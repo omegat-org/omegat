@@ -27,6 +27,7 @@ package org.omegat.core.segmentation;
 
 import java.util.ArrayList;
 import java.util.List;
+import junit.framework.Assert;
 
 import org.omegat.core.TestCore;
 import org.omegat.util.Language;
@@ -68,5 +69,45 @@ public class SegmenterTest extends TestCore
         if(!newString.equals(oldString))
             fail("Glue failed.");
     }
+    
+    /**
+     * Test of glue method for CJK, of class org.omegat.core.segmentation.Segmenter.
+     */
+    public void testGlueCJK()
+    {
+        final String EN_FULLSTOP = ".";
+        final String JA_FULLSTOP = "\\u3002"; // Unicode escaped
 
+        // basic combination
+        final String SOURCE = "Foo. Bar.\nHere.\n\nThere.\r\nThis.\tThat.\n\tOther.";
+        final String TRANSLATED = SOURCE.replace(" ", "").replace(EN_FULLSTOP, JA_FULLSTOP);
+        String translated = getPseudoTranslationFromEnToJa(SOURCE);
+        Assert.assertEquals(TRANSLATED, translated);
+
+        // spaces after/before \n
+        final String SOURCE2 = "Foo. \n Bar.";
+        final String TRANSLATED2 = "Foo\\u3002\n Bar\\u3002";
+        translated = getPseudoTranslationFromEnToJa(SOURCE2);
+        Assert.assertEquals(TRANSLATED2, translated);
+
+        // spaces after/before \t
+        final String SOURCE3 = "Foo. \t Bar.";
+        final String TRANSLATED3 = "Foo\\u3002\t Bar\\u3002";
+        translated = getPseudoTranslationFromEnToJa(SOURCE3);
+        Assert.assertEquals(TRANSLATED3, translated);
+    }
+    
+    private String getPseudoTranslationFromEnToJa(final String source) {
+        final String EN_FULLSTOP = ".";
+        final String JA_FULLSTOP = "\\u3002";
+        List<StringBuffer> spaces = new ArrayList<StringBuffer>();
+        List<Rule> brules = new ArrayList<Rule>();
+        List<String> segments = Segmenter.segment(new Language("en"), source, spaces, brules);
+
+        // pseudo-translation (just replace full-stop char)
+        for (int i = 0; i < segments.size(); i++) {
+            segments.set(i, segments.get(i).replace(EN_FULLSTOP, JA_FULLSTOP));
+        }
+        return Segmenter.glue(new Language("en"), new Language("ja"), segments, spaces, brules);
+    }
 }

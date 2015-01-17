@@ -69,10 +69,15 @@ public class LastSegmentManager {
             // Project has no files, no need to save.
             return;
         }
+        
+        SourceTextEntry ste = editor.getCurrentEntry();
+        if (ste == null) {
+        	return;
+        }
 
+        prop.put(LAST_ENTRY_SRC, ste.getSrcText());
         prop.put(LAST_ENTRY_NUMBER, Integer.toString(lastEntryNumber, 10));
         prop.put(LAST_ENTRY_FILE, currentFile);
-        prop.put(LAST_ENTRY_SRC, editor.getCurrentEntry().getSrcText());
 
 		// Won't work in EditorController.saveProject - editor commands are in SwingThread
 //		int fileIndex = fileIndex(editor.getCurrentFile());

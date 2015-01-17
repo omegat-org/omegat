@@ -1028,7 +1028,7 @@ public class EditorController implements IEditor {
         int startFileIndex = displayedFileIndex;
         int startEntryIndex = displayedEntryIndex;
         boolean looped = false;
-        do {
+        while (true) {
             displayedEntryIndex++;
             if (displayedEntryIndex >= m_docSegList.length) {
                 displayedFileIndex++;
@@ -1040,10 +1040,21 @@ public class EditorController implements IEditor {
                 loadDocument();
             }
             ste = getCurrentEntry();
-        } while (ste == null // filtered file has no entries
-                && (!looped || !(displayedFileIndex == startFileIndex && displayedEntryIndex >= startEntryIndex) 
-                // and we have not had all entries
-                ));
+            if (ste != null) {
+            	// We found an entry
+            	break;
+            }
+            if (looped && displayedFileIndex == startFileIndex && displayedEntryIndex >= startEntryIndex) {
+            	// We have looped back to our starting point
+            	break;
+            }
+            if (looped && displayedFileIndex > startFileIndex) {
+            	// We have looped past our starting point but
+            	// missed the last check because none of the files had entries
+            	// (so displayedEntryIndex was always 0)
+            	break;
+            }
+        }
 
         activateEntry();
         this.editor.setCursor(oldCursor);

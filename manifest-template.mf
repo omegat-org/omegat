@@ -293,6 +293,3 @@ OmegaT-Plugin: MachineTranslator
 
 Name: org.omegat.core.machinetranslators.YandexTranslate
 OmegaT-Plugin: MachineTranslator
-
-Name: org.omegat.core.machinetranslators.YandexTranslate
-OmegaT-Plugin: MachineTranslator

@@ -1,11 +1,17 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.8 update 1
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    5 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.1.8 update 1 vs. 3.1.8
+
+  Other enhancements:
+
+  - New Yandex Translate machine translation. The key -Dyandex.api.key
+must be supplied in the command line or in the OmegaT launcher 
+(OmegaT.l4J.ini, OmegaT.sh, OmegaT or omegat.kaptn)
 
   Bug fixes:
 

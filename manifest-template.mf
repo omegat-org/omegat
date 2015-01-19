@@ -290,3 +290,9 @@ OmegaT-Plugin: MachineTranslator
 
 Name: org.omegat.core.machinetranslators.MyMemoryMachineTranslate
 OmegaT-Plugin: MachineTranslator
+
+Name: org.omegat.core.machinetranslators.YandexTranslate
+OmegaT-Plugin: MachineTranslator
+
+Name: org.omegat.core.machinetranslators.YandexTranslate
+OmegaT-Plugin: MachineTranslator

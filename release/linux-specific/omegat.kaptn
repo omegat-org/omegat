@@ -1,6 +1,6 @@
 #!/usr/bin/kaptain
 
-# This version of the Kaptain OmegaT Launcher: 2014-06-27
+# This version of the Kaptain OmegaT Launcher: 2015-01-19
 
 start "OmegaT Launcher" -> omticon top bottom ;
   top :tabbed  -> locs mem connect services appearance about ;
@@ -118,7 +118,7 @@ team_hc :horizontal -> @close="Close" ;
 
 ### Services tab
 
-services :framed "Online Services" -> gt ms mymem taas ;
+services :framed "Online Services" -> gt ms mymem taas yand ;
 
 # Google Translate API key
 
@@ -161,6 +161,16 @@ taas_help :dialog "Help" -> taas_m taas_hc ;
 taas_m :horizontal -> taas_t ;
 taas_t "Enter API key to access your private collection from TaaS (terminology as a service) website" -> @ ;
 taas_hc :horizontal -> @close="Close" ;
+
+# Yandex Translate
+
+yand "Yandex Translate API key" -> yand_k yand_help ;
+yand_k "Yandex Translate API key" -> @password="" ;
+
+yand_help :dialog "Help" -> yand_m yand_hc ;
+yand_m :horizontal -> yand_t ;
+yand_t "Enter your Yandex Translate API key. It can be requested at\nhttps://api.yandex.com/key/form.xml?service=trnsl" -> @ ;
+yand_hc :horizontal -> @close="Close" ;
 
 
 ### Appearance settings tab
@@ -251,4 +261,4 @@ close_button -> @close="Cancel" ;
 
 ### Launch command
 
-omt -> javaloc " -jar " memory " -Duser.language=" UIlang " -Duser.country=" country " -Dgoogle.api.key=" gt " -Dmicrosoft.api.client_secret=" msk " -Dmicrosoft.api.client_id=" msi " -Dmymemory.api.email=" mymem " -Dtaas.user.key=" taas " -Dhttp.proxyHost=" proxyhost " -Dhttp.proxyPort=" proxyport " -Dawt.useSystemAAFontSettings=" fontaa laf " " jarfileloc " " projectloc " --config-dir=" configloc team;
+omt -> javaloc " -jar " memory " -Duser.language=" UIlang " -Duser.country=" country " -Dgoogle.api.key=" gt " -Dmicrosoft.api.client_secret=" msk " -Dmicrosoft.api.client_id=" msi " -Dmymemory.api.email=" mymem " -Dtaas.user.key=" taas " -Dyandex.api.key=" yand " -Dhttp.proxyHost=" proxyport " -Dawt.useSystemAAFontSettings=" fontaa laf " " jarfileloc " " projectloc " --config-dir=" configloc team;

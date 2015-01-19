@@ -23,5 +23,7 @@ JAVA=../jre/bin/java
 #MY_MEMORY_EMAIL="-Dmymemory.api.email=xxxxx@xxxxx.xx"
 # TaaS user key
 #TAAS_USER_KEY="-Dtaas.user.key=xxxxx"
+# Yandex Translate API Key
+#YANDEX_API_KEY="-Dyandex.api.key=xxxxx"
 
-${JAVA} -Xmx1024m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY} -jar OmegaT.jar
+${JAVA} -Xmx1024m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY} ${YANDEX_API_KEY} -jar OmegaT.jar

@@ -166,6 +166,8 @@ public class Preferences {
     public static final String ALLOW_MYMEMORY_HUMAN_TRANSLATE = "allow_mymemory_human_translate";
     public static final String ALLOW_MYMEMORY_MACHINE_TRANSLATE = "allow_mymemory_machine_translate";
     
+    public static final String ALLOW_YANDEX_TRANSLATE = "allow_yandex_translate";
+    
     /** Enable TransTips */
     public static final String TRANSTIPS = "transtips";
     /** TransTips Option: Only match exact words */

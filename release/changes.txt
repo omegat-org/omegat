@@ -7,11 +7,10 @@
 ----------------------------------------------------------------------
 3.1.8 update 1 vs. 3.1.8
 
-  Other enhancements:
+  Implemented requests:
 
-  - New Yandex Translate machine translation. The key -Dyandex.api.key
-must be supplied in the command line or in the OmegaT launcher 
-(OmegaT.l4J.ini, OmegaT.sh, OmegaT or omegat.kaptn)
+  - Machine translation with Yandex 
+  https://sourceforge.net/p/omegat/feature-requests/790/
 
   Bug fixes:
 

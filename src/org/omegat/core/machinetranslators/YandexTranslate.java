@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Alex Buloichik, Didier Briel
-               2014 oisee
+               2014 Ilia Vinogradov
                2015 Kos Ivantsov
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/

@@ -41,7 +41,6 @@ import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,8 +81,8 @@ import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.main.DockablePanel;
 import org.omegat.gui.main.MainWindow;
+import org.omegat.gui.main.MainWindowUI;
 import org.omegat.gui.tagvalidation.ITagValidation;
-import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -97,8 +96,6 @@ import org.omegat.util.gui.UIThreadsUtil;
 import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.event.DockableSelectionEvent;
 import com.vlsolutions.swing.docking.event.DockableSelectionListener;
-
-import org.omegat.gui.main.MainWindowUI;
 
 /**
  * Class for control all editor operations.

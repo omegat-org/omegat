@@ -1045,15 +1045,23 @@ public class EditorController implements IEditor {
             	// We found an entry
             	break;
             }
-            if (looped && displayedFileIndex == startFileIndex && displayedEntryIndex >= startEntryIndex) {
-            	// We have looped back to our starting point
-            	break;
-            }
-            if (looped && displayedFileIndex > startFileIndex) {
-            	// We have looped past our starting point but
-            	// missed the last check because none of the files had entries
-            	// (so displayedEntryIndex was always 0)
-            	break;
+            if (looped) {
+                if (displayedFileIndex == startFileIndex && displayedEntryIndex >= startEntryIndex) {
+                    // We have looped back to our starting point
+                    break;
+                }
+                if (displayedFileIndex > startFileIndex) {
+                    // We have looped past our starting point but
+                    // missed the last check because none of the files had entries
+                    // (so displayedEntryIndex was always 0)
+                    break;
+                }
+                if (files.size() == 1) {
+                    // We have looped past our starting point but
+                    // missed the last checks because there is only one file
+                    // and it had no entries (displayedFileIndex was also always 0)
+                    break;
+                }
             }
         }
 

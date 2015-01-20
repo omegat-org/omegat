@@ -1,0 +1,32 @@
+/* Copyright (c) 1998-2014 ILIAS open source eLearning e.V., Extended GPL, see docs/LICENSE */
+/**
+* ILIAS language file
+*
+* @module		language file English
+* @modulegroup	language
+* @author 		Matthias Kunkel <mkunkel@me.com>
+* @version		$Id$
+*/
+// The language file starts beyond the HTML-comment below. DO NOT modify this line!
+// To edit your language file with a spreadsheet (i.e. Excel or StarCalc) remove all lines
+// from the first line to the HTML-comment. After editing paste the lines in place again.
+// NOTICE: Character coding of all ILIAS lang files is UTF-8! Please set your editor
+// to the corresponding mode!
+// Language file names refer to ISO 639, see: http://www.oasis-open.org/cover/iso639a.html
+// the next line is blank intentionally for the filter testing
+
+<!-- language file start -->
+acc#:#acc_access_key#:#Good line
+exc#:#exc_assignment_type#:#Another good line with HTML <br/> entity
+module_1#:#var_1#:#The text may include : too
+module_1#:#var_2#:#The text may include # as well
+module_1#:#var_3#:#The text may include  #:# or 
+module_1#:#var_3#:#have it at the end #:#
+module_1#:#var_4#:##:#
+#:#bad_line_1#:#The module name is missing
+bad_line_2#:##:#The variable name is missing
+bad_line_3m#:#bad_line_3v#:#
+#:##:#Both module and variable are missing
+#:##:#
+
+

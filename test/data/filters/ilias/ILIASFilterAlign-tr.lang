@@ -1,0 +1,17 @@
+/* Copyright (c) 1998-2014 ILIAS open source eLearning e.V., Extended GPL, see docs/LICENSE */
+/**
+* ILIAS language file
+*
+* @module		language file English
+* @modulegroup	language
+* @author 		Matthias Kunkel <mkunkel@me.com>
+* @version		$Id$
+*/
+// The language file starts beyond the HTML-comment below. DO NOT modify this line!
+// To edit your language file with a spreadsheet (i.e. Excel or StarCalc) remove all lines
+// from the first line to the HTML-comment. After editing paste the lines in place again.
+// NOTICE: Character coding of all ILIAS lang files is UTF-8! Please set your editor
+// to the corresponding mode!
+// Language file names refer to ISO 639, see: http://www.oasis-open.org/cover/iso639a.html
+<!-- language file start -->
+module_name#:#variable_name#:#translated

@@ -235,6 +235,7 @@ omegat.kaptn
   Yu Tang;
   Rashid Umarov;  
   Antonio Vilei;
+  Ilia Vinogradov;
   Martin Wunderlich;
   Michael Zakharov.
 

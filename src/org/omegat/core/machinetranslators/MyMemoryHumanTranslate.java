@@ -30,18 +30,16 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource; 
-
-import javax.xml.parsers.DocumentBuilderFactory; 
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
+import org.xml.sax.InputSource;
 
 
 /**
@@ -82,12 +80,10 @@ public class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
         tmxResponse = tmxResponse.replace("&", "&amp;");
         
         // Build DOM object from the returned XML string
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         InputSource source = new InputSource(new StringReader(tmxResponse));
         Document document = factory.newDocumentBuilder().parse(source);
         
         // Set up Xpath stuff
-        XPathFactory xPathFactory = XPathFactory.newInstance();
         XPath xpath = xPathFactory.newXPath();
         String allTUsQuery = "//tu"; 
         

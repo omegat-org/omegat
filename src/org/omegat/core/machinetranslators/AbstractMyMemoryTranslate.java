@@ -36,12 +36,14 @@ import org.omegat.util.Token;
 import org.omegat.util.WikiGet;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
 import org.omegat.core.Core;
 import org.omegat.core.matching.LevenshteinDistance;
 
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+
 import org.apache.lucene.analysis.kr.utils.StringUtil;
 
 
@@ -58,7 +60,15 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
     protected static String MYMEMORYLABEL_TRANSLATION = "translation";
     protected static String MYMEMORYLABEL_MATCHQUALITYPERCENTAGE = "match";
     protected static String XPATH_QUERY = "child::tuv[starts-with(@lang, '#langCode#')]/seg/text()"; // MyMemory always returns a 4-letter locale code, even when the query contains a language code only; to make sure we get the right matches, only the language code is taken into account
-    
+
+    protected final DocumentBuilderFactory factory;
+    protected final XPathFactory xPathFactory;
+
+    public AbstractMyMemoryTranslate() {
+        factory = DocumentBuilderFactory.newInstance();
+        xPathFactory = XPathFactory.newInstance();
+    }
+
     @Override
     protected abstract String getPreferenceName();
 

@@ -64,6 +64,11 @@ public class Google2Translate extends BaseTranslate {
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
         String trText = text.length() > 5000 ? text.substring(0, 4997) + "..." : text;
 
+        String prev = getFromCache(sLang, tLang, trText);
+        if (prev != null) {
+            return prev;
+        }
+
         String targetLang = tLang.getLanguageCode();
         // Differentiate in target between simplified and traditional Chinese
         if ((tLang.getLanguage().compareToIgnoreCase("zh-cn") == 0)
@@ -129,6 +134,7 @@ public class Google2Translate extends BaseTranslate {
 
         tr = cleanSpacesAroundTags(tr, text);
 
+        putToCache(sLang, tLang, trText, tr);
         return tr;
     }
 }

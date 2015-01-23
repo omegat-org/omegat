@@ -62,6 +62,11 @@ public class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
     
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
+        String prev = getFromCache(sLang, tLang, text);
+        if (prev != null) {
+            return prev;
+        }
+
         String tmxResponse = "";
         String machineTranslationMatch = ""; 
         
@@ -88,6 +93,7 @@ public class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
         
         machineTranslationMatch = cleanSpacesAroundTags(machineTranslationMatch, text);
         
+        putToCache(sLang, tLang, text, machineTranslationMatch);
         return machineTranslationMatch; 
     }
     

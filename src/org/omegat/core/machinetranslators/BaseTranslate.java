@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Alex Buloichik
+ Copyright (C) 2010-2015 Alex Buloichik
                2013 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -28,6 +28,9 @@ package org.omegat.core.machinetranslators;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 
 import javax.swing.JCheckBoxMenuItem;
@@ -49,6 +52,12 @@ public abstract class BaseTranslate implements IMachineTranslation, ActionListen
     protected final JCheckBoxMenuItem menuItem;
 
     protected boolean enabled;
+
+    /**
+     * Machine translation implementation can use this cache for skip requests twice. Cache will not be
+     * cleared during OmegaT work, but it's okay - nobody will work weeks without exit.
+     */
+    private final Map<String, String> cache = Collections.synchronizedMap(new HashMap<String, String>());
 
     public BaseTranslate() {
         menuItem = new JCheckBoxMenuItem();
@@ -105,5 +114,13 @@ public abstract class BaseTranslate implements IMachineTranslation, ActionListen
             }
         }
         return machineText;
+    }
+
+    protected String getFromCache(Language sLang, Language tLang, String text) {
+        return cache.get(sLang + "/" + tLang + "/" + text);
+    }
+
+    protected String putToCache(Language sLang, Language tLang, String text, String result) {
+        return cache.put(sLang + "/" + tLang + "/" + text, result);
     }
 }

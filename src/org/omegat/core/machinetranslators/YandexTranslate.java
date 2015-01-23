@@ -66,8 +66,6 @@ public class YandexTranslate extends BaseTranslate {
 
     protected static final String GT_URL = "https://translate.yandex.net/api/v1.5/tr/translate";
 
-    protected static Map<String, String> translationCache = new HashMap<String, String>();
-
     protected static String mvYandexKey = System.getProperty("yandex.api.key");
 
     @Override
@@ -93,10 +91,9 @@ public class YandexTranslate extends BaseTranslate {
         String lvTargetLang = tLang.getLanguageCode().substring(0, 2).toLowerCase();
 
         String lvShorText = text.length() > 10000 ? text.substring(0, 9999) + "…" : text;
-        String lvCacheText = lvSourceLang + '-' + lvTargetLang + lvShorText;
-        String lvCachedResult = translationCache.get(lvCacheText);
-        if (lvCachedResult != null) {
-            return lvCachedResult;
+        String prev = getFromCache(sLang, tLang, lvShorText);
+        if (prev != null) {
+            return prev;
         }
 
         //----------------------------------------------------------------------
@@ -139,7 +136,7 @@ public class YandexTranslate extends BaseTranslate {
 
         String result = (String) xPathText.evaluate(pathText, new InputSource(new StringReader(response.response)));
 
-        translationCache.put(lvCacheText, result);
+        putToCache(sLang, tLang, lvShorText, result);
         return result;
     }
 

@@ -64,24 +64,34 @@ public class MicrosoftTranslate extends BaseTranslate {
     @Override
     protected synchronized String translate(Language sLang, Language tLang, String text) throws Exception {
         text = text.length() > 10000 ? text.substring(0, 9997) + "..." : text;
+        String prev = getFromCache(sLang, tLang, text);
+        if (prev != null) {
+            return prev;
+        }
+
         String langFrom = checkMSLang(sLang);
         String langTo = checkMSLang(tLang);
         try {
+            String translation;
             if (accessToken == null) {
                 requestToken();
-                return requestTranslate(langFrom, langTo, text);
+                translation = requestTranslate(langFrom, langTo, text);
             } else {
                 try {
-                    return requestTranslate(langFrom, langTo, text);
+                    translation = requestTranslate(langFrom, langTo, text);
                 } catch (WikiGet.ResponseError ex) {
                     if (ex.code == 400) {
                         requestToken();
-                        return requestTranslate(langFrom, langTo, text);
+                        translation = requestTranslate(langFrom, langTo, text);
                     } else {
                         throw ex;
                     }
                 }
             }
+            if (translation != null) {
+                putToCache(sLang, tLang, text, translation);
+            }
+            return translation;
         } catch (WikiGet.ResponseError ex) {
             return ex.getLocalizedMessage();
         } catch (Exception ex) {

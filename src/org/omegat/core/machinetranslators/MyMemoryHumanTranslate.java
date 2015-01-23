@@ -62,6 +62,11 @@ public class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
     
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
+        String prev = getFromCache(sLang, tLang, text);
+        if (prev != null) {
+            return prev;
+        }
+
         String tmxResponse = "";
         String bestHumanTranslation = "";
         
@@ -94,6 +99,7 @@ public class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
         
         bestHumanTranslation = getBestTranslation(sLang, tLang, text, xpath, allTUs);
         
+        putToCache(sLang, tLang, text, bestHumanTranslation);
         return bestHumanTranslation; 
     }
 

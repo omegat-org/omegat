@@ -43,7 +43,7 @@ distributions
   Localisation updates:
 
   - Belarusian localisation updated to 3.1.8 (UI, tutorial, scripts, readme)
-  - Russian localisation updated to 3.1.8 update 2 (UI, tutorial, scripts, readme)
+  - Russian localisation updated to 3.1.8 update 1 (UI, tutorial, scripts, readme)
 
 ----------------------------------------------------------------------
  OmegaT 3.1.8 (2014-12-04)

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.8 update 1
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -17,6 +17,10 @@
   - ILIAS Language File filter. Those files can have the .lang or
 .lang.local extensions. As .lang files are also loaded by the Lang 
 Mozilla filter, it has to be unabled to load them with the ILIAS filter.
+
+  - Machine translation requests are now cached. That means that a 
+source segment already translated will not be requested again during
+the same session (i.e., until OmegaT is closed).
 
   Bug fixes:
 

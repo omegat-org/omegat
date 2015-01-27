@@ -39,6 +39,9 @@ distributions
   
   - Filtering after a search with no live segments freezes OmegaT
   https://sourceforge.net/p/omegat/bugs/692/
+  
+  - Ellipses missing in several menu items
+  https://sourceforge.net/p/omegat/bugs/728/
 
   Localisation updates:
 

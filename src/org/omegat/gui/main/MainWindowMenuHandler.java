@@ -12,6 +12,7 @@
                2012 Wildrich Fourie, Guido Leenders, Didier Briel
                2013 Zoltan Bartko, Didier Briel, Yu Tang
                2014 Aaron Madlon-Kay
+               2015 Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -33,12 +34,14 @@
 
 package org.omegat.gui.main;
 
+import java.awt.Component;
 import java.io.IOException;
 import java.util.List;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+import javax.swing.text.JTextComponent;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -71,6 +74,7 @@ import org.omegat.gui.dialogs.UserPassDialog;
 import org.omegat.gui.dialogs.ViewOptionsDialog;
 import org.omegat.gui.dialogs.WorkflowOptionsDialog;
 import org.omegat.gui.editor.EditorSettings;
+import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.help.HelpFrame;
@@ -347,10 +351,7 @@ public class MainWindowMenuHandler {
         if (!Core.getProject().isProjectLoaded())
             return;
 
-        String selection = Core.getEditor().getSelectedText();
-        if (selection != null) {
-            selection = selection.trim();
-        }
+        String selection = getTrimmedSelectedTextInMainWindow();
 
         SearchWindowController search = new SearchWindowController(mainWindow, selection, SearchMode.SEARCH);
         mainWindow.addSearchWindow(search);
@@ -360,13 +361,23 @@ public class MainWindowMenuHandler {
         if (!Core.getProject().isProjectLoaded())
             return;
 
-        String selection = Core.getEditor().getSelectedText();
-        if (selection != null) {
-            selection = selection.trim();
-        }
+        String selection = getTrimmedSelectedTextInMainWindow();
 
         SearchWindowController search = new SearchWindowController(mainWindow, selection, SearchMode.REPLACE);
         mainWindow.addSearchWindow(search);
+    }
+
+    private String getTrimmedSelectedTextInMainWindow() {
+        String selection = null;
+        Component component = mainWindow.getMostRecentFocusOwner();
+        if (component instanceof JTextComponent) {
+            selection = ((JTextComponent) component).getSelectedText();
+            if (!StringUtil.isEmpty(selection)) {
+                selection = EditorUtils.removeDirectionChars(selection);
+                selection = selection.trim();
+            }
+        }
+        return selection;
     }
 
     /** Set active match to #1. */

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.8 update 1
 ----------------------------------------------------------------------
-   3 Enhancements
+   4 Enhancements
    7 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -11,6 +11,9 @@
 
   - Machine translation with Yandex 
   https://sourceforge.net/p/omegat/feature-requests/790/
+
+  - Use selection for text Search from "Fuzzy Match" or "Glossary" panes
+  https://sourceforge.net/p/omegat/feature-requests/877/
 
   Other enhancements:
   

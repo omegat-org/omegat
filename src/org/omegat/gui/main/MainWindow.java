@@ -9,6 +9,7 @@
                2008 Andrzej Sawula, Alex Buloichik, Didier Briel
                2013 Yu Tang, Aaron Madlon-Kay
                2014 Piotr Kulik
+               2015 Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -51,6 +52,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.text.JTextComponent;
 import javax.swing.WindowConstants;
 
 import org.omegat.core.Core;
@@ -61,12 +63,14 @@ import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.gui.filelist.ProjectFilesListController;
+import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.omegat.util.WikiGet;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.OmegaTFileChooser;
@@ -225,21 +229,37 @@ public class MainWindow extends JFrame implements IMainWindow {
         setTitle(s);
     }
 
-    /** insert current fuzzy match at cursor position */
+    /** insert current fuzzy match or selection at cursor position */
     public void doInsertTrans() {
-        if (!Core.getProject().isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded()) {
             return;
+        }
 
-        NearString near = Core.getMatcher().getActiveMatch();
-        if (near != null) {
-            Core.getEditor().insertText(near.translation);
+        String text = getSelectedTextInMatcher();
+        if (StringUtil.isEmpty(text)) {
+            NearString near = Core.getMatcher().getActiveMatch();
+            if (near != null) {
+                text = near.translation;
+            }
+        }
+        if (!StringUtil.isEmpty(text)) {
+            Core.getEditor().insertText(text);
+            Core.getEditor().requestFocus();
         }
     }
 
-    /** replace entire edit area with active fuzzy match */
+    /** replace entire edit area with active fuzzy match or selection */
     public void doRecycleTrans() {
-        if (!Core.getProject().isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded()) {
             return;
+        }
+
+        String selection = getSelectedTextInMatcher();
+        if (!StringUtil.isEmpty(selection)) {
+            Core.getEditor().replaceEditText(selection);
+            Core.getEditor().requestFocus();
+            return;
+        }
 
         NearString near = Core.getMatcher().getActiveMatch();
         if (near != null) {
@@ -255,7 +275,15 @@ public class MainWindow extends JFrame implements IMainWindow {
             } else {
                 Core.getEditor().replaceEditText(translation);
             }
+            Core.getEditor().requestFocus();
         }
+    }
+
+    private String getSelectedTextInMatcher() {
+        IMatcher matcher = Core.getMatcher();
+        return matcher instanceof JTextComponent
+                ? ((JTextComponent) matcher).getSelectedText()
+                : null;
     }
 
     protected void addSearchWindow(SearchWindowController newSearchWindow) {

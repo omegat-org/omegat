@@ -9,6 +9,7 @@
                2012 Alex Buloichik, Jean-Christophe Helary, Didier Briel, Thomas Cordonnier, Aaron Madlon-Kay
                2013 Zoltan Bartko, Aaron Madlon-Kay
                2014 Aaron Madlon-Kay
+               2015 Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -80,6 +81,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Jean-Christophe Helary
  * @author Didier Briel
  * @author Aaron Madlon-Kay
+ * @author Yu Tang
  */
 @SuppressWarnings("serial")
 public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> implements IMatcher {
@@ -512,7 +514,9 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             // the action: insert this match
             @Override
             public void actionPerformed(ActionEvent e) {
-                setActiveMatch(clickedItem);
+                if (StringUtil.isEmpty(getSelectedText())) {
+                    setActiveMatch(clickedItem);
+                }
                 mw.doInsertTrans();
             }
         });
@@ -521,7 +525,9 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         item.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setActiveMatch(clickedItem);
+                if (StringUtil.isEmpty(getSelectedText())) {
+                    setActiveMatch(clickedItem);
+                }
                 mw.doRecycleTrans();
             }
         });

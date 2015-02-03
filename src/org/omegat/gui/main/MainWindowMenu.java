@@ -604,7 +604,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 editOverwriteTranslationMenuItem, editRedoMenuItem, editSelectFuzzy1MenuItem,
                 editSelectFuzzy2MenuItem, editSelectFuzzy3MenuItem, editSelectFuzzy4MenuItem,
                 editSelectFuzzy5MenuItem, editUndoMenuItem, switchCaseSubMenu,
-                editOverwriteMachineTranslationMenuItem, editMultipleDefault, editMultipleAlternate,
+                editOverwriteMachineTranslationMenuItem,
                 editRegisterUntranslatedMenuItem, editRegisterEmptyMenuItem, editRegisterIdenticalMenuItem,
 
                 gotoMenu, gotoNextSegmentMenuItem, gotoNextUntranslatedMenuItem, gotoPreviousSegmentMenuItem,

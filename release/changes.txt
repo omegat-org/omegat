@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.8 update 1
 ----------------------------------------------------------------------
-   4 Enhancements
+   5 Enhancements
    8 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -14,6 +14,9 @@
 
   - Use selection for text Search from "Fuzzy Match" or "Glossary" panes
   https://sourceforge.net/p/omegat/feature-requests/877/
+
+  - Allow to insert selection into translation from the Fuzzy Matches pane
+  https://sourceforge.net/p/omegat/feature-requests/1057/ 
 
   Other enhancements:
   

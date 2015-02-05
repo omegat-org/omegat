@@ -2,7 +2,7 @@
  OmegaT 3.1.8 update 1
 ----------------------------------------------------------------------
    4 Enhancements
-   7 Bug fixes
+   8 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 3.1.8 update 1 vs. 3.1.8
@@ -45,6 +45,9 @@ distributions
   
   - Ellipses missing in several menu items
   https://sourceforge.net/p/omegat/bugs/728/
+
+  - Both menu items for alternative translation are enabled 
+  https://sourceforge.net/p/omegat/bugs/731/
 
   Localisation updates:
 

@@ -85,6 +85,7 @@ public class EditorPopups {
                 boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
             if (!ec.getSettings().isAutoSpellChecking()) {
                 // spellchecker disabled
+                return;
             }
             if (!isInActiveTranslation) {
                 // there is no need to display suggestions

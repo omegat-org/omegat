@@ -41,14 +41,12 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.PrepareTMXEntry;
-import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
 import org.omegat.core.spellchecker.SpellCheckerMarker;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.TagUtil;
+import org.omegat.util.Token;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -92,70 +90,82 @@ public class EditorPopups {
                 return;
             }
 
-            try {
-                // find the word boundaries
-                final int wordStart = EditorUtils.getWordStart(comp, mousepos);
-                final int wordEnd = EditorUtils.getWordEnd(comp, mousepos);
-
-                final String word = comp.getText(wordStart, wordEnd - wordStart);
-
-                final AbstractDocument xlDoc = (AbstractDocument) comp.getDocument();
-
-                if (!Core.getSpellChecker().isCorrect(word)) {
-                    // get the suggestions and create a menu
-                    List<String> suggestions = Core.getSpellChecker().suggest(word);
-
-                    // the suggestions
-                    for (final String replacement : suggestions) {
-                        JMenuItem item = menu.add(replacement);
-                        item.addActionListener(new ActionListener() {
-                            // the action: replace the word with the selected
-                            // suggestion
-                            public void actionPerformed(ActionEvent e) {
-                                try {
-                                    int pos = comp.getCaretPosition();
-                                    xlDoc.replace(wordStart, wordEnd - wordStart, replacement, null);
-                                    comp.setCaretPosition(pos);
-                                } catch (BadLocationException exc) {
-                                    Log.log(exc);
-                                }
-                            }
-                        });
-                    }
-
-                    // what if no action is done?
-                    if (suggestions.size() == 0) {
-                        JMenuItem item = menu.add(OStrings.getString("SC_NO_SUGGESTIONS"));
-                        item.addActionListener(new ActionListener() {
-                            public void actionPerformed(ActionEvent e) {
-                                // just hide the menu
-                            }
-                        });
-                    }
-
-            menu.addSeparator();
-
-                    // let us ignore it
-                    JMenuItem item = menu.add(OStrings.getString("SC_IGNORE_ALL"));
-                    item.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                            addIgnoreWord(word, wordStart, false);
-                        }
-                    });
-
-                    // or add it to the dictionary
-                    item = menu.add(OStrings.getString("SC_ADD_TO_DICTIONARY"));
-                    item.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                            addIgnoreWord(word, wordStart, true);
-                        }
-                    });
-                    
-            menu.addSeparator();
-
+            // Use the project's target tokenizer to determine the word that was right-clicked.
+            // EditorUtils.getWordEnd() and getWordStart() use Java's built-in BreakIterator
+            // under the hood, which leads to inconsistent results when compared to other spell-
+            // checking functionality in OmegaT.
+            String translation = ec.getCurrentTranslation();
+            Token tok = null;
+            int relOffset = ec.getCurrentPositionInEntryTranslation();
+            for (Token t : Core.getProject().getTargetTokenizer().tokenizeWordsForSpelling(translation)) {
+                if (t.getOffset() <= relOffset && relOffset < t.getOffset() + t.getLength()) {
+                    tok = t;
+                    break;
                 }
-            } catch (BadLocationException ex) {
-                Log.log(ex);
+            }
+            
+            if (tok == null) {
+                return;
+            }
+            
+            final String word = tok.getTextFromString(translation);
+            // The wordStart must be the absolute offset in the Editor document.
+            final int wordStart = mousepos - relOffset + tok.getOffset();
+            final int wordLength = tok.getLength();
+            final AbstractDocument xlDoc = (AbstractDocument) comp.getDocument();
+
+            if (!Core.getSpellChecker().isCorrect(word)) {
+                // get the suggestions and create a menu
+                List<String> suggestions = Core.getSpellChecker().suggest(word);
+
+                // the suggestions
+                for (final String replacement : suggestions) {
+                    JMenuItem item = menu.add(replacement);
+                    item.addActionListener(new ActionListener() {
+                        // the action: replace the word with the selected
+                        // suggestion
+                        public void actionPerformed(ActionEvent e) {
+                            try {
+                                int pos = comp.getCaretPosition();
+                                xlDoc.replace(wordStart, wordLength, replacement, null);
+                                comp.setCaretPosition(pos);
+                            } catch (BadLocationException exc) {
+                                Log.log(exc);
+                            }
+                        }
+                    });
+                }
+
+                // what if no action is done?
+                if (suggestions.size() == 0) {
+                    JMenuItem item = menu.add(OStrings.getString("SC_NO_SUGGESTIONS"));
+                    item.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            // just hide the menu
+                        }
+                    });
+                }
+
+                menu.addSeparator();
+
+                // let us ignore it
+                JMenuItem item = menu.add(OStrings.getString("SC_IGNORE_ALL"));
+                item.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        addIgnoreWord(word, wordStart, false);
+                    }
+                });
+
+                // or add it to the dictionary
+                item = menu.add(OStrings.getString("SC_ADD_TO_DICTIONARY"));
+                item.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        addIgnoreWord(word, wordStart, true);
+                    }
+                });
+                
+                menu.addSeparator();
+
             }
         }
 

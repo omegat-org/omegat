@@ -296,13 +296,14 @@ public class SpellChecker implements ISpellChecker {
             return Collections.EMPTY_LIST;
         }
 
-        return checker.suggest(word);
+        return checker.suggest(normalize(word));
     }
 
     /**
      * Add a word to the list of ignored words
      */
     public void ignoreWord(String word) {
+        word = normalize(word);
         if (!ignoreList.contains(word)) {
             ignoreList.add(word);
             synchronized (this) {
@@ -316,6 +317,7 @@ public class SpellChecker implements ISpellChecker {
      * Add a word to the list of correct words
      */
     public void learnWord(String word) {
+        word = normalize(word);
         if (!learnedList.contains(word)) {
             learnedList.add(word);
             checker.learnWord(word);

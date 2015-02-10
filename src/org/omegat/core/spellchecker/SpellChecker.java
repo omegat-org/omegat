@@ -255,6 +255,8 @@ public class SpellChecker implements ISpellChecker {
         if (checker==null) 
             return true;
 
+        word = normalize(word);
+        
         // check in cache first
         synchronized (this) {
             if (incorrectWordsCache.contains(word)) {
@@ -320,5 +322,14 @@ public class SpellChecker implements ISpellChecker {
                 correctWordsCache.add(word);
             }
         }
+    }
+    
+    /**
+     * Normalize the orthography of the word by replacing alternative characters
+     * with "canonical" ones.
+     */
+    private static String normalize(String word) {
+        // U+2019 RIGHT SINGLE QUOTATION MARK to U+0027 APOSTROPHE
+        return word.replace('’', '\'');
     }
 }

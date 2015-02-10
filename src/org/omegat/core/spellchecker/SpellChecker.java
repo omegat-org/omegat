@@ -334,6 +334,6 @@ public class SpellChecker implements ISpellChecker {
      */
     private static String normalize(String word) {
         // U+2019 RIGHT SINGLE QUOTATION MARK to U+0027 APOSTROPHE
-        return word.replace('’', '\'');
+        return word.replace('\u2019', '\'');
     }
 }

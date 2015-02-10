@@ -4,7 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 Zoltan Bartko, Alex Buloichik
-               2009 Didier Briel               
+               2009 Didier Briel
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/               
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -56,6 +57,7 @@ import org.omegat.util.Preferences;
  * @author Zoltan Bartko (bartkozoltan at bartkozoltan dot com)
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
+ * @author Aaron Madlon-Kay
  */
 public class SpellChecker implements ISpellChecker {
     /** The spell checking provider. */

@@ -6,6 +6,7 @@
  Copyright (C) 2009 Didier Briel
                2010 Wildrich Fourie
                2011 Alex Buloichik, Didier Briel
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -55,6 +56,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Wildrich Fourie
  * @author Didier Briel
+ * @author Aaron Madlon-Kay
  */
 public class EditorPopups {
     public static void init(EditorController ec) {

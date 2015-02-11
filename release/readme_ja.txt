@@ -243,6 +243,7 @@ OmegaT のユーザーインターフェースや取扱説明書、他の関連�
   Yu Tang
   Rashid Umarov  
   Antonio Vilei
+  Ilia Vinogradov
   Martin Wunderlich
   Michael Zakharov
 
@@ -250,7 +251,7 @@ OmegaT のユーザーインターフェースや取扱説明書、他の関連�
   Sabine Cretella
   Dmitri Gabinski
   Jean-Christophe Helary（地域化担当）
-  Vito Smolej（文書作成担当）
+  Vincent Bidaux（文書作成担当）
   Samuel Murray
   Marc Prior（ウェブサイト管理者）
   そして、大いに貢献してくださった多くの方々

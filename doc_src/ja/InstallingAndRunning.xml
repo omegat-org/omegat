@@ -372,7 +372,7 @@
           <primary>OmegaT の実行</primary> <secondary>起動スクリプトの引数</secondary>
         </indexterm></title>
 
-      <para>基本的なコマンドはすでに上記で述べた通りです。このコマンドを変更するには「引数」を追加します。引数を追加する位置は、最初の「<emphasis>java</emphasis>」の直後、「<emphasis>-jar <application>OmegaT</application>.jar</emphasis>」の直前です。Windows では、<emphasis><application>OmegaT</application>.l4J.ini</emphasis> を書き換えることによって、好みの設定に変更できます。Mac OS X の場合は、<emphasis><application>OmegaT</application>.app/Contents/</emphasis> にある <emphasis>Info.plist</emphasis> ファイルを使って同様に変更できます。</para>
+      <para>基本的なコマンドはすでに上記で述べた通りです。このコマンドを変更するには「引数」を追加します。引数を追加する位置は、最初の「<emphasis>java</emphasis>」の直後、「<emphasis>-jar <application>OmegaT</application>.jar</emphasis>」の直前です。Windows では、<filename>OmegaT.l4J.ini</filename> を書き換えることによって、好みの設定に変更できます。それ以外のプラットフォームでは、お使いのランチャー（たとえば Mac では <filename>OmegaT.sh</filename>、Linux では <filename>OmegaT</filename>）を修正することによって同様に変更できます。</para>
 
       <para>指定できる引数の一覧を以下に示します。上級者のユーザーは、ターミナルウィンドウ上で <emphasis>man java</emphasis> と入力すると、引数の詳細情報を得られます。</para>
 

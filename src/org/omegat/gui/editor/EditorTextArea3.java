@@ -58,10 +58,13 @@ import javax.swing.text.Utilities;
 import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
 
+import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
+import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.main.MainWindow;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
@@ -278,6 +281,12 @@ public class EditorTextArea3 extends JEditorPane {
                 controller.nextEntry();
                 processed = true;
             } else {
+                IMainWindow mainWindow = Core.getMainWindow();
+                // Timed warning is not available for console window
+                if (mainWindow instanceof MainWindow) {
+                    MainWindow window = (MainWindow) mainWindow;
+                    window.showTimedStatusMessageRB("ETA_WARNING_TAB_ADVANCE");
+                }
                 processed = true;
             }
         } else if ((StaticUtils.isKey(e, KeyEvent.VK_ENTER,

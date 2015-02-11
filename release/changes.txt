@@ -18,6 +18,9 @@
   - Allow to insert selection into translation from the Fuzzy Matches pane
   https://sourceforge.net/p/omegat/feature-requests/1057/ 
 
+  - Warn user if the Enter key is hit while "Use TAB to Advance" is checked 
+  https://sourceforge.net/p/omegat/feature-requests/1061/
+
   Other enhancements:
   
   - ILIAS Language File filter. Those files can have the .lang or

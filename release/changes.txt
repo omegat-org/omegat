@@ -2,7 +2,7 @@
  OmegaT 3.1.9
 ----------------------------------------------------------------------
    5 Enhancements
-   8 Bug fixes
+   9 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 3.1.8 update 1 vs. 3.1.8
@@ -51,6 +51,9 @@ distributions
 
   - Both menu items for alternative translation are enabled 
   https://sourceforge.net/p/omegat/bugs/731/
+
+  - Incorrect handling of typographic apostrophe (U+2019)
+  https://sourceforge.net/p/omegat/bugs/598/
 
   Localisation updates:
 

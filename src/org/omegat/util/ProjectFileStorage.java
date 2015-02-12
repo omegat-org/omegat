@@ -9,6 +9,7 @@
                2012 Didier Briel, Aaron Madlon-Kay
                2013 Aaron Madlon-Kay, Guido Leenders
                2014 Aaron Madlon-Kay, Alex Buloichik
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -44,6 +45,7 @@ import javax.xml.bind.Marshaller;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.TranslationException;
+import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 
 /**
@@ -201,6 +203,7 @@ public class ProjectFileStorage {
         m.marshal(om, outFile);
 
         SRX.saveTo(props.getProjectSRX(), new File(props.getProjectInternal(), SRX.CONF_SENTSEG));
+        FilterMaster.saveConfig(props.getProjectFilters(), props.getProjectInternal());
     }
 
     /**

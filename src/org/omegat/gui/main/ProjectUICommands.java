@@ -116,6 +116,7 @@ public class ProjectUICommands {
                     try {
                         ProjectFactory.createProject(newProps);
                         Core.getProject().saveProjectProperties();
+                        FilterMaster.saveConfig(newProps.getProjectFilters(), newProps.getProjectInternal());
                     } catch (Exception ex) {
                         Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                         Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");

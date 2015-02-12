@@ -2,7 +2,7 @@
  OmegaT 3.1.9
 ----------------------------------------------------------------------
    5 Enhancements
-   9 Bug fixes
+  10 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
 3.1.8 update 1 vs. 3.1.8
@@ -57,6 +57,9 @@ distributions
 
   - Incorrect handling of typographic apostrophe (U+2019)
   https://sourceforge.net/p/omegat/bugs/598/
+
+  - The project-specific filter configuration was not saved when creating a
+new project
 
   Localisation updates:
 

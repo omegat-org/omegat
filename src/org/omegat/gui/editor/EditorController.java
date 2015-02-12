@@ -1707,10 +1707,19 @@ public class EditorController implements IEditor {
     public int getCurrentPositionInEntryTranslation() {
         UIThreadsUtil.mustBeSwingThread();
 
+        return getPositionInEntryTranslation(editor.getCaretPosition());
+    }
+
+    /**
+     * Returns the relative caret position in the editable translation for a
+     * given absolute index into the overall editor document.
+     */
+    public int getPositionInEntryTranslation(int pos) {
+        UIThreadsUtil.mustBeSwingThread();
+
         if (!editor.getOmDocument().isEditMode()) {
             return -1;
         }
-        int pos = editor.getCaretPosition();
         int beg = editor.getOmDocument().getTranslationStart();
         int end = editor.getOmDocument().getTranslationEnd();
         if (pos < beg) {

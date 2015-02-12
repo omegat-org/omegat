@@ -98,7 +98,7 @@ public class EditorPopups {
             // checking functionality in OmegaT.
             String translation = ec.getCurrentTranslation();
             Token tok = null;
-            int relOffset = ec.getCurrentPositionInEntryTranslation();
+            int relOffset = ec.getPositionInEntryTranslation(mousepos);
             for (Token t : Core.getProject().getTargetTokenizer().tokenizeWordsForSpelling(translation)) {
                 if (t.getOffset() <= relOffset && relOffset < t.getOffset() + t.getLength()) {
                     tok = t;

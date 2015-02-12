@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    5 Enhancements
    9 Bug fixes
-   2 Localisation updates
+   3 Localisation updates
 ----------------------------------------------------------------------
 3.1.8 update 1 vs. 3.1.8
 
@@ -62,6 +62,7 @@ distributions
 
   - Belarusian localisation updated to 3.1.8 (UI, tutorial, scripts, readme)
   - Russian localisation updated to 3.1.8 update 1 (UI, tutorial, scripts, readme)
+  - Japanese localisation updated to 3.1.9 (UI, documentation, readme)
 
 ----------------------------------------------------------------------
  OmegaT 3.1.8 (2014-12-04)

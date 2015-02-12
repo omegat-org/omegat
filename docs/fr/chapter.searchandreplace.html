@@ -1,0 +1,122 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapitre&nbsp;16.&nbsp;Rechercher et remplacer</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="up" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="prev" href="chapter.searches.html" title="Chapitre&nbsp;15.&nbsp;Recherches">
+      <link rel="next" href="chapter.regexp.html" title="Chapitre&nbsp;17.&nbsp;Expressions régulières">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapitre&nbsp;16.&nbsp;Rechercher et remplacer</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.searches.html">Précédent</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Suivant</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.searchandreplace"></a>Chapitre&nbsp;16.&nbsp;Rechercher et remplacer<a class="indexterm" name="d0e7654"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.searchandreplace.html#section.searchreplace.window">1. La fenêtre Recherche textuelle</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.searchandreplace.html#d0e7716">1.1. Options de recherche</a></span></dt>
+                  </dl>
+               </dd>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="section.searchreplace.window"></a>1.&nbsp;La fenêtre Recherche textuelle<a class="indexterm" name="d0e7660"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Ouvrez la fenêtre de Recherche et remplacement avec <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>K</strong></span> et entrez le mot ou l'expression que vous voulez remplacer dans la case <span class="emphasis"><em>Rechercher</em></span>.
+            </p>
+            <p>Cliquez ensuite sur le bouton <span class="emphasis"><em>Rechercher</em></span> pour afficher toutes les occurrences correspondantes.
+            </p>
+            <p>Entrez le nouveau mot ou la nouvelle expression (les expressions régulières ne sont pas prises en charge) dans la case <span class="emphasis"><em>Remplacer par</em></span>, puis cliquez sur l'une des options suivantes :
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Remplacer tout :</strong></span> effectue le remplacement de toutes les occurrences (après l'affichage d'une fenêtre de confirmation où le nombre d'occurrences
+                        est affiché).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Remplacer :</strong></span> effectue les remplacements les uns après les autres, à l'aide de boutons dans l'<span class="bold"><strong>en-tête de l'Éditeur</strong></span>. Cliquez sur <span class="emphasis"><em>Remplacer suivant</em></span> ou <span class="emphasis"><em>Ignorer</em></span>, puis mettez un terme à la session de remplacement avec <span class="emphasis"><em>Terminer</em></span>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Fermer :</strong></span> ferme la fenêtre sans aucune modification.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e7716"></a>1.1.&nbsp;Options de recherche
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Les options de recherche sont similaires à celles affichées dans la <a class="link" href="chapter.user.interface.html#section.search.window" title="3.2.&nbsp;La fenêtre Recherche textuelle">fenêtre de Recherche</a>.
+               </p>
+               <p>Exceptée celle-ci : cochez<span class="bold"><strong>Non traduits</strong></span> pour effectuer une recherche et remplacement également sur les segments qui ne sont pas encore traduits.
+               </p>
+               <p>Pour rendre cela possible (bien que la recherche et remplacement ne fonctionne qu'en mémoire), OmegaT copiera le segment source
+                  dans le segment cible avant que l'opération de remplacement ne survienne. Si aucun remplacement n'est effectué dans un segment
+                  donné, le segment cible sera «&nbsp;vidé&nbsp;», c'est-à-dire qu'il restera non traduit.
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.searches.html">Précédent</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Suivant</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapitre&nbsp;15.&nbsp;Recherches&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapitre&nbsp;17.&nbsp;Expressions régulières</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,118 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>第16章 置換を実行</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT 3.0 - 取扱説明書">
+      <link rel="up" href="index.html" title="OmegaT 3.0 - 取扱説明書">
+      <link rel="prev" href="chapter.searches.html" title="第15章 検索">
+      <link rel="next" href="chapter.regexp.html" title="第17章 正規表現">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">第16章 置換を実行</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.searches.html">戻る</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">次へ</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.searchandreplace"></a>第16章 置換を実行<a class="indexterm" name="d0e7598"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.searchandreplace.html#section.searchreplace.window">1. 検索ウィンドウ</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.searchandreplace.html#d0e7657">1.1. 検索オプション</a></span></dt>
+                  </dl>
+               </dd>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="section.searchreplace.window"></a>1. 検索ウィンドウ<a class="indexterm" name="d0e7604"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>K</strong></span> で検索と置換ウィンドウを開き、<span class="emphasis"><em>［検索文字列］</em></span>欄に検索したい語句または正規表現を入力します。
+            </p>
+            <p><span class="emphasis"><em>［検索］</em></span>ボタンをクリックすると、検索条件に一致したすべての分節が表示されます。
+            </p>
+            <p><span class="emphasis"><em>［置換後の文字列］</em></span>欄に新しい語句を入力し（正規表現は使えません）、以下のいずれかをクリックします：
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>すべて置換：</strong></span>すべての検索文字列を置換後の文字列で置き換えます（事前に置換件数を示した確認ダイアログが表示されます）。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>置換フィルター：</strong></span>編集ウィンドウに置換用のフィルターをかけ、<span class="bold"><strong>編集ウィンドウのヘッダー</strong></span>に現れるボタンを使って、1 件ずつ置換します。<span class="emphasis"><em>［置換して次へ］</em></span>か<span class="emphasis"><em>［次を検索］</em></span>をクリックしていき、最後に<span class="emphasis"><em>［フィルターを解除］</em></span>でフィルターを解除します。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>閉じる：</strong></span>変更なしにウィンドウを閉じます。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e7657"></a>1.1. 検索オプション
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>検索オプションは、<a class="link" href="chapter.user.interface.html#section.search.window" title="3.2. 検索ウィンドウ">検索ウィンドウ</a>に表示される検索オプションとほぼ同じです。
+               </p>
+               <p>例外的に、<span class="bold"><strong>未翻訳分節</strong></span>にチェックを入れると、翻訳前の分節の原文も検索対象になります。
+               </p>
+               <p>検索条件に一致した未翻訳分節に対しては、原文を訳文にコピーした上で置換が実行されます。置換が実行されなかった場合、未翻訳分節はそのままです。つまり、原文は訳文にコピーされません。</p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.searches.html">戻る</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">次へ</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">第15章 検索&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">ホーム</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;第17章 正規表現</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

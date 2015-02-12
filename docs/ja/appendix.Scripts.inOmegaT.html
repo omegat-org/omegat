@@ -1,0 +1,154 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>付録F スクリプト</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT 3.0 - 取扱説明書">
+      <link rel="up" href="index.html" title="OmegaT 3.0 - 取扱説明書">
+      <link rel="prev" href="appendix.LanguageToolPlugin.inOmegaT.html" title="付録E LanguageTool プラグイン">
+      <link rel="next" href="appendix.website.html" title="付録G ウェブ上の OmegaT 情報">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">付録F スクリプト</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.LanguageToolPlugin.inOmegaT.html">戻る</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.website.html">次へ</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.Scripts.inOmegaT"></a>付録F スクリプト<a class="indexterm" name="d0e11257"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.Scripts.inOmegaT.html#d0e11260">1. はじめに</a></span></dt>
+               <dt><span class="section"><a href="appendix.Scripts.inOmegaT.html#d0e11265">2. 使い方</a></span></dt>
+               <dt><span class="section"><a href="appendix.Scripts.inOmegaT.html#d0e11304">3. スクリプト言語</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e11260"></a>1. はじめに
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>さまざまなスクリプト言語で書かれたスクリプトを OmegaT で実行することができます。</p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e11265"></a>2. 使い方
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="guisubmenu">［ツール］→</span><span class="guisubmenu">［スクリプト...］</span>をクリックすると、スクリプト ウィンドウが開きます：
+            </p>
+            <div class="screenshot">
+               <div class="mediaobject"><img src="images/ScriptingDialog.png"></div>
+            </div>
+            <p>スクリプト ウィンドウ上では、既存のスクリプトをテキスト欄に読み込んだり、いま開いているプロジェクトに対して実行できます。スクリプトをカスタマイズする手順は、次の通りです：</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>左側のスクリプト一覧から目的のスクリプト名をクリックして、編集ウィンドウに読み込みます。</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>下部にある「1」から「12」のどれかのボタンの上で右クリックし、［スクリプトを設定］を選びます。上の画像では、２つのスクリプトがすでに（ボタン「&lt;1&gt;」と「&lt;2&gt;」に）設定済みです。</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>数値ボタンを左クリックすると、そこに設定されているスクリプトを実行できます。また<span class="guisubmenu">［ツール］</span>メニューからスクリプトを選んだり、割り当てられたショートカットキー <span class="keycap"><strong>Ctrl+Alt+F#</strong></span>（# は 1 から 12）を使うことでも、同じようにスクリプトを実行できます。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>デフォルトでは、スクリプトファイルは「scripts」フォルダーに格納されています。このフォルダーは、OmegaT のインストール先フォルダー（OmegaT.jar ファイルを含む）の配下にあります。</p>
+            <p>このフォルダーに新しいスクリプトファイルを追加すると、スクリプト ウィンドウの一覧に表示されます。</p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e11304"></a>3. スクリプト言語
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>以下のスクリプト言語は、最初から使える状態になっています：</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Groovy</strong></span>（http://groovy.codehaus.org）：Java 仮想マシン向けの動的言語です。構文的に Java との互換性を最大限に保った上で、さらに Python や Ruby、Smalltalk に触発された強力な拡張機能を持ちます。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>JavaScript</strong></span>（JS と略すこともあり、Java とは無関係）：プロトタイプ ベースのスクリプト言語です。動的で、弱い型付け、ファーストクラス関数などの特徴を持ちます。オブジェクト指向、命令型、および関数型プログラミングのスタイルをサポートする、マルチパラダイム言語です。Firefox
+                        のような人気のあるプログラムで利用されていることから、とりわけオープンソースの分野で普及し好まれています。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>すべての言語から、プロジェクトを先頭のオブジェクトとする OmegaT のオブジェクトモデルにアクセスできます。次に示すコードスニペットは、現在のプロジェクトから全ファイルの全分節を走査する groovy スクリプトの例です。このスクリプトは、もし訳文が存在していれば、その分節の原文と訳文を出力します：</p><pre class="programlisting">    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currsegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currsegment.getSrcText();
+                target = project.getTranslationInfo(currsegment).translation;
+                console.println(source + " &gt;&gt;&gt;&gt; " + target);
+            }     
+        }
+    }</pre></div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.LanguageToolPlugin.inOmegaT.html">戻る</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.website.html">次へ</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">付録E LanguageTool プラグイン&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">ホーム</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;付録G ウェブ上の <span class="application">OmegaT</span> 情報
+               </td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

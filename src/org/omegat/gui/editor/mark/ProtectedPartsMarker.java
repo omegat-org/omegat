@@ -28,9 +28,11 @@ package org.omegat.gui.editor.mark;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 import javax.swing.text.AttributeSet;
 import javax.swing.text.Highlighter.HighlightPainter;
+
+import org.apache.commons.lang.StringEscapeUtils;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
@@ -91,14 +93,14 @@ public class ProtectedPartsMarker implements IMarker {
     }
 
     private String escapeHtml(String s) {
-        s = s.replace("&", "&amp;");
+        boolean doStrip = Preferences.isPreference(Preferences.VIEW_OPTION_PPT_STRIP_TAGS);
         Matcher m = PatternConsts.PROTECTED_PARTS_PAIRED_TAG_DECOMPILE.matcher(s);
         if (m.find()) {
+            s = s.replace("&", "&amp;");
             // paired tag
-            boolean nostrip = !Preferences.isPreference(Preferences.VIEW_OPTION_PPT_STRIP_TAGS);
             boolean bold = Preferences.isPreference(Preferences.VIEW_OPTION_PPT_BOLD_TEXT);
             StringBuilder text = new StringBuilder(1024);
-            if (nostrip) {
+            if (!doStrip) {
                 text.append(m.group(1).replace("<", "&lt;").replace(">", "&gt;"));
             }
             if (bold) {
@@ -108,13 +110,16 @@ public class ProtectedPartsMarker implements IMarker {
             if (bold) {
                 text.append("</b>");
             }
-            if (nostrip) {
+            if (!doStrip) {
                 text.append(m.group(3).replace("<", "&lt;").replace(">", "&gt;"));
             }
             return text.toString();
-        } else {
-            // standalone tag
-            return s.replace("<", "&lt;").replace(">", "&gt;");
         }
+        m = PatternConsts.EQUIV_TEXT_ATTRIBUTE_DECOMPILE.matcher(s);
+        if (doStrip && m.find()) {
+            s = StringEscapeUtils.unescapeHtml(m.group(1));
+        }
+        // standalone tag
+        return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
     }
 }

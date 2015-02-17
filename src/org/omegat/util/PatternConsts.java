@@ -143,6 +143,11 @@ public class PatternConsts {
     public static final Pattern PROTECTED_PARTS_PAIRED_TAG_DECOMPILE = Pattern.compile("^(<.+?>)([^<]+?)(<\\/.+?>)");
 
 
+    /**
+     * Pattern that matches an equiv-text attribute as used in XLIFF inline codes.
+     */
+    public static final Pattern EQUIV_TEXT_ATTRIBUTE_DECOMPILE = Pattern.compile("equiv-text=\"([^\"]+)\"");
+    
     /** Pattern that detects space-only regular expressions. */
     public static final Pattern SPACY_REGEX = Pattern.compile("((\\s|\\\\n|\\\\t|\\\\s)(\\+|\\*)?)+");
 

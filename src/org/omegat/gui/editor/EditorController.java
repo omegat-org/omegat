@@ -12,7 +12,7 @@
                2012 Guido Leenders, Didier Briel
                2013 Zoltan Bartko, Alex Buloichik, Aaron Madlon-Kay
                2014 Aaron Madlon-Kay, Piotr Kulik
-               2015 Aaron Madlon-Kay
+               2015 Aaron Madlon-Kay, Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -41,8 +41,11 @@ import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -52,6 +55,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.JViewport;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
@@ -116,6 +120,7 @@ import com.vlsolutions.swing.docking.event.DockableSelectionListener;
  * @author Guido Leenders
  * @Author Aaron Madlon-Kay
  * @author Piotr Kulik
+ * @author Yu Tang
  */
 public class EditorController implements IEditor {
 
@@ -2107,7 +2112,49 @@ public class EditorController implements IEditor {
             timer.cancel();
         }
     }
-    
+
+    public AlphabeticalMarkers getAlphabeticalMarkers() {
+        return new AlphabeticalMarkers(scrollPane) {
+
+            @Override
+            protected Map<Integer, Point> getViewableSegmentLocations() {
+                final int UPPER_GAP = 5;
+                Map<Integer, Point> map = new LinkedHashMap<Integer, Point>(); // keep putting order
+
+                // no segments
+                if (m_docSegList == null) {
+                    return map;
+                }
+
+                JViewport viewport = scrollPane.getViewport();
+                int x = sourceLangIsRTL
+                        ? editor.getWidth() - editor.getInsets().right
+                        : editor.getInsets().left;
+                Rectangle viewRect = viewport.getViewRect();
+
+                // expand a bit rect for the segment at the upper end of the editor.
+                viewRect.setBounds(viewRect.x, viewRect.y - UPPER_GAP,
+                                    viewRect.width, viewRect.height + UPPER_GAP);
+
+                Point viewPosition = viewport.getViewPosition();
+                for (SegmentBuilder sb : m_docSegList) {
+                    try {
+                        Point location = editor.modelToView(sb.getStartPosition()).getLocation();
+                        if (viewRect.contains(location)) { // location is viewable
+                            int segmentNo = sb.segmentNumberInProject;
+                            location.translate(0, -viewPosition.y); // adjust to vertically view position
+                            location.x = x;                          // align in the left or right border
+                            map.put(segmentNo, location);
+                        }
+                    } catch (BadLocationException ex) {
+                        // Eat exception silently
+                    }
+                }
+                return map;
+            }
+        };
+    }
+
     private class ForceCommitTimer extends Thread {
         
         private final long limit;

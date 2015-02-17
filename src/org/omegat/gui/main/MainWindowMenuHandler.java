@@ -35,11 +35,19 @@
 package org.omegat.gui.main;
 
 import java.awt.Component;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.text.JTextComponent;
 
@@ -76,6 +84,8 @@ import org.omegat.gui.dialogs.WorkflowOptionsDialog;
 import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.editor.IEditor;
+import org.omegat.gui.editor.AlphabeticalMarkers;
+import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.search.SearchWindowController;
@@ -493,6 +503,10 @@ public class MainWindowMenuHandler {
         // dialog
         dialog.setContentPane(input); // add option pane to dialog
 
+        // create AlphabeticalMarkers
+        final AlphabeticalMarkers alphabeticalMarkers = 
+                ((EditorController) Core.getEditor()).getAlphabeticalMarkers();
+
         // Make the dialog verify the input
         input.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             @Override
@@ -523,6 +537,9 @@ public class MainWindowMenuHandler {
                             displayErrorMessage(maxNr);
                             return;
                         }
+
+                        // translate a marker title letter to segment number string
+                        inputValue = alphabeticalMarkers.translateSegmentNumber(inputValue);
 
                         // Check if the user really entered a number
                         int segmentNr;
@@ -561,6 +578,48 @@ public class MainWindowMenuHandler {
             }
         });
 
+        // intercept user input char and close the dialog
+        // when an alphabetical marker title is entered.
+        dialog.addComponentListener(new ComponentAdapter() {
+
+            @Override
+            public void componentShown(ComponentEvent ce) {
+                try {
+                    final KeyboardFocusManager keyboardFocusManager =
+                            KeyboardFocusManager.getCurrentKeyboardFocusManager();
+                    final JTextField f = (JTextField) keyboardFocusManager.getFocusOwner();
+                    f.addKeyListener(new KeyAdapter() {
+
+                        @Override
+                        public void keyTyped(KeyEvent e) {
+                            char keyChar = e.getKeyChar();
+                            boolean isMarkerTitle = alphabeticalMarkers.containsTitle(keyChar)
+                                                 && StringUtil.isEmpty(f.getText());
+                            if (isMarkerTitle) {
+                                keyboardFocusManager.focusNextComponent();
+                                SwingUtilities.invokeLater(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        Component focusOwner = keyboardFocusManager.getFocusOwner();
+                                        if (focusOwner instanceof JButton) {
+                                            JButton ok = (JButton) keyboardFocusManager.getFocusOwner();
+                                            ok.doClick();
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
+                } catch (Exception e) {
+                    Log.log(e);
+                }
+            }
+        });
+
+        // show alphabetical markers
+        alphabeticalMarkers.showMarkers();
+
         // Show the input dialog
         dialog.pack(); // make it look good
         dialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame()); // center it on the main window
@@ -571,12 +630,17 @@ public class MainWindowMenuHandler {
         if ((inputValue != null) && !inputValue.equals(JOptionPane.UNINITIALIZED_VALUE)) {
             // Go to the segment the user requested
             try {
+                // translate alphabetical marker title to segment number
+                inputValue = alphabeticalMarkers.translateSegmentNumber(String.valueOf(inputValue));
                 Core.getEditor().gotoEntry(Integer.parseInt((String) inputValue));
             } catch (ClassCastException e) {
                 // Shouldn't happen, but still... Just eat silently.
             } catch (NumberFormatException e) {
             }
         }
+
+        // hide alphabetical markers
+        alphabeticalMarkers.hideMarkers();
     }
 
     public void gotoHistoryBackMenuItemActionPerformed() {

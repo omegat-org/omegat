@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2010 Didier Briel
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -39,6 +40,7 @@ import org.omegat.util.gui.StaticUIUtils;
  * 
  * @author Maxym Mykhalchuk
  * @author Didier Briel
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class ViewOptionsDialog extends JDialog {
@@ -61,8 +63,7 @@ public class ViewOptionsDialog extends JDialog {
         viewSourceAllBold.setSelected(Preferences.isPreferenceDefault(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD, true));
         markFirstNonUnique.setSelected(Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST));
         
-        stripPPTPairedTags.setSelected(Preferences.isPreference(Preferences.VIEW_OPTION_PPT_STRIP_TAGS));
-        viewPPTTextBold.setSelected(Preferences.isPreference(Preferences.VIEW_OPTION_PPT_BOLD_TEXT));
+        simplifyPPTooltips.setSelected(Preferences.isPreferenceDefault(Preferences.VIEW_OPTION_PPT_SIMPLIFY, true));
         
         templateActivator.setSelected(Preferences.isPreferenceDefault(Preferences.VIEW_OPTION_TEMPLATE_ACTIVE, false));
         templatesSetEnabled(templateActivator.isSelected());
@@ -108,8 +109,7 @@ public class ViewOptionsDialog extends JDialog {
         variablesLabelND = new javax.swing.JLabel();
         variablesListND = new javax.swing.JComboBox();
         insertButtonND = new javax.swing.JButton();
-        stripPPTPairedTags = new javax.swing.JCheckBox();
-        viewPPTTextBold = new javax.swing.JCheckBox();
+        simplifyPPTooltips = new javax.swing.JCheckBox();
         templateActivator = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("VIEW_OPTION_TITLE")); // NOI18N
@@ -267,7 +267,7 @@ public class ViewOptionsDialog extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 4, 0);
         getContentPane().add(insertButtonND, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(stripPPTPairedTags, OStrings.getString("VIEW_OPTION_PPT_STRIP")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(simplifyPPTooltips, OStrings.getString("VIEW_OPTION_PPT_SIMPLIFY")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -276,18 +276,7 @@ public class ViewOptionsDialog extends JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(stripPPTPairedTags, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(viewPPTTextBold, OStrings.getString("VIEW_OPTION_PPT_BOLD")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipadx = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(viewPPTTextBold, gridBagConstraints);
+        getContentPane().add(simplifyPPTooltips, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(templateActivator, OStrings.getString("MOD_INFO_TEMPLATE_ACTIVATOR")); // NOI18N
         templateActivator.addActionListener(new java.awt.event.ActionListener() {
@@ -337,8 +326,7 @@ public class ViewOptionsDialog extends JDialog {
     {
         Preferences.setPreference(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD, viewSourceAllBold.isSelected());
         Preferences.setPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST, markFirstNonUnique.isSelected());
-        Preferences.setPreference(Preferences.VIEW_OPTION_PPT_STRIP_TAGS, stripPPTPairedTags.isSelected());
-        Preferences.setPreference(Preferences.VIEW_OPTION_PPT_BOLD_TEXT, viewPPTTextBold.isSelected());
+        Preferences.setPreference(Preferences.VIEW_OPTION_PPT_SIMPLIFY, simplifyPPTooltips.isSelected());
         Preferences.setPreference(Preferences.VIEW_OPTION_TEMPLATE_ACTIVE, templateActivator.isSelected());
         Preferences.setPreference(Preferences.VIEW_OPTION_MOD_INFO_TEMPLATE, modInfoTemplate.getText());
         Preferences.setPreference(Preferences.VIEW_OPTION_MOD_INFO_TEMPLATE_WO_DATE, modInfoTemplateND.getText());
@@ -372,7 +360,7 @@ public class ViewOptionsDialog extends JDialog {
     private javax.swing.JTextField modInfoTemplate;
     private javax.swing.JTextField modInfoTemplateND;
     private javax.swing.JButton okButton;
-    private javax.swing.JCheckBox stripPPTPairedTags;
+    private javax.swing.JCheckBox simplifyPPTooltips;
     private javax.swing.JCheckBox templateActivator;
     private javax.swing.JLabel templateLabel;
     private javax.swing.JLabel templateLabelND;
@@ -380,7 +368,6 @@ public class ViewOptionsDialog extends JDialog {
     private javax.swing.JLabel variablesLabelND;
     private javax.swing.JComboBox variablesList;
     private javax.swing.JComboBox variablesListND;
-    private javax.swing.JCheckBox viewPPTTextBold;
     private javax.swing.JCheckBox viewSourceAllBold;
     // End of variables declaration//GEN-END:variables
 

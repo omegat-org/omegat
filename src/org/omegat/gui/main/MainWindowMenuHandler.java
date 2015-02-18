@@ -12,7 +12,7 @@
                2012 Wildrich Fourie, Guido Leenders, Didier Briel
                2013 Zoltan Bartko, Didier Briel, Yu Tang
                2014 Aaron Madlon-Kay
-               2015 Yu Tang
+               2015 Yu Tang, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -588,6 +588,10 @@ public class MainWindowMenuHandler {
                     final KeyboardFocusManager keyboardFocusManager =
                             KeyboardFocusManager.getCurrentKeyboardFocusManager();
                     final JTextField f = (JTextField) keyboardFocusManager.getFocusOwner();
+                    if (f == null) {  // for Mac OS X
+                        return;
+                    }
+
                     f.addKeyListener(new KeyAdapter() {
 
                         @Override

@@ -177,6 +177,9 @@ public class ProjectFilesListController {
                 case LOAD:
                 case CREATE:
                     buildDisplay(Core.getProject().getProjectFiles());
+                    if (!Preferences.isPreferenceDefault(Preferences.PROJECT_FILES_SHOW_ON_LOAD, true)) {
+                        break;
+                    }
                     list.setVisible(true);
                     list.tableFiles.requestFocus();
                     buildTotalTableLayout();

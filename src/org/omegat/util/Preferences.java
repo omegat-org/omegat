@@ -97,6 +97,9 @@ public class Preferences {
     public static final String PROJECT_FILES_WINDOW_Y = "project_files_window_y";
     // Using the main font for the Project Files window
     public static final String PROJECT_FILES_USE_FONT = "project_files_use_font";
+    // Determines whether or not the Project Files window is shown on project load.
+    // Currently not exposed in UI.
+    public static final String PROJECT_FILES_SHOW_ON_LOAD = "project_files_show_on_load";
 
     // Search window size and position
     public static final String SEARCHWINDOW_WIDTH = "search_window_width";

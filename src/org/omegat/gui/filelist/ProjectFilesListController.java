@@ -8,6 +8,7 @@
                2008 Alex Buloichik, Didier Briel
                2012 Martin Fleurke
                2014 Alex Buloichik Piotr Kulik
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -106,6 +107,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Didier Briel
  * @author Martin Fleurke
  * @author Piotr Kulik
+ * @author Aaron Madlon-Kay
  */
 public class ProjectFilesListController {
     private static final Color COLOR_STANDARD_FG = Color.BLACK;

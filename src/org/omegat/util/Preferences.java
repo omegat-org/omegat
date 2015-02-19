@@ -70,7 +70,8 @@ import org.omegat.util.xml.XMLStreamReader;
  */
 public class Preferences {
     /** OmegaT-wide Preferences Filename */
-    public static final String FILE_PREFERENCES = "omegat.prefs";
+    public static final String FILE_PREFERENCES = OStrings.BRANDING.isEmpty() ? "omegat.prefs"
+            : "omegat-" + OStrings.BRANDING + ".prefs";
 
     // preference names
     public static final String SOURCE_LOCALE = "source_lang";

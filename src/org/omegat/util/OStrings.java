@@ -46,6 +46,9 @@ public class OStrings {
     private static String __VERSION_KEY = "version";
     private static String __UPDATE_KEY = "update";
 
+    /** For custom deployments of OmegaT that need to be distinguishable from "stock" OmegaT */
+    public static String BRANDING = "";
+
     /** Just a version, e.g. "1.6" */
     public static final String VERSION = ResourceBundle.getBundle("org/omegat/Version").getString(
             __VERSION_KEY);
@@ -104,9 +107,13 @@ public class OStrings {
      * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public static String getDisplayVersion() {
-        return ((UPDATE != null) && !UPDATE.equals("0")) ? StaticUtils.format(
+        String result = ((UPDATE != null) && !UPDATE.equals("0")) ? StaticUtils.format(
                 getString("version-update-template"), new Object[] { VERSION, UPDATE }) : StaticUtils.format(
                 getString("version-template"), new Object[] { VERSION, UPDATE });
+        if (!BRANDING.isEmpty()) {
+            result += " " + BRANDING;
+        }
+        return result;
     }
 
     /**

@@ -268,6 +268,9 @@ public class TMXWriter2 {
         String version = OStrings.VERSION;
         if (!OStrings.UPDATE.equals("0"))
             version = version + "_" + OStrings.UPDATE;
+        if (!OStrings.BRANDING.isEmpty()) {
+            version += "_" + OStrings.BRANDING;
+        }
 
         xml.writeAttribute("creationtoolversion", version);
 

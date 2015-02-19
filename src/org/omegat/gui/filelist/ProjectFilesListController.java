@@ -349,14 +349,6 @@ public class ProjectFilesListController {
 
     private void doCancel() {
         list.setVisible(false);
-
-        RowSorter<AbstractTableModel> rs = (RowSorter<AbstractTableModel>) list.tableFiles.getRowSorter();
-        RowSorter.SortKey sk;
-        if (rs.getSortKeys().isEmpty()) {
-            sk = new RowSorter.SortKey(1, SortOrder.ASCENDING);
-        } else {
-            sk = rs.getSortKeys().get(0);
-        }
     }
 
     /**

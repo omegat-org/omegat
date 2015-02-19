@@ -55,10 +55,10 @@
 	</target>
 	
 	<target name="set-bundled-defaults" depends="set-layout-defaults">
-		<!-- Place an omegat.prefs in release/WebStart-specific to bundle default preferences
-			 for new users. -->
+		<!-- Place an omegat.prefs (omegat-$BRANDING.prefs if using branding)
+        	 in release/WebStart-specific to bundle default preferences for new users. -->
 		<jar destfile="${root}/build/webstart/OmegaT.jar" update="true">
-			<zipfileset dir="." includes="omegat.prefs" prefix="org/omegat/util/" />
+			<zipfileset dir="." includes="*.prefs" prefix="org/omegat/util/" />
 		</jar>
 	</target>
 	

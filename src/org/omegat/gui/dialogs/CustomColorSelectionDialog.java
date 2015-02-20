@@ -239,61 +239,6 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         dispose();
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                CustomColorSelectionDialog dialog = new CustomColorSelectionDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
-    
-//    private class CustomColorPreview extends JTextArea
-//    {
-//        EditorColor editorColor;
-//		Color curColor;
-//
-//        CustomColorPreview(JColorChooser colorChooser, Object object)
-//        {
-//            curColor = colorChooser.getColor();
-//            this.editorColor = (Styles.EditorColor) object;
-//            init();
-//        }
-//        
-//        public void init()
-//        {
-//            setText(
-//    "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.");
-//            setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
-//            setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
-//            Highlighter highlighter = getHighlighter();
-//
-//            WaveUnderline hlSpellcheck = new UnderlineFactory.WaveUnderline(Styles.EditorColor.COLOR_SPELLCHECK.getColor());
-//            try {
-//    			highlighter.addHighlight(45, 55, hlSpellcheck);
-//    		} catch (BadLocationException e) {
-//    			/* ignore */
-//    		}
-//        }
-//        
-//        public void paint(Graphics g)
-//        {
-//        	//super.paint(g);
-//            g.setColor(curColor);
-//            g.fillRect(0, 0, 50, 50);
-//        }
-//    }
-
     // Hide the Transparency Slider.
     // From: http://stackoverflow.com/a/22608885
     private void removeTransparencySlider(JColorChooser jc) throws Exception {

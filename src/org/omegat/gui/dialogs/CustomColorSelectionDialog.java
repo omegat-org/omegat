@@ -58,7 +58,17 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
     public CustomColorSelectionDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        customizeColorChooser();
         StaticUIUtils.setEscapeClosable(this);
+    }
+
+    private void customizeColorChooser() {
+        try {
+            removeTransparencySlider(colorChooser);
+            removeSwatches(colorChooser);
+        } catch (Exception e) {
+            // Ignore
+        }
     }
 
     /**
@@ -114,35 +124,6 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         jPanel3.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jPanel1.add(jPanel3, java.awt.BorderLayout.WEST);
-
-        /*
-        final CustomColorPreview samplePanel = new CustomColorPreview(colorChooser, colorStylesList.getSelectedValue());
-
-        colorChooser.setPreviewPanel(samplePanel);
-        ColorSelectionModel model = colorChooser.getSelectionModel();
-        model.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent evt) {
-                ColorSelectionModel model = (ColorSelectionModel) evt.getSource();
-                samplePanel.curColor = model.getSelectedColor();
-            }
-        });
-        */
-
-        try {
-            removeTransparencySlider(colorChooser);
-        }
-        catch (Exception e) {
-            /* empty */
-        }
-
-        // Remove sample Swatches
-        javax.swing.colorchooser.AbstractColorChooserPanel[] oldPanels = colorChooser.getChooserPanels();
-        for (int i = 0; i < oldPanels.length; i++) {
-            String clsName = oldPanels[i].getClass().getName();
-            if (clsName.equals("javax.swing.colorchooser.DefaultSwatchChooserPanel")) {
-                colorChooser.removeChooserPanel(oldPanels[i]);
-            }
-        }
         jPanel1.add(colorChooser, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -277,6 +258,17 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
     }
 }
     
+    private static void removeSwatches(JColorChooser jc) {
+        // Remove sample Swatches
+        javax.swing.colorchooser.AbstractColorChooserPanel[] oldPanels = jc.getChooserPanels();
+        for (AbstractColorChooserPanel oldPanel : oldPanels) {
+            String clsName = oldPanel.getClass().getName();
+            if (clsName.equals("javax.swing.colorchooser.DefaultSwatchChooserPanel")) {
+                jc.removeChooserPanel(oldPanel);
+            }
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton applyColorChangesButton;
     private javax.swing.JButton cancelButton;

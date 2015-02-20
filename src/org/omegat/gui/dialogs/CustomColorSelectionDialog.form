@@ -114,9 +114,6 @@
           </SubComponents>
         </Container>
         <Component class="javax.swing.JColorChooser" name="colorChooser">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="/*&#xd;&#xa;final CustomColorPreview samplePanel = new CustomColorPreview(colorChooser, colorStylesList.getSelectedValue());&#xd;&#xa;&#xd;&#xa;colorChooser.setPreviewPanel(samplePanel);&#xd;&#xa;ColorSelectionModel model = colorChooser.getSelectionModel();&#xd;&#xa;    model.addChangeListener(new ChangeListener() {&#xd;&#xa;      public void stateChanged(ChangeEvent evt) {&#xd;&#xa;        ColorSelectionModel model = (ColorSelectionModel) evt.getSource();&#xd;&#xa;        samplePanel.curColor = model.getSelectedColor();&#xd;&#xa;      }&#xd;&#xa;    });&#xd;&#xa;*/&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;try {&#xd;&#xa;    removeTransparencySlider(colorChooser);&#xd;&#xa;}&#xd;&#xa;catch (Exception e) {&#xd;&#xa;    /* empty */&#xd;&#xa;}&#xd;&#xa;&#xd;&#xa;// Remove sample Swatches&#xd;&#xa;javax.swing.colorchooser.AbstractColorChooserPanel[] oldPanels = colorChooser.getChooserPanels();&#xd;&#xa;for (int i = 0; i &lt; oldPanels.length; i++) {&#xd;&#xa;    String clsName = oldPanels[i].getClass().getName();&#xd;&#xa;    if (clsName.equals(&quot;javax.swing.colorchooser.DefaultSwatchChooserPanel&quot;)) {&#xd;&#xa;        colorChooser.removeChooserPanel(oldPanels[i]);&#xd;&#xa;    }&#xd;&#xa;}&#xd;&#xa;"/>
-          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
               <BorderConstraints direction="Center"/>

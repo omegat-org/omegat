@@ -114,6 +114,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         jPanel3.add(colorStylesLabel, java.awt.BorderLayout.NORTH);
 
         colorStylesList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        colorStylesList.setSelectedIndex(0);
         colorStylesList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 colorStylesListValueChanged(evt);

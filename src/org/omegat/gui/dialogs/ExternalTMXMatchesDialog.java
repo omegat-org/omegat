@@ -30,7 +30,6 @@ package org.omegat.gui.dialogs;
 import java.awt.Frame;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 
 import org.omegat.core.matching.NearString.SORT_KEY;
 import org.omegat.gui.matches.MatchesVarExpansion;
@@ -96,21 +95,27 @@ public class ExternalTMXMatchesDialog extends JDialog {
     // <editor-fold defaultstate="collapsed"
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
-        descriptionTextArea = new javax.swing.JTextArea();
-        okButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        sortMatchesLabel = new javax.swing.JLabel();
+        sortMatchesList = new javax.swing.JComboBox();
+        jPanel7 = new javax.swing.JPanel();
+        tagHandlingLabel = new javax.swing.JLabel();
         displayLevel2Tags = new javax.swing.JCheckBox();
         useSlash = new javax.swing.JCheckBox();
+        jPanel3 = new javax.swing.JPanel();
         templateLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         matchesTemplate = new javax.swing.JTextArea();
+        jPanel4 = new javax.swing.JPanel();
         variablesLabel = new javax.swing.JLabel();
         variablesList = new javax.swing.JComboBox();
         insertButton = new javax.swing.JButton();
-        sortMatchesLabel = new javax.swing.JLabel();
-        sortMatchesList = new javax.swing.JComboBox();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        okButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
         setTitle(OStrings.getString("EXT_TMX_TITLE")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -118,86 +123,42 @@ public class ExternalTMXMatchesDialog extends JDialog {
                 closeDialog(evt);
             }
         });
-        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        descriptionTextArea.setEditable(false);
-        descriptionTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
-        descriptionTextArea.setFont(new JLabel().getFont());
-        descriptionTextArea.setLineWrap(true);
-        descriptionTextArea.setText(OStrings.getString("EXT_TMX_DESCRIPTION")); // NOI18N
-        descriptionTextArea.setWrapStyleWord(true);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 0, 4);
-        getContentPane().add(descriptionTextArea, gridBagConstraints);
+        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jPanel2.setLayout(new java.awt.BorderLayout());
 
-        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 11;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
-        getContentPane().add(okButton, gridBagConstraints);
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
 
-        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 11;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
-        getContentPane().add(cancelButton, gridBagConstraints);
+        org.openide.awt.Mnemonics.setLocalizedText(sortMatchesLabel, OStrings.getString("EXT_TMX_SORT_KEY")); // NOI18N
+        jPanel1.add(sortMatchesLabel);
+        jPanel1.add(sortMatchesList);
+
+        jPanel2.add(jPanel1, java.awt.BorderLayout.NORTH);
+
+        jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.Y_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(tagHandlingLabel, OStrings.getString("EXT_TMX_DESCRIPTION")); // NOI18N
+        jPanel7.add(tagHandlingLabel);
 
         displayLevel2Tags.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(displayLevel2Tags, OStrings.getString("EXT_TMX_SHOW_LEVEL2")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipadx = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(displayLevel2Tags, gridBagConstraints);
+        jPanel7.add(displayLevel2Tags);
 
         useSlash.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(useSlash, OStrings.getString("EXT_TMX_USE_XML")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipadx = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(useSlash, gridBagConstraints);
+        jPanel7.add(useSlash);
+
+        jPanel2.add(jPanel7, java.awt.BorderLayout.PAGE_END);
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.NORTH);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        jPanel3.setLayout(new java.awt.BorderLayout());
 
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(templateLabel, bundle.getString("EXT_TMX_MATCHES_TEMPLATE")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 0, 4);
-        getContentPane().add(templateLabel, gridBagConstraints);
+        jPanel3.add(templateLabel, java.awt.BorderLayout.NORTH);
 
         jScrollPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setMinimumSize(new java.awt.Dimension(525, 25));
@@ -207,30 +168,15 @@ public class ExternalTMXMatchesDialog extends JDialog {
         matchesTemplate.setRows(5);
         jScrollPane1.setViewportView(matchesTemplate);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(jScrollPane1, gridBagConstraints);
+        jPanel3.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jPanel4.setLayout(new java.awt.BorderLayout());
 
         org.openide.awt.Mnemonics.setLocalizedText(variablesLabel, bundle.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 4, 4, 0);
-        getContentPane().add(variablesLabel, gridBagConstraints);
+        jPanel4.add(variablesLabel, java.awt.BorderLayout.WEST);
 
         variablesList.setModel(new DefaultComboBoxModel(org.omegat.gui.matches.MatchesVarExpansion.MATCHES_VARIABLES));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 4, 0);
-        getContentPane().add(variablesList, gridBagConstraints);
+        jPanel4.add(variablesList, java.awt.BorderLayout.CENTER);
 
         org.openide.awt.Mnemonics.setLocalizedText(insertButton, bundle.getString("BUTTON_INSERT")); // NOI18N
         insertButton.addActionListener(new java.awt.event.ActionListener() {
@@ -238,27 +184,36 @@ public class ExternalTMXMatchesDialog extends JDialog {
                 insertButtonActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 4, 0);
-        getContentPane().add(insertButton, gridBagConstraints);
+        jPanel4.add(insertButton, java.awt.BorderLayout.EAST);
 
-        org.openide.awt.Mnemonics.setLocalizedText(sortMatchesLabel, OStrings.getString("EXT_TMX_SORT_KEY")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 0);
-        getContentPane().add(sortMatchesLabel, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 4);
-        getContentPane().add(sortMatchesList, gridBagConstraints);
+        jPanel3.add(jPanel4, java.awt.BorderLayout.PAGE_END);
+
+        getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
+        jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
+        jPanel6.add(okButton);
+
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+        jPanel6.add(cancelButton);
+
+        jPanel5.add(jPanel6, java.awt.BorderLayout.EAST);
+
+        getContentPane().add(jPanel5, java.awt.BorderLayout.SOUTH);
 
         pack();
         setLocationRelativeTo(null);
@@ -297,14 +252,21 @@ public class ExternalTMXMatchesDialog extends JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JCheckBox displayLevel2Tags;
     private javax.swing.JButton insertButton;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea matchesTemplate;
     private javax.swing.JButton okButton;
     private javax.swing.JLabel sortMatchesLabel;
     private javax.swing.JComboBox sortMatchesList;
+    private javax.swing.JLabel tagHandlingLabel;
     private javax.swing.JLabel templateLabel;
     private javax.swing.JCheckBox useSlash;
     private javax.swing.JLabel variablesLabel;

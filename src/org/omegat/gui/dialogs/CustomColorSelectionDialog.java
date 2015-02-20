@@ -151,7 +151,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         });
         jPanel4.add(defaultColorButton);
 
-        jPanel5.setLayout(new java.awt.GridLayout());
+        jPanel5.setLayout(new java.awt.GridLayout(1, 0));
 
         org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -180,8 +180,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
 
     private void colorStylesListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_colorStylesListValueChanged
         Color selectedColor = ((Styles.EditorColor) colorStylesList.getSelectedValue()).getColor();
-        if (selectedColor == null)
-        {
+        if (selectedColor == null) {
             selectedColor = Color.WHITE;
         }
         colorChooser.setColor(selectedColor);
@@ -194,7 +193,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         }
         editorColor.setColor(null);
         colorChooser.setColor(editorColor.getColor());
-        
+
     }//GEN-LAST:event_defaultColorButtonActionPerformed
 
     private void setColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setColorButtonActionPerformed
@@ -222,42 +221,42 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
 
     // Hide the Transparency Slider.
     // From: http://stackoverflow.com/a/22608885
-    private void removeTransparencySlider(JColorChooser jc) throws Exception {
+    private static void removeTransparencySlider(JColorChooser jc) throws Exception {
 
-    AbstractColorChooserPanel[] colorPanels = jc.getChooserPanels();
-    for (int i = 1; i < colorPanels.length; i++) {
-        AbstractColorChooserPanel cp = colorPanels[i];
+        AbstractColorChooserPanel[] colorPanels = jc.getChooserPanels();
+        for (int i = 1; i < colorPanels.length; i++) {
+            AbstractColorChooserPanel cp = colorPanels[i];
 
-        Field f = cp.getClass().getDeclaredField("panel");
-        f.setAccessible(true);
+            Field f = cp.getClass().getDeclaredField("panel");
+            f.setAccessible(true);
 
-        Object colorPanel = f.get(cp);
-        Field f2 = colorPanel.getClass().getDeclaredField("spinners");
-        f2.setAccessible(true);
-        Object spinners = f2.get(colorPanel);
+            Object colorPanel = f.get(cp);
+            Field f2 = colorPanel.getClass().getDeclaredField("spinners");
+            f2.setAccessible(true);
+            Object spinners = f2.get(colorPanel);
 
-        Object transpSlispinner = Array.get(spinners, 3);
-        if (i == colorPanels.length - 1) {
-            transpSlispinner = Array.get(spinners, 4);
+            Object transpSlispinner = Array.get(spinners, 3);
+            if (i == colorPanels.length - 1) {
+                transpSlispinner = Array.get(spinners, 4);
+            }
+            Field f3 = transpSlispinner.getClass().getDeclaredField("slider");
+            f3.setAccessible(true);
+            JSlider slider = (JSlider) f3.get(transpSlispinner);
+            slider.setEnabled(false);
+            slider.setVisible(false);
+            Field f4 = transpSlispinner.getClass().getDeclaredField("spinner");
+            f4.setAccessible(true);
+            JSpinner spinner = (JSpinner) f4.get(transpSlispinner);
+            spinner.setEnabled(false);
+            spinner.setVisible(false);
+
+            Field f5 = transpSlispinner.getClass().getDeclaredField("label");
+            f5.setAccessible(true);
+            JLabel label = (JLabel) f5.get(transpSlispinner);
+            label.setVisible(false);
         }
-        Field f3 = transpSlispinner.getClass().getDeclaredField("slider");
-        f3.setAccessible(true);
-        JSlider slider = (JSlider) f3.get(transpSlispinner);
-        slider.setEnabled(false);
-        slider.setVisible(false);
-        Field f4 = transpSlispinner.getClass().getDeclaredField("spinner");
-        f4.setAccessible(true);
-        JSpinner spinner = (JSpinner) f4.get(transpSlispinner);
-        spinner.setEnabled(false);
-        spinner.setVisible(false);
-
-        Field f5 = transpSlispinner.getClass().getDeclaredField("label");
-        f5.setAccessible(true);
-        JLabel label = (JLabel) f5.get(transpSlispinner);
-        label.setVisible(false);
     }
-}
-    
+
     private static void removeSwatches(JColorChooser jc) {
         // Remove sample Swatches
         javax.swing.colorchooser.AbstractColorChooserPanel[] oldPanels = jc.getChooserPanels();

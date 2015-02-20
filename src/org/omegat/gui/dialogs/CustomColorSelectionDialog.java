@@ -177,6 +177,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void colorStylesListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_colorStylesListValueChanged

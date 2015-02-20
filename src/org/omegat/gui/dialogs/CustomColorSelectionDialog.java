@@ -27,11 +27,13 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import javax.swing.AbstractAction;
 
 import javax.swing.JColorChooser;
 import javax.swing.JLabel;
@@ -74,7 +76,12 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         configureColorChooser();
-        StaticUIUtils.setEscapeClosable(this);
+        StaticUIUtils.setEscapeAction(this, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                closeDialog();
+            }
+        });
         colorStylesListValueChanged(null);
     }
 

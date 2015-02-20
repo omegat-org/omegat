@@ -181,7 +181,13 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void colorStylesListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_colorStylesListValueChanged
-        Color selectedColor = ((Styles.EditorColor) colorStylesList.getSelectedValue()).getColor();
+        Object selectedObject = colorStylesList.getSelectedValue();
+        if (selectedObject == null) {
+            colorChooser.setEnabled(false);
+            return;
+        }
+        colorChooser.setEnabled(true);
+        Color selectedColor = ((Styles.EditorColor) selectedObject).getColor();
         if (selectedColor == null) {
             selectedColor = Color.WHITE;
         }

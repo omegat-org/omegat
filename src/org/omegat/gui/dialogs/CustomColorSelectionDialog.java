@@ -88,7 +88,6 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
     private void configureColorChooser() {
         try {
             removeTransparencySlider(colorChooser);
-            removeSwatches(colorChooser);
         } catch (Exception e) {
             // Ignore
         }
@@ -309,17 +308,6 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
             f5.setAccessible(true);
             JLabel label = (JLabel) f5.get(transpSlispinner);
             label.setVisible(false);
-        }
-    }
-
-    private static void removeSwatches(JColorChooser jc) {
-        // Remove sample Swatches
-        javax.swing.colorchooser.AbstractColorChooserPanel[] oldPanels = jc.getChooserPanels();
-        for (AbstractColorChooserPanel oldPanel : oldPanels) {
-            String clsName = oldPanel.getClass().getName();
-            if (clsName.equals("javax.swing.colorchooser.DefaultSwatchChooserPanel")) {
-                jc.removeChooserPanel(oldPanel);
-            }
         }
     }
 

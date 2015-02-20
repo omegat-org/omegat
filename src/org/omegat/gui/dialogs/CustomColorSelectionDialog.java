@@ -28,11 +28,9 @@ package org.omegat.gui.dialogs;
 import java.awt.Color;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.JColorChooser;
 import javax.swing.JLabel;
-
 import javax.swing.JOptionPane;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;

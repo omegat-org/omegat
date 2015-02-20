@@ -110,11 +110,10 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         updateLanguageList();
 
         String dictionaryUrl = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL);
-        if ("".equalsIgnoreCase(dictionaryUrl) ||
-            //string below was default prior to 2.5.0 update 5, but is not working. Override with new default.
-            "http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/".equalsIgnoreCase(dictionaryUrl)
-           ) {
-               dictionaryUrlTextField.setText(OConsts.REMOTE_SC_DICTIONARY_LIST_LOCATION);
+        if (dictionaryUrl.isEmpty()
+                || //string below was default prior to 2.5.0 update 5, but is not working. Override with new default.
+                "http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/".equalsIgnoreCase(dictionaryUrl)) {
+            dictionaryUrlTextField.setText(OConsts.REMOTE_SC_DICTIONARY_LIST_LOCATION);
         } else {
             dictionaryUrlTextField.setText(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL));
         }
@@ -129,7 +128,9 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         String dirName = directoryTextField.getText();
 
         // should we do anything?
-        if (dirName == null || dirName.equals(""))
+        if (dirName == null || dirName.isEmpty()) {
+            return;
+        }
             return;
 
         dicMan = new DictionaryManager(dirName);
@@ -332,7 +333,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
     }// GEN-LAST:event_directoryTextFieldActionPerformed
 
     private void directoryChooserButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_directoryChooserButtonActionPerformed
-    // open a dialog box to choose the directory
+        // open a dialog box to choose the directory
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fileChooser.setDialogTitle(OStrings.getString("GUI_SPELLCHECKER_FILE_CHOOSER_TITLE"));
         int result = fileChooser.showOpenDialog(SpellcheckerConfigurationDialog.this);
@@ -351,8 +352,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
             return;
         }
 
-        Preferences
-                .setPreference(Preferences.SPELLCHECKER_DICTIONARY_URL, dictionaryUrlTextField.getText());
+        Preferences.setPreference(Preferences.SPELLCHECKER_DICTIONARY_URL, dictionaryUrlTextField.getText());
 
         Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
         Cursor oldCursor = getCursor();
@@ -365,37 +365,37 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
             installerDialog.setVisible(true);
             updateLanguageList();
         } catch (IOException ex) {
-        	setCursor(oldCursor);
+            setCursor(oldCursor);
             JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
         }
         setUninstalButtonStatus();
     }// GEN-LAST:event_installButtonActionPerformed
 
     private void uninstallButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_uninstallButtonActionPerformed
-    // any dictionary manager available
-        if (dicMan == null)
+        // any dictionary manager available
+        if (dicMan == null) {
             return; // this should never happen - just in case it does
-
+        }
         if (currentLanguage != null) {
             Object[] selection = languageList.getSelectedValues();
-            for (int i = 0; i < selection.length; i++) {
-                String selectedItem = (String) selection[i];
+            for (Object item : selection) {
+                String selectedItem = (String) item;
                 String selectedLocaleName = selectedItem.substring(0, selectedItem.indexOf(" "));
 
                 if (selectedLocaleName.equals(currentLanguage.getLocaleCode())) {
                     if (JOptionPane.showConfirmDialog(this,
                             OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_CURRENT"),
                             OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_CURRENT_TITLE"),
-                            JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION)
+                            JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
                         return;
+                    }
                 }
-
-                if (!dicMan.uninstallDictionary(selectedLocaleName))
+                if (!dicMan.uninstallDictionary(selectedLocaleName)) {
                     JOptionPane.showMessageDialog(this,
                             OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_UNABLE"),
                             OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_UNABLE_TITLE"),
                             JOptionPane.ERROR_MESSAGE);
-
+                }
                 languageListModel.remove(languageList.getSelectedIndex());
             }
             setUninstalButtonStatus();
@@ -407,14 +407,12 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
     }// GEN-LAST:event_cancelButtonActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
-    // save preferences
+        // save preferences
         Preferences.setPreference(Preferences.ALLOW_AUTO_SPELLCHECKING, autoSpellcheckCheckBox.isSelected());
 
-        Preferences
-                .setPreference(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY, directoryTextField.getText());
+        Preferences.setPreference(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY, directoryTextField.getText());
 
-        Preferences
-                .setPreference(Preferences.SPELLCHECKER_DICTIONARY_URL, dictionaryUrlTextField.getText());
+        Preferences.setPreference(Preferences.SPELLCHECKER_DICTIONARY_URL, dictionaryUrlTextField.getText());
 
         doClose(RET_OK);
     }// GEN-LAST:event_okButtonActionPerformed

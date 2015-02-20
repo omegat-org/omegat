@@ -57,8 +57,8 @@ public class DictionaryManager {
      *            : the directory where the spell checking dictionary files
      *            (*.(aff|dic) are available locally
      */
-    public DictionaryManager(String dirName) {
-        dir = new File(dirName);
+    public DictionaryManager(File dir) {
+        this.dir = dir;
     }
 
     /**

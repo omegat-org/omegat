@@ -37,6 +37,8 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import org.omegat.core.spellchecker.DictionaryManager;
 import org.omegat.util.Language;
@@ -106,8 +108,21 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         autoSpellcheckCheckBox.setSelected(Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING));
         updateDetailPanel();
 
+        directoryTextField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateLanguageList();
+            }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateLanguageList();
+            }
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateLanguageList();
+            }
+        });
         directoryTextField.setText(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY));
-        updateLanguageList();
 
         String dictionaryUrl = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL);
         if (dictionaryUrl.isEmpty()
@@ -125,22 +140,26 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
      * Updates the language list based on the directory text field
      */
     public final void updateLanguageList() {
+        // initialize the language list model
+        languageListModel.clear();
+        
         String dirName = directoryTextField.getText();
 
         // should we do anything?
         if (dirName == null || dirName.isEmpty()) {
             return;
         }
+        
+        File dir = new File(dirName);
+        if (!dir.exists()) {
             return;
+        }
 
-        dicMan = new DictionaryManager(dirName);
+        dicMan = new DictionaryManager(dir);
 
         List<String> aList = dicMan.getLocalDictionaryNameList();
 
         Collections.sort(aList);
-
-        // initialize the language list model
-        languageListModel.clear();
 
         for (String str : aList) {
             languageListModel.addElement(str);
@@ -342,7 +361,6 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
             File file = fileChooser.getSelectedFile();
             directoryTextField.setText(file.getAbsolutePath());
         }
-        updateLanguageList();
     }// GEN-LAST:event_directoryChooserButtonActionPerformed
 
     private void installButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_installButtonActionPerformed

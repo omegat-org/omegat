@@ -134,7 +134,6 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         jPanel4.setLayout(new java.awt.GridLayout(0, 1));
 
         org.openide.awt.Mnemonics.setLocalizedText(setColorButton, OStrings.getString("GUI_COLORS_SET_COLOR")); // NOI18N
-        setColorButton.setToolTipText("");
         setColorButton.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         setColorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

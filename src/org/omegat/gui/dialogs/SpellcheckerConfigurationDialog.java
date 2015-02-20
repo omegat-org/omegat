@@ -119,6 +119,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
             dictionaryUrlTextField.setText(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL));
         }
 
+        this.setLocationRelativeTo(null);
     }
 
     /**

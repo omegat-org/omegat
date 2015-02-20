@@ -29,13 +29,19 @@ package org.omegat.gui.dialogs;
 import java.awt.Color;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.JColorChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
+import javax.swing.ListModel;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -52,25 +58,50 @@ import org.omegat.util.gui.Styles.EditorColor;
 @SuppressWarnings("serial")
 public class CustomColorSelectionDialog extends javax.swing.JDialog {
 
+    private final Map<EditorColor, Color> temporaryPreferences = new EnumMap<EditorColor, Color>(EditorColor.class);
+    private final ChangeListener colorChangeListener = new ChangeListener() {
+        @Override
+        public void stateChanged(ChangeEvent e) {
+            recordTemporaryPreference();
+        }
+    };
+    
+    
     /**
      * Creates new form CustomColorSelectionDialog
      */
     public CustomColorSelectionDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        customizeColorChooser();
+        configureColorChooser();
         StaticUIUtils.setEscapeClosable(this);
+        colorStylesListValueChanged(null);
     }
 
-    private void customizeColorChooser() {
+    private void configureColorChooser() {
         try {
             removeTransparencySlider(colorChooser);
             removeSwatches(colorChooser);
         } catch (Exception e) {
             // Ignore
         }
+        colorChooser.getSelectionModel().addChangeListener(colorChangeListener);
+    }
+    
+    private void recordTemporaryPreference() {
+        EditorColor selectedStyle = (EditorColor) colorStylesList.getSelectedValue();
+        if (selectedStyle == null) {
+            return;
+        }
+        temporaryPreferences.put(selectedStyle, colorChooser.getColor());
     }
 
+    private void setColorChooserWithoutNotifying(Color color) {
+        colorChooser.getSelectionModel().removeChangeListener(colorChangeListener);
+        colorChooser.setColor(color == null ? Color.BLACK : color);
+        colorChooser.getSelectionModel().addChangeListener(colorChangeListener);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,11 +119,11 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         colorChooser = new javax.swing.JColorChooser();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        setColorButton = new javax.swing.JButton();
-        defaultColorButton = new javax.swing.JButton();
+        resetCurrentColorButton = new javax.swing.JButton();
+        resetAllColorsButton = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
+        okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        applyColorChangesButton = new javax.swing.JButton();
 
         sampleEditorPane.setEditable(false);
         sampleEditorPane.setText("Sample translation text");
@@ -133,25 +164,33 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
 
         jPanel4.setLayout(new java.awt.GridLayout(0, 1));
 
-        org.openide.awt.Mnemonics.setLocalizedText(setColorButton, OStrings.getString("GUI_COLORS_SET_COLOR")); // NOI18N
-        setColorButton.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        setColorButton.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(resetCurrentColorButton, OStrings.getString("GUI_COLORS_RESET_COLOR")); // NOI18N
+        resetCurrentColorButton.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        resetCurrentColorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                setColorButtonActionPerformed(evt);
+                resetThisColorButtonActionPerformed(evt);
             }
         });
-        jPanel4.add(setColorButton);
+        jPanel4.add(resetCurrentColorButton);
 
-        org.openide.awt.Mnemonics.setLocalizedText(defaultColorButton, OStrings.getString("GUI_COLORS_DEFAULT_COLOR")); // NOI18N
-        defaultColorButton.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        defaultColorButton.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(resetAllColorsButton, OStrings.getString("GUI_COLORS_RESET_ALL_COLORS")); // NOI18N
+        resetAllColorsButton.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        resetAllColorsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                defaultColorButtonActionPerformed(evt);
+                resetAllColorsButtonActionPerformed(evt);
             }
         });
-        jPanel4.add(defaultColorButton);
+        jPanel4.add(resetAllColorsButton);
 
         jPanel5.setLayout(new java.awt.GridLayout(1, 0));
+
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
+        jPanel5.add(okButton);
 
         org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -160,14 +199,6 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
             }
         });
         jPanel5.add(cancelButton);
-
-        org.openide.awt.Mnemonics.setLocalizedText(applyColorChangesButton, OStrings.getString("GUI_COLORS_APPLY")); // NOI18N
-        applyColorChangesButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                applyColorChangesButtonActionPerformed(evt);
-            }
-        });
-        jPanel5.add(applyColorChangesButton);
 
         jPanel4.add(jPanel5);
 
@@ -180,48 +211,58 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void colorStylesListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_colorStylesListValueChanged
-        Object selectedObject = colorStylesList.getSelectedValue();
-        if (selectedObject == null) {
+        EditorColor selectedStyle = (EditorColor) colorStylesList.getSelectedValue();
+        if (selectedStyle == null) {
             colorChooser.setEnabled(false);
+            resetCurrentColorButton.setEnabled(false);
             return;
         }
         colorChooser.setEnabled(true);
-        Color selectedColor = ((Styles.EditorColor) selectedObject).getColor();
-        if (selectedColor == null) {
-            selectedColor = Color.WHITE;
-        }
-        colorChooser.setColor(selectedColor);
+        resetCurrentColorButton.setEnabled(true);
+        Color color = temporaryPreferences.containsKey(selectedStyle) ? 
+                temporaryPreferences.get(selectedStyle) : selectedStyle.getColor();
+        setColorChooserWithoutNotifying(color);
     }//GEN-LAST:event_colorStylesListValueChanged
 
-    private void defaultColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defaultColorButtonActionPerformed
-        EditorColor editorColor = (Styles.EditorColor) colorStylesList.getSelectedValue();
-        if (editorColor == null) {
+    private void resetAllColorsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetAllColorsButtonActionPerformed
+        ListModel model = colorStylesList.getModel();
+        for (int i = 0; i < model.getSize(); i++) {
+            EditorColor style = (EditorColor) model.getElementAt(i);
+            temporaryPreferences.put(style, style.getDefault());
+        }
+        resetThisColorButtonActionPerformed(null);
+    }//GEN-LAST:event_resetAllColorsButtonActionPerformed
+
+    private void resetThisColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetThisColorButtonActionPerformed
+        EditorColor selectedStyle = (Styles.EditorColor) colorStylesList.getSelectedValue();
+        if (selectedStyle == null) {
             return;
         }
-        editorColor.setColor(null);
-        colorChooser.setColor(editorColor.getColor());
-
-    }//GEN-LAST:event_defaultColorButtonActionPerformed
-
-    private void setColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setColorButtonActionPerformed
-        EditorColor editorColor = (Styles.EditorColor) colorStylesList.getSelectedValue();
-        if (editorColor == null) {
-            return;
+        Color defaultColor = selectedStyle.getDefault();
+        if (defaultColor == null) {
+            setColorChooserWithoutNotifying(Color.BLACK);
+            temporaryPreferences.put(selectedStyle, null);
+        } else {
+            colorChooser.setColor(defaultColor);
         }
-        editorColor.setColor(colorChooser.getColor());
-    }//GEN-LAST:event_setColorButtonActionPerformed
+    }//GEN-LAST:event_resetThisColorButtonActionPerformed
 
-    private void applyColorChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyColorChangesButtonActionPerformed
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+        for (Entry<EditorColor, Color> e : temporaryPreferences.entrySet()) {
+            EditorColor style = e.getKey();
+            style.setColor(e.getValue());
+        }
         Preferences.save();
         JOptionPane.showMessageDialog(null, OStrings.getString("GUI_COLORS_CHANGED_RESTART"));
         closeDialog();
-    }//GEN-LAST:event_applyColorChangesButtonActionPerformed
+    }//GEN-LAST:event_okButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         closeDialog();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void closeDialog() {
+        temporaryPreferences.clear();
         setVisible(false);
         dispose();
     }
@@ -276,19 +317,19 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton applyColorChangesButton;
     private javax.swing.JButton cancelButton;
     private javax.swing.JColorChooser colorChooser;
     private javax.swing.JLabel colorStylesLabel;
     private javax.swing.JList colorStylesList;
-    private javax.swing.JButton defaultColorButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton okButton;
+    private javax.swing.JButton resetAllColorsButton;
+    private javax.swing.JButton resetCurrentColorButton;
     private javax.swing.JEditorPane sampleEditorPane;
-    private javax.swing.JButton setColorButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -115,6 +115,10 @@ public final class Styles {
         public Color getColor() {
             return color;
         }
+        
+        public Color getDefault() {
+            return defaultColor;
+        }
 
         @Override
         public String toString() {

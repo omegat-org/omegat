@@ -144,29 +144,29 @@
             <Property name="rows" type="int" value="0"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="setColorButton">
+            <Component class="javax.swing.JButton" name="resetCurrentColorButton">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_COLORS_SET_COLOR" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_COLORS_RESET_COLOR" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
                 <Property name="verticalAlignment" type="int" value="1"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="setColorButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetThisColorButtonActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="generateMnemonicsCode" type="java.lang.Boolean" value="true"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="defaultColorButton">
+            <Component class="javax.swing.JButton" name="resetAllColorsButton">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_COLORS_DEFAULT_COLOR" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_COLORS_RESET_ALL_COLORS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
                 <Property name="verticalAlignment" type="int" value="1"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="defaultColorButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetAllColorsButtonActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="generateMnemonicsCode" type="java.lang.Boolean" value="true"/>
@@ -179,6 +179,19 @@
                 <Property name="rows" type="int" value="1"/>
               </Layout>
               <SubComponents>
+                <Component class="javax.swing.JButton" name="okButton">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="org/omegat/Bundle.properties" key="BUTTON_OK" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="okButtonActionPerformed"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="generateMnemonicsCode" type="java.lang.Boolean" value="true"/>
+                  </AuxValues>
+                </Component>
                 <Component class="javax.swing.JButton" name="cancelButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
@@ -187,19 +200,6 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelButtonActionPerformed"/>
-                  </Events>
-                  <AuxValues>
-                    <AuxValue name="generateMnemonicsCode" type="java.lang.Boolean" value="true"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JButton" name="applyColorChangesButton">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_COLORS_APPLY" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="applyColorChangesButtonActionPerformed"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="generateMnemonicsCode" type="java.lang.Boolean" value="true"/>

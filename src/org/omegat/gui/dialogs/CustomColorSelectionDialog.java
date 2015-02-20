@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Briac Pilpre
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -46,6 +47,7 @@ import org.omegat.util.gui.Styles.EditorColor;
  * Dialog for configuring custom colors.
  * 
  * @author Briac Pilpre
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class CustomColorSelectionDialog extends javax.swing.JDialog {

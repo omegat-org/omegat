@@ -173,72 +173,72 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        cancelButton = new javax.swing.JButton();
-        okButton = new javax.swing.JButton();
         autoSpellcheckCheckBox = new javax.swing.JCheckBox();
         detailPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        directoryLabel = new javax.swing.JLabel();
         directoryTextField = new javax.swing.JTextField();
+        directoryChooserButton = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        contentLabel = new javax.swing.JLabel();
         languageScrollPane = new javax.swing.JScrollPane();
         languageList = new javax.swing.JList();
-        contentLabel = new javax.swing.JLabel();
-        directoryLabel = new javax.swing.JLabel();
-        directoryChooserButton = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        uninstallButton = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
         dictionaryUrlLabel = new javax.swing.JLabel();
         dictionaryUrlTextField = new javax.swing.JTextField();
+        jPanel6 = new javax.swing.JPanel();
         installButton = new javax.swing.JButton();
-        uninstallButton = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        okButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(OStrings.getString("GUI_SPELLCHECKER_TITLE")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
-
-        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okButtonActionPerformed(evt);
-            }
-        });
-
-        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(420, Short.MAX_VALUE)
-                .add(okButton)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cancelButton))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                .add(cancelButton)
-                .add(okButton))
-        );
-
         org.openide.awt.Mnemonics.setLocalizedText(autoSpellcheckCheckBox, OStrings.getString("GUI_SPELLCHECKER_AUTOSPELLCHECKCHECKBOX")); // NOI18N
-        autoSpellcheckCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        autoSpellcheckCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 5, 0));
         autoSpellcheckCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
         autoSpellcheckCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 autoSpellcheckCheckBoxActionPerformed(evt);
             }
         });
+        getContentPane().add(autoSpellcheckCheckBox, java.awt.BorderLayout.NORTH);
 
-        detailPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        detailPanel.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(5, 20, 5, 20), javax.swing.BorderFactory.createEtchedBorder()));
+        detailPanel.setLayout(new java.awt.BorderLayout());
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 5, 10));
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        org.openide.awt.Mnemonics.setLocalizedText(directoryLabel, OStrings.getString("GUI_SPELLCHECKER_DICTIONARYLABEL")); // NOI18N
+        jPanel1.add(directoryLabel, java.awt.BorderLayout.NORTH);
 
         directoryTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 directoryTextFieldActionPerformed(evt);
             }
         });
+        jPanel1.add(directoryTextField, java.awt.BorderLayout.CENTER);
+
+        org.openide.awt.Mnemonics.setLocalizedText(directoryChooserButton, OStrings.getString("GUI_SPELLCHECKER_DIRECTORYCHOOSERBUTTON")); // NOI18N
+        directoryChooserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                directoryChooserButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(directoryChooserButton, java.awt.BorderLayout.EAST);
+
+        detailPanel.add(jPanel1, java.awt.BorderLayout.NORTH);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        org.openide.awt.Mnemonics.setLocalizedText(contentLabel, OStrings.getString("GUI_SPELLCHECKER_AVAILABLE_LABEL")); // NOI18N
+        jPanel3.add(contentLabel, java.awt.BorderLayout.NORTH);
 
         languageList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -247,25 +247,9 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         });
         languageScrollPane.setViewportView(languageList);
 
-        org.openide.awt.Mnemonics.setLocalizedText(contentLabel, OStrings.getString("GUI_SPELLCHECKER_AVAILABLE_LABEL")); // NOI18N
+        jPanel3.add(languageScrollPane, java.awt.BorderLayout.CENTER);
 
-        org.openide.awt.Mnemonics.setLocalizedText(directoryLabel, OStrings.getString("GUI_SPELLCHECKER_DICTIONARYLABEL")); // NOI18N
-
-        org.openide.awt.Mnemonics.setLocalizedText(directoryChooserButton, OStrings.getString("GUI_SPELLCHECKER_DIRECTORYCHOOSERBUTTON")); // NOI18N
-        directoryChooserButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                directoryChooserButtonActionPerformed(evt);
-            }
-        });
-
-        org.openide.awt.Mnemonics.setLocalizedText(dictionaryUrlLabel, OStrings.getString("GUI_SPELLCHECKER_URL_LABEL")); // NOI18N
-
-        org.openide.awt.Mnemonics.setLocalizedText(installButton, OStrings.getString("GUI_SPELLCHECKER_INSTALLBUTTON")); // NOI18N
-        installButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                installButtonActionPerformed(evt);
-            }
-        });
+        jPanel4.setLayout(new java.awt.BorderLayout());
 
         org.openide.awt.Mnemonics.setLocalizedText(uninstallButton, OStrings.getString("GUI_SPELLCHECKER_UNINSTALLBUTTON")); // NOI18N
         uninstallButton.addActionListener(new java.awt.event.ActionListener() {
@@ -273,83 +257,59 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
                 uninstallButtonActionPerformed(evt);
             }
         });
+        jPanel4.add(uninstallButton, java.awt.BorderLayout.NORTH);
 
-        org.jdesktop.layout.GroupLayout detailPanelLayout = new org.jdesktop.layout.GroupLayout(detailPanel);
-        detailPanel.setLayout(detailPanelLayout);
-        detailPanelLayout.setHorizontalGroup(
-            detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(detailPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(detailPanelLayout.createSequentialGroup()
-                        .add(dictionaryUrlTextField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .add(dictionaryUrlLabel)
-                    .add(detailPanelLayout.createSequentialGroup()
-                        .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(contentLabel)
-                            .add(directoryLabel)
-                            .add(detailPanelLayout.createSequentialGroup()
-                                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(languageScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
-                                    .add(org.jdesktop.layout.GroupLayout.TRAILING, directoryTextField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE))
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                                    .add(uninstallButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .add(directoryChooserButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .add(detailPanelLayout.createSequentialGroup()
-                        .add(installButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(377, 377, 377))))
-        );
-        detailPanelLayout.setVerticalGroup(
-            detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, detailPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(directoryLabel)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(directoryChooserButton)
-                    .add(directoryTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(contentLabel)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(detailPanelLayout.createSequentialGroup()
-                        .add(languageScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(dictionaryUrlLabel))
-                    .add(uninstallButton))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(dictionaryUrlTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(9, 9, 9)
-                .add(installButton))
-        );
+        jPanel3.add(jPanel4, java.awt.BorderLayout.EAST);
 
-        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .addContainerGap()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(autoSpellcheckCheckBox)
-                    .add(detailPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .addContainerGap()
-                .add(autoSpellcheckCheckBox)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(detailPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        detailPanel.add(jPanel3, java.awt.BorderLayout.CENTER);
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 10, 10));
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
+        org.openide.awt.Mnemonics.setLocalizedText(dictionaryUrlLabel, OStrings.getString("GUI_SPELLCHECKER_URL_LABEL")); // NOI18N
+        jPanel5.add(dictionaryUrlLabel, java.awt.BorderLayout.NORTH);
+        jPanel5.add(dictionaryUrlTextField, java.awt.BorderLayout.CENTER);
+
+        jPanel6.setLayout(new java.awt.BorderLayout());
+
+        org.openide.awt.Mnemonics.setLocalizedText(installButton, OStrings.getString("GUI_SPELLCHECKER_INSTALLBUTTON")); // NOI18N
+        installButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                installButtonActionPerformed(evt);
+            }
+        });
+        jPanel6.add(installButton, java.awt.BorderLayout.WEST);
+
+        jPanel5.add(jPanel6, java.awt.BorderLayout.SOUTH);
+
+        detailPanel.add(jPanel5, java.awt.BorderLayout.SOUTH);
+
+        getContentPane().add(detailPanel, java.awt.BorderLayout.CENTER);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 1, 20, 20));
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jPanel7.setLayout(new java.awt.BorderLayout());
+
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
+        jPanel7.add(okButton, java.awt.BorderLayout.CENTER);
+
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+        jPanel7.add(cancelButton, java.awt.BorderLayout.EAST);
+
+        jPanel2.add(jPanel7, java.awt.BorderLayout.EAST);
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -474,7 +434,13 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
     private javax.swing.JLabel directoryLabel;
     private javax.swing.JTextField directoryTextField;
     private javax.swing.JButton installButton;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JList languageList;
     private javax.swing.JScrollPane languageScrollPane;
     private javax.swing.JButton okButton;

@@ -48,7 +48,7 @@ import org.omegat.util.StaticUtils;
 public class DictionaryManager {
 
     /** the directory string */
-    private File dir;
+    private final File dir;
 
     /**
      * Creates a new instance of DictionaryManager.
@@ -120,29 +120,30 @@ public class DictionaryManager {
 
         // match them
         if (affixFiles != null && dictionaryFiles != null) {
-            for (int i = 0; i < affixFiles.length; i++) {
+            for (String affixFile : affixFiles) {
                 boolean match = false;
 
                 // get the affix file name
-                String affixName = getFileNameOnly(affixFiles[i]);
-                if (affixName == null || affixName.equals(""))
+                String affixName = getFileNameOnly(affixFile);
+                if (affixName == null || affixName.isEmpty()) {
                     continue;
-
+                }
                 // cycle through the dictionary names
-                for (int j = 0; j < dictionaryFiles.length; j++) {
+                for (String dictionaryFile : dictionaryFiles) {
                     // get the dic file name
-                    String dicName = getFileNameOnly(dictionaryFiles[j]);
-                    if (dicName == null || dicName.equals(""))
+                    String dicName = getFileNameOnly(dictionaryFile);
+                    if (dicName == null || dicName.isEmpty()) {
                         continue;
-
+                    }
                     if (affixName.equals(dicName)) {
                         match = true;
                         break;
                     }
                 }
 
-                if (match)
+                if (match) {
                     result.add(affixName);
+                }
             }
         }
 
@@ -157,8 +158,9 @@ public class DictionaryManager {
      * @returns true upon success, otherwise false
      */
     public boolean uninstallDictionary(String lang) {
-        if (lang == null || lang.equals(""))
+        if (lang == null || lang.isEmpty()) {
             return false;
+        }
 
         String base = getDirectory() + File.separator + lang;
 
@@ -169,10 +171,7 @@ public class DictionaryManager {
 
         File dicFile = new File(base + OConsts.SC_DICTIONARY_EXTENSION);
 
-        if (!dicFile.delete())
-            return false;
-
-        return true;
+        return dicFile.delete();
     }
 
     /**

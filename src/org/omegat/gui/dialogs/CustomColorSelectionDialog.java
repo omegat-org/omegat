@@ -38,6 +38,7 @@ import javax.swing.colorchooser.AbstractColorChooserPanel;
 
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.Styles.EditorColor;
 
@@ -55,6 +56,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
     public CustomColorSelectionDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        StaticUIUtils.setEscapeClosable(this);
     }
 
     /**

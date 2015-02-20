@@ -88,21 +88,29 @@ public class SaveOptionsDialog extends JDialog {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jPanel1 = new javax.swing.JPanel();
+        intervalDescriptionTextArea = new javax.swing.JTextArea();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
         minutesLabel = new javax.swing.JLabel();
         minutesSpinner = new javax.swing.JSpinner();
         secondsLabel = new javax.swing.JLabel();
         secondsSpinner = new javax.swing.JSpinner();
-        intervalDescriptionTextArea = new javax.swing.JTextArea();
-        okButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        externalCommandLabel = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
         externalCmdDescriptionTextArea = new javax.swing.JTextArea();
         externalCommandScrollPane = new javax.swing.JScrollPane();
         externalCommandTextArea = new javax.swing.JTextArea();
-        allowProjectCmdCheckBox = new javax.swing.JCheckBox();
+        jPanel4 = new javax.swing.JPanel();
         variablesLabel = new javax.swing.JLabel();
         variablesList = new javax.swing.JComboBox();
         insertButton = new javax.swing.JButton();
-        externalCommandLabel = new javax.swing.JLabel();
+        allowProjectCmdCheckBox = new javax.swing.JCheckBox();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        okButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
         setTitle(OStrings.getString("SAVE_DIALOG_TITLE")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -110,47 +118,9 @@ public class SaveOptionsDialog extends JDialog {
                 closeDialog(evt);
             }
         });
-        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        minutesLabel.setLabelFor(minutesSpinner);
-        org.openide.awt.Mnemonics.setLocalizedText(minutesLabel, OStrings.getString("SAVE_DIALOG_MINUTES")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 16, 4, 4);
-        getContentPane().add(minutesLabel, gridBagConstraints);
-
-        minutesSpinner.setValue(new Integer(90));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(minutesSpinner, gridBagConstraints);
-
-        secondsLabel.setLabelFor(secondsSpinner);
-        org.openide.awt.Mnemonics.setLocalizedText(secondsLabel, OStrings.getString("SAVE_DIALOG_SECONDS")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 16, 4, 4);
-        getContentPane().add(secondsLabel, gridBagConstraints);
-
-        secondsSpinner.setValue(new Integer(90));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(secondsSpinner, gridBagConstraints);
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
         intervalDescriptionTextArea.setEditable(false);
         intervalDescriptionTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
@@ -158,44 +128,56 @@ public class SaveOptionsDialog extends JDialog {
         intervalDescriptionTextArea.setLineWrap(true);
         intervalDescriptionTextArea.setText(OStrings.getString("SAVE_DIALOG_DESCRIPTION")); // NOI18N
         intervalDescriptionTextArea.setWrapStyleWord(true);
+        jPanel1.add(intervalDescriptionTextArea, java.awt.BorderLayout.NORTH);
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 20, 0, 0));
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
+        jPanel10.setLayout(new java.awt.GridBagLayout());
+
+        minutesLabel.setLabelFor(minutesSpinner);
+        org.openide.awt.Mnemonics.setLocalizedText(minutesLabel, OStrings.getString("SAVE_DIALOG_MINUTES")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel10.add(minutesLabel, gridBagConstraints);
+
+        minutesSpinner.setValue(new Integer(90));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(intervalDescriptionTextArea, gridBagConstraints);
+        gridBagConstraints.ipadx = 50;
+        jPanel10.add(minutesSpinner, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okButtonActionPerformed(evt);
-            }
-        });
+        secondsLabel.setLabelFor(secondsSpinner);
+        org.openide.awt.Mnemonics.setLocalizedText(secondsLabel, OStrings.getString("SAVE_DIALOG_SECONDS")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 11;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
-        getContentPane().add(okButton, gridBagConstraints);
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel10.add(secondsLabel, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
+        secondsSpinner.setValue(new Integer(90));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 11;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
-        getContentPane().add(cancelButton, gridBagConstraints);
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 50;
+        jPanel10.add(secondsSpinner, gridBagConstraints);
+
+        jPanel5.add(jPanel10, java.awt.BorderLayout.WEST);
+
+        jPanel1.add(jPanel5, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.NORTH);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        externalCommandLabel.setLabelFor(externalCommandTextArea);
+        org.openide.awt.Mnemonics.setLocalizedText(externalCommandLabel, OStrings.getString("EXTERNAL_COMMAND_LABEL")); // NOI18N
+        jPanel2.add(externalCommandLabel, java.awt.BorderLayout.NORTH);
+
+        jPanel8.setLayout(new java.awt.BorderLayout());
 
         externalCmdDescriptionTextArea.setEditable(false);
         externalCmdDescriptionTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
@@ -203,53 +185,23 @@ public class SaveOptionsDialog extends JDialog {
         externalCmdDescriptionTextArea.setLineWrap(true);
         externalCmdDescriptionTextArea.setText(OStrings.getString("EXTERNAL_COMMAND_DESCRIPTION")); // NOI18N
         externalCmdDescriptionTextArea.setWrapStyleWord(true);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 8, 4, 4);
-        getContentPane().add(externalCmdDescriptionTextArea, gridBagConstraints);
+        externalCmdDescriptionTextArea.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
+        jPanel8.add(externalCmdDescriptionTextArea, java.awt.BorderLayout.NORTH);
 
         externalCommandTextArea.setColumns(20);
         externalCommandTextArea.setLineWrap(true);
         externalCommandTextArea.setRows(5);
         externalCommandScrollPane.setViewportView(externalCommandTextArea);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(externalCommandScrollPane, gridBagConstraints);
+        jPanel8.add(externalCommandScrollPane, java.awt.BorderLayout.CENTER);
 
-        allowProjectCmdCheckBox.setFont(new JLabel().getFont());
-        org.openide.awt.Mnemonics.setLocalizedText(allowProjectCmdCheckBox, OStrings.getString("ALLOW_PROJECT_EXTERN_CMD")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 4, 4, 4);
-        getContentPane().add(allowProjectCmdCheckBox, gridBagConstraints);
+        jPanel4.setLayout(new java.awt.BorderLayout());
 
         org.openide.awt.Mnemonics.setLocalizedText(variablesLabel, OStrings.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(variablesLabel, gridBagConstraints);
+        jPanel4.add(variablesLabel, java.awt.BorderLayout.WEST);
 
         variablesList.setModel(new DefaultComboBoxModel(org.omegat.core.data.CommandVarExpansion.COMMAND_VARIABLES));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        getContentPane().add(variablesList, gridBagConstraints);
+        jPanel4.add(variablesList, java.awt.BorderLayout.CENTER);
 
         org.openide.awt.Mnemonics.setLocalizedText(insertButton, OStrings.getString("BUTTON_INSERT")); // NOI18N
         insertButton.addActionListener(new java.awt.event.ActionListener() {
@@ -257,24 +209,42 @@ public class SaveOptionsDialog extends JDialog {
                 insertButtonActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        getContentPane().add(insertButton, gridBagConstraints);
+        jPanel4.add(insertButton, java.awt.BorderLayout.EAST);
 
-        externalCommandLabel.setLabelFor(externalCommandTextArea);
-        org.openide.awt.Mnemonics.setLocalizedText(externalCommandLabel, OStrings.getString("EXTERNAL_COMMAND_LABEL")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(6, 4, 0, 4);
-        getContentPane().add(externalCommandLabel, gridBagConstraints);
+        jPanel8.add(jPanel4, java.awt.BorderLayout.SOUTH);
+
+        jPanel2.add(jPanel8, java.awt.BorderLayout.CENTER);
+
+        allowProjectCmdCheckBox.setFont(new JLabel().getFont());
+        org.openide.awt.Mnemonics.setLocalizedText(allowProjectCmdCheckBox, OStrings.getString("ALLOW_PROJECT_EXTERN_CMD")); // NOI18N
+        jPanel2.add(allowProjectCmdCheckBox, java.awt.BorderLayout.SOUTH);
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        jPanel9.setLayout(new javax.swing.BoxLayout(jPanel9, javax.swing.BoxLayout.LINE_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
+        jPanel9.add(okButton);
+
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+        jPanel9.add(cancelButton);
+
+        jPanel3.add(jPanel9, java.awt.BorderLayout.EAST);
+
+        getContentPane().add(jPanel3, java.awt.BorderLayout.SOUTH);
 
 
         pack();
@@ -345,6 +315,14 @@ public class SaveOptionsDialog extends JDialog {
     private javax.swing.JTextArea externalCommandTextArea;
     private javax.swing.JButton insertButton;
     private javax.swing.JTextArea intervalDescriptionTextArea;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel minutesLabel;
     private javax.swing.JSpinner minutesSpinner;
     private javax.swing.JButton okButton;

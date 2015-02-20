@@ -70,14 +70,19 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         sampleEditorPane = new javax.swing.JEditorPane();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         colorStylesLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         colorStylesList = new javax.swing.JList(Styles.EditorColor.values());
         colorChooser = new javax.swing.JColorChooser();
-        applyColorChangesButton = new javax.swing.JButton();
-        defaultColorButton = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         setColorButton = new javax.swing.JButton();
+        defaultColorButton = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
         cancelButton = new javax.swing.JButton();
+        applyColorChangesButton = new javax.swing.JButton();
 
         sampleEditorPane.setEditable(false);
         sampleEditorPane.setText("Sample translation text");
@@ -90,7 +95,13 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         setTitle(OStrings.getString("GUI_COLORS_TITLE")); // NOI18N
         setIconImage(null);
 
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 5));
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
         org.openide.awt.Mnemonics.setLocalizedText(colorStylesLabel, OStrings.getString("GUI_COLORS_COLOR")); // NOI18N
+        jPanel3.add(colorStylesLabel, java.awt.BorderLayout.NORTH);
 
         colorStylesList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         colorStylesList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -99,6 +110,10 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
             }
         });
         jScrollPane1.setViewportView(colorStylesList);
+
+        jPanel3.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jPanel1.add(jPanel3, java.awt.BorderLayout.WEST);
 
         /*
         final CustomColorPreview samplePanel = new CustomColorPreview(colorChooser, colorStylesList.getSelectedValue());
@@ -128,21 +143,13 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
                 colorChooser.removeChooserPanel(oldPanels[i]);
             }
         }
+        jPanel1.add(colorChooser, java.awt.BorderLayout.CENTER);
 
-        org.openide.awt.Mnemonics.setLocalizedText(applyColorChangesButton, OStrings.getString("GUI_COLORS_APPLY")); // NOI18N
-        applyColorChangesButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                applyColorChangesButtonActionPerformed(evt);
-            }
-        });
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        org.openide.awt.Mnemonics.setLocalizedText(defaultColorButton, OStrings.getString("GUI_COLORS_DEFAULT_COLOR")); // NOI18N
-        defaultColorButton.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        defaultColorButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                defaultColorButtonActionPerformed(evt);
-            }
-        });
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jPanel4.setLayout(new java.awt.GridLayout(0, 1));
 
         org.openide.awt.Mnemonics.setLocalizedText(setColorButton, OStrings.getString("GUI_COLORS_SET_COLOR")); // NOI18N
         setColorButton.setToolTipText("");
@@ -152,6 +159,18 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
                 setColorButtonActionPerformed(evt);
             }
         });
+        jPanel4.add(setColorButton);
+
+        org.openide.awt.Mnemonics.setLocalizedText(defaultColorButton, OStrings.getString("GUI_COLORS_DEFAULT_COLOR")); // NOI18N
+        defaultColorButton.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        defaultColorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                defaultColorButtonActionPerformed(evt);
+            }
+        });
+        jPanel4.add(defaultColorButton);
+
+        jPanel5.setLayout(new java.awt.GridLayout());
 
         org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -159,52 +178,21 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
                 cancelButtonActionPerformed(evt);
             }
         });
+        jPanel5.add(cancelButton);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(colorStylesLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(colorChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(cancelButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(applyColorChangesButton))
-                            .addComponent(defaultColorButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-                            .addComponent(setColorButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(colorStylesLabel)
-                            .addGap(320, 320, 320))
-                        .addComponent(colorChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(setColorButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(defaultColorButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(applyColorChangesButton)
-                    .addComponent(cancelButton))
-                .addContainerGap())
-        );
+        org.openide.awt.Mnemonics.setLocalizedText(applyColorChangesButton, OStrings.getString("GUI_COLORS_APPLY")); // NOI18N
+        applyColorChangesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                applyColorChangesButtonActionPerformed(evt);
+            }
+        });
+        jPanel5.add(applyColorChangesButton);
+
+        jPanel4.add(jPanel5);
+
+        jPanel2.add(jPanel4, java.awt.BorderLayout.EAST);
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -351,6 +339,11 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
     private javax.swing.JLabel colorStylesLabel;
     private javax.swing.JList colorStylesList;
     private javax.swing.JButton defaultColorButton;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JEditorPane sampleEditorPane;
     private javax.swing.JButton setColorButton;

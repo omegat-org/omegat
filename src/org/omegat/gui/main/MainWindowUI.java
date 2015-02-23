@@ -8,6 +8,7 @@
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik
                2014 Piotr Kulik
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -74,6 +75,7 @@ import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Piotr Kulik
+ * @author Aaron Madlon-Kay
  */
 public class MainWindowUI {
     public static String UI_LAYOUT_FILE = OStrings.BRANDING.isEmpty() ? "uiLayout.xml"
@@ -231,6 +233,8 @@ public class MainWindowUI {
                 Log.log(e);                     // In case something wrong happened, it's better to have a default
                 resetDesktopLayout(mainWindow); // screen than a blank one
             }
+        } else {
+            resetDesktopLayout(mainWindow);
         }
     }
 

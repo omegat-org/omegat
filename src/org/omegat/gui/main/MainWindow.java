@@ -9,7 +9,7 @@
                2008 Andrzej Sawula, Alex Buloichik, Didier Briel
                2013 Yu Tang, Aaron Madlon-Kay
                2014 Piotr Kulik
-               2015 Yu Tang
+               2015 Yu Tang, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -36,7 +36,6 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.HeadlessException;
-import java.awt.Image;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -77,7 +76,6 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.WikiGet;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.OmegaTFileChooser;
-import org.omegat.util.gui.ResourcesUtil;
 import org.omegat.util.gui.UIThreadsUtil;
 
 import com.vlsolutions.swing.docking.Dockable;
@@ -166,7 +164,6 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
             public void onApplicationStartup() {
-                MainWindowUI.resetDesktopLayout(MainWindow.this);
                 MainWindowUI.loadScreenLayout(MainWindow.this);
 
                 DockingUI.removeUnusedMenuSeparators(menu.getOptionsMenu().getPopupMenu());

@@ -257,9 +257,7 @@ public class CreateGlossaryEntry extends JDialog {
         getContentPane().add(jPanel1, gridBagConstraints);
 
         pack();
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        java.awt.Dimension dialogSize = getSize();
-        setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void commentTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_commentTextKeyPressed

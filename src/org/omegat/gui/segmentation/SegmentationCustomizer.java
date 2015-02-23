@@ -26,7 +26,6 @@
 package org.omegat.gui.segmentation;
 
 import java.awt.Dialog;
-import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.beans.ExceptionListener;
@@ -125,8 +124,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
         pack();
         setSize(getWidth() * 5 / 4, getHeight() * 5 / 4);
-        Dimension screen = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setLocation((screen.width - getWidth()) / 2, (screen.height - getHeight()) / 2);
+        setLocationRelativeTo(null);
     }
 
     /**

@@ -6,6 +6,7 @@
  Copyright (C) 2007 Zoltan Bartko
                2008-2011 Didier Briel
                2012 Martin Fleurke, Didier Briel
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -51,6 +52,7 @@ import org.omegat.util.gui.StaticUIUtils;
  * @author Zoltan Bartko
  * @author Didier Briel
  * @author Martin Fleurke
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {

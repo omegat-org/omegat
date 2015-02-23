@@ -214,9 +214,8 @@ public class MainWindowUI {
         if (Platform.isMacOSX() && System.getProperty("java.version").startsWith("1.8")) {
             // Work around Java bug: https://bugs.openjdk.java.net/browse/JDK-8065739
             int screenWidth = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width;
-            if (w >= screenWidth) {
-                w = screenWidth - 50; // Magic number. Can be as low as 11 (tested on OS X 10.10.2, Java 1.8.0_31).
-            }
+            // 50 is a magic number. Can be as low as 11 (tested on OS X 10.10.2, Java 1.8.0_31).
+            w = Math.min(w, screenWidth - 50);
         }
         mainWindow.setBounds(x, y, w, h);
 

@@ -61,6 +61,7 @@ import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.editor.EditorSettings;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.OSXIntegration;
@@ -270,7 +271,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         projectExitMenuItem = createMenuItem("TF_MENU_FILE_QUIT");
 
         // all except MacOSX
-        if (!StaticUtils.onMacOSX()) {
+        if (!Platform.isMacOSX()) {
             projectMenu.add(new JSeparator());
             projectMenu.add(projectExitMenuItem);
         }
@@ -421,7 +422,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         setActionCommands();
         MainWindowMenuShortcuts.setShortcuts(mainMenu);
 
-        if (StaticUtils.onMacOSX()) {
+        if (Platform.isMacOSX()) {
             initMacSpecific();
         }
 

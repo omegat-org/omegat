@@ -76,4 +76,12 @@ public final class Platform {
     public static final boolean isWebStart() {
         return System.getProperty("javawebstart.version") != null;
     }
+
+    /**
+     * Returns true if running on Mac OS X
+     */
+    public static boolean isMacOSX() {
+        OsType os = getOsType();
+        return os == OsType.MAC32 || os == OsType.MAC64;
+    }
 }

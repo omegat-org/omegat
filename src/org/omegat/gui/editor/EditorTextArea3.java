@@ -65,6 +65,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.main.MainWindow;
+import org.omegat.util.Platform;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
@@ -245,7 +246,7 @@ public class EditorTextArea3 extends JEditorPane {
 
         boolean processed = false;
 
-        boolean mac = StaticUtils.onMacOSX();
+        boolean mac = Platform.isMacOSX();
 
         Document3 doc = getOmDocument();
 

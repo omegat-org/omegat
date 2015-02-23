@@ -49,6 +49,7 @@ import org.omegat.gui.editor.chartable.CharTableAutoCompleterView;
 import org.omegat.gui.glossary.GlossaryAutoCompleterView;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.Platform;
 import org.omegat.util.StaticUtils;
 
 /**
@@ -62,7 +63,7 @@ public class AutoCompleter {
     JPopupMenu popup = new JPopupMenu(); 
     private EditorTextArea3 editor; 
     
-    boolean onMac = StaticUtils.onMacOSX();
+    boolean onMac = Platform.isMacOSX();
     
     private boolean visible = false;
     

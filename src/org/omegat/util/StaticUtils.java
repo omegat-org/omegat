@@ -719,7 +719,7 @@ public class StaticUtils {
             m_configDir = home + UNIX_CONFIG_DIR;
         }
         // check for Mac OS X
-        else if (onMacOSX()) {
+        else if (Platform.isMacOSX()) {
             // set the config dir to the user's home dir +
             // "/Library/Preferences/OmegaT/"
             m_configDir = home + OSX_CONFIG_DIR;
@@ -793,15 +793,6 @@ public class StaticUtils {
             Log.log(e.toString());
         }
         return m_scriptDir;
-    }
-
-    /**
-     * Returns true if running on Mac OS X
-     */
-    public static boolean onMacOSX() {
-        OsType os = Platform.getOsType();
-        return os == OsType.MAC32 || os == OsType.MAC64;
-
     }
 
     /**

@@ -35,6 +35,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
+import org.omegat.util.Platform;
 
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
@@ -102,7 +103,7 @@ public class MainWindowMenuShortcuts {
         Properties shortcuts = new Properties();
         String name = MainWindowMenuShortcuts.class.getPackage().getName().replace('.', '/')
                 + "/MainMenuShortcuts";
-        name += StaticUtils.onMacOSX() ? ".mac.properties" : ".properties";
+        name += Platform.isMacOSX() ? ".mac.properties" : ".properties";
 
         File userShortcuts = new File(StaticUtils.getConfigDir(), "MainMenuShortcuts.properties");
         try {

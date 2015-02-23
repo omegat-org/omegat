@@ -75,6 +75,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
     public CustomColorSelectionDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getRootPane().setDefaultButton(okButton);
         configureColorChooser();
         StaticUIUtils.setEscapeAction(this, new AbstractAction() {
             @Override

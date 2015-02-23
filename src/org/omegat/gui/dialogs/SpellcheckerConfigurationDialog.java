@@ -98,7 +98,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         StaticUIUtils.setEscapeClosable(this);
 
         initComponents();
-        this.pack();
+        getRootPane().setDefaultButton(okButton);
 
         currentLanguage = current;
 

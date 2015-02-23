@@ -37,7 +37,9 @@ the same session (i.e., until OmegaT is closed).
   - The initial location and the layout when resized of various dialogs 
 were improved. The OK button was set as the default button for all dialogs.
 
-  - The Custom Colours dialog was improved
+  - The Custom Colours dialog was improved. It can be closed with Escape, 
+changes are remembered immediately and all colours can be reset at once.
+There's also a new tab for colour selection.
 
   - The Project Files dialog can be hidden on project load via hidden preference
 (project_files_show_on_load)

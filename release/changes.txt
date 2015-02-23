@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.9
 ----------------------------------------------------------------------
-   6 Enhancements
+   8 Enhancements
   10 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
@@ -33,6 +33,11 @@ Mozilla filter, it has to be unabled to load them with the ILIAS filter.
   - Machine translation requests are now cached. That means that a 
 source segment already translated will not be requested again during
 the same session (i.e., until OmegaT is closed).
+
+  - The initial location and the layout when resized of various dialogs 
+were improved. The OK button was set as the default button for all dialogs.
+
+  - The Custom Colours dialog was improved
 
   Bug fixes:
 

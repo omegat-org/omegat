@@ -132,8 +132,6 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         } else {
             dictionaryUrlTextField.setText(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL));
         }
-
-        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -198,6 +196,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         directoryLabel = new javax.swing.JLabel();
         directoryTextField = new javax.swing.JTextField();
+        jPanel8 = new javax.swing.JPanel();
         directoryChooserButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         contentLabel = new javax.swing.JLabel();
@@ -217,6 +216,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(OStrings.getString("GUI_SPELLCHECKER_TITLE")); // NOI18N
+        setPreferredSize(new java.awt.Dimension(600, 500));
 
         org.openide.awt.Mnemonics.setLocalizedText(autoSpellcheckCheckBox, OStrings.getString("GUI_SPELLCHECKER_AUTOSPELLCHECKCHECKBOX")); // NOI18N
         autoSpellcheckCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 5, 0));
@@ -244,13 +244,18 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         });
         jPanel1.add(directoryTextField, java.awt.BorderLayout.CENTER);
 
+        jPanel8.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 0));
+        jPanel8.setLayout(new javax.swing.BoxLayout(jPanel8, javax.swing.BoxLayout.LINE_AXIS));
+
         org.openide.awt.Mnemonics.setLocalizedText(directoryChooserButton, OStrings.getString("GUI_SPELLCHECKER_DIRECTORYCHOOSERBUTTON")); // NOI18N
         directoryChooserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 directoryChooserButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(directoryChooserButton, java.awt.BorderLayout.EAST);
+        jPanel8.add(directoryChooserButton);
+
+        jPanel1.add(jPanel8, java.awt.BorderLayout.EAST);
 
         detailPanel.add(jPanel1, java.awt.BorderLayout.NORTH);
 
@@ -269,6 +274,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
 
         jPanel3.add(languageScrollPane, java.awt.BorderLayout.CENTER);
 
+        jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 0));
         jPanel4.setLayout(new java.awt.BorderLayout());
 
         org.openide.awt.Mnemonics.setLocalizedText(uninstallButton, OStrings.getString("GUI_SPELLCHECKER_UNINSTALLBUTTON")); // NOI18N
@@ -290,6 +296,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         jPanel5.add(dictionaryUrlLabel, java.awt.BorderLayout.NORTH);
         jPanel5.add(dictionaryUrlTextField, java.awt.BorderLayout.CENTER);
 
+        jPanel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 0, 0, 0));
         jPanel6.setLayout(new java.awt.BorderLayout());
 
         org.openide.awt.Mnemonics.setLocalizedText(installButton, OStrings.getString("GUI_SPELLCHECKER_INSTALLBUTTON")); // NOI18N
@@ -309,7 +316,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 1, 20, 20));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
-        jPanel7.setLayout(new java.awt.BorderLayout());
+        jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.LINE_AXIS));
 
         org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
         okButton.addActionListener(new java.awt.event.ActionListener() {
@@ -317,7 +324,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
                 okButtonActionPerformed(evt);
             }
         });
-        jPanel7.add(okButton, java.awt.BorderLayout.CENTER);
+        jPanel7.add(okButton);
 
         org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -325,13 +332,14 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
                 cancelButtonActionPerformed(evt);
             }
         });
-        jPanel7.add(cancelButton, java.awt.BorderLayout.EAST);
+        jPanel7.add(cancelButton);
 
         jPanel2.add(jPanel7, java.awt.BorderLayout.EAST);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void languageListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_languageListMouseClicked
@@ -457,6 +465,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JList languageList;
     private javax.swing.JScrollPane languageScrollPane;
     private javax.swing.JButton okButton;

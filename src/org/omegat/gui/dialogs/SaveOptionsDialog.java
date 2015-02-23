@@ -59,18 +59,15 @@ public class SaveOptionsDialog extends JDialog {
         getRootPane().setDefaultButton(okButton);
 
         // Initializing options
-        int saveInterval = (new Integer(Preferences.getPreferenceDefault(
+        int saveInterval = Integer.parseInt(Preferences.getPreferenceDefault(
                         Preferences.AUTO_SAVE_INTERVAL,
-                        Preferences.AUTO_SAVE_DEFAULT)));
+                        Preferences.AUTO_SAVE_DEFAULT));
 
         minutesSpinner.setValue(saveInterval / 60);
         secondsSpinner.setValue(saveInterval % 60);
 
         externalCommandTextArea.setText(Preferences.getPreference(Preferences.EXTERNAL_COMMAND));
         allowProjectCmdCheckBox.setSelected(Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD));
-
-        invalidate();
-        pack();
     }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
@@ -251,8 +248,7 @@ public class SaveOptionsDialog extends JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
-        externalCommandTextArea.insert(variablesList.getSelectedItem().toString(),
-                externalCommandTextArea.getCaretPosition());
+        externalCommandTextArea.replaceSelection(variablesList.getSelectedItem().toString());
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_okButtonActionPerformed

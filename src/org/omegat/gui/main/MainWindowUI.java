@@ -52,6 +52,7 @@ import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.DockingUI;
@@ -206,6 +207,13 @@ public class MainWindowUI {
                 y = 0;
                 w = 690;
                 h = 700;
+            }
+        }
+        if (Platform.isMacOSX() && System.getProperty("java.version").startsWith("1.8")) {
+            // Work around Java bug: https://bugs.openjdk.java.net/browse/JDK-8065739
+            int screenWidth = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width;
+            if (w >= screenWidth) {
+                w = screenWidth - 50; // Magic number. Can be as low as 11 (tested on OS X 10.10.2, Java 1.8.0_31).
             }
         }
         mainWindow.setBounds(x, y, w, h);

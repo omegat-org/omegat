@@ -30,6 +30,7 @@ import javax.swing.JTable;
 import org.omegat.gui.editor.chartable.CharTableModel;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -65,6 +66,7 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
                 Preferences.AC_CHARTABLE_CUSTOM_CHAR_STRING));
         
         panelSetEnabled(selectedCharsCheckBox.isSelected());
+        DockingUI.displayCentered(this);
     }
     
     private void panelSetEnabled(boolean enabled) {
@@ -277,7 +279,6 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void allCharTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_allCharTableKeyReleased

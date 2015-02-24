@@ -139,7 +139,6 @@ public class ProjectUICommands {
                 Core.getMainWindow().showStatusMessageRB(null);
 
                 final NewTeamProject dialog = new NewTeamProject(Core.getMainWindow().getApplicationFrame(), true);
-                DockingUI.displayCentered(dialog);
                 dialog.setVisible(true);
 
                 IMainWindow mainWindow = Core.getMainWindow();

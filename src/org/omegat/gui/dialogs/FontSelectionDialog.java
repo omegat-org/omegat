@@ -32,6 +32,7 @@ import java.awt.Frame;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -77,7 +78,7 @@ public class FontSelectionDialog extends javax.swing.JDialog {
         fontComboBox.setSelectedItem(oldFont.getName());
         sizeSpinner.setValue(oldFont.getSize());
         applyToProjectFilesCheckBox.setSelected(Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT));
-
+        DockingUI.displayCentered(this);
     }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
@@ -221,7 +222,6 @@ public class FontSelectionDialog extends javax.swing.JDialog {
         getContentPane().add(buttonPanel, gridBagConstraints);
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void fontComboBoxActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_fontComboBoxActionPerformed

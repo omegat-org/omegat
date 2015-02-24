@@ -48,6 +48,7 @@ import org.omegat.filters2.master.OneFilterTableModel;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -98,7 +99,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
         }
         instancesScrollPane.setPreferredSize(new Dimension(width, instances.getPreferredSize().height + 70));
         pack();
-        setLocationRelativeTo(null);
+        DockingUI.displayCentered(this);
     }
 
     private JComboBox encodingComboBox() {

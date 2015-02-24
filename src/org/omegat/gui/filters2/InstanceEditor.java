@@ -35,6 +35,7 @@ import javax.swing.border.TitledBorder;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 import org.openide.awt.Mnemonics;
 
@@ -70,6 +71,7 @@ public class InstanceEditor extends JDialog {
         StaticUIUtils.setEscapeClosable(this);
 
         pack();
+        DockingUI.displayCentered(this);
     }
 
     /**
@@ -312,9 +314,6 @@ public class InstanceEditor extends JDialog {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(targetEncodingField, gridBagConstraints);
-
-        pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_insertButtonActionPerformed

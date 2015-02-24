@@ -534,7 +534,6 @@ public class GITRemoteRepository implements IRemoteRepository {
          */
         private boolean askCredentials(String usernameInUri) {
             TeamUserPassDialog userPassDialog = new TeamUserPassDialog(Core.getMainWindow().getApplicationFrame());
-            DockingUI.displayCentered(userPassDialog);
             userPassDialog.descriptionTextArea.setText(OStrings.getString(credentials.username==null ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"));
             //if username is already available in uri, then we will not be asked for an username, so we cannot change it.
             if (usernameInUri != null && !"".equals(usernameInUri)) {

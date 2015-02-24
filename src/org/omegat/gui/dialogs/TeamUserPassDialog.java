@@ -30,6 +30,7 @@ package org.omegat.gui.dialogs;
 import javax.swing.JLabel;
 
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -56,6 +57,7 @@ public class TeamUserPassDialog extends javax.swing.JDialog {
 
         invalidate();
         pack();
+        DockingUI.displayCentered(this);
     }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
@@ -191,7 +193,6 @@ public class TeamUserPassDialog extends javax.swing.JDialog {
         getContentPane().add(cbForceSavePlainPassword, gridBagConstraints);
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed

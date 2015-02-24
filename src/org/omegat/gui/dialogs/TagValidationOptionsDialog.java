@@ -39,6 +39,7 @@ import javax.swing.JTextField;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -76,6 +77,7 @@ public class TagValidationOptionsDialog extends JDialog {
 
         invalidate();
         pack();
+        DockingUI.displayCentered(this);
     }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
@@ -265,7 +267,6 @@ public class TagValidationOptionsDialog extends JDialog {
         getContentPane().add(cancelButton, gridBagConstraints);
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

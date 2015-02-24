@@ -37,6 +37,7 @@ import javax.swing.JOptionPane;
 
 import org.omegat.core.spellchecker.DictionaryManager;
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -89,6 +90,8 @@ public class DictionaryInstallerDialog extends JDialog {
             installButton.setEnabled(false);
             infoTextArea.setText(OStrings.getString("GUI_DICTIONARY_INSTALLER_TEXT_NOTHING"));
         }
+        
+        DockingUI.displayCentered(this);
     }
 
     /**

@@ -34,6 +34,7 @@ import javax.swing.JLabel;
 
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -69,6 +70,7 @@ public class SaveOptionsDialog extends JDialog {
 
         externalCommandTextArea.setText(Preferences.getPreference(Preferences.EXTERNAL_COMMAND));
         allowProjectCmdCheckBox.setSelected(Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD));
+        DockingUI.displayCentered(this);
     }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
@@ -245,7 +247,6 @@ public class SaveOptionsDialog extends JDialog {
         getContentPane().add(jPanel3, java.awt.BorderLayout.SOUTH);
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed

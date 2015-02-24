@@ -39,6 +39,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.LFileCopy;
 import org.openide.awt.Mnemonics;
 import org.omegat.util.FileUtil;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -115,6 +116,7 @@ public class LicenseDialog extends javax.swing.JDialog {
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width - 600) / 2, (screenSize.height - 400) / 2, 600, 400);
+        DockingUI.displayCentered(this);
     }
 
     /**

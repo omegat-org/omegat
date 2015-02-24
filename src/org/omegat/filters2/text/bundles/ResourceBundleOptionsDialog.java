@@ -33,6 +33,7 @@ import javax.swing.AbstractAction;
 
 
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -68,6 +69,7 @@ public class ResourceBundleOptionsDialog extends javax.swing.JDialog {
                 doClose(RET_CANCEL);
             }
         });
+        DockingUI.displayCentered(this);
     }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
@@ -136,7 +138,6 @@ public class ResourceBundleOptionsDialog extends javax.swing.JDialog {
         getContentPane().add(buttonPanel, java.awt.BorderLayout.SOUTH);
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
 private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog

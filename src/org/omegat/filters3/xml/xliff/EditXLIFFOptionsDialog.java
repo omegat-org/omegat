@@ -36,6 +36,7 @@ import javax.swing.AbstractAction;
 
 import org.omegat.filters3.xml.xliff.XLIFFOptions.ID_TYPE;
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -73,6 +74,7 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
                 doClose(RET_CANCEL);
             }
         });
+        DockingUI.displayCentered(this);
     }
 
     private final XLIFFOptions options;
@@ -194,7 +196,6 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
 

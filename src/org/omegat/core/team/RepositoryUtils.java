@@ -54,7 +54,6 @@ public class RepositoryUtils {
             userPassDialog.userText.setEditable(false);
             userPassDialog.userText.setEnabled(false);
         }
-        DockingUI.displayCentered(userPassDialog);
         userPassDialog.descriptionTextArea.setText(message);
         userPassDialog.setVisible(true);
         if (userPassDialog.getReturnStatus() == TeamUserPassDialog.RET_OK) {

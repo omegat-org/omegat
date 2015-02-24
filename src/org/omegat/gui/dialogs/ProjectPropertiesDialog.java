@@ -81,6 +81,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.LanguageComboBoxRenderer;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.StaticUIUtils;
@@ -869,7 +870,7 @@ public class ProjectPropertiesDialog extends JDialog {
             dialogSize.height = screenSize.height;
             setSize(dialogSize);
         }
-        setLocationRelativeTo(null);
+        DockingUI.displayCentered(this);
     }
 
     /**

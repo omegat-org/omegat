@@ -34,6 +34,7 @@ import javax.swing.JDialog;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 import org.openide.awt.Mnemonics;
 
@@ -114,6 +115,7 @@ public class LogDialog extends JDialog {
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width - 600) / 2, (screenSize.height - 400) / 2, 600, 400);
+        DockingUI.displayCentered(this);
     }
 
 

@@ -39,6 +39,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -95,6 +96,7 @@ public class EditOptionsDialog extends javax.swing.JDialog {
                 doClose(RET_CANCEL);
             }
         });
+        DockingUI.displayCentered(this);
     }
 
     private HTMLOptions options;
@@ -252,7 +254,6 @@ public class EditOptionsDialog extends javax.swing.JDialog {
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

@@ -45,6 +45,7 @@ import org.omegat.core.segmentation.datamodels.MappingRulesModel;
 import org.omegat.core.segmentation.datamodels.SegmentationRulesModel;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -124,7 +125,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
         pack();
         setSize(getWidth() * 5 / 4, getHeight() * 5 / 4);
-        setLocationRelativeTo(null);
+        DockingUI.displayCentered(this);
     }
 
     /**

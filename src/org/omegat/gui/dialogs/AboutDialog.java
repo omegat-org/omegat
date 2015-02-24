@@ -35,6 +35,7 @@ import javax.swing.JDialog;
 import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -84,7 +85,7 @@ public class AboutDialog extends JDialog {
             dialogSize.height = screenSize.height;
             setSize(dialogSize);
         }
-        setLocationRelativeTo(null);
+        DockingUI.displayCentered(this);
     }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
@@ -169,9 +170,6 @@ public class AboutDialog extends JDialog {
         aboutpane.setViewportView(abouttext);
 
         getContentPane().add(aboutpane, java.awt.BorderLayout.CENTER);
-
-        pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void licenseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_licenseButtonActionPerformed

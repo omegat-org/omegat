@@ -243,7 +243,7 @@ public class DictionaryManager {
 
         String to = tempFile.getAbsolutePath();
 
-        StaticUtils.downloadFileToDisk(from, to);
+        StaticUtils.downloadFileToDisk(from, to, true);
 
         // Dirty hack for the French dictionary. Since it is named
         // fr_FR_1-3-2.zip, we remove the "_1-3-2" portion

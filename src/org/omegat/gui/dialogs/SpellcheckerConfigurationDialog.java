@@ -158,7 +158,8 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
     private void updateDirectory() {
         File dir = getDictDir();
         
-        installButton.setEnabled(dir != null && dir.canWrite());
+        installButton.setEnabled(autoSpellcheckCheckBox.isSelected()
+                && dir != null && dir.canWrite());
         
         updateLanguageList();
     }
@@ -199,9 +200,9 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         directoryChooserButton.setEnabled(enabled);
         directoryLabel.setEnabled(enabled);
         directoryTextField.setEnabled(enabled);
-        installButton.setEnabled(enabled);
         languageScrollPane.setEnabled(enabled);
         languageList.setEnabled(enabled);
+        updateDirectory();
     }
 
     /**

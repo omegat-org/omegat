@@ -227,7 +227,7 @@ public abstract class AlphabeticalMarkers extends JPanel {
     public void hideMarkers() {
         UIThreadsUtil.mustBeSwingThread();
 
-        if (!markers.isEmpty()) {
+        if (markers != null && !markers.isEmpty()) {
             parent.remove(this);
             parent.validate();
             parent.repaint();

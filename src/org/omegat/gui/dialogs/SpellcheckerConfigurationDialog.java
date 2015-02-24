@@ -114,15 +114,15 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         directoryTextField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                updateLanguageList();
+                updateDirectory();
             }
             @Override
             public void removeUpdate(DocumentEvent e) {
-                updateLanguageList();
+                updateDirectory();
             }
             @Override
             public void changedUpdate(DocumentEvent e) {
-                updateLanguageList();
+                updateDirectory();
             }
         });
         directoryTextField.setText(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY));
@@ -136,6 +136,30 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
             dictionaryUrlTextField.setText(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL));
         }
         DockingUI.displayCentered(this);
+        updateDirectory();
+    }
+    
+    private File getDictDir() {
+        String dirName = directoryTextField.getText();
+        
+        if (dirName == null || dirName.isEmpty()) {
+            return null;
+        }
+        
+        File dir = new File(dirName);
+        if (!dir.exists() || !dir.canRead()) {
+            return null;
+        }
+        
+        return dir;
+    }
+
+    private void updateDirectory() {
+        File dir = getDictDir();
+        
+        installButton.setEnabled(dir != null && dir.canWrite());
+        
+        updateLanguageList();
     }
 
     /**
@@ -145,15 +169,9 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         // initialize the language list model
         languageListModel.clear();
         
-        String dirName = directoryTextField.getText();
-
-        // should we do anything?
-        if (dirName == null || dirName.isEmpty()) {
-            return;
-        }
+        File dir = getDictDir();
         
-        File dir = new File(dirName);
-        if (!dir.exists()) {
+        if (dir == null) {
             return;
         }
 

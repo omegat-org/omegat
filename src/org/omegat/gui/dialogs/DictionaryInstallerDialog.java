@@ -5,6 +5,7 @@
 
  Copyright (C) 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
                2008 Didier Briel
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -28,12 +29,15 @@ package org.omegat.gui.dialogs;
 
 import java.awt.Cursor;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 
 import org.omegat.core.spellchecker.DictionaryManager;
 import org.omegat.util.OStrings;
@@ -45,6 +49,7 @@ import org.omegat.util.gui.StaticUIUtils;
  *
  * @author bartkoz
  * @author Didier Briel
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class DictionaryInstallerDialog extends JDialog {
@@ -57,7 +62,10 @@ public class DictionaryInstallerDialog extends JDialog {
     /**
      * the list model
      */
-    private final DefaultListModel listModel;
+    private final DefaultListModel listModel = new DefaultListModel();
+    
+    private SwingWorker<List<String>, Object> loader = null;
+    private SwingWorker<Object, Object> installer = null;
 
     /** Creates new form DictionaryInstallerDialog */
     public DictionaryInstallerDialog(JDialog parent, DictionaryManager dicMan) throws IOException {
@@ -68,32 +76,48 @@ public class DictionaryInstallerDialog extends JDialog {
         this.dicMan = dicMan;
 
         initComponents();
-
-        UiInitComponents();
-
-        //Connect with remote URL to get list of dictionaries.
-        List<String> list = dicMan.getInstallableDictionaryNameList();
-
-        listModel = new DefaultListModel();
-
-        for (String str : list) {
-            listModel.addElement(str);
-        }
-
-        dictionaryList.setModel(listModel);
-        dictionaryList.setEnabled(true);
-
-        if (!list.isEmpty()) {
-            installButton.setEnabled(true);
-            infoTextArea.setText(OStrings.getString("GUI_DICTIONARY_INSTALLER_TEXT_GO"));
-        } else {
-            installButton.setEnabled(false);
-            infoTextArea.setText(OStrings.getString("GUI_DICTIONARY_INSTALLER_TEXT_NOTHING"));
-        }
         
         DockingUI.displayCentered(this);
+        
+        dictionaryListValueChanged(null);
+        
+        loader = new LoaderWorker();
+        loader.execute();
     }
 
+    private class LoaderWorker extends SwingWorker<List<String>,Object> {
+
+        @Override
+        protected List<String> doInBackground() throws Exception {
+            //Connect with remote URL to get list of dictionaries.
+            progressBar.setVisible(true);
+            return dicMan.getInstallableDictionaryNameList();
+        }
+
+        @Override
+        protected void done() {
+            try {
+                List<String> list = get();
+                for (String str : list) {
+                    listModel.addElement(str);
+                }
+                
+                dictionaryList.setModel(listModel);
+                dictionaryList.setEnabled(true);
+                
+                if (list.isEmpty()) {
+                    installButton.setEnabled(false);
+                    infoTextArea.setText(OStrings.getString("GUI_DICTIONARY_INSTALLER_TEXT_NOTHING"));
+                }
+                progressBar.setVisible(false);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(DictionaryInstallerDialog.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ExecutionException ex) {
+                Logger.getLogger(DictionaryInstallerDialog.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -103,25 +127,45 @@ public class DictionaryInstallerDialog extends JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        infoTextArea = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel();
+        listLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         dictionaryList = new javax.swing.JList();
-        closeButton = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         installButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        infoTextArea = new javax.swing.JTextArea();
-        listLabel = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        progressBar = new javax.swing.JProgressBar();
+        closeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(OStrings.getString("GUI_DICTIONARY_INSTALLER_TITLE")); // NOI18N
+        setPreferredSize(new java.awt.Dimension(400, 500));
 
-        jScrollPane2.setViewportView(dictionaryList);
+        infoTextArea.setEditable(false);
+        infoTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        infoTextArea.setLineWrap(true);
+        infoTextArea.setText(OStrings.getString("GUI_DICTIONARY_INSTALLER_TEXT_GO")); // NOI18N
+        infoTextArea.setWrapStyleWord(true);
+        infoTextArea.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        getContentPane().add(infoTextArea, java.awt.BorderLayout.NORTH);
 
-        org.openide.awt.Mnemonics.setLocalizedText(closeButton, OStrings.getString("BUTTON_CLOSE")); // NOI18N
-        closeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                closeButtonActionPerformed(evt);
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        org.openide.awt.Mnemonics.setLocalizedText(listLabel, OStrings.getString("GUI_DICTIONARY_INSTALLER_AVAILABLE")); // NOI18N
+        jPanel1.add(listLabel, java.awt.BorderLayout.NORTH);
+
+        dictionaryList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                dictionaryListValueChanged(evt);
             }
         });
+        jScrollPane2.setViewportView(dictionaryList);
+
+        jPanel1.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
 
         org.openide.awt.Mnemonics.setLocalizedText(installButton, OStrings.getString("GUI_DICTIONARY_INSTALLER_INSTALL")); // NOI18N
         installButton.addActionListener(new java.awt.event.ActionListener() {
@@ -129,97 +173,106 @@ public class DictionaryInstallerDialog extends JDialog {
                 installButtonActionPerformed(evt);
             }
         });
+        jPanel2.add(installButton, java.awt.BorderLayout.NORTH);
 
-        infoTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
-        infoTextArea.setColumns(20);
-        infoTextArea.setEditable(false);
-        infoTextArea.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        infoTextArea.setLineWrap(true);
-        infoTextArea.setRows(5);
-        infoTextArea.setWrapStyleWord(true);
-        jScrollPane1.setViewportView(infoTextArea);
+        jPanel1.add(jPanel2, java.awt.BorderLayout.EAST);
 
-        org.openide.awt.Mnemonics.setLocalizedText(listLabel, OStrings.getString("GUI_DICTIONARY_INSTALLER_AVAILABLE")); // NOI18N
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .addContainerGap()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(listLabel)
-                    .add(layout.createSequentialGroup()
-                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                            .add(installButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(closeButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)))
-                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(9, 9, 9)
-                .add(listLabel)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .add(installButton)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 125, Short.MAX_VALUE)
-                        .add(closeButton))
-                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        progressBar.setIndeterminate(true);
+        jPanel3.add(progressBar, java.awt.BorderLayout.CENTER);
+
+        org.openide.awt.Mnemonics.setLocalizedText(closeButton, OStrings.getString("BUTTON_CLOSE")); // NOI18N
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeButtonActionPerformed(evt);
+            }
+        });
+        jPanel3.add(closeButton, java.awt.BorderLayout.EAST);
+
+        getContentPane().add(jPanel3, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void installButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_installButtonActionPerformed
-        Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = getCursor();
-        setCursor(hourglassCursor);
-        Object[] selection = dictionaryList.getSelectedValues();
-        for (Object o : selection) {
-            // install the respective dictionaries
-            String item = (String) o;
-            String langCode = (item).substring(0, item.indexOf(" "));
-            try {
-                dicMan.installRemoteDictionary(langCode);
-                ((SpellcheckerConfigurationDialog) this.getParent()).updateLanguageList();
-            } catch (MalformedURLException ex) {
-                setCursor(oldCursor);
-                JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(), "Error",
-                        JOptionPane.ERROR_MESSAGE);
-                setCursor(hourglassCursor);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+    private void installButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_installButtonActionPerformed
+        if (installer != null) {
+            installer.cancel(true);
         }
-        setCursor(oldCursor);
-    }// GEN-LAST:event_installButtonActionPerformed
+        installer = new InstallerWorker();
+        installer.execute();
+    }//GEN-LAST:event_installButtonActionPerformed
 
-    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_closeButtonActionPerformed
+    private class InstallerWorker extends SwingWorker<Object,Object> {
+
+        private final Cursor HOURGLASS_CURSOR = new Cursor(Cursor.WAIT_CURSOR);
+        private Cursor oldCursor;
+        
+        @Override
+        protected Object doInBackground() throws Exception {
+            progressBar.setVisible(true);
+            installButton.setEnabled(false);
+            closeButton.setEnabled(false);
+            
+            oldCursor = getCursor();
+            setCursor(HOURGLASS_CURSOR);
+            Object[] selection = dictionaryList.getSelectedValues();
+            for (Object o : selection) {
+                // install the respective dictionaries
+                String item = (String) o;
+                String langCode = (item).substring(0, item.indexOf(" "));
+                try {
+                    dicMan.installRemoteDictionary(langCode);
+                    ((SpellcheckerConfigurationDialog) DictionaryInstallerDialog.this.getParent()).updateLanguageList();
+                    listModel.removeElement(o);
+                } catch (Exception ex) {
+                    setCursor(oldCursor);
+                    JOptionPane.showMessageDialog(DictionaryInstallerDialog.this, ex.getLocalizedMessage(), "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    setCursor(HOURGLASS_CURSOR);
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void done() {
+            setCursor(oldCursor);
+            progressBar.setVisible(false);
+            installButton.setEnabled(true);
+            closeButton.setEnabled(true);
+        }
+    }
+    
+    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+        if (installer != null) {
+            installer.cancel(true);
+        }
+        if (loader != null) {
+            loader.cancel(true);
+        }
         setVisible(false);
         dispose();
-    }// GEN-LAST:event_closeButtonActionPerformed
+    }//GEN-LAST:event_closeButtonActionPerformed
 
-    private void UiInitComponents() {
-        installButton.setEnabled(false);
-        dictionaryList.setEnabled(false);
-    }
+    private void dictionaryListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_dictionaryListValueChanged
+        installButton.setEnabled(dictionaryList.getSelectedValues().length > 0);
+    }//GEN-LAST:event_dictionaryListValueChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeButton;
     private javax.swing.JList dictionaryList;
     private javax.swing.JTextArea infoTextArea;
     private javax.swing.JButton installButton;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel listLabel;
+    private javax.swing.JProgressBar progressBar;
     // End of variables declaration//GEN-END:variables
 
 }

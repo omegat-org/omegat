@@ -137,6 +137,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         }
         DockingUI.displayCentered(this);
         updateDirectory();
+        languageListValueChanged(null);
     }
     
     private File getDictDir() {
@@ -199,7 +200,6 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         directoryLabel.setEnabled(enabled);
         directoryTextField.setEnabled(enabled);
         installButton.setEnabled(enabled);
-        setUninstalButtonStatus();  // Depends on whether something is selected in the dictionary list
         languageScrollPane.setEnabled(enabled);
         languageList.setEnabled(enabled);
     }
@@ -287,9 +287,9 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(contentLabel, OStrings.getString("GUI_SPELLCHECKER_AVAILABLE_LABEL")); // NOI18N
         jPanel3.add(contentLabel, java.awt.BorderLayout.NORTH);
 
-        languageList.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                languageListMouseClicked(evt);
+        languageList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                languageListValueChanged(evt);
             }
         });
         languageScrollPane.setViewportView(languageList);
@@ -363,18 +363,10 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void languageListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_languageListMouseClicked
-        setUninstalButtonStatus();
-    }//GEN-LAST:event_languageListMouseClicked
-
-    /**
-     * Sets the enabled/disabled status of the Uninstall (Remove) button
-     * To be enabled, at list one dictionary must be selected, and the Spell checking box must be selected
-     */
-    private void setUninstalButtonStatus() {
+    private void languageListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_languageListValueChanged
         Object[] selection = languageList.getSelectedValues();
         uninstallButton.setEnabled(selection.length > 0 && autoSpellcheckCheckBox.isSelected());
-    }
+    }//GEN-LAST:event_languageListValueChanged
 
     private void directoryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_directoryTextFieldActionPerformed
         updateLanguageList();
@@ -415,7 +407,6 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
             setCursor(oldCursor);
             JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
         }
-        setUninstalButtonStatus();
     }// GEN-LAST:event_installButtonActionPerformed
 
     private void uninstallButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_uninstallButtonActionPerformed
@@ -445,7 +436,6 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
                 }
                 languageListModel.remove(languageList.getSelectedIndex());
             }
-            setUninstalButtonStatus();
         }
     }// GEN-LAST:event_uninstallButtonActionPerformed
 

@@ -43,8 +43,10 @@ import org.omegat.util.gui.StaticUIUtils;
 /**
  * Dialog that accepts a segment number to jump to in the editor.
  * 
+ * @author Henry Pijffers
  * @author Alex Buloichik
  * @author Aaron Madlon-Kay
+ * @author Yu Tang
  */
 public class GoToSegmentDialog extends javax.swing.JDialog {
 

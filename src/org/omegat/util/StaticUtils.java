@@ -9,7 +9,6 @@
                2012 Martin Fleurke, Didier Briel
                2013 Aaron Madlon-Kay, Zoltan Bartko, Didier Briel, Alex Buloichik
                2014 Aaron Madlon-Kay, Alex Buloichik
-               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -40,7 +39,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -1022,17 +1020,13 @@ public class StaticUtils {
     /**
      * Download a file to the disk
      */
-    public static void downloadFileToDisk(String address, String filename,
-            boolean followRedirects) throws MalformedURLException {
+    public static void downloadFileToDisk(String address, String filename) throws MalformedURLException {
         URLConnection urlConn;
         InputStream in = null;
         OutputStream out = null;
         try {
             URL url = new URL(address);
             urlConn = url.openConnection();
-            if (followRedirects && urlConn instanceof HttpURLConnection) {
-                ((HttpURLConnection) urlConn).setInstanceFollowRedirects(true);
-            }
             in = urlConn.getInputStream();
             out = new BufferedOutputStream(new FileOutputStream(filename));
 

@@ -97,6 +97,7 @@ public class NewTeamProject extends javax.swing.JDialog {
         });
         
         StaticUIUtils.setEscapeClosable(this);
+        getRootPane().setDefaultButton(btnOk);
     }
     
     private void suggestSaveDirectory(String repoName) {

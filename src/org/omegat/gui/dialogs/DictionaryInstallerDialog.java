@@ -36,6 +36,7 @@ import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
@@ -136,6 +137,7 @@ public class DictionaryInstallerDialog extends JDialog {
         installButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         progressBar = new javax.swing.JProgressBar();
+        jPanel4 = new javax.swing.JPanel();
         closeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -144,6 +146,7 @@ public class DictionaryInstallerDialog extends JDialog {
 
         infoTextArea.setEditable(false);
         infoTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        infoTextArea.setFont(new JLabel().getFont());
         infoTextArea.setLineWrap(true);
         infoTextArea.setText(OStrings.getString("GUI_DICTIONARY_INSTALLER_TEXT_GO")); // NOI18N
         infoTextArea.setWrapStyleWord(true);
@@ -165,6 +168,7 @@ public class DictionaryInstallerDialog extends JDialog {
 
         jPanel1.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 0));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
         org.openide.awt.Mnemonics.setLocalizedText(installButton, OStrings.getString("GUI_DICTIONARY_INSTALLER_INSTALL")); // NOI18N
@@ -185,13 +189,18 @@ public class DictionaryInstallerDialog extends JDialog {
         progressBar.setIndeterminate(true);
         jPanel3.add(progressBar, java.awt.BorderLayout.CENTER);
 
+        jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 0));
+        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
+
         org.openide.awt.Mnemonics.setLocalizedText(closeButton, OStrings.getString("BUTTON_CLOSE")); // NOI18N
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 closeButtonActionPerformed(evt);
             }
         });
-        jPanel3.add(closeButton, java.awt.BorderLayout.EAST);
+        jPanel4.add(closeButton);
+
+        jPanel3.add(jPanel4, java.awt.BorderLayout.EAST);
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.SOUTH);
 
@@ -270,6 +279,7 @@ public class DictionaryInstallerDialog extends JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel listLabel;
     private javax.swing.JProgressBar progressBar;

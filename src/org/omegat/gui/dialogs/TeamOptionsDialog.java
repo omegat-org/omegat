@@ -59,8 +59,6 @@ public class TeamOptionsDialog extends JDialog {
         authorText.setText(Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
                 System.getProperty("user.name")));
 
-        invalidate();
-        pack();
         DockingUI.displayCentered(this);
     }
 
@@ -77,13 +75,15 @@ public class TeamOptionsDialog extends JDialog {
     // <editor-fold defaultstate="collapsed"
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
-        descriptionTextArea = new javax.swing.JTextArea();
-        okButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
+        descriptionLabel = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         authorLabel = new javax.swing.JLabel();
         authorText = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        okButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
         setTitle(OStrings.getString("GUI_TITLE_Team_Options")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -91,23 +91,25 @@ public class TeamOptionsDialog extends JDialog {
                 closeDialog(evt);
             }
         });
-        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        descriptionTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
-        descriptionTextArea.setEditable(false);
-        descriptionTextArea.setFont(new JLabel().getFont());
-        descriptionTextArea.setLineWrap(true);
-        descriptionTextArea.setText(OStrings.getString("GUI_TEAM_DESCRIPTION")); // NOI18N
-        descriptionTextArea.setWrapStyleWord(true);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(descriptionTextArea, gridBagConstraints);
+        org.openide.awt.Mnemonics.setLocalizedText(descriptionLabel, OStrings.getString("GUI_TEAM_DESCRIPTION")); // NOI18N
+        descriptionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        getContentPane().add(descriptionLabel, java.awt.BorderLayout.NORTH);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 30, 10, 30));
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        authorLabel.setLabelFor(authorText);
+        org.openide.awt.Mnemonics.setLocalizedText(authorLabel, OStrings.getString("WF_OPTION_INSERT_AUTHOR_PREFIX")); // NOI18N
+        jPanel2.add(authorLabel, java.awt.BorderLayout.WEST);
+        jPanel2.add(authorText, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
 
         org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
         okButton.addActionListener(new java.awt.event.ActionListener() {
@@ -115,13 +117,7 @@ public class TeamOptionsDialog extends JDialog {
                 okButtonActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
-        getContentPane().add(okButton, gridBagConstraints);
+        jPanel1.add(okButton);
 
         org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -129,33 +125,13 @@ public class TeamOptionsDialog extends JDialog {
                 cancelButtonActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
-        getContentPane().add(cancelButton, gridBagConstraints);
+        jPanel1.add(cancelButton);
 
-        authorLabel.setLabelFor(authorText);
-        org.openide.awt.Mnemonics.setLocalizedText(authorLabel, OStrings.getString("WF_OPTION_INSERT_AUTHOR_PREFIX")); // NOI18N
-        authorLabel.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 16, 4, 4);
-        getContentPane().add(authorLabel, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(authorText, gridBagConstraints);
+        jPanel3.add(jPanel1, java.awt.BorderLayout.EAST);
+
+        getContentPane().add(jPanel3, java.awt.BorderLayout.SOUTH);
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_okButtonActionPerformed
@@ -186,7 +162,10 @@ public class TeamOptionsDialog extends JDialog {
     private javax.swing.JLabel authorLabel;
     private javax.swing.JTextField authorText;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JTextArea descriptionTextArea;
+    private javax.swing.JLabel descriptionLabel;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JButton okButton;
     // End of variables declaration//GEN-END:variables
 

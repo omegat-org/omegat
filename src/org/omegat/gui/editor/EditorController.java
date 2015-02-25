@@ -1027,6 +1027,9 @@ public class EditorController implements IEditor {
         commitAndDeactivate();
 
         List<FileInfo> files = Core.getProject().getProjectFiles();
+        if (files.isEmpty()) {
+            return;
+        }
         SourceTextEntry ste;
         int startFileIndex = displayedFileIndex;
         int startEntryIndex = displayedEntryIndex;
@@ -1077,6 +1080,9 @@ public class EditorController implements IEditor {
         commitAndDeactivate();
 
         List<FileInfo> files = Core.getProject().getProjectFiles();
+        if (files.isEmpty()) {
+            return;
+        }
         SourceTextEntry ste;
         int startFileIndex = displayedFileIndex;
         int startEntryIndex = displayedEntryIndex;
@@ -1127,6 +1133,9 @@ public class EditorController implements IEditor {
         commitAndDeactivate();
 
         List<FileInfo> files = Core.getProject().getProjectFiles();
+        if (files.isEmpty()) {
+            return;
+        }
         SourceTextEntry ste;
         int startFileIndex = displayedFileIndex;
         int startEntryIndex = displayedEntryIndex;
@@ -1208,6 +1217,9 @@ public class EditorController implements IEditor {
         commitAndDeactivate();
 
         List<FileInfo> files = Core.getProject().getProjectFiles();
+        if (files.isEmpty()) {
+            return;
+        }
         SourceTextEntry ste;
         int startFileIndex = displayedFileIndex;
         int startEntryIndex = displayedEntryIndex;
@@ -1263,6 +1275,9 @@ public class EditorController implements IEditor {
         commitAndDeactivate();
 
         List<FileInfo> files = Core.getProject().getProjectFiles();
+        if (files.isEmpty()) {
+            return;
+        }
         SourceTextEntry ste;
         int startFileIndex = displayedFileIndex;
         int startEntryIndex = displayedEntryIndex;
@@ -1315,6 +1330,9 @@ public class EditorController implements IEditor {
         commitAndDeactivate();
 
         List<FileInfo> files = Core.getProject().getProjectFiles();
+        if (files.isEmpty()) {
+            return;
+        }
         SourceTextEntry ste;
         int startFileIndex = displayedFileIndex;
         int startEntryIndex = displayedEntryIndex;

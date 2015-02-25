@@ -127,6 +127,22 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         });
         directoryTextField.setText(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY));
 
+        dictionaryUrlTextField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateDictUrl();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateDictUrl();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateDictUrl();
+            }
+        });
         String dictionaryUrl = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL);
         if (dictionaryUrl.isEmpty()
                 || //string below was default prior to 2.5.0 update 5, but is not working. Override with new default.
@@ -156,11 +172,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
     }
 
     private void updateDirectory() {
-        File dir = getDictDir();
-        
-        installButton.setEnabled(autoSpellcheckCheckBox.isSelected()
-                && dir != null && dir.canWrite());
-        
+        updateDictUrl();
         updateLanguageList();
     }
 
@@ -205,6 +217,14 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         updateDirectory();
     }
 
+    private void updateDictUrl() {
+        File dir = getDictDir();
+        
+        installButton.setEnabled(autoSpellcheckCheckBox.isSelected()
+                && dir != null && dir.canWrite()
+                && !dictionaryUrlTextField.getText().isEmpty());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

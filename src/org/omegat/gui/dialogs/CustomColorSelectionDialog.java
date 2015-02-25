@@ -145,9 +145,10 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         setTitle(OStrings.getString("GUI_COLORS_TITLE")); // NOI18N
         setIconImage(null);
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 5));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 10));
         jPanel3.setLayout(new java.awt.BorderLayout());
 
         org.openide.awt.Mnemonics.setLocalizedText(colorStylesLabel, OStrings.getString("GUI_COLORS_COLOR")); // NOI18N
@@ -169,6 +170,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
         jPanel4.setLayout(new java.awt.GridLayout(0, 1));
@@ -261,7 +263,9 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
             style.setColor(e.getValue());
         }
         Preferences.save();
-        JOptionPane.showMessageDialog(this, OStrings.getString("GUI_COLORS_CHANGED_RESTART"));
+        if (!temporaryPreferences.isEmpty()) {
+            JOptionPane.showMessageDialog(this, OStrings.getString("GUI_COLORS_CHANGED_RESTART"));
+        }
         closeDialog();
     }//GEN-LAST:event_okButtonActionPerformed
 

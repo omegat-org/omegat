@@ -487,7 +487,8 @@ public class EditorSettings {
      * @return
      */
     public AttributeSet getModificationInfoAttributeSet() {
-        return Styles.createAttributeSet(null, null, null, true);
+        return Styles.createAttributeSet(Styles.EditorColor.COLOR_MOD_INFO_FG.getColor(),
+                Styles.EditorColor.COLOR_MOD_INFO.getColor(), false, true);
     }
     /**
      * Returns font attributes for the segment marker.

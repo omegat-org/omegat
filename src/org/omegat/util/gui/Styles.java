@@ -65,6 +65,8 @@ public final class Styles {
         COLOR_TRANSLATED_FG((Color) null),
         COLOR_NON_UNIQUE("#808080"),
         COLOR_NON_UNIQUE_BG((Color) null),
+        COLOR_MOD_INFO((Color) null),
+        COLOR_MOD_INFO_FG((Color) null),
         COLOR_PLACEHOLDER("#969696"),
         COLOR_REMOVETEXT_TARGET("#ff0000"),
         COLOR_NBSP("#c8c8c8"),

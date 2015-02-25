@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.9
 ----------------------------------------------------------------------
-  11 Enhancements
+  12 Enhancements
   11 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
@@ -50,6 +50,9 @@ will be "3.1.9_Foo". Instead of omegat.prefs and uiLayout.xml, preferences are
 stored in omegat-Foo.prefs and uiLayout-Foo.xml. This lets the deployment keep 
 settings independent of any existing "stock" OmegaT installation, and makes sure
 any default preferences bundled are used by default no matter what.
+
+  - It is possible to define the text and background colour of modification 
+information
 
 
   Bug fixes:

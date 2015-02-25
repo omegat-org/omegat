@@ -571,7 +571,7 @@ public class SegmentBuilder {
         // trim and replace spaces to non-break spaces
         text = text.trim().replace(' ', '\u00A0');
         //replace placeholder with actual segment number
-        if (text.indexOf("0000") >= 0) {
+        if (text.contains("0000")) {
             text = text.replace("0000", NUMBER_FORMAT.format(segmentNumberInProject));
         }
 

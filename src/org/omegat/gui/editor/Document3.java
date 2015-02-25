@@ -26,7 +26,6 @@
 
 package org.omegat.gui.editor;
 
-import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.event.DocumentEvent;
@@ -40,7 +39,6 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
-import org.htmlparser.scanners.StyleScanner;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -105,6 +103,7 @@ public class Document3 extends DefaultStyledDocument {
     /**
      * Returns editor's font. Only bold style may be changed.
      */
+    @Override
     public Font getFont(AttributeSet attr) {
         if (!StyleConstants.isBold(attr) && !StyleConstants.isItalic(attr)) {
             return controller.font;

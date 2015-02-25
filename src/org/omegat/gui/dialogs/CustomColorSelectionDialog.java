@@ -261,7 +261,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
             style.setColor(e.getValue());
         }
         Preferences.save();
-        JOptionPane.showMessageDialog(null, OStrings.getString("GUI_COLORS_CHANGED_RESTART"));
+        JOptionPane.showMessageDialog(this, OStrings.getString("GUI_COLORS_CHANGED_RESTART"));
         closeDialog();
     }//GEN-LAST:event_okButtonActionPerformed
 

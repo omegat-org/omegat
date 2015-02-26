@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.9
 ----------------------------------------------------------------------
-  12 Enhancements
+  14 Enhancements
   12 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
@@ -23,6 +23,12 @@
 
   - Support XLIFF equiv-text in tooltips, simplify tooltip prefs
   https://sourceforge.net/p/omegat/feature-requests/1064/
+
+  - Show the number of non-unique segment instances in the segment markers
+  https://sourceforge.net/p/omegat/feature-requests/1068/
+
+   - Contextual menu to jump to another instance of non-unique segments
+  https://sourceforge.net/p/omegat/feature-requests/1067/
 
   Other enhancements:
   

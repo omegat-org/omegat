@@ -385,7 +385,9 @@ public class EditorSettings {
         // Custom foreground colors
         if (active) {
             if (isSource) {
-                fg = Styles.EditorColor.COLOR_SOURCE_FG.getColor();
+                fg = Styles.EditorColor.COLOR_ACTIVE_SOURCE_FG.getColor();
+            } else {
+                fg = Styles.EditorColor.COLOR_ACTIVE_TARGET_FG.getColor();
             }
         } else {
             if (isSource) {
@@ -427,7 +429,9 @@ public class EditorSettings {
         Color bg = null;
         if (active) {
             if (isSource) {
-                bg = Styles.EditorColor.COLOR_SOURCE.getColor();
+                bg = Styles.EditorColor.COLOR_ACTIVE_SOURCE.getColor();
+            } else {
+                bg = Styles.EditorColor.COLOR_ACTIVE_TARGET.getColor();
             }
         } else {
             if (isSource) {

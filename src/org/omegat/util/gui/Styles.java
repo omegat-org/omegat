@@ -55,6 +55,10 @@ public final class Styles {
         COLOR_BACKGROUND(UIManager.getColor("TextPane.background")), // Also used for EditorPane.background
         COLOR_FOREGROUND(UIManager.getColor("TextPane.foreground")),
 
+        COLOR_ACTIVE_SOURCE("#c0ffc0"),
+        COLOR_ACTIVE_SOURCE_FG((Color) null),
+        COLOR_ACTIVE_TARGET((Color) null),
+        COLOR_ACTIVE_TARGET_FG((Color) null),
         COLOR_SOURCE("#c0ffc0"),
         COLOR_SOURCE_FG((Color) null),
         COLOR_NOTED("#c0ffff"),

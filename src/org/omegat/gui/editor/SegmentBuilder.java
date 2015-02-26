@@ -572,7 +572,12 @@ public class SegmentBuilder {
         text = text.trim().replace(' ', '\u00A0');
         //replace placeholder with actual segment number
         if (text.contains("0000")) {
-            text = text.replace("0000", NUMBER_FORMAT.format(segmentNumberInProject));
+            String replacement = NUMBER_FORMAT.format(segmentNumberInProject);
+            if (Preferences.isPreference(Preferences.MARK_NON_UNIQUE_SEGMENTS)
+                    && ste.getDuplicate() != SourceTextEntry.DUPLICATE.NONE) {
+                replacement += "+";
+            }
+            text = text.replace("0000", replacement);
         }
 
         return text;

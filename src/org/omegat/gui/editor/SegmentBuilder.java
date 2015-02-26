@@ -6,6 +6,7 @@
  Copyright (C) 2009 Alex Buloichik, Martin Fleurke
                2010 Alex Buloichik, Didier Briel
                2012 Martin Fleurke, Hans-Peter Jacobs
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -61,6 +62,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Didier Briel
  * @author Martin Fleurke
  * @author Hans-Peter Jacobs
+ * @author Aaron Madlon-Kay
  */
 public class SegmentBuilder {
 

@@ -5,6 +5,7 @@
 
  Copyright (C) 2008 Alex Buloichik
                2012 Martin Fleurke, Hans-Peter Jacobs
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -44,6 +45,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
  * @author Hans-Peter Jacobs
+ * @author Aaron Madlon-Kay
  */
 public class EditorSettings {
     private final EditorController parent;

@@ -42,6 +42,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.spellchecker.SpellCheckerMarker;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -63,8 +64,9 @@ public class EditorPopups {
         ec.registerPopupMenuConstructors(100, new SpellCheckerPopup(ec));
         ec.registerPopupMenuConstructors(200, new GoToSegmentPopup(ec));
         ec.registerPopupMenuConstructors(400, new DefaultPopup());
-        ec.registerPopupMenuConstructors(500, new EmptyNoneTranslationPopup(ec));
-        ec.registerPopupMenuConstructors(600, new InsertTagsPopup(ec));
+        ec.registerPopupMenuConstructors(500, new DuplicateSegmentsPopup(ec));
+        ec.registerPopupMenuConstructors(600, new EmptyNoneTranslationPopup(ec));
+        ec.registerPopupMenuConstructors(700, new InsertTagsPopup(ec));
     }
 
     /**
@@ -297,6 +299,40 @@ public class EditorPopups {
                     ec.goToSegmentAtLocation(comp.getCaretPosition());
                 }
             });
+            menu.addSeparator();
+        }
+    }
+    
+    public static class DuplicateSegmentsPopup implements IPopupMenuConstructor {
+        protected final EditorController ec;
+        
+        public DuplicateSegmentsPopup(EditorController ec) {
+            this.ec = ec;
+        }
+        
+        @Override
+        public void addItems(JPopupMenu menu, JTextComponent comp,
+                int mousepos, boolean isInActiveEntry,
+                boolean isInActiveTranslation, SegmentBuilder sb) {
+            if (!isInActiveEntry) {
+                return;
+            }
+            SourceTextEntry ste = ec.getCurrentEntry();
+            List<SourceTextEntry> dups = ste.getDuplicates();
+            if (dups.isEmpty()) {
+                return;
+            }
+            JMenuItem header = menu.add(StaticUtils.format(OStrings.getString("MW_GO_TO_DUPLICATE_HEADER"), dups.size()));
+            header.setEnabled(false);
+            for (final SourceTextEntry dup : dups) {
+                JMenuItem item = menu.add(StaticUtils.format(OStrings.getString("MW_GO_TO_DUPLICATE_ITEM"), dup.entryNum()));
+                item.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        ec.gotoEntry(dup.entryNum());
+                    }
+                });
+            }
             menu.addSeparator();
         }
     }

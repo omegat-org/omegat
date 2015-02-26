@@ -1168,7 +1168,10 @@ public class RealProject implements IProject {
                     exists.put(ste.getSrcText(), ste);
                 } else {
                     // Note duplicate of already-seen STE
-                    prevSte.numberOfDuplicates++;
+                    if (prevSte.duplicates == null) {
+                        prevSte.duplicates = new ArrayList<SourceTextEntry>();
+                    }
+                    prevSte.duplicates.add(ste);
                     ste.firstInstance = prevSte;
                 }
             }

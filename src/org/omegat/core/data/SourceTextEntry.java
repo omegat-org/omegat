@@ -26,6 +26,8 @@
 
 package org.omegat.core.data;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -62,10 +64,10 @@ public class SourceTextEntry {
     };
 
     /** 
-     * The number of duplicates of this STE. Will be non-zero for the FIRST duplicate,
-     * zero for NONE and NEXT STEs. See {@link #getDuplicate()} for full logic.
+     * A list of duplicates of this STE. Will be non-null for the FIRST duplicate,
+     * null for NONE and NEXT STEs. See {@link #getDuplicate()} for full logic.
      */
-    int numberOfDuplicates;
+    List<SourceTextEntry> duplicates;
     
     /**
      * The first duplicate of this STE. Will be null for NONE and FIRST STEs,
@@ -113,7 +115,7 @@ public class SourceTextEntry {
             }
             this.protectedParts = protectedParts.toArray(new ProtectedPart[protectedParts.size()]);
         }
-        this.numberOfDuplicates = 0;
+        this.duplicates = null;
         this.firstInstance = null;
     }
 
@@ -146,11 +148,26 @@ public class SourceTextEntry {
         if (firstInstance != null) {
             return DUPLICATE.NEXT;
         }
-        return numberOfDuplicates == 0 ? DUPLICATE.NONE : DUPLICATE.FIRST;
+        return duplicates == null ? DUPLICATE.NONE : DUPLICATE.FIRST;
     }
 
     public int getNumberOfDuplicates() {
-        return firstInstance == null ? numberOfDuplicates : firstInstance.getNumberOfDuplicates();
+        if (firstInstance != null) {
+            return firstInstance.getNumberOfDuplicates();
+        }
+        return duplicates == null ? 0 : duplicates.size();
+    }
+    
+    @SuppressWarnings("unchecked")
+    public List<SourceTextEntry> getDuplicates() {
+        if (firstInstance != null) {
+            List<SourceTextEntry> result = new ArrayList<SourceTextEntry>(firstInstance.getDuplicates());
+            result.remove(this);
+            result.add(0, firstInstance);
+            return Collections.unmodifiableList(result);
+        }
+        return duplicates == null ? Collections.EMPTY_LIST
+                : Collections.unmodifiableList(duplicates);
     }
     
     public String getSourceTranslation() {

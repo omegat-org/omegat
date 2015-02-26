@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Briac Pilpre, Aaron Madlon-Kay
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -103,6 +104,7 @@ public class RecentProjects {
                 });
                 recentMenu.add(recentProjectMenuItem);
             }
+            recentMenu.setEnabled(!recentProjects.isEmpty());
         }
     }
 

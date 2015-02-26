@@ -63,6 +63,10 @@ public class SourceTextEntry {
 
     /** If entry with the same source already exist in project. */
     DUPLICATE duplicate;
+    
+    private int numOfDups;
+    
+    private SourceTextEntry firstInstance;
 
     /** Holds the number of this entry in a project. */
     private final int m_entryNum;
@@ -104,6 +108,8 @@ public class SourceTextEntry {
             }
             this.protectedParts = protectedParts.toArray(new ProtectedPart[protectedParts.size()]);
         }
+        this.numOfDups = 0;
+        this.firstInstance = null;
     }
 
     public EntryKey getKey() {
@@ -135,6 +141,18 @@ public class SourceTextEntry {
         return duplicate;
     }
 
+    public int getNumberOfDuplicates() {
+        return firstInstance == null ? numOfDups : firstInstance.getNumberOfDuplicates();
+    }
+    
+    public void incrementDuplicates() {
+        numOfDups++;
+    }
+    
+    public void setFirstInstance(SourceTextEntry firstInstance) {
+        this.firstInstance = firstInstance;
+    }
+    
     public String getSourceTranslation() {
         return sourceTranslation;
     }

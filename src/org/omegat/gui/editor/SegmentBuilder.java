@@ -575,7 +575,9 @@ public class SegmentBuilder {
             String replacement = NUMBER_FORMAT.format(segmentNumberInProject);
             if (Preferences.isPreference(Preferences.MARK_NON_UNIQUE_SEGMENTS)
                     && ste.getDuplicate() != SourceTextEntry.DUPLICATE.NONE) {
-                replacement += "+";
+                replacement = StaticUtils.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
+                        replacement,
+                        ste.getNumberOfDuplicates());
             }
             text = text.replace("0000", replacement);
         }

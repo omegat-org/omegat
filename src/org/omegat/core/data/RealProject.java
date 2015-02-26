@@ -1167,6 +1167,8 @@ public class RealProject implements IProject {
                     // didn't processed the same entry yet
                     ste.duplicate = SourceTextEntry.DUPLICATE.NONE;
                 } else {
+                    prevSte.incrementDuplicates();
+                    ste.setFirstInstance(prevSte);
                     if (prevSte.duplicate == SourceTextEntry.DUPLICATE.NONE) {
                         // already processed,but this is first duplicate
                         prevSte.duplicate = SourceTextEntry.DUPLICATE.FIRST;

@@ -1164,23 +1164,12 @@ public class RealProject implements IProject {
                 SourceTextEntry prevSte = exists.get(ste.getSrcText());
 
                 if (prevSte == null) {
-                    // didn't processed the same entry yet
-                    ste.duplicate = SourceTextEntry.DUPLICATE.NONE;
-                } else {
-                    prevSte.incrementDuplicates();
-                    ste.setFirstInstance(prevSte);
-                    if (prevSte.duplicate == SourceTextEntry.DUPLICATE.NONE) {
-                        // already processed,but this is first duplicate
-                        prevSte.duplicate = SourceTextEntry.DUPLICATE.FIRST;
-                        ste.duplicate = SourceTextEntry.DUPLICATE.NEXT;
-                    } else {
-                        // already processed, and this is not first duplicate
-                        ste.duplicate = SourceTextEntry.DUPLICATE.NEXT;
-                    }
-                }
-
-                if (prevSte == null) {
+                    // Note first appearance of this STE
                     exists.put(ste.getSrcText(), ste);
+                } else {
+                    // Note duplicate of already-seen STE
+                    prevSte.numberOfDuplicates++;
+                    ste.firstInstance = prevSte;
                 }
             }
         }

@@ -61,12 +61,17 @@ public class SourceTextEntry {
         NEXT
     };
 
-    /** If entry with the same source already exist in project. */
-    DUPLICATE duplicate;
+    /** 
+     * The number of duplicates of this STE. Will be non-zero for the FIRST duplicate,
+     * zero for NONE and NEXT STEs. See {@link #getDuplicate()} for full logic.
+     */
+    int numberOfDuplicates;
     
-    private int numOfDups;
-    
-    private SourceTextEntry firstInstance;
+    /**
+     * The first duplicate of this STE. Will be null for NONE and FIRST STEs,
+     * non-null for NEXT STEs. See {@link #getDuplicate()} for full logic.
+     */
+    SourceTextEntry firstInstance;
 
     /** Holds the number of this entry in a project. */
     private final int m_entryNum;
@@ -108,7 +113,7 @@ public class SourceTextEntry {
             }
             this.protectedParts = protectedParts.toArray(new ProtectedPart[protectedParts.size()]);
         }
-        this.numOfDups = 0;
+        this.numberOfDuplicates = 0;
         this.firstInstance = null;
     }
 
@@ -138,19 +143,14 @@ public class SourceTextEntry {
 
     /** If entry with the same source already exist in project. */
     public DUPLICATE getDuplicate() {
-        return duplicate;
+        if (firstInstance != null) {
+            return DUPLICATE.NEXT;
+        }
+        return numberOfDuplicates == 0 ? DUPLICATE.NONE : DUPLICATE.FIRST;
     }
 
     public int getNumberOfDuplicates() {
-        return firstInstance == null ? numOfDups : firstInstance.getNumberOfDuplicates();
-    }
-    
-    public void incrementDuplicates() {
-        numOfDups++;
-    }
-    
-    public void setFirstInstance(SourceTextEntry firstInstance) {
-        this.firstInstance = firstInstance;
+        return firstInstance == null ? numberOfDuplicates : firstInstance.getNumberOfDuplicates();
     }
     
     public String getSourceTranslation() {

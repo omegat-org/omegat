@@ -568,8 +568,6 @@ public class SegmentBuilder {
     private String createSegmentMarkText() {
         String text = OConsts.segmentMarkerString;
 
-        // trim and replace spaces to non-break spaces
-        text = text.trim().replace(' ', '\u00A0');
         //replace placeholder with actual segment number
         if (text.contains("0000")) {
             String replacement = NUMBER_FORMAT.format(segmentNumberInProject);
@@ -581,6 +579,9 @@ public class SegmentBuilder {
             }
             text = text.replace("0000", replacement);
         }
+        
+        // trim and replace spaces to non-break spaces
+        text = text.trim().replace(' ', '\u00A0');
 
         return text;
     }

@@ -60,6 +60,7 @@ public class GoToSegmentDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
+        segmentField.enableInputMethods(false);
         segmentField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {

@@ -27,8 +27,12 @@
   - Show the number of non-unique segment instances in the segment markers
   https://sourceforge.net/p/omegat/feature-requests/1068/
 
-   - Contextual menu to jump to another instance of non-unique segments
+  - Contextual menu to jump to another instance of non-unique segments
   https://sourceforge.net/p/omegat/feature-requests/1067/
+
+  - OmegaT can be "branded" for custom deployments
+  https://sourceforge.net/p/omegat/feature-requests/1069/
+
 
   Other enhancements:
   
@@ -50,11 +54,8 @@ There's also a new tab for colour selection.
   - The Project Files dialog can be hidden on project load via hidden preference
 (project_files_show_on_load)
 
-  - OmegaT can be "branded" for custom deployments
-  https://sourceforge.net/p/omegat/feature-requests/1069/
-
   - It is possible to define the text and background colour of modification 
-information
+information and the active segment's source and target
 
 
   Bug fixes:

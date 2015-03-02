@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.9
 ----------------------------------------------------------------------
-  15 Enhancements
+  16 Enhancements
   12 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
@@ -59,6 +59,7 @@ information and the active segment's source and target
 
   - Dialogs are now centered against the main window instead of the screen
 
+  - The Visio filter was updated to remove unneeded tags in Visio 2010 documents
 
   Bug fixes:
 

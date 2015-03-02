@@ -30,7 +30,7 @@
   - Contextual menu to jump to another instance of non-unique segments
   https://sourceforge.net/p/omegat/feature-requests/1067/
 
-  - OmegaT can be "branded" for custom deployments
+  - Make it easy to "brand" OmegaT for custom deployments 
   https://sourceforge.net/p/omegat/feature-requests/1069/
 
 

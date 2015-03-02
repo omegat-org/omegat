@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.9
 ----------------------------------------------------------------------
-  14 Enhancements
+  15 Enhancements
   12 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
@@ -56,6 +56,8 @@ There's also a new tab for colour selection.
 
   - It is possible to define the text and background colour of modification 
 information and the active segment's source and target
+
+  - Dialogs are now centered against the main window instead of the screen
 
 
   Bug fixes:

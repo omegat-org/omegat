@@ -227,7 +227,7 @@
           <row><entry>Convalida i tag</entry><entry><keycap>Maiusc+Ctrl+V</keycap></entry><entry>toolsValidateTagsMenuItem</entry></row>
           <row><entry>Convalida i tag per il documento attivo</entry><entry/><entry>toolsSingleValidateTagsMenuItem</entry></row>
           <row><entry>Statistiche</entry><entry/><entry>toolsShowStatisticsStandardMenuItem</entry></row>
-          <row><entry>Concordanza statistiche</entry><entry/><entry>toolsShowStatisticsMatchesMenuItem</entry></row>
+          <row><entry>Statistiche delle concordanze</entry><entry/><entry>toolsShowStatisticsMatchesMenuItem</entry></row>
           <row><entry>Statistiche delle concordanze per file</entry><entry/><entry>toolsShowStatisticsMatchesPerFileMenuItem</entry></row>
         </tbody>
       </tgroup>

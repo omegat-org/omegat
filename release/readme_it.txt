@@ -224,7 +224,7 @@ Altri contributi:
   Sabine Cretella
   Dmitri Gabinski
   Jean-Christophe Helary (gestore della localizzazione)
-  Vito Smolej (gestore della documentazione)
+  Vincent Bidaux (gestore della documentazione)
   Samuel Murray
   Marc Prior (webmaster)
   e tantissime altre persone che hanno contribuito

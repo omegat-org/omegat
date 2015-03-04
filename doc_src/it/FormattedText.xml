@@ -160,9 +160,9 @@
         <primary>Tag</primary> <secondary>Convalida di gruppo</secondary>
       </indexterm></title>
 
-    <para>La funzione di convalida di tag rileva le modifiche alle sequenze di tag (sia deliberate, sia accidentali) e mostra i segmenti coinvolti. L'avvio di questa funzione – <guimenuitem>Ctrl+T<indexterm class="singular">
+    <para>La funzione di convalida di tag rileva le modifiche alle sequenze di tag (sia deliberate, sia accidentali) e mostra i segmenti coinvolti. L'avvio di questa funzione – <guimenuitem>Ctrl+Maiusc+T<indexterm class="singular">
         <primary>Scorciatoie</primary> <secondary>Convalida dei tag - Ctrl+T</secondary>
-      </indexterm></guimenuitem> - apre una finestra che contiene tutti i segmenti nel file che contengono tag danneggiati sospetti o scorretti all'interno della traduzione. La funzione di convalida dei tag rende semplice la loro riparazione e la ricreazione del documento di arrivo. La finestra che si apre premendo <guimenuitem>Ctrl+T</guimenuitem> mostra una tabella a tre colonne con un collegamento al segmento, quello di partenza e quello di arrivo</para>
+      </indexterm></guimenuitem> - apre una finestra che che mostra tutti i segmenti nel file che contiene i tag danneggiati sospetti o scorretti all'interno della traduzione. La funzione di convalida dei tag rende semplice la loro riparazione e la ricreazione del documento di arrivo. La finestra che si apre premendo <guimenuitem>Ctrl+Maiusc+V</guimenuitem> mostra una tabella a tre colonne con un collegamento al segmento, quello di partenza e quello di arrivo</para>
 
     <figure id="tag.validation">
       <title>Voce di convalida dei tag</title>
@@ -178,7 +178,7 @@
       </mediaobject>
     </figure>
 
-    <para>I tag sono evidenziati in grassetto azzurro per un confronto migliore tra il contenuto originale e quello tradotto. Fare clic sul collegamento per aprire il segmento nell'editor. Correggere l'errore, se necessario (nel caso precedente è la coppia &lt;i2&gt;&lt;/i2&gt; mancante) e premere <guimenuitem>Ctrl+T</guimenuitem> per tornare alla finestra di convalida e correggere gli altri errori. Gli errori sui tag nella traduzione sono errori durante nelle sequenze dei tag, che non rispettano lo stesso ordine e numero del segmento originale. Certe elaborazioni sono necessarie e non creano problemi, altre ne possono causare al momento della creazione del documento di arrivo.</para>
+    <para>I tag sono evidenziati in grassetto azzurro per un confronto migliore tra il contenuto originale e quello tradotto. Fare clic sul collegamento per aprire il segmento nell'editor. Correggere l'errore, se necessario (nel caso precedente è la coppia &lt;i2&gt;&lt;/i2&gt; mancante) e premere <guimenuitem>Ctrl+Maiusc+V</guimenuitem> per tornare alla finestra di convalida e correggere gli altri errori. Gli errori sui tag nella traduzione sono errori durante nelle sequenze dei tag, che non rispettano lo stesso ordine e numero del segmento originale. Certe elaborazioni sono necessarie e non creano problemi, altre ne possono causare al momento della creazione del documento di arrivo.</para>
   </section>
 
   <section id="hints.for.tag.management">

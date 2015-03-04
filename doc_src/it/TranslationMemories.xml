@@ -85,6 +85,22 @@
         </varlistentry>
 
         <varlistentry>
+          <term>tm/enforce folder</term>
+
+          <listitem>
+            <para>Se si è certi che una TMX è più accurata del file <filename>project_save.tmx</filename> di OmegaT, inserire questa TMX nella cartella /tm/enforce per sovrascrivere in modo categorico le traduzioni predefinite esistenti.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>tm/mt folder</term>
+
+          <listitem>
+            <para>Nel pannello dell'editor, quando viene inserita una concordanza proveniente da una TMX contenuta in una cartella di nome <emphasis role="bold">mt</emphasis>, lo sfondo del segmento attivo diventa rosso. Lo sfondo ritorna al colore normale se si lascia il segmento.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
           <term><indexterm class="singular">
               <primary>Memorie di traduzione</primary> <secondary>Sottocartelle tm/penalty-xxx</secondary> <seealso>File del progetto</seealso>
             </indexterm>cartelle tm/penalty-xxx</term>
@@ -281,9 +297,9 @@
           <primary>Memorie di traduzione</primary> <secondary>Coppie di lingua alternative</secondary>
         </indexterm></title>
 
-      <para>Potrebbero verificarsi casi in cui è stato creato un progetto, per esempio, con file di origine olandese e una traduzione, diciamo, in Inglese. Si ha ora necessità di una traduzione in Cinese, ma la traduttrice non conosce l'Olandese; ella, tuttavia, padroneggia perfettamente l'Inglese. In questo caso, la memoria di traduzione NL-EN può servire da ponte per aiutare a generare la traduzione NL-ZH.</para>
+      <para>Potrebbero verificarsi casi in cui è stato creato un progetto, per esempio, con file di origine olandese e una traduzione, diciamo, in Inglese. Si ha ora necessità di una traduzione in Cinese, ma la traduttrice non conosce l'Olandese; ella, tuttavia, padroneggia perfettamente l'Inglese. In questo caso, la memoria di traduzione NL-EN può servire da ponte per aiutare a generare la traduzione da NL a ZH.</para>
 
-      <para>La soluzione, nel nostro esempio, è copiare la memoria di traduzione esistente all'interno della sottocartella tm e rinominarla ZH_CN.tmx per indicare la lingua di destinazione della tmx. Alla traduttrice si presenteranno traduzioni in Inglese per i segmenti di partenza in Olandese, che saranno usate per creare la traduzione in Cinese.</para>
+      <para>La soluzione, nel nostro esempio, è copiare la memoria di traduzione esistente all'interno della sottocartella tm/tmx2source/ e rinominarla ZH_CN.tmx per indicare la lingua di destinazione della tmx. Alla traduttrice si presenteranno traduzioni in Inglese per i segmenti di partenza in Olandese, che saranno usate per creare la traduzione in Cinese.</para>
 
       <para><emphasis role="bold">Importante: </emphasis>la TMX di aiuto deve essere rinominata XX_YY.tmx, dove XX_YY è la lingua di destinazione della tmx, per esempio in ZH_CN.tmx, nell'esempio sopra riportato. Il progetto e le lingue di origine della TMX devono essere, ovviamente, identiche - NL nel nostro esempio. Si noti che è possibile solo una TMX per una coppia linguistica specifica, perciò, nel caso in cui fossero presenti più memorie, sarà necessario unirle tutte all'interno del file XX_YY.tmx.</para>
     </section>

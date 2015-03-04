@@ -39,6 +39,26 @@
       </indexterm></title>
 
     <para>Questa finestra contiene un elenco dei filtri dei file disponibili. Se non si desidera utilizzare OmegaT per tradurre i file di un certo tipo, sarà sufficiente togliere la spunta alla casella corrispondente al tipo di file, presente nella colonna &quot;Abilitato&quot;. In questo caso, OmegaT, quando caricherà i progetti, ignorerà questo tipo di file e, quando creerà i documenti di arrivo, li copierà senza apportarvi alcuna modifica. Se si desidera utilizzare di nuovo questo filtro, sarà sufficiente attivare la casella di controllo corrispondente. Fate clic sul pulsante <emphasis role="bold">Predefiniti</emphasis> per riportare i filtri dei file alle impostazioni predefinite. Per modificare il modo in cui il filtro interviene sui file e sulla loro codifica, selezionare dall'elenco il filtro e fare clic su <emphasis role="bold">Modifica</emphasis>.</para>
+
+    <para>La finestra di dialogo permette di abilitare o disabilitare le seguenti opzioni:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Rimuovi i tag di inizio e fine: disattivare questa opzione per visualizzare tutti i tag, incluso quelli di inizio e fine. Attenzione: nei formati Microsoft Open XML (docx, xlsx, e via discorrendo), se tutti i tag sono visualizzati, NON inserire del testo prima del primo tag (è un tag tecnico che deve sempre iniziare il segmento).</para>
+      </listitem>
+
+      <listitem>
+        <para>Rimuovi lo spazio vuoto di inizio e fine nei progetti non segmentati: OmegaT, per impostazione predefinita, rimuove lo spazio vuoto di inizio e fine. Nei progetti non segmentati è possibile mantenerlo, disattivando questa opzione.</para>
+      </listitem>
+
+      <listitem>
+        <para>Preserva gli spazi per tutti i tag: attivare questa opzione se i documenti di partenza contengono spazi significativi (per ragioni compositive) che non devono essere ignorati.</para>
+      </listitem>
+
+      <listitem>
+        <para>Ignora il contesto dei file quando si identificano segmenti con traduzioni alternative: per impostazione predefinita, OmegaT utilizza il nome del file di partenza come parte identificativa di una traduzione alternativa. Se l'opzione è attivata, il nome del file di partenza non verrà usato e le traduzioni alternative avranno effetto in qualsiasi file, così come le altre corrispondenze di contesto (segmenti precedenti/successivi oppure qualche tipo di identificativo che dipende dal formato del file).</para>
+      </listitem>
+    </itemizedlist>
   </section>
 
   <section id="filters.options">

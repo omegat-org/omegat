@@ -80,7 +80,7 @@
                 <primary>Scorciatoie</primary> <secondary>Convalida dei tag - Ctrl+T</secondary>
               </indexterm>Finestra di convalida dei tag</guimenuitem></entry>
 
-            <entry><para>Usata per convalidare i tag (aprire con <keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo>, chiudere con <keycap>Esc</keycap>)</para></entry>
+            <entry><para>Usata per convalidare i tag (aprire con <keycombo> <keycap>Ctrl</keycap> <keycap>Maiusc</keycap> <keycap>V</keycap> </keycombo>, chiudere con <keycap>Esc</keycap>)</para></entry>
           </row>
 
           <row>
@@ -133,7 +133,7 @@
 
           <row>
             <entry><guimenuitem>Tipo di carattere<indexterm class="singular">
-                <primary>Impostazioni progetto</primary> <secondary>Carattere</secondary>
+                <primary>Tipo di carattere</primary>
               </indexterm></guimenuitem></entry>
 
             <entry><para>Usata per modificare il carattere usato da <application>OmegaT</application> visualizzare i file di partenza, la traduzione, le corrispondenze e i termini di glossario (si accede da <menuchoice> <guimenu>Opzioni</guimenu> <guimenuitem>Tipo di carattere...</guimenuitem> </menuchoice>, si chiude con <keycap>Esc</keycap>)</para></entry>
@@ -141,9 +141,7 @@
 
           <row>
             <entry><guimenuitem>Filtri dei file<indexterm class="singular">
-                <primary>Impostazioni del progetto</primary> <secondary>Filtri dei file</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>Menu Opzioni</primary> <secondary>Filtri dei file</secondary>
+                <primary>Filtri dei file</primary>
               </indexterm></guimenuitem></entry>
 
             <entry>Usata per regolare la gestione dei formati di file supportati (si accede da <menuchoice> <guimenu>Opzioni</guimenu> <guimenuitem>Filtri dei file...</guimenuitem> </menuchoice>, si chiude con <keycap>Esc</keycap>)</entry>
@@ -151,9 +149,7 @@
 
           <row>
             <entry><guimenuitem>Segmentazione<indexterm class="singular">
-                <primary>Impostazioni del progetto</primary> <secondary>Segmentazione</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>Menu Opzioni</primary> <secondary>Segmentazione</secondary>
+                <primary>Segmentazione</primary>
               </indexterm></guimenuitem></entry>
 
             <entry>Usata per modificare il modo in cui il testo è segmentato in frasi (si accede da <menuchoice> <guimenu>Opzioni</guimenu> <guimenuitem>Segmentazione</guimenuitem> </menuchoice>, si chiude con <keycap>Esc</keycap>)</entry>
@@ -161,9 +157,7 @@
 
           <row>
             <entry><guimenuitem>Comportamento di modifica<indexterm class="singular">
-                <primary>Menu Opzioni</primary> <secondary>Comportamento di modifica</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>Impostazioni del progetto</primary> <secondary>Comportamento di modifica</secondary>
+                <primary>Comportamento di modifica</primary>
               </indexterm></guimenuitem></entry>
 
             <entry>Usata per modificare come <application>OmegaT</application> si comporterà quando viene trovata una concordanza che si ripete tra i segmenti (si accede da <menuchoice> <guimenu>Opzioni</guimenu> <guimenuitem>Comportamento...</guimenuitem> </menuchoice>, si chiude con <keycap>Esc</keycap>)</entry>
@@ -385,7 +379,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>la percentuale di concordanza quando viene utilizzato il plugin tokenizer</para>
+          <para>la percentuale di concordanza (tenendo conto dei tokenizer)</para>
         </listitem>
       </itemizedlist>
 
@@ -599,7 +593,7 @@
           <primary>Finestre e pannelli in OmegaT</primary> <secondary>Pannello della Traduzione automatica</secondary>
         </indexterm></title>
 
-      <para>Se aperto, il pannello della traduzione automatica contiene i suggerimenti, per il segmento attivo, provenienti dagli strumenti di traduzione automatica. Premere <keysym>Ctrl+M</keysym> sostituire la traduzione del segmento attivo con quella della traduzione automatica. È possibile reperire ulteriori informazioni nel capitolo <link linkend="chapter.machine.translate">Traduzione automatica</link></para>
+      <para>Se aperto, il pannello della traduzione automatica contiene i suggerimenti, per il segmento attivo, provenienti dagli strumenti di traduzione automatica. Premere <keysym>Ctrl+M</keysym> per sostituire la traduzione del segmento attivo con quella della traduzione automatica. È possibile reperire ulteriori informazioni nel capitolo <link linkend="chapter.machine.translate">Traduzione automatica</link></para>
     </section>
 
     <section>
@@ -629,7 +623,11 @@
 
       <itemizedlist>
         <listitem>
-          <para>l'elenco di tutti i file da tradurre che compongono il progetto. Si tratta dei file contenuti nella cartella dei file di partenza in un formato che OmegaT è in grado di riconoscere. Quando si fa clic su uno dei file, questo verrà aperto e su di esso si potrà immediatamente iniziare a lavorare.</para>
+          <para>il numero totale dei file traducibili nel progetto. Si tratta dei file contenuti nella cartella /source in un formato che OmegaT è in grado di riconoscere. Il numero è visualizzato tra parentesi, affianco al titolo &quot;File del progetto&quot;</para>
+        </listitem>
+
+        <listitem>
+          <para>l'elenco di tutti i file da tradurre che compongono il progetto. Quando si fa clic su uno dei file, questo verrà aperto e su di esso si potrà immediatamente iniziare a lavorare. Nota: i nomi dei file (nella prima colonna) si possono ordinare alfabeticamente premendo l'intestazione di colonna. È anche possibile modificare la posizione di un nome di file, facendovi clic sopra e premendo i pulsanti <emphasis>Sposta...</emphasis>.</para>
         </listitem>
       </itemizedlist>
 

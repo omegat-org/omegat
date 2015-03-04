@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.TokenizerPlugin.inOmegaT">
-  <title>Plugin Tokenizer<indexterm class="singular">
-      <primary>Plugin</primary> <secondary>Tokenizer</secondary>
+<appendix id="appendix.Tokenizers.inOmegaT">
+  <title>Tokenizer<indexterm class="singular">
+      <primary>Tokenizer</primary>
     </indexterm></title>
 
   <section>
@@ -40,14 +40,16 @@
   </section>
 
   <section>
-    <title>Installazione e uso</title>
+    <title>Selezione delle lingue</title>
 
-	<para>I tokenizer sono inclusi in OmegaT. OmegaT seleziona automaticamente un tokenizer per la lingua di partenza e quella di destinazione, in base alle impostazioni linguistiche del progetto. È possibile selezionare un altro tokenizer, o una sua versione diversa, dalla finestra delle Proprietà del progetto.</para>
+    <para>I tokenizer sono inclusi in OmegaT e attivi per impostazione predefinita. OmegaT seleziona automaticamente un tokenizer per la lingua di partenza e quella di destinazione, in base alle impostazioni linguistiche del progetto. È possibile selezionare un altro tokenizer (lingua del tokenizer) o una versione diversa (comportamento del tokenizer) dalla finestra delle proprietà del progetto.</para>
 
-	<warning>
-		<title>Incompatibilità</title>
-		<para>OmegaT non si avvierà se vengono trovati i tokenizer nella cartella /plugin. Rimuovere tutti i tokenizer dalla cartella /plugin prima di avviare OmegaT.</para>
-	</warning>
-	
+    <para>Nel caso in cui non esista un tokenizer per le lingue attive nel progetto, OmegaT utilizzerà invece Hunspell (assicurarsi in questo caso che siano installati i relativi dizionari Hunspell).</para>
+
+    <warning>
+      <title>Incompatibilità</title>
+
+      <para>OmegaT non si avvierà se vengono trovati i tokenizer nella cartella /plugin. Rimuovere tutti i tokenizer dalla cartella /plugin prima di avviare OmegaT.</para>
+    </warning>
   </section>
 </appendix>

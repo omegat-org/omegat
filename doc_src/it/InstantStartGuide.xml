@@ -78,7 +78,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Per rivedere le impostazioni iniziali del progetto, aprire la finestra delle impostazioni tramite la combinazione <keycap>Ctrl+E</keycap>. Per visualizzare l'elenco dei file nel progetto, aprire la finestra dei <guilabel>File del progetto</guilabel> tramite la combinazione <keycap>Ctrl+L</keycap>.</para>
+        <para>Per rivedere le impostazioni iniziali del progetto, aprire la finestra delle proprietà tramite la combinazione <keycap>Ctrl+E</keycap>. Per visualizzare l'elenco dei file nel progetto, aprire la finestra dei <guilabel>File del progetto</guilabel> tramite la combinazione <keycap>Ctrl+L</keycap>.</para>
       </listitem>
     </itemizedlist>
 

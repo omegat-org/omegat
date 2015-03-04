@@ -135,6 +135,12 @@
 
           <entry>alterna la direzione RTL-LTR</entry>
         </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Barra spaziatrice</emphasis></entry>
+
+          <entry>apre una finestra di dialogo con i suggerimenti di contesto (Mac: <emphasis role="bold">Esc</emphasis>). Usare <emphasis role="bold">Ctrl+PgSu/PgGiù</emphasis> (Cmd+PgSu/PgGiù su Mac) per passare in modo sequenziale alle <emphasis>voci di glossario</emphasis>, le <emphasis>voci del testo automatico</emphasis>, i <emphasis>tag mancanti</emphasis> e le opzioni della <emphasis>tabella caratteri</emphasis>.</entry>
+        </row>
       </tbody>
     </tgroup>
   </table>
@@ -166,6 +172,8 @@
   <para>Il tasto &quot;Maiusc&quot; non presenta, di per sé, speciali comportamenti: se premuto, tutti i tasti spostano il cursore in base alla funzione attribuita loro, ad eccezione della combinazione <literal>Maiusc+Invio</literal>, che inserisce un'interruzione di riga nel testo.</para>
 
   <para>Comandi di tipo globale Seleziona tutto (<keycap>Ctrl+A</keycap>), Incolla (<emphasis role="bold">Ctrl+V</emphasis>), Taglia (<emphasis role="bold">Ctrl+X</emphasis>), Copia (<emphasis role="bold">Ctrl+C)</emphasis>, Inserisci corrispondenza <emphasis role="bold">(Ctrl+I</emphasis>) e Inserisci il testo di partenza (<emphasis role="bold">Ctrl+Maiusc+I</emphasis>) agiscono, in linea di principio, sul testo all'interno del solo segmento correntemente aperto.</para>
+  
+  <para>È possibile spostarsi da un pannello all'altro (per esempio, dal pannello dell'Editor a quello delle Concordanze parziali) tramite <keycap>Ctrl+Tab</keycap>. <keycap>Ctrl+Maiusc+Tab</keycap> riporta al pannello precedente. Nei pannelli funzionano le scorciatoie <keycap>Ctrl+A</keycap> e <keycap>Ctrl+C</keycap>, che permettono di copiare negli appunti tutta o parte delle informazioni.</para>
 
   <para>Si noti che è possibile riassegnare le scorciatoie in base alle proprie preferenze. <link linkend="ch04.shortcuts.customization">Vedere Appendice - Personalizzazione delle scorciatoie</link></para>
 </appendix>

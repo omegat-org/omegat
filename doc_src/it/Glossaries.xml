@@ -11,7 +11,7 @@
 
   <para>Se un progetto <application>OmegaT</application> contiene uno o più glossari, tutti i termini presenti nel glossario trovati anche nel segmenti corrente saranno visualizzati automaticamente all'interno del visualizzatore Glossario.</para>
 
-  <para>La sua posizione e il suo nome sono definiti all'interno della finestra delle proprietà del progetto. L'estensione deve essere <filename>.txt</filename>(se così non fosse, essa verrà aggiunta). Il file deve essere contenuto all'interno della cartella <filename>/glossary</filename>, ma può trovarsi anche in un'ulteriore sottocartella (per es., <filename>glossary/sub/glossario.txt</filename>). Non è obbligatorio che il file esista, esso verrà creato (se necessario) quando si aggiunge una voce di glossario. Se il file esiste già, non sarà fatta alcuna verifica sul formato o sul gruppo di caratteri del file: le nuove voci saranno sempre aggiunte in formato con spazi separati da tabulazione e in UTF-8. Il contenuto esistente non verrà alterato, dunque i danni a un file già presente saranno molto limitati.</para>
+  <para>La sua posizione e il suo nome sono definiti all'interno della finestra delle proprietà del progetto. L'estensione deve essere <filename>.txt</filename> o <filename>.utf8</filename> (se così non fosse, essa verrà aggiunta). Il file deve essere contenuto all'interno della cartella <filename>/glossary</filename>, ma può trovarsi anche in un'ulteriore sottocartella (per es., <filename>glossary/sub/glossario.txt</filename>). Non è obbligatorio che il file esista, esso verrà creato (se necessario) quando si aggiunge una voce di glossario. Se il file esiste già, non sarà fatta alcuna verifica sul formato o sul gruppo di caratteri del file: le nuove voci saranno sempre aggiunte in formato con spazi separati da tabulazione e in UTF-8. Il contenuto esistente non verrà alterato, dunque i danni a un file già presente saranno molto limitati.</para>
 
   <section>
     <title>Uso</title>
@@ -72,15 +72,19 @@
 
     <para>I file di glossario sono dei semplici file di solo testo composti da elenchi su tre colonne, delimitate da tabulatori, con il termine di partenza e quello di destinazione inseriti, rispettivamente, nella prima e nella seconda colonna. La terza colonna è utilizzata per l'inserimento di ulteriori informazioni. È possibile avere voci senza il termine di destinazione, per esempio solo col termine di partenza e il commento relativo.</para>
 
-    <para>I file di glossario possono prevedere la codifica predefinita dal sistema (indicata dall'estensione .tab) o in UTF-8 (estensione .utf8). Si preferisce la codifica Unicode (UTF8) per ovvie ragioni. È supportato anche il formato CSV. Questo formato è uguale a quello separato da tabulazione: termine sorgente, termine di destinazione. I campi del commento sono separati da una virgola ','. Le stringhe possono essere racchiuse da virgolette &quot;, che permettono di contenere una virgola all'interno di una stringa:</para>
+    <para>I file di glossario possono prevedere la codifica predefinita dal sistema (indicata dall'estensione .tab) o in UTF-8 (estensione .utf8) oppure in UTF-16 LE (estensione .txt). È supportato anche il formato CSV. Questo formato è uguale a quello separato da tabulazione: termine sorgente, termine di destinazione. I campi del commento sono separati da una virgola ','. Le stringhe possono essere racchiuse da virgolette &quot;, che permettono di contenere una virgola all'interno di una stringa:</para>
 
     <para><literal>&quot;This is a source term, which contains a comma&quot;,&quot;questo è un termine di partenza, che contiene una virgola&quot;</literal></para>
 
     <para>Oltre al formato di solo testo, è supportato anche il formato TBX <indexterm class="singular">
         <primary>Glossari</primary> <secondary>Formato TBX</secondary>
-      </indexterm>. TBX - Term Base eXchange - è lo standard aperto basato su XML per l'interscambio di dati terminologici strutturati; TBX è stato riconosciuto come standard internazionale da LISA e ISO. Se si possiede già un sistema di gestione terminologica - per esempio, MultiTerm - è molto probabile che esso preveda l'esportazione dei dati terminologici nel formato TBX. <ulink url="http://www.microsoft.com/Language/en-US/Terminology.aspx">raccolta di terminologia Microsoft</ulink> <indexterm class="singular">
+      </indexterm> come formato di glossario a sola lettura. Il file <filename>.tbx</filename> deve essere contenuto nella cartella <filename>/glossary</filename>, ma può trovarsi anche in un'ulteriore sotto cartella (per es., <filename>glossary/sub/mioglossario.tbx</filename>).</para>
+
+    <para>TBX - Term Base eXchange - è lo standard aperto basato su XML per l'interscambio di dati terminologici strutturati; TBX è stato riconosciuto come standard internazionale da LISA e ISO. Se si possiede già un sistema di gestione terminologica, è molto probabile che esso preveda l'esportazione dei dati terminologici nel formato TBX. La <ulink url="http://www.microsoft.com/Language/en-US/Terminology.aspx">raccolta di terminologia Microsoft</ulink> <indexterm class="singular">
         <primary>Glossari</primary> <secondary>Raccolta di terminologia Microsoft</secondary>
-      </indexterm> può essere scaricata in quasi cento lingue e può servire come punto di partenza per la creazione di un glossario informatico.</para>
+      </indexterm> può essere scaricata in quasi cento lingue è può servire come punto di partenza per la creazione di un glossario informatico.</para>
+
+    <para>Nota: non sembra affidabile il prodotto <filename>.tbx</filename> di MultiTerm (novembre 2013), è meglio invece utilizzare il suo prodotto <filename>.tab</filename>.</para>
   </section>
 
   <section>
@@ -106,7 +110,17 @@
         <primary>Glossari</primary> <secondary>Posizione del file di glossario scrivibile</secondary>
       </indexterm>La posizione del file del glossario scrivibile può essere decisa in <guimenuitem>Progetto &gt; finestra Proprietà...</guimenuitem>. Le estensioni accettate sono <filename>TXT</filename> e <filename>UTF8</filename></para>
 
-    <para><emphasis role="bold">Nota:</emphasis> esistono, ovviamente, altri metodi per creare un semplice file con voci delimitate da tabulazione. Nulla vieta, per esempio, di usare Notepad++ in Windows o GEdit in Linux, oppure un foglio di calcolo elettronico, per questo scopo: si possono usare tutte le applicazioni in grado di gestire gli UTF8 e di mostrare gli spazi bianchi (in modo da non perdere di vista i caratteri <keycap>TAB</keycap> richiesti).</para>
+    <para><emphasis role="bold">Nota:</emphasis> esistono, ovviamente, altri metodi per creare un semplice file con voci delimitate da tabulazione. Nulla vieta, per esempio, di usare Notepad++ in Windows o GEdit in Linux, oppure un foglio di calcolo elettronico, per questo scopo: si possono usare tutte le applicazioni in grado di gestire gli UTF-8 (o gli UTF-16 LE) e di mostrare gli spazi bianchi (in modo da non perdere di vista i caratteri <keycap>TAB</keycap> richiesti).</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glossari</primary> <secondary>Priorità</secondary>
+      </indexterm>Glossario prioritario</title>
+
+    <para>I risultati ottenuti dal glossario prioritario (per impostazione predefinita, glossary/glossario.txt) appaiono nelle prime posizioni all'interno del pannello Glossario e nei Suggerimenti.</para>
+
+    <para>Dato che le voci possono combinare parole provenienti sia dai glossari prioritari, sia da quelli non prioritari, le parole provenienti dal glossario prioritario sono visualizzate in grassetto.</para>
   </section>
 
   <section>
@@ -114,7 +128,7 @@
         <primary>Glossari</primary> <secondary>Trados MultiTerm</secondary>
       </indexterm>Uso di Trados MultiTerm</title>
 
-    <para>I dati esportati da Trados MultiTerm possono essere usati come glossari <application>OmegaT</application> senza modifiche, sempre che essi abbiano l'estensione di file <filename>.tab</filename> e che i campi dei termini di arrivo e partenza siano rispettivamente il primo e il secondo campo. Se si esporta utilizzando l'opzione di sistema &quot;Esportazione delimitata da tab&quot;, si dovranno eliminare le prime 5 colonne (Seq. Nr, Date created, ecc). Le versioni recenti di MultiTerm supportano l'esportazione al formato TBX.</para>
+    <para>I dati esportati da Trados MultiTerm possono essere usati come glossari <application>OmegaT</application> senza modifiche, sempre che essi abbiano l'estensione di file <filename>.tab</filename> e che i campi dei termini di arrivo e partenza siano rispettivamente il primo e il secondo campo. Se si esporta utilizzando l'opzione di sistema &quot;Esportazione delimitata da tab&quot;, si dovranno eliminare le prime 5 colonne (Seq. Nr, Date created, ecc).</para>
   </section>
 
   <section>
@@ -144,7 +158,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Il file di glossario non possiede l'estensione corretta (.tab o .utf8).</para>
+        <para>Il file di glossario non possiede l'estensione corretta (.tab, .utf8 o .txt).</para>
       </listitem>
     </itemizedlist>
 

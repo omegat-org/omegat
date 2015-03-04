@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.ScriptingPlugin.inOmegaT">
-  <title>Plugin per le azioni di script<indexterm class="singular">
-      <primary>Plugin</primary> <secondary>Azioni di script</secondary>
+<appendix id="appendix.Scripts.inOmegaT">
+  <title>Script<indexterm class="singular">
+      <primary>Script</primary>
     </indexterm></title>
 
   <section>
     <title>Introduzione</title>
 
-    <para>OmegaT-Scripting consente di avviare script scritti in diversi linguaggi, all'interno di OmegaT.</para>
+    <para>OmegaT consente di avviare script scritti in diversi linguaggi, all'interno di OmegaT.</para>
   </section>
 
   <section>
-    <title>Installazione e uso</title>
+    <title>Uso</title>
 
-    <para>Il plugin di script per OmegaT è scaricabile dal <ulink url="http://sourceforge.net/projects/omegat-plugins/files">sito di download dei plugin di OmegaT</ulink>. Decomprimere i file e posizionarli nella cartella &quot;plugins&quot; che si trova nella cartella di installazione di OmegaT, ossia quella in cui è presente OmegaT.jar. Se la cartella &quot;plugins&quot; non esiste, crearla.</para>
-
-    <para>Questo aggiunge un nuovo sottomenu <guisubmenu> Strumenti &gt; </guisubmenu><guisubmenu>Azioni di script.</guisubmenu> Nel sottomenu <guisubmenu>Azioni di script</guisubmenu> sono presenti dodici segnaposti disponibili per gli script. Facendo clic su <guisubmenu>Azioni di script</guisubmenu> si apre la finestra di dialogo per le azioni:<screenshot> <screeninfo>finestra di dialogo per le azioni di script</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
+    <para>Facendo clic su <guisubmenu>Strumenti &gt; </guisubmenu><guisubmenu>Azioni di script</guisubmenu> si apre la finestra di dialogo per le azioni:<screenshot> <screeninfo>Azioni di script</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
 
     <para>La finestra delle Azioni di script consente di caricare uno script esistente all'interno dell'area di testo e avviarlo nel progetto attivo aperto. Per personalizzare le funzionalità di script, osservare la procedura seguente:</para>
 
@@ -38,17 +36,17 @@
       </listitem>
     </itemizedlist>
 
+    <para>Per impostazione predefinita, gli script vengono memorizzati nella cartella &quot;scripts&quot; che si trova nella cartella di installazione di OmegaT (quella in cui è presente il file OmegaT.jar).</para>
+
+    <para>È possibile aggiungere i nuovi script in quella cartella, essi appariranno nell'elenco degli script disponibili all'interno della finestra Azioni di script.</para>
+  </section>
+
+  <section>
+    <title>Linguaggi delle azioni di script</title>
+
     <para>Sono stati implementati i seguenti linguaggi di script:</para>
 
     <para><itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">NetRexx</emphasis> (http://www.netrexx.org/): supporta la sintassi classica REXX, senza parole chiave riservate, e con considerevoli aggiunte per il supporto della programmazione orientata agli oggetti, in una forma compatibile con il modello di oggetti Java. Tutte le librerie di classe Java esistenti possono essere usate senza modifiche e senza speciali configurazioni; allo stesso tempo, un programmatore Java può scegliere se usare solo la classe Rexx dal pacchetto di runtime per la gestione avanzata delle stringhe all'interno dei programmi sorgente di sintassi Java.</para>
-        </listitem>
-      </itemizedlist><itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">XSLT</emphasis> (Extensible Stylesheet Language Transformations): è un linguaggio dichiarativo basato su XML, utilizzato per la trasformazione dei documenti XML. Il documento originale non viene modificato: ne viene, invece, creato uno nuovo basato sul contenuto di un documento esistente. Il nuovo documento può essere serializzato (output) dal processore in sintassi XML standard o in altro formato, come HTML o solo testo. XSLT è in gran parte utilizzato per convertire dati tra diversi schemi XML o per convertire dati XML all'interno di pagine web o documenti PDF.</para>
-        </listitem>
-      </itemizedlist><itemizedlist>
         <listitem>
           <para><emphasis role="bold">Groovy</emphasis> (http://groovy.codehaus.org): è un linguaggio dinamico per la Java Virtual machine. Si basa sulle potenzialità Java ma contiene potenti funzioni aggiuntive ispirate da linguaggi come Python, Ruby e Smalltalk.</para>
         </listitem>

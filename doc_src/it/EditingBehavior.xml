@@ -14,7 +14,8 @@
       <imageobject role="html">
         <imagedata fileref="images/EditingBehaviourOptions25.png"/>
       </imageobject>
-	  <imageobject role="fo">
+
+      <imageobject role="fo">
         <imagedata fileref="images/EditingBehaviourOptions25.png"/>
       </imageobject>
     </mediaobject>
@@ -69,11 +70,11 @@
           <listitem>
             <para>Il segmento di origine e le concordanze parziali devono possedere lo stesso elenco di numeri</para>
           </listitem>
-        
+
           <listitem>
             <para>I numeri devono essere esattamente gli stessi tra le concordanze di partenza e quelle di destinazione.</para>
           </listitem>
-        
+
           <listitem>
             <para>Sono considerati solo gli interi e le virgole mobili semplici (utilizzando il punto come carattere decimale, per es., 5.4, ma non 5,4 o 54E-01).</para>
           </listitem>
@@ -132,6 +133,36 @@
 
       <listitem>
         <para>Per evitare traduzioni sbagliate, nel caso siano presenti segmenti che presentano la possibilità di più traduzioni, si può attivare l'opzione che ferma il comando <emphasis role="bold"> Vai al prossimo segmento non tradotto</emphasis> segmento uguale successivo, a prescindere che esso sia stato o no tradotto.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Consenti la modifica dei tag</term>
+
+      <listitem>
+        <para>Disattiva questa opzione per evitare danni ai tag (per es., eliminazione parziale) durante la modifica. La rimozione di un intero tag rimane possibile in questo caso, tramite l'uso del comando Ctrl+Backspace/Canc o selezionando completamente in tag (Ctrl+Maiusc+Sinistra/Destra) e poi eliminandolo (Canc o Ctrl+X).</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Convalida i tag quando esci da un segmento</term>
+
+      <listitem>
+        <para>Attivare questa opzione per essere avvisati delle differenze tra i tag del segmento di partenza e quello di arrivo, ogni volta che si passa a un altro segmento.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Salva lo stato di popolazione automatica</term>
+
+      <listitem>
+        <para>Attivare questa opzione per registrare, nel file <filename>project_save.tmx</filename>, le informazioni che un segmento è stato popolato automaticamente, in modo che possa essere visualizzato, all'interno dell'Editor, con un colore specifico (se, nel menu Vista, è attivata la casella &quot;Evidenzia i segmenti popolati automaticamente&quot;).</para>
       </listitem>
     </varlistentry>
   </variablelist>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.searchandreplace">
+  <title>Cerca e sostituisci<indexterm class="singular">
+      <primary>Ricerca</primary>
+    </indexterm></title>
+
+  <section id="section.searchreplace.window">
+    <title>Finestra di ricerca<indexterm class="singular">
+        <primary>Scorciatoie</primary> <secondary>Cerca e sostituisci - Ctrl+K</secondary>
+      </indexterm></title>
+
+    <para>Aprire la finestra &quot;Cerca e sostituisci&quot; tramite la combinazione di tasti <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo> e inserire nella casella <emphasis>Cerca</emphasis> la parola o l'espressione da sostituire.</para>
+
+    <para>Fare clic sul pulsante <emphasis>Cerca</emphasis> per visualizzare tutte le corrispondenze trovate.</para>
+
+    <para>Inserire la nuova parola, o frase, (le espressioni regolari non sono supportate) nella casella <emphasis>Sostituisci con</emphasis>, poi fare clic su una delle opzioni seguenti:<itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Sostituisci tutto:</emphasis> esegue la sostituzione di tutte le corrispondenze (dopo aver visualizzato una finestra di conferma indicante il numero delle corrispondenze da sostituire).</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Sostituisci:</emphasis> una sostituzione &quot;alla volta&quot;, tramite lo strumento dei pulsanti presenti nella <emphasis role="bold">intestazione del pannello dell'Editor</emphasis>. Fare clic su <emphasis>Sostituisci successivo</emphasis> o <emphasis>Salta</emphasis>, poi terminare la sessione di sostituzione con <emphasis>Fine</emphasis>.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Chiudi:</emphasis> chiude la finestra senza apportare modifiche.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <section>
+      <title>Opzioni di ricerca</title>
+
+      <para>Le opzioni di ricerca sono simili a quelle visualizzate nella <link linkend="section.search.window">finestra di ricerca</link>.</para>
+
+      <para>Ad eccezione di una: attivare <emphasis role="bold">Non tradotti</emphasis> per operare l'operazione di ricerca e sostituzione anche su segmenti non ancora lavorati.</para>
+
+      <para>Per rendere questo possibile (sebbene la funzione Cerca e sostituisci operi solo sulla memoria), OmegaT copia il segmento di partenza nel segmento di destinazione, prima che avvenga l'operazione di sostituzione. Se non viene eseguita alcuna sostituzione in un dato segmento, il segmento di destinazione verrà “svuotato”, ossia resterà non tradotto.</para>
+    </section>
+  </section>
+</chapter>

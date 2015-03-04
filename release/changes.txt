@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.9
 ----------------------------------------------------------------------
-  16 Enhancements
+  17 Enhancements
   12 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
@@ -33,7 +33,6 @@
   - Make it easy to "brand" OmegaT for custom deployments 
   https://sourceforge.net/p/omegat/feature-requests/1069/
 
-
   Other enhancements:
   
   - ILIAS Language File filter. Those files can have the .lang or
@@ -60,6 +59,8 @@ information and the active segment's source and target
   - Dialogs are now centered against the main window instead of the screen
 
   - The Visio filter was updated to remove unneeded tags in Visio 2010 documents
+
+  - For versions including Java, the JRE is now 1.8.0_31 instead of 1.7
 
   Bug fixes:
 

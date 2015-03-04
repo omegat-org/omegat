@@ -135,6 +135,12 @@
 
           <entry>schakelen RTL-LTR</entry>
         </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+spatiebalk</emphasis></entry>
+
+          <entry>open een dialoogvenster met contextuele suggesties (Mac: <emphasis role="bold">Esc</emphasis>). Gebruik <emphasis role="bold">Ctrl+PgUp/PgDn</emphasis> (Cmd+PgUp/PgDn op Mac) om successievelijk te schakelen tussen <emphasis>Items woordenlijsten</emphasis>, <emphasis>Items auto-tekst,</emphasis> <emphasis>Ontbrekende tags</emphasis> en <emphasis>Tabel voor tekens</emphasis> options.</entry>
+        </row>
       </tbody>
     </tgroup>
   </table>
@@ -166,6 +172,8 @@
   <para>De toets &quot;Shift&quot; omvat niet per definitie enig speciaal gedrag: indien de &quot;Shift&quot;-toets is ingedrukt verplaatsen alle toetsen de cursor op de hun gewone manier, behalve in het geval van de combinatie <literal>Shift+Enter</literal>, die een regeleinde in de tekst invoert.</para>
 
   <para>De systeembrede opdrachten Alles selecteren (<keycap>Ctrl+A</keycap>), Plakken (<emphasis role="bold">Ctrl+V</emphasis>), Knippen (<emphasis role="bold">Ctrl+X</emphasis>), kopiëren (<emphasis role="bold">Ctrl+C)</emphasis>, Overeenkomst invoegen <emphasis role="bold">(Ctrl+I</emphasis>) en Bron invoegen (<emphasis role="bold">Ctrl+Shift+I</emphasis>) acteren in principe alleen op de tekst binnen het momenteel geopende segment.</para>
+  
+  <para>Het is mogelijk van het ene naar het andere venster te gaan (bijvoorbeeld vanuit Bewerken naar het venster Fuzzy overeenkomsten) met behulp van <keycap>Ctrl+Tab</keycap>. <keycap>Ctrl+Shift+Tab</keycap> brengt u terug naar het vorige venster. De sneltoetsen <keycap>Ctrl+A</keycap> en <keycap>Ctrl+C</keycap> werken in vensters, wat het mogelijk maakt alle of enige informatie te kopiëren naar het klembord.</para>
 
   <para>Onthoud dat u de sneltoetsen naar uw eigen voorkeuren kunt aanpassen. Zie <link linkend="ch04.shortcuts.customization">appendix Sneltoetsen aanpassen</link></para>
 </appendix>

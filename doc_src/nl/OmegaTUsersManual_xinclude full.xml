@@ -47,11 +47,15 @@
 
   <xi:include href="Searches.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
+  <xi:include href="SearchAndReplace.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
   <xi:include href="Regexp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="Dictionaries.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="Glossaries.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="TaaS.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="MachineTranslation.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 

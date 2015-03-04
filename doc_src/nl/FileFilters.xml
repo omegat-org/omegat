@@ -39,6 +39,26 @@
       </indexterm></title>
 
     <para>Dit dialoogvenster toont de beschikbare bestandsfilters. Als u OmegaT niet wilt gebruiken om bestanden van een bepaald type te vertalen, kunt u het betreffende filter uitschakelen door het keuzevak naast de naam niet te selecteren. OmegaT zal dan de betreffende bestanden weglaten bij het laden van projecten en zal ze ongewijzigd kopiëren bij het maken van de doeldocumenten. Als u het filter opnieuw wilt gebruiken, selecteer dan het keuzevak. Klik op <emphasis role="bold">Standaardinstellingen</emphasis> om de bestandsfilters terug te zetten naar de standaard instellingen. Selecteer het filter uit de lijst en klik op <emphasis role="bold">Bewerken</emphasis> om aan te geven welke bestanden in welke coderingen het filter moet verwerken.</para>
+
+    <para>Het dialoogvenster stelt u in staat de volgende opties in- of uit te schakelen:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Verwijder voorloop en achterliggende tags: deselecteer deze optie om alle tags weer te geven, inclusief de voorloop en achterliggende. Waarschuwing: in indelingen van Microsoft Open XML (docx, xlsx, etc.), als alle tags worden weergegeven, schrijf dan GEEN tekst vóór de eerste tag (het is een technische tag die altijd aan het begin van de tag moet staan).</para>
+      </listitem>
+
+      <listitem>
+        <para>Verwijder voor- en achterliggende witruimte in niet-gesegmenteerde projecten: standaard verwijdert OmegaT voor- en achterliggende witruimte. In niet-gesegmenteerde projecten is het mogelijk deze te behouden door deze optie te deselecteren.</para>
+      </listitem>
+
+      <listitem>
+        <para>Behoud spaties voor alle tags: selecteer deze optie als de brondocumenten significante spaties bevat (om redenen van lay-out) die niet moeten worden genegeerd.</para>
+      </listitem>
+
+      <listitem>
+        <para>Negeer context van bestand bij identificeren van segmenten met wisselende vertalingen: standaard gebruikt OmegaT de naam van het bronbestand als deel van de identificatie van een wisselende vertaling. als de optie is geselecteerd zal de naam van het bronbestand niet worden gebruikt, en alternatieve vertalingen zullen effect hebben in elk bestand zolang als de andere context (vorige/volgende segmenten, of enige soort ID afhankelijk van de bestandsindeling) overeenkomt.</para>
+      </listitem>
+    </itemizedlist>
   </section>
 
   <section id="filters.options">

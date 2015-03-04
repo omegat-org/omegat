@@ -80,7 +80,7 @@
                 <primary>Sneltoetsen</primary> <secondary>Tagvalidatie - Ctrl+T</secondary>
               </indexterm>venster Tags valideren</guimenuitem></entry>
 
-            <entry><para>Gebruikt om tags te valideren (openen met <keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo>, sluiten met <keycap>Esc</keycap>)</para></entry>
+            <entry><para>Gebruikt om tags te valideren (openen met <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>V</keycap> </keycombo>, sluiten met <keycap>Esc</keycap>)</para></entry>
           </row>
 
           <row>
@@ -133,7 +133,7 @@
 
           <row>
             <entry><guimenuitem>Lettertype<indexterm class="singular">
-                <primary>Projectinstellingen</primary> <secondary>lettertype</secondary>
+                <primary>Lettertype</primary>
               </indexterm></guimenuitem></entry>
 
             <entry><para>Gebruikt om het lettertype aan te passen <application>dat door OmegaT wordt gebruikt</application> voor het weergeven van bron, vertaling, overeenkomsten en de termen uit de woordenlijst, (openen met <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Lettertype...</guimenuitem> </menuchoice>, sluiten met <keycap>Esc</keycap>)</para></entry>
@@ -141,9 +141,7 @@
 
           <row>
             <entry><guimenuitem>Bestandsfilters<indexterm class="singular">
-                <primary>Projectinstellingen</primary> <secondary>bestandsfilters</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>menu Opties</primary> <secondary>bestandsfilters</secondary>
+                <primary>Bestandsfilters</primary>
               </indexterm></guimenuitem></entry>
 
             <entry>Gebruikt om de afhandeling van ondersteunde bestandsformaten aan te passen (openen met <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Bestandsfilters...</guimenuitem> </menuchoice>, sluiten met <keycap>Esc</keycap>)</entry>
@@ -151,9 +149,7 @@
 
           <row>
             <entry><guimenuitem>Segmentatie<indexterm class="singular">
-                <primary>Projectinstellingen</primary> <secondary>segmentatie</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>menu Opties</primary> <secondary>Segmentatie</secondary>
+                <primary>Segmentatie</primary>
               </indexterm></guimenuitem></entry>
 
             <entry>Gebruikt om de manier waarop uw tekst wordt opgedeeld in zinnen te wijzigen (openen met <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Segmentatie</guimenuitem> </menuchoice>, sluiten met <keycap>Esc</keycap>)</entry>
@@ -161,9 +157,7 @@
 
           <row>
             <entry><guimenuitem>Bewerken (gedrag)<indexterm class="singular">
-                <primary>menu Opties</primary> <secondary>bewerken (gedrag)</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>Projectinstellingen</primary> <secondary>bewerken (gedrag)</secondary>
+                <primary>Bewerken (gedrag)</primary>
               </indexterm></guimenuitem></entry>
 
             <entry>Gebruikt om te wijzigen hoe <application>OmegaT</application> zich gedraagt bij het doorlopen van de segmenten, (openen met <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Bewerken (gedrag)...</guimenuitem> </menuchoice>, sluiten met <keycap>Esc</keycap>)</entry>
@@ -385,7 +379,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>percentage van overeenkomst als de plug-in tokenizer wordt gebruikt</para>
+          <para>percentage overeenkomst (rekening houdende met tokenizers)</para>
         </listitem>
       </itemizedlist>
 
@@ -599,7 +593,7 @@
           <primary>Vensters in OmegaT</primary> <secondary>venster Machinevertaling</secondary>
         </indexterm></title>
 
-      <para>Het venster Machinevertaling, indien geopend, bevat de suggesties van programma's voor machinevertaling voor het huidige segment. Druk op <keysym>Ctrl+M </keysym>om de vertaling van het huidige segment te vervangen door de voorgestelde vertaling. Meer in het hoofdstuk <link linkend="chapter.machine.translate">Machinevertaling</link></para>
+      <para>Het venster Machinevertaling, indien geopend, bevat de suggesties van programma's voor machinevertaling voor het huidige segment. Druk op <keysym>Ctrl+M</keysym> om de vertaling van het huidige segment te vervangen door de voorgestelde vertaling. Meer in het hoofdstuk <link linkend="chapter.machine.translate">Machinevertaling</link></para>
     </section>
 
     <section>
@@ -629,7 +623,11 @@
 
       <itemizedlist>
         <listitem>
-          <para>de lijst met alle vertaalbare bestanden in het project. Dit zijn de bestanden die aanwezig zijn in de map met bronbestanden in een formaat dat OmegaT kan afhandelen. Klikken op een bestand zal het openen voor vertaling</para>
+          <para>het totale aantal vertaalbare bestanden in het project. Dit zijn de bestanden die aanwezig zijn in de map /source in een indeling die OmegaT kan afhandelen. Dit aantal wordt tussen haakjes weergegeven, naast de titel &quot;Projectbestanden&quot;</para>
+        </listitem>
+
+        <listitem>
+          <para>de lijst met alle vertaalbare bestanden in het project. Klikken op een bestand zal het openen voor vertaling Opmerking: bestandsnamen (in de eerste kolom) kunnen alfabetisch worden gesorteerd door te klikken in de kop. Het is ook mogelijk om de positie van een bestandsnaam te wijzigen door er op te klikken en te drukken op de knoppen <emphasis>Naar ...</emphasis>.</para>
         </listitem>
       </itemizedlist>
 

@@ -162,9 +162,9 @@
         <primary>Tags</primary> <secondary>groep valideren</secondary>
       </indexterm></title>
 
-    <para>De functie Tags valideren detecteert gewijzigde tags (of dat met opzet is gedaan of per ongeluk) en toont de betrokken segmenten. Het activeren van deze functie – <guimenuitem>Ctrl+T<indexterm class="singular">
+    <para>De functie Tags valideren detecteert gewijzigde tags (of dat met opzet is gedaan of per ongeluk) en toont de betrokken segmenten. Het activeren van deze functie – <guimenuitem>Ctrl+Shift+V<indexterm class="singular">
         <primary>Sneltoetsen</primary> <secondary>Tagvalidatie - Ctrl+T</secondary>
-      </indexterm></guimenuitem> - zal een venster openen dat alle segmenten uit het bestand, waarvan wordt vermoed dat ze zijn verbroken of slechte tags zijn, bevat. Repareren van de tags en het opnieuw samenstellen van de doeldocumenten is eenvoudig met de functie Tags valideren. Het venster, dat wordt geopend door te drukken op <guimenuitem>Ctrl+T</guimenuitem>, heeft een kolom met 3 tabellen met een koppeling naar het segment, het originele segment en het doelsegment</para>
+      </indexterm></guimenuitem> - zal een venster openen dat alle segmenten uit het bestand, waarvan wordt vermoed dat ze zijn verbroken of slechte tags zijn, bevat. Repareren van de tags en het opnieuw samenstellen van de doeldocumenten is eenvoudig met de functie Tags valideren. Het venster, dat wordt geopend door te drukken op <guimenuitem>Ctrl+Shift+V</guimenuitem>, heeft een kolom met 3 tabellen met een koppeling naar het segment, het originele segment en het doelsegment</para>
 
     <figure id="tag.validation">
       <title>Invoer bij tagvalidatie</title>
@@ -180,7 +180,7 @@
       </mediaobject>
     </figure>
 
-    <para>De tags worden vet blauw geaccentueerd voor eenvoudige vergelijking tussen de originele en de vertaalde inhoud. Klik op de koppeling om het segment in het venster Bewerken te activeren. Verbeter, indien nodig, de fout (in het geval hierboven is dat het ontbrekende paar &lt;i2&gt;&lt;/i2&gt;) en druk op <guimenuitem>Ctrl+T</guimenuitem> om terug te keren naar het venster Tags valideren om andere fouten te corrigeren. Tagfouten zijn volgordes van tags in de vertaling die niet dezelfde volgorde en nummering van tags produceren als die in het originele segment. Sommige bewerkingen aan tags zijn noodzakelijk en zijn goedaardig, sommige zullen problemen veroorzaken als het vertaalde document wordt gemaakt.</para>
+    <para>De tags worden vet blauw geaccentueerd voor eenvoudige vergelijking tussen de originele en de vertaalde inhoud. Klik op de koppeling om het segment in het venster Bewerken te activeren. Verbeter, indien nodig, de fout (in het geval hierboven is dat het ontbrekende paar &lt;i2&gt;&lt;/i2&gt;) en druk op <guimenuitem>Ctrl+Shift+V</guimenuitem> om terug te keren naar het venster Tags valideren om andere fouten te corrigeren. Tagfouten zijn volgordes van tags in de vertaling die niet dezelfde volgorde en nummering van tags produceren als die in het originele segment. Sommige bewerkingen aan tags zijn noodzakelijk en zijn goedaardig, sommige zullen problemen veroorzaken als het vertaalde document wordt gemaakt.</para>
   </section>
 
   <section id="hints.for.tag.management">

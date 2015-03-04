@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.searchandreplace">
+  <title>Zoeken en vervangen<indexterm class="singular">
+      <primary>Zoeken</primary>
+    </indexterm></title>
+
+  <section id="section.searchreplace.window">
+    <title>venster Zoeken<indexterm class="singular">
+        <primary>Sneltoetsen</primary> <secondary>Zoeken en vervangen - Ctrl+K</secondary>
+      </indexterm></title>
+
+    <para>Open het venster Zoeken en vervangen met <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo> en voer het woord of de uitdrukking die/dat u wilt vervangen in in het vak <emphasis>Zoeken naar</emphasis>.</para>
+
+    <para>Klik dan op de knop <emphasis>Zoeken</emphasis> om alle overeenkomende items weer te geven.</para>
+
+    <para>Voer het nieuwe woord of uitdrukking (reguliere uitdrukkingen worden niet ondersteund) in in het vak <emphasis>Vervangen door</emphasis>, en klik dan op één van de volgende opties:<itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Alles vervangen:</emphasis> voert de vervanging uit voor alle items (na het weergeven van een bevestigingsvenster waarin het aantal vervangingen wordt weergegeven).</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Vervangen:</emphasis> voert een &quot;één op één&quot;-vervanging uit, door middel van de knoppen in de <emphasis role="bold">kop van het venster Bewerken</emphasis>. Klik op <emphasis>Volgende vervangen</emphasis> of <emphasis>Overslaan</emphasis>, en beëindig de sessie van het vervangen met <emphasis>Voltooien</emphasis>.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Sluiten:</emphasis> sluit het venster zonder enige wijziging.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <section>
+      <title>Zoekopties</title>
+
+      <para>Zoekopties zijn soortgelijk aan die welke worden weergegeven in het <link linkend="section.search.window">venster Zoeken</link>.</para>
+
+      <para>Uitgezonderd één: selecteer <emphasis role="bold">Niet-vertaald</emphasis> om Zoeken en vervangen ook uit te voeren op segmenten die nog niet zijn vertaald.</para>
+
+      <para>OmegaT zal het bronsegment kopiëren naar het doelsegment vóór de vervanging wordt uitgevoerd, om dat mogelijk te maken (hoewel Zoeken en vervangen alleen op het geheugen wordt uitgevoerd). Indien er geen vervanging wordt uitgevoerd voor een bepaald segment, zal het doelsegment “leeg gemaakt” worden, d.i. het zal niet-vertaald blijven.</para>
+    </section>
+  </section>
+</chapter>

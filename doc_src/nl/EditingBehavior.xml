@@ -14,7 +14,8 @@
       <imageobject role="html">
         <imagedata fileref="images/EditingBehaviourOptions25.png"/>
       </imageobject>
-	  <imageobject role="fo">
+
+      <imageobject role="fo">
         <imagedata fileref="images/EditingBehaviourOptions25.png"/>
       </imageobject>
     </mediaobject>
@@ -69,11 +70,11 @@
           <listitem>
             <para>Het bronsegment en de fuzzy overeenkomsten moeten dezelfde lijst met getallen bevatten</para>
           </listitem>
-        
+
           <listitem>
             <para>De getallen moeten exact hetzelfde zijn tussen de bron en de overeenkomsten voor het doel.</para>
           </listitem>
-        
+
           <listitem>
             <para>Alleen gehele getallen en eenvoudige getallen met zwevende komma (die de punt als decimaal scheidingsteken gebruiken, bijv. 5.4, maar niet 5,4 of 54E-01) worden in overweging genomen.</para>
           </listitem>
@@ -132,6 +133,40 @@
 
       <listitem>
         <para>Als we foutieve vertalingen willen vermijden in het geval van segmenten met verschillende mogelijke inhoud voor het doel, zal het selecteren van dit keuzevak er voor zorgen dat <emphasis role="bold"> Ga naar volgende niet-vertaalde segment</emphasis> stopt bij het volgende dergelijke segment, ongeacht of het al is vertaald of niet.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Bewerken van tags toestaan</term>
+
+      <listitem>
+        <para>Deselecteer deze optie om te voorkomen dat er schade aan de tags ontstaat (d.i. gedeeltelijke verwijdering) gedurende het bewerken. Verwijderen van een gehele tag blijft in dat geval mogelijk door Ctrl+Backspace/Delete te gebruiken of door het volledig te selecteren (Ctrl+Shift+Links/Rechts) en het dan te verwijderen (Delete of Ctrl+X).</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Valideer tags bij het verlaten van een segment</term>
+
+      <listitem>
+        <para>Selecteer deze optie om te worden gewaarschuwd voor verschillen tussen de tags van segmenten in bron en doel, elke keer als u een segment verlaat.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Status voor automatisch vergroten van vertalingen opslaan</term>
+
+      <listitem>
+        <para>Check this option to record in the
+        <filename>project_save.tmx</filename> file the information that a
+        segment has been auto-populated, so it can be displayed with a
+        specific color in the Editor (if the &quot;Mark Auto-Populated Segments&quot;
+        option, in the View menu, is checked).</para>
       </listitem>
     </varlistentry>
   </variablelist>

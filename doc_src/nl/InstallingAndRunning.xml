@@ -53,6 +53,10 @@
 -Duser.language=FR
 # Country 
 -Duser.country=CA </code></literallayout>
+
+      <para>Advies: als OmegaT traag werkt in  sessies van Remote Desktop onder Windows, zou u deze optie kunnen gebruiken:</para>
+
+      <literallayout><code>-Dsun.java2d.noddraw=false</code></literallayout>
     </section>
 
     <section>
@@ -198,7 +202,7 @@
     <section id="which.package.to.download.OSX">
       <title>Downloaden van het pakket</title>
 
-      <para><application>OmegaT</application> vereist Java 1.6 om te kunnen worden uitgevoerd. Gebruik &quot;Software Update...&quot; uit het menu Apple om uw versie van Java bij te werken.</para>
+      <para><application>OmegaT</application> bevat de Java JRE 1.7</para>
 
       <para>Download <emphasis>OmegaT_3.n.n_Mac.zip.</emphasis></para>
     </section>
@@ -222,17 +226,19 @@
 
       <para>Dubbelklik op<emphasis> <application>OmegaT</application>.app</emphasis> of klik op zijn locatie in het dock</para>
 
-      <para>U kunt het gedrag van OmegaT aanpassen door de <emphasis>Eigenschappen</emphasis> als ook het gedeelte <emphasis>VMOptions</emphasis> te bewerken van het bestand <application><emphasis>Info.plist</emphasis></application> van het pakket.</para>
-      
-      <para>Klik met rechts op <emphasis><application>OmegaT</application>.app</emphasis> en selecteer &quot;Pakketinhoud weergeven&quot; om toegang te krijgen tot <application><emphasis>Info.plist</emphasis></application>, en open het bestand door er met rechts op te klikken en selecteer uw tekstverwerker van uw keuze. U kunt ook met &quot;cd&quot; daar rechtstreeks naartoe gaan vanaf de opdrachtregel en <application><emphasis>Info.plist</emphasis> openen in een verwerker voor de opdrachtregel zoals emacs of vi</application>.<indexterm class="singular">
+      <para>U kunt het gedrag van OmegaT' aanpassen door de <emphasis>Eigenschappen</emphasis> als ook het bestand <emphasis>OmegaT.sh</emphasis> in het pakket te bewerken.</para>
+
+      <para>Klik met rechts op <emphasis><application>OmegaT</application>.app</emphasis> en selecteer &quot;Pakketinhoud weergeven&quot; om toegang te krijgen tot <application><emphasis>OmegaT.sh</emphasis></application>, en open het bestand door er met rechts op te klikken en selecteer uw tekstverwerker van uw keuze. U kunt ook met &quot;cd&quot; daar rechtstreeks naartoe gaan vanaf de opdrachtregel en <application><emphasis>OmegaT.sh</emphasis> openen in een verwerker voor de opdrachtregel zoals emacs of vi</application>.<indexterm class="singular">
           <primary>OmegaT aanpassen</primary> <secondary>OS X</secondary> <tertiary>Startparameters</tertiary>
         </indexterm></para>
 
-      <para>Indien u waarden wilt toevoegen aan <emphasis>VMOptions</emphasis>, plaatst u er een spatie tussen. Bijvoorbeeld: <filename>-Xmx1024M -Duser.language=ja</filename> zal <application>OmegaT</application> opstarten met 1024MB aan geheugen en de gebruikersinterface in het Japans.</para>
+      <para>Opties worden gewijzigd door <emphasis>OmegaT.sh</emphasis> aan te passen. Verwijder, voor vooraf gedefinieerde opties, de # vóór een parameter om het in te schakelen. Bijvoorbeeld: <filename>LANGUAGE=&quot;-Duser.language=ja&quot;</filename> (zonder de #) zal <application>OmegaT</application> starten met de gebruikersinterface in het Japans.</para>
 
-      <para>Als u meerdere instanties van <emphasis><application>OmegaT</application>.app</emphasis> moet uitvoeren, gebruik dan in plaats daarvan het bestand <emphasis>JavaApplicationStub</emphasis> dat zich bevind in <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
+      <para>Bewerk de startregel direct om de beschikbare hoeveelheid geheugen te wijzigen. Bijvoorbeeld: <filename>${JAVA} -Xmx2048m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY} -jar OmegaT.jar</filename> zal OmegaT starten met 2 gigabyte geheugen.</para>
 
-      <para>Gebruik het bestand <emphasis><application>OmegaT</application>.jar</emphasis> dat zich bevindt in <emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis> om <application>OmegaT</application> vanaf de opdrachtregel te starten. Bekijk &quot;Starten vanaf de opdrachtregel&quot; hieronder voor meer informatie.</para>
+      <para>Als u meerdere instanties van <emphasis><application>OmegaT</application>.app</emphasis> moet uitvoeren, gebruik dan in plaats daarvan het bestand <emphasis>OmegaT.sh</emphasis> dat zich bevind in <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
+
+      <para>Gebruik het bestand <emphasis><application>OmegaT</application>.jar</emphasis> dat zich bevindt in <emphasis><application>OmegaT</application>.app/Contents/MacOS/Java/</emphasis> om <application>OmegaT</application> vanaf de opdrachtregel te starten. Bekijk &quot;Starten vanaf de opdrachtregel&quot; hieronder voor meer informatie.</para>
     </section>
 
     <section id="Mac.OSX.goodies">
@@ -398,14 +404,6 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Antialiasing lettertype</emphasis> - (alleen Java 1.6)</para>
-
-          <para><emphasis role="bold">-Dswing.aatext=true<indexterm class="singular">
-              <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>Antialiasing lettertype</tertiary>
-            </indexterm></emphasis> Dit argument beïnvloedt de anti-aliasing van de lettertypen, waarbij hun weergave wordt verbeterd.</para>
-        </listitem>
-
-        <listitem>
           <para><emphasis role="bold">Toewijzen van geheugen</emphasis></para>
 
           <para><emphasis role="bold">-XmxZZM </emphasis><indexterm class="singular">
@@ -452,7 +450,6 @@
 
           <para>-<emphasis role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
         </listitem>
-
       </itemizedlist>
 
       <para>Argumenten mogen worden gecombineerd: Voor het starten van <application>OmegaT</application> met alle hierboven genoemde voorbeelden zou de opdracht zijn:</para>
@@ -613,7 +610,7 @@
             <para>Deze optie maakt het mogelijk het valideren van tags in modus batch uit te voeren. Als <literal>abort </literal>is geselecteerd zal het valideren van tags stoppen bij het eerste ongeldige segment. Als <literal>warn</literal> is gespecificeerd zal het valideren van tags alle segmenten verwerken en waarschuwingen over segmenten met ongeldige tags in het gespecificeerde bestand schrijven.</para>
           </listitem>
         </itemizedlist>
-        
+
         <itemizedlist>
           <listitem>
             <para><literal>-no-team</literal> adresseert projecten die zijn ingesteld voor werken in teamverband. Gebruik hem als OmegaT de inhoud van het project niet moet synchroniseren.</para>
@@ -625,7 +622,6 @@
             <para><literal>--disable-project-locking</literal> maakt het, onder Windows, mogelijk om hetzelfde project met verschillende instanties van OmegaT te openen. Onder Windows is <literal>omegat.project</literal> standaard vergendeld en wordt een foutbericht ontvangen als wordt geprobeerd een project te openen dat al is geopend door een andere instantie van OmegaT. Met die optie wordt er niet vergrendeld.</para>
           </listitem>
         </itemizedlist>
-
       </section>
 
       <section id="console.mode.option.quiet">

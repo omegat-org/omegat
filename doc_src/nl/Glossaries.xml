@@ -11,7 +11,7 @@
 
   <para>Als een project in <application>OmegaT</application> één of meer woordenlijsten bevat, worden termen uit de woordenlijst die ook worden gevonden in het huidige segment automatisch weergegeven in het venster Woordenlijst.</para>
 
-  <para>U definieert de locatie ervan in het dialoogvenster Projecteigenschappen. De extensie moet <filename>.txt</filename> zijn (indien niet zal die worden toegevoegd). De locatie van het bestand moet liggen binnen de map <filename>/glossary</filename>, maar het mag in een diepere map staan (bijv. <filename>glossary/sub/glossary.txt</filename>). Het bestand hoeft niet te bestaan als het wordt ingesteld, het zal worden gemaakt (indien nodig) bij het toevoegen van een item voor de woordenlijst. Als het bestand al bestaat, wordt er geen poging gedaan om de indeling of de tekenset van het bestand te verifiëren: de nieuwe items zullen altijd in de indeling tab-gescheiden en UTF-8 zijn. Omdat de bestaande inhoud niet wordt geraakt, zal schade aan een bestaand bestand beperkt zijn.</para>
+  <para>U definieert de locatie ervan in het dialoogvenster Projecteigenschappen. De extensie moet <filename>.txt</filename> of <filename>.utf8</filename> zijn (indien niet zal die worden toegevoegd). De locatie van het bestand moet liggen binnen de map <filename>/glossary</filename>, maar het mag in een diepere map staan (bijv. <filename>glossary/sub/glossary.txt</filename>). Het bestand hoeft niet te bestaan als het wordt ingesteld, het zal worden gemaakt (indien nodig) bij het toevoegen van een item voor de woordenlijst. Als het bestand al bestaat, wordt er geen poging gedaan om de indeling of de tekenset van het bestand te verifiëren: de nieuwe items zullen altijd in de indeling tab-gescheiden en UTF-8 zijn. Omdat de bestaande inhoud niet wordt geraakt, zal schade aan een bestaand bestand beperkt zijn.</para>
 
   <section>
     <title>Gebruik</title>
@@ -72,15 +72,19 @@
 
     <para>Woordenlijstbestanden zijn eenvoudige platte tekst-bestanden die drie-kolommen, tabgescheiden lijsten bevatten met de bron- en doeltermen in respectievelijk de eerste en tweede kolom. De derde kolom kan worden gebruikt voor aanvullende informatie. Er kunnen items zijn waarin de doelkolom ontbreekt, d.i. bevatten slechts de bronterm en de opmerking.</para>
 
-    <para>Woordenlijstbestanden kunnen of in de standaard systeemcodering (en aangegeven door de extensie .tab) zijn of in UTF-8 (de extensie .utf8). De codering Unicode (UTF8) wordt om voor de hand liggende redenen geprefereerd. Ook het CSV-formaat wordt ondersteund. Dit formaat is hetzelfde als de tabgescheiden: bronterm, doelterm. Velden met opmerkingen worden gescheiden door een komma ','. Tekenreeksen kunnen worden omsloten door aanhalingstekens &quot;, die het mogelijk maken een komma binnen een tekenreeks te hebben:</para>
+    <para>Woordenlijstbestanden kunnen of in de standaard systeemcodering (en aangegeven door de extensie .tab) zijn of in UTF-8 (de extensie .utf8 of .txt) of in UTF-16 LE (de extensie .txt). Ook het CSV-formaat wordt ondersteund. Dit formaat is hetzelfde als de tabgescheiden: bronterm, doelterm. Velden met opmerkingen worden gescheiden door een komma ','. Tekenreeksen kunnen worden omsloten door aanhalingstekens &quot;, die het mogelijk maken een komma binnen een tekenreeks te hebben:</para>
 
     <para><literal>&quot;This is a source term, which contains a comma&quot;,&quot;Dit is een bronterm, die een komma bevat&quot;</literal></para>
 
     <para>In aanvulling op het platte tekst-formaat, wordt TBX-formaat <indexterm class="singular">
         <primary>Woordenlijsten</primary> <secondary>TBX-formaat</secondary>
-      </indexterm> ook ondersteund. TBX - Term Base eXchange - is de open, op XML gebaseerde standaard voor de uitwisseling van gestructureerde terminologische gegevens. TBX is goedgekeurd als een internationale standaard door LISA en ISO. Als u een bestaand systeem hebt voor de afhandeling van terminologie - MultiTerm bijvoorbeeld - is het zeer wel mogelijk dat het de mogelijkheid biedt om gegevens van terminologie in TBX-formaat te exporteren. <ulink url="http://www.microsoft.com/Language/en-US/Terminology.aspx">Microsoft Terminology Collection</ulink> <indexterm class="singular">
+      </indexterm> ook ondersteund al een alleen-lezen indeling voor woordenlijsten. De locatie van het bestand <filename>.tbx</filename> moet liggen binnen de map <filename>/glossary</filename>, maar het mag in een diepere map staan (bijv. <filename>glossary/sub/glossary.txt</filename>).</para>
+
+    <para>TBX - Term Base eXchange - is de open, op XML gebaseerde standaard voor de uitwisseling van gestructureerde terminologische gegevens. TBX is goedgekeurd als een internationale standaard door LISA en ISO. Als u een bestaand systeem hebt voor de afhandeling van terminologie is het zeer wel mogelijk dat het de mogelijkheid biedt om gegevens van terminologie in TBX-formaat te exporteren. <ulink url="http://www.microsoft.com/Language/en-US/Terminology.aspx">Microsoft Terminology Collection</ulink> <indexterm class="singular">
         <primary>Woordenlijsten</primary> <secondary>Microsoft Terminology collectie</secondary>
       </indexterm>kan worden gedownload in bijna 100 talen en kan dienen als hoeksteen IT-woordenlijst.</para>
+
+    <para>Opmerking: de uitvoer <filename>.tbx</filename> van MultiTerm kijkt niet betrouwbaar te zijn (november 2013), het is beter om in plaats daarvan de uitvoer <filename>.tab</filename> van MultiTerm te gebruiken.</para>
   </section>
 
   <section>
@@ -106,7 +110,17 @@
         <primary>Woordenlijsten</primary> <secondary>Locatie van het te beschrijven bestand voor de woordenlijst</secondary>
       </indexterm>De locatie van het te beschrijven bestand voor de woordenlijst kan worden ingesteld in het dialoogvenster <guimenuitem>Project &gt; Eigenschappen ...</guimenuitem>. De te herkennen extensies zijn <filename>TXT</filename> en <filename>UTF8</filename>.</para>
 
-    <para><emphasis role="bold">Opmerking: </emphasis>Natuurlijk zijn er andere manieren en mogelijkheden om een eenvoudig bestand met tabgescheiden items te maken. Er is niets tegen het gebruiken van Notepad++ op Windows of GEdit op Linux of een werkbladprogramma voor dit doel: elk programma dat UTF8 kan afhandelen en witruimte weer kan geven (zodat de vereiste <keycap>TAB</keycap>-tekens u niet ontgaan) kan worden gebruikt.</para>
+    <para><emphasis role="bold">Opmerking: </emphasis>Natuurlijk zijn er andere manieren en mogelijkheden om een eenvoudig bestand met tabgescheiden items te maken. Er is niets tegen het gebruiken van Notepad++ op Windows of GEdit op Linux of een werkbladprogramma voor dit doel: elk programma dat UTF8 (of UTF-16 LE) kan afhandelen en witruimte weer kan geven (zodat de vereiste <keycap>TAB</keycap>-tekens u niet ontgaan) kan worden gebruikt.</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Woordenlijsten</primary> <secondary>Prioriteiten</secondary>
+      </indexterm>Prioriteit woordenlijst</title>
+
+    <para>De resultaten van de prioriteit woordenlijst (standaard glossary/glossary.txt) verschijnt op de eerste plaats in het venster Woordenlijst en in TransTips.</para>
+
+    <para>De woorden van de prioriteit woordenlijst worden vet weergegeven, omdat items woorden kunnen mengen vanuit prioriteit en niet-prioriteit woordenlijsten.</para>
   </section>
 
   <section>
@@ -114,7 +128,7 @@
         <primary>Woordenlijsten</primary> <secondary>Trados MultiTerm</secondary>
       </indexterm>Trados Multiterm gebruiken</title>
 
-    <para>Woordenlijsten die zijn geëxporteerd vanuit Trados Multiterm kunnen zonder verdere aanpassingen worden gebruikt als woordenlijsten voor <application>OmegaT</application>, vooropgesteld dat zij de bestandsextensie <filename>.tab</filename> hebben gekregen en de velden voor bron- en doelterm respectievelijk de eerste twee velden zijn. Indien u exporteert met behulp van de systeemoptie &quot;Tabgescheiden exporteren&quot;, moet u de eerste 5 kolommen verwijderen (Seq. Nr, Date created etc). De nieuwere versies van MultiTerm ondersteunen het exporteren naar TBX-formaat.</para>
+    <para>Woordenlijsten die zijn geëxporteerd vanuit Trados Multiterm kunnen zonder verdere aanpassingen worden gebruikt als woordenlijsten voor <application>OmegaT</application>, vooropgesteld dat zij de bestandsextensie <filename>.tab</filename> hebben gekregen en de velden voor bron- en doelterm respectievelijk de eerste twee velden zijn. Indien u exporteert met behulp van de systeemoptie &quot;Tabgescheiden exporteren&quot;, moet u de eerste 5 kolommen verwijderen (Seq. Nr, Date created etc).</para>
   </section>
 
   <section>
@@ -144,7 +158,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Het bestand met de woordenlijst heeft niet de juiste extensie (.tab of .utf8).</para>
+        <para>Het bestand met de woordenlijst heeft niet de juiste extensie (.tab, .utf8 of .txt).</para>
       </listitem>
     </itemizedlist>
 

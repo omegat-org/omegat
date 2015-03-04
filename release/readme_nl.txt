@@ -201,7 +201,7 @@ Voor het op andere manieren bijdragen abonneert u zich eerst op de gebruikersgro
 en krijg daar een indruk van wat er gaande is in de wereld van OmegaT...
 
   OmegaT is van origine het werk van Keith Godfrey.
-  Didier Briel is de projectmanager van OmegaT.
+  Didier Briel is de projectmanager voor OmegaT.
 
 Eerdere bijdragen van:
 (alfabetische volgorde)
@@ -247,7 +247,7 @@ Andere bijdragen door
   Sabine Cretella
   Dmitri Gabinski
   Jean-Christophe Helary (manager lokalisatie)
-  Vito Smolej (manager documentatie)
+  Vincent Bidaux (documentatie-manager)
   Samuel Murray
   Marc Prior (webmaster)
   en vele, vele andere zeer behulpzame mensen

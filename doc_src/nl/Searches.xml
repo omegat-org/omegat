@@ -6,63 +6,15 @@
     </indexterm></title>
 
   <section id="search.window">
-    <title>venster Zoeken</title>
+    <title>venster Zoeken<indexterm class="singular">
+        <primary>Sneltoetsen</primary> <secondary>Zoeken - Ctrl+F</secondary>
+      </indexterm></title>
 
-    <figure id="text.search.window">
-      <title>venster Tekst zoeken<indexterm class="singular">
-          <primary>venster Zoeken</primary> <secondary>voorbeeld</secondary>
-        </indexterm></title>
+    <para>Open het venster Zoeken met <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> en voer het woord of de frase waarnaar u wilt zoeken in het vak <emphasis>Zoeken naar</emphasis> in.</para>
 
-      <mediaobject>
-        <imageobject role="html">
-          <imagedata fileref="images/TextSearch25.png"/>
-        </imageobject>
+    <para>Als alternatief: selecteer een woord of frase ergens in het bewerkingsveld en druk op <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. Het woord of de frase wordt automatisch ingevoegd in het vak <emphasis>Zoeken naar</emphasis>. U kunt verschillende vensters Zoeken tegelijkertijd geopend hebben, maar sluit ze als u ze niet langer nodig hebt zodat zij uw bureaublad niet vol zetten.</para>
 
-        <imageobject role="fo">
-          <imagedata fileref="images/TextSearch25.png" width="90%"/>
-        </imageobject>
-      </mediaobject>
-    </figure>
-
-    <note>
-      <para>Bovenstaande zoekactie vindt alle doelsegmenten die tekens bevatten die zeer onwaarschijnlijk zijn voor de doeltaal - d.i. Sloveens.</para>
-    </note>
-
-    <section>
-      <title>Zoeken<indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Zoeken - Ctrl+F</secondary>
-        </indexterm></title>
-
-      <para><application>OmegaT</application> verschaft een groot scala aan zoekfuncties. Open het venster Zoeken met <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> en voer het woord of de frase waarnaar u wilt zoeken in het vak &quot;Zoeken naar&quot; in. Als alternatief: selecteer een woord of frase ergens in het bewerkingsveld en druk op <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. Het woord of de frase wordt automatisch ingevoegd in het vak &quot;Zoeken naar&quot;. U kunt verschillende vensters Zoeken tegelijkertijd geopend hebben, maar sluit ze als u ze niet langer nodig hebt zodat zij uw bureaublad niet vol zetten.</para>
-    </section>
-
-    <section>
-      <title>Zoeklocatie</title>
-
-      <para>Zoekacties worden standaard uitgevoerd in zowel de bron- als de doelgedeelten van het project, maar u kunt uw zoekactie beperken tot de bron- of het de doeltekst. U kunt zoeken in</para>
-
-      <itemizedlist>
-        <listitem>
-          <para>alleen het project (standaardinstelling)</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>zowel het project en in de vertaalgeheugens waarnaar wordt verwezen in /tm/ (kies <emphasis>Zoeken in TM's</emphasis>)</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>één enkel bestand of een map die een aantal bestanden bevat (kies <emphasis>Bestanden zoeken</emphasis>)</para>
-        </listitem>
-      </itemizedlist>
-
-      <para>Bij het zoeken in bestanden (in tegenstelling tot in vertaalgeheugens) zal <application>OmegaT</application> zich beperken tot de bestanden in de indelingen van bronbestanden. Als consequentie daarvan zal OmegaT, hoewel het in staat is om<filename> tmx</filename>-bestanden te behandelen, die niet opnemen bij zoekacties met Zoeken in bestanden. Indien u <emphasis role="bold"><indexterm class="singular">
-          <primary>Zoeken</primary> <secondary>gevorderde opties</secondary>
-        </indexterm>Gevorderde opties</emphasis> inschakelt, kunt u de zoekactie combineren met de naam van de auteur van de vertaling en het tijdstip waarop de laatste wijziging is gemaakt.</para>
-    </section>
+    <para>Klik op de pijl naar beneden van het vak <emphasis>Zoeken naar</emphasis> on toegang te krijgen tot de 10 laatste zoekacties.</para>
   </section>
 
   <section id="using.wild.cards">
@@ -128,6 +80,13 @@
       </listitem>
 
       <listitem>
+        <para><emphasis role="bold">Space matches nbsp</emphasis>: when this
+        option is checked, a space character put in search entry can match
+        either a normal space character or a non-breacking space (\u00A)
+        character.</para>
+      </listitem>
+
+      <listitem>
         <para><emphasis role="bold">in bron: </emphasis>zoek in de bronsegmenten</para>
       </listitem>
 
@@ -140,11 +99,35 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">zoeken in TM's</emphasis>: vertaalgeheugens in de map <filename>tm</filename> worden opgenomen in de zoekactie.</para>
+        <para><emphasis role="bold">in opmerkingen: </emphasis>zoek in opmerkingen van segmenten</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Alle resultaten weergeven: </emphasis>niet selecteren van dit keuzevak zorgt er voor dat OmegaT alleen het eerst voorkomende item weergeeft van een hit, als er meerdere hits bestaan</para>
+        <para><emphasis role="bold">Vertaald of niet-vertaald: </emphasis>zoek in zowel vertaalde als niet-vertaalde segmenten.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Vertaald: </emphasis>zoek alleen in vertaalde segmenten.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Niet-vertaald: </emphasis>zoek alleen in niet vertaalde segmenten.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Weergeven: alle overeenkomende segmenten: </emphasis>indien geselecteerd worden alle segmenten één voor één weergegeven, zelfs als zij meerdere keren aanwezig zijn in hetzelfde document of in verschillende documenten.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Weergeven: bestandsnamen: </emphasis>indien geselecteerd, de naam van het bestand waar elk segment is gevonden wordt boven elk resultaat weergegeven.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Zoeken in project</emphasis>: selecteer <emphasis>Geheugen</emphasis> om het vertaalgeheugen van het project (bestand project_save.tmx) op te nemen in de zoekactie. Selecteer <emphasis>TM's</emphasis> om de vertaalgeheugens, geplaatst in de map <filename>tm</filename>, op te nemen in de zoekactie. Selecteer <emphasis>Woordenlijsten</emphasis> om de woordenlijsten, geplaatst in de map <filename>glossary</filename>, op te nemen in de zoekactie.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Zoeken in bestanden: </emphasis>zoek in één enkel bestand of in een map die meerdere bestanden bevat. Bij het zoeken in bestanden (in tegenstelling tot in vertaalgeheugens) zal OmegaT zich beperken tot de bestanden in de indelingen van bronbestanden. Als consequentie daarvan zal OmegaT, hoewel het in staat is om<filename> tmx</filename>-bestanden te behandelen, die niet opnemen bij zoekacties met Zoeken in bestanden.</para>
       </listitem>
     </itemizedlist>
 
@@ -160,22 +143,22 @@
 
     <para>U kunt meerdere vensters Tekst zoeken tegelijkertijd geopend hebben. U kunt hun inhoud snel zien door te kijken naar hun titel: het zal de gebruikte zoekterm bevatten.</para>
   </section>
-  
+
   <section id="search.filter">
     <title>Filteritems in bewerker overeenkomstig de zoekactie</title>
-    
+
     <para>Om eenvoudiger te navigeren in de resultaten van de zoekactie, kunt u de zoekactie toepassen in de bewerker. Druk onderaan op de knop <emphasis role="bold">Filter</emphasis> om de weergegeven items in het venster Bewerken te beperken tot die welke overeenkomen met de huidige zoekactie. U kunt de normale navigatie gebruiken om bijv. naar het volgende (niet-vertaalde) segment te gaan dat overeenkomt met de zoekcriteria.</para>
-  
-   <para>NB:</para>
-   
+
+    <para>NB:</para>
+
     <itemizedlist>
       <listitem>Een zoekactie kan beperkt zijn tot 1000 items, dus als u zoekt op een veel voorkomende frase, geeft de bewerker alleen die 1000 overeenkomende items weer, en niet alle items die overeenkomen met de zoekcriteria.</listitem>
+
       <listitem>Een bestand zou geen overeenkomende items kunnen hebben, dus ziet het er leeg uit.</listitem>
+
       <listitem>Als een zoekactie duplicaten verwijdert, zullen die duplicaten niet in het venster Bewerken staan.</listitem>
     </itemizedlist>
-    
+
     <para>Druk op de knop <emphasis role="bold">Filter verwijderen</emphasis>, of laadt een project opnieuw om een filter te verwijderen .</para>
- </section>
-      
-    
+  </section>
 </chapter>

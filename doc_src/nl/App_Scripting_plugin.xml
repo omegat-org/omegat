@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.ScriptingPlugin.inOmegaT">
-  <title>plug-in Scripting<indexterm class="singular">
-      <primary>Plug-ins</primary> <secondary>Scripting</secondary>
+<appendix id="appendix.Scripts.inOmegaT">
+  <title>Scripts<indexterm class="singular">
+      <primary>Scripts</primary>
     </indexterm></title>
 
   <section>
     <title>Introductie</title>
 
-    <para>OmegaT-Scripting maakt het mogelijk in OmegaT scripts uit te voeren die zijn geschreven in verschillende scripttalen.</para>
+    <para>OmegaT maakt het mogelijk scripts uit te voeren die zijn geschreven in verschillende scripttalen.</para>
   </section>
 
   <section>
-    <title>Installatie en gebruik</title>
+    <title>Gebruiken</title>
 
-    <para>De plug-in Scripting voor OmegaT kan worden gedownload vanaf de <ulink url="http://sourceforge.net/projects/omegat-plugins/files">downloadsite voor OmegaT plug-ins</ulink>. Pak de bestanden uit en plaats ze allemaal in de map &quot;plugins&quot; die zich bevindt in de installatiemap van OmegaT, dat is de map waarin OmegaT.jar staat. Maak eerst de map &quot;plugins&quot; als die niet bestaat.</para>
-
-    <para>Dit voegt een nieuw submenu<guisubmenu> Extra &gt; </guisubmenu><guisubmenu>Scripten</guisubmenu> toe. Onder het submenu <guisubmenu>Scripten</guisubmenu> zijn 12 tijdelijke plaatsaanduidingen beschikbaar voor scripts. Klikken op <guisubmenu>Scripten</guisubmenu> opent het dialoogvenster Scripten:<screenshot> <screeninfo>dialoogvenster Scripten</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
+    <para>Klikken op <guisubmenu>Extra &gt; </guisubmenu><guisubmenu>Scripten</guisubmenu> opent het dialoogvenster Scripten:<screenshot> <screeninfo>dialoogvenster Scripten</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
 
     <para>Het dialoogvenster Scripten maakt het voor u mogelijk om een bestaand script in het tekstgebied te laden en het uit te voeren tegen het huidige geopende project. Doe het volgende om de mogelijkheid voor scripten aan te passen:</para>
 
@@ -38,17 +36,17 @@
       </listitem>
     </itemizedlist>
 
+    <para>Standaard worden scripts opgeslagen in de map &quot;scripts&quot; die zich bevindt in de installatiemap van OmegaT (de map waarin OmegaT.jar staat).</para>
+
+    <para>U kunt daar nieuwe scripts toevoegen, zodat zij zullen verschijnen in de lijst met beschikbare scripts in het venster Scripten.</para>
+  </section>
+
+  <section>
+    <title>Scripttalen</title>
+
     <para>De volgende scripttalen zijn geïmplementeerd:</para>
 
     <para><itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">NetRexx</emphasis> (http://www.netrexx.org/): het ondersteunt een klassieke REXX-syntaxis, zonder gereserveerde sleutelwoorden, naast aanzienlijke aanvullingen voor ondersteuning van object-georiënteerd programmeren op een manier die compatibel is met het objectmodel van Java. Alle bestaande Java klassenbibliotheken kunnen ongewijzigd en zonder speciale instellingen gebruikt worden; tegelijkertijd kan een Java-programmeur er voor kiezen om slechts de Rexx-klasse uit het uitvoeringspakket te gebruiken voor verbeterde afhandeling van tekenreeksen in bronprogramma's met Java-syntaxis.</para>
-        </listitem>
-      </itemizedlist><itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">XSLT</emphasis> (Extensible Stylesheet Language Transformations): is een declarabele, op XML gebaseerde taal die wordt gebruikt voor de transformatie van XML-documenten. Het originele document wordt niet gewijzigd; in plaats daarvan wordt een nieuw document gemaakt, gebaseerd op de inhoud van een bestaand. Het nieuwe document kan door de processor worden geserialiseerd (uitvoer) in standaard XML-syntaxis of in een andere indeling, zoals HTML of platte tekst. XSLT wordt vaak gebruikt om gegevens te converteren tussen verschillende schema's van XML of om XML-gegevens te converteren naar webpagina's of PDF-documenten.</para>
-        </listitem>
-      </itemizedlist><itemizedlist>
         <listitem>
           <para><emphasis role="bold">Groovy</emphasis> (http://groovy.codehaus.org): is een dynamische taal voor de Java Virtual machine. Het bouwt op de sterke punten van Java maar heeft aanvullende krachtige mogelijkheden, geïnspireerd op talen als Python, Ruby en Smalltalk.</para>
         </listitem>

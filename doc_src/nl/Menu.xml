@@ -53,15 +53,29 @@
 
           <tbody>
             <row>
-              <entry><guimenuitem>Nieuw</guimenuitem></entry>
+              <entry><guimenuitem>Nieuw...</guimenuitem></entry>
 
-              <entry/>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>N</keycap>
+                </keycombo></entry>
 
               <entry>Maakt en opent een nieuw project. Het dialoogvenster om een project te maken is hetzelfde als voor het bewerken van het project. Zie<xref linkend="chapter.project.properties"/></entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Openen</guimenuitem></entry>
+              <entry><guimenuitem>Teamproject downloaden...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Maakt een a lokale kopie van een OmegaT-project op afstand.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Openen...</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -73,7 +87,15 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Bronbestanden importeren...</guimenuitem></entry>
+              <entry><guimenuitem>Recent project openen</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Geeft toegang tot de vijf laatst bewerkte projecten. Klikken op één ervan zal het huidige project opslaan, het sluiten en het andere project openen.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Bestanden naar map Bronbestanden kopiëren...</guimenuitem></entry>
 
               <entry/>
 
@@ -81,11 +103,11 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Importeren vanuit MediaWiki...</guimenuitem></entry>
+              <entry><guimenuitem>Pagina van MediaWiki downloaden...</guimenuitem></entry>
 
               <entry/>
 
-              <entry>Importeert eenheden vanaf pagina's van MediaWiki, gebaseerd op de ingevoerde URL.</entry>
+              <entry>Downloadt eenheden vanaf pagina's van MediaWiki, gebaseerd op de ingevoerde URL.</entry>
             </row>
 
             <row>
@@ -132,6 +154,18 @@
                 </keycombo></entry>
 
               <entry>Maakt de doeldocumenten op basis van uw vertaling van de tekst in de documenten. De gemaakte doeldocumenten zijn geplaatst in de map <filename>/target</filename>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Vertaald huidig document maken</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>D</keycap>
+                </keycombo></entry>
+
+              <entry>Maakt het doeldocument overeenkomstig het huidige document, in vertaling.</entry>
             </row>
 
             <row>
@@ -304,9 +338,9 @@
               <entry><guimenuitem>Vervangen door bron</guimenuitem></entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
 
                   <keycap>R</keycap>
                 </keycombo></entry>
@@ -318,9 +352,9 @@
               <entry><guimenuitem>Bron invoegen</guimenuitem></entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
 
                   <keycap>I</keycap>
                 </keycombo></entry>
@@ -329,28 +363,42 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Brontags invoegen</guimenuitem></entry>
+              <entry><guimenuitem>Ontbrekende brontags invoegen</guimenuitem></entry>
 
               <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
                   <keycap>Shift</keycap>
 
+                  <keycap>T</keycap>
+                </keycombo></entry>
+
+              <entry><indexterm class="singular">
+                  <primary>Tags</primary> <secondary>Ontbrekende brontags invoegen</secondary>
+                </indexterm>Voegt de brontags (indien zij ontbraken) in op de cursorpositie.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Volgende ontbrekende tag invoegen</guimenuitem></entry>
+
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>T</keycap>
                 </keycombo></entry>
 
               <entry><indexterm class="singular">
-                  <primary>Tags</primary> <secondary>Brontags invoegen</secondary>
-                </indexterm>Voegt de brontags in op de cursorpositie. Alle tags in de brontekst - d.i. OmegaT zowel als aangepaste, Java, printf etc tags - zullen worden ingevoegd in het huidige segment, ongeacht of ze daar al staan of niet. Tekst, omsloten door tags, wordt vervangen door spaties: <literal>&lt;f0&gt;&lt;f1&gt;Dit is tekst&lt;/f0&gt;&lt;/f1&gt;</literal> dus zal worden gekopieerd als <literal>&lt;f0&gt;&lt;f1&gt;één_spatie&lt;/f0&gt;&lt;/f1&gt;</literal></entry>
+                  <primary>Tags</primary> <secondary>Volgende ontbrekende tag invoegen</secondary>
+                </indexterm>Voegt slechts één tag (naast de ontbrekende) in op de cursorpositie.</entry>
             </row>
 
             <row>
               <entry><guimenuitem>Selectie exporteren</guimenuitem></entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
 
                   <keycap>C</keycap>
                 </keycombo></entry>
@@ -362,9 +410,9 @@
               <entry><guimenuitem>Item voor woordenlijst maken</guimenuitem></entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
 
                   <keycap>G</keycap>
                 </keycombo></entry>
@@ -385,7 +433,19 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Schakel Hoofd-/kleine letters naar...</guimenuitem></entry>
+              <entry><guimenuitem>Zoeken en vervangen...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>K</keycap>
+                </keycombo></entry>
+
+              <entry>Opent een nieuw <link linkend="section.searchreplace.window">venster Zoeken en vervangen</link>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Schakel Hoofd-/kleine letters naar</guimenuitem></entry>
 
               <entry><keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo> (zie tekst)</entry>
 
@@ -395,7 +455,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Overeenkomst #N selecteren</guimenuitem></entry>
+              <entry><guimenuitem>Overeenkomst selecteren</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -420,6 +480,36 @@
               <entry/>
 
               <entry>Het een en hetzelfde segment kan, afhankelijk van de context, verschillende vertalingen vereisen. Selecteer dit menuitem als de huidige vertaling niet van toepassing is en voer de alternatieve vertaling in.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Vertaling verwijderen</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Verwijdert de vertaling en stelt segment in als niet-vertaald.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Lege vertaling instellen</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>De vertaling als leeg definiëren. In het doeldocument zal voor dit segment niets verschijnen. In de bewerker wordt de vertaling weergegeven als &lt;LEEG&gt;</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Register Identieke Vertaling</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>S</keycap>
+                </keycombo></entry>
+
+              <entry>Gebruik deze opdracht om de vertaling te registreren als identiek aan de bron, zelfs als &quot;Vertaling mag gelijk zijn aan brontekst&quot; (in Opties/Bewerken (gedrag)...) niet is geselecteerd.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -453,9 +543,27 @@
             </row>
 
             <row>
+              <entry><guimenuitem>Volgende vertaalde segment</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>U</keycap>
+                </keycombo></entry>
+
+              <entry>Verplaatst naar het volgende, reeds vertaalde, segment, niet-vertaalde segmenten negerend.</entry>
+            </row>
+
+            <row>
               <entry><guimenuitem>Volgende segment</guimenuitem></entry>
 
-              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo> of <keycap>Enter</keycap> of <keycap>Tab</keycap></entry>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>N</keycap>
+                </keycombo> or <keycap>Enter</keycap></entry>
 
               <entry>Verplaatst naar het volgende segment. Als het huidige segment het laatste in een bestand is, verplaatst het naar het eerste segment van het volgende bestand.</entry>
             </row>
@@ -463,7 +571,15 @@
             <row>
               <entry><guimenuitem>Vorige segment</guimenuitem></entry>
 
-              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo> of <keycombo> <keycap>Ctrl</keycap> <keycap>Enter</keycap> </keycombo> of <keycombo> <keycap>Ctrl</keycap> <keycap>Tab</keycap> </keycombo></entry>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>P</keycap>
+                </keycombo> or <keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Enter</keycap>
+                </keycombo></entry>
 
               <entry>Verplaatst naar het vorige segment. Als het huidige segment het eerste in een bestand is, verplaatst het naar het laatste segment van het vorige bestand.</entry>
             </row>
@@ -494,6 +610,20 @@
               <entry/>
 
               <entry>Het vorige segment met een notitie zal openen.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Bron van geselecteerde overeenkomst</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>M</keycap>
+                </keycombo></entry>
+
+              <entry>Verplaatst naar het segment dat correspondeert met de huidige geselecteerde overeenkomst in de <guilabel>Fuzzy overeenkomsten</guilabel> pane.</entry>
             </row>
 
             <row>
@@ -573,17 +703,38 @@
             <row>
               <entry><guimenuitem>Niet-afbreekbare spaties markeren</guimenuitem></entry>
 
-              <entry>Indien aangevinkt worden niet-afbreekbare spaties in het segment met een grijze achtergrond weergegeven.</entry>
+              <entry>Indien aangevinkt worden niet-afbreekbare spaties met een grijze achtergrond weergegeven.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Witruimte markeren</guimenuitem></entry>
+
+              <entry>Indien aangevinkt wordt witte ruimte met kleine puntjes weergegeven.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Bidirectional Algorithm Control Characters markeren</guimenuitem></entry>
+
+              <entry>Deze optie geef <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">bidirectional control characters</ulink> weer
+              </entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Segmenten van Automatisch vergroten van vertalingen markeren</guimenuitem></entry>
+
+              <entry>Indien aangevinkt wordt de achtergrond van alle segmenten waar het doelsegment automatisch is gevuld (vanuit TMX-en geplaatst in /tm/auto bijvoorbeeld) in kleur weergegeven. De kleuren worden weergegeven zolang als de optie &quot;Status voor automatisch vergroten van vertalingen opslaan&quot; (in Opties/Bewerken (gedrag)..) is aangevinkt. Normaal gesproken worden vertalingen die worden ingevoegd vanuit de map auto weergegeven in oranje. Andere vertalingen, specifiek geïdentificeerd in de TMX, kunnen met behulp van verschillende kleuren worden weergegeven. Bekijk het <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Request For Enhancement</ulink> voor technische details</entry>
             </row>
 
             <row>
               <entry><guimenuitem>Info over wijzigingen</guimenuitem></entry>
 
-              <entry>Instellen van de optie Info over wijzigingen op <emphasis>Weergave voor huidige segment</emphasis> zal datum en tijd en de auteur weergeven van de laatste wijziging aan het huidige segment. Het instellen op<emphasis> Weergave voor alle segmenten </emphasis>geeft deze informatie weer voor alle segmenten en <emphasis>Niets weergeven</emphasis> schakelt deze optie uit.</entry>
+              <entry>Instellen van de optie Info over wijzigingen op <emphasis>Weergave voor huidige segment</emphasis> zal datum en tijd en de auteur weergeven van de laatste wijziging aan het huidige segment. Het instellen op<emphasis> Weergave voor alle segmenten </emphasis>geeft deze informatie weer voor alle segmenten en <emphasis>Niet weergeven</emphasis> schakelt deze optie uit.</entry>
             </row>
           </tbody>
         </tgroup>
       </table>
+
+      <para>Opmerking: kleuren zijn aan te passen via het dialoogvenster <guimenu>Opties / Aangepaste kleuren...</guimenu>.</para>
     </section>
 
     <section id="submenu.Tools">
@@ -613,13 +764,13 @@
             <row>
               <entry><guimenuitem>Tags valideren</guimenuitem></entry>
 
-              <entry><guimenu>Ctrl+T</guimenu>: Controleert op ontbrekende of misplaatste tags in opgemaakte bestanden. Zal een lijst weergeven waarin de segmenten met tagfouten en mogelijke onvolkomenheden staan. Zie <link linkend="section.tag.validation">Tagvalidatie</link> en <xref linkend="chapter.formatted.text"/>.</entry>
+              <entry><guimenu>Ctrl+Shift+V</guimenu>: Controleert op ontbrekende of misplaatste tags in opgemaakte bestanden. Zal een lijst weergeven waarin de segmenten met tagfouten en mogelijke onvolkomenheden staan. Zie <link linkend="section.tag.validation">Tagvalidatie</link> en <xref linkend="chapter.formatted.text"/>.</entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Tags verwijderen</guimenuitem></entry>
+              <entry><guimenuitem>Tags voor huidige document valideren</guimenuitem></entry>
 
-              <entry>Indien ingeschakeld worden alle tags voor opmaak verwijderd uit de bronsegmenten. Dit is handig als teksten worden afgehandeld waarin in-regelige opmaak geen echt nut heeft (bijv. ge-OCRde pdf, slecht geconverteerde .odt of .docx, etc.) Alleen in-regelige tags worden verwijderd, dus normaal gesproken zou er geen probleem moeten zijn met het openen van de doeldocumenten. Niet-zichtbare opmaak (d.i. die niet als tags verschijnen in de bewerker van OmegaT) wordt in het doeldocument behouden.</entry>
+              <entry>Hetzelfde als hierboven, maar alleen voor het huidige document in vertaling.</entry>
             </row>
 
             <row>
@@ -632,6 +783,18 @@
               <entry><guimenuitem>Statistieken voor overeenkomsten</guimenuitem></entry>
 
               <entry>Geeft de Statistieken voor overeenkomsten weer voor het project: het aantal herhalingen, exacte overeenkomsten, overeenkomsten en geen overeenkomsten, voor segmenten, woorden en in tekens.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Statistieken voor overeenkomsten per bestand</guimenuitem></entry>
+
+              <entry>Geeft de Statistieken voor overeenkomsten weer voor elk bestand van het project: het aantal herhalingen, exacte overeenkomsten, overeenkomsten en geen overeenkomsten, voor segmenten, woorden en in tekens.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Scripten...</guimenuitem></entry>
+
+              <entry>Opent een dialoogvenster waar de locatie van scripts kan worden ingesteld, en waar scripts naartoe kunnen worden geschreven, worden uitgevoerd en gekoppeld kunnen worden aan een sneltoets (zie <link linkend="appendix.Scripts.inOmegaT">venster Scripten</link>)</entry>
             </row>
           </tbody>
         </tgroup>
@@ -671,7 +834,7 @@
             <row>
               <entry><guimenuitem>Woordenlijst</guimenuitem></entry>
 
-              <entry>gereserveerd voor toekomstig gebruik door plugins</entry>
+              <entry>De optie <guimenuitem>Contextbeschrijving voor TBX-woordenlijsten tonen</guimenuitem> stelt u in staat contextinformatie voor de termen (die komt uit de TBX-woordenlijsten die zijn geplaatst in de map <filename>glossary</filename>) in het venster Woordenlijst weer te geven of te verbergen.<para>De 3 andere opties worden beschreven op de specifieke pagina met betrekking tot <link linkend="section.TaaS.options">TaaS</link> (Terminology as a Service).</para></entry>
             </row>
 
             <row>
@@ -681,9 +844,21 @@
             </row>
 
             <row>
+              <entry><guimenuitem>Auto-aanvullen</guimenuitem></entry>
+
+              <entry><para>Klik op <guimenuitem>Woordenlijst...</guimenuitem> om de weergave woordenlijst Auto-aanvullen te configureren.</para><para>Klik op <guimenuitem>Auto-tekst...</guimenuitem> om opties voor Auto-tekst te configureren en items toe te voegen of te verwijderen.</para><para>Klik op <guimenuitem>Tabel met tekens...</guimenuitem> om de opties voor de Tabel met tekens voor auto-aanvullen in te stellen.</para></entry>
+            </row>
+
+            <row>
               <entry><guimenuitem>Lettertype...</guimenuitem></entry>
 
               <entry>Toont het dialoogvenster om het lettertype voor de weergave van de tekst aan te passen. Gebruikers van oudere computers die het aanpassen van de venstergrootte heel traag vinden kunnen proberen om het lettertype te wijzigen. Bekijk Lettertype-instellingen in <link linkend="chapter.misc">Diverse onderwerpen</link></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Aangepaste kleuren...</guimenuitem></entry>
+
+              <entry><para>Stelt u in staat verschillende kleuren te kiezen voor elk deel van de gebruikersinterface.</para>Vooraf-gedefinieerde thema's kunnen worden ingesteld via een script. Een standaard script, genaamd Switch Colour Themes, verschaft een standaard &quot;Donker&quot;.</entry>
             </row>
 
             <row>
@@ -725,19 +900,19 @@
             <row>
               <entry><guimenuitem>Externe TMXen...</guimenuitem></entry>
 
-              <entry>Laat de gebruiker beslissen hoe tags in vreemde TMX-bestanden (d.i. niet gegenereerd door OmegaT) moeten worden behandeld.</entry>
+              <entry>Laat de gebruiker beslissen hoe tags in vreemde TMX-bestanden (d.i. niet gegenereerd door OmegaT) moeten worden behandeld.<para>De fuzzy overeenkomsten kunnen ook op verschillende manieren gesorteerd worden (alleen voor de weergave; heeft geen invloed op de statistieken). Het gebied Sjabloon voor weergave van overeenkomsten staat ook toe te wijzigen hoe fuzzy overeenkomsten weergegeven worden, door middel van het gebruiken van vooraf geconfigureerde variabelen.</para></entry>
             </row>
 
             <row>
               <entry><guimenuitem>Weergave...</guimenuitem></entry>
 
-              <entry>Bevat de optie om alle bronsegmenten in vet weer te geven en het eerste niet-unieke segment te markeren.</entry>
+              <entry>Bevat opties voor het op verschillende manieren weergeven van teksten en info over wijzigingen.</entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Opslaan...</guimenuitem></entry>
+              <entry><guimenuitem>Opslaan en uitvoer...</guimenuitem></entry>
 
-              <entry>Stelt de gebruiker in staat om de interval te selecteren - in minuten en seconden - tussen het opeenvolgende automatisch opslaan van het project. Het minimum is 10 seconden.</entry>
+              <entry>Stelt de gebruiker in staat om de interval te selecteren - in minuten en seconden - tussen het opeenvolgende automatisch opslaan van het project. Het minimum is 10 seconden.<para>Het dialoogvenster maakt het ook mogelijk externe opdrachten voor na-verwerking in te stellen (die worden uitgevoerd na de opdracht <guimenuitem>Vertaalde documenten maken</guimenuitem> command</para></entry>
             </row>
 
             <row>
@@ -750,6 +925,12 @@
               <entry><guimenuitem>Hoofdvenster herstellen</guimenuitem></entry>
 
               <entry>Herstelt de componenten van het hoofdvenster van OmegaT naar hun standaard status. Gebruik deze mogelijkheid in de gevallen dat u één of meer componenten heeft losgemaakt, verplaatst of verborgen en u ze niet terug kan krijgen op de manier die u wilt. Het kan ook worden gebruikt als vensters er niet uitzien zoals u verwachtte na een upgrade van OmegaT.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Taalcontrole</guimenuitem></entry>
+
+              <entry>Indien geselecteerd controleert LanguageTool de vertalingen en onderstreept potentiële problemen in blauw.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -780,6 +961,18 @@
               <entry><guimenuitem>Over...</guimenuitem></entry>
 
               <entry>Geeft auteursrechten, dankwoorden en licentie-informatie weer.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Laatste wijzigingen...</guimenuitem></entry>
+
+              <entry>Geeft de lijst met nieuwe functionaliteiten, verbeteringen en opgeloste problemen weer voor elke nieuwe uitgave.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Log...</guimenuitem></entry>
+
+              <entry>Geeft het huidige logbestand weer. De titel van het dialoogvenster reflecteert het feitelijk gebruikte bestand (wat afhankelijk is van hoeveel instanties van OmegaT tegelijkertijd worden uitgevoerd).</entry>
             </row>
           </tbody>
         </tgroup>

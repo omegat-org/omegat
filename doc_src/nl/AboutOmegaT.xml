@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.about.OmegaT">
-  <title>Over <application>OmegaT</application> - introductie</title>
+  <title>About <application>OmegaT</application> - introduction</title>
 
   <section id="OmegaT-Highlists">
     <title>OmegaT pluspunten</title>
@@ -120,7 +120,7 @@
 
         <itemizedlist>
           <listitem>
-            <para><emphasis role="bold">Introductie voor invoegtoepassingen Tokenizer en Scripting</emphasis></para>
+            <para><emphasis role="bold">Introductie voor tokenizers en scripts</emphasis></para>
           </listitem>
 
           <listitem>

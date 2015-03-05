@@ -414,6 +414,8 @@ public class ProjectFilesListController {
         filterPanel = null;
         currentSorter.setFilter(null);
         list.tableFiles.requestFocus();
+        int currentRow = list.tableFiles.getSelectedRow();
+        list.tableFiles.scrollRectToVisible(list.tableFiles.getCellRect(currentRow, 0, true));
         list.validate();
         list.repaint();
     }

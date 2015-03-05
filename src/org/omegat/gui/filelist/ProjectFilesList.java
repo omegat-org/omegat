@@ -4,7 +4,6 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Alex Buloichik
-               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,13 +25,27 @@
 
 package org.omegat.gui.filelist;
 
-import javax.swing.JLabel;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableModel;
 import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.util.OStrings;
+import org.openide.awt.Mnemonics;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
- * @author Aaron Madlon-Kay
  */
 public class ProjectFilesList extends javax.swing.JFrame {
 
@@ -52,142 +65,172 @@ public class ProjectFilesList extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
+        GridBagConstraints gridBagConstraints;
 
-        jPanel3 = new javax.swing.JPanel();
-        tablesOuterPanel = new javax.swing.JPanel();
-        tablesInnerPanel = new javax.swing.JPanel();
-        scrollFiles = new javax.swing.JScrollPane();
-        tableFiles = new javax.swing.JTable();
-        tableTotal = new javax.swing.JTable();
-        statLabel = new javax.swing.JTextArea();
-        jPanel4 = new javax.swing.JPanel();
-        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
-        jPanel2 = new javax.swing.JPanel();
-        btnFirst = new javax.swing.JButton();
-        btnUp = new javax.swing.JButton();
-        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
-        btnDown = new javax.swing.JButton();
-        btnLast = new javax.swing.JButton();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
-        jPanel1 = new javax.swing.JPanel();
-        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        m_addNewFileButton = new javax.swing.JButton();
-        m_wikiImportButton = new javax.swing.JButton();
-        m_closeButton = new javax.swing.JButton();
-        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        scrollFiles = new JScrollPane();
+        tableFiles = new JTable();
+        tableTotal = new JTable();
+        statLabel = new JTextArea();
+        jPanel1 = new JPanel();
+        filler1 = new Box.Filler(new Dimension(0, 0), new Dimension(0, 0), new Dimension(32767, 0));
+        m_addNewFileButton = new JButton();
+        filler3 = new Box.Filler(new Dimension(5, 0), new Dimension(5, 0), new Dimension(5, 32767));
+        m_wikiImportButton = new JButton();
+        filler4 = new Box.Filler(new Dimension(5, 0), new Dimension(5, 0), new Dimension(5, 32767));
+        m_closeButton = new JButton();
+        filler2 = new Box.Filler(new Dimension(0, 0), new Dimension(0, 0), new Dimension(32767, 0));
+        jPanel2 = new JPanel();
+        filler6 = new Box.Filler(new Dimension(0, 0), new Dimension(0, 0), new Dimension(0, 32767));
+        btnFirst = new JButton();
+        filler8 = new Box.Filler(new Dimension(0, 5), new Dimension(0, 5), new Dimension(32767, 5));
+        btnUp = new JButton();
+        filler7 = new Box.Filler(new Dimension(0, 20), new Dimension(0, 20), new Dimension(32767, 20));
+        btnDown = new JButton();
+        filler9 = new Box.Filler(new Dimension(0, 5), new Dimension(0, 5), new Dimension(32767, 5));
+        btnLast = new JButton();
+        filler5 = new Box.Filler(new Dimension(0, 0), new Dimension(0, 0), new Dimension(0, 32767));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 10));
-        jPanel3.setLayout(new java.awt.BorderLayout());
+        getContentPane().setLayout(new GridBagLayout());
 
-        tablesOuterPanel.setLayout(new java.awt.BorderLayout());
-
-        tablesInnerPanel.setLayout(new java.awt.BorderLayout());
-
-        scrollFiles.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        scrollFiles.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        tableFiles.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        tableFiles.setFillsViewportHeight(true);
-        tableFiles.getTableHeader().setResizingAllowed(false);
+        scrollFiles.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollFiles.setViewportView(tableFiles);
 
-        tablesInnerPanel.add(scrollFiles, java.awt.BorderLayout.CENTER);
-
-        tableTotal.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        tablesInnerPanel.add(tableTotal, java.awt.BorderLayout.SOUTH);
-
-        tablesOuterPanel.add(tablesInnerPanel, java.awt.BorderLayout.CENTER);
-
-        jPanel3.add(tablesOuterPanel, java.awt.BorderLayout.CENTER);
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        getContentPane().add(scrollFiles, gridBagConstraints);
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new Insets(50, 5, 10, 5);
+        getContentPane().add(tableTotal, gridBagConstraints);
 
         statLabel.setEditable(false);
-        statLabel.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
-        statLabel.setFont(new JLabel().getFont());
+        statLabel.setColumns(20);
         statLabel.setLineWrap(true);
-        statLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 0, 10));
-        jPanel3.add(statLabel, java.awt.BorderLayout.SOUTH);
+        statLabel.setRows(5);
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new Insets(10, 0, 0, 0);
+        getContentPane().add(statLabel, gridBagConstraints);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 0, 0));
-        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.PAGE_AXIS));
-        jPanel4.add(filler2);
+        jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.LINE_AXIS));
+        jPanel1.add(filler1);
 
-        jPanel2.setLayout(new java.awt.GridBagLayout());
-
-        org.openide.awt.Mnemonics.setLocalizedText(btnFirst, OStrings.getString("PF_MOVE_FIRST")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel2.add(btnFirst, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(btnUp, OStrings.getString("PF_MOVE_UP")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel2.add(btnUp, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 2;
-        jPanel2.add(filler3, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(btnDown, OStrings.getString("PF_MOVE_DOWN")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel2.add(btnDown, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(btnLast, OStrings.getString("PF_MOVE_LAST")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel2.add(btnLast, gridBagConstraints);
-
-        jPanel4.add(jPanel2);
-        jPanel4.add(filler1);
-
-        jPanel3.add(jPanel4, java.awt.BorderLayout.EAST);
-
-        getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
-        jPanel1.add(filler5);
-
-        org.openide.awt.Mnemonics.setLocalizedText(m_addNewFileButton, OStrings.getString("TF_MENU_FILE_IMPORT")); // NOI18N
+        Mnemonics.setLocalizedText(m_addNewFileButton, OStrings.getString("TF_MENU_FILE_IMPORT")); // NOI18N
         jPanel1.add(m_addNewFileButton);
+        jPanel1.add(filler3);
 
-        org.openide.awt.Mnemonics.setLocalizedText(m_wikiImportButton, OStrings.getString("TF_MENU_WIKI_IMPORT")); // NOI18N
+        Mnemonics.setLocalizedText(m_wikiImportButton, OStrings.getString("TF_MENU_WIKI_IMPORT")); // NOI18N
         jPanel1.add(m_wikiImportButton);
+        jPanel1.add(filler4);
 
-        org.openide.awt.Mnemonics.setLocalizedText(m_closeButton, OStrings.getString("BUTTON_CLOSE")); // NOI18N
+        Mnemonics.setLocalizedText(m_closeButton, OStrings.getString("BUTTON_CLOSE")); // NOI18N
         jPanel1.add(m_closeButton);
-        jPanel1.add(filler6);
+        jPanel1.add(filler2);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new Insets(10, 0, 0, 0);
+        getContentPane().add(jPanel1, gridBagConstraints);
+
+        jPanel2.setLayout(new BoxLayout(jPanel2, BoxLayout.Y_AXIS));
+        jPanel2.add(filler6);
+
+        Mnemonics.setLocalizedText(btnFirst, OStrings.getString("PF_MOVE_FIRST")); // NOI18N
+        jPanel2.add(btnFirst);
+        jPanel2.add(filler8);
+
+        Mnemonics.setLocalizedText(btnUp, OStrings.getString("PF_MOVE_UP")); // NOI18N
+        jPanel2.add(btnUp);
+        jPanel2.add(filler7);
+
+        Mnemonics.setLocalizedText(btnDown, OStrings.getString("PF_MOVE_DOWN")); // NOI18N
+        jPanel2.add(btnDown);
+        jPanel2.add(filler9);
+
+        Mnemonics.setLocalizedText(btnLast, OStrings.getString("PF_MOVE_LAST")); // NOI18N
+        jPanel2.add(btnLast);
+        jPanel2.add(filler5);
+
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 5;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new Insets(5, 5, 5, 5);
+        getContentPane().add(jPanel2, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(ProjectFilesList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ProjectFilesList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ProjectFilesList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ProjectFilesList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ProjectFilesList().setVisible(true);
+            }
+        });
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnDown;
-    public javax.swing.JButton btnFirst;
-    public javax.swing.JButton btnLast;
-    public javax.swing.JButton btnUp;
-    public javax.swing.Box.Filler filler1;
-    public javax.swing.Box.Filler filler2;
-    public javax.swing.Box.Filler filler3;
-    public javax.swing.Box.Filler filler5;
-    public javax.swing.Box.Filler filler6;
-    public javax.swing.JPanel jPanel1;
-    public javax.swing.JPanel jPanel2;
-    public javax.swing.JPanel jPanel3;
-    public javax.swing.JPanel jPanel4;
-    public javax.swing.JButton m_addNewFileButton;
-    public javax.swing.JButton m_closeButton;
-    public javax.swing.JButton m_wikiImportButton;
-    public javax.swing.JScrollPane scrollFiles;
-    public javax.swing.JTextArea statLabel;
-    public javax.swing.JTable tableFiles;
-    public javax.swing.JTable tableTotal;
-    public javax.swing.JPanel tablesInnerPanel;
-    public javax.swing.JPanel tablesOuterPanel;
+    public JButton btnDown;
+    public JButton btnFirst;
+    public JButton btnLast;
+    public JButton btnUp;
+    public Box.Filler filler1;
+    public Box.Filler filler2;
+    public Box.Filler filler3;
+    public Box.Filler filler4;
+    public Box.Filler filler5;
+    public Box.Filler filler6;
+    public Box.Filler filler7;
+    public Box.Filler filler8;
+    public Box.Filler filler9;
+    public JPanel jPanel1;
+    public JPanel jPanel2;
+    public JButton m_addNewFileButton;
+    public JButton m_closeButton;
+    public JButton m_wikiImportButton;
+    public JScrollPane scrollFiles;
+    public JTextArea statLabel;
+    public JTable tableFiles;
+    public JTable tableTotal;
     // End of variables declaration//GEN-END:variables
 }

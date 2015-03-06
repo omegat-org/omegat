@@ -47,6 +47,7 @@ import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -58,6 +59,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.Scrollable;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -174,7 +176,7 @@ public class ProjectPropertiesDialog extends JDialog {
         srcExcludes.addAll(projectProperties.getSourceRootExcludes());
 
         Border emptyBorder = new EmptyBorder(2, 0, 2, 0);
-        Box centerBox = Box.createVerticalBox();
+        Box centerBox = new ScrollableBox(BoxLayout.Y_AXIS);
         // Have to set background and opacity on OS X or else entire dialog is white.
         centerBox.setBackground(getBackground());
         centerBox.setOpaque(true);
@@ -641,6 +643,7 @@ public class ProjectPropertiesDialog extends JDialog {
         centerBox.add(dirsBox);
 
         JScrollPane scrollPane = new JScrollPane(centerBox);
+        scrollPane.getViewport().setBackground(getBackground());
         getContentPane().add(scrollPane, "Center");
 
         JButton m_okButton = new JButton();
@@ -1243,6 +1246,39 @@ public class ProjectPropertiesDialog extends JDialog {
         }
     }
 
+    private class ScrollableBox extends Box implements Scrollable {
+
+        public ScrollableBox(int axis) {
+            super(axis);
+        }
+        
+        @Override
+        public Dimension getPreferredScrollableViewportSize() {
+            return getPreferredSize();
+        }
+
+        @Override
+        public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
+            return getFont().getSize();
+        }
+
+        @Override
+        public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
+            return getFont().getSize();
+        }
+
+        @Override
+        public boolean getScrollableTracksViewportWidth() {
+            return true;
+        }
+
+        @Override
+        public boolean getScrollableTracksViewportHeight() {
+            return false;
+        }
+        
+    }
+    
     /**
      * Whether the user cancelled the dialog.
      */

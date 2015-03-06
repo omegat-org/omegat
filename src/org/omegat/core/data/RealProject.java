@@ -425,6 +425,7 @@ public class RealProject implements IProject {
      * thread shouldn't throw any error.
      */
     public void closeProject() {
+        loaded = false;
         flushProcessCache();
         tmMonitor.fin();
         tmOtherLanguagesMonitor.fin();

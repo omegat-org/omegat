@@ -124,6 +124,7 @@ public class ProjectFilesListController {
     private static final Color COLOR_CURRENT_BG = new Color(0xC8DDF2);
     private static final Color COLOR_SELECTION_FG = Color.WHITE;
     private static final Color COLOR_SELECTION_BG = new Color(0x2F77DA);
+    private static final Color COLOR_ALTERNATING_HILITE = new Color(245, 245, 245);
 
     private static final int LINE_SPACING = 6;
 
@@ -776,7 +777,7 @@ public class ProjectFilesListController {
         TableColumn cUnique = new TableColumn(4, 50);
         cUnique.setCellRenderer(new CustomRenderer(null, SwingConstants.RIGHT, ",##0"));
         TableColumn cScrollbarMargin = new TableColumn(5, 0);
-        cScrollbarMargin.setCellRenderer(new CustomRenderer(null, SwingConstants.LEFT, null));
+        cScrollbarMargin.setCellRenderer(new CustomRenderer(null, SwingConstants.LEFT, null, false));
         columns.addColumn(cFile);
         columns.addColumn(cFilter);
         columns.addColumn(cEncoding);
@@ -838,13 +839,20 @@ public class ProjectFilesListController {
     private class CustomRenderer extends DefaultTableCellRenderer {
         protected DecimalFormat pattern;
         private final List<IProject.FileInfo> files;
+        private final boolean doHighlight;
 
         public CustomRenderer(List<IProject.FileInfo> files, final int alignment, final String decimalPattern) {
+            this(files, alignment, decimalPattern, true);
+        }
+        
+        public CustomRenderer(List<IProject.FileInfo> files, final int alignment, final String decimalPattern,
+                boolean doHighlight) {
             this.files = files;
             setHorizontalAlignment(alignment);
             if (decimalPattern != null) {
                 pattern = new DecimalFormat(decimalPattern);
             }
+            this.doHighlight = doHighlight;
         }
 
         @Override
@@ -867,6 +875,9 @@ public class ProjectFilesListController {
             } else if (isCurrentFile(row)) {
                 result.setForeground(COLOR_CURRENT_FG);
                 result.setBackground(COLOR_CURRENT_BG);
+            } else if (row % 2 == 1 && doHighlight) {
+                result.setForeground(table.getForeground());
+                result.setBackground(COLOR_ALTERNATING_HILITE);
             } else {
                 result.setForeground(table.getForeground());
                 result.setBackground(table.getBackground());

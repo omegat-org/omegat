@@ -69,6 +69,7 @@ import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.border.MatteBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -802,6 +803,7 @@ public class ProjectFilesListController {
 
     private void createTableTotal() {
         applyColors(list.tableTotal);
+        list.tableTotal.setBorder(new MatteBorder(1, 0, 0, 0, COLOR_ALTERNATING_HILITE));
 
         modelTotal = new AbstractTableModel() {
             @Override

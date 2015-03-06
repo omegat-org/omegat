@@ -137,6 +137,8 @@ public class ProjectFilesListController {
     private final MainWindow m_parent;
 
     private Font dialogFont;
+    
+    private int[] optimalColWidths;
 
     public ProjectFilesListController(MainWindow parent) {
         m_parent = parent;
@@ -234,6 +236,7 @@ public class ProjectFilesListController {
         CoreEvents.registerEntryEventListener(new IEntryEventListener() {
             @Override
             public void onNewFile(String activeFileName) {
+                optimalColWidths = null;
                 list.tableFiles.repaint();
                 list.tableTotal.repaint();
                 modelTotal.fireTableDataChanged();
@@ -548,6 +551,8 @@ public class ProjectFilesListController {
         list.setTitle(StaticUtils.format(OStrings.getString("PF_WINDOW_TITLE"), files.size()));
 
         setTableFilesModel(files);
+        
+        optimalColWidths = null;
     }
 
     private void createTableFiles() {
@@ -555,7 +560,17 @@ public class ProjectFilesListController {
         list.tableFiles.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     }
 
-    private void adjustTableColumns() {
+    private void calculateOptimalColWidths() {
+        if (optimalColWidths != null) {
+            int otherCols = 0;
+            for (int i = 1; i < optimalColWidths.length; i++) {
+                otherCols += optimalColWidths[i];
+            }
+            optimalColWidths[0] = list.scrollFiles.getViewport().getWidth() - otherCols;
+            return;
+        }
+        optimalColWidths = new int[list.tableFiles.getColumnCount()];
+        
         // See: https://tips4java.wordpress.com/2008/11/10/table-column-adjuster/
         int otherCols = 0;
         for (int column = 1; column < list.tableFiles.getColumnCount(); column++) {
@@ -591,15 +606,29 @@ public class ProjectFilesListController {
                     break;
                 }
             }
-            col.setPreferredWidth(preferredWidth);
-            list.tableTotal.getColumnModel().getColumn(column).setPreferredWidth(preferredWidth);
+            optimalColWidths[column] = preferredWidth;
             otherCols += preferredWidth;
         }
+        optimalColWidths[0] = list.scrollFiles.getViewport().getWidth() - otherCols;
+    }
+    
+    private void adjustTableColumns() {
+        calculateOptimalColWidths();
         
-        // Set first column to the remainder
-        int firstColumnWidth = list.scrollFiles.getViewport().getWidth() - otherCols;
-        list.tableFiles.getColumnModel().getColumn(0).setPreferredWidth(firstColumnWidth);
-        list.tableTotal.getColumnModel().getColumn(0).setPreferredWidth(firstColumnWidth);
+        int allColsEvenWidth = list.scrollFiles.getViewport().getWidth() / list.tableFiles.getColumnCount();
+        
+        // Use optimal widths only if it results in a bigger first column
+        if (optimalColWidths[0] > allColsEvenWidth) {
+            for (int i = 0; i < optimalColWidths.length; i++) {
+                list.tableFiles.getColumnModel().getColumn(i).setPreferredWidth(optimalColWidths[i]);
+                list.tableTotal.getColumnModel().getColumn(i).setPreferredWidth(optimalColWidths[i]);
+            }
+        } else {
+            for (int i = 0; i < list.tableFiles.getColumnCount(); i++) {
+                list.tableFiles.getColumnModel().getColumn(i).setPreferredWidth(allColsEvenWidth);
+                list.tableTotal.getColumnModel().getColumn(i).setPreferredWidth(allColsEvenWidth);
+            } 
+        }
         
         // Set last column of totals table to match size of scrollbar
         JScrollBar scrollbar = list.scrollFiles.getVerticalScrollBar();

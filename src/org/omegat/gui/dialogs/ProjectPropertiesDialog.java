@@ -8,7 +8,7 @@
                2011 Martin Fleurke
                2012 Didier Briel, Aaron Madlon-Kay
                2013 Aaron Madlon-Kay, Yu Tang
-               2014 Aaron Madlon-Kay
+               2014-2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

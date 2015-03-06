@@ -305,7 +305,8 @@ public class ProjectFilesListController {
             @Override
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
-                if (!Character.isWhitespace(c) && !Character.isISOControl(c)) {
+                if ((e.getModifiers() == 0 || e.getModifiers() == KeyEvent.SHIFT_MASK)
+                        && !Character.isWhitespace(c) && !Character.isISOControl(c)) {
                     if (filterPanel == null) {
                         startFilter(e.getKeyChar());
                     } else {

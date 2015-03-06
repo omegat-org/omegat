@@ -46,6 +46,7 @@ import org.omegat.util.OStrings;
 import com.vlsolutions.swing.docking.AutoHidePolicy;
 import com.vlsolutions.swing.docking.AutoHidePolicy.ExpandMode;
 import com.vlsolutions.swing.docking.ui.DockingUISettings;
+import java.awt.Font;
 
 /**
  * Docking UI support.
@@ -80,7 +81,9 @@ public class DockingUI {
         UIManager.put("DockTabbedPane.floatButtonText", OStrings.getString("DOCKING_HINT_UNDOCK"));
         UIManager.put("DockTabbedPane.closeButtonText", new String());
 
-        UIManager.put("DockViewTitleBar.titleFont", new JLabel().getFont());
+        Font defaultFont = new JLabel().getFont();
+        UIManager.put("DockViewTitleBar.titleFont", defaultFont);
+        UIManager.put("JTabbedPaneSmartIcon.font", defaultFont);
 
         UIManager.put("DockViewTitleBar.isCloseButtonDisplayed", Boolean.FALSE);
 

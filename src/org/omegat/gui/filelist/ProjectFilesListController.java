@@ -136,7 +136,7 @@ public class ProjectFilesListController {
     
     private final MainWindow m_parent;
 
-    private Font dialogFont;
+    private Font defaultFont;
     
     private int[] optimalColWidths;
     private int cutoverWidth = -1;
@@ -148,8 +148,16 @@ public class ProjectFilesListController {
         list = new ProjectFilesList();
 
         createTableFiles();
-        dialogFont = list.tableFiles.getFont();
         createTableTotal();
+        
+        defaultFont = list.tableFiles.getFont();
+        if (Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
+            String fontName = Preferences.getPreference(OConsts.TF_SRC_FONT_NAME);
+            int fontSize = Integer.parseInt(Preferences.getPreference(OConsts.TF_SRC_FONT_SIZE));
+            setFont(new Font(fontName, Font.PLAIN, fontSize));
+        } else {
+            setFont(defaultFont);
+        }
 
         list.tablesInnerPanel.setBorder(new JScrollPane().getBorder());
         
@@ -257,14 +265,11 @@ public class ProjectFilesListController {
         CoreEvents.registerFontChangedEventListener(new IFontChangedEventListener() {
             @Override
             public void onFontChanged(Font newFont) {
-                if (!Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT))
-                    // We're using the standard dialog font
-                    newFont = dialogFont;
-                list.tableFiles.setFont(newFont);
-                list.tableTotal.setFont(new Font(newFont.getName(), Font.BOLD, newFont.getSize()));
-                list.tableFiles.setRowHeight(newFont.getSize() + LINE_SPACING);
-                list.tableTotal.setRowHeight(newFont.getSize() + LINE_SPACING);
-                list.statLabel.setFont(newFont);
+                if (!Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
+                    newFont = defaultFont;
+                }
+                setFont(newFont);
+                adjustTableColumns();
             }
         });
 
@@ -978,18 +983,13 @@ public class ProjectFilesListController {
         }
     }
 
-    public void setFont(Font f) {
-        list.setFont(f);
-
-        if (Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
-            String fontName = Preferences.getPreference(OConsts.TF_SRC_FONT_NAME);
-            int fontSize = Integer.valueOf(Preferences.getPreference(OConsts.TF_SRC_FONT_SIZE));
-            list.tableFiles.setFont(new Font(fontName, Font.PLAIN, fontSize));
-            list.tableTotal.setFont(new Font(fontName, Font.BOLD, fontSize));
-            list.tableFiles.setRowHeight(fontSize + LINE_SPACING);
-            list.tableTotal.setRowHeight(fontSize + LINE_SPACING);
-            list.statLabel.setFont(new Font(fontName, Font.PLAIN, fontSize));
-        }
+    private void setFont(Font font) {
+        list.tableFiles.setFont(font);
+        list.tableTotal.setFont(new Font(font.getName(), Font.BOLD, font.getSize()));
+        list.tableFiles.setRowHeight(font.getSize() + LINE_SPACING);
+        list.tableTotal.setRowHeight(font.getSize() + LINE_SPACING);
+        list.statLabel.setFont(font);
+        resetColWidthData();
     }
 
     class Sorter extends RowSorter<IProject.FileInfo> {

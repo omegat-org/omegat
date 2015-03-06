@@ -176,12 +176,15 @@ public class ProjectPropertiesDialog extends JDialog {
 
         Border emptyBorder = new EmptyBorder(2, 0, 2, 0);
         Box centerBox = Box.createVerticalBox();
+        // Have to set background and opacity on OS X or else entire dialog is white.
+        centerBox.setBackground(getBackground());
+        centerBox.setOpaque(true);
         centerBox.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         // hinting message
         JTextArea m_messageArea = new JTextArea();
         m_messageArea.setEditable(false);
-        m_messageArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        m_messageArea.setBackground(getBackground());
         m_messageArea.setFont(new Label().getFont());
         Box bMes = Box.createHorizontalBox();
         bMes.setBorder(emptyBorder);

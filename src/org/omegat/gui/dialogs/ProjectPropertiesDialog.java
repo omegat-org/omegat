@@ -35,10 +35,9 @@ import gen.core.filters.Filters;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GraphicsConfiguration;
-import java.awt.Insets;
+import java.awt.GraphicsEnvironment;
 import java.awt.Label;
-import java.awt.Toolkit;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -685,6 +684,7 @@ public class ProjectPropertiesDialog extends JDialog {
             }
         });
         m_srcExcludes.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 List<String> result = FilenamePatternsEditorController.show(srcExcludes);
                 if (result != null) {
@@ -863,16 +863,10 @@ public class ProjectPropertiesDialog extends JDialog {
         pack();
 
         setSize(9 * getWidth() / 8, getHeight() + 10);
-        this.setResizable(true);
-        Toolkit kit = getToolkit();
-        Dimension screenSize = kit.getScreenSize();
-        Dimension dialogSize = getSize();
-        GraphicsConfiguration config = getGraphicsConfiguration();
-        Insets insets = kit.getScreenInsets(config);
-        screenSize.height -= (insets.top + insets.bottom);  // excluding the Windows taskbar
-        if (dialogSize.height > screenSize.height) {
-            dialogSize.height = screenSize.height;
-            setSize(dialogSize);
+        setResizable(true);
+        Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+        if (getHeight() > rect.height) {
+            setSize(getWidth(), rect.height);
         }
         DockingUI.displayCentered(this);
     }

@@ -60,7 +60,7 @@ public class TableFilterPanel extends javax.swing.JPanel {
         add(jLabel1, java.awt.BorderLayout.WEST);
         add(filterTextField, java.awt.BorderLayout.CENTER);
 
-        org.openide.awt.Mnemonics.setLocalizedText(filterCloseButton, OStrings.getString("BUTTON_CLOSE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(filterCloseButton, OStrings.getString("PF_FILTER_BUTTON_CLOSE")); // NOI18N
         add(filterCloseButton, java.awt.BorderLayout.EAST);
     }// </editor-fold>//GEN-END:initComponents
 

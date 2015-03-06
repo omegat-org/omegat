@@ -87,7 +87,6 @@ public class ProjectFilesList extends javax.swing.JFrame {
         scrollFiles.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         scrollFiles.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        tableFiles.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tableFiles.setFillsViewportHeight(true);
         scrollFiles.setViewportView(tableFiles);
 

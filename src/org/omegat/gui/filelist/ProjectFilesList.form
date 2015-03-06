@@ -77,7 +77,6 @@
                   <SubComponents>
                     <Component class="javax.swing.JTable" name="tableFiles">
                       <Properties>
-                        <Property name="autoResizeMode" type="int" value="0"/>
                         <Property name="fillsViewportHeight" type="boolean" value="true"/>
                       </Properties>
                     </Component>

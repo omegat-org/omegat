@@ -646,6 +646,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
         JButton m_okButton = new JButton();
         Mnemonics.setLocalizedText(m_okButton, OStrings.getString("BUTTON_OK"));
+        getRootPane().setDefaultButton(m_okButton);
         JButton m_cancelButton = new JButton();
         Mnemonics.setLocalizedText(m_cancelButton, OStrings.getString("BUTTON_CANCEL"));
 

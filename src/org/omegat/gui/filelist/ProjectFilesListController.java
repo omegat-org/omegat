@@ -613,6 +613,23 @@ public class ProjectFilesListController {
     }
     
     private void adjustTableColumns() {
+        // Set last column of tableTotal to match size of scrollbar.
+        JScrollBar scrollbar = list.scrollFiles.getVerticalScrollBar();
+        int sbWidth = scrollbar == null || !scrollbar.isVisible() ? 0 : scrollbar.getWidth();
+        list.tableTotal.getColumnModel().getColumn(list.tableTotal.getColumnCount() - 1).setPreferredWidth(sbWidth);
+        
+        // User may have manually adjusted a column. In that case, just propagate
+        // column sizes from tableFiles to tableTotal.
+        if (list.tableFiles.getAutoResizeMode() != JTable.AUTO_RESIZE_OFF) {
+            for (int i = 0; i < list.tableFiles.getColumnCount(); i++) {
+                TableColumn srcCol = list.tableFiles.getColumnModel().getColumn(i);
+                TableColumn trgCol = list.tableTotal.getColumnModel().getColumn(i);
+                trgCol.setPreferredWidth(srcCol.getWidth());
+            }
+            return;
+        }
+        
+        // If the user has not manually adjusted the columns, try to auto-size them.
         calculateOptimalColWidths();
         
         int allColsEvenWidth = list.scrollFiles.getViewport().getWidth() / list.tableFiles.getColumnCount();
@@ -629,11 +646,6 @@ public class ProjectFilesListController {
                 list.tableTotal.getColumnModel().getColumn(i).setPreferredWidth(allColsEvenWidth);
             } 
         }
-        
-        // Set last column of totals table to match size of scrollbar
-        JScrollBar scrollbar = list.scrollFiles.getVerticalScrollBar();
-        int sbWidth = scrollbar == null || !scrollbar.isVisible() ? 0 : scrollbar.getWidth();
-        list.tableTotal.getColumnModel().getColumn(list.tableTotal.getColumnCount() - 1).setPreferredWidth(sbWidth);
     }
 
     private void setTableFilesModel(final List<IProject.FileInfo> files) {
@@ -723,6 +735,13 @@ public class ProjectFilesListController {
 
             @Override
             public void columnMarginChanged(ChangeEvent e) {
+                TableColumn col = list.tableFiles.getTableHeader().getResizingColumn();
+                if (col != null) {
+                    // User has manually resized a column. Turn off our auto-sizing
+                    // and let the table handle it itself.
+                    list.tableFiles.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+                    adjustTableColumns();
+                }
             }
 
             @Override

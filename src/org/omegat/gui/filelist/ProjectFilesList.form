@@ -79,9 +79,6 @@
                       <Properties>
                         <Property name="autoResizeMode" type="int" value="0"/>
                         <Property name="fillsViewportHeight" type="boolean" value="true"/>
-                        <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                          <TableHeader reorderingAllowed="true" resizingAllowed="false"/>
-                        </Property>
                       </Properties>
                     </Component>
                   </SubComponents>

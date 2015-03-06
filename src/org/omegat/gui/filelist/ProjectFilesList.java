@@ -89,7 +89,6 @@ public class ProjectFilesList extends javax.swing.JFrame {
 
         tableFiles.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tableFiles.setFillsViewportHeight(true);
-        tableFiles.getTableHeader().setResizingAllowed(false);
         scrollFiles.setViewportView(tableFiles);
 
         tablesInnerPanel.add(scrollFiles, java.awt.BorderLayout.CENTER);

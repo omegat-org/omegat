@@ -33,7 +33,7 @@
 
       <para>Le opzioni di ricerca sono simili a quelle visualizzate nella <link linkend="section.search.window">finestra di ricerca</link>.</para>
 
-      <para>Ad eccezione di una: attivare <emphasis role="bold">Non tradotti</emphasis> per operare l'operazione di ricerca e sostituzione anche su segmenti non ancora lavorati.</para>
+      <para>Ad eccezione di una: attivare <emphasis role="bold">Non tradotti</emphasis> per eseguire l'operazione di ricerca e sostituzione anche sui segmenti non ancora tradotti.</para>
 
       <para>Per rendere questo possibile (sebbene la funzione Cerca e sostituisci operi solo sulla memoria), OmegaT copia il segmento di partenza nel segmento di destinazione, prima che avvenga l'operazione di sostituzione. Se non viene eseguita alcuna sostituzione in un dato segmento, il segmento di destinazione verrà “svuotato”, ossia resterà non tradotto.</para>
     </section>

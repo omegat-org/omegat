@@ -365,7 +365,7 @@
           <primary>Avvio di OmegaT</primary> <secondary>Argomenti dello script di avvio</secondary>
         </indexterm></title>
 
-      <para>Il comando di base è stato già citato prima. Le modifiche a questo comando implicano l'aggiunta di &quot;argomenti&quot;. Gli argomenti sono aggiunti dopo la parte <emphasis>&quot;java&quot;</emphasis> iniziale e prima di <emphasis>&quot;-jar <application>OmegaT</application>.jar&quot;</emphasis>. Si noti che in Windows è possibile cambiare il file <emphasis><application>OmegaT</application>.l4J.ini</emphasis> per farle coincidere con proprie preferenze. In egual modo, in Mac OS X è possibile cambiare <emphasis>Info.plist</emphasis> situato in <emphasis><application>OmegaT</application>.app/Contents/</emphasis>.</para>
+      <para>Il comando di base è stato già citato prima. Le modifiche a questo comando implicano l'aggiunta di &quot;argomenti&quot;. Gli argomenti sono aggiunti dopo la parte <emphasis>&quot;java&quot;</emphasis> iniziale e prima di <emphasis>&quot;-jar <application>OmegaT</application>.jar&quot;</emphasis>. Si noti che in Windows è possibile cambiare il file <filename>OmegaT.l4J.ini</filename> per farle coincidere con proprie preferenze. In altre piattaforme è possibile modificare l'avviatore (ossia <filename>OmegaT.sh</filename> sul Mac, <filename>OmegaT</filename> in Linux) in modo che esegua le stesse operazioni.</para>
 
       <para>Sotto viene fornito un elenco di argomenti possibili. Gli utenti avanzati possono ottenere ulteriori informazioni sugli argomenti digitando <emphasis>man java</emphasis> nella finestra di terminale.</para>
 

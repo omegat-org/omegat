@@ -373,7 +373,7 @@
           <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary>
         </indexterm></title>
 
-      <para>De basisopdracht is hierboven al genoemd. Wijzigingen voor deze opdracht behelzen het daaraan toevoegen van &quot;argumenten&quot;. Argumenten worden toegevoegd ná het initiële <emphasis>&quot;java&quot;</emphasis> en vóór het gedeelte <emphasis>&quot;-jar <application>OmegaT</application>.jar&quot;</emphasis>. Onthoud dat u in Windows het bestand <emphasis><application>OmegaT</application>.l4J.ini</emphasis> kunt wijzigen om uw voorkeuren weer te geven. Op Mac OSX kunt u <emphasis>Info.plist</emphasis> wijzigen, dat zich bevindt in <emphasis><application>OmegaT</application>.app/Contents/</emphasis>, om hetzelfde te doen.</para>
+      <para>De basisopdracht is hierboven al genoemd. Wijzigingen voor deze opdracht behelzen het daaraan toevoegen van &quot;argumenten&quot;. Argumenten worden toegevoegd ná het initiële <emphasis>&quot;java&quot;</emphasis> en vóór het gedeelte <emphasis>&quot;-jar <application>OmegaT</application>.jar&quot;</emphasis>. Onthoud dat u in Windows het bestand <filename>OmegaT.l4J.ini</filename> kunt wijzigen om uw voorkeuren weer te geven. Op andere platformen kunt u uw startprogramma aanpassen (bijv., <filename>OmegaT.sh</filename> op de Mac, <filename>OmegaT</filename> onder Linux) om hetzelfde te doen.</para>
 
       <para>Een lijst van mogelijke argumenten wordt hieronder weergegeven. Gevorderde gebruikers kunnen meer informatie over de argumenten vinden door <emphasis>man java</emphasis> in het terminalvenster te typen.</para>
 

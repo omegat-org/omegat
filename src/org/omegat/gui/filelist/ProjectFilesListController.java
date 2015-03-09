@@ -553,7 +553,7 @@ public class ProjectFilesListController {
     /**
      * Builds the table which lists all the project files.
      */
-    public void buildDisplay(List<IProject.FileInfo> files) {
+    private void buildDisplay(List<IProject.FileInfo> files) {
         UIThreadsUtil.mustBeSwingThread();
 
         String path;
@@ -909,7 +909,7 @@ public class ProjectFilesListController {
     }
 
     /** Updates the Import Files button status. */
-    public void uiUpdateImportButtonStatus() {
+    private void uiUpdateImportButtonStatus() {
         list.m_addNewFileButton.setEnabled(Core.getProject().isProjectLoaded());
         list.m_wikiImportButton.setEnabled(Core.getProject().isProjectLoaded());
     }

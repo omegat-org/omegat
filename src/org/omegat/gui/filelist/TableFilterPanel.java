@@ -53,10 +53,9 @@ public class TableFilterPanel extends javax.swing.JPanel {
         filterCloseButton = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        setLayout(new java.awt.BorderLayout());
+        setLayout(new java.awt.BorderLayout(5, 0));
 
         jLabel1.setText(OStrings.getString("PF_TABLE_FILTER")); // NOI18N
-        jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 5));
         add(jLabel1, java.awt.BorderLayout.WEST);
         add(filterTextField, java.awt.BorderLayout.CENTER);
 

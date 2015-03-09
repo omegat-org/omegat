@@ -111,7 +111,7 @@ for the bug description.
   Localisation updates:
 
   - Belarusian localisation updated to 3.1.9 (UI, tutorial, scripts, readme)
-  - Basque localisation updated to 3.1.8 (UI, tutorial, scripts, readme)
+  - Basque localisation updated to 3.1.9 (UI, tutorial, scripts, readme)
   - Dutch localisation updated to 3.1.9 (UI, documentation, scripts, readme)
   - Italian localisation updated to 3.1.9 (UI, documentation, scripts, readme)
   - Japanese localisation updated to 3.1.9 (UI, documentation, readme)

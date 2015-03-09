@@ -61,6 +61,7 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import javax.swing.AbstractAction;
+import javax.swing.JComponent;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -69,6 +70,7 @@ import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.DocumentEvent;
@@ -126,6 +128,7 @@ public class ProjectFilesListController {
     private static final Color COLOR_SELECTION_FG = Color.WHITE;
     private static final Color COLOR_SELECTION_BG = new Color(0x2F77DA);
     private static final Color COLOR_ALTERNATING_HILITE = new Color(245, 245, 245);
+    private static final Border TABLE_FOCUS_BORDER = new MatteBorder(1, 1, 1, 1, new Color(0x76AFE8));
 
     private static final int LINE_SPACING = 6;
 
@@ -967,6 +970,9 @@ public class ProjectFilesListController {
             } else {
                 result.setForeground(table.getForeground());
                 result.setBackground(table.getBackground());
+            }
+            if (hasFocus && result instanceof JComponent) {
+                ((JComponent) result).setBorder(TABLE_FOCUS_BORDER);
             }
             return result;
         }

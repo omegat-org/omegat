@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;5.&nbsp;Menu e scorciatoie da tastiera</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT 3.0- Manuale dell'Utente">
-      <link rel="up" href="index.html" title="OmegaT 3.0- Manuale dell'Utente">
+      <link rel="home" href="index.html" title="OmegaT 3.1- Manuale dell'Utente">
+      <link rel="up" href="index.html" title="OmegaT 3.1- Manuale dell'Utente">
       <link rel="prev" href="chapter.user.interface.html" title="Chapter&nbsp;4.&nbsp;L'interfaccia utente">
       <link rel="next" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Proprietà del progetto">
    </head>
@@ -40,7 +40,7 @@
                <dd>
                   <dl>
                      <dt><span class="section"><a href="chapter.menu.html#submenu.Project">1.1. Progetto</a></span></dt>
-                     <dt><span class="section"><a href="chapter.menu.html#d0e3034">1.2. Modifica</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#d0e3038">1.2. Modifica</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#submenu.GoTo">1.3. Vai</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#submenu.View">1.4. Vista</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#submenu.Tools">1.5. Strumenti</a></span></dt>
@@ -51,7 +51,7 @@
                <dt><span class="section"><a href="chapter.menu.html#keyboard.shortcuts">2. Sistemi rapidi da tastiera</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.menu.html#d0e3797">2.1. Gestione del progetto</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#d0e3984">2.1. Gestione del progetto</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#keyboard.editing">2.2. Modifica</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#keyboard.moving.around">2.3. Spostarsi nella finestra</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#keyboard.other">2.4. Altro</a></span></dt>
@@ -63,7 +63,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="ch04.main.menu"></a>1.&nbsp;<a class="indexterm" name="d0e2832"></a>Menu principale
+                     <h2 class="title" style="clear: both"><a name="ch04.main.menu"></a>1.&nbsp;<a class="indexterm" name="d0e2803"></a>Menu principale
                      </h2>
                   </div>
                </div>
@@ -103,11 +103,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.Project"></a>1.1.&nbsp;Progetto<a class="indexterm" name="d0e2890"></a></h3>
+                        <h3 class="title"><a name="submenu.Project"></a>1.1.&nbsp;Progetto<a class="indexterm" name="d0e2861"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e2895"></a><p class="title"><b>Table&nbsp;5.2.&nbsp;Menu del progetto</b></p>
+               <div class="table"><a name="d0e2866"></a><p class="title"><b>Table&nbsp;5.2.&nbsp;Menu del progetto</b></p>
                   <div class="table-contents">
                      <table summary="Menu del progetto" border="1">
                         <colgroup>
@@ -117,26 +117,38 @@
                         </colgroup>
                         <tbody>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Nuovo</span></td>
-                              <td align="left">&nbsp;</td>
+                              <td align="left"><span class="guimenuitem">Nuovo...</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>N</strong></span></td>
                               <td>Crea e apre un nuovo progetto. La finestra di dialogo per la creazione di un progetto è la stessa di quella per la modifica
                                  del progetto. Vedere<a class="xref" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Proprietà del progetto">Chapter&nbsp;6, <i>Proprietà del progetto</i></a></td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Apri</span></td>
+                              <td align="left"><span class="guimenuitem">Scarica il progetto in collaborazione...</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td>Crea una copia locale di un progetto OmegaT remoto.</td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Apri...</span></td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span></td>
                               <td>Apre un progetto esistente.</td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Importa i file di partenza...</span></td>
+                              <td align="left"><span class="guimenuitem">Apri progetto recente</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td>Dà accesso agli ultimi cinque progetti modificati di recente. Facendo clic su uno qualsiasi, verrà salvato e chiuso il progetto
+                                 attivo e aperto l'altro.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Copia i file nella cartella di partenza...</span></td>
                               <td align="left">&nbsp;</td>
                               <td>Copia i file selezionati nella cartella <code class="filename">source</code> e ricarica il progetto per caricare i nuovi file.
                               </td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Importa da MediaWiki...</span></td>
+                              <td align="left"><span class="guimenuitem">Scarica la pagina MediaWiki...</span></td>
                               <td align="left">&nbsp;</td>
-                              <td>Importa unità da pagine MediaWiki, in base all'URL digitato.</td>
+                              <td>Scarica le unità da pagine MediaWiki, in base all'URL digitato.</td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Ricarica</span></td>
@@ -165,6 +177,11 @@
                               </td>
                            </tr>
                            <tr>
+                              <td align="left"><span class="guimenuitem">Crea il documento tradotto corrente</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></td>
+                              <td>Crea il documento di arrivo che corrisponde al documento corrente contenuto nella traduzione.</td>
+                           </tr>
+                           <tr>
                               <td align="left"><span class="guimenuitem">Proprietà...</span></td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>E</strong></span></td>
                               <td>Visualizza la finestra di dialogo <a class="link" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Proprietà del progetto">Proprietà del progetto</a> nella quale si potranno modificare le lingue del progetto e il percorso di memorizzazione delle cartelle.
@@ -190,14 +207,14 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e3034"></a>1.2.&nbsp;Modifica<a class="indexterm" name="d0e3037"></a></h3>
+                        <h3 class="title"><a name="d0e3038"></a>1.2.&nbsp;Modifica<a class="indexterm" name="d0e3041"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Nota: in questo menu non si trovano i comandi che appaiono comunemente nello stesso menu delle altre applicazioni (taglia/copia/incolla),
                   anche se tali comandi saranno comunque disponibili tramite le scorciatoie da tastiera tradizionali. Per esempio:
                </p>
-               <div class="table"><a name="d0e3044"></a><p class="title"><b>Table&nbsp;5.3.&nbsp;Scorciatoie copia/taglia/incolla</b></p>
+               <div class="table"><a name="d0e3048"></a><p class="title"><b>Table&nbsp;5.3.&nbsp;Scorciatoie copia/taglia/incolla</b></p>
                   <div class="table-contents">
                      <table summary="Scorciatoie copia/taglia/incolla" border="1">
                         <colgroup>
@@ -225,7 +242,7 @@
                      </table>
                   </div>
                </div><br class="table-break"><p>Lo stesso menu Modifica contiene le voci seguenti:</p>
-               <div class="table"><a name="d0e3089"></a><p class="title"><b>Table&nbsp;5.4.&nbsp;Menu Modifica</b></p>
+               <div class="table"><a name="d0e3093"></a><p class="title"><b>Table&nbsp;5.4.&nbsp;Menu Modifica</b></p>
                   <div class="table-contents">
                      <table summary="Menu Modifica" border="1">
                         <colgroup>
@@ -271,24 +288,29 @@
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Sostituisci col testo di partenza</span></td>
-                              <td align="left"><span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>R</strong></span></td>
                               <td>Sostituisce l'intero segmento di destinazione con quello originale.</td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Inserisci il testo di partenza</span></td>
-                              <td align="left"><span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>I</strong></span></td>
                               <td>Inserisce il contenuto originale alla posizione del cursore.</td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Inserisci tag di partenza</span></td>
-                              <td align="left"><span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></td>
-                              <td><a class="indexterm" name="d0e3197"></a>Inserisce i tag originali alla posizione del cursore. Tutti i tag di rilievo del documento originale (per es., quelli OmegaT
-                                 come pure quelli personalizzati, Java, printf, e via discorrendo) saranno inseriti nel segmento di destinazione attivo, senza
-                                 tenere conto se essi sono o no già presenti. I testi, racchiusi dai tag, sono sostituiti da spazi:. <code class="literal">&lt;f0&gt;&lt;f1&gt;Questo è testo&lt;/f0&gt;&lt;/f1&gt;</code> dunque sarà copiato come <code class="literal">&lt;f0&gt;&lt;f1&gt;uno_spazio&lt;/f0&gt;&lt;/f1&gt;</code></td>
+                              <td align="left"><span class="guimenuitem">Inserisci i tag di partenza mancanti</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>T</strong></span></td>
+                              <td><a class="indexterm" name="d0e3201"></a>Inserisce i tag originali (se mancanti) alla posizione del cursore.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Inserisci il tag mancante successivo</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></td>
+                              <td><a class="indexterm" name="d0e3218"></a>Inserisce solo un tag (tra gli altri mancanti) alla posizione del cursore.
+                              </td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Esporta la selezione</span></td>
-                              <td align="left"><span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>C</strong></span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>C</strong></span></td>
                               <td>Esporta la selezione attiva in un file di testo per successiva elaborazione. Se non è stato selezionato alcun testo, nel file
                                  viene copiato il segmento originale attivo. Quando l'utente chiude <span class="application">OmegaT</span>, questo file non è vuoto, in modo da essere coerente col normale comportamento degli Appunti. Il contenuto esportato viene
                                  copiato nel file <code class="filename">selection.txt</code>, memorizzato nella cartella delle preferenze dell'utente (si veda <a class="xref" href="chapter.files.and.folders.html" title="Chapter&nbsp;8.&nbsp;File e cartelle di OmegaT">Chapter&nbsp;8, <i>File e cartelle di <span class="application">OmegaT</span></i></a>).
@@ -296,7 +318,7 @@
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Crea voce di glossario</span></td>
-                              <td align="left"><span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>G</strong></span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>G</strong></span></td>
                               <td>Permette all'utente di creare una voce nel file di glossario predefinito.</td>
                            </tr>
                            <tr>
@@ -306,15 +328,21 @@
                               </td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Commuta carattere in...</span></td>
-                              <td align="left"><span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>F3</strong></span> (vedere testo)
-                              </td>
-                              <td>Commuta il carattere del testo selezionato nel segmento di destinazione in base all'opzione scelta (minuscolo, MAIUSCOLO o
-                                 Prima lettera maiuscola). Usare Maiusc+F3 <a class="indexterm" name="d0e3272"></a>per alternare da uno stato all'altro. Se non è selezionato alcun testo, <span class="application">OmegaT</span> sceglie la parola che contiene una lettera immediatamente alla destra del cursore.
+                              <td align="left"><span class="guimenuitem">Cerca e sostituisci...</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>K</strong></span></td>
+                              <td>Apre una nuova <a class="link" href="chapter.searchandreplace.html#section.searchreplace.window" title="1.&nbsp;Finestra di ricerca">finestra di ricerca e sostituzione</a>.
                               </td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Seleziona concordanza parziale #N</span></td>
+                              <td align="left"><span class="guimenuitem">Commuta carattere in</span></td>
+                              <td align="left"><span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>F3</strong></span> (vedere testo)
+                              </td>
+                              <td>Commuta il carattere del testo selezionato nel segmento di destinazione in base all'opzione scelta (minuscolo, MAIUSCOLO o
+                                 Prima lettera maiuscola). Usare Maiusc+F3 <a class="indexterm" name="d0e3303"></a>per alternare da uno stato all'altro. Se non è selezionato alcun testo, <span class="application">OmegaT</span> sceglie la parola che contiene una lettera immediatamente alla destra del cursore.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Seleziona la concordanza</span></td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>#N</strong></span></td>
                               <td>(#N è una cifra da 1 a 5) - Seleziona la concordanza parziale N visualizzata nel pannello delle concordanze e la inserisce,
                                  o sostituisce, all'interno del segmento. La <a class="xref" href="chapter.user.interface.html#match.viewer" title="2.2.&nbsp;Pannello delle concordanze parziali">Section&nbsp;2.2, “Pannello delle concordanze parziali”</a> descrive in dettaglio la codifica dei colori.
@@ -334,6 +362,25 @@
                                  l'attuale traduzione, non è adatta e inserire la traduzione alternativa.
                               </td>
                            </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Rimuovi traduzione</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td>Elimina la traduzione e imposta il segmento come non tradotto.</td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Imposta traduzione vuota</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td>Definisce la traduzione come vuota. Nel documento di destinazione per questo segmento non apparirà nulla. Nell'Editor, la
+                                 traduzione risulterà &lt;VUOTA&gt;
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Registra traduzione uguale</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>S</strong></span></td>
+                              <td>Usare questo comando affinché la traduzione sia registrata uguale al segmento di partenza, anche se l'opzione "Permetti traduzione
+                                 uguale all'originale" (in Opzioni/Comportamento di modifica...) non è attivata.
+                              </td>
+                           </tr>
                         </tbody>
                      </table>
                   </div>
@@ -342,11 +389,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.GoTo"></a>1.3.&nbsp;Vai<a class="indexterm" name="d0e3312"></a></h3>
+                        <h3 class="title"><a name="submenu.GoTo"></a>1.3.&nbsp;Vai<a class="indexterm" name="d0e3371"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3317"></a><p class="title"><b>Table&nbsp;5.5.&nbsp;Menu Vai</b></p>
+               <div class="table"><a name="d0e3376"></a><p class="title"><b>Table&nbsp;5.5.&nbsp;Menu Vai</b></p>
                   <div class="table-contents">
                      <table summary="Menu Vai" border="1">
                         <colgroup>
@@ -361,15 +408,20 @@
                               <td>Si sposta al segmento successivo che non presenta equivalenti nella memoria di traduzione.</td>
                            </tr>
                            <tr>
+                              <td align="left"><span class="guimenuitem">Segmento tradotto successivo</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>U</strong></span></td>
+                              <td>Si sposta al segmento successivo già tradotto, ignorando i segmenti non tradotti.</td>
+                           </tr>
+                           <tr>
                               <td align="left"><span class="guimenuitem">Segmento successivo</span></td>
-                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>N</strong></span> o <span class="keycap"><strong>Invio</strong></span> o <span class="keycap"><strong>Tab</strong></span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>N</strong></span> o <span class="keycap"><strong>Invio</strong></span></td>
                               <td>Si sposta al segmento immediatamente successivo a quello attivo. Se il segmento attivo è l'ultimo di un file, verrà attivato
                                  il primo segmento del file successivo.
                               </td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Segmento precedente</span></td>
-                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>P</strong></span> o <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Invio</strong></span> o <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Tab</strong></span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>P</strong></span> o <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Invio</strong></span></td>
                               <td>Si sposta al segmento immediatamente precedente a quello attivo. Se il segmento attivo è il primo di un file, verrà attivato
                                  l'ultimo segmento del file precedente.
                               </td>
@@ -388,6 +440,12 @@
                               <td align="left"><span class="guimenuitem">Nota precedente</span></td>
                               <td align="left">&nbsp;</td>
                               <td>Sarà aperto il segmento immediatamente precedente che contenga una nota.</td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Origine della concordanza selezionata</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>M</strong></span></td>
+                              <td>Si sposta al segmento che corrisponde alla corrispondenza selezionata corrente nel pannello <span class="guilabel">Concordanze parziali</span>.
+                              </td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Avanti nella cronologia...</span></td>
@@ -411,11 +469,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.View"></a>1.4.&nbsp;Vista<a class="indexterm" name="d0e3443"></a></h3>
+                        <h3 class="title"><a name="submenu.View"></a>1.4.&nbsp;Vista<a class="indexterm" name="d0e3524"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3448"></a><p class="title"><b>Table&nbsp;5.6.&nbsp;Menu Vista</b></p>
+               <div class="table"><a name="d0e3529"></a><p class="title"><b>Table&nbsp;5.6.&nbsp;Menu Vista</b></p>
                   <div class="table-contents">
                      <table summary="Menu Vista" border="1">
                         <colgroup>
@@ -452,24 +510,44 @@
                               <td>Se si seleziona l'opzione, gli spazi non divisibili saranno evidenziati con uno sfondo grigio.</td>
                            </tr>
                            <tr>
+                              <td align="left"><span class="guimenuitem">Evidenza gli spazi vuoti</span></td>
+                              <td>Se si seleziona l'opzione, gli spazi vuoti saranno evidenziati con un punto.</td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Evidenzia caratteri di controllo algoritmo bidirezionale</span></td>
+                              <td>Questa opzione mostra i <a class="ulink" href="http://www.w3.org/International/questions/qa-bidi-controls" target="_top">caratteri di controllo bidirezionali</a>
+                                               
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Evidenzia i segmenti popolati automaticamente</span></td>
+                              <td>Se si seleziona questa opzione, lo sfondo di tutti i segmenti popolati automaticamente (dalle memorie di traduzione presenti
+                                 in /tm/auto, per esempio) viene colorato. I colori sono visualizzati se è attivata l'opzione "Salva lo stato di popolazione
+                                 automatica" (in Opzioni/Comportamento di modifica...). Le solite traduzioni inserite dalla cartella "auto" vengono visualizzate
+                                 in arancione. Le altre traduzioni, individuate in modo specifico nella TMX, possono essere visualizzate usando colori diversi.
+                                 Per i dettagli tecnici, vedere il capitolo <a class="ulink" href="http://sourceforge.net/p/omegat/feature-requests/963/" target="_top">Proposte di miglioramenti</a></td>
+                           </tr>
+                           <tr>
                               <td align="left"><span class="guimenuitem">Informazioni sulla modifica</span></td>
-                              <td>Se si imposta la visualizzazione della modifica su <span class="emphasis"><em>Per il segmento attivo</em></span>, sarà visualizzata l'ora e l'autore dell'ultima modifica eseguita sul segmento attivo. Se si imposta su <span class="emphasis"><em> Per tutti i segmenti</em></span>, l'informazione sarà visualizzata per tutti, mentre <span class="emphasis"><em>Nessuna</em></span> la disattiverà.
+                              <td>Se si imposta la visualizzazione della modifica su <span class="emphasis"><em>Segmento corrente</em></span>, sarà visualizzata l'ora e l'autore dell'ultima modifica eseguita sul segmento attivo. Se si imposta su <span class="emphasis"><em>Per tutti i segmenti</em></span>, l'informazione sarà visualizzata per tutti, mentre <span class="emphasis"><em>Nessuna</em></span> la disattiverà.
                               </td>
                            </tr>
                         </tbody>
                      </table>
                   </div>
-               </div><br class="table-break"></div>
+               </div><br class="table-break"><p>Nota: i colori sono personalizzabili dalla finestra di dialogo <span class="guimenu">Opzioni / Colori personalizzati...</span>.
+               </p>
+            </div>
             <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.Tools"></a>1.5.&nbsp;Strumenti<a class="indexterm" name="d0e3508"></a></h3>
+                        <h3 class="title"><a name="submenu.Tools"></a>1.5.&nbsp;Strumenti<a class="indexterm" name="d0e3617"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3513"></a><p class="title"><b>Table&nbsp;5.7.&nbsp;Menu Strumenti</b></p>
-                  <div class="table-contents"><a class="indexterm" name="d0e3516"></a><a class="indexterm" name="d0e3521"></a><a class="indexterm" name="d0e3526"></a><table summary="Menu Strumenti" border="1">
+               <div class="table"><a name="d0e3622"></a><p class="title"><b>Table&nbsp;5.7.&nbsp;Menu Strumenti</b></p>
+                  <div class="table-contents"><a class="indexterm" name="d0e3625"></a><a class="indexterm" name="d0e3630"></a><a class="indexterm" name="d0e3635"></a><table summary="Menu Strumenti" border="1">
                         <colgroup>
                            <col align="left">
                            <col>
@@ -477,18 +555,13 @@
                         <tbody>
                            <tr>
                               <td align="left"><span class="guimenuitem">Convalida i tag</span></td>
-                              <td><span class="guimenu">Ctrl+T</span>: avvia il controllo della mancanza o dell'uso scorretto di tag nei file formattati. Verrà proposto un elenco dei segmenti
+                              <td><span class="guimenu">Ctrl+Maiusc+V</span>: avvia il controllo della mancanza o dell'uso scorretto di tag nei file formattati. Verrà proposto un elenco dei segmenti
                                  contenenti errori di tag e possibili inconsistenze. Vedere <a class="link" href="chapter.user.interface.html#section.tag.validation" title="3.3.&nbsp;Convalida dei tag">Convalida dei tag</a> e <a class="xref" href="chapter.formatted.text.html" title="Chapter&nbsp;12.&nbsp;Lavorazione di testo formattato">Chapter&nbsp;12, <i>Lavorazione di testo formattato</i></a>.
                               </td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Rimuovi i tag</span></td>
-                              <td>Se l'opzione è attivata, tutti i tag di formattazione sono rimossi dai segmenti di partenza. Ciò è utile quando si ha a che
-                                 fare con testi la cui formattazione incorporata non ha un uso concreto (per es., PDF OCRed, file .odt o .docx convertiti in
-                                 modo errato, e via discorrendo). Vengono rimossi solo i tag incorporati, dunque non dovrebbero esserci problemi con l'apertura
-                                 del documento di arrivo. Nel documento di arrivo, la formattazione non visibile (per es., quella che non appare sotto forma
-                                 di tag nell'editor di OmegaT) viene mantenuta.
-                              </td>
+                              <td align="left"><span class="guimenuitem">Convalida i tag per il documento attivo</span></td>
+                              <td>Come sopra, ma solo per il documento corrente nella traduzione.</td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Statistiche</span></td>
@@ -497,9 +570,21 @@
                               </td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Concordanza statistiche</span></td>
+                              <td align="left"><span class="guimenuitem">Statistiche delle concordanze</span></td>
                               <td>Mostra le statistiche di concordanza per il progetto: numero di ripetizioni, concordanze esatte, parziali e nessuna, per i
                                  segmenti, le parole e in caratteri.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Statistiche delle concordanze per file</span></td>
+                              <td>Mostra le statistiche di concordanza per ciascun file del progetto: numero di ripetizioni, concordanze esatte, parziali e
+                                 nessuna, per i segmenti, le parole e in caratteri.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Azioni di script...</span></td>
+                              <td>Apre una finestra di dialogo in cui è possibile impostare la posizione degli script, e in cui essi possono essere scritti,
+                                 avviati e associati a una scorciatoia (vedere il capitolo <a class="link" href="appendix.Scripts.inOmegaT.html" title="Appendix&nbsp;F.&nbsp;Script">Finestra delle azioni di script</a>)
                               </td>
                            </tr>
                         </tbody>
@@ -510,12 +595,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.Options"></a>1.6.&nbsp;<a class="indexterm" name="d0e3567"></a>Opzioni
+                        <h3 class="title"><a name="submenu.Options"></a>1.6.&nbsp;<a class="indexterm" name="d0e3691"></a>Opzioni
                         </h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3573"></a><p class="title"><b>Table&nbsp;5.8.&nbsp;Menu Opzioni</b></p>
+               <div class="table"><a name="d0e3697"></a><p class="title"><b>Table&nbsp;5.8.&nbsp;Menu Opzioni</b></p>
                   <div class="table-contents">
                      <table summary="Menu Opzioni" border="1">
                         <colgroup>
@@ -539,7 +624,11 @@
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Glossario</span></td>
-                              <td>riservato per uso futuro da parte dei plugin</td>
+                              <td>L'opzione <span class="guimenuitem">Mostra la descrizione contestuale per i glossari TBX</span> consente di visualizzare o nascondere le informazioni contestuali con i termini (che provengono dai glossari TBX presenti
+                                 nella cartella <code class="filename">glossary</code>), all'interno del pannello Glossario.
+                                 <p>Le altre tre opzioni sono descritte nella pagina specifica che tratta l'argomento <a class="link" href="chapter.TaaS.html#section.TaaS.options" title="1.&nbsp;Generalità">TaaS</a> (Terminology as a Service).
+                                 </p>
+                              </td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Suggerimenti</span></td>
@@ -549,10 +638,28 @@
                               </td>
                            </tr>
                            <tr>
+                              <td align="left"><span class="guimenuitem">Completamento automatico</span></td>
+                              <td>
+                                 <p>Fare clic su <span class="guimenuitem">Glossario...</span> per configurare la vista del glossario per il completamento automatico.
+                                 </p>
+                                 <p>Fare clic su <span class="guimenuitem">Testo automatico...</span> per configurare le opzioni del testo automatico e aggiungere o rimuovere le voci.
+                                 </p>
+                                 <p>Fare clic su <span class="guimenuitem">Tabella caratteri...</span> per impostare le opzioni di completamento automatico relativo alla tabella dei caratteri.
+                                 </p>
+                              </td>
+                           </tr>
+                           <tr>
                               <td align="left"><span class="guimenuitem">Caratteri...</span></td>
                               <td>Apre la finestra di dialogo nella quale si potrà modificare il carattere di visualizzazione del testo. Gli utenti con computer
                                  "datati" che sperimentano un ridimensionamento lento delle finestre, possono provare a modificare il carattere. Consultare
-                                 le impostazioni dei caratteri in <a class="link" href="chapter.misc.html" title="Chapter&nbsp;21.&nbsp;Argomenti vari">Miscellanea</a></td>
+                                 le impostazioni dei caratteri in <a class="link" href="chapter.misc.html" title="Chapter&nbsp;23.&nbsp;Argomenti vari">Miscellanea</a></td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Colori personalizzati...</span></td>
+                              <td>
+                                 <p>Permette di scegliere colori diversi per ciascuna parte dell'interfaccia utente.</p>Possono essere impostati, tramite script, temi predefiniti. Uno script predefinito chiamato 'Cambia tema colori' fornisce
+                                 il tema predefinito "Scuro".
+                              </td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Filtri dei file...</span></td>
@@ -566,7 +673,7 @@
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Correzione ortografica...</span></td>
-                              <td>Apre la finestra di dialogo <a class="link" href="chapter.spellchecker.html" title="Chapter&nbsp;20.&nbsp;Correttore ortografico">Configurazione del correttore ortografico</a> che consente di installare, configurare e attivare la correzione ortografica.
+                              <td>Apre la finestra di dialogo <a class="link" href="chapter.spellchecker.html" title="Chapter&nbsp;22.&nbsp;Correttore ortografico">Configurazione del correttore ortografico</a> che consente di installare, configurare e attivare la correzione ortografica.
                               </td>
                            </tr>
                            <tr>
@@ -586,16 +693,23 @@
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">TMX esterne...</span></td>
-                              <td>Permette all'utente di decidere quali file TMX esterni (per es., quelli non generati da OmegaT) devono essere trattati.</td>
+                              <td>Permette all'utente di decidere quali file TMX esterni (per es., quelli non generati da OmegaT) devono essere trattati.
+                                 <p>Le concordanze parziali possono essere anche ordinate in modi diversi (per la sola visualizzazione; nessuna influenza sulle
+                                    statistiche). Nell'area Modello visualizzazione concordanza è possibile modificare anche il tipo di visualizzazione delle
+                                    concordanze parziali, tramite l'uso di variabili preconfigurate.
+                                 </p>
+                              </td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Vista...</span></td>
-                              <td>Contiene l'opzione per contrassegnare tutti i segmenti di partenza in grassetto ed evidenziare il primo segmento non univoco.</td>
+                              <td>Contiene opzioni per la visualizzazione in vari modi del testo e delle informazioni di modifica.</td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Salva...</span></td>
+                              <td align="left"><span class="guimenuitem">Salvataggio e risultato...</span></td>
                               <td>Permette all'utente di selezionare l'intervallo, in minuti e secondi, tra un salvataggio automatico e l'altro del progetto.
                                  Il tempo minimo è dieci secondi.
+                                 <p>In questo riquadro è possibile impostare anche i comandi di post-elaborazione esterna (che vengono eseguiti dopo il comando
+                                    <span class="guimenuitem">Crea i documenti tradotti</span></p>
                               </td>
                            </tr>
                            <tr>
@@ -609,6 +723,10 @@
                                  funzione anche quando i pannelli non appaiono come dovrebbero dopo un aggiornamento del programma.
                               </td>
                            </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Verificatore linguistico</span></td>
+                              <td>Se selezionato, LanguageTool verifica, sottolineando in blu gli errori potenziali, le traduzioni.</td>
+                           </tr>
                         </tbody>
                      </table>
                   </div>
@@ -617,11 +735,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.Help"></a>1.7.&nbsp;Aiuto<a class="indexterm" name="d0e3722"></a></h3>
+                        <h3 class="title"><a name="submenu.Help"></a>1.7.&nbsp;Aiuto<a class="indexterm" name="d0e3897"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3727"></a><p class="title"><b>Table&nbsp;5.9.&nbsp;Menu Aiuto</b></p>
+               <div class="table"><a name="d0e3902"></a><p class="title"><b>Table&nbsp;5.9.&nbsp;Menu Aiuto</b></p>
                   <div class="table-contents">
                      <table summary="Menu Aiuto" border="1">
                         <colgroup>
@@ -638,6 +756,16 @@
                               <td align="left"><span class="guimenuitem">Informazioni su...</span></td>
                               <td>Visualizza le informazioni di copyright, i crediti e le informazioni di licenza.</td>
                            </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Ultime modifiche...</span></td>
+                              <td>Mostra l'elenco delle nuove funzionalità, i miglioramenti e le correzioni errori per ciascun nuovo rilascio.</td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Registro...</span></td>
+                              <td>Mostra il file di registro corrente. Il titolo della finestra rispecchia il file realmente usato (che dipende da quante istanze
+                                 di OmegaT sono in esecuzione assieme).
+                              </td>
+                           </tr>
                         </tbody>
                      </table>
                   </div>
@@ -647,7 +775,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="keyboard.shortcuts"></a>2.&nbsp;Sistemi rapidi da tastiera<a class="indexterm" name="d0e3750"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="keyboard.shortcuts"></a>2.&nbsp;Sistemi rapidi da tastiera<a class="indexterm" name="d0e3937"></a></h2>
                   </div>
                </div>
             </div>
@@ -698,11 +826,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e3797"></a>2.1.&nbsp;<a class="indexterm" name="d0e3799"></a>Gestione del progetto<a class="indexterm" name="d0e3805"></a></h3>
+                        <h3 class="title"><a name="d0e3984"></a>2.1.&nbsp;<a class="indexterm" name="d0e3986"></a>Gestione del progetto<a class="indexterm" name="d0e3992"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3810"></a><p class="title"><b>Table&nbsp;5.10.&nbsp;Scorciatoie per la gestione del progetto</b></p>
+               <div class="table"><a name="d0e3997"></a><p class="title"><b>Table&nbsp;5.10.&nbsp;Scorciatoie per la gestione del progetto</b></p>
                   <div class="table-contents">
                      <table summary="Scorciatoie per la gestione del progetto" border="1">
                         <colgroup>
@@ -748,11 +876,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.editing"></a>2.2.&nbsp;<a class="indexterm" name="d0e3879"></a>Modifica<a class="indexterm" name="d0e3885"></a></h3>
+                        <h3 class="title"><a name="keyboard.editing"></a>2.2.&nbsp;<a class="indexterm" name="d0e4066"></a>Modifica<a class="indexterm" name="d0e4072"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3890"></a><p class="title"><b>Table&nbsp;5.11.&nbsp;Modifica delle scorciatoie</b></p>
+               <div class="table"><a name="d0e4077"></a><p class="title"><b>Table&nbsp;5.11.&nbsp;Modifica delle scorciatoie</b></p>
                   <div class="table-contents">
                      <table summary="Modifica delle scorciatoie" border="1">
                         <colgroup>
@@ -837,12 +965,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.moving.around"></a>2.3.&nbsp;<a class="indexterm" name="d0e4035"></a>Spostarsi nella finestra
+                        <h3 class="title"><a name="keyboard.moving.around"></a>2.3.&nbsp;<a class="indexterm" name="d0e4222"></a>Spostarsi nella finestra
                         </h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e4041"></a><p class="title"><b>Table&nbsp;5.12.&nbsp;Scorciatoie per gli spostamenti</b></p>
+               <div class="table"><a name="d0e4228"></a><p class="title"><b>Table&nbsp;5.12.&nbsp;Scorciatoie per gli spostamenti</b></p>
                   <div class="table-contents">
                      <table summary="Scorciatoie per gli spostamenti" border="1">
                         <colgroup>
@@ -889,12 +1017,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.other"></a>2.4.&nbsp;<a class="indexterm" name="d0e4122"></a>Altro
+                        <h3 class="title"><a name="keyboard.other"></a>2.4.&nbsp;<a class="indexterm" name="d0e4309"></a>Altro
                         </h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e4128"></a><p class="title"><b>Table&nbsp;5.13.&nbsp;Scorciatoie varie</b></p>
+               <div class="table"><a name="d0e4315"></a><p class="title"><b>Table&nbsp;5.13.&nbsp;Scorciatoie varie</b></p>
                   <div class="table-contents">
                      <table summary="Scorciatoie varie" border="1">
                         <colgroup>

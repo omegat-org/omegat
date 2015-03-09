@@ -5,8 +5,8 @@
       <title>第3章 OmegaT のインストールと実行</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT 3.0 - 取扱説明書">
-      <link rel="up" href="index.html" title="OmegaT 3.0 - 取扱説明書">
+      <link rel="home" href="index.html" title="OmegaT 3.1 - 取扱説明書">
+      <link rel="up" href="index.html" title="OmegaT 3.1 - 取扱説明書">
       <link rel="prev" href="chapter.instant.start.guide.html" title="第2章 5 分でわかる！ OmegaT の使い方">
       <link rel="next" href="chapter.user.interface.html" title="第4章 OmegaT のインターフェース">
    </head>
@@ -569,7 +569,7 @@
                      </div>
                   </div>
                </div>
-               <p>基本的なコマンドはすでに上記で述べた通りです。このコマンドを変更するには「引数」を追加します。引数を追加する位置は、最初の「<span class="emphasis"><em>java</em></span>」の直後、「<span class="emphasis"><em>-jar <span class="application">OmegaT</span>.jar</em></span>」の直前です。Windows では、<span class="emphasis"><em><span class="application">OmegaT</span>.l4J.ini</em></span> を書き換えることによって、好みの設定に変更できます。Mac OS X の場合は、<span class="emphasis"><em><span class="application">OmegaT</span>.app/Contents/</em></span> にある <span class="emphasis"><em>Info.plist</em></span> ファイルを使って同様に変更できます。
+               <p>基本的なコマンドはすでに上記で述べた通りです。このコマンドを変更するには「引数」を追加します。引数を追加する位置は、最初の「<span class="emphasis"><em>java</em></span>」の直後、「<span class="emphasis"><em>-jar <span class="application">OmegaT</span>.jar</em></span>」の直前です。Windows では、<code class="filename">OmegaT.l4J.ini</code> を書き換えることによって、好みの設定に変更できます。それ以外のプラットフォームでは、お使いのランチャー（たとえば Mac では <code class="filename">OmegaT.sh</code>、Linux では <code class="filename">OmegaT</code>）を修正することによって同様に変更できます。
                </p>
                <p>指定できる引数の一覧を以下に示します。上級者のユーザーは、ターミナルウィンドウ上で <span class="emphasis"><em>man java</em></span> と入力すると、引数の詳細情報を得られます。
                </p>
@@ -577,7 +577,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>ユーザーインターフェース言語</strong></span></p>
-                        <p><span class="bold"><strong>-Duser.language=XX</strong></span><a class="indexterm" name="d0e1166"></a> 通常、何も引数を指定せずに <span class="application">OmegaT</span> を起動した場合は、プログラムはまず OS の言語を検出します。<span class="application">OmegaT</span> のユーザーインターフェースがその言語に対応していれば、<span class="application">OmegaT</span> はそれを使用します。したがって、たとえば OS がロシア語であれば、<span class="application">OmegaT</span> のユーザーインターフェースやメニューなどはロシア語で表示されます。もし OS の言語に対応していない場合、<span class="application">OmegaT</span> はデフォルトの英語で表示されます。これが基本的な仕組みです。
+                        <p><span class="bold"><strong>-Duser.language=XX</strong></span><a class="indexterm" name="d0e1162"></a> 通常、何も引数を指定せずに <span class="application">OmegaT</span> を起動した場合は、プログラムはまず OS の言語を検出します。<span class="application">OmegaT</span> のユーザーインターフェースがその言語に対応していれば、<span class="application">OmegaT</span> はそれを使用します。したがって、たとえば OS がロシア語であれば、<span class="application">OmegaT</span> のユーザーインターフェースやメニューなどはロシア語で表示されます。もし OS の言語に対応していない場合、<span class="application">OmegaT</span> はデフォルトの英語で表示されます。これが基本的な仕組みです。
                         </p>
                         <p>「<span class="emphasis"><em>-Duser.language=XX</em></span>」引数の指定により、<span class="application">OmegaT</span> は OS の言語よりも優先して、指定した言語を使用するようになります。引数の中の「XX」は、指定したい言語の 2 桁の言語コードです。<span class="application">OmegaT</span> を（たとえばロシア語 OS 上で）日本語のユーザーインターフェースで使用したい場合は、実行コマンドは以下のようになります：
                         </p>
@@ -589,7 +589,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>ユーザーの地域設定</strong></span></p>
-                        <p><span class="bold"><strong>-Duser.country=XX</strong></span><a class="indexterm" name="d0e1214"></a> 言語と合わせて、国を指定することもできます。例えば日本の場合、JP を指定します。特定の言語版の「5 分でわかる！ OmegaT の使い方」を表示するには、言語と国の両方を指定する必要があります。「ポルトガル語 - ブラジル」の組み合わせに対する
+                        <p><span class="bold"><strong>-Duser.country=XX</strong></span><a class="indexterm" name="d0e1210"></a> 言語と合わせて、国を指定することもできます。例えば日本の場合、JP を指定します。特定の言語版の「5 分でわかる！ OmegaT の使い方」を表示するには、言語と国の両方を指定する必要があります。「ポルトガル語 - ブラジル」の組み合わせに対する
                            pt_BR のように、１つの言語に１つの国のみの組み合わせである場合であっても、これは必要です。
                         </p>
                      </li>
@@ -599,7 +599,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>メモリの割り当て</strong></span></p>
-                        <p><span class="bold"><strong>-XmxZZM</strong></span><a class="indexterm" name="d0e1230"></a> この引数により、<span class="application">OmegaT</span> により多くのメモリを割り当てられます。デフォルトでは 512 MB が割り当てられます。そのため、これより小さな値をこの引数で指定しても効果はありません。「ZZ」には、割り当てたいメモリ容量を MB（メガバイト）単位で指定します。1024MB（1GB）のメモリを割り当てて
+                        <p><span class="bold"><strong>-XmxZZM</strong></span><a class="indexterm" name="d0e1226"></a> この引数により、<span class="application">OmegaT</span> により多くのメモリを割り当てられます。デフォルトでは 512 MB が割り当てられます。そのため、これより小さな値をこの引数で指定しても効果はありません。「ZZ」には、割り当てたいメモリ容量を MB（メガバイト）単位で指定します。1024MB（1GB）のメモリを割り当てて
                            <span class="application">OmegaT</span> を起動する場合のコマンドは：
                         </p>
                         <p><code class="literal">java -Xmx1024M -jar
@@ -607,22 +607,22 @@
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>プロキシサーバーのホスト名と IP アドレス</strong></span></p>
-                        <p><span class="bold"><strong><span class="bold"><strong>-Dhttp.proxyHost=nnn.nnn.nnn.nnn</strong></span><a class="indexterm" name="d0e1258"></a></strong></span> プロキシサーバーの IP アドレス。
+                        <p><span class="bold"><strong><span class="bold"><strong>-Dhttp.proxyHost=nnn.nnn.nnn.nnn</strong></span><a class="indexterm" name="d0e1254"></a></strong></span> プロキシサーバーの IP アドレス。
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>プロキシサーバーのポート番号</strong></span></p>
-                        <p><span class="bold"><strong>-Dhttp.proxyPort=NNNN</strong></span><a class="indexterm" name="d0e1273"></a> プロキシサーバーのポート番号。
+                        <p><span class="bold"><strong>-Dhttp.proxyPort=NNNN</strong></span><a class="indexterm" name="d0e1269"></a> プロキシサーバーのポート番号。
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Google Translate v2</strong></span></p>
-                        <p><span class="bold"><strong>-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </strong></span><span class="bold"><strong><a class="indexterm" name="d0e1289"></a></strong></span> Google Translate サービスのプライベートな Google API キー。キーの文字列長は 38 文字であることに注意してください。
+                        <p><span class="bold"><strong>-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </strong></span><span class="bold"><strong><a class="indexterm" name="d0e1285"></a></strong></span> Google Translate サービスのプライベートな Google API キー。キーの文字列長は 38 文字であることに注意してください。
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Microsoft
-                                           Translator</strong></span><a class="indexterm" name="d0e1301"></a></p>
+                                           Translator</strong></span><a class="indexterm" name="d0e1297"></a></p>
                         <p>事前に無料の Microsoft アカウントを取得しておいてください。それには <a class="ulink" href="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema" target="_top">Windows Azure Marketplace</a> に登録し、Translator サービスを使用（サブスクライブ）する必要があります。一ヶ月 200 万字までは、無料で使えます。<a class="ulink" href="https://datamarket.azure.com/account" target="_top">アカウント情報</a>のページにある２つの情報、プライマリ アカウント キーと顧客 ID が必要になります。
                         </p>
                         <p><span class="bold"><strong>-Dmicrosoft.api.client_id=</strong></span><span class="bold"><strong>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</strong></span></p>
@@ -639,7 +639,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="omegat.command.arguments"></a>6.3. OmegaT をコマンドラインモードで使う<a class="indexterm" name="d0e1336"></a></h3>
+                        <h3 class="title"><a name="omegat.command.arguments"></a>6.3. OmegaT をコマンドラインモードで使う<a class="indexterm" name="d0e1332"></a></h3>
                      </div>
                   </div>
                </div>
@@ -832,7 +832,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>7. ソースコードからの <span class="application">OmegaT</span> のビルド<a class="indexterm" name="d0e1625"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>7. ソースコードからの <span class="application">OmegaT</span> のビルド<a class="indexterm" name="d0e1621"></a></h2>
                   </div>
                </div>
             </div>

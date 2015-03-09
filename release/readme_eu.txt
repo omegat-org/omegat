@@ -215,6 +215,7 @@ Kodea hurrengo lagunek idatzi dute:
   Benjamin Siband
   Rashid Umarov  
   Antonio Vilei
+  Ilia Vinogradov
   Martin Wunderlich
   Michael Zakharov
 

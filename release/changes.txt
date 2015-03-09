@@ -33,6 +33,9 @@
   - Make it easy to "brand" OmegaT for custom deployments 
   https://sourceforge.net/p/omegat/feature-requests/1069/
 
+  - Make it easy to find specific files by name or path
+  https://sourceforge.net/p/omegat/feature-requests/1070/
+
   Other enhancements:
   
   - ILIAS Language File filter. Those files can have the .lang or

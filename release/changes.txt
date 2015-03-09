@@ -36,6 +36,9 @@
   - Make it easy to find specific files by name or path
   https://sourceforge.net/p/omegat/feature-requests/1070/
 
+  - Improve resizing behavior of Project Files dialog
+  https://sourceforge.net/p/omegat/feature-requests/1071/
+
   Other enhancements:
   
   - ILIAS Language File filter. Those files can have the .lang or

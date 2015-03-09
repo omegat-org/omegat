@@ -45,6 +45,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -294,39 +295,47 @@ public class ProjectFilesListController {
                 gotoFile(list.tableFiles.rowAtPoint(e.getPoint()));
             }
         });
+        
         list.tableFiles.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     gotoFile(list.tableFiles.getSelectedRow());
-                    endFilter();
                     e.consume();
                 } else if (filterPanel != null && e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     endFilter();
                     e.consume();
                 }
             }
-            @Override
-            public void keyTyped(KeyEvent e) {
-                char c = e.getKeyChar();
-                if ((e.getModifiers() == 0 || e.getModifiers() == KeyEvent.SHIFT_MASK)
-                        && !Character.isWhitespace(c) && !Character.isISOControl(c)) {
-                    if (filterPanel == null) {
-                        startFilter(e.getKeyChar());
-                    } else {
-                        resumeFilter(e.getKeyChar());
-                    }
-                    e.consume();
-                }
-            }
-            
         });
-
+        list.tableFiles.addKeyListener(filterTrigger);
+        list.tableTotal.addKeyListener(filterTrigger);
+        list.btnUp.addKeyListener(filterTrigger);
+        list.btnDown.addKeyListener(filterTrigger);
+        list.btnFirst.addKeyListener(filterTrigger);
+        list.btnLast.addKeyListener(filterTrigger);
+        
         list.btnUp.addActionListener(moveAction);
         list.btnDown.addActionListener(moveAction);
         list.btnFirst.addActionListener(moveAction);
         list.btnLast.addActionListener(moveAction);
     }
+    
+    private final KeyListener filterTrigger = new KeyAdapter() {
+        @Override
+        public void keyTyped(KeyEvent e) {
+            char c = e.getKeyChar();
+            if ((e.getModifiers() == 0 || e.getModifiers() == KeyEvent.SHIFT_MASK)
+                    && !Character.isWhitespace(c) && !Character.isISOControl(c)) {
+                if (filterPanel == null) {
+                    startFilter(e.getKeyChar());
+                } else {
+                    resumeFilter(e.getKeyChar());
+                }
+                e.consume();
+            }
+        }
+    };
     
     private void startFilter(char c) {
         if (filterPanel != null) {

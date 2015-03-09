@@ -1,4 +1,4 @@
-Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2014.
+Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2015.
 
 ==============================================================================
   OmegaT 3.0, fichier « Lisez-moi »
@@ -238,6 +238,7 @@ Contributions au code :
   Yu Tang
   Rashid Umarov  
   Antonio Vilei
+  Ilia Vinogradov
   Martin Wunderlich
   Michael Zakharov
 
@@ -254,7 +255,7 @@ Autres contributions par :
 
 OmegaT utilise les bibliothèques suivantes :
   HTMLParser par Somik Raha, Derrick Oswald, etc. (licence LGPL)
-  VLDocking Framework 3.0.4 (licence LGPL)
+  VLDocking Framework 3.0.5-SNAPSHOT (licence LGPL)
   Hunspell par László Németh et d'autres personnes (licence LGPL)
   JNA par Todd Fast, Timothy Wall et d'autres personnes (licence LGPL)
   Swing-Layout 1.0.4 (licence LGPL)

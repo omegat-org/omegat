@@ -36,7 +36,7 @@
 				<jar href="jna.jar" />
 				<jar href="lib-mnemonics.jar" />
 				<jar href="swing-layout-1.0.4.jar" />
-				<jar href="vldocking-3.0.4.jar" />
+				<jar href="vldocking-3.0.5-SNAPSHOT.jar" />
 				<jar href="svnkit-1.8.5.jar" />
 				<jar href="antlr-runtime-3.4.jar" />
 				<jar href="sqljet-1.1.10.jar" />

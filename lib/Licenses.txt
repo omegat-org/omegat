@@ -8,7 +8,7 @@ jna.jar is distributed under the GNU Lesser General Public License
 version 2.1 and greater
 Sources are available in OmegaT sources, in the directory lib/sources
 
-vldocking-3.0.4.jar is distributed under the GNU Lesser General
+vldocking-3.0.5-SNAPSHOT.jar is distributed under the GNU Lesser General
 Public License
 Sources are available in OmegaT sources, in the directory lib/sources
 

@@ -255,9 +255,6 @@ public class Main {
 
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             
-            // VLDocking looks at this when rendering tab labels. OS X looks ugly without this.
-            System.setProperty("swing.aatext", "true");
-            
             // Override LAF with custom colors, if any (they default to the LAF attributes)
             Styles.setupLAF();
 

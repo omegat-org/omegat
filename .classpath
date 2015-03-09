@@ -40,9 +40,9 @@
 	<classpathentry kind="lib" path="lib/swing-layout-1.0.4.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.7.7.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-jdk14-1.7.7.jar"/>
-	<classpathentry kind="lib" path="lib/vldocking-3.0.4.jar"/>
 	<classpathentry kind="lib" path="lib/sqljet-1.1.10.jar"/>
 	<classpathentry kind="lib" path="lib/svnkit-1.8.5.jar"/>
 	<classpathentry kind="lib" path="lib/trilead-ssh2-1.0.0-build217.jar"/>
+	<classpathentry kind="lib" path="lib/vldocking-3.0.5-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

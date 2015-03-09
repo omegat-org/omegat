@@ -2,7 +2,7 @@
  OmegaT 3.1.9
 ----------------------------------------------------------------------
   17 Enhancements
-  12 Bug fixes
+  13 Bug fixes
    6 Localisation updates
 ----------------------------------------------------------------------
 3.1.9 vs. 3.1.8
@@ -107,6 +107,9 @@ new project
   - Mac OS X: A workaround was added for the full-screen window sizing
 bug on OS X + Java 1.8. See https://bugs.openjdk.java.net/browse/JDK-8065739
 for the bug description.
+
+  - The font set in Options > Font was only used after the change when
+Apply this font to the Project Files dialog was used
 
   Localisation updates:
 

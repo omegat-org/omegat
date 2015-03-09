@@ -68,6 +68,9 @@ information and the active segment's source and target
 
   - For versions including Java, the JRE is now 1.8.0_31 instead of 1.7
 
+  - The appearance of the Project Files dialog has been improved on OS X.
+The new styling has been applied to all platforms.
+
   Bug fixes:
 
   - There's now a 3-second retry when OmegaT attempts to rename files

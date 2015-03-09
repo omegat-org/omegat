@@ -236,11 +236,11 @@ public class ProjectFilesListController {
                         break;
                     }
                     list.setVisible(true);
-                    list.tableFiles.requestFocus();
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
                             list.toFront();
+                            list.tableFiles.requestFocus();
                         }
                     });
                     break;
@@ -574,6 +574,7 @@ public class ProjectFilesListController {
         setTableFilesModel(files);
         
         resetColWidthData();
+        adjustTableColumns();
     }
 
     private void createTableFiles() {

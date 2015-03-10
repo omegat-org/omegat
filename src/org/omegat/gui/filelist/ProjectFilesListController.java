@@ -274,7 +274,9 @@ public class ProjectFilesListController {
                     newFont = defaultFont;
                 }
                 setFont(newFont);
-                adjustTableColumns();
+                if (Core.getProject().isProjectLoaded()) {
+                    adjustTableColumns();
+                }
             }
         });
 

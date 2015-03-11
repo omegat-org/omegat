@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.9 (2015-03-09)
 ----------------------------------------------------------------------
-  20 Enhancements
+  21 Enhancements
   13 Bug fixes
    6 Localisation updates
 ----------------------------------------------------------------------
@@ -38,6 +38,9 @@
 
   - Improve resizing behavior of Project Files dialog
   https://sourceforge.net/p/omegat/feature-requests/1071/
+
+  - Make segment numbers visible for all segments
+  https://sourceforge.net/p/omegat/feature-requests/1038/
 
   Other enhancements:
   

@@ -255,6 +255,8 @@ public class Main {
 
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             
+            System.setProperty("swing.aatext", "true");
+            
             // Override LAF with custom colors, if any (they default to the LAF attributes)
             Styles.setupLAF();
 

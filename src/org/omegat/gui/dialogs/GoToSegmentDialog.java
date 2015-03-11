@@ -48,6 +48,7 @@ import org.omegat.util.gui.StaticUIUtils;
  * @author Aaron Madlon-Kay
  * @author Yu Tang
  */
+@SuppressWarnings("serial")
 public class GoToSegmentDialog extends javax.swing.JDialog {
 
     final private AlphabeticalMarkers alphabeticalMarkers = ((EditorController) Core.getEditor()).getAlphabeticalMarkers();
@@ -116,6 +117,11 @@ public class GoToSegmentDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(OStrings.getString("MW_PROMPT_SEG_NR_TITLE")); // NOI18N
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         jPanel1.setLayout(new java.awt.BorderLayout());
@@ -198,6 +204,10 @@ public class GoToSegmentDialog extends javax.swing.JDialog {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         doClose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        doClose();
+    }//GEN-LAST:event_formWindowClosing
 
     private void doClose() {
         alphabeticalMarkers.hideMarkers();

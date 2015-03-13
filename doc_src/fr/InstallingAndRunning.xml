@@ -366,7 +366,7 @@
           <primary>Exécution d'OmegaT</primary> <secondary>Arguments de scripts de lancement</secondary>
         </indexterm></title>
 
-      <para>La commande de base a déjà été mentionnée plus haut. La modification de cette commande implique l'ajout « d'arguments ». Les arguments sont ajoutés après le premier <emphasis>« java »</emphasis>, et avant <emphasis>« -jar <application>OmegaT</application>.jar »</emphasis>. Notez que dans Windows, vous pouvez modifier le fichier <emphasis><application>OmegaT</application>.l4J.ini</emphasis> selon vos préférences. Sur Mac OS X, changez <emphasis>Info.plist</emphasis> situé dans <emphasis><application>OmegaT</application>.app/Contents/</emphasis> pour faire la même chose.</para>
+      <para>La commande de base a déjà été mentionnée plus haut. La modification de cette commande implique l'ajout « d'arguments ». Les arguments sont ajoutés après le premier <emphasis>« java »</emphasis>, et avant <emphasis>« -jar <application>OmegaT</application>.jar »</emphasis>. Notez que dans Windows, vous pouvez modifier le fichier <filename>OmegaT.l4J.ini</filename> selon vos préférences. Sur les autres plateformes, vous pouvez modifier votre lanceur (ex. : <filename>OmegaT.sh</filename> sur Mac, <filename>OmegaT</filename> sous Linux) pour faire de même.</para>
 
       <para>Vous trouverez ci-dessous une liste des arguments possibles. Les utilisateurs expérimentés pourront obtenir plus d'informations sur les arguments en tapant <emphasis>man java</emphasis> dans la fenêtre de terminal.</para>
 
@@ -443,6 +443,17 @@
 
           <para>-<emphasis role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
         </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Yandex Translate</emphasis><indexterm class="singular">
+              <primary>Exécution d'OmegaT</primary> <secondary>Arguments de scripts de lancement</secondary> <tertiary>Yandex Translate</tertiary>
+            </indexterm></para>
+
+          <para>Assurez-vous d'avoir un compte Yandex gratuit. Vous en aurez besoin pour obtenir et utiliser la clé d'API Yandex Translate. Les clés d'API peuvent être demandées à l'aide du <ulink url="http://api.yandex.com/key/form.xml?service=trnsl">formulaire de demande de clé d'API</ulink> et affichées sur la page <ulink url="http://api.yandex.com/key/keyslist.xml">My Keys</ulink>.</para>
+
+          <para><emphasis role="bold">-Dyandex.api.key=</emphasis><emphasis role="bold">trnsl.1.1.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</emphasis></para>
+        </listitem>
+
       </itemizedlist>
 
       <para>Les arguments peuvent être combinés. Pour lancer <application>OmegaT</application> avec tous les exemples décrits plus haut, la commande serait :</para>

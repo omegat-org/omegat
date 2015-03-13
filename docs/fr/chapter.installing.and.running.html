@@ -5,8 +5,8 @@
       <title>Chapitre&nbsp;3.&nbsp;Installation et exécution d'OmegaT</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Guide de l'utilisateur">
-      <link rel="up" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="home" href="index.html" title="OmegaT 3.1 - Guide de l'utilisateur">
+      <link rel="up" href="index.html" title="OmegaT 3.1 - Guide de l'utilisateur">
       <link rel="prev" href="chapter.instant.start.guide.html" title="Chapitre&nbsp;2.&nbsp;Apprendre à utiliser OmegaT en cinq minutes !">
       <link rel="next" href="chapter.user.interface.html" title="Chapitre&nbsp;4.&nbsp;L'interface utilisateur">
    </head>
@@ -607,7 +607,7 @@
                   </div>
                </div>
                <p>La commande de base a déjà été mentionnée plus haut. La modification de cette commande implique l'ajout « d'arguments ». Les
-                  arguments sont ajoutés après le premier <span class="emphasis"><em>« java »</em></span>, et avant <span class="emphasis"><em>« -jar <span class="application">OmegaT</span>.jar »</em></span>. Notez que dans Windows, vous pouvez modifier le fichier <span class="emphasis"><em><span class="application">OmegaT</span>.l4J.ini</em></span> selon vos préférences. Sur Mac OS X, changez <span class="emphasis"><em>Info.plist</em></span> situé dans <span class="emphasis"><em><span class="application">OmegaT</span>.app/Contents/</em></span> pour faire la même chose.
+                  arguments sont ajoutés après le premier <span class="emphasis"><em>« java »</em></span>, et avant <span class="emphasis"><em>« -jar <span class="application">OmegaT</span>.jar »</em></span>. Notez que dans Windows, vous pouvez modifier le fichier <code class="filename">OmegaT.l4J.ini</code> selon vos préférences. Sur les autres plateformes, vous pouvez modifier votre lanceur (ex. : <code class="filename">OmegaT.sh</code> sur Mac, <code class="filename">OmegaT</code> sous Linux) pour faire de même.
                </p>
                <p>Vous trouverez ci-dessous une liste des arguments possibles. Les utilisateurs expérimentés pourront obtenir plus d'informations
                   sur les arguments en tapant <span class="emphasis"><em>man java</em></span> dans la fenêtre de terminal.
@@ -616,7 +616,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Langue de l'interface utilisateur</strong></span></p>
-                        <p><span class="bold"><strong>-Duser.language=XX</strong></span><a class="indexterm" name="d0e1202"></a>&nbsp;: normalement, c'est-à-dire lorsqu'<span class="application">OmegaT</span> est lancé sans arguments, le programme détecte la langue du système d'exploitation de l'utilisateur. Si une interface utilisateur
+                        <p><span class="bold"><strong>-Duser.language=XX</strong></span><a class="indexterm" name="d0e1198"></a>&nbsp;: normalement, c'est-à-dire lorsqu'<span class="application">OmegaT</span> est lancé sans arguments, le programme détecte la langue du système d'exploitation de l'utilisateur. Si une interface utilisateur
                            est disponible dans cette langue, <span class="application">OmegaT</span> l'utilise. Ainsi, si le système d'exploitation de l'utilisateur est en russe et qu'<span class="application">OmegaT</span>a été traduit en russe, <span class="application">OmegaT</span> est affiché avec une interface utilisateur en russe, des menus en russe, etc. Si la langue du système de l'utilisateur n'est
                            pas disponible, <span class="application">OmegaT</span> s'affiche en anglais (langue par défaut). Ceci est le comportement normal.
                         </p>
@@ -632,7 +632,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Pays de l'utilisateur</strong></span></p>
-                        <p><span class="bold"><strong>-Duser.country=XX</strong></span><a class="indexterm" name="d0e1250"></a>&nbsp;: en plus de la langue, vous pouvez choisir le pays, par exemple CN ou TW pour la langue chinoise. Pour afficher le tutoriel
+                        <p><span class="bold"><strong>-Duser.country=XX</strong></span><a class="indexterm" name="d0e1246"></a>&nbsp;: en plus de la langue, vous pouvez choisir le pays, par exemple CN ou TW pour la langue chinoise. Pour afficher le tutoriel
                            de prise en main dans la langue désirée, vous devez spécifier à la fois la langue et le pays. Ceci est nécessaire, même s'il
                            n'y a qu'une seule combinaison possible (ex. : pt_BR dans le cas du portugais / Brésil).
                         </p>
@@ -643,7 +643,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Affectation de la mémoire</strong></span></p>
-                        <p><span class="bold"><strong>-XmxZZM</strong></span><a class="indexterm" name="d0e1266"></a>&nbsp;: cette commande attribue plus de mémoire à <span class="application">OmegaT</span>. 512 Mo lui sont attribués par défaut. Il n'y a donc aucun intérêt à lui en attribuer moins. «&nbsp;ZZ&nbsp;» représente la quantité
+                        <p><span class="bold"><strong>-XmxZZM</strong></span><a class="indexterm" name="d0e1262"></a>&nbsp;: cette commande attribue plus de mémoire à <span class="application">OmegaT</span>. 512 Mo lui sont attribués par défaut. Il n'y a donc aucun intérêt à lui en attribuer moins. «&nbsp;ZZ&nbsp;» représente la quantité
                            de mémoire attribuée en mégaoctets. La commande de lancement d'<span class="application">OmegaT</span> lui attribuant une mémoire de 1024 Mo (1 gigaoctet) est donc&nbsp;:
                         </p>
                         <p><code class="literal">java -Xmx1024M -jar
@@ -651,28 +651,35 @@
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Adresse IP de l'hôte proxy</strong></span></p>
-                        <p><span class="bold"><strong><span class="bold"><strong>-Dhttp.proxyHost=nnn.nnn.nnn.nnn</strong></span> <a class="indexterm" name="d0e1295"></a></strong></span> correspond à l'adresse IP de votre serveur proxy (si votre système utilise un proxy).
+                        <p><span class="bold"><strong><span class="bold"><strong>-Dhttp.proxyHost=nnn.nnn.nnn.nnn</strong></span> <a class="indexterm" name="d0e1291"></a></strong></span> correspond à l'adresse IP de votre serveur proxy (si votre système utilise un proxy).
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Numéro de port de l'hôte proxy</strong></span></p>
-                        <p><span class="bold"><strong>-Dhttp.proxyPort=NNNN</strong></span> <a class="indexterm" name="d0e1311"></a> correspond au numéro de port que votre système utilise pour accéder au serveur proxy.
+                        <p><span class="bold"><strong>-Dhttp.proxyPort=NNNN</strong></span> <a class="indexterm" name="d0e1307"></a> correspond au numéro de port que votre système utilise pour accéder au serveur proxy.
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Google Traduction V2</strong></span></p>
-                        <p><span class="bold"><strong>-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </strong></span><span class="bold"><strong><a class="indexterm" name="d0e1327"></a></strong></span>&nbsp;: si vous vous êtes inscrit sur le service Google Traduction, saisissez votre clé API Google privée ici. Notez que cette
+                        <p><span class="bold"><strong>-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </strong></span><span class="bold"><strong><a class="indexterm" name="d0e1323"></a></strong></span>&nbsp;: si vous vous êtes inscrit sur le service Google Traduction, saisissez votre clé API Google privée ici. Notez que cette
                            clé se compose de 38 caractères.
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Microsoft
-                                           Translator</strong></span><a class="indexterm" name="d0e1339"></a></p>
+                                           Translator</strong></span><a class="indexterm" name="d0e1335"></a></p>
                         <p>Assurez-vous d'avoir un compte Microsoft gratuit. Vous en aurez besoin pour vous inscrire sur <a class="ulink" href="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema" target="_top">Windows Azure Marketplace</a> et pour utiliser le service de traduction. Notez que 2 milliards de caractères par mois sont gratuits. Les deux entrées nécessaires
                            sont disponibles sur la <a class="ulink" href="https://datamarket.azure.com/account" target="_top">page de votre compte</a> en dessous de la Clé d'accès primaire de votre compte et de l'ID utilisateur&nbsp;:
                         </p>
                         <p><span class="bold"><strong>-Dmicrosoft.api.client_id=</strong></span><span class="bold"><strong>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</strong></span></p>
                         <p>-<span class="bold"><strong>Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</strong></span></p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Yandex Translate</strong></span><a class="indexterm" name="d0e1363"></a></p>
+                        <p>Assurez-vous d'avoir un compte Yandex gratuit. Vous en aurez besoin pour obtenir et utiliser la clé d'API Yandex Translate.
+                           Les clés d'API peuvent être demandées à l'aide du <a class="ulink" href="http://api.yandex.com/key/form.xml?service=trnsl" target="_top">formulaire de demande de clé d'API</a> et affichées sur la page <a class="ulink" href="http://api.yandex.com/key/keyslist.xml" target="_top">My Keys</a>.
+                        </p>
+                        <p><span class="bold"><strong>-Dyandex.api.key=</strong></span><span class="bold"><strong>trnsl.1.1.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</strong></span></p>
                      </li>
                   </ul>
                </div>
@@ -687,7 +694,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="omegat.command.arguments"></a>6.3.&nbsp;OmegaT en mode ligne de commande<a class="indexterm" name="d0e1380"></a></h3>
+                        <h3 class="title"><a name="omegat.command.arguments"></a>6.3.&nbsp;OmegaT en mode ligne de commande<a class="indexterm" name="d0e1400"></a></h3>
                      </div>
                   </div>
                </div>
@@ -910,7 +917,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>7.&nbsp;Version d'<span class="application">OmegaT</span> à partir de la source<a class="indexterm" name="d0e1681"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>7.&nbsp;Version d'<span class="application">OmegaT</span> à partir de la source<a class="indexterm" name="d0e1701"></a></h2>
                   </div>
                </div>
             </div>

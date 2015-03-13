@@ -5,8 +5,8 @@
       <title>Chapitre&nbsp;21.&nbsp;Traduction automatique</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Guide de l'utilisateur">
-      <link rel="up" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="home" href="index.html" title="OmegaT 3.1 - Guide de l'utilisateur">
+      <link rel="up" href="index.html" title="OmegaT 3.1 - Guide de l'utilisateur">
       <link rel="prev" href="chapter.TaaS.html" title="Chapitre&nbsp;20.&nbsp;Utilisation de TaaS dans OmegaT">
       <link rel="next" href="chapter.spellchecker.html" title="Chapitre&nbsp;22.&nbsp;Vérificateur orthographique">
    </head>
@@ -29,25 +29,27 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.machine.translate"></a>Chapitre&nbsp;21.&nbsp;Traduction automatique<a class="indexterm" name="d0e8679"></a></h1>
+                  <h1 class="title"><a name="chapter.machine.translate"></a>Chapitre&nbsp;21.&nbsp;Traduction automatique<a class="indexterm" name="d0e8699"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8682">1. Introduction</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8702">1. Introduction</a></span></dt>
                <dt><span class="section"><a href="chapter.machine.translate.html#introduction">2. Google Translate</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8723">3. Utilisateurs <span class="application">OmegaT</span>  et Google Translate</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8776">4. Belazar</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8788">5. Apertium</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#Google.Translate.troubleshooting">6. Traduction automatique - résolution des problèmes</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8743">3. Utilisateurs <span class="application">OmegaT</span>  et Google Translate</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8796">4. Belazar</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8808">5. Apertium</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8836">6. Microsoft Translator</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8879">7. Yandex Translate</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#Google.Translate.troubleshooting">8. Traduction automatique - résolution des problèmes</a></span></dt>
             </dl>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8682"></a>1.&nbsp;Introduction<a class="indexterm" name="d0e8685"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8702"></a>1.&nbsp;Introduction<a class="indexterm" name="d0e8705"></a></h2>
                   </div>
                </div>
             </div>
@@ -64,7 +66,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="introduction"></a>2.&nbsp;Google Translate<a class="indexterm" name="d0e8703"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="introduction"></a>2.&nbsp;Google Translate<a class="indexterm" name="d0e8723"></a></h2>
                   </div>
                </div>
             </div>
@@ -87,7 +89,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8723"></a>3.&nbsp;Utilisateurs <span class="application">OmegaT</span>  et Google Translate
+                     <h2 class="title" style="clear: both"><a name="d0e8743"></a>3.&nbsp;Utilisateurs <span class="application">OmegaT</span>  et Google Translate
                      </h2>
                   </div>
                </div>
@@ -105,7 +107,7 @@
                en partie sur la véritable traduction du livre.
             </p>
             <p>Une fois le service activé, une suggestion de traduction apparaît dans le panneau de Traduction automatique à chaque fois
-               qu'un nouveau segment source est ouvert. Si vous trouvez cette traduction satisfaisante, appuyez sur <span class="keycap"><strong><a class="indexterm" name="d0e8754"></a>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> pour remplacer la partie cible du segment ouvert par la suggestion. Dans le segment ci-dessus, par exemple, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> remplacerait la version espagnole par la suggestion slovène.
+               qu'un nouveau segment source est ouvert. Si vous trouvez cette traduction satisfaisante, appuyez sur <span class="keycap"><strong><a class="indexterm" name="d0e8774"></a>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> pour remplacer la partie cible du segment ouvert par la suggestion. Dans le segment ci-dessus, par exemple, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> remplacerait la version espagnole par la suggestion slovène.
             </p>
             <p>Si vous ne voulez pas qu'<span class="application">OmegaT</span> envoie vos segments sources à Google pour qu'ils soient traduits, décochez l'entrée de menu Google Translate dans le menu
                Options.
@@ -119,7 +121,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8776"></a>4.&nbsp;Belazar<a class="indexterm" name="d0e8779"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8796"></a>4.&nbsp;Belazar<a class="indexterm" name="d0e8799"></a></h2>
                   </div>
                </div>
             </div>
@@ -130,7 +132,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8788"></a>5.&nbsp;Apertium<a class="indexterm" name="d0e8791"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8808"></a>5.&nbsp;Apertium<a class="indexterm" name="d0e8811"></a></h2>
                   </div>
                </div>
             </div>
@@ -146,13 +148,9 @@
                   </li>
                   <li class="listitem">
                      <p>des outils qui permettent de gérer les données linguistiques nécessaires à la construction d'un système de traduction automatique
-                        pour une paire de langues donnée et
+                        pour une paire de langues donnée
                      </p>
                   </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>des données linguistiques pour un nombre croissant de paires de langues</p>
                   </li>
@@ -172,7 +170,58 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="Google.Translate.troubleshooting"></a>6.&nbsp;Traduction automatique - résolution des problèmes<a class="indexterm" name="d0e8820"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8836"></a>6.&nbsp;Microsoft Translator<a class="indexterm" name="d0e8839"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Pour obtenir des informations d'identification pour MS Translator, suivez ces étapes :</p>
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>Connectez-vous dans Microsoft Azure Marketplace : <a class="ulink" href="http://datamarket.azure.com/" target="_top">http://datamarket.azure.com/</a></p>
+                     <p>Si vous ne disposez pas déjà d'un compte Azure Marketplace vous devrez d'abord en créer un.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Cliquez sur l'option My Account en haut de la page.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Vers le bas, vous verrez des entrées et des valeurs pour :</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Primary Account Key (correspond au paramètre de ligne de commande <code class="code">microsoft.api.client_secret</code>)
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>Customer ID (correspond au paramètre de ligne de commande <code class="code"><code class="code">microsoft.api.client_id</code></code>)
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+               </ol>
+            </div>
+            <p>Pour activer MS Translator dans OmegaT, modifiez son lanceur ou consultez le chapitre <a class="link" href="chapter.installing.and.running.html" title="Chapitre&nbsp;3.&nbsp;Installation et exécution d'OmegaT">Installation et exécution</a> pour apprendre comment démarrer OmegaT depuis la ligne de commande.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8879"></a>7.&nbsp;Yandex Translate<a class="indexterm" name="d0e8882"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Pour pouvoir utiliser Yandex Translate dans OmegaT, vous devez obtenir une <a class="ulink" href="http://api.yandex.com/key/form.xml?service=trnsl" target="_top">clé d'API de Yandex</a>.
+            </p>
+            <p>La clé d'API obtenue doit être transmise à OmegaT au démarrage au travers du paramètre de ligne de commande <code class="code">yandex.api.key</code>. Pour ce faire, modifier le lanceur d'OmegaT ou consultez le chapitre <a class="link" href="chapter.installing.and.running.html" title="Chapitre&nbsp;3.&nbsp;Installation et exécution d'OmegaT">Installation et exécution</a> pour apprendre comment démarrer OmegaT depuis la ligne de commande.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="Google.Translate.troubleshooting"></a>8.&nbsp;Traduction automatique - résolution des problèmes<a class="indexterm" name="d0e8903"></a></h2>
                   </div>
                </div>
             </div>

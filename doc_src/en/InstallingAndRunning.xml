@@ -794,6 +794,27 @@
           <para>-<emphasis
           role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
         </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Yandex Translate</emphasis><indexterm class="singular">
+              <primary>Running OmegaT</primary>
+
+              <secondary>Launch script arguments</secondary>
+
+              <tertiary>Yandex Translate</tertiary>
+            </indexterm></para>
+
+          <para>Make sure that you have a free Yandex account. You’ll need
+          this to be able to obtain and use Yandex Translate API key. API keys
+          can be requested using <ulink url="http://api.yandex.com/key/form.xml?service=trnsl">API key request form</ulink>,
+          and viewed on <ulink url="http://api.yandex.com/key/keyslist.xml">My Keys</ulink> page.
+          </para>
+
+          <para><emphasis
+          role="bold">-Dyandex.api.key=</emphasis><emphasis
+          role="bold">trnsl.1.1.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</emphasis></para>
+        </listitem>
+
       </itemizedlist>
 
       <para>Arguments can be combined: to launch

@@ -127,9 +127,8 @@
         <secondary>Belazar</secondary>
       </indexterm></title>
 
-    <para><ulink url="http://belazar.info/">Belazar</ulink> is a
-    Machine language translation tool for the Russian-Belarusian language
-    pair.</para>
+    <para><ulink url="http://belazar.info/">Belazar</ulink> is a Machine
+    language translation tool for the Russian-Belarusian language pair.</para>
   </section>
 
   <section>
@@ -155,11 +154,9 @@
 
       <listitem>
         <para>tools to manage the linguistic data necessary to build a machine
-        translation system for a given language pair and</para>
+        translation system for a given language pair </para>
       </listitem>
-    </itemizedlist>
 
-    <itemizedlist>
       <listitem>
         <para>linguistic data for a growing number of language pairs</para>
       </listitem>
@@ -176,6 +173,70 @@
     XML-based standard formats to encode the linguistic data needed (either by
     hand or by converting existing data), which are compiled using the
     provided tools into the high-speed formats used by the engine.</para>
+  </section>
+
+  <section>
+    <title>Microsoft Translator<indexterm class="singular">
+        <primary>Machine Translation</primary>
+
+        <secondary>Microsoft Translator</secondary>
+      </indexterm></title>
+
+    <para>In order to get credentials for MS Translator, follow these
+    steps:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>Log into Microsoft Azure Marketplace: <ulink
+        url="http://datamarket.azure.com/">http://datamarket.azure.com/</ulink></para>
+
+        <para>If you do not already have an Azure Marketplace account you will
+        need to register one first.</para>
+      </listitem>
+
+      <listitem>
+        <para>Click on the My Account option at the top of the page.</para>
+      </listitem>
+
+      <listitem>
+        <para>Near the bottom you will see entries and values for:
+        <itemizedlist>
+            <listitem>
+              <para>Primary Account Key (corresponds to
+              <code>microsoft.api.client_secret</code> command-line
+              parameter)</para>
+            </listitem>
+
+            <listitem>
+              <para>Customer ID (corresponds to
+              <code><code>microsoft.api.client_id</code></code> command-line
+              parameter)</para>
+            </listitem>
+          </itemizedlist></para>
+      </listitem>
+    </orderedlist>
+
+    <para>To enable MS Translator in OmegaT edit its launcher or see chapter
+    <link linkend="chapter.installing.and.running">Installing and
+    Running</link> to learn how to start OmegaT from the command line.</para>
+  </section>
+
+  <section>
+    <title>Yandex Translate<indexterm class="singular">
+        <primary>Machine Translation</primary>
+
+        <secondary>Yandex Translate</secondary>
+      </indexterm></title>
+
+    <para>In order to be able to use Yandex Translate in OmegaT, you need to
+    <ulink url="http://api.yandex.com/key/form.xml?service=trnsl">obtain an
+    API key from Yandex</ulink>.</para>
+
+    <para>The obtained API key needs to be passed to OmegaT at startup through
+    <code>yandex.api.key</code> command-line parameter. To do that edit OmegaT
+    launcher or see chapter <link
+    linkend="chapter.installing.and.running">Installing and Running</link> to
+    learn how to start OmegaT from the command line.</para>
   </section>
 
   <section id="Google.Translate.troubleshooting">
@@ -207,7 +268,7 @@
         service</ulink>? Note that Google Translate service is not free of
         charge, see chapter <link
         linkend="chapter.installing.and.running">Installing and Running</link>
-        (runtime parameters) for more on that. </para>
+        (runtime parameters) for more on that.</para>
       </listitem>
 
       <listitem>
@@ -221,7 +282,7 @@
       <listitem>
         <para>Google Translate does not work: - with the Google API key
         entered as requested. Check in Options &gt; Machine Translate, that
-        Google Translate V2 is checked. </para>
+        Google Translate V2 is checked.</para>
       </listitem>
 
       <listitem>

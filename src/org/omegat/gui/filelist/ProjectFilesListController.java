@@ -173,7 +173,7 @@ public class ProjectFilesListController {
             list.scrollFiles.setBackground(COLOR_STANDARD_BG);
             list.tableFiles.getTableHeader().setBackground(COLOR_STANDARD_BG);
         }
-        list.scrollFiles.addComponentListener(new ComponentAdapter() {
+        list.scrollFiles.getViewport().addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 if (modelFiles == null) {

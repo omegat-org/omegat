@@ -60,6 +60,9 @@ import org.omegat.util.StaticUtils;
  */
 public class AutoCompleter {    
     
+    private final static int GO_NEXT_KEY = KeyEvent.VK_RIGHT;
+    private final static int GO_PREV_KEY = KeyEvent.VK_LEFT;
+    
     JPopupMenu popup = new JPopupMenu(); 
     private EditorTextArea3 editor; 
     
@@ -155,8 +158,7 @@ public class AutoCompleter {
                 return true;
             }
             
-            if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_UP,
-                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
+            if (StaticUtils.isKey(e, GO_PREV_KEY, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
                 if (popup.isVisible()) {
                     selectPreviousView();
                 }
@@ -164,7 +166,7 @@ public class AutoCompleter {
             }
             
             if (StaticUtils.isKey(e, KeyEvent.VK_SPACE, KeyEvent.CTRL_MASK)
-                    || StaticUtils.isKey(e, KeyEvent.VK_PAGE_DOWN, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
+                    || StaticUtils.isKey(e, GO_NEXT_KEY, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
                 if (popup.isVisible()) {
                     selectNextView();
                 }
@@ -298,8 +300,8 @@ public class AutoCompleter {
         sb.append("</b>");
         
         if (views.size() != 1) {
-            String nextKeyString = keyText(KeyEvent.VK_PAGE_DOWN, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
-            String prevKeyString = keyText(KeyEvent.VK_PAGE_UP, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+            String nextKeyString = keyText(GO_NEXT_KEY, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+            String prevKeyString = keyText(GO_PREV_KEY, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
             
             if (views.size() >= 2) {
                 sb.append("<br>");

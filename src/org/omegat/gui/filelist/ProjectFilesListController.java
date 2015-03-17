@@ -607,7 +607,10 @@ public class ProjectFilesListController {
                 if (row == -1) {
                     cellRenderer = col.getHeaderRenderer();
                     if (cellRenderer == null) {
-                        cellRenderer = list.tableFiles.getDefaultRenderer(col.getClass());
+                        cellRenderer = col.getCellRenderer();
+                    }
+                    if (cellRenderer == null) {
+                        cellRenderer = list.tableFiles.getDefaultRenderer(modelFiles.getColumnClass(column));
                     }
                     c = cellRenderer.getTableCellRendererComponent(list.tableFiles, col.getHeaderValue(), false, false, 0, column);
                     // Add somewhat arbitrary margin to header because it gets truncated at a smaller width

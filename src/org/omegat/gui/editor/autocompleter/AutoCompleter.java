@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
-               2014 Aaron Madlon-Kay
+               2014-2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -35,11 +35,12 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.text.BadLocationException;
 
 import org.omegat.gui.editor.EditorTextArea3;
@@ -89,7 +90,7 @@ public class AutoCompleter {
         this.editor = editor; 
         
         scroll = new JScrollPane();
-        scroll.setBorder(null);
+        scroll.setBorder(new EmptyBorder(0, 0, 0, 0));
         scroll.setPreferredSize(new Dimension(200,200));
         scroll.setColumnHeaderView(null);
         scroll.setFocusable(false);
@@ -104,8 +105,11 @@ public class AutoCompleter {
         views.add(new CharTableAutoCompleterView(this));
 
         viewLabel = new JLabel();
-        viewLabel.setBorder(new EmptyBorder(4, 4, 4, 4));;
-        popup.setBorder(BorderFactory.createLineBorder(Color.black));
+        viewLabel.setBorder(new CompoundBorder(
+                new MatteBorder(1, 0, 0, 0, Color.BLACK),
+                new EmptyBorder(5, 5, 5, 5)));
+        viewLabel.setOpaque(true);
+        popup.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
         popup.setLayout(new BorderLayout());
         popup.add(scroll, BorderLayout.CENTER); 
         popup.add(viewLabel, BorderLayout.SOUTH);

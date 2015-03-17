@@ -94,8 +94,8 @@ public class AutoCompleter {
         scroll.setColumnHeaderView(null);
         scroll.setFocusable(false);
  
-        scroll.getVerticalScrollBar().setFocusable( false ); 
-        scroll.getHorizontalScrollBar().setFocusable( false ); 
+        scroll.getVerticalScrollBar().setFocusable(false); 
+        scroll.getHorizontalScrollBar().setFocusable(false); 
         
         // add any views here
         views.add(new GlossaryAutoCompleterView(this));
@@ -204,8 +204,9 @@ public class AutoCompleter {
      * Show the popup list.
      */
     public void updatePopup() { 
-        if (!isVisible())
+        if (!isVisible()) {
             return;
+        }
         
         if (editor.isEnabled() && updateViewData() && views.get(currentView).getRowCount()!=0) { 
             scroll.setPreferredSize(new Dimension(

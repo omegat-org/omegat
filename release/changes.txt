@@ -2,7 +2,7 @@
  OmegaT 3.1.9 update 1
 ----------------------------------------------------------------------
    1 Enhancement
-   0 Bug fix
+   1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.9 update 1 vs. 3.1.9
@@ -11,6 +11,11 @@
 
   - Change auto-completion mode access keys 
   https://sourceforge.net/p/omegat/feature-requests/1073/
+
+  Bug fixes:
+  
+  - The OK and Cancel buttons of Options > Editing Behaviour were not
+displayed correctly
 
 ----------------------------------------------------------------------
  OmegaT 3.1.9 (2015-03-09)

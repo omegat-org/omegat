@@ -88,8 +88,6 @@ public class WorkflowOptionsDialog extends JDialog {
         allowTagEditing.setSelected(Preferences.isPreference(Preferences.ALLOW_TAG_EDITING));
         tagValidateOnLeave.setSelected(Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE));
         cbSaveAutoStatus.setSelected(Preferences.isPreference(Preferences.SAVE_AUTO_STATUS));
-        invalidate();
-        pack();
         DockingUI.displayCentered(this);
     }
 
@@ -109,23 +107,26 @@ public class WorkflowOptionsDialog extends JDialog {
         java.awt.GridBagConstraints gridBagConstraints;
 
         ourButtonGroup = new javax.swing.ButtonGroup();
-        similarityLabel = new javax.swing.JLabel();
-        similaritySpinner = new javax.swing.JSpinner();
+        jPanel1 = new javax.swing.JPanel();
         descriptionTextArea = new javax.swing.JTextArea();
-        okButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
-        convertNumbers = new javax.swing.JCheckBox();
-        allowTranslationEqualToSource = new javax.swing.JCheckBox();
         defaultRadio = new javax.swing.JRadioButton();
         leaveEmptyRadio = new javax.swing.JRadioButton();
+        insertFuzzyCheckBox = new javax.swing.JCheckBox();
+        similarityLabel = new javax.swing.JLabel();
+        similaritySpinner = new javax.swing.JSpinner();
         prefixLabel = new javax.swing.JLabel();
         prefixText = new javax.swing.JTextField();
-        insertFuzzyCheckBox = new javax.swing.JCheckBox();
+        convertNumbers = new javax.swing.JCheckBox();
+        allowTranslationEqualToSource = new javax.swing.JCheckBox();
         exportCurrentSegment = new javax.swing.JCheckBox();
         stopOnAlternativeTranslation = new javax.swing.JCheckBox();
         allowTagEditing = new javax.swing.JCheckBox();
         tagValidateOnLeave = new javax.swing.JCheckBox();
         cbSaveAutoStatus = new javax.swing.JCheckBox();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        okButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
         setTitle(OStrings.getString("GUI_TITLE_Workflow_Options")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -133,96 +134,22 @@ public class WorkflowOptionsDialog extends JDialog {
                 closeDialog(evt);
             }
         });
-        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        similarityLabel.setLabelFor(similaritySpinner);
-        org.openide.awt.Mnemonics.setLocalizedText(similarityLabel, OStrings.getString("GUI_WORKFLOW_OPTION_Minimal_Similarity")); // NOI18N
-        similarityLabel.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 16, 4, 4);
-        getContentPane().add(similarityLabel, gridBagConstraints);
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        similaritySpinner.setEnabled(false);
-        similaritySpinner.setValue(90);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(similaritySpinner, gridBagConstraints);
-
-        descriptionTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         descriptionTextArea.setEditable(false);
+        descriptionTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         descriptionTextArea.setFont(new JLabel().getFont());
         descriptionTextArea.setLineWrap(true);
         descriptionTextArea.setText(OStrings.getString("GUI_WORKFLOW_DESCRIPTION")); // NOI18N
         descriptionTextArea.setWrapStyleWord(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(descriptionTextArea, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
-        getContentPane().add(okButton, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
-        getContentPane().add(cancelButton, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(convertNumbers, OStrings.getString("WF_OPTION_CONVERT_NUMBERS")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipadx = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(convertNumbers, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(allowTranslationEqualToSource, OStrings.getString("WF_OPTION_ALLOW_TRANS_EQ_TO_SRC")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipadx = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(allowTranslationEqualToSource, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 5, 0);
+        jPanel1.add(descriptionTextArea, gridBagConstraints);
 
         ourButtonGroup.add(defaultRadio);
         defaultRadio.setSelected(true);
@@ -234,13 +161,12 @@ public class WorkflowOptionsDialog extends JDialog {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
-        getContentPane().add(defaultRadio, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 5, 0);
+        jPanel1.add(defaultRadio, gridBagConstraints);
 
         ourButtonGroup.add(leaveEmptyRadio);
         org.openide.awt.Mnemonics.setLocalizedText(leaveEmptyRadio, OStrings.getString("WF_OPTION_INSERT_NOTHTHING")); // NOI18N
@@ -251,33 +177,12 @@ public class WorkflowOptionsDialog extends JDialog {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
-        getContentPane().add(leaveEmptyRadio, gridBagConstraints);
-
-        prefixLabel.setLabelFor(prefixText);
-        org.openide.awt.Mnemonics.setLocalizedText(prefixLabel, OStrings.getString("WF_OPTION_INSERT_FUZZY_PREFIX")); // NOI18N
-        prefixLabel.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 16, 4, 4);
-        getContentPane().add(prefixLabel, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(prefixText, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
+        jPanel1.add(leaveEmptyRadio, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(insertFuzzyCheckBox, OStrings.getString("WF_OPTION_INSERT_FUZZY_MATCH")); // NOI18N
         insertFuzzyCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -286,68 +191,139 @@ public class WorkflowOptionsDialog extends JDialog {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
-        getContentPane().add(insertFuzzyCheckBox, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(15, 0, 0, 0);
+        jPanel1.add(insertFuzzyCheckBox, gridBagConstraints);
+
+        similarityLabel.setLabelFor(similaritySpinner);
+        org.openide.awt.Mnemonics.setLocalizedText(similarityLabel, OStrings.getString("GUI_WORKFLOW_OPTION_Minimal_Similarity")); // NOI18N
+        similarityLabel.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 5);
+        jPanel1.add(similarityLabel, gridBagConstraints);
+
+        similaritySpinner.setEnabled(false);
+        similaritySpinner.setValue(90);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.ipadx = 50;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        jPanel1.add(similaritySpinner, gridBagConstraints);
+
+        prefixLabel.setLabelFor(prefixText);
+        org.openide.awt.Mnemonics.setLocalizedText(prefixLabel, OStrings.getString("WF_OPTION_INSERT_FUZZY_PREFIX")); // NOI18N
+        prefixLabel.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 5);
+        jPanel1.add(prefixLabel, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.ipadx = 150;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(prefixText, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(convertNumbers, OStrings.getString("WF_OPTION_CONVERT_NUMBERS")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 5, 0);
+        jPanel1.add(convertNumbers, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(allowTranslationEqualToSource, OStrings.getString("WF_OPTION_ALLOW_TRANS_EQ_TO_SRC")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        jPanel1.add(allowTranslationEqualToSource, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(exportCurrentSegment, OStrings.getString("WF_OPTION_EXPORT__CURRENT_SEGMENT")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(exportCurrentSegment, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        jPanel1.add(exportCurrentSegment, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(stopOnAlternativeTranslation, OStrings.getString("WF_OPTION_GOTO_NEXT_UNTRANSLATED")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(stopOnAlternativeTranslation, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        jPanel1.add(stopOnAlternativeTranslation, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(allowTagEditing, OStrings.getString("WF_TAG_EDITING")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(allowTagEditing, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        jPanel1.add(allowTagEditing, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(tagValidateOnLeave, OStrings.getString("WG_TAG_VALIDATE_ON_LEAVE")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 11;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(tagValidateOnLeave, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        jPanel1.add(tagValidateOnLeave, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(cbSaveAutoStatus, OStrings.getString("WG_SAVE_AUTO_STATUS")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 12;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(cbSaveAutoStatus, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        jPanel1.add(cbSaveAutoStatus, gridBagConstraints);
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
+        jPanel3.add(okButton);
+
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+        jPanel3.add(cancelButton);
+
+        jPanel2.add(jPanel3, java.awt.BorderLayout.EAST);
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void radiosActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_radiosActionPerformed
@@ -409,6 +385,9 @@ public class WorkflowOptionsDialog extends JDialog {
     private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JCheckBox exportCurrentSegment;
     private javax.swing.JCheckBox insertFuzzyCheckBox;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JRadioButton leaveEmptyRadio;
     private javax.swing.JButton okButton;
     private javax.swing.ButtonGroup ourButtonGroup;

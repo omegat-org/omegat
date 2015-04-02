@@ -99,10 +99,12 @@ public class FiltersTableModel extends AbstractTableModel {
     // TableModel implementation
     // ////////////////////////////////////////////////////////////////////////
 
+    @Override
     public int getColumnCount() {
         return 2;
     }
 
+    @Override
     public String getColumnName(int columnIndex) {
         switch (columnIndex) {
         case 0:
@@ -113,6 +115,7 @@ public class FiltersTableModel extends AbstractTableModel {
         return null;
     }
 
+    @Override
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
         case 0:
@@ -123,10 +126,12 @@ public class FiltersTableModel extends AbstractTableModel {
         return null;
     }
 
+    @Override
     public int getRowCount() {
         return filters.size();
     }
 
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Filter filter = filters.get(rowIndex);
         switch (columnIndex) {
@@ -138,6 +143,7 @@ public class FiltersTableModel extends AbstractTableModel {
         return null;
     }
 
+    @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         Filter filter = filters.get(rowIndex);
         switch (columnIndex) {
@@ -149,6 +155,7 @@ public class FiltersTableModel extends AbstractTableModel {
         }
     }
 
+    @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         switch (columnIndex) {
         case 0:

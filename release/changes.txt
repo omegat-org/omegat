@@ -1,4 +1,21 @@
 ----------------------------------------------------------------------
+ OmegaT 3.1.4 
+----------------------------------------------------------------------
+   1 Enhancement
+   2 Bug fixes
+   0 Localisation update
+----------------------------------------------------------------------
+3.1.4 update 3.1.9 update 1
+
+  Other changes:
+
+  - New XML Spreadsheet 2003 filter. This allows translating Excel document
+exported in XML 2003 format. As the extension is .xml, other filters may
+"steal" the file. In that case, they have to be disabled. The XML 
+Spreadhsheet 2003 filter limit itself to documents where the first tag
+is "Workbook".
+
+----------------------------------------------------------------------
  OmegaT 3.1.9 update 1
 ----------------------------------------------------------------------
    1 Enhancement

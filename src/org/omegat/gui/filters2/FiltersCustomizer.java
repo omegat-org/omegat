@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2013 Alex Buloichik, Yu Tang
                2014 Aaron Madlon-Kay
+               2015 Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -42,6 +43,8 @@ import javax.swing.JLabel;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumn;
 
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
@@ -104,6 +107,10 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         getRootPane().setDefaultButton(okButton);
         filtersTable.setModel(new FiltersTableModel(editableFilters));
         filtersTable.getSelectionModel().addListSelectionListener(this);
+        filtersTable.getTableHeader().setResizingAllowed(false);
+        TableColumn column = filtersTable.getColumn(
+                FiltersTableModel.COLUMN.FILTERS_ON.getColumnName());
+        column.setHeaderRenderer(new DefaultTableCellRenderer());
 
         if (projectSpecific) {
             setTitle(OStrings.getString("FILTERSCUSTOMIZER_TITLE_PROJECTSPECIFIC"));
@@ -127,6 +134,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         tableSize.height = tableSize.height + 70;
         filtersScrollPane.setPreferredSize(tableSize);
         pack();
+        column.sizeWidthToFit();
         Toolkit kit = getToolkit();
         Dimension screenSize = kit.getScreenSize();
         Dimension dialogSize = getSize();

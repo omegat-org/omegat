@@ -36,6 +36,8 @@ import java.awt.Frame;
 import java.awt.GraphicsConfiguration;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Map;
 
 import javax.swing.JDialog;
@@ -107,6 +109,25 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         getRootPane().setDefaultButton(okButton);
         filtersTable.setModel(new FiltersTableModel(editableFilters));
         filtersTable.getSelectionModel().addListSelectionListener(this);
+        filtersTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                if (isDoubleClickByRightButton(me) && isClickOnFileFormatColumn(me)) {
+                    editButtonActionPerformed(null);
+                }
+            }
+
+            private boolean isDoubleClickByRightButton(MouseEvent me) {
+                return me.getClickCount() == 2
+                        && me.getButton() == MouseEvent.BUTTON1;
+            }
+
+            private boolean isClickOnFileFormatColumn(MouseEvent me) {
+                int viewColumnIndex = filtersTable.columnAtPoint(me.getPoint());
+                int modelColumnIndex = filtersTable.convertColumnIndexToModel(viewColumnIndex);
+                return modelColumnIndex == FiltersTableModel.COLUMN.FILTERS_FILE_FORMAT.index;
+            }
+        });
         filtersTable.getTableHeader().setResizingAllowed(false);
         TableColumn column = filtersTable.getColumn(
                 FiltersTableModel.COLUMN.FILTERS_ON.getColumnName());

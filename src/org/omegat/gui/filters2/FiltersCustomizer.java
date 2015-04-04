@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2013 Alex Buloichik, Yu Tang
                2014 Aaron Madlon-Kay
-               2015 Yu Tang
+               2015 Yu Tang, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -31,13 +31,12 @@ package org.omegat.gui.filters2;
 import gen.core.filters.Filter;
 import gen.core.filters.Filters;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GraphicsConfiguration;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.Map;
 
 import javax.swing.JDialog;
@@ -45,7 +44,7 @@ import javax.swing.JLabel;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import org.omegat.filters2.IFilter;
@@ -109,29 +108,9 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         getRootPane().setDefaultButton(okButton);
         filtersTable.setModel(new FiltersTableModel(editableFilters));
         filtersTable.getSelectionModel().addListSelectionListener(this);
-        filtersTable.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent me) {
-                if (isDoubleClickByRightButton(me) && isClickOnFileFormatColumn(me)) {
-                    editButtonActionPerformed(null);
-                }
-            }
-
-            private boolean isDoubleClickByRightButton(MouseEvent me) {
-                return me.getClickCount() == 2
-                        && me.getButton() == MouseEvent.BUTTON1;
-            }
-
-            private boolean isClickOnFileFormatColumn(MouseEvent me) {
-                int viewColumnIndex = filtersTable.columnAtPoint(me.getPoint());
-                int modelColumnIndex = filtersTable.convertColumnIndexToModel(viewColumnIndex);
-                return modelColumnIndex == FiltersTableModel.COLUMN.FILTERS_FILE_FORMAT.index;
-            }
-        });
-        filtersTable.getTableHeader().setResizingAllowed(false);
         TableColumn column = filtersTable.getColumn(
                 FiltersTableModel.COLUMN.FILTERS_ON.getColumnName());
-        column.setHeaderRenderer(new DefaultTableCellRenderer());
+        column.setMaxWidth(calculateOptimalColHeaderWidth(column));
 
         if (projectSpecific) {
             setTitle(OStrings.getString("FILTERSCUSTOMIZER_TITLE_PROJECTSPECIFIC"));
@@ -155,7 +134,6 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         tableSize.height = tableSize.height + 70;
         filtersScrollPane.setPreferredSize(tableSize);
         pack();
-        column.sizeWidthToFit();
         Toolkit kit = getToolkit();
         Dimension screenSize = kit.getScreenSize();
         Dimension dialogSize = getSize();
@@ -168,6 +146,30 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         }
         DockingUI.displayCentered(this);
      }    
+
+    /**
+     * Calculate specified column's ideal width, based on header
+     * @param col the column to calculate its ideal width
+     * @return the column width
+     * @see org.omegat.gui.filelist.ProjectFilesListController#calculateOptimalColWidths() 
+     */
+    private int calculateOptimalColHeaderWidth(TableColumn col) {
+        TableCellRenderer cellRenderer = col.getHeaderRenderer();
+        if (cellRenderer == null) {
+            // Headers are usually rendered as String
+            cellRenderer = filtersTable.getDefaultRenderer(String.class);
+        }
+        String title = col.getHeaderValue().toString();
+        Component c = cellRenderer.getTableCellRendererComponent(filtersTable, title,
+                false, false, -1, col.getModelIndex());
+        c.setBounds(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
+        // Add somewhat arbitrary margin to header because it gets truncated at a smaller width
+        // than a regular cell does (Windows LAF more than OS X LAF).
+        int margin = 10;
+        int width = c.getPreferredSize().width
+                + filtersTable.getIntercellSpacing().width + margin;
+        return width;
+    }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
     public int getReturnStatus() {

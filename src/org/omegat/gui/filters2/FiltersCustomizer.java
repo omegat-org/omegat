@@ -33,22 +33,29 @@ import gen.core.filters.Filters;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GraphicsConfiguration;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
+import org.omegat.core.Core;
+import org.omegat.core.data.IProject;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.FiltersTableModel;
@@ -129,9 +136,13 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
                 return modelColumnIndex == FiltersTableModel.COLUMN.FILTERS_FILE_FORMAT.index;
             }
         });
-        TableColumn column = filtersTable.getColumn(
-                FiltersTableModel.COLUMN.FILTERS_ON.getColumnName());
+        String columnName = FiltersTableModel.COLUMN.FILTERS_ON.getColumnName();
+        TableColumn column = filtersTable.getColumn(columnName);
         column.setMaxWidth(calculateOptimalColHeaderWidth(column));
+
+        columnName = FiltersTableModel.COLUMN.FILTERS_FILE_FORMAT.getColumnName();
+        column = filtersTable.getColumn(columnName);
+        column.setCellRenderer(new FilterFormatCellRenderer(getInUseFormatNames()));
 
         if (projectSpecific) {
             setTitle(OStrings.getString("FILTERSCUSTOMIZER_TITLE_PROJECTSPECIFIC"));
@@ -514,6 +525,39 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         }
         setVisible(false);
         dispose();
+    }
+
+    private Set<String> getInUseFormatNames() {
+        Set<String> inUseFormatNames = new HashSet<String>();
+        IProject project = Core.getProject();
+        if (project.isProjectLoaded()) {
+            Filters projectSpecificFilters = Core.getProject().getProjectProperties().getProjectFilters();
+            boolean noProjectSpecificFiltersAvailable = (projectSpecificFilters == null);
+            if (isProjectSpecific || noProjectSpecificFiltersAvailable) {
+                for (IProject.FileInfo fi : project.getProjectFiles()) {
+                    inUseFormatNames.add(fi.filterFileFormatName);
+                }
+            }
+        }
+        return inUseFormatNames;
+    }
+
+    private class FilterFormatCellRenderer extends DefaultTableCellRenderer {
+
+        private final Set<String> highlightFormatNames;
+
+        private FilterFormatCellRenderer(Set<String> highlightFormatNames) {
+            this.highlightFormatNames = highlightFormatNames;
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            if (highlightFormatNames.contains(value.toString())) {
+                component.setFont(component.getFont().deriveFont(Font.BOLD));
+            }
+            return component;
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

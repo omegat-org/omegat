@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.4 
 ----------------------------------------------------------------------
-   1 Enhancement
-   2 Bug fixes
+   2 Enhancements
+   0 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.4 update 3.1.9 update 1
@@ -14,6 +14,9 @@ exported in XML 2003 format. As the extension is .xml, other filters may
 "steal" the file. In that case, they have to be disabled. The XML 
 Spreadhsheet 2003 filter limit itself to documents where the first tag
 is "Workbook".
+
+  - In Options > File Filters, the filters used by the current project
+are displayed in bold
 
 ----------------------------------------------------------------------
  OmegaT 3.1.9 update 1

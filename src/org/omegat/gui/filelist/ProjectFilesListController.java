@@ -1009,7 +1009,7 @@ public class ProjectFilesListController {
 
     private void setFont(Font font) {
         list.tableFiles.setFont(font);
-        list.tableTotal.setFont(new Font(font.getName(), Font.BOLD, font.getSize()));
+        list.tableTotal.setFont(font.deriveFont(Font.BOLD));
         list.tableFiles.setRowHeight(font.getSize() + LINE_SPACING);
         list.tableTotal.setRowHeight(font.getSize() + LINE_SPACING);
         list.statLabel.setFont(font);

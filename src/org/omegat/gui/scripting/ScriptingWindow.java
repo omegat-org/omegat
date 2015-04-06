@@ -205,13 +205,12 @@ public class ScriptingWindow extends JFrame {
 
         toolsMenu.add(scriptMenu);
 
+        File scriptDir = new File(getScriptsDir());
         for (int i = 0; i < NUMBERS_OF_QUICK_SCRIPTS; i++) {
             JMenuItem menuItem = new JMenuItem();
             m_quickMenus[i] = menuItem;
 
             String scriptName = Preferences.getPreferenceDefault("scripts_quick_" + scriptKey(i), null);
-
-            File scriptDir = new File(Preferences.getPreferenceDefault("scripts_dir", new File(".", DEFAULT_SCRIPTS_DIR).getAbsolutePath()));
 
             if (scriptName != null || "".equals(scriptName)) {
                 setQuickScriptMenu(new ScriptItem(new File(scriptDir, scriptName)), i);
@@ -398,8 +397,7 @@ public class ScriptingWindow extends JFrame {
         m_txtScriptsDir = new JTextField();
         panel.add(m_txtScriptsDir);
 
-        m_txtScriptsDir.setText(Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY,
-                new File(".", DEFAULT_SCRIPTS_DIR).getAbsolutePath()));
+        m_txtScriptsDir.setText(getScriptsDir());
 
         m_txtScriptsDir.setColumns(40);
         m_txtScriptsDir.addActionListener(new ActionListener() {
@@ -419,6 +417,11 @@ public class ScriptingWindow extends JFrame {
         });
 
         panel.add(btnBrowse);
+    }
+
+    private String getScriptsDir() {
+        return Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY,
+                new File(DEFAULT_SCRIPTS_DIR).getAbsolutePath());
     }
 
     private void setupRunButtons(JPanel panel) {

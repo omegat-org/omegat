@@ -138,7 +138,9 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         });
         String columnName = FiltersTableModel.COLUMN.FILTERS_ON.getColumnName();
         TableColumn column = filtersTable.getColumn(columnName);
-        column.setMaxWidth(calculateOptimalColHeaderWidth(column));
+        int optimalColHeaderWidth = calculateOptimalColHeaderWidth(column);
+        column.setMaxWidth(optimalColHeaderWidth);
+        column.setPreferredWidth(optimalColHeaderWidth);
 
         columnName = FiltersTableModel.COLUMN.FILTERS_FILE_FORMAT.getColumnName();
         column = filtersTable.getColumn(columnName);

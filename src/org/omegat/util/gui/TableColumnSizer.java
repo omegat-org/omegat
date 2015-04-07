@@ -223,7 +223,8 @@ public class TableColumnSizer {
                         cellRenderer = col.getCellRenderer();
                     }
                     if (cellRenderer == null) {
-                        cellRenderer = table.getDefaultRenderer(table.getModel().getColumnClass(column));
+                        // Headers are usually Strings
+                        cellRenderer = table.getDefaultRenderer(String.class);
                     }
                     c = cellRenderer.getTableCellRendererComponent(table, col.getHeaderValue(), false, false, 0, column);
                     // Add somewhat arbitrary margin to header because it gets truncated at a smaller width

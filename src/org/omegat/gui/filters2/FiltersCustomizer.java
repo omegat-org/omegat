@@ -51,7 +51,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import org.omegat.core.Core;
@@ -62,6 +61,7 @@ import org.omegat.filters2.master.FiltersTableModel;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
+import org.omegat.util.gui.TableColumnSizer;
 
 /**
  * Main dialog for for setting up filters. Filter is a class that allows for
@@ -130,15 +130,11 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
                 return modelColumnIndex == FiltersTableModel.COLUMN.FILTERS_FILE_FORMAT.index;
             }
         });
-        String columnName = FiltersTableModel.COLUMN.FILTERS_ON.getColumnName();
+        String columnName = FiltersTableModel.COLUMN.FILTERS_FILE_FORMAT.getColumnName();
         TableColumn column = filtersTable.getColumn(columnName);
-        int optimalColHeaderWidth = calculateOptimalColHeaderWidth(column);
-        column.setMaxWidth(optimalColHeaderWidth);
-        column.setPreferredWidth(optimalColHeaderWidth);
-
-        columnName = FiltersTableModel.COLUMN.FILTERS_FILE_FORMAT.getColumnName();
-        column = filtersTable.getColumn(columnName);
         column.setCellRenderer(new FilterFormatCellRenderer(getInUseFormatNames()));
+        
+        TableColumnSizer.autoSize(filtersTable, 0, true);
 
         if (projectSpecific) {
             setTitle(OStrings.getString("FILTERSCUSTOMIZER_TITLE_PROJECTSPECIFIC"));
@@ -174,30 +170,6 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         }
         DockingUI.displayCentered(this);
      }    
-
-    /**
-     * Calculate specified column's ideal width, based on header
-     * @param col the column to calculate its ideal width
-     * @return the column width
-     * @see org.omegat.gui.filelist.ProjectFilesListController#calculateOptimalColWidths() 
-     */
-    private int calculateOptimalColHeaderWidth(TableColumn col) {
-        TableCellRenderer cellRenderer = col.getHeaderRenderer();
-        if (cellRenderer == null) {
-            // Headers are usually rendered as String
-            cellRenderer = filtersTable.getDefaultRenderer(String.class);
-        }
-        String title = col.getHeaderValue().toString();
-        Component c = cellRenderer.getTableCellRendererComponent(filtersTable, title,
-                false, false, -1, col.getModelIndex());
-        c.setBounds(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
-        // Add somewhat arbitrary margin to header because it gets truncated at a smaller width
-        // than a regular cell does (Windows LAF more than OS X LAF).
-        int margin = 10;
-        int width = c.getPreferredSize().width
-                + filtersTable.getIntercellSpacing().width + margin;
-        return width;
-    }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
     public int getReturnStatus() {

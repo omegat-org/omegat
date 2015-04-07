@@ -48,7 +48,13 @@ public class Token {
      * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public boolean equals(Object other) {
-        return ((this == other) || ((other instanceof Token) && (hash == ((Token) other).hash)));
+        if (this == other) {
+            return true;
+        }
+        if (other instanceof Token) {
+            return hash == ((Token) other).hash;
+        }
+        return false;
     }
 
     /**

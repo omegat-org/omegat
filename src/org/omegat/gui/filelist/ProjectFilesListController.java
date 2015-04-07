@@ -179,6 +179,10 @@ public class ProjectFilesListController {
             public void windowClosed(WindowEvent e) {
                 doCancel();
             }
+            @Override
+            public void windowActivated(WindowEvent e) {
+                propagateTableColumns();
+            }
         });
 
         StaticUIUtils.setEscapeAction(list, new AbstractAction() {

@@ -32,6 +32,7 @@
 package org.omegat.util.gui;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.Window;
 
 import javax.swing.ImageIcon;
@@ -53,6 +54,7 @@ import com.vlsolutions.swing.docking.AutoHidePolicy.ExpandMode;
 import com.vlsolutions.swing.docking.ui.DockingUISettings;
 
 import java.awt.Font;
+import java.io.FileNotFoundException;
 
 /**
  * Docking UI support.
@@ -278,7 +280,9 @@ public class DockingUI {
         UIManager.put("DockTabbedPane.menu.maximize", getIcon("appbar.app.tall.png"));
         UIManager.put("DockTabbedPane.menu.float", getIcon("appbar.fullscreen.png"));
         
-        UIManager.put("DragControler.detachCursor", getIcon("appbar.fullscreen.png").getImage());
+        // Windows only accepts a 32x32 cursor image with no semitransparency, so you basically
+        // need a special image just for that.
+        UIManager.put("DragControler.detachCursor", getImage("appbar.fullscreen.cursor32x32.png"));
         
         // Use more native-looking icons on OS X
         if (Platform.isMacOSX()) {
@@ -298,6 +302,8 @@ public class DockingUI {
             
             UIManager.put("DockTabbedPane.menu.hide", getIcon("appbar.minus.png"));
             UIManager.put("DockTabbedPane.menu.maximize", getIcon("appbar.fullscreen.corners.png"));
+            
+            UIManager.put("DragControler.detachCursor", getImage("appbar.fullscreen.png"));
         }
     }
 

@@ -1092,9 +1092,9 @@ public class StaticUtils {
      * @return result stream
      */
     public static String fixChars(String str) {
-        char[] result = new char[str.length()];
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
+        StringBuilder sb = new StringBuilder(str.length());
+        for (int c, i = 0; i < str.length(); i += Character.charCount(c)) {
+            c = str.codePointAt(i);
             if (c < 0x20) {
                 if (c != 0x09 && c != 0x0A && c != 0x0D) {
                     c = ' ';
@@ -1105,9 +1105,9 @@ public class StaticUtils {
             } else {
                 c = ' ';
             }
-            result[i] = c;
+            sb.appendCodePoint(c);
         }
-        return new String(result);
+        return sb.toString();
     }
 
     /**

@@ -1,11 +1,31 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.4 
 ----------------------------------------------------------------------
-   2 Enhancements
-   0 Bug fixes
+   8 Enhancements
+   3 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.4 update 3.1.9 update 1
+
+  Implemented requests:
+
+  - Improve OmegaT look and feel
+  https://sourceforge.net/p/omegat/feature-requests/1082/  
+
+  - Better statistics layout for l10n UI 
+  https://sourceforge.net/p/omegat/feature-requests/820/
+
+  - Increase the size or better layout of the statistics window
+  https://sourceforge.net/p/omegat/feature-requests/820/
+
+  - Add Close button to Statistics window 
+  https://sourceforge.net/p/omegat/feature-requests/859/
+
+  - Automatically detect input file encoding when possible 
+  https://sourceforge.net/p/omegat/feature-requests/1075/
+
+  - Improve fuzzy match difference granularity in Chinese
+  https://sourceforge.net/p/omegat/feature-requests/1077/
 
   Other changes:
 
@@ -17,6 +37,17 @@ is "Workbook".
 
   - In Options > File Filters, the filters used by the current project
 are displayed in bold
+
+  Bug fixes:
+
+  - Editor title overflows with long filename 
+  https://sourceforge.net/p/omegat/bugs/739/
+
+  - Valid XML characters outside the BMP are stripped from input
+  https://sourceforge.net/p/omegat/bugs/740/
+
+  - Scripting window: now ScriptsDir is displayed like "foo\scripts" instead 
+of "foo\.\scripts"
 
 ----------------------------------------------------------------------
  OmegaT 3.1.9 update 1

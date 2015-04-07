@@ -28,6 +28,7 @@ package org.omegat.util.gui;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.FileNotFoundException;
 import java.net.URL;
 
 /**
@@ -42,9 +43,13 @@ public class ResourcesUtil {
      * 
      * @param resourceName
      *            resource name
+     * @throws FileNotFoundException 
      */
-    public static Image getImage(final String resourceName) {
+    public static Image getImage(final String resourceName) throws FileNotFoundException {
         URL resourceURL = ResourcesUtil.class.getResource(resourceName);
+        if (resourceURL == null) {
+            throw new FileNotFoundException(resourceName);
+        }
         return Toolkit.getDefaultToolkit().getImage(resourceURL);
     }
 }

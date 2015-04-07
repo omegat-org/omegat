@@ -308,8 +308,17 @@ public class DockingUI {
      *            icon file name
      * @return icon instance
      */
-    private static ImageIcon getIcon(final String iconName) {
-        return new ImageIcon(ResourcesUtil.getImage("/org/omegat/gui/resources/" + iconName));
+    private static ImageIcon getIcon(String iconName) {
+        Image image = getImage(iconName);
+        return image == null ? null : new ImageIcon(image);
+    }
+    
+    private static Image getImage(String imageName) {
+        try {
+            return ResourcesUtil.getImage("/org/omegat/gui/resources/" + imageName);
+        } catch (FileNotFoundException e) {
+            return null;
+        }
     }
 
     /**

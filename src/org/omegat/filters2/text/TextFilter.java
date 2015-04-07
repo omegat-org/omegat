@@ -190,8 +190,8 @@ public class TextFilter extends AbstractFilter {
     /** Processes the file segmenting on line breaks. */
     private void processSegEmptyLines(BufferedReader in, Writer out) throws IOException {
         LinebreakPreservingReader lpin = new LinebreakPreservingReader(in);
-        StringBuffer nontrans = new StringBuffer();
-        StringBuffer trans = new StringBuffer();
+        StringBuilder nontrans = new StringBuilder();
+        StringBuilder trans = new StringBuilder();
         String s;
         while ((s = lpin.readLine()) != null) {
             if (s.length() == 0) {

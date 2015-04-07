@@ -44,7 +44,7 @@ public class XMLSpreadsheetDialect extends DefaultXMLDialect {
     public XMLSpreadsheetDialect() {
         defineConstraint(CONSTRAINT_ROOT, ROOT_PATTERN);
         defineParagraphTags(new String[] { "Workbook", "Cell", });
-//        defineIntactTags(new String[] { "source", "ut", "skeleton", "revisions"});
+        defineIntactTags(new String[] { "DocumentProperties", "ExcelWorkbook", "WorksheetOptions", });
 
     }
     

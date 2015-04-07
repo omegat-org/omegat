@@ -58,6 +58,8 @@ public class TableColumnSizer {
     private int remainderColumn = 0;
     private final boolean fitTableToWidth;
     
+    private boolean didApplySizes;
+    
     private final JTable table;
     private final List<ActionListener> listeners = new ArrayList<ActionListener>();
     
@@ -294,27 +296,66 @@ public class TableColumnSizer {
             return;
         }
         
-        calculateRemainderColReferenceWidth();
-        
         calculateOptimalColWidths();
+        
+        ensureTableResizeMode(fitTableToWidth ? JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS : JTable.AUTO_RESIZE_OFF);
         
         int proposedRemainderWidth = calculateProposedRemainderColWidth();
                         
         if (shouldAutoSize(proposedRemainderWidth)) {
-            ensureTableResizeMode(JTable.AUTO_RESIZE_OFF);
-            for (int width, i = 0; i < optimalColWidths.length; i++) {
-                width = optimalColWidths[i];
-                if (i == remainderColumn) {
-                    width = fitTableToWidth ? proposedRemainderWidth
-                            : Math.max(width, proposedRemainderWidth);
-                }
-                table.getColumnModel().getColumn(i).setPreferredWidth(width);
-            }
-        } else if (fitTableToWidth) {
-            ensureTableResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+            doAutoSize(proposedRemainderWidth);
+        } else if (didApplySizes) {
+            undoAutoSize();
         }
         
         notifyListeners();
+    }
+    
+    private void doAutoSize(int proposedRemainderWidth) {
+        
+        if (!fitTableToWidth) {
+            int width = Math.max(proposedRemainderWidth, optimalColWidths[remainderColumn]);
+            table.getColumnModel().getColumn(remainderColumn).setPreferredWidth(width);
+        }
+        
+        if (didApplySizes) {
+            return;
+        }
+
+        for (int width, i = 0; i < optimalColWidths.length; i++) {
+            width = optimalColWidths[i];
+            TableColumn col = table.getColumnModel().getColumn(i);
+            if (i == remainderColumn) {
+                continue;
+            }
+            if (fitTableToWidth) {
+                col.setMaxWidth(width);
+            }
+            col.setPreferredWidth(width);
+        }
+        didApplySizes = true;
+    }
+    
+    private void undoAutoSize() {
+        if (!didApplySizes) {
+            return;
+        }
+        
+        if (!fitTableToWidth) {
+            didApplySizes = false;
+            return;
+        }
+        
+        for (int i = 0; i < optimalColWidths.length; i++) {
+            if (i == remainderColumn) {
+                continue;
+            }
+            TableColumn col = table.getColumnModel().getColumn(i);
+            // For some reason the column will "jump" to a larger size if we restore
+            // the max to Integer.MAX_VALUE. This doesn't happen with Short.MAX_VALUE.
+            col.setMaxWidth(Short.MAX_VALUE);
+        }
+        didApplySizes = false;
     }
     
     /**
@@ -341,10 +382,11 @@ public class TableColumnSizer {
         if (!fitTableToWidth) {
             return true;
         }
-        if (proposedRemainderWidth > optimalColWidths[remainderColumn]) {
+        if (proposedRemainderWidth >= optimalColWidths[remainderColumn]) {
             return true;
         }
-        return proposedRemainderWidth > remainderColReferenceWidth;
+        calculateRemainderColReferenceWidth();
+        return proposedRemainderWidth >= remainderColReferenceWidth;
     }
     
     public void addColumnAdjustmentListener(ActionListener listener) {

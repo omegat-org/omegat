@@ -43,6 +43,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -53,12 +55,15 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.JViewport;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
@@ -95,6 +100,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
@@ -135,6 +141,8 @@ public class EditorController implements IEditor {
     /** Dockable pane for editor. */
     private DockablePanel pane;
     private JScrollPane scrollPane;
+
+    private String title;
 
     private boolean dockableSelected;
 
@@ -277,8 +285,16 @@ public class EditorController implements IEditor {
         pane = new DockablePanel("EDITOR", " ", false);
         pane.setComponentOrientation(ComponentOrientation.getOrientation(Locale.getDefault()));
         pane.setMinimumSize(new Dimension(100, 100));
+        pane.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                updateTitle();
+            }
+        });
 
         scrollPane = new JScrollPane(editor);
+        scrollPane.setBorder(UIManager.getBorder("OmegaTDockablePanel.border"));
+        scrollPane.setViewportBorder(UIManager.getBorder("OmegaTDockablePanelViewport.border"));
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         pane.setLayout(new BorderLayout());
@@ -301,8 +317,7 @@ public class EditorController implements IEditor {
     private void updateState(SHOW_TYPE showType) {
         UIThreadsUtil.mustBeSwingThread();
 
-        Component data = null;
-        String title = null;
+        JComponent data = null;
 
         switch (showType) {
         case INTRO:
@@ -334,14 +349,22 @@ public class EditorController implements IEditor {
             break;
         }
 
-        pane.setName(title);
+        updateTitle();
         pane.setToolTipText(title);
 
         if (scrollPane.getViewport().getView() != data) {
+            if (UIManager.getBoolean("OmegaTDockablePanel.isProportionalMargins")) {
+                int size = data.getFont().getSize() / 2;
+                data.setBorder(new EmptyBorder(size, size, size, size));
+            }
             scrollPane.setViewportView(data);
         }
     }
 
+    private void updateTitle() {
+        pane.setName(StaticUIUtils.truncateToFit(title, pane, 70));
+    }
+    
     private void setFont(final Font font) {
         this.font = font;
         this.fontb = new Font(font.getFontName(), Font.BOLD, font.getSize());

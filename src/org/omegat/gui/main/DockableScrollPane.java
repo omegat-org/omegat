@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -28,6 +29,9 @@ package org.omegat.gui.main;
 import java.awt.Component;
 
 import javax.swing.JScrollPane;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
+import javax.swing.text.JTextComponent;
 
 import com.vlsolutions.swing.docking.DockKey;
 import com.vlsolutions.swing.docking.Dockable;
@@ -37,6 +41,7 @@ import com.vlsolutions.swing.docking.DockingConstants;
  * Dockable ScrollPane for a docking library.
  * 
  * @author Maxym Mykhalchuk
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class DockableScrollPane extends JScrollPane implements Dockable {
@@ -57,8 +62,16 @@ public class DockableScrollPane extends JScrollPane implements Dockable {
     /** Creates a new instance of DockableScrollBox */
     public DockableScrollPane(String key, String name, Component view, boolean detouchable) {
         super(view);
+        if (view instanceof JTextComponent && UIManager.getBoolean("OmegaTDockablePanel.isProportionalMargins")) {
+            JTextComponent c = (JTextComponent) view;
+            int size = c.getFont().getSize() / 2;
+            c.setBorder(new EmptyBorder(size, size, size, size));
+        }
+        setBorder(UIManager.getBorder("OmegaTDockablePanel.border"));
+        setViewportBorder(UIManager.getBorder("OmegaTDockablePanelViewport.border"));
         dockKey = new DockKey(key, name, null, null, DockingConstants.HIDE_BOTTOM);
         dockKey.setFloatEnabled(detouchable);
+        dockKey.setCloseEnabled(false);
     }
 
     @Override

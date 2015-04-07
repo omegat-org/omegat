@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2006 Henry Pijffers
-               2014 Aaron Madlon-Kay
+               2014-2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,8 +26,10 @@
 
 package org.omegat.util.gui;
 
+import java.awt.FontMetrics;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
@@ -103,5 +105,65 @@ public class StaticUIUtils {
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
         pane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
         pane.getActionMap().put("ESCAPE", action);
+    }
+
+    private final static char TRUNCATE_CHAR = '\u2026';
+    
+    /**
+     * Truncate the supplied text so that it fits within the width (minus margin) 
+     * of the supplied component. Truncation is achieved by replacing a chunk from
+     * the center of the string with an ellipsis.
+     * 
+     * @param text Text to truncate
+     * @param comp Component to fit text into
+     * @param margin Additional space to leave empty
+     * @return A truncated string
+     */
+    public static String truncateToFit(String text, JComponent comp, int margin) {
+        if (text == null || text.isEmpty() || comp == null) {
+            return text;
+        }
+        
+        final int targetWidth = comp.getWidth();
+        
+        // Early out if component is not visible
+        if (targetWidth < 1) {
+            return text;
+        }
+                
+        FontMetrics metrics = comp.getGraphics().getFontMetrics();
+        final int fullWidth = metrics.stringWidth(text);
+        // Early out if string + margin already fits
+        if (fullWidth + margin < targetWidth) {
+            return text;
+        }
+        
+        final int truncateCharWidth = metrics.charWidth(TRUNCATE_CHAR);
+        final int middle = text.length() / 2;
+        int spread = 0, chompStart = 0, chompEnd = 0;
+        String chomp = null;
+        
+        // Calculate size when removing progressively larger chunks from the middle
+        while (true) {
+            chompStart = middle - spread;
+            if (chompStart < 1) {
+                break;
+            }
+            chompEnd = chompStart + (2 * spread + 1);
+            if (chompEnd >= text.length() - 1) {
+                break;
+            }
+            chomp = text.substring(chompStart, chompEnd);
+            int newWidth = fullWidth - metrics.stringWidth(chomp) + truncateCharWidth + margin;
+            if (newWidth <= comp.getWidth()) {
+                break;
+            }
+            spread++;
+        }
+        
+        if (chomp != null) {
+            text = text.substring(0, chompStart) + TRUNCATE_CHAR + text.substring(chompEnd, text.length());
+        }
+        return text;
     }
 }

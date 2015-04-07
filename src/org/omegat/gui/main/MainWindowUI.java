@@ -43,10 +43,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.Border;
 
 import org.omegat.core.Core;
 import org.omegat.gui.editor.EditorController;
@@ -118,8 +119,10 @@ public class MainWindowUI {
         mainWindow.progressLabel = new JLabel();
         mainWindow.lengthLabel = new JLabel();
 
-        mainWindow.statusLabel.setFont(new Font("MS Sans Serif", 0, 11));
+        mainWindow.statusLabel.setFont(mainWindow.statusLabel.getFont().deriveFont(11));
 
+        Border border = UIManager.getBorder("OmegaTStatusArea.border");
+        
         final STATUS_BAR_MODE progressMode = STATUS_BAR_MODE.valueOf(
                 Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
                         STATUS_BAR_MODE.DEFAULT).name());
@@ -133,7 +136,7 @@ public class MainWindowUI {
         Mnemonics.setLocalizedText(mainWindow.progressLabel, OStrings.getString(statusText));
         mainWindow.progressLabel.setToolTipText(OStrings.getString(tooltipText));
 
-        mainWindow.progressLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+        mainWindow.progressLabel.setBorder(border);
         mainWindow.progressLabel.setHorizontalTextPosition(SwingConstants.CENTER);
         mainWindow.progressLabel.addMouseListener(new MouseAdapter() {
             @Override
@@ -164,7 +167,7 @@ public class MainWindowUI {
         Mnemonics.setLocalizedText(mainWindow.lengthLabel, OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
         mainWindow.lengthLabel.setToolTipText(OStrings.getString("MW_SEGMENT_LENGTH_TOOLTIP"));
         mainWindow.lengthLabel.setAlignmentX(1.0F);
-        mainWindow.lengthLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+        mainWindow.lengthLabel.setBorder(border);
         mainWindow.lengthLabel.setFocusable(false);
 
         JPanel statusPanel2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -174,7 +177,14 @@ public class MainWindowUI {
         JPanel statusPanel = new JPanel(new BorderLayout());
         statusPanel.add(mainWindow.statusLabel, BorderLayout.CENTER);
         statusPanel.add(statusPanel2, BorderLayout.EAST);
+        statusPanel.setBorder(UIManager.getBorder("OmegaTMainWindowBottomMargin.border"));
 
+        Color bgColor = UIManager.getColor("AutoHideButtonPanel.background");
+        if (bgColor != null) {
+            statusPanel.setBackground(bgColor);
+            statusPanel2.setBackground(bgColor);
+        }
+        
         return statusPanel;
     }
 

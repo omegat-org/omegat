@@ -9,6 +9,7 @@
                2008 Andrzej Sawula, Alex Buloichik
                2009-2010 Alex Buloichik
                2014 Yu Tang
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -34,18 +35,23 @@ import java.awt.Color;
 import java.awt.Window;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 import javax.swing.UIManager;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.plaf.ColorUIResource;
 
 import org.omegat.core.Core;
 import org.omegat.util.OStrings;
+import org.omegat.util.Platform;
 
 import com.vlsolutions.swing.docking.AutoHidePolicy;
 import com.vlsolutions.swing.docking.AutoHidePolicy.ExpandMode;
 import com.vlsolutions.swing.docking.ui.DockingUISettings;
+
 import java.awt.Font;
 
 /**
@@ -59,7 +65,7 @@ import java.awt.Font;
  * @author Andrzej Sawula
  * @author Alex Buloichik
  * @author Yu Tang
- * 
+ * @author Aaron Madlon-Kay
  */
 public class DockingUI {
 
@@ -67,8 +73,13 @@ public class DockingUI {
      * Initialize docking subsystem.
      */
     public static void initialize() {
+        // Install VLDocking defaults
         DockingUISettings.getInstance().installUI();
+        
+        // Enable animated popup when mousing over minimized tab
         AutoHidePolicy.getPolicy().setExpandMode(ExpandMode.EXPAND_ON_ROLLOVER);
+        
+        // UI strings
         UIManager.put("DockViewTitleBar.minimizeButtonText", OStrings.getString("DOCKING_HINT_MINIMIZE"));
         UIManager.put("DockViewTitleBar.maximizeButtonText", OStrings.getString("DOCKING_HINT_MAXIMIZE"));
         UIManager.put("DockViewTitleBar.restoreButtonText", OStrings.getString("DOCKING_HINT_RESTORE"));
@@ -81,12 +92,35 @@ public class DockingUI {
         UIManager.put("DockTabbedPane.floatButtonText", OStrings.getString("DOCKING_HINT_UNDOCK"));
         UIManager.put("DockTabbedPane.closeButtonText", new String());
 
-        Font defaultFont = new JLabel().getFont();
+        // Fonts
+        Font defaultFont = UIManager.getFont("Label.font");
         UIManager.put("DockViewTitleBar.titleFont", defaultFont);
         UIManager.put("JTabbedPaneSmartIcon.font", defaultFont);
+        UIManager.put("AutoHideButton.font", defaultFont);
 
-        UIManager.put("DockViewTitleBar.isCloseButtonDisplayed", Boolean.FALSE);
+        // UI settings
+        UIManager.put("DockViewTitleBar.isCloseButtonDisplayed", false);
+        UIManager.put("DockingDesktop.closeActionAccelerator", null);
+        UIManager.put("DockingDesktop.maximizeActionAccelerator", null);
+        UIManager.put("DockingDesktop.dockActionAccelerator", null);
+        UIManager.put("DockingDesktop.floatActionAccelerator", null);
 
+        // Classic design overridden by flat design
+        //installClassicDesign();
+        
+        installFlatDesign();
+        
+        // Panel notification (blinking tabs/headers) settings
+        UIManager.put("DockingDesktop.notificationBlinkCount", 2);
+        UIManager.put("DockingDesktop.notificationColor", new Color(0xFFE8E8));
+        
+        ensureTitlebarReadability();
+    }
+
+    @SuppressWarnings("unused")
+    private static void installClassicDesign() {
+        UIManager.put("OmegaTStatusArea.border", new MatteBorder(1, 1, 1, 1, Color.BLACK));
+        
         UIManager.put("DockViewTitleBar.hide", getIcon("minimize.gif"));
         UIManager.put("DockViewTitleBar.hide.rollover", getIcon("minimize.rollover.gif"));
         UIManager.put("DockViewTitleBar.hide.pressed", getIcon("minimize.pressed.gif"));
@@ -123,18 +157,15 @@ public class DockingUI {
         UIManager.put("DockTabbedPane.menu.float", getIcon("empty.gif"));
         UIManager.put("DockTabbedPane.menu.closeAll", getIcon("empty.gif"));
         UIManager.put("DockTabbedPane.menu.closeAllOther", getIcon("empty.gif"));
-
-        UIManager.put("DockingDesktop.closeActionAccelerator", null);
-        UIManager.put("DockingDesktop.maximizeActionAccelerator", null);
-        UIManager.put("DockingDesktop.dockActionAccelerator", null);
-        UIManager.put("DockingDesktop.floatActionAccelerator", null);
-
+        
         UIManager.put("DragControler.detachCursor", getIcon("undock.gif").getImage());
-
+    }
+    
+    private static void ensureTitlebarReadability() {
         // to ensure DockViewTitleBar title readability
         Color textColor = UIManager.getColor("InternalFrame.inactiveTitleForeground");
         Color backColor = UIManager.getColor("Panel.background");
-        if (textColor!= null && backColor!=null) { // One of these could be null
+        if (textColor != null && backColor != null) { // One of these could be null
             if (textColor.equals(backColor)) {
                 float[] hsb = Color.RGBtoHSB(textColor.getRed(),
                         textColor.getGreen(), textColor.getBlue(), null);
@@ -150,6 +181,125 @@ public class DockingUI {
             }
         }
     }
+    
+    private static void installFlatDesign() {
+        // Colors
+        Color standardBgColor = new Color(0xEEEEEE); // Label.background on Metal & OS X LAF
+        Color activeTitleBgColor = new Color(0xF6F6F7); // Lighter than standard background
+        Color bottomAreaBgColor = new Color(0xDEDEDE); // Darkest background
+        Color borderColor = new Color(0x9B9B9B); // Standard border. Darker than standard background.
+        UIManager.put("OmegaTBorder.color", borderColor);
+        Color statusAreaColor = new Color(0x575757); // Darkest border
+        
+        // General highlight & shadow used in a lot of places
+        UIManager.put("VLDocking.highlight", activeTitleBgColor);
+        UIManager.put("VLDocking.shadow", statusAreaColor);
+        
+        // Main window main area
+        
+        // Docked, visible panels get two borders if we're not careful:
+        // 1. Drawn by VLDocking. Surrounds panel content AND header. Set this to empty margin instead.
+        Border panelMargin = new EmptyBorder(5, 5, 5, 5);
+        UIManager.put("DockView.singleDockableBorder", panelMargin);
+        UIManager.put("DockView.maximizedDockableBorder", panelMargin);
+        // 2. Drawn by OmegaT-defined Dockables. Make this a 1px line.
+        UIManager.put("OmegaTDockablePanel.border", new MatteBorder(1, 1, 1, 1, borderColor));
+
+        // GTK+ LAF has a default border on the viewport. Disable this.
+        UIManager.put("OmegaTDockablePanelViewport.border", new EmptyBorder(0, 0, 0, 0));
+        
+        // Use proportionally sized internal margin for text document-like panels
+        UIManager.put("OmegaTDockablePanel.isProportionalMargins", true);
+        
+        // Tabbed docked, visible panels are surrounded by LAF-specific chrome, but the surrounding
+        // colors don't appear to be available through the API. These values are from visual inspection.
+        if (Platform.isMacOSX()) {
+            UIManager.put("DockView.tabbedDockableBorder", new MatteBorder(0, 5, 5, 5, new Color(0xE6E6E6)));
+        } else {
+            UIManager.put("DockView.tabbedDockableBorder", new MatteBorder(2, 5, 5, 5, Color.WHITE));
+        }
+        
+        // Panel title bars
+        UIManager.put("DockViewTitleBar.border", new RoundedCornerBorder(8, borderColor, RoundedCornerBorder.SIDE_TOP));
+        UIManager.put("InternalFrame.activeTitleBackground", activeTitleBgColor);
+        UIManager.put("InternalFrame.inactiveTitleBackground", standardBgColor);
+        UIManager.put("InternalFrame.inactiveTitleForeground", new Color(0x808080)); // Label.disabledForeground on OS X LAF
+        // Disable gradient on pane title bars
+        UIManager.put("DockViewTitleBar.disableCustomPaint", true);
+
+        // Main window bottom area
+
+        // AutoHideButtonPanel is where minimized panel tabs go. Use compound border to give left/right margins.
+        UIManager.put("AutoHideButtonPanel.bottomBorder", new CompoundBorder(
+                new MatteBorder(1, 0, 0, 0, borderColor),
+                new EmptyBorder(0, 10, 0, 10)));
+        UIManager.put("AutoHideButtonPanel.background", bottomAreaBgColor);
+        UIManager.put("AutoHideButton.expandBorderBottom", new RoundedCornerBorder(8, borderColor, RoundedCornerBorder.SIDE_BOTTOM));
+        UIManager.put("AutoHideButton.background", standardBgColor);
+        // OmegaT-defined status box in lower right
+        UIManager.put("OmegaTStatusArea.border", new MatteBorder(1, 1, 1, 1, statusAreaColor));
+        // Lowermost section margins
+        UIManager.put("OmegaTMainWindowBottomMargin.border", new EmptyBorder(0, 10, 5, 10));
+        
+        // Undocked panel
+        UIManager.put("activeCaption", Color.WHITE);
+        UIManager.put("activeCaptionBorder", borderColor);
+        UIManager.put("inactiveCaption", standardBgColor);
+        UIManager.put("inactiveCaptionBorder", borderColor);
+        
+        // Icons
+        UIManager.put("DockViewTitleBar.maximize", getIcon("appbar.app.tall.inactive.png"));
+        UIManager.put("DockViewTitleBar.maximize.rollover", getIcon("appbar.app.tall.png"));
+        UIManager.put("DockViewTitleBar.maximize.pressed", getIcon("appbar.app.tall.pressed.png"));
+        UIManager.put("DockViewTitleBar.restore", getIcon("appbar.window.restore.inactive.png"));
+        UIManager.put("DockViewTitleBar.restore.rollover", getIcon("appbar.window.restore.png"));
+        UIManager.put("DockViewTitleBar.restore.pressed", getIcon("appbar.window.restore.pressed.png"));
+        UIManager.put("DockViewTitleBar.hide", getIcon("appbar.hide.inactive.png"));
+        UIManager.put("DockViewTitleBar.hide.rollover", getIcon("appbar.hide.png"));
+        UIManager.put("DockViewTitleBar.hide.pressed", getIcon("appbar.hide.pressed.png"));
+        UIManager.put("DockViewTitleBar.float", getIcon("appbar.fullscreen.inactive.png"));
+        UIManager.put("DockViewTitleBar.float.rollover", getIcon("appbar.fullscreen.png"));
+        UIManager.put("DockViewTitleBar.float.pressed", getIcon("appbar.fullscreen.pressed.png"));
+        UIManager.put("DockViewTitleBar.dock", getIcon("appbar.window.restore.inactive.png"));
+        UIManager.put("DockViewTitleBar.dock.rollover", getIcon("appbar.window.restore.png"));
+        UIManager.put("DockViewTitleBar.dock.pressed", getIcon("appbar.window.restore.pressed.png"));
+        UIManager.put("DockViewTitleBar.attach", getIcon("appbar.dock.window.inactive.png"));
+        UIManager.put("DockViewTitleBar.attach.rollover", getIcon("appbar.dock.window.png"));
+        UIManager.put("DockViewTitleBar.attach.pressed", getIcon("appbar.dock.window.pressed.png"));
+        
+        UIManager.put("DockViewTitleBar.menu.hide", getIcon("appbar.hide.png"));
+        UIManager.put("DockViewTitleBar.menu.maximize", getIcon("appbar.app.tall.png"));
+        UIManager.put("DockViewTitleBar.menu.restore", getIcon("appbar.window.restore.png"));
+        UIManager.put("DockViewTitleBar.menu.dock", getIcon("appbar.window.restore.png"));
+        UIManager.put("DockViewTitleBar.menu.float", getIcon("appbar.fullscreen.png"));
+        UIManager.put("DockViewTitleBar.menu.attach", getIcon("appbar.dock.window.png"));
+
+        UIManager.put("DockTabbedPane.menu.hide", getIcon("appbar.hide.png"));
+        UIManager.put("DockTabbedPane.menu.maximize", getIcon("appbar.app.tall.png"));
+        UIManager.put("DockTabbedPane.menu.float", getIcon("appbar.fullscreen.png"));
+        
+        UIManager.put("DragControler.detachCursor", getIcon("appbar.fullscreen.png").getImage());
+        
+        // Use more native-looking icons on OS X
+        if (Platform.isMacOSX()) {
+            UIManager.put("DockViewTitleBar.maximize", getIcon("appbar.fullscreen.corners.inactive.png"));
+            UIManager.put("DockViewTitleBar.maximize.rollover", getIcon("appbar.fullscreen.corners.png"));
+            UIManager.put("DockViewTitleBar.maximize.pressed", getIcon("appbar.fullscreen.corners.pressed.png"));
+            UIManager.put("DockViewTitleBar.restore", getIcon("appbar.restore.corners.inactive.png"));
+            UIManager.put("DockViewTitleBar.restore.rollover", getIcon("appbar.restore.corners.png"));
+            UIManager.put("DockViewTitleBar.restore.pressed", getIcon("appbar.restore.corners.pressed.png"));
+            UIManager.put("DockViewTitleBar.hide", getIcon("appbar.minus.inactive.png"));
+            UIManager.put("DockViewTitleBar.hide.rollover", getIcon("appbar.minus.png"));
+            UIManager.put("DockViewTitleBar.hide.pressed", getIcon("appbar.minus.pressed.png"));
+            
+            UIManager.put("DockViewTitleBar.menu.hide", getIcon("appbar.minus.png"));
+            UIManager.put("DockViewTitleBar.menu.maximize", getIcon("appbar.fullscreen.corners.png"));
+            UIManager.put("DockViewTitleBar.menu.restore", getIcon("appbar.restore.corners.png"));
+            
+            UIManager.put("DockTabbedPane.menu.hide", getIcon("appbar.minus.png"));
+            UIManager.put("DockTabbedPane.menu.maximize", getIcon("appbar.fullscreen.corners.png"));
+        }
+    }
 
     /**
      * Load icon from classpath.
@@ -159,7 +309,7 @@ public class DockingUI {
      * @return icon instance
      */
     private static ImageIcon getIcon(final String iconName) {
-        return ResourcesUtil.getIcon("/org/omegat/gui/resources/" + iconName);
+        return new ImageIcon(ResourcesUtil.getImage("/org/omegat/gui/resources/" + iconName));
     }
 
     /**

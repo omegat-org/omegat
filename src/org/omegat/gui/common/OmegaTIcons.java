@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Briac Pilpre (briacp@gmail.com)
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -32,18 +33,22 @@ import javax.swing.JFrame;
 
 import org.omegat.util.gui.ResourcesUtil;
 
+/**
+ * @author Briac Pilpre
+ * @author Aaron Madlon-Kay
+ */
 public class OmegaTIcons {
 
     final public static List<Image> ICONS = new ArrayList<Image>();
     final static String RESOURCES = "/org/omegat/gui/resources/";
 
     /**
-     * Sizes: 16×16, 24×24*, 32×32, 40x40, 48×48, 64×64*, 128×128, 256×256 from
+     * Sizes: 16x16, 24x24*, 32x32, 40x40, 48x48, 64x64*, 128x128, 256x256 from
      * http://iconhandbook.co.uk/reference/chart/
      */
     static {
-        ICONS.add(ResourcesUtil.getIcon(RESOURCES + "OmegaT_small.gif").getImage());
-        ICONS.add(ResourcesUtil.getIcon(RESOURCES + "OmegaT.gif").getImage());
+        ICONS.add(ResourcesUtil.getImage(RESOURCES + "OmegaT_small.gif"));
+        ICONS.add(ResourcesUtil.getImage(RESOURCES + "OmegaT.gif"));
     }
 
     public static void setIconImages(JFrame frame) {

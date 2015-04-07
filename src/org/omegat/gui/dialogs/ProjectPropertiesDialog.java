@@ -60,7 +60,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.Scrollable;
-import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
@@ -524,7 +523,7 @@ public class ProjectPropertiesDialog extends JDialog {
             m_externalCommandTextArea.setEditable(false);
             m_externalCommandTextArea.setToolTipText(OStrings.getString("PP_EXTERN_CMD_DISABLED_TOOLTIP"));
             m_externalCommandLabel.setToolTipText(OStrings.getString("PP_EXTERN_CMD_DISABLED_TOOLTIP"));
-            m_externalCommandTextArea.setBackground(UIManager.getDefaults().getColor("Label.background"));
+            m_externalCommandTextArea.setBackground(getBackground());
         }
         final JScrollPane m_externalCommandScrollPane = new JScrollPane();
         m_externalCommandScrollPane.setViewportView(m_externalCommandTextArea);

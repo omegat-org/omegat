@@ -96,3 +96,5 @@ OmegaT code uses the method createTempDir from Google Guava
 (https://code.google.com/p/guava-libraries/), licensed under the Apache License 2.0.
 
 slf4j-*.jar is distributed under the MIT License.
+
+OmegaT uses icons from the Modern UI Icons project. See ModernUIIcons-license.txt.

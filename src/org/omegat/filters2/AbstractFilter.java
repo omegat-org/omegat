@@ -416,11 +416,12 @@ public abstract class AbstractFilter implements IFilter {
      */
     protected void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
             TranslationException {
-        inEncodingLastParsedFile = fc.getInEncoding();
-        BufferedReader reader = createReader(inFile, inEncodingLastParsedFile);
-        if (inEncodingLastParsedFile == null) {
-            inEncodingLastParsedFile = Charset.defaultCharset().name();
+        String encoding = fc.getInEncoding();
+        if (encoding == null && isSourceEncodingVariable()) {
+            encoding = EncodingDetector.detectEncoding(inFile);
         }
+        BufferedReader reader = createReader(inFile, encoding);
+        inEncodingLastParsedFile = encoding == null ? Charset.defaultCharset().name() : encoding;
         try {
             BufferedWriter writer;
 

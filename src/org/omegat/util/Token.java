@@ -4,7 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
- Portions copyright 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
+               2007 Zoltan Bartko (bartkozoltan@bartkozoltan.com)
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -37,6 +38,8 @@ import java.util.regex.Pattern;
  * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
+ * @author Zoltan Bartko
+ * @author Aaron Madlon-Kay
  */
 public class Token {
     /**
@@ -113,5 +116,17 @@ public class Token {
      */
     public String getTextFromString(String input) {
         return input.substring(offset, length + offset);
+    }
+    
+    /**
+     * Get the strings represented by the provided tokens, from the original string
+     * they were produced from. For debugging purposes.
+     */
+    public static String[] getTextsFromString(Token[] tokens, String string) {
+        String[] result = new String[tokens.length];
+        for (int i = 0; i < tokens.length; i++) {
+            result[i] = tokens[i].getTextFromString(string);
+        }
+        return result;
     }
 }

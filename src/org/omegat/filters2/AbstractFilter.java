@@ -7,6 +7,7 @@
                2006 Martin Wunderlich
                2011 Alex Buloichik, Didier Briel,
                2012 Guido Leenders
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -428,7 +429,12 @@ public abstract class AbstractFilter implements IFilter {
             if (outFile != null) {
                 String outEncoding = fc.getOutEncoding();
                 if (outEncoding == null && isTargetEncodingVariable()) {
-                    outEncoding = "UTF-8";
+                    if (encoding.equalsIgnoreCase("utf-16le") || 
+                        encoding.equalsIgnoreCase("utf-16be") )  {
+                        outEncoding = encoding ;
+                    } else {
+                        outEncoding = "UTF-8";
+                    }
                 }
                 writer = createWriter(outFile, outEncoding);
             } else {

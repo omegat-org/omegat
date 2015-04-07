@@ -426,7 +426,11 @@ public abstract class AbstractFilter implements IFilter {
             BufferedWriter writer;
 
             if (outFile != null) {
-                writer = createWriter(outFile, fc.getOutEncoding());
+                String outEncoding = fc.getOutEncoding();
+                if (outEncoding == null && isTargetEncodingVariable()) {
+                    outEncoding = "UTF-8";
+                }
+                writer = createWriter(outFile, outEncoding);
             } else {
                 writer = new NullBufferedWriter();
             }

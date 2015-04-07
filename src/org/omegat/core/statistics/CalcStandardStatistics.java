@@ -6,6 +6,7 @@
  Copyright (C) 2009 Alex Buloichik
                2010 Arno Peters
                2013-2014 Alex Buloichik
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -43,7 +44,7 @@ import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.threads.LongProcessThread;
-import org.omegat.gui.stat.StatisticsWindow;
+import org.omegat.gui.stat.StatisticsPanel;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
@@ -62,6 +63,7 @@ import org.omegat.util.gui.TextUtil;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Arno Peters
+ * @author Aaron Madlon-Kay
  */
 public class CalcStandardStatistics extends LongProcessThread {
     private static final String[] htHeaders = new String[] { "", OStrings.getString("CT_STATS_Segments"),
@@ -94,16 +96,17 @@ public class CalcStandardStatistics extends LongProcessThread {
     private static final boolean[] ftAlign = new boolean[] { false, true, true, true, true, true, true, true,
             true, true, true, true, true, true, true, true, true, };
 
-    private StatisticsWindow callback;
+    private final StatisticsPanel callback;
 
-    public CalcStandardStatistics(StatisticsWindow callback) {
+    public CalcStandardStatistics(StatisticsPanel callback) {
         this.callback = callback;
     }
 
+    @Override
     public void run() {
         IProject p = Core.getProject();
-        String result = buildProjectStats(p, null);
-        callback.displayData(result);
+        String result = buildProjectStats(p, null, callback);
+        callback.setTextData(result);
         callback.finishData();
 
         String internalDir = p.getProjectProperties().getProjectInternal();
@@ -120,12 +123,17 @@ public class CalcStandardStatistics extends LongProcessThread {
         Statistics.writeStat(fn, result);
     }
 
+    /** Convenience method */
+    public static String buildProjectStats(final IProject project, final StatisticsInfo hotStat) {
+        return buildProjectStats(project, hotStat, null);
+    }
+    
     /**
      * Builds a file with statistic info about the project. The total word &
      * character count of the project, the total number of unique segments, plus
      * the details for each file.
      */
-    public static String buildProjectStats(final IProject project, final StatisticsInfo hotStat) {
+    public static String buildProjectStats(final IProject project, final StatisticsInfo hotStat, final StatisticsPanel callback) {
 
         StatCount total = new StatCount();
         StatCount remaining = new StatCount();
@@ -217,15 +225,23 @@ public class CalcStandardStatistics extends LongProcessThread {
 
         StringBuilder result = new StringBuilder();
 
-        result.append(OStrings.getString("CT_STATS_Project_Statistics") + "\n\n");
+        result.append(OStrings.getString("CT_STATS_Project_Statistics"));
+        result.append("\n\n");
 
         String[][] headerTable = calcHeaderTable(new StatCount[] { total, remaining, unique, remainingUnique });
+        if (callback != null) {
+            callback.setProjectTableData(htHeaders, headerTable);
+        }
         result.append(TextUtil.showTextTable(htHeaders, headerTable, htAlign));
         result.append("\n\n");
 
         // STATISTICS BY FILE
-        result.append(OStrings.getString("CT_STATS_FILE_Statistics") + "\n\n");
+        result.append(OStrings.getString("CT_STATS_FILE_Statistics"));
+        result.append("\n\n");
         String[][] filesTable = calcFilesTable(project.getProjectProperties(), counts);
+        if (callback != null) {
+            callback.setFilesTableData(ftHeaders, filesTable);
+        }
         result.append(TextUtil.showTextTable(ftHeaders, filesTable, ftAlign));
 
         if (hotStat != null) {

@@ -31,6 +31,7 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cn.smart.SentenceTokenizer;
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
 import org.apache.lucene.analysis.cn.smart.WordTokenFilter;
+import org.omegat.util.Token;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -38,6 +39,12 @@ import org.apache.lucene.analysis.cn.smart.WordTokenFilter;
  */
 @Tokenizer(languages = { "zh" }, isDefault = true)
 public class LuceneSmartChineseTokenizer extends BaseTokenizer {
+
+
+    @Override
+    public Token[] tokenizeAllExactly(String strOrig) {
+        return tokenizeByCodePoint(strOrig);
+    }
 
     @Override
     protected TokenStream getTokenStream(final String strOrig,

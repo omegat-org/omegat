@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
  
  Copyright (C) 2008 Alex Buloichik (alex73mail@gmail.com)
-               2013 Aaron Madlon-Kay
+               2013, 2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,7 +26,6 @@
 package org.omegat.tokenizer;
 
 import java.io.StringReader;
-import java.io.ObjectInputStream.GetField;
 import java.util.Collections;
 import java.util.Map;
 
@@ -34,6 +33,7 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cn.ChineseAnalyzer;
 import org.apache.lucene.analysis.cn.ChineseTokenizer;
 import org.apache.lucene.util.Version;
+import org.omegat.util.Token;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -45,6 +45,11 @@ public class LuceneChineseTokenizer extends BaseTokenizer {
     @Override
     public Map<Version, String> getSupportedBehaviors() {
         return Collections.EMPTY_MAP;
+    }
+    
+    @Override
+    public Token[] tokenizeAllExactly(String strOrig) {
+        return tokenizeByCodePoint(strOrig);
     }
     
     @Override

@@ -207,6 +207,17 @@ public abstract class BaseTokenizer implements ITokenizer {
 
         return result.toArray(new Token[result.size()]);
     }
+    
+    protected Token[] tokenizeByCodePoint(String strOrig) {
+        // See http://www.ibm.com/developerworks/library/j-unicode/#1-5
+        // Example 1-5 appears to be faster than 1-6 for us (because our strings are short?)
+        Token[] tokens = new Token[strOrig.codePointCount(0, strOrig.length())];
+        for (int cp, i = 0, j = 0; i < strOrig.length(); i += Character.charCount(cp)) {
+            cp = strOrig.codePointAt(i);
+            tokens[j++] = new Token(new String(Character.toChars(cp)), i);
+        }
+        return tokens;
+    }
 
     protected Token[] tokenize(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed, final boolean filterDigits) {

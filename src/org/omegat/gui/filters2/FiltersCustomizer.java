@@ -83,10 +83,6 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
     public Filters result;
     /** Filters from OmegaT. */
     private final Filters defaultFilters;
-    /** Filters from user preferences. */
-    private final Filters userFilters;
-    /** Filters from current project. */
-    private final Filters projectFilters;
     /** Filters which editable now. */
     private Filters editableFilters;
 
@@ -102,8 +98,6 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         isProjectSpecific = projectSpecific;
 
         this.defaultFilters = defaultFilters;
-        this.userFilters = userFilters;
-        this.projectFilters = projectFilters;
         if (userFilters == null) {
             userFilters = defaultFilters;
         }
@@ -120,12 +114,12 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         filtersTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
-                if (isDoubleClickByRightButton(me) && isClickOnFileFormatColumn(me)) {
+                if (isLeftDoubleClick(me) && isClickOnFileFormatColumn(me)) {
                     editButtonActionPerformed(null);
                 }
             }
 
-            private boolean isDoubleClickByRightButton(MouseEvent me) {
+            private boolean isLeftDoubleClick(MouseEvent me) {
                 return me.getClickCount() == 2
                         && me.getButton() == MouseEvent.BUTTON1;
             }

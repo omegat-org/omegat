@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Arno Peters
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -45,71 +46,71 @@ import org.omegat.util.OStrings;
  */
 public class PdfFilter  extends AbstractFilter {
 
+    private static final Pattern LINEBREAK_PATTERN = Pattern.compile("^\\s*?$");
+    
     @Override
     public String getFileFormatName() {
-	return OStrings.getString("PDFFILTER_FILTER_NAME");
+        return OStrings.getString("PDFFILTER_FILTER_NAME");
     }
 
     @Override
     public Instance[] getDefaultInstances() {
-	return new Instance[] {
-	    new Instance("*.pdf", null, null, TFP_NAMEONLY+".txt")
-	};
+        return new Instance[] {
+                new Instance("*.pdf", null, null, TFP_NAMEONLY+".txt")
+        };
     }
 
     @Override
     public boolean isSourceEncodingVariable() {
-	return true;
+        return false;
     }
 
     @Override
     public boolean isTargetEncodingVariable() {
-	return true;
+        return true;
     }
-	
+
     @Override
     public BufferedReader createReader(File infile, String encoding)
-	throws IOException {
-	PDFTextStripper stripper;
-	stripper = new PDFTextStripper();
-	stripper.setLineSeparator("\n");
-	stripper.setSortByPosition(true);
+            throws IOException {
+        PDFTextStripper stripper;
+        stripper = new PDFTextStripper();
+        stripper.setLineSeparator("\n");
+        stripper.setSortByPosition(true);
 
-	PDDocument document = PDDocument.load(infile.getAbsolutePath());
-	String text = stripper.getText(document);
-	document.close();
+        PDDocument document = PDDocument.load(infile.getAbsolutePath());
+        String text = stripper.getText(document);
+        document.close();
 
-	return new BufferedReader(new ReaderFromString(text));
+        return new BufferedReader(new ReaderFromString(text));
     }
-    
+
     @Override
     public void processFile(BufferedReader in, BufferedWriter out, FilterContext fc) {
-	StringBuffer sb = new StringBuffer();
-	String find = ("^\\s*?$");
-	Pattern p = Pattern.compile(find);
-		
-	String s = "";
-	try {
-	    while ( (s = in.readLine()) != null ) {
-		Matcher m = p.matcher(s);
-				
-		if (m.find()) {
-		    out.write(processEntry(sb.toString()));
-		    sb.setLength(0);
-		    out.write("\n\n");
-		} else {
-		    sb.append(s);
-		    sb.append(" ");
-		}
-	    }
-			
-	    if (sb.length() > 0) {
-		out.write(processEntry(sb.toString()));
-		sb.setLength(0);
-		out.write("\n");				
-	    }
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
+        StringBuffer sb = new StringBuffer();
+
+        String s = "";
+        try {
+            while ( (s = in.readLine()) != null ) {
+                Matcher m = LINEBREAK_PATTERN.matcher(s);
+
+                if (m.find()) {
+                    out.write(processEntry(sb.toString()));
+                    sb.setLength(0);
+                    out.write("\n\n");
+                } else {
+                    sb.append(s);
+                    sb.append(" ");
+                }
+            }
+
+            if (sb.length() > 0) {
+                out.write(processEntry(sb.toString()));
+                sb.setLength(0);
+                out.write("\n");				
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

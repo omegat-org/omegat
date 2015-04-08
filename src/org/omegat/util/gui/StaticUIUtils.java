@@ -26,10 +26,13 @@
 
 package org.omegat.util.gui;
 
+import java.awt.Component;
 import java.awt.FontMetrics;
+import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseWheelEvent;
 import java.awt.event.WindowEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -172,5 +175,13 @@ public class StaticUIUtils {
             text = text.substring(0, chompStart) + TRUNCATE_CHAR + text.substring(chompEnd, text.length());
         }
         return text;
+    }
+    
+    public static void forwardMouseWheelEvent(Component target, MouseWheelEvent evt) {
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(
+                new MouseWheelEvent(target, evt.getID(), evt.getWhen(),
+                        evt.getModifiers(), evt.getX(), evt.getY(),
+                        evt.getClickCount(), evt.isPopupTrigger(),
+                        evt.getScrollType(), evt.getScrollAmount(), evt.getWheelRotation()));
     }
 }

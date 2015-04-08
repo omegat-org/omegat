@@ -429,9 +429,9 @@ public abstract class AbstractFilter implements IFilter {
             if (outFile != null) {
                 String outEncoding = fc.getOutEncoding();
                 if (outEncoding == null && isTargetEncodingVariable()) {
-                    if (encoding.equalsIgnoreCase("utf-16le") || 
-                        encoding.equalsIgnoreCase("utf-16be") )  {
-                        outEncoding = encoding ;
+                    // Use input encoding if it's Unicode; otherwise default to UTF-8
+                    if (inEncodingLastParsedFile.toLowerCase().startsWith("utf-")) {
+                        outEncoding = inEncodingLastParsedFile;
                     } else {
                         outEncoding = "UTF-8";
                     }

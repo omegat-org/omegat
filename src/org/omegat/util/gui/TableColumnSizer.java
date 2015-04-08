@@ -273,10 +273,12 @@ public class TableColumnSizer {
     public void reset() {
         optimalColWidths = null;
         remainderColReferenceWidth = -1;
+        didApplySizes = false;
     }
     
     public void setRestoreAutoSizing() {
         didManuallyAdjustCols = false;
+        didApplySizes = false;
     }
     
     /**

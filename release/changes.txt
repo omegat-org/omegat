@@ -2,7 +2,7 @@
  OmegaT 3.1.4 
 ----------------------------------------------------------------------
    8 Enhancements
-   3 Bug fixes
+   4 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.4 update 3.1.9 update 1
@@ -48,6 +48,9 @@ are displayed in bold
 
   - Scripting window: now ScriptsDir is displayed like "foo\scripts" instead 
 of "foo\.\scripts"
+
+  - OmegaT does not look nice on Mac retina display 
+  https://sourceforge.net/p/omegat/bugs/712/
 
 ----------------------------------------------------------------------
  OmegaT 3.1.9 update 1

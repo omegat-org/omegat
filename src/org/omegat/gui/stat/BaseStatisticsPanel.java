@@ -25,14 +25,21 @@
 
 package org.omegat.gui.stat;
 
+import java.awt.Font;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumn;
+import org.omegat.core.Core;
+import org.omegat.util.Preferences;
+import org.omegat.util.gui.DataTableStyling;
+import org.omegat.util.gui.TableColumnSizer;
 
 /**
  *
  * @author Aaron Madlon-Kay
  */
-public class BaseStatisticsPanel extends JPanel {
+public abstract class BaseStatisticsPanel extends JPanel {
 
     private final StatisticsWindow window;
     
@@ -40,30 +47,68 @@ public class BaseStatisticsPanel extends JPanel {
         this.window = window;
     }
     
-    public void showProgress(final int percent) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                window.showProgress(percent);
-            }
-        });
+    public void showProgress(int percent) {
+        window.showProgress(percent);
     }
 
     public void finishData() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                window.finishData();
-            }
-        });
+        window.finishData();
     }
     
-    public void setTextData(final String data) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                window.setTextData(data);
-            }
-        });
+    public void setTextData(String data) {
+        window.setTextData(data);
+    }
+    
+    static class StringArrayTableModel extends AbstractTableModel {
+        
+        private final String[][] data;
+
+        public StringArrayTableModel(String[][] data) {
+            this.data = data;
+        }
+        
+        @Override
+        public int getRowCount() {
+            return data == null ? 0 : data.length;
+        }
+
+        @Override
+        public int getColumnCount() {
+            return data == null || data.length == 0 ? 0
+                    : data[0] == null ? 0 : data[0].length;
+        }
+
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            return data[rowIndex][columnIndex];
+        }
+    }
+        
+    protected TitledTablePanel generateTableDisplay(String title, String[] headers, String[][] data) {
+        TitledTablePanel panel = new TitledTablePanel();
+        
+        DataTableStyling.applyColors(panel.table);
+        panel.table.setDefaultRenderer(Object.class, DataTableStyling.getNumberCellRenderer());
+        Font font = panel.table.getFont();
+        if (Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
+            font = Core.getMainWindow().getApplicationFont();
+        }
+        DataTableStyling.applyFont(panel.table, font);
+        
+        panel.title.setText(title);
+        panel.table.setModel(new StringArrayTableModel(data));
+        setTableHeaders(panel.table, headers);
+        panel.table.getColumnModel().getColumn(0).setCellRenderer(
+                DataTableStyling.getHeaderTextCellRenderer());
+        TableColumnSizer.autoSize(panel.table, 0, false);
+        panel.table.setPreferredScrollableViewportSize(panel.table.getPreferredSize());
+        return panel;        
+    }
+    
+    protected static void setTableHeaders(JTable table, String[] headers) {
+        for (int i = 0; i < headers.length; i++) {
+            TableColumn col = table.getColumnModel().getColumn(i);
+            col.setHeaderValue(headers[i]);
+        }
     }
 }

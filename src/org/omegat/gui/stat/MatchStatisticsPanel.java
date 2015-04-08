@@ -26,55 +26,39 @@
 package org.omegat.gui.stat;
 
 import java.awt.BorderLayout;
-
 import javax.swing.SwingUtilities;
-
-import org.omegat.util.OStrings;
-import org.omegat.util.gui.DataTableStyling;
 
 /**
  *
  * @author Aaron Madlon-Kay
  */
-@SuppressWarnings("serial")
-public class StatisticsPanel extends BaseStatisticsPanel {
-    
-    public StatisticsPanel(StatisticsWindow window) {
+public class MatchStatisticsPanel extends BaseMatchStatisticsPanel {
+
+    public MatchStatisticsPanel(StatisticsWindow window) {
         super(window);
         setLayout(new BorderLayout());
     }
 
-    public void setProjectTableData(final String[] headers, final String[][] projectData) {
-        if (headers == null || headers.length == 0) {
-            return;
-        }
-        if (projectData == null || projectData.length == 0) {
-            return;
-        }
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                String title = OStrings.getString("CT_STATS_Project_Statistics");
-                add(generateTableDisplay(title, headers, projectData), BorderLayout.NORTH);
-            }
-        });
+    @Override
+    public void appendTable(String title, String[] headers, String[][] data) {
+        // Nothing
     }
 
-    public void setFilesTableData(final String[] headers, final String[][] filesData) {
+    @Override
+    public void setTable(final String[] headers, final String[][] data) {
         if (headers == null || headers.length == 0) {
             return;
         }
-        if (filesData == null || filesData.length == 0) {
+        if (data == null || data.length == 0) {
             return;
         }
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                String title = OStrings.getString("CT_STATS_FILE_Statistics");
-                TitledTablePanel panel = generateTableDisplay(title, headers, filesData);
-                panel.table.getColumnModel().getColumn(0).setCellRenderer(
-                        DataTableStyling.getTextCellRenderer());
-                add(panel, BorderLayout.CENTER);
+                // A simpler table is first shown, then replaced with a fancier one,
+                // so have to remove first.
+                removeAll();
+                add(generateTableDisplay(null, headers, data));
             }
         });
     }

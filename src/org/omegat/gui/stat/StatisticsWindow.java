@@ -32,6 +32,7 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
 import org.omegat.core.Core;
 import org.omegat.core.statistics.CalcMatchStatistics;
 import org.omegat.core.statistics.CalcStandardStatistics;
@@ -39,7 +40,6 @@ import org.omegat.core.threads.LongProcessThread;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
-import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * Display match statistics window and save data to file.
@@ -78,13 +78,13 @@ public class StatisticsWindow extends javax.swing.JDialog {
             break;
         case MATCHES:
             setTitle(OStrings.getString("CT_STATSMATCH_WindowHeader"));
-            PlainTextPanel panel1 = new PlainTextPanel(this);
+            MatchStatisticsPanel panel1 = new MatchStatisticsPanel(this);
             thread = new CalcMatchStatistics(panel1, false);
             output = panel1;
             break;
         case MATCHES_PER_FILE:
             setTitle(OStrings.getString("CT_STATSMATCH_PER_FILE_WindowHeader"));
-            PlainTextPanel panel2 = new PlainTextPanel(this);
+            PerFileMatchStatisticsPanel panel2 = new PerFileMatchStatisticsPanel(this);
             thread = new CalcMatchStatistics(panel2, true);
             output = panel2;
             break;
@@ -172,23 +172,35 @@ public class StatisticsWindow extends javax.swing.JDialog {
     }//GEN-LAST:event_closeButtonActionPerformed
 
     public void setTextData(final String textData) {
-        UIThreadsUtil.mustBeSwingThread();
         this.textData = textData;
-        copyDataButton.setEnabled(textData != null && !textData.isEmpty());
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                copyDataButton.setEnabled(textData != null && !textData.isEmpty());
+            }
+        });
     }
     
-    public void showProgress(int percent) {
-        UIThreadsUtil.mustBeSwingThread();
-        progressBar.setValue(percent);
-        progressBar.setString(percent + "%");
+    public void showProgress(final int percent) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setValue(percent);
+                progressBar.setString(percent + "%");
+            }
+        });
     }
 
     public void finishData() {
-        UIThreadsUtil.mustBeSwingThread();
-        progressBar.setValue(100);
-        progressBar.setString("");
-        progressBar.setVisible(false);
-        copyDataButton.setVisible(true);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setValue(100);
+                progressBar.setString("");
+                progressBar.setVisible(false);
+                copyDataButton.setVisible(true);
+            }
+        });
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

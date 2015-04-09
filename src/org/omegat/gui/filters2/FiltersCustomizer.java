@@ -35,9 +35,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
-import java.awt.GraphicsConfiguration;
-import java.awt.Insets;
-import java.awt.Toolkit;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
@@ -155,19 +154,10 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         // hack for "autoresizing" the dialog
         // accomodating table dimensions
         Dimension tableSize = filtersTable.getPreferredSize();
-        tableSize.height = tableSize.height + 70;
+        tableSize.height += 70;
         filtersScrollPane.setPreferredSize(tableSize);
         pack();
-        Toolkit kit = getToolkit();
-        Dimension screenSize = kit.getScreenSize();
-        Dimension dialogSize = getSize();
-        GraphicsConfiguration config = getGraphicsConfiguration();
-        Insets insets = kit.getScreenInsets(config);
-        screenSize.height -= (insets.top + insets.bottom);  // excluding the Windows taskbar
-        if (dialogSize.height > screenSize.height) {
-            dialogSize.height = screenSize.height;
-            setSize(dialogSize);
-        }
+        StaticUIUtils.fitInScreen(this);
         DockingUI.displayCentered(this);
      }    
 

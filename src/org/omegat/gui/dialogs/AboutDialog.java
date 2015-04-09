@@ -25,11 +25,7 @@
 
 package org.omegat.gui.dialogs;
 
-import java.awt.Dimension;
 import java.awt.Frame;
-import java.awt.GraphicsConfiguration;
-import java.awt.Insets;
-import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import org.omegat.gui.common.OmegaTIcons;
@@ -74,17 +70,7 @@ public class AboutDialog extends JDialog {
         invalidate();
         pack();
 
-        // Reduce automatically size of dialog when it doesn't fit on screen
-        Toolkit kit = getToolkit();
-        Dimension screenSize = kit.getScreenSize();
-        Dimension dialogSize = getSize();
-        GraphicsConfiguration config = getGraphicsConfiguration();
-        Insets insets = kit.getScreenInsets(config);
-        screenSize.height -= (insets.top + insets.bottom);  // excluding the Windows taskbar
-        if (dialogSize.height > screenSize.height) {
-            dialogSize.height = screenSize.height;
-            setSize(dialogSize);
-        }
+        StaticUIUtils.fitInScreen(this);
         DockingUI.displayCentered(this);
     }
 

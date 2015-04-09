@@ -865,10 +865,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
         setSize(9 * getWidth() / 8, getHeight() + 10);
         setResizable(true);
-        Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-        if (getHeight() > rect.height) {
-            setSize(getWidth(), rect.height);
-        }
+        StaticUIUtils.fitInScreen(this);
         DockingUI.displayCentered(this);
     }
 

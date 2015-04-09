@@ -212,6 +212,7 @@ public class TableColumnSizer {
         
         for (int column = 0; column < table.getColumnCount(); column++) {
             TableColumn col = table.getColumnModel().getColumn(column);
+            col.setMaxWidth(Short.MAX_VALUE);
             int preferredWidth = col.getMinWidth();
             int maxWidth = col.getMaxWidth();
 

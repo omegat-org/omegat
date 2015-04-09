@@ -461,6 +461,9 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_editButtonActionPerformed
         int row = filtersTable.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
         FilterEditor editor = new FilterEditor(this, editableFilters.getFilters().get(row));
         editor.setVisible(true);
         if (editor.result != null) {

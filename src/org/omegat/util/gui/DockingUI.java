@@ -106,6 +106,13 @@ public class DockingUI {
         UIManager.put("DockingDesktop.maximizeActionAccelerator", null);
         UIManager.put("DockingDesktop.dockActionAccelerator", null);
         UIManager.put("DockingDesktop.floatActionAccelerator", null);
+        
+        // Disused icons
+        UIManager.put("DockViewTitleBar.menu.close", getIcon("empty.gif"));
+        UIManager.put("DockTabbedPane.close", getIcon("empty.gif"));
+        UIManager.put("DockTabbedPane.close.rollover", getIcon("empty.gif"));
+        UIManager.put("DockTabbedPane.close.pressed", getIcon("empty.gif"));
+        UIManager.put("DockTabbedPane.menu.close", getIcon("empty.gif"));
 
         // Classic design overridden by flat design
         //installClassicDesign();
@@ -149,11 +156,6 @@ public class DockingUI {
         UIManager.put("DockViewTitleBar.menu.float", getIcon("undock.gif"));
         UIManager.put("DockViewTitleBar.menu.attach", getIcon("dock.gif"));
 
-        UIManager.put("DockViewTitleBar.menu.close", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.close", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.close.rollover", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.close.pressed", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.menu.close", getIcon("empty.gif"));
         UIManager.put("DockTabbedPane.menu.hide", getIcon("empty.gif"));
         UIManager.put("DockTabbedPane.menu.maximize", getIcon("empty.gif"));
         UIManager.put("DockTabbedPane.menu.float", getIcon("empty.gif"));

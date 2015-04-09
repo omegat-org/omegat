@@ -138,7 +138,7 @@ public class FiltersTableModel extends AbstractTableModel {
         case 0:
             return filterNames.get(filter.getClassName());
         case 1:
-            return new Boolean(filter.isEnabled());
+            return filter.isEnabled();
         }
         return null;
     }

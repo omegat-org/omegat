@@ -225,15 +225,15 @@ public interface XMLDialect {
     static final int CONSTRAINT_XMLNS_UNBOXED = 5;
 
     /** Constraint on Doctype name. */
-    static final Integer CONSTRAINT_DOCTYPE = new Integer(CONSTRAINT_DOCTYPE_UNBOXED);
+    static final int CONSTRAINT_DOCTYPE = CONSTRAINT_DOCTYPE_UNBOXED;
     /** Constraint on PUBLIC Doctype declaration. */
-    static final Integer CONSTRAINT_PUBLIC_DOCTYPE = new Integer(CONSTRAINT_PUBLIC_DOCTYPE_UNBOXED);
+    static final int CONSTRAINT_PUBLIC_DOCTYPE = CONSTRAINT_PUBLIC_DOCTYPE_UNBOXED;
     /** Constraint on SYSTEM Doctype declaration. */
-    static final Integer CONSTRAINT_SYSTEM_DOCTYPE = new Integer(CONSTRAINT_SYSTEM_DOCTYPE_UNBOXED);
+    static final int CONSTRAINT_SYSTEM_DOCTYPE = CONSTRAINT_SYSTEM_DOCTYPE_UNBOXED;
     /** Constraint on root tag name. */
-    static final Integer CONSTRAINT_ROOT = new Integer(CONSTRAINT_ROOT_UNBOXED);
+    static final int CONSTRAINT_ROOT = CONSTRAINT_ROOT_UNBOXED;
     /** Constraint on xmlns declaration. */
-    static final Integer CONSTRAINT_XMLNS = new Integer(CONSTRAINT_XMLNS_UNBOXED);
+    static final int CONSTRAINT_XMLNS = CONSTRAINT_XMLNS_UNBOXED;
 
     /**
      * Returns defined constraints to restrict supported subset of XML files.

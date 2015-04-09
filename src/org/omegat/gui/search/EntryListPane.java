@@ -151,7 +151,7 @@ class EntryListPane extends JTextPane {
 
             if (entries.size() >= numberOfResults) {
                 addMessage(m_stringBuf, StaticUtils.format(OStrings.getString("SW_MAX_FINDS_REACHED"),
-                        new Object[] { new Integer(numberOfResults) }));
+                        new Object[] { numberOfResults }));
             }
 
             for (SearchResultEntry e : entries) {
@@ -269,7 +269,7 @@ class EntryListPane extends JTextPane {
         if (!srcFont.equals("")) {
             int fontsize;
             try {
-                fontsize = Integer.valueOf(Preferences.getPreference(OConsts.TF_SRC_FONT_SIZE)).intValue();
+                fontsize = Integer.parseInt(Preferences.getPreference(OConsts.TF_SRC_FONT_SIZE));
             } catch (NumberFormatException nfe) {
                 fontsize = 12;
             }

@@ -95,7 +95,7 @@ public class Statistics {
         BreakIterator breaker = DefaultTokenizer.getWordBreaker();
         breaker.setText(str);
 
-        String tokenStr = new String();
+        String tokenStr = "";
 
         int start = breaker.first();
         for (int end = breaker.next(); end != BreakIterator.DONE; start = end, end = breaker.next()) {

@@ -41,6 +41,6 @@ public class XMLIntactEntry extends Entry {
      * Intact text cannot be translated, so returns an empty string.
      */
     public String sourceToShortcut() {
-        return new String();
+        return "";
     }
 }

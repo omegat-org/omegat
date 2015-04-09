@@ -55,7 +55,7 @@ public class SegmentationRulesModel extends AbstractTableModel {
         Rule rule = rules.get(rowIndex);
         switch (columnIndex) {
         case 0:
-            return new Boolean(rule.isBreakRule());
+            return rule.isBreakRule();
         case 1:
             return rule.getBeforebreak();
         case 2:

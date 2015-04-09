@@ -137,6 +137,11 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     protected void setFoundResult(final SourceTextEntry se, List<NearString> newMatches) {
         UIThreadsUtil.mustBeSwingThread();
         
+        if (newMatches == null) {
+            setText("");
+            return;
+        }
+        
         Collections.sort(newMatches, Collections.reverseOrder(new NearString.NearStringComparator()));
 
         activeMatch = -1;
@@ -144,11 +149,6 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         delimiters.clear();
         sourcePos.clear();
         diffInfos.clear();
-
-        if (newMatches == null) {
-            setText("");
-            return;
-        }
 
         matches.addAll(newMatches);
         delimiters.add(0);

@@ -55,23 +55,21 @@ public class CharTableModel extends AbstractTableModel {
      * @return true if the data have been replaced.
      */
     public boolean setData(String data) {
-        if (this.data == null && data == null)
+        if (this.data == null && data == null) {
             return false;
+        }
         
-        if (data != null) {
-            if (this.data == null || !this.data.equals(data)) {
-                glyphCount = data.length();
-                this.data = new StringBuilder(data);
-                fireTableDataChanged();
-                return true;
-            }
+        if (data != null && (this.data == null || !this.data.toString().equals(data))) {
+            glyphCount = data.length();
+            this.data = new StringBuilder(data);
+            fireTableDataChanged();
+            return true;
         } else {
             glyphCount = 0xFFFF-32;
             this.data = null;
             fireTableDataChanged();
             return true;
         }
-        return false;
     }
     
     public String getData() {
@@ -104,12 +102,13 @@ public class CharTableModel extends AbstractTableModel {
      */
     public void appendChar(Character c, boolean checkUnique) {
         char cv = c.charValue();
-        if (checkUnique)
+        if (checkUnique) {
             for (int i = 0; i < data.length(); i++) {
-                if (data.charAt(i) == cv)
+                if (data.charAt(i) == cv) {
                     return;
+                }
             }
-        
+        }
         this.data.append(cv);
         glyphCount++;
         fireTableDataChanged();
@@ -123,8 +122,9 @@ public class CharTableModel extends AbstractTableModel {
      * @param col2 to column
      */
     public void removeSelection(int row1, int col1, int row2, int col2) {
-        if (data.length() == 0)
+        if (data.length() == 0) {
             return;
+        }
         
         int pos1 = row1 * getColumnCount() + col1;
         pos1 = pos1 >= data.length() ? data.length() - 1 : pos1;

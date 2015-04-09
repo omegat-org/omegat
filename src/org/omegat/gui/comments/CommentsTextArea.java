@@ -155,7 +155,7 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
             Collections.sort(providers, new Comparator<ProviderStorage>() {
                 @Override
                 public int compare(ProviderStorage o1, ProviderStorage o2) {
-                    return new Integer(o1.priority).compareTo(new Integer(o2.priority));
+                    return o1.priority < o2.priority ? -1 : o1.priority > o2.priority ? 1 : 0;
                 }
             });
         }

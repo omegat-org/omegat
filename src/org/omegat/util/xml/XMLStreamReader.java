@@ -182,7 +182,7 @@ public class XMLStreamReader {
      * back up to correct for incorrectly formatted document
      */
     private void pushChar(char c) {
-        m_charStack.push(new Character(c));
+        m_charStack.push(c);
     }
 
     /**
@@ -190,7 +190,7 @@ public class XMLStreamReader {
      */
     private char getNextCharCache() {
         char c = getNextChar();
-        m_charCache.add(new Character(c));
+        m_charCache.add(c);
         return c;
     }
 

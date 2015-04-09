@@ -272,7 +272,7 @@ public class ProjectFileStorage {
             String res = absolutePath;
             File abs = new File(absolutePath).getCanonicalFile();
             File root = new File(m_root).getCanonicalFile();
-            String prefix = new String();
+            String prefix = "";
             //
             // Try to derive the absolutePath as a relative path
             // from root.

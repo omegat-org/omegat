@@ -66,7 +66,7 @@ public class WorkflowOptionsDialog extends JDialog {
         insertFuzzyCheckBox.setSelected(Preferences.isPreference(Preferences.BEST_MATCH_INSERT));
         similarityLabel.setEnabled(insertFuzzyCheckBox.isSelected());
         similaritySpinner
-                .setValue(new Integer(Preferences.getPreferenceDefault(
+                .setValue(Integer.parseInt(Preferences.getPreferenceDefault(
                         Preferences.BEST_MATCH_MINIMAL_SIMILARITY,
                         Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT)));
         similaritySpinner.setEnabled(insertFuzzyCheckBox.isSelected());

@@ -621,8 +621,8 @@ public class RealProject implements IProject {
         try {
             Process p = Runtime.getRuntime().exec(StaticUtils.parseCLICommand(command));
             processCache.push(p);
-            CommandMonitor stdout = CommandMonitor.StdoutMonitor(p);
-            CommandMonitor stderr = CommandMonitor.StderrMonitor(p);
+            CommandMonitor stdout = CommandMonitor.newStdoutMonitor(p);
+            CommandMonitor stderr = CommandMonitor.newStderrMonitor(p);
             stdout.start();
             stderr.start();
         } catch (IOException e) {

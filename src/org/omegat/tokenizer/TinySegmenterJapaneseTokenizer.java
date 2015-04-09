@@ -76,7 +76,7 @@ public class TinySegmenterJapaneseTokenizer extends BaseTokenizer {
     /**
      * Wrap a {@link TinySegmenter} to behave like a {@link TokenStream}.
      */
-    public class TokenStreamWrapper extends TokenStream {
+    public static class TokenStreamWrapper extends TokenStream {
         private TinySegmenter ts;
         private CharTermAttribute termAttr;
         private OffsetAttribute offAttr;

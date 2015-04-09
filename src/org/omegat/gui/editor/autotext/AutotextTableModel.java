@@ -30,6 +30,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import org.omegat.core.Core;
 import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
 
 /**
  * The table model of the table in the autotext configuration window.
@@ -57,15 +58,12 @@ public class AutotextTableModel extends AbstractTableModel {
      */
     public void store(Autotext autotext) {
         List<AutotextPair> list = autotext.getList();
-        String source;
-        String target;
-        String comment;
         list.clear();
-        for (AutotextPair pair:data) {
-            if (pair.target != null || !pair.target.isEmpty()) {
-                source = pair.source == null ? "" : pair.source;
-                comment = pair.comment == null ? "" : pair.comment;
-                list.add(new AutotextPair(source, pair.target, comment));
+        for (AutotextPair pair : data) {
+            if (!StringUtil.isEmpty(pair.target)) {
+                list.add(new AutotextPair(pair.source == null ? "" : pair.source,
+                        pair.target,
+                        pair.comment == null ? "" : pair.comment));
             }
                 
                 

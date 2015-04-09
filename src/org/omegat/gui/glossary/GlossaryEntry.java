@@ -183,8 +183,8 @@ public class GlossaryEntry {
     public int hashCode() {
         int hash = 98;
         hash = hash * 17 + (m_src == null ? 0 : m_src.hashCode());
-        hash = hash * 31 + (m_loc == null ? 0 : m_loc.hashCode());
-        hash = hash * 13 + (m_com == null ? 0 : m_com.hashCode());
+        hash = hash * 31 + (m_loc == null ? 0 : Arrays.hashCode(m_loc));
+        hash = hash * 13 + (m_com == null ? 0 : Arrays.hashCode(m_com));
         return hash;
     }
 

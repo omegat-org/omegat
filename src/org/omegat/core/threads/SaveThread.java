@@ -48,9 +48,9 @@ import org.omegat.util.Preferences;
 public class SaveThread extends Thread implements IAutoSave {
     private static final Logger LOGGER = Logger.getLogger(SaveThread.class.getName());
 
-    private static final int SAVE_DURATION = (new Integer(Preferences.getPreferenceDefault(
+    private static final int SAVE_DURATION = Integer.parseInt(Preferences.getPreferenceDefault(
                         Preferences.AUTO_SAVE_INTERVAL,          // Preferences are in seconds,
-                        Preferences.AUTO_SAVE_DEFAULT)) * 1000); // save duration is in milliseconds
+                        Preferences.AUTO_SAVE_DEFAULT)) * 1000; // save duration is in milliseconds
 
     private boolean needToSaveNow;
     private boolean enabled;

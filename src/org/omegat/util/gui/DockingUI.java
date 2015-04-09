@@ -87,12 +87,12 @@ public class DockingUI {
         UIManager.put("DockViewTitleBar.restoreButtonText", OStrings.getString("DOCKING_HINT_RESTORE"));
         UIManager.put("DockViewTitleBar.attachButtonText", OStrings.getString("DOCKING_HINT_DOCK"));
         UIManager.put("DockViewTitleBar.floatButtonText", OStrings.getString("DOCKING_HINT_UNDOCK"));
-        UIManager.put("DockViewTitleBar.closeButtonText", new String());
+        UIManager.put("DockViewTitleBar.closeButtonText", "");
         UIManager.put("DockTabbedPane.minimizeButtonText", OStrings.getString("DOCKING_HINT_MINIMIZE"));
         UIManager.put("DockTabbedPane.maximizeButtonText", OStrings.getString("DOCKING_HINT_MAXIMIZE"));
         UIManager.put("DockTabbedPane.restoreButtonText", OStrings.getString("DOCKING_HINT_RESTORE"));
         UIManager.put("DockTabbedPane.floatButtonText", OStrings.getString("DOCKING_HINT_UNDOCK"));
-        UIManager.put("DockTabbedPane.closeButtonText", new String());
+        UIManager.put("DockTabbedPane.closeButtonText", "");
 
         // Fonts
         Font defaultFont = UIManager.getFont("Label.font");

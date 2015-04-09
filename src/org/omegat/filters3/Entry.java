@@ -38,7 +38,6 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.xml.Handler;
 import org.omegat.filters3.xml.XMLContentBasedTag;
 import org.omegat.filters3.xml.XMLDialect;
-import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
@@ -65,7 +64,7 @@ public class Entry {
     public void clear() {
         tagsDetected = false;
         elements.clear();
-        translation = new String();
+        translation = "";
         translatedEntry = null;
         textInstance = null;
     }
@@ -500,7 +499,7 @@ public class Entry {
     // //////////////////////////////////////////////////////////////////////////
 
     /** Translation in shortcut form. */
-    private String translation = new String();
+    private String translation = "";
 
     Entry translatedEntry = null;
 
@@ -579,7 +578,7 @@ public class Entry {
         // TODO: implement checking
     }
 
-    class ShortTag {
+    static class ShortTag {
         String tag;
         int pos;
 

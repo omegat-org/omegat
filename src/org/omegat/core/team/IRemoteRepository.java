@@ -29,6 +29,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.Properties;
 
@@ -178,7 +180,12 @@ public interface IRemoteRepository {
                 throw new IOException("Insufficient permissions to read file: " + file);
             }
             Properties p = new Properties();
-            p.load(new FileInputStream(file));
+            InputStream stream = new FileInputStream(file);
+            try {
+                p.load(stream);
+            } finally {
+                stream.close();
+            }
             result.username = p.getProperty(PKEY_USERNAME);
             result.password = p.getProperty(PKEY_PASSWORD).toCharArray();
             result.fingerprint = p.getProperty(PKEY_FINGERPRINT);
@@ -199,7 +206,12 @@ public interface IRemoteRepository {
             if (!file.exists()) {
                 file.createNewFile();
             }
-            p.store(new FileOutputStream(file), "Remote access credentials for OmegaT project");
+            OutputStream stream = new FileOutputStream(file);
+            try {
+                p.store(stream, "Remote access credentials for OmegaT project");
+            } finally {
+                stream.close();
+            }
         }
         
         public Credentials clone() {

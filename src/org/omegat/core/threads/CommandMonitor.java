@@ -50,11 +50,11 @@ public class CommandMonitor extends Thread {
     private final boolean isStdErr;
     private String message = null;
     
-    public static CommandMonitor StdoutMonitor(Process process) {
+    public static CommandMonitor newStdoutMonitor(Process process) {
         return new CommandMonitor(process, false);
     }
     
-    public static CommandMonitor StderrMonitor(Process process) {
+    public static CommandMonitor newStderrMonitor(Process process) {
         return new CommandMonitor(process, true);
     }
     

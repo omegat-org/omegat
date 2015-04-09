@@ -980,12 +980,14 @@ public class ProjectFilesListController {
                         c = fe1.compareToIgnoreCase(fe2);
                         break;
                     case 3:
-                        c = new Integer(f1.entries.size()).compareTo(f2.entries.size());
+                        int m1 = f1.entries.size();
+                        int m2 = f2.entries.size();
+                        c = m1 > m2 ? 1 : m1 < m2 ? -1 : 0;
                         break;
                     case 4:
                         int n1 = stat.uniqueCountsByFile.get(f1.filePath);
                         int n2 = stat.uniqueCountsByFile.get(f2.filePath);
-                        c = new Integer(n1).compareTo(n2);
+                        c = n1 > n2 ? 1 : n1 < n2 ? -1 : 0;
                         break;
                     }
                     if (sortKey.getSortOrder() == SortOrder.DESCENDING) {

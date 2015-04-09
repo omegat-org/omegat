@@ -40,6 +40,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
@@ -302,8 +303,9 @@ public final class PluginUtils {
         }
 
         Map<String, Attributes> entries = m.getEntries();
-        for (String key : entries.keySet()) {
-            Attributes attrs = (Attributes) entries.get(key);
+        for (Entry<String, Attributes> e : entries.entrySet()) {
+            String key = e.getKey();
+            Attributes attrs = e.getValue();
             String sType = attrs.getValue("OmegaT-Plugin");
             if ("true".equals(attrs.getValue("OmegaT-Tokenizer"))) {
                 // TODO remove after release new tokenizers

@@ -741,7 +741,7 @@ public class ScriptingWindow extends JFrame {
         String bare = fileName;
         int i = fileName.lastIndexOf('.');
 
-        if (i >= 0 && i != -1) {
+        if (i >= 0) {
             bare = fileName.substring(0, i);
         }
 
@@ -756,7 +756,7 @@ public class ScriptingWindow extends JFrame {
 
         int i = fileName.lastIndexOf('.');
 
-        if (i >= 0 && i != -1) {
+        if (i >= 0) {
             extension = fileName.substring(i + 1);
         }
 

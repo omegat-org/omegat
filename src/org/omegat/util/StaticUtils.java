@@ -849,7 +849,7 @@ public class StaticUtils {
      */
     public static String uuencode(byte[] buf) {
         if (buf.length <= 0)
-            return new String();
+            return "";
 
         StringBuilder res = new StringBuilder();
         res.append(buf[0]);

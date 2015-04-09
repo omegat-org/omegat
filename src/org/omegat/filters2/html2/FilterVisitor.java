@@ -812,155 +812,155 @@ public class FilterVisitor extends NodeVisitor {
 
     /** Named HTML Entities and corresponding numeric character references */
     private static final Object ENTITIES[][] = {
-            { "quot", new Integer(34) },
-            { "amp", new Integer(38) },
-            { "lt", new Integer(60) },
-            { "gt", new Integer(62) },
+            { "quot", 34 },
+            { "amp", 38 },
+            { "lt", 60 },
+            { "gt", 62 },
 
             // Latin Extended-A
-            { "OElig", new Integer(338) }, // latin capital ligature OE, U+0152
+            { "OElig", 338 }, // latin capital ligature OE, U+0152
                                            // ISOlat2
-            { "oelig", new Integer(339) }, // latin small ligature oe, U+0153
+            { "oelig", 339 }, // latin small ligature oe, U+0153
                                            // ISOlat2
             // ligature is a misnomer, this is a separate character in some
             // languages
-            { "Scaron", new Integer(352) }, // latin capital letter S with
+            { "Scaron", 352 }, // latin capital letter S with
                                             // caron, U+0160 ISOlat2
-            { "scaron", new Integer(353) }, // latin small letter s with caron,
+            { "scaron", 353 }, // latin small letter s with caron,
                                             // U+0161 ISOlat2
-            { "Yuml", new Integer(376) }, // latin capital letter Y with
+            { "Yuml", 376 }, // latin capital letter Y with
                                           // diaeresis, U+0178 ISOlat2
 
             // Spacing Modifier Letters
-            { "circ", new Integer(710) }, // modifier letter circumflex accent,
+            { "circ", 710 }, // modifier letter circumflex accent,
                                           // U+02C6 ISOpub
-            { "tilde", new Integer(732) }, // small tilde, U+02DC ISOdia
+            { "tilde", 732 }, // small tilde, U+02DC ISOdia
 
             // General Punctuation
-            { "ensp", new Integer(8194) }, // en space, U+2002 ISOpub
-            { "emsp", new Integer(8195) }, // em space, U+2003 ISOpub
-            { "thinsp", new Integer(8201) }, // thin space, U+2009 ISOpub
-            { "zwnj", new Integer(8204) }, // zero width non-joiner, U+200C NEW
+            { "ensp", 8194 }, // en space, U+2002 ISOpub
+            { "emsp", 8195 }, // em space, U+2003 ISOpub
+            { "thinsp", 8201 }, // thin space, U+2009 ISOpub
+            { "zwnj", 8204 }, // zero width non-joiner, U+200C NEW
                                            // RFC 2070
-            { "zwj", new Integer(8205) }, // zero width joiner, U+200D NEW RFC
+            { "zwj", 8205 }, // zero width joiner, U+200D NEW RFC
                                           // 2070
-            { "lrm", new Integer(8206) }, // left-to-right mark, U+200E NEW RFC
+            { "lrm", 8206 }, // left-to-right mark, U+200E NEW RFC
                                           // 2070
-            { "rlm", new Integer(8207) }, // right-to-left mark, U+200F NEW RFC
+            { "rlm", 8207 }, // right-to-left mark, U+200F NEW RFC
                                           // 2070
-            { "ndash", new Integer(8211) }, // en dash, U+2013 ISOpub
-            { "mdash", new Integer(8212) }, // em dash, U+2014 ISOpub
-            { "lsquo", new Integer(8216) }, // left single quotation mark,
+            { "ndash", 8211 }, // en dash, U+2013 ISOpub
+            { "mdash", 8212 }, // em dash, U+2014 ISOpub
+            { "lsquo", 8216 }, // left single quotation mark,
                                             // U+2018 ISOnum
-            { "rsquo", new Integer(8217) }, // right single quotation mark,
+            { "rsquo", 8217 }, // right single quotation mark,
                                             // U+2019 ISOnum
-            { "sbquo", new Integer(8218) }, // single low-9 quotation mark,
+            { "sbquo", 8218 }, // single low-9 quotation mark,
                                             // U+201A NEW
-            { "ldquo", new Integer(8220) }, // left double quotation mark,
+            { "ldquo", 8220 }, // left double quotation mark,
                                             // U+201C ISOnum
-            { "rdquo", new Integer(8221) }, // right double quotation mark,
+            { "rdquo", 8221 }, // right double quotation mark,
                                             // U+201D ISOnum
-            { "bdquo", new Integer(8222) }, // double low-9 quotation mark,
+            { "bdquo", 8222 }, // double low-9 quotation mark,
                                             // U+201E NEW
-            { "dagger", new Integer(8224) }, // dagger, U+2020 ISOpub
-            { "Dagger", new Integer(8225) }, // double dagger, U+2021 ISOpub
-            { "permil", new Integer(8240) }, // per mille sign, U+2030 ISOtech
-            { "lsaquo", new Integer(8249) }, // single left-pointing angle
+            { "dagger", 8224 }, // dagger, U+2020 ISOpub
+            { "Dagger", 8225 }, // double dagger, U+2021 ISOpub
+            { "permil", 8240 }, // per mille sign, U+2030 ISOtech
+            { "lsaquo", 8249 }, // single left-pointing angle
                                              // quotation mark, U+2039 ISO
                                              // proposed
             // lsaquo is proposed but not yet ISO standardized
-            { "rsaquo", new Integer(8250) }, // single right-pointing angle
+            { "rsaquo", 8250 }, // single right-pointing angle
                                              // quotation mark, U+203A ISO
                                              // proposed
             // rsaquo is proposed but not yet ISO standardized
-            { "euro", new Integer(8364) }, // euro sign, U+20AC NEW
+            { "euro", 8364 }, // euro sign, U+20AC NEW
 
-            { "nbsp", new Integer(160) }, { "iexcl", new Integer(161) }, { "cent", new Integer(162) },
-            { "pound", new Integer(163) }, { "curren", new Integer(164) }, { "yen", new Integer(165) },
-            { "brvbar", new Integer(166) }, { "sect", new Integer(167) }, { "uml", new Integer(168) },
-            { "copy", new Integer(169) }, { "ordf", new Integer(170) }, { "laquo", new Integer(171) },
-            { "not", new Integer(172) }, { "shy", new Integer(173) }, { "reg", new Integer(174) },
-            { "macr", new Integer(175) }, { "deg", new Integer(176) }, { "plusmn", new Integer(177) },
-            { "sup2", new Integer(178) }, { "sup3", new Integer(179) }, { "acute", new Integer(180) },
-            { "micro", new Integer(181) }, { "para", new Integer(182) }, { "middot", new Integer(183) },
-            { "cedil", new Integer(184) }, { "sup1", new Integer(185) }, { "ordm", new Integer(186) },
-            { "raquo", new Integer(187) }, { "frac14", new Integer(188) }, { "frac12", new Integer(189) },
-            { "frac34", new Integer(190) }, { "iquest", new Integer(191) }, { "Agrave", new Integer(192) },
-            { "Aacute", new Integer(193) }, { "Acirc", new Integer(194) }, { "Atilde", new Integer(195) },
-            { "Auml", new Integer(196) }, { "Aring", new Integer(197) }, { "AElig", new Integer(198) },
-            { "Ccedil", new Integer(199) }, { "Egrave", new Integer(200) }, { "Eacute", new Integer(201) },
-            { "Ecirc", new Integer(202) }, { "Euml", new Integer(203) }, { "Igrave", new Integer(204) },
-            { "Iacute", new Integer(205) }, { "Icirc", new Integer(206) }, { "Iuml", new Integer(207) },
-            { "ETH", new Integer(208) }, { "Ntilde", new Integer(209) }, { "Ograve", new Integer(210) },
-            { "Oacute", new Integer(211) }, { "Ocirc", new Integer(212) }, { "Otilde", new Integer(213) },
-            { "Ouml", new Integer(214) }, { "times", new Integer(215) }, { "Oslash", new Integer(216) },
-            { "Ugrave", new Integer(217) }, { "Uacute", new Integer(218) }, { "Ucirc", new Integer(219) },
-            { "Uuml", new Integer(220) }, { "Yacute", new Integer(221) }, { "THORN", new Integer(222) },
-            { "szlig", new Integer(223) }, { "agrave", new Integer(224) }, { "aacute", new Integer(225) },
-            { "acirc", new Integer(226) }, { "atilde", new Integer(227) }, { "auml", new Integer(228) },
-            { "aring", new Integer(229) }, { "aelig", new Integer(230) }, { "ccedil", new Integer(231) },
-            { "egrave", new Integer(232) }, { "eacute", new Integer(233) }, { "ecirc", new Integer(234) },
-            { "euml", new Integer(235) }, { "igrave", new Integer(236) }, { "iacute", new Integer(237) },
-            { "icirc", new Integer(238) }, { "iuml", new Integer(239) }, { "eth", new Integer(240) },
-            { "ntilde", new Integer(241) }, { "ograve", new Integer(242) }, { "oacute", new Integer(243) },
-            { "ocirc", new Integer(244) }, { "otilde", new Integer(245) }, { "ouml", new Integer(246) },
-            { "divide", new Integer(247) }, { "oslash", new Integer(248) }, { "ugrave", new Integer(249) },
-            { "uacute", new Integer(250) }, { "ucirc", new Integer(251) }, { "uuml", new Integer(252) },
-            { "yacute", new Integer(253) }, { "thorn", new Integer(254) }, { "yuml", new Integer(255) },
+            { "nbsp", 160 }, { "iexcl", 161 }, { "cent", 162 },
+            { "pound", 163 }, { "curren", 164 }, { "yen", 165 },
+            { "brvbar", 166 }, { "sect", 167 }, { "uml", 168 },
+            { "copy", 169 }, { "ordf", 170 }, { "laquo", 171 },
+            { "not", 172 }, { "shy", 173 }, { "reg", 174 },
+            { "macr", 175 }, { "deg", 176 }, { "plusmn", 177 },
+            { "sup2", 178 }, { "sup3", 179 }, { "acute", 180 },
+            { "micro", 181 }, { "para", 182 }, { "middot", 183 },
+            { "cedil", 184 }, { "sup1", 185 }, { "ordm", 186 },
+            { "raquo", 187 }, { "frac14", 188 }, { "frac12", 189 },
+            { "frac34", 190 }, { "iquest", 191 }, { "Agrave", 192 },
+            { "Aacute", 193 }, { "Acirc", 194 }, { "Atilde", 195 },
+            { "Auml", 196 }, { "Aring", 197 }, { "AElig", 198 },
+            { "Ccedil", 199 }, { "Egrave", 200 }, { "Eacute", 201 },
+            { "Ecirc", 202 }, { "Euml", 203 }, { "Igrave", 204 },
+            { "Iacute", 205 }, { "Icirc", 206 }, { "Iuml", 207 },
+            { "ETH", 208 }, { "Ntilde", 209 }, { "Ograve", 210 },
+            { "Oacute", 211 }, { "Ocirc", 212 }, { "Otilde", 213 },
+            { "Ouml", 214 }, { "times", 215 }, { "Oslash", 216 },
+            { "Ugrave", 217 }, { "Uacute", 218 }, { "Ucirc", 219 },
+            { "Uuml", 220 }, { "Yacute", 221 }, { "THORN", 222 },
+            { "szlig", 223 }, { "agrave", 224 }, { "aacute", 225 },
+            { "acirc", 226 }, { "atilde", 227 }, { "auml", 228 },
+            { "aring", 229 }, { "aelig", 230 }, { "ccedil", 231 },
+            { "egrave", 232 }, { "eacute", 233 }, { "ecirc", 234 },
+            { "euml", 235 }, { "igrave", 236 }, { "iacute", 237 },
+            { "icirc", 238 }, { "iuml", 239 }, { "eth", 240 },
+            { "ntilde", 241 }, { "ograve", 242 }, { "oacute", 243 },
+            { "ocirc", 244 }, { "otilde", 245 }, { "ouml", 246 },
+            { "divide", 247 }, { "oslash", 248 }, { "ugrave", 249 },
+            { "uacute", 250 }, { "ucirc", 251 }, { "uuml", 252 },
+            { "yacute", 253 }, { "thorn", 254 }, { "yuml", 255 },
 
-            { "fnof", new Integer(402) },
+            { "fnof", 402 },
 
-            { "Alpha", new Integer(913) }, { "Beta", new Integer(914) }, { "Gamma", new Integer(915) },
-            { "Delta", new Integer(916) }, { "Epsilon", new Integer(917) }, { "Zeta", new Integer(918) },
-            { "Eta", new Integer(919) }, { "Theta", new Integer(920) }, { "Iota", new Integer(921) },
-            { "Kappa", new Integer(922) }, { "Lambda", new Integer(923) }, { "Mu", new Integer(924) },
-            { "Nu", new Integer(925) }, { "Xi", new Integer(926) }, { "Omicron", new Integer(927) },
-            { "Pi", new Integer(928) }, { "Rho", new Integer(929) }, { "Sigma", new Integer(931) },
-            { "Tau", new Integer(932) }, { "Upsilon", new Integer(933) }, { "Phi", new Integer(934) },
-            { "Chi", new Integer(935) }, { "Psi", new Integer(936) }, { "Omega", new Integer(937) },
-            { "alpha", new Integer(945) }, { "beta", new Integer(946) }, { "gamma", new Integer(947) },
-            { "delta", new Integer(948) }, { "epsilon", new Integer(949) }, { "zeta", new Integer(950) },
-            { "eta", new Integer(951) }, { "theta", new Integer(952) }, { "iota", new Integer(953) },
-            { "kappa", new Integer(954) }, { "lambda", new Integer(955) }, { "mu", new Integer(956) },
-            { "nu", new Integer(957) }, { "xi", new Integer(958) }, { "omicron", new Integer(959) },
-            { "pi", new Integer(960) }, { "rho", new Integer(961) }, { "sigmaf", new Integer(962) },
-            { "sigma", new Integer(963) }, { "tau", new Integer(964) }, { "upsilon", new Integer(965) },
-            { "phi", new Integer(966) }, { "chi", new Integer(967) }, { "psi", new Integer(968) },
-            { "omega", new Integer(969) }, { "thetasym", new Integer(977) }, { "upsih", new Integer(978) },
-            { "piv", new Integer(982) },
+            { "Alpha", 913 }, { "Beta", 914 }, { "Gamma", 915 },
+            { "Delta", 916 }, { "Epsilon", 917 }, { "Zeta", 918 },
+            { "Eta", 919 }, { "Theta", 920 }, { "Iota", 921 },
+            { "Kappa", 922 }, { "Lambda", 923 }, { "Mu", 924 },
+            { "Nu", 925 }, { "Xi", 926 }, { "Omicron", 927 },
+            { "Pi", 928 }, { "Rho", 929 }, { "Sigma", 931 },
+            { "Tau", 932 }, { "Upsilon", 933 }, { "Phi", 934 },
+            { "Chi", 935 }, { "Psi", 936 }, { "Omega", 937 },
+            { "alpha", 945 }, { "beta", 946 }, { "gamma", 947 },
+            { "delta", 948 }, { "epsilon", 949 }, { "zeta", 950 },
+            { "eta", 951 }, { "theta", 952 }, { "iota", 953 },
+            { "kappa", 954 }, { "lambda", 955 }, { "mu", 956 },
+            { "nu", 957 }, { "xi", 958 }, { "omicron", 959 },
+            { "pi", 960 }, { "rho", 961 }, { "sigmaf", 962 },
+            { "sigma", 963 }, { "tau", 964 }, { "upsilon", 965 },
+            { "phi", 966 }, { "chi", 967 }, { "psi", 968 },
+            { "omega", 969 }, { "thetasym", 977 }, { "upsih", 978 },
+            { "piv", 982 },
 
-            { "bull", new Integer(8226) }, { "hellip", new Integer(8230) }, { "prime", new Integer(8242) },
-            { "Prime", new Integer(8243) }, { "oline", new Integer(8254) }, { "frasl", new Integer(8260) },
+            { "bull", 8226 }, { "hellip", 8230 }, { "prime", 8242 },
+            { "Prime", 8243 }, { "oline", 8254 }, { "frasl", 8260 },
 
-            { "weierp", new Integer(8472) }, { "image", new Integer(8465) }, { "real", new Integer(8476) },
-            { "trade", new Integer(8482) }, { "alefsym", new Integer(8501) },
+            { "weierp", 8472 }, { "image", 8465 }, { "real", 8476 },
+            { "trade", 8482 }, { "alefsym", 8501 },
 
-            { "larr", new Integer(8592) }, { "uarr", new Integer(8593) }, { "rarr", new Integer(8594) },
-            { "darr", new Integer(8595) }, { "harr", new Integer(8596) }, { "crarr", new Integer(8629) },
-            { "lArr", new Integer(8656) }, { "uArr", new Integer(8657) }, { "rArr", new Integer(8658) },
-            { "dArr", new Integer(8659) }, { "hArr", new Integer(8660) },
+            { "larr", 8592 }, { "uarr", 8593 }, { "rarr", 8594 },
+            { "darr", 8595 }, { "harr", 8596 }, { "crarr", 8629 },
+            { "lArr", 8656 }, { "uArr", 8657 }, { "rArr", 8658 },
+            { "dArr", 8659 }, { "hArr", 8660 },
 
-            { "forall", new Integer(8704) }, { "part", new Integer(8706) }, { "exist", new Integer(8707) },
-            { "empty", new Integer(8709) }, { "nabla", new Integer(8711) }, { "isin", new Integer(8712) },
-            { "notin", new Integer(8713) }, { "ni", new Integer(8715) }, { "prod", new Integer(8719) },
-            { "sum", new Integer(8722) }, { "minus", new Integer(8722) }, { "lowast", new Integer(8727) },
-            { "radic", new Integer(8730) }, { "prop", new Integer(8733) }, { "infin", new Integer(8734) },
-            { "ang", new Integer(8736) }, { "and", new Integer(8869) }, { "or", new Integer(8870) },
-            { "cap", new Integer(8745) }, { "cup", new Integer(8746) }, { "int", new Integer(8747) },
-            { "there4", new Integer(8756) }, { "sim", new Integer(8764) }, { "cong", new Integer(8773) },
-            { "asymp", new Integer(8773) }, { "ne", new Integer(8800) }, { "equiv", new Integer(8801) },
-            { "le", new Integer(8804) }, { "ge", new Integer(8805) }, { "sub", new Integer(8834) },
-            { "sup", new Integer(8835) }, { "nsub", new Integer(8836) }, { "sube", new Integer(8838) },
-            { "supe", new Integer(8839) }, { "oplus", new Integer(8853) }, { "otimes", new Integer(8855) },
-            { "perp", new Integer(8869) }, { "sdot", new Integer(8901) },
+            { "forall", 8704 }, { "part", 8706 }, { "exist", 8707 },
+            { "empty", 8709 }, { "nabla", 8711 }, { "isin", 8712 },
+            { "notin", 8713 }, { "ni", 8715 }, { "prod", 8719 },
+            { "sum", 8722 }, { "minus", 8722 }, { "lowast", 8727 },
+            { "radic", 8730 }, { "prop", 8733 }, { "infin", 8734 },
+            { "ang", 8736 }, { "and", 8869 }, { "or", 8870 },
+            { "cap", 8745 }, { "cup", 8746 }, { "int", 8747 },
+            { "there4", 8756 }, { "sim", 8764 }, { "cong", 8773 },
+            { "asymp", 8773 }, { "ne", 8800 }, { "equiv", 8801 },
+            { "le", 8804 }, { "ge", 8805 }, { "sub", 8834 },
+            { "sup", 8835 }, { "nsub", 8836 }, { "sube", 8838 },
+            { "supe", 8839 }, { "oplus", 8853 }, { "otimes", 8855 },
+            { "perp", 8869 }, { "sdot", 8901 },
 
-            { "lceil", new Integer(8968) }, { "rceil", new Integer(8969) }, { "lfloor", new Integer(8970) },
-            { "rfloor", new Integer(8971) }, { "lang", new Integer(9001) }, { "rang", new Integer(9002) },
+            { "lceil", 8968 }, { "rceil", 8969 }, { "lfloor", 8970 },
+            { "rfloor", 8971 }, { "lang", 9001 }, { "rang", 9002 },
 
-            { "loz", new Integer(9674) },
+            { "loz", 9674 },
 
-            { "spades", new Integer(9824) }, { "clubs", new Integer(9827) }, { "hearts", new Integer(9829) },
-            { "diams", new Integer(9830) }, };
+            { "spades", 9824 }, { "clubs", 9827 }, { "hearts", 9829 },
+            { "diams", 9830 }, };
 
     /** Converts HTML entities to normal characters */
     protected String entitiesToChars(String str) {

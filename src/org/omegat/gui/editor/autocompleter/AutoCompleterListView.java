@@ -250,7 +250,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     
     
     @SuppressWarnings("serial")
-    class CellRenderer extends DefaultListCellRenderer {
+    static class CellRenderer extends DefaultListCellRenderer {
         private AutoCompleterListView view;
         
         public CellRenderer(AutoCompleterListView view) {

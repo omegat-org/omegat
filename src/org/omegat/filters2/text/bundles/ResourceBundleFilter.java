@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009 Alex Buloichik
                2011 Martin Fleurke
-               2013-2014 Enrique Estévez, Didier Briel
+               2013-2014 Enrique Estevez, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -44,6 +44,7 @@ import java.util.Map;
 
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.util.Log;
 import org.omegat.util.LinebreakPreservingReader;
@@ -62,7 +63,7 @@ import org.omegat.util.StringUtil;
  * @author Keith Godfrey
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
- * @author Enrique Estévez (keko.gl@gmail.com)
+ * @author Enrique Estevez (keko.gl@gmail.com)
  * @author Didier Briel
  *
  * Option to remove untranslated segments in the target files
@@ -79,10 +80,11 @@ import org.omegat.util.StringUtil;
 public class ResourceBundleFilter extends AbstractFilter {
 
     public static final String OPTION_REMOVE_STRINGS_UNTRANSLATED = "unremoveStringsUntranslated";
+    public static final String DEFAULT_TARGET_ENCODING = OConsts.ASCII;
 
     protected Map<String, String> align;
     
-    private String targetEncoding;
+    private String targetEncoding = DEFAULT_TARGET_ENCODING;
     
     /**
      * If true, will remove non-translated segments in the target files
@@ -131,11 +133,17 @@ public class ResourceBundleFilter extends AbstractFilter {
     @Override
     public BufferedWriter createWriter(File outfile, String encoding) throws UnsupportedEncodingException,
             IOException {
-        if (encoding == null) { // Automatic target is considered as being ASCII
-            encoding = OConsts.ASCII;
+        if (encoding != null) {
+            targetEncoding = encoding;
         }
-        targetEncoding = encoding;
-        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outfile), encoding));
+        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outfile), targetEncoding));
+    }
+
+    @Override
+    protected String getOutputEncoding(FilterContext fc) {
+        String encoding = fc.getOutEncoding();
+        // Use default if the user didn't specify anything ("<auto>")
+        return encoding == null ? DEFAULT_TARGET_ENCODING : encoding;
     }
 
     /**
@@ -197,11 +205,6 @@ public class ResourceBundleFilter extends AbstractFilter {
      *            it is UTF-8, what is the another supported encoding)
      */
     private String toAscii(String text, boolean key) {
-        
-            
-        if (targetEncoding == null) {
-            targetEncoding = OConsts.ASCII;
-        }
         CharsetEncoder charsetEncoder = Charset.forName(targetEncoding).newEncoder();
         
         StringBuffer result = new StringBuffer();

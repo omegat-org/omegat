@@ -417,25 +417,14 @@ public abstract class AbstractFilter implements IFilter {
      */
     protected void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
             TranslationException {
-        String encoding = fc.getInEncoding();
-        if (encoding == null && isSourceEncodingVariable()) {
-            encoding = EncodingDetector.detectEncoding(inFile);
-        }
+        String encoding = getInputEncoding(fc, inFile);
         BufferedReader reader = createReader(inFile, encoding);
         inEncodingLastParsedFile = encoding == null ? Charset.defaultCharset().name() : encoding;
         try {
             BufferedWriter writer;
 
             if (outFile != null) {
-                String outEncoding = fc.getOutEncoding();
-                if (outEncoding == null && isTargetEncodingVariable()) {
-                    // Use input encoding if it's Unicode; otherwise default to UTF-8
-                    if (inEncodingLastParsedFile.toLowerCase().startsWith("utf-")) {
-                        outEncoding = inEncodingLastParsedFile;
-                    } else {
-                        outEncoding = "UTF-8";
-                    }
-                }
+                String outEncoding = getOutputEncoding(fc);
                 writer = createWriter(outFile, outEncoding);
             } else {
                 writer = new NullBufferedWriter();
@@ -449,6 +438,45 @@ public abstract class AbstractFilter implements IFilter {
         } finally {
             reader.close();
         }
+    }
+    
+    /**
+     * Get the input encoding. If it's not set in the FilterContext (setting is "&lt;auto>")
+     * and the filter allows ({@link #isSourceEncodingVariable()}), try to detect it. The result may be null.
+     * @param fc
+     * @param inFile
+     * @return
+     * @throws IOException
+     */
+    protected String getInputEncoding(FilterContext fc, File inFile) throws IOException {
+        String encoding = fc.getInEncoding();
+        if (encoding == null && isSourceEncodingVariable()) {
+            encoding = EncodingDetector.detectEncoding(inFile);
+        }
+        return encoding;
+    }
+    
+    /**
+     * Get the output encoding. If it's not set in the FilterContext (setting is "&lt;auto>")
+     * and the filter allows ({@link #isTargetEncodingVariable()}):
+     * <ul><li>Reuse the input encoding if it's Unicode
+     * <li>If the input was not Unicode, fall back to UTF-8.
+     * </ul>
+     * The result may be null.
+     * @param fc
+     * @return
+     */
+    protected String getOutputEncoding(FilterContext fc) {
+        String encoding = fc.getOutEncoding();
+        if (encoding == null && isTargetEncodingVariable()) {
+            // Use input encoding if it's Unicode; otherwise default to UTF-8
+            if (inEncodingLastParsedFile != null && inEncodingLastParsedFile.toLowerCase().startsWith("utf-")) {
+                encoding = inEncodingLastParsedFile;
+            } else {
+                encoding = "UTF-8";
+            }
+        }
+        return encoding;
     }
 
     public final void parseFile(File inFile, Map<String, String> config, FilterContext fc,

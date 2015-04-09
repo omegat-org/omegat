@@ -6,6 +6,7 @@
  Copyright (C) 2009 Alex Buloichik
                2012 Thomas Cordonnier
                2013 Alex Buloichik
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -64,6 +65,7 @@ import org.omegat.util.gui.TextUtil;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Thomas Cordonnier
+ * @author Aaron Madlon-Kay
  */
 public class CalcMatchStatistics extends LongProcessThread {
     private final String[] header = new String[] { "", OStrings.getString("CT_STATS_Segments"),

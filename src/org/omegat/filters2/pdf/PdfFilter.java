@@ -43,6 +43,7 @@ import org.omegat.util.OStrings;
 /**
  * PDF input filter
  * @author Arno Peters
+ * @author Aaron Madlon-Kay
  */
 public class PdfFilter  extends AbstractFilter {
 

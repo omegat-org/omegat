@@ -7,6 +7,7 @@
                2009 Alex Buloichik
                2011 Martin Fleurke
                2013-2014 Enrique Estevez, Didier Briel
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -65,6 +66,7 @@ import org.omegat.util.StringUtil;
  * @author Martin Fleurke
  * @author Enrique Estevez (keko.gl@gmail.com)
  * @author Didier Briel
+ * @author Aaron Madlon-Kay
  *
  * Option to remove untranslated segments in the target files
  * Code adapted from the file: MozillaDTDFilter.java

@@ -64,6 +64,7 @@ import org.omegat.util.OStrings;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Guido Leenders
+ * @author Aaron Madlon-Kay
  */
 public abstract class AbstractFilter implements IFilter {
 

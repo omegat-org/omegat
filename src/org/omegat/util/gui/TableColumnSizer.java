@@ -120,9 +120,11 @@ public class TableColumnSizer {
                 if (newVal != null && newVal.equals(evt.getOldValue())) {
                     return;
                 }
+                boolean shouldAdjust = false;
                 if (evt.getPropertyName().equals("columnModel")) {
                     if (newVal != null && newVal instanceof TableColumnModel) {
                         ((TableColumnModel) newVal).addColumnModelListener(colListener);
+                        shouldAdjust = true;
                     }
                     if (oldVal != null && oldVal instanceof TableColumnModel) {
                         ((TableColumnModel) oldVal).removeColumnModelListener(colListener);
@@ -130,10 +132,15 @@ public class TableColumnSizer {
                 } else if (evt.getPropertyName().equals("model")) {
                     if (newVal != null  && newVal instanceof TableModel) {
                         ((TableModel) newVal).addTableModelListener(modelListener);
+                        shouldAdjust = true;
                     }
                     if (oldVal != null && oldVal instanceof TableModel) {
                         ((TableModel) oldVal).removeTableModelListener(modelListener);
                     }
+                }
+                if (shouldAdjust) {
+                    reset();
+                    adjustTableColumns();
                 }
             }
         });

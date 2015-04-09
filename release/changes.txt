@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.4 
 ----------------------------------------------------------------------
-   8 Enhancements
+   9 Enhancements
    4 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -37,6 +37,8 @@ is "Workbook".
 
   - In Options > File Filters, the filters used by the current project
 are displayed in bold
+
+  - New "Trafficlight" them in the Switch Colour Theme script
 
   Bug fixes:
 

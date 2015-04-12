@@ -25,6 +25,9 @@
 
 package org.omegat.gui.stat;
 
+import javax.swing.text.Caret;
+import javax.swing.text.DefaultCaret;
+
 /**
  *
  * @author Aaron Madlon-Kay
@@ -36,6 +39,15 @@ public class TitledTablePanel extends javax.swing.JPanel {
      */
     public TitledTablePanel() {
         initComponents();
+        
+        // Set the title JTextArea's caret not to update on changes to the text.
+        // When a TitledTablePanel is used in a JScrollPane (like in the 
+        // PerFileMatchStatisticsPanel) the caret updating will cause unwanted
+        // scrolling whenever a new TitledTablePanel is displayed.
+        Caret caret = title.getCaret();
+        if (caret instanceof DefaultCaret) {
+            ((DefaultCaret) caret).setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
+        }
     }
 
     /**

@@ -59,11 +59,11 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.editor.EditorSettings;
+import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.Styles;
 import org.openide.awt.Mnemonics;
@@ -420,7 +420,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         helpMenu.add(helpLogMenuItem = createMenuItem("TF_MENU_HELP_LOG"));
         
         setActionCommands();
-        MainWindowMenuShortcuts.setShortcuts(mainMenu);
+        new PropertiesShortcuts("/org/omegat/gui/main/MainMenuShortcuts.properties").bindKeyStrokes(mainMenu);
 
         if (Platform.isMacOSX()) {
             initMacSpecific();

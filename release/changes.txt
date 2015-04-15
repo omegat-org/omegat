@@ -62,7 +62,7 @@ of "foo\.\scripts"
  OmegaT 3.1.9 update 1
 ----------------------------------------------------------------------
    1 Enhancement
-   2 Bug fixes
+   3 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.9 update 1 vs. 3.1.9
@@ -79,6 +79,9 @@ displayed correctly
 
   - Newly assigned scripts execute several times 
   https://sourceforge.net/p/omegat/bugs/737/
+
+  - The project-specific file filter configuration was deleted when
+quitting OmegaT
 
 ----------------------------------------------------------------------
  OmegaT 3.1.9 (2015-03-09)

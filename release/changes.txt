@@ -5,7 +5,7 @@
    4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
-3.4 update vs 3.1.9 update 1
+3.4 vs 3.1.9
 
   Implemented requests:
 
@@ -59,7 +59,7 @@ of "foo\.\scripts"
   - Dutch localisation updated to 3.4 (UI)
 
 ----------------------------------------------------------------------
- OmegaT 3.1.9 update 1
+ OmegaT 3.1.9 update 1 (2015-04-15)
 ----------------------------------------------------------------------
    1 Enhancement
    3 Bug fixes

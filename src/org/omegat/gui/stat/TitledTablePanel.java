@@ -25,6 +25,7 @@
 
 package org.omegat.gui.stat;
 
+import javax.swing.UIManager;
 import javax.swing.text.Caret;
 import javax.swing.text.DefaultCaret;
 
@@ -48,6 +49,7 @@ public class TitledTablePanel extends javax.swing.JPanel {
         if (caret instanceof DefaultCaret) {
             ((DefaultCaret) caret).setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
         }
+        title.setFont(UIManager.getFont("Label.font"));
     }
 
     /**

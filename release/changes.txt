@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.4 
 ----------------------------------------------------------------------
-  10 Enhancements
+  11 Enhancements
    4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -45,6 +45,8 @@ there's now an option to decide whether protected text (from the XLIFF filter)
 and custom tags should be counted in statistics. The option is on by default.
 In previous versions, protected text was not counted in the statistics, so
 the option has to be disabled to get the same value as before.
+
+  - The font selected in Options > Fonts can be applied now also to statistics
 
   Bug fixes:
 

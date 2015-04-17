@@ -1,11 +1,11 @@
 ----------------------------------------------------------------------
  OmegaT 3.4 
 ----------------------------------------------------------------------
-   9 Enhancements
+  10 Enhancements
    4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
-3.4 vs 3.1.9
+3.4 vs 3.1.9 update 1
 
   Implemented requests:
 
@@ -38,7 +38,13 @@ is "Workbook".
   - In Options > File Filters, the filters used by the current project
 are displayed in bold
 
-  - New "Trafficlight" them in the Switch Colour Theme script
+  - New "Trafficlight" theme in the Switch Colour Theme script
+
+  - Options > Tag Validation was renamed to Tag Processing. In that dialog, 
+there's now an option to decide whether protected text (from the XLIFF filter)
+and custom tags should be counted in statistics. The option is on by default.
+In previous versions, protected text was not counted in the statistics, so
+the option has to be disabled to get the same value as before.
 
   Bug fixes:
 

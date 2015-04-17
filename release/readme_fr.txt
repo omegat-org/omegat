@@ -284,6 +284,7 @@ OmegaT utilise les bibliothèques suivantes :
   SuperTMXMerge-for_OmegaT.jar (licence LGPL)
   groovy-all-2.2.2.jar (licence Apache 2.0)
   slf4j (licence MIT)
+  juniversalchardet-1.0.3.jar (GPL v2)
 
 ==============================================================================
  5.  Est-ce qu'OmegaT vous pose problème ? Avez-vous besoin d'aide ?

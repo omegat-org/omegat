@@ -25,6 +25,8 @@
 
 package org.omegat.filters3;
 
+import org.omegat.util.StaticUtils;
+
 /**
  * A tag in a source text.
  * 
@@ -194,16 +196,21 @@ public abstract class Tag implements Element {
     public String toShortcut() {
         StringBuffer buf = new StringBuffer();
 
-        buf.append("<");
+        buf.append('<');
         if (Type.END == getType())
-            buf.append("/");
+            buf.append('/');
         buf.append(getShortcut());
         buf.append(getIndex());
         if (Type.ALONE == getType())
-            buf.append("/");
-        buf.append(">");
+            buf.append('/');
+        buf.append('>');
 
         return buf.toString();
+    }
+
+    public String toSafeCalcShortcut() {
+        return StaticUtils.TAG_REPLACEMENT_CHAR + getShortcut().replace('<', '_').replace('>', '_')
+                + StaticUtils.TAG_REPLACEMENT_CHAR;
     }
 
     /**

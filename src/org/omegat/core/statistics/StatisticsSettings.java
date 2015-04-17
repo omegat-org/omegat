@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+ Copyright (C) 2015 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -23,36 +23,33 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.filters3;
+package org.omegat.core.statistics;
+
+import org.omegat.util.Preferences;
 
 /**
- * Element of the translatable entry. Can be a tag or a piece of text.
+ * Class for get/set statistics preferences and settings.
  * 
- * @author Maxym Mykhalchuk
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public interface Element {
-    /**
-     * Returns shortcut string representation of the element. E.g. for
-     * &lt;strong&gt; tag should return &lt;s3&gt;.
-     */
-    String toShortcut();
+public class StatisticsSettings {
+    public static boolean isCountingProtectedText() {
+        return Preferences.isPreferenceDefault(Preferences.STAT_COUNTING_PROTECTED_TEXT, true);
+    }
 
-    /**
-     * Returns shorcuts like '\b_i0_\b' for statistics calculation
-     */
-    String toSafeCalcShortcut();
+    public static void setCountingProtectedText(boolean value) {
+        Preferences.setPreference(Preferences.STAT_COUNTING_PROTECTED_TEXT, value);
+    }
 
-    /**
-     * Returns long XML-encoded representation of the element for storing in
-     * TMX. E.g. for &lt;strong&gt; tag should return &lt;bpt
-     * i="3"&gt;&amp;lt;strong&amp;gt;&lt;/bpt&gt;.
-     */
-    String toTMX();
+    public static boolean isCountingStandardTags() {
+        return false;
+    }
 
-    /**
-     * Returns the element in its original form as it was in original document.
-     * E.g. for &lt;strong&gt; tag should return &lt;bpt
-     * i="3"&gt;&amp;lt;strong&amp;gt;&lt;/bpt&gt;.
-     */
-    String toOriginal();
+    public static boolean isCountingCustomTags() {
+        return Preferences.isPreferenceDefault(Preferences.STAT_COUNTING_CUSTOM_TAGS, true);
+    }
+
+    public static void setCountingCustomTags(boolean value) {
+        Preferences.setPreference(Preferences.STAT_COUNTING_CUSTOM_TAGS, value);
+    }
 }

@@ -349,6 +349,9 @@ public class Preferences {
 
     public static final String TAGS_VALID_REQUIRED = "tags_valid_required";
 
+    public static final String STAT_COUNTING_PROTECTED_TEXT = "stat_counting_protected_text";
+    public static final String STAT_COUNTING_CUSTOM_TAGS = "stat_counting_custom_tags";
+
     /**
      * Prefix for keys used to record default tokenizer behavior settings.
      * Prepend to the full name of the tokenizer, e.g.

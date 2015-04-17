@@ -58,6 +58,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.omegat.core.data.ProtectedPart;
+import org.omegat.core.statistics.StatisticsSettings;
 import org.omegat.util.Platform.OsType;
 
 /**
@@ -94,8 +95,11 @@ public class StaticUtils {
     private final static String SCRIPT_DIR = "script";
 
     /**
-     * Char which should be used instead protected parts. It should be
-     * non-letter char, to be able to have correct words counter.
+     * Char which should be used instead protected parts. It should be non-letter char, to be able to have
+     * correct words counter.
+     * 
+     * This char can be placed around protected text for separate words inside protected text and words
+     * outside if there are no spaces between they.
      */
     public static final char TAG_REPLACEMENT_CHAR = '\b';
     public static final String TAG_REPLACEMENT = "\b";
@@ -821,7 +825,11 @@ public class StaticUtils {
             ProtectedPart pp = new ProtectedPart();
             pp.setTextInSourceSegment(placeholderMatcher.group());
             pp.setDetailsFromSourceFile(placeholderMatcher.group());
-            pp.setReplacementWordsCountCalculation(placeholderMatcher.group());
+            if (StatisticsSettings.isCountingCustomTags()) {
+                pp.setReplacementWordsCountCalculation(placeholderMatcher.group());
+            } else {
+                pp.setReplacementWordsCountCalculation(StaticUtils.TAG_REPLACEMENT);
+            }
             pp.setReplacementUniquenessCalculation(placeholderMatcher.group());
             pp.setReplacementMatchCalculation(placeholderMatcher.group());
             result.add(pp);

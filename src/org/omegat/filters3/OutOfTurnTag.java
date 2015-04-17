@@ -72,20 +72,6 @@ public abstract class OutOfTurnTag extends Tag {
     public abstract String toOriginal();
 
     /**
-     * Returns shortcut string representation of the element. Returns only the
-     * placeholder.
-     * <p>
-     * E.g. for OpenDocument footnote (out of turn tag "text:note-body") <code>
-     * &lt;text:note-body>&lt;text:p text:style-name="Endnote">The endnote 
-     * appears at the end of the document in OO but in the middle of 
-     * the segment in OmegaT.&lt;/text:p>&lt;/text:note-body>
-     * </code> this method should return only <code>&lt;t7/></code>.
-     */
-    public String toShortcut() {
-        return super.toShortcut();
-    }
-
-    /**
      * Returns short XML-encoded representation of the out of turn tag to store
      * in TMX, without enclosing &lt;ph&gt;.
      * <p>

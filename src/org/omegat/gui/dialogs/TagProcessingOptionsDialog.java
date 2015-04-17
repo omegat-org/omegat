@@ -36,6 +36,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import org.omegat.core.statistics.StatisticsSettings;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
@@ -49,14 +50,14 @@ import org.omegat.util.gui.StaticUIUtils;
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
-public class TagValidationOptionsDialog extends JDialog {
+public class TagProcessingOptionsDialog extends JDialog {
     /** A return status code - returned if Cancel button has been pressed */
     public static final int RET_CANCEL = 0;
     /** A return status code - returned if OK button has been pressed */
     public static final int RET_OK = 1;
 
     /** Creates new form WorkflowOptionsDialog */
-    public TagValidationOptionsDialog(Frame parent) {
+    public TagProcessingOptionsDialog(Frame parent) {
         super(parent, true);
 
         StaticUIUtils.setEscapeClosable(this);
@@ -74,6 +75,8 @@ public class TagValidationOptionsDialog extends JDialog {
         removePatternRegExpTF.setText(Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_REMOVE_PATTERN));
         looseTagOrderCheckBox.setSelected(Preferences.isPreference(Preferences.LOOSE_TAG_ORDERING));
         cbTagsValidRequired.setSelected(Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED));
+        cbCountingProtectedText.setSelected(StatisticsSettings.isCountingProtectedText()
+                || StatisticsSettings.isCountingCustomTags());
 
         invalidate();
         pack();
@@ -104,6 +107,7 @@ public class TagValidationOptionsDialog extends JDialog {
         looseTagOrderCheckBox = new javax.swing.JCheckBox();
         looseTagOrderWarningTextArea = new javax.swing.JTextArea();
         cbTagsValidRequired = new javax.swing.JCheckBox();
+        cbCountingProtectedText = new javax.swing.JCheckBox();
         jLabelCustomPattern = new javax.swing.JLabel();
         customPatternRegExpTF = new javax.swing.JTextField();
         jLabelRemovePattern = new javax.swing.JLabel();
@@ -205,6 +209,14 @@ public class TagValidationOptionsDialog extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(4, 6, 0, 4);
         getContentPane().add(cbTagsValidRequired, gridBagConstraints);
 
+        org.openide.awt.Mnemonics.setLocalizedText(cbCountingProtectedText, OStrings.getString("TV_OPTION_PROTECTED_TEXT_COUNTING")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 6, 0, 4);
+        getContentPane().add(cbCountingProtectedText, gridBagConstraints);
+
         org.openide.awt.Mnemonics.setLocalizedText(jLabelCustomPattern, OStrings.getString("TV_OPTION_CUSTOMPATTERN")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -299,6 +311,8 @@ public class TagValidationOptionsDialog extends JDialog {
             Preferences.setPreference(Preferences.CHECK_REMOVE_PATTERN, removePatternRegExpTF.getText());
             Preferences.setPreference(Preferences.LOOSE_TAG_ORDERING, looseTagOrderCheckBox.isSelected());
             Preferences.setPreference(Preferences.TAGS_VALID_REQUIRED, cbTagsValidRequired.isSelected());
+            StatisticsSettings.setCountingProtectedText(cbCountingProtectedText.isSelected());
+            StatisticsSettings.setCountingCustomTags(cbCountingProtectedText.isSelected());
             PatternConsts.updatePlaceholderPattern();
             PatternConsts.updateRemovePattern();
             PatternConsts.updateCustomTagPattern();
@@ -325,6 +339,7 @@ public class TagValidationOptionsDialog extends JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    private javax.swing.JCheckBox cbCountingProtectedText;
     private javax.swing.JCheckBox cbTagsValidRequired;
     private javax.swing.JTextField customPatternRegExpTF;
     private javax.swing.JTextArea descriptionTextArea;

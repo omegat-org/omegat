@@ -38,6 +38,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.omegat.core.data.ProtectedPart;
+import org.omegat.core.statistics.StatisticsSettings;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.Element;
 import org.omegat.filters3.Tag;
@@ -487,7 +488,11 @@ public class DefaultXMLDialect implements XMLDialect {
                 ProtectedPart pp = new ProtectedPart();
                 pp.setTextInSourceSegment(shortcut);
                 pp.setDetailsFromSourceFile(el.toOriginal());
-                pp.setReplacementWordsCountCalculation(StaticUtils.TAG_REPLACEMENT);
+                if (StatisticsSettings.isCountingStandardTags()) {
+                    pp.setReplacementWordsCountCalculation(el.toSafeCalcShortcut());
+                } else {
+                    pp.setReplacementWordsCountCalculation(StaticUtils.TAG_REPLACEMENT);
+                }
                 pp.setReplacementUniquenessCalculation(StaticUtils.TAG_REPLACEMENT);
                 pp.setReplacementMatchCalculation(StaticUtils.TAG_REPLACEMENT);
                 protectedParts.add(pp);

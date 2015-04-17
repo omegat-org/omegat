@@ -91,6 +91,10 @@ public abstract class Text implements Element {
         return text.toString();
     }
 
+    public String toSafeCalcShortcut() {
+        return toShortcut();
+    }
+
     /**
      * Returns long XML-encoded representation of the element. Basically, the
      * XML-encoded text (&lt; -> &amp;lt; etc). E.g. for <code>Rock&Roll</code>

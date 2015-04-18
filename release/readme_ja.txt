@@ -46,10 +46,10 @@ OmegaT の主な特徴は以下の通りです：
   - あらゆる有効な TMX ファイルを、翻訳の参照として利用可能
   - SRX（Segmentation Rules eXchange）に近い手法による、柔軟な分節化
   - プロジェクトや翻訳メモリ内の検索
-  - 任意のフォルダーにある、対応した形式を持つファイルの検索  
+  - 任意のフォルダーにある、対応した形式を持つファイルの検索 
   - 参考訳文の照合
   - 複雑なフォルダー構造を含むプロジェクトでも、スマートな取り扱い
-  - 用語集（専門用語の確認） 
+  - 用語集（専門用語の確認）
   - オープンソースのオンザフライの綴り確認ツールへの対応
   - StarDict 辞書への対応
   - Google Translate などの機械翻訳サービスへの対応
@@ -105,18 +105,21 @@ OmegaT を手早く使い慣れたい場合は、まず OmegaT を起動して�
 3.1 全般の確認事項
 OmegaT の実行には、Java Runtime Environment（JRE）バージョン 1.5 以降があらかじめインストールされている必要があります。JRE の選択や入手、またはインストールにおけるトラブルを回避するため、現在の OmegaT は JRE 付きパッケージが標準で提供されています。  
 
-すでに Java 実行環境があるなら、現バージョンの OmegaT をインストールするひとつの方法として、Java Web Start を使うことができます。この場合、以下のファイルをダウンロードし、実行してください：
+すでに Java 実行環境があるなら、現バージョンの OmegaT をインストールするひとつの方法として、Java Web Start を使うことができます。
+この場合、以下のファイルをダウンロードし、実行してください：
 
    http://omegat.sourceforge.net/webstart/OmegaT.jnlp
 
 最初の実行時に、お使いのコンピューターに適した実行環境とアプリケーションを自動でインストールします。それ以降の実行時は、オンラインである必要はありません。
 
-インストール中、OS によってはいくつかのセキュリティ警告が表示される場合があります。証明書は「PnS Concept」によって署名されています。この（Java Web Start 版）実行ファイルに与える権限（「コンピューターへの無制限アクセス」と表示される可能性があります）は、通常のローカル版に対して適用するものと同一で、コンピューターのハードディスクにアクセスすることを許可するものです。インストール後は、OmegaT.jnlp をクリックすると、もしオンラインであればプログラムの更新がないか検索し、もしあればインストールした後、OmegaT を起動します。 
+インストール中、OS によってはいくつかのセキュリティ警告が表示される場合があります。証明書は「PnS Concept」によって署名されています。
+この（Java Web Start 版）実行ファイルに与える権限（「コンピューターへの無制限アクセス」と表示される可能性があります）は、通常のローカル版に対して適用するものと同一で、コンピューターのハードディスクにアクセスすることを許可するものです。インストール後は、OmegaT.jnlp をクリックすると、もしオンラインであればプログラムの更新がないか検索し、もしあればインストールした後、OmegaT を起動します。 
 
 ダウンロードとインストールを行う他の方法は、下記に示す通りです。 
 
 Windows、Linux ユーザー：
-適した JRE がすでにインストールされているとわかっている場合、JRE 無しのパッケージ（パッケージ名に「Without_JRE」がついています）をインストールしてください。JRE がインストールされているか不明な場合は、JRE が付属したパッケージをお勧めします。すでに JRE がその OS にインストールされていたとしても、付属の JRE がそれと競合することは無いため、安全です。
+適した JRE がすでにインストールされているとわかっている場合、JRE 無しのパッケージ（パッケージ名に「Without_JRE」がついています）をインストールしてください。
+JRE がインストールされているか不明な場合は、JRE が付属したパッケージをお勧めします。すでに JRE がその OS にインストールされていたとしても、付属の JRE がそれと競合することは無いため、安全です。
 
 Linux ユーザー：
 多くのディストリビューション（Ubuntu など）に含まれているオープンソースの Java 実装上で OmegaT を使用した場合、何らかのトラブルや表示上の問題、機能の欠落などに遭遇する可能性があります。そのため、可能な限り Oracle 社が提供する Java Runtime Environment（JRE）をダウンロードしてインストールするか、JRE が付属した OmegaT パッケージを利用してください（「Linux」と記されている .tar.bz2 ファイルです）。Java をシステムレベルにインストールした場合は、起動パスが通っているか、あるいは OmegaT を起動する際にパスを明示して Java を呼んでいることを確認してください。Linux に精通しているのでない限り、JRE が付属した OmegaT パッケージをインストールするのがよいでしょう。すでに JRE がその OS にインストールされていたとしても、付属の JRE がそれと競合することは無いため、安全です。
@@ -168,7 +171,8 @@ cd <OmegaT.jar が存在するフォルダー>
 
 <Java 実行ファイルへのパス> -jar OmegaT.jar
 
-（Java 実行ファイルは、Linux の場合は java、Windows の場合は java.exe です。システムレベルで Java がインストールされている場合、フルパスを指定する必要はありません。）
+（Java 実行ファイルは、Linux の場合は java、Windows の場合は java.exe です。
+システムレベルで Java がインストールされている場合、フルパスを指定する必要はありません。）
 
 OmegaT 起動方法のカスタマイズ：
 
@@ -218,7 +222,7 @@ OmegaT のユーザーインターフェースや取扱説明書、他の関連�
   Sandra Jean Chua
   Thomas Cordonnier
   Enrique Estévez Fernández
-  Martin Fleurke  
+  Martin Fleurke
   Wildrich Fourie
   Phillip Hall
   Jean-Christophe Helary
@@ -233,15 +237,15 @@ OmegaT のユーザーインターフェースや取扱説明書、他の関連�
   Manfred Martin
   Adiel Mittmann
   John Moran
-  Maxym Mykhalchuk 
+  Maxym Mykhalchuk
   Arno Peters
-  Henry Pijffers 
+  Henry Pijffers
   Briac Pilpré
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband
   Yu Tang
-  Rashid Umarov  
+  Rashid Umarov
   Antonio Vilei
   Ilia Vinogradov
   Martin Wunderlich
@@ -260,7 +264,7 @@ OmegaT のユーザーインターフェースや取扱説明書、他の関連�
 
 OmegaT は以下に示すライブラリを使用しています。
   Somik Raha, Derrick Oswald などによる HTMLParser 1.6（LGPL ライセンス）
-  VLDocking Framework 3.0.4（LGPL ライセンス）
+  VLDocking Framework 3.0.5-SNAPSHOT（LGPL ライセンス）
   László Németh などによる Hunspell（LGPL ライセンス）
   Todd Fast, Timothy Wall などによる JNA（LGPL ライセンス）
   Swing-Layout 1.0.4（LGPL ライセンス）
@@ -289,6 +293,7 @@ OmegaT は以下に示すライブラリを使用しています。
   SuperTMXMerge-for_OmegaT.jar（LGPL ライセンス）
   groovy-all-2.2.2.jar（Apache ライセンス 2.0）
   slf4j（MIT ライセンス）
+  juniversalchardet-1.0.3.jar（GPL v2 ライセンス）
 
 ==============================================================================
  5.  バグかな？と思ったら

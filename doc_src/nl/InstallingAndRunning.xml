@@ -450,6 +450,17 @@
 
           <para>-<emphasis role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
         </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Yandex Translate</emphasis><indexterm class="singular">
+              <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>Yandex Translate</tertiary>
+            </indexterm></para>
+
+          <para>Zorg er voor dat u een gratis account voor Yandex heeft. U heeft dat nodig om een API-sleutel voor Yandex Translate te verkrijgen en te gebruiken. API-sleutels kunnen worden aangevraagd met behulp van het <ulink url="http://api.yandex.com/key/form.xml?service=trnsl">API key request form</ulink>, en worden bekeken op de pagina <ulink url="http://api.yandex.com/key/keyslist.xml">My Keys</ulink>.</para>
+
+          <para><emphasis role="bold">-Dyandex.api.key=</emphasis><emphasis role="bold">trnsl.1.1.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</emphasis></para>
+        </listitem>
+
       </itemizedlist>
 
       <para>Argumenten mogen worden gecombineerd: Voor het starten van <application>OmegaT</application> met alle hierboven genoemde voorbeelden zou de opdracht zijn:</para>

@@ -80,11 +80,9 @@
       </listitem>
 
       <listitem>
-        <para>strumenti per la gestione dei dati linguistici necessari alla costruzione di un sistema di traduzione automatico per una data coppia di lingue e</para>
+        <para>strumenti per la gestione dei dati linguistici necessari alla costruzione di un sistema di traduzione automatico per una data coppia di lingue</para>
       </listitem>
-    </itemizedlist>
 
-    <itemizedlist>
       <listitem>
         <para>dati linguistici per un crescente numero di coppie di lingue</para>
       </listitem>
@@ -93,6 +91,50 @@
     <para>Apertium utilizza un motore di traduzione automatica a trasferimento superficiale, che elabora il testo di ingresso a fasi, come in una riga di linguaggio assembly: destrutturazione, analisi morfologica, disambiguazione delle parti del discorso, trasferimento strutturale superficiale, trasferimento lessicale, generazione morfologica e ristrutturazione.</para>
 
     <para>È possibile usare Apertium per costruire sistemi di traduzione automatica per varie coppie di lingue: a tal fine, Apertium utilizza formati standard basati su XML semplice per codificare i dati linguistici necessari (sia a mano, sia convertendo i dati esistenti), i quali vengono compilati, tramite gli strumenti forniti, nei formati ad alta velocità usati dal motore.</para>
+  </section>
+
+  <section>
+    <title>Microsoft Translator<indexterm class="singular">
+        <primary>Traduzione automatica</primary> <secondary>Microsoft Translator</secondary>
+      </indexterm></title>
+
+    <para>Per ottenere le credenziali per MS Translator, seguire i passi:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>Accedere al Microsoft Azure Marketplace: <ulink url="http://datamarket.azure.com/">http://datamarket.azure.com/</ulink></para>
+
+        <para>Se non si possiede già un conto Azure Marketplace sarà necessario prima registrarne uno.</para>
+      </listitem>
+
+      <listitem>
+        <para>Fare clic sull'opzione &quot;Il mio conto&quot; nella parte superiore della pagina.</para>
+      </listitem>
+
+      <listitem>
+        <para>Vicino al fondo si vedranno le voci e i valori per:<itemizedlist>
+            <listitem>
+              <para>Chiave account primaria (che corrisponde al parametro di riga di comando <code>microsoft.api.client_secret</code>)</para>
+            </listitem>
+
+            <listitem>
+              <para>ID cliente (che corrisponde al parametro di riga di comando <code><code>microsoft.api.client_id</code></code>)</para>
+            </listitem>
+          </itemizedlist></para>
+      </listitem>
+    </orderedlist>
+
+    <para>Per abilitare MS Translator in OmegaT, modificare il suo comando di avvio o consultare il capitolo <link linkend="chapter.installing.and.running">Installazione e avvio</link> per imparare ad avviare OmegaT dalla riga di comando.</para>
+  </section>
+
+  <section>
+    <title>Yandex Translate<indexterm class="singular">
+        <primary>Traduzione automatica</primary> <secondary>Yandex Translate</secondary>
+      </indexterm></title>
+
+    <para>Per usare Yandex Translate in OmegaT, è necessario <ulink url="http://api.yandex.com/key/form.xml?service=trnsl">ottenere una chiave API da Yandex</ulink>.</para>
+
+    <para>La chiave API ottenuta deve essere passata a OmegaT all'avvio tramite il parametro di riga di comando <code>yandex.api.key</code>. Per fare questo, modificare il comando di avvio di OmegaT o consultare il capitolo <link linkend="chapter.installing.and.running">Installazione e avvio</link> per imparare ad avviare OmegaT dalla riga di comando.</para>
   </section>
 
   <section id="Google.Translate.troubleshooting">

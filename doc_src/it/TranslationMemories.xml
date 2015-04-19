@@ -85,7 +85,7 @@
         </varlistentry>
 
         <varlistentry>
-          <term>tm/enforce folder</term>
+          <term>cartella tm/enforce</term>
 
           <listitem>
             <para>Se si è certi che una TMX è più accurata del file <filename>project_save.tmx</filename> di OmegaT, inserire questa TMX nella cartella /tm/enforce per sovrascrivere in modo categorico le traduzioni predefinite esistenti.</para>
@@ -93,7 +93,7 @@
         </varlistentry>
 
         <varlistentry>
-          <term>tm/mt folder</term>
+          <term>cartella tm/mt</term>
 
           <listitem>
             <para>Nel pannello dell'editor, quando viene inserita una concordanza proveniente da una TMX contenuta in una cartella di nome <emphasis role="bold">mt</emphasis>, lo sfondo del segmento attivo diventa rosso. Lo sfondo ritorna al colore normale se si lascia il segmento.</para>

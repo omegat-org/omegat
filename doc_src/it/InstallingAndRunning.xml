@@ -442,6 +442,17 @@
 
           <para>-<emphasis role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
         </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Yandex Translate</emphasis><indexterm class="singular">
+              <primary>Avvio di OmegaT</primary> <secondary>Argomenti dello script di avvio</secondary> <tertiary>Yandex Translate</tertiary>
+            </indexterm></para>
+
+          <para>Assicurarsi di avere un account Yandex gratuito. Esso è necessario al fine di ottenere e usare la chiave API di Yandex Translate. Le chiavi API si possono richiedere utilizzando il <ulink url="http://api.yandex.com/key/form.xml?service=trnsl">modulo di richiesta chiave API</ulink>, e visualizzate nella pagina <ulink url="http://api.yandex.com/key/keyslist.xml">My Keys</ulink>.</para>
+
+          <para><emphasis role="bold">-Dyandex.api.key=</emphasis><emphasis role="bold">trnsl.1.1.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</emphasis></para>
+        </listitem>
+
       </itemizedlist>
 
       <para>Gli argomenti possono essere combinati: per avviare <application>OmegaT</application> con tutti gli esempi descritti sopra, il comando deve essere:</para>

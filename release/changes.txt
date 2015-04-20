@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   11 Enhancements
    4 Bug fixes
-   2 Localisation updates
+   3 Localisation updates
 ----------------------------------------------------------------------
 3.4 vs 3.1.9 update 1
 
@@ -66,6 +66,7 @@ of "foo\.\scripts"
 
   - Dutch localisation updated to 3.4 (UI, documentation, scripts, readme)
   - Italian localisation updated to 3.4 (UI, documentation, scripts)
+  - Japanese localisation updated to 3.4 (UI, readme)
 
 ----------------------------------------------------------------------
  OmegaT 3.1.9 update 1 (2015-04-15)

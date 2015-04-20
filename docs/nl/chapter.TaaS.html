@@ -1,0 +1,116 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Hoofdstuk 20. TaaS in OmegaT gebruiken</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT 3.1 - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT 3.1 - Gebruikershandleiding">
+      <link rel="prev" href="chapter.glossaries.html" title="Hoofdstuk 19. Woordenlijsten">
+      <link rel="next" href="chapter.machine.translate.html" title="Hoofdstuk 21. Machinevertaling">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Hoofdstuk 20. TaaS in OmegaT gebruiken</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.glossaries.html">Terug</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Volgende</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.TaaS"></a>Hoofdstuk 20. TaaS in OmegaT gebruiken<a class="indexterm" name="d0e8649"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options">1. Algemeen</a></span></dt>
+               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.collections">2. Publieke en private collecties</a></span></dt>
+               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.access">3. Toegang tot de service TaaS</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="section.TaaS.options"></a>1. Algemeen
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>De service TaaS op https://demo.taas-project.eu/info verschaft services voor terminologie in Europese talen (plus Russisch).
+               Het maakt het mogelijk toegang te krijgen tot zowel publieke als private gegevens, waar private woordenlijsten ("collections"
+               genaamd) uit bestaande documenten kunnen worden uitgenomen, en de doeltermen gedeeltelijk automatisch kunnen worden gevuld
+               vanuit verschillende bronnen.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="section.TaaS.options.collections"></a>2. Publieke en private collecties
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaT maakt het mogelijk toegang te krijgen tot het publieke gedeelte van TaaS zonder enige registratie.</p>
+            <p>Een gebruiker moet, om toegang te krijgen tot het private gedeelte, een sleutel maken met behulp van https://demo.taas-project.eu/account/keys/create?system=omegaT.</p>
+            <p>De sleutel moet dan worden opgegeven aan OmegaT door middel van -Dtaas.user.key=xxxxx. De OmegaT configuratie-starters (OmegaT.l4J.ini,
+               omegat.kaptn en OmegaT.sh) bevatten een sjabloon-item.
+            </p>
+            <p>Bij toegang tot de service zonder een private sleutel, zal de het volgende bericht worden geplaatst in het log: TaaS API key
+               not found. Ga naar https://demo.taas-project.eu/account/keys/create?system=omegaT om uw eigen sleutel te maken en geef die
+               dan door aan OmegaT met -Dtaas.user.key=xxxxx (TAAS_API_KEY_NOT_FOUND)
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="section.TaaS.options.access"></a>3. Toegang tot de service TaaS
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Klik op <span class="bold"><strong>Opties, Woordenlijst</strong></span> om de volgende opties weer te geven:
+            </p>
+            <p><span class="bold"><strong>Bladeren door TaaS Collections</strong></span> maakt het mogelijk te bladeren door bestaande collecties voor de bron- en doeltalen van het project, en het downloaden ervan.
+               Private collecties worden vet weergegeven. De collecties worden gedownload als TBX-woordenlijsten in de huidige map glossary.
+            </p>
+            <p><span class="bold"><strong>TaaS Terminology Lookup</strong></span>: indien geselecteerd, zal het mogelijk maken gegevens van TaaS te bevragen op basis van segment na segment. Alle collecties
+               (publieke en private) zullen worden bevraagd voor voor de bron- en doeltaal.
+            </p>
+            <p>Het is mogelijk om een specifiek domein te selecteren door <span class="bold"><strong>Selecteer TaaS Terminology Lookup Domain</strong></span> te selecteren, om de hoeveelheid gegevens te beperken. In dat dialoogvenster is het mogelijk Alle domeinen of een specifiek
+               domein te selecteren.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.glossaries.html">Terug</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Volgende</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Hoofdstuk 19. Woordenlijsten&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Hoofdstuk 21. Machinevertaling</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

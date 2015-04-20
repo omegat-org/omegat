@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.formatted.text"></a>Hoofdstuk 12. Werken met opgemaakte tekst<a class="indexterm" name="d0e6298"></a><a class="indexterm" name="d0e6303"></a></h1>
+                  <h1 class="title"><a name="chapter.formatted.text"></a>Hoofdstuk 12. Werken met opgemaakte tekst<a class="indexterm" name="d0e6322"></a><a class="indexterm" name="d0e6327"></a></h1>
                </div>
             </div>
          </div>
@@ -39,7 +39,7 @@
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Tag-bewerkingen</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Taggroep nesten</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. Taggroep overlappen</a></span></dt>
-               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6449">5. Opties voor valideren van tags</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6473">5. Opties voor valideren van tags</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">6. Taggroep validatie</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">7. Hints voor tagbeheer</a></span></dt>
             </dl>
@@ -54,22 +54,22 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1. Tags voor opmaak<a class="indexterm" name="d0e6313"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1. Tags voor opmaak<a class="indexterm" name="d0e6337"></a></h2>
                   </div>
                </div>
             </div>
-            <p><a class="indexterm" name="d0e6317"></a><span class="bold"><strong>Namen van tags:</strong></span></p>
+            <p><a class="indexterm" name="d0e6341"></a><span class="bold"><strong>Namen van tags:</strong></span></p>
             <p>De tags bestaan uit één tot drie tekens en een getal. Met unieke nummers kunnen de tags die met elkaar overeenkomen worden
                gegroepeerd en onderscheiden zich van de tags die dezelfde tekencombinatie hebben, maar in feite verschillend zijn. De gebruikte
                tekens in de tags proberen de onderliggende betekenis van de tag weer te geven (bijv. b voor vet, i voor cursief, etc.)
             </p>
-            <p><a class="indexterm" name="d0e6327"></a><span class="bold"><strong>Nummering van tags:</strong></span></p>
+            <p><a class="indexterm" name="d0e6351"></a><span class="bold"><strong>Nummering van tags:</strong></span></p>
             <p>Tags worden oplopend genummerd per groep van tags. "Taggroepen" in deze context zijn één enkele tag (zoals &lt;i0&gt; en &lt;/i0&gt;).
                Binnen een segment krijgt de eerste groep (paar of enkele) het nummer 0, de tweede het nummer 1, etc. Het eerste voorbeeld
                hieronder heeft 3 tag-groepen (een paar, een enkele en dan nog een ander paar), het tweede voorbeeld heeft slechts één groep
                (een paar).
             </p>
-            <p><a class="indexterm" name="d0e6337"></a><span class="bold"><strong>Paren en enkele:</strong></span></p>
+            <p><a class="indexterm" name="d0e6361"></a><span class="bold"><strong>Paren en enkele:</strong></span></p>
             <p>Tags zijn altijd óf enkel óf gepaard. Enkele tags geven informatie over de opmaak aan die niet van invloed is op de tekst
                er omheen (een extra spatie of regeleinde bijvoorbeeld).
             </p>
@@ -90,7 +90,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2. Tag-bewerkingen<a class="indexterm" name="d0e6362"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2. Tag-bewerkingen<a class="indexterm" name="d0e6386"></a></h2>
                   </div>
                </div>
             </div>
@@ -98,7 +98,7 @@
                worden. De basisregel is dat de volgorde van de tags in dezelfde volgorde moet worden behouden. Het is echter mogelijk, als
                bepaalde regels strikt worden gevolgd, om van deze basisregel af te wijken.
             </p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6371"></a>Tags dupliceren:</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6395"></a>Tags dupliceren:</strong></span></p>
             <p>Kopieer ze eenvoudigweg naar de positie van uw keuze om tags te dupliceren. Onthoud dat in een paar de openingstag vóór de
                sluitingstag moet komen. De opmaak die wordt vertegenwoordigd door de groep die u dupliceerde zal op beide gedeelten worden
                toegepast.
@@ -107,7 +107,7 @@
             <p><code class="literal">&lt;b0&gt;Deze opmaak&lt;/b0&gt; zal hier worden gedupliceerd.&lt;segment 0001&gt;</code></p>
             <p>Na het dupliceren:</p>
             <p><code class="literal">&lt;b0&gt;Deze opmaak&lt;/b0&gt; is &lt;b0&gt;hier gedupliceerd&lt;/b0&gt;.&lt;segment 0001&gt;</code></p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6391"></a>Verwijderen van taggroepen:</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6415"></a>Verwijderen van taggroepen:</strong></span></p>
             <p>Verwijder ze eenvoudigweg uit het segment om taggroepen te verwijderen. Onthoud dat van een paar zowel de openings- als de
                sluitingstag moet worden verwijderd om er voor te zorgen dat alle sporen van de opmaak correct worden uitgewist, anders zou
                het vertaalde bestand mogelijk beschadigd kunnen raken. Door een taggroep te verwijderen verwijdert u de gerelateerde opmaak
@@ -122,7 +122,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3. Taggroep nesten<a class="indexterm" name="d0e6412"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3. Taggroep nesten<a class="indexterm" name="d0e6436"></a></h2>
                   </div>
                </div>
             </div>
@@ -140,7 +140,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4. Taggroep overlappen<a class="indexterm" name="d0e6432"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4. Taggroep overlappen<a class="indexterm" name="d0e6456"></a></h2>
                   </div>
                </div>
             </div>
@@ -156,7 +156,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e6449"></a>5. Opties voor valideren van tags
+                     <h2 class="title" style="clear: both"><a name="d0e6473"></a>5. Opties voor valideren van tags
                      </h2>
                   </div>
                </div>
@@ -215,12 +215,12 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6. Taggroep validatie<a class="indexterm" name="d0e6493"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6. Taggroep validatie<a class="indexterm" name="d0e6517"></a></h2>
                   </div>
                </div>
             </div>
             <p>De functie Tags valideren detecteert gewijzigde tags (of dat met opzet is gedaan of per ongeluk) en toont de betrokken segmenten.
-               Het activeren van deze functie – <span class="guimenuitem">Ctrl+Shift+V<a class="indexterm" name="d0e6502"></a></span> - zal een venster openen dat alle segmenten uit het bestand, waarvan wordt vermoed dat ze zijn verbroken of slechte tags
+               Het activeren van deze functie – <span class="guimenuitem">Ctrl+Shift+V<a class="indexterm" name="d0e6526"></a></span> - zal een venster openen dat alle segmenten uit het bestand, waarvan wordt vermoed dat ze zijn verbroken of slechte tags
                zijn, bevat. Repareren van de tags en het opnieuw samenstellen van de doeldocumenten is eenvoudig met de functie Tags valideren.
                Het venster, dat wordt geopend door te drukken op <span class="guimenuitem">Ctrl+Shift+V</span>, heeft een kolom met 3 tabellen met een koppeling naar het segment, het originele segment en het doelsegment
             </p>
@@ -239,7 +239,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7. Hints voor tagbeheer<a class="indexterm" name="d0e6527"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7. Hints voor tagbeheer<a class="indexterm" name="d0e6551"></a></h2>
                   </div>
                </div>
             </div>

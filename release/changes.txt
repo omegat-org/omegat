@@ -1,13 +1,19 @@
 ----------------------------------------------------------------------
  OmegaT 3.4 update 1
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 3.4 update 1 vs 3.4
 
-  Bug fixes:
+  Other changes:
+
+  - With a Windows Classic theme, the look and feel prior to 3.4 is 
+still used
+  
+
+Bug fixes:
 
   - Panel header title was white under Windows 7 with a classic theme
 

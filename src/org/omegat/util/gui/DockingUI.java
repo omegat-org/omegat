@@ -225,6 +225,7 @@ public class DockingUI {
         
         // Panel title bars
         UIManager.put("DockViewTitleBar.border", new RoundedCornerBorder(8, borderColor, RoundedCornerBorder.SIDE_TOP));
+        UIManager.put("InternalFrame.activeTitleForeground", Color.BLACK); // Windows 7 "Classic" has Color.WHITE for this
         UIManager.put("InternalFrame.activeTitleBackground", activeTitleBgColor);
         UIManager.put("InternalFrame.inactiveTitleBackground", standardBgColor);
         UIManager.put("InternalFrame.inactiveTitleForeground", new Color(0x808080)); // Label.disabledForeground on OS X LAF

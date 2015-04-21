@@ -32,7 +32,7 @@
   - New XML Spreadsheet 2003 filter. This allows translating Excel document
 exported in XML 2003 format. As the extension is .xml, other filters may
 "steal" the file. In that case, they have to be disabled. The XML 
-Spreadhsheet 2003 filter limit itself to documents where the first tag
+Spreadhsheet 2003 filter limits itself to documents where the first tag
 is "Workbook".
 
   - In Options > File Filters, the filters used by the current project

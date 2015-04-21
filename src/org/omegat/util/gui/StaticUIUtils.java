@@ -28,6 +28,7 @@ package org.omegat.util.gui;
 
 import java.awt.Component;
 import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
@@ -143,8 +144,12 @@ public class StaticUIUtils {
         if (targetWidth < 1) {
             return text;
         }
-                
-        FontMetrics metrics = comp.getGraphics().getFontMetrics();
+        
+        Graphics graphics = comp.getGraphics();
+        if (graphics == null) {
+            return text;
+        }
+        FontMetrics metrics = graphics.getFontMetrics();
         final int fullWidth = metrics.stringWidth(text);
         // Early out if string + margin already fits
         if (fullWidth + margin < targetWidth) {

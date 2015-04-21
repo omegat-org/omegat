@@ -33,6 +33,7 @@ package org.omegat.util.gui;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.Window;
 
 import javax.swing.ImageIcon;
@@ -114,10 +115,12 @@ public class DockingUI {
         UIManager.put("DockTabbedPane.close.pressed", getIcon("empty.gif"));
         UIManager.put("DockTabbedPane.menu.close", getIcon("empty.gif"));
 
-        // Classic design overridden by flat design
-        //installClassicDesign();
-        
-        installFlatDesign();
+        // Classic design overridden by flat design, except on Windows Classic theme
+        if (isWindowsClassicLAF()) {
+            installClassicDesign();
+        } else {
+            installFlatDesign();
+        }
         
         // Panel notification (blinking tabs/headers) settings
         UIManager.put("DockingDesktop.notificationBlinkCount", 2);
@@ -126,7 +129,6 @@ public class DockingUI {
         ensureTitlebarReadability();
     }
 
-    @SuppressWarnings("unused")
     private static void installClassicDesign() {
         UIManager.put("OmegaTStatusArea.border", new MatteBorder(1, 1, 1, 1, Color.BLACK));
         
@@ -308,6 +310,16 @@ public class DockingUI {
             
             UIManager.put("DragControler.detachCursor", getImage("appbar.fullscreen.png"));
         }
+    }
+    
+    // Windows Classic LAF detection from http://stackoverflow.com/a/4386821/448068
+    private static boolean isWindowsLAF() {
+        return UIManager.getLookAndFeel().getID().equals("Windows");
+    }
+
+    private static boolean isWindowsClassicLAF() {
+        return isWindowsLAF() &&
+                !(Boolean) Toolkit.getDefaultToolkit().getDesktopProperty("win.xpstyle.themeActive");
     }
 
     /**

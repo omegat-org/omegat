@@ -63,6 +63,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.UIManager;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -293,8 +294,14 @@ public class EditorController implements IEditor {
         });
 
         scrollPane = new JScrollPane(editor);
-        scrollPane.setBorder(UIManager.getBorder("OmegaTDockablePanel.border"));
-        scrollPane.setViewportBorder(UIManager.getBorder("OmegaTDockablePanelViewport.border"));
+        Border panelBorder = UIManager.getBorder("OmegaTDockablePanel.border");
+        if (panelBorder != null) { 
+            scrollPane.setBorder(panelBorder);
+        }
+        Border viewportBorder = UIManager.getBorder("OmegaTDockablePanelViewport.border");
+        if (viewportBorder != null) {
+            scrollPane.setViewportBorder(viewportBorder);
+        }
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         pane.setLayout(new BorderLayout());

@@ -30,6 +30,7 @@ import java.awt.Component;
 
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.JTextComponent;
 
@@ -67,8 +68,14 @@ public class DockableScrollPane extends JScrollPane implements Dockable {
             int size = c.getFont().getSize() / 2;
             c.setBorder(new EmptyBorder(size, size, size, size));
         }
-        setBorder(UIManager.getBorder("OmegaTDockablePanel.border"));
-        setViewportBorder(UIManager.getBorder("OmegaTDockablePanelViewport.border"));
+        Border panelBorder = UIManager.getBorder("OmegaTDockablePanel.border"); 
+        if (panelBorder != null) {
+            setBorder(panelBorder);
+        }
+        Border viewportBorder = UIManager.getBorder("OmegaTDockablePanelViewport.border");
+        if (viewportBorder != null) {
+            setViewportBorder(viewportBorder);
+        }
         dockKey = new DockKey(key, name, null, null, DockingConstants.HIDE_BOTTOM);
         dockKey.setFloatEnabled(detouchable);
         dockKey.setCloseEnabled(false);

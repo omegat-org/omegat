@@ -221,8 +221,10 @@ public class DockingUI {
         // colors don't appear to be available through the API. These values are from visual inspection.
         if (Platform.isMacOSX()) {
             UIManager.put("DockView.tabbedDockableBorder", new MatteBorder(0, 5, 5, 5, new Color(0xE6E6E6)));
-        } else {
+        } else if (isWindowsLAF() && !isWindowsClassicLAF()) {
             UIManager.put("DockView.tabbedDockableBorder", new MatteBorder(2, 5, 5, 5, Color.WHITE));
+        } else {
+            UIManager.put("DockView.tabbedDockableBorder", new MatteBorder(5, 5, 5, 5, standardBgColor));
         }
         
         // Panel title bars

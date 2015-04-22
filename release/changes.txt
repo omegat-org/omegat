@@ -35,7 +35,7 @@ Bug fixes:
   https://sourceforge.net/p/omegat/feature-requests/820/
 
   - Increase the size or better layout of the statistics window
-  https://sourceforge.net/p/omegat/feature-requests/820/
+  https://sourceforge.net/p/omegat/feature-requests/656/
 
   - Add Close button to Statistics window 
   https://sourceforge.net/p/omegat/feature-requests/859/

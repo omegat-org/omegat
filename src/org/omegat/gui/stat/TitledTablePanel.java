@@ -74,6 +74,7 @@ public class TitledTablePanel extends javax.swing.JPanel {
         title.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 5, 0));
         add(title, java.awt.BorderLayout.NORTH);
 
+        scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPane.setViewportView(table);
 
         add(scrollPane, java.awt.BorderLayout.CENTER);

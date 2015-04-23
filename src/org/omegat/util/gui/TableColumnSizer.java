@@ -238,6 +238,7 @@ public class TableColumnSizer {
                         cellRenderer = table.getDefaultRenderer(String.class);
                     }
                     c = cellRenderer.getTableCellRendererComponent(table, col.getHeaderValue(), false, false, 0, column);
+                    c.setFont(table.getTableHeader().getFont());
                     // Add somewhat arbitrary margin to header because it gets truncated at a smaller width
                     // than a regular cell does (Windows LAF more than OS X LAF).
                     margin = 10;

@@ -64,6 +64,9 @@ public class AutoCompleter {
     private final static int GO_NEXT_KEY = KeyEvent.VK_RIGHT;
     private final static int GO_PREV_KEY = KeyEvent.VK_LEFT;
     
+    private final static int MIN_VIEWPORT_HEIGHT = 50;
+    private final static int MAX_POPUP_WIDTH = 500;
+    
     JPopupMenu popup = new JPopupMenu(); 
     private EditorTextArea3 editor; 
     
@@ -214,8 +217,8 @@ public class AutoCompleter {
         
         if (editor.isEnabled() && updateViewData() && views.get(currentView).getRowCount()!=0) { 
             scroll.setPreferredSize(new Dimension(
-                    scroll.getPreferredSize().width,
-                    views.get(currentView).getPreferredHeight()));
+                    Math.min(views.get(currentView).getPreferredWidth(), MAX_POPUP_WIDTH),
+                    Math.max(views.get(currentView).getPreferredHeight(), MIN_VIEWPORT_HEIGHT)));
             popup.validate();
             popup.pack();
             Point p = getDisplayPoint();

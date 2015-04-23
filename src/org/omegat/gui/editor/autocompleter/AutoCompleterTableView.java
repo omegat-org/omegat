@@ -288,8 +288,12 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
     
     @Override
     public int getPreferredHeight() {
-        int height = getModifiedRowCount() * getTable().getRowHeight();
-        return Math.max(height, 50);
+        return getModifiedRowCount() * getTable().getRowHeight();
+    }
+    
+    @Override
+    public int getPreferredWidth() {
+        return getTable().getPreferredSize().width;
     }
     
     @Override

@@ -96,6 +96,12 @@ abstract public class AbstractAutoCompleterView {
     public abstract int getPreferredHeight();
     
     /**
+     * get the preferred width of the component
+     * @return
+     */
+    public abstract int getPreferredWidth();
+    
+    /**
      * set the list or table data
      * @param entryList the entries
      */

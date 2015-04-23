@@ -36,6 +36,7 @@ import java.util.List;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JScrollBar;
 import javax.swing.ListModel;
 import javax.swing.text.BadLocationException;
 
@@ -173,6 +174,16 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
         Rectangle bounds = getList().getCellBounds(0, 0);
         return (int) (getModifiedRowCount() * (bounds == null ? getList().getFont().getSize() : bounds.getHeight()));
     }
+    
+    @Override
+    public int getPreferredWidth() {
+        int width = getList().getPreferredSize().width;
+        JScrollBar bar = completer.scroll.getVerticalScrollBar();
+        if (bar != null) {
+            width += bar.getPreferredSize().width;
+        }
+        return width;
+    };
     
     @Override
     public void setData(List<AutoCompleterItem> entryList) {

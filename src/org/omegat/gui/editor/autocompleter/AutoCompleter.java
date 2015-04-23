@@ -94,7 +94,7 @@ public class AutoCompleter {
         
         scroll = new JScrollPane();
         scroll.setBorder(new EmptyBorder(0, 0, 0, 0));
-        scroll.setPreferredSize(new Dimension(200,200));
+        scroll.setPreferredSize(new Dimension(200, 200));
         scroll.setColumnHeaderView(null);
         scroll.setFocusable(false);
  
@@ -215,7 +215,7 @@ public class AutoCompleter {
             return;
         }
         
-        if (editor.isEnabled() && updateViewData() && views.get(currentView).getRowCount()!=0) { 
+        if (editor.isEnabled() && updateViewData() && views.get(currentView).getRowCount() != 0) {
             scroll.setPreferredSize(new Dimension(
                     Math.min(views.get(currentView).getPreferredWidth(), MAX_POPUP_WIDTH),
                     Math.max(views.get(currentView).getPreferredHeight(), MIN_VIEWPORT_HEIGHT)));

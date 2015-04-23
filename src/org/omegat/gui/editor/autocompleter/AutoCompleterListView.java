@@ -55,7 +55,6 @@ import org.omegat.util.Token;
 public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     
     private static JList list;
-    private static CellRenderer renderer;
 
     ListModel listModel = new DefaultListModel();
     
@@ -70,8 +69,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     public JList getList() {
         if (list == null) {
             list = new JList();
-            renderer = new CellRenderer(this);
-            list.setCellRenderer(renderer);
+            list.setCellRenderer(new CellRenderer());
             list.addMouseListener(new MouseAdapter() {
             	@Override
             	public void mouseClicked(MouseEvent e) {
@@ -202,7 +200,6 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     
     @Override
     public Component getViewContent() {
-        renderer.view = this;
         getList().setVisibleRowCount(getModifiedRowCount());
         return getList();
     }
@@ -261,12 +258,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     
     
     @SuppressWarnings("serial")
-    static class CellRenderer extends DefaultListCellRenderer {
-        private AutoCompleterListView view;
-        
-        public CellRenderer(AutoCompleterListView view) {
-            this.view = view;
-        }
+    private class CellRenderer extends DefaultListCellRenderer {
         
         @Override
         public Component getListCellRendererComponent(JList list, Object value,
@@ -274,7 +266,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
             if (value == NO_SUGGESTIONS) {
                 setText(((AutoCompleterItem)value).payload);
             } else {
-                setText(view.itemToString((AutoCompleterItem)value));
+                setText(itemToString((AutoCompleterItem)value));
             }
             if (isSelected) {
                 setBackground(list.getSelectionBackground());

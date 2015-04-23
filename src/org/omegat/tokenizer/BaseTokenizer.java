@@ -38,8 +38,11 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.util.Version;
+import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.gui.comments.ICommentProvider;
 import org.omegat.util.Token;
 
 /**
@@ -269,6 +272,46 @@ public abstract class BaseTokenizer implements ITokenizer {
         return ann == null ? new String[0] : ann.languages();
     }
 
+    protected String test(String... args) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getName()).append('\n');
+        for (String input : args) {
+            sb.append("Input:\n");
+            sb.append(input);
+            sb.append("tokenizeAllExactly:\n");
+            sb.append(printTest(tokenizeAllExactly(input), input));
+            sb.append("tokenize:\n");
+            sb.append(printTest(tokenize(input, false, false, false), input));
+            sb.append("tokenize (stemsAllowed):\n");
+            sb.append(printTest(tokenize(input, true, false, false), input));
+            sb.append("tokenize (stemsAllowed stopWordsAllowed):\n");
+            sb.append(printTest(tokenize(input, true, true, false), input));
+            sb.append("tokenize (stemsAllowed stopWordsAllowed filterDigits) (=tokenizeWords(MATCHING)):\n");
+            sb.append(printTest(tokenize(input, true, true, true), input));
+            sb.append("tokenize (stemsAllowed filterDigits) (=tokenizeWords(GLOSSARY)):\n");
+            sb.append(printTest(tokenize(input, true, false, true), input));
+            sb.append("tokenize (filterDigits) (=tokenizeWords(NONE) tokenizeWordsForSpelling):\n");
+            sb.append(printTest(tokenize(input, false, false, true), input));
+            sb.append("----------------------------------\n");
+        }
+        return sb.toString();
+    }
+    
+    protected String printTest(Token[] tokens, String input) {
+        StringBuilder sb = new StringBuilder();
+        String[] strings = Token.getTextsFromString(tokens, input);
+        sb.append(StringUtils.join(strings, ", ")).append('\n');
+        sb.append("Is verbatim: " + StringUtils.join(strings, "").equals(input)).append('\n');
+        return sb.toString();
+    }
+    
+    public static ICommentProvider TOKENIZER_DEBUG_PROVIDER = new ICommentProvider() {
+        @Override
+        public String getComment(SourceTextEntry newEntry) {
+            return ((BaseTokenizer) Core.getProject().getSourceTokenizer()).test(newEntry.getSrcText());
+        }
+    };
+    
     static {
         for (Version v : Version.values()) {
             StringBuilder b = new StringBuilder();
@@ -277,34 +320,5 @@ public abstract class BaseTokenizer implements ITokenizer {
             if (Character.isDigit(b.charAt(b.length() - 1))) b.insert(b.length() - 1, '.');
             supportedBehaviors.put(v, b.toString());
         }
-    }
-    
-    protected void test(String... args) {
-        System.out.println(getClass().getName());
-        for (String input : args) {
-            System.out.println("Input:");
-            System.out.println(input);
-            System.out.println("tokenizeAllExactly:");
-            printTest(tokenizeAllExactly(input), input);
-            System.out.println("tokenize:");
-            printTest(tokenize(input, false, false, false), input);
-            System.out.println("tokenize (stemsAllowed):");
-            printTest(tokenize(input, true, false, false), input);
-            System.out.println("tokenize (stemsAllowed stopWordsAllowed):");
-            printTest(tokenize(input, true, true, false), input);
-            System.out.println("tokenize (stemsAllowed stopWordsAllowed filterDigits) (=tokenizeWords(MATCHING)):");
-            printTest(tokenize(input, true, true, true), input);
-            System.out.println("tokenize (stemsAllowed filterDigits) (=tokenizeWords(GLOSSARY)):");
-            printTest(tokenize(input, true, false, true), input);
-            System.out.println("tokenize (filterDigits) (=tokenizeWords(NONE) tokenizeWordsForSpelling):");
-            printTest(tokenize(input, false, false, true), input);
-            System.out.println("----------------------------------");
-        }
-    }
-    
-    protected void printTest(Token[] tokens, String input) {
-        String[] strings = Token.getTextsFromString(tokens, input);
-        System.out.println(StringUtils.join(strings, ", "));
-        System.out.println("Is verbatim: " + StringUtils.join(strings, "").equals(input));
     }
 }

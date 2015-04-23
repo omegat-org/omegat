@@ -127,13 +127,13 @@ public class MainWindowUI {
                 Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
                         STATUS_BAR_MODE.DEFAULT).name());
 
-        String statusText = "MW_PROGRESS_DEFAULT";
+        String statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
         String tooltipText = "MW_PROGRESS_TOOLTIP";
         if (progressMode == STATUS_BAR_MODE.PERCENTAGE) {
-            statusText = "MW_PROGRESS_DEFAULT_PERCENTAGE";
+            statusText = OStrings.getProgressBarDefaultPrecentageText();
             tooltipText = "MW_PROGRESS_TOOLTIP_PERCENTAGE";
         }
-        Mnemonics.setLocalizedText(mainWindow.progressLabel, OStrings.getString(statusText));
+        Mnemonics.setLocalizedText(mainWindow.progressLabel, statusText);
         mainWindow.progressLabel.setToolTipText(OStrings.getString(tooltipText));
 
         mainWindow.progressLabel.setBorder(border);
@@ -148,17 +148,17 @@ public class MainWindowUI {
 
                 Preferences.setPreference(Preferences.SB_PROGRESS_MODE, progressMode);
 
-                String statusText = "MW_PROGRESS_DEFAULT";
+                String statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
                 String tooltipText = "MW_PROGRESS_TOOLTIP";
                 if (progressMode == STATUS_BAR_MODE.PERCENTAGE) {
-                    statusText = "MW_PROGRESS_DEFAULT_PERCENTAGE";
+                    statusText = OStrings.getProgressBarDefaultPrecentageText();
                     tooltipText = "MW_PROGRESS_TOOLTIP_PERCENTAGE";
                 }
 
                 if (Core.getProject().isProjectLoaded()) {
                     ((EditorController)Core.getEditor()).showStat();
                 } else {
-                    Core.getMainWindow().showProgressMessage(OStrings.getString(statusText));
+                    Core.getMainWindow().showProgressMessage(statusText);
                 }
                 ((MainWindow)Core.getMainWindow()).setProgressToolTipText(OStrings.getString(tooltipText));
             }

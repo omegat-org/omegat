@@ -459,10 +459,10 @@ public class ProjectUICommands {
 
                 // fix - reset progress bar to defaults
                 Core.getMainWindow().showLengthMessage(OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
-                Core.getMainWindow().showProgressMessage(OStrings.getString(
+                Core.getMainWindow().showProgressMessage(
                         Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
                                 MainWindowUI.STATUS_BAR_MODE.DEFAULT) == MainWindowUI.STATUS_BAR_MODE.DEFAULT
-                        ? "MW_PROGRESS_DEFAULT" : "MW_PROGRESS_DEFAULT_PERCENTAGE"));
+                        ? OStrings.getString("MW_PROGRESS_DEFAULT") : OStrings.getProgressBarDefaultPrecentageText());
 
                 return null;
             }

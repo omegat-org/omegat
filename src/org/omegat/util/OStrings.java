@@ -115,6 +115,14 @@ public class OStrings {
         }
         return result;
     }
+    
+    /** Returns default text for progress bar when no project is loaded
+     * 
+     */
+    public static String getProgressBarDefaultPrecentageText() {
+        return StaticUtils.format( OStrings.getString("MW_PROGRESS_DEFAULT_PERCENTAGE"),
+                new Object[] { "--", "--", "--", "--", "--" });
+    }
 
     /**
      * Returns the textual marker for the current segment.

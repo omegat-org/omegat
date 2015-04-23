@@ -27,6 +27,7 @@ package org.omegat.gui.editor.autocompleter;
 
 import java.awt.Component;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -68,7 +69,6 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     public JList getList() {
         if (list == null) {
             list = new JList();
-            list.setFixedCellHeight(12);
             renderer = new CellRenderer(this);
             list.setCellRenderer(renderer);
             list.addMouseListener(new MouseAdapter() {
@@ -170,8 +170,8 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     
     @Override
     public int getPreferredHeight() {
-        int height = getModifiedRowCount() * getList().getFont().getSize();
-        return Math.max(height, 50);
+        Rectangle bounds = getList().getCellBounds(0, 0);
+        return (int) (getModifiedRowCount() * (bounds == null ? getList().getFont().getSize() : bounds.getHeight()));
     }
     
     @Override

@@ -38,6 +38,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JScrollBar;
 import javax.swing.ListModel;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.text.BadLocationException;
 
 import org.omegat.gui.editor.EditorTextArea3;
@@ -256,6 +258,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
      */
     public abstract String itemToString(AutoCompleterItem item);
     
+    private static final Border LIST_MARGIN_BORDER = new EmptyBorder(0, 5, 0, 5);
     
     @SuppressWarnings("serial")
     private class CellRenderer extends DefaultListCellRenderer {
@@ -263,6 +266,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
         @Override
         public Component getListCellRendererComponent(JList list, Object value,
                 int index, boolean isSelected, boolean cellHasFocus) {
+            setBorder(LIST_MARGIN_BORDER);
             if (value == NO_SUGGESTIONS) {
                 setText(((AutoCompleterItem)value).payload);
             } else {

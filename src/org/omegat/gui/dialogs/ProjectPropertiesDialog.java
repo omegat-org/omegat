@@ -35,7 +35,6 @@ import gen.core.filters.Filters;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GraphicsEnvironment;
 import java.awt.Label;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;

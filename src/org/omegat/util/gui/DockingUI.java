@@ -115,12 +115,10 @@ public class DockingUI {
         UIManager.put("DockTabbedPane.close.pressed", getIcon("empty.gif"));
         UIManager.put("DockTabbedPane.menu.close", getIcon("empty.gif"));
 
-        // Classic design overridden by flat design, except on Windows Classic theme
-        if (isWindowsClassicLAF()) {
-            installClassicDesign();
-        } else {
-            installFlatDesign();
-        }
+        // Classic design overridden by flat design
+        //installClassicDesign();
+        
+        installFlatDesign();
         
         // Panel notification (blinking tabs/headers) settings
         UIManager.put("DockingDesktop.notificationBlinkCount", 2);
@@ -129,6 +127,7 @@ public class DockingUI {
         ensureTitlebarReadability();
     }
 
+    @SuppressWarnings("unused")
     private static void installClassicDesign() {
         UIManager.put("OmegaTStatusArea.border", new MatteBorder(1, 1, 1, 1, Color.BLACK));
         

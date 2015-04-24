@@ -121,7 +121,7 @@ public class OStrings {
      */
     public static String getProgressBarDefaultPrecentageText() {
         return StaticUtils.format( OStrings.getString("MW_PROGRESS_DEFAULT_PERCENTAGE"),
-                new Object[] { "--", "--", "--", "--", "--" });
+                new Object[] { "--%", "--", "--%", "--", "--" });
     }
 
     /**

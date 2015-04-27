@@ -1,11 +1,17 @@
 ----------------------------------------------------------------------
  OmegaT 3.4 update 1
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    1 Bug fix
    2 Localisation updates
 ----------------------------------------------------------------------
 3.4 update 1 vs 3.4
+
+
+  Implemented requests:
+
+  - Progress bar L10N improvement 
+  https://sourceforge.net/p/omegat/feature-requests/1055/
 
   Bug fixes:
 

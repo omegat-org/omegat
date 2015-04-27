@@ -1,0 +1,248 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;18.&nbsp;Glossários</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Manual do Usuário">
+      <link rel="up" href="index.html" title="OmegaT - Manual do Usuário">
+      <link rel="prev" href="chapter.dictionaries.html" title="Chapter&nbsp;17.&nbsp;Dicionários">
+      <link rel="next" href="chapter.machine.translate.html" title="Chapter&nbsp;19.&nbsp;Tradução automática">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;18.&nbsp;Glossários</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.dictionaries.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.glossaries"></a>Chapter&nbsp;18.&nbsp;Glossários<a class="indexterm" name="d0e8023"></a><a class="indexterm" name="d0e8028"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8052">1. Uso</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8107">2. Formato de arquivo</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8146">3. Como criar glossários</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8191">4. Usando Trados MultiTerm</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8207">5. Problemas comuns com glossários</a></span></dt>
+            </dl>
+         </div>
+         <p>Os glossários são arquivos criados e atualizados manualmente para uso no <span class="application">OmegaT</span>.
+         </p>
+         <p>Se um projeto do <span class="application">OmegaT</span> contém um ou mais glossários, quaisquer termos do glossário que também sejam encontrados no segmento atual serão automaticamente
+            exibidos no visualizador de glossário.
+         </p>
+         <p>É possível definir a localização e o nome do projeto na caixa de diálogo das propriedades do projeto. A extensão deve ser
+            <code class="filename">.txt</code>(caso contrário, será adicionada). A localização do arquivo deve ser na pasta <code class="filename">/glossary</code>, mas também pode ser em uma subpasta (p.ex., <code class="filename">glossary/sub/glossary.txt</code>). O arquivo não precisa existir no momento da configuração, se necessário, será criado ao adicionar um termo no glossário.
+            Se o arquivo já existir, nenhuma tentativa é feita para verificar o formato ou o conjunto de caracteres do arquivo: as novas
+            entradas estarão sempre em formato separado por tabulações e UTF-8. Uma vez que o conteúdo existente não será alterado, o
+            dano a um arquivo seria limitado.
+         </p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8052"></a>1.&nbsp;Uso
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Para usar um glossário existente, coloque-o na pasta<a class="indexterm" name="d0e8057"></a> <code class="filename">/glossary</code> após criar o projeto. <span class="application">OmegaT</span> detecta automaticamente os arquivos de glossário da pasta glossary quando o projeto é aberto. Os termos do segmento atual
+               que o <span class="application">OmegaT</span> encontrar no(s) arquivo(s) de glossário são exibidos no painel Glossário:
+            </p><a class="indexterm" name="d0e8072"></a><div class="figure"><a name="d0e8075"></a><p class="title"><b>Figure&nbsp;18.1.&nbsp;Painel Glossário</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/GlossaryPane_25.png" alt="Painel Glossário"></div>
+               </div>
+            </div><br class="figure-break"><p>A palavra antes do sinal =, é o termo de origem, e a tradução é a palavra após o sinal =. Pode ser adicionado um comentário
+               ao termo do glossário. A função do glossário é encontrar apenas correspondências exatas com os termos do glossário (por exemplo,
+               não encontra formas flexionadas, etc.) Novos termos podem ser adicionados manualmente no(s) arquivo(s) de glossário durante
+               a tradução, por exemplo, com um editor de texto. Termos recém-adicionados não serão reconhecidos até que as alterações no
+               arquivo de texto sejam salvas. 
+            </p>
+            <p>O termo de origem não precisa ser uma única palavra, assim como mostra o exemplo a seguir:</p>
+            <div class="figure"><a name="d0e8087"></a><p class="title"><b>Figure&nbsp;18.2.&nbsp;entrada de múltiplas palavras no glossário - exemplo<a class="indexterm" name="d0e8090"></a></b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="entrada de múltiplas palavras no glossário - exemplo"></div>
+               </div>
+            </div><br class="figure-break"><p>O item sublinhado no "menu pop-up" pode ser encontrado no painel Glossário como "pojavni menu". Selecione o termo no painel
+               Glossário e clique com o botão direito do mouse para inseri-lo na posição do cursor no segmento destino.<a href="#ftn.d0e8104" class="footnote" name="d0e8104"><sup class="footnote">[1]</sup></a></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8107"></a>2.&nbsp;<a class="indexterm" name="d0e8109"></a>Formato de arquivo<a class="indexterm" name="d0e8115"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Os arquivos de glossário são apenas arquivos de texto simples contendo três colunas delimitadas por tabulação, com os termos
+               fonte e destino na primeira e segunda coluna, respectivamente. A terceira coluna pode ser usada para informações extras. É
+               possível ter entradas sem a coluna do termo de destino, ou seja, contendo apenas o termo de origem e o comentário. 
+            </p>
+            <p>Os arquivos de glossário podem estar na codificação padrão do sistema (e indicados pela extensão .tab) ou no formato UTF-8
+               (a extensão .utf8). A codificação Unicode (UTF8) é preferida por razões óbvias. Também suporta o formato CSV. Esse formato
+               é o mesmo que o separado por tabulação: termo de origem, termo de destino.  Os campos de comentário são separados por vírgula
+               ','. As sequências são colocadas entre aspas ", o que permite o uso da vírgula na sequência:
+            </p>
+            <p><code class="literal">"Este é um termo de origem, que contém uma vírgula","c'est un terme, qui contient une virgule"</code></p>
+            <p>Além do formato de texto simples, o formato TBX <a class="indexterm" name="d0e8131"></a> também é suportado. TBX - Term Base eXchange, ou base de termos intercambiável - é o padrão aberto, baseado em XML para intercâmbio
+               de dados terminológicos estruturados, aprovado como padrão internacional pela ISO e LISA. Se você já tiver um sistema de tratamento
+               de terminologia - o MultiTerm, por exemplo - é bem possível que ele ofereça a exportação de dados terminológicos via formato
+               TBX. <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">A coleção de terminologia da Microsoft</a> <a class="indexterm" name="d0e8140"></a> pode ser baixada em quase 100 idiomas e serve como base para um glossário de TI.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8146"></a>3.&nbsp;Como criar glossários<a class="indexterm" name="d0e8149"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>A configuração do projeto permite a entrada de um nome para um arquivo de glossário editável (ver o início deste capítulo).
+               Clique com o botão direito do mouse no painel Glossário ou pressione <span class="keycap"><strong>Ctrl+Shift+G</strong></span> para adicionar um novo termo. Uma caixa de diálogo é aberta e permite a entrada do termo de origem, destino e qualquer comentário
+               necessário:
+            </p>
+            <div class="mediaobject"><img src="images/GlossaryEntry_25.png"></div>
+            <p>Os conteúdos dos arquivos de glossário são mantidos na memória e carregados quando o projeto é aberto ou recarregado. É bastante
+               simples atualizar um arquivo de glossário: pressione <span class="keycap"><strong>Ctrl+Shift+G</strong></span> e insira um novo termo, sua tradução e algum comentário (tenha certeza de que pressionou tab entre os campos) e salve o arquivo.
+               Os conteúdos do painel Glossário serão atualizados conforme forem inseridos.
+            </p>
+            <p><a class="indexterm" name="d0e8170"></a>O local do arquivo de glossário editável pode ser configurada na caixa de diálogo em <span class="guimenuitem">Projeto &gt; Propriedades … </span>. As extensões reconhecidas são <code class="filename">TXT</code> e <code class="filename">UTF8</code></p>
+            <p><span class="bold"><strong>Nota: </strong></span>Com certeza há outros caminhos e formas para criar um arquivo simples com entradas delimitadas por tabulações. Não há problema
+               em usar o Notepad++ no Windows, GEdit no Linux, por exemplo, ou algum programa de planilha para essa finalidade: qualquer
+               aplicativo que lide com UTF8 e que possa mostrar espaço em branco (para que você não perca os caracteres <span class="keycap"><strong>TAB</strong></span> requeridos) pode ser usado.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8191"></a>4.&nbsp;<a class="indexterm" name="d0e8193"></a>Usando Trados MultiTerm
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Os dados exportados do Trados MultiTerm podem ser usados como glossários no <span class="application">OmegaT</span> sem qualquer modificação, desde que tenham a extensão de arquivo <code class="filename">.tab</code> e os campos do termo de origem e de destino sejam os dois primeiros campos respectivamente. Se você exportar utilizando a
+               opção "Tab-delimited export", terá que apagar as 5 primeiras colunas (Seq. Nr, data de criação etc). As versões mais recentes
+               do MultiTerm suportam exportar para o formato TBX.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8207"></a>5.&nbsp;<a class="indexterm" name="d0e8209"></a>Problemas comuns com glossários
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="bold"><strong>Problema: Nenhum termo do glossário é exibido - possíveis causas:</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Nenhum arquivo de glossário foi encontrado na pasta "glossary".</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>O arquivo de glossário está vazio.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Os itens não estão separados por um caractere TAB.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>O arquivo de glossário não tem a extensão correta (.tab ou .utf8).</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Não há correspondência EXATA entre a entrada do glossário e o texto de origem no documento - por exemplo, plurais.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>O arquivo de glossário não tem a codificação correta.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>No segmento atual não há termos que correspondam com algum termo no glossário.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Um ou mais dos problemas acima podem ter sido corrigidos, mas o projeto não foi recarregado.</p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Problema: No painel Glossário, alguns caracteres não estão exibidos corretamente</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>…mas os mesmos caracteres estão devidamente exibidos no painel Editor: a extensão e a codificação do arquivo não correspondem.</p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
+            <div id="ftn.d0e8104" class="footnote">
+               <p><a href="#d0e8104" class="para"><sup class="para">[1] </sup></a>Observe que no caso acima isso é apenas metade (ou até menos) do processo, uma vez que a língua alvo (Esloveno) utiliza a
+                  declinação. Assim, o "pojavni meni" inserido na forma nominativa, deve ser alterado para "pojavnem meniju" , isto é, para
+                  o locativo. Provavelmente é mais rápido já digitar o termo de forma correta sem se preocupar com o glossário e seus atalhos.
+                  
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.dictionaries.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;17.&nbsp;Dicionários&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;19.&nbsp;Tradução automática</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

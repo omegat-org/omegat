@@ -1,0 +1,273 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;12.&nbsp;Trabalhar com texto formatado</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Manual do Usuário">
+      <link rel="up" href="index.html" title="OmegaT - Manual do Usuário">
+      <link rel="prev" href="chapter.plain.text.html" title="Chapter&nbsp;11.&nbsp;Trabalhar com texto simples">
+      <link rel="next" href="chapter.translation.memories.html" title="Chapter&nbsp;13.&nbsp;Memórias de tradução">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;12.&nbsp;Trabalhar com texto formatado</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.plain.text.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;Trabalhar com texto formatado<a class="indexterm" name="d0e6090"></a><a class="indexterm" name="d0e6095"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.formatted.text.html#formatting.tags">1. Tags de formatação</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Trabalhar com tags</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Aninhamento de grupos de tags</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. Sobreposição de grupos de tags</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6242">5. Opções para verificação de tag</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">6. Verificação de grupos de tags</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">7. Dicas para controle de tags</a></span></dt>
+            </dl>
+         </div>
+         <p>As informações de formatação presentes no arquivo fonte geralmente precisam ser reproduzidas no arquivo traduzido. O OmegaT
+            mostra informações de formatação in-line dos formatos que suporta (no momento DocBook, HTML, XHTML, Open Document Format(ODF)
+            e Office Open XML (MS Office 2007 e posteriores)) como tags. As tags geralmente não são consideradas na comparação entre textos
+            diferentes para fins de correspondência. As tags reproduzidas no segmento traduzido estarão presentes no documento traduzido.
+         </p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Tags de formatação<a class="indexterm" name="d0e6105"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><a class="indexterm" name="d0e6109"></a><span class="bold"><strong>Nomenclatura das tags:</strong></span></p>
+            <p>As tags são formadas de um a três caracteres e um número. Um número exclusivo permite agrupar aquelas tags que se correspondem
+               e diferenciar as tags que possam ter o mesmo caractere de atalho, mas na verdade são diferentes. Os caracteres de atalho podem
+               ou não refletir o valor da formatação que a tag representa (por exemplo, negrito, itálico, etc.)
+            </p>
+            <p><a class="indexterm" name="d0e6119"></a><span class="bold"><strong>Numeração das tags:</strong></span></p>
+            <p>As tags são numeradas de forma sequencial e crescente por grupo de tags. "Grupos de tags" neste contexto são uma única tag
+               (como &lt;i0&gt; e &lt;/i0&gt;). Dentro de um segmento, o primeiro grupo (par ou único) recebe o número 0, o segundo o número 1, etc.
+               O primeiro exemplo abaixo tem 3 grupos de tags (um par, um único e depois, um outro par), o segundo exemplo tem apenas um
+               grupo (um par).
+            </p>
+            <p><a class="indexterm" name="d0e6129"></a><span class="bold"><strong>Pares e únicas:</strong></span></p>
+            <p>As tags sempre aparecem como únicas ou em pares. Tags únicas indicam informações de formatação que não interferem no texto
+               (espaço extra ou quebra de linha, por exemplo).
+            </p>
+            <p><code class="literal">&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;segmento 2132&gt;</code></p>
+            <p>&lt;br1&gt; é uma tag única e não interfere no texto. Tags em pares geralmente indicam informações de estilo que se aplicam ao texto
+               entre a tag de início e a tag de fim de um par. &lt;b0&gt; e &lt;/b0&gt; estão em par e influenciam o texto log.txt. Observe que a tag
+               de início deve sempre vir antes da tag de fim correspondente:
+            </p>
+            <p>&lt;<code class="literal">Arquivos de registro (&lt;b0&gt;log.txt&lt;/b0&gt;) para acompanhar as operações e erros.&lt;segmento 3167&gt;</code></p>
+            <p>O <span class="application">OmegaT</span> cria suas tags antes do processo de segmentação de sentença. Dependendo das regras de segmentação, o par de tags pode ficar
+               separado em dois segmentos consecutivos e a validação de tags, por cautela, marcará os dois segmentos.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Trabalhar com tags<a class="indexterm" name="d0e6155"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Deve-se prestar muita atenção ao trabalhar com tags. Se elas forem modificadas por engano, a formatação final do arquivo pode
+               ficar corrompida. Como regra básica, a sequência das tags deve ser preservada na mesma ordem. No entanto, se as regras determinadas
+               forem estritamente seguidas é possível desviá-las dessa regra básica.
+            </p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6164"></a>Duplicação da tag:</strong></span></p>
+            <p>Para duplicar grupos de tag, basta copiá-los na nova posição desejada. Lembre-se de que em um grupo de pares a tag de início
+               deve vir antes da tag de fim. A formatação representada pelo grupo que você duplicou será aplicada em ambas as seções .
+            </p>
+            <p>Exemplo:</p>
+            <p><code class="literal">&lt;b0&gt;Esta formatação&lt;/b0&gt; será duplicada aqui.&lt;segmento 0001&gt;</code></p>
+            <p>Após a duplicação:</p>
+            <p><code class="literal">&lt;b0&gt;Esta formatação&lt;/b0&gt; foi &lt;b0&gt;duplicada aqui&lt;/b0&gt;.&lt;segmento 0001&gt;</code></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6184"></a>Exclusão de grupo de tag:</strong></span></p>
+            <p>Para excluir grupos de tags, basta apagá-los do segmento. Lembre-se de que um grupo de pares deve ter sua tag de início bem
+               como de fim excluídas para garantir que todos os vestígios de formatação foram apagados; caso contrário, o arquivo traduzido
+               pode ficar corrompido. Ao apagar um grupo de tags você exclui toda a formatação a elas relacionada de um arquivo traduzido.
+            </p>
+            <p>Exemplo:</p>
+            <p><code class="literal">&lt;b0&gt;Esta formatação&lt;/b0&gt; será excluída.&lt;segmento 0001&gt;</code></p>
+            <p>Após a exclusão:</p>
+            <p><code class="literal">Esta formatação será excluída.&lt;segmento 0001&gt;</code></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Aninhamento de grupos de tags<a class="indexterm" name="d0e6205"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Modificar a sequência de um grupo de tags pode resultar no aninhamento deste grupo em um outro grupo de tags. Isso é aceitável,
+               desde que o grupo delimitador inclua totalmente o grupo delimitado. Em outras palavras, ao mover as tags em par assegure-se
+               de que as tags de início e de fim estão dentro ou fora de outros pares de tag; caso contrário, o arquivo traduzido pode ficar
+               corrompido e não abrir.
+            </p>
+            <p>Exemplo:</p>
+            <p><code class="literal">&lt;b0&gt;Formatação&lt;/b0&gt; &lt;b1&gt;um&lt;/b1&gt; será aninhada na formatação zero.&lt;segmento 0001&gt;</code></p>
+            <p>Após o aninhamento:</p>
+            <p><code class="literal">&lt;b0&gt;Formatação &lt;b1&gt;um&lt;/b1&gt;&lt;/b0&gt; foi aninhada na formatação zero.&lt;segmento 0001&gt;</code></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Sobreposição de grupos de tags<a class="indexterm" name="d0e6225"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>A sobreposição é o resultado da manipulação incorreta de pares de tags e certamente resultará em problemas de formatação e
+               o arquivo traduzido pode não abrir.
+            </p>
+            <p>Exemplo:</p>
+            <p><code class="literal">&lt;b0&gt;Formatação&lt;/b0&gt; &lt;b1&gt;um&lt;/b1&gt; será desordenada.&lt;segmento 0001&gt;</code></p>
+            <p>Após a manipulação incorreta:</p>
+            <p><code class="literal">&lt;b0&gt;Formatação &lt;b1&gt;um&lt;/b0&gt; &lt;/b1&gt;está extremamente desordenada.&lt;segmento 0001</code></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e6242"></a>5.&nbsp;Opções para verificação de tag
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Para personalizar o trabalho com as tags, algumas regras podem ser definidas no menu <span class="guimenuitem">Opções &gt; Verificação de tags…</span> :
+            </p>
+            <div class="mediaobject"><img src="images/OptionsTagValidation_25.png"></div>
+            <p>O procedimento mencionado aplica-se a todos os arquivos fonte e não somente a alguns tipos de arquivos como os textos formatados.</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Variáveis printf  - não verificar, verificar as simples, verificar todas</strong></span></p>
+                     <p>OmegaT pode verificar as variáveis de programação (como %s, por exemplo) nos segmentos fonte na tradução. Você pode escolher:
+                        não verificar todas, verificar variáveis printf simples (como %s %d etc) ou verificar as variáveis printf de todos os tipos.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Verificar padrões do formato de mensagem java simples</strong></span></p>
+                     <p>Ao ativar esta caixa de seleção, o OmegaT verificará se as tags do formato de mensagem java simples (como {0}) foram processadas
+                        corretamente.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Expressão regular para tag(s) personalizada(s)</strong></span></p>
+                     <p>Ao inserir uma expressão regular, o OmegaT tratará os casos detectados como tags de clientes . Ele verifica que o número de
+                        tags e sua ordem é idêntica, assim como é o caso para as tags do OmegaT.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Fragmento(s) que devem ser removidos da expressão regular da tradução.</strong></span></p>
+                     <p>Pode-se indicar uma expressão regular para conteúdos indesejados no segmento destino. As correspondências no segmento destino
+                        serão destacadas em vermelho para facilitar a identificação e correção. Ao procurar por correspondências parciais a remoção
+                        padrão é ignorada. Uma penalidade fixada em 5 é adicionada se a parte removida não corresponder a algum outro segmento, assim
+                        a correspondência não aparece como 100%
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;Verificação de grupos de tags<a class="indexterm" name="d0e6286"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>A função de verificação de tags detecta modificações nas sequências de tags (deliberadamente ou por engano) e indica os segmentos
+               afetados. Ao iniciar esta função – <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e6295"></a></span> - uma janela é aberta com todos os segmentos de um arquivo onde há tags incorretas ou danificadas na tradução. É fácil consertar
+               as tags e recriar os documentos traduzidos com a função verificar tags. A janela que abre com o comando <span class="guimenuitem">Ctrl+T</span> tem a forma de uma tabela de 3 colunas com um link para o segmento, segmento original e segmento destino
+            </p>
+            <div class="figure"><a name="tag.validation"></a><p class="title"><b>Figure&nbsp;12.1.&nbsp;Criar verificação de tag</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/TagValidation.png" alt="Criar verificação de tag"></div>
+               </div>
+            </div><br class="figure-break"><p>As tags estão destacadas em azul e negrito para facilitar a comparação entre o original e o conteúdo traduzido. Clique no
+               link para abrir o segmento no Editor. Se necessário, corrija o erro (no caso acima é o &lt;i2&gt;&lt;/i2&gt; par ausente) e pressione
+               <span class="guimenuitem">Ctrl+T</span> para retornar a janela de verificação de tag para corrigir outros erros. Os erros de tag são sequências de tag na tradução
+               que não são reproduzidas na mesma ordem e número de tags como no segmento original.  Algumas manipulações de tags são necessárias
+               e não causam erros; outras causarão problemas quando for criado o documento traduzido.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;Dicas para controle de tags<a class="indexterm" name="d0e6320"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="bold"><strong>Simplifique o texto original</strong></span></p>
+            <p>As tags geralmente representam alguma forma de formatação no texto original. Simplificar a formatação original reduz bastante
+               a quantidade de tags. Se possível, deve-se procurar unificar as fontes usadas, os tamanhos e cores, etc., para simplificar
+               a tradução e reduzir a possibilidade de criar erros de tags. Leia a seção trabalhar com tags para saber o que pode ser feito
+               com tags. Lembre-se de que se as tags dificultarem seu trabalho no OmegaT e a formatação não for extremamente importante à
+               tradução, remover as tags evitará problemas.
+            </p>
+            <p><span class="bold"><strong>Preste atenção redobrada aos pares de tag</strong></span></p>
+            <p>Se precisar ver as tags no OmegaT, mas não precisar reter a maior parte do formato no documento traduzido, você pode optar
+               por não acrescentar as tags na tradução. Neste caso preste atenção aos pares de tag, pois se apagar uma parte do par e esquecer
+               de apagar a outra, a formatação do documento ficará corrompida. Já que há tags inseridas no próprio texto, é possível usar
+               as regras de segmentação para criar segmentos com menos tags. Esta é uma função avançada e requer alguma experiência para
+               que seja corretamente executada.
+            </p>
+            <p>O OmegaT ainda não faz a detecção total e automática de erros na formatação; portanto, não o alertará se você cometer erros
+               ou mudar a formatação para melhor adaptá-la à língua destino. Algumas vezes, porém, o arquivo traduzido pode parecer distorcido
+               e, na pior das hipóteses, pode até não abrir. 
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.plain.text.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;11.&nbsp;Trabalhar com texto simples&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;13.&nbsp;Memórias de tradução</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

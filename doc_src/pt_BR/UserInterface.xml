@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.user.interface">
+  <title>A interface do usuário</title>
+
+  <section id="user.interface.items">
+    <title>Janela principal do OmegaT, outras janelas e caixas de diálogo</title>
+
+    <para>A janela principal do OmegaT contém o menu principal, a barra de status e vários painéis. Janelas adicionais estão disponíveis, bem como diálogos usados ​​para alterar as configurações do projeto no OmegaT. As informações a seguir resumem os seus usos e como são invocados:</para>
+
+    <table colsep="0" rowsep="0">
+      <title>Janela principal do OmegaT<indexterm class="singular">
+          <primary>Interface do usuário</primary> <secondary>Janela principal do OmegaT</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Main OMegaT window">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Painel Editor</guimenuitem></entry>
+
+            <entry>onde você digita e revisa a tradução</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Painel Correspondências</guimenuitem></entry>
+
+            <entry>exibe os segmentos mais similares das memórias de tradução</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Painel Glossário</guimenuitem></entry>
+
+            <entry>exibe a terminologia encontrada para os itens do segmento atual</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Painel Dicionário</guimenuitem></entry>
+
+            <entry>exibe hits encontrados no dicionário para os itens do segmento atual</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Painel de Traduções Automáticas</guimenuitem></entry>
+
+            <entry>exibe a tradução oferecida pelos serviços de TA</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Painel Notas</guimenuitem></entry>
+
+            <entry>observações referentes ao segmento atual, p.ex., traduções alternativas ou a chave atual no caso de chave = formatos de valor de arquivo</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Painel Comentários</guimenuitem></entry>
+
+            <entry>comentários do autor em arquivos PO, ou o nome do atributo que está sendo traduzido (em XHTML)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table colsep="0" rowsep="0">
+      <title>Outras janelas<indexterm class="singular">
+          <primary>Interface do usuário</primary> <secondary>Outras janelas</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Other windows">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Atalhos</primary> <secondary>Verificação de tag - Ctrl+T</secondary>
+              </indexterm>Janela Verificação de Tags</guimenuitem></entry>
+
+            <entry><para>Usada para validar tags (abra com <keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo>, feche com <keycap>Esc</keycap>)</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Atalhos</primary> <secondary>Ajuda - F1</secondary>
+              </indexterm>Navegador da Ajuda</guimenuitem></entry>
+
+            <entry><para>Usado para exibir o manual do usuário (abra com <keycap>F1</keycap>, feche com <keycap>Esc)</keycap></para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Janela Estatísticas</guimenuitem></entry>
+
+            <entry><para>Usada para abrir a janela com as estatísticas do projeto; para exibi-la, use <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>Menu Ferramentas</primary> <secondary>Estatísticas</secondary>
+                  </indexterm>Ferramentas</guimenu> <guimenuitem>Estatísticas.</guimenuitem> </menuchoice></para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Janela Estatísticas das correspondências</guimenuitem></entry>
+
+            <entry><para>Usada para exibir as estatísticas de correspondências do projeto; selecione <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>Menu Ferramentas</primary> <secondary>Estatísticas das correspondências</secondary>
+                  </indexterm>Ferramentas</guimenu> <guimenuitem>Estatísticas das correspondências</guimenuitem> </menuchoice> para abri-la.</para></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table border="0" colsep="0" rowsep="0">
+      <title>Diálogos Configurações<indexterm class="singular">
+          <primary>Interface do usuário</primary> <secondary>Diálogos Configurações</secondary> <seealso>Configurações do Projeto</seealso>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Settings dialogs">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Propriedades do projeto<indexterm class="singular">
+                <primary>Menu Projeto</primary> <secondary>Propriedades</secondary>
+              </indexterm></guimenuitem> <indexterm class="singular">
+                <primary>Atalhos</primary> <secondary>Propriedades de projeto - Ctrl+E</secondary>
+              </indexterm></entry>
+
+            <entry>Usado para modificar as pastas do projeto e idiomas (acesse via atalho <guimenuitem>Ctrl+E </guimenuitem> ou <menuchoice> <guimenu>Projeto</guimenu> <guimenuitem>propriedades…</guimenuitem> </menuchoice>, feche via <keycap>Esc)</keycap></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Fonte<indexterm class="singular">
+                <primary>Configurações do Projeto</primary> <secondary>Fonte</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry><para>Usado para modificar a fonte usada pelo <application>OmegaT</application> para exibir a origem, tradução, correspondências e termos do glossário, (acesse via <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Fonte…</guimenuitem> </menuchoice>, feche via <keycap>Esc</keycap>)</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Filtros de arquivo<indexterm class="singular">
+                <primary>Configurações do Projeto</primary> <secondary>Filtros de arquivo</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Menu Opções</primary> <secondary>Filtros de arquivo</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Usado para ajustar o manuseio dos formatos de arquivos suportados (acesse via <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Filtros de arquivo…</guimenuitem> </menuchoice>, feche via <keycap>Esc</keycap>)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Segmentação<indexterm class="singular">
+                <primary>Configurações do Projeto</primary> <secondary>Segmentação</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Menu Opções</primary> <secondary>Segmentação</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Usado para mudar o modo como o texto é segmentado em sentenças (acesse via <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Segmentação</guimenuitem> </menuchoice>, feche via <keycap>Esc</keycap>)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Comportamento de edição<indexterm class="singular">
+                <primary>Menu Opções</primary> <secondary>Comportamento de Edição</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Configurações do Projeto</primary> <secondary>Comportamento de Edição</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Usado para alterar a maneira como o <application>OmegaT</application> se comporta quando você itera entre os segmentos (acesse via <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Comportamento…</guimenuitem> </menuchoice>, feche via <keycap>Esc</keycap>)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="OmegaT.main.window">
+    <title><application>OmegaT</application> Janela principal<indexterm class="singular">
+        <primary>Janelas e painéis no OmegaT</primary> <secondary>Janela principal</secondary>
+      </indexterm></title>
+
+    <figure id="OmegaT.main.window.figure">
+      <title>Janela principal do OmegaT</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/OmegaT_panes_25.png" scale="100"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/OmegaT_panes_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>A janela principal é formada por diversos painéis, o menu principal e a barra de status. Você pode alterar a posição de qualquer painel, ou até mesmo desconectá-lo para uma janela separada, clicando e arrastando o painel pelo seu nome. Dependendo do status no painel, este pode exibir ícones diferentes no canto direito.</para>
+
+    <note>
+      <para>Se você não conseguir ver todos os painéis (abertos ou minimizados), pressione <guisubmenu> Opções &gt; Restaurar janela principal </guisubmenu> para restaurar seu estado, definido na instalação.</para>
+    </note>
+
+    <table>
+      <title>Painel de Widgets<indexterm class="singular">
+          <primary>Janelas e painéis no OmegaT</primary> <secondary>Painel de widgets</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Minimize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Minimize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>minimiza o painel, para que somente seu nome seja mostrado na parte inferior da janela</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Maximize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Maximize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>maximiza o painel</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/restore.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/restore.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>restaura o layout antes da etapa de maximização</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/undock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/undock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>desencaixa o painel da janela principal</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/dock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/dock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>recoloca o painel dentro da janela principal</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>Você pode sobrepor painéis se desejar. Quando isso é feito, os painéis exibem uma guia na parte superior. Para redimensionar os painéis, basta arrastar os separadores que ficam entre eles. Caso você esqueça suas alterações à interface de usuário, é possível clicar em<guimenuitem><indexterm class="singular">
+        <primary>Janelas do OmegaT</primary> <seealso>Janelas e painéis no OmegaT</seealso>
+      </indexterm> <indexterm class="singular">
+        <primary>Janelas do OmegaT</primary> <secondary>Restaurar para configuração de fábrica</secondary>
+      </indexterm>Opções → Restaurar a janela principal</guimenuitem> a qualquer momento para retornar ao layout original.</para>
+
+    <para>Os contadores no canto inferior direito acompanham o andamento da tradução (números na coluna da esquerda referem-se a figura acima):</para>
+
+    <table>
+      <title>Janela Principal - contadores<indexterm class="singular">
+          <primary>Janelas e painéis no OmegaT</primary> <secondary>Contadores</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>27/27</entry>
+
+            <entry>número de segmentos - total vs traduzidos para o arquivo atual</entry>
+          </row>
+
+          <row>
+            <entry>9319/16338</entry>
+
+            <entry>número de segmentos únicos - total vs traduzidos no projeto</entry>
+          </row>
+
+          <row>
+            <entry>31175</entry>
+
+            <entry>número total de segmentos (incluindo repetições) no projeto</entry>
+          </row>
+
+          <row>
+            <entry>103/114</entry>
+
+            <entry>número de caracteres fonte e alvo no segmento atual</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>De um ponto de vista prático, o par de números mais importante é o segundo: ele diz quanto você já traduziu até agora em relação ao total, ou o segundo número. O projeto no exemplo está evidentemente terminado, pois todos os segmentos únicos foram traduzidos.</para>
+
+    <section id="editor.pane">
+      <title>Painel Editor<indexterm class="singular">
+          <primary>Janelas e painéis no OmegaT</primary> <secondary>Painel Editor</secondary>
+        </indexterm></title>
+
+      <para>É onde você digita e edita sua tradução. O painel Editor exibe o texto do documento parcialmente traduzido: o texto já traduzido é exibido na tradução, enquanto o texto não traduzido é exibido no idioma original. O texto exibido é dividido em segmentos e você pode percorrer o documento e dar um duplo clique em qualquer segmento para abrir e editar. No caso acima, os segmentos já traduzidos são mostrados em amarelo.</para>
+
+      <para>Um dos segmentos acima é o segmento atual. É o segmento que é exibido em duas partes. A parte superior é a língua de origem, em negrito, em negrito e com uma cor de fundo verde, a parte inferior é o campo de edição, terminado por um marcador: <indexterm class="singular">
+          <primary>Marcador de segmento</primary>
+        </indexterm>o marcador é <literal>&lt;segmento nnnn&gt;</literal> onde nnnn é um número do segmento no projeto. Use a parte superior como referência e substitua ou modique o conteúdo do campo de edição com seu tradutor.</para>
+
+      <para>Dependendo do comportamento de edição preferido, o campo de edição para o segmento não traduzido podem estar vazio, conter o texto fonte ou conter a tradução da cadeia mais semelhante àquela a ser traduzida. Ao passar para um outro segmento, a tradução é validada e salva. Se você quiser que a tradução seja igual à fonte, é só deixar o campo de edição vazio removendo todo o texto (selecione tudo com <keycap>Ctrl+A</keycap> e exclua com <keycap>Del</keycap>). OmegaT é capaz de armazenar traduções que são idênticas à fonte. Isto é útil para textos que contêm marcas registradas, nomes ou outros substantivos próprios, ou partes em um terceiro idioma que não necessitam de tradução. Veja <emphasis>Edição de tradução</emphasis> para obter mais detalhes.</para>
+
+      <para>Se você clicar com a direita no painel Editor, um menu pop-up aparece oferecendo<emphasis role="bold"> Cortar, Copiar, Colar</emphasis> (as mesmas funções em <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> e <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>) e as funções <emphasis role="bold">Ir para segmento</emphasis>.</para>
+    </section>
+
+    <section id="match.viewer">
+      <title>Painel de correspondências parciais<indexterm class="singular">
+          <primary>Janelas e painéis no OmegaT</primary> <secondary>Painel de correspondências parciais</secondary>
+        </indexterm></title>
+
+      <para><figure id="matches.pane">
+          <title><indexterm class="singular">
+              <primary>Corrêspondências</primary> <secondary>Painel correspondências - figura</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Janelas e painéis no OmegaT</primary> <secondary>Painel correspondências - figura</secondary>
+            </indexterm>Painel correspondências</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchesPane_25.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPane_25.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>O visualizador de correspondências mostra os segmentos mais similares da memórias de tradução, tanto da memória de tradução interna do projeto criada em tempo real enquanto você traduz o seu projeto, e das memórias de tradução auxiliares importadas de seus trabalhos anteriores, ou recebidas de seu cliente ou agência de tradução.</para>
+
+      <para>Ao passar para o próximo segmento, a primeira correspondência parcial (a que tiver maior porcentagem de semelhança) é selecionada automaticamente. É possível selecionar outra correspondência pressionando <guimenuitem>Ctrl+2, 3, 4, ou 5</guimenuitem>.<indexterm>
+          <primary>Atalhos</primary> <secondary>Selecionando correspondência - Ctrl+N</secondary>
+        </indexterm> É claro, pressionar <keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo> não terá nenhum efeito, se não houver uma correspondência nº5. Para usar na sua tradução a correspondência selecionada, pressione <guimenuitem>Ctrl+R</guimenuitem><indexterm class="singular">
+          <primary>Atalhos</primary> <secondary>Substituir texto - Ctrl+R</secondary>
+        </indexterm> para substituir o campo destino com a correspondência, ou  pressione <guimenuitem>Ctrl+I<indexterm class="singular">
+          <primary>Atalhos</primary> <secondary>Inserir texto - Ctrl+I</secondary>
+        </indexterm></guimenuitem> para inseri-la na posição onde está o cursor.</para>
+
+      <para>A percentagem de correspondência é aproximadamente equivalente a o número de palavras comuns nos segmentos correspondentes, dividindo-se o número de palavras do mais longo dos dois. A correspondência parcial selecionada é destacada em negrito, as palavras que estão faltando no segmento que você está traduzindo são de cor azul e palavras adjacentes às que faltam em verdes. No exemplo acima, o segmento fonte é <emphasis role="bold">Context menu command</emphasis>. A melhor correspondência é 100%, porque todas as palavras coincidem. Também são as próximas duas correspondências, e a correspondência #4 é semelhante, mas diferente. A linha com a porcentagem correspondente também inclui o nome da memória de tradução <indexterm class="singular">
+          <primary>Memórias de tradução</primary> <secondary>Correspondências</secondary>
+        </indexterm> contendo a correspondência. Se não houver nome de arquivo exibido, a fonte é a memória de tradução interna do projeto. Os segmentos órfãos<indexterm class="singular">
+          <primary>Memórias de tradução</primary> <secondary>Segmentos orfãos</secondary>
+        </indexterm> (a correspondência #2) descrevem segmentos na memória de tradução padrão do projeto que não têm nenhum segmento fonte correspondente.</para>
+
+      <para>Na verdade, existem três estimativas de correspondência disponíveis (66/66/30, no caso da correspondência #4 acima). Eles são definidas como se segue:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>corresponder porcentagem quando o plug-in toquenizador é usado</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>correspondência padrão do OmegaT - número de palavras correspondentes - com números e tags ignoradas - dividido pelo total da contagem de palavras</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>A correspondência do OmegaT, incluindo números, tags</para>
+        </listitem>
+      </itemizedlist>
+
+      <section>
+        <title>Customizando o Painel de correspondências parciais<indexterm class="singular">
+            <primary>Janelas e painéis no OmegaT</primary> <secondary>Painel de correspondências parciais</secondary> <tertiary>Customizar</tertiary>
+          </indexterm><indexterm class="singular">
+            <primary>Arquivos fonte</primary> <secondary>Traduzindo o texto fonte atualizado</secondary>
+          </indexterm></title>
+
+        <para>Em <guimenu>Opções &gt; TMXs externas</guimenu>, uma série de variáveis ​​permitem configurar a exibição do painel de correspondência:</para>
+
+        <figure id="matches.pane.setup">
+          <title><indexterm class="singular">
+              <primary>Correspondências</primary> <secondary>Configuração do painel de correspondências - figura</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Janelas e painéis no OmegaT</primary> <secondary>Configuração do painel de correspondências - figura</secondary>
+            </indexterm>Configuração do painel de correspondências</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="images/MatchesPaneSetup.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPaneSetup.png" width="50%"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>A figura acima mostra o modelo de exibição padrão de correspondências. Os conteúdos podem ser personalizados usando as seguintes variáveis:</para>
+
+        <table colsep="0" rowsep="0">
+          <title>Configuração do painel de correspondências<indexterm class="singular">
+              <primary>Interface do usuário</primary> <secondary>Configuração do painel de correspondências</secondary>
+            </indexterm></title>
+
+          <tgroup cols="2" colsep="1" rowsep="1" title="Match pane setup">
+            <colspec align="left" colnum="1"/>
+
+            <colspec align="left" colnum="2"/>
+
+            <tbody>
+              <row>
+                <entry><literal>${id}</literal></entry>
+
+                <entry>Número de correspondência de 1 a 5</entry>
+              </row>
+
+              <row>
+                <entry><literal>${sourceText}</literal></entry>
+
+                <entry>Texto fonte da correspondência</entry>
+              </row>
+
+              <row>
+                <entry><literal>${targetText}</literal></entry>
+
+                <entry>Texto alvo da correspondência</entry>
+              </row>
+
+              <row>
+                <entry><literal>${diff}</literal></entry>
+
+                <entry>String mostrando as diferenças entre a fonte e a correspondência.<emphasis> Dica:</emphasis> use se o texto que você estiver traduzindo tenha sido atualizado.</entry>
+              </row>
+
+              <row>
+                <entry><literal>${score}</literal></entry>
+
+                <entry>Porcentagem com tokenizer</entry>
+              </row>
+
+              <row>
+                <entry><literal>${noStemScore}</literal></entry>
+
+                <entry>Percentagem sem números e tags</entry>
+              </row>
+
+              <row>
+                <entry><literal>${adjustedScore}</literal></entry>
+
+                <entry>Porcentagem ajustada</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileNameOnly}</literal></entry>
+
+                <entry>Nome da TMX</entry>
+              </row>
+
+              <row>
+                <entry><literal>${filePath}</literal></entry>
+
+                <entry>Caminho completo da TMX</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileShortPath}</literal></entry>
+
+                <entry>Caminho da TMX a partir da raiz /tm</entry>
+              </row>
+
+              <row>
+                <entry><literal>${creationID}</literal></entry>
+
+                <entry>Autor da correspondência</entry>
+              </row>
+
+              <row>
+                <entry><literal>${creationDate}</literal></entry>
+
+                <entry>Data da correspondência</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fuzzyFlag}</literal></entry>
+
+                <entry>Indicam que esta correspondência é parcial (atualmente apenas para traduções de arquivos PO com a #marca de correspondência)</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
+    </section>
+
+    <section>
+      <title>Painel Glossário<indexterm class="singular">
+          <primary>Janelas e painéis no OmegaT</primary> <secondary>Painel de glossário</secondary>
+        </indexterm></title>
+
+      <para>O painel Glossário permite que você acesse a sua própria coleção de expressões e terminologia especializada que construiu em seus arquivos glossário. Ele mostra a tradução dos termos encontrados no segmento atual. O segmento fonte no exemplo abaixo era “<emphasis>Context menu command</emphasis>”, como no exemplo acima para Correspondências Parciais, e os termos mostrados eram encontrados nos glossários disponíveis (coleção da equipe da Microsoft e glossário do grupo esloveno de usuários Linux).</para>
+
+      <figure id="multiword.pane">
+        <title><indexterm class="singular">
+            <primary>Glossários</primary>
+          </indexterm>entrada multi-palavra no glossário</title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/GlossaryPane_25.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/GlossaryPane_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>Se você estiver com a opção TransTips ativada (<guimenuitem>Opções → TransTips</guimenuitem>), você pode clicar com o botão direito sobre a palavra destacada no segmento fonte para abrir um menu pop-up com a tradução sugerida, como aparece no seu glossário. Selecionando uma delas irá inseri-la na posição atual do cursor no segmento alvo. Você também pode destacar a sua alternativa preferida no painel glossário e inseri-la no alvo com o botão direito na seleção.</para>
+    </section>
+
+    <section id="dictionaries">
+      <title>Painel Dicionário<indexterm class="singular">
+          <primary>Janelas e painéis no OmegaT</primary> <secondary>Painel Dicionário</secondary>
+        </indexterm></title>
+
+      <para>Dicionários são os equivalentes eletrônicos de dicionários impressos como Merriam Webster, Duden, Larousse, etc., que você pode ter em sua mesa. Veja mais sobre eles no capítulo sobre <link linkend="chapter.dictionaries">Dicionários</link></para>
+    </section>
+
+    <section id="Multiple.Translations">
+      <title>Painel Traduções Múltiplas<indexterm class="singular">
+          <primary>Janelas e painéis no OmegaT</primary> <secondary>Painel de Traduções múltiplas</secondary>
+        </indexterm></title>
+
+      <para>Um determinado segmento fonte pode exigir várias traduções diferentes, dependendo do contexto. Se a tradução atual do segmento não se encaixa, o usuário pode selecionar  <guisubmenu>Editar → Criar tradução alternativa</guisubmenu>. O texto alvo inserido depois será tratado como uma tradução alternativa do segmento fonte. Você pode definir uma das alternativas - por exemplo, a mais provável entre elas - como a tradução padrão, selecionando <guisubmenu>Editar → Usar como tradução padrão</guisubmenu></para>
+    </section>
+
+    <section>
+      <title>Painel Notas</title>
+
+      <para>O tradutor pode adicionar notas para o segmento aberto, por exemplo, para voltar mais tarde para o segmento e refazer a tradução, verificar se as traduções alternativas estão corretas ou pedir aos colegas uma opinião. Você pode navegar através das notas usando  <guisubmenu>Ir para → Próxima observação</guisubmenu> e <guisubmenu>Ir para → Observação anterior</guisubmenu>.</para>
+    </section>
+
+    <section>
+      <title>Painel Comentários</title>
+
+      <para>Alguns dos formatos de arquivo especializados para o trabalho de tradução, como o PO, permitem a inserção de comentários. Desta forma, o tradutor pode descobrir o contexto do segmento a ser traduzido. No exemplo abaixo, o autor do arquivo PO incluiu um aviso para o tradutor verificar o comprimento da tradução:</para>
+
+      <figure id="comments.pane">
+        <title>Painel Comentários<indexterm class="singular">
+            <primary>Comentários</primary> <secondary>Painel Comentários</secondary>
+          </indexterm></title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/Comments_25.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/Comments_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
+
+    <section id="Google.Translate">
+      <title>Painel de Tradução Automática<indexterm class="singular">
+          <primary>Janelas e painéis no OmegaT</primary> <secondary>Painel de Tradução automática</secondary>
+        </indexterm></title>
+
+      <para>O painel de tradução automática, quando aberto, contém as sugestões de ferramentas de tradução automática para o segmento atual. Pressione <keysym>Ctrl+M</keysym> para substituir a tradução do segmento atual com a tradução sugerida. Mais no capítulo <link linkend="chapter.machine.translate">Tradução automática</link></para>
+    </section>
+
+    <section>
+      <title id="main.menu">Menu principal</title>
+
+      <para>O menu principal dá acesso a todas as funções do <application>OmegaT</application>. Veja o apêndice<emphasis> Menu Principal</emphasis> para obter uma descrição completa de todos os menus e itens de menu. As funções mais utilizadas são acessíveis com atalhos de teclado, então quando você se acostumar com eles, não terá mais necessidade de navegar através dos menus durante a tradução. Consulte o capítulo <link linkend="chapter.menu">Menu e atalhos do teclado</link> para detalhes.</para>
+    </section>
+
+    <section id="status.bar">
+      <title>Barra de status</title>
+
+      <para>A barra de status na parte inferior da janela principal exibe mensagens relacionadas com o fluxo de trabalho. Esta barra dá o feedback ao usuário sobre as operações específicas que estão em andamento. Ela também mostra o número de correspondências parciais da memória e do glossário para o segmento atual.</para>
+    </section>
+  </section>
+
+  <section id="other.windows">
+    <title>Outras janelas</title>
+
+    <section id="section.project.files">
+      <title>Arquivos do projeto<indexterm class="singular">
+          <primary>Janelas e painéis no OmegaT</primary> <secondary>Arquivos do projeto</secondary>
+        </indexterm></title>
+
+      <para>A janela Arquivos do projeto lista os arquivos do projeto e exibe outras informações sobre o projeto. Ela é exibida automaticamente quando o OmegaT carrega um projeto. Use <guimenuitem>Ctrl+L<indexterm class="singular">
+          <primary>Atalhos</primary> <secondary>Lista de arquivos do projeto - Ctrl+L</secondary>
+        </indexterm></guimenuitem> para abrir e <keycap>Esc</keycap> para fechar. A janela Arquivos do projeto exibe as seguintes informações:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>a lista de todos os arquivos de tradução no projeto. Estes são os arquivos presentes na pasta de arquivos fonte num formato que OmegaT é capaz de reconhecer. Clique em qualquer arquivo para abri-lo para tradução.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>o arquivo atualmente disponível no painel de editor é destacado com um fundo azul. Pressionar <keycap>Enter</keycap> irá mover o Painel Editor para o topo do arquivo selecionado</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>As entradas do arquivo incluem nome, tipos de filtro de arquivo, codificação e o número de segmentos que cada arquivo contém</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>o número total de segmentos, o número de segmentos únicos em todo o projeto e o número de segmentos únicos já traduzidos são mostrados na parte inferior</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>O conjunto de segmentos <emphasis role="bold">Únicos </emphasis> é calculado tomando-se todos os segmentos e removendo todas as duplicações. (A definição de “único” é sensível a maiúsculas: &quot;Executar&quot; e &quot;executar&quot; são tratados como diferentes)</para>
+
+      <para>A diferença entre &quot;Número de segmentos&quot; e &quot;Número de segmentos únicos&quot; fornece uma idéia aproximada do número de repetições no texto. Observe que, apesar dos números não indicarem quão relevantes as repetições são, eles podem significar sentenças relativamente longas repetidas várias vezes (por sorte) ou podem descrever uma tabela de palavras-chave (não tanta sorte). O <filename>project_stats.txt</filename> localizado na pasta omegat do seu projeto contém mais informações de segmento detalhadas, divididas por arquivo.</para>
+
+      <para>Modificando-se as regras de segmentação é possível obter o efeito de modificar o número de segmentos/segmentos únicos. Isso, no entanto, deve ser evitado, uma vez que você já começou a traduzir o projeto. Veja o capítulo <emphasis>Regras de segmentação</emphasis>  para mais informações.</para>
+
+      <para><emphasis role="bold"><indexterm class="singular">
+          <primary>Arquivos fonte</primary> <secondary>Adicionar arquivos ao projeto</secondary>
+        </indexterm>Adicionar arquivos ao projeto: </emphasis>Para adicionar arquivos fonte ao projeto, basta clicar no botão &quot;<guimenuitem>Importar arquivos fonte…&quot;</guimenuitem>. Isso copia os arquivos selecionados para a pasta <filename>source</filename> e recarrega o projeto para importar os novos arquivos. Para acrescentar arquivos fonte de páginas da Internet ao projeto, gravados no MediaWiki, basta clicar no botão <guimenuitem> &quot;Importar do MediaWiki&quot;</guimenuitem> e fornecer o URL correspondente.</para>
+    </section>
+
+    <section id="section.search.window">
+      <title>Janela Busca<indexterm class="singular">
+          <primary>Janelas e painéis no OmegaT</primary> <secondary>Painel Busca</secondary>
+        </indexterm></title>
+
+      <para>Você pode usar a janela de busca para encontrar segmentos específicos em um projeto. Também é possível ter várias janelas de busca abertas simultaneamente. Para abrir uma nova janela de busca, use <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> na janela principal. A janela de busca consiste em um campo de texto para cadeias de pesquisa ou palavras-chave, sinalizadores e botões de opção para configurar a busca e uma área de exibição que contém os resultados da busca. Veja o capítulo<emphasis> <link linkend="chapter.user.interface">Buscas</link> </emphasis>para obter mais informações sobre a janela de busca.</para>
+    </section>
+
+    <section id="section.tag.validation">
+      <title>Verificação de tags<indexterm class="singular">
+          <primary>Verificação de tags</primary> <seealso>Atalhos, Tags</seealso>
+        </indexterm><indexterm class="singular">
+          <primary>Janelas e painéis no OmegaT</primary> <secondary>Verificação de tags</secondary> <seealso>Tags</seealso>
+        </indexterm></title>
+
+      <para>A janela de verificação de tags detecta e lista todos os erros de tag e inconsistências na tradução. Abra a janela com <guimenuitem>Ctrl+T. </guimenuitem>A janela abre uma tabela de três colunas com um link para o segmento e seu conteúdo original e tradução:</para>
+
+      <para><figure id="tag.validator.window">
+          <title><indexterm class="singular">
+              <primary>Verificação de tags</primary> <secondary>Janela - figura</secondary> <seealso>Tags</seealso>
+            </indexterm>Janela Verificação de tags</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/TagValidator.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/TagValidator.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>As tags são destacadas em azul negrito para facilitar a comparação entre o original e o conteúdo traduzido. Clique no link para abrir o segmento no painel Editor. Corrija o erro, se necessário, e pressione <guimenuitem>Ctrl+T</guimenuitem> para retornar à janela de verificação de tag para corrigir outros erros. No primeiro e no terceiro caso acima as tags estão incorretamente emparelhadas, e, no segundo caso, o sinal &lt; está ausente da tag de partida.</para>
+
+      <para>Erros de tags são casos em que as marcas na tradução não correspondem em ordem e número ao segmento de origem. Alguns cenários de tag sinalizados na janela de verificação da tag são necessários e benignos, outros vão causar problemas quando o documento traduzido for criado. As tags geralmente representam algum tipo de formatação no texto original. Simplificar a formatação do texto original no arquivo fonte antes de se iniciar a tradução, reduz bastante a quantidade de tags.</para>
+    </section>
+
+    <section>
+      <title>Estatísticas<indexterm class="singular">
+          <primary>Estatísticas</primary> <seealso>Menu Ferramentas</seealso>
+        </indexterm></title>
+
+      <para>A janela de estatísticas, acessada via <emphasis role="bold">Ferramentas&gt;Estatísticas </emphasis>, mostra as estatísticas do projeto em Omegat atual, tanto no forma de sumário, bem como em detalhe para cada arquivo a ser traduzido. As estatísticas apresentadas estão disponíveis em um arquivo <filename>project_stats.txt</filename> separado por guias (subpasta <filename>omegat</filename>), pronto para ser carregado em um programa de planilha eletrônica, para a conveniência do usuário. Você pode usar <guimenuitem>Ctrl+A <indexterm class="singular">
+          <primary>Atalhos</primary> <secondary>Selecionar tudo - Ctrl+A</secondary>
+        </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
+          <primary>Atalhos</primary> <secondary>Copiar texto - Ctrl+C</secondary>
+        </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
+          <primary>Atalhos</primary> <secondary>Colar texto - Ctrl+V</secondary>
+        </indexterm></guimenuitem> para copiar/colar conteúdos.<figure id="ProjectStatistic.Window">
+          <title>estatísticas do projeto</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/StatisticsWindow_25.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/StatisticsWindow_25.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+    </section>
+
+    <section>
+      <title>Estatísticas das correspondências<indexterm class="singular">
+          <primary>Estatísticas das Correspondências</primary> <seealso>Menu Ferramentas</seealso>
+        </indexterm></title>
+
+      <para>As estatísticas das correspondências são acessadas via <guimenuitem>Ferramentas&gt;Estatísticas das Correspondências.</guimenuitem> A avaliação é pesada para a CPU e pode ser demorada, por isso uma barra de progresso é mostrada durante o cálculo. Na medida em que as categorias são analisadas, os seguintes grupos são usados, de acordo com os padrões comerciais de classificação de correspondências existentes: Repetições, Correspondência exata, 95%-100%, 85%-94%, 75%-84%, 50%-74% e Sem correspondência. Esta informação é calculada para os segmentos, bem como para as palavras e caracteres (incluindo e sem espaços). Observe que pode haver pequenas diferenças entre as contagens do OmegaT e os números fornecidos por outras ferramentas CAT.<figure>
+          <title>Estatísticas das correspondências</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchStatistics.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchStatistics.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Observe que esses totais são uma boa (ou tão boa quanto possível) aproximação do trabalho envolvido no projeto e, portanto, pode servir como base para o seu custo e cálculo de preços.</para>
+
+      <para>Espaços entre segmentos não são levados em conta na última coluna. As repetições representam segmentos idênticos apresentados várias vezes no texto. O primeiro segmento e o seu conteúdo será classificado como &quot;sem correspondência&quot;, e os outros como uma repetição do primeiro. Se a tradução de vários segmentos fonte idênticos já existir na memória de tradução do projeto, estes segmentos, juntamente com outros segmentos únicos e traduzidos, serão classificados como uma &quot;correspondência exata&quot;. O número de segmentos únicos, se necessário, é fornecido na janela de estatísticas padrão, independentemente do fato de terem sido ou não traduzidos.</para>
+
+      <para>O resto das categorias (50-100%) envolve os segmentos não traduzidos com uma correspondência parcial. As correspondências parciais podem também vir da pasta <filename>/tm</filename>, e não somente da memória de tradução interna no <filename>/omegaT,</filename> como no caso das repetições e correspondências exatas. A única diferença com as correspondências da memória de tradução do <filename>project_save</filename> é que as TMs externas são podem dar correspondências exatas, mas somente 100%. Se não quiser usar as TMs externas para contagem, é necessário esvaziar a pasta /tm ou alterar a configuração do projeto (temporariamente) para que o valor para a /tm aponte para um local diferente.</para>
+
+      <para>As estatísticas de correspondência são separadas por tabulações e você pode usar <guimenuitem>Ctrl+A <indexterm class="singular">
+          <primary>Atalhos</primary> <secondary>Selecionar tudo - Ctrl+A</secondary>
+        </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
+          <primary>Atalhos</primary> <secondary>Copiar texto - Ctrl+C</secondary>
+        </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
+          <primary>Atalhos</primary> <secondary>Colar texto - Ctrl+V</secondary>
+        </indexterm></guimenuitem> para copiá-las ou colá-las, por exemplo, em uma planilha ou em seu aplicativo de contabilidade de custos. Uma vez calculados, os dados também estão disponíveis em <filename>omegat/project_stats_match.txt.</filename>. Observe que o arquivo é datado, já que o cálculo (ao contrário das estatísticas padrão) não é instantâneo e pode, assim, tornar-se rapidamente obsoleto.</para>
+    </section>
+
+    <section>
+      <title>Navegador da Ajuda<indexterm class="singular">
+          <primary>Menu Ajuda</primary> <secondary>Navegador da Ajuda</secondary>
+        </indexterm></title>
+
+      <para>O navegador da Ajuda (que exibe este manual) pode ser aberto pressionando a tecla <keycap><indexterm class="singular">
+          <primary>Atalhos</primary> <secondary>Ajuda - F1</secondary>
+        </indexterm>F1</keycap> ou navegando no menu principal em <guimenuitem><indexterm class="singular">
+          <primary>Menu Ajuda</primary> <secondary>Manual do usuário…</secondary>
+        </indexterm>Ajuda → Manual do Usuário</guimenuitem>. Na janela, o manual e dois botões são exibidos: Voltar e Conteúdo. O manual do usuário é um documento HTML com links para os diversos capítulos. Clique em um link, como faria em um navegador da internet, para acessar a página desejada.</para>
+
+      <para>O manual do usuário está localizado na subpasta docs na pasta de instalação do OmegaT, assim você pode, por exemplo, consultar a documentação em português abrindo o arquivo <filename>docs/en/index.html </filename> no seu navegador. Abrir o manual do usuário desta forma também permite que você siga os links externos, já que o navegador de ajuda embutido não aceita links externos da internet.</para>
+    </section>
+  </section>
+</chapter>

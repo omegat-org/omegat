@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.formatted.text">
+  <title>Trabalhar com texto formatado<indexterm class="singular">
+      <primary>Arquivos destino</primary> <secondary>Texto formatado&lt;/s1
+    </indexterm><indexterm class="singular">
+      <primary>Arquivos fonte</primary> <secondary>Texto formatado</secondary>
+    </indexterm></title>
+
+  <para>As informações de formatação presentes no arquivo fonte geralmente precisam ser reproduzidas no arquivo traduzido. O OmegaT mostra informações de formatação in-line dos formatos que suporta (no momento DocBook, HTML, XHTML, Open Document Format(ODF) e Office Open XML (MS Office 2007 e posteriores)) como tags. As tags geralmente não são consideradas na comparação entre textos diferentes para fins de correspondência. As tags reproduzidas no segmento traduzido estarão presentes no documento traduzido.</para>
+
+  <section id="formatting.tags">
+    <title>Tags de formatação<indexterm class="singular">
+        <primary>Tags</primary>
+      </indexterm></title>
+
+    <para><indexterm class="singular">
+        <primary>Tags</primary> <secondary>Nomenclatura</secondary>
+      </indexterm><emphasis role="bold">Nomenclatura das tags:</emphasis></para>
+
+    <para>As tags são formadas de um a três caracteres e um número. Um número exclusivo permite agrupar aquelas tags que se correspondem e diferenciar as tags que possam ter o mesmo caractere de atalho, mas na verdade são diferentes. Os caracteres de atalho podem ou não refletir o valor da formatação que a tag representa (por exemplo, negrito, itálico, etc.)</para>
+
+    <para><indexterm class="singular">
+        <primary>Numeração</primary> <secondary>das tags</secondary>
+      </indexterm><emphasis role="bold">Numeração das tags:</emphasis></para>
+
+    <para>As tags são numeradas de forma sequencial e crescente por grupo de tags. &quot;Grupos de tags&quot; neste contexto são uma única tag (como &lt;i0&gt; e &lt;/i0&gt;). Dentro de um segmento, o primeiro grupo (par ou único) recebe o número 0, o segundo o número 1, etc. O primeiro exemplo abaixo tem 3 grupos de tags (um par, um único e depois, um outro par), o segundo exemplo tem apenas um grupo (um par).</para>
+
+    <para><indexterm class="singular">
+        <primary>Tags</primary> <secondary>Pares e únicas</secondary>
+      </indexterm><emphasis role="bold">Pares e únicas:</emphasis></para>
+
+    <para>As tags sempre aparecem como únicas ou em pares. Tags únicas indicam informações de formatação que não interferem no texto (espaço extra ou quebra de linha, por exemplo).</para>
+
+    <para><literal>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;segmento 2132&gt;</literal></para>
+
+    <para>&lt;br1&gt; é uma tag única e não interfere no texto. Tags em pares geralmente indicam informações de estilo que se aplicam ao texto entre a tag de início e a tag de fim de um par. &lt;b0&gt; e &lt;/b0&gt; estão em par e influenciam o texto log.txt. Observe que a tag de início deve sempre vir antes da tag de fim correspondente:</para>
+
+    <para>&lt;<literal>Arquivos de registro (&lt;b0&gt;log.txt&lt;/b0&gt;) para acompanhar as operações e erros.&lt;segmento 3167&gt;</literal></para>
+
+    <para>O <application>OmegaT</application> cria suas tags antes do processo de segmentação de sentença. Dependendo das regras de segmentação, o par de tags pode ficar separado em dois segmentos consecutivos e a validação de tags, por cautela, marcará os dois segmentos.</para>
+  </section>
+
+  <section id="tag.operations">
+    <title>Trabalhar com tags<indexterm class="singular">
+        <primary>Tags</primary> <secondary>Operações</secondary>
+      </indexterm></title>
+
+    <para>Deve-se prestar muita atenção ao trabalhar com tags. Se elas forem modificadas por engano, a formatação final do arquivo pode ficar corrompida. Como regra básica, a sequência das tags deve ser preservada na mesma ordem. No entanto, se as regras determinadas forem estritamente seguidas é possível desviá-las dessa regra básica.</para>
+
+    <para><emphasis role="bold"><indexterm class="singular">
+        <primary>Tags</primary> <secondary>Duplicação</secondary>
+      </indexterm>Duplicação da tag:</emphasis></para>
+
+    <para>Para duplicar grupos de tag, basta copiá-los na nova posição desejada. Lembre-se de que em um grupo de pares a tag de início deve vir antes da tag de fim. A formatação representada pelo grupo que você duplicou será aplicada em ambas as seções .</para>
+
+    <para>Exemplo:</para>
+
+    <para><literal>&lt;b0&gt;Esta formatação&lt;/b0&gt; será duplicada aqui.&lt;segmento 0001&gt;</literal></para>
+
+    <para>Após a duplicação:</para>
+
+    <para><literal>&lt;b0&gt;Esta formatação&lt;/b0&gt; foi &lt;b0&gt;duplicada aqui&lt;/b0&gt;.&lt;segmento 0001&gt;</literal></para>
+
+    <para><emphasis role="bold"><indexterm class="singular">
+        <primary>Tags</primary> <secondary>Exclusão de grupo</secondary>
+      </indexterm>Exclusão de grupo de tag:</emphasis></para>
+
+    <para>Para excluir grupos de tags, basta apagá-los do segmento. Lembre-se de que um grupo de pares deve ter sua tag de início bem como de fim excluídas para garantir que todos os vestígios de formatação foram apagados; caso contrário, o arquivo traduzido pode ficar corrompido. Ao apagar um grupo de tags você exclui toda a formatação a elas relacionada de um arquivo traduzido.</para>
+
+    <para>Exemplo:</para>
+
+    <para><literal>&lt;b0&gt;Esta formatação&lt;/b0&gt; será excluída.&lt;segmento 0001&gt;</literal></para>
+
+    <para>Após a exclusão:</para>
+
+    <para><literal>Esta formatação será excluída.&lt;segmento 0001&gt;</literal></para>
+  </section>
+
+  <section id="tag.group.nesting">
+    <title>Aninhamento de grupos de tags<indexterm class="singular">
+        <primary>Tags</primary> <secondary>Aninhamento de grupos</secondary>
+      </indexterm></title>
+
+    <para>Modificar a sequência de um grupo de tags pode resultar no aninhamento deste grupo em um outro grupo de tags. Isso é aceitável, desde que o grupo delimitador inclua totalmente o grupo delimitado. Em outras palavras, ao mover as tags em par assegure-se de que as tags de início e de fim estão dentro ou fora de outros pares de tag; caso contrário, o arquivo traduzido pode ficar corrompido e não abrir.</para>
+
+    <para>Exemplo:</para>
+
+    <para><literal>&lt;b0&gt;Formatação&lt;/b0&gt; &lt;b1&gt;um&lt;/b1&gt; será aninhada na formatação zero.&lt;segmento 0001&gt;</literal></para>
+
+    <para>Após o aninhamento:</para>
+
+    <para><literal>&lt;b0&gt;Formatação &lt;b1&gt;um&lt;/b1&gt;&lt;/b0&gt; foi aninhada na formatação zero.&lt;segmento 0001&gt;</literal></para>
+  </section>
+
+  <section id="tag.group.overlapping">
+    <title>Sobreposição de grupos de tags<indexterm class="singular">
+        <primary>Tags</primary> <secondary>Sobreposição de grupos</secondary>
+      </indexterm></title>
+
+    <para>A sobreposição é o resultado da manipulação incorreta de pares de tags e certamente resultará em problemas de formatação e o arquivo traduzido pode não abrir.</para>
+
+    <para>Exemplo:</para>
+
+    <para><literal>&lt;b0&gt;Formatação&lt;/b0&gt; &lt;b1&gt;um&lt;/b1&gt; será desordenada.&lt;segmento 0001&gt;</literal></para>
+
+    <para>Após a manipulação incorreta:</para>
+
+    <para><literal>&lt;b0&gt;Formatação &lt;b1&gt;um&lt;/b0&gt; &lt;/b1&gt;está extremamente desordenada.&lt;segmento 0001</literal></para>
+  </section>
+
+  <section>
+    <title>Opções para verificação de tag</title>
+
+    <para>Para personalizar o trabalho com as tags, algumas regras podem ser definidas no menu <guimenuitem>Opções &gt; Verificação de tags…</guimenuitem> :</para>
+
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="images/OptionsTagValidation_25.png"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>O procedimento mencionado aplica-se a todos os arquivos fonte e não somente a alguns tipos de arquivos como os textos formatados.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Variáveis printf  - não verificar, verificar as simples, verificar todas</emphasis></para>
+
+        <para>OmegaT pode verificar as variáveis de programação (como %s, por exemplo) nos segmentos fonte na tradução. Você pode escolher: não verificar todas, verificar variáveis printf simples (como %s %d etc) ou verificar as variáveis printf de todos os tipos.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Verificar padrões do formato de mensagem java simples</emphasis></para>
+
+        <para>Ao ativar esta caixa de seleção, o OmegaT verificará se as tags do formato de mensagem java simples (como {0}) foram processadas corretamente.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Expressão regular para tag(s) personalizada(s)</emphasis></para>
+
+        <para>Ao inserir uma expressão regular, o OmegaT tratará os casos detectados como tags de clientes . Ele verifica que o número de tags e sua ordem é idêntica, assim como é o caso para as tags do OmegaT.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Fragmento(s) que devem ser removidos da expressão regular da tradução.</emphasis></para>
+
+        <para>Pode-se indicar uma expressão regular para conteúdos indesejados no segmento destino. As correspondências no segmento destino serão destacadas em vermelho para facilitar a identificação e correção. Ao procurar por correspondências parciais a remoção padrão é ignorada. Uma penalidade fixada em 5 é adicionada se a parte removida não corresponder a algum outro segmento, assim a correspondência não aparece como 100%</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section id="tag.group.validation">
+    <title>Verificação de grupos de tags<indexterm class="singular">
+        <primary>Tags</primary> <secondary>Verificação de grupos</secondary>
+      </indexterm></title>
+
+    <para>A função de verificação de tags detecta modificações nas sequências de tags (deliberadamente ou por engano) e indica os segmentos afetados. Ao iniciar esta função – <guimenuitem>Ctrl+T<indexterm class="singular">
+        <primary>Atalhos</primary> <secondary>Verificação de tag - Ctrl+T</secondary>
+      </indexterm></guimenuitem> - uma janela é aberta com todos os segmentos de um arquivo onde há tags incorretas ou danificadas na tradução. É fácil consertar as tags e recriar os documentos traduzidos com a função verificar tags. A janela que abre com o comando <guimenuitem>Ctrl+T</guimenuitem> tem a forma de uma tabela de 3 colunas com um link para o segmento, segmento original e segmento destino</para>
+
+    <figure id="tag.validation">
+      <title>Criar verificação de tag</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/TagValidation.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/TagValidation.png" width="90%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>As tags estão destacadas em azul e negrito para facilitar a comparação entre o original e o conteúdo traduzido. Clique no link para abrir o segmento no Editor. Se necessário, corrija o erro (no caso acima é o &lt;i2&gt;&lt;/i2&gt; par ausente) e pressione <guimenuitem>Ctrl+T</guimenuitem> para retornar a janela de verificação de tag para corrigir outros erros. Os erros de tag são sequências de tag na tradução que não são reproduzidas na mesma ordem e número de tags como no segmento original.  Algumas manipulações de tags são necessárias e não causam erros; outras causarão problemas quando for criado o documento traduzido.</para>
+  </section>
+
+  <section id="hints.for.tag.management">
+    <title>Dicas para controle de tags<indexterm class="singular">
+        <primary>Tags</primary> <secondary>Dicas</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Simplifique o texto original</emphasis></para>
+
+    <para>As tags geralmente representam alguma forma de formatação no texto original. Simplificar a formatação original reduz bastante a quantidade de tags. Se possível, deve-se procurar unificar as fontes usadas, os tamanhos e cores, etc., para simplificar a tradução e reduzir a possibilidade de criar erros de tags. Leia a seção trabalhar com tags para saber o que pode ser feito com tags. Lembre-se de que se as tags dificultarem seu trabalho no OmegaT e a formatação não for extremamente importante à tradução, remover as tags evitará problemas.</para>
+
+    <para><emphasis role="bold">Preste atenção redobrada aos pares de tag</emphasis></para>
+
+    <para>Se precisar ver as tags no OmegaT, mas não precisar reter a maior parte do formato no documento traduzido, você pode optar por não acrescentar as tags na tradução. Neste caso preste atenção aos pares de tag, pois se apagar uma parte do par e esquecer de apagar a outra, a formatação do documento ficará corrompida. Já que há tags inseridas no próprio texto, é possível usar as regras de segmentação para criar segmentos com menos tags. Esta é uma função avançada e requer alguma experiência para que seja corretamente executada.</para>
+
+    <para>O OmegaT ainda não faz a detecção total e automática de erros na formatação; portanto, não o alertará se você cometer erros ou mudar a formatação para melhor adaptá-la à língua destino. Algumas vezes, porém, o arquivo traduzido pode parecer distorcido e, na pior das hipóteses, pode até não abrir. </para>
+  </section>
+</chapter>

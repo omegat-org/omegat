@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.translation.editing">
+  <title>Modo de trabalho<indexterm class="singular">
+      <primary>Menu</primary> <secondary>Opções</secondary> <tertiary>Modo de trabalho…</tertiary>
+    </indexterm></title>
+
+  <para>O diálogo em <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Editar modo de trabalho…</guimenuitem> </menuchoice> permite ao usuário selecionar como o segmento atual no campo de edição deve ser inicializado e tratado:</para>
+
+  <figure id="editing.behavior.options">
+    <title>Opções do modo de trabalho</title>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/EditingBehaviourOptions25.png"/>
+      </imageobject>
+	  <imageobject role="fo">
+        <imagedata fileref="images/EditingBehaviourOptions25.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+  <para/>
+
+  <para>Você traduz os seus arquivos movendo-se de segmento a segmento, editando cada segmento atual por vez. Ao mover-se entre segmentos, você pode desejar preencher o campo de edição com uma tradução existente do painel de correspondências parciais ou com o texto fonte. Em <menuchoice> <guimenu>Opções</guimenu> <guimenuitem> Editar modo de trabalho…</guimenuitem> </menuchoice> <application>o OmegaT</application> oferece as seguintes alternativas:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>O texto fonte</term>
+
+      <listitem>
+        <para>Você pode fazer o programa inserir o texto fonte automaticamente no campo de edição. Isto é útil para textos que contêm muitas marcas registradas ou outros substantivos próprios que devem ser deixados inalterados.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Deixar o segmento em branco<indexterm class="singular">
+          <primary>Menu Opções</primary> <secondary>Editar modo de trabalho</secondary> <tertiary>Tradução vazia</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>O OmegaT deixa o campo de edição em branco. Com esta opção você pode digitar a tradução sem precisar apagar o texto fonte, economizando alguns toques no teclado (<emphasis role="bold">Ctrl+A </emphasis>e <emphasis role="bold">Del). </emphasis>As traduções vazias agora são permitidas. Elas são exibidas como &lt;EMPTY&gt; no Editor. Para criar uma, clique com o botão direito em um segmento, e selecione &quot;<emphasis role="bold">Definir tradução vazia</emphasis>&quot;. A entrada <emphasis role="bold">Remover tradução</emphasis> na mesma janela popup também permite eliminar a tradução existente do segmento atual. Você chega ao mesmo resultado limpando o segmento destino e pressionando <guibutton>Enter.</guibutton></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Inserir a melhor correspondência parcial<indexterm class="singular">
+          <primary>Menu Opções</primary> <secondary>Editar modo de trabalho</secondary> <tertiary>Inserção de correspondências parciais</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>O OmegaT irá inserir a correspondência mais similar ao segmento aberto que encontrar na memória, respeitando o limite de similaridade selecionado neste diálogo. O prefixo (por padrão vazio) pode ser usado para marcar traduções, por meio das correspondências parciais. Se acrescentar um prefixo (por exemplo [parcial]), você pode rastrear estas traduções depois para ver se estão corretas.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <para>As caixas de seleção na metade mais baixa da janela de diálogo servem o seguinte objetivo:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Tentar converter números ao inserir uma correspondência parcial<indexterm class="singular">
+          <primary>Menu Opções</primary> <secondary>Editar modo de trabalho</secondary> <tertiary>Conversão de números</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Se esta opção estiver marcada, quando uma correspondência parcial for inserida, manualmente ou automaticamente, o OmegaT tentará converter os números nas correspondências parciais segundo o conteúdo fonte. Há algumas restrições:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>O segmento fonte e as correspondências parciais devem conter a mesma lista de números</para>
+          </listitem>
+        
+          <listitem>
+            <para>Os números devem ser exatamente os mesmos entre as correspondências fonte e alvo.</para>
+          </listitem>
+        
+          <listitem>
+            <para>Apenas os números inteiros e decimais simples (usando o ponto como caractere decimal, p. ex. 5.4, mas não 5,4 ou 54E-01) são considerados.</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Permitir que a tradução seja igual ao texto fonte<indexterm class="singular">
+          <primary>Menu Opções</primary> <secondary>Editar modo de trabalho</secondary> <tertiary>Tradução igual à fonte</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Os documentos para tradução podem conter marcas comerciais, nomes ou outros substantivos próprios que serão mantidos iguais em documentos traduzidos. Há duas estratégias para lidar com segmentos que contenham este tipo de texto invariável.</para>
+
+        <para>Você pode decidir não traduzir tais segmentos. O OmegaT então exibirá estes segmentos como não traduzidos. Esta é a opção padrão. A alternativa é inserir uma tradução idêntica ao texto fonte. O OmegaT é capaz de reconhecer que você fez isto. Para fazer isso, acesse <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Editar modo de trabalho…</guimenuitem> </menuchoice> e selecione <emphasis role="bold">Permitir que a tradução seja igual ao texto fonte</emphasis>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Exportar o segmento para arquivos de texto<indexterm class="singular">
+          <primary>Menu Opções</primary> <secondary>Editar modo de trabalho</secondary> <tertiary>Exportar o segmento atual</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>A função de exportação de texto envia dados de dentro do projeto atual do <application>OmegaT</application> para arquivos de texto simples. Os dados são exportados quando o segmento é aberto. Os arquivos aparecem na subpasta /script na pasta de arquivos de usuário do OmegaT e incluem:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>O conteúdo do texto do segmento fonte (<filename>source.txt</filename>).</para>
+          </listitem>
+
+          <listitem>
+            <para>O conteúdo do texto do segmento destino (<filename>target.txt</filename>).</para>
+          </listitem>
+
+          <listitem>
+            <para>O texto destacado pelo usuário, quando este pressiona <keycap>Ctrl+Shift+C</keycap> ou <guimenuitem>Editar &gt; Exportar seleção</guimenuitem> é selecionado (<filename>selection.txt</filename>).</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>O conteúdo dos arquivos é sobrescrito também quando um novo segmento é aberto (source.txt e target.txt) ou quando uma nova seleção é exportada (selection.txt). Os arquivos são arquivos de texto simples não formatados. O processo inteiro pode ser dirigido e controlado via scripts baseados em Tck/Tcl. Veja <ulink url="http://www.omegat.org/en/howtos/text_export.html">Usar a função de exportação de texto do OmegaT</ulink> para informações específicas, exemplos e sugestões.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Ir para - Próximo segmento não traduzido - pára onde há pelo menos uma tradução alternativa<indexterm class="singular">
+          <primary>Menu Opções</primary> <secondary>Editar modo de trabalho</secondary> <tertiary>Segmentos com tradução alternativa</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Se quisermos evitar alguma tradução incorreta em segmentos com vários conteúdos possíveis, marcar esta caixa de seleção fará com que <emphasis role="bold"> Ir para - Próximo segmento não traduzido</emphasis>pare no segmento seguinte que obedeça esta condição, esteja ele traduzido ou não.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</chapter>

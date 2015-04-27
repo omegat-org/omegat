@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.acknowledgements">
+  <title>Agradecimentos</title>
+
+  <section>
+    <title>Obrigado a todos!</title>
+
+    <para>Quaisquer inconsistências, omissões e erros claros que sejam encontrados na versão presente, são de minha plena responsabilidade. Este manual, contudo, não seria possível sem a ajuda e apoio de várias pessoas. Um franco agradecimento a:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Marc Prior: a correção do meu primeiro esboço foi um ato do amor pelo OmegaT e a língua inglesa.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Didier Briel: Pela ajuda indispensável, paciente e persistente nas dificuldades com o DocBook. Sem esquecer do seu cuidado e diligência, ao manter os repositórios intactos e em boa ordem.</para>
+      </listitem>
+
+      <listitem>
+        <para>Samuel Murray: pelo capítulo introdutório &quot;Aprenda a usar o OmegaT em 5 minutos&quot;.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Will Helton: a sua leitura final do esboço poupou-me de muito constrangimento. Só é possível imaginar quantas preposições e artigos ainda estariam faltando sem a sua ajuda inestimável.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Jean-Christophe Helary: um agradecimento especial ao JC por sua descrição concisa dos parâmetros de execução e de linha de comando do OmegaT, além de todos os outros detalhes que ainda devo notar.</para>
+      </listitem>
+
+      <listitem>
+        <para>Por último, mas não menos importante: o meu agradecimento a todos os que contribuem com o<ulink url="https://sourceforge.net/p/omegat/documentation/"> rastreador da documentação do OmegaT</ulink> para detectar todas as inconsistências encontradas nas versões prévias da documentação. Continuem o bom trabalho!</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</appendix>

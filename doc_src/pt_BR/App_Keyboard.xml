@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.keyboard">
+  <title>Atalhos de teclado no editor</title>
+
+  <para>Este texto curto descreve o comportamento das teclas no painel do editor. O termo “Mover para o segmento interno” significa que o cursor se move para o início do segmento caso esteja antes deste, e para o fim do segmento caso esteja depois dele.</para>
+
+  <table>
+    <title>Comportamento das teclas no editor</title>
+
+    <tgroup cols="2">
+      <colspec align="left" colnum="1"/>
+
+      <colspec align="left" colnum="2"/>
+
+      <thead>
+        <row>
+          <entry align="left">Combinação de teclas</entry>
+
+          <entry align="left">Ação</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry><emphasis role="bold">Esquerda:</emphasis></entry>
+
+          <entry>um caractere à esquerda, mas limitado ao início do segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Direita:</emphasis></entry>
+
+          <entry>um caractere à direita, mas limitado ao fim do segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Esquerda:</emphasis></entry>
+
+          <entry>uma palavra à esquerda, mas limitada ao início do segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Direita:</emphasis></entry>
+
+          <entry>uma palavra à direita, mas limitada ao fim do segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PgUp: </emphasis></entry>
+
+          <entry>move-se uma página acima no documento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PgDn: </emphasis></entry>
+
+          <entry>move-se uma página abaixo no documento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Home*</emphasis></entry>
+
+          <entry>move-se para o início da linha no segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">End*</emphasis></entry>
+
+          <entry>move-se para o fim da linha no segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Home</emphasis></entry>
+
+          <entry>move-se para o início do segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+End</emphasis></entry>
+
+          <entry>move-se para o fim do segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+PgUp</emphasis></entry>
+
+          <entry>move-se para o início do documento (Mac: <emphasis role="bold">Cmd+PgUp</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+PgDn</emphasis></entry>
+
+          <entry>move-se para o início do documento (Mac: <emphasis role="bold">Cmd+PgDn</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Backspace* (Tecla de retrocesso)</emphasis></entry>
+
+          <entry>remove um caractere antes do cursor</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Delete* (Excluir)</emphasis></entry>
+
+          <entry>remove um caractere depois do cursor</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Backspace</emphasis></entry>
+
+          <entry>remove caracteres até o início da palavra atual (Mac: <emphasis role="bold">Alt+Backspace</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Delete</emphasis></entry>
+
+          <entry>remove caracteres até o início da próxima palavra (Mac: <emphasis role="bold">Alt+Backspace</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Enter</emphasis></entry>
+
+          <entry>abre o segmento prévio (Mac: <emphasis role="bold">Cmd+Enter</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+A</emphasis></entry>
+
+          <entry>seleciona o segmento completo (Mac: <emphasis role="bold">Cmd+A</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Shift+O</emphasis></entry>
+
+          <entry>Alternância entre RTL-LTR</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <para>* Estas teclas comportam-se de maneira diferente quando o cursor está do lado de fora do segmento editável:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><emphasis role="bold">Home: </emphasis> o cursor vai para o início do segmento ativo</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">End: </emphasis> o cursor vai para o fim do segmento ativo</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Backspace: </emphasis>nada</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Delete: </emphasis>nada</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Qualquer tecla de caracteres,</emphasis> se for clicada do lado de fora do segmento editável, será ignorada.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>A tecla “Shift” não exibe nenhum comportamento especial: quando ela é pressionada, todas as teclas movem o cursor da maneira habitual, exceto no caso da combinação  <literal>Shift+Enter</literal>, que insere uma quebra de linha no texto.</para>
+
+  <para>Os comandos gerais do sistema Selecionar tudo (<keycap>Ctrl+A</keycap>), Colar (<emphasis role="bold">Ctrl+V</emphasis>), Recortar (<emphasis role="bold">Ctrl+X</emphasis>), Copiar (<emphasis role="bold">Ctrl+C)</emphasis>, Inserir correspondência <emphasis role="bold">(Ctrl+I</emphasis>) e Inserir texto fonte (<emphasis role="bold">Ctrl+Shift+I</emphasis>) atuam a princípio somente sobre o texto dentro do segmento aberto atualmente.</para>
+
+  <para>Observe que você pode redefinir os atalhos conforme suas próprias preferências. Ver <link linkend="ch04.shortcuts.customization">Apêndice de configuração de atalhos</link></para>
+</appendix>

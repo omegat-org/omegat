@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.glossaries">
+  <title>Glossários<indexterm class="singular">
+      <primary>Janelas e painéis no OmegaT</primary> <secondary>Painel de glossário</secondary>
+    </indexterm><indexterm class="singular">
+      <primary>Glossários</primary>
+    </indexterm></title>
+
+  <para>Os glossários são arquivos criados e atualizados manualmente para uso no <application>OmegaT</application>.</para>
+
+  <para>Se um projeto do <application>OmegaT</application> contém um ou mais glossários, quaisquer termos do glossário que também sejam encontrados no segmento atual serão automaticamente exibidos no visualizador de glossário.</para>
+
+  <para>É possível definir a localização e o nome do projeto na caixa de diálogo das propriedades do projeto. A extensão deve ser <filename>.txt</filename>(caso contrário, será adicionada). A localização do arquivo deve ser na pasta <filename>/glossary</filename>, mas também pode ser em uma subpasta (p.ex., <filename>glossary/sub/glossary.txt</filename>). O arquivo não precisa existir no momento da configuração, se necessário, será criado ao adicionar um termo no glossário. Se o arquivo já existir, nenhuma tentativa é feita para verificar o formato ou o conjunto de caracteres do arquivo: as novas entradas estarão sempre em formato separado por tabulações e UTF-8. Uma vez que o conteúdo existente não será alterado, o dano a um arquivo seria limitado.</para>
+
+  <section>
+    <title>Uso</title>
+
+    <para>Para usar um glossário existente, coloque-o na pasta<indexterm class="singular">
+        <primary>Arquivos de projetos</primary> <secondary>Subpasta glossary</secondary>
+      </indexterm> <filename>/glossary</filename> após criar o projeto. <application>OmegaT</application> detecta automaticamente os arquivos de glossário da pasta glossary quando o projeto é aberto. Os termos do segmento atual que o <application>OmegaT</application> encontrar no(s) arquivo(s) de glossário são exibidos no painel Glossário:</para>
+
+    <indexterm class="singular">
+      <primary>Glossários, painel Glossário</primary>
+    </indexterm>
+
+    <figure>
+      <title>Painel Glossário</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/GlossaryPane_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/GlossaryPane_25.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>A palavra antes do sinal =, é o termo de origem, e a tradução é a palavra após o sinal =. Pode ser adicionado um comentário ao termo do glossário. A função do glossário é encontrar apenas correspondências exatas com os termos do glossário (por exemplo, não encontra formas flexionadas, etc.) Novos termos podem ser adicionados manualmente no(s) arquivo(s) de glossário durante a tradução, por exemplo, com um editor de texto. Termos recém-adicionados não serão reconhecidos até que as alterações no arquivo de texto sejam salvas. </para>
+
+    <para>O termo de origem não precisa ser uma única palavra, assim como mostra o exemplo a seguir:</para>
+
+    <figure>
+      <title>entrada de múltiplas palavras no glossário - exemplo<indexterm class="singular">
+          <primary>Glossários</primary> <secondary>Painel Glossário</secondary> <tertiary>entrada de múltiplas palavras</tertiary>
+        </indexterm></title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>O item sublinhado no &quot;menu pop-up&quot; pode ser encontrado no painel Glossário como &quot;pojavni menu&quot;. Selecione o termo no painel Glossário e clique com o botão direito do mouse para inseri-lo na posição do cursor no segmento destino.<footnote>
+        <para>Observe que no caso acima isso é apenas metade (ou até menos) do processo, uma vez que a língua alvo (Esloveno) utiliza a declinação. Assim, o &quot;pojavni meni&quot; inserido na forma nominativa, deve ser alterado para &quot;pojavnem meniju&quot; , isto é, para o locativo. Provavelmente é mais rápido já digitar o termo de forma correta sem se preocupar com o glossário e seus atalhos. </para>
+      </footnote></para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glossários</primary> <secondary>Formato de arquivo</secondary>
+      </indexterm>Formato de arquivo<indexterm class="singular">
+        <primary>Arquivos de projeto</primary> <secondary>Arquivos do usuário</secondary> <seealso>Glossários</seealso>
+      </indexterm></title>
+
+    <para>Os arquivos de glossário são apenas arquivos de texto simples contendo três colunas delimitadas por tabulação, com os termos fonte e destino na primeira e segunda coluna, respectivamente. A terceira coluna pode ser usada para informações extras. É possível ter entradas sem a coluna do termo de destino, ou seja, contendo apenas o termo de origem e o comentário. </para>
+
+    <para>Os arquivos de glossário podem estar na codificação padrão do sistema (e indicados pela extensão .tab) ou no formato UTF-8 (a extensão .utf8). A codificação Unicode (UTF8) é preferida por razões óbvias. Também suporta o formato CSV. Esse formato é o mesmo que o separado por tabulação: termo de origem, termo de destino.  Os campos de comentário são separados por vírgula ','. As sequências são colocadas entre aspas &quot;, o que permite o uso da vírgula na sequência:</para>
+
+    <para><literal>&quot;Este é um termo de origem, que contém uma vírgula&quot;,&quot;c'est un terme, qui contient une virgule&quot;</literal></para>
+
+    <para>Além do formato de texto simples, o formato TBX <indexterm class="singular">
+        <primary>Glossários</primary> <secondary>Formato TBX</secondary>
+      </indexterm> também é suportado. TBX - Term Base eXchange, ou base de termos intercambiável - é o padrão aberto, baseado em XML para intercâmbio de dados terminológicos estruturados, aprovado como padrão internacional pela ISO e LISA. Se você já tiver um sistema de tratamento de terminologia - o MultiTerm, por exemplo - é bem possível que ele ofereça a exportação de dados terminológicos via formato TBX. <ulink url="http://www.microsoft.com/Language/en-US/Terminology.aspx">A coleção de terminologia da Microsoft</ulink> <indexterm class="singular">
+        <primary>Glossários</primary> <secondary>Coleção de terminologia da Microsoft</secondary>
+      </indexterm> pode ser baixada em quase 100 idiomas e serve como base para um glossário de TI.</para>
+  </section>
+
+  <section>
+    <title>Como criar glossários<indexterm class="singular">
+        <primary>Glossários</primary> <secondary>Criar um glossário</secondary>
+      </indexterm></title>
+
+    <para>A configuração do projeto permite a entrada de um nome para um arquivo de glossário editável (ver o início deste capítulo). Clique com o botão direito do mouse no painel Glossário ou pressione <keycap>Ctrl+Shift+G</keycap> para adicionar um novo termo. Uma caixa de diálogo é aberta e permite a entrada do termo de origem, destino e qualquer comentário necessário:</para>
+
+    <mediaobject role="html">
+      <imageobject>
+        <imagedata fileref="images/GlossaryEntry_25.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/GlossaryEntry_25.png" width="80%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>Os conteúdos dos arquivos de glossário são mantidos na memória e carregados quando o projeto é aberto ou recarregado. É bastante simples atualizar um arquivo de glossário: pressione <keycap>Ctrl+Shift+G</keycap> e insira um novo termo, sua tradução e algum comentário (tenha certeza de que pressionou tab entre os campos) e salve o arquivo. Os conteúdos do painel Glossário serão atualizados conforme forem inseridos.</para>
+
+    <para><indexterm class="singular">
+        <primary>Glossários</primary> <secondary>Localização do arquivo de glossário editável</secondary>
+      </indexterm>O local do arquivo de glossário editável pode ser configurada na caixa de diálogo em <guimenuitem>Projeto &gt; Propriedades … </guimenuitem>. As extensões reconhecidas são <filename>TXT</filename> e <filename>UTF8</filename></para>
+
+    <para><emphasis role="bold">Nota: </emphasis>Com certeza há outros caminhos e formas para criar um arquivo simples com entradas delimitadas por tabulações. Não há problema em usar o Notepad++ no Windows, GEdit no Linux, por exemplo, ou algum programa de planilha para essa finalidade: qualquer aplicativo que lide com UTF8 e que possa mostrar espaço em branco (para que você não perca os caracteres <keycap>TAB</keycap> requeridos) pode ser usado.</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glossários</primary> <secondary>Trados MultiTerm</secondary>
+      </indexterm>Usando Trados MultiTerm</title>
+
+    <para>Os dados exportados do Trados MultiTerm podem ser usados como glossários no <application>OmegaT</application> sem qualquer modificação, desde que tenham a extensão de arquivo <filename>.tab</filename> e os campos do termo de origem e de destino sejam os dois primeiros campos respectivamente. Se você exportar utilizando a opção &quot;Tab-delimited export&quot;, terá que apagar as 5 primeiras colunas (Seq. Nr, data de criação etc). As versões mais recentes do MultiTerm suportam exportar para o formato TBX.</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glossários</primary> <secondary>Problemas com glossários</secondary>
+      </indexterm>Problemas comuns com glossários</title>
+
+    <para><emphasis role="bold">Problema: Nenhum termo do glossário é exibido - possíveis causas:</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Nenhum arquivo de glossário foi encontrado na pasta &quot;glossary&quot;.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>O arquivo de glossário está vazio.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Os itens não estão separados por um caractere TAB.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>O arquivo de glossário não tem a extensão correta (.tab ou .utf8).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Não há correspondência EXATA entre a entrada do glossário e o texto de origem no documento - por exemplo, plurais.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>O arquivo de glossário não tem a codificação correta.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>No segmento atual não há termos que correspondam com algum termo no glossário.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Um ou mais dos problemas acima podem ter sido corrigidos, mas o projeto não foi recarregado.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Problema: No painel Glossário, alguns caracteres não estão exibidos corretamente</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>…mas os mesmos caracteres estão devidamente exibidos no painel Editor: a extensão e a codificação do arquivo não correspondem.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.LanguageToolPlugin.inOmegaT">
+  <title>Plugin LanguageTool<indexterm class="singular">
+      <primary>Plugins</primary>
+
+      <secondary>LanguageTool</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>Introdução</title>
+
+    <para><ulink url="http://www.languagetool.org">LanguageTool</ulink> é um programa de código aberto de revisão gramatical para o inglês, francês, alemão, polonês, holandês, romeno e várias outras línguas - veja a <ulink url="http://www.languagetool.org/languages/">lista de línguas suportadas</ulink>.</para>
+
+    <para>Pode-se pensar no LanguageTool como um programa para detectar erros que um verificador ortográfico simples não identificaria, p. ex., utilização incorreta de palavras como lá/lã, não/no etc. Ele também pode detectar alguns erros de gramática. Não inclui verificador ortográfico. O LanguageTool encontrará erros para os quais uma regra foi definida nos seus arquivos de configuração específicos para a língua.</para>
+
+    <figure>
+      <title>O LanguageTool no OmegaT</title>
+
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/LanguageToolExample.png"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+  </section>
+
+  <section>
+    <title>Instalação e uso</title>
+
+    <para>O plugin do LanguageTool vem incluído no OmegaT. Ele será usado automaticamente pelo OmegaT, se estiver selecionado em <guimenuitem>Opções &gt; Verificador de língua</guimenuitem>  As regras aplicadas (se houverem) dependerão da língua de origem e de destino do projeto. Quando uma regra é acionada, a frase correspondente será sublinhada em azul no Editor (veja <emphasis>também </emphasis>e <emphasis>Não fiz nada</emphasis> na imagem acima). Ao passar o mouse sobre a frase sublinhada, uma explicação aparecerá.</para>
+    
+	<warning>
+		<title>Incompatibilidades</title>
+		<para>O LanguageTool não funcionará corretamente se houver uma versão antiga na pasta /plugin. Remova o LanguageTool da pasta /plugin antes de iniciar o OmegaT.</para>
+	</warning>
+
+  </section>
+</appendix>

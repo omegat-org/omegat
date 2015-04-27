@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.project.properties">
+  <title>Propriedades do projeto<indexterm class="singular">
+      <primary>Projeto</primary> <secondary>Propriedades</secondary>
+    </indexterm></title>
+
+  <para/>
+
+  <section id="properties.dialog">
+    <title>Caixa de diálogo Propriedades</title>
+
+    <para>A caixa de diálogo <menuchoice><guimenuitem>Propriedades</guimenuitem> do <guimenu>Projeto</guimenu> <shortcut><keycombo><keycap>Ctrl</keycap> <keycap>E</keycap></keycombo></shortcut></menuchoice> é usada para modificar as pastas e as línguas do projeto.</para>
+
+    <para>É possível modificar as propriedades do projeto durante uma sessão de tradução. Observe que as mudanças na configuração do projeto podem ter algumas consequências, especialmente quando o projeto já foi iniciado. Até que você tenha experiência com o OmegaT, é mais seguro considerar como definitivas todas as configurações uma vez que a tradução tenha começado - a menos, é claro, que você perceba que algum erro maior tenha sido feito. Veja a seção Prevenindo a perda de dados para maneiras e jeitos de proteger o seu trabalho.</para>
+
+    <figure>
+      <title>Janela Propriedades do projeto</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/NewProject_26.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/NewProject_26.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Contém:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Área para definir as línguas fonte e destino</emphasis></para>
+
+        <para>As línguas de origem e destino podem ser digitadas ou então selecionadas dos menus suspensos. Lembre-se de que modificar as línguas pode inutilizar as memórias de tradução usadas, pois elas podem não corresponder às novas línguas definidas.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Caixa de seleção <emphasis role="bold"><guilabel>Habilitar segmentação a nível de frase</guilabel></emphasis></para>
+
+        <indexterm class="singular">
+          <primary>Projeto</primary> <secondary>Habilitar segmentação a nível de frase</secondary>
+        </indexterm>
+
+        <para>As definições da segmentação apenas tratam da forma como os arquivos fonte são processados pelo <application>OmegaT</application>. A maneira predominante de segmentar as fontes é pela segmentação a nível de frase, então esta caixa de seleção deve permanecer marcada de maneira geral.</para>
+
+        <para>Em raros casos pode-se preferir, por exemplo, a segmentação em parágrafos. Modificar esta marcação não modifica a segmentação das memórias de tradução já existentes. Se no meio da tradução você decidir trocar de tradução de frase para parágrafo, a memória de tradução interna do projeto não irá ser alterada (o OmegaT pode atualizar memórias de tradução antigas que não usaram a segmentação por frase, mas não o contrário).</para>
+
+        <para>Modificar as configurações de segmentação pode fazer com que alguns segmentos já traduzidos fiquem divididos ou combinados. Isto efetivamente fará com que eles sejam retornados ao estado &quot;não traduzido&quot;, pois eles não corresponderão mais aos segmentos gravados na memória do projeto, mesmo que a tradução original ainda esteja presente.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Botão <emphasis role="bold"><guibutton>Segmentação…</guibutton> </emphasis><indexterm class="singular">
+            <primary>Segmentação</primary> <secondary>regras globais vs de projeto</secondary>
+          </indexterm></para>
+
+        <para>As regras de segmentação são geralmente válidas para todos os projetos. O usuário, entretanto, pode precisar gerar um conjunto de regras específicas para o projeto em questão Use este botão para abrir a caixa de diálogo, ativar a caixa de seleção <guimenuitem>Regras de segmentação específicas do projeto</guimenuitem>, e prossiga para ajustar as regras de segmentação como desejado. O novo conjunto de regras será salvo junto com o projeto e não irá interferir no conjunto geral de regras de segmentação. Para excluir regras de segmentação específicas do projeto, desmarque esta caixa de seleção Veja o capítulo <link linkend="chapter.segmentation">Segmentação do texto fonte</link> para obter mais informações sobre regras de segmentação.<emphasis/></para>
+
+        <para><emphasis>Dica:</emphasis> o conjunto de regras de segmentação para um determinado projeto é salvo como <filename>project/omegat/segmentation.conf.</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>Botão <emphasis role="bold"><guibutton>Filtros de arquivos…</guibutton> </emphasis><indexterm class="singular">
+            <primary>Filtros de arquivo</primary> <secondary>regras globais vs de projeto</secondary>
+          </indexterm></para>
+
+        <para>De uma maneira similar à acima, o usuário pode criar filtros de arquivo específicos por projeto, que serão salvos junto com o projeto e serão válidos apenas para o projeto atual. Para criar um conjunto de filtros de arquivos específicos por projeto, clique no botão <guibutton>Filtros de arquivo…</guibutton>, e então ative a caixa de seleção <guimenuitem>Ativar filtros específicos de projeto</guimenuitem> na janela que se abrir. Uma cópia da configuração de filtros alterados será salva com o projeto. Para excluir filtros de arquivo específicos de projeto, desmarque a caixa de seleção. Note que no menu <guimenuitem>Opções-&gt;Filtros de arquivo</guimenuitem>, os filtros de uso global são mudados, não os filtros do projeto. Veja o capítulo<link linkend="chapter.file.filters"> Filtros de arquivo </link> para mais informações sobre o assunto.<emphasis/></para>
+
+        <para><emphasis>Dica:</emphasis> o conjunto de filtros de arquivo para um determinado projeto é salvo como <filename>project/omegat/filters.xml.</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>Auto propagação <emphasis role="bold">Caixa de seleção</emphasis><emphasis role="bold"><indexterm class="singular">
+            <primary>Projeto</primary> <secondary>Opção Auto propagação</secondary>
+          </indexterm></emphasis></para>
+
+        <para>No caso de haver segmento não únicos nos documentos fonte, a caixa de seleção Auto propagação oferece ao usuário as duas seguintes possibilidades para tradução automática: se marcada, o primeiro segmento traduzido será tomado como a tradução padrão e seu texto alvo será automaticamente usado para hits posteriores durante o processo de tradução. Segmentos traduzidos erradamente podem, é claro, ser manualmente corrigidos mais tarde usando-se <guimenuitem>Criar Tradução Alternativa</guimenuitem>. Se a caixa de seleção de Auto propagação não for marcada, os segmentos com traduções alternativas são deixados sem tradução até que o usuário decida qual tradução será usada.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Remover tags</emphasis> Caixa de seleção<indexterm class="singular">
+            <primary>Projeto</primary> <secondary>Opção remover as tags</secondary>
+          </indexterm></para>
+
+        <para>Quando habilitado, todas as tags de formatação são removidas dos segmentos fonte. É muito útil quando se trabalha com textos onde a formatação em linha não é na verdade útil (p.ex., OCRed PDF, .odt ou .docx mal convertidos, etc.) No geral, deve sempre ser possível abrir o documento alvo, já que somente as marcações em linha são removidas. A formatação não visível (p.ex., que não aparece como tags no editor OmegaT) é mantida nos documentos de destino.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Área para definir as pastas do projeto</emphasis><indexterm class="singular">
+            <primary>Projeto</primary> <secondary>Mudar a estrutura da pasta</secondary>
+          </indexterm><indexterm class="singular">
+            <primary>Glossários</primary> <secondary>Localização do arquivo de glossário editável</secondary>
+          </indexterm></para>
+
+        <para>Aqui você poderá selecionar subpastas diferentes, por exemplo, subpasta com arquivos fonte, subpasta para arquivos de destino, etc. Caso você insira nomes de pastas que ainda não existam, <application>OmegaT</application> cria pastas para você. Caso você decida modificar as pastas do projeto, tenha em mente de que isso não moverá arquivos existentes de pastas antigas para a nova localização.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

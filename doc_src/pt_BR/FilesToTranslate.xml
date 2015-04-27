@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.files.to.translate">
+  <title>Arquivos para traduzir</title>
+
+  <section id="file.formats">
+    <title>Formatos de arquivos<indexterm class="singular">
+        <primary>Arquivos fonte</primary> <secondary>Formatos de arquivo</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Arquivos destino</primary> <secondary>Formatos de arquivo</secondary>
+      </indexterm></title>
+
+    <para><application>Com o OmegaT</application> você pode traduzir diversos formatos de arquivo. Basicamente há dois tipos de formatos, o texto simples e o texto formatado.</para>
+
+    <section>
+      <title>Arquivos de texto simples<indexterm class="singular">
+          <primary>Arquivos destino</primary> <secondary>Arquivos de texto simples</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Arquivos fonte</primary> <secondary>Arquivos de texto simples</secondary>
+        </indexterm></title>
+
+      <para>Os arquivos de texto simples contêm apenas texto, portanto sua tradução é um processo simples de inserção do texto. Há diversos métodos para codificar os arquivos de forma que seus conteúdos não apareçam truncados quando abertos no <application>OmegaT</application>. Tais arquivos não contêm nenhuma informação de formatação além do &quot;espaço em branco&quot; usado para alinhar texto, indicar parágrafos ou inserir quebra de páginas. Eles não podem conter ou reter informações sobre a cor, tipo de fonte, etc. do texto. Atualmente, o <application>OmegaT</application> é compatível com os seguintes formatos de texto simples:<indexterm class="singular">
+          <primary>Formatos de arquivos</primary> <secondary>Texto não formatado</secondary> <seealso>Arquivos fonte</seealso>
+        </indexterm></para>
+
+      <itemizedlist>
+        <listitem>
+          <para>ASCII text (.txt, etc.)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Texto codificado (*.UTF8)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Pacotes de recursos Java (*.properties)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Arquivos PO (*.po)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Arquivos INI (key=value) (*.ini)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Arquivos DTD (*.DTD)</para>
+        </listitem>
+
+        <listitem>
+          <para>Arquivos DokuWiki (*.txt)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Arquivos de legenda SubRip (*.srt)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Arquivos Magento CE Locale CSV (*.csv)</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Outros tipos de arquivos de texto simples podem ser processados pelo <application>OmegaT</application> associando sua extensão de arquivo com um tipo de arquivo compatível (por exemplo, os arquivos .pod podem ser associados ao filtro de texto ASCII) e serem pré-processados com regras de segmentação específica.</para>
+
+      <para>Arquivos PO<indexterm class="singular">
+          <primary>Arquivos fonte</primary> <secondary>PO como arquivos bilíngues</secondary>
+        </indexterm> podem conter os textos fonte e destino. Deste ponto de vista, eles são arquivos de texto simples<emphasis> mais</emphasis> memórias de tradução. Se ainda não há tradução para um determinado segmento fonte na memória de tradução do projeto (project_save.tmx), a tradução atual será salva no project_save.tmx como a tradução padrão. No entanto, caso o mesmo segmento de origem já exista com uma tradução diferente, a nova tradução será salva como uma alternativa.</para>
+    </section>
+
+    <section>
+      <title>Arquivos de texto formatado<indexterm class="singular">
+          <primary>Arquivos destino</primary><secondary>Arquivos de texto formatado</secondary><seealso>Textos com tags</seealso>
+        </indexterm><indexterm class="singular">
+          <primary>Arquivos fonte</primary> <secondary>Arquivos de texto formatado</secondary>
+        </indexterm></title>
+
+      <para>Os arquivos de texto formatado contêm texto bem como informações do tipo de fonte, tamanho, cor, etc. Eles são geralmente criados em processadores de texto ou editores de texto html. Tais formatos de arquivos são criados de forma que mantenham as informações de formatação. As informações de formatação podem ser simples como “isto está em negrito” ou tão complexas como dados em tabelas com diferentes tamanhos de fontes, cor, posições, etc. Na maioria dos trabalhos de tradução é considerado importante que o documento traduzido pareça similar ao original. O OmegaT permite-lhe fazer isso através da marcação dos caracteres/palavras que tenham uma formatação especial com tags fáceis de serem manipuladas. Simplificar a formatação do texto original reduz bastante a quantidade de tags. Sempre que possível, unifique as fontes, tamanhos de fonte, cores, etc utilizados no documento, pois isto simplifica a tarefa de tradução e reduz o número possível de erros de tag. Cada tipo de arquivo é tratado de forma diferente no OmegaT. Para especificar um funcionamento específico do OmegaT, use filtros de arquivo. Atualmente, o OmegaT é compatível com os seguintes formatos de texto formatado:<indexterm class="singular">
+          <primary>Formatos de arquivos</primary> <secondary>formatados</secondary> <seealso>Arquivos fonte</seealso>
+        </indexterm></para>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>ODF - OASIS Open Document Format (*.ods, *.ots, *.odt,
+            *.ott, *.odp, *.otp)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Microsoft Office Open XML (*.docx, *.dotx, *.xlsx, *.xltx,
+            *.pptx)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>(X)HTML (*.html, *.xhtml,*.xht)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Compilador de Ajuda HTML (*.hhc, *.hhk)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>DocBook (*.xml)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>XLIFF (*.xlf, *.xliff, *.sdlxliff) - do tipo fonte=destino</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>QuarkXPress CopyFlowGold (*.tag, *.xtg)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Arquivos ResX (*.resx)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Recurso Android (*.xml)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>LaTex (*.tex, *.latex)</para>
+          </listitem>
+
+          <listitem>
+            <para>Arquivos Help (*.xml) &amp; Manual (*.hmxp)</para>
+          </listitem>
+
+          <listitem>
+            <para>Typo3 LocManager (*.xml)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Localização WiX (*.wxl)</para>
+          </listitem>
+
+          <listitem>
+            <para>Iceni Infix (*.xml)</para>
+          </listitem>
+
+          <listitem>
+            <para>Flash XML export (*.xml)</para>
+          </listitem>
+
+          <listitem>
+            <para>Wordfast TXML (*.txml)</para>
+          </listitem>
+
+          <listitem>
+            <para>Camtasia for Windows (*.camproj)</para>
+          </listitem>
+
+          <listitem>
+            <para>Visio (*.vxd)</para>
+          </listitem>
+        </itemizedlist></para>
+
+      <para>Outros tipos de arquivos de texto formatados podem ser processados pelo OmegaT associando sua extensão de arquivo com um tipo de arquivo compatível, desde que sejam pré-processados com regras de segmentação específica.</para>
+    </section>
+  </section>
+
+  <section id="other.file.formats">
+    <title>Outros formatos de arquivos<indexterm class="singular">
+        <primary>Arquivos destino</primary> <secondary>Outros formatos de arquivo</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Arquivos fonte</primary> <secondary>Outros formatos de arquivo</secondary>
+      </indexterm></title>
+
+    <para>Outros formatos de texto simples ou formatado também podem ser processados no OmegaT.</para>
+
+    <para><indexterm class="singular">
+        <primary>Arquivos destino</primary> <secondary>Ferramentas de conversão de arquivos</secondary>
+      </indexterm>Podem ser usadas ferramentas externas para fazer a conversão dos arquivos para os formatos compatíveis. Os arquivos traduzidos precisarão ser convertidos de novo ao formato original. Por exemplo, se você tem uma versão desatualizada do Microsoft Word, que não lida com o formato ODT, aqui está um atalho para arquivos do Word com a extensão DOC:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>importe o arquivo no editor ODF</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>salve o arquivo em formato ODT</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>traduza-o no arquivo ODT destino</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>carregue o arquivo destino no editor ODF</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>salve o arquivo como arquivo DOC</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>A qualidade do arquivo traduzido dependerá da qualidade da conversão. Antes de fazer estas conversões, teste todas as opções. Verifique a <ulink url="http://www.omegat.org">home page do OmegaT</ulink> para uma lista atualizada de ferramentas auxiliares de tradução.</para>
+  </section>
+
+  <section id="right.to.left.languages">
+    <title>Línguas da Direita para Esquerda (DPE)<indexterm class="singular">
+        <primary>Línguas da Direita para Esquerda (DPE)</primary>
+      </indexterm><indexterm class="singular">
+        <primary>Arquivos destino</primary> <secondary>Línguas da direita para esquerda</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Arquivos fonte</primary> <secondary>Línguas da direita para esquerda</secondary>
+      </indexterm></title>
+
+    <para>O alinhamento dos segmentos fonte e destino depende das línguas do projeto. Por predefinição, o texto de línguas da esquerda para a direita (EPD) é alinhado à esquerda e o das línguas da direita para a esquerda (DPE), à direita. Para alternar entre os modos de exibição diferentes, pressione <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> (esta é a letra &quot;O&quot; e não o número 0). O <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> tem três modos:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>alinhamento padrão, definida pela língua</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>alinhamento à esquerda</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>alinhamento à direita</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>O modo DPE no <application>OmegaT</application> não tem nenhuma influência no modo de exibição dos documentos traduzidos criados no <application>OmegaT</application>. O modo de exibição dos documentos traduzidos deve ser modificado nos programas (como o Microsoft Word) que você usará para exibir ou modificar os documentos (consulte o manual desses programas para detalhes). Usar <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> faz com que a entrada de texto e sua exibição no <application>OmegaT</application> mude. Esta função pode ser usada separadamente para os três painéis (Editor, Correspondências parciais e Glossário); basta clicar no painel e alternar o modo de exibição. Também pode ser usada em todos os campos de entrada no <application>OmegaT</application> – na janela de busca, para regras de segmentação, etc.</para>
+
+    <para>Usuário do Mac OS X, observem: use o atalho <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> e <emphasis role="bold">não </emphasis>cmd+Ctrl+O.</para>
+
+    <section>
+      <title>Combinação de sequências de texto EPD (esquerda para direita) e DPE (direita para esquerda) nos segmentos<indexterm class="singular">
+          <primary>Línguas da direita para a esquerda</primary> <secondary>Combinação de sequências de texto EPD e DPE nos segmentos</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Arquivos destino</primary> <secondary>Combinação de sequências de texto EPD e DPE nos segmentos</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Arquivos fonte</primary> <secondary>Combinação de sequências de texto EPD e DPE nos segmentos</secondary>
+        </indexterm></title>
+
+      <para>Quando o texto é escrito da direita para a esquerda, o modo de visualização padrão (esquerda para direita) pode ser usado. Em muitos casos, entretanto, é necessário incluir texto EPD em textos DPE. Por exemplo, nas tags do OmegaT, os nomes dos produtos que devem permanecer na língua fonte, espaços reservados em arquivos de localização e números em texto. Em casos como esses é necessário alternar para o modo DPE para que o texto (na verdade bidirecional) seja exibido corretamente. Note que quando o <application>OmegaT</application> está no modo DPE, tanto o texto fonte como o texto destino são exibidos neste modo. Isto significa que se a língua fonte é da EPD e a língua destino é da DPE, ou vice-versa, pode ser necessário alternar entre esses dois modos para visualizar o texto nos seus respectivos modos de escrita.</para>
+    </section>
+
+    <section>
+      <title>Tags do <application>OmegaT</application> nos segmentos DPE<indexterm class="singular">
+          <primary>Línguas da direita para a esquerda</primary> <secondary>Tags do OmegaT nos segmentos DPE</secondary>
+        </indexterm></title>
+
+      <para>Conforme mencionado acima, as tags do OmegaT são sequências da esquerda para a direita. Quando o tradutor trabalhar com línguas da DPE e EPD, para ler as tags do segmento fonte e digitá-las corretamente no segmento destino, será necessário alternar entre os modos EPD e DPE várias vezes.</para>
+
+      <para>Se o documento permitir, é recomendado que o tradutor retire as informações de estilo do documento original, dessa forma aparecerá apenas algumas tags na interface do OmegaT. Siga as dicas para lidar com as tags. Verifique as tags (ver Verificação de tags) e gere documentos traduzidos (ver acima e Menu) em intervalos regulares para facilitar a identificação de algum problema que surja. Uma dica: traduzir uma versão de texto simples e depois acrescentar o estilo necessário usando o programa relevante pode gerar menos problemas.</para>
+    </section>
+
+    <section>
+      <title>Criação de documentos DPE<indexterm class="singular">
+          <primary>Línguas da direita para esquerda</primary> <secondary>Criação de arquivos destino DPE</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Línguas da direita para esquerda</primary> <secondary>Arquivos destino</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Línguas da direita para esquerda</primary> <secondary>Criação de arquivos destino DPE</secondary>
+        </indexterm></title>
+
+      <para>Quando o documento traduzido for criado, ele exibirá a mesma direção do texto que o documento original. Se o texto é da esquerda para a direita, o documento traduzido deve ser modificado manualmente no programa onde será visualizado para ter o texto da direita para a esquerda. Cada formato de saída tem maneiras específicas de lidar com exibição da direita para a esquerda; consulte o manual dos programas.</para>
+      
+      <para>Para arquivos .docx, várias mudanças podem ser feitas automaticamente:<itemizedlist>
+      <listitem>Parágrafos, seções e tabelas têm sentido bidirecional</listitem>
+      <listitem>Sequências (elementos de texto) são definidas como DPE</listitem>     
+      </itemizedlist>
+      </para>
+
+      <para>Para evitar modificar os parâmetros de exibição dos arquivos destino cada vez que os arquivos são abertos, é possível modificar os parâmetros de exibição do arquivo fonte para que eles sejam usados pelos arquivos destino. Tais modificações podem ser feitas em arquivos ODF, por exemplo.</para>
+    </section>
+  </section>
+</chapter>

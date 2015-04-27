@@ -1,0 +1,871 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.shortcut.custom">
+  <title>Configuração de atalhos</title>
+
+  <section id="ch04.shortcuts.customization">
+    <title><indexterm class="singular">
+        <primary>Configuração</primary> de <secondary>atalhos</secondary>
+      </indexterm>Configuração de atalhos</title>
+
+    <para>A maioria dos itens que aparecem no menu principal podem ter os atalhos alterados. Você pode modificar os atalhos já atribuídos e acrescentar novos atalhos colocando um arquivo de definições de atalhos na sua pasta de preferências do OmegaT (veja <link linkend="user.files">Local dos arquivos do usuário</link>).</para>
+
+    <para>O arquivo de definições de atalhos deve ser nomeado <filename>MainMenuShortcuts.properties</filename> e deve conter no máximo uma definição de atalho por linha. Linhas vazias são aceitas e linhas de comentários devem começar com &quot;//&quot;. Tudo o que estiver depois do &quot;//&quot; será ignorado.</para>
+
+    <para>Uma vez que o arquivo <filename>MainMenuShortcuts.properties</filename> for modificado, o <application>OmegaT</application> deve ser reiniciado para aceitar os novos atalhos.</para>
+
+    <para>A sintaxe de definição de atalho é a seguinte: <code>&lt;código de item do menu&gt;=&lt;atalho&gt;</code>, onde <emphasis>&lt;código de item do menu&gt;</emphasis> é um código encontrado nas tabelas abaixo e <emphasis>&lt;atalho&gt;</emphasis> é uma combinação de teclas a serem pressionadas, especificada pelo usuário<footnote>
+        <para>A sintaxe completa de teclas pressionadas (atalhos) é definida na seguinte documentação do Java 1.6 da Oracle (no fim da página): <ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Atalhos de teclas pressionadas do Java 1.6</ulink></para>
+      </footnote>.</para>
+
+    <para>&lt;atalho&gt; deve ter o seguinte formato: 0 ou mais <code>&lt;modificador&gt;</code> seguido de 0 ou 1 <code>&lt;evento&gt;</code> seguido de 1 <code>&lt;tecla&gt;</code>, onde:<itemizedlist>
+        <listitem>
+          <para><code>&lt;modificador&gt;</code> pode ser: <emphasis>shift</emphasis>, <emphasis>control</emphasis>, <emphasis>ctrl</emphasis>, <emphasis>meta</emphasis><footnote>
+              <para>No Mac, o modificador <emphasis>meta</emphasis> deve ser usado para especificar a tecla <emphasis>command</emphasis>.</para>
+            </footnote>, <emphasis>alt</emphasis>,
+          <emphasis>altGraph</emphasis></para>
+        </listitem>
+
+        <listitem>
+          <para><code>&lt;evento&gt;</code> pode ser: <emphasis>digitado</emphasis>, <emphasis>pressionado</emphasis>, <emphasis>solto</emphasis></para>
+        </listitem>
+
+        <listitem>
+          <para>e <code>&lt;tecla&gt;</code> pode ser qualquer tecla disponível no seu teclado<footnote>
+              <para>Os keyevents (teclas) possíveis estão enumeradas na seguinte documentação do Java 1.6 da Oracle: <ulink url="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html">Descrição dos keyEvents do Java 1.6</ulink></para>
+            </footnote>.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <para>Por exemplo, nos atalhos padrão do OmegaT<footnote>
+        <para>O atalhos padrão do OmegaT estão disponíveis no Sourceforge: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties">Atalhos padrão do OmegaT</ulink></para>
+
+        <para>Os atalhos padrão do OmegaT para o Mac também estão disponíveis no Sourceforge, todos eles usam &quot;meta&quot; em vez de &quot;ctrl&quot;: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Atalhos padrão do OmegaT para o Mac</ulink></para>
+      </footnote>, pode-se encontrar:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><code>projectOpenMenuItem=ctrl O</code></para>
+      </listitem>
+
+      <listitem>
+        <para><code>editCreateGlossaryEntryMenuItem=ctrl shift G</code></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>O primeiro é o atalho para <guimenuitem>Abrir projeto</guimenuitem>, o segundo para <guimenuitem>Criar termos no glossário</guimenuitem>.</para>
+
+    <para>Se você quiser usar <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> para abrir um projeto, modifique o <filename>MainMenuShortcuts.properties</filename> da seguinte maneira:<code>
+    </code></para>
+
+    <para><code>projectOpenMenuItem=shift ctrl O</code>.</para>
+
+    <para>Se estiver em um Mac e quiser acrescentar o atalho <keycombo> <keycap>Shift</keycap> <keycap>Command</keycap> <keycap>S</keycap> </keycombo> para <menuchoice> <guimenu>Ferramentas</guimenu> <guimenuitem>Estatísticas</guimenuitem> </menuchoice>, acrescente a linha seguinte ao seu <filename>MainMenuShortcuts.properties</filename>:<code/></para>
+
+    <para><code> toolsShowStatisticsStandardMenuItem=shift meta
+    S</code></para>
+
+    <para>Então salve o arquivo e reinicie o <application>OmegaT</application>. Os novos atalhos devem aparecer agora ao lado dos itens de menu que foram modificados. Se não estiverem em conflito com atalhos de sistema, estarão disponíveis dentro do OmegaT.</para>
+  </section>
+
+  <section id="ch04.shortcuts.ProjectMenu">
+    <title>Menu Projeto</title>
+
+    <table>
+      <title>Menu Projeto</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Item de menu</entry>
+
+            <entry>Atalho padrão</entry>
+
+            <entry>Código de item de menu</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Novo</entry>
+
+            <entry/>
+
+            <entry>projectNewMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Abrir</entry>
+
+            <entry><keycap>Ctrl+O</keycap></entry>
+
+            <entry>projectOpenMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Baixar projetos de equipe</entry>
+
+            <entry/>
+
+            <entry>projectTeamNewMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Copiar arquivos para a pasta source…</entry>
+
+            <entry/>
+
+            <entry>projectImportMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Importar do MediaWiki…</entry>
+
+            <entry/>
+
+            <entry>projectWikiImportMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Recarregar</entry>
+
+            <entry><keycap>F5</keycap></entry>
+
+            <entry>projectReloadMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Fechar</entry>
+
+            <entry><keycap>Ctrl+Shift+W</keycap></entry>
+
+            <entry>projectCloseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Salvar</entry>
+
+            <entry><keycap>Ctrl+S</keycap></entry>
+
+            <entry>projectSaveMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Criar documentos traduzidos</entry>
+
+            <entry><keycap>Ctrl+D</keycap></entry>
+
+            <entry>projectCompileMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Propriedades…</entry>
+
+            <entry><keycap>Ctrl+E</keycap></entry>
+
+            <entry>projectEditMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Arquivos do projeto…</entry>
+
+            <entry><keycap>Ctrl+L</keycap></entry>
+
+            <entry>viewFileListMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Sair</entry>
+
+            <entry><keycap>Ctrl+Q</keycap></entry>
+
+            <entry>projectExitMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.EditMenu">
+    <title>Menu editar</title>
+
+    <table>
+      <title>Menu editar</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Item de menu</entry>
+
+            <entry>Atalho padrão</entry>
+
+            <entry>Código de item de menu</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Desfazer última ação</entry>
+
+            <entry><keycap>Ctrl+Z</keycap></entry>
+
+            <entry>editUndoMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Refazer última ação</entry>
+
+            <entry><keycap>Ctrl+Y</keycap></entry>
+
+            <entry>editRedoMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Substituir com correspondência</entry>
+
+            <entry><keycap>Ctrl+R</keycap></entry>
+
+            <entry>editOverwriteTranslationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Inserir correspondência</entry>
+
+            <entry><keycap>Ctrl+I</keycap></entry>
+
+            <entry>editInsertTranslationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Substituir com tradução automática</entry>
+
+            <entry><keycap>Ctrl+M</keycap></entry>
+
+            <entry>editOverwriteMachineTranslationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Substituir com texto fonte</entry>
+
+            <entry><keycap>Shift+Ctrl+R</keycap></entry>
+
+            <entry>editOverwriteSourceMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Inserir texto fonte</entry>
+
+            <entry><keycap>Shift+Ctrl+I</keycap></entry>
+
+            <entry>editInsertSourceMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Inserir tags do texto fonte</entry>
+
+            <entry><keycap>Shift+Ctrl+T</keycap></entry>
+
+            <entry>editTagPainterMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Exportar seleção</entry>
+
+            <entry><keycap>Shift+Ctrl+C</keycap></entry>
+
+            <entry>editExportSelectionMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Criar termos no glossário</entry>
+
+            <entry><keycap>Shift+Ctrl+G</keycap></entry>
+
+            <entry>editCreateGlossaryEntryMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Buscar no projeto…</entry>
+
+            <entry><keycap>Ctrl+F</keycap></entry>
+
+            <entry>editFindInProjectMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Selecionar correspondência parcial 1</entry>
+
+            <entry><keycap>Ctrl+1</keycap></entry>
+
+            <entry>editSelectFuzzy1MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Selecionar correspondência parcial 2</entry>
+
+            <entry><keycap>Ctrl+2</keycap></entry>
+
+            <entry>editSelectFuzzy2MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Selecionar correspondência parcial 3</entry>
+
+            <entry><keycap>Ctrl+3</keycap></entry>
+
+            <entry>editSelectFuzzy3MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Selecionar correspondência parcial 4</entry>
+
+            <entry><keycap>Ctrl+4</keycap></entry>
+
+            <entry>editSelectFuzzy4MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Selecionar correspondência parcial 5</entry>
+
+            <entry><keycap>Ctrl+5</keycap></entry>
+
+            <entry>editSelectFuzzy5MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Trocar letras para/Minúsculas</entry>
+
+            <entry/>
+
+            <entry>lowerCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Trocar letras para/Maiúsculas</entry>
+
+            <entry/>
+
+            <entry>upperCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Trocar letras para/Títulos</entry>
+
+            <entry/>
+
+            <entry>titleCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Alternar letra para…</entry>
+
+            <entry><keycap>Shift+F3</keycap></entry>
+
+            <entry>cycleSwitchCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Usar como tradução padrão</entry>
+
+            <entry/>
+
+            <entry>editMultipleDefault</entry>
+          </row>
+
+          <row>
+            <entry>Criar tradução alternativa</entry>
+
+            <entry/>
+
+            <entry>editMultipleAlternate</entry>
+          </row>
+
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.GoToMenu">
+    <title>Menu Ir para</title>
+
+    <table>
+      <title>Menu Ir para</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Item de menu</entry>
+
+            <entry>Atalho padrão</entry>
+
+            <entry>Código de item de menu</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Próximo segmento não traduzido</entry>
+
+            <entry><keycap>Ctrl+U</keycap></entry>
+
+            <entry>gotoNextUntranslatedMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Próximo segmento</entry>
+
+            <entry><keycap>Ctrl+N</keycap> ou <keycap>Enter</keycap> ou <keycap>Tab</keycap></entry>
+
+            <entry>gotoNextSegmentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Segmento anterior</entry>
+
+            <entry><keycap>Ctrl+P</keycap> ou <keycap>Ctrl+Enter</keycap> ou <keycap>Ctrl+Tab</keycap></entry>
+
+            <entry>gotoPreviousSegmentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Segmento número…</entry>
+
+            <entry><keycap>Ctrl+J</keycap></entry>
+
+            <entry>gotoSegmentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Próxima nota</entry>
+
+            <entry/>
+
+            <entry>gotoNextNoteMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Nota anterior</entry>
+
+            <entry/>
+
+            <entry>gotoPreviousNoteMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Avançar pelos segmentos…</entry>
+
+            <entry><keycap>Ctrl+Shift+N</keycap></entry>
+
+            <entry>gotoHistoryForwardMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Voltar pelos segmentos…</entry>
+
+            <entry><keycap>Ctrl+Shift+P</keycap></entry>
+
+            <entry>gotoHistoryBackMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.ViewMenu">
+    <title>Menu Exibir</title>
+
+    <table>
+      <title>Menu Exibir</title>
+
+      <indexterm class="singular">
+        <primary>Configuração de atalhos</primary> <secondary>Menu Exibir</secondary>
+      </indexterm>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Item de menu</entry>
+
+            <entry>Atalho padrão</entry>
+
+            <entry>Código de item de menu</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Marcar segmentos traduzidos</entry>
+
+            <entry/>
+
+            <entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Marcar segmentos não traduzidos</entry>
+
+            <entry/>
+
+            <entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Mostrar segmentos fonte</entry>
+
+            <entry/>
+
+            <entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Marcar segmentos repetidos</entry>
+
+            <entry/>
+
+            <entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Marcar segmentos com notas</entry>
+
+            <entry/>
+
+            <entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Marcar espaços inseparáveis</entry>
+
+            <entry/>
+
+            <entry>viewMarkNBSPCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Marcar espaços em branco</entry>
+
+            <entry/>
+
+            <entry>viewMarkWhitespaceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Marcar caracteres de controle de algoritmo bidirecional</entry>
+
+            <entry/>
+
+            <entry>viewMarkBidiCheckBoxMenuItem</entry>
+          </row>
+
+           <row>
+            <entry>Informações de modificação/Não exibir</entry>
+
+            <entry/>
+
+            <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
+          </row>
+
+         <row>
+            <entry>Informações de modificação/Exibir selecionadas</entry>
+
+            <entry/>
+
+            <entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Informações de modificação/Exibir todas</entry>
+
+            <entry/>
+
+            <entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.ToolsMenu">
+    <title>Menu Ferramentas</title>
+
+    <table>
+      <title>Menu Ferramentas</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Item de menu</entry>
+
+            <entry>Atalho padrão</entry>
+
+            <entry>Código de item de menu</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Verificar tags</entry>
+
+            <entry><keycap>Ctrl +T</keycap></entry>
+
+            <entry>toolsValidateTagsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Estatísticas</entry>
+
+            <entry/>
+
+            <entry>toolsShowStatisticsStandardMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Estatística das correspondências</entry>
+
+            <entry/>
+
+            <entry>toolsShowStatisticsMatchesMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.OptionsMenu">
+    <title>Menu Opções</title>
+
+    <table>
+      <title>Menu Opções</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Item de menu</entry>
+
+            <entry>Atalho padrão</entry>
+
+            <entry>Código de item de menu</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Usar TAB para avançar</entry>
+
+            <entry/>
+
+            <entry>optionsTabAdvanceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Sempre confirmar saída</entry>
+
+            <entry/>
+
+            <entry>optionsAlwaysConfirmQuitCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Tradução automática</entry>
+
+            <entry/>
+
+            <entry/>
+          </row>
+
+          <row>
+            <entry>TransTips/Habilitar TransTips</entry>
+
+            <entry/>
+
+            <entry>optionsTransTipsEnableMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>TransTips/Correspondência exata</entry>
+
+            <entry/>
+
+            <entry>optionsTransTipsExactMatchMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Fonte…</entry>
+
+            <entry/>
+
+            <entry>optionsFontSelectionMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Filtros de arquivo…</entry>
+
+            <entry/>
+
+            <entry>optionsSetupFileFiltersMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Segmentação…</entry>
+
+            <entry/>
+
+            <entry>optionsSentsegMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Verificador ortográfico…</entry>
+
+            <entry/>
+
+            <entry>optionsSpellCheckMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Modo de trabalho…</entry>
+
+            <entry/>
+
+            <entry>optionsWorkflowMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Verificação de tags…</entry>
+
+            <entry/>
+
+            <entry>optionsTagValidationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Equipe…</entry>
+
+            <entry/>
+
+            <entry>optionsTeamMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>TMXs externas…</entry>
+
+            <entry/>
+
+            <entry>optionsExtTMXMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Exibição…</entry>
+
+            <entry/>
+
+            <entry>optionsViewOptionsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Gravação e saída…</entry>
+
+            <entry/>
+
+            <entry>optionsSaveOptionsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Login de Proxy…</entry>
+
+            <entry/>
+
+            <entry>optionsViewOptionsMenuLoginItem</entry>
+          </row>
+
+          <row>
+            <entry>Restaurar janela principal</entry>
+
+            <entry/>
+
+            <entry>optionsRestoreGUIMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.HelpMenu">
+    <title>Menu Ajuda</title>
+
+    <table>
+      <title>Menu Ajuda</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Item de menu</entry>
+
+            <entry>Atalho padrão</entry>
+
+            <entry>Código de item de menu</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Manual do Usuário…</entry>
+
+            <entry><keycap>F1</keycap></entry>
+
+            <entry>helpContentsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Sobre…</entry>
+
+            <entry/>
+
+            <entry>helpAboutMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+</appendix>

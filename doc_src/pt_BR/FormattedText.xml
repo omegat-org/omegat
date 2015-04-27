@@ -2,7 +2,7 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.formatted.text">
   <title>Trabalhar com texto formatado<indexterm class="singular">
-      <primary>Arquivos destino</primary> <secondary>Texto formatado&lt;/s1
+      <primary>Arquivos destino</primary> <secondary>Texto formatado&lt;</secondary>
     </indexterm><indexterm class="singular">
       <primary>Arquivos fonte</primary> <secondary>Texto formatado</secondary>
     </indexterm></title>

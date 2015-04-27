@@ -1,0 +1,906 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;3.&nbsp;Como instalar e usar o OmegaT</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Manual do Usuário">
+      <link rel="up" href="index.html" title="OmegaT - Manual do Usuário">
+      <link rel="prev" href="chapter.instant.start.guide.html" title="Chapter&nbsp;2.&nbsp;Aprenda a usar o OmegaT em 5 minutos!">
+      <link rel="next" href="chapter.user.interface.html" title="Chapter&nbsp;4.&nbsp;A interface do usuário">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;3.&nbsp;Como instalar e usar o <span class="application">OmegaT</span></th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.instant.start.guide.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.user.interface.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.installing.and.running"></a>Chapter&nbsp;3.&nbsp;Como instalar e usar o <span class="application">OmegaT</span></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.installing.and.running.html#d0e404">1. Usuários do Windows</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#d0e412">1.1. Baixando o pacote</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#OmegaT.installation.Windows">1.2. <span class="application">Instalando o OmegaT</span></a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#running.OmegaT.Windows">1.3. Executando o OmegaT</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#d0e498">1.4. Atualizar o OmegaT</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#Linux.Intel.users">2. Usuários do Linux (Intel)</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#which.package.to.download.Linux">2.1. Baixando o pacote correto</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#OmegaT.installation.Linux">2.2. <span class="application">Instalando o OmegaT</span></a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#adding.OmegaT.to.your.menus.or.panels">2.3. Acrescente o <span class="application">OmegaT</span> nos menus (KDE) ou painéis (Gnome)</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#running.OmegaT.Linux">2.4. Executando o OmegaT</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#MAC.OSX.users">3. Usuários do Mac OS X</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#which.package.to.download.OSX">3.1. Baixando o pacote</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#OmegaT.installation.OSX">3.2. <span class="application">Instalando o OmegaT</span></a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#adding.OmegaT.to.the.dock">3.3. Adicionando o <span class="application">OmegaT</span> na Dock</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#running.OmegaT.OSX">3.4. Executando o OmegaT</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#Mac.OSX.goodies">3.5. Mac OS X goodies</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#other.systems">4. Outros sistemas</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#d0e896">4.1. Baixando o pacote correto</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#OmegaT.installation.other">4.2. <span class="application">Instalando o OmegaT</span></a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#installing.convenient.shortcuts">4.3. Instalando atalhos úteis</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#running.OmegaT.other">4.4. Executando o OmegaT</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#using.Java.Web.Start">5. Usando o Java Web Start</a></span></dt>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#d0e1046">6. Iniciando o OmegaT a partir da linha de comando</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#method1.opening.commandline.window">6.1. Abrir uma janela da linha de comando</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#launch.command.arguments">6.2. Parâmetros do comando de inicialização do programa</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#omegat.command.arguments">6.3. OmegaT no modo de linha de comando</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#building.OmegaT.from.source">7. Compilando o<span class="application">OmegaT</span> a partir do código-fonte</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e404"></a>1.&nbsp;Usuários do Windows<a class="indexterm" name="d0e407"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e412"></a>1.1.&nbsp;Baixando o pacote
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Você tem uma implementação Java compatível com o Oracle's Java 1.6 JRE?</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Sim: </strong></span>baixe <span class="emphasis"><em>OmegaT_3.n.n_Windows_without_JRE.exe</em></span>.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Não / não sei:</strong></span> baixe o<span class="emphasis"><em> OmegaT_3.n.n_Windows.exe.</em></span></p>
+                        <p>Este pacote vem com o Oracle's Java Runtime Environment. Este JRE não interferirá com outras implementações Java que podem
+                           estar instaladas em seu sistema.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="OmegaT.installation.Windows"></a>1.2.&nbsp;<span class="application">Instalando o OmegaT</span></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Para instalar o <span class="application">OmegaT</span>, dê dois cliques no programa que baixou.
+               </p>
+               <p>No início da instalação é possível selecionar o idioma que será usado durante a instalação. Na janela seguinte você pode indicar
+                  que o idioma selecionado será utilizado no OmegaT. Se você marcar a caixa de seleção correspondente, o arquivo OmegaT.l4J.ini
+                  é modificado para utilizar o idioma selecionado (veja os detalhes na próxima seção). Depois que tiver aceitado o contrato
+                  de licença, o programa de instalação pergunta se você gostaria de criar uma pasta no menu  <span class="emphasis"><em>iniciar</em></span> , e se gostaria de criar um atalho na área de trabalho e na barra de inicialização rápida - você pode criar esses atalhos
+                  depois, arrastando o <span class="emphasis"><em><span class="application">OmegaT</span>.exe</em></span> para a área de trabalho ou para o menu iniciar, para assim criar um vínculo. O último quadro disponibiliza para leitura o
+                  leiame e os arquivos de mudança para a versão que foi instalada.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="running.OmegaT.Windows"></a>1.3.&nbsp;Executando o <span class="application">OmegaT<a class="indexterm" name="d0e459"></a></span></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Após instalar o<span class="application">OmegaT</span> , clique em<span class="emphasis"><em><span class="application">OmegaT</span>.jar</em></span> para rodar o programa ou o inicie diretamente da linha de comando.
+               </p>
+               <p>Entretanto, a maneira mais simples para iniciar o OmegaT é executar o<span class="emphasis"><em> <span class="application">OmegaT</span>.exe</em></span>. <a class="indexterm" name="d0e482"></a>Neste caso, as opções para iniciar o programa serão lidas do arquivo <span class="emphasis"><em><span class="application">OmegaT</span>.l4J.ini </em></span>, que está na mesma pasta que o arquivo exe, e que pode ser editado para refletir suas configurações. O exemplo a seguir para
+                  o arquivo INI reserva 1GB de memória, tem o francês como língua do usuário e o Canadá como país:
+               </p>
+               <div class="literallayout">
+                  <p><code class="code">#&nbsp;OmegaT.exe&nbsp;runtime&nbsp;configuration&nbsp;#&nbsp;Para&nbsp;usar&nbsp;um&nbsp;parâmetro,&nbsp;apague&nbsp;o&nbsp;símbolo&nbsp;'#'&nbsp;antes&nbsp;do&nbsp;'-'&nbsp;#&nbsp;Memory&nbsp;-Xmx1024M&nbsp;#&nbsp;Language&nbsp;-Duser.language=FR&nbsp;#&nbsp;Country&nbsp;-Duser.country=CA</code></p>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e498"></a>1.4.&nbsp;Atualizar o OmegaT<a class="indexterm" name="d0e501"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p><span class="emphasis"><em>Esta informação aplica-se apenas às versões "tradicionais" do OmegaT para Windows. Isso não se aplica para as versões WEB
+                        Start, que são atualizadas automaticamente, nem para as versões multiplataforma instaladas no Windows.</em></span></p>
+               <p>Se você já possui a versão do OmegaT instalada no computador e gostaria de atualizar para a versão mais recente, há duas opções:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Instalar sobre a instalação já existente. </strong></span>Para isso, selecione a pasta de instalação já existente ao instalar a nova versão. A versão "antiga" do OmegaT será sobrescrita,
+                           mas qualquer configuração será mantida. Isso inclui as preferências configuradas no OmegaT, qualquer modificação feita no
+                           arquivo<code class="filename"> OmegaT.l4J.ini</code> e também no script de inicialização  (.bat file), caso use algum desses.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Com esse método, é possível baixar a versão "Windows without JRE", considerando que a nova instalação utilizará o JRE existente.</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Instalar em uma nova pasta. </strong></span>Isso permitirá manter as duas versões lado a lado, podendo trabalhar dessa forma até sentir-se confortável com a nova versão.
+                           Esse método também usará as preferências e configurações que fizer no OmegaT. No entanto, neste caso:
+                        </p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
+                              <li class="listitem">
+                                 <p>Se você tiver feito alterações no arquivo<code class="filename"> OmegaT.l4J.ini </code>e/ou estiver usando um arquivo .bat, você deve copiá-los para a outra pasta.
+                                 </p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
+                              <li class="listitem">
+                                 <p>Se a sua instalação do OmegaT é uma versão "Windows with JRE", a nova versão também deve ser "Windows with JRE"</p>
+                              </li>
+                           </ul>
+                        </div>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="Linux.Intel.users"></a>2.&nbsp;Usuários do Linux (Intel)<a class="indexterm" name="d0e542"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="which.package.to.download.Linux"></a>2.1.&nbsp;Baixando o pacote correto
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Você tem uma implementação Java compatível com o Oracle's Java 1.6 JRE?</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Sim: </strong></span>baixe o <span class="emphasis"><em>OmegaT_3.n.n_Without_JRE.zip</em></span>.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Não / não sei:</strong></span> baixe o <span class="emphasis"><em>OmegaT_3.n.n_Linux.tar.bz2.</em></span></p>
+                        <p>Este pacote vem com o Oracle's Java Runtime Environment. Este JRE não interferirá com outras implementações Java que podem
+                           estar instaladas em seu sistema.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="OmegaT.installation.Linux"></a>2.2.&nbsp;<span class="application">Instalando o OmegaT</span></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Descompactar/untar o arquivo baixado. Isso criará uma pasta omegat/ na pasta de trabalho onde você encontrará todos os arquivos
+                  necessários para executar o  <span class="application">OmegaT</span>. Para untar o arquivo <span class="emphasis"><em>.tar.gz</em></span> :
+               </p>
+               <p><span class="emphasis"><em>$ tar xf downloaded_file.tar.gz</em></span></p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="adding.OmegaT.to.your.menus.or.panels"></a>2.3.&nbsp;Acrescente o <span class="application">OmegaT</span> nos menus (KDE) ou painéis (Gnome)
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="KDE.users"></a>2.3.1.&nbsp;Usuários do KDE 4<a class="indexterm" name="d0e594"></a></h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Você pode adicionar o <span class="application">OmegaT</span> aos seus menus da seguinte maneira:
+                  </p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p>Pressione <span class="bold"><strong> <span class="keysym">Alt+F2</span> </strong></span> para exibir o KRunner. Digite <span class="emphasis"><em>kmenuedit+enter</em></span> para executar o comando. O KMenuEditor aparecerá. Em KMenuEditor selecione <span class="emphasis"><em>Arquivo -&gt; Novo item.</em></span></p>
+                        </li>
+                        <li class="listitem">
+                           <p>Depois de selecionar um menu apropriado, acrescente um submenu/item com <span class="emphasis"><em>Arquivo - Novo</em></span> Submenu e <span class="emphasis"><em>Arquivo - Novo item</em></span>. Digite <span class="application">OmegaT</span> como o nome do novo item.
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>No campo "Comando", use o botão de navegação para encontrar o script para rodar o <span class="application">OmegaT</span> (o arquivo chamado <span class="application">OmegaT</span> na pasta descompactada), e o selecione.
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>Clique no ícone (à direita dos campos Nome/Descrição/Comentário)</p>
+                        </li>
+                        <li class="listitem">
+                           <p>Outros ícones - Procure, e acesse a subpasta /images na pasta do programa <span class="application">OmegaT</span>. Selecione o ícone <span class="application">OmegaT</span>.png.
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>Finalmente, salve as alterações em <span class="emphasis"><em>Arquivo - Salvar.</em></span></p>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="GNOME.users"></a>2.3.2.&nbsp;Usuários do GNOME
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Você pode adicionar o <span class="application">OmegaT</span> aos seus menus da seguinte maneira:
+                  </p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p>Clique com o botão direito do mouse no painel - <span class="emphasis"><em>Adicionar novo atalho.</em></span></p>
+                        </li>
+                        <li class="listitem">
+                           <p>Digite "<span class="application">OmegaT</span>" no campo "Nome"; no campo "Comando", use o botão de navegação para encontrar o script para iniciar o<span class="application">OmegaT</span> (o arquivo denominado <span class="application">OmegaT</span> na pasta descompactada). Selecione e confirme com OK.
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>Clique no ícone, depois em <span class="emphasis"><em>Pesquisar…</em></span> e vá até a subpasta /images na pasta do programa <span class="application">OmegaT</span> Selecione o ícone <span class="emphasis"><em><span class="application">OmegaT</span>.png</em></span>. O GNOME pode não exibir os arquivos de ícone em formatos disponíveis e, inicialmente, parece esperar um arquivo SVG, mas
+                              se a pasta estiver selecionada, os arquivos devem aparecer e o<span class="application">OmegaT</span>.png pode ser selecionado.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="running.OmegaT.Linux"></a>2.4.&nbsp;Executando o <span class="application">OmegaT<a class="indexterm" name="d0e705"></a></span></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>O OmegaT pode ser iniciado pela linha de comando com um script que inclua as opções de inicialização ou ao clicar em<span class="emphasis"><em><span class="application">OmegaT</span>.jar</em></span> para iniciar o programa diretamente. Os métodos diferem dependendo da distribuição. Verifique se as configurações de <span class="emphasis"><em>PATH </em></span>estão corretas e que os arquivos .<span class="emphasis"><em>jar</em></span> estejam devidamente associados com um inicializador Java. Para mais informações, verifique "Iniciar pela linha de comando"
+                  abaixo.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="MAC.OSX.users"></a>3.&nbsp;Usuários do Mac OS X<a class="indexterm" name="d0e726"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="which.package.to.download.OSX"></a>3.1.&nbsp;Baixando o pacote
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Para executar, o<span class="application">OmegaT</span> 2.6 requer o Java 1.5. Use 'Software Update…' do menu Apple para atualizar sua versão Java.
+               </p>
+               <p>Baixe o <span class="emphasis"><em>OmegaT_3.n.n_Mac.zip.</em></span></p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="OmegaT.installation.OSX"></a>3.2.&nbsp;<span class="application">Instalando o OmegaT</span></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Dê um clique duplo em <span class="emphasis"><em>OmegaT_3.n.n_Mac.zip</em></span> para descompactá-lo. Isso criará uma pasta chamada<span class="emphasis"><em> <span class="application">OmegaT</span> </em></span>. A pasta contém dois arquivos: index.html e <span class="emphasis"><em><span class="application">OmegaT</span>.app.</em></span> Copie a pasta para um local apropriado (p.ex. Aplicativos). Depois de ter feito isso, o arquivo <span class="emphasis"><em>&gt;OmegaT_3.n.n_Mac.zip</em></span> pode ser apagado; ele não será mais necessário.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="adding.OmegaT.to.the.dock"></a>3.3.&nbsp;Adicionando o <span class="application">OmegaT</span> na Dock
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Arraste o <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> para a Dock.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="running.OmegaT.OSX"></a>3.4.&nbsp;Executando o <span class="application">OmegaT<a class="indexterm" name="d0e784"></a></span></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Dê um duplo clique em<span class="emphasis"><em> <span class="application">OmegaT</span>.app</em></span> ou clique na sua localização na Dock.
+               </p>
+               <p>Para acessar <span class="application"><span class="emphasis"><em>Info.plist</em></span></span>, clique com o botão direito em <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> e selecione "Mostrar conteúdo do pacote", depois, clique com o botão direito para abrir o arquivo e selecione o editor de
+                  texto de sua preferência. É possível usar o comando "cd" diretamente da linha de comando e abrir <span class="application"><span class="emphasis"><em>Info.plist</em></span> em um editor da linha de comando como emacs ou vi</span>.<span class="emphasis"><em> <a class="indexterm" name="d0e815"></a></em></span></p>
+               <p>Você pode modificar as  <span class="emphasis"><em>Propriedades</em></span> bem como a parte <span class="emphasis"><em>VMOptions</em></span>.
+               </p>
+               <p>Se quiser acrescentar valores na<span class="emphasis"><em> VMOptions</em></span>, coloque um espaço entre eles. Por exemplo, <code class="filename">-Xmx1024M -Duser.language=ja</code> lançará o<span class="application">OmegaT</span> com 1024MB de memória e com a interface de usuário em japonês.
+               </p>
+               <p>Para iniciar múltiplas instâncias do <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span>, dê um duplo clique no arquivo <span class="emphasis"><em>JavaApplicationStub</em></span> localizado em <span class="emphasis"><em><span class="application">OmegaT</span>.app/ Contents/MacOS/</em></span>.
+               </p>
+               <p><span class="emphasis"><em><span class="application"> </span></em></span>Use o arquivo <span class="emphasis"><em><span class="application">OmegaT</span>.jar</em></span> localizado em <span class="emphasis"><em><span class="application">OmegaT</span>.app/Contents/Resources/Java/</em></span> para iniciar o <span class="application">OmegaT</span> a partir da linha de comando. Para mais informações, verifique "Iniciar pela linha de comando" abaixo.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="Mac.OSX.goodies"></a>3.5.&nbsp;Mac OS X goodies
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p><span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> pode ser acessado a partir do Mac OS X Services. Assim, você pode acessar uma palavra em qualquer lugar do <span class="application">OmegaT</span> e usar os Services para verificar a palavra, por exemplo no Spotlight ou no Google. Você também pode usar o AppleScript ou
+                  Automator para criar Services ou scripts que automatizam as ações frequentes
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="other.systems"></a>4.&nbsp;Outros sistemas<a class="indexterm" name="d0e889"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Esta informação aplica-se aos sistemas como o Solaris SPARC/x86/x64, Linux x64/PowerPC, Windows x64</p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e896"></a>4.1.&nbsp;Baixando o pacote correto
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p><span class="application">OmegaT</span> está disponível num pacote junto com o Oracle Java JRE para as plataformas Linux (Intel x86) e Windows. Os usuários de outras
+                  plataformas (Linux PowerPC, Linux x64, Solaris SPARC/x86/x64, Windows x64 etc) devem ter um Java JRE funcional e compatível
+                  com seu sistema para poderem usar o<span class="application">OmegaT</span>.
+               </p>
+               <p>Você tem uma implementação Java compatível com o Oracle's Java 1.6 JRE?</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Sim: </strong></span>baixe o <span class="emphasis"><em>OmegaT_3.n.n_Windows_without_JRE.</em></span>zip. Este pacote pode ser usado em qualquer plataforma onde um JRE compatível com Java 1.6 JRE estiver instalado
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Não sei:</strong></span> abra um terminal e digite "java -version". Se aparecer a mensagem 'command not found' (comando não encontrado) ou algo parecido,
+                           é provável que o Java não está instalado no seu sistema
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Não:</strong></span> instale um Java JRE no seu sistema (ver abaixo) e baixe o <span class="emphasis"><em>OmegaT_3.n.n_Without_JRE.zip</em></span>.
+                        </p>
+                        <p>Oracle oferece JREs para Solaris SPARC/x86 (Java 1.6) e para Linux x64, Solaris x64, Windows x64 (Java 1.6) em <a class="ulink" href="http://www.oracle.com/technetwork/java/archive-139210.html" target="_top">http://www.oracle.com/technetwork/java/archive-139210.html</a></p>
+                        <p>IBM oferece JREs para Linux PowerPC em <a class="ulink" href="http://www.ibm.com/developerworks/java/jdk/linux/download.html" target="_top">http://www.ibm.com/developerworks/java/jdk/linux/download.htm</a></p>
+                        <p>Siga as instruções de instalação do pacote que se aplica ao seu sistema.</p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="OmegaT.installation.other"></a>4.2.&nbsp;<span class="application">Instalando o OmegaT</span><a class="indexterm" name="d0e944"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Para instalar o <span class="application">OmegaT</span>, basta descompactar o arquivo <span class="bold"><strong>OmegaT_3.n.n_Without_JRE.zip</strong></span> file. Isso criará um diretório <span class="emphasis"><em>./OmegaT_3.n.n_Without_JRE/</em></span> na pasta de trabalho com todos os arquivos necessários para rodar o<span class="application">OmegaT</span>.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="installing.convenient.shortcuts"></a>4.3.&nbsp;Instalando atalhos úteis
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Siga as instruções do seu sistema para instalar os atalhos do <span class="application">OmegaT</span> nos locais de sua escolha.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="running.OmegaT.other"></a>4.4.&nbsp;Executando o <span class="application">OmegaT<a class="indexterm" name="d0e976"></a></span></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Depois de instalado, o <span class="application">OmegaT</span> pode ser iniciado diretamente da linha de comando, ou você poderá criar um script que inclui os parâmetros de inicialização
+                  para a linha de comando ou ainda clicar no <span class="emphasis"><em><span class="application">OmegaT</span>.jar</em></span>para iniciar o programa diretamente. Os métodos diferem dependendo da distribuição. Verifique se as configurações de <span class="emphasis"><em>PATH</em></span> estão corretas e que os arquivos <span class="emphasis"><em>.jar </em></span> estão corretamente associados com um lançador Java. Para mais informações, verifique "Iniciar pela linha de comando" abaixo.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="using.Java.Web.Start"></a>5.&nbsp;Usando o Java Web Start<a class="indexterm" name="d0e1000"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Com o uso da tecnologia Java Web Start (parte do Java 1.6 e versões mais recentes), os aplicativos independentes do Java podem
+               ser implementados com um único clique na rede. O Java Web Start assegura que a versão mais atual do aplicativo será instalada,
+               bem como a versão correta do Java Runtime Environment (JRE). Para iniciar o OmegaT pela primeira vez com o Java Web Start,
+               carregue a seguinte URL no seu navegador:
+            </p>
+            <p><span class="emphasis"><em>http://omegat.sourceforge.net/webstart/<span class="application">OmegaT</span>.jnlp</em></span></p>
+            <p>Baixe o arquivo<span class="emphasis"><em> <span class="application">OmegaT</span>.jnlp</em></span> e depois clique nele. Durante a instalação, dependendo do seu sistema operacional, você pode receber diversos avisos de segurança.
+               As permissões que você dá para esta versão (que podem ser mencionadas como um "acesso irrestrito ao computador") são idênticas
+               às permissões dadas para a versão local, por exemplo, elas permitem o acesso ao disco rígido do computador. Os próximos cliques
+               em <span class="emphasis"><em><span class="application">OmegaT</span>.jnlp</em></span> farão uma verificação se há versões mais novas e, se houver, instalá-las, e em seguida iniciar o <span class="application">OmegaT</span>. Após a instalação inicial você também pode utilizar o <span class="emphasis"><em><span class="application">OmegaT</span>.jnlp</em></span> quando estiver offline.
+            </p>
+            <p><span class="bold"><strong>Privacidade</strong></span>: o <span class="application">OmegaT</span> Java Web Start não guarda nenhuma informação fora do computador no qual está sendo executado. O aplicativo é executado somente
+               em seu computador. Seus documentos e memórias de tradução permanecem no seu computador, e o projeto<span class="application">OmegaT</span> não terá acesso ao seu trabalho ou informações.
+            </p>
+            <p>Lembre-se de que se você precisar ou quiser usar algum dos parâmetros de inicialização (ver acima), deverá usar a instalação
+               normal.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e1046"></a>6.&nbsp;Iniciando o OmegaT a partir da linha de comando<a class="indexterm" name="d0e1049"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Normalmente, não é necessário iniciar o <span class="application">OmegaT</span> a partir da linha de comando. No entanto, a opção da linha de comando permite ao usuário controlar e modificar o comportamento
+               do programa. Há duas maneiras de iniciar o <span class="application">OmegaT</span> usando a linha de comando.
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="method1.opening.commandline.window"></a>6.1.&nbsp;Abrir uma janela da linha de comando
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>A janela da linha de comando também é chamada como "janela do terminal". No Windows, ela é chamada "janela do MS-DOS" e está
+                  disponível no menu Iniciar, em Programas, no item "MS-DOS". O equivalente no Mac OS X é a aplicação Terminal localizada em
+                  Aplicativos  → Utilitários.
+               </p>
+               <p>Para iniciar o <span class="application">OmegaT</span>, normalmente são digitados dois comandos. O primeiro deles é:
+               </p>
+               <p><span class="emphasis"><em> <code class="literal">cd {pasta}</code> </em></span></p>
+               <p>onde<span class="emphasis"><em> {pasta}</em></span> é o nome da pasta com o caminho completo na qual o <span class="application">OmegaT</span> está localizado - especificamente, o arquivo <span class="emphasis"><em><span class="application">OmegaT</span>.jar</em></span>. Na prática, este comando será algo parecido com o seguinte:
+               </p>
+               <p>No Windows</p>
+               <p><span class="emphasis"><em> <code class="literal">cd C:\Program
+                                 Files\<span class="application">OmegaT</span></code> </em></span></p>
+               <p>No Mac OS X</p>
+               <p><code class="literal"> <code class="literal">cd &lt;<span class="application">OmegaT</span>.app
+                              location&gt;/<span class="application">OmegaT</span>.app/Contents/Resources/Java/</code>
+                           </code></p>
+               <p>No Linux</p>
+               <p><code class="literal">cd /usr/local/omegat</code></p>
+               <p>Este comando muda de pasta para aquela que contém o arquivo executável do<span class="application">OmegaT</span>. O segundo comando é o que realmente incia o <span class="application">OmegaT</span>. Na sua forma mais básica, este comando é:
+               </p>
+               <p><code class="literal">java -jar
+                           <span class="application">OmegaT</span>.jar</code></p>
+               <p>Preste atenção para o uso das letras maiúsculas - num SO diferente do Windows o programa não iniciará se você escrever <span class="emphasis"><em>omegat</em></span> em vez de <span class="emphasis"><em>OmegaT </em></span>!
+               </p>
+               <p>Este método tem uma vantagem especial de ser adequado para depuração de bugs: se um erro ocorre durante a utilização do programa,
+                  a janela do terminal mostra uma mensagem de erro que pode conter informações úteis sobre a causa do problema.
+               </p>
+               <p>O metódo acima é um caminho pouco prático para inicializar o programa habitualmente. Por esta razão, os dois comandos descritos
+                  acima estão contidos em um arquivo (um "script ", também chamado de "arquivo .bat" em sistemas Windows).
+               </p>
+               <p>Quando esse arquivo é executado, os comandos dentro dele são executados automaticamente. Assim, para fazer alterações no comando
+                  para iniciar o programa, basta modificar o arquivo.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="launch.command.arguments"></a>6.2.&nbsp;Parâmetros do comando de inicialização do programa<a class="indexterm" name="d0e1151"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>O comando básico já foi mencionado acima. As alterações neste comando requerem a adição de "parâmetros". Os parâmetros são
+                  adicionados depois do primeiro <span class="emphasis"><em>"java"</em></span>, e antes de <span class="emphasis"><em>"-jar <span class="application">OmegaT</span>.jar"</em></span>. Observer que no Windows é possível alterar o arquivo <span class="emphasis"><em><span class="application">OmegaT</span>.l4J.ini</em></span> para refletir suas preferências. Para fazer o mesmo no Mac OS X, você pode modificar o <span class="emphasis"><em>Info.plist</em></span> localizado em <span class="emphasis"><em><span class="application">OmegaT</span>.app/Contents/</em></span>.
+               </p>
+               <p>A lista de parâmetros possíveis é fornecida abaixo. Os usuários avançados podem obter mais informações sobre os parâmetros
+                  digitando <span class="emphasis"><em>man java</em></span> na janela do terminal.
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Idioma da interface do usuário</strong></span></p>
+                        <p><span class="bold"><strong>-Duser.language=XX</strong></span><a class="indexterm" name="d0e1193"></a> Normalmente, ou seja, quando o <span class="application">OmegaT</span> é iniciado sem parâmetros, o programa primeiramente detecta o idioma do sistema operacional do usuário. Se uma interface
+                           do usuário neste idioma existir, ela será usada pelo <span class="application">OmegaT</span>. Assim, se o sistema operacional do usuário é russo e o<span class="application">OmegaT</span> foi localizado em russo, o<span class="application">OmegaT</span> será exibido com a interface do usuário em russo, menus em russo, etc. Se o idioma do usuário do sistema não estiver disponível,
+                           o<span class="application">OmegaT</span> ficará em inglês. Esse é o comportamento padrão.
+                        </p>
+                        <p>O parâmetro <span class="emphasis"><em>"-Duser.language=XX"</em></span> faz com que o <span class="application">OmegaT</span> use o idioma especificado e não o idioma do sitema operacional do usuário. "XX" no comando representa o código de dois dígitos
+                           do idioma desejado. Para iniciar o <span class="application">OmegaT</span> com a interface em francês (por exemplo, em um sistema operacional em russo), o comando seria assim:
+                        </p>
+                        <p><code class="literal">java -Duser.language=fr -jar
+                                        <span class="application">OmegaT</span>.jar</code></p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>País do usuário</strong></span></p>
+                        <p><span class="bold"><strong>-Duser.country=XX</strong></span><a class="indexterm" name="d0e1241"></a> Além do idioma, é possível também especificar o país, por exemplo CN ou TW no caso do idioma chinês. Para exibir o guia de
+                           início rápido na língua desejada, é preciso especificar o idioma e o país. Isso é necessário mesmo que haja apenas uma combinação
+                           disponível, como pt_BR, no caso de Português / Brasil.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Suavização da fonte</strong></span> - (Java 1.6 only)
+                        </p>
+                        <p><span class="bold"><strong>-Dswing.aatext=true<a class="indexterm" name="d0e1258"></a></strong></span> Este parâmetro tem efeito na suavização das fontes, melhorando sua aparência. 
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Atribuição de memória</strong></span></p>
+                        <p><span class="bold"><strong>-XmxZZM </strong></span><a class="indexterm" name="d0e1273"></a>Este comando atribui mais memória para o <span class="application">OmegaT</span>. Por padrão, são atribuídos 512 MB de memória, portanto não há vantagem em atribuir valor inferior a este. "ZZ" representa
+                           a quantidade em megabytes atribuída à memória. O comando para iniciar o <span class="application">OmegaT</span> com 1024 MB (1 gigabyte) de memória é este:
+                        </p>
+                        <p><code class="literal">java -Xmx1024M -jar
+                                        <span class="application">OmegaT</span>.jar</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Endereço IP do host de proxy</strong></span></p>
+                        <p><span class="bold"><strong><span class="bold"><strong>-Dhttp.proxyHost=nnn.nnn.nnn.nnn</strong></span> <a class="indexterm" name="d0e1302"></a></strong></span> O endereço IP do seu servidor proxy, se o seu sistema usar um proxy.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Número da porta do host de proxy</strong></span></p>
+                        <p><span class="bold"><strong>-Dhttp.proxyPort=NNNN</strong></span> <a class="indexterm" name="d0e1318"></a> O número da porta usada pelo seu sistema para acessar o servidor proxy.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Google Translate V2 </strong></span></p>
+                        <p><span class="bold"><strong>-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </strong></span><span class="bold"><strong><a class="indexterm" name="d0e1334"></a></strong></span> Se você se inscreveu para os serviços do Google Translate, digite aqui sua chave privada do Google API. Observe que a chave
+                           deve ter 38 caracteres.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Microsoft
+                                           Translator</strong></span><a class="indexterm" name="d0e1346"></a></p>
+                        <p>Certifique-se de que tem um conta gratuita da Microsoft Você precisa se inscrever no <a class="ulink" href="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema" target="_top">Windows Azure Marketplace</a> e usar o serviço de tradução. Observe que o uso de até 2 milhões de caracteres por mês é gratuito.  As duas entradas solicitadas
+                           estão disponíveis na sua<a class="ulink" href="https://datamarket.azure.com/account" target="_top">página da conta</a> mediante a chave da conta principal e ID do usuário:
+                        </p>
+                        <p><span class="bold"><strong>-Dmicrosoft.api.client_id=</strong></span><span class="bold"><strong>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</strong></span></p>
+                        <p>-<span class="bold"><strong>Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</strong></span></p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Opção de projeto de equipe<em class="parameter"><code><a class="indexterm" name="d0e1375"></a></code></em></strong></span></p>
+                        <p><span class="bold"><strong>-no-team</strong></span> se refere a configurações de projetos para trabalhos em equipe. Use essa opção caso o OmegaT não deva sincronizar os conteúdos
+                           do projeto.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Os parâmetros podem ser combinados: para iniciar o <span class="application">OmegaT</span> com todos os exemplos descritos acima, o comando seria:
+               </p>
+               <p><code class="literal">java -Dswing.aatext=true -Duser.language=pt
+                           -Duser.country=BR -Xmx1024M <span class="application">-DDhttp.proxyHost=192.168.1.1
+                              -Dhttp.proxyport<span class="bold"><strong>=</strong></span>3128 -jar
+                              -OmegaT</span>.jar</code></p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="omegat.command.arguments"></a>6.3.&nbsp;OmegaT no modo de linha de comando<a class="indexterm" name="d0e1403"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>O objetivo do modo console é usar o OmegaT como ferramenta de tradução em um ambiente de script. Ao iniciar no modo console,
+                  a interface gráfica do usuário não é carregada (assim, ele funcionará em qualquer console) e o projeto é processado automaticamente
+                  conforme requisitado.
+               </p>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="console.mode.prerequisites"></a>6.3.1.&nbsp;Pré-requisitos
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Para iniciar o <span class="application">OmegaT</span> no modo de linha de comando, é necessário existir um projeto do <span class="application">OmegaT</span>válido. O local do projeto não importa, desde que você o tenha adicionado na linha de comando ao iniciar.
+                  </p>
+                  <p>Se você precisar de configurações diferentes, os arquivos de configuração devem estar disponíveis. Isto pode ser feito de
+                     duas formas:
+                  </p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p>Inicie o <span class="application">OmegaT</span> normalmente (com a interface gráfica do usuário) e defina as configurações. Se iniciar o <span class="application">OmegaT</span> no modo console, serão usadas as mesmas configurações.
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>Se não for possível executar o <span class="application">OmegaT</span> normalmente (quando não existir ambiente gráfico disponível): copie os arquivos de configurações de outra instalação do <span class="application">OmegaT</span> para outro computador para uma pasta específica. O local não importa, pois você pode adicioná-lo na linha de comando ao iniciar.
+                              Os arquivos relevantes são <code class="literal">filters.conf</code> e <code class="literal">segmentation.conf</code> e estão na pasta base do usuário (tal como <code class="literal">C:\Documents and Settings\%User%\<span class="application">OmegaT</span></code> no Windows, <code class="literal">%user%/.omegat/</code> no Linux)
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="starting.in.console.mode"></a>6.3.2.&nbsp;Iniciando no modo console
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Para iniciar o <span class="application">OmegaT</span> no modo console, alguns parâmetros extras devem ser executados na inicialização. O mais importante é o<code class="literal">&lt;project-dir&gt;</code>, e opcionalmente<code class="literal"> --config-dir=&lt;config-dir&gt;. </code>Exemplo:
+                  </p>
+                  <p><code class="literal">java -jar <span class="application">OmegaT</span>.jar
+                                /path/to/project \</code></p>
+                  <p><code class="literal"> --config-dir=/path/to/config-files/ \</code></p>
+                  <p><code class="literal">
+                                --mode=console-translate|console-createpseudotranslatetmx|console-align</code></p>
+                  <p><code class="literal"> --source-pattern={regexp}</code></p>
+                  <p>Observe que todos os parâmetros iniciam com um caractere - duplo.</p>
+                  <p><span class="bold"><strong>Explicação:</strong></span></p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><code class="literal">&lt;project-dir&gt;</code> indica ao <span class="application">OmegaT</span> onde encontrar o projeto para tradução. Ao utilizar esse parâmetro, o <span class="application">OmegaT</span> inicia no modo console e traduzirá o projeto determinado.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><code class="literal">--config-dir=&lt;config-dir&gt;</code> indica ao <span class="application">OmegaT</span> em qual pasta os arquivos de configuração estão armazenados. Caso não utilize esse parâmetro, o<span class="application">OmegaT</span> usa os valores padrão (a pasta<span class="application">OmegaT</span> do usuário local, ou se não existir, a pasta de trabalho atual). Observe o duplo caractere -
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em><code class="literal">--mode</code>=…-</em></span> <span class="application">OmegaT</span> inicia em modo console para executar um dos seguintes serviços automaticamente
+                           </p>
+                           <div class="itemizedlist">
+                              <ul class="itemizedlist" style="list-style-type: circle; ">
+                                 <li class="listitem">
+                                    <p><span class="emphasis"><em><span class="emphasis"><em><code class="literal">--mode=console-translate</code></em></span></em></span></p>
+                                    <p>Neste modo, o OmegaT tentará traduzir os arquivos da pasta /source/ com as memórias de tradução disponíveis. Isso é útil para
+                                       executar o OmegaT em um servidor com arquivos TMX alimentados automaticamente para um projeto. 
+                                    </p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p><code class="literal">--mode=console-createpseudotranslatetmx</code></p>
+                                    <p>Neste modo, o OmegaT criará uma TMX para todo o projeto, baseado somente nos arquivos fonte. Você especifica o arquivo TMX
+                                       a ser criado com
+                                    </p>
+                                    <p><code class="literal">--pseudotranslatetmx=allsegments.tmx
+                                                          --pseudotranslatetype=[equal|empty]</code></p>
+                                    <p>O parâmetro <span class="emphasis"><em>pseudotranslatetype</em></span> especifica se os segmentos destino são iguais aos de origem ou se devem ser deixados vazios.
+                                    </p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p><code class="literal">--mode=console-align</code></p>
+                                    <p>Neste modo, o OmegaT alinhará os arquivos de propriedades Java encontrados na pasta<code class="literal"> /source/ </code>do projeto para os conteúdos encontrados em um local específico. A TMX resultante é armazenada na pasta <code class="filename">/omegat/</code> com o nome <code class="filename">align.tmx</code>.
+                                    </p>
+                                    <p>Neste caso, um parâmetro adicional é requisitado, especificando o local dos dados de destino:</p>
+                                    <p><code class="literal">--alignDir={local dos arquivos traduzidos}</code></p>
+                                    <p>O<code class="filename">alignDir</code> deve conter uma tradução na língua de destino do projeto. Por exemplo, se o projeto for EN-&gt;FR, o alignDir deve conter um
+                                       pacote com final _fr. A tmx resultante é armazenada na pasta <code class="literal">omegat</code> com o nome <code class="filename">align.tmx</code>.
+                                    </p>
+                                 </li>
+                              </ul>
+                           </div>
+                        </li>
+                        <li class="listitem">
+                           <p><code class="literal">--source-pattern={regexp} </code></p>
+                           <p>Quando o modo for usado, essa opção especificará os arquivos a serem processados automaticamente. Se o parâmetro não for especificado,
+                              todos os arquivos serão processados. Alguns exemplos típicos para limitar sua escolha:
+                           </p>
+                           <div class="itemizedlist">
+                              <ul class="itemizedlist" style="list-style-type: circle; ">
+                                 <li class="listitem">
+                                    <p><span class="emphasis"><em><code class="literal">.*\.html</code></em></span></p>
+                                    <p>Todos os arquivos HTML serão traduzidos - observe que o ponto habitual em *.html deve ser de escape (\.), como especificado
+                                       pelas regras de expressões regulares.
+                                    </p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p><code class="literal">test\.html</code></p>
+                                    <p>Somente o arquivo test.html na raiz da pasta de origem será traduzido. Se houver outros arquivos chamado teste.html em outras
+                                       pastas, eles serão ignorados.
+                                    </p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p><code class="literal">dir-10\\test\.html</code></p>
+                                    <p>Somente o arquivo test.html na pasta dir-10 será processado. Novamente observe que a barra invertida é também de escape (\\).</p>
+                                 </li>
+                              </ul>
+                           </div>
+                        </li>
+                        <li class="listitem">
+                           <p><code class="literal">--output-tag-validation-={regexp} </code></p>
+                           <p>Quando o modo for usado, essa opção especificará os arquivos a serem processados automaticamente. Se o parâmetro não for especificado,
+                              todos os arquivos serão processados. Alguns exemplos típicos para limitar sua escolha:
+                           </p>
+                           <div class="itemizedlist">
+                              <ul class="itemizedlist" style="list-style-type: circle; ">
+                                 <li class="listitem">
+                                    <p><span class="emphasis"><em><code class="literal">.*\.html</code></em></span></p>
+                                    <p>Todos os arquivos HTML serão traduzidos - observe que o ponto habitual em *.html deve ser de escape (\.), como especificado
+                                       pelas regras de expressões regulares.
+                                    </p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p><code class="literal">test\.html</code></p>
+                                    <p>Somente o arquivo test.html na raiz da pasta de origem será traduzido. Se houver outros arquivos chamado teste.html em outras
+                                       pastas, eles serão ignorados.
+                                    </p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p><code class="literal">dir-10\\test\.html</code></p>
+                                    <p>Somente o arquivo test.html na pasta dir-10 será processado. Novamente observe que a barra invertida é também de escape (\\).</p>
+                                 </li>
+                              </ul>
+                           </div>
+                        </li>
+                        <li class="listitem">
+                           <p><code class="literal">--tag-validation=[abort|warn]</code><em class="parameter"><code>
+                                                outputFileName</code></em></p>
+                           <p>Esta opção permite a verificação de tags em lote. Se <code class="literal">anular </code>for selecionado, o validador de tags irá parar no primeiro segmento inválido. Se <code class="literal">aviso</code> for especificado, o validador de tags processará todos os segmentos e alertará sobre os segmentos com tags inválidas no arquivo
+                              especificado.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="console.mode.option.quiet"></a>6.3.3.&nbsp;Opção Quiet
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Um parâmetro extra na linha de comando específico para o modo console: <code class="literal">--quiet.</code> No modo quiet, menos informações aparecerão na tela. Não serão exibidas as mensagens que geralmente aparecem na barra de
+                     status.
+                  </p>
+                  <p>Uso: <code class="literal">java -jar <span class="application">OmegaT</span>.jar /path/to/project --mode=console-translate --quiet</code></p>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="console.mode.option.validatetags"></a>6.3.4.&nbsp;Opção para verificação de tags
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Outro parâmetro extra na linha de comando específico para o modo console: <code class="literal">--tag-validation=[abort|warn].</code> Quando esse parâmetro é adicionado, a verificação de tags é feita antes da tradução/alinhamento. Se o valor for <code class="literal">anular</code>, os erros de tag são exibidos e o programa é interrompido. Se o valor for <code class="literal">aviso</code>, os erros são exibidos mas o OmegaT continua a trabalhar.
+                  </p>
+                  <p>Uso: <code class="literal">java -jar <span class="application">OmegaT</span>.jar /path/to/project --mode=console-translate --tag-validation=abort</code></p>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>7.&nbsp;Compilando o<span class="application">OmegaT</span> a partir do código-fonte<a class="indexterm" name="d0e1690"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Observe que será necessário o programa ant (<span class="emphasis"><em>http://ant.apache.org/bindownload.cgi</em></span>) para compilar sua própria versão do OmegaT. Descompacte o arquivo <span class="emphasis"><em>OmegaT_3.n.n_Source.zip</em></span> e entre na pasta OmegaT_3.n.n_Source ou na pasta <span class="emphasis"><em>./omegat/</em></span> do código baixado do SVN. Certifique-se de que um arquivo build.xml está na pasta. Depois, digite na linha de comando:
+            </p>
+            <p><code class="literal">$ ant jar release</code></p>
+            <p>Isto irá compilar um distribuição completa do <span class="application">OmegaT</span> na pasta ./dist/, onde você encontrará todos os arquivos necessários para executar o <span class="application">OmegaT</span>.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.instant.start.guide.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.user.interface.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;2.&nbsp;Aprenda a usar o OmegaT em 5 minutos!&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;4.&nbsp;A interface do usuário</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

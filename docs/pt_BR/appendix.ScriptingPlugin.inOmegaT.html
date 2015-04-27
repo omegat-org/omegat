@@ -1,0 +1,178 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Appendix&nbsp;F.&nbsp;Plugin de scripts</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Manual do Usuário">
+      <link rel="up" href="index.html" title="OmegaT - Manual do Usuário">
+      <link rel="prev" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Appendix&nbsp;E.&nbsp;Plugin LanguageTool">
+      <link rel="next" href="appendix.website.html" title="Appendix&nbsp;G.&nbsp;OmegaT na web">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Appendix&nbsp;F.&nbsp;Plugin de scripts</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.LanguageToolPlugin.inOmegaT.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.website.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.ScriptingPlugin.inOmegaT"></a>Appendix&nbsp;F.&nbsp;Plugin de scripts<a class="indexterm" name="d0e10877"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e10882">1. Introdução</a></span></dt>
+               <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e10887">2. Instalação e uso</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10882"></a>1.&nbsp;Introdução
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>O OmegaT permite executar scripts em várias linguagens diferentes.</p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10887"></a>2.&nbsp;Instalação e uso
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>O plugin de scripts do OmegaT pode ser baixado no <a class="ulink" href="http://sourceforge.net/projects/omegat-plugins/files" target="_top">site de downloads do OmegaT</a>. Descompacte os arquivos e coloque-os na pasta "plugins", localizada na pasta de instalação do OmegaT, que é a pasta que
+               contém o OmegaT.jar. Se a pasta "plugins" não existir, crie-a primeiro.
+            </p>
+            <p>Isto acrescenta um novo submenu <span class="guisubmenu"> Ferramentas &gt; </span><span class="guisubmenu"> Scripts.</span> Abaixo do submenu <span class="guisubmenu">Scripts</span>, há 12 submenus disponíveis para scripts. Ao clicar em <span class="guisubmenu">Scripts</span> você abre a caixa de diálogo Scripts:
+            </p>
+            <div class="screenshot">
+               <div class="mediaobject"><img src="images/ScriptingDialog.png"></div>
+            </div>
+            <p>A caixa de diálogo de scripts permite carregar um script existente na área de texto e executá-lo no projeto aberto atual.
+               Para personalizar o recurso de scripts, faça o seguinte:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Na lista do painel esquerdo, clique no nome do script que deseja carregar no editor.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Clique com o botão direito em um botão de "&lt;1&gt;" a "&lt;12&gt;" no painel da base da tela e selecione "Adicionar script". No exemplo
+                        acima, dois scripts (posição 1 e 2) já foram adicionados.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Ao clicar com o botão esquerdo no número correspondente, o script selecionado será executado. Você pode ativar as macros selecionadas
+                        no menu principal ou também usando as opções no menu <span class="guisubmenu">Ferramentas </span>ou pressioanando<span class="keycap"><strong> Ctrl+Alt+F#</strong></span> (F# = teclas F1 a F12).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>As seguintes linguagens de script foram implementadas:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>NetRexx</strong></span> (http://www.netrexx.org/): suporta uma sintaxe REXX clássica, sem palavras-chave reservadas, junto com adições consideráveis
+                        para dar suporte a programação orientada ao objeto de maneira compatível com o modelo de objeto do Java. Todas as bibliotecas
+                        de classe Java existentes podem ser usadas sem alterações e sem configurações especiais; ao mesmo tempo, um programador Java
+                        pode optar por usar somente a classe Rexx do pacote de execução para melhorar o manejo de strings em programas fonte de sintaxe
+                        do Java.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>XLST</strong></span> (Extensible Stylesheet Language Transformations): é uma linguagem declarativa, baseada em XML e usada para a transformação
+                        de documentos em XML. O documento original não é modificado; ao invés disso, um novo documento é criado com base no conteúdo
+                        de um já existente. O novo documento pode ser serializado (saída) pelo processador em sintaxe de XML padrão ou em outro formato,
+                        como HTML ou texto simples. O XSLT é geralmente usado para converter dados entre esquemas de XML diferentes ou converter dados
+                        de XML em páginas da Web ou documentos PDF.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Groovy</strong></span> (http://groovy.codehaus.org): é uma linguagem dinâmica da máquina virtual Java. Aproveita os pontos fortes do Java mas tem
+                        recursos adicionais poderosos inspirados por linguagens como Python, Ruby e Smalltalk.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>JavaScript</strong></span> (às vezes abreviado como JS, para não ser confundido com o Java): é uma linguagem de script baseada em protótipos, tipagem
+                        fraca e dinâmica e funções de primeira classe. É uma linguagem de multiparadigma, com suporte imperativo, a estilos de programação
+                        funcionais e orientada a objetos. Como é a linguagem por trás de programas conhecidos, como o Firefox, é uma ferramenta de
+                        programação popular no meio do código aberto.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Todas as linguagens têm acesso ao modelo de objeto do OmegaT, com o projeto como o objeto principal. O seguinte fragmento
+               de código em groovy, por exemplo, verifica todos os segmentos em todos os arquivos do projeto atual e, se a tradução existir,
+               imprime a fonte e o alvo do segmento:
+            </p><pre class="programlisting">    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currSegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currSegment.getSrcText();
+                target = project.getTranslationInfo(currSegment).translation;
+                console.println(source + " &gt;&gt;&gt;&gt; " + target);
+            }     
+        }
+    }</pre></div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.LanguageToolPlugin.inOmegaT.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.website.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;E.&nbsp;Plugin LanguageTool&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;G.&nbsp;OmegaT na web</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

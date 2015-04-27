@@ -1,0 +1,235 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;14.&nbsp;Segmentação do texto fonte</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Manual do Usuário">
+      <link rel="up" href="index.html" title="OmegaT - Manual do Usuário">
+      <link rel="prev" href="chapter.translation.memories.html" title="Chapter&nbsp;13.&nbsp;Memórias de tradução">
+      <link rel="next" href="chapter.searches.html" title="Chapter&nbsp;15.&nbsp;Buscas">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;14.&nbsp;Segmentação do texto fonte</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.translation.memories.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.searches.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.segmentation"></a>Chapter&nbsp;14.&nbsp;Segmentação do texto fonte
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.segmentation.html#segmentation.rules">1. Regras de Segmentação</a></span></dt>
+               <dt><span class="section"><a href="chapter.segmentation.html#rules.priority">2. Prioridade de regra</a></span></dt>
+               <dt><span class="section"><a href="chapter.segmentation.html#creating.new.rule">3. Criação de uma nova regra</a></span></dt>
+               <dt><span class="section"><a href="chapter.segmentation.html#few.simple.examples">4. Alguns exemplos simples</a></span></dt>
+            </dl>
+         </div>
+         <p>Ferramentas de memória de tradução trabalham com unidades de texto chamadas segmentos. O <span class="application">OmegaT</span> tem duas maneiras de segmentar um texto: por parágrafo ou por segmentação de sentença (também referenciada como "segmentação
+            baseada em regras"). Para selecionar o tipo de segmentação, clique em <span class="guimenu"><a class="indexterm" name="d0e6912"></a>Projeto</span> → <span class="guimenuitem">Propriedades…</span> no menu principal e marque ou desmarque a caixa de seleção existente. A segmentação por parágrafo é mais vantajosa em certos
+            casos, tais como traduções estilizadas ou altamente criativas, nas quais o tradutor pode querer alterar a ordem de frase inteiras;
+            porém, para a maioria dos projetos, a segmentação por sentença é a escolha preferida, já que retorna melhores correspondências
+            da traduções anteriores. Se escolher segmentação por sentença, você pode definir as regras; basta clicar em  <span class="guimenu"><a class="indexterm" name="d0e6924"></a>Opções</span> → <span class="guimenuitem">Segmentação…</span> no menu principal.
+         </p>
+         <p>Regras de segmentação dependentes já estão disponíveis para muitos idiomas, então é provável que você não irá precisar se
+            envolver criando suas próprias regras de segmentação. Por outro lado, esta funcionalidade pode ser muito útil em casos especiais,
+            em que você pode aumentar sua produtividade ao ajustar as regras de segmentação ao texto que será traduzido.
+         </p>
+         <p><span class="bold"><strong>Atenção: </strong></span>uma vez que o texto vai se segmentar diferentemente após mudanças terem sido feitas nas opções de filtro, você talvez tenha
+            que recomeçar a traduzir do princípio. Ao mesmo tempo, segmentos válidos anteriores na memória de tradução do projeto se tornarão
+            segmentos orfãos. Se você modificar opções de segmentação quando um projeto estiver aberto, você deverá recarregar o projeto
+            para aplicar as modificações.
+         </p>
+         <p><span class="application">OmegaT</span> usa a seguinte sequência de passos:
+         </p>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term"><a class="indexterm" name="d0e6947"></a>Segmentação baseada na estrutura do texto</span></dt>
+               <dd>
+                  <p><span class="application">OmegaT</span> analisa primeiro o texto pela segmentação usando o nível de estrutura. Durante este processo somente a estrutura do arquivo
+                     fonte é usada para produzir segmentos.
+                  </p>
+                  <p>Por exemplo, os arquivos de texto podem ser segmentados nas quebras de linha, nas linhas vazias ou não serem segmentados.
+                     Arquivos com formatação (documentos ODF, documentos HTML, etc.) são segmentados nas tags de nível de bloco (ou seja, parágrafos).
+                     Os atributos de objeto traduzíveis em arquivos  XHTML ou HTML podem ser extraídos como segmentos separados.
+                  </p>
+               </dd>
+               <dt><span class="term"><a class="indexterm" name="d0e6962"></a>Segmentação por sentenças</span></dt>
+               <dd>
+                  <p>Após segmentar o arquivo fonte em unidades estruturais, <span class="application">o OmegaT</span> segmentará esses blocos em sentenças.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1.&nbsp;Regras de Segmentação<a class="indexterm" name="d0e6977"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>O processo de segmentação pode ser ilustrato da seguinte forma: o cursor passa pelo texto, um caractere de cada vez. Regras
+               de posição do cursor, que consistem em um padrão <span class="bold"><strong>Antes</strong></span>e <span class="bold"><strong>Depois </strong></span>, são aplicadas em sua dada ordem para verificar se quaisquer dos padrões <span class="bold"><strong> Antes</strong></span> são válidos para o texto à esquerda e o padrão <span class="bold"><strong>Depois</strong></span> correspondente para o texto à direita do cursor. Se a regra corresponder, o cursor se move sem inserir uma quebra de segmento
+               (para uma regra de exceção) ou uma nova quebra de segmento será criada na posição atual do cursor.
+            </p>
+            <p>Os dois tipos de regras comportam-se da seguinte forma:</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term"><a class="indexterm" name="d0e7001"></a>Regra de quebra</span></dt>
+                  <dd>
+                     <p>Separa o texto fonte em segmentos. Por exemplo, "<span class="emphasis"><em>Isto fez sentido? Eu não tinha certeza</em></span>."deve ser dividido em dois segmentos. Para que isso aconteça, deve haver uma quebra de regra para "?", quando seguido de
+                        espaços e uma palavra maiúscula. Para definir uma regra como quebra de regra, marque a caixa de seleção Quebra/Exceção.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term"><a class="indexterm" name="d0e7018"></a>Regra de exceção</span></dt>
+                  <dd>
+                     <p>especifica que partes do texto NÃO devem ser separadas. Apesar do ponto de abreviatura, <span class="emphasis"><em>"Sra. Dalloway "</em></span> não deve ser separada em dois segmentos, portanto uma regra de exceção deve ser criada para Sra. (bem como para Sr. e Srta.
+                        e Dr. e prof. e etc.), seguida de um ponto. Para definir uma regra como regra de exceção, deixe a caixa de seleção Quebra/Exceção
+                        desmarcada.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <p>As regras de quebra predefinidas devem ser suficientes para a maioria das línguas europeias e para o japonês. Dada a flexibilidade
+               desse recurso, você pode definir mais regras de exceção para a língua fonte, para com isso obter segmentos mais significativos
+               e coerentes.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2.&nbsp;Prioridade de regra<a class="indexterm" name="d0e7037"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Todos os conjuntos de regras de segmentação para um padrão de língua correspondente são ativos e aplicados na ordem de prioridade
+               estabelecida, portanto as regras para uma língua específica devem ter maior prioridade do que aquelas predefinidas. Por exemplo,
+               as regras para francês canadense (FR-CA) devem ter prioridade às regras para o francês (FR.*), bem como àquelas definidas
+               como padrão (.*). Dessa maneira, na tradução do francês canadense as regras para o francês canadense serão aplicadas primeiro,
+               se houverem, seguidas pelas regras do francês e por fim, seguidas pelas regras padrão.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3.&nbsp;Criação de uma nova regra<a class="indexterm" name="d0e7047"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Grandes alterações para as regras de segmentação geralmente devem ser evitadas, sobretudo após a conclusão do primeiro esboço,
+               mas pequenas alterações, tais como, acréscimo de uma abreviatura reconhecida, podem ser perigosas.
+            </p>
+            <p>Para editar ou expandir um conjunto de regras existentes, basta clicar nas regras na tabela superior. As regras para esse
+               conjunto serão mostradas na metade inferior da janela
+            </p>
+            <p>Para criar um conjunto vazio de regras para uma nova língua, clique em <span class="bold"><strong>Adicionar </strong></span>na metade superior da caixa de diálogo. Na parte de baixo da tabela será acrescentada uma linha (faça a rolagem na tela para
+               ver a nova linha). Mude o nome do conjunto de regras e o padrão da língua para a língua em questão e seu código (veja <a class="xref" href="appendix.languages.html" title="Appendix&nbsp;A.&nbsp;Línguas - lista de códigos ISO 639">Appendix&nbsp;A, <i>Línguas - lista de códigos ISO 639
+                       
+                       
+                       </i></a> para uma lista de códigos de línguas). A sintaxe do padrão da língua segue a sintaxe das expressões regulares. Se o seu conjunto
+               de regras processa um par de línguas, recomendamos que o coloque no topo da lista usando o botão <span class="bold"><strong>Mover para cima</strong></span>.
+            </p>
+            <p>Adicione os padrões <span class="bold"><strong>Antes</strong></span> e<span class="bold"><strong> Depois</strong></span>. Para verificar suas sintaxes e suas aplicabilidades, é recomendado usar ferramentas que permitirão que você veja diretamente
+               seus efeitos. Veja o capítulo sobre <a class="link" href="chapter.regexp.html" title="Chapter&nbsp;16.&nbsp;Expressões regulares">Expressões regulares</a>. As regras existentes sempre serão um bom ponto de partida.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4.&nbsp;<a class="indexterm" name="d0e7081"></a>Alguns exemplos simples
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="informaltable">
+               <table border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col align="center">
+                     <col align="center">
+                     <col align="left">
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Intenção</th>
+                        <th align="center">Antes</th>
+                        <th align="center">Depois</th>
+                        <th align="left">Observação:</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">Defina o início do segmento depois do ponto ('.') seguido por espaço, tabulação…</td>
+                        <td align="center">\.</td>
+                        <td align="center">\s</td>
+                        <td align="left">"\." representa o caractere do período. "\s" significa qualquer caractere de espaço em branco (espaço, tabulação, nova página,
+                           etc.)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">Não segmentar após Sr.</td>
+                        <td align="center">Sr\.</td>
+                        <td align="center">\s</td>
+                        <td align="left">Esta é uma regra de exceção, portanto a caixa de seleção da regra não deve ser marcada</td>
+                     </tr>
+                     <tr>
+                        <td align="left">Definir um segmento após "。" (ponto japonês)</td>
+                        <td align="center">。</td>
+                        <td align="center">&nbsp;</td>
+                        <td align="left">Note que <code class="literal">após</code> está vazio
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">Não segmentar após Sr. Sra e Srta.</td>
+                        <td align="center">Sr??s??\.</td>
+                        <td align="center">\s</td>
+                        <td align="left">Regra de exceção - ver o uso de ? em expressões regulares</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.translation.memories.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.searches.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;13.&nbsp;Memórias de tradução&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;15.&nbsp;Buscas</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

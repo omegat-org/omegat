@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.TokenizerPlugin.inOmegaT">
+  <title>Plugin do Tokenizer<indexterm class="singular">
+      <primary>Plugins</primary>
+
+      <secondary>Tokenizer</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>Introdução<indexterm class="singular">
+        <primary>Lucene</primary>
+
+        <see>Tokenizer</see>
+      </indexterm><indexterm class="singular">
+        <primary>Stemmer</primary>
+
+        <see>Tokenizer</see>
+      </indexterm></title>
+
+    <para>Tokenizers (ou stemmers) melhoram a qualidade das correspondências, reconhecendo palavras flexionadas nos dados da memória de tradução e da fonte. Também melhoram a correspondência de glossários.</para>
+
+    <para>Um stemmer do inglês, por exemplo, deve identificar a string &quot;casas&quot; (e possivelmente &quot;casarão&quot;, &quot;casinha&quot; etc.) tomando por base a raiz &quot;casa&quot;, e &quot;portinhola&quot;, &quot;portal&quot;, a partir de &quot;porta&quot;. O algoritmo do stemmer reduz as palavras &quot;pescar&quot;, &quot;pescada&quot;, &quot;pescaria&quot; e &quot;pescador&quot; à palavra de raiz, &quot;pesca&quot;. Isto é especialmente útil no caso de línguas que usam formas pré- e pós-fixadas das palavras a partir da raiz. Em um exemplo do esloveno, aqui está &quot;bem&quot; em todas as formas gramaticalmente corretas possíveis:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>lep, lepa, lepo - singular, masculino, feminino, neutro</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>lepši, lepša, lepše . - comparativo, nominativo, masculino, feminino, neutro, resp. Forma plural do adjetivo</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>najlepših - superlativo, plural, genitivo para M, F, N</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Instalação e uso</title>
+
+	<para>Os tokenizers vêm incluídos no OmegaT. O OmegaT seleciona automaticamente um tokenizer para a língua fonte e destino segundo as configurações de língua do projeto. É possível selecionar outro tokenizer ou uma versão diferente deste na janela de propriedades do projeto.</para>
+
+	<warning>
+		<title>Incompatibilidades</title>
+		<para>O OmegaT não funcionará se houver tokenizers na pasta /plugin. Remova todos os tokenizers da pasta /plugin antes de iniciar o OmegaT.</para>
+	</warning>
+	
+  </section>
+</appendix>

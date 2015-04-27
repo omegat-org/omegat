@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.searches">
+  <title>Buscas<indexterm class="singular">
+      <primary>Buscas</primary>
+    </indexterm></title>
+
+  <section id="search.window">
+    <title>Janela Busca</title>
+
+    <figure id="text.search.window">
+      <title>Janela Busca de texto<indexterm class="singular">
+          <primary>Janela Busca</primary> <secondary>Exemplo</secondary>
+        </indexterm></title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/TextSearch25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/TextSearch25.png" width="90%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <note>
+      <para>A busca acima encontra todos os segmentos destino que contenham caracteres bastante improváveis na língua alvo - ou seja, esloveno.</para>
+    </note>
+
+    <section>
+      <title>Buscar<indexterm class="singular">
+          <primary>Atalhos</primary> <secondary>Buscar - Ctrl+F</secondary>
+        </indexterm></title>
+
+      <para>O <application>OmegaT</application> oferece um grande leque de funções avançadas de busca. Para abrir a janela Busca, pressione <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> e digite a palavra ou frase que deseja localizar na caixa de texto Busca por. Uma outra forma é selecionar, no Painel Editor, uma palavra ou frase no campo de edição (texto alvo no segmento atual) e pressionar <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. A palavra ou frase é inserida automaticamente na caixa Busca por. É possível ter várias janelas de Busca abertas ao mesmo tempo, mas feche-as assim que não forem mais necessárias, para que não encham sua área de trabalho.</para>
+    </section>
+
+    <section>
+      <title>Local da busca</title>
+
+      <para>Por padrão, as buscas são feitas nos segmentos de origem e destino do projeto, mas você pode limitar sua pesquisa para apenas o texto de origem ou destino. As buscas podem ser </para>
+
+      <itemizedlist>
+        <listitem>
+          <para>somente no projeto (opção predefinida)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>no projeto e nas memórias de tradução de referência na pasta /tm/ (marque <emphasis>Buscar nas TMs)</emphasis></para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>em um único arquivo ou pasta contendo um conjunto de arquivos (marque <emphasis>Buscar nos arquivos)</emphasis></para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Quando fizer buscas em arquivos (ao contrário das memórias de tradução), o <application>OmegaT</application> somente pesquisará nos que estejam nos formatos dos arquivos fonte. Consequentemente, embora o OmegaT possa processar os arquivos<filename> tmx</filename>, eles não serão incluídos na pesquisa Buscar nos arquivos. Se você ativar as <emphasis role="bold"><indexterm class="singular">
+          <primary>Buscas</primary> <secondary>Opções avançadas</secondary>
+        </indexterm>Opções avançadas</emphasis>, é possível conciliar a busca com o nome do autor da tradução e o horário da última modificação.</para>
+    </section>
+  </section>
+
+  <section id="using.wild.cards">
+    <title>Usando curingas<indexterm class="singular">
+        <primary>Buscas</primary> <secondary>Usar curingas</secondary>
+      </indexterm></title>
+
+    <para>Tanto na busca exata como na busca de palavra-chave pode-se usar os curingas  '*' e '?'. Eles têm o significado familiar aos usuários do Word:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>'*' corresponde a zero ou mais caracteres, da posição atual em uma determinada palavra até seu final. Por exemplo, a busca por <literal>'correr*'</literal> encontraria as palavras <literal>'correr'</literal>, <literal>'corre'</literal> e <literal>'correndo'</literal>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>'?' corresponde qualquer caractere único. Por exemplo, <literal>'correr?'</literal> encontraria <literal>'corre'</literal> e <literal>'corren'</literal> na palavra <literal>'correndo'</literal>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>As correspondências serão exibidas em azul e negrito. Observe que '*' e '?' têm siginificados especiais nas expressões regulares, assim a busca por curingas, como descrito, aplica-se somente às buscas exatas e palavras-chave (veja abaixo).</para>
+  </section>
+
+  <section id="search.methoids">
+    <title>Métodos e opções de busca<indexterm class="singular">
+        <primary>Buscas</primary> <secondary>Métodos e opções</secondary>
+      </indexterm></title>
+
+    <para>Selecione o método usando as opções. Os seguintes métodos de busca estão disponíveis:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Busca exata</term>
+
+        <listitem>
+          <para>Busca por segmento contendo a sequência exata que você especificou. Uma busca exata procura por uma frase, isto é, se diversas palavras forem fornecidas, serão encontradas somente se ocorrerem exatamente na mesma sequência. Ao pesquisar por <literal>abrir arquivo</literal> encontrará todas as ocorrências da sequência <emphasis><literal>abrir arquivo</literal></emphasis>, mas não <emphasis><literal>arquivo aberto</literal></emphasis> ou <emphasis><literal>abrir arquivo de entrada</literal></emphasis>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Busca de palavra-chave</term>
+
+        <listitem>
+          <para>Busca os segmentos contendo todas as palavras-chave especificadas, em qualquer sequência. Selecione busca de palavra-chave para qualquer quantidade de palavras individuais completas, em qualquer ordem. O OmegaT exibirá uma lista de todos os segmentos contendo as palavras especificadas. As buscas de palavra-chave são similares à pesquisa &quot;com todas as palavras&quot; em um dispositivo de busca na Internet, como o Google (lógica AND). Ao usar a busca por palavra-chave para <emphasis><literal>abrir arquivo</literal></emphasis> encontrará todas as ocorrências da sequência <emphasis><literal>abrir arquivo</literal>,</emphasis> bem como <emphasis><literal>arquivo aberto</literal>, <literal>abrir arquivo de entrada</literal>, <literal>não é seguro abrir o arquivo</literal></emphasis>, etc.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><emphasis role="bold">Expressões regulares</emphasis></term>
+
+        <listitem>
+          <para>A sequência de busca será tratada como uma expressão regular. A sequência de busca - [a-zA-Z]+[öäüqwß] - no exemplo acima, procura-se por palavras no segmento alvo, contendo caracteres questionáveis do teclado alemão. As expressões regulares são uma excelente maneira de procurar por ocorrências de uma sequência. Veja mais informações no capítulo<link linkend="chapter.regexp"> Expressões regulares.</link></para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Além do método acima é possível selecionar da seguinte maneira:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">distinção entre maiúsculas e minúsculas</emphasis>: a busca será feita conforme a sequência exata especificada; isto é, será considerado o uso de letras maiúsculas.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">no texto fonte: </emphasis>busca nos segmentos fonte</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">nas traduções: </emphasis>busca nos segmentos destino</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">nas notas: </emphasis>busca nas notas dos segmentos</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">busca nas TMs</emphasis>: as memórias de tradução da pasta <filename>tm</filename> são incluídas na pesquisa.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">exibir todos os resultados: </emphasis>ao limpar a caixa de seleção o OmegaT mostrará apenas a primeira ocorrência do hit, se houver mais de um hit</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Se clicar no botão <guibutton>Opções avançadas</guibutton>, critérios adicionais (autor da tradução, data da tradução, etc) podem ser selecionados conforme mostrado na imagem acima.</para>
+  </section>
+
+  <section id="search.result.display">
+    <title>Exibição dos resultados da busca</title>
+
+    <para>Após digitar uma sequência no campo de busca, pressione o botão Buscar para exibir todos os segmentos do projeto que contenham a sequência procurada. Visto que o <application>OmegaT</application> considera os segmentos idênticos como uma única entidade, somente o primeiro segmento único é exibido. Os segmentos são exibidos na seqüência em que aparecem no projeto. Os segmentos traduzidos são exibidos na parte superior com o texto original e a tradução na parte inferior; os segmentos não traduzidos aparecerão apenas como texto de origem.</para>
+
+    <para>Clique em um segmento e abra-o no Editor para modificações. Depois, é só voltar para a janela Busca e ir para o próximo segmento, caso seja necessário checar e corrigir a terminologia.</para>
+
+    <para>É possível ter várias janelas Busca abertas ao mesmo tempo. Os conteúdos podem ser vistos de forma rápida pelo título: ele mostrará o termo pesquisado.</para>
+  </section>
+</chapter>

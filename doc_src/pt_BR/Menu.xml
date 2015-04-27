@@ -1,0 +1,1163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.menu">
+  <title>Menu principal e atalhos de teclado</title>
+
+  <section id="ch04.main.menu">
+    <title><indexterm class="singular">
+        <primary>Menu</primary>
+      </indexterm>Menu principal</title>
+
+    <para>Todas as funções do OmegaT estão disponíveis na barra de menus na parte superior da janela Editor. Muitas funções também estão disponíveis via atalhos de teclado. Para ativar os atalhos, pressione <keycap>Ctrl</keycap> e uma letra. Alguns atalhos requerem o uso de outras teclas. Para facilitar a leitura, as letras estão escritas aqui em maiúsculas. <keycap>Ctrl</keycap> é usado no Windows, UNIX e sistemas operacionais semelhantes ao UNIX com os teclados que tenham uma tecla <keycap>Ctrl</keycap> ou <keycap>Control</keycap>. No teclado do Mac, <keycombo> <keycap>Cmd</keycap> é a <keycap>tecla</keycap> a ser usada</keycombo>. A tecla &quot;Cmd&quot; está identificada como &quot;comando&quot; ou a marca da maçã nos teclados Apple.</para>
+
+    <para>Você pode personalizar atalhos existentes ou acrescentar novos, segundo as suas necessidades. <link linkend="ch04.shortcuts.customization">Consulte o Apêndice - Personalização de atalhos</link></para>
+
+    <table colsep="1" id="table.main.menu">
+      <title>Menu principal</title>
+
+      <tgroup cols="7" colsep="1">
+        <tbody>
+          <row>
+            <entry><guimenuitem>Projeto</guimenuitem></entry>
+
+            <entry><guimenuitem>Editar</guimenuitem></entry>
+
+            <entry><guimenuitem>Ir para</guimenuitem></entry>
+
+            <entry><guimenuitem>Exibir</guimenuitem></entry>
+
+            <entry><guimenuitem>Ferramentas</guimenuitem></entry>
+
+            <entry><guimenuitem>Opções</guimenuitem></entry>
+
+            <entry><guimenuitem>Ajuda</guimenuitem></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <section id="submenu.Project">
+      <title>Projeto<indexterm class="singular">
+          <primary>Menu</primary> <secondary>Projeto</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Menu Projeto</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Novo</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Cria e abre um projeto novo. A caixa de diálogo para criar um projeto é a mesma que para editar o projeto. Veja<xref linkend="chapter.project.properties"/></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Abrir</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>O</keycap>
+                </keycombo></entry>
+
+              <entry>Abre um projeto criado anteriormente.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Copiar arquivos para a pasta source…</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Copia os arquivos selecionados para a pasta <filename>source</filename> e recarrega o projeto com os novos arquivos.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Importar do MediaWiki…</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Importa unidades das páginas do MediaWiki, de acordo com o URL digitado.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Recarregar</guimenuitem></entry>
+
+              <entry><keycap>F5</keycap></entry>
+
+              <entry>Recarrega o projeto para aceitar modificações externas nos arquivos fonte, nas memórias de tradução existentes, nos glossários e nas configurações do projeto.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Fechar</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>W</keycap>
+                </keycombo></entry>
+
+              <entry>Grava a tradução e fecha o projeto.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Salvar</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>S</keycap>
+                </keycombo></entry>
+
+              <entry>Salva a memória de tradução interna no disco rígido. O OmegaT grava automaticamente a tradução a cada 10 minutos ou quando você fechar o projeto ou sair do programa.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Criar documentos traduzidos</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>D</keycap>
+                </keycombo></entry>
+
+              <entry>Cria os documentos de destino com base no texto que você traduziu. Os documentos de destino criados estão localizados na pasta <filename>target</filename>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Propriedades…</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>E</keycap>
+                </keycombo></entry>
+
+              <entry>Exibe a caixa de diálogo <link linkend="chapter.project.properties">Propriedades do projeto</link> para modificar as línguas do projeto e o local das pastas.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Arquivos do projeto…</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>L</keycap>
+                </keycombo></entry>
+
+              <entry>Fecha ou abre a <link linkend="section.project.files">janela Arquivos do projeto</link> (dependendo se ela estiver aberta ou fechada).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Sair</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Q</keycap>
+                </keycombo></entry>
+
+              <entry>Grava o projeto e sai do <application>OmegaT</application>. Se você ainda não gravou o projeto manualmente, confirma se você quer realmente sair.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section>
+      <title>Editar<indexterm class="singular">
+          <primary>Menu</primary> <secondary>Editar</secondary>
+        </indexterm></title>
+
+      <para>Nota: os itens geralmente encontrados na maioria dos aplicativos (copiar/recortar/colar) não são exibidos neste menu, mas estão disponíveis com os atalhos do seu sistema. For example:</para>
+
+      <table colsep="1">
+        <title>Atalhos para copiar/recortar/colar</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Copiar</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>C</keycap>
+                </keycombo></entry>
+
+              <entry>Copia o texto selecionado para a área de transferência.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Recortar</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>X</keycap>
+                </keycombo></entry>
+
+              <entry>Copia o texto selecionado para a área de transferência e apaga o texto selecionado.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Colar</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>V</keycap>
+                </keycombo></entry>
+
+              <entry>Passa o texto da área de transferência para a posição onde está o cursor.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <para>O menu Editar contém as seguintes opções:</para>
+
+      <table colsep="1">
+        <title>Menu editar</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Desfazer última ação</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>Z</keycap>
+                </keycombo></entry>
+
+              <entry>Restaura ao estado anterior à última edição feita. Este comando não funciona se o segmento alterado tiver sido validado.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Refazer última ação</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>Y</keycap>
+                </keycombo></entry>
+
+              <entry>Restaura ao estado anterior à última edição cancelada. Este comando não funciona se o segmento alterado tiver sido validado.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Substituir com correspondência</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>Substitui por completo o segmento destino com a correspondência parcial atual selecionada (por padrão, a primeira correspondência é selecionada).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Inserir correspondência</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>Insere a correspondência parcial atual selecionada na posição do cursor. Se parte do segmento destino tiver sido selecionado, esta função sobrescreve a porção selecionada.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Substituir com tradução automática</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>M</keycap>
+                </keycombo></entry>
+
+              <entry>Substitui o segmento destino com a tradução, fornecida pelo serviço de Tradução Automática selecionado. Se nenhum serviço de Tradução Automática tiver sido ativado, nenhuma ação é feita (veja Menu &gt; Opções abaixo).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Substituir com texto fonte</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap><keycap>Ctrl</keycap><keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>Substitui o conteúdo do segmento destino aberto com o texto fonte.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Inserir texto fonte</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap><keycap>Ctrl</keycap><keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>Insere o texto fonte na posição do cursor.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Inserir tags do texto fonte</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap><keycap>Ctrl</keycap><keycap>T</keycap>
+                </keycombo></entry>
+
+              <entry><indexterm class="singular">
+                  <primary>Tags</primary> <secondary>Inserir tags do texto fonte</secondary>
+                </indexterm>Insere as tags do texto fonte na posição do cursor. Todas as tags relevantes no texto fonte - isto é, as do OmegaT, além das personalizadas, do Java, printf, etc. - serão inseridas no texto alvo atual, mesmo que já estejam lá. Textos ladeados por tags são substituídos por espaços:. <literal>&lt;f0&gt;&lt;f1&gt;Este texto&lt;/f0&gt;&lt;/f1&gt;</literal> será copiado como <literal>&lt;f0&gt;&lt;f1&gt;um_espaço&lt;/f0&gt;&lt;/f1&gt;</literal></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Exportar seleção</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap><keycap>Ctrl</keycap><keycap>C</keycap>
+                </keycombo></entry>
+
+              <entry>Exporta o segmento atual para um arquivo de texto para processomento. Se nenhum texto tiver sido selecionado, o segmento fonte atual será escrito neste arquivo. Quando o usuário sair do <application>OmegaT</application> este arquivo não é esvaziado, para ser consistente com o comportamento comum da área de transferência. Os conteúdos exportados são copiados para o arquivo <filename>selection.txt</filename> localizado na pasta de arquivos de preferências do Usuário (ver <xref linkend="chapter.files.and.folders"/>).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Criar termos no glossário</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap><keycap>Ctrl</keycap><keycap>G</keycap>
+                </keycombo></entry>
+
+              <entry>Permite que o usuario crie uma entrada no arquivo de glossário padrão.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Buscar no projeto…</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>Abre uma nova <link linkend="section.search.window">janela de busca</link>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Alternar letra para…</guimenuitem></entry>
+
+              <entry><keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo> (veja texto)</entry>
+
+              <entry>Altera a capitalização do texto destacado no segmento de destino de acordo com a opção selecionada (minúscula, maiúscula ou títulos). Use Shift+F3 <indexterm>
+                  <primary>Atalhos</primary> <secondary>Seleção de letra - Shift+F3</secondary>
+                </indexterm>para alternar entre as três alternativas. Se não houver nenhum texto selecionado, o <application>OmegaT</application> seleciona a palavra que contiver a letra imediatamente à direita do cursor.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Selecionar Correspondência parcial No.</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>No.</keycap>
+                </keycombo></entry>
+
+              <entry>(No. é um dígito de 1 a 5) - Seleciona o número da correspondência parcial exibida no visualizador de correspondências para substituir ou inserir no segmento. <xref linkend="match.viewer"/> descreve o código de cores em detalhe.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Usar como tradução padrão</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Se houver várias traduções alternativas disponíveis para o segmento ativo, você pode rotular a alternativa selecionada como a tradução padrão. A entrada aparecerá em cinza, se houver somente uma tradução disponível.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Criar tradução alternativa</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>O mesmo segmento pode exigir diferentes traduções dependendo do contexto. Selecione este item do menu, se a tradução atual não se aplicar e insira a tradução alternativa.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.GoTo">
+      <title>Ir para<indexterm class="singular">
+          <primary>Menu</primary> <secondary>Ir para</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Menu Ir para</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Próximo segmento não traduzido</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>U</keycap>
+                </keycombo></entry>
+
+              <entry>Avança para o próximo segmento que não tem equivalente na memória da tradução.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Próximo segmento</guimenuitem></entry>
+
+              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo> ou <keycap>Enter</keycap> ou <keycap>Tab</keycap></entry>
+
+              <entry>Avança para o próximo segmento. Se o segmento atual for o último em um arquivo, o programa leva você ao primeiro segmento do próximo arquivo.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Segmento anterior</guimenuitem></entry>
+
+              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo> ou <keycombo> <keycap>Ctrl</keycap> <keycap>Enter</keycap> </keycombo> ou <keycombo> <keycap>Ctrl</keycap> <keycap>Tab</keycap> </keycombo></entry>
+
+              <entry>Volta para o segmento anterior. Se o segmento atual for o primeiro em um arquivo, o programa leva você ao último segmento do arquivo anterior.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Segmento número…</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>J</keycap>
+                </keycombo></entry>
+
+              <entry>O segmento é aberto quando o seu número de segmento é inserido.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Próxima nota</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>O próximo segmento com uma nota anexada será aberto.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Nota anterior</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>O segmento anterior com uma nota anexada será aberto.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Avançar pelos segmentos…</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>N</keycap>
+                </keycombo></entry>
+
+              <entry>O <application>OmegaT</application> lembra dos segmentos executados. Com este comando você pode avançar ao segmento deixado para trás com o comando <guimenuitem>Voltar pelos segmentos</guimenuitem>…</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Voltar pelos segmentos…</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>P</keycap>
+                </keycombo></entry>
+
+              <entry>Com este comando você pode retroceder um segmento por vez e voltar mais tarde ao segmento atual usando o comando <guimenuitem>Avançar pelos segmentos…</guimenuitem> abaixo.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.View">
+      <title>Exibir<indexterm class="singular">
+          <primary>Menu</primary> <secondary>Exibir</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Menu Exibir</title>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Marcar segmentos traduzidos</guimenuitem></entry>
+
+              <entry>Se selecionada, esta opção marcará com amarelo os segmentos traduzidos.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Marcar segmentos não traduzidos</guimenuitem></entry>
+
+              <entry>Se selecionada, os segmentos não traduzidos serão marcados em violeta.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Mostrar segmentos fonte</guimenuitem></entry>
+
+              <entry>Se selecionada, os segmentos fonte serão mostrados e marcados em verde. Se não for selecionada, os segmentos fonte não serão mostrados.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Marcar segmentos repetidos</guimenuitem></entry>
+
+              <entry>Se selecionada, os segmentos repetidos serão marcados em cinza claro.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Marcar segmentos com notas</guimenuitem></entry>
+
+              <entry>Se selecionada, os segmentos com notas serão marcados em ciano. Esta marcação tem a prioridade sobre Marcar segmentos traduzidos e Marcar segmentos não traduzidos.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Marcar espaços inseparáveis</guimenuitem></entry>
+
+              <entry>Se selecionada, os espaços inseparáveis no segmento serão marcados com um fundo cinza.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Informações de modificação</guimenuitem></entry>
+
+              <entry>Definir a opção Exibir modificação para <emphasis>Selecionado</emphasis> exibirá a hora e o autor da última mudança no segmento atual. Definir como<emphasis> todos </emphasis>exibirá esta informação para todos os segmentos e <emphasis>nenhum</emphasis> desativa esta opção.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Tools">
+      <title>Ferramentas<indexterm class="singular">
+          <primary>Menu</primary> <secondary>Ferramentas</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Menu Ferramentas</title>
+
+        <indexterm class="singular">
+          <primary>Correspondências</primary> <secondary>Estatísticas de correspondência</secondary>
+        </indexterm>
+
+        <indexterm class="singular">
+          <primary>Projeto</primary> <secondary>Estatísticas das correspondências</secondary>
+        </indexterm>
+
+        <indexterm class="singular">
+          <primary>Projeto</primary><secondary>Estatísticas</secondary>
+        </indexterm>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Verificar tags</guimenuitem></entry>
+
+              <entry><guimenu>Ctrl+T</guimenu>: Verifica se faltam tags ou se elas estão posicionadas de forma errada nos arquivos formatados. Exibirá uma lista de segmentos com problemas de tags e possíveis inconsistências. Ver <link linkend="section.tag.validation">Verificação de tags</link> e <xref linkend="chapter.formatted.text"/>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Remover tags</guimenuitem></entry>
+
+              <entry>Quando habilitado, todas as tags de formatação são removidas dos segmentos fonte. É útil no trabalho com textos onde a formatação em linha não tem uso (p.ex., OCRed PDF, .odt ou .docx mal convertidos, etc.) Só as tags em linha são removidas, portanto normalmente não deve haver problemas ao abrir os documentos de destino. A formatação não visível (p.ex., que não aparece como tags no editor OmegaT) é mantida nos documentos de destino.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Estatísticas</guimenuitem></entry>
+
+              <entry>Abre uma nova janela e exibe as estatísticas do projeto, isto é, os totais do projeto e totais de cada arquivo no projeto.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Estatística das correspondências</guimenuitem></entry>
+
+              <entry>Exibe as Estatísticas das correspondências para o projeto, como o número de repetições, correspondências exatas, correspondências parciais e não correspondências para segmentos, palavras e caracteres.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Options">
+      <title><indexterm class="singular">
+          <primary>Menu</primary> <secondary>Opções</secondary>
+        </indexterm>Opções</title>
+
+      <table colsep="1">
+        <title>Menu Opções</title>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Usar TAB para avançar</guimenuitem></entry>
+
+              <entry>Define a tecla de validação de segmentos para <guimenuitem>Tab</guimenuitem> em vez da tecla predefinida <guimenuitem>Enter</guimenuitem>. Esta opção é útil para alguns sistemas de entrada de caracteres chineses, japoneses e coreanos.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Sempre confirmar saída</guimenuitem></entry>
+
+              <entry>Antes de encerrar, o programa sempre confirmará com o usuário.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Tradução automática</guimenuitem></entry>
+
+              <entry>Permite ativar/desativar as ferramentas de Tradução automática oferecidas. Quando ativada, <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> inserirá a sugestão na parte alvo do segmento atual.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Glossário</guimenuitem></entry>
+
+              <entry>reservado para uso futuro de plugins</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>TransTips</guimenuitem></entry>
+
+              <entry>Permite ativar/desativar o recurso <emphasis>TransTips </emphasis> e definir a opção <emphasis> Correspondência exata.</emphasis> Com o <emphasis>TransTips</emphasis> ativados, um clique direito numa palavra destacada no segmento fonte abrirá uma janela pop up com as entradas do glossário para a palavra que você clicou. Então você pode clicar na tradução preferencial para inseri-la no segmento fonte na posição atual. Com o <emphasis>TransTips/Correspondência exata </emphasis>marcado, apenas as palavras inteiras serão verificadas, senão o programa corresponderá partes de palavras também.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Fonte…</guimenuitem></entry>
+
+              <entry>Exibe a caixa de diálogo para modificar a fonte de visualização do texto. Recomenda-se aos usuários de computadores antigos, com redimensionamento lento da janela, que mudem a fonte. Ver as definições de fontes em <link linkend="chapter.misc">Diversos</link></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Filtros de arquivo…</guimenuitem></entry>
+
+              <entry>Exibe a caixa de diálogo <link linkend="chapter.file.filters">Filtros de arquivos</link> para configurar o processamento e análise de arquivos.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Segmentação…</guimenuitem></entry>
+
+              <entry>Abre a caixa de diálogo <link linkend="chapter.segmentation">Segmentação do texto fonte</link> para configurar a segmentação do texto.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Verificador ortográfico…</guimenuitem></entry>
+
+              <entry>Abre a janela <link linkend="chapter.spellchecker">Configuração do verificador ortográfico</link> para instalar, configurar e ativar o verificador.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Modo de trabalho…</guimenuitem></entry>
+
+              <entry>Mostra a caixa de diálogo <link linkend="chapter.translation.editing">Editar modo de trabalho</link> com suas configurações.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Verificação de tags…</guimenuitem></entry>
+
+              <entry>Para programadores: Permite configurar as opções do validador de tags para verificar também as variáveis de programação (%…).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Equipe…</guimenuitem></entry>
+
+              <entry>Digite o seu nome aqui e ele será anexado a todos os segmentos traduzidos por você.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>TMXs externas…</guimenuitem></entry>
+
+              <entry>Permite ao usuário decidir como as tags de arquivos TMX externos (isto é, não geradas pelo OmegaT) serão tratadas.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Exibição…</guimenuitem></entry>
+
+              <entry>Contém a opção para tornar todos os segmentos destino em negrito e marcar o primeiro segmento repetido.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Salvar</guimenuitem></entry>
+
+              <entry>Permite ao usuário salvar o intervalo, em minutos e segundos, entre os salvamentos automáticos consecutivos do projeto. O mínimo é 10 segundos.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Login de Proxy…</guimenuitem></entry>
+
+              <entry>Digite o seu nome e senha, se você usar um proxy para acessar seus projetos.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Restaurar janela principal</guimenuitem></entry>
+
+              <entry>Restaura os componentes da janela principal do OmegaT para seu estado padrão. Use este recurso caso tenha desencaixado, movido ou ocultado um ou mais componentes e não consegue recuperá-los de outra forma. Também pode ser usado quando as janelas não aparecem como esperado após a atualização do OmegaT.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Help">
+      <title>Ajuda<indexterm class="singular">
+          <primary>Menu</primary> <secondary>Ajuda</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Menu Ajuda</title>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Manual do Usuário…</guimenuitem></entry>
+
+              <entry><keycap>F1:</keycap> Abre o navegador de Ajuda com este manual em uma janela separada.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Sobre…</guimenuitem></entry>
+
+              <entry>Exibe as informações sobre direitos autorais, créditos e licença.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </section>
+
+  <section id="keyboard.shortcuts">
+    <title>Atalhos de teclado<indexterm class="singular">
+        <primary>Atalhos de teclado</primary>
+      </indexterm></title>
+
+    <para>Os atalhos seguintes estão à disposição a partir da janela principal. Quando uma outra janela estiver na frente, clique na janela principal para colocá-la em primeiro plano ou pressione <keycap>Esc</keycap> para fechar esta janela.</para>
+
+    <para>Para ativar os atalhos, pressione <keycap>Ctrl</keycap> e uma letra. Alguns atalhos requerem o uso de outras teclas. Para facilitar a leitura, as letras estão escritas aqui em maiúsculas.</para>
+
+    <para>Ctrl é usado no Windows, UNIX e sistemas operacionais semelhantes ao UNIX com os teclados que tenham uma tecla <keycap>Ctrl</keycap> / <keycap>Control</keycap>. Usuários de Mac devem usar a combinação <guimenuitem>cmd+tecla.</guimenuitem> A tecla <guimenuitem>cmd</guimenuitem> está identificada como comando ou a marca da maçã nos teclados Apple.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Gerenciamento do projeto</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Edição</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Movimentação</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Janelas de referência</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Outros</para>
+      </listitem>
+    </itemizedlist>
+
+    <section>
+      <title id="keyboard.project.management"><indexterm class="singular">
+          <primary>Atalhos de teclado</primary> <secondary>Projeto</secondary>
+        </indexterm>Gerenciamento do projeto<indexterm class="singular">
+          <primary>Projeto</primary> <secondary>Atalhos de gerenciamento do projeto</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Atalhos de gerenciamento do projeto</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry>Abrir projeto</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>O</keycap>
+                </keycombo></entry>
+
+              <entry>Exibe uma caixa de diálogo para localizar um projeto existente.</entry>
+            </row>
+
+            <row>
+              <entry>Salvar</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>S</keycap>
+                </keycombo></entry>
+
+              <entry>Grava o trabalho atual na memm[ória de tradução interna (o arquivo project_save.tmx localizado na pasta <filename>omegat</filename> do projeto).</entry>
+            </row>
+
+            <row>
+              <entry>Fechar projeto</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap><keycap>Ctrl</keycap><keycap>W</keycap>
+                </keycombo></entry>
+
+              <entry>Fecha o projeto atual.</entry>
+            </row>
+
+            <row>
+              <entry>Criar documentos traduzidos</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>D</keycap>
+                </keycombo></entry>
+
+              <entry>Cria os documentos traduzidos na pasta 'target' do projeto e cria arquivos de memória de tradução (arquivos tmx level1, level2 e omegat) na pasta raiz do projeto.</entry>
+            </row>
+
+            <row>
+              <entry>Propriedades do projeto</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>E</keycap>
+                </keycombo></entry>
+
+              <entry>Exibe as definições do projeto para modificação, se necessário.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.editing">
+      <title><indexterm class="singular">
+          <primary>Atalhos de teclado</primary><secondary>Edição</secondary>
+        </indexterm>Edição<indexterm class="singular">
+          <primary>Atalhos de teclado</primary> <secondary>IrPara</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Edição de atalhos de teclado</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry>Desfazer última ação</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>Z</keycap>
+                </keycombo></entry>
+
+              <entry>Desfaz as últimas ações de edição no segmento destino aberto</entry>
+            </row>
+
+            <row>
+              <entry>Refazer última ação</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>Y</keycap>
+                </keycombo></entry>
+
+              <entry>Refaz as últimas ações de edição no segmento destino aberto</entry>
+            </row>
+
+            <row>
+              <entry>Selecionar correspondência No.</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>No.</keycap>
+                </keycombo></entry>
+
+              <entry>No. é um dígito de 1 a 5. O atalho seleciona a correspondência No. mostrada na janela de correspondências (por predefinição, a primeira está selecionada)</entry>
+            </row>
+
+            <row>
+              <entry>Substituir com correspondência</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>Substitui o conteúdo do segmento destino aberto com a correspondência selecionada (por predefinição, a primeira está selecionada)</entry>
+            </row>
+
+            <row>
+              <entry>Inserir correspondência</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>Insere no segmento aberto e na posição onde está o cursor a correspondência selecionada (a primeira está selecionada por predefinição)</entry>
+            </row>
+
+            <row>
+              <entry>Substituir com texto fonte</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+R</keycap>
+                </keycombo></entry>
+
+              <entry>Substitui o conteúdo do segmento destino aberto com o texto fonte</entry>
+            </row>
+
+            <row>
+              <entry>Inserir texto fonte</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+I</keycap>
+                </keycombo></entry>
+
+              <entry>Insere o conteúdo do texto fonte no segmento destino na posição do cursor.</entry>
+            </row>
+
+            <row>
+              <entry>Inserir tags do texto fonte</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+T</keycap>
+                </keycombo></entry>
+
+              <entry>Insere as tags do texto fonte no segmento destino na posição do cursor.</entry>
+            </row>
+
+            <row>
+              <entry>Buscar no projeto</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>Displays a dialog to conduct searches in the
+              project</entry>
+            </row>
+
+            <row>
+              <entry>Substituir com tradução automática</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>M</keycap>
+                </keycombo></entry>
+
+              <entry>Replaces the target segment with the machine translation of the source. Nada acontecerá se as ferramentas automáticas estiverem desativadas  (veja Menu &gt; Opções &gt;Tradução Automática).</entry>
+            </row>
+
+            <row>
+              <entry>Exportar seleção</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap><keycap>Ctrl</keycap><keycap>C</keycap>
+                </keycombo></entry>
+
+              <entry>Exporta o segmento atual para um arquivo de texto para processomento.</entry>
+            </row>
+
+            <row>
+              <entry>Criar termos no glossário</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap><keycap>Ctrl</keycap><keycap>G</keycap>
+                </keycombo></entry>
+
+              <entry>Permite que o usuario crie uma entrada no arquivo de glossário padrão.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.moving.around">
+      <title><indexterm class="singular">
+          <primary>Atalhos de teclado</primary> <secondary>IrPara</secondary>
+        </indexterm>Movimentação</title>
+
+      <table colsep="1">
+        <title>Movimentação de atalhos de teclado</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry>Próximo segmento não traduzido</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>U</keycap>
+                </keycombo></entry>
+
+              <entry>Move o campo de edição para o próximo segmento que não está registrado na memória de tradução do projeto</entry>
+            </row>
+
+            <row>
+              <entry>Próximo segmento</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>N</keycap>
+                </keycombo>, <keycap>Enter</keycap> or
+              <keycap>Return</keycap></entry>
+
+              <entry>Move o campo de edição para o próximo segmento</entry>
+            </row>
+
+            <row>
+              <entry>Segmento anterior</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>P</keycap>
+                </keycombo></entry>
+
+              <entry>Moves o campo de edição para o segmento anterior</entry>
+            </row>
+
+            <row>
+              <entry>Segmento número…</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>J</keycap>
+                </keycombo></entry>
+
+              <entry>Move o cursor para o número do segmento inserido</entry>
+            </row>
+
+            <row>
+              <entry>Voltar pelos segmentos…</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+P</keycap>
+                </keycombo></entry>
+
+              <entry>Volta um segmento no histórico dos segmentos.</entry>
+            </row>
+
+            <row>
+              <entry>Avançar pelos segmentos…</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+N</keycap>
+                </keycombo></entry>
+
+              <entry>Avança um segmento no histórico dos segmentos.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.other">
+      <title><indexterm class="singular">
+          <primary>Atalhos de teclado</primary> <secondary>Outros</secondary>
+        </indexterm>Outros</title>
+
+      <table colsep="1">
+        <title>Vários atalhos de teclado</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry>Relação de arquivos do projeto</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>L</keycap>
+                </keycombo></entry>
+
+              <entry>Exibe a relação dos arquivos do projeto</entry>
+            </row>
+
+            <row>
+              <entry>Verificar tags</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>T</keycap>
+                </keycombo></entry>
+
+              <entry>Abre a janela Verificação de tags</entry>
+            </row>
+
+            <row>
+              <entry>Exportar seleção</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl+C</keycap>
+                </keycombo></entry>
+
+              <entry>Exporta a seleção atual ou o texto fonte atual, se não houver nenhum texto selecionado. O texto é exportado para um arquivo de texto simples não formatados.</entry>
+            </row>
+
+            <row>
+              <entry>Buscar no projeto</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap><keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>Abre uma nova janela de busca.</entry>
+            </row>
+
+            <row>
+              <entry>Arquivos de Ajuda</entry>
+
+              <entry><keycap>F1</keycap></entry>
+
+              <entry>Exibe os arquivos de ajuda do <application>OmegaT</application> em uma janela separada</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </section>
+</chapter>

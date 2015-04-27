@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.legal.notices">
+  <title><indexterm class="singular">
+      <primary>Avisos legais</primary>
+    </indexterm>Avisos legais</title>
+
+  <section id="legal.notices.for.documentation">
+    <title>Para a documentação<indexterm class="singular">
+        <primary>Avisos legais</primary> <secondary>Para a documentação</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Copyright</emphasis></para>
+
+    <para>A documentação distribuída com o <application>OmegaT</application> inclui o Manual do Usuário e o documento readme.txt. A documentação está protegida pelo Copyright ©2013 de Vito Smolej. O autor do capítulo <emphasis>Aprenda a usar o OmegaT em 5 minutos!</emphasis> é Samuel Murray, Copyright ©2005-2012.</para>
+
+    <para><emphasis role="bold">Distribuição e modificações</emphasis></para>
+
+    <para>A documentação é um documento livre; você pode redistribui-la e/ou modificá-la nas condições da Licença Pública Geral (GNU) como publicado pela Fundação para o Software Livre; da versão 3 da Licença, ou (se preferir) qualquer versão posterior.</para>
+
+    <para><emphasis role="bold">Garantia</emphasis></para>
+
+    <para>A documentação é distribuída na expectativa de que possa ser útil, mas SEM NENHUMA GARANTIA, sem mesmo a garantia implícita de COMERCIALIZAÇÃO ou ADEQUAÇÃO PARA UM PROPÓSITO PARTICULAR. Veja a Licença Pública Geral - GNU para obter mais detalhes.</para>
+  </section>
+
+  <section id="legal.ntices.for.application">
+    <title>Para o programa<indexterm class="singular">
+        <primary>Avisos legais</primary> <secondary>Para o programa</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Copyright</emphasis></para>
+
+    <para>O <emphasis role="bold"><application>OmegaT</application></emphasis> é protegido por Copyright © 2000-2013 de Keith Godfrey, Zoltan Bartko, Volker Berlin, Didier Briel, Kim Bruning, Alex Buloichik, Thomas Cordonnier, Sandra Jean Chua, Martin Fleurke, Wildrich Fourie, Phillip Hall, Jean-Christophe Helary, Thomas Huriaux, Hans-Peter Jacobs, Kyle Katarn, Ibai Lakunza Velasco, Guido Leenders, Aaron Madlon-Kay, Fabián Mandelbaum, John Moran, Maxym Mykhalchuk, Arno Peters, Henry Pijffers, Briac Pilpré, Tiago Saboga, Andrzej Sawuła, Benjamin Siband, Yu Tang, Rashid Umarov, Antonio Vilei, Martin Wunderlich e Michael Zakharov.</para>
+
+    <para><emphasis role="bold">Distribuição e modificações</emphasis></para>
+
+    <para>O <emphasis role="bold">OmegaT</emphasis> é um programa gratuito; você pode redistribuí-lo e/ou modificá-lo nas condições da Licença Pública Geral (GNU) como publicado pela Fundação para o Software Livre; a versão 3 da Licença, ou (se preferir) qualquer versão posterior.</para>
+
+    <para><emphasis role="bold">Garantia</emphasis></para>
+
+    <para><emphasis role="bold">O <application>O OmegaT</application> </emphasis>é distribuído na expectativa de que possa ser útil, mas SEM NENHUMA GARANTIA, sem mesmo a garantia implícita de COMERCIALIZAÇÃO ou ADEQUAÇÃO PARA UM PROPÓSITO PARTICULAR. Veja a Licença Pública Geral - GNU para obter mais detalhes.</para>
+  </section>
+</appendix>

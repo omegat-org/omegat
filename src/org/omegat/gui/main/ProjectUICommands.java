@@ -8,7 +8,7 @@
                2012 Thomas Cordonnier
                2013 Yu Tang
                2014 Aaron Madlon-Kay, Piotr Kulik
-               2015 Aaron Madlon-Kay
+               2015 Aaron Madlon-Kay, Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -516,7 +516,15 @@ public class ProjectUICommands {
             protected void done() {
                 try {
                     get();
-                    Core.getEditor().gotoEntry(previousCurEntryNum);
+                    // Make sure to update Editor title
+                    SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                            // activate entry later - after project will be
+                            // loaded
+                            Core.getEditor().gotoEntry(previousCurEntryNum);
+                            Core.getEditor().requestFocus();
+                        }
+                    });
                 } catch (Exception ex) {
                     processSwingWorkerException(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                 }

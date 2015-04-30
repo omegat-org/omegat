@@ -70,8 +70,8 @@ commons-*.jar are distributed under the Apache License 2.0
 jwordSplitter-3.4.jar is distributed under the Apache License 2.0
 (required for LanguageTool)
 
-LanguageTool-data.jar and languagetool-core-2.1.jar are distributed under the LGPL license
-LanguageTool sources are available via SVN from http://sourceforge.net/projects/languagetool/
+LanguageTool-data.jar and languagetool-core-2.2.jar are distributed under the LGPL license
+LanguageTool sources are available from https://github.com/languagetool-org/languagetool
 
 morfologik-*.jar is distributed under the Morfologik license
 (required for LanguageTool)

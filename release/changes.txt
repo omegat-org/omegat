@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.4 update 1
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -11,6 +11,8 @@
 
   - Progress bar L10N improvement 
   https://sourceforge.net/p/omegat/feature-requests/1055/
+
+  - Update LanguageTool to 2.2
 
   Bug fixes:
 
@@ -96,11 +98,15 @@ of "foo\.\scripts"
 ----------------------------------------------------------------------
  OmegaT 3.1.9 update 2
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 3.1.9 update 2 vs. 3.1.9 update 1
+
+  Implemented requests:
+
+  - Updated LanguageTool to 2.2
 
   Bug fixes:
 

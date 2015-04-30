@@ -53,7 +53,7 @@
 				<jar href="jwordsplitter-3.4.jar"  />
 				<jar href="KoreanAnalyzer-3x-120223.jar" />
 				<jar href="LanguageTool-data.jar"  />
-				<jar href="languagetool-core-2.1.jar"  />
+				<jar href="languagetool-core-2.2.jar"  />
 				<jar href="morfologik-fsa-1.5.4.jar"  />
 				<jar href="morfologik-speller-1.5.4.jar"  />
 				<jar href="morfologik-stemming-1.5.4.jar"  />

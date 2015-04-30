@@ -27,7 +27,7 @@
 	<classpathentry kind="lib" path="lib/LanguageTool/cjftransform-1.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool/ictclas4j-1.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool/jwordsplitter-3.4.jar"/>
-	<classpathentry kind="lib" path="lib/LanguageTool/languagetool-core-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool/languagetool-core-2.2.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool/LanguageTool-data.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool/morfologik-fsa-1.5.4.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool/morfologik-speller-1.5.4.jar"/>

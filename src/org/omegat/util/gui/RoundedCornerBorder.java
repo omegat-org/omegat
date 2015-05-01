@@ -71,47 +71,51 @@ class RoundedCornerBorder extends AbstractBorder {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
         int r = radius == -1 ? height - 1 : radius;
-        RoundRectangle2D round = new RoundRectangle2D.Float(x, y, width - 0.5f, height - 1, r, r);
-        Area corners = new Area(new Rectangle2D.Float(x, y, width, height));
-        corners.subtract(new Area(round));
+        RoundRectangle2D roundRect = new RoundRectangle2D.Float(x, y, width - 0.5f, height - 1, r, r);
+        Rectangle2D sharpRect = new Rectangle2D.Float(x, y, width, height);
+        Area corners = new Area(sharpRect);
+        corners.subtract(new Area(roundRect));
         Color background = c.getParent() == null ? null : c.getParent().getBackground();
         
         if (side == SIDE_ALL) {
-            drawCorners(g2, background, corners, round);
+            drawCorners(g2, background, corners, roundRect);
             g2.dispose();
             return;
         }
         
-        Rectangle2D rect = new Rectangle2D.Float(x, y, width, height);
-        Area clip;
+        Shape initialClip = g2.getClip();
+        Rectangle2D roundedHalfClip;
         Shape line1;
         Shape line2;
         if (side == SIDE_TOP) {
-            clip = new Area(new Rectangle2D.Float(x, y, width, height / 2));
+            roundedHalfClip = new Rectangle2D.Float(x, y, width, height / 2);
             line1 = new Line2D.Float(x, y, x, y + height);
             line2 = new Line2D.Float(x + width - 0.5f, y, x + width - 0.5f, y + height);
         } else if (side == SIDE_LEFT) {
-            clip = new Area(new Rectangle2D.Float(x, y, width / 2 + 1, height));
+            roundedHalfClip = new Rectangle2D.Float(x, y, width / 2 + 1, height);
             line1 = new Line2D.Float(x, y, x + width, y);
             line2 = new Line2D.Float(x, y + height - 1, x + width, y + height - 1);
         } else if (side == SIDE_BOTTOM) {
-            clip = new Area(new Rectangle2D.Float(x, y + height / 2, width, height / 2 + 1));
+            roundedHalfClip = new Rectangle2D.Float(x, y + height / 2, width, height / 2 + 1);
             line1 = new Line2D.Float(x, y, x, y + height);
             line2 = new Line2D.Float(x + width - 0.5f, y, x + width - 0.5f, y + height);
         } else if (side == SIDE_RIGHT) {
-            clip = new Area(new Rectangle2D.Float(x + width / 2, y, width / 2 + 1, height));
+            roundedHalfClip = new Rectangle2D.Float(x + width / 2, y, width / 2 + 1, height);
             line1 = new Line2D.Float(x, y, x + width, y);
             line2 = new Line2D.Float(x, y + height - 1, x + width, y + height - 1);
         } else {
             throw new IllegalArgumentException();
         }
-        g2.setClip(clip);
-        drawCorners(g2, background, corners, round);
-        Area inverseClip = new Area(rect);
-        inverseClip.subtract(clip);
-        g2.setClip(inverseClip);
+        g2.clip(roundedHalfClip);
+        drawCorners(g2, background, corners, roundRect);
+        
+        Area inverseClip = new Area(sharpRect);
+        inverseClip.subtract(new Area(roundedHalfClip));
+        g2.setClip(initialClip);
+        g2.clip(inverseClip);
         g2.draw(line1);
         g2.draw(line2);
+        
         g2.dispose();
     }
     

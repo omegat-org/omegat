@@ -40,7 +40,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 import javax.swing.UIManager;
-import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
@@ -201,12 +200,15 @@ public class DockingUI {
         UIManager.put("VLDocking.shadow", statusAreaColor);
         
         // Main window main area
+        int outside = 5;
+        UIManager.put("DockingDesktop.border", new EmptyBorder(outside, outside, outside, outside));
         
         // Docked, visible panels get two borders if we're not careful:
         // 1. Drawn by VLDocking. Surrounds panel content AND header. Set this to empty margin instead.
-        Border panelMargin = new EmptyBorder(5, 5, 5, 5);
-        UIManager.put("DockView.singleDockableBorder", panelMargin);
-        UIManager.put("DockView.maximizedDockableBorder", panelMargin);
+        int panel = 2;
+        UIManager.put("DockView.singleDockableBorder", new EmptyBorder(panel, panel, panel, panel));
+        int maxPanel = outside + panel;
+        UIManager.put("DockView.maximizedDockableBorder", new EmptyBorder(maxPanel, maxPanel, maxPanel, maxPanel));
         // 2. Drawn by OmegaT-defined Dockables. Make this a 1px line.
         UIManager.put("OmegaTDockablePanel.border", new MatteBorder(1, 1, 1, 1, borderColor));
 
@@ -242,14 +244,14 @@ public class DockingUI {
         // AutoHideButtonPanel is where minimized panel tabs go. Use compound border to give left/right margins.
         UIManager.put("AutoHideButtonPanel.bottomBorder", new CompoundBorder(
                 new MatteBorder(1, 0, 0, 0, borderColor),
-                new EmptyBorder(0, 10, 0, 10)));
+                new EmptyBorder(0, 2 * outside, 0, 2 * outside)));
         UIManager.put("AutoHideButtonPanel.background", bottomAreaBgColor);
         UIManager.put("AutoHideButton.expandBorderBottom", new RoundedCornerBorder(8, borderColor, RoundedCornerBorder.SIDE_BOTTOM));
         UIManager.put("AutoHideButton.background", standardBgColor);
         // OmegaT-defined status box in lower right
         UIManager.put("OmegaTStatusArea.border", new MatteBorder(1, 1, 1, 1, statusAreaColor));
         // Lowermost section margins
-        UIManager.put("OmegaTMainWindowBottomMargin.border", new EmptyBorder(0, 10, 5, 10));
+        UIManager.put("OmegaTMainWindowBottomMargin.border", new EmptyBorder(0, 2 * outside, outside, 2 * outside));
         
         // Undocked panel
         UIManager.put("activeCaption", Color.WHITE);

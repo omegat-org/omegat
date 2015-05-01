@@ -2,7 +2,7 @@
  OmegaT 3.1.9 update 2
 ----------------------------------------------------------------------
    1 Enhancement
-   1 Bug fix
+   2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.1.9 update 2 vs. 3.1.9 update 1
@@ -15,6 +15,9 @@
 
   - In the default source document exclusion patterns, "CVS" folders were
 entered as "CSV"
+
+  - Too many duplicate segments in the popup menu
+  https://sourceforge.net/p/omegat/bugs/744/
 
   Localisation updates:
 

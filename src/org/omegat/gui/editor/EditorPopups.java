@@ -35,6 +35,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.text.AbstractDocument;
@@ -305,6 +306,7 @@ public class EditorPopups {
     
     public static class DuplicateSegmentsPopup implements IPopupMenuConstructor {
         protected final EditorController ec;
+        private static int MAX_ITEMS_PER_PAGE = 10;
         
         public DuplicateSegmentsPopup(EditorController ec) {
             this.ec = ec;
@@ -324,12 +326,26 @@ public class EditorPopups {
             }
             JMenuItem header = menu.add(StaticUtils.format(OStrings.getString("MW_GO_TO_DUPLICATE_HEADER"), dups.size()));
             header.setEnabled(false);
-            for (final SourceTextEntry dup : dups) {
-                JMenuItem item = menu.add(StaticUtils.format(OStrings.getString("MW_GO_TO_DUPLICATE_ITEM"), dup.entryNum()));
+            JMenu submenu = null;
+            for (int i = 0; i < dups.size(); i++) {
+                final int entryNum = dups.get(i).entryNum();
+                // Put the first n items in the main popup, but put every subsequent batch of n in
+                // nested submenus to prevent any single menu from getting too tall.
+                if (i > 0 && i % MAX_ITEMS_PER_PAGE == 0) {
+                    JMenu newSubmenu = new JMenu(OStrings.getString("MW_MORE_SUBMENU"));
+                    if (submenu == null) {
+                        menu.add(newSubmenu);
+                    } else {
+                        submenu.add(newSubmenu);
+                    }
+                    submenu = newSubmenu;
+                }
+                String label = StaticUtils.format(OStrings.getString("MW_GO_TO_DUPLICATE_ITEM"), entryNum);
+                JMenuItem item = submenu == null ? menu.add(label) : submenu.add(label);
                 item.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        ec.gotoEntry(dup.entryNum());
+                        ec.gotoEntry(entryNum);
                     }
                 });
             }

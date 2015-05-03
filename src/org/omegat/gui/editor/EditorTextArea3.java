@@ -8,6 +8,7 @@
                2010 Wildrich Fourie
                2013 Zoltan Bartko
                2014 Aaron Madlon-Kay
+               2015 Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -314,6 +315,13 @@ public class EditorTextArea3 extends JEditorPane {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
             controller.toggleOrientation();
             this.setCursor(oldCursor);
+
+            IMainWindow mainWindow = Core.getMainWindow();
+            // Timed warning is not available for console window
+            if (mainWindow instanceof MainWindow) {
+                MainWindow window = (MainWindow) mainWindow;
+                window.showTimedStatusMessageRB("ETA_INFO_TOGGLE_LTR_RTL");
+            }
             processed = true;
         } else if (StaticUtils.isKey(e, KeyEvent.VK_BACK_SPACE,
                 mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK)) {

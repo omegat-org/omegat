@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.4 update 1
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -11,6 +11,9 @@
 
   - Progress bar L10N improvement 
   https://sourceforge.net/p/omegat/feature-requests/1055/
+
+  - There's an explanation message at the bottom of the Editor when
+Ctrl+Shift+O is pressed
 
   - New script to clear SVN authentication data
 

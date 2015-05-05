@@ -452,11 +452,6 @@ public class StaticUtils {
         return graphics.getAvailableFontFamilyNames();
     }
 
-    // List of CVS or SVN folders
-    private static final String CVS_SVN_FOLDERS = "(CVS)|(.svn)|(_svn)";
-
-    private static final Pattern IGNORED_FOLDERS = Pattern.compile(CVS_SVN_FOLDERS);
-
     /**
      * Tests whether a directory has to be used
      *
@@ -464,8 +459,7 @@ public class StaticUtils {
      */
     private static boolean isProperDirectory(File file) {
         if (file.isDirectory()) {
-            Matcher directoryMatch = IGNORED_FOLDERS.matcher(file.getName());
-            return !directoryMatch.matches();
+            return true;
         } else
             return false;
     }

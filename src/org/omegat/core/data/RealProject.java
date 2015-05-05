@@ -554,7 +554,7 @@ public class RealProject implements IProject {
         fileList.clear();
         StaticUtils.buildFileList(fileList, new File(srcRoot), true);
         for (int i = 0; i < fileList.size(); i++) {
-            fileList.set(i, fileList.get(i).substring(m_config.getSourceRoot().length()));
+            fileList.set(i, fileList.get(i).substring(m_config.getSourceRoot().length()).replace(File.separatorChar, '/'));
         }
         StaticUtils.removeFilesByMasks(fileList, m_config.getSourceRootExcludes());
 
@@ -1109,7 +1109,7 @@ public class RealProject implements IProject {
         File root = new File(m_config.getSourceRoot());
         StaticUtils.buildFileList(srcFileList, root, true);
         for (int i = 0; i < srcFileList.size(); i++) {
-            srcFileList.set(i, srcFileList.get(i).substring(m_config.getSourceRoot().length()));
+            srcFileList.set(i, srcFileList.get(i).substring(m_config.getSourceRoot().length()).replace(File.separatorChar, '/'));
         }
         StaticUtils.removeFilesByMasks(srcFileList, m_config.getSourceRootExcludes());
         StaticUtils.sortByList(srcFileList, getSourceFilesOrder());

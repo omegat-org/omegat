@@ -2,7 +2,7 @@
  OmegaT 3.1.9 update 2
 ----------------------------------------------------------------------
    1 Enhancement
-   2 Bug fixes
+   3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.1.9 update 2 vs. 3.1.9 update 1
@@ -18,6 +18,9 @@ entered as "CSV"
 
   - Too many duplicate segments in the popup menu
   https://sourceforge.net/p/omegat/bugs/744/
+
+  - Exclusion masks not working correctly under Windows 
+  https://sourceforge.net/p/omegat/bugs/746/
 
   Localisation updates:
 

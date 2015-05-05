@@ -9,6 +9,7 @@
                2010 Alex Buloichik
                2012 Jean-Christophe Helary
                2013 Aaron Madlon-Kay, Alex Buloichik
+               2015 Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -30,7 +31,9 @@
 
 package org.omegat.gui.glossary;
 
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -47,6 +50,7 @@ import java.util.List;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.text.AttributeSet;
+import javax.swing.text.JTextComponent;
 import javax.swing.text.StyledDocument;
 
 import org.omegat.core.Core;
@@ -55,6 +59,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringEntry;
 import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.dialogs.CreateGlossaryEntry;
+import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -253,6 +258,11 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
     }
 
     public void showCreateGlossaryEntryDialog() {
+        Frame parent = Core.getMainWindow().getApplicationFrame();
+        showCreateGlossaryEntryDialog(parent);
+    }
+
+    public void showCreateGlossaryEntryDialog(final Frame parent) {
         CreateGlossaryEntry d = createGlossaryEntryDialog;
         if (d != null) {
             d.requestFocus();
@@ -262,7 +272,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
         ProjectProperties props = Core.getProject().getProjectProperties();
         final File out = new File(props.getWriteableGlossary());
 
-        final CreateGlossaryEntry dialog = new CreateGlossaryEntry(Core.getMainWindow().getApplicationFrame());
+        final CreateGlossaryEntry dialog = new CreateGlossaryEntry(parent);
         String txt = dialog.getGlossaryFileText().getText();
         txt = MessageFormat.format(txt, out.getAbsolutePath());
         dialog.getGlossaryFileText().setText(txt);
@@ -275,7 +285,14 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
 
             @Override
             public void windowGainedFocus(WindowEvent e) {
-                String sel = Core.getEditor().getSelectedText();
+                String sel = null;
+                Component component = parent.getMostRecentFocusOwner();
+                if (component instanceof JTextComponent) {
+                    sel = ((JTextComponent) component).getSelectedText();
+                    if (!StringUtil.isEmpty(sel)) {
+                        sel = EditorUtils.removeDirectionChars(sel);
+                    }
+                }
                 if (!StringUtil.isEmpty(sel)) {
                     if (StringUtil.isEmpty(dialog.getSourceText().getText())) {
                         dialog.getSourceText().setText(sel);

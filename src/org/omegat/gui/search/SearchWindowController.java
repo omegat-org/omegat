@@ -10,6 +10,7 @@
                2012 Didier Briel
                2013 Aaron Madlon-Kay, Alex Buloichik
                2014 Aaron Madlon-Kay, Piotr Kulik
+               2015 Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -48,6 +49,7 @@ import java.util.Date;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.ActionMap;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.InputMap;
 import javax.swing.JComboBox;
@@ -69,6 +71,7 @@ import org.omegat.core.threads.SearchThread;
 import org.omegat.gui.editor.filter.ReplaceFilter;
 import org.omegat.gui.editor.filter.SearchFilter;
 import org.omegat.gui.main.MainWindow;
+import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -95,6 +98,10 @@ import org.omegat.util.gui.UIThreadsUtil;
  */
 @SuppressWarnings("serial")
 public class SearchWindowController {
+
+    // Keys for InputMap/ActionMap
+    private final String KEY_FIND_IN_PROJECT       = "editFindInProjectMenuItem";
+    private final String KEY_CREATE_GLOSSARY_ENTRY = "editCreateGlossaryEntryMenuItem";
 
     private final SearchWindowForm form;
     private final SearchMode mode;
@@ -280,20 +287,30 @@ public class SearchWindowController {
                 doCancel();
             }
         });
-        
-        // Make Ctrl+F re-focus on search field
-        KeyStroke find = KeyStroke.getKeyStroke(KeyEvent.VK_F,
-                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(), false);
-        Action focusAction = new AbstractAction() {
+
+        ActionMap actionMap = form.getRootPane().getActionMap();
+        InputMap  inputMap  = form.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+
+        // Make Search shortcut re-focus on search field
+        actionMap.put(KEY_FIND_IN_PROJECT, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 form.m_searchField.requestFocus();
                 form.m_searchField.getEditor().selectAll();
             }
-        };
-        form.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(find, "CTRL+F");
-        form.getRootPane().getActionMap().put("CTRL+F", focusAction);
-        
+        });
+
+        // Show create glossary entry dialog
+        actionMap.put(KEY_CREATE_GLOSSARY_ENTRY, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                Core.getGlossary().showCreateGlossaryEntryDialog(form);
+            }
+        });
+
+        PropertiesShortcuts shortcuts = new PropertiesShortcuts("/org/omegat/gui/main/MainMenuShortcuts.properties");
+        shortcuts.bindKeyStrokes(inputMap, actionMap.keys());
+
         // Set search and replace combo boxes' actions, undo, key handling
         configureHistoryComboBox(form.m_searchField);
         configureHistoryComboBox(form.m_replaceField);        

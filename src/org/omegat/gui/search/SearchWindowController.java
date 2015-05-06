@@ -48,7 +48,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.ActionMap;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.InputMap;
@@ -98,10 +97,6 @@ import org.omegat.util.gui.UIThreadsUtil;
  */
 @SuppressWarnings("serial")
 public class SearchWindowController {
-
-    // Keys for InputMap/ActionMap
-    private final String KEY_FIND_IN_PROJECT       = "editFindInProjectMenuItem";
-    private final String KEY_CREATE_GLOSSARY_ENTRY = "editCreateGlossaryEntryMenuItem";
 
     private final SearchWindowForm form;
     private final SearchMode mode;
@@ -292,7 +287,7 @@ public class SearchWindowController {
         InputMap  inputMap  = form.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
 
         // Make Search shortcut re-focus on search field
-        actionMap.put(KEY_FIND_IN_PROJECT, new AbstractAction() {
+        actionMap.put("editFindInProjectMenuItem", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 form.m_searchField.requestFocus();
@@ -301,7 +296,7 @@ public class SearchWindowController {
         });
 
         // Show create glossary entry dialog
-        actionMap.put(KEY_CREATE_GLOSSARY_ENTRY, new AbstractAction() {
+        actionMap.put("editCreateGlossaryEntryMenuItem", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 Core.getGlossary().showCreateGlossaryEntryDialog(form);

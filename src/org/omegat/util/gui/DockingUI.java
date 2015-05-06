@@ -253,6 +253,8 @@ public class DockingUI {
         // Lowermost section margins
         UIManager.put("OmegaTMainWindowBottomMargin.border", new EmptyBorder(0, 2 * outside, outside, 2 * outside));
         
+        UIManager.put("OmegaTEditorFilter.border", new MatteBorder(1, 1, 0, 1, borderColor));
+        
         // Undocked panel
         UIManager.put("activeCaption", Color.WHITE);
         UIManager.put("activeCaptionBorder", borderColor);

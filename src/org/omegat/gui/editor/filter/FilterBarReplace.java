@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Alex Buloichik
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,10 +26,13 @@
 
 package org.omegat.gui.editor.filter;
 
+import javax.swing.UIManager;
+import javax.swing.border.Border;
 import org.omegat.util.OStrings;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public class FilterBarReplace extends javax.swing.JPanel {
 
@@ -37,6 +41,10 @@ public class FilterBarReplace extends javax.swing.JPanel {
      */
     public FilterBarReplace() {
         initComponents();
+        Border border = UIManager.getBorder("OmegaTEditorFilter.border");
+        if (border != null) {
+            setBorder(border);
+        }
     }
 
     /**

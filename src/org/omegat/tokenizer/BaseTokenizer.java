@@ -52,11 +52,11 @@ import org.omegat.util.Token;
  * @author Aaron Madlon-Kay
  */
 public abstract class BaseTokenizer implements ITokenizer {
-    private static Map<String, Token[]> tokenCacheNone = new HashMap<String, Token[]>(
+    private static final Map<String, Token[]> tokenCacheNone = new HashMap<String, Token[]>(
             5000);
-    private static Map<String, Token[]> tokenCacheMatching = new HashMap<String, Token[]>(
+    private static final Map<String, Token[]> tokenCacheMatching = new HashMap<String, Token[]>(
             5000);
-    private static Map<String, Token[]> tokenCacheGlossary = new HashMap<String, Token[]>(
+    private static final Map<String, Token[]> tokenCacheGlossary = new HashMap<String, Token[]>(
             5000);
 
     /**
@@ -96,6 +96,7 @@ public abstract class BaseTokenizer implements ITokenizer {
 
     public BaseTokenizer() {
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
+            @Override
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
                 if (eventType == PROJECT_CHANGE_TYPE.CLOSE) {
                     synchronized (tokenCacheNone) {
@@ -115,6 +116,7 @@ public abstract class BaseTokenizer implements ITokenizer {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Map<Version, String> getSupportedBehaviors() {
         return supportedBehaviors;
     }
@@ -122,6 +124,7 @@ public abstract class BaseTokenizer implements ITokenizer {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Version getBehavior() {
         return currentBehavior == null ? defaultBehavior : currentBehavior;
     }
@@ -129,6 +132,7 @@ public abstract class BaseTokenizer implements ITokenizer {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setBehavior(Version behavior) {
         currentBehavior = behavior;
     }
@@ -136,6 +140,7 @@ public abstract class BaseTokenizer implements ITokenizer {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Version getDefaultBehavior() {
         return defaultBehavior;
     }
@@ -143,6 +148,7 @@ public abstract class BaseTokenizer implements ITokenizer {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Token[] tokenizeWordsForSpelling(String str) {
         return tokenize(str, false, false, true);
     }
@@ -150,9 +156,10 @@ public abstract class BaseTokenizer implements ITokenizer {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Token[] tokenizeWords(final String strOrig,
             final StemmingMode stemmingMode) {
-        Map<String, Token[]> cache = null;
+        Map<String, Token[]> cache;
         switch (stemmingMode) {
         case NONE:
             cache = tokenCacheNone;
@@ -163,14 +170,16 @@ public abstract class BaseTokenizer implements ITokenizer {
         case MATCHING:
             cache = tokenCacheMatching;
             break;
+        default:
+            throw new RuntimeException("No cache for specified stemming mode");
         }
         Token[] result;
         synchronized (cache) {
             result = cache.get(strOrig);
         }
-        if (result != null)
+        if (result != null) {
             return result;
-
+        }
         result = tokenize(strOrig, stemmingMode == StemmingMode.GLOSSARY
                 || stemmingMode == StemmingMode.MATCHING,
                 stemmingMode == StemmingMode.MATCHING,
@@ -186,6 +195,7 @@ public abstract class BaseTokenizer implements ITokenizer {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Token[] tokenizeAllExactly(final String strOrig) {
 
         if (!shouldDelegateTokenizeExactly) {
@@ -267,6 +277,7 @@ public abstract class BaseTokenizer implements ITokenizer {
     protected abstract TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed);
 
+    @Override
     public String[] getSupportedLanguages() {
         Tokenizer ann = getClass().getAnnotation(Tokenizer.class);
         return ann == null ? new String[0] : ann.languages();
@@ -301,7 +312,7 @@ public abstract class BaseTokenizer implements ITokenizer {
         StringBuilder sb = new StringBuilder();
         String[] strings = Token.getTextsFromString(tokens, input);
         sb.append(StringUtils.join(strings, ", ")).append('\n');
-        sb.append("Is verbatim: " + StringUtils.join(strings, "").equals(input)).append('\n');
+        sb.append("Is verbatim: ").append(StringUtils.join(strings, "").equals(input)).append('\n');
         return sb.toString();
     }
     

@@ -252,7 +252,7 @@ omegat.kaptn
 
 OmegaT использует следующие библиотеки:
   HTMLParser 1.6 (авторы: Somik Raha, Derrick Oswald и другие; лицензия: LGPL)
-  Инфраструктура VLDocking Framework 3.0.4 (лицензия LGPL License)
+  Инфраструктура VLDocking Framework 3.0.5-SNAPSHOT (лицензия LGPL License)
   Hunspell. Авторы: László Németh и другие (лицензия LGPL)
   JNA. Авторы: Todd Fast, Timothy Wall и другие (лицензия LGPL)
   Swing-Layout 1.0.4 (лицензия LGPL)
@@ -280,6 +280,7 @@ OmegaT использует следующие библиотеки:
   SuperTMXMerge-for_OmegaT.jar (лицензия LGPL)
   groovy-all-2.2.2.jar (лицензия Apache 2.0)
   slf4j (лицензия MIT)
+  juniversalchardet-1.0.3.jar (лицензия GPL v2)
 
 ==============================================================================
  5.  OmegaT работает неправильно? Нужна помощь?

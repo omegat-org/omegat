@@ -7,6 +7,7 @@
                2006-2007 Henry Pijffers
                2010 Alex Buloichik, Didier Briel
                2014 Piotr Kulik
+               2014 Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -34,7 +35,9 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
@@ -45,6 +48,9 @@ import org.omegat.core.Core;
 import org.omegat.core.search.SearchMatch;
 import org.omegat.core.search.SearchResultEntry;
 import org.omegat.core.search.Searcher;
+import org.omegat.gui.editor.EditorController;
+import org.omegat.gui.editor.EditorController.CaretPosition;
+import org.omegat.gui.editor.IEditor;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -91,7 +97,15 @@ class EntryListPane extends JTextPane {
                             if (entry >= 0) {
                                 SwingUtilities.invokeLater(new Runnable() {
                                     public void run() {
-                                        Core.getEditor().gotoEntry(entry);
+                                        IEditor editor = Core.getEditor();
+                                        if (m_firstMatchList.containsKey(entry)
+                                                && editor instanceof EditorController) {
+                                            // Select search word in Editor pane
+                                            CaretPosition pos = m_firstMatchList.get(entry);
+                                            ((EditorController) editor).gotoEntry(entry, pos);
+                                        } else {
+                                            editor.gotoEntry(entry);
+                                        }
                                         setCursor(oldCursor);
                                     }
                                 });
@@ -122,6 +136,7 @@ class EntryListPane extends JTextPane {
         currentlyDisplayedMatches = null;
         m_entryList.clear();
         m_offsetList.clear();
+        m_firstMatchList.clear();
 
         if (searcher == null || searcher.getSearchResults() == null) {
             // empty marks - just reset
@@ -201,6 +216,12 @@ class EntryListPane extends JTextPane {
             if (loc != null && !loc.equals("")) {
                 m_stringBuf.append("-- ");
                 if (targetMatches != null) {
+                    // Save first match position to select it in Editor pane later
+                    if (num > 0) {
+                        SearchMatch m = targetMatches[0];
+                        m_firstMatchList.put(num, new CaretPosition(m.getStart(), m.getEnd()));
+                    }
+
                     for (SearchMatch m : targetMatches) {
                         m.move(m_stringBuf.length());
                         matches.add(m);
@@ -296,6 +317,7 @@ class EntryListPane extends JTextPane {
     private volatile Searcher m_searcher;
     private final List<Integer> m_entryList = new ArrayList<Integer>();
     private final List<Integer> m_offsetList = new ArrayList<Integer>();
+    private final Map<Integer, CaretPosition> m_firstMatchList = new HashMap<Integer, CaretPosition>();
     private DisplayMatches currentlyDisplayedMatches;
     private int numberOfResults;
 }

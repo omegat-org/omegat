@@ -7,7 +7,7 @@
                2006-2007 Henry Pijffers
                2010 Alex Buloichik, Didier Briel
                2014 Piotr Kulik
-               2014 Yu Tang
+               2015 Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

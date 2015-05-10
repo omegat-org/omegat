@@ -96,6 +96,7 @@ class EntryListPane extends JTextPane {
                             final int entry = m_entryList.get(i);
                             if (entry >= 0) {
                                 SwingUtilities.invokeLater(new Runnable() {
+                                    @Override
                                     public void run() {
                                         IEditor editor = Core.getEditor();
                                         if (m_firstMatchList.containsKey(entry)
@@ -247,6 +248,7 @@ class EntryListPane extends JTextPane {
             m_offsetList.add(m_stringBuf.length());
         }
 
+        @Override
         public void run() {
             UIThreadsUtil.mustBeSwingThread();
 

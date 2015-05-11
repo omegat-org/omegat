@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.4 update 1
 ----------------------------------------------------------------------
-   4 Enhancements
+   5 Enhancements
    1 Bug fix
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -24,6 +24,8 @@
 Ctrl+Shift+O is pressed
 
   - New script to clear SVN authentication data
+
+  - New OmegaT icon on the Mac
 
   Bug fixes:
 

@@ -14,11 +14,15 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>OmegaT</string>
+	<key>CFBundleIdentifier</key>
+	<string>org.omegat.OmegaT</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
+	<string>@VERSION_NUMBER_SUBST@</string>
+	<key>CFBundleShortVersionString</key>
 	<string>@VERSION_NUMBER_SUBST@</string>
 </dict>
 </plist>

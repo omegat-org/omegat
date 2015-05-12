@@ -30,10 +30,11 @@ import java.io.File;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+
 import org.omegat.gui.common.OmegaTIcons;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
 
 /**
  * Basic File Chooser for OmegaT, showing the icon for OmegaT projects and
@@ -71,7 +72,7 @@ public class OmegaTFileChooser extends JFileChooser {
 
     /** Redefines the icon for OmegaT projects. */
     public Icon getIcon(File f) {
-        if (isProjectDir(f) && omegatIcon != null)
+        if (StaticUtils.isProjectDir(f) && omegatIcon != null)
             return omegatIcon;
         else
             return super.getIcon(f);
@@ -79,18 +80,9 @@ public class OmegaTFileChooser extends JFileChooser {
 
     /** Redefines the file type for OmegaT projects. */
     public String getTypeDescription(File f) {
-        if (isProjectDir(f))
+        if (StaticUtils.isProjectDir(f))
             return OStrings.getString("PFC_OMEGAT_PROJECT");
         else
             return super.getTypeDescription(f);
     }
-
-    public static boolean isProjectDir(File f) {
-        if (f == null || f.getName().length() == 0)
-            return false;
-        File projFile = new File(f.getAbsolutePath() + File.separator + OConsts.FILE_PROJECT);
-        File internal = new File(f.getAbsolutePath() + File.separator + OConsts.DEFAULT_INTERNAL);
-        return projFile.exists() && internal.exists() && internal.isDirectory();
-    }
-
 }

@@ -225,7 +225,7 @@ public class Core {
         editor = new EditorController(me);
         tagValidation = new TagValidationTool(me);
         matcher = new MatchesTextArea(me);
-        glossary = new GlossaryTextArea();
+        glossary = new GlossaryTextArea(me);
         glossaryManager = new GlossaryManager(glossary);
         notes = new NotesTextArea(me);
         comments = new CommentsTextArea(me);

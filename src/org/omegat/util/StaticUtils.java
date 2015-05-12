@@ -1225,5 +1225,14 @@ public class StaticUtils {
         }
         return result.toArray(new String[0]);
     }
+
+    public static boolean isProjectDir(File f) {
+        if (f == null || f.getName().length() == 0) {
+            return false;
+        }
+        File projFile = new File(f.getAbsolutePath(), OConsts.FILE_PROJECT);
+        File internal = new File(f.getAbsolutePath(), OConsts.DEFAULT_INTERNAL);
+        return projFile.exists() && internal.exists() && internal.isDirectory();
+    }
     
 } // StaticUtils

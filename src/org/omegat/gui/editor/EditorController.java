@@ -45,6 +45,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -92,6 +93,7 @@ import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.main.DockablePanel;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.MainWindowUI;
+import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.tagvalidation.ITagValidation;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -101,6 +103,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
+import org.omegat.util.gui.FileDropHandler;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -185,6 +188,8 @@ public class EditorController implements IEditor {
     private Component entriesFilterControlComponent;
 
     private SegmentExportImport segmentExportImport;
+    
+    private final FileDropHandler fileDropHandler;
     
     /**
      * Indicates, in nanoseconds, the last time a keypress was input.
@@ -279,6 +284,24 @@ public class EditorController implements IEditor {
             }
         });
 
+        fileDropHandler = new FileDropHandler() {
+            @Override
+            protected boolean handleFiles(List<File> files) {
+                if (Core.getProject().isProjectLoaded()) {
+                    mainWindow.importFiles(Core.getProject().getProjectProperties().getSourceRoot(),
+                            files.toArray(new File[0]));
+                    return true;
+                }
+
+                File firstFile = files.get(0); // Ignore others
+                if (StaticUtils.isProjectDir(firstFile)) {
+                    ProjectUICommands.projectOpen(firstFile);
+                    return true;
+                }
+                return false;
+            }
+        };
+        
         EditorPopups.init(this);
     }
 
@@ -364,6 +387,7 @@ public class EditorController implements IEditor {
                 int size = data.getFont().getSize() / 2;
                 data.setBorder(new EmptyBorder(size, size, size, size));
             }
+            data.setTransferHandler(fileDropHandler);
             scrollPane.setViewportView(data);
         }
     }

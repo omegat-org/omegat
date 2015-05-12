@@ -330,6 +330,32 @@ public class FileUtil {
         }
         dir.delete();
     }
+    
+    public static void copyFilesTo(File destination, File[] toImport) throws IOException {
+        if (destination.exists() && !destination.isDirectory()) {
+            throw new RuntimeException("Copy-to destination exists and is not a directory.");
+        }
+        copyFilesTo(destination, toImport, null);
+    }
+    
+    private static void copyFilesTo(File destination, File[] toImport, File root) throws IOException {
+        for (File file : toImport) {
+            if (file.isDirectory()) {
+                if (file.getPath().startsWith(destination.getPath())) {
+                    continue;
+                }
+                copyFilesTo(destination, file.listFiles(), root == null ? file.getParentFile() : root);
+            } else {
+                if (root == null) {
+                    root = file.getParentFile();
+                }
+                String filePath = file.getPath();
+                String relPath = filePath.substring(root.getPath().length(), filePath.length());
+                File dest = new File(destination, relPath);
+                LFileCopy.copy(file, dest);
+            }
+        }
+    }
 
     /**
      * This method is taken from

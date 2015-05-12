@@ -39,6 +39,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -62,11 +63,13 @@ import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 import org.omegat.util.gui.AlwaysVisibleCaret;
+import org.omegat.util.gui.ProjectFileDragImporter;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -109,7 +112,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     private final MainWindow mw;
 
     /** Creates new form MatchGlossaryPane */
-    public MatchesTextArea(MainWindow mw) {
+    public MatchesTextArea(final MainWindow mw) {
         super(true);
         this.mw = mw;
 
@@ -122,6 +125,17 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         setMinimumSize(new Dimension(100, 50));
 
         addMouseListener(mouseListener);
+        
+        setTransferHandler(new ProjectFileDragImporter(mw, false) {
+            @Override
+            protected String getDestination() {
+                return Core.getProject().getProjectProperties().getTMRoot();
+            }
+            @Override
+            protected boolean accept(File pathname) {
+                return pathname.getName().toLowerCase().endsWith(OConsts.TMX_EXTENSION);
+            }
+        });
     }
 
     @Override

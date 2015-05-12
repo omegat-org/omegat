@@ -61,11 +61,14 @@ import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.dialogs.CreateGlossaryEntry;
 import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.main.DockableScrollPane;
+import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.AlwaysVisibleCaret;
+import org.omegat.util.gui.ProjectFileDragImporter;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -107,7 +110,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
     private CreateGlossaryEntry createGlossaryEntryDialog;
 
     /** Creates new form MatchGlossaryPane */
-    public GlossaryTextArea() {
+    public GlossaryTextArea(final MainWindow mw) {
         super(true);
 
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Glossary");
@@ -132,6 +135,20 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
         addMouseListener(mouseListener);
 
         Core.getEditor().registerPopupMenuConstructors(300, new TransTipsPopup());
+        
+        setTransferHandler(new ProjectFileDragImporter(mw, false) {
+            @Override
+            protected String getDestination() {
+                return Core.getProject().getProjectProperties().getGlossaryRoot();
+            }
+            @Override
+            protected boolean accept(File pathname) {
+                String name = pathname.getName().toLowerCase();
+                return name.endsWith(OConsts.EXT_CSV_UTF8) || name.endsWith(OConsts.EXT_TBX)
+                        || name.endsWith(OConsts.EXT_TSV_DEF) || name.endsWith(OConsts.EXT_TSV_TXT)
+                        || name.endsWith(OConsts.EXT_TSV_UTF8);
+            }
+        });
     }
 
     @Override

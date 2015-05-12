@@ -94,6 +94,7 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.ProjectFileDragImporter;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TableColumnSizer;
 import org.omegat.util.gui.DataTableStyling;
@@ -139,6 +140,13 @@ public class ProjectFilesListController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 propagateTableColumns();
+            }
+        });
+        
+        list.tableFiles.setTransferHandler(new ProjectFileDragImporter(m_parent, true) {
+            @Override
+            protected String getDestination() {
+                return Core.getProject().getProjectProperties().getSourceRoot();
             }
         });
         
@@ -748,7 +756,7 @@ public class ProjectFilesListController {
      * @author Maxym Mykhalchuk
      */
     private void doImportSourceFiles() {
-        m_parent.doImportSourceFiles();
+        m_parent.doPromptImportSourceFiles();
     }
 
     private void doWikiImport() {

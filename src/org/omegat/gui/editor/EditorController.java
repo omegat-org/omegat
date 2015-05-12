@@ -387,7 +387,7 @@ public class EditorController implements IEditor {
                 int size = data.getFont().getSize() / 2;
                 data.setBorder(new EmptyBorder(size, size, size, size));
             }
-            data.setTransferHandler(fileDropHandler);
+            data.setTransferHandler(fileDropHandler.wrapExisting(data));
             scrollPane.setViewportView(data);
         }
     }

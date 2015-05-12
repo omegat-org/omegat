@@ -126,7 +126,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
 
         addMouseListener(mouseListener);
         
-        setTransferHandler(new ProjectFileDragImporter(mw, false) {
+        setTransferHandler(new ProjectFileDragImporter(mw, this, false) {
             @Override
             protected String getDestination() {
                 return Core.getProject().getProjectProperties().getTMRoot();

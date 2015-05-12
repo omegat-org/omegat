@@ -143,7 +143,7 @@ public class ProjectFilesListController {
             }
         });
         
-        list.tableFiles.setTransferHandler(new ProjectFileDragImporter(m_parent, true) {
+        list.tableFiles.setTransferHandler(new ProjectFileDragImporter(m_parent, list.tableFiles, true) {
             @Override
             protected String getDestination() {
                 return Core.getProject().getProjectProperties().getSourceRoot();

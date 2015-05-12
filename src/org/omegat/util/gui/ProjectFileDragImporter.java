@@ -28,6 +28,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JComponent;
 import org.omegat.core.Core;
 import org.omegat.gui.main.MainWindow;
 
@@ -36,9 +37,10 @@ public abstract class ProjectFileDragImporter extends FileDropHandler {
     private final MainWindow mw;
     private final boolean doReset;
     
-    public ProjectFileDragImporter(MainWindow mw, boolean doReset) {
+    public ProjectFileDragImporter(MainWindow mw, JComponent comp, boolean doReset) {
         this.mw = mw;
         this.doReset = doReset;
+        wrapExisting(comp);
     }
     
     @Override

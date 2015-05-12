@@ -136,7 +136,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
 
         Core.getEditor().registerPopupMenuConstructors(300, new TransTipsPopup());
         
-        setTransferHandler(new ProjectFileDragImporter(mw, false) {
+        setTransferHandler(new ProjectFileDragImporter(mw, this, false) {
             @Override
             protected String getDestination() {
                 return Core.getProject().getProjectProperties().getGlossaryRoot();

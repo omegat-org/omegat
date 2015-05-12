@@ -45,7 +45,10 @@ public abstract class ProjectFileDragImporter extends FileDropHandler {
     
     @Override
     public boolean canImport(TransferSupport support) {
-        return Core.getProject().isProjectLoaded() && super.canImport(support);
+    	if (isFileData(support)) {
+    		return Core.getProject().isProjectLoaded() && super.canImport(support);
+    	}
+        return super.canImport(support);
     }
     
     @Override

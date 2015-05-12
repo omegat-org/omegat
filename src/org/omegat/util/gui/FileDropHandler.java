@@ -60,7 +60,7 @@ public abstract class FileDropHandler extends TransferHandler {
         return  isFileData(support) || (wrappedHandler != null && wrappedHandler.canImport(support));
     }
     
-    private boolean isFileData(TransferHandler.TransferSupport support) {
+    protected boolean isFileData(TransferHandler.TransferSupport support) {
     	return support.isDataFlavorSupported(DataFlavor.javaFileListFlavor);
     }
     

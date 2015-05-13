@@ -300,7 +300,7 @@ Custom strings from release\win32-specific must be added manually to the languag
             <zipfileset dir="release/mac-specific/" excludes="OmegaT.app/Contents/Info.plist,OmegaT.app/Contents/MacOS/JavaAppLauncher,Configuration.properties"/>
             <zipfileset dir="build/" includes="Info.plist" prefix="OmegaT.app/Contents/"/>
             <zipfileset dir="release/mac-specific/" includes="OmegaT.app/Contents/MacOS/JavaAppLauncher" filemode="755"/>
-            <zipfileset dir="../jre-mac-root/" excludes="bin/" prefix="OmegaT.app/Contents/Plugins/jre/"/>
+            <zipfileset dir="../jre-mac/" excludes="bin/" prefix="OmegaT.app/Contents/Plugins/jre/"/>
         </zip>
     </target>
 

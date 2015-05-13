@@ -1,28 +1,77 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" ?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleAllowMixedLocalizations</key>
-	<string>true</string>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
-	<key>CFBundleExecutable</key>
-	<string>OmegaT.sh</string>
-	<key>CFBundleIconFile</key>
-	<string>OmegaT.icns</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>OmegaT</string>
-	<key>CFBundleIdentifier</key>
-	<string>org.omegat.OmegaT</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>@VERSION_NUMBER_SUBST@</string>
-	<key>CFBundleShortVersionString</key>
-	<string>@VERSION_NUMBER_SUBST@</string>
+<key>CFBundleDevelopmentRegion</key>
+<string>English</string>
+<key>CFBundleExecutable</key>
+<string>JavaAppLauncher</string>
+<key>CFBundleIconFile</key>
+<string>OmegaT.icns</string>
+<key>CFBundleIdentifier</key>
+<string>org.omegat.OmegaT</string>
+<key>CFBundleDisplayName</key>
+<string>OmegaT</string>
+<key>CFBundleInfoDictionaryVersion</key>
+<string>6.0</string>
+<key>CFBundleName</key>
+<string>OmegaT</string>
+<key>CFBundlePackageType</key>
+<string>APPL</string>
+<key>CFBundleShortVersionString</key>
+<string>@VERSION_NUMBER_SUBST@</string>
+<key>CFBundleVersion</key>
+<string>@VERSION_NUMBER_SUBST@</string>
+<key>CFBundleSignature</key>
+<string>????</string>
+<key>NSHumanReadableCopyright</key>
+<string></string>
+<key>NSHighResolutionCapable</key>
+<true/>
+<key>NSSupportsAutomaticGraphicsSwitching</key>
+<true/>
+<key>JVMVersion</key>
+<string>1.7</string>
+<key>JVMMainClassName</key>
+<string>org.omegat.Main</string>
+<key>CFBundleDocumentTypes</key>
+<array>
+<dict>
+<key>CFBundleTypeExtensions</key>
+<array>
+<string>project</string>
+</array>
+<key>CFBundleTypeIconFile</key>
+<string>OmegaT.icns</string>
+<key>CFBundleTypeName</key>
+<string>OmegaT Project</string>
+<key>CFBundleTypeRole</key>
+<string>Editor</string>
+<key>LSTypeIsPackage</key>
+<false/></dict>
+</array>
+<key>LSArchitecturePriority</key>
+<array>
+</array>
+<key>LSEnvironment</key>
+<dict>
+<key>LC_CTYPE</key>
+<string>UTF-8</string>
+</dict>
+<key>JVMOptions</key>
+<array>
+<string>-Xdock:name=OmegaT</string>
+<string>-Xmx1024M</string>
+</array>
+<key>JVMDefaultOptions</key>
+<dict>
+</dict>
+<key>JVMArguments</key>
+<array>
+<string>--config-file=$APP_ROOT/Contents/Resources/Configuration.properties</string>
+</array>
+<key>JVMRuntime</key>
+<string>jre</string>
 </dict>
 </plist>
+

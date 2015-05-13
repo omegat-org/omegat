@@ -31,6 +31,8 @@ package org.omegat;
 
 import java.awt.Toolkit;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.text.MessageFormat;
@@ -39,6 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.PropertyResourceBundle;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -74,6 +77,7 @@ import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.Styles;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
+
 import org.omegat.util.Platform;
 
 /**	
@@ -150,6 +154,8 @@ public class Main {
             }
         }
 
+        applyConfigFile(params.get("config-file"));
+
         runMode = RUN_MODE.parse(params.get("mode"));
 
         String resourceBundle = params.get("resource-bundle");
@@ -217,6 +223,52 @@ public class Main {
         }
     }
 
+    /**
+     * Load System properties from a specified .properties file.
+     * In order to allow this to reliably change the display language, it must 
+     * called before any use of {@link Log#log}, thus it logs to {@link System.out}.
+     * @param path to config file
+     */
+    private static void applyConfigFile(String path) {
+        if (path == null) {
+            return;
+        }
+        File configFile = new File(path);
+        if (!configFile.exists()) {
+            return;
+        }
+        System.out.println("Reading config from " + path);
+        try {
+            PropertyResourceBundle config = new PropertyResourceBundle(new FileInputStream(configFile));
+            String userLanguage = null;
+            String userCountry = null;
+            // Put config properties into system.
+            for (String key : config.keySet()) {
+                String value = config.getString(key);
+                System.setProperty(key, value);
+                System.out.println("Read from config: " + key + "=" + value);
+                if (key.equals("user.language")) {
+                    userLanguage = value;
+                }
+                if (key.equals("user.country")) {
+                    userCountry = value;
+                }
+            }
+            // Apply language preferences, if present.
+            if (userLanguage != null) {
+                if (userCountry != null) {
+                    Locale.setDefault(new Locale(userLanguage, userCountry));
+                } else {
+                    Locale.setDefault(new Locale(userLanguage));
+                }
+            }
+        } catch (FileNotFoundException exception) {
+            System.err.println("Config file not found: " + path);
+        } catch (IOException exception) {
+            System.err.println("Error while reading config file: " + path);
+        }
+    }
+    
     /**
      * Execute standard GUI.
      */

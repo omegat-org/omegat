@@ -68,7 +68,8 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.AlwaysVisibleCaret;
-import org.omegat.util.gui.ProjectFileDragImporter;
+import org.omegat.util.gui.DragTargetOverlay;
+import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -114,7 +115,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
         super(true);
 
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Glossary");
-        Core.getMainWindow().addDockable(new DockableScrollPane("GLOSSARY", title, this, true));
+        final DockableScrollPane scrollPane = new DockableScrollPane("GLOSSARY", title, this, true);
+        Core.getMainWindow().addDockable(scrollPane);
 
         setEditable(false);
         AlwaysVisibleCaret.apply(this);
@@ -136,17 +138,29 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
 
         Core.getEditor().registerPopupMenuConstructors(300, new TransTipsPopup());
         
-        setTransferHandler(new ProjectFileDragImporter(mw, this, false) {
+        DragTargetOverlay.apply(this, new FileDropInfo(mw, false) {
             @Override
-            protected String getDestination() {
+            public boolean canAcceptDrop() {
+                return Core.getProject().isProjectLoaded();
+            }
+            @Override
+            public String getOverlayMessage() {
+                return OStrings.getString("DND_ADD_GLOSSARY_FILE");
+            }
+            @Override
+            public String getImportDestination() {
                 return Core.getProject().getProjectProperties().getGlossaryRoot();
             }
             @Override
-            protected boolean accept(File pathname) {
+            public boolean acceptFile(File pathname) {
                 String name = pathname.getName().toLowerCase();
                 return name.endsWith(OConsts.EXT_CSV_UTF8) || name.endsWith(OConsts.EXT_TBX)
                         || name.endsWith(OConsts.EXT_TSV_DEF) || name.endsWith(OConsts.EXT_TSV_TXT)
                         || name.endsWith(OConsts.EXT_TSV_UTF8);
+            }
+            @Override
+            public Component getComponentToOverlay() {
+                return scrollPane;
             }
         });
     }

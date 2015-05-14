@@ -31,7 +31,7 @@
 
 package org.omegat.gui.matches;
 
-import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -69,7 +69,8 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 import org.omegat.util.gui.AlwaysVisibleCaret;
-import org.omegat.util.gui.ProjectFileDragImporter;
+import org.omegat.util.gui.DragTargetOverlay;
+import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -117,7 +118,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         this.mw = mw;
 
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches");
-        Core.getMainWindow().addDockable(new DockableScrollPane("MATCHES", title, this, true));
+        final DockableScrollPane scrollPane = new DockableScrollPane("MATCHES", title, this, true);
+        Core.getMainWindow().addDockable(scrollPane);
 
         setEditable(false);
         AlwaysVisibleCaret.apply(this);
@@ -126,14 +128,26 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
 
         addMouseListener(mouseListener);
         
-        setTransferHandler(new ProjectFileDragImporter(mw, this, false) {
+        DragTargetOverlay.apply(this, new FileDropInfo(mw, false) {
             @Override
-            protected String getDestination() {
+            public String getImportDestination() {
                 return Core.getProject().getProjectProperties().getTMRoot();
             }
             @Override
-            protected boolean accept(File pathname) {
+            public boolean acceptFile(File pathname) {
                 return pathname.getName().toLowerCase().endsWith(OConsts.TMX_EXTENSION);
+            }
+            @Override
+            public String getOverlayMessage() {
+                return OStrings.getString("DND_ADD_TM_FILE");
+            }
+            @Override
+            public boolean canAcceptDrop() {
+                return Core.getProject().isProjectLoaded();
+            }
+            @Override
+            public Component getComponentToOverlay() {
+                return scrollPane;
             }
         });
     }

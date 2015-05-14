@@ -43,6 +43,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.File;
@@ -103,7 +104,8 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
-import org.omegat.util.gui.FileDropHandler;
+import org.omegat.util.gui.DragTargetOverlay;
+import org.omegat.util.gui.DragTargetOverlay.IDropInfo;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -189,8 +191,6 @@ public class EditorController implements IEditor {
 
     private SegmentExportImport segmentExportImport;
     
-    private final FileDropHandler fileDropHandler;
-    
     /**
      * Indicates, in nanoseconds, the last time a keypress was input.
      * This is reset to -1 upon commit or entering a segment.
@@ -205,6 +205,7 @@ public class EditorController implements IEditor {
         segmentExportImport = new SegmentExportImport(this);
 
         editor = new EditorTextArea3(this);
+        DragTargetOverlay.apply(editor, dropInfo);
         setFont(Core.getMainWindow().getApplicationFont());
 
         markerController = new MarkerController(this);
@@ -283,24 +284,6 @@ public class EditorController implements IEditor {
                 LOGGER.log(Level.SEVERE, "Uncatched exception in thread [" + t.getName() + "]", e);
             }
         });
-
-        fileDropHandler = new FileDropHandler() {
-            @Override
-            protected boolean handleFiles(List<File> files) {
-                if (Core.getProject().isProjectLoaded()) {
-                    mainWindow.importFiles(Core.getProject().getProjectProperties().getSourceRoot(),
-                            files.toArray(new File[0]));
-                    return true;
-                }
-
-                File firstFile = files.get(0); // Ignore others
-                if (StaticUtils.isProjectDir(firstFile)) {
-                    ProjectUICommands.projectOpen(firstFile);
-                    return true;
-                }
-                return false;
-            }
-        };
         
         EditorPopups.init(this);
     }
@@ -387,11 +370,50 @@ public class EditorController implements IEditor {
                 int size = data.getFont().getSize() / 2;
                 data.setBorder(new EmptyBorder(size, size, size, size));
             }
-            data.setTransferHandler(fileDropHandler.wrapExisting(data));
             scrollPane.setViewportView(data);
         }
     }
 
+    private final IDropInfo dropInfo = new IDropInfo() {
+        @Override
+        public DataFlavor getDataFlavor() {
+            return DataFlavor.javaFileListFlavor;
+        }
+        @Override
+        public boolean handleDroppedObject(Object dropped) {
+            List<File> files = (List<File>) dropped;
+            if (Core.getProject().isProjectLoaded()) {
+                mw.importFiles(Core.getProject().getProjectProperties().getSourceRoot(),
+                        files.toArray(new File[0]));
+                return true;
+            }
+
+            File firstFile = files.get(0); // Ignore others
+            if (StaticUtils.isProjectDir(firstFile)) {
+                ProjectUICommands.projectOpen(firstFile);
+                return true;
+            }
+            if (StaticUtils.isProjectDir(firstFile.getParentFile())) {
+                ProjectUICommands.projectOpen(firstFile.getParentFile());
+                return true;
+            }
+            return false;
+        }
+        @Override
+        public Component getComponentToOverlay() {
+            return scrollPane;
+        }
+        @Override
+        public String getOverlayMessage() {
+            return Core.getProject().isProjectLoaded() ? OStrings.getString("DND_ADD_SOURCE_FILE")
+                    : OStrings.getString("DND_OPEN_PROJECT");
+        }
+        @Override
+        public boolean canAcceptDrop() {
+            return true;
+        }
+    };
+    
     private void updateTitle() {
         pane.setName(StaticUIUtils.truncateToFit(title, pane, 70));
     }
@@ -1903,6 +1925,7 @@ public class EditorController implements IEditor {
                             : ComponentOrientation.LEFT_TO_RIGHT);
             introPane.setEditable(false);
             introPane.setPage(HelpFrame.getHelpFileURL(language, OConsts.HELP_INSTANT_START));
+            DragTargetOverlay.apply(introPane, dropInfo);
         } catch (IOException e) {
             // editorScroller.setViewportView(editor);
         }
@@ -1912,6 +1935,7 @@ public class EditorController implements IEditor {
         emptyProjectPane.setEditable(false);
         emptyProjectPane.setText(OStrings.getString("TF_INTRO_EMPTYPROJECT"));
         emptyProjectPane.setFont(Core.getMainWindow().getApplicationFont());
+        DragTargetOverlay.apply(emptyProjectPane, dropInfo);
     }
 
     /**

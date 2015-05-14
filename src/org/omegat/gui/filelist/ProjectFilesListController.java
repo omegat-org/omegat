@@ -31,9 +31,11 @@
 package org.omegat.gui.filelist;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -94,7 +96,8 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
-import org.omegat.util.gui.ProjectFileDragImporter;
+import org.omegat.util.gui.DragTargetOverlay;
+import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TableColumnSizer;
 import org.omegat.util.gui.DataTableStyling;
@@ -143,10 +146,27 @@ public class ProjectFilesListController {
             }
         });
         
-        list.tableFiles.setTransferHandler(new ProjectFileDragImporter(m_parent, list.tableFiles, true) {
+        DragTargetOverlay.apply(list.tableFiles, new FileDropInfo(m_parent, true) {
             @Override
-            protected String getDestination() {
+            public String getImportDestination() {
                 return Core.getProject().getProjectProperties().getSourceRoot();
+            }
+            @Override
+            public boolean canAcceptDrop() {
+                return Core.getProject().isProjectLoaded();
+            }
+
+            @Override
+            public String getOverlayMessage() {
+                return OStrings.getString("DND_ADD_SOURCE_FILE");
+            }
+            @Override
+            public boolean acceptFile(File path) {
+                return true;
+            }
+            @Override
+            public Component getComponentToOverlay() {
+                return list.tablesInnerPanel;
             }
         });
         

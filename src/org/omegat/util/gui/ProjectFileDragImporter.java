@@ -46,23 +46,28 @@ public abstract class ProjectFileDragImporter extends FileDropHandler {
     @Override
     public boolean canImport(TransferSupport support) {
     	if (isFileData(support)) {
-    		return Core.getProject().isProjectLoaded() && super.canImport(support);
+    		return Core.getProject().isProjectLoaded();
     	}
         return super.canImport(support);
     }
     
-    @Override
-    protected boolean handleFiles(List<File> files) {
+    private List<File> filterFiles(List<File> files) {
         List<File> filtered = new ArrayList<File>(files.size());
         for (File file : files) {
             if (file.exists() && file.canRead() && accept(file)) {
                 filtered.add(file);
             }
         }
-        if (filtered.isEmpty()) {
+        return filtered;
+    }
+    
+    @Override
+    protected boolean handleFiles(List<File> files) {
+        files = filterFiles(files);
+        if (files.isEmpty()) {
             return false;
         }
-        mw.importFiles(getDestination(), filtered.toArray(new File[0]), doReset);
+        mw.importFiles(getDestination(), files.toArray(new File[0]), doReset);
         return true;
     }
     

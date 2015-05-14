@@ -31,6 +31,7 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.InputEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,7 +41,12 @@ import javax.swing.JComponent;
 import javax.swing.TransferHandler;
 
 /**
- *
+ * Handles receiving dragged-and-dropped files. Override {@link #handleFiles(List)}
+ * as appropriate. Optionally wraps another {@link TransferHandler} so as to not
+ * clobber built-in functionality. If 
+ * <a href="http://bugs.java.com/bugdatabase/view_bug.do?bug_id=4830695">JDK-4830695</a>
+ * is ever resolved then this wrapping may not be necessary.
+ * 
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
@@ -70,30 +76,32 @@ public abstract class FileDropHandler extends TransferHandler {
             return false;
         }
         
-        if (!isFileData(support)) {
+        if (!support.isDrop() || !isFileData(support)) {
         	return wrappedHandler != null && wrappedHandler.importData(support);
         }
 
-        List<File> files;
-        try {
-            Object payload = support.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
-            if (!(payload instanceof List<?>)) {
-              return false;
-            }
-            files = (List<File>) payload;
-        } catch (UnsupportedFlavorException ex) {
-            LOGGER.log(Level.SEVERE, null, ex);
-            return false;
-        } catch (IOException ex) {
-            LOGGER.log(Level.SEVERE, null, ex);
-            return false;
-        }
-        
+        List<File> files = extractFiles(support);
         if (files.isEmpty()) {
             return false;
         }
-        
         return handleFiles(files);
+    }
+    
+    @SuppressWarnings("unchecked")
+    protected List<File> extractFiles(TransferHandler.TransferSupport support) {
+        try {
+            Object payload = support.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
+            if (!(payload instanceof List<?>)) {
+              return Collections.EMPTY_LIST;
+            }
+            return (List<File>) payload;
+        } catch (UnsupportedFlavorException ex) {
+            LOGGER.log(Level.SEVERE, null, ex);
+            return Collections.EMPTY_LIST;
+        } catch (IOException ex) {
+            LOGGER.log(Level.SEVERE, null, ex);
+            return Collections.EMPTY_LIST;
+        }
     }
     
     protected abstract boolean handleFiles(List<File> files);

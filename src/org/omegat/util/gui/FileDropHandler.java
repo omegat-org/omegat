@@ -31,6 +31,8 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.InputEvent;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
@@ -149,5 +151,40 @@ public abstract class FileDropHandler extends TransferHandler {
     public boolean importData(JComponent comp, Transferable t) {
     	return wrappedHandler == null ? super.importData(comp, t)
     			: wrappedHandler.importData(comp, t);
+    }
+    
+    @Override
+    protected Transferable createTransferable(JComponent c) {
+        if (wrappedHandler != null) {
+            try {
+                Method m = wrappedHandler.getClass().getDeclaredMethod("createTransferable", JComponent.class);
+                m.setAccessible(true);
+                return (Transferable) m.invoke(wrappedHandler, c);
+            } catch (SecurityException e) {
+            } catch (NoSuchMethodException e) {
+            } catch (IllegalArgumentException e) {
+            } catch (IllegalAccessException e) {
+            } catch (InvocationTargetException e) {
+            }
+        }
+        return super.createTransferable(c);
+    }
+    
+    @Override
+    protected void exportDone(JComponent source, Transferable data, int action) {
+        if (wrappedHandler != null) {
+            try {
+                Method m = wrappedHandler.getClass().getDeclaredMethod("exportDone", JComponent.class, Transferable.class, Integer.class);
+                m.setAccessible(true);
+                m.invoke(wrappedHandler, source, data, action);
+                return;
+            } catch (SecurityException e) {
+            } catch (NoSuchMethodException e) {
+            } catch (IllegalArgumentException e) {
+            } catch (IllegalAccessException e) {
+            } catch (InvocationTargetException e) {
+            }
+        }
+        super.exportDone(source, data, action);
     }
 }

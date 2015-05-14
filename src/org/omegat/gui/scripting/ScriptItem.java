@@ -83,8 +83,9 @@ public class ScriptItem extends File {
     }
 
     private void scanFileForDescription(File file) {
+        Scanner scan = null;
         try {
-            Scanner scan = new Scanner(file);
+            scan = new Scanner(file);
             scan.findInLine(":name\\s*=\\s*(.*)\\s+:description\\s*=\\s*(.*)");
             MatchResult results = scan.match();
             m_scriptName = results.group(1).trim();
@@ -93,6 +94,12 @@ public class ScriptItem extends File {
             /* bad luck */
         } catch (FileNotFoundException e) {
             /* ignore - it should not happen here */
+        }
+        finally {
+            if (scan != null)
+            {
+                scan.close();
+            }
         }
     }
 

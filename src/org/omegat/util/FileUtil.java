@@ -352,6 +352,10 @@ public class FileUtil {
                 String filePath = file.getPath();
                 String relPath = filePath.substring(root.getPath().length(), filePath.length());
                 File dest = new File(destination, relPath);
+                if (file.equals(dest)) {
+                    // Trying to copy file to itself. Skip.
+                    continue;
+                }
                 LFileCopy.copy(file, dest);
             }
         }

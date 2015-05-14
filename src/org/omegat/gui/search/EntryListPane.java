@@ -32,6 +32,13 @@ package org.omegat.gui.search;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -39,9 +46,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
 import javax.swing.JTextPane;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
 
 import org.omegat.core.Core;
@@ -51,6 +63,7 @@ import org.omegat.core.search.Searcher;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.EditorController.CaretPosition;
 import org.omegat.gui.editor.IEditor;
+import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -75,6 +88,52 @@ import org.omegat.util.gui.UIThreadsUtil;
 class EntryListPane extends JTextPane {
     protected static final AttributeSet FOUND_MARK = Styles.createAttributeSet(Color.BLUE, null, true, null);
     protected static final int MARKS_PER_REQUEST = 100;
+    protected static final String ENTRY_SEPARATOR = "---------\n";
+    private static final String KEY_GO_TO_NEXT_SEGMENT = "gotoNextSegmentMenuItem";
+    private static final String KEY_GO_TO_PREVIOUS_SEGMENT = "gotoPreviousSegmentMenuItem";
+    private static final String KEY_TRANSFER_FOCUS = "transferFocus";
+    private static final String KEY_TRANSFER_FOCUS_BACKWARD = "transferFocusBackward";
+
+    private static void bindKeyStrokesFromMainMenuShortcuts(InputMap map) {
+        PropertiesShortcuts shortcuts = new PropertiesShortcuts(
+                "/org/omegat/gui/main/MainMenuShortcuts.properties");
+        // Add KeyStrokes Ctrl+N/P (Cmd+N/P for MacOS) to the parent
+        shortcuts.bindKeyStrokes(
+                map,
+                new String[]{KEY_GO_TO_NEXT_SEGMENT, KEY_GO_TO_PREVIOUS_SEGMENT});
+    }
+
+    private static InputMap createDefaultInputMap(InputMap parent) {
+        InputMap map = new InputMap();
+        map.setParent(parent);
+        bindKeyStrokesFromMainMenuShortcuts(map);
+
+        // Add KeyStrokes: Enter, Ctrl+Enter (Cmd+Enter for MacOS)
+        int CTRL_CMD_MASK = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
+                KEY_GO_TO_NEXT_SEGMENT);
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, CTRL_CMD_MASK),
+                KEY_GO_TO_PREVIOUS_SEGMENT);
+        return map;
+    }
+
+    private static InputMap createDefaultInputMapUseTab(InputMap parent) {
+        InputMap map = new InputMap();
+        map.setParent(parent);
+        bindKeyStrokesFromMainMenuShortcuts(map);
+
+        // Add KeyStrokes: TAB, Shift+TAB, Ctrl+TAB (Cmd+TAB for MacOS), Ctrl+Shift+TAB (Cmd+Shift+TAB for MacOS)
+        int CTRL_CMD_MASK = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0),
+                KEY_GO_TO_NEXT_SEGMENT);
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, InputEvent.SHIFT_DOWN_MASK),
+                KEY_GO_TO_PREVIOUS_SEGMENT);
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, CTRL_CMD_MASK),
+                KEY_TRANSFER_FOCUS);
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, CTRL_CMD_MASK | InputEvent.SHIFT_DOWN_MASK),
+                KEY_TRANSFER_FOCUS_BACKWARD);
+        return map;
+    }
 
     public EntryListPane() {
         setDocument(new DefaultStyledDocument());
@@ -87,7 +146,7 @@ class EntryListPane extends JTextPane {
                     final Cursor oldCursor = getCursor();
                     setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     // user double clicked on viewer pane - send message
-                    // to org.omegat.gui.TransFrame to jump to this entry
+                    // to org.omegat.gui.editor.IEditor to jump to this entry
                     int pos = getCaretPosition();
                     int off;
                     for (int i = 0; i < m_offsetList.size(); i++) {
@@ -120,8 +179,36 @@ class EntryListPane extends JTextPane {
             }
         });
 
+        addFocusListener(new FocusListener() {
+
+            @Override
+            public void focusGained(FocusEvent e) {
+                boolean useTabForAdvance = Core.getEditor().getSettings().isUseTabForAdvance();
+                if (EntryListPane.this.useTabForAdvance != useTabForAdvance) {
+                    EntryListPane.this.useTabForAdvance = useTabForAdvance;
+                    initInputMap(useTabForAdvance);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                // do nothing
+            }
+        });
+
+        initActions();
+        useTabForAdvance = Core.getEditor().getSettings().isUseTabForAdvance();
+        initInputMap(useTabForAdvance);
         setEditable(false);
         AlwaysVisibleCaret.apply(this);
+    }
+
+    private void initInputMap(boolean useTabForAdvance) {
+        setFocusTraversalKeysEnabled(!useTabForAdvance);
+        InputMap parent = getInputMap().getParent();
+        InputMap newMap = useTabForAdvance ? createDefaultInputMapUseTab(parent)
+                                           : createDefaultInputMap(parent);
+        setInputMap(WHEN_FOCUSED, newMap);
     }
 
     /**
@@ -196,7 +283,7 @@ class EntryListPane extends JTextPane {
                 String src, String loc, String note, SearchMatch[] srcMatches,
                 SearchMatch[] targetMatches, SearchMatch[] noteMatches) {
             if (m_stringBuf.length() > 0)
-                m_stringBuf.append("---------\n");
+                m_stringBuf.append(ENTRY_SEPARATOR);
 
             if (preamble != null && !preamble.equals(""))
                 m_stringBuf.append(preamble + "\n");
@@ -281,7 +368,7 @@ class EntryListPane extends JTextPane {
     private void addMessage(StringBuilder m_stringBuf, String message) {
         // Insert entry/message separator if necessary
         if (m_stringBuf.length() > 0)
-            m_stringBuf.append("---------\n");
+            m_stringBuf.append(ENTRY_SEPARATOR);
 
         // Insert the message text
         m_stringBuf.append(message);
@@ -316,10 +403,144 @@ class EntryListPane extends JTextPane {
         return m_searcher;
     }
 
+    private void initActions() {
+        ActionMap actionMap = getActionMap();
+
+        // go to next segment
+        actionMap.put(KEY_GO_TO_NEXT_SEGMENT, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                getActiveDisplayedEntry().getNext().activate();
+            }
+        });
+
+        // go to previous segment
+        actionMap.put(KEY_GO_TO_PREVIOUS_SEGMENT, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                getActiveDisplayedEntry().getPrevious().activate();
+            }
+        });
+
+        // transfer focus to next component
+        actionMap.put(KEY_TRANSFER_FOCUS, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                transferFocus();
+            }
+        });
+
+        // transfer focus to previous component
+        actionMap.put(KEY_TRANSFER_FOCUS_BACKWARD, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                transferFocusBackward();
+            }
+        });
+    }
+
+    private DisplayedEntry getActiveDisplayedEntry() {
+        if (getNrEntries() == 0) {
+            // No entry
+            return new EmptyDisplayedEntry();
+        }
+
+        if (getNrEntries() > 0) {
+            int pos = getSelectionStart();
+            for (int i = 0; i < m_offsetList.size(); i++) {
+                if (pos < m_offsetList.get(i)) {
+                    return new DisplayedEntryImpl(i);
+                }
+            }
+        }
+
+        // end of text (out of entries range)
+        return new DisplayedEntryImpl(m_offsetList.size());
+    }
+
+    private interface DisplayedEntry {
+
+        DisplayedEntry getNext();
+
+        DisplayedEntry getPrevious();
+
+        void activate();
+    }
+
+    private class EmptyDisplayedEntry implements DisplayedEntry {
+
+        @Override
+        public DisplayedEntry getNext() {
+            return this;
+        }
+
+        @Override
+        public DisplayedEntry getPrevious() {
+            return this;
+        }
+
+        @Override
+        public void activate() {
+            // Do nothing
+        }
+
+    }
+
+    private class DisplayedEntryImpl implements DisplayedEntry {
+
+        private final int index;
+
+        private DisplayedEntryImpl(int index) {
+            this.index = index;
+        }
+
+        @Override
+        public DisplayedEntry getNext() {
+            if (index >= (getNrEntries() - 1)) {
+                return this;
+            } else {
+                return new DisplayedEntryImpl(index + 1);
+            }
+        }
+
+        @Override
+        public DisplayedEntry getPrevious() {
+            if (index == 0) {
+                return this;
+            } else {
+                return new DisplayedEntryImpl(index - 1);
+            }
+        }
+
+        @Override
+        public void activate() {
+            if (index >= getNrEntries()) {
+                // end of text (out of entries range)
+                return;
+            }
+
+            int beginPos = 0;
+            if (index != 0) {
+                beginPos = m_offsetList.get(index - 1) + ENTRY_SEPARATOR.length();
+                int endPos = m_offsetList.get(index);
+                try {
+                    Rectangle endRect = modelToView(endPos);
+                    scrollRectToVisible(endRect);
+                } catch (BadLocationException ex) {
+                    // Eat exception silently
+                }
+            }
+            setSelectionStart(beginPos);
+            setSelectionEnd(beginPos);
+        }
+
+    }
+
     private volatile Searcher m_searcher;
     private final List<Integer> m_entryList = new ArrayList<Integer>();
     private final List<Integer> m_offsetList = new ArrayList<Integer>();
     private final Map<Integer, CaretPosition> m_firstMatchList = new HashMap<Integer, CaretPosition>();
     private DisplayMatches currentlyDisplayedMatches;
     private int numberOfResults;
+    private boolean useTabForAdvance;
 }

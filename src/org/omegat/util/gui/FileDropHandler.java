@@ -59,10 +59,21 @@ public abstract class FileDropHandler extends TransferHandler {
     private TransferHandler wrappedHandler;
 
     public FileDropHandler wrapExisting(JComponent comp) {
-    	this.wrappedHandler = comp.getTransferHandler();
+        TransferHandler newHandler = comp.getTransferHandler();
+        if (newHandler instanceof FileDropHandler) {
+            newHandler = ((FileDropHandler) newHandler).getWrappedHandler();
+        }
+    	this.wrappedHandler = newHandler;
     	return this;
     }
 
+    public TransferHandler getWrappedHandler() {
+        if (wrappedHandler instanceof FileDropHandler) {
+            return ((FileDropHandler) wrappedHandler).getWrappedHandler();
+        }
+        return wrappedHandler;
+    }
+    
     @Override
     public boolean canImport(TransferHandler.TransferSupport support) {
         return  isFileData(support) || (wrappedHandler != null && wrappedHandler.canImport(support));

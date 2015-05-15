@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.4 update 1
 ----------------------------------------------------------------------
-   6 Enhancements
+   7 Enhancements
    2 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -29,6 +29,9 @@ Ctrl+Shift+O is pressed
 
   - Go to next/previous segment with key shortcuts work 
 in the Search result window just like in the Editor
+
+  - Alternatively to specifiy a project folder on the command line,
+it is now also possible to specify the path of an omegat.project file
 
   Bug fixes:
 

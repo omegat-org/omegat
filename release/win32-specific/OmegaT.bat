@@ -1,2 +1,2 @@
-java -jar -Xmx512M OmegaT.jar %*
+java -jar -Xmx512M "%~dp0OmegaT.jar" %*
 

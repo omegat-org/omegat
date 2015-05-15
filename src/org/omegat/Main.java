@@ -147,7 +147,10 @@ public class Main {
                     params.put("resource-bundle", arg.substring(16));
                 } else {
                     File f = new File(arg);
-                    if (f.exists() && f.isDirectory()) {
+                    if (f.getName().equals(OConsts.FILE_PROJECT)) {
+                        f = f.getParentFile();
+                    }
+                    if (StaticUtils.isProjectDir(f)) {
                         projectLocation = f;
                     }
                 }

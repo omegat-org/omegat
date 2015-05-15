@@ -1232,7 +1232,7 @@ public class StaticUtils {
         }
         File projFile = new File(f.getAbsolutePath(), OConsts.FILE_PROJECT);
         File internal = new File(f.getAbsolutePath(), OConsts.DEFAULT_INTERNAL);
-        return projFile.exists() && internal.exists() && internal.isDirectory();
+        return projFile.exists() && internal.isDirectory();
     }
     
 } // StaticUtils

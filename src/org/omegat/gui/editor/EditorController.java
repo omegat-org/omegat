@@ -389,12 +389,11 @@ public class EditorController implements IEditor {
             }
 
             File firstFile = files.get(0); // Ignore others
+            if (firstFile.getName().equals(OConsts.FILE_PROJECT)) {
+                firstFile = firstFile.getParentFile();
+            }
             if (StaticUtils.isProjectDir(firstFile)) {
                 ProjectUICommands.projectOpen(firstFile);
-                return true;
-            }
-            if (StaticUtils.isProjectDir(firstFile.getParentFile())) {
-                ProjectUICommands.projectOpen(firstFile.getParentFile());
                 return true;
             }
             return false;

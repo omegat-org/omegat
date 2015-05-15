@@ -331,8 +331,10 @@ Custom strings from release\win32-specific must be added manually to the languag
         		icon="images/OmegaT.icns"/>
             <plistentry key="JVMRuntime" value="jre"/>
         </bundleapp>
-        <copy file="release/mac-specific/Configuration.properties"
-              todir="release/mac-specific/OmegaT.app/Contents/Resources" />
+        <copy todir="release/mac-specific/OmegaT.app/Contents/Resources">
+            <fileset dir="release/mac-specific"
+                     includes="Configuration.properties,Mac-Licenses.txt" />
+        </copy>
     </target>
     
     <target name="check-win" depends="init">

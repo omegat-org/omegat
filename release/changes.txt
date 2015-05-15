@@ -23,6 +23,8 @@
 
   Other changes:
 
+  - Drag and drop in respective panes to add source/glossary/tm files
+
   - There's an explanation message at the bottom of the Editor when
 Ctrl+Shift+O is pressed
 

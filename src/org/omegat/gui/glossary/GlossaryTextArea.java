@@ -9,7 +9,7 @@
                2010 Alex Buloichik
                2012 Jean-Christophe Helary
                2013 Aaron Madlon-Kay, Alex Buloichik
-               2015 Yu Tang
+               2015 Yu Tang, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -44,7 +44,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.io.File;
 import java.text.MessageFormat;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JMenuItem;
@@ -208,8 +208,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
         UIThreadsUtil.mustBeSwingThread();
 
         if (entries == null) {
-            nowEntries = new ArrayList<GlossaryEntry>();
-            setText("");
+            clear();
             return;
         }
 
@@ -239,6 +238,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
 
     /** Clears up the pane. */
     public void clear() {
+        nowEntries = Collections.EMPTY_LIST;
         setText("");
     }
 

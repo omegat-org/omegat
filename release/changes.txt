@@ -2,7 +2,7 @@
  OmegaT 3.4 update 1
 ----------------------------------------------------------------------
    6 Enhancements
-   1 Bug fix
+   2 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 3.4 update 1 vs 3.4
@@ -33,6 +33,9 @@ in the Search result window just like in the Editor
   Bug fixes:
 
   - Panel header title was white under Windows 7 with a classic theme
+
+  - Script files could be locked 
+  https://sourceforge.net/p/omegat/bugs/749/
 
   Localisation updates:
 

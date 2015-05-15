@@ -44,6 +44,7 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.datatransfer.DataFlavor;
+import java.awt.dnd.DnDConstants;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.File;
@@ -378,6 +379,11 @@ public class EditorController implements IEditor {
         @Override
         public DataFlavor getDataFlavor() {
             return DataFlavor.javaFileListFlavor;
+        }
+        @Override
+        public int getDnDAction() {
+            return Core.getProject().isProjectLoaded() ? DnDConstants.ACTION_COPY
+                    : DnDConstants.ACTION_COPY_OR_MOVE;
         }
         @Override
         public boolean handleDroppedObject(Object dropped) {

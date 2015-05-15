@@ -161,9 +161,33 @@ public class DragTargetOverlay {
             this.info = info;
         }
         
+        private void verifyDrag(DropTargetDragEvent dtde) {
+            if (dtde.isDataFlavorSupported(info.getDataFlavor())
+                    && (dtde.getSourceActions() & info.getDnDAction()) != 0) {
+                dtde.acceptDrag(info.getDnDAction());
+            } else {
+                dtde.rejectDrag();
+            }
+        }
+        
+        @Override
+        public void dragEnter(DropTargetDragEvent dtde) {
+            verifyDrag(dtde);
+        }
+        
+        @Override
+        public void dragOver(DropTargetDragEvent dtde) {
+            verifyDrag(dtde);
+        }
+        
+        @Override
+        public void dropActionChanged(DropTargetDragEvent dtde) {
+            verifyDrag(dtde);
+        }
+        
         @Override
         public void drop(DropTargetDropEvent dtde) {
-            dtde.acceptDrop(DnDConstants.ACTION_COPY);
+            dtde.acceptDrop(info.getDnDAction());
             Transferable transferable = dtde.getTransferable();
             boolean success = false;
             try {
@@ -191,6 +215,7 @@ public class DragTargetOverlay {
     
     public interface IDropInfo {
         public DataFlavor getDataFlavor();
+        public int getDnDAction();
         public boolean canAcceptDrop();
         public Component getComponentToOverlay();
         public String getOverlayMessage();
@@ -209,6 +234,11 @@ public class DragTargetOverlay {
         @Override
         public DataFlavor getDataFlavor() {
             return DataFlavor.javaFileListFlavor;
+        }
+        
+        @Override
+        public int getDnDAction() {
+            return DnDConstants.ACTION_COPY;
         }
         
         private List<File> filterFiles(List<File> files) {

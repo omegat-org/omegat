@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.4 update 1
 ----------------------------------------------------------------------
-   7 Enhancements
+   8 Enhancements
    2 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -17,6 +17,9 @@
 
   - Highlighting search word in target segment 
   https://sourceforge.net/p/omegat/feature-requests/890/
+
+  - Drag and drop to open project 
+  https://sourceforge.net/p/omegat/feature-requests/113/
 
   Other changes:
 

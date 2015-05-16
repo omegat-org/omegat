@@ -386,10 +386,17 @@ public class EditorController implements IEditor {
         }
         @Override
         public boolean handleDroppedObject(Object dropped) {
-            List<File> files = (List<File>) dropped;
+            final List<File> files = (List<File>) dropped;
             if (Core.getProject().isProjectLoaded()) {
-                mw.importFiles(Core.getProject().getProjectProperties().getSourceRoot(),
-                        files.toArray(new File[0]));
+                // The import might take a long time if there are collision dialogs.
+                // Invoke later so we can return successfully right away.
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        mw.importFiles(Core.getProject().getProjectProperties().getSourceRoot(),
+                                files.toArray(new File[0]));
+                    }
+                });
                 return true;
             }
 

@@ -253,15 +253,21 @@ public class DragTargetOverlay {
         
         @Override
         public boolean handleDroppedObject(Object dropped) {
-            return handleFiles((List<File>) dropped);
+            return handleFiles(filterFiles((List<File>) dropped));
         };
 
-        protected boolean handleFiles(List<File> files) {
-            files = filterFiles(files);
+        protected boolean handleFiles(final List<File> files) {
             if (files.isEmpty()) {
                 return false;
             }
-            mw.importFiles(getImportDestination(), files.toArray(new File[0]), doReset);
+            // The import might take a long time if there are collision dialogs.
+            // Invoke later so we can return successfully right away.
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    mw.importFiles(getImportDestination(), files.toArray(new File[0]), doReset);
+                }
+            });
             return true;
         }
         

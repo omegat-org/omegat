@@ -46,7 +46,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.omegat.gui.help.HelpFrame;
@@ -318,47 +321,84 @@ public class FileUtil {
         if (!dir.exists()) {
             return;
         }
-        if (!dir.isDirectory()) {
-            throw new IllegalArgumentException("Argument must be a directory.");
-        }
-        for (File file : dir.listFiles()) {
-            if (file.isFile()) {
-                file.delete();
-            } else if (file.isDirectory()) {
-                deleteTree(file);
+        if (dir.isDirectory()) {
+            for (File file : dir.listFiles()) {
+                if (file.isFile()) {
+                    file.delete();
+                } else if (file.isDirectory()) {
+                    deleteTree(file);
+                }
             }
         }
         dir.delete();
     }
     
-    public static void copyFilesTo(File destination, File[] toImport) throws IOException {
-        if (destination.exists() && !destination.isDirectory()) {
-            throw new RuntimeException("Copy-to destination exists and is not a directory.");
-        }
-        copyFilesTo(destination, toImport, null);
+    public interface ICollisionCallback {
+        public boolean isCanceled();
+        public boolean shouldReplace(File file, int thisFile, int totalFiles);
     }
     
-    private static void copyFilesTo(File destination, File[] toImport, File root) throws IOException {
-        for (File file : toImport) {
+    /**
+     * Copy a collection of files to a destination. Recursively copies contents of directories
+     * while preserving relative paths. Provide an {@link ICollisionCallback} to determine
+     * what to do with files with conflicting names; they will be overwritten if the callback is null.
+     * @param destination Directory to copy to
+     * @param toCopy Files to copy
+     * @param onCollision Callback that determines what to do in case files with the same name
+     * already exist
+     * @throws IOException
+     */
+    public static void copyFilesTo(File destination, File[] toCopy, ICollisionCallback onCollision) throws IOException {
+        if (destination.exists() && !destination.isDirectory()) {
+            throw new IOException("Copy-to destination exists and is not a directory.");
+        }
+        Map<File, File> collisions = copyFilesTo(destination, toCopy, (File) null);
+        if (collisions.isEmpty()) {
+            return;
+        }
+        List<File> toReplace = new ArrayList<File>();
+        List<File> toDelete = new ArrayList<File>();
+        int count = 0;
+        for (Entry<File, File> e : collisions.entrySet()) {
+            if (onCollision != null && onCollision.isCanceled()) {
+                break;
+            }
+            if (onCollision == null || onCollision.shouldReplace(e.getValue(), count, collisions.size())) {
+                toReplace.add(e.getKey());
+                toDelete.add(e.getValue());
+            }
+            count++;
+        }
+        if (onCollision == null || !onCollision.isCanceled()) {
+            for (File file : toDelete) {
+                deleteTree(file);
+            }
+            copyFilesTo(destination, toReplace.toArray(new File[0]), (File) null);
+        }
+    }
+    
+    private static Map<File, File> copyFilesTo(File destination, File[] toCopy, File root) throws IOException {
+        Map<File, File> collisions = new LinkedHashMap<File, File>();
+        for (File file : toCopy) {
+            File thisRoot = root == null ? file.getParentFile() : root;
+            String filePath = file.getPath();
+            String relPath = filePath.substring(thisRoot.getPath().length(), filePath.length());
+            File dest = new File(destination, relPath);
+            if (file.equals(dest)) {
+                // Trying to copy file to itself. Skip.
+                continue;
+            }
+            if (dest.exists()) {
+                collisions.put(file, dest);
+                continue;
+            }
             if (file.isDirectory()) {
-                if (file.getPath().startsWith(destination.getPath())) {
-                    continue;
-                }
-                copyFilesTo(destination, file.listFiles(), root == null ? file.getParentFile() : root);
+                copyFilesTo(destination, file.listFiles(), thisRoot);
             } else {
-                if (root == null) {
-                    root = file.getParentFile();
-                }
-                String filePath = file.getPath();
-                String relPath = filePath.substring(root.getPath().length(), filePath.length());
-                File dest = new File(destination, relPath);
-                if (file.equals(dest)) {
-                    // Trying to copy file to itself. Skip.
-                    continue;
-                }
                 LFileCopy.copy(file, dest);
             }
         }
+        return collisions;
     }
 
     /**

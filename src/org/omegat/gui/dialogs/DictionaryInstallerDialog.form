@@ -32,9 +32,6 @@
     <Component class="javax.swing.JTextArea" name="infoTextArea">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ee" green="ee" id="Label.background" palette="3" red="ee" type="palette"/>
-        </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new JLabel().getFont()" type="code"/>
         </Property>
@@ -48,6 +45,7 @@
             <EmptyBorder bottom="10" left="10" right="10" top="10"/>
           </Border>
         </Property>
+        <Property name="opaque" type="boolean" value="false"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

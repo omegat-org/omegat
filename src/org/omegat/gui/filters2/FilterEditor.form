@@ -101,9 +101,6 @@
     </Component>
     <Component class="javax.swing.JTextArea" name="descTextArea">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="d8" green="e9" id="Label.background" palette="3" red="ec" type="palette"/>
-        </Property>
         <Property name="editable" type="boolean" value="false"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new JLabel().getFont()" type="code"/>
@@ -113,6 +110,7 @@
           <ResourceString bundle="org/omegat/Bundle.properties" key="FILTEREDITOR_DESC" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="wrapStyleWord" type="boolean" value="true"/>
+        <Property name="opaque" type="boolean" value="false"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -201,15 +199,13 @@
     </Container>
     <Component class="javax.swing.JTextArea" name="hintTextArea">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="d8" green="e9" id="Label.background" palette="3" red="ec" type="palette"/>
-        </Property>
         <Property name="editable" type="boolean" value="false"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new JLabel().getFont()" type="code"/>
         </Property>
         <Property name="lineWrap" type="boolean" value="true"/>
         <Property name="wrapStyleWord" type="boolean" value="true"/>
+        <Property name="opaque" type="boolean" value="false"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">

@@ -96,9 +96,6 @@
     <Component class="javax.swing.JTextArea" name="description">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="e3" green="df" id="Label.background" palette="3" red="e0" type="palette"/>
-        </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new JLabel().getFont()" type="code"/>
         </Property>
@@ -112,6 +109,7 @@
             <EmptyBorder bottom="3" left="3" right="3" top="3"/>
           </Border>
         </Property>
+        <Property name="opaque" type="boolean" value="false"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">

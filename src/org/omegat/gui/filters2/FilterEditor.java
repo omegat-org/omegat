@@ -216,12 +216,12 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(fileFormatTextField, gridBagConstraints);
 
-        descTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         descTextArea.setEditable(false);
         descTextArea.setFont(new JLabel().getFont());
         descTextArea.setLineWrap(true);
         descTextArea.setText(OStrings.getString("FILTEREDITOR_DESC")); // NOI18N
         descTextArea.setWrapStyleWord(true);
+        descTextArea.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -301,11 +301,11 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(jPanel3, gridBagConstraints);
 
-        hintTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         hintTextArea.setEditable(false);
         hintTextArea.setFont(new JLabel().getFont());
         hintTextArea.setLineWrap(true);
         hintTextArea.setWrapStyleWord(true);
+        hintTextArea.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;

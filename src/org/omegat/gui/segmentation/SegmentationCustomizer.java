@@ -90,7 +90,6 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         });
 
         initComponents();
-        hintTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
 
         getRootPane().setDefaultButton(okButton);
 
@@ -411,6 +410,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         hintTextArea.setLineWrap(true);
         hintTextArea.setText(OStrings.getString("GUI_SEGMENTATION_NOTE")); // NOI18N
         hintTextArea.setWrapStyleWord(true);
+        hintTextArea.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;

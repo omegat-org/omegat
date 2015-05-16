@@ -69,9 +69,9 @@ public class TitledTablePanel extends javax.swing.JPanel {
         setLayout(new java.awt.BorderLayout());
 
         title.setEditable(false);
-        title.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         title.setLineWrap(true);
         title.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 5, 0));
+        title.setOpaque(false);
         add(title, java.awt.BorderLayout.NORTH);
 
         scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);

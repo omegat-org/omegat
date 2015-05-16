@@ -194,11 +194,11 @@ public class InstanceEditor extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(buttonPanel, gridBagConstraints);
 
-        hintTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         hintTextArea.setEditable(false);
         hintTextArea.setFont(new JLabel().getFont());
         hintTextArea.setLineWrap(true);
         hintTextArea.setWrapStyleWord(true);
+        hintTextArea.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;

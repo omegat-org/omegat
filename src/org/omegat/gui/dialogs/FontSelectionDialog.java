@@ -161,12 +161,12 @@ public class FontSelectionDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(sizeLabel, gridBagConstraints);
 
-        previewTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         previewTextArea.setEditable(false);
         previewTextArea.setLineWrap(true);
         previewTextArea.setText(OStrings.getString("TF_FONT_SAMPLE_TEXT")); // NOI18N
         previewTextArea.setWrapStyleWord(true);
         previewTextArea.setBorder(javax.swing.BorderFactory.createTitledBorder(null, OStrings.getString("TF_FONT_SAMPLE_TITLE"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, fontLabel.getFont())); // NOI18N
+        previewTextArea.setOpaque(false);
         previewTextArea.setPreferredSize(new java.awt.Dimension(116, 100));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

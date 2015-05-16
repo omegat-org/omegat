@@ -275,12 +275,12 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         getContentPane().add(filtersScrollPane, gridBagConstraints);
 
         description.setEditable(false);
-        description.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         description.setFont(new JLabel().getFont());
         description.setLineWrap(true);
         description.setText(OStrings.getString("FILTERSCUSTOMIZER_DESCRIPTION")); // NOI18N
         description.setWrapStyleWord(true);
         description.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
+        description.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;

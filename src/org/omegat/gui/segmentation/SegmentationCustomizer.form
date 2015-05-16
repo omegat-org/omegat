@@ -191,6 +191,7 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_SEGMENTATION_NOTE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
             <Property name="wrapStyleWord" type="boolean" value="true"/>
+            <Property name="opaque" type="boolean" value="false"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">

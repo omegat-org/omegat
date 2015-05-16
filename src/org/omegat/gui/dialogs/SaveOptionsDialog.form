@@ -47,9 +47,6 @@
         <Component class="javax.swing.JTextArea" name="intervalDescriptionTextArea">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="e3" green="df" id="Label.background" palette="3" red="e0" type="palette"/>
-            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="new JLabel().getFont()" type="code"/>
             </Property>
@@ -58,6 +55,7 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="SAVE_DIALOG_DESCRIPTION" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
             <Property name="wrapStyleWord" type="boolean" value="true"/>
+            <Property name="opaque" type="boolean" value="false"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -193,9 +191,6 @@
             <Component class="javax.swing.JTextArea" name="externalCmdDescriptionTextArea">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f0" green="f0" id="Label.background" palette="3" red="f0" type="palette"/>
-                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new JLabel().getFont()" type="code"/>
                 </Property>
@@ -209,6 +204,7 @@
                     <EmptyBorder bottom="1" left="5" right="1" top="1"/>
                   </Border>
                 </Property>
+                <Property name="opaque" type="boolean" value="false"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

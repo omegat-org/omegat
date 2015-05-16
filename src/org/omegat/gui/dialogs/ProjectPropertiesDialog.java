@@ -183,7 +183,7 @@ public class ProjectPropertiesDialog extends JDialog {
         // hinting message
         JTextArea m_messageArea = new JTextArea();
         m_messageArea.setEditable(false);
-        m_messageArea.setBackground(getBackground());
+        m_messageArea.setOpaque(false);
         m_messageArea.setFont(new Label().getFont());
         Box bMes = Box.createHorizontalBox();
         bMes.setBorder(emptyBorder);

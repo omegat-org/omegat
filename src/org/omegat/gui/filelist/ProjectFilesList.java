@@ -100,10 +100,10 @@ public class ProjectFilesList extends javax.swing.JFrame {
         jPanel3.add(tablesOuterPanel, java.awt.BorderLayout.CENTER);
 
         statLabel.setEditable(false);
-        statLabel.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         statLabel.setFont(new JLabel().getFont());
         statLabel.setLineWrap(true);
         statLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 0, 10));
+        statLabel.setOpaque(false);
         jPanel3.add(statLabel, java.awt.BorderLayout.SOUTH);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 5, 0, 0));

@@ -145,12 +145,12 @@ public class DictionaryInstallerDialog extends JDialog {
         setPreferredSize(new java.awt.Dimension(400, 500));
 
         infoTextArea.setEditable(false);
-        infoTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         infoTextArea.setFont(new JLabel().getFont());
         infoTextArea.setLineWrap(true);
         infoTextArea.setText(OStrings.getString("GUI_DICTIONARY_INSTALLER_TEXT_GO")); // NOI18N
         infoTextArea.setWrapStyleWord(true);
         infoTextArea.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        infoTextArea.setOpaque(false);
         getContentPane().add(infoTextArea, java.awt.BorderLayout.NORTH);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));

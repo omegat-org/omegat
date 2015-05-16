@@ -235,6 +235,13 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_colorStylesListValueChanged
 
     private void resetAllColorsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetAllColorsButtonActionPerformed
+
+        int confirm = JOptionPane.showConfirmDialog(this, OStrings.getString("GUI_COLORS_RESET_ALL_COLORS_CONFIRM"), OStrings.getString("GUI_COLORS_RESET_ALL_COLORS").replaceFirst("&", ""), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+
         ListModel model = colorStylesList.getModel();
         for (int i = 0; i < model.getSize(); i++) {
             EditorColor style = (EditorColor) model.getElementAt(i);

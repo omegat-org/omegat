@@ -382,8 +382,7 @@ public class EditorController implements IEditor {
         }
         @Override
         public int getDnDAction() {
-            return Core.getProject().isProjectLoaded() ? DnDConstants.ACTION_COPY
-                    : DnDConstants.ACTION_COPY_OR_MOVE;
+            return DnDConstants.ACTION_COPY;
         }
         @Override
         public boolean handleDroppedObject(Object dropped) {

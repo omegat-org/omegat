@@ -3,11 +3,11 @@
 ----------------------------------------------------------------------
    1 Enhancement
    3 Bug fixes
-   1 Localisation update
+   2 Localisation updates
 ----------------------------------------------------------------------
 3.1.9 update 2 vs. 3.1.9 update 1
 
-  Implemented requests:
+  Other enhancements:
 
   - Updated LanguageTool to 2.2
 
@@ -25,6 +25,7 @@ entered as "CSV"
   Localisation updates:
 
   - Brazilian Portuguese localisation updated to 3.0.7 (UI, documentation, readme)
+  - Japanese localisation updated to 3.1 update 1 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 3.1.9 update 1 (2015-04-15)

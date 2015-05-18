@@ -21,9 +21,10 @@
   - Drag and drop to open project 
   https://sourceforge.net/p/omegat/feature-requests/113/
 
-  Other changes:
+  - Drag and drop to add files to project
+  https://sourceforge.net/p/omegat/feature-requests/1091/
 
-  - Drag and drop in respective panes to add source/glossary/tm files
+  Other changes:
 
   - There's an explanation message at the bottom of the Editor when
 Ctrl+Shift+O is pressed

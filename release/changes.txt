@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.4 update 1
 ----------------------------------------------------------------------
-   8 Enhancements
+   9 Enhancements
    2 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
@@ -23,6 +23,9 @@
 
   - Drag and drop to add files to project
   https://sourceforge.net/p/omegat/feature-requests/1091/
+
+  - Add confirmation for the button Reset all colours
+  https://sourceforge.net/p/omegat/feature-requests/1085/
 
   Other changes:
 

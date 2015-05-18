@@ -49,6 +49,17 @@
 <string>Editor</string>
 <key>LSTypeIsPackage</key>
 <false/></dict>
+<dict>
+<key>CFBundleTypeExtensions</key>
+<array>
+<string>*</string>
+</array>
+<key>CFBundleTypeName</key>
+<string>All Files</string>
+<key>CFBundleTypeRole</key>
+<string>None</string>
+<key>LSTypeIsPackage</key>
+<false/></dict>
 </array>
 <key>LSArchitecturePriority</key>
 <array>

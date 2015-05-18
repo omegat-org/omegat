@@ -39,7 +39,9 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
 
 /**
  * This class uses reflection to set Mac OS X-specific integration hooks.
@@ -97,14 +99,22 @@ public class OSXIntegration {
     
     private static final IOpenFilesHandler openFilesHandler = new IOpenFilesHandler() {
         @Override
-        public void openFiles(final List<File> files) {
+        public void openFiles(List<File> files) {
             if (files.isEmpty()) {
                 return;
             }
+            File firstFile = files.get(0); // Ignore others
+            if (firstFile.getName().equals(OConsts.FILE_PROJECT)) {
+                firstFile = firstFile.getParentFile();
+            }
+            if (!StaticUtils.isProjectDir(firstFile)) {
+                return;
+            }
+            final File projDir = firstFile;
             Runnable openProject = new Runnable() {
                 @Override
                 public void run() {
-                    ProjectUICommands.projectOpen(files.get(0).getParentFile());
+                    ProjectUICommands.projectOpen(projDir);
                 }
             };
             if (guiLoaded) {

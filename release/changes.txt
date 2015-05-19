@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.4 update 1
 ----------------------------------------------------------------------
-   9 Enhancements
+  10 Enhancements
    2 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
@@ -41,6 +41,9 @@ in the Search result window just like in the Editor
 
   - Alternatively to specifiy a project folder on the command line,
 it is now also possible to specify the path of an omegat.project file
+
+  - In the QA - Check rules script (check_rules.groovy), it is now
+possible to check linguistic (LangageTool) issues
 
   Bug fixes:
 

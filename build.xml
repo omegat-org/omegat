@@ -290,7 +290,7 @@ Custom strings from release\win32-specific must be added manually to the languag
     </target>
 
     <!-- Builds a Mac distribution -->    
-    <target name="mac" description="Build Mac distro. PRE: A MacOS JRE must be present in ../jre-mac-root/ and JavaAppLauncher must be in ../etc (obtain from AppBundler JAR)" depends="jar,release,check-mac-reqs">
+    <target name="mac" description="Build Mac distro. PRE: A MacOS JRE must be present in ../jre-mac-root/ and JavaAppLauncher must be in ../ (obtain from AppBundler JAR)" depends="jar,release,check-mac-reqs">
         <!-- Build directories -->
         <mkdir dir="dist2"/>
 
@@ -301,7 +301,7 @@ Custom strings from release\win32-specific must be added manually to the languag
             <zipfileset dir="dist" excludes="OmegaT OmegaT-JRE linux-install.sh omegat.kaptn OmegaT.exe OmegaT.bat OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project" prefix="OmegaT.app/Contents/Java"/>
             <zipfileset dir="release/mac-specific/" excludes="OmegaT.app/Contents/Info.plist"/>
             <zipfileset dir="build/" includes="Info.plist" prefix="OmegaT.app/Contents/"/>
-            <zipfileset dir="../etc/" includes="JavaAppLauncher" filemode="755" prefix="OmegaT.app/Contents/MacOS/"/>
+            <zipfileset dir="../" includes="JavaAppLauncher" filemode="755" prefix="OmegaT.app/Contents/MacOS/"/>
             <zipfileset dir="../jre-mac-root/" excludes="bin/" prefix="OmegaT.app/Contents/Plugins/jre/"/>
         </zip>
     </target>
@@ -362,8 +362,8 @@ Custom strings from release\win32-specific must be added manually to the languag
 
 
     <target name="check-mac-reqs">
-        <available file="../etc/JavaAppLauncher" type="file" property="mac-java-stub.exists" />
-        <fail message="There is no Java for MacOS in the ../etc/JavaAppLauncher" unless="mac-java-stub.exists" />
+        <available file="../JavaAppLauncher" type="file" property="mac-java-stub.exists" />
+        <fail message="There is no Java for MacOS in the ../JavaAppLauncher" unless="mac-java-stub.exists" />
         <available file="../jre-mac-root/Contents/Home/bin/java" type="file" property="mac-java-stub.exists1" />
         <fail message="There is no Java for MacOS in the ../jre-mac-root/Contents/Home/bin/java" unless="mac-java-stub.exists1" />
         <available file="../jre-mac-root/Contents/Home/lib/rt.jar" type="file" property="mac-java-stub.exists2" />

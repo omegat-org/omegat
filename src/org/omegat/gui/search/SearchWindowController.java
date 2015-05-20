@@ -63,10 +63,15 @@ import javax.swing.event.ChangeListener;
 import javax.swing.undo.UndoManager;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.search.SearchExpression;
 import org.omegat.core.search.SearchMode;
 import org.omegat.core.search.Searcher;
 import org.omegat.core.threads.SearchThread;
+import org.omegat.gui.editor.EditorController;
+import org.omegat.gui.editor.EditorController.CaretPosition;
+import org.omegat.gui.editor.IEditor;
+import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.filter.ReplaceFilter;
 import org.omegat.gui.editor.filter.SearchFilter;
 import org.omegat.gui.main.MainWindow;
@@ -100,10 +105,14 @@ public class SearchWindowController {
 
     private final SearchWindowForm form;
     private final SearchMode mode;
+    private final int initialEntry;
+    private final CaretPosition initialCaret;
 
     public SearchWindowController(MainWindow par, String startText, SearchMode mode) {
         form = new SearchWindowForm();
         this.mode = mode;
+        initialEntry = Core.getEditor().getCurrentEntryNumber();
+        initialCaret = getCurrentPositionInEntryTranslationInEditor(Core.getEditor());
 
         m_parent = par;
 
@@ -344,6 +353,15 @@ public class SearchWindowController {
         form.m_allResultsCB.addActionListener(searchFieldRequestFocus);
         form.m_fileNamesCB.addActionListener(searchFieldRequestFocus);
 
+        form.m_autoSyncWithEditor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // update auto-sync flag in EntryListPane
+                EntryListPane viewer = (EntryListPane) form.m_viewer;
+                viewer.setAutoSyncWithEditor(form.m_autoSyncWithEditor.isSelected());
+            }
+        });
+
         form.m_rbDir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -562,6 +580,10 @@ public class SearchWindowController {
         form.m_allResultsCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_ALL_RESULTS, false));
         form.m_fileNamesCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_FILE_NAMES, false));
 
+        // editor related options
+        form.m_autoSyncWithEditor.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_AUTO_SYNC, false));
+        form.m_backToInitialSegment.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_BACK_TO_INITIAL_SEGMENT, false));
+
         // update the enabled/selected status of normal options
         updateOptionStatus();
 
@@ -652,6 +674,10 @@ public class SearchWindowController {
         Preferences.setPreference(Preferences.SEARCHWINDOW_DIR, form.m_dirField.getText());
         Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_FILES, form.m_rbDir.isSelected());
         Preferences.setPreference(Preferences.SEARCHWINDOW_RECURSIVE, form.m_recursiveCB.isSelected());
+
+        // editor related options
+        Preferences.setPreference(Preferences.SEARCHWINDOW_AUTO_SYNC, form.m_autoSyncWithEditor.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_BACK_TO_INITIAL_SEGMENT, form.m_backToInitialSegment.isSelected());
 
         // Search/replace history
         HistoryManager.save();
@@ -883,11 +909,34 @@ public class SearchWindowController {
         if (m_thread != null) {
             m_thread.fin();
         }
+
+        int currentEntry = Core.getEditor().getCurrentEntryNumber();
+        if (initialEntry > 0 && form.m_backToInitialSegment.isSelected() && initialEntry != currentEntry) {
+            boolean isSegDisplayed = isSegmentDisplayed(initialEntry);
+
+            if (isSegDisplayed) {
+                // Restore caretPosition too
+                ((EditorController) Core.getEditor()).gotoEntry(initialEntry, initialCaret);
+            } else {
+                Core.getEditor().gotoEntry(initialEntry);
+            }
+        }
+
         form.dispose();
     }
 
     public void dispose() {
         form.dispose();
+    }
+
+    private boolean isSegmentDisplayed(int entry) {
+        IEditorFilter filter = Core.getEditor().getFilter();
+        if (filter == null) {
+            return true;
+        } else {
+            SourceTextEntry ste = Core.getProject().getAllEntries().get(entry - 1);
+            return filter.allowed(ste);
+        }
     }
 
     private void toggleAdvancedOptions() {
@@ -1011,6 +1060,39 @@ public class SearchWindowController {
             if (c instanceof Container) {
                 setEnabled((Container) c, enabled);
             }
+        }
+    }
+
+    private CaretPosition getCurrentPositionInEntryTranslationInEditor(IEditor editor) {
+        if (editor instanceof EditorController) {
+            EditorController c = (EditorController) editor;
+            int selectionEnd = c.getCurrentPositionInEntryTranslation();
+            String selection = c.getSelectedText();
+            String translation = c.getCurrentTranslation();
+
+            if (StringUtil.isEmpty(translation) || StringUtil.isEmpty(selection)) {
+                // no translation or no selection
+                return new CaretPosition(selectionEnd);
+            } else {
+                // get selected range
+                int selectionStart = selectionEnd;
+                int pos = 0;
+                do {
+                    pos = translation.indexOf(selection, pos);
+                    if (pos == selectionEnd) {
+                        selectionStart = pos;
+                        selectionEnd = pos + selection.length();
+                        break;
+                    } else if ((pos + selection.length()) == selectionEnd) {
+                        selectionStart = pos;
+                        break;
+                    }
+                    pos++;
+                } while (pos > 0);
+                return new CaretPosition(selectionStart, selectionEnd);
+            }
+        } else {
+            return CaretPosition.startOfEntry();
         }
     }
 

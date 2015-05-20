@@ -5,6 +5,7 @@
 
  Copyright (C) 2013 Alex Buloichik
                2014 Aaron Madlon-Kay, Piotr Kulik
+               2015 Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -158,6 +159,8 @@ public class SearchWindowForm extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         filler13 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         jPanel7 = new javax.swing.JPanel();
+        m_autoSyncWithEditor = new javax.swing.JCheckBox();
+        m_backToInitialSegment = new javax.swing.JCheckBox();
         filler12 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         m_replaceAllButton = new javax.swing.JButton();
         filler18 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
@@ -579,6 +582,16 @@ public class SearchWindowForm extends javax.swing.JFrame {
         getContentPane().add(jPanel8, gridBagConstraints);
 
         jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.LINE_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(m_autoSyncWithEditor, OStrings.getString("SW_AUTO_SYNC")); // NOI18N
+        m_autoSyncWithEditor.setFocusable(false);
+        m_autoSyncWithEditor.setMinimumSize(new java.awt.Dimension(105, 21));
+        jPanel7.add(m_autoSyncWithEditor);
+
+        org.openide.awt.Mnemonics.setLocalizedText(m_backToInitialSegment, OStrings.getString("SW_BACK_TO_INITIAL_SEGMENT")); // NOI18N
+        m_backToInitialSegment.setFocusable(false);
+        m_backToInitialSegment.setMinimumSize(new java.awt.Dimension(105, 21));
+        jPanel7.add(m_backToInitialSegment);
         jPanel7.add(filler12);
 
         org.openide.awt.Mnemonics.setLocalizedText(m_replaceAllButton, OStrings.getString("BUTTON_REPLACE_ALL")); // NOI18N
@@ -706,6 +719,8 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JCheckBox m_allResultsCB;
     javax.swing.JCheckBox m_authorCB;
     org.omegat.gui.search.MFindField m_authorField;
+    javax.swing.JCheckBox m_autoSyncWithEditor;
+    javax.swing.JCheckBox m_backToInitialSegment;
     javax.swing.JCheckBox m_cbSearchInGlossaries;
     javax.swing.JCheckBox m_cbSearchInMemory;
     javax.swing.JCheckBox m_cbSearchInTMs;

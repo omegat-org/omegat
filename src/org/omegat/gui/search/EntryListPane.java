@@ -30,7 +30,6 @@
 package org.omegat.gui.search;
 
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
@@ -52,17 +51,21 @@ import javax.swing.InputMap;
 import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.search.SearchMatch;
 import org.omegat.core.search.SearchResultEntry;
 import org.omegat.core.search.Searcher;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.EditorController.CaretPosition;
 import org.omegat.gui.editor.IEditor;
+import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -142,45 +145,13 @@ class EntryListPane extends JTextPane {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if (e.getClickCount() == 2 && m_entryList.size() > 0) {
-                    final Cursor oldCursor = getCursor();
-                    setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    // user double clicked on viewer pane - send message
-                    // to org.omegat.gui.editor.IEditor to jump to this entry
-                    int pos = getCaretPosition();
-                    int off;
-                    for (int i = 0; i < m_offsetList.size(); i++) {
-                        off = m_offsetList.get(i);
-                        if (off >= pos) {
-                            final int entry = m_entryList.get(i);
-                            if (entry >= 0) {
-                                SwingUtilities.invokeLater(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        IEditor editor = Core.getEditor();
-                                        if (m_firstMatchList.containsKey(entry)
-                                                && editor instanceof EditorController) {
-                                            // Select search word in Editor pane
-                                            CaretPosition pos = m_firstMatchList.get(entry);
-                                            ((EditorController) editor).gotoEntry(entry, pos);
-                                        } else {
-                                            editor.gotoEntry(entry);
-                                        }
-                                        setCursor(oldCursor);
-                                    }
-                                });
-                            } else {
-                                setCursor(oldCursor);
-                            }
-                            break;
-                        }
-                    }
+                if (!autoSyncWithEditor && e.getClickCount() == 2 && m_entryList.size() > 0) {
+                    getActiveDisplayedEntry().gotoEntryInEditor();
                 }
             }
         });
 
         addFocusListener(new FocusListener() {
-
             @Override
             public void focusGained(FocusEvent e) {
                 boolean useTabForAdvance = Core.getEditor().getSettings().isUseTabForAdvance();
@@ -196,8 +167,18 @@ class EntryListPane extends JTextPane {
             }
         });
 
+        addCaretListener(new CaretListener() {
+            @Override
+            public void caretUpdate(CaretEvent e) {
+                if (autoSyncWithEditor) {
+                    getActiveDisplayedEntry().gotoEntryInEditor();
+                }
+            }
+        });
+
         initActions();
         useTabForAdvance = Core.getEditor().getSettings().isUseTabForAdvance();
+        autoSyncWithEditor = Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_AUTO_SYNC, false);
         initInputMap(useTabForAdvance);
         setEditable(false);
         AlwaysVisibleCaret.apply(this);
@@ -209,6 +190,13 @@ class EntryListPane extends JTextPane {
         InputMap newMap = useTabForAdvance ? createDefaultInputMapUseTab(parent)
                                            : createDefaultInputMap(parent);
         setInputMap(WHEN_FOCUSED, newMap);
+    }
+
+    void setAutoSyncWithEditor(boolean autoSyncWithEditor) {
+        this.autoSyncWithEditor = autoSyncWithEditor;
+        if (autoSyncWithEditor) {
+            getActiveDisplayedEntry().gotoEntryInEditor();
+        }
     }
 
     /**
@@ -233,6 +221,10 @@ class EntryListPane extends JTextPane {
         }
 
         currentlyDisplayedMatches = new DisplayMatches(searcher.getSearchResults());
+        
+        if (autoSyncWithEditor) {
+            getActiveDisplayedEntry().gotoEntryInEditor();
+        }
     }
 
     protected class DisplayMatches implements Runnable {
@@ -465,6 +457,8 @@ class EntryListPane extends JTextPane {
         DisplayedEntry getPrevious();
 
         void activate();
+        
+        void gotoEntryInEditor();
     }
 
     private class EmptyDisplayedEntry implements DisplayedEntry {
@@ -481,6 +475,11 @@ class EntryListPane extends JTextPane {
 
         @Override
         public void activate() {
+            // Do nothing
+        }
+
+        @Override
+        public void gotoEntryInEditor() {
             // Do nothing
         }
 
@@ -534,6 +533,45 @@ class EntryListPane extends JTextPane {
             setSelectionEnd(beginPos);
         }
 
+        @Override
+        public void gotoEntryInEditor() {
+            if (index >= getNrEntries()) {
+                // end of text (out of entries range)
+                return;
+            }
+
+            final int entry = m_entryList.get(index);
+            if (entry > 0) {
+                final IEditor editor = Core.getEditor();
+                int currEntryInEditor = editor.getCurrentEntryNumber();
+                if (currEntryInEditor != 0 && entry != currEntryInEditor) {
+                    final boolean isSegDisplayed = isSegmentDisplayed(entry);
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (isSegDisplayed && m_firstMatchList.containsKey(entry)
+                                    && editor instanceof EditorController) {
+                                // Select search word in Editor pane
+                                CaretPosition pos = m_firstMatchList.get(entry);
+                                ((EditorController) editor).gotoEntry(entry, pos);
+                            } else {
+                                editor.gotoEntry(entry);
+                            }
+                        }
+                    });
+                }
+            }
+        }
+
+        private boolean isSegmentDisplayed(int entry) {
+            IEditorFilter filter = Core.getEditor().getFilter();
+            if (filter == null) {
+                return true;
+            } else {
+                SourceTextEntry ste = Core.getProject().getAllEntries().get(entry - 1);
+                return filter.allowed(ste);
+            }
+        }
     }
 
     private volatile Searcher m_searcher;
@@ -543,4 +581,5 @@ class EntryListPane extends JTextPane {
     private DisplayMatches currentlyDisplayedMatches;
     private int numberOfResults;
     private boolean useTabForAdvance;
+    private boolean autoSyncWithEditor;
 }

@@ -10,7 +10,7 @@
 			<menu submenu="OmegaT from WebStart" />
 		</shortcut>
 		<offline-allowed />
-        <association extensions="project" />
+        <association mime-type="application/x-omegat-project" extensions="project" />
 
 <!--
 		<related-content href="readme.html">

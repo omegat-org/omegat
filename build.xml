@@ -290,7 +290,7 @@ Custom strings from release\win32-specific must be added manually to the languag
     </target>
 
     <!-- Builds a Mac distribution -->    
-    <target name="mac" description="Build Mac distro. PRE: A MacOS JRE must be present in ../jre-mac-root/" depends="jar,release,check-jre-mac">
+    <target name="mac" description="Build Mac distro. PRE: A MacOS JRE must be present in ../jre-mac-root/ and JavaAppLauncher must be in ../etc (obtain from AppBundler JAR)" depends="jar,release,check-mac-reqs">
         <!-- Build directories -->
         <mkdir dir="dist2"/>
 
@@ -299,16 +299,17 @@ Custom strings from release\win32-specific must be added manually to the languag
 
         <zip destfile="dist2/OmegaT_${distversion}${beta}_Mac.zip">
             <zipfileset dir="dist" excludes="OmegaT OmegaT-JRE linux-install.sh omegat.kaptn OmegaT.exe OmegaT.bat OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project" prefix="OmegaT.app/Contents/Java"/>
-            <zipfileset dir="release/mac-specific/" excludes="OmegaT.app/Contents/Info.plist,OmegaT.app/Contents/MacOS/JavaAppLauncher,Configuration.properties,Mac-Licenses.txt"/>
+            <zipfileset dir="release/mac-specific/" excludes="OmegaT.app/Contents/Info.plist"/>
             <zipfileset dir="build/" includes="Info.plist" prefix="OmegaT.app/Contents/"/>
-            <zipfileset dir="release/mac-specific/" includes="OmegaT.app/Contents/MacOS/JavaAppLauncher" filemode="755"/>
+            <zipfileset dir="../etc/" includes="JavaAppLauncher" filemode="755" prefix="OmegaT.app/Contents/MacOS/"/>
             <zipfileset dir="../jre-mac-root/" excludes="bin/" prefix="OmegaT.app/Contents/Plugins/jre/"/>
         </zip>
     </target>
 
     <!-- Requires AppBundler to be available to Ant (e.g. in ~/.ant/lib):
-         https://bitbucket.org/infinitekind/appbundler -->
-    <target name="gen-mac" description="Build Mac app with native wrapper.">
+         https://bitbucket.org/infinitekind/appbundler
+         AppBundler requires Java 1.7 -->
+    <target name="gen-mac" description="Generate Mac .app bundle.">
         <taskdef name="bundleapp"
                  classname="com.oracle.appbundler.AppBundlerTask"/>
         <bundleapp
@@ -336,10 +337,6 @@ Custom strings from release\win32-specific must be added manually to the languag
         		role="none"/>
             <plistentry key="JVMRuntime" value="jre"/>
         </bundleapp>
-        <copy todir="release/mac-specific/OmegaT.app/Contents/Resources">
-            <fileset dir="release/mac-specific"
-                     includes="Configuration.properties,Mac-Licenses.txt" />
-        </copy>
     </target>
     
     <target name="check-win" depends="init">
@@ -364,7 +361,9 @@ Custom strings from release\win32-specific must be added manually to the languag
     </target>
 
 
-    <target name="check-jre-mac">
+    <target name="check-mac-reqs">
+        <available file="../etc/JavaAppLauncher" type="file" property="mac-java-stub.exists" />
+        <fail message="There is no Java for MacOS in the ../etc/JavaAppLauncher" unless="mac-java-stub.exists" />
         <available file="../jre-mac-root/Contents/Home/bin/java" type="file" property="mac-java-stub.exists1" />
         <fail message="There is no Java for MacOS in the ../jre-mac-root/Contents/Home/bin/java" unless="mac-java-stub.exists1" />
         <available file="../jre-mac-root/Contents/Home/lib/rt.jar" type="file" property="mac-java-stub.exists2" />

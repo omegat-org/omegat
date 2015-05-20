@@ -380,6 +380,10 @@ public class FileUtil {
     private static Map<File, File> copyFilesTo(File destination, File[] toCopy, File root) throws IOException {
         Map<File, File> collisions = new LinkedHashMap<File, File>();
         for (File file : toCopy) {
+            if (destination.getPath().startsWith(file.getPath())) {
+                // Trying to copy something into its own subtree
+                continue;
+            }
             File thisRoot = root == null ? file.getParentFile() : root;
             String filePath = file.getPath();
             String relPath = filePath.substring(thisRoot.getPath().length(), filePath.length());

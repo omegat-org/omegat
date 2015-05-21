@@ -2,7 +2,7 @@
  OmegaT 3.1.9 update 2
 ----------------------------------------------------------------------
    1 Enhancement
-   3 Bug fixes
+   4 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 3.1.9 update 2 vs. 3.1.9 update 1
@@ -21,6 +21,9 @@ entered as "CSV"
 
   - Exclusion masks not working correctly under Windows 
   https://sourceforge.net/p/omegat/bugs/746/
+
+  - There was a compatibility issue with the Okapi plugin with the 
+XML/ITS and Doxygen filter
 
   Localisation updates:
 

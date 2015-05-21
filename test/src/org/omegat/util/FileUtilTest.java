@@ -101,7 +101,7 @@ public class FileUtilTest extends TestCase {
         FileUtil.copyFilesTo(targetDir, sourceDir.listFiles(), new ICollisionCallback() {
             @Override
             public boolean shouldReplace(File file, int thisFile, int totalFiles) {
-                return file.equals(sub1trg) ? true : false;
+                return file.equals(sub1trg);
             }
             @Override
             public boolean isCanceled() {
@@ -182,7 +182,7 @@ public class FileUtilTest extends TestCase {
     private String readFile(File file) throws IOException {
         InputStreamReader stream = new InputStreamReader(new FileInputStream(file));
         char[] cbuf = new char[256];
-        int len = 0;
+        int len;
         StringBuilder sb = new StringBuilder();
         while ((len = stream.read(cbuf)) != -1) {
             sb.append(cbuf, 0, len);

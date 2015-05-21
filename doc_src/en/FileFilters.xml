@@ -160,9 +160,9 @@
         <para><emphasis>Auto replace 'nplurals=INTEGER; plural=EXPRESSION;' in
         header</emphasis></para>
 
-        <para><emphasis><emphasis>The option allows OmegaT to override the
+        <para><emphasis>The option allows OmegaT to override the
         specification in the PO file header and use the default for the
-        selected target language. </emphasis></emphasis></para>
+        selected target language. </emphasis></para>
       </listitem>
     </itemizedlist>
 

@@ -925,7 +925,7 @@
 
             <itemizedlist>
               <listitem>
-                <para><emphasis><emphasis><literal>--mode=console-translate</literal></emphasis></emphasis></para>
+                <para><emphasis><literal>--mode=console-translate</literal></emphasis></para>
 
                 <para>In this mode, OmegaT will attempt to translate the files
                 in /source/ with the available translation memories. This is

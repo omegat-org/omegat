@@ -209,7 +209,7 @@
 
             <listitem>
               <para>Customer ID (corresponds to
-              <code><code>microsoft.api.client_id</code></code> command-line
+              <code>microsoft.api.client_id</code> command-line
               parameter)</para>
             </listitem>
           </itemizedlist></para>

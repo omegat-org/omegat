@@ -119,12 +119,12 @@ public class FileCollisionDialog extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
-        batchCheckbox.setText("Apply to All");
+        org.openide.awt.Mnemonics.setLocalizedText(batchCheckbox, OStrings.getString("DND_APPLY_TO_ALL_BUTTON")); // NOI18N
         jPanel2.add(batchCheckbox, java.awt.BorderLayout.WEST);
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
 
-        cancelButton.setText("Cancel");
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
@@ -132,7 +132,7 @@ public class FileCollisionDialog extends javax.swing.JDialog {
         });
         jPanel1.add(cancelButton);
 
-        replaceButton.setText("Replace");
+        org.openide.awt.Mnemonics.setLocalizedText(replaceButton, OStrings.getString("DND_REPLACE_BUTTON")); // NOI18N
         replaceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 replaceButtonActionPerformed(evt);

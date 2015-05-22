@@ -34,6 +34,9 @@ Ctrl+Shift+O is pressed
 
   - New script to clear SVN authentication data
 
+  - Better OS X integration: Full-screen support, drag-and-drop
+to program icon, main window proxy icon and modification marker
+
   - New OmegaT icon on the Mac
 
   - Go to next/previous segment with key shortcuts work 

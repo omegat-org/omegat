@@ -39,9 +39,11 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.team.GITRemoteRepository;
 import org.omegat.core.team.IRemoteRepository;
 import org.omegat.core.team.RepositoryUtils;
@@ -55,7 +57,6 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RecentProjects;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -216,15 +217,39 @@ public class ProjectUICommands {
     }
 
     /**
-     * Open project.
+     * Open project. Does nothing if there is already a project open.
+     * Convenience method for {@link #projectOpen(File, boolean)}.
+     * 
+     * @param projectDirectory
+     */
+    public static void projectOpen(File projectDirectory) {
+        projectOpen(projectDirectory, false);
+    }
+    
+    /**
+     * Open project. Does nothing if a project is already open and closeCurrent is false.
      * 
      * @param projectDirectory
      *            project directory or null if user must choose it
+     * @param closeCurrent
+     *            whether or not to close the current project first, if any
      */
-    public static void projectOpen(final File projectDirectory) {
+    public static void projectOpen(final File projectDirectory, boolean closeCurrent) {
         UIThreadsUtil.mustBeSwingThread();
 
         if (Core.getProject().isProjectLoaded()) {
+            if (closeCurrent) {
+                // Register to try again after closing the current project.
+                CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
+                    public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
+                        if (eventType == PROJECT_CHANGE_TYPE.CLOSE) {
+                            projectOpen(projectDirectory);
+                            CoreEvents.unregisterProjectChangeListener(this);
+                        }
+                    }
+                });
+                projectClose();
+            }
             return;
         }
 

@@ -448,6 +448,17 @@
 
           <para>-<emphasis role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
         </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Yandex Translate</emphasis><indexterm class="singular">
+              <primary>OmegaT の実行</primary> <secondary>起動スクリプトの引数</secondary> <tertiary>Yandex Translate</tertiary>
+            </indexterm></para>
+
+          <para>事前に無料の Yandex アカウントを取得しておいてください。Yandex Translate API キーを利用するために、必要になります。API キーは <ulink url="http://api.yandex.com/key/form.xml?service=trnsl">API key request form</ulink> から申請できます。申請後は、<ulink url="http://api.yandex.com/key/keyslist.xml">My Keys</ulink> ページで確認できます。</para>
+
+          <para><emphasis role="bold">-Dyandex.api.key=</emphasis><emphasis role="bold">trnsl.1.1.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</emphasis></para>
+        </listitem>
+
       </itemizedlist>
 
       <para>複数の引数を、組み合わせて指定することもできます。上記で例示したすべての引数を使用して <application>OmegaT</application> を起動する場合、コマンドは以下のようになります：</para>
@@ -517,7 +528,7 @@
 
             <itemizedlist>
               <listitem>
-                <para><emphasis><emphasis><literal>--mode=console-translate</literal></emphasis></emphasis></para>
+                <para><emphasis><literal>--mode=console-translate</literal></emphasis></para>
 
                 <para>このモードでは、source フォルダーのファイルを翻訳メモリを使って翻訳します。OmegaT が TMX ファイルと共にサーバーで実行され、プロジェクトを自動処理するような状況に向いています。</para>
               </listitem>

@@ -1,0 +1,5 @@
+"JRELoadError" = "Java 実行環境を起動できません。";
+"JRExLoadError" = "Java %d 実行環境を起動できません。";
+"MainClassNameRequired" = "メインクラス名の指定は必須です。";
+"JavaDirectoryNotFound" = "Java ディレクトリのコンテンツを列挙できません。";
+"BundlePathContainsColon" = "名前に \"/\" 記号を含むフォルダーからは起動できません。";

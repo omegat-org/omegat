@@ -128,8 +128,7 @@
       </listitem>
     </itemizedlist>
 
-    <para><guibutton>［詳細設定］</guibutton>ボタンをクリックすると、上の図でも見ることができるように、追加の条件欄（翻訳者の名前や、翻訳が最後に更新された日時）が表示されます。
-</para>
+    <para><guibutton>［詳細設定］</guibutton>ボタンをクリックすると、上の図でも見ることができるように、追加の条件欄（翻訳者の名前や、翻訳が最後に更新された日時）が表示されます。</para>
   </section>
 
   <section id="search.result.display">

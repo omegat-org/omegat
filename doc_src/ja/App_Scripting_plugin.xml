@@ -67,7 +67,7 @@
                 source = currsegment.getSrcText();
                 target = project.getTranslationInfo(currsegment).translation;
                 console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
-            }     
+            }
         }
     }</programlisting>
   </section>

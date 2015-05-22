@@ -33,7 +33,7 @@ package org.omegat.core.events;
 public interface IProjectEventListener {
     /** Event type which happen for project. */
     enum PROJECT_CHANGE_TYPE {
-        CLOSE, COMPILE, CREATE, LOAD, SAVE
+        CLOSE, COMPILE, CREATE, LOAD, SAVE, MODIFIED
     }
 
     /**

@@ -243,7 +243,7 @@ public class ProjectUICommands {
                 CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
                     public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
                         if (eventType == PROJECT_CHANGE_TYPE.CLOSE) {
-                            projectOpen(projectDirectory);
+                            projectOpen(projectDirectory, false);
                             CoreEvents.unregisterProjectChangeListener(this);
                         }
                     }

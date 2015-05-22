@@ -78,7 +78,7 @@
       <para>他の形式のプレーンテキストファイルでも、OmegaT で扱うことができます。まずその拡張子を <application>OmegaT</application> が対応しているフィルター形式に追加します（たとえば .pod ファイルを「テキストファイル」フィルターに追加するなど）。次に、必要であれば適切な分節化規則を設定して前処理させればよいのです。</para>
 
       <para>PO ファイル<indexterm class="singular">
-          <primary>原文ファイル</primary> <secondary>多言語形式の PO ファイル</secondary>
+          <primary>原文ファイル</primary> <secondary>バイリンガルファイルとしての PO</secondary>
         </indexterm>は、原文と訳文の両方を格納できるファイル形式です。したがって、PO ファイルはプレーンテキストファイルである<emphasis>と同時に</emphasis>、翻訳メモリでもあるといえます。原文分節に対応する訳文がまだ翻訳メモリ（project_save.tmx）に存在しなければ、翻訳内容はデフォルトの対訳（既定値訳文）として project_save.tmx に保存されます。もし原文分節に対応する別の訳文がすでに存在した場合、翻訳内容は（既定値訳文ではなく）「新しい訳文」として保存されます。</para>
     </section>
 

@@ -100,7 +100,7 @@
       <listitem>
         <para><emphasis>ヘッダーの「nplurals=整数; plural=式;」を自動で置換</emphasis></para>
 
-        <para><emphasis><emphasis>この設定にチェックを入れると、PO ファイルのヘッダーにある複数形指定を、訳文言語に合わせて自動変更します。</emphasis></emphasis></para>
+        <para><emphasis>この設定にチェックを入れると、PO ファイルのヘッダーにある複数形指定を、訳文言語に合わせて自動変更します。</emphasis></para>
       </listitem>
     </itemizedlist>
 

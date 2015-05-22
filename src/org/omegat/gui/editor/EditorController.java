@@ -376,49 +376,71 @@ public class EditorController implements IEditor {
     }
 
     private final IDropInfo dropInfo = new IDropInfo() {
+        
         @Override
         public DataFlavor getDataFlavor() {
             return DataFlavor.javaFileListFlavor;
         }
+        
         @Override
         public int getDnDAction() {
             return DnDConstants.ACTION_COPY;
         }
+        
         @Override
         public boolean handleDroppedObject(Object dropped) {
             final List<File> files = (List<File>) dropped;
-            if (Core.getProject().isProjectLoaded()) {
-                // The import might take a long time if there are collision dialogs.
-                // Invoke later so we can return successfully right away.
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        mw.importFiles(Core.getProject().getProjectProperties().getSourceRoot(),
-                                files.toArray(new File[0]));
-                    }
-                });
-                return true;
-            }
-
-            File firstFile = files.get(0); // Ignore others
+            
+            // Only look at first file to determine intent to open project
+            File firstFile = files.get(0);
             if (firstFile.getName().equals(OConsts.FILE_PROJECT)) {
                 firstFile = firstFile.getParentFile();
             }
             if (StaticUtils.isProjectDir(firstFile)) {
-                ProjectUICommands.projectOpen(firstFile);
-                return true;
+                return handleDroppedProject(firstFile);
             }
-            return false;
+            return handleDroppedFiles(files);
         }
+        
+        private boolean handleDroppedProject(final File projDir) {
+            // Opening/closing might take a long time for team projects.
+            // Invoke later so we can return successfully right away.
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    ProjectUICommands.projectOpen(projDir, true);
+                }
+            });
+            return true;
+        }
+        
+        private boolean handleDroppedFiles(final List<File> files) {
+            if (!Core.getProject().isProjectLoaded()) {
+                return false;
+            }
+            // The import might take a long time if there are collision dialogs.
+            // Invoke later so we can return successfully right away.
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    mw.importFiles(Core.getProject().getProjectProperties().getSourceRoot(),
+                            files.toArray(new File[0]));
+                }
+            });
+            return true;
+        }
+        
         @Override
         public Component getComponentToOverlay() {
             return scrollPane;
         }
+        
         @Override
         public String getOverlayMessage() {
             return Core.getProject().isProjectLoaded() ? OStrings.getString("DND_ADD_SOURCE_FILE")
                     : OStrings.getString("DND_OPEN_PROJECT");
         }
+        
         @Override
         public boolean canAcceptDrop() {
             return true;

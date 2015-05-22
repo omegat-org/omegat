@@ -114,7 +114,7 @@ public class OSXIntegration {
             Runnable openProject = new Runnable() {
                 @Override
                 public void run() {
-                    ProjectUICommands.projectOpen(projDir);
+                    ProjectUICommands.projectOpen(projDir, true);
                 }
             };
             if (guiLoaded) {

@@ -34,11 +34,13 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -68,6 +70,7 @@ public class OSXIntegration {
             Class<?> strategyClass = Class.forName("com.apple.eawt.QuitStrategy");
             Method setQuitStrategy = getAppClass().getDeclaredMethod("setQuitStrategy", strategyClass);
             setQuitStrategy.invoke(getApp(), strategyClass.getField("CLOSE_ALL_WINDOWS").get(null));
+            
             // Prevent sudden termination:
             //   app.disableSuddenTermination();
             Method disableTerm = getAppClass().getDeclaredMethod("disableSuddenTermination");
@@ -78,6 +81,9 @@ public class OSXIntegration {
             CoreEvents.registerApplicationEventListener(appListener);
             // 2. The open file handler can defer opening a project until the GUI is ready.
             setOpenFilesHandler(openFilesHandler);
+            
+            // Register listener to update the main window's proxy icon and modified indicators.
+            CoreEvents.registerProjectChangeListener(projectListener);
         } catch (Exception ex) {
             Log.log(ex);
         }
@@ -137,6 +143,27 @@ public class OSXIntegration {
                 synchronized (doAfterLoad) {
                     doAfterLoad.add(openProject);
                 }
+            }
+        }
+    };
+    
+    private static final IProjectEventListener projectListener = new IProjectEventListener() {
+        @Override
+        public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
+            switch (eventType) {
+            case LOAD:
+                String projDir = Core.getProject().getProjectProperties().getProjectRoot();
+                setProxyIcon(new File(projDir));
+                break;
+            case CLOSE:
+                setProxyIcon(null);
+                break;
+            case MODIFIED:
+                setModifiedIndicator(true);
+                break;
+            case SAVE:
+                setModifiedIndicator(false);
+                break;
             }
         }
     };
@@ -239,6 +266,16 @@ public class OSXIntegration {
         }
     }
 
+    private static void setProxyIcon(File file) {
+        JRootPane rootPane = Core.getMainWindow().getApplicationFrame().getRootPane();
+        rootPane.putClientProperty("Window.documentFile", file);
+    }
+    
+    private static void setModifiedIndicator(boolean isModified) {
+        JRootPane rootPane = Core.getMainWindow().getApplicationFrame().getRootPane();
+        rootPane.putClientProperty("Window.documentModified", isModified);
+    }
+    
     public interface IOpenFilesHandler {
         public void openFiles(List<File> files);
     }

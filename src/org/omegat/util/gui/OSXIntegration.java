@@ -25,6 +25,7 @@
 
 package org.omegat.util.gui;
 
+import java.awt.Window;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.lang.reflect.InvocationHandler;
@@ -35,6 +36,7 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
+import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.gui.main.ProjectUICommands;
@@ -71,9 +73,10 @@ public class OSXIntegration {
             Method disableTerm = getAppClass().getDeclaredMethod("disableSuddenTermination");
             disableTerm.invoke(getApp());
 
-            // Register to find out when app finishes loading...
+            // Register to find out when app finishes loading so we can
+            // 1. Set up full-screen support, and...
             CoreEvents.registerApplicationEventListener(appListener);
-            // So that the open file handler can defer opening a project until the GUI is ready.
+            // 2. The open file handler can defer opening a project until the GUI is ready.
             setOpenFilesHandler(openFilesHandler);
         } catch (Exception ex) {
             Log.log(ex);
@@ -89,6 +92,17 @@ public class OSXIntegration {
                     r.run();
                 }
                 doAfterLoad.clear();
+            }
+            try {
+                // Enable full-screen mode:
+                //   FullScreenUtilities.setWindowCanFullScreen(java.awt.Window, boolean)
+                Class<?> utilClass = Class.forName("com.apple.eawt.FullScreenUtilities");
+                Method setWindowCanFullScreen = utilClass.getMethod("setWindowCanFullScreen",
+                        new Class<?>[] { java.awt.Window.class, Boolean.TYPE });
+                Window window = Core.getMainWindow().getApplicationFrame();
+                setWindowCanFullScreen.invoke(utilClass, window, true);
+            } catch (Exception ex) {
+                Log.log(ex);
             }
         }
         @Override

@@ -65,7 +65,7 @@ possible to check linguistic (LangageTool) issues
 ----------------------------------------------------------------------
  OmegaT 3.4 (2015-04-20)
 ----------------------------------------------------------------------
-  11 Enhancements
+  12 Enhancements
    4 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
@@ -87,6 +87,9 @@ possible to check linguistic (LangageTool) issues
 
   - Automatically detect input file encoding when possible 
   https://sourceforge.net/p/omegat/feature-requests/1075/
+
+  - Improve default output encoding settings 
+  https://sourceforge.net/p/omegat/feature-requests/1083/
 
   - Improve fuzzy match difference granularity in Chinese
   https://sourceforge.net/p/omegat/feature-requests/1077/

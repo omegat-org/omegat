@@ -13,6 +13,7 @@
                2012 Wildrich Fourie, Guido Leenders, Martin Fleurke, Didier Briel
                2013 Zoltan Bartko, Didier Briel, Yu Tang
                2014 Aaron Madlon-Kay
+               2015 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -384,6 +385,10 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
         optionsGlossaryMenu
                 .add(optionsGlossaryTBXDisplayContextCheckBoxMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_GLOSSARY_TBX_DISPLAY_CONTEXT"));
+        optionsGlossaryMenu
+                .add(optionsGlossaryExactMatchCheckBoxMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_GLOSSARY_EXACT_MATCH"));
+        optionsGlossaryMenu
+                .add(optionsGlossaryStemmingCheckBoxMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_GLOSSARY_STEMMING"));
 
         optionsMenu.add(optionsTransTipsMenu = createMenu("TF_OPTIONSMENU_TRANSTIPS"));
         optionsTransTipsMenu
@@ -490,6 +495,10 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
         optionsGlossaryTBXDisplayContextCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
                 Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT, true));
+        optionsGlossaryExactMatchCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
+                Preferences.GLOSSARY_NOT_EXACT_MATCH, true));
+        optionsGlossaryStemmingCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
+                Preferences.GLOSSARY_STEMMING, true));        
     }
 
     /**
@@ -709,6 +718,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenu optionsMachineTranslateMenu;
     JMenu optionsGlossaryMenu;
     JMenuItem optionsGlossaryTBXDisplayContextCheckBoxMenuItem;
+    JMenuItem optionsGlossaryExactMatchCheckBoxMenuItem;
+    JMenuItem optionsGlossaryStemmingCheckBoxMenuItem;
     JMenu optionsTransTipsMenu;
     JCheckBoxMenuItem optionsTransTipsEnableMenuItem;
     JCheckBoxMenuItem optionsTransTipsExactMatchMenuItem;

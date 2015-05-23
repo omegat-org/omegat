@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2007 Didier Briel, Zoltan Bartko
                2008 Alex Buloichik
+               2015 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -196,14 +197,56 @@ public class DefaultTokenizer implements ITokenizer {
 
     /**
      * Check if array contains other array.
+     * @param tokensList a list of tokens to be searched
+     * @param listForFind a list of tokens to search in tokensList
+     * @param notExact is true if the tokens in listForFind can be non-contiguous or in a different order in the 
+     * tokensList. If false, tokens must be exactly the same.
+     * @return true if the tokens in listForFind are found in tokensList
      */
-    public static boolean isContainsAll(Token[] tokensList, Token[] listForFind) {
-        for (Token t : listForFind) {
-            if (!isContains(tokensList, t)) {
-                return false;
+    public static boolean isContainsAll(Token[] tokensList, Token[] listForFind, boolean notExact) {
+        if (notExact) {         
+            for (Token t : listForFind) {
+                if (!isContains(tokensList, t)) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return isContainsExact(tokensList, listForFind);
+        }
+    }
+    
+    /**
+     * Check if a list of tokens is found contiguously in another list of tokens
+     * @param tokensList a list of tokens to be searched
+     * @param listForFind a list of tokens to search in tokensList
+     * @return true if the tokens in listForFind are found contiguously in tokensList
+     */
+    private static boolean isContainsExact(Token[] tokensList, Token[] listForFind) {
+        for (int i=0; i<tokensList.length; i++) { // For all tokens in the searched strings
+            if (tokensList[i].equals(listForFind[0])) { // We found the first position of listForFind
+                if (listForFind.length == 1) { // Only one token, and we found it
+                    return true;
+                }                   
+                int k = i+1;
+                if (listForFind.length <= tokensList.length-k+1) { // Enough words remain to match tokensList
+                    boolean found = true;
+                    for (int j=1; j<listForFind.length; j++) { 
+                        if (!listForFind[j].equals(tokensList[k])) { // One of the other tokens doesn't match
+                            found = false;
+                            break;
+                        }
+                        k++;
+                    }
+                    if (found) {  // All tokens matched
+                        return true;
+                    }
+                 } else {
+                    return false;
+                 }
             }
         }
-        return true;
+        return false;
     }
 
     @Override

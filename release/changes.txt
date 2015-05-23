@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.4 update 1
 ----------------------------------------------------------------------
-  10 Enhancements
+  11 Enhancements
    2 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
@@ -26,6 +26,9 @@
 
   - Add confirmation for the button Reset all colours
   https://sourceforge.net/p/omegat/feature-requests/1085/
+
+  - Option to remove "fuzziness" from glossary 
+  https://sourceforge.net/p/omegat/feature-requests/1033/
 
   Other changes:
 

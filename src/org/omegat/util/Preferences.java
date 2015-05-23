@@ -12,7 +12,7 @@
                     Aaron Madlon-Kay
                2013 Aaron Madlon-Kay, Zoltan Bartko
                2014 Piotr Kulik, Aaron Madlon-Kay
-               2015 Aaron Madlon-Kay, Yu Tang
+               2015 Aaron Madlon-Kay, Yu Tang, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -84,6 +84,8 @@ public class Preferences {
     public static final String GLOSSARY_FOLDER = "glossary_folder";
     public static final String GLOSSARY_FILE = "glossary_file";
     public static final String GLOSSARY_TBX_DISPLAY_CONTEXT = "glossary_tbx_display_context";
+    public static final String GLOSSARY_NOT_EXACT_MATCH="glossary_not_exact_match";
+    public static final String GLOSSARY_STEMMING="glossary_stemming";
 
     public static final String MAINWINDOW_WIDTH = "screen_width";
     public static final String MAINWINDOW_HEIGHT = "screen_height";

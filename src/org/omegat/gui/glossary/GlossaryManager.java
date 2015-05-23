@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009-2010 Alex Buloichik
                2013 Alex Buloichik
+               2015 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -51,6 +52,7 @@ import org.omegat.util.OConsts;
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik <alex73mail@gmail.com>
+ * @author Didier Briel
  */
 public class GlossaryManager implements DirectoryMonitor.Callback {
 
@@ -125,6 +127,10 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
                 fileChanged(f);
             }
         }
+    }
+    
+    public void forceUpdateGlossary() {
+        pane.refresh();
     }
 
     /**

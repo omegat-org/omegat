@@ -29,7 +29,6 @@ package org.omegat.gui.dialogs;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 import javax.swing.JFileChooser;
 import javax.swing.SwingWorker;

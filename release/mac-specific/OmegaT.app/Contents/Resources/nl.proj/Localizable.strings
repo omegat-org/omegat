@@ -1,4 +1,4 @@
-"JRELoadError" = "Java Runtime Environment kan niet geladen worden.";
+﻿"JRELoadError" = "Java Runtime Environment kan niet geladen worden.";
 "JRExLoadError" = "Java %d Runtime Environment kan niet geladen worden.";
 "MainClassNameRequired" = "Naam van hoofdklasse is vereist.";
 "JavaDirectoryNotFound" = "Inhoud Java-map kan niet genummerd worden.";

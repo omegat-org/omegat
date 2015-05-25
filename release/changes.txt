@@ -2,7 +2,7 @@
  OmegaT 3.5
 ----------------------------------------------------------------------
   12 Enhancements
-   2 Bug fixes
+   3 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
 3.5 vs 3.4
@@ -59,6 +59,8 @@ possible to check linguistic (LangageTool) issues
 
   - Script files could be locked 
   https://sourceforge.net/p/omegat/bugs/749/
+
+  - In statistics, scrollbars could cover table content
 
   Localisation updates:
 

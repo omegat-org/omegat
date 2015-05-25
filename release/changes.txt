@@ -142,8 +142,8 @@ of "foo\.\scripts"
  OmegaT 3.1.9 update 2
 ----------------------------------------------------------------------
    1 Enhancement
-   3 Bug fixes
-   2 Localisation updates
+   2 Bug fixes
+   1 Localisation update
 ----------------------------------------------------------------------
 3.1.9 update 2 vs. 3.1.9 update 1
 
@@ -159,13 +159,9 @@ entered as "CSV"
   - Too many duplicate segments in the popup menu
   https://sourceforge.net/p/omegat/bugs/744/
 
-  - There was a compatibility issue with the Okapi plugin with the 
-XML/ITS and Doxygen filter
-
   Localisation updates:
 
  - Brazilian Portuguese localisation updated to 3.0.7 (UI, documentation, readme)
- - Japanese localisation updated to 3.1.9 update 1 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 3.1.9 update 1 (2015-04-15)

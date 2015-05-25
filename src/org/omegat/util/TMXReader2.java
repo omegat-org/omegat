@@ -99,7 +99,7 @@ public class TMXReader2 {
 
     public TMXReader2() {
         factory = XMLInputFactory.newInstance();
-        factory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, true);
+        factory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, false);
         factory.setXMLReporter(new XMLReporter() {
             public void report(String message, String error_type, Object info, Location location)
                     throws XMLStreamException {

@@ -30,15 +30,15 @@
   - Option to remove "fuzziness" from glossary 
   https://sourceforge.net/p/omegat/feature-requests/1033/
 
+  - Better Mac OS X integration
+  https://sourceforge.net/p/omegat/feature-requests/1092/
+
   Other changes:
 
   - There's an explanation message at the bottom of the Editor when
 Ctrl+Shift+O is pressed
 
   - New script to clear SVN authentication data
-
-  - Better OS X integration: Full-screen support, drag-and-drop
-to program icon, main window proxy icon and modification marker
 
   - New OmegaT icon on the Mac
 

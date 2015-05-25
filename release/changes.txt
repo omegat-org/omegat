@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5
 ----------------------------------------------------------------------
-  13 Enhancements
+  14 Enhancements
    3 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
@@ -55,6 +55,12 @@ possible to check linguistic (LangageTool) issues
 
   - Read parameters from config file on startup, specified with 
 --config-file=path/to/file
+
+  - There are two new search options at the bottom of the Search window.
+"Auto-sync with Editor". If checked, the Editor will go automatically to the 
+segment where the cursor is located in the search window.
+"Back to the initial segment on close". If checked, the Editor will go back 
+to the segment being current before the Search window was opened.
 
   Bug fixes:
 

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.4 update 1
 ----------------------------------------------------------------------
-  11 Enhancements
+  12 Enhancements
    2 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
@@ -50,6 +50,8 @@ it is now also possible to specify the path of an omegat.project file
 
   - In the QA - Check rules script (check_rules.groovy), it is now
 possible to check linguistic (LangageTool) issues
+
+  - There's now a "Save as" button in Help > Log
 
   Bug fixes:
 

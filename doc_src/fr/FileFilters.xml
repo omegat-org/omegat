@@ -100,7 +100,7 @@
       <listitem>
         <para><emphasis>Remplacement automatique de 'nplurals=INTEGER; plural=EXPRESSION;' dans l'en-tête</emphasis></para>
 
-        <para><emphasis><emphasis>Cette option permet à OmegaT de remplacer la spécification dans l'en-tête du fichier PO et d'utiliser la valeur par défaut pour la langue cible sélectionnée.</emphasis></emphasis></para>
+        <para><emphasis>Cette option permet à OmegaT de remplacer la spécification dans l'en-tête du fichier PO et d'utiliser la valeur par défaut pour la langue cible sélectionnée.</emphasis></para>
       </listitem>
     </itemizedlist>
 

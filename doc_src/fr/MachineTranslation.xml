@@ -118,7 +118,7 @@
             </listitem>
 
             <listitem>
-              <para>Customer ID (correspond au paramètre de ligne de commande <code><code>microsoft.api.client_id</code></code>)</para>
+              <para>Customer ID (correspond au paramètre de ligne de commande <code>microsoft.api.client_id</code>)</para>
             </listitem>
           </itemizedlist></para>
       </listitem>

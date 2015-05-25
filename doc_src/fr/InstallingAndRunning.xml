@@ -526,7 +526,7 @@
 
             <itemizedlist>
               <listitem>
-                <para><emphasis><emphasis><literal>--mode=console-translate</literal></emphasis></emphasis></para>
+                <para><emphasis><literal>--mode=console-translate</literal></emphasis></para>
 
                 <para>Dans ce mode, OmegaT tente de traduire les fichiers du dossier /source/ avec les mémoires de traduction disponibles. Ce mode est utile pour exécuter OmegaT sur un serveur qui fournit automatiquement des fichiers TMX à un projet.</para>
               </listitem>

@@ -99,6 +99,9 @@ possible to check linguistic (LangageTool) issues
   - Improve fuzzy match difference granularity in Chinese
   https://sourceforge.net/p/omegat/feature-requests/1077/
 
+  - Add option to ignore custom tags in statistics
+  https://sourceforge.net/p/omegat/feature-requests/937/
+
   Other changes:
 
   - New XML Spreadsheet 2003 filter. This allows translating Excel document
@@ -111,12 +114,6 @@ is "Workbook".
 are displayed in bold
 
   - New "Trafficlight" theme in the Switch Colour Theme script
-
-  - Options > Tag Validation was renamed to Tag Processing. In that dialog, 
-there's now an option to decide whether protected text (from the XLIFF filter)
-and custom tags should be counted in statistics. The option is on by default.
-In previous versions, protected text was not counted in the statistics, so
-the option has to be disabled to get the same value as before.
 
   - The font selected in Options > Fonts can be applied now also to statistics
 

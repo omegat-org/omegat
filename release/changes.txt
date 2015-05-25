@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.9 update 2
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    3 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -10,6 +10,10 @@
   Other enhancements:
 
   - Updated LanguageTool to 2.2
+
+  - *.strings (Mac OS X localisation format) was added to the Key=value 
+filter. That's only a partial solution, as " and ; characters remain
+in the translatable text, and have to be preserved by the translator.
 
   Bug fixes:
 

@@ -32,6 +32,7 @@ import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DockingUI;
+import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -61,6 +62,7 @@ public class LogDialog extends javax.swing.JDialog {
         try {
             setTitle(OStrings.getString("LOGDIALOG_TITLE") + " " + Log.getLogFileName());
             logTextPane.setText(FileUtil.readTextFile(logLocation));
+            OSXIntegration.setProxyIcon(getRootPane(), logLocation);
         } catch (Exception e) {
             // We'll get an empty page
         }

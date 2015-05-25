@@ -150,19 +150,20 @@ public class OSXIntegration {
     private static final IProjectEventListener projectListener = new IProjectEventListener() {
         @Override
         public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
+            JRootPane rootPane = Core.getMainWindow().getApplicationFrame().getRootPane();
             switch (eventType) {
             case LOAD:
                 String projDir = Core.getProject().getProjectProperties().getProjectRoot();
-                setProxyIcon(new File(projDir));
+                setProxyIcon(rootPane, new File(projDir));
                 break;
             case CLOSE:
-                setProxyIcon(null);
+                setProxyIcon(rootPane, null);
                 break;
             case MODIFIED:
-                setModifiedIndicator(true);
+                setModifiedIndicator(rootPane, true);
                 break;
             case SAVE:
-                setModifiedIndicator(false);
+                setModifiedIndicator(rootPane, false);
                 break;
             }
         }
@@ -266,13 +267,11 @@ public class OSXIntegration {
         }
     }
 
-    private static void setProxyIcon(File file) {
-        JRootPane rootPane = Core.getMainWindow().getApplicationFrame().getRootPane();
+    public static void setProxyIcon(JRootPane rootPane, File file) {
         rootPane.putClientProperty("Window.documentFile", file);
     }
     
-    private static void setModifiedIndicator(boolean isModified) {
-        JRootPane rootPane = Core.getMainWindow().getApplicationFrame().getRootPane();
+    public static void setModifiedIndicator(JRootPane rootPane, boolean isModified) {
         rootPane.putClientProperty("Window.documentModified", isModified);
     }
     

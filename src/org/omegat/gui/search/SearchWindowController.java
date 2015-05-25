@@ -403,6 +403,19 @@ public class SearchWindowController {
                 if (m_thread != null) {
                     m_thread.fin();
                 }
+
+                // back to the initial segment
+                int currentEntry = Core.getEditor().getCurrentEntryNumber();
+                if (initialEntry > 0 && form.m_backToInitialSegment.isSelected() && initialEntry != currentEntry) {
+                    boolean isSegDisplayed = isSegmentDisplayed(initialEntry);
+                    if (isSegDisplayed) {
+                        // Restore caretPosition too
+                        ((EditorController) Core.getEditor()).gotoEntry(initialEntry, initialCaret);
+                    } else {
+                        // The segment is not displayed (maybe filter on). Ignore caretPosition.
+                        Core.getEditor().gotoEntry(initialEntry);
+                    }
+                }
             }
         });
     }
@@ -909,19 +922,6 @@ public class SearchWindowController {
         if (m_thread != null) {
             m_thread.fin();
         }
-
-        int currentEntry = Core.getEditor().getCurrentEntryNumber();
-        if (initialEntry > 0 && form.m_backToInitialSegment.isSelected() && initialEntry != currentEntry) {
-            boolean isSegDisplayed = isSegmentDisplayed(initialEntry);
-
-            if (isSegDisplayed) {
-                // Restore caretPosition too
-                ((EditorController) Core.getEditor()).gotoEntry(initialEntry, initialCaret);
-            } else {
-                Core.getEditor().gotoEntry(initialEntry);
-            }
-        }
-
         form.dispose();
     }
 

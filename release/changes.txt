@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5
 ----------------------------------------------------------------------
-  12 Enhancements
+  13 Enhancements
    3 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
@@ -52,6 +52,9 @@ it is now also possible to specify the path of an omegat.project file
 possible to check linguistic (LangageTool) issues
 
   - There's now a "Save as" button in Help > Log
+
+  - Read parameters from config file on startup, specified with 
+--config-file=path/to/file
 
   Bug fixes:
 

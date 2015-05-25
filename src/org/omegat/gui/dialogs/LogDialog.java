@@ -29,7 +29,11 @@ package org.omegat.gui.dialogs;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+
 import javax.swing.JFileChooser;
+import javax.swing.SwingWorker;
+
 import org.omegat.util.FileUtil;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
@@ -62,21 +66,33 @@ public class LogDialog extends javax.swing.JDialog {
         super(parent, true);
         initComponents();
         
-        File logLocation = new File (Log.getLogFilePath());
-        try {
-            setTitle(OStrings.getString("LOGDIALOG_TITLE") + " " + Log.getLogFileName());
-            logTextPane.setText(FileUtil.readTextFile(logLocation));
-            OSXIntegration.setProxyIcon(getRootPane(), logLocation);
-        } catch (Exception e) {
-            // We'll get an empty page
-        }
+        setTitle(OStrings.getString("LOGDIALOG_TITLE") + " " + Log.getLogFileName());
         
         StaticUIUtils.setEscapeClosable(this);
         
         setSize(600, 400);
         DockingUI.displayCentered(this);
         
-        logTextPane.setCaretPosition(0);
+        final File logLocation = new File(Log.getLogFilePath());
+        new SwingWorker<String, Object>() {
+            @Override
+            protected String doInBackground() throws Exception {
+                try {
+                    return FileUtil.readTextFile(logLocation);
+                } catch (Exception e) {
+                    return "";
+                }
+            }
+            protected void done() {
+                try {
+                    logTextPane.setText(get());
+                } catch (Exception e) {
+                    Log.log(e);
+                }
+                logTextPane.setCaretPosition(0);
+                OSXIntegration.setProxyIcon(getRootPane(), logLocation);
+            };
+        }.execute();
     }
 
     /**

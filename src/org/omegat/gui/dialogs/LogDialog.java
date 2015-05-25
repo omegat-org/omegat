@@ -28,9 +28,13 @@
 package org.omegat.gui.dialogs;
 
 import java.io.File;
+import java.io.IOException;
+import javax.swing.JFileChooser;
 import org.omegat.util.FileUtil;
+import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.StaticUIUtils;
@@ -95,6 +99,7 @@ public class LogDialog extends javax.swing.JDialog {
         logTextPane = new javax.swing.JTextPane();
         buttonPanel = new javax.swing.JPanel();
         innerButtonPanel = new javax.swing.JPanel();
+        saveAsButton = new javax.swing.JButton();
         okButton = new javax.swing.JButton();
 
         setTitle(OStrings.getString("LOGDIALOG_TITLE")); // NOI18N
@@ -112,6 +117,14 @@ public class LogDialog extends javax.swing.JDialog {
         buttonPanel.setLayout(new java.awt.BorderLayout());
 
         innerButtonPanel.setLayout(new javax.swing.BoxLayout(innerButtonPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(saveAsButton, OStrings.getString("BUTTON_SAVE_AS")); // NOI18N
+        saveAsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveAsButtonActionPerformed(evt);
+            }
+        });
+        innerButtonPanel.add(saveAsButton);
 
         org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
         okButton.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +149,25 @@ public class LogDialog extends javax.swing.JDialog {
         doClose(RET_CANCEL);
     }//GEN-LAST:event_closeDialog
 
+    private void saveAsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsButtonActionPerformed
+        String curDir = Preferences.getPreferenceDefault(Preferences.CURRENT_FOLDER, System.getProperty("user.home"));
+        JFileChooser chooser = new JFileChooser();
+        chooser.setSelectedFile(new File(curDir, Log.getLogFileName()));
+        if (chooser.showSaveDialog(this) != JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+        File outFile = chooser.getSelectedFile();
+        if (outFile.exists() && !FileCollisionDialog.promptToReplace(this, outFile.getName())) {
+            return;
+        }
+        try {
+            LFileCopy.copy(new File (Log.getLogFilePath()), chooser.getSelectedFile());
+        } catch (IOException ex) {
+            Log.log(ex);
+        }
+        Preferences.setPreference(Preferences.CURRENT_FOLDER, outFile.getParent());
+    }//GEN-LAST:event_saveAsButtonActionPerformed
+
     private void doClose(int retStatus) {
         returnStatus = retStatus;
         setVisible(false);
@@ -147,6 +179,7 @@ public class LogDialog extends javax.swing.JDialog {
     private javax.swing.JPanel innerButtonPanel;
     private javax.swing.JTextPane logTextPane;
     private javax.swing.JButton okButton;
+    private javax.swing.JButton saveAsButton;
     private javax.swing.JScrollPane scroll;
     // End of variables declaration//GEN-END:variables
 }

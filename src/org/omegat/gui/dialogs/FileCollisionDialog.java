@@ -42,11 +42,29 @@ public class FileCollisionDialog extends javax.swing.JDialog {
 
     private JButton userClicked;
     
+    public static boolean promptToReplace(javax.swing.JDialog parent, String filename) {
+        FileCollisionDialog dialog = new FileCollisionDialog(parent);
+        dialog.setFilename(filename);
+        dialog.enableApplyToAll(false);
+        dialog.pack();
+        dialog.setVisible(true);
+        return dialog.shouldReplace();
+    }
+    
     /**
      * Creates new form FileCollisionDialog
      */
     public FileCollisionDialog(java.awt.Frame parent) {
         super(parent, true);
+        grandInit();
+    }
+    
+    public FileCollisionDialog(javax.swing.JDialog parent) {
+        super(parent, true);
+        grandInit();
+    }
+    
+    private void grandInit() {
         initComponents();
         icon.setIcon(UIManager.getIcon("OptionPane.warningIcon"));
         DockingUI.displayCentered(this);

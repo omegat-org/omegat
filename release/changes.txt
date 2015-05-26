@@ -2,7 +2,7 @@
  OmegaT 3.5
 ----------------------------------------------------------------------
   14 Enhancements
-   3 Bug fixes
+   4 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
 3.5 vs 3.4
@@ -70,6 +70,8 @@ to the segment being current before the Search window was opened.
   https://sourceforge.net/p/omegat/bugs/749/
 
   - In statistics, scrollbars could cover table content
+
+  - Auto-completer popup size was often too small for its contents
 
   Localisation updates:
 

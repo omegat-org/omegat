@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5
 ----------------------------------------------------------------------
-  14 Enhancements
+  15 Enhancements
    4 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
@@ -32,6 +32,9 @@
 
   - Better Mac OS X integration
   https://sourceforge.net/p/omegat/feature-requests/1092/
+
+  - Remove automatically mnemonics for CJK bundles under Mac
+  https://sourceforge.net/p/omegat/feature-requests/1049/
 
   Other changes:
 

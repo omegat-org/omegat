@@ -49,6 +49,8 @@ package org.openide.awt;
 
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
+
 import javax.swing.AbstractButton;
 import javax.swing.JLabel;
 
@@ -59,6 +61,8 @@ import javax.swing.JLabel;
  * @see <a href="http://www.netbeans.org/issues/show_bug.cgi?id=26640">Issue #26640</a>
  */
 public final class Mnemonics extends Object {
+    
+    private static Pattern RE_MNEMONIC_END = Pattern.compile("\\s*\\(&[A-Za-z0-9]\\)$");
     
     /** Private constructor in order that this class is never instantiated. */
     private Mnemonics() {}
@@ -103,7 +107,11 @@ public final class Mnemonics extends Object {
             setText(item, null);
             return;
         }
-        
+        if (isMacOS()) {
+            // remove shortcuts at the end because MacOS doesn't support mnemonics
+            text = RE_MNEMONIC_END.matcher(text).replaceFirst("");
+        }
+
         int i = findMnemonicAmpersand(text);
 
         if (i < 0) {
@@ -164,7 +172,7 @@ public final class Mnemonics extends Object {
         
         // OmegaT tweak
         // if we're running on non-MacOSX, we don't set any mnemonics
-		if( System.getProperty("os.name").contains("OS X") ) {   
+        if (isMacOS()) {
 			setMnemonic(item, 0);
         }
         else {
@@ -270,5 +278,9 @@ public final class Mnemonics extends Object {
      */
     private static ResourceBundle getBundle() {
         return ResourceBundle.getBundle("org.openide.awt.Mnemonics"); 
+    }
+
+    private static boolean isMacOS() {
+        return System.getProperty("os.name").contains("OS X");
     }
 }

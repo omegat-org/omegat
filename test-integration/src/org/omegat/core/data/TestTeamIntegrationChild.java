@@ -57,6 +57,7 @@ import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.IPopupMenuConstructor;
+import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
@@ -395,6 +396,11 @@ public class TestTeamIntegrationChild {
         }
 
         public void activateEntry() {
+        }
+
+        @Override
+        public IAutoCompleter getAutoCompleter() {
+            return null;
         }
     };
 

@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
-               2014 Aaron Madlon-Kay
+               2014-2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -63,8 +63,8 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     private static AutoCompleterItem NO_SUGGESTIONS = new AutoCompleterItem(
             OStrings.getString("AC_NO_SUGGESTIONS"), null, 0);
     
-    public AutoCompleterListView(String name, AutoCompleter completer) {
-        super(name, completer);
+    public AutoCompleterListView(String name) {
+        super(name);
         getList().setFocusable(false);
     }
     
@@ -72,21 +72,23 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
         if (list == null) {
             list = new JList();
             list.setCellRenderer(new CellRenderer());
-            list.addMouseListener(new MouseAdapter() {
-            	@Override
-            	public void mouseClicked(MouseEvent e) {
-            		if (e.getClickCount() == 2) {
-            			Point p = e.getPoint();
-            			int i = list.locationToIndex(p);
-            			if (list.getSelectedIndex() == i && list.getCellBounds(i, i).contains(p)) {
-            				completer.doSelection();
-            			}
-            		}
-            	}
-			});
+            list.addMouseListener(mouseAdapter);
         }
         return list;
     }
+    
+    private final MouseAdapter mouseAdapter = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) {
+                Point p = e.getPoint();
+                int i = list.locationToIndex(p);
+                if (list.getSelectedIndex() == i && list.getCellBounds(i, i).contains(p)) {
+                    completer.doSelection();
+                }
+            }
+        }
+    };
     
     @Override
     public boolean processKeys(KeyEvent e, boolean visible) {

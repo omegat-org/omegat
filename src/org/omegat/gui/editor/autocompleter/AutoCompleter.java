@@ -59,7 +59,7 @@ import org.omegat.util.StaticUtils;
  * @author Zoltan Bartko <bartkozoltan@bartkozoltan.com>
  * @author Aaron Madlon-Kay
  */
-public class AutoCompleter {    
+public class AutoCompleter implements IAutoCompleter {    
     
     private final static int GO_NEXT_KEY = KeyEvent.VK_RIGHT;
     private final static int GO_PREV_KEY = KeyEvent.VK_LEFT;
@@ -102,10 +102,10 @@ public class AutoCompleter {
         scroll.getHorizontalScrollBar().setFocusable(false); 
         
         // add any views here
-        views.add(new GlossaryAutoCompleterView(this));
-        views.add(new AutotextAutoCompleterView(this));
-        views.add(new TagAutoCompleterView(this));
-        views.add(new CharTableAutoCompleterView(this));
+        addView(new GlossaryAutoCompleterView());
+        addView(new AutotextAutoCompleterView());
+        addView(new TagAutoCompleterView());
+        addView(new CharTableAutoCompleterView());
 
         viewLabel = new JLabel();
         viewLabel.setBorder(new CompoundBorder(
@@ -118,6 +118,12 @@ public class AutoCompleter {
         popup.add(viewLabel, BorderLayout.SOUTH);
         selectNextView();
     } 
+
+    @Override
+    public void addView(AbstractAutoCompleterView view) {
+        view.setParent(this);
+        views.add(view);
+    }
 
     public EditorTextArea3 getEditor() {
         return editor;

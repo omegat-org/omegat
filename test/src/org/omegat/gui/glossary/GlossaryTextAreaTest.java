@@ -38,6 +38,7 @@ import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.IPopupMenuConstructor;
+import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.Preferences;
 
@@ -228,6 +229,11 @@ public class GlossaryTextAreaTest extends TestCore {
             
             @Override
             public void waitForCommit(int timeoutSeconds) {   
+            }
+
+            @Override
+            public IAutoCompleter getAutoCompleter() {
+                return null;
             }
         });
     }

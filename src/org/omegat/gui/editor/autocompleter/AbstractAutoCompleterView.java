@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
-               2014 Aaron Madlon-Kay
+               2014-2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -53,11 +53,9 @@ abstract public class AbstractAutoCompleterView {
     /**
      * Creates a new auto-completer view.
      * @param name the name of this view
-     * @param completer the completer it belongs to
      */
-    public AbstractAutoCompleterView(String name, AutoCompleter completer) {
+    public AbstractAutoCompleterView(String name) {
         this.name = name;
-        this.completer = completer;
     }
     
     /**
@@ -65,6 +63,14 @@ abstract public class AbstractAutoCompleterView {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * Set the AutoCompleter that this view belongs to.
+     * @param completer
+     */
+    public void setParent(AutoCompleter completer) {
+        this.completer = completer;
     }
 
     /**

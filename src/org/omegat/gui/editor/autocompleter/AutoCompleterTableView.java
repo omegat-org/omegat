@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
-               2014 Aaron Madlon-Kay
+               2014-2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -51,8 +51,8 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
      */
     private static JTable table;
     
-    public AutoCompleterTableView(String name, AutoCompleter completer) {
-        super(name,completer);
+    public AutoCompleterTableView(String name) {
+        super(name);
         getTable().changeSelection(0, 0, false, false);
     }
     
@@ -70,22 +70,24 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
             table.setCellSelectionEnabled(true);
             table.setFocusable(false);
             table.setTableHeader(null);
-            table.addMouseListener(new MouseAdapter() {
-            	@Override
-            	public void mouseClicked(MouseEvent e) {
-            		if (e.getClickCount() == 2) {
-            			Point p = e.getPoint();
-            			int r = table.rowAtPoint(p);
-            			int c = table.columnAtPoint(p);
-            			if (table.getSelectedRow() == r && table.getSelectedColumn() == c) {
-            				completer.doSelection();
-            			}
-            		}
-            	}
-			});
+            table.addMouseListener(mouseAdapter);
         }
         return table;
     }
+    
+    private final MouseAdapter mouseAdapter = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) {
+                Point p = e.getPoint();
+                int r = table.rowAtPoint(p);
+                int c = table.columnAtPoint(p);
+                if (table.getSelectedRow() == r && table.getSelectedColumn() == c) {
+                    completer.doSelection();
+                }
+            }
+        }
+    };
     
     @Override
     public Component getViewContent() {

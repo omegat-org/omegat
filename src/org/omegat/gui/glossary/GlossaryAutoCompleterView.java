@@ -33,7 +33,6 @@ import java.util.List;
 import org.omegat.core.Core;
 import org.omegat.gui.editor.autocompleter.AutoCompleterItem;
 import org.omegat.gui.editor.autocompleter.AutoCompleterListView;
-import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 
@@ -45,8 +44,8 @@ import org.omegat.util.Preferences;
  */
 public class GlossaryAutoCompleterView extends AutoCompleterListView {
 
-    public GlossaryAutoCompleterView(AutoCompleter completer) {
-        super(OStrings.getString("AC_GLOSSARY_VIEW"), completer);
+    public GlossaryAutoCompleterView() {
+        super(OStrings.getString("AC_GLOSSARY_VIEW"));
     }
 
     @Override

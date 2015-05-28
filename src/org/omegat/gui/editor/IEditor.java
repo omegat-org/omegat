@@ -33,6 +33,7 @@ import java.util.List;
 
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.Mark;
 
 /**
@@ -368,4 +369,9 @@ public interface IEditor {
      * Wait for the user to commit the current translation.
      */
     void waitForCommit(int timeoutSeconds);
+
+    /**
+     * Access the AutoCompleter
+     */
+    IAutoCompleter getAutoCompleter();
 }

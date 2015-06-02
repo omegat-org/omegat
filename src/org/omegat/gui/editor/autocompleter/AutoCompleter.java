@@ -201,8 +201,12 @@ public class AutoCompleter implements IAutoCompleter {
     /**
      * Show the popup list.
      */
-    public void updatePopup() { 
-        if (!isVisible()) {
+    public void updatePopup() {
+        updatePopup(false);
+    }
+    
+    public void updatePopup(boolean force) { 
+        if (!force && !isVisible()) {
             return;
         }
         
@@ -341,8 +345,8 @@ public class AutoCompleter implements IAutoCompleter {
     }
 
     public void setVisible(boolean isVisible) {
-         popup.setVisible(isVisible);
-         updatePopup();
+        updatePopup(isVisible);
+        popup.setVisible(isVisible);
     }
     
     /** 

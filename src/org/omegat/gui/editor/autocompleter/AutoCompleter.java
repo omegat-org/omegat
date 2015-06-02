@@ -184,8 +184,10 @@ public class AutoCompleter implements IAutoCompleter {
     }
     
     public void doSelection() {
-        acceptedListItem(getSelectedValue()); 
-        setVisible(false);
+        acceptedListItem(getSelectedValue());
+        if (getCurrentView().shouldCloseOnSelection()) {
+            setVisible(false);
+        }
     }
     
     /**

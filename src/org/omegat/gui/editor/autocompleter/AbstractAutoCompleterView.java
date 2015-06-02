@@ -142,4 +142,14 @@ abstract public class AbstractAutoCompleterView {
     protected int getModifiedRowCount() {
         return Math.min(getRowCount(), AutoCompleter.pageRowCount);
     }
+
+    /**
+     * Indicates whether or not the AutoCompleter should close by default when the
+     * user confirms a selection. Override and return false to keep the popup open.
+     * 
+     * @return Whether or not the AutoCompleter popup should close upon selection
+     */
+    public boolean shouldCloseOnSelection() {
+        return true;
+    }
 }

@@ -103,79 +103,59 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
     }
     
     @Override
-    public boolean processKeys(KeyEvent e, boolean visible) {
+    public boolean processKeys(KeyEvent e) {
         
         if (StaticUtils.isKey(e, KeyEvent.VK_UP, 0)) {
             // process key UP
-            if (visible) {
-                selectPreviousPossibleValueUp();
-            }
+            selectPreviousPossibleValueUp();
             return true;
         }
 
         if (StaticUtils.isKey(e, KeyEvent.VK_LEFT, 0)) {
             // process key LEFT
-            if (visible) {
-                selectPreviousPossibleValueLeft();
-            }
+            selectPreviousPossibleValueLeft();
             return true;
         }
         
         if (StaticUtils.isKey(e, KeyEvent.VK_DOWN, 0)) {
             // process key DOWN
-            if (visible) {
-                selectNextPossibleValueDown();
-            }
+            selectNextPossibleValueDown();
             return true;
         }
 
         if (StaticUtils.isKey(e, KeyEvent.VK_RIGHT, 0)) {
             // process key RIGHT
-            if (visible) {
-                selectNextPossibleValueRight();
-            }
+            selectNextPossibleValueRight();
             return true;
         }
         
         if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_UP, 0)) {
-            if (visible) {
-                selectPreviousPossibleValueByPage();
-            }
+            selectPreviousPossibleValueByPage();
             return true;
         }
 
         if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_DOWN, 0)) {
-            if (visible) {
-                selectNextPossibleValueByPage();
-            }
+            selectNextPossibleValueByPage();
             return true;
         }
         
         if (StaticUtils.isKey(e, KeyEvent.VK_HOME, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
-            if (visible) {
-                selectFirstPossibleValue();
-            }
+            selectFirstPossibleValue();
             return true;
         }
 
         if (StaticUtils.isKey(e, KeyEvent.VK_END, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
-            if (visible) {
-                selectLastPossibleValue();
-            }
+            selectLastPossibleValue();
             return true;
         }
         
         if (StaticUtils.isKey(e, KeyEvent.VK_HOME, 0)) {
-            if (visible) {
-                selectFirstPossibleValueInLine();
-            }
+            selectFirstPossibleValueInLine();
             return true;
         }
 
         if (StaticUtils.isKey(e, KeyEvent.VK_END, 0)) {
-            if (visible) {
-                selectLastPossibleValueInLine();
-            }
+            selectLastPossibleValueInLine();
             return true;
         }
         

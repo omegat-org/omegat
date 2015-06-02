@@ -91,34 +91,26 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     };
     
     @Override
-    public boolean processKeys(KeyEvent e, boolean visible) {
+    public boolean processKeys(KeyEvent e) {
         if (StaticUtils.isKey(e, KeyEvent.VK_UP, 0)) {
             // process key UP
-            if (visible) {
-                selectPreviousPossibleValue();
-            }
+            selectPreviousPossibleValue();
             return true;
         }
 
         if (StaticUtils.isKey(e, KeyEvent.VK_DOWN, 0)) {
             // process key DOWN
-            if (visible) {
-                selectNextPossibleValue();
-            }
+            selectNextPossibleValue();
             return true;
         }
 
         if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_UP, 0)) {
-            if (visible) {
-                selectPreviousPossibleValueByPage();
-            }
+            selectPreviousPossibleValueByPage();
             return true;
         }
 
         if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_DOWN, 0)) {
-            if (visible) {
-                selectNextPossibleValueByPage();
-            }
+            selectNextPossibleValueByPage();
             return true;
         }
 

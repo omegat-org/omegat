@@ -160,9 +160,8 @@ public class EditorTextArea3 extends JEditorPane {
     protected MouseListener mouseListener = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
-            if (autoCompleter.isVisible()) {
-                autoCompleter.hidePopup();
-            }
+            autoCompleter.setVisible(false);
+            
             // where is the mouse
             int mousepos = viewToModel(e.getPoint());
             if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {

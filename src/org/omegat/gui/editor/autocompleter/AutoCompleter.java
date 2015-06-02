@@ -72,8 +72,6 @@ public class AutoCompleter implements IAutoCompleter {
     
     boolean onMac = Platform.isMacOSX();
     
-    private boolean visible = false;
-    
     public final static int pageRowCount = 10;
     
     /**
@@ -145,15 +143,13 @@ public class AutoCompleter implements IAutoCompleter {
 
             setVisible(true);
             
-            if (!popup.isVisible()) {
-                updatePopup();
-            }
             return true;
         }
         
         if (isVisible()) {
-            if (views.get(currentView).processKeys(e, popup.isVisible()))
+            if (views.get(currentView).processKeys(e)) {
                 return true;
+            }
             
             if ((StaticUtils.isKey(e, KeyEvent.VK_ENTER, 0))) {
                 doSelection();
@@ -167,22 +163,18 @@ public class AutoCompleter implements IAutoCompleter {
             }
 
             if ((StaticUtils.isKey(e, KeyEvent.VK_ESCAPE, 0))) {
-                hidePopup();
+                setVisible(false);
                 return true;
             }
             
             if (StaticUtils.isKey(e, GO_PREV_KEY, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
-                if (popup.isVisible()) {
-                    selectPreviousView();
-                }
+                selectPreviousView();
                 return true;
             }
             
             if ((!onMac && StaticUtils.isKey(e, KeyEvent.VK_SPACE, KeyEvent.CTRL_MASK))
                     || StaticUtils.isKey(e, GO_NEXT_KEY, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
-                if (popup.isVisible()) {
-                    selectNextView();
-                }
+                selectNextView();
                 return true;
             }
         }
@@ -192,17 +184,8 @@ public class AutoCompleter implements IAutoCompleter {
     }
     
     public void doSelection() {
-    	popup.setVisible(false); 
         acceptedListItem(getSelectedValue()); 
         setVisible(false);
-    }
-
-    /**
-     * hide the popup
-     */
-    public void hidePopup() {
-        setVisible(false);
-        popup.setVisible(false); 
     }
     
     /**
@@ -355,18 +338,13 @@ public class AutoCompleter implements IAutoCompleter {
         activateView();
     }
 
-    /**
-     * @return the autoCompleterVisible
-     */
     public boolean isVisible() {
-        return visible;
+        return popup.isVisible();
     }
 
-    /**
-     * @param autoCompleterVisible the autoCompleterVisible to set
-     */
-    public void setVisible(boolean autoCompleterVisible) {
-         this.visible = autoCompleterVisible;
+    public void setVisible(boolean isVisible) {
+         popup.setVisible(isVisible);
+         updatePopup();
     }
     
     /** 

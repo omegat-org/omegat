@@ -741,7 +741,7 @@ public class EditorController implements IEditor {
             CoreEvents.fireEntryNewFile(Core.getProject().getProjectFiles().get(displayedFileIndex).filePath);
         }
 
-        editor.autoCompleter.hidePopup();
+        editor.autoCompleter.setVisible(false);
         editor.repaint();
 
         // fire event about new segment activated
@@ -2165,7 +2165,7 @@ public class EditorController implements IEditor {
 
     @Override
     public void windowDeactivated() {
-        editor.autoCompleter.hidePopup();
+        editor.autoCompleter.setVisible(false);
     }
 
     /**

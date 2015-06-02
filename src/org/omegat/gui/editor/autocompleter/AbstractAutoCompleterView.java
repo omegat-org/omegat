@@ -87,7 +87,7 @@ abstract public class AbstractAutoCompleterView {
      * @param e the key event to process
      * @return true if a key has been processed, false if otherwise.
      */
-    public abstract boolean processKeys(KeyEvent e, boolean visible);
+    public abstract boolean processKeys(KeyEvent e);
     
     /**
      * return the size of the data list / array.

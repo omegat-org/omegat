@@ -264,7 +264,9 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
             if (value == NO_SUGGESTIONS) {
                 setText(((AutoCompleterItem)value).payload);
             } else {
-                setText(itemToString((AutoCompleterItem)value));
+                AutoCompleterListView aclView = (AutoCompleterListView) completer.getCurrentView();
+                AutoCompleterItem acItem = (AutoCompleterItem) value;
+                setText(aclView.itemToString(acItem));
             }
             if (isSelected) {
                 setBackground(list.getSelectionBackground());

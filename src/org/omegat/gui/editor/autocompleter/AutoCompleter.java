@@ -317,7 +317,7 @@ public class AutoCompleter implements IAutoCompleter {
         viewLabel.setText(sb.toString());
     }
 
-    private AbstractAutoCompleterView getCurrentView() {
+    public AbstractAutoCompleterView getCurrentView() {
         return views.get(currentView);
     }
     

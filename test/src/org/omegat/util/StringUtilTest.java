@@ -46,7 +46,7 @@ public class StringUtilTest extends TestCase {
         assertFalse(StringUtil.isTitleCase("fooBar"));
         assertFalse(StringUtil.isTitleCase("f1obar"));
         assertFalse(StringUtil.isTitleCase("FooBar"));
-        assertFalse(StringUtil.isTitleCase("Fo1bar"));
+        assertTrue(StringUtil.isTitleCase("Fo1bar"));
         assertTrue(StringUtil.isTitleCase("Foobar"));
     }
     

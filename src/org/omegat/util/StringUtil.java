@@ -76,9 +76,9 @@ public class StringUtil {
      */
     public static boolean isTitleCase(final String input) {
         if (input.length() > 1)
-            return Character.isTitleCase(input.charAt(0)) && isLowerCase(input.substring(1));
+            return Character.isUpperCase(input.charAt(0)) && isLowerCase(input.substring(1));
         else
-            return Character.isTitleCase(input.charAt(0));
+            return Character.isUpperCase(input.charAt(0));
     }
 
     /**

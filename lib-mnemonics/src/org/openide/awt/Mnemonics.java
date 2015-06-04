@@ -62,7 +62,7 @@ import javax.swing.JLabel;
  */
 public final class Mnemonics extends Object {
     
-    private static Pattern RE_MNEMONIC_END = Pattern.compile("\\s*\\(&[A-Za-z0-9]\\)$");
+    private static final Pattern RE_MNEMONIC_END = Pattern.compile("\\s*\\(&[A-Za-z0-9]\\)(?=[.\\uFF1A]*$)");
     
     /** Private constructor in order that this class is never instantiated. */
     private Mnemonics() {}
@@ -109,6 +109,7 @@ public final class Mnemonics extends Object {
         }
         if (isMacOS()) {
             // remove shortcuts at the end because MacOS doesn't support mnemonics
+            // text i.e. "Open(&O)..." will be "Open..."
             text = RE_MNEMONIC_END.matcher(text).replaceFirst("");
         }
 

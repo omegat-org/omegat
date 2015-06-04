@@ -447,7 +447,7 @@
 
               <entry><keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo>（右を参照）</entry>
 
-              <entry>訳文分節中の選択したテキストに対し、ケースを変更します（すべて小文字→すべて大文字→Title case：単語先頭のみ大文字）。［Shift+F3］<indexterm>
+              <entry>訳文分節中の選択したテキストに対し、ケースを変更します（すべて小文字→すべて大文字→単語の先頭を大文字に）。［Shift+F3］<indexterm>
                   <primary>ショートカット</primary> <secondary>大/小文字設定 - Shift+F3</secondary>
                 </indexterm>で、上記３通りを順に切り替えて実行します。テキストを何も選択していない場合、<application>OmegaT</application> はカーソル右にある単語をその場で選択して実行します。</entry>
             </row>

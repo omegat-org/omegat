@@ -114,6 +114,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.event.DockableSelectionEvent;
 import com.vlsolutions.swing.docking.event.DockableSelectionListener;
+import org.omegat.util.PatternConsts;
 
 /**
  * Class for control all editor operations.
@@ -1681,6 +1682,10 @@ public class EditorController implements IEditor {
 
                 for (Token token : tokenList) {
                     String word = token.getTextFromString(selectionText);
+                    boolean whitespaceOnly = PatternConsts.SPACE_TAB.matcher(word).matches();
+                    if (whitespaceOnly) {
+                        continue;
+                    }
                     if (StringUtil.isLowerCase(word)) {
                         lower++;
                         continue;

@@ -75,14 +75,23 @@ public class StringUtil {
     }
 
     /**
-     * Returns true if the input is title case.
+     * Returns true if the input is title case, meaning the first character is UpperCase or
+     * TitleCase* and the rest of the string (if present) is LowerCase.
+     * <p>
+     * *There are exotic characters that are neither UpperCase nor LowerCase, but are TitleCase:
+     * e.g. LATIN CAPITAL LETTER L WITH SMALL LETTER J (U+01C8)<br>
+     * These are handled correctly.
      */
     public static boolean isTitleCase(final String input) {
         if (input.length() > 1) {
-            return Character.isUpperCase(input.codePointAt(0)) && isLowerCase(input.substring(input.offsetByCodePoints(0, 1)));
+            return isTitleOrUpper(input.codePointAt(0)) && isLowerCase(input.substring(input.offsetByCodePoints(0, 1)));
         } else {
-            return Character.isUpperCase(input.codePointAt(0));
+            return isTitleOrUpper(input.codePointAt(0));
         }
+    }
+    
+    private static boolean isTitleOrUpper(int codePoint) {
+        return Character.isUpperCase(codePoint) || Character.isTitleCase(codePoint);
     }
 
     /**

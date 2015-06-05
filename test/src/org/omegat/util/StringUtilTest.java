@@ -48,6 +48,9 @@ public class StringUtilTest extends TestCase {
         assertFalse(StringUtil.isTitleCase("FooBar"));
         assertTrue(StringUtil.isTitleCase("Fo1bar"));
         assertTrue(StringUtil.isTitleCase("Foobar"));
+        // LATIN CAPITAL LETTER L WITH SMALL LETTER J (U+01C8)
+        assertTrue(StringUtil.isTitleCase("\u01C8bcd"));
+        assertFalse(StringUtil.isTitleCase("a\u01C8bcd"));
     }
     
     public void testIsSubstringBefore() {

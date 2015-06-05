@@ -41,7 +41,7 @@ public class StringUtilTest extends TestCase {
         assertTrue(StringUtil.isSubstringAfter("123456", 1, "23"));
     }
 
-        public void testIsTitleCase() {
+    public void testIsTitleCase() {
         assertFalse(StringUtil.isTitleCase("foobar"));
         assertFalse(StringUtil.isTitleCase("fooBar"));
         assertFalse(StringUtil.isTitleCase("f1obar"));

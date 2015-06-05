@@ -92,4 +92,16 @@ public class StringUtilTest extends TestCase {
         assertFalse(StringUtil.isLowerCase(test));
         assertFalse(StringUtil.isTitleCase(test));
     }
+    
+    public void testEmptyStringCase() {
+        String test = null;
+        assertFalse(StringUtil.isUpperCase(test));
+        assertFalse(StringUtil.isLowerCase(test));
+        assertFalse(StringUtil.isTitleCase(test));
+        
+        test = "";
+        assertFalse(StringUtil.isUpperCase(test));
+        assertFalse(StringUtil.isLowerCase(test));
+        assertFalse(StringUtil.isTitleCase(test));
+    }
 }

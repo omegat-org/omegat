@@ -52,6 +52,9 @@ public class StringUtil {
      * Returns true if the input is lowercase.
      */
     public static boolean isLowerCase(final String input) {
+        if (StringUtil.isEmpty(input)) {
+            return false;
+        }
         for (int i = 0, cp; i < input.length(); i += Character.charCount(cp)) {
             cp = input.codePointAt(i);
             if (Character.isLetter(cp) && !Character.isLowerCase(cp)) {
@@ -65,6 +68,9 @@ public class StringUtil {
      * Returns true if the input is upper case.
      */
     public static boolean isUpperCase(final String input) {
+        if (StringUtil.isEmpty(input)) {
+            return false;
+        }
         for (int i = 0, cp; i < input.length(); i += Character.charCount(cp)) {
             cp = input.codePointAt(i);
             if (Character.isLetter(cp) && !Character.isUpperCase(cp)) {
@@ -83,6 +89,9 @@ public class StringUtil {
      * These are handled correctly.
      */
     public static boolean isTitleCase(final String input) {
+        if (StringUtil.isEmpty(input)) {
+            return false;
+        }
         if (input.length() > 1) {
             return isTitleOrUpper(input.codePointAt(0)) && isLowerCase(input.substring(input.offsetByCodePoints(0, 1)));
         } else {

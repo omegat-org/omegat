@@ -29,25 +29,27 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.machine.translate"></a>第21章 機械翻訳<a class="indexterm" name="d0e8619"></a></h1>
+                  <h1 class="title"><a name="chapter.machine.translate"></a>第21章 機械翻訳<a class="indexterm" name="d0e8641"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8622">1. はじめに</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8644">1. はじめに</a></span></dt>
                <dt><span class="section"><a href="chapter.machine.translate.html#introduction">2. Google Translate</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8663">3. <span class="application">OmegaT</span> ユーザーと Google Translate</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8712">4. Belazar</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8724">5. Apertium</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#Google.Translate.troubleshooting">6. 機械翻訳 - トラブルシューティング</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8685">3. <span class="application">OmegaT</span> ユーザーと Google Translate</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8734">4. Belazar</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8746">5. Apertium</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8774">6. Microsoft Translator</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8813">7. Yandex Translate</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#Google.Translate.troubleshooting">8. 機械翻訳 - トラブルシューティング</a></span></dt>
             </dl>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8622"></a>1. はじめに<a class="indexterm" name="d0e8625"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8644"></a>1. はじめに<a class="indexterm" name="d0e8647"></a></h2>
                   </div>
                </div>
             </div>
@@ -60,7 +62,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="introduction"></a>2. Google Translate<a class="indexterm" name="d0e8643"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="introduction"></a>2. Google Translate<a class="indexterm" name="d0e8665"></a></h2>
                   </div>
                </div>
             </div>
@@ -74,7 +76,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8663"></a>3. <span class="application">OmegaT</span> ユーザーと Google Translate
+                     <h2 class="title" style="clear: both"><a name="d0e8685"></a>3. <span class="application">OmegaT</span> ユーザーと Google Translate
                      </h2>
                   </div>
                </div>
@@ -88,7 +90,7 @@
                </div>
             </div><br class="figure-break"><p>スペイン語の翻訳は、スロヴェニア語の翻訳よりも高品質です。動詞「interest」と「sail」はそれぞれ、スペイン語「<span class="emphasis"><em>interesar</em></span>」と「<span class="emphasis"><em>navegar</em></span>」に正しく翻訳されています。一方、スロヴェニア語の方は、どちらの単語も名詞として翻訳されています。この場合、スペイン語の翻訳は少なくとも部分的に、実際の書物の翻訳に基づいている可能性が高いと言えます。
             </p>
-            <p>いったん機械翻訳を有効にした後は、原文分節を新しく移動するたびに、機械翻訳ウィンドウにその翻訳の候補が表示されます。その候補を適用したい場合は、<span class="keycap"><strong><a class="indexterm" name="d0e8693"></a>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> を押すと、編集中の訳文分節が置換されます。上の例で言えば、<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> を押すと、スペイン語の訳文がスロヴェニア語の候補に置換されます。
+            <p>いったん機械翻訳を有効にした後は、原文分節を新しく移動するたびに、機械翻訳ウィンドウにその翻訳の候補が表示されます。その候補を適用したい場合は、<span class="keycap"><strong><a class="indexterm" name="d0e8715"></a>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> を押すと、編集中の訳文分節が置換されます。上の例で言えば、<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> を押すと、スペイン語の訳文がスロヴェニア語の候補に置換されます。
             </p>
             <p>Google 翻訳機能は、原文分節を Google へ送信します。これを望まない場合は、［設定］→［機械翻訳］→［Google Translate v2］のチェックを外してください。</p>
             <p>いずれにしても、原文分節以外の情報は機械翻訳サービスに送信されません。オンライン版の Google 翻訳には、他の候補を表示したり、フィードバックを送信する機能があります。今のところ、これらの機能は OmegaT では使えません。</p>
@@ -97,7 +99,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8712"></a>4. Belazar<a class="indexterm" name="d0e8715"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8734"></a>4. Belazar<a class="indexterm" name="d0e8737"></a></h2>
                   </div>
                </div>
             </div>
@@ -108,7 +110,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8724"></a>5. Apertium<a class="indexterm" name="d0e8727"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8746"></a>5. Apertium<a class="indexterm" name="d0e8749"></a></h2>
                   </div>
                </div>
             </div>
@@ -123,10 +125,6 @@
                   <li class="listitem">
                      <p>機械翻訳システム（特定の言語ペア向け）を構築するために必要な言語データの管理ツール</p>
                   </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>増え続ける言語ペア向けの言語データ</p>
                   </li>
@@ -139,7 +137,57 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="Google.Translate.troubleshooting"></a>6. 機械翻訳 - トラブルシューティング<a class="indexterm" name="d0e8756"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8774"></a>6. Microsoft Translator<a class="indexterm" name="d0e8777"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>MS Translator の認証情報は、以下の手順で取得します：</p>
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>Microsoft Translator 機械翻訳の使用に必要な設定：<a class="ulink" href="http://www.omegat.org/ja/howtos/ms_translator.html" target="_top">http://datamarket.azure.com/</a></p>
+                     <p>上記の技術情報を参照し、サブスクリプションを登録してください。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>同様に技術情報に従い、アプリケーションの登録を完了してください。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>OmegaT で必要なのは、アプリケーションの登録で得られる次の情報です：</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>クライアント ID（<code class="code">microsoft.api.client_secret</code> コマンドライン引数に対応）
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>顧客の秘密（<code class="code">microsoft.api.client_id</code> コマンドライン引数に対応）
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+               </ol>
+            </div>
+            <p>OmegaT で MS Translator を有効するには、ランチャーを編集するか、&lt;l1&gt;OmegaT のインストールと実行&lt;/l1&gt;を参照してコマンドライン指定で起動してください。</p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8813"></a>7. Yandex Translate<a class="indexterm" name="d0e8816"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Yandex Translate を OmegaT で利用するには、<a class="ulink" href="http://api.yandex.com/key/form.xml?service=trnsl" target="_top">Yandex から API キーを取得する</a>必要があります。
+            </p>
+            <p>取得した API キーは、OmegaT の起動時に <code class="code">yandex.api.key</code> コマンドライン引数として指定してください。指定方法については、OmegaT ランチャーを編集するか、<a class="link" href="chapter.installing.and.running.html" title="第3章 OmegaT のインストールと実行">OmegaT のインストールと実行</a>を参照してコマンドライン指定で起動してください。
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="Google.Translate.troubleshooting"></a>8. 機械翻訳 - トラブルシューティング<a class="indexterm" name="d0e8837"></a></h2>
                   </div>
                </div>
             </div>

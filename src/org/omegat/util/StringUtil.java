@@ -51,10 +51,11 @@ public class StringUtil {
      * Returns true if the input is lowercase.
      */
     public static boolean isLowerCase(final String input) {
-        for (int i = 0; i < input.length(); i++) {
-            char current = input.charAt(i);
-            if (Character.isLetter(current) && !Character.isLowerCase(current))
+        for (int i = 0, cp; i < input.length(); i += Character.charCount(cp)) {
+            cp = input.codePointAt(i);
+            if (Character.isLetter(cp) && !Character.isLowerCase(cp)) {
                 return false;
+            }
         }
         return true;
     }
@@ -63,10 +64,11 @@ public class StringUtil {
      * Returns true if the input is upper case.
      */
     public static boolean isUpperCase(final String input) {
-        for (int i = 0; i < input.length(); i++) {
-            char current = input.charAt(i);
-            if (Character.isLetter(current) && !Character.isUpperCase(current))
+        for (int i = 0, cp; i < input.length(); i += Character.charCount(cp)) {
+            cp = input.codePointAt(i);
+            if (Character.isLetter(cp) && !Character.isUpperCase(cp)) {
                 return false;
+            }
         }
         return true;
     }
@@ -75,10 +77,11 @@ public class StringUtil {
      * Returns true if the input is title case.
      */
     public static boolean isTitleCase(final String input) {
-        if (input.length() > 1)
-            return Character.isUpperCase(input.charAt(0)) && isLowerCase(input.substring(1));
-        else
-            return Character.isUpperCase(input.charAt(0));
+        if (input.length() > 1) {
+            return Character.isUpperCase(input.codePointAt(0)) && isLowerCase(input.substring(input.offsetByCodePoints(0, 1)));
+        } else {
+            return Character.isUpperCase(input.codePointAt(0));
+        }
     }
 
     /**
@@ -146,6 +149,7 @@ public class StringUtil {
 
     /**
      * Returns first letter in lowercase. Usually used for create tag shortcuts.
+     * Does not support non-BMP Unicode characters.
      */
     public static char getFirstLetterLowercase(CharSequence s) {
         if (s == null) {

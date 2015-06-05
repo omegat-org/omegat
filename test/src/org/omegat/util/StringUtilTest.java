@@ -57,4 +57,36 @@ public class StringUtilTest extends TestCase {
         assertTrue(StringUtil.isSubstringBefore("123456", 6, "56"));
         assertTrue(StringUtil.isSubstringBefore("123456", 5, "45"));
     }
+    
+    public void testUnicodeNonBMP() {
+        // MATHEMATICAL BOLD CAPITAL A (U+1D400)
+        String test = "\uD835\uDC00";
+        assertTrue(StringUtil.isUpperCase(test));
+        assertFalse(StringUtil.isLowerCase(test));
+        assertTrue(StringUtil.isTitleCase(test));
+        
+        // MATHEMATICAL BOLD CAPITAL A (U+1D400) x2
+        test = "\uD835\uDC00\uD835\uDC00";
+        assertTrue(StringUtil.isUpperCase(test));
+        assertFalse(StringUtil.isLowerCase(test));
+        assertFalse(StringUtil.isTitleCase(test));
+        
+        // MATHEMATICAL BOLD SMALL A (U+1D41A)
+        test = "\uD835\uDC1A";
+        assertFalse(StringUtil.isUpperCase(test));
+        assertTrue(StringUtil.isLowerCase(test));
+        assertFalse(StringUtil.isTitleCase(test));
+        
+        // MATHEMATICAL BOLD CAPITAL A + MATHEMATICAL BOLD SMALL A
+        test = "\uD835\uDC00\uD835\uDC1A";
+        assertFalse(StringUtil.isUpperCase(test));
+        assertFalse(StringUtil.isLowerCase(test));
+        assertTrue(StringUtil.isTitleCase(test));
+        
+        // MATHEMATICAL BOLD SMALL A + MATHEMATICAL BOLD CAPITAL A
+        test = "\uD835\uDC1A\uD835\uDC00";
+        assertFalse(StringUtil.isUpperCase(test));
+        assertFalse(StringUtil.isLowerCase(test));
+        assertFalse(StringUtil.isTitleCase(test));
+    }
 }

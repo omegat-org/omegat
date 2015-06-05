@@ -8,6 +8,7 @@
                2007 Zoltan Bartko - bartkozoltan@bartkozoltan.com
                2008 Andrzej Sawula
                2010-2013 Alex Buloichik
+               2015 Zoltan Bartko, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

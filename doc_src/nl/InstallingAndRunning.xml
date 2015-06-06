@@ -532,7 +532,7 @@
 
             <itemizedlist>
               <listitem>
-                <para><emphasis><emphasis><literal>--mode=console-translate</literal></emphasis></emphasis></para>
+                <para><emphasis><literal>--mode=console-translate</literal></emphasis></para>
 
                 <para>In deze modus zal OmegaT proberen om de bestanden in /source/ te vertalen met de beschikbare vertaalgeheugens. Dit is handig om OmegaT uit te voeren op een server waarmee TMX-bestanden automatisch worden toegevoegd aan het project.</para>
               </listitem>

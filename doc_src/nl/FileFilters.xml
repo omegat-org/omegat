@@ -100,7 +100,7 @@
       <listitem>
         <para><emphasis>Automatisch vervangen van 'nplurals=INTEGER; &amp;plural=EXPRESSION;' in koptekst</emphasis></para>
 
-        <para><emphasis><emphasis>De optie maakt het voor OmegaT mogelijk om de specificatie in de koptekst van het PO-bestand te overschrijven en de standaard voor de geselecteerde doeltaal te gebruiken.</emphasis></emphasis></para>
+        <para><emphasis>De optie maakt het voor OmegaT mogelijk om de specificatie in de koptekst van het PO-bestand te overschrijven en de standaard voor de geselecteerde doeltaal te gebruiken.</emphasis></para>
       </listitem>
     </itemizedlist>
 

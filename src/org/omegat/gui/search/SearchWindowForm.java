@@ -48,6 +48,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
     public SearchWindowForm() {
         OmegaTIcons.setIconImages(this);
         initComponents();
+        m_viewer.setDragEnabled(true);
     }
 
     /**

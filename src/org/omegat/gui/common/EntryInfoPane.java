@@ -57,6 +57,7 @@ public abstract class EntryInfoPane<T> extends JTextPane implements IProjectEven
             });
         }
         CoreEvents.registerProjectChangeListener(this);
+        setDragEnabled(true);
     }
 
     public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {

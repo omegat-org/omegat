@@ -132,6 +132,7 @@ public class EditorTextArea3 extends JEditorPane {
             }
         });
         setToolTipText("");
+        setDragEnabled(true);
     }
 
     /**

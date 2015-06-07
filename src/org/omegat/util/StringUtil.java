@@ -104,6 +104,36 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if the input consists only of whitespace characters
+     * (including non-breaking characters that are false according to
+     * {@link Character#isWhitespace(int)}).
+     */
+    public static boolean isWhiteSpace(final String input) {
+        if (StringUtil.isEmpty(input)) {
+            return false;
+        }
+        for (int i = 0, cp; i < input.length(); i += Character.charCount(cp)) {
+            cp = input.codePointAt(i);
+            if (!isWhiteSpace(cp)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * Returns true if the input is a whitespace character
+     * (including non-breaking characters that are false according to
+     * {@link Character#isWhitespace(int)}).
+     */
+    public static boolean isWhiteSpace(int codePoint) {
+        return Character.isWhitespace(codePoint)
+                || codePoint == '\u00A0'
+                || codePoint == '\u2007'
+                || codePoint == '\u202F';
+    }
+    
+    /**
      * Returns first not null object from list, or null if all values is null.
      */
     public static <T> T nvl(T... values) {

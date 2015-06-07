@@ -104,4 +104,16 @@ public class StringUtilTest extends TestCase {
         assertFalse(StringUtil.isLowerCase(test));
         assertFalse(StringUtil.isTitleCase(test));
     }
+    
+    public void testIsWhiteSpace() {
+        assertFalse(StringUtil.isWhiteSpace(null));
+        assertFalse(StringUtil.isWhiteSpace(""));
+        assertTrue(StringUtil.isWhiteSpace(" "));
+        assertFalse(StringUtil.isWhiteSpace(" a "));
+        // SPACE (U+0020) + IDEOGRAPHIC SPACE (U+3000)
+        assertTrue(StringUtil.isWhiteSpace(" \u3000"));
+        // We considered whitespace but Character.isWhiteSpace(int) doesn't:
+        // NO-BREAK SPACE (U+00A0) + FIGURE SPaCE (U+2007) + NARROW NO-BREAK SPACE (U+202F)
+        assertTrue(StringUtil.isWhiteSpace("\u00a0\u2007\u202f"));
+    }
 }

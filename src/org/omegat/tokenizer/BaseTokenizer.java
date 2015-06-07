@@ -43,6 +43,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.comments.ICommentProvider;
+import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 
 /**
@@ -157,8 +158,7 @@ public abstract class BaseTokenizer implements ITokenizer {
      * {@inheritDoc}
      */
     @Override
-    public Token[] tokenizeWords(final String strOrig,
-            final StemmingMode stemmingMode) {
+    public Token[] tokenizeWords(final String strOrig, final StemmingMode stemmingMode) {
         Map<String, Token[]> cache;
         switch (stemmingMode) {
         case NONE:
@@ -202,7 +202,7 @@ public abstract class BaseTokenizer implements ITokenizer {
             return tokenize(strOrig, false, false, false);
         }
 
-        if (strOrig.length() == 0) {
+        if (strOrig.isEmpty()) {
             return EMPTY_TOKENS_LIST;
         }
 
@@ -212,8 +212,8 @@ public abstract class BaseTokenizer implements ITokenizer {
         iterator.setText(strOrig.toLowerCase());
 
         int start = iterator.first();
-        for (int end = iterator.next(); end != BreakIterator.DONE; start = end, end = iterator
-                .next()) {
+        for (int end = iterator.next(); end != BreakIterator.DONE; start = end,
+                end = iterator.next()) {
             String tokenStr = strOrig.substring(start, end).toLowerCase();
             result.add(new Token(tokenStr, start));
         }
@@ -227,21 +227,20 @@ public abstract class BaseTokenizer implements ITokenizer {
         Token[] tokens = new Token[strOrig.codePointCount(0, strOrig.length())];
         for (int cp, i = 0, j = 0; i < strOrig.length(); i += Character.charCount(cp)) {
             cp = strOrig.codePointAt(i);
-            tokens[j++] = new Token(new String(Character.toChars(cp)), i);
+            tokens[j++] = new Token(String.valueOf(Character.toChars(cp)), i);
         }
         return tokens;
     }
 
     protected Token[] tokenize(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed, final boolean filterDigits) {
-        if (strOrig == null || strOrig.length() == 0) {
+        if (StringUtil.isEmpty(strOrig)) {
             return EMPTY_TOKENS_LIST;
         }
 
         List<Token> result = new ArrayList<Token>(64);
 
-        final TokenStream in = getTokenStream(strOrig, stemsAllowed,
-                stopWordsAllowed);
+        final TokenStream in = getTokenStream(strOrig, stemsAllowed, stopWordsAllowed);
         in.addAttribute(CharTermAttribute.class);
         in.addAttribute(OffsetAttribute.class);
         
@@ -262,9 +261,8 @@ public abstract class BaseTokenizer implements ITokenizer {
                     }
                 }
                 if (tokenText != null) {
-                    result.add(new Token(tokenText, off.startOffset(), off
-                            .endOffset()
-                            - off.startOffset()));
+                    result.add(new Token(tokenText, off.startOffset(),
+                            off.endOffset() - off.startOffset()));
                 }
             }
             in.end();

@@ -278,7 +278,7 @@ public abstract class BaseTokenizer implements ITokenizer {
             if (filterDigits && Character.isDigit(cp)) {
                 return false;
             }
-            if (filterWhitespace && !Character.isWhitespace(cp)) {
+            if (filterWhitespace && !StringUtil.isWhiteSpace(cp)) {
                 isWhitespaceOnly = false;
             }
         }

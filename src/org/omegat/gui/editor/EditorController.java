@@ -1688,8 +1688,7 @@ public class EditorController implements IEditor {
 
                 for (Token token : tokenList) {
                     String word = token.getTextFromString(selectionText);
-                    boolean whitespaceOnly = PatternConsts.SPACE_TAB.matcher(word).matches();
-                    if (whitespaceOnly) {
+                    if (StringUtil.isWhiteSpace(word)) {
                         continue;
                     }
                     if (StringUtil.isLowerCase(word)) {

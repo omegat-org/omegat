@@ -151,7 +151,7 @@ public abstract class BaseTokenizer implements ITokenizer {
      */
     @Override
     public Token[] tokenizeWordsForSpelling(String str) {
-        return tokenize(str, false, false, true);
+        return tokenize(str, false, false, true, true);
     }
 
     /**
@@ -183,6 +183,7 @@ public abstract class BaseTokenizer implements ITokenizer {
         result = tokenize(strOrig, stemmingMode == StemmingMode.GLOSSARY
                 || stemmingMode == StemmingMode.MATCHING,
                 stemmingMode == StemmingMode.MATCHING,
+                true,
                 true);
 
         // put result in the cache
@@ -199,7 +200,7 @@ public abstract class BaseTokenizer implements ITokenizer {
     public Token[] tokenizeAllExactly(final String strOrig) {
 
         if (!shouldDelegateTokenizeExactly) {
-            return tokenize(strOrig, false, false, false);
+            return tokenize(strOrig, false, false, false, false);
         }
 
         if (strOrig.isEmpty()) {
@@ -232,8 +233,8 @@ public abstract class BaseTokenizer implements ITokenizer {
         return tokens;
     }
 
-    protected Token[] tokenize(final String strOrig,
-            final boolean stemsAllowed, final boolean stopWordsAllowed, final boolean filterDigits) {
+    protected Token[] tokenize(final String strOrig, final boolean stemsAllowed, final boolean stopWordsAllowed,
+            final boolean filterDigits, final boolean filterWhitespace) {
         if (StringUtil.isEmpty(strOrig)) {
             return EMPTY_TOKENS_LIST;
         }
@@ -251,16 +252,7 @@ public abstract class BaseTokenizer implements ITokenizer {
             in.reset();
             while (in.incrementToken()) {
                 String tokenText = cattr.toString();
-                if (filterDigits) {
-                    for (int i = 0, cp; i < tokenText.length(); i += Character.charCount(cp)) {
-                        cp = tokenText.codePointAt(i);
-                        if (Character.isDigit(cp)) {
-                            tokenText = null;
-                            break;
-                        }
-                    }
-                }
-                if (tokenText != null) {
+                if (acceptToken(tokenText, filterDigits, filterWhitespace)) {
                     result.add(new Token(tokenText, off.startOffset(),
                             off.endOffset() - off.startOffset()));
                 }
@@ -273,6 +265,26 @@ public abstract class BaseTokenizer implements ITokenizer {
         return result.toArray(new Token[result.size()]);
     }
 
+    private boolean acceptToken(String token, boolean filterDigits, boolean filterWhitespace) {
+        if (StringUtil.isEmpty(token)) {
+            return false;
+        }
+        if (!filterDigits && !filterWhitespace) {
+            return true;
+        }
+        boolean isWhitespaceOnly = true;
+        for (int i = 0, cp; i < token.length(); i += Character.charCount(cp)) {
+            cp = token.codePointAt(i);
+            if (filterDigits && Character.isDigit(cp)) {
+                return false;
+            }
+            if (filterWhitespace && !Character.isWhitespace(cp)) {
+                isWhitespaceOnly = false;
+            }
+        }
+        return !(filterWhitespace && isWhitespaceOnly);
+    }
+    
     protected abstract TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed);
 
@@ -291,17 +303,17 @@ public abstract class BaseTokenizer implements ITokenizer {
             sb.append("tokenizeAllExactly:\n");
             sb.append(printTest(tokenizeAllExactly(input), input));
             sb.append("tokenize:\n");
-            sb.append(printTest(tokenize(input, false, false, false), input));
+            sb.append(printTest(tokenize(input, false, false, false, true), input));
             sb.append("tokenize (stemsAllowed):\n");
-            sb.append(printTest(tokenize(input, true, false, false), input));
+            sb.append(printTest(tokenize(input, true, false, false, true), input));
             sb.append("tokenize (stemsAllowed stopWordsAllowed):\n");
-            sb.append(printTest(tokenize(input, true, true, false), input));
+            sb.append(printTest(tokenize(input, true, true, false, true), input));
             sb.append("tokenize (stemsAllowed stopWordsAllowed filterDigits) (=tokenizeWords(MATCHING)):\n");
-            sb.append(printTest(tokenize(input, true, true, true), input));
+            sb.append(printTest(tokenize(input, true, true, true, true), input));
             sb.append("tokenize (stemsAllowed filterDigits) (=tokenizeWords(GLOSSARY)):\n");
-            sb.append(printTest(tokenize(input, true, false, true), input));
+            sb.append(printTest(tokenize(input, true, false, true, true), input));
             sb.append("tokenize (filterDigits) (=tokenizeWords(NONE) tokenizeWordsForSpelling):\n");
-            sb.append(printTest(tokenize(input, false, false, true), input));
+            sb.append(printTest(tokenize(input, false, false, true, true), input));
             sb.append("----------------------------------\n");
         }
         return sb.toString();

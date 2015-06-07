@@ -1628,6 +1628,7 @@ public class EditorController implements IEditor {
      * @param toWhat
      *            : lower, title, upper or cycle
      */
+    @Override
     public void changeCase(CHANGE_CASE_TO toWhat) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -1640,15 +1641,18 @@ public class EditorController implements IEditor {
         int translationEnd = editor.getOmDocument().getTranslationEnd();
 
         // both should be within the limits
-        if (end < translationStart || start > translationEnd)
+        if (end < translationStart || start > translationEnd) {
             return; // forget it, not worth the effort
+        }
 
         // adjust the bound which exceeds the limits
-        if (start < translationStart && end <= translationEnd)
+        if (start < translationStart && end <= translationEnd) {
             start = translationStart;
+        }
 
-        if (end > translationEnd && start >= translationStart)
+        if (end > translationEnd && start >= translationStart) {
             end = translationEnd;
+        }
 
         try {
             // no selection? make it the current word
@@ -1657,11 +1661,13 @@ public class EditorController implements IEditor {
                 end = EditorUtils.getWordEnd(editor, end);
 
                 // adjust the bound again
-                if (start < translationStart && end <= translationEnd)
+                if (start < translationStart && end <= translationEnd) {
                     start = translationStart;
+                }
 
-                if (end > translationEnd && start >= translationStart)
+                if (end > translationEnd && start >= translationStart) {
                     end = translationEnd;
+                }
             }
 
             editor.setSelectionStart(start);
@@ -1672,7 +1678,7 @@ public class EditorController implements IEditor {
             Token[] tokenList = Core.getProject().getTargetTokenizer()
                     .tokenizeWordsForSpelling(selectionText);
 
-            StringBuffer buffer = new StringBuffer(selectionText);
+            StringBuilder buffer = new StringBuilder(selectionText);
 
             if (toWhat == CHANGE_CASE_TO.CYCLE) {
                 int lower = 0;
@@ -1701,20 +1707,25 @@ public class EditorController implements IEditor {
                     other++;
                 }
 
-                if (lower == 0 && title == 0 && upper == 0 && other == 0)
+                if (lower == 0 && title == 0 && upper == 0 && other == 0) {
                     return; // nothing to do here
+                }
 
-                if (lower != 0 && title == 0 && upper == 0)
+                if (lower != 0 && title == 0 && upper == 0) {
                     toWhat = CHANGE_CASE_TO.TITLE;
+                }
 
-                if (lower == 0 && title != 0 && upper == 0)
+                if (lower == 0 && title != 0 && upper == 0) {
                     toWhat = CHANGE_CASE_TO.UPPER;
+                }
 
-                if (lower == 0 && title == 0 && upper != 0)
+                if (lower == 0 && title == 0 && upper != 0) {
                     toWhat = CHANGE_CASE_TO.LOWER;
+                }
 
-                if (other != 0)
+                if (other != 0) {
                     toWhat = CHANGE_CASE_TO.UPPER;
+                }
             }
 
             int lengthIncrement = 0;

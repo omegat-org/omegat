@@ -93,13 +93,13 @@ public class StringUtil {
             return false;
         }
         if (input.codePointCount(0, input.length()) > 1) {
-            return isTitleOrUpper(input.codePointAt(0)) && isLowerCase(input.substring(input.offsetByCodePoints(0, 1)));
+            return isTitleCase(input.codePointAt(0)) && isLowerCase(input.substring(input.offsetByCodePoints(0, 1)));
         } else {
-            return isTitleOrUpper(input.codePointAt(0));
+            return isTitleCase(input.codePointAt(0));
         }
     }
     
-    private static boolean isTitleOrUpper(int codePoint) {
+    public static boolean isTitleCase(int codePoint) {
         return Character.isUpperCase(codePoint) || Character.isTitleCase(codePoint);
     }
 

@@ -114,7 +114,6 @@ import org.omegat.util.gui.UIThreadsUtil;
 import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.event.DockableSelectionEvent;
 import com.vlsolutions.swing.docking.event.DockableSelectionListener;
-import org.omegat.util.PatternConsts;
 
 /**
  * Class for control all editor operations.
@@ -1684,13 +1683,10 @@ public class EditorController implements IEditor {
                 int lower = 0;
                 int upper = 0;
                 int title = 0;
-                int other = 0;
+                int mixed = 0;
 
                 for (Token token : tokenList) {
                     String word = token.getTextFromString(selectionText);
-                    if (StringUtil.isWhiteSpace(word)) {
-                        continue;
-                    }
                     if (StringUtil.isLowerCase(word)) {
                         lower++;
                         continue;
@@ -1703,10 +1699,14 @@ public class EditorController implements IEditor {
                         upper++;
                         continue;
                     }
-                    other++;
+                    if (StringUtil.isMixedCase(word)) {
+                        mixed++;
+                    }
+                    // Ignore other tokens as they should be caseless text
+                    // such as CJK ideographs or symbols only.
                 }
 
-                if (lower == 0 && title == 0 && upper == 0 && other == 0) {
+                if (lower == 0 && title == 0 && upper == 0 && mixed == 0) {
                     return; // nothing to do here
                 }
 
@@ -1722,7 +1722,7 @@ public class EditorController implements IEditor {
                     toWhat = CHANGE_CASE_TO.LOWER;
                 }
 
-                if (other != 0) {
+                if (mixed != 0) {
                     toWhat = CHANGE_CASE_TO.UPPER;
                 }
             }

@@ -116,4 +116,21 @@ public class StringUtilTest extends TestCase {
         // NO-BREAK SPACE (U+00A0) + FIGURE SPaCE (U+2007) + NARROW NO-BREAK SPACE (U+202F)
         assertTrue(StringUtil.isWhiteSpace("\u00a0\u2007\u202f"));
     }
+    
+    public void testIsMixedCase() {
+        assertTrue(StringUtil.isMixedCase("ABc"));
+        assertTrue(StringUtil.isMixedCase("aBc"));
+        // This is title case, not mixed:
+        assertFalse(StringUtil.isMixedCase("Abc"));
+        // Non-letter characters should not affect the result:
+        assertTrue(StringUtil.isMixedCase(" {ABc"));
+    }
+    
+    public void testNonWordCase() {
+        String test = "{";
+        assertFalse(StringUtil.isLowerCase(test));
+        assertFalse(StringUtil.isUpperCase(test));
+        assertFalse(StringUtil.isTitleCase(test));
+        assertFalse(StringUtil.isMixedCase(test));
+    }
 }

@@ -49,19 +49,24 @@ public class StringUtil {
     }
 
     /**
-     * Returns true if the input is lowercase.
+     * Returns true if the input has at least one letter and
+     * all letters are lower case.
      */
     public static boolean isLowerCase(final String input) {
         if (StringUtil.isEmpty(input)) {
             return false;
         }
+        boolean hasLetters = false;
         for (int i = 0, cp; i < input.length(); i += Character.charCount(cp)) {
             cp = input.codePointAt(i);
-            if (Character.isLetter(cp) && !Character.isLowerCase(cp)) {
-                return false;
+            if (Character.isLetter(cp)) {
+                hasLetters = true;
+                if (!Character.isLowerCase(cp)) {
+                    return false;
+                }
             }
         }
-        return true;
+        return hasLetters;
     }
 
     /**
@@ -71,13 +76,44 @@ public class StringUtil {
         if (StringUtil.isEmpty(input)) {
             return false;
         }
+        boolean hasLetters = false;
         for (int i = 0, cp; i < input.length(); i += Character.charCount(cp)) {
             cp = input.codePointAt(i);
-            if (Character.isLetter(cp) && !Character.isUpperCase(cp)) {
-                return false;
+            if (Character.isLetter(cp)) {
+                hasLetters = true;
+                if (!Character.isUpperCase(cp)) {
+                    return false;
+                }
             }
         }
-        return true;
+        return hasLetters;
+    }
+
+    /**
+     * Returns true if the input has both upper case and lower case letters, but
+     * is not title case.
+     */
+    public static boolean isMixedCase(final String input) {
+        if (StringUtil.isEmpty(input) || input.codePointCount(0, input.length()) < 2) {
+            return false;
+        }
+        boolean hasUpper = false;
+        boolean hasLower = false;
+        for (int i = 0, cp; i < input.length(); i += Character.charCount(cp)) {
+            cp = input.codePointAt(i);
+            if (Character.isLetter(cp)) {
+                // Don't count the first cp as upper to allow for title case
+                if (Character.isUpperCase(cp) && i > 0) {
+                    hasUpper = true;
+                } else if (Character.isLowerCase(cp)) {
+                    hasLower = true;
+                }
+                if (hasUpper && hasLower) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**

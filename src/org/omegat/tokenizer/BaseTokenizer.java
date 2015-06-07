@@ -253,8 +253,9 @@ public abstract class BaseTokenizer implements ITokenizer {
             while (in.incrementToken()) {
                 String tokenText = cattr.toString();
                 if (filterDigits) {
-                    for (int i = 0; i < tokenText.length(); i++) {
-                        if (Character.isDigit(tokenText.charAt(i))) {
+                    for (int i = 0, cp; i < tokenText.length(); i += Character.charCount(cp)) {
+                        cp = tokenText.codePointAt(i);
+                        if (Character.isDigit(cp)) {
                             tokenText = null;
                             break;
                         }

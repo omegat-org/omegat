@@ -89,20 +89,29 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
         
         for (GlossaryEntry entry : glossary) {
             for (String term : entry.getLocTerms(true)) {
-                if (context == null || termMatchesChunk(term, context)) {
-                    String payload = shouldCapitalize ? capitalize(term) : term;
-                    if (Core.getProject().getProjectProperties().getTargetLanguage().isSpaceDelimited()) {
-                        payload += " ";
-                    }
-                    int length = context == null ? 0 : context.length();
-                    result.add(new AutoCompleterItem(payload, new String[] { entry.getSrcText() }, length));
+                if (!termMatchesChunk(term, context)) {
+                    continue;
                 }
+                String payload = shouldCapitalize ? capitalize(term) : term;
+                if (Core.getProject().getProjectProperties().getTargetLanguage().isSpaceDelimited()) {
+                    payload += " ";
+                }
+                int length = context == null ? 0 : context.length();
+                result.add(new AutoCompleterItem(payload, new String[] { entry.getSrcText() }, length));
             }
         }
     }
     
-    private boolean termMatchesChunk(String term, String wordChunk) {
-        return !term.equals(wordChunk) && toLowerCase(term).startsWith(toLowerCase(wordChunk));
+    private boolean termMatchesChunk(String term, String context) {
+        if (context == null) {
+            // Consider null context to match everything
+            return true;
+        }
+        if (term.equals(context)) {
+            // Consider a term to NOT match if it is identical to the context (it is already present)
+            return false;
+        }
+        return toLowerCase(term).startsWith(toLowerCase(context));
     }
     
     private Locale getTargetLocale() {

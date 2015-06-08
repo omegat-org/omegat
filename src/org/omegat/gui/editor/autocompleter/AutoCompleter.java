@@ -53,6 +53,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 /**
  * The controller part of the auto-completer
@@ -258,15 +259,18 @@ public class AutoCompleter implements IAutoCompleter {
 
         int offset = editor.getCaretPosition();
 
-        if (editor.getSelectionStart() == editor.getSelectionEnd()) {
+        String selection = editor.getSelectedText();
+
+        if (StringUtil.isEmpty(selection)) {
             editor.setSelectionStart(offset - selected.replacementLength);
             editor.setSelectionEnd(offset);
         }
-        String selection = editor.getSelectedText();
         editor.replaceSelection(selected.payload);
+        
         if (selected.cursorAdjust != 0) {
             editor.getCaret().setDot(editor.getCaretPosition() + selected.cursorAdjust);
         }
+        
         if (selected.keepSelection) {
             editor.replaceSelection(selection);
         }

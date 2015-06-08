@@ -27,14 +27,20 @@
 package org.omegat.gui.editor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
 
-import org.omegat.tokenizer.DefaultTokenizer;
+import org.apache.lucene.util.Version;
 import org.omegat.tokenizer.ITokenizer;
+import org.omegat.core.Core;
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.gui.editor.autocompleter.AutoCompleterItem;
 import org.omegat.gui.editor.autocompleter.AutoCompleterListView;
 import org.omegat.util.OStrings;
 import org.omegat.util.TagUtil;
+import org.omegat.util.Token;
 
 /**
  * An AutoCompleterView for inserting missing tags.
@@ -42,6 +48,8 @@ import org.omegat.util.TagUtil;
  * @author Aaron Madlon-Kay
  */
 public class TagAutoCompleterView extends AutoCompleterListView {
+
+    private static final ITokenizer TAG_TOKENIZER = new TagTokenizer();
 
     public TagAutoCompleterView() {
         super(OStrings.getString("AC_TAG_VIEW"));
@@ -95,11 +103,98 @@ public class TagAutoCompleterView extends AutoCompleterListView {
 
     @Override
     public ITokenizer getTokenizer() {
-        return new DefaultTokenizer();
+        return TAG_TOKENIZER;
     }
 
     @Override
     public String itemToString(AutoCompleterItem item) {
         return item.extras[0];
+    }
+    
+    private static class TagTokenizer implements ITokenizer {
+
+        @SuppressWarnings("unchecked")
+        @Override
+        public Map<Version, String> getSupportedBehaviors() {
+            return Collections.EMPTY_MAP;
+        }
+
+        @Override
+        public Version getBehavior() {
+            return null;
+        }
+
+        @Override
+        public void setBehavior(Version behavior) {}
+
+        @Override
+        public Version getDefaultBehavior() {
+            return null;
+        }
+
+        @Override
+        public Token[] tokenizeWords(String str, StemmingMode stemmingMode) {
+            return tokenize(str);
+        }
+
+        @Override
+        public Token[] tokenizeWordsForSpelling(String str) {
+            return tokenize(str);
+        }
+
+        @Override
+        public Token[] tokenizeAllExactly(String str) {
+            return tokenize(str);
+        }
+
+        private Token[] tokenize(String str) {
+            String regex = buildRegex();
+            if (regex == null) {
+                return new Token[] { new Token(str, 0) };
+            }
+            String[] pieces = str.split(regex);
+            Token[] tokens = new Token[pieces.length];
+            for (int i = 0, offset = 0; i < pieces.length; i++) {
+                tokens[i] = new Token(pieces[i], offset);
+                offset += pieces[i].length();
+            }
+            return tokens;
+        }
+        
+        /**
+         * Create a regex that will split a string in front of any protected parts.
+         * It will look like "(?=c1|c2|c3|...|cn)" where c1,...,cn are the unique first
+         * characters of protected parts in the current segment.
+         * 
+         * @return regex string
+         */
+        private String buildRegex() {
+            ProtectedPart[] protectedParts = Core.getEditor().getCurrentEntry().getProtectedParts();
+            if (protectedParts.length == 0) {
+                return null;
+            }
+            List<String> initials = new ArrayList<String>();
+            for (ProtectedPart pp : protectedParts) {
+                String part = pp.getTextInSourceSegment();
+                String initial = part.substring(0, part.offsetByCodePoints(0, 1));
+                if (!initials.contains(initial)) {
+                    initials.add(initial);
+                }
+            }
+            StringBuilder regex = new StringBuilder("(?=");
+            for (int i = 0, max = initials.size(); i < max; i++) {
+                regex.append(Pattern.quote(initials.get(i)));
+                if (i + 1 < max) {
+                    regex.append('|');
+                }
+            }
+            regex.append(')');
+            return regex.toString();
+        }
+        
+        @Override
+        public String[] getSupportedLanguages() {
+            return new String[0];
+        }
     }
 }

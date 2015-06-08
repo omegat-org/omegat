@@ -1772,8 +1772,7 @@ public class EditorController implements IEditor {
         case UPPER:
             return input.toUpperCase(locale);
         case TITLE:
-            // TODO: find out how to get a locale-aware title case
-            return Character.toTitleCase(input.charAt(0)) + input.substring(1).toLowerCase(locale);
+            return StringUtil.toTitleCase(input, locale);
         }
         // if everything fails
         return input.toUpperCase(locale);

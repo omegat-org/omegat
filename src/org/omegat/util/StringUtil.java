@@ -29,6 +29,8 @@
  **************************************************************************/
 package org.omegat.util;
 
+import java.util.Locale;
+
 /**
  * Utilities for string processing.
  * 
@@ -167,6 +169,21 @@ public class StringUtil {
                 || codePoint == '\u00A0'
                 || codePoint == '\u2007'
                 || codePoint == '\u202F';
+    }
+    
+    /**
+     * Convert text to title case according to the supplied locale.
+     */
+    public static String toTitleCase(String text, Locale locale) {
+        if (text.isEmpty()) {
+            return text;
+        }
+        int firstTitleCase = Character.toTitleCase(text.codePointAt(0));
+        int remainderOffset = text.offsetByCodePoints(0, 1);
+        String first = Character.isTitleCase(firstTitleCase)
+                    ? String.valueOf(Character.toChars(firstTitleCase))
+                    : text.substring(0, remainderOffset).toUpperCase(locale);
+        return first + text.substring(remainderOffset).toLowerCase(locale);
     }
     
     /**

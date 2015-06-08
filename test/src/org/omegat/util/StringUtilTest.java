@@ -25,6 +25,8 @@
 
 package org.omegat.util;
 
+import java.util.Locale;
+
 import junit.framework.TestCase;
 
 /**
@@ -124,6 +126,7 @@ public class StringUtilTest extends TestCase {
         assertFalse(StringUtil.isUpperCase(test));
         assertFalse(StringUtil.isLowerCase(test));
         assertFalse(StringUtil.isTitleCase(test));
+        assertEquals("", StringUtil.toTitleCase("", Locale.ENGLISH));
     }
     
     public void testIsWhiteSpace() {
@@ -158,5 +161,18 @@ public class StringUtilTest extends TestCase {
         assertFalse(StringUtil.isUpperCase(test));
         assertFalse(StringUtil.isTitleCase(test));
         assertFalse(StringUtil.isMixedCase(test));
+    }
+    
+    public void testToTitleCase() {
+        Locale locale = Locale.ENGLISH;
+        assertEquals("Abc", StringUtil.toTitleCase("abc", locale));
+        assertEquals("Abc", StringUtil.toTitleCase("ABC", locale));
+        assertEquals("Abc", StringUtil.toTitleCase("Abc", locale));
+        assertEquals("Abc", StringUtil.toTitleCase("abc", locale));
+        assertEquals("A", StringUtil.toTitleCase("a", locale));
+        // LATIN SMALL LETTER NJ (U+01CC) -> LATIN CAPITAL LETTER N WITH SMALL LETTER J (U+01CB)
+        assertEquals("\u01CB", StringUtil.toTitleCase("\u01CC", locale));
+        // LATIN SMALL LETTER I (U+0069) -> LATIN CAPITAL LETTER I WITH DOT ABOVE (U+0130) in Turkish
+        assertEquals("\u0130jk", StringUtil.toTitleCase("ijk", new Locale("tr")));
     }
 }

@@ -370,25 +370,30 @@ public class AutoCompleter implements IAutoCompleter {
     }
     
     public void textDidChange() {
-        if (isVisible()) {
-            // Close if we popped up automatically but no longer have relevant suggestions
-            if (didPopUpAutomatically && !getCurrentView().shouldPopUp()) {
-                setVisible(false);
-            } else {
-                updatePopup();
-            }
+        if (isVisible() && !didPopUpAutomatically) {
+            updatePopup();
             return;
         }
         if (!Preferences.isPreference(Preferences.AC_SHOW_SUGGESTIONS_AUTOMATICALLY)) {
             return;
         }
-        for (int i = 0; i < views.size(); i++) {
+        
+        // Cycle through each view, stopping and showing it if it has some relevant content.
+        int i = currentView;
+        while (true) {
             if (views.get(i).shouldPopUp()) {
                 currentView = i;
                 activateView(true);
                 didPopUpAutomatically = true;
+                return;
+            }
+            i = (i + 1) % views.size();
+            if (i == currentView) {
+                // We made it full circle with no results.
                 break;
             }
         }
+        // If we get here, no views had relevant content, so we close the popup.
+        setVisible(false);
     }
 }

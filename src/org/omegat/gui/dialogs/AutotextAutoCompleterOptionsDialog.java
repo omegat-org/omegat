@@ -26,6 +26,7 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -75,11 +76,9 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
      */
     public AutotextAutoCompleterOptionsDialog(java.awt.Frame parent) {
         super(parent, true);
-        
-        StaticUIUtils.setEscapeClosable(this);
-        
         initComponents();
         
+        StaticUIUtils.setEscapeClosable(this);
         getRootPane().setDefaultButton(okButton);
         
         sortByLengthCheckBox.setSelected(Preferences.isPreference(Preferences.AC_AUTOTEXT_SORT_BY_LENGTH));
@@ -95,6 +94,10 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
         model.load();
         entryTable.setModel(model);
         model.addTableModelListener(entryTable);
+        
+        setPreferredSize(new Dimension(500, 500));
+        pack();
+        
         DockingUI.displayCentered(this);
     }
     
@@ -106,17 +109,17 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
-        okButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
         sortByLengthCheckBox = new javax.swing.JCheckBox();
         sortAlphabeticallyCheckBox = new javax.swing.JCheckBox();
         sortFullTextCheckBox = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
-        loadButton = new javax.swing.JButton();
-        saveButton = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         entryTable = new JTable() {
             public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
@@ -128,8 +131,19 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
                 return c;
             }
         };
+        jPanel10 = new javax.swing.JPanel();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
+        jPanel7 = new javax.swing.JPanel();
+        loadButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 20), new java.awt.Dimension(0, 20), new java.awt.Dimension(32767, 20));
         addNewRowButton = new javax.swing.JButton();
         removeEntryButton = new javax.swing.JButton();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        okButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -145,23 +159,20 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(OStrings.getString("AC_AUTOTEXT_OPTIONS_TITLE")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okButtonActionPerformed(evt);
-            }
-        });
-
-        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
+        jPanel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jPanel6.setLayout(new java.awt.BorderLayout());
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("AC_AUTOTEXT_DISPLAY_PANEL"))); // NOI18N
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        jPanel9.setLayout(new java.awt.GridBagLayout());
 
         sortByLengthCheckBox.setText(OStrings.getString("AC_AUTOTEXT_SORT_BY_LENGTH")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel9.add(sortByLengthCheckBox, gridBagConstraints);
 
         sortAlphabeticallyCheckBox.setText(OStrings.getString("AC_AUTOTEXT_ALPHABETICALLY")); // NOI18N
         sortAlphabeticallyCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -169,6 +180,12 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
                 sortAlphabeticallyCheckBoxActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel9.add(sortAlphabeticallyCheckBox, gridBagConstraints);
 
         sortFullTextCheckBox.setText(OStrings.getString("AC_AUTOTEXT_SORT_FULL_TEXT")); // NOI18N
         sortFullTextCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -176,52 +193,23 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
                 sortFullTextCheckBoxActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 25, 5, 0);
+        jPanel9.add(sortFullTextCheckBox, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(sortAlphabeticallyCheckBox)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(sortFullTextCheckBox))
-                            .addComponent(sortByLengthCheckBox))
-                        .addGap(0, 181, Short.MAX_VALUE))))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(sortByLengthCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(sortAlphabeticallyCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(sortFullTextCheckBox)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel3.add(jPanel9, java.awt.BorderLayout.WEST);
+
+        jPanel6.add(jPanel3, java.awt.BorderLayout.NORTH);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("AC_AUTOTEXT_ENTRIES_PANEL"))); // NOI18N
+        jPanel2.setLayout(new java.awt.BorderLayout());
 
-        org.openide.awt.Mnemonics.setLocalizedText(loadButton, OStrings.getString("AC_AUTOTEXT_BUTTON_LOAD")); // NOI18N
-        loadButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadButtonActionPerformed(evt);
-            }
-        });
-
-        org.openide.awt.Mnemonics.setLocalizedText(saveButton, OStrings.getString("AC_AUTOTEXT_BUTTON_SAVE")); // NOI18N
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
-            }
-        });
+        jPanel8.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 0));
+        jPanel8.setLayout(new java.awt.BorderLayout());
 
         entryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -234,6 +222,7 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
                 "Shortcut", "Full text", "Comment"
             }
         ));
+        entryTable.setFillsViewportHeight(true);
         jScrollPane2.setViewportView(entryTable);
         if (entryTable.getColumnModel().getColumnCount() > 0) {
             entryTable.getColumnModel().getColumn(0).setHeaderValue(OStrings.getString("AC_AUTOTEXT_ABBREVIATION")); // NOI18N
@@ -241,12 +230,52 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
             entryTable.getColumnModel().getColumn(2).setHeaderValue(OStrings.getString("AC_AUTOTEXT_COMMENT")); // NOI18N
         }
 
+        jPanel8.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        jPanel10.setLayout(new javax.swing.BoxLayout(jPanel10, javax.swing.BoxLayout.Y_AXIS));
+        jPanel10.add(filler3);
+
+        jPanel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel7.setLayout(new java.awt.GridBagLayout());
+
+        org.openide.awt.Mnemonics.setLocalizedText(loadButton, OStrings.getString("AC_AUTOTEXT_BUTTON_LOAD")); // NOI18N
+        loadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel7.add(loadButton, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(saveButton, OStrings.getString("AC_AUTOTEXT_BUTTON_SAVE")); // NOI18N
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel7.add(saveButton, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 2;
+        jPanel7.add(filler1, gridBagConstraints);
+
         org.openide.awt.Mnemonics.setLocalizedText(addNewRowButton, OStrings.getString("BUTTON_ADD_NODOTS")); // NOI18N
         addNewRowButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addNewRowButtonActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel7.add(addNewRowButton, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(removeEntryButton, OStrings.getString("BUTTON_REMOVE")); // NOI18N
         removeEntryButton.addActionListener(new java.awt.event.ActionListener() {
@@ -254,72 +283,47 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
                 removeEntryButtonActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel7.add(removeEntryButton, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(loadButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(saveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(removeEntryButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addNewRowButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(loadButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(saveButton)
-                        .addGap(37, 37, 37)
-                        .addComponent(addNewRowButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(removeEntryButton)
-                        .addGap(0, 153, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        jPanel10.add(jPanel7);
+        jPanel10.add(filler2);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(5, 5, 5))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelButton))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelButton)
-                    .addComponent(okButton))
-                .addContainerGap())
-        );
+        jPanel8.add(jPanel10, java.awt.BorderLayout.EAST);
 
-        pack();
+        jPanel2.add(jPanel8, java.awt.BorderLayout.CENTER);
+
+        jPanel6.add(jPanel2, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel6, java.awt.BorderLayout.CENTER);
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        jPanel4.setLayout(new java.awt.BorderLayout());
+
+        jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.LINE_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
+        jPanel5.add(okButton);
+
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+        jPanel5.add(cancelButton);
+
+        jPanel4.add(jPanel5, java.awt.BorderLayout.EAST);
+
+        getContentPane().add(jPanel4, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
@@ -408,9 +412,19 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
     private javax.swing.JButton addNewRowButton;
     private javax.swing.JButton cancelButton;
     private javax.swing.JTable entryTable;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton loadButton;
     private javax.swing.JButton okButton;

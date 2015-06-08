@@ -5,6 +5,7 @@
 
  Copyright (C) 2008 Alex Buloichik
                2012 Didier Briel
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -32,11 +33,17 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.Utilities;
 
+import org.omegat.core.Core;
+import org.omegat.gui.editor.IEditor.CHANGE_CASE_TO;
+import org.omegat.util.StringUtil;
+import org.omegat.util.Token;
+
 /**
  * Some utilities methods.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
+ * @author Aaron Madlon-Kay
  */
 public class EditorUtils {
     /**
@@ -124,5 +131,109 @@ public class EditorUtils {
      */
     public static String removeDirectionChars(String text) {
         return text.replaceAll("[\u202A\u202B\u202C]", "");
+    }
+    
+    /**
+     * perform the case change. Lowercase becomes titlecase, titlecase becomes uppercase, uppercase becomes
+     * lowercase. if the text matches none of these categories, it is uppercased.
+     * 
+     * @param input
+     *            : the string to work on
+     * @param toWhat
+     *            : one of the CASE_* values - except for case CASE_CYCLE.
+     */
+    public static String doChangeCase(String input, CHANGE_CASE_TO toWhat) {
+        // tokenize the selection
+        Token[] tokenList = Core.getProject().getTargetTokenizer().tokenizeWordsForSpelling(input);
+
+        if (toWhat == CHANGE_CASE_TO.CYCLE) {
+            int lower = 0;
+            int upper = 0;
+            int title = 0;
+            int mixed = 0;
+
+            for (Token token : tokenList) {
+                String word = token.getTextFromString(input);
+                if (StringUtil.isLowerCase(word)) {
+                    lower++;
+                    continue;
+                }
+                if (StringUtil.isTitleCase(word)) {
+                    title++;
+                    continue;
+                }
+                if (StringUtil.isUpperCase(word)) {
+                    upper++;
+                    continue;
+                }
+                if (StringUtil.isMixedCase(word)) {
+                    mixed++;
+                }
+                // Ignore other tokens as they should be caseless text
+                // such as CJK ideographs or symbols only.
+            }
+            
+            if (lower == 0 && title == 0 && upper == 0 && mixed == 0) {
+                return input; // nothing to do here
+            }
+
+            toWhat = determineTargetCase(lower, upper, title, mixed);
+        }
+
+        StringBuilder buffer = new StringBuilder(input);
+        int lengthIncrement = 0;
+        Locale locale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
+        
+        for (Token token : tokenList) {
+            // find out the case and change to the selected
+            String tokText = token.getTextFromString(input);
+            String result = toWhat == CHANGE_CASE_TO.LOWER ? tokText.toLowerCase(locale)
+                    : toWhat == CHANGE_CASE_TO.UPPER ? tokText.toUpperCase(locale)
+                    : toWhat == CHANGE_CASE_TO.TITLE ? StringUtil.toTitleCase(tokText, locale)
+                    : tokText;
+
+            // replace this token
+            buffer.replace(token.getOffset() + lengthIncrement, token.getLength() + token.getOffset()
+                    + lengthIncrement, result);
+
+            lengthIncrement += result.length() - token.getLength();
+        }
+        
+        return buffer.toString();
+    }
+    
+    private static CHANGE_CASE_TO determineTargetCase(int lower, int upper, int title, int mixed) {
+        int presentCaseTypes = 0;
+        if (lower > 0) {
+            presentCaseTypes++;
+        }
+        if (upper > 0) {
+            presentCaseTypes++;
+        }
+        if (title > 0) {
+            presentCaseTypes++;
+        }
+        if (mixed > 0) {
+            presentCaseTypes++;
+        }
+        
+        if (mixed > 0 || presentCaseTypes > 1) {
+            return CHANGE_CASE_TO.UPPER;
+        }
+
+        if (lower > 0) {
+            return CHANGE_CASE_TO.TITLE;
+        }
+
+        if (title > 0) {
+            return CHANGE_CASE_TO.UPPER;
+        }
+
+        if (upper > 0) {
+            return CHANGE_CASE_TO.LOWER;
+        }
+
+        // This should only happen if no cases are present, so it doesn't even matter.
+        return CHANGE_CASE_TO.UPPER;
     }
 }

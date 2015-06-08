@@ -89,13 +89,13 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
         
         for (GlossaryEntry entry : glossary) {
             for (String term : entry.getLocTerms(true)) {
-                if (context == null) {
-                    // No context--supply all available terms
-                    result.add(new AutoCompleterItem(term, new String[] { entry.getSrcText() }, 0));
-                } else if (termMatchesChunk(term, context)) {
-                    // Have context--only supply if term matches
-                    result.add(new AutoCompleterItem(shouldCapitalize ? capitalize(term) : term,
-                            new String[] { entry.getSrcText() }, context.length()));
+                if (context == null || termMatchesChunk(term, context)) {
+                    String payload = shouldCapitalize ? capitalize(term) : term;
+                    if (Core.getProject().getProjectProperties().getTargetLanguage().isSpaceDelimited()) {
+                        payload += " ";
+                    }
+                    int length = context == null ? 0 : context.length();
+                    result.add(new AutoCompleterItem(payload, new String[] { entry.getSrcText() }, length));
                 }
             }
         }

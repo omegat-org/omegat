@@ -85,8 +85,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
             return;
         }
         
-        boolean shouldCapitalize = context != null && Preferences.isPreference(Preferences.AC_GLOSSARY_CAPITALIZE)
-                && Character.isUpperCase(context.codePointAt(0));
+        boolean shouldCapitalize = context != null && Character.isUpperCase(context.codePointAt(0));
         
         for (GlossaryEntry entry : glossary) {
             for (String term : entry.getLocTerms(true)) {

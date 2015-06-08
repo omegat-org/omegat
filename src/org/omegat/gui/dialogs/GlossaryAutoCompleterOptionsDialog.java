@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -57,7 +58,6 @@ public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
         sortBySourceCheckBox.setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_BY_SOURCE));
         longerFirstCheckBox.setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_BY_LENGTH));
         sortEntriesCheckBox.setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_ALPHABETICALLY));
-        followCapitalizationCheckBox.setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_CAPITALIZE));
         DockingUI.displayCentered(this);
     }
 
@@ -69,21 +69,27 @@ public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         sourceButtonGroup = new javax.swing.ButtonGroup();
+        jPanel2 = new javax.swing.JPanel();
         displaySourceCheckBox = new javax.swing.JCheckBox();
-        okButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
         sourceFirstRadioButton = new javax.swing.JRadioButton();
         targetFirstRadioButton = new javax.swing.JRadioButton();
         sortBySourceCheckBox = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
         longerFirstCheckBox = new javax.swing.JCheckBox();
         sortEntriesCheckBox = new javax.swing.JCheckBox();
-        followCapitalizationCheckBox = new javax.swing.JCheckBox();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        okButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(OStrings.getString("AC_OPTIONS_GLOSSARY_FRAME")); // NOI18N
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jPanel2.setLayout(new java.awt.GridBagLayout());
 
         displaySourceCheckBox.setText(OStrings.getString("AC_OPTIONS_DISPLAY_SOURCE")); // NOI18N
         displaySourceCheckBox.setToolTipText(OStrings.getString("AC_OPTIONS_DISPLAY_SOURCE_TOOLTIP")); // NOI18N
@@ -92,6 +98,69 @@ public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
                 displaySourceCheckBoxActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel2.add(displaySourceCheckBox, gridBagConstraints);
+
+        sourceButtonGroup.add(sourceFirstRadioButton);
+        sourceFirstRadioButton.setText(OStrings.getString("AC_OPTIONS_SOURCE_FIRST")); // NOI18N
+        sourceFirstRadioButton.setToolTipText(OStrings.getString("AC_OPTIONS_SOURCE_FIRST")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 0);
+        jPanel2.add(sourceFirstRadioButton, gridBagConstraints);
+
+        sourceButtonGroup.add(targetFirstRadioButton);
+        targetFirstRadioButton.setText(OStrings.getString("AC_OPTIONS_TARGET_FIRST")); // NOI18N
+        targetFirstRadioButton.setToolTipText(OStrings.getString("AC_OPTIONS_TARGET_FIRST_TOOLTIP")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel2.add(targetFirstRadioButton, gridBagConstraints);
+
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
+        sortBySourceCheckBox.setText(bundle.getString("AC_OPTIONS_SORT_SOURCE_ALPHABETICALLY")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 0);
+        jPanel2.add(sortBySourceCheckBox, gridBagConstraints);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("AC_GLOSSARY_TARGET_PANEL"))); // NOI18N
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
+
+        longerFirstCheckBox.setText(OStrings.getString("AC_OPTIONS_SORT_BY_LENGTH")); // NOI18N
+        longerFirstCheckBox.setToolTipText(OStrings.getString("AC_OPTIONS_SORT_BY_LENGTH_TOOLTIP")); // NOI18N
+        jPanel1.add(longerFirstCheckBox);
+
+        sortEntriesCheckBox.setText(OStrings.getString("AC_OPTIONS_SORT_TARGET_ALPHABETICALLY")); // NOI18N
+        sortEntriesCheckBox.setToolTipText(OStrings.getString("AC_OPTIONS_SORT_ALPHABETICALLY_TOOLTIP")); // NOI18N
+        jPanel1.add(sortEntriesCheckBox);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
+        jPanel2.add(jPanel1, gridBagConstraints);
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        jPanel4.setLayout(new java.awt.BorderLayout());
+
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
 
         org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
         okButton.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +168,7 @@ public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
                 okButtonActionPerformed(evt);
             }
         });
+        jPanel3.add(okButton);
 
         org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -106,98 +176,11 @@ public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
                 cancelButtonActionPerformed(evt);
             }
         });
+        jPanel3.add(cancelButton);
 
-        sourceButtonGroup.add(sourceFirstRadioButton);
-        sourceFirstRadioButton.setText(OStrings.getString("AC_OPTIONS_SOURCE_FIRST")); // NOI18N
-        sourceFirstRadioButton.setToolTipText(OStrings.getString("AC_OPTIONS_SOURCE_FIRST")); // NOI18N
+        jPanel4.add(jPanel3, java.awt.BorderLayout.EAST);
 
-        sourceButtonGroup.add(targetFirstRadioButton);
-        targetFirstRadioButton.setText(OStrings.getString("AC_OPTIONS_TARGET_FIRST")); // NOI18N
-        targetFirstRadioButton.setToolTipText(OStrings.getString("AC_OPTIONS_TARGET_FIRST_TOOLTIP")); // NOI18N
-
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
-        sortBySourceCheckBox.setText(bundle.getString("AC_OPTIONS_SORT_SOURCE_ALPHABETICALLY")); // NOI18N
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("AC_GLOSSARY_TARGET_PANEL"))); // NOI18N
-
-        longerFirstCheckBox.setText(OStrings.getString("AC_OPTIONS_SORT_BY_LENGTH")); // NOI18N
-        longerFirstCheckBox.setToolTipText(OStrings.getString("AC_OPTIONS_SORT_BY_LENGTH_TOOLTIP")); // NOI18N
-
-        sortEntriesCheckBox.setText(OStrings.getString("AC_OPTIONS_SORT_TARGET_ALPHABETICALLY")); // NOI18N
-        sortEntriesCheckBox.setToolTipText(OStrings.getString("AC_OPTIONS_SORT_ALPHABETICALLY_TOOLTIP")); // NOI18N
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(longerFirstCheckBox)
-                    .addComponent(sortEntriesCheckBox))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(longerFirstCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sortEntriesCheckBox)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        followCapitalizationCheckBox.setText(OStrings.getString("AC_GLOSSARY_CAPITALIZE")); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(okButton)
-                        .addGap(4, 4, 4)
-                        .addComponent(cancelButton))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(displaySourceCheckBox)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(sortBySourceCheckBox)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(sourceFirstRadioButton)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(targetFirstRadioButton))))
-                            .addComponent(followCapitalizationCheckBox))
-                        .addGap(0, 78, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(displaySourceCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sourceFirstRadioButton)
-                    .addComponent(targetFirstRadioButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(sortBySourceCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(followCapitalizationCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(okButton)
-                    .addComponent(cancelButton))
-                .addContainerGap())
-        );
+        getContentPane().add(jPanel4, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -229,15 +212,16 @@ public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
         }
         Preferences.setPreference(Preferences.AC_GLOSSARY_SORT_BY_LENGTH, longerFirstCheckBox.isSelected());
         Preferences.setPreference(Preferences.AC_GLOSSARY_SORT_ALPHABETICALLY, sortEntriesCheckBox.isSelected());
-        Preferences.setPreference(Preferences.AC_GLOSSARY_CAPITALIZE, followCapitalizationCheckBox.isSelected());
         doClose();
     }//GEN-LAST:event_okButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JCheckBox displaySourceCheckBox;
-    private javax.swing.JCheckBox followCapitalizationCheckBox;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JCheckBox longerFirstCheckBox;
     private javax.swing.JButton okButton;
     private javax.swing.JCheckBox sortBySourceCheckBox;

@@ -238,7 +238,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
         if (tokens.length != 0) {
             Token lastToken = tokens[tokens.length - 1];
             String lastString = text.substring(lastToken.getOffset()).trim();
-            if (lastString.length() > 0) {
+            if (!lastString.isEmpty()) {
                 token = lastString;
             }
         }

@@ -53,7 +53,7 @@ public class StringUtil {
      * all letters are lower case.
      */
     public static boolean isLowerCase(final String input) {
-        if (StringUtil.isEmpty(input)) {
+        if (input.isEmpty()) {
             return false;
         }
         boolean hasLetters = false;
@@ -73,7 +73,7 @@ public class StringUtil {
      * Returns true if the input is upper case.
      */
     public static boolean isUpperCase(final String input) {
-        if (StringUtil.isEmpty(input)) {
+        if (input.isEmpty()) {
             return false;
         }
         boolean hasLetters = false;
@@ -94,7 +94,7 @@ public class StringUtil {
      * is not title case.
      */
     public static boolean isMixedCase(final String input) {
-        if (StringUtil.isEmpty(input) || input.codePointCount(0, input.length()) < 2) {
+        if (input.isEmpty() || input.codePointCount(0, input.length()) < 2) {
             return false;
         }
         boolean hasUpper = false;
@@ -125,7 +125,7 @@ public class StringUtil {
      * These are handled correctly.
      */
     public static boolean isTitleCase(final String input) {
-        if (StringUtil.isEmpty(input)) {
+        if (input.isEmpty()) {
             return false;
         }
         if (input.codePointCount(0, input.length()) > 1) {
@@ -145,7 +145,7 @@ public class StringUtil {
      * {@link Character#isWhitespace(int)}).
      */
     public static boolean isWhiteSpace(final String input) {
-        if (StringUtil.isEmpty(input)) {
+        if (input.isEmpty()) {
             return false;
         }
         for (int i = 0, cp; i < input.length(); i += Character.charCount(cp)) {

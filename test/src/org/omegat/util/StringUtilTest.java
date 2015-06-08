@@ -95,9 +95,30 @@ public class StringUtilTest extends TestCase {
     
     public void testEmptyStringCase() {
         String test = null;
-        assertFalse(StringUtil.isUpperCase(test));
-        assertFalse(StringUtil.isLowerCase(test));
-        assertFalse(StringUtil.isTitleCase(test));
+        try {
+            assertFalse(StringUtil.isUpperCase(test));
+            fail("Should throw an NPE");
+        } catch (NullPointerException ex) {
+            // OK
+        }
+        try {
+            assertFalse(StringUtil.isLowerCase(test));
+            fail("Should throw an NPE");
+        } catch (NullPointerException ex) {
+            // OK
+        }
+        try {
+            assertFalse(StringUtil.isTitleCase(test));
+            fail("Should throw an NPE");
+        } catch (NullPointerException ex) {
+            // OK
+        }
+        try {
+            StringUtil.toTitleCase(test, Locale.ENGLISH);
+            fail("Should throw an NPE");
+        } catch (NullPointerException ex) {
+            // OK
+        }
         
         test = "";
         assertFalse(StringUtil.isUpperCase(test));
@@ -106,7 +127,12 @@ public class StringUtilTest extends TestCase {
     }
     
     public void testIsWhiteSpace() {
-        assertFalse(StringUtil.isWhiteSpace(null));
+        try {
+            assertFalse(StringUtil.isWhiteSpace(null));
+            fail("Should throw an NPE");
+        } catch (NullPointerException ex) {
+            // OK
+        }
         assertFalse(StringUtil.isWhiteSpace(""));
         assertTrue(StringUtil.isWhiteSpace(" "));
         assertFalse(StringUtil.isWhiteSpace(" a "));

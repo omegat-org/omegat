@@ -118,7 +118,7 @@
             </listitem>
 
             <listitem>
-              <para>Customer ID (correspondeert met de <code>&lt;c1&gt;microsoft.api.client_id&lt;/c1&gt;</code> parameter voor de opdrachtregel)</para>
+              <para>Customer ID (correspondeert met de <code>microsoft.api.client_id</code> parameter voor de opdrachtregel)</para>
             </listitem>
           </itemizedlist></para>
       </listitem>

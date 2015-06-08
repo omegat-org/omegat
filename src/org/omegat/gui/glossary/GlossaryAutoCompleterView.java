@@ -107,7 +107,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
             // Consider null context to match everything
             return true;
         }
-        if (term.equals(context)) {
+        if (term.equals(context) || term.equals(capitalize(context))) {
             // Consider a term to NOT match if it is identical to the context (it is already present)
             return false;
         }

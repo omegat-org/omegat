@@ -398,6 +398,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
         optionsMenu.add(optionsAutoCompleteMenu = createMenu("MW_OPTIONSMENU_AUTOCOMPLETE"));
         // add any autocomplete view configuration menu items below
+        optionsAutoCompleteMenu.add(optionsAutoCompleteShowAutomaticallyItem = createCheckboxMenuItem("MW_OPTIONSMENU_AUTOCOMPLETE_SHOW_AUTOMATICALLY"));
         optionsAutoCompleteMenu.add(optionsAutoCompleteGlossaryMenuItem = createMenuItem("MW_OPTIONSMENU_AUTOCOMPLETE_GLOSSARY"));
         optionsAutoCompleteMenu.add(optionsAutoCompleteAutoTextMenuItem = createMenuItem("MW_OPTIONSMENU_AUTOCOMPLETE_AUTOTEXT"));
         optionsAutoCompleteMenu.add(optionsAutoCompleteCharTableMenuItem = createMenuItem("MW_OPTIONSMENU_AUTOCOMPLETE_CHARTABLE"));
@@ -493,6 +494,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 .setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(Core.getEditor()
                         .getSettings().getDisplayModificationInfo()));
 
+        optionsAutoCompleteShowAutomaticallyItem.setSelected(Preferences.isPreferenceDefault(
+                Preferences.AC_SHOW_SUGGESTIONS_AUTOMATICALLY, true));
         optionsGlossaryTBXDisplayContextCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
                 Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT, true));
         optionsGlossaryExactMatchCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
@@ -724,6 +727,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JCheckBoxMenuItem optionsTransTipsEnableMenuItem;
     JCheckBoxMenuItem optionsTransTipsExactMatchMenuItem;
     JMenu optionsAutoCompleteMenu;
+    JMenuItem optionsAutoCompleteShowAutomaticallyItem;
     JMenuItem optionsAutoCompleteGlossaryMenuItem;
     JMenuItem optionsAutoCompleteAutoTextMenuItem;
     JMenuItem optionsAutoCompleteCharTableMenuItem;

@@ -786,7 +786,7 @@ public class EditorController implements IEditor {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
                     markerController.reprocessImmediately(m_docSegList[displayedEntryIndex]);
-                    editor.autoCompleter.updatePopup();
+                    editor.autoCompleter.textDidChange();
                 }
             });
         }

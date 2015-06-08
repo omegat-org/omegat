@@ -31,6 +31,7 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.DefaultListCellRenderer;
@@ -202,25 +203,31 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     
     @Override
     public boolean updateViewData() {
-        EditorTextArea3 editor = completer.getEditor();
+        List<AutoCompleterItem> entryList = computeEntries(false);    
+        if (entryList.isEmpty()) {
+            entryList.add(NO_SUGGESTIONS);
+        }
+        setData(entryList);
+        
+        return !entryList.isEmpty();
+    }
+    
+    @SuppressWarnings("unchecked")
+    private List<AutoCompleterItem> computeEntries(boolean contextualOnly) {
         try {
+            EditorTextArea3 editor = completer.getEditor();
             int offset = editor.getCaretPosition();
             int translationStart = editor.getOmDocument().getTranslationStart();
-            
             String prevText = editor.getDocument().getText(translationStart, offset - translationStart);
-            
-            List<AutoCompleterItem> entryList = computeListData(prevText);
-            
-            if (entryList.isEmpty()) {
-                entryList.add(NO_SUGGESTIONS);
-            }
-            setData(entryList);
-            
-            return !entryList.isEmpty();
-        } catch (BadLocationException ex) {
-            // what now?
-            return false;
+            return computeListData(prevText, contextualOnly);
+        } catch (BadLocationException e) {
+            return Collections.EMPTY_LIST;
         }
+    }
+    
+    @Override
+    public boolean shouldPopUp() {
+        return !computeEntries(true).isEmpty();
     }
     
     protected String getLastToken(String text) {
@@ -243,7 +250,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
      * @param prevText the text in the editing field up to the cursor location
      * @return a list of AutoCompleterItems.
      */
-    public abstract List<AutoCompleterItem> computeListData(String prevText);
+    public abstract List<AutoCompleterItem> computeListData(String prevText, boolean contextualOnly);
     
     /**
      * Each view should determine how to print a view item.

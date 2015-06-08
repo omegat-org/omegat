@@ -663,6 +663,11 @@ public class MainWindowMenuHandler {
                 mainWindow.menu.optionsTransTipsExactMatchMenuItem.isSelected());
     }
 
+    public void optionsAutoCompleteShowAutomaticallyItemActionPerformed() {
+        Preferences.setPreference(Preferences.AC_SHOW_SUGGESTIONS_AUTOMATICALLY,
+                mainWindow.menu.optionsAutoCompleteShowAutomaticallyItem.isSelected());
+    }
+    
     public void optionsAutoCompleteGlossaryMenuItemActionPerformed() {
         new GlossaryAutoCompleterOptionsDialog(mainWindow).setVisible(true);
     }

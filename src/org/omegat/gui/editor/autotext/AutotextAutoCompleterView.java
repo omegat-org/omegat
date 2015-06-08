@@ -50,7 +50,7 @@ public class AutotextAutoCompleterView extends AutoCompleterListView {
     }
             
     @Override
-    public List<AutoCompleterItem> computeListData(String prevText) {
+    public List<AutoCompleterItem> computeListData(String prevText, boolean contextualOnly) {
         
         List<AutoCompleterItem> result = new ArrayList<AutoCompleterItem>();
         for (AutotextPair s : Core.getAutoText().getList()) {
@@ -61,7 +61,7 @@ public class AutotextAutoCompleterView extends AutoCompleterListView {
         }
         
         if (!Core.getProject().getProjectProperties().getTargetLanguage().isSpaceDelimited()
-                && result.size() == 0) {
+                && result.isEmpty() && !contextualOnly) {
             for (AutotextPair s : Core.getAutoText().getList()) {
                 result.add(new AutoCompleterItem(s.target, new String[] { s.source, s.comment }, 0));
             }

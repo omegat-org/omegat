@@ -144,6 +144,14 @@ abstract public class AbstractAutoCompleterView {
     }
 
     /**
+     * Return true to indicate that the view has relevant contextual suggestions
+     * that merit displaying the AutoCompleter popup unprompted.
+     * 
+     * @return Whether or not the AutoCompleter should appear
+     */
+    public abstract boolean shouldPopUp();
+    
+    /**
      * Indicates whether or not the AutoCompleter should close by default when the
      * user confirms a selection. Override and return false to keep the popup open.
      * 

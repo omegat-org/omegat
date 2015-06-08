@@ -85,4 +85,9 @@ public class CharTableAutoCompleterView extends AutoCompleterTableView {
     public void setSelection(Point p) {
         super.setSelection(model.modifyPoint(p));
     }
+    
+    @Override
+    public boolean shouldPopUp() {
+        return false;
+    }
 }

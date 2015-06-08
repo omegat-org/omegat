@@ -51,6 +51,7 @@ import org.omegat.gui.glossary.GlossaryAutoCompleterView;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
+import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 
 /**
@@ -73,6 +74,8 @@ public class AutoCompleter implements IAutoCompleter {
     boolean onMac = Platform.isMacOSX();
     
     public final static int pageRowCount = 10;
+    
+    private boolean didPopUpAutomatically = false;
     
     /**
      * a list of the views associated with this auto-completer
@@ -212,7 +215,7 @@ public class AutoCompleter implements IAutoCompleter {
         
         AbstractAutoCompleterView view = getCurrentView();
         
-        if (editor.isEnabled() && view.updateViewData() && view.getRowCount() != 0) {
+        if (editor.isEnabled() && view.updateViewData()) {
             scroll.setPreferredSize(new Dimension(
                     Math.min(view.getPreferredWidth(), MAX_POPUP_WIDTH),
                     Math.max(view.getPreferredHeight(), MIN_VIEWPORT_HEIGHT)));
@@ -324,20 +327,20 @@ public class AutoCompleter implements IAutoCompleter {
     /** go to the next view */
     private void selectNextView() {
         currentView = nextViewNumber();
-        activateView();
+        activateView(false);
     }
 
     /** activate the current view */
-    private void activateView() {
+    private void activateView(boolean force) {
         scroll.setViewportView(getCurrentView().getViewContent());
         updateViewLabel();
-        updatePopup();
+        updatePopup(force);
     }
     
     /** select the previous view */
     private void selectPreviousView() {
         currentView = prevViewNumber();
-        activateView();
+        activateView(false);
     }
 
     public boolean isVisible() {
@@ -347,6 +350,9 @@ public class AutoCompleter implements IAutoCompleter {
     public void setVisible(boolean isVisible) {
         updatePopup(isVisible);
         popup.setVisible(isVisible);
+        if (!isVisible) {
+            didPopUpAutomatically = false;
+        }
     }
     
     /** 
@@ -357,5 +363,28 @@ public class AutoCompleter implements IAutoCompleter {
      */
     public String keyText(int base, int modifier) {
          return KeyEvent.getKeyModifiersText(modifier) + "+" + KeyEvent.getKeyText(base);
+    }
+    
+    public void textDidChange() {
+        if (isVisible()) {
+            // Close if we popped up automatically but no longer have relevant suggestions
+            if (didPopUpAutomatically && !getCurrentView().shouldPopUp()) {
+                setVisible(false);
+            } else {
+                updatePopup();
+            }
+            return;
+        }
+        if (!Preferences.isPreference(Preferences.AC_SHOW_SUGGESTIONS_AUTOMATICALLY)) {
+            return;
+        }
+        for (int i = 0; i < views.size(); i++) {
+            if (views.get(i).shouldPopUp()) {
+                currentView = i;
+                activateView(true);
+                didPopUpAutomatically = true;
+                break;
+            }
+        }
     }
 }

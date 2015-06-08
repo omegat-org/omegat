@@ -49,7 +49,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
     }
 
     @Override
-    public List<AutoCompleterItem> computeListData(String prevText) {
+    public List<AutoCompleterItem> computeListData(String prevText, boolean contextualOnly) {
         String wordChunk = getLastToken(prevText);
         
         List<AutoCompleterItem> result = new ArrayList<AutoCompleterItem>();
@@ -59,19 +59,21 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
                 : false;
         
         List<GlossaryEntry> entries = Core.getGlossary().getDisplayedEntries();
-        for (GlossaryEntry entry : entries) {
-            for (String s : entry.getLocTerms(true)) {
-                if (s.toLowerCase().startsWith(wordChunk.toLowerCase())) {
-                   if (capitalize) {
-                        s = s.substring(0,1).toUpperCase() + s.substring(1);
+        if (!"".equals(wordChunk)) {
+            for (GlossaryEntry entry : entries) {
+                for (String s : entry.getLocTerms(true)) {
+                    if (s.toLowerCase().startsWith(wordChunk.toLowerCase()) && !s.toLowerCase().equals(wordChunk)) {
+                       if (capitalize) {
+                            s = s.substring(0,1).toUpperCase() + s.substring(1);
+                        }
+                        result.add(new AutoCompleterItem(s, new String[] { entry.getSrcText() }, wordChunk.length()));
                     }
-                    result.add(new AutoCompleterItem(s, new String[] { entry.getSrcText() }, wordChunk.length()));
                 }
             }
         }
         
         if (!Core.getProject().getProjectProperties().getTargetLanguage().isSpaceDelimited()
-                && result.size() == 0) {
+                && result.isEmpty() && !contextualOnly) {
             for (GlossaryEntry entry : entries) {
                 for (String s : entry.getLocTerms(true)) {
                     result.add(new AutoCompleterItem(s, new String[] { entry.getSrcText() }, 0));

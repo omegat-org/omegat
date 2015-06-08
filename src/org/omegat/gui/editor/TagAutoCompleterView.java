@@ -48,7 +48,7 @@ public class TagAutoCompleterView extends AutoCompleterListView {
     }
 
     @Override
-    public List<AutoCompleterItem> computeListData(String prevText) {
+    public List<AutoCompleterItem> computeListData(String prevText, boolean contextualOnly) {
         String wordChunk = getLastToken(prevText);
         
         List<String> missingGroups = TagUtil.getGroupedMissingTagsFromTarget();
@@ -58,14 +58,16 @@ public class TagAutoCompleterView extends AutoCompleterListView {
             wordChunk = "";
         }
 
-        // Check for partial matches among missing tag groups.
         List<String> matchGroups = new ArrayList<String>();
-        for (String g : missingGroups) {
-            if (g.startsWith(wordChunk)) matchGroups.add(g);
+        if (!"".equals(wordChunk)) {
+            // Check for partial matches among missing tag groups.
+            for (String g : missingGroups) {
+                if (g.startsWith(wordChunk)) matchGroups.add(g);
+            }
         }
-        
+
         // If there are no partial matches, show all missing tags as suggestions.
-        if (matchGroups.isEmpty()) {
+        if (matchGroups.isEmpty() && !contextualOnly) {
             return convertList(missingGroups, 0);
         }
         

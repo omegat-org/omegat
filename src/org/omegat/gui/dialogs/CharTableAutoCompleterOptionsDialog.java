@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,6 +26,7 @@
 
 package org.omegat.gui.dialogs;
 
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import javax.swing.JTable;
 import org.omegat.gui.editor.chartable.CharTableModel;
@@ -51,10 +53,11 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
      */
     public CharTableAutoCompleterOptionsDialog(java.awt.Frame parent) {
         super(parent, true);
+        initComponents();
         
         StaticUIUtils.setEscapeClosable(this);
-
-        initComponents();
+        getRootPane().setDefaultButton(okButton);
+        
         allCharTable.setModel(allCharModel);
         selCharTable.setModel(selCharModel);
         
@@ -66,6 +69,9 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
                 Preferences.AC_CHARTABLE_CUSTOM_CHAR_STRING));
         
         panelSetEnabled(selectedCharsCheckBox.isSelected());
+        
+        setPreferredSize(new Dimension(400, 500));
+        pack();
         DockingUI.displayCentered(this);
     }
     
@@ -91,23 +97,33 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel3 = new javax.swing.JPanel();
         selectedCharsCheckBox = new javax.swing.JCheckBox();
-        okButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
         customPanel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        selCharTable = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        jPanel8 = new javax.swing.JPanel();
         descriptionTextArea = new javax.swing.JTextArea();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
         allCharLabel = new javax.swing.JLabel();
-        selCharLabel = new javax.swing.JLabel();
-        uniqueCheckBox = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         allCharTable = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        selCharLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        selCharTable = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
         clearButton = new javax.swing.JButton();
+        uniqueCheckBox = new javax.swing.JCheckBox();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        okButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(OStrings.getString("AC_CHARTABLE_DIALOG_TITLE")); // NOI18N
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jPanel3.setLayout(new java.awt.BorderLayout());
 
         selectedCharsCheckBox.setText(OStrings.getString("AC_CHARTABLE_CUSTOM")); // NOI18N
         selectedCharsCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -115,64 +131,31 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
                 selectedCharsCheckBoxStateChanged(evt);
             }
         });
+        jPanel3.add(selectedCharsCheckBox, java.awt.BorderLayout.NORTH);
 
-        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okButtonActionPerformed(evt);
-            }
-        });
+        customPanel.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(5, 0, 0, 0), javax.swing.BorderFactory.createEtchedBorder()));
+        customPanel.setLayout(new java.awt.BorderLayout());
 
-        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
-
-        customPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        selCharTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        selCharTable.setCellSelectionEnabled(true);
-        selCharTable.setTableHeader(null);
-        selCharTable.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                selCharTableKeyReleased(evt);
-            }
-        });
-        jScrollPane2.setViewportView(selCharTable);
-
-        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jPanel8.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel8.setLayout(new java.awt.BorderLayout());
 
         descriptionTextArea.setEditable(false);
-        descriptionTextArea.setBackground(getBackground());
-        descriptionTextArea.setColumns(20);
-        descriptionTextArea.setFont(selectedCharsCheckBox.getFont());
+        descriptionTextArea.setFont(getFont());
         descriptionTextArea.setLineWrap(true);
-        descriptionTextArea.setRows(5);
         descriptionTextArea.setText(OStrings.getString("AC_CHARTABLE_EXPLANATION")); // NOI18N
         descriptionTextArea.setWrapStyleWord(true);
-        descriptionTextArea.setBorder(null);
-        descriptionTextArea.setMargin(new java.awt.Insets(2, 5, 2, 5));
-        jScrollPane3.setViewportView(descriptionTextArea);
+        descriptionTextArea.setOpaque(false);
+        jPanel8.add(descriptionTextArea, java.awt.BorderLayout.NORTH);
+
+        customPanel.add(jPanel8, java.awt.BorderLayout.NORTH);
+
+        jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.Y_AXIS));
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel6.setLayout(new java.awt.BorderLayout());
 
         allCharLabel.setText(OStrings.getString("AC_CHARTABLE_ALL_LABEL")); // NOI18N
-
-        selCharLabel.setText(OStrings.getString("AC_CHARTABLE_CUSTOM_LABEL")); // NOI18N
-
-        uniqueCheckBox.setText(OStrings.getString("AC_CHARTABLE_CUSTOM_UNIQUE")); // NOI18N
-        uniqueCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                uniqueCheckBoxStateChanged(evt);
-            }
-        });
+        jPanel6.add(allCharLabel, java.awt.BorderLayout.NORTH);
 
         allCharTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -183,6 +166,7 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
             }
         ));
         allCharTable.setCellSelectionEnabled(true);
+        allCharTable.setFillsViewportHeight(true);
         allCharTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         allCharTable.setTableHeader(null);
         allCharTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -197,88 +181,89 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(allCharTable);
 
+        jPanel6.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jPanel7.add(jPanel6);
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 5, 5));
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
+        selCharLabel.setText(OStrings.getString("AC_CHARTABLE_CUSTOM_LABEL")); // NOI18N
+        jPanel5.add(selCharLabel, java.awt.BorderLayout.NORTH);
+
+        selCharTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        selCharTable.setCellSelectionEnabled(true);
+        selCharTable.setFillsViewportHeight(true);
+        selCharTable.setTableHeader(null);
+        selCharTable.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                selCharTableKeyReleased(evt);
+            }
+        });
+        jScrollPane2.setViewportView(selCharTable);
+
+        jPanel5.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        jPanel7.add(jPanel5);
+
+        customPanel.add(jPanel7, java.awt.BorderLayout.CENTER);
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 5, 5));
+        jPanel4.setLayout(new java.awt.BorderLayout());
+
         clearButton.setText(OStrings.getString("AC_CHARTABLE_CLEAR_BUTTON")); // NOI18N
         clearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clearButtonActionPerformed(evt);
             }
         });
+        jPanel4.add(clearButton, java.awt.BorderLayout.EAST);
 
-        javax.swing.GroupLayout customPanelLayout = new javax.swing.GroupLayout(customPanel);
-        customPanel.setLayout(customPanelLayout);
-        customPanelLayout.setHorizontalGroup(
-            customPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(customPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(customPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(customPanelLayout.createSequentialGroup()
-                        .addComponent(uniqueCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(clearButton))
-                    .addGroup(customPanelLayout.createSequentialGroup()
-                        .addGroup(customPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(selCharLabel)
-                            .addComponent(allCharLabel)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        customPanelLayout.setVerticalGroup(
-            customPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(customPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(allCharLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(customPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(customPanelLayout.createSequentialGroup()
-                        .addComponent(selCharLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(uniqueCheckBox))
-                    .addComponent(clearButton, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
-        );
+        uniqueCheckBox.setText(OStrings.getString("AC_CHARTABLE_CUSTOM_UNIQUE")); // NOI18N
+        uniqueCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                uniqueCheckBoxStateChanged(evt);
+            }
+        });
+        jPanel4.add(uniqueCheckBox, java.awt.BorderLayout.WEST);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(selectedCharsCheckBox)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(okButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelButton))
-                    .addComponent(customPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(selectedCharsCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(customPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(okButton)
-                    .addComponent(cancelButton))
-                .addContainerGap())
-        );
+        customPanel.add(jPanel4, java.awt.BorderLayout.SOUTH);
 
-        pack();
+        jPanel3.add(customPanel, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
+        jPanel2.add(okButton);
+
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+        jPanel2.add(cancelButton);
+
+        jPanel1.add(jPanel2, java.awt.BorderLayout.EAST);
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
     private void allCharTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_allCharTableKeyReleased
@@ -360,9 +345,16 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
     private javax.swing.JButton clearButton;
     private javax.swing.JPanel customPanel;
     private javax.swing.JTextArea descriptionTextArea;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton okButton;
     private javax.swing.JLabel selCharLabel;
     private javax.swing.JTable selCharTable;

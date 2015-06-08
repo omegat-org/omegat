@@ -470,7 +470,8 @@ public class Preferences {
      * Returns the boolean value of some preference out of OmegaT's preferences
      * file, if it exists.
      * <p>
-     * If the key is not found, returns the default value provided.
+     * If the key is not found, returns the default value provided and sets the
+     * preference to the default value.
      * 
      * @param key
      *            name of the key to look up, usually OConsts.PREF_...
@@ -481,6 +482,7 @@ public class Preferences {
     public static boolean isPreferenceDefault(String key, boolean defaultValue) {
         String val = getPreference(key);
         if (StringUtil.isEmpty(val)) {
+            setPreference(key, defaultValue);
             return defaultValue;
         }
         return "true".equals(val);

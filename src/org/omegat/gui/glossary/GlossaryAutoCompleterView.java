@@ -68,6 +68,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
     @Override
     public List<AutoCompleterItem> computeListData(String prevText, boolean contextualOnly) {
         String wordChunk = getLastToken(prevText);
+        String sortMatchTo = wordChunk;
         
         List<AutoCompleterItem> result = new ArrayList<AutoCompleterItem>();
         List<GlossaryEntry> entries = Core.getGlossary().getDisplayedEntries();
@@ -78,9 +79,10 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
         if (result.isEmpty() && !contextualOnly) {
             // Get non-contextual results only if called for
             fillMatchingTerms(result, entries, null);
+            sortMatchTo = null;
         }
         
-        Collections.sort(result, new GlossaryComparator(entries, wordChunk));
+        Collections.sort(result, new GlossaryComparator(entries, sortMatchTo));
         
         return result;
     }
@@ -119,11 +121,10 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
             // Consider null context to match everything
             return true;
         }
-        if (term.equals(context) || matchCapitalization(term, context).equals(context)) {
-            // Consider a term to NOT match if it is identical to the context (it is already present)
-            return false;
-        }
-        return toLowerCase(term).startsWith(toLowerCase(context));
+        String lowerTerm = toLowerCase(term);
+        String lowerContext = toLowerCase(context);
+        // Consider a term to NOT match if it is the same (modulo case) as the context (i.e. it is already present)
+        return !lowerTerm.equals(lowerContext) && lowerTerm.startsWith(lowerContext);
     }
     
     private Locale getTargetLocale() {

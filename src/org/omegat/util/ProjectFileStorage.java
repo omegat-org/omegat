@@ -102,20 +102,14 @@ public class ProjectFileStorage {
 
         // Compute glossary file location
         String glossaryFile = om.getProject().getGlossaryFile();
-        String glossaryDir = null;
-        if (glossaryFile != null) {
-            glossaryDir = new File(glossaryFile).getParent();
-        } else {
-            glossaryDir = result.getGlossaryRoot();
-        }
-        glossaryDir = computeAbsolutePath(m_root, glossaryDir, OConsts.DEFAULT_GLOSSARY);
-        if (glossaryFile == null) {
+        if (StringUtil.isEmpty(glossaryFile)) {
             glossaryFile = OConsts.DEFAULT_FOLDER_MARKER;
         }
         if (glossaryFile.equalsIgnoreCase(OConsts.DEFAULT_FOLDER_MARKER)) {
             glossaryFile = result.computeDefaultWriteableGlossaryFile();
-        } else {
-            glossaryFile = glossaryDir + new File(glossaryFile).getName();
+        } else if (! new File(glossaryFile).isAbsolute()) {
+            String absGlossaryRoot = computeAbsolutePath(m_root, result.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY);
+            glossaryFile = new File(absGlossaryRoot, glossaryFile).getPath();
         }
         result.setWriteableGlossary(glossaryFile);
 
@@ -166,24 +160,11 @@ public class ProjectFileStorage {
                 computeRelativePath(m_root, props.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY));
 
         // Compute glossary file location
-        String glossaryFile = new File(props.getWriteableGlossary()).getName(); // File name
+        String glossaryFile = computeRelativePath(props.getGlossaryRoot(), props.getWriteableGlossary(), null); // Rel file name
         String glossaryDir = computeRelativePath(m_root, props.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY);
-        if (glossaryDir.equalsIgnoreCase(OConsts.DEFAULT_FOLDER_MARKER)) { // Standard path for glossary
-            if (!props.isDefaultWriteableGlossaryFile()) {
-                glossaryDir = props.getWriteableGlossaryDir();
-                glossaryDir = computeRelativePath(m_root, glossaryDir, OConsts.DEFAULT_GLOSSARY);
-                if (!StringUtil.isEmpty(glossaryDir)) {
-                    glossaryDir += "/"; // Separator is always "/" internally
-                }
-                glossaryFile = glossaryDir + glossaryFile;
-            } else { // Everything equals to default
-                glossaryFile = OConsts.DEFAULT_FOLDER_MARKER;
-            }
-        } else {
-            if (!glossaryDir.endsWith(File.separator)) {
-                glossaryDir += "/"; // Separator is always "/" internally
-            }
-            glossaryFile = glossaryDir + glossaryFile;
+        if (glossaryDir.equalsIgnoreCase(OConsts.DEFAULT_FOLDER_MARKER) && props.isDefaultWriteableGlossaryFile()) {
+            // Everything equals to default
+            glossaryFile = OConsts.DEFAULT_FOLDER_MARKER;
         }
         om.getProject().setGlossaryFile(glossaryFile);
 
@@ -264,8 +245,9 @@ public class ProjectFileStorage {
      * @since 1.6.0
      */
     private static String computeRelativePath(String m_root, String absolutePath, String defaultName) {
-        if (absolutePath.equals(m_root + defaultName + File.separator))
+        if (defaultName != null && new File(absolutePath).equals(new File(m_root, defaultName))) {
             return OConsts.DEFAULT_FOLDER_MARKER;
+        }
 
         try {
             // trying to look two folders up

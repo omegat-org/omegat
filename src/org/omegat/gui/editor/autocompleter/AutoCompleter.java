@@ -74,7 +74,7 @@ public class AutoCompleter implements IAutoCompleter {
     
     boolean onMac = Platform.isMacOSX();
     
-    public final static int pageRowCount = 10;
+    public final static int PAGE_ROW_COUNT = 10;
     
     private boolean didPopUpAutomatically = false;
     

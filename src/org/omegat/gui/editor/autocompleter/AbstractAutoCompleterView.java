@@ -137,7 +137,7 @@ abstract public class AbstractAutoCompleterView {
      * @return a modified row count.
      */
     protected int getModifiedRowCount() {
-        return Math.min(getRowCount(), AutoCompleter.pageRowCount);
+        return Math.min(getRowCount(), AutoCompleter.PAGE_ROW_COUNT);
     }
 
     /**

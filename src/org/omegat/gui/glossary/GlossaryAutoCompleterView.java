@@ -107,9 +107,6 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
                     continue;
                 }
                 String payload = shouldCapitalize ? capitalize(term) : term;
-                if (Core.getProject().getProjectProperties().getTargetLanguage().isSpaceDelimited()) {
-                    payload += " ";
-                }
                 int length = context == null ? 0 : context.length();
                 result.add(new AutoCompleterItem(payload, new String[] { entry.getSrcText() }, length));
             }

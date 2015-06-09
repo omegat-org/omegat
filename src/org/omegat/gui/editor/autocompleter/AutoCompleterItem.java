@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2013, 2014 Aaron Madlon-Kay
+ Copyright (C) 2013-2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -24,6 +24,8 @@
  **************************************************************************/
 
 package org.omegat.gui.editor.autocompleter;
+
+import java.util.Arrays;
 
 /**
  * A class to represent an item available for auto-completion.
@@ -59,5 +61,51 @@ public class AutoCompleterItem {
         this.cursorAdjust = cursorAdjust;
         this.keepSelection = keepSelection;
         this.replacementLength = replacementLength;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + cursorAdjust;
+        result = prime * result + Arrays.hashCode(extras);
+        result = prime * result + (keepSelection ? 1231 : 1237);
+        result = prime * result + ((payload == null) ? 0 : payload.hashCode());
+        result = prime * result + replacementLength;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        AutoCompleterItem other = (AutoCompleterItem) obj;
+        if (cursorAdjust != other.cursorAdjust) {
+            return false;
+        }
+        if (!Arrays.equals(extras, other.extras)) {
+            return false;
+        }
+        if (keepSelection != other.keepSelection) {
+            return false;
+        }
+        if (payload == null) {
+            if (other.payload != null) {
+                return false;
+            }
+        } else if (!payload.equals(other.payload)) {
+            return false;
+        }
+        if (replacementLength != other.replacementLength) {
+            return false;
+        }
+        return true;
     }
 }

@@ -106,7 +106,10 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
                 }
                 String payload = matchCapitalization(term, context);
                 int length = context == null ? 0 : context.length();
-                result.add(new AutoCompleterItem(payload, new String[] { entry.getSrcText() }, length));
+                AutoCompleterItem item = new AutoCompleterItem(payload, new String[] { entry.getSrcText() }, length);
+                if (!result.contains(item)) {
+                    result.add(item);
+                }
             }
         }
     }

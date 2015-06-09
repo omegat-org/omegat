@@ -1,16 +1,19 @@
 ----------------------------------------------------------------------
  OmegaT 3.5 update 1
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    0 Bug fix
    2 Localisation updates
 ----------------------------------------------------------------------
 3.5 update 1 vs 3.5
 
   Implemented requests:
-  
+
   - Drag and drop within the segment 
   https://sourceforge.net/p/omegat/feature-requests/401/
+
+  - Auto-completion option: Show relevant suggestions automatically
+  https://sourceforge.net/p/omegat/feature-requests/1097/
 
   Localisation updates:
   - Dutch localisation updated to 3.5 (UI, documentation, scripts, readme)

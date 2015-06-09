@@ -152,6 +152,7 @@ public class OSXIntegration {
         public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
             JRootPane rootPane = Core.getMainWindow().getApplicationFrame().getRootPane();
             switch (eventType) {
+            case CREATE:
             case LOAD:
                 String projDir = Core.getProject().getProjectProperties().getProjectRoot();
                 setProxyIcon(rootPane, new File(projDir));

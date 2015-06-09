@@ -101,7 +101,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     @Override
     public void fileChanged(File file) {
         synchronized (this) {
-            glossaries.remove(file.getName());
+            glossaries.remove(file.getPath());
         }
         if (file.exists()) {
             try {
@@ -109,7 +109,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
                 if (entries != null) {
                     synchronized (this) {
                         Log.logRB("CT_LOADING_GLOSSARY_DETAILS", new Object[] { entries.size(), file.getName() });
-                        glossaries.put(file.getName(), entries);
+                        glossaries.put(file.getPath(), entries);
                     }
                 }
             } catch (Exception ex) {

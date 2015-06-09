@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.omegat.core.Core;
+import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.gui.editor.autocompleter.AutoCompleterItem;
 import org.omegat.gui.editor.autocompleter.AutoCompleterListView;
 import org.omegat.util.OStrings;
@@ -50,6 +51,19 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
         super(OStrings.getString("AC_GLOSSARY_VIEW"));
     }
 
+    /* Users with gigantic glossaries can get too many popups, so adjust the behavior here.
+     * Only pop up if a) we have suggestions, and b) if there's more than one page of
+     * suggestions then the user should have input at least 2 characters.
+     */
+    @Override
+    public boolean shouldPopUp() {
+        String leadingText = getLeadingText();
+        List<AutoCompleterItem> entries = computeListData(leadingText, true);
+        return !entries.isEmpty()
+                && (leadingText.codePointCount(0, leadingText.length()) > 1
+                        || entries.size() <= AutoCompleter.PAGE_ROW_COUNT);
+    }
+    
     @Override
     public List<AutoCompleterItem> computeListData(String prevText, boolean contextualOnly) {
         String wordChunk = getLastToken(prevText);

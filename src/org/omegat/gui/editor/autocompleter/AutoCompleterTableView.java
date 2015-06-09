@@ -32,7 +32,6 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.List;
 
 import javax.swing.JTable;
 
@@ -286,10 +285,5 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
             return new AutoCompleterItem(selection.toString(), null, 0);
         }
         return new AutoCompleterItem((String) selection, null, 0);
-    }
-    
-    @Override
-    public void setData(List<AutoCompleterItem> entryList) {
-        
     }
 }

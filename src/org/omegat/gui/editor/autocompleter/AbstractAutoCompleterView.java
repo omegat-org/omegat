@@ -108,12 +108,6 @@ abstract public class AbstractAutoCompleterView {
     public abstract int getPreferredWidth();
     
     /**
-     * set the list or table data
-     * @param entryList the entries
-     */
-    public abstract void setData(List<AutoCompleterItem> entryList);
-    
-    /**
      * get the selected value
      * @return 
      */

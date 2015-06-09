@@ -180,8 +180,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
         return width;
     };
     
-    @Override
-    public void setData(List<AutoCompleterItem> entryList) {
+    protected void setData(List<AutoCompleterItem> entryList) {
         getList().setListData(entryList.toArray());
         if (!entryList.isEmpty()) {
             getList().setSelectedIndex(0);

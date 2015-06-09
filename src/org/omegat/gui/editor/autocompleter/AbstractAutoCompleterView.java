@@ -30,7 +30,10 @@ import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.util.List;
 
+import javax.swing.text.BadLocationException;
+
 import org.omegat.core.Core;
+import org.omegat.gui.editor.EditorTextArea3;
 import org.omegat.tokenizer.ITokenizer;
 
 /**
@@ -153,5 +156,16 @@ abstract public class AbstractAutoCompleterView {
      */
     public boolean shouldCloseOnSelection() {
         return true;
+    }
+    
+    protected String getLeadingText() {
+        try {
+            EditorTextArea3 editor = completer.getEditor();
+            int offset = editor.getCaretPosition();
+            int translationStart = editor.getOmDocument().getTranslationStart();
+            return editor.getDocument().getText(translationStart, offset - translationStart);
+        } catch (BadLocationException e) {
+            return "";
+        }
     }
 }

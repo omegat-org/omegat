@@ -31,7 +31,6 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Collections;
 import java.util.List;
 
 import javax.swing.DefaultListCellRenderer;
@@ -41,9 +40,7 @@ import javax.swing.JScrollBar;
 import javax.swing.ListModel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.BadLocationException;
 
-import org.omegat.gui.editor.EditorTextArea3;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
@@ -202,7 +199,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     
     @Override
     public boolean updateViewData() {
-        List<AutoCompleterItem> entryList = computeEntries(false);    
+        List<AutoCompleterItem> entryList = computeListData(getLeadingText(), false);    
         if (entryList.isEmpty()) {
             entryList.add(NO_SUGGESTIONS);
         }
@@ -211,22 +208,9 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
         return !entryList.isEmpty();
     }
     
-    @SuppressWarnings("unchecked")
-    private List<AutoCompleterItem> computeEntries(boolean contextualOnly) {
-        try {
-            EditorTextArea3 editor = completer.getEditor();
-            int offset = editor.getCaretPosition();
-            int translationStart = editor.getOmDocument().getTranslationStart();
-            String prevText = editor.getDocument().getText(translationStart, offset - translationStart);
-            return computeListData(prevText, contextualOnly);
-        } catch (BadLocationException e) {
-            return Collections.EMPTY_LIST;
-        }
-    }
-    
     @Override
     public boolean shouldPopUp() {
-        return !computeEntries(true).isEmpty();
+        return !computeListData(getLeadingText(), true).isEmpty();
     }
     
     protected String getLastToken(String text) {

@@ -38,6 +38,7 @@ import org.omegat.gui.editor.autocompleter.AutoCompleterItem;
 import org.omegat.gui.editor.autocompleter.AutoCompleterListView;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
 
 /**
  * The glossary auto-completer view.
@@ -74,8 +75,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
         // Get contextual results
         fillMatchingTerms(result, entries, wordChunk);
         
-        if (!Core.getProject().getProjectProperties().getTargetLanguage().isSpaceDelimited()
-                && result.isEmpty() && !contextualOnly) {
+        if (result.isEmpty() && !contextualOnly) {
             // Get non-contextual results only if called for
             fillMatchingTerms(result, entries, null);
         }
@@ -99,14 +99,12 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
             return;
         }
         
-        boolean shouldCapitalize = context != null && Character.isUpperCase(context.codePointAt(0));
-        
         for (GlossaryEntry entry : glossary) {
             for (String term : entry.getLocTerms(true)) {
                 if (!termMatchesChunk(term, context)) {
                     continue;
                 }
-                String payload = shouldCapitalize ? capitalize(term) : term;
+                String payload = matchCapitalization(term, context);
                 int length = context == null ? 0 : context.length();
                 result.add(new AutoCompleterItem(payload, new String[] { entry.getSrcText() }, length));
             }
@@ -118,7 +116,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
             // Consider null context to match everything
             return true;
         }
-        if (term.equals(context) || term.equals(capitalize(context))) {
+        if (term.equals(context) || matchCapitalization(term, context).equals(context)) {
             // Consider a term to NOT match if it is identical to the context (it is already present)
             return false;
         }
@@ -133,10 +131,27 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
         return text.toLowerCase(getTargetLocale());
     }
     
-    private String capitalize(String text) {
-        int secondCP = text.offsetByCodePoints(0, 1);
-        return text.substring(0, secondCP).toUpperCase(getTargetLocale()) +
-                text.substring(secondCP);
+    private String toUpperCase(String text) {
+        return text.toUpperCase(getTargetLocale());
+    }
+    
+    private String matchCapitalization(String text, String matchTo) {
+        if (StringUtil.isEmpty(matchTo)) {
+            return text;
+        }
+        // If matching to upper when input is lower, turn into title case.
+        if (StringUtil.isTitleCase(matchTo) && StringUtil.isLowerCase(text)) {
+            return StringUtil.toTitleCase(text, getTargetLocale());
+        }
+        // If matching to lower when input is upper, turn into lower.
+        if (StringUtil.isLowerCase(matchTo) && StringUtil.isUpperCase(text)) {
+            return toLowerCase(text);
+        }
+        // If matching to upper (at least 2 chars), turn into upper.
+        if (StringUtil.isUpperCase(matchTo) && matchTo.codePointCount(0, matchTo.length()) > 1) {
+            return toUpperCase(text);
+        }
+        return text;
     }
 
     @Override

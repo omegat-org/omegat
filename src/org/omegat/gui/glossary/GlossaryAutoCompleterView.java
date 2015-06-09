@@ -80,7 +80,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
             fillMatchingTerms(result, entries, null);
         }
         
-        Collections.sort(result, new GlossaryComparator(entries));
+        Collections.sort(result, new GlossaryComparator(entries, wordChunk));
         
         return result;
     }
@@ -173,14 +173,28 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
         private boolean byLength = Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_BY_LENGTH);
         private boolean alphabetically = Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_ALPHABETICALLY);
         
-        private List<GlossaryEntry> entries;
+        private final List<GlossaryEntry> entries;
+        private final String matchTo;
         
-        public GlossaryComparator(List<GlossaryEntry> entries) {
+        public GlossaryComparator(List<GlossaryEntry> entries, String matchTo) {
             this.entries = entries;
+            this.matchTo = matchTo;
         }
         
         @Override
         public int compare(AutoCompleterItem o1, AutoCompleterItem o2) {
+            
+            // If one of the payloads starts with the exact matchTo string, prioritize that one.
+            if (!StringUtil.isEmpty(matchTo)) {
+                boolean o1Matches = o1.payload.startsWith(matchTo);
+                boolean o2Matches = o2.payload.startsWith(matchTo);
+                if (o1Matches && !o2Matches) {
+                    return -1;
+                }
+                if (!o1Matches && o2Matches) {
+                    return 1;
+                }
+            }
             
             // Sort alphabetically by source term
             if (bySource) {

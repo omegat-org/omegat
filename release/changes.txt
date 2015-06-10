@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 3.5 update 1
 ----------------------------------------------------------------------
-   2 Enhancements
-   1 Bug fix
+   3 Enhancements
+   2 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 3.5 update 1 vs 3.5
@@ -15,11 +15,16 @@
   - Auto-completion option: Show relevant suggestions automatically
   https://sourceforge.net/p/omegat/feature-requests/1097/
 
+  - Glossary view auto-completion improvements 
+  https://sourceforge.net/p/omegat/feature-requests/1098/
+
   Bug fixes:
 
   - The writeable glossary was not working propertly if it was not
 at the root of the glossary folder
 
+  - It was not possible to have two glossaries with the same name 
+in different sub-folders
 
   Localisation updates:
   - Dutch localisation updated to 3.5 (UI, documentation, scripts, readme)

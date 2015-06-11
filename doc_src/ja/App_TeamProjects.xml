@@ -72,7 +72,7 @@
 
     <para>SVN サーバーを使うには、２つの選択肢があります。自前のサーバーに SVN をインストールするか、ホスティングサービスを利用するか、です。外部サービスを利用するなら、元の文書を外部のサーバーにアップロードする前に、機密保持の観点から問題が無いか、よく検討した方が良いでしょう。この問題を避けるために、プライベートな SVN サーバーを立てるという手もあります。たとえば、すでに Apache サーバーを管理しているのであれば、VisualSVN のようなプログラムをインストールすれば済むかもしれません。</para>
 
-    <para>SVN サーバーを利用可能になったら、プロジェクト用のファイルを管理できます。管理者はそのために、SVN クライアントをローカルコンピューター上にインストールしておく必要があります。Windows 向けには、<ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink> を勧めます。Mac 向けのクライアントは <ulink url="https://sourceforge.net/projects/macsvn/">SourceForge</ulink> などで見つけることができます。Linux 向けの情報は、『<ulink url="www.yolinux.com/TUTORIALS/Subversion.html">Subversion Commands and Scripts</ulink>』（英語）を参照してください。</para>
+    <para>SVN サーバーを利用可能になったら、プロジェクト用のファイルを管理できます。管理者はそのために、SVN クライアントをローカルコンピューター上にインストールしておく必要があります。Windows 向けには、<ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink> を勧めます。Mac 向けのクライアントは <ulink url="https://sourceforge.net/projects/macsvn/">SourceForge</ulink> などで見つけることができます。Linux 向けの情報は、『<ulink url="http://www.yolinux.com/TUTORIALS/Subversion.html">Subversion Commands and Scripts</ulink>』（英語）を参照してください。</para>
 
     <section>
       <title>リポジトリの作成<indexterm class="singular">

@@ -72,7 +72,7 @@
 
     <para>Esistono due possibilità per avviare un server SVN: è possibile installare SVN sul proprio server o usare servizio di hosting. Quando si usa un servizio esterno, bisogna essere consapevoli delle possibili implicazioni in termini di riservatezza, dato che si carica la documentazione originale in un server fuori dal proprio controllo diretto. In alternativa, al fine di evitare questo problema, è possibile configurare un server SVN privato, per esempio, se si possiede già un server Apache che include il software in questione (per es., VisualSVN).</para>
 
-    <para>Una volta che il server SVN è disponibile, per gestire i contenuti del progetto nei loro computer, i gestori del progetto devono installare localmente un client SVN. Per Windows raccomandiamo <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink>. Per Mac si può scaricare il client, per esempio, da <ulink url="https://sourceforge.net/projects/macsvn/">SourceForge</ulink>, per Linux vedere <ulink url="www.yolinux.com/TUTORIALS/Subversion.html">Comandi Subversion e script</ulink>.</para>
+    <para>Una volta che il server SVN è disponibile, per gestire i contenuti del progetto nei loro computer, i gestori del progetto devono installare localmente un client SVN. Per Windows raccomandiamo <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink>. Per Mac si può scaricare il client, per esempio, da <ulink url="https://sourceforge.net/projects/macsvn/">SourceForge</ulink>, per Linux vedere <ulink url="http://www.yolinux.com/TUTORIALS/Subversion.html">Comandi Subversion e script</ulink>.</para>
 
     <section>
       <title>Creazione di un deposito (repository)<indexterm class="singular">

@@ -72,7 +72,7 @@
 
     <para>Deux possibilités existent pour exploiter un serveur SVN : installer SVN sur votre propre serveur ou utiliser un service hébergé. Lorsque vous utilisez un service externe, soyez conscients des risques possibles en termes de confidentialité, dans la mesure où vous chargez un document sur un serveur qui échappe à votre contrôle direct. Une autre solution consiste à définir un serveur SVN privé (ex. : si vous possédez déjà un serveur Apache qui inclut le logiciel en question - ex. : VisualSVN)</para>
 
-    <para>Une fois le serveur SVN disponible, les gestionnaires du projet doivent installer un client SVN localement afin de pouvoir gérer le contenu du projet sur leur ordinateur. Pour Windows, nous recommandons <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink>. Pour Mac, vous pouvez télécharger le client sur<ulink url="https://sourceforge.net/projects/macsvn/">SourceForge</ulink>. Pour Linux, voir <ulink url="www.yolinux.com/TUTORIALS/Subversion.html">Commandes de Subversion et Scripts</ulink>.</para>
+    <para>Une fois le serveur SVN disponible, les gestionnaires du projet doivent installer un client SVN localement afin de pouvoir gérer le contenu du projet sur leur ordinateur. Pour Windows, nous recommandons <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink>. Pour Mac, vous pouvez télécharger le client sur<ulink url="https://sourceforge.net/projects/macsvn/">SourceForge</ulink>. Pour Linux, voir <ulink url="http://www.yolinux.com/TUTORIALS/Subversion.html">Commandes de Subversion et Scripts</ulink>.</para>
 
     <section>
       <title>Création d'un référentiel<indexterm class="singular">

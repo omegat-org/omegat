@@ -72,7 +72,7 @@
 
     <para>Existují dvě možnosti jak rozběhnout SVN server: můžete instalovat SVN na svůj server nebo můžete použít hostující službu. Když používáte externí službu musíte si být vědomi možných následků v rámci utajení dat, protože nahráváte originální dokument na server, nad kterým nemáte přímou kontrolu.  Alternativně, abyste zabránili tomuto problému, můžete nastavit soukromý SVN server, například pokud již máte Apache server, který obsahuje dotyčný software (např. VisualSVN).</para>
 
-    <para>Jakmile je SVN server dostupný, správci projektu musí lokálně instalovat SVN klienta, aby mohli spravovat obsah projektu na svých počítačích. Pro Windows doporučujeme <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink>. Pro Mac můžete stáhnout klienta např. z <ulink url="https://sourceforge.net/projects/macsvn/">SourceForge</ulink>, pro Linux viz <ulink url="www.yolinux.com/TUTORIALS/Subversion.html">Subversion Commands and Scripts</ulink>. </para>
+    <para>Jakmile je SVN server dostupný, správci projektu musí lokálně instalovat SVN klienta, aby mohli spravovat obsah projektu na svých počítačích. Pro Windows doporučujeme <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink>. Pro Mac můžete stáhnout klienta např. z <ulink url="https://sourceforge.net/projects/macsvn/">SourceForge</ulink>, pro Linux viz <ulink url="http://www.yolinux.com/TUTORIALS/Subversion.html">Subversion Commands and Scripts</ulink>. </para>
 
     <section>
       <title>Vytvoření úložiště<indexterm class="singular">

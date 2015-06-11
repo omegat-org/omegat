@@ -72,7 +72,7 @@
 
     <para>Hai dúas posibilidades para executar un servidor SVN: pode instalar SVN no seu propio servidor ou ben pode empregar un servizo de aloxamento web. Se emprega un servizo externo debe ter coidado coas posíbeis implicacións en termos de confidencialidade, pois está cargando un documento orixinal nun servidor fóra do seu control directo. Se quere evitar isto, pode preparar un servidor SVN privado, por exemplo se xa ten un servidor Apache que inclúa o software en cuestión (por exemplo VisualSVN).</para>
 
-    <para>Unha ver que estea dispoñíbel o servidor SVN, os xestores de proxectos deben instalar no seu computador un cliente SVN, para así poder xestionar os contidos dos proxectos dende el. Para Windows, recomendámoslle <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink>. Para Mac pode descargar o cliente, por exemplo, desde <ulink url="https://sourceforge.net/projects/macsvn/">SourceForge </ulink>, para Linux, vexa <ulink url="www.yolinux.com/TUTORIALS/Subversion.html">Scripts e ordes de Subversion</ulink>.</para>
+    <para>Unha ver que estea dispoñíbel o servidor SVN, os xestores de proxectos deben instalar no seu computador un cliente SVN, para así poder xestionar os contidos dos proxectos dende el. Para Windows, recomendámoslle <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink>. Para Mac pode descargar o cliente, por exemplo, desde <ulink url="https://sourceforge.net/projects/macsvn/">SourceForge </ulink>, para Linux, vexa <ulink url="http://www.yolinux.com/TUTORIALS/Subversion.html">Scripts e ordes de Subversion</ulink>.</para>
 
     <section>
       <title>Crear un repositorio<indexterm class="singular">

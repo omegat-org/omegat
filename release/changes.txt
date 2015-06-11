@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    3 Enhancements
    2 Bug fixes
-   2 Localisation updates
+   3 Localisation updates
 ----------------------------------------------------------------------
 3.5 update 1 vs 3.5
 
@@ -28,6 +28,7 @@ in different sub-folders
 
   Localisation updates:
   - Dutch localisation updated to 3.5 (UI, documentation, scripts, readme)
+  - Interlingua localisation updated to 3.5 (UI, scripts, readme)
   - Italian localisation updated to 3.5 (UI, scripts)
 
 ----------------------------------------------------------------------

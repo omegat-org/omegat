@@ -72,7 +72,7 @@
 
     <para>Er zijn twee mogelijkheden om een server voor SVN uit te voeren: u kunt SVN op uw eigen server installeren of u kunt een gehoste service gebruiken. Bij het gebruiken van een externe service dient u zich bewust te zijn van de mogelijke implicaties met betrekking tot vertrouwelijkheid, omdat u het originele document laadt op een server die zich buiten uw directe beheer bevindt. U kunt, als alternatief, een private server voor SVN server instellen, bijvoorbeeld als u al een server voor Apache hebt die de gevraagde software al bevat (bijv. VisualSVN), om dit probleem te vermijden.</para>
 
-    <para>Als de server voor SVN eenmaal beschikbaar is, moeten beheerders voor het project lokaal een cliënt voor SVN installeren, om de inhoud van het project op hun computers te kunnen beheren. Voor Windows bevelen wij <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink> aan. Voor Mac kunt u de cliënt bijvoorbeeld downloaden van <ulink url="https://sourceforge.net/projects/macsvn/">SourceForge</ulink>, Voor Linux: zie <ulink url="www.yolinux.com/TUTORIALS/Subversion.html">Subversion opdrachten en scripts</ulink>.</para>
+    <para>Als de server voor SVN eenmaal beschikbaar is, moeten beheerders voor het project lokaal een cliënt voor SVN installeren, om de inhoud van het project op hun computers te kunnen beheren. Voor Windows bevelen wij <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink> aan. Voor Mac kunt u de cliënt bijvoorbeeld downloaden van <ulink url="https://sourceforge.net/projects/macsvn/">SourceForge</ulink>, Voor Linux: zie <ulink url="http://www.yolinux.com/TUTORIALS/Subversion.html">Subversion opdrachten en scripts</ulink>.</para>
 
     <section>
       <title>Een opslagplaats maken<indexterm class="singular">

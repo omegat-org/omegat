@@ -72,7 +72,7 @@
 
     <para>Il ha duo possibilitates pro exequer un server SVN: tu pote install SVN sur tu proprie server o tu pote usar un servicio hospite. Quando tu usa un servicio externe tu debe esser al currente del implicationes possibile in terminos de confidentialitate, depois que tu es cargante le documento original sur un server for de tu controlo directe. Alias, pro evitar iste question tu pote preparar un server SVN private, per exemplo si tu ja ha un server Apache que include le software in question (per exemplo VisualSVN).</para>
 
-    <para>Un vice que le server SVN is disponibile, le administratores del projecto debe installar localmente un client SVN, pro gerer le projecto contentos sur lor computatores. Pro Windows nos recommenda <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink>. Pro Mac tu pote discargar le cliente per exemplo ex <ulink url="https://sourceforge.net/projects/macsvn/">SourceForge</ulink>, Pro Linux vide <ulink url="www.yolinux.com/TUTORIALS/Subversion.html">Subversion Commands and Scripts</ulink>.</para>
+    <para>Un vice que le server SVN is disponibile, le administratores del projecto debe installar localmente un client SVN, pro gerer le projecto contentos sur lor computatores. Pro Windows nos recommenda <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink>. Pro Mac tu pote discargar le cliente per exemplo ex <ulink url="https://sourceforge.net/projects/macsvn/">SourceForge</ulink>, Pro Linux vide <ulink url="http://www.yolinux.com/TUTORIALS/Subversion.html">Subversion Commands and Scripts</ulink>.</para>
 
     <section>
       <title>Crear un deposito<indexterm class="singular">

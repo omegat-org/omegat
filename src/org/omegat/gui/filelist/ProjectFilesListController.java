@@ -98,6 +98,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.DragTargetOverlay;
 import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
+import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TableColumnSizer;
 import org.omegat.util.gui.DataTableStyling;
@@ -566,6 +567,8 @@ public class ProjectFilesListController {
 
         uiUpdateImportButtonStatus();
         list.setTitle(StaticUtils.format(OStrings.getString("PF_WINDOW_TITLE"), files.size()));
+
+        OSXIntegration.setProxyIcon(list.getRootPane(), new File(Core.getProject().getProjectProperties().getSourceRoot()));
 
         setTableFilesModel(files);
     }

@@ -138,7 +138,9 @@ public class StringUtil {
     }
     
     public static boolean isTitleCase(int codePoint) {
-        return Character.isUpperCase(codePoint) || Character.isTitleCase(codePoint);
+        // True if is actual title case, or if is upper case and has no separate title case variant.
+        return Character.isTitleCase(codePoint) ||
+                (Character.isUpperCase(codePoint) && Character.toTitleCase(codePoint) == codePoint);
     }
 
     /**

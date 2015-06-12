@@ -73,15 +73,15 @@ public class EditorUtilsTest extends TestCase {
     }
     
     public void testChangeCase() {
-        String input = "I've GOT some {crazy} text hErE including 1 \u65e5\u672c\u8a9e!";
+        String input = "I've GOT a {crazy} text hErE including 1 \u65e5\u672c\u8a9e!";
         String round1 = EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE);
-        assertEquals("I'VE GOT SOME {CRAZY} TEXT HERE INCLUDING 1 \u65e5\u672c\u8a9e!", round1);
+        assertEquals("I'VE GOT A {CRAZY} TEXT HERE INCLUDING 1 \u65e5\u672c\u8a9e!", round1);
         assertEquals(round1, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER));
         String round2 = EditorUtils.doChangeCase(round1, CHANGE_CASE_TO.CYCLE);
-        assertEquals("i've got some {crazy} text here including 1 \u65e5\u672c\u8a9e!", round2);
+        assertEquals("i've got a {crazy} text here including 1 \u65e5\u672c\u8a9e!", round2);
         assertEquals(round2, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER));
         String round3 = EditorUtils.doChangeCase(round2, CHANGE_CASE_TO.CYCLE);
-        assertEquals("I've Got Some {Crazy} Text Here Including 1 \u65e5\u672c\u8a9e!", round3);
+        assertEquals("I've Got A {Crazy} Text Here Including 1 \u65e5\u672c\u8a9e!", round3);
         assertEquals(round3, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE));
         String round4 = EditorUtils.doChangeCase(round3, CHANGE_CASE_TO.CYCLE);
         assertEquals(round1, round4);
@@ -109,6 +109,16 @@ public class EditorUtilsTest extends TestCase {
         assertEquals("MIXED CASE ONLY", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER));
         assertEquals("Mixed Case Only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE));
         assertEquals("MIXED CASE ONLY", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE));
+        
+        // Ambiguous only
+        input = "A B C";
+        assertEquals("a b c", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER));
+        assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER));
+        assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE));
+        round2 = EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE);
+        assertEquals("a b c", round2);
+        round3 = EditorUtils.doChangeCase(round2, CHANGE_CASE_TO.CYCLE);
+        assertEquals(input, round3);
         
         // No letter-containing tokens
         input = "{!} 1 \u65e5\u672c\u8a9e";

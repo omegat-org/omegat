@@ -150,6 +150,7 @@ public class EditorUtils {
             int lower = 0;
             int upper = 0;
             int title = 0;
+            int ambiguous = 0; // Maybe title, maybe upper
             int mixed = 0;
 
             for (Token token : tokenList) {
@@ -158,11 +159,17 @@ public class EditorUtils {
                     lower++;
                     continue;
                 }
-                if (StringUtil.isTitleCase(word)) {
+                boolean isTitle = StringUtil.isTitleCase(word);
+                boolean isUpper = StringUtil.isUpperCase(word);
+                if (isTitle && isUpper) {
+                    ambiguous++;
+                    continue;
+                }
+                if (isTitle) {
                     title++;
                     continue;
                 }
-                if (StringUtil.isUpperCase(word)) {
+                if (isUpper) {
                     upper++;
                     continue;
                 }
@@ -173,11 +180,11 @@ public class EditorUtils {
                 // such as CJK ideographs or symbols only.
             }
             
-            if (lower == 0 && title == 0 && upper == 0 && mixed == 0) {
+            if (lower == 0 && title == 0 && upper == 0 && mixed == 0 && ambiguous == 0) {
                 return input; // nothing to do here
             }
 
-            toWhat = determineTargetCase(lower, upper, title, mixed);
+            toWhat = determineTargetCase(lower, upper, title, mixed, ambiguous);
         }
 
         StringBuilder buffer = new StringBuilder(input);
@@ -202,7 +209,7 @@ public class EditorUtils {
         return buffer.toString();
     }
     
-    private static CHANGE_CASE_TO determineTargetCase(int lower, int upper, int title, int mixed) {
+    private static CHANGE_CASE_TO determineTargetCase(int lower, int upper, int title, int mixed, int ambiguous) {
         int presentCaseTypes = 0;
         if (lower > 0) {
             presentCaseTypes++;
@@ -233,6 +240,12 @@ public class EditorUtils {
             return CHANGE_CASE_TO.LOWER;
         }
 
+        if (ambiguous > 0) {
+            // If we only have ambiguous tokens then we must go to lower so that we
+            // get binary upper/lower switching instead of trinary upper/lower/title.
+            return CHANGE_CASE_TO.LOWER;
+        }
+        
         // This should only happen if no cases are present, so it doesn't even matter.
         return CHANGE_CASE_TO.UPPER;
     }

@@ -56,6 +56,9 @@ import javax.swing.event.CaretListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.MutableAttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
@@ -74,6 +77,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.AlwaysVisibleCaret;
 import org.omegat.util.gui.Styles;
+import org.omegat.util.gui.Styles.EditorColor;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -96,11 +100,13 @@ class EntryListPane extends JTextPane {
     private static final String KEY_GO_TO_PREVIOUS_SEGMENT = "gotoPreviousSegmentMenuItem";
     private static final String KEY_TRANSFER_FOCUS = "transferFocus";
     private static final String KEY_TRANSFER_FOCUS_BACKWARD = "transferFocusBackward";
+    private static final int ENTRY_LIST_INDEX_NO_ENTRIES  = -1;
+    private static final int ENTRY_LIST_INDEX_END_OF_TEXT = -2;
 
     private static void bindKeyStrokesFromMainMenuShortcuts(InputMap map) {
         PropertiesShortcuts shortcuts = new PropertiesShortcuts(
                 "/org/omegat/gui/main/MainMenuShortcuts.properties");
-        // Add KeyStrokes Ctrl+N/P (Cmd+N/P for MacOS) to the parent
+        // Add KeyStrokes Ctrl+N/P (Cmd+N/P for MacOS) to the map
         shortcuts.bindKeyStrokes(
                 map,
                 new String[]{KEY_GO_TO_NEXT_SEGMENT, KEY_GO_TO_PREVIOUS_SEGMENT});
@@ -170,6 +176,8 @@ class EntryListPane extends JTextPane {
         addCaretListener(new CaretListener() {
             @Override
             public void caretUpdate(CaretEvent e) {
+                SwingUtilities.invokeLater(highlighter);
+
                 if (autoSyncWithEditor) {
                     getActiveDisplayedEntry().gotoEntryInEditor();
                 }
@@ -221,10 +229,33 @@ class EntryListPane extends JTextPane {
         }
 
         currentlyDisplayedMatches = new DisplayMatches(searcher.getSearchResults());
-        
+
+        highlighter.reset();
+        SwingUtilities.invokeLater(highlighter);
+
         if (autoSyncWithEditor) {
             getActiveDisplayedEntry().gotoEntryInEditor();
         }
+    }
+
+    private int getActiveEntryListIndex() {
+        int nrEntries = getNrEntries();
+
+        if (nrEntries == 0) {
+            // No entry
+            return ENTRY_LIST_INDEX_NO_ENTRIES;
+        }
+
+        if (nrEntries > 0) {
+            int pos = getSelectionStart();
+            for (int i = 0; i < nrEntries; i++) {
+                if (pos < m_offsetList.get(i)) {
+                    return i;
+                }
+            }
+        }
+
+        return ENTRY_LIST_INDEX_END_OF_TEXT;
     }
 
     protected class DisplayMatches implements Runnable {
@@ -432,22 +463,17 @@ class EntryListPane extends JTextPane {
     }
 
     private DisplayedEntry getActiveDisplayedEntry() {
-        if (getNrEntries() == 0) {
-            // No entry
-            return new EmptyDisplayedEntry();
-        }
+        int activeEntryListIndex = getActiveEntryListIndex();
 
-        if (getNrEntries() > 0) {
-            int pos = getSelectionStart();
-            for (int i = 0; i < m_offsetList.size(); i++) {
-                if (pos < m_offsetList.get(i)) {
-                    return new DisplayedEntryImpl(i);
-                }
-            }
+        switch (activeEntryListIndex) {
+            case ENTRY_LIST_INDEX_NO_ENTRIES:
+                return new EmptyDisplayedEntry();
+            case ENTRY_LIST_INDEX_END_OF_TEXT:
+                // end of text (out of entries range)
+                return new DisplayedEntryImpl(getNrEntries());
+            default:
+                return new DisplayedEntryImpl(activeEntryListIndex);
         }
-
-        // end of text (out of entries range)
-        return new DisplayedEntryImpl(m_offsetList.size());
     }
 
     private interface DisplayedEntry {
@@ -574,6 +600,70 @@ class EntryListPane extends JTextPane {
         }
     }
 
+    private class SegmentHighlighter implements Runnable {
+
+        private final MutableAttributeSet attrNormal;
+        private final MutableAttributeSet attrActive;
+        
+        private int entryListIndex = -1;
+        private int offset         = -1;
+        private int length         = -1;
+
+        public SegmentHighlighter() {
+            attrNormal = new SimpleAttributeSet();
+            StyleConstants.setBackground(attrNormal, EditorColor.COLOR_BACKGROUND.getColor());
+
+            attrActive = new SimpleAttributeSet();
+            StyleConstants.setBackground(attrActive, EditorColor.COLOR_ACTIVE_SOURCE.getColor());
+        }
+
+        @Override
+        public void run() {
+            int activeEntryListIndex = getActiveEntryListIndex();
+            if (activeEntryListIndex == ENTRY_LIST_INDEX_END_OF_TEXT) {
+                // end of text (out of entries range) should belongs to the last segment
+                activeEntryListIndex = getNrEntries() - 1;
+            }
+
+            if (activeEntryListIndex != entryListIndex) {
+                removeCurrentHighlight();
+                addHighlight(activeEntryListIndex);
+            }
+        }
+
+        public void reset() {
+            entryListIndex = -1;
+            offset         = -1;
+            length         = -1;
+        }
+        
+        private void removeCurrentHighlight() {
+            if (entryListIndex == -1 || entryListIndex >= m_offsetList.size() || length <= 0) {
+                return;
+            }
+
+            getStyledDocument().setCharacterAttributes(offset, length, attrNormal, false);
+            reset();
+        }
+
+        private void addHighlight(int entryListIndex) {
+            if (entryListIndex == -1 || entryListIndex >= m_offsetList.size()) {
+                return;
+            }
+
+            int offset = entryListIndex == 0
+                    ? 0
+                    : m_offsetList.get(entryListIndex - 1) + ENTRY_SEPARATOR.length();
+            int length = m_offsetList.get(entryListIndex) - offset - 1; // except tail line break
+
+            getStyledDocument().setCharacterAttributes(offset, length, attrActive, false);
+
+            this.entryListIndex = entryListIndex;
+            this.offset = offset;
+            this.length = length;
+        }
+    }
+
     private volatile Searcher m_searcher;
     private final List<Integer> m_entryList = new ArrayList<Integer>();
     private final List<Integer> m_offsetList = new ArrayList<Integer>();
@@ -582,4 +672,5 @@ class EntryListPane extends JTextPane {
     private int numberOfResults;
     private boolean useTabForAdvance;
     private boolean autoSyncWithEditor;
+    private final SegmentHighlighter highlighter = new SegmentHighlighter();
 }

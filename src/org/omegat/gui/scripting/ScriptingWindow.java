@@ -86,6 +86,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.StaticUIUtils;
 import org.openide.awt.Mnemonics;
 
@@ -675,6 +676,7 @@ public class ScriptingWindow extends JFrame {
         }
         m_scriptsDirectory = scriptsDir;
         Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, scriptsDir.getPath());
+        OSXIntegration.setProxyIcon(getRootPane(), m_scriptsDirectory);
 
         if (m_txtScriptsDir != null) {
             m_txtScriptsDir.setText(scriptsDir.getPath());

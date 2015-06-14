@@ -32,6 +32,7 @@ import java.io.UnsupportedEncodingException;
 
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
+import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 import org.omegat.util.WikiGet;
 import org.w3c.dom.Node;
@@ -43,8 +44,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-
-import org.apache.lucene.analysis.kr.utils.StringUtil;
 
 
 /**

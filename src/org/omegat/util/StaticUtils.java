@@ -36,6 +36,7 @@ import java.awt.event.KeyEvent;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,12 +49,11 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
+import java.util.jar.JarInputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -1059,31 +1059,33 @@ public class StaticUtils {
 
     public static void extractFileFromJar(String archive, List<String> filenames, String destination)
             throws IOException {
-        // open the jar (zip) file
-        JarFile jar = new JarFile(archive);
-
+        InputStream is = new FileInputStream(archive);
+        extractFileFromJar(is, filenames, destination);
+        is.close();
+    }
+    
+    public static void extractFileFromJar(InputStream in, List<String> filenames, String destination) throws IOException {
+        JarInputStream jis = new JarInputStream(in);
         // parse the entries
-        Enumeration<JarEntry> entryEnum = jar.entries();
-        while (entryEnum.hasMoreElements()) {
-            JarEntry file = entryEnum.nextElement();
-            if (filenames.contains(file.getName())) {
+        JarEntry entry;
+        while ((entry = jis.getNextJarEntry()) != null) {
+            if (filenames.contains(entry.getName())) {
                 // match found
-                File f = new File(destination + File.separator + file.getName());
-                InputStream in = jar.getInputStream(file);
+                File f = new File(destination, entry.getName());
+                f.getParentFile().mkdirs();
                 BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(f));
 
                 byte[] byteBuffer = new byte[1024];
 
                 int numRead;
-                while ((numRead = in.read(byteBuffer)) != -1) {
+                while ((numRead = jis.read(byteBuffer)) != -1) {
                     out.write(byteBuffer, 0, numRead);
                 }
 
-                in.close();
                 out.close();
             }
         }
-        jar.close();
+        jis.close();
     }
 
     /**

@@ -254,7 +254,6 @@ public class DictionaryManager {
             langCode = langCode.substring(0, pos);
         }
 
-        dir.mkdirs();
         StaticUtils.extractFileFromJar(to,
                 Arrays.asList(langCode + OConsts.SC_AFFIX_EXTENSION, langCode + OConsts.SC_DICTIONARY_EXTENSION),
                 dir.getAbsolutePath());

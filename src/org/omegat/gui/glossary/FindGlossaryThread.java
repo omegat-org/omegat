@@ -111,7 +111,13 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
                 if (DefaultTokenizer.isContainsAll(strTokens, glosTokens, 
                         Preferences.isPreferenceDefault(Preferences.GLOSSARY_NOT_EXACT_MATCH, true))) {
                     result.add(glosEntry);
-                }                    
+                    continue;
+                }
+                
+                if (!Core.getProject().getProjectProperties().getSourceLanguage().isSpaceDelimited()
+                        && src.contains(glosEntry.getSrcText())) {
+                    result.add(glosEntry);
+                }
             }
         }
 

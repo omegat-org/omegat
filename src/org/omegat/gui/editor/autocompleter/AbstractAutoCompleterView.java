@@ -28,7 +28,6 @@ package org.omegat.gui.editor.autocompleter;
 
 import java.awt.Component;
 import java.awt.event.KeyEvent;
-import java.util.List;
 
 import javax.swing.text.BadLocationException;
 

@@ -388,11 +388,11 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         uninstallButton.setEnabled(selection.length > 0 && autoSpellcheckCheckBox.isSelected());
     }//GEN-LAST:event_languageListValueChanged
 
-    private void directoryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_directoryTextFieldActionPerformed
+    private void directoryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_directoryTextFieldActionPerformed
         updateLanguageList();
-    }// GEN-LAST:event_directoryTextFieldActionPerformed
+    }//GEN-LAST:event_directoryTextFieldActionPerformed
 
-    private void directoryChooserButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_directoryChooserButtonActionPerformed
+    private void directoryChooserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_directoryChooserButtonActionPerformed
         // open a dialog box to choose the directory
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fileChooser.setDialogTitle(OStrings.getString("GUI_SPELLCHECKER_FILE_CHOOSER_TITLE"));
@@ -402,9 +402,9 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
             File file = fileChooser.getSelectedFile();
             directoryTextField.setText(file.getAbsolutePath());
         }
-    }// GEN-LAST:event_directoryChooserButtonActionPerformed
+    }//GEN-LAST:event_directoryChooserButtonActionPerformed
 
-    private void installButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_installButtonActionPerformed
+    private void installButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_installButtonActionPerformed
         if (dicMan == null) {
             JOptionPane.showMessageDialog(this, OStrings.getString("GUI_SPELLCHECKER_INSTALL_UNABLE"),
                     OStrings.getString("GUI_SPELLCHECKER_INSTALL_UNABLE_TITLE"), JOptionPane.ERROR_MESSAGE);
@@ -427,9 +427,9 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
             setCursor(oldCursor);
             JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
         }
-    }// GEN-LAST:event_installButtonActionPerformed
+    }//GEN-LAST:event_installButtonActionPerformed
 
-    private void uninstallButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_uninstallButtonActionPerformed
+    private void uninstallButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uninstallButtonActionPerformed
         // any dictionary manager available
         if (dicMan == null) {
             return; // this should never happen - just in case it does
@@ -457,13 +457,13 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
                 languageListModel.remove(languageList.getSelectedIndex());
             }
         }
-    }// GEN-LAST:event_uninstallButtonActionPerformed
+    }//GEN-LAST:event_uninstallButtonActionPerformed
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         doClose(RET_CANCEL);
-    }// GEN-LAST:event_cancelButtonActionPerformed
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
-    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         // save preferences
         Preferences.setPreference(Preferences.ALLOW_AUTO_SPELLCHECKING, autoSpellcheckCheckBox.isSelected());
 
@@ -472,11 +472,11 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         Preferences.setPreference(Preferences.SPELLCHECKER_DICTIONARY_URL, dictionaryUrlTextField.getText());
 
         doClose(RET_OK);
-    }// GEN-LAST:event_okButtonActionPerformed
+    }//GEN-LAST:event_okButtonActionPerformed
 
-    private void autoSpellcheckCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_autoSpellcheckCheckBoxActionPerformed
+    private void autoSpellcheckCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autoSpellcheckCheckBoxActionPerformed
         updateDetailPanel();
-    }// GEN-LAST:event_autoSpellcheckCheckBoxActionPerformed
+    }//GEN-LAST:event_autoSpellcheckCheckBoxActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox autoSpellcheckCheckBox;

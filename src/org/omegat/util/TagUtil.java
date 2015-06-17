@@ -73,10 +73,22 @@ public class TagUtil {
         List<String> result = new ArrayList<String>();
         
         int index = -1;
-        StringBuilder group = null;
+        List<String> group = new ArrayList<String>();
         List<String> tags = getAllTagsMissingFromTarget();
         for (int i = 0; i < tags.size(); i++) {
             String tag = tags.get(i);
+            
+            if (sourceText.startsWith(tag, index)) {
+                // We are continuing an existing group.
+                group.add(tag);
+                index += tag.length();
+            } else {
+                // We are starting a new group.
+                dumpGroup(group, result);
+                group.clear();
+                group.add(tag);
+                index = sourceText.indexOf(tag, index) + tag.length();
+            }
             
             // See if this tag and next tag make a pair and offer them as a set,
             // regardless of whether or not they're contiguous.
@@ -85,31 +97,31 @@ public class TagUtil {
             if (i + 1 < tags.size()) {
                 String next = tags.get(i + 1);
                 if (tagsArePaired(tag, next) || tagsAreStandalone(tag, next)) {
-                    // Add existing group up to this point *in addition* to complete group later.
-                    if (group != null) {
-                        result.add(group.toString());
-                    }
                     // Insert sentinel to allow cursor relocating.
                     result.add(tag + TAG_SEPARATOR_SENTINEL + next);
                 }
             }
-            
-            if (sourceText.startsWith(tag, index)) {
-                group.append(tag);
-                index += tag.length();
-            } else {
-                if (group != null) {
-                    result.add(group.toString());
-                }
-                group = new StringBuilder(tag);
-                index = sourceText.indexOf(tag, index) + tag.length();
-            }
         }
-        if (group != null && group.length() > 0) {
-            result.add(group.toString());
-        }
+        // Catch the last group.
+        dumpGroup(group, result);
         
         return result;
+    }
+    
+    private static void dumpGroup(List<String> groupTags, List<String> result) {
+        if (groupTags.isEmpty()) {
+            return;
+        }
+        if (groupTags.size() > 1) {
+            StringBuilder sb = new StringBuilder();
+            for (String t : groupTags) {
+                sb.append(t);
+            }
+            result.add(sb.toString());
+        }
+        for (String t : groupTags) {
+            result.add(t);
+        }
     }
     
     public static boolean tagsArePaired(String tag1, String tag2) {

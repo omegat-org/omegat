@@ -43,6 +43,7 @@ import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.ITokenizer.StemmingMode;
 import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 
 /**
@@ -115,7 +116,9 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
                 }
                 
                 if (!Core.getProject().getProjectProperties().getSourceLanguage().isSpaceDelimited()
-                        && src.contains(glosEntry.getSrcText())) {
+                        && StringUtil.isCJK(glosEntry.getSrcText()) && src.contains(glosEntry.getSrcText())) {
+                    // This is a CJK word and our source language is not space-delimited, so include if
+                    // word appears anywhere in source string.
                     result.add(glosEntry);
                 }
             }

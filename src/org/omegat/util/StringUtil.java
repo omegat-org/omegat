@@ -173,6 +173,21 @@ public class StringUtil {
                 || codePoint == '\u202F';
     }
     
+    public static boolean isCJK(String input) {
+        if (input.isEmpty()) {
+            return false;
+        }
+        for (int i = 0, cp; i < input.length(); i += Character.charCount(cp)) {
+            cp = input.codePointAt(i);
+            // Anything less than CJK Radicals Supplement is "not CJK". Everything else is.
+            // TODO: Make this smarter?
+            if (cp < '\u2E80') {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     /**
      * Convert text to title case according to the supplied locale.
      */

@@ -1246,7 +1246,7 @@ public class ProjectPropertiesDialog extends JDialog {
         }
     }
 
-    private class ScrollableBox extends Box implements Scrollable {
+    private static class ScrollableBox extends Box implements Scrollable {
 
         public ScrollableBox(int axis) {
             super(axis);

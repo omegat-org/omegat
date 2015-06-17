@@ -503,7 +503,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         return inUseFormatNames;
     }
 
-    private class FilterFormatCellRenderer extends DefaultTableCellRenderer {
+    private static class FilterFormatCellRenderer extends DefaultTableCellRenderer {
 
         private final Set<String> highlightFormatNames;
 

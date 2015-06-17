@@ -487,7 +487,7 @@ class EntryListPane extends JTextPane {
         void gotoEntryInEditor();
     }
 
-    private class EmptyDisplayedEntry implements DisplayedEntry {
+    private static class EmptyDisplayedEntry implements DisplayedEntry {
 
         @Override
         public DisplayedEntry getNext() {

@@ -60,12 +60,18 @@ public class DirectoryMonitor extends Thread {
      *            directory to monitoring
      */
     public DirectoryMonitor(final File dir, final Callback callback) {
+        if (dir == null) {
+            throw new IllegalArgumentException("Dir cannot be null.");
+        }
         this.dir = dir;
         this.callback = callback;
         this.directoryCallback = null;
     }
 
     public DirectoryMonitor(final File dir, final Callback callback, final DirectoryCallback directoryCallback) {
+        if (dir == null) {
+            throw new IllegalArgumentException("Dir cannot be null.");
+        }
         this.dir = dir;
         this.callback = callback;
         // Can't call this(dir, callback) because fields are final.

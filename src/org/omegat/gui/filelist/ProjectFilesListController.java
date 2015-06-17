@@ -476,9 +476,14 @@ public class ProjectFilesListController {
     public void setActive(boolean active) {
         if (active) {
             // moved current file selection here so it will be properly set on each activation
-            selectCurrentFile(Core.getProject().getProjectFiles());
             list.setVisible(true);
             list.toFront();
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    selectCurrentFile(Core.getProject().getProjectFiles());
+                }
+            });
         } else {
             list.setVisible(false);
         }

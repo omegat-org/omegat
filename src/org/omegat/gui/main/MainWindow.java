@@ -164,7 +164,7 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
             public void onApplicationStartup() {
-                MainWindowUI.loadScreenLayout(MainWindow.this);
+                MainWindowUI.initializeScreenLayout(MainWindow.this);
 
                 DockingUI.removeUnusedMenuSeparators(menu.getOptionsMenu().getPopupMenu());
             }
@@ -173,6 +173,8 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
         });
 
+        MainWindowUI.handlePerProjectLayouts(this);
+        
         updateTitle();
     }
 

@@ -229,7 +229,7 @@ public class MainWindowUI {
         }
         mainWindow.setBounds(x, y, w, h);
 
-        File uiLayoutFile = new File(StaticUtils.getConfigDir() + MainWindowUI.UI_LAYOUT_FILE);
+        File uiLayoutFile = new File(StaticUtils.getConfigDir(), MainWindowUI.UI_LAYOUT_FILE);
         if (uiLayoutFile.exists()) {
             try {
                 FileInputStream in = new FileInputStream(uiLayoutFile);

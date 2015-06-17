@@ -326,13 +326,19 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
                 }
                 if (!StringUtil.isEmpty(sel)) {
                     if (StringUtil.isEmpty(dialog.getSourceText().getText())) {
-                        dialog.getSourceText().setText(sel);
+                        setText(dialog.getSourceText(), sel);
                     } else if (StringUtil.isEmpty(dialog.getTargetText().getText())) {
-                        dialog.getTargetText().setText(sel);
+                        setText(dialog.getTargetText(), sel);
                     } else if (StringUtil.isEmpty(dialog.getCommentText().getText())) {
-                        dialog.getCommentText().setText(sel);
+                        setText(dialog.getCommentText(), sel);
                     }
                 }
+            }
+            
+            private void setText(JTextComponent comp, String text) {
+                comp.setText(text);
+                comp.requestFocus();
+                comp.selectAll();
             }
         });
 

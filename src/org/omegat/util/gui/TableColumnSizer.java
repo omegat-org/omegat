@@ -137,6 +137,10 @@ public class TableColumnSizer {
                     if (oldVal != null && oldVal instanceof TableModel) {
                         ((TableModel) oldVal).removeTableModelListener(modelListener);
                     }
+                } else if (evt.getPropertyName().equals("font")) {
+                    if ((newVal != null && !newVal.equals(oldVal)) || (oldVal != null && !oldVal.equals(newVal))) {
+                        shouldAdjust = true;
+                    }
                 }
                 if (shouldAdjust) {
                     reset();

@@ -299,7 +299,7 @@ public abstract class BaseTokenizer implements ITokenizer {
         sb.append(getClass().getName()).append('\n');
         for (String input : args) {
             sb.append("Input:\n");
-            sb.append(input);
+            sb.append(input).append("\n");
             sb.append("tokenizeAllExactly:\n");
             sb.append(printTest(tokenizeAllExactly(input), input));
             sb.append("tokenize:\n");

@@ -30,6 +30,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -248,17 +249,14 @@ public class DictionaryManager {
         // Dirty hack for the French dictionary. Since it is named
         // fr_FR_1-3-2.zip, we remove the "_1-3-2" portion
         // [ 2138846 ] French dictionary cannot be downloaded and installed
-        int pos;
-        if ((pos = langCode.indexOf("_1-3-2", 0)) != -1) {
+        int pos = langCode.indexOf("_1-3-2", 0);
+        if (pos != -1) {
             langCode = langCode.substring(0, pos);
         }
 
-        List<String> filenames = new ArrayList<String>();
-
-        filenames.add(langCode + OConsts.SC_AFFIX_EXTENSION);
-        filenames.add(langCode + OConsts.SC_DICTIONARY_EXTENSION);
-
         dir.mkdirs();
-        StaticUtils.extractFileFromJar(to, filenames, dir.getAbsolutePath());
+        StaticUtils.extractFileFromJar(to,
+                Arrays.asList(langCode + OConsts.SC_AFFIX_EXTENSION, langCode + OConsts.SC_DICTIONARY_EXTENSION),
+                dir.getAbsolutePath());
     }
 }

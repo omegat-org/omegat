@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
  
- Copyright (C) 2013 Aaron Madlon-Kay
+ Copyright (C) 2013, 2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -27,12 +27,14 @@ package org.omegat.tokenizer;
 import java.io.StringReader;
 import java.util.Collections;
 import java.util.Set;
+import java.util.regex.Matcher;
 
 import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.ja.JapaneseAnalyzer;
 import org.apache.lucene.analysis.ja.JapaneseTokenizer;
 import org.apache.lucene.analysis.ja.JapaneseTokenizer.Mode;
+import org.omegat.util.PatternConsts;
 
 /**
  * @author Aaron Madlon-Kay
@@ -46,18 +48,38 @@ public class LuceneJapaneseTokenizer extends BaseTokenizer {
     }
 
     @Override
-    protected TokenStream getTokenStream(final String strOrig,
-            final boolean stemsAllowed, final boolean stopWordsAllowed) {
+    protected TokenStream getTokenStream(String strOrig, boolean stemsAllowed, boolean stopWordsAllowed) {
         if (stemsAllowed) {
+            // Blank out tags when stemming only
+            strOrig = blankOutTags(strOrig);
             CharArraySet stopWords = stopWordsAllowed ? JapaneseAnalyzer.getDefaultStopSet()
                     : new CharArraySet(getBehavior(), 0, false);
             Set<String> stopTags = stopWordsAllowed ? JapaneseAnalyzer.getDefaultStopTags()
                     : Collections.EMPTY_SET;
-            return new JapaneseAnalyzer(getBehavior(), null,
-                    Mode.SEARCH, stopWords, stopTags).tokenStream("", new StringReader(
-                    strOrig));
+            return new JapaneseAnalyzer(getBehavior(), null, Mode.SEARCH, stopWords, stopTags)
+                    .tokenStream("", new StringReader(strOrig));
         } else {
             return new JapaneseTokenizer(new StringReader(strOrig), null, false, Mode.NORMAL);
         }
+    }
+    
+    /**
+     * Replace all instances of OmegaT-style tags (&lt;x0>, etc.) with blank spaces
+     * of equal length. This is done because
+     * <ul><li>This tokenizer will turn "&lt;x0>" into [x, 0], leaving the alphabetical part
+     * intact (other tokenizers are expected to produce [x0], which is suppressed by digit filtering)
+     * <li>Instead of merely removing the tags, they are replaced with spaces so that
+     * the tokens produced correctly line up with the original, unmodified string.
+     * </ul>
+     */
+    private String blankOutTags(String text) {
+        StringBuilder buffer = new StringBuilder(text);
+        Matcher m = PatternConsts.OMEGAT_TAG.matcher(text);
+        while (m.find()) {
+            for (int i = m.start(), end = m.end(); i < end; i++) {
+                buffer.replace(i, i + 1, " ");
+            }
+        }
+        return buffer.toString();
     }
 }

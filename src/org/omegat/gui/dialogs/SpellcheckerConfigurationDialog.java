@@ -46,6 +46,7 @@ import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
@@ -159,12 +160,12 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
     private File getDictDir() {
         String dirName = directoryTextField.getText();
         
-        if (dirName == null || dirName.isEmpty()) {
+        if (StringUtil.isEmpty(dirName)) {
             return null;
         }
         
         File dir = new File(dirName);
-        if (!dir.exists() || !dir.canRead()) {
+        if (dir.isFile() || (dir.exists() && (!dir.canRead() || !dir.canWrite()))) {
             return null;
         }
         
@@ -217,10 +218,8 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
     }
 
     private void updateDictUrl() {
-        File dir = getDictDir();
-        
         installButton.setEnabled(autoSpellcheckCheckBox.isSelected()
-                && dir != null && dir.canWrite()
+                && getDictDir() != null
                 && !dictionaryUrlTextField.getText().isEmpty());
     }
     
@@ -405,12 +404,28 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_directoryChooserButtonActionPerformed
 
     private void installButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_installButtonActionPerformed
-        if (dicMan == null) {
+        File dicDir = getDictDir();
+        if (dicDir == null) {
             JOptionPane.showMessageDialog(this, OStrings.getString("GUI_SPELLCHECKER_INSTALL_UNABLE"),
                     OStrings.getString("GUI_SPELLCHECKER_INSTALL_UNABLE_TITLE"), JOptionPane.ERROR_MESSAGE);
             return;
         }
 
+        if (!dicDir.exists()) {
+            int doCreateDir = JOptionPane.showConfirmDialog(this,
+                    OStrings.getString("GUI_SPELLCHECKER_DIR_NOT_PRESENT"),
+                    OStrings.getString("GUI_SPELLCHECKER_DIR_NOT_PRESENT_TITLE"),
+                    JOptionPane.OK_CANCEL_OPTION);
+            if (doCreateDir != JOptionPane.OK_OPTION) {
+                return;
+            }
+            if (!dicDir.mkdirs()) {
+                JOptionPane.showMessageDialog(this, OStrings.getString("GUI_SPELLCHECKER_COULD_NOT_CREATE_DIR"),
+                    OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        
         Preferences.setPreference(Preferences.SPELLCHECKER_DICTIONARY_URL, dictionaryUrlTextField.getText());
 
         Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);

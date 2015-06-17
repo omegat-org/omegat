@@ -104,8 +104,9 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
                 String glosStr = glosEntry.getSrcText();
                 Token[] glosTokens = tok.tokenizeWords(glosStr, mode);
                 int glosTokensN = glosTokens.length;
-                if (glosTokensN == 0)
+                if (glosTokensN == 0) {
                     continue;
+                }
 
                 if (DefaultTokenizer.isContainsAll(strTokens, glosTokens, 
                         Preferences.isPreferenceDefault(Preferences.GLOSSARY_NOT_EXACT_MATCH, true))) {

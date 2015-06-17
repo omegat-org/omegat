@@ -137,12 +137,12 @@ public class CreateGlossaryEntry extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(4, 16, 4, 4);
         getContentPane().add(sourceTermLabel, gridBagConstraints);
 
-        descriptionTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         descriptionTextArea.setEditable(false);
-        descriptionTextArea.setFont(new JLabel().getFont());
+        descriptionTextArea.setFont(getFont());
         descriptionTextArea.setLineWrap(true);
         descriptionTextArea.setText(OStrings.getString("CREATE_GLOSSARY_DESCRIPTION")); // NOI18N
         descriptionTextArea.setWrapStyleWord(true);
+        descriptionTextArea.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -218,12 +218,12 @@ public class CreateGlossaryEntry extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(jScrollPane1, gridBagConstraints);
 
-        glossaryFileText.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         glossaryFileText.setEditable(false);
         glossaryFileText.setFont(new JLabel().getFont());
         glossaryFileText.setLineWrap(true);
         glossaryFileText.setText(OStrings.getString("CREATE_GLOSSARY_FILE")); // NOI18N
         glossaryFileText.setWrapStyleWord(true);
+        glossaryFileText.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;

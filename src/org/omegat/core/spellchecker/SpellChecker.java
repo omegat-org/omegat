@@ -34,9 +34,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -50,6 +52,7 @@ import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
 
 /**
  * Common spell checker interface for use any spellchecker providers.
@@ -118,55 +121,81 @@ public class SpellChecker implements ISpellChecker {
         // initialize the spell checker - get the data from the preferences
         String language = Core.getProject().getProjectProperties().getTargetLanguage().getLocaleCode();
 
-        String dictionaryDir = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY);
+        String dictionaryDir = Preferences.getPreferenceDefault(
+                Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
+                new File(StaticUtils.getConfigDir(), OConsts.SPELLING_DICT_DIR).getPath());
 
-        if (dictionaryDir != null) {
-            String affixName = dictionaryDir + File.separator + language + OConsts.SC_AFFIX_EXTENSION;
+        installBundledDictionary(dictionaryDir, language);
+        
+        File affixName = new File(dictionaryDir, language + OConsts.SC_AFFIX_EXTENSION);
+        File dictionaryName = new File(dictionaryDir, language + OConsts.SC_DICTIONARY_EXTENSION);
 
-            String dictionaryName = dictionaryDir + File.separator + language
-                    + OConsts.SC_DICTIONARY_EXTENSION;
+        // find out the internal project directory
+        String projectDir = Core.getProject().getProjectProperties().getProjectInternal();
 
-            // find out the internal project directory
-            String projectDir = Core.getProject().getProjectProperties().getProjectInternal();
+        // load the ignore list
+        ignoreFileName = projectDir + OConsts.IGNORED_WORD_LIST_FILE_NAME;
 
-            // load the ignore list
-            ignoreFileName = projectDir + OConsts.IGNORED_WORD_LIST_FILE_NAME;
+        // Since we read from disk, we clean the list first
+        ignoreList = new ArrayList<String>();
+        fillWordList(ignoreFileName, ignoreList);
 
-            // Since we read from disk, we clean the list first
-            ignoreList = new ArrayList<String>();
-            fillWordList(ignoreFileName, ignoreList);
+        // now the correct words
+        learnedFileName = projectDir + OConsts.LEARNED_WORD_LIST_FILE_NAME;
 
-            // now the correct words
-            learnedFileName = projectDir + OConsts.LEARNED_WORD_LIST_FILE_NAME;
+        // Since we read from disk, we clean the list first
+        learnedList = new ArrayList<String>();
+        fillWordList(learnedFileName, learnedList);
 
-            // Since we read from disk, we clean the list first
-            learnedList = new ArrayList<String>();
-            fillWordList(learnedFileName, learnedList);
-
-            checker = null;
-            if (new File(dictionaryName).exists()) {
-                try {
-                    checker = new SpellCheckerHunspell(language, dictionaryName, affixName);
-                } catch (Exception ex) {
-                    Log.log("Error loading hunspell: " + ex.getMessage());
-                } catch (Error err) {
-                    Log.log("Error loading hunspell: " + err.getMessage());
-                }
-                if (checker == null) {
-                    try {
-                        checker = new SpellCheckerJMySpell(language, dictionaryName, affixName);
-                    } catch (Exception ex) {
-                        Log.log("Error loading jmyspell: " + ex.getMessage());
-                    }
-                }
+        checker = null;
+        if (dictionaryName.isFile()) {
+            try {
+                checker = new SpellCheckerHunspell(language, dictionaryName.getPath(), affixName.getPath());
+            } catch (Exception ex) {
+                Log.log("Error loading hunspell: " + ex.getMessage());
+            } catch (Error err) {
+                Log.log("Error loading hunspell: " + err.getMessage());
             }
             if (checker == null) {
-                checker = new SpellCheckerDummy();
-                Log.log("No spell checker loaded");
+                try {
+                    checker = new SpellCheckerJMySpell(language, dictionaryName.getPath(), affixName.getPath());
+                } catch (Exception ex) {
+                    Log.log("Error loading jmyspell: " + ex.getMessage());
+                }
             }
-            for (String w : learnedList) {
-                checker.learnWord(w);
-            }
+        }
+        if (checker == null) {
+            checker = new SpellCheckerDummy();
+            Log.log("No spell checker loaded");
+        }
+        for (String w : learnedList) {
+            checker.learnWord(w);
+        }
+    }
+    
+    /**
+     * If there is a Hunspell dictionary for the current target language bundled inside
+     * this OmegaT distribution, install it if necessary. 
+     */
+    private void installBundledDictionary(String dictionaryDir, String language) {
+        InputStream bundledDict = getClass().getResourceAsStream(language + ".zip");
+        if (bundledDict == null) {
+            // Relevant dictionary not present.
+            return;
+        }
+        
+        File affix = new File(dictionaryDir, language + OConsts.SC_AFFIX_EXTENSION);
+        File dict = new File(dictionaryDir, language + OConsts.SC_DICTIONARY_EXTENSION);
+        if (affix.isFile() && dict.isFile()) {
+            // Dictionary already installed.
+            return;
+        }
+        
+        try {
+            StaticUtils.extractFileFromJar(bundledDict, Arrays.asList(affix.getName(), dict.getName()), dictionaryDir);
+            bundledDict.close();            
+        } catch (IOException e) {
+            Log.log(e);
         }
     }
 

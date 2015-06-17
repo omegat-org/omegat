@@ -100,6 +100,8 @@ public class OConsts {
     public static final String DEFAULT_INTERNAL = "omegat";
     /** Project subfolder for translation memories with other languages as alternative sources. */
     public static final String DEFAULT_OTHERLANG = "tmx2source";
+    /** Default name for spelling dictionary directory */
+    public static final String SPELLING_DICT_DIR = "spelling";
 
     /**
      * Glossary files extensions

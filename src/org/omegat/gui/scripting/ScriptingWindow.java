@@ -151,7 +151,9 @@ public class ScriptingWindow extends JFrame {
         initWindowLayout();
 
         monitor = new ScriptsMonitor(this, m_scriptList, getAvailableScriptExtensions());
-        monitor.start(m_scriptsDirectory);
+        if (m_scriptsDirectory != null) {
+            monitor.start(m_scriptsDirectory);
+        }
 
         logResult(listScriptEngine().toString());
 

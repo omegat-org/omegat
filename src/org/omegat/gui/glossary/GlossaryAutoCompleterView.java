@@ -139,20 +139,30 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
         return text.toUpperCase(getTargetLocale());
     }
     
+    private String capitalizeFirst(String text) {
+        int remainder = text.offsetByCodePoints(0, 1);
+        String firstCP = text.substring(0, remainder);
+        return StringUtil.toTitleCase(firstCP, getTargetLocale())
+                + text.substring(remainder);
+    }
+    
     private String matchCapitalization(String text, String matchTo) {
         if (StringUtil.isEmpty(matchTo)) {
             return text;
         }
-        // If matching to upper when input is lower, turn into title case.
-        if (StringUtil.isTitleCase(matchTo) && StringUtil.isLowerCase(text)) {
-            return StringUtil.toTitleCase(text, getTargetLocale());
+        // If matching to title case (or 1 upper char), capitalize first letter.
+        // Don't turn into title case because the text may be e.g. a phrase
+        // with intentional mixed casing.
+        if (StringUtil.isTitleCase(matchTo)) {
+            return capitalizeFirst(text);
         }
         // If matching to lower when input is upper, turn into lower.
         if (StringUtil.isLowerCase(matchTo) && StringUtil.isUpperCase(text)) {
             return toLowerCase(text);
         }
-        // If matching to upper (at least 2 chars), turn into upper.
-        if (StringUtil.isUpperCase(matchTo) && matchTo.codePointCount(0, matchTo.length()) > 1) {
+        // If matching to upper (at least 2 chars; otherwise would have hit isTitleCase()
+        // above), turn into upper.
+        if (StringUtil.isUpperCase(matchTo)) {
             return toUpperCase(text);
         }
         return text;

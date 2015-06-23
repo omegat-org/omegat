@@ -599,8 +599,10 @@ public class GITRemoteRepository implements IRemoteRepository {
             Collection<Ref> result = new LsRemoteCommand(null).setRemote(url).call();
             return !result.isEmpty();
         } catch (TransportException ex) {
-            if (ex.getMessage().endsWith("not authorized") || ex.getMessage().endsWith("Auth fail")
-            		|| ex.getMessage().contains("Too many authentication failures")) {
+            String message = ex.getMessage();
+            if (message.endsWith("not authorized") || message.endsWith("Auth fail")
+            		|| message.contains("Too many authentication failures")
+            		|| message.contains("Authentication is required")) {
                 throw new AuthenticationException(ex);
             }
             return false;

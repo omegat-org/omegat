@@ -590,17 +590,13 @@ public class GITRemoteRepository implements IRemoteRepository {
         if (url.startsWith("svn://") || url.startsWith("svn+")) {
             return false;
         }
-        File temp = FileUtil.createTempDir();
         try {
-            // A temporary local repository appears to be required even though
-            // we're just calling `git ls-remote`.
-            Repository repo = Git.init().setDirectory(temp).call().getRepository();
             if (credentials != null) {
                 MyCredentialsProvider provider = new MyCredentialsProvider(null);
                 provider.setCredentials(credentials);
                 CredentialsProvider.setDefault(provider);
             }
-            Collection<Ref> result = new LsRemoteCommand(repo).setRemote(url).call();
+            Collection<Ref> result = new LsRemoteCommand(null).setRemote(url).call();
             return !result.isEmpty();
         } catch (TransportException ex) {
             if (ex.getMessage().endsWith("not authorized") || ex.getMessage().endsWith("Auth fail")
@@ -613,8 +609,6 @@ public class GITRemoteRepository implements IRemoteRepository {
         } catch (JGitInternalException ex) {
             // Happens if the URL is a Subversion URL like svn://...
             return false;
-        } finally {
-            FileUtil.deleteTree(temp);
         }
     }
 

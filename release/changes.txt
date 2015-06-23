@@ -1,11 +1,15 @@
 ----------------------------------------------------------------------
  OmegaT 3.5 update 2
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 3.5 update 2 vs 3.5 update 1
+
+  Other changes:
+
+  - Team projects: Git library updated to 3.7.1
 
   Bug fixes:
 

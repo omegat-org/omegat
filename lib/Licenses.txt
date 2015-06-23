@@ -42,7 +42,7 @@ sqljet-1.1.10.jar is distributed under the GNU General Public License version 2
 (required for SVNRemoteRepository.java)
 Sources are available in OmegaT sources, in the directory lib/sources
 
-org.eclipse.jgit-2.1.0.201209190230-r.jar is distributed under the
+org.eclipse.jgit-3.7.1.201504261725-r.jar is distributed under the
 Eclipse Distribution License (EDL) v 1.0 
 (required for GITRemoteRepository.java)
 

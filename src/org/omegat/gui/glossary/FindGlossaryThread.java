@@ -7,7 +7,7 @@
                2008 Alex Buloichik
                2009 Wildrich Fourie, Didier Briel, Alex Buloichik
                2013 Aaron Madlon-Kay, Alex Buloichik
-               2015 Didier Briel
+               2015 Didier Briel, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

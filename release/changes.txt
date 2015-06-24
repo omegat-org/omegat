@@ -2,7 +2,7 @@
  OmegaT 3.5 update 2
 ----------------------------------------------------------------------
    1 Enhancement
-   1 Bug fix
+   2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.5 update 2 vs 3.5 update 1
@@ -15,6 +15,8 @@
 
   - Shift + F3 doesn't cycle case for single characters 
   https://sourceforge.net/p/omegat/bugs/750/
+
+  - The Japanese tokenizer was not removing tags
 
 ----------------------------------------------------------------------
  OmegaT 3.5 update 1 (2015-06-11)

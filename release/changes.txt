@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5 update 2
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -10,6 +10,8 @@
   Other changes:
 
   - Team projects: Git library updated to 3.7.1
+
+  - Use full text search for glossary hits when language is not space-delimited
 
   Bug fixes:
 

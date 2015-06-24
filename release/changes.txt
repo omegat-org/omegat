@@ -1,11 +1,14 @@
 ----------------------------------------------------------------------
  OmegaT 3.5 update 2
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.5 update 2 vs 3.5 update 1
+
+  - Glossary adding term dialog - set focus on any GUI element 
+  https://sourceforge.net/p/omegat/feature-requests/1014/
 
   Other changes:
 

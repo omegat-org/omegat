@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    3 Enhancements
    2 Bug fixes
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 3.5 update 2 vs 3.5 update 1
 
@@ -22,6 +22,9 @@
   https://sourceforge.net/p/omegat/bugs/750/
 
   - The Japanese tokenizer was not removing tags
+
+  Localisation updates:
+  - Norwegian localisation created (UI, Instant Start, scripts, readme)
 
 ----------------------------------------------------------------------
  OmegaT 3.5 update 1 (2015-06-11)

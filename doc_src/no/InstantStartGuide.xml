@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.instant.start.guide">
+  <title>Lær å bruke OmegaT på fem minutter!</title>
+
+  <section id="create.and.open.new.project">
+    <title>Opprett et nytt prosjekt<indexterm class="singular">
+        <primary>Prosjekt</primary> <secondary>Opprett / åpne nytt</secondary>
+      </indexterm></title>
+
+    <para><remark>Merk:</remark> Bruk <keycap>Command</keycap>-tasten i stedet for <keycap>Control</keycap>-tasten dersom du bruker en Apple Mac.</para>
+
+      <indexterm class="singular">
+        <primary>Meny Prosjekt</primary> <secondary>Nytt...</secondary>
+      </indexterm>
+
+    <para>For å begynne å bruke OmegaT oppretter du først et prosjekt. Dette vil inneholde alle filene dine, slik som kildefilen, oversettelsesminner, glossarer og til slutt den oversatte filen. I <guimenu>Prosjekt</guimenu>menyen velger du <menuchoice><guimenuitem>Nytt...</guimenuitem></menuchoice> og skriver inn navnet på prosjektet. Du må kunne finne igjen prosjektet senere, så husk hvor du lagrer det.</para>
+
+    <para>Etter at du har gitt prosjektet et navn, åpnes dialogboksen <guilabel>Opprett nytt prosjekt.</guilabel> Øverst i dialogboksen velger du kildefilens språk og språket filen skal oversettes til og klikker så <guibutton>OK</guibutton> for å fortsette.</para>
+
+    <para>Dersom du er interessert i andre innstillinger i denne dialogboksen kan du gå tilbake til den ved å trykke <keycap>Ctrl+E</keycap> når som helst.</para>
+
+    <para>Deretter åpnes dialogboksen <guilabel>Prosjektfiler</guilabel>. Klikk på <guibutton>Kopier filer til kildemappe...</guibutton> for å velge kildefilen(e). OmegaT kopierer så den valgte filen til undermappen <filename>/source/</filename> i prosjektmappen du nettopp har opprettet. Etter at kildefilen har blitt lastet opp i vinduet <guilabel>Rediger</guilabel>, kan du lukke dialogboksen <guilabel>Prosjektfiler</guilabel>.</para>
+  </section>
+
+  <section id="translate.the.segments.one.by.one">
+    <title>Hvordan oversette filen</title>
+
+    <para>OmegaT gir deg ett segment om gangen, som du deretter oversetter. Etter at du har oversatt et segment går du videre til neste uoversatte segment ved å trykke <keycap>Ctrl+U</keycap> (eller <keycap>Ctrl+Shift+U</keycap> for å gå videre til neste oversatte segmentet). Når du har lyst til å se hvordan oversettelsens sluttformat ser ut, trykker du <keycap>Ctrl+D</keycap> for å opprette oversettelsen(e), som så lagres i undermappen <filename>/target/</filename> i prosjektmappen. Mens du oversetter kan du bruke menyene <guimenu>Rediger</guimenu> og <guimenu>Gå til</guimenu> for flere nyttige funksjoner.</para>
+  </section>
+
+  <section>
+    <title>Hvordan validere koder</title>
+
+    <para>Dersom kildefilene dine er formaterte filer, for eksempel Microsoft Word, LibreOffice Writer eller HTML, konverterer OmegaT formatet til koder som omgir teksten du oversetter. Dokumenter har ofte koder som har ingenting med formatet å gjøre, men som allikevel er viktige for både kildefilen og den oversatte filen.  En setning på kildespråket kan se slik ut:<mediaobject>
+      <imageobject role="html">
+        <imagedata align="justify" fileref="images/InstantGuide_1.png"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata align="justify" fileref="images/InstantGuide_1.png" width="40%"/>
+      </imageobject>
+    </mediaobject>
+    </para>
+
+    <para>Men OmegaT viser den slik:<mediaobject>
+      <imageobject role="html">
+        <imagedata align="justify" fileref="images/InstantGuide_2.png"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata align="justify" fileref="images/InstantGuide_2.png" width="45%"/>
+      </imageobject>
+    </mediaobject>
+    </para>
+    
+    <para>Kodene i OmegaT er grå slik at de er lettere å kjenne igjen.  De er beskyttet slik at du ikke kan modifisere innholdet i kodene, men du kan slette dem, skrive dem inn manuelt eller flytte dem rundt i målsetningen. Imidlertid kan det hende at den oversatte filen ikke vil åpnes dersom du gjorde en feil da du skrev inn formateringskodene. Trykk derfor <keycap>Ctrl+Shift+V</keycap> før du oppretter den oversatte filen for å sjekke at kodene er riktige.</para>
+  </section>
+
+  <section>
+    <title>Hvordan opprette den oversatte filen</title>
+
+    <para>Når du er sikker på at alle kodene i oversettelsen er riktige, trykker du <keycap>Ctrl+D</keycap> for å opprette målfilen, som lagres i undermappen <filename>/target/</filename> i prosjektmappen.</para>
+  </section>
+
+  <section>
+    <title>Noen ting å huske på</title>
+
+    <itemizedlist>
+      <listitem>
+        <para>Om en fil ikke vil lastes inn i <guilabel>Redigering</guilabel>svinduet, kan det hende at filen er i et format som ikke støttes av OmegaT. See <link linkend="chapter.file.filters">Filfiltre</link> for en liste over filformater som OmegaT støtter.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Du kan opprette et nytt prosjekt for hver nye jobb, og du kan legge til nye kildefiler i et prosjekt når som helst.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>For å minne deg selv på prosjektets innstillinger åpner du dialogboksen med prosjektegenskaper ved å trykke <keycap>Ctrl+E</keycap>.  For å se en liste over filene i prosjektet åpner du dialogboksen <guilabel>Prosjektfiler</guilabel> ved å trykke <keycap>Ctrl+L</keycap>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Når oversettelsen er ferdig eksporterer OmegaT tre oversettelsesminner kalt <filename>level1</filename>, <filename>level2</filename> og <filename>omegat</filename> til prosjektmappen. <filename>level1</filename>- og <filename>level2</filename>-minnene kan deles med brukere av andre CAT-verktøy. Minnet kalt <filename>omegat</filename> kan brukes av OmegaT til andre, fremtidige prosjekter. Dersom du plasserer slike TM-filer i undermappen <filename>/tm/</filename> i en prosjektmappe går OmegaT automatisk igjennom dem for å finne lignende segmenter, såkalte &quot;tilnærmingssøk&quot;.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Du kan legge til en ny term i glossaren ved å trykke <keycap>Ctrl+Shift+G</keycap>, eller du kan kopiere eksisterende glossarer til undermappen <filename>/glossary/</filename> i prosjektmappen, og OmegaT bruker dem da automatisk til å søke etter ord.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Det kan være nyttig å søke etter ord og fraser i kildeteksten og i oversettelsen, så trykk <keycap>Ctrl+F</keycap> for å få opp dialogboksen <guilabel>Tekstsøk</guilabel> når som helst.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>For en mer omfattende introduksjon, gå til <ulink url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">OmegaT for beginners</ulink> på OmegaTs nettside. Skulle du trenge hjelp med OmegaT er du velkommen til å bli med i <ulink url="http://tech.groups.yahoo.com/group/OmegaT/">OmegaTs brukergruppe.</ulink></para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

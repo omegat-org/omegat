@@ -2,7 +2,7 @@
  OmegaT 3.5 update 2
 ----------------------------------------------------------------------
    5 Enhancements
-   2 Bug fixes
+   3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.5 update 2 vs 3.5 update 1
@@ -31,7 +31,11 @@
 
   - The Japanese tokenizer was not removing tags
 
+  - When the auto-completer was changing the first letter of a phrase
+from lower-case to upper-case, it was turning the phrase to title-case
+
   Localisation updates:
+
   - Norwegian localisation created (UI, Instant Start, scripts, readme)
 
 ----------------------------------------------------------------------
@@ -234,7 +238,7 @@ of "foo\.\scripts"
 
   Localisation updates:
 
-  - New Norwegian localisation (UI, Instant start, readme)
+  - New Norwegian localisation (UI, Instant start, scripts, readme)
 
 ----------------------------------------------------------------------
  OmegaT 3.1.9 update 2 (2015-06-03)

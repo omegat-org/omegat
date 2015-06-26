@@ -13,7 +13,7 @@
                2012 Wildrich Fourie, Guido Leenders, Martin Fleurke, Didier Briel
                2013 Zoltan Bartko, Didier Briel, Yu Tang
                2014 Aaron Madlon-Kay
-               2015 Didier Briel
+               2015 Didier Briel, Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -269,6 +269,15 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         projectMenu.add(new JSeparator());
         projectMenu.add(projectEditMenuItem = createMenuItem("MW_PROJECTMENU_EDIT"));
         projectMenu.add(viewFileListMenuItem = createMenuItem("TF_MENU_FILE_PROJWIN"));
+        projectMenu.add(projectRevealProjectFilesMenu = createMenu("TF_MENU_FILE_REVEAL_PROJECT_FILES"));
+        projectRevealProjectFilesMenu.add(projectRevealDictionaryMenuItem = createMenuItem("TF_MENU_FILE_REVEAL_DICTIONARY"));
+        projectRevealProjectFilesMenu.add(projectRevealGlossaryMenuItem = createMenuItem("TF_MENU_FILE_REVEAL_GLOSSARY"));
+        projectRevealProjectFilesMenu.add(projectRevealSourceMenuItem = createMenuItem("TF_MENU_FILE_REVEAL_SOURCE"));
+        projectRevealProjectFilesMenu.add(projectRevealTargetMenuItem = createMenuItem("TF_MENU_FILE_REVEAL_TARGET"));
+        projectRevealProjectFilesMenu.add(projectRevealTMMenuItem = createMenuItem("TF_MENU_FILE_REVEAL_TM"));
+        projectRevealProjectFilesMenu.add(new JSeparator());
+        projectRevealProjectFilesMenu.add(projectRevealCurrentSourceDocumentMenuItem = createMenuItem("TF_MENU_FILE_REVEAL_CURRENT_SOURCE_DOCUMENT"));
+        projectRevealProjectFilesMenu.add(projectRevealCurrentTargetDocumentMenuItem = createMenuItem("TF_MENU_FILE_REVEAL_CURRENT_TARGET_DOCUMENT"));
         projectExitMenuItem = createMenuItem("TF_MENU_FILE_QUIT");
 
         // all except MacOSX
@@ -610,7 +619,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
         JMenuItem[] itemsToSwitchOn = new JMenuItem[] { projectImportMenuItem, projectWikiImportMenuItem,
                 projectReloadMenuItem, projectCloseMenuItem, projectSaveMenuItem, projectEditMenuItem,
-                projectCompileMenuItem, projectSingleCompileMenuItem,
+                projectCompileMenuItem, projectSingleCompileMenuItem, projectRevealProjectFilesMenu,
 
                 editMenu, editFindInProjectMenuItem, editReplaceInProjectMenuItem, editInsertSourceMenuItem,
                 editInsertTranslationMenuItem, editTagPainterMenuItem, editOverwriteSourceMenuItem,
@@ -752,6 +761,14 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem projectReloadMenuItem;
     JMenuItem projectSaveMenuItem;
     JMenuItem projectWikiImportMenuItem;
+    JMenu projectRevealProjectFilesMenu;
+    JMenuItem projectRevealDictionaryMenuItem;
+    JMenuItem projectRevealGlossaryMenuItem;
+    JMenuItem projectRevealSourceMenuItem;
+    JMenuItem projectRevealTargetMenuItem;
+    JMenuItem projectRevealTMMenuItem;
+    JMenuItem projectRevealCurrentSourceDocumentMenuItem;
+    JMenuItem projectRevealCurrentTargetDocumentMenuItem;
     JMenu switchCaseSubMenu;
     JMenuItem titleCaseMenuItem;
     JMenu toolsMenu;

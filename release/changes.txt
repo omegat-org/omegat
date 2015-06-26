@@ -1,14 +1,22 @@
 ----------------------------------------------------------------------
  OmegaT 3.5 update 2
 ----------------------------------------------------------------------
-   3 Enhancements
+   5 Enhancements
    2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.5 update 2 vs 3.5 update 1
 
+  Implemented requests:
+
   - Glossary adding term dialog - set focus on any GUI element 
   https://sourceforge.net/p/omegat/feature-requests/1014/
+
+  - Allow bundling of Hunspell spelling dictionaries in OmegaT.jar
+  https://sourceforge.net/p/omegat/feature-requests/1101/
+
+  - Allow per-project main window layouts
+  https://sourceforge.net/p/omegat/feature-requests/1102/
 
   Other changes:
 

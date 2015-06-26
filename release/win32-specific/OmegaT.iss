@@ -39,10 +39,12 @@ Source: "readme_eu.txt"; DestDir: "{app}"; Flags: isreadme; Languages: eu
 Source: "readme_fr.txt"; DestDir: "{app}"; Flags: isreadme; Languages: fr
 Source: "readme_gl.txt"; DestDir: "{app}"; Flags: isreadme; Languages: gl
 Source: "readme_hu.txt"; DestDir: "{app}"; Flags: isreadme; Languages: hu
+Source: "readme_id.txt"; DestDir: "{app}"; Flags: isreadme; Languages: id
 Source: "readme_it.txt"; DestDir: "{app}"; Flags: isreadme; Languages: it
 Source: "readme_ja.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ja
 Source: "readme_ko.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ko
 Source: "readme_nl.txt"; DestDir: "{app}"; Flags: isreadme; Languages: nl
+Source: "readme_no.txt"; DestDir: "{app}"; Flags: isreadme; Languages: no
 Source: "readme_pl.txt"; DestDir: "{app}"; Flags: isreadme; Languages: pl
 Source: "readme_pt_BR.txt"; DestDir: "{app}"; Flags: isreadme; Languages: pt_BR
 Source: "readme_ru.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ru
@@ -91,7 +93,7 @@ Name: "de"; MessagesFile: "compiler:Languages\German.isl"
 ;Name: "he"; MessagesFile: "compiler:Languages\Hebrew.isl"
 Name: "hu"; MessagesFile: "compiler:Languages\Hungarian.isl"
 Name: "it"; MessagesFile: "compiler:Languages\Italian.isl"
-;Name: "nb"; MessagesFile: "compiler:Languages\Norwegian.isl"
+Name: "no"; MessagesFile: "compiler:Languages\Norwegian.isl"
 Name: "pl"; MessagesFile: "compiler:Languages\Polish.isl"
 Name: "pt"; MessagesFile: "compiler:Languages\Portuguese.isl"
 Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"
@@ -115,7 +117,7 @@ Name: "eo"; MessagesFile: "compiler:Languages\Esperanto.isl"
 Name: "gl"; MessagesFile: "compiler:Languages\Galician.isl"
 Name: "el"; MessagesFile: "compiler:Languages\Greek.isl"
 ;Name: "is"; MessagesFile: "compiler:Languages\Icelandic.isl"
-;Name: "id"; MessagesFile: "compiler:Languages\Indonesian.isl"
+Name: "id"; MessagesFile: "compiler:Languages\Indonesian.isl"
 Name: "ja"; MessagesFile: "compiler:Languages\Japanese.isl"
 ;Name: "kk"; MessagesFile: "compiler:Languages\Kazakh.isl"
 Name: "ko"; MessagesFile: "compiler:Languages\Korean.isl"

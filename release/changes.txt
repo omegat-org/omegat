@@ -9,7 +9,7 @@
 
   Localisation updates:
 
-  - New Norwegian localisation (UI, Instant start, readme)
+  - New Norwegian localisation (UI, Instant start, scripts, readme)
 
 ----------------------------------------------------------------------
  OmegaT 3.1.9 update 2 (2015-06-03)

@@ -2,7 +2,7 @@
  OmegaT 3.5 update 2
 ----------------------------------------------------------------------
    5 Enhancements
-   3 Bug fixes
+   4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.5 update 2 vs 3.5 update 1
@@ -33,6 +33,10 @@
 
   - When the auto-completer was changing the first letter of a phrase
 from lower-case to upper-case, it was turning the phrase to title-case
+
+  - The Mac package contained two folders with the same name except the 
+case. Depending on the zip application, it was difficult to unpack it 
+correctly.
 
   Localisation updates:
 

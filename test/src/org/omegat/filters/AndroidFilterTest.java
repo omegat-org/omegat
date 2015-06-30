@@ -53,7 +53,7 @@ public class AndroidFilterTest extends TestFilterBase {
         checkMulti("<f0>Welcome !</f0> \\nAdditional comment", "line", null, null, null,
                 " This is line for... ");
         checkMulti("T'est", "apo_test", null, null, null, null);
-        checkMulti("1 minute", "Nminutes/one", null, null, null, " 1-minute ");
+        checkMulti("1 minute", "Nminutes/one", null, null, null, " Plural demo \n 1-minute ");
         checkMulti("<x0>%d</x0> minutes", "Nminutes/other", null, null, null, " 2-minute or more ");
         checkMultiEnd();
     }

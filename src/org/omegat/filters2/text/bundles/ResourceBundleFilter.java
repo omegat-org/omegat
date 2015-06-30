@@ -292,7 +292,7 @@ public class ResourceBundleFilter extends AbstractFilter {
         boolean noi18n = false;
 
         // Parameter in the options of filter to customize the target file
-        removeStringsUntranslated = processOptions != null && "true".equals(processOptions.get(OPTION_REMOVE_STRINGS_UNTRANSLATED));
+        removeStringsUntranslated = processOptions != null && "true".equalsIgnoreCase(processOptions.get(OPTION_REMOVE_STRINGS_UNTRANSLATED));
         // Initialize the comments
         comments = null;
         while ((str = getNextLine(lbpr)) != null) {

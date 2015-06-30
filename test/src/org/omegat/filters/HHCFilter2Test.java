@@ -25,8 +25,12 @@
 
 package org.omegat.filters;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.hhc.HHCFilter2;
+import org.omegat.filters2.html2.HTMLOptions;
 
 public class HHCFilter2Test extends TestFilterBase {
     public void testParse() throws Exception {
@@ -36,7 +40,11 @@ public class HHCFilter2Test extends TestFilterBase {
     }
 
     public void testTranslate() throws Exception {
-        translateText(new HHCFilter2(), "test/data/filters/hhc/file-HHCFilter2.hhc");
+        Map<String, String> config = new HashMap<String, String>();
+        // Rewriting the header will cause the first test to fail.
+        // The other files don't have a header.
+        config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "NEVER");
+        translateText(new HHCFilter2(), "test/data/filters/hhc/file-HHCFilter2.hhc", config);
         translateText(new HHCFilter2(), "test/data/filters/hhc/file-HHCFilter2-Contents file.hhc");
         translateText(new HHCFilter2(), "test/data/filters/hhc/file-HHCFilter2-Index file.hhk");
     }

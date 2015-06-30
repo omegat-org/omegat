@@ -29,6 +29,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +70,7 @@ import org.xml.sax.InputSource;
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
+@SuppressWarnings("unchecked")
 public abstract class TestFilterBase extends TestCore {
     protected FilterContext context = new FilterContext(new Language("en"), new Language("be"), false);
 
@@ -191,7 +193,11 @@ public abstract class TestFilterBase extends TestCore {
     }
 
     protected void translate(AbstractFilter filter, String filename) throws Exception {
-        filter.translateFile(new File(filename), outFile, new TreeMap<String, String>(), context,
+        translate(filter, filename, Collections.EMPTY_MAP);
+    }
+    
+    protected void translate(AbstractFilter filter, String filename, Map<String, String> config) throws Exception {
+        filter.translateFile(new File(filename), outFile, config, context,
                 new ITranslateCallback() {
                     public String getTranslation(String id, String source, String path) {
                         return source;
@@ -216,7 +222,10 @@ public abstract class TestFilterBase extends TestCore {
     }
 
     protected void translateText(AbstractFilter filter, String filename) throws Exception {
-        translate(filter, filename);
+        translateText(filter, filename, Collections.EMPTY_MAP);
+    }
+    protected void translateText(AbstractFilter filter, String filename, Map<String, String> config) throws Exception {
+        translate(filter, filename, config);
         compareBinary(new File(filename), outFile);
     }
 

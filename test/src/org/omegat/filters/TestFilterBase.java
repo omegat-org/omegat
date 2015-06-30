@@ -34,7 +34,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -79,7 +78,7 @@ public abstract class TestFilterBase extends TestCore {
     protected void setUp() throws Exception {
         super.setUp();
 
-        Core.initializeConsole(new TreeMap<String, String>());
+        Core.initializeConsole(Collections.EMPTY_MAP);
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         Core.setProject(new TestProject(new ProjectPropertiesTest()));
 
@@ -90,7 +89,7 @@ public abstract class TestFilterBase extends TestCore {
     protected List<String> parse(AbstractFilter filter, String filename) throws Exception {
         final List<String> result = new ArrayList<String>();
 
-        filter.parseFile(new File(filename), new TreeMap<String, String>(), context, new IParseCallback() {
+        filter.parseFile(new File(filename), Collections.EMPTY_MAP, context, new IParseCallback() {
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
                     String comment, IFilter filter) {
                 addEntry(id, source, translation, isFuzzy, comment, null, filter, null);
@@ -135,7 +134,7 @@ public abstract class TestFilterBase extends TestCore {
     protected void parse2(final AbstractFilter filter, final String filename,
             final Map<String, String> result, final Map<String, String> legacyTMX) throws Exception {
 
-        filter.parseFile(new File(filename), new TreeMap<String, String>(), context, new IParseCallback() {
+        filter.parseFile(new File(filename), Collections.EMPTY_MAP, context, new IParseCallback() {
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
                     String comment, IFilter filter) {
                 addEntry(id, source, translation, isFuzzy, comment, null, filter, null);
@@ -218,7 +217,7 @@ public abstract class TestFilterBase extends TestCore {
     protected void align(IFilter filter, String in, String out, IAlignCallback callback) throws Exception {
         File inFile = new File("test/data/filters/" + in);
         File outFile = new File("test/data/filters/" + out);
-        filter.alignFile(inFile, outFile, new TreeMap<String, String>(), context, callback);
+        filter.alignFile(inFile, outFile, Collections.EMPTY_MAP, context, callback);
     }
 
     protected void translateText(AbstractFilter filter, String filename) throws Exception {
@@ -307,7 +306,7 @@ public abstract class TestFilterBase extends TestCore {
     }
 
     protected IProject.FileInfo loadSourceFiles(IFilter filter, String file) throws Exception {
-        return loadSourceFiles(filter, file, new TreeMap<String, String>());
+        return loadSourceFiles(filter, file, Collections.EMPTY_MAP);
     }
 
     protected IProject.FileInfo fi;

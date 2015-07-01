@@ -180,14 +180,19 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         Method method = null;
         try {
             method = mainWindowMenuHandler.getClass().getMethod(methodName);
-        } catch (NoSuchMethodException ex) {
-            throw new IncompatibleClassChangeError(
-                    "Error invoke method handler for main menu: there is no method " + methodName);
+        } catch (NoSuchMethodException ignore) {
+            try {
+                method = mainWindowMenuHandler.getClass().getMethod(methodName, Integer.TYPE);
+            } catch (NoSuchMethodException ex) {
+                throw new IncompatibleClassChangeError(
+                        "Error invoke method handler for main menu: there is no method " + methodName);
+            }
         }
 
         // Call ...MenuItemActionPerformed method.
+        Object[] args = method.getParameterTypes().length == 0 ? null : new Object[] { evt.getModifiers() };
         try {
-            method.invoke(mainWindowMenuHandler);
+            method.invoke(mainWindowMenuHandler, args);
         } catch (IllegalAccessException ex) {
             throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
         } catch (InvocationTargetException ex) {

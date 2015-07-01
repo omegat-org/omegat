@@ -36,6 +36,7 @@ package org.omegat.gui.main;
 
 import java.awt.Component;
 import java.awt.Desktop;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -227,67 +228,80 @@ public class MainWindowMenuHandler {
     }
 
     public void projectRevealDictionaryMenuItemActionPerformed() {
-        if (Core.getProject().isProjectLoaded()) {
-            String path = Core.getProject().getProjectProperties().getDictRoot();
-            revealFolderContents(path);
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
         }
+        String path = Core.getProject().getProjectProperties().getDictRoot();
+        openFile(path);
     }
 
     public void projectRevealGlossaryMenuItemActionPerformed() {
-        if (Core.getProject().isProjectLoaded()) {
-            String path = Core.getProject().getProjectProperties().getGlossaryRoot();
-            revealFolderContents(path);
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
         }
+        String path = Core.getProject().getProjectProperties().getGlossaryRoot();
+        openFile(path);
     }
 
     public void projectRevealSourceMenuItemActionPerformed() {
-        if (Core.getProject().isProjectLoaded()) {
-            String path = Core.getProject().getProjectProperties().getSourceRoot();
-            revealFolderContents(path);
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
         }
+        String path = Core.getProject().getProjectProperties().getSourceRoot();
+        openFile(path);
     }
 
     public void projectRevealTargetMenuItemActionPerformed() {
-        if (Core.getProject().isProjectLoaded()) {
-            String path = Core.getProject().getProjectProperties().getTargetRoot();
-            revealFolderContents(path);
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
         }
+        String path = Core.getProject().getProjectProperties().getTargetRoot();
+        openFile(path);
     }
 
     public void projectRevealTMMenuItemActionPerformed() {
-        if (Core.getProject().isProjectLoaded()) {
-            String path = Core.getProject().getProjectProperties().getTMRoot();
-            revealFolderContents(path);
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
         }
+        String path = Core.getProject().getProjectProperties().getTMRoot();
+        openFile(path);
     }
 
-    public void projectRevealCurrentSourceDocumentMenuItemActionPerformed() {
-        if (Core.getProject().isProjectLoaded()) {
-            String root = Core.getProject().getProjectProperties().getSourceRoot();
-            String path = Core.getEditor().getCurrentFile();
-            if (!StringUtil.isEmpty(path)) {
-                revealFolderContents(root + path);
-            }
+    public void projectRevealCurrentSourceDocumentMenuItemActionPerformed(int modifier) {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
         }
+        String root = Core.getProject().getProjectProperties().getSourceRoot();
+        String path = Core.getEditor().getCurrentFile();
+        if (StringUtil.isEmpty(path)) {
+            return;
+        }
+        String toOpen = root + path;
+        if ((modifier & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
+            toOpen = new File(toOpen).getParent();
+        }
+        openFile(toOpen);
     }
 
-    public void projectRevealCurrentTargetDocumentMenuItemActionPerformed() {
-        if (Core.getProject().isProjectLoaded()) {
-            String root = Core.getProject().getProjectProperties().getTargetRoot();
-            String path = Core.getEditor().getCurrentFile();
-            if (!StringUtil.isEmpty(path)) {
-                revealFolderContents(root + path);
-            }
+    public void projectRevealCurrentTargetDocumentMenuItemActionPerformed(int modifier) {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
         }
+        String root = Core.getProject().getProjectProperties().getTargetRoot();
+        String path = Core.getEditor().getCurrentFile();
+        if (StringUtil.isEmpty(path)) {
+            return;
+        }
+        String toOpen = root + path;
+        if ((modifier & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
+            toOpen = new File(toOpen).getParent();
+        }
+        openFile(toOpen);
     }
 
-    private void revealFolderContents(String path) {
+    private void openFile(String path) {
         try {
-            File file = new File(path);
-            while (!file.isDirectory()) {
-                file = file.getParentFile();
-            }
-            Desktop.getDesktop().open(file);
+            Desktop.getDesktop().open(new File(path));
         } catch (Exception ex) {
             Log.logErrorRB(ex, "RPF_ERROR");
             Core.getMainWindow().displayErrorRB(ex, "RPF_ERROR");

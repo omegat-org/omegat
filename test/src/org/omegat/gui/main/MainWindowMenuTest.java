@@ -52,7 +52,12 @@ public class MainWindowMenuTest extends TestCore {
 
         for (Method m : MainWindowMenuHandler.class.getDeclaredMethods()) {
             if (Modifier.isPublic(m.getModifiers()) && !Modifier.isStatic(m.getModifiers())) {
-                if (m.getParameterTypes().length == 0) {
+                Class<?>[] params = m.getParameterTypes();
+                if (params.length == 0) {
+                    existsMethods.put(m.getName(), m);
+                }
+                // Include menu items that take a modifier key.
+                if (params.length == 1 && params[0] == Integer.TYPE) {
                     existsMethods.put(m.getName(), m);
                 }
             }
@@ -62,7 +67,13 @@ public class MainWindowMenuTest extends TestCore {
             if (JMenuItem.class.isAssignableFrom(f.getType()) && f.getType() != JMenu.class) {
                 count++;
                 String actionMethodName = f.getName() + "ActionPerformed";
-                Method m = MainWindowMenuHandler.class.getMethod(actionMethodName);
+                Method m;
+                try {
+                    m = MainWindowMenuHandler.class.getMethod(actionMethodName);
+                } catch (NoSuchMethodException ignore) {
+                    // See if the method accepts a modifier key argument.
+                    m = MainWindowMenuHandler.class.getMethod(actionMethodName, Integer.TYPE);
+                }
                 assertNotNull("Action method not defined for " + f.getName(), m);
                 assertNotNull(existsMethods.remove(actionMethodName));
             }

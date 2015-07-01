@@ -227,7 +227,7 @@ public class MainWindowMenuHandler {
         FileUtil.writeScriptFile("", OConsts.TARGET_EXPORT);
     }
 
-    public void projectRevealDictionaryMenuItemActionPerformed() {
+    public void projectAccessDictionaryMenuItemActionPerformed() {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -235,7 +235,7 @@ public class MainWindowMenuHandler {
         openFile(path);
     }
 
-    public void projectRevealGlossaryMenuItemActionPerformed() {
+    public void projectAccessGlossaryMenuItemActionPerformed() {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -243,7 +243,7 @@ public class MainWindowMenuHandler {
         openFile(path);
     }
 
-    public void projectRevealSourceMenuItemActionPerformed() {
+    public void projectAccessSourceMenuItemActionPerformed() {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -251,7 +251,7 @@ public class MainWindowMenuHandler {
         openFile(path);
     }
 
-    public void projectRevealTargetMenuItemActionPerformed() {
+    public void projectAccessTargetMenuItemActionPerformed() {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -259,7 +259,7 @@ public class MainWindowMenuHandler {
         openFile(path);
     }
 
-    public void projectRevealTMMenuItemActionPerformed() {
+    public void projectAccessTMMenuItemActionPerformed() {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -267,7 +267,7 @@ public class MainWindowMenuHandler {
         openFile(path);
     }
 
-    public void projectRevealCurrentSourceDocumentMenuItemActionPerformed(int modifier) {
+    public void projectAccessCurrentSourceDocumentMenuItemActionPerformed(int modifier) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -283,7 +283,7 @@ public class MainWindowMenuHandler {
         openFile(toOpen);
     }
 
-    public void projectRevealCurrentTargetDocumentMenuItemActionPerformed(int modifier) {
+    public void projectAccessCurrentTargetDocumentMenuItemActionPerformed(int modifier) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }

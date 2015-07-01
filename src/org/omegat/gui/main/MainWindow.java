@@ -33,6 +33,7 @@ package org.omegat.gui.main;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.HeadlessException;
@@ -67,6 +68,7 @@ import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.FileUtil;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -158,6 +160,17 @@ public class MainWindow extends JFrame implements IMainWindow {
                 updateTitle();
                 if (eventType == PROJECT_CHANGE_TYPE.CLOSE) {
                     closeSearchWindows();
+                }
+                if (eventType == PROJECT_CHANGE_TYPE.COMPILE) {
+                    // Open target folder after running Create Translated Documents.
+                    // This is here so as to keep GUI-specific code separate from
+                    // UI-agnostic model code in RealProject.
+                    try {
+                        Desktop.getDesktop().open(new File(Core.getProject().getProjectProperties().getTargetRoot()));
+                    } catch (Exception ex) {
+                        Log.logErrorRB(ex, "RPF_ERROR");
+                        displayErrorRB(ex, "RPF_ERROR");
+                    }
                 }
             }
         });

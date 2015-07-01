@@ -383,13 +383,11 @@ public class TMXReader2 {
         inlineTagHandler.reset();
 
         int inlineLevel = 0;
-        StartElement currentElement;
         while (true) {
             XMLEvent e = xml.nextEvent();
             switch (e.getEventType()) {
             case XMLEvent.START_ELEMENT:
                 StartElement eStart = e.asStartElement();
-                currentElement = eStart;
                 if ("hi".equals(eStart.getName().getLocalPart())) {
                     // tag should be skipped
                     break;

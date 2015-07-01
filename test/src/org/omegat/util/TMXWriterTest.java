@@ -120,6 +120,7 @@ public class TMXWriterTest extends TestFilterBase {
         // patch for 'ext' tmx
         setCreationTool(new File("test/data/tmx/test-save-tmx14.tmx"), "ext", outFile);
 
+        // extLevel2 = false; useSlash = false
         load(sources, null, false, false);
         assertEquals(4, sources.size());
         assertEquals("source", sources.get(0));
@@ -127,6 +128,7 @@ public class TMXWriterTest extends TestFilterBase {
         assertEquals("345", sources.get(2));
         assertEquals("67", sources.get(3));
 
+        // extLevel2 = true; useSlash = false
         load(sources, null, true, false);
         assertEquals(4, sources.size());
         assertEquals("source", sources.get(0));
@@ -134,12 +136,18 @@ public class TMXWriterTest extends TestFilterBase {
         assertEquals("3<a0>4</a0>5", sources.get(2));
         assertEquals("6<a0>7", sources.get(3));
 
+        // extLevel2 = true; useSlash = true
         load(sources, null, true, true);
         assertEquals(4, sources.size());
         assertEquals("source", sources.get(0));
         assertEquals("1<a0/>2", sources.get(1));
         assertEquals("3<a0>4</a0>5", sources.get(2));
-        assertEquals("6<a0/>7", sources.get(3));
+        // This last seg has an <it> tag with @pos="begin",
+        // which should be treated as a beginning tag even when
+        // useSlash = true so that we can match after segmenting,
+        // such as in TmxComplianceTests#testImport2A:
+        // "First <b0>sentence. Second</b0> sentence." -> ["First <b0>sentence.", "Second</b0> sentence."] 
+        assertEquals("6<a0>7", sources.get(3));
     }
 
     public void testEOLwrite() throws Exception {

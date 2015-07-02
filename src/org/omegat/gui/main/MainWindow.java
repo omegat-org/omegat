@@ -161,7 +161,8 @@ public class MainWindow extends JFrame implements IMainWindow {
                 if (eventType == PROJECT_CHANGE_TYPE.CLOSE) {
                     closeSearchWindows();
                 }
-                if (eventType == PROJECT_CHANGE_TYPE.COMPILE) {
+                if (eventType == PROJECT_CHANGE_TYPE.COMPILE &&
+                        Preferences.isPreferenceDefault(Preferences.OPEN_TARGET_DIR_ON_COMPILE, true)) {
                     // Open target folder after running Create Translated Documents.
                     // This is here so as to keep GUI-specific code separate from
                     // UI-agnostic model code in RealProject.

@@ -393,6 +393,9 @@ public class Preferences {
     public static final String TAAS_LOOKUP = "taas_lookup";
     public static final String TAAS_DOMAIN = "taas_domain";
 
+    /** Open `target` directory upon compile project. Not exposed in GUI. */
+    public static final String OPEN_TARGET_DIR_ON_COMPILE = "open_target_dir_on_compile";
+    
     /** Private constructor, because this file is singleton */
     static {
         m_loaded = false;

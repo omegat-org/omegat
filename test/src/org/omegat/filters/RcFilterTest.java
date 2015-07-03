@@ -47,13 +47,16 @@ public class RcFilterTest extends TestFilterBase {
         context.setOutEncoding("UTF-8");
         align(new RcFilter(), "Rc/prog.rc", "Rc/prog_be.rc", callback);
         checkAlignStart(callback);
-        checkAlignById("103/512", "&File", "&Файл", null);
-        checkAlignById("103/601", "&Import...", "&Імпартаваць...", null);
-        checkAlignById("103/602", "&Export...", "&Экспартаваць...", null);
-        checkAlignById("103/603", "Exit", "Выйсьці", null);
-        checkAlignById("/61", "Error Import", "Памылка імпарту", null);
-        checkAlignById("/62", "Error Output", "Памылка вываду", null);
-        checkAlignById("/63", "Exiting...", "Выйсьце...", null);
+        // Translation strings are Russian(?); originally they were actual UTF-8,
+        // but that causes the test to fail when environment encodings aren't set
+        // correctly, so we are now using Unicode literals.
+        checkAlignById("103/512", "&File", "&\u0424\u0430\u0439\u043B", null);
+        checkAlignById("103/601", "&Import...", "&\u0406\u043C\u043F\u0430\u0440\u0442\u0430\u0432\u0430\u0446\u044C...", null);
+        checkAlignById("103/602", "&Export...", "&\u042D\u043A\u0441\u043F\u0430\u0440\u0442\u0430\u0432\u0430\u0446\u044C...", null);
+        checkAlignById("103/603", "Exit", "\u0412\u044B\u0439\u0441\u044C\u0446\u0456", null);
+        checkAlignById("/61", "Error Import", "\u041F\u0430\u043C\u044B\u043B\u043A\u0430 \u0456\u043C\u043F\u0430\u0440\u0442\u0443", null);
+        checkAlignById("/62", "Error Output", "\u041F\u0430\u043C\u044B\u043B\u043A\u0430 \u0432\u044B\u0432\u0430\u0434\u0443", null);
+        checkAlignById("/63", "Exiting...", "\u0412\u044B\u0439\u0441\u044C\u0446\u0435...", null);
         checkAlignEnd();
     }
 }

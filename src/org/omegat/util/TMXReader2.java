@@ -395,7 +395,7 @@ public class TMXReader2 {
                 inlineLevel++;
                 segInlineTag.setLength(0);
                 if ("bpt".equals(eStart.getName().getLocalPart())) {
-                    inlineTagHandler.startBPT(getAttributeValue(eStart, "i"));
+                    inlineTagHandler.startBPT(getAttributeValue(eStart, "i"), getAttributeValue(eStart, "x"));
                     inlineTagHandler.setTagShortcutLetter(StringUtil.getFirstLetterLowercase(getAttributeValue(eStart,
                             "type")));
                 } else if ("ept".equals(eStart.getName().getLocalPart())) {

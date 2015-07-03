@@ -60,7 +60,37 @@ public class InlineTagHandler {
     }
 
     /**
-     * Handle "bpt" tag start.
+     * Handle "bpt" tag start for TMX. OmegaT internal tag number
+     * will be based off the x attr (if provided).
+     * 
+     * @param i TMX i attribute value
+     * @param x TMX x attribute value (can be null)
+     */
+    public void startBPT(String i, String x) {
+        if (i == null) {
+            throw new RuntimeException("Wrong index in inline tag");
+        }
+        currentI = i;
+        int index = tagIndex++;
+        try {
+            // If a value for the @x attr was provided, base the tag
+            // number off of it for matching purposes.
+            // Subtract 1 because OmegaT 0-indexes tags, while TMX
+            // seems to start at 1 (though the spec only says it must be
+            // unique for each <bpt> in the segment, so we clip to 0
+            // to prevent negative tag numbers).
+            index = Math.max(0, Integer.parseInt(x) - 1);
+        } catch (Exception ex) {
+            // Ignore
+        }
+        pairTags.put(currentI, index);
+    }
+    
+    /**
+     * Handle "bpt" tag start. Identifier will be first non-null
+     * attribute in provided attributes. OmegaT internal tag number
+     * will be its index in the list of tags in the segment (starting
+     * with 0).
      * 
      * @param attributeValues
      *            attributes to identify pairs

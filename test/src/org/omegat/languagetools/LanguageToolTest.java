@@ -47,7 +47,10 @@ public class LanguageToolTest extends TestCase {
         JLanguageTool lt = new JLanguageTool(new Belarusian());
         lt.activateDefaultPatternRules();
 
-        List<RuleMatch> matches = lt.check("спраудзім.");
+        // The test string is Russian(?); originally it was actual UTF-8,
+        // but that causes the test to fail when environment encodings aren't set
+        // correctly, so we are now using Unicode literals.
+        List<RuleMatch> matches = lt.check("\u0441\u043F\u0440\u0430\u0443\u0434\u0437\u0456\u043C.");
         assertEquals(2, matches.size());
         assertTrue(matches.get(0).getRule() instanceof UppercaseSentenceStartRule);
         assertTrue(matches.get(1).getRule() instanceof PatternRule);

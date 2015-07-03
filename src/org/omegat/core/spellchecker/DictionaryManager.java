@@ -27,6 +27,7 @@
 package org.omegat.core.spellchecker;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 
 import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -242,9 +244,7 @@ public class DictionaryManager {
         // TODO: replace this with something meaningful
         File tempFile = File.createTempFile(langCode, ".zip");
 
-        String to = tempFile.getAbsolutePath();
-
-        StaticUtils.downloadFileToDisk(from, to);
+        StaticUtils.downloadFileToDisk(from, tempFile.getAbsolutePath());
 
         // Dirty hack for the French dictionary. Since it is named
         // fr_FR_1-3-2.zip, we remove the "_1-3-2" portion
@@ -254,8 +254,12 @@ public class DictionaryManager {
             langCode = langCode.substring(0, pos);
         }
 
-        StaticUtils.extractFileFromJar(to,
-                Arrays.asList(langCode + OConsts.SC_AFFIX_EXTENSION, langCode + OConsts.SC_DICTIONARY_EXTENSION),
-                dir.getAbsolutePath());
+        try {
+            StaticUtils.extractFileFromJar(tempFile,
+                    Arrays.asList(langCode + OConsts.SC_AFFIX_EXTENSION, langCode + OConsts.SC_DICTIONARY_EXTENSION),
+                    dir.getAbsolutePath());
+        } catch (FileNotFoundException ex) {
+            throw new RuntimeException(OStrings.getString("GUI_SPELLCHECKER_ERROR_ON_INSTALL"), ex);
+        }
     }
 }

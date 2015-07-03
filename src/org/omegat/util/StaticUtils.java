@@ -37,6 +37,7 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -1057,7 +1058,7 @@ public class StaticUtils {
         }
     }
 
-    public static void extractFileFromJar(String archive, List<String> filenames, String destination)
+    public static void extractFileFromJar(File archive, List<String> filenames, String destination)
             throws IOException {
         InputStream is = new FileInputStream(archive);
         extractFileFromJar(is, filenames, destination);
@@ -1065,11 +1066,15 @@ public class StaticUtils {
     }
     
     public static void extractFileFromJar(InputStream in, List<String> filenames, String destination) throws IOException {
+        if (filenames == null || filenames.isEmpty()) {
+            throw new IllegalArgumentException("Caller must provide non-empty list of files to extract.");
+        }
+        List<String> toExtract = new ArrayList<String>(filenames);
         JarInputStream jis = new JarInputStream(in);
         // parse the entries
         JarEntry entry;
         while ((entry = jis.getNextJarEntry()) != null) {
-            if (filenames.contains(entry.getName())) {
+            if (toExtract.contains(entry.getName())) {
                 // match found
                 File f = new File(destination, entry.getName());
                 f.getParentFile().mkdirs();
@@ -1081,11 +1086,14 @@ public class StaticUtils {
                 while ((numRead = jis.read(byteBuffer)) != -1) {
                     out.write(byteBuffer, 0, numRead);
                 }
-
                 out.close();
+                toExtract.remove(entry.getName());
             }
         }
         jis.close();
+        if (!toExtract.isEmpty()) {
+            throw new FileNotFoundException("Failed to extract all of the specified files.");
+        }
     }
 
     /**

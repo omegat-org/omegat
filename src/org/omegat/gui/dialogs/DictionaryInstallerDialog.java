@@ -29,6 +29,7 @@ package org.omegat.gui.dialogs;
 
 import java.awt.Cursor;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
@@ -66,7 +67,7 @@ public class DictionaryInstallerDialog extends JDialog {
     private final DefaultListModel listModel = new DefaultListModel();
     
     private SwingWorker<List<String>, Object> loader = null;
-    private SwingWorker<Object, Object> installer = null;
+    private InstallerWorker installer = null;
 
     /** Creates new form DictionaryInstallerDialog */
     public DictionaryInstallerDialog(JDialog parent, DictionaryManager dicMan) throws IOException {
@@ -211,32 +212,32 @@ public class DictionaryInstallerDialog extends JDialog {
         if (installer != null) {
             installer.cancel(true);
         }
+        progressBar.setVisible(true);
+        installButton.setEnabled(false);
+        closeButton.setEnabled(false);
         installer = new InstallerWorker();
         installer.execute();
     }//GEN-LAST:event_installButtonActionPerformed
 
-    private class InstallerWorker extends SwingWorker<Object,Object> {
+    private class InstallerWorker extends SwingWorker<List<String>,Object> {
 
         private final Cursor HOURGLASS_CURSOR = new Cursor(Cursor.WAIT_CURSOR);
         private Cursor oldCursor;
         
         @Override
-        protected Object doInBackground() throws Exception {
-            progressBar.setVisible(true);
-            installButton.setEnabled(false);
-            closeButton.setEnabled(false);
-            
+        protected List<String> doInBackground() throws Exception {
             oldCursor = getCursor();
             setCursor(HOURGLASS_CURSOR);
             Object[] selection = dictionaryList.getSelectedValues();
+            List<String> completed = new ArrayList<String>();
             for (Object o : selection) {
                 // install the respective dictionaries
                 String item = (String) o;
                 String langCode = (item).substring(0, item.indexOf(" "));
                 try {
                     dicMan.installRemoteDictionary(langCode);
-                    ((SpellcheckerConfigurationDialog) DictionaryInstallerDialog.this.getParent()).updateLanguageList();
-                    listModel.removeElement(o);
+                    completed.add(item);
+                    publish(item);
                 } catch (Exception ex) {
                     setCursor(oldCursor);
                     JOptionPane.showMessageDialog(DictionaryInstallerDialog.this, ex.getLocalizedMessage(), "Error",
@@ -244,11 +245,27 @@ public class DictionaryInstallerDialog extends JDialog {
                     setCursor(HOURGLASS_CURSOR);
                 }
             }
-            return null;
+            return completed;
         }
 
         @Override
+        protected void process(List<Object> chunks) {
+            for (Object o : chunks) {
+                listModel.removeElement(o);
+            }
+        }
+        
+        @Override
         protected void done() {
+            try {
+                for (Object o : get()) {
+                    listModel.removeElement(o);
+                }
+            } catch (InterruptedException e) {
+                // Ignore
+            } catch (ExecutionException e) {
+                // Ignore
+            }
             setCursor(oldCursor);
             progressBar.setVisible(false);
             installButton.setEnabled(true);

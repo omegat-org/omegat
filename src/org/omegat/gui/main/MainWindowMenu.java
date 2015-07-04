@@ -274,7 +274,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         projectMenu.add(new JSeparator());
         projectMenu.add(projectEditMenuItem = createMenuItem("MW_PROJECTMENU_EDIT"));
         projectMenu.add(viewFileListMenuItem = createMenuItem("TF_MENU_FILE_PROJWIN"));
-        projectMenu.add(projectAccessProjectFilesMenu = createMenu("TF_MENU_FILE_ACCESS_PROJECT_FILES"));
+        projectMenu.add(projectAccessProjectFilesMenu = createMenu("TF_MENU_FILE_ACCESS_PROJECT_FILES"));       
+        projectAccessProjectFilesMenu.add(projectAccessRootMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_ROOT"));
         projectAccessProjectFilesMenu.add(projectAccessDictionaryMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_DICTIONARY"));
         projectAccessProjectFilesMenu.add(projectAccessGlossaryMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_GLOSSARY"));
         projectAccessProjectFilesMenu.add(projectAccessSourceMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_SOURCE"));
@@ -650,6 +651,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         if (Core.getParams().containsKey("no-team")) {
         	projectTeamNewMenuItem.setEnabled(false);
         }
+        
     }
 
     public JMenu getMachineTranslationMenu() {
@@ -767,6 +769,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem projectSaveMenuItem;
     JMenuItem projectWikiImportMenuItem;
     JMenu projectAccessProjectFilesMenu;
+    JMenuItem projectAccessRootMenuItem;    
     JMenuItem projectAccessDictionaryMenuItem;
     JMenuItem projectAccessGlossaryMenuItem;
     JMenuItem projectAccessSourceMenuItem;

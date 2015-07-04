@@ -39,6 +39,7 @@ import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -227,6 +228,14 @@ public class MainWindowMenuHandler {
         FileUtil.writeScriptFile("", OConsts.TARGET_EXPORT);
     }
 
+    public void projectAccessRootMenuItemActionPerformed() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        String path = Core.getProject().getProjectProperties().getProjectRoot();
+        openFile(path);
+    }
+
     public void projectAccessDictionaryMenuItemActionPerformed() {
         if (!Core.getProject().isProjectLoaded()) {
             return;
@@ -296,7 +305,12 @@ public class MainWindowMenuHandler {
         if ((modifier & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
             toOpen = new File(toOpen).getParent();
         }
-        openFile(toOpen);
+        File f = new File(toOpen);
+        if(f.exists() ) {
+            openFile(toOpen);
+        } else {
+            Core.getMainWindow().showStatusMessageRB("LFC_ERROR_FILE_DOESNT_EXIST", toOpen);
+        }
     }
 
     private void openFile(String path) {

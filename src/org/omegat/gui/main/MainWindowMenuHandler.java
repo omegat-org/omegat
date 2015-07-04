@@ -302,10 +302,16 @@ public class MainWindowMenuHandler {
             return;
         }
         String toOpen = root + path;
+        File f = new File(toOpen);
+        try {
+            toOpen = f.getCanonicalPath(); // Normalise file name in case it is displayed
+        } catch (Exception e) {
+            // Do nothing
+        }
+            
         if ((modifier & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
             toOpen = new File(toOpen).getParent();
         }
-        File f = new File(toOpen);
         if(f.exists() ) {
             openFile(toOpen);
         } else {

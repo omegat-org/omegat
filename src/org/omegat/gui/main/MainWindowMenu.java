@@ -284,6 +284,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         projectAccessProjectFilesMenu.add(new JSeparator());
         projectAccessProjectFilesMenu.add(projectAccessCurrentSourceDocumentMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_CURRENT_SOURCE_DOCUMENT"));
         projectAccessProjectFilesMenu.add(projectAccessCurrentTargetDocumentMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_CURRENT_TARGET_DOCUMENT"));
+        projectAccessProjectFilesMenu.add(projectAccessWriteableGlossaryMenuItem = 
+                createMenuItem("TF_MENU_FILE_ACCESS_WRITEABLE_GLOSSARY"));       
         projectExitMenuItem = createMenuItem("TF_MENU_FILE_QUIT");
 
         // all except MacOSX
@@ -777,6 +779,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem projectAccessTMMenuItem;
     JMenuItem projectAccessCurrentSourceDocumentMenuItem;
     JMenuItem projectAccessCurrentTargetDocumentMenuItem;
+    JMenuItem projectAccessWriteableGlossaryMenuItem;
     JMenu switchCaseSubMenu;
     JMenuItem titleCaseMenuItem;
     JMenu toolsMenu;

@@ -39,7 +39,6 @@ import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -312,7 +311,32 @@ public class MainWindowMenuHandler {
         if ((modifier & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
             toOpen = new File(toOpen).getParent();
         }
-        if(f.exists() ) {
+        if (f.exists() ) {
+            openFile(toOpen);
+        } else {
+            Core.getMainWindow().showStatusMessageRB("LFC_ERROR_FILE_DOESNT_EXIST", toOpen);
+        }
+    }
+
+    public void projectAccessWriteableGlossaryMenuItemActionPerformed(int modifier) {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        String toOpen = Core.getProject().getProjectProperties().getWriteableGlossary();
+        if (StringUtil.isEmpty(toOpen)) {
+            return;
+        }
+        File f = new File(toOpen);
+        try {
+            toOpen = f.getCanonicalPath(); // Normalise file name in case it is displayed
+        } catch (Exception e) {
+            // Do nothing
+        }
+            
+        if ((modifier & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
+            toOpen = new File(toOpen).getParent();
+        }
+        if (f.exists() ) {
             openFile(toOpen);
         } else {
             Core.getMainWindow().showStatusMessageRB("LFC_ERROR_FILE_DOESNT_EXIST", toOpen);

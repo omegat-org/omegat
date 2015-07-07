@@ -1579,6 +1579,20 @@ public class RealProject implements IProject {
     }
 
     @Override
+    public String getTargetPathForSourceFile(String currentSource) {
+        if (StringUtil.isEmpty(currentSource)) {
+            return null;
+        }
+        try {
+            return Core.getFilterMaster().getTargetForSource(m_config.getSourceRoot(),
+                    currentSource, new FilterContext(m_config));
+        } catch (Exception e) {
+            Log.log(e);
+        }
+        return null;
+    }
+    
+    @Override
     public List<String> getSourceFilesOrder() {
         final String file = m_config.getProjectInternal() + OConsts.FILES_ORDER_FILENAME;
         try {

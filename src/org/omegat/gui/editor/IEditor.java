@@ -59,12 +59,23 @@ public interface IEditor {
     }
 
     /**
-     * Get current file name which opened in editor.
-     * 
+     * Get relative path (under <code>source</code>) of the source file
+     * currently open in the editor.
+     * <p>
      * Can be called from any thread.
      */
     String getCurrentFile();
 
+    /**
+     * Get the relative path (under <code>target</code>) of the target file
+     * corresponding to the current source file (per {@link #getCurrentFile()}).
+     * This file is what is created upon doing Create Target Documents, but it
+     * may not exist yet.
+     * <p>
+     * Can be called from any thread.
+     */
+    String getCurrentTargetFile();
+    
     /**
      * Get current active entry.
      * 

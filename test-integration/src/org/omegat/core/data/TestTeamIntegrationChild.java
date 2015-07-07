@@ -402,6 +402,11 @@ public class TestTeamIntegrationChild {
         public IAutoCompleter getAutoCompleter() {
             return null;
         }
+
+        @Override
+        public String getCurrentTargetFile() {
+            return null;
+        }
     };
 
     static IMainWindow mainWindow = new IMainWindow() {

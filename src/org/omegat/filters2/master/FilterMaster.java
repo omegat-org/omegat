@@ -232,15 +232,7 @@ public class FilterMaster {
         }
 
         File inFile = new File(sourcedir, filename);
-
-        String name = inFile.getName();
-        String path = filename.substring(0, filename.length() - name.length());
-
-        File outFile = new File(new File(targetdir, path),
-                constructTargetFilename(lookup.outFilesInfo.getSourceFilenameMask(), name,
-                        lookup.outFilesInfo.getTargetFilenamePattern(), fc.getTargetLang(),
-                        lookup.outFilesInfo.getSourceEncoding(), lookup.outFilesInfo.getTargetEncoding(),
-                        lookup.filterObject.getFileFormatName()));
+        File outFile = new File(targetdir, getTargetForSource(filename, lookup, fc.getTargetLang()));
 
         fc.setInEncoding(lookup.outFilesInfo.getSourceEncoding());
         fc.setOutEncoding(lookup.outFilesInfo.getTargetEncoding());
@@ -264,15 +256,7 @@ public class FilterMaster {
         }
 
         File inFile = new File(sourceDir, fileName);
-
-        String name = inFile.getName();
-        String path = fileName.substring(0, fileName.length() - name.length());
-
-        File outFile = new File(new File(targetdir, path),
-                constructTargetFilename(lookup.outFilesInfo.getSourceFilenameMask(), name,
-                        lookup.outFilesInfo.getTargetFilenamePattern(), fc.getTargetLang(),
-                        lookup.outFilesInfo.getSourceEncoding(), lookup.outFilesInfo.getTargetEncoding(),
-                        lookup.filterObject.getFileFormatName()));
+        File outFile = new File(targetdir, getTargetForSource(fileName, lookup, fc.getTargetLang()));
 
         if (!outFile.exists()) {
             // out file not exist - skip
@@ -460,6 +444,33 @@ public class FilterMaster {
     }
 
     /**
+     * Calculate the target path corresponding to the given source file.
+     * @param sourceDir Path to the project's <code>source</code> dir
+     * @param srcRelPath Relative path under <code>sourceDir</code> of the source file
+     * @param fc Filter context
+     * @return The relative path under <code>target</code> of the corresponding target file
+     * @throws IOException
+     * @throws TranslationException
+     */
+    public String getTargetForSource(String sourceDir, String srcRelPath, FilterContext fc) throws IOException, TranslationException {
+        File srcFile = new File(sourceDir, srcRelPath);
+        if (!srcFile.isFile()) {
+            throw new IllegalArgumentException("The sourceDir and srcRelPath arguments must together point to an existing file.");
+        }
+        LookupInformation lookup = lookupFilter(srcFile, fc);
+        return getTargetForSource(srcRelPath, lookup, fc.getTargetLang());
+    }
+    
+    private static String getTargetForSource(String srcRelPath, LookupInformation lookup, Language targetLang) {
+        File srcRelFile = new File(srcRelPath);
+        return new File(srcRelFile.getParent(),
+                constructTargetFilename(lookup.outFilesInfo.getSourceFilenameMask(), srcRelFile.getName(),
+                        lookup.outFilesInfo.getTargetFilenamePattern(), targetLang,
+                        lookup.outFilesInfo.getSourceEncoding(), lookup.outFilesInfo.getTargetEncoding(),
+                        lookup.filterObject.getFileFormatName())).getPath();
+    }
+    
+    /**
      * Construct a target filename according to pattern from a file's name. Filename should be "name.ext",
      * without path.
      * <p>
@@ -503,7 +514,7 @@ public class FilterMaster {
      *            Pattern, according to which we change the filename
      * @return The changed filename
      */
-    private String constructTargetFilename(String sourceMask, String filename, String pattern,
+    private static String constructTargetFilename(String sourceMask, String filename, String pattern,
             Language targetLang, String sourceEncoding, String targetEncoding, String filterFormatName) {
         int lastStarPos = sourceMask.lastIndexOf('*');
         int dot = 0;

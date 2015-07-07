@@ -586,6 +586,15 @@ public class EditorController implements IEditor {
         }
     }
 
+    @Override
+    public String getCurrentTargetFile() {
+        String currentSource = getCurrentFile();
+        if (currentSource == null) {
+            return null;
+        }
+        return Core.getProject().getTargetPathForSourceFile(currentSource);
+    }
+
     /**
      * Displays all segments in current document.
      * <p>

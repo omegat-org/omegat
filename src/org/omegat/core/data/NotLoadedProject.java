@@ -146,4 +146,9 @@ public class NotLoadedProject implements IProject {
 
     public void setSourceFilesOrder(List<String> filesList) {
     }
+
+    @Override
+    public String getTargetPathForSourceFile(String sourceFile) {
+        return null;
+    }
 }

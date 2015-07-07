@@ -235,6 +235,11 @@ public class GlossaryTextAreaTest extends TestCore {
             public IAutoCompleter getAutoCompleter() {
                 return null;
             }
+
+            @Override
+            public String getCurrentTargetFile() {
+                return null;
+            }
         });
     }
 }

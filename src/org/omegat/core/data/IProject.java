@@ -187,6 +187,20 @@ public interface IProject {
     List<FileInfo> getProjectFiles();
 
     /**
+     * For a given source file, calculate the path of the target file that would be created
+     * by running Create Translated Documents (the file may not exist yet).
+     * <p>
+     * The target path must be calculated because it can depend on project properties such
+     * as the target language, etc.
+     * 
+     * @param sourceFile The relative path (under the <code>source</code> directory) of the
+     * source file, e.g. <code>Bundle.properties</code>
+     * @return The relative path (under the <code>target</code> directory) of the corresponding
+     * target file, e.g. <code>Bundle_fr_FR.properties</code>
+     */
+    String getTargetPathForSourceFile(String sourceFile);
+    
+    /**
      * Get ordered list of source file names.
      */
     List<String> getSourceFilesOrder();

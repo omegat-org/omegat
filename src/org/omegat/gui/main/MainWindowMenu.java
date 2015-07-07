@@ -38,6 +38,7 @@ package org.omegat.gui.main;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -65,6 +66,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.Styles;
 import org.openide.awt.Mnemonics;
@@ -286,6 +288,26 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         projectAccessProjectFilesMenu.add(projectAccessCurrentTargetDocumentMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_CURRENT_TARGET_DOCUMENT"));
         projectAccessProjectFilesMenu.add(projectAccessWriteableGlossaryMenuItem = 
                 createMenuItem("TF_MENU_FILE_ACCESS_WRITEABLE_GLOSSARY"));       
+        projectAccessProjectFilesMenu.addMenuListener(new MenuListener() {
+            @Override
+            public void menuSelected(MenuEvent e) {
+                String sourcePath = Core.getEditor().getCurrentFile();
+                projectAccessCurrentSourceDocumentMenuItem.setEnabled(!StringUtil.isEmpty(sourcePath)
+                        && new File(sourcePath).isFile());
+                String targetPath = Core.getEditor().getCurrentTargetFile();
+                projectAccessCurrentTargetDocumentMenuItem.setEnabled(!StringUtil.isEmpty(targetPath)
+                        && new File(Core.getProject().getProjectProperties().getTargetRoot(), targetPath).isFile());
+                String glossaryPath = Core.getProject().getProjectProperties().getWriteableGlossary();
+                projectAccessWriteableGlossaryMenuItem.setEnabled(!StringUtil.isEmpty(glossaryPath)
+                        && new File(glossaryPath).isFile());
+            }
+            @Override
+            public void menuDeselected(MenuEvent e) {
+            }
+            @Override
+            public void menuCanceled(MenuEvent e) {
+            }
+        });
         projectExitMenuItem = createMenuItem("TF_MENU_FILE_QUIT");
 
         // all except MacOSX

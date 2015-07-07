@@ -308,6 +308,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
         txt = MessageFormat.format(txt, out.getAbsolutePath());
         dialog.getGlossaryFileText().setText(txt);
         dialog.setVisible(true);
+        dialog.getSourceText().requestFocus();
 
         dialog.addWindowFocusListener(new WindowFocusListener() {
             @Override

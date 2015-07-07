@@ -1001,6 +1001,10 @@ public class MainWindowMenuHandler {
         MainWindowUI.resetDesktopLayout(mainWindow);
     }
 
+    public void optionsAccessConfigDirMenuItemActionPerformed() {
+        openFile(new File(StaticUtils.getConfigDir()));
+    }
+    
     /**
      * Show help.
      */

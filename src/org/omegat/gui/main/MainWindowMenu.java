@@ -293,7 +293,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
             public void menuSelected(MenuEvent e) {
                 String sourcePath = Core.getEditor().getCurrentFile();
                 projectAccessCurrentSourceDocumentMenuItem.setEnabled(!StringUtil.isEmpty(sourcePath)
-                        && new File(sourcePath).isFile());
+                        && new File(Core.getProject().getProjectProperties().getSourceRoot(), sourcePath).isFile());
                 String targetPath = Core.getEditor().getCurrentTargetFile();
                 projectAccessCurrentTargetDocumentMenuItem.setEnabled(!StringUtil.isEmpty(targetPath)
                         && new File(Core.getProject().getProjectProperties().getTargetRoot(), targetPath).isFile());

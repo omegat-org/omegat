@@ -232,7 +232,7 @@ public class MainWindowMenuHandler {
             return;
         }
         String path = Core.getProject().getProjectProperties().getProjectRoot();
-        openFile(path);
+        openFile(new File(path));
     }
 
     public void projectAccessDictionaryMenuItemActionPerformed() {
@@ -240,7 +240,7 @@ public class MainWindowMenuHandler {
             return;
         }
         String path = Core.getProject().getProjectProperties().getDictRoot();
-        openFile(path);
+        openFile(new File(path));
     }
 
     public void projectAccessGlossaryMenuItemActionPerformed() {
@@ -248,7 +248,7 @@ public class MainWindowMenuHandler {
             return;
         }
         String path = Core.getProject().getProjectProperties().getGlossaryRoot();
-        openFile(path);
+        openFile(new File(path));
     }
 
     public void projectAccessSourceMenuItemActionPerformed() {
@@ -256,7 +256,7 @@ public class MainWindowMenuHandler {
             return;
         }
         String path = Core.getProject().getProjectProperties().getSourceRoot();
-        openFile(path);
+        openFile(new File(path));
     }
 
     public void projectAccessTargetMenuItemActionPerformed() {
@@ -264,7 +264,7 @@ public class MainWindowMenuHandler {
             return;
         }
         String path = Core.getProject().getProjectProperties().getTargetRoot();
-        openFile(path);
+        openFile(new File(path));
     }
 
     public void projectAccessTMMenuItemActionPerformed() {
@@ -272,7 +272,7 @@ public class MainWindowMenuHandler {
             return;
         }
         String path = Core.getProject().getProjectProperties().getTMRoot();
-        openFile(path);
+        openFile(new File(path));
     }
 
     public void projectAccessCurrentSourceDocumentMenuItemActionPerformed(int modifier) {
@@ -284,9 +284,9 @@ public class MainWindowMenuHandler {
         if (StringUtil.isEmpty(path)) {
             return;
         }
-        String toOpen = root + path;
+        File toOpen = new File(root, path);
         if ((modifier & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
-            toOpen = new File(toOpen).getParent();
+            toOpen = toOpen.getParentFile();
         }
         openFile(toOpen);
     }
@@ -296,56 +296,44 @@ public class MainWindowMenuHandler {
             return;
         }
         String root = Core.getProject().getProjectProperties().getTargetRoot();
-        String path = Core.getEditor().getCurrentFile();
+        String path = Core.getEditor().getCurrentTargetFile();
         if (StringUtil.isEmpty(path)) {
             return;
         }
-        String toOpen = root + path;
-        File f = new File(toOpen);
-        try {
-            toOpen = f.getCanonicalPath(); // Normalise file name in case it is displayed
-        } catch (Exception e) {
-            // Do nothing
-        }
-            
+        File toOpen = new File(root, path);
         if ((modifier & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
-            toOpen = new File(toOpen).getParent();
+            toOpen = toOpen.getParentFile();
         }
-        if (f.exists() ) {
-            openFile(toOpen);
-        } else {
-            Core.getMainWindow().showStatusMessageRB("LFC_ERROR_FILE_DOESNT_EXIST", toOpen);
-        }
+        openFile(toOpen);
     }
 
     public void projectAccessWriteableGlossaryMenuItemActionPerformed(int modifier) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
-        String toOpen = Core.getProject().getProjectProperties().getWriteableGlossary();
-        if (StringUtil.isEmpty(toOpen)) {
+        String path = Core.getProject().getProjectProperties().getWriteableGlossary();
+        if (StringUtil.isEmpty(path)) {
             return;
         }
-        File f = new File(toOpen);
-        try {
-            toOpen = f.getCanonicalPath(); // Normalise file name in case it is displayed
-        } catch (Exception e) {
-            // Do nothing
-        }
-            
+        File toOpen = new File(path);
         if ((modifier & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
-            toOpen = new File(toOpen).getParent();
+            toOpen = toOpen.getParentFile();
         }
-        if (f.exists() ) {
-            openFile(toOpen);
-        } else {
-            Core.getMainWindow().showStatusMessageRB("LFC_ERROR_FILE_DOESNT_EXIST", toOpen);
-        }
+        openFile(toOpen);
     }
 
-    private void openFile(String path) {
+    private void openFile(File path) {
         try {
-            Desktop.getDesktop().open(new File(path));
+            path = path.getCanonicalFile(); // Normalize file name in case it is displayed
+        } catch (Exception ex) {
+            // Ignore
+        }
+        if (!path.exists()) {
+            Core.getMainWindow().showStatusMessageRB("LFC_ERROR_FILE_DOESNT_EXIST", path);
+            return;
+        }
+        try {
+            Desktop.getDesktop().open(path);
         } catch (Exception ex) {
             Log.logErrorRB(ex, "RPF_ERROR");
             Core.getMainWindow().displayErrorRB(ex, "RPF_ERROR");

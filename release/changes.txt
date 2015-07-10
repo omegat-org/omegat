@@ -235,10 +235,17 @@ of "foo\.\scripts"
  OmegaT 3.1.9 update 3
 ----------------------------------------------------------------------
    0 Enhancement
-   0 Bug fix
+   1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 3.1.9 update 2 vs. 3.1.9 update 1
+
+  Bug fixes:
+
+  - When a segment contained only protected text, and that the
+translation contained text, an error occurred when trying to create
+the translated document, resulting in the translated document being 
+empty
 
   Localisation updates:
 

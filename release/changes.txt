@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.1 
 ----------------------------------------------------------------------
-   5 Enhancements
+   7 Enhancements
    4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -18,11 +18,17 @@
   - Allow per-project main window layouts
   https://sourceforge.net/p/omegat/feature-requests/1102/
 
+  - Access Project Contents
+  https://sourceforge.net/p/omegat/feature-requests/1110/
+
   Other changes:
 
   - Team projects: Git library updated to 3.7.1
 
   - Use full text search for glossary hits when language is not space-delimited
+
+  - In the Option menu, Access Configuration Folder allows accessing
+directly the configuration folder
 
   Bug fixes:
 

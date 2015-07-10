@@ -40,7 +40,7 @@ Source: "readme_eu.txt"; DestDir: "{app}"; Flags: isreadme; Languages: eu
 Source: "readme_fr.txt"; DestDir: "{app}"; Flags: isreadme; Languages: fr
 Source: "readme_gl.txt"; DestDir: "{app}"; Flags: isreadme; Languages: gl
 Source: "readme_hu.txt"; DestDir: "{app}"; Flags: isreadme; Languages: hu
-Source: "readme_id.txt"; DestDir: "{app}"; Flags: isreadme; Languages: id
+;Source: "readme_id.txt"; DestDir: "{app}"; Flags: isreadme; Languages: id
 Source: "readme_it.txt"; DestDir: "{app}"; Flags: isreadme; Languages: it
 Source: "readme_ja.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ja
 Source: "readme_ko.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ko

@@ -38,6 +38,7 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.xml.Handler;
 import org.omegat.filters3.xml.XMLContentBasedTag;
 import org.omegat.filters3.xml.XMLDialect;
+import org.omegat.filters3.xml.XMLText;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
@@ -552,8 +553,7 @@ public class Entry {
         int pos = 0;
         for (StaticUtils.TagOrder shortTag : shortTags) {
             if (pos < shortTag.pos) {
-                translatedEntry.add(getTextInstance()
-                        .createInstance(translation.substring(pos, shortTag.pos)));
+                translatedEntry.add(createTextInstance(translation.substring(pos, shortTag.pos)));
                 pos = shortTag.pos;
             }
             for (int j = getFirstGood(); j <= getLastGood(); j++) {
@@ -571,11 +571,20 @@ public class Entry {
             // warning.
         }
         if (pos < translation.length())
-            translatedEntry.add(getTextInstance().createInstance(translation.substring(pos)));
+            translatedEntry.add(createTextInstance(translation.substring(pos)));
 
         // /////////////////////////////////////////////////////////////////////
         // checking tags
         // TODO: implement checking
+    }
+
+    private Text createTextInstance(String str) {
+        Text text = getTextInstance();
+        if (text != null) {
+            return text.createInstance(str);
+        } else {
+            return new XMLText(str, false);
+        }
     }
 
     static class ShortTag {

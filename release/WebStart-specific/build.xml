@@ -9,9 +9,9 @@
 	</condition>
 	
 	<!-- Ant-contrib is required in order to mark all JARs as "Trusted-Library: true"
-	     so as to suppress a Java Web Start "mixed content" warning on launch.
-	     Install ant-contrib.jar in ANT_HOME/lib or ~/.ant/lib.
-	     http://ant-contrib.sourceforge.net/ -->
+		 so as to suppress a Java Web Start "mixed content" warning on launch.
+		 Install ant-contrib.jar in ANT_HOME/lib or ~/.ant/lib.
+		 http://ant-contrib.sourceforge.net/ -->
 	<condition property="ant-contrib.installed">
 		<available classname="net.sf.antcontrib.logic.ForEach" />
 	</condition>
@@ -56,7 +56,7 @@
 	
 	<target name="set-bundled-defaults" depends="set-layout-defaults">
 		<!-- Place an omegat.prefs (omegat-$BRANDING.prefs if using branding)
-        	 in release/WebStart-specific to bundle default preferences for new users. -->
+			 in release/WebStart-specific to bundle default preferences for new users. -->
 		<jar destfile="${root}/build/webstart/OmegaT.jar" update="true">
 			<zipfileset dir="." includes="*.prefs" prefix="org/omegat/util/" />
 		</jar>

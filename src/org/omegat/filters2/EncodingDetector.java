@@ -56,4 +56,18 @@ public class EncodingDetector {
         
         return encoding;
     }
+    
+    /**
+     * Detect the encoding of the supplied file. If detection fails, return the supplied
+     * default encoding.
+     */
+    public static String detectEncodingDefault(File inFile, String defaultEncoding) {
+        String detected = null;
+        try {
+            detected = detectEncoding(inFile);
+        } catch (IOException ex) {
+            // Ignore
+        }
+        return detected == null ? defaultEncoding : detected;
+    }
 }

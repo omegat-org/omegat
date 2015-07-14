@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2010 Alex Buloichik
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -31,13 +32,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.omegat.filters2.EncodingDetector;
 import org.omegat.util.OConsts;
 import org.omegat.util.StringUtil;
 
@@ -47,23 +49,20 @@ import org.omegat.util.StringUtil;
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik <alex73mail@gmail.com>
+ * @author Aaron Madlon-Kay
  */
 public class GlossaryReaderTSV {
     public static List<GlossaryEntry> read(final File file, boolean priorityGlossary) throws IOException {
-        InputStreamReader reader;
+        String encoding;
         String fname_lower = file.getName().toLowerCase();
-        if (fname_lower.endsWith(OConsts.EXT_TSV_DEF)) {
-            reader = new InputStreamReader(new FileInputStream(file));
+        if (fname_lower.endsWith(OConsts.EXT_TSV_DEF) || fname_lower.endsWith(OConsts.EXT_TSV_TXT)) {
+            encoding = EncodingDetector.detectEncodingDefault(file, Charset.defaultCharset().name());
         } else if (fname_lower.endsWith(OConsts.EXT_TSV_UTF8)) {
-            InputStream fis = new FileInputStream(file);
-            reader = new InputStreamReader(fis, OConsts.UTF8);
-        } else if (fname_lower.endsWith(OConsts.EXT_TSV_TXT)) {
-            String encoding = isUTF16LE(file) ? OConsts.UTF16LE : OConsts.UTF8;
-            InputStream fis = new FileInputStream(file);
-            reader = new InputStreamReader(fis, encoding);
+            encoding = OConsts.UTF8;
         } else {
             return null;
         }
+        InputStreamReader reader = new InputStreamReader(new FileInputStream(file), encoding);
 
         List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
         BufferedReader in = new BufferedReader(reader);
@@ -116,8 +115,8 @@ public class GlossaryReaderTSV {
                 }
             }
             file.createNewFile();
-        } else if (isUTF16LE(file)) {
-            encoding = OConsts.UTF16LE;
+        } else {
+            encoding = EncodingDetector.detectEncodingDefault(file, Charset.defaultCharset().name());
         }
         Writer wr = new OutputStreamWriter(new FileOutputStream(file, true), encoding);
         wr.append(newEntry.getSrcText()).append('\t').append(newEntry.getLocText());
@@ -126,24 +125,5 @@ public class GlossaryReaderTSV {
         }
         wr.append(System.getProperty("line.separator"));
         wr.close();
-    }
-
-    private static boolean isUTF16LE(final File file) throws IOException {
-        FileInputStream stream = null;
-        boolean ret = false;
-        try {
-            stream = new FileInputStream(file);
-            byte[] bytes = new byte[2];
-
-            // BOM (byte order mark) detection
-            if (stream.read(bytes, 0, 2) == 2 && bytes[0] == (byte) 0xFF && bytes[1] == (byte) 0xFE) {
-                ret = true;
-            }
-        } finally {
-            if (stream != null) {
-                stream.close();
-            }
-        }
-        return ret;
     }
 }

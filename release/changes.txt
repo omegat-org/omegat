@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.1 
 ----------------------------------------------------------------------
-   7 Enhancements
+   8 Enhancements
    4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -29,6 +29,11 @@
 
   - In the Option menu, Access Configuration Folder allows accessing
 directly the configuration folder
+
+  - The encoding of glossaries is now determined automatically. That means
+you can now have a .tab or .csv glossary in UTF-16 LE and a .txt glossary in 
+Windows 1252. Of course, the encoding must be compatible with both the 
+languages contained, so Unicode is recommanded.
 
   Bug fixes:
 

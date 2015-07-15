@@ -116,7 +116,7 @@ public class GlossaryReaderTSV {
             }
             file.createNewFile();
         } else {
-            encoding = EncodingDetector.detectEncodingDefault(file, Charset.defaultCharset().name());
+            encoding = EncodingDetector.detectEncodingDefault(file, OConsts.UTF8);
         }
         Writer wr = new OutputStreamWriter(new FileOutputStream(file, true), encoding);
         wr.append(newEntry.getSrcText()).append('\t').append(newEntry.getLocText());

@@ -25,15 +25,12 @@
  **************************************************************************/
 package org.omegat.core.team;
 
-import java.util.Arrays;
-
 import org.omegat.core.Core;
 import org.omegat.core.team.IRemoteRepository.AuthenticationException;
 import org.omegat.core.team.IRemoteRepository.Credentials;
 import org.omegat.gui.dialogs.TeamUserPassDialog;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
-import org.omegat.util.gui.DockingUI;
 
 /**
  * Some utility methods for working with remote repository.
@@ -47,20 +44,16 @@ public class RepositoryUtils {
      * 
      * @return true if user entered credentials, otherwise - false
      */
-    public static boolean askForCredentials(Credentials credentials, String message, boolean userNameIsPreset) {
+    public static boolean askForCredentials(Credentials credentials, String message) {
         TeamUserPassDialog userPassDialog = new TeamUserPassDialog(Core.getMainWindow().getApplicationFrame());
-        if (userNameIsPreset) {
-            userPassDialog.userText.setText(credentials.username);
-            userPassDialog.userText.setEditable(false);
-            userPassDialog.userText.setEnabled(false);
+        if (!StringUtil.isEmpty(credentials.username)) {
+            userPassDialog.setFixedUsername(credentials.username);
         }
         userPassDialog.descriptionTextArea.setText(message);
         userPassDialog.setVisible(true);
         if (userPassDialog.getReturnStatus() == TeamUserPassDialog.RET_OK) {
             credentials.username = userPassDialog.userText.getText();
-            char[] arrayPassword = userPassDialog.passwordField.getPassword();
-            credentials.password = Arrays.copyOf(arrayPassword, arrayPassword.length);
-            Arrays.fill(arrayPassword, '0');
+            credentials.password = userPassDialog.getPasswordCopy();
             credentials.saveAsPlainText = userPassDialog.cbForceSavePlainPassword.isSelected();
             credentials.readOnly = userPassDialog.cbReadOnly.isSelected();
             return true;
@@ -107,8 +100,7 @@ public class RepositoryUtils {
                         credentials = new Credentials();
                     }
                     boolean entered = RepositoryUtils.askForCredentials(credentials,
-                            OStrings.getString(firstPass ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"),
-                            false);
+                            OStrings.getString(firstPass ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"));
                     repository.setCredentials(credentials);
                     if (!entered) {
                         throw ex;
@@ -149,7 +141,6 @@ public class RepositoryUtils {
 
         public void execute() throws Exception {
             boolean firstPass = true;
-            boolean usernameIsPreset = false;
             while (true) {
                 try {
                     repoType = detect(credentials);
@@ -157,15 +148,10 @@ public class RepositoryUtils {
                 } catch (IRemoteRepository.AuthenticationException ex) {
                     if (credentials == null) {
                         credentials = new Credentials();
-                        String usernameInUrl = getUsernameFromUrl(url);
-                        if (!StringUtil.isEmpty(usernameInUrl)) {
-                            credentials.username = usernameInUrl;
-                            usernameIsPreset = true;
-                        }
+                        credentials.username = getUsernameFromUrl(url);
                     }
                     boolean entered = RepositoryUtils.askForCredentials(credentials,
-                            OStrings.getString(firstPass ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"),
-                            usernameIsPreset);
+                            OStrings.getString(firstPass ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"));
                     if (!entered) {
                         throw new RuntimeException("User declined to enter credentials.", ex);
                     }

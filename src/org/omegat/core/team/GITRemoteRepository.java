@@ -536,15 +536,13 @@ public class GITRemoteRepository implements IRemoteRepository {
             TeamUserPassDialog userPassDialog = new TeamUserPassDialog(Core.getMainWindow().getApplicationFrame());
             userPassDialog.descriptionTextArea.setText(OStrings.getString(credentials.username==null ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"));
             //if username is already available in uri, then we will not be asked for an username, so we cannot change it.
-            if (usernameInUri != null && !"".equals(usernameInUri)) {
-                userPassDialog.userText.setText(usernameInUri);
-                userPassDialog.userText.setEditable(false);
-                userPassDialog.userText.setEnabled(false);
+            if (!StringUtil.isEmpty(usernameInUri)) {
+                userPassDialog.setFixedUsername(usernameInUri);
             }
             userPassDialog.setVisible(true);
             if (userPassDialog.getReturnStatus() == TeamUserPassDialog.RET_OK) {
                 credentials.username = userPassDialog.userText.getText();
-                credentials.password = userPassDialog.passwordField.getPassword();
+                credentials.password = userPassDialog.getPasswordCopy();
                 credentials.readOnly = userPassDialog.cbReadOnly.isSelected();
                 if (gitRemoteRepository != null) {
                     gitRemoteRepository.setReadOnly(credentials.readOnly);

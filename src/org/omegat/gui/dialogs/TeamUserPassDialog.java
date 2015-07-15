@@ -27,6 +27,8 @@
 
 package org.omegat.gui.dialogs;
 
+import java.util.Arrays;
+
 import javax.swing.JLabel;
 
 import org.omegat.util.OStrings;
@@ -58,8 +60,24 @@ public class TeamUserPassDialog extends javax.swing.JDialog {
         invalidate();
         pack();
         DockingUI.displayCentered(this);
+        
+        userText.requestFocusInWindow();
     }
 
+    public void setFixedUsername(String username) {
+        userText.setText(username);
+        userText.setEditable(false);
+        userText.setEnabled(false);
+        passwordField.requestFocusInWindow();
+    }
+    
+    public char[] getPasswordCopy() {
+        char[] arrayPassword = passwordField.getPassword();
+        char[] keepPassword = Arrays.copyOf(arrayPassword, arrayPassword.length);
+        Arrays.fill(arrayPassword, '0');
+        return keepPassword;
+    }
+    
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
     public int getReturnStatus() {
         return returnStatus;

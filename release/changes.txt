@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    8 Enhancements
    4 Bug fixes
-   1 Localisation update
+   7 Localisation update
 ----------------------------------------------------------------------
 3.5.1 vs 3.5 update 1
 
@@ -51,7 +51,13 @@ correctly.
 
   Localisation updates:
 
+  - Belarusian localisation updated to 3.5 (UI)
+  - Dutch localisation updated to 3.5 (UI)
+  - Hugarian localisation updated to 3.5 (UI)
+  - Italian localisation updated to 3.5 (UI)
+  - Japanese localisation updated to 3.5 (UI)
   - Norwegian localisation created (UI, Instant Start, scripts, readme)
+  - Portuguese localisation updated to 3.5 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 3.5 update 1 (2015-06-11)

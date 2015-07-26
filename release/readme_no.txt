@@ -237,6 +237,7 @@ Disse har bidratt med koder
   Yu Tang
   Rashid Umarov  
   Antonio Vilei
+  Ilia Vinogradov
   Martin Wunderlich
   Michael Zakharov
 
@@ -253,7 +254,7 @@ Andre bidrag fra
 
 OmegaT bruker følgende bibliotek:
   HTMLParser 1.6 av Somik Raha, Derrick Oswald m.fl. (LGPL-lisens)
-  VLDocking Framework 3.0.4 (LGPL-lisens)
+  VLDocking Framework 3.0.5-SNAPSHOT (LGPL-lisens)
   Hunspell av László Németh m.fl. (LGPL-lisens)
   JNA av Todd Fast, Timothy Wall m.fl. (LGPL-lisens)
   Swing-Layout 1.0.4 (LGPL-lisens)

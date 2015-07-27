@@ -33,7 +33,7 @@ directly the configuration folder
   - The encoding of glossaries is now determined automatically. That means
 you can now have a .tab or .csv glossary in UTF-16 LE and a .txt glossary in 
 Windows 1252. Of course, the encoding must be compatible with both the 
-languages contained, so Unicode is recommanded.
+languages contained, so Unicode is recommended.
 
   Bug fixes:
 
@@ -53,7 +53,7 @@ correctly.
 
   - Belarusian localisation updated to 3.5 (UI)
   - Dutch localisation updated to 3.5 (UI)
-  - Hugarian localisation updated to 3.5 (UI)
+  - Hungarian localisation updated to 3.5 (UI)
   - Italian localisation updated to 3.5 (UI)
   - Japanese localisation updated to 3.5 (UI)
   - Norwegian localisation created (UI, Instant Start, scripts, readme)

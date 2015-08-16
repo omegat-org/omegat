@@ -291,15 +291,17 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         projectAccessProjectFilesMenu.addMenuListener(new MenuListener() {
             @Override
             public void menuSelected(MenuEvent e) {
-                String sourcePath = Core.getEditor().getCurrentFile();
-                projectAccessCurrentSourceDocumentMenuItem.setEnabled(!StringUtil.isEmpty(sourcePath)
-                        && new File(Core.getProject().getProjectProperties().getSourceRoot(), sourcePath).isFile());
-                String targetPath = Core.getEditor().getCurrentTargetFile();
-                projectAccessCurrentTargetDocumentMenuItem.setEnabled(!StringUtil.isEmpty(targetPath)
-                        && new File(Core.getProject().getProjectProperties().getTargetRoot(), targetPath).isFile());
-                String glossaryPath = Core.getProject().getProjectProperties().getWriteableGlossary();
-                projectAccessWriteableGlossaryMenuItem.setEnabled(!StringUtil.isEmpty(glossaryPath)
-                        && new File(glossaryPath).isFile());
+                if (Core.getProject().isProjectLoaded()) {
+                    String sourcePath = Core.getEditor().getCurrentFile();
+                    projectAccessCurrentSourceDocumentMenuItem.setEnabled(!StringUtil.isEmpty(sourcePath)
+                            && new File(Core.getProject().getProjectProperties().getSourceRoot(), sourcePath).isFile());
+                    String targetPath = Core.getEditor().getCurrentTargetFile();
+                    projectAccessCurrentTargetDocumentMenuItem.setEnabled(!StringUtil.isEmpty(targetPath)
+                            && new File(Core.getProject().getProjectProperties().getTargetRoot(), targetPath).isFile());
+                    String glossaryPath = Core.getProject().getProjectProperties().getWriteableGlossary();
+                    projectAccessWriteableGlossaryMenuItem.setEnabled(!StringUtil.isEmpty(glossaryPath)
+                            && new File(glossaryPath).isFile());
+                }
             }
             @Override
             public void menuDeselected(MenuEvent e) {

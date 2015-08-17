@@ -148,9 +148,9 @@ public class DokuWikiFilter extends AbstractFilter {
                 writeTranslate(outfile, text, lbpr);
                 int start = 0;
                 int braceCount = 0;
-                for (int i = 0; i < line.length(); i++) {
-                    char ch = line.charAt(i);
-                    switch (ch) {
+                for (int cp, i = 0; i < line.length(); i += Character.charCount(cp)) {
+                    cp = line.codePointAt(i);
+                    switch (cp) {
                     case '|':
                     case '^':
                         if (braceCount == 0) {
@@ -160,8 +160,8 @@ public class DokuWikiFilter extends AbstractFilter {
                                 writeTranslate(outfile, value, null);
                                 outfile.write(' ');
                             }
-                            outfile.write(ch);
-                            start = i + 1;
+                            outfile.write(Character.toChars(cp));
+                            start = i + Character.charCount(cp);
                         }
                         break;
                     case '{':
@@ -195,14 +195,21 @@ public class DokuWikiFilter extends AbstractFilter {
      *            the lien to check
      * @return the level, 0 means no heading
      */
-    private int getHeadingLevel(String line) {
+    private static int getHeadingLevel(String line) {
         int level = 0;
-        int length = line.length() - 1;
-        while (level < length && line.charAt(level) == '=' && line.charAt(length) == '=') {
+        int start = 0;
+        int end = line.length();
+        while (start < end) {
+            int scp = line.codePointAt(start);
+            int ecp = line.codePointBefore(end);
+            if (scp != '=' || ecp != '=') {
+                break;
+            }
+            start += Character.charCount(scp);
+            end -= Character.charCount(ecp);
             level++;
-            length--;
         }
-        if (level < length) {
+        if (line.codePointCount(start, end) > 1) {
             return level;
         } else {
             return 0;

@@ -129,9 +129,7 @@ public class GITRemoteRepository implements IRemoteRepository {
         try {
             c.call();
         } catch (InvalidRemoteException e) {
-            if (localDirectory.exists()) {
-                deleteDirectory(localDirectory);
-            }
+            FileUtil.deleteTree(localDirectory);
             Throwable cause = e.getCause();
             if (cause != null && cause instanceof org.eclipse.jgit.errors.NoRemoteRepositoryException) {
                 BadRepositoryException bre = new BadRepositoryException(((org.eclipse.jgit.errors.NoRemoteRepositoryException)cause).getLocalizedMessage());
@@ -163,21 +161,6 @@ public class GITRemoteRepository implements IRemoteRepository {
         myCredentialsProvider.saveCredentials();
         Log.logInfoRB("GIT_FINISH", "clone");
     }
-
-    static public boolean deleteDirectory(File path) {
-        if( path.exists() ) {
-          File[] files = path.listFiles();
-          for(int i=0; i<files.length; i++) {
-             if(files[i].isDirectory()) {
-               deleteDirectory(files[i]);
-             }
-             else {
-               files[i].delete();
-             }
-          }
-        }
-        return( path.delete() );
-      }
 
     public boolean isChanged(File file) throws Exception {
         Log.logInfoRB("GIT_START", "status");

@@ -425,7 +425,7 @@ public class TMXReader2 {
                 }
                 boolean slashBefore = false;
                 boolean slashAfter = false;
-                char tagName = StringUtil.getFirstLetterLowercase(segInlineTag);
+                int tagName = StringUtil.getFirstLetterLowercase(segInlineTag.toString());
                 Integer tagN;
                 if ("bpt".equals(eEnd.getName().getLocalPart())) {
                     if (tagName != 0) {
@@ -490,7 +490,7 @@ public class TMXReader2 {
                 if (slashBefore) {
                     segContent.append('/');
                 }
-                segContent.append(tagName);
+                segContent.appendCodePoint(tagName);
                 segContent.append(Integer.toString(tagN));
                 if (slashAfter) {
                     segContent.append('/');

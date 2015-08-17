@@ -42,11 +42,11 @@ public class InlineTagHandler {
     /** map of 'i' attributes to tag numbers */
     Map<String, Integer> pairTags = new TreeMap<String, Integer>();
     Map<String, ArrayDeque<Integer>> pairedOtherTags = new TreeMap<String, ArrayDeque<Integer>>();
-    Map<String, Character> shortcutLetters = new TreeMap<String, Character>();
+    Map<String, Integer> shortcutLetters = new TreeMap<String, Integer>();
     String currentI;
     String currentPos;
     int tagIndex;
-    char otherTagShortcutLetter;
+    int otherTagShortcutLetter;
 
     /**
      * Reset stored info for process new part of XML.
@@ -106,7 +106,7 @@ public class InlineTagHandler {
      * @param letter
      *            letter to store
      */
-    public void setTagShortcutLetter(char letter) {
+    public void setTagShortcutLetter(int letter) {
         if (letter != 0) {
             shortcutLetters.put(currentI, letter);
         }
@@ -117,9 +117,9 @@ public class InlineTagHandler {
      * 
      * @return
      */
-    public char getTagShortcutLetter() {
-        Character c = shortcutLetters.get(currentI);
-        return c != null ? c.charValue() : 0;
+    public int getTagShortcutLetter() {
+        Integer c = shortcutLetters.get(currentI);
+        return c != null ? c : 0;
     }
 
     /**
@@ -128,7 +128,7 @@ public class InlineTagHandler {
      * @param letter
      *            letter to store
      */
-    public void setOtherTagShortcutLetter(char letter) {
+    public void setOtherTagShortcutLetter(int letter) {
         otherTagShortcutLetter = letter;
     }
 
@@ -137,7 +137,7 @@ public class InlineTagHandler {
      * 
      * @return
      */
-    public char getOtherTagShortcutLetter() {
+    public int getOtherTagShortcutLetter() {
         return otherTagShortcutLetter;
     }
 

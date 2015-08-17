@@ -270,23 +270,20 @@ public class StringUtil {
 
     /**
      * Returns first letter in lowercase. Usually used for create tag shortcuts.
-     * Does not support non-BMP Unicode characters.
      */
-    public static char getFirstLetterLowercase(CharSequence s) {
+    public static int getFirstLetterLowercase(String s) {
         if (s == null) {
             return 0;
         }
 
-        char f = 0;
-
-        for (int i = 0; i < s.length(); i++) {
-            if (Character.isLetter(s.charAt(i))) {
-                f = Character.toLowerCase(s.charAt(i));
-                break;
+        for (int cp, i = 0; i < s.length(); i += Character.charCount(cp)) {
+            cp = s.codePointAt(i);
+            if (Character.isLetter(cp)) {
+                return Character.toLowerCase(cp);
             }
         }
 
-        return f;
+        return 0;
     }
 
     /**

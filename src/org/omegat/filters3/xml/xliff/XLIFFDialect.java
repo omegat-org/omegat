@@ -175,7 +175,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
             if (el instanceof XMLContentBasedTag) {
                 XMLContentBasedTag tag = (XMLContentBasedTag) el;
                 String shortcut = null;
-                char shortcutLetter;
+                int shortcutLetter;
                 int tagIndex;
                 boolean tagProtected;
                 if ("bpt".equals(tag.getTag())) {
@@ -185,13 +185,13 @@ public class XLIFFDialect extends DefaultXMLDialect {
                     shortcutLetter = calcTagShortcutLetter(tag, ignoreTypeForBptTags);
                     tagHandler.setTagShortcutLetter(shortcutLetter);
                     tagIndex = tagHandler.endBPT();
-                    shortcut = "<" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';
+                    shortcut = "<" + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f') + tagIndex + '>';
                     tagProtected = false;
                 } else if ("ept".equals(tag.getTag())) {
                     tagHandler.startEPT(tag.getAttribute("rid"), tag.getAttribute("id"), tag.getAttribute("i"));
                     tagIndex = tagHandler.endEPT();
                     shortcutLetter = tagHandler.getTagShortcutLetter();
-                    shortcut = "</" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';
+                    shortcut = "</" + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f') + tagIndex + '>';
                     tagProtected = false;
                 } else if ("it".equals(tag.getTag())) {
                     tagHandler.startOTHER();
@@ -206,16 +206,16 @@ public class XLIFFDialect extends DefaultXMLDialect {
                         if (forceShortCutToF) { 
                             shortcutLetter = 'f';
                         }
-                        shortcut = "</" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';
+                        shortcut = "</" + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f') + tagIndex + '>';
                     } else {
-                        shortcut = "<" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';
+                        shortcut = "<" + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f') + tagIndex + '>';
                     }
                     tagProtected = false;
                 } else if ("ph".equals(tag.getTag())) {
                     tagHandler.startOTHER();
                     tagIndex = tagHandler.endOTHER();
                     shortcutLetter = calcTagShortcutLetter(tag, ignoreTypeForPhTags);
-                    shortcut = "<" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + "/>";
+                    shortcut = "<" + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f') + tagIndex + "/>";
                     tagProtected = false;
                 } else if ("mrk".equals(tag.getTag())) {
                     tagHandler.startOTHER();
@@ -283,12 +283,12 @@ public class XLIFFDialect extends DefaultXMLDialect {
         return r.toString();
     }
 
-    private char calcTagShortcutLetter(XMLContentBasedTag tag) {
+    private int calcTagShortcutLetter(XMLContentBasedTag tag) {
     	return calcTagShortcutLetter(tag, false);
     }
 
-    private char calcTagShortcutLetter(XMLContentBasedTag tag, boolean ignoreTypeForPhtags) {
-        char s;
+    private int calcTagShortcutLetter(XMLContentBasedTag tag, boolean ignoreTypeForPhtags) {
+        int s;
         if (tag.getIntactContents().size() > 0 && (tag.getIntactContents().get(0) instanceof XMLText)) {
             XMLText xmlText = (XMLText) tag.getIntactContents().get(0);
             s = StringUtil.getFirstLetterLowercase(xmlText.getText());

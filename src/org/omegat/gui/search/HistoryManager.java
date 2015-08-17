@@ -28,7 +28,6 @@ package org.omegat.gui.search;
 import java.util.ArrayList;
 import java.util.List;
 import org.omegat.util.Preferences;
-import org.omegat.util.StringUtil;
 
 /**
  * A class for managing search/replace history

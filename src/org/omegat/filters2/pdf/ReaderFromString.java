@@ -32,34 +32,34 @@ import java.io.Reader;
  * 
  * @author Arno Peters
  */
-public class ReaderFromString extends Reader
-{
+public class ReaderFromString extends Reader {
     private String source = "";
     private int mark = 0;
-	
+
     public ReaderFromString(String s) {
-	this.source = s;
-	this.mark = 0;
+        this.source = s;
+        this.mark = 0;
     }
-	
+
     @Override
-    public int read(char[] c, int off, int len) 
-	throws IOException {
-	if ( mark + off >= source.length() )
-	    return -1;
+    public int read(char[] c, int off, int len) throws IOException {
+        if (mark + off >= source.length()) {
+            return -1;
+        }
 
-	int charsRead = 0;
-	mark = mark + off;
+        int charsRead = 0;
+        mark = mark + off;
 
-	while ( mark < source.length() ) {
-	    if (charsRead == c.length)
-		break;
-	    c[charsRead] = source.charAt(mark);
-	    charsRead++;
-	    mark++;
-	}
-		
-	return charsRead;
+        while (mark < source.length()) {
+            if (charsRead == c.length) {
+                break;
+            }
+            c[charsRead] = source.charAt(mark);
+            charsRead++;
+            mark++;
+        }
+
+        return charsRead;
     }
 
     @Override

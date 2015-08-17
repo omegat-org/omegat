@@ -194,11 +194,11 @@ public final class Styles {
 	public static void setupLAF() {
         Color backgroundColor = Styles.EditorColor.COLOR_BACKGROUND.getColor();
         Color foregroundColor = Styles.EditorColor.COLOR_FOREGROUND.getColor();
-        UIManager.put("TextPane.background",   backgroundColor);  
-        UIManager.put("TextPane.foreground",   foregroundColor);
+        UIManager.put("TextPane.background", backgroundColor);
+        UIManager.put("TextPane.foreground", foregroundColor);
         UIManager.put("TextPane.caretForeground", foregroundColor);
-        UIManager.put("TextArea.background",   backgroundColor);  
-        UIManager.put("TextArea.foreground",   foregroundColor);
+        UIManager.put("TextArea.background", backgroundColor);
+        UIManager.put("TextArea.foreground", foregroundColor);
         UIManager.put("TextArea.caretForeground", foregroundColor);
         UIManager.put("EditorPane.background", backgroundColor);
         UIManager.put("EditorPane.foreground", foregroundColor);

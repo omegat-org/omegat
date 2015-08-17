@@ -51,21 +51,22 @@ public class Xtag implements Element {
      * @return The shortcut
      */
     private String makeShortcut(String tag) {
-        char letter = ' ';
+        int cp = 0;
 
-        for (int i = 0; i < tag.length(); i++) {
-            letter = tag.charAt(i);
-            if (Character.isLetter(letter)) {
-                letter = Character.toLowerCase(letter);
-                return String.valueOf(letter);
+        for (int i = 0; i < tag.length(); i += Character.charCount(cp)) {
+            cp = tag.codePointAt(i);
+            if (Character.isLetter(cp)) {
+                cp = Character.toLowerCase(cp);
+                return String.valueOf(Character.toChars(cp));
             }
         }
-        if (letter == '<')
+        if (cp == '<') {
             return "<";
-        else if (letter == '>')
+        } else if (cp == '>') {
             return ">";
-        else
+        } else {
             return "x";
+        }
     }
 
     private String tag;
@@ -82,7 +83,7 @@ public class Xtag implements Element {
         if (shortcut != null)
             return shortcut;
         else
-            return Character.toString(getTag().charAt(0));
+            return String.valueOf(Character.toChars(getTag().codePointAt(0)));
     }
 
     public String toSafeCalcShortcut() {

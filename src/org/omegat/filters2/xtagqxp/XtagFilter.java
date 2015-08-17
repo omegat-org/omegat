@@ -143,19 +143,20 @@ public class XtagFilter extends AbstractFilter {
      * @return either the original Xtag, or the tag with &lt; and &gt;
      *         characters converted to the Xtag equivalent
      */
-    private String findTag(StringBuffer tag) {
+    private String findTag(StringBuilder tag) {
         for (Xtag oneTag : listTags) {
-            if (oneTag.toShortcut().equals(tag.toString()))
+            if (oneTag.toShortcut().equals(tag.toString())) {
                 return oneTag.toOriginal();
+            }
         }
         // It was not a real tag
         // We must convert < to <\<> and > to <\>>
-        String changedString = "";
-        for (int i = 0; i < tag.length(); i++) {
-            char c = tag.charAt(i);
-            changedString += convertSpecialCharacter(c);
+        StringBuilder changedString = new StringBuilder();
+        for (int cp, i = 0; i < tag.length(); i += Character.charCount(cp)) {
+            cp = tag.codePointAt(i);
+            changedString.append(convertSpecialCharacter(cp));
         }
-        return changedString;
+        return changedString.toString();
     }
 
     /**
@@ -166,16 +167,14 @@ public class XtagFilter extends AbstractFilter {
      * @return either the original character, or an Xtag version of that
      *         character
      */
-    private String convertSpecialCharacter(char c) {
-        String changedString = "";
-        if (c == '<')
-            changedString += "<\\<>";
-        else if (c == '>')
-            changedString += "<\\>>";
-        else
-            changedString = Character.toString(c);
-
-        return changedString;
+    private String convertSpecialCharacter(int cp) {
+        if (cp == '<') {
+            return "<\\<>";
+        } else if (cp == '>') {
+            return "<\\>>";
+        } else {
+            return String.valueOf(Character.toChars(cp));
+        }
     }
 
     /**
@@ -187,7 +186,7 @@ public class XtagFilter extends AbstractFilter {
      * @return the entry with OmegaT tags
      */
     private String convertToTags(String s) {
-        String changedString = "";
+        StringBuilder changedString = new StringBuilder();
         final int STATE_NORMAL = 1;
         final int STATE_COLLECT_TAG = 2;
 
@@ -195,29 +194,30 @@ public class XtagFilter extends AbstractFilter {
         int num = 0;
         listTags.clear();
 
-        StringBuffer tag = new StringBuffer(s.length());
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
+        StringBuilder tag = new StringBuilder(s.length());
+        for (int cp, i = 0; i < s.length(); i += Character.charCount(cp)) {
+            cp = s.codePointAt(i);
             // Start of a tag
-            if ((c == '<') && (!(state == STATE_COLLECT_TAG))) {
+            if ((cp == '<') && (!(state == STATE_COLLECT_TAG))) {
                 tag.setLength(0);
                 state = STATE_COLLECT_TAG;
                 // Possible end of a tag
                 // Exception for <\>>, which is how CopyFlow stores a >
-            } else if ((c == '>') && (!(tag.lastIndexOf("\\") == tag.length() - 1))) {
+            } else if ((cp == '>') && (tag.lastIndexOf("\\") != tag.offsetByCodePoints(tag.length(), -1))) {
                 num++;
                 Xtag oneTag = new Xtag(tag.toString(), num);
-                changedString += oneTag.toShortcut();
+                changedString.append(oneTag.toShortcut());
                 listTags.add(oneTag);
                 tag.setLength(0);
                 state = STATE_NORMAL;
-            } else if (state == STATE_COLLECT_TAG)
-                tag.append(c);
-            else
-                changedString += c;
+            } else if (state == STATE_COLLECT_TAG) {
+                tag.appendCodePoint(cp);
+            } else {
+                changedString.appendCodePoint(cp);
+            }
         }
 
-        return changedString;
+        return changedString.toString();
     }
 
     /**
@@ -229,34 +229,35 @@ public class XtagFilter extends AbstractFilter {
      * @return the entry with the original Xtags
      */
     private String convertToXtags(String s) {
-        String changedString = "";
+        StringBuilder changedString = new StringBuilder();
         final int STATE_NORMAL = 1;
         final int STATE_COLLECT_TAG = 2;
 
         int state = STATE_NORMAL;
 
-        StringBuffer tag = new StringBuffer(s.length());
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
+        StringBuilder tag = new StringBuilder(s.length());
+        for (int cp, i = 0; i < s.length(); i += Character.charCount(cp)) {
+            cp = s.codePointAt(i);
             // Start of a tag
-            if ((c == '<') && (!(state == STATE_COLLECT_TAG))) {
+            if ((cp == '<') && (state != STATE_COLLECT_TAG)) {
                 tag.setLength(0);
-                tag.append(c);
+                tag.appendCodePoint(cp);
                 state = STATE_COLLECT_TAG;
                 // End of a tag
-            } else if ((c == '>') && (state == STATE_COLLECT_TAG)) {
-                tag.append(c);
-                changedString += findTag(tag);
+            } else if ((cp == '>') && (state == STATE_COLLECT_TAG)) {
+                tag.appendCodePoint(cp);
+                changedString.append(findTag(tag));
                 state = STATE_NORMAL;
                 tag.setLength(0);
-            } else if (state == STATE_COLLECT_TAG)
-                tag.append(c);
-            else
-                changedString += convertSpecialCharacter(c);
+            } else if (state == STATE_COLLECT_TAG) {
+                tag.appendCodePoint(cp);
+            } else {
+                changedString.append(convertSpecialCharacter(cp));
+            }
         }
         // Copy what might remain at the end of the string
-        changedString += findTag(tag);
-        return changedString;
+        changedString.append(findTag(tag));
+        return changedString.toString();
     }
 
     /**

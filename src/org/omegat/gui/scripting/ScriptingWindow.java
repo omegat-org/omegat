@@ -216,7 +216,7 @@ public class ScriptingWindow extends JFrame {
 
             String scriptName = Preferences.getPreferenceDefault("scripts_quick_" + scriptKey(i), null);
 
-            if (scriptName != null || "".equals(scriptName)) {
+            if (!StringUtil.isEmpty(scriptName)) {
                 setQuickScriptMenu(new ScriptItem(new File(m_scriptsDirectory, scriptName)), i);
             } else {
                 unsetQuickScriptMenu(i);

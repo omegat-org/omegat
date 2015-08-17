@@ -35,6 +35,7 @@ import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.tagvalidation.ErrorReport.TagError;
 import org.omegat.util.Preferences;
+import org.omegat.util.TagUtil.Tag;
 
 /**
  * @author Aaron Madlon-Kay
@@ -56,8 +57,8 @@ public class TagValidationTest extends TestCase {
         String[] locTags2 = {"<g0>", "<g1>", "</g1>"};
         report = new ErrorReport(null, null);
         TagValidation.inspectOrderedTags(getList(srcTags2), getList(locTags2), false, report);
-        assertTrue(report.srcErrors.get("</g0>") == TagError.MISSING);
-        assertTrue(report.transErrors.get("<g0>") == TagError.ORPHANED);
+        assertTrue(report.srcErrors.get(tag("</g0>")) == TagError.MISSING);
+        assertTrue(report.transErrors.get(tag("<g0>")) == TagError.ORPHANED);
         
         // Count mismatch </g0>
         String[] srcTags3 = {"<g0>", "<g1>", "</g1>", "</g0>"};
@@ -65,7 +66,7 @@ public class TagValidationTest extends TestCase {
         report = new ErrorReport(null, null);
         TagValidation.inspectOrderedTags(getList(srcTags3), getList(locTags3), false, report);
         assertTrue(report.srcErrors.isEmpty());
-        assertTrue(report.transErrors.get("</g0>") == TagError.DUPLICATE);
+        assertTrue(report.transErrors.get(tag("</g0>")) == TagError.DUPLICATE);
         
         // Extraneous <x2/>
         String[] srcTags4 = {"<g0>", "<g1>", "</g1>", "</g0>"};
@@ -73,7 +74,7 @@ public class TagValidationTest extends TestCase {
         report = new ErrorReport(null, null);
         TagValidation.inspectOrderedTags(getList(srcTags4), getList(locTags4), false, report);
         assertTrue(report.srcErrors.isEmpty());
-        assertTrue(report.transErrors.get("<x2/>") == TagError.EXTRANEOUS);
+        assertTrue(report.transErrors.get(tag("<x2/>")) == TagError.EXTRANEOUS);
         
         // Bad nesting <g1></g1>
         String[] srcTags5 = {"<g0>", "</g0>", "<g1>", "</g1>"};
@@ -81,8 +82,8 @@ public class TagValidationTest extends TestCase {
         report = new ErrorReport(null, null);
         TagValidation.inspectOrderedTags(getList(srcTags5), getList(locTags5), false, report);
         assertTrue(report.srcErrors.isEmpty());
-        assertTrue(report.transErrors.get("<g1>") == TagError.MALFORMED);
-        assertTrue(report.transErrors.get("</g1>") == TagError.MALFORMED);
+        assertTrue(report.transErrors.get(tag("<g1>")) == TagError.MALFORMED);
+        assertTrue(report.transErrors.get(tag("</g1>")) == TagError.MALFORMED);
         
         // Out of order <g1></g1>
         String[] srcTags6 = {"<g0>", "</g0>", "<g1>", "</g1>"};
@@ -90,8 +91,8 @@ public class TagValidationTest extends TestCase {
         report = new ErrorReport(null, null);
         TagValidation.inspectOrderedTags(getList(srcTags6), getList(locTags6), false, report);
         assertTrue(report.srcErrors.isEmpty());
-        assertTrue(report.transErrors.get("<g1>") == TagError.ORDER);
-        assertTrue(report.transErrors.get("</g1>") == TagError.ORDER);
+        assertTrue(report.transErrors.get(tag("<g1>")) == TagError.ORDER);
+        assertTrue(report.transErrors.get(tag("</g1>")) == TagError.ORDER);
         
         // Out of order <g1></g1> with loose ordering
         report = new ErrorReport(null, null);
@@ -114,7 +115,7 @@ public class TagValidationTest extends TestCase {
         String[] locTags2 = {"a", "b", "c"};
         report = new ErrorReport(null, null);
         TagValidation.inspectUnorderedTags(getList(srcTags2), getList(locTags2), report);
-        assertTrue(report.srcErrors.get("d") == TagError.MISSING);
+        assertTrue(report.srcErrors.get(tag("d")) == TagError.MISSING);
         assertTrue(report.transErrors.isEmpty());
         
         // No error for unordered: Count mismatch d
@@ -131,7 +132,7 @@ public class TagValidationTest extends TestCase {
         report = new ErrorReport(null, null);
         TagValidation.inspectOrderedTags(getList(srcTags4), getList(locTags4), false, report);
         assertTrue(report.srcErrors.isEmpty());
-        assertTrue(report.transErrors.get("e") == TagError.EXTRANEOUS);
+        assertTrue(report.transErrors.get(tag("e")) == TagError.EXTRANEOUS);
     }
     
     public void testPrintfTagValidation() {
@@ -145,17 +146,18 @@ public class TagValidationTest extends TestCase {
         // Missing %d
         report = makeReport("Foo %s bar %d", "Foo %s bar");
         TagValidation.inspectPrintfVariables(true, report);
-        assertTrue(report.srcErrors.get("%s") == TagError.UNSPECIFIED);
-        assertTrue(report.srcErrors.get("%d") == TagError.UNSPECIFIED);
-        assertTrue(report.transErrors.get("%s") == TagError.UNSPECIFIED);
+        assertTrue(report.srcErrors.get(new Tag(4, "%s")) == TagError.UNSPECIFIED);
+        assertTrue(report.srcErrors.get(new Tag(11, "%d")) == TagError.UNSPECIFIED);
+        assertTrue(report.transErrors.get(new Tag(4, "%s")) == TagError.UNSPECIFIED);
         
         // Extraneous %d
         report = makeReport("Foo %s bar %d", "Foo %s bar %d baz %d");
         TagValidation.inspectPrintfVariables(true, report);
-        assertTrue(report.srcErrors.get("%s") == TagError.UNSPECIFIED);
-        assertTrue(report.srcErrors.get("%d") == TagError.UNSPECIFIED);
-        assertTrue(report.transErrors.get("%s") == TagError.UNSPECIFIED);
-        assertTrue(report.transErrors.get("%d") == TagError.UNSPECIFIED);
+        assertTrue(report.srcErrors.get(new Tag(4, "%s")) == TagError.UNSPECIFIED);
+        assertTrue(report.srcErrors.get(new Tag(11, "%d")) == TagError.UNSPECIFIED);
+        assertTrue(report.transErrors.get(new Tag(4, "%s")) == TagError.UNSPECIFIED);
+        assertTrue(report.transErrors.get(new Tag(11, "%d")) == TagError.UNSPECIFIED);
+        assertTrue(report.transErrors.get(new Tag(18, "%d")) == TagError.UNSPECIFIED);
     }
     
     public void testRemovePattern() {
@@ -171,43 +173,19 @@ public class TagValidationTest extends TestCase {
         report = makeReport("foo bar baz", "foo bar baz");
         TagValidation.inspectRemovePattern(report);
         assertTrue(report.srcErrors.isEmpty());
-        assertTrue(report.transErrors.get("foo") == TagError.EXTRANEOUS);
+        assertTrue(report.transErrors.get(new Tag(0, "foo")) == TagError.EXTRANEOUS);
     }
     
-    public void testCustomTagPattern() {
-        Preferences.setPreference(Preferences.CHECK_CUSTOM_PATTERN, "fo+");
-        
-        // No error
-        ErrorReport report = makeReport("foo bar baz", "foo bar baz");
-        TagValidation.inspectCustomTags(report);
-        assertTrue(report.srcErrors.isEmpty());
-        assertTrue(report.transErrors.isEmpty());
-        
-        // Missing foo
-        report = makeReport("foo bar baz", "bar baz");
-        TagValidation.inspectCustomTags(report);
-        assertTrue(report.srcErrors.get("foo") == TagError.MISSING);
-        assertTrue(report.transErrors.isEmpty());
-        
-        // Extraneous foo (no error)
-        report = makeReport("foo bar baz", "foo foo bar baz");
-        TagValidation.inspectCustomTags(report);
-        assertTrue(report.srcErrors.isEmpty());
-        assertTrue(report.transErrors.isEmpty());
-        
-        // Extraneous fooo (novel tag; error)
-        report = makeReport("foo bar baz", "foo fooo bar baz");
-        TagValidation.inspectCustomTags(report);
-        assertTrue(report.srcErrors.isEmpty());
-        assertTrue(report.transErrors.get("fooo") == TagError.EXTRANEOUS);
-    }
-    
-    protected static <T> List<T> getList(T[] array) {
-        List<T> list = new ArrayList<T>();
-        for (T item : array) {
-            list.add(item);
+    protected static List<Tag> getList(String[] array) {
+        List<Tag> list = new ArrayList<Tag>();
+        for (String item : array) {
+            list.add(tag(item));
         }
         return list;
+    }
+    
+    private static Tag tag(String tag) {
+        return new Tag(-1, tag);
     }
     
     private ErrorReport makeReport(String source, String translation) {

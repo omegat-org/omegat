@@ -543,10 +543,10 @@ public class Entry {
 
         // /////////////////////////////////////////////////////////////////////
         // recovering tags
-        List<TagUtil.TagOrder> shortTags = TagUtil.buildAllTagList(translation,
+        List<TagUtil.Tag> shortTags = TagUtil.buildTagList(translation,
                 protectedParts.toArray(new ProtectedPart[protectedParts.size()]));
         int pos = 0;
-        for (TagUtil.TagOrder shortTag : shortTags) {
+        for (TagUtil.Tag shortTag : shortTags) {
             if (pos < shortTag.pos) {
                 translatedEntry.add(createTextInstance(translation.substring(pos, shortTag.pos)));
                 pos = shortTag.pos;

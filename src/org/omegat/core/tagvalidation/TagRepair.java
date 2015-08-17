@@ -31,25 +31,24 @@ import java.util.List;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.tagvalidation.ErrorReport.TagError;
 import org.omegat.util.TagUtil;
+import org.omegat.util.TagUtil.Tag;
 
 /**
  * @author Aaron Madlon-Kay
  */
 public class TagRepair {
 
-    public static void fixTag(SourceTextEntry ste, String tag, TagError error, StringBuilder translation, String source) {
-        List<String> tags;
+    public static void fixTag(SourceTextEntry ste, Tag tag, TagError error, StringBuilder translation, String source) {
+        List<Tag> tags;
         switch (error) {
         case DUPLICATE:
         case ORDER:
         case MALFORMED:
-            tags = new ArrayList<String>();
-            TagUtil.buildTagList(source, ste.getProtectedParts(), tags);
+            tags = TagUtil.buildTagList(source, ste.getProtectedParts());
             fixMalformed(tags, translation, tag);
             break;
         case MISSING:
-            tags = new ArrayList<String>();
-            TagUtil.buildTagList(source, ste.getProtectedParts(), tags);
+            tags = TagUtil.buildTagList(source, ste.getProtectedParts());
             fixMissing(tags, translation, tag);
             break;
         case EXTRANEOUS:
@@ -79,33 +78,43 @@ public class TagRepair {
         }
     }
 
-    protected static void fixMalformed(List<String> tags, StringBuilder text, String tag) {
+    protected static void fixMalformed(List<Tag> tags, StringBuilder text, Tag tag) {
         fixExtraneous(text, tag);
         fixMissing(tags, text, tag);
     }
 
-    protected static void fixMissing(List<String> tags, StringBuilder text, String tag) {
+    protected static void fixMissing(List<Tag> tags, StringBuilder text, Tag tag) {
         // Insert missing tag.
-        int index = tags.indexOf(tag);
-        String prev = index > 0 ? tags.get(index - 1) : null;
-        String next = index + 1 < tags.size() ? tags.get(index + 1) : null;
-        if (prev != null && text.indexOf(prev) > -1) {
+        int index = getTagIndex(tags, tag);
+        Tag prev = index > 0 ? tags.get(index - 1) : null;
+        Tag next = index + 1 < tags.size() ? tags.get(index + 1) : null;
+        if (prev != null && text.indexOf(prev.tag) > -1) {
             // Insert after a preceding tag.
-            text.insert(text.indexOf(prev) + prev.length(), tag);
-        } else if (next != null && text.indexOf(next) > -1) {
+            text.insert(text.indexOf(prev.tag) + prev.tag.length(), tag.tag);
+        } else if (next != null && text.indexOf(next.tag) > -1) {
             // Insert before a proceeding tag.
-            text.insert(text.indexOf(next), tag);
+            text.insert(text.indexOf(next.tag), tag.tag);
         } else {
             // Nothing before or after; append to end.
-            text.append(tag);
+            text.append(tag.tag);
         }
     }
 
-    protected static void fixExtraneous(StringBuilder text, String tag) {
+    protected static void fixExtraneous(StringBuilder text, Tag tag) {
         int i = 0;
-        while ((i = text.indexOf(tag, i)) != -1) {
-            text.delete(i, i + tag.length());
+        while ((i = text.indexOf(tag.tag, i)) != -1) {
+            text.delete(i, i + tag.tag.length());
         }
+    }
+    
+    private static int getTagIndex(List<Tag> tags, Tag tag) {
+        for (int i = 0; i < tags.size(); i++) {
+            Tag t = tags.get(i);
+            if (t.tag.equals(tag.tag)) {
+                return i;
+            }
+        }
+        return -1;
     }
     
 }

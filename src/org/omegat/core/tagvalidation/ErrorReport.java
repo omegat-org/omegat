@@ -33,6 +33,7 @@ import java.util.Map.Entry;
 
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.OStrings;
+import org.omegat.util.TagUtil.Tag;
 
 /**
  * A class to encapuslate information about tag errors. Tag errors are stored
@@ -44,8 +45,8 @@ import org.omegat.util.OStrings;
  */
 public class ErrorReport {
 
-    final public Map<String, TagError> srcErrors = new HashMap<String, TagError>();
-    final public Map<String, TagError> transErrors = new HashMap<String, TagError>();
+    final public Map<Tag, TagError> srcErrors = new HashMap<Tag, TagError>();
+    final public Map<Tag, TagError> transErrors = new HashMap<Tag, TagError>();
 
     final public SourceTextEntry ste;
     final public String source;
@@ -69,18 +70,18 @@ public class ErrorReport {
      * 
      * @return A map between errors and tags
      */
-    public Map<TagError, List<String>> inverseReport() {
-        Map<TagError, List<String>> result = new HashMap<TagError, List<String>>();
+    public Map<TagError, List<Tag>> inverseReport() {
+        Map<TagError, List<Tag>> result = new HashMap<TagError, List<Tag>>();
         fillInverseReport(srcErrors, result);
         fillInverseReport(transErrors, result);
         return result;
     }
 
-    private static void fillInverseReport(Map<String, TagError> input, Map<TagError, List<String>> collector) {
-        for (Entry<String, TagError> e : input.entrySet()) {
-            List<String> existing = collector.get(e.getValue());
+    private static void fillInverseReport(Map<Tag, TagError> input, Map<TagError, List<Tag>> collector) {
+        for (Entry<Tag, TagError> e : input.entrySet()) {
+            List<Tag> existing = collector.get(e.getValue());
             if (existing == null) {
-                existing = new ArrayList<String>();
+                existing = new ArrayList<Tag>();
                 collector.put(e.getValue(), existing);
             }
             existing.add(e.getKey());

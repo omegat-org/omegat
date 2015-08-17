@@ -44,13 +44,91 @@ import org.omegat.core.statistics.StatisticsSettings;
  */
 public class TagUtil {
     
-    public static class TagOrder {
+    private static final Comparator<Tag> TAG_COMPARATOR = new Comparator<Tag>() {
+        @Override
+        public int compare(Tag o1, Tag o2) {
+            return o1.pos - o2.pos;
+        }
+    };
+    
+    public static class Tag {
         public final int pos;
         public final String tag;
     
-        public TagOrder(int pos, String tag) {
+        public Tag(int pos, String tag) {
             this.pos = pos;
             this.tag = tag;
+        }
+        
+        public TagType getType() {
+            if (tag.length() < 4 || (!tag.startsWith("<") && !tag.endsWith(">"))) {
+                return TagType.SINGLE;
+            }
+            
+            if (tag.startsWith("</")) {
+                return TagType.END;
+            } else if (tag.endsWith("/>")) {
+                return TagType.SINGLE;
+            }
+        
+            return TagType.START;
+        }
+        
+        public String getName() {
+            Matcher m = PatternConsts.OMEGAT_TAG_DECOMPILE.matcher(tag);
+            String name = m.find() ? m.group(2) + m.group(3) : tag;
+            return name;
+        }
+        
+        public String getPairedTag() {
+            switch(getType()) {
+            case START:
+                return "</" + getName() + ">";
+            case END:
+                return "<" + getName() + ">";
+            case SINGLE:
+            default:
+                return null;
+            }
+        }
+
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + pos;
+            result = prime * result + ((tag == null) ? 0 : tag.hashCode());
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            Tag other = (Tag) obj;
+            if (pos != other.pos) {
+                return false;
+            }
+            if (tag == null) {
+                if (other.tag != null) {
+                    return false;
+                }
+            } else if (!tag.equals(other.tag)) {
+                return false;
+            }
+            return true;
+        }
+        
+        @Override
+        public String toString() {
+            return tag + "@" + pos;
         }
     }
 
@@ -85,7 +163,7 @@ public class TagUtil {
     /**
      * Sort tags by order of their appearance in a reference string.
      */
-    public static class TagComparator implements Comparator<String> {
+    public static class TagComparator implements Comparator<Tag> {
     
         private final String source;
     
@@ -95,29 +173,29 @@ public class TagUtil {
         }
     
         @Override
-        public int compare(String tag1, String tag2) {
+        public int compare(Tag tag1, Tag tag2) {
             // Check for equality
             if (tag1.equals(tag2)) {
                 return 0;
             }
             // Check to see if one tag encompases the other
-            if (tag1.startsWith(tag2)) {
+            if (tag1.tag.startsWith(tag2.tag)) {
                 return -1;
-            } else if (tag2.startsWith(tag1)) {
+            } else if (tag2.tag.startsWith(tag1.tag)) {
                 return 1;
             }
             // Check which tag comes first
-            int index1 = source.indexOf(tag1);
-            int index2 = source.indexOf(tag2);
+            int index1 = source.indexOf(tag1.tag);
+            int index2 = source.indexOf(tag2.tag);
             if (index1 == index2) {
-                int len1 = tag1.length();
-                int len2 = tag2.length();
+                int len1 = tag1.tag.length();
+                int len2 = tag2.tag.length();
                 if (len1 > len2) {
                     return -1;
                 } else if (len2 > len1) {
                     return 1;
                 } else {
-                    return tag1.compareTo(tag2);
+                    return tag1.tag.compareTo(tag2.tag);
                 }
             }
             return index1 > index2 ? 1 : -1;
@@ -125,26 +203,23 @@ public class TagUtil {
     }
 
     final public static String TAG_SEPARATOR_SENTINEL = "\uE100";
+    final public static char TEXT_REPLACEMENT = '\uE100';
         
-    public static List<String> getAllTagsInSource() {
-        
-        List<String> result = new ArrayList<String>();
-        
-        // Add tags.
+    public static List<Tag> getAllTagsInSource() {
         SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-        for(ProtectedPart pp:ste.getProtectedParts()) {
-            result.add(pp.getTextInSourceSegment());
-        }
-        return result;
+        return buildTagList(ste.getSrcText(), ste.getProtectedParts());
     }
 
-    public static List<String> getAllTagsMissingFromTarget() {
-        List<String> result = new ArrayList<String>();
+    public static List<Tag> getAllTagsMissingFromTarget() {
+        List<Tag> result = new ArrayList<Tag>();
         
-        String target = Core.getEditor().getCurrentTranslation();
+        StringBuilder target = new StringBuilder(Core.getEditor().getCurrentTranslation());
         
-        for (String tag : getAllTagsInSource()) {
-            if (!target.contains(tag)) {
+        for (Tag tag : getAllTagsInSource()) {
+            int pos = -1;
+            if ((pos = target.indexOf(tag.tag)) != -1) {
+                replaceWith(target, pos, pos + tag.tag.length(), TEXT_REPLACEMENT);
+            } else {
                 result.add(tag);
             }
         }
@@ -156,21 +231,21 @@ public class TagUtil {
         List<String> result = new ArrayList<String>();
         
         int index = -1;
-        List<String> group = new ArrayList<String>();
-        List<String> tags = getAllTagsMissingFromTarget();
+        List<Tag> group = new ArrayList<Tag>();
+        List<Tag> tags = getAllTagsMissingFromTarget();
         for (int i = 0; i < tags.size(); i++) {
-            String tag = tags.get(i);
+            Tag tag = tags.get(i);
             
-            if (sourceText.startsWith(tag, index)) {
+            if (sourceText.startsWith(tag.tag, index)) {
                 // We are continuing an existing group.
                 group.add(tag);
-                index += tag.length();
+                index += tag.tag.length();
             } else {
                 // We are starting a new group.
                 dumpGroup(group, result);
                 group.clear();
                 group.add(tag);
-                index = sourceText.indexOf(tag, index) + tag.length();
+                index = sourceText.indexOf(tag.tag, index) + tag.tag.length();
             }
             
             // See if this tag and next tag make a pair and offer them as a set,
@@ -178,10 +253,12 @@ public class TagUtil {
             // E.g. either an actual pair like <foo></foo> or a potential pair
             // like <foo/><foo/>.
             if (i + 1 < tags.size()) {
-                String next = tags.get(i + 1);
-                if (tagsArePaired(tag, next) || tagsAreStandalone(tag, next)) {
+                Tag next = tags.get(i + 1);
+                String pair = tag.getPairedTag();
+                if ((pair != null && pair.equals(next.tag))
+                        || (tag.getType() == TagType.SINGLE && next.getType() == TagType.SINGLE)) {
                     // Insert sentinel to allow cursor relocating.
-                    result.add(tag + TAG_SEPARATOR_SENTINEL + next);
+                    result.add(tag.tag + TAG_SEPARATOR_SENTINEL + next.tag);
                 }
             }
         }
@@ -191,104 +268,50 @@ public class TagUtil {
         return result;
     }
     
-    private static void dumpGroup(List<String> groupTags, List<String> result) {
+    private static void dumpGroup(List<Tag> groupTags, List<String> result) {
         if (groupTags.isEmpty()) {
             return;
         }
         if (groupTags.size() > 1) {
             StringBuilder sb = new StringBuilder();
-            for (String t : groupTags) {
-                sb.append(t);
+            for (Tag t : groupTags) {
+                sb.append(t.tag);
             }
             result.add(sb.toString());
         }
-        for (String t : groupTags) {
-            result.add(t);
+        for (Tag t : groupTags) {
+            result.add(t.tag);
         }
-    }
-    
-    public static boolean tagsArePaired(String tag1, String tag2) {
-        TagInfo tag1info = getTagInfo(tag1);
-        return tag1info.type == TagType.START && tag2.equals(getPairedTag(tag1info));
-    }
-    
-    public static boolean tagsAreStandalone(String tag1, String tag2) {
-        return getTagType(tag1) == TagType.SINGLE && getTagType(tag2) == TagType.SINGLE;
     }
 
     /**
      * Builds a list of format tags within the supplied string. Format tags are
      * 'protected parts' and OmegaT style tags: &lt;xx02&gt; or &lt;/yy01&gt;.
      */
-    public static void buildTagList(String str, ProtectedPart[] protectedParts, List<String> tagList) {
-        List<TagOrder> tags = new ArrayList<TagOrder>();
+    public static List<Tag> buildTagList(String str, ProtectedPart[] protectedParts) {
+        List<Tag> tags = new ArrayList<Tag>();
         if (protectedParts != null) {
             // Put string in temporary buffer and replace tags with spaces as we find them.
             // This ensures that we don't find identical tags multiple times unless they are
             // actually present multiple times.
             StringBuilder sb = new StringBuilder(str);
-            while (true) {
-                boolean foundTag = false;
-                for (ProtectedPart pp : protectedParts) {
-                    int pos = -1;
-                    if ((pos = sb.indexOf(pp.getTextInSourceSegment(), pos + 1)) >= 0) {
-                        tags.add(new TagOrder(pos, pp.getTextInSourceSegment()));
-                        replaceWith(sb, pos, pos + pp.getTextInSourceSegment().length(), ' ');
-                        foundTag = true;
-                    }
-                }
-                if (!foundTag) {
-                    break;
+            for (ProtectedPart pp : protectedParts) {
+                int pos = -1;
+                if ((pos = sb.indexOf(pp.getTextInSourceSegment())) != -1) {
+                    tags.add(new Tag(pos, pp.getTextInSourceSegment()));
+                    replaceWith(sb, pos, pos + pp.getTextInSourceSegment().length(), TEXT_REPLACEMENT);
                 }
             }
         }
-    
-        if (tags.isEmpty()) {
-            return;
-        }
-        Collections.sort(tags, new Comparator<TagOrder>() {
-            @Override
-            public int compare(TagOrder o1, TagOrder o2) {
-                return o1.pos - o2.pos;
-            }
-        });
-        for (TagOrder t : tags) {
-            tagList.add(t.tag);
-        }
+        
+        Collections.sort(tags, TAG_COMPARATOR);
+        return tags;
     }
 
     private static void replaceWith(StringBuilder sb, int start, int end, char replacement) {
         for (int i = start; i < end; i++) {
             sb.setCharAt(i, replacement);
         }
-    }
-
-    /**
-     * Builds a list of all occurrences of all protected parts.
-     */
-    public static List<TagOrder> buildAllTagList(String str, ProtectedPart[] protectedParts) {
-        List<TagOrder> tags = new ArrayList<TagOrder>();
-        if (protectedParts != null) {
-            for (ProtectedPart pp : protectedParts) {
-                int pos = -1;
-                do {
-                    if ((pos = str.indexOf(pp.getTextInSourceSegment(), pos + 1)) >= 0) {
-                        tags.add(new TagOrder(pos, pp.getTextInSourceSegment()));
-                    }
-                } while (pos >= 0);
-            }
-        }
-    
-        if (tags.isEmpty()) {
-            return Collections.emptyList();
-        }
-        Collections.sort(tags, new Comparator<TagOrder>() {
-            @Override
-            public int compare(TagOrder o1, TagOrder o2) {
-                return o1.pos - o2.pos;
-            }
-        });
-        return tags;
     }
 
     /**
@@ -318,53 +341,6 @@ public class TagUtil {
             return placeholderMatcher.group(0);
         }
         return null;
-    }
-
-    /**
-     * Detect the type of a tag, e.g. one of {@link TagType}.
-     * @param tag String containing full text of tag
-     * @return The type of the tag
-     */
-    public static TagType getTagType(String tag) {
-        if (tag.length() < 4 || (!tag.startsWith("<") && !tag.endsWith(">"))) {
-            return TagType.SINGLE;
-        }
-        
-        if (tag.startsWith("</")) {
-            return TagType.END;
-        } else if (tag.endsWith("/>")) {
-            return TagType.SINGLE;
-        }
-    
-        return TagType.START;
-    }
-
-    /**
-     * Retrieve info about a tag.
-     * @param tag String containing full text of tag
-     * @return A {@link TagInfo} with tag's name and type
-     */
-    public static TagInfo getTagInfo(String tag) {
-        Matcher m = PatternConsts.OMEGAT_TAG_DECOMPILE.matcher(tag);
-        String name = m.find() ? m.group(2) + m.group(3) : tag;
-        return new TagInfo(name, getTagType(tag));
-    }
-
-    /**
-     * For a given tag, retrieve its pair e.g. &lt;/foo> for &lt;foo>.
-     * @param info A {@link TagInfo} describing the tag
-     * @return The tag's pair as a string, or null for self-contained tags
-     */
-    public static String getPairedTag(TagInfo info) {
-        switch(info.type) {
-        case START:
-            return String.format("</%s>", info.name);
-        case END:
-            return String.format("<%s>", info.name);
-        case SINGLE:
-        default:
-            return null;
-        }
     }
 
     /**
@@ -410,24 +386,5 @@ public class TagUtil {
      */
     public static String stripXmlTags(String xml) {
         return PatternConsts.OMEGAT_TAG.matcher(xml).replaceAll("");
-    }
-
-    /**
-     * Reconstruct a tag from its {@link TagInfo}.
-     * 
-     * @param info
-     *            Description of tag
-     * @return Reconstructed original tag
-     */
-    public static String getOriginalTag(TagInfo info) {
-        switch (info.type) {
-        case START:
-            return String.format("<%s>", info.name);
-        case END:
-            return String.format("</%s>", info.name);
-        case SINGLE:
-            return String.format("<%s/>", info.name);
-        }
-        return null;
     }
 }

@@ -49,6 +49,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.TagUtil;
+import org.omegat.util.TagUtil.Tag;
 import org.omegat.util.Token;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -404,11 +405,11 @@ public class EditorPopups {
                 return;
             }
 
-            for (final String tag : TagUtil.getAllTagsMissingFromTarget()) {
+            for (final Tag tag : TagUtil.getAllTagsMissingFromTarget()) {
                 JMenuItem item = menu.add(StaticUtils.format(OStrings.getString("TF_MENU_EDIT_TAG_INSERT_N"), tag));
                 item.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        Core.getEditor().insertText(tag);
+                        Core.getEditor().insertText(tag.tag);
                     }
                 });
             }

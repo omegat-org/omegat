@@ -25,6 +25,8 @@
 
 package org.omegat.core.tagvalidation;
 
+import org.omegat.util.TagUtil.Tag;
+
 import junit.framework.TestCase;
 
 /**
@@ -36,31 +38,31 @@ public class TagRepairTest extends TestCase {
         
         // Fix extraneous
         StringBuilder text = new StringBuilder("Foo bar baz bar bonkers");
-        TagRepair.fixExtraneous(text, "bar");
+        TagRepair.fixExtraneous(text, new Tag(-1, "bar"));
         assertEquals("Foo  baz  bonkers", text.toString());
         
         // Fix missing: before
         text = new StringBuilder("Foo bar {tag2}baz");
         String[] tags = {"{tag1}", "{tag2}"};
-        TagRepair.fixMissing(TagValidationTest.getList(tags), text, "{tag1}");
+        TagRepair.fixMissing(TagValidationTest.getList(tags), text, new Tag(-1, "{tag1}"));
         assertEquals("Foo bar {tag1}{tag2}baz", text.toString());
         
         // Fix missing: after
         text = new StringBuilder("Foo bar {tag2}baz");
         String[] tags2 = {"{tag2}", "{tag1}"};
-        TagRepair.fixMissing(TagValidationTest.getList(tags2), text, "{tag1}");
+        TagRepair.fixMissing(TagValidationTest.getList(tags2), text, new Tag(-1, "{tag1}"));
         assertEquals("Foo bar {tag2}{tag1}baz", text.toString());
         
         // Fix missing: no anchor
         text = new StringBuilder("Foo bar baz");
         String[] tags3 = {"{tag1}"};
-        TagRepair.fixMissing(TagValidationTest.getList(tags3), text, "{tag1}");
+        TagRepair.fixMissing(TagValidationTest.getList(tags3), text, new Tag(-1, "{tag1}"));
         assertEquals("Foo bar baz{tag1}", text.toString());
         
         // Fix maformed
         text = new StringBuilder("Foo bar {tag2}baz{tag1}");
         String[] tags4 = {"{tag1}", "{tag2}"};
-        TagRepair.fixMalformed(TagValidationTest.getList(tags4), text, "{tag1}");
+        TagRepair.fixMalformed(TagValidationTest.getList(tags4), text, new Tag(-1, "{tag1}"));
         assertEquals("Foo bar {tag1}{tag2}baz", text.toString());
         
         // Fix whitespace

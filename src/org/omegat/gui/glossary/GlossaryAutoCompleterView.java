@@ -150,6 +150,11 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
         if (StringUtil.isEmpty(matchTo)) {
             return text;
         }
+        // If input matches term exactly, don't change anything
+        if (text.startsWith(matchTo)) {
+            return text;
+        }
+        
         // If matching to title case (or 1 upper char), capitalize first letter.
         // Don't turn into title case because the text may be e.g. a phrase
         // with intentional mixed casing.

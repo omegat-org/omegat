@@ -371,27 +371,19 @@ public class FindMatches {
             return true;
         }
         NearString st = result.get(result.size() - 1);
-        Boolean chanse = checkScore(st.scores[0].score, simStem);
-        if (chanse == null) {
-            chanse = checkScore(st.scores[0].scoreNoStem, simNoStem);
+        int chance = checkScore(st.scores[0].score, simStem);
+        if (chance == 0) {
+            chance = checkScore(st.scores[0].scoreNoStem, simNoStem);
         }
-        if (chanse == null) {
-            chanse = checkScore(st.scores[0].adjustedScore, simExactly);
+        if (chance == 0) {
+            chance = checkScore(st.scores[0].adjustedScore, simExactly);
         }
-        if (chanse == null) {
-            chanse = true;
-        }
-        return chanse;
+        return chance != 1;
     }
 
-    private Boolean checkScore(final int storedScore, final int checkedStore) {
-        if (storedScore < checkedStore) {
-            return true;
-        } else if (storedScore > checkedStore) {
-            return false;
-        } else {
-            return null;
-        }
+    private int checkScore(final int storedScore, final int checkedStore) {
+        return storedScore < checkedStore ? -1
+                : storedScore > checkedStore ? 1 : 0;
     }
 
     /**

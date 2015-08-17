@@ -214,18 +214,19 @@ public class RcFilter extends AbstractFilter {
         }
         e = b;
         while (true) {
-            e = s.indexOf('"', e + 1);
+            e = s.indexOf('"', s.offsetByCodePoints(e, 1));
             if (e < 0) {
                 break;
             }
-            if (s.charAt(e - 1) == '\\') {
+            if (s.codePointBefore(e) == '\\') {
                 // skip escaped quote
                 continue;
             }
-            if (e < s.length() - 1) {
-                if (s.charAt(e + 1) == '"') {
+            if (s.codePointCount(e, s.length()) > 1) {
+                int cp = s.codePointAt(s.offsetByCodePoints(e, 1));
+                if (cp == '"') {
                     // skip double quote
-                    e++;
+                    e += Character.charCount(cp);
                     continue;
                 }
             }

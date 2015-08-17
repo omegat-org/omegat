@@ -113,8 +113,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
     	// currently installed.
         ArrayList<ScriptItem> scriptsList = new ArrayList<ScriptItem>();
 		// Replace the script filename by its description, if available
-        for (File script : m_scriptDir.listFiles(m_filter))
-        {
+        for (File script : m_scriptDir.listFiles(m_filter)) {
         	scriptsList.add(new ScriptItem(script));
         }
 
@@ -122,8 +121,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
         m_list.setListData(scriptsList.toArray(new ScriptItem[0]));
         
 
-        if (SCRIPTING_EVENTS)
-        {
+        if (SCRIPTING_EVENTS) {
             hookApplicationEvent();
             hookEntryEvent();
             hookProjectEvent();

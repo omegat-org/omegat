@@ -35,8 +35,8 @@ import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.util.Language;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.TagUtil;
 
 /**
  * Base class for entry translation.
@@ -100,7 +100,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
         // has been enabled.
         String tags = null;
         if (m_config.isRemoveTags()) {
-            tags = StaticUtils.buildTagListForRemove(origSource);
+            tags = TagUtil.buildTagListForRemove(origSource);
         }
         
         boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
@@ -150,7 +150,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
         if ((getCurrentFile().endsWith(".docx") || getCurrentFile().endsWith(".docm")) &&
             !m_config.isRemoveTags() && !Core.getFilterMaster().getConfig().isRemoveTags()) {
             // Locate the location of the first tag
-            String firstTag = StaticUtils.getFirstTag(r);
+            String firstTag = TagUtil.getFirstTag(r);
             if (firstTag != null) { 
                 int locFirstTag = r.indexOf(firstTag);
                 // Is there text before that first tag?

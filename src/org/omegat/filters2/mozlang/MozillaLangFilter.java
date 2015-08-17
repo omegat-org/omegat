@@ -46,7 +46,7 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.util.OStrings;
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.TagUtil;
 
 /**
  * Filter for support Mozilla lang files.
@@ -228,7 +228,7 @@ public class MozillaLangFilter extends AbstractFilter {
      */
     protected void align(String source, String translation, String comments) {
         if (entryParseCallback != null) {       
-            List<ProtectedPart> protectedParts = StaticUtils.applyCustomProtectedParts(source, PatternConsts.PRINTF_VARS, null);
+            List<ProtectedPart> protectedParts = TagUtil.applyCustomProtectedParts(source, PatternConsts.PRINTF_VARS, null);
             entryParseCallback.addEntry(null, source, translation, false, comments, null, this, protectedParts);
         } else if (entryAlignCallback != null) {
             entryAlignCallback.addTranslation(null, source, translation, false, null, this);

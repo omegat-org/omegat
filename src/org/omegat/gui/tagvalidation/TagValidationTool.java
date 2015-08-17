@@ -51,7 +51,7 @@ import org.omegat.filters2.po.PoFilter;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.TagUtil;
 
 /**
  * Class for show tag validation results.
@@ -261,7 +261,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         }
 
         // Sort the map first to ensure that fixing works properly.
-        Map<String, TagError> sortedErrors = new TreeMap<String, TagError>(new StaticUtils.TagComparator(
+        Map<String, TagError> sortedErrors = new TreeMap<String, TagError>(new TagUtil.TagComparator(
                 report.source));
         sortedErrors.putAll(report.srcErrors);
         sortedErrors.putAll(report.transErrors);

@@ -39,8 +39,8 @@ import org.omegat.filters3.xml.Handler;
 import org.omegat.filters3.xml.XMLContentBasedTag;
 import org.omegat.filters3.xml.XMLDialect;
 import org.omegat.filters3.xml.XMLText;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.TagUtil;
 
 /**
  * Translatable entry. Holds a list of source tags and text, translated text and
@@ -548,10 +548,10 @@ public class Entry {
 
         // /////////////////////////////////////////////////////////////////////
         // recovering tags
-        List<StaticUtils.TagOrder> shortTags = StaticUtils.buildAllTagList(translation,
+        List<TagUtil.TagOrder> shortTags = TagUtil.buildAllTagList(translation,
                 protectedParts.toArray(new ProtectedPart[protectedParts.size()]));
         int pos = 0;
-        for (StaticUtils.TagOrder shortTag : shortTags) {
+        for (TagUtil.TagOrder shortTag : shortTags) {
             if (pos < shortTag.pos) {
                 translatedEntry.add(createTextInstance(translation.substring(pos, shortTag.pos)));
                 pos = shortTag.pos;

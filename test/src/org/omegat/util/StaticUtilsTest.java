@@ -74,9 +74,9 @@ public class StaticUtilsTest extends TestCase
     public void testBuildTagList() {
         // TODO add your test code below by replacing the default call to fail.
         String str = "Tag <test> case <b0>one</b0>.<b1>";
-        List<ProtectedPart> pps = StaticUtils.applyCustomProtectedParts(str, PatternConsts.OMEGAT_TAG, null);
+        List<ProtectedPart> pps = TagUtil.applyCustomProtectedParts(str, PatternConsts.OMEGAT_TAG, null);
         ArrayList<String> tagList = new ArrayList<String>();
-        StaticUtils.buildTagList(str, new SourceTextEntry(null, 0, null, null, pps).getProtectedParts(),
+        TagUtil.buildTagList(str, new SourceTextEntry(null, 0, null, null, pps).getProtectedParts(),
                 tagList);
 
         assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<b0>", "</b0>", "<b1>"), tagList);
@@ -90,7 +90,7 @@ public class StaticUtilsTest extends TestCase
         p = new ProtectedPart();
         p.setTextInSourceSegment("</b0>");
         pp.add(p);
-        StaticUtils.buildTagList(str, new SourceTextEntry(null, 0, null, null, pp).getProtectedParts(),
+        TagUtil.buildTagList(str, new SourceTextEntry(null, 0, null, null, pp).getProtectedParts(),
                 tagList);
         assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<b0>", "</b0>"), tagList);
 
@@ -100,7 +100,7 @@ public class StaticUtilsTest extends TestCase
         p = new ProtectedPart();
         p.setTextInSourceSegment("<test>case</test>");
         pp.add(p);
-        StaticUtils.buildTagList(str, new SourceTextEntry(null, 0, null, null, pp).getProtectedParts(), tagList);
+        TagUtil.buildTagList(str, new SourceTextEntry(null, 0, null, null, pp).getProtectedParts(), tagList);
         assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<test>case</test>"), tagList);
     }
 

@@ -30,7 +30,7 @@ import java.util.List;
 
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.tagvalidation.ErrorReport.TagError;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.TagUtil;
 
 /**
  * @author Aaron Madlon-Kay
@@ -44,12 +44,12 @@ public class TagRepair {
         case ORDER:
         case MALFORMED:
             tags = new ArrayList<String>();
-            StaticUtils.buildTagList(source, ste.getProtectedParts(), tags);
+            TagUtil.buildTagList(source, ste.getProtectedParts(), tags);
             fixMalformed(tags, translation, tag);
             break;
         case MISSING:
             tags = new ArrayList<String>();
-            StaticUtils.buildTagList(source, ste.getProtectedParts(), tags);
+            TagUtil.buildTagList(source, ste.getProtectedParts(), tags);
             fixMissing(tags, translation, tag);
             break;
         case EXTRANEOUS:

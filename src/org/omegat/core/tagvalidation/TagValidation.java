@@ -38,8 +38,8 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.tagvalidation.ErrorReport.TagError;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
-import org.omegat.util.StaticUtils.TagInfo;
+import org.omegat.util.TagUtil;
+import org.omegat.util.TagUtil.TagInfo;
 
 /**
  * @author Aaron Madlon-Kay
@@ -130,8 +130,8 @@ public class TagValidation {
         List<String> srcTags = new ArrayList<String>();
         List<String> locTags = new ArrayList<String>();
         // extract tags from src and loc string
-        StaticUtils.buildTagList(report.source, ste.getProtectedParts(), srcTags);
-        StaticUtils.buildTagList(report.translation, ste.getProtectedParts(), locTags);
+        TagUtil.buildTagList(report.source, ste.getProtectedParts(), srcTags);
+        TagUtil.buildTagList(report.translation, ste.getProtectedParts(), locTags);
 
         inspectOrderedTags(srcTags, locTags, Preferences.isPreference(Preferences.LOOSE_TAG_ORDERING), report);
     }
@@ -240,7 +240,7 @@ public class TagValidation {
             }
 
             // Build stack of tags to check well-formedness.
-            TagInfo info = StaticUtils.getTagInfo(tag);
+            TagInfo info = TagUtil.getTagInfo(tag);
             switch (info.type) {
             case START:
                 tagStack.push(info);
@@ -255,14 +255,14 @@ public class TagValidation {
                         // Rewind stack until we find its pair. Report everything along
                         // the way as malformed.
                         TagInfo last = tagStack.pop();
-                        report.transErrors.put(StaticUtils.getOriginalTag(last),
+                        report.transErrors.put(TagUtil.getOriginalTag(last),
                                 TagError.MALFORMED);
                         if (last.name.equals(info.name)) break;
                     }
                     // If the stack was empty to begin with or we emptied it above,
                     // report the tag, but only if it's not a valid orphan.
                     if (tagStack.isEmpty()) {
-                        String pair = StaticUtils.getPairedTag(info);
+                        String pair = TagUtil.getPairedTag(info);
                         if (srcTags.contains(pair)) {
                             report.transErrors.put(tag,
                                     locTags.contains(pair) ? TagError.MALFORMED : TagError.ORPHANED);
@@ -279,9 +279,9 @@ public class TagValidation {
         while (!tagStack.isEmpty()) {
             // Allow stragglers only if they're orphans.
             TagInfo info = tagStack.pop();
-            String pair = StaticUtils.getPairedTag(info);
+            String pair = TagUtil.getPairedTag(info);
             if (srcTags.contains(pair)) {
-                report.transErrors.put(StaticUtils.getOriginalTag(info),
+                report.transErrors.put(TagUtil.getOriginalTag(info),
                         locTags.contains(pair) ? TagError.MALFORMED : TagError.ORPHANED);
             }
         }

@@ -113,12 +113,12 @@ public class TMXWriter {
         TMXDateParser dateParser = new TMXDateParser();
         for (Map.Entry<String, PrepareTMXEntry> en : data.entrySet()) {
             PrepareTMXEntry transEntry = en.getValue();
-            source = forceValidTMX ? StaticUtils.stripXmlTags(en.getKey()) : en.getKey();
-            target = forceValidTMX ? StaticUtils.stripXmlTags(transEntry.translation) : transEntry.translation;
+            source = forceValidTMX ? TagUtil.stripXmlTags(en.getKey()) : en.getKey();
+            target = forceValidTMX ? TagUtil.stripXmlTags(transEntry.translation) : transEntry.translation;
             source = StaticUtils.makeValidXML(source);
             target = StaticUtils.makeValidXML(target);
             if (transEntry.note != null) {
-                note = forceValidTMX ? StaticUtils.stripXmlTags(transEntry.note) : transEntry.note;
+                note = forceValidTMX ? TagUtil.stripXmlTags(transEntry.note) : transEntry.note;
                 note = StaticUtils.makeValidXML(note);
             }
             // TO DO: This *possibly* converts occurrences in the actual text of

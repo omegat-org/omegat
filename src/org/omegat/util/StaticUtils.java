@@ -55,11 +55,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.omegat.core.data.ProtectedPart;
-import org.omegat.core.statistics.StatisticsSettings;
 import org.omegat.util.Platform.OsType;
 
 /**
@@ -118,92 +115,6 @@ public class StaticUtils {
     private static String m_scriptDir = null;
 
     /**
-     * Builds a list of format tags within the supplied string. Format tags are
-     * 'protected parts' and OmegaT style tags: &lt;xx02&gt; or &lt;/yy01&gt;.
-     */
-    public static void buildTagList(String str, ProtectedPart[] protectedParts, List<String> tagList) {
-        List<TagOrder> tags = new ArrayList<TagOrder>();
-        if (protectedParts != null) {
-            for (ProtectedPart pp : protectedParts) {
-                int pos = -1;
-                if ((pos = str.indexOf(pp.getTextInSourceSegment(), pos + 1)) >= 0) {
-                    tags.add(new TagOrder(pos, pp.getTextInSourceSegment()));
-                }
-            }
-        }
-
-        if (tags.isEmpty()) {
-            return;
-        }
-        Collections.sort(tags, new Comparator<TagOrder>() {
-            @Override
-            public int compare(TagOrder o1, TagOrder o2) {
-                return o1.pos - o2.pos;
-            }
-        });
-        for (TagOrder t : tags) {
-            tagList.add(t.tag);
-        }
-    }
-
-    /**
-     * Builds a list of all occurrences of all protected parts.
-     */
-    public static List<TagOrder> buildAllTagList(String str, ProtectedPart[] protectedParts) {
-        List<TagOrder> tags = new ArrayList<TagOrder>();
-        if (protectedParts != null) {
-            for (ProtectedPart pp : protectedParts) {
-                int pos = -1;
-                do {
-                    if ((pos = str.indexOf(pp.getTextInSourceSegment(), pos + 1)) >= 0) {
-                        tags.add(new TagOrder(pos, pp.getTextInSourceSegment()));
-                    }
-                } while (pos >= 0);
-            }
-        }
-
-        if (tags.isEmpty()) {
-            return Collections.emptyList();
-        }
-        Collections.sort(tags, new Comparator<TagOrder>() {
-            @Override
-            public int compare(TagOrder o1, TagOrder o2) {
-                return o1.pos - o2.pos;
-            }
-        });
-        return tags;
-    }
-
-    /**
-     * Builds a list of format tags within the supplied string. Format tags are
-     * OmegaT style tags: &lt;xx02&gt; or &lt;/yy01&gt;.
-     * @return a string containing the tags
-     */
-    public static String buildTagListForRemove(String str) {
-        String res = "";
-        Pattern placeholderPattern = PatternConsts.OMEGAT_TAG;
-        Matcher placeholderMatcher = placeholderPattern.matcher(str);
-        while (placeholderMatcher.find()) {
-            res += placeholderMatcher.group(0);
-        }
-        return res;
-    }
-    
-    /**
-     * Find the first tag in a segment
-     * @param str A segment
-     * @return the first tag in the segment, or null if there are no tags
-     */
-    public static String getFirstTag(String str) {
-        Pattern placeholderPattern = PatternConsts.OMEGAT_TAG;
-        Matcher placeholderMatcher = placeholderPattern.matcher(str);
-        if (placeholderMatcher.find()) {
-            return placeholderMatcher.group(0);
-        }
-        return null;
-    }
-
-    /**
      * Check if specified key pressed.
      *
      * @param e
@@ -216,93 +127,6 @@ public class StaticUtils {
      */
     public static boolean isKey(KeyEvent e, int code, int modifiers) {
         return e.getKeyCode() == code && e.getModifiers() == modifiers;
-    }
-
-    public static class TagOrder {
-        public final int pos;
-        public final String tag;
-
-        public TagOrder(int pos, String tag) {
-            this.pos = pos;
-            this.tag = tag;
-        }
-    }
-
-    /**
-     * Indicates the type of a tag, e.g.:
-     * <ul>
-     * <li>&lt;foo> = START</li>
-     * <li>&lt;/foo> = END</li>
-     * <li>&lt;bar/> = SINGLE</li>
-     * </ul>
-     */
-    public static enum TagType {
-        START, END, SINGLE
-    }
-
-    /**
-     * Detect the type of a tag, e.g. one of {@link TagType}.
-     * @param tag String containing full text of tag
-     * @return The type of the tag
-     */
-    public static TagType getTagType(String tag) {
-        if (tag.length() < 4 || (!tag.startsWith("<") && !tag.endsWith(">"))) {
-            return TagType.SINGLE;
-        }
-        
-        if (tag.startsWith("</")) {
-            return TagType.END;
-        } else if (tag.endsWith("/>")) {
-            return TagType.SINGLE;
-        }
-
-        return TagType.START;
-    }
-
-    /**
-     * Retrieve info about a tag.
-     * @param tag String containing full text of tag
-     * @return A {@link TagInfo} with tag's name and type
-     */
-    public static TagInfo getTagInfo(String tag) {
-        Matcher m = PatternConsts.OMEGAT_TAG_DECOMPILE.matcher(tag);
-        String name = m.find() ? m.group(2) + m.group(3) : tag;
-        return new TagInfo(name, getTagType(tag));
-    }
-
-        
-    /**
-     * For a given tag, retrieve its pair e.g. &lt;/foo> for &lt;foo>.
-     * @param info A {@link TagInfo} describing the tag
-     * @return The tag's pair as a string, or null for self-contained tags
-     */
-    public static String getPairedTag(TagInfo info) {
-        switch(info.type) {
-        case START:
-            return String.format("</%s>", info.name);
-        case END:
-            return String.format("<%s>", info.name);
-        case SINGLE:
-        default:
-            return null;
-        }
-    }
-
-    
-    /**
-     * A tuple containing 
-     * <ul><li>A tag's name</li>
-     * <li>The tag's {@link TagType} type</li>
-     * </ul>
-     */
-    public static class TagInfo {
-        public final TagType type;
-        public final String name;
-        
-        public TagInfo (String name, TagType type) {
-            this.name = name;
-            this.type = type;
-        }
     }
 
     /**
@@ -753,51 +577,6 @@ public class StaticUtils {
     }
 
     /**
-     * Find some protected parts defined in Tag Validation Options dialog: printf variables, java
-     * MessageFormat patterns, user defined cusom tags.
-     * 
-     * These protected parts shouldn't affect statistic but just be displayed in gray in editor and take part
-     * in tag validation.
-     */
-    public static List<ProtectedPart> applyCustomProtectedParts(String source,
-            Pattern protectedPartsPatterns, List<ProtectedPart> protectedParts) {
-        List<ProtectedPart> result;
-        if (protectedParts != null) {
-            // Remove already define protected parts first for prevent intersection
-            for (ProtectedPart pp : protectedParts) {
-                source = source.replace(pp.getTextInSourceSegment(), StaticUtils.TAG_REPLACEMENT);
-            }
-            result = protectedParts;
-        } else {
-            result = new ArrayList<ProtectedPart>();
-        }
-
-        Matcher placeholderMatcher = protectedPartsPatterns.matcher(source);
-        while (placeholderMatcher.find()) {
-            ProtectedPart pp = new ProtectedPart();
-            pp.setTextInSourceSegment(placeholderMatcher.group());
-            pp.setDetailsFromSourceFile(placeholderMatcher.group());
-            if (StatisticsSettings.isCountingCustomTags()) {
-                pp.setReplacementWordsCountCalculation(placeholderMatcher.group());
-            } else {
-                pp.setReplacementWordsCountCalculation(StaticUtils.TAG_REPLACEMENT);
-            }
-            pp.setReplacementUniquenessCalculation(placeholderMatcher.group());
-            pp.setReplacementMatchCalculation(placeholderMatcher.group());
-            result.add(pp);
-        }
-        return result;
-    }
-
-    /**
-     * Strips all XML tags (converts to plain text). Tags detected only by
-     * pattern. Protected parts are not used.
-     */
-    public static String stripXmlTags(String xml) {
-        return PatternConsts.OMEGAT_TAG.matcher(xml).replaceAll("");
-    }
-
-    /**
      * Compares two strings for equality. Handles nulls: if both strings are
      * nulls they are considered equal.
      */
@@ -1078,67 +857,6 @@ public class StaticUtils {
             sb.appendCodePoint(c);
         }
         return sb.toString();
-    }
-
-    /**
-     * Reconstruct a tag from its {@link TagInfo}.
-     * 
-     * @param info
-     *            Description of tag
-     * @return Reconstructed original tag
-     */
-    public static String getOriginalTag(TagInfo info) {
-        switch (info.type) {
-        case START:
-            return String.format("<%s>", info.name);
-        case END:
-            return String.format("</%s>", info.name);
-        case SINGLE:
-            return String.format("<%s/>", info.name);
-        }
-        return null;
-    }
-
-    /**
-     * Sort tags by order of their appearance in a reference string.
-     */
-    public static class TagComparator implements Comparator<String> {
-
-        private final String source;
-
-        public TagComparator(String source) {
-            super();
-            this.source = source;
-        }
-
-        @Override
-        public int compare(String tag1, String tag2) {
-            // Check for equality
-            if (tag1.equals(tag2)) {
-                return 0;
-            }
-            // Check to see if one tag encompases the other
-            if (tag1.startsWith(tag2)) {
-                return -1;
-            } else if (tag2.startsWith(tag1)) {
-                return 1;
-            }
-            // Check which tag comes first
-            int index1 = source.indexOf(tag1);
-            int index2 = source.indexOf(tag2);
-            if (index1 == index2) {
-                int len1 = tag1.length();
-                int len2 = tag2.length();
-                if (len1 > len2) {
-                    return -1;
-                } else if (len2 > len1) {
-                    return 1;
-                } else {
-                    return tag1.compareTo(tag2);
-                }
-            }
-            return index1 > index2 ? 1 : -1;
-        }
     }
 
     /**

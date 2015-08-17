@@ -53,8 +53,8 @@ import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.TagUtil;
 
 /**
  * Filter to support Java Resource Bundles - the files that are used to I18ze
@@ -460,7 +460,7 @@ public class ResourceBundleFilter extends AbstractFilter {
     // Added the c parameter, of type String, which is the comment showed in the interface
     protected String process(String key, String value, String c) {
         if (entryParseCallback != null) {
-            List<ProtectedPart> protectedParts = StaticUtils.applyCustomProtectedParts(value,
+            List<ProtectedPart> protectedParts = TagUtil.applyCustomProtectedParts(value,
                     PatternConsts.SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS, null);
             entryParseCallback.addEntry(key, value, null, false, c, null, this, protectedParts);
             return value;

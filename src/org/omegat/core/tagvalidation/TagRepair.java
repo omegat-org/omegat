@@ -25,7 +25,6 @@
 
 package org.omegat.core.tagvalidation;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.omegat.core.data.SourceTextEntry;

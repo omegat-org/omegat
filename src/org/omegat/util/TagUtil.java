@@ -160,48 +160,6 @@ public class TagUtil {
         }
     }
 
-    /**
-     * Sort tags by order of their appearance in a reference string.
-     */
-    public static class TagComparator implements Comparator<Tag> {
-    
-        private final String source;
-    
-        public TagComparator(String source) {
-            super();
-            this.source = source;
-        }
-    
-        @Override
-        public int compare(Tag tag1, Tag tag2) {
-            // Check for equality
-            if (tag1.equals(tag2)) {
-                return 0;
-            }
-            // Check to see if one tag encompases the other
-            if (tag1.tag.startsWith(tag2.tag)) {
-                return -1;
-            } else if (tag2.tag.startsWith(tag1.tag)) {
-                return 1;
-            }
-            // Check which tag comes first
-            int index1 = source.indexOf(tag1.tag);
-            int index2 = source.indexOf(tag2.tag);
-            if (index1 == index2) {
-                int len1 = tag1.tag.length();
-                int len2 = tag2.tag.length();
-                if (len1 > len2) {
-                    return -1;
-                } else if (len2 > len1) {
-                    return 1;
-                } else {
-                    return tag1.tag.compareTo(tag2.tag);
-                }
-            }
-            return index1 > index2 ? 1 : -1;
-        }
-    }
-
     final public static String TAG_SEPARATOR_SENTINEL = "\uE100";
     final public static char TEXT_REPLACEMENT = '\uE100';
         

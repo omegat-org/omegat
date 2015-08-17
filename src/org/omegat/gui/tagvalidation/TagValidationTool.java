@@ -28,6 +28,7 @@
 package org.omegat.gui.tagvalidation;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,6 @@ import org.omegat.filters2.po.PoFilter;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.TagUtil;
 import org.omegat.util.TagUtil.Tag;
 
 /**
@@ -260,8 +260,14 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         }
 
         // Sort the map first to ensure that fixing works properly.
-        Map<Tag, TagError> sortedErrors = new TreeMap<Tag, TagError>(new TagUtil.TagComparator(
-                report.source));
+        Map<Tag, TagError> sortedErrors = new TreeMap<Tag, TagError>(new Comparator<Tag>() {
+            @Override
+            public int compare(Tag o1, Tag o2) {
+                return o1.pos < o2.pos ? -1
+                        : o1.pos > o2.pos ? 1
+                        : 0;
+            }
+        });
         sortedErrors.putAll(report.srcErrors);
         sortedErrors.putAll(report.transErrors);
 

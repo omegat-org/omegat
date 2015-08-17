@@ -83,7 +83,7 @@ public class LuceneJapaneseTokenizer extends BaseTokenizer {
         Matcher m = PatternConsts.OMEGAT_TAG.matcher(text);
         while (m.find()) {
             for (int i = m.start(), end = m.end(); i < end; i++) {
-                buffer.replace(i, i + 1, " ");
+                buffer.setCharAt(i, ' ');
             }
         }
         return buffer.toString();

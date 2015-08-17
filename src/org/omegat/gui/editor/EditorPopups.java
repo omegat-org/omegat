@@ -406,7 +406,7 @@ public class EditorPopups {
             }
 
             for (final Tag tag : TagUtil.getAllTagsMissingFromTarget()) {
-                JMenuItem item = menu.add(StaticUtils.format(OStrings.getString("TF_MENU_EDIT_TAG_INSERT_N"), tag));
+                JMenuItem item = menu.add(StaticUtils.format(OStrings.getString("TF_MENU_EDIT_TAG_INSERT_N"), tag.tag));
                 item.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         Core.getEditor().insertText(tag.tag);

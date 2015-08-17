@@ -29,7 +29,6 @@ package org.omegat.gui.editor;
 import java.awt.Font;
 
 import javax.swing.event.DocumentEvent;
-import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.Element;
@@ -79,11 +78,23 @@ public class Document3 extends DefaultStyledDocument {
     public Document3(final EditorController controller) {
         this.controller = controller;
 
-        // 
-        StyleContext styleContext = (StyleContext) getAttributeContext();
-        Style defaultStyle = styleContext.getStyle(StyleContext.DEFAULT_STYLE);
+        Style defaultStyle = getDefaultStyle();
         StyleConstants.setForeground(defaultStyle, Styles.EditorColor.COLOR_FOREGROUND.getColor());
         StyleConstants.setBackground(defaultStyle, Styles.EditorColor.COLOR_BACKGROUND.getColor());
+        setFont(controller.font);
+    }
+    
+    private Style getDefaultStyle() {
+        StyleContext styleContext = (StyleContext) getAttributeContext();
+        return styleContext.getStyle(StyleContext.DEFAULT_STYLE);
+    }
+    
+    void setFont(Font font) {
+        Style defaultStyle = getDefaultStyle();
+        StyleConstants.setFontFamily(defaultStyle, font.getFamily());
+        StyleConstants.setFontSize(defaultStyle, font.getSize());
+        StyleConstants.setBold(defaultStyle, font.isBold());
+        StyleConstants.setItalic(defaultStyle, font.isItalic());
     }
 
     /**
@@ -99,37 +110,6 @@ public class Document3 extends DefaultStyledDocument {
     protected int getTranslationEnd() {
         return activeTranslationEndP1.getOffset() - 1;
     }
-
-    /**
-     * Returns editor's font. Only bold style may be changed.
-     */
-    @Override
-    public Font getFont(AttributeSet attr) {
-        if (!StyleConstants.isBold(attr) && !StyleConstants.isItalic(attr)) {
-            return controller.font;
-        } else if (StyleConstants.isBold(attr) && !StyleConstants.isItalic(attr)) {
-            return controller.fontb;
-        } else if (!StyleConstants.isBold(attr) && StyleConstants.isItalic(attr)) {
-            return controller.fonti;
-        } else if (StyleConstants.isBold(attr) && StyleConstants.isItalic(attr)) {
-            return controller.fontbi;
-        } else {
-            return null;
-        }
-    }
-
-//    @Override
-//    public Color getForeground(AttributeSet attr) {
-//      //((StyleContext) getAttributeContext()).getForeground(Styles.defaultAttributeSet());
-//      Color fg  = StyleConstants.getForeground(attr);
-//      System.out.println("GET FOREGROUND == " + fg);
-//      if (fg == null)
-//      {
-//          fg = Styles.EditorColor.COLOR_FOREGROUND.getColor();
-//      }
-//      System.out.println("GET FOREGROUND => " + fg);
-//      return fg;
-//    }
 
     /**
      * Check if document is in edit mode, i.e. one of segment activated for

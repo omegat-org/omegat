@@ -31,6 +31,7 @@
 package org.omegat.gui.editor;
 
 import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -133,6 +134,15 @@ public class EditorTextArea3 extends JEditorPane {
         });
         setToolTipText("");
         setDragEnabled(true);
+    }
+    
+    @Override
+    public void setFont(Font font) {
+        super.setFont(font);
+        Document3 doc = getOmDocument();
+        if (doc != null) {
+            doc.setFont(font);
+        }
     }
 
     /**

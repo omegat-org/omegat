@@ -178,7 +178,7 @@ public class EditorController implements IEditor {
 
     protected final EditorSettings settings;
 
-    protected Font font, fontb, fonti, fontbi;
+    protected Font font;
 
     private enum SHOW_TYPE {
         INTRO, EMPTY_PROJECT, FIRST_ENTRY, NO_CHANGE
@@ -453,10 +453,6 @@ public class EditorController implements IEditor {
     
     private void setFont(final Font font) {
         this.font = font;
-        this.fontb = new Font(font.getFontName(), Font.BOLD, font.getSize());
-        this.fonti = new Font(font.getFontName(), Font.ITALIC, font.getSize());
-        this.fontbi = new Font(font.getFontName(), Font.BOLD | Font.ITALIC, font.getSize());
-
         editor.setFont(font);
     }
 

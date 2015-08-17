@@ -51,7 +51,7 @@ public class NewProjectFileChooser extends OmegaTFileChooser {
         String curDir = Preferences.getPreference(Preferences.CURRENT_FOLDER);
         if (curDir != null) {
             File dir = new File(curDir);
-            if (dir.exists() && dir.isDirectory()) {
+            if (dir.isDirectory()) {
                 setCurrentDirectory(dir);
             }
         }
@@ -61,7 +61,7 @@ public class NewProjectFileChooser extends OmegaTFileChooser {
         // user hit 'open' button - redirect command to open project or
         // recurse into lower directory
         File dir = getSelectedFile();
-        if (dir.exists()) {
+        if (dir.isDirectory()) {
             File[] files = dir.listFiles();
             if (files.length > 0) {
                 // must select non-existing name or empty dir for project

@@ -134,7 +134,7 @@ public class HunspellTokenizer extends BaseTokenizer {
         }
         
         File dictionaryDir = new File(dictionaryDirPath);
-        if (!dictionaryDir.exists() || !dictionaryDir.isDirectory()) {
+        if (!dictionaryDir.isDirectory()) {
             return;
         }
         

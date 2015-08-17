@@ -103,7 +103,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 	}
 	@Override
 	public void directoryChanged(File file) {
-        if (! (m_scriptDir.exists() && m_scriptDir.isDirectory())) {
+        if (!m_scriptDir.isDirectory()) {
         	// No script directory.
         	return;
         }
@@ -247,20 +247,18 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 		String entryDirName = eventType.name().toLowerCase();
 		
 		File entryActivatedDir = new File(m_scriptDir, entryDirName);
-        if (entryActivatedDir.exists())
-        {
-        	ArrayList<ScriptItem> eventScripts = m_eventsScript.get(eventType);
-        	// Avoid executing scripts that may be deleted during the directory change.
-        	eventScripts.clear();
+        if (!entryActivatedDir.isDirectory()) {
+            return;
+        }
+    	ArrayList<ScriptItem> eventScripts = m_eventsScript.get(eventType);
+    	// Avoid executing scripts that may be deleted during the directory change.
+    	eventScripts.clear();
 
-            for (File script : entryActivatedDir.listFiles(m_filter))
-            {
-            	ScriptItem scriptItem = new ScriptItem(script);
-            	if (! eventScripts.contains(scriptItem))
-            	{
-            		eventScripts.add(scriptItem);
-            	}
-            }
+        for (File script : entryActivatedDir.listFiles(m_filter)) {
+        	ScriptItem scriptItem = new ScriptItem(script);
+        	if (!eventScripts.contains(scriptItem)) {
+        		eventScripts.add(scriptItem);
+        	}
         }
 	}
 	

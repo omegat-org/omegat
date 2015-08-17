@@ -154,14 +154,18 @@ public class XMLWriter extends Writer {
      * We assume that EOL is always '\n' after XML processing.
      */
     StringBuffer fixEOL(StringBuffer out) {
-        for (int i = 0; i < out.length(); i++) {
-            if (out.charAt(i) == '\n') {
+        for (int cp, i = 0; i < out.length(); i += Character.charCount(cp)) {
+            cp = out.codePointAt(i);
+            if (cp == '\n') {
                 // EOL
                 out.setCharAt(i, eol.charAt(0));
                 if (eol.length() > 1) {
-                    // eol more than 1 char - need to insert second
-                    out.insert(i + 1, eol.charAt(1));
-                    i++;
+                    // EOL is more than 1 char - need to insert remaining.
+                    // Intentionally iterating by chars instead of code points.
+                    for (int j = 1; j < eol.length(); j++) {
+                        out.insert(i + 1, eol.charAt(j));
+                        i++;
+                    }
                 }
             }
         }

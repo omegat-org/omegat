@@ -32,7 +32,7 @@ package org.omegat.filters3.xml;
  */
 public class XMLContentBasedTag extends XMLIntactTag {
     private String shortcut;
-    private char shortcutLetter;
+    private int shortcutLetter;
     private int shortcutIndex;
 
     /** Creates a new instance of XML Tag */
@@ -49,11 +49,11 @@ public class XMLContentBasedTag extends XMLIntactTag {
         return shortcut;
     }
 
-    public char getShortcutLetter() {
+    public int getShortcutLetter() {
         return shortcutLetter;
     }
 
-    public void setShortcutLetter(char shortcutLetter) {
+    public void setShortcutLetter(int shortcutLetter) {
         this.shortcutLetter = shortcutLetter;
     }
 

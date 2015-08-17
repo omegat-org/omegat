@@ -170,13 +170,13 @@ public class XMLReader extends Reader {
             if (ch == '\r' || ch == '\n') {
                 if (eol == null) {
                     eol = "";
-                } else if (eol.charAt(0) == ch) {
+                } else if (eol.codePointAt(0) == ch) {
                     // duplicate char - this is second line
                     rd.reset();
                     return rd;
                 }
                 eol += ch;
-                if (eol.length() == 2) {
+                if (eol.codePointCount(0, eol.length()) == 2) {
                     // second char - latest
                     rd.reset();
                     return rd;

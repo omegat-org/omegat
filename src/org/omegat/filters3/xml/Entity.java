@@ -84,9 +84,9 @@ public class Entity {
 
     private void setName(String name) {
         originalName = name;
-        if (name.charAt(0) == '%') {
+        if (name.codePointAt(0) == '%') {
             parameter = true;
-            this.name = name.substring(1);
+            this.name = name.substring(name.offsetByCodePoints(0, 1));
         } else {
             parameter = false;
             this.name = name;

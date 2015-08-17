@@ -53,10 +53,11 @@ public abstract class Tag implements Element {
 
     /** Returns the short form of this tag, most often -- the first letter. */
     public String getShortcut() {
-        if (shortcut != null)
+        if (shortcut != null) {
             return shortcut;
-        else
-            return Character.toString(getTag().charAt(0));
+        } else {
+            return String.valueOf(Character.toChars(getTag().codePointAt(0)));
+        }
     }
 
     private Type type;

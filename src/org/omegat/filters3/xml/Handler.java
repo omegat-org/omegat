@@ -267,7 +267,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
                 res = inFile.getCanonicalFile().getParent();
             } catch (IOException ex) {
             }
-            if (res.charAt(res.length() - 1) != File.separatorChar) {
+            if (res.codePointBefore(res.length()) != File.separatorChar) {
                 res = res + File.separatorChar;
             }
             sourceFolderAbsolutePath = res;

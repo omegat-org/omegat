@@ -40,6 +40,7 @@ import org.omegat.gui.editor.autocompleter.AutoCompleterItem;
 import org.omegat.gui.editor.autocompleter.AutoCompleterListView;
 import org.omegat.util.OStrings;
 import org.omegat.util.TagUtil;
+import org.omegat.util.TagUtil.Tag;
 import org.omegat.util.Token;
 
 /**
@@ -62,8 +63,11 @@ public class TagAutoCompleterView extends AutoCompleterListView {
         List<String> missingGroups = TagUtil.getGroupedMissingTagsFromTarget();
         
         // If wordChunk is a tag, pretend we have a blank wordChunk.
-        if (TagUtil.getAllTagsInSource().contains(wordChunk)) {
-            wordChunk = "";
+        for (Tag tag : TagUtil.getAllTagsInSource()) {
+            if (tag.tag.equals(wordChunk)) {
+                wordChunk = "";
+                break;
+            }
         }
 
         List<String> matchGroups = new ArrayList<String>();

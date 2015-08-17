@@ -317,9 +317,9 @@ public class FileUtil {
      * Recursively delete a directory and all of its contents.
      * @param dir The directory to delete
      */
-    public static void deleteTree(File dir) {
+    public static boolean deleteTree(File dir) {
         if (!dir.exists()) {
-            return;
+            return false;
         }
         if (dir.isDirectory()) {
             for (File file : dir.listFiles()) {
@@ -330,7 +330,7 @@ public class FileUtil {
                 }
             }
         }
-        dir.delete();
+        return dir.delete();
     }
     
     public interface ICollisionCallback {

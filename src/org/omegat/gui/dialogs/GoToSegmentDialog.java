@@ -90,10 +90,10 @@ public class GoToSegmentDialog extends javax.swing.JDialog {
 
     private void detectDidInputLetter() {
         String input = segmentField.getText();
-        if (input.length() != 1) {
+        if (input.codePointCount(0, input.length()) != 1) {
             return;
         }
-        if (alphabeticalMarkers.containsTitle(input.charAt(0))) {
+        if (alphabeticalMarkers.containsTitle(input.codePointAt(0))) {
             okButtonActionPerformed(null);
         }
     }

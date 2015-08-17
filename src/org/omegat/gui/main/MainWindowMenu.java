@@ -35,6 +35,7 @@
 
 package org.omegat.gui.main;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -51,6 +52,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSeparator;
+import javax.swing.UIManager;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
@@ -331,6 +333,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         viewMenu.add(viewMarkWhitespaceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_WHITESPACE"));
         viewMenu.add(viewMarkBidiCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_BIDI"));
         viewMenu.add(viewMarkAutoPopulatedCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_AUTOPOPULATED"));
+        viewMenu.add(viewMarkFontFallbackCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_FONT_FALLBACK"));
         viewMenu.add(viewModificationInfoMenu = createMenu("MW_VIEW_MENU_MODIFICATION_INFO"));
         ButtonGroup viewModificationInfoMenuBG = new ButtonGroup();
         viewModificationInfoMenu.add(viewDisplayModificationInfoNoneRadioButtonMenuItem = createRadioButtonMenuItem(
@@ -350,6 +353,9 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         viewMarkBidiCheckBoxMenuItem.setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_BIDIMARKERS.getColor()));
         viewModificationInfoMenu.setIcon(MainMenuIcons.newBlankIcon());
         viewMarkAutoPopulatedCheckBoxMenuItem.setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor()));
+        viewMarkFontFallbackCheckBoxMenuItem.setIcon(MainMenuIcons.newTextIcon(UIManager.getColor("Label.foreground"),
+                new Font("Serif", Font.ITALIC, 16), 'F'));
+        
         toolsMenu.add(toolsValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_VALIDATE"));
         toolsMenu.add(toolsSingleValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_SINGLE_VALIDATE"));
         toolsMenu.add(toolsShowStatisticsStandardMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_STANDARD"));
@@ -451,6 +457,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 .isMarkBidi());
         viewMarkAutoPopulatedCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
                 .isMarkAutoPopulated());
+        viewMarkFontFallbackCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
+                .isDoFontFallback());
 
         viewDisplayModificationInfoNoneRadioButtonMenuItem
                 .setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE.equals(Core.getEditor()
@@ -748,6 +756,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JCheckBoxMenuItem viewMarkWhitespaceCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkBidiCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkAutoPopulatedCheckBoxMenuItem;
+    JCheckBoxMenuItem viewMarkFontFallbackCheckBoxMenuItem;
     JMenu viewModificationInfoMenu;
     JRadioButtonMenuItem viewDisplayModificationInfoNoneRadioButtonMenuItem;
     JRadioButtonMenuItem viewDisplayModificationInfoSelectedRadioButtonMenuItem;

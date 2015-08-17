@@ -684,6 +684,11 @@ public class MainWindowMenuHandler {
         Core.getEditor().getSettings()
                 .setMarkAutoPopulated(mainWindow.menu.viewMarkAutoPopulatedCheckBoxMenuItem.isSelected());
     }
+    
+    public void viewMarkFontFallbackCheckBoxMenuItemActionPerformed() {
+        Core.getEditor().getSettings()
+                .setDoFontFallback(mainWindow.menu.viewMarkFontFallbackCheckBoxMenuItem.isSelected());
+    }
 
     public void viewDisplayModificationInfoNoneRadioButtonMenuItemActionPerformed() {
         Core.getEditor().getSettings()

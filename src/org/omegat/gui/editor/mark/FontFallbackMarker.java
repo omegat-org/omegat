@@ -58,6 +58,10 @@ public class FontFallbackMarker implements IMarker {
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText,
             String translationText, boolean isActive) throws Exception {
         
+        if (!isEnabled()) {
+            return null;
+        }
+        
         int srcGlyphMissing;
         if (isActive || Core.getEditor().getSettings().isDisplaySegmentSources() || translationText == null) {
             srcGlyphMissing = editorFont.canDisplayUpTo(sourceText);
@@ -80,6 +84,10 @@ public class FontFallbackMarker implements IMarker {
         }
         
         return marks;
+    }
+    
+    private boolean isEnabled() {
+        return Core.getEditor().getSettings().isDoFontFallback();
     }
     
     private void createMarks(List<Mark> acc, Mark.ENTRY_PART part, String text, int firstMissing) {

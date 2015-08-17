@@ -191,6 +191,8 @@ public class Preferences {
     public static final String MARK_WHITESPACE = "mark_whitespace";
     /** Mark Bidi controls as symbols */
     public static final String MARK_BIDI = "mark_bidi";
+    /** Do aggressive font fallback */
+    public static final String FONT_FALLBACK = "font_fallback";
 
     /** Mark the translated segments with a different color */
     public static final String MARK_TRANSLATED_SEGMENTS = "mark_translated_segments";

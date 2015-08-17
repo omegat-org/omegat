@@ -43,6 +43,8 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import org.omegat.util.Preferences;
+
 public class FontFallbackListener implements DocumentListener {
         
     private Font defaultFont;
@@ -67,6 +69,10 @@ public class FontFallbackListener implements DocumentListener {
     }
     
     private void doStyling(Document document, final int offset, final int length) {
+        if (!Preferences.isPreference(Preferences.FONT_FALLBACK)) {
+            return;
+        }
+        
         if (!(document instanceof StyledDocument)) {
             return;
         }

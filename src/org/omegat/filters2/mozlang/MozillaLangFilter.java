@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2014 Enrique Estévez Fernández 
+ Copyright (C) 2014 Enrique Estevez Fernandez 
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -58,7 +58,7 @@ import org.omegat.util.TagUtil;
  * 
  * Code adapted from the files: PoFilter.java and SrtFilter.java
  *
- * @author Enrique Estévez (keko.gl@gmail.com)
+ * @author Enrique Estevez (keko.gl@gmail.com)
  */
 public class MozillaLangFilter extends AbstractFilter {
 

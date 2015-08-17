@@ -68,7 +68,7 @@ public final class Segmenter {
      *            list to store rules that account to breaks
      * @return list of sentences (String objects)
      */
-    public static List<String> segment(Language lang, String paragraph, List<StringBuffer> spaces,
+    public static List<String> segment(Language lang, String paragraph, List<StringBuilder> spaces,
             List<Rule> brules) {
         if (paragraph == null) {
             return null;
@@ -76,26 +76,32 @@ public final class Segmenter {
         List<String> segments = breakParagraph(lang, paragraph, brules);
         List<String> sentences = new ArrayList<String>(segments.size());
         if (spaces == null)
-            spaces = new ArrayList<StringBuffer>();
+            spaces = new ArrayList<StringBuilder>();
         spaces.clear();
         for (String one : segments) {
             int len = one.length();
             int b = 0;
-            StringBuffer bs = new StringBuffer();
-            while (b < len && Character.isWhitespace(one.charAt(b))) {
-                bs.append(one.charAt(b));
-                b++;
+            StringBuilder bs = new StringBuilder();
+            for (int cp; b < len; b += Character.charCount(cp)) {
+                cp = one.codePointAt(b);
+                if (!Character.isWhitespace(cp)) {
+                    break;
+                }
+                bs.appendCodePoint(cp);
             }
 
-            int e = len - 1;
-            StringBuffer es = new StringBuffer();
-            while (e >= b && Character.isWhitespace(one.charAt(e))) {
-                es.append(one.charAt(e));
-                e--;
+            int e = len;
+            StringBuilder es = new StringBuilder();
+            for (int cp; e > b; e -= Character.charCount(cp)) {
+                cp = one.codePointBefore(e);
+                if (!Character.isWhitespace(cp)) {
+                    break;
+                }
+                es.appendCodePoint(cp);
             }
             es.reverse();
 
-            String trimmed = one.substring(b, e + 1);
+            String trimmed = one.substring(b, e);
             sentences.add(trimmed);
             if (spaces != null) {
                 spaces.add(bs);
@@ -277,11 +283,11 @@ public final class Segmenter {
      * @return glued translated paragraph
      */
     public static String glue(Language sourceLang, Language targetLang, List<String> sentences,
-            List<StringBuffer> spaces, List<Rule> brules) {
+            List<StringBuilder> spaces, List<Rule> brules) {
         if (sentences.size() <= 0)
             return "";
 
-        StringBuffer res = new StringBuffer();
+        StringBuilder res = new StringBuilder();
         res.append(sentences.get(0));
 
         for (int i = 1; i < sentences.size(); i++) {

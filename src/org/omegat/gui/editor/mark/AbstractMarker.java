@@ -52,7 +52,7 @@ public abstract class AbstractMarker implements IMarker {
     /** Regexp for mark. */
     protected Pattern pattern;
     /** char for mark. */
-    protected char patternChar;
+    protected int patternChar;
 
     public AbstractMarker() throws Exception {
     }
@@ -91,13 +91,15 @@ public abstract class AbstractMarker implements IMarker {
                 }
             }
             if (patternChar != 0) {
-                int pos = -1;
-                while ((pos = sourceText.indexOf(patternChar, pos + 1)) >= 0) {
-                    Mark m = new Mark(Mark.ENTRY_PART.SOURCE, pos, pos + 1);
+                int pos = 0;
+                while ((pos = sourceText.indexOf(patternChar, pos)) >= 0) {
+                    int next = sourceText.offsetByCodePoints(pos, 1);
+                    Mark m = new Mark(Mark.ENTRY_PART.SOURCE, pos, next);
                     m.painter = PAINTER;
                     m.toolTipText = toolTip;
                     m.attributes = ATTRIBUTES;
                     r.add(m);
+                    pos = next;
                 }
             }
         }
@@ -114,13 +116,15 @@ public abstract class AbstractMarker implements IMarker {
                 }
             }
             if (patternChar != 0) {
-                int pos = -1;
-                while ((pos = translationText.indexOf(patternChar, pos + 1)) >= 0) {
-                    Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, pos, pos + 1);
+                int pos = 0;
+                while ((pos = translationText.indexOf(patternChar, pos)) >= 0) {
+                    int next = translationText.offsetByCodePoints(pos, 1);
+                    Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, pos, next);
                     m.painter = PAINTER;
                     m.toolTipText = toolTip;
                     m.attributes = ATTRIBUTES;
                     r.add(m);
+                    pos = next;
                 }
             }
         }

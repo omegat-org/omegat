@@ -282,23 +282,27 @@ public abstract class ParseEntry implements IParseCallback {
         int len = r.length();
         int b = 0;
         if (removeSpaces) {
-            while (b < len && (Character.isWhitespace(r.charAt(b)) || r.charAt(b) == '\u00A0')) {
-                b++;
+            for (int cp; b < len; b += Character.charCount(cp)) {
+                cp = r.codePointAt(b);
+                if (!Character.isWhitespace(cp) && cp != '\u00A0') {
+                    break;
+                }
             }
         }
         per.spacesAtBegin = b;
 
-        int pos = len - 1;
-        int e = 0;
+        int e = len;
         if (removeSpaces) {
-            while (pos >= b && (Character.isWhitespace(r.charAt(pos)) || r.charAt(pos) == '\u00A0')) {
-                pos--;
-                e++;
+            for (int cp; e > b; e -= Character.charCount(cp)) {
+                cp = r.codePointBefore(e);
+                if (!Character.isWhitespace(cp) && cp != '\u00A0') {
+                    break;
+                }
             }
         }
-        per.spacesAtEnd = e;
+        per.spacesAtEnd = len - e;
 
-        r = r.substring(b, pos + 1);
+        r = r.substring(b, e);
 
         /*
          * Replacing all occurrences of single CR (\r) or CRLF (\r\n) by LF

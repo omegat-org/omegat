@@ -157,8 +157,8 @@ public abstract class TranslateEntry implements ITranslateCallback {
                 if (locFirstTag > 0) {
                     // Was the first tag between two words without any spaces around?
                     String addSpace = "";
-                    if (!Character.isWhitespace(r.charAt(locFirstTag -1)) && 
-                        !Character.isWhitespace(r.charAt(locFirstTag + firstTag.length()))) {
+                    if (!Character.isWhitespace(r.codePointBefore(locFirstTag)) && 
+                        !Character.isWhitespace(r.codePointAt(locFirstTag + firstTag.length()))) {
                         addSpace = " ";
                     }
                     // Move that first tag before the text, adding a space if needed.

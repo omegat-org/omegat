@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.1 update 1
 ----------------------------------------------------------------------
-   0 Enhancement
-   1 Bug fix
+   1 Enhancement
+   4 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.5.1 update 1 vs 3.5.1
+
+  Implemented requests:  
+  
+  -Allow aggressive font fallback for undisplayable characters
+  https://sourceforge.net/p/omegat/feature-requests/1112/
 
   Bug fixes:
 
@@ -14,6 +19,15 @@
 
   - Equivalent Unicode composed and decomposed characters not treated as equivalent
   https://sourceforge.net/p/omegat/bugs/758/
+
+  - Tag validation does not recognize extraneous tags 
+  https://sourceforge.net/p/omegat/bugs/660/
+
+  - Tag validation fails 
+  https://sourceforge.net/p/omegat/bugs/733/
+
+  - Non-Latin characters corrupted in the editor, but not in the other panes
+  https://sourceforge.net/p/omegat/bugs/759/
 
 ----------------------------------------------------------------------
  OmegaT 3.5.1 (2015-07-26)

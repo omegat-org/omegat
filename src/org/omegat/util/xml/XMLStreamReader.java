@@ -106,8 +106,7 @@ public class XMLStreamReader {
             } else if (!ver.equals("1.0")) {
                 throw new IOException(OStrings.getString("XSR_ERROR_NONVALID_XML")
                         + "\n"
-                        + StaticUtils.format(OStrings.getString("XSR_ERROR_UNSUPPORTED_XML_VERSION"),
-                                new Object[] { ver }));
+                        + StaticUtils.format(OStrings.getString("XSR_ERROR_UNSUPPORTED_XML_VERSION"), ver));
             }
             m_headBlock = blk;
         } else {

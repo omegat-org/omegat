@@ -217,10 +217,9 @@ public class HelpFrame extends JFrame {
             String txt = "<b>" + link + "</b>";
             StringBuilder buf = new StringBuilder();
             buf.append("<html><body><p>");
-            buf.append(StaticUtils.format(OStrings.getString("HF_ERROR_EXTLINK_TITLE"), new Object[] { txt }));
+            buf.append(StaticUtils.format(OStrings.getString("HF_ERROR_EXTLINK_TITLE"), txt));
             buf.append("<p>");
-            buf.append(StaticUtils.format(OStrings.getString("HF_ERROR_EXTLINK_MSG"),
-                    new Object[] { "<b>index.html</b>" }));
+            buf.append(StaticUtils.format(OStrings.getString("HF_ERROR_EXTLINK_MSG"), "<b>index.html</b>"));
             buf.append("</body></html>");
 
             m_helpPane.setText(buf.toString());

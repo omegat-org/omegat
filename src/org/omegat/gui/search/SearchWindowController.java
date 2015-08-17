@@ -723,7 +723,7 @@ public class SearchWindowController {
                 EntryListPane viewer = (EntryListPane) form.m_viewer;
                 viewer.displaySearchResult(searcher, ((Integer) form.m_numberOfResults.getValue()));
                 form.m_resultsLabel.setText(StaticUtils.format(OStrings.getString("SW_NR_OF_RESULTS"),
-                        new Object[] { viewer.getNrEntries()}));
+                        viewer.getNrEntries()));
                 form.m_filterButton.setEnabled(true);
                 form.m_replaceButton.setEnabled(true);
                 form.m_replaceAllButton.setEnabled(true);
@@ -821,7 +821,7 @@ public class SearchWindowController {
             File f = new File(root);
             if (!f.exists() || !f.isDirectory()) {
                 String error = StaticUtils.format(OStrings.getString("SW_ERROR_BAD_DIR"),
-                        new Object[] { form.m_dirField.getText() });
+                        form.m_dirField.getText());
                 form.m_viewer.setText(error);
                 Log.log(error);
                 return;

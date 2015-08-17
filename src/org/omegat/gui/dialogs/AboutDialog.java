@@ -56,10 +56,10 @@ public class AboutDialog extends JDialog {
         initComponents();
         if ((OStrings.UPDATE != null) && !OStrings.UPDATE.equals("0")) {
             versionLabel.setText(StaticUtils.format(OStrings.getString("ABOUTDIALOG_VERSION_UPDATE"),
-                    new Object[] { OStrings.VERSION, OStrings.UPDATE }));
+                    OStrings.VERSION, OStrings.UPDATE));
         } else {
             versionLabel.setText(StaticUtils.format(OStrings.getString("ABOUTDIALOG_VERSION"),
-                    new Object[] { OStrings.VERSION }));
+                    OStrings.VERSION));
         }
         Object[] args = { Runtime.getRuntime().totalMemory() / 1024 / 1024,
                 Runtime.getRuntime().freeMemory() / 1024 / 1024,

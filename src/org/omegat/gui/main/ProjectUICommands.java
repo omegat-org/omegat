@@ -198,7 +198,7 @@ public class ProjectUICommands {
                                 f.mkdir();
                             }
                         } catch (Exception e) {
-                            Log.logErrorRB(e, "TEAM_MISSING_FOLDER", new Object[] {f.getName()});
+                            Log.logErrorRB(e, "TEAM_MISSING_FOLDER", f.getName());
                         };
                     }
                     //load project

@@ -154,7 +154,7 @@ public class SRX implements Serializable, Cloneable {
                     sb.append(ex);
                     sb.append("\n");
                 }
-                Log.logErrorRB("CORE_SRX_EXC_LOADING_SEG_RULES", new Object[] { sb.toString() });
+                Log.logErrorRB("CORE_SRX_EXC_LOADING_SEG_RULES", sb.toString());
                 res = new SRX();
                 res.initDefaults();
                 return res;

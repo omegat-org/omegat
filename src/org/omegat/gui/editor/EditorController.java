@@ -896,13 +896,13 @@ public class EditorController implements IEditor {
             nfPer.setMaximumFractionDigits(1);
 
             String message = StaticUtils.format( OStrings.getString("MW_PROGRESS_DEFAULT_PERCENTAGE"),
-                    new Object[] { (translatedUniqueInFile == 0) ? "0%" :
+                    (translatedUniqueInFile == 0) ? "0%" :
                             nfPer.format((double)translatedUniqueInFile / uniqueInFile),
                     uniqueInFile - translatedUniqueInFile,
                     (stat.numberofTranslatedSegments == 0) ? "0%" :
                             nfPer.format((double)stat.numberofTranslatedSegments / stat.numberOfUniqueSegments),
                     stat.numberOfUniqueSegments - stat.numberofTranslatedSegments,
-                    stat.numberOfSegmentsTotal });
+                    stat.numberOfSegmentsTotal);
 
             Core.getMainWindow().showProgressMessage(message);
         }

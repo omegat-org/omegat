@@ -245,8 +245,7 @@ public class PropertiesShortcutsTest {
 
         // bind
         InputMap inputMap = new InputMap();
-        Object[] keys = new Object[] { TEST_SAVE, TEST_CUT, TEST_USER_1 };
-        shotcuts.bindKeyStrokes(inputMap, keys);
+        shotcuts.bindKeyStrokes(inputMap, TEST_SAVE, TEST_CUT, TEST_USER_1);
 
         // test map size
         long expSize = 3;
@@ -278,8 +277,7 @@ public class PropertiesShortcutsTest {
         expResult = TEST_DELETE;
         result = inputMap.get(CTRL_D);
         assertEquals(expResult, result); // target exists before remove
-        keys = new Object[] { TEST_DELETE }; // key to be removed as null
-        shotcuts.bindKeyStrokes(inputMap, keys);
+        shotcuts.bindKeyStrokes(inputMap, TEST_DELETE); // key to be removed as null
         result = inputMap.get(CTRL_D);
         assertNull(result); // target will be null after removed
 

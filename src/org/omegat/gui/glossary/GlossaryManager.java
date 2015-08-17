@@ -108,7 +108,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
                 List<GlossaryEntry> entries = loadGlossaryFile(file);
                 if (entries != null) {
                     synchronized (this) {
-                        Log.logRB("CT_LOADING_GLOSSARY_DETAILS", new Object[] { entries.size(), file.getName() });
+                        Log.logRB("CT_LOADING_GLOSSARY_DETAILS", entries.size(), file.getName());
                         glossaries.put(file.getPath(), entries);
                     }
                 }
@@ -140,16 +140,16 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         boolean isPriority = priorityGlossary.equals(file);
         String fname_lower = file.getName().toLowerCase();
         if (fname_lower.endsWith(OConsts.EXT_TSV_DEF)) {
-            Log.logRB("CT_LOADING_GLOSSARY", new Object[] { file.getName() });
+            Log.logRB("CT_LOADING_GLOSSARY", file.getName());
             return GlossaryReaderTSV.read(file, isPriority);
         } else if (fname_lower.endsWith(OConsts.EXT_TSV_UTF8) || fname_lower.endsWith(OConsts.EXT_TSV_TXT)) {
-            Log.logRB("CT_LOADING_GLOSSARY", new Object[] { file.getName() });
+            Log.logRB("CT_LOADING_GLOSSARY", file.getName());
             return GlossaryReaderTSV.read(file, isPriority);
         } else if (fname_lower.endsWith(OConsts.EXT_CSV_UTF8)) {
-            Log.logRB("CT_LOADING_GLOSSARY", new Object[] { file.getName() });
+            Log.logRB("CT_LOADING_GLOSSARY", file.getName());
             return GlossaryReaderCSV.read(file, isPriority);
         } else if (fname_lower.endsWith(OConsts.EXT_TBX)) {
-            Log.logRB("CT_LOADING_GLOSSARY", new Object[] { file.getName() });
+            Log.logRB("CT_LOADING_GLOSSARY", file.getName());
             return GlossaryReaderTBX.read(file, isPriority);
         } else {
             return null;

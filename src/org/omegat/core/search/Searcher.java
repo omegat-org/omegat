@@ -117,7 +117,7 @@ public class Searcher {
                     if (entry.getEntryNum() == ENTRY_ORIGIN_TRANSLATION_MEMORY) {
                         if (m_tmxMap.containsKey(key) && (m_tmxMap.get(key) > 0)) {
                         	String newPreamble = StaticUtils.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
-                        			new Object[]{entry.getPreamble(), m_tmxMap.get(key)});
+                        			entry.getPreamble(), m_tmxMap.get(key));
                             entry.setPreamble(newPreamble);
                         }
                     } else if (entry.getEntryNum() > ENTRY_ORIGIN_PROJECT_MEMORY) {
@@ -125,9 +125,9 @@ public class Searcher {
                         if (m_entryMap.containsKey(key) && (m_entryMap.get(key) > 0)) {
                         	String newPreamble = StringUtil.isEmpty(entry.getPreamble())
                         			? StaticUtils.format(OStrings.getString("SW_NR_OF_MORE"),
-                            				new Object[]{m_entryMap.get(key)})
+                            				m_entryMap.get(key))
                     				: StaticUtils.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
-                                            new Object[]{entry.getPreamble(), m_entryMap.get(key)});
+                                            entry.getPreamble(), m_entryMap.get(key));
                             entry.setPreamble(newPreamble);
                         }
                     }

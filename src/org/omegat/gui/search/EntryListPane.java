@@ -277,7 +277,7 @@ class EntryListPane extends JTextPane {
 
             if (entries.size() >= numberOfResults) {
                 addMessage(m_stringBuf, StaticUtils.format(OStrings.getString("SW_MAX_FINDS_REACHED"),
-                        new Object[] { numberOfResults }));
+                        numberOfResults));
             }
 
             for (SearchResultEntry e : entries) {

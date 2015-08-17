@@ -110,6 +110,7 @@ public class TMXWriter {
         String source = null;
         String target = null;
         String note = null;
+        TMXDateParser dateParser = new TMXDateParser();
         for (Map.Entry<String, PrepareTMXEntry> en : data.entrySet()) {
             PrepareTMXEntry transEntry = en.getValue();
             source = forceValidTMX ? StaticUtils.stripXmlTags(en.getKey()) : en.getKey();
@@ -131,7 +132,7 @@ public class TMXWriter {
                     + transEntry.changer + "\""
                     : "");
             String changeDatePropertyString = (transEntry.changeDate != 0 ? " changedate=\""
-                    + TMXDateParser.getTMXDate(transEntry.changeDate) + "\"" : "");
+                    + dateParser.getTMXDate(transEntry.changeDate) + "\"" : "");
             out.println("    <tu>");
             out.println("      <tuv " + langAttr + "=\"" + sourceLocale + "\">");
             out.println("        <seg>" + source + "</seg>");

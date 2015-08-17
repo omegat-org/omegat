@@ -94,6 +94,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler {
         this.sourceLanguage = sourceLanguage.getLanguage();
         this.targetLanguage = targetLanguage.getLanguage();
         this.isSegmentingEnabled = isSegmentingEnabled;
+        dateParser = new TMXDateParser();
     }
 
     /** Returns the source language */
@@ -940,11 +941,11 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler {
         long changeDate = 0;
         if (target.changeDate != null) {
             try {
-                changeDate = TMXDateParser.parse(target.changeDate).getTime();
+                changeDate = dateParser.parse(target.changeDate).getTime();
             } catch (ParseException e) {
                 if (target.creationDate != null) {
                     try {
-                        changeDate = TMXDateParser.parse(target.creationDate).getTime();
+                        changeDate = dateParser.parse(target.creationDate).getTime();
                     } catch (ParseException e2) {
                     }
                 }
@@ -1190,6 +1191,8 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler {
     private String currentProperty; // Name of the current property being parsed
                                     // (null if none)
     private boolean isSegmentingEnabled;
+
+    private TMXDateParser dateParser;
 
     /**
      * Internal class to represent translation unit variants

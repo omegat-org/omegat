@@ -45,6 +45,8 @@ import java.util.TimeZone;
  * YYYYMMDDThhmmssZ. Since all translation tools conform to this format, this
  * parser only parses this variant of the 'basic' format.
  * 
+ * DateFormat is not thread-safe, so this class must be instantiated.
+ * 
  * @author Martin Fleurke
  */
 public class TMXDateParser {
@@ -52,19 +54,15 @@ public class TMXDateParser {
     /**
      * A DateFormat to format any date as YYYYMMDDThhmmssZ
      */
-    private static DateFormat tmxDateFormat = initializeTMXDateFormat();
+    private final DateFormat tmxDateFormat;
 
     /**
-     * Creates a DateFormat with format YYYYMMDDThhmmssZ able to display a date
-     * in UTC time. This function is added so the timezone of the dateformat can
-     * be set
-     * 
-     * @return the DateFormat.
+     * Wraps a DateFormat with format YYYYMMDDThhmmssZ able to display a date
+     * in UTC time.
      */
-    private static DateFormat initializeTMXDateFormat() {
-        SimpleDateFormat tmxDateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'");
+    public TMXDateParser() {
+        tmxDateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'");
         tmxDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+00:00"));
-        return tmxDateFormat;
     }
 
     /**
@@ -103,7 +101,7 @@ public class TMXDateParser {
      * @return a string representing the date in the ISO 8601 compatible format
      *         'YYYYMMDDThhmmssZ'
      */
-    public static String getTMXDate(Date date) {
+    public String getTMXDate(Date date) {
         return tmxDateFormat.format(date);
     }
 
@@ -116,7 +114,7 @@ public class TMXDateParser {
      * @return a string representing the date in the ISO 8601 compatible format
      *         'YYYYMMDDThhmmssZ'
      */
-    public static String getTMXDate(long date) {
+    public String getTMXDate(long date) {
         return tmxDateFormat.format(new Date(date));
     }
 }

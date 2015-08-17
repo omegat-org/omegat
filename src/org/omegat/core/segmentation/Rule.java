@@ -34,7 +34,7 @@ import java.util.regex.PatternSyntaxException;
  * 
  * @author Maxym Mykhalchuk
  */
-public class Rule implements Serializable {
+public class Rule implements Serializable, Cloneable {
 
     /** Creates a new empty instance of segmentation rule */
     public Rule() {

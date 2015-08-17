@@ -151,7 +151,7 @@ public interface IRemoteRepository {
         }
     }
     
-    public static class Credentials {
+    public static class Credentials implements Cloneable {
         public String username = null;
         public char[] password = null;
         public boolean saveAsPlainText = false;

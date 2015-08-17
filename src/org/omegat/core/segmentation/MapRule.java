@@ -37,7 +37,7 @@ import java.util.regex.PatternSyntaxException;
  * 
  * @author Maxym Mykhalchuk
  */
-public class MapRule implements Serializable {
+public class MapRule implements Serializable, Cloneable {
     /** creates a new empty MapRule */
     public MapRule() {
     }

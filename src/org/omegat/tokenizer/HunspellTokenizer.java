@@ -159,6 +159,6 @@ public class HunspellTokenizer extends BaseTokenizer {
             result.add(lang.getLanguage().toLowerCase());
             result.add(lang.getLanguageCode().toLowerCase());
         }
-        return result.toArray(new String[0]);
+        return result.toArray(new String[result.size()]);
     }
 }

@@ -61,7 +61,7 @@ public class OneFilter {
      * Returns all the instances of the filter.
      */
     public Instance[] getInstance() {
-        return instances.toArray(new Instance[0]);
+        return instances.toArray(new Instance[instances.size()]);
     }
 
     /**

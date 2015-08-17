@@ -83,7 +83,7 @@ public class GlossaryEntry {
             if (i > 0 && m_loc[i].equals(m_loc[i - 1])) continue;
             list.add(m_loc[i]);
         }
-        return list.toArray(new String[0]);
+        return list.toArray(new String[list.size()]);
     }
 
     /**

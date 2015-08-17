@@ -81,13 +81,13 @@ public class HistoryManager {
     
     public static String[] getSearchItems() {
         synchronized (searchItems) {
-            return searchItems.toArray(new String[0]);
+            return searchItems.toArray(new String[searchItems.size()]);
         }
     }
     
     public static String[] getReplaceItems() {
         synchronized (replaceItems) {
-            return replaceItems.toArray(new String[0]);
+            return replaceItems.toArray(new String[replaceItems.size()]);
         }
     }
     

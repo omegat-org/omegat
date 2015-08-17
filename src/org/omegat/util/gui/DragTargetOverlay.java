@@ -265,7 +265,7 @@ public class DragTargetOverlay {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    mw.importFiles(getImportDestination(), files.toArray(new File[0]), doReset);
+                    mw.importFiles(getImportDestination(), files.toArray(new File[files.size()]), doReset);
                 }
             });
             return true;

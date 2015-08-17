@@ -424,7 +424,7 @@ public class EditorController implements IEditor {
                 @Override
                 public void run() {
                     mw.importFiles(Core.getProject().getProjectProperties().getSourceRoot(),
-                            files.toArray(new File[0]));
+                            files.toArray(new File[files.size()]));
                 }
             });
             return true;

@@ -1190,7 +1190,7 @@ public class StaticUtils {
         if (arg.length() > 0) {
             result.add(arg.toString());
         }
-        return result.toArray(new String[0]);
+        return result.toArray(new String[result.size()]);
     }
 
     public static boolean isProjectDir(File f) {

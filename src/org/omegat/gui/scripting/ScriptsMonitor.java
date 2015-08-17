@@ -118,7 +118,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
         }
 
 		Collections.sort(scriptsList, new ScriptItem.ScriptItemComparator());
-        m_list.setListData(scriptsList.toArray(new ScriptItem[0]));
+        m_list.setListData(scriptsList.toArray(new ScriptItem[scriptsList.size()]));
         
 
         if (SCRIPTING_EVENTS) {

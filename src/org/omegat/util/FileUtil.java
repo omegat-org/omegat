@@ -373,7 +373,7 @@ public class FileUtil {
             for (File file : toDelete) {
                 deleteTree(file);
             }
-            copyFilesTo(destination, toReplace.toArray(new File[0]), (File) null);
+            copyFilesTo(destination, toReplace.toArray(new File[toReplace.size()]), (File) null);
         }
     }
     

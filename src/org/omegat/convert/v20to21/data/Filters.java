@@ -43,7 +43,7 @@ public class Filters {
      * Returns all the filters as an array.
      */
     public OneFilter[] getFilter() {
-        return filters.toArray(new OneFilter[0]);
+        return filters.toArray(new OneFilter[filters.size()]);
     }
 
     /**

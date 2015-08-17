@@ -12,6 +12,9 @@
   - Auto-Completer does not work for repeated custom tags 
   https://sourceforge.net/p/omegat/bugs/753/
 
+  - Equivalent Unicode composed and decomposed characters not treated as equivalent
+  https://sourceforge.net/p/omegat/bugs/758/
+
 ----------------------------------------------------------------------
  OmegaT 3.5.1 (2015-07-26)
 ----------------------------------------------------------------------

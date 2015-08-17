@@ -344,20 +344,20 @@ public class StaticUtils {
 
     static Pattern compileFileMask(String mask) {
         StringBuilder m = new StringBuilder();
-        for (int i = 0; i < mask.length(); i++) {
-            char c = mask.charAt(i);
-            if (c >= 'A' && c <= 'Z') {
-                m.append(c);
-            } else if (c >= 'a' && c <= 'z') {
-                m.append(c);
-            } else if (c >= '0' && c <= '9') {
-                m.append(c);
-            } else if (c == '/') {
-                m.append(c);
-            } else if (c == '?') {
+        for (int cp, i = 0; i < mask.length(); i += Character.charCount(cp)) {
+            cp = mask.codePointAt(i);
+            if (cp >= 'A' && cp <= 'Z') {
+                m.appendCodePoint(cp);
+            } else if (cp >= 'a' && cp <= 'z') {
+                m.appendCodePoint(cp);
+            } else if (cp >= '0' && cp <= '9') {
+                m.appendCodePoint(cp);
+            } else if (cp == '/') {
+                m.appendCodePoint(cp);
+            } else if (cp == '?') {
                 m.append('.');
-            } else if (c == '*') {
-                if (i + 1 < mask.length() && mask.charAt(i + 1) == '*') {
+            } else if (cp == '*') {
+                if (mask.codePointCount(i, mask.length()) > 1 && mask.codePointAt(mask.offsetByCodePoints(i, 1)) == '*') {
                     // **
                     m.append(".*");
                     i++;
@@ -366,7 +366,7 @@ public class StaticUtils {
                     m.append("[^/]*");
                 }
             } else {
-                m.append('\\').append(c);
+                m.append('\\').appendCodePoint(cp);
             }
         }
         return Pattern.compile(m.toString());
@@ -428,11 +428,11 @@ public class StaticUtils {
     }
 
     /**
-     * Converts a single char into valid XML. Output stream must convert stream
+     * Converts a single code point into valid XML. Output stream must convert stream
      * to UTF-8 when saving to disk.
      */
-    public static String makeValidXML(char c) {
-        switch (c) {
+    public static String makeValidXML(int cp) {
+        switch (cp) {
         // case '\'':
         // return "&apos;";
         case '&':
@@ -444,7 +444,7 @@ public class StaticUtils {
         case '"':
             return "&quot;";
         default:
-            return String.valueOf(c);
+            return String.valueOf(Character.toChars(cp));
         }
     }
 
@@ -477,12 +477,11 @@ public class StaticUtils {
      * stream to UTF-8 when saving to disk.
      */
     public static String makeValidXML(String plaintext) {
-        char c;
         StringBuilder out = new StringBuilder();
         String text = fixChars(plaintext);
-        for (int i = 0; i < text.length(); i++) {
-            c = text.charAt(i);
-            out.append(makeValidXML(c));
+        for (int cp, i = 0; i < text.length(); i += Character.charCount(cp)) {
+            cp = text.codePointAt(i);
+            out.append(makeValidXML(cp));
         }
         return out.toString();
     }
@@ -492,16 +491,17 @@ public class StaticUtils {
         int strlen = str.length();
         StringBuilder res = new StringBuilder(strlen);
         boolean wasspace = true;
-        for (int i = 0; i < strlen; i++) {
-            char ch = str.charAt(i);
-            boolean space = Character.isWhitespace(ch);
-            if (space) {
-                if (!wasspace)
+        for (int cp, i = 0; i < strlen; i += Character.charCount(cp)) {
+            cp = str.codePointAt(i);
+            if (Character.isWhitespace(cp)) {
+                if (!wasspace) {
                     wasspace = true;
+                }
             } else {
-                if (wasspace && res.length() > 0)
+                if (wasspace && res.length() > 0) {
                     res.append(' ');
-                res.append(ch);
+                }
+                res.appendCodePoint(cp);
                 wasspace = false;
             }
         }
@@ -901,9 +901,9 @@ public class StaticUtils {
 
         // handle rest of characters to be escaped
         // String escape = "^.*+[]{}()&|-:=?!<>";
-        String escape = "^.+[]{}()&|-:=!<>";
-        for (int i = 0; i < escape.length(); i++)
-            text = text.replaceAll("\\" + escape.charAt(i), "\\\\" + escape.charAt(i));
+        for (char c : "^.+[]{}()&|-:=!<>".toCharArray()) {
+            text = text.replaceAll("\\" + c, "\\\\" + c);
+        }
 
         // handle "wildcard characters" ? and * (only if requested)
         // do this last, or the additional period (.) will cause trouble
@@ -1149,32 +1149,34 @@ public class StaticUtils {
      */
     public static String[] parseCLICommand(String cmd) {
         cmd = cmd.trim();
-        if (cmd.length() == 0) return new String[] { "" };
+        if (cmd.length() == 0) {
+            return new String[] { "" };
+        }
         
         StringBuilder arg = new StringBuilder();
         List<String> result = new ArrayList<String>();
         
         final char noQuote = '\0';
         char currentQuote = noQuote;
-        for (int i = 0; i < cmd.length(); i++) {
-            char c = cmd.charAt(i);
-            if (c == currentQuote) {
+        for (int cp, i = 0; i < cmd.length(); i += Character.charCount(cp)) {
+            cp = cmd.codePointAt(i);
+            if (cp == currentQuote) {
                 currentQuote = noQuote;
-            } else if (c == '"' && currentQuote == noQuote) {
+            } else if (cp == '"' && currentQuote == noQuote) {
                 currentQuote = '"';
-            } else if (c == '\'' && currentQuote == noQuote) {
+            } else if (cp == '\'' && currentQuote == noQuote) {
                 currentQuote = '\'';
-            } else if (c == '\\' && i + 1 < cmd.length()) {
-                char next = cmd.charAt(i + 1);
-                if ((currentQuote == noQuote && Character.isWhitespace(next))
-                        || (currentQuote == '"' && next == '"')) {
-                    arg.append(next);
-                    i++;
+            } else if (cp == '\\' && i + 1 < cmd.length()) {
+                int ncp = cmd.codePointAt(cmd.offsetByCodePoints(i, 1));
+                if ((currentQuote == noQuote && Character.isWhitespace(ncp))
+                        || (currentQuote == '"' && ncp == '"')) {
+                    arg.appendCodePoint(ncp);
+                    i += Character.charCount(ncp);
                 } else {
-                    arg.append(c);
+                    arg.appendCodePoint(cp);
                 }
             } else {
-                if (Character.isWhitespace(c) && currentQuote == noQuote) {
+                if (Character.isWhitespace(cp) && currentQuote == noQuote) {
                     if (arg.length() > 0) {
                         result.add(arg.toString());
                         arg = new StringBuilder();
@@ -1182,7 +1184,7 @@ public class StaticUtils {
                         // Discard
                     }
                 } else {
-                    arg.append(c);
+                    arg.appendCodePoint(cp);
                 }
             }
         }

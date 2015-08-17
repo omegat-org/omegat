@@ -70,8 +70,6 @@ public class SegmentBuilder {
     public static final String SEGMENT_MARK_ATTRIBUTE = "SEGMENT_MARK_ATTRIBUTE";
     public static final String SEGMENT_SPELL_CHECK = "SEGMENT_SPELL_CHECK";
     private static final DecimalFormat NUMBER_FORMAT = new DecimalFormat("0000");
-    private static final DateFormat dateFormat = DateFormat.getDateInstance();
-    private static final DateFormat timeFormat = DateFormat.getTimeInstance();
 
     static AtomicLong globalVersions = new AtomicLong();
 
@@ -492,8 +490,8 @@ public class SegmentBuilder {
             if (trans.changeDate != 0) {
                 template = OStrings.getString("TF_CUR_SEGMENT_AUTHOR_DATE");
                 Date changeDate = new Date(trans.changeDate);
-                String changeDateString = dateFormat.format(changeDate);
-                String changeTimeString = timeFormat.format(changeDate);
+                String changeDateString = DateFormat.getDateInstance().format(changeDate);
+                String changeTimeString = DateFormat.getTimeInstance().format(changeDate);
                 Object[] args = { author, changeDateString, changeTimeString };
                 text = StaticUtils.format(template, args);
             } else {

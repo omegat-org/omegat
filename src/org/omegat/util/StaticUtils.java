@@ -309,7 +309,11 @@ public class StaticUtils {
      * Returns a list of all files under the root directory by absolute path.
      */
     public static void buildFileList(List<String> lst, File rootDir, boolean recursive) {
-        internalBuildFileList(lst, rootDir, recursive);
+        try {
+            internalBuildFileList(lst, rootDir, recursive);
+        } catch (Exception ex) {
+            // Ignore
+        }
 
         // Get the local collator and set its strength to PRIMARY
         final Collator localCollator = Collator.getInstance(Locale.getDefault());
@@ -401,50 +405,15 @@ public class StaticUtils {
     }
 
     private static void internalBuildFileList(List<String> lst, File rootDir, boolean recursive) {
-        // read all files in current directory, recurse into subdirs
-        // append files to supplied list
-        File flist[] = null;
-        try {
-            flist = rootDir.listFiles();
-        } catch (Exception e) {
-            // don't care what exception is there.
-            // by contract, only a SecurityException is possible, but who
-            // knows...
-        }
-        // if IOException occured, flist is null
-        // and we simply return
-        if (flist == null)
+        if (!rootDir.isDirectory()) {
             return;
-
-        for (File file : flist) {
-            if (file.isDirectory()) {
-                continue; // recurse into directories later
-            }
-            lst.add(file.getAbsolutePath());
         }
-        if (recursive) {
-            for (File file : flist) {
-                if (isProperDirectory(file)) // Ignores some directories
-                {
-                    // now recurse into subdirectories
-                    buildFileList(lst, file, true);
-                }
+        for (File file : rootDir.listFiles()) {
+            if (file.isDirectory() && recursive) {
+                internalBuildFileList(lst, file, recursive);
             }
-        }
-    }
-
-    // returns a list of all files under the root directory
-    // by absolute path
-    public static void buildDirList(List<String> lst, File rootDir) {
-        // read all files in current directory, recurse into subdirs
-        // append files to supplied list
-        File[] flist = rootDir.listFiles();
-        for (File file : flist) {
-            if (isProperDirectory(file)) // Ignores some directories
-            {
-                // now recurse into subdirectories
+            if (file.isFile()) {
                 lst.add(file.getAbsolutePath());
-                buildDirList(lst, file);
             }
         }
     }
@@ -456,18 +425,6 @@ public class StaticUtils {
         GraphicsEnvironment graphics;
         graphics = GraphicsEnvironment.getLocalGraphicsEnvironment();
         return graphics.getAvailableFontFamilyNames();
-    }
-
-    /**
-     * Tests whether a directory has to be used
-     *
-     * @return <code>true</code> or <code>false</code>
-     */
-    private static boolean isProperDirectory(File file) {
-        if (file.isDirectory()) {
-            return true;
-        } else
-            return false;
     }
 
     /**

@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.TreeMap;
 import java.util.Vector;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.htmlparser.Attribute;
 import org.htmlparser.Node;
@@ -578,15 +579,19 @@ public class FilterVisitor extends NodeVisitor {
         // (This changes the layout, therefore it is an option)
         if (!preformatting) {
 
-            for (int i = 0; i < size; i++) {
-                if (!Character.isWhitespace(uncompressed.charAt(i))) {
-                    spacePrefix = uncompressed.substring(0, (options.getCompressWhitespace() ? Math.min(i,1) : i));
+            for (int cp, i = 0; i < size; i += Character.charCount(cp)) {
+                cp = uncompressed.codePointAt(i);
+                if (!Character.isWhitespace(cp)) {
+                    spacePrefix = i == 0 ? "" : uncompressed.substring(0,
+                            options.getCompressWhitespace() ? Math.min(i, uncompressed.offsetByCodePoints(i, 1)) : i);
                     break;
                 }
             }
-            for (int i = size - 1; i > 0; i--) {
-                if (!Character.isWhitespace(uncompressed.charAt(i))) {
-                    spacePostfix = uncompressed.substring(i + 1, (options.getCompressWhitespace() ? Math.min(i + 2, size) : size));
+            for (int cp, i = size; i > 0; i -= Character.charCount(cp)) {
+                cp = uncompressed.codePointBefore(i);
+                if (!Character.isWhitespace(cp)) {
+                    spacePostfix = i == size ? "" : uncompressed.substring(i,
+                            options.getCompressWhitespace() ? Math.min(uncompressed.offsetByCodePoints(i, 1), size) : size);
                     break;
                 }
             }
@@ -683,10 +688,11 @@ public class FilterVisitor extends NodeVisitor {
         // special handling for BR tag, as it's given a two-char shortcut
         // to allow for its segmentation in sentence-segmentation mode
         // idea by Jean-Christophe Helary
-        if ("BR".equals(tag.getTagName()))
+        if ("BR".equals(tag.getTagName())) {
             result.append("br");
-        else
-            result.append(Character.toLowerCase(tag.getTagName().charAt(0)));
+        } else {
+            result.appendCodePoint(Character.toLowerCase(tag.getTagName().codePointAt(0)));
+        }
 
         result.append(n);
         if (tag.isEmptyXmlTag()) // This only detects tags that already have a
@@ -966,116 +972,135 @@ public class FilterVisitor extends NodeVisitor {
     protected String entitiesToChars(String str) {
         int strlen = str.length();
         StringBuffer res = new StringBuffer(strlen);
-        for (int i = 0; i < strlen; i++) {
-            char ch = str.charAt(i);
-            switch (ch) {
+        for (int cp, i = 0; i < strlen; i += Character.charCount(cp)) {
+            cp = str.codePointAt(i);
+            switch (cp) {
             case '&':
-                char ch1;
+                int cp1;
                 // if there's one more symbol, reading it,
                 // otherwise it's a dangling '&'
-                if ((i + 1) >= strlen) {
-                    res.append(ch);
+                if (str.codePointCount(i, strlen) < 2) {
+                    res.appendCodePoint(cp);
                     break;
-                } else
-                    ch1 = str.charAt(i + 1);
-                if (ch1 == '#') {
+                } else {
+                    cp1 = str.codePointAt(str.offsetByCodePoints(i, 1));
+                }
+                if (cp1 == '#') {
                     // numeric entity
-                    char ch2 = str.charAt(i + 2);
-                    if (ch2 == 'x' || ch2 == 'X') {
+                    int cp2 = str.codePointAt(str.offsetByCodePoints(i, 2));
+                    if (cp2 == 'x' || cp2 == 'X') {
                         // hex numeric entity
-                        int n = i + 3;
-                        while (n < strlen && isHexDigit(str.charAt(n)))
-                            n++;
-                        String s_entity = str.substring(i + 3, n);
+                        int hexStart = str.offsetByCodePoints(i, 3);
+                        int hexEnd = hexStart;
+                        while (hexEnd < strlen) {
+                            int hexCp = str.codePointAt(hexEnd);
+                            if (!isHexDigit(hexCp)) {
+                                break;
+                            }
+                            hexEnd += Character.charCount(hexCp);
+                        }
+                        String s_entity = str.substring(hexStart, hexEnd);
                         try {
                             int n_entity = Integer.parseInt(s_entity, 16);
-                            if (n_entity > 0 && n_entity <= 65535) {
-                                res.append((char) n_entity);
-                                if (n < strlen && str.charAt(n) == ';')
-                                    i = n;
-                                else
-                                    i = n - 1;
+                            if (n_entity > 0 && n_entity <= 0x10FFFF) {
+                                res.appendCodePoint(n_entity);
+                                if (hexEnd < strlen && str.codePointAt(hexEnd) == ';') {
+                                    i = hexEnd;
+                                } else {
+                                    i = str.offsetByCodePoints(hexEnd, -1);
+                                }
                             } else {
                                 // too big number
                                 // dangling '&'
-                                res.append(ch);
+                                res.appendCodePoint(cp);
                             }
                         } catch (NumberFormatException nfe) {
                             // do nothing
                             // dangling '&'
-                            res.append(ch);
+                            res.appendCodePoint(cp);
                         }
                     } else {
                         // decimal entity
-                        int n = i + 2;
-                        while (n < strlen && isDecimalDigit(str.charAt(n)))
-                            n++;
-                        String s_entity = str.substring(i + 2, n);
+                        int decStart = str.offsetByCodePoints(i, 2);
+                        int decEnd = decStart;
+                        while (decEnd < strlen) {
+                            int decCp = str.codePointAt(decEnd);
+                            if (!isDecimalDigit(decCp)) {
+                                break;
+                            }
+                            decEnd += Character.charCount(decCp);
+                        }
+                        String s_entity = str.substring(decStart, decEnd);
                         try {
                             int n_entity = Integer.parseInt(s_entity, 10);
-                            if (n_entity > 0 && n_entity <= 65535) {
-                                res.append((char) n_entity);
-                                if (n < strlen && str.charAt(n) == ';')
-                                    i = n;
-                                else
-                                    i = n - 1;
+                            if (n_entity > 0 && n_entity <= 0x10FFFF) {
+                                res.appendCodePoint(n_entity);
+                                if (decEnd < strlen && str.codePointAt(decEnd) == ';') {
+                                    i = decEnd;
+                                } else {
+                                    i = str.offsetByCodePoints(decEnd, -1);
+                                }
                             } else {
                                 // too big number
                                 // dangling '&'
-                                res.append(ch);
+                                res.appendCodePoint(cp);
                             }
                         } catch (NumberFormatException nfe) {
                             // do nothing
                             // dangling '&'
-                            res.append(ch);
+                            res.appendCodePoint(cp);
                         }
                     }
-                } else if (isLatinLetter(ch1)) {
+                } else if (isLatinLetter(cp1)) {
                     // named entity?
-                    int n = i + 1;
-                    while (n < strlen && (isLatinLetter(str.charAt(n)) || // Some
-                                                                          // entities
-                            isDecimalDigit(str.charAt(n))) // contain numbers
-                    )
-                        // e.g., frac12
-                        n++;
-                    String s_entity = str.substring(i + 1, n);
+                    int entStart = str.offsetByCodePoints(i, 1);
+                    int entEnd = entStart;
+                    while (entEnd < strlen) {
+                        int entCp = str.codePointAt(entEnd);
+                        // Some entities contain numbers, e.g. frac12
+                        if (!isLatinLetter(entCp) && !isDecimalDigit(entCp)) {
+                            break;
+                        }
+                        entEnd += Character.charCount(entCp);
+                    }
+                    String s_entity = str.substring(entStart, entEnd);
                     int n_entity = lookupEntity(s_entity);
                     if (n_entity > 0 && n_entity <= 65535) {
                         res.append((char) n_entity);
-                        if (n < strlen && str.charAt(n) == ';')
-                            i = n;
-                        else
-                            i = n - 1;
+                        if (entEnd < strlen && str.codePointAt(entEnd) == ';') {
+                            i = entEnd;
+                        } else {
+                            i = str.offsetByCodePoints(entEnd, -1);
+                        }
                     } else {
                         // too big number
                         // dangling '&'
-                        res.append(ch);
+                        res.appendCodePoint(cp);
                     }
                 } else {
                     // dangling '&'
-                    res.append(ch);
+                    res.appendCodePoint(cp);
                 }
                 break;
             default:
-                res.append(ch);
+                res.appendCodePoint(cp);
             }
         }
         return res.toString();
     }
 
     /** Returns true if a char is a latin letter */
-    private boolean isLatinLetter(char ch) {
+    private boolean isLatinLetter(int ch) {
         return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
     }
 
     /** Returns true if a char is a decimal digit */
-    private boolean isDecimalDigit(char ch) {
+    private boolean isDecimalDigit(int ch) {
         return (ch >= '0' && ch <= '9');
     }
 
     /** Returns true if a char is a hex digit */
-    private boolean isHexDigit(char ch) {
+    private boolean isHexDigit(int ch) {
         return (ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'f') || (ch >= 'A' && ch <= 'F');
     }
 
@@ -1098,10 +1123,10 @@ public class FilterVisitor extends NodeVisitor {
      */
     protected String charsToEntities(String str) {
         int strlen = str.length();
-        StringBuffer res = new StringBuffer(strlen * 5);
-        for (int i = 0; i < strlen; i++) {
-            char ch = str.charAt(i);
-            switch (ch) {
+        StringBuilder res = new StringBuilder(strlen * 5);
+        for (int cp, i = 0; i < strlen; i += Character.charCount(cp)) {
+            cp = str.codePointAt(i);
+            switch (cp) {
             case '\u00A0':
                 res.append("&nbsp;");
                 break;
@@ -1110,7 +1135,7 @@ public class FilterVisitor extends NodeVisitor {
                 break;
             case '>':
                 // If it's the end of a processing instruction
-                if ((i > 0) && str.substring(i-1, i).contentEquals("?")) {
+                if ((i > 0) && str.codePointBefore(i) == '?') {
                    res.append(">"); 
                 } else {
                     res.append("&gt;");
@@ -1119,13 +1144,13 @@ public class FilterVisitor extends NodeVisitor {
             case '<':
                 int qMarkPos = str.indexOf('?', i);
                 // If it's the beginning of a processing instruction
-                if (qMarkPos == i+1) {
+                if (qMarkPos == str.offsetByCodePoints(i, 1)) {
                     res.append("<");
                     break;
                 }
                 int gtpos = str.indexOf('>', i);
                 if (gtpos >= 0) {
-                    String maybeShortcut = str.substring(i, gtpos + 1);
+                    String maybeShortcut = str.substring(i, str.offsetByCodePoints(gtpos, 1));
                     boolean foundShortcut = false; // here because it's
                                                    // impossible to step out of
                                                    // two loops at once
@@ -1151,7 +1176,7 @@ public class FilterVisitor extends NodeVisitor {
                 }
                 break;
             default:
-                res.append(ch);
+                res.appendCodePoint(cp);
             }
         }
         String contents = res.toString();
@@ -1168,25 +1193,20 @@ public class FilterVisitor extends NodeVisitor {
         if (encoding != null) {
             CharsetEncoder charsetEncoder = Charset.forName(encoding).newEncoder();
             int i = 0;
-            boolean notfinished = true;
-            while (notfinished) {
-                for (; i < contents.length(); i++) {
-                    char x = contents.charAt(i);
-                    if (!charsetEncoder.canEncode(x)) {
-                        String regexp;
-                        if (x == '[' || x == '\\' || x == '^' || x == '$' || x == '.' || x == '|' || x == '?'
-                                || x == '*' || x == '+' || x == '(' || x == ')') {
-                            // escape special regexp characters
-                            regexp = "\\" + x;
-                        } else
-                            regexp = "" + x;
-                        String replacement = "&#" + (int) x + ';';
-                        contents = contents.replaceAll(regexp, replacement);
+            while (true) {
+                String substring;
+                for (int cp; i < contents.length(); i += substring.length()) {
+                    cp = contents.codePointAt(i);
+                    substring = contents.substring(i, i + Character.charCount(cp));
+                    if (!charsetEncoder.canEncode(substring)) {
+                        String replacement = "&#" + cp + ';';
+                        contents = contents.replaceAll(Pattern.quote(substring), replacement);
                         break;
                     }
                 }
-                if (i == contents.length())
-                    notfinished = false;
+                if (i == contents.length()) {
+                    break;
+                }
             }
         }
         return contents;

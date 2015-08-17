@@ -600,7 +600,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     /**
      * {@inheritDoc}
      */
-    public void showErrorDialogRB(String message, Object[] args, String title) {
+    public void showErrorDialogRB(String title, String message, Object... args) {
 
         JOptionPane.showMessageDialog(this.getApplicationFrame(),
                 StaticUtils.format(OStrings.getString(message), args), OStrings.getString(title),

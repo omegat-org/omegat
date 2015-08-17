@@ -173,8 +173,8 @@ public class ProjectUICommands {
                         }
                     }.execute(repository);
                 } catch (IRemoteRepository.BadRepositoryException bre) {
-                    Object[] args = { bre.getMessage() };
-                    Core.getMainWindow().showErrorDialogRB("TEAM_BADREPOSITORY_ERROR", args, "TF_ERROR");
+                    Core.getMainWindow().showErrorDialogRB("TF_ERROR", "TEAM_BADREPOSITORY_ERROR",
+                            bre.getMessage());
                     mainWindow.setCursor(oldCursor);
                     return null;
                 } catch (Exception ex) {
@@ -310,8 +310,7 @@ public class ProjectUICommands {
                         File GlossaryFile = new File(props.getWriteableGlossary());
                         if (repository.isChanged(tmxFile) || repository.isChanged(GlossaryFile)) {
                             Log.logWarningRB("TEAM_NOCHECKOUT");
-                            Core.getMainWindow().showErrorDialogRB("TEAM_NOCHECKOUT", null,
-                                    "TEAM_NOCHECKOUT_TITLE");
+                            Core.getMainWindow().showErrorDialogRB("TEAM_NOCHECKOUT_TITLE", "TEAM_NOCHECKOUT");
                         } else {
                             new RepositoryUtils.AskCredentials() {
                                 public void callRepository() throws Exception {

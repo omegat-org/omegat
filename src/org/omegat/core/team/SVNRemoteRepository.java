@@ -255,8 +255,8 @@ public class SVNRemoteRepository implements IRemoteRepository {
                 checkNetworkException(ex);
             }
             if (SHOW_UNKNOWN_ERRORS) {
-                Core.getMainWindow().showErrorDialogRB("SVN_UPLOAD_ERROR", new Object[] { ex.getMessage() },
-                        "SVN_UPLOAD_ERROR_TITLE");
+                Core.getMainWindow().showErrorDialogRB("SVN_UPLOAD_ERROR_TITLE", "SVN_UPLOAD_ERROR",
+                        ex.getMessage());
             }
             throw ex;
         } catch (Exception ex) {

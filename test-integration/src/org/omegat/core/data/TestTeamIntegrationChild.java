@@ -425,7 +425,7 @@ public class TestTeamIntegrationChild {
         public void showLengthMessage(String messageText) {
         }
 
-        public void showErrorDialogRB(String message, Object[] args, String title) {
+        public void showErrorDialogRB(String title, String message, Object... args) {
             System.err.println(message);
         }
 

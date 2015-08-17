@@ -95,7 +95,7 @@ public class ConsoleWindow implements IMainWindow {
     /**
      * {@inheritDoc}
      */
-    public void showErrorDialogRB(String message, Object[] args, String title) {
+    public void showErrorDialogRB(String title, String message, Object... args) {
         System.err.println(StaticUtils.format(OStrings.getString(message), args));
     }
 

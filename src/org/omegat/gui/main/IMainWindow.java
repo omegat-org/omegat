@@ -133,7 +133,7 @@ public interface IMainWindow {
      *            title of dialog. message key in resource bundle of title that
      *            is to be displayed
      */
-    void showErrorDialogRB(String message, Object[] args, String title);
+    void showErrorDialogRB(String title, String message, Object... args);
 
     /**
      * shows a confirm dialog. For a GUI main window, this can be implemented as JOptionPane.showConfirmDialog

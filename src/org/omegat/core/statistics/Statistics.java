@@ -62,9 +62,9 @@ public class Statistics {
      */
     public static int numberOfCharactersWithoutSpaces(String str) {
         int chars = 0;
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            if (c != StaticUtils.TAG_REPLACEMENT_CHAR && !Character.isSpaceChar(c)) {
+        for (int cp, i = 0; i < str.length(); i += Character.charCount(cp)) {
+            cp = str.codePointAt(i);
+            if (cp != StaticUtils.TAG_REPLACEMENT_CHAR && !Character.isSpaceChar(cp)) {
                 chars++;
             }
         }
@@ -77,9 +77,9 @@ public class Statistics {
      */
     public static int numberOfCharactersWithSpaces(String str) {
         int chars = 0;
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            if (c != StaticUtils.TAG_REPLACEMENT_CHAR) {
+        for (int cp, i = 0; i < str.length(); i += Character.charCount(cp)) {
+            cp = str.codePointAt(i);
+            if (cp != StaticUtils.TAG_REPLACEMENT_CHAR) {
                 chars++;
             }
         }
@@ -101,9 +101,9 @@ public class Statistics {
         for (int end = breaker.next(); end != BreakIterator.DONE; start = end, end = breaker.next()) {
             tokenStr = str.substring(start, end);
             boolean word = false;
-            for (int i = 0; i < tokenStr.length(); i++) {
-                char ch = tokenStr.charAt(i);
-                if (Character.isLetterOrDigit(ch)) {
+            for (int cp, i = 0; i < tokenStr.length(); i += Character.charCount(cp)) {
+                cp = tokenStr.codePointAt(i);
+                if (Character.isLetterOrDigit(cp)) {
                     word = true;
                     break;
                 }

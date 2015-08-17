@@ -59,7 +59,8 @@ public class ResourceBundleFilterTest extends TestFilterBase {
 
     public void testLoad() throws Exception {
         String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter.properties";
-        IProject.FileInfo fi = loadSourceFiles(new ResourceBundleFilter(), f);
+        ResourceBundleFilter filter = new ResourceBundleFilter();
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
 
         checkMultiStart(fi, f);
         checkMulti("Value", "ID", null, null, null, null);
@@ -67,6 +68,14 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         checkMulti("Value3", "ID3", null, null, null, "# some comment");
         checkMulti("Value4", "ID4", null, null, null, "# multiple line\n# comment");
         checkMulti("Value5", "ID5", null, null, null, "! alternate comment style");
+        checkMultiEnd();
+        
+        f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-SMP.properties";
+        fi = loadSourceFiles(filter, f);
+
+        checkMultiStart(fi, f);
+        checkMulti("\uD835\uDC00\uD835\uDC01\uD835\uDC02", "ID", null, null, null, null);
+        checkMulti("\uD835\uDC03\uD835\uDC04\uD835\uDC05", "ID2", null, null, null, null);
         checkMultiEnd();
     }
 }

@@ -26,15 +26,11 @@
 package org.omegat.filters;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.TreeMap;
 
 import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
-import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.statistics.StatCount;
 import org.omegat.core.statistics.StatisticsSettings;
@@ -66,6 +62,7 @@ public class XLIFFFilterTest extends TestFilterBase {
     @Test
     public void testTranslate() throws Exception {
         translateXML(filter, "test/data/filters/xliff/file-XLIFFFilter.xlf");
+        translateXML(filter, "test/data/filters/xliff/file-XLIFFFilter-SMP.xlf");
     }
 
     @Test

@@ -47,17 +47,28 @@ public class HTMLFilter2Test extends TestFilterBase {
 
     @Test
     public void testTranslate() throws Exception {
-        translateText(new HTMLFilter2(), "test/data/filters/html/file-HTMLFilter2.html");
+        HTMLFilter2 filter = new HTMLFilter2();
+        translateText(filter, "test/data/filters/html/file-HTMLFilter2.html");
+        translateText(filter, "test/data/filters/html/file-HTMLFilter2-SMP.html");
     }
 
     @Test
     public void testLoad() throws Exception {
         String f = "test/data/filters/html/file-HTMLFilter2.html";
-        IProject.FileInfo fi = loadSourceFiles(new HTMLFilter2(), f);
+        HTMLFilter2 filter = new HTMLFilter2();
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
 
         checkMultiStart(fi, f);
         checkMulti("This is first line.", null, null, "", "This is second line.", null);
         checkMulti("This is second line.", null, null, "This is first line.", "", null);
+        checkMultiEnd();
+        
+        f = "test/data/filters/html/file-HTMLFilter2-SMP.html";
+        fi = loadSourceFiles(filter, f);
+
+        checkMultiStart(fi, f);
+        checkMulti("\uD835\uDC00\uD835\uDC01\uD835\uDC02", null, null, "", "\uD835\uDC03\uD835\uDC04\uD835\uDC05", null);
+        checkMulti("\uD835\uDC03\uD835\uDC04\uD835\uDC05", null, null, "\uD835\uDC00\uD835\uDC01\uD835\uDC02", "", null);
         checkMultiEnd();
     }
 

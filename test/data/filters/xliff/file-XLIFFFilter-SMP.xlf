@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.1">
+    <file target-language="be" source-language="en" original="text.txt">
+        <body>
+            <trans-unit>
+                <source>source</source>
+                <target>𝐅𝐈𝐑𝐒𝐓<mrk mtype="protected">𝐌𝐀𝐑𝐊</mrk> <mrk mtype="protected">𝐌𝐀𝐑𝐊2</mrk>𝐂𝐔𝐒𝐓𝐎𝐌</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -25,6 +25,8 @@
 
 package org.omegat.filters;
 
+import java.io.File;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -82,5 +84,18 @@ public class TextFilterTest extends TestFilterBase {
         checkMulti("line2", null, null, "line1", "line3", null);
         checkMulti("line3", null, null, "line2", "", null);
         checkMultiEnd();
+    }
+    
+    @Test
+    public void testLineLengthLimit() throws Exception {
+        Map<String, String> options = new TreeMap<String, String>();
+        options.put(TextFilter.OPTION_SEGMENT_ON, TextFilter.SEGMENT_EMPTYLINES);
+        options.put(TextFilter.OPTION_LINE_LENGTH, "8");
+        options.put(TextFilter.OPTION_MAX_LINE_LENGTH, "10");
+
+        TextFilter filter = new TextFilter();
+        
+        translate(filter, "test/data/filters/text/file-TextFilter-SMP.txt", options);
+        compareBinary(new File("test/data/filters/text/file-TextFilter-SMP-gold.txt"), outFile);
     }
 }

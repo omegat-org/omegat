@@ -80,6 +80,21 @@ public class TMXReaderTest extends TestCore {
                 });
     }
     
+    public void testSMP() throws Exception {
+        final Map<String, String> tr = new TreeMap<String, String>();
+        new TMXReader2().readTMX(new File("test/data/tmx/test-SMP.tmx"), new Language("en"),
+                new Language("be"), false, false, true, false, new TMXReader2.LoadCallback() {
+                    public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
+                            TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+                        tr.put(tuvSource.text, tuvTarget.text);
+                        return true;
+                    }
+                });
+        assertFalse(tr.isEmpty());
+        // Assert contents are {"ABC": "DEF"} where letters are MATHEMATICAL BOLD CAPITALs (U+1D400-)
+        assertEquals("\uD835\uDC03\uD835\uDC04\uD835\uDC05", tr.get("\uD835\uDC00\uD835\uDC01\uD835\uDC02"));
+    }
+    
     public void testGetTuvByLang() {
         TMXReader2.ParsedTuv tuvBE = new TMXReader2.ParsedTuv();
         tuvBE.lang = "be";

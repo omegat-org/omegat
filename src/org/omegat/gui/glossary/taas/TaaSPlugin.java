@@ -27,7 +27,6 @@ package org.omegat.gui.glossary.taas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringReader;
@@ -157,7 +156,6 @@ public class TaaSPlugin {
     }
 
     static void filterTaasResult(InputStream in, OutputStream out) throws Exception {
-        ByteArrayOutputStream o = new ByteArrayOutputStream();
         Source src = new StreamSource(in);
         filterTransformer.transform(src, new StreamResult(out));
     }

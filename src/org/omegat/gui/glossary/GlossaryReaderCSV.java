@@ -91,22 +91,21 @@ public class GlossaryReaderCSV {
         List<String> result = new ArrayList<String>();
         StringBuilder w = new StringBuilder();
         boolean fopened = false; // field opened by "
-        for (int i = 0; i < line.length(); i++) {
-            char c = line.charAt(i);
-            char cn;
+        for (int cp, cpn, i = 0; i < line.length(); i += Character.charCount(cp)) {
+            cp = line.codePointAt(i);
             try {
-                cn = line.charAt(i + 1);
+                cpn = line.codePointAt(i + Character.charCount(cp));
             } catch (StringIndexOutOfBoundsException ex) {
-                cn = 0;
+                cpn = 0;
             }
-            switch (c) {
+            switch (cp) {
             case '"':
                 if (w.length() == 0 && !fopened) {
                     // first " in field
                     fopened = true;
-                } else if (cn == '"') {
+                } else if (cpn == '"') {
                     // double " - add one
-                    w.append(c);
+                    w.appendCodePoint(cp);
                     i++;
                 } else {
                     // last " in field
@@ -115,14 +114,14 @@ public class GlossaryReaderCSV {
                 break;
             case SEPARATOR:
                 if (fopened) {
-                    w.append(c);
+                    w.appendCodePoint(cp);
                 } else {
                     result.add(w.toString());
                     w.setLength(0);
                 }
                 break;
             default:
-                w.append(c);
+                w.appendCodePoint(cp);
                 break;
             }
         }

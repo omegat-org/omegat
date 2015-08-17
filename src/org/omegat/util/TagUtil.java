@@ -295,11 +295,18 @@ public class TagUtil {
             // This ensures that we don't find identical tags multiple times unless they are
             // actually present multiple times.
             StringBuilder sb = new StringBuilder(str);
-            for (ProtectedPart pp : protectedParts) {
-                int pos = -1;
-                if ((pos = sb.indexOf(pp.getTextInSourceSegment())) != -1) {
-                    tags.add(new Tag(pos, pp.getTextInSourceSegment()));
-                    replaceWith(sb, pos, pos + pp.getTextInSourceSegment().length(), TEXT_REPLACEMENT);
+            while (true) {
+                boolean loopAgain = false;
+                for (ProtectedPart pp : protectedParts) {
+                    int pos = -1;
+                    if ((pos = sb.indexOf(pp.getTextInSourceSegment())) != -1) {
+                        tags.add(new Tag(pos, pp.getTextInSourceSegment()));
+                        replaceWith(sb, pos, pos + pp.getTextInSourceSegment().length(), TEXT_REPLACEMENT);
+                        loopAgain = true;
+                    }
+                }
+                if (!loopAgain) {
+                    break;
                 }
             }
         }

@@ -75,17 +75,10 @@ public class TMXDateParser {
      * @exception ParseException
      *                if the date is null or not valid
      */
-    public static Date parse(String tmxDate) throws ParseException {
-        if (tmxDate == null || tmxDate.length() != 16) { // parse function does
-                                                         // not check this
-                                                         // itself
-            int offset = 0;
-            if (tmxDate != null) {
-                if (tmxDate.length() < 16)
-                    offset = tmxDate.length();
-                else
-                    offset = 16;
-            }
+    public Date parse(String tmxDate) throws ParseException {
+        if (tmxDate == null || tmxDate.length() != 16) {
+            // Parse function does not check this itself.
+            int offset = tmxDate == null ? 0 : Math.min(tmxDate.length(), 16);
             throw new ParseException("date '" + tmxDate + "' is null or not equal to YYYYMMDDThhmmssZ",
                     offset);
         }

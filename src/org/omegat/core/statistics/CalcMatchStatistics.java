@@ -166,6 +166,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         String fn = Core.getProject().getProjectProperties().getProjectInternal()
                 + OConsts.STATS_MATCH_PER_FILE_FILENAME;
         Statistics.writeStat(fn, textForLog.toString());
+        callback.setDataFile(fn);
     }
 
     MatchStatCounts calcTotal(boolean outData) {
@@ -210,6 +211,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             String fn = Core.getProject().getProjectProperties().getProjectInternal()
                     + OConsts.STATS_MATCH_FILENAME;
             Statistics.writeStat(fn, outText);
+            callback.setDataFile(fn);
         }
 
         return result;

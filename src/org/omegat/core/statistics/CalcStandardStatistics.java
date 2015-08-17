@@ -121,6 +121,7 @@ public class CalcStandardStatistics extends LongProcessThread {
         // now dump file based word counts to disk
         String fn = internalDir + OConsts.STATS_FILENAME;
         Statistics.writeStat(fn, result);
+        callback.setDataFile(fn);
     }
 
     /** Convenience method */

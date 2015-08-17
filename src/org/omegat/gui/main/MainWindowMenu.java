@@ -35,7 +35,6 @@
 
 package org.omegat.gui.main;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -46,7 +45,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.ButtonGroup;
-import javax.swing.Icon;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -105,60 +103,9 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     /** MainWindow menu handler instance. */
     protected final MainWindowMenuHandler mainWindowMenuHandler;
 
-    /**
-     * Size of icons (both height and width) of menu entries.
-     */
-    private static final int ICON_SIZE=12;
-
     public MainWindowMenu(final MainWindow mainWindow, final MainWindowMenuHandler mainWindowMenuHandler) {
         this.mainWindow = mainWindow;
         this.mainWindowMenuHandler = mainWindowMenuHandler;
-    }
-    /**
-     * Creates an icon to show color of background marking
-     * @param color background color
-     * @return
-     */
-    private Icon getViewMenuMarkBGIcon(final Color color) {
-        Icon i = new Icon() {
-            public void paintIcon(java.awt.Component cmpnt, java.awt.Graphics grphcs, int x, int y) {
-                if (color!=null) {
-                    grphcs.setColor(color);
-                    grphcs.fillRect(x,y,ICON_SIZE,ICON_SIZE);
-                }
-            }
-            public int getIconWidth() {
-                return ICON_SIZE;
-            }
-            public int getIconHeight() {
-                return ICON_SIZE;
-            }
-        };
-        return i;
-    }
-
-    /**
-     * Creates icon to show font marking
-     * @param color color of font
-     * @return 
-     */
-    private Icon getViewMenuMarkTextIcon(final Color color) {
-        Icon i = new Icon() {
-            public void paintIcon(java.awt.Component cmpnt, java.awt.Graphics grphcs, int x, int y) {
-                if (color!=null && grphcs != null) { //Mac fix: test on grphcs != null needed. Weird...
-                    grphcs.setColor(color);
-                    char[] data = {'M'};
-                    grphcs.drawChars(data, 0, 1, x, y+ICON_SIZE);
-                }
-            }
-            public int getIconWidth() {
-                return ICON_SIZE;
-            }
-            public int getIconHeight() {
-                return ICON_SIZE;
-            }
-        };
-        return i;
     }
 
     /**
@@ -393,17 +340,16 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         viewModificationInfoMenu.add(viewDisplayModificationInfoAllRadioButtonMenuItem = createRadioButtonMenuItem(
                         "MW_VIEW_MENU_MODIFICATION_INFO_ALL", viewModificationInfoMenuBG));
         
-        viewMarkTranslatedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.EditorColor.COLOR_TRANSLATED.getColor()));
-        viewMarkUntranslatedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.EditorColor.COLOR_UNTRANSLATED.getColor()));
-        viewDisplaySegmentSourceCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.EditorColor.COLOR_SOURCE.getColor()));
-        viewMarkNonUniqueSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkTextIcon(Styles.EditorColor.COLOR_NON_UNIQUE.getColor()));
-        viewMarkNotedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.EditorColor.COLOR_NOTED.getColor()));
-        viewMarkNBSPCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.EditorColor.COLOR_NBSP.getColor()));
-        viewMarkWhitespaceCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.EditorColor.COLOR_WHITESPACE.getColor()));
-        viewMarkBidiCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.EditorColor.COLOR_BIDIMARKERS.getColor()));
-        viewModificationInfoMenu.setIcon(getViewMenuMarkBGIcon(null));
-        viewMarkAutoPopulatedCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor()));
-
+        viewMarkTranslatedSegmentsCheckBoxMenuItem.setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_TRANSLATED.getColor()));
+        viewMarkUntranslatedSegmentsCheckBoxMenuItem.setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_UNTRANSLATED.getColor()));
+        viewDisplaySegmentSourceCheckBoxMenuItem.setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_SOURCE.getColor()));
+        viewMarkNonUniqueSegmentsCheckBoxMenuItem.setIcon(MainMenuIcons.newTextIcon(Styles.EditorColor.COLOR_NON_UNIQUE.getColor(), 'M'));
+        viewMarkNotedSegmentsCheckBoxMenuItem.setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_NOTED.getColor()));
+        viewMarkNBSPCheckBoxMenuItem.setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_NBSP.getColor()));
+        viewMarkWhitespaceCheckBoxMenuItem.setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_WHITESPACE.getColor()));
+        viewMarkBidiCheckBoxMenuItem.setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_BIDIMARKERS.getColor()));
+        viewModificationInfoMenu.setIcon(MainMenuIcons.newBlankIcon());
+        viewMarkAutoPopulatedCheckBoxMenuItem.setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor()));
         toolsMenu.add(toolsValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_VALIDATE"));
         toolsMenu.add(toolsSingleValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_SINGLE_VALIDATE"));
         toolsMenu.add(toolsShowStatisticsStandardMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_STANDARD"));

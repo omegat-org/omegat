@@ -56,14 +56,14 @@ public class LineLengthLimitWriter extends Writer {
 
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
-        for (int i = 0; i < len; i++) {
-            char ch = cbuf[off + i];
-            if (breakChars > 0 && ch == str.charAt(str.length() - 1)) {
+        for (int cp, i = 0; i < len; i += Character.charCount(cp)) {
+            cp = Character.codePointAt(cbuf, off + i);
+            if (breakChars > 0 && cp == str.codePointBefore(str.length())) {
                 // the same eol char - flush
                 outLine();
             }
-            if (ch == '\n' || ch == '\r') {
-                str.append(ch);
+            if (cp == '\n' || cp == '\r') {
+                str.appendCodePoint(cp);
                 breakChars++;
                 if (breakChars > 1) {
                     // 2 eol chars - flush
@@ -74,7 +74,7 @@ public class LineLengthLimitWriter extends Writer {
                     // was eol char - flush
                     outLine();
                 }
-                str.append(ch);
+                str.appendCodePoint(cp);
             }
         }
     }
@@ -83,17 +83,17 @@ public class LineLengthLimitWriter extends Writer {
         if (str.length() == 0) {
             return;
         }
-        char ch = str.charAt(str.length() - 1);
-        if (ch == '\n' || ch == '\r') {
+        int cp = str.codePointBefore(str.length());
+        if (cp == '\n' || cp == '\r') {
             // get latest eol char
-            eol2 = ch;
+            eol2 = (char) cp;
             str.setLength(str.length() - 1);
         }
         if (str.length() > 0) {
             // get pre-latest eol char
-            ch = str.charAt(str.length() - 1);
-            if (ch == '\n' || ch == '\r') {
-                eol1 = ch;
+            cp = str.codePointBefore(str.length());
+            if (cp == '\n' || cp == '\r') {
+                eol1 = (char) cp;
                 str.setLength(str.length() - 1);
             }
         }
@@ -113,7 +113,7 @@ public class LineLengthLimitWriter extends Writer {
     }
 
     int getBreakPos(Token[] tokens) {
-        if (str.length() <= maxLineLength) {
+        if (str.codePointCount(0, str.length()) <= maxLineLength) {
             // line no longer than max length - use full line
             return str.length();
         }
@@ -132,7 +132,7 @@ public class LineLengthLimitWriter extends Writer {
             latestNonSpacesTokenPos = t.getOffset() + t.getLength();
             break;
         }
-        if (latestNonSpacesTokenPos <= maxLineLength) {
+        if (str.codePointCount(0, latestNonSpacesTokenPos) <= maxLineLength) {
             return str.length();
         }
         // try to break on the space ends
@@ -143,9 +143,9 @@ public class LineLengthLimitWriter extends Writer {
                 // less than begin
                 continue;
             }
-            if (t.getOffset() >= lineLength) {
+            if (str.codePointCount(0, t.getOffset()) >= lineLength) {
                 // spaces can be after max length
-                if (spacesStart >= 0 && spacesStart < maxLineLength) {
+                if (spacesStart >= 0 && str.codePointCount(0, spacesStart) < maxLineLength) {
                     return t.getOffset();
                 }
             }
@@ -164,12 +164,14 @@ public class LineLengthLimitWriter extends Writer {
                 // less than begin
                 continue;
             }
-            if (t.getOffset() >= lineLength && t.getOffset() < maxLineLength) {
+            int cps = str.codePointCount(0, t.getOffset());
+            if (cps >= lineLength && cps < maxLineLength) {
                 if (isSpaces(t)) {
                     return t.getOffset();
                 }
             }
-            if (t.getOffset() + t.getLength() >= lineLength && t.getOffset() + t.getLength() < maxLineLength) {
+            cps = str.codePointCount(0, t.getOffset() + t.getLength());
+            if (cps >= lineLength && cps < maxLineLength) {
                 if (isSpaces(t)) {
                     return t.getOffset() + t.getLength();
                 }
@@ -182,12 +184,14 @@ public class LineLengthLimitWriter extends Writer {
                 // less than begin
                 continue;
             }
-            if (t.getOffset() >= lineLength && t.getOffset() < maxLineLength) {
+            int cps = str.codePointCount(0, t.getOffset());
+            if (cps >= lineLength && cps < maxLineLength) {
                 if (isPossibleBreakBefore(t.getOffset())) {
                     return t.getOffset();
                 }
             }
-            if (t.getOffset() + t.getLength() >= lineLength && t.getOffset() + t.getLength() < maxLineLength) {
+            cps = str.codePointCount(0, t.getOffset() + t.getLength());
+            if (cps >= lineLength && cps < maxLineLength) {
                 if (isPossibleBreakBefore(t.getOffset() + t.getLength())) {
                     return t.getOffset() + t.getLength();
                 }
@@ -200,7 +204,7 @@ public class LineLengthLimitWriter extends Writer {
                 // less than begin
                 continue;
             }
-            if (t.getOffset() >= lineLength) {
+            if (str.codePointCount(0, t.getOffset()) >= lineLength) {
                 if (i == 0) {
                     return t.getOffset() + t.getLength();
                 }
@@ -221,8 +225,9 @@ public class LineLengthLimitWriter extends Writer {
     }
 
     boolean isSpaces(Token token) {
-        for (int i = 0; i < token.getLength(); i++) {
-            if (!Character.isWhitespace(str.charAt(token.getOffset() + i))) {
+        for (int cp, i = 0; i < token.getLength(); i += Character.charCount(cp)) {
+            cp = str.codePointAt(token.getOffset() + i);
+            if (!Character.isWhitespace(cp)) {
                 return false;
             }
         }
@@ -282,16 +287,16 @@ public class LineLengthLimitWriter extends Writer {
     boolean isPossibleBreakBefore(int pos) {
         try {
             // check previous char. Can't split after specified chars.
-            char c = str.charAt(pos - 1);
-            if ("([{<«„".indexOf(c) >= 0) {
+            int cp = str.codePointBefore(pos);
+            if ("([{<«„".indexOf(cp) >= 0) {
                 return false;
             }
         } catch (StringIndexOutOfBoundsException ex) {
         }
         try {
             // check next char. Can't split before specified chars.
-            char c = str.charAt(pos);
-            if (")]}>»“,.".indexOf(c) >= 0) {
+            int cp = str.codePointAt(pos);
+            if (")]}>»“,.".indexOf(cp) >= 0) {
                 return false;
             }
         } catch (StringIndexOutOfBoundsException ex) {

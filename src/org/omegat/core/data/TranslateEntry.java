@@ -110,7 +110,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
 
         if (m_config.isSentenceSegmentingEnabled()) {
             boolean translated = false;
-            List<StringBuffer> spaces = new ArrayList<StringBuffer>();
+            List<StringBuilder> spaces = new ArrayList<StringBuilder>();
             List<Rule> brules = new ArrayList<Rule>();
             Language sourceLang = m_config.getSourceLanguage();
             Language targetLang = m_config.getTargetLanguage();

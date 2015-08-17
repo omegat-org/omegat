@@ -161,7 +161,7 @@ public abstract class ParseEntry implements IParseCallback {
         }
 
         if (m_config.isSentenceSegmentingEnabled()) {
-            List<StringBuffer> spaces = new ArrayList<StringBuffer>();
+            List<StringBuilder> spaces = new ArrayList<StringBuilder>();
             List<Rule> brules = new ArrayList<Rule>();
             Language sourceLang = m_config.getSourceLanguage();
             List<String> segments = Segmenter.segment(sourceLang, source, spaces, brules);

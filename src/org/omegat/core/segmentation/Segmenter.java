@@ -46,7 +46,7 @@ import org.omegat.util.PatternConsts;
  */
 public final class Segmenter {
     
-    public static SRX srx;
+    public static volatile SRX srx;
     /** private to disallow creation */
     private Segmenter() {
     }

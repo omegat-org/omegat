@@ -75,9 +75,14 @@ public class INIFilter extends AbstractFilter {
      * Trims the string from left.
      */
     private String leftTrim(String s) {
-        int i;
-        for (i = 0; i < s.length() && (s.charAt(i) == ' ' || s.charAt(i) == '\t'); i++)
-            ;
+        int i = 0;
+        while (i < s.length()) {
+            int cp = s.codePointAt(i);
+            if (cp != ' ' && cp != '\t') {
+                break;
+            }
+            i += Character.charCount(cp);
+        }
         return s.substring(i, s.length());
     }
 
@@ -94,33 +99,43 @@ public class INIFilter extends AbstractFilter {
             String trimmed = str.trim();
 
             // skipping empty strings and comments
-            if (trimmed.length() == 0 || trimmed.charAt(0) == '#' || trimmed.charAt(0) == ';') {
+            if (trimmed.length() == 0 || trimmed.codePointAt(0) == '#' || trimmed.codePointAt(0) == ';') {
                 // outfile.write(str+"\n");
-                outfile.write(str + lbpr.getLinebreak()); // fix for bug 1462566
+                outfile.write(str);
+                outfile.write(lbpr.getLinebreak()); // fix for bug 1462566
                 continue;
             }
 
             if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
                 // group name
-                group = trimmed.substring(1, trimmed.length() - 1);
+                group = trimmed.substring(trimmed.offsetByCodePoints(0, 1),
+                        trimmed.offsetByCodePoints(trimmed.length(), -1));
             }
 
             // key=value pairs
             int equalsPos = str.indexOf('=');
 
             // if there's no separator, assume it's a key w/o a value
-            if (equalsPos == -1)
-                equalsPos = str.length() - 1;
+            if (equalsPos == -1) {
+                equalsPos = str.offsetByCodePoints(str.length(), -1);
+            }
 
             // advance if there're spaces after =
-            while ((equalsPos + 1) < str.length() && str.charAt(equalsPos + 1) == ' ')
-                equalsPos++;
+            while (str.codePointCount(equalsPos, str.length()) > 1) {
+                int nextOffset = str.offsetByCodePoints(equalsPos, 1);
+                if (str.codePointAt(nextOffset) != ' ') {
+                    break;
+                }
+                equalsPos = nextOffset;
+            }
+            
+            int afterEqualsPos = str.offsetByCodePoints(equalsPos, 1);
 
             // writing out everything before = (and = itself)
-            outfile.write(str.substring(0, equalsPos + 1));
+            outfile.write(str.substring(0, afterEqualsPos));
 
             String key = (group != null ? group + '/' : "") + str.substring(0, equalsPos).trim();
-            String value = str.substring(equalsPos + 1);
+            String value = str.substring(afterEqualsPos);
 
             value = leftTrim(value);
 

@@ -48,7 +48,6 @@ import javax.swing.text.JTextComponent;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
-import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.search.SearchMode;
@@ -92,6 +91,8 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.TagUtil;
+import org.omegat.util.TagUtil.Tag;
 
 /**
  * Handler for main menu items.
@@ -723,33 +724,19 @@ public class MainWindowMenuHandler {
      * Identify all the placeholders in the source text and automatically inserts them into the target text.
      */
     public void editTagPainterMenuItemActionPerformed() {
-        SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-
         // insert tags
-        String tr = Core.getEditor().getCurrentTranslation();
-        for (ProtectedPart pp : ste.getProtectedParts()) {
-            if (!tr.contains(pp.getTextInSourceSegment())) {
-                Core.getEditor().insertText(pp.getTextInSourceSegment());
-            }
+        for (Tag tag : TagUtil.getAllTagsMissingFromTarget()) {
+            Core.getEditor().insertText(tag.tag);
         }
     }
 
     public void editTagNextMissedMenuItemActionPerformed() {
-        String trans = Core.getEditor().getCurrentTranslation();
-        if (trans == null) {
+        // insert next tag
+        List<Tag> tags = TagUtil.getAllTagsMissingFromTarget();
+        if (tags.isEmpty()) {
             return;
         }
-
-        SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-
-        // insert next tag
-        String tr = Core.getEditor().getCurrentTranslation();
-        for (ProtectedPart pp : ste.getProtectedParts()) {
-            if (!tr.contains(pp.getTextInSourceSegment())) {
-                Core.getEditor().insertText(pp.getTextInSourceSegment());
-                break;
-            }
-        }
+        Core.getEditor().insertText(tags.get(0).tag);
     }
 
     public void toolsShowStatisticsStandardMenuItemActionPerformed() {

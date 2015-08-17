@@ -266,10 +266,13 @@ public class TagValidation {
     
     private static List<Tag> getCommonTags(List<Tag> orig, List<Tag> compare) {
         List<Tag> result = new ArrayList<Tag>();
+        List<Tag> uninspected = new ArrayList<Tag>(compare);
         for (Tag oTag : orig) {
-            for (Tag cTag : compare) {
+            for (Tag cTag : uninspected) {
                 if (oTag.tag.equals(cTag.tag)) {
                     result.add(oTag);
+                    uninspected.remove(cTag);
+                    break;
                 }
             }
         }

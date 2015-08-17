@@ -1200,7 +1200,7 @@ public class EditorController implements IEditor {
         int startFileIndex = displayedFileIndex;
         int startEntryIndex = displayedEntryIndex;
         boolean looped = false;
-        do {
+        while (true) {
             displayedEntryIndex--;
             if (displayedEntryIndex < 0) {
                 displayedFileIndex--;
@@ -1212,15 +1212,22 @@ public class EditorController implements IEditor {
                 displayedEntryIndex = m_docSegList.length - 1;
             }
             ste = getCurrentEntry();
-        } while (ste == null // filtered file has no entries
-                && (!looped || !(displayedFileIndex == startFileIndex && displayedEntryIndex <= startEntryIndex) // and
-                                                                                                                 // we
-                                                                                                                 // have
-                                                                                                                 // not
-                                                                                                                 // had
-                                                                                                                 // all
-                                                                                                                 // entries
-                ));
+            if (ste != null) {
+                // We found an entry
+                break;
+            }
+            if (looped && displayedFileIndex == startFileIndex) {
+                if (displayedEntryIndex >= startEntryIndex) {
+                    // We have looped back to our starting point
+                    break;
+                }
+                if (m_docSegList.length == 0) {
+                    // We have looped back to our starting point
+                    // and there were no hits in any files
+                    break;
+                }
+            }
+        };
 
         activateEntry();
 

@@ -145,7 +145,7 @@ public class DataTableStyling {
             } else if (isSpecialHighlightRow(row)) {
                 result.setForeground(COLOR_SPECIAL_FG);
                 result.setBackground(COLOR_SPECIAL_BG);
-            } else if (row % 2 == 1 && doHighlight) {
+            } else if (row % 2 != 0 && doHighlight) {
                 result.setForeground(table.getForeground());
                 result.setBackground(COLOR_ALTERNATING_HILITE);
             } else {

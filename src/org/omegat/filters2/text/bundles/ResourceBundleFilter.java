@@ -160,34 +160,40 @@ public class ResourceBundleFilter extends AbstractFilter {
     protected String getNextLine(LinebreakPreservingReader reader) throws IOException // fix for bug 1462566
     {
         String ascii = reader.readLine();
-        if (ascii == null)
+        if (ascii == null) {
             return null;
+        }
 
-        StringBuffer result = new StringBuffer();
-        for (int i = 0; i < ascii.length(); i++) {
-            char ch = ascii.charAt(i);
-            if (ch == '\\' && i != ascii.length() - 1) {
-                i++;
-                ch = ascii.charAt(i);
-                if (ch != 'u') {
-                    if (ch == 'n')
-                        ch = '\n';
-                    else if (ch == 'r')
-                        ch = '\r';
-                    else if (ch == 't')
-                        ch = '\t';
-                    else
+        StringBuilder result = new StringBuilder();
+        for (int cp, i = 0; i < ascii.length(); i += Character.charCount(cp)) {
+            cp = ascii.codePointAt(i);
+            if (cp == '\\' && ascii.codePointCount(i, ascii.length()) > 1) {
+                i += Character.charCount(cp);
+                cp = ascii.codePointAt(i);
+                if (cp != 'u') {
+                    if (cp == 'n') {
+                        cp = '\n';
+                    } else if (cp == 'r') {
+                        cp = '\r';
+                    } else if (cp == 't') {
+                        cp = '\t';
+                    } else {
                         result.append('\\');
+                    }
                 } else {
                     // checking if the string is long enough
-                    if (ascii.length() >= i + 1 + 4) {
-                        ch = (char) Integer.parseInt(ascii.substring(i + 1, i + 1 + 4), 16);
-                        i += 4;
-                    } else
+                    if (ascii.codePointCount(i, ascii.length()) >= 1 + 4) {
+                        int uStart = ascii.offsetByCodePoints(i, 1);
+                        int uEnd = ascii.offsetByCodePoints(uStart, 4);
+                        String uStr = ascii.substring(uStart, uEnd);
+                        cp = Integer.parseInt(uStr, 16);
+                        i = uEnd - Character.charCount(cp);
+                    } else {
                         throw new IOException(OStrings.getString("RBFH_ERROR_ILLEGAL_U_SEQUENCE"));
+                    }
                 }
             }
-            result.append(ch);
+            result.appendCodePoint(cp);
         }
 
         return result.toString();
@@ -209,31 +215,34 @@ public class ResourceBundleFilter extends AbstractFilter {
     private String toAscii(String text, boolean key) {
         CharsetEncoder charsetEncoder = Charset.forName(targetEncoding).newEncoder();
         
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
 
-        for (int i = 0; i < text.length(); i++) {
-            char ch = text.charAt(i);
-            if (ch == '\\')
+        for (int cp, i = 0; i < text.length(); i += Character.charCount(cp)) {
+            cp = text.codePointAt(i);
+            if (cp == '\\') {
                 result.append("\\\\");
-            else if (ch == '\n')
+            } else if (cp == '\n') {
                 result.append("\\n");
-            else if (ch == '\r')
+            } else if (cp == '\r') {
                 result.append("\\r");
-            else if (ch == '\t')
+            } else if (cp == '\t') {
                 result.append("\\t");
-            else if (key && ch == ' ')
+            } else if (key && cp == ' ') {
                 result.append("\\ ");
-            else if (key && ch == '=')
+            } else if (key && cp == '=') {
                 result.append("\\=");
-            else if (key && ch == ':')
+            } else if (key && cp == ':') {
                 result.append("\\:");
-            else if ((ch >= 32 && ch < 127) || charsetEncoder.canEncode(ch)) 
-                result.append(ch);
-            else {
-                String code = Integer.toString(ch, 16);
-                while (code.length() < 4)
-                    code = '0' + code;
-                result.append("\\u" + code);
+            } else if ((cp >= 32 && cp < 127) || charsetEncoder.canEncode(text.substring(i, i + Character.charCount(cp)))) {
+                result.appendCodePoint(cp);
+            } else {
+                for (char c : Character.toChars(cp)) {
+                    String code = Integer.toString(c, 16);
+                    while (code.codePointCount(0, code.length()) < 4) {
+                        code = '0' + code;
+                    }
+                    result.append("\\u" + code);
+                }
             }
         }
 
@@ -251,19 +260,20 @@ public class ResourceBundleFilter extends AbstractFilter {
      * >#1606595</a>.
      */
     private String removeExtraSlashes(String string) {
-        StringBuffer result = new StringBuffer(string.length());
-        for (int i = 0; i < string.length(); i++) {
-            char ch = string.charAt(i);
-            if (ch == '\\') {
+        StringBuilder result = new StringBuilder(string.length());
+        for (int cp, i = 0; i < string.length(); i += Character.charCount(cp)) {
+            cp = string.codePointAt(i);
+            if (cp == '\\') {
                 // Fix for [ 1812183 ] Properties: space before "=" shouldn't
                 // be part of the key, contributed by Arno Peters
-                if (i + 1 < string.length()) {
-                    i++;
-                    ch = string.charAt(i);
-                } else
-                    ch = ' ';
+                if (string.codePointCount(i, string.length()) > 1) {
+                    i += Character.charCount(cp);
+                    cp = string.codePointAt(i);
+                } else {
+                    cp = ' ';
+                }
             }
-            result.append(ch);
+            result.appendCodePoint(cp);
         }
         return result.toString();
     }
@@ -273,9 +283,14 @@ public class ResourceBundleFilter extends AbstractFilter {
      * from '\ ' (non-trimmable space), but doesn't trim this space.
      */
     private String leftTrim(String s) {
-        int i;
-        for (i = 0; i < s.length() && (s.charAt(i) == ' ' || s.charAt(i) == '\t'); i++)
-            ;
+        int i = 0;
+        while (i < s.length()) {
+            int cp = s.codePointAt(i);
+            if (cp != ' ' && cp != '\t') {
+                break;
+            }
+            i += Character.charCount(cp);
+        }
         s = s.replaceAll("\\\\ ", " ");
         return s.substring(i, s.length());
     }
@@ -311,27 +326,27 @@ public class ResourceBundleFilter extends AbstractFilter {
             }
 
             // skipping comments
-            char firstChar = trimmed.charAt(0);
-            if (firstChar == '#' || firstChar == '!') {
+            int firstCp = trimmed.codePointAt(0);
+            if (firstCp == '#' || firstCp == '!') {
                 outfile.write(toAscii(str, false) + lbpr.getLinebreak());
                 // Save the comments
-                comments = (comments==null? str : comments + "\n" + str);
+                comments = (comments == null ? str : comments + "\n" + str);
                 // checking if the next string shouldn't be internationalized
-                if (trimmed.indexOf("NOI18N") >= 0)
+                if (trimmed.indexOf("NOI18N") >= 0) {
                     noi18n = true;
-
+                }
                 continue;
             }
 
             // reading the glued lines
-            while (str.charAt(str.length() - 1) == '\\') {
+            while (str.codePointBefore(str.length()) == '\\') {
                 String next = getNextLine(lbpr);
-                if (next == null)
+                if (next == null) {
                     next = "";
-
+                }
                 // gluing this line (w/o '\' on this line)
                 // with next line (w/o leading spaces)
-                str = str.substring(0, str.length() - 1) + leftTrim(next);
+                str = str.substring(0, str.offsetByCodePoints(str.length(), -1)) + leftTrim(next);
             }
 
             // key=value pairs
@@ -339,22 +354,24 @@ public class ResourceBundleFilter extends AbstractFilter {
 
             // writing out key
             String key;
-            if (equalsPos >= 0)
+            if (equalsPos >= 0) {
                 key = str.substring(0, equalsPos).trim();
-            else
+            } else {
                 key = str.trim();
+            }
             key = removeExtraSlashes(key);
             // writing segment is delayed until verifying that the translation was made
             // outfile.write(toAscii(key, true));
 
             // advance if there're spaces or tabs after =
             if (equalsPos >= 0) {
-                int equalsEnd = equalsPos + 1;
+                int equalsEnd = str.offsetByCodePoints(equalsPos, 1);
                 while (equalsEnd < str.length()) {
-                    char ch = str.charAt(equalsEnd);
-                    if (ch != ' ' && ch != '\t')
+                    int cp = str.codePointAt(equalsEnd);
+                    if (cp != ' ' && cp != '\t') {
                         break;
-                    equalsEnd++;
+                    }
+                    equalsEnd += Character.charCount(cp);
                 }
                 String equals = str.substring(equalsPos, equalsEnd);
                 // writing segment is delayed until verifying that the translation was made
@@ -362,10 +379,11 @@ public class ResourceBundleFilter extends AbstractFilter {
 
                 // value, if any
                 String value;
-                if (equalsEnd < str.length())
+                if (equalsEnd < str.length()) {
                     value = removeExtraSlashes(str.substring(equalsEnd));
-                else
+                } else {
                     value = "";
+                }
 
                 if (noi18n) {
                     // if we don't need to internationalize
@@ -378,14 +396,15 @@ public class ResourceBundleFilter extends AbstractFilter {
                     // Delete the comments
                     comments = null;
                     // Check if the segment is not translated
-	            if ("--untranslated_yet--".equals(trans)) {
+                    if ("--untranslated_yet--".equals(trans)) {
                         translatedSegment = false;
                         trans = value;
                     }
                     trans = trans.replaceAll("\\n\\s\\n", "\n\n");
                     trans = toAscii(trans, false);
-                    if (trans.length() > 0 && trans.charAt(0) == ' ')
+                    if (trans.length() > 0 && trans.codePointAt(0) == ' ') {
                         trans = '\\' + trans;
+                    }
                     // Non-translated segments are written based on the filter options 
                     if (translatedSegment == true || removeStringsUntranslated == false) {
                         outfile.write(toAscii(key, true));
@@ -413,24 +432,26 @@ public class ResourceBundleFilter extends AbstractFilter {
      *         returns <code>-1</code> to indicate there's no equals.
      */
     private int searchEquals(String str) {
-        char prevChar = 'a';
-        for (int i = 0; i < str.length(); i++) {
-            char ch = str.charAt(i);
-            if (prevChar != '\\') {
-                if (ch == '=' || ch == ':')
+        int prevCp = 'a';
+        for (int cp, i = 0; i < str.length(); i += Character.charCount(cp)) {
+            cp = str.codePointAt(i);
+            if (prevCp != '\\') {
+                if (cp == '=' || cp == ':') {
                     return i;
-                else if (ch == ' ' || ch == '\t') {
-                    for (int j = i + 1; j < str.length(); j++) {
-                        char c2 = str.charAt(j);
-                        if (c2 == ':' || c2 == '=')
+                } else if (cp == ' ' || cp == '\t') {
+                    for (int cp2, j = str.offsetByCodePoints(i, 1); j < str.length(); j += Character.charCount(cp2)) {
+                        cp2 = str.codePointAt(j);
+                        if (cp2 == ':' || cp2 == '=') {
                             return j;
-                        if (c2 != ' ' && c2 != '\t')
+                        }
+                        if (cp2 != ' ' && cp2 != '\t') {
                             return i;
+                        }
                     }
                     return i;
                 }
             }
-            prevChar = ch;
+            prevCp = cp;
         }
         return -1;
     }

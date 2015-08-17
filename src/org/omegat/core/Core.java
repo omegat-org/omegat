@@ -48,6 +48,7 @@ import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.autotext.Autotext;
 import org.omegat.gui.editor.mark.BidiMarkerFactory;
 import org.omegat.gui.editor.mark.ComesFromAutoTMMarker;
+import org.omegat.gui.editor.mark.FontFallbackMarker;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.NBSPMarker;
 import org.omegat.gui.editor.mark.ProtectedPartsMarker;
@@ -220,6 +221,7 @@ public class Core {
         Core.registerMarker(new BidiMarkerFactory.RLOMarker());
         Core.registerMarker(new ReplaceMarker());
         Core.registerMarker(new ComesFromAutoTMMarker());
+        Core.registerMarker(new FontFallbackMarker());
 
         // 3. Initialize other components. They add themselves to the main window.
         editor = new EditorController(me);

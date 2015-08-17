@@ -33,6 +33,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.util.gui.FontFallbackListener;
 
 /**
  * Base class for show information about currently selected entry. It can be used for glossaries, dictionaries
@@ -58,6 +59,7 @@ public abstract class EntryInfoPane<T> extends JTextPane implements IProjectEven
         }
         CoreEvents.registerProjectChangeListener(this);
         setDragEnabled(true);
+        getDocument().addDocumentListener(new FontFallbackListener(this));
     }
 
     public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {

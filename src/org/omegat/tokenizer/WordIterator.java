@@ -183,14 +183,14 @@ public class WordIterator extends BreakIterator {
                 return next;
 
             String str2 = text.substring(next, next2);
-            if (Character.isLetterOrDigit(str2.charAt(0)))
+            if (Character.isLetterOrDigit(str2.codePointAt(0)))
                 return next2;
             else {
                 // rewind back once
                 breaker.previous();
                 return next;
             }
-        } else if (Character.isLetterOrDigit(str.charAt(0))) {
+        } else if (Character.isLetterOrDigit(str.codePointAt(0))) {
             // trying to see whether the next "word" is a "&"
             int next2 = breaker.next();
             if (DONE == next2)
@@ -208,7 +208,7 @@ public class WordIterator extends BreakIterator {
 
                 String str3 = text.substring(next2, next3);
                 // is it followed by a word like Some&thing
-                if (Character.isLetterOrDigit(str3.charAt(0)))
+                if (Character.isLetterOrDigit(str3.codePointAt(0)))
                     return next3; // oh yes
                 else { // oh no
                     // rewind back two times

@@ -148,9 +148,9 @@ public class DefaultTokenizer implements ITokenizer {
         for (int end = breaker.next(); end != BreakIterator.DONE; start = end, end = breaker.next()) {
             String tokenStr = str.substring(start, end);
             boolean word = false;
-            for (int i = 0; i < tokenStr.length(); i++) {
-                char ch = tokenStr.charAt(i);
-                if (Character.isLetter(ch)) {
+            for (int cp, i = 0; i < tokenStr.length(); i += Character.charCount(cp)) {
+                cp = tokenStr.codePointAt(i);
+                if (Character.isLetter(cp)) {
                     word = true;
                     break;
                 }

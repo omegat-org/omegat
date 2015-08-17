@@ -337,9 +337,13 @@ public abstract class BaseTokenizer implements ITokenizer {
     static {
         for (Version v : Version.values()) {
             StringBuilder b = new StringBuilder();
-            b.append(v.toString().charAt(0));
-            b.append(v.toString().substring(1).toLowerCase().replace('_', ' '));
-            if (Character.isDigit(b.charAt(b.length() - 1))) b.insert(b.length() - 1, '.');
+            String vStr = v.toString();
+            b.appendCodePoint(vStr.codePointAt(0));
+            b.append(vStr.substring(vStr.offsetByCodePoints(0, 1)).toLowerCase().replace('_', ' '));
+            int secondToLastOffset = b.offsetByCodePoints(b.length(), -1);
+            if (Character.isDigit(b.codePointAt(secondToLastOffset))) {
+                b.insert(secondToLastOffset, '.');
+            }
             supportedBehaviors.put(v, b.toString());
         }
     }

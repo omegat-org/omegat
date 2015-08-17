@@ -143,8 +143,8 @@ public abstract class VarExpansion<Param> {
         localTemplate = localTemplate.replace(VAR_FILE_NAME, filePath + numHint);
         if (filePath.contains(".")) {
             String[] splitName = filePath.split("\\.");
-            StringBuffer nameOnlyBuf = new StringBuffer (splitName[0]);
-            StringBuffer extensionBuf = new StringBuffer (splitName[splitName.length - 1]);
+            StringBuilder nameOnlyBuf = new StringBuilder(splitName[0]);
+            StringBuilder extensionBuf = new StringBuilder(splitName[splitName.length - 1]);
             localTemplate = localTemplate.replace(VAR_FILE_NAME_ONLY, nameOnlyBuf.toString());
             localTemplate = localTemplate.replace(VAR_FILE_EXTENSION, extensionBuf.toString());
             for (int i = 0; i < splitName.length; i++) {

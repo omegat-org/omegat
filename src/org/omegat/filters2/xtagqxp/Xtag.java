@@ -104,7 +104,7 @@ public class Xtag implements Element {
      * tag should return &lt;s3&gt;.
      */
     public String toShortcut() {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
 
         if (getShortcut().equals("<"))
             return "<";

@@ -613,8 +613,8 @@ public class FilterMaster {
         }
         
         String[] splitName = filename.split("\\.");
-        StringBuffer nameOnlyBuf = new StringBuffer (splitName[0]);
-        StringBuffer extensionBuf = new StringBuffer (splitName[splitName.length - 1]);
+        StringBuilder nameOnlyBuf = new StringBuilder (splitName[0]);
+        StringBuilder extensionBuf = new StringBuilder (splitName[splitName.length - 1]);
         for (int i = 0; i < splitName.length; i++) {
             res = res.replaceAll ("\\$\\{nameOnly-" + i + "\\}", nameOnlyBuf.toString());
             res = res.replaceAll ("\\$\\{extension-" + i + "\\}", extensionBuf.toString());

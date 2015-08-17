@@ -153,7 +153,7 @@ public class TextFilter extends AbstractFilter {
 
     /** Process the file without segmenting it. */
     private void processNonSeg(BufferedReader in, Writer out) throws IOException {
-        StringBuffer segment = new StringBuffer();
+        StringBuilder segment = new StringBuilder();
         char[] buf = new char[4096];
         int len;
         while ((len = in.read(buf)) >= 0)

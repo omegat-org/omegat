@@ -152,7 +152,7 @@ public abstract class Tag implements Element {
             throw new RuntimeException("Shouldn't hapen!");
         }
 
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
 
         buf.append("<");
         buf.append(tmxtag);
@@ -176,7 +176,7 @@ public abstract class Tag implements Element {
      * return &amp;lt;strong&amp;gt;
      */
     protected String toPartialTMX() {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
 
         buf.append("&amp;lt;");
         if (Type.END == getType())
@@ -195,7 +195,7 @@ public abstract class Tag implements Element {
      * &lt;strong&gt; tag should return &lt;s3&gt;.
      */
     public String toShortcut() {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
 
         buf.append('<');
         if (Type.END == getType())

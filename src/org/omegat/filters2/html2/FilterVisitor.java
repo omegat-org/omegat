@@ -552,7 +552,7 @@ public class FilterVisitor extends NodeVisitor {
         }
 
         // appending all tags until "last good" one to paragraph text
-        StringBuffer paragraph = new StringBuffer();
+        StringBuilder paragraph = new StringBuilder();
         // appending all tags starting from "first good" one to paragraph text
         for (int i = firstgood; i <= lastgood; i++) {
             Node node = all.get(i);
@@ -651,8 +651,8 @@ public class FilterVisitor extends NodeVisitor {
     /**
      * Creates and stores a shortcut for the tag.
      */
-    private void shortcut(Tag tag, StringBuffer paragraph) {
-        StringBuffer result = new StringBuffer();
+    private void shortcut(Tag tag, StringBuilder paragraph) {
+        StringBuilder result = new StringBuilder();
         result.append('<');
         int n = -1;
         if (tag.isEndTag()) {
@@ -971,7 +971,7 @@ public class FilterVisitor extends NodeVisitor {
     /** Converts HTML entities to normal characters */
     protected String entitiesToChars(String str) {
         int strlen = str.length();
-        StringBuffer res = new StringBuffer(strlen);
+        StringBuilder res = new StringBuilder(strlen);
         for (int cp, i = 0; i < strlen; i += Character.charCount(cp)) {
             cp = str.codePointAt(i);
             switch (cp) {

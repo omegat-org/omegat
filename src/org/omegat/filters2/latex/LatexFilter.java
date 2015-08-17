@@ -136,9 +136,9 @@ public class LatexFilter extends AbstractFilter {
      * @throws java.io.IOException
      */
     private void processLatexFile(BufferedReader in, Writer out) throws IOException {
-        StringBuffer par = new StringBuffer();
+        StringBuilder par = new StringBuilder();
         String s;
-        StringBuffer comment = new StringBuffer();
+        StringBuilder comment = new StringBuilder();
 
         LinkedList<String> commands = new LinkedList<String>();
 
@@ -165,7 +165,7 @@ public class LatexFilter extends AbstractFilter {
 
                 if (cat == 0) {
                     /* parse control sequence */
-                    StringBuffer cmd = new StringBuffer();
+                    StringBuilder cmd = new StringBuilder();
                     cmd.append(cidx);
                     idx++;
                     while (idx < c.length) {

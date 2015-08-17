@@ -119,7 +119,7 @@ public class GlossaryEntry {
         result.text.append(m_src);
         result.text.append(" = ");
         
-        StringBuffer comments = new StringBuffer();
+        StringBuilder comments = new StringBuilder();
         
         int commentIndex = 0;
         for (int i = 0; i < m_loc.length; i++) {

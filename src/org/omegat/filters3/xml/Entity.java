@@ -112,7 +112,7 @@ public class Entity {
      * Returns the entity as string.
      */
     public String toString() {
-        StringBuffer res = new StringBuffer();
+        StringBuilder res = new StringBuilder();
         res.append("<!ENTITY");
         if (parameter)
             res.append(" %");

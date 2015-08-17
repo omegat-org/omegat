@@ -148,7 +148,7 @@ public class SRX implements Serializable, Cloneable {
             xmldec.close();
 
             if (myel.isExceptionOccured()) {
-                StringBuffer sb = new StringBuffer();
+                StringBuilder sb = new StringBuilder();
                 for (Exception ex : myel.getExceptionsList()) {
                     sb.append("    ");
                     sb.append(ex);

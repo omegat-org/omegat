@@ -163,7 +163,7 @@ public class TMXWriter {
      */
     private static String makeLevelTwo(String segment) {
         // Create a storage buffer for the result
-        StringBuffer result = new StringBuffer(segment.length() * 2);
+        StringBuilder result = new StringBuilder(segment.length() * 2);
 
         // Find all single tags
         // Matcher match =

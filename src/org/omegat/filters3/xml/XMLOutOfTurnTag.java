@@ -54,7 +54,7 @@ public class XMLOutOfTurnTag extends OutOfTurnTag {
      * </code>.
      */
     public String toOriginal() {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
 
         buf.append("<");
         buf.append(getTag());

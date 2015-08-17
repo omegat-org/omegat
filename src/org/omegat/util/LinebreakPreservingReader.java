@@ -92,7 +92,7 @@ public class LinebreakPreservingReader extends Reader {
         linebreak.setLength(0);
 
         // Create a buffer to contain the result
-        StringBuffer line = new StringBuffer(1024);
+        StringBuilder line = new StringBuilder(1024);
 
         // Get the next character and check if it's not the end of the stream
         int chr = in.read();

@@ -106,7 +106,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
         boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
         final String source = ParseEntry.stripSomeChars(origSource, spr, m_config.isRemoveTags(), removeSpaces);
         
-        StringBuffer res = new StringBuffer();
+        StringBuilder res = new StringBuilder();
 
         if (m_config.isSentenceSegmentingEnabled()) {
             boolean translated = false;

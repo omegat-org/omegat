@@ -476,7 +476,7 @@ public class Entry {
      *       text&lt;ept i="0"&gt;&amp;lt;/b0&amp;gt;&lt;/ept&gt;</code>.
      */
     public String sourceToTMX() {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for (int i = 0; i < size(); i++)
             buf.append(get(i).toTMX());
         return buf.toString();
@@ -489,7 +489,7 @@ public class Entry {
      * <code>Here's &lt;b&gt;bold text&lt;/b&gt;</code>.
      */
     public String sourceToOriginal() {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for (int i = 0; i < size(); i++)
             buf.append(get(i).toOriginal());
         return buf.toString();
@@ -605,7 +605,7 @@ public class Entry {
         if (translatedEntry == null)
             return sourceToTMX();
 
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
 
         for (int i = 0; i < getFirstGood(); i++)
             buf.append(get(i).toTMX());
@@ -626,7 +626,7 @@ public class Entry {
         if (translatedEntry == null)
             return sourceToOriginal();
 
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
 
         for (int i = 0; i < getFirstGood(); i++)
             buf.append(get(i).toOriginal());

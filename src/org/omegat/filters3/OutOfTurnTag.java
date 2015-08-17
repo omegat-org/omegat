@@ -88,7 +88,7 @@ public abstract class OutOfTurnTag extends Tag {
      * </code>.
      */
     protected String toPartialTMX() {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
 
         buf.append("&amp;lt;");
         buf.append(getTag());

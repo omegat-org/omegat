@@ -34,8 +34,6 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.omegat.core.Core;
-import org.omegat.core.data.IProject;
 import org.omegat.util.Language;
 import org.omegat.util.PatternConsts;
 

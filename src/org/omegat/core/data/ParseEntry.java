@@ -143,6 +143,7 @@ public abstract class ParseEntry implements IParseCallback {
 
         boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
         source = stripSomeChars(source, tmp, m_config.isRemoveTags(), removeSpaces);
+        source = StringUtil.normalizeUnicode(source);
         if (m_config.isRemoveTags() && protectedParts != null) {
             for (int i = 0; i < protectedParts.size(); i++) {
                 ProtectedPart p = protectedParts.get(i);
@@ -158,6 +159,7 @@ public abstract class ParseEntry implements IParseCallback {
         }
         if (translation != null) {
             translation = stripSomeChars(translation, tmp, m_config.isRemoveTags(), removeSpaces);
+            translation = StringUtil.normalizeUnicode(translation);
         }
 
         if (m_config.isSentenceSegmentingEnabled()) {

@@ -383,7 +383,9 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler {
 
     /** Collects a segment from TMX. Performs upgrades of a segment if needed. */
     private void storeSegment(String source, String translation, String changeId, long changeDate) {
+        source = StringUtil.normalizeUnicode(source);
         source = upgradeSegment(source);
+        translation = StringUtil.normalizeUnicode(translation);
         translation = upgradeSegment(translation);
 
         if (isUpgradeSentSeg()) {

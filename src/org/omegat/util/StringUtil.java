@@ -29,6 +29,7 @@
  **************************************************************************/
 package org.omegat.util;
 
+import java.text.Normalizer;
 import java.util.Locale;
 
 /**
@@ -319,5 +320,13 @@ public class StringUtil {
             }
         }
         return string;
+    }
+
+    /**
+     * Apply Unicode NFC normalization to a string.
+     */
+    public static String normalizeUnicode(CharSequence text) {
+        return Normalizer.isNormalized(text, Normalizer.Form.NFC) ? text.toString() :
+            Normalizer.normalize(text, Normalizer.Form.NFC);
     }
 }

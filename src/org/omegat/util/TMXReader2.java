@@ -264,7 +264,7 @@ public class TMXReader2 {
                     } else {
                         parseSegExtLevel1();
                     }
-                    tuv.text = segContent.toString();
+                    tuv.text = StringUtil.normalizeUnicode(segContent);
                 }
                 break;
             case XMLEvent.END_ELEMENT:

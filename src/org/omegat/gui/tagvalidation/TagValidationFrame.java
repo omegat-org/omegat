@@ -459,7 +459,7 @@ public class TagValidationFrame extends JFrame {
             break;
         }
         
-        if (m_errorList.size() > 0) {
+        if (m_errorList != null && !m_errorList.isEmpty()) {
             update();
         } else {
             this.dispose();

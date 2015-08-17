@@ -44,7 +44,7 @@ public class WhitespaceMarkerFactory {
      */
     public static class SpaceMarker extends AbstractMarker {
         public SpaceMarker() throws Exception {
-            PAINTER = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "\u00B7"); //Â·â€¢
+            PAINTER = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "\u00B7");
             toolTip = null; //don't overdo it. Space occurs many times.
             patternChar = ' ';
         }
@@ -58,7 +58,7 @@ public class WhitespaceMarkerFactory {
      */
     public static class TabMarker extends AbstractMarker {
         public TabMarker() throws Exception {
-            PAINTER = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "\u00BB"); //Â»
+            PAINTER = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "\u00BB");
             toolTip = OStrings.getString("MARKER_TAB");
             patternChar = '\t';
         }
@@ -69,14 +69,14 @@ public class WhitespaceMarkerFactory {
     /**
      * Marker for linefeed. 
      * 
-     * There is a linefeed symbol: 'â�Š'. But it is so small / hard to see, 
-     * that instead we use 'Â¶' as the symbol to show, like other applications do.
+     * There is a linefeed symbol: U+240A. But it is so small / hard to see, 
+     * that instead we use U+00B6 as the symbol to show, like other applications do.
      * 
      * @author Martin Fleurke
      */
     public static class LFMarker extends AbstractMarker {
         public LFMarker() throws Exception {
-            PAINTER = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "\u00B6"); //Â¶â�Š
+            PAINTER = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "\u00B6");
             toolTip = "LF";
             patternChar = '\n';
         }

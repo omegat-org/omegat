@@ -64,7 +64,6 @@ import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
-import org.omegat.util.gui.DockingUI;
 
 /**
  * GIT repository connection implementation.

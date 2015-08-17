@@ -43,27 +43,27 @@ public class TransTips {
     // List containing the characters that may be found at the end of a word,
     // that
     // might result in the word not being underlined
-    private static List<Character> afterExcludeCases = new ArrayList<Character>();
+    private static List<Integer> afterExcludeCases = new ArrayList<Integer>();
     static {
-        afterExcludeCases.add('.');
-        afterExcludeCases.add('!');
-        afterExcludeCases.add('?');
-        afterExcludeCases.add(':');
-        afterExcludeCases.add(',');
-        afterExcludeCases.add(';');
-        afterExcludeCases.add('<');
-        afterExcludeCases.add(')');
-        afterExcludeCases.add('-');
+        afterExcludeCases.add((int) '.');
+        afterExcludeCases.add((int) '!');
+        afterExcludeCases.add((int) '?');
+        afterExcludeCases.add((int) ':');
+        afterExcludeCases.add((int) ',');
+        afterExcludeCases.add((int) ';');
+        afterExcludeCases.add((int) '<');
+        afterExcludeCases.add((int) ')');
+        afterExcludeCases.add((int) '-');
     };
 
     // List containing the characters that may be found at the beginning of a
     // word, that
     // might result in the word not being underlined
-    private static List<Character> beforeExcludeCases = new ArrayList<Character>();
+    private static List<Integer> beforeExcludeCases = new ArrayList<Integer>();
     static {
-        beforeExcludeCases.add('>');
-        beforeExcludeCases.add('(');
-        beforeExcludeCases.add(' ');
+        beforeExcludeCases.add((int) '>');
+        beforeExcludeCases.add((int) '(');
+        beforeExcludeCases.add((int) ' ');
     };
 
     /**
@@ -138,34 +138,32 @@ public class TransTips {
         sourceText = sourceText.replaceAll("[\u202A|\u202B|\u202C]", " ");
 
         // Check that word stands alone
-        char before;
+        int before;
         try {
-            before = sourceText.toLowerCase().charAt(testIndex - 1);
+            before = sourceText.toLowerCase().codePointBefore(testIndex);
         } catch (Exception ex) {
             before = ' ';
         }
 
         // Test the end of the string
-        char after;
+        int after;
         try {
-            after = sourceText.toLowerCase().charAt(testIndex + glosSrc.length());
+            after = sourceText.toLowerCase().codePointAt(testIndex + glosSrc.length());
         } catch (Exception cp) {
             after = ' ';
         }
 
         // After Exclude Cases.
-        if (afterExcludeCases.contains(after))
+        if (afterExcludeCases.contains(after)) {
             after = ' ';
+        }
 
         // Before Exclude Cases
-        if (beforeExcludeCases.contains(before))
+        if (beforeExcludeCases.contains(before)) {
             before = ' ';
-
-        if ((before == ' ') && (after == ' ')) {
-            return true;
-        } else {
-            return false;
         }
+
+        return before == ' ' && after == ' ';
     }
 
     public interface Search {

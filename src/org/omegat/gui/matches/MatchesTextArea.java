@@ -425,7 +425,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             // Iterate through each diff variant (${diff}, ${diffReversed}, ...)
             for (Entry<Integer, List<TextRun>> e : diffInfo.entrySet()) {
                 int diffPos = e.getKey();
-                if (diffPos != -1 && diffInfo != null) {
+                if (diffPos != -1) {
                     // Iterate through each style chunk (added or deleted)
                     for (TextRun r : e.getValue()) {
                         int tokstart = delimiters.get(i) + diffPos + r.start;

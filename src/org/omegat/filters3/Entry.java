@@ -65,7 +65,6 @@ public class Entry {
     public void clear() {
         tagsDetected = false;
         elements.clear();
-        translation = "";
         translatedEntry = null;
         textInstance = null;
     }
@@ -499,9 +498,6 @@ public class Entry {
     // Dealing with translation
     // //////////////////////////////////////////////////////////////////////////
 
-    /** Translation in shortcut form. */
-    private String translation = "";
-
     Entry translatedEntry = null;
 
     /**
@@ -534,7 +530,6 @@ public class Entry {
             throws TranslationException {
         if (!sourceToShortcut(xmlDialect, protectedParts).equals(translation)) {
             checkAndRecoverTags(translation, protectedParts);
-            this.translation = translation;
         }
     }
 

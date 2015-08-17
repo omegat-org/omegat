@@ -30,7 +30,6 @@ import java.awt.Font;
 import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import com.vlsolutions.swing.docking.Dockable;
 

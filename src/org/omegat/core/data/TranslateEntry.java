@@ -104,7 +104,8 @@ public abstract class TranslateEntry implements ITranslateCallback {
         }
         
         boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
-        final String source = ParseEntry.stripSomeChars(origSource, spr, m_config.isRemoveTags(), removeSpaces);
+        final String source = StringUtil.normalizeUnicode(ParseEntry.stripSomeChars(
+                origSource, spr, m_config.isRemoveTags(), removeSpaces));
         
         StringBuilder res = new StringBuilder();
 

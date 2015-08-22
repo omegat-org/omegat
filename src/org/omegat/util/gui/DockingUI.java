@@ -228,10 +228,13 @@ public class DockingUI {
             UIManager.put("DockView.tabbedDockableBorder", new MatteBorder(5, 5, 5, 5, standardBgColor));
         }
         
+        // Windows 8+ is very square.
+        int cornerRadius = isFlatWindows() ? 0 : 8;
+        
         // Panel title bars
         Color activeTitleText = UIManager.getColor("Label.foreground");
         Color inactiveTitleText = adjustRGB(activeTitleText, 0x80); // #000000 -> #808080; GTK+ has Color.WHITE for Label.disabledForeground
-        UIManager.put("DockViewTitleBar.border", new RoundedCornerBorder(8, borderColor, RoundedCornerBorder.SIDE_TOP));
+        UIManager.put("DockViewTitleBar.border", new RoundedCornerBorder(cornerRadius, borderColor, RoundedCornerBorder.SIDE_TOP));
         UIManager.put("InternalFrame.activeTitleForeground", activeTitleText); // Windows 7 "Classic" has Color.WHITE for this
         UIManager.put("InternalFrame.activeTitleBackground", activeTitleBgColor);
         UIManager.put("InternalFrame.inactiveTitleForeground", inactiveTitleText); 
@@ -246,7 +249,7 @@ public class DockingUI {
                 new MatteBorder(1, 0, 0, 0, borderColor),
                 new EmptyBorder(0, 2 * outside, 0, 2 * outside)));
         UIManager.put("AutoHideButtonPanel.background", bottomAreaBgColor);
-        UIManager.put("AutoHideButton.expandBorderBottom", new RoundedCornerBorder(8, borderColor, RoundedCornerBorder.SIDE_BOTTOM));
+        UIManager.put("AutoHideButton.expandBorderBottom", new RoundedCornerBorder(cornerRadius, borderColor, RoundedCornerBorder.SIDE_BOTTOM));
         UIManager.put("AutoHideButton.background", standardBgColor);
         // OmegaT-defined status box in lower right
         UIManager.put("OmegaTStatusArea.border", new MatteBorder(1, 1, 1, 1, statusAreaColor));
@@ -337,6 +340,13 @@ public class DockingUI {
     private static boolean isWindowsClassicLAF() {
         return isWindowsLAF() &&
                 !(Boolean) Toolkit.getDefaultToolkit().getDesktopProperty("win.xpstyle.themeActive");
+    }
+
+    // This check fails to detect Windows 10 correctly on Java 1.8 prior to u60.
+    // See: https://bugs.openjdk.java.net/browse/JDK-8066504
+    private static boolean isFlatWindows() {
+        return System.getProperty("os.name").startsWith("Windows")
+                && System.getProperty("os.version").matches("6\\.[23]|10\\..*");
     }
 
     /**

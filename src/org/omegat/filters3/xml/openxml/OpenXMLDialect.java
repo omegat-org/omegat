@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2010 Didier Briel
                2010 Antonio Vilei
-               2011-2014 Didier Briel
+               2011-2015 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -47,12 +47,16 @@ public class OpenXMLDialect extends DefaultXMLDialect {
     public void defineDialect(OpenXMLOptions options) {
         defineParagraphTags(new String[] {
                 // Word
-                "w:p", "w:tab", "w:br",
+                "w:p", "w:tab", 
                 // Excel
                 "si", "comment", "definedName",
                 // PowerPoint
                 "a:p", "c:v", });
 
+        if (options.getBreakOnBr()) {
+            defineParagraphTag("w:br"); // Word
+        }
+        
         if (options.getTranslateHiddenText()) // Word
             defineOutOfTurnTag("w:instrText");
         else

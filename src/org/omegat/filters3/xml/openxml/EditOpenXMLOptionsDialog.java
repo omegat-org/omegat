@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2010 Didier Briel
                2010 Antonio Vilei
-               2011-2014 Didier Briel
+               2011-2015 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -77,6 +77,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         translateWordArtCB.setSelected(options.getTranslateWordArt());
         aggregateTagsCB.setSelected(options.getAggregateTags());
         preserveSpacesCB.setSelected(options.getSpacePreserving());
+        breakOnBrCB.setSelected(options.getBreakOnBr());
 
         StaticUIUtils.setEscapeAction(this, new AbstractAction() {
             @Override
@@ -141,6 +142,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         aggregateTagsCB = new javax.swing.JCheckBox();
         preserveSpacesCB = new javax.swing.JCheckBox();
+        breakOnBrCB = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("OpenXML_FILTER_OPTIONS")); // NOI18N
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -345,6 +347,14 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         });
         jPanel1.add(preserveSpacesCB);
 
+        org.openide.awt.Mnemonics.setLocalizedText(breakOnBrCB, OStrings.getString("OpenXML_BREAK_ON_BR")); // NOI18N
+        breakOnBrCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                breakOnBrCBradiosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(breakOnBrCB);
+
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -361,6 +371,10 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
     private void translateFallbackTextCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateFallbackTextCBradiosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_translateFallbackTextCBradiosActionPerformed
+
+    private void breakOnBrCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_breakOnBrCBradiosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_breakOnBrCBradiosActionPerformed
 
     private void translateExcelCommentsCBradiosActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_translateExcelCommentsCBradiosActionPerformed
     // TODO add your handling code here:
@@ -414,6 +428,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         options.setTranslateWordArt(translateWordArtCB.isSelected());
         options.setAggregateTags(aggregateTagsCB.isSelected());
         options.setSpacePreserving(preserveSpacesCB.isSelected());
+        options.setBreakOnBr(breakOnBrCB.isSelected());
         doClose(RET_OK);
     }// GEN-LAST:event_okButtonActionPerformed
 
@@ -452,6 +467,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox aggregateTagsCB;
+    private javax.swing.JCheckBox breakOnBrCB;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;

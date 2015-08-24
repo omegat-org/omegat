@@ -5,7 +5,7 @@
 
  Copyright (C) 2007-2010 Didier Briel
                2010 Antonio Vilei
-               2011-2014 Didier Briel
+               2011-2015 Didier Briel               
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -60,6 +60,7 @@ import org.omegat.filters2.AbstractOptions;
  * <ul>
  * <li>[+] Tags Aggregation
  * <li>[+] Preserve space for all tags
+ * <li>[+] Start a new paragraph on Word soft return
  * </ul>
  * 
  * @author Didier Briel, Antonio Vilei
@@ -84,6 +85,7 @@ public class OpenXMLOptions extends AbstractOptions {
     private static final String OPTION_TRANSLATE_WORDART = "translateWordArt";
     private static final String OPTION_AGGREGATE_TAGS = "aggregateTags";
     private static final String OPTION_PRESERVE_SPACES = "preserveSpaces";
+    private static final String OPTION_BREAK_ON_BR = "breakOnBr";
 
     public OpenXMLOptions(Map<String, String> options) {
         super(options);
@@ -358,4 +360,22 @@ public class OpenXMLOptions extends AbstractOptions {
     public void setSpacePreserving(boolean onOff) {
         setBoolean(OPTION_PRESERVE_SPACES, onOff);
     }
+    
+    /**
+     * Returns whether a new paragraph should be created on "w:br"
+     * @return the state of OPTION_BREAK_ON_BR
+     */
+    public boolean getBreakOnBr() {
+        return getBoolean(OPTION_BREAK_ON_BR, true);
+    }
+    
+    /**
+     * Sets whether a new paragraph should be created on "w:br"
+     * @param breakOnBr The option whether to break or not
+     */
+    public void setBreakOnBr(boolean breakOnBr) {
+        setBoolean(OPTION_BREAK_ON_BR, breakOnBr);
+    }
+            
+
 }

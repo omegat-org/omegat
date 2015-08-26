@@ -5,9 +5,9 @@
 
   <para>Ferramentas de memória de tradução trabalham com unidades de texto chamadas segmentos. O <application>OmegaT</application> tem duas maneiras de segmentar um texto: por parágrafo ou por segmentação de sentença (também referenciada como &quot;segmentação baseada em regras&quot;). Para selecionar o tipo de segmentação, clique em <menuchoice><guimenu><indexterm class="singular">
           <primary>Projeto</primary> <secondary>Propriedades</secondary>
-        </indexterm>Projeto</guimenu> → <guimenuitem>Propriedades…</guimenuitem></menuchoice> no menu principal e marque ou desmarque a caixa de seleção existente. A segmentação por parágrafo é mais vantajosa em certos casos, tais como traduções estilizadas ou altamente criativas, nas quais o tradutor pode querer alterar a ordem de frase inteiras; porém, para a maioria dos projetos, a segmentação por sentença é a escolha preferida, já que retorna melhores correspondências da traduções anteriores. Se escolher segmentação por sentença, você pode definir as regras; basta clicar em  <menuchoice><guimenu><indexterm class="singular">
+        </indexterm>Projeto</guimenu> → <guimenuitem>Propriedades...</guimenuitem></menuchoice> no menu principal e marque ou desmarque a caixa de seleção existente. A segmentação por parágrafo é mais vantajosa em certos casos, tais como traduções estilizadas ou altamente criativas, nas quais o tradutor pode querer alterar a ordem de frase inteiras; porém, para a maioria dos projetos, a segmentação por sentença é a escolha preferida, já que retorna melhores correspondências da traduções anteriores. Se escolher segmentação por sentença, você pode definir as regras; basta clicar em  <menuchoice><guimenu><indexterm class="singular">
           <primary>Projeto</primary> <secondary>Opções</secondary>
-        </indexterm>Opções</guimenu> → <guimenuitem>Segmentação…</guimenuitem></menuchoice> no menu principal.</para>
+        </indexterm>Opções</guimenu> → <guimenuitem>Segmentação...</guimenuitem></menuchoice> no menu principal.</para>
 
   <para>Regras de segmentação dependentes já estão disponíveis para muitos idiomas, então é provável que você não irá precisar se envolver criando suas próprias regras de segmentação. Por outro lado, esta funcionalidade pode ser muito útil em casos especiais, em que você pode aumentar sua produtividade ao ajustar as regras de segmentação ao texto que será traduzido.</para>
 
@@ -126,7 +126,7 @@
 
         <tbody>
           <row>
-            <entry>Defina o início do segmento depois do ponto ('.') seguido por espaço, tabulação…</entry>
+            <entry>Defina o início do segmento depois do ponto ('.') seguido por espaço, tabulação...</entry>
 
             <entry align="center">\.</entry>
 

@@ -4,23 +4,23 @@
   <title>Aprenda a usar o OmegaT em 5 minutos!</title>
 
   <section id="create.and.open.new.project">
-    <title>Crie um novo projeto<indexterm class="singular">
+    <title>Criar um novo projeto<indexterm class="singular">
         <primary>Projeto</primary> <secondary>Criar / abrir novo</secondary>
       </indexterm></title>
 
     <para><remark>Nota:</remark>Em um computador Apple Mac, use a tecla <keycap>Command</keycap> em vez da tecla <keycap>Ctrl</keycap></para>
 
       <indexterm class="singular">
-        <primary>Menu Projeto</primary> <secondary>Novo…</secondary>
+        <primary>Menu Projeto</primary> <secondary>Novo...</secondary>
       </indexterm>
 
-    <para>Para começar a usar o OmegaT, primeiro crie um projeto que contenha todos os seus arquivos, tais como o arquivo fonte, memórias de tradução, glossários e por fim, seu arquivo traduzido. No menu <guimenu>Projeto</guimenu>, selecione <menuchoice> <guimenuitem>Novo…</guimenuitem> </menuchoice> e digite um nome para o seu projeto. Lembre-se de onde você está criando o projeto, porque você terá que voltar a ele mais tarde.</para>
+    <para>Para começar a usar o OmegaT, primeiro crie um projeto que contenha todos os seus arquivos, tais como o arquivo fonte, memórias de tradução, glossários e por fim, seu arquivo traduzido. No menu <guimenu>Projeto</guimenu>, selecione <menuchoice> <guimenuitem>Novo...</guimenuitem> </menuchoice> e digite um nome para o seu projeto. Lembre-se de onde você está criando o projeto, porque você terá que voltar a ele mais tarde.</para>
 
     <para>Depois que você der um nome ao projeto, a caixa de diálogo <guilabel>Criar um novo projeto</guilabel> abrirá. No alto desta caixa de diálogo, selecione a língua do arquivo fonte, a língua para qual o arquivo será traduzido e clique em <guibutton>OK </guibutton>para continuar.</para>
 
     <para>Se estiver interessado em outras configurações desta caixa de diálogo, você pode voltar a ela a qualquer momento pressionando <keycap>Ctrl+E.</keycap></para>
 
-    <para>Em seguida, é aberta a caixa de diálogo <guilabel>Arquivos do projeto</guilabel>. Clique em <guibutton>Copiar arquivos para pasta source…</guibutton> para selecionar seus arquivos fonte. O OmegaT copiará o arquivo selecionado para a subpasta <filename>/source/</filename>do seu novo projeto recém-criado. Depois que o arquivo fonte for carregado no painel <guilabel>Editor</guilabel>, você pode fechar a caixa de diálogo <guilabel>Arquivos do projeto</guilabel>.</para>
+    <para>Em seguida, é aberta a caixa de diálogo <guilabel>Arquivos do projeto</guilabel>. Clique em <guibutton>Copiar arquivos para pasta source...</guibutton> para selecionar seus arquivos fonte. O OmegaT copiará o arquivo selecionado para a subpasta <filename>/source/</filename>do seu novo projeto recém-criado. Depois que o arquivo fonte for carregado no painel <guilabel>Editor</guilabel>, você pode fechar a caixa de diálogo <guilabel>Arquivos do projeto</guilabel>.</para>
   </section>
 
   <section id="translate.the.segments.one.by.one">
@@ -30,9 +30,9 @@
   </section>
 
   <section>
-    <title>Verifique suas tags</title>
+    <title>Verificar tags</title>
 
-    <para>Se o seu arquivo fonte for um arquivo formatado, por exemplo, do Microsoft Word, do LibreOffice Writer ou em HTML, o OmegaT converterá a formatação em tags que rodearão o texto a ser traduzido. Muitas vezes os documentos também têm tags não relacionadas à formatação, mas que também são importantes no arquivo fonte (e no arquivo traduzido). Uma frase fonte pode parecer assim:<mediaobject>
+    <para>Se o seu arquivo fonte for um arquivo formatado, por exemplo, do Microsoft Word, do LibreOffice Writer ou em HTML, o OmegaT converterá a formatação em tags que rodearão o texto a ser traduzido. Muitas vezes os documentos também têm tags não relacionadas à formatação, mas que também são importantes no arquivo fonte (e no arquivo traduzido). Uma frase fonte pode parecer:<mediaobject>
       <imageobject role="html">
         <imagedata align="justify" fileref="images/InstantGuide_1.png"/>
       </imageobject>
@@ -52,7 +52,7 @@
     </mediaobject>
     </para>
     
-    <para>As tags no OmegaT são acinzentadas, portanto é mais fácil reconhecê-las. Elas são protegidas, para que você não possa modificá-las, mas você pode apagá-las, inseri-las manualmente ou movê-las na frase destino. Porém, se você cometeu erros ao digitar as tags de formatação, o seu arquivo traduzido pode não abrir. Portanto, pressione <keycap>Ctrl+Shift+V</keycap> antes de gerar seu arquivo traduzido, para verificar se as tags estão corretas.</para>
+    <para>As tags no OmegaT são acinzentadas, portanto é mais fácil reconhecê-las. Elas são protegidas, para que você não possa modificá-las, mas você pode eliminá-las, inseri-las manualmente ou movê-las na frase destino. Porém, se você cometeu erros ao digitar as tags de formatação, o seu arquivo traduzido pode não abrir. Portanto, pressione <keycap>Ctrl+Shift+V</keycap> antes de gerar seu arquivo traduzido, para verificar se as tags estão corretas.</para>
   </section>
 
   <section>
@@ -72,31 +72,31 @@
 
     <itemizedlist>
       <listitem>
-        <para>Você pode criar um novo projeto para cada novo trabalho, além de poder adicionar vários arquivos fonte de uma vez em cada projeto.</para>
+        <para>É possível criar um novo projeto para cada novo trabalho, e adicionar novos arquivos fonte a um projeto a qualquer momento.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Para rever as configurações iniciais do projeto, abra a caixa de diálogo Editar Projeto pressionando <keycap>Ctrl+E</keycap>. Para ver a lista de arquivos do projeto, abra a caixa de diálogo <guilabel>Arquivos do projeto</guilabel> pressionando <keycap>Ctrl+L</keycap>.</para>
+        <para>Para rever as configurações iniciais do projeto, abra a janela de propriedades do projeto pressionando <keycap>Ctrl+E</keycap>. Para ver a lista de arquivos do projeto, abra a caixa de diálogo Arquivos do projeto pressionando &lt;k1&gt;Ctrl+L&lt;/k1&gt;.<guilabel></guilabel><keycap></keycap></para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Ao final da tradução, o OmegaT exporta três memórias de tradução chamadas <filename>level1</filename>, <filename>level2</filename> e <filename>omegat</filename> para a pasta do projeto. As memórias <filename>level1</filename> e <filename>level2</filename> podem ser compartilhadas com usuários de outros programas de tradução. A memória chamada <filename>omegat</filename> pode ser usada no próprio OmegaT em projetos futuros que você criar. Se você colocar estes arquivos de memória de tradução na subpasta <filename>/tm/</filename> de um projeto, o OmegaT vai automaticamente procurar segmentos semelhantes neles, chamados de &quot;correspondências parciais&quot;.</para>
+        <para>Ao final da tradução, o OmegaT exporta três memórias de tradução chamadas <filename>level1</filename>, <filename>level2</filename> e <filename>omegat</filename> para a pasta do projeto. As memórias <filename>level1</filename> e <filename>level2</filename> podem ser compartilhadas com usuários de outros programas de tradução. A memória chamada <filename>omegat</filename> pode ser usada no próprio OmegaT em projetos futuros que você criar. Se você colocar os arquivos de memória de tradução na subpasta <filename>/tm/</filename> da pasta do projeto, o OmegaT vai procurá-los automaticamente para os segmentos semelhantes, chamados de &quot;correspondências parciais&quot;.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Você pode adicionar um novo termo ao glossário pressionando <keycap>Ctrl+Shift+G</keycap>, ou copiar glossários existentes para a subpasta<filename>/glossary/</filename>da pasta do projeto, e o OmegaT procurará palavras nele automaticamente.</para>
+        <para>Você pode criar um glossário pressionando <keycap>Ctrl+Shift+G</keycap>, ou copiar glossários existentes para a subpasta<filename>/glossary/</filename>da pasta do projeto, e o OmegaT procurará palavras nele automaticamente.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Muitas vezes, é conveniente procurar palavras e frases no texto fonte e em sua tradução. Para isso, pressione <keycap>Ctrl+F</keycap> para abrir a caixa de diálogo <guilabel>Busca de texto</guilabel> a qualquer momento.</para>
+        <para>Muitas vezes, é útil procurar por palavras e frases no texto fonte e em sua tradução. Para isso, pressione <keycap>Ctrl+F</keycap> para chamar a caixa de diálogo <guilabel>Busca de texto</guilabel> a qualquer momento.</para>
       </listitem>
     </itemizedlist>
 

@@ -46,6 +46,10 @@
         </indexterm>Neste caso, as opções para iniciar o programa serão lidas do arquivo <emphasis><application>OmegaT</application>.l4J.ini </emphasis>, que está na mesma pasta que o arquivo exe, e que pode ser editado para refletir suas configurações. O exemplo a seguir para o arquivo INI reserva 1GB de memória, tem o francês como língua do usuário e o Canadá como país:</para>
 
       <literallayout><code># OmegaT.exe runtime configuration # Para usar um parâmetro, apague o símbolo '#' antes do '-' # Memory -Xmx1024M # Language -Duser.language=FR # Country -Duser.country=CA</code></literallayout>
+
+      <para>Dica: se o OmegaT estiver lento em sessões de Acesso Remoto no Windows, você pode usar esta opção:</para>
+
+      <literallayout><code>-Dsun.java2d.noddraw=false</code></literallayout>
     </section>
 
     <section>
@@ -168,7 +172,7 @@
           </listitem>
 
           <listitem>
-            <para>Clique no ícone, depois em <emphasis>Pesquisar…</emphasis> e vá até a subpasta /images na pasta do programa <application>OmegaT</application> Selecione o ícone <emphasis><application>OmegaT</application>.png</emphasis>. O GNOME pode não exibir os arquivos de ícone em formatos disponíveis e, inicialmente, parece esperar um arquivo SVG, mas se a pasta estiver selecionada, os arquivos devem aparecer e o<application>OmegaT</application>.png pode ser selecionado.</para>
+            <para>Clique no ícone, depois em <emphasis>Pesquisar...</emphasis> e vá até a subpasta /images na pasta do programa <application>OmegaT</application> Selecione o ícone <emphasis><application>OmegaT</application>.png</emphasis>. O GNOME pode não exibir os arquivos de ícone em formatos disponíveis e, inicialmente, parece esperar um arquivo SVG, mas se a pasta estiver selecionada, os arquivos devem aparecer e o<application>OmegaT</application>.png pode ser selecionado.</para>
           </listitem>
         </itemizedlist>
       </section>
@@ -191,7 +195,7 @@
     <section id="which.package.to.download.OSX">
       <title>Baixando o pacote</title>
 
-      <para>Para executar, o<application>OmegaT</application> 2.6 requer o Java 1.5. Use 'Software Update…' do menu Apple para atualizar sua versão Java.</para>
+      <para><application>O OmegaT</application> contém o Java JRE 1.7</para>
 
       <para>Baixe o <emphasis>OmegaT_3.n.n_Mac.zip.</emphasis></para>
     </section>
@@ -215,17 +219,19 @@
 
       <para>Dê um duplo clique em<emphasis> <application>OmegaT</application>.app</emphasis> ou clique na sua localização na Dock.</para>
 
-      <para>Para acessar <application><emphasis>Info.plist</emphasis></application>, clique com o botão direito em <emphasis><application>OmegaT</application>.app</emphasis> e selecione &quot;Mostrar conteúdo do pacote&quot;, depois, clique com o botão direito para abrir o arquivo e selecione o editor de texto de sua preferência. É possível usar o comando &quot;cd&quot; diretamente da linha de comando e abrir <application><emphasis>Info.plist</emphasis> em um editor da linha de comando como emacs ou vi</application>.<emphasis> <indexterm class="singular">
+      <para>Você pode modificar o comportamento do OmegaT ao editar tanto as <emphasis>Propriedades</emphasis> como o arquivo <emphasis>OmegaT.sh</emphasis> no pacote.</para>
+
+      <para>Para acessar o <application><emphasis>OmegaT.sh</emphasis></application>, clique com o botão direito em <emphasis><application>OmegaT</application>.app</emphasis> e selecione &quot;Mostrar conteúdo do pacote&quot;, depois abra o arquivo em Contents/MacOS clicando com o botão direito e selecionando o editor de texto de sua preferência. É possível usar o comando &quot;cd&quot; diretamente da linha de comando e abrir o <application><emphasis>OmegaT.sh</emphasis> em um editor da linha de comando como emacs ou vi</application>.<indexterm class="singular">
           <primary>Customizar o OmegaT para</primary> <secondary>OS X</secondary> <tertiary>Parâmetros de inicialização</tertiary>
-        </indexterm></emphasis></para>
+        </indexterm></para>
 
-      <para>Você pode modificar as  <emphasis>Propriedades</emphasis> bem como a parte <emphasis>VMOptions</emphasis>.</para>
+      <para>As opções são alteradas ao modificar o <emphasis>OmegaT.sh</emphasis>. Para opções pré-definidas, remova o caractere # antes de um parâmetro para habilitá-lo. Por exemplo, <filename>LANGUAGE=&quot;-Duser.language=ja&quot;</filename> (sem o #) irá iniciar o <application>OmegaT</application> com a interface de usuário em japonês.</para>
 
-      <para>Se quiser acrescentar valores na<emphasis> VMOptions</emphasis>, coloque um espaço entre eles. Por exemplo, <filename>-Xmx1024M -Duser.language=ja</filename> lançará o<application>OmegaT</application> com 1024MB de memória e com a interface de usuário em japonês.</para>
+      <para>Para mudar a quantidade de memória disponível, edite o próprio comando de inicialização. Por exemplo, <filename>${JAVA} -Xmx2048m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY} -jar OmegaT.jar</filename> irá iniciar o OmegaT com 2GB de memória.</para>
 
-      <para>Para iniciar múltiplas instâncias do <emphasis><application>OmegaT</application>.app</emphasis>, dê um duplo clique no arquivo <emphasis>JavaApplicationStub</emphasis> localizado em <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
+      <para>Para iniciar múltiplas instâncias do <emphasis><application>OmegaT</application>.app</emphasis>, dê um duplo clique no arquivo <emphasis>OmegaT.sh</emphasis> localizado em <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
 
-      <para><emphasis><application> </application></emphasis>Use o arquivo <emphasis><application>OmegaT</application>.jar</emphasis> localizado em <emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis> para iniciar o <application>OmegaT</application> a partir da linha de comando. Para mais informações, verifique &quot;Iniciar pela linha de comando&quot; abaixo.</para>
+      <para>Use o arquivo <emphasis><application>OmegaT</application>.jar</emphasis> localizado em <emphasis><application>OmegaT</application>.app/Contents/MacOS/Java/</emphasis> para iniciar o <application>OmegaT</application> a partir da linha de comando. Para mais informações, verifique &quot;Iniciar pela linha de comando&quot; abaixo.</para>
     </section>
 
     <section id="Mac.OSX.goodies">
@@ -361,7 +367,7 @@
           <primary>Executando o OmegaT</primary> <secondary>Parâmetros do script de inicialização do programa</secondary>
         </indexterm></title>
 
-      <para>O comando básico já foi mencionado acima. As alterações neste comando requerem a adição de &quot;parâmetros&quot;. Os parâmetros são adicionados depois do primeiro <emphasis>&quot;java&quot;</emphasis>, e antes de <emphasis>&quot;-jar <application>OmegaT</application>.jar&quot;</emphasis>. Observer que no Windows é possível alterar o arquivo <emphasis><application>OmegaT</application>.l4J.ini</emphasis> para refletir suas preferências. Para fazer o mesmo no Mac OS X, você pode modificar o <emphasis>Info.plist</emphasis> localizado em <emphasis><application>OmegaT</application>.app/Contents/</emphasis>.</para>
+      <para>O comando básico já foi mencionado acima. As alterações neste comando requerem a adição de &quot;parâmetros&quot;. Os parâmetros são adicionados depois do primeiro <emphasis>&quot;java&quot;</emphasis>, e antes de <emphasis>&quot;-jar <application>OmegaT</application>.jar&quot;</emphasis>. Observe que no Windows é possível alterar o arquivo <filename>OmegaT.l4J.ini</filename> para refletir suas preferências. Em outras plataformas, é possível modificar seu atalho (por ex., <filename>OmegaT.sh</filename> no Mac, <filename>OmegaT</filename> no Linux) para fazer o mesmo.</para>
 
       <para>A lista de parâmetros possíveis é fornecida abaixo. Os usuários avançados podem obter mais informações sobre os parâmetros digitando <emphasis>man java</emphasis> na janela do terminal.</para>
 
@@ -391,14 +397,6 @@
       </itemizedlist>
 
       <itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">Suavização da fonte</emphasis> - (Java 1.6 only)</para>
-
-          <para><emphasis role="bold">-Dswing.aatext=true<indexterm class="singular">
-              <primary>Executando o OmegaT</primary> <secondary>Parâmetros do script de inicialização do programa</secondary> <tertiary>Suavização da fonte</tertiary>
-            </indexterm></emphasis> Este parâmetro tem efeito na suavização das fontes, melhorando sua aparência. </para>
-        </listitem>
-
         <listitem>
           <para><emphasis role="bold">Atribuição de memória</emphasis></para>
 
@@ -448,18 +446,21 @@
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Opção de projeto de equipe<parameter><indexterm class="singular">
-              <primary>Executando o OmegaT</primary> <secondary>Parâmetros do script de inicialização do programa</secondary> <tertiary>opção &quot;no-team&quot;</tertiary>
-            </indexterm></parameter></emphasis></para>
+          <para><emphasis role="bold">Yandex Translate</emphasis><indexterm class="singular">
+              <primary>Executando o OmegaT</primary> <secondary>Parâmetros do script de inicialização do programa</secondary> <tertiary>Yandex Translate</tertiary>
+            </indexterm></para>
 
-          <para><emphasis role="bold">-no-team</emphasis> se refere a configurações de projetos para trabalhos em equipe. Use essa opção caso o OmegaT não deva sincronizar os conteúdos do projeto.</para>
+          <para>Certifique-se de que tem um conta gratuita da Yandex. Você precisa disso para obter e usar uma chave de API do Yandex Translate. Chaves de API podem ser solicitadas usando o <ulink url="http://api.yandex.com/key/form.xml?service=trnsl">formulário de requisição de chave de API</ulink> e visualizadas na página <ulink url="http://api.yandex.com/key/keyslist.xml">Minhas chaves</ulink>.</para>
+
+          <para><emphasis role="bold">-Dyandex.api.key=</emphasis><emphasis role="bold">trnsl.1.1.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</emphasis></para>
         </listitem>
+
       </itemizedlist>
 
       <para>Os parâmetros podem ser combinados: para iniciar o <application>OmegaT</application> com todos os exemplos descritos acima, o comando seria:</para>
 
       <para><literal>java -Dswing.aatext=true -Duser.language=pt
-      -Duser.country=BR -Xmx1024M <application>-DDhttp.proxyHost=192.168.1.1
+      -Duser.country=BR -Xmx1024M <application>-Dhttp.proxyHost=192.168.1.1
       -Dhttp.proxyport<emphasis role="bold">=</emphasis>3128 -jar
       -OmegaT</application>.jar</literal></para>
     </section>
@@ -522,11 +523,11 @@
 
         <itemizedlist>
           <listitem>
-            <para><emphasis><literal>--mode</literal>=…-</emphasis> <application>OmegaT</application> inicia em modo console para executar um dos seguintes serviços automaticamente</para>
+            <para><emphasis><literal>--mode</literal>=...-</emphasis> <application>OmegaT</application> inicia em modo console para executar um dos seguintes serviços automaticamente</para>
 
             <itemizedlist>
               <listitem>
-                <para><emphasis><emphasis><literal>--mode=console-translate</literal></emphasis></emphasis></para>
+                <para><emphasis><literal>--mode=console-translate</literal></emphasis></para>
 
                 <para>Neste modo, o OmegaT tentará traduzir os arquivos da pasta /source/ com as memórias de tradução disponíveis. Isso é útil para executar o OmegaT em um servidor com arquivos TMX alimentados automaticamente para um projeto. </para>
               </listitem>
@@ -613,6 +614,18 @@
             outputFileName</parameter></para>
 
             <para>Esta opção permite a verificação de tags em lote. Se <literal>anular </literal>for selecionado, o validador de tags irá parar no primeiro segmento inválido. Se <literal>aviso</literal> for especificado, o validador de tags processará todos os segmentos e alertará sobre os segmentos com tags inválidas no arquivo especificado.</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>-no-team</literal> se refere a configurações de projetos para trabalhos em equipe. Use essa opção caso o OmegaT não deva sincronizar os conteúdos do projeto.</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>--disable-project-locking</literal> permite abrir o mesmo projeto em várias instâncias do OmegaT no Windows. No Windows, por padrão, o arquivo <literal>omegat.project</literal> é bloqueado, e uma mensagem de erro é recebida ao tentar abrir um projeto já aberto em outra instância do OmegaT. Com esta opção, o bloqueio não ocorre.</para>
           </listitem>
         </itemizedlist>
       </section>

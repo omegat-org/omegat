@@ -135,6 +135,12 @@
 
           <entry>Alternância entre RTL-LTR</entry>
         </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Espaço</emphasis></entry>
+
+          <entry>abre uma caixa de diálogo com sugestões contextuais (Mac: <emphasis role="bold">Esc</emphasis>). Use <emphasis role="bold">Ctrl+PgUp/PgDn</emphasis> (Cmd+PgUp/PgDn no Mac) para alternar em sequência as opções de <emphasis>Entradas de glossário</emphasis>, <emphasis>Entradas de auto-texto</emphasis>, <emphasis>Tags faltantes</emphasis> e <emphasis>Tabela de caracteres</emphasis>.</entry>
+        </row>
       </tbody>
     </tgroup>
   </table>
@@ -166,6 +172,8 @@
   <para>A tecla “Shift” não exibe nenhum comportamento especial: quando ela é pressionada, todas as teclas movem o cursor da maneira habitual, exceto no caso da combinação  <literal>Shift+Enter</literal>, que insere uma quebra de linha no texto.</para>
 
   <para>Os comandos gerais do sistema Selecionar tudo (<keycap>Ctrl+A</keycap>), Colar (<emphasis role="bold">Ctrl+V</emphasis>), Recortar (<emphasis role="bold">Ctrl+X</emphasis>), Copiar (<emphasis role="bold">Ctrl+C)</emphasis>, Inserir correspondência <emphasis role="bold">(Ctrl+I</emphasis>) e Inserir texto fonte (<emphasis role="bold">Ctrl+Shift+I</emphasis>) atuam a princípio somente sobre o texto dentro do segmento aberto atualmente.</para>
+  
+  <para>É possível ir de um painel a outro (por exemplo, do Editor para o painel de Correspondências parciais) usando <keycap>Ctrl+Tab</keycap>. <keycap>Ctrl+Shift+Tab</keycap> volta ao painel anterior. Os atalhos <keycap>Ctrl+A</keycap> e <keycap>Ctrl+C</keycap> funcionam nos painéis, permitindo copiar tudo ou partes das informações para a área de transferência.</para>
 
   <para>Observe que você pode redefinir os atalhos conforme suas próprias preferências. Ver <link linkend="ch04.shortcuts.customization">Apêndice de configuração de atalhos</link></para>
 </appendix>

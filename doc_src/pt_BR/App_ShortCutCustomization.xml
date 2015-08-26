@@ -75,118 +75,26 @@
       <title>Menu Projeto</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Item de menu</entry>
-
-            <entry>Atalho padrão</entry>
-
-            <entry>Código de item de menu</entry>
-          </row>
+          <row><entry>Item de menu</entry><entry>Atalho padrão</entry><entry>Código de item de menu</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Novo</entry>
-
-            <entry/>
-
-            <entry>projectNewMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Abrir</entry>
-
-            <entry><keycap>Ctrl+O</keycap></entry>
-
-            <entry>projectOpenMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Baixar projetos de equipe</entry>
-
-            <entry/>
-
-            <entry>projectTeamNewMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Copiar arquivos para a pasta source…</entry>
-
-            <entry/>
-
-            <entry>projectImportMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Importar do MediaWiki…</entry>
-
-            <entry/>
-
-            <entry>projectWikiImportMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Recarregar</entry>
-
-            <entry><keycap>F5</keycap></entry>
-
-            <entry>projectReloadMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Fechar</entry>
-
-            <entry><keycap>Ctrl+Shift+W</keycap></entry>
-
-            <entry>projectCloseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Salvar</entry>
-
-            <entry><keycap>Ctrl+S</keycap></entry>
-
-            <entry>projectSaveMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Criar documentos traduzidos</entry>
-
-            <entry><keycap>Ctrl+D</keycap></entry>
-
-            <entry>projectCompileMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Propriedades…</entry>
-
-            <entry><keycap>Ctrl+E</keycap></entry>
-
-            <entry>projectEditMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Arquivos do projeto…</entry>
-
-            <entry><keycap>Ctrl+L</keycap></entry>
-
-            <entry>viewFileListMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Sair</entry>
-
-            <entry><keycap>Ctrl+Q</keycap></entry>
-
-            <entry>projectExitMenuItem</entry>
-          </row>
+          <row><entry>Novo</entry><entry><keycap>Shift+Ctrl+N</keycap></entry><entry>projectNewMenuItem</entry></row>
+          <row><entry>Abrir</entry><entry><keycap>Ctrl+O</keycap></entry><entry>projectOpenMenuItem</entry></row>
+          <row><entry>Baixar projetos de equipe</entry><entry/><entry>projectTeamNewMenuItem</entry></row>
+          <row><entry>Copiar arquivos para a pasta source...</entry><entry/><entry>projectImportMenuItem</entry></row>
+          <row><entry>Importar do MediaWiki...</entry><entry/><entry>projectWikiImportMenuItem</entry></row>
+          <row><entry>Recarregar</entry><entry><keycap>F5</keycap></entry><entry>projectReloadMenuItem</entry></row>
+          <row><entry>Fechar</entry><entry><keycap>Ctrl+Shift+W</keycap></entry><entry>projectCloseMenuItem</entry></row>
+          <row><entry>Salvar</entry><entry><keycap>Ctrl+S</keycap></entry><entry>projectSaveMenuItem</entry></row>
+          <row><entry>Criar documentos traduzidos</entry><entry><keycap>Ctrl+D</keycap></entry><entry>projectCompileMenuItem</entry></row>
+          <row><entry>Criar documento atual traduzido</entry><entry><keycap>Shift+Ctrl+D</keycap></entry><entry>projectSingleCompileMenuItem</entry></row>
+          <row><entry>Propriedades...</entry><entry><keycap>Ctrl+E</keycap></entry><entry>projectEditMenuItem</entry></row>
+          <row><entry>Arquivos do projeto...</entry><entry><keycap>Ctrl+L</keycap></entry><entry>viewFileListMenuItem</entry></row>
+          <row><entry>Sair</entry><entry><keycap>Ctrl+Q</keycap></entry><entry>projectExitMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>
@@ -199,198 +107,40 @@
       <title>Menu editar</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Item de menu</entry>
-
-            <entry>Atalho padrão</entry>
-
-            <entry>Código de item de menu</entry>
-          </row>
+          <row><entry>Item de menu</entry><entry>Atalho padrão</entry><entry>Código de item de menu</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Desfazer última ação</entry>
-
-            <entry><keycap>Ctrl+Z</keycap></entry>
-
-            <entry>editUndoMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Refazer última ação</entry>
-
-            <entry><keycap>Ctrl+Y</keycap></entry>
-
-            <entry>editRedoMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Substituir com correspondência</entry>
-
-            <entry><keycap>Ctrl+R</keycap></entry>
-
-            <entry>editOverwriteTranslationMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Inserir correspondência</entry>
-
-            <entry><keycap>Ctrl+I</keycap></entry>
-
-            <entry>editInsertTranslationMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Substituir com tradução automática</entry>
-
-            <entry><keycap>Ctrl+M</keycap></entry>
-
-            <entry>editOverwriteMachineTranslationMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Substituir com texto fonte</entry>
-
-            <entry><keycap>Shift+Ctrl+R</keycap></entry>
-
-            <entry>editOverwriteSourceMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Inserir texto fonte</entry>
-
-            <entry><keycap>Shift+Ctrl+I</keycap></entry>
-
-            <entry>editInsertSourceMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Inserir tags do texto fonte</entry>
-
-            <entry><keycap>Shift+Ctrl+T</keycap></entry>
-
-            <entry>editTagPainterMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Exportar seleção</entry>
-
-            <entry><keycap>Shift+Ctrl+C</keycap></entry>
-
-            <entry>editExportSelectionMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Criar termos no glossário</entry>
-
-            <entry><keycap>Shift+Ctrl+G</keycap></entry>
-
-            <entry>editCreateGlossaryEntryMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Buscar no projeto…</entry>
-
-            <entry><keycap>Ctrl+F</keycap></entry>
-
-            <entry>editFindInProjectMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Selecionar correspondência parcial 1</entry>
-
-            <entry><keycap>Ctrl+1</keycap></entry>
-
-            <entry>editSelectFuzzy1MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Selecionar correspondência parcial 2</entry>
-
-            <entry><keycap>Ctrl+2</keycap></entry>
-
-            <entry>editSelectFuzzy2MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Selecionar correspondência parcial 3</entry>
-
-            <entry><keycap>Ctrl+3</keycap></entry>
-
-            <entry>editSelectFuzzy3MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Selecionar correspondência parcial 4</entry>
-
-            <entry><keycap>Ctrl+4</keycap></entry>
-
-            <entry>editSelectFuzzy4MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Selecionar correspondência parcial 5</entry>
-
-            <entry><keycap>Ctrl+5</keycap></entry>
-
-            <entry>editSelectFuzzy5MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Trocar letras para/Minúsculas</entry>
-
-            <entry/>
-
-            <entry>lowerCaseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Trocar letras para/Maiúsculas</entry>
-
-            <entry/>
-
-            <entry>upperCaseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Trocar letras para/Títulos</entry>
-
-            <entry/>
-
-            <entry>titleCaseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Alternar letra para…</entry>
-
-            <entry><keycap>Shift+F3</keycap></entry>
-
-            <entry>cycleSwitchCaseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Usar como tradução padrão</entry>
-
-            <entry/>
-
-            <entry>editMultipleDefault</entry>
-          </row>
-
-          <row>
-            <entry>Criar tradução alternativa</entry>
-
-            <entry/>
-
-            <entry>editMultipleAlternate</entry>
-          </row>
+          <row><entry>Desfazer última ação</entry><entry><keycap>Ctrl+Z</keycap></entry><entry>editUndoMenuItem</entry></row>
+          <row><entry>Refazer última ação</entry><entry><keycap>Ctrl+Y</keycap></entry><entry>editRedoMenuItem</entry></row>
+          <row><entry>Substituir com correspondência</entry><entry><keycap>Ctrl+R</keycap></entry><entry>editOverwriteTranslationMenuItem</entry></row>
+          <row><entry>Inserir correspondência</entry><entry><keycap>Ctrl+I</keycap></entry><entry>editInsertTranslationMenuItem</entry></row>
+          <row><entry>Substituir com tradução automática</entry><entry><keycap>Ctrl+M</keycap></entry><entry>editOverwriteMachineTranslationMenuItem</entry></row>
+          <row><entry>Substituir com texto fonte</entry><entry><keycap>Shift+Ctrl+R</keycap></entry><entry>editOverwriteSourceMenuItem</entry></row>
+          <row><entry>Inserir texto fonte</entry><entry><keycap>Shift+Ctrl+I</keycap></entry><entry>editInsertSourceMenuItem</entry></row>
+          <row><entry>Inserir tags do texto fonte</entry><entry><keycap>Shift+Ctrl+T</keycap></entry><entry>editTagPainterMenuItem</entry></row>
+          <row><entry>Inserir próxima tag ausente</entry><entry><keycap>Ctrl+T</keycap></entry><entry>editTagNextMissedMenuItem</entry></row>
+          <row><entry>Exportar seleção</entry><entry><keycap>Shift+Ctrl+C</keycap></entry><entry>editExportSelectionMenuItem</entry></row>
+          <row><entry>Criar termos no glossário</entry><entry><keycap>Shift+Ctrl+G</keycap></entry><entry>editCreateGlossaryEntryMenuItem</entry></row>
+          <row><entry>Buscar no projeto...</entry><entry><keycap>Ctrl+F</keycap></entry><entry>editFindInProjectMenuItem</entry></row>
+          <row><entry>Buscar e substituir...</entry><entry><keycap>Ctrl+K</keycap></entry><entry>editReplaceInProjectMenuItem</entry></row>
+          <row><entry>Selecionar correspondência anterior</entry><entry><keycap>Ctrl+↑</keycap></entry><entry>editSelectFuzzyPrevMenuItem</entry></row>
+          <row><entry>Selecionar próxima correspondência</entry><entry><keycap>Ctrl+↓</keycap></entry><entry>editSelectFuzzyNextMenuItem</entry></row>
+          <row><entry>Selecionar correspondência parcial 1</entry><entry><keycap>Ctrl+1</keycap></entry><entry>editSelectFuzzy1MenuItem</entry></row>
+          <row><entry>Selecionar correspondência parcial 2</entry><entry><keycap>Ctrl+2</keycap></entry><entry>editSelectFuzzy2MenuItem</entry></row>
+          <row><entry>Selecionar correspondência parcial 3</entry><entry><keycap>Ctrl+3</keycap></entry><entry>editSelectFuzzy3MenuItem</entry></row>
+          <row><entry>Selecionar correspondência parcial 4</entry><entry><keycap>Ctrl+4</keycap></entry><entry>editSelectFuzzy4MenuItem</entry></row>
+          <row><entry>Selecionar correspondência parcial 5</entry><entry><keycap>Ctrl+5</keycap></entry><entry>editSelectFuzzy5MenuItem</entry></row>
+          <row><entry>Trocar letras para/Minúsculas</entry><entry/><entry>lowerCaseMenuItem</entry></row>
+          <row><entry>Trocar letras para/Maiúsculas</entry><entry/><entry>upperCaseMenuItem</entry></row>
+          <row><entry>Trocar letras para/Títulos</entry><entry/><entry>titleCaseMenuItem</entry></row>
+          <row><entry>Alternar letra para...</entry><entry><keycap>Shift+F3</keycap></entry><entry>cycleSwitchCaseMenuItem</entry></row>
+          <row><entry>Usar como tradução padrão</entry><entry/><entry>editMultipleDefault</entry></row>
+          <row><entry>Criar tradução alternativa</entry><entry/><entry>editMultipleAlternate</entry></row>
+          <row><entry>Registrar tradução idêntica</entry><entry/><entry>editRegisterIdenticalMenuItem</entry></row>
 
         </tbody>
       </tgroup>
@@ -404,86 +154,22 @@
       <title>Menu Ir para</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Item de menu</entry>
-
-            <entry>Atalho padrão</entry>
-
-            <entry>Código de item de menu</entry>
-          </row>
+          <row><entry>Item de menu</entry><entry>Atalho padrão</entry><entry>Código de item de menu</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Próximo segmento não traduzido</entry>
-
-            <entry><keycap>Ctrl+U</keycap></entry>
-
-            <entry>gotoNextUntranslatedMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Próximo segmento</entry>
-
-            <entry><keycap>Ctrl+N</keycap> ou <keycap>Enter</keycap> ou <keycap>Tab</keycap></entry>
-
-            <entry>gotoNextSegmentMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Segmento anterior</entry>
-
-            <entry><keycap>Ctrl+P</keycap> ou <keycap>Ctrl+Enter</keycap> ou <keycap>Ctrl+Tab</keycap></entry>
-
-            <entry>gotoPreviousSegmentMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Segmento número…</entry>
-
-            <entry><keycap>Ctrl+J</keycap></entry>
-
-            <entry>gotoSegmentMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Próxima nota</entry>
-
-            <entry/>
-
-            <entry>gotoNextNoteMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Nota anterior</entry>
-
-            <entry/>
-
-            <entry>gotoPreviousNoteMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Avançar pelos segmentos…</entry>
-
-            <entry><keycap>Ctrl+Shift+N</keycap></entry>
-
-            <entry>gotoHistoryForwardMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Voltar pelos segmentos…</entry>
-
-            <entry><keycap>Ctrl+Shift+P</keycap></entry>
-
-            <entry>gotoHistoryBackMenuItem</entry>
-          </row>
+          <row><entry>Próximo segmento não traduzido</entry><entry><keycap>Ctrl+U</keycap></entry><entry>gotoNextUntranslatedMenuItem</entry></row>
+          <row><entry>Próximo segmento traduzido</entry><entry><keycap>Shift+Ctrl+U</keycap></entry><entry>gotoNextTranslatedMenuItem</entry></row>
+          <row><entry>Próximo segmento</entry><entry><keycap>Ctrl+N</keycap> ou <keycap>Enter</keycap> ou <keycap>Tab</keycap></entry><entry>gotoNextSegmentMenuItem</entry></row>
+          <row><entry>Segmento anterior</entry><entry><keycap>Ctrl+P</keycap> ou <keycap>Ctrl+Enter</keycap> ou <keycap>Ctrl+Tab</keycap></entry><entry>gotoPreviousSegmentMenuItem</entry></row>
+          <row><entry>Segmento número...</entry><entry><keycap>Ctrl+J</keycap></entry><entry>gotoSegmentMenuItem</entry></row>
+          <row><entry>Próxima nota</entry><entry/><entry>gotoNextNoteMenuItem</entry></row>
+          <row><entry>Nota anterior</entry><entry/><entry>gotoPreviousNoteMenuItem</entry></row>
+          <row><entry>Avançar pelos segmentos...</entry><entry><keycap>Ctrl+Shift+N</keycap></entry><entry>gotoHistoryForwardMenuItem</entry></row>
+          <row><entry>Voltar pelos segmentos...</entry><entry><keycap>Ctrl+Shift+P</keycap></entry><entry>gotoHistoryBackMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>
@@ -500,110 +186,25 @@
       </indexterm>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Item de menu</entry>
-
-            <entry>Atalho padrão</entry>
-
-            <entry>Código de item de menu</entry>
-          </row>
+          <row><entry>Item de menu</entry><entry>Atalho padrão</entry><entry>Código de item de menu</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Marcar segmentos traduzidos</entry>
-
-            <entry/>
-
-            <entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Marcar segmentos não traduzidos</entry>
-
-            <entry/>
-
-            <entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Mostrar segmentos fonte</entry>
-
-            <entry/>
-
-            <entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Marcar segmentos repetidos</entry>
-
-            <entry/>
-
-            <entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Marcar segmentos com notas</entry>
-
-            <entry/>
-
-            <entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Marcar espaços inseparáveis</entry>
-
-            <entry/>
-
-            <entry>viewMarkNBSPCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Marcar espaços em branco</entry>
-
-            <entry/>
-
-            <entry>viewMarkWhitespaceCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Marcar caracteres de controle de algoritmo bidirecional</entry>
-
-            <entry/>
-
-            <entry>viewMarkBidiCheckBoxMenuItem</entry>
-          </row>
-
-           <row>
-            <entry>Informações de modificação/Não exibir</entry>
-
-            <entry/>
-
-            <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
-          </row>
-
-         <row>
-            <entry>Informações de modificação/Exibir selecionadas</entry>
-
-            <entry/>
-
-            <entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Informações de modificação/Exibir todas</entry>
-
-            <entry/>
-
-            <entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry>
-          </row>
+          <row><entry>Marcar segmentos traduzidos</entry><entry/><entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry></row>
+          <row><entry>Marcar segmentos não traduzidos</entry><entry/><entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry></row>
+          <row><entry>Mostrar segmentos fonte</entry><entry/><entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry></row>
+          <row><entry>Marcar segmentos repetidos</entry><entry/><entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry></row>
+          <row><entry>Marcar segmentos com notas</entry><entry/><entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry></row>
+          <row><entry>Marcar espaços inseparáveis</entry><entry/><entry>viewMarkNBSPCheckBoxMenuItem</entry></row>
+          <row><entry>Marcar espaços em branco</entry><entry/><entry>viewMarkWhitespaceCheckBoxMenuItem</entry></row>
+          <row><entry>Marcar caracteres de controle de algoritmo bidirecional</entry><entry/><entry>viewMarkBidiCheckBoxMenuItem</entry></row>
+          
+          <row><entry>Informações de modificação/Não exibir</entry><entry/><entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry></row>
+          <row><entry>Informações de modificação/Exibir selecionadas</entry><entry/><entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry></row>
+          <row><entry>Informações de modificação/Exibir todas</entry><entry/><entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>
@@ -616,46 +217,18 @@
       <title>Menu Ferramentas</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Item de menu</entry>
-
-            <entry>Atalho padrão</entry>
-
-            <entry>Código de item de menu</entry>
-          </row>
+          <row><entry>Item de menu</entry><entry>Atalho padrão</entry><entry>Código de item de menu</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Verificar tags</entry>
-
-            <entry><keycap>Ctrl +T</keycap></entry>
-
-            <entry>toolsValidateTagsMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Estatísticas</entry>
-
-            <entry/>
-
-            <entry>toolsShowStatisticsStandardMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Estatística das correspondências</entry>
-
-            <entry/>
-
-            <entry>toolsShowStatisticsMatchesMenuItem</entry>
-          </row>
+          <row><entry>Verificar tags</entry><entry><keycap>Shift+Ctrl+V</keycap></entry><entry>toolsValidateTagsMenuItem</entry></row>
+          <row><entry>Verificar tags para o documento atual</entry><entry/><entry>toolsSingleValidateTagsMenuItem</entry></row>
+          <row><entry>Estatísticas</entry><entry/><entry>toolsShowStatisticsStandardMenuItem</entry></row>
+          <row><entry>Estatística das correspondências</entry><entry/><entry>toolsShowStatisticsMatchesMenuItem</entry></row>
+          <row><entry>Estatísticas das correspondências por arquivo</entry><entry/><entry>toolsShowStatisticsMatchesPerFileMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>
@@ -668,158 +241,33 @@
       <title>Menu Opções</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Item de menu</entry>
-
-            <entry>Atalho padrão</entry>
-
-            <entry>Código de item de menu</entry>
-          </row>
+          <row><entry>Item de menu</entry><entry>Atalho padrão</entry><entry>Código de item de menu</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Usar TAB para avançar</entry>
-
-            <entry/>
-
-            <entry>optionsTabAdvanceCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Sempre confirmar saída</entry>
-
-            <entry/>
-
-            <entry>optionsAlwaysConfirmQuitCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Tradução automática</entry>
-
-            <entry/>
-
-            <entry/>
-          </row>
-
-          <row>
-            <entry>TransTips/Habilitar TransTips</entry>
-
-            <entry/>
-
-            <entry>optionsTransTipsEnableMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>TransTips/Correspondência exata</entry>
-
-            <entry/>
-
-            <entry>optionsTransTipsExactMatchMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Fonte…</entry>
-
-            <entry/>
-
-            <entry>optionsFontSelectionMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Filtros de arquivo…</entry>
-
-            <entry/>
-
-            <entry>optionsSetupFileFiltersMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Segmentação…</entry>
-
-            <entry/>
-
-            <entry>optionsSentsegMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Verificador ortográfico…</entry>
-
-            <entry/>
-
-            <entry>optionsSpellCheckMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Modo de trabalho…</entry>
-
-            <entry/>
-
-            <entry>optionsWorkflowMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Verificação de tags…</entry>
-
-            <entry/>
-
-            <entry>optionsTagValidationMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Equipe…</entry>
-
-            <entry/>
-
-            <entry>optionsTeamMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>TMXs externas…</entry>
-
-            <entry/>
-
-            <entry>optionsExtTMXMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Exibição…</entry>
-
-            <entry/>
-
-            <entry>optionsViewOptionsMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Gravação e saída…</entry>
-
-            <entry/>
-
-            <entry>optionsSaveOptionsMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Login de Proxy…</entry>
-
-            <entry/>
-
-            <entry>optionsViewOptionsMenuLoginItem</entry>
-          </row>
-
-          <row>
-            <entry>Restaurar janela principal</entry>
-
-            <entry/>
-
-            <entry>optionsRestoreGUIMenuItem</entry>
-          </row>
+          <row><entry>Usar TAB para avançar</entry><entry/><entry>optionsTabAdvanceCheckBoxMenuItem</entry></row>
+          <row><entry>Sempre confirmar saída</entry><entry/><entry>optionsAlwaysConfirmQuitCheckBoxMenuItem</entry></row>
+          <row><entry>Tradução automática</entry><entry/><entry/></row>
+          <row><entry>TransTips/Habilitar TransTips</entry><entry/><entry>optionsTransTipsEnableMenuItem</entry></row>
+          <row><entry>TransTips/Correspondência exata</entry><entry/><entry>optionsTransTipsExactMatchMenuItem</entry></row>
+          <row><entry>Auto-completar/Glossário...</entry><entry/><entry>optionsAutoCompleteGlossaryMenuItem</entry></row>
+          <row><entry>Auto-completar/Auto-texto...</entry><entry/><entry>optionsAutoCompleteAutoTextMenuItem</entry></row>
+          <row><entry>Auto-completar/Tabela de caracteres...</entry><entry/><entry>optionsAutoCompleteCharTableMenuItem</entry></row>
+          <row><entry>Fonte...</entry><entry/><entry>optionsFontSelectionMenuItem</entry></row>
+          <row><entry>Filtros de arquivo...</entry><entry/><entry>optionsSetupFileFiltersMenuItem</entry></row>
+          <row><entry>Segmentação...</entry><entry/><entry>optionsSentsegMenuItem</entry></row>
+          <row><entry>Verificador ortográfico...</entry><entry/><entry>optionsSpellCheckMenuItem</entry></row>
+          <row><entry>Modo de trabalho…</entry><entry/><entry>optionsWorkflowMenuItem</entry></row>
+          <row><entry>Verificação de tags...</entry><entry/><entry>optionsTagValidationMenuItem</entry></row>
+          <row><entry>Equipe...</entry><entry/><entry>optionsTeamMenuItem</entry></row>
+          <row><entry>TMXs externas...</entry><entry/><entry>optionsExtTMXMenuItem</entry></row>
+          <row><entry>Exibição...</entry><entry/><entry>optionsViewOptionsMenuItem</entry></row>
+          <row><entry>Gravação e saída...</entry><entry/><entry>optionsSaveOptionsMenuItem</entry></row>
+          <row><entry>Login de Proxy...</entry><entry/><entry>optionsViewOptionsMenuLoginItem</entry></row>
+          <row><entry>Restaurar janela principal</entry><entry/><entry>optionsRestoreGUIMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>
@@ -832,38 +280,17 @@
       <title>Menu Ajuda</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Item de menu</entry>
-
-            <entry>Atalho padrão</entry>
-
-            <entry>Código de item de menu</entry>
-          </row>
+          <row><entry>Item de menu</entry><entry>Atalho padrão</entry><entry>Código de item de menu</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Manual do Usuário…</entry>
-
-            <entry><keycap>F1</keycap></entry>
-
-            <entry>helpContentsMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Sobre…</entry>
-
-            <entry/>
-
-            <entry>helpAboutMenuItem</entry>
-          </row>
+          <row><entry>Manual do Usuário...</entry><entry><keycap>F1</keycap></entry><entry>helpContentsMenuItem</entry></row>
+          <row><entry>Sobre...</entry><entry/><entry>helpAboutMenuItem</entry></row>
+          <row><entry>Últimas alterações...</entry><entry/><entry>helpLastChangesMenuItem</entry></row>
+          <row><entry>Registros...</entry><entry/><entry>helpLogMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>

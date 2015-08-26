@@ -26,7 +26,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Processo de tradução:</emphasis> Imagine que você tenha para traduzir desde um arquivo único até uma pasta com subpastas repletas de arquivos em diversos formatos. Quando você indica quais arquivos quer traduzir, o OmegaT procurará pelos formatos compatíveis de acordo com as regras de filtragem de arquivo, reconhecerá neles as partes de texto, dividirá os grupos de texto maiores de acordo com as regras de segmentação, e exibirá os segmentos um a um para que você inicie a tradução. O OmegaT guarda as suas traduções e propõe traduções possíveis de segmentos semelhantes em arquivos de memória prévios. Quando estiver pronto para examinar o produto final, você pode exportar os arquivos traduzidos, abri-los na aplicação apropriada e examinar a tradução no formato final…</para>
+        <para><emphasis role="bold">Processo de tradução:</emphasis> Imagine que você tenha para traduzir desde um arquivo único até uma pasta com subpastas repletas de arquivos em diversos formatos. Quando você indica quais arquivos quer traduzir, o OmegaT procurará pelos formatos compatíveis de acordo com as regras de filtragem de arquivo, reconhecerá neles as partes de texto, dividirá os grupos de texto maiores de acordo com as regras de segmentação, e exibirá os segmentos um a um para que você inicie a tradução. O OmegaT guarda as suas traduções e propõe traduções possíveis de segmentos semelhantes registrados em arquivos de memória de tradução. Quando estiver pronto para examinar o produto final, você pode exportar os arquivos traduzidos, abri-los na aplicação apropriada e examinar a tradução no formato final...</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -104,7 +104,7 @@
 
         <itemizedlist>
           <listitem>
-            <para><emphasis role="bold">Idiomas:</emphasis> a lista ISO de idiomas e códigos de idiomas é fornecida</para>
+            <para><emphasis role="bold">Idiomas:</emphasis> a lista ISO de línguas e códigos de língua é fornecida</para>
           </listitem>
         </itemizedlist>
 
@@ -120,7 +120,7 @@
 
         <itemizedlist>
           <listitem>
-            <para><emphasis role="bold">Introdução aos plug-ins do tokenizer e de script</emphasis></para>
+            <para><emphasis role="bold">Introdução aos tokenizers e scripts</emphasis></para>
           </listitem>
 
           <listitem>

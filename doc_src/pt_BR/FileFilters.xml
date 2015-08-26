@@ -23,11 +23,11 @@
     </listitem>
   </itemizedlist>
 
-  <para>Para ver que formatos de arquivo são compatíveis com o OmegaT, veja o menu <guimenuitem>Opções &gt; Filtros de arquivo… </guimenuitem></para>
+  <para>Para ver que formatos de arquivo são compatíveis com o OmegaT, veja o menu <guimenuitem>Opções &gt; Filtros de arquivo... </guimenuitem></para>
 
-  <para>A maior parte dos usuários achará as opções padrão de filtro de arquivo suficientes. Se não for o caso, selecione o menu<emphasis role="bold"> Opções -&gt; Filtros de arquivos…</emphasis> para abrir a caixa de diálogo principal. Também é possivel ativar filtros de arquivo específicos por projeto, que somente serão usados no projeto atual, selecionando a opção <emphasis role="bold">Filtros de arquivos…</emphasis> em Propriedade do projeto.</para>
+  <para>A maior parte dos usuários achará as opções padrão de filtro de arquivo suficientes. Se não for o caso, selecione o menu<emphasis role="bold"> Opções -&gt; Filtros de arquivos...</emphasis> para abrir a caixa de diálogo principal. Também é possivel ativar filtros de arquivo específicos por projeto, que somente serão usados no projeto atual, selecionando a opção <emphasis role="bold">Filtros de arquivos...</emphasis> em Propriedade do projeto.</para>
 
-  <para>Você pode ativar filtros específicos por projeto em <emphasis role="bold">Projeto → Propriedades…</emphasis>. Clique em <guibutton>Filtros de arquivos</guibutton> e ative a caixa de seleção <guimenuitem>Ativar filtros específicos por projeto</guimenuitem><indexterm class="singular">
+  <para>Você pode ativar filtros específicos por projeto em <emphasis role="bold">Projeto → Propriedades...</emphasis>. Clique em <guibutton>Filtros de arquivos</guibutton> e ative a caixa de seleção <guimenuitem>Ativar filtros específicos por projeto</guimenuitem><indexterm class="singular">
       <primary>Filtros de arquivo</primary> <secondary>Filtros de arquivo específicos por projeto</secondary>
     </indexterm>. Uma cópia da configuração de filtros será gravada com o projeto neste caso. Se você modificar filtros mais tarde, apenas os filtros do projeto serão atualizados, enquanto os filtros de usuário ficam inalterados.</para>
 
@@ -39,6 +39,26 @@
       </indexterm></title>
 
     <para>Este diálogo enumera filtros de arquivo disponíveis. Se deseja não usar OmegaT para traduzir arquivos de certo tipo, pode apagar o filtro correspondente desativando a caixa de seleção junto ao seu nome. O OmegaT então omitirá tais arquivos ao carregar os projetos e irá apenas copiá-los, sem nenhuma intervenção, quando criar os documentos traduzidos. Quando quiser usar o filtro de novo, basta marcar a caixa de seleção. Clique em <emphasis role="bold">Restaurar padrões</emphasis> para restaurar os filtros às configurações padrões. Para editar os arquivos e a codificação que o filtro processará, selecione o filtro na lista e clique em <emphasis role="bold">Editar.</emphasis></para>
+
+    <para>A caixa de diálogo permite habilitar ou desabilitar as seguintes opções:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Remover tags à esquerda e à direita: desmarque esta opção para exibir todas as tags, inclusive as tags à esquerda e à direita. Atenção: nos formatos Microsoft Open XML (docx, xlsx, etc.), se todas as tags forem exibidas, NÃO escreva nenhum texto antes da primeira tag (é uma tag técnica que deve sempre iniciar o segmento).</para>
+      </listitem>
+
+      <listitem>
+        <para>Remover espaço em branco à esquerda e à direita em projetos não segmentados: por padrão, o OmegaT remove os espaços em branco à esquerda e à direita. Em projetos não segmentados, é possível mantê-los ao desmarcar esta opção.</para>
+      </listitem>
+
+      <listitem>
+        <para>Preservar espaços para todas as tags: marque esta opção se os documentos fonte contêm espaços importantes (para fins de layout) que não devem ser ignorados.</para>
+      </listitem>
+
+      <listitem>
+        <para>Ignorar contexto de arquivos ao identificar segmentos com traduções alternativas: por padrão, o OmegaT usa o nome do arquivo fonte como parte da identificação de uma tradução alternativa. Se a opção estiver marcada, o nome do arquivo fonte não será usado, e traduções alternativas terão efeito em um arquivo, se outros itens de contexto (segmentos anteriores/posteriores, ou algum tipo de identificador, dependendo do formato do arquivo) sejam correspondentes.</para>
+      </listitem>
+    </itemizedlist>
   </section>
 
   <section id="filters.options">
@@ -80,7 +100,7 @@
       <listitem>
         <para><emphasis>Substituir automaticamente 'nplurals=INTEGER; plural=EXPRESSION;' no cabeçalho</emphasis></para>
 
-        <para><emphasis><emphasis>A opção permite que o OmegaT ignore a especificação no cabeçalho do arquivo PO e use o padrão para o idioma de destino selecionado.</emphasis></emphasis></para>
+        <para><emphasis>A opção permite que o OmegaT ignore a especificação no cabeçalho do arquivo PO e use o padrão para o idioma de destino selecionado.</emphasis></para>
       </listitem>
     </itemizedlist>
 
@@ -112,7 +132,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Não traduzir o atributo de conteúdo das meta-tags … :</emphasis> As seguintes meta-tags não serão traduzidas.</para>
+        <para><emphasis>Não traduzir o atributo de conteúdo das meta-tags ... :</emphasis> As seguintes meta-tags não serão traduzidas.</para>
       </listitem>
     </itemizedlist>
 
@@ -196,7 +216,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Não traduzir o atributo de conteúdo das meta-tags … :</emphasis> As seguintes meta-tags não serão traduzidas.</para>
+        <para><emphasis>Não traduzir o atributo de conteúdo das meta-tags ... :</emphasis> As seguintes meta-tags não serão traduzidas.</para>
       </listitem>
     </itemizedlist>
 
@@ -285,7 +305,7 @@
           <primary>Arquivos destino</primary> <secondary>Nomes de arquivo</secondary>
         </indexterm></title>
 
-      <para>Se quiser, você poderá renomear automaticamente os arquivos que traduz, por exemplo, acrescentando o código de idioma após o nome do arquivo. O tipo de arquivo traduzido usa uma sintaxe especial, portanto se você quiser editar este campo, clique em <emphasis role="bold">Editar…</emphasis> para acessar a <indexterm class="singular">
+      <para>Se quiser, você poderá renomear automaticamente os arquivos que traduz, por exemplo, acrescentando o código de idioma após o nome do arquivo. O tipo de arquivo traduzido usa uma sintaxe especial, portanto se você quiser editar este campo, clique em <emphasis role="bold">Editar...</emphasis> para acessar a <indexterm class="singular">
           <primary>Filtros de arquivos</primary> <secondary>Caixa de diálogo</secondary>
         </indexterm>caixa de diálogo 'Editar padrão'. Se você quiser voltar à configuração padrão do filtro, clique em <emphasis role="bold">Restaurar padrões.</emphasis> Também é possível modificar o nome diretamente no campo de tipo de arquivo traduzido, na caixa de diálogo dos filtros de arquivos. A caixa de diálogo Editar padrão contém as seguintes opções:</para>
 

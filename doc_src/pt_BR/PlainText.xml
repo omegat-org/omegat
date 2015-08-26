@@ -12,7 +12,7 @@
         <primary>Arquivos fonte</primary> <secondary>Codificação</secondary>
       </indexterm></title>
 
-    <para>Arquivos de texto simples (na maioria dos casos arquivos com uma extensão .txt) contêm somente informação textual e não oferecem nenhuma maneira claramente definida de informar ao computar que linguagem contêm. O máximo que o OmegaT pode fazer em tal caso é presumir que o texto está escrito na mesma linguagem que o computador usa. Não há problema para arquivos codificados em Unicod usando a configuração de codificação de caractere de 16 bits. Porém, se o texto for codificado em 8 bits, você poderá se deparar com uma situação inusitada: ao invés de ter o texto exibido com caracteres japoneses…</para>
+    <para>Arquivos de texto simples (na maioria dos casos arquivos com uma extensão .txt) contêm somente informação textual e não oferecem nenhuma maneira claramente definida de informar ao computar que linguagem contêm. O máximo que o OmegaT pode fazer em tal caso é presumir que o texto está escrito na mesma linguagem que o computador usa. Não há problema para arquivos codificados em Unicod usando a configuração de codificação de caractere de 16 bits. Porém, se o texto for codificado em 8 bits, você poderá se deparar com uma situação inusitada: ao invés de ter o texto exibido com caracteres japoneses...</para>
 
     <mediaobject>
       <imageobject role="html">
@@ -24,7 +24,7 @@
       </imageobject>
     </mediaobject>
 
-    <para>…o sistema exibirá, por exemplo:</para>
+    <para>...o sistema exibirá, por exemplo:</para>
 
     <mediaobject>
       <imageobject role="html">

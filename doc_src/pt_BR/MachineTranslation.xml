@@ -12,7 +12,7 @@
 
     <para>Ao contrário das memórias de tradução geradas pelos usuários (como no caso do <application>OmegaT</application>), ferramentas de Tradução automática (MT, Machine translation) usam sistemas linguísticos baseados em regras para criar uma tradução do segmento fonte sem precisar de uma memória de tradução. Técnicas de aprendizagem estatística, baseadas em textos fonte e destino, são usadas para construir um modelo de tradução. Serviços de tradução automática estão obtendo resultados bons nas avaliações de pesquisas e melhorando constantemente.</para>
 
-    <para>Para ativar algum dos serviços de tradução automática, vá a <guimenuitem>Opções &gt; Tradução automática</guimenuitem> e ative o serviço desejado. Observe que são todos baseados na web: você terá que estar online se quiser usá-los.</para>
+    <para>Para ativar algum dos serviços de tradução automática, vá a <guimenuitem>Opções &gt; Tradução automática</guimenuitem> e ative o serviço desejado. Observe que são todos baseados na internet: você terá que estar online se quiser usá-los.</para>
   </section>
 
   <section id="introduction">
@@ -22,7 +22,7 @@
 
     <para>O Google Translate é um serviço pago oferecido pela Google para traduzir frases, páginas da Internet e textos completos em um número crescente de línguas. Na ocasião em que este texto foi elaborado, a lista incluia mais de 50 línguas, desde albanês até o iídiche, além das línguas principais, evidentemente. A versão atual do serviço é baseada no uso, com o preço de 20 USD por milhão de caracteres no momento da escrita deste.<emphasis role="bold"/></para>
 
-    <para><emphasis role="bold">Importante: </emphasis>O API do Google Translate v2 requer informações de cobrança para todas as contas antes que você possa começar a usar o serviço (veja <ulink url="https://developers.google.com/translate/v2/pricing?hl=en-US">Preços e termos de serviço</ulink> para saber mais). Para identificar-se como um usuário válido dos serviços da Google, você usa uma chave privada única enviada a você pela Google quando tiver se registrado para o serviço. Veja o capítulo <link linkend="chapter.installing.and.running">Instalação e execução</link>, na seção parâmetros do comando de inicialização, para obter mais informações sobre como acrescentar esta chave ao ambiente do OmegaT.</para>
+    <para><emphasis role="bold">Importante: </emphasis>O API do Google Translate v2 requer informações de cobrança para todas as contas antes que você possa começar a usar o serviço (veja <ulink url="https://developers.google.com/translate/v2/pricing?hl=en-US">Preços e termos de serviço</ulink> para saber mais). Para identificar-se como um usuário válido dos serviços da Google, você usa uma chave única pessoal enviada a você pela Google quando tiver se registrado para o serviço. Veja o capítulo <link linkend="chapter.installing.and.running">Instalação e execução</link>, na seção parâmetros do comando de inicialização, para obter mais informações sobre como acrescentar esta chave ao ambiente do OmegaT.</para>
 
     <para>A qualidade da tradução do Google Translate depende do acervo de textos na língua destino e da disponibilidade de versões bilíngues, e também da qualidade dos modelos construídos. É claro que, embora a qualidade possa ser insuficiente em alguns casos, ela será definitivamente melhor no decorrer do tempo, e não pior.</para>
   </section>
@@ -54,7 +54,7 @@
 
     <para>Se você não quiser que o <application>OmegaT</application> envie os segmentos do texto original para o Google para receber as sugestões de tradução, desmarque a opção do Google Translate no menu Opções.</para>
 
-    <para>Observe que apenas o seu segmento de fonte é enviado ao serviço de Tradução Automática. A versão online do Google Translate permite ao usuário corrigir a sugestão e enviar o segmento corrigido. Esta recurso, contudo, não foi implementado no OmegaT.</para>
+    <para>Observe que apenas o seu segmento de fonte é enviado ao serviço de TA. A versão online de Google Translate permite ao usuário corrigir a sugestão e enviar o segmento corrigido. Esta recurso, contudo, não foi implementado no OmegaT.</para>
   </section>
 
   <section>
@@ -82,9 +82,7 @@
       <listitem>
         <para>para lidar com os dados linguísticos necessários para construir um sistema de tradução automática de um determinado par de línguas e</para>
       </listitem>
-    </itemizedlist>
 
-    <itemizedlist>
       <listitem>
         <para>dados linguísticos de um número crescente de pares de línguas</para>
       </listitem>
@@ -93,6 +91,50 @@
     <para>A Apertium usa um mecanismo de tradução automática de transferência superficial que processa o texto de entrada por etapas, como em uma linha de montagem: com desformatação, análise morfológica, desambiguação de categoria gramatical, transferência estrutural superficial, transferência lexical, geração morfológica e reformatação.</para>
 
     <para>É possível utilizar a Apertium para construir sistemas de tradução automática para uma variedade de pares de línguas; para este fim, a Apertium usa formatos padrão baseados em XML simples para codificar os dados linguísticos necessários (à mão ou convertendo os dados existentes), que são compilados utilizando-se as ferramentas fornecidos nos formatos de alta velocidade utilizados pelo mecanismo.</para>
+  </section>
+
+  <section>
+    <title>Microsoft Translator<indexterm class="singular">
+        <primary>Tradução automática</primary> <secondary>Microsoft Translator</secondary>
+      </indexterm></title>
+
+    <para>Para receber as credenciais para o MS Translator, siga os seguintes passos:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>Faça login no Microsoft Azure Marketplace: <ulink url="http://datamarket.azure.com/">http://datamarket.azure.com/</ulink></para>
+
+        <para>Se ainda não tiver uma conta do Azure Marketplace, será necessário criá-la primeiro.</para>
+      </listitem>
+
+      <listitem>
+        <para>Clique na opção Minha Conta na parte superior da página.</para>
+      </listitem>
+
+      <listitem>
+        <para>Na parte inferior, você verá as seguintes informações:<itemizedlist>
+            <listitem>
+              <para>Chave Primária da Conta (corresponde ao parâmetro <code>microsoft.api.client_secret</code> da linha de comando)</para>
+            </listitem>
+
+            <listitem>
+              <para>ID do Consumidor (corresponde ao parâmetro <code>microsoft.api.client_id</code> da linha de comando)</para>
+            </listitem>
+          </itemizedlist></para>
+      </listitem>
+    </orderedlist>
+
+    <para>Para habilitar o MS Translator no OmegaT edite o atalho ou consulte o capítulo <link linkend="chapter.installing.and.running">Como Instalar e Usar o OmegaT</link> para aprender como iniciá-lo pela linha de comando.</para>
+  </section>
+
+  <section>
+    <title>Yandex Translate<indexterm class="singular">
+        <primary>Tradução automática</primary> <secondary>Yandex Translate</secondary>
+      </indexterm></title>
+
+    <para>Para poder usar o Yandex Translate no OmegaT, é necessário <ulink url="http://api.yandex.com/key/form.xml?service=trnsl">obter uma chave de API do Yandex</ulink>.</para>
+
+    <para>A chave de API obtida deve ser passada ao OmegaT na inicialização, por meio do parâmetro <code>yandex.api.key</code> da linha de comando. Para fazer isso, edite o atalho do OmegaT, ou consulte o capítulo <link linkend="chapter.installing.and.running">Como Instalar e Usar o OmegaT</link> para aprender como iniciá-lo pela linha de comando.</para>
   </section>
 
   <section id="Google.Translate.troubleshooting">
@@ -104,13 +146,13 @@
 
     <itemizedlist>
       <listitem>
-        <para>Você está online? É necessário que seu computador esteja conectado à internet para usar a ferramenta de tradução automática.</para>
+        <para>Você está online? É necessário que seu computador esteja ligado à internet para usar a ferramenta de TA.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Qual é o par de línguas de que você precisa? Verifique se o serviço selecionado o oferece.</para>
+        <para>Quem é o par de línguas de que precisa? Verifique se o serviço selecionado o oferece.</para>
       </listitem>
 
       <listitem>
@@ -118,7 +160,7 @@
       </listitem>
 
       <listitem>
-        <para>&quot;Google Translate returned HTTP response code: 403 …&quot;: verifique se a chave de 38 caracteres inserida no arquivo pinfo.list está correta. Verifique se <ulink url="https://developers.google.com/translate/v2/faq">Serviço de API de tradução </ulink>foi ativado.</para>
+        <para>&quot;Google Translate returned HTTP response code: 403 ...&quot;: verifique se a chave de 38 caracteres inserida no arquivo pinfo.list está correta. Verifique se <ulink url="https://developers.google.com/translate/v2/faq">Serviço de API de tradução </ulink>foi ativado.</para>
       </listitem>
 
       <listitem>

@@ -10,7 +10,7 @@
   <section>
     <title>Instalação de dicionários ortográficos</title>
 
-    <para>Before the spell check function can be used, a suitable dictionary or dictionaries (i.e. for your target language) must be installed. Para instalar dicionários ortográficos, siga este procedimento:</para>
+    <para>Antes que a funcionalidade de verificação ortográfica possa ser usada, um dicionário adequado (ou seja, do idioma destino) deve ser instalado. Para instalar dicionários ortográficos, siga este procedimento:</para>
 
     <itemizedlist>
       <listitem>
@@ -21,7 +21,7 @@
     <itemizedlist>
       <listitem>
         <para>No OmegaT, selecione<guisubmenu><indexterm class="singular">
-            <primary>Menu Opções</primary> <secondary>Verificador ortográfico…</secondary>
+            <primary>Menu Opções</primary> <secondary>Verificador ortográfico...</secondary>
           </indexterm></guisubmenu><guimenuitem>Opções &gt; Verificador ortográfico</guimenuitem>, então clique <guibutton>Escolher </guibutton>ao lado do campo Pasta de arquivo de dicionários. Navegar e selecionar a pasta criada para os dicionários.</para>
       </listitem>
     </itemizedlist>
@@ -84,7 +84,7 @@
         <primary>Verificador ortográfico</primary> <secondary>Dicas</secondary>
       </indexterm></title>
 
-    <para>Se o verificador ortográfico não funcionar, certifique-se primeiro de que a caixa de seleção <guilabel>&quot;Verificar a ortografia do texto automaticamente&quot;</guilabel> no diálogo do verificador ortográfico (<guisubmenu>Opções &gt; Verificador ortográfico…</guisubmenu>) está marcada.</para>
+    <para>Se o verificador ortográfico não funcionar, certifique-se primeiro de que a caixa de seleção <guilabel>&quot;Verificar a ortografia do texto automaticamente&quot;</guilabel> no diálogo do verificador ortográfico (<guisubmenu>Opções &gt; Verificador ortográfico...</guisubmenu>) está marcada.</para>
 
     <para>Verifique também se o código da língua destino do seu projeto casa com os dicionários disponíveis na janela de configuração do verificador ortográfico. O verificador ortográfico utiliza o código de língua destino para determinar o idioma a ser usado: se a língua da tradução é o português brasileiro (pt_BR), a subpasta com os dicionários deve conter os dois arquivos chamados  <emphasis>pt_br.aff</emphasis> e <emphasis>pt_br.dic</emphasis>.</para>
 

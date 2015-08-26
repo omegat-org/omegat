@@ -2,7 +2,7 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.formatted.text">
   <title>Trabalhar com texto formatado<indexterm class="singular">
-      <primary>Arquivos destino</primary> <secondary>Texto formatado&lt;</secondary>
+      <primary>Arquivos destino</primary> <secondary>Texto formatado</secondary>
     </indexterm><indexterm class="singular">
       <primary>Arquivos fonte</primary> <secondary>Texto formatado</secondary>
     </indexterm></title>
@@ -112,7 +112,7 @@
   <section>
     <title>Opções para verificação de tag</title>
 
-    <para>Para personalizar o trabalho com as tags, algumas regras podem ser definidas no menu <guimenuitem>Opções &gt; Verificação de tags…</guimenuitem> :</para>
+    <para>Para personalizar o trabalho com as tags, algumas regras podem ser definidas no menu <guimenuitem>Opções &gt; Verificação de tags...</guimenuitem> :</para>
 
     <mediaobject>
       <imageobject>
@@ -160,9 +160,9 @@
         <primary>Tags</primary> <secondary>Verificação de grupos</secondary>
       </indexterm></title>
 
-    <para>A função de verificação de tags detecta modificações nas sequências de tags (deliberadamente ou por engano) e indica os segmentos afetados. Ao iniciar esta função – <guimenuitem>Ctrl+T<indexterm class="singular">
+    <para>A função de verificação de tags detecta modificações nas sequências de tags (deliberadamente ou por engano) e indica os segmentos afetados. Ao iniciar esta função – <guimenuitem>Ctrl+Shift+V<indexterm class="singular">
         <primary>Atalhos</primary> <secondary>Verificação de tag - Ctrl+T</secondary>
-      </indexterm></guimenuitem> - uma janela é aberta com todos os segmentos de um arquivo onde há tags incorretas ou danificadas na tradução. É fácil consertar as tags e recriar os documentos traduzidos com a função verificar tags. A janela que abre com o comando <guimenuitem>Ctrl+T</guimenuitem> tem a forma de uma tabela de 3 colunas com um link para o segmento, segmento original e segmento destino</para>
+      </indexterm></guimenuitem> - uma janela é aberta com todos os segmentos de um arquivo onde há tags incorretas ou danificadas na tradução. É fácil consertar as tags e recriar os documentos traduzidos com a função verificar tags. A janela que é aberta com o comando <guimenuitem>Ctrl+Shift+V</guimenuitem> tem a forma de uma tabela de 3 colunas com um link para o segmento, segmento original e segmento destino</para>
 
     <figure id="tag.validation">
       <title>Criar verificação de tag</title>
@@ -178,7 +178,7 @@
       </mediaobject>
     </figure>
 
-    <para>As tags estão destacadas em azul e negrito para facilitar a comparação entre o original e o conteúdo traduzido. Clique no link para abrir o segmento no Editor. Se necessário, corrija o erro (no caso acima é o &lt;i2&gt;&lt;/i2&gt; par ausente) e pressione <guimenuitem>Ctrl+T</guimenuitem> para retornar a janela de verificação de tag para corrigir outros erros. Os erros de tag são sequências de tag na tradução que não são reproduzidas na mesma ordem e número de tags como no segmento original.  Algumas manipulações de tags são necessárias e não causam erros; outras causarão problemas quando for criado o documento traduzido.</para>
+    <para>As tags estão destacadas em azul e negrito para facilitar a comparação entre o original e o conteúdo traduzido. Clique no link para abrir o segmento no Editor. Se necessário, corrija o erro (no caso acima é o &lt;i2&gt;&lt;/i2&gt; par ausente) e pressione <guimenuitem>Ctrl+Shift+V</guimenuitem> para retornar à janela de verificação de tag para corrigir outros erros. Os erros de tag são sequências de tag na tradução que não são reproduzidas na mesma ordem e número de tags como no segmento original.  Algumas manipulações de tags são necessárias e não causam erros; outras causarão problemas quando for criado o documento traduzido.</para>
   </section>
 
   <section id="hints.for.tag.management">

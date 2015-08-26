@@ -62,7 +62,7 @@
 
             <para>Os conteúdos das memórias de tradução na subpasta tm servem para gerar sugestões para o(s) texto(s) a ser(em) traduzido(s). Qualquer texto já traduzido e armazenado nesses arquivos vai aparecer entre as correspondências parciais se for suficientemente semelhante ao texto a ser traduzido.</para>
 
-            <para>Se o segmento fonte em uma das TMs auxiliares for idêntica ao texto que está sendo traduzido, o OmegaT age como definido na janela de diálogo <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Comportamento de Edição…</guimenuitem> </menuchoice> Por exemplo (se o padrão for aceito), a tradução da TM auxiliar é aceita e prefixada com <emphasis> [padrão]</emphasis>, de modo que o tradutor possa rever as traduções numa fase posterior e verificar se os segmentos marcados desta forma têm sido traduzidos corretamente (veja o capítulo <link linkend="chapter.translation.editing">Comportamento de edição</link>) <menuchoice> <guimenu>.</guimenu> </menuchoice></para>
+            <para>Se o segmento fonte em uma das TMs auxiliares for idêntica ao texto que está sendo traduzido, o OmegaT age como definido na janela de diálogo <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Comportamento de Edição...</guimenuitem> </menuchoice> Por exemplo (se o padrão for aceito), a tradução da TM auxiliar é aceita e prefixada com <emphasis> [padrão]</emphasis>, de modo que o tradutor possa rever as traduções numa fase posterior e verificar se os segmentos marcados desta forma têm sido traduzidos corretamente (veja o capítulo <link linkend="chapter.translation.editing">Comportamento de edição</link>) <menuchoice> <guimenu>.</guimenu> </menuchoice></para>
 
             <para>Pode acontecer que as memórias de tradução disponíveis na subpasta <filename>tm</filename> contenham segmentos com textos fonte idênticos, mas alvos diferentes. Os arquivos TMX são lidos e ordenados pelos seus nomes e segmentos dentro de um determinado arquivo TMX linha por linha. O último segmento com texto fonte idêntico irá prevalecer (observe que, obviamente, faz mais sentido evitar que isso aconteça já de início).</para>
 
@@ -81,6 +81,22 @@
 
           <listitem>
             <para>Se estiver claro desde o início que as traduções numa determinada TM (ou TMs) estão todas corretas, pode-se colocá-las na pasta <emphasis role="bold"> tm/auto</emphasis> e evitar a confirmação de muitos casos de <emphasis> [parcial]</emphasis> . Isso fará a <emphasis role="bold">pré-tradução </emphasis> efetiva do texto fonte: todos os segmentos no texto fonte para os quais pode-se achar traduções nas TMs &quot;auto&quot; irão para a TM principal do projeto sem intervenção do usuário.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>pasta tm/enforce</term>
+
+          <listitem>
+            <para>Se tiver certeza que um arquivo TMX está mais correto do que o arquivo <filename>project_save.tmx</filename> do OmegaT, coloque este arquivo TMX em /tm/enforce para sobrescrever as traduções padrão existentes incondicionalmente.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>pasta tm/mt</term>
+
+          <listitem>
+            <para>No painel Editor, quando uma correspondência é inserida a partir de um arquivo TMX contido numa pasta chamada <emphasis role="bold">mt</emphasis>, a cor de fundo do segmento ativo passa a ser vermelha. A cor de fundo volta ao normal ao sair do segmento.</para>
           </listitem>
         </varlistentry>
 
@@ -105,7 +121,7 @@
 
       <para><emphasis role="bold">vários projetos sobre o mesmo assunto: </emphasis>mantém a estrutura do projeto e muda os diretórios fonte e alvo (Fonte = fonte/ordem1, alvo = alvo/ordem1, etc). Observe que seus segmentos de ordem1, que não estejam presentes nos trabalhos posteriores em ordem2 e trabalhos subsequentes, serão marcados como segmentos órfãos, entretanto, ainda serão úteis para obter correspondências parciais.</para>
 
-      <para><emphasis role="bold">vários tradutores trabalhando em um mesmo projeto: </emphasis> divide os arquivos fonte em fonte/Alice, fonte/Roberto… e os aloca para os membros do time (Alice, Roberto…). Eles podem criar seus próprios projetos e entregar seus próprios <filename>project_save.tmx</filename>, quando acabarem ou quando um certo ponto for atingido. Os arquivos <filename>project_save.tmx</filename> são então recolhidos e possíveis conflitos no que diz respeito a terminologia, por exemplo, são resolvidos. Uma nova versão da TM principal é criada para ser colocada nos subdiretórios <emphasis>tm/auto</emphasis> do time ou substituir seus arquivos <filename>project_save.tmx</filename>. O time também pode usar a mesma estrutura de subpasta para os arquivos alvo. Isto permite, por exemplo, verificar a qualquer momento se a versão alvo para o projeto completo ainda está OK.</para>
+      <para><emphasis role="bold">vários tradutores trabalhando em um mesmo projeto: </emphasis> divide os arquivos fonte em fonte/Alice, fonte/Roberto... e os aloca para os membros do time (Alice, Roberto...). Eles podem criar seus próprios projetos e entregar seus próprios <filename>project_save.tmx</filename>, quando acabarem ou quando um certo ponto for atingido. Os arquivos <filename>project_save.tmx</filename> são então recolhidos e possíveis conflitos no que diz respeito a terminologia, por exemplo, são resolvidos. Uma nova versão da TM principal é criada para ser colocada nos subdiretórios <emphasis>tm/auto</emphasis> do time ou substituir seus arquivos <filename>project_save.tmx</filename>. O time também pode usar a mesma estrutura de subpasta para os arquivos alvo. Isto permite, por exemplo, verificar a qualquer momento se a versão alvo para o projeto completo ainda está OK.</para>
     </section>
 
     <section id="tmx.backup">
@@ -188,7 +204,7 @@
 
     <para>Caso você queira reutilizar uma memória de tradução de um projeto anterior (por exemplo, por semelhança do novo projeto com o anterior, ou por usar terminologia já utilizada antes), você pode usar essas memórias de tradução como &quot;memórias de entrada de tradução&quot;, ou seja, para importar para o novo projeto. Neste caso, coloque as memórias de tradução que desejar usar na pasta <emphasis>/tm</emphasis> ou <emphasis>/tm</emphasis>/auto do seu novo projeto: no primeiro caso você obterá hits das memórias de tradução no visualizador de correspondências parciais, e no segundo, estas TMs serão usadas para pré-traduzir o texto fonte.</para>
 
-    <para>Está predefinido que a pasta /tm fica acima da pasta raiz do projeto (p. ex. …<emphasis>/MyProject/tm</emphasis>), mas você pode escolher uma pasta diferente na caixa de propriedades do projeto. Isso é útil se você costuma usar as memórias de tradução produzidas anteriormente, por exemplo, porque se referem ao mesmo assunto ou são para o mesmo cliente. Neste caso, um procedimento muito útil seria:</para>
+    <para>Está predefinido que a pasta /tm fica acima da pasta raiz do projeto (p. ex. ...<emphasis>/MyProject/tm</emphasis>), mas você pode escolher uma pasta diferente na caixa de propriedades do projeto. Isso é útil se você costuma usar as memórias de tradução produzidas anteriormente, por exemplo, porque se referem ao mesmo assunto ou são para o mesmo cliente. Neste caso, um procedimento muito útil seria:</para>
 
     <itemizedlist>
       <listitem>
@@ -268,7 +284,7 @@
 
     <section id="sharing.translation.memories">
       <title>Compartilhando memórias de tradução<indexterm class="singular">
-          <primary>Memórias de tradução</primary> <secondary>Compartilhando</secondary> <seealso>Projeto, Baixar Projeto de Equipe…</seealso>
+          <primary>Memórias de tradução</primary> <secondary>Compartilhando</secondary> <seealso>Projeto, Baixar Projeto de Equipe...</seealso>
         </indexterm></title>
 
       <para>Nos casos em que uma equipe de tradutores está envolvida, os tradutores preferem compartilhar memórias de tradução comuns em vez de distribuir suas versões locais.</para>
@@ -281,9 +297,9 @@
           <primary>Memórias de tradução</primary> <secondary>Pares de idiomas alternativos</secondary>
         </indexterm></title>
 
-      <para>Pode haver casos onde você tenha feito um projeto com, por exemplo, fontes holandesas e uma tradução em, digamos, inglês. Então você precisa de uma tradução, por exemplo, em chinês, mas seu tradutor não entende holandês; no entanto, entende inglês perfeitamente. Neste caso, uma memória de tradução NL-EN pode servir como um intermediário para ajudar a gerar uma tradução NL-ZH.</para>
+      <para>Pode haver casos onde você tenha feito um projeto com, por exemplo, fontes holandesas e uma tradução em, digamos, inglês. Então você precisa de uma tradução, por exemplo, em chinês, mas seu tradutor não entende holandês; no entanto, entende inglês perfeitamente. Neste caso, uma memória de tradução NL-EN pode servir como um intermediário para ajudar a gerar uma tradução de NL para ZH.</para>
 
-      <para>A solução, no nosso exemplo, é copiar a memória de tradução existente para a subpasta tm e renomeá-la ZH_CN.tmx para indicar a língua-alvo da tmx. O tradutor verá traduções em inglês para os segmentos de origem em holandês e as usará para criar a tradução chinesa.</para>
+      <para>A solução, no nosso exemplo, é copiar a memória de tradução existente para a subpasta tm/tmx2source/ e renomeá-la ZH_CN.tmx para indicar o idioma destino da tmx. O tradutor verá traduções em inglês para os segmentos de origem em holandês e as usará para criar a tradução chinesa.</para>
 
       <para><emphasis role="bold">Important: </emphasis>the supporting TMX must be renamed XX_YY.tmx, where XX_YY is the target language of the tmx, for instance to ZH_CN.tmx in the example above. O projeto e idiomas de origem da TMX devem ser obviamente idênticos - NL em nosso exemplo. Observe que é possível apenas uma TMX para um dado par de línguas, por isso, se várias memórias de tradução forem envolvidas, você terá que juntá-las todas no XX_YY.tmx.</para>
     </section>
@@ -298,7 +314,7 @@
 
     <para>Todas as traduções de documentos de origem também são exibidas no painel de comentários, além do painel de correspondências. No caso dos arquivos PO, aplica-se 20% de penalidade à tradução alternativa (isto é, uma correspondência 100% torna-se 80%). A palavra [Correspondência] é exibida no segmento fonte.</para>
 
-    <para>Quando você carrega um arquivo TTX segmentado, segmentos fonte = alvo serão incluídos se &quot;Permitir tradução igual à fonte&quot; em Opções → Comportamento de edição… foi marcada. Isso pode ser confuso, então considere desmarcar esta opção neste caso.</para>
+    <para>Quando você carrega um arquivo TTX segmentado, segmentos fonte = alvo serão incluídos se &quot;Permitir tradução igual à fonte&quot; em Opções → Comportamento de edição... foi marcada. Isso pode ser confuso, então considere desmarcar esta opção neste caso.</para>
   </section>
 
   <section id="pseudo.translated.memory">

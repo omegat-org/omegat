@@ -172,7 +172,7 @@
 
         </listitem>
         <listitem>
-          <para><emphasis role="bold">confirme as modificações locais no servidor: </emphasis>clique com o botão direito na pasta local e escolha <guilabel>SVN Commit…</guilabel> A janela Commit abre-se - veja abaixo. Verifique as modificações a fazer - isto é, as pastas e arquivos acrescentados, neste caso.</para>
+          <para><emphasis role="bold">confirme as modificações locais no servidor: </emphasis>clique com o botão direito na pasta local e escolha <guilabel>SVN Commit....</guilabel> A janela Commit abre-se - veja abaixo. Verifique as modificações a fazer - isto é, as pastas e arquivos acrescentados, neste caso.</para>
  
           <mediaobject>
             <imageobject role="html">

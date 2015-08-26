@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.ScriptingPlugin.inOmegaT">
-  <title>Plugin de scripts<indexterm class="singular">
-      <primary>Plugins</primary> <secondary>Scripts</secondary>
+<appendix id="appendix.Scripts.inOmegaT">
+  <title>Scripts<indexterm class="singular">
+      <primary>Scripts</primary>
     </indexterm></title>
 
   <section>
@@ -12,13 +12,11 @@
   </section>
 
   <section>
-    <title>Instalação e uso</title>
+    <title>Uso</title>
 
-    <para>O plugin de scripts do OmegaT pode ser baixado no <ulink url="http://sourceforge.net/projects/omegat-plugins/files">site de downloads do OmegaT</ulink>. Descompacte os arquivos e coloque-os na pasta &quot;plugins&quot;, localizada na pasta de instalação do OmegaT, que é a pasta que contém o OmegaT.jar. Se a pasta &quot;plugins&quot; não existir, crie-a primeiro.</para>
+    <para>Ao clicar em <guisubmenu>Ferramentas &gt; </guisubmenu><guisubmenu>Scripts</guisubmenu> a janela Scripts abre:<screenshot> <screeninfo>Janela de Scripts</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
 
-    <para>Isto acrescenta um novo submenu <guisubmenu> Ferramentas &gt; </guisubmenu><guisubmenu> Scripts.</guisubmenu> Abaixo do submenu <guisubmenu>Scripts</guisubmenu>, há 12 submenus disponíveis para scripts. Ao clicar em <guisubmenu>Scripts</guisubmenu> você abre a caixa de diálogo Scripts:<screenshot> <screeninfo>caixa de diálogo Scripts</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
-
-    <para>A caixa de diálogo de scripts permite carregar um script existente na área de texto e executá-lo no projeto aberto atual. Para personalizar o recurso de scripts, faça o seguinte:</para>
+    <para>A Janela de Script permite carregar um script existente na área de texto e executá-lo no projeto aberto atual. Para personalizar o recurso de scripts, faça o seguinte:</para>
 
     <itemizedlist>
       <listitem>
@@ -38,17 +36,17 @@
       </listitem>
     </itemizedlist>
 
+    <para>Por padrão, os scripts são armazenados na pasta &quot;scripts&quot;, na pasta de instalação do OmegaT (a pasta que contem o arquivo OmegaT.jar).</para>
+
+    <para>É possível adicionar novos scripts nesta pasta, para que eles apareçam na lista de scripts disponíveis da Janela de Scripts.</para>
+  </section>
+
+  <section>
+    <title>Linguagens de script</title>
+
     <para>As seguintes linguagens de script foram implementadas:</para>
 
     <para><itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">NetRexx</emphasis> (http://www.netrexx.org/): suporta uma sintaxe REXX clássica, sem palavras-chave reservadas, junto com adições consideráveis para dar suporte a programação orientada ao objeto de maneira compatível com o modelo de objeto do Java. Todas as bibliotecas de classe Java existentes podem ser usadas sem alterações e sem configurações especiais; ao mesmo tempo, um programador Java pode optar por usar somente a classe Rexx do pacote de execução para melhorar o manejo de strings em programas fonte de sintaxe do Java.</para>
-        </listitem>
-      </itemizedlist><itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">XLST</emphasis> (Extensible Stylesheet Language Transformations): é uma linguagem declarativa, baseada em XML e usada para a transformação de documentos em XML. O documento original não é modificado; ao invés disso, um novo documento é criado com base no conteúdo de um já existente. O novo documento pode ser serializado (saída) pelo processador em sintaxe de XML padrão ou em outro formato, como HTML ou texto simples. O XSLT é geralmente usado para converter dados entre esquemas de XML diferentes ou converter dados de XML em páginas da Web ou documentos PDF.</para>
-        </listitem>
-      </itemizedlist><itemizedlist>
         <listitem>
           <para><emphasis role="bold">Groovy</emphasis> (http://groovy.codehaus.org): é uma linguagem dinâmica da máquina virtual Java. Aproveita os pontos fortes do Java mas tem recursos adicionais poderosos inspirados por linguagens como Python, Ruby e Smalltalk.</para>
         </listitem>

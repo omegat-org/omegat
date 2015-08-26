@@ -47,7 +47,7 @@
       </mediaobject>
 	  </figure>
 
-    <para>Podem ser selecionados locais alternativos para algumas pastas na etapa de criação do projeto, ou durante a tradução. Dessa forma é possível selecionar pastas existentes ou criar outras onde você preferir. Para mudar o local das pastas após a criação de um projeto, abra <guimenuitem>Projeto &gt; Propriedades…</guimenuitem> no menu ou com <guibutton>Ctrl+E</guibutton> e faça as modificações necessárias.</para>
+    <para>Podem ser selecionados locais alternativos para algumas pastas na etapa de criação do projeto, ou durante a tradução. Dessa forma é possível selecionar pastas existentes ou criar outras onde você preferir. Para mudar o local das pastas após a criação de um projeto, abra <guimenuitem>Projeto &gt; Propriedades...</guimenuitem> no menu ou com <guibutton>Ctrl+E</guibutton> e faça as modificações necessárias.</para>
 
     <para>Em um gerenciador de arquivos um projeto de tradução parece e funciona exatamente como qualquer outra pasta. No exemplo seguinte, a pasta <filename>my projects</filename> contém três projetos OmegaT:</para>
 
@@ -122,13 +122,13 @@
               <row>
                 <entry>segmentation.conf</entry>
 
-                <entry>se existente, contém regras de segmentação específicas do projeto, se isto tiver sido solicitado em <guimenuitem>Projeto &gt; Propriedades… </guimenuitem>Veja o <link linkend="chapter.project.properties">capítulo Propriedades</link></entry>
+                <entry>se existente, contém regras de segmentação específicas do projeto, se isto tiver sido solicitado em <guimenuitem>Projeto &gt; Propriedades... </guimenuitem>Veja o <link linkend="chapter.project.properties">capítulo Propriedades</link></entry>
               </row>
 
               <row>
                 <entry>filters.xml</entry>
 
-                <entry>se existente, contém regras de segmentação específicas do projeto, se isto tiver sido solicitado em <guimenuitem>Projeto &gt; Propriedades… </guimenuitem>Veja o <link linkend="chapter.project.properties">capítulo Propriedade do projeto</link></entry>
+                <entry>se existente, contém regras de segmentação específicas do projeto, se isto tiver sido solicitado em <guimenuitem>Projeto &gt; Propriedades... </guimenuitem>Veja o <link linkend="chapter.project.properties">capítulo Propriedade do projeto</link></entry>
               </row>
             </tbody>
           </tgroup>

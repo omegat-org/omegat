@@ -5,7 +5,7 @@
       <primary>Menu</primary> <secondary>Opções</secondary> <tertiary>Modo de trabalho…</tertiary>
     </indexterm></title>
 
-  <para>O diálogo em <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Editar modo de trabalho…</guimenuitem> </menuchoice> permite ao usuário selecionar como o segmento atual no campo de edição deve ser inicializado e tratado:</para>
+  <para>O diálogo em <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Editar modo de trabalho...</guimenuitem> </menuchoice> permite ao usuário selecionar como o segmento atual no campo de edição deve ser inicializado e tratado:</para>
 
   <figure id="editing.behavior.options">
     <title>Opções do modo de trabalho</title>
@@ -14,7 +14,8 @@
       <imageobject role="html">
         <imagedata fileref="images/EditingBehaviourOptions25.png"/>
       </imageobject>
-	  <imageobject role="fo">
+
+      <imageobject role="fo">
         <imagedata fileref="images/EditingBehaviourOptions25.png"/>
       </imageobject>
     </mediaobject>
@@ -22,7 +23,7 @@
 
   <para/>
 
-  <para>Você traduz os seus arquivos movendo-se de segmento a segmento, editando cada segmento atual por vez. Ao mover-se entre segmentos, você pode desejar preencher o campo de edição com uma tradução existente do painel de correspondências parciais ou com o texto fonte. Em <menuchoice> <guimenu>Opções</guimenu> <guimenuitem> Editar modo de trabalho…</guimenuitem> </menuchoice> <application>o OmegaT</application> oferece as seguintes alternativas:</para>
+  <para>Você traduz os seus arquivos movendo-se de segmento a segmento, editando cada segmento atual por vez. Ao mover-se entre segmentos, você pode desejar preencher o campo de edição com uma tradução existente do painel de correspondências parciais ou com o texto fonte. Em <menuchoice> <guimenu>Opções</guimenu> <guimenuitem> Editar modo de trabalho...</guimenuitem> </menuchoice> <application>o OmegaT</application> oferece as seguintes alternativas:</para>
 
   <variablelist>
     <varlistentry>
@@ -69,11 +70,11 @@
           <listitem>
             <para>O segmento fonte e as correspondências parciais devem conter a mesma lista de números</para>
           </listitem>
-        
+
           <listitem>
             <para>Os números devem ser exatamente os mesmos entre as correspondências fonte e alvo.</para>
           </listitem>
-        
+
           <listitem>
             <para>Apenas os números inteiros e decimais simples (usando o ponto como caractere decimal, p. ex. 5.4, mas não 5,4 ou 54E-01) são considerados.</para>
           </listitem>
@@ -91,7 +92,7 @@
       <listitem>
         <para>Os documentos para tradução podem conter marcas comerciais, nomes ou outros substantivos próprios que serão mantidos iguais em documentos traduzidos. Há duas estratégias para lidar com segmentos que contenham este tipo de texto invariável.</para>
 
-        <para>Você pode decidir não traduzir tais segmentos. O OmegaT então exibirá estes segmentos como não traduzidos. Esta é a opção padrão. A alternativa é inserir uma tradução idêntica ao texto fonte. O OmegaT é capaz de reconhecer que você fez isto. Para fazer isso, acesse <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Editar modo de trabalho…</guimenuitem> </menuchoice> e selecione <emphasis role="bold">Permitir que a tradução seja igual ao texto fonte</emphasis>.</para>
+        <para>Você pode decidir não traduzir tais segmentos. O OmegaT então exibirá estes segmentos como não traduzidos. Esta é a opção padrão. A alternativa é inserir uma tradução idêntica ao texto fonte. O OmegaT é capaz de reconhecer que você fez isto. Para fazer isso, acesse <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Editar modo de trabalho...</guimenuitem> </menuchoice> e selecione <emphasis role="bold">Permitir que a tradução seja igual ao texto fonte</emphasis>.</para>
       </listitem>
     </varlistentry>
   </variablelist>
@@ -132,6 +133,36 @@
 
       <listitem>
         <para>Se quisermos evitar alguma tradução incorreta em segmentos com vários conteúdos possíveis, marcar esta caixa de seleção fará com que <emphasis role="bold"> Ir para - Próximo segmento não traduzido</emphasis>pare no segmento seguinte que obedeça esta condição, esteja ele traduzido ou não.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Permitir edição de tag</term>
+
+      <listitem>
+        <para>Desmarque esta opção para prevenir danos às tags (por exemplo, exclusão parcial) durante a edição. Remover uma tag inteira ainda é possível neste caso, basta usar Ctrl+Backspace/Delete ou selecioná-la inteira (Ctrl+Shift+Esquerda/Direita) e então apagá-la (Delete ou Ctrl+X).</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Verificar tags ao deixar um segmento</term>
+
+      <listitem>
+        <para>Marque esta opção para receber um aviso sobre as diferenças entre tags dos segmentos fonte e destino sempre que deixar um segmento.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Salvar estados auto-preenchidos</term>
+
+      <listitem>
+        <para>Marque esta opção para salvar no arquivo <filename>project_save.tmx</filename> a informação que um segmento foi auto-preenchido, para que ele possa ser exibido com uma cor específica no Editor (se a opção &quot;&quot;Marcar segmentos auto-preenchidos&quot;, no menu Visualizar, estiver marcada).</para>
       </listitem>
     </varlistentry>
   </variablelist>

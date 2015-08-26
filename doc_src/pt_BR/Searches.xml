@@ -6,63 +6,15 @@
     </indexterm></title>
 
   <section id="search.window">
-    <title>Janela Busca</title>
+    <title>Janela Busca<indexterm class="singular">
+        <primary>Atalhos</primary> <secondary>Buscar - Ctrl+F</secondary>
+      </indexterm></title>
 
-    <figure id="text.search.window">
-      <title>Janela Busca de texto<indexterm class="singular">
-          <primary>Janela Busca</primary> <secondary>Exemplo</secondary>
-        </indexterm></title>
+    <para>Para abrir a janela Busca, pressione <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> e digite a palavra ou frase que deseja localizar na caixa de texto <emphasis>Busca por</emphasis>.</para>
 
-      <mediaobject>
-        <imageobject role="html">
-          <imagedata fileref="images/TextSearch25.png"/>
-        </imageobject>
+    <para>Uma outra forma é selecionar, no Painel Editor, uma palavra ou frase no campo de edição (texto alvo no segmento atual) e pressionar <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. A palavra ou frase é inserida automaticamente na caixa <emphasis>Busca por</emphasis>. É possível ter várias janelas de Busca abertas ao mesmo tempo, mas feche-as assim que não forem mais necessárias, para que não encham sua área de trabalho.</para>
 
-        <imageobject role="fo">
-          <imagedata fileref="images/TextSearch25.png" width="90%"/>
-        </imageobject>
-      </mediaobject>
-    </figure>
-
-    <note>
-      <para>A busca acima encontra todos os segmentos destino que contenham caracteres bastante improváveis na língua alvo - ou seja, esloveno.</para>
-    </note>
-
-    <section>
-      <title>Buscar<indexterm class="singular">
-          <primary>Atalhos</primary> <secondary>Buscar - Ctrl+F</secondary>
-        </indexterm></title>
-
-      <para>O <application>OmegaT</application> oferece um grande leque de funções avançadas de busca. Para abrir a janela Busca, pressione <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> e digite a palavra ou frase que deseja localizar na caixa de texto Busca por. Uma outra forma é selecionar, no Painel Editor, uma palavra ou frase no campo de edição (texto alvo no segmento atual) e pressionar <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. A palavra ou frase é inserida automaticamente na caixa Busca por. É possível ter várias janelas de Busca abertas ao mesmo tempo, mas feche-as assim que não forem mais necessárias, para que não encham sua área de trabalho.</para>
-    </section>
-
-    <section>
-      <title>Local da busca</title>
-
-      <para>Por padrão, as buscas são feitas nos segmentos de origem e destino do projeto, mas você pode limitar sua pesquisa para apenas o texto de origem ou destino. As buscas podem ser </para>
-
-      <itemizedlist>
-        <listitem>
-          <para>somente no projeto (opção predefinida)</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>no projeto e nas memórias de tradução de referência na pasta /tm/ (marque <emphasis>Buscar nas TMs)</emphasis></para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>em um único arquivo ou pasta contendo um conjunto de arquivos (marque <emphasis>Buscar nos arquivos)</emphasis></para>
-        </listitem>
-      </itemizedlist>
-
-      <para>Quando fizer buscas em arquivos (ao contrário das memórias de tradução), o <application>OmegaT</application> somente pesquisará nos que estejam nos formatos dos arquivos fonte. Consequentemente, embora o OmegaT possa processar os arquivos<filename> tmx</filename>, eles não serão incluídos na pesquisa Buscar nos arquivos. Se você ativar as <emphasis role="bold"><indexterm class="singular">
-          <primary>Buscas</primary> <secondary>Opções avançadas</secondary>
-        </indexterm>Opções avançadas</emphasis>, é possível conciliar a busca com o nome do autor da tradução e o horário da última modificação.</para>
-    </section>
+    <para>Clique na seta da caixa de texto <emphasis>Busca por</emphasis> para acessar as últimas dez pesquisas..</para>
   </section>
 
   <section id="using.wild.cards">
@@ -128,6 +80,10 @@
       </listitem>
 
       <listitem>
+        <para><emphasis role="bold">Espaço corresponde a nbsp</emphasis>: ao selecionar esta opção, um caractere de espaço inserido na busca pode corresponder tanto a um caractere normal de espaço como a um caractere de espaço rígido (\u00A).</para>
+      </listitem>
+
+      <listitem>
         <para><emphasis role="bold">no texto fonte: </emphasis>busca nos segmentos fonte</para>
       </listitem>
 
@@ -140,11 +96,35 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">busca nas TMs</emphasis>: as memórias de tradução da pasta <filename>tm</filename> são incluídas na pesquisa.</para>
+        <para><emphasis role="bold">nos comentários: </emphasis>busca nos comentários dos segmentos</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">exibir todos os resultados: </emphasis>ao limpar a caixa de seleção o OmegaT mostrará apenas a primeira ocorrência do hit, se houver mais de um hit</para>
+        <para><emphasis role="bold">Traduzidos ou não traduzidos: </emphasis>busca tanto nos segmentos traduzidos como nos não traduzidos.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Traduzidos: </emphasis>busca apenas nos segmentos traduzidos.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Não traduzidos: </emphasis>busca apenas nos segmentos não traduzidos.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Exibir todos os segmentos correspondentes: </emphasis>se marcado, todos os segmentos são exibidos um a um, mesmo se estiverem repetidos várias vezes no mesmo documento ou em documentos diferentes.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Exibir: nomes de arquivos: </emphasis>se marcado, o nome do arquivo em que cada segmento encontrado é exibido acima de cada resultado.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Busca no Projeto</emphasis>: marque <emphasis>Memória</emphasis> para incluir a memória do projeto (arquivo project_save.tmx) na busca. Marque <emphasis>TMs</emphasis> para incluir as memórias de tradução localizadas na pasta <filename>tm</filename> na busca. Marque <emphasis>Glossários</emphasis> para incluir os glossários localizados na pasta <filename>glossary</filename> na busca.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Buscar em arquivos: </emphasis>busca em um único arquivo ou em uma pasta contendo vários arquivos. Quando fizer buscas em arquivos (ao contrário das memórias de tradução), o OmegaT somente pesquisará nos que estejam nos formatos dos arquivos fonte. Consequentemente, embora o OmegaT possa processar os arquivos<filename> tmx</filename>, eles não serão incluídos na pesquisa Buscar nos arquivos.</para>
       </listitem>
     </itemizedlist>
 
@@ -159,5 +139,23 @@
     <para>Clique em um segmento e abra-o no Editor para modificações. Depois, é só voltar para a janela Busca e ir para o próximo segmento, caso seja necessário checar e corrigir a terminologia.</para>
 
     <para>É possível ter várias janelas Busca abertas ao mesmo tempo. Os conteúdos podem ser vistos de forma rápida pelo título: ele mostrará o termo pesquisado.</para>
+  </section>
+
+  <section id="search.filter">
+    <title>Filtra as entradas no Editor de acordo com a busca</title>
+
+    <para>Pra uma navegação mais fácil no conjunto de resultados da busca, é possível aplicar a busca ao Editor. Pressione o botão <emphasis role="bold">Filtrar</emphasis> na parte inferior para restringir as entradas exibidas no painel Editor às que correspondem à busca atual. É possível navegar normalmente para ir, por exemplo para o próximo segmento (não traduzido) que corresponda aos critérios da busca.</para>
+
+    <para>NB:</para>
+
+    <itemizedlist>
+      <listitem>Uma busca pode ser limitada a 1000 itens, portanto ao buscar por uma frase comum, o editor irá mostrar apenas estas 1000 entradas correspondentes, e não todas as entradas que correspondam aos critérios da busca.</listitem>
+
+      <listitem>Um arquivo pode não ter correspondências, e então será mostrado em branco.</listitem>
+
+      <listitem>Se uma busca remover segmentos duplicados, estes segmentos não estarão no Editor.</listitem>
+    </itemizedlist>
+
+    <para>Para remover um filtro, pressione o botão <emphasis role="bold">Remover filtro</emphasis> ou recarregue um projeto.</para>
   </section>
 </chapter>

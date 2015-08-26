@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    2 Enhancements
    4 Bug fixes
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 3.5.2 vs 3.5.1
 
@@ -35,6 +35,10 @@ returns should generate a new paragraph or not.
 
   - Non-Latin characters corrupted in the editor, but not in the other panes
   https://sourceforge.net/p/omegat/bugs/759/
+
+  Localisation Updates:
+
+ - Brazilian Portuguese localisation updated to 3.5 (UI, documentation, scripts, readme)
 
 ----------------------------------------------------------------------
  OmegaT 3.5.1 (2015-07-26)

@@ -80,7 +80,7 @@
                 <primary>Atalhos</primary> <secondary>Verificação de tag - Ctrl+T</secondary>
               </indexterm>Janela Verificação de Tags</guimenuitem></entry>
 
-            <entry><para>Usada para validar tags (abra com <keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo>, feche com <keycap>Esc</keycap>)</para></entry>
+            <entry><para>Usada para validar tags (abra com <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>V</keycap> </keycombo>, feche com <keycap>Esc</keycap>)</para></entry>
           </row>
 
           <row>
@@ -128,32 +128,28 @@
                 <primary>Atalhos</primary> <secondary>Propriedades de projeto - Ctrl+E</secondary>
               </indexterm></entry>
 
-            <entry>Usado para modificar as pastas do projeto e idiomas (acesse via atalho <guimenuitem>Ctrl+E </guimenuitem> ou <menuchoice> <guimenu>Projeto</guimenu> <guimenuitem>propriedades…</guimenuitem> </menuchoice>, feche via <keycap>Esc)</keycap></entry>
+            <entry>Usado para modificar as pastas do projeto e idiomas (acesse via atalho <guimenuitem>Ctrl+E </guimenuitem> ou <menuchoice> <guimenu>Projeto</guimenu> <guimenuitem>propriedades...</guimenuitem> </menuchoice>, feche via <keycap>Esc)</keycap></entry>
           </row>
 
           <row>
             <entry><guimenuitem>Fonte<indexterm class="singular">
-                <primary>Configurações do Projeto</primary> <secondary>Fonte</secondary>
+                <primary>Fonte</primary>
               </indexterm></guimenuitem></entry>
 
-            <entry><para>Usado para modificar a fonte usada pelo <application>OmegaT</application> para exibir a origem, tradução, correspondências e termos do glossário, (acesse via <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Fonte…</guimenuitem> </menuchoice>, feche via <keycap>Esc</keycap>)</para></entry>
+            <entry><para>Usado para modificar a fonte usada pelo <application>OmegaT</application> para exibir a origem, tradução, correspondências e termos do glossário, (acesse via <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Fonte...</guimenuitem> </menuchoice>, feche via <keycap>Esc</keycap>)</para></entry>
           </row>
 
           <row>
             <entry><guimenuitem>Filtros de arquivo<indexterm class="singular">
-                <primary>Configurações do Projeto</primary> <secondary>Filtros de arquivo</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>Menu Opções</primary> <secondary>Filtros de arquivo</secondary>
+                <primary>Filtros de arquivo</primary>
               </indexterm></guimenuitem></entry>
 
-            <entry>Usado para ajustar o manuseio dos formatos de arquivos suportados (acesse via <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Filtros de arquivo…</guimenuitem> </menuchoice>, feche via <keycap>Esc</keycap>)</entry>
+            <entry>Usado para ajustar o manuseio dos formatos de arquivos suportados (acesse via <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Filtros de arquivo...</guimenuitem> </menuchoice>, feche via <keycap>Esc</keycap>)</entry>
           </row>
 
           <row>
             <entry><guimenuitem>Segmentação<indexterm class="singular">
-                <primary>Configurações do Projeto</primary> <secondary>Segmentação</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>Menu Opções</primary> <secondary>Segmentação</secondary>
+                <primary>Segmentação</primary>
               </indexterm></guimenuitem></entry>
 
             <entry>Usado para mudar o modo como o texto é segmentado em sentenças (acesse via <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Segmentação</guimenuitem> </menuchoice>, feche via <keycap>Esc</keycap>)</entry>
@@ -161,12 +157,10 @@
 
           <row>
             <entry><guimenuitem>Comportamento de edição<indexterm class="singular">
-                <primary>Menu Opções</primary> <secondary>Comportamento de Edição</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>Configurações do Projeto</primary> <secondary>Comportamento de Edição</secondary>
+                <primary>Comportamento de edição</primary>
               </indexterm></guimenuitem></entry>
 
-            <entry>Usado para alterar a maneira como o <application>OmegaT</application> se comporta quando você itera entre os segmentos (acesse via <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Comportamento…</guimenuitem> </menuchoice>, feche via <keycap>Esc</keycap>)</entry>
+            <entry>Usado para alterar a maneira como o <application>OmegaT</application> se comporta quando você itera entre os segmentos (acesse via <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Comportamento...</guimenuitem> </menuchoice>, feche via <keycap>Esc</keycap>)</entry>
           </row>
         </tbody>
       </tgroup>
@@ -385,7 +379,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>corresponder porcentagem quando o plug-in toquenizador é usado</para>
+          <para>porcentagem de correspondência (considerando os tokenizers)</para>
         </listitem>
       </itemizedlist>
 
@@ -629,7 +623,11 @@
 
       <itemizedlist>
         <listitem>
-          <para>a lista de todos os arquivos de tradução no projeto. Estes são os arquivos presentes na pasta de arquivos fonte num formato que OmegaT é capaz de reconhecer. Clique em qualquer arquivo para abri-lo para tradução.</para>
+          <para>o número total de arquivos traduzíveis no projeto. Estes são os arquivos presentes na pasta /source num formato que OmegaT é capaz de reconhecer. Este número é exibido entre colchetes, ao lado do título &quot;Arquivo de projeto&quot;</para>
+        </listitem>
+
+        <listitem>
+          <para>a lista de todos os arquivos de tradução no projeto. Clique em qualquer arquivo para abri-lo para tradução. Observação: os nomes de arquivos (primeira coluna) podem ser colocados em ordem alfabética ao clicar no cabeçalho da coluna. Também é possível alterar a posição de um nome de arquivo ao clicar nele e pressionar os botões <emphasis>Mover...</emphasis>.</para>
         </listitem>
       </itemizedlist>
 
@@ -659,7 +657,7 @@
 
       <para><emphasis role="bold"><indexterm class="singular">
           <primary>Arquivos fonte</primary> <secondary>Adicionar arquivos ao projeto</secondary>
-        </indexterm>Adicionar arquivos ao projeto: </emphasis>Para adicionar arquivos fonte ao projeto, basta clicar no botão &quot;<guimenuitem>Importar arquivos fonte…&quot;</guimenuitem>. Isso copia os arquivos selecionados para a pasta <filename>source</filename> e recarrega o projeto para importar os novos arquivos. Para acrescentar arquivos fonte de páginas da Internet ao projeto, gravados no MediaWiki, basta clicar no botão <guimenuitem> &quot;Importar do MediaWiki&quot;</guimenuitem> e fornecer o URL correspondente.</para>
+        </indexterm>Adicionar arquivos ao projeto: </emphasis>Para adicionar arquivos fonte ao projeto, basta clicar no botão &quot;<guimenuitem>Importar arquivos fonte...&quot;</guimenuitem>. Isso copia os arquivos selecionados para a pasta <filename>source</filename> e recarrega o projeto para importar os novos arquivos. Para acrescentar arquivos fonte de páginas da Internet ao projeto, gravados no MediaWiki, basta clicar no botão <guimenuitem> &quot;Importar do MediaWiki&quot;</guimenuitem> e fornecer o URL correspondente.</para>
     </section>
 
     <section id="section.search.window">
@@ -768,7 +766,7 @@
       <para>O navegador da Ajuda (que exibe este manual) pode ser aberto pressionando a tecla <keycap><indexterm class="singular">
           <primary>Atalhos</primary> <secondary>Ajuda - F1</secondary>
         </indexterm>F1</keycap> ou navegando no menu principal em <guimenuitem><indexterm class="singular">
-          <primary>Menu Ajuda</primary> <secondary>Manual do usuário…</secondary>
+          <primary>Menu Ajuda</primary> <secondary>Manual do usuário...</secondary>
         </indexterm>Ajuda → Manual do Usuário</guimenuitem>. Na janela, o manual e dois botões são exibidos: Voltar e Conteúdo. O manual do usuário é um documento HTML com links para os diversos capítulos. Clique em um link, como faria em um navegador da internet, para acessar a página desejada.</para>
 
       <para>O manual do usuário está localizado na subpasta docs na pasta de instalação do OmegaT, assim você pode, por exemplo, consultar a documentação em português abrindo o arquivo <filename>docs/en/index.html </filename> no seu navegador. Abrir o manual do usuário desta forma também permite que você siga os links externos, já que o navegador de ajuda embutido não aceita links externos da internet.</para>

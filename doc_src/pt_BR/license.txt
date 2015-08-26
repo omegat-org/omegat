@@ -1,7 +1,9 @@
-                    LICENÇA PÚBLICA GERAL (GNU GENERAL PUBLIC LICENSE)       Versão 3, 29 de junho de 1997
+                    Licença Pública Geral (GNU)
+                       Versão 3, 29 de junho de 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
- Qualquer um pode copiar e distribuir cópias textuais deste documento de licença, mas sua modificação não é permitida.
+ Qualquer um pode copiar e distribuir cópias textuais
+ deste documento de licença, mas sua modificação não é permitida.
 
                             Preâmbulo
 
@@ -100,21 +102,25 @@ e pode oferecer suporte ou a proteção de garantia por uma taxa.
 produzi-lo a partir do Programa, na forma do código fonte sob
 os termos da seção 4, contanto que você também cumpra todas estas condições:
 
-    a) O trabalho deve portar avisos proeminentes declarando que você o modificou, com a data relevante.
+    a) O trabalho deve portar avisos proeminentes declarando que você o modificou,
+    com a data relevante.
 
     b) O trabalho deve portar avisos proeminentes declarando que é
-    lançado sob esta Licença e quaisquer condições acrescentadas sob a seção 7.  Este requisito modifica o requisito na seção 4 de "manter intactos todos os avisos".
+    lançado sob esta Licença e quaisquer condições acrescentadas sob a seção
+    7.  Este requisito modifica o requisito na seção 4 de
+    "manter intactos todos os avisos".
 
     c) Você deve licenciar o trabalho inteiro, no conjunto, de acordo com esta
     licença, a cada um que estiver em posse de uma cópia.  Esta
     licença se aplicará, junto com quaisquer termos adicionais aplicáveis da seção 7,
     ao conjunto do trabalho e a todas as suas partes, 
-    independente de como forem empacotadas.  Esta licença não dá
+    independente de como forem empacotadas.  Esta Licença não dá nenhuma
     permissão de autorizar o trabalho de qualquer outro modo, mas não 
     invalida tal permissão se você a tiver recebido separadamente.
 
-    d) Se o trabalho tiver interfaces de usuário interativas, cada uma deve exibir    Avisos legais apropriados; contudo, se o programa tiver 
-    interfaces interativas que não expõem Avisos legais apropriados, o seu
+    d) Se o trabalho tiver interfaces de usuário interativas, cada uma deve exibir
+    Avisos legais apropriados; contudo, se o programa tiver 
+    interfaces interativas que não expõem Avisos legais apropriados, o seu 
     trabalho não é obrigado a fazê-lo.
 
   Uma compilação de um trabalho coberto com outros trabalhos separados e independentes, que não são por sua natureza extensões do trabalho coberto, e que não se combinam com ele para, por exemplo, formar um programa maior, em ou junto com um volume de um meio de armazenamento ou de distribuição, é chamado de "agregado" se a compilação e os seus direitos autorais resultantes não forem usados para limitar o acesso ou direitos legais dos usuários da compilação além do que trabalhos individuais permitem.  A inclusão de um trabalho coberto em um agregado não faz com que esta licença se aplique às outras partes do agregado.
@@ -125,8 +131,8 @@ os termos da seção 4, contanto que você também cumpra todas estas condiçõe
 das seções 4 e 5, contanto que também transmita o fonte correspondente legível pela máquina nas condições desta licença, de um destes modos:
 
     a) Transmitir o código objeto em, ou incorporado em, um produto físico
-    (inclusive um meio de distribuição físico), acompanhado pela
-    fonte correspondente gravada em um meio físico durável
+    (inclusive um meio de distribuição físico), acompanhado pela 
+    fonte correspondente gravada em um meio físico durável 
     habitualmente usado para a permuta de software.
 
     b) Transmitir o código objeto em, ou incorporado em, um produto físico
@@ -140,6 +146,7 @@ das seções 4 e 5, contanto que também transmita o fonte correspondente legív
     maior do que o custo razoável por executar fisicamente esta
     transmissão da fonte, ou (2) acesso para copiar a
     fonte correspondente de um servidor de rede gratuito.
+
 
     c) Transmitir cópias individuais do código objeto com uma cópia da
     oferta escrita para fornecer à Fonte Correspondente.  Esta
@@ -297,9 +304,15 @@ LEGISLAÇÃO APLICÁVEL.  EXCETO QUANDO DETERMINADO DE OUTRA MANEIRA POR ESCRITO
     <uma linha para dar o nome do programa e uma breve ideia do que ele faz.>
     Copyright (C) <ano>  <nome do autor>
 
-    Este programa é software livre; você pode redistribuí-lo e/ou modificá-lo sob os termos da Licença Pública Geral da GNU como publicada pela Free Software Foundation; seja a versão 3 da Licença, ou (a sua escolha) qualquer versão posterior.
+    Este programa é um software gratuito: você pode redistribuí-lo e/ou modificá-lo
+    sob as condições da Licença Pública Geral (GNU) como publicado pela
+    Fundação para o Software Livre, sob a versão 3 da Licença ou
+    (à sua opção) qualquer versão posterior.
 
-    Este programa é distribuído na expectativa de que possa ser útil, mas SEM NENHUMA GARANTIA; sem mesmo a garantia implícita de COMERCIALIZAÇÃO ou ADEQUAÇÃO PARA UM PROPÓSITO PARTICULAR.  Veja a Licença Pública Geral - GNU para obter mais detalhes.
+    Este programa é distribuído na esperança de que seja útil,
+    mas SEM QUALQUER GARANTIA; até mesmo a garantia implícita de
+    VALOR COMERCIAL ou APTIDÃO PARA UM DETERMINADO OBJETIVO.  Veja a
+    Licença Pública Geral (GNU) para obter mais informações.
 
     Você deve ter recebido uma cópia da Licença Pública Geral (GNU)
     junto com este programa.  Se não, veja <http://www.gnu.org/licenses/>.

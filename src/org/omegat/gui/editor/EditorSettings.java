@@ -521,7 +521,7 @@ public class EditorSettings {
      * @return
      */
     public AttributeSet getSegmentMarkerAttributeSet() {
-        return Styles.createAttributeSet(null, null, true, false);
+        return Styles.createAttributeSet(Styles.EditorColor.COLOR_SEGMENT_MARKER_FG.getColor(), Styles.EditorColor.COLOR_SEGMENT_MARKER_BG.getColor(), true, false);
     }
     /**
      * Returns font attributes for other laguages translation.

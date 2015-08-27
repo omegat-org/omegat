@@ -59,6 +59,8 @@ public final class Styles {
         COLOR_ACTIVE_SOURCE_FG((Color) null),
         COLOR_ACTIVE_TARGET((Color) null),
         COLOR_ACTIVE_TARGET_FG((Color) null),
+        COLOR_SEGMENT_MARKER_FG((Color) null),
+        COLOR_SEGMENT_MARKER_BG((Color) null),
         COLOR_SOURCE("#c0ffc0"),
         COLOR_SOURCE_FG((Color) null),
         COLOR_NOTED("#c0ffff"),

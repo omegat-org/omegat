@@ -66,6 +66,10 @@ public class AboutDialog extends JDialog {
                 Runtime.getRuntime().maxMemory() / 1024 / 1024 };
         String memoryUsage = StaticUtils.format(OStrings.getString("MEMORY_USAGE"), args);
         memoryusage.setText(memoryUsage);
+        
+        String javaVersion = StaticUtils.format(OStrings.getString("JAVA_VERSION"),
+                System.getProperty("java.version"));
+        javaversion.setText(javaVersion);
 
         invalidate();
         pack();
@@ -93,6 +97,8 @@ public class AboutDialog extends JDialog {
         jPanel1 = new javax.swing.JPanel();
         licenseButton = new javax.swing.JButton();
         okButton = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        javaversion = new javax.swing.JLabel();
         memoryusage = new javax.swing.JLabel();
         versionLabel = new javax.swing.JLabel();
         aboutpane = new javax.swing.JScrollPane();
@@ -132,8 +138,15 @@ public class AboutDialog extends JDialog {
 
         buttonPanel.add(jPanel1, java.awt.BorderLayout.EAST);
 
+        jPanel2.setLayout(new java.awt.GridLayout(0, 1));
+
+        org.openide.awt.Mnemonics.setLocalizedText(javaversion, OStrings.getString("JAVA_VERSION")); // NOI18N
+        jPanel2.add(javaversion);
+
         org.openide.awt.Mnemonics.setLocalizedText(memoryusage, OStrings.getString("MEMORY_USAGE")); // NOI18N
-        buttonPanel.add(memoryusage, java.awt.BorderLayout.PAGE_START);
+        jPanel2.add(memoryusage);
+
+        buttonPanel.add(jPanel2, java.awt.BorderLayout.NORTH);
 
         getContentPane().add(buttonPanel, java.awt.BorderLayout.SOUTH);
 
@@ -185,6 +198,8 @@ public class AboutDialog extends JDialog {
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel javaversion;
     private javax.swing.JButton licenseButton;
     private javax.swing.JLabel memoryusage;
     private javax.swing.JButton okButton;

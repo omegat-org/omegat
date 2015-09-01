@@ -171,20 +171,18 @@ public class AboutDialog extends JDialog {
         getContentPane().add(aboutpane, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void licenseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_licenseButtonActionPerformed
+    private void licenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_licenseButtonActionPerformed
         new LicenseDialog(this).setVisible(true);
-    }// GEN-LAST:event_licenseButtonActionPerformed
+    }//GEN-LAST:event_licenseButtonActionPerformed
 
-    private void okButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_okButtonActionPerformed
-    {
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         doClose(RET_OK);
-    }// GEN-LAST:event_okButtonActionPerformed
+    }//GEN-LAST:event_okButtonActionPerformed
 
     /** Closes the dialog */
-    private void closeDialog(java.awt.event.WindowEvent evt)// GEN-FIRST:event_closeDialog
-    {
+    private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
         doClose(RET_CANCEL);
-    }// GEN-LAST:event_closeDialog
+    }//GEN-LAST:event_closeDialog
 
     private void doClose(int retStatus) {
         returnStatus = retStatus;

@@ -420,6 +420,7 @@ public class EditorTextArea3 extends JEditorPane {
                 case KeyEvent.VK_KP_UP:
                 case KeyEvent.VK_KP_DOWN:
                     checkAndFixCaret(); //works only in after-processing if translation length (start and end position) has not changed, because start and end position are not updated yet.
+                    autoCompleter.updatePopup();
             }
         }
     }
@@ -582,7 +583,6 @@ public class EditorTextArea3 extends JEditorPane {
                 setCaretPosition(end);
             }
         }
-        autoCompleter.updatePopup();
     }
 
     /**

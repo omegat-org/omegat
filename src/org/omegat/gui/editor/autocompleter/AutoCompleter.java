@@ -217,6 +217,10 @@ public class AutoCompleter implements IAutoCompleter {
                     Math.max(view.getPreferredHeight(), MIN_VIEWPORT_HEIGHT)));
             popup.validate();
             popup.pack();
+            if (isVisible()) {
+                Point p = getDisplayPoint();
+                popup.show(editor, p.x, p.y);
+            }
         }
     }
     

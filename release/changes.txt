@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.2
 ----------------------------------------------------------------------
-   5 Enhancements
+   6 Enhancements
    5 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -25,6 +25,8 @@ or changer
   - The About window shows the Java version
 
   - It is possible to define a custom colour for the segment marker
+
+  - In Windows 8 or above, the panes are square instead of rounded
 
   Bug fixes:
 

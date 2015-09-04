@@ -56,20 +56,23 @@ public class CharTableModel extends AbstractTableModel {
      */
     public boolean setData(String data) {
         if (this.data == null && data == null) {
+            // Both null
+            return false;
+        }
+        if (data != null && this.data != null && this.data.toString().equals(data)) {
+            // Both same non-null value
             return false;
         }
         
-        if (data != null && (this.data == null || !this.data.toString().equals(data))) {
+        if (data == null) {
+            glyphCount = 0xFFF - 32;
+            this.data = null;
+        } else {
             glyphCount = data.length();
             this.data = new StringBuilder(data);
-            fireTableDataChanged();
-            return true;
-        } else {
-            glyphCount = 0xFFFF-32;
-            this.data = null;
-            fireTableDataChanged();
-            return true;
         }
+        fireTableDataChanged();
+        return true;
     }
     
     public String getData() {

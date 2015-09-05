@@ -45,6 +45,9 @@ or changer
   - Non-Latin characters corrupted in the editor, but not in the other panes
   https://sourceforge.net/p/omegat/bugs/759/
 
+  - The auto-completer popup once again follows the caret when navigating with
+the arrow keys
+
   Localisation Updates:
 
  - Brazilian Portuguese localisation updated to 3.5 (UI, documentation, scripts, readme)

@@ -87,7 +87,7 @@ public class DTD extends XMLPseudoTag {
             res.append("\"" + systemId + "\"");
         }
 
-        if (entities.size() > 0) {
+        if (!entities.isEmpty()) {
             res.append("\n[\n");
             for (Entity entity : entities) {
                 res.append(entity.toString());

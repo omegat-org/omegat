@@ -210,7 +210,7 @@ public class StarDict implements IDictionary {
             }
             Map<String, String> result = new TreeMap<String, String>();
             while ((line = rd.readLine()) != null) {
-                if (line.trim().length() == 0) {
+                if (line.trim().isEmpty()) {
                     continue;
                 }
                 int pos = line.indexOf('=');

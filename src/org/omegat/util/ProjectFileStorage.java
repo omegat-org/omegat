@@ -299,7 +299,7 @@ public class ProjectFileStorage {
      * if the specified one could not be loaded for whatever reason.
      */
     private static Class<?> loadTokenizer(String className, Language fallback) {
-        if (className != null && className.length() > 0) {
+        if (!StringUtil.isEmpty(className)) {
             try {
                 return ProjectFileStorage.class.getClassLoader().loadClass(className);
             } catch (ClassNotFoundException e) {

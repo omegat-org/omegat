@@ -606,7 +606,7 @@ public class PoFilter extends AbstractFilter {
      *            for next
      */
     protected void align(String source, String translation, String comments, String pathSuffix) {
-        if (translation.length() == 0) {
+        if (translation.isEmpty()) {
             translation = null;
         }
         if (entryParseCallback != null) {

@@ -149,7 +149,7 @@ public class XMLStreamReader {
         if (blk != null && m_killEmptyBlocks) {
             String str = blk.getText();
             str = str.trim();
-            if (str.length() == 0) {
+            if (str.isEmpty()) {
                 blk = getNextBlock();
             }
         }
@@ -1094,10 +1094,7 @@ public class XMLStreamReader {
             }
         }
 
-        if (lst.size() == 0)
-            return null;
-        else
-            return lst;
+        return lst.isEmpty() ? null : lst;
     }
 
     public XMLBlock advanceToTag(String tagname) throws TranslationException {

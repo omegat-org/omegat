@@ -56,7 +56,7 @@ public class SnowballEnglishTokenizer extends BaseTokenizer {
                 List<String> words = new ArrayList<String>();
                 while ((s = rd.readLine()) != null) {
                     s = s.trim();
-                    if (s.length() == 0 || s.startsWith("#")) {
+                    if (s.isEmpty() || s.startsWith("#")) {
                         continue;
                     }
                     words.add(s);

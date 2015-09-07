@@ -106,7 +106,7 @@ public class MagentoFilter extends AbstractFilter {
             String trimmed = line.trim();
 
             // skipping empty strings
-            if (trimmed.length() == 0) {
+            if (trimmed.isEmpty()) {
                 outfile.write(line + lbpr.getLinebreak());
                 continue;
             }

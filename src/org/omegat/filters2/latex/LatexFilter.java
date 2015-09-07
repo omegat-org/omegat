@@ -151,7 +151,7 @@ public class LatexFilter extends AbstractFilter {
             // String[] c = s.split(""); In Java 8, that line gave a first empty element, so it was replaced with the 
             // following lines, and idx below was started at 0 instead of 1
             String[] c;
-            if (s.length() > 0){
+            if (!s.isEmpty()){
               c = s.split("(?!^)");
             } else {
               c = new String[0];

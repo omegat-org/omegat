@@ -307,10 +307,10 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler {
 
             int tagstart = matcher.start();
             int tagend = matcher.end();
-            boolean end = matcher.group(1).length() > 0;
+            boolean end = !matcher.group(1).isEmpty();
             String name = matcher.group(2);
             int num = Integer.parseInt(matcher.group(3));
-            boolean alone = matcher.group(4).length() > 0;
+            boolean alone = !matcher.group(4).isEmpty();
 
             if (num == 1)
                 num = 0;
@@ -336,9 +336,9 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler {
             while (matcher.find()) {
                 tagstart = matcher.start();
                 tagend = matcher.end();
-                end = matcher.group(1).length() > 0;
+                end = !matcher.group(1).isEmpty();
                 name = matcher.group(2);
-                alone = matcher.group(4).length() > 0;
+                alone = !matcher.group(4).isEmpty();
                 tag = new Tag(end, name, num, alone);
 
                 if (end && unclosedTagsNames.containsKey(name)) {
@@ -771,7 +771,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler {
                 // add the language to the set, but trim off any region
                 // indicators
                 // for simplicity's sake, and convert it to all uppercase
-                if (language.length() > 0) {
+                if (!language.isEmpty()) {
                     m_variantLanguages.add(language.substring(0, 2).toUpperCase(Locale.ENGLISH));
                     if (languages.length() > 0)
                         languages.append(", ");

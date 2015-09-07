@@ -214,7 +214,7 @@ public abstract class ParseEntry implements IParseCallback {
      */
     private void internalAddSegment(String id, short segmentIndex, String segmentSource, String segmentTranslation,
             boolean segmentTranslationFuzzy, String comment, String path, List<ProtectedPart> protectedParts) {
-        if (segmentSource.length() == 0 || segmentSource.trim().length() == 0) {
+        if (segmentSource.trim().isEmpty()) {
             // skip empty segments
             return;
         }

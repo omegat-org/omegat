@@ -25,6 +25,8 @@
 
 package org.omegat.core.data;
 
+import org.omegat.util.StringUtil;
+
 /*
  * String entry represents a unique translatable string
  * (a single string may occur many times in data files, but only
@@ -77,7 +79,7 @@ public class StringEntry {
      * Returns whether the given string entry is already translated.
      */
     public boolean isTranslated() {
-        return m_translation != null && m_translation.length() > 0;
+        return !StringUtil.isEmpty(m_translation);
     }
 
     private String m_srcText;

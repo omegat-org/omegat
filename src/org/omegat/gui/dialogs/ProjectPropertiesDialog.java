@@ -337,7 +337,7 @@ public class ProjectPropertiesDialog extends JDialog {
         }
         final JComboBox m_sourceTokenizerBehaviorField = new JComboBox(
                 srcTok.getSupportedBehaviors().keySet().toArray());
-        m_sourceTokenizerBehaviorField.setEnabled(srcTok.getSupportedBehaviors().size() > 0);
+        m_sourceTokenizerBehaviorField.setEnabled(!srcTok.getSupportedBehaviors().isEmpty());
         if (m_sourceTokenizerBehaviorField.getMaximumRowCount() < 20)
             m_sourceTokenizerBehaviorField.setMaximumRowCount(20);
         m_sourceTokenizerBehaviorField.setEditable(false);
@@ -408,7 +408,7 @@ public class ProjectPropertiesDialog extends JDialog {
         }
         final JComboBox m_targetTokenizerBehaviorField = new JComboBox(
                 trgTok.getSupportedBehaviors().keySet().toArray());
-        m_targetTokenizerBehaviorField.setEnabled(trgTok.getSupportedBehaviors().size() > 0);
+        m_targetTokenizerBehaviorField.setEnabled(!trgTok.getSupportedBehaviors().isEmpty());
         if (m_targetTokenizerBehaviorField.getMaximumRowCount() < 20)
             m_targetTokenizerBehaviorField.setMaximumRowCount(20);
         m_targetTokenizerBehaviorField.setEditable(false);

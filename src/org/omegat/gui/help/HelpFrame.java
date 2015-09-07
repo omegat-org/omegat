@@ -107,7 +107,7 @@ public class HelpFrame extends JFrame {
         m_backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (m_historyList.size() > 0) {
+                if (!m_historyList.isEmpty()) {
                     URL u = m_historyList.remove(m_historyList.size() - 1);
                     displayURL(u);
                 }

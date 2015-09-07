@@ -130,7 +130,7 @@ public class DefaultTokenizer implements ITokenizer {
      * @return array of tokens (all)
      */
     private static Token[] tokenizeTextNoCache(final String strOrig, final boolean all) {
-        if (strOrig.length() == 0) {
+        if (strOrig.isEmpty()) {
             // fixes bug nr. 1382810 (StringIndexOutOfBoundsException)
             return EMPTY_TOKENS_LIST;
         }

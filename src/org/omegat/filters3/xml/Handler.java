@@ -210,10 +210,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * included into main file. Each entry is {@link File}.
      */
     public List<File> getProcessedFiles() {
-        if (processedFiles.size() > 0)
-            return processedFiles;
-        else
-            return null;
+        return processedFiles.isEmpty() ? null : processedFiles;
     }
 
     /** Throws a nice error message when SAX parser encounders fastal error. */
@@ -409,7 +406,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             currEntry().add(new XMLEntityText(internalEntityStarted));
         else {
             boolean added = false;
-            if (currEntry().size() > 0) {
+            if (!currEntry().isEmpty()) {
                 Element elem = currEntry().get(currEntry().size() - 1);
                 if (elem instanceof XMLText) {
                     XMLText text = (XMLText) elem;
@@ -584,7 +581,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * @see #translateAndFlush()
      */
     private void translateButDontFlash() throws TranslationException {
-        if (currEntry().size() == 0)
+        if (currEntry().isEmpty())
             return;
 
         List<ProtectedPart> shortcutDetails = new ArrayList<ProtectedPart>();

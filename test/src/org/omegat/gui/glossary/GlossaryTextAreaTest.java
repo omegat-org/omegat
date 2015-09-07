@@ -91,8 +91,7 @@ public class GlossaryTextAreaTest extends TestCore {
                 }
             });
             gta.clear();
-            if (gta.getText().length() > 0)
-                fail("Glossary pane isn't empty.");
+            assertTrue(gta.getText().isEmpty());
         } catch (HeadlessException ignore) {
             // Test will fail when run in a headless environment, but this test
             // is not meaningful then anyway.

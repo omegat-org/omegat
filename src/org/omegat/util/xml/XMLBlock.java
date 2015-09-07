@@ -193,7 +193,7 @@ public class XMLBlock {
             } else {
                 tag += m_text + " ";
                 if (m_attrList != null) {
-                    if (m_attrList.size() > 0) {
+                    if (!m_attrList.isEmpty()) {
                         tag += m_attrList.get(0).name;
                     }
                 }

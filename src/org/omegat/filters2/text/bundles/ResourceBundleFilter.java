@@ -318,7 +318,7 @@ public class ResourceBundleFilter extends AbstractFilter {
             String trimmed = str.trim();
 
             // skipping empty strings
-            if (trimmed.length() == 0) {
+            if (trimmed.isEmpty()) {
                 outfile.write(toAscii(str, false) + lbpr.getLinebreak());
                 // Delete the comments
                 comments = null;
@@ -402,7 +402,7 @@ public class ResourceBundleFilter extends AbstractFilter {
                     }
                     trans = trans.replaceAll("\\n\\s\\n", "\n\n");
                     trans = toAscii(trans, false);
-                    if (trans.length() > 0 && trans.codePointAt(0) == ' ') {
+                    if (!trans.isEmpty() && trans.codePointAt(0) == ' ') {
                         trans = '\\' + trans;
                     }
                     // Non-translated segments are written based on the filter options 

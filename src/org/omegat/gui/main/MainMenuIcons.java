@@ -99,7 +99,7 @@ public class MainMenuIcons {
             } else {
                 savedHints.clear();
             }
-            if (hintsToSave.size() == 0) {
+            if (hintsToSave.isEmpty()) {
                 return savedHints;
             }
             /* RenderingHints.keySet() returns Set */

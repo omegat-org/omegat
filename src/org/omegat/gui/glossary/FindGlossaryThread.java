@@ -157,8 +157,9 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
 
     static List<GlossaryEntry> filterGlossary(List<GlossaryEntry> result) {
         // First check that entries exist in the list.
-        if (result.size() == 0)
+        if (result.isEmpty()) {
             return result;
+        }
 
         List<GlossaryEntry> returnList = new LinkedList<GlossaryEntry>();
 

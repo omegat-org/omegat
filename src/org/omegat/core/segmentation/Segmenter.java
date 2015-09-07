@@ -160,7 +160,7 @@ public final class Segmenter {
             // Sometimes the last segment may be empty,
             // it happens for paragraphs like "Rains. "
             // So if it's an empty segment and there's a previous segment
-            if (oneseg.trim().length() == 0 && segments.size() > 0) {
+            if (oneseg.trim().isEmpty() && !segments.isEmpty()) {
                 String prev = segments.get(segments.size() - 1);
                 prev += oneseg;
                 segments.set(segments.size() - 1, prev);

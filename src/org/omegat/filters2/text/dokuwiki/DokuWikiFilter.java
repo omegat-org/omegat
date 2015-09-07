@@ -107,7 +107,7 @@ public class DokuWikiFilter extends AbstractFilter {
             String trimmed = line.trim();
 
             // skipping empty strings
-            if (trimmed.length() == 0) {
+            if (trimmed.isEmpty()) {
                 writeTranslate(outfile, text, lbpr);
                 outfile.write(line + lbpr.getLinebreak());
                 continue;
@@ -118,7 +118,7 @@ public class DokuWikiFilter extends AbstractFilter {
             if (headingLevel > 0) {
                 writeTranslate(outfile, text, lbpr);
                 String header = trimmed.substring(headingLevel, trimmed.length() - headingLevel).trim();
-                if (header.length() > 0) {
+                if (!header.isEmpty()) {
                     String trans = processEntry(header);
                     line = line.replace(header, trans);
                 }
@@ -253,7 +253,7 @@ public class DokuWikiFilter extends AbstractFilter {
     private void writeTranslate(BufferedWriter outfile, String value, LinebreakPreservingReader lbpr)
             throws IOException {
         value = value.trim();
-        if (value.length() > 0) {
+        if (!value.isEmpty()) {
             while (true) {
                 // reduce all spaces to a single space
                 String newValue = value.replace("  ", " ");

@@ -98,7 +98,7 @@ public abstract class VarExpansion<Param> {
         while ((matcher = patternBundleEntry.matcher(localTemplate)).find()) {
             String original = matcher.group();
             String translation = OStrings.getString(matcher.group(1));
-            if ((matcher.group(2) != null) && (matcher.group(2).length() > 0)) {
+            if (!StringUtil.isEmpty(matcher.group(2))) {
                 String vars = matcher.group(2); 
                 List<String> values = new ArrayList<String>();
                 matcher = Pattern.compile("\\[(.+?)\\]").matcher(vars);

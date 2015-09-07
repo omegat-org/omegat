@@ -312,9 +312,9 @@ public class TMXWriter2 {
             xml.writeCharacters(segment.substring(pos, m.start()));
             pos = m.end();
 
-            if (m.group(1).length() > 0) {
+            if (!m.group(1).isEmpty()) {
                 tagType = TAG_TYPE.END;
-            } else if (m.group(4).length() > 0) {
+            } else if (!m.group(4).isEmpty()) {
                 tagType = TAG_TYPE.SINGLE;
             } else {
                 tagType = TAG_TYPE.START;

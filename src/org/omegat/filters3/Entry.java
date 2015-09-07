@@ -666,4 +666,9 @@ public class Entry {
     public int size() {
         return elements.size();
     }
+
+    /** Returns whether or not the elements list is empty. */
+    public boolean isEmpty() {
+        return elements.isEmpty();
+    }
 }

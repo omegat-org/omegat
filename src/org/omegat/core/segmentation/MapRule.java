@@ -31,6 +31,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.omegat.util.StringUtil;
+
 /**
  * A class representing the language rules and their mapping to the segmentation
  * rules for each particular language.
@@ -55,9 +57,7 @@ public class MapRule implements Serializable, Cloneable {
     /** Returns Language Name (to display it in a dialog). */
     public String getLanguage() {
         String res = LanguageCodes.getLanguageName(languageCode);
-        if (res == null || res.length() == 0)
-            res = languageCode;
-        return res;
+        return StringUtil.isEmpty(res) ? languageCode : res;
     }
 
     /** Sets Language Name */

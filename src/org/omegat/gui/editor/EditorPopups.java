@@ -143,7 +143,7 @@ public class EditorPopups {
                 }
 
                 // what if no action is done?
-                if (suggestions.size() == 0) {
+                if (suggestions.isEmpty()) {
                     JMenuItem item = menu.add(OStrings.getString("SC_NO_SUGGESTIONS"));
                     item.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {

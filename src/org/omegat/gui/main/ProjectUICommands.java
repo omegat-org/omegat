@@ -57,6 +57,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RecentProjects;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -113,7 +114,7 @@ public class ProjectUICommands {
 
                 final String projectRoot = newProps.getProjectRoot();
 
-                if (projectRoot != null && projectRoot.length() > 0) {
+                if (!StringUtil.isEmpty(projectRoot)) {
                     // create project
                     try {
                         ProjectFactory.createProject(newProps);

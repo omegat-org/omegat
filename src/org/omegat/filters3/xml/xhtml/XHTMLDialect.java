@@ -36,6 +36,7 @@ import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 import org.omegat.util.Log;
+import org.omegat.util.StringUtil;
 import org.xml.sax.InputSource;
 
 /**
@@ -126,7 +127,7 @@ public class XHTMLDialect extends DefaultXMLDialect {
 
         // Prepare matcher
         String skipRegExp = options.getSkipRegExp();
-        if (skipRegExp != null && skipRegExp.length() > 0) {
+        if (!StringUtil.isEmpty(skipRegExp)) {
             try {
                 this.skipRegExpPattern = Pattern.compile(skipRegExp, Pattern.CASE_INSENSITIVE);
             } catch (PatternSyntaxException e) {

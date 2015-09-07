@@ -385,7 +385,7 @@ public class MainWindow extends JFrame implements IMainWindow {
                 OStrings.getString("TF_WIKI_IMPORT_TITLE"), JOptionPane.OK_CANCEL_OPTION);
         String projectsource = Core.getProject().getProjectProperties().getSourceRoot();
         // [1762625] Only try to get MediaWiki page if a string has been entered
-        if ((remote_url != null) && (remote_url.trim().length() > 0)) {
+        if (remote_url != null && !remote_url.trim().isEmpty()) {
             WikiGet.doWikiGet(remote_url, projectsource);
             ProjectUICommands.projectReload();
         }

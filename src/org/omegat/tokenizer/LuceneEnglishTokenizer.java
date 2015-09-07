@@ -55,7 +55,7 @@ public class LuceneEnglishTokenizer extends BaseTokenizer {
                 String s;
                 while ((s = rd.readLine()) != null) {
                     s = s.trim();
-                    if (s.length() == 0 || s.startsWith("#")) {
+                    if (s.isEmpty() || s.startsWith("#")) {
                         continue;
                     }
                     STOP_WORDS.add(s);

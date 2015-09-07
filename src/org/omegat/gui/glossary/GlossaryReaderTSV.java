@@ -81,7 +81,7 @@ public class GlossaryReaderTSV {
                 // divide lines on tabs
                 String tokens[] = s.split("\t");
                 // check token list to see if it has a valid string
-                if (tokens.length < 2 || tokens[0].length() == 0)
+                if (tokens.length < 2 || tokens[0].isEmpty())
                     continue;
 
                 // creating glossary entry and add it to the hash

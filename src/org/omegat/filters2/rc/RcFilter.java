@@ -102,7 +102,7 @@ public class RcFilter extends AbstractFilter {
                 continue;
             }
 
-            if (strim.length() == 0) {
+            if (strim.isEmpty()) {
                 if (cLevel == 0) {
                     cPart = PART.UNKNOWN;
                 }

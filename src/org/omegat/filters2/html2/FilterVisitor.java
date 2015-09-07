@@ -275,7 +275,7 @@ public class FilterVisitor extends NodeVisitor {
         recurse = true;
         // nbsp is special case - process it like usual spaces
         String trimmedtext = entitiesToChars(string.getText()).replace((char) 160, ' ').trim();
-        if (trimmedtext.length() > 0) {
+        if (!trimmedtext.isEmpty()) {
             // Hack around HTMLParser not being able to handle XHTML
             // RFE pending:
             // http://sourceforge.net/tracker/index.php?func=detail&aid=1227222&group_id=24399&atid=381402
@@ -745,7 +745,7 @@ public class FilterVisitor extends NodeVisitor {
      * Whitespace text is simply added to the queue.
      */
     private void queueTranslatable(Text text) {
-        if (text.toHtml().trim().length() > 0) {
+        if (!text.toHtml().trim().isEmpty()) {
             translatable.addAll(afters);
             afters.clear();
             translatable.add(text);

@@ -233,7 +233,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
      * @return
      */
     private String internalGetSegmentTranslation(String id, int segmentIndex, String segmentSource, String path) {
-        if (segmentSource.length() == 0 || segmentSource.trim().length() == 0) {
+        if (segmentSource.trim().isEmpty()) {
             // empty segment
             return segmentSource;
         }

@@ -151,7 +151,7 @@ class EntryListPane extends JTextPane {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if (!autoSyncWithEditor && e.getClickCount() == 2 && m_entryList.size() > 0) {
+                if (!autoSyncWithEditor && e.getClickCount() == 2 && !m_entryList.isEmpty()) {
                     getActiveDisplayedEntry().gotoEntryInEditor();
                 }
             }
@@ -270,7 +270,7 @@ class EntryListPane extends JTextPane {
 
             StringBuilder m_stringBuf = new StringBuilder();
             // display what's been found so far
-            if (entries.size() == 0) {
+            if (entries.isEmpty()) {
                 // no match
                 addMessage(m_stringBuf, OStrings.getString("ST_NOTHING_FOUND"));
             }
@@ -296,7 +296,7 @@ class EntryListPane extends JTextPane {
 
             setFont();
 
-            if (matches.size() > 0) {
+            if (!matches.isEmpty()) {
                 SwingUtilities.invokeLater(this);
             }
         }
@@ -373,7 +373,7 @@ class EntryListPane extends JTextPane {
             }
             display.clear();
 
-            if (matches.size() > 0) {
+            if (!matches.isEmpty()) {
                 SwingUtilities.invokeLater(this);
             }
         }

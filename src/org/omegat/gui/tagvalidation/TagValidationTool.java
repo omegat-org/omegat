@@ -216,7 +216,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         // if there's no translation, skip the string
         // bugfix for:
         // http://sourceforge.net/support/tracker.php?aid=1209839
-        if (!te.isTranslated() || s.length() == 0) {
+        if (!te.isTranslated() || s.isEmpty()) {
             return null;
         }
         ErrorReport report = new ErrorReport(ste, te.translation);

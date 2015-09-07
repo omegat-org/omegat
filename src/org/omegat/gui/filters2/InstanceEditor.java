@@ -35,6 +35,7 @@ import javax.swing.border.TitledBorder;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 import org.openide.awt.Mnemonics;
@@ -63,10 +64,8 @@ public class InstanceEditor extends JDialog {
         sourceFilenameMaskField.setText("*.*");
         targetFilenamePatternField.setText("${filename}");
 
-        if (hint != null && hint.length() != 0)
-            hintTextArea.setText(hint);
-        else
-            hintTextArea.setVisible(false);
+        hintTextArea.setText(hint);
+        hintTextArea.setVisible(!StringUtil.isEmpty(hint));
 
         StaticUIUtils.setEscapeClosable(this);
 

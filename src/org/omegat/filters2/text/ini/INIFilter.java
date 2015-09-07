@@ -99,7 +99,7 @@ public class INIFilter extends AbstractFilter {
             String trimmed = str.trim();
 
             // skipping empty strings and comments
-            if (trimmed.length() == 0 || trimmed.codePointAt(0) == '#' || trimmed.codePointAt(0) == ';') {
+            if (trimmed.isEmpty() || trimmed.codePointAt(0) == '#' || trimmed.codePointAt(0) == ';') {
                 // outfile.write(str+"\n");
                 outfile.write(str);
                 outfile.write(lbpr.getLinebreak()); // fix for bug 1462566

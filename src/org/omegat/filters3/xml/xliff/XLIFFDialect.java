@@ -289,7 +289,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
 
     private int calcTagShortcutLetter(XMLContentBasedTag tag, boolean ignoreTypeForPhtags) {
         int s;
-        if (tag.getIntactContents().size() > 0 && (tag.getIntactContents().get(0) instanceof XMLText)) {
+        if (!tag.getIntactContents().isEmpty() && (tag.getIntactContents().get(0) instanceof XMLText)) {
             XMLText xmlText = (XMLText) tag.getIntactContents().get(0);
             s = StringUtil.getFirstLetterLowercase(xmlText.getText());
         } else {

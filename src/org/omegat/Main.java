@@ -442,7 +442,7 @@ public class Main {
                 .get("pseudotranslatetype"));
 
         String fname;
-        if (pseudoTranslateTMXFilename != null && pseudoTranslateTMXFilename.length() > 0) {
+        if (!StringUtil.isEmpty(pseudoTranslateTMXFilename)) {
             if (!pseudoTranslateTMXFilename.endsWith(OConsts.TMX_EXTENSION)) {
                 fname = pseudoTranslateTMXFilename + "." + OConsts.TMX_EXTENSION;
             } else {

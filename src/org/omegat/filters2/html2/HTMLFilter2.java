@@ -45,6 +45,7 @@ import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
 
 /**
  * A filter to translate HTML and XHTML files.
@@ -146,7 +147,7 @@ public class HTMLFilter2 extends AbstractFilter {
 
         // Prepare matcher
         String skipRegExp = options.getSkipRegExp();
-        if (skipRegExp != null && skipRegExp.length() > 0) {
+        if (!StringUtil.isEmpty(skipRegExp)) {
             try {
                 this.skipRegExpPattern = Pattern.compile(skipRegExp, Pattern.CASE_INSENSITIVE);
             } catch (PatternSyntaxException e) {

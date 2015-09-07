@@ -102,7 +102,7 @@ public class ILIASFilter extends AbstractFilter {
             String trimmed = line.trim();
 
             // skipping empty strings
-            if (trimmed.length() == 0) {
+            if (trimmed.isEmpty()) {
                 outfile.write(line + lbpr.getLinebreak());
                 continue;
             }
@@ -143,7 +143,7 @@ public class ILIASFilter extends AbstractFilter {
             LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader);
             while ((line = lbpr.readLine()) != null && --more > 0) {
                 line = line.trim();
-                if (line.length() == 0) {
+                if (line.isEmpty()) {
                     continue;
                 }
                 markFound = patternMark.matcher(line).matches();

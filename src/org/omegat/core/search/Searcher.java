@@ -190,7 +190,7 @@ public class Searcher {
             // break the search string into keywords,
             // each of which is a separate search string
             text = text.trim();
-            if (text.length() > 0) {
+            if (!text.isEmpty()) {
                 int wordStart = 0;
                 while (wordStart < text.length()) {
                     // get the location of the next space
@@ -201,7 +201,7 @@ public class Searcher {
                     ? text.substring(wordStart, text.length()).trim()
                             : text.substring(wordStart, spacePos).trim();
 
-                    if (word.length() > 0) {
+                    if (!word.isEmpty()) {
                         // escape the word, if it's not supposed to be a regular
                         // expression
                         word = StaticUtils.escapeNonRegex(word, false);

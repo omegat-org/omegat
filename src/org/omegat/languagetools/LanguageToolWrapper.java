@@ -25,7 +25,6 @@
 
 package org.omegat.languagetools;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -52,6 +51,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.Styles;
+import org.openide.awt.Mnemonics;
 
 /**
  * Marker implementation for LanguageTool support.
@@ -82,8 +82,8 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
 
     public LanguageToolWrapper() throws Exception {
         disabled = Preferences.isPreferenceDefault(Preferences.LT_DISABLED, true);
-
-        menuItem = new JCheckBoxMenuItem(OStrings.getString("LT_OPTIONS_MENU_ENABLED"));
+        menuItem = new JCheckBoxMenuItem();
+        Mnemonics.setLocalizedText(menuItem, OStrings.getString("LT_OPTIONS_MENU_ENABLED"));
         menuItem.addActionListener(menuItemActionListener);
         menuItem.setSelected(!disabled);
 

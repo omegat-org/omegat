@@ -137,10 +137,10 @@ public class ILIASFilter extends AbstractFilter {
         boolean textFound = false;
         final int MAX_LINES_TO_CHECK = 128;
 
+        LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader);
         try {
             String line;
             int more = MAX_LINES_TO_CHECK + 1;
-            LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader);
             while ((line = lbpr.readLine()) != null && --more > 0) {
                 line = line.trim();
                 if (line.isEmpty()) {
@@ -154,6 +154,12 @@ public class ILIASFilter extends AbstractFilter {
             }
         } catch (IOException e) {
             return false;
+        } finally {
+            try {
+                lbpr.close();
+            } catch (IOException e) {
+                // Ignore
+            }
         }
         return markFound & !textFound;
     }

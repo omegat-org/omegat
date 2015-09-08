@@ -1,5 +1,6 @@
 # Stop words default list for English
 
+a
 able
 about
 according
@@ -17,6 +18,7 @@ although
 always
 among
 an
+and
 another
 any
 approach
@@ -154,6 +156,7 @@ not
 now
 number
 obviously
+of
 often
 on
 once

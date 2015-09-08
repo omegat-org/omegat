@@ -59,7 +59,7 @@ trilead-ssh2-1.0.0-build217.jar is distributed under the Trilead SSH license
 lucene-*.jar are distributed under the Apache License 2.0
 
 The English tokenizers (org.omegat.tokenizer.SnowballEnglishTokenizer and
-org.omegat.tokenizer.LuceneEnglishTokenizer) use stop words from Okapi
+org.omegat.tokenizer.LuceneEnglishTokenizer) use stop words originally from Okapi
 (http://okapi.sourceforge.net) under the LGPL license.
 
 tinysegmenter.jar is distributed under the Modified BSD license

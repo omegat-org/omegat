@@ -371,6 +371,9 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         optionsGlossaryMenu.add(optionsGlossaryExactMatchCheckBoxMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_GLOSSARY_EXACT_MATCH"));
         optionsGlossaryMenu.add(optionsGlossaryStemmingCheckBoxMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_GLOSSARY_STEMMING"));
 
+        optionsMenu.add(optionsDictionaryMenu= createMenu("TF_OPTIONSMENU_DICTIONARY"));
+        optionsDictionaryMenu.add(optionsDictionaryFuzzyMatchingCheckBoxMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_DICTIONARY_FUZZY"));
+        
         optionsMenu.add(optionsTransTipsMenu = createMenu("TF_OPTIONSMENU_TRANSTIPS"));
         optionsTransTipsMenu.add(optionsTransTipsEnableMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_TRANSTIPS_ENABLE"));
         optionsTransTipsMenu.add(optionsTransTipsExactMatchMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_TRANSTIPS_EXACTMATCH"));
@@ -477,7 +480,9 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         optionsGlossaryExactMatchCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
                 Preferences.GLOSSARY_NOT_EXACT_MATCH, true));
         optionsGlossaryStemmingCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
-                Preferences.GLOSSARY_STEMMING, true));        
+                Preferences.GLOSSARY_STEMMING, true));
+        optionsDictionaryFuzzyMatchingCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
+                Preferences.DICTIONARY_FUZZY_MATCHING, true));
     }
 
     /**
@@ -701,6 +706,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem optionsGlossaryTBXDisplayContextCheckBoxMenuItem;
     JMenuItem optionsGlossaryExactMatchCheckBoxMenuItem;
     JMenuItem optionsGlossaryStemmingCheckBoxMenuItem;
+    JMenu optionsDictionaryMenu;
+    JMenuItem optionsDictionaryFuzzyMatchingCheckBoxMenuItem;
     JMenu optionsTransTipsMenu;
     JCheckBoxMenuItem optionsTransTipsEnableMenuItem;
     JCheckBoxMenuItem optionsTransTipsExactMatchMenuItem;

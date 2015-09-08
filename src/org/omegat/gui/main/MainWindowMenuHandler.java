@@ -812,6 +812,12 @@ public class MainWindowMenuHandler {
 
     }
 
+    public void optionsDictionaryFuzzyMatchingCheckBoxMenuItemActionPerformed() {
+        Preferences.setPreference(Preferences.DICTIONARY_FUZZY_MATCHING,
+                mainWindow.menu.optionsDictionaryFuzzyMatchingCheckBoxMenuItem.isSelected());
+        Preferences.save();
+        Core.getDictionaries().refresh();
+    }
 
     /**
      * Displays the font dialog to allow selecting the font for source, target text (in main window) and for

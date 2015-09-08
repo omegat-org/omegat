@@ -43,6 +43,7 @@ import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.comments.CommentsTextArea;
 import org.omegat.gui.comments.IComments;
 import org.omegat.gui.dictionaries.DictionariesTextArea;
+import org.omegat.gui.dictionaries.IDictionaries;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.autotext.Autotext;
@@ -103,7 +104,6 @@ public class Core {
     private static GlossaryTextArea glossary;
     private static GlossaryManager glossaryManager;
     private static MachineTranslateTextArea machineTranslatePane;
-    @SuppressWarnings("unused")
     private static DictionariesTextArea dictionaries;
     @SuppressWarnings("unused")
     private static MultipleTransPane multiple;
@@ -190,6 +190,10 @@ public class Core {
      */
     public static IComments getComments() {
         return comments;
+    }
+    
+    public static IDictionaries getDictionaries() {
+        return dictionaries;
     }
     
     /**

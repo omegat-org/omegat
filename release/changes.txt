@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.2
 ----------------------------------------------------------------------
-   6 Enhancements
+   7 Enhancements
    6 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -11,6 +11,9 @@
   
   -Allow aggressive font fallback for undisplayable characters
   https://sourceforge.net/p/omegat/feature-requests/1112/
+
+  - Allow to apply tokenizer to dictionaries 
+  https://sourceforge.net/p/omegat/feature-requests/1053/
 
   Other changes:
 

@@ -332,8 +332,8 @@ OmegaT uses the following libraries:
   trilead-ssh2-1.0.0-build217 (Trilead SSH license)
   lucene-*.jar (Apache License 2.0)
   The English tokenizers (org.omegat.tokenizer.SnowballEnglishTokenizer and
-  org.omegat.tokenizer.LuceneEnglishTokenizer) use stop words from Okapi
-(http://okapi.sourceforge.net) (LGPL license)
+org.omegat.tokenizer.LuceneEnglishTokenizer) use stop words originally from
+Okapi (http://okapi.sourceforge.net) (LGPL license)
   tinysegmenter.jar (Modified BSD license)
   commons-*.jar (Apache License 2.0)
   jWordSplitter (Apache License 2.0)

@@ -81,6 +81,11 @@ public class DefaultTokenizer implements ITokenizer {
     public Token[] tokenizeWordsForSpelling(final String str) {
         return tokenizeTextNoCache(str, false);
     }
+    
+    @Override
+    public String[] tokenizeWordsForDictionary(String str) {
+        return tokenizeTextToStringsNoCache(str, false);
+    }
 
     /**
      * {@inheritDoc}
@@ -163,6 +168,40 @@ public class DefaultTokenizer implements ITokenizer {
         }
 
         return tokens.toArray(new Token[tokens.size()]);
+    }
+    
+    private static String[] tokenizeTextToStringsNoCache(String str, boolean all) {
+        if (str.isEmpty()) {
+            return new String[0];
+        }
+
+        // create a new token list
+        List<String> tokens = new ArrayList<String>(64);
+
+        // get a word breaker
+        str = str.toLowerCase(); // HP: possible error, this makes
+                                 // "A" and "a" match, CHECK AND FIX
+        BreakIterator breaker = getWordBreaker();
+        breaker.setText(str);
+
+        int start = breaker.first();
+        for (int end = breaker.next(); end != BreakIterator.DONE; start = end, end = breaker.next()) {
+            String tokenStr = str.substring(start, end);
+            boolean word = false;
+            for (int cp, i = 0; i < tokenStr.length(); i += Character.charCount(cp)) {
+                cp = tokenStr.codePointAt(i);
+                if (Character.isLetter(cp)) {
+                    word = true;
+                    break;
+                }
+            }
+
+            if (all || (word && !PatternConsts.OMEGAT_TAG.matcher(tokenStr).matches())) {
+                tokens.add(tokenStr);
+            }
+        }
+
+        return tokens.toArray(new String[tokens.size()]);
     }
 
     /** Returns an iterator to break sentences into words. */

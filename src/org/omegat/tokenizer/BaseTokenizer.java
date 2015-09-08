@@ -154,6 +154,11 @@ public abstract class BaseTokenizer implements ITokenizer {
         return tokenize(str, false, false, true, true);
     }
 
+    @Override
+    public String[] tokenizeWordsForDictionary(String str) {
+        return tokenizeToStrings(str, true, true, true, true);
+    }
+    
     /**
      * {@inheritDoc}
      */
@@ -263,6 +268,41 @@ public abstract class BaseTokenizer implements ITokenizer {
             // shouldn't happen
         }
         return result.toArray(new Token[result.size()]);
+    }
+    
+    protected String[] tokenizeToStrings(String str, boolean stemsAllowed, boolean stopWordsAllowed,
+            boolean filterDigits, boolean filterWhitespace) {
+        if (StringUtil.isEmpty(str)) {
+            return new String[0];
+        }
+
+        List<String> result = new ArrayList<String>(64);
+
+        final TokenStream in = getTokenStream(str, stemsAllowed, stopWordsAllowed);
+        in.addAttribute(CharTermAttribute.class);
+        in.addAttribute(OffsetAttribute.class);
+        
+        CharTermAttribute cattr = in.getAttribute(CharTermAttribute.class);
+        OffsetAttribute off = in.getAttribute(OffsetAttribute.class);
+
+        try {
+            in.reset();
+            while (in.incrementToken()) {
+                String tokenText = cattr.toString();
+                if (acceptToken(tokenText, filterDigits, filterWhitespace)) {
+                    result.add(tokenText);
+                    String origText = str.substring(off.startOffset(), off.endOffset());
+                    if (!origText.toLowerCase().equals(tokenText.toLowerCase())) {
+                        result.add(origText);
+                    }
+                }
+            }
+            in.end();
+            in.close();
+        } catch (IOException ex) {
+            // shouldn't happen
+        }
+        return result.toArray(new String[result.size()]);
     }
 
     private boolean acceptToken(String token, boolean filterDigits, boolean filterWhitespace) {

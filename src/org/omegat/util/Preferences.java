@@ -84,8 +84,9 @@ public class Preferences {
     public static final String GLOSSARY_FOLDER = "glossary_folder";
     public static final String GLOSSARY_FILE = "glossary_file";
     public static final String GLOSSARY_TBX_DISPLAY_CONTEXT = "glossary_tbx_display_context";
-    public static final String GLOSSARY_NOT_EXACT_MATCH="glossary_not_exact_match";
-    public static final String GLOSSARY_STEMMING="glossary_stemming";
+    public static final String GLOSSARY_NOT_EXACT_MATCH = "glossary_not_exact_match";
+    public static final String GLOSSARY_STEMMING = "glossary_stemming";
+    public static final String DICTIONARY_FUZZY_MATCHING = "dictionary_fuzzy_matching";
 
     public static final String MAINWINDOW_WIDTH = "screen_width";
     public static final String MAINWINDOW_HEIGHT = "screen_height";

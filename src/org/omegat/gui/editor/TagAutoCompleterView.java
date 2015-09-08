@@ -145,6 +145,11 @@ public class TagAutoCompleterView extends AutoCompleterListView {
         public Token[] tokenizeWordsForSpelling(String str) {
             return tokenize(str);
         }
+        
+        @Override
+        public String[] tokenizeWordsForDictionary(String str) {
+            return new String[0];
+        }
 
         @Override
         public Token[] tokenizeAllExactly(String str) {

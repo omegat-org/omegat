@@ -96,6 +96,17 @@ public interface ITokenizer {
     Token[] tokenizeWordsForSpelling(String str);
 
     /**
+     * Breaks a string into word-only substrings. Includes stems. Numbers, tags,
+     * and other non-word tokens are NOT included in the result.
+     * 
+     * This method is used for looking up words in user-supplied natural-language
+     * dictionaries.
+     * 
+     * There is no sense to cache results.
+     */
+    String[] tokenizeWordsForDictionary(String str);
+
+    /**
      * Breaks a string into tokens. Numbers, tags, and other non-word tokens are
      * included in the result. Stemming must NOT be used.
      * 

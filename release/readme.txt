@@ -283,7 +283,7 @@ Code has been contributed by
   Piotr Kulik
   Ibai Lakunza Velasco
   Guido Leenders
-  Aaron Madlon-Kay
+  Aaron Madlon-Kay (integration manager)
   Fabián Mandelbaum
   Manfred Martin
   Adiel Mittmann

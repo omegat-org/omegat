@@ -9,8 +9,11 @@
 
   Bug fixes:
 
-  Mac: With the included JRE, it was not possible to launch scripts
+  - Mac: With the included JRE, it was not possible to launch scripts
 opening files or folders
+
+  - Team project: URL used for checkout is not trimmed 
+  https://sourceforge.net/p/omegat/bugs/764/
 
 ----------------------------------------------------------------------
  OmegaT 3.1.9 update 3 (2015-07-10)

@@ -120,7 +120,8 @@ public class NewTeamProject extends javax.swing.JDialog {
         if (detecting || !isVisible()) {
             return;
         }
-        String url = txtRepositoryURL.getText().trim();
+        txtRepositoryURL.setText(txtRepositoryURL.getText().trim()); 
+        String url = txtRepositoryURL.getText();
         if (StringUtil.isEmpty(url)) {
             return;
         }

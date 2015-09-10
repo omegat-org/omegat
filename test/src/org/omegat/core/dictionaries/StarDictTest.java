@@ -45,11 +45,10 @@ public class StarDictTest extends TestCore {
     @Test
     public void testReadFileDict() throws Exception {
         StarDict s = new StarDict(new File("test/data/dicts/latin-francais.ifo"));
-        Map<String, Object> map = s.readHeader();
-        assertEquals(10451, map.size());
+        assertEquals(10451, s.entrySize());
         
         String word = "testudo";
-        Object data = map.get(word);
+        Object data = s.searchExactMatch(word);
         assertNotNull(data);
         String result = s.readArticle(word, data);
         assertEquals("dinis, f. : tortue", result);
@@ -58,11 +57,10 @@ public class StarDictTest extends TestCore {
     @Test
     public void testReadZipDict() throws Exception {
         StarDict s = new StarDict(new File("test/data/dicts-zipped/latin-francais.ifo"));
-        Map<String, Object> map = s.readHeader();
-        assertEquals(10451, map.size());
+        assertEquals(10451, s.entrySize());
         
         String word = "testudo";
-        Object data = map.get(word);
+        Object data = s.searchExactMatch(word);
         assertNotNull(data);
         String result = s.readArticle(word, data);
         assertEquals("dinis, f. : tortue", result);

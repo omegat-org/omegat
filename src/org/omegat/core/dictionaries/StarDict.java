@@ -83,6 +83,8 @@ public class StarDict implements IDictionary {
     private String dictName;
     private String dataFile;
 
+    protected Map<String, Object> result;
+
     /**
      * @param ifoFile
      *            ifo file with dictionary
@@ -121,11 +123,11 @@ public class StarDict implements IDictionary {
             dictType = DictType.DICTFILE;
             dataFile = dictFile;
         }
+        readHeader();
     }
 
-    @Override
-    public Map<String, Object> readHeader() throws IOException {
-        Map<String, Object> result = new HashMap<String, Object>();
+    private void readHeader() throws IOException {
+        result = new HashMap<String, Object>();
         File file = new File(dictName + ".idx");
         byte[] idxBytes = readFile(file);
 
@@ -147,7 +149,10 @@ public class StarDict implements IDictionary {
                 mem.write(b);
             }
         }
-        return result;
+    }
+
+    public int entrySize() {
+        return result.size();
     }
 
     /**
@@ -184,13 +189,23 @@ public class StarDict implements IDictionary {
         result.put(key, data);
     }
 
+    /**
+     * (non-Javadoc)
+     * @see org.omegat.core.dictionaries.IDictionary#searchExactMatch(java.lang.String)
+     *
+     * returns Object that will be given to readArticle()'s second argument.
+     */
+    public Object searchExactMatch(String key) {
+        return result.get(key);
+    }
+
     /*
      * (non-Javadoc)
      * @see org.omegat.core.dictionaries.IDictionary#readArticle(java.lang.String, java.lang.Object)
      * 
      * Returns not the raw text, but the formatted article ready for upstream use (\n replaced
      * with <br>, etc.
-     */
+    */
     @Override
     public String readArticle(String word, Object data) {
         Entry dictData = (Entry) data;

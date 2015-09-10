@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.2
 ----------------------------------------------------------------------
-   7 Enhancements
+   8 Enhancements
    6 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -30,6 +30,8 @@ or changer
   - It is possible to define a custom colour for the segment marker
 
   - In Windows 8 or above, the panes are square instead of rounded
+
+  - English tokenizer: three stop words were added: a, and, of
 
   Bug fixes:
 

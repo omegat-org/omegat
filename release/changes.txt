@@ -1,12 +1,17 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.9 update 4 
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.9 update 4 vs. 3.1.9 update 3
 
+  Implemented requests:
+
+  - Support HTML 5 encoding detection 
+  https://sourceforge.net/p/omegat/feature-requests/1122/
+  
   Bug fixes:
 
   - Mac: With the included JRE, it was not possible to launch scripts

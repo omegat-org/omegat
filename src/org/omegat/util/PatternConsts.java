@@ -9,6 +9,7 @@
                2009 Didier Briel, Martin Fleurke
                2010 Didier Briel
                2012 Martin Fleurke
+               2015 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -82,6 +83,11 @@ public class PatternConsts {
     /** compiled pattern to extract the encoding from HTML file, if any */
     public static final Pattern HTML_ENCODING = Pattern.compile(
             "<meta.*?content\\s*=\\s*[\"']\\s*text/html\\s*;\\s*charset\\s*=\\s*(\\S+?)[\"'].*?/?\\s*>",
+            Pattern.CASE_INSENSITIVE);
+
+    /** compiled pattern to extract the encoding from HTML5 file, if any */
+    public static final Pattern HTML5_ENCODING = Pattern.compile(
+            "<meta.*?charset\\s*=\\s*[\"'](\\S+?)[\"'].*?/?\\s*>",
             Pattern.CASE_INSENSITIVE);
 
     /** Compiled pattern to look for HTML file HEAD declaration. 

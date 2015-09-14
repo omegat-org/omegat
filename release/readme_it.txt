@@ -1,4 +1,4 @@
-Questa traduzione è frutto del lavoro di Valter Mura, copyright© 2014 e revisione di Valter Mura e Carmelo Serraino copyright© 2014.
+Questa traduzione è frutto del lavoro di Valter Mura, copyright© 2015
 
 ==============================================================================
   File Leggimi di OmegaT 3.0
@@ -202,7 +202,7 @@ Contributi al codice:
   Piotr Kulik
   Ibai Lakunza Velasco
   Guido Leenders
-  Aaron Madlon-Kay
+  Aaron Madlon-Kay (responsabile dell'integrazione)
   Fabián Mandelbaum
   Manfred Martin
   Adiel Mittmann
@@ -234,7 +234,7 @@ Altri contributi:
 
 OmegaT usa le seguenti librerie:
   HTMLParser 1.6 di Somik Raha, Derrick Oswald et al (licenza LGPL)
-  VLDocking Framework 3.0.4 (licenza LGPL)
+  VLDocking Framework 3.0.5-SNAPSHOT (licenza LGPL)
   Hunspell di László Németh et al (licenza LGPL)
   JNA di Todd Fast, Timothy Wall et al (licenza LGPL)
   Swing-Layout 1.0.4 (licenza LGPL)
@@ -250,8 +250,7 @@ OmegaT usa le seguenti librerie:
   trilead-ssh2-1.0.0-build217 (licenza Trilead SSH)
   lucene-*.jar (licenza Apache 2.0)
   I tokenizer inglesi (org.omegat.tokenizer.SnowballEnglishTokenizer e
-  org.omegat.tokenizer.LuceneEnglishTokenizer) mutua le stop words da Okapi
-(http://okapi.sourceforge.net) (licenza LGPL)
+org.omegat.tokenizer.LuceneEnglishTokenizer) mutuano originariamente le stop words da Okapi (http://okapi.sourceforge.net) (LGPL license)
   tinysegmenter.jar (licenza BSD modificata)
   commons-*.jar (licenza Apache 2.0)
   jWordSplitter (licenza Apache 2.0)
@@ -263,6 +262,7 @@ OmegaT usa le seguenti librerie:
   SuperTMXMerge-for_OmegaT.jar (licenza LGPL)
   groovy-all-2.2.2.jar (licenza Apache 2.0)
   slf4j (licenza MIT)
+  juniversalchardet-1.0.3.jar (GPL v2)
 
 ==============================================================================
  5.  OmegaT genera problemi? Si ha bisogno di assistenza?

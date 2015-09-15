@@ -65,8 +65,14 @@ import org.omegat.util.StringUtil;
  */
 public class AutoCompleter implements IAutoCompleter {    
     
-    private final static int GO_NEXT_KEY = KeyEvent.VK_RIGHT;
-    private final static int GO_PREV_KEY = KeyEvent.VK_LEFT;
+    private final static boolean ON_MAC = Platform.isMacOSX();
+    
+    // On OS X: Cmd+Left / Cmd+Right
+    // Otherwise: Ctrl+Space / Ctrl+Shift+Space
+    private final static int GO_NEXT_KEY = ON_MAC ? KeyEvent.VK_RIGHT : KeyEvent.VK_SPACE;
+    private final static int GO_NEXT_MASK = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+    private final static int GO_PREV_KEY = ON_MAC ? KeyEvent.VK_LEFT : KeyEvent.VK_SPACE;
+    private final static int GO_PREV_MASK = ON_MAC ? GO_NEXT_MASK : GO_NEXT_MASK | KeyEvent.SHIFT_MASK;
     
     private final static int MIN_VIEWPORT_HEIGHT = 50;
     private final static int MAX_POPUP_WIDTH = 500;
@@ -74,7 +80,6 @@ public class AutoCompleter implements IAutoCompleter {
     JPopupMenu popup = new JPopupMenu(); 
     private EditorTextArea3 editor; 
     
-    boolean onMac = Platform.isMacOSX();
     
     public final static int PAGE_ROW_COUNT = 10;
     
@@ -140,8 +145,8 @@ public class AutoCompleter implements IAutoCompleter {
      */
     public boolean processKeys(KeyEvent e) {
         
-        if (!isVisible() && ((!onMac && StaticUtils.isKey(e, KeyEvent.VK_SPACE, KeyEvent.CTRL_MASK))
-                || (onMac && StaticUtils.isKey(e, KeyEvent.VK_ESCAPE, 0)))) {
+        if (!isVisible() && ((!ON_MAC && StaticUtils.isKey(e, KeyEvent.VK_SPACE, KeyEvent.CTRL_MASK))
+                || (ON_MAC && StaticUtils.isKey(e, KeyEvent.VK_ESCAPE, 0)))) {
 
             if (!editor.isInActiveTranslation(editor.getCaretPosition())) {
                 return false;
@@ -174,13 +179,13 @@ public class AutoCompleter implements IAutoCompleter {
                 return true;
             }
             
-            if (StaticUtils.isKey(e, GO_PREV_KEY, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
+            if (StaticUtils.isKey(e, GO_PREV_KEY, GO_PREV_MASK)) {
                 selectPreviousView();
                 return true;
             }
             
-            if ((!onMac && StaticUtils.isKey(e, KeyEvent.VK_SPACE, KeyEvent.CTRL_MASK))
-                    || StaticUtils.isKey(e, GO_NEXT_KEY, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
+            if ((!ON_MAC && StaticUtils.isKey(e, KeyEvent.VK_SPACE, KeyEvent.CTRL_MASK))
+                    || StaticUtils.isKey(e, GO_NEXT_KEY, GO_NEXT_MASK)) {
                 selectNextView();
                 return true;
             }
@@ -296,8 +301,8 @@ public class AutoCompleter implements IAutoCompleter {
         sb.append("</b>");
         
         if (views.size() != 1) {
-            String nextKeyString = keyText(GO_NEXT_KEY, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
-            String prevKeyString = keyText(GO_PREV_KEY, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+            String nextKeyString = keyText(GO_NEXT_KEY, GO_NEXT_MASK);
+            String prevKeyString = keyText(GO_PREV_KEY, GO_PREV_MASK);
             
             if (views.size() >= 2) {
                 sb.append("<br>");

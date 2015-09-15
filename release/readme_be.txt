@@ -223,7 +223,7 @@ omegat.kaptn
   Пётр Кулік
   Ібаі Лякунса Вэляска
   Гвіда Лендэрс
-  Арон Мадлан-Кэй
+  Арон Мадлан-Кэй (кіраўнік інтэграцыі)
   Фаб’ян Мандэльбаўм
   Манфрэд Марцін
   Адыель Мітман
@@ -271,8 +271,8 @@ OmegaT выкарыстоўвае наступныя бібліятэкі:
   trilead-ssh2-1.0.0-build217 (ліцэнзія Trilead SSH)
   lucene-*.jar (ліцэнзія Apache License 2.0)
   Генэратары метак для англійскай мовы (org.omegat.tokenizer.SnowballEnglishTokenizer і
-  org.omegat.tokenizer.LuceneEnglishTokenizer) выкарыстоўваюць ігнараваныя словы з Okapi
-(http://okapi.sourceforge.net) (ліцэнзія LGPL)
+org.omegat.tokenizer.LuceneEnglishTokenizer) выкарыстоўваюць ігнараваныя словы з
+Okapi (http://okapi.sourceforge.net) (ліцэнзія LGPL)
   tinysegmenter.jar (зьмененая ліцэнзія BSD)
   commons-*.jar (ліцэнзія Apache License 2.0)
   jWordSplitter (ліцэнзія Apache License 2.0)

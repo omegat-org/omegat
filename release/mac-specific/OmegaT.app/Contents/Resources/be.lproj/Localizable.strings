@@ -1,7 +1,7 @@
-"JRELoadError" = "Unable to load Java Runtime Environment.";
-"JRExLoadError" = "Unable to load a Java %d Runtime Environment.";
-"JRExLoadFullError" = "This application requires that Java %d or later be installed on your computer. Please download and install the latest version of Java from www.java.com and try again.";
-"JDKxLoadFullError" = "This application requires that a Java %d JDK or later be installed on your computer. Please download and install the latest Java JDK from Oracle.com and try again.";
-"MainClassNameRequired" = "Main class name is required.";
-"JavaDirectoryNotFound" = "Unable to enumerate Java directory contents.";
-"BundlePathContainsColon" = "Cannot launch from folder that contains a \"/\" in its name.";
+"JRELoadError" = "Немагчыма загрузіць Java.";
+"JRExLoadError" = "Немагчыма загрузіць асяродзьдзе выкананьня Java %d.";
+"JRExLoadFullError" = "Для гэтай праграмы патрабуецца Java %d або пазьнейшай вэрсіі на кампутары. Спампуйце і ўсталюйце апошнюю вэрсію Java з вэб-сайта www.java.com і паўтарэце спробу.";
+"JDKxLoadFullError" = "Для гэтай праграмы патрабуецца Java %d JDK або пазьнейшай вэрсіі на кампутары. Спампуйце і ўсталюйце апошнюю вэрсію Java JDK з вэб-сайта Oracle.com і паўтарэце спробу.";
+"MainClassNameRequired" = "Патрабуецца назва галоўнага кляса.";
+"JavaDirectoryNotFound" = "Не атрымліваецца пералічыць зьмесьціва каталёга Java.";
+"BundlePathContainsColon" = "Немагчыма запусьціць з каталёга, у назьве якога ёсьць сымбаль \"/\".";

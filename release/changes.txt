@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    8 Enhancements
    6 Bug fixes
-   1 Localisation update
+   2 Localisation updates
 ----------------------------------------------------------------------
 3.5.2 vs 3.5.1
 
@@ -56,6 +56,7 @@ the arrow keys
   Localisation Updates:
 
  - Brazilian Portuguese localisation updated to 3.5 (UI, documentation, scripts, readme)
+ - Italian localisation updated to 3.5.2 (UI, readme)
 
 ----------------------------------------------------------------------
  OmegaT 3.5.1 (2015-07-26)

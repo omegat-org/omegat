@@ -15,7 +15,7 @@
   - Allow to apply tokenizer to dictionaries 
   https://sourceforge.net/p/omegat/feature-requests/1053/
 
-  - Changing “Ctrl + Left/Right Arrow” Shortcuts in Auto-completer 
+  - Changing "Ctrl + Left/Right Arrow" Shortcuts in Auto-completer 
   https://sourceforge.net/p/omegat/feature-requests/1113/
 
   Other changes:

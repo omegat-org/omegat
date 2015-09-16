@@ -67,6 +67,11 @@ public class AutoCompleter implements IAutoCompleter {
     
     private final static boolean ON_MAC = Platform.isMacOSX();
     
+    // On OS X: Esc (matches system word autocomplete; Cmd+Space conflicts with IME)
+    // Otherwise: Ctrl+Space (matches input assist in some IDEs, etc.)
+    private final static int TRIGGER_KEY = ON_MAC ? KeyEvent.VK_ESCAPE : KeyEvent.VK_SPACE;
+    private final static int TRIGGER_KEY_MASK = ON_MAC ? 0 : Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+
     // On OS X: Cmd+Left / Cmd+Right
     // Otherwise: Ctrl+Space / Ctrl+Shift+Space
     private final static int GO_NEXT_KEY = ON_MAC ? KeyEvent.VK_RIGHT : KeyEvent.VK_SPACE;
@@ -145,8 +150,7 @@ public class AutoCompleter implements IAutoCompleter {
      */
     public boolean processKeys(KeyEvent e) {
         
-        if (!isVisible() && ((!ON_MAC && StaticUtils.isKey(e, KeyEvent.VK_SPACE, KeyEvent.CTRL_MASK))
-                || (ON_MAC && StaticUtils.isKey(e, KeyEvent.VK_ESCAPE, 0)))) {
+        if (!isVisible() && StaticUtils.isKey(e, TRIGGER_KEY, TRIGGER_KEY_MASK)) {
 
             if (!editor.isInActiveTranslation(editor.getCaretPosition())) {
                 return false;

@@ -22,6 +22,7 @@
 	<classpathentry kind="lib" path="lib/lucene-kuromoji-3.6.2.jar"/>
 	<classpathentry kind="lib" path="lib/lucene-smartcn-3.6.2.jar"/>
 	<classpathentry kind="lib" path="lib/tinysegmenter.jar"/>
+	<classpathentry kind="lib" path="lib/commons-collections4-4.0.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang-2.4.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool/cjftransform-1.0.1.jar"/>

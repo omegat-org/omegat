@@ -65,4 +65,19 @@ public class StarDictTest extends TestCore {
         String result = s.readArticle(word, data);
         assertEquals("dinis, f. : tortue", result);
     }
+
+    /**
+     * Test of prefixMatch method
+     * @throws java.lang.Exception
+     */
+    @Test
+    public void testPrefixMatch() throws Exception {
+        Object data;
+        Object result;
+        StarDict s = new StarDict(new File("test/data/dicts-zipped/latin-francais.ifo"));
+        String word = "testudo";
+        String prefix = "test";
+        Map<String, Object> resultMap = s.searchPrefixMatch(prefix);
+        assertTrue(resultMap.containsKey(word));
+    }
 }

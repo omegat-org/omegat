@@ -47,10 +47,18 @@ public interface IDictionary {
     /**
      * Search with exact word match
      *
-     * @return map where key is dictionary article, value is object which allows
-     * to read article's data by readArticle method
+     * @return Object which allows to read article's data by readArticle method
      */
     Object searchExactMatch(String key);
+
+    /**
+     * Search with word prefix match
+     *
+     * @param key search key
+     * @return  map where key is dictionary articles, value is object which allows
+     * to read article's data by readArticle method
+     */
+    Map<String, Object> searchPrefixMatch(String key);
 
     /**
      * Read article's text.

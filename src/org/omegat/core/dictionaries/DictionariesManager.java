@@ -42,6 +42,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import org.apache.commons.collections4.MapIterator;
 
 import org.omegat.gui.dictionaries.IDictionaries;
 import org.omegat.util.DirectoryMonitor;
@@ -180,6 +181,19 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         }
     }
 
+    private void retrieveArticle(String word, Object data,
+                IDictionary di, final List<DictionaryEntry> result) throws Exception {
+        if (data.getClass().isArray()) {
+            for (Object d : (Object[]) data) {
+                String a = di.readArticle(word, d);
+                result.add(new DictionaryEntry(word, a));
+            }
+        } else {
+            String a = di.readArticle(word, data);
+            result.add(new DictionaryEntry(word, a));
+        }
+    }
+
     /**
      * Find words list in all dictionaries.
      * 
@@ -194,6 +208,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         }
         List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
         for (String word : words) {
+            String lowerCaseWord = word.toLowerCase();
             for (IDictionary di : dicts) {
                 try {
                     synchronized (ignoreWords) {
@@ -201,25 +216,32 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
                             continue;
                         }
                     }
-                    Object data = di.searchExactMatch(word);
-                    if (data == null) {
-                        String lowerCaseWord = word.toLowerCase();
+                    Map<String, Object> resultMap = di.searchPrefixMatch(word);
+                    if (resultMap == null) {
                         synchronized (ignoreWords) {
                             if (ignoreWords.contains(lowerCaseWord)) {
                                 continue;
                             }
                         }
-                        data = di.searchExactMatch(lowerCaseWord);
+                        resultMap = di.searchPrefixMatch(lowerCaseWord);
                     }
-                    if (data != null) {
-                        if (data.getClass().isArray()) {
-                            for (Object d : (Object[]) data) {
-                                String a = di.readArticle(word, d);
-                                result.add(new DictionaryEntry(word, a));
-                            }
+
+                    /* If there is exact match, return result of it.
+                     *  else return results of prefix match
+                     */
+                    if (resultMap != null) {
+                        Object data;
+                        if (resultMap.containsKey(word)) {
+                            data = resultMap.get(word);
+                            retrieveArticle(word, data, di, result);
+                        } else if (resultMap.containsKey(lowerCaseWord)) {
+                            data = resultMap.get(lowerCaseWord);
+                            retrieveArticle(lowerCaseWord, data, di, result);
                         } else {
-                            String a = di.readArticle(word, data);
-                            result.add(new DictionaryEntry(word, a));
+                            for (Map.Entry<String, Object> entry : resultMap.entrySet()) {
+                                data = entry.getValue();
+                                retrieveArticle(entry.getKey(), data, di, result);
+                            }
                         }
                     }
                 } catch (Exception ex) {

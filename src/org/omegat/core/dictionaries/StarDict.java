@@ -42,6 +42,8 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.zip.GZIPInputStream;
 
+import org.apache.commons.collections4.trie.PatriciaTrie;
+
 import org.dict.zip.DictZipHeader;
 import org.dict.zip.DictZipInputStream;
 import org.dict.zip.RandomAccessInputStream;
@@ -83,7 +85,7 @@ public class StarDict implements IDictionary {
     private String dictName;
     private String dataFile;
 
-    protected Map<String, Object> result;
+    protected PatriciaTrie<Object> result;
 
     /**
      * @param ifoFile
@@ -127,7 +129,7 @@ public class StarDict implements IDictionary {
     }
 
     private void readHeader() throws IOException {
-        result = new HashMap<String, Object>();
+        result = new PatriciaTrie();
         File file = new File(dictName + ".idx");
         byte[] idxBytes = readFile(file);
 
@@ -167,11 +169,11 @@ public class StarDict implements IDictionary {
      * @param result
      *            result map
      */
-    private void addIndex(final String key, final int start, final int len, final Map<String, Object> result) {
+    private void addIndex(final String key, final int start, final int len, final PatriciaTrie<Object> result) {
         Object data = result.get(key);
         if (data == null) {
             Entry d = new Entry(start, len);
-            data = d;
+            result.put(key, d);
         } else {
             if (data instanceof Entry[]) {
                 Entry[] dobj = (Entry[]) data;
@@ -185,8 +187,8 @@ public class StarDict implements IDictionary {
                 d[1] = new Entry(start, len);
                 data = d;
             }
+            result.put(key, data);
         }
-        result.put(key, data);
     }
 
     /**
@@ -197,6 +199,16 @@ public class StarDict implements IDictionary {
      */
     public Object searchExactMatch(String key) {
         return result.get(key);
+    }
+
+    /**
+     * (non-Javadoc)
+     * @see org.omegat.core.dictionaries.IDictionary#searchPrefixMatch(java.lang.String)
+     * 
+     * Returns Map<String, Object> that String is word and Object is Entry or Entry[]
+     */
+    public Map<String, Object> searchPrefixMatch(String key) {
+        return result.prefixMap(key);
     }
 
     /*

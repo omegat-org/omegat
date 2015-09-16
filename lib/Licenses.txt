@@ -65,7 +65,7 @@ org.omegat.tokenizer.LuceneEnglishTokenizer) use stop words originally from Okap
 tinysegmenter.jar is distributed under the Modified BSD license
 
 commons-*.jar are distributed under the Apache License 2.0
-(required for LanguageTool, scripting)
+(required for LanguageTool, scripting and dictionary)
 
 jwordSplitter-3.4.jar is distributed under the Apache License 2.0
 (required for LanguageTool)

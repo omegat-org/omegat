@@ -184,8 +184,7 @@ public class AutoCompleter implements IAutoCompleter {
                 return true;
             }
             
-            if ((!ON_MAC && StaticUtils.isKey(e, KeyEvent.VK_SPACE, KeyEvent.CTRL_MASK))
-                    || StaticUtils.isKey(e, GO_NEXT_KEY, GO_NEXT_MASK)) {
+            if (StaticUtils.isKey(e, GO_NEXT_KEY, GO_NEXT_MASK)) {
                 selectNextView();
                 return true;
             }

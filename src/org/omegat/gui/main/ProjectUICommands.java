@@ -406,10 +406,18 @@ public class ProjectUICommands {
                 Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
                 Cursor oldCursor = mainWindow.getCursor();
                 mainWindow.setCursor(hourglassCursor);
-                IRemoteRepository repository = Core.getProject().getRepository();
+                final IRemoteRepository repository = Core.getProject().getRepository();
 
                 Core.getProject().saveProject();
                 ProjectFactory.closeProject();
+
+                new RepositoryUtils.AskCredentials() {
+                    public void callRepository() throws Exception {
+                        Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
+                        repository.updateFullProject();
+                        Core.getMainWindow().showStatusMessageRB(null);
+                    }
+                }.execute(repository);
 
                 ProjectFactory.loadProject(props, repository, true);
                 mainWindow.setCursor(oldCursor);

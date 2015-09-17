@@ -411,13 +411,15 @@ public class ProjectUICommands {
                 Core.getProject().saveProject();
                 ProjectFactory.closeProject();
 
-                new RepositoryUtils.AskCredentials() {
-                    public void callRepository() throws Exception {
-                        Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
-                        repository.updateFullProject();
-                        Core.getMainWindow().showStatusMessageRB(null);
-                    }
-                }.execute(repository);
+                if (repository != null) {
+                    new RepositoryUtils.AskCredentials() {
+                        public void callRepository() throws Exception {
+                            Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
+                            repository.updateFullProject();
+                            Core.getMainWindow().showStatusMessageRB(null);
+                        }
+                    }.execute(repository);
+                }
 
                 ProjectFactory.loadProject(props, repository, true);
                 mainWindow.setCursor(oldCursor);

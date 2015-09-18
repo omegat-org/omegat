@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+  <body attr="foo">
+    <ascii>bar</ascii>
+    <bmp>☃</bmp>
+    <dec>&#9731;</dec>
+    <hex>&#x2603;</hex>
+    <astral>🂿</astral>
+    <a-dec>&#127167;</a-dec>
+    <a-hex>&#x0001F0BF;</a-hex>
+    <standalone/>
+  </body>
+</root>

@@ -1170,30 +1170,19 @@ public class XMLStreamReader {
         }
 
         // else, binary data
-        for (int cp2, i = 0; i < val.length(); i += Character.charCount(cp2)) {
-            cp2 = val.codePointAt(i);
-            if (hex) {
-                cp *= 16;
-                if (cp2 >= '0' && cp2 <= '9') {
-                    cp += cp2 - '0';
-                } else if (cp2 >= 'A' && cp2 <= 'F') {
-                    cp += 10;
-                    cp += cp2 - 'A';
-                } else if (cp2 >= 'a' && cp2 <= 'f') {
-                    cp += 10;
-                    cp += cp2 - 'a';
-                } else {
-                    throw new TranslationException(StaticUtils.format(
-                            OStrings.getString("XSR_ERROR_BAD_BINARY_CHAR"), val));
-                }
-            } else {
-                cp *= 10;
-                if (cp2 >= '0' && cp2 <= '9')
-                    cp += cp2 - '0';
-                else {
-                    throw new TranslationException(StaticUtils.format(
-                            OStrings.getString("XSR_ERROR_BAD_DECIMAL_CHAR"), val));
-                }
+        if (hex) {
+            try {
+                cp = Integer.valueOf(valString, 16);
+            } catch (NumberFormatException ex) {
+                throw new TranslationException(StaticUtils.format(
+                            OStrings.getString("XSR_ERROR_BAD_BINARY_CHAR"), val), ex);
+            }
+        } else {
+            try {
+                cp = Integer.valueOf(valString, 10);
+            } catch (NumberFormatException ex) {
+                throw new TranslationException(StaticUtils.format(
+                        OStrings.getString("XSR_ERROR_BAD_DECIMAL_CHAR"), val), ex);
             }
         }
 

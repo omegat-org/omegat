@@ -165,7 +165,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         }
         
         File dir = new File(dirName);
-        if (dir.isFile() || (dir.exists() && (!dir.canRead() || !dir.canWrite()))) {
+        if (dir.isFile() || (dir.exists() && !dir.canRead())) {
             return null;
         }
         
@@ -218,8 +218,9 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
     }
 
     private void updateDictUrl() {
+        File dictDir = getDictDir();
         installButton.setEnabled(autoSpellcheckCheckBox.isSelected()
-                && getDictDir() != null
+                && dictDir != null && dictDir.canWrite()
                 && !dictionaryUrlTextField.getText().isEmpty());
     }
     

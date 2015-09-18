@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;7.&nbsp;Filtros de arquivos</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Manual do Usuário">
-      <link rel="up" href="index.html" title="OmegaT - Manual do Usuário">
+      <link rel="home" href="index.html" title="OmegaT 3.1 - Manual do Usuário">
+      <link rel="up" href="index.html" title="OmegaT 3.1 - Manual do Usuário">
       <link rel="prev" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Propriedades do projeto">
       <link rel="next" href="chapter.files.and.folders.html" title="Chapter&nbsp;8.&nbsp;OmegaT Arquivos e pastas">
    </head>
@@ -72,11 +72,11 @@
                </li>
             </ul>
          </div>
-         <p>Para ver que formatos de arquivo são compatíveis com o OmegaT, veja o menu <span class="guimenuitem">Opções &gt; Filtros de arquivo… </span></p>
-         <p>A maior parte dos usuários achará as opções padrão de filtro de arquivo suficientes. Se não for o caso, selecione o menu<span class="bold"><strong> Opções -&gt; Filtros de arquivos…</strong></span> para abrir a caixa de diálogo principal. Também é possivel ativar filtros de arquivo específicos por projeto, que somente
-            serão usados no projeto atual, selecionando a opção <span class="bold"><strong>Filtros de arquivos…</strong></span> em Propriedade do projeto.
+         <p>Para ver que formatos de arquivo são compatíveis com o OmegaT, veja o menu <span class="guimenuitem">Opções &gt; Filtros de arquivo... </span></p>
+         <p>A maior parte dos usuários achará as opções padrão de filtro de arquivo suficientes. Se não for o caso, selecione o menu<span class="bold"><strong> Opções -&gt; Filtros de arquivos...</strong></span> para abrir a caixa de diálogo principal. Também é possivel ativar filtros de arquivo específicos por projeto, que somente
+            serão usados no projeto atual, selecionando a opção <span class="bold"><strong>Filtros de arquivos...</strong></span> em Propriedade do projeto.
          </p>
-         <p>Você pode ativar filtros específicos por projeto em <span class="bold"><strong>Projeto → Propriedades…</strong></span>. Clique em <span class="guibutton">Filtros de arquivos</span> e ative a caixa de seleção <span class="guimenuitem">Ativar filtros específicos por projeto</span><a class="indexterm" name="d0e4409"></a>. Uma cópia da configuração de filtros será gravada com o projeto neste caso. Se você modificar filtros mais tarde, apenas
+         <p>Você pode ativar filtros específicos por projeto em <span class="bold"><strong>Projeto → Propriedades...</strong></span>. Clique em <span class="guibutton">Filtros de arquivos</span> e ative a caixa de seleção <span class="guimenuitem">Ativar filtros específicos por projeto</span><a class="indexterm" name="d0e4597"></a>. Uma cópia da configuração de filtros será gravada com o projeto neste caso. Se você modificar filtros mais tarde, apenas
             os filtros do projeto serão atualizados, enquanto os filtros de usuário ficam inalterados.
          </p>
          <p><span class="bold"><strong>Atenção!</strong></span> Se você modificar opções de filtro enquanto um projeto estiver aberto, você deve recarregar o projeto para aplicar as modificações.
@@ -85,7 +85,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;Caixa de diálogo 'Filtros de arquivos'<a class="indexterm" name="d0e4422"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;Caixa de diálogo 'Filtros de arquivos'<a class="indexterm" name="d0e4610"></a></h2>
                   </div>
                </div>
             </div>
@@ -94,12 +94,40 @@
                os projetos e irá apenas copiá-los, sem nenhuma intervenção, quando criar os documentos traduzidos. Quando quiser usar o filtro
                de novo, basta marcar a caixa de seleção. Clique em <span class="bold"><strong>Restaurar padrões</strong></span> para restaurar os filtros às configurações padrões. Para editar os arquivos e a codificação que o filtro processará, selecione
                o filtro na lista e clique em <span class="bold"><strong>Editar.</strong></span></p>
+            <p>A caixa de diálogo permite habilitar ou desabilitar as seguintes opções:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Remover tags à esquerda e à direita: desmarque esta opção para exibir todas as tags, inclusive as tags à esquerda e à direita.
+                        Atenção: nos formatos Microsoft Open XML (docx, xlsx, etc.), se todas as tags forem exibidas, NÃO escreva nenhum texto antes
+                        da primeira tag (é uma tag técnica que deve sempre iniciar o segmento).
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Remover espaço em branco à esquerda e à direita em projetos não segmentados: por padrão, o OmegaT remove os espaços em branco
+                        à esquerda e à direita. Em projetos não segmentados, é possível mantê-los ao desmarcar esta opção.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Preservar espaços para todas as tags: marque esta opção se os documentos fonte contêm espaços importantes (para fins de layout)
+                        que não devem ser ignorados.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Ignorar contexto de arquivos ao identificar segmentos com traduções alternativas: por padrão, o OmegaT usa o nome do arquivo
+                        fonte como parte da identificação de uma tradução alternativa. Se a opção estiver marcada, o nome do arquivo fonte não será
+                        usado, e traduções alternativas terão efeito em um arquivo, se outros itens de contexto (segmentos anteriores/posteriores,
+                        ou algum tipo de identificador, dependendo do formato do arquivo) sejam correspondentes.
+                     </p>
+                  </li>
+               </ul>
+            </div>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Opções de filtro<a class="indexterm" name="d0e4437"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Opções de filtro<a class="indexterm" name="d0e4640"></a></h2>
                   </div>
                </div>
             </div>
@@ -140,7 +168,7 @@
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Substituir automaticamente 'nplurals=INTEGER; plural=EXPRESSION;' no cabeçalho</em></span></p>
-                     <p><span class="emphasis"><em><span class="emphasis"><em>A opção permite que o OmegaT ignore a especificação no cabeçalho do arquivo PO e use o padrão para o idioma de destino selecionado.</em></span></em></span></p>
+                     <p><span class="emphasis"><em>A opção permite que o OmegaT ignore a especificação no cabeçalho do arquivo PO e use o padrão para o idioma de destino selecionado.</em></span></p>
                   </li>
                </ul>
             </div>
@@ -184,7 +212,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Não traduzir o atributo de conteúdo das meta-tags … :</em></span> As seguintes meta-tags não serão traduzidas.
+                     <p><span class="emphasis"><em>Não traduzir o atributo de conteúdo das meta-tags ... :</em></span> As seguintes meta-tags não serão traduzidas.
                      </p>
                   </li>
                </ul>
@@ -289,7 +317,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Não traduzir o atributo de conteúdo das meta-tags … :</em></span> As seguintes meta-tags não serão traduzidas.
+                     <p><span class="emphasis"><em>Não traduzir o atributo de conteúdo das meta-tags ... :</em></span> As seguintes meta-tags não serão traduzidas.
                      </p>
                   </li>
                </ul>
@@ -328,7 +356,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Caixa de diálogo 'Editar filtro'<a class="indexterm" name="d0e4640"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Caixa de diálogo 'Editar filtro'<a class="indexterm" name="d0e4842"></a></h2>
                   </div>
                </div>
             </div>
@@ -342,7 +370,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4655"></a>Tipo de arquivo fonte, padrão do nome de arquivo<a class="indexterm" name="d0e4661"></a></h3>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4857"></a>Tipo de arquivo fonte, padrão do nome de arquivo<a class="indexterm" name="d0e4863"></a></h3>
                      </div>
                   </div>
                </div>
@@ -362,7 +390,7 @@
                         </h3>
                      </div>
                   </div>
-               </div><a class="indexterm" name="d0e4689"></a><a class="indexterm" name="d0e4694"></a><a class="indexterm" name="d0e4699"></a><p>Apenas uma quantidade limitada de formatos de arquivos requer codificação obrigatória. Os formatos de arquivos que não especificam
+               </div><a class="indexterm" name="d0e4891"></a><a class="indexterm" name="d0e4896"></a><a class="indexterm" name="d0e4901"></a><p>Apenas uma quantidade limitada de formatos de arquivos requer codificação obrigatória. Os formatos de arquivos que não especificam
                   sua própria codificação usarão aquela que for definida para a extensão correspondente aos seus nomes. Por exemplo, por padrão
                   os arquivos <code class="literal">.txt</code> serão carregados usando a codificação padrão do sistema operacional. A codificação fonte pode ser modificada para cada tipo
                   de arquivo fonte diferente. Tais arquivos podem também ser processados sem nenhuma codificação. Por padrão, a codificação
@@ -397,13 +425,13 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Nome de arquivo traduzido<a class="indexterm" name="d0e4727"></a></h3>
+                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Nome de arquivo traduzido<a class="indexterm" name="d0e4929"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Se quiser, você poderá renomear automaticamente os arquivos que traduz, por exemplo, acrescentando o código de idioma após
                   o nome do arquivo. O tipo de arquivo traduzido usa uma sintaxe especial, portanto se você quiser editar este campo, clique
-                  em <span class="bold"><strong>Editar…</strong></span> para acessar a <a class="indexterm" name="d0e4737"></a>caixa de diálogo 'Editar padrão'. Se você quiser voltar à configuração padrão do filtro, clique em <span class="bold"><strong>Restaurar padrões.</strong></span> Também é possível modificar o nome diretamente no campo de tipo de arquivo traduzido, na caixa de diálogo dos filtros de
+                  em <span class="bold"><strong>Editar...</strong></span> para acessar a <a class="indexterm" name="d0e4939"></a>caixa de diálogo 'Editar padrão'. Se você quiser voltar à configuração padrão do filtro, clique em <span class="bold"><strong>Restaurar padrões.</strong></span> Também é possível modificar o nome diretamente no campo de tipo de arquivo traduzido, na caixa de diálogo dos filtros de
                   arquivos. A caixa de diálogo Editar padrão contém as seguintes opções:
                </p>
                <div class="itemizedlist">

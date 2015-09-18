@@ -5,10 +5,10 @@
       <title>Chapter&nbsp;15.&nbsp;Buscas</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Manual do Usuário">
-      <link rel="up" href="index.html" title="OmegaT - Manual do Usuário">
+      <link rel="home" href="index.html" title="OmegaT 3.1 - Manual do Usuário">
+      <link rel="up" href="index.html" title="OmegaT 3.1 - Manual do Usuário">
       <link rel="prev" href="chapter.segmentation.html" title="Chapter&nbsp;14.&nbsp;Segmentação do texto fonte">
-      <link rel="next" href="chapter.regexp.html" title="Chapter&nbsp;16.&nbsp;Expressões regulares">
+      <link rel="next" href="chapter.searchandreplace.html" title="Chapter&nbsp;16.&nbsp;Buscar e substituir">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
@@ -20,7 +20,7 @@
                <td width="20%" align="left"><a accesskey="p" href="chapter.segmentation.html">Prev</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Next</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.searchandreplace.html">Next</a></td>
             </tr>
          </table>
          <hr>
@@ -29,99 +29,41 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.searches"></a>Chapter&nbsp;15.&nbsp;Buscas<a class="indexterm" name="d0e7145"></a></h1>
+                  <h1 class="title"><a name="chapter.searches"></a>Chapter&nbsp;15.&nbsp;Buscas<a class="indexterm" name="d0e7389"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
                <dt><span class="section"><a href="chapter.searches.html#search.window">1. Janela Busca</a></span></dt>
-               <dd>
-                  <dl>
-                     <dt><span class="section"><a href="chapter.searches.html#d0e7167">1.1. Buscar</a></span></dt>
-                     <dt><span class="section"><a href="chapter.searches.html#d0e7192">1.2. Local da busca</a></span></dt>
-                  </dl>
-               </dd>
                <dt><span class="section"><a href="chapter.searches.html#using.wild.cards">2. Usando curingas</a></span></dt>
                <dt><span class="section"><a href="chapter.searches.html#search.methoids">3. Métodos e opções de busca</a></span></dt>
                <dt><span class="section"><a href="chapter.searches.html#search.result.display">4. Exibição dos resultados da busca</a></span></dt>
+               <dt><span class="section"><a href="chapter.searches.html#search.filter">5. Filtra as entradas no Editor de acordo com a busca</a></span></dt>
             </dl>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="search.window"></a>1.&nbsp;Janela Busca
-                     </h2>
+                     <h2 class="title" style="clear: both"><a name="search.window"></a>1.&nbsp;Janela Busca<a class="indexterm" name="d0e7395"></a></h2>
                   </div>
                </div>
             </div>
-            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Figure&nbsp;15.1.&nbsp;Janela Busca de texto<a class="indexterm" name="d0e7154"></a></b></p>
-               <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/TextSearch25.png" alt="Janela Busca de texto"></div>
-               </div>
-            </div><br class="figure-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
-               <h3 class="title">Note</h3>
-               <p>A busca acima encontra todos os segmentos destino que contenham caracteres bastante improváveis na língua alvo - ou seja,
-                  esloveno.
-               </p>
-            </div>
-            <div class="section">
-               <div class="titlepage">
-                  <div>
-                     <div>
-                        <h3 class="title"><a name="d0e7167"></a>1.1.&nbsp;Buscar<a class="indexterm" name="d0e7170"></a></h3>
-                     </div>
-                  </div>
-               </div>
-               <p>O <span class="application">OmegaT</span> oferece um grande leque de funções avançadas de busca. Para abrir a janela Busca, pressione <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> e digite a palavra ou frase que deseja localizar na caixa de texto Busca por. Uma outra forma é selecionar, no Painel Editor,
-                  uma palavra ou frase no campo de edição (texto alvo no segmento atual) e pressionar <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>. A palavra ou frase é inserida automaticamente na caixa Busca por. É possível ter várias janelas de Busca abertas ao mesmo
-                  tempo, mas feche-as assim que não forem mais necessárias, para que não encham sua área de trabalho.
-               </p>
-            </div>
-            <div class="section">
-               <div class="titlepage">
-                  <div>
-                     <div>
-                        <h3 class="title"><a name="d0e7192"></a>1.2.&nbsp;Local da busca
-                        </h3>
-                     </div>
-                  </div>
-               </div>
-               <p>Por padrão, as buscas são feitas nos segmentos de origem e destino do projeto, mas você pode limitar sua pesquisa para apenas
-                  o texto de origem ou destino. As buscas podem ser 
-               </p>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" style="list-style-type: disc; ">
-                     <li class="listitem">
-                        <p>somente no projeto (opção predefinida)</p>
-                     </li>
-                  </ul>
-               </div>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" style="list-style-type: disc; ">
-                     <li class="listitem">
-                        <p>no projeto e nas memórias de tradução de referência na pasta /tm/ (marque <span class="emphasis"><em>Buscar nas TMs)</em></span></p>
-                     </li>
-                  </ul>
-               </div>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" style="list-style-type: disc; ">
-                     <li class="listitem">
-                        <p>em um único arquivo ou pasta contendo um conjunto de arquivos (marque <span class="emphasis"><em>Buscar nos arquivos)</em></span></p>
-                     </li>
-                  </ul>
-               </div>
-               <p>Quando fizer buscas em arquivos (ao contrário das memórias de tradução), o <span class="application">OmegaT</span> somente pesquisará nos que estejam nos formatos dos arquivos fonte. Consequentemente, embora o OmegaT possa processar os
-                  arquivos<code class="filename"> tmx</code>, eles não serão incluídos na pesquisa Buscar nos arquivos. Se você ativar as <span class="bold"><strong><a class="indexterm" name="d0e7222"></a>Opções avançadas</strong></span>, é possível conciliar a busca com o nome do autor da tradução e o horário da última modificação.
-               </p>
-            </div>
+            <p>Para abrir a janela Busca, pressione <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> e digite a palavra ou frase que deseja localizar na caixa de texto <span class="emphasis"><em>Busca por</em></span>.
+            </p>
+            <p>Uma outra forma é selecionar, no Painel Editor, uma palavra ou frase no campo de edição (texto alvo no segmento atual) e pressionar
+               <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>. A palavra ou frase é inserida automaticamente na caixa <span class="emphasis"><em>Busca por</em></span>. É possível ter várias janelas de Busca abertas ao mesmo tempo, mas feche-as assim que não forem mais necessárias, para que
+               não encham sua área de trabalho.
+            </p>
+            <p>Clique na seta da caixa de texto <span class="emphasis"><em>Busca por</em></span> para acessar as últimas dez pesquisas..
+            </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Usando curingas<a class="indexterm" name="d0e7232"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Usando curingas<a class="indexterm" name="d0e7430"></a></h2>
                   </div>
                </div>
             </div>
@@ -153,7 +95,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Métodos e opções de busca<a class="indexterm" name="d0e7276"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Métodos e opções de busca<a class="indexterm" name="d0e7474"></a></h2>
                   </div>
                </div>
             </div>
@@ -178,7 +120,7 @@
                   <dd>
                      <p>A sequência de busca será tratada como uma expressão regular. A sequência de busca - [a-zA-Z]+[öäüqwß] - no exemplo acima,
                         procura-se por palavras no segmento alvo, contendo caracteres questionáveis do teclado alemão. As expressões regulares são
-                        uma excelente maneira de procurar por ocorrências de uma sequência. Veja mais informações no capítulo<a class="link" href="chapter.regexp.html" title="Chapter&nbsp;16.&nbsp;Expressões regulares"> Expressões regulares.</a></p>
+                        uma excelente maneira de procurar por ocorrências de uma sequência. Veja mais informações no capítulo<a class="link" href="chapter.regexp.html" title="Chapter&nbsp;17.&nbsp;Expressões regulares"> Expressões regulares.</a></p>
                   </dd>
                </dl>
             </div>
@@ -187,6 +129,11 @@
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>distinção entre maiúsculas e minúsculas</strong></span>: a busca será feita conforme a sequência exata especificada; isto é, será considerado o uso de letras maiúsculas.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Espaço corresponde a nbsp</strong></span>: ao selecionar esta opção, um caractere de espaço inserido na busca pode corresponder tanto a um caractere normal de espaço
+                        como a um caractere de espaço rígido (\u00A).
                      </p>
                   </li>
                   <li class="listitem">
@@ -202,11 +149,38 @@
                      </p>
                   </li>
                   <li class="listitem">
-                     <p><span class="bold"><strong>busca nas TMs</strong></span>: as memórias de tradução da pasta <code class="filename">tm</code> são incluídas na pesquisa.
+                     <p><span class="bold"><strong>nos comentários: </strong></span>busca nos comentários dos segmentos
                      </p>
                   </li>
                   <li class="listitem">
-                     <p><span class="bold"><strong>exibir todos os resultados: </strong></span>ao limpar a caixa de seleção o OmegaT mostrará apenas a primeira ocorrência do hit, se houver mais de um hit
+                     <p><span class="bold"><strong>Traduzidos ou não traduzidos: </strong></span>busca tanto nos segmentos traduzidos como nos não traduzidos.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Traduzidos: </strong></span>busca apenas nos segmentos traduzidos.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Não traduzidos: </strong></span>busca apenas nos segmentos não traduzidos.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Exibir todos os segmentos correspondentes: </strong></span>se marcado, todos os segmentos são exibidos um a um, mesmo se estiverem repetidos várias vezes no mesmo documento ou em documentos
+                        diferentes.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Exibir: nomes de arquivos: </strong></span>se marcado, o nome do arquivo em que cada segmento encontrado é exibido acima de cada resultado.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Busca no Projeto</strong></span>: marque <span class="emphasis"><em>Memória</em></span> para incluir a memória do projeto (arquivo project_save.tmx) na busca. Marque <span class="emphasis"><em>TMs</em></span> para incluir as memórias de tradução localizadas na pasta <code class="filename">tm</code> na busca. Marque <span class="emphasis"><em>Glossários</em></span> para incluir os glossários localizados na pasta <code class="filename">glossary</code> na busca.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Buscar em arquivos: </strong></span>busca em um único arquivo ou em uma pasta contendo vários arquivos. Quando fizer buscas em arquivos (ao contrário das memórias
+                        de tradução), o OmegaT somente pesquisará nos que estejam nos formatos dos arquivos fonte. Consequentemente, embora o OmegaT
+                        possa processar os arquivos<code class="filename"> tmx</code>, eles não serão incluídos na pesquisa Buscar nos arquivos.
                      </p>
                   </li>
                </ul>
@@ -235,6 +209,31 @@
                mostrará o termo pesquisado.
             </p>
          </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.filter"></a>5.&nbsp;Filtra as entradas no Editor de acordo com a busca
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Pra uma navegação mais fácil no conjunto de resultados da busca, é possível aplicar a busca ao Editor. Pressione o botão <span class="bold"><strong>Filtrar</strong></span> na parte inferior para restringir as entradas exibidas no painel Editor às que correspondem à busca atual. É possível navegar
+               normalmente para ir, por exemplo para o próximo segmento (não traduzido) que corresponda aos critérios da busca.
+            </p>
+            <p>NB:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">Uma busca pode ser limitada a 1000 itens, portanto ao buscar por uma frase comum, o editor irá mostrar apenas estas 1000 entradas
+                     correspondentes, e não todas as entradas que correspondam aos critérios da busca.
+                  </li>
+                  <li class="listitem">Um arquivo pode não ter correspondências, e então será mostrado em branco.</li>
+                  <li class="listitem">Se uma busca remover segmentos duplicados, estes segmentos não estarão no Editor.</li>
+               </ul>
+            </div>
+            <p>Para remover um filtro, pressione o botão <span class="bold"><strong>Remover filtro</strong></span> ou recarregue um projeto.
+            </p>
+         </div>
       </div>
       <div class="navfooter">
          <hr>
@@ -243,12 +242,12 @@
                <td width="40%" align="left"><a accesskey="p" href="chapter.segmentation.html">Prev</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Next</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.searchandreplace.html">Next</a></td>
             </tr>
             <tr>
                <td width="40%" align="left" valign="top">Chapter&nbsp;14.&nbsp;Segmentação do texto fonte&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;16.&nbsp;Expressões regulares</td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;16.&nbsp;Buscar e substituir</td>
             </tr>
          </table>
       </div>

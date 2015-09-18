@@ -2,11 +2,11 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>Appendix&nbsp;F.&nbsp;Plugin de scripts</title>
+      <title>Appendix&nbsp;F.&nbsp;Scripts</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Manual do Usuário">
-      <link rel="up" href="index.html" title="OmegaT - Manual do Usuário">
+      <link rel="home" href="index.html" title="OmegaT 3.1 - Manual do Usuário">
+      <link rel="up" href="index.html" title="OmegaT 3.1 - Manual do Usuário">
       <link rel="prev" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Appendix&nbsp;E.&nbsp;Plugin LanguageTool">
       <link rel="next" href="appendix.website.html" title="Appendix&nbsp;G.&nbsp;OmegaT na web">
    </head>
@@ -14,7 +14,7 @@
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">Appendix&nbsp;F.&nbsp;Plugin de scripts</th>
+               <th colspan="3" align="center">Appendix&nbsp;F.&nbsp;Scripts</th>
             </tr>
             <tr>
                <td width="20%" align="left"><a accesskey="p" href="appendix.LanguageToolPlugin.inOmegaT.html">Prev</a>&nbsp;
@@ -29,21 +29,22 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="appendix.ScriptingPlugin.inOmegaT"></a>Appendix&nbsp;F.&nbsp;Plugin de scripts<a class="indexterm" name="d0e10877"></a></h1>
+                  <h1 class="title"><a name="appendix.Scripts.inOmegaT"></a>Appendix&nbsp;F.&nbsp;Scripts<a class="indexterm" name="d0e11404"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e10882">1. Introdução</a></span></dt>
-               <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e10887">2. Instalação e uso</a></span></dt>
+               <dt><span class="section"><a href="appendix.Scripts.inOmegaT.html#d0e11407">1. Introdução</a></span></dt>
+               <dt><span class="section"><a href="appendix.Scripts.inOmegaT.html#d0e11412">2. Uso</a></span></dt>
+               <dt><span class="section"><a href="appendix.Scripts.inOmegaT.html#d0e11452">3. Linguagens de script</a></span></dt>
             </dl>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10882"></a>1.&nbsp;Introdução
+                     <h2 class="title" style="clear: both"><a name="d0e11407"></a>1.&nbsp;Introdução
                      </h2>
                   </div>
                </div>
@@ -54,21 +55,18 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10887"></a>2.&nbsp;Instalação e uso
+                     <h2 class="title" style="clear: both"><a name="d0e11412"></a>2.&nbsp;Uso
                      </h2>
                   </div>
                </div>
             </div>
-            <p>O plugin de scripts do OmegaT pode ser baixado no <a class="ulink" href="http://sourceforge.net/projects/omegat-plugins/files" target="_top">site de downloads do OmegaT</a>. Descompacte os arquivos e coloque-os na pasta "plugins", localizada na pasta de instalação do OmegaT, que é a pasta que
-               contém o OmegaT.jar. Se a pasta "plugins" não existir, crie-a primeiro.
-            </p>
-            <p>Isto acrescenta um novo submenu <span class="guisubmenu"> Ferramentas &gt; </span><span class="guisubmenu"> Scripts.</span> Abaixo do submenu <span class="guisubmenu">Scripts</span>, há 12 submenus disponíveis para scripts. Ao clicar em <span class="guisubmenu">Scripts</span> você abre a caixa de diálogo Scripts:
+            <p>Ao clicar em <span class="guisubmenu">Ferramentas &gt; </span><span class="guisubmenu">Scripts</span> a janela Scripts abre:
             </p>
             <div class="screenshot">
                <div class="mediaobject"><img src="images/ScriptingDialog.png"></div>
             </div>
-            <p>A caixa de diálogo de scripts permite carregar um script existente na área de texto e executá-lo no projeto aberto atual.
-               Para personalizar o recurso de scripts, faça o seguinte:
+            <p>A Janela de Script permite carregar um script existente na área de texto e executá-lo no projeto aberto atual. Para personalizar
+               o recurso de scripts, faça o seguinte:
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -95,31 +93,21 @@
                   </li>
                </ul>
             </div>
+            <p>Por padrão, os scripts são armazenados na pasta "scripts", na pasta de instalação do OmegaT (a pasta que contem o arquivo
+               OmegaT.jar).
+            </p>
+            <p>É possível adicionar novos scripts nesta pasta, para que eles apareçam na lista de scripts disponíveis da Janela de Scripts.</p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e11452"></a>3.&nbsp;Linguagens de script
+                     </h2>
+                  </div>
+               </div>
+            </div>
             <p>As seguintes linguagens de script foram implementadas:</p>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
-                  <li class="listitem">
-                     <p><span class="bold"><strong>NetRexx</strong></span> (http://www.netrexx.org/): suporta uma sintaxe REXX clássica, sem palavras-chave reservadas, junto com adições consideráveis
-                        para dar suporte a programação orientada ao objeto de maneira compatível com o modelo de objeto do Java. Todas as bibliotecas
-                        de classe Java existentes podem ser usadas sem alterações e sem configurações especiais; ao mesmo tempo, um programador Java
-                        pode optar por usar somente a classe Rexx do pacote de execução para melhorar o manejo de strings em programas fonte de sintaxe
-                        do Java.
-                     </p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
-                  <li class="listitem">
-                     <p><span class="bold"><strong>XLST</strong></span> (Extensible Stylesheet Language Transformations): é uma linguagem declarativa, baseada em XML e usada para a transformação
-                        de documentos em XML. O documento original não é modificado; ao invés disso, um novo documento é criado com base no conteúdo
-                        de um já existente. O novo documento pode ser serializado (saída) pelo processador em sintaxe de XML padrão ou em outro formato,
-                        como HTML ou texto simples. O XSLT é geralmente usado para converter dados entre esquemas de XML diferentes ou converter dados
-                        de XML em páginas da Web ou documentos PDF.
-                     </p>
-                  </li>
-               </ul>
-            </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">

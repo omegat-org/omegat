@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;10.&nbsp;Modo de trabalho</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Manual do Usuário">
-      <link rel="up" href="index.html" title="OmegaT - Manual do Usuário">
+      <link rel="home" href="index.html" title="OmegaT 3.1 - Manual do Usuário">
+      <link rel="up" href="index.html" title="OmegaT 3.1 - Manual do Usuário">
       <link rel="prev" href="chapter.files.to.translate.html" title="Chapter&nbsp;9.&nbsp;Arquivos para traduzir">
       <link rel="next" href="chapter.plain.text.html" title="Chapter&nbsp;11.&nbsp;Trabalhar com texto simples">
    </head>
@@ -29,11 +29,11 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.translation.editing"></a>Chapter&nbsp;10.&nbsp;Modo de trabalho<a class="indexterm" name="d0e5703"></a></h1>
+                  <h1 class="title"><a name="chapter.translation.editing"></a>Chapter&nbsp;10.&nbsp;Modo de trabalho<a class="indexterm" name="d0e5905"></a></h1>
                </div>
             </div>
          </div>
-         <p>O diálogo em <span class="guimenu">Opções</span> → <span class="guimenuitem">Editar modo de trabalho…</span> permite ao usuário selecionar como o segmento atual no campo de edição deve ser inicializado e tratado:
+         <p>O diálogo em <span class="guimenu">Opções</span> → <span class="guimenuitem">Editar modo de trabalho...</span> permite ao usuário selecionar como o segmento atual no campo de edição deve ser inicializado e tratado:
          </p>
          <div class="figure"><a name="editing.behavior.options"></a><p class="title"><b>Figure&nbsp;10.1.&nbsp;Opções do modo de trabalho</b></p>
             <div class="figure-contents">
@@ -42,7 +42,7 @@
          </div><br class="figure-break"><p></p>
          <p>Você traduz os seus arquivos movendo-se de segmento a segmento, editando cada segmento atual por vez. Ao mover-se entre segmentos,
             você pode desejar preencher o campo de edição com uma tradução existente do painel de correspondências parciais ou com o texto
-            fonte. Em <span class="guimenu">Opções</span> → <span class="guimenuitem"> Editar modo de trabalho…</span> <span class="application">o OmegaT</span> oferece as seguintes alternativas:
+            fonte. Em <span class="guimenu">Opções</span> → <span class="guimenuitem"> Editar modo de trabalho...</span> <span class="application">o OmegaT</span> oferece as seguintes alternativas:
          </p>
          <div class="variablelist">
             <dl class="variablelist">
@@ -52,14 +52,14 @@
                      marcas registradas ou outros substantivos próprios que devem ser deixados inalterados.
                   </p>
                </dd>
-               <dt><span class="term">Deixar o segmento em branco<a class="indexterm" name="d0e5748"></a></span></dt>
+               <dt><span class="term">Deixar o segmento em branco<a class="indexterm" name="d0e5950"></a></span></dt>
                <dd>
                   <p>O OmegaT deixa o campo de edição em branco. Com esta opção você pode digitar a tradução sem precisar apagar o texto fonte,
                      economizando alguns toques no teclado (<span class="bold"><strong>Ctrl+A </strong></span>e <span class="bold"><strong>Del). </strong></span>As traduções vazias agora são permitidas. Elas são exibidas como &lt;EMPTY&gt; no Editor. Para criar uma, clique com o botão direito
                      em um segmento, e selecione "<span class="bold"><strong>Definir tradução vazia</strong></span>". A entrada <span class="bold"><strong>Remover tradução</strong></span> na mesma janela popup também permite eliminar a tradução existente do segmento atual. Você chega ao mesmo resultado limpando
                      o segmento destino e pressionando <span class="guibutton">Enter.</span></p>
                </dd>
-               <dt><span class="term">Inserir a melhor correspondência parcial<a class="indexterm" name="d0e5775"></a></span></dt>
+               <dt><span class="term">Inserir a melhor correspondência parcial<a class="indexterm" name="d0e5977"></a></span></dt>
                <dd>
                   <p>O OmegaT irá inserir a correspondência mais similar ao segmento aberto que encontrar na memória, respeitando o limite de similaridade
                      selecionado neste diálogo. O prefixo (por padrão vazio) pode ser usado para marcar traduções, por meio das correspondências
@@ -71,7 +71,7 @@
          <p>As caixas de seleção na metade mais baixa da janela de diálogo servem o seguinte objetivo:</p>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term">Tentar converter números ao inserir uma correspondência parcial<a class="indexterm" name="d0e5791"></a></span></dt>
+               <dt><span class="term">Tentar converter números ao inserir uma correspondência parcial<a class="indexterm" name="d0e5993"></a></span></dt>
                <dd>
                   <p>Se esta opção estiver marcada, quando uma correspondência parcial for inserida, manualmente ou automaticamente, o OmegaT tentará
                      converter os números nas correspondências parciais segundo o conteúdo fonte. Há algumas restrições:
@@ -96,21 +96,21 @@
          </div>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term">Permitir que a tradução seja igual ao texto fonte<a class="indexterm" name="d0e5815"></a></span></dt>
+               <dt><span class="term">Permitir que a tradução seja igual ao texto fonte<a class="indexterm" name="d0e6017"></a></span></dt>
                <dd>
                   <p>Os documentos para tradução podem conter marcas comerciais, nomes ou outros substantivos próprios que serão mantidos iguais
                      em documentos traduzidos. Há duas estratégias para lidar com segmentos que contenham este tipo de texto invariável.
                   </p>
                   <p>Você pode decidir não traduzir tais segmentos. O OmegaT então exibirá estes segmentos como não traduzidos. Esta é a opção
                      padrão. A alternativa é inserir uma tradução idêntica ao texto fonte. O OmegaT é capaz de reconhecer que você fez isto. Para
-                     fazer isso, acesse <span class="guimenu">Opções</span> → <span class="guimenuitem">Editar modo de trabalho…</span> e selecione <span class="bold"><strong>Permitir que a tradução seja igual ao texto fonte</strong></span>.
+                     fazer isso, acesse <span class="guimenu">Opções</span> → <span class="guimenuitem">Editar modo de trabalho...</span> e selecione <span class="bold"><strong>Permitir que a tradução seja igual ao texto fonte</strong></span>.
                   </p>
                </dd>
             </dl>
          </div>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term">Exportar o segmento para arquivos de texto<a class="indexterm" name="d0e5840"></a></span></dt>
+               <dt><span class="term">Exportar o segmento para arquivos de texto<a class="indexterm" name="d0e6042"></a></span></dt>
                <dd>
                   <p>A função de exportação de texto envia dados de dentro do projeto atual do <span class="application">OmegaT</span> para arquivos de texto simples. Os dados são exportados quando o segmento é aberto. Os arquivos aparecem na subpasta /script
                      na pasta de arquivos de usuário do OmegaT e incluem:
@@ -140,10 +140,41 @@
          </div>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term">Ir para - Próximo segmento não traduzido - pára onde há pelo menos uma tradução alternativa<a class="indexterm" name="d0e5887"></a></span></dt>
+               <dt><span class="term">Ir para - Próximo segmento não traduzido - pára onde há pelo menos uma tradução alternativa<a class="indexterm" name="d0e6089"></a></span></dt>
                <dd>
                   <p>Se quisermos evitar alguma tradução incorreta em segmentos com vários conteúdos possíveis, marcar esta caixa de seleção fará
                      com que <span class="bold"><strong>&nbsp;Ir para - Próximo segmento não traduzido</strong></span>pare no segmento seguinte que obedeça esta condição, esteja ele traduzido ou não.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Permitir edição de tag</span></dt>
+               <dd>
+                  <p>Desmarque esta opção para prevenir danos às tags (por exemplo, exclusão parcial) durante a edição. Remover uma tag inteira
+                     ainda é possível neste caso, basta usar Ctrl+Backspace/Delete ou selecioná-la inteira (Ctrl+Shift+Esquerda/Direita) e então
+                     apagá-la (Delete ou Ctrl+X).
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Verificar tags ao deixar um segmento</span></dt>
+               <dd>
+                  <p>Marque esta opção para receber um aviso sobre as diferenças entre tags dos segmentos fonte e destino sempre que deixar um
+                     segmento.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Salvar estados auto-preenchidos</span></dt>
+               <dd>
+                  <p>Marque esta opção para salvar no arquivo <code class="filename">project_save.tmx</code> a informação que um segmento foi auto-preenchido, para que ele possa ser exibido com uma cor específica no Editor (se a opção
+                     ""Marcar segmentos auto-preenchidos", no menu Visualizar, estiver marcada).
                   </p>
                </dd>
             </dl>

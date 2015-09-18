@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;6.&nbsp;Propriedades do projeto</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Manual do Usuário">
-      <link rel="up" href="index.html" title="OmegaT - Manual do Usuário">
+      <link rel="home" href="index.html" title="OmegaT 3.1 - Manual do Usuário">
+      <link rel="up" href="index.html" title="OmegaT 3.1 - Manual do Usuário">
       <link rel="prev" href="chapter.menu.html" title="Chapter&nbsp;5.&nbsp;Menu principal e atalhos de teclado">
       <link rel="next" href="chapter.file.filters.html" title="Chapter&nbsp;7.&nbsp;Filtros de arquivos">
    </head>
@@ -29,26 +29,28 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.project.properties"></a>Chapter&nbsp;6.&nbsp;Propriedades do projeto<a class="indexterm" name="d0e4197"></a></h1>
+                  <h1 class="title"><a name="chapter.project.properties"></a>Chapter&nbsp;6.&nbsp;Propriedades do projeto<a class="indexterm" name="d0e4400"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.project.properties.html#properties.dialog">1. Caixa de diálogo Propriedades</a></span></dt>
+               <dt><span class="section"><a href="chapter.project.properties.html#properties.dialog">1. Geral</a></span></dt>
+               <dt><span class="section"><a href="chapter.project.properties.html#d0e4423">2. Línguas</a></span></dt>
+               <dt><span class="section"><a href="chapter.project.properties.html#d0e4433">3. Opções</a></span></dt>
+               <dt><span class="section"><a href="chapter.project.properties.html#d0e4527">4. Locais do arquivo</a></span></dt>
             </dl>
          </div>
-         <p></p>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="properties.dialog"></a>1.&nbsp;Caixa de diálogo Propriedades
+                     <h2 class="title" style="clear: both"><a name="properties.dialog"></a>1.&nbsp;Geral
                      </h2>
                   </div>
                </div>
             </div>
-            <p>A caixa de diálogo <span class="guimenuitem">Propriedades</span>+<span class="guimenu">Projeto</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>E</strong></span></strong></span>) é usada para modificar as pastas e as línguas do projeto.
+            <p>A caixa de diálogo <span class="guimenu"></span> → <span class="guimenuitem"></span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>E</strong></span></strong></span>) é usada para modificar as pastas e as línguas do projeto.
             </p>
             <p>É possível modificar as propriedades do projeto durante uma sessão de tradução. Observe que as mudanças na configuração do
                projeto podem ter algumas consequências, especialmente quando o projeto já foi iniciado. Até que você tenha experiência com
@@ -56,87 +58,124 @@
                é claro, que você perceba que algum erro maior tenha sido feito. Veja a seção Prevenindo a perda de dados para maneiras e
                jeitos de proteger o seu trabalho.
             </p>
-            <div class="figure"><a name="d0e4223"></a><p class="title"><b>Figure&nbsp;6.1.&nbsp;Janela Propriedades do projeto</b></p>
-               <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/NewProject_26.png" alt="Janela Propriedades do projeto"></div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4423"></a>2.&nbsp;Línguas
+                     </h2>
+                  </div>
                </div>
-            </div><br class="figure-break"><p>Contém:</p>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
-                  <li class="listitem">
-                     <p><span class="bold"><strong>Área para definir as línguas fonte e destino</strong></span></p>
-                     <p>As línguas de origem e destino podem ser digitadas ou então selecionadas dos menus suspensos. Lembre-se de que modificar as
-                        línguas pode inutilizar as memórias de tradução usadas, pois elas podem não corresponder às novas línguas definidas.
-                     </p>
-                  </li>
-               </ul>
             </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
-                  <li class="listitem">
-                     <p>Caixa de seleção <span class="bold"><strong><span class="guilabel">Habilitar segmentação a nível de frase</span></strong></span></p><a class="indexterm" name="d0e4247"></a><p>As definições da segmentação apenas tratam da forma como os arquivos fonte são processados pelo <span class="application">OmegaT</span>. A maneira predominante de segmentar as fontes é pela segmentação a nível de frase, então esta caixa de seleção deve permanecer
+            <p>As línguas de origem e destino podem ser digitadas ou então selecionadas dos menus suspensos. Lembre-se de que modificar as
+               línguas pode inutilizar as memórias de tradução usadas, pois elas podem não corresponder às novas línguas definidas.
+            </p>
+            <p>Tokenizers correspondentes aos idiomas selecionados são exibidos. Veja <a class="link" href="appendix.Tokenizers.inOmegaT.html" title="Appendix&nbsp;D.&nbsp;Tokenizers">Apêndice de Tokenizers</a> para mais detalhes.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4433"></a>3.&nbsp;Opções
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">Habilitar Segmentação por sentenças</span></dt>
+                  <dd>
+                     <p>As definições da segmentação apenas tratam da forma como os arquivos fonte são processados pelo <span class="application">OmegaT</span>. A maneira predominante de segmentar as fontes é pela segmentação a nível de frase, então esta caixa de seleção deve permanecer
                         marcada de maneira geral.
                      </p>
                      <p>Em raros casos pode-se preferir, por exemplo, a segmentação em parágrafos. Modificar esta marcação não modifica a segmentação
-                        das memórias de tradução já existentes. Se no meio da tradução você decidir trocar de tradução de frase para parágrafo, a
-                        memória de tradução interna do projeto não irá ser alterada (o OmegaT pode atualizar memórias de tradução antigas que não
-                        usaram a segmentação por frase, mas não o contrário).
+                        das memórias de tradução já existentes. Se no meio da tradução você decidir trocar de tradução de sentença para parágrafo,
+                        a memória de tradução interna do projeto não irá ser alterada (o OmegaT pode atualizar memórias de tradução antigas que não
+                        usaram a segmentação por frase, mas não o contrário), mas o OmegaT irá tentar criar correspondências parciais de parágrafos
+                        ao juntar traduções de sentenças existentes. 
                      </p>
                      <p>Modificar as configurações de segmentação pode fazer com que alguns segmentos já traduzidos fiquem divididos ou combinados.
                         Isto efetivamente fará com que eles sejam retornados ao estado "não traduzido", pois eles não corresponderão mais aos segmentos
                         gravados na memória do projeto, mesmo que a tradução original ainda esteja presente.
                      </p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
-                  <li class="listitem">
-                     <p>Botão <span class="bold"><strong><span class="guibutton">Segmentação…</span> </strong></span><a class="indexterm" name="d0e4269"></a></p>
+                  </dd>
+                  <dt><span class="term"><span class="guibutton">Segmentação...</span> <a class="indexterm" name="d0e4455"></a></span></dt>
+                  <dd>
                      <p>As regras de segmentação são geralmente válidas para todos os projetos. O usuário, entretanto, pode precisar gerar um conjunto
-                        de regras específicas para o projeto em questão Use este botão para abrir a caixa de diálogo, ativar a caixa de seleção <span class="guimenuitem">Regras de segmentação específicas do projeto</span>, e prossiga para ajustar as regras de segmentação como desejado. O novo conjunto de regras será salvo junto com o projeto
-                        e não irá interferir no conjunto geral de regras de segmentação. Para excluir regras de segmentação específicas do projeto,
-                        desmarque esta caixa de seleção Veja o capítulo <a class="link" href="chapter.segmentation.html" title="Chapter&nbsp;14.&nbsp;Segmentação do texto fonte">Segmentação do texto fonte</a> para obter mais informações sobre regras de segmentação.<span class="emphasis"><em></em></span></p>
+                        de regras específicas para o projeto em questão Use este botão para abrir uma caixa de diálogo, ative a caixa de seleção <span class="guimenuitem">Regras de segmentação específicas do projeto</span>, e ajuste as regras de segmentação como desejar. O novo conjunto de regras será salvo junto com o projeto e não irá interferir
+                        no conjunto geral de regras de segmentação. Para excluir regras de segmentação específicas do projeto, desmarque esta caixa
+                        de seleção Veja o capítulo <a class="link" href="chapter.segmentation.html" title="Chapter&nbsp;14.&nbsp;Segmentação do texto fonte">Segmentação do texto fonte</a> para obter mais informações sobre regras de segmentação.
+                     </p>
                      <p><span class="emphasis"><em>Dica:</em></span> o conjunto de regras de segmentação para um determinado projeto é salvo como <code class="filename">project/omegat/segmentation.conf.</code></p>
-                  </li>
-                  <li class="listitem">
-                     <p>Botão <span class="bold"><strong><span class="guibutton">Filtros de arquivos…</span> </strong></span><a class="indexterm" name="d0e4296"></a></p>
+                  </dd>
+                  <dt><span class="term"><span class="guibutton">Filtros de arquivo...</span><a class="indexterm" name="d0e4479"></a></span></dt>
+                  <dd>
                      <p>De uma maneira similar à acima, o usuário pode criar filtros de arquivo específicos por projeto, que serão salvos junto com
                         o projeto e serão válidos apenas para o projeto atual. Para criar um conjunto de filtros de arquivos específicos por projeto,
-                        clique no botão <span class="guibutton">Filtros de arquivo…</span>, e então ative a caixa de seleção <span class="guimenuitem">Ativar filtros específicos de projeto</span> na janela que se abrir. Uma cópia da configuração de filtros alterados será salva com o projeto. Para excluir filtros de
+                        clique no botão <span class="guibutton">Filtros de arquivo...</span>, e então ative a caixa de seleção <span class="guimenuitem">Ativar filtros específicos de projeto</span> na janela que se abrir. Uma cópia da configuração de filtros alterados será salva com o projeto. Para excluir filtros de
                         arquivo específicos de projeto, desmarque a caixa de seleção. Note que no menu <span class="guimenuitem">Opções-&gt;Filtros de arquivo</span>, os filtros de uso global são mudados, não os filtros do projeto. Veja o capítulo<a class="link" href="chapter.file.filters.html" title="Chapter&nbsp;7.&nbsp;Filtros de arquivos"> Filtros de arquivo </a> para mais informações sobre o assunto.<span class="emphasis"><em></em></span></p>
                      <p><span class="emphasis"><em>Dica:</em></span> o conjunto de filtros de arquivo para um determinado projeto é salvo como <code class="filename">project/omegat/filters.xml.</code></p>
-                  </li>
-                  <li class="listitem">
-                     <p>Auto propagação <span class="bold"><strong>Caixa de seleção</strong></span><span class="bold"><strong><a class="indexterm" name="d0e4328"></a></strong></span></p>
+                  </dd>
+                  <dt><span class="term">Propagação automática das traduções</span></dt>
+                  <dd>
                      <p>No caso de haver segmento não únicos nos documentos fonte, a caixa de seleção Auto propagação oferece ao usuário as duas seguintes
                         possibilidades para tradução automática: se marcada, o primeiro segmento traduzido será tomado como a tradução padrão e seu
                         texto alvo será automaticamente usado para hits posteriores durante o processo de tradução. Segmentos traduzidos erradamente
                         podem, é claro, ser manualmente corrigidos mais tarde usando-se <span class="guimenuitem">Criar Tradução Alternativa</span>. Se a caixa de seleção de Auto propagação não for marcada, os segmentos com traduções alternativas são deixados sem tradução
                         até que o usuário decida qual tradução será usada.
                      </p>
-                  </li>
-                  <li class="listitem">
-                     <p><span class="bold"><strong>Remover tags</strong></span> Caixa de seleção<a class="indexterm" name="d0e4343"></a></p>
+                  </dd>
+                  <dt><span class="term">Remover tags</span></dt>
+                  <dd>
                      <p>Quando habilitado, todas as tags de formatação são removidas dos segmentos fonte. É muito útil quando se trabalha com textos
                         onde a formatação em linha não é na verdade útil (p.ex., OCRed PDF, .odt ou .docx mal convertidos, etc.) No geral, deve sempre
                         ser possível abrir o documento alvo, já que somente as marcações em linha são removidas. A formatação não visível (p.ex.,
                         que não aparece como tags no editor OmegaT) é mantida nos documentos de destino.
                      </p>
-                  </li>
-               </ul>
+                  </dd>
+                  <dt><span class="term">Comando de pós-processamento externo</span></dt>
+                  <dd>
+                     <p>Esta área permite digitar um comando externo de pós-processamento (por exemplo, um script que renomeie arquivos) que será
+                        aplicado a cada vez que forem criados os documentos traduzidos. Este comando externo não pode incluir caracteres como o "pipe"
+                        (|), etc., e por isso é recomendado usar um script.
+                     </p>
+                  </dd>
+               </dl>
             </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4527"></a>4.&nbsp;Locais do arquivo
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Aqui você poderá selecionar subpastas diferentes, por exemplo, subpasta com arquivos fonte, subpasta para arquivos de destino,
+               etc. Caso você insira nomes de pastas que ainda não existam, <span class="application">OmegaT</span> cria pastas para você. Caso você decida modificar as pastas do projeto, tenha em mente de que isso não moverá arquivos existentes
+               de pastas antigas para a nova localização.
+            </p>
+            <p>Clique em <span class="guibutton">Exclusões...</span>para definir os arquivos ou pastas que serão ignorados pelo <span class="application">OmegaT</span>. Um arquivo ou pasta ignorado:
+            </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="bold"><strong>Área para definir as pastas do projeto</strong></span><a class="indexterm" name="d0e4355"></a><a class="indexterm" name="d0e4360"></a></p>
-                     <p>Aqui você poderá selecionar subpastas diferentes, por exemplo, subpasta com arquivos fonte, subpasta para arquivos de destino,
-                        etc. Caso você insira nomes de pastas que ainda não existam, <span class="application">OmegaT</span> cria pastas para você. Caso você decida modificar as pastas do projeto, tenha em mente de que isso não moverá arquivos existentes
-                        de pastas antigas para a nova localização.
-                     </p>
+                     <p>não é exibido no painel Editor,</p>
+                  </li>
+                  <li class="listitem">
+                     <p>não é levado em consideração nas estatísticas,</p>
+                  </li>
+                  <li class="listitem">
+                     <p>não é copiado na pasta /target durante a criação dos arquivos traduzidos.</p>
                   </li>
                </ul>
             </div>
+            <p>Na caixa de diálogo de padrões de exclusão é possível adicionar ou remover um padrão, ou editar um padrão selecionado ao selecionar
+               sua linha e pressionar F2. É possível usar curingas, por meio da <a class="ulink" href="https://ant.apache.org/manual/dirtasks.html#patterns" target="_top">sintaxe ant</a>.
+            </p>
          </div>
       </div>
       <div class="navfooter">

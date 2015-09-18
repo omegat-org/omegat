@@ -152,6 +152,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
         m_dateToSpinner = new javax.swing.JSpinner();
         filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         m_excludeOrphans = new javax.swing.JCheckBox();
+        m_fullHalfWidthInsensitive = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         m_advancedButton = new javax.swing.JButton();
         filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
@@ -548,6 +549,14 @@ public class SearchWindowForm extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         m_advancedVisiblePane.add(m_excludeOrphans, gridBagConstraints);
 
+        org.openide.awt.Mnemonics.setLocalizedText(m_fullHalfWidthInsensitive, OStrings.getString("SW_FULLHALFWIDTH_INSENSITIVE")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        m_advancedVisiblePane.add(m_fullHalfWidthInsensitive, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
@@ -738,5 +747,6 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JCheckBox m_searchTranslation;
     javax.swing.JRadioButton m_searchUntranslated;
     javax.swing.JTextPane m_viewer;
+    javax.swing.JCheckBox m_fullHalfWidthInsensitive;
     // End of variables declaration//GEN-END:variables
 }

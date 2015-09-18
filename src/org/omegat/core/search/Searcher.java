@@ -183,6 +183,11 @@ public class Searcher {
                 text = text.replaceAll(" ", "( |\u00A0)");
             }
 
+            // handle half-width and full-width character insensitive match
+            if (expression.fullHalfWidthInsensitive) {
+                text = StringUtil.fullHalfWidthMatchExpression(text);
+            }
+
             // create a matcher for the search string
             m_matchers.add(Pattern.compile(text, flags).matcher(""));
             break;

@@ -149,6 +149,7 @@ public class Preferences {
     public static final String SEARCHWINDOW_AUTO_SYNC = "search_window_auto_sync";
     public static final String SEARCHWINDOW_BACK_TO_INITIAL_SEGMENT = "search_window_back_to_initial_segment";
     public static final String SEARCHWINDOW_EXCLUDE_ORPHANS = "search_window_exclude_orphans";
+    public static final String SEARCHWINDOW_FULLHALFWIDTH_INSENSITIVE = "search_window_full_half_width_insensitive";
 
     // Search history
     public static final String SEARCHWINDOW_HISTORY_SIZE = "search_window_history_size";

@@ -237,4 +237,19 @@ public class StringUtilTest extends TestCase {
         // matchTo is mixed
         assertSame(text, StringUtil.matchCapitalization(text, "bAzZ", locale));
     }
+
+    public void testFullHalfWidthMatchExpression() {
+        String text = "abc";
+        assertEquals("(abc|\uff41\uff42\uff43)", StringUtil.fullHalfWidthMatchExpression(text));
+        text = "";
+        assertSame(text, StringUtil.fullHalfWidthMatchExpression(text));
+        text = "\u1000";
+        assertSame(text, StringUtil.fullHalfWidthMatchExpression(text));
+    }
+
+    public void testEscapeRegexChars() {
+        String text = "abc";
+        assertSame(text, StringUtil.escapeRegexChars(text));
+        assertEquals("\\(abc\\)", StringUtil.escapeRegexChars("(abc)"));
+    }
 }

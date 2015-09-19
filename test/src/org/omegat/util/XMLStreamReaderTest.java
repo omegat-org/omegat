@@ -54,7 +54,7 @@ public class XMLStreamReaderTest extends TestCase {
         assertEquals("foo", blk.getAttribute("attr"));
         assertNotNull(lst = xml.closeBlock(blk));
         
-        assertEquals(22, lst.size());
+        assertEquals(25, lst.size());
         
         assertOpenTag(lst.get(0), "ascii");
         assertText(lst.get(1), "bar");
@@ -84,7 +84,11 @@ public class XMLStreamReaderTest extends TestCase {
         assertText(lst.get(19), "\uD83C\uDCBF"); // PLAYING CARD RED JOKER
         assertCloseTag(lst.get(20), "a-hex");
         
-        assertStandaloneTag(lst.get(21), "standalone");
+        assertOpenTag(lst.get(21), "named");
+        assertText(lst.get(22), "&<>'\"");
+        assertCloseTag(lst.get(23), "named");
+        
+        assertStandaloneTag(lst.get(24), "standalone");
         
         xml.close();
     }

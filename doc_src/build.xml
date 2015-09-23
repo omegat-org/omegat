@@ -4,7 +4,7 @@
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
  Copyright (C) 2011-2012 Didier Briel
-               2014 Didier Briel
+               2014-2015 Didier Briel
  
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -105,13 +105,21 @@
         </java>
     </target>
     
+    <condition property="fop.home.lib" else="${fop.home}/lib">
+        <isset property="fop.home.lib"/>
+    </condition>
+    
+    <condition property="fop.home.build" else="${fop.home}/build">
+        <isset property="fop.home.build"/>
+    </condition>      
+
     <taskdef name="fop" 
              classname="org.apache.fop.tools.anttasks.Fop">
         <classpath>
-            <fileset dir="${fop.home}/lib">
+            <fileset dir="${fop.home.lib}">
                 <include name="*.jar"/>
             </fileset>
-            <fileset dir="${fop.home}/build">
+            <fileset dir="${fop.home.build}">
                 <include name="fop.jar"/>
                 <include name="fop-hyph.jar" />
              </fileset>

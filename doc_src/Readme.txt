@@ -50,6 +50,10 @@ C:\Program Files\fop-1.1
 
 The location of fop-1.1, dbk and Saxon must be set in doc_src_paths.xml, in the corresponding properties:
     <property name="fop.home" value="C:\Program Files\fop-1.1" />
+Alternatively, it is possible to set the values of fop.home.lib and fop.home.build separately:
+    <property name="fop.home.lib" value="C:\Program Files (x86)\fop-1.1\lib" />
+    <property name="fop.home.build" value="C:\Program Files (x86)\fop-1.1\build" />
+
     <property name="dbk" value="c:\dbk" />
     <property name="saxon" value="C:\Program Files\saxon6-5-5\saxon.jar" />
 

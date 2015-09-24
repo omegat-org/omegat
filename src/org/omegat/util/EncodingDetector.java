@@ -28,6 +28,7 @@ package org.omegat.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.mozilla.universalchardet.UniversalDetector;
 
@@ -35,14 +36,26 @@ public class EncodingDetector {
     
     /**
      * Detect the encoding of the supplied file.
-     * See: https://code.google.com/p/juniversalchardet/
+     * Convenience method for {@link #detectEncoding(java.io.InputStream)}.
      */
     public static String detectEncoding(File inFile) throws IOException {
-        byte[] buffer = new byte[4096];
         FileInputStream stream = new FileInputStream(inFile);
-        
+        try {
+            return detectEncoding(stream);
+        } finally {
+            stream.close();
+        }
+    }
+    
+    /**
+     * Detect the encoding of the supplied file.
+     * @see Original https://code.google.com/p/juniversalchardet/
+     * @see Fork https://github.com/amake/juniversalchardet
+     */
+    public static String detectEncoding(InputStream stream) throws IOException {
         UniversalDetector detector = new UniversalDetector(null);
         
+        byte[] buffer = new byte[4096];
         int read;
         while ((read = stream.read(buffer)) > 0 && !detector.isDone()) {
             detector.handleData(buffer, 0, read);
@@ -52,7 +65,6 @@ public class EncodingDetector {
         
         String encoding = detector.getDetectedCharset();
         detector.reset();
-        stream.close();
         
         return encoding;
     }

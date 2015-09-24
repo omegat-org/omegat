@@ -23,7 +23,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.filters2;
+package org.omegat.util;
 
 import java.io.File;
 import java.io.FileInputStream;

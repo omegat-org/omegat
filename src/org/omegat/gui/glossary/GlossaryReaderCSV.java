@@ -34,7 +34,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.omegat.filters2.EncodingDetector;
+import org.omegat.util.EncodingDetector;
 import org.omegat.util.OConsts;
 
 /**

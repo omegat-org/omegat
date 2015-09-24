@@ -29,6 +29,7 @@
 
 package org.omegat.filters2;
 
+import org.omegat.util.EncodingDetector;
 import java.awt.Dialog;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

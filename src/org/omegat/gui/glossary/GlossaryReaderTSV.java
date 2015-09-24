@@ -39,7 +39,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.omegat.filters2.EncodingDetector;
+import org.omegat.util.EncodingDetector;
 import org.omegat.util.OConsts;
 import org.omegat.util.StringUtil;
 

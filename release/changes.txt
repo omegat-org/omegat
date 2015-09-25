@@ -15,7 +15,7 @@
   - Fails to buid OmegaT users guide on Linux 
   https://sourceforge.net/p/omegat/bugs/769/
 
-  - Wrong encoding of the Portuguese Portuguese UI strings
+  - Wrong encoding of the Portugal Portuguese UI strings
 
 ----------------------------------------------------------------------
  OmegaT 3.5.2 (2015-09-18)

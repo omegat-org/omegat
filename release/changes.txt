@@ -5,7 +5,7 @@
    3 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
-3.5.2 update 1 vs 3.5.1
+3.5.2 update 1 vs 3.5.2
 
   Bug fixes:
 

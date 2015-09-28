@@ -174,8 +174,8 @@ public class EditorTextArea3 extends JEditorPane {
             autoCompleter.setVisible(false);
             
             // where is the mouse
-            int mousepos = viewToModel(e.getPoint());
             if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
+                int mousepos = viewToModel(e.getPoint());
                 boolean changed = controller.goToSegmentAtLocation(getCaretPosition());
                 if (!changed) {
                     if (selectTag(mousepos)) {
@@ -184,6 +184,7 @@ public class EditorTextArea3 extends JEditorPane {
                 }
             }
             if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
+                int mousepos = viewToModel(e.getPoint());
                 JPopupMenu popup = makePopupMenu(mousepos);
                 if (popup.getComponentCount() > 0) {
                     popup.show(EditorTextArea3.this, (int) e.getPoint().getX(), (int) e.getPoint().getY());

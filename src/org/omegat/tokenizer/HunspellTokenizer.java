@@ -44,7 +44,6 @@ import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
 
-
 /**
  * Methods for tokenize string.
  * 
@@ -56,43 +55,43 @@ public class HunspellTokenizer extends BaseTokenizer {
 
     private static Map<Language, File> AFFIX_FILES;
     private static Map<Language, File> DICTIONARY_FILES;
-    
+
     private HunspellDictionary dict;
-    
-    public HunspellDictionary getDict() {
+
+    private HunspellDictionary getDict() {
         if (dict != null) {
             return dict;
         }
-        
+
         Language language;
-        if (Core.getProject().getSourceTokenizer() == this)
+        if (Core.getProject().getSourceTokenizer() == this) {
             language = Core.getProject().getProjectProperties().getSourceLanguage();
-        else
+        } else {
             language = Core.getProject().getProjectProperties().getTargetLanguage();
-        
+        }
+
         if (AFFIX_FILES == null || DICTIONARY_FILES == null) {
             populateInstalledDicts();
         }
-        
+
         File affixFile = AFFIX_FILES.get(language);
         File dictionaryFile = DICTIONARY_FILES.get(language);
-        
-        if (affixFile == null || dictionaryFile == null
-                || !affixFile.exists() || !dictionaryFile.exists()) {
+
+        if (affixFile == null || dictionaryFile == null || !affixFile.exists()
+                || !dictionaryFile.exists()) {
             Log.logErrorRB("HUNSPELL_TOKENIZER_DICT_NOT_INSTALLED", language.getLocale());
         }
-        
+
         try {
             dict = new HunspellDictionary(new FileInputStream(affixFile),
-                    new FileInputStream(dictionaryFile),
-                    getBehavior());
+                    new FileInputStream(dictionaryFile), getBehavior());
             return dict;
         } catch (Exception ex) {
             // Nothing
-        }   
+        }
         return null;
     }
-    
+
     @Override
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
@@ -100,44 +99,44 @@ public class HunspellTokenizer extends BaseTokenizer {
             HunspellDictionary dictionary = getDict();
             if (dictionary == null) {
                 return new StandardTokenizer(getBehavior(),
-                    new StringReader(strOrig));
+                        new StringReader(strOrig));
             }
-            
+
             return new HunspellStemFilter(new StandardTokenizer(getBehavior(),
                     new StringReader(strOrig)), dictionary);
-            
+
             /// TODO: implement stop words checks
         } else {
             return new StandardTokenizer(getBehavior(),
                     new StringReader(strOrig));
         }
     }
-    
+
     @Override
     public String[] getSupportedLanguages() {
-        
+
         populateInstalledDicts();
-        
+
         Set<Language> commonLangs = AFFIX_FILES.keySet();
         commonLangs.retainAll(DICTIONARY_FILES.keySet());
-        
+
         return langsToStrings(commonLangs);
     }
-    
+
     private static void populateInstalledDicts() {
         AFFIX_FILES = new HashMap<Language, File>();
         DICTIONARY_FILES = new HashMap<Language, File>();
-        
+
         String dictionaryDirPath = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY);
         if (dictionaryDirPath.isEmpty()) {
             return;
         }
-        
+
         File dictionaryDir = new File(dictionaryDirPath);
         if (!dictionaryDir.isDirectory()) {
             return;
         }
-        
+
         for (File file : dictionaryDir.listFiles()) {
             String name = file.getName();
             if (name.endsWith(OConsts.SC_AFFIX_EXTENSION)) {
@@ -149,10 +148,9 @@ public class HunspellTokenizer extends BaseTokenizer {
                 DICTIONARY_FILES.put(lang, file);
                 DICTIONARY_FILES.put(new Language(lang.getLanguageCode()), file);
             }
-            
         }
     }
-    
+
     private static String[] langsToStrings(Set<Language> langs) {
         List<String> result = new ArrayList<String>();
         for (Language lang : langs) {

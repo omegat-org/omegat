@@ -256,16 +256,11 @@ public class SpellCheckerHunspell implements ISpellCheckerProvider {
     protected static String mapLibraryName(String libName) {
         String result = System.mapLibraryName(libName);
 
-        switch (Platform.getOsType()) {
-        case MAC64:
-        case MAC32:
+        if (Platform.isMacOSX() && result.endsWith(".jnilib")) {
             // On MacOSX, System.mapLibraryName() returns the .jnilib extension
             // (the suffix for JNI libraries); ordinarily shared libraries have
             // a .dylib suffix
-            if (result.endsWith(".jnilib")) {
-                result = result.substring(0, result.lastIndexOf(".jnilib")) + ".dylib";
-            }
-            break;
+            result = result.substring(0, result.lastIndexOf(".jnilib")) + ".dylib";
         }
 
         return result;

@@ -32,7 +32,6 @@ import java.util.Locale;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.VarExpansion;
 
 /**

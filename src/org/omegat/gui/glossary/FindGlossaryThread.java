@@ -35,6 +35,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
@@ -72,8 +73,6 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
 
     private final String src;
 
-    private List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
-
     private final GlossaryManager manager;
 
     public FindGlossaryThread(final GlossaryTextArea pane, final SourceTextEntry newEntry,
@@ -85,42 +84,50 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
 
     @Override
     protected List<GlossaryEntry> search() {
+        
         ITokenizer tok = Core.getProject().getSourceTokenizer();
         if (tok == null) {
-            return null;
+            return Collections.emptyList();
         }
+        
+        List<GlossaryEntry> entries = manager.getGlossaryEntries(src);
+        if (entries == null) {
+            return Collections.emptyList();
+        }
+        
+        List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
+        
+        // Make comparison case-insensitive
+        Locale loc = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
+        String srcLower = src.toLowerCase(loc);
 
         // Compute source entry tokens
         StemmingMode mode = Preferences.isPreferenceDefault(Preferences.GLOSSARY_STEMMING, true)
                 ? StemmingMode.GLOSSARY
                 : StemmingMode.NONE;
-        Token[] strTokens = tok.tokenizeWords(src, mode);
+        Token[] strTokens = tok.tokenizeWords(srcLower, mode);
 
-        List<GlossaryEntry> entries = manager.getGlossaryEntries(src);
-        if (entries != null) {
-            for (GlossaryEntry glosEntry : entries) {
-                checkEntryChanged();
+        for (GlossaryEntry glosEntry : entries) {
+            checkEntryChanged();
 
-                // Computer glossary entry tokens
-                String glosStr = glosEntry.getSrcText();
-                Token[] glosTokens = tok.tokenizeWords(glosStr, mode);
-                int glosTokensN = glosTokens.length;
-                if (glosTokensN == 0) {
-                    continue;
-                }
+            // Computer glossary entry tokens
+            String glosStr = glosEntry.getSrcText().toLowerCase(loc);
+            Token[] glosTokens = tok.tokenizeWords(glosStr, mode);
+            if (glosTokens.length == 0) {
+                continue;
+            }
 
-                if (DefaultTokenizer.isContainsAll(strTokens, glosTokens, 
-                        Preferences.isPreferenceDefault(Preferences.GLOSSARY_NOT_EXACT_MATCH, true))) {
-                    result.add(glosEntry);
-                    continue;
-                }
-                
-                if (!Core.getProject().getProjectProperties().getSourceLanguage().isSpaceDelimited()
-                        && StringUtil.isCJK(glosEntry.getSrcText()) && src.contains(glosEntry.getSrcText())) {
-                    // This is a CJK word and our source language is not space-delimited, so include if
-                    // word appears anywhere in source string.
-                    result.add(glosEntry);
-                }
+            if (DefaultTokenizer.isContainsAll(strTokens, glosTokens, 
+                    Preferences.isPreferenceDefault(Preferences.GLOSSARY_NOT_EXACT_MATCH, true))) {
+                result.add(glosEntry);
+                continue;
+            }
+            
+            if (!Core.getProject().getProjectProperties().getSourceLanguage().isSpaceDelimited()
+                    && StringUtil.isCJK(glosEntry.getSrcText()) && src.contains(glosEntry.getSrcText())) {
+                // This is a CJK word and our source language is not space-delimited, so include if
+                // word appears anywhere in source string.
+                result.add(glosEntry);
             }
         }
 
@@ -128,8 +135,7 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
         // We reorder entries: 1) by priority, 2) by length, 3) by alphabet
         // Then remove the duplicates and combine the synonyms.
         sortGlossaryEntries(result);
-        result = filterGlossary(result);
-        return result;
+        return filterGlossary(result);
     }
 
     static void sortGlossaryEntries(List<GlossaryEntry> entries) {

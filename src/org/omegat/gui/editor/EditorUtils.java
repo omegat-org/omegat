@@ -35,6 +35,7 @@ import javax.swing.text.Utilities;
 
 import org.omegat.core.Core;
 import org.omegat.gui.editor.IEditor.CHANGE_CASE_TO;
+import org.omegat.tokenizer.ITokenizer.StemmingMode;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 
@@ -144,7 +145,7 @@ public class EditorUtils {
      */
     public static String doChangeCase(String input, CHANGE_CASE_TO toWhat) {
         // tokenize the selection
-        Token[] tokenList = Core.getProject().getTargetTokenizer().tokenizeWordsForSpelling(input);
+        Token[] tokenList = Core.getProject().getTargetTokenizer().tokenizeWords(input, StemmingMode.NONE);
 
         if (toWhat == CHANGE_CASE_TO.CYCLE) {
             int lower = 0;

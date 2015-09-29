@@ -56,7 +56,7 @@ public class LuceneFrenchTokenizer extends BaseTokenizer {
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
             String[] stopWords = stopWordsAllowed ? FrenchAnalyzer.FRENCH_STOP_WORDS
-                    : EMPTY_STOP_WORDS_LIST;
+                    : EMPTY_STRING_LIST;
             return new FrenchAnalyzer(getBehavior(), stopWords).tokenStream("", new StringReader(
                     strOrig));
         } else {

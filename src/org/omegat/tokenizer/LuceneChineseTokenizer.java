@@ -48,7 +48,7 @@ public class LuceneChineseTokenizer extends BaseTokenizer {
     }
     
     @Override
-    public Token[] tokenizeAllExactly(String strOrig) {
+    public Token[] tokenizeVerbatim(String strOrig) {
         return tokenizeByCodePoint(strOrig);
     }
     

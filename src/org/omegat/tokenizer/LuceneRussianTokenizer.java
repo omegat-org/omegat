@@ -46,7 +46,7 @@ public class LuceneRussianTokenizer extends BaseTokenizer {
                 an = new RussianAnalyzer(getBehavior());
             } else {
                 an = new RussianAnalyzer(getBehavior(),
-                        EMPTY_STOP_WORDS_LIST);
+                        EMPTY_STRING_LIST);
             }
             return an.tokenStream("", new StringReader(strOrig));
         } else {

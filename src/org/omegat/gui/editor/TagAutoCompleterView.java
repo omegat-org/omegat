@@ -140,20 +140,20 @@ public class TagAutoCompleterView extends AutoCompleterListView {
         public Token[] tokenizeWords(String str, StemmingMode stemmingMode) {
             return tokenize(str);
         }
+        
+        @Override
+        public String[] tokenizeWordsToStrings(String str, StemmingMode stemmingMode) {
+            return null;
+        }
 
         @Override
-        public Token[] tokenizeWordsForSpelling(String str) {
+        public Token[] tokenizeVerbatim(String str) {
             return tokenize(str);
         }
         
         @Override
-        public String[] tokenizeWordsForDictionary(String str) {
-            return new String[0];
-        }
-
-        @Override
-        public Token[] tokenizeAllExactly(String str) {
-            return tokenize(str);
+        public String[] tokenizeVerbatimToStrings(String str) {
+            return null;
         }
 
         private Token[] tokenize(String str) {
@@ -203,7 +203,7 @@ public class TagAutoCompleterView extends AutoCompleterListView {
         
         @Override
         public String[] getSupportedLanguages() {
-            return new String[0];
+            return null;
         }
     }
 }

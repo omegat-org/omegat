@@ -42,7 +42,7 @@ public class LuceneBrazilianTokenizer extends BaseTokenizer {
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
             String[] stopWords = stopWordsAllowed ? BrazilianAnalyzer.BRAZILIAN_STOP_WORDS
-                    : EMPTY_STOP_WORDS_LIST;
+                    : EMPTY_STRING_LIST;
             return new BrazilianAnalyzer(getBehavior(), stopWords).tokenStream("",
                     new StringReader(strOrig));
         } else {

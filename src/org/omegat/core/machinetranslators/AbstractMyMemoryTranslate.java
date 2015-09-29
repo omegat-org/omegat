@@ -159,8 +159,8 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
             LevenshteinDistance leven = new LevenshteinDistance(); 
             ITokenizer srcTokenizer = Core.getProject().getSourceTokenizer();
 
-            Token[] textTokenArray = srcTokenizer.tokenizeAllExactly(text);
-            Token[] sourceSegTokenArray = srcTokenizer.tokenizeAllExactly(sourceSeg);
+            Token[] textTokenArray = srcTokenizer.tokenizeVerbatim(text);
+            Token[] sourceSegTokenArray = srcTokenizer.tokenizeVerbatim(sourceSeg);
             
             dist = leven.compute(textTokenArray, sourceSegTokenArray);
             return dist;

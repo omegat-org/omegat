@@ -101,7 +101,7 @@ public class LineLengthLimitWriter extends Writer {
             // was empty line
             writeSourceEol();
         } else {
-            Token[] tokens = tokenizer.tokenizeAllExactly(str.toString());
+            Token[] tokens = tokenizer.tokenizeVerbatim(str.toString());
             while (str.length() > 0) {
                 int p = getBreakPos(tokens);
                 breakAt(p, tokens);

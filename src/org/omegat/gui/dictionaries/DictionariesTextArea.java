@@ -62,10 +62,10 @@ import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.tokenizer.ITokenizer;
+import org.omegat.tokenizer.ITokenizer.StemmingMode;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
-import org.omegat.util.Token;
 import org.omegat.util.gui.AlwaysVisibleCaret;
 import org.omegat.util.gui.Styles.EditorColor;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -284,20 +284,13 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
                 return null;
             }
             
+            StemmingMode mode = Preferences.isPreferenceDefault(Preferences.DICTIONARY_FUZZY_MATCHING, true)
+                    ? StemmingMode.MATCHING : StemmingMode.NONE;
+            String[] tokenList = tok.tokenizeWordsToStrings(src, mode);
             Set<String> words = new TreeSet<String>();
-            if (Preferences.isPreferenceDefault(Preferences.DICTIONARY_FUZZY_MATCHING, true)) {
-                String[] tokenList = tok.tokenizeWordsForDictionary(src);
-                for (String tok : tokenList) {
-                    checkEntryChanged();
-                    words.add(tok);
-                }
-            } else {
-                Token[] tokenList = tok.tokenizeWords(src, ITokenizer.StemmingMode.NONE);
-                for (Token tok : tokenList) {
-                    checkEntryChanged();
-                    String w = tok.getTextFromString(src);
-                    words.add(w);
-                }
+            for (String tok : tokenList) {
+                checkEntryChanged();
+                words.add(tok);
             }
             List<DictionaryEntry> result = manager.findWords(words);
 

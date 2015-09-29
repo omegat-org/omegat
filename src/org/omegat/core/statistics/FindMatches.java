@@ -466,7 +466,7 @@ public class FindMatches {
     public Token[] tokenizeAll(String str) {
         Token[] result = tokenizeAllCache.get(str);
         if (result == null) {
-            result = tok.tokenizeAllExactly(str);
+            result = tok.tokenizeVerbatim(str);
             tokenizeAllCache.put(str, result);
         }
         return result;

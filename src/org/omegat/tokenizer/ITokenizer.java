@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
-               2013 Aaron Madlon-Kay
+               2013, 2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -75,46 +75,49 @@ public interface ITokenizer {
 
     /**
      * Breaks a string into word-only tokens. Numbers, tags, and other non-word
-     * tokens are NOT included in the result. Stemming can be used if possible,
-     * depends of StemmingMode.
-     * 
-     * This method used to find 'fizzy matches' entries and to find glossary
-     * entries.
-     * 
+     * tokens are NOT included in the result. Stemming can be used depending on
+     * the supplied {@link StemmingMode}.
+     * <p>
+     * This method is used to find fuzzy matches and glossary entries.
+     * <p>
      * Results can be cached for better performance.
      */
     Token[] tokenizeWords(String str, StemmingMode stemmingMode);
 
     /**
-     * Breaks a string into word-only tokens. Numbers, tags, and other non-word
-     * tokens are NOT included in the result. Stemming must NOT be used.
-     * 
-     * This method used to tokenize string to check spelling and to switch case.
-     * 
-     * There is no sense to cache results.
+     * Breaks a string into word-only strings. Numbers, tags, and other non-word
+     * tokens are NOT included in the result. Stemming can be used depending on
+     * the supplied {@link StemmingMode}.
+     * <p>
+     * When stemming is used, both the original word and its stem may be included
+     * in the results, if they differ.
+     * <p>
+     * This method used for dictionary lookup.
+     * <p>
+     * Results are not cached.
      */
-    Token[] tokenizeWordsForSpelling(String str);
-
-    /**
-     * Breaks a string into word-only substrings. Includes stems. Numbers, tags,
-     * and other non-word tokens are NOT included in the result.
-     * 
-     * This method is used for looking up words in user-supplied natural-language
-     * dictionaries.
-     * 
-     * There is no sense to cache results.
-     */
-    String[] tokenizeWordsForDictionary(String str);
+    String[] tokenizeWordsToStrings(String str, StemmingMode stemmingMode);
 
     /**
      * Breaks a string into tokens. Numbers, tags, and other non-word tokens are
-     * included in the result. Stemming must NOT be used.
-     * 
-     * This method used to mark string differences on UI and to tune similarity.
-     * 
-     * There is no sense to cache results.
+     * included in the result. Stemming is NOT used.
+     * <p>
+     * This method is used to mark string differences in the UI and to tune similarity.
+     * <p>
+     * Results are not cached.
      */
-    Token[] tokenizeAllExactly(String str);
+    Token[] tokenizeVerbatim(String str);
+    
+    /**
+     * Breaks a string into strings. Numbers, tags, and other non-word tokens are
+     * included in the result. Stemming is NOT used.
+     * <p>
+     * This method is used to mark string differences in the UI and for debugging
+     * purposes.
+     * <p>
+     * Results are not cached.
+     */
+    String[] tokenizeVerbatimToStrings(String str);
 
     /**
      * Return an array of language strings (<code>xx-yy</code>) indicating the tokenizer's

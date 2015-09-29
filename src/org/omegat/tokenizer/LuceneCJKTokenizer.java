@@ -42,7 +42,7 @@ public class LuceneCJKTokenizer extends BaseTokenizer {
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
             String[] stopWords = stopWordsAllowed ? CJKAnalyzer.STOP_WORDS
-                    : EMPTY_STOP_WORDS_LIST;
+                    : EMPTY_STRING_LIST;
             return new CJKAnalyzer(getBehavior(), stopWords).tokenStream("", new StringReader(
                     strOrig));
         } else {

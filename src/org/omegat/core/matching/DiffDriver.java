@@ -5,6 +5,7 @@
 
  Copyright (C) 2012 Aaron Madlon-Kay
                2013 Zoltan Bartko
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -32,7 +33,6 @@ import java.util.regex.Pattern;
 
 import org.omegat.core.Core;
 import org.omegat.tokenizer.ITokenizer;
-import org.omegat.util.Token;
 
 import bmsi.util.Diff;
 
@@ -61,9 +61,14 @@ public class DiffDriver {
 
         Render result = new Render();
         
-        String[] originalStrings = tokenize(original);
-        String[] revisedStrings = tokenize(revised);
-        
+        ITokenizer tokenizer = Core.getProject().getSourceTokenizer();
+        if (tokenizer == null) {
+            // Project has probably been closed.
+            return result;
+        }
+
+        String[] originalStrings = tokenizer.tokenizeVerbatimToStrings(original);
+        String[] revisedStrings = tokenizer.tokenizeVerbatimToStrings(revised);
         if (originalStrings == null || revisedStrings == null) {
             return result;
         }
@@ -244,30 +249,6 @@ public class DiffDriver {
             prev = c;
         }
         return true;
-    }
-
-    /**
-     * Use the project's source tokenizer to split a string into token strings.
-     *
-     * @param input String to tokenize
-     * @return Array of String tokens
-     */
-    private static String[] tokenize(String input) {
-        ITokenizer tokenizer = Core.getProject().getSourceTokenizer();
-        
-        if (tokenizer == null) {
-            // Project has probably been closed.
-            return null;
-        }
-
-        Token[] tokens = tokenizer.tokenizeAllExactly(input);
-        String[] strings = new String[tokens.length];
-
-        for (int n = 0; n < tokens.length; n++) {
-            strings[n] = tokens[n].getTextFromString(input);
-        }
-
-        return strings;
     }
 
     /**

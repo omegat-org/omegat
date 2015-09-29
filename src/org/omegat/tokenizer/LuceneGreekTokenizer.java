@@ -46,7 +46,7 @@ public class LuceneGreekTokenizer extends BaseTokenizer {
                 an = new GreekAnalyzer(getBehavior());
             } else {
                 an = new GreekAnalyzer(getBehavior(),
-                        EMPTY_STOP_WORDS_LIST);
+                        EMPTY_STRING_LIST);
             }
             return an.tokenStream("", new StringReader(strOrig));
         } else {

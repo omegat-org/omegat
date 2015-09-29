@@ -73,12 +73,12 @@ public abstract class BaseTokenizer implements ITokenizer {
     protected static final Map<Version, String> supportedBehaviors = new LinkedHashMap<Version, String>(
             Version.values().length);
 
-    protected static final String[] EMPTY_STOP_WORDS_LIST = new String[0];
+    protected static final String[] EMPTY_STRING_LIST = new String[0];
     protected static final Token[] EMPTY_TOKENS_LIST = new Token[0];
     protected static final int DEFAULT_TOKENS_COUNT = 64;
 
     /**
-     * Indicates that {@link #tokenizeAllExactly(String)} should use OmegaT's
+     * Indicates that {@link #tokenizeVerbatim(String)} should use OmegaT's
      * {@link WordIterator} to tokenize "exactly" for display.
      * <p>
      * For language-specific tokenizers that maintain the property that 
@@ -91,6 +91,7 @@ public abstract class BaseTokenizer implements ITokenizer {
      * Indicates the default behavior to use for the tokenizer.
      * Each tokenizer may override this with the version most suitable for that language.
      */
+    @SuppressWarnings("deprecation")
     protected Version defaultBehavior = Version.LUCENE_CURRENT;
 
     protected Version currentBehavior = null;
@@ -145,19 +146,6 @@ public abstract class BaseTokenizer implements ITokenizer {
     public Version getDefaultBehavior() {
         return defaultBehavior;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Token[] tokenizeWordsForSpelling(String str) {
-        return tokenize(str, false, false, true, true);
-    }
-
-    @Override
-    public String[] tokenizeWordsForDictionary(String str) {
-        return tokenizeToStrings(str, true, true, true, true);
-    }
     
     /**
      * {@inheritDoc}
@@ -185,8 +173,8 @@ public abstract class BaseTokenizer implements ITokenizer {
         if (result != null) {
             return result;
         }
-        result = tokenize(strOrig, stemmingMode == StemmingMode.GLOSSARY
-                || stemmingMode == StemmingMode.MATCHING,
+        result = tokenize(strOrig,
+                stemmingMode == StemmingMode.GLOSSARY || stemmingMode == StemmingMode.MATCHING,
                 stemmingMode == StemmingMode.MATCHING,
                 true,
                 true);
@@ -197,19 +185,27 @@ public abstract class BaseTokenizer implements ITokenizer {
         }
         return result;
     }
+    
+    @Override
+    public String[] tokenizeWordsToStrings(String str, StemmingMode stemmingMode) {
+        return tokenizeToStrings(str,
+                stemmingMode == StemmingMode.GLOSSARY || stemmingMode == StemmingMode.MATCHING,
+                stemmingMode == StemmingMode.MATCHING,
+                true,
+                true);
+    }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Token[] tokenizeAllExactly(final String strOrig) {
+    public Token[] tokenizeVerbatim(final String strOrig) {
+        if (StringUtil.isEmpty(strOrig)) {
+            return EMPTY_TOKENS_LIST;
+        }
 
         if (!shouldDelegateTokenizeExactly) {
             return tokenize(strOrig, false, false, false, false);
-        }
-
-        if (strOrig.isEmpty()) {
-            return EMPTY_TOKENS_LIST;
         }
 
         List<Token> result = new ArrayList<Token>(DEFAULT_TOKENS_COUNT);
@@ -225,6 +221,31 @@ public abstract class BaseTokenizer implements ITokenizer {
         }
 
         return result.toArray(new Token[result.size()]);
+    }
+    
+    @Override
+    public String[] tokenizeVerbatimToStrings(String str) {
+        if (StringUtil.isEmpty(str)) {
+            return EMPTY_STRING_LIST;
+        }
+        
+        if (!shouldDelegateTokenizeExactly) {
+            return tokenizeToStrings(str, false, false, false, false);
+        }
+
+        List<String> result = new ArrayList<String>(DEFAULT_TOKENS_COUNT);
+
+        WordIterator iterator = new WordIterator();
+        iterator.setText(str);
+
+        int start = iterator.first();
+        for (int end = iterator.next(); end != BreakIterator.DONE; start = end,
+                end = iterator.next()) {
+            String tokenStr = str.substring(start, end);
+            result.add(tokenStr);
+        }
+
+        return result.toArray(new String[result.size()]);
     }
     
     protected Token[] tokenizeByCodePoint(String strOrig) {
@@ -273,7 +294,7 @@ public abstract class BaseTokenizer implements ITokenizer {
     protected String[] tokenizeToStrings(String str, boolean stemsAllowed, boolean stopWordsAllowed,
             boolean filterDigits, boolean filterWhitespace) {
         if (StringUtil.isEmpty(str)) {
-            return new String[0];
+            return EMPTY_STRING_LIST;
         }
 
         List<String> result = new ArrayList<String>(64);
@@ -342,8 +363,8 @@ public abstract class BaseTokenizer implements ITokenizer {
         for (String input : args) {
             sb.append("Input:\n");
             sb.append(input).append("\n");
-            sb.append("tokenizeAllExactly:\n");
-            sb.append(printTest(tokenizeAllExactly(input), input));
+            sb.append("tokenizeVerbatim:\n");
+            sb.append(printTest(tokenizeVerbatim(input), input));
             sb.append("tokenize:\n");
             sb.append(printTest(tokenize(input, false, false, false, true), input));
             sb.append("tokenize (stemsAllowed):\n");
@@ -354,7 +375,7 @@ public abstract class BaseTokenizer implements ITokenizer {
             sb.append(printTest(tokenize(input, true, true, true, true), input));
             sb.append("tokenize (stemsAllowed filterDigits) (=tokenizeWords(GLOSSARY)):\n");
             sb.append(printTest(tokenize(input, true, false, true, true), input));
-            sb.append("tokenize (filterDigits) (=tokenizeWords(NONE) tokenizeWordsForSpelling):\n");
+            sb.append("tokenize (filterDigits) (=tokenizeWords(NONE)):\n");
             sb.append(printTest(tokenize(input, false, false, true, true), input));
             sb.append("----------------------------------\n");
         }

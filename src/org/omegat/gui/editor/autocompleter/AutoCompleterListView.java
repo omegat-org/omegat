@@ -216,7 +216,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     protected String getLastToken(String text) {
         String token = "";
         ITokenizer tokenizer = getTokenizer();
-        Token[] tokens = tokenizer.tokenizeAllExactly(text);
+        Token[] tokens = tokenizer.tokenizeVerbatim(text);
         
         if (tokens.length != 0) {
             Token lastToken = tokens[tokens.length - 1];

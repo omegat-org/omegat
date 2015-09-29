@@ -35,6 +35,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.tokenizer.ITokenizer.StemmingMode;
 import org.omegat.util.Token;
 import org.omegat.util.gui.Styles;
 
@@ -59,11 +60,11 @@ public class SpellCheckerMarker implements IMarker {
             return null;
         }
         List<Mark> result = new ArrayList<Mark>();
-        for (Token tok : Core.getProject().getTargetTokenizer().tokenizeWordsForSpelling(translationText)) {
-            int st = tok.getOffset();
-            int en = tok.getOffset() + tok.getLength();
-            String word = translationText.substring(st, en);
+        for (Token tok : Core.getProject().getTargetTokenizer().tokenizeWords(translationText, StemmingMode.NONE)) {
+            String word = tok.getTextFromString(translationText);
             if (!Core.getSpellChecker().isCorrect(word)) {
+                int st = tok.getOffset();
+                int en = st + tok.getLength();
                 Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, st, en);
                 m.painter = PAINTER;
                 result.add(m);

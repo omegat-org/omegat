@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2007 Didier Briel, Zoltan Bartko
                2008 Alex Buloichik
-               2015 Didier Briel
+               2015 Didier Briel, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -39,6 +39,7 @@ import org.apache.lucene.util.Version;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.PatternConsts;
+import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 
 /**
@@ -50,6 +51,7 @@ import org.omegat.util.Token;
  * @author Didier Briel
  * @author Zoltan Bartko - bartkozoltan@bartkozoltan.com
  * @author Alex Buloichik
+ * @author Aaron Madlon-Kay
  */
 public class DefaultTokenizer implements ITokenizer {
 
@@ -61,6 +63,7 @@ public class DefaultTokenizer implements ITokenizer {
     private static Map<String, Token[]> tokenCache = new HashMap<String, Token[]>(5000);
 
     private static final Token[] EMPTY_TOKENS_LIST = new Token[0];
+    private static final String[] EMPTY_STRINGS_LIST = new String[0];
 
     public DefaultTokenizer() {
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
@@ -78,25 +81,18 @@ public class DefaultTokenizer implements ITokenizer {
     /**
      * {@inheritDoc}
      */
-    public Token[] tokenizeWordsForSpelling(final String str) {
-        return tokenizeTextNoCache(str, false);
-    }
-    
-    @Override
-    public String[] tokenizeWordsForDictionary(String str) {
-        return tokenizeTextToStringsNoCache(str, false);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public Token[] tokenizeWords(final String strOrig, final StemmingMode stemmingMode) {
+        if (StringUtil.isEmpty(strOrig)) {
+            return EMPTY_TOKENS_LIST;
+        }
+        
         Token[] result;
         synchronized (tokenCache) {
             result = tokenCache.get(strOrig);
         }
-        if (result != null)
+        if (result != null) {
             return result;
+        }
 
         result = tokenizeTextNoCache(strOrig, false);
 
@@ -106,12 +102,23 @@ public class DefaultTokenizer implements ITokenizer {
         }
         return result;
     }
+    
+    @Override
+    public String[] tokenizeWordsToStrings(String str, StemmingMode stemmingMode) {
+        if (StringUtil.isEmpty(str)) {
+            return EMPTY_STRINGS_LIST;
+        }
+        return tokenizeTextToStringsNoCache(str, false);
+    }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Token[] tokenizeAllExactly(final String strOrig) {
+    @Override
+    public Token[] tokenizeVerbatim(final String strOrig) {
         return tokenizeTextNoCache(strOrig, true);
+    }
+    
+    @Override
+    public String[] tokenizeVerbatimToStrings(String str) {
+        return tokenizeTextToStringsNoCache(str, true);
     }
 
     /**
@@ -135,7 +142,7 @@ public class DefaultTokenizer implements ITokenizer {
      * @return array of tokens (all)
      */
     private static Token[] tokenizeTextNoCache(final String strOrig, final boolean all) {
-        if (strOrig.isEmpty()) {
+        if (StringUtil.isEmpty(strOrig)) {
             // fixes bug nr. 1382810 (StringIndexOutOfBoundsException)
             return EMPTY_TOKENS_LIST;
         }
@@ -169,8 +176,8 @@ public class DefaultTokenizer implements ITokenizer {
     }
     
     private static String[] tokenizeTextToStringsNoCache(String str, boolean all) {
-        if (str.isEmpty()) {
-            return new String[0];
+        if (StringUtil.isEmpty(str)) {
+            return EMPTY_STRINGS_LIST;
         }
 
         // create a new token list

@@ -66,7 +66,7 @@ public class TinySegmenterJapaneseTokenizer extends BaseTokenizer {
         
         if (stemsAllowed) {
             String[] stopWords = stopWordsAllowed ? CJKAnalyzer.STOP_WORDS
-                    : EMPTY_STOP_WORDS_LIST;
+                    : EMPTY_STRING_LIST;
             return new StopFilter(getBehavior(), ts, StopFilter.makeStopSet(stopWords));
         }
         

@@ -215,12 +215,12 @@ public abstract class BaseTokenizer implements ITokenizer {
         List<Token> result = new ArrayList<Token>(DEFAULT_TOKENS_COUNT);
 
         WordIterator iterator = new WordIterator();
-        iterator.setText(strOrig.toLowerCase());
+        iterator.setText(strOrig);
 
         int start = iterator.first();
         for (int end = iterator.next(); end != BreakIterator.DONE; start = end,
                 end = iterator.next()) {
-            String tokenStr = strOrig.substring(start, end).toLowerCase();
+            String tokenStr = strOrig.substring(start, end);
             result.add(new Token(tokenStr, start));
         }
 

@@ -47,7 +47,7 @@ public class LuceneSpanishTokenizer extends BaseTokenizer {
                     new StringReader(strOrig));
         } else {
             return new StandardTokenizer(getBehavior(),
-                    new StringReader(strOrig.toLowerCase()));
+                    new StringReader(strOrig));
         }
     }
 }

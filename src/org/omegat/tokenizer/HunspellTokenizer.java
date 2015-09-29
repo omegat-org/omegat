@@ -100,16 +100,16 @@ public class HunspellTokenizer extends BaseTokenizer {
             HunspellDictionary dictionary = getDict();
             if (dictionary == null) {
                 return new StandardTokenizer(getBehavior(),
-                    new StringReader(strOrig.toLowerCase()));
+                    new StringReader(strOrig));
             }
             
             return new HunspellStemFilter(new StandardTokenizer(getBehavior(),
-                    new StringReader(strOrig.toLowerCase())), dictionary);
+                    new StringReader(strOrig)), dictionary);
             
             /// TODO: implement stop words checks
         } else {
             return new StandardTokenizer(getBehavior(),
-                    new StringReader(strOrig.toLowerCase()));
+                    new StringReader(strOrig));
         }
     }
     

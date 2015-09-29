@@ -53,7 +53,7 @@ public class LuceneSmartChineseTokenizer extends BaseTokenizer {
             SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer(getBehavior(), stopWordsAllowed);
             return analyzer.tokenStream("", new StringReader(strOrig));
         } else {
-            return new WordTokenFilter(new SentenceTokenizer(new StringReader(strOrig.toLowerCase())));
+            return new WordTokenFilter(new SentenceTokenizer(new StringReader(strOrig)));
         }
     }
 }

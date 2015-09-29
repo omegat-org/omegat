@@ -59,7 +59,7 @@ public class LuceneChineseTokenizer extends BaseTokenizer {
             return new ChineseAnalyzer().tokenStream("", new StringReader(
                     strOrig));
         } else {
-            return new ChineseTokenizer(new StringReader(strOrig.toLowerCase()));
+            return new ChineseTokenizer(new StringReader(strOrig));
         }
     }
 }

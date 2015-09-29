@@ -45,7 +45,7 @@ public class SnowballGerman2Tokenizer extends BaseTokenizer {
                     new StringReader(strOrig));
         } else {
             return new StandardTokenizer(getBehavior(),
-                    new StringReader(strOrig.toLowerCase()));
+                    new StringReader(strOrig));
         }
     }
 }

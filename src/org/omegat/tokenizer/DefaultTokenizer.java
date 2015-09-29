@@ -144,14 +144,12 @@ public class DefaultTokenizer implements ITokenizer {
         List<Token> tokens = new ArrayList<Token>(64);
 
         // get a word breaker
-        String str = strOrig.toLowerCase(); // HP: possible error, this makes
-                                            // "A" and "a" match, CHECK AND FIX
         BreakIterator breaker = getWordBreaker();
-        breaker.setText(str);
+        breaker.setText(strOrig);
 
         int start = breaker.first();
         for (int end = breaker.next(); end != BreakIterator.DONE; start = end, end = breaker.next()) {
-            String tokenStr = str.substring(start, end);
+            String tokenStr = strOrig.substring(start, end);
             boolean word = false;
             for (int cp, i = 0; i < tokenStr.length(); i += Character.charCount(cp)) {
                 cp = tokenStr.codePointAt(i);
@@ -179,8 +177,6 @@ public class DefaultTokenizer implements ITokenizer {
         List<String> tokens = new ArrayList<String>(64);
 
         // get a word breaker
-        str = str.toLowerCase(); // HP: possible error, this makes
-                                 // "A" and "a" match, CHECK AND FIX
         BreakIterator breaker = getWordBreaker();
         breaker.setText(str);
 

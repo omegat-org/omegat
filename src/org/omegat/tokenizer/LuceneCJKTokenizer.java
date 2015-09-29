@@ -46,7 +46,7 @@ public class LuceneCJKTokenizer extends BaseTokenizer {
             return new CJKAnalyzer(getBehavior(), stopWords).tokenStream("", new StringReader(
                     strOrig));
         } else {
-            return new CJKTokenizer(new StringReader(strOrig.toLowerCase()));
+            return new CJKTokenizer(new StringReader(strOrig));
         }
     }
 }

@@ -291,9 +291,11 @@ public abstract class BaseTokenizer implements ITokenizer {
                 String tokenText = cattr.toString();
                 if (acceptToken(tokenText, filterDigits, filterWhitespace)) {
                     result.add(tokenText);
-                    String origText = str.substring(off.startOffset(), off.endOffset());
-                    if (!origText.toLowerCase().equals(tokenText.toLowerCase())) {
-                        result.add(origText);
+                    if (stemsAllowed) {
+                        String origText = str.substring(off.startOffset(), off.endOffset());
+                        if (!origText.toLowerCase().equals(tokenText.toLowerCase())) {
+                            result.add(origText);
+                        }
                     }
                 }
             }

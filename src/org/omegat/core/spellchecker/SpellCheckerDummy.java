@@ -43,7 +43,7 @@ public class SpellCheckerDummy implements ISpellCheckerProvider {
     }
 
     public List<String> suggest(String word) {
-        return Collections.EMPTY_LIST;
+        return Collections.emptyList();
     }
 
     public void learnWord(String word) {

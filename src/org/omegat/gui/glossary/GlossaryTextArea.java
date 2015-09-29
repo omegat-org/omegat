@@ -238,7 +238,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
 
     /** Clears up the pane. */
     public void clear() {
-        nowEntries = Collections.EMPTY_LIST;
+        nowEntries = Collections.emptyList();
         setText("");
     }
 

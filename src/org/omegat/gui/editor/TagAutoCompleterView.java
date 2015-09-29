@@ -117,10 +117,9 @@ public class TagAutoCompleterView extends AutoCompleterListView {
     
     private static class TagTokenizer implements ITokenizer {
 
-        @SuppressWarnings("unchecked")
         @Override
         public Map<Version, String> getSupportedBehaviors() {
-            return Collections.EMPTY_MAP;
+            return Collections.emptyMap();
         }
 
         @Override

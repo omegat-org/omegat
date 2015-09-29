@@ -728,10 +728,9 @@ public class ScriptingWindow extends JFrame {
         return null;
     }
 
-    @SuppressWarnings("unchecked")
     public List<Mark> getMarksForEntry(String sourceText, String translationText, boolean isActive)
             throws Exception {
-        return Collections.EMPTY_LIST;
+        return Collections.emptyList();
     }
 
     private void onListSelectionChanged() {

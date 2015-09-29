@@ -322,7 +322,7 @@ public class SpellChecker implements ISpellChecker {
      */
     public List<String> suggest(String word) {
         if (isCorrect(word)) {
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
 
         return checker.suggest(normalize(word));

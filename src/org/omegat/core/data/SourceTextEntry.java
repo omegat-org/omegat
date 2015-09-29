@@ -160,7 +160,6 @@ public class SourceTextEntry {
         return duplicates == null ? 0 : duplicates.size();
     }
     
-    @SuppressWarnings("unchecked")
     public List<SourceTextEntry> getDuplicates() {
         if (firstInstance != null) {
             List<SourceTextEntry> result = new ArrayList<SourceTextEntry>(firstInstance.getDuplicates());
@@ -168,8 +167,11 @@ public class SourceTextEntry {
             result.add(0, firstInstance);
             return Collections.unmodifiableList(result);
         }
-        return duplicates == null ? Collections.EMPTY_LIST
-                : Collections.unmodifiableList(duplicates);
+        if (duplicates == null) {
+            return Collections.emptyList();
+        } else {
+            return Collections.unmodifiableList(duplicates);
+        }
     }
     
     public String getSourceTranslation() {

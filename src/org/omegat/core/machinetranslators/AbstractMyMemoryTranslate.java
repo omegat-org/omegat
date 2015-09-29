@@ -29,6 +29,7 @@ package org.omegat.core.machinetranslators;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Locale;
 
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
@@ -119,7 +120,11 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
                 sourceSeg = xpath.evaluate(sourceSegQueryString, tu);
                 targetSeg = xpath.evaluate(targetSegQueryString, tu);
                 
-                dist = getLevensteinDistance(text, sourceSeg);
+                // Make strings lowercase to make comparison case-insensitive.
+                // (Case-sensitive comparison would penalize mere capitalization
+                // differences equally with whole-word differences.)
+                Locale srcLoc = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
+                dist = getLevensteinDistance(text.toLowerCase(srcLoc), sourceSeg.toLowerCase(srcLoc));
 
                 if( dist < lowestEditDistance && !sourceSeg.isEmpty() && !targetSeg.isEmpty() ) {
                     lowestEditDistance = dist;

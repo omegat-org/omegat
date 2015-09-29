@@ -31,10 +31,12 @@ package org.omegat.core.statistics;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
@@ -94,6 +96,7 @@ public class FindMatches {
     private final Pattern removePattern = PatternConsts.getRemovePattern();
 
     private final ITokenizer tok;
+    private final Locale srcLocale;
     private final int maxCount;
 
     /** Result list. */
@@ -125,6 +128,7 @@ public class FindMatches {
      */
     public FindMatches(ITokenizer sourceTokenizer, int maxCount, boolean allowSeparateSegmentMatch, boolean searchExactlyTheSame) {
         tok = sourceTokenizer;
+        srcLocale = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
         this.maxCount = maxCount;
         this.searchExactlyTheSame = searchExactlyTheSame;
         if (allowSeparateSegmentMatch) {
@@ -455,6 +459,9 @@ public class FindMatches {
     }
 
     public Token[] tokenizeNoStem(String str) {
+        // No-stemming token comparisons are intentionally case-insensitive
+        // for matching purposes.
+        str = str.toLowerCase(srcLocale);
         Token[] result = tokenizeNoStemCache.get(str);
         if (result == null) {
             result = tok.tokenizeWords(str, ITokenizer.StemmingMode.NONE);
@@ -464,6 +471,9 @@ public class FindMatches {
     }
 
     public Token[] tokenizeAll(String str) {
+        // Verbatim token comparisons are intentionally case-insensitive.
+        // for matching purposes.
+        str = str.toLowerCase(srcLocale);
         Token[] result = tokenizeAllCache.get(str);
         if (result == null) {
             result = tok.tokenizeVerbatim(str);

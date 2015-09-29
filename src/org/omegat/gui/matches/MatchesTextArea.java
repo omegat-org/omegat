@@ -509,10 +509,6 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         }
     };
 
-    private void mouseOneClick(final int clickedItem, final Point clickedPoint) {
-        // show colored source segment
-    }
-
     private void mouseRightClick(final int clickedItem, final Point clickedPoint) {
         // create the menu
         JPopupMenu popup = new JPopupMenu();

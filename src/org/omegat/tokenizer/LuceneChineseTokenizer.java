@@ -44,7 +44,7 @@ public class LuceneChineseTokenizer extends BaseTokenizer {
     
     @Override
     public Map<Version, String> getSupportedBehaviors() {
-        return Collections.EMPTY_MAP;
+        return Collections.emptyMap();
     }
     
     @Override

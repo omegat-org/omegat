@@ -53,6 +53,11 @@ public class LuceneChineseTokenizer extends BaseTokenizer {
     }
     
     @Override
+    public String[] tokenizeVerbatimToStrings(String strOrig) {
+        return tokenizeByCodePointToStrings(strOrig);
+    }
+    
+    @Override
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {

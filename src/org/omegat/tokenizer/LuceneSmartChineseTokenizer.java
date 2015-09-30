@@ -45,6 +45,11 @@ public class LuceneSmartChineseTokenizer extends BaseTokenizer {
     public Token[] tokenizeVerbatim(String strOrig) {
         return tokenizeByCodePoint(strOrig);
     }
+    
+    @Override
+    public String[] tokenizeVerbatimToStrings(String strOrig) {
+        return tokenizeByCodePointToStrings(strOrig);
+    }
 
     @Override
     protected TokenStream getTokenStream(final String strOrig,

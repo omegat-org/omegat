@@ -190,7 +190,7 @@ public class TokenizerTest extends TestCase {
 //            System.out.print(s.replace("\"", "\\\""));
 //            System.out.print("\", ");
 //        }
-        System.out.print('\n');
+//        System.out.print('\n');
         assertEquals(expected.length, test.length);
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i], test[i]);

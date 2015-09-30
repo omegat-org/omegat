@@ -33,6 +33,7 @@ import java.util.List;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.TagUtil.Tag;
+import org.omegat.util.TagUtil.TagType;
 
 import junit.framework.TestCase;
 
@@ -74,5 +75,44 @@ public class TagUtilTest extends TestCase {
         pp.add(p);
         tagList = TagUtil.buildTagList(str, new SourceTextEntry(null, 0, null, null, pp).getProtectedParts());
         assertEquals("Wrong tags found in '" + str + "'", Arrays.asList(new Tag(4, "<test>case</test>")), tagList);
+    }
+    
+    public void testTagType() {
+        // Only OmegaT tags (per PatternConsts.OMEGAT_TAG_DECOMPILE) can be
+        // anything other than TagType.SINGLE.
+        assertEquals(TagType.START, new Tag(-1, "<x0>").getType());
+        assertEquals(TagType.START, new Tag(-1, "<x10>").getType());
+        assertEquals(TagType.END, new Tag(-1, "</x0>").getType());
+        assertEquals(TagType.SINGLE, new Tag(-1, "<x0/>").getType());
+        // Generic XML-like tags are always TagType.SINGLE.
+        assertEquals(TagType.SINGLE, new Tag(-1, "<x>").getType());
+        assertEquals(TagType.SINGLE, new Tag(-1, "<x/>").getType());
+        assertEquals(TagType.SINGLE, new Tag(-1, "</x>").getType());
+        assertEquals(TagType.SINGLE, new Tag(-1, "</x0/>").getType());
+        assertEquals(TagType.SINGLE, new Tag(-1, "foo").getType());
+    }
+    
+    public void testTagName() {
+        assertEquals("x0", new Tag(-1, "<x0>").getName());
+        assertEquals("x10", new Tag(-1, "<x10>").getName());
+        assertEquals("x0", new Tag(-1, "</x0>").getName());
+        assertEquals("x0", new Tag(-1, "<x0/>").getName());
+        assertEquals("<x>", new Tag(-1, "<x>").getName());
+        assertEquals("<x/>", new Tag(-1, "<x/>").getName());
+        assertEquals("</x>", new Tag(-1, "</x>").getName());
+        assertEquals("</x0/>", new Tag(-1, "</x0/>").getName());
+        assertEquals("foo", new Tag(-1, "foo").getName());
+    }
+    
+    public void testPairedTag() {
+        assertEquals("</x0>", new Tag(-1, "<x0>").getPairedTag());
+        assertEquals("</x10>", new Tag(-1, "<x10>").getPairedTag());
+        assertEquals("<x0>", new Tag(-1, "</x0>").getPairedTag());
+        assertEquals(null, new Tag(-1, "<x0/>").getPairedTag());
+        assertEquals(null, new Tag(-1, "<x>").getPairedTag());
+        assertEquals(null, new Tag(-1, "<x/>").getPairedTag());
+        assertEquals(null, new Tag(-1, "</x>").getPairedTag());
+        assertEquals(null, new Tag(-1, "</x0/>").getPairedTag());
+        assertEquals(null, new Tag(-1, "foo").getPairedTag());
     }
 }

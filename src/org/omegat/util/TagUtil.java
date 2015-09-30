@@ -61,23 +61,39 @@ public class TagUtil {
         }
         
         public TagType getType() {
-            if (tag.length() < 4 || (!tag.startsWith("<") && !tag.endsWith(">"))) {
+            Matcher m = PatternConsts.OMEGAT_TAG_DECOMPILE.matcher(tag);
+            if (!m.find()) {
                 return TagType.SINGLE;
             }
             
-            if (tag.startsWith("</")) {
+            boolean hasFrontSlash = "/".equals(m.group(1));
+            boolean hasBackSlash = "/".equals(m.group(4));
+            
+            if (hasFrontSlash && !hasBackSlash) {
                 return TagType.END;
-            } else if (tag.endsWith("/>")) {
-                return TagType.SINGLE;
             }
-        
-            return TagType.START;
+            
+            if (!hasFrontSlash && !hasBackSlash) {
+                return TagType.START;
+            }
+            
+            return TagType.SINGLE;
         }
         
         public String getName() {
             Matcher m = PatternConsts.OMEGAT_TAG_DECOMPILE.matcher(tag);
-            String name = m.find() ? m.group(2) + m.group(3) : tag;
-            return name;
+            if (!m.find()) {
+                return tag;
+            }
+            
+            boolean hasFrontSlash = "/".equals(m.group(1));
+            boolean hasBackSlash = "/".equals(m.group(4));
+            
+            if (hasFrontSlash && hasBackSlash) {
+                return tag;
+            }
+            
+            return m.group(2) + m.group(3);
         }
         
         public String getPairedTag() {

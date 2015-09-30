@@ -100,9 +100,14 @@ public class TagRepair {
     }
 
     protected static void fixExtraneous(StringBuilder text, Tag tag) {
-        int i = 0;
-        while ((i = text.indexOf(tag.tag, i)) != -1) {
-            text.delete(i, i + tag.tag.length());
+        int tagEnd = tag.pos + tag.tag.length();
+        if (tag.pos > 0 && tagEnd < text.length() && text.substring(tag.pos, tagEnd).equals(tag)) {
+            text.delete(tag.pos, tagEnd);
+        } else {
+            int i = text.indexOf(tag.tag);
+            if (i != -1) {
+                text.delete(i, i + tag.tag.length());
+            }
         }
     }
     

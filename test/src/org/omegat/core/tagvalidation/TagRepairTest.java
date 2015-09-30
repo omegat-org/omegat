@@ -39,6 +39,7 @@ public class TagRepairTest extends TestCase {
         // Fix extraneous
         StringBuilder text = new StringBuilder("Foo bar baz bar bonkers");
         TagRepair.fixExtraneous(text, new Tag(-1, "bar"));
+        TagRepair.fixExtraneous(text, new Tag(-1, "bar"));
         assertEquals("Foo  baz  bonkers", text.toString());
         
         // Fix missing: before

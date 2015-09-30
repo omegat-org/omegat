@@ -49,6 +49,12 @@ public class TokenizerTest extends TestCase {
                 tok.tokenizeWordsToStrings(orig, StemmingMode.MATCHING));
     }
     
+    /**
+     * LuceneJapaneseTokenizer includes two customizations that warrant testing:
+     * <ol><li>Special removal of tags (e.g. &lt;x0/>) when stemming
+     * <li>Re-joining of tags when doing verbatim or non-stemming tokenizing
+     * </ol>
+     */
     public void testJapanese() {
         ITokenizer tok = new LuceneJapaneseTokenizer();
         String orig = "\u6211\u3005\u306E\u3059\u3079\u3066\u306F\u540C\u3058\uFF11\u500B\u306E\u60D1"

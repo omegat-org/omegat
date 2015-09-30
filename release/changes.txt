@@ -2,7 +2,7 @@
  OmegaT 3.5.2 update 2 
 ----------------------------------------------------------------------
    0 Enhancement
-   1 Bug fix
+   2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.5.2 update 2 vs 3.5.2 update 1
@@ -11,6 +11,9 @@
 
   - Spell Checking issue with a Turkish character 
   https://sourceforge.net/p/omegat/bugs/771/
+
+  - Tag validation could wrongly mention bad nesting for custom tags.
+Tag nesting is now only tested for OmegaT tags.
 
 ----------------------------------------------------------------------
  OmegaT 3.5.2 update 1 (2015-09-25)

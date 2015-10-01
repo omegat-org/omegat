@@ -94,6 +94,7 @@ import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.DragTargetOverlay;
@@ -135,6 +136,10 @@ public class ProjectFilesListController {
         m_parent = parent;
 
         list = new ProjectFilesList();
+        
+        if (Platform.isMacOSX()) {
+            OSXIntegration.enableFullScreen(list);
+        }
 
         createTableFiles();
         createTableTotal();

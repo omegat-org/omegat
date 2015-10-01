@@ -99,17 +99,8 @@ public class OSXIntegration {
                 }
                 doAfterLoad.clear();
             }
-            try {
-                // Enable full-screen mode:
-                //   FullScreenUtilities.setWindowCanFullScreen(java.awt.Window, boolean)
-                Class<?> utilClass = Class.forName("com.apple.eawt.FullScreenUtilities");
-                Method setWindowCanFullScreen = utilClass.getMethod("setWindowCanFullScreen",
-                        new Class<?>[] { java.awt.Window.class, Boolean.TYPE });
-                Window window = Core.getMainWindow().getApplicationFrame();
-                setWindowCanFullScreen.invoke(utilClass, window, true);
-            } catch (Exception ex) {
-                Log.log(ex);
-            }
+            Window window = Core.getMainWindow().getApplicationFrame();
+            enableFullScreen(window);
         }
         @Override
         public void onApplicationShutdown() {
@@ -263,6 +254,19 @@ public class OSXIntegration {
             //   app.setOpenFileHandler(handler);
             Method setOpenFileHandler = getAppClass().getDeclaredMethod("setOpenFileHandler", openFilesHandlerClass);
             setOpenFileHandler.invoke(getApp(), handler);
+        } catch (Exception ex) {
+            Log.log(ex);
+        }
+    }
+    
+    public static void enableFullScreen(Window window) {
+        try {
+            // Enable full-screen mode:
+            //   FullScreenUtilities.setWindowCanFullScreen(java.awt.Window, boolean)
+            Class<?> utilClass = Class.forName("com.apple.eawt.FullScreenUtilities");
+            Method setWindowCanFullScreen = utilClass.getMethod("setWindowCanFullScreen",
+                    new Class<?>[] { java.awt.Window.class, Boolean.TYPE });
+            setWindowCanFullScreen.invoke(utilClass, window, true);
         } catch (Exception ex) {
             Log.log(ex);
         }

@@ -677,78 +677,16 @@ public class Preferences {
     }
 
     private static void doLoad() {
+        // mark as loaded - if the load fails, there's no use
+        // trying again later
+        m_loaded = true;
+
+        XMLStreamReader xml = new XMLStreamReader();
+        xml.killEmptyBlocks();
+
         try {
-            // mark as loaded - if the load fails, there's no use
-            // trying again later
-            m_loaded = true;
-
-            XMLStreamReader xml = new XMLStreamReader();
-            xml.killEmptyBlocks();
-            
-            File prefsFile = new File(StaticUtils.getConfigDir() + FILE_PREFERENCES);
-            // If user prefs don't exist, fall back to defaults (possibly) bundled with OmegaT.
-            if (!prefsFile.exists()) {
-                prefsFile = new File(StaticUtils.installDir(), FILE_PREFERENCES);
-            }
-            // If no prefs are found so far, look inside JAR for defaults. Useful for e.g. Web Start.
-            if (prefsFile.exists()) {
-                xml.setStream(prefsFile);
-            } else {
-                InputStream is = Preferences.class.getResourceAsStream(FILE_PREFERENCES);
-                if (is == null) {
-                    throw new FileNotFoundException("No prefs found of any kind.");
-                } else {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                    xml.setStream(br);
-                }
-            }
-            
-            XMLBlock blk;
-            List<XMLBlock> lst;
-
-            m_preferenceMap.clear();
-            String pref;
-            String val;
-            // advance to omegat tag
-            if (xml.advanceToTag("omegat") == null)
-                return;
-
-            // advance to project tag
-            if ((blk = xml.advanceToTag("preference")) == null)
-                return;
-
-            String ver = blk.getAttribute("version");
-            if (ver != null && !ver.equals("1.0")) {
-                // unsupported preference file version - abort read
-                return;
-            }
-
-            lst = xml.closeBlock(blk);
-            if (lst == null)
-                return;
-
-            for (int i = 0; i < lst.size(); i++) {
-                blk = lst.get(i);
-                if (blk.isClose())
-                    continue;
-
-                if (!blk.isTag())
-                    continue;
-
-                pref = blk.getTagName();
-                blk = lst.get(++i);
-                if (blk.isClose()) {
-                //allow empty string as a preference value
-                    val = "";
-                } else {
-                    val = blk.getText();
-                }
-                if (pref != null && val != null) {
-                    // valid match - record these
-                    m_preferenceMap.put(pref, m_valList.size());
-                    m_nameList.add(pref);
-                    m_valList.add(val);
-                }
+            if (setPreferencesSource(xml)) {
+                readXmlPrefs(xml);
             }
         } catch (TranslationException te) {
             // error loading preference file - keep whatever was
@@ -766,12 +704,16 @@ public class Preferences {
             // unsupported encoding - forget about it
             Log.logErrorRB("PM_UNSUPPORTED_ENCODING");
             Log.log(e3);
-        } catch (FileNotFoundException ex) {
-            // there is no config file yet
         } catch (IOException e4) {
             // can't read file - forget about it and move on
             Log.logErrorRB("PM_ERROR_READING_FILE");
             Log.log(e4);
+        } finally {
+            try {
+                xml.close();
+            } catch (IOException ex) {
+                Log.log(ex);
+            }
         }
 
         File srxFile = new File(StaticUtils.getConfigDir() + SRX.CONF_SENTSEG);
@@ -781,24 +723,114 @@ public class Preferences {
         }
     }
 
+    /**
+     * Set prefs reading source. Returns true on success, false on failure.
+     * Tries these sources in order:
+     * <ol>
+     * <li>omegat.prefs in config dir
+     * <li>omegat.prefs in install dir (defaults supplied with local install)
+     * <li>omegat.prefs inside JAR (defaults supplied inside app, e.g. for Web
+     * Start)
+     * </ol>
+     * 
+     * @param xml
+     *            Reader to set source on
+     * @return true on success, false on failure
+     * @throws TranslationException
+     * @throws IOException
+     * @throws UnsupportedEncodingException
+     * @throws FileNotFoundException
+     */
+    private static boolean setPreferencesSource(XMLStreamReader xml) throws FileNotFoundException,
+            UnsupportedEncodingException, IOException, TranslationException {
+        File prefsFile = new File(StaticUtils.getConfigDir(), FILE_PREFERENCES);
+        // If user prefs don't exist, fall back to defaults (possibly) bundled with OmegaT.
+        if (!prefsFile.exists()) {
+            prefsFile = new File(StaticUtils.installDir(), FILE_PREFERENCES);
+        }
+        // If no prefs are found so far, look inside JAR for defaults. Useful for e.g. Web Start.
+        if (prefsFile.exists()) {
+            xml.setStream(prefsFile);
+            return true;
+        }
+        InputStream is = Preferences.class.getResourceAsStream(FILE_PREFERENCES);
+        if (is == null) {
+            return false;
+        }
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        xml.setStream(br);
+        return true;
+    }
+
+    private static void readXmlPrefs(XMLStreamReader xml) throws TranslationException {
+        XMLBlock blk;
+        List<XMLBlock> lst;
+
+        m_preferenceMap.clear();
+        String pref;
+        String val;
+        // advance to omegat tag
+        if (xml.advanceToTag("omegat") == null) {
+            return;
+        }
+        // advance to project tag
+        if ((blk = xml.advanceToTag("preference")) == null) {
+            return;
+        }
+        String ver = blk.getAttribute("version");
+        if (ver != null && !ver.equals("1.0")) {
+            // unsupported preference file version - abort read
+            return;
+        }
+        lst = xml.closeBlock(blk);
+        if (lst == null) {
+            return;
+        }
+        for (int i = 0; i < lst.size(); i++) {
+            blk = lst.get(i);
+            if (blk.isClose()) {
+                continue;
+            }
+            if (!blk.isTag()) {
+                continue;
+            }
+            pref = blk.getTagName();
+            blk = lst.get(++i);
+            if (blk.isClose()) {
+                // allow empty string as a preference value
+                val = "";
+            } else {
+                val = blk.getText();
+            }
+            if (pref != null && val != null) {
+                // valid match - record these
+                m_preferenceMap.put(pref, m_valList.size());
+                m_nameList.add(pref);
+                m_valList.add(val);
+            }
+        }
+    }
+
     private static void doSave() throws IOException {
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
                 StaticUtils.getConfigDir() + FILE_PREFERENCES), "UTF-8"));
-
-        out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
-        out.write("<omegat>\n");
-        out.write("  <preference version=\"1.0\">\n");
-
-        for (int i = 0; i < m_nameList.size(); i++) {
-            String name = m_nameList.get(i);
-            String val = StaticUtils.makeValidXML(m_valList.get(i));
-            out.write("    <" + name + ">");
-            out.write(val);
-            out.write("</" + name + ">\n");
+        try {
+            out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
+            out.write("<omegat>\n");
+            out.write("  <preference version=\"1.0\">\n");
+    
+            for (int i = 0; i < m_nameList.size(); i++) {
+                String name = m_nameList.get(i);
+                String val = StaticUtils.makeValidXML(m_valList.get(i));
+                out.write("    <" + name + ">");
+                out.write(val);
+                out.write("</" + name + ">\n");
+            }
+            out.write("  </preference>\n");
+            out.write("</omegat>\n");
+        } finally {
+            out.close();
         }
-        out.write("  </preference>\n");
-        out.write("</omegat>\n");
-        out.close();
         m_changed = false;
     }
 

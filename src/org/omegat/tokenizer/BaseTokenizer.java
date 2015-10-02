@@ -41,6 +41,7 @@ import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.util.Version;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.comments.ICommentProvider;
@@ -327,7 +328,7 @@ public abstract class BaseTokenizer implements ITokenizer {
                 String tokenText = cattr.toString();
                 if (acceptToken(tokenText, filterDigits, filterWhitespace)) {
                     result.add(tokenText);
-                    if (stemsAllowed && loc != null) {
+                    if (stemsAllowed) {
                         String origText = str.substring(off.startOffset(), off.endOffset());
                         if (!origText.toLowerCase(loc).equals(tokenText.toLowerCase(loc))) {
                             result.add(origText);
@@ -369,21 +370,28 @@ public abstract class BaseTokenizer implements ITokenizer {
     @Override
     public String[] getSupportedLanguages() {
         Tokenizer ann = getClass().getAnnotation(Tokenizer.class);
-        return ann == null ? new String[0] : ann.languages();
+        if (ann == null) {
+            throw new RuntimeException(getClass().getName() + " must have a "
+                    + Tokenizer.class.getName() + " annotation available at runtime.");
+        }
+        return ann.languages();
     }
     
     protected Language getLanguage() {
         String[] languages = getSupportedLanguages();
-        if (languages == null || languages.length == 0) {
-            return null;
-        }
-        if (languages[0] == Tokenizer.DISCOVER_AT_RUNTIME) {
-            if (Core.getProject().getSourceTokenizer() == this) {
-                return Core.getProject().getProjectProperties().getSourceLanguage();
-            } else if (Core.getProject().getTargetTokenizer() == this) {
-                return Core.getProject().getProjectProperties().getTargetLanguage();
+        if (languages.length == 0 || languages[0] == Tokenizer.DISCOVER_AT_RUNTIME) {
+            IProject proj = Core.getProject();
+            if (proj == null) {
+                throw new RuntimeException("This tokenizer's language can only be "
+                        + "determined in the context of a project, but project is null.");
+            } else if (proj.getSourceTokenizer() == this) {
+                return proj.getProjectProperties().getSourceLanguage();
+            } else if (proj.getTargetTokenizer() == this) {
+                return proj.getProjectProperties().getTargetLanguage();
             } else {
-                return null;
+                throw new RuntimeException("This tokenizer's language can only be "
+                        + "determined in the context of a project, but is not assigned "
+                        + "to current project.");
             }
         }
         return new Language(languages[0]);

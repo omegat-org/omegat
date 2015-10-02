@@ -38,7 +38,6 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.hunspell.HunspellDictionary;
 import org.apache.lucene.analysis.hunspell.HunspellStemFilter;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
-import org.omegat.core.Core;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -63,17 +62,11 @@ public class HunspellTokenizer extends BaseTokenizer {
             return dict;
         }
 
-        Language language;
-        if (Core.getProject().getSourceTokenizer() == this) {
-            language = Core.getProject().getProjectProperties().getSourceLanguage();
-        } else {
-            language = Core.getProject().getProjectProperties().getTargetLanguage();
-        }
-
         if (AFFIX_FILES == null || DICTIONARY_FILES == null) {
             populateInstalledDicts();
         }
 
+        Language language = getLanguage();
         File affixFile = AFFIX_FILES.get(language);
         File dictionaryFile = DICTIONARY_FILES.get(language);
 

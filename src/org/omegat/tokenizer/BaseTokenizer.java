@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -43,6 +44,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.comments.ICommentProvider;
+import org.omegat.util.Language;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 
@@ -316,6 +318,8 @@ public abstract class BaseTokenizer implements ITokenizer {
         
         CharTermAttribute cattr = in.getAttribute(CharTermAttribute.class);
         OffsetAttribute off = in.getAttribute(OffsetAttribute.class);
+        
+        Locale loc = stemsAllowed ? getLanguage().getLocale() : null;
 
         try {
             in.reset();
@@ -323,9 +327,9 @@ public abstract class BaseTokenizer implements ITokenizer {
                 String tokenText = cattr.toString();
                 if (acceptToken(tokenText, filterDigits, filterWhitespace)) {
                     result.add(tokenText);
-                    if (stemsAllowed) {
+                    if (stemsAllowed && loc != null) {
                         String origText = str.substring(off.startOffset(), off.endOffset());
-                        if (!origText.toLowerCase().equals(tokenText.toLowerCase())) {
+                        if (!origText.toLowerCase(loc).equals(tokenText.toLowerCase(loc))) {
                             result.add(origText);
                         }
                     }
@@ -366,6 +370,23 @@ public abstract class BaseTokenizer implements ITokenizer {
     public String[] getSupportedLanguages() {
         Tokenizer ann = getClass().getAnnotation(Tokenizer.class);
         return ann == null ? new String[0] : ann.languages();
+    }
+    
+    protected Language getLanguage() {
+        String[] languages = getSupportedLanguages();
+        if (languages == null || languages.length == 0) {
+            return null;
+        }
+        if (languages[0] == Tokenizer.DISCOVER_AT_RUNTIME) {
+            if (Core.getProject().getSourceTokenizer() == this) {
+                return Core.getProject().getProjectProperties().getSourceLanguage();
+            } else if (Core.getProject().getTargetTokenizer() == this) {
+                return Core.getProject().getProjectProperties().getTargetLanguage();
+            } else {
+                return null;
+            }
+        }
+        return new Language(languages[0]);
     }
 
     protected String test(String... args) {

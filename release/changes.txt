@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.2 update 2 
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.5.2 update 2 vs 3.5.2 update 1
+
+  Implemented requests:  
+
+  - Add sentence case to Shift+F3 case change 
+  https://sourceforge.net/p/omegat/feature-requests/1134/
 
   Bug fixes:
 

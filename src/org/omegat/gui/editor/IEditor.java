@@ -51,9 +51,9 @@ public interface IEditor {
         /** lower case */
         LOWER,
         /** title case for whole string */
-        TITLE,
+        SENTENCE,
         /** title case for each token in string */
-        TITLE_TOKENS,
+        TITLE,
         /** upper case */
         UPPER,
         /** cycle between cases */

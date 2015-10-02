@@ -189,7 +189,7 @@ public class EditorUtils {
         }
         
         Locale locale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
-        if (toWhat == CHANGE_CASE_TO.TITLE) {
+        if (toWhat == CHANGE_CASE_TO.SENTENCE) {
             return StringUtil.toTitleCase(input, locale);
         }
 
@@ -201,7 +201,7 @@ public class EditorUtils {
             String tokText = token.getTextFromString(input);
             String result = toWhat == CHANGE_CASE_TO.LOWER ? tokText.toLowerCase(locale)
                     : toWhat == CHANGE_CASE_TO.UPPER ? tokText.toUpperCase(locale)
-                    : toWhat == CHANGE_CASE_TO.TITLE_TOKENS ? StringUtil.toTitleCase(tokText, locale)
+                    : toWhat == CHANGE_CASE_TO.TITLE ? StringUtil.toTitleCase(tokText, locale)
                     : tokText;
 
             // replace this token
@@ -230,7 +230,7 @@ public class EditorUtils {
         }
         
         if ((title > 0 || ambiguous > 0) && lower > 0 && upper == 0 && mixed == 0) {
-            return CHANGE_CASE_TO.TITLE_TOKENS;
+            return CHANGE_CASE_TO.TITLE;
         }
         
         if (mixed > 0 || presentCaseTypes > 1) {
@@ -238,7 +238,7 @@ public class EditorUtils {
         }
 
         if (lower > 0) {
-            return CHANGE_CASE_TO.TITLE;
+            return CHANGE_CASE_TO.SENTENCE;
         }
 
         if (title > 0) {

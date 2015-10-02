@@ -308,6 +308,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         switchCaseSubMenu.add(lowerCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_LOWER"));
         switchCaseSubMenu.add(upperCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_UPPER"));
         switchCaseSubMenu.add(titleCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_TITLE"));
+        switchCaseSubMenu.add(sentenceCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_SENTENCE"));
         switchCaseSubMenu.add(new JSeparator());
         switchCaseSubMenu.add(cycleSwitchCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_CYCLE"));
 
@@ -747,6 +748,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem projectAccessCurrentSourceDocumentMenuItem;
     JMenuItem projectAccessCurrentTargetDocumentMenuItem;
     JMenuItem projectAccessWriteableGlossaryMenuItem;
+    JMenuItem sentenceCaseMenuItem;
     JMenu switchCaseSubMenu;
     JMenuItem titleCaseMenuItem;
     JMenu toolsMenu;

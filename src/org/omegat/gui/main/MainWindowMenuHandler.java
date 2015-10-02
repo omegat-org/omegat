@@ -556,6 +556,10 @@ public class MainWindowMenuHandler {
         Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.CYCLE);
     }
 
+    public void sentenceCaseMenuItemActionPerformed() {
+        Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.SENTENCE);
+    }
+
     public void titleCaseMenuItemActionPerformed() {
         Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.TITLE);
     }

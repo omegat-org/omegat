@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.2 update 2 
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -11,6 +11,12 @@
 
   - Add sentence case to Shift+F3 case change 
   https://sourceforge.net/p/omegat/feature-requests/1134/
+
+  Other changes:
+
+  - Mac OS X: It is now possible to make the project files list 
+"truly" full-screen. On OS X 10.11 this means you can have the main 
+window and the project files window open side-by-side in split view.
 
   Bug fixes:
 

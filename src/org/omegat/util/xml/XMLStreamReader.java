@@ -1195,7 +1195,9 @@ public class XMLStreamReader {
 
     /** Closes the TMX file */
     public void close() throws IOException {
-        m_bufferedReader.close();
+        if (m_bufferedReader != null) {
+            m_bufferedReader.close();
+        }
     }
 
     // /////////////////////////////////////////////////////////////

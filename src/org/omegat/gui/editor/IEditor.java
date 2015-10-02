@@ -50,8 +50,10 @@ public interface IEditor {
     enum CHANGE_CASE_TO {
         /** lower case */
         LOWER,
-        /** title case */
+        /** title case for whole string */
         TITLE,
+        /** title case for each token in string */
+        TITLE_TOKENS,
         /** upper case */
         UPPER,
         /** cycle between cases */

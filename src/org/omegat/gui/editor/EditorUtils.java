@@ -187,17 +187,21 @@ public class EditorUtils {
 
             toWhat = determineTargetCase(lower, upper, title, mixed, ambiguous);
         }
+        
+        Locale locale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
+        if (toWhat == CHANGE_CASE_TO.TITLE) {
+            return StringUtil.toTitleCase(input, locale);
+        }
 
         StringBuilder buffer = new StringBuilder(input);
         int lengthIncrement = 0;
-        Locale locale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
         
         for (Token token : tokenList) {
             // find out the case and change to the selected
             String tokText = token.getTextFromString(input);
             String result = toWhat == CHANGE_CASE_TO.LOWER ? tokText.toLowerCase(locale)
                     : toWhat == CHANGE_CASE_TO.UPPER ? tokText.toUpperCase(locale)
-                    : toWhat == CHANGE_CASE_TO.TITLE ? StringUtil.toTitleCase(tokText, locale)
+                    : toWhat == CHANGE_CASE_TO.TITLE_TOKENS ? StringUtil.toTitleCase(tokText, locale)
                     : tokText;
 
             // replace this token
@@ -223,6 +227,10 @@ public class EditorUtils {
         }
         if (mixed > 0) {
             presentCaseTypes++;
+        }
+        
+        if ((title > 0 || ambiguous > 0) && lower > 0 && upper == 0 && mixed == 0) {
+            return CHANGE_CASE_TO.TITLE_TOKENS;
         }
         
         if (mixed > 0 || presentCaseTypes > 1) {

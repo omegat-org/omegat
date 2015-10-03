@@ -3,8 +3,12 @@
  * Global spell checking
  *
  * @author  Piotr Kulik
- * @date    2014-05-14
- * @version 0.4
+ * @date    2015-10-03
+ * @version 0.5
+ *
+ * Changes since 0.4:
+ * - update to current changes in Tokenizers code
+ * - added possibility to skip segments where target is the same as source
  *
  * Changes since 0.3:
  * - added localization
@@ -48,6 +52,8 @@ removeOmegaTags = true
 replaceCustomTags = true
 // if TRUE fragments defined for removal will be removed
 removeDefinedFragments = true
+// if TRUE 
+skipIdenticalSegments = false
 
 import groovy.swing.SwingBuilder
 import groovy.beans.Bindable
@@ -76,6 +82,7 @@ import org.omegat.util.Token
 import java.util.Comparator
 import java.util.regex.Matcher
 import java.util.regex.Pattern
+import org.omegat.tokenizer.ITokenizer.StemmingMode
 
 class SpellcheckerData {
     @Bindable data = [];
@@ -164,7 +171,7 @@ def spellcheck() {
 
             for (j in 0 ..< terms.size()) {
                 term = terms[j]
-                for (Token tok in Core.getProject().getTargetTokenizer().tokenizeWordsForSpelling(term)) {
+                for (Token tok in Core.getProject().getTargetTokenizer().tokenizeWords(term, StemmingMode.NONE)) {
                     String word = tok.getTextFromString(term);
                     if (!Core.getSpellChecker().isCorrect(word)) {
                         glossary1.add(ignoreGlossaryCase ? word.toLowerCase() : word);
@@ -193,9 +200,13 @@ def spellcheck() {
                 continue;
             }
 
+	    if (skipIdenticalSegments && source == target) {
+		continue;
+	    }
+
             target = cleanupTarget(target)
 
-            for (Token tok in Core.getProject().getTargetTokenizer().tokenizeWordsForSpelling(target)) {
+            for (Token tok in Core.getProject().getTargetTokenizer().tokenizeWords(target, StemmingMode.NONE)) {
                 String word = tok.getTextFromString(target);
                 if (!glossary1.contains(ignoreGlossaryCase ? word.toLowerCase() : word)) {
                     if (!Core.getSpellChecker().isCorrect(word)) {
@@ -397,7 +408,13 @@ def interfejs(locationxy = new Point(0, 0), width = 500, height = 550, scrollpos
                     replaceCustomTags = !replaceCustomTags;
                 },
                 constraints:gbc(gridx:1, gridy:1, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
-            checkBox(text:'<html>' + res.getString("cbRemoveOmegaTTags") + '</html>',
+            checkBox(text:res.getString("cbSkipIdenticalSegments"),
+                selected: skipIdenticalSegments,
+                actionPerformed: {
+                    skipIdenticalSegments = !skipIdenticalSegments;
+                },
+                constraints:gbc(gridx:2, gridy:1, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,5]))
+	    checkBox(text:'<html>' + res.getString("cbRemoveOmegaTTags") + '</html>',
                 selected: removeOmegaTags,
                 actionPerformed: {
                     removeOmegaTags = !removeOmegaTags;

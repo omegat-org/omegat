@@ -34,6 +34,7 @@ import java.awt.event.*
 import java.awt.BorderLayout as BL
 import java.awt.GridBagConstraints
 import org.omegat.core.Core
+import org.omegat.tokenizer.ITokenizer.StemmingMode
 
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
@@ -155,7 +156,7 @@ ruleset = [
                 },
             (nameSpellErr): {s, t -> if (t != QA_empty) {
                 def spellerror = []
-                tokenizer.tokenizeWordsForSpelling( t ).each {
+                tokenizer.tokenizeWords(t, StemmingMode.NONE).each {
                     def (int a, int b) = [it.offset, it.offset + it.length]
                     def word = t.substring( a, b )
                         if (!checker.isCorrect(word)) {

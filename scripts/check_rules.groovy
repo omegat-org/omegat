@@ -5,8 +5,8 @@
  * @author  Piotr Kulik
  * @author  Kos Ivantsov
  * @author  Didier Briel
- * @date    2014-06-05
- * @version 0.6
+ * @date    2015-10-03
+ * @version 0.7
  */
 
 // if FALSE only current file will be checked

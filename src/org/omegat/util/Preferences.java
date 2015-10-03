@@ -744,15 +744,15 @@ public class Preferences {
     private static boolean setPreferencesSource(XMLStreamReader xml) throws FileNotFoundException,
             UnsupportedEncodingException, IOException, TranslationException {
         File prefsFile = new File(StaticUtils.getConfigDir(), FILE_PREFERENCES);
-        // If user prefs don't exist, fall back to defaults (possibly) bundled with OmegaT.
         if (!prefsFile.exists()) {
+            // If user prefs don't exist, fall back to defaults (possibly) bundled with OmegaT.
             prefsFile = new File(StaticUtils.installDir(), FILE_PREFERENCES);
         }
-        // If no prefs are found so far, look inside JAR for defaults. Useful for e.g. Web Start.
         if (prefsFile.exists()) {
             xml.setStream(prefsFile);
             return true;
         }
+        // If no prefs are found so far, look inside JAR for defaults. Useful for e.g. Web Start.
         InputStream is = Preferences.class.getResourceAsStream(FILE_PREFERENCES);
         if (is == null) {
             return false;

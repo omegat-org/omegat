@@ -43,7 +43,6 @@ import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.util.Language;
 import org.omegat.util.PatternConsts;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
 /**
@@ -323,7 +322,7 @@ public abstract class ParseEntry implements IParseCallback {
             r = PatternConsts.OMEGAT_TAG.matcher(r).replaceAll("");
         }
 
-        r = StaticUtils.fixChars(r);
+        r = StringUtil.removeXMLInvalidChars(r);
 
         return r;
     }

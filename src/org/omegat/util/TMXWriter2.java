@@ -177,7 +177,7 @@ public class TMXWriter2 {
         
         // add note
         if (entry.note != null && !entry.note.equals("")) {
-            String note = StaticUtils.fixChars(entry.note);
+            String note = StringUtil.removeXMLInvalidChars(entry.note);
             if (forceValidTMX) {
                 note = TagUtil.stripXmlTags(note);
             }
@@ -189,7 +189,7 @@ public class TMXWriter2 {
         }
 
         // write source segment
-        source = StaticUtils.fixChars(source);
+        source = StringUtil.removeXMLInvalidChars(source);
         if (forceValidTMX) {
             source = TagUtil.stripXmlTags(source);
         }
@@ -213,7 +213,7 @@ public class TMXWriter2 {
 
         // write target segment
         if (translation != null) {
-            translation = StaticUtils.fixChars(translation);
+            translation = StringUtil.removeXMLInvalidChars(translation);
             if (forceValidTMX) {
                 translation = TagUtil.stripXmlTags(translation);
             }

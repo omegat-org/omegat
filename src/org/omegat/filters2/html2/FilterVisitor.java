@@ -52,7 +52,7 @@ import org.htmlparser.visitors.NodeVisitor;
 import org.omegat.core.Core;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 /**
  * The part of HTML filter that actually does the job. This class is called back
@@ -597,7 +597,7 @@ public class FilterVisitor extends NodeVisitor {
             }
             
             if (Core.getFilterMaster().getConfig().isRemoveSpacesNonseg()) {
-                compressed = StaticUtils.compressSpaces(uncompressed);
+                compressed = StringUtil.compressSpaces(uncompressed);
             } else {
                 compressed = uncompressed;
             }

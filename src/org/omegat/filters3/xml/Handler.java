@@ -303,8 +303,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         for (Entity entity : externalEntities) {
             if (entity.isInternal())
                 continue;
-            if (StaticUtils.equal(publicId, entity.getPublicId())
-                    && StaticUtils.equal(systemId, entity.getSystemId()))
+            if (StringUtil.equal(publicId, entity.getPublicId())
+                    && StringUtil.equal(systemId, entity.getSystemId()))
                 return entity;
         }
         return null;
@@ -351,8 +351,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     public InputSource doResolve(String publicId, String systemId) throws SAXException, TranslationException,
             IOException, URISyntaxException {
         if (dtd != null
-                && StaticUtils.equal(publicId, dtd.getPublicId())
-                && (StaticUtils.equal(systemId, dtd.getSystemId()) || StaticUtils.equal(
+                && StringUtil.equal(publicId, dtd.getPublicId())
+                && (StringUtil.equal(systemId, dtd.getSystemId()) || StringUtil.equal(
                         localizeSystemId(systemId), dtd.getSystemId()))) {
             inDTD = true;
         }
@@ -458,8 +458,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
                         .getTranslatableTagAttributes().containsPair(tag, attr.getName()))
                         && dialect.validateTranslatableTagAttribute(tag, attr.getName(),
                                 xmltag.getAttributes())) {
-                    attr.setValue(StaticUtils.makeValidXML(
-                            translator.translate(StaticUtils.entitiesToCharacters(attr.getValue()), null)));
+                    attr.setValue(StringUtil.makeValidXML(
+                            translator.translate(StringUtil.unescapeXMLEntities(attr.getValue()), null)));
                 }
             }
         }
@@ -599,7 +599,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         } else {
             String compressed = src;
             if (Core.getFilterMaster().getConfig().isRemoveSpacesNonseg()) {
-                compressed = StaticUtils.compressSpaces(src);
+                compressed = StringUtil.compressSpaces(src);
             } 
             if (isTranslatableTag())
                 translation = translator.translate(compressed, shortcutDetails);

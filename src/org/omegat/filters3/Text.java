@@ -25,7 +25,7 @@
 
 package org.omegat.filters3;
 
-import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 /**
  * Abstract piece of text.
@@ -101,7 +101,7 @@ public abstract class Text implements Element {
      * should return <code>Rock&amp;Roll</code>.
      */
     public String toTMX() {
-        return StaticUtils.makeValidXML(text.toString());
+        return StringUtil.makeValidXML(text.toString());
     }
 
     /**

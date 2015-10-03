@@ -38,6 +38,7 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 /**
  * A reader for XML stream.
@@ -1023,7 +1024,7 @@ public class XMLStreamReader {
      * to UTF-8 when saving to disk.
      */
     public String makeValidXML(int cp) {
-        String res = StaticUtils.makeValidXML(cp);
+        String res = StringUtil.escapeXMLChars(cp);
         if (res.codePointCount(0, res.length()) == 1 && entityFilter != null) {
             return entityFilter.convertToEntity(cp);
         } else {

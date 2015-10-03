@@ -252,87 +252,6 @@ public class StaticUtils {
     }
 
     /**
-     * Converts a single code point into valid XML. Output stream must convert stream
-     * to UTF-8 when saving to disk.
-     */
-    public static String makeValidXML(int cp) {
-        switch (cp) {
-        // case '\'':
-        // return "&apos;";
-        case '&':
-            return "&amp;";
-        case '>':
-            return "&gt;";
-        case '<':
-            return "&lt;";
-        case '"':
-            return "&quot;";
-        default:
-            return String.valueOf(Character.toChars(cp));
-        }
-    }
-
-    /**
-     * Converts XML entities to characters.
-     */
-    public static String entitiesToCharacters(String text) {
-
-        if (text.contains("&gt;")) {
-            text = text.replaceAll("&gt;", ">");
-        }
-        if (text.contains("&lt;")) {
-            text = text.replaceAll("&lt;", "<");
-        }
-        if (text.contains("&quot;")) {
-            text = text.replaceAll("&quot;", "\"");
-        }
-       // If makeValidXML converts ' to apos;, the following lines should be uncommented
-        /* if (text.indexOf("&apos;") >= 0) {
-            text = text.replaceAll("&apos;", "'");
-        }*/
-        if (text.contains("&amp;")) {
-            text = text.replaceAll("&amp;", "&");
-        }
-        return text;
-    }
-
-    /**
-     * Converts a stream of plaintext into valid XML. Output stream must convert
-     * stream to UTF-8 when saving to disk.
-     */
-    public static String makeValidXML(String plaintext) {
-        StringBuilder out = new StringBuilder();
-        String text = fixChars(plaintext);
-        for (int cp, i = 0; i < text.length(); i += Character.charCount(cp)) {
-            cp = text.codePointAt(i);
-            out.append(makeValidXML(cp));
-        }
-        return out.toString();
-    }
-
-    /** Compresses spaces in case of non-preformatting paragraph. */
-    public static String compressSpaces(String str) {
-        int strlen = str.length();
-        StringBuilder res = new StringBuilder(strlen);
-        boolean wasspace = true;
-        for (int cp, i = 0; i < strlen; i += Character.charCount(cp)) {
-            cp = str.codePointAt(i);
-            if (Character.isWhitespace(cp)) {
-                if (!wasspace) {
-                    wasspace = true;
-                }
-            } else {
-                if (wasspace && res.length() > 0) {
-                    res.append(' ');
-                }
-                res.appendCodePoint(cp);
-                wasspace = false;
-            }
-        }
-        return res.toString();
-    }
-
-    /**
      * Extracts an element of a class path.
      *
      * @param fullcp
@@ -577,14 +496,6 @@ public class StaticUtils {
             Log.log(e.toString());
         }
         return m_scriptDir;
-    }
-
-    /**
-     * Compares two strings for equality. Handles nulls: if both strings are
-     * nulls they are considered equal.
-     */
-    public static boolean equal(String one, String two) {
-        return (one == null && two == null) || (one != null && one.equals(two));
     }
 
     /**
@@ -833,33 +744,6 @@ public class StaticUtils {
         if (!toExtract.isEmpty()) {
             throw new FileNotFoundException("Failed to extract all of the specified files.");
         }
-    }
-
-    /**
-     * Replace invalid XML chars by spaces. See supported chars at
-     * http://www.w3.org/TR/2006/REC-xml-20060816/#charsets.
-     *
-     * @param str
-     *            input stream
-     * @return result stream
-     */
-    public static String fixChars(String str) {
-        StringBuilder sb = new StringBuilder(str.length());
-        for (int c, i = 0; i < str.length(); i += Character.charCount(c)) {
-            c = str.codePointAt(i);
-            if (c < 0x20) {
-                if (c != 0x09 && c != 0x0A && c != 0x0D) {
-                    c = ' ';
-                }
-            } else if (c >= 0x20 && c <= 0xD7FF) {
-            } else if (c >= 0xE000 && c <= 0xFFFD) {
-            } else if (c >= 0x10000 && c <= 0x10FFFF) {
-            } else {
-                c = ' ';
-            }
-            sb.appendCodePoint(c);
-        }
-        return sb.toString();
     }
 
     /**

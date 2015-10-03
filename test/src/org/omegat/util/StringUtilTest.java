@@ -182,4 +182,9 @@ public class StringUtilTest extends TestCase {
         // LATIN SMALL LETTER I (U+0069) -> LATIN CAPITAL LETTER I WITH DOT ABOVE (U+0130) in Turkish
         assertEquals("\u0130jk", StringUtil.toTitleCase("ijk", new Locale("tr")));
     }
+    
+    public void testCompressSpace() {
+        assertEquals("One Two Three Four Five", StringUtil.compressSpaces(" One Two\nThree   Four\r\nFive "));
+        assertEquals("Six seven", StringUtil.compressSpaces("Six\tseven"));
+    }
 }

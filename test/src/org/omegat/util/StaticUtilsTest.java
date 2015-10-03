@@ -28,45 +28,14 @@ package org.omegat.util;
 
 import java.util.regex.Pattern;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Tests for (some) static utility methods.
  *
  * @author Maxym Mykhalchuk
  */
-public class StaticUtilsTest extends TestCase
-{
-    
-    public StaticUtilsTest(String testName)
-    {
-        super(testName);
-    }
-
-    @Override
-    protected void setUp() throws Exception
-    {
-    }
-
-    @Override
-    protected void tearDown() throws Exception
-    {
-    }
-
-    public static Test suite()
-    {
-        TestSuite suite = new TestSuite(StaticUtilsTest.class);
-        
-        return suite;
-    }
-
-    public void testCompressSpace()
-    {
-        if ( !"One Two Three Four Five".equals(StaticUtils.compressSpaces(" One Two\nThree   Four\r\nFive ")) ) fail("Space wrongly compressed");
-        if ( !"Six seven".equals(StaticUtils.compressSpaces("Six\tseven")) ) fail("Space wrongly compressed");
-    }
+public class StaticUtilsTest extends TestCase {
 
     public void testCompileFileMask() {
         Pattern r = StaticUtils.compileFileMask("Ab1-&*/**");

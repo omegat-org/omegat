@@ -27,7 +27,7 @@ package org.omegat.filters3;
 
 import org.omegat.filters3.xml.Handler;
 import org.omegat.filters3.xml.XMLDialect;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 /**
  * Class for collecting out of turn pieces of document.
@@ -95,7 +95,7 @@ public abstract class OutOfTurnTag extends Tag {
         buf.append(getAttributes().toString());
         buf.append("&amp;gt;");
 
-        buf.append(StaticUtils.makeValidXML(getEntry().translationToOriginal()));
+        buf.append(StringUtil.makeValidXML(getEntry().translationToOriginal()));
 
         buf.append("&amp;lt;/");
         buf.append(getTag());

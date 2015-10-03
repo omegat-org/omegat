@@ -26,7 +26,7 @@
 package org.omegat.filters3.xml;
 
 import org.omegat.filters3.Text;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 /**
  * Piece of text in XML.
@@ -59,7 +59,7 @@ public class XMLText extends Text {
             res.append("]]>");
             return res.toString();
         } else
-            return StaticUtils.makeValidXML(getText());
+            return StringUtil.makeValidXML(getText());
     }
 
     /**

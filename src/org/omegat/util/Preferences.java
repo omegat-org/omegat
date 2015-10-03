@@ -821,7 +821,7 @@ public class Preferences {
     
             for (int i = 0; i < m_nameList.size(); i++) {
                 String name = m_nameList.get(i);
-                String val = StaticUtils.makeValidXML(m_valList.get(i));
+                String val = StringUtil.makeValidXML(m_valList.get(i));
                 out.write("    <" + name + ">");
                 out.write(val);
                 out.write("</" + name + ">\n");

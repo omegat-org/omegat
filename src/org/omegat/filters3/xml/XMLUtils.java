@@ -28,7 +28,7 @@ package org.omegat.filters3.xml;
 
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Attributes;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 /**
  * Static XML utility methods.
@@ -48,8 +48,8 @@ public final class XMLUtils {
             return res;
 
         for (int i = 0; i < attributes.getLength(); i++) {
-            String name = StaticUtils.makeValidXML(attributes.getQName(i));
-            String value = StaticUtils.makeValidXML(attributes.getValue(i));
+            String name = StringUtil.makeValidXML(attributes.getQName(i));
+            String value = StringUtil.makeValidXML(attributes.getValue(i));
             Attribute attr = new Attribute(name, value);
             res.add(attr);
         }

@@ -115,11 +115,11 @@ public class TMXWriter {
             PrepareTMXEntry transEntry = en.getValue();
             source = forceValidTMX ? TagUtil.stripXmlTags(en.getKey()) : en.getKey();
             target = forceValidTMX ? TagUtil.stripXmlTags(transEntry.translation) : transEntry.translation;
-            source = StaticUtils.makeValidXML(source);
-            target = StaticUtils.makeValidXML(target);
+            source = StringUtil.makeValidXML(source);
+            target = StringUtil.makeValidXML(target);
             if (transEntry.note != null) {
                 note = forceValidTMX ? TagUtil.stripXmlTags(transEntry.note) : transEntry.note;
-                note = StaticUtils.makeValidXML(note);
+                note = StringUtil.makeValidXML(note);
             }
             // TO DO: This *possibly* converts occurrences in the actual text of
             // &lt;fX&gt;

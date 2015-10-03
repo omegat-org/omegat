@@ -353,14 +353,17 @@ public class StaticUtils {
         return fullcp.substring(semicolon1 + 1, semicolon2);
     }
 
-    /** Trying to see if this ending is inside the classpath */
-    private static String tryThisClasspathElement(String cp, String ending) {
+    /**
+     * Extract classpath element that ends with <code>ending</code> from
+     * the full classpath <code>cp</code>, if present. If not present, returns
+     * null.
+     */
+    private static String extractClasspathElement(String cp, String ending) {
         try {
             int pos = cp.indexOf(ending);
             if (pos >= 0) {
                 String path = classPathElement(cp, pos);
-                path = path.substring(0, path.indexOf(ending));
-                return path;
+                return path.substring(0, path.indexOf(ending));
             }
         } catch (Exception e) {
             // should never happen, but just in case ;-)
@@ -376,28 +379,26 @@ public class StaticUtils {
      * up for OmegaT documentation.
      */
     public static String installDir() {
-        if (INSTALLDIR != null)
-            return INSTALLDIR;
-
-        String cp = System.getProperty("java.class.path");
-        String path;
-
-        // running from a Jar ?
-        path = tryThisClasspathElement(cp, File.separator + OConsts.APPLICATION_JAR);
-
-        // again missed, we're not running from Jar, most probably debug mode
-        if (path == null)
-            path = tryThisClasspathElement(cp, OConsts.DEBUG_CLASSPATH);
-
-        // WTF?!! using current directory
-        if (path == null)
-            path = ".";
-
-        // absolutizing the path
-        path = new File(path).getAbsolutePath();
-
-        INSTALLDIR = path;
-        return path;
+        if (INSTALLDIR == null) {
+            String cp = System.getProperty("java.class.path");
+            
+            // See if we are running from a JAR
+            String path = extractClasspathElement(cp, File.separator + OConsts.APPLICATION_JAR);
+            
+            if (path == null) {
+                // We're not running from a JAR; probably debug mode (in IDE, etc.)
+                path = extractClasspathElement(cp, OConsts.DEBUG_CLASSPATH);
+            }
+            
+            // WTF?!! Falling back to current directory
+            if (path == null) {
+                path = ".";
+            }
+            
+            // Cache the absolute path
+            INSTALLDIR = new File(path).getAbsolutePath();
+        }
+        return INSTALLDIR;
     }
 
     /**
@@ -407,13 +408,14 @@ public class StaticUtils {
      * is being determined, an empty string will be returned, resulting in the
      * current working directory being used.
      *
-     * Windows XP : &lt;Documents and Settings&gt;>\&lt;User name&gt;\Application Data\OmegaT
-     * Windows Vista : User\&lt;User name&gt;\AppData\Roaming 
-     * Linux: &lt;User Home&gt;/.omegat 
-     * Solaris/SunOS: &lt;User Home&gt;/.omegat
-     * FreeBSD: &lt;User Home&gt;/.omegat 
-     * Mac OS X: &lt;User Home&gt;/Library/Preferences/OmegaT 
-     * Other: User home directory
+     * <ul><li>Windows XP: &lt;Documents and Settings>\&lt;User name>\Application Data\OmegaT
+     * <li>Windows Vista: User\&lt;User name>\AppData\Roaming 
+     * <li>Linux: ~/.omegat 
+     * <li>Solaris/SunOS: ~/.omegat
+     * <li>FreeBSD: ~/.omegat 
+     * <li>Mac OS X: ~/Library/Preferences/OmegaT 
+     * <li>Other: User home directory
+     * </ul>
      *
      * @return The full path of the directory containing the OmegaT
      *         configuration files, including trailing path separator.
@@ -422,8 +424,9 @@ public class StaticUtils {
      */
     public static String getConfigDir() {
         // if the configuration directory has already been determined, return it
-        if (m_configDir != null)
+        if (m_configDir != null) {
             return m_configDir;
+        }
 
         String cd = RuntimePreferences.getConfigDir();
         if (cd != null) {
@@ -456,7 +459,7 @@ public class StaticUtils {
 
         // if os or user home is null or empty, we cannot reliably determine
         // the config dir, so we use the current working dir (= empty string)
-        if (os == null || home == null || home.isEmpty()) {
+        if (os == null || StringUtil.isEmpty(home)) {
             // set the config dir to the current working dir
             m_configDir = new File(".").getAbsolutePath() + File.separator;
             return m_configDir;

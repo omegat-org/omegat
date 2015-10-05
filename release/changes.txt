@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    2 Enhancements
    2 Bug fixes
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 3.5.2 update 2 vs 3.5.2 update 1
 
@@ -25,6 +25,10 @@ window and the project files window open side-by-side in split view.
 
   - Tag validation could wrongly mention bad nesting for custom tags.
 Tag nesting is now only tested for OmegaT tags.
+
+  Localisation Updates:
+
+ - German localisation updated to 3.5.2 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 3.5.2 update 1 (2015-09-25)

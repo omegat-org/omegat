@@ -102,17 +102,14 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
         String srcLower = src.toLowerCase(loc);
 
         // Compute source entry tokens
-        StemmingMode mode = Preferences.isPreferenceDefault(Preferences.GLOSSARY_STEMMING, true)
-                ? StemmingMode.GLOSSARY
-                : StemmingMode.NONE;
-        Token[] strTokens = tok.tokenizeWords(srcLower, mode);
+        Token[] strTokens = tokenize(tok, srcLower);
 
         for (GlossaryEntry glosEntry : entries) {
             checkEntryChanged();
 
             // Computer glossary entry tokens
             String glosStr = glosEntry.getSrcText().toLowerCase(loc);
-            Token[] glosTokens = tok.tokenizeWords(glosStr, mode);
+            Token[] glosTokens = tokenize(tok, glosStr);
             if (glosTokens.length == 0) {
                 continue;
             }
@@ -136,6 +133,14 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
         // Then remove the duplicates and combine the synonyms.
         sortGlossaryEntries(result);
         return filterGlossary(result);
+    }
+    
+    private Token[] tokenize(ITokenizer tok, String str) {
+        if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_STEMMING, true)) {
+            return tok.tokenizeWords(str, StemmingMode.GLOSSARY);
+        } else {
+            return tok.tokenizeVerbatim(str);
+        }        
     }
 
     static void sortGlossaryEntries(List<GlossaryEntry> entries) {

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.2 update 2 
 ----------------------------------------------------------------------
-   2 Enhancements
+   4 Enhancements
    2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -17,6 +17,15 @@
   - Mac OS X: It is now possible to make the project files list 
 "truly" full-screen. On OS X 10.11 this means you can have the main 
 window and the project files window open side-by-side in split view.
+
+  - When Use stemming for glossary entries is not checked, numbers
+and word containing numbers are taken into account. That means that, 
+for instance, "CO2 gas" will only appear in the glossary pane if the 
+source text actually contains "CO2 gas", while previously it would 
+appear as long as the source text contained "gas".
+
+  - spellcheck.groovy has a new option to ignore segments where 
+source=target
 
   Bug fixes:
 

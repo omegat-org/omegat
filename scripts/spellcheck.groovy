@@ -52,7 +52,7 @@ removeOmegaTags = true
 replaceCustomTags = true
 // if TRUE fragments defined for removal will be removed
 removeDefinedFragments = true
-// if TRUE 
+// if TRUE segments where source=target will be removed
 skipIdenticalSegments = false
 
 import groovy.swing.SwingBuilder

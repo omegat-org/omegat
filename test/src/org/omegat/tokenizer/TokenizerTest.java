@@ -43,7 +43,7 @@ public class TokenizerTest extends TestCase {
                 orig);
         assertResult(new String[] { "The", "quick", "brown", "jumped", "over", "lazy", "dog" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.NONE));
-        assertResult(new String[] { "the", "quick", "brown", "jump", "jumped", "over", "lazi", "lazy", "dog" },
+        assertResult(new String[] { "the", "quick", "brown", "x0", "jump", "jumped", "over", "1", "lazi", "lazy", "dog" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.GLOSSARY));
         assertResult(new String[] { "quick", "brown", "jump", "jumped", "lazi", "lazy", "dog" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.MATCHING));
@@ -76,9 +76,9 @@ public class TokenizerTest extends TestCase {
                 "\u90E8", "\u3067", "\u3042\u308B", "\u3002" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.NONE));
         assertResult(new String[] { "\u6211\u3005", "\u306E", "\u3059\u3079\u3066", "\u306F", "\u540C\u3058",
-                "\u500B", "\u306E", "\u60D1\u661F", "\u82F1", "a", "planet", "\u306B", "\u4F4F\u3080",
+                "1", "\uFF11", "\u500B", "\u306E", "\u60D1\u661F", "\u82F1", "a", "planet", "\u306B", "\u4F4F\u3080",
                 "\u4F4F\u307F", "\u6211\u3005", "\u306E", "\u3059\u3079\u3066", "\u306F", "\u305D\u306E",
-                "\u751F\u7269", "\u570F", "\u306E", "\u90E8", "\u3060", "\u3067", "\u3042\u308B" },
+                "\u751F\u7269", "\u570F", "\u306E", "1", "5", "\u90E8", "\u3060", "\u3067", "\u3042\u308B" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.GLOSSARY));
         assertResult(new String[] { "\u6211\u3005", "\u3059\u3079\u3066", "\u540C\u3058", "\u500B",
                 "\u60D1\u661F", "\u82F1", "a", "planet", "\u4F4F\u3080", "\u4F4F\u307F", "\u6211\u3005",

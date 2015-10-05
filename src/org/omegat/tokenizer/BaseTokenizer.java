@@ -179,7 +179,7 @@ public abstract class BaseTokenizer implements ITokenizer {
         result = tokenize(strOrig,
                 stemmingMode == StemmingMode.GLOSSARY || stemmingMode == StemmingMode.MATCHING,
                 stemmingMode == StemmingMode.MATCHING,
-                true,
+                stemmingMode != StemmingMode.GLOSSARY,
                 true);
 
         // put result in the cache
@@ -194,7 +194,7 @@ public abstract class BaseTokenizer implements ITokenizer {
         return tokenizeToStrings(str,
                 stemmingMode == StemmingMode.GLOSSARY || stemmingMode == StemmingMode.MATCHING,
                 stemmingMode == StemmingMode.MATCHING,
-                true,
+                stemmingMode != StemmingMode.GLOSSARY,
                 true);
     }
 

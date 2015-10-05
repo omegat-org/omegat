@@ -174,6 +174,33 @@ public class TokenizerTest extends TestCase {
                 "\u5177", "\u4E00\u5B9A", "\u7684", "\u8868\u97F3", "\u529F\u80FD" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.MATCHING));
     }
+    
+    /**
+     * The DefaultTokenizer has a completely different implementation from the Lucene-base
+     * tokenizers (the latter were originally an external plugin, for licensing reasons).
+     * It's based on Java's BreakIterator. It warrants testing so that it doesn't get overlooked
+     * when changes are made to the other tokenizers.
+     */
+    public void testDefault() {
+        ITokenizer tok = new DefaultTokenizer();
+        String orig = "The quick, brown <x0/> jumped over 1 \"lazy\" \u0130stanbul. "
+                + "\u65E5\u672C\u8A9E\u3042\u3044\u3046\u3048\u304A\u3002";
+        assertVerbatim(new String[] { "The", " ", "quick", ",", " ", "brown", " ", "<x0/>", " ",
+                "jumped", " ", "over", " ", "1", " ", "\"", "lazy", "\"", " ", "\u0130stanbul", ".",
+                " ", "\u65E5\u672C\u8A9E", "\u3042\u3044\u3046\u3048\u304A", "\u3002" },
+                tok.tokenizeVerbatimToStrings(orig),
+                tok.tokenizeVerbatim(orig),
+                orig);
+        assertResult(new String[] { "The", "quick", "brown", "jumped", "over", "lazy", "\u0130stanbul",
+                "\u65E5\u672C\u8A9E", "\u3042\u3044\u3046\u3048\u304A" },
+                tok.tokenizeWordsToStrings(orig, StemmingMode.NONE));
+        assertResult(new String[] { "The", "quick", "brown", "jumped", "over", "lazy", "\u0130stanbul",
+                "\u65E5\u672C\u8A9E", "\u3042\u3044\u3046\u3048\u304A" },
+                tok.tokenizeWordsToStrings(orig, StemmingMode.GLOSSARY));
+        assertResult(new String[] { "The", "quick", "brown", "jumped", "over", "lazy", "\u0130stanbul",
+                "\u65E5\u672C\u8A9E", "\u3042\u3044\u3046\u3048\u304A" },
+                tok.tokenizeWordsToStrings(orig, StemmingMode.MATCHING));
+    }
 
     private void assertVerbatim(String[] expected, String[] test, Token[] testTok, String origString) {
         assertResult(expected, test);

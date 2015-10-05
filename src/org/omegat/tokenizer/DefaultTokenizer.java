@@ -157,6 +157,12 @@ public class DefaultTokenizer implements ITokenizer {
         int start = breaker.first();
         for (int end = breaker.next(); end != BreakIterator.DONE; start = end, end = breaker.next()) {
             String tokenStr = strOrig.substring(start, end);
+            if (all) {
+                // Accepting all tokens
+                tokens.add(new Token(tokenStr, start));
+                continue;
+            }
+            // Accepting only words that aren't OmegaT tags
             boolean word = false;
             for (int cp, i = 0; i < tokenStr.length(); i += Character.charCount(cp)) {
                 cp = tokenStr.codePointAt(i);
@@ -165,10 +171,8 @@ public class DefaultTokenizer implements ITokenizer {
                     break;
                 }
             }
-
-            if (all || (word && !PatternConsts.OMEGAT_TAG.matcher(tokenStr).matches())) {
-                Token token = new Token(tokenStr, start);
-                tokens.add(token);
+            if (word && !PatternConsts.OMEGAT_TAG.matcher(tokenStr).matches()) {
+                tokens.add(new Token(tokenStr, start));
             }
         }
 
@@ -190,6 +194,12 @@ public class DefaultTokenizer implements ITokenizer {
         int start = breaker.first();
         for (int end = breaker.next(); end != BreakIterator.DONE; start = end, end = breaker.next()) {
             String tokenStr = str.substring(start, end);
+            if (all) {
+                // Accepting all tokens
+                tokens.add(tokenStr);
+                continue;
+            }
+            // Accepting only words that aren't OmegaT tags
             boolean word = false;
             for (int cp, i = 0; i < tokenStr.length(); i += Character.charCount(cp)) {
                 cp = tokenStr.codePointAt(i);
@@ -198,8 +208,7 @@ public class DefaultTokenizer implements ITokenizer {
                     break;
                 }
             }
-
-            if (all || (word && !PatternConsts.OMEGAT_TAG.matcher(tokenStr).matches())) {
+            if (word && !PatternConsts.OMEGAT_TAG.matcher(tokenStr).matches()) {
                 tokens.add(tokenStr);
             }
         }

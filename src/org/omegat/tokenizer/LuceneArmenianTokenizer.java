@@ -41,7 +41,7 @@ public class LuceneArmenianTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            Set stopWords = stopWordsAllowed ? ArmenianAnalyzer.getDefaultStopSet()
+            Set<?> stopWords = stopWordsAllowed ? ArmenianAnalyzer.getDefaultStopSet()
                     : Collections.EMPTY_SET;
             return new ArmenianAnalyzer(getBehavior(), stopWords).tokenStream("",
                     new StringReader(strOrig));

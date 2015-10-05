@@ -58,7 +58,7 @@ public class LuceneJapaneseTokenizer extends BaseTokenizer {
         if (stemsAllowed) {
             // Blank out tags when stemming only
             strOrig = blankOutTags(strOrig);
-            CharArraySet stopWords = stopWordsAllowed ? JapaneseAnalyzer.getDefaultStopSet()
+            CharArraySet<?> stopWords = stopWordsAllowed ? JapaneseAnalyzer.getDefaultStopSet()
                     : new CharArraySet(getBehavior(), 0, false);
             Set<String> stopTags = stopWordsAllowed ? JapaneseAnalyzer.getDefaultStopTags()
                     : Collections.EMPTY_SET;

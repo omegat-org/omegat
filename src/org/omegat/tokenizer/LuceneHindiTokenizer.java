@@ -41,7 +41,7 @@ public class LuceneHindiTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            Set stopWords = stopWordsAllowed ? HindiAnalyzer.getDefaultStopSet()
+            Set<?> stopWords = stopWordsAllowed ? HindiAnalyzer.getDefaultStopSet()
                     : Collections.EMPTY_SET;
             return new HindiAnalyzer(getBehavior(), stopWords).tokenStream("",
                     new StringReader(strOrig));

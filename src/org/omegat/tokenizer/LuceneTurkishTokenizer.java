@@ -41,7 +41,7 @@ public class LuceneTurkishTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            Set stopWords = stopWordsAllowed ? TurkishAnalyzer.getDefaultStopSet()
+            Set<?> stopWords = stopWordsAllowed ? TurkishAnalyzer.getDefaultStopSet()
                     : Collections.EMPTY_SET;
             return new TurkishAnalyzer(getBehavior(), stopWords).tokenStream("",
                     new StringReader(strOrig));

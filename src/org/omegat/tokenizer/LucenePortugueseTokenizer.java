@@ -41,7 +41,7 @@ public class LucenePortugueseTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            Set stopWords = stopWordsAllowed ? PortugueseAnalyzer.getDefaultStopSet()
+            Set<?> stopWords = stopWordsAllowed ? PortugueseAnalyzer.getDefaultStopSet()
                     : Collections.EMPTY_SET;
             return new PortugueseAnalyzer(getBehavior(), stopWords).tokenStream("",
                     new StringReader(strOrig));

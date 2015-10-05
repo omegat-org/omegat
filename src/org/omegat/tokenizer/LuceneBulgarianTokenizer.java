@@ -41,7 +41,7 @@ public class LuceneBulgarianTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            Set stopWords = stopWordsAllowed ? BulgarianAnalyzer.getDefaultStopSet()
+            Set<?> stopWords = stopWordsAllowed ? BulgarianAnalyzer.getDefaultStopSet()
                     : Collections.EMPTY_SET;
             return new BulgarianAnalyzer(getBehavior(), stopWords).tokenStream("",
                     new StringReader(strOrig));

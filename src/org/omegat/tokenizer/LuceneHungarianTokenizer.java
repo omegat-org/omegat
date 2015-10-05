@@ -41,7 +41,7 @@ public class LuceneHungarianTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            Set stopWords = stopWordsAllowed ? HungarianAnalyzer.getDefaultStopSet()
+            Set<?> stopWords = stopWordsAllowed ? HungarianAnalyzer.getDefaultStopSet()
                     : Collections.EMPTY_SET;
             return new HungarianAnalyzer(getBehavior(), stopWords).tokenStream("",
                     new StringReader(strOrig));

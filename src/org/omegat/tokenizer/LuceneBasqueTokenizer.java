@@ -41,7 +41,7 @@ public class LuceneBasqueTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            Set stopWords = stopWordsAllowed ? BasqueAnalyzer.getDefaultStopSet()
+            Set<?> stopWords = stopWordsAllowed ? BasqueAnalyzer.getDefaultStopSet()
                     : Collections.EMPTY_SET;
             return new BasqueAnalyzer(getBehavior(), stopWords).tokenStream("",
                     new StringReader(strOrig));

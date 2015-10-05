@@ -41,7 +41,7 @@ public class LuceneSwedishTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            Set stopWords = stopWordsAllowed ? SwedishAnalyzer.getDefaultStopSet()
+            Set<?> stopWords = stopWordsAllowed ? SwedishAnalyzer.getDefaultStopSet()
                     : Collections.EMPTY_SET;
             return new SwedishAnalyzer(getBehavior(), stopWords).tokenStream("",
                     new StringReader(strOrig));

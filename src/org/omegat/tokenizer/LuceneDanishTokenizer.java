@@ -41,7 +41,7 @@ public class LuceneDanishTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            Set stopWords = stopWordsAllowed ? DanishAnalyzer.getDefaultStopSet()
+            Set<?> stopWords = stopWordsAllowed ? DanishAnalyzer.getDefaultStopSet()
                     : Collections.EMPTY_SET;
             return new DanishAnalyzer(getBehavior(), stopWords).tokenStream("",
                     new StringReader(strOrig));

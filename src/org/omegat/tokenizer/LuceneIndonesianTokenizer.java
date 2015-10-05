@@ -41,7 +41,7 @@ public class LuceneIndonesianTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            Set stopWords = stopWordsAllowed ? IndonesianAnalyzer.getDefaultStopSet()
+            Set<?> stopWords = stopWordsAllowed ? IndonesianAnalyzer.getDefaultStopSet()
                     : Collections.EMPTY_SET;
             return new IndonesianAnalyzer(getBehavior(), stopWords).tokenStream("",
                     new StringReader(strOrig));

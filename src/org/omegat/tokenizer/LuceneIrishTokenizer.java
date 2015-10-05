@@ -40,7 +40,7 @@ public class LuceneIrishTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            CharArraySet stopWords = stopWordsAllowed ? IrishAnalyzer.getDefaultStopSet()
+            CharArraySet<?> stopWords = stopWordsAllowed ? IrishAnalyzer.getDefaultStopSet()
                     : new CharArraySet(getBehavior(), 0, false);
             return new IrishAnalyzer(getBehavior(), stopWords).tokenStream("", new StringReader(
                     strOrig));

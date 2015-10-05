@@ -41,7 +41,7 @@ public class LuceneCatalanTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            Set stopWords = stopWordsAllowed ? CatalanAnalyzer.getDefaultStopSet()
+            Set<?> stopWords = stopWordsAllowed ? CatalanAnalyzer.getDefaultStopSet()
                     : Collections.EMPTY_SET;
             return new CatalanAnalyzer(getBehavior(), stopWords).tokenStream("",
                     new StringReader(strOrig));

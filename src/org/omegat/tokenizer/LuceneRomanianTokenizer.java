@@ -41,7 +41,7 @@ public class LuceneRomanianTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            Set stopWords = stopWordsAllowed ? RomanianAnalyzer.getDefaultStopSet()
+            Set<?> stopWords = stopWordsAllowed ? RomanianAnalyzer.getDefaultStopSet()
                     : Collections.EMPTY_SET;
             return new RomanianAnalyzer(getBehavior(), stopWords).tokenStream("",
                     new StringReader(strOrig));

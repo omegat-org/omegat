@@ -41,7 +41,7 @@ public class LuceneLatvianTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            Set stopWords = stopWordsAllowed ? LatvianAnalyzer.getDefaultStopSet()
+            Set<?> stopWords = stopWordsAllowed ? LatvianAnalyzer.getDefaultStopSet()
                     : Collections.EMPTY_SET;
             return new LatvianAnalyzer(getBehavior(), stopWords).tokenStream("",
                     new StringReader(strOrig));

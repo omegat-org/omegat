@@ -83,6 +83,10 @@ public class Preferences {
     public static final String DICT_FOLDER = "dict_folder";
     public static final String GLOSSARY_FOLDER = "glossary_folder";
     public static final String GLOSSARY_FILE = "glossary_file";
+    
+    /** Whether to restrict MT requests to only untranslated segments */
+    public static final String MT_ONLY_UNTRANSLATED = "mt_only_untranslated";
+    
     public static final String GLOSSARY_TBX_DISPLAY_CONTEXT = "glossary_tbx_display_context";
     public static final String GLOSSARY_NOT_EXACT_MATCH = "glossary_not_exact_match";
     public static final String GLOSSARY_STEMMING = "glossary_stemming";

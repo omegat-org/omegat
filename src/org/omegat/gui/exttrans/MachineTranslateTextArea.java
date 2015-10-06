@@ -35,6 +35,7 @@ import java.util.List;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TMXEntry;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.gui.common.EntryInfoThreadPane;
@@ -42,6 +43,7 @@ import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.gui.AlwaysVisibleCaret;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -86,6 +88,18 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     public String getDisplayedTranslation() {
         return displayed;
     }
+    
+    @Override
+    public void onEntryActivated(SourceTextEntry newEntry) {
+        if (Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED)) {
+            TMXEntry entry = Core.getProject().getTranslationInfo(newEntry);
+            if (entry.isTranslated()) {
+                clear();
+                return;
+            }
+        }
+        super.onEntryActivated(newEntry);
+    }
 
     @Override
     protected void onProjectClose() {
@@ -97,8 +111,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     protected void startSearchThread(final SourceTextEntry newEntry) {
         UIThreadsUtil.mustBeSwingThread();
 
-        setText("");
-        displayed = null;
+        clear();
         for (IMachineTranslation mt : translators) {
             new FindThread(mt, newEntry).start();
         }
@@ -114,6 +127,11 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
             }
             setText(getText() + data.result + "\n<" + data.translatorName + ">\n\n");
         }
+    }
+    
+    private void clear() {
+        setText("");
+        displayed = null;
     }
 
     protected class FindThread extends EntryInfoSearchThread<MachineTranslationInfo> {

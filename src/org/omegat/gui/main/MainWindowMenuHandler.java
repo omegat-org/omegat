@@ -792,6 +792,11 @@ public class MainWindowMenuHandler {
         new CharTableAutoCompleterOptionsDialog(mainWindow).setVisible(true);
     }
 
+    public void optionsMTOnlyUntranslatedCheckboxMenuItemActionPerformed() {
+        Preferences.setPreference(Preferences.MT_ONLY_UNTRANSLATED,
+                mainWindow.menu.optionsMTOnlyUntranslatedCheckboxMenuItem.isSelected());
+    }
+    
     public void optionsGlossaryTBXDisplayContextCheckBoxMenuItemActionPerformed() {
         Preferences.setPreference(Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT,
                 mainWindow.menu.optionsGlossaryTBXDisplayContextCheckBoxMenuItem.isSelected());

@@ -6,6 +6,7 @@
  Copyright (C) 2009-2010 Alex Buloichik
                2011 Martin Fleurke
                2012 Jean-Christophe Helary
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -53,6 +54,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
  * @author Jean-Christophe Helary
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTranslationInfo> {
@@ -89,9 +91,20 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         return displayed;
     }
     
+    public void doQueries() {
+        SourceTextEntry entry = Core.getEditor().getCurrentEntry();
+        if (entry != null) {
+            onEntryActivated(entry, true);
+        }
+    }
+    
     @Override
     public void onEntryActivated(SourceTextEntry newEntry) {
-        if (Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED)) {
+        onEntryActivated(newEntry, false);
+    }
+    
+    public void onEntryActivated(SourceTextEntry newEntry, boolean force) {
+        if (!force && Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED)) {
             TMXEntry entry = Core.getProject().getTranslationInfo(newEntry);
             if (entry.isTranslated()) {
                 clear();

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.2 update 2 
 ----------------------------------------------------------------------
-   5 Enhancements
+   6 Enhancements
    2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -17,6 +17,9 @@
 
   - Allow suppressing MT retrieval for translated segments
   https://sourceforge.net/p/omegat/feature-requests/1137/
+
+  - Ctrl-M manual call of MT on translated segments
+  https://sourceforge.net/p/omegat/feature-requests/1140/
 
   Other changes:
 

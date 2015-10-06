@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.2 update 2 
 ----------------------------------------------------------------------
-   4 Enhancements
+   5 Enhancements
    2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -14,6 +14,9 @@
 
   - Improve glossary matching of terms containing numbers
   https://sourceforge.net/p/omegat/feature-requests/1138/
+
+  - Allow suppressing MT retrieval for translated segments
+  https://sourceforge.net/p/omegat/feature-requests/1137/
 
   Other changes:
 

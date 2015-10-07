@@ -158,10 +158,8 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
                 return null;
             }
 
-            MachineTranslationInfo result = new MachineTranslationInfo();
-            result.translatorName = translator.getName();
-            result.result = getTranslation(source, target);
-            return result.result != null ? result : null;
+            String result = getTranslation(source, target);
+            return result == null ? null : new MachineTranslationInfo(translator.getName(), result);
         }
         
         private String getTranslation(Language source, Language target) throws Exception {

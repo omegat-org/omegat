@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -29,8 +30,14 @@ package org.omegat.gui.exttrans;
  * Class to store machine translation result.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public class MachineTranslationInfo {
-    protected String translatorName;
-    protected String result;
+    public final String translatorName;
+    public final String result;
+    
+    public MachineTranslationInfo(String translatorName, String result) {
+        this.translatorName = translatorName;
+        this.result = result;
+    }
 }

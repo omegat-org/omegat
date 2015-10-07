@@ -90,29 +90,6 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     public String getDisplayedTranslation() {
         return displayed;
     }
-    
-    public void doQueries() {
-        SourceTextEntry entry = Core.getEditor().getCurrentEntry();
-        if (entry != null) {
-            onEntryActivated(entry, true);
-        }
-    }
-    
-    @Override
-    public void onEntryActivated(SourceTextEntry newEntry) {
-        onEntryActivated(newEntry, false);
-    }
-    
-    public void onEntryActivated(SourceTextEntry newEntry, boolean force) {
-        if (!force && Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED)) {
-            TMXEntry entry = Core.getProject().getTranslationInfo(newEntry);
-            if (entry.isTranslated()) {
-                clear();
-                return;
-            }
-        }
-        super.onEntryActivated(newEntry);
-    }
 
     @Override
     protected void onProjectClose() {
@@ -120,13 +97,21 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         this.setText(EXPLANATION);
     }
 
+    public void forceLoad() {
+        startSearchThread(currentlyProcessedEntry, true);
+    }
+    
     @Override
-    protected void startSearchThread(final SourceTextEntry newEntry) {
+    protected void startSearchThread(SourceTextEntry newEntry) {
+        startSearchThread(newEntry, false);
+    }
+
+    private void startSearchThread(SourceTextEntry newEntry, boolean force) {
         UIThreadsUtil.mustBeSwingThread();
 
         clear();
         for (IMachineTranslation mt : translators) {
-            new FindThread(mt, newEntry).start();
+            new FindThread(mt, newEntry, force).start();
         }
     }
 
@@ -150,17 +135,20 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     protected class FindThread extends EntryInfoSearchThread<MachineTranslationInfo> {
         private final IMachineTranslation translator;
         private final String src;
+        private final boolean force;
 
-        public FindThread(final IMachineTranslation translator, final SourceTextEntry newEntry) {
+        public FindThread(final IMachineTranslation translator, final SourceTextEntry newEntry,
+                boolean force) {
             super(MachineTranslateTextArea.this, newEntry);
             this.translator = translator;
             src = newEntry.getSrcText();
+            this.force = force;
         }
 
         @Override
         protected MachineTranslationInfo search() throws Exception {
-            Language source=null;
-            Language target=null;
+            Language source = null;
+            Language target = null;
             ProjectProperties pp = Core.getProject().getProjectProperties();
             if (pp != null){
                  source = pp.getSourceLanguage();
@@ -172,8 +160,18 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
 
             MachineTranslationInfo result = new MachineTranslationInfo();
             result.translatorName = translator.getName();
-            result.result = translator.getTranslation(source, target, src);
+            result.result = getTranslation(source, target);
             return result.result != null ? result : null;
+        }
+        
+        private String getTranslation(Language source, Language target) throws Exception {
+            if (!force && Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED)) {
+                TMXEntry entry = Core.getProject().getTranslationInfo(currentlyProcessedEntry);
+                if (entry.isTranslated()) {
+                    return translator.getCachedTranslation(source, target, src);
+                }
+            }
+            return translator.getTranslation(source, target, src);
         }
     }
 }

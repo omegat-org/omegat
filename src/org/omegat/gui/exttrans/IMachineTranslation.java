@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -31,6 +32,7 @@ import org.omegat.util.Language;
  * Interface for all machine translation systems.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public interface IMachineTranslation {
     /**
@@ -50,4 +52,17 @@ public interface IMachineTranslation {
      * @return translated text, or null if translation impossible
      */
     String getTranslation(Language sLang, Language tLang, String text) throws Exception;
+    
+    /**
+     * Get cached translation. Returns null if translation not present.
+     * 
+     * @param sLang
+     *            source language
+     * @param tLang
+     *            target language
+     * @param text
+     *            text for translation
+     * @return translated text, or null if translation impossible
+     */
+    String getCachedTranslation(Language sLang, Language tLang, String text);
 }

@@ -40,7 +40,7 @@ import org.omegat.core.events.IEntryEventListener;
 @SuppressWarnings("serial")
 public abstract class EntryInfoThreadPane<T> extends EntryInfoPane<T> implements IEntryEventListener {
 
-    volatile SourceTextEntry currentlyProcessedEntry;
+    protected volatile SourceTextEntry currentlyProcessedEntry;
 
     public EntryInfoThreadPane(final boolean useApplicationFont) {
         super(useApplicationFont);

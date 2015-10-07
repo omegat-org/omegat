@@ -50,7 +50,7 @@ public abstract class EntryInfoSearchThread<T> extends Thread {
      * If entry in pane was changed, it means user was moved to other entry, and
      * there is no sense to continue search.
      */
-    private final SourceTextEntry currentlyProcessedEntry;
+    protected final SourceTextEntry currentlyProcessedEntry;
 
     /**
      * Constructor.

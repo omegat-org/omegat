@@ -80,6 +80,14 @@ public abstract class BaseTranslate implements IMachineTranslation, ActionListen
             return null;
         }
     }
+    
+    public String getCachedTranslation(Language sLang, Language tLang, String text) {
+        if (enabled) {
+            return getFromCache(sLang, tLang, text);
+        } else {
+            return null;
+        }
+    }
 
     abstract protected String getPreferenceName();
 

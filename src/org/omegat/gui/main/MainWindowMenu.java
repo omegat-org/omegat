@@ -367,6 +367,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         optionsMenu.add(optionsAlwaysConfirmQuitCheckBoxMenuItem = createCheckboxMenuItem("MW_OPTIONSMENU_ALWAYS_CONFIRM_QUIT"));
         optionsMenu.add(optionsMachineTranslateMenu = createMenu("TF_OPTIONSMENU_MACHINETRANSLATE"));
         
+        optionsMachineTranslateMenu.add(optionsMTAutoFetchCheckboxMenuItem = createCheckboxMenuItem("MT_AUTO_FETCH"));
         optionsMachineTranslateMenu.add(optionsMTOnlyUntranslatedCheckboxMenuItem = createCheckboxMenuItem("MT_ONLY_UNTRANSLATED"));
         optionsMachineTranslateMenu.addSeparator();
         
@@ -480,8 +481,11 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
         optionsAutoCompleteShowAutomaticallyItem.setSelected(Preferences.isPreferenceDefault(
                 Preferences.AC_SHOW_SUGGESTIONS_AUTOMATICALLY, true));
+        optionsMTAutoFetchCheckboxMenuItem.setSelected(Preferences.isPreferenceDefault(
+                Preferences.MT_AUTO_FETCH, true));
         optionsMTOnlyUntranslatedCheckboxMenuItem.setSelected(Preferences.isPreference(
                 Preferences.MT_ONLY_UNTRANSLATED));
+        optionsMTOnlyUntranslatedCheckboxMenuItem.setEnabled(optionsMTAutoFetchCheckboxMenuItem.isSelected());
         optionsGlossaryTBXDisplayContextCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
                 Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT, true));
         optionsGlossaryExactMatchCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
@@ -730,6 +734,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem optionsViewOptionsMenuItem;
     JMenuItem optionsSaveOptionsMenuItem;
     JMenuItem optionsViewOptionsMenuLoginItem;
+    JCheckBoxMenuItem optionsMTAutoFetchCheckboxMenuItem;
     JCheckBoxMenuItem optionsMTOnlyUntranslatedCheckboxMenuItem;
     JMenuItem projectCloseMenuItem;
     JMenuItem projectCompileMenuItem;

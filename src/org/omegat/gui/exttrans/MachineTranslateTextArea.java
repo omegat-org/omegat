@@ -165,10 +165,15 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         }
         
         private String getTranslation(Language source, Language target) throws Exception {
-            if (!force && Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED)) {
-                TMXEntry entry = Core.getProject().getTranslationInfo(currentlyProcessedEntry);
-                if (entry.isTranslated()) {
+            if (!force) {
+                if (!Preferences.isPreferenceDefault(Preferences.MT_AUTO_FETCH, true)) {
                     return translator.getCachedTranslation(source, target, src);
+                }
+                if (Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED)) {
+                    TMXEntry entry = Core.getProject().getTranslationInfo(currentlyProcessedEntry);
+                    if (entry.isTranslated()) {
+                        return translator.getCachedTranslation(source, target, src);
+                    }
                 }
             }
             return translator.getTranslation(source, target, src);

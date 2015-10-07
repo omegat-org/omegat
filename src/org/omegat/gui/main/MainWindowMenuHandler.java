@@ -794,6 +794,12 @@ public class MainWindowMenuHandler {
         new CharTableAutoCompleterOptionsDialog(mainWindow).setVisible(true);
     }
 
+    public void optionsMTAutoFetchCheckboxMenuItemActionPerformed() {
+        boolean enabled = mainWindow.menu.optionsMTAutoFetchCheckboxMenuItem.isSelected();
+        Preferences.setPreference(Preferences.MT_AUTO_FETCH, enabled);
+        mainWindow.menu.optionsMTOnlyUntranslatedCheckboxMenuItem.setEnabled(enabled);
+    }
+    
     public void optionsMTOnlyUntranslatedCheckboxMenuItemActionPerformed() {
         Preferences.setPreference(Preferences.MT_ONLY_UNTRANSLATED,
                 mainWindow.menu.optionsMTOnlyUntranslatedCheckboxMenuItem.isSelected());

@@ -84,7 +84,9 @@ public class Preferences {
     public static final String GLOSSARY_FOLDER = "glossary_folder";
     public static final String GLOSSARY_FILE = "glossary_file";
     
-    /** Whether to restrict MT requests to only untranslated segments */
+    /** Whether to automatically perform MT requests on entering segment */
+    public static final String MT_AUTO_FETCH = "mt_auto_fetch";
+    /** Whether to restrict automatic MT requests to only untranslated segments */
     public static final String MT_ONLY_UNTRANSLATED = "mt_only_untranslated";
     
     public static final String GLOSSARY_TBX_DISPLAY_CONTEXT = "glossary_tbx_display_context";

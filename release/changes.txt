@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.2 update 2 
 ----------------------------------------------------------------------
-   6 Enhancements
+   7 Enhancements
    2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -20,6 +20,9 @@
 
   - Ctrl-M manual call of MT on translated segments
   https://sourceforge.net/p/omegat/feature-requests/1140/
+
+  - Machine translate only current segment, on demand
+  https://sourceforge.net/p/omegat/feature-requests/552/
 
   Other changes:
 

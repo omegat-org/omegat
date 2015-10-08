@@ -29,6 +29,7 @@
 package org.omegat.util.gui;
 
 import java.awt.Color;
+import java.util.MissingResourceException;
 import java.util.logging.Logger;
 
 import javax.swing.UIManager;
@@ -131,7 +132,12 @@ public final class Styles {
 
         @Override
         public String toString() {
-            return OStrings.getString(name());
+            try {
+                return OStrings.getString(name());
+            } catch (MissingResourceException ex) {
+                Log.log(ex);
+                return name();
+            }
         }
 
         public void setColor(Color newColor) {

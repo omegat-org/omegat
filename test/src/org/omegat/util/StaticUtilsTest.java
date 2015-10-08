@@ -41,4 +41,21 @@ public class StaticUtilsTest extends TestCase {
         Pattern r = StaticUtils.compileFileMask("Ab1-&*/**");
         assertEquals("Ab1\\-\\&[^/]*/.*", r.pattern());
     }
+    
+    public void testParseCLICommand() {
+        String cmd = " sort  \"/path with/spaces in/it\"    /path\\ with/escaped\\ spaces/"
+                + " \"escape\\\"escape\" 'noescape\\'noescape'' \"noescape\\ noescape\""
+                + " C:\\windows\\path";
+        String[] args = StaticUtils.parseCLICommand(cmd);
+        assertEquals("/path with/spaces in/it", args[1]);
+        assertEquals("/path with/escaped spaces/", args[2]);
+        assertEquals("escape\"escape", args[3]);
+        assertEquals("noescape\\noescape", args[4]);
+        assertEquals("noescape\\ noescape", args[5]);
+        assertEquals("C:\\windows\\path", args[6]);
+        assertEquals(args.length, 7);
+        args = StaticUtils.parseCLICommand(" ");
+        assertEquals(args[0], "");
+        assertEquals(args.length, 1);
+    }
 }

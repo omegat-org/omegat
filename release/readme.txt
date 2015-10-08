@@ -277,6 +277,7 @@ Code has been contributed by
   Wildrich Fourie
   Phillip Hall
   Jean-Christophe Helary
+  Chihiro Hio
   Thomas Huriaux
   Hans-Peter Jacobs
   Kyle Katarn

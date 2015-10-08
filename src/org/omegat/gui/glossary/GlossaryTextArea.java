@@ -69,6 +69,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.AlwaysVisibleCaret;
 import org.omegat.util.gui.DragTargetOverlay;
+import org.omegat.util.gui.JTextPaneLinkifier;
 import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -163,6 +164,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
                 return scrollPane;
             }
         });
+        
+        JTextPaneLinkifier.linkify(this);
     }
 
     @Override

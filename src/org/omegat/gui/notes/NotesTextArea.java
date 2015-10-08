@@ -34,6 +34,7 @@ import org.omegat.gui.common.EntryInfoPane;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.JTextPaneLinkifier;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -58,6 +59,8 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes {
         this.setEditable(false);
         this.setText(EXPLANATION);
         this.setMinimumSize(new Dimension(100, 50));
+        
+        JTextPaneLinkifier.linkify(this);
     }
 
     @Override

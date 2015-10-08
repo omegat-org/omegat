@@ -41,6 +41,7 @@ import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.AlwaysVisibleCaret;
+import org.omegat.util.gui.JTextPaneLinkifier;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -72,6 +73,8 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
         addCommentProvider(ENTRY_COMMENT_PROVIDER, 0);
 
         CoreEvents.registerEntryEventListener(this);
+        
+        JTextPaneLinkifier.linkify(this);
     }
 
     public void onEntryActivated(SourceTextEntry newEntry) {

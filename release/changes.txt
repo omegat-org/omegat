@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.3
 ----------------------------------------------------------------------
-   7 Enhancements
+   8 Enhancements
    2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -23,6 +23,9 @@
 
   - Machine translate only current segment, on demand
   https://sourceforge.net/p/omegat/feature-requests/552/
+
+  - Make URLs in Comments, Notes panes clickable
+  https://sourceforge.net/p/omegat/feature-requests/1141/
 
   Other changes:
 

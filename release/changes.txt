@@ -24,7 +24,7 @@
   - Machine translate only current segment, on demand
   https://sourceforge.net/p/omegat/feature-requests/552/
 
-  - Make URLs in Comments, Notes panes clickable
+  - Make URLs in Comments, Notes, Glossary panes clickable
   https://sourceforge.net/p/omegat/feature-requests/1141/
 
   Other changes:

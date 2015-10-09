@@ -85,7 +85,6 @@ import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.StaticUIUtils;
@@ -295,7 +294,7 @@ public class ScriptingWindow extends JFrame {
             return;
         }
 
-        logResult(StaticUtils.format(OStrings.getString("SCW_QUICK_RUN"), (index + 1)));
+        logResult(StringUtil.format(OStrings.getString("SCW_QUICK_RUN"), (index + 1)));
         ScriptItem scriptFile = new ScriptItem(new File(m_scriptsDirectory, m_quickScripts[index]));
 
         executeScriptFile(scriptFile, true);
@@ -352,7 +351,7 @@ public class ScriptingWindow extends JFrame {
             public void actionPerformed(ActionEvent evt) {
                 try {
                     m_currentScriptItem.setText(m_txtScriptEditor.getText());
-                    logResult(StaticUtils.format(OStrings.getString("SCW_SAVE_OK"),
+                    logResult(StringUtil.format(OStrings.getString("SCW_SAVE_OK"),
                             m_currentScriptItem.getAbsolutePath()));
                 } catch (IOException e) {
                     logResult(OStrings.getString("SCW_SAVE_ERROR"));
@@ -457,7 +456,7 @@ public class ScriptingWindow extends JFrame {
                     if (Preferences.existsPreference("scripts_quick_" + scriptKey)) {
                         runQuickScript(index);
                     } else {
-                        logResult(StaticUtils.format(OStrings.getString("SCW_NO_SCRIPT_BOUND"), scriptKey));
+                        logResult(StringUtil.format(OStrings.getString("SCW_NO_SCRIPT_BOUND"), scriptKey));
                     }
                 }
             });
@@ -476,7 +475,7 @@ public class ScriptingWindow extends JFrame {
 
                     setQuickScriptMenu(scriptItem, index);
 
-                    logResult(StaticUtils.format(OStrings.getString("SCW_SAVE_QUICK_SCRIPT"), scriptItem, scriptKey));
+                    logResult(StringUtil.format(OStrings.getString("SCW_SAVE_QUICK_SCRIPT"), scriptItem, scriptKey));
                 }
             });
             quickScriptPopup.add(addQuickScriptMenuItem);
@@ -487,7 +486,7 @@ public class ScriptingWindow extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
                     String scriptName = Preferences.getPreferenceDefault("scripts_quick_" + scriptKey, "(unknown)");
-                    logResult(StaticUtils.format(OStrings.getString("SCW_REMOVED_QUICK_SCRIPT"), scriptName, scriptKey));
+                    logResult(StringUtil.format(OStrings.getString("SCW_REMOVED_QUICK_SCRIPT"), scriptName, scriptKey));
                     Preferences.setPreference("scripts_quick_" + scriptKey, "");
                     m_quickScriptButtons[index].setToolTipText(OStrings.getString("SCW_NO_SCRIPT_SET"));
                     m_quickScriptButtons[index].setText(" " + scriptKey + " ");
@@ -538,7 +537,7 @@ public class ScriptingWindow extends JFrame {
         }
 
         m_txtResult.setText("");
-        logResult(StaticUtils.format(OStrings.getString("SCW_RUNNING_SCRIPT"),
+        logResult(StringUtil.format(OStrings.getString("SCW_RUNNING_SCRIPT"),
                 m_currentScriptItem.getAbsolutePath()));
 
         executeScriptFile(m_currentScriptItem, false);

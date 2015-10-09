@@ -51,7 +51,6 @@ import org.omegat.filters3.Element;
 import org.omegat.filters3.Entry;
 import org.omegat.filters3.Tag;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
@@ -227,7 +226,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         } else
             filename = inFile.getAbsolutePath();
         throw new SAXException("\n"
-                + StaticUtils.format(e.getMessage() + "\n" + OStrings.getString("XML_FATAL_ERROR"),
+                + StringUtil.format(e.getMessage() + "\n" + OStrings.getString("XML_FATAL_ERROR"),
                         filename, linenum));
     }
 

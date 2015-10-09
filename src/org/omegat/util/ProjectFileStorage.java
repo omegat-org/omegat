@@ -77,7 +77,7 @@ public class ProjectFileStorage {
         Omegat om = (Omegat) CONTEXT.createUnmarshaller().unmarshal(inFile);
 
         if (!OConsts.PROJ_CUR_VERSION.equals(om.getProject().getVersion())) {
-            throw new TranslationException(StaticUtils.format(
+            throw new TranslationException(StringUtil.format(
                     OStrings.getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"),
                     om.getProject().getVersion()));
         }

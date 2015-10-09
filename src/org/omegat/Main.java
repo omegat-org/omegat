@@ -502,7 +502,7 @@ public class Main {
 
         validateTagsConsoleMode();
 
-        System.out.println(StaticUtils.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), dir));
+        System.out.println(StringUtil.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), dir));
 
         Map<String, TMXEntry> data = p.align(p.getProjectProperties(), new File(dir));
         Map<String, PrepareTMXEntry> result = new TreeMap<String, PrepareTMXEntry>();

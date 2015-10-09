@@ -74,7 +74,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.AlwaysVisibleCaret;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.Styles.EditorColor;
@@ -276,7 +276,7 @@ class EntryListPane extends JTextPane {
             }
 
             if (entries.size() >= numberOfResults) {
-                addMessage(m_stringBuf, StaticUtils.format(OStrings.getString("SW_MAX_FINDS_REACHED"),
+                addMessage(m_stringBuf, StringUtil.format(OStrings.getString("SW_MAX_FINDS_REACHED"),
                         numberOfResults));
             }
 

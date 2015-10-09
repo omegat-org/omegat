@@ -70,7 +70,6 @@ import org.omegat.util.FileUtil;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.WikiGet;
 import org.omegat.util.FileUtil.ICollisionCallback;
@@ -410,7 +409,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         } else if (params == null) {
             return OStrings.getString(messageKey);
         } else {
-            return StaticUtils.format(OStrings.getString(messageKey), params);
+            return StringUtil.format(OStrings.getString(messageKey), params);
         }
     }
 
@@ -499,7 +498,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             public void run() {
                 String msg;
                 if (params != null) {
-                    msg = StaticUtils.format(OStrings.getString(warningKey), params);
+                    msg = StringUtil.format(OStrings.getString(warningKey), params);
                 } else {
                     msg = OStrings.getString(warningKey);
                 }
@@ -530,7 +529,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             public void run() {
                 String msg;
                 if (params != null) {
-                    msg = StaticUtils.format(OStrings.getString(errorKey), params);
+                    msg = StringUtil.format(OStrings.getString(errorKey), params);
                 } else {
                     msg = OStrings.getString(errorKey);
                 }
@@ -603,7 +602,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     public void showErrorDialogRB(String title, String message, Object... args) {
 
         JOptionPane.showMessageDialog(this.getApplicationFrame(),
-                StaticUtils.format(OStrings.getString(message), args), OStrings.getString(title),
+                StringUtil.format(OStrings.getString(message), args), OStrings.getString(title),
                 JOptionPane.ERROR_MESSAGE);
     }
 

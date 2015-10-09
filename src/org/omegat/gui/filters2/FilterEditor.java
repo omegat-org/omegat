@@ -46,7 +46,6 @@ import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.OneFilterTableModel;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
@@ -321,7 +320,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
         int row = instances.getSelectedRow();
         Files instance = filter.getFiles().get(row);
         if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this,
-                StaticUtils.format(OStrings.getString("FILTEREDITOR_really_delete_filter_instance"),
+                StringUtil.format(OStrings.getString("FILTEREDITOR_really_delete_filter_instance"),
                         instance.getSourceFilenameMask()),
                 OStrings.getString("FILTEREDITOR_Confirm_deletion_TITLE"), JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE)) {

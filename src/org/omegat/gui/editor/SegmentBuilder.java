@@ -50,7 +50,6 @@ import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -493,11 +492,11 @@ public class SegmentBuilder {
                 String changeDateString = DateFormat.getDateInstance().format(changeDate);
                 String changeTimeString = DateFormat.getTimeInstance().format(changeDate);
                 Object[] args = { author, changeDateString, changeTimeString };
-                text = StaticUtils.format(template, args);
+                text = StringUtil.format(template, args);
             } else {
                 template = OStrings.getString("TF_CUR_SEGMENT_AUTHOR");
                 Object[] args = { author };
-                text = StaticUtils.format(template, args);
+                text = StringUtil.format(template, args);
             }
         }
 
@@ -573,7 +572,7 @@ public class SegmentBuilder {
             String replacement = NUMBER_FORMAT.format(segmentNumberInProject);
             if (Preferences.isPreference(Preferences.MARK_NON_UNIQUE_SEGMENTS)
                     && ste.getDuplicate() != SourceTextEntry.DUPLICATE.NONE) {
-                replacement = StaticUtils.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
+                replacement = StringUtil.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
                         replacement,
                         ste.getNumberOfDuplicates());
             }

@@ -42,7 +42,6 @@ import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
 /**
@@ -383,33 +382,33 @@ public class ProjectProperties {
         String srcDir = getSourceRoot();
         File src = new File(srcDir);
         if (!src.exists()) {
-            throw new ProjectException(StaticUtils.format(OStrings.getString("PROJECT_SOURCE_FOLDER"), srcDir));
+            throw new ProjectException(StringUtil.format(OStrings.getString("PROJECT_SOURCE_FOLDER"), srcDir));
         }
         //
         String tgtDir = getTargetRoot();
         File tgt = new File(tgtDir);
         if (!tgt.exists()) {
-            throw new ProjectException(StaticUtils.format(OStrings.getString("PROJECT_TARGET_FOLDER"), tgtDir));
+            throw new ProjectException(StringUtil.format(OStrings.getString("PROJECT_TARGET_FOLDER"), tgtDir));
         }
         //
         String glsDir = getGlossaryRoot();
         File gls = new File(glsDir);
         if (!gls.exists()) {
-            throw new ProjectException(StaticUtils.format(OStrings.getString("PROJECT_GLOSSARY_FOLDER"), glsDir));
+            throw new ProjectException(StringUtil.format(OStrings.getString("PROJECT_GLOSSARY_FOLDER"), glsDir));
         }
         String wGlsDir = getWriteableGlossaryDir();
         if (!wGlsDir.endsWith(File.separator)) {
             wGlsDir += File.separator;
         }
         if (!wGlsDir.contains(getGlossaryRoot())) {
-            throw new ProjectException(StaticUtils.format(OStrings.getString("PROJECT_W_GLOSSARY"), glsDir));
+            throw new ProjectException(StringUtil.format(OStrings.getString("PROJECT_W_GLOSSARY"), glsDir));
         }
 
         //
         String tmxDir = getTMRoot();
         File tmx = new File(tmxDir);
         if (!tmx.exists()) {
-            throw new ProjectException(StaticUtils.format(OStrings.getString("PROJECT_TM_FOLDER"), tmxDir));
+            throw new ProjectException(StringUtil.format(OStrings.getString("PROJECT_TM_FOLDER"), tmxDir));
         }
         
         // Dictionary folder is always created automatically when it does not exist, for ascending

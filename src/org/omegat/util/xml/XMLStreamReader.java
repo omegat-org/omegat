@@ -37,7 +37,6 @@ import java.util.Stack;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
 /**
@@ -107,7 +106,7 @@ public class XMLStreamReader {
             } else if (!ver.equals("1.0")) {
                 throw new IOException(OStrings.getString("XSR_ERROR_NONVALID_XML")
                         + "\n"
-                        + StaticUtils.format(OStrings.getString("XSR_ERROR_UNSUPPORTED_XML_VERSION"), ver));
+                        + StringUtil.format(OStrings.getString("XSR_ERROR_UNSUPPORTED_XML_VERSION"), ver));
             }
             m_headBlock = blk;
         } else {
@@ -457,7 +456,7 @@ public class XMLStreamReader {
 
                 default:
                     err = true;
-                    msg = StaticUtils.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                    msg = StringUtil.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                             String.valueOf(Character.toChars(cp)), state);
                 }
                 break;
@@ -537,7 +536,7 @@ public class XMLStreamReader {
 
                 default:
                     err = true;
-                    msg = StaticUtils.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                    msg = StringUtil.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                             String.valueOf(Character.toChars(cp)), state);
                 }
                 break;
@@ -706,7 +705,7 @@ public class XMLStreamReader {
                 default:
                     throwErrorInGetNextTag(
                             blk,
-                            StaticUtils.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                            StringUtil.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                                     String.valueOf(Character.toChars(cp)), state));
                 }
                 break;
@@ -741,7 +740,7 @@ public class XMLStreamReader {
                 default:
                     throwErrorInGetNextTag(
                             blk,
-                            StaticUtils.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                            StringUtil.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                                     String.valueOf(Character.toChars(cp)), state));
                 }
                 break;
@@ -761,7 +760,7 @@ public class XMLStreamReader {
                 default:
                     throwErrorInGetNextTag(
                             blk,
-                            StaticUtils.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                            StringUtil.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                                     String.valueOf(Character.toChars(cp)), state));
                 }
                 break;
@@ -780,7 +779,7 @@ public class XMLStreamReader {
                 default:
                     throwErrorInGetNextTag(
                             blk,
-                            StaticUtils.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                            StringUtil.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                                     String.valueOf(Character.toChars(cp)), state));
                 }
                 break;
@@ -812,7 +811,7 @@ public class XMLStreamReader {
                 default:
                     throwErrorInGetNextTag(
                             blk,
-                            StaticUtils.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                            StringUtil.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                                     String.valueOf(Character.toChars(cp)), state));
                 }
                 break;
@@ -842,7 +841,7 @@ public class XMLStreamReader {
                 default:
                     throwErrorInGetNextTag(
                             blk,
-                            StaticUtils.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                            StringUtil.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                                     String.valueOf(Character.toChars(cp)), state));
                 }
                 break;
@@ -859,7 +858,7 @@ public class XMLStreamReader {
                 default:
                     throwErrorInGetNextTag(
                             blk,
-                            StaticUtils.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                            StringUtil.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                                     String.valueOf(Character.toChars(cp)), state));
                 }
                 break;
@@ -922,7 +921,7 @@ public class XMLStreamReader {
                 default:
                     throwErrorInGetNextTag(
                             blk,
-                            StaticUtils.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
+                            StringUtil.format(OStrings.getString("XSR_ERROR_UNEXPECTED_CHAR"),
                                     String.valueOf(Character.toChars(cp)), state));
                 }
                 break;
@@ -1175,22 +1174,22 @@ public class XMLStreamReader {
             try {
                 cp = Integer.valueOf(valString, 16);
             } catch (NumberFormatException ex) {
-                throw new TranslationException(StaticUtils.format(
+                throw new TranslationException(StringUtil.format(
                             OStrings.getString("XSR_ERROR_BAD_BINARY_CHAR"), val), ex);
             }
             if (!StringUtil.isValidXMLChar(cp)) {
-                throw new TranslationException(StaticUtils.format(
+                throw new TranslationException(StringUtil.format(
                         OStrings.getString("XSR_ERROR_BAD_BINARY_CHAR"), val));
             }
         } else {
             try {
                 cp = Integer.valueOf(valString, 10);
             } catch (NumberFormatException ex) {
-                throw new TranslationException(StaticUtils.format(
+                throw new TranslationException(StringUtil.format(
                         OStrings.getString("XSR_ERROR_BAD_DECIMAL_CHAR"), val), ex);
             }
             if (!StringUtil.isValidXMLChar(cp)) {
-                throw new TranslationException(StaticUtils.format(
+                throw new TranslationException(StringUtil.format(
                         OStrings.getString("XSR_ERROR_BAD_DECIMAL_CHAR"), val));
             }
         }

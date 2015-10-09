@@ -65,7 +65,7 @@ import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.ITokenizer.StemmingMode;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.AlwaysVisibleCaret;
 import org.omegat.util.gui.Styles.EditorColor;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -250,7 +250,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
                     if (el != null) {
                         if (el.getStartOffset() <= mousepos && el.getEndOffset() >= mousepos) {
                             final String w = displayedWords.get(i);
-                            String hideW = StaticUtils.format(OStrings.getString("DICTIONARY_HIDE"), w);
+                            String hideW = StringUtil.format(OStrings.getString("DICTIONARY_HIDE"), w);
                             JMenuItem item = popup.add(hideW);
                             item.addActionListener(new ActionListener() {
                                 public void actionPerformed(ActionEvent e) {

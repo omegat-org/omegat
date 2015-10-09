@@ -32,7 +32,7 @@ import java.util.TreeMap;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 public class POFilterTest extends TestFilterBase {
     public void testParse() throws Exception {
@@ -65,9 +65,9 @@ public class POFilterTest extends TestFilterBase {
         checkMulti("source1", null, "other context", null, null, null);
         checkMulti("source4", null, "one more context", null, null, null);
         checkMulti("source4", null, "one more context[1]", null, null,
-                StaticUtils.format(OStrings.getString("POFILTER_PLURAL_FORM_COMMENT"), 1) + "\n");
+                StringUtil.format(OStrings.getString("POFILTER_PLURAL_FORM_COMMENT"), 1) + "\n");
         checkMulti("source4", null, "one more context[2]", null, null,
-                StaticUtils.format(OStrings.getString("POFILTER_PLURAL_FORM_COMMENT"), 2) + "\n");
+                StringUtil.format(OStrings.getString("POFILTER_PLURAL_FORM_COMMENT"), 2) + "\n");
         checkMultiEnd();
     }
 

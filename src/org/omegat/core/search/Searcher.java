@@ -116,7 +116,7 @@ public class Searcher {
                     String key = entry.getSrcText() + entry.getTranslation();
                     if (entry.getEntryNum() == ENTRY_ORIGIN_TRANSLATION_MEMORY) {
                         if (m_tmxMap.containsKey(key) && (m_tmxMap.get(key) > 0)) {
-                        	String newPreamble = StaticUtils.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
+                        	String newPreamble = StringUtil.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
                         			entry.getPreamble(), m_tmxMap.get(key));
                             entry.setPreamble(newPreamble);
                         }
@@ -124,9 +124,9 @@ public class Searcher {
                         // at this stage each PM entry num is increased by 1
                         if (m_entryMap.containsKey(key) && (m_entryMap.get(key) > 0)) {
                         	String newPreamble = StringUtil.isEmpty(entry.getPreamble())
-                        			? StaticUtils.format(OStrings.getString("SW_NR_OF_MORE"),
+                        			? StringUtil.format(OStrings.getString("SW_NR_OF_MORE"),
                             				m_entryMap.get(key))
-                    				: StaticUtils.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
+                    				: StringUtil.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
                                             entry.getPreamble(), m_entryMap.get(key));
                             entry.setPreamble(newPreamble);
                         }

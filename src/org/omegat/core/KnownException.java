@@ -25,7 +25,7 @@
 package org.omegat.core;
 
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 /**
  * Know exception for some problems.
@@ -51,6 +51,6 @@ public class KnownException extends RuntimeException {
 
     @Override
     public String getLocalizedMessage() {
-        return StaticUtils.format(OStrings.getString(getMessage()), params);
+        return StringUtil.format(OStrings.getString(getMessage()), params);
     }
 }

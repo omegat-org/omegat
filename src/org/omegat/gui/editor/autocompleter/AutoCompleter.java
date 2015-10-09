@@ -309,14 +309,14 @@ public class AutoCompleter implements IAutoCompleter {
             
             if (views.size() >= 2) {
                 sb.append("<br>");
-                sb.append(StaticUtils.format(OStrings.getString("AC_NEXT_VIEW"),
+                sb.append(StringUtil.format(OStrings.getString("AC_NEXT_VIEW"),
                         nextKeyString,
                         views.get(nextViewNumber()).getName()));
             }
             
             if (views.size() > 2) {
                 sb.append("<br>");
-                sb.append(StaticUtils.format(OStrings.getString("AC_PREV_VIEW"),
+                sb.append(StringUtil.format(OStrings.getString("AC_PREV_VIEW"),
                         prevKeyString,
                         views.get(prevViewNumber()).getName()));
             }

@@ -30,7 +30,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
@@ -55,19 +55,19 @@ public class AboutDialog extends JDialog {
 
         initComponents();
         if ((OStrings.UPDATE != null) && !OStrings.UPDATE.equals("0")) {
-            versionLabel.setText(StaticUtils.format(OStrings.getString("ABOUTDIALOG_VERSION_UPDATE"),
+            versionLabel.setText(StringUtil.format(OStrings.getString("ABOUTDIALOG_VERSION_UPDATE"),
                     OStrings.VERSION, OStrings.UPDATE));
         } else {
-            versionLabel.setText(StaticUtils.format(OStrings.getString("ABOUTDIALOG_VERSION"),
+            versionLabel.setText(StringUtil.format(OStrings.getString("ABOUTDIALOG_VERSION"),
                     OStrings.VERSION));
         }
         Object[] args = { Runtime.getRuntime().totalMemory() / 1024 / 1024,
                 Runtime.getRuntime().freeMemory() / 1024 / 1024,
                 Runtime.getRuntime().maxMemory() / 1024 / 1024 };
-        String memoryUsage = StaticUtils.format(OStrings.getString("MEMORY_USAGE"), args);
+        String memoryUsage = StringUtil.format(OStrings.getString("MEMORY_USAGE"), args);
         memoryusage.setText(memoryUsage);
         
-        String javaVersion = StaticUtils.format(OStrings.getString("JAVA_VERSION"),
+        String javaVersion = StringUtil.format(OStrings.getString("JAVA_VERSION"),
                 System.getProperty("java.version"));
         javaversion.setText(javaVersion);
 

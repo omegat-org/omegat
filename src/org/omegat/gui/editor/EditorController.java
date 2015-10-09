@@ -345,7 +345,7 @@ public class EditorController implements IEditor {
         case FIRST_ENTRY:
             displayedFileIndex = 0;
             displayedEntryIndex = 0;
-            title = StaticUtils.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
+            title = StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
             data = editor;
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
@@ -358,7 +358,7 @@ public class EditorController implements IEditor {
             });
             break;
         case NO_CHANGE:
-            title = StaticUtils.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
+            title = StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
             data = editor;
             break;
         }
@@ -891,7 +891,7 @@ public class EditorController implements IEditor {
             nfPer.setRoundingMode(java.math.RoundingMode.DOWN);
             nfPer.setMaximumFractionDigits(1);
 
-            String message = StaticUtils.format( OStrings.getString("MW_PROGRESS_DEFAULT_PERCENTAGE"),
+            String message = StringUtil.format( OStrings.getString("MW_PROGRESS_DEFAULT_PERCENTAGE"),
                     (translatedUniqueInFile == 0) ? "0%" :
                             nfPer.format((double)translatedUniqueInFile / uniqueInFile),
                     uniqueInFile - translatedUniqueInFile,

@@ -53,6 +53,7 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.StaticUIUtils;
 import org.openide.awt.Mnemonics;
 
@@ -217,9 +218,9 @@ public class HelpFrame extends JFrame {
             String txt = "<b>" + link + "</b>";
             StringBuilder buf = new StringBuilder();
             buf.append("<html><body><p>");
-            buf.append(StaticUtils.format(OStrings.getString("HF_ERROR_EXTLINK_TITLE"), txt));
+            buf.append(StringUtil.format(OStrings.getString("HF_ERROR_EXTLINK_TITLE"), txt));
             buf.append("<p>");
-            buf.append(StaticUtils.format(OStrings.getString("HF_ERROR_EXTLINK_MSG"), "<b>index.html</b>"));
+            buf.append(StringUtil.format(OStrings.getString("HF_ERROR_EXTLINK_MSG"), "<b>index.html</b>"));
             buf.append("</body></html>");
 
             m_helpPane.setText(buf.toString());

@@ -108,8 +108,8 @@ public class OStrings {
      */
     public static String getDisplayVersion() {
         String result = ((UPDATE != null) && !UPDATE.equals("0"))
-                ? StaticUtils.format(getString("version-update-template"), VERSION, UPDATE)
-                : StaticUtils.format(getString("version-template"), VERSION, UPDATE);
+                ? StringUtil.format(getString("version-update-template"), VERSION, UPDATE)
+                : StringUtil.format(getString("version-template"), VERSION, UPDATE);
         if (!BRANDING.isEmpty()) {
             result += " " + BRANDING;
         }
@@ -120,7 +120,7 @@ public class OStrings {
      * 
      */
     public static String getProgressBarDefaultPrecentageText() {
-        return StaticUtils.format(OStrings.getString("MW_PROGRESS_DEFAULT_PERCENTAGE"),
+        return StringUtil.format(OStrings.getString("MW_PROGRESS_DEFAULT_PERCENTAGE"),
                 "--%", "--", "--%", "--", "--");
     }
 

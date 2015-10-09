@@ -96,6 +96,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DragTargetOverlay;
 import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
 import org.omegat.util.gui.OSXIntegration;
@@ -575,7 +576,7 @@ public class ProjectFilesListController {
         list.statLabel.setText(statText);
 
         uiUpdateImportButtonStatus();
-        list.setTitle(StaticUtils.format(OStrings.getString("PF_WINDOW_TITLE"), files.size()));
+        list.setTitle(StringUtil.format(OStrings.getString("PF_WINDOW_TITLE"), files.size()));
 
         OSXIntegration.setProxyIcon(list.getRootPane(), new File(Core.getProject().getProjectProperties().getSourceRoot()));
 

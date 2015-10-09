@@ -30,7 +30,7 @@ import javax.swing.JButton;
 import javax.swing.UIManager;
 
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
@@ -77,7 +77,7 @@ public class FileCollisionDialog extends javax.swing.JDialog {
     }
     
     public void setFilename(String name) {
-        message.setText(StaticUtils.format(OStrings.getString("DND_FILE_COLLISION_MESSAGE"), name));
+        message.setText(StringUtil.format(OStrings.getString("DND_FILE_COLLISION_MESSAGE"), name));
     }
     
     public void enableApplyToAll(boolean enabled) {

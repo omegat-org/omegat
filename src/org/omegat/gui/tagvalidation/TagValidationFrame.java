@@ -63,7 +63,7 @@ import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil.Tag;
 import org.omegat.util.gui.StaticUIUtils;
 import org.openide.awt.Mnemonics;
@@ -107,7 +107,7 @@ public class TagValidationFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
-                        StaticUtils.format(OStrings.getString("TAG_FIX_ALL_WARNING"), m_numFixableErrors),
+                        StringUtil.format(OStrings.getString("TAG_FIX_ALL_WARNING"), m_numFixableErrors),
                         OStrings.getString("CONFIRM_DIALOG_TITLE"), JOptionPane.YES_NO_OPTION)) {
                     return;
                 }

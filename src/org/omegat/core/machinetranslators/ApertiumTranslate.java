@@ -33,7 +33,6 @@ import java.util.regex.Pattern;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.WikiGet;
 
@@ -143,7 +142,7 @@ public class ApertiumTranslate extends BaseTranslate {
             if (m.find()) {
                 code = m.group(1);
             }
-            return StaticUtils.format(OStrings.getString("APERTIUM_ERROR"), code, details);
+            return StringUtil.format(OStrings.getString("APERTIUM_ERROR"), code, details);
         }
         String tr = v.substring(beg, end - 2); // Remove \n
 

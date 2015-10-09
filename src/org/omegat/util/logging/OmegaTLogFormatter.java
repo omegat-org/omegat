@@ -37,7 +37,7 @@ import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 /**
  * Formatter for output data with session ID
@@ -142,7 +142,7 @@ public class OmegaTLogFormatter extends Formatter {
         if (record.getParameters() == null) {
             message = format;
         } else {
-            message = StaticUtils.format(format, record.getParameters());
+            message = StringUtil.format(format, record.getParameters());
         }
         String[] lines = message.split("\r|\n");
         for (String line : lines) {

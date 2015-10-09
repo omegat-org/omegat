@@ -52,7 +52,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil;
 
 /**
@@ -574,7 +574,7 @@ public class PoFilter extends AbstractFilter {
         if (pair > 0) {
             s = unescape(sources[1].toString());
             pathSuffix = "[" + pair + "]";
-            c += StaticUtils.format(OStrings.getString("POFILTER_PLURAL_FORM_COMMENT"), pair) + "\n";
+            c += StringUtil.format(OStrings.getString("POFILTER_PLURAL_FORM_COMMENT"), pair) + "\n";
         } else {
             s = unescape(sources[pair].toString());
             pathSuffix = "";

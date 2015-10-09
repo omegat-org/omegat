@@ -33,7 +33,7 @@ import javax.swing.JFrame;
 
 import org.omegat.util.OStrings;
 import org.omegat.util.RuntimePreferences;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 import com.vlsolutions.swing.docking.Dockable;
 
@@ -50,7 +50,7 @@ public class ConsoleWindow implements IMainWindow {
     public void displayErrorRB(Throwable ex, String errorKey, Object... params) {
         String msg;
         if (params != null) {
-            msg = StaticUtils.format(OStrings.getString(errorKey), params);
+            msg = StringUtil.format(OStrings.getString(errorKey), params);
         } else {
             msg = OStrings.getString(errorKey);
         }
@@ -76,7 +76,7 @@ public class ConsoleWindow implements IMainWindow {
             msg = " ";
         } else {
             if (params != null) {
-                msg = StaticUtils.format(OStrings.getString(messageKey), params);
+                msg = StringUtil.format(OStrings.getString(messageKey), params);
             } else {
                 msg = OStrings.getString(messageKey);
             }
@@ -89,14 +89,14 @@ public class ConsoleWindow implements IMainWindow {
     }
     
     public void displayWarningRB(String message, String supercedesKey, Object... args) {
-        System.err.println(StaticUtils.format(OStrings.getString(message), args));
+        System.err.println(StringUtil.format(OStrings.getString(message), args));
     }
 
     /**
      * {@inheritDoc}
      */
     public void showErrorDialogRB(String title, String message, Object... args) {
-        System.err.println(StaticUtils.format(OStrings.getString(message), args));
+        System.err.println(StringUtil.format(OStrings.getString(message), args));
     }
 
     public void addDockable(Dockable pane) {

@@ -46,7 +46,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.Collator;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -626,30 +625,6 @@ public class StaticUtils {
         }
 
         return text;
-    }
-
-    /**
-     * Formats UI strings.
-     *
-     * Note: This is only a first attempt at putting right what goes wrong in
-     * MessageFormat. Currently it only duplicates single quotes, but it doesn't
-     * even test if the string contains parameters (numbers in curly braces),
-     * and it doesn't allow for string containg already escaped quotes.
-     *
-     * @param str
-     *            The string to format
-     * @param arguments
-     *            Arguments to use in formatting the string
-     *
-     * @return The formatted string
-     *
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
-     */
-    public static String format(String str, Object... arguments) {
-        // MessageFormat.format expects single quotes to be escaped
-        // by duplicating them, otherwise the string will not be formatted
-        str = str.replaceAll("'", "''");
-        return MessageFormat.format(str, arguments);
     }
 
     /**

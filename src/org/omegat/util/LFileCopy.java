@@ -47,7 +47,7 @@ public class LFileCopy {
     /** Copies one file. Creates directories on the path to dest if necessary. */
     public static void copy(File src, File dest) throws IOException {
         if (!src.exists()) {
-            throw new IOException(StaticUtils.format(OStrings.getString("LFC_ERROR_FILE_DOESNT_EXIST"),
+            throw new IOException(StringUtil.format(OStrings.getString("LFC_ERROR_FILE_DOESNT_EXIST"),
                     src.getAbsolutePath()));
         }
         FileInputStream fis = new FileInputStream(src);
@@ -103,7 +103,7 @@ public class LFileCopy {
      */
     public static void copy(File src, OutputStream dest) throws IOException {
         if (!src.exists()) {
-            throw new IOException(StaticUtils.format(OStrings.getString("LFC_ERROR_FILE_DOESNT_EXIST"),
+            throw new IOException(StringUtil.format(OStrings.getString("LFC_ERROR_FILE_DOESNT_EXIST"),
                     src.getAbsolutePath()));
         }
         FileInputStream fis = new FileInputStream(src);

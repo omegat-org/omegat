@@ -113,11 +113,11 @@ public class Log {
             for (String hn : hs) {
                 String word = hn.trim();
                 try {
-                    Class clz = Log.class.getClassLoader().loadClass(word);
+                    Class<?> clz = Log.class.getClassLoader().loadClass(word);
                     Handler h = (Handler) clz.newInstance();
                     String fname = props.getProperty(word + ".formatter");
                     if (fname != null) {
-                        Class clzF = Log.class.getClassLoader().loadClass(fname.trim());
+                        Class<?> clzF = Log.class.getClassLoader().loadClass(fname.trim());
                         h.setFormatter((Formatter) clzF.newInstance());
                     }
                     String level = props.getProperty(word + ".level");

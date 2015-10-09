@@ -187,4 +187,20 @@ public class StringUtilTest extends TestCase {
         assertEquals("One Two Three Four Five", StringUtil.compressSpaces(" One Two\nThree   Four\r\nFive "));
         assertEquals("Six seven", StringUtil.compressSpaces("Six\tseven"));
     }
+    
+    public void testIsValidXMLChar() {
+        assertFalse(StringUtil.isValidXMLChar(0x01));
+        assertTrue(StringUtil.isValidXMLChar(0x09));
+        assertTrue(StringUtil.isValidXMLChar(0x0A));
+        assertTrue(StringUtil.isValidXMLChar(0x0D));
+        
+        assertTrue(StringUtil.isValidXMLChar(0x21));
+        assertFalse(StringUtil.isValidXMLChar(0xD800));
+        
+        assertTrue(StringUtil.isValidXMLChar(0xE000));
+        assertFalse(StringUtil.isValidXMLChar(0xFFFE));
+        
+        assertTrue(StringUtil.isValidXMLChar(0x10000));
+        assertFalse(StringUtil.isValidXMLChar(0x110000));
+    }
 }

@@ -28,6 +28,7 @@ package org.omegat.util;
 import java.io.File;
 import java.util.List;
 
+import org.omegat.filters2.TranslationException;
 import org.omegat.util.xml.XMLBlock;
 import org.omegat.util.xml.XMLStreamReader;
 
@@ -91,6 +92,33 @@ public class XMLStreamReaderTest extends TestCase {
         assertStandaloneTag(lst.get(24), "standalone");
         
         xml.close();
+    }
+    
+    public void testBadEntity() throws Exception {
+        XMLStreamReader xml = new XMLStreamReader();
+        xml.killEmptyBlocks();
+        
+        XMLBlock blk;
+        
+        xml.setStream(new File("test/data/xml/test-badDecimalEntity.xml"));
+
+        assertNotNull(xml.advanceToTag("root"));
+        assertNotNull(blk = xml.advanceToTag("body"));
+        try {
+            assertNotNull(xml.closeBlock(blk));
+            fail("XML parsing should fail on bad decimal entity");
+        } catch (TranslationException ex) {
+        }
+        
+        xml.setStream(new File("test/data/xml/test-badHexEntity.xml"));
+
+        assertNotNull(xml.advanceToTag("root"));
+        assertNotNull(blk = xml.advanceToTag("body"));
+        try {
+            assertNotNull(xml.closeBlock(blk));
+            fail("XML parsing should fail on bad hex entity");
+        } catch (TranslationException ex) {
+        }
     }
     
     private void assertOpenTag(XMLBlock block, String name) {

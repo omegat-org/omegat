@@ -1178,12 +1178,20 @@ public class XMLStreamReader {
                 throw new TranslationException(StaticUtils.format(
                             OStrings.getString("XSR_ERROR_BAD_BINARY_CHAR"), val), ex);
             }
+            if (!StringUtil.isValidXMLChar(cp)) {
+                throw new TranslationException(StaticUtils.format(
+                        OStrings.getString("XSR_ERROR_BAD_BINARY_CHAR"), val));
+            }
         } else {
             try {
                 cp = Integer.valueOf(valString, 10);
             } catch (NumberFormatException ex) {
                 throw new TranslationException(StaticUtils.format(
                         OStrings.getString("XSR_ERROR_BAD_DECIMAL_CHAR"), val), ex);
+            }
+            if (!StringUtil.isValidXMLChar(cp)) {
+                throw new TranslationException(StaticUtils.format(
+                        OStrings.getString("XSR_ERROR_BAD_DECIMAL_CHAR"), val));
             }
         }
 

@@ -342,19 +342,26 @@ public class StringUtil {
         StringBuilder sb = new StringBuilder(str.length());
         for (int c, i = 0; i < str.length(); i += Character.charCount(c)) {
             c = str.codePointAt(i);
-            if (c < 0x20) {
-                if (c != 0x09 && c != 0x0A && c != 0x0D) {
-                    c = ' ';
-                }
-            } else if (c >= 0x20 && c <= 0xD7FF) {
-            } else if (c >= 0xE000 && c <= 0xFFFD) {
-            } else if (c >= 0x10000 && c <= 0x10FFFF) {
-            } else {
+            if (!isValidXMLChar(c)) {
                 c = ' ';
             }
             sb.appendCodePoint(c);
         }
         return sb.toString();
+    }
+    
+    public static boolean isValidXMLChar(int codePoint) {
+        if (codePoint < 0x20) {
+            if (codePoint != 0x09 && codePoint != 0x0A && codePoint != 0x0D) {
+                return false;
+            }
+        } else if (codePoint >= 0x20 && codePoint <= 0xD7FF) {
+        } else if (codePoint >= 0xE000 && codePoint <= 0xFFFD) {
+        } else if (codePoint >= 0x10000 && codePoint <= 0x10FFFF) {
+        } else {
+            return false;
+        }
+        return true;
     }
 
     /**

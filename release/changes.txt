@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.3
 ----------------------------------------------------------------------
-   8 Enhancements
+   9 Enhancements
    2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -26,6 +26,9 @@
 
   - Make URLs in Comments, Notes, Glossary panes clickable
   https://sourceforge.net/p/omegat/feature-requests/1141/
+
+  - Back up preferences when a loading error occurs
+  https://sourceforge.net/p/omegat/feature-requests/1142/
 
   Other changes:
 

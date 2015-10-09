@@ -188,13 +188,12 @@ public class MainWindowUI {
         mainWindow.progressLabel = new JLabel();
         mainWindow.lengthLabel = new JLabel();
 
-        mainWindow.statusLabel.setFont(mainWindow.statusLabel.getFont().deriveFont(11));
+        mainWindow.statusLabel.setFont(mainWindow.statusLabel.getFont().deriveFont(11f));
 
         Border border = UIManager.getBorder("OmegaTStatusArea.border");
         
-        final STATUS_BAR_MODE progressMode = STATUS_BAR_MODE.valueOf(
-                Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
-                        STATUS_BAR_MODE.DEFAULT).name());
+        final STATUS_BAR_MODE progressMode = Preferences.getPreferenceEnumDefault(
+                Preferences.SB_PROGRESS_MODE, STATUS_BAR_MODE.DEFAULT);
 
         String statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
         String tooltipText = "MW_PROGRESS_TOOLTIP";
@@ -206,14 +205,13 @@ public class MainWindowUI {
         mainWindow.progressLabel.setToolTipText(OStrings.getString(tooltipText));
 
         mainWindow.progressLabel.setBorder(border);
-        mainWindow.progressLabel.setHorizontalTextPosition(SwingConstants.CENTER);
         mainWindow.progressLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                STATUS_BAR_MODE[] modes = STATUS_BAR_MODE.values();
                 STATUS_BAR_MODE progressMode = Preferences.getPreferenceEnumDefault(
-                        Preferences.SB_PROGRESS_MODE,
-                        STATUS_BAR_MODE.DEFAULT);
-                progressMode = STATUS_BAR_MODE.values()[(progressMode.ordinal() + 1) % STATUS_BAR_MODE.values().length];
+                        Preferences.SB_PROGRESS_MODE, STATUS_BAR_MODE.DEFAULT);
+                progressMode = modes[(progressMode.ordinal() + 1) % modes.length];
 
                 Preferences.setPreference(Preferences.SB_PROGRESS_MODE, progressMode);
 
@@ -235,7 +233,6 @@ public class MainWindowUI {
 
         Mnemonics.setLocalizedText(mainWindow.lengthLabel, OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
         mainWindow.lengthLabel.setToolTipText(OStrings.getString("MW_SEGMENT_LENGTH_TOOLTIP"));
-        mainWindow.lengthLabel.setAlignmentX(1.0F);
         mainWindow.lengthLabel.setBorder(border);
         mainWindow.lengthLabel.setFocusable(false);
 

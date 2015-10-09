@@ -37,14 +37,15 @@ package org.omegat.util;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -690,8 +691,18 @@ public class Preferences {
         XMLStreamReader xml = new XMLStreamReader();
         xml.killEmptyBlocks();
 
+        File prefsFile = getPreferencesFile();
+        
         try {
-            if (setPreferencesSource(xml)) {
+            if (prefsFile == null) {
+                // If no prefs file is present, look inside JAR for defaults. Useful for e.g. Web Start.
+                InputStream is = Preferences.class.getResourceAsStream(FILE_PREFERENCES);
+                if (is != null) {
+                    xml.setStream(new BufferedReader(new InputStreamReader(is)));
+                    readXmlPrefs(xml);
+                }
+            } else {
+                xml.setStream(prefsFile);
                 readXmlPrefs(xml);
             }
         } catch (TranslationException te) {
@@ -700,20 +711,22 @@ public class Preferences {
             // print an error to the console as an FYI
             Log.logWarningRB("PM_WARNING_PARSEERROR_ON_READ");
             Log.log(te);
+            makeBackup(prefsFile);
         } catch (IndexOutOfBoundsException e3) {
             // error loading preference file - keep whatever was
             // loaded then return gracefully to calling function
             // print an error to the console as an FYI
             Log.logWarningRB("PM_WARNING_PARSEERROR_ON_READ");
             Log.log(e3);
+            makeBackup(prefsFile);
         } catch (UnsupportedEncodingException e3) {
             // unsupported encoding - forget about it
-            Log.logErrorRB("PM_UNSUPPORTED_ENCODING");
-            Log.log(e3);
+            Log.logErrorRB(e3, "PM_UNSUPPORTED_ENCODING");
+            makeBackup(prefsFile);
         } catch (IOException e4) {
             // can't read file - forget about it and move on
-            Log.logErrorRB("PM_ERROR_READING_FILE");
-            Log.log(e4);
+            Log.logErrorRB(e4, "PM_ERROR_READING_FILE");
+            makeBackup(prefsFile);
         } finally {
             try {
                 xml.close();
@@ -730,42 +743,23 @@ public class Preferences {
     }
 
     /**
-     * Set prefs reading source. Returns true on success, false on failure.
-     * Tries these sources in order:
+     * Gets the prefs file to use. Looks in these places in this order:
      * <ol>
      * <li>omegat.prefs in config dir
      * <li>omegat.prefs in install dir (defaults supplied with local install)
-     * <li>omegat.prefs inside JAR (defaults supplied inside app, e.g. for Web
-     * Start)
      * </ol>
-     * 
-     * @param xml
-     *            Reader to set source on
-     * @return true on success, false on failure
-     * @throws TranslationException
-     * @throws IOException
-     * @throws UnsupportedEncodingException
-     * @throws FileNotFoundException
      */
-    private static boolean setPreferencesSource(XMLStreamReader xml) throws FileNotFoundException,
-            UnsupportedEncodingException, IOException, TranslationException {
+    private static File getPreferencesFile() {
         File prefsFile = new File(StaticUtils.getConfigDir(), FILE_PREFERENCES);
-        if (!prefsFile.exists()) {
-            // If user prefs don't exist, fall back to defaults (possibly) bundled with OmegaT.
-            prefsFile = new File(StaticUtils.installDir(), FILE_PREFERENCES);
-        }
         if (prefsFile.exists()) {
-            xml.setStream(prefsFile);
-            return true;
+            return prefsFile;
         }
-        // If no prefs are found so far, look inside JAR for defaults. Useful for e.g. Web Start.
-        InputStream is = Preferences.class.getResourceAsStream(FILE_PREFERENCES);
-        if (is == null) {
-            return false;
+        // If user prefs don't exist, fall back to defaults (possibly) bundled with OmegaT.
+        prefsFile = new File(StaticUtils.installDir(), FILE_PREFERENCES);
+        if (prefsFile.exists()) {
+            return prefsFile;
         }
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        xml.setStream(br);
-        return true;
+        return null;
     }
 
     private static void readXmlPrefs(XMLStreamReader xml) throws TranslationException {
@@ -814,6 +808,20 @@ public class Preferences {
                 m_nameList.add(pref);
                 m_valList.add(val);
             }
+        }
+    }
+    
+    private static void makeBackup(File file) {
+        if (file == null || !file.isFile()) {
+            return;
+        }
+        String timestamp = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
+        File bakFile = new File(file.getAbsolutePath() + "." + timestamp + ".bak");
+        try {
+            LFileCopy.copy(file, bakFile);
+            Log.logWarningRB("PM_BACKED_UP_PREFS_FILE", bakFile.getAbsolutePath());
+        } catch (IOException ex) {
+            Log.logErrorRB(ex, "PM_ERROR_BACKING_UP_PREFS_FILE");
         }
     }
 

@@ -464,6 +464,13 @@ public class StaticUtils {
         // we should have a correct, existing config dir now
         return m_configDir;
     }
+    
+    /**
+     * For testing purposes only!
+     */
+    public static void setConfigDir(String path) {
+        m_configDir = path;
+    }
 
     public static String getScriptDir() {
         // If the script directory has already been determined, return it

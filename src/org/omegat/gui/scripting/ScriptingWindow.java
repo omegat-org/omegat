@@ -432,7 +432,7 @@ public class ScriptingWindow extends JFrame {
         for (int i = 0; i < NUMBERS_OF_QUICK_SCRIPTS; i++) {
             final int index = i;
             final int scriptKey = scriptKey(index);
-            m_quickScriptButtons[i] = new JButton("" + scriptKey + "");
+            m_quickScriptButtons[i] = new JButton(String.valueOf(scriptKey));
 
             // Run a script from the quick button bar
             m_quickScriptButtons[i].addActionListener(new ActionListener() {
@@ -690,6 +690,7 @@ public class ScriptingWindow extends JFrame {
             } else {
                 unsetQuickScriptMenu(i);
                 m_quickScriptButtons[i].setToolTipText(OStrings.getString("SCW_NO_SCRIPT_SET"));
+                m_quickScriptButtons[i].setText(String.valueOf(key));
             }
         }
     }

@@ -144,11 +144,11 @@ public class ScriptingWindow extends JFrame {
 
         StaticUIUtils.setEscapeClosable(this);
 
-        setScriptsDirectory(Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY, DEFAULT_SCRIPTS_DIR));
+        initWindowLayout();
+
         addScriptCommandToOmegaT();
         addRunShortcutToOmegaT();
-
-        initWindowLayout();
+        setScriptsDirectory(Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY, DEFAULT_SCRIPTS_DIR));
 
         monitor = new ScriptsMonitor(this, m_scriptList, getAvailableScriptExtensions());
         if (m_scriptsDirectory != null) {
@@ -214,14 +214,8 @@ public class ScriptingWindow extends JFrame {
             JMenuItem menuItem = new JMenuItem();
             m_quickMenus[i] = menuItem;
 
-            String scriptName = Preferences.getPreferenceDefault("scripts_quick_" + scriptKey(i), null);
-
-            if (!StringUtil.isEmpty(scriptName)) {
-                setQuickScriptMenu(new ScriptItem(new File(m_scriptsDirectory, scriptName)), i);
-            } else {
-                unsetQuickScriptMenu(i);
-            }
-
+            unsetQuickScriptMenu(i);
+            
             // Since the script is run while editing a segment, the shortcut should not interfere
             // with the segment content, so we set it to a Function key.
             m_quickMenus[i].setAccelerator(KeyStroke.getKeyStroke("shift ctrl F" + (i + 1)));
@@ -439,15 +433,6 @@ public class ScriptingWindow extends JFrame {
             final int index = i;
             final int scriptKey = scriptKey(index);
             m_quickScriptButtons[i] = new JButton("" + scriptKey + "");
-
-            String scriptName = Preferences.getPreferenceDefault("scripts_quick_" + scriptKey, null);
-
-            if (scriptName != null || "".equals(scriptName)) {
-                m_quickScriptButtons[i].setToolTipText(scriptName);
-                m_quickScriptButtons[i].setText("<" + scriptKey + ">");
-            } else {
-                m_quickScriptButtons[i].setToolTipText(OStrings.getString("SCW_NO_SCRIPT_SET"));
-            }
 
             // Run a script from the quick button bar
             m_quickScriptButtons[i].addActionListener(new ActionListener() {
@@ -674,6 +659,7 @@ public class ScriptingWindow extends JFrame {
     private void setScriptsDirectory(File scriptsDir) {
         
         if (!scriptsDir.isDirectory()) {
+            updateQuickScripts();
             return;
         }
         m_scriptsDirectory = scriptsDir;
@@ -687,6 +673,23 @@ public class ScriptingWindow extends JFrame {
         if (monitor != null) {
             monitor.stop();
             monitor.start(m_scriptsDirectory);
+        }
+        updateQuickScripts();
+    }
+    
+    private void updateQuickScripts() {
+        for (int i = 0; i < NUMBERS_OF_QUICK_SCRIPTS; i++) {
+            int key = scriptKey(i);
+            String scriptName = Preferences.getPreferenceDefault("scripts_quick_" + key, null);
+    
+            if (m_scriptsDirectory != null && !StringUtil.isEmpty(scriptName)) {
+                setQuickScriptMenu(new ScriptItem(new File(m_scriptsDirectory, scriptName)), i);
+                m_quickScriptButtons[i].setToolTipText(scriptName);
+                m_quickScriptButtons[i].setText("<" + key + ">");
+            } else {
+                unsetQuickScriptMenu(i);
+                m_quickScriptButtons[i].setToolTipText(OStrings.getString("SCW_NO_SCRIPT_SET"));
+            }
         }
     }
 

@@ -2,7 +2,7 @@
  OmegaT 3.5.3
 ----------------------------------------------------------------------
    9 Enhancements
-   2 Bug fixes
+   3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.5.3 vs 3.5.2 update 1
@@ -43,6 +43,10 @@ source=target
 
   - Spell Checking issue with a Turkish character 
   https://sourceforge.net/p/omegat/bugs/771/
+
+  - Unresolvable scripting folder setting can cause an empty
+Scripting window
+  https://sourceforge.net/p/omegat/bugs/775/
 
   - Tag validation could wrongly mention bad nesting for custom tags.
 Tag nesting is now only tested for OmegaT tags.

@@ -438,7 +438,7 @@ public class ScriptingWindow extends JFrame {
             m_quickScriptButtons[i].addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent a) {
-                    if (Preferences.existsPreference("scripts_quick_" + scriptKey)) {
+                    if (Preferences.existsPreference(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey)) {
                         runQuickScript(index);
                     } else {
                         logResult(StringUtil.format(OStrings.getString("SCW_NO_SCRIPT_BOUND"), scriptKey));
@@ -454,7 +454,7 @@ public class ScriptingWindow extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
                     ScriptItem scriptItem = (ScriptItem) m_scriptList.getSelectedValue();
-                    Preferences.setPreference("scripts_quick_" + scriptKey, scriptItem.getName());
+                    Preferences.setPreference(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey, scriptItem.getName());
                     m_quickScriptButtons[index].setToolTipText(scriptItem.getToolTip());
                     m_quickScriptButtons[index].setText("<" + scriptKey + ">");
 
@@ -470,9 +470,9 @@ public class ScriptingWindow extends JFrame {
             removeQuickScriptMenuItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
-                    String scriptName = Preferences.getPreferenceDefault("scripts_quick_" + scriptKey, "(unknown)");
+                    String scriptName = Preferences.getPreferenceDefault(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey, "(unknown)");
                     logResult(StringUtil.format(OStrings.getString("SCW_REMOVED_QUICK_SCRIPT"), scriptName, scriptKey));
-                    Preferences.setPreference("scripts_quick_" + scriptKey, "");
+                    Preferences.setPreference(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey, "");
                     m_quickScriptButtons[index].setToolTipText(OStrings.getString("SCW_NO_SCRIPT_SET"));
                     m_quickScriptButtons[index].setText(" " + scriptKey + " ");
 
@@ -488,7 +488,7 @@ public class ScriptingWindow extends JFrame {
                     addQuickScriptMenuItem.setEnabled(!m_scriptList.isSelectionEmpty());
 
                     // Disable remove a script command if the quick run button is not bounded
-                    String scriptName = Preferences.getPreferenceDefault("scripts_quick_" + scriptKey, null);
+                    String scriptName = Preferences.getPreferenceDefault(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey, null);
                     removeQuickScriptMenuItem.setEnabled(!StringUtil.isEmpty(scriptName));
                 }
 
@@ -680,7 +680,8 @@ public class ScriptingWindow extends JFrame {
     private void updateQuickScripts() {
         for (int i = 0; i < NUMBERS_OF_QUICK_SCRIPTS; i++) {
             int key = scriptKey(i);
-            String scriptName = Preferences.getPreferenceDefault("scripts_quick_" + key, null);
+            String scriptName = Preferences.getPreferenceDefault(
+                    Preferences.SCRIPTS_QUICK_PREFIX + key, null);
     
             if (m_scriptsDirectory != null && !StringUtil.isEmpty(scriptName)) {
                 setQuickScriptMenu(new ScriptItem(new File(m_scriptsDirectory, scriptName)), i);

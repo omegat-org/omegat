@@ -278,6 +278,7 @@ public class Preferences {
     public static final String SCRIPTS_DIRECTORY = "scripts_dir";
     
     /** Quick script names */
+    public static final String SCRIPTS_QUICK_PREFIX = "scripts_quick_";
     public static final String SCRIPTS_QUICK_1 = "scripts_quick_1";
     public static final String SCRIPTS_QUICK_2 = "scripts_quick_2";
     public static final String SCRIPTS_QUICK_3 = "scripts_quick_3";

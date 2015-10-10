@@ -94,7 +94,7 @@ public abstract class TestCore extends XMLTestCase {
             }
 
             public JFrame getApplicationFrame() {
-                return null;
+                return new JFrame();
             }
 
             public void lockUI() {

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.3
 ----------------------------------------------------------------------
-   9 Enhancements
+  11 Enhancements
    3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -38,6 +38,9 @@ window and the project files window open side-by-side in split view.
 
   - spellcheck.groovy has a new option to ignore segments where 
 source=target
+
+  - A new script, Strip Bidi Marks (strip_bidi_marks.groovy) allows
+removing bidi marks in the current segment 
 
   Bug fixes:
 

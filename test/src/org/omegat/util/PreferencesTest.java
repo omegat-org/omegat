@@ -43,44 +43,46 @@ public class PreferencesTest extends TestCase {
      */
     public void testPreferencesBackup() throws Exception {
         File tmpDir = FileUtil.createTempDir();
-        assertTrue(tmpDir.isDirectory());
-        
-        StaticUtils.setConfigDir(tmpDir.getAbsolutePath());
-        
-        // We can't use Preferences.FILE_PREFERENCES here
-        // because the prefs loading is done in a static
-        // block, so any references to the class will cause
-        // the load to happen before we have written our malformed
-        // prefs file.
-        File prefs = new File(tmpDir, "omegat.prefs");
-        
-        
-        // Write anything that is malformed XML, to force a parsing error.
-        PrintStream out = new PrintStream(prefs);
-        out.println("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
-        out.println("<omegat>");
-        out.println("<preference version=\"1.0\">");
-        out.close();
-        
-        // Do anything to make the Preferences class load.
-        Preferences.isPreference("");
-        
-        // The actual backup file will have a timestamp in the filename,
-        // so we have to loop through looking for it.
-        File backup = null;
-        for (File f : tmpDir.listFiles()) {
-            String name = f.getName();
-            if (name.startsWith("omegat.prefs") && name.endsWith(".bak")) {
-                backup = f;
-                break;
+        try {
+            assertTrue(tmpDir.isDirectory());
+            
+            StaticUtils.setConfigDir(tmpDir.getAbsolutePath());
+            
+            // We can't use Preferences.FILE_PREFERENCES here
+            // because the prefs loading is done in a static
+            // block, so any references to the class will cause
+            // the load to happen before we have written our malformed
+            // prefs file.
+            File prefs = new File(tmpDir, "omegat.prefs");
+            
+            
+            // Write anything that is malformed XML, to force a parsing error.
+            PrintStream out = new PrintStream(prefs);
+            out.println("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
+            out.println("<omegat>");
+            out.println("<preference version=\"1.0\">");
+            out.close();
+            
+            // Do anything to make the Preferences class load.
+            Preferences.isPreference("");
+            
+            // The actual backup file will have a timestamp in the filename,
+            // so we have to loop through looking for it.
+            File backup = null;
+            for (File f : tmpDir.listFiles()) {
+                String name = f.getName();
+                if (name.startsWith("omegat.prefs") && name.endsWith(".bak")) {
+                    backup = f;
+                    break;
+                }
             }
+            
+            assertNotNull(backup);
+            assertTrue(backup.isFile());
+            
+            TestFilterBase.compareBinary(prefs, backup);
+        } finally {
+            assertTrue(FileUtil.deleteTree(tmpDir));
         }
-        
-        assertNotNull(backup);
-        assertTrue(backup.isFile());
-        
-        TestFilterBase.compareBinary(prefs, backup);
-        
-        assertTrue(FileUtil.deleteTree(tmpDir));
     }
 }

@@ -51,7 +51,7 @@ public class FileUtilTest extends TestCase {
 
     @Override
     protected void tearDown() throws Exception {
-        FileUtil.deleteTree(base);
+        assertTrue(FileUtil.deleteTree(base));
     }
 
     public void testCopyFilesTo() throws Exception {

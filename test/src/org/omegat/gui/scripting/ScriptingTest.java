@@ -48,14 +48,13 @@ public class ScriptingTest extends TestCore {
         
         // Set bogus scripts folder (a file can't be a folder!)
         File tmp = File.createTempFile("omegat", "tmp");
-        Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, tmp.getAbsolutePath());
-        
         try {
+            Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, tmp.getAbsolutePath());
             new ScriptingWindow();
         } catch (HeadlessException ex) {
             // Can't do this test when headless
+        } finally {
+            assertTrue(tmp.delete());
         }
-        
-        assertTrue(tmp.delete());
     }
 }

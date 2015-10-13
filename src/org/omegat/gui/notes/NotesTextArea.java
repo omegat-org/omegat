@@ -30,6 +30,7 @@ package org.omegat.gui.notes;
 
 import java.awt.Dimension;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.common.EntryInfoPane;
 import org.omegat.gui.main.DockableScrollPane;
@@ -56,7 +57,7 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes {
         super(true);
 
         String title = OStrings.getString("GUI_NOTESWINDOW_SUBWINDOWTITLE_Notes");
-        mw.addDockable(new DockableScrollPane("NOTES", title, this, true));
+        Core.getMainWindow().addDockable(new DockableScrollPane("NOTES", title, this, true));
 
         setEditable(false);
         setText(EXPLANATION);

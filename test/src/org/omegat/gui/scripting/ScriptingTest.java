@@ -53,6 +53,7 @@ public class ScriptingTest extends TestCore {
             new ScriptingWindow();
         } catch (HeadlessException ex) {
             // Can't do this test when headless
+            ex.printStackTrace();
         } finally {
             assertTrue(tmp.delete());
         }

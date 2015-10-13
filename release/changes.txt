@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.3
 ----------------------------------------------------------------------
-  11 Enhancements
+  12 Enhancements
    4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -41,6 +41,9 @@ source=target
 
   - A new script, Strip Bidi Marks (strip_bidi_marks.groovy) allows
 removing bidi marks in the current segment 
+
+  - It's now possible to have an alternative translation where
+the translation is the same but the note is different
 
   Bug fixes:
 

@@ -994,7 +994,6 @@ public class EditorController implements IEditor {
         PrepareTMXEntry newen = new PrepareTMXEntry();
         newen.source = sb.getSourceText();
         newen.note = Core.getNotes().getNoteText();
-        boolean defaultTranslation = sb.isDefaultTranslation();
         if (forceTranslation != null) { // there is force translation
             switch (forceTranslation) {
             case UNTRANSLATED:
@@ -1035,13 +1034,16 @@ public class EditorController implements IEditor {
             }
         }
 
-        if (StringUtil.equalsWithNulls(oldTE.translation, newen.translation)) {
-            // translation wasn't changed
-            if (!StringUtil.nvl(oldTE.note, "").equals(StringUtil.nvl(newen.note, ""))) {
-                // note was changed
-                Core.getProject().setNote(entry, oldTE, newen.note);
-            }
-        } else {
+        boolean defaultTranslation = sb.isDefaultTranslation();
+        boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
+        boolean translationChanged = !StringUtil.equalsWithNulls(oldTE.translation, newen.translation);
+        boolean noteChanged = !StringUtil.nvl(oldTE.note, "").equals(StringUtil.nvl(newen.note, ""));
+        
+        if (!isNewAltTrans && !translationChanged && noteChanged) {
+            // Only note was changed, and we are not making a new alt translation.
+            Core.getProject().setNote(entry, oldTE, newen.note);
+        } else if (translationChanged || noteChanged) {
+            // We are changing translation or making a new alt translation.
             Core.getProject().setTranslation(entry, newen, defaultTranslation, null);
         }
 

@@ -1429,9 +1429,14 @@ public class RealProject implements IProject {
     }
 
     @Override
-    public void setNote(final SourceTextEntry entry, final TMXEntry oldTE, final String note) {
+    public void setNote(final SourceTextEntry entry, final TMXEntry oldTE, String note) {
         if (oldTE == null) {
             throw new IllegalArgumentException("RealProject.setNote(tr) can't be null");
+        }
+        
+        // Disallow empty notes. Use null to represent lack of note.
+        if (note != null && note.isEmpty()) {
+            note = null;
         }
 
         TMXEntry prevTrEntry = oldTE.defaultTranslation ? projectTMX

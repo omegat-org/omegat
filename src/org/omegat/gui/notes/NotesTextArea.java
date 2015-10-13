@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Zoltan Bartko
                2011 John Moran
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -41,6 +42,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * This is a pane that displays notes on translation units.
  * 
  * @author Martin Fleurke
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class NotesTextArea extends EntryInfoPane<String> implements INotes {
@@ -86,13 +88,15 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes {
     public void setNoteText(String text) {
         UIThreadsUtil.mustBeSwingThread();
 
-        this.setText(text != null ? text : "");
+        this.setText(text);
         this.setEditable(true);
     }
 
     public String getNoteText() {
         UIThreadsUtil.mustBeSwingThread();
 
-        return this.getText();
+        String text = this.getText();
+        // Disallow empty note. Use null to indicate lack of note.
+        return text.isEmpty() ? null : text;
     }
 }

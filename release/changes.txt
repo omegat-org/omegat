@@ -2,7 +2,7 @@
  OmegaT 3.5.3
 ----------------------------------------------------------------------
   11 Enhancements
-   3 Bug fixes
+   4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.5.3 vs 3.5.2 update 1
@@ -50,6 +50,9 @@ removing bidi marks in the current segment
   - Unresolvable scripting folder setting can cause an empty
 Scripting window
   https://sourceforge.net/p/omegat/bugs/775/
+
+  - Segments remain marked for note after note deletion
+  https://sourceforge.net/p/omegat/bugs/671/
 
   - Tag validation could wrongly mention bad nesting for custom tags.
 Tag nesting is now only tested for OmegaT tags.

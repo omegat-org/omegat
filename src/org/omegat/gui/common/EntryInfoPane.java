@@ -26,6 +26,7 @@
 package org.omegat.gui.common;
 
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 
 import javax.swing.JTextPane;
 
@@ -58,7 +59,9 @@ public abstract class EntryInfoPane<T> extends JTextPane implements IProjectEven
             });
         }
         CoreEvents.registerProjectChangeListener(this);
-        setDragEnabled(true);
+        if (!GraphicsEnvironment.isHeadless()) {
+            setDragEnabled(true);
+        }
         getDocument().addDocumentListener(new FontFallbackListener(this));
     }
 

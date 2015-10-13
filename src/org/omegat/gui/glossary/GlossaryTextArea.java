@@ -34,6 +34,7 @@ package org.omegat.gui.glossary;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -139,31 +140,33 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
 
         Core.getEditor().registerPopupMenuConstructors(300, new TransTipsPopup());
         
-        DragTargetOverlay.apply(this, new FileDropInfo(mw, false) {
-            @Override
-            public boolean canAcceptDrop() {
-                return Core.getProject().isProjectLoaded();
-            }
-            @Override
-            public String getOverlayMessage() {
-                return OStrings.getString("DND_ADD_GLOSSARY_FILE");
-            }
-            @Override
-            public String getImportDestination() {
-                return Core.getProject().getProjectProperties().getGlossaryRoot();
-            }
-            @Override
-            public boolean acceptFile(File pathname) {
-                String name = pathname.getName().toLowerCase();
-                return name.endsWith(OConsts.EXT_CSV_UTF8) || name.endsWith(OConsts.EXT_TBX)
-                        || name.endsWith(OConsts.EXT_TSV_DEF) || name.endsWith(OConsts.EXT_TSV_TXT)
-                        || name.endsWith(OConsts.EXT_TSV_UTF8);
-            }
-            @Override
-            public Component getComponentToOverlay() {
-                return scrollPane;
-            }
-        });
+        if (!GraphicsEnvironment.isHeadless()) {
+            DragTargetOverlay.apply(this, new FileDropInfo(mw, false) {
+                @Override
+                public boolean canAcceptDrop() {
+                    return Core.getProject().isProjectLoaded();
+                }
+                @Override
+                public String getOverlayMessage() {
+                    return OStrings.getString("DND_ADD_GLOSSARY_FILE");
+                }
+                @Override
+                public String getImportDestination() {
+                    return Core.getProject().getProjectProperties().getGlossaryRoot();
+                }
+                @Override
+                public boolean acceptFile(File pathname) {
+                    String name = pathname.getName().toLowerCase();
+                    return name.endsWith(OConsts.EXT_CSV_UTF8) || name.endsWith(OConsts.EXT_TBX)
+                            || name.endsWith(OConsts.EXT_TSV_DEF) || name.endsWith(OConsts.EXT_TSV_TXT)
+                            || name.endsWith(OConsts.EXT_TSV_UTF8);
+                }
+                @Override
+                public Component getComponentToOverlay() {
+                    return scrollPane;
+                }
+            });
+        }
         
         JTextPaneLinkifier.linkify(this);
     }

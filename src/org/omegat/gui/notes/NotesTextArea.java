@@ -58,9 +58,9 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes {
         String title = OStrings.getString("GUI_NOTESWINDOW_SUBWINDOWTITLE_Notes");
         mw.addDockable(new DockableScrollPane("NOTES", title, this, true));
 
-        this.setEditable(false);
-        this.setText(EXPLANATION);
-        this.setMinimumSize(new Dimension(100, 50));
+        setEditable(false);
+        setText(EXPLANATION);
+        setMinimumSize(new Dimension(100, 50));
         
         JTextPaneLinkifier.linkify(this);
     }
@@ -73,29 +73,29 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes {
     @Override
     protected void onProjectClose() {
         clear();
-        this.setText(EXPLANATION);
+        setText(EXPLANATION);
     }
 
     /** Clears up the pane. */
     public void clear() {
         UIThreadsUtil.mustBeSwingThread();
 
-        this.setText("");
-        this.setEditable(false);
-        this.ste = null;
+        setText("");
+        setEditable(false);
+        ste = null;
     }
 
     public void setNoteText(String text) {
         UIThreadsUtil.mustBeSwingThread();
 
-        this.setText(text);
-        this.setEditable(true);
+        setText(text);
+        setEditable(true);
     }
 
     public String getNoteText() {
         UIThreadsUtil.mustBeSwingThread();
 
-        String text = this.getText();
+        String text = getText();
         // Disallow empty note. Use null to indicate lack of note.
         return text.isEmpty() ? null : text;
     }

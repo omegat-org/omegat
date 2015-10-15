@@ -722,7 +722,13 @@ public class SearchWindowController {
                 form.m_filterButton.setEnabled(true);
                 form.m_replaceButton.setEnabled(true);
                 form.m_replaceAllButton.setEnabled(true);
-                viewer.requestFocus();
+                if (searcher.getSearchResults().isEmpty()) {
+                    // RFE#1143 https://sourceforge.net/p/omegat/feature-requests/1143/
+                    form.m_searchField.requestFocus();
+                    form.m_searchField.getEditor().selectAll();
+                } else {
+                    viewer.requestFocus();                    
+                }
             }
         });
     }

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.3
 ----------------------------------------------------------------------
-  12 Enhancements
+  13 Enhancements
    4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -29,6 +29,9 @@
 
   - Back up preferences when a loading error occurs
   https://sourceforge.net/p/omegat/feature-requests/1142/
+
+  - Set focus to "Search for" field if search returns zero hits
+  https://sourceforge.net/p/omegat/feature-requests/1143/
 
   Other changes:
 

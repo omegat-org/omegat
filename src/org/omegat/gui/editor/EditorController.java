@@ -389,10 +389,10 @@ public class EditorController implements IEditor {
         
         @Override
         public boolean handleDroppedObject(Object dropped) {
-            final List<File> files = (List<File>) dropped;
+            final List<?> files = (List<?>) dropped;
             
             // Only look at first file to determine intent to open project
-            File firstFile = files.get(0);
+            File firstFile = (File) files.get(0);
             if (firstFile.getName().equals(OConsts.FILE_PROJECT)) {
                 firstFile = firstFile.getParentFile();
             }
@@ -414,7 +414,7 @@ public class EditorController implements IEditor {
             return true;
         }
         
-        private boolean handleDroppedFiles(final List<File> files) {
+        private boolean handleDroppedFiles(final List<?> files) {
             if (!Core.getProject().isProjectLoaded()) {
                 return false;
             }

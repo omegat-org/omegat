@@ -241,9 +241,10 @@ public class DragTargetOverlay {
             return DnDConstants.ACTION_COPY;
         }
         
-        private List<File> filterFiles(List<File> files) {
+        private List<File> filterFiles(List<?> files) {
             List<File> filtered = new ArrayList<File>(files.size());
-            for (File file : files) {
+            for (Object o : files) {
+                File file = (File) o;
                 if (file.exists() && file.canRead() && acceptFile(file)) {
                     filtered.add(file);
                 }
@@ -253,7 +254,7 @@ public class DragTargetOverlay {
         
         @Override
         public boolean handleDroppedObject(Object dropped) {
-            return handleFiles(filterFiles((List<File>) dropped));
+            return handleFiles(filterFiles((List<?>) dropped));
         };
 
         protected boolean handleFiles(final List<File> files) {

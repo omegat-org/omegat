@@ -45,6 +45,9 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
+import javax.swing.text.Caret;
+import javax.swing.text.DefaultCaret;
+import javax.swing.text.JTextComponent;
 
 /**
  *
@@ -193,6 +196,13 @@ public class StaticUIUtils {
         Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
         if (comp.getHeight() > rect.height) {
             comp.setSize(comp.getWidth(), rect.height);
+        }
+    }
+    
+    public static void neverUpdateCaret(JTextComponent comp) {
+        Caret caret = comp.getCaret();
+        if (caret instanceof DefaultCaret) {
+            ((DefaultCaret) caret).setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
         }
     }
 }

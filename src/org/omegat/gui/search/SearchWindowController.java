@@ -150,10 +150,6 @@ public class SearchWindowController {
 
         loadPreferences();
 
-        ((EntryListPane) form.m_viewer).setFont(); // Otherwise, the
-                                                   // user-defined font is not
-                                                   // used
-
         if (!Core.getProject().isProjectLoaded()) {
             // restrict user to file only access
             form.m_rbDir.setSelected(true);

@@ -30,7 +30,6 @@
 package org.omegat.gui.search;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -71,11 +70,11 @@ import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.AlwaysVisibleCaret;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.Styles.EditorColor;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -146,6 +145,11 @@ class EntryListPane extends JTextPane {
 
     public EntryListPane() {
         setDocument(new DefaultStyledDocument());
+        
+        setDragEnabled(true);
+        setFont(Core.getMainWindow().getApplicationFont());
+        AlwaysVisibleCaret.apply(this);
+        StaticUIUtils.neverUpdateCaret(this);
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -189,7 +193,6 @@ class EntryListPane extends JTextPane {
         autoSyncWithEditor = Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_AUTO_SYNC, false);
         initInputMap(useTabForAdvance);
         setEditable(false);
-        AlwaysVisibleCaret.apply(this);
     }
 
     private void initInputMap(boolean useTabForAdvance) {
@@ -292,9 +295,6 @@ class EntryListPane extends JTextPane {
                 Log.log(ex);
             }
             setDocument(doc);
-            setCaretPosition(0);
-
-            setFont();
 
             if (!matches.isEmpty()) {
                 SwingUtilities.invokeLater(this);
@@ -395,19 +395,6 @@ class EntryListPane extends JTextPane {
 
         // Insert the message text
         m_stringBuf.append(message);
-    }
-
-    public void setFont() {
-        String srcFont = Preferences.getPreference(OConsts.TF_SRC_FONT_NAME);
-        if (!srcFont.equals("")) {
-            int fontsize;
-            try {
-                fontsize = Integer.parseInt(Preferences.getPreference(OConsts.TF_SRC_FONT_SIZE));
-            } catch (NumberFormatException nfe) {
-                fontsize = 12;
-            }
-            setFont(new Font(srcFont, Font.PLAIN, fontsize));
-        }
     }
 
     public void reset() {

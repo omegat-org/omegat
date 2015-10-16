@@ -7,7 +7,7 @@
                2009 Alex Buloichik
                2011 Martin Fleurke
                2013-2014 Enrique Estevez, Didier Briel
-               2015 Aaron Madlon-Kay
+               2015 Aaron Madlon-Kay, Enrique Estevez
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -78,10 +78,12 @@ import org.omegat.util.TagUtil;
  * "auto" for the target encoding is considered as being ASCII.
  *
  * Support for the comments into the Comments panel (localization notes).
+ * Optionally can leave Unicode literals (\\uXXXX) unescaped.
  */
 public class ResourceBundleFilter extends AbstractFilter {
 
     public static final String OPTION_REMOVE_STRINGS_UNTRANSLATED = "unremoveStringsUntranslated";
+    public static final String OPTION_DONT_UNESCAPE_U_LITERALS = "dontUnescapeULiterals";
     public static final String DEFAULT_TARGET_ENCODING = OConsts.ASCII;
 
     protected Map<String, String> align;
@@ -92,6 +94,11 @@ public class ResourceBundleFilter extends AbstractFilter {
      * If true, will remove non-translated segments in the target files
      */
     private boolean removeStringsUntranslated = false;
+    
+    /**
+     * If true, will not convert characters into \\uXXXX notation
+     */
+    private boolean dontUnescapeULiterals = false;
 
     @Override
     public String getFileFormatName() {
@@ -165,9 +172,9 @@ public class ResourceBundleFilter extends AbstractFilter {
         }
 
         StringBuilder result = new StringBuilder();
-        for (int cp, i = 0; i < ascii.length(); i += Character.charCount(cp)) {
+        for (int cp, len = ascii.length(), i = 0; i < len; i += Character.charCount(cp)) {
             cp = ascii.codePointAt(i);
-            if (cp == '\\' && ascii.codePointCount(i, ascii.length()) > 1) {
+            if (cp == '\\' && ascii.codePointCount(i, len) > 1) {
                 i += Character.charCount(cp);
                 cp = ascii.codePointAt(i);
                 if (cp != 'u') {
@@ -180,13 +187,20 @@ public class ResourceBundleFilter extends AbstractFilter {
                     } else {
                         result.append('\\');
                     }
+                } else if (dontUnescapeULiterals) {
+                    // Escape this \ because removeExtraSlashes() will be called later,
+                    // and the desired result is to have a single \ remain.
+                    result.append("\\\\");
                 } else {
                     // checking if the string is long enough
-                    if (ascii.codePointCount(i, ascii.length()) >= 1 + 4) {
+                    if (ascii.codePointCount(i, len) >= 1 + 4) {
                         int uStart = ascii.offsetByCodePoints(i, 1);
                         int uEnd = ascii.offsetByCodePoints(uStart, 4);
                         String uStr = ascii.substring(uStart, uEnd);
                         cp = Integer.parseInt(uStr, 16);
+                        if (!Character.isDefined(cp)) {
+                            throw new IOException(OStrings.getString("RBFH_ERROR_ILLEGAL_U_SEQUENCE"));
+                        }
                         i = uEnd - Character.charCount(cp);
                     } else {
                         throw new IOException(OStrings.getString("RBFH_ERROR_ILLEGAL_U_SEQUENCE"));
@@ -217,10 +231,27 @@ public class ResourceBundleFilter extends AbstractFilter {
         
         StringBuilder result = new StringBuilder();
 
-        for (int cp, i = 0; i < text.length(); i += Character.charCount(cp)) {
+        for (int cp, len = text.length(), i = 0; i < len; i += Character.charCount(cp)) {
             cp = text.codePointAt(i);
             if (cp == '\\') {
-                result.append("\\\\");
+                if (dontUnescapeULiterals && text.codePointCount(i, len) >= 1 + 1 + 4
+                        && text.codePointAt(text.offsetByCodePoints(i, 1)) == 'u') {
+                    // If we are keeping Unicode literals unescaped then we don't want
+                    // to double-escape the leading \ here. So look ahead to see if this
+                    // is a valid literal, and if so output the naked \. Otherwise we
+                    // treat this as a normal \ that needs normal escaping as \\.
+                    int uStart = text.offsetByCodePoints(i, 2);
+                    int uEnd = text.offsetByCodePoints(uStart, 4);
+                    String uStr = text.substring(uStart, uEnd);
+                    int uChr = Integer.parseInt(uStr, 16);
+                    if (Character.isDefined(uChr)) {
+                        result.append("\\");
+                    } else {
+                        result.append("\\\\");
+                    }
+                } else {
+                    result.append("\\\\");
+                }
             } else if (cp == '\n') {
                 result.append("\\n");
             } else if (cp == '\r') {
@@ -308,6 +339,10 @@ public class ResourceBundleFilter extends AbstractFilter {
 
         // Parameter in the options of filter to customize the target file
         removeStringsUntranslated = processOptions != null && "true".equalsIgnoreCase(processOptions.get(OPTION_REMOVE_STRINGS_UNTRANSLATED));
+        
+        // Parameter in the options of filter to customize the behavior of the filter
+        dontUnescapeULiterals = processOptions != null && "true".equalsIgnoreCase(processOptions.get(OPTION_DONT_UNESCAPE_U_LITERALS));
+        
         // Initialize the comments
         comments = null;
         while ((str = getNextLine(lbpr)) != null) {
@@ -328,6 +363,11 @@ public class ResourceBundleFilter extends AbstractFilter {
             // skipping comments
             int firstCp = trimmed.codePointAt(0);
             if (firstCp == '#' || firstCp == '!') {
+                // The comment might have extra slashes due to e.g. not unescaping
+                // Unicode literals. Ideally we would not modify comment content at
+                // all, but that's not realistic given that we want to ensure that
+                // the entire file's encoding is consistent.
+                str = removeExtraSlashes(str);
                 outfile.write(toAscii(str, false) + lbpr.getLinebreak());
                 // Save the comments
                 comments = (comments == null ? str : comments + "\n" + str);

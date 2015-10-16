@@ -3,7 +3,7 @@ OmegaT - Computer Assisted Translation (CAT) tool
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2013 Enrique Estévez
+ Copyright (C) 2013, 2015 Enrique Estevez
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -41,7 +41,7 @@ import org.omegat.util.gui.StaticUIUtils;
  * 
  * Code modified from the file: MozillaDTDOptionsDialog.java
  * 
- * @author Enrique Estévez (keko.gl@gmail.com)
+ * @author Enrique Estevez (keko.gl@gmail.com)
  */
 @SuppressWarnings("serial")
 public class ResourceBundleOptionsDialog extends javax.swing.JDialog {
@@ -63,6 +63,9 @@ public class ResourceBundleOptionsDialog extends javax.swing.JDialog {
         String removeStringsUntranslated = options.get(ResourceBundleFilter.OPTION_REMOVE_STRINGS_UNTRANSLATED);
         removeStringsUntranslatedCB.setSelected("true".equalsIgnoreCase(removeStringsUntranslated));
 
+        String notConvertCharacters = options.get(ResourceBundleFilter.OPTION_DONT_UNESCAPE_U_LITERALS);
+        dontUnescapeULiteralsCB.setSelected("true".equalsIgnoreCase(notConvertCharacters));
+        
         StaticUIUtils.setEscapeAction(this, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -93,6 +96,7 @@ public class ResourceBundleOptionsDialog extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         removeStringsUntranslatedCB = new javax.swing.JCheckBox();
+        dontUnescapeULiteralsCB = new javax.swing.JCheckBox();
         buttonPanel = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -110,10 +114,22 @@ public class ResourceBundleOptionsDialog extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         jPanel1.add(removeStringsUntranslatedCB, gridBagConstraints);
+
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(dontUnescapeULiteralsCB, bundle.getString("RB_FILTER_NOT_CONVERT_UNICODE_CHARACTERS")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel1.add(dontUnescapeULiteralsCB, gridBagConstraints);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -146,6 +162,7 @@ private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_clos
 
 private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         options.put(ResourceBundleFilter.OPTION_REMOVE_STRINGS_UNTRANSLATED, Boolean.toString(removeStringsUntranslatedCB.isSelected()));
+        options.put(ResourceBundleFilter.OPTION_DONT_UNESCAPE_U_LITERALS, Boolean.toString(dontUnescapeULiteralsCB.isSelected()));
         doClose(RET_OK);
 }//GEN-LAST:event_okButtonActionPerformed
 
@@ -162,6 +179,7 @@ private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JCheckBox dontUnescapeULiteralsCB;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton okButton;
     private javax.swing.JCheckBox removeStringsUntranslatedCB;

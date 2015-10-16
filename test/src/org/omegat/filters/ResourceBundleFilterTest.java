@@ -25,6 +25,9 @@
 
 package org.omegat.filters;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
@@ -77,5 +80,19 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         checkMulti("\uD835\uDC00\uD835\uDC01\uD835\uDC02", "ID", null, null, null, null);
         checkMulti("\uD835\uDC03\uD835\uDC04\uD835\uDC05", "ID2", null, null, null, null);
         checkMultiEnd();
+    }
+    
+    public void testDoNotEscapeUnicodeLiterals() throws Exception {
+        String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-UnicodeLiterals.properties";
+        ResourceBundleFilter filter = new ResourceBundleFilter();
+        Map<String, String> options = new HashMap<String, String>();
+        options.put(ResourceBundleFilter.OPTION_DONT_UNESCAPE_U_LITERALS, "true");
+        IProject.FileInfo fi = loadSourceFiles(filter, f, options);
+
+        checkMultiStart(fi, f);
+        checkMulti("a\nb\\u0020\\ad", "MU", null, null, null, "# \\u00ad");
+        checkMultiEnd();
+        
+        translateText(filter, f, options);
     }
 }

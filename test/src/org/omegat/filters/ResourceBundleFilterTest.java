@@ -71,6 +71,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         checkMulti("Value3", "ID3", null, null, null, "# some comment");
         checkMulti("Value4", "ID4", null, null, null, "# multiple line\n# comment");
         checkMulti("Value5", "ID5", null, null, null, "! alternate comment style");
+        checkMulti("Value\u2603", "ID6", null, null, null, "# Unicode escape \u2603");
         checkMultiEnd();
         
         f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-SMP.properties";

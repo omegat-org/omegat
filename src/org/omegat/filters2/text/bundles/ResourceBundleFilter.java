@@ -188,9 +188,8 @@ public class ResourceBundleFilter extends AbstractFilter {
                         result.append('\\');
                     }
                 } else if (dontUnescapeULiterals) {
-                    // Escape this \ because removeExtraSlashes() will be called later,
-                    // and the desired result is to have a single \ remain.
-                    result.append("\\\\");
+                    // Put back the \ we swallowed
+                    result.append('\\');
                 } else {
                     // checking if the string is long enough
                     if (ascii.codePointCount(i, len) >= 1 + 4) {
@@ -234,21 +233,8 @@ public class ResourceBundleFilter extends AbstractFilter {
         for (int cp, len = text.length(), i = 0; i < len; i += Character.charCount(cp)) {
             cp = text.codePointAt(i);
             if (cp == '\\') {
-                if (dontUnescapeULiterals && text.codePointCount(i, len) >= 1 + 1 + 4
-                        && text.codePointAt(text.offsetByCodePoints(i, 1)) == 'u') {
-                    // If we are keeping Unicode literals unescaped then we don't want
-                    // to double-escape the leading \ here. So look ahead to see if this
-                    // is a valid literal, and if so output the naked \. Otherwise we
-                    // treat this as a normal \ that needs normal escaping as \\.
-                    int uStart = text.offsetByCodePoints(i, 2);
-                    int uEnd = text.offsetByCodePoints(uStart, 4);
-                    String uStr = text.substring(uStart, uEnd);
-                    int uChr = Integer.parseInt(uStr, 16);
-                    if (Character.isDefined(uChr)) {
-                        result.append("\\");
-                    } else {
-                        result.append("\\\\");
-                    }
+                if (dontUnescapeULiterals && containsUEscapeAt(text, i)) {
+                    result.append("\\");
                 } else {
                     result.append("\\\\");
                 }
@@ -280,6 +266,24 @@ public class ResourceBundleFilter extends AbstractFilter {
         return result.toString();
         
     }
+    
+    private static boolean containsUEscapeAt(String text, int offset) {
+        if (text.codePointCount(offset, text.length()) < 1 + 1 + 4) {
+            return false;
+        }
+        if (text.codePointAt(text.offsetByCodePoints(offset, 1)) != 'u') {
+            return false;
+        }
+        int uStart = text.offsetByCodePoints(offset, 2);
+        int uEnd = text.offsetByCodePoints(uStart, 4);
+        String uStr = text.substring(uStart, uEnd);
+        try {
+            int uChr = Integer.parseInt(uStr, 16);
+            return Character.isDefined(uChr);
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+    }
 
     /**
      * Removes extra slashes from, e.g. "\ ", "\=" and "\:" typical in
@@ -292,12 +296,14 @@ public class ResourceBundleFilter extends AbstractFilter {
      */
     private String removeExtraSlashes(String string) {
         StringBuilder result = new StringBuilder(string.length());
-        for (int cp, i = 0; i < string.length(); i += Character.charCount(cp)) {
+        for (int cp, len = string.length(), i = 0; i < len; i += Character.charCount(cp)) {
             cp = string.codePointAt(i);
             if (cp == '\\') {
-                // Fix for [ 1812183 ] Properties: space before "=" shouldn't
-                // be part of the key, contributed by Arno Peters
-                if (string.codePointCount(i, string.length()) > 1) {
+                if (dontUnescapeULiterals && containsUEscapeAt(string, i)) {
+                    // Don't remove \ before \\uXXXX if we are not unescaping
+                } else if (string.codePointCount(i, len) > 1) {
+                    // Fix for [ 1812183 ] Properties: space before "=" shouldn't
+                    // be part of the key, contributed by Arno Peters
                     i += Character.charCount(cp);
                     cp = string.codePointAt(i);
                 } else {
@@ -363,11 +369,6 @@ public class ResourceBundleFilter extends AbstractFilter {
             // skipping comments
             int firstCp = trimmed.codePointAt(0);
             if (firstCp == '#' || firstCp == '!') {
-                // The comment might have extra slashes due to e.g. not unescaping
-                // Unicode literals. Ideally we would not modify comment content at
-                // all, but that's not realistic given that we want to ensure that
-                // the entire file's encoding is consistent.
-                str = removeExtraSlashes(str);
                 outfile.write(toAscii(str, false) + lbpr.getLinebreak());
                 // Save the comments
                 comments = (comments == null ? str : comments + "\n" + str);

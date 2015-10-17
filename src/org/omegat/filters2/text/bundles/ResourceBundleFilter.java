@@ -47,6 +47,7 @@ import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
+import org.omegat.filters2.TranslationException;
 import org.omegat.util.Log;
 import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.NullBufferedWriter;
@@ -163,9 +164,10 @@ public class ResourceBundleFilter extends AbstractFilter {
      * <li>But! Keeps a backspace in '\ ', '\=', '\:' etc (non-trimmable space
      * or non-key-value-breaking :-) equals).
      * <ul>
+     * Change from BufferedReader to LinebreakPreservingReader was part of fix
+     * for bug 1462566
      */
-    protected String getNextLine(LinebreakPreservingReader reader) throws IOException // fix for bug 1462566
-    {
+    protected String getNextLine(LinebreakPreservingReader reader) throws IOException, TranslationException {
         String ascii = reader.readLine();
         if (ascii == null) {
             return null;
@@ -192,17 +194,20 @@ public class ResourceBundleFilter extends AbstractFilter {
                     result.append('\\');
                 } else {
                     // checking if the string is long enough
-                    if (ascii.codePointCount(i, len) >= 1 + 4) {
-                        int uStart = ascii.offsetByCodePoints(i, 1);
-                        int uEnd = ascii.offsetByCodePoints(uStart, 4);
-                        String uStr = ascii.substring(uStart, uEnd);
+                    if (ascii.codePointCount(i, len) < 1 + 4) {
+                        throw new TranslationException(OStrings.getString("RBFH_ERROR_ILLEGAL_U_SEQUENCE"));
+                    }
+                    int uStart = ascii.offsetByCodePoints(i, 1);
+                    int uEnd = ascii.offsetByCodePoints(uStart, 4);
+                    String uStr = ascii.substring(uStart, uEnd);
+                    try {
                         cp = Integer.parseInt(uStr, 16);
                         if (!Character.isDefined(cp)) {
-                            throw new IOException(OStrings.getString("RBFH_ERROR_ILLEGAL_U_SEQUENCE"));
+                            throw new TranslationException(OStrings.getString("RBFH_ERROR_ILLEGAL_U_SEQUENCE"));
                         }
                         i = uEnd - Character.charCount(cp);
-                    } else {
-                        throw new IOException(OStrings.getString("RBFH_ERROR_ILLEGAL_U_SEQUENCE"));
+                    } catch (NumberFormatException ex) {
+                        throw new TranslationException(OStrings.getString("RBFH_ERROR_ILLEGAL_U_SEQUENCE"), ex);
                     }
                 }
             }
@@ -336,7 +341,8 @@ public class ResourceBundleFilter extends AbstractFilter {
      * Doing the processing of the file...
      */
     @Override
-    public void processFile(BufferedReader reader, BufferedWriter outfile, org.omegat.filters2.FilterContext fc) throws IOException {
+    public void processFile(BufferedReader reader, BufferedWriter outfile, FilterContext fc)
+            throws IOException, TranslationException {
         LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix for bug 1462566
         String str;
         // Support to show the comments (localization notes) into the Comments panel

@@ -31,6 +31,7 @@ import java.util.Map;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
+import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 
 public class ResourceBundleFilterTest extends TestFilterBase {
@@ -71,7 +72,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         checkMulti("Value3", "ID3", null, null, null, "# some comment");
         checkMulti("Value4", "ID4", null, null, null, "# multiple line\n# comment");
         checkMulti("Value5", "ID5", null, null, null, "! alternate comment style");
-        checkMulti("Value\u2603", "ID6", null, null, null, "# Unicode escape \u2603");
+        checkMulti("Value\u2603", "ID6", null, null, null, "# Unicode escape \u2603"); // U+2603 SNOWMAN
         checkMultiEnd();
         
         f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-SMP.properties";
@@ -95,5 +96,25 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         checkMultiEnd();
         
         translateText(filter, f, options);
+    }
+    
+    public void testBadUnicodeLiterals() throws Exception {
+        String base = "test/data/filters/resourceBundle/";
+        ResourceBundleFilter filter = new ResourceBundleFilter();
+        try {
+            loadSourceFiles(filter, base + "file-ResourceBundleFilter-BadLiteral1.properties");
+            fail("Failed to catch invalid Unicode literal: too short");
+        } catch (TranslationException ex) {
+        }
+        try {
+            loadSourceFiles(filter, base + "file-ResourceBundleFilter-BadLiteral2.properties");
+            fail("Failed to catch invalid Unicode literal: not a valid character");
+        } catch (TranslationException ex) {
+        }
+        try {
+            loadSourceFiles(filter, base + "file-ResourceBundleFilter-BadLiteral3.properties");
+            fail("Failed to catch invalid Unicode literal: not hex code");
+        } catch (TranslationException ex) {
+        }
     }
 }

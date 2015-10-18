@@ -25,6 +25,7 @@
 
 package svn;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.PropertyResourceBundle;
 
@@ -49,18 +50,25 @@ public class BundleTest extends TestCase {
      * @see PropertyResourceBundle https://docs.oracle.com/javase/8/docs/api/java/util/PropertyResourceBundle.html
      */
     public void testBundleEncodings() throws Exception {
+        // Test English bundle separately as its name corresponds to the
+        // empty locale, and will not be resolved otherwise.
+        assertEncoding("Bundle.properties");
         for (Language lang : Language.LANGUAGES) {
             String bundle = "Bundle_" + lang.getLocaleCode() + ".properties";
-            InputStream stream = Main.class.getResourceAsStream(bundle);
-            if (stream == null) {
-                continue;
-            }
-            String encoding = EncodingDetector.detectEncoding(stream);
-            System.out.println(bundle + ": " + encoding);
-            // The detector will give null for ASCII and Windows-1252 for ISO-8859-1;
-            // yes, this is not technically correct, but it's close enough. See:
-            // http://www.i18nqa.com/debug/table-iso8859-1-vs-windows-1252.html
-            assertTrue(encoding == null || "WINDOWS-1252".equals(encoding));
+            assertEncoding(bundle);
         }
+    }
+    
+    private void assertEncoding(String bundle) throws IOException {
+        InputStream stream = Main.class.getResourceAsStream(bundle);
+        if (stream == null) {
+            return;
+        }
+        String encoding = EncodingDetector.detectEncoding(stream);
+        System.out.println(bundle + ": " + encoding);
+        // The detector will give null for ASCII and Windows-1252 for ISO-8859-1;
+        // yes, this is not technically correct, but it's close enough. See:
+        // http://www.i18nqa.com/debug/table-iso8859-1-vs-windows-1252.html
+        assertTrue(encoding == null || "WINDOWS-1252".equals(encoding));
     }
 }

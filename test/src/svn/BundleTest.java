@@ -27,7 +27,9 @@ package svn;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Locale;
 import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
 
 import org.omegat.Main;
 import org.omegat.util.EncodingDetector;
@@ -70,5 +72,17 @@ public class BundleTest extends TestCase {
         // yes, this is not technically correct, but it's close enough. See:
         // http://www.i18nqa.com/debug/table-iso8859-1-vs-windows-1252.html
         assertTrue(encoding == null || "WINDOWS-1252".equals(encoding));
+    }
+    
+    public void testBundleLoading() {
+        // We must set the default locale to English first because we provide our
+        // English bundle as the empty-locale default. If we don't do so, the
+        // English bundle will never be tested in the case that the "default default"
+        // is a language we provide a bundle for.
+        Locale.setDefault(Locale.ENGLISH);
+        
+        for (Language lang : Language.LANGUAGES) {
+            ResourceBundle.getBundle("org/omegat/Bundle", lang.getLocale());
+        }
     }
 }

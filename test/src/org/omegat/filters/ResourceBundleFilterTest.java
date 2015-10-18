@@ -108,8 +108,9 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         }
         try {
             loadSourceFiles(filter, base + "file-ResourceBundleFilter-BadLiteral2.properties");
-            fail("Failed to catch invalid Unicode literal: not a valid character");
         } catch (TranslationException ex) {
+            fail("Actual Java ResourceBundle loader doesn't prevent you from including characters "
+                    + "for which Character.isDefined() returns false.");
         }
         try {
             loadSourceFiles(filter, base + "file-ResourceBundleFilter-BadLiteral3.properties");

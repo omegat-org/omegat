@@ -202,7 +202,7 @@ public class ResourceBundleFilter extends AbstractFilter {
                     String uStr = ascii.substring(uStart, uEnd);
                     try {
                         cp = Integer.parseInt(uStr, 16);
-                        if (!Character.isDefined(cp)) {
+                        if (!Character.isValidCodePoint(cp)) {
                             throw new TranslationException(OStrings.getString("RBFH_ERROR_ILLEGAL_U_SEQUENCE"));
                         }
                         i = uEnd - Character.charCount(cp);
@@ -284,7 +284,7 @@ public class ResourceBundleFilter extends AbstractFilter {
         String uStr = text.substring(uStart, uEnd);
         try {
             int uChr = Integer.parseInt(uStr, 16);
-            return Character.isDefined(uChr);
+            return Character.isValidCodePoint(uChr);
         } catch (NumberFormatException ex) {
             return false;
         }

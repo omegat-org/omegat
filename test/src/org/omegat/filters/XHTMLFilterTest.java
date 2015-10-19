@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,16 +27,46 @@
 package org.omegat.filters;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.TreeMap;
 
+import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters3.xml.xhtml.XHTMLFilter;
 import org.omegat.util.Language;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 public class XHTMLFilterTest extends TestFilterBase {
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+        // Use custom EntityResolver to resolve DTD and entity files
+        // to our locally provided files. Otherwise Java will actually
+        // try to download them over the network each time, which is
+        // *really* slow.
+        // See http://stackoverflow.com/a/9398602
+        EntityResolver er = new EntityResolver() {
+            @Override
+            public InputSource resolveEntity(String publicId, String systemId)
+                    throws SAXException, IOException {
+                String filename = new File(systemId).getName();
+                File localFile = new File("test/data/dtd", filename);
+                if (localFile.exists()) {
+                    return new InputSource(new FileInputStream(localFile));
+                }
+                throw new IOException("Could not resolve: " + publicId + " / " + systemId);
+            }
+        };
+        XMLUnit.setTestEntityResolver(er);
+        XMLUnit.setControlEntityResolver(er);
+    }
+    
     @Test
     public void testParse() throws Exception {
         String f = "test/data/filters/xhtml/file-XHTMLFilter.html";

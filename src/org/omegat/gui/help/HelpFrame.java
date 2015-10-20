@@ -29,12 +29,14 @@
 package org.omegat.gui.help;
 
 import java.awt.Container;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -200,30 +202,35 @@ public class HelpFrame extends JFrame {
     /**
      * Displays some file in Online Help.
      * <p>
-     * If the <code>file</code> is a full URL starting from <code>http://</code>
-     * , then say
+     * If the <code>link</code> is a full URL starting from <code>http://</code>
+     * or <code>https://</code>, it will be displayed in the user default browser.
+     * <p>
+     * If any exception thrown then say
      * 
      * <pre>
-     * &lt;p&gt;You can display the User Manual in a normal web browser and have
-     * access to external links by opening the &lt;b&gt;index.html&lt;/b&gt; file
-     * located in the &lt;b&gt;/docs/&lt;/b&gt; directory of the OmegaT application
-     * directory.&lt;/p&gt;
+     * User's Manual viewer does not support navigation to external links. 
+     * To access this link, either copy and paste the URL to your Web browser, 
+     * or open the User's Manual in your Web browser (index.html file).
      * </pre>
      * 
-     * @param file
-     *            the file to display
+     * @param link
+     *            the file or URL string to display
      */
     private void gotoLink(String link) {
-        if (link.startsWith("http://")) {
-            String txt = "<b>" + link + "</b>";
-            StringBuilder buf = new StringBuilder();
-            buf.append("<html><body><p>");
-            buf.append(StringUtil.format(OStrings.getString("HF_ERROR_EXTLINK_TITLE"), txt));
-            buf.append("<p>");
-            buf.append(StringUtil.format(OStrings.getString("HF_ERROR_EXTLINK_MSG"), "<b>index.html</b>"));
-            buf.append("</body></html>");
+        if (link.startsWith("http://") || link.startsWith("https://")) {
+            try {
+                Desktop.getDesktop().browse(new URI(link));
+            } catch (Exception e) {
+                String txt = "<b>" + link + "</b>";
+                StringBuilder buf = new StringBuilder();
+                buf.append("<html><body><p>");
+                buf.append(StringUtil.format(OStrings.getString("HF_ERROR_EXTLINK_TITLE"), txt));
+                buf.append("<p>");
+                buf.append(StringUtil.format(OStrings.getString("HF_ERROR_EXTLINK_MSG"), "<b>index.html</b>"));
+                buf.append("</body></html>");
 
-            m_helpPane.setText(buf.toString());
+                m_helpPane.setText(buf.toString());
+            }
         } else {
             try {
                 URL newPage = new URL(m_filename, link);

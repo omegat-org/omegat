@@ -68,6 +68,10 @@ public abstract class BaseTranslate implements IMachineTranslation, ActionListen
         Core.getMainWindow().getMainMenu().getMachineTranslationMenu().add(menuItem);
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
     public void actionPerformed(ActionEvent e) {
         enabled = menuItem.isSelected();
         Preferences.setPreference(getPreferenceName(), enabled);

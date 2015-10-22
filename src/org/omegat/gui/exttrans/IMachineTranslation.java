@@ -41,6 +41,11 @@ public interface IMachineTranslation {
     String getName();
 
     /**
+     * Determine whether or not the MT provider has been enabled by the user.
+     */
+    boolean isEnabled();
+
+    /**
      * Translate.
      * 
      * @param sLang

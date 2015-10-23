@@ -118,4 +118,16 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         } catch (TranslationException ex) {
         }
     }
+    
+    public void testWhiteSpace() throws Exception {
+        String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-WhiteSpace.properties";
+        ResourceBundleFilter filter = new ResourceBundleFilter();
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
+
+        checkMultiStart(fi, f);
+        checkMulti("Value", "KEY", null, null, null, "# Tab->\t<-Tab");
+        checkMultiEnd();
+        
+        translateText(filter, f);
+    }
 }

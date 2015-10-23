@@ -366,7 +366,7 @@ public class ResourceBundleFilter extends AbstractFilter {
 
             // skipping empty strings
             if (trimmed.isEmpty()) {
-                outfile.write(toAscii(str, false) + lbpr.getLinebreak());
+                outfile.write(str + lbpr.getLinebreak());
                 // Delete the comments
                 comments = null;
                 continue;

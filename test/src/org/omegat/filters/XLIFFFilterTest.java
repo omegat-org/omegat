@@ -159,6 +159,8 @@ public class XLIFFFilterTest extends TestFilterBase {
     public void testStatCounting() throws Exception {
         String f = "test/data/filters/xliff/file-XLIFFFilter-statcount.xlf";
 
+        StatisticsSettings.setCountingProtectedText(true);
+        StatisticsSettings.setCountingCustomTags(true);
         IProject.FileInfo fi = loadSourceFiles(filter, f);
         StatCount counts = new StatCount(fi.entries.get(0));
         assertEquals(4, counts.words);
@@ -169,6 +171,7 @@ public class XLIFFFilterTest extends TestFilterBase {
         String f = "test/data/filters/xliff/file-XLIFFFilter-statcount.xlf";
 
         StatisticsSettings.setCountingProtectedText(false);
+        StatisticsSettings.setCountingCustomTags(true);
         IProject.FileInfo fi = loadSourceFiles(filter, f);
         StatCount counts = new StatCount(fi.entries.get(0));
         assertEquals(2, counts.words);

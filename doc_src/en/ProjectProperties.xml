@@ -68,8 +68,9 @@
           mid-translation to switch from sentence to paragraph translation,
           the internal translation memory of the project will not be changed
           (OmegaT may upgrade old translation memories that did not use
-          sentence segmentation, but not vice versa), but OmegaT will attemps to create
-          paragraph fuzzy matches by glueing together existing sentence translations.</para>
+          sentence segmentation, but not vice versa), but OmegaT will attemp
+          to create paragraph fuzzy matches by glueing together existing
+          sentence translations.</para>
 
           <para>Changing segmentation settings may cause some already
           translated segments to be split or merged. This will effectively
@@ -98,7 +99,7 @@
           set of segmentation rules. To delete project specific segmentation
           rules, uncheck the check box. See chapter <link
           linkend="chapter.segmentation">Source Segmentation</link> for more
-          information on segmentation rules. </para>
+          information on segmentation rules.</para>
 
           <para><emphasis>Hint:</emphasis> the set of segmentation rules for a
           given project is stored as
@@ -172,9 +173,10 @@
 
         <listitem>
           <para>This area allows entering an external post-processing command
-          (for instance, a script to rename files) that will be applied each time 
-          Create Translated Documents is used. This external command cannot include "pipes", etc.,
-          which is why calling a script is recommended.</para>
+          (for instance, a script to rename files) that will be applied each
+          time Create Translated Documents is used. This external command
+          cannot include "pipes", etc., which is why calling a script is
+          recommended.</para>
         </listitem>
       </varlistentry>
     </variablelist>

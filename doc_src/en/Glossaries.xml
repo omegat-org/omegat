@@ -144,8 +144,8 @@
     <filename>/glossary</filename> folder, but it can be in a deeper folder
     (e.g., <filename>glossary/sub/MyGlossary.tbx</filename>).</para>
 
-    <para>TBX - Term Base eXchange - is the open, XML-based standard
-    for exchanging structured terminological data, TBX has been approved as an
+    <para>TBX - Term Base eXchange - is the open, XML-based standard for
+    exchanging structured terminological data, TBX has been approved as an
     international standard by LISA and ISO. If you have an existing
     terminology handling system it is quite possible it offers the export of
     terminology data via TBX format. <ulink
@@ -155,11 +155,11 @@
 
         <secondary>Microsoft Terminology collection</secondary>
       </indexterm> can be downloaded in nearly 100 languages and can serve as
-    a cornerstone IT glossary. </para>
+    a cornerstone IT glossary.</para>
 
     <para>Note: the <filename>.tbx</filename> output of MultiTerm seems to not
     be reliable (November 2013), it is better to use the
-    <filename>.tab</filename> output of MultiTerm instead. </para>
+    <filename>.tab</filename> output of MultiTerm instead.</para>
   </section>
 
   <section>
@@ -169,7 +169,7 @@
         <secondary>Creating a glossary</secondary>
       </indexterm></title>
 
-    <para>The project setting allows one can enter a name for a writable
+    <para>The project setting allows one to enter a name for a writable
     glossary file (see beginning of this chapter). Right-click in the glossary
     pane or press <keycap>Ctrl+Shift+G</keycap> to add a new entry. A dialog
     opens, allowing you to enter the source term, target term and any comments

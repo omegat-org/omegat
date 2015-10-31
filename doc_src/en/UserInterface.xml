@@ -145,7 +145,7 @@
                   </indexterm>Tools</guimenu>
 
                 <guimenuitem>Match statistics</guimenuitem>
-              </menuchoice>to open it.</para></entry>
+              </menuchoice> to open it.</para></entry>
           </row>
         </tbody>
       </tgroup>
@@ -320,11 +320,11 @@
           <row>
             <entry><inlinemediaobject>
                 <imageobject role="html">
-                  <imagedata fileref="images/restore.gif" width="60%"/>
+                  <imagedata fileref="images/Restore.gif" width="60%"/>
                 </imageobject>
 
                 <imageobject role="fo">
-                  <imagedata fileref="images/restore.gif" width="40%"/>
+                  <imagedata fileref="images/Restore.gif" width="40%"/>
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -334,11 +334,11 @@
           <row>
             <entry><inlinemediaobject>
                 <imageobject role="html">
-                  <imagedata fileref="images/undock.gif" width="60%"/>
+                  <imagedata fileref="images/Undock.gif" width="60%"/>
                 </imageobject>
 
                 <imageobject role="fo">
-                  <imagedata fileref="images/undock.gif" width="40%"/>
+                  <imagedata fileref="images/Undock.gif" width="40%"/>
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -348,11 +348,11 @@
           <row>
             <entry><inlinemediaobject>
                 <imageobject role="html">
-                  <imagedata fileref="images/dock.gif" width="60%"/>
+                  <imagedata fileref="images/Dock.gif" width="60%"/>
                 </imageobject>
 
                 <imageobject role="fo">
-                  <imagedata fileref="images/dock.gif" width="40%"/>
+                  <imagedata fileref="images/Dock.gif" width="40%"/>
                 </imageobject>
               </inlinemediaobject></entry>
 

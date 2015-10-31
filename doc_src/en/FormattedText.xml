@@ -247,10 +247,10 @@
 
         <para>One can enter a regular expression for unwanted contents in the
         target. Any matches in the target segment will then be painted red,
-        i.e. easy to identify and correct. When looking for fuzzy matches the
+        i.e. easy to identify and correct. When looking for fuzzy matches, the
         remove pattern is ignored. A fixed penalty of 5 is added if the
         removed part does not match some other segment, so the match does not
-        show up as 100%</para>
+        show up as 100%.</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -274,7 +274,7 @@
     validate tags function. The window that opens when
     <guimenuitem>Ctrl+Shift+V</guimenuitem> is pressed features a 3-column
     table with a link to the segment, the original segment and the target
-    segment</para>
+    segment.</para>
 
     <figure id="tag.validation">
       <title>Tag validation entry</title>

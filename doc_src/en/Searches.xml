@@ -189,16 +189,16 @@
 
       <listitem>
         <para><emphasis role="bold">Display: file names: </emphasis>if
-        checked, the name of the file where each segment is found is
-        displayed above each result.</para>
+        checked, the name of the file where each segment is found is displayed
+        above each result.</para>
       </listitem>
 
       <listitem>
         <para><emphasis role="bold">Search in Project</emphasis>: check
         <emphasis>Memory</emphasis> to include the project memory
-        (project_save.tmx file) in the search. Check
-        <emphasis>TMs</emphasis> to include the translation memories located
-        in the <filename>tm</filename> folder in the search. Check
+        (project_save.tmx file) in the search. Check <emphasis>TMs</emphasis>
+        to include the translation memories located in the
+        <filename>tm</filename> folder in the search. Check
         <emphasis>Glossaries</emphasis> to include the glossaries located in
         the <filename>glossary</filename> folder in the search.</para>
       </listitem>
@@ -214,8 +214,8 @@
     </itemizedlist>
 
     <para>If you click on the button <guibutton>Advanced options</guibutton>
-    additional criteria (author of the translation, date translated etc) as
-    shown in the above image can be selected.</para>
+    additional criteria (author of the translation, date translated etc) can
+    be selected.</para>
   </section>
 
   <section id="search.result.display">

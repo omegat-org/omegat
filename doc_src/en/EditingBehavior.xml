@@ -231,9 +231,9 @@
       <listitem>
         <para>If we want to avoid any mis-translations in case of segments
         with several possible target contents, checking this check box will
-        cause <emphasis role="bold"> Go To Next Untranslated
-        Segment</emphasis>stop on the next such segment, irrespective of
-        whether it has already been translated or not.</para>
+        cause <emphasis role="bold">Go To Next Untranslated Segment</emphasis>
+        to stop on the next such segment, irrespective of whether it has
+        already been translated or not.</para>
       </listitem>
     </varlistentry>
   </variablelist>

@@ -123,8 +123,9 @@
                   </li>
                   <li class="listitem">
                      <p>Remove leading and trailing whitespace in non-segmented
-                                projects: by default, OmegaT removes leading and trailing whitespace. 
-                                In non-segmented projects, it is possible to keep it by unchecking this option.
+                                projects: by default, OmegaT removes leading and trailing whitespace.
+                                In non-segmented projects, it is possible to keep it by unchecking
+                                this option.
                      </p>
                   </li>
                   <li class="listitem">
@@ -135,12 +136,12 @@
                   </li>
                   <li class="listitem">
                      <p>Ignore file context when identifying segments with alternate
-                                translations: by default, OmegaT uses the source file name as part of the 
-                                identification of an alternate translation.
-                                if the option is checked, the source file name will not be used, and
-                                alternative translations will take effect in any file as long 
-                                as the other context (previous/next
-                                segments, or some sort of ID depending on the file format) matches.
+                                translations: by default, OmegaT uses the source file name as part of
+                                the identification of an alternate translation. if the option is
+                                checked, the source file name will not be used, and alternative
+                                translations will take effect in any file as long as the other context
+                                (previous/next segments, or some sort of ID depending on the file
+                                format) matches.
                      </p>
                   </li>
                </ul>
@@ -204,28 +205,13 @@
                   <li class="listitem">
                      <p><span class="emphasis"><em>Auto replace 'nplurals=INTEGER; plural=EXPRESSION;' in
                                       header</em></span></p>
-                     <p><span class="emphasis"><em>The option allows OmegaT to override the
-                                      specification in the PO file header and use the default for the
-                                      selected target language. </em></span></p>
+                     <p><span class="emphasis"><em>The option allows OmegaT to override the specification
+                                      in the PO file header and use the default for the selected target
+                                      language. </em></span></p>
                   </li>
                </ul>
             </div>
             <p><span class="bold"><strong>XHTML Files</strong></span></p>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
-                  <li class="listitem">
-                     <p><span class="emphasis"><em>Add or rewrite encoding declaration in HTML and XHTML
-                                      files</em></span>: frequently the target files must have the encoding
-                                character set different from the one in the source file (wether it is
-                                explicitly defined or implied). Using this option the translator can
-                                specify, whether the target files are to have the encoding declaration
-                                included. For instance, if the file filter specifies UTF8 as the
-                                encoding scheme for the target files, selecting Always will assure
-                                that this information is included in the translated files.
-                     </p>
-                  </li>
-               </ul>
-            </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
@@ -239,7 +225,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Start a new paragraph on: the &lt;br&gt;</em></span>
+                     <p><span class="emphasis"><em>Start a new paragraph on</em></span>: the &lt;br&gt;
                                 HTML tag will constitute a paragraph for segmentation purposes.
                      </p>
                   </li>
@@ -352,8 +338,13 @@
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Add or rewrite encoding declaration in HTML and XHTML
-                                      files</em></span>: Always (default), Only if (X)HTML file has a header,
-                                Only if (X)HTML file has an encoding declaration, Never
+                                      files</em></span>: frequently the target files must have the encoding
+                                character set different from the one in the source file (wether it is
+                                explicitly defined or implied). Using this option the translator can
+                                specify, whether the target files are to have the encoding declaration
+                                included. For instance, if the file filter specifies UTF8 as the
+                                encoding scheme for the target files, selecting Always will assure
+                                that this information is included in the translated files.
                      </p>
                   </li>
                </ul>
@@ -380,8 +371,10 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Skip text matching regular expression</em></span>: The
-                                text, matching the regular expression, will be skipped.
+                     <p><span class="emphasis"><em>Skip text matching regular expression</em></span>: the
+                                text matching the regular expression gets skipped. It is shown
+                                rendered red in the tag validator. Text in source segment that matches
+                                is shown in italic.
                      </p>
                   </li>
                </ul>
@@ -404,18 +397,23 @@
                                 a match in the list of key-value pairs will cause the content of tags
                                 to be ignored
                      </p>
+                     <p>It is sometimes useful to be able make some tags untranslatable
+                                based on the value of attributes. For example, <code class="literal">&lt;div
+                                   class="hide"&gt; &lt;span translate="no"&gt;</code> You can define
+                                key-value pairs for tags to be left untranslated. For the example
+                                above, the field would contain: <code class="literal">class=hide, translate=no
+                                   </code></p>
                   </li>
-               </ul>
-            </div>
-            <p><span class="bold"><strong>Text files</strong></span></p>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Paragraph segmentation on line breaks, empty lines or
-                                      never</em></span>:
+                     <p><span class="emphasis"><em>Compress whitespace in translated document</em></span>:
+                                multiple continuous whitespaces will be converted into one single
+                                whitespace in translated document.
                      </p>
-                     <p>if sentence segmentation rules are active, the text will further
-                                be segmented according to the option selected here.
+                  </li>
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Remove HTML comments in translated
+                                      document</em></span>: all commented parts (between &lt;!-- and --&gt;)
+                                won't be copied in the translated document.
                      </p>
                   </li>
                </ul>

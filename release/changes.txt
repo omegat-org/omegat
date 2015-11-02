@@ -1984,58 +1984,58 @@ of OmegaT, the second instance would freeze
   Implemented requests:
 
   - Have glossary search in Find dialog
-  http://sourceforge.net/support/tracker.php?aid=3385415
+  https://sourceforge.net/p/omegat/feature-requests/705/
 
   - Grey out more options with Search Files
-  http://sourceforge.net/support/tracker.php?aid=3385348
+  https://sourceforge.net/p/omegat/feature-requests/700/
 
   - Put "Search files" option at top of Search window
-  http://sourceforge.net/support/tracker.php?aid=2610166
+  https://sourceforge.net/p/omegat/feature-requests/510/
 
   - Adding content (e.g., glossaries) search options
-  http://sourceforge.net/support/tracker.php?aid=1587706
+  https://sourceforge.net/p/omegat/feature-requests/232/
 
   - Go to Next **Translated** Segment
-  http://sourceforge.net/support/tracker.php?aid=3181098
+  https://sourceforge.net/p/omegat/feature-requests/680/
 
   - Do not remove leading and trailing spaces
-  http://sourceforge.net/support/tracker.php?aid=3608611
+  https://sourceforge.net/p/omegat/feature-requests/831/
 
   - Preserve spaces for all tags
-  http://sourceforge.net/support/tracker.php?aid=3608615
+  https://sourceforge.net/p/omegat/feature-requests/832/
 
   - Moving between tags with a single keystroke
-  http://sourceforge.net/support/tracker.php?aid=3579784
+  https://sourceforge.net/p/omegat/feature-requests/810/
 
   - Show the content of tags in tooltips
-  http://sourceforge.net/support/tracker.php?aid=3573166
+  https://sourceforge.net/p/omegat/feature-requests/804/
 
   - Validate tags when creating target files
-  http://sourceforge.net/support/tracker.php?aid=1398289
+  https://sourceforge.net/p/omegat/feature-requests/141/
 
   - Validate tags after each segment
-  http://sourceforge.net/support/tracker.php?aid=3608715
+  https://sourceforge.net/p/omegat/feature-requests/833/
 
   - Tag protection
-  http://sourceforge.net/support/tracker.php?aid=3608720
+  https://sourceforge.net/p/omegat/feature-requests/834/
 
   - Protected text in XLIFF
-  http://sourceforge.net/support/tracker.php?aid=3608725
+  https://sourceforge.net/p/omegat/feature-requests/835/
 
   - Move active match selection up/down
-  http://sourceforge.net/support/tracker.php?aid=3608814
+  https://sourceforge.net/p/omegat/feature-requests/838/
 
   - Gnome Shell integration
-  http://sourceforge.net/support/tracker.php?aid=3609146
+  https://sourceforge.net/p/omegat/feature-requests/840/
 
   - Do not remove leading and trailing tags
-  http://sourceforge.net/support/tracker.php?aid=3574760
+  https://sourceforge.net/p/omegat/feature-requests/806/
 
   - Not adding extra space on Insert Missing Source Tags
-  http://sourceforge.net/support/tracker.php?aid=3370310
+  https://sourceforge.net/p/omegat/feature-requests/697/
 
   - Better OmegaT icon resolution
-  http://sourceforge.net/support/tracker.php?aid=3603928
+  https://sourceforge.net/p/omegat/feature-requests/822/
 
   - Integrate tokenizers in OmegaT 
   https://sourceforge.net/p/omegat/feature-requests/844/
@@ -2072,13 +2072,13 @@ are just copied
   Bug fixes:
 
   - XLIFF Filter: <ept> not recognized in relation with <bpt>
-  http://sourceforge.net/support/tracker.php?aid=1988732
+  https://sourceforge.net/p/omegat/bugs/390/
 
   - Problem with Undo after entering Japanese with IME
-  http://sourceforge.net/support/tracker.php?aid=3586912
+  https://sourceforge.net/p/omegat/bugs/546/
 
   - Infinite loop of exceptions when using Undo function
-  http://sourceforge.net/support/tracker.php?aid=3540091
+  https://sourceforge.net/p/omegat/bugs/540/
 
   - When the custom shortcut file was containing non-existent shortcuts,
 OmegaT failed to load the valid ones
@@ -2381,7 +2381,7 @@ external entities, the target files could be empty
   Implemented requests:
 
   - Import from exported script files
-  http://sourceforge.net/support/tracker.php?aid=2957819
+  https://sourceforge.net/p/omegat/feature-requests/596/
 
   Other enhancements:
   
@@ -2406,16 +2406,16 @@ machines
   Implemented requests:
 
   - External post-processing command
-  http://sourceforge.net/support/tracker.php?aid=3600209
+  https://sourceforge.net/p/omegat/feature-requests/817/
 
   - Tag partial verification
-  http://sourceforge.net/support/tracker.php?aid=1545637
+  https://sourceforge.net/p/omegat/feature-requests/210/
 
   - In OpenXML filtter, add xml:space="preserve" to w:t elts
-  http://sourceforge.net/support/tracker.php?aid=3556996
+  https://sourceforge.net/p/omegat/feature-requests/798/
 
   - Showing cursor in Search window and other panes
-  http://sourceforge.net/support/tracker.php?aid=3586905
+  https://sourceforge.net/p/omegat/feature-requests/811/
 
   Other enhancements:
   
@@ -2472,10 +2472,10 @@ the display could be corrupted when ${diff} was used
   Implemented requests:
 
   - Show where text has been added in match window
-  http://sourceforge.net/support/tracker.php?aid=1483716
+  https://sourceforge.net/p/omegat/feature-requests/183/
 
   - Save authentication information for team projects
-  http://sourceforge.net/support/tracker.php?aid=3574419
+  https://sourceforge.net/p/omegat/feature-requests/805/
 
   Other enhancements:
 
@@ -2505,7 +2505,7 @@ the Windows Azure Marketplace.
   Bug fixes:
 
   - Missing part from matches not highlighted
-  http://sourceforge.net/support/tracker.php?aid=1606024
+  https://sourceforge.net/p/omegat/bugs/264/
 
   - It was not possible to use team projects offline. Now, when the 
 connection is off, a message mentions the project is in offline mode.
@@ -2560,19 +2560,19 @@ to load a file
   Implemented requests:
 
   - Allow to load TMX as 'alternative source' 
-  http://sourceforge.net/support/tracker.php?aid=3563248
+  https://sourceforge.net/p/omegat/feature-requests/799/
 
   - Display encoding and filter used in list of project files 
-  http://sourceforge.net/support/tracker.php?aid=3440267
+  https://sourceforge.net/p/omegat/feature-requests/736/
 
   - Ignore 'Fragments that should be removed' on fuzzy matches 
-  http://sourceforge.net/support/tracker.php?aid=3567014
+  https://sourceforge.net/p/omegat/feature-requests/800/
 
   - Option to not translate headers in PO filter
-  http://sourceforge.net/support/tracker.php?aid=3568947
+  https://sourceforge.net/p/omegat/feature-requests/801/
 
   - PO filter Plural Forms
-  http://sourceforge.net/support/tracker.php?aid=2979054
+  https://sourceforge.net/p/omegat/feature-requests/603/
 
   Other enhancements:
 
@@ -2651,13 +2651,13 @@ to write in the repository anymore
   Implemented requests:
 
   - Online team projects
-  http://sourceforge.net/support/tracker.php?aid=1604911
+  https://sourceforge.net/p/omegat/feature-requests/279/
 
   - Apply penalties to external TMXs
-  http://sourceforge.net/support/tracker.php?aid=3528575
+  https://sourceforge.net/p/omegat/feature-requests/786/
 
   - Configurable display in match pane
-  http://sourceforge.net/support/tracker.php?aid=2960656
+  https://sourceforge.net/p/omegat/feature-requests/598/
 
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
@@ -2676,7 +2676,7 @@ to write in the repository anymore
   Bug fixes:
 
   - Launcher issue on linux with space in folder name
-  http://sourceforge.net/support/tracker.php?aid=3605953
+  https://sourceforge.net/p/omegat/bugs/562/
 
 ----------------------------------------------------------------------
  OmegaT 2.5.5 update 4 (2012-12-06)
@@ -2737,7 +2737,7 @@ filter
   Bug fixes:
 
   - File filters options changes have no effect
-  http://sourceforge.net/support/tracker.php?aid=3556394
+  https://sourceforge.net/p/omegat/bugs/542/
 
 ----------------------------------------------------------------------
  OmegaT 2.5.5 update 1 (2012-08-03)
@@ -2751,7 +2751,7 @@ filter
   Bug fixes:
 
   - Project specific filter settings not saved
-  http://sourceforge.net/support/tracker.php?aid=3546645
+  https://sourceforge.net/p/omegat/bugs/541/
 
   - PowerPoint documents (.pptx and .pptm) could not be opened with Java 1.7
 
@@ -2771,7 +2771,7 @@ filter
   Implemented requests:
 
   - Option to not load translations=source from source documents
-  http://sourceforge.net/support/tracker.php?aid=3527626
+  https://sourceforge.net/p/omegat/feature-requests/779/
 
   - Revised manual
 
@@ -2789,7 +2789,7 @@ regardless of the choice of the user
 listed
 
   - Recognize single quotes in ENTITY of DTD file filter
-  http://sourceforge.net/support/tracker.php?aid=3520305
+  https://sourceforge.net/p/omegat/feature-requests/770/
 (It was already implemented in 2.3 update 8, but had not been ported
 to 2.5.)
 
@@ -2816,10 +2816,10 @@ the Editor is in RTL mode.
   Implemented requests:
 
   - Help&Manual: hide content of tags per translate=true/false
-  http://sourceforge.net/support/tracker.php?aid=3528468
+  https://sourceforge.net/p/omegat/feature-requests/784/
 
   - Camtasia added tags
-  http://sourceforge.net/support/tracker.php?aid=3528472
+  https://sourceforge.net/p/omegat/feature-requests/785/
 
   Other enhancements:
 
@@ -2830,10 +2830,10 @@ Yes, OmegaT.l4J.ini is modified to use that language.
   Bug fixes:
 
   - Exception if new non-default /tm contains TMs to segment
-  http://sourceforge.net/support/tracker.php?aid=3425237
+  https://sourceforge.net/p/omegat/bugs/514/
 
   - NullPointerException during resegmentation
-  http://sourceforge.net/support/tracker.php?aid=3481757
+  https://sourceforge.net/p/omegat/bugs/531/
 
   - When editing project-specific file filters, the checkbox was 
 labelled jCheckBox1 instead of "Enable project specific filters"
@@ -2860,7 +2860,7 @@ the results were not immediately visible
   Implemented requests:
 
   - Automatic conversion of numbers when inserting fuzzy matches
-  http://sourceforge.net/support/tracker.php?aid=1381480
+  https://sourceforge.net/p/omegat/feature-requests/132/
 
   Other enhancements:
 
@@ -2871,14 +2871,14 @@ is set, it is reset to 10 seconds.
   - Linux: Enhanced Kaptain script
 
   - Load translations from sources as default translations
-  http://sourceforge.net/support/tracker.php?aid=3524017
+  https://sourceforge.net/p/omegat/feature-requests/775/
 
   - The File Filters dialog can now be resized, as well as its
 sub-dialogs
 
   - Capture variables in source filename to target mapping
 has been extended with new variables for a given number of extensions
-See http://sourceforge.net/support/tracker.php?aid=3436954
+See https://sourceforge.net/p/omegat/feature-requests/733/
 
 
   Localisation updates:
@@ -2897,10 +2897,10 @@ See http://sourceforge.net/support/tracker.php?aid=3436954
   Implemented requests:
 
   - (X)HTML filters: hide content of tags based on attributes
-  http://sourceforge.net/support/tracker.php?aid=3513384
+  https://sourceforge.net/p/omegat/feature-requests/768/
 
   - Capture variables in source filename to target mapping
-  http://sourceforge.net/support/tracker.php?aid=3436954
+  https://sourceforge.net/p/omegat/feature-requests/733/
 
   Other enhancements:
 
@@ -2991,19 +2991,19 @@ was done in project properties.
   Implemented requests:
 
   - Show non-breakable space
-  http://sourceforge.net/support/tracker.php?aid=3495779
+  https://sourceforge.net/p/omegat/feature-requests/760/
 
   - Use search term as window title in Search window
-  http://sourceforge.net/support/tracker.php?aid=2610094
+  https://sourceforge.net/p/omegat/feature-requests/507/
 
   - Clarification of the Options > Spell Checking... dialog
-  http://sourceforge.net/support/tracker.php?aid=3473630
+  https://sourceforge.net/p/omegat/feature-requests/751/
 
   - Selectable location for the writeable glossary file
-  http://sourceforge.net/support/tracker.php?aid=3503373
+  https://sourceforge.net/p/omegat/feature-requests/767/
 
   - Second plugin location in <home>/plugins
-  http://sourceforge.net/support/tracker.php?aid=3428485
+  https://sourceforge.net/p/omegat/feature-requests/724/
 
   Other enhancements:
 
@@ -3043,18 +3043,18 @@ even if it was empty
   Implemented requests:
 
   - Console: more context on error message "Failed to load..."
-  http://sourceforge.net/support/tracker.php?aid=3465220
+  https://sourceforge.net/p/omegat/feature-requests/745/
 
   - Navigate to next/previous segment with a note
-  http://sourceforge.net/support/tracker.php?aid=3484729
+  https://sourceforge.net/p/omegat/feature-requests/758/
 
   Bug fixes:
 
   - Remove Tags can create a corrupted target document
-  http://sourceforge.net/support/tracker.php?aid=3487497
+  https://sourceforge.net/p/omegat/bugs/532/
 
   - After "save" the cursor goes to the head of the segment
-  http://sourceforge.net/support/tracker.php?aid=1643198
+  https://sourceforge.net/p/omegat/bugs/284/
 
 ----------------------------------------------------------------------
  OmegaT 2.5.1 (2012-02-02)
@@ -3068,31 +3068,31 @@ even if it was empty
   Implemented requests:
 
   - Validate tags in console mode
-  http://sourceforge.net/support/tracker.php?aid=3426212
+  https://sourceforge.net/p/omegat/feature-requests/723/
 
   - Add patterns for text that should be removed and validate
-  http://sourceforge.net/support/tracker.php?aid=3477099
+  https://sourceforge.net/p/omegat/feature-requests/753/
 
   - User-defined tags
-  http://sourceforge.net/support/tracker.php?aid=1599334
+  https://sourceforge.net/p/omegat/feature-requests/261/
 
   - Validate Java MessageFormat pattern tags ({0} etc.)
-  http://sourceforge.net/support/tracker.php?aid=3477045
+  https://sourceforge.net/p/omegat/feature-requests/752/
 
   - Render tags in different color in editor
-  http://sourceforge.net/support/tracker.php?aid=2120329
+  https://sourceforge.net/p/omegat/feature-requests/471/
 
   - Add "date" & "time" to translated file name pattern
-  http://sourceforge.net/support/tracker.php?aid=3346155
+  https://sourceforge.net/p/omegat/feature-requests/692/
 
   - targetLocale for use with DotNetNuke ResX
-  http://sourceforge.net/support/tracker.php?aid=3330974
+  https://sourceforge.net/p/omegat/feature-requests/690/
 
   - Remove all tags
-  http://sourceforge.net/support/tracker.php?aid=3481683
+  https://sourceforge.net/p/omegat/feature-requests/755/
 
   - Create /tm/auto folder in new project
-  http://sourceforge.net/support/tracker.php?aid=3368416
+  https://sourceforge.net/p/omegat/feature-requests/696/
 
   Other enhancements:
 
@@ -3102,7 +3102,7 @@ not only OmegaT-tags
   Bug fixes:
 
   - Camtasia filter: <Line> is incorrectly added as src segment
-  http://sourceforge.net/support/tracker.php?aid=3481602
+  https://sourceforge.net/p/omegat/bugs/530/
 
   Localisation updates:
 
@@ -3121,13 +3121,13 @@ not only OmegaT-tags
   Implemented requests:
 
   - Filter for Camtasia Studio for Windows
-  http://sourceforge.net/support/tracker.php?aid=3457285
+  https://sourceforge.net/p/omegat/feature-requests/741/
 
   - TBX entry/concept level note
-  http://sourceforge.net/support/tracker.php?aid=3454401
+  https://sourceforge.net/p/omegat/feature-requests/737/
 
   - Load comment from TBX even without target language
-  http://sourceforge.net/support/tracker.php?aid=3472408
+  https://sourceforge.net/p/omegat/feature-requests/748/
 
   Other enhancements:
 
@@ -3157,7 +3157,7 @@ startup scripts now use 512 MB
   Bug fixes:
 
   - GPL license has an outdated FSF address
-  http://sourceforge.net/support/tracker.php?aid=3440748
+  https://sourceforge.net/p/omegat/bugs/521/
 
   - Android filter: non-translatable text was not ignored
 
@@ -3199,13 +3199,13 @@ working for all tags
   Implemented requests:
 
   - TMX: match other languages if no project target language
-  http://sourceforge.net/support/tracker.php?aid=2700699
+  https://sourceforge.net/p/omegat/feature-requests/525/
   
   - HTML filter: translate label attribute of OPTION/OPTGROUP/MENU tag
-  http://sourceforge.net/support/tracker.php?aid=3436499
+  https://sourceforge.net/p/omegat/feature-requests/732/
 
   Make the location of spelling dictionaries configurable
-  http://sourceforge.net/support/tracker.php?aid=3434091
+  https://sourceforge.net/p/omegat/feature-requests/727/
 
   Other enhancements:
 
@@ -3228,7 +3228,7 @@ launched directly under the Scripting menu entry. Requires version
   Bug fixes:
 
   - Translations from non-target-language are not loaded
-  http://sourceforge.net/support/tracker.php?aid=3414344
+  https://sourceforge.net/p/omegat/bugs/508/
 
   - Fuzzy match were inserted even if the segment was already translated
 
@@ -3254,7 +3254,7 @@ instead of removing the translation
 no tags at all
 
   - ResX filter no longer working since revision 3508
-  http://sourceforge.net/support/tracker.php?aid=3430364
+  https://sourceforge.net/p/omegat/bugs/516/
 
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 1 (2011-10-25)
@@ -3273,7 +3273,7 @@ Windows
   Bug fixes:
 
   - Null pointer exception in a project without <dictionary_dir>
-  http://sourceforge.net/support/tracker.php?aid=3414549
+  https://sourceforge.net/p/omegat/bugs/509/
 
   - Wrong handling of the Enter key in the comment field of a 
 glossary entry
@@ -3282,7 +3282,7 @@ glossary entry
 translations in TMX
 
   - Search function doesn't work when searching files
-  http://sourceforge.net/support/tracker.php?aid=3419536
+  https://sourceforge.net/p/omegat/bugs/512/
 
   Localisation updates:
 
@@ -3301,25 +3301,25 @@ translations in TMX
   Implemented requests:
 
   - Multiple translation support
-  http://sourceforge.net/support/tracker.php?aid=1922026
+  https://sourceforge.net/p/omegat/feature-requests/440/
 
   - Run scripts in OmegaT
-  http://sourceforge.net/support/tracker.php?aid=3382006
+  https://sourceforge.net/p/omegat/feature-requests/699/
   
   - View/edit notes on translation units (restore main window to see notes pane)
-  http://sourceforge.net/support/tracker.php?aid=3404301
+  https://sourceforge.net/p/omegat/feature-requests/713/
   
   - View comments in source files (restore main window to see comments pane)
-  http://sourceforge.net/support/tracker.php?aid=3406286
+  https://sourceforge.net/p/omegat/feature-requests/716/
   
   - Project-specific file filters
-  http://sourceforge.net/support/tracker.php?aid=3404303
+  https://sourceforge.net/p/omegat/feature-requests/714/
   
   - Project-specific segmentation rules
-  http://sourceforge.net/support/tracker.php?aid=3405056
+  https://sourceforge.net/p/omegat/feature-requests/715/
 
   - "Loader" plugin type to load additional GUI components
-  http://sourceforge.net/support/tracker.php?aid=3393897
+  https://sourceforge.net/p/omegat/feature-requests/708/
 
   Other enhancements:
 
@@ -3352,7 +3352,7 @@ is saved.
   Implemented requests:
 
   - Recognize single quotes in ENTITY of DTD file filter
-  http://sourceforge.net/support/tracker.php?aid=3520305
+  https://sourceforge.net/p/omegat/feature-requests/770/
 
 ----------------------------------------------------------------------
  OmegaT 2.3.0 update 7 (2012-03-18)
@@ -3366,7 +3366,7 @@ is saved.
   Implemented requests:
 
   - Segmentation rules for Italian
-  http://sourceforge.net/support/tracker.php?aid=3497206
+  https://sourceforge.net/p/omegat/feature-requests/763/
 
   Bug fixes:
 
@@ -3388,7 +3388,7 @@ to left language
   Bug fixes:
 
   - Non working remote dictionary location
-  http://sourceforge.net/support/tracker.php?aid=3476639
+  https://sourceforge.net/p/omegat/bugs/527/
 
 ----------------------------------------------------------------------
  OmegaT 2.3.0 update 5 (2012-01-12)
@@ -3422,13 +3422,13 @@ the corresponding menu entry has been removed
   Bug fixes:
 
   - Java 7 compilation encoding errors
-  http://sourceforge.net/support/tracker.php?aid=3440901
+  https://sourceforge.net/p/omegat/bugs/522/
 
   - When several dictionaries were used, words written in uppercase in 
 the dictionaries could fail to be recognised
 
   - NetBSD and DragonFly not recognized as UNIX
-  http://sourceforge.net/support/tracker.php?aid=3451034
+  https://sourceforge.net/p/omegat/bugs/525/
 
   - Some Open XML files could not be loaded, because they used
 backslashes instead of slashes in the zip container
@@ -3449,7 +3449,7 @@ backslashes instead of slashes in the zip container
   Implemented requests:
 
   - Google Translate API v2
-  http://sourceforge.net/support/tracker.php?aid=3426058
+  https://sourceforge.net/p/omegat/feature-requests/722/
 
   Bug fixes:
 
@@ -3473,7 +3473,7 @@ tags
   Bug fixes:
 
   - Pipe-sign | missing from fields when copy-pasting
-  http://sourceforge.net/support/tracker.php?aid=3395795
+  https://sourceforge.net/p/omegat/bugs/503/
 
   - Parse exception in the LaTeX filter
 
@@ -3492,7 +3492,7 @@ tags
   Bug fixes:
 
   - Mozilla DTD handler is skipping segments
-  http://sourceforge.net/support/tracker.php?aid=3369466
+  https://sourceforge.net/p/omegat/bugs/502/
 
   Localisation updates:
 
@@ -3512,19 +3512,19 @@ tags
   Implemented requests:
 
   - Allow blank translations in PO files
-  http://sourceforge.net/support/tracker.php?aid=2974663
+  https://sourceforge.net/p/omegat/feature-requests/600/
 
   - TransTips to consider letter case
-  http://sourceforge.net/support/tracker.php?aid=3027339
+  https://sourceforge.net/p/omegat/feature-requests/626/
 
   - Ability to translate WordArt in MS Office files
-  http://sourceforge.net/support/tracker.php?aid=3311077
+  https://sourceforge.net/p/omegat/feature-requests/688/
 
   - Add .xliff extension to the XLIFF filter
-  http://sourceforge.net/support/tracker.php?aid=3339675
+  https://sourceforge.net/p/omegat/feature-requests/691/
 
   - Enable no prefix for fuzzy matches
-  http://sourceforge.net/support/tracker.php?aid=1616157
+  https://sourceforge.net/p/omegat/feature-requests/303/
 
   Other enhancements:
 
@@ -3545,16 +3545,16 @@ with Windows 64-bit
   Bug fixes:
 
   - PO filter mangles \\r strings
-  http://sourceforge.net/support/tracker.php?aid=3292553
+  https://sourceforge.net/p/omegat/bugs/496/
 
   - Wrong TransTip when target term contains comma
-  http://sourceforge.net/support/tracker.php?aid=2970681
+  https://sourceforge.net/p/omegat/bugs/454/
 
   - LaTeX filter: comments are removed from target documents
-  http://sourceforge.net/support/tracker.php?aid=3297471
+  https://sourceforge.net/p/omegat/bugs/497/
 
   - Overeager numbered header segmentation rule
-  http://sourceforge.net/support/tracker.php?aid=3308282
+  https://sourceforge.net/p/omegat/bugs/499/
 
   - PO filter: when a segment had trailing spaces, it was not visible for
 translation in OmegaT
@@ -3578,7 +3578,7 @@ translation in OmegaT
   Bug fixes:
 
   - HTML filter: PHP tags are transformed into HTML entities
-  http://sourceforge.net/support/tracker.php?aid=3175744
+  https://sourceforge.net/p/omegat/bugs/489/
 
   - For three languages, the internal locale was corresponding to an
 obsolete locale, which meant the spell checker wasn't finding the correct
@@ -3604,7 +3604,7 @@ with a preceding \
   - ResX filter: some untranslatable text appeared in the Editor
 
   - XML: preserve spaces
-  http://sourceforge.net/support/tracker.php?aid=1650342
+  https://sourceforge.net/p/omegat/bugs/287/
 
   Localisation updates:
 
@@ -3624,7 +3624,7 @@ with a preceding \
   Implemented requests:
 
   - Do not show "space" in empty segments
-  http://sourceforge.net/support/tracker.php?aid=2169106
+  https://sourceforge.net/p/omegat/feature-requests/478/
 
   Other enhancements:
 
@@ -3657,7 +3657,7 @@ still work.
   Implemented requests:
 
   - Translatable sheet names for Calc documents
-  http://sourceforge.net/support/tracker.php?aid=2804745
+  https://sourceforge.net/p/omegat/feature-requests/540/
 
   Other enhancements:
 
@@ -3669,13 +3669,13 @@ installation
   Bug fixes:
 
   - HTML cryptic error message "StringIndexOutOfBoundsException"
-  http://sourceforge.net/support/tracker.php?aid=1653822
+  https://sourceforge.net/p/omegat/bugs/291/
 
   - On a Mac having both Java 1.5 and 1.6, the Okapi file filter plugin
 prevented OmegaT to run
 
   - Windows installer overwrites existing OmegaT.I4J.ini
-  http://sourceforge.net/support/tracker.php?aid=3152734
+  https://sourceforge.net/p/omegat/bugs/486/
 
   - In the Spell Checking options, the uninstall button was selected
 (pressed) instead of being unabled when the list of dictionaries is
@@ -3702,13 +3702,13 @@ and restarting OmegaT
   Implemented requests:
 
   - Accept script in language code for documents
-  http://sourceforge.net/support/tracker.php?aid=3139010
+  https://sourceforge.net/p/omegat/feature-requests/657/
 
   - Add a TTX filter
-  http://sourceforge.net/support/tracker.php?aid=1851513
+  https://sourceforge.net/p/omegat/feature-requests/407/
 
   - Proxy authentication for machine translation
-  http://sourceforge.net/support/tracker.php?aid=3132893
+  https://sourceforge.net/p/omegat/feature-requests/655/
 
   Other enhancements:
 
@@ -3753,7 +3753,7 @@ to XML entities in the target document
   Implemented requests:
 
   - Glossary term creation interface
-  http://sourceforge.net/support/tracker.php?aid=3054189
+  https://sourceforge.net/p/omegat/feature-requests/630/
 
   - Partial support for StarDict dictionaries with sametypesequence=x
 
@@ -3766,7 +3766,7 @@ to XML entities in the target document
   Bug fixes:
 
   - Some content ignored in DTD files
-    http://sourceforge.net/support/tracker.php?aid=3088802
+    https://sourceforge.net/p/omegat/bugs/482/
 
 ----------------------------------------------------------------------
  OmegaT 2.2.1 update 1 (2010-11-30)
@@ -3801,10 +3801,10 @@ didn't appear in bold.
   Implemented requests:
 
   - Visual identification of non-unique segments
-  http://sourceforge.net/support/tracker.php?aid=1869046
+  https://sourceforge.net/p/omegat/feature-requests/416/
 
   - Priority to Mark untranslated segments over Display source
-  http://sourceforge.net/support/tracker.php?aid=1811562
+  https://sourceforge.net/p/omegat/feature-requests/385/
 
   Other enhancements:
 
@@ -3857,7 +3857,7 @@ some options (e.g., Diagrams) apply to all the documents.
   Bug fixes:
 
   - OpenXML Excel: some parts are not available for translation
-    http://sourceforge.net/support/tracker.php?aid=2885433
+    https://sourceforge.net/p/omegat/bugs/432/
 
   - Open XML filter: The comments in Excel sheets didn't appear for
 translation
@@ -3874,7 +3874,7 @@ translation
   Implemented requests:
 
   - Remove extra spaces added around tags by Google Translate
-  http://sourceforge.net/support/tracker.php?aid=2956989
+  https://sourceforge.net/p/omegat/feature-requests/594/
 
   Other enhancements:
 
@@ -3903,7 +3903,7 @@ to "HTML, XHTML and ODF segmentation"
 characters. This applied also to the HTML Help Compiler Filter.
 
   - MT using Google fails to give results in Traditional Chinese
-  http://sourceforge.net/support/tracker.php?aid=3086757
+  https://sourceforge.net/p/omegat/bugs/481/
 
   Localisation updates:
 
@@ -3921,12 +3921,12 @@ characters. This applied also to the HTML Help Compiler Filter.
   Implemented requests:
 
   - Make the number of search results a parameter
-  http://sourceforge.net/support/tracker.php?aid=3084009
+  https://sourceforge.net/p/omegat/feature-requests/643/
 
   Bug fixes:
 
   - XML, wrong handling of comments and PI in translatable text
-  http://sourceforge.net/support/tracker.php?aid=1662205
+  https://sourceforge.net/p/omegat/bugs/297/
 
   Localisation updates:
 
@@ -3946,7 +3946,7 @@ characters. This applied also to the HTML Help Compiler Filter.
   Implemented requests:
 
   - Create OmegaT tags for external TMX files
-  http://sourceforge.net/support/tracker.php?aid=2891712
+  https://sourceforge.net/p/omegat/feature-requests/565/
 
   Bug fixes:
 
@@ -3976,10 +3976,10 @@ of unfiltered results
   - Rc filter: Correction on the handling of comments and includes
 
   - HTML entities containing numbers are not recognized
-  http://sourceforge.net/support/tracker.php?aid=3060805
+  https://sourceforge.net/p/omegat/bugs/477/
 
   - Very slow editor with Java 1.6 on a Mac
-  http://sourceforge.net/support/tracker.php?aid=3070076
+  https://sourceforge.net/p/omegat/bugs/479/
 
   Localisation updates:
 
@@ -4016,7 +4016,7 @@ of unfiltered results
   Implemented requests:
 
   - Aggregate OpenXML tags
-  http://sourceforge.net/support/tracker.php?aid=3036227
+  https://sourceforge.net/p/omegat/feature-requests/629/
 
   Localisation updates:
 
@@ -4035,7 +4035,7 @@ of unfiltered results
   Implemented requests:
 
   - Extended project statistics
-  http://sourceforge.net/support/tracker.php?aid=2988953
+  https://sourceforge.net/p/omegat/feature-requests/610/
 
   Other enhancements:
 
@@ -4059,7 +4059,7 @@ translator.
   - Some TBX glossaries were not read (e.g., Microsoft glossaries)
 
   - Webstart jnidispatch error on Windows 64-bit
-  http://sourceforge.net/support/tracker.php?aid=3024102
+  https://sourceforge.net/p/omegat/bugs/474/
 
 ----------------------------------------------------------------------
  OmegaT 2.1.7 update 2 (2010-07-08)
@@ -4095,15 +4095,15 @@ on supported file formats
   Implemented requests:
 
   - Highlight search results
-  http://sourceforge.net/support/tracker.php?aid=2956986
+  https://sourceforge.net/p/omegat/feature-requests/593/
 
   Bug fixes:
 
   - Some search options widgets do not set focus to Search field
-  http://sourceforge.net/support/tracker.php?aid=3013796
+  https://sourceforge.net/p/omegat/bugs/471/
 
   - Search window - search items containing $ behave strangely
-  http://sourceforge.net/support/tracker.php?aid=3021915
+  https://sourceforge.net/p/omegat/bugs/472/
 
   Localisation updates:
 
@@ -4122,13 +4122,13 @@ on supported file formats
   Implemented requests:
 
   - Sort Project Files according to locale
-  http://sourceforge.net/support/tracker.php?aid=3002616
+  https://sourceforge.net/p/omegat/feature-requests/619/
 
   - Remember advanced search settings
-  http://sourceforge.net/support/tracker.php?aid=2997454
+  https://sourceforge.net/p/omegat/feature-requests/616/
 
   - Add source/target selection to the search window
-  http://sourceforge.net/support/tracker.php?aid=2860161
+  https://sourceforge.net/p/omegat/feature-requests/550/
 
   Other enhancements:
 
@@ -4141,10 +4141,10 @@ on supported file formats
   Bug fixes:
 
   - Project Files list not sorted on some systems
-  http://sourceforge.net/support/tracker.php?aid=3000377
+  https://sourceforge.net/p/omegat/bugs/467/
 
   - Cursor jumps to end of selection during Shift+left
-  http://sourceforge.net/support/tracker.php?aid=3006297
+  https://sourceforge.net/p/omegat/bugs/469/
 
   Localisation updates:
 
@@ -4163,7 +4163,7 @@ on supported file formats
   Implemented requests:
 
   - Apertium machine translation
-  http://sourceforge.net/support/tracker.php?aid=2999892
+  https://sourceforge.net/p/omegat/feature-requests/617/
 
   Other enhancements:
 
@@ -4188,12 +4188,12 @@ in some circumstances
   Implemented requests:
 
   - Memorize search settings after each search
-  http://sourceforge.net/support/tracker.php?aid=1605843
+  https://sourceforge.net/p/omegat/feature-requests/287/
 
   Bug fixes:
 
   - Go To/Segment Number goes to wrong segment
-  http://sourceforge.net/support/tracker.php?aid=2990761
+  https://sourceforge.net/p/omegat/bugs/464/
 
   - User-defined font wasn't used when first opening the Search window
 
@@ -4209,10 +4209,10 @@ in some circumstances
   Implemented requests:
 
   - Load TMXs from nested folders
-  http://sourceforge.net/support/tracker.php?aid=2986574
+  https://sourceforge.net/p/omegat/feature-requests/609/
 
   - Insert exact matches from TMXs in the auto folder
-  http://sourceforge.net/support/tracker.php?aid=2131989
+  https://sourceforge.net/p/omegat/feature-requests/474/
 
   Other enhancements:
 
@@ -4222,7 +4222,7 @@ For explanations, see Searches in the English documentation
   Bug fixes:
 
   - Insert Source Tags miss tags when source text contains <
-  http://sourceforge.net/support/tracker.php?aid=2987164
+  https://sourceforge.net/p/omegat/bugs/463/
 
 ----------------------------------------------------------------------
  OmegaT 2.1.4 update 1 (2010-04-07)
@@ -4236,16 +4236,16 @@ For explanations, see Searches in the English documentation
   Implemented requests:
 
   - SRT filter: read time group into a single segment
-  http://sourceforge.net/support/tracker.php?aid=2980046
+  https://sourceforge.net/p/omegat/feature-requests/606/
 
   - Spell checker dialog improvements
-  http://sourceforge.net/support/tracker.php?aid=2980991
+  https://sourceforge.net/p/omegat/feature-requests/607/
 
   - TBX: recognize <descrip> elements
-  http://sourceforge.net/support/tracker.php?aid=2978608
+  https://sourceforge.net/p/omegat/feature-requests/601/
 
   - TBX: display termNotes only for target language
-  http://sourceforge.net/support/tracker.php?aid=2978610
+  https://sourceforge.net/p/omegat/feature-requests/602/
 
   Other enhancements:
 
@@ -4257,7 +4257,7 @@ If it is not specified, the source tokenizer will be used.
   Bug fixes:
 
   - No filters available when locale is tr
-  http://sourceforge.net/support/tracker.php?aid=2976351
+  https://sourceforge.net/p/omegat/bugs/457/
 
   - Exception when project was reloaded after some project properties
 changes
@@ -4268,10 +4268,10 @@ codes were entered in lowercase
   - TBX terms with country code (e.g., de-AT) were ignored
 
   - Only one translation is kept in TBX glossaries
-  http://sourceforge.net/support/tracker.php?aid=2978575
+  https://sourceforge.net/p/omegat/bugs/460/
 
   - Japanese stemmer interferes with French spellchecker
-  http://sourceforge.net/support/tracker.php?aid=2946389
+  https://sourceforge.net/p/omegat/bugs/446/
 
 ----------------------------------------------------------------------
  OmegaT 2.1.4 (2010-03-24)
@@ -4285,16 +4285,16 @@ codes were entered in lowercase
   Implemented requests:
 
    - TBX glossary format
-  http://sourceforge.net/support/tracker.php?aid=1756560
+  https://sourceforge.net/p/omegat/feature-requests/348/
 
   - Make order of TUs stable in project_save.tmx
-  http://sourceforge.net/support/tracker.php?aid=2948323
+  https://sourceforge.net/p/omegat/feature-requests/585/
 
   - Add .txt extension as tab-separated glossary in UTF-8
-  http://sourceforge.net/support/tracker.php?aid=2942348
+  https://sourceforge.net/p/omegat/feature-requests/580/
 
   - Add LanguageTool support
-  http://sourceforge.net/support/tracker.php?aid=2950346
+  https://sourceforge.net/p/omegat/feature-requests/587/
 (Requires LangageTool plugin from
 http://sourceforge.net/projects/omegat-plugins)
 
@@ -4309,13 +4309,13 @@ http://sourceforge.net/projects/omegat-plugins)
   Bug fixes:
 
   - Project Files window doesn't remember its position
-  http://sourceforge.net/support/tracker.php?aid=2893165
+  https://sourceforge.net/p/omegat/bugs/435/
 
   - Windows only: OS allowed to rename a project directory while in use
-  http://sourceforge.net/support/tracker.php?aid=1956239
+  https://sourceforge.net/p/omegat/bugs/385/
 
   - OpenXML options enabled only after restarting OmegaT
-  http://sourceforge.net/support/tracker.php?aid=2959514
+  https://sourceforge.net/p/omegat/bugs/452/
 
   - Windows RC filter: some files (in "Pascal notation") were not
 recognised
@@ -4332,10 +4332,10 @@ recognised
   Implemented requests:
 
    - CSV glossary format
-  http://sourceforge.net/support/tracker.php?aid=2952761
+  https://sourceforge.net/p/omegat/feature-requests/589/
 
    - File filter for DTD and Mozilla .properties files
-  http://sourceforge.net/support/tracker.php?aid=1848169
+  https://sourceforge.net/p/omegat/feature-requests/403/
 
   Other enhancements:
 
@@ -4353,12 +4353,12 @@ recognised
   - Help & Manual: Some translatable text was not available
 
   - TransTip doesn't highlight words in uppercase
-  http://sourceforge.net/support/tracker.php?aid=2953462
+  https://sourceforge.net/p/omegat/bugs/448/
 
   - Line spacing wasn't always fixed in the Editor
 
   - Missings paragraphs after an out of turn tag
-  http://sourceforge.net/support/tracker.php?aid=2954272
+  https://sourceforge.net/p/omegat/bugs/450/
 
 ----------------------------------------------------------------------
  OmegaT 2.1.2 (2010-02-04)
@@ -4372,19 +4372,19 @@ recognised
   Implemented requests:
 
    - Selection of files to translate in console mode
-  http://sourceforge.net/support/tracker.php?aid=2890282
+  https://sourceforge.net/p/omegat/feature-requests/564/
 
   - Allow translating or not presentation notes in Impress
-  http://sourceforge.net/support/tracker.php?aid=2926510
+  https://sourceforge.net/p/omegat/feature-requests/575/
 
   - Insert Source Tags
-  http://sourceforge.net/support/tracker.php?aid=2873562
+  https://sourceforge.net/p/omegat/feature-requests/554/
 
   - Glossary match identification
-  http://sourceforge.net/support/tracker.php?aid=2921520
+  https://sourceforge.net/p/omegat/feature-requests/572/
 
   - TransTips for glossary items
-  http://sourceforge.net/support/tracker.php?aid=2935633
+  https://sourceforge.net/p/omegat/feature-requests/576/
 
   Other enhancements:
 
@@ -4415,10 +4415,10 @@ the current segment was moved to the next one. If "Copy source text" was
 set in Editing Behaviour, the previous segment was entered as translation.
 
   - OmT loses msgctxt content in PO files
-  http://sourceforge.net/support/tracker.php?aid=2920637
+  https://sourceforge.net/p/omegat/bugs/442/
 
   - Same accelerator for "Tab", "Team" and "Tag Validation"
-  http://sourceforge.net/support/tracker.php?aid=2929351
+  https://sourceforge.net/p/omegat/bugs/443/
 
   - In search: '?' would find 0 or 1 character, while search instructions
 clearly state that it should find 1 character, which is now the case
@@ -4440,14 +4440,14 @@ clearly state that it should find 1 character, which is now the case
   Implemented requests:
 
    - [stopwords] (simplify segments for matching purposes)
-  http://sourceforge.net/support/tracker.php?aid=1599201
+  https://sourceforge.net/p/omegat/feature-requests/258/
  (Requires version 0.4-2.1 of the tokenizers for English)
 
    - Dated TUs in TM
-  http://sourceforge.net/support/tracker.php?aid=1546824
+  https://sourceforge.net/p/omegat/feature-requests/211/
 
   - Automatic bundle aligner in console mode
-  http://sourceforge.net/support/tracker.php?aid=2911321
+  https://sourceforge.net/p/omegat/feature-requests/568/
 
   Other enhancements:
 
@@ -4461,15 +4461,15 @@ clearly state that it should find 1 character, which is now the case
   - Text selected in the Glossary pane can be inserted with a right click
 
   - New options to enable checking localisation variables
-  (see http://sourceforge.net/support/tracker.php?aid=2890624)
+  (see https://sourceforge.net/p/omegat/bugs/434/)
 
   Bug Fixes:
 
   - Number of unique segments always 0 in standard statistics
-  http://sourceforge.net/support/tracker.php?aid=2879866
+  https://sourceforge.net/p/omegat/bugs/430/
 
   - Non-tag is marked as tag error
-  http://sourceforge.net/support/tracker.php?aid=2890624
+  https://sourceforge.net/p/omegat/bugs/434/
 
   - When there were fuzzy matches for a given segment, it wasn't counted
 as a repetition in Match Statistics
@@ -4477,10 +4477,10 @@ as a repetition in Match Statistics
   - Wrong spell checker display if word split to several lines
 
   - PO filter doubles up end-of-line spaces and newlines
-  http://sourceforge.net/support/tracker.php?aid=2910616
+  https://sourceforge.net/p/omegat/bugs/437/
 
   - PO with multiline msgctxt fails to load in OmT
-  http://sourceforge.net/support/tracker.php?aid=2912080
+  https://sourceforge.net/p/omegat/bugs/439/
 
 ----------------------------------------------------------------------
  OmegaT 2.1.0 (2009-10-14)
@@ -4494,10 +4494,10 @@ as a repetition in Match Statistics
   Implemented requests:
 
   - Match Statistics
-  http://sourceforge.net/support/tracker.php?aid=2876216
+  https://sourceforge.net/p/omegat/feature-requests/556/
 
   - Display Statistics in a window
-  http://sourceforge.net/support/tracker.php?aid=2876217
+  https://sourceforge.net/p/omegat/feature-requests/557/
 
 ----------------------------------------------------------------------
  OmegaT 2.0.5 update 4 (2010-06-10)
@@ -4524,18 +4524,18 @@ as a repetition in Match Statistics
   Implemented requests:
 
   - Segmentation rule for header number and the header body
-  http://sourceforge.net/support/tracker.php?aid=2948997
+  https://sourceforge.net/p/omegat/feature-requests/586/
 
   - Define Uyghur as RTL
-  http://sourceforge.net/support/tracker.php?aid=2970467
+  https://sourceforge.net/p/omegat/feature-requests/599/
 
   Bug Fixes:
 
   - Webstart for linux amd64 doesn't work
-  http://sourceforge.net/support/tracker.php?aid=2953631
+  https://sourceforge.net/p/omegat/bugs/449/
 
   - $ Dollar sign in filenames gives error
-  http://sourceforge.net/support/tracker.php?aid=2982509
+  https://sourceforge.net/p/omegat/bugs/461/
 
   - References to Java 1.4 removed in OmegaT.l4J.ini
 
@@ -4577,7 +4577,7 @@ as a repetition in Match Statistics
   Implemented requests:
 
   - Document proxy setting
-  http://sourceforge.net/support/tracker.php?aid=1878073
+  https://sourceforge.net/p/omegat/feature-requests/422/
 
   Other enhancements:
 
@@ -4594,7 +4594,7 @@ as a repetition in Match Statistics
   - Various corrections in the manual
 
   - sh tutorial in English
-  http://sourceforge.net/support/tracker.php?aid=1895401
+  https://sourceforge.net/p/omegat/bugs/364/
 
   - The /gen folder was not included in the source package
 
@@ -4604,7 +4604,7 @@ as a repetition in Match Statistics
 a space
 
   - Spanish exception rule error
-  http://sourceforge.net/support/tracker.php?aid=2939781
+  https://sourceforge.net/p/omegat/bugs/445/
 
   Localisation updates:
 
@@ -4639,12 +4639,12 @@ a space
   Implemented requests:
 
   - Read existing translations from source PO documents
-  http://sourceforge.net/support/tracker.php?aid=2862687
+  https://sourceforge.net/p/omegat/feature-requests/553/
 
   Bug Fixes:
 
   - PO: bad handling of already translated strings
-  http://sourceforge.net/support/tracker.php?aid=1899440
+  https://sourceforge.net/p/omegat/bugs/368/
 
   Localisation updates:
 
@@ -4663,10 +4663,10 @@ a space
   Implemented requests:
 
   - A new default segmentation rule for Russian
-  http://sourceforge.net/support/tracker.php?aid=2835535
+  https://sourceforge.net/p/omegat/feature-requests/548/
 
   - Translation of current segment with Google Translate
-  http://sourceforge.net/support/tracker.php?aid=2818658
+  https://sourceforge.net/p/omegat/feature-requests/544/
 
   Other enhancements:
 
@@ -4684,7 +4684,7 @@ a space
   Implemented requests:
 
   - Provide a Java Web Start version
-  http://sourceforge.net/support/tracker.php?aid=1793300
+  https://sourceforge.net/p/omegat/feature-requests/363/
 
   Bug Fixes:
 
@@ -4724,10 +4724,10 @@ a space
   Implemented requests:
 
   - StarDict dictionaries support
-  http://sourceforge.net/support/tracker.php?aid=2795600
+  https://sourceforge.net/p/omegat/feature-requests/534/
 
   - LaTeX filter support
-  http://sourceforge.net/support/tracker.php?aid=2790332
+  https://sourceforge.net/p/omegat/feature-requests/532/
 
   Other enhancements:
 
@@ -4742,7 +4742,7 @@ to the one obtained in OmegaT.
   Bug Fixes:
 
   - "Unable to read project file!" after creating a new project
-  http://sourceforge.net/support/tracker.php?aid=2796271
+  https://sourceforge.net/p/omegat/bugs/423/
 
   Localisation updates:
 
@@ -4781,19 +4781,19 @@ was checked
   Implemented requests:
 
   - Support for alpha-3 language codes of ISO 639-2 and 639-3
-  http://sourceforge.net/support/tracker.php?aid=1570557
+  https://sourceforge.net/p/omegat/feature-requests/221/
 
   - ResX file filter
-  http://sourceforge.net/support/tracker.php?aid=1908250
+  https://sourceforge.net/p/omegat/feature-requests/435/
 
   - Display all the instances of a segment in searches
-  http://sourceforge.net/support/tracker.php?aid=1904497
+  https://sourceforge.net/p/omegat/feature-requests/430/
 
   - Polish segmentation rules
-  http://sourceforge.net/support/tracker.php?aid=2783294
+  https://sourceforge.net/p/omegat/feature-requests/530/
 
   - Dutch segmentation rules
-  http://sourceforge.net/support/tracker.php?aid=2790334
+  https://sourceforge.net/p/omegat/feature-requests/533/
 
   Other enhancements:
 
@@ -4816,28 +4816,28 @@ which has now three states:
   Bug Fixes:
 
   - Glossary: unclear display if combined entries contain a ","
-  http://sourceforge.net/support/tracker.php?aid=2628490
+  https://sourceforge.net/p/omegat/bugs/409/
 
   - Bidi wrong justification
-  http://sourceforge.net/support/tracker.php?aid=1383289
+  https://sourceforge.net/p/omegat/bugs/127/
 
   - OmegaT hangs at random
-  http://sourceforge.net/support/tracker.php?aid=1762277
+  https://sourceforge.net/p/omegat/bugs/319/
 
   - Random hangs, exceptions in command line, nothing in log
-  http://sourceforge.net/support/tracker.php?aid=1817830
+  https://sourceforge.net/p/omegat/bugs/338/
 
   - Confused display when RTL segment starts with LTR characters
-  http://sourceforge.net/support/tracker.php?aid=1898522
+  https://sourceforge.net/p/omegat/bugs/367/
 
   - Spellchecker slow down
-  http://sourceforge.net/support/tracker.php?aid=1908643
+  https://sourceforge.net/p/omegat/bugs/372/
 
   - Over matching in segmentation rules
-  http://sourceforge.net/support/tracker.php?aid=2783299
+  https://sourceforge.net/p/omegat/bugs/419/
 
   - "Mark untranslated" + "Display source"= opening problem
-  http://sourceforge.net/support/tracker.php?aid=1812310
+  https://sourceforge.net/p/omegat/bugs/332/
 
   - Pattern after in Text files segmentation rule contained "\s+" instead
 of " +"
@@ -4861,19 +4861,19 @@ the default value
   Implemented requests:
 
   - New English exception
-  http://sourceforge.net/support/tracker.php?aid=2493485
+  https://sourceforge.net/p/omegat/feature-requests/496/
 
   - Changing the location of user files
-  http://sourceforge.net/support/tracker.php?aid=2317274
+  https://sourceforge.net/p/omegat/feature-requests/489/
 
   - Combine identical and similar glossary entries
-  http://sourceforge.net/support/tracker.php?aid=2505552
+  https://sourceforge.net/p/omegat/feature-requests/497/
 
   - Interface for scripting languages
-  http://sourceforge.net/support/tracker.php?aid=1989533
+  https://sourceforge.net/p/omegat/feature-requests/454/
 
   - Specify project from command line
-  http://sourceforge.net/support/tracker.php?aid=1880170
+  https://sourceforge.net/p/omegat/feature-requests/425/
 
   Other enhancements:
 
@@ -4889,7 +4889,7 @@ and copied to the clipboard.
   Bug Fixes:
 
   - Fix for detection of printf-variables with index specifier
-  (for feature http://sourceforge.net/support/tracker.php?aid=2371713)
+  (for feature https://sourceforge.net/p/omegat/feature-requests/494/)
 
   Localisation updates :
 
@@ -4906,20 +4906,20 @@ and copied to the clipboard.
 
   Implemented requests:
   - Extra checks in TagValidator for PO linefeed
-  http://sourceforge.net/support/tracker.php?aid=2371683
+  https://sourceforge.net/p/omegat/feature-requests/493/
 
   - Extra check in TagValidator if printf variables in PO-file segments are correct
-  http://sourceforge.net/support/tracker.php?aid=2371713
+  https://sourceforge.net/p/omegat/feature-requests/494/
 
   - New English segmentation exceptions
-  http://sourceforge.net/support/tracker.php?aid=1974262
+  https://sourceforge.net/p/omegat/feature-requests/451/
 
   - Fuzzy Glossary Matching
-  http://sourceforge.net/support/tracker.php?aid=1374596
+  https://sourceforge.net/p/omegat/feature-requests/129/
   (Requires tokenizers from http://sourceforge.net/projects/omegat-plugins)
 
   - Catalan and Spanish segmentation rules
-  http://sourceforge.net/support/tracker.php?aid=2282491
+  https://sourceforge.net/p/omegat/feature-requests/483/
 
   Other enhancements:
 
@@ -4937,7 +4937,7 @@ steps of matching:
   Bugs fixes:
 
   - Spellcheck EN-US: incorrect handling of hyphenated compounds
-  http://sourceforge.net/support/tracker.php?aid=1815736
+  https://sourceforge.net/p/omegat/bugs/336/
   (Requires tokenizers from http://sourceforge.net/projects/omegat-plugins)
 
   Localisation updates:
@@ -4958,22 +4958,22 @@ steps of matching:
   Implemented requests:
 
   - User-configurable keyboard shortcuts
-  http://sourceforge.net/support/tracker.php?aid=1615400
+  https://sourceforge.net/p/omegat/feature-requests/300/
 
   - Shortcut for Reload/Close/Create translated documents
-  http://sourceforge.net/support/tracker.php?aid=1618679
+  https://sourceforge.net/p/omegat/feature-requests/305/
 
   - Additions to the log
-  http://sourceforge.net/support/tracker.php?aid=1632959
+  https://sourceforge.net/p/omegat/feature-requests/312/
 
   - Keep position after clicking a file
-  http://sourceforge.net/support/tracker.php?aid=2150276
+  https://sourceforge.net/p/omegat/feature-requests/476/
 
   - Project List to remain in front
-  http://sourceforge.net/support/tracker.php?aid=1808903
+  https://sourceforge.net/p/omegat/feature-requests/378/
 
   - Rewrite thread use
-  http://sourceforge.net/support/tracker.php?aid=1581565
+  https://sourceforge.net/p/omegat/feature-requests/226/
 
   Other enhancements:
 
@@ -5032,7 +5032,7 @@ can be applied or not with a new option in Options/Font.
   Bug fixes:
 
   - Windows: project's absolute paths are displayed with /
-  http://sourceforge.net/support/tracker.php?aid=2826624
+  https://sourceforge.net/p/omegat/bugs/428/
 
   Localisation updates:
 
@@ -5050,7 +5050,7 @@ can be applied or not with a new option in Options/Font.
   Bug fixes:
 
   - Linux startup script must be run from install dir
-  http://sourceforge.net/support/tracker.php?aid=2654430
+  https://sourceforge.net/p/omegat/bugs/413/
 
   - XLIFF filter: the content of <seg-source> was visible
 
@@ -5071,10 +5071,10 @@ can be applied or not with a new option in Options/Font.
   Bug fixes:
 
   - XML, stylesheet declaration removed from target
-  http://sourceforge.net/support/tracker.php?aid=1677412
+  https://sourceforge.net/p/omegat/bugs/302/
 
   - XML, Processing Instructions removed from target document
-  http://sourceforge.net/support/tracker.php?aid=1662202
+  https://sourceforge.net/p/omegat/bugs/296/
 
   - Hunspell and OmegaT could crash if a dictionary did not exist for
 a project's language
@@ -5094,7 +5094,7 @@ translatable content
   Implemented requests:
 
   - Add keyboard shortcuts in Search dialog
-  http://sourceforge.net/support/tracker.php?aid=1811065
+  https://sourceforge.net/p/omegat/feature-requests/383/
   (Effective in English and in French, other translations must be
    updated. As for all dialogs, dialog shortcuts are not available on a Mac.)
 
@@ -5106,13 +5106,13 @@ translatable content
   Bug fixes:
 
   - Tags are counted as characters in statistics
-  http://sourceforge.net/support/tracker.php?aid=1910909
+  https://sourceforge.net/p/omegat/bugs/373/
 
   - French dictionary cannot be downloaded and installed
-  http://sourceforge.net/support/tracker.php?aid=2138846
+  https://sourceforge.net/p/omegat/bugs/402/
 
   - Linux: Exception on reading omegat/learned_words.txt
-  http://sourceforge.net/support/tracker.php?aid=2657589
+  https://sourceforge.net/p/omegat/bugs/414/
 
   Localisation updates:
 
@@ -5136,13 +5136,13 @@ launcher), based on version 3.0.1 of Launch4J.
   Bug fixes:
 
   - PL "Create new project" too large on OSX
-  http://sourceforge.net/support/tracker.php?aid=1895406
+  https://sourceforge.net/p/omegat/bugs/365/
 
   - The content of external TMX level 2 tags is displayed
-  http://sourceforge.net/support/tracker.php?aid=1988491
+  https://sourceforge.net/p/omegat/bugs/388/
 
   - Spellcheck: words added to dictionary lost after restart
-  http://sourceforge.net/support/tracker.php?aid=1819355
+  https://sourceforge.net/p/omegat/bugs/339/
 
   Localisation updates:
 
@@ -5160,7 +5160,7 @@ launcher), based on version 3.0.1 of Launch4J.
   Implemented requests:
 
   - PO: transform \t to tabs and back
-  http://sourceforge.net/support/tracker.php?aid=2120936
+  https://sourceforge.net/p/omegat/feature-requests/472/
 
   Bug fixes:
 
@@ -5169,7 +5169,7 @@ launcher), based on version 3.0.1 of Launch4J.
   - Various corrections in the manual
 
   - PO Filter: \ is doubled for \t
-  http://sourceforge.net/support/tracker.php?aid=2149518
+  https://sourceforge.net/p/omegat/bugs/403/
 
   - OpenXML filter: Newline (<w:br>) was not defined as a paragraph tag
   The change might require to revalidate the translation for some existing
@@ -5192,10 +5192,10 @@ segments
   Implemented requests:
 
   - OpenDoc: Allow to translate or not Bookmark references
-  http://sourceforge.net/support/tracker.php?aid=2018244
+  https://sourceforge.net/p/omegat/feature-requests/461/
 
   - Do not take user to first segment on project reload
-  http://sourceforge.net/support/tracker.php?aid=1906198
+  https://sourceforge.net/p/omegat/feature-requests/432/
 
   Other enhancements:
 
@@ -5206,10 +5206,10 @@ segments
   Bug fixes:
 
   - Extra space in each segment in the German localization
-  http://sourceforge.net/support/tracker.php?aid=2169447
+  https://sourceforge.net/p/omegat/bugs/405/
 
   - Vista: wrong location of configuration files
-  http://sourceforge.net/support/tracker.php?aid=2200872
+  https://sourceforge.net/p/omegat/bugs/407/
 
   Localisation updates:
 
@@ -5235,15 +5235,15 @@ segments
   Bug fixes:
 
   - Spellchecking dialogs not dismissable with [esc]
-  http://sourceforge.net/support/tracker.php?aid=1815506
+  https://sourceforge.net/p/omegat/bugs/334/
 
   - Wrong Import file dialog title
-  http://sourceforge.net/support/tracker.php?aid=1940081
+  https://sourceforge.net/p/omegat/bugs/381/
 
   - Hunspell not working on Linux 64-bit
 
   - Non-ascii char badly handled in hunspell lib loading on OS-X
-  http://sourceforge.net/support/tracker.php?aid=1862199
+  https://sourceforge.net/p/omegat/bugs/350/
 
   Localisation updates:
 
@@ -5276,54 +5276,54 @@ segments
   Implemented requests:
 
   - Editor window name
-  http://sourceforge.net/support/tracker.php?aid=1764103
+  https://sourceforge.net/p/omegat/feature-requests/352/
 
   - Tool: Spellchecker
-  http://sourceforge.net/support/tracker.php?aid=991510
+  https://sourceforge.net/p/omegat/feature-requests/5/
 
   - Letter case change in editing field
-  http://sourceforge.net/support/tracker.php?aid=1386063
+  https://sourceforge.net/p/omegat/feature-requests/134/
 
   - Display source segments
-  http://sourceforge.net/support/tracker.php?aid=1805172
+  https://sourceforge.net/p/omegat/feature-requests/370/
 
   - Mark translated segments
-  http://sourceforge.net/support/tracker.php?aid=1805173
+  https://sourceforge.net/p/omegat/feature-requests/371/
 
   - Mark untranslated segments
-  http://sourceforge.net/support/tracker.php?aid=1809004
+  https://sourceforge.net/p/omegat/feature-requests/379/
 
   - Navigation history
-  http://sourceforge.net/support/tracker.php?aid=1805175
+  https://sourceforge.net/p/omegat/feature-requests/372/
 
   - HTML, skip extraction of messages matching regxep
-  http://sourceforge.net/support/tracker.php?aid=1787085
+  https://sourceforge.net/p/omegat/feature-requests/361/
 
   - (X)HTML filter: do not translate input VALUE attribute
-  http://sourceforge.net/support/tracker.php?aid=1787153
+  https://sourceforge.net/p/omegat/feature-requests/362/
 
   - Select elements to translate in office documents
-  http://sourceforge.net/support/tracker.php?aid=1812565
+  https://sourceforge.net/p/omegat/feature-requests/387/
 
   - Clickable match window
-  http://sourceforge.net/support/tracker.php?aid=1297188
+  https://sourceforge.net/p/omegat/feature-requests/89/
 
   - Compare source segment and translated segment lengths
-  http://sourceforge.net/support/tracker.php?aid=1562002
+  https://sourceforge.net/p/omegat/feature-requests/220/
 
   - Indicate translation progress in status bar
-  http://sourceforge.net/support/tracker.php?aid=1520599
+  https://sourceforge.net/p/omegat/feature-requests/201/
 
   Bug fixes:
 
   - HTML filter loses html-encoded characters if not supported
-  http://sourceforge.net/support/tracker.php?aid=1802000
+  https://sourceforge.net/p/omegat/bugs/324/
 
   - Check-spelling/styles error
-  http://sourceforge.net/support/tracker.php?aid=1822579
+  https://sourceforge.net/p/omegat/bugs/341/
 
   - Mistake of segmentation after <PRE>
-  http://sourceforge.net/support/tracker.php?aid=1827479
+  https://sourceforge.net/p/omegat/bugs/345/
 
   Localisation updates:
 
@@ -5342,16 +5342,16 @@ segments
   Bug fixes:
 
   - PO Filter: some escapes not working
-  http://sourceforge.net/support/tracker.php?aid=1964169
+  https://sourceforge.net/p/omegat/bugs/387/
 
   - Angle bracket no showing in Editor after segment number in the German
 localization
 
   - DocBook: entities resolved only under Java 1.4
-  http://sourceforge.net/support/tracker.php?aid=1825174
+  https://sourceforge.net/p/omegat/bugs/342/
 
   - PO: Bad handling of double quotes after no-wrap
-  http://sourceforge.net/support/tracker.php?aid=2021007
+  https://sourceforge.net/p/omegat/bugs/395/
 
   Other enhancements:
 
@@ -5370,21 +5370,21 @@ localization
   Implemented requests:
 
   - DocBook: Allow to translate the language attribute
-  http://sourceforge.net/support/tracker.php?aid=1949471
+  https://sourceforge.net/p/omegat/feature-requests/447/
 
   - Escape support for PO
-  http://sourceforge.net/support/tracker.php?aid=1869069
+  https://sourceforge.net/p/omegat/feature-requests/418/
 
   Bug fixes:
 
   - Wrong default encoding in XML (should be UTF-8)
-  http://sourceforge.net/support/tracker.php?aid=1941365
+  https://sourceforge.net/p/omegat/bugs/382/
 
   - Solaris not detected, and wrong default home directory
-  http://sourceforge.net/support/tracker.php?aid=1953251
+  https://sourceforge.net/p/omegat/bugs/383/
 
   - Error trying to create target document with large OOo file
-  http://sourceforge.net/support/tracker.php?aid=1955635
+  https://sourceforge.net/p/omegat/bugs/384/
 
   - Windows: the OmegaT folder was not completely removed from Program files
 when uninstalling the JRE version
@@ -5401,27 +5401,27 @@ when uninstalling the JRE version
   Implemented requests:
 
   - Command line parameters for OmegaT.exe
-  http://sourceforge.net/support/tracker.php?aid=1900264
+  https://sourceforge.net/p/omegat/feature-requests/428/
 
   - Windows installer
-  http://sourceforge.net/support/tracker.php?aid=1596625
+  https://sourceforge.net/p/omegat/feature-requests/253/
 
   - DocBook 5.0 filter
-  http://sourceforge.net/support/tracker.php?aid=1907008
+  https://sourceforge.net/p/omegat/feature-requests/434/
 
   - Do not copy SVN/CVS folders from /source to /target
-  http://sourceforge.net/support/tracker.php?aid=1774502
+  https://sourceforge.net/p/omegat/feature-requests/358/
 
   Bug fixes:
 
   - PO: Bad handling of plural messages on multiple lines
-  http://sourceforge.net/support/tracker.php?aid=1896781
+  https://sourceforge.net/p/omegat/bugs/366/
 
   - Some strings not translated when using external bundle
-  http://sourceforge.net/support/tracker.php?aid=1922188
+  https://sourceforge.net/p/omegat/bugs/378/
 
   - XHTML: xmlns="http://www.w3.org... in every tag
-  http://sourceforge.net/support/tracker.php?aid=1926940
+  https://sourceforge.net/p/omegat/bugs/380/
 
   Other enhancements:
 
@@ -5439,30 +5439,30 @@ when uninstalling the JRE version
   Implemented requests:
 
   - Exceptions for EN.*: Fig., St., middle name.
-  http://sourceforge.net/support/tracker.php?aid=1856354
+  https://sourceforge.net/p/omegat/feature-requests/410/
 
   Bug fixes:
 
   - HTML entities not resolved in the XHTML filter
-  http://sourceforge.net/support/tracker.php?aid=1844968
+  https://sourceforge.net/p/omegat/bugs/346/
 
   - Prevent non-XML characters from entering the TMX
-  http://sourceforge.net/support/tracker.php?aid=1684825
+  https://sourceforge.net/p/omegat/bugs/305/
 
   - Relative paths not working under Windows/Java 1.4
-  http://sourceforge.net/support/tracker.php?aid=1875331
+  https://sourceforge.net/p/omegat/bugs/352/
 
   - Mediawiki import - remove invalid chars in filename
-  http://sourceforge.net/support/tracker.php?aid=1878113
+  https://sourceforge.net/p/omegat/bugs/354/
 
   - Relative paths with "similar names" not working
-  http://sourceforge.net/support/tracker.php?aid=1879571
+  https://sourceforge.net/p/omegat/bugs/355/
 
   - PO-filter fails to handle plural forms
-  http://sourceforge.net/support/tracker.php?aid=1879892
+  https://sourceforge.net/p/omegat/bugs/356/
 
   - Non-translatable strings displayed in OOo documents
-  http://sourceforge.net/support/tracker.php?aid=1888097
+  https://sourceforge.net/p/omegat/bugs/359/
 
   Localisation updates:
 
@@ -5492,13 +5492,13 @@ Contains a revised manual, two new localisations (Danish, polish) and bug fixes
   Bug fixes:
 
   - Properties: space before "=" shouldn't be part of the key
-  http://sourceforge.net/support/tracker.php?aid=1812183
+  https://sourceforge.net/p/omegat/bugs/330/
 
   - <context> should be ignored in XLIFF files
-  http://sourceforge.net/support/tracker.php?aid=1802000
+  https://sourceforge.net/p/omegat/bugs/324/
 
   - Footnotes break segments in OOo 1.x documents
-  http://sourceforge.net/support/tracker.php?aid=1812385
+  https://sourceforge.net/p/omegat/bugs/333/
 
   Localisation updates:
 
@@ -5522,36 +5522,36 @@ Contains three new localisations (Simplified Chinese, Traditional Chinese and Cz
   Implemented requests:
 
   - Have a more complete ISO 639 list in the UI
-  http://sourceforge.net/support/tracker.php?aid=1755240
+  https://sourceforge.net/p/omegat/feature-requests/347/
 
   - instant start display in the main window
-  http://sourceforge.net/support/tracker.php?aid=1604238
+  https://sourceforge.net/p/omegat/feature-requests/273/
 
   - Current file highlighted in Project Files Window
-  http://sourceforge.net/support/tracker.php?aid=1766670
+  https://sourceforge.net/p/omegat/feature-requests/357/
 
   Bug fixes:
 
   - Incorrect/unclear data in project_save.txt
-  http://sourceforge.net/support/tracker.php?aid=1616247
+  https://sourceforge.net/p/omegat/bugs/274/
 
   - regression in the JA UI strings 1.7.1 test
-  http://sourceforge.net/support/tracker.php?aid=1749787
+  https://sourceforge.net/p/omegat/bugs/318/
 
   - Only try to get MediaWiki page if a string has been entered
-  http://sourceforge.net/support/tracker.php?aid=1762625
+  https://sourceforge.net/p/omegat/bugs/320/
 
   - readme_pt_BR.txt is garbled (incorrect encoding?)
-  http://sourceforge.net/support/tracker.php?aid=1631735
+  https://sourceforge.net/p/omegat/documentation/5/
 
   - Editor window still shows filename after closing project
-  http://sourceforge.net/support/tracker.php?aid=1730935
+  https://sourceforge.net/p/omegat/bugs/312/
 
   - omegat version nb in project_save.tmx
-  http://sourceforge.net/support/tracker.php?aid=1774398
+  https://sourceforge.net/p/omegat/bugs/322/
 
   - sh language is not expanded in the manual
-  http://sourceforge.net/support/tracker.php?aid=1748552
+  https://sourceforge.net/p/omegat/bugs/317/
 
   Other enhancements:
 
@@ -5578,46 +5578,46 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
   Implemented requests:
 
   - Jump to segment #
-  http://sourceforge.net/support/tracker.php?aid=1086959
+  https://sourceforge.net/p/omegat/feature-requests/34/
 
   - Indicate number of results in search window
-  http://sourceforge.net/support/tracker.php?aid=1427915
+  https://sourceforge.net/p/omegat/feature-requests/153/
 
   - Log file l10n and debugging
-  http://sourceforge.net/support/tracker.php?aid=1209835
+  https://sourceforge.net/p/omegat/feature-requests/55/
 
   - Ctrl+Delete, Ctrl+Backspace, and overwriting with Ctrl+i
-  http://sourceforge.net/support/tracker.php?aid=1579488
+  https://sourceforge.net/p/omegat/feature-requests/223/
 
   - Monolingual XLIFF (Okapi) filter
-  http://sourceforge.net/support/tracker.php?aid=1649067
+  https://sourceforge.net/p/omegat/feature-requests/315/
 
   - Apply font to Tag Verification and Project Files windows
-  http://sourceforge.net/support/tracker.php?aid=1545636
+  https://sourceforge.net/p/omegat/feature-requests/209/
 
   - Simplified coloring tags in tag validation window
-  http://sourceforge.net/support/tracker.php?aid=1679619
+  https://sourceforge.net/p/omegat/feature-requests/329/
 
   - Executable alternative to OmegaT.bat
-  http://sourceforge.net/support/tracker.php?aid=1692363
+  https://sourceforge.net/p/omegat/feature-requests/330/
 
   - HTML filters->optional translatable contents in attribute
-  http://sourceforge.net/support/tracker.php?aid=1436569
+  https://sourceforge.net/p/omegat/feature-requests/159/
 
   - (X)HTML: Optional paragraph on BR
-  http://sourceforge.net/support/tracker.php?aid=1709400
+  https://sourceforge.net/p/omegat/feature-requests/332/
 
   - OOo documents, do not show "default language"
-  http://sourceforge.net/support/tracker.php?aid=1711953
+  https://sourceforge.net/p/omegat/feature-requests/334/
 
   - Add direct support for Office 2007 XML
-  http://sourceforge.net/support/tracker.php?aid=1589239
+  https://sourceforge.net/p/omegat/feature-requests/237/
 
   - Do not show quotation marks in glossary pane
-  http://sourceforge.net/support/tracker.php?aid=1727409
+  https://sourceforge.net/p/omegat/feature-requests/338/
 
   - Import MediaWiki source page
-  http://sourceforge.net/support/tracker.php?aid=1745384
+  https://sourceforge.net/p/omegat/feature-requests/345/
 
  Other enhancements:
 
@@ -5628,61 +5628,61 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
  Bug fixes:
 
   - Hardcoded bits of text unlocalisable
-  http://sourceforge.net/support/tracker.php?aid=1602798
+  https://sourceforge.net/p/omegat/bugs/256/
 
   - log.txt encoding
-  http://sourceforge.net/support/tracker.php?aid=1600139
+  https://sourceforge.net/p/omegat/bugs/253/
 
   - Incorrect XHTML file not parsed at all
-  http://sourceforge.net/support/tracker.php?aid=1590169
+  https://sourceforge.net/p/omegat/bugs/238/
 
   - DocBook: indexterm not recognised as sub text
-  http://sourceforge.net/support/tracker.php?aid=1670754
+  https://sourceforge.net/p/omegat/bugs/300/
 
   - DocBook: <member> should create a new segment
-  http://sourceforge.net/support/tracker.php?aid=1672849
+  https://sourceforge.net/p/omegat/bugs/301/
 
   - OmegaT.exe not compatible with Java 1.6
-  http://sourceforge.net/support/tracker.php?aid=1692362
+  https://sourceforge.net/p/omegat/bugs/306/
 
   - (X)HTML: HR not defined as a paragraph tag
-  http://sourceforge.net/support/tracker.php?aid=1709373
+  https://sourceforge.net/p/omegat/bugs/310/
 
   - Ctrl+Z in search window is hard coded
-  http://sourceforge.net/support/tracker.php?aid=1618742
+  https://sourceforge.net/p/omegat/bugs/276/
 
   - Localization projects glitches
-  http://sourceforge.net/support/tracker.php?aid=1612550
+  https://sourceforge.net/p/omegat/bugs/271/
 
   - Sentence break on comments in OOo documents
-  http://sourceforge.net/support/tracker.php?aid=1628890
+  https://sourceforge.net/p/omegat/bugs/281/
 
   - Resource bundle filter incomplete
-  http://sourceforge.net/support/tracker.php?aid=1606595
+  https://sourceforge.net/p/omegat/bugs/266/
 
   - FF character in license.txt
-  http://sourceforge.net/support/tracker.php?aid=1664523
+  https://sourceforge.net/p/omegat/bugs/298/
 
   - Can not build on Windows XP
-  http://sourceforge.net/support/tracker.php?aid=1657233
+  https://sourceforge.net/p/omegat/bugs/293/
 
   - Wrong auto encoding for XML documents
-  http://sourceforge.net/support/tracker.php?aid=1652221
+  https://sourceforge.net/p/omegat/bugs/290/
 
   - Wrong link in legalNotices.html
-  http://sourceforge.net/support/tracker.php?aid=1657547
+  https://sourceforge.net/p/omegat/documentation/7/
 
   - Search: simple wilcards do not work
-  http://sourceforge.net/support/tracker.php?aid=1680081
+  https://sourceforge.net/p/omegat/bugs/303/
 
   - Language code in segmentation rule is case sensitive
-  http://sourceforge.net/support/tracker.php?aid=1643500
+  https://sourceforge.net/p/omegat/bugs/285/
 
   - Less than sign causes problems in HTML and OpenOffice
-  http://sourceforge.net/support/tracker.php?aid=1176585
+  https://sourceforge.net/p/omegat/bugs/39/
 
   - Pasting with middle mouse button allowed anywhere in editor
-  http://sourceforge.net/support/tracker.php?aid=1743100
+  https://sourceforge.net/p/omegat/bugs/315/
 
   Localisation updates:
 
@@ -5712,7 +5712,7 @@ GPL-compatible.
 
   - License incompatibility
   (Inconsistent license information)
-  http://sourceforge.net/support/tracker.php?aid=1609275
+  https://sourceforge.net/p/omegat/bugs/269/
 
 ----------------------------------------------------------------------
 1.6.1_03 ( 2007-01-07)
@@ -5766,10 +5766,10 @@ and two bug fixes
  Bug fixes:
 
   - Corrupted TMX after weird GUI interaction
-  http://sourceforge.net/support/tracker.php?aid=1604963
+  https://sourceforge.net/p/omegat/bugs/262/
 
   - Inconsistent license information
-  http://sourceforge.net/support/tracker.php?aid=1609275
+  https://sourceforge.net/p/omegat/bugs/269/
 
 ----------------------------------------------------------------------
 1.6.1_01 (2006-11-27)
@@ -5792,19 +5792,19 @@ Contains new localisations plus a couple bug fixes
  Bug fixes:
 
    - Localisation errors
-   http://sourceforge.net/support/tracker.php?aid=1598209
+   https://sourceforge.net/p/omegat/bugs/249/
 
    - Some texts not loaded from external resource bundle
-   http://sourceforge.net/support/tracker.php?aid=1602787
+   https://sourceforge.net/p/omegat/bugs/255/
 
    - [target=japanese] some trailing spaces are not reproduced
-   http://sourceforge.net/support/tracker.php?aid=1599209
+   https://sourceforge.net/p/omegat/bugs/252/
 
    - Insert best match (% setting)
-   http://sourceforge.net/support/tracker.php?aid=1599127
+   https://sourceforge.net/p/omegat/bugs/250/
 
    - Segmentation of bundles on empty lines
-   http://sourceforge.net/support/tracker.php?aid=1577534
+   https://sourceforge.net/p/omegat/bugs/225/
 
 ----------------------------------------------------------------------
 1.6.1 (2006-11-25)
@@ -5813,10 +5813,10 @@ Contains a new HTML Help Compiler (HCC) filter
  Implemented requests:
 
   - HTML Help Compiler filter
-  http://sourceforge.net/support/tracker.php?aid=1592946
+  https://sourceforge.net/p/omegat/feature-requests/249/
 
   - Restore GUI widget
-   http://sourceforge.net/support/tracker.php?aid=1557794
+   https://sourceforge.net/p/omegat/feature-requests/215/
 
  Other enhancements:
 
@@ -5829,7 +5829,7 @@ Contains a new HTML Help Compiler (HCC) filter
  Bug fixes:
 
   - Arbitrary modification of project_save.tmx
-  http://sourceforge.net/support/tracker.php?aid=1594483
+  https://sourceforge.net/p/omegat/bugs/247/
 
 ----------------------------------------------------------------------
 1.6.0_02 (2006-11-11)
@@ -5838,39 +5838,39 @@ Contains a number of quick bug fixes and a documentation enhancement.
  Enhancements:
 
   - [Doc] readme.txt: some clarification on Java
-  http://sourceforge.net/support/tracker.php?aid=1592468
+  https://sourceforge.net/p/omegat/feature-requests/246/
 
  Bug fixes:
 
   -Incorreft referral in index.html in root dir
-  http://sourceforge.net/support/tracker.php?aid=1591028
+  https://sourceforge.net/p/omegat/bugs/243/
 
   - Links not working in instant start guide
-  http://sourceforge.net/support/tracker.php?aid=1591025
+  https://sourceforge.net/p/omegat/bugs/242/
 
   - Search in files shouldn't be checked by default
-  http://sourceforge.net/support/tracker.php?aid=1590209
+  https://sourceforge.net/p/omegat/bugs/240/
 
   - Incorrect display in search function
-  http://sourceforge.net/support/tracker.php?aid=1590208
+  https://sourceforge.net/p/omegat/bugs/239/
 
   - Force kill causes project_save.tmx destruction
-  http://sourceforge.net/support/tracker.php?aid=1583560
+  https://sourceforge.net/p/omegat/bugs/230/
 
   - First segment validation persistence issue
-  http://sourceforge.net/support/tracker.php?aid=1587606
+  https://sourceforge.net/p/omegat/bugs/235/
 
   - Project TM not read by older versions
-  http://sourceforge.net/support/tracker.php?aid=1592377
+  https://sourceforge.net/p/omegat/bugs/246/
 
   - TMX 1.4 files output by OmegaT refer to TMX 1.1 DTD
-  http://sourceforge.net/support/tracker.php?aid=1592375
+  https://sourceforge.net/p/omegat/bugs/245/
 
   - Suprefluous 'while parsing' in bundle.properties
-  http://sourceforge.net/support/tracker.php?aid=1591888
+  https://sourceforge.net/p/omegat/bugs/244/
 
   - Segmentation/parsing problem while translating .properties
-  http://sourceforge.net/support/tracker.php?aid=1590490
+  https://sourceforge.net/p/omegat/bugs/241/
 
 ----------------------------------------------------------------------
 1.6.0_01 (2006-11-03)
@@ -5893,7 +5893,7 @@ other CAT tools, and supports regular expression searches.
   [No RFE submitted]
 
   - Regular expression search
-  http://sourceforge.net/support/tracker.php?aid=1506640
+  https://sourceforge.net/p/omegat/bugs/189/
 
   - More search options with greater flexibility
   [No RFE submitted]
@@ -5901,73 +5901,73 @@ other CAT tools, and supports regular expression searches.
  Bug fixes:
 
   - Multiple instances of OmegaT and log file
-  http://sourceforge.net/support/tracker.php?aid=1392639
+  https://sourceforge.net/p/omegat/bugs/134/
 
   - Untranslated segment marked as translated
-  http://sourceforge.net/support/tracker.php?aid=1409309
+  https://sourceforge.net/p/omegat/bugs/146/
 
   - Search options persistence
-  http://sourceforge.net/support/tracker.php?aid=1447698
+  https://sourceforge.net/p/omegat/bugs/172/
 
   - Match ordering
-  http://sourceforge.net/support/tracker.php?aid=1449988
+  https://sourceforge.net/p/omegat/bugs/175/
 
   - [MacOSX] Browsing wrong folders from project properties
-  http://sourceforge.net/support/tracker.php?aid=1476591
+  https://sourceforge.net/p/omegat/bugs/187/
 
   - Search function should differentiate accented letters
-  http://sourceforge.net/support/tracker.php?aid=1506640
+  https://sourceforge.net/p/omegat/bugs/189/
 
   - Tag validation window does not remember position
-  http://sourceforge.net/support/tracker.php?aid=1542937
+  https://sourceforge.net/p/omegat/bugs/210/
 
   - Log display bug when parsing TMX
-  http://sourceforge.net/support/tracker.php?aid=1549088
+  https://sourceforge.net/p/omegat/bugs/211/
 
   - Trados TMX import bug
-  http://sourceforge.net/support/tracker.php?aid=1549926
+  https://sourceforge.net/p/omegat/bugs/213/
 
   - project_stats.txt not updated
-  http://sourceforge.net/support/tracker.php?aid=1553115
+  https://sourceforge.net/p/omegat/bugs/214/
 
   - Can't start on Fedore Core 5 with JDK1.6
-  http://sourceforge.net/support/tracker.php?aid=1555809
+  https://sourceforge.net/p/omegat/bugs/215/
 
   - Project files window position
-  http://sourceforge.net/support/tracker.php?aid=1558328
+  https://sourceforge.net/p/omegat/bugs/218/
 
   - [OpenDocument] One bookmark attribute not translatable
-  http://sourceforge.net/support/tracker.php?aid=1569874
+  https://sourceforge.net/p/omegat/bugs/221/
 
   - Out of memory error
-  http://sourceforge.net/support/tracker.php?aid=1571944
+  https://sourceforge.net/p/omegat/bugs/222/
 
   - Charset definition in HTML files
-  http://sourceforge.net/support/tracker.php?aid=1575761
+  https://sourceforge.net/p/omegat/bugs/223/
 
   - Ctrl+z (cancel) does not work in the search window
-  http://sourceforge.net/support/tracker.php?aid=1567480
+  https://sourceforge.net/p/omegat/bugs/220/
 
   - Cancel button not working
-  http://sourceforge.net/support/tracker.php?aid=1583109
+  https://sourceforge.net/p/omegat/bugs/229/
 
   - Project files window dismissal
-  http://sourceforge.net/support/tracker.php?aid=1581385
+  https://sourceforge.net/p/omegat/bugs/228/
 
   - Folder selection in properties dialog
-  http://sourceforge.net/support/tracker.php?aid=1581379
+  https://sourceforge.net/p/omegat/bugs/227/
 
   - Closing a project and the related windows
-  http://sourceforge.net/support/tracker.php?aid=1560724
+  https://sourceforge.net/p/omegat/bugs/219/
 
   - Filters Configuration is not persistent under Turkish locale
-  http://sourceforge.net/support/tracker.php?aid=1207296
+  https://sourceforge.net/p/omegat/bugs/61/
 
   - Respect original CR/LF of plain text files
-  http://sourceforge.net/support/tracker.php?aid=1462566
+  https://sourceforge.net/p/omegat/bugs/179/
 
   - Numbers not coloured in match
-  http://sourceforge.net/support/tracker.php?aid=1586397
+  https://sourceforge.net/p/omegat/bugs/234/
 
 ----------------------------------------------------------------------
 1.6.0 RC12a (2006-07-30)
@@ -5977,45 +5977,45 @@ fixes a few regressions of RC11 and RC12.
  Enchancements:
 
   - [OpenDocument] Support for inserted OpenDocument files
-    http://sourceforge.net/support/tracker.php?aid=1218002
+    https://sourceforge.net/p/omegat/feature-requests/64/
 
   - [OpenDocument] Translate Bookmarks and Index Entries
-    http://sourceforge.net/support/tracker.php?aid=1527251
+    https://sourceforge.net/p/omegat/feature-requests/207/
 
   - Upgrade 1.4.x tag numbering and restore pair tags
-    http://sourceforge.net/support/tracker.php?aid=1523773
+    https://sourceforge.net/p/omegat/feature-requests/205/
 
   - Upgrade TMXs from paragraph to sentence segmentation
-    http://sourceforge.net/support/tracker.php?aid=1527082
+    https://sourceforge.net/p/omegat/feature-requests/206/
 
   - File statistics should list relative file paths
-    http://sourceforge.net/support/tracker.php?aid=1518109
+    https://sourceforge.net/p/omegat/feature-requests/199/
 
   - Exact OmegaT version in TMX
-    http://sourceforge.net/support/tracker.php?aid=1436563
+    https://sourceforge.net/p/omegat/feature-requests/158/
 
  Bug fixes:
 
   - [OpenDocument] Writer headers and footers not honored
-    http://sourceforge.net/support/tracker.php?aid=1111950
+    https://sourceforge.net/p/omegat/bugs/35/
 
   - [OpenDocument] Footnote markers break sentences
-    http://sourceforge.net/support/tracker.php?aid=1461154
+    https://sourceforge.net/p/omegat/bugs/177/
 
   - [OpenDocument] Tracked changes add unnecessary data
-    http://sourceforge.net/support/tracker.php?aid=1461178
+    https://sourceforge.net/p/omegat/bugs/178/
 
   - [Regression] Wrong saved path for project folders
-    http://sourceforge.net/support/tracker.php?aid=1519052
+    https://sourceforge.net/p/omegat/bugs/200/
 
   - [Regression] Buggy Docking Library
-    http://sourceforge.net/support/tracker.php?aid=1518026
+    https://sourceforge.net/p/omegat/bugs/198/
 
   - Encoding problem with project_stats.txt file
-    http://sourceforge.net/support/tracker.php?aid=1518101
+    https://sourceforge.net/p/omegat/bugs/199/
 
   - ClassNotFoundException while loading a project
-    http://sourceforge.net/support/tracker.php?aid=1528772
+    https://sourceforge.net/p/omegat/bugs/204/
 
 ----------------------------------------------------------------------
 1.6.0 RC11b (2006-07-05)
@@ -6024,13 +6024,13 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  Bug fixes:
 
  - Glossary displays source=source
-   http://sourceforge.net/support/tracker.php?aid=1516395
+   https://sourceforge.net/p/omegat/bugs/194/
 
  - Insert/replace with match does not work
-   http://sourceforge.net/support/tracker.php?aid=1516807
+   https://sourceforge.net/p/omegat/bugs/195/
 
  - No colouring in matches window
-   http://sourceforge.net/support/tracker.php?aid=1516936
+   https://sourceforge.net/p/omegat/bugs/196/
 
 ----------------------------------------------------------------------
 1.6.0 RC11 (2006-07-02)
@@ -6038,21 +6038,21 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  Enchancements:
 
  - Enable relative paths in omegat.project
-   http://sourceforge.net/support/tracker.php?aid=1111956
+   https://sourceforge.net/p/omegat/feature-requests/41/
 
  - Match/Glossary pane may be docked to single main window, improved
-   http://sourceforge.net/support/tracker.php?aid=1472196
+   https://sourceforge.net/p/omegat/feature-requests/177/
 
  - Separate match and glossary window
-   http://sourceforge.net/support/tracker.php?aid=1374201
+   https://sourceforge.net/p/omegat/feature-requests/127/
 
  Bug fixes:
 
  - HTML filter doesn't handle XHTML in full
-   http://sourceforge.net/support/tracker.php?aid=1468685
+   https://sourceforge.net/p/omegat/bugs/184/
 
  - "Re-activate" output of word_count
-   http://sourceforge.net/support/tracker.php?aid=1447306
+   https://sourceforge.net/p/omegat/bugs/171/
 
 ----------------------------------------------------------------------
 1.6.0 RC10 (2006-06-16)
@@ -6060,57 +6060,57 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  Enchancements:
 
  - New filter: DocBook files
-   http://sourceforge.net/support/tracker.php?aid=991533
+   https://sourceforge.net/p/omegat/feature-requests/7/
 
  - New filter: PO files
-   http://sourceforge.net/support/tracker.php?aid=1483316
+   https://sourceforge.net/p/omegat/feature-requests/181/
 
  - New Filter: Key-Value text files
-   http://sourceforge.net/support/tracker.php?aid=1462564
+   https://sourceforge.net/p/omegat/feature-requests/172/
 
  - Match/Glossary pane may be docked to single main window
-   http://sourceforge.net/support/tracker.php?aid=1472196
+   https://sourceforge.net/p/omegat/feature-requests/177/
 
  - Find function should not display identical segments
-   http://sourceforge.net/support/tracker.php?aid=1295940
+   https://sourceforge.net/p/omegat/feature-requests/83/
 
  - Separate language and formatting rules
-   http://sourceforge.net/support/tracker.php?aid=1475486
+   https://sourceforge.net/p/omegat/feature-requests/179/
 
  - Give total number of segments in Project Files window
-   http://sourceforge.net/support/tracker.php?aid=1500874
+   https://sourceforge.net/p/omegat/feature-requests/191/
 
  Bug fixes:
 
  - Problems with segments clickability (Java5+MacOSX-specific regression)
-   http://sourceforge.net/support/tracker.php?aid=1436607
+   https://sourceforge.net/p/omegat/bugs/162/
 
  - "Re-activate" output of word_count
-   http://sourceforge.net/support/tracker.php?aid=1447306
+   https://sourceforge.net/p/omegat/bugs/171/
 
  - [CJK] [1.6RC8] Translated text files miss line breaks in CJK
-   http://sourceforge.net/support/tracker.php?aid=1462938
+   https://sourceforge.net/p/omegat/bugs/180/
 
  - [OO] Don't segment on inline images, bookmarks, references
-   http://sourceforge.net/support/tracker.php?aid=1458673
+   https://sourceforge.net/p/omegat/bugs/176/
 
  - Windows closing/position problems/String problems
-   http://sourceforge.net/support/tracker.php?aid=1386155
+   https://sourceforge.net/p/omegat/bugs/131/
 
  - Language codes forced to uppercase
-   http://sourceforge.net/support/tracker.php?aid=1473713
+   https://sourceforge.net/p/omegat/bugs/185/
 
  - Language names in segmentation file are hardcoded
-   http://sourceforge.net/support/tracker.php?aid=1467200
+   https://sourceforge.net/p/omegat/bugs/182/
 
  - Shortcuts active while menus are not
-   http://sourceforge.net/support/tracker.php?aid=1446521
+   https://sourceforge.net/p/omegat/bugs/170/
 
  - Go to next untranslated should cycle the project
-   http://sourceforge.net/support/tracker.php?aid=1447708
+   https://sourceforge.net/p/omegat/bugs/173/
 
  - Previous segment shortcut should be CMD+Enter on MacOSX
-   http://sourceforge.net/support/tracker.php?aid=1468315
+   https://sourceforge.net/p/omegat/bugs/183/
 
 
 1.6.0 RC9 - internal version that was never released
@@ -6118,48 +6118,48 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  Enchancements:
 
  - [Filters] New Filter for Key-Value text files (differently encoded)
-   http://sourceforge.net/support/tracker.php?aid=1462564
+   https://sourceforge.net/p/omegat/feature-requests/172/
 
  - Match/Glossary pane may be docked to single main window
-   http://sourceforge.net/support/tracker.php?aid=1472196
+   https://sourceforge.net/p/omegat/feature-requests/177/
 
  - Separate language and formatting rules
-   http://sourceforge.net/support/tracker.php?aid=1475486
+   https://sourceforge.net/p/omegat/feature-requests/179/
 
  Bug fixes:
 
  - Problems with segments clickability (Java5+MacOSX-specific regression)
-   http://sourceforge.net/support/tracker.php?aid=1436607
+   https://sourceforge.net/p/omegat/bugs/162/
 
  - "Re-activate" output of word_count
-   http://sourceforge.net/support/tracker.php?aid=1447306
+   https://sourceforge.net/p/omegat/bugs/171/
 
  - [CJK] [1.6RC8] Translated text files miss line breaks in CJK
-   http://sourceforge.net/support/tracker.php?aid=1462938
+   https://sourceforge.net/p/omegat/bugs/180/
 
  - [OO] Don't segment on inline images, bookmarks, references
-   http://sourceforge.net/support/tracker.php?aid=1458673
+   https://sourceforge.net/p/omegat/bugs/176/
 
  - [OO] Tracked changes add unnecessary data
-   http://sourceforge.net/support/tracker.php?aid=1461178
+   https://sourceforge.net/p/omegat/bugs/178/
 
  - Windows closing/position problems/String problems
-   http://sourceforge.net/support/tracker.php?aid=1386155
+   https://sourceforge.net/p/omegat/bugs/131/
 
  - Language codes forced to uppercase
-   http://sourceforge.net/support/tracker.php?aid=1473713
+   https://sourceforge.net/p/omegat/bugs/185/
 
  - Language names in segmentation file are hardcoded
-   http://sourceforge.net/support/tracker.php?aid=1467200
+   https://sourceforge.net/p/omegat/bugs/182/
 
  - Shortcuts active while menus are not
-   http://sourceforge.net/support/tracker.php?aid=1446521
+   https://sourceforge.net/p/omegat/bugs/170/
 
  - Go to next untranslated should cycle the project
-   http://sourceforge.net/support/tracker.php?aid=1447708
+   https://sourceforge.net/p/omegat/bugs/173/
 
  - Previous segment shortcut should be CMD+Enter on MacOSX
-   http://sourceforge.net/support/tracker.php?aid=1468315
+   https://sourceforge.net/p/omegat/bugs/183/
 
 
 1.6.0 RC8 (2006-03-03)
@@ -6167,24 +6167,24 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  Enchancements:
 
  - keeping Cursor at middle of working window
-   http://sourceforge.net/support/tracker.php?aid=1228857
+   https://sourceforge.net/p/omegat/feature-requests/74/
 
  Bug fixes:
 
  - Problems with segments visibility (RC7 regression)
-   http://sourceforge.net/support/tracker.php?aid=1436607
+   https://sourceforge.net/p/omegat/bugs/162/
 
  - Japanese mismatches
-   http://sourceforge.net/support/tracker.php?aid=1392607
+   https://sourceforge.net/p/omegat/bugs/133/
 
  - Regex exception when loading glossary
-   http://sourceforge.net/support/tracker.php?aid=1438295
+   https://sourceforge.net/p/omegat/bugs/166/
 
  - BOM problem in UTF-8 glossaries
-   http://sourceforge.net/support/tracker.php?aid=1439547
+   https://sourceforge.net/p/omegat/bugs/167/
 
  - Upgrade segmentation defaults each new version
-   http://sourceforge.net/support/tracker.php?aid=1435711
+   https://sourceforge.net/p/omegat/bugs/161/
 
 
 1.6.0 RC7 (2006-02-21)
@@ -6192,85 +6192,85 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  Enchancements:
 
  - Delete orphan segments from exported TMX file
-   http://sourceforge.net/support/tracker.php?aid=1422364
+   https://sourceforge.net/p/omegat/feature-requests/149/
 
  - Filters should be individually configured
-   http://sourceforge.net/support/tracker.php?aid=1434121
+   https://sourceforge.net/p/omegat/feature-requests/155/
 
  - Option for Text filter: Non-segmenting filter
-   http://sourceforge.net/support/tracker.php?aid=1435349
+   https://sourceforge.net/p/omegat/feature-requests/157/
 
  - Save project's backup each reload (up to 10 backups)
-   http://sourceforge.net/support/tracker.php?aid=1435288
+   https://sourceforge.net/p/omegat/feature-requests/156/
 
  Bug fixes:
 
  - Performance issue with Huge files
-   http://sourceforge.net/support/tracker.php?aid=1427669
+   https://sourceforge.net/p/omegat/bugs/157/
 
  - Dialogs/windows do not close on Escape
-   http://sourceforge.net/support/tracker.php?aid=1422959
+   https://sourceforge.net/p/omegat/bugs/153/
 
  - Structure of HTML not respected in output
    (second iteration over a Bug fix first appeared in 1.6.RC4)
-   http://sourceforge.net/support/tracker.php?aid=1364265
+   https://sourceforge.net/p/omegat/bugs/108/
 
  - Do not add encoding declaration meta if HTML has no header
-   http://sourceforge.net/support/tracker.php?aid=1406630
+   https://sourceforge.net/p/omegat/bugs/142/
 
  - OO tags are numbered one-by-one
-   http://sourceforge.net/support/tracker.php?aid=1431473
+   https://sourceforge.net/p/omegat/bugs/158/
 
  - OO bug: Initial and trailing tags falsely skipped
-   http://sourceforge.net/support/tracker.php?aid=1431497
+   https://sourceforge.net/p/omegat/bugs/159/
 
  - Dialogs/windows do not close on Escape
-   http://sourceforge.net/support/tracker.php?aid=1422959
+   https://sourceforge.net/p/omegat/bugs/153/
 
  - status bar display bug
-   http://sourceforge.net/support/tracker.php?aid=1422380
+   https://sourceforge.net/p/omegat/bugs/151/
 
  - About dialog too small
-   http://sourceforge.net/support/tracker.php?aid=1422986
+   https://sourceforge.net/p/omegat/bugs/155/
 
  - License dialog too small/funny characters
-   http://sourceforge.net/support/tracker.php?aid=1422982
+   https://sourceforge.net/p/omegat/bugs/154/
 
 1.6 RC6 (2005-11-30)
 
  Enchancements:
 
  - TMX: Import TMX 1.4b, export TMX 1.1 Level 1
-   http://sourceforge.net/support/tracker.php?aid=1031139
+   https://sourceforge.net/p/omegat/feature-requests/17/
 
  - Language matching precision while importing TMX files
-   http://sourceforge.net/support/tracker.php?aid=1416610
+   https://sourceforge.net/p/omegat/feature-requests/148/
 
  Bug fixes:
 
  - Unicode path names problem
-   http://sourceforge.net/support/tracker.php?aid=1391060
+   https://sourceforge.net/p/omegat/bugs/132/
 
  - Case sensitivity for segmentation rules
-   http://sourceforge.net/support/tracker.php?aid=1393484
+   https://sourceforge.net/p/omegat/bugs/136/
 
  - False positive in tag validation
-   http://sourceforge.net/support/tracker.php?aid=1374674
+   https://sourceforge.net/p/omegat/bugs/122/
 
  - UTF-8 BOM not recognized
-   http://sourceforge.net/support/tracker.php?aid=1407663
+   https://sourceforge.net/p/omegat/bugs/145/
 
  - The order of tags is changed in HTML header when translating
-   http://sourceforge.net/support/tracker.php?aid=1398044
+   https://sourceforge.net/p/omegat/bugs/138/
 
  - incorrect punctuation in some error messages
-   http://sourceforge.net/support/tracker.php?aid=1399514
+   https://sourceforge.net/p/omegat/bugs/139/
 
  - Incorrect menu option naming
-   http://sourceforge.net/support/tracker.php?aid=1410234
+   https://sourceforge.net/p/omegat/bugs/147/
 
  - Empty file makes loading of project fail
-   http://sourceforge.net/support/tracker.php?aid=1406084
+   https://sourceforge.net/p/omegat/bugs/141/
 
 
 1.6 RC5 (2005-12-23)
@@ -6278,78 +6278,78 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  Enchancements:
 
  - OOo tag support (text:user-defined and text:sequence)
-   http://sourceforge.net/support/tracker.php?aid=1385052
+   https://sourceforge.net/p/omegat/feature-requests/133/
 
  - log does not indicate if tmx is loaded.
-   http://sourceforge.net/support/tracker.php?aid=1372226
+   https://sourceforge.net/p/omegat/feature-requests/123/
 
  Bug fixes:
 
  - generic tmx compatibility issue
-   http://sourceforge.net/support/tracker.php?aid=1365649
+   https://sourceforge.net/p/omegat/bugs/111/
 
  - Previously working TMX not accepted
-   http://sourceforge.net/support/tracker.php?aid=1369056
+   https://sourceforge.net/p/omegat/bugs/113/
 
  - tmx files with srclang set to "*all*"
-   http://sourceforge.net/support/tracker.php?aid=1370836
+   https://sourceforge.net/p/omegat/bugs/116/
 
  - TMX load error message
-   http://sourceforge.net/support/tracker.php?aid=1370530
+   https://sourceforge.net/p/omegat/bugs/115/
 
  - StringIndexOutOfBoundsException in tokenizer
-   http://sourceforge.net/support/tracker.php?aid=1382810
+   https://sourceforge.net/p/omegat/bugs/126/
 
  - OmegaT does not segment on "<br>\n"
-   http://sourceforge.net/support/tracker.php?aid=1385202
+   https://sourceforge.net/p/omegat/bugs/128/
 
  - <div> not considered as segmenting
-   http://sourceforge.net/support/tracker.php?aid=1379137
+   https://sourceforge.net/p/omegat/bugs/125/
 
  - target doc meta-tag not corresponding to original
    http://sourceforge.net/support/tracker.php?aid=1388802
 
  - Incorrect encoding of error messages
-   http://sourceforge.net/support/tracker.php?aid=1378639
+   https://sourceforge.net/p/omegat/bugs/124/
 
  - typo in about box
-   http://sourceforge.net/support/tracker.php?aid=1377539
+   https://sourceforge.net/p/omegat/bugs/123/
 
  - Bug in auto-copy selected text for search
-   http://sourceforge.net/support/tracker.php?aid=1374100
+   https://sourceforge.net/p/omegat/bugs/121/
 
  - OmegaT autoinserts a fuzzy match when you try to quit it
-   http://sourceforge.net/support/tracker.php?aid=1370840
+   https://sourceforge.net/p/omegat/bugs/118/
 
  - first segment does not trigger matches after load
-   http://sourceforge.net/support/tracker.php?aid=1370838
+   https://sourceforge.net/p/omegat/bugs/117/
 
  - False positive in tag validation
-   http://sourceforge.net/support/tracker.php?aid=1374674
+   https://sourceforge.net/p/omegat/bugs/122/
 
 1.6 RC4 (2005-11-30)
 
  Enchancements:
 
  - Access to segmentation rules
-   http://sourceforge.net/support/tracker.php?aid=1367707
+   https://sourceforge.net/p/omegat/feature-requests/120/
 
  Bug fixes:
 
  - HTML bug: Initial tags falsely skipped
-   http://sourceforge.net/support/tracker.php?aid=1359915
+   https://sourceforge.net/p/omegat/bugs/104/
 
  - Structure of HTML not respected in output
-   http://sourceforge.net/support/tracker.php?aid=1364265
+   https://sourceforge.net/p/omegat/bugs/108/
 
  - trados tmx compatibility issue
-   http://sourceforge.net/support/tracker.php?aid=1365597
+   https://sourceforge.net/p/omegat/bugs/110/
 
  - empty <tu> in external TMX fail project loading
-   http://sourceforge.net/support/tracker.php?aid=1365457
+   https://sourceforge.net/p/omegat/bugs/109/
 
  - search bug
-   http://sourceforge.net/support/tracker.php?aid=1348191
+   https://sourceforge.net/p/omegat/bugs/100/
 
 
 1.6 RC3 (2005-11-17)
@@ -6357,24 +6357,24 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  Enchancements:
 
  - Keyboard option (ESC) to close Find window
-   http://sourceforge.net/support/tracker.php?aid=1350555
+   https://sourceforge.net/p/omegat/feature-requests/107/
 
  - Add Yes/No Warning before OmegaT quits
-   http://sourceforge.net/support/tracker.php?aid=1302358
+   https://sourceforge.net/p/omegat/feature-requests/91/
 
  Bug fixes:
 
  - sentence segmenting regexp and Japanese
-   http://sourceforge.net/support/tracker.php?aid=1333721
+   https://sourceforge.net/p/omegat/bugs/95/
 
  - search bug
-   http://sourceforge.net/support/tracker.php?aid=1348191
+   https://sourceforge.net/p/omegat/bugs/100/
 
  - The help viewer does not recognize external links
    http://sourceforge.net/support/tracker.php?aid=1348851
 
  - Index entries in OpenOffice documents segment the text
-   http://sourceforge.net/support/tracker.php?aid=1353211
+   https://sourceforge.net/p/omegat/bugs/103/
 
 
 1.6 RC2.002 (2005-11-09)
@@ -6382,15 +6382,15 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  Enchancements:
 
  - DL, DD, DT tags should segment
-   http://sourceforge.net/support/tracker.php?aid=1348792
+   https://sourceforge.net/p/omegat/feature-requests/102/
 
  - Different enchancements for Editing Options
-   http://sourceforge.net/support/tracker.php?aid=1337476
+   https://sourceforge.net/p/omegat/feature-requests/100/
 
  Bug fixes:
 
  - Bug if Target Encoding is set to [auto] for (X)HTML
-   http://sourceforge.net/support/tracker.php?aid=1350320
+   https://sourceforge.net/p/omegat/bugs/101/
 
 
 1.6 RC2 (2005-11-07)
@@ -6399,94 +6399,94 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  Enchancements:
 
  - Flexible (Sentence) Segmenting
-   http://sourceforge.net/support/tracker.php?aid=1053692
+   https://sourceforge.net/p/omegat/feature-requests/25/
 
  - Translate HTML attributes "alt", "title" etc
-   http://sourceforge.net/support/tracker.php?aid=1236555
+   https://sourceforge.net/p/omegat/feature-requests/77/
 
  - Variable charset for output of (X)HTML documents
-   http://sourceforge.net/support/tracker.php?aid=1309787
+   https://sourceforge.net/p/omegat/feature-requests/93/
 
  - Edit Project to change project parameters
-   http://sourceforge.net/support/tracker.php?aid=1227890
+   https://sourceforge.net/p/omegat/feature-requests/71/
 
  - Display save status in the status bar
-   http://sourceforge.net/support/tracker.php?aid=1228249
+   https://sourceforge.net/p/omegat/feature-requests/72/
 
  - Display "OmegaT: Instant Start" article on statup
-   http://sourceforge.net/support/tracker.php?aid=1217081
+   https://sourceforge.net/p/omegat/feature-requests/63/
 
  - Project File List small improvements
-   http://sourceforge.net/support/tracker.php?aid=1295695
+   https://sourceforge.net/p/omegat/feature-requests/82/
 
  - Option: not copy source text into target field
-   http://sourceforge.net/support/tracker.php?aid=1075972
+   https://sourceforge.net/p/omegat/feature-requests/32/
 
  - Option: Insert best match (80%+) into target field
-   http://sourceforge.net/support/tracker.php?aid=1075976
+   https://sourceforge.net/p/omegat/feature-requests/33/
 
  - Creating project should immediately open it
    (code by Kim Bruning)
-   http://sourceforge.net/support/tracker.php?aid=1313027
+   https://sourceforge.net/p/omegat/feature-requests/95/
 
  - Allow adding source files from OmegaT UI
    (code by Kim Bruning)
-   http://sourceforge.net/support/tracker.php?aid=1313033
+   https://sourceforge.net/p/omegat/feature-requests/96/
 
  - Add scroller to Match Window
-   http://sourceforge.net/support/tracker.php?aid=1295945
+   https://sourceforge.net/p/omegat/feature-requests/84/
 
  - Give use more key shorctuts!
-   http://sourceforge.net/support/tracker.php?aid=1230230
+   https://sourceforge.net/p/omegat/feature-requests/76/
 
  Bug fixes:
 
  - Tools/Validate tags shouldn't display a list of errors
    if no errors were found
-   http://sourceforge.net/support/tracker.php?aid=1209839
+   https://sourceforge.net/p/omegat/bugs/64/
 
  - Several problems in XHTML filter
-   http://sourceforge.net/support/tracker.php?aid=1111338
+   https://sourceforge.net/p/omegat/bugs/32/
 
  - HTML filter doesn't handle CDATA sections
-   http://sourceforge.net/support/tracker.php?aid=1207505
+   https://sourceforge.net/p/omegat/bugs/62/
 
  - javascript quote marks wrongly replaced (in HTML)
-   http://sourceforge.net/support/tracker.php?aid=1213496
+   https://sourceforge.net/p/omegat/bugs/69/
 
  - Empty files are displayed in a file list window
-   http://sourceforge.net/support/tracker.php?aid=1256026
+   https://sourceforge.net/p/omegat/bugs/79/
 
  - AltGr+A in Irish deletes all the segment text
-   http://sourceforge.net/support/tracker.php?aid=1296761
+   https://sourceforge.net/p/omegat/bugs/92/
 
  - Valid TMX 1.1 unsupported (CSVConverter's output)
-   http://sourceforge.net/support/tracker.php?aid=1295165
+   https://sourceforge.net/p/omegat/bugs/86/
 
  - <br> and <address> don't segment in HTML documents
-   http://sourceforge.net/support/tracker.php?aid=1288756
+   https://sourceforge.net/p/omegat/bugs/84/
 
  - Changing the highlighted match types number on MacOSX
-   http://sourceforge.net/support/tracker.php?aid=1295936
+   https://sourceforge.net/p/omegat/bugs/87/
 
  - Users Manual not found if OT is started not from install dir
-   http://sourceforge.net/support/tracker.php?aid=1296688
+   https://sourceforge.net/p/omegat/bugs/91/
 
  - 1.4.6beta4 selection in the match window
    (1.4.6 beta 4 regression)
-   http://sourceforge.net/support/tracker.php?aid=1303853
+   https://sourceforge.net/p/omegat/bugs/94/
 
  - Tags are taken into account when computing similarity
-   http://sourceforge.net/support/tracker.php?aid=1298542
+   https://sourceforge.net/p/omegat/bugs/93/
 
  - Command shortcuts must use CMD+Key on MacOSX
-   http://sourceforge.net/support/tracker.php?aid=1295936
+   https://sourceforge.net/p/omegat/bugs/87/
 
  - <br> and <address> do not segment in HTLM documents
-   http://sourceforge.net/support/tracker.php?aid=1288756
+   https://sourceforge.net/p/omegat/bugs/84/
 
  - Window size settings not memorized on MacOSX
-   http://sourceforge.net/support/tracker.php?aid=1224884
+   https://sourceforge.net/p/omegat/bugs/74/
 
 1.4.5.04 (2005-08-11)
 -------------------------------
@@ -6494,7 +6494,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  Bug fixes:
 
  - Empty files are displayed in a file list window
-   http://sourceforge.net/support/tracker.php?aid=1256026
+   https://sourceforge.net/p/omegat/bugs/79/
 
  - AltGr+A in Irish deletes all the segment text
    http://sourceforge.net/support/tracker.php?aid=1256094
@@ -6508,7 +6508,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  - HOME and END key issues:
      * While pressing the HOME key cursor moves to begining of a line
      * While pressing the END key cursor moves to end of a line
-   http://sourceforge.net/support/tracker.php?aid=1228296
+   https://sourceforge.net/p/omegat/bugs/76/
 
  Enchancements:
 
@@ -6521,7 +6521,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  Bug fixes:
 
  - Regression: 1.4.5.01 Cannot create/open a project
-   http://sourceforge.net/support/tracker.php?aid=1225510
+   https://sourceforge.net/p/omegat/bugs/75/
 
 
 1.4.5.01 (2005-06-14)
@@ -6530,18 +6530,18 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  Bug fixes:
 
  - Serious threading issue, preventing OmegaT from showing up...
-   http://sourceforge.net/support/tracker.php?aid=1216514
+   https://sourceforge.net/p/omegat/bugs/71/
 
  - ResourceBundle filter bug: \\ -> \
-   http://sourceforge.net/support/tracker.php?aid=1215590
+   https://sourceforge.net/p/omegat/bugs/70/
 
  - Select all in the editing field shifts focus on MacOSX
-   http://sourceforge.net/support/tracker.php?aid=1211826
+   https://sourceforge.net/p/omegat/bugs/67/
 
  Enchancements:
 
  - Open the project when selecting the project folder
-   http://sourceforge.net/support/tracker.php?aid=1216533
+   https://sourceforge.net/p/omegat/feature-requests/62/
 
 1.4.5 (2005-05-31)
 -------------------------------
@@ -6549,10 +6549,10 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  Bug fixes:
 
  - Problem with glossary - OmT freezing
-   http://sourceforge.net/support/tracker.php?aid=1211458
+   https://sourceforge.net/p/omegat/bugs/66/
 
  - Filters Configuration is not persistent under Turkish locale
-   http://sourceforge.net/support/tracker.php?aid=1207296
+   https://sourceforge.net/p/omegat/bugs/61/
    (workaround JVM bug)
 
 
@@ -6562,31 +6562,31 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  Bug fixes:
 
  - Less than sign causes problems in HTML, XHTML and OpenOffice
-   http://sf.net/tracker/index.php?func=detail&aid=1176585&group_id=68187&atid=520347
+   http://sourceforge.net/p/omegat/bugs/39/
 
  - Keys to select/delete target text work not as expected
-   http://sf.net/tracker/index.php?func=detail&aid=1085043&group_id=68187&atid=520347
+   http://sourceforge.net/p/omegat/bugs/27/
 
  - No warnings on wrong language codes during project creation
-   http://sf.net/tracker/index.php?func=detail&aid=1053695&group_id=68187&atid=520347
+   http://sourceforge.net/p/omegat/bugs/20/
 
  - Weird behaviour of Create Project / Open Project dialogs:
    * Cancel during project creation caused the dialog to appear in weird state
    * Cancel during project load resulted in InterruptedAcception shown to the user
 
  - Corrupt target OOo files after compiling
-   http://sf.net/tracker/index.php?func=detail&aid=1188307&group_id=68187&atid=520347
+   http://sourceforge.net/p/omegat/bugs/40/
    (regression in OpenOffice and XHTML due to a massive rewrite of file filters)
 
  - Compiled OO files missing language-specific characters
-   http://sourceforge.net/tracker/index.php?func=detail&aid=1188723&group_id=68187&atid=520347
+   http://sourceforge.net/p/omegat/bugs/42/
    (regression in OpenOffice filter due to a massive rewrite of file filters)
 
 
  Enchancements:
 
  - File Filters Redesign
-   http://sf.net/tracker/index.php?func=detail&aid=991526&group_id=68187&atid=520350
+   http://sourceforge.net/p/omegat/feature-requests/6/
 
    Now mostly all the information about filters is exposed,
    and may be edited by user. Such as:
@@ -6596,7 +6596,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
    * Setting a pattern of target filename
 
  - Load filters as plugins
-   http://sf.net/tracker/index.php?func=detail&aid=1195957&group_id=68187&atid=520350
+   http://sourceforge.net/p/omegat/feature-requests/46/
 
    OmegaT now may load filter plugins dynamically.
    Filter plugins should be situated in [OmegaT-install-dir]/plugins
@@ -6606,29 +6606,29 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
    * OmegaT-Filter: true
 
  - UI issues: Make menu item names more clear & Change the way we display version
-   http://sf.net/tracker/index.php?func=detail&aid=1037633&group_id=68187&atid=520350
-   http://sf.net/tracker/index.php?func=detail&aid=1037638&group_id=68187&atid=520350
+   http://sourceforge.net/p/omegat/feature-requests/18/
+   http://sourceforge.net/p/omegat/feature-requests/19/
 
  - ESC to close the file list
-   http://sf.net/tracker/index.php?func=detail&aid=1073194&group_id=68187&atid=520350
+   http://sourceforge.net/p/omegat/feature-requests/30/
 
  - Hide CDATA from translators in XML/XHTML
-   http://sf.net/tracker/index.php?func=detail&aid=1110991&group_id=68187&atid=520350
+   http://sourceforge.net/p/omegat/feature-requests/40/
 
  - Error log
-   http://sf.net/tracker/index.php?func=detail&aid=1164377&group_id=68187&atid=520350
+   http://sourceforge.net/p/omegat/feature-requests/43/
    (now OmegaT stores error messages to 'log.txt' file, reset each time you start OmegaT)
 
  - New filter: NetBeans EDGE Newsletter
-   http://sf.net/tracker/index.php?func=detail&aid=1195959&group_id=68187&atid=520350
+   http://sourceforge.net/p/omegat/feature-requests/47/
    (really a small extension of XML filter, useful for a really small number of people.
     this filter is implemented as a plugn).
 
  - Edit the project directories paths
-   http://sourceforge.net/tracker/index.php?func=detail&aid=1202405&group_id=68187&atid=520350
+   http://sourceforge.net/p/omegat/feature-requests/48/
 
  - Match/Glossary Split Pane
-   http://sourceforge.net/tracker/index.php?func=detail&aid=1202984&group_id=68187&atid=520350
+   http://sourceforge.net/p/omegat/feature-requests/50/
 
 1.4.5 Beta3 (2005-05-05)
 -------------------------------
@@ -6636,10 +6636,10 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 Bug fixes:
 
 - Compiled OpenOffice files missing language-specific characters
-  http://sf.net/tracker/index.php?func=detail&aid=1188723&group_id=68187&atid=520347
+  http://sourceforge.net/p/omegat/bugs/42/
 
 - No warnings on wrong language codes during project creation
-  http://sf.net/tracker/index.php?func=detail&aid=1053695&group_id=68187&atid=520347
+  http://sourceforge.net/p/omegat/bugs/20/
 
 Also some work on stabilizing the interface...
 
@@ -6652,7 +6652,7 @@ Bug fixes:
 
 - Less than sign causes problems in XHTML & OpenOffice
   (similar to the Bug fix in Beta1, but for XML-based filters)
-  http://sf.net/tracker/index.php?func=detail&aid=1176585&group_id=68187&atid=520347
+  http://sourceforge.net/p/omegat/bugs/39/
 
 Enchancements:
 
@@ -6666,31 +6666,31 @@ Enchancements:
 Bug fixes:
 
 - Less than sign causes problems in HTML
-  http://sf.net/tracker/index.php?func=detail&aid=1176585&group_id=68187&atid=520347
+  http://sourceforge.net/p/omegat/bugs/39/
 
 Enchancements:
 
 - Change the way we display version
-  http://sf.net/tracker/index.php?func=detail&aid=1037638&group_id=68187&atid=520350
+  http://sourceforge.net/p/omegat/feature-requests/19/
 
 - Editing extension mapping
-  http://sf.net/tracker/index.php?func=detail&aid=991526&group_id=68187&atid=520350
+  http://sourceforge.net/p/omegat/feature-requests/6/
 
 1.4.4.02 (2005-02-10)
 -------------------------------
 Bug fixes:
 
 - Wrong handling of CDATA tags in XHTML
-  http://sf.net/tracker/index.php?func=detail&aid=1109089&group_id=68187&atid=520347
+  http://sourceforge.net/p/omegat/bugs/31/
 
 - OmegaT throws error instead of eating BOM (byte order mark)
-  http://sf.net/tracker/index.php?func=detail&aid=1107299&group_id=68187&atid=520347
+  http://sourceforge.net/p/omegat/bugs/30/
 
 
 1.4.4.01 (2005-01-20)
 -------------------------------
 (1.4.4 "final" contained a serious bug in TXT file handler,
- http://sf.net/tracker/index.php?func=detail&aid=1106314&group_id=68187&atid=520347
+ http://sourceforge.net/p/omegat/bugs/29/
  and was released for a couple of days only, hope you don't have it)
 -------------------------------
 Enchancements:

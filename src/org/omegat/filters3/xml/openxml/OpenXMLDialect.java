@@ -51,7 +51,9 @@ public class OpenXMLDialect extends DefaultXMLDialect {
                 // Excel
                 "si", "comment", "definedName",
                 // PowerPoint
-                "a:p", "c:v", });
+                "a:p", "c:v", 
+                // Visio
+                "Text"});
 
         if (options.getBreakOnBr()) {
             defineParagraphTag("w:br"); // Word
@@ -76,7 +78,72 @@ public class OpenXMLDialect extends DefaultXMLDialect {
                 // Word
                 "wp:align", "wp:posOffset", "wp14:pctWidth", "wp14:pctHeight", "w:fldChar",
                 // Drawings
-                "xdr:col", "xdr:row", "xdr:colOff", "xdr:rowOff", });
+                "xdr:col", "xdr:row", "xdr:colOff", "xdr:rowOff", 
+                // Visio (copied directly from the Visio filter. As far as we know, the dialect is the same)
+                "DocumentProperties",
+                "DocumentSettings",
+                "Colors",
+                "FaceNames",
+                "StyleSheets",
+                "DocumentSheet",
+                "Masters",
+                "Misc",
+                "TextBlock",
+                "Geom",
+                "Para",
+                "Char",
+                "Connection",
+                "XForm",
+                "Line",
+                "Fill",
+                "Event",
+                "PageSheet",
+                "PageProps",
+                "PageLayout",
+                "PrintProps",
+                "PageHeight",
+                "PageWidth",
+                "Image",
+                "PinY",
+                "Width",
+                "Height",
+                "XForm1D",
+                "EndX",
+                "LayerMem",
+                "TextXForm",
+                "Control",
+                "ForeignData",
+                "Foreign",
+                "Menu",
+                "Act",
+                "User",
+                "Help",
+                "Copyright",
+                "VBProjectData",
+                "FooterMargin",
+                "HeaderMargin",
+                "HeaderFooter",
+                "Window",
+                "Windows",
+                "EventList",
+                "Scratch",
+                "TextBlock",
+                "Protection",
+                "Layout",
+                "Icon",
+                "vx:Event",
+                "v14:Geom",
+                "vx:Fill",
+                "PreviewPicture",
+                "vx:Char",
+                "vx:Color",
+                "vx:Line",
+                "FillForegnd",
+                "XForm1D",
+                "ShdwBkgnd",
+                "TextBkgnd",
+                "vx:TextBkgnd",       
+        });
 
         defineTranslatableTagAttribute("sheet", "name"); // Excel
 

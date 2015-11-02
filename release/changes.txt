@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.3
 ----------------------------------------------------------------------
-  14 Enhancements
+  15 Enhancements
    4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -51,6 +51,9 @@ removing bidi marks in the current segment
 
   - It's now possible to have an alternative translation where
 the translation is the same but the note is different
+
+  - The Open XML filter now loads Visio 2013 files with the extension
+*.vsdx.
 
   Bug fixes:
 

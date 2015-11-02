@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2013 Didier Briel
+               2015 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -79,7 +80,9 @@ public class OpenXMLFilter extends AbstractFilter {
          "|(data\\d+\\.xml)|(chart\\d+\\.xml)|(drawing\\d+\\.xml)"
          Excel 
          "|(workbook\\.xml)"
-         */
+         Visio
+         "|(page\\d+\\.xml)
+        */
 
         DOCUMENTS = "(document\\.xml)";
 
@@ -129,6 +132,7 @@ public class OpenXMLFilter extends AbstractFilter {
         if (options.getTranslateSlideLinks()) {
             DOCUMENTS += "|(slide\\d+\\.xml\\.rels)";
         }
+        DOCUMENTS += "|(page\\d+\\.xml)";       
         
         TRANSLATABLE = Pattern.compile(DOCUMENTS);
     }
@@ -339,7 +343,9 @@ public class OpenXMLFilter extends AbstractFilter {
             new Instance("*.doc?"), 
             new Instance("*.dotx"), 
             new Instance("*.xls?"), 
-            new Instance("*.ppt?"), };
+            new Instance("*.ppt?"),
+            new Instance("*.vsdx")
+        };
     }
 
     /** Source encoding cannot be varied by the user. */

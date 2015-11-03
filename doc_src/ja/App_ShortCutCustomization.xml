@@ -135,7 +135,7 @@
           <row><entry>参考訳文 5 を選択</entry><entry><keycap>Ctrl+5</keycap></entry><entry>editSelectFuzzy5MenuItem</entry></row>
           <row><entry>大/小文字設定→すべて小文字に</entry><entry/><entry>lowerCaseMenuItem</entry></row>
           <row><entry>大/小文字設定→すべて大文字に</entry><entry/><entry>upperCaseMenuItem</entry></row>
-          <row><entry>大/小文字設定→Title case（単語の先頭を大文字）に</entry><entry/><entry>titleCaseMenuItem</entry></row>
+          <row><entry>大/小文字設定→単語の先頭を大文字に</entry><entry/><entry>titleCaseMenuItem</entry></row>
           <row><entry>上記を順に切り替え...</entry><entry><keycap>Shift+F3</keycap></entry><entry>cycleSwitchCaseMenuItem</entry></row>
           <row><entry>既定値訳文として使用</entry><entry/><entry>editMultipleDefault</entry></row>
           <row><entry>新しい訳文を登録</entry><entry/><entry>editMultipleAlternate</entry></row>

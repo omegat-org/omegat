@@ -226,13 +226,14 @@ OmegaT のユーザーインターフェースや取扱説明書、他の関連�
   Wildrich Fourie
   Phillip Hall
   Jean-Christophe Helary
+  Chihiro Hio
   Thomas Huriaux
   Hans-Peter Jacobs
   Kyle Katarn
   Piotr Kulik
   Ibai Lakunza Velasco
   Guido Leenders
-  Aaron Madlon-Kay
+  Aaron Madlon-Kay（インテグレーション担当）
   Fabián Mandelbaum
   Manfred Martin
   Adiel Mittmann
@@ -279,9 +280,7 @@ OmegaT は以下に示すライブラリを使用しています。
   Diff（GPL ライセンス）
   trilead-ssh2-1.0.0-build217（Trilead SSH ライセンス）
   lucene-*.jar（Apache ライセンス 2.0）
-  英語用のトークナイザー（org.omegat.tokenizer.SnowballEnglishTokenizer および
-  org.omegat.tokenizer.LuceneEnglishTokenizer）が利用する 
-  Okapi（http://okapi.sourceforge.net）由来の stop words（LGPL ライセンス）
+  英語用のトークナイザー（org.omegat.tokenizer.SnowballEnglishTokenizer および org.omegat.tokenizer.LuceneEnglishTokenizer）が利用する Okapi（http://okapi.sourceforge.net）由来の stop words（LGPL ライセンス）
   tinysegmenter.jar（修正 BSD ライセンス）
   commons-*.jar（Apache ライセンス 2.0）
   jWordSplitter（Apache ライセンス 2.0）

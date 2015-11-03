@@ -108,19 +108,13 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>以下の場合に HTML・XHTML ファイルにエンコーディング宣言を追加または変更</emphasis>：訳文ファイルのエンコーディング文字セットを、原文ファイルのそれ（明示的に指定されたものであれ、暗黙に適用されたものであれ）とは違うものにしたいということは、よくあります。この設定を使うと、訳文ファイルにエンコーディング宣言を含めるかどうかを指定できます。たとえば、ファイルフィルターで訳文ファイルのエンコーディングが UTF-8 に指定されている場合、この設定によって、訳文ファイルに必ずその情報を含めるようにすることができます。</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
         <para><emphasis>以下の属性を翻訳：</emphasis>選択した属性を編集ウィンドウで分節として表示できます。</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>以下のタグで分節化：</emphasis> HTML の <emphasis>&lt;br&gt;</emphasis> タグがある場所を段落とみなして分節化することができます。</para>
+        <para><emphasis>以下のタグで分節化：</emphasis> HTML の &lt;br&gt; タグがある場所を段落とみなして分節化することができます。</para>
       </listitem>
     </itemizedlist>
 
@@ -192,7 +186,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>以下の場合に HTML・XHTML ファイルにエンコーディング宣言を追加または変更：</emphasis>常に（デフォルト）、(X)HTML ファイルにヘッダーがある場合のみ、(X)HTML ファイルにエンコーディング宣言がある場合のみ、しない</para>
+        <para><emphasis>以下の場合に HTML・XHTML ファイルにエンコーディング宣言を追加または変更</emphasis>：訳文ファイルのエンコーディング文字セットを、原文ファイルのそれ（明示的に指定されたものであれ、暗黙に適用されたものであれ）とは違うものにしたいということは、よくあります。この設定を使うと、訳文ファイルにエンコーディング宣言を含めるかどうかを指定できます。たとえば、ファイルフィルターで訳文ファイルのエンコーディングが UTF-8 に指定されている場合、この設定によって、訳文ファイルに必ずその情報を含めるようにすることができます。</para>
       </listitem>
     </itemizedlist>
 
@@ -210,7 +204,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>以下の正規表現に一致する文字列を翻訳しない：</emphasis>指定した正規表現に一致するテキストは、翻訳対象とせずスキップすることができます。</para>
+        <para><emphasis>以下の正規表現に一致する文字列を翻訳しない：</emphasis>指定した正規表現に一致するテキストは、翻訳対象とせずスキップすることができます。スキップした箇所は、タグ検証では赤く表示されます。参考訳文ウィンドウでは、スキップした箇所が原文分節にあると、そのテキストは斜体で表示されます。</para>
       </listitem>
     </itemizedlist>
 
@@ -223,16 +217,16 @@
     <itemizedlist>
       <listitem>
         <para><emphasis>以下の属性と値を持つタグの内容は翻訳しない（カンマ区切りで複数指定）</emphasis>：ここでキー＝値の形式で指定したタグは、翻訳されません。</para>
+
+        <para>この設定は、ある属性の値に応じてタグを翻訳しないようにするのに、役に立つことがあります。たとえば、<literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal> のようなタグは、キー＝値の形式で指定して翻訳対象外に設定できます。この例の場合、設定欄は次のようになります：<literal>class=hide, translate=no</literal></para>
       </listitem>
-    </itemizedlist>
 
-    <para><emphasis role="bold">テキストファイル</emphasis></para>
-
-    <itemizedlist>
       <listitem>
-        <para><emphasis>原文を改行で分節化するか、空行で分節化するか、分節化しないか</emphasis>：</para>
+        <para><emphasis>訳文ファイルの空白圧縮</emphasis>：連続する空白文字がある場合、訳文ファイル生成時に空白文字一つだけに変換します。</para>
+      </listitem>
 
-        <para>文単位の分節化が有効になっている場合は、ここで選択した設定によってさらに分節化されます。</para>
+      <listitem>
+        <para><emphasis>訳文ファイルの HTML コメントを削除</emphasis>：すべてのコメント部（&lt;!-- から --&gt; までのあいだ）を訳文ファイルに出力しません。</para>
       </listitem>
     </itemizedlist>
 

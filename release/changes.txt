@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.3
 ----------------------------------------------------------------------
-  15 Enhancements
+  16 Enhancements
    4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -54,6 +54,9 @@ the translation is the same but the note is different
 
   - The Open XML filter now loads Visio 2013 files with the extension
 *.vsdx.
+
+  - In the online help, external links will open in the user default
+browser
 
   Bug fixes:
 

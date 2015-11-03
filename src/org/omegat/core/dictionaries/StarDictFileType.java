@@ -3,8 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Alex Buloichik
-               2015 Hiroshi Miura
+ Copyright (C) 2015 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,32 +25,11 @@
 
 package org.omegat.core.dictionaries;
 
-import java.io.File;
-import java.util.Map;
-
-import org.junit.Test;
-
-import org.omegat.core.TestCore;
-
 /**
- * Dictionary test
  *
- * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Hiroshi Miura
  */
-public class StarDictTest extends TestCore {
-    /**
-     * Test of readArticle method, of class StarDict.
-     */
-    @Test
-    public void testStarDictReadArticle() throws Exception {
-        System.out.println("readArticle from latin-francais stardict dictionary.");
-        String word = "testudo";
-        String expResult = "dinis, f. : tortue";
-        StarDict s = new StarDict(new File("test/data/dicts/latin-francais.ifo"));
-        Map<String, Object> map = s.readHeader();
-        Object data = map.get(word);
-        String result = s.readArticle(word, data);
-        assertEquals(expResult, result);
-    }
+public enum StarDictFileType {
+    DICTZIP,
+    DICTFILE
 }

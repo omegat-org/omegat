@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
+               2015 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -36,11 +37,16 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.zip.GZIPInputStream;
+
+import org.dict.zip.DictZipHeader;
+import org.dict.zip.DictZipInputStream;
+import org.dict.zip.RandomAccessInputStream;
 
 import org.omegat.util.LFileCopy;
 
@@ -49,6 +55,13 @@ import org.omegat.util.LFileCopy;
  * 
  * StarDict format described on http://code.google.com/p/babiloo/wiki/StarDict_format
  * 
+ * {1}. Files
+ * Every dictionary consists of these files:
+ * (1). somedict.ifo
+ * (2). somedict.idx or somedict.idx.gz
+ * (3). somedict.dict or somedict.dict.dz
+ * (4). somedict.syn (optional)
+ *
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
 public class StarDict implements IDictionary {
@@ -58,6 +71,10 @@ public class StarDict implements IDictionary {
 
     /** Dictionary type, from 'sametypesequence' header. */
     protected final String contentType;
+    private DictZipHeader fHeader;
+    private StarDictFileType dictType;
+    private String dictName;
+    private String dataFile;
 
     /**
      * @param ifoFile
@@ -78,6 +95,22 @@ public class StarDict implements IDictionary {
             !"h".equals(contentType)) {
             throw new Exception("Invalid type of dictionary: " + contentType);
         }
+
+        String f = ifoFile.getPath();
+        if (f.endsWith(".ifo")) {
+            f = f.substring(0, f.length() - 4);
+        }
+        this.dictName = f;
+
+        String dataFile = this.dictName + ".dict.dz";
+        File file = new File(dataFile);
+        if (file.exists()) {
+            this.dictType = StarDictFileType.DICTZIP;
+            this.dataFile = dataFile;
+        } else {
+            this.dictType = StarDictFileType.DICTFILE;
+            this.dataFile = f + ".dict";
+        }
     }
 
     /**
@@ -85,15 +118,8 @@ public class StarDict implements IDictionary {
      */
     public Map<String, Object> readHeader() throws IOException {
         Map<String, Object> result = new HashMap<String, Object>();
-        String f = ifoFile.getPath();
-        if (f.endsWith(".ifo")) {
-            f = f.substring(0, f.length() - 4);
-        }
-        File idxFile = new File(f + ".idx");
-        File dataFile = new File(f + ".dict");
-
-        byte[] idxBytes = readFile(idxFile);
-        byte[] dataBytes = readFile(dataFile);
+        File file = new File(this.dictName + ".idx");
+        byte[] idxBytes = readFile(file);
 
         DataInputStream idx = new DataInputStream(new ByteArrayInputStream(idxBytes));
 
@@ -108,43 +134,42 @@ public class StarDict implements IDictionary {
                 mem.reset();
                 int bodyOffset = idx.readInt();
                 int bodyLength = idx.readInt();
-                String text = readArticleText(dataBytes, bodyOffset, bodyLength);
-                addArticle(key, text, result);
+                addIndex(key, bodyOffset, bodyLength, result);
             } else {
                 mem.write(b);
             }
         }
-
         return result;
     }
 
     /**
-     * Add new article to dictionary map. If article for this words was already read, it create array with all
-     * articles instead one article, and add new article to this array. It required to support multiple
-     * translations for one word in dictionary.
+     * Add new index to dictionary map.
+     * If index for this words was already added, it create array with all indexes.
+     * It required to support multiple translations for one word in dictionary.
      * 
      * @param key
      *            translated word
-     * @param text
-     *            translation article
+     * @param index, offset
+     *            article index and offset
      * @param result
      *            result map
      */
-    private void addArticle(final String key, final String text, final Map<String, Object> result) {
+    private void addIndex(final String key, final int start, final int len, final Map<String, Object> result) {
         Object data = result.get(key);
         if (data == null) {
-            data = text;
+            StarDictData d = new StarDictData(start, len);
+            data = d;
         } else {
-            if (data instanceof String[]) {
-                String[] dobj = (String[]) data;
-                String[] d = new String[dobj.length + 1];
+            if (data instanceof StarDictData[]) {
+                StarDictData[] dobj = (StarDictData[]) data;
+                StarDictData[] d = new StarDictData[dobj.length + 1];
                 System.arraycopy(dobj, 0, d, 0, dobj.length);
-                d[d.length - 1] = text;
+                d[d.length - 1] = new StarDictData(start, len);
                 data = d;
             } else {
-                String[] d = new String[2];
-                d[0] = (String) data;
-                d[1] = text;
+                StarDictData[] d = new StarDictData[2];
+                d[0] = (StarDictData) data;
+                d[1] = new StarDictData(start,len);
                 data = d;
             }
         }
@@ -154,15 +179,115 @@ public class StarDict implements IDictionary {
     /**
      * Get one article.
      */
-    public String readArticle(String word, Object articleData) {
-        return (String) articleData;
+    public String readArticle(String word, Object data) {
+        StarDictData dictData = (StarDictData) data;
+        String ret = dictData.getArticle();
+        if (ret == null) {
+            synchronized(dictData) {
+                ret = dictData.getArticle();
+                if (ret == null) {
+                    ret = readArticleText(dictData);
+                    dictData.setArticle(ret);
+                }
+            }
+        }
+        return ret;
     }
 
-    /**
-     * Load acticle's text.
+    private String readArticleText(StarDictData dictData) {
+        if (this.dictType == StarDictFileType.DICTZIP) {
+            return readDictZipArticleText(dictData);
+        } else {
+            return readDictArticleText(dictData);
+        }
+    }
+
+
+    /*
+     * Read .dict file data and return article string.
+     *
+     * @param StarDictData dictData
+     * @return String      article
      */
-    private String readArticleText(byte[] data, int off, int len) throws UnsupportedEncodingException {
-        return new String(data, off, len, UTF8).replace("\n", "<br>");
+    private String readDictArticleText(StarDictData dictData) {
+        int off = dictData.offset();
+        int len = dictData.length();
+        FileInputStream in = null;
+        try {
+            in = new FileInputStream(this.dataFile);
+            byte[] data = new byte[len];
+            in.skip(off);
+            in.read(data);
+            return new String(data, UTF8).replace("\n", "<br>");
+        } catch (java.io.IOException e) {
+            System.err.println(e);
+            return null;
+        } finally {
+            try {
+                in.close();
+            } catch (Throwable t) {
+            }
+            in = null;
+        }
+    }
+
+    /*
+     * return DictZip header
+     *
+     * for delayed initialize and avoiding synchronize cost
+     * we use double null check.
+     *
+     * DictZip has a header that indicates data offset.
+     * When try retrieving data, use header information
+     * as an index for random access.
+     */
+    private DictZipHeader getDZHeader(DictZipInputStream din) throws java.io.IOException {
+        if (fHeader == null) {
+            /* delayed initialize */
+            synchronized(this) {
+                if (fHeader == null) {
+                    fHeader = din.readHeader();
+                }
+            }
+        }
+        return fHeader;
+    }
+
+    /*
+     * Read .dict.dz file data.
+     *
+     * @param StarDictData dictData
+     * @return String article
+     */
+    private String readDictZipArticleText(StarDictData dictData) {
+        int start = dictData.offset();
+        int len = dictData.length();
+        RandomAccessInputStream in = null;
+        DictZipInputStream din = null;
+        try {
+            in = new RandomAccessInputStream(this.dataFile, "r");
+            din = new DictZipInputStream(in);
+            DictZipHeader h = getDZHeader(din);
+            int off = h.getOffset(start);
+            int pos = h.getPosition(start);
+            in.seek(pos);
+            byte[] b = new byte[off + len];
+            din.readFully(b);
+            byte[] data = new byte[len];
+            System.arraycopy(b, off, data, 0, len);
+            return new String(data, UTF8).replace("\n", "<br>");
+        } catch (java.io.IOException e) {
+            System.err.println(e);
+            return null;
+        } finally {
+            try {
+                din.close();
+                in.close();
+            } catch (Throwable t) {
+            }
+            din = null;
+            in = null;
+        }
     }
 
     /**
@@ -179,9 +304,6 @@ public class StarDict implements IDictionary {
             in = new BufferedInputStream(new FileInputStream(file), BUFFER_SIZE);
         } else {
             gzFile = new File(file.getPath() + ".gz");
-            if (!gzFile.exists()) {
-                gzFile = new File(file.getPath() + ".dz");
-            }
             if (gzFile.exists()) {
                 in = new GZIPInputStream(new BufferedInputStream(new FileInputStream(gzFile), BUFFER_SIZE));
             } else {

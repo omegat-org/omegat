@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.3
 ----------------------------------------------------------------------
-  16 Enhancements
+  17 Enhancements
    4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -57,6 +57,9 @@ the translation is the same but the note is different
 
   - In the online help, external links will open in the user default
 browser
+
+  - In the Resource Bundler filter (.properties) whitespace-only lines
+are not modified anymore
 
   Bug fixes:
 

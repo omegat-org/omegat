@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
-               2015 Hiroshi Miura
+               2015 Hiroshi Miura, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -38,20 +38,33 @@ import org.omegat.core.TestCore;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Hiroshi Miura
+ * @author Aaron Madlon-Kay
  */
 public class StarDictTest extends TestCore {
-    /**
-     * Test of readArticle method, of class StarDict.
-     */
+
     @Test
-    public void testStarDictReadArticle() throws Exception {
-        System.out.println("readArticle from latin-francais stardict dictionary.");
-        String word = "testudo";
-        String expResult = "dinis, f. : tortue";
+    public void testReadFileDict() throws Exception {
         StarDict s = new StarDict(new File("test/data/dicts/latin-francais.ifo"));
         Map<String, Object> map = s.readHeader();
+        assertEquals(10451, map.size());
+        
+        String word = "testudo";
         Object data = map.get(word);
+        assertNotNull(data);
         String result = s.readArticle(word, data);
-        assertEquals(expResult, result);
+        assertEquals("dinis, f. : tortue", result);
+    }
+    
+    @Test
+    public void testReadZipDict() throws Exception {
+        StarDict s = new StarDict(new File("test/data/dicts-zipped/latin-francais.ifo"));
+        Map<String, Object> map = s.readHeader();
+        assertEquals(10451, map.size());
+        
+        String word = "testudo";
+        Object data = map.get(word);
+        assertNotNull(data);
+        String result = s.readArticle(word, data);
+        assertEquals("dinis, f. : tortue", result);
     }
 }

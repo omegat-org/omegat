@@ -1,0 +1,10 @@
+StarDict's dict ifo file
+version=2.4.2
+wordcount=10451
+idxfilesize=171932
+bookname=latin-français
+sametypesequence=m
+author=Yves Ouvrard
+website=http://www.collatinus.org/
+description=Dictionnaire latin-français tiré du logiciel sous licence GPL "collatinus", conçu par Yves Ouvrard, et mis au format StarDict par des membres de la communauté ubuntu-fr, www.forum.ubuntu-fr.org
+date=1er Novembre 2007

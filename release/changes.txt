@@ -37,6 +37,9 @@
 Resource Bundle filter
   https://sourceforge.net/p/omegat/feature-requests/1144/
 
+  - Lazily load StarDict dictionary contents
+  https://sourceforge.net/p/omegat/feature-requests/1148/
+
   Other changes:
 
   - Mac OS X: It is now possible to make the project files list 

@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   17 Enhancements
    4 Bug fixes
-   1 Localisation update
+   2 Localisation updates
 ----------------------------------------------------------------------
 3.5.3 vs 3.5.2 update 1
 
@@ -78,8 +78,9 @@ Tag nesting is now only tested for OmegaT tags.
 
   Localisation Updates:
 
- - German localisation updated to 3.5.2 (UI)
-
+  - German localisation updated to 3.5.2 (UI)
+  - Japanese localisation updated to 3.5.3 (UI, documentation, scripts, readme)
+ 
 ----------------------------------------------------------------------
  OmegaT 3.5.2 update 1 (2015-09-25)
 ----------------------------------------------------------------------

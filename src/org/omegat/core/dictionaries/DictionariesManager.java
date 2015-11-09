@@ -35,13 +35,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import org.omegat.gui.dictionaries.DictionariesTextArea;
+import org.omegat.gui.dictionaries.IDictionaries;
 import org.omegat.util.DirectoryMonitor;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
@@ -54,14 +56,15 @@ import org.omegat.util.OConsts;
  * @author Didier Briel
  */
 public class DictionariesManager implements DirectoryMonitor.Callback {
+    public static final String IGNORE_FILE = "ignore.txt";
     protected DirectoryMonitor monitor;
     protected final Map<String, DictionaryInfo> infos = new TreeMap<String, DictionaryInfo>();
-    private final DictionariesTextArea pane;
+    private final IDictionaries pane;
     protected static String DICTIONARY_SUBDIR = "dictionary";
 
     protected final Set<String> ignoreWords = new TreeSet<String>();
 
-    public DictionariesManager(final DictionariesTextArea pane) {
+    public DictionariesManager(final IDictionaries pane) {
         this.pane = pane;
     }
 
@@ -90,7 +93,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
             try {
                 long st = System.currentTimeMillis();
 
-                if (file.getName().equals("ignore.txt")) {
+                if (file.getName().equals(IGNORE_FILE)) {
                     loadIgnoreWords(file);
                 } else if (fn.endsWith(".ifo")) {
                     IDictionary dict = new StarDict(file);
@@ -141,17 +144,27 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
      * Add new ignore word.
      */
     public void addIgnoreWord(final String word) {
+        Collection<String> words = Collections.emptyList();
+        synchronized (ignoreWords) {
+            ignoreWords.add(word);
+            words = new ArrayList<String>(ignoreWords);
+        }
+        saveIgnoreWords(words);
+    }
+    
+    private synchronized void saveIgnoreWords(Collection<String> words) {
+        if (monitor == null) {
+            Log.log("Could not save ignore words because no dictionary dir has been set.");
+            return;
+        }
         try {
-            File outFile = new File(monitor.getDir(), "ignore.txt");
-            File outFileTmp = new File(monitor.getDir(), "ignore.txt.new");
+            File outFile = new File(monitor.getDir(), IGNORE_FILE);
+            File outFileTmp = new File(monitor.getDir(), IGNORE_FILE + ".new");
             BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFileTmp),
                     OConsts.UTF8));
             try {
-                synchronized (ignoreWords) {
-                    ignoreWords.add(word);
-                    for (String w : ignoreWords) {
-                        wr.write(w + System.getProperty("line.separator"));
-                    }
+                for (String w : words) {
+                    wr.write(w + System.getProperty("line.separator"));
                 }
                 wr.flush();
             } finally {
@@ -160,7 +173,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
             outFile.delete();
             FileUtil.rename(outFileTmp, outFile);
         } catch (Exception ex) {
-            Log.log("Error save ignore words:" + ex.getMessage());
+            Log.log("Error saving ignore words: " + ex.getMessage());
         }
     }
 
@@ -171,7 +184,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
      *            words list
      * @return articles list
      */
-    public List<DictionaryEntry> findWords(Set<String> words) {
+    public List<DictionaryEntry> findWords(Collection<String> words) {
         List<DictionaryInfo> dicts;
         synchronized (this) {
             dicts = new ArrayList<DictionaryInfo>(infos.values());

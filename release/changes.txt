@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.3
 ----------------------------------------------------------------------
-  17 Enhancements
+  18 Enhancements
    4 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -39,6 +39,9 @@ Resource Bundle filter
 
   - Lazily load StarDict dictionary contents
   https://sourceforge.net/p/omegat/feature-requests/1148/
+
+  - Improve explanation text in the Search window
+  https://sourceforge.net/p/omegat/feature-requests/1116/
 
   Other changes:
 

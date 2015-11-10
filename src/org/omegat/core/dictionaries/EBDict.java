@@ -105,6 +105,32 @@ public class EBDict implements IDictionary {
         return result;
     }
 
+    public Map<String, Object> searchPrefixMatch(String key) {
+        Searcher sh;
+        Result searchResult;
+        Hook<String> hook;
+        String title;
+        String article;
+        Map<String, Object> result = null;
+
+        for (SubBook sb: subBooks) {
+            if (sb.hasWordSearch()) {
+                try {
+                    hook = new EBDictStringHook(sb);
+                    sh = sb.searchWord(key);
+                    while ((searchResult = sh.getNextResult()) != null) {
+                        title = searchResult.getHeading(hook);
+                        article = searchResult.getText(hook);
+                        result = addArticle(title, article, result);
+                    }
+                } catch (EBException e) {
+                    logEBError(e);
+               }
+            }
+        }
+        return result;
+    }
+
     /**
      * Add new article to result object. If article for this words was already read,
      * it create array with all articles instead one article,
@@ -132,6 +158,19 @@ public class EBDict implements IDictionary {
                 d[1] = text;
                 return d;
             }
+        }
+    }
+
+    private Map<String, Object> addArticle(final String title, final String text, final Map<String, Object> result) {
+        if (result == null) {
+            Map<String, Object> robj = new HashMap<String, Object>();
+            robj.put(title, text);
+            return robj;
+        } else {
+            Object data = result.get(title);
+            data = addArticle(text, data);
+            result.put(title, data);
+            return result;
         }
     }
 

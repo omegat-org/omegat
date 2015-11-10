@@ -26,6 +26,11 @@
 package org.omegat.core.dictionaries;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -73,5 +78,63 @@ public class EBDictTest {
         Object data = e.searchExactMatch(word);
         String result = e.readArticle(word, data);
         assertEquals("&nbsp;Tokyo<br>&nbsp;&nbsp;\u6771\u4eac<br>&nbsp;", result);
+    }
+
+    /**
+     * Test of prefixMatch method
+     * @throws java.lang.Exception
+     */
+    @Test
+    public void testPrefixMatch() throws Exception {
+        Object data;
+        List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
+        EBDict e = new EBDict(new File("test/data/dicts/epwing/CATALOGS"));
+        String word = "Tokyo";
+        String prefix = "Tok";
+        Map<String, Object> resultMap = e.searchPrefixMatch(prefix);
+        for (Map.Entry<String, Object> entry : resultMap.entrySet()) {
+            data = entry.getValue();
+            retrieveArticle(entry.getKey(), entry.getValue(), e, result);
+        }
+        assertTrue(resultMap.containsKey(word));
+    }
+
+    /**
+     * Test of prefixMatch method
+     * @throws java.lang.Exception
+     */
+    @Test
+    public void testPrefixMatchRetrieveArticles() throws Exception {
+        Object data = null;
+        List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
+        EBDict e = new EBDict(new File("test/data/dicts/epwing/CATALOGS"));
+        String word = "Tokyo";
+        Map<String, String> expected = new HashMap<String, String>();
+        expected.put(word, "&nbsp;Tokyo<br>&nbsp;&nbsp;\u6771\u4eac<br>&nbsp;");
+        Map<String, Object> resultMap = e.searchPrefixMatch(word);
+        if (resultMap.containsKey(word)) {
+            data = resultMap.get(word);
+            assertEquals(expected.get(word), (String) data);
+        } else {
+            for (Map.Entry<String, Object> entry : resultMap.entrySet()) {
+                retrieveArticle(entry.getKey(), entry.getValue(), e, result);
+            }
+            for (DictionaryEntry entry: result) {
+                assertEquals(expected.get(entry.getWord()), entry.getArticle());
+            }
+        }
+    }
+
+    private void retrieveArticle(String word, Object data,
+                IDictionary di, final List<DictionaryEntry> result) throws Exception {
+        if (data.getClass().isArray()) {
+            for (Object d : (Object[]) data) {
+                String a = di.readArticle(word, d);
+                result.add(new DictionaryEntry(word, a));
+            }
+        } else {
+            String a = di.readArticle(word, data);
+            result.add(new DictionaryEntry(word, a));
+        }
     }
 }

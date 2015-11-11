@@ -65,17 +65,11 @@ public class JTextPaneLinkifier {
     private static final String ATTR_LINK = "linkbuilder_link";
 
     public static void linkify(JTextPane jTextPane) {
-        JTextPaneLinkifier inserter = new JTextPaneLinkifier(jTextPane);
-        inserter.register();
+        JTextPaneLinkifier inserter = new JTextPaneLinkifier();
+        inserter.register(jTextPane);
     }
     
-    private final JTextPane jTextPane;
-
-    public JTextPaneLinkifier(final JTextPane pane) {
-        this.jTextPane = pane;
-    }
-
-    public void register() {
+    public void register(JTextPane jTextPane) {
         final MouseAdapter mouseAdapter = new AttributeInserterMouseListener(jTextPane);
 
         // Adding mouse listner for actions
@@ -88,7 +82,7 @@ public class JTextPaneLinkifier {
         setDocumentFilter(jTextPane);
 
         jTextPane.addPropertyChangeListener("document", new PropertyChangeListener() {
-
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 Object source = evt.getSource();
                 if (source instanceof JTextPane) {

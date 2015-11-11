@@ -68,7 +68,7 @@
           mid-translation to switch from sentence to paragraph translation,
           the internal translation memory of the project will not be changed
           (OmegaT may upgrade old translation memories that did not use
-          sentence segmentation, but not vice versa), but OmegaT will attemp
+          sentence segmentation, but not vice versa), but OmegaT will attempt
           to create paragraph fuzzy matches by glueing together existing
           sentence translations.</para>
 

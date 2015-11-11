@@ -684,7 +684,13 @@ public class Preferences {
         }
     }
 
-    private static void doLoad() {
+    /**
+     * Loads the preferences from disk, from a location determined by {@link #getPreferencesFile()}.
+     * This method is package-private for unit testing purposes. Otherwise it is only meant to be
+     * called from the static initializer in this class. DO NOT CALL IT UNLESS YOU KNOW WHAT YOU'RE
+     * DOING.
+     */
+    static void doLoad() {
         // mark as loaded - if the load fails, there's no use
         // trying again later
         m_loaded = true;

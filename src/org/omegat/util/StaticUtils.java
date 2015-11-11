@@ -465,9 +465,10 @@ public class StaticUtils {
     }
     
     /**
-     * For testing purposes only!
+     * Set the config dir path. This method is for unit testing purposes only.
+     * DO NOT CALL IT UNLESS YOU KNOW WHAT YOU'RE DOING.
      */
-    public static void setConfigDir(String path) {
+    static void setConfigDir(String path) {
         m_configDir = path;
     }
 

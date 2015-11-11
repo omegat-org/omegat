@@ -58,13 +58,7 @@ public class PreferencesTest extends TestCase {
             Log.log("Dummy log line");
             StaticUtils.setConfigDir(tmpDir.getAbsolutePath());
             
-            // We can't use Preferences.FILE_PREFERENCES here
-            // because the prefs loading is done in a static
-            // block, so any references to the class will cause
-            // the load to happen before we have written our malformed
-            // prefs file.
-            File prefs = new File(tmpDir, "omegat.prefs");
-            
+            File prefs = new File(tmpDir, Preferences.FILE_PREFERENCES);
             
             // Write anything that is malformed XML, to force a parsing error.
             PrintStream out = new PrintStream(prefs);
@@ -73,8 +67,8 @@ public class PreferencesTest extends TestCase {
             out.println("<preference version=\"1.0\">");
             out.close();
             
-            // Do anything to make the Preferences class load.
-            Preferences.isPreference("");
+            // Load bad prefs file.
+            Preferences.doLoad();
             
             // The actual backup file will have a timestamp in the filename,
             // so we have to loop through looking for it.

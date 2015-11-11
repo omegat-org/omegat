@@ -108,19 +108,13 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Ajouter ou réécrire une déclaration d'encodage dans les fichiers HTML et XHTML</emphasis> : généralement, les fichiers cibles doivent posséder un jeu de caractères d'encodage différent de celui présent dans le fichier source (que cela soit défini explicitement ou implicitement). En utilisant cette option, le traducteur peut spécifier si les fichiers cibles doivent inclure la déclaration d'encodage. Par exemple, si le filtre de fichiers désigne UTF8 comme système d'encodage pour les fichiers cibles, sélectionner « Toujours » permettra de s'assurer que cette information est inscrite dans les fichiers cibles.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
         <para><emphasis>Traduire les attributs suivants</emphasis> : les attributs sélectionnés apparaîtront en tant que segments dans la fenêtre de l'Éditeur.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Commencer un nouveau paragraphe sur : &lt;br&gt; (rupture de ligne)</emphasis>, cette balise HTML créera un paragraphe du point de vue de la segmentation.</para>
+        <para><emphasis>Commencer un nouveau paragraphe sur</emphasis> : &lt;br&gt; (rupture de ligne), cette balise HTML créera un paragraphe du point de vue de la segmentation.</para>
       </listitem>
     </itemizedlist>
 
@@ -192,7 +186,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Ajoute ou réécrit une déclaration d'encodage dans les fichiers HTML et XHTML :</emphasis> : Toujours (valeur par défaut), Seulement si le fichier (X)HTML a un en-tête, Seulement si le fichier (X)HTML a une déclaration d'encodage, Jamais</para>
+        <para><emphasis>Ajouter ou réécrire une déclaration d'encodage dans les fichiers HTML et XHTML</emphasis> : généralement, les fichiers cibles doivent posséder un jeu de caractères d'encodage différent de celui présent dans le fichier source (que cela soit défini explicitement ou implicitement). En utilisant cette option, le traducteur peut spécifier si les fichiers cibles doivent inclure la déclaration d'encodage. Par exemple, si le filtre de fichiers désigne UTF8 comme système d'encodage pour les fichiers cibles, sélectionner « Toujours » permettra de s'assurer que cette information est inscrite dans les fichiers cibles.</para>
       </listitem>
     </itemizedlist>
 
@@ -210,7 +204,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Ignorer le texte correspondant à une expression régulière</emphasis> : le texte correspondant à l'expression régulière choisie est ignoré.</para>
+        <para><emphasis>Ignorer le texte correspondant à une expression régulière</emphasis> : le texte correspondant à l'expression régulière choisie est ignoré. Il est affiché en rouge dans le validateur de balise. Le texte dans les segments source correspondants est affiché en italique.</para>
       </listitem>
     </itemizedlist>
 
@@ -223,16 +217,16 @@
     <itemizedlist>
       <listitem>
         <para><emphasis>Ne pas traduire le contenu des balises comportant les paires de clé-valeur d'attribut suivantes (séparées par des virgules)</emphasis> : une correspondance dans la liste des paires de valeur-clé aura pour effet de faire ignorer le contenu de la balise</para>
+
+        <para>Il est parfois utile de rendre certaines balises intraductibles en se basant sur la valeur de leurs attributs. Par exemple, <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal> Vous pouvez définir des paires de valeur-clé pour les balises qui doivent rester non traduites. Pour reprendre l'exemple ci-dessus, le champ contiendrait : <literal>class=hide, translate=no </literal></para>
       </listitem>
-    </itemizedlist>
 
-    <para><emphasis role="bold">Fichiers texte</emphasis></para>
-
-    <itemizedlist>
       <listitem>
-        <para><emphasis>Segmenter le texte source en paragraphes (basés) sur : fins de ligne, lignes vides ou jamais</emphasis> :</para>
+        <para><emphasis>Compresser les espaces dans le document traduit</emphasis> : les caractères d'espacement contigus seront convertis en un seul caractère d'espacement dans le document traduit.</para>
+      </listitem>
 
-        <para>Si les règles de segmentation par phrases sont actives, le texte sera segmenté en fonction des options sélectionnées ici.</para>
+      <listitem>
+        <para><emphasis>Supprimer les commentaires HTML dans le document traduit</emphasis> : les parties commentées (entre &lt;!-- et --&gt;) ne seront pas copiées dans le document traduit.</para>
       </listitem>
     </itemizedlist>
 

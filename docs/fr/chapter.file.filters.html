@@ -183,18 +183,6 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Ajouter ou réécrire une déclaration d'encodage dans les fichiers HTML et XHTML</em></span>&nbsp;: généralement, les fichiers cibles doivent posséder un jeu de caractères d'encodage différent de celui présent dans le fichier
-                        source (que cela soit défini explicitement ou implicitement). En utilisant cette option, le traducteur peut spécifier si les
-                        fichiers cibles doivent inclure la déclaration d'encodage. Par exemple, si le filtre de fichiers désigne UTF8 comme système
-                        d'encodage pour les fichiers cibles, sélectionner «&nbsp;Toujours&nbsp;» permettra de s'assurer que cette information est inscrite dans
-                        les fichiers cibles.
-                     </p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
-                  <li class="listitem">
                      <p><span class="emphasis"><em>Traduire les attributs suivants</em></span> : les attributs sélectionnés apparaîtront en tant que segments dans la fenêtre de l'Éditeur.
                      </p>
                   </li>
@@ -203,7 +191,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Commencer un nouveau paragraphe sur : &lt;br&gt; (rupture de ligne)</em></span>, cette balise HTML créera un paragraphe du point de vue de la segmentation.
+                     <p><span class="emphasis"><em>Commencer un nouveau paragraphe sur</em></span> : &lt;br&gt; (rupture de ligne), cette balise HTML créera un paragraphe du point de vue de la segmentation.
                      </p>
                   </li>
                </ul>
@@ -295,8 +283,11 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Ajoute ou réécrit une déclaration d'encodage dans les fichiers HTML et XHTML :</em></span> : Toujours (valeur par défaut), Seulement si le fichier (X)HTML a un en-tête, Seulement si le fichier (X)HTML a une déclaration
-                        d'encodage, Jamais
+                     <p><span class="emphasis"><em>Ajouter ou réécrire une déclaration d'encodage dans les fichiers HTML et XHTML</em></span>&nbsp;: généralement, les fichiers cibles doivent posséder un jeu de caractères d'encodage différent de celui présent dans le fichier
+                        source (que cela soit défini explicitement ou implicitement). En utilisant cette option, le traducteur peut spécifier si les
+                        fichiers cibles doivent inclure la déclaration d'encodage. Par exemple, si le filtre de fichiers désigne UTF8 comme système
+                        d'encodage pour les fichiers cibles, sélectionner «&nbsp;Toujours&nbsp;» permettra de s'assurer que cette information est inscrite dans
+                        les fichiers cibles.
                      </p>
                   </li>
                </ul>
@@ -320,7 +311,8 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Ignorer le texte correspondant à une expression régulière</em></span> : le texte correspondant à l'expression régulière choisie est ignoré.
+                     <p><span class="emphasis"><em>Ignorer le texte correspondant à une expression régulière</em></span> : le texte correspondant à l'expression régulière choisie est ignoré. Il est affiché en rouge dans le validateur de balise.
+                        Le texte dans les segments source correspondants est affiché en italique.
                      </p>
                   </li>
                </ul>
@@ -338,16 +330,17 @@
                   <li class="listitem">
                      <p><span class="emphasis"><em>Ne pas traduire le contenu des balises comportant les paires de clé-valeur d'attribut suivantes (séparées par des virgules)</em></span> : une correspondance dans la liste des paires de valeur-clé aura pour effet de faire ignorer le contenu de la balise
                      </p>
+                     <p>Il est parfois utile de rendre certaines balises intraductibles en se basant sur la valeur de leurs attributs. Par exemple,
+                        <code class="literal">&lt;div class="hide"&gt; &lt;span translate="no"&gt;</code> Vous pouvez définir des paires de valeur-clé pour les balises qui doivent rester non traduites. Pour reprendre l'exemple
+                        ci-dessus, le champ contiendrait : <code class="literal">class=hide, translate=no </code></p>
                   </li>
-               </ul>
-            </div>
-            <p><span class="bold"><strong>Fichiers texte</strong></span></p>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Segmenter le texte source en paragraphes (basés) sur : fins de ligne, lignes vides ou jamais</em></span> :
+                     <p><span class="emphasis"><em>Compresser les espaces dans le document traduit</em></span> : les caractères d'espacement contigus seront convertis en un seul caractère d'espacement dans le document traduit.
                      </p>
-                     <p>Si les règles de segmentation par phrases sont actives, le texte sera segmenté en fonction des options sélectionnées ici.</p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Supprimer les commentaires HTML dans le document traduit</em></span> : les parties commentées (entre &lt;!-- et --&gt;) ne seront pas copiées dans le document traduit.
+                     </p>
                   </li>
                </ul>
             </div>

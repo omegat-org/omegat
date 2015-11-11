@@ -150,7 +150,7 @@
       <listitem>
         <para><emphasis role="bold">Expression régulière du fragment qui devrait être supprimé de la traduction :</emphasis></para>
 
-        <para>Il est possible d'entrer une expression régulière correspondant au contenu indésirable dans la cible. Toutes les correspondances dans le segment cible seront affichées en rouge et donc faciles à identifier et à corriger. Lors de la recherche de correspondances, le masque de suppression est ignoré. Une pénalité fixe de cinq points est ajoutée si la partie supprimée ne correspond à aucun autre segment afin que la correspondance n'atteigne pas les 100 %</para>
+        <para>Il est possible d'entrer une expression régulière correspondant au contenu indésirable dans la cible. Toutes les correspondances dans le segment cible seront affichées en rouge et donc faciles à identifier et à corriger. Lors de la recherche de correspondances, le masque de suppression est ignoré. Une pénalité fixe de cinq points est ajoutée si la partie supprimée ne correspond à aucun autre segment afin que la correspondance n'atteigne pas les 100 %.</para>
       </listitem>
     </itemizedlist>
   </section>

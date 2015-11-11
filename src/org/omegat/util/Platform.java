@@ -54,14 +54,14 @@ public final class Platform {
 
     static {
         String osName = System.getProperty("os.name");
-        String osArch = System.getProperty("os.arch");
-        if (osName != null && osArch != null) {
+        if (osName != null && System.getProperty("os.arch") != null) {
+            boolean is64 = is64Bit();
             if (osName.startsWith("Linux")) {
-                osType = osArch.contains("64") ? OsType.LINUX64 : OsType.LINUX32;
+                osType = is64 ? OsType.LINUX64 : OsType.LINUX32;
             } else if (osName.contains("OS X")) {
-                osType = osArch.contains("64") ? OsType.MAC64 : OsType.MAC32;
+                osType = is64 ? OsType.MAC64 : OsType.MAC32;
             } else if (osName.startsWith("Windows")) {
-                osType = osArch.contains("64") ? OsType.WIN64 : OsType.WIN32;
+                osType = is64 ? OsType.WIN64 : OsType.WIN32;
             }
         }
     }
@@ -83,5 +83,16 @@ public final class Platform {
     public static boolean isMacOSX() {
         OsType os = getOsType();
         return os == OsType.MAC32 || os == OsType.MAC64;
+    }
+    
+    /**
+     * Returns true if the JVM (NOT the OS) is 64-bit
+     */
+    public static boolean is64Bit() {
+        String osArch = System.getProperty("os.arch");
+        if (osArch != null) {
+            return osArch.contains("64");
+        }
+        return false;
     }
 }

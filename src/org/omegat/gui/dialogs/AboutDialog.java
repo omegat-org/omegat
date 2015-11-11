@@ -30,6 +30,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.util.OStrings;
+import org.omegat.util.Platform;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
@@ -68,7 +69,7 @@ public class AboutDialog extends JDialog {
         memoryusage.setText(memoryUsage);
         
         String javaVersion = StringUtil.format(OStrings.getString("JAVA_VERSION"),
-                System.getProperty("java.version"));
+                System.getProperty("java.version"), Platform.is64Bit() ? 64 : 32);
         javaversion.setText(javaVersion);
 
         invalidate();

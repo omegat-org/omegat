@@ -63,13 +63,8 @@ import org.omegat.util.Log;
 public class JTextPaneLinkifier {
 
     private static final String ATTR_LINK = "linkbuilder_link";
-
-    public static void linkify(JTextPane jTextPane) {
-        JTextPaneLinkifier inserter = new JTextPaneLinkifier();
-        inserter.register(jTextPane);
-    }
     
-    public void register(JTextPane jTextPane) {
+    public static void linkify(JTextPane jTextPane) {
         final MouseAdapter mouseAdapter = new AttributeInserterMouseListener(jTextPane);
 
         // Adding mouse listner for actions

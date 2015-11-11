@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.3
 ----------------------------------------------------------------------
-  19 Enhancements
+  20 Enhancements
    4 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -69,6 +69,9 @@ browser
 
   - In the Resource Bundler filter (.properties) whitespace-only lines
 are not modified anymore
+
+  - The About dialog now indicates whether the current Java VM is
+32-bit or 64-bit
 
   Bug fixes:
 

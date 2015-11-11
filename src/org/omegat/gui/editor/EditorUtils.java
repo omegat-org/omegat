@@ -283,8 +283,10 @@ public class EditorUtils {
      * in the given text with the target term. When there are multiple target terms, the first
      * one is used.
      * 
-     * @param text Text in which to replace glossary hits. Assumed to be in the project's source language.
+     * @param text Text in which to replace glossary hits (assumed to be in the project's source language)
      * @param entries List of glossary entries
+     * @param locale Locale with which to perform capitalization matching (assumed to be source locale)
+     * @param tokenizer Tokenizer with which to split text (assumed to be project's source tokenizer)
      * @return Text with source glossary terms replaced with target terms
      */
     public static String replaceGlossaryEntries(String text, List<GlossaryEntry> entries, Locale locale, ITokenizer tokenizer) {

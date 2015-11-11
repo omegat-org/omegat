@@ -199,5 +199,21 @@ public class EditorUtilsTest extends TestCase {
         ITokenizer tokenizer = new LuceneEnglishTokenizer();
         assertEquals(expected, EditorUtils.replaceGlossaryEntries(srcText, entries,
                 locale, tokenizer));
+        
+        // Empty cases
+        assertNull(EditorUtils.replaceGlossaryEntries(null, entries, locale, tokenizer));
+        assertEquals("", EditorUtils.replaceGlossaryEntries("", entries, locale, tokenizer));
+        assertSame(srcText, EditorUtils.replaceGlossaryEntries(srcText, null, locale, tokenizer));
+        assertSame(srcText, EditorUtils.replaceGlossaryEntries(srcText, new ArrayList<GlossaryEntry>(), locale, tokenizer));
+        try {
+            EditorUtils.replaceGlossaryEntries(srcText, entries, null, tokenizer);
+            fail("Should give NPE when given null locale");
+        } catch (NullPointerException ex) {
+        }
+        try {
+            EditorUtils.replaceGlossaryEntries(srcText, entries, locale, null);
+            fail("Should give NPE when given null tokenizer");
+        } catch (NullPointerException ex) {
+        }
     }
 }

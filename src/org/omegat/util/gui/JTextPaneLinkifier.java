@@ -149,7 +149,7 @@ public class JTextPaneLinkifier {
 
     private static class AttributeInserterDocumentFilter extends DocumentFilter {
 
-        private static final int REFRESH_DELAY = 2000;
+        private static final int REFRESH_DELAY = 200;
 
         // Regular Expression for URL validation
         // From https://gist.github.com/dperini/729294

@@ -26,7 +26,7 @@
 package org.omegat.core.dictionaries;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -59,10 +59,10 @@ public class DictionariesManagerTest extends TestCase {
             public void refresh() {
             }
         });
-        FileWriter fw = new FileWriter(IGNORE_FILE);
-        fw.write(IGNORE_WORD);
-        fw.write('\n');
+        PrintWriter fw = new PrintWriter(IGNORE_FILE, "UTF-8");
+        fw.println(IGNORE_WORD);
         fw.close();
+        assertFalse(fw.checkError());
     }
     
     @After

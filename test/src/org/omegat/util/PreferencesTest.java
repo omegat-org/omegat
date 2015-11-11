@@ -26,7 +26,7 @@
 package org.omegat.util;
 
 import java.io.File;
-import java.io.PrintStream;
+import java.io.PrintWriter;
 
 import org.omegat.filters.TestFilterBase;
 
@@ -61,11 +61,12 @@ public class PreferencesTest extends TestCase {
             File prefs = new File(tmpDir, Preferences.FILE_PREFERENCES);
             
             // Write anything that is malformed XML, to force a parsing error.
-            PrintStream out = new PrintStream(prefs);
+            PrintWriter out = new PrintWriter(prefs, "UTF-8");
             out.println("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
             out.println("<omegat>");
             out.println("<preference version=\"1.0\">");
             out.close();
+            assertFalse(out.checkError());
             
             // Load bad prefs file.
             Preferences.doLoad();

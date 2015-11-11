@@ -217,16 +217,18 @@ Contributions au code :
   Wildrich Fourie
   Phillip Hall
   Jean-Christophe Helary
+  Chihiro Hio
   Thomas Huriaux
   Hans-Peter Jacobs
   Kyle Katarn
   Piotr Kulik
   Ibai Lakunza Velasco
   Guido Leenders
-  Aaron Madlon-Kay
+  Aaron Madlon-Kay (responsable de l'intégration)
   Fabián Mandelbaum
   Manfred Martin
   Adiel Mittmann
+  Hiroshi Miura 
   John Moran
   Maxym Mykhalchuk 
   Arno Peters
@@ -271,8 +273,8 @@ OmegaT utilise les bibliothèques suivantes :
   trilead-ssh2-1.0.0-build217 (licence Trilead SSH)
   lucene-*.jar (licence Apache 2.0)
   Les lemmatiseurs anglais (org.omegat.tokenizer.SnowballEnglishTokenizer et
-  org.omegat.tokenizer.LuceneEnglishTokenizer) utilisent des mots non significatifs d'Okapi
-(http://okapi.sourceforge.net) (licence LGPL)
+org.omegat.tokenizer.LuceneEnglishTokenizer) utilisent des mots non significatifs 
+provenant initialement d'Okapi (http://okapi.sourceforge.net) (licence LGPL)
   tinysegmenter.jar (licence BSD modifiée)
   commons-*.jar (licence Apache 2.0)
   jWordSplitter (licence Apache 2.0)
@@ -285,6 +287,7 @@ OmegaT utilise les bibliothèques suivantes :
   groovy-all-2.2.2.jar (licence Apache 2.0)
   slf4j (licence MIT)
   juniversalchardet-1.0.3.jar (GPL v2)
+  DictZip de JDictd (GPL v2)
 
 ==============================================================================
  5.  Est-ce qu'OmegaT vous pose problème ? Avez-vous besoin d'aide ?

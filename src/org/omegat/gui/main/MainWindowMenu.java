@@ -376,6 +376,9 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         optionsGlossaryMenu.add(optionsGlossaryTBXDisplayContextCheckBoxMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_GLOSSARY_TBX_DISPLAY_CONTEXT"));
         optionsGlossaryMenu.add(optionsGlossaryExactMatchCheckBoxMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_GLOSSARY_EXACT_MATCH"));
         optionsGlossaryMenu.add(optionsGlossaryStemmingCheckBoxMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_GLOSSARY_STEMMING"));
+        optionsGlossaryMenu.add(optionsGlossaryReplacementCheckBoxMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_GLOSSARY_REPLACE_ON_INSERT"));
+        optionsGlossaryMenu.addSeparator();
+        // TaaS options come next (but are added from elsewhere)
 
         optionsMenu.add(optionsDictionaryMenu= createMenu("TF_OPTIONSMENU_DICTIONARY"));
         optionsDictionaryMenu.add(optionsDictionaryFuzzyMatchingCheckBoxMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_DICTIONARY_FUZZY"));
@@ -492,6 +495,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 Preferences.GLOSSARY_NOT_EXACT_MATCH, true));
         optionsGlossaryStemmingCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
                 Preferences.GLOSSARY_STEMMING, true));
+        optionsGlossaryReplacementCheckBoxMenuItem.setSelected(Preferences.isPreference(
+                Preferences.GLOSSARY_REPLACE_ON_INSERT));
         optionsDictionaryFuzzyMatchingCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
                 Preferences.DICTIONARY_FUZZY_MATCHING, true));
     }
@@ -717,6 +722,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem optionsGlossaryTBXDisplayContextCheckBoxMenuItem;
     JMenuItem optionsGlossaryExactMatchCheckBoxMenuItem;
     JMenuItem optionsGlossaryStemmingCheckBoxMenuItem;
+    JMenuItem optionsGlossaryReplacementCheckBoxMenuItem;
     JMenu optionsDictionaryMenu;
     JMenuItem optionsDictionaryFuzzyMatchingCheckBoxMenuItem;
     JMenu optionsTransTipsMenu;

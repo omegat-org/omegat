@@ -27,6 +27,7 @@
 
 package org.omegat.gui.editor;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.swing.text.BadLocationException;
@@ -35,6 +36,9 @@ import javax.swing.text.Utilities;
 
 import org.omegat.core.Core;
 import org.omegat.gui.editor.IEditor.CHANGE_CASE_TO;
+import org.omegat.gui.glossary.GlossaryEntry;
+import org.omegat.gui.glossary.GlossaryManager;
+import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.ITokenizer.StemmingMode;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
@@ -257,5 +261,50 @@ public class EditorUtils {
         
         // This should only happen if no cases are present, so it doesn't even matter.
         return CHANGE_CASE_TO.UPPER;
+    }
+
+    /**
+     * Convenience method for {@link #replaceGlossaryEntries(String, List, Locale, ITokenizer)}.
+     * Glossary entries are retrieved from {@link GlossaryManager}; the locale and tokenizer are
+     * taken from the project's current values for the source language.
+     * 
+     * @param text Text in which to replace glossary hits. Assumed to be in the project's source language.
+     * @return Text with source glossary terms replaced with target terms
+     */
+    public static String replaceGlossaryEntries(String text) {
+        Locale locale = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
+        ITokenizer tokenizer = Core.getProject().getSourceTokenizer();
+        return replaceGlossaryEntries(text, Core.getGlossaryManager().getGlossaryEntries(text),
+                locale, tokenizer);
+    }
+
+    /**
+     * Given a list of glossary entries, replace any instances of the source term appearing
+     * in the given text with the target term. When there are multiple target terms, the first
+     * one is used.
+     * 
+     * @param text Text in which to replace glossary hits. Assumed to be in the project's source language.
+     * @param entries List of glossary entries
+     * @return Text with source glossary terms replaced with target terms
+     */
+    public static String replaceGlossaryEntries(String text, List<GlossaryEntry> entries, Locale locale, ITokenizer tokenizer) {
+        if (StringUtil.isEmpty(text) || entries == null || entries.isEmpty()) {
+            return text;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (String tok : tokenizer.tokenizeVerbatimToStrings(text)) {
+            boolean replaced = false;
+            for (GlossaryEntry e : entries) {
+                if (tok.equalsIgnoreCase(e.getSrcText())) {
+                    sb.append(StringUtil.matchCapitalization(e.getLocText(), tok, locale));
+                    replaced = true;
+                    break;
+                }
+            }
+            if (!replaced) {
+                sb.append(tok);
+            }
+        }
+        return sb.toString();
     }
 }

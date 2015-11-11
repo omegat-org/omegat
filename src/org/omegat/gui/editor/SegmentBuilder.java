@@ -255,7 +255,11 @@ public class SegmentBuilder {
                 }
                 if (insertSource) {
                     // need to insert source text on empty translation
-                    translationText = ste.getSrcText();
+                    String srcText = ste.getSrcText();
+                    if (Preferences.isPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT)) {
+                        srcText = EditorUtils.replaceGlossaryEntries(srcText);
+                    }
+                    translationText = srcText;
                 } else {
                     // empty text on non-exist translation
                     translationText = "";

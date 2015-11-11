@@ -430,7 +430,11 @@ public class MainWindowMenuHandler {
         if (!Core.getProject().isProjectLoaded())
             return;
 
-        Core.getEditor().replaceEditText(Core.getEditor().getCurrentEntry().getSrcText());
+        String toInsert = Core.getEditor().getCurrentEntry().getSrcText();
+        if (Preferences.isPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT)) {
+            toInsert = EditorUtils.replaceGlossaryEntries(toInsert);
+        }
+        Core.getEditor().replaceEditText(toInsert);
     }
 
     /** inserts the source text of a segment at cursor position */
@@ -438,7 +442,11 @@ public class MainWindowMenuHandler {
         if (!Core.getProject().isProjectLoaded())
             return;
 
-        Core.getEditor().insertText(Core.getEditor().getCurrentEntry().getSrcText());
+        String toInsert = Core.getEditor().getCurrentEntry().getSrcText();
+        if (Preferences.isPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT)) {
+            toInsert = EditorUtils.replaceGlossaryEntries(toInsert);
+        }
+        Core.getEditor().insertText(toInsert);
     }
 
     public void editExportSelectionMenuItemActionPerformed() {
@@ -829,6 +837,11 @@ public class MainWindowMenuHandler {
 
     }
 
+    public void optionsGlossaryReplacementCheckBoxMenuItemActionPerformed() {
+        Preferences.setPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT,
+                mainWindow.menu.optionsGlossaryStemmingCheckBoxMenuItem.isSelected());
+    }
+    
     public void optionsDictionaryFuzzyMatchingCheckBoxMenuItemActionPerformed() {
         Preferences.setPreference(Preferences.DICTIONARY_FUZZY_MATCHING,
                 mainWindow.menu.optionsDictionaryFuzzyMatchingCheckBoxMenuItem.isSelected());

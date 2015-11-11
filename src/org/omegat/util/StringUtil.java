@@ -190,6 +190,40 @@ public class StringUtil {
         return true;
     }
     
+    public static String capitalizeFirst(String text, Locale locale) {
+        int remainder = text.offsetByCodePoints(0, 1);
+        String firstCP = text.substring(0, remainder);
+        return StringUtil.toTitleCase(firstCP, locale)
+                + text.substring(remainder);
+    }
+    
+    public static String matchCapitalization(String text, String matchTo, Locale locale) {
+        if (StringUtil.isEmpty(matchTo)) {
+            return text;
+        }
+        // If input matches term exactly, don't change anything
+        if (text.startsWith(matchTo)) {
+            return text;
+        }
+        
+        // If matching to title case (or 1 upper char), capitalize first letter.
+        // Don't turn into title case because the text may be e.g. a phrase
+        // with intentional mixed casing.
+        if (StringUtil.isTitleCase(matchTo)) {
+            return capitalizeFirst(text, locale);
+        }
+        // If matching to lower when input is upper, turn into lower.
+        if (StringUtil.isLowerCase(matchTo) && StringUtil.isUpperCase(text)) {
+            return text.toLowerCase(locale);
+        }
+        // If matching to upper (at least 2 chars; otherwise would have hit isTitleCase()
+        // above), turn into upper.
+        if (StringUtil.isUpperCase(matchTo)) {
+            return text.toUpperCase(locale);
+        }
+        return text;
+    }
+    
     /**
      * Convert text to title case according to the supplied locale.
      */

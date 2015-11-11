@@ -106,7 +106,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
                 if (!termMatchesChunk(term, context)) {
                     continue;
                 }
-                String payload = matchCapitalization(term, context);
+                String payload = StringUtil.matchCapitalization(term, context, getTargetLocale());
                 int length = context == null ? 0 : context.length();
                 AutoCompleterItem item = new AutoCompleterItem(payload, new String[] { entry.getSrcText() }, length);
                 if (!result.contains(item)) {
@@ -121,56 +121,15 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
             // Consider null context to match everything
             return true;
         }
-        String lowerTerm = toLowerCase(term);
-        String lowerContext = toLowerCase(context);
+        Locale locale = getTargetLocale();
+        String lowerTerm = term.toLowerCase(locale);
+        String lowerContext = context.toLowerCase(locale);
         // Consider a term to NOT match if it is the same (modulo case) as the context (i.e. it is already present)
         return !lowerTerm.equals(lowerContext) && lowerTerm.startsWith(lowerContext);
     }
     
     private Locale getTargetLocale() {
         return Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
-    }
-    
-    private String toLowerCase(String text) {
-        return text.toLowerCase(getTargetLocale());
-    }
-    
-    private String toUpperCase(String text) {
-        return text.toUpperCase(getTargetLocale());
-    }
-    
-    private String capitalizeFirst(String text) {
-        int remainder = text.offsetByCodePoints(0, 1);
-        String firstCP = text.substring(0, remainder);
-        return StringUtil.toTitleCase(firstCP, getTargetLocale())
-                + text.substring(remainder);
-    }
-    
-    private String matchCapitalization(String text, String matchTo) {
-        if (StringUtil.isEmpty(matchTo)) {
-            return text;
-        }
-        // If input matches term exactly, don't change anything
-        if (text.startsWith(matchTo)) {
-            return text;
-        }
-        
-        // If matching to title case (or 1 upper char), capitalize first letter.
-        // Don't turn into title case because the text may be e.g. a phrase
-        // with intentional mixed casing.
-        if (StringUtil.isTitleCase(matchTo)) {
-            return capitalizeFirst(text);
-        }
-        // If matching to lower when input is upper, turn into lower.
-        if (StringUtil.isLowerCase(matchTo) && StringUtil.isUpperCase(text)) {
-            return toLowerCase(text);
-        }
-        // If matching to upper (at least 2 chars; otherwise would have hit isTitleCase()
-        // above), turn into upper.
-        if (StringUtil.isUpperCase(matchTo)) {
-            return toUpperCase(text);
-        }
-        return text;
     }
 
     @Override

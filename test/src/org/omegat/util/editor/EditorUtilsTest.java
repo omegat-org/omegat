@@ -26,6 +26,9 @@
 package org.omegat.util.editor;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import junit.framework.TestCase;
 
@@ -34,6 +37,7 @@ import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.editor.IEditor.CHANGE_CASE_TO;
+import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
 import org.omegat.util.Language;
@@ -182,5 +186,18 @@ public class EditorUtilsTest extends TestCase {
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE));
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE));
         assertEquals("a", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE));
+    }
+
+    public void testReplaceGlossaryEntries() {
+        List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
+        entries.add(new GlossaryEntry("snowman", "sneeuwpop", "", false));
+        entries.add(new GlossaryEntry("Bob", "Blub", "", false));
+        
+        String srcText = "Snowman Bob went to the snowman party. SnOwMaN!";
+        String expected = "Sneeuwpop Blub went to the sneeuwpop party. sneeuwpop!";
+        Locale locale = Locale.ENGLISH;
+        ITokenizer tokenizer = new LuceneEnglishTokenizer();
+        assertEquals(expected, EditorUtils.replaceGlossaryEntries(srcText, entries,
+                locale, tokenizer));
     }
 }

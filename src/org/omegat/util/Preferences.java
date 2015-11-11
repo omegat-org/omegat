@@ -93,6 +93,7 @@ public class Preferences {
     public static final String GLOSSARY_TBX_DISPLAY_CONTEXT = "glossary_tbx_display_context";
     public static final String GLOSSARY_NOT_EXACT_MATCH = "glossary_not_exact_match";
     public static final String GLOSSARY_STEMMING = "glossary_stemming";
+    public static final String GLOSSARY_REPLACE_ON_INSERT = "glossary_replace_on_insert";
     public static final String DICTIONARY_FUZZY_MATCHING = "dictionary_fuzzy_matching";
 
     public static final String MAINWINDOW_WIDTH = "screen_width";

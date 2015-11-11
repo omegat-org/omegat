@@ -176,6 +176,7 @@ public class StringUtilTest extends TestCase {
         assertEquals("Abc", StringUtil.toTitleCase("ABC", locale));
         assertEquals("Abc", StringUtil.toTitleCase("Abc", locale));
         assertEquals("Abc", StringUtil.toTitleCase("abc", locale));
+        assertEquals("Abc", StringUtil.toTitleCase("aBC", locale));
         assertEquals("A", StringUtil.toTitleCase("a", locale));
         // LATIN SMALL LETTER NJ (U+01CC) -> LATIN CAPITAL LETTER N WITH SMALL LETTER J (U+01CB)
         assertEquals("\u01CB", StringUtil.toTitleCase("\u01CC", locale));
@@ -202,5 +203,38 @@ public class StringUtilTest extends TestCase {
         
         assertTrue(StringUtil.isValidXMLChar(0x10000));
         assertFalse(StringUtil.isValidXMLChar(0x110000));
+    }
+
+    public void testCapitalizeFirst() {
+        Locale locale = Locale.ENGLISH;
+        assertEquals("Abc", StringUtil.capitalizeFirst("abc", locale));
+        assertEquals("ABC", StringUtil.capitalizeFirst("ABC", locale));
+        assertEquals("Abc", StringUtil.capitalizeFirst("Abc", locale));
+        assertEquals("Abc", StringUtil.capitalizeFirst("abc", locale));
+        assertEquals("AbC", StringUtil.capitalizeFirst("abC", locale));
+        assertEquals("A", StringUtil.capitalizeFirst("a", locale));
+        // LATIN SMALL LETTER NJ (U+01CC) -> LATIN CAPITAL LETTER N WITH SMALL LETTER J (U+01CB)
+        assertEquals("\u01CB", StringUtil.capitalizeFirst("\u01CC", locale));
+        // LATIN SMALL LETTER I (U+0069) -> LATIN CAPITAL LETTER I WITH DOT ABOVE (U+0130) in Turkish
+        assertEquals("\u0130jk", StringUtil.capitalizeFirst("ijk", new Locale("tr")));
+    }
+    
+    public void testMatchCapitalization() {
+        Locale locale = Locale.ENGLISH;
+        String text = "foo";
+        // matchTo is empty -> return original text
+        assertSame(text, StringUtil.matchCapitalization(text, null, locale));
+        assertSame(text, StringUtil.matchCapitalization(text, "", locale));
+        // text starts with matchTo -> return original text
+        assertSame(text, StringUtil.matchCapitalization(text, text + "BAR", locale));
+        // matchTo is title case
+        assertEquals("Foo", StringUtil.matchCapitalization(text, "Abc", locale));
+        assertEquals("Foo", StringUtil.matchCapitalization(text, "A", locale));
+        // matchTo is lower case and text is upper case
+        assertEquals("foo", StringUtil.matchCapitalization("FOO", "lower", locale));
+        // matchTo is upper case
+        assertEquals("FOO", StringUtil.matchCapitalization("foo", "UPPER", locale));
+        // matchTo is mixed
+        assertSame(text, StringUtil.matchCapitalization(text, "bAzZ", locale));
     }
 }

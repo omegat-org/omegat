@@ -26,22 +26,20 @@ package org.omegat.util.gui;
 
 import java.awt.Cursor;
 import java.awt.Desktop;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -151,17 +149,37 @@ public class JTextPaneLinkifier {
 
     private static class AttributeInserterDocumentFilter extends DocumentFilter {
 
-        private static final long REFRESH_DELAY = 2L;
+        private static final int REFRESH_DELAY = 2000;
 
-        private final ScheduledExecutorService executorService;
-        private Future<?> refreshTask;
-        private final Runnable refreshRun;
+        // Regular Expression for URL validation
+        // From https://gist.github.com/dperini/729294
+        // See lib/Licenses.txt
+        private static final String REGEX_URL = "(?:(?:https?|ftp):\\/\\/)(?:\\S+(?::\\S*)?@)?(?:(?!(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))\\.?)(?::\\d{2,5})?(?:[/?#]\\S*)?";
+        private static final Pattern URL_PATTERN = Pattern.compile(REGEX_URL, Pattern.CASE_INSENSITIVE);
+        private static final AttributeSet DEFAULT_ATTRIBUTES = new SimpleAttributeSet();
+        private static final AttributeSet LINK_ATTRIBUTES;
+        
+        static {
+            MutableAttributeSet tmp = new SimpleAttributeSet();
+            tmp = new SimpleAttributeSet();
+            StyleConstants.setUnderline(tmp, true);
+            StyleConstants.setForeground(tmp, Styles.EditorColor.COLOR_HYPERLINK.getColor());
+            LINK_ATTRIBUTES = tmp;
+        }
+
+        private final StyledDocument doc;
+        private final Timer timer;
 
         // as default constructor
-        public AttributeInserterDocumentFilter(final StyledDocument doc) {
-            // refresh thread
-            this.executorService = new ScheduledThreadPoolExecutor(1);
-            this.refreshRun = new RefreshRunnable(doc);
+        public AttributeInserterDocumentFilter(StyledDocument doc) {
+            this.doc = doc;
+            timer = new Timer(REFRESH_DELAY, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    refreshPane();
+                }
+            });
+            timer.setRepeats(false);
         }
 
         @Override
@@ -171,7 +189,12 @@ public class JTextPaneLinkifier {
             if (attr != null && attr.isDefined(StyleConstants.ComposedTextAttribute)) {
                 // ignore
             } else {
-                refreshPane(0);
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshPane();
+                    }
+                });
             }
         }
 
@@ -186,7 +209,7 @@ public class JTextPaneLinkifier {
             super.remove(fb, offset, length);
 
             if (refresh && length != 0 && fb.getDocument().getLength() != 0) {
-                refreshPane(REFRESH_DELAY);
+                timer.restart();
             }
         }
 
@@ -195,102 +218,58 @@ public class JTextPaneLinkifier {
             super.replace(fb, offset, length, text, attrs);
 
             if (fb.getDocument().getLength() != 0) {
-                refreshPane(REFRESH_DELAY);
+                timer.restart();
             }
         }
 
-        private void refreshPane(final long delay) {
-            if (refreshTask != null && !refreshTask.isDone()) {
+        private void refreshPane() {
+            final int docLength = doc.getLength();
+            if (docLength == 0) {
                 return;
             }
-
-            refreshTask = executorService.schedule(refreshRun, delay, TimeUnit.SECONDS);
-        }
-
-        private static class RefreshRunnable implements Runnable {
-
-            // Regular Expression for URL validation
-            // From https://gist.github.com/dperini/729294
-            // See lib/Licenses.txt
-            private static final String REGEX_URL = "(?:(?:https?|ftp):\\/\\/)(?:\\S+(?::\\S*)?@)?(?:(?!(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))\\.?)(?::\\d{2,5})?(?:[/?#]\\S*)?";
-            private static final Pattern URL_PATTERN = Pattern.compile(REGEX_URL, Pattern.CASE_INSENSITIVE);
-            private static final AttributeSet DEFAULT_ATTRIBUTES = new SimpleAttributeSet();
-            private static final AttributeSet LINK_ATTRIBUTES;
-            
-            static {
-                MutableAttributeSet tmp = new SimpleAttributeSet();
-                tmp = new SimpleAttributeSet();
-                StyleConstants.setUnderline(tmp, true);
-                StyleConstants.setForeground(tmp, Styles.EditorColor.COLOR_HYPERLINK.getColor());
-                LINK_ATTRIBUTES = tmp;
-            }
-
-            private final StyledDocument doc;
-
-            public RefreshRunnable(StyledDocument doc) {
-                this.doc = doc;
-            }
-
-            public void run() {
-                try {
-                    SwingUtilities.invokeAndWait(new Runnable() {
-
-                        public void run() {
-                            final int docLength = doc.getLength();
-                            if (docLength == 0) {
-                                return;
-                            }
-                            try {
-                                // clear attributes
-                                for (int i = 0; i < docLength; ++i) {
-                                    if (doc.getCharacterElement(i).getAttributes().containsAttributes(LINK_ATTRIBUTES)) {
-                                        doc.setCharacterAttributes(i, 1, DEFAULT_ATTRIBUTES, true);
-                                    }
-                                }
-
-                                // URL detection
-                                final String text = doc.getText(0, docLength);
-                                final Matcher matcher = URL_PATTERN.matcher(text);
-                                while (matcher.find()) {
-                                    final int offset = matcher.start();
-                                    final int targetLength = matcher.end() - offset;
-
-                                    try {
-                                        // Transform into clickable text
-                                        AttributeSet atts = makeAttributes(offset, new URI(matcher.group()));
-                                        doc.setCharacterAttributes(offset, targetLength, atts, true);
-                                    } catch (URISyntaxException ex) {
-                                        Log.log(ex);
-                                    }
-                                }
-
-                            } catch (BadLocationException ex) {
-                                Log.log(ex);
-                            }
-                        }
-                    });
-                } catch (InterruptedException ex) {
-                    Log.log(ex);
-                } catch (InvocationTargetException ex) {
-                    Log.log(ex);
-                }
-            }
-            
-            private AttributeSet makeAttributes(final int offset, final URI target) {
-                SimpleAttributeSet atts = new SimpleAttributeSet(doc.getCharacterElement(offset).getAttributes());
-                atts.addAttributes(LINK_ATTRIBUTES);
-                atts.addAttribute(ATTR_LINK, new IAttributeAction() {
-                    @Override
-                    public void execute() {
-                        try {
-                            Desktop.getDesktop().browse(target);
-                        } catch (IOException e) {
-                            Log.log(e);
-                        }
+            try {
+                // clear attributes
+                for (int i = 0; i < docLength; ++i) {
+                    if (doc.getCharacterElement(i).getAttributes().containsAttributes(LINK_ATTRIBUTES)) {
+                        doc.setCharacterAttributes(i, 1, DEFAULT_ATTRIBUTES, true);
                     }
-                });  
-                return atts;
+                }
+
+                // URL detection
+                final String text = doc.getText(0, docLength);
+                final Matcher matcher = URL_PATTERN.matcher(text);
+                while (matcher.find()) {
+                    final int offset = matcher.start();
+                    final int targetLength = matcher.end() - offset;
+
+                    try {
+                        // Transform into clickable text
+                        AttributeSet atts = makeAttributes(offset, new URI(matcher.group()));
+                        doc.setCharacterAttributes(offset, targetLength, atts, true);
+                    } catch (URISyntaxException ex) {
+                        Log.log(ex);
+                    }
+                }
+
+            } catch (BadLocationException ex) {
+                Log.log(ex);
             }
+        }
+        
+        private AttributeSet makeAttributes(final int offset, final URI target) {
+            SimpleAttributeSet atts = new SimpleAttributeSet(doc.getCharacterElement(offset).getAttributes());
+            atts.addAttributes(LINK_ATTRIBUTES);
+            atts.addAttribute(ATTR_LINK, new IAttributeAction() {
+                @Override
+                public void execute() {
+                    try {
+                        Desktop.getDesktop().browse(target);
+                    } catch (IOException e) {
+                        Log.log(e);
+                    }
+                }
+            });  
+            return atts;
         }
     }
 }

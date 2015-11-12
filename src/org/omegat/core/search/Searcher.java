@@ -316,20 +316,22 @@ public class Searcher {
             }
 
             // search in orphaned
-            m_project.iterateByDefaultTranslations(new IProject.DefaultTranslationsIterator() {
-                final String file = OStrings.getString("CT_ORPHAN_STRINGS");
-
-                public void iterate(String source, TMXEntry en) {
-                    // stop searching if the max. nr of hits has been reached
-                    if (m_numFinds >= expression.numberOfResults) {
-                        return;
+            if (!m_searchExpression.excludeOrphans) {
+                m_project.iterateByDefaultTranslations(new IProject.DefaultTranslationsIterator() {
+                    final String file = OStrings.getString("CT_ORPHAN_STRINGS");
+    
+                    public void iterate(String source, TMXEntry en) {
+                        // stop searching if the max. nr of hits has been reached
+                        if (m_numFinds >= expression.numberOfResults) {
+                            return;
+                        }
+                        checkStop.checkInterrupted();
+                        if (m_project.isOrphaned(source)) {
+                            checkEntry(en.source, en.translation, en.note, null, en, ENTRY_ORIGIN_ORPHAN, file);
+                        }
                     }
-                    checkStop.checkInterrupted();
-                    if (m_project.isOrphaned(source)) {
-                        checkEntry(en.source, en.translation, en.note, null, en, ENTRY_ORIGIN_ORPHAN, file);
-                    }
-                }
-            });
+                });
+            }
 
             m_project.iterateByMultipleTranslations(new IProject.MultipleTranslationsIterator() {
                 final String file = OStrings.getString("CT_ORPHAN_STRINGS");

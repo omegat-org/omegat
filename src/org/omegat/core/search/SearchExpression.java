@@ -84,4 +84,5 @@ public class SearchExpression {
     public boolean searchDateBefore = false;
     public long dateBefore;
     public int numberOfResults = OConsts.ST_MAX_SEARCH_RESULTS;
+    public boolean excludeOrphans = false;
 }

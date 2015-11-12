@@ -150,7 +150,8 @@ public class SearchWindowForm extends javax.swing.JFrame {
         m_numberOfResults = new javax.swing.JSpinner();
         m_dateFromSpinner = new javax.swing.JSpinner();
         m_dateToSpinner = new javax.swing.JSpinner();
-        jPanel6 = new javax.swing.JPanel();
+        filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        m_excludeOrphans = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         m_advancedButton = new javax.swing.JButton();
         filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
@@ -477,7 +478,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         m_advancedVisiblePane.add(m_authorField, gridBagConstraints);
 
@@ -510,7 +511,6 @@ public class SearchWindowForm extends javax.swing.JFrame {
         org.openide.awt.Mnemonics.setLocalizedText(m_numberLabel, OStrings.getString("SW_NUMBER")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 1;
         m_advancedVisiblePane.add(m_numberLabel, gridBagConstraints);
 
         m_numberOfResults.setModel(new javax.swing.SpinnerNumberModel());
@@ -518,7 +518,6 @@ public class SearchWindowForm extends javax.swing.JFrame {
         m_numberOfResults.setPreferredSize(new java.awt.Dimension(100, 28));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 1;
         m_advancedVisiblePane.add(m_numberOfResults, gridBagConstraints);
 
         m_dateFromSpinner.setModel(new javax.swing.SpinnerDateModel());
@@ -536,10 +535,18 @@ public class SearchWindowForm extends javax.swing.JFrame {
         m_advancedVisiblePane.add(m_dateToSpinner, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        m_advancedVisiblePane.add(jPanel6, gridBagConstraints);
+        m_advancedVisiblePane.add(filler7, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(m_excludeOrphans, OStrings.getString("SW_EXCLUDE_ORPHANS")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        m_advancedVisiblePane.add(m_excludeOrphans, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -653,6 +660,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.Box.Filler filler4;
     javax.swing.Box.Filler filler5;
     javax.swing.Box.Filler filler6;
+    javax.swing.Box.Filler filler7;
     javax.swing.Box.Filler filler8;
     javax.swing.Box.Filler filler9;
     javax.swing.JPanel jPanel1;
@@ -664,7 +672,6 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JPanel jPanel3;
     javax.swing.JPanel jPanel4;
     javax.swing.JPanel jPanel5;
-    javax.swing.JPanel jPanel6;
     javax.swing.JPanel jPanel7;
     javax.swing.JPanel jPanel8;
     javax.swing.JPanel jPanel9;
@@ -694,6 +701,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JLabel m_dirLabel;
     javax.swing.JButton m_dismissButton;
     javax.swing.JLabel m_displayLabel;
+    javax.swing.JCheckBox m_excludeOrphans;
     javax.swing.JCheckBox m_fileNamesCB;
     javax.swing.JButton m_filterButton;
     javax.swing.JLabel m_numberLabel;

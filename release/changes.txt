@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.3
 ----------------------------------------------------------------------
-  20 Enhancements
+  21 Enhancements
    4 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -45,6 +45,9 @@ Resource Bundle filter
 
   - Automatically replace glossary hits when inserting source text
   https://sourceforge.net/p/omegat/feature-requests/1152/
+
+  - Allow excluding orphan segments from search results
+  https://sourceforge.net/p/omegat/feature-requests/1026/
 
   Other changes:
 

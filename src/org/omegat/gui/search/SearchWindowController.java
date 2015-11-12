@@ -84,6 +84,7 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
+import org.openide.awt.Mnemonics;
 
 /**
  * This is a window that appears when user'd like to search for something. For
@@ -227,7 +228,7 @@ public class SearchWindowController {
         form.m_advancedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                toggleAdvancedOptions();
+                setAdvancedOptionsVisible(!form.m_advancedVisiblePane.isVisible());
             }
         });
 
@@ -940,8 +941,11 @@ public class SearchWindowController {
         }
     }
 
-    private void toggleAdvancedOptions() {
-        form.m_advancedVisiblePane.setVisible(!form.m_advancedVisiblePane.isVisible());
+    private void setAdvancedOptionsVisible(boolean visible) {
+        form.m_advancedVisiblePane.setVisible(visible);
+        Mnemonics.setLocalizedText(form.m_advancedButton,
+                visible ? OStrings.getString("SW_HIDE_ADVANCED_OPTIONS")
+                        : OStrings.getString("SW_SHOW_ADVANCED_OPTIONS"));
         updateAdvancedOptionStatus();
     }
 
@@ -1002,7 +1006,7 @@ public class SearchWindowController {
 
     private void loadAdvancedOptionPreferences() {
         // advanced options visibility
-        form.m_advancedVisiblePane.setVisible(Preferences.isPreference(Preferences.SEARCHWINDOW_ADVANCED_VISIBLE));
+        setAdvancedOptionsVisible(Preferences.isPreference(Preferences.SEARCHWINDOW_ADVANCED_VISIBLE));
 
         // author options
         form.m_authorCB.setSelected(Preferences.isPreference(Preferences.SEARCHWINDOW_SEARCH_AUTHOR));
@@ -1035,7 +1039,7 @@ public class SearchWindowController {
         // let the user see them anyway. This is important because
         // search results will be affected by these settings
         if (form.m_authorCB.isSelected() || form.m_dateFromCB.isSelected() || form.m_dateToCB.isSelected()) {
-            form.m_advancedVisiblePane.setVisible(true);
+            setAdvancedOptionsVisible(true);
         }
     }
 

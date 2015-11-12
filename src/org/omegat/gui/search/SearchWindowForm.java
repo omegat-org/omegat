@@ -550,7 +550,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
 
         jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
 
-        org.openide.awt.Mnemonics.setLocalizedText(m_advancedButton, OStrings.getString("SW_ADVANCED_OPTIONS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(m_advancedButton, OStrings.getString("SW_SHOW_ADVANCED_OPTIONS")); // NOI18N
         jPanel4.add(m_advancedButton);
         jPanel4.add(filler10);
 

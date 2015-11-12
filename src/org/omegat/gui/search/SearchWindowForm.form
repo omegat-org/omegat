@@ -1033,7 +1033,7 @@
         <Component class="javax.swing.JButton" name="m_advancedButton">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="org/omegat/Bundle.properties" key="SW_ADVANCED_OPTIONS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="org/omegat/Bundle.properties" key="SW_SHOW_ADVANCED_OPTIONS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>

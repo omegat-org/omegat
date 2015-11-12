@@ -139,17 +139,46 @@ public class EditorUtils {
     }
     
     /**
-     * perform the case change. Lowercase becomes titlecase, titlecase becomes uppercase, uppercase becomes
-     * lowercase. if the text matches none of these categories, it is uppercased.
+     * Change the case of the input string to the indicated case. When toWhat is
+     * {@link CHANGE_CASE_TO#CYCLE} the result will be UPPER > LOWER > SENTENCE
+     * > TITLE > UPPER.
+     * <p>
+     * This is a convenience method for
+     * {@link #doChangeCase(String, CHANGE_CASE_TO, Locale, ITokenizer)}. The
+     * locale and tokenizer will be taken from the current project's target
+     * language values.
      * 
      * @param input
-     *            : the string to work on
+     *            The string to change
      * @param toWhat
-     *            : one of the CASE_* values - except for case CASE_CYCLE.
+     *            The case to change to, or {@link CHANGE_CASE_TO#CYCLE}
+     * @return The modified string
      */
     public static String doChangeCase(String input, CHANGE_CASE_TO toWhat) {
+        Locale locale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
+        ITokenizer tokenizer = Core.getProject().getTargetTokenizer();
+        return doChangeCase(input, toWhat, locale, tokenizer);
+    }
+
+    /**
+     * Change the case of the input string to the indicated case. When toWhat is
+     * {@link CHANGE_CASE_TO#CYCLE} the result will be UPPER > LOWER > SENTENCE
+     * > TITLE > UPPER.
+     * 
+     * @param input
+     *            The string to change
+     * @param toWhat
+     *            The case to change to, or {@link CHANGE_CASE_TO#CYCLE}
+     * @param locale
+     *            The locale of the input string
+     * @param tokenizer
+     *            A tokenizer for the input string language
+     * @return The modified string
+     */
+    public static String doChangeCase(String input, CHANGE_CASE_TO toWhat, Locale locale,
+            ITokenizer tokenizer) {
         // tokenize the selection
-        Token[] tokenList = Core.getProject().getTargetTokenizer().tokenizeWords(input, StemmingMode.NONE);
+        Token[] tokenList = tokenizer.tokenizeWords(input, StemmingMode.NONE);
 
         if (toWhat == CHANGE_CASE_TO.CYCLE) {
             int lower = 0;
@@ -192,7 +221,6 @@ public class EditorUtils {
             toWhat = determineTargetCase(lower, upper, title, mixed, ambiguous);
         }
         
-        Locale locale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
         if (toWhat == CHANGE_CASE_TO.SENTENCE) {
             return StringUtil.toTitleCase(input, locale);
         }

@@ -49,6 +49,8 @@ git svn info
 curl -L -o authors-new https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/release/ci/authors.txt?format=raw
 mv authors-new authors
 git svn fetch
+git branch -f master trunk
 #git push ssh://omegat-jenkins@git.code.sf.net/p/omegat/code
+echo "r$(git svn find-rev $(git rev-parse HEAD))" > ../buildname
 cd ..
 tar -cf $REPO.tar $REPO

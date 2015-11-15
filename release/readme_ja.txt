@@ -237,6 +237,7 @@ OmegaT のユーザーインターフェースや取扱説明書、他の関連�
   Fabián Mandelbaum
   Manfred Martin
   Adiel Mittmann
+  Hiroshi Miura
   John Moran
   Maxym Mykhalchuk
   Arno Peters
@@ -293,6 +294,7 @@ OmegaT は以下に示すライブラリを使用しています。
   groovy-all-2.2.2.jar（Apache ライセンス 2.0）
   slf4j（MIT ライセンス）
   juniversalchardet-1.0.3.jar（GPL v2 ライセンス）
+  DictZip from JDictd（GPL v2 ライセンス）
 
 ==============================================================================
  5.  バグかな？と思ったら

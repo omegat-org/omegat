@@ -78,6 +78,6 @@ EOF
 
 # Zip up SVN::Core installation for achiving
 cd $HOME
-tar -cvzhf svncore.tar.gz perl5 apr apr-util sqlite swig
+tar -cvzhf svncore.tar.gz .cpan perl5 apr apr-util sqlite swig
 cd -
 mv $HOME/svncore.tar.gz ./

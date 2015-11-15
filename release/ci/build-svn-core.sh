@@ -3,8 +3,13 @@
 # needed for git-svn installed[2]. So we have to build this
 # package ourselves and provide it for any jobs that use
 # git-svn.
+#
+# Copies of apr, apr-util, sqlite-amalgamation, and swig are
+# also available in the private storage area[3].
+#
 # [1] https://documentation.cloudbees.com/docs/dev-at-cloud/Jenkins+Build+Machine+Specifications.html
 # [2] https://examples.ci.cloudbees.com/job/General/job/fedora-packages/lastSuccessfulBuild/console
+# [3] https://documentation.cloudbees.com/docs/dev-at-cloud/Sharing+Files+with+Build+Executors.html
 
 # Install Adobe Portable Runtime
 if [ ! -d ~/apr ]; then
@@ -76,7 +81,7 @@ cpan SVN::Core <<EOF
 $CONFIG_ARGS
 EOF
 
-# Zip up SVN::Core installation for achiving
+# Zip up SVN::Core installation for archiving.
 cd $HOME
 tar -cvzhf svncore.tar.gz .cpan perl5 apr apr-util sqlite swig
 cd -

@@ -8,14 +8,15 @@
 # by re-cloning. Thus we need to treat the git-svn clone itself
 # as an artifact to be preserved.
 #
-# In /private/omegat/ we have a cleaned-up copy of the original
+# In /private/omegat/ [3] we have a cleaned-up copy of the original
 # git-svn clone created and synced by Alex Buloichik. This serves
 # as our base, onto which we fetch new revisions. The result of
 # this fetching is then tarred and propagated to further builds of
 # this job as an artifact, in prev/.
 #
-# [1] https://documentation.cloudbees.com/docs/dev-at-cloud/Sharing+Files+with+Build+Executors.html
+# [1] https://documentation.cloudbees.com/docs/dev-at-cloud/Jenkins+Build+Machine+Specifications.html
 # [2] https://examples.ci.cloudbees.com/job/General/job/fedora-packages/lastSuccessfulBuild/console
+# [3] https://documentation.cloudbees.com/docs/dev-at-cloud/Sharing+Files+with+Build+Executors.html
 
 if [ ! -d $HOME/perl5 ]; then
 	SVNCORE=$(pwd)/svncore.tar.gz

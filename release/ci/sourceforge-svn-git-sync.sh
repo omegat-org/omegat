@@ -51,6 +51,9 @@ mv authors-new authors
 git svn fetch
 git branch -f master trunk
 #git push ssh://omegat-jenkins@git.code.sf.net/p/omegat/code
-echo "r$(git svn find-rev $(git rev-parse HEAD))" > ../buildname
+GIT_SHA=$(git rev-parse master)
+GIT_SHA_SHORT=$(git rev-parse --short $GIT_SHA)
+SVN_REVISION=$(git svn find-rev $GIT_SHA)
+echo "r$SVN_REVISION $GIT_SHA_SHORT" > ../buildname
 cd ..
 tar -cf $REPO.tar $REPO

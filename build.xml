@@ -180,7 +180,7 @@
     <target name="release" depends="docindexgen">
         <mkdir dir="dist"/>
         <copy todir="dist">
-            <fileset dir="release" includes="*" excludes="readme.txt *-specific l10n-project"/>
+            <fileset dir="release" includes="*" excludes="readme.txt *-specific l10n-project ci"/>
         </copy>
         <copy todir="dist">
             <fileset dir="release/linux-specific"/>

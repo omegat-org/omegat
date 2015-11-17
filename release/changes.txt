@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.3
 ----------------------------------------------------------------------
-  21 Enhancements
+  22 Enhancements
    4 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -75,6 +75,9 @@ are not modified anymore
 
   - The About dialog now indicates whether the current Java VM is
 32-bit or 64-bit
+
+  - A new script (nbsp.groovy) replaces spaces with non-breaking
+spaces where appropriate in French
 
   Bug fixes:
 

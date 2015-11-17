@@ -120,7 +120,7 @@
                     scripts/properties/spellcheck.properties
                     scripts/properties/svn_cleanup_selected.properties
                     scripts/properties/search_replace.properties
-                    script/properties/replace_strip_tags.properties
+                    scripts/properties/replace_strip_tags.properties
                     release/mac-specific/OmegaT.app/Contents/Resources/en.lproj/Localizable.strings" />
         </copy>
         <copy file="release/readme.txt"
@@ -149,7 +149,7 @@
                     scripts/properties/spellcheck.properties
                     scripts/properties/svn_cleanup_selected.properties
                     scripts/properties/search_replace.properties
-                    script/properties/replace_strip_tags.properties
+                    scripts/properties/replace_strip_tags.properties
                     release/mac-specific/OmegaT.app/Contents/Resources/en.lproj/Localizable.strings"
                     excludes="doc_src/en/index.xml
                     doc_src/en/html/**

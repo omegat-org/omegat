@@ -50,7 +50,7 @@ curl -L -o authors-new https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/rele
 mv authors-new authors
 git svn fetch
 git branch -f master trunk
-#git push ssh://omegat-jenkins@git.code.sf.net/p/omegat/code
+git push ssh://omegat-jenkins@git.code.sf.net/p/omegat/code
 GIT_SHA=$(git rev-parse master)
 GIT_SHA_SHORT=$(git rev-parse --short $GIT_SHA)
 SVN_REVISION=$(git svn find-rev $GIT_SHA)

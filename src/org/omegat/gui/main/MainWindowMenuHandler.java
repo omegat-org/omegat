@@ -839,7 +839,7 @@ public class MainWindowMenuHandler {
 
     public void optionsGlossaryReplacementCheckBoxMenuItemActionPerformed() {
         Preferences.setPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT,
-                mainWindow.menu.optionsGlossaryStemmingCheckBoxMenuItem.isSelected());
+                mainWindow.menu.optionsGlossaryReplacementCheckBoxMenuItem.isSelected());
     }
     
     public void optionsDictionaryFuzzyMatchingCheckBoxMenuItemActionPerformed() {

@@ -465,7 +465,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>既定値訳文として使用</guimenuitem></entry>
+              <entry><guimenuitem>基本訳文として使用</guimenuitem></entry>
 
               <entry/>
 
@@ -473,7 +473,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>新しい訳文を登録</guimenuitem></entry>
+              <entry><guimenuitem>例外訳文を登録</guimenuitem></entry>
 
               <entry/>
 

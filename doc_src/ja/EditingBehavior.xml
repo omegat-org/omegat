@@ -127,8 +127,8 @@
 
   <variablelist>
     <varlistentry>
-      <term>既定値訳文と違う新しい訳文がある場合［次の未翻訳分節］でその訳文へ移動する<indexterm class="singular">
-          <primary>設定メニュー</primary> <secondary>翻訳入力行</secondary> <tertiary>新しい訳文が入力された分節</tertiary>
+      <term>基本訳文と違う例外訳文がある場合［次の未翻訳分節］でその訳文へ移動する<indexterm class="singular">
+          <primary>設定メニュー</primary> <secondary>翻訳入力行</secondary> <tertiary>例外訳文が入力された分節</tertiary>
         </indexterm></term>
 
       <listitem>

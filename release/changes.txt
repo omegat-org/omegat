@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.3
 ----------------------------------------------------------------------
-  22 Enhancements
+  23 Enhancements
    4 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -48,6 +48,9 @@ Resource Bundle filter
 
   - Allow excluding orphan segments from search results
   https://sourceforge.net/p/omegat/feature-requests/1026/
+
+  - Show revision number in version string 
+  https://sourceforge.net/p/omegat/feature-requests/1159/
 
   Other changes:
 

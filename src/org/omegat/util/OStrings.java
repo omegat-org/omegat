@@ -139,10 +139,10 @@ public class OStrings {
      */
     public static String getDisplayVersion() {
         if (UPDATE != null && !UPDATE.equals("0")) {
-            return StringUtil.format(getString("version-template-pretty-update"),
+            return StringUtil.format(getString("app-version-template-pretty-update"),
                     getApplicationDisplayName(), VERSION, UPDATE);
         } else {
-            return StringUtil.format(getString("version-template-pretty"),
+            return StringUtil.format(getString("app-version-template-pretty"),
                     getApplicationDisplayName(), VERSION);
         }
     }
@@ -152,7 +152,7 @@ public class OStrings {
      * Example: "OmegaT-3.5_0_dev", "OmegaT-3.5.1_0_r7532"
      */
     public static String getVersion() {
-        return StringUtil.format(getString("version-template"), getApplicationName(),
+        return StringUtil.format(getString("app-version-template"), getApplicationName(),
                 VERSION, UPDATE, REVISION);
     }
 

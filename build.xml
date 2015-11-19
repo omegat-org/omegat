@@ -77,12 +77,27 @@
         </propertyfile>
     </target>
 
-    <!-- Set repo.revision property from current svn revision or git SHA-1.
-         If neither are available, use the value "unknown". -->
-    <target name="get-revision" depends="get-svn-revision,get-git-revision">
-        <!-- Fallback in case value was not set from svn or git -->
+    <!-- Set the repo.revision property from the first valid source in this order:
+         1. src/org/omegat/Version.properties (only if not "dev", i.e. if this is
+            an unversioned source distro made with `ant src`)
+         2. This svn checkout's revision
+         3. This git clone's SHA-1
+         4. If none of the above, the value "unknown" -->
+    <target name="get-revision" depends="get-source-revision,get-svn-revision,get-git-revision">
+        <!-- Fallback in case value was not set from source, svn, or git -->
         <property name="repo.revision" value="unknown"/>
         <echo message="Detected revision: ${repo.revision}"/>
+    </target>
+
+    <target name="get-source-revision">
+        <condition property="repo.revision" value="${revision}">
+            <and>
+                <isset property="revision"/>
+                <not>
+                    <equals arg1="${revision}" arg2="dev"/>
+                </not>
+            </and>
+        </condition>
     </target>
 
     <available file=".svn" type="dir" property="svn.available"/>
@@ -215,11 +230,21 @@
     </target>
 
     <!-- Builds a source distribution -->
-    <target name="src" depends="init" description="Build source distribution">
+    <target name="src" depends="init,get-revision" description="Build source distribution">
         <mkdir dir="dist2"/>
-        <zip destfile="dist2/OmegaT_${distversion}${beta}_Source.zip" basedir="."
+        <!-- Create temporary Version.properties with current revision -->
+        <tempfile property="temp.version.props" destdir="dist2" deleteonexit="true"/>
+        <copy file="src/org/omegat/Version.properties" tofile="${temp.version.props}"/>
+        <propertyfile file="${temp.version.props}">
+            <entry key="revision" value="${repo.revision}"/>
+        </propertyfile>
+        <!-- Build zip -->
+        <zip destfile="dist2/OmegaT_${distversion}${beta}_Source.zip">
+            <fileset dir="."
                 includes="docs/** images/** lib/** nbproject/** lib-mnemonics/** release/** src/** test/** gen/** manifest-template.mf build.xml native/** doc_src/** docs_devel/** scripts/**"
-                excludes="**/nbproject/private/** **/build/** **/dist/**" />
+                excludes="**/nbproject/private/** **/build/** **/dist/** src/org/omegat/Version.properties" />
+            <zipfileset file="${temp.version.props}" fullpath="src/org/omegat/Version.properties"/>
+        </zip>
     </target>
 
     <!-- Copies all files to dist -->

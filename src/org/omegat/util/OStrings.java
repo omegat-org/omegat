@@ -45,17 +45,22 @@ public class OStrings {
 
     private static String __VERSION_KEY = "version";
     private static String __UPDATE_KEY = "update";
+    private static String __REVISION_KEY = "revision";
 
     /** For custom deployments of OmegaT that need to be distinguishable from "stock" OmegaT */
     public static String BRANDING = "";
 
     /** Just a version, e.g. "1.6" */
-    public static final String VERSION = ResourceBundle.getBundle("org/omegat/Version").getString(
-            __VERSION_KEY);
+    public static final String VERSION = ResourceBundle.getBundle("org/omegat/Version")
+            .getString(__VERSION_KEY);
 
     /** Update number, e.g. 2, for 1.6.0_02 */
     public static final String UPDATE = ResourceBundle.getBundle("org/omegat/Version")
             .getString(__UPDATE_KEY);
+
+    /** Repository revision number, e.g. r7500 */
+    public static final String REVISION = ResourceBundle.getBundle("org/omegat/Version")
+            .getString(__REVISION_KEY);
 
     /** Resource bundle that contains all the strings */
     private static ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/Bundle");
@@ -102,20 +107,55 @@ public class OStrings {
     }
 
     /**
-     * Returns the OmegaT version for display (includes the application name)
+     * Get the application name for display purposes (includes branding)
+     */
+    public static String getApplicationDisplayName() {
+        String name = bundle.getString("application-name");
+        return BRANDING.isEmpty() ? name : name + " " + BRANDING;
+    }
+
+    /**
+     * Get the raw application name (suitable for file paths, etc.; includes branding)
+     */
+    public static String getApplicationName() {
+        String name = bundle.getString("application-name");
+        return BRANDING.isEmpty() ? name : name + "_" + BRANDING;
+    }
+
+    /**
+     * Get the token for identifying stock vs branded OmegaT files. Intended to
+     * be used in filenames, etc. Is the empty string if {@link #BRANDING} is
+     * empty.
+     */
+    public static String getBrandingToken() {
+        return BRANDING.isEmpty() ? "" : "-" + BRANDING;
+    }
+
+    /**
+     * Returns the OmegaT "pretty" version for display (includes the application name).
+     * Example: "OmegaT 3.5", "OmegaT 3.5.1_2"
      * 
      * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public static String getDisplayVersion() {
-        String result = ((UPDATE != null) && !UPDATE.equals("0"))
-                ? StringUtil.format(getString("version-update-template"), VERSION, UPDATE)
-                : StringUtil.format(getString("version-template"), VERSION, UPDATE);
-        if (!BRANDING.isEmpty()) {
-            result += " " + BRANDING;
+        if (UPDATE != null && !UPDATE.equals("0")) {
+            return StringUtil.format(getString("version-template-pretty-update"),
+                    getApplicationDisplayName(), VERSION, UPDATE);
+        } else {
+            return StringUtil.format(getString("version-template-pretty"),
+                    getApplicationDisplayName(), VERSION);
         }
-        return result;
     }
     
+    /**
+     * Returns the OmegaT full version for logs, etc. (includes the application name).
+     * Example: "OmegaT-3.5_0_dev", "OmegaT-3.5.1_0_r7532"
+     */
+    public static String getVersion() {
+        return StringUtil.format(getString("version-template"), getApplicationName(),
+                VERSION, UPDATE, REVISION);
+    }
+
     /** Returns default text for progress bar when no project is loaded
      * 
      */

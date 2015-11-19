@@ -68,6 +68,7 @@ import org.omegat.gui.scripting.ScriptingWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.Platform;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StaticUtils;
@@ -77,8 +78,6 @@ import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.Styles;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
-
-import org.omegat.util.Platform;
 
 /**	
  * The main OmegaT class, used to launch the program.
@@ -184,7 +183,7 @@ public class Main {
         }
 
         Log.log("\n" + "===================================================================" + "\n"
-                + OStrings.getDisplayVersion() + " (" + new Date() + ") " + " Locale " + Locale.getDefault());
+                + OStrings.getVersion() + " (" + new Date() + ") " + " Locale " + Locale.getDefault());
 
         Log.logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"), System.getProperty("java.version"),
                 System.getProperty("java.home"));

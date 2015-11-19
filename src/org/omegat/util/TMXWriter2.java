@@ -260,19 +260,12 @@ public class TMXWriter2 {
         xml.writeCharacters("  ");
         xml.writeEmptyElement("header");
 
-        xml.writeAttribute("creationtool", "OmegaT");
+        xml.writeAttribute("creationtool", OStrings.getApplicationName());
         xml.writeAttribute("o-tmf", "OmegaT TMX");
         xml.writeAttribute("adminlang", "EN-US");
         xml.writeAttribute("datatype", "plaintext");
 
-        String version = OStrings.VERSION;
-        if (!OStrings.UPDATE.equals("0"))
-            version = version + "_" + OStrings.UPDATE;
-        if (!OStrings.BRANDING.isEmpty()) {
-            version += "_" + OStrings.BRANDING;
-        }
-
-        xml.writeAttribute("creationtoolversion", version);
+        xml.writeAttribute("creationtoolversion", OStrings.getVersion());
 
         xml.writeAttribute("segtype", sentenceSegmentingEnabled ? TMXReader.SEG_SENTENCE
                 : TMXReader.SEG_PARAGRAPH);

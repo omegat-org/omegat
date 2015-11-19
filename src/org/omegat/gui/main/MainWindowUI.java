@@ -46,7 +46,6 @@ import java.io.InputStream;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 
@@ -83,8 +82,7 @@ import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
  * @author Aaron Madlon-Kay
  */
 public class MainWindowUI {
-    public static String UI_LAYOUT_FILE = OStrings.BRANDING.isEmpty() ? "uiLayout.xml"
-            : "uiLayout-" + OStrings.BRANDING + ".xml";
+    public static String UI_LAYOUT_FILE = "uiLayout" + OStrings.getBrandingToken() + ".xml";
     
     public enum STATUS_BAR_MODE {
         DEFAULT,

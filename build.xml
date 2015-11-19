@@ -71,6 +71,23 @@
         </condition>
     </target>
 
+    <target name="-post-compile" depends="get-revision">
+        <propertyfile file="${build.classes.dir}/org/omegat/Version.properties">
+            <entry key="revision" value="${svn.revision}" />
+        </propertyfile>
+    </target>
+
+    <target name="get-revision">
+        <exec executable="svnversion" outputproperty="raw.revision" failifexecutionfails="false"/>
+        <condition property="svn.revision" value="r${raw.revision}" else="unknown">
+            <and>
+            	<available file=".svn" type="dir"/>
+                <isset property="raw.revision"/>
+                <length string="${raw.revision}" trim="yes" length="0" when="greater"/>
+            </and>
+        </condition>
+    </target>
+
     <target name="-post-clean">
         <delete>
             <fileset dir="src" includes="**/*.class"/>

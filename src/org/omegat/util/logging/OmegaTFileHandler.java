@@ -104,9 +104,7 @@ public class OmegaTFileHandler extends StreamHandler {
     private void openFiles(final File dir) throws IOException {
         dir.mkdirs();
         for (int instanceIndex = 0; instanceIndex < 100; instanceIndex++) {
-            String fileName = "OmegaT"
-                    // Optional branding identifier
-                    + (OStrings.BRANDING.isEmpty() ? "" : "-" + OStrings.BRANDING)
+            String fileName = OStrings.getApplicationName()
                     // Instance index
                     + (instanceIndex > 0 ? ("-" + instanceIndex) : "");
             

@@ -73,17 +73,40 @@
 
     <target name="-post-compile" depends="get-revision">
         <propertyfile file="${build.classes.dir}/org/omegat/Version.properties">
-            <entry key="revision" value="${svn.revision}" />
+            <entry key="revision" value="${repo.revision}" />
         </propertyfile>
     </target>
 
-    <target name="get-revision">
-        <exec executable="svnversion" outputproperty="raw.revision" failifexecutionfails="false"/>
-        <condition property="svn.revision" value="r${raw.revision}" else="unknown">
+    <!-- Set repo.revision property from current svn revision or git SHA-1.
+         If neither are available, use the value "unknown". -->
+    <target name="get-revision" depends="get-svn-revision,get-git-revision">
+        <!-- Fallback in case value was not set from svn or git -->
+        <property name="repo.revision" value="unknown"/>
+        <echo message="Detected revision: ${repo.revision}"/>
+    </target>
+
+    <available file=".svn" type="dir" property="svn.available"/>
+    <target name="get-svn-revision" if="svn.available">
+        <exec executable="svnversion" outputproperty="svn.revision" failifexecutionfails="false"/>
+        <condition property="repo.revision" value="r${svn.revision}">
             <and>
-            	<available file=".svn" type="dir"/>
-                <isset property="raw.revision"/>
-                <length string="${raw.revision}" trim="yes" length="0" when="greater"/>
+                <isset property="svn.revision"/>
+                <length string="${svn.revision}" trim="yes" length="0" when="greater"/>
+            </and>
+        </condition>
+    </target>
+
+    <available file=".git" type="dir" property="git.available"/>
+    <target name="get-git-revision" if="git.available">
+        <exec executable="git" outputproperty="git.sha1" failifexecutionfails="false">
+            <arg value="rev-parse"/>
+            <arg value="--short"/>
+            <arg value="HEAD"/>
+        </exec>
+        <condition property="repo.revision" value="${git.sha1}">
+            <and>
+                <isset property="git.sha1"/>
+                <length string="${git.sha1}" trim="yes" length="0" when="greater"/>
             </and>
         </condition>
     </target>

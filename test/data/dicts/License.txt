@@ -1,3 +1,7 @@
-The latin-francais StarDict dictionary is based on Collatinus and is under the GPL license.
+Liceses:
 
+The latin-francais StarDict dictionary is based on Collatinus and is under the GPL license.
 Sources are available from http://www.collatinus.org/collatinus/
+
+The test.dsl LingvoDSL dictionary is made for test by OmegaT project and is under the GPL.
+

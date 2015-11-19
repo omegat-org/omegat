@@ -31,13 +31,13 @@
 
 <project name="OmegaT" default="all" basedir=".">
     <property environment="env"/>
-	<condition property="assets.dir" value="${env.OMEGAT_ASSETS_DIR}" else="..">
+    <condition property="assets.dir" value="${env.OMEGAT_ASSETS_DIR}" else="..">
         <isset property="${env.OMEGAT_ASSETS_DIR}" />
     </condition>
-	
+
     <!-- Use an empty string for non-beta versions  and _Beta for beta versions -->
     <property name="beta" value="_Beta" />
-    
+
     <description>Builds, tests, and runs the project OmegaT.</description>
     <import file="nbproject/build-impl.xml"/>
     <import file="nbproject/profiler-build-impl.xml"/>
@@ -82,7 +82,7 @@
         <delete file="manifest.mf"/>
         <delete dir="dist2"/>
     </target>
-    
+
     <target name="-post-jar">
         <delete file="${dist.dir}/README.TXT"/>
         <!-- copy the native libraries to the distribution directory -->
@@ -94,14 +94,14 @@
             <fileset dir="scripts"/>
         </copy>
     </target>
-    
+
     <!-- Creates a zip with two localization packs -->
     <target name="l10n-pack" depends="init" description="Build a distribution of localizable files">
         <mkdir dir="dist2"/>
         <property name="l10n.project.dir" value="release/l10n-project"/>
         <property name="l10n.dir" value="${build.dir}/l10n"/>
         <mkdir dir="${l10n.dir}"/>
-        
+
         <!-- minimal -->
         <property name="l10n.min" value="OmegaT_${distversion}_L10N_Minimal"/>
         <property name="l10n.min.dir" value="${l10n.dir}/${l10n.min}"/>
@@ -110,8 +110,8 @@
             <fileset dir="${l10n.project.dir}"/>
         </copy>
         <copy todir="${l10n.min.dir}/source">
-            <fileset dir="." 
-                    includes="doc_src/en/InstantStartGuide.xml 
+            <fileset dir="."
+                    includes="doc_src/en/InstantStartGuide.xml
                     doc_src/en/images/InstantGuide_1.png
                     doc_src/en/images/InstantGuide_2.png
                     src/**/Bundle.properties
@@ -135,9 +135,9 @@
                         value="This translation is the work of [insert your name], copyright© [insert year]."/>
             </filterset>
         </copy>
-        <zip destfile="dist2/${l10n.min}.zip" 
+        <zip destfile="dist2/${l10n.min}.zip"
                 basedir="${l10n.dir}" includes="${l10n.min}/**" />
-               
+
         <!-- full -->
         <property name="l10n.max" value="OmegaT_${distversion}_L10N_Full"/>
         <property name="l10n.max.dir" value="${l10n.dir}/${l10n.max}"/>
@@ -145,7 +145,7 @@
         <copy todir="${l10n.max.dir}">
             <fileset dir="${l10n.project.dir}"/>
         </copy>
-        <copy todir="${l10n.max.dir}/source"> 
+        <copy todir="${l10n.max.dir}/source">
             <fileset dir="."
                     includes="doc_src/en/** src/**/Bundle.properties release/win32-specific/CustomMessages.ini
                     scripts/properties/check_rules.properties
@@ -170,14 +170,14 @@
                         value="This translation is the work of [insert your name], copyright© [insert year]."/>
             </filterset>
         </copy>
-        <zip destfile="dist2/${l10n.max}.zip" 
+        <zip destfile="dist2/${l10n.max}.zip"
                 basedir="${l10n.dir}" includes="${l10n.max}/**" />
     </target>
-    
-    <!-- Builds a source distribution -->    
+
+    <!-- Builds a source distribution -->
     <target name="src" depends="init" description="Build source distribution">
         <mkdir dir="dist2"/>
-        <zip destfile="dist2/OmegaT_${distversion}${beta}_Source.zip" basedir="." 
+        <zip destfile="dist2/OmegaT_${distversion}${beta}_Source.zip" basedir="."
                 includes="docs/** images/** lib/** nbproject/** lib-mnemonics/** release/** src/** test/** gen/** manifest-template.mf build.xml native/** doc_src/** docs_devel/** scripts/**"
                 excludes="**/nbproject/private/** **/build/** **/dist/**" />
     </target>
@@ -223,8 +223,8 @@
             <fileset dir="lib" includes="**/*.txt" excludes="sources/**" />
         </copy>
     </target>
-   
-    <!-- Builds a ZIP distribution -->    
+
+    <!-- Builds a ZIP distribution -->
     <target name="zip" description="Build Zip distro" depends="jar,release">
         <mkdir dir="dist2"/>
         <zip destfile="dist2/OmegaT_${distversion}${beta}_Without_JRE.zip">
@@ -233,37 +233,37 @@
         </zip>
     </target>
 
-    <!-- Builds a Linux (tar, bz2) distribution -->    
+    <!-- Builds a Linux (tar, bz2) distribution -->
    <target name="linux" description="Build Linux distro" depends="jar,release, check-jre-linux" if="jre-linux.exists">
         <mkdir dir="dist2"/>
         <mkdir dir="dist2/linux"/>
         <copy todir="dist2/linux/OmegaT">
-            <fileset dir="dist" excludes="OmegaT OmegaT-JRE OmegaT.exe OmegaT.bat OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project"/>           
+            <fileset dir="dist" excludes="OmegaT OmegaT-JRE OmegaT.exe OmegaT.bat OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project"/>
         </copy>
         <copy file="dist/OmegaT-JRE" tofile="dist2/linux/OmegaT/OmegaT"/>
         <copy todir="dist2/linux/OmegaT/jre">
             <fileset dir="${assets.dir}/jre-linux"/>
         </copy>
         <tar destfile="dist2/OmegaT_${distversion}_Linux.tar">
-            <tarfileset dir="dist2/linux" excludes="OmegaT/OmegaT OmegaT/linux-install.sh OmegaT/omegat.kaptn OmegaT/jre/bin/java"/>           
+            <tarfileset dir="dist2/linux" excludes="OmegaT/OmegaT OmegaT/linux-install.sh OmegaT/omegat.kaptn OmegaT/jre/bin/java"/>
             <tarfileset dir="dist2/linux" includes="OmegaT/OmegaT OmegaT/linux-install.sh OmegaT/omegat.kaptn OmegaT/jre/bin/java" filemode="755"/>
         </tar>
         <bzip2 zipfile="dist2/OmegaT_${distversion}${beta}_Linux.tar.bz2" src="dist2/OmegaT_${distversion}_Linux.tar"/>
    </target>
-   
-   <!-- Builds a Linux-64 (tar, bz2) distribution -->    
+
+   <!-- Builds a Linux-64 (tar, bz2) distribution -->
    <target name="linux-64" description="Build Linux distro" depends="jar,release, check-jre-linux-64" if="jre-linux-64.exists">
         <mkdir dir="dist2"/>
         <mkdir dir="dist2/linux-64"/>
         <copy todir="dist2/linux-64/OmegaT">
-            <fileset dir="dist" excludes="OmegaT OmegaT-JRE OmegaT.exe OmegaT.bat OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project"/>           
+            <fileset dir="dist" excludes="OmegaT OmegaT-JRE OmegaT.exe OmegaT.bat OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project"/>
         </copy>
         <copy file="dist/OmegaT-JRE" tofile="dist2/linux-64/OmegaT/OmegaT"/>
         <copy todir="dist2/linux-64/OmegaT/jre">
             <fileset dir="${assets.dir}/jre-linux-64"/>
         </copy>
         <tar destfile="dist2/OmegaT_${distversion}_Linux_64.tar">
-            <tarfileset dir="dist2/linux-64" excludes="OmegaT/OmegaT OmegaT/linux-install.sh OmegaT/omegat.kaptn OmegaT/jre/bin/java"/>           
+            <tarfileset dir="dist2/linux-64" excludes="OmegaT/OmegaT OmegaT/linux-install.sh OmegaT/omegat.kaptn OmegaT/jre/bin/java"/>
             <tarfileset dir="dist2/linux-64" includes="OmegaT/OmegaT OmegaT/linux-install.sh OmegaT/omegat.kaptn OmegaT/jre/bin/java" filemode="755"/>
         </tar>
         <bzip2 zipfile="dist2/OmegaT_${distversion}${beta}_Linux_64.tar.bz2" src="dist2/OmegaT_${distversion}_Linux_64.tar"/>
@@ -275,23 +275,23 @@
 Custom strings from release\win32-specific must be added manually to the language files.">
         <copy todir="dist" file="release/win32-specific/OmegaT.exe"/>
         <copy todir="dist" file="release/win32-specific/OmegaT.l4J.ini"/>
- 
+
         <delete file="dist/OmegaT.iss"/>
         <filter token="VERSION_NUMBER_SUBST" value="${distversion}${beta}"/>
         <copy todir="dist" file="release/win32-specific/OmegaT.iss" filtering="on"/>
-        
+
         <mkdir dir="dist2"/>
         <exec executable="${iscc.exe}">
             <arg file="dist/OmegaT.iss"/>
-        </exec>     
+        </exec>
     </target>
 
     <!-- Creates a Windows Installer with JRE-->
-    <target name="do-win-jre" depends="check-jre" if="jre.exists" description="Creates a Windows Installer with JRE. PRE: Inno Setup (http://www.jrsoftware.org/isinfo.php) with all optional language packs must be installed and available on the path, and a JRE must be present in ${assets.dir}\\jre\\ 
+    <target name="do-win-jre" depends="check-jre" if="jre.exists" description="Creates a Windows Installer with JRE. PRE: Inno Setup (http://www.jrsoftware.org/isinfo.php) with all optional language packs must be installed and available on the path, and a JRE must be present in ${assets.dir}\\jre\\
 Custom strings from release\win32-specific must be added manually to the language files.">
         <copy todir="dist" file="release/win32-specific/OmegaT.exe"/>
         <copy todir="dist" file="release/win32-specific/OmegaT.l4J.ini"/>
-        
+
         <delete file="dist/OmegaT-JRE.iss"/>
         <filter token="VERSION_NUMBER_SUBST" value="${distversion}${beta}"/>
         <copy todir="dist" file="release/win32-specific/OmegaT-JRE.iss" filtering="on"/>
@@ -300,7 +300,7 @@ Custom strings from release\win32-specific must be added manually to the languag
         </exec>
     </target>
 
-    <!-- Builds a Mac distribution -->    
+    <!-- Builds a Mac distribution -->
     <target name="mac" description="Build Mac distro. PRE: A MacOS JRE must be present in ${assets.dir}/jre-mac-root/ and JavaAppLauncher must be in ${assets.dir}/ (obtain from AppBundler JAR)" depends="jar,release,check-mac-reqs">
         <!-- Build directories -->
         <mkdir dir="dist2"/>
@@ -335,21 +335,21 @@ Custom strings from release\win32-specific must be added manually to the languag
             <option value="-Xdock:name=OmegaT"/>
             <option value="-Xmx1024M"/>
             <argument value="--config-file=$APP_ROOT/Contents/Resources/Configuration.properties"/>
-        	<!--<option value="-Xdebug" />
-        	<option value="-Xrunjdwp:transport=dt_socket,address=8998,server=y"/>-->
-        	<bundledocument
-        		extensions="project"
-        		name="OmegaT Project"
-        		role="editor"
-        		icon="images/OmegaT.icns"/>
-        	<bundledocument
-        		extensions="*"
-        		name="All Files"
-        		role="none"/>
+            <!--<option value="-Xdebug" />
+            <option value="-Xrunjdwp:transport=dt_socket,address=8998,server=y"/>-->
+            <bundledocument
+                extensions="project"
+                name="OmegaT Project"
+                role="editor"
+                icon="images/OmegaT.icns"/>
+            <bundledocument
+                extensions="*"
+                name="All Files"
+                role="none"/>
             <plistentry key="JVMRuntime" value="jre"/>
         </bundleapp>
     </target>
-    
+
     <target name="check-win" depends="init">
         <condition property="os.windows">
             <and>
@@ -358,15 +358,15 @@ Custom strings from release\win32-specific must be added manually to the languag
             </and>
         </condition>
     </target>
-    
+
     <target name="check-jre" depends="check-win" if="os.windows">
         <available file="${assets.dir}/jre" type="dir" property="jre.exists" />
     </target>
-    
+
     <target name="check-jre-linux">
         <available file="${assets.dir}/jre-linux" type="dir" property="jre-linux.exists" />
     </target>
-    
+
     <target name="check-jre-linux-64">
         <available file="${assets.dir}/jre-linux-64" type="dir" property="jre-linux-64.exists" />
     </target>
@@ -379,29 +379,29 @@ Custom strings from release\win32-specific must be added manually to the languag
         <fail message="There is no Java for MacOS in the ${assets.dir}/jre-mac-root/Contents/Home/bin/java" unless="mac-java-stub.exists1" />
         <available file="${assets.dir}/jre-mac-root/Contents/Home/lib/rt.jar" type="file" property="mac-java-stub.exists2" />
         <fail message="There is no Java for MacOS in the ${assets.dir}/jre-mac-root/Contents/Home/lib/rt.jar" unless="mac-java-stub.exists2" />
-    </target>   
+    </target>
 
     <target name="win" description="Build Win32 distro if on Windows. PRE: Inno Setup (http://www.jrsoftware.org/isinfo.php) with all optional language packs must be installed and available on the path, and for the JRE-version a JRE must be present in ${assets.dir}\\jre\\ "
                                         depends="check-win" if="os.windows">
         <ant target="do-win" />
         <ant target="do-win-jre" />
     </target>
-    
+
     <!-- Creates WebStart package -->
     <target name="webstart" depends="init,jar">
         <ant dir="release/WebStart-specific" antfile="build.xml"/>
     </target>
 
-        
+
     <!-- Builds all OmegaT products -->
     <target name="all" depends="l10n-pack,src,jar,zip,win,linux,linux-64, mac" />
 
-    <target name="checksums" description="Compute the checksum for files"><!--depends="l10n-pack,src,jar,zip,win,linux,mac"--> 
+    <target name="checksums" description="Compute the checksum for files"><!--depends="l10n-pack,src,jar,zip,win,linux,mac"-->
         <mkdir dir="dist2/checksums"/>
 
         <!-- Adjust the fileset according to what is needed to be checksumed -->
         <fileset dir="dist2" id="checksum_source">
-            <include name="*.zip"/>            
+            <include name="*.zip"/>
             <include name="*.exe"/>
         </fileset>
 
@@ -471,5 +471,5 @@ Custom strings from release\win32-specific must be added manually to the languag
             <fileset dir="release" includes="OmegaT-license.txt doc-license.txt changes.txt" />
         </copy>
     </target>
-    
+
 </project>

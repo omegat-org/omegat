@@ -159,7 +159,7 @@ public class AboutDialog extends JDialog {
         getContentPane().add(buttonPanel, java.awt.BorderLayout.SOUTH);
 
         versionLabel.setIcon(new ImageIcon(OmegaTIcons.ICONS.get(1)));
-        org.openide.awt.Mnemonics.setLocalizedText(versionLabel, OStrings.getString("ABOUTDIALOG_VERSION")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(versionLabel, OStrings.getString("ABOUTDIALOG_VERSION_REVISION")); // NOI18N
         versionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         getContentPane().add(versionLabel, java.awt.BorderLayout.NORTH);
 

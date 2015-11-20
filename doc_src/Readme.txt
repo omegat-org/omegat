@@ -1,6 +1,6 @@
 ***License***
 
-All the files in this directory and below are under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+All the files in this directory and below are under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 
 ***Installation***
 

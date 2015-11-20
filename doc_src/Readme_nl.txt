@@ -1,6 +1,6 @@
 ***Licentie***
 
-Alle bestanden in deze map en daaronder zijn onderworpen aan de termen van de GNU General Public License zoals die zijn gepubliceerd door de Free Software Foundation; ofwel versie 2 van de License, of (naar uw eigen inzicht) een willekeurige latere versie.
+Alle bestanden in deze map en daaronder zijn onderworpen aan de termen van de GNU General Public License zoals die zijn gepubliceerd door de Free Software Foundation; ofwel versie 3 van de License, of (naar uw eigen inzicht) een willekeurige latere versie.
 
 ***Installeren****
 

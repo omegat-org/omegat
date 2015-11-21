@@ -110,7 +110,7 @@ public class Core {
     private static INotes notes;
     private static IComments comments;
 
-    private static Map<String, String> cmdLineParams;
+    private static Map<String, String> cmdLineParams = Collections.emptyMap();
 
     private static List<String> pluginsLoadingErrors = Collections.synchronizedList(new ArrayList<String>());
 

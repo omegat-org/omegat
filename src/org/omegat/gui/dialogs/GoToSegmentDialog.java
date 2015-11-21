@@ -57,8 +57,8 @@ public class GoToSegmentDialog extends javax.swing.JDialog {
     /**
      * Creates new form GoToSegmentDialog
      */
-    public GoToSegmentDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public GoToSegmentDialog(java.awt.Frame parent) {
+        super(parent, true);
         initComponents();
         
         segmentField.enableInputMethods(false);

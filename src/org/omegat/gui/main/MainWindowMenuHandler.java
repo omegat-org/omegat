@@ -617,7 +617,7 @@ public class MainWindowMenuHandler {
      */
     public void gotoSegmentMenuItemActionPerformed() {
         // Create a dialog for input
-        GoToSegmentDialog dialog = new GoToSegmentDialog(mainWindow, true);
+        GoToSegmentDialog dialog = new GoToSegmentDialog(mainWindow);
         dialog.setVisible(true);
 
         int jumpTo = dialog.getResult();

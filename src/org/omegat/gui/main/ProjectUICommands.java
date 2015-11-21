@@ -143,7 +143,7 @@ public class ProjectUICommands {
             protected Object doInBackground() throws Exception {
                 Core.getMainWindow().showStatusMessageRB(null);
 
-                final NewTeamProject dialog = new NewTeamProject(Core.getMainWindow().getApplicationFrame(), true);
+                final NewTeamProject dialog = new NewTeamProject(Core.getMainWindow().getApplicationFrame());
                 dialog.setVisible(true);
 
                 IMainWindow mainWindow = Core.getMainWindow();

@@ -28,10 +28,8 @@
 
 package org.omegat.gui.dialogs;
 
-import java.awt.Cursor;
 import java.awt.Frame;
 import java.io.File;
-import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -429,18 +427,12 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         
         Preferences.setPreference(Preferences.SPELLCHECKER_DICTIONARY_URL, dictionaryUrlTextField.getText());
 
-        Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = getCursor();
-        setCursor(hourglassCursor);
-
         DictionaryInstallerDialog installerDialog;
         try {
             installerDialog = new DictionaryInstallerDialog(this, dicMan);
-            setCursor(oldCursor);
             installerDialog.setVisible(true);
             updateLanguageList();
-        } catch (IOException ex) {
-            setCursor(oldCursor);
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_installButtonActionPerformed

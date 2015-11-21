@@ -28,6 +28,9 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
@@ -51,7 +54,7 @@ import org.omegat.util.gui.StaticUIUtils;
 @SuppressWarnings("serial")
 public class GoToSegmentDialog extends javax.swing.JDialog {
 
-    final private AlphabeticalMarkers alphabeticalMarkers = ((EditorController) Core.getEditor()).getAlphabeticalMarkers();
+    private AlphabeticalMarkers alphabeticalMarkers;
     private int result = -1;
     
     /**
@@ -85,7 +88,13 @@ public class GoToSegmentDialog extends javax.swing.JDialog {
         });
         getRootPane().setDefaultButton(okButton);
         DockingUI.displayCentered(this);
-        alphabeticalMarkers.showMarkers();
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                alphabeticalMarkers = ((EditorController) Core.getEditor()).getAlphabeticalMarkers();
+                alphabeticalMarkers.showMarkers();
+            }
+        });
     }
 
     private void detectDidInputLetter() {

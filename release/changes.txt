@@ -116,7 +116,7 @@ Tag nesting is now only tested for OmegaT tags.
   - No dictionaries show up in the Spellchecker Setup window 
   https://sourceforge.net/p/omegat/bugs/766/
 
-  - Fails to buid OmegaT users guide on Linux 
+  - Fails to build OmegaT users guide on Linux 
   https://sourceforge.net/p/omegat/bugs/769/
 
   - Wrong encoding of the Portugal Portuguese UI strings

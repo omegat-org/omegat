@@ -5,6 +5,7 @@
 
  Copyright (C) 2010 Alex Buloichik, Ibai Lakunza Velasco, Didier Briel
                2013 Martin Wunderlich, Didier Briel
+               2015 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -81,6 +82,11 @@ public class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
         // fixed by MyMemory; TODO: Use local DTD
         tmxResponse = tmxResponse.replace("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">", "");
         tmxResponse = tmxResponse.replace("&", "&amp;");
+        
+        // We must remove anything before the XML declaration, otherwise we get an exception when creating the
+        // DOM object. Currently, MyMemory returns \r\n<?xml
+        tmxResponse = getXMLString(tmxResponse);
+        
         
         // Build DOM object from the returned XML string
         InputSource source = new InputSource(new StringReader(tmxResponse));

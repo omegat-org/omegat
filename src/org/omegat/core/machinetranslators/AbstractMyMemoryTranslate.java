@@ -6,6 +6,7 @@
  Copyright (C) 2010 Alex Buloichik, Ibai Lakunza Velasco, Didier Briel
                2013 Martin Wunderlich
                2014 Manfred Martin
+               2015 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -52,6 +53,7 @@ import javax.xml.xpath.XPathFactory;
  * @author Didier Briel
  * @author Martin Wunderlich
  * @author Manfred Martin
+ * @author Didier Briel
  */
 public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
 	
@@ -203,5 +205,19 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
 	 * This method must be overriden in the concrete implementations to adjust the query to include or exclude MT results
 	 */
 	protected abstract String buildMyMemoryUrl(Language sLang, Language tLang, String text, String format) throws UnsupportedEncodingException;
+        
+     /**
+     * Removes any character before &lt;?xml in a string.
+     * This prevents an exception when trying to create a DOM object from that string.
+     * @param str The input string
+     * @return The string starting with &lt;?xml, if found, or the initial string
+     */
+    protected String getXMLString(String str) {
+        int XMLHeader = str.indexOf("<?xml");
+        if (XMLHeader != -1) { // XML header is not at the beginning
+            str = str.substring(XMLHeader);
+        }
+        return str;
+    }
     
 }

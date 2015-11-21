@@ -73,8 +73,8 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
     /**
      * Creates new form CustomColorSelectionDialog
      */
-    public CustomColorSelectionDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public CustomColorSelectionDialog(java.awt.Frame parent) {
+        super(parent, true);
         initComponents();
         getRootPane().setDefaultButton(okButton);
         configureColorChooser();

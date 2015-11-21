@@ -866,7 +866,7 @@ public class MainWindowMenuHandler {
      * Displays the color dialog selection. It needs an application restart after color changes.
      */
     public void optionsColorsSelectionMenuItemActionPerformed() {
-        CustomColorSelectionDialog dlg = new CustomColorSelectionDialog(Core.getMainWindow().getApplicationFrame(), true);
+        CustomColorSelectionDialog dlg = new CustomColorSelectionDialog(Core.getMainWindow().getApplicationFrame());
         dlg.setVisible(true);
     }
 

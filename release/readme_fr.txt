@@ -93,7 +93,7 @@ Le guide de l'utilisateur se trouve dans le paquet que vous avez téléchargé, 
  3. Installer OmegaT
 
 3.1 Informations générales
-Pour fonctionner, OmegaT a besoin d'un environnement d'exécution Java (JRE) de version 1.5 ou supérieure. Les versions d'OmegaT incluant le JRE (Java Runtime Environment) sont maintenant disponibles afin déviter aux utilisateurs d'avoir à le sélectionner, l'obtenir et l'installer. 
+Pour fonctionner, OmegaT a besoin d'un environnement d'exécution Java (JRE) de version 1.6 ou supérieure. Les versions d'OmegaT incluant le JRE (Java Runtime Environment) sont maintenant disponibles afin déviter aux utilisateurs d'avoir à le sélectionner, l'obtenir et l'installer. 
 
 Si vous disposez déjà de Java, l'une des façons d'installer la version actuelle d'OmegaT est d'utiliser Java Web Start. 
 Pour ce faire, téléchargez le fichier suivant et exécutez-le :

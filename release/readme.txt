@@ -102,7 +102,7 @@ the [Help] menu after starting OmegaT.
 
 3.1 General
 In order to run, OmegaT requires the Java Runtime Environment (JRE) version 
-1.5 or higher to be installed on your system. OmegaT packages which include
+1.6 or higher to be installed on your system. OmegaT packages which include
 the Java Runtime Environment are now available to save users the trouble of 
 selecting, obtaining and installing it. 
 

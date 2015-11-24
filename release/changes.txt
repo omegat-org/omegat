@@ -2,7 +2,7 @@
  OmegaT 3.5.3
 ----------------------------------------------------------------------
   23 Enhancements
-   5 Bug fixes
+   6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 3.5.3 vs 3.5.2 update 1
@@ -99,6 +99,9 @@ Tag nesting is now only tested for OmegaT tags.
 
   - MyMemory machine and human translation not working
   https://sourceforge.net/p/omegat/bugs/773/
+
+  - Fragments to be removed not colored correctly
+  https://sourceforge.net/p/omegat/bugs/549/
 
   Localisation Updates:
 

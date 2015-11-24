@@ -5,6 +5,7 @@
 
  Copyright (C) 2012 Martin Fleurke
                2013 Alex Buloichik (alex73mail@gmail.com)
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -30,6 +31,8 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.editor.Document3;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
@@ -42,6 +45,7 @@ import org.omegat.util.gui.Styles;
  * 
  * @author Martin Fleurke
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public class RemoveTagMarker extends AbstractMarker {
     HighlightPainter PAINTERrtl;
@@ -55,6 +59,12 @@ public class RemoveTagMarker extends AbstractMarker {
 
         ATTRIBUTESltrSource = Styles.createAttributeSet(null, null, null, true);
         ATTRIBUTESltrTranslation = Styles.createAttributeSet(Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor(), null, null, null);
+        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
+            @Override
+            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
+                pattern = PatternConsts.getRemovePattern();
+            }
+        });
     }
 
     @Override
@@ -69,7 +79,6 @@ public class RemoveTagMarker extends AbstractMarker {
 
     @Override
     protected void initDrawers(boolean isSource, boolean isActive) {
-        pattern = PatternConsts.getRemovePattern();
         if (((EditorController) Core.getEditor()).getOrientation() == Document3.ORIENTATION.ALL_LTR) {
             ATTRIBUTES = isSource ? ATTRIBUTESltrSource : ATTRIBUTESltrTranslation;
             PAINTER = null;

@@ -1,4 +1,4 @@
-@@TRANSLATION_NOTICE@@
+Deze vertaling is het werk van Dick Groskamp, copyright© 2015
 
 ==============================================================================
   ==============================================================================
@@ -103,7 +103,7 @@ het menu [Help] na het starten van OmegaT.
 
 3.1 Algemeen
 OmegaT vereist dat een Java Runtime Environment (JRE) versie 
-1.5 of hoger is geïnstalleerd op uw systeem om uitgevoerd te kunnen worden. OmegaT pakketten die de Java Runtime Environment bevatten
+1.6 of hoger is geïnstalleerd op uw systeem om uitgevoerd te kunnen worden. OmegaT pakketten die de Java Runtime Environment bevatten
 zijn nu beschikbaar om gebruikers de moeite van het 
 selecteren, verkrijgen en installeren te besparen. 
 
@@ -278,6 +278,7 @@ Code is bijgedragen door
   Wildrich Fourie
   Phillip Hall
   Jean-Christophe Helary
+  Chihiro Hio
   Thomas Huriaux
   Hans-Peter Jacobs
   Kyle Katarn
@@ -288,6 +289,7 @@ Code is bijgedragen door
   Fabián Mandelbaum
   Manfred Martin
   Adiel Mittmann
+  Hiroshi Miura 
   John Moran
   Maxym Mykhalchuk 
   Arno Peters
@@ -347,6 +349,7 @@ Okapi (http://okapi.sourceforge.net) (LGPL-licentie)
   groovy-all-2.2.2.jar (Apache License 2.0)
   slf4j (MIT License)
   juniversalchardet-1.0.3.jar (GPL v2)
+  DictZip van JDictd (GPL v2)
 
 ==============================================================================
  5.  Heeft u problemen met OmegaT ? Heeft u hulp nodig?

@@ -104,7 +104,7 @@
 
             <entry><para>Gebruikt om de statistieken voor overeenkomsten in het project weer te geven, selecteer <menuchoice> <guimenu><indexterm class="singular">
                     <primary>menu Extra</primary> <secondary>Statistieken voor overeenkomsten</secondary>
-                  </indexterm>Extra</guimenu> <guimenuitem>Statistieken voor overeenkomsten</guimenuitem> </menuchoice>om het te openen.</para></entry>
+                  </indexterm>Extra</guimenu> <guimenuitem>Statistieken voor overeenkomsten</guimenuitem> </menuchoice> om het te openen.</para></entry>
           </row>
         </tbody>
       </tgroup>
@@ -232,11 +232,11 @@
           <row>
             <entry><inlinemediaobject>
                 <imageobject role="html">
-                  <imagedata fileref="images/restore.gif" width="60%"/>
+                  <imagedata fileref="images/Restore.gif" width="60%"/>
                 </imageobject>
 
                 <imageobject role="fo">
-                  <imagedata fileref="images/restore.gif" width="40%"/>
+                  <imagedata fileref="images/Restore.gif" width="40%"/>
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -246,11 +246,11 @@
           <row>
             <entry><inlinemediaobject>
                 <imageobject role="html">
-                  <imagedata fileref="images/undock.gif" width="60%"/>
+                  <imagedata fileref="images/Undock.gif" width="60%"/>
                 </imageobject>
 
                 <imageobject role="fo">
-                  <imagedata fileref="images/undock.gif" width="40%"/>
+                  <imagedata fileref="images/Undock.gif" width="40%"/>
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -260,11 +260,11 @@
           <row>
             <entry><inlinemediaobject>
                 <imageobject role="html">
-                  <imagedata fileref="images/dock.gif" width="60%"/>
+                  <imagedata fileref="images/Dock.gif" width="60%"/>
                 </imageobject>
 
                 <imageobject role="fo">
-                  <imagedata fileref="images/dock.gif" width="40%"/>
+                  <imagedata fileref="images/Dock.gif" width="40%"/>
                 </imageobject>
               </inlinemediaobject></entry>
 

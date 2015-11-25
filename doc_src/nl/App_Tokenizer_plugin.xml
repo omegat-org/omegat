@@ -42,7 +42,7 @@
   <section>
     <title>Selectie talen</title>
 
-    <para>Tokenizers zijn opgenomen in OmegaT en standaard actief. OmegaT selecteert automatisch een tokenizer voor de bron- en de doeltaal, overeenkomstig de taalinstellingen van het project.  taalHet is mogelijk om een andere tokenizer (Tokenizer taal)  te selecteren of een andere versie van de tokenizer (Gedrag tokenizer) in het venster Projecteigenschappen.</para>
+    <para>Tokenizers zijn opgenomen in OmegaT en standaard actief. OmegaT selecteert automatisch een tokenizer voor de bron- en de doeltaal, overeenkomstig de taalinstellingen van het project. taalHet is mogelijk om een andere tokenizer (Tokenizer taal)  te selecteren of een andere versie van de tokenizer (Gedrag tokenizer) in het venster Projecteigenschappen.</para>
 
     <para>In het geval dat er geen tokenizer bestaat voor de huidige talen, gebruikt OmegaT in plaats daarvan Hunspell (zorg er in dat geval voor dat de relevante woordenboeken van Hunspell zijn geïnstalleerd).</para>
 

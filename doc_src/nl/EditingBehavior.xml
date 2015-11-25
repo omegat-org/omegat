@@ -132,7 +132,7 @@
         </indexterm></term>
 
       <listitem>
-        <para>Als we foutieve vertalingen willen vermijden in het geval van segmenten met verschillende mogelijke inhoud voor het doel, zal het selecteren van dit keuzevak er voor zorgen dat <emphasis role="bold"> Ga naar volgende niet-vertaalde segment</emphasis> stopt bij het volgende dergelijke segment, ongeacht of het al is vertaald of niet.</para>
+        <para>Als we foutieve vertalingen willen vermijden in het geval van segmenten met verschillende mogelijke inhoud voor het doel, zal het selecteren van dit keuzevak er voor zorgen dat <emphasis role="bold">Ga naar volgende niet-vertaalde segment</emphasis> stopt bij het volgende dergelijke segment, ongeacht of het al is vertaald of niet.</para>
       </listitem>
     </varlistentry>
   </variablelist>

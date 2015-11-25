@@ -4,13 +4,13 @@
   <title>Over <application>OmegaT</application> - introductie</title>
 
   <section id="OmegaT-Highlists">
-    <title>OmegaT pluspunten</title>
+    <title>Sterke punten OmegaT</title>
 
-    <para><application>OmegaT</application> is een vrij, multiplatform Computer Aided Translation programma met de volgende pluspunten.</para>
+    <para><application>OmegaT</application> is een vrij en open source multiplatform Computer Assisted Translation-programma, met de volgende sterke punten:</para>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Vertaalgeheugen:</emphasis><application> OmegaT</application> slaat uw vertalingen op in een vertaalgeheugen. Tegelijkertijd kan het vertaalgeheugens van eerdere vertalingen als verwijzingen gebruiken. Vertaalgeheugens kunnen zeer handig zijn bij het vertalen van veel voorkomende herhalingen of tekstsegmenten die redelijk met elkaar overeen komen. OmegaT gebruikt vertaalgeheugens om uw eerdere vertalingen op te slaan en toont u dan de meest waarschijnlijke vertalingen voor de tekst waaraan u momenteel werkt.</para>
+        <para><emphasis role="bold">Vertaalgeheugen:</emphasis><application> OmegaT</application> slaat uw vertalingen op in een bestand als vertaalgeheugen. Tegelijkertijd kan het meerdere bestanden uit eerdere vertalingen gebruiken als verwijzing. Vertaalgeheugens kunnen zeer nuttig zijn in een vertaling waar veel herhalingen of redelijk overeenkomende segmenten tekst staan. OmegaT gebruikt vertaalgeheugens om uw eerdere vertalingen op te slaan en toont u dan de meest waarschijnlijke vertalingen voor de tekst waaraan u momenteel werkt.</para>
 
         <para>Deze vertaalgeheugens kunnen zeer handig zijn als een, reeds vertaald, document moet worden bijgewerkt. Ongewijzigde zinnen worden automatisch vertaald, terwijl bijgewerkte zinnen worden getoond met de vertaling van de meest gelijkende oudere versie van dezelfde zin. Wijzigingen in het originele document worden dus gemakkelijker afgehandeld. Als u eerder gemaakte vertaalgeheugens gebruikt, bijvoorbeeld geleverd door uw vertaalbureau of uw cliënt, is OmegaT in staat om ze te gebruiken als referentie-geheugens.</para>
 

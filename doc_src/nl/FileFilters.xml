@@ -108,19 +108,13 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Codering-declaratie aan HTML- en XHTML-bestanden toevoegen of herschrijven</emphasis>: vaak moeten de doelbestanden een andere tekenset voor de codering hebben dan die in het bronbestand (of dat nu expliciet gedefinieerd is of als gevolg van). Met behulp van deze optie kan de vertaler specificeren of in de doelbestanden de declaratie voor de codering moet worden opgenomen. Als bijvoorbeeld het bestandsfilter UTF8 specificeert als het schema voor codering voor de doelbestanden, zal het selecteren van Altijd er voor zorgen dat deze informatie zal worden opgenomen in de vertaalde bestanden.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
         <para><emphasis>Vertaal de volgende attributen</emphasis>: De geselecteerde attributen zullen als segmenten in het venster Bewerken verschijnen.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Start een nieuwe alinea bij: De &lt;br&gt;</emphasis> HTML-tag zal een alinea voor segmentatiedoeleinden maken.</para>
+        <para><emphasis>Start een nieuwe alinea bij</emphasis>: De &lt;br&gt; HTML-tag zal een alinea voor segmentatiedoeleinden maken.</para>
       </listitem>
     </itemizedlist>
 
@@ -192,7 +186,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Codering-declaratie aan HTML- en XHTML-bestanden toevoegen of herschrijven</emphasis>: Altijd (standaard), Alleen als (X)HTML-bestand een kop heeft, Alleen als (X)HTML-bestand een codering-declaratie heeft, Nooit</para>
+        <para><emphasis>Codering-declaratie aan HTML- en XHTML-bestanden toevoegen of herschrijven</emphasis>: vaak moeten de doelbestanden een andere tekenset voor de codering hebben dan die in het bronbestand (of dat nu expliciet gedefinieerd is of als gevolg van). Met behulp van deze optie kan de vertaler specificeren of in de doelbestanden de declaratie voor de codering moet worden opgenomen. Als bijvoorbeeld het bestandsfilter UTF8 specificeert als het schema voor codering voor de doelbestanden, zal het selecteren van Altijd er voor zorgen dat deze informatie zal worden opgenomen in de vertaalde bestanden.</para>
       </listitem>
     </itemizedlist>
 
@@ -210,7 +204,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Tekst die overeenkomt met reguliere uitdrukking overslaan</emphasis>: De tekst die overeenkomt met de reguliere uitdrukking zal worden overgeslagen.</para>
+        <para><emphasis>Tekst die overeenkomt met reguliere uitdrukking overslaan</emphasis>: De tekst die overeenkomt met de reguliere uitdrukking wordt overgeslagen. Dit wordt in de tagvalidatie in rood weergegeven. Tekst in het bronsegment die overeenkomt wordt cursief weergegeven.</para>
       </listitem>
     </itemizedlist>
 
@@ -223,16 +217,16 @@
     <itemizedlist>
       <listitem>
         <para><emphasis>Vertaal NIET de inhoud van tags met de volgende paren van sleutels en waarden voor attributen (door komma's gescheiden):</emphasis>: een overeenkomst in de lijst met sleutel-waardenparen zorgt er voor dat de inhoud van tags zal worden genegeerd</para>
+
+        <para>Het is soms handig om enkele tags niet te vertalen te maken, gebaseerd op de waarde van attributen. Bijvoorbeeld: <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal> U kunt sleutel-waardenparen definiëren voor tags die niet vertaald moeten worden. Voor het voorbeeld hierboven zou het veld bevatten: <literal>class=hide, translate=no </literal></para>
       </listitem>
-    </itemizedlist>
 
-    <para><emphasis role="bold">Tekstbestanden</emphasis></para>
-
-    <itemizedlist>
       <listitem>
-        <para><emphasis>Alineasegmentatie op regeleinden, lege regels of nooit</emphasis>:</para>
+        <para><emphasis>Witruimte in vertaalde documenten comprimeren</emphasis>: meerdere doorlopende witruimten zullen worden geconverteerd naar één enkele witruimte in vertaalde documenten.</para>
+      </listitem>
 
-        <para>als regels voor zinsegmentatie actief zijn, zal de tekst verder worden gesegmenteerd overeenkomstig de hier geselecteerde optie.</para>
+      <listitem>
+        <para><emphasis>HTML-opmerkingen in vertaalde document verwijderen</emphasis>: alle delen met opmerkingen (tussen &lt;!-- en --&gt;) zullen niet worden gekopieerd naar het vertaalde document.</para>
       </listitem>
     </itemizedlist>
 

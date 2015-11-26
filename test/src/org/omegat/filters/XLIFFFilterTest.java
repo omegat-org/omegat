@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008-2013 Alex Buloichik
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,6 +27,7 @@
 package org.omegat.filters;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.TreeMap;
 
 import org.junit.Test;
@@ -35,13 +37,16 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.statistics.StatCount;
 import org.omegat.core.statistics.StatisticsSettings;
 import org.omegat.filters2.ITranslateCallback;
+import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.xml.xliff.XLIFFDialect;
 import org.omegat.filters3.xml.xliff.XLIFFFilter;
 import org.omegat.filters3.xml.xliff.XLIFFOptions;
 import org.omegat.util.FileUtil;
+import org.omegat.util.LFileCopy;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.xml.sax.SAXException;
 
 public class XLIFFFilterTest extends TestFilterBase {
     XLIFFFilter filter;
@@ -188,5 +193,69 @@ public class XLIFFFilterTest extends TestFilterBase {
         IProject.FileInfo fi = loadSourceFiles(filter, f);
         StatCount counts = new StatCount(fi.entries.get(0));
         assertEquals(3, counts.words);
+    }
+
+    /*
+     * Test that an XLIFF file containing an invalid character (in this case
+     * U+0008) will cause the parser to die with a SAXParseException. This isn't
+     * actually important in and of itself; we wouldn't mind if the parser was
+     * lenient because we filter bad XML characters out on our own later. This
+     * is just necessary to set a baseline for testInvalidXMLOnWeirdPath().
+     */
+    @Test
+    public void testInvalidXML() throws Exception {
+        String f = "test/data/filters/xliff/file-XLIFFFilter-invalid-content.xlf";
+
+        try {
+            loadSourceFiles(filter, f);
+            fail("Should have died due to invalid XML character");
+        } catch (TranslationException ex) {
+            assertTrue(wasCausedBy(ex, SAXException.class));
+        }
+    }
+
+    /*
+     * Issue reported by Jean-Christophe Helary: When a file with invalid
+     * content is on a path that contains both spaces and "non-path" characters,
+     * a URISyntaxException was reported about the path instead of the
+     * SAXParseException about the file content.
+     * 
+     * This may only fail with a particular underlying parser implementation, as
+     * it depends on a particular codepath in
+     * com.sun.org.apache.xerces.internal.impl.XMLEntityManager and
+     * com.sun.org.apache.xerces.internal.util.URI where it tries to be lenient
+     * in its acceptance of not-quite-valid URIs as system IDs.
+     */
+    @Test
+    public void testInvalidXMLOnWeirdPath() throws Exception {
+        String f = "test/data/filters/xliff/file-XLIFFFilter-invalid-content.xlf";
+
+        File tmpDir = FileUtil.createTempDir();
+        assertTrue(tmpDir.isDirectory());
+        File weirdDir = new File(tmpDir, "a b\u2603"); // U+2603 SNOWMAN
+        File testFile = new File(weirdDir, "file-XLIFFFilter-invalid-content.xlf");
+        LFileCopy.copy(new File(f), testFile);
+        assertTrue(testFile.isFile());
+
+        try {
+            loadSourceFiles(filter, testFile.getAbsolutePath());
+            fail("Should have died due to invalid XML character");
+        } catch (TranslationException ex) {
+            assertTrue(wasCausedBy(ex, SAXException.class));
+            assertFalse(wasCausedBy(ex, URISyntaxException.class));
+        }
+
+        assertTrue(FileUtil.deleteTree(tmpDir));
+    }
+
+    private static boolean wasCausedBy(Throwable ex, Class<?> cls) {
+        Throwable cause = ex.getCause();
+        if (cause == null) {
+            return false;
+        } else if (cause.getClass().equals(cls)) {
+            return true;
+        } else {
+            return wasCausedBy(cause, cls);
+        }
     }
 }

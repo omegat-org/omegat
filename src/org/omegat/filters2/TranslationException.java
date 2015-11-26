@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -32,6 +33,7 @@ package org.omegat.filters2;
  * Note that a filter may also throw IOException in case of any I/O errors.
  * 
  * @author Maxym Mykhalchuk
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class TranslationException extends Exception {
@@ -57,5 +59,16 @@ public class TranslationException extends Exception {
      */
     public TranslationException(String msg, Throwable cause) {
         super(msg, cause);
+    }
+
+    /**
+     * Constructs an instance of <code>TranslationException</code> with the
+     * specified cause.
+     * 
+     * @param cause
+     *            cause the cause
+     */
+    public TranslationException(Throwable cause) {
+        super(cause);
     }
 }

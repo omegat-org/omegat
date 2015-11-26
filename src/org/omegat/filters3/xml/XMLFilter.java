@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2008 Didier Briel
                2013 Didier Briel, Alex Buloichik
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -46,7 +47,6 @@ import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.Language;
-import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
 import org.xml.sax.Attributes;
@@ -60,6 +60,7 @@ import org.xml.sax.SAXException;
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Alex Buloichik
+ * @author Aaron Madlon-Kay
  */
 public abstract class XMLFilter extends AbstractFilter implements Translator {
     /** Factory for SAX parsers. */
@@ -156,8 +157,9 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     @Override
     public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
             TranslationException {
+        BufferedReader inReader = null;
         try {
-            BufferedReader inReader = createReader(inFile, fc.getInEncoding());
+            inReader = createReader(inFile, fc.getInEncoding());
             inEncodingLastParsedFile = this.encoding;
             targetLanguage = fc.getTargetLang();
             InputSource source = new InputSource(inReader);
@@ -167,12 +169,14 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
             parser.setProperty("http://xml.org/sax/properties/lexical-handler", handler);
             parser.setProperty("http://xml.org/sax/properties/declaration-handler", handler);
             parser.parse(source, handler);
-            inReader.close();
         } catch (ParserConfigurationException e) {
-            throw new TranslationException(e.getLocalizedMessage());
+            throw new TranslationException(e);
         } catch (SAXException e) {
-            Log.log(e);
-            throw new TranslationException(e.getLocalizedMessage());
+            throw new TranslationException(e);
+        } finally {
+            if (inReader != null) {
+                inReader.close();
+            }
         }
     }
     @Override

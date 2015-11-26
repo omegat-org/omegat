@@ -161,7 +161,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
             inEncodingLastParsedFile = this.encoding;
             targetLanguage = fc.getTargetLang();
             InputSource source = new InputSource(inReader);
-            source.setSystemId("file:///" + inFile.getCanonicalPath().replace(File.separatorChar, '/'));
+            source.setSystemId(inFile.toURI().toString());
             SAXParser parser = parserFactory.newSAXParser();
             Handler handler = new Handler(this, dialect, inFile, outFile, fc.getOutEncoding());
             parser.setProperty("http://xml.org/sax/properties/lexical-handler", handler);

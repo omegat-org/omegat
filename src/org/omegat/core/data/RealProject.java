@@ -355,6 +355,9 @@ public class RealProject implements IProject {
         } catch (Exception e) {
             Log.logErrorRB(e, "TF_LOAD_ERROR");
             Core.getMainWindow().displayErrorRB(e, "TF_LOAD_ERROR");
+            if (!loaded) {
+                unlockProject();
+            }
         }
         // Fix for bug 1571944 @author Henry Pijffers
         // (henry.pijffers@saxnot.com)

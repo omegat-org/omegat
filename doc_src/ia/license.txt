@@ -471,8 +471,7 @@ sale, or importing the Program or any portion of it.
   11. Patents.
 
   A "contributor" is a copyright holder who authorizes use under this
-License of the Program or a work on which the Program is based.  The
-work thus licensed is called the contributor's "contributor version".
+License of the Program or a work on which the Program is based.  work thus licensed is called the contributor's "contributor version".
 
   A contributor's "essential patent claims" are all patent claims
 owned or controlled by the contributor, whether already acquired or
@@ -528,7 +527,7 @@ to the third party based on the extent of your activity of conveying
 the work, and under which the third party grants, to any of the
 parties who would receive the covered work from you, a discriminatory
 patent license (a) in connection with copies of the covered work
-conveyed by you (or copies made from those copies), or (b) primarily
+conveyed by you (or copies made from those copies), or (b) fontely
 for and in connection with specific products or compilations that
 contain the covered work, unless you entered into that arrangement,
 or that patent license was granted, prior to 28 March 2007.

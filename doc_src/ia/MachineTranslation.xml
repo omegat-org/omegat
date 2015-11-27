@@ -10,9 +10,9 @@
         <primary>Traduction automatic</primary> <secondary>Introduction</secondary>
       </indexterm></title>
 
-    <para>Al contrario del memorias de traduction generate per le usator (como in le caso de <application>OmegaT</application>) le applicationes de Traduction Automatic usa instrumentos linguistic basate sur regulas pro crear un traduction del segmento fonte sin le necessitate de un memoria de traduction. Pro construer un modello de traduction son usate technicas statistic de saper, basate sur textos de origine e final. Le servicios de Traduction Automatic ha complite resultatos bon e constantemente melior in le evalutationes del recerca.</para>
+    <para>Al contrario del memorias de traduction generate per le usator (como in le caso de <application>OmegaT</application>) le applicationes de Traduction Automatic usa instrumentos linguistic basate sur regulas pro crear un traduction del segmento fonte sin le necessitate de un memoria de traduction. Pro construer un modello de traduction es usate technicas statistic de saper, basate sur textos de origine e final. Le servicios de Traduction Automatic ha complite resultatos bon e constantemente melior in le evalutationes del recerca.</para>
 
-    <para>Pro activar alicun del servicios de Traduction Automatic, va a <guimenuitem>Optiones &gt; Traduction Automatic...</guimenuitem> e activa le servicio desiderate. Nota que illos es omne basate sur le TTT: tu debera esser on-line si tu vole usar los.</para>
+    <para>Pro activar alicun del servicios de Traduction Automatic, va a <guimenuitem>Optiones &gt; Traduction Automatic...</guimenuitem> e activa le servicio desiderate. Nota que illos es omne basate sur le Web: tu debera esser on-line si tu vole usar los.</para>
   </section>
 
   <section id="introduction">
@@ -20,17 +20,17 @@
         <primary>Traductor Automatic</primary> <secondary>Google Translate</secondary>
       </indexterm></title>
 
-    <para>Google Translate es un servicio pagabile offerite ex Google, pro render phrases, sitos TTT e textos complete inter un numero de linguas semper crescente. Al tempore de scriptura le lista include plus que 50 linguas, ab le albanese al judeogermano, includite naturalmente omne le linguas major. le version actual del servicio  es basate super le uso, con le precio de 20 USD per million de characteres al tempore del scriptura.<emphasis role="bold"/></para>
+    <para>Google Translate es un servicio pagabile offerite per Google, pro render phrases, sitos Web e textos complete, in un numero de linguas semper crescente. Al tempore del scriptura le lista include plus de 50 linguas, ab le albanese al judeogermano, includite naturalmente omne le linguas major. le version actual del servicio  es basate sur le uso, con le precio de 20 USD per million de characteres al tempore del scriptura.<emphasis role="bold"/></para>
 
-    <para><emphasis role="bold">Importante: </emphasis>Google Translate API v2 necessita information pro le factura pro omne le contos ante que tu pote initiar a usar le servicio (vide <ulink url="https://developers.google.com/translate/v2/pricing?hl=en-US">Pricing and Terms of Service</ulink> pro magis). Pro identificar te quam un usator valide del servicios Google, tu usa tu clave unic private expedite a te per Google, quando tu ha registrate te pro le servicio. Vide capitulo <link linkend="chapter.installing.and.running">Installar e executar</link>, section Argumentos del commando de Lanceamento, pro detalios sur como adder iste clave clave al ambiente OmegaT.</para>
+    <para><emphasis role="bold">Importante: </emphasis>Google Translate API v2 necessita le informationes pro le factura pro omne le contos, ante que tu pote initiar a usar le servicio (vide <ulink url="https://developers.google.com/translate/v2/pricing?hl=en-US">Pricing and Terms of Service</ulink> pro magis). Pro identificar te ipse qual usator valide del servicios Google, usa tu clave unic private expedite te per Google, quando tu ha registrate te al servicio. Vide le capitulo <link linkend="chapter.installing.and.running">Installar e facer fluer</link>, section Argumentos del commando de lanceamento, pro le detalios re como adder iste clave al ambiente de OmegaT.</para>
 
-    <para>Le qualitate del traduction de Google Translate depende sur un latere sur le reservoir de textos del lingua de destination e le disponibilitate de lor versiones bilingue, del altere parte sur le qualitate del modellos construite. Il es assatis certe que dum le qualitate sia insufficiente in alicun casos, unes illo devenira melior con le tempore e non pejor.</para>
+    <para>Le qualitate del traduction de Google Translate depende per un latere del reservoir de textos del lingua de destination e del disponibilitate de lor versiones bilingue, per altere parte del qualitate del modellos construite. Il es assatis certe que dum le qualitate sia insufficiente in alicun casos, illos devenira melior con le tempore e non pejor.</para>
   </section>
 
   <section>
     <title>Usatores de <application>OmegaT</application> e Google Translate</title>
 
-    <para>Le usator de <application>OmegaT</application> non es coercite a usar Google Translate. Si usate, ni le decision del usator a acceptar le traduction ni le traduction final son utilisabile per Google. Le fenestra sequente monstra un exemplo de a) le fonte anglese b) le traduction espaniol e c) le traduction sloven de Google Translate.</para>
+    <para>Le usator de <application>OmegaT</application> non es coercite a usar Google Translate. Si usate, ni le decision del usator a acceptar le traduction ni le traduction final es utilisabile per Google. Le fenestra sequente monstra un exemplo de a) le fonte anglese b) le traduction espaniol e c) le traduction sloven de Google Translate.</para>
 
     <figure id="moby.dick">
       <title>Google Translate - exemplo</title>
@@ -46,7 +46,7 @@
       </mediaobject>
     </figure>
 
-    <para>Le traduction espaniol es melior que illa sloven. Nota <emphasis>interesar</emphasis> e<emphasis> navegar</emphasis> in espaniol, son rendite correctemente como verbos interest e sail respectivemente. In le  version sloven ambe le parolas esseva rendite qua nomines. Il es in veritate assatis probabile que le traduction espaniol es basate al minus partialmente sur le traduction real del libro.</para>
+    <para>Le traduction espaniol es melior que illa sloven. Nota <emphasis>interesar</emphasis> e<emphasis> navegar</emphasis> in espaniol, es rendite correctemente como verbos interest e sail respectivemente. In le  version sloven ambe le parolas esseva rendite qual nomines. Il es in veritate assatis probabile que le traduction espaniol es basate al minus partialmente sur le traduction real del libro.</para>
 
     <para>Un vice que tu ha activate le servicio, un suggestion pro le traduction apparera in le quadro del Traduction Automatic cata vice un nove segmento fonte es aperte. Si tu trova acceptabile le suggestion, pulsa <keycombo> <keycap><indexterm class="singular">
             <primary>Vias breve</primary> <secondary>Traduction Automatic - Ctrl+M</secondary>
@@ -62,7 +62,7 @@
         <primary>Traduction Automatic</primary> <secondary>Belazar</secondary>
       </indexterm></title>
 
-    <para><ulink url="http://belazar.info/">Belazar</ulink> es un application pro le traduction automatic pro le par del lingua russo-bielorusso.</para>
+    <para><ulink url="http://belazar.info/">Belazar</ulink> es un application pro le traduction automatic pro le copula de lingua russo-bielorusso.</para>
   </section>
 
   <section>
@@ -70,33 +70,75 @@
         <primary>Traduction Automatic</primary> <secondary>Apertium</secondary>
       </indexterm></title>
 
-    <para><ulink url="http://www.apertium.org/">Apertium</ulink> es un platteforma de traductor automatic gratuite, open source, finalisate initialmente a pares de linguas relative, como CA, ES, GA, PT, OC e FR ma in le ultime tempore expandite pro tractar con plus pares de linguas divergente (assi como anglese-catalano). Controla le sito TTT pro le ultime lista del pares de linguas implementate.</para>
+    <para><ulink url="http://www.apertium.org/">Apertium</ulink> es un platteforma de traductor automatic gratuite, open source, proponite initialmente a pares de linguas relative, como CA, ES, GA, PT, OC e FR, ma in le ultime tempore expandite a tractar con plus copulas de linguas divergente (assi como anglese-catalano). Controla le sito Web pro le ultime lista del copulas de linguas implementate.</para>
 
     <para>Le platteforma provide</para>
 
     <itemizedlist>
       <listitem>
-        <para>un ingenio pro le traduction automatic, independente ab le linguas</para>
+        <para>un ingenio pro le traduction automatic, independente del linguas</para>
       </listitem>
 
       <listitem>
-        <para>applicationes pro administrar le datos linguistic necessari pro construer un systema de traductor automatic pro un date par de lingua e</para>
+        <para>applicationes pro gerer le datos linguistic necessari a producer un systema de traduction automatic pro un date copula de linguas</para>
       </listitem>
-    </itemizedlist>
 
-    <itemizedlist>
       <listitem>
         <para>datos linguistic pro un crescente numero de pares de lingua</para>
       </listitem>
     </itemizedlist>
 
-    <para>Apertium usa un machina automatic a traduction superficial le qual processa le texto fonte in stages, como in un linea de montage: de-formattation, analyse morphologic, disambiguation del parte del discurso, traduction structural superficial, traduction lexical, generation morphologic, e re-formattation.</para>
+    <para>Apertium usa un traduction automatic superficial le qual processa le texto fonte in plure phases, como in un linea de montage: de-formattation, analyse morphologic, disambiguation del parte del discurso, traduction structural superficial, traduction lexical, generation morphologic, e re-formattation.</para>
 
-    <para>Il es possibile usar Apertium pro construer systemas de traductor automatic pro plure pares de linguas; pro le qual fin, Apertium usa simple formatos standard basate sur XML pro codificar le datos linguistic necessitate (o per mano o per convertimento de datos existente), que son compilate usante le applicationes fornite in le formatos de alte velocitate usate per le machina.</para>
+    <para>Il es possibile usar Apertium pro construer systemas de traductor automatic pro plure copulas de linguas; pro le qual fin, Apertium usa simple formatos standard basate sur XML pro codificar le datos linguistic necessitate (o per mano o per convertimento de datos existente), que son compilate, usante le applicationes fornite, in le formatos de alte velocitate usate per le machina.</para>
+  </section>
+
+  <section>
+    <title>Traductor Microsoft<indexterm class="singular">
+        <primary>Traduction Automatic</primary> <secondary>Microsoft Translator</secondary>
+      </indexterm></title>
+
+    <para>Pro procurar se le credentiales pro MS Translator, sequer iste grados:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>Connecte te in Microsoft Azure Marketplace: <ulink url="http://datamarket.azure.com/">http://datamarket.azure.com/</ulink></para>
+
+        <para>In prime loco tu habera necessitate de registrar un conto Azure Marketplace, si tu non ha jam uno.&lt;br4/&gt;</para>
+      </listitem>
+
+      <listitem>
+        <para>Cliccar sur le option My Account al summitate del pagina.</para>
+      </listitem>
+
+      <listitem>
+        <para>Presso le base tu videra le entratas e le valores pro le:<itemizedlist>
+            <listitem>
+              <para>Clave del conto fonte (corresponde al parametro de linea de commando <code>microsoft.api.client_id</code> )</para>
+            </listitem>
+
+            <listitem>
+              <para>ID personal (corresponde al parametro de linea de commando <code>microsoft.api.client_id</code>)</para>
+            </listitem>
+          </itemizedlist></para>
+      </listitem>
+    </orderedlist>
+
+    <para>Pro habilitar MS Translator in OmegaT modificar su lanceator o vider le capitulo  <link linkend="chapter.installing.and.running">Installar e Facer Fluer</link> pro apprender a lancear OmegaT per le linea de commando</para>
+  </section>
+
+  <section>
+    <title>Yandex Translate<indexterm class="singular">
+        <primary>Traduction Automatic</primary> <secondary>Yandex Translate</secondary>
+      </indexterm></title>
+
+    <para>Al fin que tu usa Yandex Translate in OmegaT, tu necessita <ulink url="http://api.yandex.com/key/form.xml?service=trnsl">obtener un clave API ab Yandex</ulink>.</para>
+
+    <para>Tu debe passar al lanceamento a OmegaT le clave API obtenite, al lanceamento con le parametro de linea de commando <code>yandex.api.key</code>. Modificar le lanceator de OmegaT o vider le capitulo <link linkend="chapter.installing.and.running">Installar e Facer Fluer</link> pro apprender como lancear OmegaT per le linea de commando.</para>
   </section>
 
   <section id="Google.Translate.troubleshooting">
-    <title>Traduction Automatic - cerca del defectos<indexterm class="singular">
+    <title>Traduction Automatic - chassa del defectos<indexterm class="singular">
         <primary>Traduction Automatic</primary> <secondary>Chassa al defecto</secondary>
       </indexterm></title>
 
@@ -126,7 +168,7 @@
       </listitem>
 
       <listitem>
-        <para>Google Translate V2 reporta &quot;Bad request&quot; - controla le linguas original e final pro tu projecto. Haver nulle linguas definite evoca iste genere de responsa.</para>
+        <para>Google Translate V2 reporta &quot;Bad request&quot; - controla le linguas fonte e de destination pro tu projecto. Haver nulle linguas definite evoca iste genere de responsa.</para>
       </listitem>
     </itemizedlist>
   </section>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.searchandreplace">
+  <title>Cercar e replaciar<indexterm class="singular">
+      <primary>Cercar</primary>
+    </indexterm></title>
+
+  <section id="section.searchreplace.window">
+    <title>Fenestra de recerca<indexterm class="singular">
+        <primary>Vias breve</primary> <secondary>Cercar e reimplaciar - Ctrl+K</secondary>
+      </indexterm></title>
+
+    <para>Aperi le Fenestra de recerca e replacia con <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo> e inscribe le parola o phrase que tu desidera pro recercar in le cassa  <emphasis>pro le Recerca</emphasis>.</para>
+
+    <para>Clicca alora sur le button <emphasis>Cercar</emphasis> pro monstrar omne le occurrentias correspondente.</para>
+
+    <para>Insere le nove parola o phrase (le expressiones regular non es supportate) in le cassa <emphasis>Reimplacia con</emphasis>, pois clicca un del optiones sequente:<itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Reimplaciar toto:</emphasis> opera le replaciamento de tote le occurrentias (post los haber displicate un fenestra de confirmation ubi es monstrate le numero de occurrentias).</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Reimplaciar:</emphasis> opera un replaciamento &quot;uno a uno&quot;, per le buttones al <emphasis role="bold">testa del quadro Modificar</emphasis>. Clicca <emphasis>Replacia le successive</emphasis> o <emphasis>Salta</emphasis>, pois fini le session de replaciamento con<emphasis>Fini</emphasis>.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Clauder:</emphasis> claude le fenestra sin cambios.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <section>
+      <title>Optiones de recerca</title>
+
+      <para>Le optiones de recerca es simile al illos monstrate in le <link linkend="section.search.window">Fenestra de recerca</link>.</para>
+
+      <para>Excepte uno: controlar <emphasis role="bold">Non rendite</emphasis> pro facer Cercar e reimplaciar alsi sur le segmentos que non ha essite jam rendite.</para>
+
+      <para>Pro render lo possibile (ben que Cerca e reimplacia opera sol in le memoria), OmegaT copiara le segmento fonte al destination ante que occurre le operation reimplaciar. Si le segmento de destination non ha essite reimplaciate, le destination essera “vacuate”, id es, illo restara non rendite.</para>
+    </section>
+  </section>
+</chapter>

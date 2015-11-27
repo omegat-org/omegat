@@ -8,11 +8,11 @@
   <para/>
 
   <section>
-    <title>Quomodo discargar e installar le dictionarios<indexterm class="singular">
+    <title>Como discargar e installar le dictionarios<indexterm class="singular">
         <primary>Dictionarios</primary> <secondary>Discargamento e installation</secondary>
       </indexterm></title>
 
-    <para>Le dictionarios in <application>OmegaT</application> es basate super le formato StarDict o sur le Lingvo DSL. Pro installar le files necessari pro le formato StarDict, procede como seque:</para>
+    <para>Le dictionarios in <application>OmegaT</application> es basate sur le formato StarDict o sur le Lingvo DSL. Pro installar le files necessari in le formato StarDict, procede como seque:</para>
 
     <itemizedlist>
       <listitem>
@@ -66,7 +66,7 @@
       </listitem>
     </itemizedlist>
 
-    <para>Alicun del dictionarios non ha series attaccate - id es lor uso es &quot;gratuite&quot;, e altere, como le selection supra, es sub Le licentia GPL. Le exemplo sequente monstra le dictionario  Merriam Webster 10th  &quot;in action&quot;:</para>
+    <para>Alicun del dictionarios non ha filas attaccate - id es lor uso es &quot;gratuite&quot;, e altere, como le selection supra, es sub Le licentia GPL. Le exemplo sequente monstra le dictionario  Merriam Webster 10th  &quot;in action&quot;:</para>
 
     <figure id="Dict.Merriam.Webster">
       <title><indexterm class="singular">
@@ -87,13 +87,13 @@
 
   <section>
     <title><indexterm class="singular">
-        <primary>Dictionarios</primary> <secondary>Problemas con</secondary>
+        <primary>Dictionarios</primary> <secondary>Problemas con le</secondary>
       </indexterm>Problemas con le dictionarios</title>
 
     <itemizedlist>
       <listitem>
-        <para>Controla qual files dict ha in tu plica correcte (o in un sub plicas sub illo). Controla in <menuchoice> <shortcut> <keycombo> <keycap><indexterm class="singular">
-                    <primary>Vias breve</primary> <secondary>Proprietates del projecto - Ctrl+E</secondary>
+        <para>Controla qual files dict ha in tu plica correcte (o in un sub-plica sub illo). Controla in <menuchoice> <shortcut> <keycombo> <keycap><indexterm class="singular">
+                    <primary>Vias breve</primary> <secondary>Proprietates de projecto - Ctrl+E</secondary>
                   </indexterm>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Projecto</guimenu> <guimenuitem>Proprietates</guimenuitem> </menuchoice>.</para>
       </listitem>
     </itemizedlist>

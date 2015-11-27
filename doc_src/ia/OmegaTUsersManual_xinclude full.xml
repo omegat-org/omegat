@@ -2,12 +2,12 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <book lang="en">
   <bookinfo>
-    <title>OmegaT - Guida del usator</title>
+    <title>OmegaT 3.1 - Guida del usator </title>
 
     <authorinitials>per</authorinitials>
 
     <author>
-      <firstname>Vito Smolej (rendite in Interlingua per Carmelo Serraino in octobre 2014)</firstname>
+      <firstname>Vito Smolej (rendite in Interlingua per Carmelo Serraino desde 2012 a decembre 2015)</firstname>
     </author>
 
     <pubdate/>
@@ -47,11 +47,15 @@
 
   <xi:include href="Searches.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
+  <xi:include href="SearchAndReplace.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
   <xi:include href="Regexp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="Dictionaries.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="Glossaries.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="TaaS.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="MachineTranslation.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 

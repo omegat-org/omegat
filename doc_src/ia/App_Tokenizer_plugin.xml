@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.TokenizerPlugin.inOmegaT">
-  <title>Plugin Tokenizer&amp;<indexterm class="singular">
-      <primary>Plugins</primary>
-
-      <secondary>Tokenizer</secondary>
+<appendix id="appendix.Tokenizers.inOmegaT">
+  <title>Tokenizers<indexterm class="singular">
+      <primary>Tokenizers</primary>
     </indexterm></title>
 
   <section>
@@ -16,9 +14,9 @@
         <primary>Cercator de stirpe</primary> <see>Tokenizer</see>
       </indexterm></title>
 
-    <para>Le cercatores del stirpe meliora le qualitate de concordantias con le recognition del parolas declinate in le datos del memoria primari e in le traduction. Illos meliora alsi la concordantia del glossario.</para>
+    <para>Le cercatores del stirpe meliora le qualitate de concordantias con le recognition del parolas declinate in le datos del memoria fonte e in le traduction. Illos augmenta alsi la concordantias del glossario.</para>
 
-    <para>Un cercator del stirpe pro le anglese deberea identificar, exempli gratia, le linea de character &quot;cats&quot; (e possibilemente &quot;catlike&quot;, &quot;catty&quot; etc.) como basate sur le mesme radice &quot;cat&quot;, e &quot;stemmer&quot;, &quot;stemming&quot;, &quot;stemmed&quot; como basate sur &quot;stem&quot;. Un algorithmo de cerca del stirpe reduce le parolas &quot;fishing&quot;, &quot;fished&quot;, &quot;fish&quot;, e &quot;fisher&quot; al radice, &quot;fish&quot;. Isto es in modo special utile in caso de linguas que usa formas con prefixo e suffixo pro le parolas stirpe. Faciente se prestar un exemplo ex le sloveno, ci &quot;bon&quot; in omne possibile formas grammaticamente correcte:</para>
+    <para>Un cercator del stirpe pro le anglese deberea identificar, per exemplo, le linea  &quot;cats&quot; (e possibilemente &quot;catlike&quot;, &quot;catty&quot; etc.) como basate sur le mesme radice &quot;cat&quot;, e &quot;stemmer&quot;, &quot;stemming&quot;, &quot;stemmed&quot; como basate sur &quot;stem&quot;. Un algorithmo de cerca del stirpe reduce le parolas &quot;fishing&quot;, &quot;fished&quot;, &quot;fish&quot;, e &quot;fisher&quot; al radice, &quot;fish&quot;. Isto es in modo special utile in caso de linguas que usa formas con prefixo e suffixo pro le parolas stirpe. Faciente se prestar un exemplo ex le sloveno, ci &quot;bon&quot; in omne possibile formas grammaticamente correcte:</para>
 
     <itemizedlist>
       <listitem>
@@ -28,7 +26,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>lepši, lepša, lepše . - comparative, nominative, masculin, feminin, neutral, resp. Forma plural del adjective</para>
+        <para>lepši, lepša, lepše . - comparative, nominative, masculin, feminin, neutral, resp. Forma plural del adjectivo</para>
       </listitem>
     </itemizedlist>
 
@@ -40,14 +38,16 @@
   </section>
 
   <section>
-    <title>Installation e uso</title>
+    <title>Selection del linguas</title>
 
-	<para>Le tokenizers son includite in OmegaT. OmegaT selige automaticamente un tokenizer pro le lingua fonte e uno pro le lingua de destination secundo le preparationes del lingua del projecto. Il es possibile seliger un altere tokenizer o un version differente del tokenizer del fenestra Proprietates del Projecto.</para>
+    <para>Le Tokenizers es ordinarimente includite in OmegaT e active. OmegaT selige automaticamente un tokenizer pro le lingua fonte e uno pro le lingua de destination secundo le configurationes del lingua del projecto. Il es possibile seliger un altere tokenizer (Tokenizer del lingua) o un version differente del tokenizer (Comportamento del Tokenizer) per le fenestra Proprietates de projecto.</para>
 
-	<warning>
-		<title>Incompatibilitates</title>
-		<para>OmegaT non lanceara se si son trovate tokenizers in le plica /plugin. Leva omne le tokenizers ex le plica  /plugin ante que tu lancea OmegaT.</para>
-	</warning>
-	
+    <para>In le caso que nulle tokenizer existe pro le lingua currente, OmegaT usa Hunspell in vice (in iste caso, face te secur que es installate le dictionarios Hunspell pertinente).</para>
+
+    <warning>
+      <title>Incompatibilitates</title>
+
+      <para>OmegaT non initiara se si es trovate tokenizers in le plica /plugin. Leva omne le tokenizers ex le plica  /plugin ante que tu lancea OmegaT.</para>
+    </warning>
   </section>
 </appendix>

@@ -12,17 +12,17 @@
   </indexterm>
   </title>
 
-  <para>Per favor controla le<ulink url="http://www.sil.org/ISO639-3/codes.asp"> Tabellas del codices ISO 639</ulink> pro informationes additional e recente, re le codices del lingua.</para>
+  <para>Per favor controla le<ulink url="http://www.sil.org/ISO639-3/codes.asp"> Tabellas del codices ISO 639</ulink> pro informationes additional e recente, re le codices de lingua.</para>
 
   <table id="table.language.code.list">
-    <title>Lista del codices del linguas ISO 639-1/639-2</title>
+    <title>Lista del codices de lingua ISO 639-639/1-2</title>
     <tgroup cols="3" align="left" colsep="1" rowsep="1">
       <colspec align="left" colnum="1"/>
       <colspec align="left" colnum="2"/>
       <colspec align="left" colnum="3"/>
       <thead>
         <row>
-          <entry align="left">Nomine del lingua</entry>
+          <entry align="left">Nomine del lingua </entry>
           <entry align="left">ISO 639-1</entry>
           <entry align="left">ISO 639-2</entry>
 	</row>
@@ -54,7 +54,7 @@
 	  <entry>sqi</entry>
 	</row>
         <row>
-	  <entry>Amharic</entry>
+	  <entry>Amharico</entry>
 	  <entry>am</entry>
 	  <entry>amh</entry>
 	</row>
@@ -79,12 +79,12 @@
 	  <entry>asm</entry>
 	</row>
         <row>
-	  <entry>Avaric</entry>
+	  <entry>Avarico</entry>
 	  <entry>av</entry>
 	  <entry>ava</entry>
 	</row>
         <row>
-	  <entry>Avestan</entry>
+	  <entry>Avestano</entry>
 	  <entry>ae</entry>
 	  <entry>ave</entry>
 	</row>
@@ -94,7 +94,7 @@
 	  <entry>aym</entry>
 	</row>
         <row>
-	  <entry>Azerbaijani</entry>
+	  <entry>Azerbaijano</entry>
 	  <entry>az</entry>
 	  <entry>aze</entry>
 	</row>
@@ -104,17 +104,17 @@
 	  <entry>bam</entry>
 	</row>
         <row>
-	  <entry>Bashkir</entry>
+	  <entry>Bashkiro</entry>
 	  <entry>ba</entry>
 	  <entry>bak</entry>
 	</row>
         <row>
-	  <entry>Basque</entry>
+	  <entry>Basquo</entry>
 	  <entry>eu</entry>
 	  <entry>eus</entry>
 	</row>
         <row>
-	  <entry>Belarusian</entry>
+	  <entry>Bielorusso</entry>
 	  <entry>be</entry>
 	  <entry>bel</entry>
 	</row>
@@ -130,11 +130,11 @@
 	</row>
         <row>
 	  <entry>Bislama</entry>
-	  <entry>bi</entry>
+	  <entry>bis</entry>
 	  <entry>bis</entry>
 	</row>
         <row>
-	  <entry>Bosnian</entry>
+	  <entry>Bosniac</entry>
 	  <entry>bs</entry>
 	  <entry>bos</entry>
 	</row>
@@ -144,7 +144,7 @@
 	  <entry>bre</entry>
 	</row>
         <row>
-	  <entry>Bulgare</entry>
+	  <entry>Bulgaro</entry>
 	  <entry>bg</entry>
 	  <entry>bul</entry>
 	</row>
@@ -154,7 +154,7 @@
 	  <entry>mya</entry>
 	</row>
         <row>
-	  <entry>Catalan</entry>
+	  <entry>Catalano</entry>
 	  <entry>ca</entry>
 	  <entry>cat</entry>
 	</row>
@@ -164,7 +164,7 @@
 	  <entry>cha</entry>
 	</row>
         <row>
-	  <entry>Chechen</entry>
+	  <entry>Checheno</entry>
 	  <entry>ce</entry>
 	  <entry>che</entry>
 	</row>
@@ -189,7 +189,7 @@
 	  <entry>cor</entry>
 	</row>
         <row>
-	  <entry>Corse</entry>
+	  <entry>Corso</entry>
 	  <entry>co</entry>
 	  <entry>cos</entry>
 	</row>
@@ -199,12 +199,12 @@
 	  <entry>cre</entry>
 	</row>
         <row>
-	  <entry>Croate</entry>
+	  <entry>Croato</entry>
 	  <entry>hr</entry>
 	  <entry>hrv</entry>
 	</row>
         <row>
-	  <entry>Chec</entry>
+	  <entry>Checo</entry>
 	  <entry>cs</entry>
 	  <entry>ces</entry>
 	</row>
@@ -214,7 +214,7 @@
 	  <entry>dan</entry>
 	</row>
         <row>
-	  <entry>Divehi, Dhivehi, Maldivian</entry>
+	  <entry>Divehi, Dhivehi, Maldiviano</entry>
 	  <entry>dv</entry>
 	  <entry>div</entry>
 	</row>
@@ -254,7 +254,7 @@
 	  <entry>fao</entry>
 	</row>
         <row>
-	  <entry>Fijian</entry>
+	  <entry>Fijiano</entry>
 	  <entry>fj</entry>
 	  <entry>fij</entry>
 	</row>
@@ -264,7 +264,7 @@
 	  <entry>fin</entry>
 	</row>
         <row>
-	  <entry>Francese</entry>
+	  <entry>Francese </entry>
 	  <entry>fr</entry>
 	  <entry>fra</entry>
 	</row>
@@ -279,7 +279,7 @@
 	  <entry>glg</entry>
 	</row>
         <row>
-	  <entry>Georgian</entry>
+	  <entry>Georgiano</entry>
 	  <entry>ka</entry>
 	  <entry>kat</entry>
 	</row>
@@ -289,7 +289,7 @@
 	  <entry>deu</entry>
 	</row>
         <row>
-	  <entry>Grec, moderne</entry>
+	  <entry>Greco, moderne</entry>
 	  <entry>el</entry>
 	  <entry>ell</entry>
 	</row>
@@ -304,7 +304,7 @@
 	  <entry>guj</entry>
 	</row>
         <row>
-	  <entry>Haitian, Haitian Creole</entry>
+	  <entry>Haitian, Haitian Creolo</entry>
 	  <entry>ht</entry>
 	  <entry>hat</entry>
 	</row>
@@ -384,7 +384,7 @@
 	  <entry>ita</entry>
 	</row>
         <row>
-	  <entry>Inuktitut</entry>
+	  <entry>Inuktituto</entry>
 	  <entry>iu</entry>
 	  <entry>iku</entry>
 	</row>
@@ -419,7 +419,7 @@
 	  <entry>kas</entry>
 	</row>
         <row>
-	  <entry>Kazakh</entry>
+	  <entry>Kazakho</entry>
 	  <entry>kk</entry>
 	  <entry>kaz</entry>
 	</row>
@@ -459,7 +459,7 @@
 	  <entry>kor</entry>
 	</row>
         <row>
-	  <entry>Kurdish</entry>
+	  <entry>Kurdo</entry>
 	  <entry>ku</entry>
 	  <entry>kur</entry>
 	</row>
@@ -474,7 +474,7 @@
 	  <entry>lat</entry>
 	</row>
         <row>
-	  <entry>Luxembourgish, Letzeburgesch</entry>
+	  <entry>Luxemburgese, Letzeburgesch</entry>
 	  <entry>lb</entry>
 	  <entry>ltz</entry>
 	</row>
@@ -544,7 +544,7 @@
 	  <entry>mlt</entry>
 	</row>
         <row>
-	  <entry>Māori</entry>
+	  <entry>Maori</entry>
 	  <entry>mi</entry>
 	  <entry>mri</entry>
 	</row>
@@ -689,7 +689,7 @@
 	  <entry>Curre (&amp;Run)</entry>
 	</row>
         <row>
-	  <entry>Romanian, Moldavian, Moldovan</entry>
+	  <entry>Romaniano, Moldavo, Moldovan</entry>
 	  <entry>ro</entry>
 	  <entry>ron</entry>
 	</row>
@@ -699,7 +699,7 @@
 	  <entry>rus</entry>
 	</row>
         <row>
-	  <entry>Sanskrit (Saṁskṛta)</entry>
+	  <entry>Sanskrito (Saṁskṛta)</entry>
 	  <entry>sa</entry>
 	  <entry>san</entry>
 	</row>
@@ -819,12 +819,12 @@
 	  <entry>tir</entry>
 	</row>
         <row>
-	  <entry>Tibetano standard, Tibetano central</entry>
+	  <entry>Tibetano standard, tibetano central</entry>
 	  <entry>bo</entry>
 	  <entry>bod</entry>
 	</row>
         <row>
-	  <entry>Turkmen</entry>
+	  <entry>Turcomano</entry>
 	  <entry>tk</entry>
 	  <entry>tuk</entry>
 	</row>

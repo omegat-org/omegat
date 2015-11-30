@@ -137,7 +137,7 @@ public class OStrings {
      * 
      * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
-    public static String getDisplayVersion() {
+    public static String getDisplayNameAndVersion() {
         if (UPDATE != null && !UPDATE.equals("0")) {
             return StringUtil.format(getString("app-version-template-pretty-update"),
                     getApplicationDisplayName(), VERSION, UPDATE);
@@ -151,9 +151,17 @@ public class OStrings {
      * Returns the OmegaT full version for logs, etc. (includes the application name).
      * Example: "OmegaT-3.5_0_dev", "OmegaT-3.5.1_0_r7532"
      */
-    public static String getVersion() {
+    public static String getNameAndVersion() {
         return StringUtil.format(getString("app-version-template"), getApplicationName(),
                 VERSION, UPDATE, REVISION);
+    }
+    
+    /**
+     * Returns the OmegaT full version for logs, etc. (does not include the application name).
+     * Example: "3.5_0_dev", "3.5.1_0_r7532"
+     */
+    public static String getVersion() {
+        return StringUtil.format(getString("version-template"), VERSION, UPDATE, REVISION);
     }
 
     /** Returns default text for progress bar when no project is loaded

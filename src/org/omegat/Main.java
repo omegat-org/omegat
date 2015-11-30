@@ -183,12 +183,12 @@ public class Main {
         }
 
         Log.log("\n" + "===================================================================" + "\n"
-                + OStrings.getVersion() + " (" + new Date() + ") " + " Locale " + Locale.getDefault());
+                + OStrings.getNameAndVersion() + " (" + new Date() + ") " + " Locale " + Locale.getDefault());
 
         Log.logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"), System.getProperty("java.version"),
                 System.getProperty("java.home"));
 
-        System.setProperty("http.user", OStrings.getDisplayVersion());
+        System.setProperty("http.user", OStrings.getDisplayNameAndVersion());
 
         ConvertConfigs.convert();
         PluginUtils.loadPlugins(params);

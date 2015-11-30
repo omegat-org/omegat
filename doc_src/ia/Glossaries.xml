@@ -11,7 +11,7 @@
 
   <para>Si un projecto de <application>OmegaT</application> contine uno o plus glossarios, qualcunque terminos in le glossario que alsi es trovate in le actual segmento essera automaticamente monstrate in le quadro &quot;Glossario&quot;.</para>
 
-  <para>Tu defini su ubication e nomine in le fenestra de dialogo Proprietates de projecto. Le extension debe esser <filename>.txt</filename> o <filename>.utf8</filename> (si non, illo essera addite). Le ubication del file debe esser intra le plica <filename>/glossary </filename> , ma illo pote esser in un plica plus profunde (per exemplo, <filename>glossary/sub/glossary.txt</filename>). Le file pote non exister quando on configura lo, illo essera create (si necessari) quando tu addera le prime entrata. Si le file existe jam, nulle tentativa es facite pro verificar le formato o le filas de character del file: le nove entratas essera semper in formato texto simple, 'separate per signo de tabulation' e codificate UTF-8. Pois que le contento existente non essera alterate, eventual damnos a un file existente deberea esser limitate.</para>
+  <para>Tu defini su ubication e nomine in le fenestra de dialogo Proprietates de projecto. Le extension debe esser <filename>.txt</filename> o <filename>.utf8</filename> (si non, illo essera addite). Le ubication del file debe esser intra le plica <filename>/glossary</filename>, ma illo pote esser in un plica plus profunde (per exemplo, <filename>glossary/sub/glossary.txt</filename>). Le file pote non exister quando on configura lo, illo essera create (si necessari) quando tu addera le prime entrata. Si le file existe jam, nulle tentativa es facite pro verificar le formato o le filas de character del file: le nove entratas essera semper in formato texto simple, 'separate per signo de tabulation' e codificate UTF-8. Pois que le contento existente non essera alterate, eventual damnos a un file existente deberea esser limitate.</para>
 
   <section>
     <title>Costume</title>
@@ -78,7 +78,7 @@
 
     <para>In plus al formato texto simple, le formato TBX <indexterm class="singular">
         <primary>Glossarios</primary> <secondary>formato TBX</secondary>
-      </indexterm> es alsi supportate qual formato a sol lectura. Le ubication del file <filename>.tbx</filename> debe esser intra le plica <filename>/glossary</filename> , ma illo pote esser  in un plica plus profunde (qual, <filename><filename>glossary/sub/MyGlossary.tbx</filename>).</para>
+      </indexterm> es alsi supportate qual formato a sol lectura. Le ubication del file <filename>.tbx</filename> debe esser intra le plica <filename>/glossary</filename> , ma illo pote esser  in un plica plus profunde (qual, <filename>glossary/sub/MyGlossary.tbx</filename>).</para>
 
     <para>TBX - Term Base eXchange - es le standard aperte, basate sur XML pro le excambio del datos terminologic structurate, TBX esseva approbate como standard international per LISA e ISO. Si on ha un systema de tractamento del terminologia existente il es ja possibile que illo offere le exportation del datos del terminologia in formato TBX. On pote discargar le <ulink url="http://www.microsoft.com/Language/en-US/Terminology.aspx">Collection de terminologia Microsoft</ulink> <indexterm class="singular">
         <primary>Glossaries</primary>

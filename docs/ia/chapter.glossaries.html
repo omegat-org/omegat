@@ -2,25 +2,25 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>Chapter&nbsp;18.&nbsp;Glossarios</title>
+      <title>Chapter&nbsp;19.&nbsp;Glossarios</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Guida del usator">
-      <link rel="up" href="index.html" title="OmegaT - Guida del usator">
-      <link rel="prev" href="chapter.dictionaries.html" title="Chapter&nbsp;17.&nbsp;Dictionarios">
-      <link rel="next" href="chapter.machine.translate.html" title="Chapter&nbsp;19.&nbsp;Traduction automatic">
+      <link rel="home" href="index.html" title="OmegaT 3.1 - Guida del usator">
+      <link rel="up" href="index.html" title="OmegaT 3.1 - Guida del usator">
+      <link rel="prev" href="chapter.dictionaries.html" title="Chapter&nbsp;18.&nbsp;Dictionarios">
+      <link rel="next" href="chapter.TaaS.html" title="Chapter&nbsp;20.&nbsp;Usar TaaS in OmegaT">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">Chapter&nbsp;18.&nbsp;Glossarios</th>
+               <th colspan="3" align="center">Chapter&nbsp;19.&nbsp;Glossarios</th>
             </tr>
             <tr>
                <td width="20%" align="left"><a accesskey="p" href="chapter.dictionaries.html">Prev</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Next</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.TaaS.html">Next</a></td>
             </tr>
          </table>
          <hr>
@@ -29,135 +29,156 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.glossaries"></a>Chapter&nbsp;18.&nbsp;Glossarios<a class="indexterm" name="d0e8037"></a><a class="indexterm" name="d0e8042"></a></h1>
+                  <h1 class="title"><a name="chapter.glossaries"></a>Chapter&nbsp;19.&nbsp;Glossarios<a class="indexterm" name="d0e8376"></a><a class="indexterm" name="d0e8381"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8066">1. Costume</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8121">2. Formato del File</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8160">3. Como producer glossarios</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8205">4. Usar Trados MultiTerm</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8221">5. Problemas commun al glossario</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8408">1. Costume</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8463">2. Formato de File </a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8521">3. Como producer glossarios</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8567">4. Prioritate del glossario</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8580">5. Usar Trados MultiTerm</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8596">6. Problemas commun al glossario </a></span></dt>
             </dl>
          </div>
-         <p>Le glossarios son files create e implementate manualmente pro uso in <span class="application">OmegaT</span>.
+         <p>Le glossarios es files create e implementate manualmente pro uso in <span class="application">OmegaT</span>.
          </p>
-         <p>Si un projecto <span class="application">OmegaT</span> contine uno o plus glossarios, qualcunque terminos in le glossario que alsi es trovate in le actual segmento essera automaticamente
+         <p>Si un projecto de <span class="application">OmegaT</span> contine uno o plus glossarios, qualcunque terminos in le glossario que alsi es trovate in le actual segmento essera automaticamente
             monstrate in le quadro "Glossario".
          </p>
-         <p>Tu defini su ubication e nomine in le fenestra de dialogo Proprietates del projecto. Le extension debe esser <code class="filename">.txt</code> (sinon, illo non essera addite). Le ubication del file debe esser intra le classificator <code class="filename">/glossary </code> , ma illo pote esser  in un plica plus profunde (e.g., <code class="filename">glossary/sub/glossary.txt</code>). Le file non debe exister quando on prepara lo, illo essera create (si necessari) quando on addera le prime entrata del
-            glossario. Si le file existe jam, nulle tentativa es facite pro verificar le formato o le serie de character del file: le
-            nove entratas essera semper in formato texto simple, 'separate per signo de tabulation' e codificate UTF-8. Pois que le contento
-            existente non essera alterate, eventual damnos a un file existente deberea esser limitate.
+         <p>Tu defini su ubication e nomine in le fenestra de dialogo Proprietates de projecto. Le extension debe esser <code class="filename">.txt</code> o <code class="filename">.utf8</code> (si non, illo essera addite). Le ubication del file debe esser intra le plica <code class="filename">/glossary</code>, ma illo pote esser in un plica plus profunde (per exemplo, <code class="filename">glossary/sub/glossary.txt</code>). Le file pote non exister quando on configura lo, illo essera create (si necessari) quando tu addera le prime entrata. Si
+            le file existe jam, nulle tentativa es facite pro verificar le formato o le filas de character del file: le nove entratas
+            essera semper in formato texto simple, 'separate per signo de tabulation' e codificate UTF-8. Pois que le contento existente
+            non essera alterate, eventual damnos a un file existente deberea esser limitate.
          </p>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8066"></a>1.&nbsp;Costume
+                     <h2 class="title" style="clear: both"><a name="d0e8408"></a>1.&nbsp;Costume
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Pro usar un glossario existente, placia lo simplemente in le plica<a class="indexterm" name="d0e8071"></a> <code class="filename">/glossary</code> post le creation del projecto. <span class="application">OmegaT</span> releva automaticamente le files glossario in iste plica quando on aperi un projecto. Le terminos in le segmento currente
+            <p>Pro usar un glossario existente, placia lo simplemente in le plica<a class="indexterm" name="d0e8413"></a> <code class="filename">/glossary</code> post le creation del projecto. <span class="application">OmegaT</span> releva automaticamente le files glossario in iste plica quando on aperi un projecto. Le terminos in le segmento currente
                que <span class="application">OmegaT</span> trova in le file(s) glossario es monstrate in le quadro Glossario:
-            </p><a class="indexterm" name="d0e8086"></a><div class="figure"><a name="d0e8089"></a><p class="title"><b>Figure&nbsp;18.1.&nbsp;Quadro Glossario</b></p>
+            </p><a class="indexterm" name="d0e8428"></a><div class="figure"><a name="d0e8431"></a><p class="title"><b>Figure&nbsp;19.1.&nbsp;Quadro Glossario</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/GlossaryPane_25.png" alt="Quadro Glossario"></div>
                </div>
             </div><br class="figure-break"><p>Le parola ante le signo '=' es le termino original, e su traduction es le parola(s) post le signo '='. Al entrata del vocabulario
                pote esser addite un commento. Le function del glossario discoperi solmente concordantias exacte con le entrata del glossario
-               (e.g. non trova le formas declinate et cetera). On pote adder le terminos nove al file(s) glossario manualmente durante le
-               traduction, per exemplo in un editor de texto. Cata vice que le nove termino del glossario essera salvate, essera trovate
+               (per exemplo non trova le formas declinate et cetera). On pote adder le terminos nove al file(s) glossario manualmente durante
+               le traduction, per exemplo in un editor de texto. Cata vice que le nove termino del glossario essera salvate, essera trovate
                le nove terminos addite.
             </p>
             <p>Le termino fonte non debe esser necessarimente de un sol parola, como monstra le exemplo sequente:</p>
-            <div class="figure"><a name="d0e8101"></a><p class="title"><b>Figure&nbsp;18.2.&nbsp;entratas con plure parolas in glossarios - exemplo<a class="indexterm" name="d0e8104"></a></b></p>
+            <div class="figure"><a name="d0e8443"></a><p class="title"><b>Figure&nbsp;19.2.&nbsp;entratas con plure parolas in le glossarios - exemplo<a class="indexterm" name="d0e8446"></a></b></p>
                <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="entratas con plure parolas in glossarios - exemplo"></div>
+                  <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="entratas con plure parolas in le glossarios - exemplo"></div>
                </div>
-            </div><br class="figure-break"><p>Le termino sublineate  "pop-up menu" pote esser trovate in le quadro pro le Glossario como "pojavni menu". Si marcate lo in
-               le le quadro Glossario e pois cliccate lo con le dextera, inserera lo al position del cursor in le segmento de destination.<a href="#ftn.d0e8118" class="footnote" name="d0e8118"><sup class="footnote">[1]</sup></a></p>
+            </div><br class="figure-break"><p>Le termino sublineate  del "menu pop-up" pote esser trovate in le quadro pro le Glossario como "pojavni menu". Si on marca
+               lo in le le quadro Glossario e pois clicca lo con le dextera, insere lo al position del cursor in le segmento de destination.<a href="#ftn.d0e8460" class="footnote" name="d0e8460"><sup class="footnote">[1]</sup></a></p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8121"></a>2.&nbsp;<a class="indexterm" name="d0e8123"></a>Formato del File<a class="indexterm" name="d0e8129"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8463"></a>2.&nbsp;<a class="indexterm" name="d0e8465"></a>Formato de File <a class="indexterm" name="d0e8471"></a></h2>
                   </div>
                </div>
             </div>
-            <p>Le formato del files glossario es le texto simple, continente listas de tres columnas, delimitate ab signo de tabulation,
-               con le terminos fonte e de destination respectivemente in le prime e in le secunde columna. Le tertie columna pote esser usate
+            <p>Le formato de file glossario es le texto simple, continente listas de tres columnas, delimitate per signo de tabulation, con
+               le terminos fonte e de destination respectivemente in le prime e in le secunde columna. Le tertie columna pote esser usate
                pro information additional (commentos). Tu pote haber entratas con le columna de destination mancante, id es continente justo
                le termino fonte e le commento.
             </p>
-            <p>Le files glossario pote etiam esser o in codification base del systema (e indicate per le extension .tab) o in UTF-8 (le extension
-               .utf8). Le codification Unicode (UTF8) es ideal pro rationes obvie. Alsi supportate es le formato CSV. Iste formato es identic
+            <p>Le files Glossarios pote esser sia in le codifica prefixate del systema (e indicate per the le extension .tab) o in UTF-8
+               (con extension .utf8 o .txt) o in UTF-16 LE (con le extension .txt). Alsi supportate es le formato CSV. Iste formato es identic
                al formato separate per tabulation: termino fonte, termino de destination. Le campo Commento es alsi separate per un virgula
-               ','. Le lineas de character pote esser incluse in virgulettas ", le qual permitte de haber un virgula intra un linea de character:
+               ','. Le filas de character pote esser incluse in virgulettas ", le qual permitte de haber un virgula intra un linea de character:
             </p>
             <p><code class="literal">"Iste es un termino original, que contine un virgula","c'est un terme, qui contient une virgule"</code></p>
-            <p>In plus al formato texto simple, le formato TBX <a class="indexterm" name="d0e8145"></a> es alsi supportate. TBX - Term Base eXchange - es le standard aperte, basate sur XML pro le excambio del datos terminologic
-               structurate, TBX esseva approbate como standard international per LISA e ISO. Si tu ha un systema de tractamento del terminologia
-               - per exemplo MultiTerm  - il es assatis eventual que illo offere le exportation del datos terminologic con le formato TBX.
-               On pote discargar le <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Collection de terminologia Microsoft</a> <a class="indexterm" name="d0e8154"></a> in quasi 100 linguas e can servir como glossario petra angular del technologia informatic (IT).
+            <p>In plus al formato texto simple, le formato TBX <a class="indexterm" name="d0e8487"></a> es alsi supportate qual formato a sol lectura. Le ubication del file <code class="filename">.tbx</code> debe esser intra le plica <code class="filename">/glossary</code> , ma illo pote esser  in un plica plus profunde (qual, <code class="filename">glossary/sub/MyGlossary.tbx</code>).
+            </p>
+            <p>TBX - Term Base eXchange - es le standard aperte, basate sur XML pro le excambio del datos terminologic structurate, TBX esseva
+               approbate como standard international per LISA e ISO. Si on ha un systema de tractamento del terminologia existente il es
+               ja possibile que illo offere le exportation del datos del terminologia in formato TBX. On pote discargar le <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Collection de terminologia Microsoft</a> <a class="indexterm" name="d0e8507"></a> in quasi 100 linguas e pote servir como glossario, petra angular del technologia informatic (IT).
+            </p>
+            <p>Notar: le output in formato <code class="filename">.tbx</code> de MultiTerm non  simila esser digne de fide (November 2013), il es in vice melio usar le output <code class="filename">.tab</code> de MultiTerm.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8160"></a>3.&nbsp;Como producer glossarios<a class="indexterm" name="d0e8163"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8521"></a>3.&nbsp;Como producer glossarios<a class="indexterm" name="d0e8524"></a></h2>
                   </div>
                </div>
             </div>
-            <p>Le preparation del projecto permitte de denominar un file glossario scribibile (vide initio de iste capitulo). Clicca con
-               le dextero in le Quadro del glossario o pulsa <span class="keycap"><strong>Ctrl+Shift+G</strong></span> pro adder un entrata nove. Se displica un fenestra de dialogo, que permitte te de inscriber le termino fonte, le termino
-               de destination e omne le commentos que tu vole:
+            <p>Le preparation del projecto permitte de inserer le nomines del file glossario scribibile (vide al initio de iste capitulo).
+               Clicca con le dextere in le Quadro de glossario o pulsa <span class="keycap"><strong>Ctrl+Shift+G</strong></span> pro adder un entrata nove. Se displica un fenestra de dialogo, que permitte te de inserer le termino fonte, le termino de
+               destination e omne le commentos que tu vole:
             </p>
             <div class="mediaobject"><img src="images/GlossaryEntry_25.png"></div>
-            <p>Le contentos del files glossario es conservate in memoria e es cargate quando le projecto es aperte o recargate. Il es assatis
-               simplice implementar un file glossario: calca <span class="keycap"><strong>Ctrl+Shift+G</strong></span> e scribe le termino nove, su traduction e omne le commentos que tu vole (assecurante te que tu calca le clave tabulation
-               intra le campos) e salva le file. Le contentos del quadro pro le Glossario essera implementate in consequentia.
+            <p>Le contentos del files glossario es conservate in le memoria e es cargate quando le projecto es aperte o recargate. Il es
+               assatis simplice implementar un file glossario: pulsa <span class="keycap"><strong>Ctrl+Shift+G</strong></span> e scribe le termino nove, su traduction e omne le commentos que tu vole (assecurante te que tu pulsa le clave tabulation
+               intra le campos) e salva le file. Le contentos del quadro Glossario essera implementate in consequentia.
             </p>
-            <p><a class="indexterm" name="d0e8184"></a>Le ubication del file glossario scribibile pote esser fixate in le fenestra de dialogo <span class="guimenuitem">Projecto &gt; Proprietates ... </span>. Le extensiones admittite son <code class="filename">TXT</code> e <code class="filename">UTF8</code></p>
-            <p><span class="bold"><strong>Nota: </strong></span>naturalmente il habe altere manieras e medios pro crear un simplice file con entratas delimitate per tabulation. Nihil a dicer
+            <p><a class="indexterm" name="d0e8545"></a>Le ubication del file glossario scribibile pote esser fixate in le fenestra de dialogo <span class="guimenuitem">Projecto &gt; Proprietates ... </span>. Le extensiones admittite es <code class="filename">TXT</code> e <code class="filename">UTF8</code> 
+            </p>
+            <p><span class="bold"><strong>Nota: </strong></span>naturalmente il ha altere manieras e medios pro crear un simplice file con entratas delimitate per tabulation. Nihil a dicer
                contra le uso de Notepad++ sur Windows, GEdit sur Linux per exemplo o alicun programma de folio de calculo (per exemplo OpenOffice
-               Calc) pro iste proposito: omne application, que pote tractar UTF8 e que pote monstrar spatio blanc (de maniera que tu non
-               perde le character <span class="keycap"><strong>TAB</strong></span> ) pote esser utilisate.
+               Calc) pro iste proposito: omne application, que pote tractar UTF8 e (o UTF-16 LE) que pote monstrar spatio blanc (de maniera
+               que tu non perde le character <span class="keycap"><strong>TAB</strong></span> ) pote esser utilisate.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8205"></a>4.&nbsp;<a class="indexterm" name="d0e8207"></a>Usar Trados MultiTerm
+                     <h2 class="title" style="clear: both"><a name="d0e8567"></a>4.&nbsp;<a class="indexterm" name="d0e8569"></a>Prioritate del glossario
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Le datos exportate ab Trados MultiTerm pote esser usate como glossarios de <span class="application">OmegaT</span> sin ulterior modification, a condition que on provide illos del extension <code class="filename">.tab</code> e le campos del termino original e final es le prime duo campos respectivemente. Si tu exporta usante le option de systema
-               "Exporta delimitate per character del tabulation", tu necessitara de deler le prime 5 columnas (Seq. Numero, Data de creation
-               et cetera). Le versiones plus nove de MultiTerm supporta le exportation al formato TBX.
+            <p>Le resultatos del glossario prioritari (per option predefinite, glossary/glossary.txt) appare in le prime locos in le quadro
+               del Glossario e in le TransTips.
+            </p>
+            <p>Si le entratas pote miscer le parolas ex le glossario con prioritate e los sin prioritate, le parolas ex le glossario prioritari
+               es monstrate in nigrato.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8221"></a>5.&nbsp;<a class="indexterm" name="d0e8223"></a>Problemas commun al glossario
+                     <h2 class="title" style="clear: both"><a name="d0e8580"></a>5.&nbsp;<a class="indexterm" name="d0e8582"></a>Usar Trados MultiTerm
                      </h2>
                   </div>
                </div>
             </div>
-            <p><span class="bold"><strong>Problema: Nulle terminos del glossario es exponite - causas possibile:</strong></span></p>
+            <p>Le datos exportate ex Trados MultiTerm pote esser usate como glossarios de <span class="application">OmegaT</span> sin ulterior modification, a condition que on provide illos del extension <code class="filename">.tab</code> e le campos del termino fonte e de destination es le prime duo campos respectivemente. Si tu exporta con le option de systema
+               "Exporta delimitate per character del tabulation", tu necessitara deler le prime 5 columnas (Seq. Numero, Data de creation
+               et cetera).
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8596"></a>6.&nbsp;<a class="indexterm" name="d0e8598"></a>Problemas commun al glossario 
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="bold"><strong>Problema: nulle terminos del glossario es exponite - causas possibile:</strong></span></p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Nulle file glossario trovate in le classificator "glossary".</p>
+                     <p>Nulle file glossario trovate in le plica "glossary".</p>
                   </li>
                </ul>
             </div>
@@ -171,14 +192,14 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Le articulos non es separate con un character de tabulation.</p>
+                     <p>Le articulos non es separate con un character de tabulation (TAB).</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Le file glossario non ha le extension correcte (.tab o .utf8).</p>
+                     <p>Le file glossario non ha le extension correcte (.tab, .utf8 o .txt).</p>
                   </li>
                </ul>
             </div>
@@ -206,24 +227,24 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Un o plus del problemas precedente esseva fixate, ma le projecto non esseva recargate.</p>
+                     <p>Un o plus del problemas precedente esseva fixate, ma le projecto non ha essite ancora recargate.</p>
                   </li>
                </ul>
             </div>
-            <p><span class="bold"><strong>Problema: In le quadro pro le Glossario, qualque characteres non es monstrate debitemente</strong></span></p>
+            <p><span class="bold"><strong>Problema: in le quadro Glossario, qualque character non es monstrate debitemente</strong></span></p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>...ma le mesme characteres es monstrate debitemente in le quadro pro Editar: le extension e le codification del file non concorda.</p>
+                     <p>...ma le mesme characteres es monstrate debitemente in le quadro Editor: le extension e le codification del file non concorda.</p>
                   </li>
                </ul>
             </div>
          </div>
          <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
-            <div id="ftn.d0e8118" class="footnote">
-               <p><a href="#d0e8118" class="para"><sup class="para">[1] </sup></a>Nota que in le caso precedente, isto es justo le medietate (o mesmo minus) del labor, pois que le lingua final (sloveno) usa
-                  le declination. Assi le  "pojavni meni" inserite in le forma nominative - debe esser cambiate in "pojavnem meniju" , id es
-                  al locativo. Assi il es probabilemente plus rapide dactylographar le termino correctemente justo immediatemente sin penar
+            <div id="ftn.d0e8460" class="footnote">
+               <p><a href="#d0e8460" class="para"><sup class="para">[1] </sup></a>Nota que in le exemplo precedente, isto es justo le medietate (o mesmo minus) del labor, pois que le lingua final (sloveno)
+                  usa le declination. Assi le  "pojavni meni" inserite in le forma nominative - debe esser cambiate in "pojavnem meniju" , id
+                  es al locativo. Assi il es probabilemente plus rapide dactylographar le termino correctemente justo immediatemente sin penar
                   con le glossario e su vias breve.
                </p>
             </div>
@@ -236,12 +257,12 @@
                <td width="40%" align="left"><a accesskey="p" href="chapter.dictionaries.html">Prev</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Next</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.TaaS.html">Next</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">Chapter&nbsp;17.&nbsp;Dictionarios&nbsp;</td>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;18.&nbsp;Dictionarios&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;19.&nbsp;Traduction automatic</td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;20.&nbsp;Usar TaaS in OmegaT</td>
             </tr>
          </table>
       </div>

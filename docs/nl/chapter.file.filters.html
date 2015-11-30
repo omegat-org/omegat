@@ -185,18 +185,6 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Codering-declaratie aan HTML- en XHTML-bestanden toevoegen of herschrijven</em></span>: vaak moeten de doelbestanden een andere tekenset voor de codering hebben dan die in het bronbestand (of dat nu expliciet
-                        gedefinieerd is of als gevolg van). Met behulp van deze optie kan de vertaler specificeren of in de doelbestanden de declaratie
-                        voor de codering moet worden opgenomen. Als bijvoorbeeld het bestandsfilter UTF8 specificeert als het schema voor codering
-                        voor de doelbestanden, zal het selecteren van Altijd er voor zorgen dat deze informatie zal worden opgenomen in de vertaalde
-                        bestanden.
-                     </p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
-                  <li class="listitem">
                      <p><span class="emphasis"><em>Vertaal de volgende attributen</em></span>: De geselecteerde attributen zullen als segmenten in het venster Bewerken verschijnen.
                      </p>
                   </li>
@@ -205,7 +193,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Start een nieuwe alinea bij: De &lt;br&gt;</em></span> HTML-tag zal een alinea voor segmentatiedoeleinden maken.
+                     <p><span class="emphasis"><em>Start een nieuwe alinea bij</em></span>: De &lt;br&gt; HTML-tag zal een alinea voor segmentatiedoeleinden maken.
                      </p>
                   </li>
                </ul>
@@ -295,8 +283,11 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Codering-declaratie aan HTML- en XHTML-bestanden toevoegen of herschrijven</em></span>: Altijd (standaard), Alleen als (X)HTML-bestand een kop heeft, Alleen als (X)HTML-bestand een codering-declaratie heeft,
-                        Nooit
+                     <p><span class="emphasis"><em>Codering-declaratie aan HTML- en XHTML-bestanden toevoegen of herschrijven</em></span>: vaak moeten de doelbestanden een andere tekenset voor de codering hebben dan die in het bronbestand (of dat nu expliciet
+                        gedefinieerd is of als gevolg van). Met behulp van deze optie kan de vertaler specificeren of in de doelbestanden de declaratie
+                        voor de codering moet worden opgenomen. Als bijvoorbeeld het bestandsfilter UTF8 specificeert als het schema voor codering
+                        voor de doelbestanden, zal het selecteren van Altijd er voor zorgen dat deze informatie zal worden opgenomen in de vertaalde
+                        bestanden.
                      </p>
                   </li>
                </ul>
@@ -320,7 +311,8 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Tekst die overeenkomt met reguliere uitdrukking overslaan</em></span>: De tekst die overeenkomt met de reguliere uitdrukking zal worden overgeslagen.
+                     <p><span class="emphasis"><em>Tekst die overeenkomt met reguliere uitdrukking overslaan</em></span>: De tekst die overeenkomt met de reguliere uitdrukking wordt overgeslagen. Dit wordt in de tagvalidatie in rood weergegeven.
+                        Tekst in het bronsegment die overeenkomt wordt cursief weergegeven.
                      </p>
                   </li>
                </ul>
@@ -338,17 +330,15 @@
                   <li class="listitem">
                      <p><span class="emphasis"><em>Vertaal NIET de inhoud van tags met de volgende paren van sleutels en waarden voor attributen (door komma's gescheiden):</em></span>: een overeenkomst in de lijst met sleutel-waardenparen zorgt er voor dat de inhoud van tags zal worden genegeerd
                      </p>
+                     <p>Het is soms handig om enkele tags niet te vertalen te maken, gebaseerd op de waarde van attributen. Bijvoorbeeld: <code class="literal">&lt;div class="hide"&gt; &lt;span translate="no"&gt;</code> U kunt sleutel-waardenparen definiëren voor tags die niet vertaald moeten worden. Voor het voorbeeld hierboven zou het veld
+                        bevatten: <code class="literal">class=hide, translate=no </code></p>
                   </li>
-               </ul>
-            </div>
-            <p><span class="bold"><strong>Tekstbestanden</strong></span></p>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Alineasegmentatie op regeleinden, lege regels of nooit</em></span>:
+                     <p><span class="emphasis"><em>Witruimte in vertaalde documenten comprimeren</em></span>: meerdere doorlopende witruimten zullen worden geconverteerd naar één enkele witruimte in vertaalde documenten.
                      </p>
-                     <p>als regels voor zinsegmentatie actief zijn, zal de tekst verder worden gesegmenteerd overeenkomstig de hier geselecteerde
-                        optie.
+                  </li>
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>HTML-opmerkingen in vertaalde document verwijderen</em></span>: alle delen met opmerkingen (tussen &lt;!-- en --&gt;) zullen niet worden gekopieerd naar het vertaalde document.
                      </p>
                   </li>
                </ul>

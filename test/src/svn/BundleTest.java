@@ -28,6 +28,7 @@ package svn;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
@@ -82,7 +83,31 @@ public class BundleTest extends TestCase {
         Locale.setDefault(Locale.ENGLISH);
         
         for (Language lang : Language.LANGUAGES) {
-            ResourceBundle.getBundle("org/omegat/Bundle", lang.getLocale());
+            ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/Bundle", lang.getLocale());
+            assertTrue(bundle.getKeys().hasMoreElements());
         }
+    }
+
+    public void testVersionPropsLoading() {
+        ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/Version");
+        bundle.getString("version");
+        bundle.getString("update");
+        bundle.getString("revision");
+    }
+
+    public void testLoggerPropsLoading() {
+        ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/logger");
+        assertTrue(bundle.getKeys().hasMoreElements());
+    }
+
+    public void testShortcutPropsLoading() throws Exception {
+        ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/gui/main/MainMenuShortcuts");
+        assertTrue(bundle.getKeys().hasMoreElements());
+
+        // ResourceBundle.getBundle won't resolve the Mac-specific file's name
+        // so we have to load it manually.
+        Properties props = new Properties();
+        props.load(getClass().getResourceAsStream("/org/omegat/gui/main/MainMenuShortcuts.mac.properties"));
+        assertFalse(props.isEmpty());
     }
 }

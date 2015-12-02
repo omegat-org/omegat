@@ -112,6 +112,7 @@ Tag nesting is now only tested for OmegaT tags.
   - Interlingua localisation updated to 3.5.3 (UI, documentation, scripts, readme)
   - Japanese localisation updated to 3.5.3 (UI, documentation, scripts, readme)
   - Norwegian localisation updated to 3.5.3 (UI, tutorial, scripts, readme)
+  - Spanish localisation updated to 3.5.3 (UI, tutorial)
  
 ----------------------------------------------------------------------
  OmegaT 3.5.2 update 1 (2015-09-25)

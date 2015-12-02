@@ -92,8 +92,8 @@ Brukermanualen finner du i mappen du nettopp lastet ned. Du kan åpne den i Hjel
 ==============================================================================
  3. Installere OmegaT
 
-3.1 Generelt
-For å kunne kjøre OmegaT må Java Runtime Environment (JRE) versjon 1.5 eller nyere være installert i systemet ditt. OmegaT-pakker som inkluderer Java Runtime Environment er nå tilgjengelige for å spare brukerne for bryet med å velge, finne og installere det selv. 
+3.1 Generell info:
+Du må ha Java Runtime Environment (JRE) versjon 1.6 eller høyere installert på systemet for å kunne kjøre OmegaT. OmegaT-pakker som inkluderer Java Runtime Environment er nå tilgjengelige for å spare brukerne for bryet med å velge, finne og installere det selv. 
 
 Dersom du allerede har Java, er en måte å installere den nyeste versjonen av OmegaT å bruke Java Web Start. 
 For å gjøre dette laster du ned og kjører denne filen:
@@ -216,16 +216,18 @@ Disse har bidratt med koder
   Wildrich Fourie
   Phillip Hall
   Jean-Christophe Helary
+  Chihiro Hio
   Thomas Huriaux
   Hans-Peter Jacobs
   Kyle Katarn
   Piotr Kulik
   Ibai Lakunza Velasco
   Guido Leenders
-  Aaron Madlon-Kay
+  Aaron Madlon-Kay (integreringsmanager)
   Fabián Mandelbaum
   Manfred Martin
   Adiel Mittmann
+  Hiroshi Miura 
   John Moran
   Maxym Mykhalchuk 
   Arno Peters
@@ -270,8 +272,7 @@ OmegaT bruker følgende bibliotek:
   trilead-ssh2-1.0.0-build217 (Trilead SSH-lisens)
   lucene-*.jar (Apache License 2.0)
   De engelske tokenisererne (org.omegat.tokenizer.SnowballEnglishTokenizer og
-  org.omegat.tokenizer.LuceneEnglishTokenizer) bruker stoppord fra Okapi
-(http://okapi.sourceforge.net) (LGPL-lisens)
+org.omegat.tokenizer.LuceneEnglishTokenizer) bruker stoppord fra Okapi (http://okapi.sourceforge.net) (LGPL-lisens)
   tinysegmenter.jar (Modified BSD-lisens)
   commons-*.jar (Apache-lisens 2.0)
   jWordSplitter (Apache License 2.0)
@@ -283,6 +284,8 @@ OmegaT bruker følgende bibliotek:
   SuperTMXMerge-for_OmegaT.jar (LGPL-lisens)
   groovy-all-2.2.2.jar(Apache-lisens 2.0)
   slf4j (MIT-lisens)
+  juniversalchardet-1.0.3.jar (GPL v2)
+  DictZip fra JDictd (GPL v2)
 
 ==============================================================================
  5.  Har du problemer med OmegaT? Trenger du hjelp?

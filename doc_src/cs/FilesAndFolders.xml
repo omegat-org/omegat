@@ -319,14 +319,14 @@
           </row>
 
           <row>
-            <entry><application>OmegaT</application></entry>
+            <entry><application>O aplikaci OmegaT</application></entry>
 
             <entry><para>Textový soubor, který obsahuje dva řádky:</para>
 
             <programlisting>#!/bin/bash java
 java -jar OmegaT.jar $*</programlisting>
 
-            <para>Uživatelům systémů Linux a Mac OS X se tyto soubory mohou hodit. Po té, co se ujistíte, že jste v příkazovém řádku v adresáři OmegaT, povolte souboru oprávnění na čtení a zápis (chmod +x OmegaT). Posléze bude možné startovat OmegaT spouštěním tohoto souboru z příkazového řádku.</para>
+            <para>Uživatelům systémů Linux a Mac OS X se tyto soubory mohou hodit. Po té, co se ujistíte, že jste v příkazovém řádku v adresáři OmegaT, povolte souboru oprávnění na čtení a zápis (chmod +x OmegaT).<literal></literal> Posléze bude možné startovat OmegaT spouštěním tohoto souboru z příkazového řádku.</para>
             </entry>
           </row>
           

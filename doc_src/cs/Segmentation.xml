@@ -15,7 +15,9 @@
 
   <para><application>OmegaT</application> používá následující sled kroků:</para>
 
-  <variablelist><varlistentry><term><indexterm class="singular">
+  <variablelist>
+    <varlistentry>
+      <term><indexterm class="singular">
           <primary>Segmentace</primary> <secondary>Segmentace na úrovni zdroje</secondary>
         </indexterm>Segmentace na úrovni struktury</term>
 
@@ -24,7 +26,10 @@
 
         <para>Například mohou být textové soubory segmentovány podle zlomů řádků, prázdných řádků nebo vůbec nemusí být segmentovány na strukturální úrovni. Soubory s formátováním (dokumenty ODF, HTML, atd.) jsou segmentovány na úrovni tagů bloků (odstavce). Atributy přeložitelných objektů v souborech XHTML nebo HTML lze extrahovat jako samostatné segmenty.</para>
       </listitem>
-    </varlistentry><varlistentry><term><indexterm class="singular">
+    </varlistentry>
+
+    <varlistentry>
+      <term><indexterm class="singular">
           <primary>Segmentace</primary> <secondary>Segmentace na úrovni vět</secondary>
         </indexterm>Segmentace na úrovni vět</term>
 
@@ -43,19 +48,26 @@
 
     <para>Tyto dva typy pravidel se chovají následovně:</para>
 
-    <variablelist><varlistentry><term><indexterm class="singular">
+    <variablelist>
+      <varlistentry>
+        <term><indexterm class="singular">
             <primary>Segmentace</primary> <secondary>Pravidla</secondary> <tertiary>Pravidlo zalomení</tertiary>
           </indexterm>Pravidla zalomení</term>
 
         <listitem>
           <para>Rozdělí zdrojový text na segmenty. Například: „<emphasis>Did it make sense? I was not sure.“</emphasis> by mělo být rozděleno na dva segmenty. Aby se tak stalo, mělo by tu být pravidlo zalomení pro „?“, po kterém následuje mezera a slovo začínající velkým písmenem. Když chcete definovat pravidlo jako pravidlo zalomení, zaškrtněte zaškrtávací políčko Zlom/Výjimka.</para>
         </listitem>
-      </varlistentry></variablelist><variablelist><varlistentry><term><indexterm class="singular">
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term><indexterm class="singular">
             <primary>Segmentace</primary> <secondary>Pravidla</secondary><tertiary>Pravidlo výjimky</tertiary>
           </indexterm>Pravidlo výjimky</term>
 
         <listitem>
-          <para>Specifikuje, které části textu by NEMĚLY být rozděleny. Nehledě na tečku v <emphasis>„Mrs.  Dalloway“</emphasis> by zde neměl být text rozdělen, tzn. mělo by být založeno pravidlo výjimky pro Mrs (stejně tak Mr a Dr a prof atd.), což je normálně následováno tečkou. Když chcete definovat pravidlo jakožto výjimku, nechte zaškrtávací políčko Zlom/Výjimka prázdné.</para>
+          <para>Specifikuje, které části textu by NEMĚLY být rozděleny. Nehledě na tečku v <emphasis>„Mrs. Dalloway“</emphasis> by zde neměl být text rozdělen, tzn. mělo by být založeno pravidlo výjimky pro Mrs (stejně tak Mr a Dr a prof atd.), což je normálně následováno tečkou. Když chcete definovat pravidlo jakožto výjimku, nechte zaškrtávací políčko Zlom/Výjimka prázdné.</para>
         </listitem>
       </varlistentry>
     </variablelist>

@@ -39,6 +39,26 @@
       </indexterm></title>
 
     <para>Toto dialogové okno vypisuje dostupné filtry souborů. Pokud nechcete používat aplikaci OmegaT na překlad souborů nějakého určitého typu, můžete daný filtr vypnout odznačením zaškrtávacího políčka vedle jeho názvu. OmegaT pak při načítání projektů vynechá všechny příslušné soubory, a při vytváření cílových dokumentů je zkopíruje v nezměněné podobě. Když se rozhodnete používat filtr znovu, stačí příslušné políčko opět zaškrtnout. Kliknutím na <emphasis role="bold">Výchozí nastavení</emphasis> obnovíte výchozí nastavení filtrů. Když chcete upravit nastavení, které soubory budou v jakém kódování, vyberte filtr ze seznamu a klikněte na <emphasis role="bold">Editovat</emphasis>.</para>
+
+    <para>Dialogové okno umožňuje zpřístupnit nebo zakázat následující možnosti:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Odstranit úvodní a koncové tagy: zrušením označení této možnosti zobrazíte všechny tagy včetně úvodních a koncových. Upozornění: ve formátech Microsoft Open XML (docx, xlsx, atd.), pokud jsou tagy zobrazeny, NIKDY nezapisujte žádný text před první tag (je to technický tag, kterým segment vždy začíná).</para>
+      </listitem>
+
+      <listitem>
+        <para>Odstranit úvodní a koncové netisknutelné znaky v nesegmentovaných projektech: ve výchozím nastavení OmegaT odstraňuje úvodní a koncové netisknutelné znaky. U nesegmentovaných projektů můžete tyto znaky ponechat tím, že zrušíte označení této možnosti.</para>
+      </listitem>
+
+      <listitem>
+        <para>Zachovat mezery pro všechny tagy: označte tuto možnost pokud zdrojové dokumenty obsahují důležité mezery (pro potřeby rozvržení textu), které nesmí být ignorovány.</para>
+      </listitem>
+
+      <listitem>
+        <para>Ignorovat obsah souboru pokud se naleznou segmenty s alternativními překlady: ve výchozím nastavení OmegaT používá název zdrojového souboru jako část identifikace alternativního překladu. Pokud je tato možnost označena, název zdrojového souboru nebude použit a alternativní překlady se projeví v libovolném souboru, pokud se jiný kontext (předchozí/následný segment nebo nějaký typ ID v závislosti na souborovém formátu) shoduje s přibližným překladem.</para>
+      </listitem>
+    </itemizedlist>
   </section>
 
   <section id="filters.options">
@@ -80,17 +100,11 @@
       <listitem>
         <para><emphasis>Automaticky v hlavičce nahradit 'nplurals=INTEGER; &amp;plural=EXPRESSION;'</emphasis></para>
 
-        <para><emphasis><emphasis>Tato možnost umožňuje aplikaci OmegaT přepsat specifikaci v hlavičce souboru PO a použít výchozí hodnoty pro vybraný cílový jazyk.</emphasis></emphasis></para>
+        <para><emphasis>Tato možnost umožňuje aplikaci OmegaT přepsat specifikaci v hlavičce souboru PO a použít výchozí hodnoty pro vybraný cílový jazyk.</emphasis></para>
       </listitem>
     </itemizedlist>
 
     <para><emphasis role="bold">Soubory XHTML</emphasis></para>
-
-    <itemizedlist>
-      <listitem>
-        <para><emphasis>Přidat nebo přepsat deklaraci kódování v souborech HTML a XHTML</emphasis>: cílové soubory často musí mít kódování znakové sady odlišné od kódování ve zdrojovém souboru (nezáleží na tom, jestli je to přímo definováno či implicitně obsaženo). Použitím této možnosti si překladatel může určit, zda cílové soubory mají obsahovat deklaraci kódování. Například, pokud pokud filtr souboru určí UTF8 jako kódovací schéma pro cílové soubory, výběrem možnosti ‚Vždy‘ zajistí, že tato informace bude obsažena v přeložených souborech.</para>
-      </listitem>
-    </itemizedlist>
 
     <itemizedlist>
       <listitem>
@@ -172,7 +186,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Přidat nebo přepsat deklaraci kódování v HTML a XHTML: Vždy (výchozí nastavení), Jen když soubor (X)HTML má hlavičku, Jen když (X)HTML má deklaraci kódování, Nikdy</emphasis></para>
+        <para><emphasis>Přidat nebo přepsat deklaraci kódování v souborech HTML a XHTML</emphasis>: cílové soubory často musí mít kódování znakové sady odlišné od kódování ve zdrojovém souboru (nezáleží na tom, jestli je to přímo definováno či implicitně obsaženo). Použitím této možnosti si překladatel může určit, zda cílové soubory mají obsahovat deklaraci kódování. Například, pokud pokud filtr souboru určí UTF8 jako kódovací schéma pro cílové soubory, výběrem možnosti ‚Vždy‘ zajistí, že tato informace bude obsažena v přeložených souborech.</para>
       </listitem>
     </itemizedlist>
 
@@ -190,7 +204,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Přeskočit text který se rovná regulárnímu výrazu: </emphasis> Text představující regulární výraz bude ignorován.</para>
+        <para><emphasis>Přeskočit text který se rovná regulárnímu výrazu: </emphasis> text představující regulární výraz bude ignorován. Validátor tagů toto zobrazí červeně jako odmítnuté. Text ve zdrojovém segmentu, který má shodu, bude zobrazen kurzívou.</para>
       </listitem>
     </itemizedlist>
 
@@ -203,16 +217,16 @@
     <itemizedlist>
       <listitem>
         <para><emphasis>Nepřekládejte obsah tagů s následujícími atributy párů key-value [klíč-hodnota] (odděleno čárkou):</emphasis>: shoda v seznamu párů klíč-hodnota zapříčiní, že obsah tagů bude ignorován.</para>
+
+        <para>Někdy se to totiž může hodit, když je možno definovat tagy podle hodnoty jejich atributů, a tyto tagy pak nepřekládat. Např. <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal> Můžete definovat páry klíč-hodnota pro tagy, které mají zůstat nepřeložené. Jako příklad poslouží nahoře uvedený příklad, pole by pak obsahovalo: <literal>class=hide, translate=no </literal></para>
       </listitem>
-    </itemizedlist>
 
-    <para><emphasis role="bold">Textové soubory</emphasis></para>
-
-    <itemizedlist>
       <listitem>
-        <para><emphasis>Segmentace podle odstavců na zalomení řádků, prázdných řádcích nebo vůbec</emphasis>:</para>
+        <para><emphasis>V přeloženém dokumentu komprimovat netisknutelné znaky</emphasis>: více po sobě jdoucích netisknutelných znaků bude v přeloženém dokumentu převedeno na jeden jediný netisknutelný znak.</para>
+      </listitem>
 
-        <para>pokud jsou aktivní pravidla segmentace podle vět, text bude i nadále segmentován podle možnosti, která je zde označena.</para>
+      <listitem>
+        <para><emphasis>V přeloženém dokumentu odstranit HTML komentáře</emphasis>: žádné části kódu označené jako komentář (mezi značkami &lt;!-- a --&gt;) nebudou skopírovány do přeloženého dokumentu.</para>
       </listitem>
     </itemizedlist>
 
@@ -339,7 +353,7 @@
         </listitem>
 
         <listitem>
-          <para><literal>${system-user-name}</literal> - system user name</para>
+          <para><literal>${system-user-name)</literal> – jméno uživatele systému</para>
         </listitem>
 
         <listitem>
@@ -355,7 +369,7 @@
         </listitem>
 
         <listitem>
-          <para><literal>${targetLocaleLCID}</literal> - Microsoft target locale</para>
+          <para><literal>${targetLocaleLCID)</literal> – cílové umístění ‚Microsoft target locale‛</para>
         </listitem>
       </itemizedlist>
 

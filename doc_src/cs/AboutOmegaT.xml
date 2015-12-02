@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.about.OmegaT">
-  <title>O aplikaci <application>OmegaT</application> – úvodi</title>
+  <title>O aplikaci <application>OmegaT</application> – úvod</title>
 
   <section id="OmegaT-Highlists">
     <title>Nejdůležitější charakteristiky OmegaT</title>
@@ -12,7 +12,7 @@
       <listitem>
         <para><emphasis role="bold">Překladová paměť:</emphasis><application> OmegaT</application> ukládá vaše překlady do souboru s překladovou pamětí. Současně může pro srovnání využívat paměti z předchozích překladů. Překladové paměti mohou být velmi užitečné u takového překladu, ve kterém se části textu často opakují nebo je zde množství přiměřeně podobných segmentů textu. OmegaT ukládá vaše předchozí překlady do překladové paměti a pak navrhuje vhodné překlady pro text, se kterým právě pracujete.</para>
 
-        <para>Jakmile potřebujete aktualizovat dokument, který jste již jednou přeložiti, pak jsou takové překladové paměti velmi užitečné. Nezměněné věty budou automaticky přeloženy, a aktualizované věty budou zobrazeny s překladem nejpodobnější starší věty. Tím pádem se zjednoduší práce na úpravách původního dokumentu. Pokud vám byly dodány již dříve vytvořené překladové paměti, například poskytnuté překladatelskou agenturou nebo vaším klientem, OmegaT je bude moci používat jako referenční paměti.</para>
+        <para>Jakmile potřebujete aktualizovat dokument, který jste již jednou přeložili, pak jsou takové překladové paměti velmi užitečné. Nezměněné věty budou automaticky přeloženy, a aktualizované věty budou zobrazeny s překladem nejpodobnější starší věty. Tím pádem se zjednoduší práce na úpravách původního dokumentu. Pokud vám byly dodány již dříve vytvořené překladové paměti, například poskytnuté překladatelskou agenturou nebo vaším klientem, OmegaT je bude moci používat jako referenční paměti.</para>
 
         <para>Pro ukládání a přístup k překladovým pamětem používá OmegaT standardní formát souborů TMX, což nabízí možnost sdílení vašich překladových materiálů s jinými aplikacemi CAT, které tento formát podporují.</para>
       </listitem>

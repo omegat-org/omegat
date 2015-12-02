@@ -18,7 +18,7 @@
         <primary>Tagy</primary> <secondary>Pojmenování</secondary>
       </indexterm><emphasis role="bold">Pojmenování tagů:</emphasis></para>
 
-    <para>Tagy se skládají z jednoho až tří písmen a čísla. Jedinečné číslování umožňuje vzájemně si odpovídající tagy seskupovat do skupin a rozlišovat mezi tagy, které mají stejné písmeno v názvu, ale ve skutečnosti zastupují jinou vlastnost. Znaky mohou, ale nemusí odrážet hodnotu formátování, kterou reprezentují tagy (např. tučně (‚b‛ pro ‚bold‛), kurzíva (‚i‛ pro ‚italics‛), atd.) tučně (‚b‛ pro ‚bold‛), kurzíva (‚i‛ pro ‚italics‛), atd.)&lt;</para>
+    <para>Tagy se skládají z jednoho až tří písmen a čísla. Jedinečné číslování umožňuje vzájemně si odpovídající tagy seskupovat do skupin a rozlišovat mezi tagy, které mají stejné písmeno v názvu, ale ve skutečnosti zastupují jinou vlastnost. Znaky mohou, ale nemusí odrážet hodnotu formátování, kterou reprezentují tagy (např. tučně (‚b‛ pro ‚bold‛), kurzíva (‚i‛ pro ‚italics‛), atd.)</para>
 
     <para><indexterm class="singular">
         <primary>Tagy</primary> <secondary>Číslování</secondary>
@@ -106,9 +106,9 @@
 
     <para><literal>&lt;b0&gt;Formátování&lt;/b0&gt; &lt;b1&gt;jedna&lt;/b1&gt; bude zpřeházeno.&lt;segment 0001&gt;</literal></para>
 
-    <para>Po chybné manipulaci</para>
+    <para>Po chybné manipulaci:</para>
 
-    <para><literal>&lt;b0&gt;Formátování&lt;b1&gt; jedna &lt;/b0&gt; &lt;/b1&gt;je teď zcela špatně.&lt;segment 0001&gt;</literal></para>
+    <para><literal>&lt;b0&gt;Formátování &lt;b1&gt;jedna&lt;/b0&gt; &lt;/b1&gt; je teď zcela špatně.&lt;segment 0001&gt;</literal></para>
   </section>
 
   <section>
@@ -152,7 +152,7 @@
       <listitem>
         <para><emphasis role="bold">Fragment nebo fragmenty, které mají být odstraněny z regulárního výrazu překladu:</emphasis></para>
 
-        <para>Můžete vložit regulární výraz pro nežádoucí obsah v překladu. Jakákoliv shoda v cílovém segmentu pak bude zobrazena červeně, tj.  tak, aby mohla být snadno identifikována a opravena. Když se provádí hledání přibližných překladů, pak bude ignorován tzv. ‚remove pattern‘, čili vzor, dle kterého se postupuje při odstraňování zadaných znaků nebo částí textu. V takovém případě se počítá 5 tzv. trestných bodů, pokud odstraněná část neodpovídá jinému segmentu, takže shoda přibližného překladu se neukazuje s hodnotou 100%.</para>
+        <para>Můžete vložit regulární výraz pro nežádoucí obsah v překladu. Jakákoliv shoda v cílovém segmentu pak bude zobrazena červeně, tj. tak, aby mohla být snadno identifikována a opravena. Když se provádí hledání přibližných překladů, pak bude ignorován tzv. ‚remove pattern‘, čili vzor, dle kterého se postupuje při odstraňování zadaných znaků nebo částí textu. V takovém případě se počítá 5 tzv. trestných bodů, pokud odstraněná část neodpovídá jinému segmentu, takže shoda přibližného překladu se neukazuje s hodnotou 100%.</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -162,9 +162,9 @@
         <primary>Tagy</primary> <secondary>Ověření skupiny tag</secondary>
       </indexterm></title>
 
-    <para>Funkce Ověření tagů detekuje změny v sekvenci tagů (ať už byli změněny cíleně nebo nechtěně) a ukáže dotyčný segment. Spuštění této funkce - stiskem <guimenuitem>Ctrl+T<indexterm class="singular">
+    <para>Funkce Ověření tagů detekuje změny v sekvenci tagů (ať už byli změněny cíleně nebo nechtěně) a ukáže dotyčný segment. Spuštění této funkce - stiskem <guimenuitem>Ctrl+Shift+V<indexterm class="singular">
         <primary>Klávesové zkratky</primary> <secondary>Ověření tagů - Ctrl+T</secondary>
-      </indexterm></guimenuitem> – otevřete okno obsahující všechny segmenty souboru, které obsahují pravděpodobně poškozené nebo chybné tagy v překladu. Za použití funkce Ověření tagů je oprava tagů a opětovné vytvoření cílových dokumentů opravdu jednoduché. Okno, které se otevře po stisku <guimenuitem>Ctrl+T</guimenuitem>, zobrazí tabulku se třemi sloupci, které obsahují odkaz na segment, původní segment a segment s překladem.</para>
+      </indexterm></guimenuitem> – otevřete okno obsahující všechny segmenty souboru, které obsahují pravděpodobně poškozené nebo chybné tagy v překladu. Za použití funkce Ověření tagů je oprava tagů a opětovné vytvoření cílových dokumentů opravdu jednoduché. Okno, které se otevře po stisku <guimenuitem>Ctrl+Shift+V</guimenuitem>, zobrazí tabulku se třemi sloupci, které obsahují odkaz na segment, původní segment a segment s překladem.</para>
 
     <figure id="tag.validation">
       <title>Záznam ověření tagů</title>
@@ -180,7 +180,7 @@
       </mediaobject>
     </figure>
 
-    <para>Tagy jsou zvýrazněné tučným modrým písmem a tak lze snadno srovnat původní obsah s obsahem přeloženým. Klikněte na odkaz pro přejití na segment v Editoru. Pokud je to nutné, opravte chybu (ve výše uvedeném případe je to chybějící pár &lt;i2&gt;&lt;/i2&gt;) a stiskněte <guimenuitem>Ctrl+T</guimenuitem> pro návrat k oknu ověření tagů a tak můžete opravit případné další chyby. Chyby tagů představují sekvence tagů v překladu, které nereflektují stejný pořádek a počet tagů, po vzoru původního segmentu. Některé změny tagů jsou nutné a neškodné, oproti tomu některé zapříčiní problémy při vytváření přeložených dokumentů.</para>
+    <para>Tagy jsou zvýrazněné tučným modrým písmem a tak lze snadno srovnat původní obsah s obsahem přeloženým. Klikněte na odkaz pro přejití na segment v Editoru. Pokud je to nutné, opravte chybu (ve výše uvedeném případe je to chybějící pár &lt;i2&gt;&lt;/i2&gt;) a stiskněte <guimenuitem>Ctrl+Shift+V</guimenuitem> pro návrat k oknu ověření tagů a tak můžete opravit případné další chyby. Chyby tagů představují sekvence tagů v překladu, které nereflektují stejný pořádek a počet tagů, po vzoru původního segmentu. Některé změny tagů jsou nutné a neškodné, oproti tomu některé zapříčiní problémy při vytváření přeložených dokumentů.</para>
   </section>
 
   <section id="hints.for.tag.management">
@@ -190,7 +190,7 @@
 
     <para><emphasis role="bold">Zjednodušení výchozího textu</emphasis></para>
 
-    <para>Tagy všeobecně představují nějaký druh formátování v původním textu. Zjednodušení formátování původního textu ve velké míře přispívá ke snížení počtu tagů. Tam kde to okolnosti povolují, zkuste zvážit sjednocení použitého písma, velikosti písma, barev, atd.,  protože tak vám to může zjednodušit překlad a snížit potencionální množství chyb tagů. Přečtěte si část ‚Operace s tagy‛, zjistíte tam, co všechno se dá s tagy provádět. Pamatujte, že pokud vás tagy ruší a formátování není v daném překladu extrémně důležité, tak odstranění tagů může být nejjednodušší cesta ven z problémů.</para>
+    <para>Tagy všeobecně představují nějaký druh formátování v původním textu. Zjednodušení formátování původního textu ve velké míře přispívá ke snížení počtu tagů. Tam kde to okolnosti povolují, zkuste zvážit sjednocení použitého písma, velikosti písma, barev, atd., protože tak vám to může zjednodušit překlad a snížit potencionální množství chyb tagů. Přečtěte si část ‚Operace s tagy‛, zjistíte tam, co všechno se dá s tagy provádět. Pamatujte, že pokud vás tagy ruší a formátování není v daném překladu extrémně důležité, tak odstranění tagů může být nejjednodušší cesta ven z problémů.</para>
 
     <para><emphasis role="bold">Věnujte zvýšenou pozornost párovým tagům.</emphasis></para>
 

@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.TokenizerPlugin.inOmegaT">
-  <title>Plugin Tokenizer<indexterm class="singular">
-      <primary>Pluginy</primary> <secondary>Tokenizer</secondary>
+<appendix id="appendix.Tokenizers.inOmegaT">
+  <title>Tokenizery<indexterm class="singular">
+      <primary>Tokenizery</primary>
     </indexterm></title>
 
   <section>
     <title>Úvod<indexterm class="singular">
-        <primary>Lucene</primary>
-
-        <see>Tokenizer</see>
+        <primary>Tokenizer</primary> <see>Lucene</see>
       </indexterm><indexterm class="singular">
         <primary>Stemmer</primary>
 
@@ -40,14 +38,16 @@
   </section>
 
   <section>
-    <title>Instalace a použití</title>
+    <title>Výběr jazyka</title>
 
-	<para>Tokenizery jsou v OmegaT obsaženy. OmegaT automaticky vybere tokenizer pro zdrojový a cílový jazyk podle jazykových nastavení projektu. Je možné vybrat jiný tokenizer nebo jinou verzi tokenizeru v okně Vlastnosti projektu.</para>
+    <para>Tokenizery jsou v OmegaT zahrnuty a aktivní již ve výchozím nastavení. OmegaT automaticky vybere tokenizer pro zdrojový a cílový jazyk podle jazykových nastavení projektu. Je možné vybrat jiný tokenizer (jazyk tokenizeru) nebo jinou verzi tokenizeru (chování tokenizeru) v okně Vlastnosti projektu.</para>
 
-	<warning>
-		<title>Případy nefunkčnosti</title>
-		<para>OmegaT se nespustí, pokud v adresáři /plugin budou nějaké tokenizery. Ještě před startem OmegaT odstraňte z adresáře /plugin případné soubory tokenizeru.</para>
-	</warning>
-	
+    <para>Pokud pro aktuální jazyk není dostupný žádný tokenizer, pak OmegaT použije místo toho Hunspell (v takovém případě se ujistěte, že máte instalovány příslušné slovníky Hunspell).</para>
+
+    <warning>
+      <title>Případy nefunkčnosti</title>
+
+      <para>OmegaT se nespustí, pokud v adresáři /plugin budou nějaké tokenizery. Ještě před startem OmegaT odstraňte z adresáře /plugin případné soubory tokenizeru.</para>
+    </warning>
   </section>
 </appendix>

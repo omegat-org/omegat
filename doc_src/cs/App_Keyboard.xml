@@ -135,6 +135,12 @@
 
           <entry>změna směru záznamu mezi RTL-LTR (zprava doleva – zleva doprava)</entry>
         </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Mezerník</emphasis></entry>
+
+          <entry>otevře dialogové okno s kontextovými návrhy (Mac: <emphasis role="bold">Esc</emphasis>). Použijte klávesovou zkratku <emphasis role="bold">Ctrl+PgUp/PgDn</emphasis> (Cmd+PgUp/PgDn na Mac-u) pro postupné procházení mezi možnostmi <emphasis>Záznamy glosáře</emphasis>, <emphasis>Automatický text,</emphasis> <emphasis>Chybějící tagy</emphasis> a <emphasis>Tabulka znaků</emphasis>.</entry>
+        </row>
       </tbody>
     </tgroup>
   </table>
@@ -166,6 +172,8 @@
   <para>Klávesa „Shift“ sama o sobě nevyvolá žádné speciální reakce pohybu kurzoru: když je stisknuta klávesa „Shift“, všechny klávesy pohybují kurzorem obvyklým způsobem, kromě případu kombinace kláves <literal>Shift+Enter</literal>, pomocí které se do textu vloží zalomení řádku.</para>
 
   <para>Obecné příkazy systému: Vybrat vše (<keycap>Ctrl+A</keycap>), Vložit (<emphasis role="bold">Ctrl+V</emphasis> ), Vyjmout (<emphasis role="bold">Ctrl+X</emphasis>), Kopírovat <emphasis role="bold">Ctrl+C)</emphasis>, Vložit přibližný překlad <emphasis role="bold">(Ctrl+I</emphasis>) a Vložit zdroj (<emphasis role="bold">Ctrl+Shift+I</emphasis>) v zásadě reaguje pouze na text uvnitř aktuálně otevřeného segmentu.</para>
+  
+  <para>Prostřednictvím klávesové zkratky <keycap>Ctrl+Tab</keycap> je možné se pohybovat mezi podokny (například přejít z Editoru do Přibližných překladů). <keycap>Ctrl+Shift+Tab</keycap> zprostředkuje pohyb zpět do předchozího podokna. Klávesové zkratky <keycap>Ctrl+A</keycap> a <keycap>Ctrl+C</keycap> fungují v rámci podoken a umožňují zkopírovat celý text nebo jeho část do schránky systému.</para>
 
   <para>Klávesové zkratky si můžete dle vlastní potřeby upravit. Více naleznete v části <link linkend="ch04.shortcuts.customization">Přizpůsobení zkratek</link></para>
 </appendix>

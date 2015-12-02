@@ -51,15 +51,29 @@
 
           <tbody>
             <row>
-              <entry><guimenuitem>Nový</guimenuitem></entry>
+              <entry><guimenuitem>Nový...</guimenuitem></entry>
 
-              <entry/>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>N</keycap>
+                </keycombo></entry>
 
               <entry>Vytvoří a otevře nový projekt. Dialogové okno pro vytvoření projektu je stejné jako u Vlastnosti projektu. Viz<xref linkend="chapter.project.properties"/></entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Otevřít</guimenuitem></entry>
+              <entry><guimenuitem>Stáhnout týmový projekt...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Vytvoří místní kopii vzdáleného projektu OmegaT.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Otevřít...</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -71,7 +85,15 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Importovat zdrojové soubory...</guimenuitem></entry>
+              <entry><guimenuitem>Otevřít nedávný projekt</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Zpřístupňuje posledních pět upravovaných projektů. Kliknutím na jeden vybraný uloží aktuální projekt, zavře jej a otevře ten nově vybraný.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Kopírovat soubory do zdrojového adresáře...</guimenuitem></entry>
 
               <entry/>
 
@@ -79,11 +101,11 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Import z MediaWiki...</guimenuitem></entry>
+              <entry><guimenuitem>Stáhnout stránku MediaWiki...</guimenuitem></entry>
 
               <entry/>
 
-              <entry>Importuje jednotky ze stránek MediaWiki založené na vloženém URL.</entry>
+              <entry>Stáhne jednotky ze stránek MediaWiki založené na vloženém URL.</entry>
             </row>
 
             <row>
@@ -130,6 +152,18 @@
                 </keycombo></entry>
 
               <entry>Vytvoří cílové dokumenty založené na vašem překladu dokumentu. Přeložené dokumenty budou umístěné v adresáři překladu <filename>/target</filename>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Vytvořit aktuálně přeložené dokumenty</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>D</keycap>
+                </keycombo></entry>
+
+              <entry>Vytvoří cílový dokument, který odpovídá aktuálnímu překládanému dokumentu.</entry>
             </row>
 
             <row>
@@ -302,9 +336,9 @@
               <entry><guimenuitem>Přepsat zdrojem</guimenuitem></entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
 
                   <keycap>R</keycap>
                 </keycombo></entry>
@@ -316,9 +350,9 @@
               <entry><guimenuitem>Vložit zdroj</guimenuitem></entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
 
                   <keycap>I</keycap>
                 </keycombo></entry>
@@ -327,28 +361,42 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Vložit tagy zdroje</guimenuitem></entry>
+              <entry><guimenuitem>Vložit chybějící tagy zdroje</guimenuitem></entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
 
                   <keycap>T</keycap>
                 </keycombo></entry>
 
               <entry><indexterm class="singular">
                   <primary>Tagy</primary> <secondary>Vložit tagy zdroje</secondary>
-                </indexterm>Vloží tagy zdroje na pozici kurzoru. Všechny důležité tagy ve zdroji – tj.  nejen tagy OmegaT, ale i vlastní, Java, printf, atp. - budou vloženy do aktuálního cílového segmentu, nehledě na to, zda tam již jsou vloženy nebo ne. Texty a závorky u tagů budou nahrazeny mezerami: <literal>&lt;f0&gt;&lt;f1&gt;Tento text&lt;/f0&gt;&lt;/f1&gt;</literal>bude zkopírován jako<literal>&lt;f0&gt;&lt;f1&gt;jedna mezera&lt;/f0&gt;&lt;/f1&gt;</literal></entry>
+                </indexterm>Vloží tagy zdroje (pokud chyběly) na pozici kurzoru.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Vložit další chybějící tag</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>T</keycap>
+                </keycombo></entry>
+
+              <entry><indexterm class="singular">
+                  <primary>Tagy</primary> <secondary>Vložit další chybějící tag</secondary>
+                </indexterm>Vloží jen jeden tag (z chybějících) na pozici kurzoru.</entry>
             </row>
 
             <row>
               <entry><guimenuitem>Exportovat výběr</guimenuitem></entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
 
                   <keycap>C</keycap>
                 </keycombo></entry>
@@ -360,9 +408,9 @@
               <entry><guimenuitem>Vytvořit nový záznam Glosáře</guimenuitem></entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
 
                   <keycap>G</keycap>
                 </keycombo></entry>
@@ -383,6 +431,18 @@
             </row>
 
             <row>
+              <entry><guimenuitem>Najít a nahradit...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>K</keycap>
+                </keycombo></entry>
+
+              <entry>Otevře nové okno <link linkend="section.searchreplace.window">Najít a nahradit</link></entry>
+            </row>
+
+            <row>
               <entry><guimenuitem>Změnit velikost písma</guimenuitem></entry>
 
               <entry><keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo> (viz text)</entry>
@@ -393,7 +453,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Označit přibližný překlad #N</guimenuitem></entry>
+              <entry><guimenuitem>Označit přibližný překlad</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -418,6 +478,36 @@
               <entry/>
 
               <entry>Jeden a ten samý segment může, v závislosti na kontextu, vyžadovat různé překlady. Vyberte tuto položku v nabídce, pokud se aktuální segment nehodí a vložte alternativní překlad.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Odstranit překlad</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Smaže překlad a označí segment jako nepřeložený.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Použít prázdný překlad</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Definuje překlad jako ‚prázdný‘. V cílovém dokumentu se v tomto segmentu nic nezobrazí. V Editoru se místo překladu zobrazí &lt;PRÁZDNÝ&gt; / &lt;EMPTY&gt;.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Zapsat identický překlad</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>S</keycap>
+                </keycombo></entry>
+
+              <entry>Použitím tohoto příkazu registrujete překlad jako identický se zdrojem, a to i když políčko „Povolit překlad rovnající se zdroji“ (v Možnosti / Nastavení editace...) není označeno.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -451,9 +541,27 @@
             </row>
 
             <row>
+              <entry><guimenuitem>Další přeložený segment</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>U</keycap>
+                </keycombo></entry>
+
+              <entry>Přejde na další již přeložený segment, ignoruje nepřeložené segmenty.</entry>
+            </row>
+
+            <row>
               <entry><guimenuitem>Další segment</guimenuitem></entry>
 
-              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo> nebo <keycap>Enter</keycap> nebo <keycap>TAB</keycap></entry>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>N</keycap>
+                </keycombo> or <keycap>Enter</keycap></entry>
 
               <entry>Přesune se na další segment. Pokud je aktuální segment posledním v souboru, přesune se na první segment dalšího souboru.</entry>
             </row>
@@ -461,7 +569,15 @@
             <row>
               <entry><guimenuitem>Předchozí segment</guimenuitem></entry>
 
-              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo> nebo <keycombo> <keycap>Ctrl</keycap> <keycap>Enter</keycap> </keycombo> nebo <keycombo> <keycap>Ctrl</keycap> <keycap>Tab</keycap> </keycombo></entry>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>P</keycap>
+                </keycombo> or <keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Enter</keycap>
+                </keycombo></entry>
 
               <entry>Přesune se na předchozí segment. Pokud je aktuální segment prvním v souboru, přesune se na poslední segment předchozího souboru.</entry>
             </row>
@@ -492,6 +608,20 @@
               <entry/>
 
               <entry>Otevře předchozí segment s poznámkou.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Zdroj vybraných přibližných překladů</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>M</keycap>
+                </keycombo></entry>
+
+              <entry>Přejde na segment, který neodpovídá aktuálně vybranému přibližnému překladu v podokně <guilabel>Přibližné překlady</guilabel>.</entry>
             </row>
 
             <row>
@@ -571,17 +701,38 @@
             <row>
               <entry><guimenuitem>Označit nezlomitelné mezery</guimenuitem></entry>
 
-              <entry>Pokud je tato možnost vybraná, pak budou nezlomitelné mezery v segmentech označeny s šedým pozadím.</entry>
+              <entry>Pokud je tato možnost vybraná, pak budou nezlomitelné mezery označeny s šedým pozadím.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Označit netisknutelné znaky</guimenuitem></entry>
+
+              <entry>Pokud je tato možnost vybraná, pak budou netisknutelné znaky označeny malou tečkou.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Označit řídicí znak bidirekcionálního algoritmu</guimenuitem></entry>
+
+              <entry>Tato možnost zobrazí <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">znaky obousměrného zápisu</ulink>
+              </entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Označit automaticky vyplněné segmenty</guimenuitem></entry>
+
+              <entry>Když je tato možnost aktivní, pozadí všech segmentů, kde byl cílový segment automaticky vyplněn (např. z paměti TMX umístěné v /tm/auto), je barevně zvýrazněno. Barvy se zobrazují tehdy, když je aktivní možnost „Uložit automaticky vyplněný status“ (v Možnosti / Nastavení editace ...). Běžné překlady vložené z adresáře auto jsou zobrazeny oranžově. Ostatní překlady, rozpoznány obzvláště v TMX, lze zobrazit s použitím různých barev. Více technických detailů najdete v <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Požadavky na vylepšení</ulink>.</entry>
             </row>
 
             <row>
               <entry><guimenuitem>Informace k úpravám</guimenuitem></entry>
 
-              <entry>Když v možnosti zobrazit Informace k úpravám vyberete volbu <emphasis>Zobrazovat u otevřeného segmentu</emphasis>, bude zobrazen čas a autor poslední změny u aktuálně otevřeného segmentu. Když vyberete volbu <emphasis>Zobrazovat pro všechny segmenty</emphasis>, bude tato informace u všech segmentů a volba <emphasis>Nezobrazovat žádné</emphasis> zobrazování vypne.</entry>
+              <entry>Když v možnosti zobrazit Informace k úpravám vyberete volbu <emphasis>Aktuální segment</emphasis>, bude zobrazen čas a autor poslední změny u aktuálně otevřeného segmentu. Když vyberete volbu <emphasis>Všechny segmenty</emphasis>, bude tato informace u všech segmentů a volba <emphasis>Nezobrazovat žádné</emphasis> zobrazování vypne.</entry>
             </row>
           </tbody>
         </tgroup>
       </table>
+
+      <para>Poznámka: barvy se nastavují v podokně <guimenu>Možnosti / Přizpůsobit barvy...</guimenu></para>
     </section>
 
     <section id="submenu.Tools">
@@ -611,13 +762,13 @@
             <row>
               <entry><guimenuitem>Ověření tagů</guimenuitem></entry>
 
-              <entry><guimenu>Ctrl+T</guimenu>: Zkontroluje chybějící nebo nesprávně umístěné tagy ve formátovaných souborech. Zobrazí seznam segmentů s chybnými tagy a možnými nesrovnalostmi. Viz <link linkend="section.tag.validation">Ověření tagů</link> a <xref linkend="chapter.formatted.text"/>.</entry>
+              <entry><guimenu>Ctrl+Shift+V</guimenu>: Zkontroluje chybějící nebo nesprávně umístěné tagy ve formátovaných souborech. Zobrazí seznam segmentů s chybnými tagy a možnými nesrovnalostmi. Viz <link linkend="section.tag.validation">Ověření tagů</link> a <xref linkend="chapter.formatted.text"/>.</entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Odstranit tagy</guimenuitem></entry>
+              <entry><guimenuitem>Ověřit tagy aktuálního dokumentu</guimenuitem></entry>
 
-              <entry>Pokud je aktivováno, všechny formátovací tagy budou ze zdrojových segmentů odstraněny. Tato funkce je užitečná zvláště při práci s texty, kde vnitřní formátování nemá žádné skutečné využití (např. PDF rozpoznané pomocí OCR, špatně zkonvertované .odt nebo .docx, atd). Odstraněny budou jen vnitřní tagy, takže běžně by neměl být žádný problém s otevíráním přeložených dokumentů. Neviditelné formátování (tj. takové, které se nezobrazí jako tagy v editoru OmegaT) v přeloženém dokumentu zůstane.</entry>
+              <entry>Stejné jako u předchozího, ale jen pro aktuálně překládaný dokument.</entry>
             </row>
 
             <row>
@@ -630,6 +781,18 @@
               <entry><guimenuitem>Statistika shody</guimenuitem></entry>
 
               <entry>Zobrazí Statistiku shody pro projekt: počty opakování, přesné shody, shody přibližných překladů a nulové shody pro segmenty, slova a znaky.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Statistika shody podle souboru</guimenuitem></entry>
+
+              <entry>Zobrazí Statistiku shody pro každý soubor projektu: počet opakování, přesné shody, přibližné překlady a segmenty bez shody, a to pro segmenty, slova a znaky.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Skriptování...</guimenuitem></entry>
+
+              <entry>Otevře dialogové okno, kde lze nastavit umístění skriptů a kde můžete skripty zapisovat, spouštět a přiřazovat jim zkratky (viz <link linkend="appendix.Scripts.inOmegaT">Okno skriptování</link>).</entry>
             </row>
           </tbody>
         </tgroup>
@@ -669,7 +832,7 @@
             <row>
               <entry><guimenuitem>Glosář</guimenuitem></entry>
 
-              <entry>Rezervováno pro budoucí použití pluginů.</entry>
+              <entry>Možnost <guimenuitem>Zobrazit popis kontextu pro glosáře TBX</guimenuitem> umožňuje zobrazit nebo skrýt kontextové informace zároveň s pojmy (které pochází z glosářů TBX umístěných v adresáři <filename>glossary</filename>) v podokně Glosář.<para>Další 3 možnosti jsou popsány na specifické stránce zabývající se  <link linkend="section.TaaS.options">TaaS</link> (‚Terminology as a Service / Terminologie jako služba‘).</para></entry>
             </row>
 
             <row>
@@ -679,9 +842,21 @@
             </row>
 
             <row>
+              <entry><guimenuitem>Automatické doplnění</guimenuitem></entry>
+
+              <entry><para>Kliknutím na <guimenuitem>Glosář...</guimenuitem>  můžete nastavit zobrazení glosáře při automatickém doplnění.</para><para>Možnosti nastavení pro automatický text otevřete kliknutím na <guimenuitem>Automatický text...</guimenuitem>, zde také můžete přidávat nebo odstranit záznamy.</para><para>Volba <guimenuitem>Tabulka znaků...</guimenuitem> slouží k nastavení možností tabulky znaků automatického doplnění textu.</para></entry>
+            </row>
+
+            <row>
               <entry><guimenuitem>Písmo...</guimenuitem></entry>
 
               <entry>Zobrazí dialogové okno pro změnu písma zobrazování písma. Uživatelé starších počítačů, kde je změna velikosti okna pomalá, mohou vyzkoušet změnu písma. Viz nastavení písma v <link linkend="chapter.misc">Různé</link></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Přizpůsobit barvy...</guimenuitem></entry>
+
+              <entry><para>Tato volba umožňuje vybrat různé barvy pro každou část uživatelského prostředí.</para>Pomocí skriptu si můžete vybrat předdefinované ucelené nastavení barev. Výchozí skript nazývaný ‚Switch Colour Themes/přepnout barevné nastavení‘ poskytuje výchozí „Dark/Temný“.</entry>
             </row>
 
             <row>
@@ -723,19 +898,19 @@
             <row>
               <entry><guimenuitem>Externí soubory TMX</guimenuitem></entry>
 
-              <entry>Umožní uživateli rozhodnout, jak zacházet s tagy v cizích souborech TMX (tj. TMX, které nevygeneroval program OmegaT).</entry>
+              <entry>Umožní uživateli rozhodnout, jak zacházet s tagy v cizích souborech TMX (tj. TMX, které nevygeneroval program OmgegaT).<para>Přibližné shody lze také třídit různými způsoby (pouze pro účely zobrazení; nemá vliv na statistiku). Oblast zobrazení přibližných překladů dovoluje změnit jakým způsobem jsou přibliné překlady zobrazovány, to se děje pomocí předkonfigurovaných proměnných.</para></entry>
             </row>
 
             <row>
               <entry><guimenuitem>Zobrazit...</guimenuitem></entry>
 
-              <entry>Obsahuje možnost zobrazit všechny segmenty tučně a označit první nejedinečný segment.</entry>
+              <entry>Nabízí různé možnosti zobrazení textu a informací ke změnám.</entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Ukládat automaticky...</guimenuitem></entry>
+              <entry><guimenuitem>Uložení a výstup...</guimenuitem></entry>
 
-              <entry>Zde si uživatel může vybrat interval – v minutách a sekundách – mezi průběžným automatickým ukládáním projektu. Minimum je 10 sekund.</entry>
+              <entry>Zde si uživatel může vybrat interval – v minutách a sekundách – mezi průběžným automatickým ukládáním projektu. Minimum je 10 sekund.<para>Dialogové okno také umožňuje nastavit externí příkazy k dodatečnému zpracování (které jsou prováděny po příkazu <guimenuitem>Vytvořit přeložené dokumenty</guimenuitem>).</para></entry>
             </row>
 
             <row>
@@ -748,6 +923,12 @@
               <entry><guimenuitem>Obnovit Hlavní okno</guimenuitem></entry>
 
               <entry>Obnovit výchozí nastavení všech komponent hlavního okna OmegaT. Tuto vlastnost využijete, když jste odpojili, přesunuli nebo skryli jednu nebo více komponent a nedaří se vám obnovit jejich žádané rozestavění. Je možno toto použít také tehdy, když se podokna nezobrazují správně po upgradu OmegaT.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Jazyková korektura</guimenuitem></entry>
+
+              <entry>Když je tato možnost vybrána, nástroj jazykové korektury kontroluje překlad a podtrhne možné chyby modře.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -776,6 +957,18 @@
               <entry><guimenuitem>O aplikaci...</guimenuitem></entry>
 
               <entry>Zobrazí informace o autorských právech, poděkování a licenci.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Poslední změny...</guimenuitem></entry>
+
+              <entry>Zobrazí seznam nových funkcí, rozšíření a oprav chyb pro každé nové vydání.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Protokol...</guimenuitem></entry>
+
+              <entry>Zobrazí soubor s aktuálním protokolem. Název dialogového okna odpovídá právě používanému souboru (který závisí na tom, kolik oken OmegaT je v daný moment spuštěno).</entry>
             </row>
           </tbody>
         </tgroup>

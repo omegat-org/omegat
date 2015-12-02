@@ -2,9 +2,9 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <book lang="en">
   <bookinfo>
-    <title>OmegaT 3.0 - Uživatelská příručka</title>
+    <title>OmegaT 3.1 - Uživatelská příručka</title>
 
-    <authorinitials>vs.</authorinitials>
+    <authorinitials>vs</authorinitials>
 
     <author>
       <firstname>Vito Smolej</firstname>
@@ -47,11 +47,15 @@
 
   <xi:include href="Searches.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
+  <xi:include href="SearchAndReplace.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
   <xi:include href="Regexp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="Dictionaries.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="Glossaries.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="TaaS.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="MachineTranslation.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 

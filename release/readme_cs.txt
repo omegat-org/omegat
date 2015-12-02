@@ -1,4 +1,4 @@
-Tento překlad vypracoval [Josef Molnár], copyright© [2013].
+Tento překlad vypracoval [Josef Molnár], copyright© [2015].
 
 ==============================================================================
   OmegaT 3.0, soubor Read Me / Čti mě
@@ -94,7 +94,7 @@ Uživatelská příručka je v balíčku, který jste právě stáhli, po spušt
  3. Instalace programu OmegaT
 
 3.1 Obecné informace
-Ke spuštění vyžaduje OmegaT ve vašem systému nainstalované prostředí Java Runtime Environment (JRE) verzi 1.5 nebo vyšší. Balíčky OmegaT, které obsahují běhové prostředí Java jsou dostupné a ušetří tak uživatelům problémy s výběrem, získáním prostředí a jeho instalací. 
+Ke spuštění vyžaduje OmegaT ve vašem systému nainstalované prostředí Java Runtime Environment (JRE) verzi 1.6 nebo vyšší. Balíčky OmegaT, které obsahují běhové prostředí Java jsou dostupné a ušetří tak uživatelům problémy s výběrem, získáním prostředí a jeho instalací. 
 
 Jestliže Javu již máte, jeden způsob instalace aktuální verze programu OmegaT je použití Java Web Start. 
 V takovém případě stačí stáhnout následující soubor a spustit jej:
@@ -103,7 +103,7 @@ V takovém případě stačí stáhnout následující soubor a spustit jej:
 
 Při prvním spuštění bude nainstalováno nejen prostředí přesně pro váš počítač ale také samotná aplikace. Při dalším spuštění již nemusíte být online.
 
-V závislosti na operačním systému se může objevit několik bezpečnostních výstrah. Certifikát podepsal „Didier Briel“ (self-signed). 
+V závislosti na operačním systému se může objevit několik bezpečnostních výstrah. Certifikát odpovídá „PnS Concept“. 
 Práva, která udělíte této verzi (která lze nazývat jako „neomezený přístup k počítači“) jsou identická s právy, která jste přidělili lokální verzi při její instalaci, což znamená: tato práva povolí přístup na hard disk počítače. Při pozdějším spuštění souboru OmegaT.jnlp dojde ke kontrole verze, pokud tedy jste online, a když bude nalezena novější verze, tak ji nainstaluje a aplikaci OmegaT spustí. 
 
 Jiné způsoby stahování a instalace programu OmegaT si ukážeme později. 
@@ -189,7 +189,7 @@ Když byste chtěli přispívat jinak, přihlaste se nejdříve do uživatelské
 A seznamte se s děním okolo aplikace OmegaT ...
 
   Autorem původního projektu OmegaT je Keith Godfrey.
-  Koordinátorem projektu OmegaT je Marc Prior.
+  Projektovým managerem OmegaT je Didier Briel.
 
 Mezi dřívější přispěvatele patří:
 (podle abecedy)
@@ -197,22 +197,28 @@ Mezi dřívější přispěvatele patří:
 Do kódu přispěli
   Zoltan Bartko
   Volker Berlin
-  Didier Briel (správce vývoje)
+  Didier Briel
   Kim Bruning
   Alex Buloichik (vedoucí vývojář)
   Sandra Jean Chua
   Thomas Cordonnier
+  Enrique Estévez Fernández
   Martin Fleurke  
   Wildrich Fourie
   Phillip Hall
   Jean-Christophe Helary
+  Chihiro Hio
   Thomas Huriaux
   Hans-Peter Jacobs
   Kyle Katarn
+  Piotr Kulik
   Ibai Lakunza Velasco
   Guido Leenders
-  Aaron Madlon-Kay
+  Aaron Madlon-Kay (manager integrace)
   Fabián Mandelbaum
+  Manfred Martin
+  Adiel Mittmann
+  Hiroshi Miura 
   John Moran
   Maxym Mykhalchuk 
   Arno Peters
@@ -224,6 +230,7 @@ Do kódu přispěli
   Yu Tang
   Rashid Umarov  
   Antonio Vilei
+  Ilia Vinogradov
   Martin Wunderlich
   Michael Zakharov
 
@@ -231,9 +238,9 @@ Ostatní přispěvatelé
   Sabine Cretella
   Dmitri Gabinski
   Jean-Christophe Helary (správce lokalizace)
-  Vito Smolej (správce dokumentace)
+  Vincent Bidaux (správce dokumentace)
   Samuel Murray
-  Marc Prior 
+  Marc Prior (webmaster)
   a mnoho, mnoho dalších velmi nápomocných lidí
 
 (Pokud si myslíte, že jste významně přispěli k projektu OmegaT,
@@ -241,24 +248,23 @@ ale své jméno nevidíte v těchto záznamech, klidně nás kontaktujte.)
 
 OmegaT používá následující knihovny:
   HTMLParser 1.6 od autorů Somik Raha, Derrick Oswald a další (LGPL Licence)
-  MRJ Adapter 1.0.8 od Steve Roy (LGPL Licence)
-  VLDocking Framework 2.1.4 od VLSolutions (CeCILL Licence)
+  VLDocking Framework 3.0.5-SNAPSHOT (LGPL Licence)
   Hunspell autora László Németh a dalších (LGPL Licence).
   JNA dodali Todd Fast, Timothy Wall a dalších (LGPL Licence)
-  Swing-Layout 1.0.2 (Licence LGPL)
+  Swing-Layout 1.0.4 (Licence LGPL)
   Jmyspell 2.1.4 (Licence LGPL)
-  SVNKit 1.7.5 (Licence TMate)
-  Sequence Library (Sequence Library License)
+  SVNKit 1.8.5 (Licence TMate)
+  Sequence Library (Licence Sequence Library)
   ANTLR 3.4 (Licence ANTLR 3)
-  SQLJet 1.1.3 (GPL v2)
-  JGit (Eclipse Distribution License)
+  SQLJet 1.1.10 (GPL v2)
+  JGit (Licence Eclipse Distribution)
   JSch (Licence JSch)
   Base64 (public domain)
   Diff (GPL)
-  orion-ssh2-214 (Orion SSH for Java license)
+  trilead-ssh2-1.0.0-build217 (Trilead SSH license)
   lucene-*.jar (Apache License 2.0)
-  Tokenizery pro angličtinu (org.omegat.tokenizer.SnowballEnglishTokenizer a
-  org.omegat.tokenizer.LuceneEnglishTokenizer) používají stop slova z Okapi (http://okapi.sourceforge.net) (LGPL licence)
+  Anglické tokenizery (org.omegat.tokenizer.SnowballEnglishTokenizer a
+org.omegat.tokenizer.LuceneEnglishTokenizer) používají stop slova původně z Okapi (http://okapi.sourceforge.net) (LGPL license).
   tinysegmenter.jar (Modified BSD license)
   commons-*.jar (Apache License 2.0)
   jWordSplitter (Apache License 2.0)
@@ -266,9 +272,12 @@ OmegaT používá následující knihovny:
   morfologik-*.jar (Morfologik license)
   segment-1.4.1.jar (Segment license)
   pdfbox-app-1.8.1.jar (Apache License 2.0)
-  Fontbox-0.1.0.jar and JempBox-0.2.0.jar (Fontbox license)
-  icu4j-51_1.jar (ICU4J license)
-
+  KoreanAnalyzer-3x-120223.jar (Apache License 2.0)
+  SuperTMXMerge-for_OmegaT.jar (LGPL license)
+  groovy-all-2.2.2.jar (Apache Licence 2.0)
+  slf4j (MIT License)
+  juniversalchardet-1.0.3.jar (GPL v2)
+  DictZip from JDictd (GPL v2)
 
 ==============================================================================
  5.  Máte s aplikací OmegaT problémy? Potřebujete pomoc?

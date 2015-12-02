@@ -15,7 +15,7 @@
     <para>Jakmile upravíte soubor <filename>MainMenuShortcuts.properties</filename>, je pak nutno <application>OmegaT</application> restartovat, aby se načetlo nastavení nových klávesových zkratek.</para>
 
     <para>Syntaxe definice klávesové zkratky je tato: <code>&lt;kód položky nabídky&gt;=&lt;klávesová zkratka&gt;</code>, kde <emphasis>&lt;kód položky nabídky&gt;</emphasis> je kód, který si vezmete z tabulek níže a <emphasis>&lt;klávesová zkratka&gt;</emphasis> je kombinace kláves definovaná uživatele.<footnote>
-        <para>Kompletní syntax stisku kláves (klávesových zkratek) je definovaná v následující dokumentaci Java 1.6 od Oracle (na konci stránky): <ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java 1.6 klávesové zkratky</ulink></para>
+        <para>Kompletní syntax stisku kláves (klávesových zkratek) je definovaná v následující dokumentaci Java 1.6 od Oracle (na konci stránky): <ulink url="p://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java 1.6 klávesové zkratky</ulink></para>
       </footnote>.</para>
 
     <para>&lt;klávesová zkratka&gt; musí mít jednu z následujících podob: 0 nebo více <code>&lt;modifikátor&gt;</code> následován 0 nebo 1 <code>&lt;událost&gt;</code> následován 1 <code>&lt;klávesa&gt;</code>, kde:<itemizedlist>
@@ -37,11 +37,11 @@
         </listitem>
       </itemizedlist></para>
 
-    <para>Podívejme se například na výchozí klávesové zkratky OmegaT
-        <para>Výchozí klávesové zkratky OmegaT jsou dostupné přes Sourceforge: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties">Výchozí klávesové zkratky OmegaT</ulink></para><footnote>
+    <para>Podívejme se například na výchozí klávesové zkratky OmegaT<footnote>
+        <para>Výchozí klávesové zkratky OmegaT jsou dostupné přes Sourceforge: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties">Výchozí klávesové zkratky OmegaT</ulink></para>
 
         <para>Výchozí klávesové zkratky OmegaT pro Mac jsou také dostupné přes Sourceforge, všechny používají „meta“ místo „ctrl“: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Výchozí klávesové zkratky OmegaT pro Mac</ulink></para>
-      </footnote>, one can find:</para>
+      </footnote>nalezneme např.:</para>
 
     <itemizedlist>
       <listitem>
@@ -55,7 +55,8 @@
 
     <para>První je klávesová zkratka pro otevření projektu <guimenuitem>Otevřít</guimenuitem>, druhá odpovídá <guimenuitem>Vytvořit nový záznam Glosáře</guimenuitem>.</para>
 
-    <para>Pokud byste chtěli použít <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> k otevření projektu, upravte příslušný řádek v souboru <filename>MainMenuShortcuts.properties</filename> následovně: </para>
+    <para>Pokud byste chtěli použít <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> k otevření projektu, upravte příslušný řádek v souboru <filename>MainMenuShortcuts.properties</filename> následovně: <code>
+    </code></para>
 
     <para><code>projectOpenMenuItem=shift ctrl O</code>.</para>
 
@@ -74,118 +75,26 @@
       <title>Nabídka ‚Projekt‛</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Položka nabídky</entry>
-
-            <entry>Výchozí klávesová zkratka</entry>
-
-            <entry>Kód položky nabídky</entry>
-          </row>
+          <row><entry>Položka nabídky</entry><entry>Výchozí klávesová zkratka</entry><entry>Kód položky nabídky</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Nový</entry>
-
-            <entry/>
-
-            <entry>projectNewMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Otevřít</entry>
-
-            <entry><keycap>Ctrl+O</keycap></entry>
-
-            <entry>projectOpenMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Download Team Project</entry>
-
-            <entry/>
-
-            <entry>projectTeamNewMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Importovat zdrojové soubory...</entry>
-
-            <entry/>
-
-            <entry>projectImportMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Import z MediaWiki...</entry>
-
-            <entry/>
-
-            <entry>projectWikiImportMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Znovu načíst</entry>
-
-            <entry><keycap>F5</keycap></entry>
-
-            <entry>projectReloadMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Zavřít</entry>
-
-            <entry><keycap>Ctrl+Shift+W</keycap></entry>
-
-            <entry>projectCloseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Uložit</entry>
-
-            <entry><keycap>Ctrl+S</keycap></entry>
-
-            <entry>projectSaveMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Vytvořit přeložené dokumenty</entry>
-
-            <entry><keycap>Ctrl+D</keycap></entry>
-
-            <entry>projectCompileMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Vlastnosti...</entry>
-
-            <entry><keycap>Ctrl+E</keycap></entry>
-
-            <entry>projectEditMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Soubory projektu...</entry>
-
-            <entry><keycap>Ctrl+L</keycap></entry>
-
-            <entry>viewFileListMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Konec</entry>
-
-            <entry><keycap>Ctrl+Q</keycap></entry>
-
-            <entry>projectExitMenuItem</entry>
-          </row>
+          <row><entry>Nový</entry><entry><keycap>Shift+Ctrl+N</keycap></entry><entry>projectNewMenuItem</entry></row>
+          <row><entry>Otevřít</entry><entry><keycap>Ctrl+O</keycap></entry><entry>projectOpenMenuItem</entry></row>
+          <row><entry>Stáhnout Týmový projekt</entry><entry/><entry>projectTeamNewMenuItem</entry></row>
+          <row><entry>Importovat zdrojové soubory...</entry><entry/><entry>projectImportMenuItem</entry></row>
+          <row><entry>Import z MediaWiki...</entry><entry/><entry>projectWikiImportMenuItem</entry></row>
+          <row><entry>Znovu načíst</entry><entry><keycap>F5</keycap></entry><entry>projectReloadMenuItem</entry></row>
+          <row><entry>Zavřít</entry><entry><keycap>Ctrl+Shift+W</keycap></entry><entry>projectCloseMenuItem</entry></row>
+          <row><entry>Uložit</entry><entry><keycap>Ctrl+S</keycap></entry><entry>projectSaveMenuItem</entry></row>
+          <row><entry>Vytvořit přeložené dokumenty</entry><entry><keycap>Ctrl+D</keycap></entry><entry>projectCompileMenuItem</entry></row>
+          <row><entry>Vytvořit aktuálně překládané dokumenty</entry><entry><keycap>Shift+Ctrl+D</keycap></entry><entry>projectSingleCompileMenuItem</entry></row>
+          <row><entry>Vlastnosti...</entry><entry><keycap>Ctrl+E</keycap></entry><entry>projectEditMenuItem</entry></row>
+          <row><entry>Soubory projektu...</entry><entry><keycap>Ctrl+L</keycap></entry><entry>viewFileListMenuItem</entry></row>
+          <row><entry>Konec</entry><entry><keycap>Ctrl+Q</keycap></entry><entry>projectExitMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>
@@ -198,198 +107,40 @@
       <title>Nabídka ‚Upravit‛</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Položka nabídky</entry>
-
-            <entry>Výchozí klávesová zkratka</entry>
-
-            <entry>Kód položky nabídky</entry>
-          </row>
+          <row><entry>Položka nabídky</entry><entry>Výchozí klávesová zkratka</entry><entry>Kód položky nabídky</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Zpět</entry>
-
-            <entry><keycap>Ctrl+Z</keycap></entry>
-
-            <entry>editUndoMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Obnovit</entry>
-
-            <entry><keycap>Ctrl+Y</keycap></entry>
-
-            <entry>editRedoMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Přepsat nalezeným překladem</entry>
-
-            <entry><keycap>Ctrl+R</keycap></entry>
-
-            <entry>editOverwriteTranslationMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Vložit nalezený překlad</entry>
-
-            <entry><keycap>Ctrl+I</keycap></entry>
-
-            <entry>editInsertTranslationMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Přepsat Strojovým překladem</entry>
-
-            <entry><keycap>Ctrl+M</keycap></entry>
-
-            <entry>editOverwriteMachineTranslationMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Přepsat zdrojem</entry>
-
-            <entry><keycap>Shift+Ctrl+R</keycap></entry>
-
-            <entry>editOverwriteSourceMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Vložit zdroj</entry>
-
-            <entry><keycap>Shift+Ctrl+I</keycap></entry>
-
-            <entry>editInsertSourceMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Vložit tagy zdroje</entry>
-
-            <entry><keycap>Shift+Ctrl+T</keycap></entry>
-
-            <entry>editTagPainterMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Exportovat výběr</entry>
-
-            <entry><keycap>Shift+Ctrl+C</keycap></entry>
-
-            <entry>editExportSelectionMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Vytvořit nový záznam Glosáře</entry>
-
-            <entry><keycap>Shift+Ctrl+G</keycap></entry>
-
-            <entry>editCreateGlossaryEntryMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Hledat v projektu</entry>
-
-            <entry><keycap>Ctrl+F</keycap></entry>
-
-            <entry>editFindInProjectMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Označit přibližný překlad #1</entry>
-
-            <entry><keycap>Ctrl+1</keycap></entry>
-
-            <entry>editSelectFuzzy1MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Označit přibližný překlad #2</entry>
-
-            <entry><keycap>Ctrl+2</keycap></entry>
-
-            <entry>editSelectFuzzy2MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Označit přibližný překlad #3</entry>
-
-            <entry><keycap>Ctrl+3</keycap></entry>
-
-            <entry>editSelectFuzzy3MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Označit přibližný překlad #4</entry>
-
-            <entry><keycap>Ctrl+4</keycap></entry>
-
-            <entry>editSelectFuzzy4MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Označit přibližný překlad #5</entry>
-
-            <entry><keycap>Ctrl+5</keycap></entry>
-
-            <entry>editSelectFuzzy5MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Switch Case to/Lower Case</entry>
-
-            <entry/>
-
-            <entry>lowerCaseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Switch Case to/Upper Case</entry>
-
-            <entry/>
-
-            <entry>upperCaseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Switch Case to/Title Case</entry>
-
-            <entry/>
-
-            <entry>titleCaseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Změnit velikost písma...</entry>
-
-            <entry><keycap>Shift+F3</keycap></entry>
-
-            <entry>cycleSwitchCaseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Použít jako výchozí překlad</entry>
-
-            <entry/>
-
-            <entry>editMultipleDefault</entry>
-          </row>
-
-          <row>
-            <entry>Vytvořit alternativní překlad</entry>
-
-            <entry/>
-
-            <entry>editMultipleAlternate</entry>
-          </row>
+          <row><entry>Zpět</entry><entry><keycap>Ctrl+Z</keycap></entry><entry>editUndoMenuItem</entry></row>
+          <row><entry>Obnovit</entry><entry><keycap>Ctrl+Y</keycap></entry><entry>editRedoMenuItem</entry></row>
+          <row><entry>Přepsat nalezeným překladem</entry><entry><keycap>Ctrl+R</keycap></entry><entry>editOverwriteTranslationMenuItem</entry></row>
+          <row><entry>Vložit nalezený překlad</entry><entry><keycap>Ctrl+I</keycap></entry><entry>editInsertTranslationMenuItem</entry></row>
+          <row><entry>Přepsat Strojovým překladem</entry><entry><keycap>Ctrl+M</keycap></entry><entry>editOverwriteMachineTranslationMenuItem</entry></row>
+          <row><entry>Přepsat zdrojem</entry><entry><keycap>Shift+Ctrl+R</keycap></entry><entry>editOverwriteSourceMenuItem</entry></row>
+          <row><entry>Vložit zdroj</entry><entry><keycap>Shift+Ctrl+I</keycap></entry><entry>editInsertSourceMenuItem</entry></row>
+          <row><entry>Vložit tagy zdroje</entry><entry><keycap>Shift+Ctrl+T</keycap></entry><entry>editTagPainterMenuItem</entry></row>
+          <row><entry>Vložit další chybějící tag</entry><entry><keycap>Ctrl+T</keycap></entry><entry>editTagNextMissedMenuItem</entry></row>
+          <row><entry>Exportovat výběr</entry><entry><keycap>Shift+Ctrl+C</keycap></entry><entry>editExportSelectionMenuItem</entry></row>
+          <row><entry>Vytvořit nový záznam Glosáře</entry><entry><keycap>Shift+Ctrl+G</keycap></entry><entry>editCreateGlossaryEntryMenuItem</entry></row>
+          <row><entry>Hledat v projektu</entry><entry><keycap>Ctrl+F</keycap></entry><entry>editFindInProjectMenuItem</entry></row>
+          <row><entry>Najít a nahradit...</entry><entry><keycap>Ctrl+K</keycap></entry><entry>editReplaceInProjectMenuItem</entry></row>
+          <row><entry>Označit předchozí přibližný překlad</entry><entry><keycap>Ctrl+↑</keycap></entry><entry>editSelectFuzzyPrevMenuItem</entry></row>
+          <row><entry>Označit další přibližný překlad</entry><entry><keycap>Ctrl+↓</keycap></entry><entry>editSelectFuzzyNextMenuItem</entry></row>
+          <row><entry>Označit přibližný překlad 1</entry><entry><keycap>Ctrl+1</keycap></entry><entry>editSelectFuzzy1MenuItem</entry></row>
+          <row><entry>Označit přibližný překlad #2</entry><entry><keycap>Ctrl+2</keycap></entry><entry>editSelectFuzzy2MenuItem</entry></row>
+          <row><entry>Označit přibližný překlad #3</entry><entry><keycap>Ctrl+3</keycap></entry><entry>editSelectFuzzy3MenuItem</entry></row>
+          <row><entry>Označit přibližný překlad #4</entry><entry><keycap>Ctrl+4</keycap></entry><entry>editSelectFuzzy4MenuItem</entry></row>
+          <row><entry>Označit přibližný překlad #5</entry><entry><keycap>Ctrl+5</keycap></entry><entry>editSelectFuzzy5MenuItem</entry></row>
+          <row><entry>Změnit písmo na malá písmena</entry><entry/><entry>lowerCaseMenuItem</entry></row>
+          <row><entry>Změnit písmo na Velká písmena</entry><entry/><entry>upperCaseMenuItem</entry></row>
+          <row><entry>Změnit písmo na kapitálky</entry><entry/><entry>titleCaseMenuItem</entry></row>
+          <row><entry>Změnit velikost písma...</entry><entry><keycap>Shift+F3</keycap></entry><entry>cycleSwitchCaseMenuItem</entry></row>
+          <row><entry>Použít jako výchozí překlad</entry><entry/><entry>editMultipleDefault</entry></row>
+          <row><entry>Vytvořit alternativní překlad</entry><entry/><entry>editMultipleAlternate</entry></row>
+          <row><entry>Zapsat identický překlad</entry><entry/><entry>editRegisterIdenticalMenuItem</entry></row>
 
         </tbody>
       </tgroup>
@@ -403,86 +154,22 @@
       <title>Nabídka ‚Přejít‛</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Položka nabídky</entry>
-
-            <entry>Výchozí klávesová zkratka</entry>
-
-            <entry>Kód položky nabídky</entry>
-          </row>
+          <row><entry>Položka nabídky</entry><entry>Výchozí klávesová zkratka</entry><entry>Kód položky nabídky</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Další nepřeložený segment</entry>
-
-            <entry><keycap>Ctrl+U</keycap></entry>
-
-            <entry>gotoNextUntranslatedMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Další segment</entry>
-
-            <entry><keycap>&lt;Ctrl+N&gt;</keycap> nebo <keycap>&lt;Enter&gt;</keycap> nebo <keycap>&lt;TAB&gt;</keycap></entry>
-
-            <entry>gotoNextSegmentMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Předchozí segment</entry>
-
-            <entry><keycap>&lt;Ctrl+P&gt;</keycap> nebo <keycap>&lt;Ctrl+Enter&gt;</keycap> nebo <keycap>&lt;Ctrl+TAB&gt;</keycap></entry>
-
-            <entry>gotoPreviousSegmentMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Segment číslo...</entry>
-
-            <entry><keycap>Ctrl+J</keycap></entry>
-
-            <entry>gotoSegmentMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Další poznámka</entry>
-
-            <entry/>
-
-            <entry>gotoNextNoteMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Předchozí poznámka</entry>
-
-            <entry/>
-
-            <entry>gotoPreviousNoteMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Vpřed v historii</entry>
-
-            <entry><keycap>Ctrl+Shift+N</keycap></entry>
-
-            <entry>gotoHistoryForwardMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Zpět v historii</entry>
-
-            <entry><keycap>Ctrl+Shift+P</keycap></entry>
-
-            <entry>gotoHistoryBackMenuItem</entry>
-          </row>
+          <row><entry>Další nepřeložený segment</entry><entry><keycap>Ctrl+U</keycap></entry><entry>gotoNextUntranslatedMenuItem</entry></row>
+          <row><entry>Další přeložený segment</entry><entry><keycap>Shift+Ctrl+U</keycap></entry><entry>gotoNextTranslatedMenuItem</entry></row>
+          <row><entry>Další segment</entry><entry><keycap>&lt;Ctrl+N&gt;</keycap> nebo <keycap>&lt;Enter&gt;</keycap> nebo <keycap>&lt;TAB&gt;</keycap></entry><entry>gotoNextSegmentMenuItem</entry></row>
+          <row><entry>Předchozí segment</entry><entry><keycap>&lt;Ctrl+P&gt;</keycap> nebo <keycap>&lt;Ctrl+Enter&gt;</keycap> nebo <keycap>&lt;Ctrl+TAB&gt;</keycap></entry><entry>gotoPreviousSegmentMenuItem</entry></row>
+          <row><entry>Segment číslo...</entry><entry><keycap>Ctrl+J</keycap></entry><entry>gotoSegmentMenuItem</entry></row>
+          <row><entry>Další poznámka</entry><entry/><entry>gotoNextNoteMenuItem</entry></row>
+          <row><entry>Předchozí poznámka</entry><entry/><entry>gotoPreviousNoteMenuItem</entry></row>
+          <row><entry>Vpřed v historii</entry><entry><keycap>Ctrl+Shift+N</keycap></entry><entry>gotoHistoryForwardMenuItem</entry></row>
+          <row><entry>Zpět v historii</entry><entry><keycap>Ctrl+Shift+P</keycap></entry><entry>gotoHistoryBackMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>
@@ -499,110 +186,25 @@
       </indexterm>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Položka nabídky</entry>
-
-            <entry>Výchozí klávesová zkratka</entry>
-
-            <entry>Kód položky nabídky</entry>
-          </row>
+          <row><entry>Položka nabídky</entry><entry>Výchozí klávesová zkratka</entry><entry>Kód položky nabídky</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Označit přeložené segmenty</entry>
-
-            <entry/>
-
-            <entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Označit nepřeložené segmenty</entry>
-
-            <entry/>
-
-            <entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Ukázat zdrojové segmenty</entry>
-
-            <entry/>
-
-            <entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Označit nejedinečné segmenty</entry>
-
-            <entry/>
-
-            <entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Označit segmenty s Poznámkami</entry>
-
-            <entry/>
-
-            <entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Označit nezlomitelné mezery</entry>
-
-            <entry/>
-
-            <entry>viewMarkNBSPCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Označit netisknutelné znaky</entry>
-
-            <entry/>
-
-            <entry>viewMarkWhitespaceCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Označit řídicí znak bidirekcionálního algoritmu</entry>
-
-            <entry/>
-
-            <entry>viewMarkBidiCheckBoxMenuItem</entry>
-          </row>
-
-           <row>
-            <entry>Informace k úpravám / Nezobrazovat žádné</entry>
-
-            <entry/>
-
-            <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
-          </row>
-
-         <row>
-            <entry>Informace k úpravám / Zobrazovat u otevřeného segmentu</entry>
-
-            <entry/>
-
-            <entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Informace k úpravám / Zobrazovat pro všechny segmenty</entry>
-
-            <entry/>
-
-            <entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry>
-          </row>
+          <row><entry>Označit přeložené segmenty</entry><entry/><entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry></row>
+          <row><entry>Označit nepřeložené segmenty</entry><entry/><entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry></row>
+          <row><entry>Ukázat zdrojové segmenty</entry><entry/><entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry></row>
+          <row><entry>Označit nejedinečné segmenty</entry><entry/><entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry></row>
+          <row><entry>Označit segmenty s Poznámkami</entry><entry/><entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry></row>
+          <row><entry>Označit nezlomitelné mezery</entry><entry/><entry>viewMarkNBSPCheckBoxMenuItem</entry></row>
+          <row><entry>Označit netisknutelné znaky</entry><entry/><entry>viewMarkWhitespaceCheckBoxMenuItem</entry></row>
+          <row><entry>Označit řídicí znak bidirekcionálního algoritmu</entry><entry/><entry>viewMarkBidiCheckBoxMenuItem</entry></row>
+          
+          <row><entry>Informace k úpravám / Nezobrazovat žádné</entry><entry/><entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry></row>
+          <row><entry>Informace k úpravám / Zobrazovat u otevřeného segmentu</entry><entry/><entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry></row>
+          <row><entry>Informace k úpravám / Zobrazovat pro všechny segmenty</entry><entry/><entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>
@@ -615,46 +217,18 @@
       <title>Nabídka ‚Nástroje‛</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Položka nabídky</entry>
-
-            <entry>Výchozí klávesová zkratka</entry>
-
-            <entry>Kód položky nabídky</entry>
-          </row>
+          <row><entry>Položka nabídky</entry><entry>Výchozí klávesová zkratka</entry><entry>Kód položky nabídky</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Ověření tagů</entry>
-
-            <entry><keycap>Ctrl +T</keycap></entry>
-
-            <entry>toolsValidateTagsMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Statistika</entry>
-
-            <entry/>
-
-            <entry>toolsShowStatisticsStandardMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Statistika shody</entry>
-
-            <entry/>
-
-            <entry>toolsShowStatisticsMatchesMenuItem</entry>
-          </row>
+          <row><entry>Ověření tagů</entry><entry><keycap>Shift+Ctrl+V</keycap></entry><entry>toolsValidateTagsMenuItem</entry></row>
+          <row><entry>Ověřit tagy aktuálního dokumentu</entry><entry/><entry>toolsSingleValidateTagsMenuItem</entry></row>
+          <row><entry>Statistika</entry><entry/><entry>toolsShowStatisticsStandardMenuItem</entry></row>
+          <row><entry>Statistika shody</entry><entry/><entry>toolsShowStatisticsMatchesMenuItem</entry></row>
+          <row><entry>Statistika shody podle souboru</entry><entry/><entry>toolsShowStatisticsMatchesPerFileMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>
@@ -667,158 +241,33 @@
       <title>Nabídka ‚Možnosti‛</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Položka nabídky</entry>
-
-            <entry>Výchozí klávesová zkratka</entry>
-
-            <entry>Kód položky nabídky</entry>
-          </row>
+          <row><entry>Položka nabídky</entry><entry>Výchozí klávesová zkratka</entry><entry>Kód položky nabídky</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Použít TAB pro postup</entry>
-
-            <entry/>
-
-            <entry>optionsTabAdvanceCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Vždy potvrdit ukončení</entry>
-
-            <entry/>
-
-            <entry>optionsAlwaysConfirmQuitCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Strojový překlad</entry>
-
-            <entry/>
-
-            <entry/>
-          </row>
-
-          <row>
-            <entry>TransTips / Povolit TransTips</entry>
-
-            <entry/>
-
-            <entry>optionsTransTipsEnableMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>TransTips / Přesná shoda</entry>
-
-            <entry/>
-
-            <entry>optionsTransTipsExactMatchMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Písmo...</entry>
-
-            <entry/>
-
-            <entry>optionsFontSelectionMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Filtry souborů...</entry>
-
-            <entry/>
-
-            <entry>optionsSetupFileFiltersMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Segmentace...</entry>
-
-            <entry/>
-
-            <entry>optionsSentsegMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Kontrola pravopisu</entry>
-
-            <entry/>
-
-            <entry>optionsSpellCheckMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Nastavení editace</entry>
-
-            <entry/>
-
-            <entry>optionsWorkflowMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Ověření tagů...</entry>
-
-            <entry/>
-
-            <entry>optionsTagValidationMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Tým...</entry>
-
-            <entry/>
-
-            <entry>optionsTeamMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Externí soubory TMX</entry>
-
-            <entry/>
-
-            <entry>optionsExtTMXMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Zobrazit...</entry>
-
-            <entry/>
-
-            <entry>optionsViewOptionsMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Uložení a výstup...</entry>
-
-            <entry/>
-
-            <entry>optionsSaveOptionsMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Proxy přihlášení ...</entry>
-
-            <entry/>
-
-            <entry>optionsViewOptionsMenuLoginItem</entry>
-          </row>
-
-          <row>
-            <entry>Obnovit Hlavní okno</entry>
-
-            <entry/>
-
-            <entry>optionsRestoreGUIMenuItem</entry>
-          </row>
+          <row><entry>Použít TAB pro postup</entry><entry/><entry>optionsTabAdvanceCheckBoxMenuItem</entry></row>
+          <row><entry>Vždy potvrdit ukončení</entry><entry/><entry>optionsAlwaysConfirmQuitCheckBoxMenuItem</entry></row>
+          <row><entry>Strojový překlad</entry><entry/><entry/></row>
+          <row><entry>TransTips / Povolit TransTips</entry><entry/><entry>optionsTransTipsEnableMenuItem</entry></row>
+          <row><entry>TransTips / Přesná shoda</entry><entry/><entry>optionsTransTipsExactMatchMenuItem</entry></row>
+          <row><entry>Automatické doplnění/Glosář...</entry><entry/><entry>optionsAutoCompleteGlossaryMenuItem</entry></row>
+          <row><entry>Automatické doplnění/Automatický text...</entry><entry/><entry>optionsAutoCompleteAutoTextMenuItem</entry></row>
+          <row><entry>Automatické doplnění/Tabulka znaků...</entry><entry/><entry>optionsAutoCompleteCharTableMenuItem</entry></row>
+          <row><entry>Písmo...</entry><entry/><entry>optionsFontSelectionMenuItem</entry></row>
+          <row><entry>Filtry souborů...</entry><entry/><entry>optionsSetupFileFiltersMenuItem</entry></row>
+          <row><entry>Segmentace...</entry><entry/><entry>optionsSentsegMenuItem</entry></row>
+          <row><entry>Kontrola pravopisu</entry><entry/><entry>optionsSpellCheckMenuItem</entry></row>
+          <row><entry>Nastavení editace</entry><entry/><entry>optionsWorkflowMenuItem</entry></row>
+          <row><entry>Ověření tagů...</entry><entry/><entry>optionsTagValidationMenuItem</entry></row>
+          <row><entry>Tým...</entry><entry/><entry>optionsTeamMenuItem</entry></row>
+          <row><entry>Externí soubory TMX</entry><entry/><entry>optionsExtTMXMenuItem</entry></row>
+          <row><entry>Zobrazit...</entry><entry/><entry>optionsViewOptionsMenuItem</entry></row>
+          <row><entry>Uložení a výstup...</entry><entry/><entry>optionsSaveOptionsMenuItem</entry></row>
+          <row><entry>Proxy přihlášení ...</entry><entry/><entry>optionsViewOptionsMenuLoginItem</entry></row>
+          <row><entry>Obnovit Hlavní okno</entry><entry/><entry>optionsRestoreGUIMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>
@@ -831,38 +280,17 @@
       <title>Nabídka ‚Nápověda‛</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Položka nabídky</entry>
-
-            <entry>Výchozí klávesová zkratka</entry>
-
-            <entry>Kód položky nabídky</entry>
-          </row>
+          <row><entry>Položka nabídky</entry><entry>Výchozí klávesová zkratka</entry><entry>Kód položky nabídky</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Uživatelská příručka...</entry>
-
-            <entry><keycap>F1</keycap></entry>
-
-            <entry>helpContentsMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>O aplikaci...</entry>
-
-            <entry/>
-
-            <entry>helpAboutMenuItem</entry>
-          </row>
+          <row><entry>Uživatelská příručka...</entry><entry><keycap>F1</keycap></entry><entry>helpContentsMenuItem</entry></row>
+          <row><entry>O aplikaci...</entry><entry/><entry>helpAboutMenuItem</entry></row>
+          <row><entry>Poslední změny...</entry><entry/><entry>helpLastChangesMenuItem</entry></row>
+          <row><entry>Protokol...</entry><entry/><entry>helpLogMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>

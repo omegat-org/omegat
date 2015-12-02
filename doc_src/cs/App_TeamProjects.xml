@@ -36,7 +36,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">VCS server - </emphasis>tj. SVN nebo Git server, který poskytuje prostředí kde je společný materiál udržován a spravován na síti. Server může existovat v místní síti, ale ve většině případů bude dostupný na internetu, tj. přes adresu URL. Jeden člen týmu, administrátor projektu, musí být obeznámen s obsluhou serveru, tj.  jeho úkolem je nastavení prostředí, import projektu OmegaT, přiřazení přístupových práv členům týmu, řešení konfliktů, atd.</para>
+        <para><emphasis role="bold">VCS server - </emphasis>t.j. server SVN nebo Git, který poskytuje prostředí, kde je společný materiál udržován a spravován na síti. Server může existovat v místní síti, ale ve většině případů bude dostupný na internetu, tj. prostřednictvím adresy URL. Jeden člen týmu, administrátor projektu, musí být obeznámen s obsluhou serveru, tj. jeho úkolem je nastavení prostředí, import projektu OmegaT, přiřazení přístupových práv členům týmu, řešení konfliktů, atd.</para>
       </listitem>
 
       <listitem>
@@ -70,7 +70,7 @@
         <primary>Týmové projekty</primary> <secondary>Subverze</secondary>
       </indexterm></title>
 
-    <para>Existují dvě možnosti jak rozběhnout SVN server: můžete instalovat SVN na svůj server nebo můžete použít hostující službu. Když používáte externí službu musíte si být vědomi možných následků v rámci utajení dat, protože nahráváte originální dokument na server, nad kterým nemáte přímou kontrolu.  Alternativně, abyste zabránili tomuto problému, můžete nastavit soukromý SVN server, například pokud již máte Apache server, který obsahuje dotyčný software (např. VisualSVN).</para>
+    <para>Existují dvě možnosti jak rozběhnout SVN server: můžete instalovat SVN na svůj server nebo můžete použít hostující službu. Když používáte externí službu musíte si být vědomi možných následků v rámci utajení dat, protože nahráváte originální dokument na server, nad kterým nemáte přímou kontrolu.  Jinak, abyste zabránili tomuto problému, můžete nastavit soukromý SVN server, například pokud již máte Apache server, který obsahuje dotyčný software (např. VisualSVN).</para>
 
     <para>Jakmile je SVN server dostupný, správci projektu musí lokálně instalovat SVN klienta, aby mohli spravovat obsah projektu na svých počítačích. Pro Windows doporučujeme <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink>. Pro Mac můžete stáhnout klienta např. z <ulink url="https://sourceforge.net/projects/macsvn/">SourceForge</ulink>, pro Linux viz <ulink url="http://www.yolinux.com/TUTORIALS/Subversion.html">Subversion Commands and Scripts</ulink>. </para>
 
@@ -120,7 +120,7 @@
         </imageobject>
       </mediaobject>
  
-      <para>Vložte URL, kterou poskytl ProjectLocker do políčka <emphasis role="bold">URL úložiště</emphasis>. Ujistěte se, že políčko <emphasis role="bold">Adresář získání (‚Checkout directory‘)</emphasis> je správně, tj. specifikuje prázdný adresář, který jste vytvořili, a stiskněte <emphasis role="bold">OK</emphasis>. Jakmile je operace dokončena, můžete zkontrolovat popsaný adresář: měl by nyní obsahovat podadresář .svn a mělo by být zobrazena zelená ikona s nápisem OK, to znamená, že obsah adresáře je aktuální:</para>
+      <para>Vložte URL, kterou poskytl ProjectLocker do políčka <emphasis role="bold">URL úložiště</emphasis>. Ujistěte se, že políčko <emphasis role="bold">Adresář získání (‚Checkout directory‘)</emphasis> je správně, tj. specifikuje prázdný adresář, který jste vytvořili, a stiskněte <emphasis role="bold">OK</emphasis>.  Jakmile je operace dokončena, můžete zkontrolovat popsaný adresář: měl by nyní obsahovat podadresář .svn a mělo by být zobrazena zelená ikona s nápisem OK, to znamená, že obsah adresáře je aktuální:</para>
 
       <para>V dalším kroku přidáme soubory OmegaT do místního adresáře. Následující soubory jsou určeny ke sdílení mezi členy týmu a musí zde být tedy obsaženy:</para>
 

@@ -89,14 +89,13 @@
           <primary>Zdrojové soubory</primary> <secondary>Soubory s formátovaným textem</secondary>
         </indexterm></title>
 
-      <para>Soubory s formátovaným textem obsahují informace jako je typ písma, velikost, barva atd. a také samotný text. Běžně jsou vytvářeny pomocí textových procesorů nebo editorů HTML. Takovéto formáty souborů jsou navrženy k tomu, aby přenesly informaci o formátovaní textu. Informace o formátování mohou být buď jednoduché, jako „toto je tučné písmo„“, nebo složité, jako např. tabulkové údaje s různými velikostmi písma, barvami, umístěním atd. Ve většině překladatelských zakázek bývá důležité, aby v přeloženém dokumentu bylo zachováno formátování originálu. OmegaT vám to umožní označením znaků či slov, které mají speciální formátování pomocí jednoduchých a přehledných tagů. Zjednodušení formátování původního textu ve velké míře přispívá ke snížení počtu tagů. Kde je to možné, tam se využívá sjednocení tagů pro písmo, velikost písma, barvy, atd., což jsou vlastnosti použité v dokumentu, a zjednoduší se tak práce na překladu a sníží se možný počet chyb tagů. OmegaT zachází s každým typem souboru jinak. Specifický přístup lze nastavit ve filtrech souborů. V době psaní tohoto textu podporuje OmegaT následující formáty pro formátovaný text:<indexterm class="singular">
+      <para>Soubory s formátovaným textem obsahují informace jako je typ písma, velikost, barva atd. stejně jako text samotný. Běžně jsou vytvářeny pomocí textových procesorů nebo editorů HTML. Takovéto formáty souborů jsou navrženy k tomu, aby přenesly informaci o formátovaní textu. Informace o formátování mohou být buď jednoduché, jako „toto je tučné písmo„“, nebo složité, jako např. tabulkové údaje s různými velikostmi písma, barvami, umístěním atd. Ve většině překladatelských zakázek bývá důležité, aby v přeloženém dokumentu bylo zachováno formátování originálu. OmegaT vám to umožní označením znaků či slov, které mají speciální formátování pomocí jednoduchých a přehledných tagů. Zjednodušení formátování původního textu ve velké míře přispívá ke snížení počtu tagů. Kde je to možné, tam se využívá sjednocení tagů pro písmo, velikost písma, barvy, atd., což jsou vlastnosti použité v dokumentu, a zjednoduší se tak práce na překladu a sníží se možný počet chyb tagů. OmegaT zachází s každým typem souboru jinak. Specifický přístup lze nastavit ve filtrech souborů. V době psaní tohoto textu podporuje OmegaT následující formáty pro formátovaný text:<indexterm class="singular">
           <primary>Formáty souborů</primary> <secondary>formátované</secondary> <seealso>Zdrojové soubory</seealso>
         </indexterm></para>
 
       <para><itemizedlist>
           <listitem>
-            <para>ODF - OASIS Open Document Format (*.ods, *.ots, *.odt,
-            *.ott, *.odp, *.otp)</para>
+            <para>ODF - Formát OASIS Open Document Format (*.ods, *.ots, *.odt, *.ott, *.odp, *.otp)</para>
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>

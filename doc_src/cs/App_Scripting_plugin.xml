@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.ScriptingPlugin.inOmegaT">
-  <title>Plugin Scripting<indexterm class="singular">
-      <primary>Pluginy</primary> <secondary>Skriptování</secondary>
+<appendix id="appendix.Scripts.inOmegaT">
+  <title>Skriptování<indexterm class="singular">
+      <primary>Skriptování</primary>
     </indexterm></title>
 
   <section>
@@ -12,11 +12,9 @@
   </section>
 
   <section>
-    <title>Instalace a použití</title>
+    <title>Použití</title>
 
-    <para>Plugin Skriptování pro OmegaT si můžete stáhnout ze <ulink url="http://sourceforge.net/projects/omegat-plugins/files">stránky určené pro stahování pluginů</ulink>. Rozbalte soubory a vložte je všechny do adresáře „plugins“, který se nachází v instalačním adresáři OmegaT, čili v adresáři, kde je uložen soubor OmegaT.jar. Pokud adresář „plugins“ neexistuje, tak jej vytvořte.</para>
-
-    <para>Tímto krokem bude přidána další podnabídka<guisubmenu> Nástroje &gt; </guisubmenu><guisubmenu>Skriptování.</guisubmenu> V podnabídce <guisubmenu>Skriptování</guisubmenu> naleznete pět zástupných řádků, kterým můžete přiřadit skripty. Kliknutím na <guisubmenu>Skriptování</guisubmenu> otevřete podokno Skriptování: <screenshot> <screeninfo>Skriptování</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
+    <para>Kliknutím na <guisubmenu>Nástroje &gt; </guisubmenu><guisubmenu>Skriptování</guisubmenu> otevřete podokno Skriptování:<screenshot> <screeninfo>Skriptování</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
 
     <para>V podokně Skriptování můžete nahrát již existující skript do textového pole a spustit jej v právě otevřeném projektu. Pro přizpůsobení vlastností skriptu proveďte následující kroky:</para>
 
@@ -28,27 +26,27 @@
 
     <itemizedlist>
       <listitem>
-        <para>Klikněte pravým tlačítkem myši ve spodním panelu na tlačítko od „&lt;1&gt;“ do „&lt;5&gt;“ a potvrďte možnost „Přidat skript“. V uvedeném příkladě jsou dva skripty (pozice 1 a 2) již přiřazeny.</para>
+        <para>Klikněte pravým tlačítkem myši ve spodním panelu na tlačítko od „&lt;1&gt;“ do „&lt;12&gt;“ a potvrďte možnost „Přidat skript“. V uvedeném příkladě jsou dva skripty (pozice 1 a 2) již přiřazeny.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Když kliknete na číslo levým tlačítkem myši, vybraný skript bude spuštěn. Stejně tak můžete spouštět vybraná makra z hlavního menu, a to použitím jejich záznamů v nabídce <guisubmenu>Nástroje </guisubmenu> nebo aktivováním zkratky <keycap>Ctrl+Alt+F#</keycap> (kde # odpovídá 1 až 5).</para>
+        <para>Když kliknete na číslo levým tlačítkem myši, vybraný skript bude spuštěn. Stejně tak můžete spouštět vybraná makra z hlavního menu, a to použitím jejich záznamů v nabídce <guisubmenu>Nástroje </guisubmenu> nebo aktivováním zkratky <keycap>Ctrl+Alt+F#</keycap> (kde # odpovídá 1 až 12).</para>
       </listitem>
     </itemizedlist>
+
+    <para>Ve výchozím nastavení jsou skripty uloženy v adresáři „scripts“, který se nachází v instalačním adresáři OmegaT (je to ten adresář, který obsahuje OmegaT.jar). </para>
+
+    <para>Můžete sem přidat nové skrpity, a ty se pak objeví v seznamu dostupných skriptů v podokně Skriptování.</para>
+  </section>
+
+  <section>
+    <title>Skriptovací jazyky</title>
 
     <para>Zařazeny jsou následující skriptovací jazyky:</para>
 
     <para><itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">NetRexx</emphasis> (http://www.netrexx.org/): podporuje klasickou REXX syntaxi, bez vyhrazených klíčových slov, spolu s významnými dodatky pro podporu objektově orientovaného programování, které je kompatibilní s objektovým modelem Javy. Všechny existující knihovny Java class lze použít v nezměněné podobě bez zvláštního nastavení; současně může programátor Java zvolit, aby se používala jen třída Rexx z běhového balíčku z vylepšeného řetězce, který působí ve zdrojových programech syntaxe Javy.</para>
-        </listitem>
-      </itemizedlist><itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">XSLT</emphasis> (Extensible Stylesheet Language Transformations): je deklarativní, jazyk založený na XML používaný pro transformaci XML dokumentů. Původní dokument není změněn; spíše je vytvořen nový dokument založený na obsahu toho již existujícího. Nový dokument může být změněn (výstup) zpracovávajícím programem do standardní XML syntaxe nebo jiného formátu, jako je HTML nebo prostý text. XSLT se nejčastěji používá k převodu dat mezi různými XML schématy nebo pro převod XML dat na webové stránky nebo PDF dokumenty.</para>
-        </listitem>
-      </itemizedlist><itemizedlist>
         <listitem>
           <para><emphasis role="bold">Groovy</emphasis> (http://groovy.codehaus.org): je dynamický jazyk pro Java Virtual machine. Je vystavěn na silných stránkách Javy, ale má dodatečné silné vlastnosti, které převzal z jazyků jako Python, Ruby a Smalltalk.</para>
         </listitem>

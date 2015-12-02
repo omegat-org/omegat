@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.searchandreplace">
+  <title>Najít a nahradit<indexterm class="singular">
+      <primary>Hledat</primary>
+    </indexterm></title>
+
+  <section id="section.searchreplace.window">
+    <title>Okno Hledat v textu<indexterm class="singular">
+        <primary>Klávesové zkratky</primary> <secondary>Najít a nahradit - Ctrl+K</secondary>
+      </indexterm></title>
+
+    <para>Pomocí klávesové zkratky <keycombo><keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo>otevřete okno Najít a nahradit a vložte slovo nebo výraz, který chcete nahradit do políčka <emphasis>Hledat</emphasis>.</para>
+
+    <para>Pak klikněte na tlačítko <emphasis>Hledat</emphasis> a zobrazí se všechny odpovídající výskyty.</para>
+
+    <para>Vložte nové slovo nebo frázi (regulární výrazy nejsou podporovány) do políčka <emphasis>Nahradit čím</emphasis>, pak klikněte na některou z následujících možností:<itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Nahradit vše</emphasis>: provede náhradu všech výskytů (po zobrazení potvrzujícího hlášení, kde se zobrazí počet výskytů).</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Nahradit</emphasis>: provede náhradu „jedna ku jedné“ prostřednictvím tlačítek, která se zobrazí v <emphasis role="bold">záhlaví podokna Editoru</emphasis>. Zde můžete vybírat z možností <emphasis>Nahradit další</emphasis> nebo <emphasis>Přeskočit</emphasis><emphasis>Dokončit</emphasis>.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Zavřít</emphasis>: zavře okno bez jakýchkoliv změn.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <section>
+      <title>Možnosti vyhledávání</title>
+
+      <para>Možnosti vyhledávání jsou podobné těm zobrazeným v <link linkend="section.search.window">okně Hledat</link>.</para>
+
+      <para>Kromě jedné: označte <emphasis role="bold">Nepřeloženo</emphasis> k provádění hledání a nahrazování také v dosud nepřeložených segmentech.</para>
+
+      <para>Aby toto bylo proveditelné (i když Hledat a nahradit pracuje jen s pamětí), OmegaT zkopíruje zdrojový segment do cílového segmentu před tím, než bude náhrada textu uskutečněna. Pokud se v daném segmentu provede žádná náhrada textu, pak bude cílový segment „vyprázdněn“, tj. zůstane nepřeložený.</para>
+    </section>
+  </section>
+</chapter>

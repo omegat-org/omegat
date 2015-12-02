@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.TaaS">
+  <title>Použití TaaS v OmegaT<indexterm class="singular">
+      <primary>Hledat</primary>
+    </indexterm></title>
+
+  <section id="section.TaaS.options">
+    <title>Všeobecné informace</title>
+
+    <para>Služba TaaS na adrese https://demo.taas-project.eu/info poskytuje terminologický servis pro evropské jazyky (plus ruštinu). Umožňuje přístup jak k veřejným, tak i k soukromým datům, kde soukromé glosáře (zde nazývané „kolekce“) mohou být extrahovány z existujících dokumentů a cílové pojmy bývají částečně doplněny automaticky z různých zdrojů. </para>
+  </section>
+
+  <section id="section.TaaS.options.collections">
+    <title>Veřejné a soukromé kolekce</title>
+
+    <para>OmegaT umožňuje přístup k veřejné části TaaS bez jakékoliv registrace.</para>
+
+    <para>Pro přístup k soukromé části si musí uživatel vytvořit klíč na adrese https://demo.taas-project.eu/account/keys/create?system=omegaT.</para>
+
+    <para>Klíč se pak musí vložit do OmegaT prostřednictvím -Dtaas.user.key=xxxxx. Konfigurační spouštěče Omega T (OmegaT.l4J.ini, omegat.kaptn a OmegaT.sh) obsahují vzorový záznam.</para>
+
+    <para>Pokud se pokusíte přístoupit ke službě bez soukromého klíče, zobrazí se v protokolu následující hláška: ‚TaaS API key not found‘ / ‚Klíč TaaS nenalezen‘. Přejděte na adresu https://demo.taas-project.eu/account/keys/create?system=omegaT a vytvořte si vlastní klíč, ten pak zadejte do OmegaT prostřednictvím -Dtaas.user.key=xxxxx (TAAS_API_KEY_NOT_FOUND)</para>
+  </section>
+
+  <section id="section.TaaS.options.access">
+    <title>Přístup ke službě TaaS</title>
+
+    <para>Klikněte na <emphasis role="bold">Možnosti, Glosář</emphasis> a zobrazíte si následující možnosti:</para>
+
+    <para><emphasis role="bold">Procházet kolekce Taas</emphasis> umožní procházet existující kolekce pro zdrojový a cílový jazyk projektu a stáhnout je. Soukromé kolekce jsou zobrazeny tučně. Kolekce jsou stahovány jako TBX glosáře do aktuálního adresáře glosáře.</para>
+
+    <para><emphasis role="bold">Hledání terminologie v TaaS</emphasis>: když je tato možnost označena, pak je možno dotazování TaaS dat na základě postupu po jednotlivých segmentech. Všechny kolekce (jak veřejné, tak soukromé) budou prohledávány, a to jak pro zdrojový, tak i pro cílový jazyk.</para>
+
+    <para>Pro omezení dat je možné označit specifickou oblast vybráním možnosti <emphasis role="bold">Vybrat oblast hledání terminologie v TaaS</emphasis>. V zobrazeném okně můžete vybrat všechny oblasti nebo jen ty potřebné.</para>
+  </section>
+</chapter>

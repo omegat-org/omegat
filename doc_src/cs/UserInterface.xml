@@ -52,7 +52,7 @@
           <row>
             <entry><guimenuitem>Podokno Poznámky</guimenuitem></entry>
 
-            <entry>poznámky týkající se aktuálního segmentu, např. alternativní překlad nebo aktuální hodnota klíče v případě formátu klíč=hodnota (key=value)</entry>
+            <entry>poznámky, které se pojí k právě otevřenému segmentu, tj. alternativní překlady nebo aktuální klíč v případě souborového formátu klíč=hodnota (key=value)</entry>
           </row>
 
           <row>
@@ -80,7 +80,7 @@
                 <primary>Klávesové zkratky</primary> <secondary>Ověření tagů - Ctrl+T</secondary>
               </indexterm>Okno Ověření tagů</guimenuitem></entry>
 
-            <entry><para>Slouží k ověření tagů (otevře se po stisku<keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo>, zavře se stiskem klávesy <keycap>Esc</keycap>)</para></entry>
+            <entry><para>Slouží k ověření tagů (otevře se po stisku<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>V</keycap></keycombo>, zavře se stiskem klávesy <keycap>Esc</keycap>)</para></entry>
           </row>
 
           <row>
@@ -133,7 +133,7 @@
 
           <row>
             <entry><guimenuitem>Písmo<indexterm class="singular">
-                <primary>Nastavení projektu</primary> <secondary>Písmo</secondary>
+                <primary>Písmo</primary>
               </indexterm></guimenuitem></entry>
 
             <entry><para>Slouží k úpravě písma, které <application>OmegaT</application> používá pro zobrazení zdroje, překladu, shodných výrazů a pojmů v glosáři, otevírá se přes <menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Písmo...</guimenuitem> </menuchoice>, zavírá se stiskem <keycap>Esc</keycap>)</para></entry>
@@ -141,9 +141,7 @@
 
           <row>
             <entry><guimenuitem>Filtry souborů<indexterm class="singular">
-                <primary>Nastavení projektu</primary> <secondary>Filtry souborů</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>Nabídka ‚Možnosti‛</primary> <secondary>Filtry souborů</secondary>
+                <primary>Filtry souborů</primary>
               </indexterm></guimenuitem></entry>
 
             <entry>Nabízí přizpůsobení si práce s podporovanými formáty souborů (spouští se přes <menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Filtry souborů...</guimenuitem> </menuchoice>, zavírá se stiskem <keycap>Esc</keycap>)</entry>
@@ -151,9 +149,7 @@
 
           <row>
             <entry><guimenuitem>Segmentace<indexterm class="singular">
-                <primary>Nastavení projektu</primary> <secondary>Segmentace</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>Nabídka ‚Možnosti‛</primary> <secondary>Segmentace</secondary>
+                <primary>Segmentace</primary>
               </indexterm></guimenuitem></entry>
 
             <entry>Umožňuje změnu způsobu, jakým je váš text segmentovaný do vět, spouští se přes <menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Segmentace</guimenuitem> </menuchoice>, zavírá se stiskem <keycap>Esc</keycap>)</entry>
@@ -161,9 +157,7 @@
 
           <row>
             <entry><guimenuitem>Nastavení editace<indexterm class="singular">
-                <primary>Nabídka ‚Možnosti‛</primary> <secondary>Nastavení editace...</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>Nastavení projektu</primary> <secondary>Nastavení editace</secondary>
+                <primary>Nastavení editace</primary>
               </indexterm></guimenuitem></entry>
 
             <entry>Zde se mění nastavení reakcí <application>OmegaT</application>, když přecházíte mezi segmenty, spouští se přes <menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Nastavení editace...</guimenuitem> </menuchoice>, zavřete jej stiskem <keycap>Esc</keycap>)</entry>
@@ -238,11 +232,11 @@
           <row>
             <entry><inlinemediaobject>
                 <imageobject role="html">
-                  <imagedata fileref="images/restore.gif" width="60%"/>
+                  <imagedata fileref="images/Restore.gif" width="60%"/>
                 </imageobject>
 
                 <imageobject role="fo">
-                  <imagedata fileref="images/restore.gif" width="40%"/>
+                  <imagedata fileref="images/Restore.gif" width="40%"/>
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -252,11 +246,11 @@
           <row>
             <entry><inlinemediaobject>
                 <imageobject role="html">
-                  <imagedata fileref="images/undock.gif" width="60%"/>
+                  <imagedata fileref="images/Undock.gif" width="60%"/>
                 </imageobject>
 
                 <imageobject role="fo">
-                  <imagedata fileref="images/undock.gif" width="40%"/>
+                  <imagedata fileref="images/Undock.gif" width="40%"/>
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -266,11 +260,11 @@
           <row>
             <entry><inlinemediaobject>
                 <imageobject role="html">
-                  <imagedata fileref="images/dock.gif" width="60%"/>
+                  <imagedata fileref="images/Dock.gif" width="60%"/>
                 </imageobject>
 
                 <imageobject role="fo">
-                  <imagedata fileref="images/dock.gif" width="40%"/>
+                  <imagedata fileref="images/Dock.gif" width="40%"/>
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -339,7 +333,7 @@
 
       <para>V závislosti na nastavení hodnot u Nastavení editace, může být editační pole pro nepřeložený segment prázdné, obsahovat zdrojový text nebo překladový řetězec nejpřibližnější k tomu, který právě překládáte.  Jakmile přejdete na jiný segment, překlad bude validován a uložen. Pokud chcete, aby se překlad rovnal zdroji, jednoduše vyprázdněte editační pole odstraněním veškerého textu (vyberte vše stiskem <keycap>Ctrl+A</keycap> a smažte pomocí <keycap>Del</keycap>). OmegaT umí uložit překlad, který je identický se zdrojem. Toto je užitečné u dokumentů, které obsahují obchodní značky, názvy nebo také vlastní jména, nebo části textu ve třetím jazyce, které nevyžadují překlad. Více podrobností najdete v části <emphasis>Editace překladu</emphasis>.</para>
 
-      <para>Když kliknete pravým tlačítkem myši do Editoru, otevře se vyskakovací nabídka, která nabízí možnosti<emphasis role="bold"> Vyjmout, Kopírovat, Vložit</emphasis> (tj. stejné funkce jako <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> and <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>) a funkce <emphasis role="bold">Přejít na segment</emphasis>.</para>
+      <para>Když kliknete pravým tlačítkem myši do Editoru, otevře se vyskakovací nabídka, která nabízí možnosti <emphasis role="bold"> Vyjmout, Kopírovat, Vložit</emphasis> (tj. stejné funkce jako <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> a <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>) a funkce <emphasis role="bold">Přejít na segment</emphasis>. </para>
     </section>
 
     <section id="match.viewer">
@@ -385,7 +379,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>procento shody, když je používán plugin tokenizer</para>
+          <para>procento shody (s ohledem na tokenizery)</para>
         </listitem>
       </itemizedlist>
 
@@ -462,7 +456,7 @@
               <row>
                 <entry><literal>${diff}</literal></entry>
 
-                <entry>Řetězec zobrazující rozdíl mezi zdrojem a přibližným překladem.<emphasis> Tip</emphasis> použijte tuto proměnnou v případě, že text, na kterém pracujete, byl aktualizován.</entry>
+                <entry>Řetězec zobrazující rozdíl mezi zdrojem a přibližným překladem.<emphasis> Tip:</emphasis> použijte tuto proměnnou v případě, že text, na kterém pracujete, byl aktualizován.</entry>
               </row>
 
               <row>
@@ -629,7 +623,11 @@
 
       <itemizedlist>
         <listitem>
-          <para>seznam všech přeložitelných souborů v projektu. Toto jsou soubory nacházející se v adresáři zdrojových souborů, a ve formátech, které OmegaT umí zpracovávat. Kliknutí na jakýkoliv soubor jej otevře a překlad může začít.</para>
+          <para>celkový počet přeložitelných souborů v projektu. Toto jsou soubory nacházející se v adresáři zdrojových souborů /source, a ve formátech, které OmegaT umí zpracovávat. Jejich počet je zobrazen v závorkách vedle nápisu „Soubory projektu“</para>
+        </listitem>
+
+        <listitem>
+          <para>seznam všech přeložitelných souborů v projektu. Kliknutí na jakýkoliv soubor jej otevře a překlad může začít. Poznámka: názvy souborů (v prvním sloupci) můžete seřadit podle abecedy tak, že kliknete na hlavičku sloupce. Kliknutím na název souboru a výběrem některého z tlačítek <emphasis>Přesunout...</emphasis> můžete změnit umístění názvu souboru.</para>
         </listitem>
       </itemizedlist>
 
@@ -711,7 +709,7 @@
           <primary>Klávesové zkratky</primary> <secondary>Kopírovat text - Ctrl+C</secondary>
         </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
           <primary>Klávesové zkratky</primary> <secondary>Vložit text - Ctrl+V</secondary>
-        </indexterm></guimenuitem>. <figure id="ProjectStatistic.Window">
+        </indexterm></guimenuitem>.<figure id="ProjectStatistic.Window">
           <title>Statistika projektu</title>
 
           <mediaobject>
@@ -731,7 +729,7 @@
           <primary>Statistika shody</primary> <seealso>Nabídka ‚Nástroje‛</seealso>
         </indexterm></title>
 
-      <para>Statistiku shody najdete pod <guimenuitem>Nástroje&gt;Statistika shody.</guimenuitem> Zpracování statistiky je náročné na možnosti CPU a může nějakou dobu trvat, proto se během zpracování zobrazí ukazatel průběhu. Pracuje se tu s určitými kategoriemi, které de facto představují průmyslový standard při klasifikaci shody na následující skupiny: Přesná shoda 95%-100%, 85%-94%, 75%-84%, 50%-74% a Žádná shoda. Tato informace je počítána jak pro segmenty, tak i pro slova a znaky (bez a s mezerami). Nicméně se zde ovšem mohou vyskytnout drobné rozdíly mezi počty OmegaT a čísly, které poskytnou jiné nástroje CAT.<figure>
+      <para>Statistiku shody najdete pod <guimenuitem>Nástroje&gt;Statistika shody.</guimenuitem> Zpracování statistiky je náročné na možnosti CPU a může nějakou dobu trvat, proto se během zpracování zobrazí ukazatel průběhu. Pracuje se tu s určitými kategoriemi, které de facto představují průmyslový standard při klasifikaci shody na následující skupiny: Přesná shoda 95%-100%, 85%-94%, 75%-84%, 50%-74% a Žádná shoda. Tato informace je počítána jak pro segmenty, tak i pro slova a znaky (bez a s mezerami). Mohou se zde ovšem vyskytnout drobné rozdíly mezi počty OmegaT a čísly, které poskytnou jiné nástroje CAT.<figure>
           <title>Statistika shody</title>
 
           <mediaobject>

@@ -2,25 +2,25 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>Chapter&nbsp;18.&nbsp;Glosáře</title>
+      <title>Chapter&nbsp;19.&nbsp;Glosáře</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT 3.0 - Uživatelská příručka">
-      <link rel="up" href="index.html" title="OmegaT 3.0 - Uživatelská příručka">
-      <link rel="prev" href="chapter.dictionaries.html" title="Chapter&nbsp;17.&nbsp;Slovníky">
-      <link rel="next" href="chapter.machine.translate.html" title="Chapter&nbsp;19.&nbsp;Strojový překlad">
+      <link rel="home" href="index.html" title="OmegaT 3.1 - Uživatelská příručka">
+      <link rel="up" href="index.html" title="OmegaT 3.1 - Uživatelská příručka">
+      <link rel="prev" href="chapter.dictionaries.html" title="Chapter&nbsp;18.&nbsp;Slovníky">
+      <link rel="next" href="chapter.TaaS.html" title="Chapter&nbsp;20.&nbsp;Použití TaaS v OmegaT">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">Chapter&nbsp;18.&nbsp;Glosáře</th>
+               <th colspan="3" align="center">Chapter&nbsp;19.&nbsp;Glosáře</th>
             </tr>
             <tr>
                <td width="20%" align="left"><a accesskey="p" href="chapter.dictionaries.html">Prev</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Next</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.TaaS.html">Next</a></td>
             </tr>
          </table>
          <hr>
@@ -29,17 +29,18 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.glossaries"></a>Chapter&nbsp;18.&nbsp;Glosáře<a class="indexterm" name="d0e7998"></a><a class="indexterm" name="d0e8003"></a></h1>
+                  <h1 class="title"><a name="chapter.glossaries"></a>Chapter&nbsp;19.&nbsp;Glosáře<a class="indexterm" name="d0e8374"></a><a class="indexterm" name="d0e8379"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8027">1. Používání</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8081">2. Formát souboru</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8120">3. Jak glosáře vytvořit</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8166">4. Použití Trados Multiterm</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8182">5. Obecné problémy glosáře</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8406">1. Používání</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8460">2. Formát souboru</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8517">3. Jak glosáře vytvořit</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8563">4. Prioritní glosář</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8575">5. Použití Trados Multiterm</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8591">6. Obecné problémy glosáře</a></span></dt>
             </dl>
          </div>
          <p>Glosáře představují soubory, které jsou pro použití v <span class="application">OmegaT</span> tvořené a aktualizované ručně.
@@ -47,7 +48,7 @@
          <p>Pokud projekt <span class="application">OmegaT</span> obsahuje jeden či více glosářů, jakékoliv termíny v glosáři, pokud jsou nalezené v aktuálním segmentu, budou automaticky
             zobrazené v okně Glosář.
          </p>
-         <p>Sami si zvolíte umístění a název svého glosáře v dialogovém okně Vlastnosti projektu. Koncovka musí být <code class="filename">.txt</code> (pokud chybí, bude přidána). Umístění tohoto souboru musí být sice v adresáři <code class="filename">/glossary</code>, ale zato může být na jakékoliv nižší úrovni (např. <code class="filename">glossary/sub/glossary.txt</code>). Soubor glosáře nemusí existovat v době vytváření adresáře, samotný soubor glosáře bude vytvořen (pokud nutno) přidáním
+         <p>Sami si zvolíte umístění a název svého glosáře v dialogovém okně Vlastnosti projektu. Koncovka musí být <code class="filename">.txt</code> nebo <code class="filename">.utf8</code> (pokud chybí, bude přidána). Umístění tohoto souboru musí být sice v adresáři <code class="filename">/glossary</code>, ale zato může být na jakékoliv nižší úrovni (např. <code class="filename">glossary/sub/glossary.txt</code>). Soubor glosáře nemusí existovat v době vytváření adresáře, samotný soubor glosáře bude vytvořen (pokud nutno) přidáním
             prvního záznamu. Pokud už máte soubor glosáře k dispozici, program nebude ověřovat formát nebo znakovou sadu: nové záznamy
             budou vždy ve formátu, kdy jsou záznamy od sebe odděleny tabulátorem a kódování bude UTF-8. Protože se nezasahuje do již existujícího
             obsahu, je též omezeno riziko poškození již existujícího souboru.
@@ -56,13 +57,13 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8027"></a>1.&nbsp;Používání
+                     <h2 class="title" style="clear: both"><a name="d0e8406"></a>1.&nbsp;Používání
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Dostupný glosář začněte používat tak, že jej po vytvoření projektu jednoduše umístíte do adresáře <a class="indexterm" name="d0e8032"></a><code class="filename">/glossary</code>. Když je projekt otevřený, <span class="application">OmegaT</span> v tomto adresáři soubory glosáře automaticky detekuje. Výrazy aktuálního segmentu, které <span class="application">OmegaT</span> najde v souboru (souborech) glosáře, se zobrazují v okně Glosář:
-            </p><a class="indexterm" name="d0e8046"></a><div class="figure"><a name="d0e8049"></a><p class="title"><b>Figure&nbsp;18.1.&nbsp;Okno Glosář</b></p>
+            <p>Dostupný glosář začněte používat tak, že jej po vytvoření projektu jednoduše umístíte do adresáře <a class="indexterm" name="d0e8411"></a><code class="filename">/glossary</code>. Když je projekt otevřený, <span class="application">OmegaT</span> v tomto adresáři soubory glosáře automaticky detekuje. Výrazy aktuálního segmentu, které <span class="application">OmegaT</span> najde v souboru (souborech) glosáře, se zobrazují v okně Glosář:
+            </p><a class="indexterm" name="d0e8425"></a><div class="figure"><a name="d0e8428"></a><p class="title"><b>Figure&nbsp;19.1.&nbsp;Okno Glosář</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/GlossaryPane_25.png" alt="Okno Glosář"></div>
                </div>
@@ -72,18 +73,18 @@
                překladu. Nově vložené pojmy budou rozpoznané až po novém načtení projektu.
             </p>
             <p>Termín ve zdrojovém jazyce nemusí být položka o jednom slovu, jak to vidíme na příkladě:</p>
-            <div class="figure"><a name="d0e8061"></a><p class="title"><b>Figure&nbsp;18.2.&nbsp;záznamy o více slovech v glosáři – příklad<a class="indexterm" name="d0e8064"></a></b></p>
+            <div class="figure"><a name="d0e8440"></a><p class="title"><b>Figure&nbsp;19.2.&nbsp;záznamy o více slovech v glosáři – příklad<a class="indexterm" name="d0e8443"></a></b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="záznamy o více slovech v glosáři – příklad"></div>
                </div>
             </div><br class="figure-break"><p>Podtržené slovo „pop-up menu“ může být v glosáři nalezeno jako „pojavni menu“. V glosáři nalezený záznam vložíte do překladu
-               tak, že označíte termín v podokně Glosáře a kliknete pravým tlačítkem (nebo kolečkem) myši do cílového segmentu.<a href="#ftn.d0e8078" class="footnote" name="d0e8078"><sup class="footnote">[1]</sup></a></p>
+               tak, že označíte termín v podokně Glosáře a kliknete pravým tlačítkem (nebo kolečkem) myši do cílového segmentu.<a href="#ftn.d0e8457" class="footnote" name="d0e8457"><sup class="footnote">[1]</sup></a></p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8081"></a>2.&nbsp;<a class="indexterm" name="d0e8083"></a>Formát souboru<a class="indexterm" name="d0e8089"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8460"></a>2.&nbsp;<a class="indexterm" name="d0e8462"></a>Formát souboru<a class="indexterm" name="d0e8468"></a></h2>
                   </div>
                </div>
             </div>
@@ -91,22 +92,25 @@
                nachází zdrojový (první sloupec) a cílový (druhý sloupec) výraz. Třetí sloupec může být použit pro dodatečné informace. Také
                můžete mít záznamy, kde chybí sloupec s překladem, tj. záznamy jen s nějakým pojmem a příslušný komentář.
             </p>
-            <p>Soubory glosáře mohou být buď  ve výchozím kódování systému (a mít koncovku .tab) nebo v kódování UTF-8 (s koncovkou .utf8).
-               Právě kvůli své univerzálnosti je upřednostňováno kódování Unicode (UTF-8). Formát CSV je také podporován. Tento formát je
-               prakticky to samé jako když jsou položky odděleny tabulátorem: zdrojový výraz, cílový výraz. Pole s komentářem je odděleno
-               čárkou ','. Jednotlivé řetězce mohou být ohraničeny uvozovkami ", což umožňuje použít čárku uvnitř řetězce.
+            <p>Soubory glosáře mohou být buď  ve výchozím kódování systému (a mít koncovku .tab), v kódování UTF-8 (s koncovkou .utf8 nebo
+               .txt) nebo v kódování UTF-16 LE (s koncovou .txt). Formát CSV je také podporován. Tento formát je prakticky to samé jako když
+               jsou položky odděleny tabulátorem: zdrojový výraz, cílový výraz. Pole s komentářem je odděleno čárkou ','. Jednotlivé řetězce
+               mohou být ohraničeny uvozovkami ", což umožňuje použít čárku uvnitř řetězce.
             </p>
             <p><code class="literal">"Toto je zdrojový výraz, který obsahuje čárku","c'est un terme, qui contient une virgule"</code></p>
-            <p>Vedle prostého textového formátu je podporován <a class="indexterm" name="d0e8105"></a> formát TBX. TBX - Term Base eXchange - je otevřený standard založený na XML a slouží k výměně strukturovaných dat, TBX se
-               osvědčil jako mezinárodní standard organizací LISA a ISO. Pokud používáte systém pro správu terminologie - např. MultiTerm
-               – je docela možné, že bude nabízet export terminologických dat do formátu TBX. <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Sbírka terminologických slovníčků pro Microsoft</a> <a class="indexterm" name="d0e8114"></a> nabízí ke stažení terminologii v téměř stech jazycích a slouží jako základ IT glosáře.
+            <p>Vedle prostého textového formátu je podporován <a class="indexterm" name="d0e8484"></a> formát TBX jakožto formát slovníku určený pouze pro čtení.. Umístění souboru <code class="filename">.tbx</code> musí být sice v adresáři <code class="filename">/glossary</code>, ale zato může být na jakékoliv nižší úrovni (např. <code class="filename">glossary/sub/MujGlosar.txt</code>).
             </p>
+            <p>TBX - Term Base eXchange - je otevřený standard založený na XML a slouží k výměně strukturovaných dat, TBX se osvědčil jako
+               mezinárodní standard organizací LISA a ISO. Pokud používáte systém pro správu terminologie je docela možné, že bude nabízet
+               export terminologických dat do formátu TBX. <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Sbírka terminologických slovníčků Microsoft Terminology Collection</a> <a class="indexterm" name="d0e8504"></a> nabízí ke stažení terminologii v téměř stech jazycích a slouží jako základ IT glosáře.
+            </p>
+            <p>Poznámka: koncovka <code class="filename">.tbx</code> souborů MultiTerm se zdá být nespolehlivá (listopad 2013), doporučujeme místo ní raději používat pro MultiTerm kocovku <code class="filename">.tab</code></p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8120"></a>3.&nbsp;Jak glosáře vytvořit<a class="indexterm" name="d0e8123"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8517"></a>3.&nbsp;Jak glosáře vytvořit<a class="indexterm" name="d0e8520"></a></h2>
                   </div>
                </div>
             </div>
@@ -118,32 +122,48 @@
                tedy zcela jednoduchá: stiskněte <span class="keycap"><strong>Ctrl+Shift+G </strong></span> a zadejte nový termín, jeho překlad a příslušný komentář (ujistěte se, že jste stiskli tabulátor pro přechod mezi jednotlivými
                poli) a soubor uložte. Současně bude aktualizován obsah podokna Glosář.
             </p>
-            <p><a class="indexterm" name="d0e8144"></a>Umístění zapisovatelného souboru glosáře si můžete nastavit přes dialog <span class="guimenuitem">Projekt &gt; Vlastnosti...</span> Rozeznatelné koncovky jsou <code class="filename">TXT</code> a <code class="filename">UTF8</code>.
+            <p><a class="indexterm" name="d0e8541"></a>Umístění zapisovatelného souboru glosáře si můžete nastavit přes dialog <span class="guimenuitem">Projekt &gt; Vlastnosti...</span> Rozeznatelné koncovky jsou <code class="filename">TXT</code> a <code class="filename">UTF8</code>.
             </p>
             <p><span class="bold"><strong>Poznámka:</strong></span> Jistě že jsou tu i jiné způsoby a prostředky jak vytvořit prostý soubor se záznamy oddělenými tabulátorem. Pro tyto účely
-               můžete používat například Notepad++ pod Windows, GEdit na Linuxu nebo nějaký tabulkový procesor: jakákoliv aplikace, která
-               umí pracovat s UTF8, a která umí zobrazit netisknutelné znaky (takže vám nebude chybět značka tabulátoru <span class="keycap"><strong>TAB</strong></span>).
+               můžete používat například Notepad++ pod Windows, GEdit na Linuxu nebo nějaký tabulkový procesor: lze použít jakoukoliv aplikaci,
+               která umí pracovat s UTF-8 (nebo UTF-16 LE), a která umí zobrazit netisknutelné znaky (takže vám nebude chybět značka tabulátoru
+               <span class="keycap"><strong>TAB</strong></span>).
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8166"></a>4.&nbsp;<a class="indexterm" name="d0e8168"></a>Použití Trados Multiterm
+                     <h2 class="title" style="clear: both"><a name="d0e8563"></a>4.&nbsp;<a class="indexterm" name="d0e8565"></a>Prioritní glosář
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Výsledky hledání z prioritního glosáře (ve výchozím nastavení je to soubor glossary/glossary.txt) se zobrazují na prvním místě
+               v podokně Glosář a pro TransTips.
+            </p>
+            <p>Když se mezi zobrazenými záznamy vyskytují slova z prioritních a neprioritních glosářů, pak jsou slova z prioritních glosářů
+               zobrazena tučně.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8575"></a>5.&nbsp;<a class="indexterm" name="d0e8577"></a>Použití Trados Multiterm
                      </h2>
                   </div>
                </div>
             </div>
             <p>Data, která jsou exportována z Trados MutliTerm můžete použít jako glosáře <span class="application">OmegaT</span> bez dalších úprav, tedy jestliže mají koncovku <code class="filename">.tab</code> a pole pro zdroj a překlad jsou prvními dvěma poli (v tomto pořadí).  Když exportujete data použitím možnosti „Tab-delimited
-               export“, budete muset smazat prvních 5 sloupců (Seq. Nr, Date created atd.). Novější verze MultiTerm podporuje export ve formátu
-               TBX.
+               export“, budete muset smazat prvních 5 sloupců (Seq. Nr, Date created atd.).
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8182"></a>5.&nbsp;<a class="indexterm" name="d0e8184"></a>Obecné problémy glosáře
+                     <h2 class="title" style="clear: both"><a name="d0e8591"></a>6.&nbsp;<a class="indexterm" name="d0e8593"></a>Obecné problémy glosáře
                      </h2>
                   </div>
                </div>
@@ -173,7 +193,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Soubor glosáře nemá správnou koncovku (.tab nebo .utf8).</p>
+                     <p>Soubor glosáře nemá správnou koncovku (.tab, .utf8 nebo .txt).</p>
                   </li>
                </ul>
             </div>
@@ -217,11 +237,11 @@
             </div>
          </div>
          <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
-            <div id="ftn.d0e8078" class="footnote">
-               <p><a href="#d0e8078" class="para"><sup class="para">[1] </sup></a>Ve výše uvedeném případě jsme si k věci neřekli vše, protože cílový jazyk (zde slovinština) používá deklinaci. Takže vložený
-                  výraz „pojavni menu“ ve tvaru nominativu musí být změněno na „pojavnem meniju“, tj. na tvar lokativu. Je tedy pravděpodobně
-                  rychlejší daný pojem napsat hned správně bez kroku navíc vkládat termín z glosáře, byť pomocí klávesové zkratky, a vyhnout
-                  se těmto úprávám.
+            <div id="ftn.d0e8457" class="footnote">
+               <p><a href="#d0e8457" class="para"><sup class="para">[1] </sup></a>Ve výše uvedeném případě jsme si k věci neřekli vše, protože cílový jazyk (zde slovinština) používá deklinaci. Takže vložený
+                  výraz „pojavni menu“ ve tvaru nominativu musí být změněno na „pojavnem meniju“, tj. tvar lokativu. Je tedy pravděpodobně rychlejší
+                  daný pojem napsat hned správně bez kroku navíc vkládat termín z glosáře, byť pomocí klávesové zkratky, a vyhnout se těmto
+                  úprávám.
                </p>
             </div>
          </div>
@@ -233,12 +253,12 @@
                <td width="40%" align="left"><a accesskey="p" href="chapter.dictionaries.html">Prev</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Next</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.TaaS.html">Next</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">Chapter&nbsp;17.&nbsp;Slovníky&nbsp;</td>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;18.&nbsp;Slovníky&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;19.&nbsp;Strojový překlad</td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;20.&nbsp;Použití TaaS v OmegaT</td>
             </tr>
          </table>
       </div>

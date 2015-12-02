@@ -2,11 +2,11 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>Appendix&nbsp;F.&nbsp;Plugin Scripting</title>
+      <title>Appendix&nbsp;F.&nbsp;Skriptování</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT 3.0 - Uživatelská příručka">
-      <link rel="up" href="index.html" title="OmegaT 3.0 - Uživatelská příručka">
+      <link rel="home" href="index.html" title="OmegaT 3.1 - Uživatelská příručka">
+      <link rel="up" href="index.html" title="OmegaT 3.1 - Uživatelská příručka">
       <link rel="prev" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Appendix&nbsp;E.&nbsp;Plugin LanguageTool">
       <link rel="next" href="appendix.website.html" title="Appendix&nbsp;G.&nbsp;OmegaT na webu">
    </head>
@@ -14,7 +14,7 @@
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">Appendix&nbsp;F.&nbsp;Plugin Scripting</th>
+               <th colspan="3" align="center">Appendix&nbsp;F.&nbsp;Skriptování</th>
             </tr>
             <tr>
                <td width="20%" align="left"><a accesskey="p" href="appendix.LanguageToolPlugin.inOmegaT.html">Prev</a>&nbsp;
@@ -29,21 +29,22 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="appendix.ScriptingPlugin.inOmegaT"></a>Appendix&nbsp;F.&nbsp;Plugin Scripting<a class="indexterm" name="d0e10847"></a></h1>
+                  <h1 class="title"><a name="appendix.Scripts.inOmegaT"></a>Appendix&nbsp;F.&nbsp;Skriptování<a class="indexterm" name="d0e11399"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e10852">1. Úvod</a></span></dt>
-               <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e10857">2. Instalace a použití</a></span></dt>
+               <dt><span class="section"><a href="appendix.Scripts.inOmegaT.html#d0e11402">1. Úvod</a></span></dt>
+               <dt><span class="section"><a href="appendix.Scripts.inOmegaT.html#d0e11407">2. Použití</a></span></dt>
+               <dt><span class="section"><a href="appendix.Scripts.inOmegaT.html#d0e11447">3. Skriptovací jazyky</a></span></dt>
             </dl>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10852"></a>1.&nbsp;Úvod
+                     <h2 class="title" style="clear: both"><a name="d0e11402"></a>1.&nbsp;Úvod
                      </h2>
                   </div>
                </div>
@@ -54,15 +55,12 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10857"></a>2.&nbsp;Instalace a použití
+                     <h2 class="title" style="clear: both"><a name="d0e11407"></a>2.&nbsp;Použití
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Plugin Skriptování pro OmegaT si můžete stáhnout ze <a class="ulink" href="http://sourceforge.net/projects/omegat-plugins/files" target="_top">stránky určené pro stahování pluginů</a>. Rozbalte soubory a vložte je všechny do adresáře „plugins“, který se nachází v instalačním adresáři OmegaT, čili v adresáři,
-               kde je uložen soubor OmegaT.jar. Pokud adresář „plugins“ neexistuje, tak jej vytvořte.
-            </p>
-            <p>Tímto krokem bude přidána další podnabídka<span class="guisubmenu"> Nástroje &gt; </span><span class="guisubmenu">Skriptování.</span> V podnabídce <span class="guisubmenu">Skriptování</span> naleznete pět zástupných řádků, kterým můžete přiřadit skripty. Kliknutím na <span class="guisubmenu">Skriptování</span> otevřete podokno Skriptování: 
+            <p>Kliknutím na <span class="guisubmenu">Nástroje &gt; </span><span class="guisubmenu">Skriptování</span> otevřete podokno Skriptování:
             </p>
             <div class="screenshot">
                <div class="mediaobject"><img src="images/ScriptingDialog.png"></div>
@@ -80,7 +78,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Klikněte pravým tlačítkem myši ve spodním panelu na tlačítko od „&lt;1&gt;“ do „&lt;5&gt;“ a potvrďte možnost „Přidat skript“. V uvedeném
+                     <p>Klikněte pravým tlačítkem myši ve spodním panelu na tlačítko od „&lt;1&gt;“ do „&lt;12&gt;“ a potvrďte možnost „Přidat skript“. V uvedeném
                         příkladě jsou dva skripty (pozice 1 a 2) již přiřazeny.
                      </p>
                   </li>
@@ -90,34 +88,26 @@
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Když kliknete na číslo levým tlačítkem myši, vybraný skript bude spuštěn. Stejně tak můžete spouštět vybraná makra z hlavního
-                        menu, a to použitím jejich záznamů v nabídce <span class="guisubmenu">Nástroje </span> nebo aktivováním zkratky <span class="keycap"><strong>Ctrl+Alt+F#</strong></span> (kde # odpovídá 1 až 5).
+                        menu, a to použitím jejich záznamů v nabídce <span class="guisubmenu">Nástroje </span> nebo aktivováním zkratky <span class="keycap"><strong>Ctrl+Alt+F#</strong></span> (kde # odpovídá 1 až 12).
                      </p>
                   </li>
                </ul>
+            </div>
+            <p>Ve výchozím nastavení jsou skripty uloženy v adresáři „scripts“, který se nachází v instalačním adresáři OmegaT (je to ten
+               adresář, který obsahuje OmegaT.jar). 
+            </p>
+            <p>Můžete sem přidat nové skrpity, a ty se pak objeví v seznamu dostupných skriptů v podokně Skriptování.</p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e11447"></a>3.&nbsp;Skriptovací jazyky
+                     </h2>
+                  </div>
+               </div>
             </div>
             <p>Zařazeny jsou následující skriptovací jazyky:</p>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
-                  <li class="listitem">
-                     <p><span class="bold"><strong>NetRexx</strong></span> (http://www.netrexx.org/): podporuje klasickou REXX syntaxi, bez vyhrazených klíčových slov, spolu s významnými dodatky pro
-                        podporu objektově orientovaného programování, které je kompatibilní s objektovým modelem Javy. Všechny existující knihovny
-                        Java class lze použít v nezměněné podobě bez zvláštního nastavení; současně může programátor Java zvolit, aby se používala
-                        jen třída Rexx z běhového balíčku z vylepšeného řetězce, který působí ve zdrojových programech syntaxe Javy.
-                     </p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
-                  <li class="listitem">
-                     <p><span class="bold"><strong>XSLT</strong></span> (Extensible Stylesheet Language Transformations): je deklarativní, jazyk založený na XML používaný pro transformaci XML dokumentů.
-                        Původní dokument není změněn; spíše je vytvořen nový dokument založený na obsahu toho již existujícího. Nový dokument může
-                        být změněn (výstup) zpracovávajícím programem do standardní XML syntaxe nebo jiného formátu, jako je HTML nebo prostý text.
-                        XSLT se nejčastěji používá k převodu dat mezi různými XML schématy nebo pro převod XML dat na webové stránky nebo PDF dokumenty.
-                     </p>
-                  </li>
-               </ul>
-            </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">

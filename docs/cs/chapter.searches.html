@@ -5,10 +5,10 @@
       <title>Chapter&nbsp;15.&nbsp;Vyhledávání</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT 3.0 - Uživatelská příručka">
-      <link rel="up" href="index.html" title="OmegaT 3.0 - Uživatelská příručka">
+      <link rel="home" href="index.html" title="OmegaT 3.1 - Uživatelská příručka">
+      <link rel="up" href="index.html" title="OmegaT 3.1 - Uživatelská příručka">
       <link rel="prev" href="chapter.segmentation.html" title="Chapter&nbsp;14.&nbsp;Segmentace zdroje">
-      <link rel="next" href="chapter.regexp.html" title="Chapter&nbsp;16.&nbsp;Regulární výrazy">
+      <link rel="next" href="chapter.searchandreplace.html" title="Chapter&nbsp;16.&nbsp;Najít a nahradit">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
@@ -20,7 +20,7 @@
                <td width="20%" align="left"><a accesskey="p" href="chapter.segmentation.html">Prev</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Next</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.searchandreplace.html">Next</a></td>
             </tr>
          </table>
          <hr>
@@ -29,99 +29,41 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.searches"></a>Chapter&nbsp;15.&nbsp;Vyhledávání<a class="indexterm" name="d0e7121"></a></h1>
+                  <h1 class="title"><a name="chapter.searches"></a>Chapter&nbsp;15.&nbsp;Vyhledávání<a class="indexterm" name="d0e7392"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
                <dt><span class="section"><a href="chapter.searches.html#search.window">1. Okno Hledat v textu</a></span></dt>
-               <dd>
-                  <dl>
-                     <dt><span class="section"><a href="chapter.searches.html#d0e7143">1.1. Hledání</a></span></dt>
-                     <dt><span class="section"><a href="chapter.searches.html#d0e7167">1.2. Hledat umístění</a></span></dt>
-                  </dl>
-               </dd>
                <dt><span class="section"><a href="chapter.searches.html#using.wild.cards">2. Použití zástupných znaků</a></span></dt>
                <dt><span class="section"><a href="chapter.searches.html#search.methoids">3. Metody a možnosti vyhledávání</a></span></dt>
                <dt><span class="section"><a href="chapter.searches.html#search.result.display">4. Zobrazení výsledků hledání</a></span></dt>
+               <dt><span class="section"><a href="chapter.searches.html#search.filter">5. Filtrování záznamů v editoru podle hledání</a></span></dt>
             </dl>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="search.window"></a>1.&nbsp;Okno Hledat v textu
-                     </h2>
+                     <h2 class="title" style="clear: both"><a name="search.window"></a>1.&nbsp;Okno Hledat v textu<a class="indexterm" name="d0e7398"></a></h2>
                   </div>
                </div>
             </div>
-            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Figure&nbsp;15.1.&nbsp;Okno hledání v textu<a class="indexterm" name="d0e7130"></a></b></p>
-               <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/TextSearch25.png" alt="Okno hledání v textu"></div>
-               </div>
-            </div><br class="figure-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
-               <h3 class="title">Note</h3>
-               <p>Výše uvedené hledání najde všechny cílové segmenty, které obsahují hledané znaky, což je v cílovém jazyce – zde slovinština
-                  – dost vzácné.
-               </p>
-            </div>
-            <div class="section">
-               <div class="titlepage">
-                  <div>
-                     <div>
-                        <h3 class="title"><a name="d0e7143"></a>1.1.&nbsp;Hledání<a class="indexterm" name="d0e7146"></a></h3>
-                     </div>
-                  </div>
-               </div>
-               <p><span class="application">OmegaT</span> poskytuje množství výkonných vyhledávacích funkcí. Okno Hledat otevřete pomocí zkratky <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>, pak zadejte slovo nebo frázi, kterou chcete vyhledat do pole „Hledat“. Podobně lze vycházet přímo z Editoru: označte slovo
-                  či frázi kdekoliv v podokně Editoru (cílový text aktuálního segmentu) a stiskněte <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>. Slovo nebo fráze bude v tomto případě zadané do pole „Hledat“ automaticky. Současně je možné mít otevřeno několik oken hledání,
-                  ale zavřete je hned, když je už nepotřebujete, aby se tak nezahltila paměť počítače.
-               </p>
-            </div>
-            <div class="section">
-               <div class="titlepage">
-                  <div>
-                     <div>
-                        <h3 class="title"><a name="d0e7167"></a>1.2.&nbsp;Hledat umístění
-                        </h3>
-                     </div>
-                  </div>
-               </div>
-               <p>Ve výchozím nastavení se při hledání prochází jak zdrojový text, tak i přeložená část projektu, ale můžete omezit hledání
-                  jen na text zdroje či překladu. Prohledávat lze
-               </p>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" style="list-style-type: disc; ">
-                     <li class="listitem">
-                        <p>pouze projekt (výchozí nastavení)</p>
-                     </li>
-                  </ul>
-               </div>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" style="list-style-type: disc; ">
-                     <li class="listitem">
-                        <p>jak projekt, tak i referenční překladové paměti v adresáři /tm/ (označte <span class="emphasis"><em>Prohledávat překladové paměti)</em></span></p>
-                     </li>
-                  </ul>
-               </div>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" style="list-style-type: disc; ">
-                     <li class="listitem">
-                        <p>jednotlivý soubor nebo adresář obsahující sadu souborů (označte <span class="emphasis"><em>Prohledávat soubory</em></span>)
-                        </p>
-                     </li>
-                  </ul>
-               </div>
-               <p>Když procházíte soubory (jako protiklad k překladovým pamětem), bude <span class="application">OmegaT</span> prohledávat jen soubory, které jsou ve zdrojovém formátu. Tedy, ačkoliv je OmegaT schopna zpracovat soubory <code class="filename">TMX</code>, nezahrne je ale do vyhledávání. Když aktivujete možnost <span class="bold"><strong><a class="indexterm" name="d0e7198"></a>Pokročilé možnosti</strong></span>, pak můžete kombinovat hledání podle jména autora překladu a času poslední změny.
-               </p>
-            </div>
+            <p>Okno Hledat otevřete pomocí zkratky <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>, pak zadejte slovo nebo frázi, kterou chcete vyhledat do pole <span class="emphasis"><em>„Hledat“</em></span>.
+            </p>
+            <p>Podobně lze vycházet přímo z Editoru: označte slovo či frázi kdekoliv v podokně Editoru (cílový text aktuálního segmentu)
+               a stiskněte <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>. Slovo nebo fráze bude v tomto případě zadané do pole <span class="emphasis"><em>„Hledat“</em></span> automaticky. Současně je možné mít otevřeno několik oken hledání, ale zavřete je hned, když je už nepotřebujete, aby se tak
+               nezahltila paměť počítače.
+            </p>
+            <p>Posledních 10 hledání zobrazíte kliknutím na šipku rozbalovacího menu v okně <span class="emphasis"><em>Hledat</em></span>.
+            </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Použití zástupných znaků<a class="indexterm" name="d0e7208"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Použití zástupných znaků<a class="indexterm" name="d0e7433"></a></h2>
                   </div>
                </div>
             </div>
@@ -153,7 +95,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Metody a možnosti vyhledávání<a class="indexterm" name="d0e7252"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Metody a možnosti vyhledávání<a class="indexterm" name="d0e7477"></a></h2>
                   </div>
                </div>
             </div>
@@ -178,7 +120,7 @@
                   <dd>
                      <p>Řetězec znaků pro vyhledávání bude zpracován jako regulární výraz. Řetězec znaků pro vyhledávání – [a-zA-Z]+[öäüqwß] – například
                         jako v příkladě nahoře hledá slova v cílovém segmentu, a to taková, která obsahují zadané zvláštní znaky na německé klávesnici.
-                        Regulární výrazy představují účinný způsob hledání různých podob daného řetězce. Více najdete v kapitole <a class="link" href="chapter.regexp.html" title="Chapter&nbsp;16.&nbsp;Regulární výrazy">Regulární výrazy.</a></p>
+                        Regulární výrazy představují účinný způsob hledání různých podob daného řetězce. Více najdete v kapitole <a class="link" href="chapter.regexp.html" title="Chapter&nbsp;17.&nbsp;Regulární výrazy">Regulární výrazy.</a></p>
                   </dd>
                </dl>
             </div>
@@ -186,7 +128,12 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="bold"><strong>Rozlišovat velikost písmen</strong></span>: vyhledávání se týká přesně zadaného řetězce; tj. přihlíží se na velikost písmen.
+                     <p><span class="bold"><strong>Rozlišovat velikost písmen</strong></span>: vyhledávání se týká přesně zadaného řetězce; tj. přihlíží se na velikost písmen
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Shody mezer nbsp</strong></span>: když je označena tato možnost, pak mezera vložená do hledacího políčka může odpovídat buď znaku normální mezery nebo znaku
+                        nezalomitelné mezery (tj. \u00a).
                      </p>
                   </li>
                   <li class="listitem">
@@ -202,16 +149,43 @@
                      </p>
                   </li>
                   <li class="listitem">
-                     <p><span class="bold"><strong>Prohledávat překladové paměti</strong></span>: vyhledávání se týká i překladových pamětí, které jsou obsaženy v adresáři <code class="filename">/tm</code>.
+                     <p><span class="bold"><strong>v komentářích: </strong></span>prohledávají se komentáře segmentů
                      </p>
                   </li>
                   <li class="listitem">
-                     <p><span class="bold"><strong>Zobrazit všechny výsledky</strong></span>: když necháte toto políčko nezaškrtnuté, OmegaT zobrazí jen první výskyt nalezeného textu, i když jich je v textu více
+                     <p><span class="bold"><strong>Přeloeno nebo nepřeloženo: </strong></span>prohledávají se jak přeložené, tak nepřeložené segmenty.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Přeloženo: </strong></span>prohledává se jen v přeložených segmentech.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Nepřeloženo: </strong></span>prohledává se jen v nepřeložených segmentech.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Zobrazit: všechny shodující se segmenty: </strong></span>pokud je tato možnost označena, všechny segmenty jsou zobrazeny jedna ku jedné, a to i kdyby byly přítomny několikrát v tom
+                        samém dokumentu nebo v různých dokumentech.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Zobrazit: názvy souborů: </strong></span>pokud j označeno, nad výsledkem se zobrazí název souboru, kde byl daný segment nalezen.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Prohledat Projekt</strong></span>: označením <span class="emphasis"><em>Paměť</em></span> bude do vyhledávání zahrnuta projektová paměť (soubor project_save.tmx). Označením možnosti <span class="emphasis"><em>Překladové paměti</em></span> budou do vyhledávání zahrnuty překladové paměti umístěné v adresáři <code class="filename">tm</code>. Když bude označena možnost <span class="emphasis"><em>Glosáře</em></span>, pak bude vyhledávání probíhat i v glosářích umístěných ve složce <code class="filename">glossary</code>.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Prohledat Soubory: </strong></span>prohledává se buď jeden soubor nebo adresář obsahující více souborů. Když procházíte soubory (jako protiklad k překladovým
+                        pamětem), bude OmegaT prohledávat jen soubory, které jsou ve zdrojovém formátu. Tedy, ačkoliv je OmegaT schopna zpracovat
+                        soubory <code class="filename">TMX</code>, nezahrne je ale do vyhledávání.
                      </p>
                   </li>
                </ul>
             </div>
-            <p>Když nakliknete tlačítko <span class="guibutton">Pokročilé možnosti</span>, pak si můžete vybrat dodatečná kritéria (jako autor překladu, datum přeložení, atd.), jak to vidíte na obrázku nahoře.
+            <p>Po kliknutí na tlačítko <span class="guibutton">Pokročilé možnosti</span> si můžete vybrat dodatečná kritéria (jako autor překladu, datum přeložení, atd.).
             </p>
          </div>
          <div class="section">
@@ -235,6 +209,31 @@
                se podíváte na titulek okna: obsahuje použitý hledaný výraz.
             </p>
          </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.filter"></a>5.&nbsp;Filtrování záznamů v editoru podle hledání
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Pro snazší navigaci ve výsledcích hledání můžete použít hledání v Editoru. Stiskněte tlačítko <span class="bold"><strong>‚Filtr‘</strong></span> ve spodní části okna, a tak omezíte počet zobrazených záznamů v okně editoru na daný počet, který se shoduje s aktuálním
+               hledáním. Můžete využít normální navigaci k přechodu na např. další (nepřeložený) segment, který se shoduje s kritérii vyhledávání.
+            </p>
+            <p>Tip:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">hledání je omezeno na 1 000 nálezů, tak pokud hledáte nějakou hodně běžnou frázi, editor zobrazí jen těchto 1 000 shodných
+                     nálezů a ne všechny položky, které odpovídají kritériím hledání.
+                  </li>
+                  <li class="listitem">v souboru nemusí být žádná nalezená shoda, pak bude zobrazen prázdný prostor</li>
+                  <li class="listitem">Pokud hledání odstraní duplicity, pak tyto duplicity nebudou zobrazeny v Editoru.</li>
+               </ul>
+            </div>
+            <p>Filtr odstraníte stisknutím tlačítka <span class="bold"><strong>‚Odstranit filtr‘</strong></span>, nebo opětovným načtením projektu.
+            </p>
+         </div>
       </div>
       <div class="navfooter">
          <hr>
@@ -243,12 +242,12 @@
                <td width="40%" align="left"><a accesskey="p" href="chapter.segmentation.html">Prev</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Next</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.searchandreplace.html">Next</a></td>
             </tr>
             <tr>
                <td width="40%" align="left" valign="top">Chapter&nbsp;14.&nbsp;Segmentace zdroje&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;16.&nbsp;Regulární výrazy</td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;16.&nbsp;Najít a nahradit</td>
             </tr>
          </table>
       </div>

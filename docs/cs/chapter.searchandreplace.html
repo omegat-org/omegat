@@ -1,0 +1,121 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;16.&nbsp;Najít a nahradit</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT 3.1 - Uživatelská příručka">
+      <link rel="up" href="index.html" title="OmegaT 3.1 - Uživatelská příručka">
+      <link rel="prev" href="chapter.searches.html" title="Chapter&nbsp;15.&nbsp;Vyhledávání">
+      <link rel="next" href="chapter.regexp.html" title="Chapter&nbsp;17.&nbsp;Regulární výrazy">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;16.&nbsp;Najít a nahradit</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.searches.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.searchandreplace"></a>Chapter&nbsp;16.&nbsp;Najít a nahradit<a class="indexterm" name="d0e7668"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.searchandreplace.html#section.searchreplace.window">1. Okno Hledat v textu</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.searchandreplace.html#d0e7729">1.1. Možnosti vyhledávání</a></span></dt>
+                  </dl>
+               </dd>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="section.searchreplace.window"></a>1.&nbsp;Okno Hledat v textu<a class="indexterm" name="d0e7674"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Pomocí klávesové zkratky <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>K</strong></span>otevřete okno Najít a nahradit a vložte slovo nebo výraz, který chcete nahradit do políčka <span class="emphasis"><em>Hledat</em></span>.
+            </p>
+            <p>Pak klikněte na tlačítko <span class="emphasis"><em>Hledat</em></span> a zobrazí se všechny odpovídající výskyty.
+            </p>
+            <p>Vložte nové slovo nebo frázi (regulární výrazy nejsou podporovány) do políčka <span class="emphasis"><em>Nahradit čím</em></span>, pak klikněte na některou z následujících možností:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Nahradit vše</strong></span>: provede náhradu všech výskytů (po zobrazení potvrzujícího hlášení, kde se zobrazí počet výskytů).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Nahradit</strong></span>: provede náhradu „jedna ku jedné“ prostřednictvím tlačítek, která se zobrazí v <span class="bold"><strong>záhlaví podokna Editoru</strong></span>. Zde můžete vybírat z možností <span class="emphasis"><em>Nahradit další</em></span> nebo <span class="emphasis"><em>Přeskočit</em></span><span class="emphasis"><em>Dokončit</em></span>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Zavřít</strong></span>: zavře okno bez jakýchkoliv změn.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e7729"></a>1.1.&nbsp;Možnosti vyhledávání
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Možnosti vyhledávání jsou podobné těm zobrazeným v <a class="link" href="chapter.user.interface.html#section.search.window" title="3.2.&nbsp;Okno Hledat v textu">okně Hledat</a>.
+               </p>
+               <p>Kromě jedné: označte <span class="bold"><strong>Nepřeloženo</strong></span> k provádění hledání a nahrazování také v dosud nepřeložených segmentech.
+               </p>
+               <p>Aby toto bylo proveditelné (i když Hledat a nahradit pracuje jen s pamětí), OmegaT zkopíruje zdrojový segment do cílového
+                  segmentu před tím, než bude náhrada textu uskutečněna. Pokud se v daném segmentu provede žádná náhrada textu, pak bude cílový
+                  segment „vyprázdněn“, tj. zůstane nepřeložený.
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.searches.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;15.&nbsp;Vyhledávání&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;17.&nbsp;Regulární výrazy</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

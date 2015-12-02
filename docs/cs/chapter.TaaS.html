@@ -1,0 +1,114 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;20.&nbsp;Použití TaaS v OmegaT</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT 3.1 - Uživatelská příručka">
+      <link rel="up" href="index.html" title="OmegaT 3.1 - Uživatelská příručka">
+      <link rel="prev" href="chapter.glossaries.html" title="Chapter&nbsp;19.&nbsp;Glosáře">
+      <link rel="next" href="chapter.machine.translate.html" title="Chapter&nbsp;21.&nbsp;Strojový překlad">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;20.&nbsp;Použití TaaS v OmegaT</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.glossaries.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.TaaS"></a>Chapter&nbsp;20.&nbsp;Použití TaaS v OmegaT<a class="indexterm" name="d0e8644"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options">1. Všeobecné informace</a></span></dt>
+               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.collections">2. Veřejné a soukromé kolekce</a></span></dt>
+               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.access">3. Přístup ke službě TaaS</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="section.TaaS.options"></a>1.&nbsp;Všeobecné informace
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Služba TaaS na adrese https://demo.taas-project.eu/info poskytuje terminologický servis pro evropské jazyky (plus ruštinu).
+               Umožňuje přístup jak k veřejným, tak i k soukromým datům, kde soukromé glosáře (zde nazývané „kolekce“) mohou být extrahovány
+               z existujících dokumentů a cílové pojmy bývají částečně doplněny automaticky z různých zdrojů. 
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="section.TaaS.options.collections"></a>2.&nbsp;Veřejné a soukromé kolekce
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaT umožňuje přístup k veřejné části TaaS bez jakékoliv registrace.</p>
+            <p>Pro přístup k soukromé části si musí uživatel vytvořit klíč na adrese https://demo.taas-project.eu/account/keys/create?system=omegaT.</p>
+            <p>Klíč se pak musí vložit do OmegaT prostřednictvím -Dtaas.user.key=xxxxx. Konfigurační spouštěče Omega T (OmegaT.l4J.ini, omegat.kaptn
+               a OmegaT.sh) obsahují vzorový záznam.
+            </p>
+            <p>Pokud se pokusíte přístoupit ke službě bez soukromého klíče, zobrazí se v protokolu následující hláška: ‚TaaS API key not
+               found‘ / ‚Klíč TaaS nenalezen‘. Přejděte na adresu https://demo.taas-project.eu/account/keys/create?system=omegaT a vytvořte
+               si vlastní klíč, ten pak zadejte do OmegaT prostřednictvím -Dtaas.user.key=xxxxx (TAAS_API_KEY_NOT_FOUND)
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="section.TaaS.options.access"></a>3.&nbsp;Přístup ke službě TaaS
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Klikněte na <span class="bold"><strong>Možnosti, Glosář</strong></span> a zobrazíte si následující možnosti:
+            </p>
+            <p><span class="bold"><strong>Procházet kolekce Taas</strong></span> umožní procházet existující kolekce pro zdrojový a cílový jazyk projektu a stáhnout je. Soukromé kolekce jsou zobrazeny tučně.
+               Kolekce jsou stahovány jako TBX glosáře do aktuálního adresáře glosáře.
+            </p>
+            <p><span class="bold"><strong>Hledání terminologie v TaaS</strong></span>: když je tato možnost označena, pak je možno dotazování TaaS dat na základě postupu po jednotlivých segmentech. Všechny kolekce
+               (jak veřejné, tak soukromé) budou prohledávány, a to jak pro zdrojový, tak i pro cílový jazyk.
+            </p>
+            <p>Pro omezení dat je možné označit specifickou oblast vybráním možnosti <span class="bold"><strong>Vybrat oblast hledání terminologie v TaaS</strong></span>. V zobrazeném okně můžete vybrat všechny oblasti nebo jen ty potřebné.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.glossaries.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;19.&nbsp;Glosáře&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;21.&nbsp;Strojový překlad</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

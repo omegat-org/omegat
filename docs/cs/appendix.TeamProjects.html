@@ -5,10 +5,10 @@
       <title>Appendix&nbsp;C.&nbsp;OmegaT Týmové projekty</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT 3.0 - Uživatelská příručka">
-      <link rel="up" href="index.html" title="OmegaT 3.0 - Uživatelská příručka">
+      <link rel="home" href="index.html" title="OmegaT 3.1 - Uživatelská příručka">
+      <link rel="up" href="index.html" title="OmegaT 3.1 - Uživatelská příručka">
       <link rel="prev" href="appendix.keyboard.html" title="Appendix&nbsp;B.&nbsp;Klávesové zkratky v editoru">
-      <link rel="next" href="appendix.TokenizerPlugin.inOmegaT.html" title="Appendix&nbsp;D.&nbsp;Plugin Tokenizer">
+      <link rel="next" href="appendix.Tokenizers.inOmegaT.html" title="Appendix&nbsp;D.&nbsp;Tokenizery">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
@@ -20,7 +20,7 @@
                <td width="20%" align="left"><a accesskey="p" href="appendix.keyboard.html">Prev</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">Next</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.Tokenizers.inOmegaT.html">Next</a></td>
             </tr>
          </table>
          <hr>
@@ -29,28 +29,28 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="appendix.TeamProjects"></a>Appendix&nbsp;C.&nbsp;OmegaT Týmové projekty<a class="indexterm" name="d0e10433"></a></h1>
+                  <h1 class="title"><a name="appendix.TeamProjects"></a>Appendix&nbsp;C.&nbsp;OmegaT Týmové projekty<a class="indexterm" name="d0e10985"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10440">1. Správa verzí - úvod</a></span></dt>
-               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10511">2. Sdílení projektu za použití SVN</a></span></dt>
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10992">1. Správa verzí - úvod</a></span></dt>
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e11063">2. Sdílení projektu za použití SVN</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10532">2.1. Vytvoření úložiště</a></span></dt>
-                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10592">2.2. Import projektu do úložiště SVN - Windows</a></span></dt>
+                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e11084">2.1. Vytvoření úložiště</a></span></dt>
+                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e11144">2.2. Import projektu do úložiště SVN - Windows</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10729">3. Použití týmového projektu v OmegaT</a></span></dt>
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e11281">3. Použití týmového projektu v OmegaT</a></span></dt>
             </dl>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10440"></a>1.&nbsp;Správa verzí - úvod
+                     <h2 class="title" style="clear: both"><a name="d0e10992"></a>1.&nbsp;Správa verzí - úvod
                      </h2>
                   </div>
                </div>
@@ -84,10 +84,10 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="bold"><strong>VCS server - </strong></span>tj. SVN nebo Git server, který poskytuje prostředí kde je společný materiál udržován a spravován na síti. Server může existovat
-                        v místní síti, ale ve většině případů bude dostupný na internetu, tj. přes adresu URL. Jeden člen týmu, administrátor projektu,
-                        musí být obeznámen s obsluhou serveru, tj.  jeho úkolem je nastavení prostředí, import projektu OmegaT, přiřazení přístupových
-                        práv členům týmu, řešení konfliktů, atd.
+                     <p><span class="bold"><strong>VCS server - </strong></span>t.j. server SVN nebo Git, který poskytuje prostředí, kde je společný materiál udržován a spravován na síti. Server může existovat
+                        v místní síti, ale ve většině případů bude dostupný na internetu, tj. prostřednictvím adresy URL. Jeden člen týmu, administrátor
+                        projektu, musí být obeznámen s obsluhou serveru, tj. jeho úkolem je nastavení prostředí, import projektu OmegaT, přiřazení
+                        přístupových práv členům týmu, řešení konfliktů, atd.
                      </p>
                   </li>
                   <li class="listitem">
@@ -127,14 +127,14 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10511"></a>2.&nbsp;Sdílení projektu za použití SVN<a class="indexterm" name="d0e10514"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e11063"></a>2.&nbsp;Sdílení projektu za použití SVN<a class="indexterm" name="d0e11066"></a></h2>
                   </div>
                </div>
             </div>
             <p>Existují dvě možnosti jak rozběhnout SVN server: můžete instalovat SVN na svůj server nebo můžete použít hostující službu.
                Když používáte externí službu musíte si být vědomi možných následků v rámci utajení dat, protože nahráváte originální dokument
-               na server, nad kterým nemáte přímou kontrolu.  Alternativně, abyste zabránili tomuto problému, můžete nastavit soukromý SVN
-               server, například pokud již máte Apache server, který obsahuje dotyčný software (např. VisualSVN).
+               na server, nad kterým nemáte přímou kontrolu.  Jinak, abyste zabránili tomuto problému, můžete nastavit soukromý SVN server,
+               například pokud již máte Apache server, který obsahuje dotyčný software (např. VisualSVN).
             </p>
             <p>Jakmile je SVN server dostupný, správci projektu musí lokálně instalovat SVN klienta, aby mohli spravovat obsah projektu na
                svých počítačích. Pro Windows doporučujeme <a class="ulink" href="http://tortoisesvn.net/" target="_top">TortoiseSVN</a>. Pro Mac můžete stáhnout klienta např. z <a class="ulink" href="https://sourceforge.net/projects/macsvn/" target="_top">SourceForge</a>, pro Linux viz <a class="ulink" href="http://www.yolinux.com/TUTORIALS/Subversion.html" target="_top">Subversion Commands and Scripts</a>. 
@@ -143,7 +143,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e10532"></a>2.1.&nbsp;Vytvoření úložiště<a class="indexterm" name="d0e10535"></a></h3>
+                        <h3 class="title"><a name="d0e11084"></a>2.1.&nbsp;Vytvoření úložiště<a class="indexterm" name="d0e11087"></a></h3>
                      </div>
                   </div>
                </div>
@@ -182,7 +182,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e10592"></a>2.2.&nbsp;Import projektu do úložiště SVN - Windows
+                        <h3 class="title"><a name="d0e11144"></a>2.2.&nbsp;Import projektu do úložiště SVN - Windows
                         </h3>
                      </div>
                   </div>
@@ -191,8 +191,8 @@
                   budete uchovávat svůj projekt a klikněte na něj pravým tlačítkem myši. Vyberte volbu <span class="guilabel"> TortoiseSVN &gt; SVN Získat... (SVN Checkout).</span> Zobrazí se následující dialogové okno:
                </p>
                <div class="mediaobject"><img src="images/Team_projects_checkout.png"></div>
-               <p>Vložte URL, kterou poskytl ProjectLocker do políčka <span class="bold"><strong>URL úložiště</strong></span>. Ujistěte se, že políčko <span class="bold"><strong>Adresář získání (‚Checkout directory‘)</strong></span> je správně, tj. specifikuje prázdný adresář, který jste vytvořili, a stiskněte <span class="bold"><strong>OK</strong></span>. Jakmile je operace dokončena, můžete zkontrolovat popsaný adresář: měl by nyní obsahovat podadresář .svn a mělo by být zobrazena
-                  zelená ikona s nápisem OK, to znamená, že obsah adresáře je aktuální:
+               <p>Vložte URL, kterou poskytl ProjectLocker do políčka <span class="bold"><strong>URL úložiště</strong></span>. Ujistěte se, že políčko <span class="bold"><strong>Adresář získání (‚Checkout directory‘)</strong></span> je správně, tj. specifikuje prázdný adresář, který jste vytvořili, a stiskněte <span class="bold"><strong>OK</strong></span>.  Jakmile je operace dokončena, můžete zkontrolovat popsaný adresář: měl by nyní obsahovat podadresář .svn a mělo by být
+                  zobrazena zelená ikona s nápisem OK, to znamená, že obsah adresáře je aktuální:
                </p>
                <p>V dalším kroku přidáme soubory OmegaT do místního adresáře. Následující soubory jsou určeny ke sdílení mezi členy týmu a musí
                   zde být tedy obsaženy:
@@ -253,7 +253,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10729"></a>3.&nbsp;Použití týmového projektu v OmegaT
+                     <h2 class="title" style="clear: both"><a name="d0e11281"></a>3.&nbsp;Použití týmového projektu v OmegaT
                      </h2>
                   </div>
                </div>
@@ -273,12 +273,12 @@
                <td width="40%" align="left"><a accesskey="p" href="appendix.keyboard.html">Prev</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">Next</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.Tokenizers.inOmegaT.html">Next</a></td>
             </tr>
             <tr>
                <td width="40%" align="left" valign="top">Appendix&nbsp;B.&nbsp;Klávesové zkratky v editoru&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;D.&nbsp;Plugin Tokenizer</td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;D.&nbsp;Tokenizery</td>
             </tr>
          </table>
       </div>

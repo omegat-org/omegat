@@ -2,7 +2,7 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>Capítulo 2. Guía de inicio rápido</title>
+      <title>Capítulo 2. ¡Aprenda a usar OmegaT en 5 minutos!</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
@@ -14,7 +14,7 @@
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">Capítulo 2. Guía de inicio rápido</th>
+               <th colspan="3" align="center">Capítulo 2. ¡Aprenda a usar OmegaT en 5 minutos!</th>
             </tr>
             <tr>
                <td width="20%" align="left"><a accesskey="p" href="chapter.about.OmegaT.html">Anterior</a>&nbsp;
@@ -29,464 +29,210 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.instant.start.guide"></a>Capítulo 2. Guía de inicio rápido
+                  <h1 class="title"><a name="chapter.instant.start.guide"></a>Capítulo 2. ¡Aprenda a usar OmegaT en 5 minutos!
                   </h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.instant.start.guide.html#d0e183">1. ¡Comienza a usar <span class="application">OmegaT</span> en 5 Minutos!</a></span></dt>
-               <dt><span class="section"><a href="chapter.instant.start.guide.html#d0e225">2. Traduciendo con <span class="application">OmegaT</span></a></span></dt>
-               <dd>
-                  <dl>
-                     <dt><span class="section"><a href="chapter.instant.start.guide.html#create.and.open.new.project">2.1. Creando y abriendo un nuevo proyecto</a></span></dt>
-                     <dt><span class="section"><a href="chapter.instant.start.guide.html#translate.the.segments.one.by.one">2.2. Traduciendo segmentos uno por uno</a></span></dt>
-                     <dt><span class="section"><a href="chapter.instant.start.guide.html#use.matches.in.TMs.dictionaries.and.glossaries">2.3. Utiliza las coincidencias de las memorias de traducción, diccionarios y glosarios</a></span></dt>
-                     <dt><span class="section"><a href="chapter.instant.start.guide.html#create.translated.documents">2.4. Creando documentos traducidos</a></span></dt>
-                  </dl>
-               </dd>
-               <dt><span class="section"><a href="chapter.instant.start.guide.html#how.to.handle.tagged.text">3. Manejando texto etiquetado</a></span></dt>
-               <dd>
-                  <dl>
-                     <dt><span class="section"><a href="chapter.instant.start.guide.html#d0e681">3.1. Un ejemplo...</a></span></dt>
-                     <dt><span class="section"><a href="chapter.instant.start.guide.html#tag.verification">3.2. Verificación de etiquetas</a></span></dt>
-                  </dl>
-               </dd>
+               <dt><span class="section"><a href="chapter.instant.start.guide.html#create.and.open.new.project">1. Configurar un proyecto nuevo
+                            </a></span></dt>
+               <dt><span class="section"><a href="chapter.instant.start.guide.html#translate.the.segments.one.by.one">2. Traducir el archivo</a></span></dt>
+               <dt><span class="section"><a href="chapter.instant.start.guide.html#d0e268">3. Validar sus etiquetas</a></span></dt>
+               <dt><span class="section"><a href="chapter.instant.start.guide.html#d0e292">4. Generar el archivo traducido</a></span></dt>
+               <dt><span class="section"><a href="chapter.instant.start.guide.html#d0e303">5. Un par de cosas más a tener en cuenta</a></span></dt>
             </dl>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e183"></a>1. ¡Comienza a usar <span class="application">OmegaT</span> en 5 Minutos!
+                     <h2 class="title" style="clear: both"><a name="create.and.open.new.project"></a>1. Configurar un proyecto nuevo
+                            <a class="indexterm" name="d0e186"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><em><span class="remark">Nota:</span></em> en un Apple Mac, usar la tecla <span class="keycap"><strong>Command</strong></span> 
+                   en lugar de la tecla <span class="keycap"><strong>Control</strong></span>.
+            </p><a class="indexterm" name="d0e201"></a><p>Para empezar a usar OmegaT, cree primero un proyecto que tendrá todos
+                   sus archivos, como el archivo original, las memorias de traducción, los glosarios
+                   y después el archivo traducido. En el menú <span class="guimenu">Proyecto</span>
+                   seleccione <span class="guimenuitem">Nuevo...</span> 
+                   y escriba un nombre para el proyecto. Recuerde en qué ubicación está
+                   creando el proyecto, porque tendrá que regresar ahí más tarde.
+            </p>
+            <p>Tras darle un nombre a su proyecto, aparecerá el diálogo <span class="guilabel">Crear proyecto nuevo</span>
+                   . Al principio de ese diálogo, seleccione el idioma del archivo original
+                   y el idioma que tendrá el archivo traducido y haga clic en
+                   <span class="guibutton">OK</span> para continuar.
+            </p>
+            <p>Si le interesan los demás ajustes de este diálogo,
+                   puede volver a ello en cualquier momento pulsando <span class="keycap"><strong>Ctrl+E</strong></span>.
+            </p>
+            <p>Después, se abre el diálogo <span class="guilabel">Archivos del proyecto</span>. Haga clic en <span class="guibutton">Copiar archivos a carpeta Source...</span>para seleccionar sus archivos originales. OmegaT copiará los archivos seleccionados
+                   a la carpeta <code class="filename">/source/</code> de su proyecto recién creado
+                   . Después de que se hayan cargado los archivos originales en el panel del <span class="guilabel">Editor</span>, puede
+                   cerrar el diálogo <span class="guilabel">Archivos del proyecto</span>.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="translate.the.segments.one.by.one"></a>2. Traducir el archivo
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Esta guía de inicio rápido sólo cubre lo más básico de OmegaT. Lo ideal sería que los usuarios leyeran el Manual de usuario
-               para familiarizarse con todo lo que <span class="application">OmegaT</span> ofrece. Nota para usuarios de Mac: los accesos directos descritos aquí como "<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>tecla</strong></span>" pero los usuarios de Mac en su lugar deberían usar "<span class="keycap"><strong>Cmd</strong></span>+<span class="keycap"><strong>tecla</strong></span>". La tecla "<span class="keycap"><strong>Cmd</strong></span>" o bien tiene una etiqueta "comando" o un símbolo de manzana en los teclados de Apple.
-            </p>
-            <p>La pantalla de <span class="application">OmegaT</span> se compone de un espacio de trabajo con cinco distintos paneles<a class="indexterm" name="d0e214"></a>. A cada una de estas le puede cambiar el tamaño usando el ratón. A la izquierda está el Editor en dónde se escribe la traducción.
-               En la parte superior derecha está el visor de coincidencias, donde se muestran las coincidencias con la memoria de traducción.
-               Por debajo de este está el Visor del Glosario, donde se muestran las coincidencias con el glosario. Dos pestañas adicionales
-               en la parte inferior de la ventana abren los paneles del Diccionario y de la Traducción Automática. (Nota: Por supuesto, puedes
-               reorganizar los paneles a tu gusto - la descripción anterior se aplica a tu OmegaT después de la instalación).
-            </p>
-            <p>En el panel del Editor de OmegaT se presenta el texto de fuente "segmentado" entre frases o párrafos. Estos se traducen, uno
-               por uno. Conforme avances de un segmento a otro tus traducciones se registran automáticamente en una memoria de traducción.
-               Una vez que haz traducido todos los segmentos (o antes, si lo solicitas) <span class="application">OmegaT</span> utilizará la memoria de traducción para generar el documento o documentos traducido(s) en el directorio "Destino".
-            </p>
-            <p>OmegaT organiza tu trabajo de traducción en "proyectos" de traducción. Para cada proyecto, OmegaT crea un conjunto de directorios
-               que, a su vez, se utilizan para almacenar los documentos originales a traducir, así como cualquier glosario y memorias de
-               traducción que posiblemente desees utilizar. OmegaT además crea un directorio "Destino" en el cual OmegaT coloca los documentos
-               finales traducidos.
+            <p>OmegaT presentará un segmento a la vez para que traduzca.
+                   Después de traducir cada segmento, pulse <span class="keycap"><strong>Ctrl-U</strong></span> para
+                   pasar al siguiente segmento sin traducir (o <span class="keycap"><strong>Ctrl+Shift+U</strong></span> para)
+                   pasar al siguiente segmento traducido). Cuando desee ver su
+                   traducción en el formato final, pulse
+                   <span class="keycap"><strong>Ctrl+D</strong></span> para generar los documentos traducidos, que se
+                   crearán en la carpeta <code class="filename">/target/</code> dentro de la carpeta del proyecto. Durante
+                   la traducción, use los menús <span class="guimenu">Editar</span> e <span class="guimenu">Ir a</span>
+                   para ejecutar diversas funciones útiles.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e225"></a>2. Traduciendo con <span class="application">OmegaT</span></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e268"></a>3. Validar sus etiquetas
+                     </h2>
                   </div>
                </div>
             </div>
-            <div class="section">
-               <div class="titlepage">
-                  <div>
-                     <div>
-                        <h3 class="title"><a name="create.and.open.new.project"></a>2.1. Creando y abriendo un nuevo proyecto<a class="indexterm" name="d0e233"></a></h3>
-                     </div>
-                  </div>
-               </div>
-               <p>Selecciona <span class="guimenu">Proyecto</span> → <span class="guimenuitem">Nuevo...</span><a class="indexterm" name="d0e245"></a> desde el menú.
-               </p>
-               <p>Navega al directorio donde desees guardar los archivos del proyecto y escribe un nombre para el proyecto de traducción. Este
-                  nombre se utiliza para el directorio principal del proyecto, todos los archivos del proyecto se almacenan en este directorio
-                  o sus subdirectorios.
-               </p>
-               <p><span class="application">OmegaT</span> le pedirá que confirmes o cambies los directorios del proyecto a crear, usando el siguiente diálogo:
-               </p>
-               <div class="figure"><a name="New.project.dialog.window"></a><p class="title"><b>Figura 2.1. <a class="indexterm" name="d0e259"></a>Nuevo proyecto - ventana de diálogo</b></p>
-                  <div class="figure-contents">
-                     <div class="mediaobject"><img src="images/NewProject.png" alt="Nuevo proyecto - ventana de diálogo"></div>
-                  </div>
-               </div><br class="figure-break"><p>Puedes simplemente aceptar las ubicaciones predeterminadas de los subdirectorios, pero asegúrate de comprobar que los códigos
-                  del idioma fuente e idioma destino son correctos. Selecciona el código del lenguaje (2 letras) o el código de idioma y región
-                  (2 + 2 letras) de la lista desplegable, o escríbelas a mano (el código del idioma puede ser de 2 a 3 letras). Toma nota mental
-                  de la ubicación del subdirectorio Destino (para tus documentos traducidos). Si prefieres que OmegaT segmente por frase en
-                  vez de por "párrafo", por favor lee el capítulo sobre las Reglas de segmentación<a class="indexterm" name="d0e272"></a>.
-               </p>
-               <p>Al hacer clic en Aceptar para aceptar la configuración del proyecto, OmegaT te pide que selecciones los documentos fuente
-                  para la importarlos. Puedes importar archivos individuales con <em class="firstterm">Proyecto → Importar archivos fuente</em>, o puedes copiar archivos o incluso árboles de directorios enteros (con todos los archivos de todos los subdirectorios) manualmente
-                  en el directorio fuente de tu proyecto OmegaT (usando el administrador de archivos de tu sistema, por ejemplo). Si accidentalmente
-                  haz importado documentos equivocados, o demasiados documentos, puedes simplemente eliminarlos de nuevo desde el directorio
-                  fuente.
-               </p>
-               <p>Para comprobar la lista de archivos a traducir, consulta la ventana <span class="bold"><strong>Archivos del proyecto</strong></span><a class="indexterm" name="d0e287"></a> (Menú: <span class="guimenu">Proyecto</span> → <span class="guimenuitem">Archivos del proyecto...</span>,<a class="indexterm" name="d0e300"></a> si no se abre automáticamente). Si tuvieras que cambiar el contenido del directorio fuente, primero recuerda volver a cargar
-                  el proyecto (Menú: <span class="guimenu">Proyecto</span> → <span class="guimenuitem">Volver a cargar</span> (<span class="shortcut"><strong><span class="keycap"><strong>F5</strong></span></strong></span>)). <span class="application">OmegaT</span> de manera predeterminada abre el primer archivo en la lista del proyecto. Ten en cuenta que <span class="application">OmegaT</span> sólo puede traducir archivos en los siguientes formatos si coinciden con los patrones definidos en los filtros de archivo.
-                  Cualquier otro archivo será ignorado.<a class="indexterm" name="d0e322"></a></p>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" style="list-style-type: disc; ">
-                     <li class="listitem">
-                        <p><span class="bold"><strong>Formatos de archivos de texto plano<a class="indexterm" name="d0e332"></a></strong></span></p>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" style="list-style-type: circle; ">
-                              <li class="listitem">
-                                 <p>texto ASCII (*.txt, etc.)</p>
-                              </li>
-                              <li class="listitem">
-                                 <p>texto codificado (*.UTF8)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" style="list-style-type: circle; ">
-                              <li class="listitem">
-                                 <p>Paquetes de recursos Java (*.properties)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" style="list-style-type: circle; ">
-                              <li class="listitem">
-                                 <p>archivos PO (*.po)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" style="list-style-type: circle; ">
-                              <li class="listitem">
-                                 <p>archivos INI (clave=valor) (*.ini)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" style="list-style-type: circle; ">
-                              <li class="listitem">
-                                 <p>Archivos DTD (*.DTD)</p>
-                              </li>
-                              <li class="listitem">
-                                 <p>Archivos DocuWiki (*.txt)</p>
-                              </li>
-                           </ul>
-                        </div>
-                     </li>
-                  </ul>
-               </div>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" style="list-style-type: disc; ">
-                     <li class="listitem">
-                        <p><span class="bold"><strong>Archivos de texto con formato etiquetado<a class="indexterm" name="d0e368"></a></strong></span></p>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" style="list-style-type: circle; ">
-                              <li class="listitem">
-                                 <p>OpenOffice.org / OpenDocument (*.odt, *.ott, *.ods, *.ots,
-                                                  *.odp, *.otp)
-                                 </p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" style="list-style-type: circle; ">
-                              <li class="listitem">
-                                 <p>Microsoft Open XML (*.docx. *.xlsx, *.pptx)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" style="list-style-type: circle; ">
-                              <li class="listitem">
-                                 <p>(X)HTML (*.html, *.xhtml,*.xht)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" style="list-style-type: circle; ">
-                              <li class="listitem">
-                                 <p>Compilador de ayuda HTML (*.hhc, *.hhk)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" style="list-style-type: circle; ">
-                              <li class="listitem">
-                                 <p>DocBook (*.xml)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" style="list-style-type: circle; ">
-                              <li class="listitem">
-                                 <p>XLIFF monolingüe (*.xlf, *.xliff, *.sdlxliff)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" style="list-style-type: circle; ">
-                              <li class="listitem">
-                                 <p>QuarkXPress CopyFlowGold (*.tag, *.xtg)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" style="list-style-type: circle; ">
-                              <li class="listitem">
-                                 <p>Archivos de títulos subRip (*.srt)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" style="list-style-type: circle; ">
-                              <li class="listitem">
-                                 <p>Archivos ResX (*.resx)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" style="list-style-type: circle; ">
-                              <li class="listitem">
-                                 <p>Recurso Android (*.xml)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" style="list-style-type: circle; ">
-                              <li class="listitem">
-                                 <p>LaTex (*.tex, *.latex)</p>
-                              </li>
-                              <li class="listitem">
-                                 <p>Archivos de ayuda (*.xml) y (*.hmxp)</p>
-                              </li>
-                              <li class="listitem">
-                                 <p>Typo3 LocManager (*.xml)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" style="list-style-type: circle; ">
-                              <li class="listitem">
-                                 <p>Localización WiX (*.wxl)</p>
-                              </li>
-                              <li class="listitem">
-                                 <p>Iceni Infix (*.xml)</p>
-                              </li>
-                              <li class="listitem">
-                                 <p>Flash XML export (*.xml)</p>
-                              </li>
-                           </ul>
-                        </div>
-                     </li>
-                  </ul>
-               </div>
-               <p>Además en el texto que deseas traducir, los archivos de texto etiquetado contienen el formato de la información visible en
-                  OmegaT en forma de "etiquetas". Las etiquetas también deben estar presentes en el texto traducido, incluso si el formato no
-                  tiene por qué "traducirse". Si las etiquetas resultan ser incorrectas o están fuera de lugar, el texto no se muestra como
-                  se pretende y se tendrá que corregir la traducción - consulta el capítulo de "Verificación de etiquetas" a continuación.
-               </p>
-            </div>
-            <div class="section">
-               <div class="titlepage">
-                  <div>
-                     <div>
-                        <h3 class="title"><a name="translate.the.segments.one.by.one"></a>2.2. Traduciendo segmentos uno por uno
-                        </h3>
-                     </div>
-                  </div>
-               </div>
-               <p>Una vez definido el proyecto y los archivos a traducir, <span class="application">OmegaT</span> abre el primer archivo fuente en el editor.
-               </p>
-               <p>El segmento activo se resalta en verde, mostrando una copia del texto original justo debajo de este en el "campo destino".
-                  (En este punto, todo el texto fuera del campo destino está protegido y no se puede modificar.) debes escribir su traducción
-                  antes de la etiqueta &lt;<code class="literal">segmento 0001&gt;</code>. Puedes configurar OmegaT para copiar automáticamente el texto fuente en el texto destino (ve <span class="emphasis"><em>Opciones → Comportamiento del campo de edición...</em></span>), lo cual puede ser útil cuando las partes del texto original se mantendrán sin modificación. En estos casos, se sobrescribirá
-                  el texto original. Pulas <span class="bold"><strong>"ENTRAR"</strong></span> para avanzar al siguiente segmento. Nota:
-               </p>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" style="list-style-type: disc; ">
-                     <li class="listitem">
-                        <p>Para ir a cualquier otra parte del texto, ya sea por encima o por debajo, haz doble clic sobre la frase o párrafo que deseas
-                           abrir.
-                        </p>
-                     </li>
-                     <li class="listitem">
-                        <p>Si prefieres traducir en un campo destino vacío, establece esta opción en <span class="guimenu">Opciones</span> → <span class="guimenuitem">Comportamiento del campo de edición...<a class="indexterm" name="d0e467"></a></span></p>
-                     </li>
-                     <li class="listitem">
-                        <p>Puedes cambiar la configuración del panel de Edición (por ejemplo para mostrar el texto original o no, resaltar el texto traducido,
-                           etc.) en el menú principal en Ver.
-                        </p>
-                        <p>Cuando presionas <span class="bold"><strong>"ENTRAR"</strong></span>, suceden varias cosas detrás del escenario: <span class="application">OmegaT</span> añade el segmento par (el segmento fuente y su traducción) a la memoria de traducción interna. También automáticamente traduce
-                           cualquier otro segmento idéntico que detecte. Adicionalmente analiza la memoria de traducción y busca una coincidencia en
-                           el glosario para el siguiente segmento sin traducir, que se abre.
-                        </p>
-                     </li>
-                  </ul>
-               </div>
-            </div>
-            <div class="section">
-               <div class="titlepage">
-                  <div>
-                     <div>
-                        <h3 class="title"><a name="use.matches.in.TMs.dictionaries.and.glossaries"></a>2.3. Utiliza las coincidencias de las memorias de traducción, diccionarios y glosarios
-                        </h3>
-                     </div>
-                  </div>
-               </div>
-               <div class="section">
-                  <div class="titlepage">
-                     <div>
-                        <div>
-                           <h4 class="title"><a name="translation.memory.matches"></a>2.3.1. Coincidencias con la memoria de traducción<a class="indexterm" name="d0e489"></a><a class="indexterm" name="d0e494"></a></h4>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="figure"><a name="d0e499"></a><p class="title"><b>Figura 2.2. Panel de coincidencias</b></p>
-                     <div class="figure-contents">
-                        <div class="mediaobject"><img src="images/MatchesPane.png" alt="Panel de coincidencias"></div>
-                     </div>
-                  </div><br class="figure-break"><p>Si <span class="application">OmegaT</span> encuentra algunas coincidencias parciales (del 30% o más) para el siguiente segmento en las memorias de traducción del proyecto,
-                     las muestra en el visor de coincidencias. La primera coincidencia, de manera predeterminada, está preseleccionada en el visor
-                     de coincidencias.
-                  </p>
-                  <div class="itemizedlist">
-                     <ul class="itemizedlist" style="list-style-type: disc; ">
-                        <li class="listitem">
-                           <p>Presiona <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span><a class="indexterm" name="d0e521"></a> para insertar la coincidencia preseleccionado en la posición del cursor, o...
-                           </p>
-                        </li>
-                        <li class="listitem">
-                           <p>Presiona <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span><a class="indexterm" name="d0e535"></a><a class="indexterm" name="d0e540"></a> para sobrescribir todo el segmento con la coincidencia preseleccionada.
-                           </p>
-                        </li>
-                     </ul>
-                  </div>
-                  <p>Si se han encontrado varias coincidencias y prefieres usar una coincidencia que no sea la coincidencia preseleccionada:</p>
-                  <div class="itemizedlist">
-                     <ul class="itemizedlist" style="list-style-type: disc; ">
-                        <li class="listitem">
-                           <p>Seleccione la coincidencia que prefieras en el visor de coincidencias: <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>2</strong></span> para la segunda coincidencia en pantalla, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>3</strong></span> para la tercera, etc.
-                           </p>
-                        </li>
-                        <li class="listitem">
-                           <p>A continuación, utiliza los accesos directos <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span> o <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span> como el anterior.
-                           </p>
-                        </li>
-                     </ul>
-                  </div>
-                  <p>Puedes decir a OmegaT para que inserte automáticamente la primer coincidencia que esté por encima de un porcentaje especificado
-                     en el campo destino. Establece esta opción usando <span class="guimenu">Opciones</span></p>
-               </div>
-               <div class="section">
-                  <div class="titlepage">
-                     <div>
-                        <div>
-                           <h4 class="title"><a name="glossary.and.dictionary.matches"></a>2.3.2. Coincidencias en el glosario y diccionario<a class="indexterm" name="d0e585"></a></h4>
-                        </div>
-                     </div>
-                  </div>
-                  <p>Cualquiera de los términos coincidentes en los glosarios y diccionarios, que puedas haber incluido en el proyecto se muestran
-                     como referencia en los paneles glosario y diccionario.
-                  </p>
-               </div>
-               <div class="section">
-                  <div class="titlepage">
-                     <div>
-                        <div>
-                           <h4 class="title"><a name="use.searches"></a>2.3.3. Utiliza búsquedas
-                           </h4>
-                        </div>
-                     </div>
-                  </div>
-                  <p><span class="application">OmegaT</span> proporciona una potente gama de funciones de búsqueda. Abre la ventana de búsqueda con <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> y escribe la palabra o frase que deseas buscar en el cuadro "Buscar". También puedes seleccionar una palabra o frase en cualquier
-                     parte del panel Editor y pulsa <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>: la palabra o frase seleccionada se insertará automáticamente en la caja "Buscar" en la ventana que se abre.
-                  </p>
-               </div>
-               <div class="section">
-                  <div class="titlepage">
-                     <div>
-                        <div>
-                           <h4 class="title"><a name="use.Google.Translate"></a>2.3.4. Utilizando los servicios de traducción automática<a class="indexterm" name="d0e613"></a></h4>
-                        </div>
-                     </div>
-                  </div>
-                  <p>En el panel de traducción automática, si alguno de los servicios está activado (consulta <span class="emphasis"><em>Opciones → Traducción automática</em></span>), automáticamente recibirás una sugerencia para la traducción del segmento actual. Presiona <span class="emphasis"><em>Ctrl+M</em></span> para reemplazar el segmento destino con esa sugerencia.
-                  </p>
-               </div>
-            </div>
-            <div class="section">
-               <div class="titlepage">
-                  <div>
-                     <div>
-                        <h3 class="title"><a name="create.translated.documents"></a>2.4. Creando documentos traducidos<a class="indexterm" name="d0e629"></a></h3>
-                     </div>
-                  </div>
-               </div>
-               <p>Cuando hayas traducido todos los segmentos (o antes si así lo deseas) <span class="application">OmegaT</span> creará los documentos destino con las traducciones almacenadas en la memoria de traducción. Para ello, selecciona <span class="guimenu">Proyecto</span> → <span class="guimenuitem">Crear documentos finales</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>)<a class="indexterm" name="d0e651"></a><a class="indexterm" name="d0e656"></a> en el menú. <span class="application">OmegaT</span> creará versiones traducidas de todos los documentos traducibles en el directorio fuente del proyecto, se hayan traducido
-                  completamente o no. Los archivos total o parcialmente traducidos se guardarán en el subdirectorio destino del proyecto. Para
-                  finalizar la traducción, abre los archivos destino en sus aplicaciones asociadas (navegador, procesador de textos...) para
-                  comprobar el contenido y formato de la traducción. A continuación, puedes volver a <span class="application">OmegaT</span> para hacer las correcciones necesarias, no olvides volver a crear los documentos traducidos.
-               </p>
-            </div>
+            <p>Si los archivos originales están en archivos con formato, como Microsoft Word,
+                   LibreOffice Writer o HTML, por ejemplo, OmegaT convertirá el formato en etiquetas
+                   que rodean al texto que está traduciendo. A menudo, los documentos también tienen
+                   etiquetas que no cumplen funciones de formato, pero que son
+                   importantes en los archivos originales (y en los archivos traducidos). Una oración
+                   original podría lucir así:
+                   
+                   
+            </p>
+            <div class="mediaobject" align="justify"><img src="images/InstantGuide_1.png" align="justify"></div>
+            <p>
+                   
+            </p>
+            <p>Sin embargo, Omegat presentará la oración de la siguiente
+                   manera:
+                   
+                   
+            </p>
+            <div class="mediaobject" align="justify"><img src="images/InstantGuide_2.png" align="justify"></div>
+            <p>
+                   
+            </p>
+            <p>Las etiquetas en OmegaT aparecen en gris, para que sean fáciles de reconocer. Están
+                   protegidas para que no pueda modificar su contenido, pero puede eliminarlas, introducirlas manualmente o cambiarlas
+                   de lugar en la oración traducida. Sin embargo, si comete errores al
+                   escribir las etiquetas de formato, sus archivos traducidos podrían no abrirse.
+                   Por lo tanto, pulse <span class="keycap"><strong>Ctrl+Shift+V</strong></span> antes de generar sus
+                   archivos traducidos, para validar que sus etiquetas estén correctas.
+            </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="how.to.handle.tagged.text"></a>3. Manejando texto etiquetado<a class="indexterm" name="d0e671"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e292"></a>4. Generar el archivo traducido
+                     </h2>
                   </div>
                </div>
             </div>
-            <p><span class="application">OmegaT</span> garantiza que el formato de los documentos originales (negrita, cursiva, etc.) no se pierde por el marcado con etiquetas
-               especiales. Las etiquetas de <span class="application">OmegaT</span> se componen de una o más letras seguidas de uno o más dígitos, utilizando el carácter "/" para el cierre (por ejemplo: &lt;f0&gt;,
-               &lt;/f0&gt;&lt;br&gt;, &lt;/s2&gt;, etc.) Debes manipular estas etiquetas con cuidado y asegurarte de que estén incluidas en los segmentos destino
-               de una manera apropiada (consulta las operaciones de etiqueta).
+            <p>Cuando se haya asegurado de que no hay errores de etiquetas en su
+                   traducción, pulse <span class="keycap"><strong>Ctrl+D</strong></span> para generar los archivos traducidos,
+                   que se crearán en la carpeta <code class="filename">/target/</code> dentro de
+                   la carpeta del proyecto.
             </p>
-            <div class="section">
-               <div class="titlepage">
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
                   <div>
-                     <div>
-                        <h3 class="title"><a name="d0e681"></a>3.1. Un ejemplo...<a class="indexterm" name="d0e684"></a></h3>
-                     </div>
+                     <h2 class="title" style="clear: both"><a name="d0e303"></a>5. Un par de cosas más a tener en cuenta
+                     </h2>
                   </div>
                </div>
-               <p>En estos ejemplos hemos destacado las etiquetas para que sean más fáciles de ver, pero en <span class="application">OmegaT</span> estas no se resaltarán. Las etiquetas HTML, en azul, serán ignoradas por <span class="application">OmegaT</span> ya que encierran el segmento totalmente. Las etiquetas resaltadas en verde a continuación, sin embargo, las tiene que manejar
-                  <span class="application">OmegaT</span> porque están dentro del segmento. He aquí un ejemplo de un segmento en HTML:
-               </p>
-               <p><code class="literal">&lt;p&gt;Puedes elegir mostrar un diferente tipo de letra a través del diálogo &lt;b&gt;Mostrar tipo de letra&lt;/b&gt;. Ábrelo a través del
-                     menú &lt;i&gt;Opciones&lt;/i&gt; → &lt;i&gt;Tipo de letra...&lt;/i&gt;. Puedes modificar el tipo de letra y tamaño desde el diálogo.&lt;/p&gt;</code></p>
-               <p>Así es como <span class="application">OmegaT</span> mostrará este, con la traducción en afrikaans:
-               </p>
-               <div class="figure"><a name="fig.tagged.segment.source"></a><p class="title"><b>Figura 2.3. Fuente <a class="indexterm" name="d0e711"></a>segmento HTML</b></p>
-                  <div class="figure-contents">
-                     <div class="mediaobject"><img src="images/tagged_segment.png" alt="Fuente segmento HTML"></div>
-                  </div>
-               </div><br class="figure-break"><p>Cuando <span class="application">OmegaT</span> ha creado el documento traducido, el HTML se verá así:
-               </p>
-               <div class="figure"><a name="fig.tagged.segment.target"></a><p class="title"><b>Figura 2.4. Segmento HTML destino</b></p>
-                  <div class="figure-contents">
-                     <div class="mediaobject"><img src="images/tagged_segment_target.png" alt="Segmento HTML destino"></div>
-                  </div>
-               </div><br class="figure-break"></div>
-            <div class="section">
-               <div class="titlepage">
-                  <div>
-                     <div>
-                        <h3 class="title"><a name="tag.verification"></a>3.2. Verificación de etiquetas<a class="indexterm" name="d0e736"></a><a class="indexterm" name="d0e741"></a></h3>
-                     </div>
-                  </div>
-               </div>
-               <p><span class="application">OmegaT</span> no detecta automáticamente el etiquetado defectuoso en el documento traducido. Por lo tanto, antes de entregar el documento
-                  a tu cliente, siempre debes comprobar los errores de etiquetas. Selecciona <span class="guimenu">Herramientas</span> → <span class="guimenuitem">Validar etiquetas...</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></strong></span>) en el menú. Te mostrará una tabla que muestra los segmentos en los que las etiquetas fuente y destino no se corresponden.
-                  Haz clic en el número de segmento. Para que te lleve automáticamente al Editor en segmento cuestionable, donde podrás corregir
-                  el etiquetado. Cuando hayas hecho las correcciones, comprueba estas presionando <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T<a class="indexterm" name="d0e767"></a></strong></span> de nuevo. Ten en cuenta que el verificador de etiquetas puede encontrar un error en los casos en que las etiquetas son correctas
-                  - por ejemplo, cuando era necesario cambiar el orden de las etiquetas involucradas en el etiquetado de una traducción gramaticalmente
-                  correcta. Por favor considera esto como una señal de que el verificador prefiere errar por el lado de la precaución.
-               </p>
-               <p>En algunos casos, los errores de etiquetas pueden impedir incluso que un documento se abra. Esto no es una razón para entrar
-                  en pánico - puesto que todavía tienes tanto el archivo fuente como la traducción disponibles, sólo tienes que asegurarte de
-                  que haz corregido los errores de etiqueta antes de crear los archivos traducidos. Por último, siempre debes comprobar doblemente
-                  el formato final al abrir el documento traducido en el visor asociado o editor.
-               </p>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Si un archivo no se carga en el panel del <span class="guilabel">Editor</span>, podría ser que su formato no sea compatible con OmegaT. Vea
+                                <a class="link" href="chapter.file.filters.html" title="Capítulo 7. Filtros de archivo">Filtros de archivo</a> para obtener un listado de los formatos de archivo que OmegaT entiende.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Puede crear un proyecto nuevo para cada trabajo nuevo y puede añadir
+                                archivos originales nuevos a un proyecto en cualquier momento.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Para tener un recordatorio de los ajustes iniciales del proyecto, abra el
+                                diálogo de propiedades del proyecto con la combinación <span class="keycap"><strong>Ctrl+E</strong></span>. Para ver un
+                                listado de los archivos del proyecto, abra el diálogo <span class="guilabel">Archivos del proyecto</span> con
+                                la combinación <span class="keycap"><strong>Ctrl+L</strong></span>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Al finalizar su traducción, OmegaT exporta tres memorias
+                                de traducción con los nombres <code class="filename">level1</code>, <code class="filename">level2</code> y <code class="filename">omegat</code> en la carpeta de su proyecto
+                                . Las memorias <code class="filename">level1</code> y <code class="filename">level2</code> pueden compartirse con usuarios de
+                                otros programas de traducción. La memoria con el nombre <code class="filename">omegat</code> puede servir a
+                                OmegaT para proyectos futuros que desee crear. Si pone esos
+                                archivos de memoria de traducción en la carpeta <code class="filename">/tm/</code> de un proyecto,
+                                OmegaT buscará automáticamente segmentos similares en ellos, lo que se conoce como
+                                «coincidencias aproximadas»
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Puede añadir un término nuevo al glosario con la combinación
+                                <span class="keycap"><strong>Ctrl+Shift+G</strong></span> o copiar glosarios a
+                                la carpeta <code class="filename">/glossary/</code> dentro de la carpeta de su proyecto
+                                y OmegaT buscará palabras en ellos automáticamente.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>A menudo es útil buscar palabras y frases en el texto original
+                                y en la traducción, para lo que debe pulsar <span class="keycap"><strong>Ctrl+F</strong></span> para
+                                ver el diálogo <span class="guilabel">Buscar texto</span> en cualquier momento.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Para ver una introducción más detallada consulte <a class="ulink" href="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf" target="_top">OmegaT
+                                   for beginners</a> en el sitio web de OmegaT. Si necesita ayuda
+                                con cualquier aspecto de OmegaT, no dude en suscribirse al <a class="ulink" href="http://tech.groups.yahoo.com/group/OmegaT/" target="_top">grupo de usuarios de OmegaT
+                                   .</a></p>
+                  </li>
+               </ul>
             </div>
          </div>
       </div>

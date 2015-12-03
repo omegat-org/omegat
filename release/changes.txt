@@ -1,11 +1,14 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.3 update 1
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancements
 ----------------------------------------------------------------------
 3.5.3 update 1 vs 3.5.3
 
   Implemented requests:  
+
+  - Re-use search window(s) with a shortcut
+  https://sourceforge.net/p/omegat/feature-requests/142/
 
   - Add menus to the Search window 
   https://sourceforge.net/p/omegat/feature-requests/1164/

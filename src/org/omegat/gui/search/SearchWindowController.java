@@ -40,6 +40,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.text.MessageFormat;
 import java.text.ParseException;
@@ -72,7 +73,6 @@ import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.filter.ReplaceFilter;
 import org.omegat.gui.editor.filter.SearchFilter;
-import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -105,14 +105,12 @@ public class SearchWindowController {
     private final int initialEntry;
     private final CaretPosition initialCaret;
 
-    public SearchWindowController(MainWindow par, SearchMode mode) {
+    public SearchWindowController(SearchMode mode) {
         form = new SearchWindowForm();
         form.setJMenuBar(new SearchWindowMenu(form, this));
         this.mode = mode;
         initialEntry = Core.getEditor().getCurrentEntryNumber();
         initialCaret = getCurrentPositionInEntryTranslationInEditor(Core.getEditor());
-
-        m_parent = par;
 
         m_dateFormat = new SimpleDateFormat(SAVED_DATE_FORMAT);
         
@@ -361,9 +359,6 @@ public class SearchWindowController {
             public void windowClosed(WindowEvent e) {
                 // save user preferences
                 savePreferences();
-
-                // notify main window
-                m_parent.removeSearchWindow(SearchWindowController.this);
 
                 if (m_thread != null) {
                     m_thread.fin();
@@ -1090,6 +1085,10 @@ public class SearchWindowController {
         }
     }
 
+    public void addWindowListener(WindowListener listener) {
+        form.addWindowListener(listener);
+    }
+
     /**
      * Display message dialog with the error as message
      * 
@@ -1118,8 +1117,6 @@ public class SearchWindowController {
             }
         });
     }
-
-    MainWindow m_parent;
 
     private SimpleDateFormat m_dateFormat;
     private SpinnerDateModel m_dateFromModel, m_dateToModel;

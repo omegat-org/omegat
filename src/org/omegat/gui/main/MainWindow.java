@@ -287,13 +287,19 @@ public class MainWindow extends JFrame implements IMainWindow {
                 : null;
     }
 
-    protected void addSearchWindow(SearchWindowController newSearchWindow) {
+    protected void addSearchWindow(final SearchWindowController newSearchWindow) {
+        newSearchWindow.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                removeSearchWindow(newSearchWindow);
+            }
+        });
         synchronized (m_searches) {
             m_searches.add(newSearchWindow);
         }
     }
 
-    public void removeSearchWindow(SearchWindowController searchWindow) {
+    private void removeSearchWindow(SearchWindowController searchWindow) {
         synchronized (m_searches) {
             m_searches.remove(searchWindow);
         }

@@ -478,7 +478,7 @@ public class MainWindowMenuHandler {
         if (!Core.getProject().isProjectLoaded())
             return;
 
-        SearchWindowController search = new SearchWindowController(mainWindow, SearchMode.SEARCH);
+        SearchWindowController search = new SearchWindowController(SearchMode.SEARCH);
         mainWindow.addSearchWindow(search);
 
         search.makeVisible(getTrimmedSelectedTextInMainWindow());
@@ -501,7 +501,7 @@ public class MainWindowMenuHandler {
         if (!Core.getProject().isProjectLoaded())
             return;
 
-        SearchWindowController search = new SearchWindowController(mainWindow, SearchMode.REPLACE);
+        SearchWindowController search = new SearchWindowController(SearchMode.REPLACE);
         mainWindow.addSearchWindow(search);
 
         search.makeVisible(getTrimmedSelectedTextInMainWindow());

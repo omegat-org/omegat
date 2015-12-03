@@ -138,6 +138,10 @@ public class Core {
         return editor;
     }
 
+    public static void setEditor(IEditor theEditor) {
+        editor = theEditor;
+    }
+
     /** Get tag validation component instance. */
     public static ITagValidation getTagValidation() {
         return tagValidation;

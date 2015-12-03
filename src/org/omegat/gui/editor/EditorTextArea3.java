@@ -45,6 +45,7 @@ import java.util.List;
 
 import javax.swing.JEditorPane;
 import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.text.AbstractDocument;
@@ -93,6 +94,14 @@ public class EditorTextArea3 extends JEditorPane {
     protected String currentWord;
 
     protected AutoCompleter autoCompleter = new AutoCompleter(this);
+
+    /**
+     * Whether or not we are confining the cursor to the editable part of the
+     * text area. The user can optionally allow the caret to roam freely.
+     * 
+     * @see {@link #checkAndFixCaret(boolean)}
+     */
+    protected boolean lockCursorToInputArea = true;
 
     public EditorTextArea3(EditorController controller) {
         this.controller = controller;
@@ -388,6 +397,16 @@ public class EditorTextArea3 extends JEditorPane {
                 || StaticUtils.isKey(e, KeyEvent.VK_RIGHT, (mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK) | InputEvent.SHIFT_MASK)) {
             // Ctrl+Right - skip to the end of tag (Alt+Right for MacOS)
             processed = moveCursorOverTag((e.getModifiers() & KeyEvent.SHIFT_MASK) != 0, true);
+        } else if (StaticUtils.isKey(e, KeyEvent.VK_F2, 0)) {
+            boolean lockEnabled = !lockCursorToInputArea;
+            final String key = lockEnabled ? "MW_STATUS_CURSOR_LOCK_ON" : "MW_STATUS_CURSOR_LOCK_OFF";
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    Core.getMainWindow().showStatusMessageRB(key);
+                }
+            });
+            lockCursorToInputArea = lockEnabled;
         }
 
         // leave standard processing if need
@@ -396,10 +415,10 @@ public class EditorTextArea3 extends JEditorPane {
         } else {
             if ((e.getModifiers() & (KeyEvent.CTRL_MASK | KeyEvent.META_MASK | KeyEvent.ALT_MASK)) == 0) {
                 // there is no Alt,Ctrl,Cmd keys, i.e. it's char
-                if (e.getKeyCode() != KeyEvent.VK_SHIFT) {
-                    // it's not a single 'shift' press
+                if (e.getKeyCode() != KeyEvent.VK_SHIFT && !isNavigationKey(e.getKeyCode())) {
+                    // it's not a single 'shift' press or navigation key
                     // fix caret position prior to inserting character
-                    checkAndFixCaret();
+                    checkAndFixCaret(true);
                 }
             }
             super.processKeyEvent(e);
@@ -407,23 +426,29 @@ public class EditorTextArea3 extends JEditorPane {
         }
 
         // some after-processing catches
-        if (!processed && e.getKeyChar() != 0) {
-            switch (e.getKeyCode()) {
-                //if caret is moved over existing chars, check and fix caret position
-                case KeyEvent.VK_HOME:
-                case KeyEvent.VK_END:
-                case KeyEvent.VK_LEFT:
-                case KeyEvent.VK_RIGHT:
-                case KeyEvent.VK_UP:
-                case KeyEvent.VK_DOWN:
-                case KeyEvent.VK_KP_LEFT:
-                case KeyEvent.VK_KP_RIGHT:
-                case KeyEvent.VK_KP_UP:
-                case KeyEvent.VK_KP_DOWN:
-                    checkAndFixCaret(); //works only in after-processing if translation length (start and end position) has not changed, because start and end position are not updated yet.
-                    autoCompleter.updatePopup();
-            }
+        if (!processed && e.getKeyChar() != 0 && isNavigationKey(e.getKeyCode())) {
+            //if caret is moved over existing chars, check and fix caret position
+            checkAndFixCaret(false); //works only in after-processing if translation length (start and end position) has not changed, because start and end position are not updated yet.
+            autoCompleter.updatePopup();
         }
+    }
+
+    private boolean isNavigationKey(int keycode) {
+        switch (keycode) {
+        // if caret is moved over existing chars, check and fix caret position
+        case KeyEvent.VK_HOME:
+        case KeyEvent.VK_END:
+        case KeyEvent.VK_LEFT:
+        case KeyEvent.VK_RIGHT:
+        case KeyEvent.VK_UP:
+        case KeyEvent.VK_DOWN:
+        case KeyEvent.VK_KP_LEFT:
+        case KeyEvent.VK_KP_RIGHT:
+        case KeyEvent.VK_KP_UP:
+        case KeyEvent.VK_KP_DOWN:
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -546,9 +571,26 @@ public class EditorTextArea3 extends JEditorPane {
 
     /**
      * Checks whether the selection & caret is inside editable text, and changes
-     * their positions accordingly if not.
+     * their positions accordingly if not. Convenience method for
+     * {@link #checkAndFixCaret(boolean)} that always forcibly fixes the caret.
      */
     void checkAndFixCaret() {
+        checkAndFixCaret(true);
+    }
+
+    /**
+     * Checks whether the selection & caret is inside editable text, and changes
+     * their positions accordingly if not.
+     * 
+     * @param force
+     *            When true, ignore {@link #lockCursorToInputArea} and always
+     *            fix the caret even if the user has enabled free roaming
+     */
+    void checkAndFixCaret(boolean force) {
+        if (!force && !lockCursorToInputArea) {
+            return;
+        }
+
         Document3 doc = getOmDocument();
         if (doc == null) {
             // doc is not active

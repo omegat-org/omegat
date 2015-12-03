@@ -48,11 +48,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.AbstractAction;
-import javax.swing.ActionMap;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.InputMap;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
@@ -75,7 +73,6 @@ import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.filter.ReplaceFilter;
 import org.omegat.gui.editor.filter.SearchFilter;
 import org.omegat.gui.main.MainWindow;
-import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -110,6 +107,7 @@ public class SearchWindowController {
 
     public SearchWindowController(MainWindow par, String startText, SearchMode mode) {
         form = new SearchWindowForm();
+        form.setJMenuBar(new SearchWindowMenu(form));
         this.mode = mode;
         initialEntry = Core.getEditor().getCurrentEntryNumber();
         initialCaret = getCurrentPositionInEntryTranslationInEditor(Core.getEditor());
@@ -287,29 +285,6 @@ public class SearchWindowController {
                 doCancel();
             }
         });
-
-        ActionMap actionMap = form.getRootPane().getActionMap();
-        InputMap  inputMap  = form.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-
-        // Make Search shortcut re-focus on search field
-        actionMap.put("editFindInProjectMenuItem", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                form.m_searchField.requestFocus();
-                form.m_searchField.getEditor().selectAll();
-            }
-        });
-
-        // Show create glossary entry dialog
-        actionMap.put("editCreateGlossaryEntryMenuItem", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                Core.getGlossary().showCreateGlossaryEntryDialog(form);
-            }
-        });
-
-        PropertiesShortcuts shortcuts = new PropertiesShortcuts("/org/omegat/gui/main/MainMenuShortcuts.properties");
-        shortcuts.bindKeyStrokes(inputMap, actionMap.keys());
 
         // Set search and replace combo boxes' actions, undo, key handling
         configureHistoryComboBox(form.m_searchField);

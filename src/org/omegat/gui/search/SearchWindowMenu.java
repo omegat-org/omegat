@@ -25,35 +25,56 @@
 
 package org.omegat.gui.search;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JComboBox;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.text.BadLocationException;
 
 import org.omegat.core.Core;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
 import org.openide.awt.Mnemonics;
 
 public class SearchWindowMenu extends JMenuBar {
 
     private final SearchWindowForm form;
+    private final SearchWindowController controller;
 
-    public SearchWindowMenu(SearchWindowForm form) {
+    public SearchWindowMenu(SearchWindowForm form, SearchWindowController controller) {
         this.form = form;
+        this.controller = controller;
         init();
     }
 
     private void init() {
+        JMenu fileMenu = add(new JMenu());
+        Mnemonics.setLocalizedText(fileMenu, OStrings.getString("SW_FILE_MENU"));
+
+        JMenuItem item;
+
+        item = fileMenu.add(new JMenuItem());
+        Mnemonics.setLocalizedText(item, OStrings.getString("SW_FILE_MENU_CLOSE"));
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        item.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.doCancel();
+            }
+        });
+
         JMenu editMenu = add(new JMenu());
         Mnemonics.setLocalizedText(editMenu, OStrings.getString("TF_MENU_EDIT"));
 
-        JMenuItem item;
 
         // "Action Commands" must be the same as equivalent MainWindowMenu
         // members in order to get matching shortcuts.

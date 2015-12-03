@@ -107,7 +107,7 @@ public class SearchWindowController {
 
     public SearchWindowController(MainWindow par, String startText, SearchMode mode) {
         form = new SearchWindowForm();
-        form.setJMenuBar(new SearchWindowMenu(form));
+        form.setJMenuBar(new SearchWindowMenu(form, this));
         this.mode = mode;
         initialEntry = Core.getEditor().getCurrentEntryNumber();
         initialCaret = getCurrentPositionInEntryTranslationInEditor(Core.getEditor());
@@ -896,7 +896,7 @@ public class SearchWindowController {
         m_thread.start();
     }
 
-    private void doCancel() {
+    void doCancel() {
         UIThreadsUtil.mustBeSwingThread();
         if (m_thread != null) {
             m_thread.fin();

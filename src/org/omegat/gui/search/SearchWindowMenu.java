@@ -62,6 +62,23 @@ public class SearchWindowMenu extends JMenuBar {
         JMenuItem item;
 
         item = fileMenu.add(new JMenuItem());
+        Mnemonics.setLocalizedText(item, OStrings.getString("SW_FILE_MENU_SELECT_SEARCH_FIELD"));
+        item.setActionCommand("editFindInProjectMenuItem");
+        item.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selection = form.m_viewer.getSelectedText();
+                JComboBox field = form.m_searchField;
+                if (!StringUtil.isEmpty(selection)) {
+                    JTextField editor = (JTextField) field.getEditor().getEditorComponent();
+                    editor.setText(selection);
+                }
+                field.requestFocus();
+                field.getEditor().selectAll();
+            }
+        });
+
+        item = fileMenu.add(new JMenuItem());
         Mnemonics.setLocalizedText(item, OStrings.getString("SW_FILE_MENU_CLOSE"));
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,
                 Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
@@ -123,17 +140,6 @@ public class SearchWindowMenu extends JMenuBar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Core.getGlossary().showCreateGlossaryEntryDialog(form);
-            }
-        });
-
-        item = editMenu.add(new JMenuItem());
-        Mnemonics.setLocalizedText(item, OStrings.getString("SW_EDIT_MENU_SELECT_SEARCH_FIELD"));
-        item.setActionCommand("editFindInProjectMenuItem");
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                form.m_searchField.requestFocus();
-                form.m_searchField.getEditor().selectAll();
             }
         });
 

@@ -50,9 +50,9 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
-import org.omegat.core.search.SearchMode;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.NearString.MATCH_SOURCE;
+import org.omegat.core.search.SearchMode;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.tagvalidation.ErrorReport;
@@ -478,20 +478,33 @@ public class MainWindowMenuHandler {
         if (!Core.getProject().isProjectLoaded())
             return;
 
-        String selection = getTrimmedSelectedTextInMainWindow();
-
-        SearchWindowController search = new SearchWindowController(mainWindow, selection, SearchMode.SEARCH);
+        SearchWindowController search = new SearchWindowController(mainWindow, SearchMode.SEARCH);
         mainWindow.addSearchWindow(search);
+
+        search.makeVisible(getTrimmedSelectedTextInMainWindow());
+    }
+
+    void findInProjectReuseLastWindow() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+
+        SearchWindowController search = mainWindow.peekLastSearchWindow();
+        if (search == null) {
+            editFindInProjectMenuItemActionPerformed();
+        } else {
+            search.makeVisible(getTrimmedSelectedTextInMainWindow());
+        }
     }
 
     public void editReplaceInProjectMenuItemActionPerformed() {
         if (!Core.getProject().isProjectLoaded())
             return;
 
-        String selection = getTrimmedSelectedTextInMainWindow();
-
-        SearchWindowController search = new SearchWindowController(mainWindow, selection, SearchMode.REPLACE);
+        SearchWindowController search = new SearchWindowController(mainWindow, SearchMode.REPLACE);
         mainWindow.addSearchWindow(search);
+
+        search.makeVisible(getTrimmedSelectedTextInMainWindow());
     }
 
     private String getTrimmedSelectedTextInMainWindow() {

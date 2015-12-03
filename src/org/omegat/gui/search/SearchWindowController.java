@@ -105,7 +105,7 @@ public class SearchWindowController {
     private final int initialEntry;
     private final CaretPosition initialCaret;
 
-    public SearchWindowController(MainWindow par, String startText, SearchMode mode) {
+    public SearchWindowController(MainWindow par, SearchMode mode) {
         form = new SearchWindowForm();
         form.setJMenuBar(new SearchWindowMenu(form, this));
         this.mode = mode;
@@ -119,9 +119,6 @@ public class SearchWindowController {
         form.m_searchField.setModel(new DefaultComboBoxModel(HistoryManager.getSearchItems()));
         if (form.m_searchField.getModel().getSize() > 0) {
             form.m_searchField.setSelectedIndex(-1);
-        }
-        if (!StringUtil.isEmpty(startText)) {
-            ((JTextField) form.m_searchField.getEditor().getEditorComponent()).setText(startText);
         }
         
         form.m_replaceField.setModel(new DefaultComboBoxModel(HistoryManager.getReplaceItems()));
@@ -183,9 +180,6 @@ public class SearchWindowController {
             form.m_panelReplace.setVisible(true);
             break;
         }
-
-        form.setVisible(true);
-        form.m_searchField.requestFocus();
     }
 
     final void initActions() {
@@ -906,6 +900,21 @@ public class SearchWindowController {
 
     public void dispose() {
         form.dispose();
+    }
+
+    /**
+     * Make Search window visible on screen, with optional initial query (may be
+     * null).
+     * 
+     * @param query
+     *            Initial query string (may be empty or null)
+     */
+    public void makeVisible(String query) {
+        if (!StringUtil.isEmpty(query)) {
+            ((JTextField) form.m_searchField.getEditor().getEditorComponent()).setText(query);
+        }
+        form.setVisible(true);
+        form.m_searchField.requestFocus();
     }
 
     private boolean isSegmentDisplayed(int entry) {

@@ -43,8 +43,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -52,8 +52,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
-import javax.swing.text.JTextComponent;
 import javax.swing.WindowConstants;
+import javax.swing.text.JTextComponent;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -67,12 +67,12 @@ import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.FileUtil;
+import org.omegat.util.FileUtil.ICollisionCallback;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.WikiGet;
-import org.omegat.util.FileUtil.ICollisionCallback;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -111,7 +111,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     private Font m_font;
 
     /** Set of all open search windows. */
-    private final Set<SearchWindowController> m_searches = new HashSet<SearchWindowController>();
+    private final List<SearchWindowController> m_searches = new ArrayList<SearchWindowController>();
 
     protected JLabel lengthLabel;
     protected JLabel progressLabel;
@@ -307,6 +307,16 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
             m_searches.clear();
         }
+    }
+
+    protected SearchWindowController peekLastSearchWindow() {
+        SearchWindowController result = null;
+        synchronized (m_searches) {
+            if (!m_searches.isEmpty()) {
+                result = m_searches.get(m_searches.size() - 1);
+            }
+        }
+        return result;
     }
 
     /**

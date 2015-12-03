@@ -45,8 +45,10 @@ import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -118,11 +120,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
      */
     @Override
     public void actionPerformed(ActionEvent evt) {
-        // Item what perform event.
-        JMenuItem menuItem = (JMenuItem) evt.getSource();
-
         // Get item name from actionCommand.
-        String action = menuItem.getActionCommand();
+        String action = evt.getActionCommand();
 
         Log.logInfoRB("LOG_MENU_CLICK", action);
 
@@ -416,7 +415,17 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         helpMenu.add(helpLogMenuItem = createMenuItem("TF_MENU_HELP_LOG"));
         
         setActionCommands();
-        new PropertiesShortcuts("/org/omegat/gui/main/MainMenuShortcuts.properties").bindKeyStrokes(mainMenu);
+        PropertiesShortcuts shortcuts = new PropertiesShortcuts("/org/omegat/gui/main/MainMenuShortcuts.properties");
+        shortcuts.bindKeyStrokes(mainMenu);
+
+        String key = "findInProjectReuseLastWindow";
+        mainWindow.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(shortcuts.getKeyStroke(key), key);
+        mainWindow.getRootPane().getActionMap().put(key, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainWindowMenuHandler.findInProjectReuseLastWindow();
+            }
+        });
 
         if (Platform.isMacOSX()) {
             initMacSpecific();

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.3 update 1
 ----------------------------------------------------------------------
-  2 Enhancements
+  3 Enhancements
 ----------------------------------------------------------------------
 3.5.3 update 1 vs 3.5.3
 
@@ -9,6 +9,9 @@
 
   - Re-use search window(s) with a shortcut
   https://sourceforge.net/p/omegat/feature-requests/142/
+
+  - Allow moving the cursor anywhere in the editor
+  https://sourceforge.net/p/omegat/feature-requests/821/
 
   - Add menus to the Search window 
   https://sourceforge.net/p/omegat/feature-requests/1164/

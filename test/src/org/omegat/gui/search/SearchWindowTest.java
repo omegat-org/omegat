@@ -323,6 +323,10 @@ public class SearchWindowTest extends TestCore {
             }
 
             @Override
+            public void gotoEntry(int entryNum, CaretPosition pos) {
+            }
+
+            @Override
             public IEditorSettings getSettings() {
                 return editorSettings;
             }

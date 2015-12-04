@@ -41,6 +41,8 @@ import org.omegat.core.data.TMXEntry;
 import org.omegat.core.search.SearchMatch;
 import org.omegat.core.search.Searcher;
 import org.omegat.gui.editor.EditorController;
+import org.omegat.gui.editor.IEditor;
+import org.omegat.gui.editor.IEditor.CaretPosition;
 import org.omegat.gui.editor.IEditorFilter;
 
 /**
@@ -150,7 +152,7 @@ public class ReplaceFilter implements IEditorFilter {
         if (found != null) {
             for (SearchMatch m : found) {
                 if (m.getStart() > pos) {
-                    ec.setCaretPosition(new EditorController.CaretPosition(m.getStart(), m.getEnd()));
+                    ec.setCaretPosition(new IEditor.CaretPosition(m.getStart(), m.getEnd()));
                     ec.requestFocus();
                     return;
                 }
@@ -176,7 +178,7 @@ public class ReplaceFilter implements IEditorFilter {
                 continue; // no replacements
             }
             for (SearchMatch m : found) {
-                ec.gotoEntry(i, new EditorController.CaretPosition(m.getStart(), m.getEnd()));
+                ec.gotoEntry(i, new CaretPosition(m.getStart(), m.getEnd()));
                 ec.requestFocus();
                 return;
             }
@@ -197,7 +199,7 @@ public class ReplaceFilter implements IEditorFilter {
                 continue; // no replacements
             }
             for (SearchMatch m : found) {
-                ec.gotoEntry(i, new EditorController.CaretPosition(m.getStart(), m.getEnd()));
+                ec.gotoEntry(i, new CaretPosition(m.getStart(), m.getEnd()));
                 ec.requestFocus();
                 return;
             }

@@ -2133,33 +2133,6 @@ public class EditorController implements IEditor {
         }
     }
 
-    /**
-     * Storage for caret position and selection.
-     */
-    public static class CaretPosition {
-        Integer position;
-        Integer selectionStart, selectionEnd;
-
-        public CaretPosition(int position) {
-            this.position = position;
-            this.selectionStart = null;
-            this.selectionEnd = null;
-        }
-
-        public CaretPosition(int selectionStart, int selectionEnd) {
-            this.position = null;
-            this.selectionStart = selectionStart;
-            this.selectionEnd = selectionEnd;
-        }
-
-        /**
-         * We can't define it once since 'position' can be changed later.
-         */
-        public static CaretPosition startOfEntry() {
-            return new CaretPosition(0);
-        }
-    }
-    
     @Override
     public void waitForCommit(int timeoutSeconds) {
         ForceCommitTimer timer;

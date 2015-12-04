@@ -358,6 +358,9 @@ public class TestTeamIntegrationChild {
         public void gotoEntry(int entryNum) {
         }
 
+        public void gotoEntry(int entryNum, CaretPosition pos) {
+        }
+
         public EditorSettings getSettings() {
             return null;
         }

@@ -61,6 +61,33 @@ public interface IEditor {
     }
 
     /**
+     * Storage for caret position and selection.
+     */
+    public class CaretPosition {
+        Integer position;
+        Integer selectionStart, selectionEnd;
+
+        public CaretPosition(int position) {
+            this.position = position;
+            this.selectionStart = null;
+            this.selectionEnd = null;
+        }
+
+        public CaretPosition(int selectionStart, int selectionEnd) {
+            this.position = null;
+            this.selectionStart = selectionStart;
+            this.selectionEnd = selectionEnd;
+        }
+
+        /**
+         * We can't define it once since 'position' can be changed later.
+         */
+        public static CaretPosition startOfEntry() {
+            return new CaretPosition(0);
+        }
+    }
+
+    /**
      * Get relative path (under <code>source</code>) of the source file
      * currently open in the editor.
      * <p>
@@ -173,7 +200,9 @@ public interface IEditor {
     void gotoFile(int fileIndex);
 
     /**
-     * Goto entry with specified number.
+     * Goto entry with specified number. Convenience method for
+     * {@link #gotoEntry(int, CaretPosition)} where the caret position will be
+     * the start of the entry.
      * 
      * @param entryNum
      *            entry number, starts from 1
@@ -181,6 +210,17 @@ public interface IEditor {
      *            Must be called only from UI thread.
      */
     void gotoEntry(int entryNum);
+
+    /**
+     * Goto entry with specified number, and restore caret to specified
+     * position.
+     * 
+     * @param entryNum
+     *            entry number, starts from 1
+     * 
+     *            Must be called only from UI thread.
+     */
+    void gotoEntry(int entryNum, CaretPosition pos);
 
     /**
      * Goto entry based on a string and entry key.

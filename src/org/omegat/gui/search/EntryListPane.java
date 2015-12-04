@@ -64,9 +64,8 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.search.SearchMatch;
 import org.omegat.core.search.SearchResultEntry;
 import org.omegat.core.search.Searcher;
-import org.omegat.gui.editor.EditorController;
-import org.omegat.gui.editor.EditorController.CaretPosition;
 import org.omegat.gui.editor.IEditor;
+import org.omegat.gui.editor.IEditor.CaretPosition;
 import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
@@ -562,11 +561,10 @@ class EntryListPane extends JTextPane {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            if (isSegDisplayed && m_firstMatchList.containsKey(entry)
-                                    && editor instanceof EditorController) {
+                            if (isSegDisplayed && m_firstMatchList.containsKey(entry)) {
                                 // Select search word in Editor pane
                                 CaretPosition pos = m_firstMatchList.get(entry);
-                                ((EditorController) editor).gotoEntry(entry, pos);
+                                editor.gotoEntry(entry, pos);
                             } else {
                                 editor.gotoEntry(entry);
                             }

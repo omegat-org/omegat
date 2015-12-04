@@ -126,6 +126,9 @@ public class GlossaryTextAreaTest extends TestCore {
             public void gotoEntry(int entryNum) {
             }
 
+            public void gotoEntry(int entryNum, CaretPosition pos) {
+            }
+
             public void gotoEntry(String srcString, EntryKey key) {
             }
 

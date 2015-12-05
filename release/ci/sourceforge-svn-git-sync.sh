@@ -34,7 +34,7 @@ PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 REPO=omegat-git-svn
 
 # If we have copied the tarred repo from a previous build, use it.
-if [ ! -d $REPO ] && [ -f prev/$REPO.tar ]; then
+if [ "$COPY_FROM_WEBDAV" != true ] && [ ! -d $REPO ] && [ -f prev/$REPO.tar ]; then
 	tar -xf prev/$REPO.tar
 fi
 
@@ -50,7 +50,8 @@ curl -L -o authors-new https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/rele
 mv authors-new authors
 git svn fetch
 git branch -f master trunk
-git push ssh://omegat-jenkins@git.code.sf.net/p/omegat/code
+cp refs/remotes/tags/* refs/tags/
+git push --tags ssh://omegat-jenkins@git.code.sf.net/p/omegat/code
 GIT_SHA=$(git rev-parse master)
 GIT_SHA_SHORT=$(git rev-parse --short $GIT_SHA)
 SVN_REVISION=$(git svn find-rev $GIT_SHA)

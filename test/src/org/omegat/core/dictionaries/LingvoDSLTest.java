@@ -44,7 +44,7 @@ public class LingvoDSLTest extends TestCore {
         LingvoDSL l = new LingvoDSL(new File("test/data/dicts/test.dsl"));
         Map<String, Object> map = l.readHeader();
         assertEquals(6, map.size());
-        
+
         String word = "space";
         String expect = "Only a single white space on first character\n";
         Object data = map.get(word);
@@ -72,7 +72,6 @@ public class LingvoDSLTest extends TestCore {
         Object data = map.get(word);
         assertNotNull(data);
         String result = l.readArticle(word, data);
-        assertEquals("\u0441\u0442\u0430\u043d\u043e\u043a\n", result); //станок
+        assertEquals("\u0441\u0442\u0430\u043d\u043e\u043a\n", result);
     }
-
-} 
+}

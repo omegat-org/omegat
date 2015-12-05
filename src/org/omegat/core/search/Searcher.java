@@ -174,30 +174,19 @@ public class Searcher {
         switch (expression.searchExpressionType) {
         case EXACT:
         default:
-            // escape the search string, it's not supposed to be a regular
-            // expression
-            text = StaticUtils.escapeNonRegex(text, false);
+            if (!expression.fullHalfWidthInsensitive) {
+                // escape the search string, it's not supposed to be a regular
+                // expression
+                text = StaticUtils.escapeNonRegex(text, false);
+            } else {
+                // handle half-width and full-width character insensitive match
+                // create regex expression to match both
+                text = StringUtil.createFullHalfMatchExpression(text);
+            }
 
             // space match nbsp (\u00a0)
             if (expression.spaceMatchNbsp) {
                 text = text.replaceAll(" ", "( |\u00A0)");
-            }
-
-            // handle half-width and full-width character insensitive match
-            if (expression.fullHalfWidthInsensitive) {
-                if (StringUtil.containsFullWidthExpression(text)) {
-                    // create a matcher for the full/half width search strings
-                    String full = StringUtil.getFullWidthText(text);
-                    String half = StringUtil.getHalfWidthText(text);
-                    // half can contain regex character generated from full-width character
-                    half = StaticUtils.escapeNonRegex(half, false);
-                    StringBuilder sb = new StringBuilder(half);
-                    sb.insert(0, "(");
-                    sb.append("|");
-                    sb.append(full);
-                    sb.append(")");
-                    text = sb.toString();
-                }
             }
 
             // create a matcher for the search string

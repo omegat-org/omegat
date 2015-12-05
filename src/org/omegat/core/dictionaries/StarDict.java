@@ -224,7 +224,7 @@ public class StarDict implements IDictionary {
      * 
      * Returns not the raw text, but the formatted article ready for upstream use (\n replaced
      * with <br>, etc.
-    */
+     */
     @Override
     public String readArticle(String word, Object data) {
         Entry dictData = (Entry) data;

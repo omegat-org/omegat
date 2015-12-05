@@ -351,19 +351,21 @@ public class EBDict implements IDictionary {
          * convert Zenkaku alphabet to Hankaku
          *
          * convert (\uFF01 - \uFF5E) to (\u0021- \u007E)
+         *     and \u3000 to \u0020
          *
          * @param text
          * @return String converted
         */
         public String convertZen2Han(String text) {
-            int i;
             StringBuilder result = new StringBuilder(text.length());
-            for (i = 0; i < text.length(); i++ ) {
-                char c = text.charAt(i);
-                if (0xff00 < (int) c && (int) c  < 0xff5f) {
-                    result.append(Character.toChars((int) c + 0x0021 - 0xff01));
-                }else {
-                    result.append(c);
+            for (int i = 0; i < text.length(); i++ ) {
+                int cp = text.codePointAt(i);
+                if (0xFF00 < cp && cp < 0xFF5F) {
+                    result.append((char)(cp-0xFEE0));
+                } else if (cp == 0x3000) {
+                    result.append("\u0020");
+                } else {
+                    result.append(cp);
                 }
             }
             return result.toString();

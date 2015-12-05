@@ -43,7 +43,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import org.omegat.gui.dictionaries.IDictionaries;
+import org.omegat.gui.dictionaries.IDictionariesPane;
 import org.omegat.util.DirectoryMonitor;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
@@ -59,12 +59,12 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
     public static final String IGNORE_FILE = "ignore.txt";
     protected DirectoryMonitor monitor;
     protected final Map<String, IDictionary> infos = new TreeMap<String, IDictionary>();
-    private final IDictionaries pane;
+    private final IDictionariesPane pane;
     protected static String DICTIONARY_SUBDIR = "dictionary";
 
     protected final Set<String> ignoreWords = new TreeSet<String>();
 
-    public DictionariesManager(final IDictionaries pane) {
+    public DictionariesManager(final IDictionariesPane pane) {
         this.pane = pane;
     }
 

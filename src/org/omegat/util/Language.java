@@ -75,7 +75,7 @@ public class Language implements Comparable<Object> {
      * The form xx-xxxx-xx is also accepted, where "xxxx" is a 4 alpha characters script as defined in
      * <a href="http://unicode.org/iso15924/iso15924-codes.html">ISO 15924</a>. E.g., sr-Latn-RS, 
      * which represents Serbian ('sr') written using Latin script ('Latn') as used in Serbia ('RS').
-     * This form is described in <a href="http://www.rfc-editor.org/rfc/bcp/bcp47.tx">BCP47</a>.
+     * This form is described in <a href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP47</a>.
      */
     public Language(String str) {
         this.languageCode = "";

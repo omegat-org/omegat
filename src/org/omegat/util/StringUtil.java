@@ -513,31 +513,142 @@ public class StringUtil {
     }
 
     /**
-     * convert full-width and half-width charecters to a regex that match both
+     * Analyze text whether contains full/half width character that has a expression in full-width text
      *
-     * @param text
-     * @return String with regex
-     */
-    public static String fullHalfWidthMatchExpression(String text) {
-        StringBuilder sbhw = new StringBuilder(text);
+     * Analyze text whether contains full/half width character
+     * that has a codepoint in both full-width and half-width expression in Unicode
+     *    ex. ASCII, full-width alphabet, full-width katakana, half-width katakana, etc.
+     *
+     * @return true when text contains character
+     *    that has a full-width expression and half-width expression codepoint
+     **/
+    public static boolean containsFullWidthExpression(String text) {
+        String full = getFullWidthText(text);
+        String half = getHalfWidthText(text);
+        if (equal(full, half)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Return full width expression
+     *
+     * @param Stirng text
+     * @return String result
+     **/
+    public static String getFullWidthText(String text) {
         StringBuilder sbfw = new StringBuilder(text);
-        for (int i = 0; i < sbhw.length(); i++ ) {
-            int ch = sbhw.codePointAt(i);
+        for (int i = 0; i < sbfw.length(); i++ ) {
+            int ch = sbfw.codePointAt(i);
             // ASCII
             if (( ch >= 0x0021 ) && ( ch <= 0x007E )) {
                 sbfw.setCharAt(i, (char)(ch+0xFEE0));
                 continue;
-            }
-            // Full width alphabet
-            if (0xff01 <  ch &&  ch < 0xff5e) {
-                sbhw.setCharAt(i, (char)(ch-0xFEE0));
             }
             // Half width Hangul
             if (( ch > 0xFFA1 ) && ( ch <= 0xFFBE )) {
                 sbfw.setCharAt(i, (char)(ch-0xCE70));
 			          continue;
 			      }
-            // Full width Hangul
+            switch ( ch ) {
+               // Half width Katakana
+                case 0xFF61: sbfw.setCharAt(i, (char)0x3002); break;
+                case 0xFF62: sbfw.setCharAt(i, (char)0x300C); break;
+                case 0xFF63: sbfw.setCharAt(i, (char)0x300D); break;
+                case 0xFF64: sbfw.setCharAt(i, (char)0x3001); break;
+                case 0xFF65: sbfw.setCharAt(i, (char)0x30FB); break;
+                case 0xFF66: sbfw.setCharAt(i, (char)0x30F2); break;
+                case 0xFF67: sbfw.setCharAt(i, (char)0x30A1); break;
+                case 0xFF68: sbfw.setCharAt(i, (char)0x30A3); break;
+                case 0xFF69: sbfw.setCharAt(i, (char)0x30A5); break;
+                case 0xFF6A: sbfw.setCharAt(i, (char)0x30A7); break;
+                case 0xFF6B: sbfw.setCharAt(i, (char)0x30A9); break;
+                case 0xFF6C: sbfw.setCharAt(i, (char)0x30E3); break;
+                case 0xFF6D: sbfw.setCharAt(i, (char)0x30E5); break;
+                case 0xFF6E: sbfw.setCharAt(i, (char)0x30E7); break;
+                case 0xFF6F: sbfw.setCharAt(i, (char)0x30C3); break;
+                case 0xFF70: sbfw.setCharAt(i, (char)0x30FC); break;
+                case 0xFF71: sbfw.setCharAt(i, (char)0x30A2); break;
+                case 0xFF72: sbfw.setCharAt(i, (char)0x30A4); break;
+                case 0xFF73: sbfw.setCharAt(i, (char)0x30A6); break;
+                case 0xFF74: sbfw.setCharAt(i, (char)0x30A8); break;
+                case 0xFF75: sbfw.setCharAt(i, (char)0x30AA); break;
+                case 0xFF76: sbfw.setCharAt(i, (char)0x30AB); break;
+                case 0xFF77: sbfw.setCharAt(i, (char)0x30AD); break;
+                case 0xFF78: sbfw.setCharAt(i, (char)0x30AF); break;
+                case 0xFF79: sbfw.setCharAt(i, (char)0x30B1); break;
+                case 0xFF7A: sbfw.setCharAt(i, (char)0x30B3); break;
+                case 0xFF7B: sbfw.setCharAt(i, (char)0x30B5); break;
+                case 0xFF7C: sbfw.setCharAt(i, (char)0x30B7); break;
+                case 0xFF7D: sbfw.setCharAt(i, (char)0x30B9); break;
+                case 0xFF7E: sbfw.setCharAt(i, (char)0x30BB); break;
+                case 0xFF7F: sbfw.setCharAt(i, (char)0x30BD); break;
+                case 0xFF80: sbfw.setCharAt(i, (char)0x30BF); break;
+                case 0xFF81: sbfw.setCharAt(i, (char)0x30C1); break;
+                case 0xFF82: sbfw.setCharAt(i, (char)0x30C4); break;
+                case 0xFF83: sbfw.setCharAt(i, (char)0x30C6); break;
+                case 0xFF84: sbfw.setCharAt(i, (char)0x30C8); break;
+                case 0xFF85: sbfw.setCharAt(i, (char)0x30CA); break;
+                case 0xFF86: sbfw.setCharAt(i, (char)0x30CB); break;
+                case 0xFF87: sbfw.setCharAt(i, (char)0x30CC); break;
+                case 0xFF88: sbfw.setCharAt(i, (char)0x30CD); break;
+                case 0xFF89: sbfw.setCharAt(i, (char)0x30CE); break;
+                case 0xFF8A: sbfw.setCharAt(i, (char)0x30CF); break;
+                case 0xFF8B: sbfw.setCharAt(i, (char)0x30D2); break;
+                case 0xFF8C: sbfw.setCharAt(i, (char)0x30D5); break;
+                case 0xFF8D: sbfw.setCharAt(i, (char)0x30D8); break;
+                case 0xFF8E: sbfw.setCharAt(i, (char)0x30DB); break;
+                case 0xFF8F: sbfw.setCharAt(i, (char)0x30DE); break;
+                case 0xFF90: sbfw.setCharAt(i, (char)0x30DF); break;
+                case 0xFF91: sbfw.setCharAt(i, (char)0x30E0); break;
+                case 0xFF92: sbfw.setCharAt(i, (char)0x30E1); break;
+                case 0xFF93: sbfw.setCharAt(i, (char)0x30E2); break;
+                case 0xFF94: sbfw.setCharAt(i, (char)0x30E4); break;
+                case 0xFF95: sbfw.setCharAt(i, (char)0x30E6); break;
+                case 0xFF96: sbfw.setCharAt(i, (char)0x30E8); break;
+                case 0xFF97: sbfw.setCharAt(i, (char)0x30E9); break;
+                case 0xFF98: sbfw.setCharAt(i, (char)0x30EA); break;
+                case 0xFF99: sbfw.setCharAt(i, (char)0x30EB); break;
+                case 0xFF9A: sbfw.setCharAt(i, (char)0x30EC); break;
+                case 0xFF9B: sbfw.setCharAt(i, (char)0x30ED); break;
+                case 0xFF9C: sbfw.setCharAt(i, (char)0x30EF); break;
+                case 0xFF9D: sbfw.setCharAt(i, (char)0x30F3); break;
+                case 0xFF9E: sbfw.setCharAt(i, (char)0x3099); break;
+                case 0xFF9F: sbfw.setCharAt(i, (char)0x309A); break;
+                // Half width Hangul
+                case 0xFFA0: sbfw.setCharAt(i, (char)0x3164); break;
+                case 0xFFDA: sbfw.setCharAt(i, (char)0x3161); break;
+                case 0xFFDB: sbfw.setCharAt(i, (char)0x3162); break;
+                case 0xFFDC: sbfw.setCharAt(i, (char)0x3163); break;
+                // Others
+                case 0xFFE8: sbfw.setCharAt(i, (char)0x2502); break;
+                case 0xFFE9: sbfw.setCharAt(i, (char)0x2190); break;
+                case 0xFFEA: sbfw.setCharAt(i, (char)0x2191); break;
+                case 0xFFEB: sbfw.setCharAt(i, (char)0x2192); break;
+                case 0xFFEC: sbfw.setCharAt(i, (char)0x2193); break;
+                case 0xFFED: sbfw.setCharAt(i, (char)0x25A0); break;
+                case 0xFFEE: sbfw.setCharAt(i, (char)0x25CB); break;
+            }
+        }
+        return sbfw.toString();
+    }
+
+    /**
+     * Return half width expression
+     *
+     * @param Stirng text
+     * @return String result
+     **/
+    public static String getHalfWidthText(String text) {
+        StringBuilder sbhw = new StringBuilder(text);
+        for (int i = 0; i < sbhw.length(); i++ ) {
+            int ch = sbhw.codePointAt(i);
+           // Full width alphabet
+            if (0xff01 <  ch &&  ch < 0xff5e) {
+                sbhw.setCharAt(i, (char)(ch-0xFEE0));
+            }
+           // Full width Hangul
             if (( ch > 0x3131 ) && ( ch <= 0x314E )) {
                 sbhw.setCharAt(i, (char)(ch+0xCE70));
                 continue;
@@ -620,114 +731,8 @@ public class StringUtil {
                 case 0x2193: sbhw.setCharAt(i, (char)0xFFEC); break;
                 case 0x25A0: sbhw.setCharAt(i, (char)0xFFED); break;
                 case 0x25CB: sbhw.setCharAt(i, (char)0xFFEE); break;
-                // Half width Katakana
-                case 0xFF61: sbfw.setCharAt(i, (char)0x3002); break;
-                case 0xFF62: sbfw.setCharAt(i, (char)0x300C); break;
-                case 0xFF63: sbfw.setCharAt(i, (char)0x300D); break;
-                case 0xFF64: sbfw.setCharAt(i, (char)0x3001); break;
-                case 0xFF65: sbfw.setCharAt(i, (char)0x30FB); break;
-                case 0xFF66: sbfw.setCharAt(i, (char)0x30F2); break;
-                case 0xFF67: sbfw.setCharAt(i, (char)0x30A1); break;
-                case 0xFF68: sbfw.setCharAt(i, (char)0x30A3); break;
-                case 0xFF69: sbfw.setCharAt(i, (char)0x30A5); break;
-                case 0xFF6A: sbfw.setCharAt(i, (char)0x30A7); break;
-                case 0xFF6B: sbfw.setCharAt(i, (char)0x30A9); break;
-                case 0xFF6C: sbfw.setCharAt(i, (char)0x30E3); break;
-                case 0xFF6D: sbfw.setCharAt(i, (char)0x30E5); break;
-                case 0xFF6E: sbfw.setCharAt(i, (char)0x30E7); break;
-                case 0xFF6F: sbfw.setCharAt(i, (char)0x30C3); break;
-                case 0xFF70: sbfw.setCharAt(i, (char)0x30FC); break;
-                case 0xFF71: sbfw.setCharAt(i, (char)0x30A2); break;
-                case 0xFF72: sbfw.setCharAt(i, (char)0x30A4); break;
-                case 0xFF73: sbfw.setCharAt(i, (char)0x30A6); break;
-                case 0xFF74: sbfw.setCharAt(i, (char)0x30A8); break;
-                case 0xFF75: sbfw.setCharAt(i, (char)0x30AA); break;
-                case 0xFF76: sbfw.setCharAt(i, (char)0x30AB); break;
-                case 0xFF77: sbfw.setCharAt(i, (char)0x30AD); break;
-                case 0xFF78: sbfw.setCharAt(i, (char)0x30AF); break;
-                case 0xFF79: sbfw.setCharAt(i, (char)0x30B1); break;
-                case 0xFF7A: sbfw.setCharAt(i, (char)0x30B3); break;
-                case 0xFF7B: sbfw.setCharAt(i, (char)0x30B5); break;
-                case 0xFF7C: sbfw.setCharAt(i, (char)0x30B7); break;
-                case 0xFF7D: sbfw.setCharAt(i, (char)0x30B9); break;
-                case 0xFF7E: sbfw.setCharAt(i, (char)0x30BB); break;
-                case 0xFF7F: sbfw.setCharAt(i, (char)0x30BD); break;
-                case 0xFF80: sbfw.setCharAt(i, (char)0x30BF); break;
-                case 0xFF81: sbfw.setCharAt(i, (char)0x30C1); break;
-                case 0xFF82: sbfw.setCharAt(i, (char)0x30C4); break;
-                case 0xFF83: sbfw.setCharAt(i, (char)0x30C6); break;
-                case 0xFF84: sbfw.setCharAt(i, (char)0x30C8); break;
-                case 0xFF85: sbfw.setCharAt(i, (char)0x30CA); break;
-                case 0xFF86: sbfw.setCharAt(i, (char)0x30CB); break;
-                case 0xFF87: sbfw.setCharAt(i, (char)0x30CC); break;
-                case 0xFF88: sbfw.setCharAt(i, (char)0x30CD); break;
-                case 0xFF89: sbfw.setCharAt(i, (char)0x30CE); break;
-                case 0xFF8A: sbfw.setCharAt(i, (char)0x30CF); break;
-                case 0xFF8B: sbfw.setCharAt(i, (char)0x30D2); break;
-                case 0xFF8C: sbfw.setCharAt(i, (char)0x30D5); break;
-                case 0xFF8D: sbfw.setCharAt(i, (char)0x30D8); break;
-                case 0xFF8E: sbfw.setCharAt(i, (char)0x30DB); break;
-                case 0xFF8F: sbfw.setCharAt(i, (char)0x30DE); break;
-                case 0xFF90: sbfw.setCharAt(i, (char)0x30DF); break;
-                case 0xFF91: sbfw.setCharAt(i, (char)0x30E0); break;
-                case 0xFF92: sbfw.setCharAt(i, (char)0x30E1); break;
-                case 0xFF93: sbfw.setCharAt(i, (char)0x30E2); break;
-                case 0xFF94: sbfw.setCharAt(i, (char)0x30E4); break;
-                case 0xFF95: sbfw.setCharAt(i, (char)0x30E6); break;
-                case 0xFF96: sbfw.setCharAt(i, (char)0x30E8); break;
-                case 0xFF97: sbfw.setCharAt(i, (char)0x30E9); break;
-                case 0xFF98: sbfw.setCharAt(i, (char)0x30EA); break;
-                case 0xFF99: sbfw.setCharAt(i, (char)0x30EB); break;
-                case 0xFF9A: sbfw.setCharAt(i, (char)0x30EC); break;
-                case 0xFF9B: sbfw.setCharAt(i, (char)0x30ED); break;
-                case 0xFF9C: sbfw.setCharAt(i, (char)0x30EF); break;
-                case 0xFF9D: sbfw.setCharAt(i, (char)0x30F3); break;
-                case 0xFF9E: sbfw.setCharAt(i, (char)0x3099); break;
-                case 0xFF9F: sbfw.setCharAt(i, (char)0x309A); break;
-                // Half width Hangul
-                case 0xFFA0: sbfw.setCharAt(i, (char)0x3164); break;
-                case 0xFFDA: sbfw.setCharAt(i, (char)0x3161); break;
-                case 0xFFDB: sbfw.setCharAt(i, (char)0x3162); break;
-                case 0xFFDC: sbfw.setCharAt(i, (char)0x3163); break;
-                // Others
-                case 0xFFE8: sbfw.setCharAt(i, (char)0x2502); break;
-                case 0xFFE9: sbfw.setCharAt(i, (char)0x2190); break;
-                case 0xFFEA: sbfw.setCharAt(i, (char)0x2191); break;
-                case 0xFFEB: sbfw.setCharAt(i, (char)0x2192); break;
-                case 0xFFEC: sbfw.setCharAt(i, (char)0x2193); break;
-                case 0xFFED: sbfw.setCharAt(i, (char)0x25A0); break;
-                case 0xFFEE: sbfw.setCharAt(i, (char)0x25CB); break;
             }
         }
-        // whether we have a character to be converted.
-        if ( sbhw.toString().equals(sbfw.toString()) ) {
-            return text;
-        }
-        // Create regex
-        StringBuilder sb = new StringBuilder("(");
-        sb.append(escapeRegexChars(sbhw.toString()));
-        sb.append("|");
-        sb.append(sbfw);
-        sb.append(")");
-        return sb.toString();
-    }
-
-    public static String escapeRegexChars(String text) {
-        final String REGEX_CHARS = "()|&.{}\\+*";
-        boolean hasRegex = false;
-        StringBuilder sb = new StringBuilder(text);
-        for (int i = 0; i < sb.length(); i++ ) {
-            int ch = sb.codePointAt(i);
-            if (REGEX_CHARS.indexOf((char)ch) >= 0) {
-                sb.insert(i, "\\");
-                hasRegex = true;
-                i++;
-            }
-        }
-        if (hasRegex) {
-            return sb.toString();
-        }
-        sb = null;
-        return text;
+        return sbhw.toString();
     }
 }

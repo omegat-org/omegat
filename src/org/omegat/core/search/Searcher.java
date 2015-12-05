@@ -185,7 +185,19 @@ public class Searcher {
 
             // handle half-width and full-width character insensitive match
             if (expression.fullHalfWidthInsensitive) {
-                text = StringUtil.fullHalfWidthMatchExpression(text);
+                if (StringUtil.containsFullWidthExpression(text)) {
+                    // create a matcher for the full/half width search strings
+                    String full = StringUtil.getFullWidthText(text);
+                    String half = StringUtil.getHalfWidthText(text);
+                    // half can contain regex character generated from full-width character
+                    half = StaticUtils.escapeNonRegex(half, false);
+                    StringBuilder sb = new StringBuilder(half);
+                    sb.insert(0, "(");
+                    sb.append("|");
+                    sb.append(full);
+                    sb.append(")");
+                    text = sb.toString();
+                }
             }
 
             // create a matcher for the search string

@@ -238,18 +238,26 @@ public class StringUtilTest extends TestCase {
         assertSame(text, StringUtil.matchCapitalization(text, "bAzZ", locale));
     }
 
-    public void testFullHalfWidthMatchExpression() {
+    public void testContainsFullWidthExpression() {
         String text = "abc";
-        assertEquals("(abc|\uff41\uff42\uff43)", StringUtil.fullHalfWidthMatchExpression(text));
-        text = "";
-        assertSame(text, StringUtil.fullHalfWidthMatchExpression(text));
+        assertTrue(StringUtil.containsFullWidthExpression(text));
         text = "\u1000";
-        assertSame(text, StringUtil.fullHalfWidthMatchExpression(text));
+        assertFalse(StringUtil.containsFullWidthExpression(text));
+        text = "\uff41\uff42\uff43";
+        assertTrue(StringUtil.containsFullWidthExpression(text));
     }
 
-    public void testEscapeRegexChars() {
+    public void testGetHalfWidthText() {
+        String text = "\uff41\uff42\uff43";
+        assertEquals("abc", StringUtil.getHalfWidthText(text));
+        text = "\u1000";
+        assertEquals(text, StringUtil.getHalfWidthText(text));
+    }
+
+    public void testGetFullWidthText() {
         String text = "abc";
-        assertSame(text, StringUtil.escapeRegexChars(text));
-        assertEquals("\\(abc\\)", StringUtil.escapeRegexChars("(abc)"));
+        assertEquals("\uff41\uff42\uff43", StringUtil.getFullWidthText(text));
+        text = "\u1000";
+        assertEquals(text, StringUtil.getFullWidthText(text));
     }
 }

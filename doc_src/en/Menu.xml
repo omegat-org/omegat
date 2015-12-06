@@ -589,7 +589,8 @@
 
               <entry/>
 
-              <entry>Deletes the translation and set the segment as untranslated.</entry>
+              <entry>Deletes the translation and set the segment as
+              untranslated.</entry>
             </row>
 
             <row>
@@ -597,9 +598,9 @@
 
               <entry/>
 
-              <entry>Define the translation as being empty. In the target document,
-              nothing will appear for this segment. In the Editor, the translation is
-              displayed as &lt;EMPTY&gt;</entry>
+              <entry>Define the translation as being empty. In the target
+              document, nothing will appear for this segment. In the Editor,
+              the translation is displayed as &lt;EMPTY&gt;</entry>
             </row>
 
             <row>
@@ -711,8 +712,8 @@
                   <keycap>J</keycap>
                 </keycombo></entry>
 
-              <entry>The segment is opened when its segment number is
-              entered.</entry>
+              <entry>The segment is opened when either its segment call-out or
+              segment number is entered.</entry>
             </row>
 
             <row>
@@ -862,8 +863,9 @@
               <entry><guimenuitem>Mark Bidirectional Algorithm Control
               Characters</guimenuitem></entry>
 
-              <entry>This option displays <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">bidirectional control characters</ulink>
-              </entry>
+              <entry>This option displays <ulink
+              url="http://www.w3.org/International/questions/qa-bidi-controls">bidirectional
+              control characters</ulink></entry>
             </row>
 
             <row>
@@ -874,11 +876,13 @@
               target segment has been auto-populated (from TMXs placed in
               /tm/auto for example) are displayed in colour. The colours are
               displayed as long as the "Save auto-populated status" (in
-              Options/Editing behaviour..) option is checked. Usual translations
-              inserted from the auto folder are displayed in orange. Other translations,
-              identified specifically in the TMX, can be displayed using different colours.
-              For technical details, see the 
-              <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Request For Enhancement</ulink></entry>
+              Options/Editing behaviour..) option is checked. Usual
+              translations inserted from the auto folder are displayed in
+              orange. Other translations, identified specifically in the TMX,
+              can be displayed using different colours. For technical details,
+              see the <ulink
+              url="http://sourceforge.net/p/omegat/feature-requests/963/">Request
+              For Enhancement</ulink></entry>
             </row>
 
             <row>
@@ -977,10 +981,9 @@
             <row>
               <entry><guimenuitem>Scripting...</guimenuitem></entry>
 
-              <entry>Opens a dialog box where the location of scripts
-              can be set, and where scripts can be written, run and associated
-              with a shortcut (see <link
-              linkend="appendix.Scripts.inOmegaT">Scripts
+              <entry>Opens a dialog box where the location of scripts can be
+              set, and where scripts can be written, run and associated with a
+              shortcut (see <link linkend="appendix.Scripts.inOmegaT">Scripts
               window</link>)</entry>
             </row>
           </tbody>
@@ -1036,9 +1039,9 @@
               <entry>The <guimenuitem>Display Context Description for TBX
               Glossaries</guimenuitem> option allows to show or hide
               contextual information with the terms (that come from TBX
-              glossaries located in <filename>glossary</filename> folder)
-              in the Glossary pane.<para>The 3 other options are described in
-              the specific page concerning <link
+              glossaries located in <filename>glossary</filename> folder) in
+              the Glossary pane.<para>The 3 other options are described in the
+              specific page concerning <link
               linkend="section.TaaS.options">TaaS</link> (Terminology as a
               Service).</para></entry>
             </row>
@@ -1082,8 +1085,8 @@
               <entry><guimenuitem>Custom colours...</guimenuitem></entry>
 
               <entry><para>Allows you to choose different colours for each
-              part of the User Interface.</para>Pre-defined themes can be set through
-              a script. A default script called Switch Colour Themes
+              part of the User Interface.</para>Pre-defined themes can be set
+              through a script. A default script called Switch Colour Themes
               provides a default "Dark".</entry>
             </row>
 
@@ -1140,9 +1143,9 @@
               <entry>Allows the user decide, how tags in foreign TMX files
               (i.e. not generated by OmegaT) are to be treated.<para>The fuzzy
               matches can be also sorted in different ways (for displaying
-              only; no influence on statistics). The Match Display Template area
-              also allows changing how fuzzy matches are displayed, through the use
-              of pre-configured variables.</para></entry>
+              only; no influence on statistics). The Match Display Template
+              area also allows changing how fuzzy matches are displayed,
+              through the use of pre-configured variables.</para></entry>
             </row>
 
             <row>
@@ -1183,8 +1186,8 @@
             <row>
               <entry><guimenuitem>Language Checker</guimenuitem></entry>
 
-              <entry>When selected, LanguageTool checks the translations, and underline
-              potential issues in blue.</entry>
+              <entry>When selected, LanguageTool checks the translations, and
+              underline potential issues in blue.</entry>
             </row>
           </tbody>
         </tgroup>

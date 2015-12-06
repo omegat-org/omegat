@@ -315,7 +315,8 @@
     <section id="which.package.to.download.OSX">
       <title>Downloading the package</title>
 
-      <para><application>OmegaT</application> contains the Java JRE 1.7</para>
+      <para><application>OmegaT</application> contains the Java JRE
+      1.8.0_31</para>
 
       <para>Download <emphasis>OmegaT_3.n.n_Mac.zip.</emphasis></para>
     </section>
@@ -635,10 +636,9 @@
       this command involve the addition of "arguments" to it. Arguments are
       added after the initial <emphasis>"java"</emphasis>, and before the
       <emphasis>"-jar <application>OmegaT</application>.jar"</emphasis>. Note
-      that in Windows you can change the
-      <filename>OmegaT.l4J.ini</filename> file to
-      reflect your preferences. In other platforms, you can modify your 
-      launcher (e.g., <filename>OmegaT.sh</filename> on the Mac, 
+      that in Windows you can change the <filename>OmegaT.l4J.ini</filename>
+      file to reflect your preferences. In other platforms, you can modify
+      your launcher (e.g., <filename>OmegaT.sh</filename> on the Mac,
       <filename>OmegaT</filename> under Linux) to do the same.</para>
 
       <para>A list of possible arguments is given below. Advanced users can
@@ -796,7 +796,8 @@
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Yandex Translate</emphasis><indexterm class="singular">
+          <para><emphasis role="bold">Yandex Translate</emphasis><indexterm
+              class="singular">
               <primary>Running OmegaT</primary>
 
               <secondary>Launch script arguments</secondary>
@@ -806,15 +807,15 @@
 
           <para>Make sure that you have a free Yandex account. You’ll need
           this to be able to obtain and use Yandex Translate API key. API keys
-          can be requested using <ulink url="http://api.yandex.com/key/form.xml?service=trnsl">API key request form</ulink>,
-          and viewed on <ulink url="http://api.yandex.com/key/keyslist.xml">My Keys</ulink> page.
-          </para>
+          can be requested using <ulink
+          url="http://api.yandex.com/key/form.xml?service=trnsl">API key
+          request form</ulink>, and viewed on <ulink
+          url="http://api.yandex.com/key/keyslist.xml">My Keys</ulink>
+          page.</para>
 
-          <para><emphasis
-          role="bold">-Dyandex.api.key=</emphasis><emphasis
+          <para><emphasis role="bold">-Dyandex.api.key=</emphasis><emphasis
           role="bold">trnsl.1.1.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</emphasis></para>
         </listitem>
-
       </itemizedlist>
 
       <para>Arguments can be combined: to launch

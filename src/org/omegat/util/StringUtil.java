@@ -527,196 +527,196 @@ public class StringUtil {
         StringBuilder sb = new StringBuilder(text);
         StringBuilder result = new StringBuilder();
 
-        for (int i = 0; i < sb.length(); i++ ) {
-            int ch = sb.codePointAt(i);
+        for (int cp, i = 0; i < sb.length(); i += Character.charCount(cp) ) {
+            cp = sb.codePointAt(i);
             // ASCII
-            if (( ch >= 0x0021 ) && ( ch <= 0x007E )) {
-                result.append(genFullHalfMatchRegex(quote(ch), (char)(ch+0xFEE0)));
+            if (( cp >= 0x0021 ) && ( cp <= 0x007E )) {
+                result.append(genFullHalfMatchRegex(quote(cp), (char)(cp+0xFEE0)));
                 continue;
             }
             // Half width Hangul
-            if (( ch > 0xFFA1 ) && ( ch <= 0xFFBE )) {
-                result.append(genFullHalfMatchRegex((char)ch, (char)(ch-0xCE70)));
+            if (( cp > 0xFFA1 ) && ( cp <= 0xFFBE )) {
+                result.append(genFullHalfMatchRegex((char)cp, (char)(cp-0xCE70)));
                 continue;
             }
             // Full width alphabet
-            if (0xff01 <  ch &&  ch < 0xff5e) {
-                result.append(genFullHalfMatchRegex((char)ch, quote(ch-0xFEE0)));
+            if (0xff01 <  cp &&  cp < 0xff5e) {
+                result.append(genFullHalfMatchRegex((char)cp, quote(cp-0xFEE0)));
                 continue;
             }
             // Full width Hangul
-            if (( ch > 0x3131 ) && ( ch <= 0x314E )) {
-                result.append(genFullHalfMatchRegex((char)ch, (char)(ch+0xCE70)));
+            if (( cp > 0x3131 ) && ( cp <= 0x314E )) {
+                result.append(genFullHalfMatchRegex((char)cp, (char)(cp+0xCE70)));
                 continue;
             }
-            switch ( ch ) {
+            switch ( cp ) {
                 // space
-                case 0x0020: result.append(genFullHalfMatchRegex((char)ch, (char)0x3000)); break;
+                case 0x0020: result.append(genFullHalfMatchRegex((char)cp, (char)0x3000)); break;
                 // Half width Katakana
-                case 0xFF61: result.append(genFullHalfMatchRegex((char)ch, (char)0x3002)); break;
-                case 0xFF62: result.append(genFullHalfMatchRegex((char)ch, (char)0x300C)); break;
-                case 0xFF63: result.append(genFullHalfMatchRegex((char)ch, (char)0x300D)); break;
-                case 0xFF64: result.append(genFullHalfMatchRegex((char)ch, (char)0x3001)); break;
-                case 0xFF65: result.append(genFullHalfMatchRegex((char)ch, (char)0x30FB)); break;
-                case 0xFF66: result.append(genFullHalfMatchRegex((char)ch, (char)0x30F2)); break;
-                case 0xFF67: result.append(genFullHalfMatchRegex((char)ch, (char)0x30A1)); break;
-                case 0xFF68: result.append(genFullHalfMatchRegex((char)ch, (char)0x30A3)); break;
-                case 0xFF69: result.append(genFullHalfMatchRegex((char)ch, (char)0x30A5)); break;
-                case 0xFF6A: result.append(genFullHalfMatchRegex((char)ch, (char)0x30A7)); break;
-                case 0xFF6B: result.append(genFullHalfMatchRegex((char)ch, (char)0x30A9)); break;
-                case 0xFF6C: result.append(genFullHalfMatchRegex((char)ch, (char)0x30E3)); break;
-                case 0xFF6D: result.append(genFullHalfMatchRegex((char)ch, (char)0x30E5)); break;
-                case 0xFF6E: result.append(genFullHalfMatchRegex((char)ch, (char)0x30E7)); break;
-                case 0xFF6F: result.append(genFullHalfMatchRegex((char)ch, (char)0x30C3)); break;
-                case 0xFF70: result.append(genFullHalfMatchRegex((char)ch, (char)0x30FC)); break;
-                case 0xFF71: result.append(genFullHalfMatchRegex((char)ch, (char)0x30A2)); break;
-                case 0xFF72: result.append(genFullHalfMatchRegex((char)ch, (char)0x30A4)); break;
-                case 0xFF73: result.append(genFullHalfMatchRegex((char)ch, (char)0x30A6)); break;
-                case 0xFF74: result.append(genFullHalfMatchRegex((char)ch, (char)0x30A8)); break;
-                case 0xFF75: result.append(genFullHalfMatchRegex((char)ch, (char)0x30AA)); break;
-                case 0xFF76: result.append(genFullHalfMatchRegex((char)ch, (char)0x30AB)); break;
-                case 0xFF77: result.append(genFullHalfMatchRegex((char)ch, (char)0x30AD)); break;
-                case 0xFF78: result.append(genFullHalfMatchRegex((char)ch, (char)0x30AF)); break;
-                case 0xFF79: result.append(genFullHalfMatchRegex((char)ch, (char)0x30B1)); break;
-                case 0xFF7A: result.append(genFullHalfMatchRegex((char)ch, (char)0x30B3)); break;
-                case 0xFF7B: result.append(genFullHalfMatchRegex((char)ch, (char)0x30B5)); break;
-                case 0xFF7C: result.append(genFullHalfMatchRegex((char)ch, (char)0x30B7)); break;
-                case 0xFF7D: result.append(genFullHalfMatchRegex((char)ch, (char)0x30B9)); break;
-                case 0xFF7E: result.append(genFullHalfMatchRegex((char)ch, (char)0x30BB)); break;
-                case 0xFF7F: result.append(genFullHalfMatchRegex((char)ch, (char)0x30BD)); break;
-                case 0xFF80: result.append(genFullHalfMatchRegex((char)ch, (char)0x30BF)); break;
-                case 0xFF81: result.append(genFullHalfMatchRegex((char)ch, (char)0x30C1)); break;
-                case 0xFF82: result.append(genFullHalfMatchRegex((char)ch, (char)0x30C4)); break;
-                case 0xFF83: result.append(genFullHalfMatchRegex((char)ch, (char)0x30C6)); break;
-                case 0xFF84: result.append(genFullHalfMatchRegex((char)ch, (char)0x30C8)); break;
-                case 0xFF85: result.append(genFullHalfMatchRegex((char)ch, (char)0x30CA)); break;
-                case 0xFF86: result.append(genFullHalfMatchRegex((char)ch, (char)0x30CB)); break;
-                case 0xFF87: result.append(genFullHalfMatchRegex((char)ch, (char)0x30CC)); break;
-                case 0xFF88: result.append(genFullHalfMatchRegex((char)ch, (char)0x30CD)); break;
-                case 0xFF89: result.append(genFullHalfMatchRegex((char)ch, (char)0x30CE)); break;
-                case 0xFF8A: result.append(genFullHalfMatchRegex((char)ch, (char)0x30CF)); break;
-                case 0xFF8B: result.append(genFullHalfMatchRegex((char)ch, (char)0x30D2)); break;
-                case 0xFF8C: result.append(genFullHalfMatchRegex((char)ch, (char)0x30D5)); break;
-                case 0xFF8D: result.append(genFullHalfMatchRegex((char)ch, (char)0x30D8)); break;
-                case 0xFF8E: result.append(genFullHalfMatchRegex((char)ch, (char)0x30DB)); break;
-                case 0xFF8F: result.append(genFullHalfMatchRegex((char)ch, (char)0x30DE)); break;
-                case 0xFF90: result.append(genFullHalfMatchRegex((char)ch, (char)0x30DF)); break;
-                case 0xFF91: result.append(genFullHalfMatchRegex((char)ch, (char)0x30E0)); break;
-                case 0xFF92: result.append(genFullHalfMatchRegex((char)ch, (char)0x30E1)); break;
-                case 0xFF93: result.append(genFullHalfMatchRegex((char)ch, (char)0x30E2)); break;
-                case 0xFF94: result.append(genFullHalfMatchRegex((char)ch, (char)0x30E4)); break;
-                case 0xFF95: result.append(genFullHalfMatchRegex((char)ch, (char)0x30E6)); break;
-                case 0xFF96: result.append(genFullHalfMatchRegex((char)ch, (char)0x30E8)); break;
-                case 0xFF97: result.append(genFullHalfMatchRegex((char)ch, (char)0x30E9)); break;
-                case 0xFF98: result.append(genFullHalfMatchRegex((char)ch, (char)0x30EA)); break;
-                case 0xFF99: result.append(genFullHalfMatchRegex((char)ch, (char)0x30EB)); break;
-                case 0xFF9A: result.append(genFullHalfMatchRegex((char)ch, (char)0x30EC)); break;
-                case 0xFF9B: result.append(genFullHalfMatchRegex((char)ch, (char)0x30ED)); break;
-                case 0xFF9C: result.append(genFullHalfMatchRegex((char)ch, (char)0x30EF)); break;
-                case 0xFF9D: result.append(genFullHalfMatchRegex((char)ch, (char)0x30F3)); break;
-                case 0xFF9E: result.append(genFullHalfMatchRegex((char)ch, (char)0x3099)); break;
-                case 0xFF9F: result.append(genFullHalfMatchRegex((char)ch, (char)0x309A)); break;
+                case 0xFF61: result.append(genFullHalfMatchRegex((char)cp, (char)0x3002)); break;
+                case 0xFF62: result.append(genFullHalfMatchRegex((char)cp, (char)0x300C)); break;
+                case 0xFF63: result.append(genFullHalfMatchRegex((char)cp, (char)0x300D)); break;
+                case 0xFF64: result.append(genFullHalfMatchRegex((char)cp, (char)0x3001)); break;
+                case 0xFF65: result.append(genFullHalfMatchRegex((char)cp, (char)0x30FB)); break;
+                case 0xFF66: result.append(genFullHalfMatchRegex((char)cp, (char)0x30F2)); break;
+                case 0xFF67: result.append(genFullHalfMatchRegex((char)cp, (char)0x30A1)); break;
+                case 0xFF68: result.append(genFullHalfMatchRegex((char)cp, (char)0x30A3)); break;
+                case 0xFF69: result.append(genFullHalfMatchRegex((char)cp, (char)0x30A5)); break;
+                case 0xFF6A: result.append(genFullHalfMatchRegex((char)cp, (char)0x30A7)); break;
+                case 0xFF6B: result.append(genFullHalfMatchRegex((char)cp, (char)0x30A9)); break;
+                case 0xFF6C: result.append(genFullHalfMatchRegex((char)cp, (char)0x30E3)); break;
+                case 0xFF6D: result.append(genFullHalfMatchRegex((char)cp, (char)0x30E5)); break;
+                case 0xFF6E: result.append(genFullHalfMatchRegex((char)cp, (char)0x30E7)); break;
+                case 0xFF6F: result.append(genFullHalfMatchRegex((char)cp, (char)0x30C3)); break;
+                case 0xFF70: result.append(genFullHalfMatchRegex((char)cp, (char)0x30FC)); break;
+                case 0xFF71: result.append(genFullHalfMatchRegex((char)cp, (char)0x30A2)); break;
+                case 0xFF72: result.append(genFullHalfMatchRegex((char)cp, (char)0x30A4)); break;
+                case 0xFF73: result.append(genFullHalfMatchRegex((char)cp, (char)0x30A6)); break;
+                case 0xFF74: result.append(genFullHalfMatchRegex((char)cp, (char)0x30A8)); break;
+                case 0xFF75: result.append(genFullHalfMatchRegex((char)cp, (char)0x30AA)); break;
+                case 0xFF76: result.append(genFullHalfMatchRegex((char)cp, (char)0x30AB)); break;
+                case 0xFF77: result.append(genFullHalfMatchRegex((char)cp, (char)0x30AD)); break;
+                case 0xFF78: result.append(genFullHalfMatchRegex((char)cp, (char)0x30AF)); break;
+                case 0xFF79: result.append(genFullHalfMatchRegex((char)cp, (char)0x30B1)); break;
+                case 0xFF7A: result.append(genFullHalfMatchRegex((char)cp, (char)0x30B3)); break;
+                case 0xFF7B: result.append(genFullHalfMatchRegex((char)cp, (char)0x30B5)); break;
+                case 0xFF7C: result.append(genFullHalfMatchRegex((char)cp, (char)0x30B7)); break;
+                case 0xFF7D: result.append(genFullHalfMatchRegex((char)cp, (char)0x30B9)); break;
+                case 0xFF7E: result.append(genFullHalfMatchRegex((char)cp, (char)0x30BB)); break;
+                case 0xFF7F: result.append(genFullHalfMatchRegex((char)cp, (char)0x30BD)); break;
+                case 0xFF80: result.append(genFullHalfMatchRegex((char)cp, (char)0x30BF)); break;
+                case 0xFF81: result.append(genFullHalfMatchRegex((char)cp, (char)0x30C1)); break;
+                case 0xFF82: result.append(genFullHalfMatchRegex((char)cp, (char)0x30C4)); break;
+                case 0xFF83: result.append(genFullHalfMatchRegex((char)cp, (char)0x30C6)); break;
+                case 0xFF84: result.append(genFullHalfMatchRegex((char)cp, (char)0x30C8)); break;
+                case 0xFF85: result.append(genFullHalfMatchRegex((char)cp, (char)0x30CA)); break;
+                case 0xFF86: result.append(genFullHalfMatchRegex((char)cp, (char)0x30CB)); break;
+                case 0xFF87: result.append(genFullHalfMatchRegex((char)cp, (char)0x30CC)); break;
+                case 0xFF88: result.append(genFullHalfMatchRegex((char)cp, (char)0x30CD)); break;
+                case 0xFF89: result.append(genFullHalfMatchRegex((char)cp, (char)0x30CE)); break;
+                case 0xFF8A: result.append(genFullHalfMatchRegex((char)cp, (char)0x30CF)); break;
+                case 0xFF8B: result.append(genFullHalfMatchRegex((char)cp, (char)0x30D2)); break;
+                case 0xFF8C: result.append(genFullHalfMatchRegex((char)cp, (char)0x30D5)); break;
+                case 0xFF8D: result.append(genFullHalfMatchRegex((char)cp, (char)0x30D8)); break;
+                case 0xFF8E: result.append(genFullHalfMatchRegex((char)cp, (char)0x30DB)); break;
+                case 0xFF8F: result.append(genFullHalfMatchRegex((char)cp, (char)0x30DE)); break;
+                case 0xFF90: result.append(genFullHalfMatchRegex((char)cp, (char)0x30DF)); break;
+                case 0xFF91: result.append(genFullHalfMatchRegex((char)cp, (char)0x30E0)); break;
+                case 0xFF92: result.append(genFullHalfMatchRegex((char)cp, (char)0x30E1)); break;
+                case 0xFF93: result.append(genFullHalfMatchRegex((char)cp, (char)0x30E2)); break;
+                case 0xFF94: result.append(genFullHalfMatchRegex((char)cp, (char)0x30E4)); break;
+                case 0xFF95: result.append(genFullHalfMatchRegex((char)cp, (char)0x30E6)); break;
+                case 0xFF96: result.append(genFullHalfMatchRegex((char)cp, (char)0x30E8)); break;
+                case 0xFF97: result.append(genFullHalfMatchRegex((char)cp, (char)0x30E9)); break;
+                case 0xFF98: result.append(genFullHalfMatchRegex((char)cp, (char)0x30EA)); break;
+                case 0xFF99: result.append(genFullHalfMatchRegex((char)cp, (char)0x30EB)); break;
+                case 0xFF9A: result.append(genFullHalfMatchRegex((char)cp, (char)0x30EC)); break;
+                case 0xFF9B: result.append(genFullHalfMatchRegex((char)cp, (char)0x30ED)); break;
+                case 0xFF9C: result.append(genFullHalfMatchRegex((char)cp, (char)0x30EF)); break;
+                case 0xFF9D: result.append(genFullHalfMatchRegex((char)cp, (char)0x30F3)); break;
+                case 0xFF9E: result.append(genFullHalfMatchRegex((char)cp, (char)0x3099)); break;
+                case 0xFF9F: result.append(genFullHalfMatchRegex((char)cp, (char)0x309A)); break;
                 // Half width Hangul
-                case 0xFFA0: result.append(genFullHalfMatchRegex((char)ch, (char)0x3164)); break;
-                case 0xFFDA: result.append(genFullHalfMatchRegex((char)ch, (char)0x3161)); break;
-                case 0xFFDB: result.append(genFullHalfMatchRegex((char)ch, (char)0x3162)); break;
-                case 0xFFDC: result.append(genFullHalfMatchRegex((char)ch, (char)0x3163)); break;
+                case 0xFFA0: result.append(genFullHalfMatchRegex((char)cp, (char)0x3164)); break;
+                case 0xFFDA: result.append(genFullHalfMatchRegex((char)cp, (char)0x3161)); break;
+                case 0xFFDB: result.append(genFullHalfMatchRegex((char)cp, (char)0x3162)); break;
+                case 0xFFDC: result.append(genFullHalfMatchRegex((char)cp, (char)0x3163)); break;
                 // Others
-                case 0xFFE8: result.append(genFullHalfMatchRegex((char)ch, (char)0x2502)); break;
-                case 0xFFE9: result.append(genFullHalfMatchRegex((char)ch, (char)0x2190)); break;
-                case 0xFFEA: result.append(genFullHalfMatchRegex((char)ch, (char)0x2191)); break;
-                case 0xFFEB: result.append(genFullHalfMatchRegex((char)ch, (char)0x2192)); break;
-                case 0xFFEC: result.append(genFullHalfMatchRegex((char)ch, (char)0x2193)); break;
-                case 0xFFED: result.append(genFullHalfMatchRegex((char)ch, (char)0x25A0)); break;
-                case 0xFFEE: result.append(genFullHalfMatchRegex((char)ch, (char)0x25CB)); break;
+                case 0xFFE8: result.append(genFullHalfMatchRegex((char)cp, (char)0x2502)); break;
+                case 0xFFE9: result.append(genFullHalfMatchRegex((char)cp, (char)0x2190)); break;
+                case 0xFFEA: result.append(genFullHalfMatchRegex((char)cp, (char)0x2191)); break;
+                case 0xFFEB: result.append(genFullHalfMatchRegex((char)cp, (char)0x2192)); break;
+                case 0xFFEC: result.append(genFullHalfMatchRegex((char)cp, (char)0x2193)); break;
+                case 0xFFED: result.append(genFullHalfMatchRegex((char)cp, (char)0x25A0)); break;
+                case 0xFFEE: result.append(genFullHalfMatchRegex((char)cp, (char)0x25CB)); break;
                 // Full width space
-                case 0x3000: result.append(genFullHalfMatchRegex((char)ch, (char)0x0020)); break;
+                case 0x3000: result.append(genFullHalfMatchRegex((char)cp, (char)0x0020)); break;
                 // Katakana to half width
-                case 0x3002: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF61)); break;
-                case 0x300C: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF62)); break;
-                case 0x300D: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF63)); break;
-                case 0x3001: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF64)); break;
-                case 0x30FB: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF65)); break;
-                case 0x30F2: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF66)); break;
-                case 0x30A1: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF67)); break;
-                case 0x30A3: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF68)); break;
-                case 0x30A5: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF69)); break;
-                case 0x30A7: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF6A)); break;
-                case 0x30A9: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF6B)); break;
-                case 0x30E3: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF6C)); break;
-                case 0x30E5: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF6D)); break;
-                case 0x30E7: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF6E)); break;
-                case 0x30C3: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF6F)); break;
-                case 0x30FC: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF70)); break;
-                case 0x30A2: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF71)); break;
-                case 0x30A4: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF72)); break;
-                case 0x30A6: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF73)); break;
-                case 0x30A8: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF74)); break;
-                case 0x30AA: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF75)); break;
-                case 0x30AB: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF76)); break;
-                case 0x30AD: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF77)); break;
-                case 0x30AF: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF78)); break;
-                case 0x30B1: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF79)); break;
-                case 0x30B3: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF7A)); break;
-                case 0x30B5: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF7B)); break;
-                case 0x30B7: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF7C)); break;
-                case 0x30B9: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF7D)); break;
-                case 0x30BB: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF7E)); break;
-                case 0x30BD: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF7F)); break;
-                case 0x30BF: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF80)); break;
-                case 0x30C1: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF81)); break;
-                case 0x30C4: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF82)); break;
-                case 0x30C6: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF83)); break;
-                case 0x30C8: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF84)); break;
-                case 0x30CA: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF85)); break;
-                case 0x30CB: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF86)); break;
-                case 0x30CC: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF87)); break;
-                case 0x30CD: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF88)); break;
-                case 0x30CE: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF89)); break;
-                case 0x30CF: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF8A)); break;
-                case 0x30D2: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF8B)); break;
-                case 0x30D5: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF8C)); break;
-                case 0x30D8: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF8D)); break;
-                case 0x30DB: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF8E)); break;
-                case 0x30DE: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF8F)); break;
-                case 0x30DF: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF90)); break;
-                case 0x30E0: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF91)); break;
-                case 0x30E1: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF92)); break;
-                case 0x30E2: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF93)); break;
-                case 0x30E4: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF94)); break;
-                case 0x30E6: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF95)); break;
-                case 0x30E8: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF96)); break;
-                case 0x30E9: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF97)); break;
-                case 0x30EA: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF98)); break;
-                case 0x30EB: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF99)); break;
-                case 0x30EC: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF9A)); break;
-                case 0x30ED: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF9B)); break;
-                case 0x30EF: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF9C)); break;
-                case 0x30F3: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF9D)); break;
-                case 0x3099: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF9E)); break;
-                case 0x309A: result.append(genFullHalfMatchRegex((char)ch, (char)0xFF9F)); break;
+                case 0x3002: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF61)); break;
+                case 0x300C: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF62)); break;
+                case 0x300D: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF63)); break;
+                case 0x3001: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF64)); break;
+                case 0x30FB: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF65)); break;
+                case 0x30F2: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF66)); break;
+                case 0x30A1: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF67)); break;
+                case 0x30A3: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF68)); break;
+                case 0x30A5: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF69)); break;
+                case 0x30A7: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF6A)); break;
+                case 0x30A9: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF6B)); break;
+                case 0x30E3: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF6C)); break;
+                case 0x30E5: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF6D)); break;
+                case 0x30E7: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF6E)); break;
+                case 0x30C3: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF6F)); break;
+                case 0x30FC: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF70)); break;
+                case 0x30A2: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF71)); break;
+                case 0x30A4: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF72)); break;
+                case 0x30A6: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF73)); break;
+                case 0x30A8: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF74)); break;
+                case 0x30AA: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF75)); break;
+                case 0x30AB: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF76)); break;
+                case 0x30AD: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF77)); break;
+                case 0x30AF: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF78)); break;
+                case 0x30B1: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF79)); break;
+                case 0x30B3: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF7A)); break;
+                case 0x30B5: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF7B)); break;
+                case 0x30B7: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF7C)); break;
+                case 0x30B9: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF7D)); break;
+                case 0x30BB: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF7E)); break;
+                case 0x30BD: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF7F)); break;
+                case 0x30BF: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF80)); break;
+                case 0x30C1: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF81)); break;
+                case 0x30C4: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF82)); break;
+                case 0x30C6: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF83)); break;
+                case 0x30C8: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF84)); break;
+                case 0x30CA: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF85)); break;
+                case 0x30CB: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF86)); break;
+                case 0x30CC: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF87)); break;
+                case 0x30CD: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF88)); break;
+                case 0x30CE: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF89)); break;
+                case 0x30CF: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF8A)); break;
+                case 0x30D2: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF8B)); break;
+                case 0x30D5: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF8C)); break;
+                case 0x30D8: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF8D)); break;
+                case 0x30DB: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF8E)); break;
+                case 0x30DE: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF8F)); break;
+                case 0x30DF: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF90)); break;
+                case 0x30E0: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF91)); break;
+                case 0x30E1: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF92)); break;
+                case 0x30E2: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF93)); break;
+                case 0x30E4: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF94)); break;
+                case 0x30E6: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF95)); break;
+                case 0x30E8: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF96)); break;
+                case 0x30E9: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF97)); break;
+                case 0x30EA: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF98)); break;
+                case 0x30EB: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF99)); break;
+                case 0x30EC: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF9A)); break;
+                case 0x30ED: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF9B)); break;
+                case 0x30EF: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF9C)); break;
+                case 0x30F3: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF9D)); break;
+                case 0x3099: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF9E)); break;
+                case 0x309A: result.append(genFullHalfMatchRegex((char)cp, (char)0xFF9F)); break;
                 // Hangul
-                case 0x3164: result.append(genFullHalfMatchRegex((char)ch, (char)0xFFA0)); break;
-                case 0x3161: result.append(genFullHalfMatchRegex((char)ch, (char)0xFFDA)); break;
-                case 0x3162: result.append(genFullHalfMatchRegex((char)ch, (char)0xFFDB)); break;
-                case 0x3163: result.append(genFullHalfMatchRegex((char)ch, (char)0xFFDC)); break;
+                case 0x3164: result.append(genFullHalfMatchRegex((char)cp, (char)0xFFA0)); break;
+                case 0x3161: result.append(genFullHalfMatchRegex((char)cp, (char)0xFFDA)); break;
+                case 0x3162: result.append(genFullHalfMatchRegex((char)cp, (char)0xFFDB)); break;
+                case 0x3163: result.append(genFullHalfMatchRegex((char)cp, (char)0xFFDC)); break;
                 // Others
-                case 0x2502: result.append(genFullHalfMatchRegex((char)ch, (char)0xFFE8)); break;
-                case 0x2190: result.append(genFullHalfMatchRegex((char)ch, (char)0xFFE9)); break;
-                case 0x2191: result.append(genFullHalfMatchRegex((char)ch, (char)0xFFEA)); break;
-                case 0x2192: result.append(genFullHalfMatchRegex((char)ch, (char)0xFFEB)); break;
-                case 0x2193: result.append(genFullHalfMatchRegex((char)ch, (char)0xFFEC)); break;
-                case 0x25A0: result.append(genFullHalfMatchRegex((char)ch, (char)0xFFED)); break;
-                case 0x25CB: result.append(genFullHalfMatchRegex((char)ch, (char)0xFFEE)); break;
+                case 0x2502: result.append(genFullHalfMatchRegex((char)cp, (char)0xFFE8)); break;
+                case 0x2190: result.append(genFullHalfMatchRegex((char)cp, (char)0xFFE9)); break;
+                case 0x2191: result.append(genFullHalfMatchRegex((char)cp, (char)0xFFEA)); break;
+                case 0x2192: result.append(genFullHalfMatchRegex((char)cp, (char)0xFFEB)); break;
+                case 0x2193: result.append(genFullHalfMatchRegex((char)cp, (char)0xFFEC)); break;
+                case 0x25A0: result.append(genFullHalfMatchRegex((char)cp, (char)0xFFED)); break;
+                case 0x25CB: result.append(genFullHalfMatchRegex((char)cp, (char)0xFFEE)); break;
                 // No match, add ch
-                default: result.append(cp2str(ch)); break;
+                default: result.append(codePoint2String(cp)); break;
             }
         }
         return result.toString();
     }
 
-    public static String cp2str(int ch){
-        return new String(new int[]{ch},0,1);
+    public static String codePoint2String(int cp){
+        return new String(new int[]{cp},0,1);
     }
 
     /**
@@ -740,7 +740,7 @@ public class StringUtil {
         return new StringBuilder("(").append(a).append("|").append(b).append(")").toString();
     }
 
-    private static String quote(int ch) {
-        return StaticUtils.escapeNonRegex(cp2str(ch), false);
+    private static String quote(int cp) {
+        return StaticUtils.escapeNonRegex(codePoint2String(cp), false);
     }
 }

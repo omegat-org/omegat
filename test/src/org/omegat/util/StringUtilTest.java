@@ -249,12 +249,14 @@ public class StringUtilTest extends TestCase {
         assertEquals("(\u3000|\u0020)", StringUtil.createFullHalfMatchExpression(text));
         text = "\uff5c";
         assertEquals("(\uff5c|\\|)", StringUtil.createFullHalfMatchExpression(text));
+        text = "\ud840\udc0b\uff41";
+        assertEquals("\ud840\udc0b(\uff41|a)", StringUtil.createFullHalfMatchExpression(text));
     }
 
-    public void testCp2Str() {
-        int ch = 0xff11;
-        assertEquals("\uff11", StringUtil.cp2str(ch));
-        ch = 0x2000b;
-        assertEquals("\ud840\udc0b", StringUtil.cp2str(ch));
+    public void testCodePoint2String() {
+        int cp = 0xff11;
+        assertEquals("\uff11", StringUtil.codePoint2String(cp));
+        cp = 0x2000b;
+        assertEquals("\ud840\udc0b", StringUtil.codePoint2String(cp));
     }
 }

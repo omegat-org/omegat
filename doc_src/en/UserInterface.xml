@@ -885,7 +885,15 @@
 
       <para>The Project Files window lists the project files and displays
       other project information. It is displayed automatically when OmegaT
-      loads a project. Use <guimenuitem>Ctrl+L<indexterm class="singular">
+      loads a project.</para>
+
+      <para><remark>Note:</remark> it is possible to inhibit this Project
+      Files window displaying, by setting
+      <emphasis>project_files_show_on_load</emphasis> to
+      <emphasis>false</emphasis> in <filename>omegat.prefs</filename> file
+      (accessible by Options / Access Configuration Folder menu).</para>
+
+      <para>Use <guimenuitem>Ctrl+L<indexterm class="singular">
           <primary>Shortcuts</primary>
 
           <secondary>Project files list - Ctrl+L</secondary>

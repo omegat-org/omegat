@@ -79,7 +79,8 @@ public class SearchWindowMenu extends JMenuBar {
 
         item = fileMenu.add(new JMenuItem());
         Mnemonics.setLocalizedText(item, OStrings.getString("SW_FILE_MENU_CLOSE"));
-        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0));
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         item.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

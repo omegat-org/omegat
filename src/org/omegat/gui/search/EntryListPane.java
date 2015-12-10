@@ -102,11 +102,8 @@ class EntryListPane extends JTextPane {
     private static final int ENTRY_LIST_INDEX_END_OF_TEXT = -2;
 
     private static void bindKeyStrokesFromMainMenuShortcuts(InputMap map) {
-        PropertiesShortcuts shortcuts = new PropertiesShortcuts(
-                "/org/omegat/gui/main/MainMenuShortcuts.properties");
         // Add KeyStrokes Ctrl+N/P (Cmd+N/P for MacOS) to the map
-        shortcuts.bindKeyStrokes(
-                map,
+        PropertiesShortcuts.MainMenuShortcuts.bindKeyStrokes(map,
                 KEY_GO_TO_NEXT_SEGMENT, KEY_GO_TO_PREVIOUS_SEGMENT);
     }
 

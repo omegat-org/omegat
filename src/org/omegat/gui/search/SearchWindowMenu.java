@@ -25,7 +25,6 @@
 
 package org.omegat.gui.search;
 
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -80,8 +79,7 @@ public class SearchWindowMenu extends JMenuBar {
 
         item = fileMenu.add(new JMenuItem());
         Mnemonics.setLocalizedText(item, OStrings.getString("SW_FILE_MENU_CLOSE"));
-        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,
-                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0));
         item.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -143,7 +141,6 @@ public class SearchWindowMenu extends JMenuBar {
             }
         });
 
-        PropertiesShortcuts shortcuts = new PropertiesShortcuts("/org/omegat/gui/main/MainMenuShortcuts.properties");
-        shortcuts.bindKeyStrokes(this);
+        PropertiesShortcuts.MainMenuShortcuts.bindKeyStrokes(this);
     }
 }

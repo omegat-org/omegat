@@ -49,6 +49,10 @@ import org.omegat.util.StringUtil;
  */
 public class PropertiesShortcuts {
 
+    private static final String MAIN_MENU_SHORTCUTS_FILE = "/org/omegat/gui/main/MainMenuShortcuts.properties";
+
+    public static final PropertiesShortcuts MainMenuShortcuts = new PropertiesShortcuts(MAIN_MENU_SHORTCUTS_FILE);
+
     private final Properties properties = new Properties();
 
     /**

@@ -261,4 +261,4 @@ close_button -> @close="Cancel" ;
 
 ### Launch command
 
-omt -> javaloc " -jar " memory " -Duser.language=" UIlang " -Duser.country=" country " -Dgoogle.api.key=" gt " -Dmicrosoft.api.client_secret=" msk " -Dmicrosoft.api.client_id=" msi " -Dmymemory.api.email=" mymem " -Dtaas.user.key=" taas " -Dyandex.api.key=" yand " -Dhttp.proxyHost=" proxyport " -Dawt.useSystemAAFontSettings=" fontaa laf " " jarfileloc " " projectloc " --config-dir=" configloc team;
+omt -> javaloc " -jar " memory " -Duser.language=" UIlang " -Duser.country=" country " -Dgoogle.api.key=" gt " -Dmicrosoft.api.client_secret=" msk " -Dmicrosoft.api.client_id=" msi " -Dmymemory.api.email=" mymem " -Dtaas.user.key=" taas " -Dyandex.api.key=" yand " -Dhttp.proxyHost=" proxyhost " -Dhttp.proxyPort=" proxyport " -Dawt.useSystemAAFontSettings=" fontaa laf " " jarfileloc " " projectloc " --config-dir=" configloc team;

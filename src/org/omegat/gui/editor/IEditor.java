@@ -277,7 +277,7 @@ public interface IEditor {
      * 
      *         Can be called from any thread.
      */
-    IEditorSettings getSettings();
+    EditorSettings getSettings();
 
     /**
      * Undo editing.

@@ -77,7 +77,7 @@
             si potrà aprire la finestra principale selezionando il comando <span class="bold"><strong> Opzioni → Filtri dei file...</strong></span> dalla barra dei menu. Si possono anche abilitare specifici filtri dei file per il progetto, che verranno utilizzati solo
             in quello attivo, selezionando l'opzione <span class="bold"><strong>Filtri dei file...</strong></span> nelle Proprietà del progetto.
          </p>
-         <p>Si possono abilitare specifici filtri dei file per il progetto tramite <span class="bold"><strong>Progetto → Proprietà...</strong></span>. Premere il pulsante <span class="guibutton">Filtri dei file</span> e attivare l'opzione <span class="guimenuitem">Rendi specifiche del progetto le impostazioni dei filtri dei file</span><a class="indexterm" name="d0e4601"></a>. In questo caso, una copia della configurazione dei filtri verrà memorizzata all'interno del progetto. Se i filtri verrano
+         <p>Si possono abilitare specifici filtri dei file per il progetto tramite <span class="bold"><strong>Progetto → Proprietà...</strong></span>. Premere il pulsante <span class="guibutton">Filtri dei file</span> e attivare l'opzione <span class="guimenuitem">Rendi specifiche del progetto le impostazioni dei filtri dei file</span><a class="indexterm" name="d0e4600"></a>. In questo caso, una copia della configurazione dei filtri verrà memorizzata all'interno del progetto. Se i filtri verrano
             modificati in seguito, solo quelli del progetto saranno aggiornati, lasciando inalterati quelli dell'utente.
          </p>
          <p><span class="bold"><strong>Attenzione!</strong></span> Se si modificano le opzioni dei filtri mentre un progetto è aperto, affinché le modifiche siano attivate il progetto va ricaricato.
@@ -86,7 +86,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;Finestra di dialogo "Filtri dei file"<a class="indexterm" name="d0e4614"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;Finestra di dialogo "Filtri dei file"<a class="indexterm" name="d0e4613"></a></h2>
                   </div>
                </div>
             </div>
@@ -131,7 +131,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Opzioni dei filtri<a class="indexterm" name="d0e4645"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Opzioni dei filtri<a class="indexterm" name="d0e4644"></a></h2>
                   </div>
                </div>
             </div>
@@ -175,23 +175,12 @@
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Sostituisci automaticamente 'nplurals=INTEGER; plural=EXPRESSION;' nell'intestazione</em></span></p>
-                     <p><span class="emphasis"><em><span class="emphasis"><em>L'opzione permette a OmegaT di non tenere conto delle specifiche contenute nell'intestazione del file PO e usare le impostazioni
-                                    predefinite per la lingua di destinazione selezionata.</em></span></em></span></p>
+                     <p><span class="emphasis"><em>L'opzione permette a OmegaT di non tenere conto delle specifiche contenute nell'intestazione del file PO e usare le impostazioni
+                              predefinite per la lingua di destinazione selezionata.</em></span></p>
                   </li>
                </ul>
             </div>
             <p><span class="bold"><strong>File XHTML</strong></span></p>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
-                  <li class="listitem">
-                     <p><span class="emphasis"><em>Aggiungi o riscrivi la dichiarazione di codifica nei file HTML e XHTML</em></span>: spesso i file di destinazione devono contenere una codifica dei caratteri diversa da quella specificata nei file di partenza
-                        (che sia definita o no esplicitamente). Tramite l'uso di questa opzione il traduttore può specificare se i file di destinazione
-                        debbano includere la dichiarazione di codifica. Per esempio, se il filtro dei file specifica UTF8 come schema di codifica
-                        per i file di destinazione, selezionare "Sempre" consentirà di includere tale informazione all'interno dei file tradotti.
-                     </p>
-                  </li>
-               </ul>
-            </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
@@ -203,7 +192,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Avvia un nuovo paragrafo con: il tag HTML &lt;br&gt;</em></span> costituirà un paragrafo per scopi di segmentazione.
+                     <p><span class="emphasis"><em>Avvia un nuovo paragrafo con</em></span>: il tag HTML &lt;br&gt; costituirà un paragrafo per scopi di segmentazione.
                      </p>
                   </li>
                </ul>
@@ -292,8 +281,10 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Aggiungi o riscrivi la dichiarazione di codifica nei file HTML e XHTML</em></span>: sempre (impostazione predefinita), Solo se il file (X)HTML contiene un'intestazione, Solo se il file (X)HTML contiene una
-                        dichiarazione di codifica, Mai
+                     <p><span class="emphasis"><em>Aggiungi o riscrivi la dichiarazione di codifica nei file HTML e XHTML</em></span>: spesso i file di destinazione devono contenere una codifica dei caratteri diversa da quella specificata nei file di partenza
+                        (che sia definita o no esplicitamente). Tramite l'uso di questa opzione il traduttore può specificare se i file di destinazione
+                        debbano includere la dichiarazione di codifica. Per esempio, se il filtro dei file specifica UTF8 come schema di codifica
+                        per i file di destinazione, selezionare "Sempre" consentirà di includere tale informazione all'interno dei file tradotti.
                      </p>
                   </li>
                </ul>
@@ -317,7 +308,8 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Salta l'espressione regolare che corrisponde al testo</em></span>: il testo che corrisponde all'espressione regolare sarà saltata.
+                     <p><span class="emphasis"><em>Salta l'espressione regolare che corrisponde al testo</em></span>: il testo che corrisponde all'espressione regolare viene saltato. Viene mostrato in colore rosso nella convalida dei tag.
+                        Il testo nel segmento di origine che corrisponde viene mostrato in corsivo.
                      </p>
                   </li>
                </ul>
@@ -335,18 +327,14 @@
                   <li class="listitem">
                      <p><span class="emphasis"><em>Non tradurre il contenuto dei tag con la seguente coppia di valori-chiave di attributo (separati da virgole)</em></span>: la corrispondenza all'interno dell'elenco delle coppie di valori-chiave farà sì che il contenuto dei tag venga ignorato
                      </p>
+                     <p>A volte potrebbe essere utile rendere non traducibili certi tag basati sul valore degli attributi. Per esempio, <code class="literal">&lt;div class="hide"&gt; &lt;span translate="no"&gt;</code> È possibile definire coppie di valori-chiave per i tag da non tradurre. L'esempio sopra conterrebbe: <code class="literal">class=hide, translate=no </code></p>
                   </li>
-               </ul>
-            </div>
-            <p><span class="bold"><strong>File di testo</strong></span></p>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Segmentazione a livello di paragrafo in corrispondenza delle interruzioni di riga, in base alle righe vuote oppure nessuna
-                              segmentazione</em></span>:
+                     <p><span class="emphasis"><em>Comprimi lo spazio vuoto nel documento tradotto</em></span>: più spazi vuoti continui verranno convertiti in un unico spazio vuoto all'interno del documento tradotto.
                      </p>
-                     <p>se le regole di segmentazione a livello di frase sono attive, il testo verrà ulteriormente segmentato in base all'opzione
-                        qui selezionata.
+                  </li>
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Rimuovi i commenti HTML nel documento tradotto</em></span>: tutte le parti commentate (comprese nei tag &lt;!-- e --&gt;) non saranno copiate nel documento tradotto.
                      </p>
                   </li>
                </ul>
@@ -367,7 +355,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Finestra di dialogo "Modifica filtro"<a class="indexterm" name="d0e4848"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Finestra di dialogo "Modifica filtro"<a class="indexterm" name="d0e4846"></a></h2>
                   </div>
                </div>
             </div>
@@ -382,7 +370,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4863"></a>Tipo del file di partenza, modello del nome del file<a class="indexterm" name="d0e4869"></a></h3>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4861"></a>Tipo del file di partenza, modello del nome del file<a class="indexterm" name="d0e4867"></a></h3>
                      </div>
                   </div>
                </div>
@@ -404,7 +392,7 @@
                         </h3>
                      </div>
                   </div>
-               </div><a class="indexterm" name="d0e4897"></a><a class="indexterm" name="d0e4902"></a><a class="indexterm" name="d0e4907"></a><p>Solo un numero limitato di formati di file specifica una codifica obbligatoria. I formati di file che non specificano la loro
+               </div><a class="indexterm" name="d0e4895"></a><a class="indexterm" name="d0e4900"></a><a class="indexterm" name="d0e4905"></a><p>Solo un numero limitato di formati di file specifica una codifica obbligatoria. I formati di file che non specificano la loro
                   codifica useranno la codifica impostata dall'utente per l'estensione che corrisponde al loro nome. Per esempio, per impostazione
                   predefinita, i file <code class="literal">.txt</code> verranno caricati utilizzando la codifica predefinita del sistema operativo. Per ogni modello di nome dei file di partenza
                   si ha la possibilità di modificare la codifica originaria. Tali file possono anche venire scritti utilizzando una qualsiasi
@@ -440,13 +428,13 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Nome del file di arrivo<a class="indexterm" name="d0e4935"></a></h3>
+                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Nome del file di arrivo<a class="indexterm" name="d0e4933"></a></h3>
                      </div>
                   </div>
                </div>
                <p>A volte, potrebbe essere necessario assegnare automaticamente un nuovo nome al file, o ai file, che vengono tradotti; è il
                   caso, per esempio, dell'aggiunta di un codice di lingua al nome del file finale. Il modello del nome del file di arrivo utilizza
-                  una sintassi particolare; pertanto, se si desidera intervenire su questo campo, si deve fare clic su <span class="bold"><strong>Modifica...</strong></span> e usare la finestra di dialogo <a class="indexterm" name="d0e4945"></a>Modifica filtro. Se si vuole tornare alla configurazione predefinita del filtro, fare clic su <span class="bold"><strong>Predefiniti.</strong></span> È possibile anche modificare direttamente il nome nel campo del modello del nome del file di arrivo della finestra di dialogo
+                  una sintassi particolare; pertanto, se si desidera intervenire su questo campo, si deve fare clic su <span class="bold"><strong>Modifica...</strong></span> e usare la finestra di dialogo <a class="indexterm" name="d0e4943"></a>Modifica filtro. Se si vuole tornare alla configurazione predefinita del filtro, fare clic su <span class="bold"><strong>Predefiniti.</strong></span> È possibile anche modificare direttamente il nome nel campo del modello del nome del file di arrivo della finestra di dialogo
                   dei filtri dei file. La finestra di dialogo "Modifica modello" offre, tra le altre, le opzioni seguenti:
                </p>
                <div class="itemizedlist">

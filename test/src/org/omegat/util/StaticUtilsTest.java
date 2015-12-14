@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2013 Alex Buloichik
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,6 +27,11 @@
 
 package org.omegat.util;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import junit.framework.TestCase;
@@ -34,6 +40,7 @@ import junit.framework.TestCase;
  * Tests for (some) static utility methods.
  *
  * @author Maxym Mykhalchuk
+ * @author Aaron Madlon-Kay
  */
 public class StaticUtilsTest extends TestCase {
 
@@ -57,5 +64,35 @@ public class StaticUtilsTest extends TestCase {
         args = StaticUtils.parseCLICommand(" ");
         assertEquals(args[0], "");
         assertEquals(args.length, 1);
+    }
+
+    public void testBuildFileList() throws IOException {
+
+        File tempDir = FileUtil.createTempDir();
+        assertTrue(tempDir.isDirectory());
+
+        File subDir = new File(tempDir, "a");
+        assertTrue(subDir.mkdirs());
+
+        File aFile = new File(subDir, "foo");
+        assertTrue(aFile.createNewFile());
+        aFile = new File(subDir, "bar");
+        assertTrue(aFile.createNewFile());
+
+        List<String> list = new ArrayList<String>();
+        StaticUtils.buildFileList(list, tempDir, false);
+
+        assertTrue(list.isEmpty());
+
+        StaticUtils.buildFileList(list, tempDir, true);
+        assertEquals(2, list.size());
+
+        Collections.sort(list);
+        assertTrue(list.get(0).endsWith("bar"));
+
+        assertTrue(FileUtil.deleteTree(tempDir));
+
+        // TODO: Once we can use Java 1.7, add a test with a symlink loop to
+        // make sure we aren't looping infinitely
     }
 }

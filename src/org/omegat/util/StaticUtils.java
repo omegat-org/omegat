@@ -49,9 +49,11 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 import java.util.regex.Pattern;
@@ -131,9 +133,14 @@ public class StaticUtils {
     /**
      * Returns a list of all files under the root directory by absolute path.
      */
-    public static void buildFileList(List<String> lst, File rootDir, boolean recursive) {
+    public static void buildFileList(final List<String> lst, File rootDir, boolean recursive) {
         try {
-            internalBuildFileList(lst, rootDir, recursive);
+            iterateFileTree(rootDir.getCanonicalFile(), recursive, new ITreeIteratorCallback() {
+                @Override
+                public void processFile(File file) {
+                    lst.add(file.getPath());
+                }
+            });
         } catch (Exception ex) {
             // Ignore
         }
@@ -227,16 +234,29 @@ public class StaticUtils {
         });
     }
 
-    private static void internalBuildFileList(List<String> lst, File rootDir, boolean recursive) {
+    public interface ITreeIteratorCallback {
+        public void processFile(File file) throws Exception;
+    }
+
+    public static void iterateFileTree(File rootDir, boolean recursive, ITreeIteratorCallback cb) throws Exception {
+        iterateFileTree(rootDir, recursive, new HashSet<File>(), cb);
+    }
+
+    private static void iterateFileTree(File rootDir, boolean recursive, Set<File> visited, ITreeIteratorCallback cb)
+            throws Exception {
         if (!rootDir.isDirectory()) {
             return;
         }
+        if (visited.contains(rootDir)) {
+            return;
+        }
+        visited.add(rootDir);
         for (File file : rootDir.listFiles()) {
             if (file.isDirectory() && recursive) {
-                internalBuildFileList(lst, file, recursive);
+                iterateFileTree(file.getCanonicalFile(), recursive, visited, cb);
             }
             if (file.isFile()) {
-                lst.add(file.getAbsolutePath());
+                cb.processFile(file.getCanonicalFile());
             }
         }
     }

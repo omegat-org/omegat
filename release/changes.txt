@@ -21,7 +21,7 @@
 ----------------------------------------------------------------------
    0 Enhancement
    1 Bug fix
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 3.5.3 update 1 vs 3.5.3
 
@@ -29,6 +29,10 @@
 
   - An error was fixed with -Dhttp.proxyHost and -Dhttp.proxyPort in 
 Linux kaptain launcher
+
+  Localisation Updates:
+
+  - Italian localisation updated to 3.5.3 (UI, documentation, scripts, readme)
 
 ----------------------------------------------------------------------
  OmegaT 3.5.3 (2015-12-02)

@@ -150,7 +150,7 @@
       <listitem>
         <para><emphasis role="bold">Frammenti da rimuovere dall'espressione regolare della traduzione</emphasis></para>
 
-        <para>È possibile inserire un'espressione regolare per i contenuti che non si vuole che appaiano nel testo di destinazione. Tutte le corrispondenze trovate nel segmento di destinazione verrano evidenziate in rosso, in modo da individuarle facilmente e correggerle. Quando si cercano corrispondenze parziali, il modello per la rimozione viene ignorato. Una penalità fissa di 5 punti viene aggiunta se la parte rimossa non corrisponde a qualche altro segmento, in modo che la corrispondenza non indichi il 100%</para>
+        <para>È possibile inserire un'espressione regolare per i contenuti che non si vuole che appaiano nel testo di destinazione. Tutte le corrispondenze trovate nel segmento di destinazione verrano evidenziate in rosso, in modo da individuarle facilmente e correggerle. Quando si cercano corrispondenze parziali, il modello per la rimozione viene ignorato. Una penalità fissa di 5 punti viene aggiunta se la parte rimossa non corrisponde a qualche altro segmento, in modo che la corrispondenza non indichi il 100%.</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -162,7 +162,7 @@
 
     <para>La funzione di convalida di tag rileva le modifiche alle sequenze di tag (sia deliberate, sia accidentali) e mostra i segmenti coinvolti. L'avvio di questa funzione – <guimenuitem>Ctrl+Maiusc+T<indexterm class="singular">
         <primary>Scorciatoie</primary> <secondary>Convalida dei tag - Ctrl+T</secondary>
-      </indexterm></guimenuitem> - apre una finestra che che mostra tutti i segmenti nel file che contiene i tag danneggiati sospetti o scorretti all'interno della traduzione. La funzione di convalida dei tag rende semplice la loro riparazione e la ricreazione del documento di arrivo. La finestra che si apre premendo <guimenuitem>Ctrl+Maiusc+V</guimenuitem> mostra una tabella a tre colonne con un collegamento al segmento, quello di partenza e quello di arrivo</para>
+      </indexterm></guimenuitem> - apre una finestra che che mostra tutti i segmenti nel file che contiene i tag danneggiati sospetti o scorretti all'interno della traduzione. La funzione di convalida dei tag rende semplice la loro riparazione e la ricreazione del documento di arrivo. La finestra che si apre premendo <guimenuitem>Ctrl+Maiusc+V</guimenuitem> mostra una tabella a tre colonne con un collegamento al segmento, quello di partenza e quello di arrivo.</para>
 
     <figure id="tag.validation">
       <title>Voce di convalida dei tag</title>

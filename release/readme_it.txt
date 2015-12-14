@@ -1,4 +1,4 @@
-Questa traduzione è frutto del lavoro di Valter Mura, copyright© 2015
+Questa traduzione è frutto del lavoro di Valter Mura, copyright© 2014 e revisione di Valter Mura e Carmelo Serraino copyright© 2014.
 
 ==============================================================================
   File Leggimi di OmegaT 3.0
@@ -93,7 +93,7 @@ Il manuale per l'utente si trova nel pacchetto appena scaricato e vi si potrà a
  3. Installazione di OmegaT
 
 3.1 Generale
-Per funzionare, OmegaT richiede che sul sistema sia installato Java Runtime Environment (JRE) versione 1.5 o superiore. Sono ora disponibili i pacchetti OmegaT che includono il Java Runtime Environment, e che evitano agli utenti l'incombenza di selezionarlo, scaricarlo e installarlo. 
+Per funzionare, OmegaT richiede che sul sistema sia installato Java Runtime Environment (JRE) versione 1.6 o superiore. Sono ora disponibili i pacchetti OmegaT che includono il Java Runtime Environment, e che evitano agli utenti l'incombenza di selezionarlo, scaricarlo e installarlo. 
 
 Se Java è già installato, un metodo per installare la versione corrente di OmegaT è usare "Java Web Start". 
 A questo proposito, scaricare ed eseguire il file seguente:
@@ -196,6 +196,7 @@ Contributi al codice:
   Wildrich Fourie
   Phillip Hall
   Jean-Christophe Helary
+  Chihiro Hio
   Thomas Huriaux
   Hans-Peter Jacobs
   Kyle Katarn
@@ -206,6 +207,7 @@ Contributi al codice:
   Fabián Mandelbaum
   Manfred Martin
   Adiel Mittmann
+  Hiroshi Miura 
   John Moran
   Maxym Mykhalchuk 
   Arno Peters
@@ -263,6 +265,7 @@ org.omegat.tokenizer.LuceneEnglishTokenizer) mutuano originariamente le stop wor
   groovy-all-2.2.2.jar (licenza Apache 2.0)
   slf4j (licenza MIT)
   juniversalchardet-1.0.3.jar (GPL v2)
+  DictZip da JDictd (GPL v2)
 
 ==============================================================================
  5.  OmegaT genera problemi? Si ha bisogno di assistenza?

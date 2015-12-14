@@ -31,7 +31,7 @@
         <listitem>
           <para>Le impostazioni di segmentazione si occupano solo del modo in cui <application>OmegaT</application> gestisce i file di partenza. Il metodo prevalente di segmentazione dei file sorgenti è quello a livello di frase, dunque questa opzione dovrebbe essere lasciata normalmente attivata.</para>
 
-          <para>In alcuni rari casi può essere preferibile usare un'alternativa, per es. la segmentazione a livello di paragrafo. La modifica di questa impostazione non cambia la segmentazione delle memorie di traduzione già esistenti. Se, a metà del lavoro, si decide di passare da una traduzione a livello di frase a quella a livello di paragrafo, la memoria di traduzione interna del progetto non verrà alterata (OmegaT può aggiornare le vecchie memorie di traduzione che non utilizzano la segmentazione per frasi, ma non viceversa.). ma OmegaT tenterà di creare corrispondenze parziali di paragrafo combinando assieme le traduzioni di frasi esistenti.</para>
+          <para>In alcuni rari casi può essere preferibile usare un'alternativa, per es. la segmentazione a livello di paragrafo. La modifica di questa impostazione non cambia la segmentazione delle memorie di traduzione già esistenti. Se, a metà del lavoro, si decide di passare da una traduzione a livello di frase a quella a livello di paragrafo, la memoria di traduzione interna del progetto non verrà alterata (OmegaT può aggiornare le vecchie memorie di traduzione che non utilizzano la segmentazione per frasi, ma non viceversa). ma OmegaT tenterà di creare corrispondenze parziali di paragrafo combinando assieme le traduzioni di frasi esistenti.</para>
 
           <para>La modifica delle impostazioni di segmentazione potrebbe causare il frazionamento o l'accorpamento dei segmenti già tradotti. Ciò li riporterebbe alla condizione di &quot;non tradotti&quot;, dato che, nonostante la vecchia traduzione sia ancora presente, non corrisponderebbero più ai segmenti registrati nella memoria del progetto.</para>
         </listitem>
@@ -51,7 +51,7 @@
 
       <varlistentry>
         <term><guibutton>Filtri dei file...</guibutton><indexterm class="singular">
-            <primary>filtri dei file</primary> <secondary>filtri dei file generali vs filtri dei file del progetto</secondary>
+            <primary>filtri dei file</primary> <secondary>filtri dei file generali vs. filtri dei file del progetto</secondary>
           </indexterm></term>
 
         <listitem>

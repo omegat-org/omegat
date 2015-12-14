@@ -132,7 +132,7 @@
         </indexterm></term>
 
       <listitem>
-        <para>Per evitare traduzioni sbagliate, nel caso siano presenti segmenti che presentano la possibilità di più traduzioni, si può attivare l'opzione che ferma il comando <emphasis role="bold"> Vai al prossimo segmento non tradotto</emphasis> segmento uguale successivo, a prescindere che esso sia stato o no tradotto.</para>
+        <para>Per evitare traduzioni sbagliate, nel caso siano presenti segmenti che presentano la possibilità di più traduzioni, si può attivare l'opzione che ferma il comando <emphasis role="bold">Vai al prossimo segmento non tradotto</emphasis> sul segmento uguale successivo, a prescindere che esso sia stato o no tradotto.</para>
       </listitem>
     </varlistentry>
   </variablelist>

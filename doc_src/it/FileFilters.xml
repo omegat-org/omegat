@@ -100,17 +100,11 @@
       <listitem>
         <para><emphasis>Sostituisci automaticamente 'nplurals=INTEGER; plural=EXPRESSION;' nell'intestazione</emphasis></para>
 
-        <para><emphasis><emphasis>L'opzione permette a OmegaT di non tenere conto delle specifiche contenute nell'intestazione del file PO e usare le impostazioni predefinite per la lingua di destinazione selezionata.</emphasis></emphasis></para>
+        <para><emphasis>L'opzione permette a OmegaT di non tenere conto delle specifiche contenute nell'intestazione del file PO e usare le impostazioni predefinite per la lingua di destinazione selezionata.</emphasis></para>
       </listitem>
     </itemizedlist>
 
     <para><emphasis role="bold">File XHTML</emphasis></para>
-
-    <itemizedlist>
-      <listitem>
-        <para><emphasis>Aggiungi o riscrivi la dichiarazione di codifica nei file HTML e XHTML</emphasis>: spesso i file di destinazione devono contenere una codifica dei caratteri diversa da quella specificata nei file di partenza (che sia definita o no esplicitamente). Tramite l'uso di questa opzione il traduttore può specificare se i file di destinazione debbano includere la dichiarazione di codifica. Per esempio, se il filtro dei file specifica UTF8 come schema di codifica per i file di destinazione, selezionare &quot;Sempre&quot; consentirà di includere tale informazione all'interno dei file tradotti.</para>
-      </listitem>
-    </itemizedlist>
 
     <itemizedlist>
       <listitem>
@@ -120,7 +114,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Avvia un nuovo paragrafo con: il tag HTML &lt;br&gt;</emphasis> costituirà un paragrafo per scopi di segmentazione.</para>
+        <para><emphasis>Avvia un nuovo paragrafo con</emphasis>: il tag HTML &lt;br&gt; costituirà un paragrafo per scopi di segmentazione.</para>
       </listitem>
     </itemizedlist>
 
@@ -192,7 +186,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Aggiungi o riscrivi la dichiarazione di codifica nei file HTML e XHTML</emphasis>: sempre (impostazione predefinita), Solo se il file (X)HTML contiene un'intestazione, Solo se il file (X)HTML contiene una dichiarazione di codifica, Mai</para>
+        <para><emphasis>Aggiungi o riscrivi la dichiarazione di codifica nei file HTML e XHTML</emphasis>: spesso i file di destinazione devono contenere una codifica dei caratteri diversa da quella specificata nei file di partenza (che sia definita o no esplicitamente). Tramite l'uso di questa opzione il traduttore può specificare se i file di destinazione debbano includere la dichiarazione di codifica. Per esempio, se il filtro dei file specifica UTF8 come schema di codifica per i file di destinazione, selezionare &quot;Sempre&quot; consentirà di includere tale informazione all'interno dei file tradotti.</para>
       </listitem>
     </itemizedlist>
 
@@ -210,7 +204,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Salta l'espressione regolare che corrisponde al testo</emphasis>: il testo che corrisponde all'espressione regolare sarà saltata.</para>
+        <para><emphasis>Salta l'espressione regolare che corrisponde al testo</emphasis>: il testo che corrisponde all'espressione regolare viene saltato. Viene mostrato in colore rosso nella convalida dei tag. Il testo nel segmento di origine che corrisponde viene mostrato in corsivo.</para>
       </listitem>
     </itemizedlist>
 
@@ -223,16 +217,16 @@
     <itemizedlist>
       <listitem>
         <para><emphasis>Non tradurre il contenuto dei tag con la seguente coppia di valori-chiave di attributo (separati da virgole)</emphasis>: la corrispondenza all'interno dell'elenco delle coppie di valori-chiave farà sì che il contenuto dei tag venga ignorato</para>
+
+        <para>A volte potrebbe essere utile rendere non traducibili certi tag basati sul valore degli attributi. Per esempio, <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal> È possibile definire coppie di valori-chiave per i tag da non tradurre. L'esempio sopra conterrebbe: <literal>class=hide, translate=no </literal></para>
       </listitem>
-    </itemizedlist>
 
-    <para><emphasis role="bold">File di testo</emphasis></para>
-
-    <itemizedlist>
       <listitem>
-        <para><emphasis>Segmentazione a livello di paragrafo in corrispondenza delle interruzioni di riga, in base alle righe vuote oppure nessuna segmentazione</emphasis>:</para>
+        <para><emphasis>Comprimi lo spazio vuoto nel documento tradotto</emphasis>: più spazi vuoti continui verranno convertiti in un unico spazio vuoto all'interno del documento tradotto.</para>
+      </listitem>
 
-        <para>se le regole di segmentazione a livello di frase sono attive, il testo verrà ulteriormente segmentato in base all'opzione qui selezionata.</para>
+      <listitem>
+        <para><emphasis>Rimuovi i commenti HTML nel documento tradotto</emphasis>: tutte le parti commentate (comprese nei tag &lt;!-- e --&gt;) non saranno copiate nel documento tradotto.</para>
       </listitem>
     </itemizedlist>
 

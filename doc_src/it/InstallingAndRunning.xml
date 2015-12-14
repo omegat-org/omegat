@@ -31,7 +31,7 @@
 
       <para>Per installare <application>OmegaT</application>, fare doppio-clic sul programma scaricato.</para>
 
-      <para>All'inizio dell'installazione è possibile selezionare la lingua da utilizzare durante l'installazione. Nella finestra successiva è possibile indicare che la quale lingua selezionata dovrà essere utilizzata in OmegaT. Attivando la casella corrispondente, il file OmegaT.l4J.ini verrà modificato per utilizzare la lingua selezionata (per i dettagli, si veda la sezione seguente). Successivamente, una volta accettata il contratto di licenza, il programma chiederà se si vuole creare un gruppo nel menu <emphasis>start</emphasis> , e un collegamento nel desktop e nella barra di avvio rapido: è possibile creare tali scorciatoie anche in seguito, trascinando l'icona <emphasis><application>OmegaT</application>.exe</emphasis> nel desktop o nel menu &quot;start&quot;. L'ultimo riquadro permette di dare uno sguardo al file leggimi e a quello delle modifiche relativo alla versione installata.</para>
+      <para>All'inizio dell'installazione è possibile selezionare la lingua da utilizzare durante l'installazione. Nella finestra successiva è possibile indicare che la quale lingua selezionata dovrà essere utilizzata in OmegaT. Attivando la casella corrispondente, il file OmegaT.l4J.ini verrà modificato per utilizzare la lingua selezionata (per i dettagli, si veda la sezione seguente). Successivamente, una volta accettato il contratto di licenza, il programma chiederà se si vuole creare un gruppo nel menu <emphasis>start</emphasis> , e un collegamento nel desktop e nella barra di avvio rapido: è possibile creare queste scorciatoie anche in seguito, trascinando l'icona <emphasis><application>OmegaT</application>.exe</emphasis> nel desktop o nel menu &quot;start&quot;. L'ultimo riquadro permette di dare uno sguardo al file leggimi e a quello delle modifiche relativo alla versione installata.</para>
     </section>
 
     <section id="running.OmegaT.Windows">
@@ -39,15 +39,15 @@
           <primary>Avvio di OmegaT</primary> <secondary>Windows</secondary>
         </indexterm></application></title>
 
-      <para>Una volta installato <application>OmegaT</application>, è possibile avviarlo sia facendo clic direttamente su <emphasis><application>OmegaT</application>.jar</emphasis>, sia da riga di comando.</para>
+      <para>Una volta installato <application>OmegaT</application>, è possibile avviare il programma sia facendo clic direttamente su <emphasis><application>OmegaT</application>.jar</emphasis>, sia da riga di comando.</para>
 
       <para>Il metodo più semplice per avviare OmegaT è, comunque, eseguire il programma <emphasis> <application>OmegaT</application>.exe</emphasis>. <indexterm class="singular">
           <primary>Avvio di OmegaT</primary> <secondary>Windows</secondary> <tertiary>file INI</tertiary>
-        </indexterm>In questo caso, per opzioni per l'avvio del programma saranno lette dal file <emphasis><application>OmegaT</application>.l4J.ini </emphasis>file, che si trova nella stessa cartella del file eseguibile e che può essere modificato affinché rispecchi le proprie impostazioni. L'esempio di file INI che segue riserva 1GB di memoria, richiede come lingua dell'utente il Francese e il Canada come nazione:</para>
+        </indexterm>In questo caso, le opzioni per l'avvio del programma saranno lette dal file <emphasis><application>OmegaT</application>.l4J.ini </emphasis>, che si trova nella stessa cartella del file eseguibile e che può essere modificato affinché rispecchi le proprie impostazioni. L'esempio di file INI che segue riserva 1GB di memoria, richiede il francese come lingua dell'utente e il Canada come nazione:</para>
 
       <literallayout><code># OmegaT.exe runtime configuration # Per usare un parametro, rimuovere '#' prima del '-' # Memory -Xmx1024M # Language -Duser.language=FR # Country -Duser.country=CA</code></literallayout>
 
-      <para>Nota: se OmegaT risulta lento durante le sessioni di Desktop remoto in Windows, è possibile usare questa opzione:</para>
+      <para>Nota: se OmegaT risultasse lento durante le sessioni di desktop remoto in Windows, sarà possibile usare questa opzione:</para>
 
       <literallayout><code>-Dsun.java2d.noddraw=false</code></literallayout>
     </section>
@@ -524,7 +524,7 @@
 
             <itemizedlist>
               <listitem>
-                <para><emphasis><emphasis><literal>--mode=console-translate</literal></emphasis></emphasis></para>
+                <para><emphasis><literal>--mode=console-translate</literal></emphasis></para>
 
                 <para>In questa modalità, OmegaT tenterà di tradurre, con le memorie di traduzione disponibili, i file presenti in /source/. Ciò è utile per avviare OmegaT su un server con file TMX forniti automaticamente a un progetto.</para>
               </listitem>
@@ -638,7 +638,7 @@
       <section id="console.mode.option.validatetags">
         <title>Opzione di convalida dei tag</title>
 
-        <para>Altro parametro di riga di comando aggiuntivo specifico della modalità console: <literal>--tag-validation=[abort|warn].</literal> Quando viene aggiunto questo parametro, la convalida dei tag viene eseguita prima della traduzione/allineamento. Se il valore è <literal>abort</literal> (&quot;ferma&quot;), allora se si incontrano errori nei tag, gli errori vengono visualizzati e il programma si blocca. Se il valore è <literal>warn</literal> (&quot;avvisa&quot;), allora gli errori vengono visualizzati ma OmegaT continua.</para>
+        <para>Altro parametro di riga di comando aggiuntivo specifico della modalità console: <literal>--tag-validation=[abort|warn].</literal> Quando questo parametro è aggiunto, la convalida dei tag viene eseguita prima della traduzione/allineamento. Se il valore è <literal>abort</literal> (&quot;ferma&quot;), allora se si incontrano errori nei tag, gli errori vengono visualizzati e il programma si blocca. Se il valore è <literal>warn</literal> (&quot;avvisa&quot;), allora gli errori vengono visualizzati ma OmegaT continua.</para>
 
         <para>Uso: <literal>java -jar <application>OmegaT</application>.jar /percorso/al/progetto --mode=console-translate --tag-validation=abort</literal></para>
       </section>
@@ -654,6 +654,6 @@
 
     <para><literal>$ ant jar release</literal></para>
 
-    <para>L'operazione creerà una distribuzione completa di <application>OmegaT</application> nella cartella ./dist/, in cui saranno presenti tutti i file che servono per avviare <application>OmegaT</application>.</para>
+    <para>L'operazione creerà una distribuzione completa di <application>OmegaT</application> nella cartella /dist/, in cui saranno presenti tutti i file necessari ad avviare <application>OmegaT</application>.</para>
   </section>
 </chapter>

@@ -7,7 +7,7 @@
       <primary>Glossari</primary>
     </indexterm></title>
 
-  <para>I glossari sono file da usare in  <application>OmegaT</application> creati e aggiornati.</para>
+  <para>I glossari sono file da usare in <application>OmegaT</application> creati e aggiornati.</para>
 
   <para>Se un progetto <application>OmegaT</application> contiene uno o più glossari, tutti i termini presenti nel glossario trovati anche nel segmenti corrente saranno visualizzati automaticamente all'interno del visualizzatore Glossario.</para>
 

@@ -66,7 +66,7 @@ public class LingvoDSL implements IDictionary {
                 }
                 s = RE_SKIP.matcher(s).replaceAll("");
                 if (Character.isWhitespace(s.codePointAt(0))) {
-                    trans.append(s).append('\n');
+                    trans.append(s.trim()).append('\n');
                 } else {
                     if (word.length() > 0) {
                         result.put(word.toString(), trans.toString());

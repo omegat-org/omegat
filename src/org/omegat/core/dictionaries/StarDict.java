@@ -42,6 +42,8 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.zip.GZIPInputStream;
 
+import org.apache.commons.collections4.trie.PatriciaTrie;
+
 import org.dict.zip.DictZipHeader;
 import org.dict.zip.DictZipInputStream;
 import org.dict.zip.RandomAccessInputStream;
@@ -83,6 +85,8 @@ public class StarDict implements IDictionary {
     private String dictName;
     private String dataFile;
 
+    protected PatriciaTrie<Object> result;
+
     /**
      * @param ifoFile
      *            ifo file with dictionary
@@ -121,11 +125,11 @@ public class StarDict implements IDictionary {
             dictType = DictType.DICTFILE;
             dataFile = dictFile;
         }
+        readHeader();
     }
 
-    @Override
-    public Map<String, Object> readHeader() throws IOException {
-        Map<String, Object> result = new HashMap<String, Object>();
+    private void readHeader() throws IOException {
+        result = new PatriciaTrie();
         File file = new File(dictName + ".idx");
         byte[] idxBytes = readFile(file);
 
@@ -147,7 +151,10 @@ public class StarDict implements IDictionary {
                 mem.write(b);
             }
         }
-        return result;
+    }
+
+    public int entrySize() {
+        return result.size();
     }
 
     /**
@@ -162,11 +169,11 @@ public class StarDict implements IDictionary {
      * @param result
      *            result map
      */
-    private void addIndex(final String key, final int start, final int len, final Map<String, Object> result) {
+    private void addIndex(final String key, final int start, final int len, final PatriciaTrie<Object> result) {
         Object data = result.get(key);
         if (data == null) {
             Entry d = new Entry(start, len);
-            data = d;
+            result.put(key, d);
         } else {
             if (data instanceof Entry[]) {
                 Entry[] dobj = (Entry[]) data;
@@ -180,8 +187,28 @@ public class StarDict implements IDictionary {
                 d[1] = new Entry(start, len);
                 data = d;
             }
+            result.put(key, data);
         }
-        result.put(key, data);
+    }
+
+    /**
+     * (non-Javadoc)
+     * @see org.omegat.core.dictionaries.IDictionary#searchExactMatch(java.lang.String)
+     *
+     * returns Object that will be given to readArticle()'s second argument.
+     */
+    public Object searchExactMatch(String key) {
+        return result.get(key);
+    }
+
+    /**
+     * (non-Javadoc)
+     * @see org.omegat.core.dictionaries.IDictionary#searchPrefixMatch(java.lang.String)
+     * 
+     * Returns Map<String, Object> that String is word and Object is Entry or Entry[]
+     */
+    public Map<String, Object> searchPrefixMatch(String key) {
+        return result.prefixMap(key);
     }
 
     /*
@@ -190,7 +217,7 @@ public class StarDict implements IDictionary {
      * 
      * Returns not the raw text, but the formatted article ready for upstream use (\n replaced
      * with <br>, etc.
-     */
+    */
     @Override
     public String readArticle(String word, Object data) {
         Entry dictData = (Entry) data;

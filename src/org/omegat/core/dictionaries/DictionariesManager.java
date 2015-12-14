@@ -42,6 +42,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import org.apache.commons.collections4.MapIterator;
 
 import org.omegat.gui.dictionaries.IDictionaries;
 import org.omegat.util.DirectoryMonitor;
@@ -58,7 +59,7 @@ import org.omegat.util.OConsts;
 public class DictionariesManager implements DirectoryMonitor.Callback {
     public static final String IGNORE_FILE = "ignore.txt";
     protected DirectoryMonitor monitor;
-    protected final Map<String, DictionaryInfo> infos = new TreeMap<String, DictionaryInfo>();
+    protected final Map<String, IDictionary> infos = new TreeMap<String, IDictionary>();
     private final IDictionaries pane;
     protected static String DICTIONARY_SUBDIR = "dictionary";
 
@@ -97,15 +98,18 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
                     loadIgnoreWords(file);
                 } else if (fn.endsWith(".ifo")) {
                     IDictionary dict = new StarDict(file);
-                    Map<String, Object> header = dict.readHeader();
                     synchronized (this) {
-                        infos.put(fn, new DictionaryInfo(dict, header));
+                        infos.put(fn, dict);
                     }
                 } else if (fn.endsWith(".dsl")) {
                     IDictionary dict = new LingvoDSL(file);
-                    Map<String, Object> header = dict.readHeader();
                     synchronized (this) {
-                        infos.put(fn, new DictionaryInfo(dict, header));
+                        infos.put(fn, dict);
+                    }
+                } else if (file.getName().toLowerCase().equals("catalogs")) {
+                    IDictionary dict = new EBDict(file);
+                    synchronized (this) {
+                        infos.put(fn, dict);
                     }
                 } else {
                     fn = null;
@@ -177,6 +181,19 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         }
     }
 
+    private void retrieveArticle(String word, Object data,
+                IDictionary di, final List<DictionaryEntry> result) throws Exception {
+        if (data.getClass().isArray()) {
+            for (Object d : (Object[]) data) {
+                String a = di.readArticle(word, d);
+                result.add(new DictionaryEntry(word, a));
+            }
+        } else {
+            String a = di.readArticle(word, data);
+            result.add(new DictionaryEntry(word, a));
+        }
+    }
+
     /**
      * Find words list in all dictionaries.
      * 
@@ -185,38 +202,46 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
      * @return articles list
      */
     public List<DictionaryEntry> findWords(Collection<String> words) {
-        List<DictionaryInfo> dicts;
+        List<IDictionary> dicts;
         synchronized (this) {
-            dicts = new ArrayList<DictionaryInfo>(infos.values());
+            dicts = new ArrayList<IDictionary>(infos.values());
         }
         List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
         for (String word : words) {
-            for (DictionaryInfo di : dicts) {
+            String lowerCaseWord = word.toLowerCase();
+            for (IDictionary di : dicts) {
                 try {
                     synchronized (ignoreWords) {
                         if (ignoreWords.contains(word)) {
                             continue;
                         }
                     }
-                    Object data = di.info.get(word);
-                    if (data == null) {
-                        String lowerCaseWord = word.toLowerCase();
+                    Map<String, Object> resultMap = di.searchPrefixMatch(word);
+                    if (resultMap == null) {
                         synchronized (ignoreWords) {
                             if (ignoreWords.contains(lowerCaseWord)) {
                                 continue;
                             }
                         }
-                        data = di.info.get(lowerCaseWord);
+                        resultMap = di.searchPrefixMatch(lowerCaseWord);
                     }
-                    if (data != null) {
-                        if (data.getClass().isArray()) {
-                            for (Object d : (Object[]) data) {
-                                String a = di.dict.readArticle(word, d);
-                                result.add(new DictionaryEntry(word, a));
-                            }
+
+                    /* If there is exact match, return result of it.
+                     *  else return results of prefix match
+                     */
+                    if (resultMap != null) {
+                        Object data;
+                        if (resultMap.containsKey(word)) {
+                            data = resultMap.get(word);
+                            retrieveArticle(word, data, di, result);
+                        } else if (resultMap.containsKey(lowerCaseWord)) {
+                            data = resultMap.get(lowerCaseWord);
+                            retrieveArticle(lowerCaseWord, data, di, result);
                         } else {
-                            String a = di.dict.readArticle(word, data);
-                            result.add(new DictionaryEntry(word, a));
+                            for (Map.Entry<String, Object> entry : resultMap.entrySet()) {
+                                data = entry.getValue();
+                                retrieveArticle(entry.getKey(), data, di, result);
+                            }
                         }
                     }
                 } catch (Exception ex) {
@@ -225,15 +250,5 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
             }
         }
         return result;
-    }
-
-    protected static class DictionaryInfo {
-        public final IDictionary dict;
-        public final Map<String, Object> info;
-
-        public DictionaryInfo(final IDictionary dict, final Map<String, Object> info) {
-            this.dict = dict;
-            this.info = info;
-        }
     }
 }

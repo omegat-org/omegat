@@ -3,8 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Alex Buloichik
-               2015 Hiroshi Miura, Aaron Madlon-Kay
+ Copyright (C) 2015 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -36,48 +35,42 @@ import org.omegat.core.TestCore;
 /**
  * Dictionary test
  *
- * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Hiroshi Miura
- * @author Aaron Madlon-Kay
  */
-public class StarDictTest extends TestCore {
+public class LingvoDSLTest extends TestCore {
 
     @Test
     public void testReadFileDict() throws Exception {
-        StarDict s = new StarDict(new File("test/data/dicts/latin-francais.ifo"));
-        assertEquals(10451, s.entrySize());
+        LingvoDSL l = new LingvoDSL(new File("test/data/dicts/test.dsl"));
+        assertEquals(6, l.entrySize());
         
-        String word = "testudo";
-        Object data = s.searchExactMatch(word);
+        String word = "space";
+        String expect = "Only a single white space on first character\n";
+        Object data = l.searchExactMatch(word);
         assertNotNull(data);
-        String result = s.readArticle(word, data);
-        assertEquals("dinis, f. : tortue", result);
-    }
-    
-    @Test
-    public void testReadZipDict() throws Exception {
-        StarDict s = new StarDict(new File("test/data/dicts-zipped/latin-francais.ifo"));
-        assertEquals(10451, s.entrySize());
-        
-        String word = "testudo";
-        Object data = s.searchExactMatch(word);
-        assertNotNull(data);
-        String result = s.readArticle(word, data);
-        assertEquals("dinis, f. : tortue", result);
+        String result = l.readArticle(word, data);
+        assertEquals(expect, result);
     }
 
-    /**
-     * Test of prefixMatch method
-     * @throws java.lang.Exception
-     */
     @Test
-    public void testPrefixMatch() throws Exception {
-        Object data;
-        Object result;
-        StarDict s = new StarDict(new File("test/data/dicts-zipped/latin-francais.ifo"));
-        String word = "testudo";
-        String prefix = "test";
-        Map<String, Object> resultMap = s.searchPrefixMatch(prefix);
-        assertTrue(resultMap.containsKey(word));
+    public void testReadArticle1() throws Exception {
+        LingvoDSL l = new LingvoDSL(new File("test/data/dicts/test.dsl"));
+        String word = "tab";
+        String expect = "Translation line also can have a single TAB char\n";
+        Object data = l.searchExactMatch(word);
+        assertNotNull(data);
+        String result = l.readArticle(word, data);
+        assertEquals(expect, result);
     }
-}
+
+    @Test
+    public void testReadArticleRussian() throws Exception {
+        LingvoDSL l = new LingvoDSL(new File("test/data/dicts/test.dsl"));
+        String word = "tool";
+        Object data = l.searchExactMatch(word);
+        assertNotNull(data);
+        String result = l.readArticle(word, data);
+        assertEquals("\u0441\u0442\u0430\u043d\u043e\u043a\n", result); //станок
+    }
+
+} 

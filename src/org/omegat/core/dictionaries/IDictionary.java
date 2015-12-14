@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
+               2015 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -44,20 +45,28 @@ import java.util.Map;
  */
 public interface IDictionary {
     /**
-     * Read dictionary's articles list on startup.
-     * 
-     * @return map where key is dictionary article, value is object which allows
-     *         to read article's data by readArticle method
+     * Search with exact word match
+     *
+     * @return Object which allows to read article's data by readArticle method
      */
-    Map<String, Object> readHeader() throws Exception;
+    Object searchExactMatch(String key);
+
+    /**
+     * Search with word prefix match
+     *
+     * @param key search key
+     * @return  map where key is dictionary articles, value is object which allows
+     * to read article's data by readArticle method
+     */
+    Map<String, Object> searchPrefixMatch(String key);
 
     /**
      * Read article's text.
      * 
      * @param word
-     *            acticle name from key from readHeader method
+     *            acticle name from key from search* method
      * @param acticleData
-     *            object from value from readHeader method
+     *            object from value from search* method
      * @return article text
      */
     String readArticle(String word, Object acticleData) throws Exception;

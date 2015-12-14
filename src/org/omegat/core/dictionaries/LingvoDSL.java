@@ -33,6 +33,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.apache.commons.collections4.trie.PatriciaTrie;
+
 /**
  * Dictionary implementation for Lingvo DSL format.
  * 
@@ -46,14 +48,18 @@ public class LingvoDSL implements IDictionary {
 
     protected final File file;
 
-    public LingvoDSL(File file) {
+    protected Map<String, Object> loaded;
+    protected PatriciaTrie<Object> result;
+
+    public LingvoDSL(File file) throws Exception {
         this.file = file;
+        readHeader();
     }
 
-    public Map<String, Object> readHeader() throws Exception {
+    private void readHeader() throws Exception {
+        loaded = new HashMap<String, Object>();
         BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(file), CHARSET));
         try {
-            Map<String, Object> result = new HashMap<String, Object>();
             String s;
             StringBuilder word = new StringBuilder();
             StringBuilder trans = new StringBuilder();
@@ -66,10 +72,10 @@ public class LingvoDSL implements IDictionary {
                 }
                 s = RE_SKIP.matcher(s).replaceAll("");
                 if (Character.isWhitespace(s.codePointAt(0))) {
-                    trans.append(s).append('\n');
+                    trans.append(s.substring(1)).append('\n');
                 } else {
                     if (word.length() > 0) {
-                        result.put(word.toString(), trans.toString());
+                        loaded.put(word.toString(), trans.toString());
                         word.setLength(0);
                         trans.setLength(0);
                     }
@@ -77,12 +83,37 @@ public class LingvoDSL implements IDictionary {
                 }
             }
             if (word.length() > 0) {
-                result.put(word.toString(), trans.toString());
+                loaded.put(word.toString(), trans.toString());
             }
-            return result;
+            result = new PatriciaTrie(loaded);
+            loaded = null;
         } finally {
             rd.close();
         }
+    }
+
+    public int entrySize() {
+        return result.size();
+    }
+
+    /**
+     * Search with exact word match.
+     *
+     * @param key
+     * @return loaded Object which is String or String[]
+     */
+    public Object searchExactMatch(String key) {
+        return result.get(key);
+    }
+
+   /**
+     * Search with word prefix match
+     *
+     * @param key  String search key
+     * @return  Object which is StarDictData or StarDictData[]
+     */
+    public Map<String, Object> searchPrefixMatch(String Key) {
+        return result.prefixMap(Key);
     }
 
     public String readArticle(String word, Object articleData) throws Exception {

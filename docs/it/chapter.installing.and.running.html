@@ -130,8 +130,8 @@
                <p>All'inizio dell'installazione è possibile selezionare la lingua da utilizzare durante l'installazione. Nella finestra successiva
                   è possibile indicare che la quale lingua selezionata dovrà essere utilizzata in OmegaT. Attivando la casella corrispondente,
                   il file OmegaT.l4J.ini verrà modificato per utilizzare la lingua selezionata (per i dettagli, si veda la sezione seguente).
-                  Successivamente, una volta accettata il contratto di licenza, il programma chiederà se si vuole creare un gruppo nel menu
-                  <span class="emphasis"><em>start</em></span> , e un collegamento nel desktop e nella barra di avvio rapido: è possibile creare tali scorciatoie anche in seguito, trascinando
+                  Successivamente, una volta accettato il contratto di licenza, il programma chiederà se si vuole creare un gruppo nel menu
+                  <span class="emphasis"><em>start</em></span> , e un collegamento nel desktop e nella barra di avvio rapido: è possibile creare queste scorciatoie anche in seguito, trascinando
                   l'icona <span class="emphasis"><em><span class="application">OmegaT</span>.exe</em></span> nel desktop o nel menu "start". L'ultimo riquadro permette di dare uno sguardo al file leggimi e a quello delle modifiche
                   relativo alla versione installata.
                </p>
@@ -144,15 +144,15 @@
                      </div>
                   </div>
                </div>
-               <p>Una volta installato <span class="application">OmegaT</span>, è possibile avviarlo sia facendo clic direttamente su <span class="emphasis"><em><span class="application">OmegaT</span>.jar</em></span>, sia da riga di comando.
+               <p>Una volta installato <span class="application">OmegaT</span>, è possibile avviare il programma sia facendo clic direttamente su <span class="emphasis"><em><span class="application">OmegaT</span>.jar</em></span>, sia da riga di comando.
                </p>
-               <p>Il metodo più semplice per avviare OmegaT è, comunque, eseguire il programma <span class="emphasis"><em> <span class="application">OmegaT</span>.exe</em></span>. <a class="indexterm" name="d0e482"></a>In questo caso, per opzioni per l'avvio del programma saranno lette dal file <span class="emphasis"><em><span class="application">OmegaT</span>.l4J.ini </em></span>file, che si trova nella stessa cartella del file eseguibile e che può essere modificato affinché rispecchi le proprie impostazioni.
-                  L'esempio di file INI&nbsp;che segue riserva 1GB di memoria, richiede come lingua dell'utente il Francese e il Canada come nazione:
+               <p>Il metodo più semplice per avviare OmegaT è, comunque, eseguire il programma <span class="emphasis"><em> <span class="application">OmegaT</span>.exe</em></span>. <a class="indexterm" name="d0e482"></a>In questo caso, le opzioni per l'avvio del programma saranno lette dal file <span class="emphasis"><em><span class="application">OmegaT</span>.l4J.ini </em></span>, che si trova nella stessa cartella del file eseguibile e che può essere modificato affinché rispecchi le proprie impostazioni.
+                  L'esempio di file INI&nbsp;che segue riserva 1GB di memoria, richiede il francese come lingua dell'utente e il Canada come nazione:
                </p>
                <div class="literallayout">
                   <p><code class="code">#&nbsp;OmegaT.exe&nbsp;runtime&nbsp;configuration&nbsp;#&nbsp;Per&nbsp;usare&nbsp;un&nbsp;parametro,&nbsp;rimuovere&nbsp;'#'&nbsp;prima&nbsp;del&nbsp;'-'&nbsp;#&nbsp;Memory&nbsp;-Xmx1024M&nbsp;#&nbsp;Language&nbsp;-Duser.language=FR&nbsp;#&nbsp;Country&nbsp;-Duser.country=CA</code></p>
                </div>
-               <p>Nota: se OmegaT risulta lento durante le sessioni di Desktop remoto in Windows, è possibile usare questa opzione:</p>
+               <p>Nota: se OmegaT risultasse lento durante le sessioni di desktop remoto in Windows, sarà possibile usare questa opzione:</p>
                <div class="literallayout">
                   <p><code class="code">-Dsun.java2d.noddraw=false</code></p>
                </div>
@@ -761,7 +761,7 @@
                            <div class="itemizedlist">
                               <ul class="itemizedlist" style="list-style-type: circle; ">
                                  <li class="listitem">
-                                    <p><span class="emphasis"><em><span class="emphasis"><em><code class="literal">--mode=console-translate</code></em></span></em></span></p>
+                                    <p><span class="emphasis"><em><code class="literal">--mode=console-translate</code></em></span></p>
                                     <p>In questa modalità, OmegaT tenterà di tradurre, con le memorie di traduzione disponibili, i file presenti in /source/. Ciò
                                        è utile per avviare OmegaT su un server con file TMX forniti automaticamente a un progetto.
                                     </p>
@@ -897,7 +897,7 @@
                         </div>
                      </div>
                   </div>
-                  <p>Altro parametro di riga di comando aggiuntivo specifico della modalità console: <code class="literal">--tag-validation=[abort|warn].</code> Quando viene aggiunto questo parametro, la convalida dei tag viene eseguita prima della traduzione/allineamento. Se il valore
+                  <p>Altro parametro di riga di comando aggiuntivo specifico della modalità console: <code class="literal">--tag-validation=[abort|warn].</code> Quando questo parametro è aggiunto, la convalida dei tag viene eseguita prima della traduzione/allineamento. Se il valore
                      è <code class="literal">abort</code> ("ferma"), allora se si incontrano errori nei tag, gli errori vengono visualizzati e il programma si blocca. Se il valore
                      è <code class="literal">warn</code> ("avvisa"), allora gli errori vengono visualizzati ma OmegaT continua.
                   </p>
@@ -909,7 +909,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>7.&nbsp;Costruire un pacchetto <span class="application">OmegaT</span> dai sorgenti<a class="indexterm" name="d0e1699"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>7.&nbsp;Costruire un pacchetto <span class="application">OmegaT</span> dai sorgenti<a class="indexterm" name="d0e1698"></a></h2>
                   </div>
                </div>
             </div>
@@ -917,7 +917,7 @@
                digitare:
             </p>
             <p><code class="literal">$ ant jar release</code></p>
-            <p>L'operazione creerà una distribuzione completa di <span class="application">OmegaT</span> nella cartella ./dist/, in cui saranno presenti tutti i file che servono per avviare <span class="application">OmegaT</span>.
+            <p>L'operazione creerà una distribuzione completa di <span class="application">OmegaT</span> nella cartella /dist/, in cui saranno presenti tutti i file necessari ad avviare <span class="application">OmegaT</span>.
             </p>
          </div>
       </div>

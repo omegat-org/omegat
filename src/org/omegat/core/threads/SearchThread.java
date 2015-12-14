@@ -29,12 +29,10 @@
 
 package org.omegat.core.threads;
 
-import java.io.IOException;
 import java.util.regex.PatternSyntaxException;
 
 import org.omegat.core.Core;
 import org.omegat.core.search.Searcher;
-import org.omegat.filters2.TranslationException;
 import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.Log;
 
@@ -84,16 +82,11 @@ public class SearchThread extends LongProcessThread {
                 // bad regexp input
                 // alert user to badness
                 m_window.displayErrorRB(e, "ST_REGEXP_ERROR");
-            } catch (IOException e) {
+            } catch (Exception e) {
                 // something bad happened
                 // alert user to badness
                 Log.logErrorRB(e, "ST_FILE_SEARCH_ERROR");
                 Core.getMainWindow().displayErrorRB(e, "ST_FILE_SEARCH_ERROR");
-            } catch (TranslationException te) {
-                // something bad happened
-                // alert user to badness
-                Log.logErrorRB(te, "ST_FILE_SEARCH_ERROR");
-                Core.getMainWindow().displayErrorRB(te, "ST_FILE_SEARCH_ERROR");
             }
         } catch (RuntimeException re) {
             Log.logErrorRB(re, "ST_FATAL_ERROR");

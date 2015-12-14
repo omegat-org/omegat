@@ -31,7 +31,6 @@
 package org.omegat.core.search;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -40,7 +39,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
@@ -57,12 +55,12 @@ import org.omegat.core.data.TMXEntry;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IParseCallback;
-import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StaticUtils.ITreeIteratorCallback;
 import org.omegat.util.StringUtil;
 
 /**
@@ -144,8 +142,9 @@ public class Searcher {
      *            what to search for (search text and options)
      * @param maxResults
      *            maximum number of search results
+     * @throws Exception
      */
-    public void search() throws TranslationException, PatternSyntaxException, IOException {
+    public void search() throws Exception {
         m_searchExpression = expression;
         String text = expression.text;
         String author = expression.author;
@@ -524,27 +523,29 @@ public class Searcher {
         }
     }
 
-    private void searchFiles() throws IOException, TranslationException {
-        List<String> fileList = new ArrayList<String>(256);
+    private void searchFiles() throws Exception {
         if (!expression.rootDir.endsWith(File.separator))
             expression.rootDir += File.separator;
-        StaticUtils.buildFileList(fileList, new File(expression.rootDir), expression.recursive);
 
-        FilterMaster fm = Core.getFilterMaster();
+        final FilterMaster fm = Core.getFilterMaster();
 
-        SearchCallback searchCallback = new SearchCallback(m_project.getProjectProperties());
+        final SearchCallback searchCallback = new SearchCallback(m_project.getProjectProperties());
         
-        for (String filename : fileList) {
-            FileInfo fi = new FileInfo();
-            // determine actual file name w/ no root path info
-            fi.filePath = filename.substring(expression.rootDir.length());
+        StaticUtils.iterateFileTree(new File(expression.rootDir), expression.recursive, new ITreeIteratorCallback() {
+            @Override
+            public void processFile(File file) throws Exception {
+                String filename = file.getPath();
+                FileInfo fi = new FileInfo();
+                // determine actual file name w/ no root path info
+                fi.filePath = filename.substring(expression.rootDir.length());
 
-            searchCallback.setCurrentFile(fi);
-            fm.loadFile(filename, new FilterContext(m_project.getProjectProperties()), searchCallback);
-            searchCallback.fileFinished();
-            
-            checkStop.checkInterrupted();
-        }
+                searchCallback.setCurrentFile(fi);
+                fm.loadFile(filename, new FilterContext(m_project.getProjectProperties()), searchCallback);
+                searchCallback.fileFinished();
+
+                checkStop.checkInterrupted();
+            }
+        });
     }
 
     protected class SearchCallback extends ParseEntry implements IParseCallback {

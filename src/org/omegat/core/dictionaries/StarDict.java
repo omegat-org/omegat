@@ -170,7 +170,7 @@ public class StarDict implements IDictionary {
         }
     }
 
-    public int entrySize() {
+    public int size() {
         return result.size();
     }
 

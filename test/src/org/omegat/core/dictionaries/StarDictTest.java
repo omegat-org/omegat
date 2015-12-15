@@ -30,8 +30,8 @@ import java.io.File;
 import java.util.Map;
 
 import org.junit.Test;
+import junit.framework.TestCase;
 
-import org.omegat.core.TestCore;
 
 /**
  * Dictionary test
@@ -40,12 +40,15 @@ import org.omegat.core.TestCore;
  * @author Hiroshi Miura
  * @author Aaron Madlon-Kay
  */
-public class StarDictTest extends TestCore {
+public class StarDictTest extends TestCase {
+
+    static final String dictPath = "test/data/dicts/latin-francais.ifo";
+    static final String zippedDictPath = "test/data/dicts-zipped/latin-francais.ifo";
 
     @Test
     public void testReadFileDict() throws Exception {
-        StarDict s = new StarDict(new File("test/data/dicts/latin-francais.ifo"));
-        assertEquals(10451, s.entrySize());
+        StarDict s = new StarDict(new File(dictPath));
+        assertEquals(10451, s.size());
         
         String word = "testudo";
         Object data = s.searchExactMatch(word);
@@ -56,8 +59,8 @@ public class StarDictTest extends TestCore {
     
     @Test
     public void testReadZipDict() throws Exception {
-        StarDict s = new StarDict(new File("test/data/dicts-zipped/latin-francais.ifo"));
-        assertEquals(10451, s.entrySize());
+        StarDict s = new StarDict(new File(zippedDictPath));
+        assertEquals(10451, s.size());
         
         String word = "testudo";
         Object data = s.searchExactMatch(word);

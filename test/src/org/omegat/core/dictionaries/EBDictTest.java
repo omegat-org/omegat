@@ -26,23 +26,27 @@
 package org.omegat.core.dictionaries;
 
 import java.io.File;
-import org.junit.Test;
-import static org.junit.Assert.*;
 
-import org.omegat.core.TestCore;
+import org.junit.Test;
+import junit.framework.TestCase;
+
 
 /**
  *
  * @author Hiroshi Miura
  */
-public class EBDictTest {
+public class EBDictTest extends TestCase {
+
+    private static final String dictPath = "test/data/dicts/epwing/CATALOGS";
+    private static final String zippedDictPath = "test/data/dicts-zipped/epwing/CATALOGS";
+
     /**
      * Test of searchExactMatch method
      * @throws java.lang.Exception
      */
     @Test
     public void testSearchExactMatch() throws Exception {
-        EBDict e = new EBDict(new File("test/data/dicts/epwing/CATALOGS"));
+        EBDict e = new EBDict(new File(dictPath));
         String word = "Here";
         Object result = e.searchExactMatch(word);
         assertNotNull(result);
@@ -55,7 +59,7 @@ public class EBDictTest {
      */
     @Test
     public void testReadArticle() throws Exception {
-        EBDict e = new EBDict(new File("test/data/dicts/epwing/CATALOGS"));
+        EBDict e = new EBDict(new File(dictPath));
         String word = "Tokyo";
         Object data = e.searchExactMatch(word);
         String result = e.readArticle(word, data);
@@ -68,7 +72,7 @@ public class EBDictTest {
      */
     @Test
     public void testEBZipReadArticle() throws Exception {
-        EBDict e = new EBDict(new File("test/data/dicts-zipped/epwing/CATALOGS"));
+        EBDict e = new EBDict(new File(zippedDictPath));
         String word = "Tokyo";
         Object data = e.searchExactMatch(word);
         String result = e.readArticle(word, data);

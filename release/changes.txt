@@ -20,7 +20,7 @@
  OmegaT 3.5.3 update 1
 ----------------------------------------------------------------------
    0 Enhancement
-   2 Bug fixes
+   3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.5.3 update 1 vs 3.5.3
@@ -29,6 +29,9 @@
 
   - Stop searching when Find window is closed
   https://sourceforge.net/p/omegat/bugs/412/
+
+  - Trim whitespace on LingvoDSL dictionary entries
+  https://sourceforge.net/p/omegat/bugs/786/
 
   - An error was fixed with -Dhttp.proxyHost and -Dhttp.proxyPort in 
 Linux kaptain launcher

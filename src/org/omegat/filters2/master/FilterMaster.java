@@ -35,11 +35,6 @@
 
 package org.omegat.filters2.master;
 
-import gen.core.filters.Files;
-import gen.core.filters.Filter;
-import gen.core.filters.Filter.Option;
-import gen.core.filters.Filters;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -55,8 +50,8 @@ import javax.swing.JOptionPane;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import org.omegat.core.Core;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IAlignCallback;
@@ -69,6 +64,12 @@ import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
+
+import gen.core.filters.Files;
+import gen.core.filters.Filter;
+import gen.core.filters.Filter.Option;
+import gen.core.filters.Filters;
 
 /**
  * A master class that registers and handles all the filters. Singleton - there can be only one instance of
@@ -231,8 +232,13 @@ public class FilterMaster {
             return;
         }
 
-        File inFile = new File(sourcedir, filename);
-        File outFile = new File(targetdir, getTargetForSource(filename, lookup, fc.getTargetLang()));
+        File inFile = new File(sourcedir, filename).getCanonicalFile();
+        File outFile = new File(targetdir, getTargetForSource(filename, lookup, fc.getTargetLang())).getCanonicalFile();
+
+        if (inFile.equals(outFile)) {
+            throw new TranslationException(
+                    StringUtil.format(OStrings.getString("FILTERMASTER_ERROR_SRC_TRG_SAME_FILE"), inFile.getPath()));
+        }
 
         fc.setInEncoding(lookup.outFilesInfo.getSourceEncoding());
         fc.setOutEncoding(lookup.outFilesInfo.getTargetEncoding());

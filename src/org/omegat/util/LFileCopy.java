@@ -50,6 +50,11 @@ public class LFileCopy {
             throw new IOException(StringUtil.format(OStrings.getString("LFC_ERROR_FILE_DOESNT_EXIST"),
                     src.getAbsolutePath()));
         }
+        if (src.getCanonicalFile().equals(dest.getCanonicalFile())) {
+            // Source and destination are literally the same file.
+            // It doesn't make sense to do anything but return.
+            return;
+        }
         FileInputStream fis = new FileInputStream(src);
         dest.getParentFile().mkdirs();
         FileOutputStream fos = new FileOutputStream(dest);

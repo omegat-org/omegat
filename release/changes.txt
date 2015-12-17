@@ -2,6 +2,7 @@
  OmegaT 3.6.0
 ----------------------------------------------------------------------
   3 Enhancements
+  1 Bug fix
 ----------------------------------------------------------------------
 3.6.0 vs 3.5.3
 
@@ -15,6 +16,11 @@
 
   - Add menus to the Search window 
   https://sourceforge.net/p/omegat/feature-requests/1164/
+
+  Bug fixes:
+
+  - Files can be clobbered when creating translated documents
+  https://sourceforge.net/p/omegat/bugs/787/
 
 ----------------------------------------------------------------------
  OmegaT 3.5.3 update 1

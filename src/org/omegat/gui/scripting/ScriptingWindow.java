@@ -39,15 +39,13 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.script.ScriptEngine;
 import javax.script.ScriptEngineFactory;
-import javax.script.ScriptEngineManager;
-import javax.script.SimpleBindings;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -82,7 +80,6 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.gui.editor.mark.Mark;
-import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -150,29 +147,18 @@ public class ScriptingWindow extends JFrame {
         addRunShortcutToOmegaT();
         setScriptsDirectory(Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY, DEFAULT_SCRIPTS_DIR));
 
-        monitor = new ScriptsMonitor(this, m_scriptList, getAvailableScriptExtensions());
+        monitor = new ScriptsMonitor(this);
         if (m_scriptsDirectory != null) {
             monitor.start(m_scriptsDirectory);
         }
 
-        logResult(listScriptEngine().toString());
+        logResult(listScriptEngines());
 
     }
 
-    private List<String> getAvailableScriptExtensions() {
-        ArrayList<String> extensions = new ArrayList<String>();
-        for (ScriptEngineFactory engine : manager.getEngineFactories()) {
-            for (String ext : engine.getExtensions()) {
-                extensions.add(ext);
-            }
-        }
-
-        return extensions;
-    }
-
-    private StringBuilder listScriptEngine() {
+    private String listScriptEngines() {
         StringBuilder sb = new StringBuilder(OStrings.getString("SCW_LIST_ENGINES") + "\n");
-        for (ScriptEngineFactory engine : manager.getEngineFactories()) {
+        for (ScriptEngineFactory engine : ScriptRunner.MANAGER.getEngineFactories()) {
             sb.append(" - ");
             sb.append(engine.getEngineName());
             sb.append(" ");
@@ -192,7 +178,7 @@ public class ScriptingWindow extends JFrame {
             sb.append("\n");
         }
 
-        return sb;
+        return sb.toString();
     }
 
     private void addScriptCommandToOmegaT() {
@@ -533,68 +519,13 @@ public class ScriptingWindow extends JFrame {
         executeScriptFile(scriptItem, forceFromFile, null);
     }
 
-    public static Object executeScriptFileHeadless(ScriptItem scriptItem, boolean forceFromFile,
+    public void executeScriptFile(ScriptItem scriptItem, boolean forceFromFile,
             Map<String, Object> additionalBindings) {
-        ScriptEngineManager manager = new ScriptEngineManager(ScriptingWindow.class.getClassLoader());
-        ScriptEngine scriptEngine = manager.getEngineByExtension(getFileExtension(scriptItem.getName()));
-
-        if (scriptEngine == null) {
-            scriptEngine = manager.getEngineByName(DEFAULT_SCRIPT);
-        }
-
-        SimpleBindings bindings = new SimpleBindings();
-        bindings.put(VAR_PROJECT, Core.getProject());
-        bindings.put(VAR_EDITOR, Core.getEditor());
-        bindings.put(VAR_GLOSSARY, Core.getGlossary());
-        bindings.put(VAR_MAINWINDOW, Core.getMainWindow());
-        bindings.put(VAR_RESOURCES, scriptItem.getResourceBundle());
-
-        if (additionalBindings != null) {
-            bindings.putAll(additionalBindings);
-        }
-
-        Object eval = null;
-        try {
-            eval = scriptEngine.eval(scriptItem.getText(), bindings);
-            if (eval != null) {
-                Log.logRB("SCW_SCRIPT_RESULT");
-                Log.log(eval.toString());
-            }
-        } catch (Throwable e) {
-            Log.logErrorRB(e, "SCW_SCRIPT_ERROR");
-        }
-
-        return eval;
-    }
-
-    public void executeScriptFile(ScriptItem scriptItem, boolean forceFromFile, Map<String, Object> additionalBindings) {
-        ScriptLogger scriptLogger = new ScriptLogger(m_txtResult);
-
-        ScriptEngine scriptEngine = manager.getEngineByExtension(getFileExtension(scriptItem.getName()));
-
-        if (scriptEngine == null) {
-            scriptEngine = manager.getEngineByName(DEFAULT_SCRIPT);
-        }
-
-        //logResult(StaticUtils.format(OStrings.getString("SCW_SELECTED_LANGUAGE"), scriptEngine.getFactory().getEngineName()));
-        SimpleBindings bindings = new SimpleBindings();
-        bindings.put(VAR_PROJECT, Core.getProject());
-        bindings.put(VAR_EDITOR, Core.getEditor());
-        bindings.put(VAR_GLOSSARY, Core.getGlossary());
-        bindings.put(VAR_MAINWINDOW, Core.getMainWindow());
-        bindings.put(VAR_CONSOLE, scriptLogger);
-        bindings.put(VAR_RESOURCES, scriptItem.getResourceBundle());
-
-        if (additionalBindings != null) {
-            bindings.putAll(additionalBindings);
-        }
-
-        // evaluate JavaScript code from String
         try {
             String scriptString;
             if (forceFromFile) {
                 scriptString = scriptItem.getText();
-            } else if ("".equals(m_txtScriptEditor.getText().trim())) {
+            } else if (m_txtScriptEditor.getText().trim().isEmpty()) {
                 scriptString = scriptItem.getText();
                 m_txtScriptEditor.setText(scriptString);
             } else {
@@ -605,11 +536,33 @@ public class ScriptingWindow extends JFrame {
                 scriptString += "\n";
             }
 
-            Object eval = scriptEngine.eval(scriptString, bindings);
-            if (eval != null) {
-                logResult(OStrings.getString("SCW_SCRIPT_RESULT"));
-                logResult(eval.toString());
+            Map<String, Object> bindings = new HashMap<String, Object>();
+            if (additionalBindings != null) {
+                bindings.putAll(additionalBindings);
             }
+            bindings.put(ScriptRunner.VAR_CONSOLE, new IScriptLogger() {
+                @Override
+                public void print(Object o) {
+                    Document doc = m_txtResult.getDocument();
+
+                    try {
+                        doc.insertString(doc.getLength(), o.toString(), null);
+                    } catch (BadLocationException e) {
+                        /* empty */
+                    }
+                }
+                @Override
+                public void println(Object o) {
+                    print(o.toString() + "\n");
+                }
+                @Override
+                public void clear() {
+                    m_txtResult.setText("");
+                }
+            });
+
+            String result = ScriptRunner.executeScript(scriptString, scriptItem, bindings);
+            logResult(result);
         } catch (Throwable e) {
             logResult(OStrings.getString("SCW_SCRIPT_ERROR"));
             logResult(e.getMessage());
@@ -695,6 +648,10 @@ public class ScriptingWindow extends JFrame {
         }
     }
 
+    void setScriptItems(Collection<ScriptItem> items) {
+        m_scriptList.setListData(items.toArray(new ScriptItem[items.size()]));
+    }
+
     /**
      * Loads the position and size of the script window
      */
@@ -768,28 +725,6 @@ public class ScriptingWindow extends JFrame {
         return bare;
     }
 
-    /**
-     * Returns the extension of file.
-     */
-    protected static String getFileExtension(String fileName) {
-        String extension = "";
-
-        int i = fileName.lastIndexOf('.');
-
-        if (i >= 0) {
-            extension = fileName.substring(i + 1);
-        }
-
-        return extension;
-    }
-
-    public static final String DEFAULT_SCRIPT = "javascript";
-    public static final String VAR_CONSOLE = "console";
-    public static final String VAR_MAINWINDOW = "mainWindow";
-    public static final String VAR_GLOSSARY = "glossary";
-    public static final String VAR_EDITOR = "editor";
-    public static final String VAR_PROJECT = "project";
-    public static final String VAR_RESOURCES = "res";
 
     private static final String DEFAULT_SCRIPTS_DIR = "scripts";
 
@@ -799,8 +734,6 @@ public class ScriptingWindow extends JFrame {
     private JEditorPane m_txtResult;
     private JTextArea m_txtScriptEditor;
     private JButton m_btnRunScript;
-
-    private final ScriptEngineManager manager = new ScriptEngineManager(getClass().getClassLoader());
 
     protected ScriptsMonitor monitor;
 

@@ -5,6 +5,7 @@
 
  Copyright (C) 2011 Briac Pilpre 
                2013 Alex Buloichik, Yu Tang
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,41 +26,19 @@
  **************************************************************************/
 package org.omegat.gui.scripting;
 
-import javax.swing.JEditorPane;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
-
 /**
  * Used to display results in the scripting window
  * 
  * @author Briac Pilpre (briacp@gmail.com)
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Yu Tang
- * 
+ * @author Aaron Madlon-Kay
  */
-public class ScriptLogger {
-	private JEditorPane jt;
+public interface IScriptLogger {
 
-	ScriptLogger(JEditorPane m_scriptResultTextArea)
-	{
-            this.jt = m_scriptResultTextArea;
-	}
-
-	public void print(Object o) {
-            Document doc = jt.getDocument();
+    public void print(Object o);
 	
-            try {
-                doc.insertString(doc.getLength(), o.toString(), null);
-            } catch (BadLocationException e) {
-	      /* empty */
-            }
-	}
+    public void println(Object o);
 	
-	public void println(Object o) {
-            print(o.toString() + "\n");
-	}
-	
-	public void clear() {
-            jt.setText("");
-	}
+    public void clear();
 }

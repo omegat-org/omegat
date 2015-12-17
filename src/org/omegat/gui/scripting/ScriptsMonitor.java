@@ -121,7 +121,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
         	scriptsList.add(new ScriptItem(script));
         }
 
-		Collections.sort(scriptsList, new ScriptItem.ScriptItemComparator());
+        Collections.sort(scriptsList);
         m_scriptingWindow.setScriptItems(scriptsList);
 
         if (SCRIPTING_EVENTS) {

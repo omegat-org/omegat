@@ -161,6 +161,16 @@ public class FileUtilTest extends TestCase {
         assertEquals("", FileUtil.getFileExtension("foo\\.bar"));
     }
 
+    public void testStripFileExtension() {
+        assertEquals("foo", FileUtil.stripFileExtension("foo.js"));
+        assertEquals("foo.js/bar", FileUtil.stripFileExtension("foo.js/bar.zip"));
+        assertEquals("C:/foo.js/bar", FileUtil.stripFileExtension("C:\\foo.js\\bar.zip"));
+        assertEquals("foo", FileUtil.stripFileExtension("foo.tar.gz"));
+        assertEquals("foo", FileUtil.stripFileExtension("foo"));
+        assertEquals("foo/.bar", FileUtil.stripFileExtension("foo/.bar"));
+        assertEquals("foo/.bar", FileUtil.stripFileExtension("foo\\.bar"));
+    }
+
     private abstract class CountingCallback implements ICollisionCallback {
         int calledTimes = 0;
     }

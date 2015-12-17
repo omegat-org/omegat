@@ -225,7 +225,7 @@ public class ScriptingWindow extends JFrame {
     }
 
     private void setQuickScriptMenu(ScriptItem scriptItem, int index) {
-        m_quickScripts[index] = scriptItem.getName();
+        m_quickScripts[index] = scriptItem.getFile().getName();
 
         removeAllQuickScriptActionListenersFrom(m_quickMenus[index]);
         m_quickMenus[index].addActionListener(new QuickScriptActionListener(index));
@@ -332,7 +332,7 @@ public class ScriptingWindow extends JFrame {
                 try {
                     m_currentScriptItem.setText(m_txtScriptEditor.getText());
                     logResult(StringUtil.format(OStrings.getString("SCW_SAVE_OK"),
-                            m_currentScriptItem.getAbsolutePath()));
+                            m_currentScriptItem.getFile().getAbsolutePath()));
                 } catch (IOException e) {
                     logResult(OStrings.getString("SCW_SAVE_ERROR"));
                     logResult(e.getMessage());
@@ -440,7 +440,8 @@ public class ScriptingWindow extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
                     ScriptItem scriptItem = (ScriptItem) m_scriptList.getSelectedValue();
-                    Preferences.setPreference(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey, scriptItem.getName());
+                    Preferences.setPreference(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey,
+                            scriptItem.getFile().getName());
                     m_quickScriptButtons[index].setToolTipText(scriptItem.getToolTip());
                     m_quickScriptButtons[index].setText("<" + scriptKey + ">");
 
@@ -502,14 +503,14 @@ public class ScriptingWindow extends JFrame {
             return;
         }
 
-        if (!m_currentScriptItem.canRead()) {
+        if (!m_currentScriptItem.getFile().canRead()) {
             logResult(OStrings.getString("SCW_CANNOT_READ_SCRIPT"));
             return;
         }
 
         m_txtResult.setText("");
         logResult(StringUtil.format(OStrings.getString("SCW_RUNNING_SCRIPT"),
-                m_currentScriptItem.getAbsolutePath()));
+                m_currentScriptItem.getFile().getAbsolutePath()));
 
         executeScriptFile(m_currentScriptItem, false);
 
@@ -706,25 +707,6 @@ public class ScriptingWindow extends JFrame {
             logResult(OStrings.getString("SCW_CANNOT_READ_SCRIPT"));
         }
     }
-
-    /**
-     * Returns the filename without the extension
-     */
-    protected static String getBareFileName(String fileName) {
-        if (fileName == null) {
-            return null;
-        }
-
-        String bare = fileName;
-        int i = fileName.lastIndexOf('.');
-
-        if (i >= 0) {
-            bare = fileName.substring(0, i);
-        }
-
-        return bare;
-    }
-
 
     private static final String DEFAULT_SCRIPTS_DIR = "scripts";
 

@@ -456,4 +456,17 @@ public class FileUtil {
         int i = basename.indexOf('.');
         return i < 1 ? "" : basename.substring(i + 1);
     }
+
+    /**
+     * Returns the filename without the extension
+     */
+    public static String stripFileExtension(String path) {
+        File file = new File(path.replace('\\', '/'));
+
+        String basename = file.getName();
+        int i = basename.indexOf('.');
+        String stripped = i < 1 ? basename : basename.substring(0, i);
+
+        return new File(file.getParent(), stripped).getPath();
+    }
 }

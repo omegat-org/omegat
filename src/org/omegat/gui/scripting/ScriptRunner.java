@@ -103,7 +103,7 @@ public class ScriptRunner {
             bindings.putAll(additionalBindings);
         }
         bindings.put(VAR_RESOURCES, item.getResourceBundle());
-        ScriptEngine engine = MANAGER.getEngineByExtension(FileUtil.getFileExtension(item.getName()));
+        ScriptEngine engine = MANAGER.getEngineByExtension(FileUtil.getFileExtension(item.getFile().getName()));
         if (engine == null) {
             engine = MANAGER.getEngineByName(DEFAULT_SCRIPT);
         }

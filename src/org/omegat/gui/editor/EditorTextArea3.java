@@ -462,15 +462,28 @@ public class EditorTextArea3 extends JEditorPane {
      */
     boolean moveCursorOverTag(boolean withShift, boolean checkTagStart) {
         Document3 doc = getOmDocument();
+        int caret = getCaretPosition();
+        int start = doc.getTranslationStart();
+        int end = doc.getTranslationEnd();
+        if (caret < start || caret > end) {
+            // We are outside the translation (maybe cursor lock is off).
+            // Don't try to jump over tags.
+            return false;
+        }
+        if ((caret == start && !checkTagStart) || (caret == end && checkTagStart)) {
+            // We are at the edge of the translation but moving toward the outside.
+            // Don't try to jump over tags.
+            return false;
+        }
         SourceTextEntry ste = doc.controller.getCurrentEntry();
         String text = doc.extractTranslation();
-        int off = getCaretPosition() - doc.getTranslationStart();
+        int off = caret - start;
         // iterate by 'protected parts'
         if (ste != null) {
             for (ProtectedPart pp : ste.getProtectedParts()) {
                 if (checkTagStart) {
                     if (StringUtil.isSubstringAfter(text, off, pp.getTextInSourceSegment())) {
-                        int pos = off + doc.getTranslationStart() + pp.getTextInSourceSegment().length();
+                        int pos = off + start + pp.getTextInSourceSegment().length();
                         if (withShift) {
                             getCaret().moveDot(pos);
                         } else {
@@ -480,7 +493,7 @@ public class EditorTextArea3 extends JEditorPane {
                     }
                 } else {
                     if (StringUtil.isSubstringBefore(text, off, pp.getTextInSourceSegment())) {
-                        int pos = off + doc.getTranslationStart() - pp.getTextInSourceSegment().length();
+                        int pos = off + start - pp.getTextInSourceSegment().length();
                         if (withShift) {
                             getCaret().moveDot(pos);
                         } else {

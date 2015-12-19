@@ -72,6 +72,7 @@ import org.omegat.util.Platform;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
+import org.omegat.util.gui.Styles;
 
 /**
  * Changes of standard JEditorPane implementation for support custom behavior.
@@ -143,6 +144,8 @@ public class EditorTextArea3 extends JEditorPane {
         });
         setToolTipText("");
         setDragEnabled(true);
+        setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
+        setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
     }
     
     @Override

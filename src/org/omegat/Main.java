@@ -75,7 +75,6 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter;
 import org.omegat.util.gui.OSXIntegration;
-import org.omegat.util.gui.Styles;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 
@@ -310,9 +309,6 @@ public class Main {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             
             System.setProperty("swing.aatext", "true");
-            
-            // Override LAF with custom colors, if any (they default to the LAF attributes)
-            Styles.setupLAF();
 
         } catch (Exception e) {
             // do nothing

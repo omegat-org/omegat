@@ -32,9 +32,11 @@
 package org.omegat.util.gui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.Window;
+import java.io.FileNotFoundException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPopupMenu;
@@ -52,9 +54,6 @@ import org.omegat.util.Platform;
 import com.vlsolutions.swing.docking.AutoHidePolicy;
 import com.vlsolutions.swing.docking.AutoHidePolicy.ExpandMode;
 import com.vlsolutions.swing.docking.ui.DockingUISettings;
-
-import java.awt.Font;
-import java.io.FileNotFoundException;
 
 /**
  * Docking UI support.
@@ -323,12 +322,13 @@ public class DockingUI {
     }
     
     /**
-     * Adjust a color by adding some constant to its RGB values, wrapping around within the range 0-255.
+     * Adjust a color by adding some constant to its RGB values, clamping to the
+     * range 0-255.
      */
     private static Color adjustRGB(Color color, int adjustment) {
-        Color result = new Color((color.getRed() + adjustment + 255) % 255,
-                (color.getGreen() + adjustment + 255) % 255,
-                (color.getBlue() + adjustment + 255) % 255);
+        Color result = new Color(Math.max(0, Math.min(255, color.getRed() + adjustment)),
+                Math.max(0, Math.min(255, color.getGreen() + adjustment)),
+                Math.max(0, Math.min(255, color.getBlue() + adjustment)));
         return result;
     }
     

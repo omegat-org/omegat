@@ -25,6 +25,10 @@
   - Files can be clobbered when creating translated documents
   https://sourceforge.net/p/omegat/bugs/787/
 
+  Other changes:
+
+  - The appearance under Windows "high-contrast" themes is improved
+
 ----------------------------------------------------------------------
  OmegaT 3.5.3 update 1
 ----------------------------------------------------------------------

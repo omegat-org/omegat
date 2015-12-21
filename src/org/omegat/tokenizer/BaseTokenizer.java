@@ -94,8 +94,7 @@ public abstract class BaseTokenizer implements ITokenizer {
      * Indicates the default behavior to use for the tokenizer.
      * Each tokenizer may override this with the version most suitable for that language.
      */
-    @SuppressWarnings("deprecation")
-    protected Version defaultBehavior = Version.LUCENE_CURRENT;
+    protected Version defaultBehavior = Version.LUCENE_36;
 
     protected Version currentBehavior = null;
 

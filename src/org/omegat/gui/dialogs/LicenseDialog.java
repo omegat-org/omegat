@@ -110,32 +110,6 @@ public class LicenseDialog extends javax.swing.JDialog {
         DockingUI.displayCentered(this);
     }
 
-    /**
-     * Load license from file "license.txt" from the root of help.
-     */
-    private String loadLicense() {
-
-        // Get the license
-        URL url = HelpFrame.getHelpFileURL(null, OConsts.LICENSE_FILE);
-        if (url == null) {
-            return HelpFrame.errorHaiku();
-        }
-
-        try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(url.openStream(), OConsts.UTF8));
-            try {
-                StringWriter out = new StringWriter();
-                LFileCopy.copy(rd, out);
-                return out.toString();
-            } finally {
-                rd.close();
-            }
-        } catch (IOException ex) {
-            return HelpFrame.errorHaiku();
-        }
-
-    }
-
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {
         doClose(RET_OK);
     }

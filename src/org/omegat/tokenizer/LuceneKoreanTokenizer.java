@@ -54,7 +54,7 @@ public class LuceneKoreanTokenizer extends BaseTokenizer {
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
             Set<?> stopWords = stopWordsAllowed ? KoreanAnalyzer.STOP_WORDS_SET
-                    : Collections.EMPTY_SET;
+                    : Collections.emptySet();
             return new KoreanAnalyzer(getBehavior(), stopWords).tokenStream("",
             		new StringReader(strOrig));
         } else {

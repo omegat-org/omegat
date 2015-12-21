@@ -85,7 +85,7 @@ public class LuceneEnglishTokenizer extends BaseTokenizer {
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
             return new EnglishAnalyzer(getBehavior(),
-                    stopWordsAllowed ? STOP_WORDS : Collections.EMPTY_SET).tokenStream("",
+                    stopWordsAllowed ? STOP_WORDS : Collections.emptySet()).tokenStream("",
                     new StringReader(strOrig));
         } else {
             return new StandardTokenizer(getBehavior(),

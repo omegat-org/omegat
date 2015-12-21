@@ -157,6 +157,8 @@ public class OSXIntegration {
             case SAVE:
                 setModifiedIndicator(rootPane, false);
                 break;
+            default:
+                // Nothing
             }
         }
     };

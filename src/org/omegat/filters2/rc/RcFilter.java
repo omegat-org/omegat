@@ -203,6 +203,8 @@ public class RcFilter extends AbstractFilter {
         case STRINGTABLE:
             w = line.substring(0, b).split(",");
             return w[0].trim();
+        default:
+            // Nothing
         }
         return null;
     }

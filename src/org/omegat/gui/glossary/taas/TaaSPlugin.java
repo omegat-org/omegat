@@ -142,6 +142,8 @@ public class TaaSPlugin {
                 case LOAD:
                     browse.setEnabled(true);
                     break;
+                default:
+                    // Nothing
                 }
             }
         });

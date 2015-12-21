@@ -247,6 +247,8 @@ public class ProjectFilesListController {
                         }
                     });
                     break;
+                default:
+                    // Nothing
                 }
             }
         });

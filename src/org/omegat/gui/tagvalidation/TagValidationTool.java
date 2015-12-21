@@ -145,6 +145,8 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
             if (m_tagWin != null)
                 m_tagWin.dispose();
             break;
+        default:
+            // Nothing
         }
     }
 

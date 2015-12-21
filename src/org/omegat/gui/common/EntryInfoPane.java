@@ -77,6 +77,8 @@ public abstract class EntryInfoPane<T> extends JTextPane implements IProjectEven
         case CLOSE:
             onProjectClose();
             break;
+        default:
+            // Nothing
         }
     }
 

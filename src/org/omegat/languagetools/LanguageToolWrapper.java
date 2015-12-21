@@ -108,6 +108,8 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
             sourceLt = null;
             targetLt = null;
             break;
+        default:
+            // Nothing
         }
     }
 

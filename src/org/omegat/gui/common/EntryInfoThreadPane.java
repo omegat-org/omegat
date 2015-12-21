@@ -67,6 +67,8 @@ public abstract class EntryInfoThreadPane<T> extends EntryInfoPane<T> implements
             currentlyProcessedEntry = null;
             onProjectClose();
             break;
+        default:
+            // Nothing
         }
     }
 

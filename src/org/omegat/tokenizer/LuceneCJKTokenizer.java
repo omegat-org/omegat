@@ -37,6 +37,7 @@ import org.apache.lucene.analysis.cjk.CJKTokenizer;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
+@SuppressWarnings("deprecation")
 @Tokenizer(languages = { "zh", "ja", "ko" })
 public class LuceneCJKTokenizer extends BaseTokenizer {
     @Override

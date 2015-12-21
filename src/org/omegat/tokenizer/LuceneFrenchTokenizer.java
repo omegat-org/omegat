@@ -43,6 +43,7 @@ import org.apache.lucene.util.Version;
 @Tokenizer(languages = { "fr" }, isDefault = true)
 public class LuceneFrenchTokenizer extends BaseTokenizer {
 
+    @SuppressWarnings("deprecation")
     @Override
     public Map<Version, String> getSupportedBehaviors() {
         Map<Version, String> result = new LinkedHashMap<Version, String>();

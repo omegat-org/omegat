@@ -38,11 +38,7 @@ import java.io.Reader;
 public class LinebreakPreservingReader extends Reader {
 
     /** Reader for input, must be able to re-insert non-linebreak characters. */
-    private PushbackReader in;
-
-    /** Default constructor, hidden. */
-    private LinebreakPreservingReader() {
-    }
+    private final PushbackReader in;
 
     /** Buffer that contains the last linebreak */
     private StringBuffer linebreak = new StringBuffer(2);;

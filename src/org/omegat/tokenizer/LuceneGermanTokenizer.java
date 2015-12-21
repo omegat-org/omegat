@@ -48,6 +48,7 @@ public class LuceneGermanTokenizer extends BaseTokenizer {
         defaultBehavior = Version.LUCENE_30;
     }
     
+    @SuppressWarnings("deprecation")
     @Override
     public Map<Version, String> getSupportedBehaviors() {
         Map<Version, String> result = new LinkedHashMap<Version, String>();

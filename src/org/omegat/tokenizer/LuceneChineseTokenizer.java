@@ -39,6 +39,7 @@ import org.omegat.util.Token;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
+@SuppressWarnings("deprecation")
 @Tokenizer(languages = { "zh" })
 public class LuceneChineseTokenizer extends BaseTokenizer {
     

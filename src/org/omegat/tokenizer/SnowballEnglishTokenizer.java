@@ -41,6 +41,7 @@ import org.apache.lucene.analysis.standard.StandardTokenizer;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
+@SuppressWarnings("deprecation")
 @Tokenizer(languages = { "en" })
 public class SnowballEnglishTokenizer extends BaseTokenizer {
     public static final Set<String> STOP_WORDS;

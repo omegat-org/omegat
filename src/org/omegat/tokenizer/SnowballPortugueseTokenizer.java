@@ -35,6 +35,7 @@ import org.apache.lucene.analysis.standard.StandardTokenizer;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
+@SuppressWarnings("deprecation")
 @Tokenizer(languages = { "pt" })
 public class SnowballPortugueseTokenizer extends BaseTokenizer {
     @Override

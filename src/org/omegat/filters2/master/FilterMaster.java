@@ -107,13 +107,13 @@ public class FilterMaster {
     private final Filters config;
 
     /** Classes of all filters. */
-    private static List<Class<IFilter>> filtersClasses;
+    private static List<Class<?>> filtersClasses;
 
     static {
         try {
             CONFIG_CTX = JAXBContext.newInstance(Filters.class);
-            filtersClasses = new ArrayList<Class<IFilter>>();
-            filtersClasses.addAll((List)PluginUtils.getFilterClasses());
+            filtersClasses = new ArrayList<Class<?>>();
+            filtersClasses.addAll((List<Class<?>>) PluginUtils.getFilterClasses());
         } catch (Exception ex) {
             throw new ExceptionInInitializerError(ex);
         }
@@ -135,7 +135,7 @@ public class FilterMaster {
      */
     private static boolean addNewFiltersToConfig(final Filters conf) {
         boolean result = false;
-        for (Class<IFilter> fclass : filtersClasses) {
+        for (Class<?> fclass : filtersClasses) {
             boolean found = false;
             for (Filter fc : conf.getFilters()) {
                 if (fclass.getName().equals(fc.getClassName())) {
@@ -161,10 +161,10 @@ public class FilterMaster {
      * @return filter instance
      */
     public static IFilter getFilterInstance(final String classname) {
-        for (Class<IFilter> f : filtersClasses) {
+        for (Class<?> f : filtersClasses) {
             if (f.getName().equals(classname)) {
                 try {
-                    return f.newInstance();
+                    return (IFilter) f.newInstance();
                 } catch (Exception ex) {
                     Log.log(ex);
                 }

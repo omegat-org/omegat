@@ -83,7 +83,6 @@ import javax.swing.text.BadLocationException;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
-import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IEntryEventListener;
@@ -97,12 +96,12 @@ import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.DataTableStyling;
 import org.omegat.util.gui.DragTargetOverlay;
 import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TableColumnSizer;
-import org.omegat.util.gui.DataTableStyling;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -603,61 +602,7 @@ public class ProjectFilesListController {
     }
 
     private void setTableFilesModel(final List<IProject.FileInfo> files) {
-        modelFiles = new AbstractTableModel() {
-            @Override
-            public Object getValueAt(int rowIndex, int columnIndex) {
-                IProject.FileInfo fi;
-                try {
-                    fi = files.get(rowIndex);
-                } catch (IndexOutOfBoundsException ex) {
-                    // data changed
-                    return null;
-                }
-                switch (columnIndex) {
-                case 0:
-                    return fi.filePath;
-                case 1:
-                    return fi.filterFileFormatName;
-                case 2:
-                    return fi.fileEncoding;
-                case 3:
-                    return fi.entries.size();
-                case 4:
-                    StatisticsInfo stat = Core.getProject().getStatistics();
-                    return stat.uniqueCountsByFile.get(fi.filePath);
-                default:
-                    return null;
-                }
-            }
-
-            @Override
-            public int getColumnCount() {
-                return 5;
-            }
-
-            @Override
-            public int getRowCount() {
-                return files.size();
-            }
-
-            @Override
-            public Class<?> getColumnClass(int columnIndex) {
-                switch (columnIndex) {
-                case 0:
-                    return String.class;
-                case 1:
-                    return String.class;
-                case 2:
-                    return String.class;
-                case 3:
-                    return Integer.class;
-                case 4:
-                    return Integer.class;
-                default:
-                    return null;
-                }
-            }
-        };
+        modelFiles = new FileInfoModel(files);
 
         list.tableFiles.setModel(modelFiles);
 
@@ -707,7 +652,7 @@ public class ProjectFilesListController {
         list.tableFiles.setColumnModel(columns);
 
         currentSorter = new Sorter(files);
-        list.tableFiles.setRowSorter((RowSorter) currentSorter);
+        list.tableFiles.setRowSorter(currentSorter);
     }
 
     private void createTableTotal() {
@@ -862,7 +807,69 @@ public class ProjectFilesListController {
         list.statLabel.setFont(font);
     }
 
-    class Sorter extends RowSorter<IProject.FileInfo> {
+    class FileInfoModel extends AbstractTableModel {
+        private final List<IProject.FileInfo> files;
+
+        public FileInfoModel(List<IProject.FileInfo> files) {
+            this.files = files;
+        }
+
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            IProject.FileInfo fi;
+            try {
+                fi = files.get(rowIndex);
+            } catch (IndexOutOfBoundsException ex) {
+                // data changed
+                return null;
+            }
+            switch (columnIndex) {
+            case 0:
+                return fi.filePath;
+            case 1:
+                return fi.filterFileFormatName;
+            case 2:
+                return fi.fileEncoding;
+            case 3:
+                return fi.entries.size();
+            case 4:
+                StatisticsInfo stat = Core.getProject().getStatistics();
+                return stat.uniqueCountsByFile.get(fi.filePath);
+            default:
+                return null;
+            }
+        }
+
+        @Override
+        public int getColumnCount() {
+            return 5;
+        }
+
+        @Override
+        public int getRowCount() {
+            return files.size();
+        }
+
+        @Override
+        public Class<?> getColumnClass(int columnIndex) {
+            switch (columnIndex) {
+            case 0:
+                return String.class;
+            case 1:
+                return String.class;
+            case 2:
+                return String.class;
+            case 3:
+                return Integer.class;
+            case 4:
+                return Integer.class;
+            default:
+                return null;
+            }
+        }
+    };
+
+    class Sorter extends RowSorter<FileInfoModel> {
         private final List<IProject.FileInfo> files;
         private SortKey sortKey = new SortKey(0, SortOrder.UNSORTED);
         private Integer[] modelToView;
@@ -931,7 +938,7 @@ public class ProjectFilesListController {
         }
 
         @Override
-        public FileInfo getModel() {
+        public FileInfoModel getModel() {
             throw new RuntimeException("Not implemented");
         }
 

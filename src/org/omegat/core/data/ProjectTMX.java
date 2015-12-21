@@ -33,7 +33,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Logger;
 
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.FileUtil;
@@ -54,7 +53,6 @@ import org.omegat.util.TMXWriter2;
  * @author Aaron Madlon-Kay
  */
 public class ProjectTMX {
-    private static final Logger LOGGER = Logger.getLogger(ProjectTMX.class.getName());
 
     protected static final String PROP_FILE = "file";
     protected static final String PROP_ID = "id";

@@ -131,18 +131,14 @@ public class SegmentationRulesModel extends AbstractTableModel {
 
     /** Moves a segmentation rule up an order. */
     public void moveRowUp(int row) {
-        Rule rulePrev = rules.get(row - 1);
-        Rule rule = rules.get(row);
-        rules.remove(row - 1);
+        Rule rulePrev = rules.remove(row - 1);
         rules.add(row, rulePrev);
         fireTableRowsUpdated(row - 1, row);
     }
 
     /** Moves a segmentation rule down an order. */
     public void moveRowDown(int row) {
-        Rule ruleNext = rules.get(row + 1);
-        Rule rule = rules.get(row);
-        rules.remove(row + 1);
+        Rule ruleNext = rules.remove(row + 1);
         rules.add(row, ruleNext);
         fireTableRowsUpdated(row, row + 1);
     }

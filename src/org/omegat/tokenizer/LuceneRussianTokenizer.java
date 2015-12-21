@@ -26,6 +26,8 @@
 package org.omegat.tokenizer;
 
 import java.io.StringReader;
+import java.util.Collections;
+import java.util.Set;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.ru.RussianAnalyzer;
@@ -41,14 +43,10 @@ public class LuceneRussianTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            RussianAnalyzer an;
-            if (stopWordsAllowed) {
-                an = new RussianAnalyzer(getBehavior());
-            } else {
-                an = new RussianAnalyzer(getBehavior(),
-                        EMPTY_STRING_LIST);
-            }
-            return an.tokenStream("", new StringReader(strOrig));
+            Set<?> stopWords = stopWordsAllowed ? RussianAnalyzer.getDefaultStopSet()
+                    : Collections.emptySet();
+            return new RussianAnalyzer(getBehavior(), stopWords).tokenStream("",
+                    new StringReader(strOrig));
         } else {
             return new StandardTokenizer(getBehavior(),
                     new StringReader(strOrig));

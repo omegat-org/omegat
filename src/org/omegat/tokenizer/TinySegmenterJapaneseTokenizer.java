@@ -27,6 +27,8 @@ package org.omegat.tokenizer;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.Collections;
+import java.util.Set;
 
 import net.moraleboost.io.BasicCodePointReader;
 import net.moraleboost.io.CodePointReader;
@@ -65,9 +67,9 @@ public class TinySegmenterJapaneseTokenizer extends BaseTokenizer {
         TokenStream ts = new TokenStreamWrapper(new BasicCodePointReader(new StringReader(strOrig)));
         
         if (stemsAllowed) {
-            String[] stopWords = stopWordsAllowed ? CJKAnalyzer.STOP_WORDS
-                    : EMPTY_STRING_LIST;
-            return new StopFilter(getBehavior(), ts, StopFilter.makeStopSet(stopWords));
+            Set<?> stopWords = stopWordsAllowed ? CJKAnalyzer.getDefaultStopSet()
+                    : Collections.emptySet();
+            return new StopFilter(getBehavior(), ts, stopWords);
         }
         
         return ts;

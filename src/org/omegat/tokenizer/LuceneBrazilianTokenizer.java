@@ -26,6 +26,8 @@
 package org.omegat.tokenizer;
 
 import java.io.StringReader;
+import java.util.Collections;
+import java.util.Set;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.br.BrazilianAnalyzer;
@@ -41,8 +43,8 @@ public class LuceneBrazilianTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            String[] stopWords = stopWordsAllowed ? BrazilianAnalyzer.BRAZILIAN_STOP_WORDS
-                    : EMPTY_STRING_LIST;
+            Set<?> stopWords = stopWordsAllowed ? BrazilianAnalyzer.getDefaultStopSet()
+                    : Collections.emptySet();
             return new BrazilianAnalyzer(getBehavior(), stopWords).tokenStream("",
                     new StringReader(strOrig));
         } else {

@@ -27,6 +27,7 @@
 package org.omegat.tokenizer;
 
 import java.io.StringReader;
+import java.util.Collections;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.ar.ArabicAnalyzer;
@@ -45,7 +46,7 @@ public class LuceneArabicTokenizer extends BaseTokenizer {
         if (stemsAllowed) {
             ArabicAnalyzer analyzer = stopWordsAllowed ?
                     new ArabicAnalyzer(getBehavior()) :
-                        new ArabicAnalyzer(getBehavior(), new String[] {});
+                        new ArabicAnalyzer(getBehavior(), Collections.emptySet());
             return analyzer.tokenStream("", new StringReader(strOrig));
         } else {
             return new StandardTokenizer(getBehavior(),

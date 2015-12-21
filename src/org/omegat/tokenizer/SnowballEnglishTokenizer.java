@@ -29,8 +29,9 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.snowball.SnowballAnalyzer;
@@ -42,7 +43,7 @@ import org.apache.lucene.analysis.standard.StandardTokenizer;
  */
 @Tokenizer(languages = { "en" })
 public class SnowballEnglishTokenizer extends BaseTokenizer {
-    public static final String[] STOP_WORDS;
+    public static final Set<String> STOP_WORDS;
 
     static {
         // Load stopwords
@@ -53,15 +54,14 @@ public class SnowballEnglishTokenizer extends BaseTokenizer {
                 BufferedReader rd = new BufferedReader(new InputStreamReader(
                         in, "UTF-8"));
                 String s;
-                List<String> words = new ArrayList<String>();
+                STOP_WORDS = new HashSet<String>();
                 while ((s = rd.readLine()) != null) {
                     s = s.trim();
                     if (s.isEmpty() || s.startsWith("#")) {
                         continue;
                     }
-                    words.add(s);
+                    STOP_WORDS.add(s);
                 }
-                STOP_WORDS = words.toArray(new String[words.size()]);
             } finally {
                 in.close();
             }
@@ -78,7 +78,7 @@ public class SnowballEnglishTokenizer extends BaseTokenizer {
         if (stemsAllowed) {
             return new SnowballAnalyzer(getBehavior(),
                     "English",
-                    stopWordsAllowed ? STOP_WORDS : new String[0]).tokenStream(
+                    stopWordsAllowed ? STOP_WORDS : Collections.emptySet()).tokenStream(
                     null, new StringReader(strOrig));
         } else {
             return new StandardTokenizer(getBehavior(),

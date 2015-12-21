@@ -26,8 +26,10 @@
 package org.omegat.tokenizer;
 
 import java.io.StringReader;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.de.GermanAnalyzer;
@@ -60,8 +62,8 @@ public class LuceneGermanTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            String[] stopWords = stopWordsAllowed ? GermanAnalyzer.GERMAN_STOP_WORDS
-                    : EMPTY_STRING_LIST;
+            Set<?> stopWords = stopWordsAllowed ? GermanAnalyzer.getDefaultStopSet()
+                    : Collections.emptySet();
             return new GermanAnalyzer(getBehavior(), stopWords).tokenStream("", new StringReader(
                     strOrig));
         } else {

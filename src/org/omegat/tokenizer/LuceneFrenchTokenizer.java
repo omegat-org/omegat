@@ -26,8 +26,10 @@
 package org.omegat.tokenizer;
 
 import java.io.StringReader;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.fr.FrenchAnalyzer;
@@ -55,8 +57,8 @@ public class LuceneFrenchTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            String[] stopWords = stopWordsAllowed ? FrenchAnalyzer.FRENCH_STOP_WORDS
-                    : EMPTY_STRING_LIST;
+            Set<?> stopWords = stopWordsAllowed ? FrenchAnalyzer.getDefaultStopSet()
+                    : Collections.emptySet();
             return new FrenchAnalyzer(getBehavior(), stopWords).tokenStream("", new StringReader(
                     strOrig));
         } else {

@@ -26,6 +26,8 @@
 package org.omegat.tokenizer;
 
 import java.io.StringReader;
+import java.util.Collections;
+import java.util.Set;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.el.GreekAnalyzer;
@@ -41,14 +43,10 @@ public class LuceneGreekTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            GreekAnalyzer an;
-            if (stopWordsAllowed) {
-                an = new GreekAnalyzer(getBehavior());
-            } else {
-                an = new GreekAnalyzer(getBehavior(),
-                        EMPTY_STRING_LIST);
-            }
-            return an.tokenStream("", new StringReader(strOrig));
+            Set<?> stopWords = stopWordsAllowed ? GreekAnalyzer.getDefaultStopSet()
+                    : Collections.emptySet();
+            return new GreekAnalyzer(getBehavior(), stopWords).tokenStream("",
+                    new StringReader(strOrig));
         } else {
             return new StandardTokenizer(getBehavior(),
                     new StringReader(strOrig));

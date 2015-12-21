@@ -26,6 +26,7 @@
 package org.omegat.tokenizer;
 
 import java.io.StringReader;
+import java.util.Collections;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.fa.PersianAnalyzer;
@@ -44,7 +45,7 @@ public class LucenePersianTokenizer extends BaseTokenizer {
         if (stemsAllowed) {
             PersianAnalyzer analyzer = stopWordsAllowed ?
                     new PersianAnalyzer(getBehavior()) :
-                        new PersianAnalyzer(getBehavior(), new String[] {});
+                        new PersianAnalyzer(getBehavior(), Collections.emptySet());
             return analyzer.tokenStream("", new StringReader(strOrig));
         } else {
             return new StandardTokenizer(getBehavior(),

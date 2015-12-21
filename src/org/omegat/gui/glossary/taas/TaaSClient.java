@@ -25,14 +25,6 @@
 
 package org.omegat.gui.glossary.taas;
 
-import gen.taas.TaasArrayOfTerm;
-import gen.taas.TaasCollection;
-import gen.taas.TaasCollections;
-import gen.taas.TaasDomain;
-import gen.taas.TaasDomains;
-import gen.taas.TaasExtractionResult;
-import gen.taas.TaasTerm;
-
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -55,6 +47,14 @@ import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.StringUtil;
+
+import gen.taas.TaasArrayOfTerm;
+import gen.taas.TaasCollection;
+import gen.taas.TaasCollections;
+import gen.taas.TaasDomain;
+import gen.taas.TaasDomains;
+import gen.taas.TaasExtractionResult;
+import gen.taas.TaasTerm;
 
 /**
  * Client for TaaS REST service.

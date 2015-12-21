@@ -28,9 +28,9 @@
 package org.omegat.core.machinetranslators;
 
 import java.io.StringReader;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 

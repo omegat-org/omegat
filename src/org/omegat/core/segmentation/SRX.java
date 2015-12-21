@@ -26,10 +26,6 @@
 
 package org.omegat.core.segmentation;
 
-import gen.core.segmentation.Languagemap;
-import gen.core.segmentation.Languagerule;
-import gen.core.segmentation.Srx;
-
 import java.beans.ExceptionListener;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -49,6 +45,10 @@ import javax.xml.bind.JAXBException;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+
+import gen.core.segmentation.Languagemap;
+import gen.core.segmentation.Languagerule;
+import gen.core.segmentation.Srx;
 
 /**
  * The class with all the segmentation data possible -- rules, languages, etc.

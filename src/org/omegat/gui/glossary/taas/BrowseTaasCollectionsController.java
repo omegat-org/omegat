@@ -25,11 +25,6 @@
 
 package org.omegat.gui.glossary.taas;
 
-import gen.taas.TaasCollection;
-import gen.taas.TaasCollectionType;
-import gen.taas.TaasDomain;
-import gen.taas.TaasLanguage;
-
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -60,6 +55,11 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
+
+import gen.taas.TaasCollection;
+import gen.taas.TaasCollectionType;
+import gen.taas.TaasDomain;
+import gen.taas.TaasLanguage;
 
 /**
  * Controller for TaaS download UI.

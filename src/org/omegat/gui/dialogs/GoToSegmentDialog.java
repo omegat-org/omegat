@@ -35,6 +35,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
 import org.omegat.core.Core;
 import org.omegat.gui.editor.AlphabeticalMarkers;
 import org.omegat.gui.editor.EditorController;

@@ -26,8 +26,6 @@
 package org.omegat.gui.stat;
 
 import javax.swing.UIManager;
-import javax.swing.text.Caret;
-import javax.swing.text.DefaultCaret;
 
 import org.omegat.util.gui.StaticUIUtils;
 

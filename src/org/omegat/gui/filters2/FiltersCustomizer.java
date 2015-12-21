@@ -28,15 +28,10 @@
 
 package org.omegat.gui.filters2;
 
-import gen.core.filters.Filter;
-import gen.core.filters.Filters;
-
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
@@ -61,6 +56,9 @@ import org.omegat.util.OStrings;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TableColumnSizer;
+
+import gen.core.filters.Filter;
+import gen.core.filters.Filters;
 
 /**
  * Main dialog for for setting up filters. Filter is a class that allows for

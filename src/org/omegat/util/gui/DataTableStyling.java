@@ -30,6 +30,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -39,6 +40,7 @@ import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
+
 import org.omegat.util.Platform;
 
 /**

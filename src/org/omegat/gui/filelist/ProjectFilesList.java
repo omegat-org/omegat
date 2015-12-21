@@ -27,6 +27,7 @@
 package org.omegat.gui.filelist;
 
 import javax.swing.JLabel;
+
 import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.util.OStrings;
 

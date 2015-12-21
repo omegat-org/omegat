@@ -26,6 +26,7 @@
 package org.omegat.gui.stat;
 
 import java.awt.BorderLayout;
+
 import javax.swing.SwingUtilities;
 
 /**

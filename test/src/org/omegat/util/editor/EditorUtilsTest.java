@@ -25,22 +25,17 @@
  **************************************************************************/
 package org.omegat.util.editor;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import junit.framework.TestCase;
-
-import org.omegat.core.Core;
-import org.omegat.core.data.NotLoadedProject;
-import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.editor.IEditor.CHANGE_CASE_TO;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
-import org.omegat.util.Language;
+
+import junit.framework.TestCase;
 
 public class EditorUtilsTest extends TestCase {
     

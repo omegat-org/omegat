@@ -25,6 +25,7 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.UIManager;

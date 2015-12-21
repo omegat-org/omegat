@@ -26,15 +26,14 @@
 package org.omegat.core.data;
 
 import java.io.File;
-import java.util.TreeMap;
-
-import junit.framework.Assert;
-import junit.framework.TestCase;
 
 import org.junit.Test;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.Language;
+
+import junit.framework.Assert;
+import junit.framework.TestCase;
 
 public class TmxSegmentationTest extends TestCase {
     @Test

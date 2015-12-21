@@ -27,8 +27,8 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.Frame;
+
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;

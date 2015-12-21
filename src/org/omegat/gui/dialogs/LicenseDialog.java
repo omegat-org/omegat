@@ -26,21 +26,12 @@
 
 package org.omegat.gui.dialogs;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringWriter;
-import java.net.URL;
-
-
-import org.omegat.gui.help.HelpFrame;
+import org.omegat.util.FileUtil;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.LFileCopy;
-import org.openide.awt.Mnemonics;
-import org.omegat.util.FileUtil;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
+import org.openide.awt.Mnemonics;
 
 /**
  * Dialog showing GNU Public License.

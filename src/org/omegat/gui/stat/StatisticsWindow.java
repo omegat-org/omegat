@@ -31,8 +31,10 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
+
 import org.omegat.core.Core;
 import org.omegat.core.statistics.CalcMatchStatistics;
 import org.omegat.core.statistics.CalcStandardStatistics;

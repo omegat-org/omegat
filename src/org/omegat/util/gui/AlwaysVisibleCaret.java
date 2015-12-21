@@ -25,6 +25,7 @@
 package org.omegat.util.gui;
 
 import java.awt.event.FocusEvent;
+
 import javax.swing.JTextPane;
 import javax.swing.text.Caret;
 import javax.swing.text.DefaultCaret;

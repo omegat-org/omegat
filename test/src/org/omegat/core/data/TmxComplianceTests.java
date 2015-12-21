@@ -30,15 +30,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.html2.HTMLFilter2;
 import org.omegat.filters2.html2.HTMLOptions;
-import org.omegat.filters2.po.PoFilter;
 import org.omegat.filters2.rc.RcFilter;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
+
+import junit.framework.Assert;
 
 /**
  * TMX Compliance tests as described on http://www.localization.org/fileadmin/standards/tmx1.4/comp.htm

@@ -31,8 +31,6 @@ package org.omegat.filters3.xml.xliff;
 import java.util.List;
 
 import org.omegat.core.data.ProtectedPart;
-import org.omegat.core.statistics.StatCount;
-import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsSettings;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.Element;
@@ -42,7 +40,6 @@ import org.omegat.filters3.xml.XMLContentBasedTag;
 import org.omegat.filters3.xml.XMLText;
 import org.omegat.filters3.xml.xliff.XLIFFOptions.ID_TYPE;
 import org.omegat.util.InlineTagHandler;
-import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 

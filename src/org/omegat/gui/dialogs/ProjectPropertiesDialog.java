@@ -30,8 +30,6 @@
 
 package org.omegat.gui.dialogs;
 
-import gen.core.filters.Filters;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -87,6 +85,8 @@ import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TokenizerBehaviorComboBoxRenderer;
 import org.omegat.util.gui.TokenizerComboBoxRenderer;
 import org.openide.awt.Mnemonics;
+
+import gen.core.filters.Filters;
 
 /**
  * The dialog for customizing the OmegaT project (where project properties are

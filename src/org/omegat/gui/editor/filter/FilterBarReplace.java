@@ -28,6 +28,7 @@ package org.omegat.gui.editor.filter;
 
 import javax.swing.UIManager;
 import javax.swing.border.Border;
+
 import org.omegat.util.OStrings;
 
 /**

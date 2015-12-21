@@ -27,7 +27,6 @@ package org.omegat.filters;
 
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.text.ini.INIFilter;
-import org.omegat.util.OStrings;
 
 public class INIFilterTest extends TestFilterBase {
     public void testParse() throws Exception {

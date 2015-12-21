@@ -27,6 +27,7 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.Frame;
+
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.DockingUI;

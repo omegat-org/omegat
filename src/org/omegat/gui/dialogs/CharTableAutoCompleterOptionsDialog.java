@@ -28,7 +28,9 @@ package org.omegat.gui.dialogs;
 
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+
 import javax.swing.JTable;
+
 import org.omegat.gui.editor.chartable.CharTableModel;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;

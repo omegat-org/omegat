@@ -32,8 +32,6 @@
 
 package org.omegat.core.data;
 
-import gen.core.filters.Filters;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -101,6 +99,8 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil;
 import org.omegat.util.gui.UIThreadsUtil;
 import org.xml.sax.SAXParseException;
+
+import gen.core.filters.Filters;
 
 /**
  * Loaded project implementation. Only translation could be changed after project will be loaded and set by

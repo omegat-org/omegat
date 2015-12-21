@@ -127,6 +127,7 @@ public class RealProject implements IProject {
     private final IRemoteRepository repository;
     private boolean isOnlineMode;
 
+    private RandomAccessFile raFile;
     private FileChannel lockChannel;
     private FileLock lock;
 
@@ -451,7 +452,8 @@ public class RealProject implements IProject {
         }
         try {
             File lockFile = new File(m_config.getProjectRoot(), OConsts.FILE_PROJECT);
-            lockChannel = new RandomAccessFile(lockFile, "rw").getChannel();
+            raFile = new RandomAccessFile(lockFile, "rw");
+            lockChannel = raFile.getChannel();
             lock = lockChannel.tryLock();
         } catch (Throwable ex) {
             Log.log(ex);
@@ -486,6 +488,9 @@ public class RealProject implements IProject {
             }
             if (lockChannel != null) {
                 lockChannel.close();
+            }
+            if (raFile != null) {
+                raFile.close();
             }
         } catch (Throwable ex) {
             Log.log(ex);

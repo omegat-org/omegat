@@ -211,10 +211,7 @@ public class ScriptingWindow extends JFrame {
     }
 
     private int scriptKey(int i) {
-        if (NUMBERS_OF_QUICK_SCRIPTS != 10) {
-            return i + 1;
-        }
-        return i + 1 == NUMBERS_OF_QUICK_SCRIPTS ? 0 : i + 1;
+        return i + 1;
     }
 
     private void unsetQuickScriptMenu(int index) {

@@ -60,8 +60,12 @@ public class LuceneJapaneseTokenizer extends BaseTokenizer {
             strOrig = blankOutTags(strOrig);
             CharArraySet stopWords = stopWordsAllowed ? JapaneseAnalyzer.getDefaultStopSet()
                     : new CharArraySet(getBehavior(), 0, false);
-            Set<String> stopTags = stopWordsAllowed ? JapaneseAnalyzer.getDefaultStopTags()
-                    : Collections.EMPTY_SET;
+            Set<String> stopTags;
+            if (stopWordsAllowed) {
+                stopTags = JapaneseAnalyzer.getDefaultStopTags();
+            } else {
+                stopTags = Collections.emptySet();
+            }
             return new JapaneseAnalyzer(getBehavior(), null, Mode.SEARCH, stopWords, stopTags)
                     .tokenStream("", new StringReader(strOrig));
         } else {

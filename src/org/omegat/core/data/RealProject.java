@@ -1461,6 +1461,7 @@ public class RealProject implements IProject {
         setProjectModified(true);
     }
 
+    @SuppressWarnings("unchecked")
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
         Map.Entry<String, TMXEntry>[] entries;
         synchronized (projectTMX) {
@@ -1472,6 +1473,7 @@ public class RealProject implements IProject {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public void iterateByMultipleTranslations(MultipleTranslationsIterator it) {
         Map.Entry<EntryKey, TMXEntry>[] entries;
         synchronized (projectTMX) {

@@ -110,11 +110,11 @@ public class OSXIntegration {
     
     private static final IOpenFilesHandler openFilesHandler = new IOpenFilesHandler() {
         @Override
-        public void openFiles(List<File> files) {
+        public void openFiles(List<?> files) {
             if (files.isEmpty()) {
                 return;
             }
-            File firstFile = files.get(0); // Ignore others
+            File firstFile = (File) files.get(0); // Ignore others
             if (firstFile.getName().equals(OConsts.FILE_PROJECT)) {
                 firstFile = firstFile.getParentFile();
             }
@@ -241,7 +241,7 @@ public class OSXIntegration {
                                 //   arg0.getFiles()
                                 Method getFilesMethod = filesEventClass.getDeclaredMethod("getFiles");
                                 Object filesList = getFilesMethod.invoke(filesEvent);
-                                ofh.openFiles((List<File>) filesList);
+                                ofh.openFiles((List<?>) filesList);
                             }
                         }
                     } catch (Throwable t) {
@@ -283,7 +283,7 @@ public class OSXIntegration {
     }
     
     public interface IOpenFilesHandler {
-        public void openFiles(List<File> files);
+        public void openFiles(List<?> files);
     }
     
     private static Class<?> getAppClass() throws Exception {

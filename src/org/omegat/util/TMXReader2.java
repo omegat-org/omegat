@@ -241,8 +241,8 @@ public class TMXReader2 {
         tuv.creationdate = parseISO8601date(getAttributeValue(element, "creationdate"));
 
         // find 'lang' or 'xml:lang' attribute
-        for (Iterator<Attribute> it = element.getAttributes(); it.hasNext();) {
-            Attribute a = it.next();
+        for (Iterator<?> it = element.getAttributes(); it.hasNext();) {
+            Attribute a = (Attribute) it.next();
             if ("lang".equals(a.getName().getLocalPart())) {
                 tuv.lang = a.getValue();
                 break;

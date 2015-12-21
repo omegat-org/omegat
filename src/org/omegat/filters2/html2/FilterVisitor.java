@@ -162,10 +162,10 @@ public class FilterVisitor extends NodeVisitor {
         if (!intactTag) { // If it's an intact tag, no reason to check
             // Decide whether this tag should be intact, based on the key-value pairs stored in the
             // configuration
-            Vector<Attribute> tagAttributes = tag.getAttributesEx();
-            Iterator<Attribute> i = tagAttributes.iterator();
+            Vector<?> tagAttributes = tag.getAttributesEx();
+            Iterator<?> i = tagAttributes.iterator();
             while (i.hasNext() && intactTag == false) {
-                Attribute attribute = i.next();
+                Attribute attribute = (Attribute) i.next();
                 String name = attribute.getName();
                 String value = attribute.getValue();
                 if (name == null || value == null)
@@ -224,11 +224,11 @@ public class FilterVisitor extends NodeVisitor {
             // The group of attribute-value pairs indicating non-translation
             // are stored in the configuration
             if ("META".equals(tag.getTagName())) {
-                Vector<Attribute> tagAttributes = tag.getAttributesEx();
-                Iterator<Attribute> i = tagAttributes.iterator();
+                Vector<?> tagAttributes = tag.getAttributesEx();
+                Iterator<?> i = tagAttributes.iterator();
                 boolean doSkipMetaTag = false;
                 while (i.hasNext() && doSkipMetaTag == false) {
-                    Attribute attribute = i.next();
+                    Attribute attribute = (Attribute) i.next();
                     String name = attribute.getName();
                     String value = attribute.getValue();
                     if (name == null || value == null)

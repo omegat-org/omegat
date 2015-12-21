@@ -38,6 +38,7 @@ import org.apache.lucene.analysis.standard.StandardTokenizer;
 @SuppressWarnings("deprecation")
 @Tokenizer(languages = { "nb" })
 public class SnowballNorwegianTokenizer extends BaseTokenizer {
+    @SuppressWarnings("resource")
     @Override
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {

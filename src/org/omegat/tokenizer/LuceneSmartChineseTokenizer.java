@@ -51,6 +51,7 @@ public class LuceneSmartChineseTokenizer extends BaseTokenizer {
         return tokenizeByCodePointToStrings(strOrig);
     }
 
+    @SuppressWarnings("resource")
     @Override
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {

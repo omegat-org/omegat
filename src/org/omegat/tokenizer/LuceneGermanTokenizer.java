@@ -59,6 +59,7 @@ public class LuceneGermanTokenizer extends BaseTokenizer {
         return result;
     }
     
+    @SuppressWarnings("resource")
     @Override
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {

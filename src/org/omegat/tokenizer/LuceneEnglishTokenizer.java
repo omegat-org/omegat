@@ -80,6 +80,7 @@ public class LuceneEnglishTokenizer extends BaseTokenizer {
     public static void unloadPlugins() {
     }
 
+    @SuppressWarnings("resource")
     @Override
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {

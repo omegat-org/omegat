@@ -37,6 +37,7 @@ import org.apache.lucene.analysis.tr.TurkishAnalyzer;
  */
 @Tokenizer(languages = { "tr" }, isDefault = true)
 public class LuceneTurkishTokenizer extends BaseTokenizer {
+    @SuppressWarnings("resource")
     @Override
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {

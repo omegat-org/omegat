@@ -37,6 +37,7 @@ import org.apache.lucene.analysis.th.ThaiAnalyzer;
  */
 @Tokenizer(languages = { "th" })
 public class LuceneThaiTokenizer extends BaseTokenizer {
+    @SuppressWarnings("resource")
     @Override
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {

@@ -40,6 +40,7 @@ import org.apache.lucene.analysis.cjk.CJKTokenizer;
 @SuppressWarnings("deprecation")
 @Tokenizer(languages = { "zh", "ja", "ko" })
 public class LuceneCJKTokenizer extends BaseTokenizer {
+    @SuppressWarnings("resource")
     @Override
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {

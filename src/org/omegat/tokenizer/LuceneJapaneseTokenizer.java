@@ -53,6 +53,7 @@ public class LuceneJapaneseTokenizer extends BaseTokenizer {
         shouldDelegateTokenizeExactly = false;
     }
 
+    @SuppressWarnings("resource")
     @Override
     protected TokenStream getTokenStream(String strOrig, boolean stemsAllowed, boolean stopWordsAllowed) {
         if (stemsAllowed) {

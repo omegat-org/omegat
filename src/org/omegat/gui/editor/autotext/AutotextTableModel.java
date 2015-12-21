@@ -36,6 +36,7 @@ import org.omegat.util.StringUtil;
  * The table model of the table in the autotext configuration window.
  * @author bartkoz
  */
+@SuppressWarnings("serial")
 public class AutotextTableModel extends AbstractTableModel {
 
     private List<AutotextPair> data = new ArrayList<AutotextPair>();

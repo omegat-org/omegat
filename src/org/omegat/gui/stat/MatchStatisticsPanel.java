@@ -33,6 +33,7 @@ import javax.swing.SwingUtilities;
  *
  * @author Aaron Madlon-Kay
  */
+@SuppressWarnings("serial")
 public class MatchStatisticsPanel extends BaseMatchStatisticsPanel {
 
     public MatchStatisticsPanel(StatisticsWindow window) {

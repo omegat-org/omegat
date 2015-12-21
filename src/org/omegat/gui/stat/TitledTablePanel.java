@@ -33,6 +33,7 @@ import org.omegat.util.gui.StaticUIUtils;
  *
  * @author Aaron Madlon-Kay
  */
+@SuppressWarnings("serial")
 public class TitledTablePanel extends javax.swing.JPanel {
 
     /**

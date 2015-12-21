@@ -36,6 +36,8 @@ import java.util.regex.PatternSyntaxException;
  */
 public class Rule implements Serializable, Cloneable {
 
+    private static final long serialVersionUID = 7645267236376489908L;
+
     /** Creates a new empty instance of segmentation rule */
     public Rule() {
     }

@@ -32,6 +32,7 @@ package org.omegat.core.data;
  * 
  * @author Guido Leenders
  */
+@SuppressWarnings("serial")
 public class ProjectException extends Exception {
     /**
      * Constructs an instance of <code>ProjectException</code> with the

@@ -39,6 +39,7 @@ import org.omegat.util.gui.StaticUIUtils;
  *
  * @author Aaron Madlon-Kay
  */
+@SuppressWarnings("serial")
 public class FileCollisionDialog extends javax.swing.JDialog {
 
     private JButton userClicked;

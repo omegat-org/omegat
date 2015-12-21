@@ -33,6 +33,8 @@ import java.io.Serializable;
  */
 public class Instance implements Serializable {
 
+    private static final long serialVersionUID = -8290853406593590600L;
+
     private String sourceFilenameMask;
 
     public String getSourceFilenameMask() {

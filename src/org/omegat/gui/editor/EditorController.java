@@ -2153,6 +2153,7 @@ public class EditorController implements IEditor {
         }
     }
 
+    @SuppressWarnings("serial")
     public AlphabeticalMarkers getAlphabeticalMarkers() {
         return new AlphabeticalMarkers(scrollPane) {
 

@@ -32,6 +32,7 @@ import org.omegat.util.StringUtil;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
+@SuppressWarnings("serial")
 public class KnownException extends RuntimeException {
     protected final Object[] params;
 

@@ -102,6 +102,7 @@ public class DataTableStyling {
         return new AlternatingHighlightRenderer(SwingConstants.LEFT, null, true, Font.BOLD);
     }
     
+    @SuppressWarnings("serial")
     public static class AlternatingHighlightRenderer extends DefaultTableCellRenderer {
         private final NumberFormat numberFormat;        
         private final boolean doHighlight;

@@ -44,6 +44,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.openide.awt.Mnemonics;
 
+@SuppressWarnings("serial")
 public class SearchWindowMenu extends JMenuBar {
 
     private final SearchWindowForm form;

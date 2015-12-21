@@ -29,6 +29,7 @@ package org.omegat.gui.stat;
  *
  * @author Aaron Madlon-Kay
  */
+@SuppressWarnings("serial")
 public abstract class BaseMatchStatisticsPanel extends BaseStatisticsPanel {
 
     private final StringBuilder buffer = new StringBuilder();

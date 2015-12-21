@@ -40,6 +40,9 @@ import org.omegat.util.StringUtil;
  * @author Maxym Mykhalchuk
  */
 public class MapRule implements Serializable, Cloneable {
+
+    private static final long serialVersionUID = -5868132953113679291L;
+
     /** creates a new empty MapRule */
     public MapRule() {
     }

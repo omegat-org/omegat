@@ -35,6 +35,7 @@ import org.omegat.util.OStrings;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
+@SuppressWarnings("serial")
 public class FilterBarReplace extends javax.swing.JPanel {
 
     /**

@@ -58,6 +58,8 @@ import gen.core.segmentation.Srx;
  */
 public class SRX implements Serializable, Cloneable {
 
+    private static final long serialVersionUID = 2182125877925944613L;
+
     public static final String CONF_SENTSEG = "segmentation.conf";
 
     /** Context for JAXB rules processing. */

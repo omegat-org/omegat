@@ -40,6 +40,7 @@ import org.omegat.util.OStrings;
  * @author Aaron Madlon-Kay
  * @author Piotr Kulik
  */
+@SuppressWarnings("serial")
 public class SearchWindowForm extends javax.swing.JFrame {
 
     /**

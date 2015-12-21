@@ -83,6 +83,7 @@ public class StaticUIUtils {
      * @param window
      * @return action
      */
+    @SuppressWarnings("serial")
     public static AbstractAction makeCloseAction(final Window window) {
         return new AbstractAction() {
             @Override

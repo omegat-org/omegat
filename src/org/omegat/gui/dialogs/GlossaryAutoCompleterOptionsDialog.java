@@ -37,6 +37,7 @@ import org.omegat.util.gui.StaticUIUtils;
  *
  * @author bartkoz
  */
+@SuppressWarnings("serial")
 public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
     
     /**

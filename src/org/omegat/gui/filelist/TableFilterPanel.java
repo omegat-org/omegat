@@ -30,6 +30,7 @@ import org.omegat.util.OStrings;
  * A text box providing input to a table filter
  * @author Aaron Madlon-Kay
  */
+@SuppressWarnings("serial")
 public class TableFilterPanel extends javax.swing.JPanel {
 
     /**

@@ -57,6 +57,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  *
  * @author Yu Tang
  */
+@SuppressWarnings("serial")
 public abstract class AlphabeticalMarkers extends JPanel {
 
     private static final String DEFAULT_MARKER_FONT_NAME = "Century";

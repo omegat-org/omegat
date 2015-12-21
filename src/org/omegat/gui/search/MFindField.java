@@ -54,6 +54,7 @@ import javax.swing.undo.UndoManager;
  *  @author Didier Briel
  *  @author Aaron Madlon-Kay
  */
+@SuppressWarnings("serial")
 public class MFindField extends JTextField implements FocusListener {
     public MFindField() {
         // Handle undo (CtrlCmd+Z);

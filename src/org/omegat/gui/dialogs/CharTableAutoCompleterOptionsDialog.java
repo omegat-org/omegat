@@ -42,6 +42,7 @@ import org.omegat.util.gui.StaticUIUtils;
  * @author bartkoz
  * @author Aaron Madlon-Kay
  */
+@SuppressWarnings("serial")
 public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
 
     CharTableModel allCharModel = new CharTableModel(null);

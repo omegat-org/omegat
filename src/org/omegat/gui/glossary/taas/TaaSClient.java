@@ -61,6 +61,7 @@ import gen.taas.TaasTerm;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
+@SuppressWarnings("serial")
 public class TaaSClient {
     static final Charset UTF8 = Charset.forName("UTF-8");
 

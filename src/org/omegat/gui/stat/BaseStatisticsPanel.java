@@ -43,6 +43,7 @@ import org.omegat.util.gui.TableColumnSizer;
  *
  * @author Aaron Madlon-Kay
  */
+@SuppressWarnings("serial")
 public abstract class BaseStatisticsPanel extends JPanel {
 
     private final StatisticsWindow window;

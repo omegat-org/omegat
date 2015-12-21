@@ -66,6 +66,7 @@ import gen.taas.TaasLanguage;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
+@SuppressWarnings("serial")
 public class BrowseTaasCollectionsController {
     static BrowseTaasCollectionsUI dialog;
 

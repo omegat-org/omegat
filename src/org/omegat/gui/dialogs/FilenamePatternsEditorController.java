@@ -49,6 +49,7 @@ public class FilenamePatternsEditorController {
         final FilenamePatternsEditor dialog = new FilenamePatternsEditor(Core.getMainWindow()
                 .getApplicationFrame(), true);
 
+        @SuppressWarnings("serial")
         final AbstractTableModel model = new AbstractTableModel() {
             public int getColumnCount() {
                 return 1;

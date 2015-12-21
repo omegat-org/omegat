@@ -35,6 +35,7 @@ import javax.swing.text.DefaultCaret;
  * 
  * @author Yu-Tang
  */
+@SuppressWarnings("serial")
 public class AlwaysVisibleCaret extends DefaultCaret {
 
     public static void apply(JTextPane text) {

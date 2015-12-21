@@ -198,6 +198,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     /**
      * Initialize menu items.
      */
+    @SuppressWarnings("serial")
     JMenuBar initComponents() {
         mainMenu = new JMenuBar();
         mainMenu.add(projectMenu = createMenu("TF_MENU_FILE"));

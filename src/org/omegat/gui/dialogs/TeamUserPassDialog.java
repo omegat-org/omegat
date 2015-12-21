@@ -39,6 +39,7 @@ import org.omegat.util.gui.StaticUIUtils;
  *
  * @author alex
  */
+@SuppressWarnings("serial")
 public class TeamUserPassDialog extends javax.swing.JDialog {
     /** A return status code - returned if Cancel button has been pressed */
     public static final int RET_CANCEL = 0;

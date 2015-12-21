@@ -44,6 +44,7 @@ import org.openide.awt.Mnemonics;
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
+@SuppressWarnings("serial")
 public class BrowseTaasCollectionsUI extends javax.swing.JDialog {
 
     /**

@@ -87,6 +87,10 @@ public class LingvoDSL implements IDictionary {
         }
     }
 
+    public int size() {
+        return result.size();
+    }
+
     /**
      * Search with exact word match.
      *

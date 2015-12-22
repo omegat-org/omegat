@@ -161,6 +161,7 @@ public class SegmentBuilder {
         this.active = isActive;
 
         doc.trustedChangesInProgress = true;
+        controller.editor.setCaretUpdateEnabled(false);
         try {
             try {
                 if (beginPosP1 != null && endPosM1 != null) {
@@ -197,16 +198,16 @@ public class SegmentBuilder {
             }
         } finally {
             doc.trustedChangesInProgress = false;
+            controller.editor.setCaretUpdateEnabled(true);
         }
     }
 
     /**
      * Add separator between segments - one empty line.
-     *
-     * @param doc
      */
-    public static void addSegmentSeparator(final Document3 doc) {
+    public void addSegmentSeparator() {
         doc.trustedChangesInProgress = true;
+        controller.editor.setCaretUpdateEnabled(false);
         try {
             try {
                 doc.insertString(doc.getLength(), "\n", null);
@@ -215,6 +216,7 @@ public class SegmentBuilder {
             }
         } finally {
             doc.trustedChangesInProgress = false;
+            controller.editor.setCaretUpdateEnabled(true);
         }
     }
 

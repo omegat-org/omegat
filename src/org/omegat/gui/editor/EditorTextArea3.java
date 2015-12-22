@@ -52,6 +52,7 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.BoxView;
 import javax.swing.text.ComponentView;
+import javax.swing.text.DefaultCaret;
 import javax.swing.text.Element;
 import javax.swing.text.IconView;
 import javax.swing.text.MutableAttributeSet;
@@ -583,6 +584,11 @@ public class EditorTextArea3 extends JEditorPane {
             }
         }
         return false;
+    }
+
+    void setCaretUpdateEnabled(boolean updateEnabled) {
+        DefaultCaret caret = (DefaultCaret) getCaret();
+        caret.setUpdatePolicy(updateEnabled ? DefaultCaret.UPDATE_WHEN_ON_EDT : DefaultCaret.NEVER_UPDATE);
     }
 
     /**

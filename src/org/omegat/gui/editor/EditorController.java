@@ -632,7 +632,7 @@ public class EditorController implements IEditor {
 
                 sb.createSegmentElement(false);
 
-                SegmentBuilder.addSegmentSeparator(doc);
+                sb.addSegmentSeparator();
             }
         }
         m_docSegList = temp_docSegList2.toArray(new SegmentBuilder[temp_docSegList2.size()]);

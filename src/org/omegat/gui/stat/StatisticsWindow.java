@@ -169,6 +169,11 @@ public class StatisticsWindow extends javax.swing.JDialog {
     }//GEN-LAST:event_copyDataButtonActionPerformed
 
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+        // Apparently calling dispose() does not invoke
+        // WindowListener.windowClosing() so we have to be sure to end the
+        // thread here too.
+        // See https://sourceforge.net/p/omegat/bugs/789/
+        thread.fin();
         dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
 

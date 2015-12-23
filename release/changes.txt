@@ -2,7 +2,7 @@
  OmegaT 3.5.3 update 1
 ----------------------------------------------------------------------
    0 Enhancement
-   3 Bug fixes
+   4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.5.3 update 1 vs 3.5.3
@@ -14,6 +14,10 @@
 
   - Trim whitespace on LingvoDSL dictionary entries
   https://sourceforge.net/p/omegat/bugs/786/
+
+  - Closing Match Statistics window while it's updating the stats doesn't
+stop the calculations
+  https://sourceforge.net/p/omegat/bugs/789/
 
   - An error was fixed with -Dhttp.proxyHost and -Dhttp.proxyPort in 
 Linux kaptain launcher

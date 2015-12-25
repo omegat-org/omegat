@@ -17,6 +17,9 @@
   - Add menus to the Search window 
   https://sourceforge.net/p/omegat/feature-requests/1164/
 
+  - Keep top Machine Translation pane item visible
+  https://sourceforge.net/p/omegat/feature-requests/1168/
+
   Bug fixes:
 
   - Custom text color used for text in dialogs

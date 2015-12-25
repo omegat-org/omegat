@@ -66,7 +66,7 @@ import org.omegat.tokenizer.ITokenizer.StemmingMode;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
-import org.omegat.util.gui.AlwaysVisibleCaret;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles.EditorColor;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -101,7 +101,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         addMouseListener(mouseCallback);
 
         setEditable(false);
-        AlwaysVisibleCaret.apply(this);
+        StaticUIUtils.makeCaretAlwaysVisible(this);
         this.setText(EXPLANATION);
     	applyFont();
         setMinimumSize(new Dimension(100, 50));

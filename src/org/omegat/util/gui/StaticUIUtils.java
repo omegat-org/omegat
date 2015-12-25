@@ -34,6 +34,8 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.WindowEvent;
@@ -205,5 +207,22 @@ public class StaticUIUtils {
         if (caret instanceof DefaultCaret) {
             ((DefaultCaret) caret).setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
         }
+    }
+
+    /**
+     * Make caret visible even when the {@link JTextComponent} is not editable.
+     * 
+     * @author Yu-Tang
+     * @author Aaron Madlon-Kay
+     */
+    public static void makeCaretAlwaysVisible(JTextComponent comp) {
+        final Caret caret = comp.getCaret();
+        comp.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                caret.setVisible(true);
+                caret.setSelectionVisible(true);
+            }
+        });
     }
 }

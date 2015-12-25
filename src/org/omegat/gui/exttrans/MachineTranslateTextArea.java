@@ -29,7 +29,6 @@
 package org.omegat.gui.exttrans;
 
 import java.awt.Dimension;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +44,7 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.gui.AlwaysVisibleCaret;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -69,7 +68,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         super(true);
 
         setEditable(false);
-        AlwaysVisibleCaret.apply(this);
+        StaticUIUtils.makeCaretAlwaysVisible(this);
         this.setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
 

@@ -68,9 +68,9 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
-import org.omegat.util.gui.AlwaysVisibleCaret;
 import org.omegat.util.gui.DragTargetOverlay;
 import org.omegat.util.gui.JTextPaneLinkifier;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -121,7 +121,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
         Core.getMainWindow().addDockable(scrollPane);
 
         setEditable(false);
-        AlwaysVisibleCaret.apply(this);
+        StaticUIUtils.makeCaretAlwaysVisible(this);
         this.setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
 

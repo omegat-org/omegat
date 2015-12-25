@@ -797,54 +797,44 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * Display some segments before and after when user on the top or bottom of page.
+     * Attempt to center the active segment in the editor. When the active
+     * segment is taller than the editor, the first line of the editable area
+     * will be at the bottom of the editor.
      */
     private void scrollForDisplayNearestSegments(final CaretPosition pos) {
-        int lookNext, lookPrev;
-        try {
-            SegmentBuilder prev = m_docSegList[displayedEntryIndex - 3];
-            lookPrev = prev.getStartPosition();
-        } catch (IndexOutOfBoundsException ex) {
-            lookPrev = 0;
-        }
-        try {
-            SegmentBuilder next = m_docSegList[displayedEntryIndex + 4];
-            lookNext = next.getStartPosition() - 1;
-        } catch (IndexOutOfBoundsException ex) {
-            lookNext = editor.getOmDocument().getLength();
-        }
-
-        final int p = lookPrev;
-        final int n = lookNext;
-        //scroll a little up and down and then back, in separate thread, else 
-        // gui is not updated!
-        // It can happen that this method is called multiple time in short 
-        // period E.g. on project reload, the first entry is activated, and 
-        // then the last active segment. In between the file can be changed. 
-        // When the first thread starts scrolling (for go to first 
-        // segment), the scrolling could be done for the wrong document, 
-        // possibly causing IllegalArgumentExceptions. They can be ignored.
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                try {
-                    editor.setCaretPosition(n);
-                    SwingUtilities.invokeLater(new Runnable() {
-                        public void run() {
-                            try {
-                                editor.setCaretPosition(p);
-                                SwingUtilities.invokeLater(new Runnable() {
-                                    public void run() {
-                                        setCaretPosition(pos);
-                                    }
-                                });
-                            } catch (IllegalArgumentException iae) {
-                            } // eating silently
-                        }
-                    });
-                } catch (IllegalArgumentException iae) {
-                } // eating silently
+                Rectangle rect = getSegmentBounds(displayedEntryIndex);
+                if (rect != null) {
+                    // Expand rect vertically to fill height of viewport.
+                    int viewportHeight = scrollPane.getViewport().getHeight();
+                    rect.y -= (viewportHeight - rect.height) / 2;
+                    rect.height = viewportHeight;
+                    editor.scrollRectToVisible(rect);
+                }
+                setCaretPosition(pos);
             }
         });
+    }
+
+    /**
+     * Get a rectangle that bounds the specified segment in editor-space pixel
+     * coordinates.
+     */
+    private Rectangle getSegmentBounds(int index) {
+        Rectangle result = null;
+        try {
+            SegmentBuilder sb = m_docSegList[index];
+            Rectangle start = editor.modelToView(sb.getStartPosition());
+            Rectangle end = editor.modelToView(sb.getEndPosition());
+            if (start != null && end != null) {
+                result = start.union(end);
+            }
+        } catch (BadLocationException ex) {
+            Log.log(ex);
+        }
+        return result;
     }
 
     /**

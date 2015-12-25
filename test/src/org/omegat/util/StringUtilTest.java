@@ -223,10 +223,10 @@ public class StringUtilTest extends TestCase {
         Locale locale = Locale.ENGLISH;
         String text = "foo";
         // matchTo is empty -> return original text
-        assertSame(text, StringUtil.matchCapitalization(text, null, locale));
-        assertSame(text, StringUtil.matchCapitalization(text, "", locale));
+        assertEquals(text, StringUtil.matchCapitalization(text, null, locale));
+        assertEquals(text, StringUtil.matchCapitalization(text, "", locale));
         // text starts with matchTo -> return original text
-        assertSame(text, StringUtil.matchCapitalization(text, text + "BAR", locale));
+        assertEquals(text, StringUtil.matchCapitalization(text, text + "BAR", locale));
         // matchTo is title case
         assertEquals("Foo", StringUtil.matchCapitalization(text, "Abc", locale));
         assertEquals("Foo", StringUtil.matchCapitalization(text, "A", locale));
@@ -235,6 +235,6 @@ public class StringUtilTest extends TestCase {
         // matchTo is upper case
         assertEquals("FOO", StringUtil.matchCapitalization("foo", "UPPER", locale));
         // matchTo is mixed
-        assertSame(text, StringUtil.matchCapitalization(text, "bAzZ", locale));
+        assertEquals(text, StringUtil.matchCapitalization(text, "bAzZ", locale));
     }
 }

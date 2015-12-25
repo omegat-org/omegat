@@ -106,11 +106,16 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
                 if (!termMatchesChunk(term, context)) {
                     continue;
                 }
-                String payload = StringUtil.matchCapitalization(term, context, getTargetLocale());
                 int length = context == null ? 0 : context.length();
+                // Add matched-capitalization version
+                String payload = StringUtil.matchCapitalization(term, context, getTargetLocale());
                 AutoCompleterItem item = new AutoCompleterItem(payload, new String[] { entry.getSrcText() }, length);
                 if (!result.contains(item)) {
                     result.add(item);
+                }
+                // Add original, if it differs
+                if (!payload.equals(term)) {
+                    result.add(new AutoCompleterItem(term, new String[] { entry.getSrcText() }, length));
                 }
             }
         }

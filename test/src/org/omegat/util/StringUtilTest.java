@@ -230,11 +230,15 @@ public class StringUtilTest extends TestCase {
         // matchTo is title case
         assertEquals("Foo", StringUtil.matchCapitalization(text, "Abc", locale));
         assertEquals("Foo", StringUtil.matchCapitalization(text, "A", locale));
-        // matchTo is lower case and text is upper case
+        // matchTo is lower case
         assertEquals("foo", StringUtil.matchCapitalization("FOO", "lower", locale));
+        assertEquals("foo", StringUtil.matchCapitalization("fOo", "l", locale));
         // matchTo is upper case
-        assertEquals("FOO", StringUtil.matchCapitalization("foo", "UPPER", locale));
-        // matchTo is mixed
+        assertEquals("FOO", StringUtil.matchCapitalization(text, "UPPER", locale));
+        assertEquals("FOO", StringUtil.matchCapitalization("fOo", "UP", locale));
+        assertEquals("FOo", StringUtil.matchCapitalization("fOo", "U", locale)); // Interpreted as title case
+        // matchTo is mixed or not cased
         assertEquals(text, StringUtil.matchCapitalization(text, "bAzZ", locale));
+        assertEquals(text, StringUtil.matchCapitalization(text, ".", locale));
     }
 }

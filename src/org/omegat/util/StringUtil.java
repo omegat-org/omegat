@@ -212,8 +212,8 @@ public class StringUtil {
         if (StringUtil.isTitleCase(matchTo)) {
             return capitalizeFirst(text, locale);
         }
-        // If matching to lower when input is upper, turn into lower.
-        if (StringUtil.isLowerCase(matchTo) && StringUtil.isUpperCase(text)) {
+        // If matching to lower, turn into lower.
+        if (StringUtil.isLowerCase(matchTo)) {
             return text.toLowerCase(locale);
         }
         // If matching to upper (at least 2 chars; otherwise would have hit isTitleCase()

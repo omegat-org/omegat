@@ -105,6 +105,12 @@ public class Main {
     protected static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
     public static void main(String[] args) {
+        if (args.length > 0 && (CLIParameters.HELP_SHORT.equals(args[0])
+                || CLIParameters.HELP.equals(args[0]))) {
+            System.out.println(StringUtil.format(OStrings.getString("COMMAND_LINE_HELP"),
+                    OStrings.getNameAndVersion()));
+            System.exit(0);
+        }
 
         /*
          * Parse command line arguments info map.

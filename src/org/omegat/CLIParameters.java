@@ -57,6 +57,10 @@ public class CLIParameters {
     public static final String TOKENIZER_BEHAVIOR_SOURCE = "ITokenizerBehavior";
     /** CLI parameter to specify target tokenizer behavior mode */
     public static final String TOKENIZER_BEHAVIOR_TARGET = "ITokenizerTargetBehavior";
+    // TODO: Document this; see RealProject.patchFileNameForEntryKey()
+    public static final String ALTERNATE_FILENAME_FROM = "alternate-filename-from";
+    // TODO: Document this; see RealProject.patchFileNameForEntryKey()
+    public static final String ALTERNATE_FILENAME_TO = "alternate-filename-to";
 
     // Non-GUI modes only
     public static final String QUIET = "quiet";

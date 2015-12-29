@@ -1654,8 +1654,8 @@ public class RealProject implements IProject {
      * @return normalized filename
      */
     protected String patchFileNameForEntryKey(String filename) {
-        String f = Core.getParams().get("alternate-filename-from");
-        String t = Core.getParams().get("alternate-filename-to");
+        String f = Core.getParams().get(CLIParameters.ALTERNATE_FILENAME_FROM);
+        String t = Core.getParams().get(CLIParameters.ALTERNATE_FILENAME_TO);
         String fn = filename.replace('\\', '/');
         if (f != null && t != null) {
             fn = fn.replaceAll(f, t);

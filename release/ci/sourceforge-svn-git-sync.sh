@@ -46,7 +46,7 @@ fi
 cd $REPO
 git svn info
 # Overwrite the authors file with the latest version from SVN.
-curl -L -o authors-new https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/release/ci/authors.txt?format=raw
+svn cat svn://svn.code.sf.net/p/omegat/svn/trunk/release/ci/authors.txt > authors-new
 mv authors-new authors
 git svn fetch
 git branch -f master trunk

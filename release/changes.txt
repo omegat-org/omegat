@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.6.0
 ----------------------------------------------------------------------
-  3 Enhancements
+  4 Enhancements
   2 Bug fixes
 ----------------------------------------------------------------------
 3.6.0 vs 3.5.3
@@ -19,6 +19,9 @@
 
   - Keep top Machine Translation pane item visible
   https://sourceforge.net/p/omegat/feature-requests/1168/
+
+  - Keep top Alternative Translation match visible 
+  https://sourceforge.net/p/omegat/feature-requests/1169/
 
   Bug fixes:
 

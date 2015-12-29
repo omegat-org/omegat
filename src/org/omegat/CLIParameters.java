@@ -47,6 +47,8 @@ public class CLIParameters {
     public static final String CONFIG_DIR = "config-dir";
     public static final String DISABLE_PROJECT_LOCKING = "disable-project-locking";
     public static final String DISABLE_LOCATION_SAVE = "disable-location-save";
+    /** CLI parameter to disable team functionality (treat as local project) */
+    public static final String NO_TEAM = "no-team";
 
     // Non-GUI modes only
     public static final String QUIET = "quiet";

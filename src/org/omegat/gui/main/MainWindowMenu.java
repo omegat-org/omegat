@@ -59,6 +59,7 @@ import javax.swing.UIManager;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
+import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
@@ -641,7 +642,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         for (JMenuItem item : itemsToSwitchOn) {
             item.setEnabled(isProjectOpened);
         }
-        if (Core.getParams().containsKey("no-team")) {
+        if (Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
         	projectTeamNewMenuItem.setEnabled(false);
         }
         

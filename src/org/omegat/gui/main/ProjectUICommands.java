@@ -38,6 +38,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
@@ -292,7 +293,7 @@ public class ProjectUICommands {
                 final IRemoteRepository repository;
                 // check for team-project
                 try {
-                    if (Core.getParams().containsKey("no-team")) {
+                    if (Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
                         // disable team functionality
                         repository = null;
                     } else if (SVNRemoteRepository.isSVNDirectory(projectRootFolder)) {

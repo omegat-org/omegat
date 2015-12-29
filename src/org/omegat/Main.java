@@ -50,6 +50,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
+import org.omegat.CLIParameters.TAG_VALIDATION_MODE;
 import org.omegat.convert.ConvertConfigs;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -89,34 +91,6 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Kyle Katarn
  */
 public class Main {
-    /** Application execution mode. */
-    enum RUN_MODE {
-        GUI, CONSOLE_TRANSLATE, CONSOLE_CREATEPSEUDOTRANSLATETMX, CONSOLE_ALIGN;
-        public static RUN_MODE parse(String s) {
-            try {
-                return valueOf(s.toUpperCase(Locale.ENGLISH).replace('-', '_'));
-            } catch (Exception ex) {
-                // default mode
-                return GUI;
-            }
-        }
-    };
-
-    /**
-     * Choice of types of translation for all segments in the optional, special
-     * TMX file that contains all segments of the project.
-     */
-    enum PSEUDO_TRANSLATE_TYPE {
-        EQUAL, EMPTY;
-        public static PSEUDO_TRANSLATE_TYPE parse(String s) {
-            try {
-                return valueOf(s.toUpperCase(Locale.ENGLISH).replace('-', '_'));
-            } catch (Exception ex) {
-                // default mode
-                return EQUAL;
-            }
-        }
-    };
 
     /** Regexp for parse parameters. */
     protected static final Pattern PARAM = Pattern.compile("\\-\\-([A-Za-z\\-]+)(=(.+))?");
@@ -128,7 +102,7 @@ public class Main {
     protected static final Map<String, String> params = new TreeMap<String, String>();
 
     /** Execution mode. */
-    protected static RUN_MODE runMode = RUN_MODE.GUI;
+    protected static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
     public static void main(String[] args) {
 
@@ -140,9 +114,10 @@ public class Main {
             if (m.matches()) {
                 params.put(m.group(1), m.group(3));
             } else {
-                if (arg.startsWith("resource-bundle=")) {
+                if (arg.startsWith(CLIParameters.RESOURCE_BUNDLE + "=")) {
                     // backward compatibility
-                    params.put("resource-bundle", arg.substring(16));
+                    params.put(CLIParameters.RESOURCE_BUNDLE,
+                            arg.substring(CLIParameters.RESOURCE_BUNDLE.length()));
                 } else {
                     File f = new File(arg);
                     if (f.getName().equals(OConsts.FILE_PROJECT)) {
@@ -155,29 +130,29 @@ public class Main {
             }
         }
 
-        applyConfigFile(params.get("config-file"));
+        applyConfigFile(params.get(CLIParameters.CONFIG_FILE));
 
-        runMode = RUN_MODE.parse(params.get("mode"));
+        runMode = CLIParameters.RUN_MODE.parse(params.get(CLIParameters.MODE));
 
-        String resourceBundle = params.get("resource-bundle");
+        String resourceBundle = params.get(CLIParameters.RESOURCE_BUNDLE);
         if (resourceBundle != null) {
             OStrings.loadBundle(resourceBundle);
         }
 
-        String configDir = params.get("config-dir");
+        String configDir = params.get(CLIParameters.CONFIG_DIR);
         if (configDir != null) {
             RuntimePreferences.setConfigDir(configDir);
         }
 
-        if (params.containsKey("quiet")) {
+        if (params.containsKey(CLIParameters.QUIET)) {
             RuntimePreferences.setQuietMode(true);
         }
 
-        if (params.containsKey("disable-project-locking")) {
+        if (params.containsKey(CLIParameters.DISABLE_PROJECT_LOCKING)) {
             RuntimePreferences.setProjectLockingEnabled(false);
         }
         
-        if (params.containsKey("disable-location-save")) {
+        if (params.containsKey(CLIParameters.DISABLE_LOCATION_SAVE)) {
             RuntimePreferences.setLocationSaveEnabled(false);
         }
 
@@ -365,7 +340,7 @@ public class Main {
 
         System.out.println(OStrings.getString("CONSOLE_TRANSLATING"));
 
-        String sourceMask = params.get("source-pattern");
+        String sourceMask = params.get(CLIParameters.SOURCE_PATTERN);
         if (sourceMask != null)
             p.compileProject(sourceMask, false);
         else
@@ -391,25 +366,30 @@ public class Main {
      * In all other cases no tag validation is done.
      */
     private static void validateTagsConsoleMode() {
-        String tagValidation = params.get("tag-validation");
+        TAG_VALIDATION_MODE mode = TAG_VALIDATION_MODE.parse(params.get(CLIParameters.TAG_VALIDATION));
 
-        if ("abort".equalsIgnoreCase(tagValidation)) {
+        List<ErrorReport> stes;
+
+        switch (mode) {
+        case ABORT:
             System.out.println(OStrings.getString("CONSOLE_VALIDATING_TAGS"));
-            List<ErrorReport> stes = Core.getTagValidation().listInvalidTags();
+            stes = Core.getTagValidation().listInvalidTags();
             if (stes != null) {
                 Core.getTagValidation().displayTagValidationErrors(stes, null);
                 System.out.println(OStrings.getString("CONSOLE_TAGVALIDATION_FAIL"));
                 System.out.println(OStrings.getString("CONSOLE_TAGVALIDATION_ABORT"));
                 System.exit(1);
             }
-        } else if ("warn".equalsIgnoreCase(tagValidation)) {
+            break;
+        case WARN:
             System.out.println(OStrings.getString("CONSOLE_VALIDATING_TAGS"));
-            List<ErrorReport> stes = Core.getTagValidation().listInvalidTags();
+            stes = Core.getTagValidation().listInvalidTags();
             if (stes != null) {
                 Core.getTagValidation().displayTagValidationErrors(stes, null);
                 System.out.println(OStrings.getString("CONSOLE_TAGVALIDATION_FAIL"));
             }
-        } else {
+            break;
+        default:
             //do not validate tags = default
         }
     }
@@ -432,9 +412,9 @@ public class Main {
 
         ProjectProperties m_config = p.getProjectProperties();
         List<SourceTextEntry> entries = p.getAllEntries();
-        String pseudoTranslateTMXFilename = params.get("pseudotranslatetmx");
-        PSEUDO_TRANSLATE_TYPE pseudoTranslateType = PSEUDO_TRANSLATE_TYPE.parse(params
-                .get("pseudotranslatetype"));
+        String pseudoTranslateTMXFilename = params.get(CLIParameters.PSEUDOTRANSLATETMX);
+        PSEUDO_TRANSLATE_TYPE pseudoTranslateType = PSEUDO_TRANSLATE_TYPE
+                .parse(params.get(CLIParameters.PSEUDOTRANSLATETYPE));
 
         String fname;
         if (!StringUtil.isEmpty(pseudoTranslateTMXFilename)) {
@@ -485,7 +465,7 @@ public class Main {
             return 1;
         }
 
-        String dir = params.get("alignDir");
+        String dir = params.get(CLIParameters.ALIGNDIR);
         if (dir == null) {
             System.out.println(OStrings.getString("CONSOLE_TRANSLATED_FILES_LOC_UNDEFINED"));
             return 1;
@@ -542,11 +522,9 @@ public class Main {
         if (loadProject) {
             p.loadProject(true);
             if (!p.isProjectLoaded()) {
-            	Core.setProject(new NotLoadedProject());
-            }
-            else
-            {
-            	executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
+                Core.setProject(new NotLoadedProject());
+            } else {
+                executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
             }
 
         }
@@ -558,7 +536,7 @@ public class Main {
      *  in console mode. 
      */
     private static void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
-        if (params.containsKey("script")) {
+        if (params.containsKey(CLIParameters.SCRIPT)) {
     		File script = new File(params.get("script").toString());
 
             if (script.isFile()) {

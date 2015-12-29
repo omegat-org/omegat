@@ -64,6 +64,7 @@ import javax.swing.SwingUtilities;
 import org.apache.lucene.util.Version;
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
+import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
@@ -213,11 +214,11 @@ public class RealProject implements IProject {
         m_config = props;
         this.repository = repository;
 
-        sourceTokenizer = createTokenizer(Core.getParams().get(ITokenizer.CLI_PARAM_SOURCE), props.getSourceTokenizer());
-        configTokenizer(Core.getParams().get(ITokenizer.CLI_PARAM_SOURCE_BEHAVIOR), sourceTokenizer);
+        sourceTokenizer = createTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_SOURCE), props.getSourceTokenizer());
+        configTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_BEHAVIOR_SOURCE), sourceTokenizer);
         Log.log("Source tokenizer: " + sourceTokenizer.getClass().getName() + " (" + sourceTokenizer.getBehavior() + ")");
-        targetTokenizer = createTokenizer(Core.getParams().get(ITokenizer.CLI_PARAM_TARGET), props.getTargetTokenizer());
-        configTokenizer(Core.getParams().get(ITokenizer.CLI_PARAM_TARGET_BEHAVIOR), targetTokenizer);
+        targetTokenizer = createTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_TARGET), props.getTargetTokenizer());
+        configTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_BEHAVIOR_TARGET), targetTokenizer);
         Log.log("Target tokenizer: " + targetTokenizer.getClass().getName() + " (" + targetTokenizer.getBehavior() + ")");
     }
     

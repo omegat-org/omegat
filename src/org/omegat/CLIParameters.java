@@ -49,6 +49,14 @@ public class CLIParameters {
     public static final String DISABLE_LOCATION_SAVE = "disable-location-save";
     /** CLI parameter to disable team functionality (treat as local project) */
     public static final String NO_TEAM = "no-team";
+    /** CLI parameter to specify source tokenizer */
+    public static final String TOKENIZER_SOURCE = "ITokenizer";
+    /** CLI parameter to specify target tokenizer */
+    public static final String TOKENIZER_TARGET = "ITokenizerTarget";
+    /** CLI parameter to specify source tokenizer behavior mode */
+    public static final String TOKENIZER_BEHAVIOR_SOURCE = "ITokenizerBehavior";
+    /** CLI parameter to specify target tokenizer behavior mode */
+    public static final String TOKENIZER_BEHAVIOR_TARGET = "ITokenizerTargetBehavior";
 
     // Non-GUI modes only
     public static final String QUIET = "quiet";

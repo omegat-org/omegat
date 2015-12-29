@@ -42,15 +42,6 @@ public interface ITokenizer {
         NONE, MATCHING, GLOSSARY
     }
 
-    /** CLI parameter to specify source tokenizer */
-    static final String CLI_PARAM_SOURCE = "ITokenizer";
-    /** CLI parameter to specify target tokenizer */
-    static final String CLI_PARAM_TARGET = "ITokenizerTarget";
-    /** CLI parameter to specify source tokenizer behavior mode */
-    static final String CLI_PARAM_SOURCE_BEHAVIOR = "ITokenizerBehavior";
-    /** CLI parameter to specify target tokenizer behavior mode */
-    static final String CLI_PARAM_TARGET_BEHAVIOR = "ITokenizerTargetBehavior";
-    
     /**
      * Obtain a map indicating the Lucene {@link Version}s supported by this tokenizer.
      * @return A version-description map

@@ -62,6 +62,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
 import org.apache.lucene.util.Version;
+import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.data.CommandVarExpansion;
 import org.omegat.core.data.ProjectProperties;
@@ -258,7 +259,7 @@ public class ProjectPropertiesDialog extends JDialog {
         m_sourceTokenizerField.setSelectedItem(projectProperties.getSourceTokenizer());
         bT.add(m_sourceTokenizerField);
 
-        String cliTokSrc = Core.getParams().get(ITokenizer.CLI_PARAM_SOURCE);
+        String cliTokSrc = Core.getParams().get(CLIParameters.TOKENIZER_SOURCE);
         if (cliTokSrc != null) {
             m_sourceTokenizerField.setEnabled(false);
             m_sourceTokenizerField.addItem(cliTokSrc);
@@ -295,7 +296,7 @@ public class ProjectPropertiesDialog extends JDialog {
         m_targetTokenizerField.setSelectedItem(projectProperties.getTargetTokenizer());
         bT.add(m_targetTokenizerField);
 
-        String cliTokTrg = Core.getParams().get(ITokenizer.CLI_PARAM_TARGET);
+        String cliTokTrg = Core.getParams().get(CLIParameters.TOKENIZER_TARGET);
         if (cliTokTrg != null) {
             m_targetTokenizerField.setEnabled(false);
             m_targetTokenizerField.addItem(cliTokTrg);
@@ -351,7 +352,7 @@ public class ProjectPropertiesDialog extends JDialog {
             m_sourceTokenizerBehaviorField.setEnabled(false);
         }
 
-        final String cliTokSrcBehavior = Core.getParams().get(ITokenizer.CLI_PARAM_SOURCE_BEHAVIOR);
+        final String cliTokSrcBehavior = Core.getParams().get(CLIParameters.TOKENIZER_BEHAVIOR_SOURCE);
         if (cliTokSrcBehavior != null) {
             m_sourceTokenizerBehaviorField.setEnabled(false);
             m_sourceTokenizerBehaviorField.addItem(cliTokSrcBehavior);
@@ -422,7 +423,7 @@ public class ProjectPropertiesDialog extends JDialog {
             m_targetTokenizerBehaviorField.setEnabled(false);
         }
 
-        final String cliTokTrgBehavior = Core.getParams().get(ITokenizer.CLI_PARAM_TARGET_BEHAVIOR);
+        final String cliTokTrgBehavior = Core.getParams().get(CLIParameters.TOKENIZER_BEHAVIOR_TARGET);
         if (cliTokTrgBehavior != null) {
             m_targetTokenizerBehaviorField.setEnabled(false);
             m_targetTokenizerBehaviorField.addItem(cliTokTrgBehavior);

@@ -92,7 +92,7 @@ public class StarDict implements IDictionary {
 
         Map<String, String> header = readIFO(ifoFile);
         String version = header.get("version");
-        if (!"2.4.2".equals(version)) {
+        if (!"2.4.2".equals(version) && !"3.0.0".equals(version)) {
             throw new Exception("Invalid version of dictionary: " + version);
         }
         contentType = header.get("sametypesequence");

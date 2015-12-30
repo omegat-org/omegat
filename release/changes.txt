@@ -38,11 +38,15 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.3 update 1
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    4 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 3.5.3 update 1 vs 3.5.3
+
+  Other changes:
+
+ - Support 3.0.0 StarDict dictionaries
 
  Bug fixes:
 

@@ -27,13 +27,13 @@
 
 package org.omegat.gui.dictionaries;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -45,10 +45,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
-import javax.swing.text.MutableAttributeSet;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.html.CSS;
 import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.StyleSheet;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -102,8 +100,8 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
         setEditable(false);
         StaticUIUtils.makeCaretAlwaysVisible(this);
-        this.setText(EXPLANATION);
-    	applyFont();
+        setText(EXPLANATION);
+        applyFont(Core.getMainWindow().getApplicationFont());
         setMinimumSize(new Dimension(100, 50));
 
         CoreEvents.registerEditorEventListener(new IEditorEventListener() {
@@ -120,22 +118,17 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         });
     }
 
-    private void applyFont() {
-    	applyFont(Core.getMainWindow().getApplicationFont());
-		
-	}
-
 	private void applyFont(Font font) {
-		MutableAttributeSet attr = new SimpleAttributeSet();
 		HTMLDocument doc = (HTMLDocument) getDocument();
-		
-		doc.getStyleSheet().addCSSAttribute(attr, CSS.Attribute.BACKGROUND_COLOR, EditorColor.COLOR_BACKGROUND.toHex());
-		doc.getStyleSheet().addCSSAttribute(attr, CSS.Attribute.COLOR, EditorColor.COLOR_FOREGROUND.toHex());
-
-    	doc.getStyleSheet().addCSSAttribute(attr, CSS.Attribute.FONT_FAMILY, font.getFontName());
-    	doc.getStyleSheet().addCSSAttribute(attr, CSS.Attribute.FONT_SIZE, font.getSize() + "pt");
-    	doc.setCharacterAttributes(0, doc.getLength(), attr, false);
-	}
+        StyleSheet styleSheet = doc.getStyleSheet();
+        styleSheet.addRule("body { font-family: " + font.getName() + "; "
+                + " font-size: " + font.getSize() + "; "
+                + " font-style: " + (font.getStyle() == Font.BOLD ? "bold" :
+                    font.getStyle() == Font.ITALIC ? "italic" : "normal") + "; "
+                + " color: #" + EditorColor.COLOR_FOREGROUND.toHex() + "; "
+                + " background: #" + EditorColor.COLOR_BACKGROUND.toHex() + "; "
+                + " }");
+    }
 
     @Override
     protected void onProjectOpen() {
@@ -148,8 +141,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     @Override
     protected void onProjectClose() {
         clear();
-        this.setText(EXPLANATION);
-        applyFont();
+        setText(EXPLANATION);
         manager.stop();
         tokenizer = null;
     }
@@ -232,7 +224,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             i++;
         }
         setText(txt.toString());
-        applyFont();
         setCaretPosition(0);
     }
 

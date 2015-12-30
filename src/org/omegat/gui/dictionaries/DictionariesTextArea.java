@@ -162,20 +162,21 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         HTMLDocument doc = (HTMLDocument) getDocument();
 
         int i = displayedWords.indexOf(word.toLowerCase());
-        if (i >= 0) {
-            final Element el = doc.getElement(Integer.toString(i));
-            if (el != null) {
-                try {
-                    // rectangle to be visible
-                    Rectangle rect = getUI().modelToView(this, el.getStartOffset());
-                    // show 2 lines
-                    if (rect != null) {
-                        rect.height *= 2;
-                        scrollRectToVisible(rect);
-                    }
-                } catch (BadLocationException ex) {
-                    // shouldn't be throwed
+        if (i == -1) {
+            return;
+        }
+        Element el = doc.getElement(Integer.toString(i));
+        if (el != null) {
+            try {
+                // rectangle to be visible
+                Rectangle rect = modelToView(el.getStartOffset());
+                // show 2 lines
+                if (rect != null) {
+                    rect.height *= 2;
+                    scrollRectToVisible(rect);
                 }
+            } catch (BadLocationException ex) {
+                // shouldn't be throwed
             }
         }
     }
@@ -235,26 +236,33 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
                 JPopupMenu popup = new JPopupMenu();
                 int mousepos = viewToModel(e.getPoint());
-                HTMLDocument doc = (HTMLDocument) getDocument();
-                for (int i = 0; i < displayedWords.size(); i++) {
-                    Element el = doc.getElement(Integer.toString(i));
-                    if (el != null) {
-                        if (el.getStartOffset() <= mousepos && el.getEndOffset() >= mousepos) {
-                            final String w = displayedWords.get(i);
-                            String hideW = StringUtil.format(OStrings.getString("DICTIONARY_HIDE"), w);
-                            JMenuItem item = popup.add(hideW);
-                            item.addActionListener(new ActionListener() {
-                                public void actionPerformed(ActionEvent e) {
-                                    manager.addIgnoreWord(w);
-                                };
-                            });
-                        }
-                    }
+                final String word = getWordAtOffset(mousepos);
+                if (word != null) {
+                    JMenuItem item = popup.add(StringUtil.format(OStrings.getString("DICTIONARY_HIDE"), word));
+                    item.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            manager.addIgnoreWord(word);
+                        };
+                    });
+                    popup.show(DictionariesTextArea.this, e.getX(), e.getY());
                 }
-                popup.show(DictionariesTextArea.this, e.getX(), e.getY());
             }
         }
     };
+
+    private String getWordAtOffset(int offset) {
+        HTMLDocument doc = (HTMLDocument) getDocument();
+        for (int i = 0; i < displayedWords.size(); i++) {
+            Element el = doc.getElement(Integer.toString(i));
+            if (el == null) {
+                continue;
+            }
+            if (el.getStartOffset() <= offset && el.getEndOffset() >= offset) {
+                return displayedWords.get(i);
+            }
+        }
+        return null;
+    }
 
     /**
      * Thread for search data in dictionaries.

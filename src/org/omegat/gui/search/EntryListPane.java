@@ -144,7 +144,7 @@ class EntryListPane extends JTextPane {
         setDragEnabled(true);
         setFont(Core.getMainWindow().getApplicationFont());
         StaticUIUtils.makeCaretAlwaysVisible(this);
-        StaticUIUtils.neverUpdateCaret(this);
+        StaticUIUtils.setCaretUpdateEnabled(this, false);
 
         addMouseListener(new MouseAdapter() {
             @Override

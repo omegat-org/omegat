@@ -121,7 +121,7 @@ public class TagValidationFrame extends JFrame {
         m_editorPane = new JEditorPane();
         m_editorPane.setEditable(false);
         m_editorPane.addHyperlinkListener(new HListener(parent, this, true)); // fix for bug 1542937
-        StaticUIUtils.neverUpdateCaret(m_editorPane);
+        StaticUIUtils.setCaretUpdateEnabled(m_editorPane, false);
         JScrollPane scroller = new JScrollPane(m_editorPane);
 
         Box bbut = Box.createHorizontalBox();

@@ -67,9 +67,15 @@ public abstract class EntryInfoPane<T> extends JTextPane implements IProjectEven
         getDocument().addDocumentListener(new FontFallbackListener(this));
         setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
         setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
-        StaticUIUtils.neverUpdateCaret(this);
     }
 
+    @Override
+    public void setEditable(boolean isEditable) {
+        StaticUIUtils.setCaretUpdateEnabled(this, isEditable);
+        super.setEditable(isEditable);
+    }
+
+    @Override
     public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
         switch (eventType) {
         case CREATE:

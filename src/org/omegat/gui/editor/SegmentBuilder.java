@@ -51,6 +51,7 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -161,7 +162,7 @@ public class SegmentBuilder {
         this.active = isActive;
 
         doc.trustedChangesInProgress = true;
-        controller.editor.setCaretUpdateEnabled(false);
+        StaticUIUtils.setCaretUpdateEnabled(controller.editor, false);
         try {
             try {
                 if (beginPosP1 != null && endPosM1 != null) {
@@ -198,7 +199,7 @@ public class SegmentBuilder {
             }
         } finally {
             doc.trustedChangesInProgress = false;
-            controller.editor.setCaretUpdateEnabled(true);
+            StaticUIUtils.setCaretUpdateEnabled(controller.editor, true);
         }
     }
 
@@ -207,7 +208,7 @@ public class SegmentBuilder {
      */
     public void addSegmentSeparator() {
         doc.trustedChangesInProgress = true;
-        controller.editor.setCaretUpdateEnabled(false);
+        StaticUIUtils.setCaretUpdateEnabled(controller.editor, false);
         try {
             try {
                 doc.insertString(doc.getLength(), "\n", null);
@@ -216,7 +217,7 @@ public class SegmentBuilder {
             }
         } finally {
             doc.trustedChangesInProgress = false;
-            controller.editor.setCaretUpdateEnabled(true);
+            StaticUIUtils.setCaretUpdateEnabled(controller.editor, true);
         }
     }
 

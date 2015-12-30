@@ -202,11 +202,12 @@ public class StaticUIUtils {
             comp.setSize(comp.getWidth(), rect.height);
         }
     }
-    
-    public static void neverUpdateCaret(JTextComponent comp) {
+
+    public static void setCaretUpdateEnabled(JTextComponent comp, boolean updateEnabled) {
         Caret caret = comp.getCaret();
         if (caret instanceof DefaultCaret) {
-            ((DefaultCaret) caret).setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
+            ((DefaultCaret) caret).setUpdatePolicy(updateEnabled ? DefaultCaret.UPDATE_WHEN_ON_EDT
+                    : DefaultCaret.NEVER_UPDATE);
         }
     }
 

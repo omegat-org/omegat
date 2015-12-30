@@ -39,6 +39,7 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -85,10 +86,10 @@ public class Document3 extends DefaultStyledDocument {
      * <p>
      * As a workaround, when setting this flag to true, if the changes are to
      * include insertions or deletions of text in the document, you must also
-     * disable caret updates temporarily via
-     * {@link EditorTextArea3#setCaretUpdateEnabled(boolean)}. After the
-     * document changes are complete and you have set this flag back to false,
-     * caret update can be re-enabled.
+     * disable the editor's caret updates temporarily (e.g. with
+     * {@link StaticUIUtils#setCaretUpdateEnabled(javax.swing.text.JTextComponent, boolean)}
+     * ). After the document changes are complete and you have set this flag
+     * back to false, caret update can be re-enabled.
      * 
      * @see <a href="https://sourceforge.net/p/omegat/bugs/162/">Initial
      *      ticket</a>

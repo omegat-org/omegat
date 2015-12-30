@@ -46,7 +46,7 @@ public class TitledTablePanel extends javax.swing.JPanel {
         // When a TitledTablePanel is used in a JScrollPane (like in the 
         // PerFileMatchStatisticsPanel) the caret updating will cause unwanted
         // scrolling whenever a new TitledTablePanel is displayed.
-        StaticUIUtils.neverUpdateCaret(title);
+        StaticUIUtils.setCaretUpdateEnabled(title, false);
         title.setFont(UIManager.getFont("Label.font"));
     }
 

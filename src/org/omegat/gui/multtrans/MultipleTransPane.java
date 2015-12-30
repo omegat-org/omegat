@@ -73,7 +73,6 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
 
         setEditable(false);
         StaticUIUtils.makeCaretAlwaysVisible(this);
-        StaticUIUtils.neverUpdateCaret(this);
         this.setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
 

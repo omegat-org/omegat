@@ -69,7 +69,6 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
 
         setEditable(false);
         StaticUIUtils.makeCaretAlwaysVisible(this);
-        StaticUIUtils.neverUpdateCaret(this);
 
         this.setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));

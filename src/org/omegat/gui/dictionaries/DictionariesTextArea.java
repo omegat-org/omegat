@@ -225,7 +225,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             i++;
         }
         setText(txt.toString());
-        setCaretPosition(0);
     }
 
     protected final MouseAdapter mouseCallback = new MouseAdapter() {

@@ -35,6 +35,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.gui.FontFallbackListener;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -66,6 +67,7 @@ public abstract class EntryInfoPane<T> extends JTextPane implements IProjectEven
         getDocument().addDocumentListener(new FontFallbackListener(this));
         setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
         setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
+        StaticUIUtils.neverUpdateCaret(this);
     }
 
     public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {

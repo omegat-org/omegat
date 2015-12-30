@@ -69,9 +69,9 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DragTargetOverlay;
+import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
 import org.omegat.util.gui.JTextPaneLinkifier;
 import org.omegat.util.gui.StaticUIUtils;
-import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -233,7 +233,6 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
             buf.append("\n\n");
         }
         setText(buf.text.toString());
-        setCaretPosition(0);
         StyledDocument doc = getStyledDocument();
         doc.setCharacterAttributes(0, doc.getLength(), NO_ATTRIBUTES, true); // remove old bold settings first
         for (int i = 0; i < buf.boldStarts.size(); i++) {

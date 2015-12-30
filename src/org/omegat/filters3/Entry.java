@@ -110,7 +110,7 @@ public class Entry {
     /**
      * Detects the first and the last translatable tags and assigns all tags in
      * translatable region the shortcuts. Basically calls {@link #detectTags()}
-     * and {@link #enumerateTags()} if tags were not detected, i.e.
+     * and {@link #enumerateTags(int, int))} if tags were not detected, i.e.
      * {@link #tagsDetected} is false. in the paragraph "last translatable".
      */
     private void detectAndEnumerateTags() {

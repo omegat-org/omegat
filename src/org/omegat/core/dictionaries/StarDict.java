@@ -76,8 +76,16 @@ public class StarDict implements IDictionary {
 
     protected final File ifoFile;
 
-    /** Dictionary type, from 'sametypesequence' header. */
-    protected final String contentType;
+    /**
+     * Field in StarDict .ifo file, added in version 3.0.0. This must be
+     * retained in order to support idxoffsetbits=64 dictionaries (not yet
+     * implemented).
+     * 
+     * @see <a href="http://www.stardict.org/StarDictFileFormat">StarDict File
+     *      Format</a>
+     */
+    private int idxoffsetbits = 32;
+
     private DictZipHeader fHeader;
     private DictType dictType;
     private String dictName;
@@ -95,12 +103,23 @@ public class StarDict implements IDictionary {
         if (!"2.4.2".equals(version) && !"3.0.0".equals(version)) {
             throw new Exception("Invalid version of dictionary: " + version);
         }
-        contentType = header.get("sametypesequence");
-        if (!"g".equals(contentType) && 
-            !"m".equals(contentType) && 
-            !"x".equals(contentType) &&
-            !"h".equals(contentType)) {
-            throw new Exception("Invalid type of dictionary: " + contentType);
+        String sametypesequence = header.get("sametypesequence");
+        if (!"g".equals(sametypesequence) && 
+            !"m".equals(sametypesequence) && 
+            !"x".equals(sametypesequence) &&
+            !"h".equals(sametypesequence)) {
+            throw new Exception("Invalid type of dictionary: " + sametypesequence);
+        }
+        
+        if ("3.0.0".equals(version)) {
+            String bitsString = header.get("idxoffsetbits");
+            if (bitsString != null) {
+                idxoffsetbits = Integer.parseInt(bitsString);
+            }
+        }
+
+        if (idxoffsetbits != 32) {
+            throw new Exception("StarDict dictionaries with idxoffsetbits=64 are not supported.");
         }
 
         String f = ifoFile.getPath();

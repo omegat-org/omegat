@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Box;
@@ -49,6 +50,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.PrepareTMXEntry;
@@ -119,6 +121,7 @@ public class TagValidationFrame extends JFrame {
         m_editorPane = new JEditorPane();
         m_editorPane.setEditable(false);
         m_editorPane.addHyperlinkListener(new HListener(parent, this, true)); // fix for bug 1542937
+        StaticUIUtils.neverUpdateCaret(m_editorPane);
         JScrollPane scroller = new JScrollPane(m_editorPane);
 
         Box bbut = Box.createHorizontalBox();
@@ -317,7 +320,6 @@ public class TagValidationFrame extends JFrame {
         m_fixAllButton.setEnabled(m_numFixableErrors > 0);
         m_editorPane.setContentType("text/html");
         m_editorPane.setText(output.toString());
-        m_editorPane.setCaretPosition(0);
     }
 
     public void setMessage(String message) {

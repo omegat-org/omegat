@@ -97,7 +97,7 @@ public abstract class Text implements Element {
 
     /**
      * Returns long XML-encoded representation of the element. Basically, the
-     * XML-encoded text (&lt; -> &amp;lt; etc). E.g. for <code>Rock&Roll</code>
+     * XML-encoded text (&lt; -&gt; &amp;lt; etc). E.g. for <code>Rock&amp;Roll</code>
      * should return <code>Rock&amp;Roll</code>.
      */
     public String toTMX() {
@@ -106,8 +106,8 @@ public abstract class Text implements Element {
 
     /**
      * Returns the text in its original form as it was in original document.
-     * E.g. for <code>Rock&Roll</code> should return <code>Rock&amp;Roll</code>
-     * for XML and <code>Rock&Roll</code> for text files.
+     * E.g. for <code>Rock&amp;Roll</code> should return <code>Rock&amp;Roll</code>
+     * for XML and <code>Rock&amp;Roll</code> for text files.
      */
     public abstract String toOriginal();
 }

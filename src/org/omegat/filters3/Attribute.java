@@ -48,7 +48,7 @@ public class Attribute {
     /**
      * Sets attribute's value.
      * <p>
-     * Actually an ugly hack to allow quick & dirty translation of attributes.
+     * Actually an ugly hack to allow quick &amp; dirty translation of attributes.
      * Normal solution requires too much time :-(
      */
     public void setValue(String value) {

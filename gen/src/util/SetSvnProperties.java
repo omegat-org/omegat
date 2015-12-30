@@ -38,7 +38,7 @@ import java.util.List;
  * If you are using TortoiseSVN, then kill TSVNCache in memory, since it can
  * conflict with command-line svn.
  * 
- * @author Alex Buloichik <alex73mail@gmail.com>
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SetSvnProperties {
     protected static String filename;

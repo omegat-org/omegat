@@ -33,7 +33,7 @@ import org.omegat.core.data.ProtectedPart;
 /**
  * Callback for parse files.
  * 
- * @author Alex Buloichik <alex73mail@gmail.com>
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IParseCallback {
     /**

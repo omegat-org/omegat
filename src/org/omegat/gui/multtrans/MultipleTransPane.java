@@ -54,7 +54,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 /**
  * Pane for display information about multiple translations.
  * 
- * @author Alex Buloichik <alex73mail@gmail.com>
+ * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Jean-Christophe Helary
  * @author Aaron Madlon-Kay
  */

@@ -443,7 +443,7 @@ public abstract class AbstractFilter implements IFilter {
     }
     
     /**
-     * Get the input encoding. If it's not set in the FilterContext (setting is "&lt;auto>")
+     * Get the input encoding. If it's not set in the FilterContext (setting is "&lt;auto&gt;")
      * and the filter allows ({@link #isSourceEncodingVariable()}), try to detect it. The result may be null.
      * @param fc
      * @param inFile
@@ -459,7 +459,7 @@ public abstract class AbstractFilter implements IFilter {
     }
     
     /**
-     * Get the output encoding. If it's not set in the FilterContext (setting is "&lt;auto>")
+     * Get the output encoding. If it's not set in the FilterContext (setting is "&lt;auto&gt;")
      * and the filter allows ({@link #isTargetEncodingVariable()}):
      * <ul><li>Reuse the input encoding if it's Unicode
      * <li>If the input was not Unicode, fall back to UTF-8.

@@ -60,7 +60,7 @@ import org.omegat.util.StringUtil;
 /**
  * The controller part of the auto-completer
  * 
- * @author Zoltan Bartko <bartkozoltan@bartkozoltan.com>
+ * @author Zoltan Bartko (bartkozoltan@bartkozoltan.com)
  * @author Aaron Madlon-Kay
  */
 public class AutoCompleter implements IAutoCompleter {    

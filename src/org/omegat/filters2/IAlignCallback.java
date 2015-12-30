@@ -28,7 +28,7 @@ package org.omegat.filters2;
 /**
  * Callback for align files in filter.
  * 
- * @author Alex Buloichik <alex73mail@gmail.com>
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IAlignCallback {
     /**

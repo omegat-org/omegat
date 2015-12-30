@@ -32,13 +32,13 @@ import org.omegat.util.Token;
 /**
  * Class to compute Levenshtein Distance.
  * 
- * <p/>
+ * <p>
  * Levenshtein distance (LD) is a measure of the similarity between two strings,
  * which we will refer to as the source string (s) and the target string (t).
  * The distance is the number of deletions, insertions, or substitutions
  * required to transform s into t.
  * 
- * <p/>
+ * <p>
  * For example,
  * <ul>
  * <li>If s is "test" and t is "test", then LD(s,t) = 0, because no
@@ -47,9 +47,9 @@ import org.omegat.util.Token;
  * substitution (change "s" to "n") is sufficient to transform s into t.
  * </ul>
  * 
- * <p/>
+ * <p>
  * The greater the Levenshtein distance, the more different the strings are.
- * <p/>
+ * <p>
  * Levenshtein distance is named after the Russian scientist Vladimir
  * Levenshtein, who devised the algorithm in 1965. If you can't spell or
  * pronounce Levenshtein, the metric is also sometimes called edit distance.
@@ -60,7 +60,7 @@ import org.omegat.util.Token;
  * operation. We have to create LevenshteinDistance instance one for each thread
  * where we will call it. It's best way for best performance.
  * 
- * @see http://www.merriampark.com/ld.htm
+ * @see <a href="http://people.cs.pitt.edu/~kirk/cs1501/Pruhs/Fall2006/Assignments/editdistance/Levenshtein%20Distance.htm">Levenshtein Distance, in Three Flavors</a>
  * 
  * @author Vladimir Levenshtein
  * @author Michael Gilleland, Merriam Park Software

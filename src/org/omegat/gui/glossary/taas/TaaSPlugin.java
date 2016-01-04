@@ -70,20 +70,21 @@ public class TaaSPlugin {
         try {
             client = new TaaSClient();
             if (client.isAllowed()) {
-                return;
-            }
-            glossary = new TaaSGlossary();
+                glossary = new TaaSGlossary();
 
-            InputStream in = TaaSGlossary.class.getResourceAsStream("filter.xslt");
-            if (in == null) {
-                throw new Exception("filter.xslt is unaccessible");
-            }
-            try {
-                TransformerFactory factory = TransformerFactory.newInstance();
-                Source xslt = new StreamSource(in);
-                filterTransformer = factory.newTransformer(xslt);
-            } finally {
-                in.close();
+                InputStream in = TaaSGlossary.class.getResourceAsStream("filter.xslt");
+                if (in == null) {
+                    throw new Exception("filter.xslt is unaccessible");
+                }
+                try {
+                    TransformerFactory factory = TransformerFactory.newInstance();
+                    Source xslt = new StreamSource(in);
+                    filterTransformer = factory.newTransformer(xslt);
+                } finally {
+                    in.close();
+                }
+            } else {
+                glossary = null;
             }
         } catch (Exception ex) {
             Log.log(ex);

@@ -125,8 +125,8 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
                 + " font-size: " + font.getSize() + "; "
                 + " font-style: " + (font.getStyle() == Font.BOLD ? "bold" :
                     font.getStyle() == Font.ITALIC ? "italic" : "normal") + "; "
-                + " color: #" + EditorColor.COLOR_FOREGROUND.toHex() + "; "
-                + " background: #" + EditorColor.COLOR_BACKGROUND.toHex() + "; "
+                + " color: " + EditorColor.COLOR_FOREGROUND.toHex() + "; "
+                + " background: " + EditorColor.COLOR_BACKGROUND.toHex() + "; "
                 + " }");
     }
 

@@ -222,27 +222,21 @@ public class Main {
         System.out.println("Reading config from " + path);
         try {
             PropertyResourceBundle config = new PropertyResourceBundle(new FileInputStream(configFile));
-            String userLanguage = null;
-            String userCountry = null;
             // Put config properties into system.
             for (String key : config.keySet()) {
                 String value = config.getString(key);
                 System.setProperty(key, value);
                 System.out.println("Read from config: " + key + "=" + value);
-                if (key.equals("user.language")) {
-                    userLanguage = value;
-                }
-                if (key.equals("user.country")) {
-                    userCountry = value;
-                }
             }
             // Apply language preferences, if present.
-            if (userLanguage != null) {
-                if (userCountry != null) {
-                    Locale.setDefault(new Locale(userLanguage, userCountry));
-                } else {
-                    Locale.setDefault(new Locale(userLanguage));
-                }
+            // This must be done with Locale.setDefault(). Merely doing
+            // System.setProperty() will not work.
+            if (config.containsKey("user.language")) {
+                String userLanguage = config.getString("user.language");
+                Locale userLocale = config.containsKey("user.country")
+                        ? new Locale(userLanguage, config.getString("user.country"))
+                        : new Locale(userLanguage);
+                Locale.setDefault(userLocale);
             }
         } catch (FileNotFoundException exception) {
             System.err.println("Config file not found: " + path);

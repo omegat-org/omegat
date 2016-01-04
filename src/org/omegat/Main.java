@@ -222,10 +222,11 @@ public class Main {
         System.out.println("Reading config from " + path);
         try {
             PropertyResourceBundle config = new PropertyResourceBundle(new FileInputStream(configFile));
-            // Put config properties into system.
+            // Put config properties into System properties and into OmegaT params.
             for (String key : config.keySet()) {
                 String value = config.getString(key);
                 System.setProperty(key, value);
+                params.put(key, value);
                 System.out.println("Read from config: " + key + "=" + value);
             }
             // Apply language preferences, if present.

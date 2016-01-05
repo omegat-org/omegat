@@ -38,7 +38,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.3 update 1
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    4 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -47,6 +47,9 @@
   Other changes:
 
  - Support 3.0.0 StarDict dictionaries
+
+ - To reflect TaaS's change of policy, a key is now mandatory to use the 
+service
 
  Bug fixes:
 

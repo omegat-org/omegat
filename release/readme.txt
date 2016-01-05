@@ -245,6 +245,9 @@ Spotlight search field.
 To participate in the development of OmegaT, get in touch with the developers at:
     http://lists.sourceforge.net/lists/listinfo/omegat-development
 
+To get started as a programmer, see the developer documentation at:
+    https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/
+
 To translate OmegaT's user interface, user manual or other related documents,
 read:
       

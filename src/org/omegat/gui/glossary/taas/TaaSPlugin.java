@@ -35,6 +35,7 @@ import java.io.StringWriter;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -68,18 +69,22 @@ public class TaaSPlugin {
         final TaaSGlossary glossary;
         try {
             client = new TaaSClient();
-            glossary = new TaaSGlossary();
+            if (client.isAllowed()) {
+                glossary = new TaaSGlossary();
 
-            InputStream in = TaaSGlossary.class.getResourceAsStream("filter.xslt");
-            if (in == null) {
-                throw new Exception("filter.xslt is unaccessible");
-            }
-            try {
-                TransformerFactory factory = TransformerFactory.newInstance();
-                Source xslt = new StreamSource(in);
-                filterTransformer = factory.newTransformer(xslt);
-            } finally {
-                in.close();
+                InputStream in = TaaSGlossary.class.getResourceAsStream("filter.xslt");
+                if (in == null) {
+                    throw new Exception("filter.xslt is unaccessible");
+                }
+                try {
+                    TransformerFactory factory = TransformerFactory.newInstance();
+                    Source xslt = new StreamSource(in);
+                    filterTransformer = factory.newTransformer(xslt);
+                } finally {
+                    in.close();
+                }
+            } else {
+                glossary = null;
             }
         } catch (Exception ex) {
             Log.log(ex);
@@ -95,7 +100,13 @@ public class TaaSPlugin {
                 browse.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        BrowseTaasCollectionsController.show();
+                        if (client.isAllowed()) {
+                            BrowseTaasCollectionsController.show();
+                        } else {
+                            JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
+                                    OStrings.getString("TAAS_API_KEY_NOT_FOUND"),
+                                    OStrings.getString("TF_WARNING"), JOptionPane.WARNING_MESSAGE);
+                        }
                     }
                 });
                 browse.setEnabled(false);
@@ -106,7 +117,13 @@ public class TaaSPlugin {
                 select.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        SelectDomainController.show();
+                        if (client.isAllowed()) {
+                            SelectDomainController.show();
+                        } else {
+                            JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
+                                    OStrings.getString("TAAS_API_KEY_NOT_FOUND"),
+                                    OStrings.getString("TF_WARNING"), JOptionPane.WARNING_MESSAGE);
+                        }
                     }
                 });
                 menu.add(select);
@@ -119,11 +136,18 @@ public class TaaSPlugin {
                     public void actionPerformed(ActionEvent e) {
                         Preferences.setPreference(Preferences.TAAS_LOOKUP, lookup.isSelected());
                         Preferences.save();
+                        if (!client.isAllowed()) {
+                            JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
+                                    OStrings.getString("TAAS_API_KEY_NOT_FOUND"),
+                                    OStrings.getString("TF_WARNING"), JOptionPane.WARNING_MESSAGE);
+                        }
                     }
                 });
                 menu.add(lookup);
 
-                Core.getGlossaryManager().addGlossaryProvider(glossary);
+                if (client.isAllowed()) {
+                    Core.getGlossaryManager().addGlossaryProvider(glossary);
+                }
             }
 
             public void onApplicationShutdown() {

@@ -18,7 +18,7 @@ Main development is performed in the `trunk` branch of the SourceForge-hosted
 Subversion repository:
     https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/
 
-Git mirrors are also provided:
+Git mirrors are also provided (svn trunk is synced to git master):
     SourceForge: https://sourceforge.net/p/omegat/code/ci/master/tree/
     GitHub:      https://github.com/OmegaT-Project/OmegaT
 

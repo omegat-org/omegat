@@ -162,8 +162,8 @@ public class ProjectPropertiesDialog extends JDialog {
      * @param projFileName
      *            project file name
      * @param dialogTypeValue
-     *            type of the dialog ({@link #NEW_PROJECT},
-     *            {@link #RESOLVE_DIRS} or {@link #EDIT_PROJECT}).
+     *            type of the dialog ({@link Mode#NEW_PROJECT},
+     *            {@link Mode#RESOLVE_DIRS} or {@link Mode#EDIT_PROJECT}).
      */
     public ProjectPropertiesDialog(final ProjectProperties projectProperties, String projFileName,
             Mode dialogTypeValue) {

@@ -100,7 +100,7 @@ public class EditorTextArea3 extends JEditorPane {
      * Whether or not we are confining the cursor to the editable part of the
      * text area. The user can optionally allow the caret to roam freely.
      * 
-     * @see {@link #checkAndFixCaret(boolean)}
+     * @see #checkAndFixCaret(boolean)
      */
     protected boolean lockCursorToInputArea = true;
 

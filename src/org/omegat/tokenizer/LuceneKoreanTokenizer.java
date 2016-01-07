@@ -33,16 +33,19 @@ import org.apache.lucene.analysis.kr.KoreanAnalyzer;
 import org.apache.lucene.analysis.kr.KoreanTokenizer;
 
 /**
- * This uses the Korean tokenizer currently under development
- * for inclusion in Lucene (but not yet incorporated).
+ * This uses the Korean tokenizer currently under development for inclusion in
+ * Lucene (but not yet incorporated).
  * <p>
  * The code quality appears to be poor at the moment (see LUCENE-4956 thread;
  * spurious ArrayIndexOutOfBoundsException errors observable in normal usage
- * within OmegaT) so {@link Tokenizer#isDefault()} is currently <code>false</code>.
+ * within OmegaT) so {@link Tokenizer#isDefault()} is currently
+ * <code>false</code>.
  * 
- * @see http://sourceforge.net/projects/lucenekorean/
- * @see http://cafe.naver.com/korlucene
- * @see https://issues.apache.org/jira/browse/LUCENE-4956
+ * @see <a href="http://sourceforge.net/projects/lucenekorean/">SourceForge
+ *      project</a>
+ * @see <a href="http://cafe.naver.com/korlucene">Korean site</a>
+ * @see <a href="https://issues.apache.org/jira/browse/LUCENE-4956">Lucene
+ *      issue</a>
  * 
  * @author Aaron Madlon-Kay
  */

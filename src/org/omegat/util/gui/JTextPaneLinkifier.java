@@ -37,6 +37,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
@@ -55,7 +56,8 @@ import org.omegat.util.Log;
 /**
  * Adapted from omegat-plugin-linkbuilder by Chihiro Hio, provided under GPLv3.
  * 
- * @see original https://github.com/hiohiohio/omegat-plugin-linkbuilder
+ * @see <a href="https://github.com/hiohiohio/omegat-plugin-linkbuilder">
+ *      Original</a>
  * 
  * @author Chihiro Hio
  * @author Aaron Madlon-Kay

@@ -130,11 +130,11 @@ public abstract class Tag implements Element {
 
     /**
      * Returns long XML-encoded representation of the tag to store in TMX. This
-     * implementation encloses {@link toPartialTMX()} in &lt;bpt&gt;,
+     * implementation encloses {@link #toPartialTMX()} in &lt;bpt&gt;,
      * &lt;ept&gt; or &lt;ph&gt;. Can be overriden in ancestors if needed, but
      * most probably you won't ever need to override this method, and override
-     * {@link toPartialTMX()} instead. E.g. for &lt;strong&gt; tag should return
-     * &lt;bpt i="3"&gt;&amp;lt;strong&amp;gt;&lt;/bpt&gt;.
+     * {@link #toPartialTMX()} instead. E.g. for &lt;strong&gt; tag should
+     * return &lt;bpt i="3"&gt;&amp;lt;strong&amp;gt;&lt;/bpt&gt;.
      */
     public String toTMX() {
         String tmxtag;

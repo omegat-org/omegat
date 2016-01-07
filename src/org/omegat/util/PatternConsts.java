@@ -200,7 +200,7 @@ public class PatternConsts {
      * detects only simple placeholders, without SIGN-, PADDING-, ALIGNMENT- and
      * WIDTH specifier.
      * 
-     * @see PRINTF_VARS
+     * @see #PRINTF_VARS
      */
     public static final Pattern SIMPLE_PRINTF_VARS = Pattern.compile(RE_SIMPLE_PRINTF_VARS);
 
@@ -225,9 +225,11 @@ public class PatternConsts {
     private static Pattern CUSTOM_TAGS;
 
     /**
-     * Returns the placeholder pattern (OmegaT tags, printf tags, java MessageFomat tags, custom tags, combined according to user configuration)
+     * Returns the placeholder pattern (OmegaT tags, printf tags, java
+     * MessageFomat tags, custom tags, combined according to user configuration)
+     * 
      * @return the pattern
-     * @see updatePlaceholderPattern
+     * @see #updatePlaceholderPattern()
      */
     public static Pattern getPlaceholderPattern() {
         if (PLACEHOLDERS == null) {

@@ -194,8 +194,9 @@ public class RealProject implements IProject {
     private Stack<Process> processCache = new Stack<Process>();
 
     /**
-     * Create new project instance. It required to call {@link #createProject() createProject} or
-     * {@link #loadProject() loadProject} methods just after constructor before use project.
+     * Create new project instance. It required to call {@link #createProject()}
+     * or {@link #loadProject(boolean)} methods just after constructor before
+     * use project.
      * 
      * @param props
      *            project properties

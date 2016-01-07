@@ -95,7 +95,7 @@ public class CLIParameters {
     /**
      * Choice of types of translation for all segments in the optional, special
      * TMX file that contains all segments of the project. Value of
-     * {@link #PSEUDO_TRANSLATE_TYPE}.
+     * {@link #PSEUDOTRANSLATETYPE}.
      */
     public enum PSEUDO_TRANSLATE_TYPE {
         EQUAL, EMPTY;

@@ -49,8 +49,9 @@ public class EncodingDetector {
     
     /**
      * Detect the encoding of the supplied file.
-     * @see Original https://code.google.com/p/juniversalchardet/
-     * @see Fork https://github.com/amake/juniversalchardet
+     * 
+     * @see <a href="https://code.google.com/p/juniversalchardet/">Original</a>
+     * @see <a href="https://github.com/amake/juniversalchardet">Fork</a>
      */
     public static String detectEncoding(InputStream stream) throws IOException {
         UniversalDetector detector = new UniversalDetector(null);

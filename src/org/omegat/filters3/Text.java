@@ -75,7 +75,7 @@ public abstract class Text implements Element {
      * Tag[&lt;i&gt;], Text[pyatnitzu], Tag[&lt;/i&gt;], Text[ ya vlyublyon.]).
      * Tags are the same, but text is translated. Even the number of text
      * elements might change! So OmegaT must be able to create Text classes with
-     * appropriate {@link toOriginal()} methods for storing translated text, so
+     * appropriate {@link #toOriginal()} methods for storing translated text, so
      * it would pick any of the original Text instances, e.g. Text[Friday], and
      * call <code>createInstance("V ")</code>,
      * <code>createInstance("pyatnitzu")</code>, and

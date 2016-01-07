@@ -398,9 +398,9 @@ public class XMLStreamReader {
      * For CDATA we eat CDATA prefix, setup a "hack" flag and return.
      * 
      * @author Maxym Mykhalchuk
-     * @bugfixes 
-     *           http://sourceforge.net/tracker/?func=detail&atid=520347&aid=1109089
-     *           &group_id=68187
+     * @see <a href=
+     *      "http://sourceforge.net/tracker/?func=detail&atid=520347&aid=1109089&group_id=68187">
+     *      bug fixes</a>
      */
     private XMLBlock getNextTagExclamation() throws TranslationException {
         final int state_start = 1;

@@ -106,8 +106,8 @@ public class HTMLOptions extends AbstractOptions {
      * Returns whether and when (X)HTML filter adds/rewrites encoding
      * declaration.
      * 
-     * @return One of {@link #REWRITE_ALWAYS}, {@link #REWRITE_IFHEADER},
-     *         {@link #REWRITE_IFMETA}, {@link #REWRITE_NEVER}.
+     * @return One of {@link REWRITE_MODE#ALWAYS}, {@link REWRITE_MODE#IFHEADER}
+     *         , {@link REWRITE_MODE#IFMETA}, {@link REWRITE_MODE#NEVER}.
      */
     public REWRITE_MODE getRewriteEncoding() {
         return getEnum(REWRITE_MODE.class, OPTION_REWRITE_ENCODING, REWRITE_MODE.IFHEADER);
@@ -117,8 +117,9 @@ public class HTMLOptions extends AbstractOptions {
      * Sets when (X)HTML filter should add/rewrite encoding declaration.
      * 
      * @param rewriteEncoding
-     *            One of {@link #REWRITE_ALWAYS}, {@link #REWRITE_IFHEADER},
-     *            {@link #REWRITE_IFMETA}, {@link #REWRITE_NEVER}.
+     *            One of {@link REWRITE_MODE#ALWAYS},
+     *            {@link REWRITE_MODE#IFHEADER}, {@link REWRITE_MODE#IFMETA},
+     *            {@link REWRITE_MODE#NEVER}.
      */
     public void setRewriteEncoding(REWRITE_MODE rewriteEncoding) {
         setEnum(OPTION_REWRITE_ENCODING, rewriteEncoding);

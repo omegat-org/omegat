@@ -37,14 +37,14 @@ import java.util.TimeZone;
 /**
  * Date parser for the 'basic' ISO 8601 format that is advised for TMX dates.
  * There are many variations of the ISO8601 standard (the good thing about
- * standards is that there are so many to choose from :( ) The {@link http
- * ://www.lisa.org/fileadmin/standards/tmx1.4/tmx.htm#refISO8601 TMX
- * specification} refers to {@link http
- * ://www.w3.org/TR/1998/NOTE-datetime-19980827}, the 'extended' format, but
- * although referring to this standard, it recommends the 'basic' format:
- * YYYYMMDDThhmmssZ. Since all translation tools conform to this format, this
- * parser only parses this variant of the 'basic' format.
- * 
+ * standards is that there are so many to choose from :( ) The
+ * <a href="http://www.lisa.org/fileadmin/standards/tmx1.4/tmx.htm#refISO8601">
+ * TMX specification</a> refers to
+ * <a href="http://www.w3.org/TR/1998/NOTE-datetime-19980827">the 'extended'
+ * format</a>, but although referring to this standard, it recommends the
+ * 'basic' format: YYYYMMDDThhmmssZ. Since all translation tools conform to this
+ * format, this parser only parses this variant of the 'basic' format.
+ * <p>
  * DateFormat is not thread-safe, so this class must be instantiated.
  * 
  * @author Martin Fleurke

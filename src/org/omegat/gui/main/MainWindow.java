@@ -624,7 +624,9 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     /**
      * {@inheritDoc}
-     * @see JOptionPane.showConfirmDialog
+     * 
+     * @see JOptionPane#showConfirmDialog(java.awt.Component, Object, String,
+     *      int, int)
      */
     public int showConfirmDialog(Object message, String title, int optionType,
             int messageType) throws HeadlessException {

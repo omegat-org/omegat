@@ -110,7 +110,7 @@ public class Entry {
     /**
      * Detects the first and the last translatable tags and assigns all tags in
      * translatable region the shortcuts. Basically calls {@link #detectTags()}
-     * and {@link #enumerateTags(int, int))} if tags were not detected, i.e.
+     * and {@link #enumerateTags(int, int)} if tags were not detected, i.e.
      * {@link #tagsDetected} is false. in the paragraph "last translatable".
      */
     private void detectAndEnumerateTags() {
@@ -536,7 +536,7 @@ public class Entry {
     /**
      * Before setting translation checks whether the translation contains all
      * the same tags in weakly correct order. See
-     * {@link #setTranslation(String)} for details.
+     * {@link #setTranslation(String, XMLDialect, List)} for details.
      */
     private void checkAndRecoverTags(String translation, List<ProtectedPart> protectedParts) throws TranslationException {
         translatedEntry = new Entry(xmlDialect, handler);

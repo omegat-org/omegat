@@ -31,9 +31,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -43,12 +43,17 @@ import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
 /**
- * Filter to support language files for ILIAS. The files are a kind of UTF8 encoded text where the lines look like
- * module_name#:#identifier#:#string to translate
- * where neither module_name, nor identifier can be modified but must be copied into the translated version as they are including #:# separators.
+ * Filter to support language files for ILIAS. The files are a kind of UTF8
+ * encoded text where the lines look like module_name#:#identifier#:#string to
+ * translate where neither module_name, nor identifier can be modified but must
+ * be copied into the translated version as they are including #:# separators.
  * The file contains a header that should be copied into the translated version.
- * The translated stings should not contain any \n\r symbols but may include simple HTML entities such as <p> ... </p> and <br />
- * @see http://www.ilias.de/docu/ilias.php?ref_id=37&from_page=129&obj_id=133&obj_type=PageObject&cmd=layout&cmdClass=illmpresentationgui&cmdNode=ih&baseClass=ilLMPresentationGUI 
+ * The translated stings should not contain any \n\r symbols but may include
+ * simple HTML entities such as &lt;p&gt; ... &lt;/p&gt; and &lt;br /&gt;
+ * 
+ * @see <a href=
+ *      "http://www.ilias.de/docu/ilias.php?ref_id=37&from_page=129&obj_id=133&obj_type=PageObject&cmd=layout&cmdClass=illmpresentationgui&cmdNode=ih&baseClass=ilLMPresentationGUI">
+ *      docs</a>
  * 
  * @author Michael Zakharov <trapman.hunt@gmail.com>
  */

@@ -32,17 +32,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 
 /**
- * This class is used to transform a string by expansion of variables it contains. <br>
- * It can expand: <br> <ul>
- * <li>Entries in Bundle.properties : {@see expandBundleEntries} for syntax
- * <li>Variables : {@see expandVariables} for syntax
+ * This class is used to transform a string by expansion of variables it
+ * contains. It can expand:
+ * <ul>
+ * <li>Entries in Bundle.properties: see {@link #expandBundleEntries(String)}
+ * for syntax
+ * <li>Variables: see {@link #expandVariables(Object)} for syntax
  * </ul>
- * Here we define variables which depends only on the project.
- * This class should be overriden to define more specific substitutions.
+ * Here we define variables which depends only on the project. This class should
+ * be overriden to define more specific substitutions.
+ * 
  * @author Thomas CORDONNIER
  * @author Aaron Madlon-Kay
  */

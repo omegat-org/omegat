@@ -1973,7 +1973,8 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * {@inheritdoc} Document is reloaded to immediately have the filter being effective.
+     * {@inheritDoc} Document is reloaded to immediately have the filter being
+     * effective.
      */
     public void setFilter(IEditorFilter filter) {
         UIThreadsUtil.mustBeSwingThread();
@@ -2023,7 +2024,8 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * {@inheritdoc} Document is reloaded if appropriate to immediately remove the filter;
+     * {@inheritDoc} Document is reloaded if appropriate to immediately remove
+     * the filter;
      */
     public void removeFilter() {
         UIThreadsUtil.mustBeSwingThread();
@@ -2050,7 +2052,7 @@ public class EditorController implements IEditor {
     }
     
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public void setAlternateTranslationForCurrentEntry(boolean alternate) {
         SegmentBuilder sb = m_docSegList[displayedEntryIndex];

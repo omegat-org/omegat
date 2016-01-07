@@ -1165,9 +1165,6 @@ public class RealProject implements IProject {
         Log.log("Load project source files: " + (en - st) + "ms");
     }
 
-    /**
-     * {@inheritDoc}
-     */
     protected void findNonUniqueSegments() {
         Map<String, SourceTextEntry> exists = new HashMap<String, SourceTextEntry>(16384);
 

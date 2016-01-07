@@ -327,9 +327,6 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     /**
      * Imports the file/files/folder into project's source files.
-     * 
-     * @author Kim Bruning
-     * @author Maxym Mykhalchuk
      */
     public void doPromptImportSourceFiles() {
         OmegaTFileChooser chooser = new OmegaTFileChooser();
@@ -392,8 +389,6 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     /**
      * Does wikiread
-     * 
-     * @author Kim Bruning
      */
     public void doWikiImport() {
         String remote_url = JOptionPane.showInputDialog(this, OStrings.getString("TF_WIKI_IMPORT_PROMPT"),

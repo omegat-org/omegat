@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.Random;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
@@ -50,6 +51,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
+
 import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -283,8 +285,6 @@ public class HelpFrame extends JFrame {
      * 
      * If the latest manual is not available in the system locale language, it
      * returns null, i.e. show a language selection screen.
-     * 
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     private static String detectInitialLanguage() {
         // Get the system locale (language and country)
@@ -310,8 +310,6 @@ public class HelpFrame extends JFrame {
     /**
      * Returns the version of (a translation of) the user manual. If there is no
      * translation for the specified locale, null is returned.
-     * 
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     private static String getDocVersion(String locale) {
         // Check if there's a manual for the specified locale

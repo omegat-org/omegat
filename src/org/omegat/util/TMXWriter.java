@@ -40,14 +40,16 @@ import org.omegat.core.data.ProjectProperties;
 
 /**
  * Class that store TMX (Translation Memory Exchange) files.
+ * 
+ * @author Henry Pijffers (henry.pijffers@saxnot.com)
+ * @author Maxym Mykhalchuk
+ * 
  */
 public class TMXWriter {
 
     /**
      * Saves a TMX file to disk
      * 
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
-     * @author Maxym Mykhalchuk
      * @param filename
      *            The name of the file to create
      * @param forceValidTMX
@@ -158,8 +160,6 @@ public class TMXWriter {
     /**
      * Creates three-quarted-assed TMX level 2 segments from OmegaT internal
      * segments
-     * 
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     private static String makeLevelTwo(String segment) {
         // Create a storage buffer for the result

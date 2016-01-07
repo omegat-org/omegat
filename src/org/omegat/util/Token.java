@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2006 Henry Pijffers (henry.pijffers@saxnot.com)
                2007 Zoltan Bartko (bartkozoltan@bartkozoltan.com)
                2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
@@ -38,14 +39,13 @@ import java.util.regex.Pattern;
  * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
+ * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Zoltan Bartko
  * @author Aaron Madlon-Kay
  */
 public class Token {
     /**
      * Two tokens are thought equal if their hash code is equal.
-     * 
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public boolean equals(Object other) {
         if (this == other) {

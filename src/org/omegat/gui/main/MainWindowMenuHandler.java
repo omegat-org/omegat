@@ -140,9 +140,6 @@ public class MainWindowMenuHandler {
 
     /**
      * Imports the file/files/folder into project's source files.
-     * 
-     * @author Kim Bruning
-     * @author Maxym Mykhalchuk
      */
     public void projectImportMenuItemActionPerformed() {
         mainWindow.doPromptImportSourceFiles();
@@ -625,8 +622,6 @@ public class MainWindowMenuHandler {
 
     /**
      * Asks the user for a segment number and then displays the segment.
-     * 
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public void gotoSegmentMenuItemActionPerformed() {
         // Create a dialog for input

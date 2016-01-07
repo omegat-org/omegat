@@ -357,8 +357,6 @@ public class StaticUtils {
      *
      * @return The full path of the directory containing the OmegaT
      *         configuration files, including trailing path separator.
-     *
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public static String getConfigDir() {
         // if the configuration directory has already been determined, return it
@@ -579,8 +577,6 @@ public class StaticUtils {
      *            The text to escape
      *
      * @return The escaped text
-     *
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public static String escapeNonRegex(String text) {
         return escapeNonRegex(text, true);
@@ -604,8 +600,6 @@ public class StaticUtils {
      *            false, these are converted to there regex equivalents.
      *
      * @return The escaped text
-     *
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public static String escapeNonRegex(String text, boolean escapeWildcards) {
         // handle backslash

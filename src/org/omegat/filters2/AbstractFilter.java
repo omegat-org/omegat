@@ -29,7 +29,6 @@
 
 package org.omegat.filters2;
 
-import org.omegat.util.EncodingDetector;
 import java.awt.Dialog;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -43,6 +42,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Map;
 
+import org.omegat.util.EncodingDetector;
 import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OStrings;
 
@@ -414,8 +414,6 @@ public abstract class AbstractFilter implements IFilter {
      *             In case of any I/O error.
      * @throws TranslationException
      *             Should be thrown when processed file has any format defects.
-     * 
-     * @author Martin Wunderlich
      */
     protected void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
             TranslationException {

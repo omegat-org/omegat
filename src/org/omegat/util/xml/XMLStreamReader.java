@@ -43,6 +43,7 @@ import org.omegat.util.StringUtil;
  * A reader for XML stream.
  * 
  * @author Keith Godfrey
+ * @author Maxym Mykhalchuk
  */
 public class XMLStreamReader {
     private DefaultEntityFilter entityFilter;
@@ -397,7 +398,6 @@ public class XMLStreamReader {
      * For comments we copy "--" into tagname and '...' into first attribute.
      * For CDATA we eat CDATA prefix, setup a "hack" flag and return.
      * 
-     * @author Maxym Mykhalchuk
      * @see <a href=
      *      "http://sourceforge.net/tracker/?func=detail&atid=520347&aid=1109089&group_id=68187">
      *      bug fixes</a>

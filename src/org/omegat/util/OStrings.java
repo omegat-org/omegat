@@ -76,8 +76,6 @@ public class OStrings {
      * Loads resources from the specified file. If the file cannot be loaded,
      * resources are reverted to the default locale. Useful when testing
      * localisations outside the jar file.
-     * 
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public static void loadBundle(String filename) {
         boolean loaded = false;
@@ -134,8 +132,6 @@ public class OStrings {
     /**
      * Returns the OmegaT "pretty" version for display (includes the application name).
      * Example: "OmegaT 3.5", "OmegaT 3.5.1_2"
-     * 
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public static String getDisplayNameAndVersion() {
         if (UPDATE != null && !UPDATE.equals("0")) {
@@ -177,8 +173,6 @@ public class OStrings {
      * NOTE: segment marker is assumed to contain "0000" string to overwrite
      * with entry number. If zeros not detected, entry number will not be
      * displayed
-     * 
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public static String getSegmentMarker() {
         return getString("TF_CUR_SEGMENT_START");

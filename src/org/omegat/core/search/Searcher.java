@@ -584,8 +584,6 @@ public class Searcher {
      *            The text string to search in
      * 
      * @return True if the text string contains all search strings
-     * 
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public boolean searchString(String text) {
         if (text == null || m_matchers == null || m_matchers.isEmpty())

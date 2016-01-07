@@ -756,9 +756,6 @@ public class RealProject implements IProject {
      * synchronized around memory TMX, so, all edits are stopped. Since it's enough fast step, it's okay.
      *
      * 4. Upload new revision into repository.
-     *
-     * @author Alex Buloichik <alex73mail@gmail.com>
-     * @author Martin Fleurke
      */
     private void rebaseProject() throws Exception {
         File filenameTMXwithLocalChangesOnBase, filenameTMXwithLocalChangesOnHead;

@@ -29,7 +29,7 @@ package org.omegat.util;
 /**
  * A class to retrieve some platform information.
  * 
- * @author: Zoltan Bartko bartkozoltan@bartkozoltan.com
+ * @author Zoltan Bartko bartkozoltan@bartkozoltan.com
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public final class Platform {

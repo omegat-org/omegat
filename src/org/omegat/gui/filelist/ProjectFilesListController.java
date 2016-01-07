@@ -731,9 +731,6 @@ public class ProjectFilesListController {
 
     /**
      * Imports the file/files/folder into project's source files.
-     * 
-     * @author Kim Bruning
-     * @author Maxym Mykhalchuk
      */
     private void doImportSourceFiles() {
         m_parent.doPromptImportSourceFiles();

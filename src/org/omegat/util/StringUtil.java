@@ -502,8 +502,6 @@ public class StringUtil {
      *            Arguments to use in formatting the string
      *
      * @return The formatted string
-     *
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public static String format(String str, Object... arguments) {
         // MessageFormat.format expects single quotes to be escaped

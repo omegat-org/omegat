@@ -29,6 +29,7 @@ package org.omegat.gui.editor;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+
 import org.omegat.core.data.TMXEntry;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -36,11 +37,12 @@ import org.omegat.util.VarExpansion;
 
 /**
  * This class is used to generate modification info for a TMXEntry to a text
- * visible above source segment according to the given template containing variables.
+ * visible above source segment according to the given template containing
+ * variables.
  * 
  * @author Thomas CORDONNIER
  * @author Aaron Madlon-Kay
- * @Alex Buloichik
+ * @author Alex Buloichik
  * @author Piotr Kulik
  */
 

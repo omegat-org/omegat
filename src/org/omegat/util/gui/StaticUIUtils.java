@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2006 Henry Pijffers
+               2013 Yu Tang
                2014-2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -53,7 +54,8 @@ import javax.swing.text.DefaultCaret;
 import javax.swing.text.JTextComponent;
 
 /**
- *
+ * @author Henry Pijffers
+ * @author Yu-Tang
  * @author Aaron Madlon-Kay
  */
 public class StaticUIUtils {
@@ -213,9 +215,6 @@ public class StaticUIUtils {
 
     /**
      * Make caret visible even when the {@link JTextComponent} is not editable.
-     * 
-     * @author Yu-Tang
-     * @author Aaron Madlon-Kay
      */
     public static FocusListener makeCaretAlwaysVisible(final JTextComponent comp) {
         FocusListener listener = new FocusAdapter() {

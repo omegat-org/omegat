@@ -131,7 +131,7 @@ import com.vlsolutions.swing.docking.event.DockableSelectionListener;
  * @author Didier Briel
  * @author Martin Fleurke
  * @author Guido Leenders
- * @Author Aaron Madlon-Kay
+ * @author Aaron Madlon-Kay
  * @author Piotr Kulik
  * @author Yu Tang
  */
@@ -1909,8 +1909,6 @@ public class EditorController implements IEditor {
      * 
      * If there is no instant start guide in the default locale's language, "en" (English) is returned,
      * otherwise the acronym for the default locale's language.
-     * 
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     private String detectInstantStartLanguage() {
         // Get the system language and country

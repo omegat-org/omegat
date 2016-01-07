@@ -10,6 +10,12 @@ thus recommended to build with Oracle JDK 1.6.
 Eclipse and NetBeans are recommended IDEs for working with OmegaT source
 code. NetBeans is required to modify *.form-based GUI layouts.
 
+Check the other files in this directory for documentation. You can
+produce Javadoc by running `ant javadoc`, or browse online:
+    Trunk:    https://omegat.ci.cloudbees.com/job/omegat-trunk/javadoc/
+    Releases: https://omegat.ci.cloudbees.com/job/omegat-javadoc/
+              (Open desired version and click "Javadoc" link on left)
+
 
 Contributing to OmegaT
 ======================

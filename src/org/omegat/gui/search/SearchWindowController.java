@@ -452,7 +452,7 @@ public class SearchWindowController {
             form.setLocation(x, y);
             String dw = Preferences.getPreference(Preferences.SEARCHWINDOW_WIDTH);
             String dh = Preferences.getPreference(Preferences.SEARCHWINDOW_HEIGHT);
-            int w = Integer.parseInt(dw);
+            int w = StaticUIUtils.correctFrameWidth(Integer.parseInt(dw));
             int h = Integer.parseInt(dh);
             form.setSize(w, h);
         } catch (NumberFormatException nfe) {

@@ -53,6 +53,8 @@ import javax.swing.text.Caret;
 import javax.swing.text.DefaultCaret;
 import javax.swing.text.JTextComponent;
 
+import org.omegat.util.Platform;
+
 /**
  * @author Henry Pijffers
  * @author Yu-Tang
@@ -227,5 +229,25 @@ public class StaticUIUtils {
         };
         comp.addFocusListener(listener);
         return listener;
+    }
+
+    /**
+     * Ensure the frame width is OK. This is really just a workaround for
+     * <a href="https://bugs.openjdk.java.net/browse/JDK-8065739">JDK-8065739
+     * </a>, a Java bug specific to Java 1.8 on OS X whereby a frame too close
+     * to the width of the screen will warp to one corner with tiny dimensions.
+     * 
+     * @param width
+     *            Proposed window width
+     * @return A safe window width
+     */
+    public static int correctFrameWidth(int width) {
+        if (Platform.isMacOSX() && System.getProperty("java.version").startsWith("1.8")) {
+            int screenWidth = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width;
+            // 50 is a magic number. Can be as low as 11 (tested on OS X
+            // 10.10.2, Java 1.8.0_31).
+            width = Math.min(width, screenWidth - 50);
+        }
+        return width;
     }
 }

@@ -233,8 +233,9 @@ public class ProjectFilesListController {
                 case CLOSE:
                     list.tableFiles.setModel(new DefaultTableModel());
                     list.tableFiles.repaint();
+                    updateTitle("-");
                     modelTotal.fireTableDataChanged();
-                    list.setVisible(false);
+                    // list.setVisible(false);
                     break;
                 case LOAD:
                 case CREATE:
@@ -328,6 +329,10 @@ public class ProjectFilesListController {
         list.btnLast.addActionListener(moveAction);
     }
     
+    private void updateTitle(Object numFiles) {
+        list.setTitle(StringUtil.format(OStrings.getString("PF_WINDOW_TITLE"), numFiles));
+    }
+
     private final KeyListener filterTrigger = new KeyAdapter() {
         @Override
         public void keyTyped(KeyEvent e) {
@@ -581,7 +586,7 @@ public class ProjectFilesListController {
         list.statLabel.setText(statText);
 
         uiUpdateImportButtonStatus();
-        list.setTitle(StringUtil.format(OStrings.getString("PF_WINDOW_TITLE"), files.size()));
+        updateTitle(files.size());
 
         OSXIntegration.setProxyIcon(list.getRootPane(), new File(Core.getProject().getProjectProperties().getSourceRoot()));
 

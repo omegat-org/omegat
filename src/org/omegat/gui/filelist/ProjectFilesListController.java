@@ -754,6 +754,9 @@ public class ProjectFilesListController {
     }
 
     private void gotoFile(int row) {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
         int modelRow;
         try {
             modelRow = list.tableFiles.convertRowIndexToModel(row);

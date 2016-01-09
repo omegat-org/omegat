@@ -7,6 +7,7 @@
                2012 Guido Leenders, Didier Briel
                2013 Aaron Madlon-Kay, Yu Tang
                2014 Aaron Madlon-Kay, Alex Buloichik
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -28,8 +29,6 @@
 
 package org.omegat.core.data;
 
-import gen.core.filters.Filters;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,6 +43,8 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 
+import gen.core.filters.Filters;
+
 /**
  * Storage for project properties. May read and write project from/to disk.
  * 
@@ -57,8 +58,14 @@ import org.omegat.util.StringUtil;
  */
 public class ProjectProperties {
 
-    public static final String[] DEFAULT_EXCLUDES = { "**/.svn/**", "**/CVS/**", "**/.cvs/**",
-            "**/desktop.ini", "**/Thumbs.db" };
+    public static final String[] DEFAULT_EXCLUDES = {
+            "**/.svn/**",
+            "**/CVS/**",
+            "**/.cvs/**",
+            "**/desktop.ini",
+            "**/Thumbs.db",
+            "**/.DS_Store",
+            };
 
     /**
      * Constructor for tests only.

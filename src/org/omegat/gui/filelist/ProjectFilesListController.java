@@ -235,7 +235,7 @@ public class ProjectFilesListController {
                     list.tableFiles.repaint();
                     updateTitle("-");
                     modelTotal.fireTableDataChanged();
-                    // list.setVisible(false);
+                    list.setVisible(false);
                     break;
                 case LOAD:
                 case CREATE:

@@ -1,0 +1,56 @@
+Comment installer Kolekti
+
+/// Installation de l'environnement ///
+
+Installer python (2.7.9) pour windows 32bit (même sur les pc 64bit) :
+https://www.python.org/ftp/python/2.7.9/python-2.7.9.msi
+
+Ajouter dans la variable d'environnement Path :
+- C:\Python27
+- C:\Python27\Scripts
+
+Installer pysvn avec :
+http://pysvn.tigris.org/files/documents/1233/49404/py27-pysvn-svn1811-1.7.10-1584.exe
+
+Installer lxml avec la commande :
+pip install lxml
+
+Installer whoosh (indexation) avec la commande :
+pip install whoosh
+
+Installer Fop (si besoin) :
+- (à écrire)
+
+Installer PrinceXML (si besoin) :
+- télécharger l'nstalleur depuis http://www.princexml.com/download/
+- ajouter C:\Program Files (x86)\Prince\Engine\bin dans la variable d'environnement Path
+
+/// Installation de Kolekti ///
+
+Récupérer Kolekti sur github : télécharger https://github.com/kolekti/kolekti/archive/dev.zip
+
+Dézipper dans C:
+
+/// Publication du UserGuide (en ligne de commande) ///
+
+Se positionner dans :
+C:\kolekti-dev\src
+
+La structure de la ligne de commande est :
+
+python kolekti.py [-v] [-b BASE] publish [-j JOB] [-l LANGUAGES] toc
+
+Avec :
+
+-b BASE : chemin d'accès à la base (projet) kolekti à utiliser
+
+-j JOB (optionnel) : chemin du fichier de paramètres de publication à utiliser, remplace la valeur présente dans la trame (toc) 
+
+-l LANGS : liste des codes langue à publier, séparés par des virgules
+
+toc : trame à publier
+
+Exemple de commande :
+python kolekti.py -b C:\[...]\trunk\doc_src2 publish [-j JOB] -l fr,en C:\[...]\trunk\doc_src2\sources\{LANG}\tocs\UserGuide.html
+
+Il est possible d'avoir le détail des opérations en écrivant -v après kolekti.py

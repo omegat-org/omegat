@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<settings sourcelang="fr" version="0.7">
+  <languages>
+    <lang>fr</lang><lang>en</lang><lang>it</lang><lang>ja</lang></languages>
+
+  <criteria>
+  <criterion type="enum" code="OS"><value>Mac</value><value>Linux</value><value>Win7</value></criterion><criterion type="enum" code="F"><value>docx</value><value>html</value><value>odt</value><value>xml</value></criterion></criteria>
+
+<releases><lang>fr</lang></releases>
+
+
+</settings>

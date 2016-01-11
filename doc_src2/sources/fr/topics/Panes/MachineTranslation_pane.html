@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta content="application/xhtml+xml; charset=UTF-8"
+  http-equiv="content-type" />
+  <title>Machine Translation pane</title>
+  	<meta content="MachineTranslationPane" name="topic_file" />
+  <link href="/kolekti/stylesheets/module.css" rel="stylesheet" type="text/css"
+  />
+</head>
+
+<body>
+<h1>Volet Traduction automatique</h1>
+
+<p>Affiche la traduction du segment source effectuée par les services de
+traductions automatiques sélectionnés dans Options &gt; Traduction
+automatique si ces services sont disponibles.</p>
+
+<p>affiche la traduction fournie par les services de traduction automatique</p>
+
+<p>Le volet Traduction automatique, lorsqu'il est ouvert, contient les
+suggestions de traduction proposées par les outils de traduction automatique
+pour le segment en cours. Appuyer sur Ctrl+M permet de remplacer la traduction
+du segment en cours par la traduction suggérée.</p>
+
+<p>Intro</p>
+
+<p>Contrairement aux mémoires de traduction créées par les utilisateurs
+(comme dans le cas d'OmegaT), les outils de Traduction automatique (TA)
+utilisent des outils linguistiques basés sur des règles afin de créer une
+traduction du segment source sans avoir recours aux mémoires de traduction.
+Des techniques d'apprentissage statistique, basées sur des textes source et
+cible, sont utilisées afin de mettre en place un modèle de traduction. Selon
+les évaluations de recherche, les services de traduction automatique affichent
+de bons résultats et s'améliorent continuellement.  Pour activer l'un des
+services de Traduction automatique, allez dans Options &gt; Traduction
+automatique... et activez le service de votre choix. Veuillez noter que tous
+ces services proviennent d'Internet : vous devrez donc être en ligne pour
+pouvoir les utiliser.</p>
+
+<h2>Google Translate</h2>
+
+<p>Google Translate est un service payant proposé par Google et qui permet de
+traduire des phrases, des sites Internet et des textes complets dans un nombre
+toujours plus important de langues. Au moment de la rédaction, cette liste
+comprend plus de 50 langues, allant de l'Albanais au Yiddish, et comprend bien
+sûr toutes les principales langues du monde. La version actuelle de ce service
+se base sur la quantité d'utilisation avec, à ce jour, un tarif de 20 dollars
+américains pour un million de caractères.  Important : Google Translate API
+v2 vous demandera vos coordonnées bancaires pour chacun de vos comptes avant
+que vous puissiez commencer à utiliser le service (voir Conditions et Tarifs
+pour plus d'informations). Pour vous identifier en tant qu'utilisateur valide
+des services Google, vous devez utiliser la clé privée unique que Google vous
+a envoyée lorsque vous vous êtes inscrits pour le service. Voir le chapitre
+Installation et Exécution, section Arguments de commandes de lancement, pour
+plus de détails concernant l'addition de cette clé dans l'environnement
+Omegat.  La qualité de la traduction de Google Translate dépend d'une part
+du réservoir de textes de la langue cible et de leur disponibilité en version
+bilingue, et d'autre part de la qualité des modèles construits. Il est
+quasiment certain que si, dans certain cas, la qualité est insuffisante, elle
+ne pourra que s'améliorer avec le temps.</p>
+
+<p>Utilisateurs OmegaT et Google Translate</p>
+
+<p>L'utilisateur d'OmegaT n'est pas obligé d'utiliser Google Translate. S'il
+l'utilise, ni la décision de l'utilisateur concernant l'acceptation ou non de
+la traduction, ni la traduction finale ne sont connues de Google. La fenêtre
+suivante montre un exemple de traduction Google Translate a) du texte source
+anglais b) espagnol et c) slovène.  Figure 19.1. Google Translate -
+exemple    La traduction espagnole est meilleure que la slovène. Notez que
+interesar et navegar en espagnol sont correctement traduits respectivement par
+les verbes « intéresser » et « naviguer ». Dans la version slovène, les
+deux mots ont été traduits par des noms. En fait, il est assez probable que
+la traduction espagnole soit basée au moins en partie sur la véritable
+traduction du livre.  Une fois le service activé, une suggestion de
+traduction apparaît dans le panneau de Traduction automatique à chaque fois
+qu'un nouveau segment source est ouvert. Si vous trouvez cette traduction
+satisfaisante, appuyez sur Ctrl+M pour remplacer la partie cible du segment
+ouvert par la suggestion. Dans le segment ci-dessus, par exemple, Ctrl+M
+remplacerait la version espagnole par la suggestion slovène.  Si vous ne
+voulez pas qu'OmegaT envoie vos segments sources à Google pour qu'ils soient
+traduits, décochez l'entrée de menu Google Translate dans le menu Options. 
+Veuillez noter que seuls vos segments source sont envoyés au service de
+Traduction automatique. La version en ligne de Google Translate permet à
+l'utilisateur de corriger la suggestion et d'insérer le segment corrigé.
+Cette caractéristique, cependant, n'est disponible dans OmegaT.</p>
+
+<h2>Belazar</h2>
+
+<p>Belazar est un outil linguistique de Traduction automatique spécialisé
+dans la paire de langues Russe-Biélorusse.</p>
+
+<h2>Apertium</h2>
+
+<p>Apertium est une plateforme de traduction automatique libre/à code source
+ouvert, au départ destinée aux paires de langues proches comme CA, ES, GA,
+PT, OC et FR mais qui a récemment été étendue à d'autres paires de langues
+plus éloignées (comme la paire anglais-catalan). Vérifiez le site internet
+pour avoir la liste la plus récente des paires de langues présents sur cette
+plateforme.  La plateforme fournit  un moteur de traduction automatique
+indépendant des langues  des outils qui permettent de gérer les données
+linguistiques nécessaires à la construction d'un système de traduction
+automatique pour une paire de langues donnée et  des données linguistiques
+pour un nombre croissant de paires de langues  Apertium utilise un moteur de
+traduction automatique avec une approche par transfert superficiel qui traite
+le texte saisi par étapes, comme une ligne d'assemblage : déformatage,
+analyse morphologique, désambiguation de la nature des mots, transfert
+structurel superficiel, transfert lexical, génération morphologique et
+reformatage.  Il est possible d'utiliser Apertium pour construire des
+systèmes de traduction automatique pour une grande variété de paires de
+langues ; pour cela, Apertium utilise des formats standards simples basés sur
+XML pour encoder les données linguistiques nécessaires (soit à la main, soit
+en convertissant des données préexistantes). Celles-ci sont ensuite
+compilées par les outils fournis en formats haute vitesse utilisés par le
+moteur de traduction.</p>
+
+<p>Résolution de problèmes</p>
+
+<p>Si rien n'apparaît dans le panneau de Traduction automatique, vérifiez les
+éléments suivants :  Êtes-vous connectés ? Vous devez être connectés
+pour pouvoir utiliser un outil de traduction automatique.  Quel est la paire
+de langues dont vous avez besoin ? Vérifiez que le service sélectionné le
+propose.  Google Translate ne fonctionne pas : vous êtes vous inscrit sur le
+service Translate API ? Veuillez noter que le service Google Translate n'est
+pas gratuit (voir chapitre Installation et exécution (paramètres
+d'exécution) pour en savoir plus sur ce sujet).  « Google Translate vous a
+envoyé le code de réponse HTTP : 403 ... » : vérifiez que les 38
+caractères de la clé, entrés dans le fichier pinfo.list, sont corrects.
+Vérifiez que le service Translate API a été activé.  Google Translate ne
+fonctionne pas : - avec la clé Google API entrée comme demandé. Vérifiez
+dans Options &gt; Traduction Automatique, que la case Google Translate v2 est
+cochée.  Google Translate V2 affiche « Bad request » - vérifiez les
+langues source et cible de votre projet. Ne pas avoir défini de langues
+provoque l'apparition de ce genre de réponse.</p>
+
+<p></p>
+</body>
+</html>

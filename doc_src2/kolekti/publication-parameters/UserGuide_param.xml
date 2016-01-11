@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<job id="undefined">
+  <dir value="undefined"/>
+  <criteria/>
+  <profiles>
+    <profile enabled="1">
+      <label>Profil1</label>
+      <dir value="Profil1_folder"/>
+      <criteria>
+        <criterion code="OS"/>
+        <criterion code="F"/>
+      </criteria>
+    </profile>
+  </profiles>
+  <scripts>
+    <script name="WebHelp5" enabled="1">
+      <filename>WebhelpAllInOne</filename>
+      <parameters>
+        <parameter name="template" value="omegat"/>
+        <parameter name="css" value="WebHelp5"/>
+        <parameter name="pivot_filter" value="filter"/>
+        <parameter name="zip" value="no"/>
+        <parameter name="labels" value="undefined"/>
+        <parameter name="generate" value="undefined"/>
+      </parameters>
+    </script>
+  </scripts>
+</job>

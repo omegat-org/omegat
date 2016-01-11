@@ -38,7 +38,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.5.3 update 1
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    4 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -50,6 +50,8 @@
 
  - To reflect TaaS's change of policy, a key is now mandatory to use the 
 service
+
+  - Exclude .DS_Store files from translation by default
 
  Bug fixes:
 

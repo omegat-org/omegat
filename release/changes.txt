@@ -28,6 +28,9 @@
   - Custom text color used for text in dialogs
   https://sourceforge.net/p/omegat/bugs/725/
 
+  - Jumping to a large entry makes it appear at the bottom of the editor
+  https://sourceforge.net/p/omegat/bugs/781/
+
   - Files can be clobbered when creating translated documents
   https://sourceforge.net/p/omegat/bugs/787/
 

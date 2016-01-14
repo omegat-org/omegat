@@ -310,7 +310,6 @@ public class EditorController implements IEditor {
                 double scrollPercent = bar.getValue() / (double) bar.getMaximum();
                 int unitsPerSeg = (bar.getMaximum() - bar.getMinimum()) / (lastLoaded - firstLoaded + 1);
                 if (firstLoaded > 0 && scrollPercent <= PAGE_LOAD_THRESHOLD) {
-                    Core.getMainWindow().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     int docSize = editor.getDocument().getLength();
                     int visiblePos = editor.viewToModel(scrollPane.getViewport().getViewPosition());
                     // Try to load enough segments to restore scrollbar value to
@@ -334,7 +333,6 @@ public class EditorController implements IEditor {
                         Log.log(ex);
                     }
                 } else if (lastLoaded < m_docSegList.length - 1 && scrollPercent >= 1 - PAGE_LOAD_THRESHOLD) {
-                    Core.getMainWindow().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     // Load enough segments to restore scrollbar value to the
                     // range (PAGE_LOAD_THRESHOLD, 1 - PAGE_LOAD_THRESHOLD).
                     // Formula is obtained by solving the following equations for loadCount:
@@ -407,11 +405,6 @@ public class EditorController implements IEditor {
 
             if (pos <= PAGE_LOAD_THRESHOLD || pos >= 1.0 - PAGE_LOAD_THRESHOLD) {
                 lazyLoadTimer.restart();
-            } else {
-                Cursor cursor = Core.getMainWindow().getCursor();
-                if (cursor.getType() == Cursor.WAIT_CURSOR) {
-                    Core.getMainWindow().setCursor(Cursor.getDefaultCursor());
-                }
             }
         }
     };

@@ -385,12 +385,15 @@ public class EditorTextArea3 extends JEditorPane {
         } else if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_UP,
                 Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
             // Ctrl+PgUp - to the begin of document(Cmd+PgUp for MacOS)
-            setCaretPosition(0);
+            int segNum = controller.m_docSegList[0].segmentNumberInProject;
+            controller.gotoEntry(segNum);
             processed = true;
         } else if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_DOWN,
                 Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
             // Ctrl+PgDn - to the end of document(Cmd+PgDn for MacOS)
-            setCaretPosition(getOmDocument().getLength());
+            int lastSegIndex = controller.m_docSegList.length - 1;
+            int segNum = controller.m_docSegList[lastSegIndex].segmentNumberInProject;
+            controller.gotoEntry(segNum);
             processed = true;
         } else if (StaticUtils.isKey(e, KeyEvent.VK_LEFT, mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK)
                 || StaticUtils.isKey(e, KeyEvent.VK_LEFT, (mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK) | InputEvent.SHIFT_MASK)) {

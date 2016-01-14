@@ -50,6 +50,7 @@
 				<jar href="lucene-smartcn-3.6.2.jar" />
 				<jar href="tinysegmenter.jar" />
 				<jar href="commons-lang-2.4.jar"  />
+				<jar href="commons-io-2.4.jar"  />
 				<jar href="commons-logging-1.1.1.jar"  />
 				<jar href="jwordsplitter-3.4.jar"  />
 				<jar href="KoreanAnalyzer-3x-120223.jar" />

@@ -26,7 +26,6 @@
 package org.omegat.gui.glossary.taas;
 
 import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -42,8 +41,8 @@ import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
 
+import org.apache.commons.io.IOUtils;
 import org.omegat.util.Base64;
-import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -195,9 +194,7 @@ public class TaaSClient {
     String readUTF8(HttpURLConnection conn) throws IOException {
         InputStream in = conn.getInputStream();
         try {
-            ByteArrayOutputStream o = new ByteArrayOutputStream();
-            LFileCopy.copy(in, o);
-            return new String(o.toByteArray(), UTF8);
+            return IOUtils.toString(in, UTF8);
         } finally {
             in.close();
         }

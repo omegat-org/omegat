@@ -42,10 +42,10 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.zip.GZIPInputStream;
 
+import org.apache.commons.io.IOUtils;
 import org.dict.zip.DictZipHeader;
 import org.dict.zip.DictZipInputStream;
 import org.dict.zip.RandomAccessInputStream;
-import org.omegat.util.LFileCopy;
 import org.omegat.util.OConsts;
 
 /**
@@ -337,13 +337,11 @@ public class StarDict implements IDictionary {
                 throw new FileNotFoundException(file.getPath());
             }
         }
-        ByteArrayOutputStream out = new ByteArrayOutputStream(BUFFER_SIZE);
         try {
-            LFileCopy.copy(in, out);
+            return IOUtils.toByteArray(in);
         } finally {
             in.close();
         }
-        return out.toByteArray();
     }
 
     /**

@@ -30,9 +30,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
+import org.apache.commons.io.FileUtils;
 
-import org.omegat.util.LFileCopy;
+import junit.framework.TestCase;
 
 /**
  * Test for copyright notes exists in source files.
@@ -66,7 +66,7 @@ public class CopyrightTest extends TestCase {
                 // skip Base64.java (public domain)
                 continue;
             }
-            LFileCopy.copy(f, fdata);
+            FileUtils.copyFile(f, fdata);
             String data = fdata.toString("ISO-8859-1");
             checkNote(f, data);
             fdata.reset();

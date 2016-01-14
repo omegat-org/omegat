@@ -51,6 +51,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import org.apache.commons.io.FileUtils;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -60,7 +61,6 @@ import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
-import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -228,7 +228,7 @@ public class FilterMaster {
         if (lookup == null) {
             // The file is not supported by any of the filters.
             // Copying it
-            LFileCopy.copy(new File(sourcedir, filename), new File(targetdir, filename));
+            FileUtils.copyFile(new File(sourcedir, filename), new File(targetdir, filename));
             return;
         }
 

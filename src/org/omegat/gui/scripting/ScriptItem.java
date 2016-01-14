@@ -26,7 +26,6 @@
 package org.omegat.gui.scripting;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -44,8 +43,8 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.regex.MatchResult;
 
+import org.apache.commons.io.FileUtils;
 import org.omegat.util.FileUtil;
-import org.omegat.util.LFileCopy;
 import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.OConsts;
 
@@ -206,8 +205,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
             text = BOM + text;
         }
 
-        InputStream is = new ByteArrayInputStream(text.getBytes(OConsts.UTF8));
-        LFileCopy.copy(is, m_file);
+        FileUtils.writeStringToFile(m_file, text, OConsts.UTF8);
     }
 
     @Override

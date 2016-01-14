@@ -30,6 +30,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.util.TreeMap;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
@@ -42,7 +43,6 @@ import org.omegat.filters3.xml.xliff.XLIFFDialect;
 import org.omegat.filters3.xml.xliff.XLIFFFilter;
 import org.omegat.filters3.xml.xliff.XLIFFOptions;
 import org.omegat.util.FileUtil;
-import org.omegat.util.LFileCopy;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -234,7 +234,7 @@ public class XLIFFFilterTest extends TestFilterBase {
         assertTrue(tmpDir.isDirectory());
         File weirdDir = new File(tmpDir, "a b\u2603"); // U+2603 SNOWMAN
         File testFile = new File(weirdDir, "file-XLIFFFilter-invalid-content.xlf");
-        LFileCopy.copy(new File(f), testFile);
+        FileUtils.copyFile(new File(f), testFile);
         assertTrue(testFile.isFile());
 
         try {

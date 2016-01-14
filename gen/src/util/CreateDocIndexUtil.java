@@ -34,14 +34,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
-import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Locale;
 import java.util.Properties;
 
-import org.omegat.util.LFileCopy;
+import org.apache.commons.io.IOUtils;
 import org.omegat.util.OStrings;
 
 public class CreateDocIndexUtil {
@@ -116,9 +115,7 @@ public class CreateDocIndexUtil {
     protected static String readTemplate() throws IOException {
         Reader rd = new InputStreamReader(
                 new FileInputStream("docs/index.html"), "UTF-8");
-        StringWriter wr = new StringWriter();
-        LFileCopy.copy(rd, wr);
-        return wr.toString();
+        return IOUtils.toString(rd);
     }
 
     protected static void writeOut(String text) throws IOException {

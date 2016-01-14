@@ -28,6 +28,7 @@ package org.omegat.util;
 import java.io.File;
 import java.io.PrintWriter;
 
+import org.apache.commons.io.FileUtils;
 import org.omegat.filters.TestFilterBase;
 
 import junit.framework.TestCase;
@@ -53,12 +54,12 @@ public class LFileCopyTest extends TestCase {
         File b = new File(tempDir, "b");
 
         // Copy file "a" to file "b". Contents should be identical.
-        LFileCopy.copy(a, b);
+        FileUtils.copyFile(a, b);
         TestFilterBase.compareBinary(a, b);
 
         // Copy file "a" to itself. Contents should remain identical
         // and not get clobbered per https://sourceforge.net/p/omegat/bugs/787/
-        LFileCopy.copy(a, a);
+        FileUtils.copyFile(a, a);
         TestFilterBase.compareBinary(a, b);
     }
 

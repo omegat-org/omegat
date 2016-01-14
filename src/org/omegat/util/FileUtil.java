@@ -29,7 +29,6 @@
 
 package org.omegat.util;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -37,11 +36,8 @@ import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.StringWriter;
 import java.io.Writer;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -58,6 +54,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.omegat.gui.help.HelpFrame;
 
@@ -111,7 +108,7 @@ public class FileUtil {
     public static void backupFile(File f) throws IOException {
         long fileMillis = f.lastModified();
         String str = new SimpleDateFormat("yyyyMMddHHmm").format(new Date(fileMillis));
-        LFileCopy.copy(f, new File(f.getPath() + "." + str + OConsts.BACKUP_EXTENSION));
+        FileUtils.copyFile(f, new File(f.getPath() + "." + str + OConsts.BACKUP_EXTENSION));
     }
 
     /**
@@ -132,21 +129,6 @@ public class FileUtil {
                 throw new IOException("Error renaming " + from + " to " + to);
             }
         }
-    }
-
-    /**
-     * Move one file to another.
-     */
-    public static void move(File f1, File f2) throws Exception {
-        if (f1.equals(f2)) {
-            return;
-        }
-        if (f2.exists()) {
-            if (!f2.delete()) {
-                throw new IOException("Unable to delete " + f2);
-            }
-        }
-        rename(f1, f2);
     }
 
     /**
@@ -186,9 +168,7 @@ public class FileUtil {
             BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(file), OConsts.UTF8));
 
             try {
-                StringWriter out = new StringWriter();
-                LFileCopy.copy(rd, out);
-                return out.toString().replace(System.getProperty("line.separator"), "\n");
+                return IOUtils.toString(rd).replace(System.getProperty("line.separator"), "\n");
             } finally {
                 rd.close();
             }
@@ -205,9 +185,7 @@ public class FileUtil {
         BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(file), OConsts.UTF8));
 
         try {
-            StringWriter out = new StringWriter();
-            LFileCopy.copy(rd, out);
-            return out.toString();
+            return IOUtils.toString(rd);
         } finally {
             rd.close();
         }
@@ -222,40 +200,6 @@ public class FileUtil {
             wr.write(text);
         } finally {
             wr.close();
-        }
-    }
-
-    /**
-     * Copy file and create output directory if need.
-     */
-    public static void copyFile(File inFile, File outFile) throws IOException {
-        File dir = outFile.getParentFile();
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
-        InputStream in = new FileInputStream(inFile);
-        try {
-            OutputStream out = new FileOutputStream(outFile);
-            try {
-                byte[] buffer = new byte[64 * 1024];
-                while (true) {
-                    int len = in.read(buffer, 0, buffer.length);
-                    if (len < 0) {
-                        break;
-                    }
-                    out.write(buffer, 0, len);
-                }
-            } finally {
-                try {
-                    out.close();
-                } catch (IOException ex) {
-                }
-            }
-        } finally {
-            try {
-                in.close();
-            } catch (IOException ex) {
-            }
         }
     }
 
@@ -279,7 +223,7 @@ public class FileUtil {
         }
         if (eol == null) {
             // EOL wasn't detected - just copy
-            copyFile(inFile, outFile);
+            FileUtils.copyFile(inFile, outFile, false);
             return;
         }
         BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(inFile),
@@ -323,57 +267,6 @@ public class FileUtil {
         } finally {
             IOUtils.closeQuietly(in);
         }
-    }
-
-    public static boolean isFilesEqual(File file1, File file2) throws IOException {
-        long length = file1.length();
-        if (length != file2.length()) {
-            return false;
-        }
-        byte[] buffer1 = new byte[64 * 1024];
-        byte[] buffer2 = new byte[64 * 1024];
-        BufferedInputStream in1 = new BufferedInputStream(new FileInputStream(file1));
-        try {
-            BufferedInputStream in2 = new BufferedInputStream(new FileInputStream(file2));
-            try {
-                for (long pos = 0; pos < length; pos += buffer1.length) {
-                    int off = 0;
-                    while (off < buffer1.length) {
-                        int len = in1.read(buffer1, off, buffer1.length - off);
-                        if (len < 0) {
-                            Arrays.fill(buffer1, off, buffer1.length, (byte) 0);
-                            break;
-                        } else {
-                            off += len;
-                        }
-                    }
-                    off = 0;
-                    while (off < buffer2.length) {
-                        int len = in2.read(buffer2, off, buffer2.length - off);
-                        if (len < 0) {
-                            Arrays.fill(buffer2, off, buffer2.length, (byte) 0);
-                            break;
-                        } else {
-                            off += len;
-                        }
-                    }
-                    if (!Arrays.equals(buffer1, buffer2)) {
-                        return false;
-                    }
-                }
-            } finally {
-                try {
-                    in2.close();
-                } catch (IOException ex) {
-                }
-            }
-        } finally {
-            try {
-                in1.close();
-            } catch (IOException ex) {
-            }
-        }
-        return true;
     }
 
     /**
@@ -474,9 +367,7 @@ public class FileUtil {
         try {
             BufferedReader rd = new BufferedReader(new InputStreamReader(url.openStream(), OConsts.UTF8));
             try {
-                StringWriter out = new StringWriter();
-                LFileCopy.copy(rd, out);
-                return out.toString();
+                return IOUtils.toString(rd);
             } finally {
                 rd.close();
             }
@@ -572,7 +463,7 @@ public class FileUtil {
             if (file.isDirectory()) {
                 copyFilesTo(destination, file.listFiles(), thisRoot);
             } else {
-                LFileCopy.copy(file, dest);
+                FileUtils.copyFile(file, dest);
             }
         }
         return collisions;

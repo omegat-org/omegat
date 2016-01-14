@@ -57,6 +57,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.IOUtils;
 import org.omegat.util.Platform.OsType;
 
 /**
@@ -753,17 +754,11 @@ public class StaticUtils {
         urlConn.setConnectTimeout(10000);
         in = urlConn.getInputStream();
 
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
         try {
-            LFileCopy.copy(in, out);
+            return IOUtils.toString(in, "UTF-8");
         } finally {
-            try {
-                in.close();
-            } catch (IOException ex) {
-                // munch this
-            }
+            in.close();
         }
-        return new String(out.toByteArray(), "UTF-8");
     }
 
     /**

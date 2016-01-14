@@ -50,6 +50,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.xml.XMLBlock;
@@ -826,7 +827,7 @@ public class Preferences {
         String timestamp = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
         File bakFile = new File(file.getAbsolutePath() + "." + timestamp + ".bak");
         try {
-            LFileCopy.copy(file, bakFile);
+            FileUtils.copyFile(file, bakFile);
             Log.logWarningRB("PM_BACKED_UP_PREFS_FILE", bakFile.getAbsolutePath());
         } catch (IOException ex) {
             Log.logErrorRB(ex, "PM_ERROR_BACKING_UP_PREFS_FILE");

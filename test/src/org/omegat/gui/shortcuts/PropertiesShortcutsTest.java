@@ -25,21 +25,26 @@
 
 package org.omegat.gui.shortcuts;
 
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+
 import javax.swing.InputMap;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
+
+import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import org.omegat.util.LFileCopy;
 import org.omegat.util.StaticUtils;
 
 /**
@@ -65,7 +70,7 @@ public class PropertiesShortcutsTest {
         InputStream in = classLoader.getResourceAsStream("org/omegat/gui/shortcuts/test.user.properties");
         File file = new File(StaticUtils.getConfigDir(), "test.properties");
         try {
-            LFileCopy.copy(in, file);
+            FileUtils.copyInputStreamToFile(in, file);
         } finally {
             in.close();
         }

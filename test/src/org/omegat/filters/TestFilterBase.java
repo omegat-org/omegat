@@ -41,6 +41,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
+import org.apache.commons.io.FileUtils;
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 import org.omegat.core.data.EntryKey;
@@ -57,7 +58,6 @@ import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.tokenizer.DefaultTokenizer;
-import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
 import org.omegat.util.TMXReader2;
 import org.w3c.dom.Document;
@@ -237,10 +237,10 @@ public abstract class TestFilterBase extends TestCore {
 
     public static void compareBinary(File f1, File f2) throws Exception {
         ByteArrayOutputStream d1 = new ByteArrayOutputStream();
-        LFileCopy.copy(f1, d1);
+        FileUtils.copyFile(f1, d1);
 
         ByteArrayOutputStream d2 = new ByteArrayOutputStream();
-        LFileCopy.copy(f2, d2);
+        FileUtils.copyFile(f2, d2);
 
         assertEquals(d1.size(), d2.size());
         byte[] a1 = d1.toByteArray();

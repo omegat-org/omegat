@@ -40,11 +40,12 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
-import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
@@ -118,7 +119,7 @@ public class OpenDocFilter extends AbstractFilter {
                 shortname = shortname.substring(shortname.lastIndexOf('/') + 1);
             if (TRANSLATABLE.contains(shortname)) {
                 File tmpin = tmp();
-                LFileCopy.copy(zipfile.getInputStream(zipentry), tmpin);
+                FileUtils.copyInputStreamToFile(zipfile.getInputStream(zipentry), tmpin);
                 File tmpout = null;
                 if (zipout != null)
                     tmpout = tmp();
@@ -135,7 +136,7 @@ public class OpenDocFilter extends AbstractFilter {
                     ZipEntry outentry = new ZipEntry(zipentry.getName());
                     outentry.setMethod(ZipEntry.DEFLATED);
                     zipout.putNextEntry(outentry);
-                    LFileCopy.copy(tmpout, zipout);
+                    FileUtils.copyFile(tmpout, zipout);
                     zipout.closeEntry();
                 }
                 if (!tmpin.delete())
@@ -148,7 +149,7 @@ public class OpenDocFilter extends AbstractFilter {
                 if (zipout != null) {
                     ZipEntry outentry = new ZipEntry(zipentry.getName());
                     zipout.putNextEntry(outentry);
-                    LFileCopy.copy(zipfile.getInputStream(zipentry), zipout);
+                    IOUtils.copy(zipfile.getInputStream(zipentry), zipout);
                     zipout.closeEntry();
                 }
             }

@@ -34,7 +34,6 @@ package org.omegat.util;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyEvent;
 import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -154,6 +153,105 @@ public class StaticUtils {
                 return localCollator.compare(o1, o2);
             }
         });
+    }
+
+    public static List<String> buildRelativeFilesList(File rootDir, List<String> includes,
+            List<String> excludes) throws IOException {
+        List<String> files = new ArrayList<String>();
+        buildFileList(files, rootDir, true);
+        Pattern[] includesMasks;
+        if (includes != null) {
+            includesMasks = new Pattern[includes.size()];
+            for (int i = 0; i < includes.size(); i++) {
+                includesMasks[i] = compileFileMask(includes.get(i));
+            }
+        } else {
+            includesMasks = new Pattern[0];
+        }
+        Pattern[] excludesMasks;
+        if (excludes != null) {
+            excludesMasks = new Pattern[excludes.size()];
+            for (int i = 0; i < excludes.size(); i++) {
+                excludesMasks[i] = compileFileMask(excludes.get(i));
+            }
+        } else {
+            excludesMasks = new Pattern[0];
+        }
+        String prefix = rootDir.getCanonicalPath().replace('\\', '/');
+        List<String> result = new ArrayList<String>();
+        for (String f : files) {
+            String fn = f.replace('\\', '/');
+            if (fn.startsWith(prefix)) {
+                // file path should starts from '/' for checking.
+                fn = fn.substring(prefix.length());
+            }
+            boolean add = false;
+            // check include masks
+            for (Pattern p : includesMasks) {
+                if (p.matcher(fn).matches()) {
+                    add = true;
+                    break;
+                }
+            }
+            if (!add) {
+                add = true;
+                // check exclude masks
+                for (Pattern p : excludesMasks) {
+                    if (p.matcher(fn).matches()) {
+                        add = false;
+                        break;
+                    }
+                }
+            }
+            if (add) {
+                result.add(fn);
+            }
+        }
+        return result;
+    }
+
+    public static boolean checkFileInclude(String filePath, List<String> includes, List<String> excludes) {
+        if (!filePath.startsWith("/")) {
+            // file path should starts from '/' for checking.
+            filePath = '/' + filePath;
+        }
+        Pattern[] includesMasks;
+        if (includes != null) {
+            includesMasks = new Pattern[includes.size()];
+            for (int i = 0; i < includes.size(); i++) {
+                includesMasks[i] = compileFileMask(includes.get(i));
+            }
+        } else {
+            includesMasks = new Pattern[0];
+        }
+        Pattern[] excludesMasks;
+        if (excludes != null) {
+            excludesMasks = new Pattern[excludes.size()];
+            for (int i = 0; i < excludes.size(); i++) {
+                excludesMasks[i] = compileFileMask(excludes.get(i));
+            }
+        } else {
+            excludesMasks = new Pattern[0];
+        }
+        boolean add = false;
+        // check include masks
+        for (Pattern p : includesMasks) {
+            if (p.matcher(filePath).matches()) {
+                add = true;
+                break;
+            }
+        }
+        if (!add) {
+            add = true;
+            // check exclude masks
+            for (Pattern p : excludesMasks) {
+                if (p.matcher(filePath).matches()) {
+                    add = false;
+                    break;
+                }
+            }
+        }
+        return add;
     }
 
     /**

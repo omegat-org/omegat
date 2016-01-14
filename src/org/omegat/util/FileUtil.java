@@ -29,6 +29,7 @@
 
 package org.omegat.util;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -36,7 +37,9 @@ import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -52,7 +55,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.apache.commons.io.IOUtils;
 import org.omegat.gui.help.HelpFrame;
 
 /**
@@ -129,6 +135,21 @@ public class FileUtil {
     }
 
     /**
+     * Move one file to another.
+     */
+    public static void move(File f1, File f2) throws Exception {
+        if (f1.equals(f2)) {
+            return;
+        }
+        if (f2.exists()) {
+            if (!f2.delete()) {
+                throw new IOException("Unable to delete " + f2);
+            }
+        }
+        rename(f1, f2);
+    }
+
+    /**
      * Writes a text into a UTF-8 text file in the script directory.
      * 
      * @param textToWrite
@@ -202,6 +223,157 @@ public class FileUtil {
         } finally {
             wr.close();
         }
+    }
+
+    /**
+     * Copy file and create output directory if need.
+     */
+    public static void copyFile(File inFile, File outFile) throws IOException {
+        File dir = outFile.getParentFile();
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        InputStream in = new FileInputStream(inFile);
+        try {
+            OutputStream out = new FileOutputStream(outFile);
+            try {
+                byte[] buffer = new byte[64 * 1024];
+                while (true) {
+                    int len = in.read(buffer, 0, buffer.length);
+                    if (len < 0) {
+                        break;
+                    }
+                    out.write(buffer, 0, len);
+                }
+            } finally {
+                try {
+                    out.close();
+                } catch (IOException ex) {
+                }
+            }
+        } finally {
+            try {
+                in.close();
+            } catch (IOException ex) {
+            }
+        }
+    }
+
+    /**
+     * Copy file and create output directory if need. EOL will be converted into target-specific or into
+     * platform-specific if target doesn't exist.
+     */
+    public static void copyFileWithEolConversion(File inFile, File outFile, String eolConversionCharset)
+            throws IOException {
+        File dir = outFile.getParentFile();
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        String eol;
+        if (outFile.exists()) {
+            // file exist - read EOL from file
+            eol = getEOL(outFile, eolConversionCharset);
+        } else {
+            // file not exist - use system-dependent
+            eol = Platform.getEOL();
+        }
+        if (eol == null) {
+            // EOL wasn't detected - just copy
+            copyFile(inFile, outFile);
+            return;
+        }
+        BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(inFile),
+                eolConversionCharset));
+        try {
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile),
+                    eolConversionCharset));
+            try {
+                String s;
+                while ((s = in.readLine()) != null) {
+                    // copy using known EOL
+                    out.write(s);
+                    out.write(eol);
+                }
+            } finally {
+                IOUtils.closeQuietly(out);
+            }
+        } finally {
+            IOUtils.closeQuietly(in);
+        }
+    }
+
+    public static String getEOL(File file, String eolConversionCharset) throws IOException {
+        BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(file),
+                eolConversionCharset));
+        try {
+            while (true) {
+                int ch = in.read();
+                if (ch < 0) {
+                    return null;
+                }
+                if (ch == '\n' || ch == '\r') {
+                    String r = Character.toString((char) ch);
+                    int ch2 = in.read();
+                    if (ch2 == '\n' || ch2 == '\r') {
+                        r += Character.toString((char) ch2);
+                    }
+                    return r;
+                }
+            }
+        } finally {
+            IOUtils.closeQuietly(in);
+        }
+    }
+
+    public static boolean isFilesEqual(File file1, File file2) throws IOException {
+        long length = file1.length();
+        if (length != file2.length()) {
+            return false;
+        }
+        byte[] buffer1 = new byte[64 * 1024];
+        byte[] buffer2 = new byte[64 * 1024];
+        BufferedInputStream in1 = new BufferedInputStream(new FileInputStream(file1));
+        try {
+            BufferedInputStream in2 = new BufferedInputStream(new FileInputStream(file2));
+            try {
+                for (long pos = 0; pos < length; pos += buffer1.length) {
+                    int off = 0;
+                    while (off < buffer1.length) {
+                        int len = in1.read(buffer1, off, buffer1.length - off);
+                        if (len < 0) {
+                            Arrays.fill(buffer1, off, buffer1.length, (byte) 0);
+                            break;
+                        } else {
+                            off += len;
+                        }
+                    }
+                    off = 0;
+                    while (off < buffer2.length) {
+                        int len = in2.read(buffer2, off, buffer2.length - off);
+                        if (len < 0) {
+                            Arrays.fill(buffer2, off, buffer2.length, (byte) 0);
+                            break;
+                        } else {
+                            off += len;
+                        }
+                    }
+                    if (!Arrays.equals(buffer1, buffer2)) {
+                        return false;
+                    }
+                }
+            } finally {
+                try {
+                    in2.close();
+                } catch (IOException ex) {
+                }
+            }
+        } finally {
+            try {
+                in1.close();
+            } catch (IOException ex) {
+            }
+        }
+        return true;
     }
 
     /**
@@ -468,5 +640,38 @@ public class FileUtil {
         String stripped = i < 1 ? basename : basename.substring(0, i);
 
         return new File(file.getParent(), stripped).getPath();
+    }
+
+    private static final Pattern RE_ABSOLUTE_WINDOWS = Pattern.compile("[A-Za-z]\\:(/.*)");
+    private static final Pattern RE_ABSOLUTE_LINUX = Pattern.compile("/.*");
+
+    /**
+     * Checks if path starts with possible root on the Linux, MacOS, Windows.
+     */
+    public static boolean isRelative(String path) {
+        path = path.replace('\\', '/');
+        if (RE_ABSOLUTE_LINUX.matcher(path).matches()) {
+            return false;
+        } else if (RE_ABSOLUTE_WINDOWS.matcher(path).matches()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Converts Windows absolute path into current system's absolute path. It required for conversion like
+     * 'C:\zzz' into '/zzz' for be real absolute in Linux.
+     */
+    public static String absoluteForSystem(String path, Platform.OsType currentOsType) {
+        path = path.replace('\\', '/');
+        Matcher m = RE_ABSOLUTE_WINDOWS.matcher(path);
+        if (m.matches()) {
+            if (currentOsType != Platform.OsType.WIN32 && currentOsType != Platform.OsType.WIN64) {
+                // Windows' absolute file on non-Windows system
+                return m.group(1);
+            }
+        }
+        return path;
     }
 }

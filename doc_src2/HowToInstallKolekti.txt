@@ -1,0 +1,56 @@
+How to install Kolekti
+
+/// Installation of the environment ///
+
+Install python (2.7.9) for Windows 32-bit (even on 64-bit PCs):
+https://www.python.org/ftp/python/2.7.9/python-2.7.9.msi
+
+In the Path environment variable, add:
+- C:\Python27
+- C:\Python27\Scripts
+
+Install pysvn with:
+http://pysvn.tigris.org/files/documents/1233/49404/py27-pysvn-svn1811-1.7.10-1584.exe
+
+Install lxml with the command:
+pip install lxml
+
+Install whoosh (indexation) with the command:
+pip install whoosh
+
+Install Fop (if needed):
+- (to be written)
+
+Install PrinceXML (if needed):
+- Download the setup program from http://www.princexml.com/download/
+- add C:\Program Files (x86)\Prince\Engine\bin in the Path environment variable
+
+/// Installation of Kolekti ///
+
+Download Kolekti from github: download https://github.com/kolekti/kolekti/archive/dev.zip
+
+Unzip in C:
+
+/// Publication of the UserGuide (from the command line) ///
+
+Go to:
+C:\kolekti-dev\src
+
+Usage of the command line is:
+
+python kolekti.py [-v] [-b BASE] publish [-j JOB] [-l LANGUAGES] toc
+
+With:
+
+-b BASE: path to the kolekti base (project) to use
+
+-j JOB (optional) : path to the publication parameter file to use, replaces the value available in frame (toc) 
+
+-l LANGUAGES: list of language codes to publish, separated by commas
+
+toc: frame to publish
+
+Command line example:
+python kolekti.py -b C:\[...]\trunk\doc_src2 publish [-j JOB] -l fr,en C:\[...]\trunk\doc_src2\sources\{LANG}\tocs\UserGuide.html
+
+It is possible to get a verbose output by adding -v after kolekti.py

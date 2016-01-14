@@ -29,6 +29,7 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.Frame;
+
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
@@ -86,6 +87,8 @@ public class WorkflowOptionsDialog extends JDialog {
         allowTagEditing.setSelected(Preferences.isPreference(Preferences.ALLOW_TAG_EDITING));
         tagValidateOnLeave.setSelected(Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE));
         cbSaveAutoStatus.setSelected(Preferences.isPreference(Preferences.SAVE_AUTO_STATUS));
+        initialSegCountSpinner.setValue(Preferences.getPreferenceDefault(Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT,
+                Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT_DEFAULT));
         DockingUI.displayCentered(this);
     }
 
@@ -121,6 +124,8 @@ public class WorkflowOptionsDialog extends JDialog {
         allowTagEditing = new javax.swing.JCheckBox();
         tagValidateOnLeave = new javax.swing.JCheckBox();
         cbSaveAutoStatus = new javax.swing.JCheckBox();
+        initialSegCountLabel = new javax.swing.JLabel();
+        initialSegCountSpinner = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
@@ -294,6 +299,21 @@ public class WorkflowOptionsDialog extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
         jPanel1.add(cbSaveAutoStatus, gridBagConstraints);
 
+        initialSegCountLabel.setLabelFor(initialSegCountSpinner);
+        org.openide.awt.Mnemonics.setLocalizedText(initialSegCountLabel, OStrings.getString("WG_INITIAL_SEGMENT_LOAD_COUNT")); // NOI18N
+        initialSegCountLabel.setToolTipText(OStrings.getString("WG_INITIAL_SEGMENT_LOAD_COUNT_TOOLTIP")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 5);
+        jPanel1.add(initialSegCountLabel, gridBagConstraints);
+
+        initialSegCountSpinner.setToolTipText(OStrings.getString("WG_INITIAL_SEGMENT_LOAD_COUNT_TOOLTIP")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.ipadx = 50;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(initialSegCountSpinner, gridBagConstraints);
+
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
@@ -353,6 +373,9 @@ public class WorkflowOptionsDialog extends JDialog {
         Preferences.setPreference(Preferences.TAG_VALIDATE_ON_LEAVE, tagValidateOnLeave.isSelected());
         Preferences.setPreference(Preferences.SAVE_AUTO_STATUS, cbSaveAutoStatus.isSelected());
 
+        int segCount = Math.max(0, (Integer) initialSegCountSpinner.getValue());
+        Preferences.setPreference(Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT, segCount);
+
         doClose(RET_OK);
     }// GEN-LAST:event_okButtonActionPerformed
 
@@ -382,6 +405,8 @@ public class WorkflowOptionsDialog extends JDialog {
     private javax.swing.JRadioButton defaultRadio;
     private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JCheckBox exportCurrentSegment;
+    private javax.swing.JLabel initialSegCountLabel;
+    private javax.swing.JSpinner initialSegCountSpinner;
     private javax.swing.JCheckBox insertFuzzyCheckBox;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

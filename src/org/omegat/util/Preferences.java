@@ -236,6 +236,9 @@ public class Preferences {
     public static final String CONVERT_NUMBERS = "wf_convertNumbers";
     /** Workflow Option: Save auto-populated status */
     public static final String SAVE_AUTO_STATUS = "save_auto_status";
+    /** Workflow Option: Number of segments to load initially in editor */
+    public static final String EDITOR_INITIAL_SEGMENT_LOAD_COUNT = "editor_initial_segment_load_count";
+    public static final int EDITOR_INITIAL_SEGMENT_LOAD_COUNT_DEFAULT = 2000;
     
     /** Tag Validation Option: Don't check printf-tags */
     public static final String DONT_CHECK_PRINTF_TAGS = "tagValidation_noCheck";

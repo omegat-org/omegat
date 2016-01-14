@@ -65,7 +65,11 @@ public class CalcMarkersThread extends Thread {
         List<EntryMarks> vers = new ArrayList<EntryMarks>(entryBuilders.length);
 
         for (int i = 0; i < entryBuilders.length; i++) {
-            EntryMarks v = new EntryMarks(entryBuilders[i], entryBuilders[i].getDisplayVersion(), markerIndex);
+            SegmentBuilder builder = entryBuilders[i];
+            if (!builder.hasBeenCreated()) {
+                continue;
+            }
+            EntryMarks v = new EntryMarks(builder, builder.getDisplayVersion(), markerIndex);
             vers.add(v);
         }
 

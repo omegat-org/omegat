@@ -161,6 +161,9 @@ public class MarkerController {
         }
         
         for (SegmentBuilder sb : entryBuilders) {
+            if (!sb.hasBeenCreated()) {
+                continue;
+            }
             remove(sb, markerIndex);
         }
         markerThreads[markerIndex].add(entryBuilders);

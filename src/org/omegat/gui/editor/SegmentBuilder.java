@@ -156,6 +156,14 @@ public class SegmentBuilder {
      * @return OmElementSegment
      */
     public void createSegmentElement(final boolean isActive, TMXEntry trans) {
+        createSegmentElement(isActive, doc.getLength(), trans);
+    }
+
+    public void prependSegmentElement(final boolean isActive, TMXEntry trans) {
+        createSegmentElement(isActive, 0, trans);
+    }
+
+    public void createSegmentElement(final boolean isActive, int initialOffset, TMXEntry trans) {
         UIThreadsUtil.mustBeSwingThread();
 
         displayVersion = globalVersions.incrementAndGet();
@@ -173,7 +181,7 @@ public class SegmentBuilder {
                     offset = beginOffset;
                 } else {
                     // there is no segment in document yet - need to add
-                    offset = doc.getLength();
+                    offset = initialOffset;
                 }
 
                 defaultTranslation = trans.defaultTranslation;
@@ -181,7 +189,7 @@ public class SegmentBuilder {
                     defaultTranslation = false;
                 }
                 transExist = trans.isTranslated();
-                noteExist  = trans.hasNote();
+                noteExist = trans.hasNote();
 
                 int beginOffset = offset;
                 if (isActive) {
@@ -202,15 +210,27 @@ public class SegmentBuilder {
         }
     }
 
+    public boolean hasBeenCreated() {
+        return beginPosP1 != null && endPosM1 != null;
+    }
+
     /**
      * Add separator between segments - one empty line.
      */
     public void addSegmentSeparator() {
+        addSegmentSeparator(doc.getLength());
+    }
+
+    public void prependSegmentSeparator() {
+        addSegmentSeparator(0);
+    }
+
+    public void addSegmentSeparator(int index) {
         doc.trustedChangesInProgress = true;
         StaticUIUtils.setCaretUpdateEnabled(controller.editor, false);
         try {
             try {
-                doc.insertString(doc.getLength(), "\n", null);
+                doc.insertString(index, "\n", null);
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
             }

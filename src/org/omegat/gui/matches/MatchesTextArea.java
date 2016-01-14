@@ -62,7 +62,6 @@ import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.tokenizer.ITokenizer;
-import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -335,21 +334,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             return;
         }
         if (Preferences.isPreference(Preferences.BEST_MATCH_INSERT)) {
-            String percentage_s = Preferences.getPreferenceDefault(Preferences.BEST_MATCH_MINIMAL_SIMILARITY,
+            int percentage = Preferences.getPreferenceDefault(Preferences.BEST_MATCH_MINIMAL_SIMILARITY,
                     Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT);
-            // <HP-experiment>
-            int percentage;
-            try {
-                // int
-                percentage = Integer.parseInt(percentage_s);
-            } catch (Exception exception) {
-                Log.log("ERROR: exception while parsing percentage:");
-                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
-                Log.log(exception);
-                return; // deliberately breaking, to simulate previous behaviour
-                // FIX: unknown, but expect number parsing errors
-            }
-            // </HP-experiment>
             NearString thebest = matches.get(0);
             if (thebest.scores[0].score >= percentage) {
                 SourceTextEntry currentEntry = Core.getEditor().getCurrentEntry();

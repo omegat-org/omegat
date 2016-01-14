@@ -65,10 +65,8 @@ public class WorkflowOptionsDialog extends JDialog {
 
         insertFuzzyCheckBox.setSelected(Preferences.isPreference(Preferences.BEST_MATCH_INSERT));
         similarityLabel.setEnabled(insertFuzzyCheckBox.isSelected());
-        similaritySpinner
-                .setValue(Integer.parseInt(Preferences.getPreferenceDefault(
-                        Preferences.BEST_MATCH_MINIMAL_SIMILARITY,
-                        Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT)));
+        similaritySpinner.setValue(Preferences.getPreferenceDefault(Preferences.BEST_MATCH_MINIMAL_SIMILARITY,
+                Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT));
         similaritySpinner.setEnabled(insertFuzzyCheckBox.isSelected());
         prefixLabel.setEnabled(insertFuzzyCheckBox.isSelected());
         if (!Preferences.existsPreference(Preferences.BEST_MATCH_EXPLANATORY_TEXT)) {
@@ -340,8 +338,8 @@ public class WorkflowOptionsDialog extends JDialog {
 
         Preferences.setPreference(Preferences.BEST_MATCH_INSERT, insertFuzzyCheckBox.isSelected());
         if (insertFuzzyCheckBox.isSelected()) {
-            Preferences.setPreference(Preferences.BEST_MATCH_MINIMAL_SIMILARITY, similaritySpinner.getValue()
-                    .toString());
+            int val = Math.max(0, Math.min(100, (Integer) similaritySpinner.getValue()));
+            Preferences.setPreference(Preferences.BEST_MATCH_MINIMAL_SIMILARITY, val);
             Preferences.setPreference(Preferences.BEST_MATCH_EXPLANATORY_TEXT, prefixText.getText());
         }
 

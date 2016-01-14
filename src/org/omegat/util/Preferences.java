@@ -224,7 +224,7 @@ public class Preferences {
      * Default Value of Workflow Option: Minimal Similarity Of the Best Fuzzy
      * Match to insert
      */
-    public static final String BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT = "80";
+    public static final int BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT = 80;
     /** Workflow Option: Insert Explanatory Text before the Best Fuzzy Match */
     public static final String BEST_MATCH_EXPLANATORY_TEXT = "wf_explanatoryText";
     /** Workflow Option: Export current segment */

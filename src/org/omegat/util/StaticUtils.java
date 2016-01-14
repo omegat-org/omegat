@@ -133,17 +133,13 @@ public class StaticUtils {
     /**
      * Returns a list of all files under the root directory by absolute path.
      */
-    public static void buildFileList(final List<String> lst, File rootDir, boolean recursive) {
-        try {
-            iterateFileTree(rootDir.getCanonicalFile(), recursive, new ITreeIteratorCallback() {
-                @Override
-                public void processFile(File file) {
-                    lst.add(file.getPath());
-                }
-            });
-        } catch (Exception ex) {
-            // Ignore
-        }
+    public static void buildFileList(final List<String> lst, File rootDir, boolean recursive) throws Exception {
+        iterateFileTree(rootDir.getCanonicalFile(), recursive, new ITreeIteratorCallback() {
+            @Override
+            public void processFile(File file) {
+                lst.add(file.getPath());
+            }
+        });
 
         // Get the local collator and set its strength to PRIMARY
         final Collator localCollator = Collator.getInstance(Locale.getDefault());
@@ -157,7 +153,7 @@ public class StaticUtils {
     }
 
     public static List<String> buildRelativeFilesList(File rootDir, List<String> includes,
-            List<String> excludes) throws IOException {
+            List<String> excludes) throws Exception {
         List<String> files = new ArrayList<String>();
         buildFileList(files, rootDir, true);
         Pattern[] includesMasks;

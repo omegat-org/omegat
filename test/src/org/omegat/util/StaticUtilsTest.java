@@ -28,7 +28,6 @@
 package org.omegat.util;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -66,7 +65,7 @@ public class StaticUtilsTest extends TestCase {
         assertEquals(args.length, 1);
     }
 
-    public void testBuildFileList() throws IOException {
+    public void testBuildFileList() throws Exception {
 
         File tempDir = FileUtil.createTempDir();
         assertTrue(tempDir.isDirectory());

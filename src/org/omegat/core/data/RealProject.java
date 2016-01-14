@@ -39,7 +39,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.InterruptedIOException;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
@@ -564,7 +563,13 @@ public class RealProject implements IProject {
         FilterMaster fm = Core.getFilterMaster();
 
         fileList.clear();
-        StaticUtils.buildFileList(fileList, new File(srcRoot), true);
+        try {
+            StaticUtils.buildFileList(fileList, new File(srcRoot), true);
+        } catch (Exception e) {
+            Log.logErrorRB("CT_ERROR_CREATING_TMX");
+            Log.log(e);
+            throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") + "\n" + e.getMessage());
+        }
         for (int i = 0; i < fileList.size(); i++) {
             fileList.set(i, fileList.get(i).substring(m_config.getSourceRoot().length()).replace(File.separatorChar, '/'));
         }
@@ -1093,7 +1098,7 @@ public class RealProject implements IProject {
      * @param projectRoot
      *            project root dir
      */
-    private void loadSourceFiles() throws IOException, InterruptedIOException, TranslationException {
+    private void loadSourceFiles() throws Exception {
         long st = System.currentTimeMillis();
         FilterMaster fm = Core.getFilterMaster();
 

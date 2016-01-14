@@ -419,11 +419,6 @@ public interface IEditor {
     void registerIdenticalTranslation();
 
     /**
-     * Wait for the user to commit the current translation.
-     */
-    void waitForCommit(int timeoutSeconds);
-
-    /**
      * Access the AutoCompleter
      */
     IAutoCompleter getAutoCompleter();

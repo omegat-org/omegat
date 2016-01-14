@@ -68,6 +68,10 @@ public class NotLoadedProject implements IProject {
         return null;
     }
 
+    public AllTranslations getAllTranslations(SourceTextEntry ste) {
+        return null;
+    }
+
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
     }
 
@@ -127,6 +131,10 @@ public class NotLoadedProject implements IProject {
 
     public void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
             ExternalLinked externalLinked) {
+    }
+
+    public void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
+            ExternalLinked externalLinked, AllTranslations previousTranslations) throws OptimisticLockingFail {
     }
 
     public ITokenizer getSourceTokenizer() {

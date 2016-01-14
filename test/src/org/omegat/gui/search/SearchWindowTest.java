@@ -198,10 +198,6 @@ public class SearchWindowTest extends TestCore {
             }
 
             @Override
-            public void waitForCommit(int timeoutSeconds) {
-            }
-
-            @Override
             public void undo() {
             }
 

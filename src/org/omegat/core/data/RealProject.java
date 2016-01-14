@@ -68,6 +68,7 @@ import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
+import org.omegat.core.data.TMXEntry.ExternalLinked;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.CalcStandardStatistics;
@@ -900,21 +901,6 @@ public class RealProject implements IProject {
                 // need rebase
                 again = true;
                 headTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), projectTMXFile, null);
-                
-                // We must wait for the user to finish committing the current translation before
-                // we can proceed. Otherwise there is the possibility of a silent, unrecoverable
-                // merge conflict:
-                //   1. Local user starts editing segment X.
-                //   2. Remote user commits and pushes a different translation for X.
-                //   3. Team sync starts before local user has finished editing.
-                //   4. Team sync finishes, with remote user's translation for X used
-                //      (no conflict detected because local user has not committed).
-                //   5. Local user commits translation, which overwrites remote user's
-                //      (no conflict detected because this is now a standard local edit).
-                // It is undesirable to simply forcibly commit the current translation because
-                // there are distracting visual and/or cursor-location jumps on commit and
-                // on the post-merge refresh.
-                Core.getEditor().waitForCommit(10);
 
                 mergeTMX(baseTMX, headTMX, commitDetails);
 
@@ -1044,11 +1030,9 @@ public class RealProject implements IProject {
                 .setParentWindow(Core.getMainWindow().getApplicationFrame())
                 // More than this number of conflicts will trigger List View by default.
                 .setListViewThreshold(5);
-        synchronized (projectTMX) {
-            ProjectTMX mergedTMX = SuperTmxMerge.merge(baseTMX, projectTMX, headTMX, m_config
-                    .getSourceLanguage().getLanguage(), m_config.getTargetLanguage().getLanguage(), props);
-            projectTMX.replaceContent(mergedTMX);
-        }
+        ProjectTMX mergedTMX = SuperTmxMerge.merge(baseTMX, projectTMX, headTMX, m_config.getSourceLanguage()
+                .getLanguage(), m_config.getTargetLanguage().getLanguage(), props);
+        projectTMX.replaceContent(mergedTMX);
         Log.logDebug(LOGGER, "Merge report: {0}", props.getReport());
         commitDetails.append('\n');
         commitDetails.append(props.getReport().toString());
@@ -1360,6 +1344,28 @@ public class RealProject implements IProject {
         return r;
     }
 
+    public AllTranslations getAllTranslations(SourceTextEntry ste) {
+        AllTranslations r = new AllTranslations();
+        synchronized (projectTMX) {
+            r.defaultTranslation = projectTMX.getDefaultTranslation(ste.getSrcText());
+            r.alternativeTranslation = projectTMX.getMultipleTranslation(ste.getKey());
+            if (r.alternativeTranslation != null) {
+                r.currentTranslation = r.alternativeTranslation;
+            } else if (r.defaultTranslation != null) {
+                r.currentTranslation = r.defaultTranslation;
+            } else {
+                r.currentTranslation = EMPTY_TRANSLATION;
+            }
+            if (r.defaultTranslation == null) {
+                r.defaultTranslation = EMPTY_TRANSLATION;
+            }
+            if (r.alternativeTranslation == null) {
+                r.alternativeTranslation = EMPTY_TRANSLATION;
+            }
+        }
+        return r;
+    }
+
     /**
      * Returns the active Project's Properties.
      */
@@ -1381,6 +1387,42 @@ public class RealProject implements IProject {
         }
     }
     
+    @Override
+    public void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
+            ExternalLinked externalLinked, AllTranslations previous) throws OptimisticLockingFail {
+        if (trans == null) {
+            throw new IllegalArgumentException("RealProject.setTranslation(tr) can't be null");
+        }
+
+        synchronized (projectTMX) {
+            AllTranslations current = getAllTranslations(entry);
+            boolean wasAlternative = current.alternativeTranslation.isTranslated();
+            if (defaultTranslation) {
+                if (!current.defaultTranslation.equals(previous.defaultTranslation)) {
+                    throw new OptimisticLockingFail(previous.getDefaultTranslation().translation,
+                            current.getDefaultTranslation().translation, current);
+                }
+                if (wasAlternative) {
+                    // alternative -> default
+                    if (!current.alternativeTranslation.equals(previous.alternativeTranslation)) {
+                        throw new OptimisticLockingFail(previous.getAlternativeTranslation().translation,
+                                current.getAlternativeTranslation().translation, current);
+                    }
+                    // remove alternative
+                    setTranslation(entry, new PrepareTMXEntry(), false, null);
+                }
+            } else {
+                // new is alternative translation
+                if (!current.alternativeTranslation.equals(previous.alternativeTranslation)) {
+                    throw new OptimisticLockingFail(previous.getAlternativeTranslation().translation,
+                            current.getAlternativeTranslation().translation, current);
+                }
+            }
+
+            setTranslation(entry, trans, defaultTranslation, externalLinked);
+        }
+    }
+
     @Override
     public void setTranslation(final SourceTextEntry entry, final PrepareTMXEntry trans, boolean defaultTranslation, TMXEntry.ExternalLinked externalLinked) {
         if (trans == null) {

@@ -77,6 +77,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
+import org.omegat.core.data.IProject.OptimisticLockingFail;
 import org.omegat.core.data.LastSegmentManager;
 import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectTMX;
@@ -88,6 +89,7 @@ import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
+import org.omegat.gui.dialogs.ConflictDialogController;
 import org.omegat.gui.editor.mark.CalcMarkersThread;
 import org.omegat.gui.editor.mark.ComesFromTMMarker;
 import org.omegat.gui.editor.mark.EntryMarks;
@@ -193,12 +195,9 @@ public class EditorController implements IEditor {
     private SegmentExportImport segmentExportImport;
     
     /**
-     * Indicates, in nanoseconds, the last time a keypress was input.
-     * This is reset to -1 upon commit or entering a segment.
-     * Used by {@link ForceCommitTimer} to tell if the user is still
-     * typing or not.
+     * Previous translations. Used for optimistic locking.
      */
-    private long dirtyTime = -1;
+    private IProject.AllTranslations previousTranslations;
 
     public EditorController(final MainWindow mainWindow) {
         this.mw = mainWindow;
@@ -630,7 +629,7 @@ public class EditorController implements IEditor {
                 SegmentBuilder sb = new SegmentBuilder(this, doc, settings, ste, ste.entryNum(), hasRTL);
                 temp_docSegList2.add(sb);
 
-                sb.createSegmentElement(false);
+                sb.createSegmentElement(false, Core.getProject().getTranslationInfo(ste));
 
                 sb.addSegmentSeparator();
             }
@@ -699,10 +698,12 @@ public class EditorController implements IEditor {
         if (!Core.getProject().isProjectLoaded())
             return;
 
+        previousTranslations = Core.getProject().getAllTranslations(ste);
+        TMXEntry currentTranslation = previousTranslations.getCurrentTranslation();
         // forget about old marks
-        m_docSegList[displayedEntryIndex].createSegmentElement(true);
-        
-        Core.getNotes().setNoteText(Core.getProject().getTranslationInfo(ste).note);
+        m_docSegList[displayedEntryIndex].createSegmentElement(true, currentTranslation);
+
+        Core.getNotes().setNoteText(currentTranslation.note);
 
         // then add new marks
         markerController.reprocessImmediately(m_docSegList[displayedEntryIndex]);
@@ -750,8 +751,6 @@ public class EditorController implements IEditor {
 
         // fire event about new segment activated
         CoreEvents.fireEntryActivated(ste);
-        
-        dirtyTime = -1;
     }
     
     private void setMenuEnabled() {
@@ -784,7 +783,6 @@ public class EditorController implements IEditor {
             return;
         }
         if (doc.isEditMode()) {
-            dirtyTime = System.nanoTime();
             m_docSegList[displayedEntryIndex].onActiveEntryChanged();
 
             SwingUtilities.invokeLater(new Runnable() {
@@ -933,7 +931,7 @@ public class EditorController implements IEditor {
         for (int i = 0; i < m_docSegList.length; i++) {
             if (entryNumbers.contains(m_docSegList[i].ste.entryNum())) {
                 // the same source text - need to update
-                m_docSegList[i].createSegmentElement(false);
+                m_docSegList[i].createSegmentElement(false, Core.getProject().getTranslationInfo(m_docSegList[i].ste));
             }
         }
     }
@@ -966,7 +964,6 @@ public class EditorController implements IEditor {
         if (newTrans != null) {
             commitAndDeactivate(null, newTrans);
         }
-        dirtyTime = -1;
     }
 
     void commitAndDeactivate(ForceTranslation forceTranslation, String newTrans) {
@@ -1028,16 +1025,33 @@ public class EditorController implements IEditor {
         boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
         boolean translationChanged = !StringUtil.equalsWithNulls(oldTE.translation, newen.translation);
         boolean noteChanged = !StringUtil.nvl(oldTE.note, "").equals(StringUtil.nvl(newen.note, ""));
-        
+
         if (!isNewAltTrans && !translationChanged && noteChanged) {
             // Only note was changed, and we are not making a new alt translation.
             Core.getProject().setNote(entry, oldTE, newen.note);
         } else if (translationChanged || noteChanged) {
-            // We are changing translation or making a new alt translation.
-            Core.getProject().setTranslation(entry, newen, defaultTranslation, null);
+            while (true) {
+                // iterate before optimistic locking will be resolved
+                try {
+                    Core.getProject().setTranslation(entry, newen, defaultTranslation, null,
+                            previousTranslations);
+                    break;
+                } catch (OptimisticLockingFail ex) {
+                    boolean result = new ConflictDialogController().show(ex.getOldTranslationText(),
+                            ex.getNewTranslationText(), newen.translation);
+                    if (result) {
+                        // next iteration
+                        previousTranslations = ex.getPrevious();
+                    } else {
+                        // use remote - don't save user's translation
+                        break;
+                    }
+                }
+            }
         }
 
-        m_docSegList[displayedEntryIndex].createSegmentElement(false);
+        m_docSegList[displayedEntryIndex].createSegmentElement(false,
+                Core.getProject().getTranslationInfo(m_docSegList[displayedEntryIndex].ste));
 
         // find all identical sources and redraw them
         for (int i = 0; i < m_docSegList.length; i++) {
@@ -1047,7 +1061,8 @@ public class EditorController implements IEditor {
             }
             if (m_docSegList[i].ste.getSrcText().equals(entry.getSrcText())) {
                 // the same source text - need to update
-                m_docSegList[i].createSegmentElement(false);
+                m_docSegList[i].createSegmentElement(false,
+                        Core.getProject().getTranslationInfo(m_docSegList[i].ste));
                 // then add new marks
                 markerController.reprocessImmediately(m_docSegList[i]);
             }
@@ -1073,11 +1088,6 @@ public class EditorController implements IEditor {
                 }
             }.execute();
         }
-        
-        synchronized (this) {
-            notifyAll();
-        }
-        dirtyTime = -1;
     }
 
     /**
@@ -2056,12 +2066,6 @@ public class EditorController implements IEditor {
         SegmentBuilder sb = m_docSegList[displayedEntryIndex];
 
         if (!alternate) {
-            // remove alternative translation from project
-            SourceTextEntry ste = sb.getSourceTextEntry();
-            PrepareTMXEntry en = new PrepareTMXEntry();
-            en.source = ste.getSrcText();
-            Core.getProject().setTranslation(ste, en, false, null);
-
             // switch to default translation
             sb.setDefaultTranslation(true);
         } else {
@@ -2123,26 +2127,6 @@ public class EditorController implements IEditor {
         }
     }
 
-    @Override
-    public void waitForCommit(int timeoutSeconds) {
-        ForceCommitTimer timer;
-        if (dirtyTime == -1) {
-            return;
-        } else {
-            timer = new ForceCommitTimer(timeoutSeconds);
-            timer.start();
-        }
-        try {
-            synchronized (this) {
-                wait();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            timer.cancel();
-        }
-    }
-
     @SuppressWarnings("serial")
     public AlphabeticalMarkers getAlphabeticalMarkers() {
         return new AlphabeticalMarkers(scrollPane) {
@@ -2184,46 +2168,6 @@ public class EditorController implements IEditor {
                 return map;
             }
         };
-    }
-
-    private class ForceCommitTimer extends Thread {
-        
-        private final long limit;
-        private boolean isCanceled = false;
-        
-        public ForceCommitTimer(int limit) {
-            this.limit = limit * 1000000000L;
-        }
-        
-        @Override
-        public void run() {
-            while (!isCanceled) {
-                long t = System.nanoTime() - dirtyTime;
-                if (t >= limit) {
-                    UIThreadsUtil.executeInSwingThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            commitAndLeave();
-                        }
-                    });
-                    Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
-                    break;
-                } else if (t >= limit - 5000000000L) {
-                    Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE_COUNTDOWN", (limit - t) / 1000000000L);
-                } else {
-                    Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE_WAITING");
-                }
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        
-        public void cancel() {
-            this.isCanceled = true;
-        }
     }
 
     @Override

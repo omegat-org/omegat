@@ -5,7 +5,7 @@
 
  Copyright (C) 2008 Alex Buloichik
                2010 Didier Briel
-               2014 Alex Buloichik
+               2014-2015 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -106,14 +106,31 @@ public interface IProject {
     List<SourceTextEntry> getAllEntries();
 
     /**
-     * Set translation for entry. Use when user has typed a new translation.
+     * Set translation for entry.
+     * 
+     * Optimistic locking will not be checked.
      * 
      * @param entry
      *            entry
      * @param trans
      *            translation. It can't be null
      */
-    void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation, TMXEntry.ExternalLinked externalLinked);
+    void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
+            TMXEntry.ExternalLinked externalLinked);
+
+    /**
+     * Set translation for entry with optimistic lock checking: if previous translation is not the same like
+     * in storage, OptimisticLockingFail exception will be generated. Use when user has typed a new
+     * translation.
+     * 
+     * @param entry
+     *            entry
+     * @param trans
+     *            translation. It can't be null
+     */
+    void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
+            TMXEntry.ExternalLinked externalLinked, AllTranslations previousTranslations)
+            throws OptimisticLockingFail;
 
     /**
      * Change note only for translation.
@@ -145,6 +162,11 @@ public interface IProject {
      * @return translation
      */
     TMXEntry getTranslationInfo(SourceTextEntry ste);
+
+    /**
+     * Get default and alternative translations for optimistic locking.
+     */
+    AllTranslations getAllTranslations(SourceTextEntry ste);
 
     /**
      * Iterate by all default translations in project.
@@ -233,5 +255,55 @@ public interface IProject {
 
     public interface MultipleTranslationsIterator {
         void iterate(EntryKey source, TMXEntry trans);
+    }
+
+    /**
+     * These translations can't be null. Only value or EMPTY_TRANSLATION.
+     */
+    public class AllTranslations {
+        protected TMXEntry defaultTranslation;
+        protected TMXEntry alternativeTranslation;
+        protected TMXEntry currentTranslation;
+
+        public TMXEntry getDefaultTranslation() {
+            return defaultTranslation;
+        }
+
+        public TMXEntry getAlternativeTranslation() {
+            return alternativeTranslation;
+        }
+
+        public TMXEntry getCurrentTranslation() {
+            return currentTranslation;
+        }
+    }
+
+    /**
+     * Exception for optimistic locking fail. Used when segment changed remotely or by automatic translation,
+     * but user also changed data.
+     */
+    public class OptimisticLockingFail extends Exception {
+        private final String oldTranslationText;
+        private final String newTranslationText;
+        private final AllTranslations previous;
+
+        public OptimisticLockingFail(String oldTranslationText, String newTranslationText,
+                AllTranslations previous) {
+            this.oldTranslationText = oldTranslationText;
+            this.newTranslationText = newTranslationText;
+            this.previous = previous;
+        }
+
+        public String getOldTranslationText() {
+            return oldTranslationText;
+        }
+
+        public String getNewTranslationText() {
+            return newTranslationText;
+        }
+
+        public AllTranslations getPrevious() {
+            return previous;
+        }
     }
 }

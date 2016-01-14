@@ -1285,9 +1285,9 @@ public class EditorController implements IEditor {
         if (!Core.getProject().isProjectLoaded())
             return;
 
-        Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = this.editor.getCursor();
-        this.editor.setCursor(hourglassCursor);
+        Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
+        Cursor oldCursor = editor.getCursor();
+        editor.setCursor(hourglassCursor);
 
         commitAndDeactivate();
 
@@ -1329,7 +1329,7 @@ public class EditorController implements IEditor {
         }
 
         activateEntry();
-        this.editor.setCursor(oldCursor);
+        editor.setCursor(oldCursor);
     }
 
     public void prevEntry() {
@@ -1338,9 +1338,9 @@ public class EditorController implements IEditor {
         if (!Core.getProject().isProjectLoaded())
             return;
 
-        Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = this.editor.getCursor();
-        this.editor.setCursor(hourglassCursor);
+        Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
+        Cursor oldCursor = editor.getCursor();
+        editor.setCursor(hourglassCursor);
 
         commitAndDeactivate();
 
@@ -1397,9 +1397,9 @@ public class EditorController implements IEditor {
         if (Core.getProject().isProjectLoaded() == false)
             return;
 
-        Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = this.editor.getCursor();
-        this.editor.setCursor(hourglassCursor);
+        Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
+        Cursor oldCursor = editor.getCursor();
+        editor.setCursor(hourglassCursor);
 
         // save the current entry
         commitAndDeactivate();
@@ -1454,7 +1454,7 @@ public class EditorController implements IEditor {
 
         activateEntry();
 
-        this.editor.setCursor(oldCursor);
+        editor.setCursor(oldCursor);
     }
     
     /**
@@ -1481,9 +1481,9 @@ public class EditorController implements IEditor {
         if (Core.getProject().isProjectLoaded() == false)
             return;
 
-        Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = this.editor.getCursor();
-        this.editor.setCursor(hourglassCursor);
+        Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
+        Cursor oldCursor = editor.getCursor();
+        editor.setCursor(hourglassCursor);
 
         // Save the current entry.
         commitAndDeactivate();
@@ -1526,7 +1526,7 @@ public class EditorController implements IEditor {
 
         activateEntry();
 
-        this.editor.setCursor(oldCursor);
+        editor.setCursor(oldCursor);
     }
 
     /**
@@ -1539,9 +1539,9 @@ public class EditorController implements IEditor {
         if (!Core.getProject().isProjectLoaded())
             return;
 
-        Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = this.editor.getCursor();
-        this.editor.setCursor(hourglassCursor);
+        Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
+        Cursor oldCursor = editor.getCursor();
+        editor.setCursor(hourglassCursor);
 
         // Save the current entry.
         commitAndDeactivate();
@@ -1580,7 +1580,7 @@ public class EditorController implements IEditor {
 
         activateEntry();
 
-        this.editor.setCursor(oldCursor);
+        editor.setCursor(oldCursor);
     }
 
     /**
@@ -1594,9 +1594,9 @@ public class EditorController implements IEditor {
         if (Core.getProject().isProjectLoaded() == false)
             return;
 
-        Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = this.editor.getCursor();
-        this.editor.setCursor(hourglassCursor);
+        Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
+        Cursor oldCursor = editor.getCursor();
+        editor.setCursor(hourglassCursor);
 
         // save the current entry
         commitAndDeactivate();
@@ -1636,7 +1636,7 @@ public class EditorController implements IEditor {
 
         activateEntry();
 
-        this.editor.setCursor(oldCursor);
+        editor.setCursor(oldCursor);
     }
 
     /**
@@ -1687,9 +1687,9 @@ public class EditorController implements IEditor {
             // document didn't loaded yet
             return;
         }
-        Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = this.editor.getCursor();
-        this.editor.setCursor(hourglassCursor);
+        Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
+        Cursor oldCursor = editor.getCursor();
+        editor.setCursor(hourglassCursor);
         commitAndDeactivate();
 
         if (entryNum == 0) {

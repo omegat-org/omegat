@@ -174,10 +174,13 @@ public class FalseFriendsTest extends TestCore {
 
     @Test
     public void testExecute() throws Exception {
-        LanguageToolWrapper wrapper = new LanguageToolWrapper();
+        LanguageToolWrapper wrapper = new LanguageToolWrapper() {
+            public boolean isEnabled() {
+                return true;
+            };
+        };
 
         wrapper.onProjectChanged(PROJECT_CHANGE_TYPE.LOAD);
-        wrapper.disabled = false;
 
         List<Mark> marks = wrapper.getMarksForEntry(null, "This is abnegation.", "To jest abnegacja.", true);
         assertEquals(1, marks.size());
@@ -186,10 +189,13 @@ public class FalseFriendsTest extends TestCore {
 
     @Test
     public void testRemoveRules() throws Exception {
-        LanguageToolWrapper wrapper = new LanguageToolWrapper();
+        LanguageToolWrapper wrapper = new LanguageToolWrapper() {
+            public boolean isEnabled() {
+                return true;
+            };
+        };
 
         wrapper.onProjectChanged(PROJECT_CHANGE_TYPE.LOAD);
-        wrapper.disabled = false;
 
         List<Mark> marks = wrapper.getMarksForEntry(null, "This is some long text without translation.", "", true);
         assertEquals(0, marks.size());

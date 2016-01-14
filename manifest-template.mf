@@ -6,7 +6,6 @@ Implementation-Version: @version@
 Permissions: all-permissions
 Class-Path: lib/lib-mnemonics.jar @all-jars-path@
 OmegaT-Plugins: 
-  org.omegat.languagetools.LanguageToolWrapper
   org.omegat.filters3.xml.xliff.XLIFFFilter
   org.omegat.filters2.text.TextFilter
   org.omegat.tokenizer.LuceneEnglishTokenizer

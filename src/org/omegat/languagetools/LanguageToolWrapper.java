@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010-2013 Alex Buloichik
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,12 +26,9 @@
 
 package org.omegat.languagetools;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.languagetool.JLanguageTool;
@@ -48,17 +46,17 @@ import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.Log;
-import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 import org.omegat.util.gui.Styles;
-import org.openide.awt.Mnemonics;
 
 /**
  * Marker implementation for LanguageTool support.
  * 
- * Bilingual check described on http://languagetool.wikidot.com/checking-translations-bilingual-texts
+ * Bilingual check described <a href=
+ * "http://languagetool.wikidot.com/checking-translations-bilingual-texts">here
+ * </a>
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public class LanguageToolWrapper implements IMarker, IProjectEventListener {
     protected static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
@@ -66,30 +64,12 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
     private JLanguageTool sourceLt, targetLt;
     private List<BitextRule> bRules;
 
-    private JCheckBoxMenuItem menuItem;
-
-    protected boolean disabled = true;
-
-    /**
-     * Register plugin into OmegaT.
-     */
-    public static void loadPlugins() {
-        Core.registerMarkerClass(LanguageToolWrapper.class);
-    }
-
-    public static void unloadPlugins() {
-    }
-
     public LanguageToolWrapper() throws Exception {
-        disabled = Preferences.isPreferenceDefault(Preferences.LT_DISABLED, true);
-        menuItem = new JCheckBoxMenuItem();
-        Mnemonics.setLocalizedText(menuItem, OStrings.getString("LT_OPTIONS_MENU_ENABLED"));
-        menuItem.addActionListener(menuItemActionListener);
-        menuItem.setSelected(!disabled);
-
-        Core.getMainWindow().getMainMenu().getOptionsMenu().add(menuItem);
-
         CoreEvents.registerProjectChangeListener(this);
+    }
+
+    public boolean isEnabled() {
+        return Core.getEditor().getSettings().isMarkLanguageChecker();
     }
 
     public synchronized void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
@@ -130,9 +110,9 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
     }
 
     @Override
-    public synchronized List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive)
-            throws Exception {
-        if (translationText == null || disabled) {
+    public synchronized List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
+            boolean isActive) throws Exception {
+        if (translationText == null || !isEnabled()) {
             return null;
         }
 
@@ -146,7 +126,8 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
         List<Mark> r = new ArrayList<Mark>();
         List<RuleMatch> matches;
         if (ltSource != null && bRules != null) {
-            // LT knows about source and target languages both and has bitext rules
+            // LT knows about source and target languages both and has bitext
+            // rules
             matches = Tools.checkBitext(sourceText, translationText, ltSource, ltTarget, bRules);
         } else {
             // LT knows about target language only
@@ -198,12 +179,4 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
         }
         return result;
     }
-
-    protected ActionListener menuItemActionListener = new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            disabled = !menuItem.isSelected();
-            Preferences.setPreference(Preferences.LT_DISABLED, disabled);
-            Core.getEditor().remarkOneMarker(LanguageToolWrapper.class.getName());
-        }
-    };
 }

@@ -336,6 +336,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         viewMenu.add(viewMarkWhitespaceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_WHITESPACE"));
         viewMenu.add(viewMarkBidiCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_BIDI"));
         viewMenu.add(viewMarkAutoPopulatedCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_AUTOPOPULATED"));
+        viewMenu.add(viewMarkLanguageCheckerCheckBoxMenuItem = createCheckboxMenuItem("LT_OPTIONS_MENU_ENABLED"));
         viewMenu.add(viewMarkFontFallbackCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_FONT_FALLBACK"));
         viewMenu.add(viewModificationInfoMenu = createMenu("MW_VIEW_MENU_MODIFICATION_INFO"));
         ButtonGroup viewModificationInfoMenuBG = new ButtonGroup();
@@ -356,6 +357,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         viewMarkBidiCheckBoxMenuItem.setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_BIDIMARKERS.getColor()));
         viewModificationInfoMenu.setIcon(MainMenuIcons.newBlankIcon());
         viewMarkAutoPopulatedCheckBoxMenuItem.setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor()));
+        viewMarkLanguageCheckerCheckBoxMenuItem.setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor()));
         viewMarkFontFallbackCheckBoxMenuItem.setIcon(MainMenuIcons.newTextIcon(UIManager.getColor("Label.foreground"),
                 new Font("Serif", Font.ITALIC, 16), 'F'));
         
@@ -481,6 +483,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 .isMarkBidi());
         viewMarkAutoPopulatedCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
                 .isMarkAutoPopulated());
+        viewMarkLanguageCheckerCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkLanguageChecker());
         viewMarkFontFallbackCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
                 .isDoFontFallback());
 
@@ -795,6 +798,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JCheckBoxMenuItem viewMarkWhitespaceCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkBidiCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkAutoPopulatedCheckBoxMenuItem;
+    JCheckBoxMenuItem viewMarkLanguageCheckerCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkFontFallbackCheckBoxMenuItem;
     JMenu viewModificationInfoMenu;
     JRadioButtonMenuItem viewDisplayModificationInfoNoneRadioButtonMenuItem;

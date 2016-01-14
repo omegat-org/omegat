@@ -71,6 +71,7 @@ import org.omegat.gui.notes.INotes;
 import org.omegat.gui.notes.NotesTextArea;
 import org.omegat.gui.tagvalidation.ITagValidation;
 import org.omegat.gui.tagvalidation.TagValidationTool;
+import org.omegat.languagetools.LanguageToolWrapper;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Preferences;
 import org.omegat.util.RecentProjects;
@@ -226,6 +227,7 @@ public class Core {
         Core.registerMarker(new ReplaceMarker());
         Core.registerMarker(new ComesFromAutoTMMarker());
         Core.registerMarker(new FontFallbackMarker());
+        Core.registerMarker(new LanguageToolWrapper());
 
         // 3. Initialize other components. They add themselves to the main window.
         editor = new EditorController(me);

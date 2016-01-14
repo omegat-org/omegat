@@ -190,6 +190,15 @@ public class SearchWindowTest extends TestCore {
             @Override
             public void updateViewPreferences() {
             }
+
+            @Override
+            public boolean isMarkLanguageChecker() {
+                return false;
+            }
+
+            @Override
+            public void setMarkLanguageChecker(boolean markLanguageChecker) {
+            }
         };
         TestCoreInitializer.initEditor(new IEditor() {
 

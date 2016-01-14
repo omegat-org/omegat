@@ -708,6 +708,11 @@ public class MainWindowMenuHandler {
                 .setMarkAutoPopulated(mainWindow.menu.viewMarkAutoPopulatedCheckBoxMenuItem.isSelected());
     }
     
+    public void viewMarkLanguageCheckerCheckBoxMenuItemActionPerformed() {
+        Core.getEditor().getSettings()
+                .setMarkLanguageChecker(mainWindow.menu.viewMarkLanguageCheckerCheckBoxMenuItem.isSelected());
+    }
+
     public void viewMarkFontFallbackCheckBoxMenuItemActionPerformed() {
         Core.getEditor().getSettings()
                 .setDoFontFallback(mainWindow.menu.viewMarkFontFallbackCheckBoxMenuItem.isSelected());
@@ -1040,7 +1045,7 @@ public class MainWindowMenuHandler {
     public void optionsAccessConfigDirMenuItemActionPerformed() {
         openFile(new File(StaticUtils.getConfigDir()));
     }
-    
+
     /**
      * Show help.
      */

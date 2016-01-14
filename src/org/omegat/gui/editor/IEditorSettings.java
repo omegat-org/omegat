@@ -74,6 +74,10 @@ public interface IEditorSettings {
 
     void setAutoSpellChecking(boolean isNeedToSpell);
 
+    boolean isMarkLanguageChecker();
+
+    void setMarkLanguageChecker(boolean markLanguageChecker);
+
     boolean isDoFontFallback();
 
     void setDoFontFallback(boolean doFallback);

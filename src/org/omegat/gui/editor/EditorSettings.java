@@ -64,6 +64,7 @@ public class EditorSettings implements IEditorSettings {
     private boolean autoSpellChecking;
     private boolean viewSourceBold;
     private boolean markFirstNonUnique;
+    private boolean markLanguageChecker;
     private boolean doFontFallback;
 
     public static String DISPLAY_MODIFICATION_INFO_NONE = "none";
@@ -91,6 +92,7 @@ public class EditorSettings implements IEditorSettings {
         //options from menu options->view
         viewSourceBold = Preferences.isPreference(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD);
         markFirstNonUnique = Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST);
+        markLanguageChecker = !Preferences.isPreferenceDefault(Preferences.LT_DISABLED, true);
         doFontFallback = Preferences.isPreference(Preferences.FONT_FALLBACK);
     }
 
@@ -298,6 +300,26 @@ public class EditorSettings implements IEditorSettings {
 
         this.doFontFallback = doFontFalback;
         Preferences.setPreference(Preferences.FONT_FALLBACK, doFontFalback);
+
+        if (Core.getProject().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
+    }
+
+    @Override
+    public boolean isMarkLanguageChecker() {
+        return markLanguageChecker;
+    }
+
+    @Override
+    public void setMarkLanguageChecker(boolean markLanguageChecker) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitAndDeactivate();
+
+        this.markLanguageChecker = markLanguageChecker;
+        Preferences.setPreference(Preferences.LT_DISABLED, !markLanguageChecker);
 
         if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();

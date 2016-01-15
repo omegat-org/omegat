@@ -56,7 +56,7 @@ public abstract class EntryInfoPane<T> extends JTextPane implements IProjectEven
             setFont(Core.getMainWindow().getApplicationFont());
             CoreEvents.registerFontChangedEventListener(new IFontChangedEventListener() {
                 public void onFontChanged(Font newFont) {
-                    EntryInfoPane.this.setFont(newFont);
+                    setFont(newFont);
                 }
             });
         }

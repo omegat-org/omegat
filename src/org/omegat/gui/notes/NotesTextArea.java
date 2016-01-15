@@ -81,7 +81,7 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes {
     public void clear() {
         UIThreadsUtil.mustBeSwingThread();
 
-        setText("");
+        setText(null);
         setEditable(false);
         ste = null;
     }

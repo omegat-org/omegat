@@ -164,18 +164,13 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     protected void setFoundResult(final SourceTextEntry se, List<NearString> newMatches) {
         UIThreadsUtil.mustBeSwingThread();
         
+        clear();
+
         if (newMatches == null) {
-            setText("");
             return;
         }
         
         Collections.sort(newMatches, Collections.reverseOrder(new NearString.NearStringComparator()));
-
-        activeMatch = -1;
-        matches.clear();
-        delimiters.clear();
-        sourcePos.clear();
-        diffInfos.clear();
 
         matches.addAll(newMatches);
         delimiters.add(0);
@@ -209,7 +204,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     @Override
     protected void onProjectClose() {
         clear();
-        this.setText(EXPLANATION);
+        setText(EXPLANATION);
         // We clean the ATTRIBUTE_SELECTED style set by the last displayed match
         StyledDocument doc = (StyledDocument) getDocument();
         doc.setCharacterAttributes(0, doc.getLength(), ATTRIBUTES_EMPTY, true);
@@ -452,7 +447,12 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     public void clear() {
         UIThreadsUtil.mustBeSwingThread();
 
-        setFoundResult(null, new ArrayList<NearString>());
+        activeMatch = -1;
+        matches.clear();
+        delimiters.clear();
+        sourcePos.clear();
+        diffInfos.clear();
+        setText(null);
     }
 
     protected MouseListener mouseListener = new MouseAdapter() {

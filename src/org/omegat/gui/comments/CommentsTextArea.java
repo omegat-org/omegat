@@ -67,7 +67,7 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
 
         setEditable(false);
         StaticUIUtils.makeCaretAlwaysVisible(this);
-        this.setText(EXPLANATION);
+        setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
 
         addCommentProvider(ENTRY_COMMENT_PROVIDER, 0);
@@ -145,7 +145,7 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
     public void clear() {
         UIThreadsUtil.mustBeSwingThread();
 
-        this.setText("");
+        setText(null);
     }
 
     @Override

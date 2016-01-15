@@ -241,4 +241,28 @@ public class StringUtilTest extends TestCase {
         assertEquals(text, StringUtil.matchCapitalization(text, "bAzZ", locale));
         assertEquals(text, StringUtil.matchCapitalization(text, ".", locale));
     }
+
+    public void testFirstN() {
+        // MATHEMATICAL BOLD CAPITAL A (U+1D400) x2
+        String test = "\uD835\uDC00\uD835\uDC00";
+        assertTrue(StringUtil.firstN(test, 0).isEmpty());
+        assertEquals("\uD835\uDC00", StringUtil.firstN(test, 1));
+        assertEquals(test, StringUtil.firstN(test, 2));
+        assertEquals(test, StringUtil.firstN(test, 100));
+    }
+
+    public void testTruncateString() {
+        // MATHEMATICAL BOLD CAPITAL A (U+1D400) x3
+        String test = "\uD835\uDC00\uD835\uDC00\uD835\uDC00";
+        try {
+            StringUtil.truncate(test, 0);
+            fail();
+        } catch (IndexOutOfBoundsException ex) {
+            // Ignore
+        }
+        assertEquals(String.valueOf(StringUtil.TRUNCATE_CHAR), StringUtil.truncate(test, 1));
+        assertEquals("\uD835\uDC00" + StringUtil.TRUNCATE_CHAR, StringUtil.truncate(test, 2));
+        assertEquals(test, StringUtil.truncate(test, 3));
+        assertEquals(test, StringUtil.truncate(test, 100));
+    }
 }

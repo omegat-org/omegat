@@ -130,8 +130,8 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
                 }
                 o.append(">\n");
                 if (e.key.prev != null && e.key.next != null) {
-                    o.append('(').append(StringUtil.firstN(e.key.prev, 10));
-                    o.append(" <...> ").append(StringUtil.firstN(e.key.next, 10)).append(")\n");
+                    o.append('(').append(StringUtil.truncate(e.key.prev, 10));
+                    o.append(" <...> ").append(StringUtil.truncate(e.key.next, 10)).append(")\n");
                 }
             } else {
                 o.append(e.entry.translation).append('\n');

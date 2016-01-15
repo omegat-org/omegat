@@ -467,8 +467,8 @@ public class EditorController implements IEditor {
                 public void run() {
                     // need to run later because some other event listeners
                     // should be called before
-                    loadDocument(LastSegmentManager.getLastSegmentIndex() - 1);
-                    activateEntry();
+                    loadDocument();
+                    gotoEntry(LastSegmentManager.getLastSegmentNumber());
                 }
             });
             break;

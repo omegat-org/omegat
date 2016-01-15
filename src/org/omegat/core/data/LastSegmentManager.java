@@ -98,16 +98,16 @@ public class LastSegmentManager {
     }
 
     /**
-     * Read the user's last-visited segment index from persistent storage. This
-     * segment index is the user-visible index that starts with 1.
+     * Read the user's last-visited segment number from persistent storage. The
+     * segment number is the user-visible number that starts with 1.
      * 
-     * @return The segment index (starts from 1)
+     * @return The segment number (starts from 1)
      */
-    public static int getLastSegmentIndex() {
+    public static int getLastSegmentNumber() {
         File lastEntryFile = getLastEntryFile();
 
         if (!lastEntryFile.exists()) {
-            return 0;
+            return 1;
         }
 
         Properties prop = new Properties();
@@ -115,7 +115,7 @@ public class LastSegmentManager {
             prop.load(new FileInputStream(lastEntryFile));
         } catch (IOException e) {
             Log.logDebug(LOGGER, "Could not load last segment info", e.getMessage());
-            return 0;
+            return 1;
         }
 
         Core.getMainWindow().showStatusMessageRB("MW_JUMPING_LAST_ENTRY");
@@ -133,7 +133,7 @@ public class LastSegmentManager {
         if (allEntries.size() < lastEntryNumber) {
             Log.logDebug(LOGGER, "Not enough segments to jump to " + lastEntryNumber);
             Core.getMainWindow().showStatusMessageRB(null);
-            return 0;
+            return 1;
         }
 
         SourceTextEntry propEntry = allEntries.get(lastEntryNumber - 1);
@@ -158,7 +158,7 @@ public class LastSegmentManager {
         if (fileIndex == -1) {
             Log.logDebug(LOGGER, "File \"" + lastFile + "\" is not in the project anymore.");
             Core.getMainWindow().showStatusMessageRB(null);
-            return 0;
+            return 1;
         }
 
         // We landed in the right file, just not the right segment
@@ -180,7 +180,7 @@ public class LastSegmentManager {
         }
 
         Core.getMainWindow().showStatusMessageRB(null);
-        return 0;
+        return 1;
     }
 
     /**

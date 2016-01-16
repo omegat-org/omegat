@@ -61,8 +61,7 @@ public class Help {
      * "standard" release branch.
      */
     public static final String ONLINE_HELP_URL = "http://omegat.sourceforge.net/manual-latest/";
-    // public static final String ONLINE_HELP_URL =
-    // "http://omegat.sourceforge.net/manual-standard/";
+    //public static final String ONLINE_HELP_URL = "http://omegat.sourceforge.net/manual-standard/";
 
     /**
      * Shows help in the system browser.

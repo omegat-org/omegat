@@ -36,6 +36,7 @@ import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -358,23 +359,33 @@ public class FileUtil {
      */
     public static String loadTextFileFromDoc(String textFile) {
 
-        // Get the license
+        // Get the file
         URI uri = Help.getHelpFileURI(null, textFile);
         if (uri == null) {
-            return Help.errorHaiku();
+            return null;
         }
 
+        String result = null;
+        BufferedReader rd = null;
+        InputStream is = null;
+        InputStreamReader isr = null;
         try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(uri.toURL().openStream(), OConsts.UTF8));
-            try {
-                return IOUtils.toString(rd);
-            } finally {
-                rd.close();
-            }
+            is = uri.toURL().openStream();
+            isr = new InputStreamReader(is, OConsts.UTF8);
+            rd = new BufferedReader(isr);
+            result = IOUtils.toString(rd);
+            rd.close();
+            isr.close();
+            is.close();
         } catch (IOException ex) {
-            return Help.errorHaiku();
+            Log.log(ex);
+        } finally {
+            IOUtils.closeQuietly(rd);
+            IOUtils.closeQuietly(is);
+            IOUtils.closeQuietly(isr);
         }
 
+        return result;
     }
 
     /**

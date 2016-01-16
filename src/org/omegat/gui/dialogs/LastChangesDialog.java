@@ -27,8 +27,10 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.Frame;
+
 import javax.swing.JDialog;
 
+import org.omegat.help.Help;
 import org.omegat.util.FileUtil;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -99,8 +101,8 @@ public class LastChangesDialog extends JDialog {
         getContentPane().add(buttonPanel, java.awt.BorderLayout.SOUTH);
 
         lastChangesTextPane.setEditable(false);
-        lastChangesTextPane
-                .setText(FileUtil.loadTextFileFromDoc(OConsts.LAST_CHANGES_FILE));
+        String text = FileUtil.loadTextFileFromDoc(OConsts.LAST_CHANGES_FILE);
+        lastChangesTextPane.setText(text == null ? Help.errorHaiku() : text);
         scroll.setViewportView(lastChangesTextPane);
 
         getContentPane().add(scroll, java.awt.BorderLayout.CENTER);

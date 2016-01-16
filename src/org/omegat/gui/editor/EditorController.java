@@ -1983,27 +1983,16 @@ public class EditorController implements IEditor {
         SourceTextEntry curEntry = getCurrentEntry();
         Document3 doc = editor.getOmDocument();
         IProject project = Core.getProject();
-        if (doc != null && project != null && project.getProjectFiles() != null // prevent
-                && curEntry != null) {                                          // nullpointererrors
-                                                                                // in
-                                                                                // loadDocument.
-                                                                                // Only
-                                                                                // load
-                                                                                // if
-                                                                                // there
-                                                                                // is
-                                                                                // a
-                                                                                // document.
+        // Prevent NullPointerErrors in loadDocument. Only load if there is a document.
+        if (doc != null && project != null && project.getProjectFiles() != null && curEntry != null) {
             int curEntryNum = curEntry.entryNum();
             loadDocument(); // rebuild entrylist
             if (entriesFilter == null || entriesFilter.allowed(curEntry)) {
                 gotoEntry(curEntry.entryNum());
             } else {
-                // go to next (available) segment. But first, we need to reset
-                // the
-                // displayedEntryIndex to the number where the current but
-                // filtered
-                // entry could have been if it was not filtered.
+                // Go to next (available) segment. But first, we need to reset
+                // the displayedEntryIndex to the number where the current but
+                // filtered entry could have been if it was not filtered.
                 for (int j = 0; j < m_docSegList.length; j++) {
                     if (m_docSegList[j].segmentNumberInProject >= curEntryNum) { //
                         displayedEntryIndex = j - 1;

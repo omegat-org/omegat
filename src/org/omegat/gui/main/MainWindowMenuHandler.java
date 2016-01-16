@@ -79,10 +79,10 @@ import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.filters2.FiltersCustomizer;
-import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.search.SearchWindowController;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.gui.stat.StatisticsWindow;
+import org.omegat.help.Help;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -1050,9 +1050,11 @@ public class MainWindowMenuHandler {
      * Show help.
      */
     public void helpContentsMenuItemActionPerformed() {
-        HelpFrame hf = HelpFrame.getInstance();
-        hf.setVisible(true);
-        hf.toFront();
+        try {
+            Help.showHelp();
+        } catch (Exception ex) {
+            Log.log(ex);
+        }
     }
 
     /**

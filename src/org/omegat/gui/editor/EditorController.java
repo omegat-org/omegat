@@ -101,12 +101,12 @@ import org.omegat.gui.editor.mark.CalcMarkersThread;
 import org.omegat.gui.editor.mark.ComesFromTMMarker;
 import org.omegat.gui.editor.mark.EntryMarks;
 import org.omegat.gui.editor.mark.Mark;
-import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.main.DockablePanel;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.MainWindowUI;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.tagvalidation.ITagValidation;
+import org.omegat.help.Help;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -2055,7 +2055,7 @@ public class EditorController implements IEditor {
                             : ComponentOrientation.LEFT_TO_RIGHT);
             introPane.setEditable(false);
             DragTargetOverlay.apply(introPane, dropInfo);
-            introPane.setPage(HelpFrame.getHelpFileURL(language, OConsts.HELP_INSTANT_START));
+            introPane.setPage(Help.getHelpFileURI(language, OConsts.HELP_INSTANT_START).toURL());
         } catch (IOException e) {
             // editorScroller.setViewportView(editor);
         }
@@ -2080,12 +2080,12 @@ public class EditorController implements IEditor {
         String country = Locale.getDefault().getCountry().toUpperCase(Locale.ENGLISH);
 
         // Check if there's a translation for the full locale (lang + country)
-        if (HelpFrame.getHelpFileURL(language + "_" + country, OConsts.HELP_INSTANT_START) != null) {
+        if (Help.getHelpFileURI(language + "_" + country, OConsts.HELP_INSTANT_START) != null) {
             return language + "_" + country;
         }
 
         // Check if there's a translation for the language only
-        if (HelpFrame.getHelpFileURL(language, OConsts.HELP_INSTANT_START) != null) {
+        if (Help.getHelpFileURI(language, OConsts.HELP_INSTANT_START) != null) {
             return language;
         }
         // Default to English, if no translation exists

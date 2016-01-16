@@ -39,7 +39,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.net.URL;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,7 +56,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.omegat.gui.help.HelpFrame;
+import org.omegat.help.Help;
 
 /**
  * Files processing utilities.
@@ -359,20 +359,20 @@ public class FileUtil {
     public static String loadTextFileFromDoc(String textFile) {
 
         // Get the license
-        URL url = HelpFrame.getHelpFileURL(null, textFile);
-        if (url == null) {
-            return HelpFrame.errorHaiku();
+        URI uri = Help.getHelpFileURI(null, textFile);
+        if (uri == null) {
+            return Help.errorHaiku();
         }
 
         try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(url.openStream(), OConsts.UTF8));
+            BufferedReader rd = new BufferedReader(new InputStreamReader(uri.toURL().openStream(), OConsts.UTF8));
             try {
                 return IOUtils.toString(rd);
             } finally {
                 rd.close();
             }
         } catch (IOException ex) {
-            return HelpFrame.errorHaiku();
+            return Help.errorHaiku();
         }
 
     }

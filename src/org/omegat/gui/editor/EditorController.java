@@ -1280,7 +1280,11 @@ public class EditorController implements IEditor {
         activateEntry(new CaretPosition(currentPosition));
     }
 
-    public void nextEntry() {
+    interface IIterateSegments {
+        boolean shouldStop(SourceTextEntry ste);
+    }
+
+    private void iterateToEntry(boolean forward, IIterateSegments test) {
         UIThreadsUtil.mustBeSwingThread();
 
         if (!Core.getProject().isProjectLoaded())
@@ -1301,24 +1305,39 @@ public class EditorController implements IEditor {
         int startEntryIndex = displayedEntryIndex;
         boolean looped = false;
         while (true) {
-            displayedEntryIndex++;
-            if (displayedEntryIndex >= m_docSegList.length) {
-                displayedFileIndex++;
-                displayedEntryIndex = 0;
-                if (displayedFileIndex >= files.size()) {
-                    displayedFileIndex = 0;
-                    looped = true;
+            if (forward) {
+                displayedEntryIndex++;
+                if (displayedEntryIndex >= m_docSegList.length) {
+                    displayedFileIndex++;
+                    displayedEntryIndex = 0;
+                    if (displayedFileIndex >= files.size()) {
+                        displayedFileIndex = 0;
+                        looped = true;
+                    }
+                    loadDocument();
                 }
-                loadDocument();
+            } else {
+                displayedEntryIndex--;
+                if (displayedEntryIndex < 0) {
+                    displayedFileIndex--;
+                    if (displayedFileIndex < 0) {
+                        displayedFileIndex = files.size() - 1;
+                        looped = true;
+                    }
+                    loadDocument();
+                    displayedEntryIndex = m_docSegList.length - 1;
+                }
             }
             ste = getCurrentEntry();
-            if (ste != null) {
-            	// We found an entry
+            if (test.shouldStop(ste)) {
             	break;
             }
             if (looped && displayedFileIndex == startFileIndex) {
-                if (displayedEntryIndex >= startEntryIndex) {
-                    // We have looped back to our starting point
+                if (forward && displayedEntryIndex >= startEntryIndex) {
+                    // We have looped forward to our starting point
+                    break;
+                } else if (!forward && displayedEntryIndex <= startEntryIndex) {
+                    // We have looped backwards to our starting point
                     break;
                 }
                 if (m_docSegList.length == 0) {
@@ -1333,129 +1352,56 @@ public class EditorController implements IEditor {
         editor.setCursor(oldCursor);
     }
 
+    private void anyEntry(boolean forwards) {
+        iterateToEntry(forwards, new IIterateSegments() {
+            @Override
+            public boolean shouldStop(SourceTextEntry ste) {
+                return ste != null;
+            }
+        });
+    }
+
+    public void nextEntry() {
+        anyEntry(true);
+    }
+
     public void prevEntry() {
-        UIThreadsUtil.mustBeSwingThread();
-
-        if (!Core.getProject().isProjectLoaded())
-            return;
-
-        Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = editor.getCursor();
-        editor.setCursor(hourglassCursor);
-
-        commitAndDeactivate();
-
-        List<FileInfo> files = Core.getProject().getProjectFiles();
-        if (files.isEmpty()) {
-            return;
-        }
-        SourceTextEntry ste;
-        int startFileIndex = displayedFileIndex;
-        int startEntryIndex = displayedEntryIndex;
-        boolean looped = false;
-        while (true) {
-            displayedEntryIndex--;
-            if (displayedEntryIndex < 0) {
-                displayedFileIndex--;
-                if (displayedFileIndex < 0) {
-                    displayedFileIndex = files.size() - 1;
-                    looped = true;
-                }
-                loadDocument();
-                displayedEntryIndex = m_docSegList.length - 1;
-            }
-            ste = getCurrentEntry();
-            if (ste != null) {
-                // We found an entry
-                break;
-            }
-            if (looped && displayedFileIndex == startFileIndex) {
-                if (displayedEntryIndex >= startEntryIndex) {
-                    // We have looped back to our starting point
-                    break;
-                }
-                if (m_docSegList.length == 0) {
-                    // We have looped back to our starting point
-                    // and there were no hits in any files
-                    break;
-                }
-            }
-        };
-
-        activateEntry();
-
-        this.editor.setCursor(oldCursor);
+        anyEntry(false);
     }
 
     /**
      * Find the next (un)translated entry.
      * @param findTranslated should the next entry be translated or not.
      */
-    private void nextTranslatedEntry(boolean findTranslated) {
-        UIThreadsUtil.mustBeSwingThread();
-
-        // check if a document is loaded
-        if (Core.getProject().isProjectLoaded() == false)
-            return;
-
-        Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = editor.getCursor();
-        editor.setCursor(hourglassCursor);
-
-        // save the current entry
-        commitAndDeactivate();
-
-        List<FileInfo> files = Core.getProject().getProjectFiles();
-        if (files.isEmpty()) {
-            return;
-        }
-        SourceTextEntry ste;
-        int startFileIndex = displayedFileIndex;
-        int startEntryIndex = displayedEntryIndex;
-        do {
-            displayedEntryIndex++;
-            if (displayedEntryIndex >= m_docSegList.length) {
-                // file finished - need new
-                displayedFileIndex++;
-                displayedEntryIndex = 0;
-                if (displayedFileIndex >= files.size()) {
-                    displayedFileIndex = 0;
+    private void nextTranslatedEntry(final boolean findTranslated) {
+        iterateToEntry(true, new IIterateSegments() {
+            @Override
+            public boolean shouldStop(SourceTextEntry ste) {
+                if (ste == null) {
+                    return true;
                 }
-                loadDocument(); // to get proper EntryIndex when filter active
-            }
-            ste = getCurrentEntry();
-
-            if (ste == null) {
-                break;// filtered file has no entries
-            }
-            if (displayedFileIndex == startFileIndex && displayedEntryIndex == startEntryIndex) {
-                break; // not found
-            }
-            
-            if (!findTranslated) {
-                if (!Core.getProject().getTranslationInfo(ste).isTranslated()) {
-                    break;// non-translated
+                if (!findTranslated) {
+                    if (!Core.getProject().getTranslationInfo(ste).isTranslated()) {
+                        return true; // non-translated
+                    }
+                } else {
+                    if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
+                        return true; // translated
+                    }
                 }
-            } else {
-                if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
-                    break;// translated
+                if (Preferences.isPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION)) {
+                    // when there is at least one alternative translation, then
+                    // we can consider that segment is not translated
+                    HasMultipleTranslations checker = new HasMultipleTranslations(ste.getSrcText());
+                    Core.getProject().iterateByMultipleTranslations(checker);
+                    if (checker.found) {
+                        // stop - alternative translation exist
+                        return true;
+                    }
                 }
+                return false;
             }
-            if (Preferences.isPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION)) {
-                // when there is at least one alternative translation, then we can consider that segment is
-                // not translated
-                HasMultipleTranslations checker = new HasMultipleTranslations(ste.getSrcText());
-                Core.getProject().iterateByMultipleTranslations(checker);
-                if (checker.found) {
-                    // stop - alternative translation exist
-                    break;
-                }
-            }
-        } while (true);
-
-        activateEntry();
-
-        editor.setCursor(oldCursor);
+        });
     }
     
     /**
@@ -1472,116 +1418,33 @@ public class EditorController implements IEditor {
         nextTranslatedEntry(true);
     }
 
+    private void entryWithNote(boolean forward) {
+        iterateToEntry(forward, new IIterateSegments() {
+            @Override
+            public boolean shouldStop(SourceTextEntry ste) {
+                if (ste == null) {
+                    return true;
+                }
+                if (Core.getProject().getTranslationInfo(ste).hasNote()) {
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
     /**
      * Finds the next entry with a non-empty note.
      */
     public void nextEntryWithNote() {
-        UIThreadsUtil.mustBeSwingThread();
-
-        // Check if a document is loaded.
-        if (Core.getProject().isProjectLoaded() == false)
-            return;
-
-        Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = editor.getCursor();
-        editor.setCursor(hourglassCursor);
-
-        // Save the current entry.
-        commitAndDeactivate();
-
-        List<FileInfo> files = Core.getProject().getProjectFiles();
-        if (files.isEmpty()) {
-            return;
-        }
-        SourceTextEntry ste;
-        int startFileIndex = displayedFileIndex;
-        int startEntryIndex = displayedEntryIndex;
-        do {
-            // Navigate to next entry in the order: segment -> project file -> project.
-            displayedEntryIndex++;
-            if (displayedEntryIndex >= m_docSegList.length) {
-                // File finished - need new.
-                displayedFileIndex++;
-                displayedEntryIndex = 0;
-                if (displayedFileIndex >= files.size()) {
-                    displayedFileIndex = 0;
-                }
-                // To get proper EntryIndex when filter active.
-                loadDocument(); 
-            }
-            ste = getCurrentEntry();
-
-            if (ste == null) {
-                // Filtered file has no entries.
-                break;
-            }
-            if (displayedFileIndex == startFileIndex && displayedEntryIndex == startEntryIndex) {
-                // Found no segment with a note. Cursor remains at starting position.
-                break; 
-            }
-            if (Core.getProject().getTranslationInfo(ste).hasNote()) {
-                // Non-translated.
-                break;
-            }
-        } while (true);
-
-        activateEntry();
-
-        editor.setCursor(oldCursor);
+        entryWithNote(true);
     }
 
     /**
      * Finds the previous entry with a non-empty note.
      */
     public void prevEntryWithNote() {
-        UIThreadsUtil.mustBeSwingThread();
-
-        // Check if a document is loaded.
-        if (!Core.getProject().isProjectLoaded())
-            return;
-
-        Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = editor.getCursor();
-        editor.setCursor(hourglassCursor);
-
-        // Save the current entry.
-        commitAndDeactivate();
-
-        List<FileInfo> files = Core.getProject().getProjectFiles();
-        if (files.isEmpty()) {
-            return;
-        }
-        SourceTextEntry ste;
-        int startFileIndex = displayedFileIndex;
-        int startEntryIndex = displayedEntryIndex;
-        do {
-            displayedEntryIndex--;
-            if (displayedEntryIndex < 0) {
-                displayedFileIndex--;
-                if (displayedFileIndex < 0) {
-                    displayedFileIndex = files.size() - 1;
-                }
-                loadDocument();
-                displayedEntryIndex = m_docSegList.length - 1;
-            }
-            ste = getCurrentEntry();
-            if (ste == null) {
-                // Filtered file has no entries.
-                break;
-            }
-            if (displayedFileIndex == startFileIndex && displayedEntryIndex == startEntryIndex) {
-                // Found no segment with a note. Cursor remains at starting position.
-                break; 
-            }
-            if (Core.getProject().getTranslationInfo(ste).hasNote()) {
-                // Non-translated.
-                break;
-            }
-        } while (true);
-
-        activateEntry();
-
-        editor.setCursor(oldCursor);
+        entryWithNote(false);
     }
 
     /**
@@ -1589,55 +1452,18 @@ public class EditorController implements IEditor {
      * @param findTranslated should the next entry be translated or not.
      */
     public void nextUniqueEntry() {
-        UIThreadsUtil.mustBeSwingThread();
-
-        // check if a document is loaded
-        if (Core.getProject().isProjectLoaded() == false)
-            return;
-
-        Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = editor.getCursor();
-        editor.setCursor(hourglassCursor);
-
-        // save the current entry
-        commitAndDeactivate();
-
-        List<FileInfo> files = Core.getProject().getProjectFiles();
-        if (files.isEmpty()) {
-            return;
-        }
-        SourceTextEntry ste;
-        int startFileIndex = displayedFileIndex;
-        int startEntryIndex = displayedEntryIndex;
-        do {
-            displayedEntryIndex++;
-            if (displayedEntryIndex >= m_docSegList.length) {
-                // file finished - need new
-                displayedFileIndex++;
-                displayedEntryIndex = 0;
-                if (displayedFileIndex >= files.size()) {
-                    displayedFileIndex = 0;
+        iterateToEntry(true, new IIterateSegments() {
+            @Override
+            public boolean shouldStop(SourceTextEntry ste) {
+                if (ste == null) {
+                    return true;
                 }
-                loadDocument(); // to get proper EntryIndex when filter active
+                if (ste.getDuplicate() != DUPLICATE.NEXT) {
+                    return true;
+                }
+                return false;
             }
-            ste = getCurrentEntry();
-
-            if (ste == null) {
-                break;// filtered file has no entries
-            }
-            if (displayedFileIndex == startFileIndex && displayedEntryIndex == startEntryIndex) {
-                break; // not found
-            }
-            
-            if (ste.getDuplicate() != DUPLICATE.NEXT){
-                break;
-            }
-
-        } while (true);
-
-        activateEntry();
-
-        editor.setCursor(oldCursor);
+        });
     }
 
     /**

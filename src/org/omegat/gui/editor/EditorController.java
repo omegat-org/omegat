@@ -53,6 +53,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -2055,7 +2056,10 @@ public class EditorController implements IEditor {
                             : ComponentOrientation.LEFT_TO_RIGHT);
             introPane.setEditable(false);
             DragTargetOverlay.apply(introPane, dropInfo);
-            introPane.setPage(Help.getHelpFileURI(language, OConsts.HELP_INSTANT_START).toURL());
+            URI uri = Help.getHelpFileURI(language, OConsts.HELP_INSTANT_START);
+            if (uri != null) {
+                introPane.setPage(uri.toURL());
+            }
         } catch (IOException e) {
             // editorScroller.setViewportView(editor);
         }

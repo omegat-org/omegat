@@ -45,7 +45,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 
 /**
- * Frame that displays help HTML files. Singleton.
+ * A utility class for accessing bundled local or online documentation.
  * 
  * @author Keith Godfrey
  * @author Sandra Jean Chua - sachachua at users.sourceforge.net

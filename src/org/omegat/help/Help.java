@@ -57,11 +57,11 @@ import org.omegat.util.StaticUtils;
 public class Help {
 
     /**
-     * URL for the online manual. Swap these when branching from trunk to a
-     * "standard" release branch.
+     * URL for the online manual.
      */
-    public static final String ONLINE_HELP_URL = "http://omegat.sourceforge.net/manual-latest/";
-    //public static final String ONLINE_HELP_URL = "http://omegat.sourceforge.net/manual-standard/";
+    public static final String ONLINE_HELP_URL = OStrings.IS_BETA
+            ? "http://omegat.sourceforge.net/manual-latest/"
+            : "http://omegat.sourceforge.net/manual-standard/";
 
     /**
      * Shows help in the system browser.

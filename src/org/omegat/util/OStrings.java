@@ -46,6 +46,7 @@ public class OStrings {
     private static String __VERSION_KEY = "version";
     private static String __UPDATE_KEY = "update";
     private static String __REVISION_KEY = "revision";
+    private static String __BETA_KEY = "beta";
 
     /** For custom deployments of OmegaT that need to be distinguishable from "stock" OmegaT */
     public static String BRANDING = "";
@@ -61,6 +62,10 @@ public class OStrings {
     /** Repository revision number, e.g. r7500 */
     public static final String REVISION = ResourceBundle.getBundle("org/omegat/Version")
             .getString(__REVISION_KEY);
+
+    /** Indicates whether this is a "beta" (or "latest") version or a "standard" version. */
+    public static final boolean IS_BETA = !ResourceBundle.getBundle("org/omegat/Version")
+            .getString(__BETA_KEY).isEmpty();
 
     /** Resource bundle that contains all the strings */
     private static ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/Bundle");

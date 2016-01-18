@@ -12,12 +12,6 @@ In the Path environment variable, add:
 Install pysvn with:
 http://pysvn.tigris.org/files/documents/1233/49404/py27-pysvn-svn1811-1.7.10-1584.exe
 
-Install lxml with the command:
-pip install lxml
-
-Install whoosh (indexation) with the command:
-pip install whoosh
-
 Install Fop (if needed):
 - (to be written)
 
@@ -27,18 +21,19 @@ Install PrinceXML (if needed):
 
 /// Installation of Kolekti ///
 
-Download Kolekti from github: download https://github.com/kolekti/kolekti/archive/dev.zip
+If you are installing to a virtualenv, make sure system packages are available:
+virtualenv --system-site-packages <envname>
 
-Unzip in C:
+Install via pip:
+pip install git+https://github.com/kolekti/kolekti.git@dev
 
 /// Publication of the UserGuide (from the command line) ///
 
-Go to:
-C:\kolekti-dev\src
+Ensure that the `kolekti` command is available on your Path.
 
 Usage of the command line is:
 
-python kolekti.py [-v] [-b BASE] publish [-j JOB] [-l LANGUAGES] toc
+kolekti [-v] [-b BASE] publish [-j JOB] [-l LANGUAGES] toc
 
 With:
 
@@ -51,6 +46,6 @@ With:
 toc: frame to publish
 
 Command line example:
-python kolekti.py -b C:\[...]\trunk\doc_src2 publish [-j JOB] -l fr,en C:\[...]\trunk\doc_src2\sources\{LANG}\tocs\UserGuide.html
+kolekti -b C:\[...]\trunk\doc_src2 publish [-j JOB] -l fr,en C:\[...]\trunk\doc_src2\sources\{LANG}\tocs\UserGuide.html
 
-It is possible to get a verbose output by adding -v after kolekti.py
+It is possible to get a verbose output by adding -v after kolekti.

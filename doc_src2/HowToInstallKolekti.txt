@@ -1,23 +1,70 @@
 How to install Kolekti
 
+
 /// Installation of the environment ///
 
-Install python (2.7.9) for Windows 32-bit (even on 64-bit PCs):
-https://www.python.org/ftp/python/2.7.9/python-2.7.9.msi
+* git
 
-In the Path environment variable, add:
+Systems other than Windows probably already have this.
+
+Windows:
+
+Install the latest version of git for Windows from
+https://git-for-windows.github.io/
+
+* Python
+
+Systems other than Windows probably already have this.
+
+Windows:
+
+Install the latest version of Python 2.7, 32-bit (even on 64-bit PCs):
+https://www.python.org/downloads/
+
+When installing, you are recommended to select the option (off by default) to
+add Python to your Path. If you missed it, add these directories manually:
 - C:\Python27
 - C:\Python27\Scripts
 
-Install pysvn with:
-http://pysvn.tigris.org/files/documents/1233/49404/py27-pysvn-svn1811-1.7.10-1584.exe
+* pysvn
 
-Install Fop (if needed):
-- (to be written)
+Check your package manager, as this is not available in PyPI. On OS X this is
+available in MacPorts as `py27-pysvn`.
 
-Install PrinceXML (if needed):
-- Download the setup program from http://www.princexml.com/download/
-- add C:\Program Files (x86)\Prince\Engine\bin in the Path environment variable
+Windows:
+
+Download and install a binary kit from
+http://pysvn.tigris.org/project_downloads.html
+- Extension Version: 1.7.10 or higher
+- Python Version: Python 2.7
+- Subversion Version: Your choice
+
+* FOP (optional?)
+
+TODO
+
+* PrinceXML (optional?)
+
+Windows:
+
+Download the setup program from http://www.princexml.com/download/
+Add C:\Program Files (x86)\Prince\Engine\bin to your Path.
+
+* lxml
+
+On systems other than Windows you can let pip install this as a dependency of
+kolteki later.
+
+Windows:
+
+Download an installer for the latest version of lxml + Python 2.7 from
+https://pypi.python.org/pypi/lxml
+
+* virtualenv (optional)
+
+Once you have a working Python installation, install via pip:
+pip install virtualenv
+
 
 /// Installation of Kolekti ///
 
@@ -26,6 +73,7 @@ virtualenv --system-site-packages <envname>
 
 Install via pip:
 pip install git+https://github.com/kolekti/kolekti.git@dev
+
 
 /// Publication of the UserGuide (from the command line) ///
 

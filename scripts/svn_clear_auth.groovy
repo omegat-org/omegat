@@ -4,7 +4,8 @@
  *  This feature is only available with simple password credential kind ("svn.simple").
  *
  * @author  Yu Tang
- * @date    2015-05-02
+ * @author  Kos Ivantsov
+ * @date    2016-01-18
  * @version 0.1
  */
 import groovy.swing.SwingBuilder
@@ -20,10 +21,16 @@ import org.apache.commons.lang.StringEscapeUtils as SEU
 import org.omegat.core.team.SVNRemoteRepository
 import org.omegat.gui.scripting.ScriptingWindow
 import org.omegat.util.gui.StaticUIUtils
+import org.omegat.util.OStrings
 import org.omegat.util.StaticUtils
+import org.omegat.util.StringUtil
 
 import static org.tmatesoft.svn.core.auth.ISVNAuthenticationManager.PASSWORD
 import org.tmatesoft.svn.core.wc.SVNWCUtil
+
+//check OmegaT version
+    utils = (OStrings.VERSION < '3.5.2') ? StaticUtils : StringUtil
+
 
 // helper methods
 def owner = {
@@ -53,7 +60,7 @@ def authSvnSimpleDirectory = {
 
 // No auth folder
 if (!authSvnSimpleDirectory.isDirectory()) {
-    return echoIfRunFromShortcut( StaticUtils.format(_('err_auth_dir_not_found'), authSvnSimpleDirectory) )
+    return echoIfRunFromShortcut( utils.format(_('err_auth_dir_not_found'), authSvnSimpleDirectory) )
 }
 
 // get SVNConfigFile
@@ -65,14 +72,14 @@ authSvnSimpleDirectory.eachFile(groovy.io.FileType.FILES) { file ->
         def username = content.find(/\nusername\nV \d+\n(.+)\n/) {g0, g1 -> g1}
         def escapedRealm = SEU.escapeHtml(realm)
         def escapedUserName = SEU.escapeHtml(username ?: '')
-        def title = StaticUtils.format(_('item_html'), escapedRealm, escapedUserName)
+        def title = utils.format(_('item_html'), escapedRealm, escapedUserName)
         map[title] = file
     }
 }
 
 // No auth files
 if (!map) {
-    return echoIfRunFromShortcut( StaticUtils.format(_('err_auth_file_not_found'), authSvnSimpleDirectory) )
+    return echoIfRunFromShortcut( utils.format(_('err_auth_file_not_found'), authSvnSimpleDirectory) )
 }
 
 // Initializing SwingBuilder
@@ -114,7 +121,7 @@ def deleteCredentials = {
         def file = map[title]
         try {
             if (!file.delete()) {
-                console.println echoIfRunFromShortcut( StaticUtils.format(_('err_file_could_not_delete'), file.path) )
+                console.println echoIfRunFromShortcut( utils.format(_('err_file_could_not_delete'), file.path) )
                 return
             }
             map.remove title
@@ -126,7 +133,7 @@ def deleteCredentials = {
                 dialog.dispose()
             }
         } catch(e) {
-            console.println echoIfRunFromShortcut( StaticUtils.format(_('err_failed_to_delete'), file.path, e) )
+            console.println echoIfRunFromShortcut( utils.format(_('err_failed_to_delete'), file.path, e) )
         }
     }
 }

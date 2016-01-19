@@ -1,56 +1,97 @@
 Comment installer Kolekti
 
+
 /// Installation de l'environnement ///
 
-Installer python (2.7.9) pour windows 32bit (même sur les pc 64bit) :
-https://www.python.org/ftp/python/2.7.9/python-2.7.9.msi
+* git
 
-Ajouter dans la variable d'environnement Path :
+Les autres systèmes que Windows en disposent probablement déjà.
+
+Windows :
+
+Installer la dernière version de git pour Windows à partir de
+https://git-for-windows.github.io/
+
+* Python
+
+Les autres systèmes que Windows en disposent probablement déjà.
+
+Windows :
+
+Installer la dernière version de Python 2.7, 32 bits (même sur les PC 64 bits):
+https://www.python.org/downloads/
+
+Durant l'installation, il est recommandé de sélectionner l'option (décochée par défaut) pour ajouter Python au Path. Si cela n'a pas été effectué, ajouter ces répertoires manuellement :
 - C:\Python27
 - C:\Python27\Scripts
 
-Installer pysvn avec :
-http://pysvn.tigris.org/files/documents/1233/49404/py27-pysvn-svn1811-1.7.10-1584.exe
+* pysvn
 
-Installer lxml avec la commande :
-pip install lxml
+Vérifier votre gestionnaire de package, cet élément n'étant pas disponible dans PyPI. Sous OS X, il est
+disponible dans MacPorts sous le nom « py27-pysvn ».
 
-Installer whoosh (indexation) avec la commande :
-pip install whoosh
+Windows :
 
-Installer Fop (si besoin) :
-- (à écrire)
+Télécharger et installer un kit binaire depuis
+http://pysvn.tigris.org/project_downloads.html
+- Version de l'extension : 1.7.10 ou supérieure
+- Version de Python : Python 2.7
+- Version de Subversion : libre
 
-Installer PrinceXML (si besoin) :
-- télécharger l'nstalleur depuis http://www.princexml.com/download/
-- ajouter C:\Program Files (x86)\Prince\Engine\bin dans la variable d'environnement Path
+* FOP (optionnel ?)
+
+À documenter
+
+* PrinceXML (optionnel ?)
+
+Windows :
+
+Télécharger le programme d'installation depuis http://www.princexml.com/download/
+Ajouter C:\Program Files (x86)\Prince\Engine\bin dans le Path.
+
+* lxml
+
+Dans les autres systèmes que Windows, vous pouvez laisser pip l'installer ultérieurement comme une dépendance de kolekti.
+
+Windows :
+
+Télécharger un programme d'installation pour la dernière version de lxml + Python 2.7 depuis
+https://pypi.python.org/pypi/lxml
+
+* virtualenv (optionnel)
+
+Une fois Python opérationnel, installer avec pip :
+install virtualenv
+
 
 /// Installation de Kolekti ///
 
-Récupérer Kolekti sur github : télécharger https://github.com/kolekti/kolekti/archive/dev.zip
+Si vous installez sur un virtualenv, faire en sorte que les paquets système soient disponibles :
+virtualenv --system-site-packages <nom de l'environnement>
 
-Dézipper dans C:
+Installer avec pip :
+pip install git+https://github.com/kolekti/kolekti.git@dev
+
 
 /// Publication du UserGuide (en ligne de commande) ///
 
-Se positionner dans :
-C:\kolekti-dev\src
+Vérifier que la commande « kolekti » est disponible dans le Path.
 
 La structure de la ligne de commande est :
 
-python kolekti.py [-v] [-b BASE] publish [-j JOB] [-l LANGUAGES] toc
+kolekti [-v] [-b BASE] publish [-j JOB] [-l LANGUES] toc
 
 Avec :
 
 -b BASE : chemin d'accès à la base (projet) kolekti à utiliser
 
--j JOB (optionnel) : chemin du fichier de paramètres de publication à utiliser, remplace la valeur présente dans la trame (toc) 
+-j JOB (optional) : chemin du fichier de paramètres de publication à utiliser, remplace la valeur présente dans la trame (toc) 
 
--l LANGS : liste des codes langue à publier, séparés par des virgules
+-l LANGUES : liste des codes langue à publier, séparés par des virgules
 
 toc : trame à publier
 
-Exemple de commande :
-python kolekti.py -b C:\[...]\trunk\doc_src2 publish [-j JOB] -l fr,en C:\[...]\trunk\doc_src2\sources\{LANG}\tocs\UserGuide.html
+Exemple de ligne de commande :
+kolekti -b C:\[...]\trunk\doc_src2 publish [-j JOB] -l fr,en C:\[...]\trunk\doc_src2\sources\{LANG}\tocs\UserGuide.html
 
-Il est possible d'avoir le détail des opérations en écrivant -v après kolekti.py
+Il est possible d'avoir le détail des opérations en écrivant -v après kolekti.

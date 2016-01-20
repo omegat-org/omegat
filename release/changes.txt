@@ -29,6 +29,10 @@
   - Open help in external browser 
   https://sourceforge.net/p/omegat/feature-requests/397/
 
+  - Improve editor performance with very large files
+  https://sourceforge.net/p/omegat/feature-requests/1173/
+  
+
   Bug fixes:
 
   - Custom text color used for text in dialogs

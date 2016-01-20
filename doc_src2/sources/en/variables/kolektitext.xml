@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<variables>
+  <variable code="TOC">
+    <value>
+      <content>Table of contents</content>
+    </value>
+  </variable>
+  <variable code="INDEX">
+    <value>
+      <content>Alphabetical Index</content>
+    </value>
+  </variable>
+</variables>

@@ -28,6 +28,7 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.Frame;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -61,9 +62,8 @@ public class SaveOptionsDialog extends JDialog {
         getRootPane().setDefaultButton(okButton);
 
         // Initializing options
-        int saveInterval = Integer.parseInt(Preferences.getPreferenceDefault(
-                        Preferences.AUTO_SAVE_INTERVAL,
-                        Preferences.AUTO_SAVE_DEFAULT));
+        int saveInterval = Preferences.getPreferenceDefault(Preferences.AUTO_SAVE_INTERVAL,
+                Preferences.AUTO_SAVE_DEFAULT);
 
         minutesSpinner.setValue(saveInterval / 60);
         secondsSpinner.setValue(saveInterval % 60);

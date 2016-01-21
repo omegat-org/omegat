@@ -349,7 +349,7 @@ public class Preferences {
     public static final String AUTO_SAVE_INTERVAL = "auto_save_interval";
 
     /** Default number of seconds to auto save project */
-    public static final String AUTO_SAVE_DEFAULT = "180";
+    public static final int AUTO_SAVE_DEFAULT = 180;
     
     /** Custom external command for post-processing */
     public static final String EXTERNAL_COMMAND = "external_command";

@@ -41,6 +41,12 @@ OmegaT-Plugin: filter
 Name: org.omegat.filters3.xml.helpandmanual.HelpAndManualFilter
 OmegaT-Plugin: filter
 
+Name: org.omegat.filters3.xml.properties.PropertiesFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters3.xml.schematron.SchematronFilter
+OmegaT-Plugin: filter
+
 Name: org.omegat.filters3.xml.camtasiawindows.CamtasiaWindowsFilter
 OmegaT-Plugin: filter
 

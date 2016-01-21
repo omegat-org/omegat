@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.6.0
 ----------------------------------------------------------------------
-  8 Enhancements
+  10 Enhancements
   3 Bug fixes
 ----------------------------------------------------------------------
 3.6.0 vs 3.5.3
@@ -31,7 +31,9 @@
 
   - Improve editor performance with very large files
   https://sourceforge.net/p/omegat/feature-requests/1173/
-  
+
+  - Immediately apply changes to automatic save interval
+  https://sourceforge.net/p/omegat/feature-requests/1174/
 
   Bug fixes:
 

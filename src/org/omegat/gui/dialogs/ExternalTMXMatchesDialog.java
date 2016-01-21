@@ -65,7 +65,7 @@ public class ExternalTMXMatchesDialog extends JDialog {
         sortMatchesList.setRenderer(new DelegatingComboBoxRenderer<SORT_KEY>() {
             @Override
             protected Object getDisplayText(SORT_KEY value) {
-                return OStrings.getString("EXT_TMX_SORT_KEY_" + value.toString());
+                return OStrings.getString("EXT_TMX_SORT_KEY_" + value.name());
             }
         });
 

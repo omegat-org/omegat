@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Alex Buloichik
                2012 Didier Briel
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -27,6 +28,8 @@
 
 package org.omegat.core.threads;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.logging.Level;
@@ -44,19 +47,34 @@ import org.omegat.util.Preferences;
  * @author Keith Godfrey
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
+ * @author Aaron Madlon-Kay
  */
 public class SaveThread extends Thread implements IAutoSave {
     private static final Logger LOGGER = Logger.getLogger(SaveThread.class.getName());
 
-    private static final int SAVE_DURATION = Preferences.getPreferenceDefault(
-                        Preferences.AUTO_SAVE_INTERVAL,        // Preferences are in seconds,
-                        Preferences.AUTO_SAVE_DEFAULT) * 1000; // save duration is in milliseconds
-
+    /** The length the thread should wait in milliseconds */
+    private int waitDuration;
     private boolean needToSaveNow;
     private boolean enabled;
 
     public SaveThread() {
         setName("Save thread");
+        setWaitDuration(Preferences.getPreferenceDefault(Preferences.AUTO_SAVE_INTERVAL, Preferences.AUTO_SAVE_DEFAULT));
+        Preferences.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if (evt.getPropertyName().equals(Preferences.AUTO_SAVE_INTERVAL)) {
+                    setWaitDuration((Integer) evt.getNewValue());
+                    synchronized (SaveThread.this) {
+                        SaveThread.this.notify();
+                    }
+                }
+            }
+        });
+    }
+
+    private void setWaitDuration(int seconds) {
+        waitDuration = seconds * 1000;
     }
 
     public synchronized void disable() {
@@ -80,7 +98,7 @@ public class SaveThread extends Thread implements IAutoSave {
                     // clear this flag also.
                     needToSaveNow = true;
                     // sleep
-                    wait(SAVE_DURATION);
+                    wait(waitDuration);
                 }
                 if (needToSaveNow && enabled) {
                     // Wait finished by time and autosaving enabled.

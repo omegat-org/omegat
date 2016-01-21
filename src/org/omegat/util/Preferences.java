@@ -34,6 +34,8 @@
 
 package org.omegat.util;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -414,7 +416,8 @@ public class Preferences {
         m_loaded = false;
         m_preferenceMap = new HashMap<String, Integer>(64);
         m_nameList = new ArrayList<String>(32);
-        m_valList = new ArrayList<String>(32);
+        m_valList = new ArrayList<Object>(32);
+        m_propChangeSupport = new PropertyChangeSupport(Preferences.class);
         m_changed = false;
         doLoad();
     }
@@ -436,12 +439,12 @@ public class Preferences {
             doLoad();
 
         Integer i = m_preferenceMap.get(key);
-        String v = "";
+        Object v = "";
         if (i != null) {
             // mapping exists - recover defaultValue
             v = m_valList.get(i);
         }
-        return v;
+        return v.toString();
     }
     
 	/**
@@ -587,81 +590,49 @@ public class Preferences {
     }
 
     /**
-     * Sets the value of some preference.
+     * Sets the value of some preference. The value will be persisted to disk as
+     * XML, serialized via value.toString().
      * 
      * @param name
      *            preference key name, usually Preferences.PREF_...
      * @param value
-     *            preference value as a string
+     *            preference value as an object
      */
-    public static void setPreference(String name, String value) {
-        m_changed = true;
-        if (!StringUtil.isEmpty(name) && value != null) {
-            if (!m_loaded)
-                doLoad();
-            Integer i = m_preferenceMap.get(name);
-            if (i == null) {
-                // defaultValue doesn't exist - add it
-                i = m_valList.size();
-                m_preferenceMap.put(name, i);
-                m_valList.add(value);
-                m_nameList.add(name);
-            } else {
-                // mapping exists - reset defaultValue to new
-                m_valList.set(i.intValue(), value);
+    public static void setPreference(String name, Object value) {
+        if (StringUtil.isEmpty(name) || value == null) {
+            return;
+        }
+        if (value instanceof Enum) {
+            if (!value.toString().equals(((Enum<?>) value).name())) {
+                throw new IllegalArgumentException("Enum prefs must return the same thing from toString() and name()");
             }
         }
-    }
-
-    /**
-     * Sets the value of some preference.
-     * 
-     * @param name
-     *            preference key name, usually Preferences.PREF_...
-     * @param value
-     *            preference value as enum
-     */
-    public static void setPreference(String name, Enum<?> value) {
         m_changed = true;
-        if (!StringUtil.isEmpty(name) && value != null) {
-            if (!m_loaded)
-                doLoad();
-            Integer i = m_preferenceMap.get(name);
-            if (i == null) {
-                // defaultValue doesn't exist - add it
-                i = m_valList.size();
-                m_preferenceMap.put(name, i);
-                m_valList.add(value.name());
-                m_nameList.add(name);
-            } else {
-                // mapping exists - reset defaultValue to new
-                m_valList.set(i.intValue(), value.name());
-            }
+        Object oldValue = null;
+        if (!m_loaded) {
+            doLoad();
         }
+        Integer i = m_preferenceMap.get(name);
+        if (i == null) {
+            // defaultValue doesn't exist - add it
+            i = m_valList.size();
+            m_preferenceMap.put(name, i);
+            m_valList.add(value);
+            m_nameList.add(name);
+        } else {
+            // mapping exists - reset defaultValue to new
+            oldValue = m_valList.set(i.intValue(), value);
+        }
+        m_propChangeSupport.firePropertyChange(name, oldValue, value);
     }
 
     /**
-     * Sets the boolean value of some preference.
+     * Register to receive notifications when preferences change.
      * 
-     * @param name
-     *            preference key name, usually Preferences.PREF_...
-     * @param boolvalue
-     *            preference defaultValue as a boolean
+     * @param listener
      */
-    public static void setPreference(String name, boolean boolvalue) {
-        setPreference(name, String.valueOf(boolvalue));
-    }
-
-    /**
-     * Sets the int value of some preference.
-     * 
-     * @param name
-     *            preference key name, usually Preferences.PREF_...
-     * @param intvalue
-     *            preference value as an integer
-     */
-    public static void setPreference(String name, int intvalue) {
-        setPreference(name, String.valueOf(intvalue));
+    public static void addPropertyChangeListener(PropertyChangeListener listener) {
+        m_propChangeSupport.addPropertyChangeListener(listener);
     }
 
     public static SRX getSRX() {
@@ -847,7 +818,7 @@ public class Preferences {
     
             for (int i = 0; i < m_nameList.size(); i++) {
                 String name = m_nameList.get(i);
-                String val = StringUtil.makeValidXML(m_valList.get(i));
+                String val = StringUtil.makeValidXML(m_valList.get(i).toString());
                 out.write("    <" + name + ">");
                 out.write(val);
                 out.write("</" + name + ">\n");
@@ -866,8 +837,11 @@ public class Preferences {
     // use a hash map for fast lookup of data
     // use array lists for orderly recovery of it for saving to disk
     private static List<String> m_nameList;
-    private static List<String> m_valList;
+    private static List<Object> m_valList;
     private static Map<String, Integer> m_preferenceMap;
+
+    // Support for firing property change events
+    private static PropertyChangeSupport m_propChangeSupport;
 
     private static SRX srx;
 }

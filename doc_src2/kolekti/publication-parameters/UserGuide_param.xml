@@ -5,7 +5,7 @@
   <profiles>
     <profile enabled="1">
       <label>Profil1</label>
-      <dir value="Profil1_folder"/>
+      <dir value="{LANG}"/>
       <criteria>
         <criterion code="OS"/>
         <criterion code="F"/>
@@ -14,7 +14,7 @@
   </profiles>
   <scripts>
     <script name="WebHelp5" enabled="1">
-      <filename>WebhelpAllInOne</filename>
+      <filename>WebhelpAllInOne_{LANG}</filename>
       <parameters>
         <parameter name="template" value="omegat"/>
         <parameter name="css" value="WebHelp5"/>

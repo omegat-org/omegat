@@ -27,16 +27,19 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import javax.swing.AbstractAction;
 
+import javax.swing.AbstractAction;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JColorChooser;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
@@ -86,6 +89,14 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         });
         colorStylesListValueChanged(null);
         DockingUI.displayCentered(this);
+        colorStylesList.setCellRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+                    boolean cellHasFocus) {
+                return super.getListCellRendererComponent(list, ((EditorColor) value).getDisplayName(), index,
+                        isSelected, cellHasFocus);
+            }
+        });
     }
 
     private void configureColorChooser() {

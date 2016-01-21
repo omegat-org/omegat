@@ -130,8 +130,7 @@ public final class Styles {
             return defaultColor;
         }
 
-        @Override
-        public String toString() {
+        public String getDisplayName() {
             try {
                 return OStrings.getString(name());
             } catch (MissingResourceException ex) {

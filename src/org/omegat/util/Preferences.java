@@ -34,6 +34,7 @@
 
 package org.omegat.util;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.BufferedReader;
@@ -416,7 +417,7 @@ public class Preferences {
         m_loaded = false;
         m_preferenceMap = new HashMap<String, Integer>(64);
         m_nameList = new ArrayList<String>(32);
-        m_valList = new ArrayList<Object>(32);
+        m_valList = new ArrayList<String>(32);
         m_propChangeSupport = new PropertyChangeSupport(Preferences.class);
         m_changed = false;
         doLoad();
@@ -617,17 +618,22 @@ public class Preferences {
             // defaultValue doesn't exist - add it
             i = m_valList.size();
             m_preferenceMap.put(name, i);
-            m_valList.add(value);
+            m_valList.add(value.toString());
             m_nameList.add(name);
         } else {
             // mapping exists - reset defaultValue to new
-            oldValue = m_valList.set(i.intValue(), value);
+            oldValue = m_valList.set(i.intValue(), value.toString());
         }
         m_propChangeSupport.firePropertyChange(name, oldValue, value);
     }
 
     /**
      * Register to receive notifications when preferences change.
+     * <p>
+     * Note: The value returned by {@link PropertyChangeEvent#getNewValue()}
+     * will be of the "correct" type (Integer, Boolean, Enum, etc.) but the
+     * value returned by {@link PropertyChangeEvent#getOldValue()} will be the
+     * String equivalent for storing in XML.
      * 
      * @param listener
      */
@@ -837,7 +843,7 @@ public class Preferences {
     // use a hash map for fast lookup of data
     // use array lists for orderly recovery of it for saving to disk
     private static List<String> m_nameList;
-    private static List<Object> m_valList;
+    private static List<String> m_valList;
     private static Map<String, Integer> m_preferenceMap;
 
     // Support for firing property change events

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.6.0
 ----------------------------------------------------------------------
- 11 Enhancements
+ 12 Enhancements
   3 Bug fixes
 ----------------------------------------------------------------------
 3.6.0 vs 3.5.3
@@ -37,6 +37,10 @@
 
   - Filters for Java Properties XML and Schematron 
   https://sourceforge.net/p/omegat/feature-requests/1147/
+
+  Other changes:
+
+  - Filter for Wordpress XML export
 
   Bug fixes:
 

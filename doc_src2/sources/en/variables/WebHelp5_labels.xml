@@ -25,6 +25,10 @@
       <crit name="LANG" value="fr"/>
       <content>Attention</content>
     </value>
+    <value>
+      <crit name="LANG" value="en"/>
+      <content>Warning</content>
+    </value>
   </variable>
 
   <variable code="masquer">
@@ -341,6 +345,10 @@
     <value>
       <crit name="LANG" value="fr"/>
       <content>Sélection</content>
+    </value>
+    <value>
+      <crit name="LANG" value="en"/>
+      <content>Selection</content>
     </value>
   </variable>
 </variables>

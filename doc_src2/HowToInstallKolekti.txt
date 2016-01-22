@@ -87,11 +87,11 @@ With:
 
 -b BASE: path to the kolekti base (project) to use
 
--j JOB (optional) : path to the publication parameter file to use, replaces the value available in frame (toc) 
+-j JOB (optional) : path to the publication parameter file to use, replaces the value available in the table of contents (toc) 
 
 -l LANGUAGES: list of language codes to publish, separated by commas
 
-toc: frame to publish
+toc: table of contents to publish
 
 Command line example:
 kolekti -b C:\[...]\trunk\doc_src2 publish [-j JOB] -l fr,en C:\[...]\trunk\doc_src2\sources\{LANG}\tocs\UserGuide.html

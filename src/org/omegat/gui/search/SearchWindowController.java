@@ -10,7 +10,7 @@
                2012 Didier Briel
                2013 Aaron Madlon-Kay, Alex Buloichik
                2014 Aaron Madlon-Kay, Piotr Kulik
-               2015 Yu Tang
+               2015 Yu Tang, Aaron Madlon-Kay, Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -96,6 +96,7 @@ import org.openide.awt.Mnemonics;
  * @author Aaron Madlon-Kay
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Piotr Kulik
+ * @author Hiroshi Miura
  */
 @SuppressWarnings("serial")
 public class SearchWindowController {
@@ -643,6 +644,7 @@ public class SearchWindowController {
         Preferences.setPreference(Preferences.SEARCHWINDOW_NUMBER_OF_RESULTS,
                 ((Integer) form.m_numberOfResults.getValue()));
         Preferences.setPreference(Preferences.SEARCHWINDOW_EXCLUDE_ORPHANS, form.m_excludeOrphans.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_FULLHALFWIDTH_INSENSITIVE, form.m_fullHalfWidthInsensitive.isSelected());
 
         // search dir options
         Preferences.setPreference(Preferences.SEARCHWINDOW_DIR, form.m_dirField.getText());
@@ -844,6 +846,7 @@ public class SearchWindowController {
                 s.searchTranslated = false;
                 s.searchUntranslated = true;
             }
+            s.widthInsensitive = form.m_fullHalfWidthInsensitive.isSelected();
             break;
         case REPLACE:
             if (form.m_replaceExactSearchRB.isSelected()) {
@@ -864,6 +867,7 @@ public class SearchWindowController {
             s.searchUntranslated = false;
             s.replaceTranslated = true;
             s.replaceUntranslated = form.m_replaceUntranslated.isSelected();
+            s.widthInsensitive = form.m_fullHalfWidthInsensitive.isSelected();
             break;
         }
 
@@ -1017,6 +1021,7 @@ public class SearchWindowController {
                 OConsts.ST_MAX_SEARCH_RESULTS));
 
         form.m_excludeOrphans.setSelected(Preferences.isPreference(Preferences.SEARCHWINDOW_EXCLUDE_ORPHANS));
+        form.m_fullHalfWidthInsensitive.setSelected(Preferences.isPreference(Preferences.SEARCHWINDOW_FULLHALFWIDTH_INSENSITIVE));
         
         // if advanced options are enabled (e.g. author/date search),
         // let the user see them anyway. This is important because

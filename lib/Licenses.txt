@@ -110,3 +110,6 @@ under the MIT License.
 dictzip.jar is distributed under the GNU General Public License version 2.0
 and greater. It is a part of JDict v1.5 and its sources are available in OmegaT
 sources, in lib/sources/
+
+StringUtil uses code from the FullWidthConversionStep in the Okapi Framework
+(http://okapi.opentag.com/) under the GNU Public License version 2.1 or greater.

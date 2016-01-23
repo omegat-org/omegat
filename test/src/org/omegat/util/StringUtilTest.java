@@ -265,4 +265,27 @@ public class StringUtilTest extends TestCase {
         assertEquals(test, StringUtil.truncate(test, 3));
         assertEquals(test, StringUtil.truncate(test, 100));
     }
+
+    public void testNormalizeWidth() {
+        String test = "Foo 123 " // ASCII
+                + "\uFF26\uFF4F\uFF4F\u3000\uFF11\uFF12\uFF13 " // Full-width alphanumerics
+                + "\uFF01\uFF1F\uFF08\uFF09 " // Full-width punctuation
+                + "\u3371 " // Squared Latin Abbreviations
+                + "\u2100 " // Letter-Like Symbols
+                + "\u30AC\u30D1\u30AA " // Katakana
+                + "\uD55C\uAD6D\uC5B4 " // Full-width Hangul
+                + "\u314E\u314F\u3134"; // Full-width Jamo
+        assertEquals("Foo 123 Foo 123 !?() hPa a/c \u30AC\u30D1\u30AA \uD55C\uAD6D\uC5B4 \u314E\u314F\u3134",
+                StringUtil.normalizeWidth(test));
+        test = "\uFF26\uFF4F\uFF4F\u3000\uFF11\uFF12\uFF13 " // Full-width alphanumerics
+                + "Foo 123 !?() " // ASCII
+                + "\uFF76\uFF9E\uFF8A\uFF9F\uFF75 " // Half-width Katakana
+                + "\uFFBE\uFFC2\uFFA4"; // Half-width Jamo
+        assertEquals("Foo 123 Foo 123 !?() \u30AC\u30D1\u30AA \u314E\uFFC2\u3134",
+                StringUtil.normalizeWidth(test));
+        test = "\uff21\uff22\uff23\uff0e\uff11\uff12\uff13\uff04\uff01";
+        assertEquals("ABC.123$!", StringUtil.normalizeWidth(test));
+        test = "\u30a2\uff71\u30ac\uff76\u3099\u3000";
+        assertEquals("\u30a2\u30a2\u30ac\u30ac ", StringUtil.normalizeWidth(test));
+    }
 }

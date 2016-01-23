@@ -8,7 +8,7 @@
                2009 Didier Briel
                2010 Martin Fleurke, Antonio Vilei, Didier Briel
                2013 Alex Buloichik
-               2014 Aaron Madlon-Kay
+               2014-2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -63,6 +63,7 @@ public class SearchExpression {
     public boolean recursive = true;
     public SearchExpressionType searchExpressionType;
     public boolean caseSensitive = false;
+    public boolean widthInsensitive = true;
     public boolean spaceMatchNbsp = false;
     public boolean glossary = true;
     public boolean memory = true;

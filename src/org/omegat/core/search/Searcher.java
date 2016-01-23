@@ -9,6 +9,7 @@
                2010 Martin Fleurke, Antonio Vilei, Alex Buloichik, Didier Briel
                2013 Aaron Madlon-Kay, Alex Buloichik
                2014 Alex Buloichik, Piotr Kulik, Aaron Madlon-Kay
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -165,6 +166,13 @@ public class Searcher {
 
         // determine pattern matching flags
         int flags = expression.caseSensitive ? 0 : Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;
+
+        // Normalize width of search string if width insensitivity is requested.
+        // Then, instead of modifying the regex, we also normalize the
+        // comparison strings later on.
+        if (m_searchExpression.widthInsensitive) {
+            text = StringUtil.normalizeWidth(text);
+        }
 
         // if exact search, just use the entire search string as a single
         // search string; otherwise, if keyword, break up the string into
@@ -585,9 +593,12 @@ public class Searcher {
      * 
      * @return True if the text string contains all search strings
      */
-    public boolean searchString(String text) {
-        if (text == null || m_matchers == null || m_matchers.isEmpty())
+    public boolean searchString(String origText) {
+        if (origText == null || m_matchers == null || m_matchers.isEmpty()) {
             return false;
+        }
+        
+        String text = m_searchExpression.widthInsensitive ? StringUtil.normalizeWidth(origText) : origText;
 
         foundMatches.clear();
         // check the text against all matchers
@@ -596,13 +607,25 @@ public class Searcher {
             // if one of the search strings is not found, don't
             // bother looking for the rest of the search strings
             matcher.reset(text);
-            if (!matcher.find())
+            if (!matcher.find()) {
                 return false;
+            }
 
             while (true) {
-                foundMatches.add(new SearchMatch(matcher.start(), matcher.end()));
-                int pos = matcher.start();
-                if (pos >= text.length() || !matcher.find(pos + 1)) {
+                int start = matcher.start();
+                // Check if we searched a string of different length from the
+                // original.
+                if (text != origText && text.length() != origText.length()) {
+                    // If so, and the preceding text from both strings doesn't
+                    // match, then we give up on highlighting this match because
+                    // the offsets will not match. We still return true so the
+                    // match will still be recorded.
+                    if (start >= origText.length() || !text.substring(0, start).equals(origText.substring(0, start))) {
+                        break;
+                    }
+                }
+                foundMatches.add(new SearchMatch(start, matcher.end()));
+                if (start >= text.length() || !matcher.find(start + 1)) {
                     break;
                 }
             }

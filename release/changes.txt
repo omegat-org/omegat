@@ -1,12 +1,15 @@
 ----------------------------------------------------------------------
  OmegaT 3.6.0
 ----------------------------------------------------------------------
- 12 Enhancements
+ 13 Enhancements
   3 Bug fixes
 ----------------------------------------------------------------------
 3.6.0 vs 3.5.3
 
   Implemented requests:  
+
+  - Allow width-insensitive search
+  https://sourceforge.net/p/omegat/feature-requests/140/
 
   - Re-use search window(s) with a shortcut
   https://sourceforge.net/p/omegat/feature-requests/142/

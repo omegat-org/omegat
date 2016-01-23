@@ -527,6 +527,7 @@ Custom strings from release\win32-specific must be added manually to the languag
             <classpath>
                 <pathelement path="build/genclasses" />
                 <pathelement path="build/classes" />
+            	<pathelement path="lib/commons-io-2.4.jar" />
             </classpath>
         </java>
         <copy todir="docs">

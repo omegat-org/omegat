@@ -164,7 +164,7 @@ public class Searcher {
         m_matchers = new ArrayList<Matcher>();
 
         // determine pattern matching flags
-        int flags = expression.caseSensitive ? 0 : Pattern.CASE_INSENSITIVE + Pattern.UNICODE_CASE;
+        int flags = expression.caseSensitive ? 0 : Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;
 
         // if exact search, just use the entire search string as a single
         // search string; otherwise, if keyword, break up the string into

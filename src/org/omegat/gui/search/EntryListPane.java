@@ -321,7 +321,7 @@ class EntryListPane extends JTextPane {
             }
             if (loc != null && !loc.equals("")) {
                 m_stringBuf.append("-- ");
-                if (targetMatches != null) {
+                if (targetMatches != null && targetMatches.length > 0) {
                     // Save first match position to select it in Editor pane later
                     if (num > 0) {
                         SearchMatch m = targetMatches[0];

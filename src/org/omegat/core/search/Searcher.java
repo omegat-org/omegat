@@ -611,19 +611,15 @@ public class Searcher {
                 return false;
             }
 
+            // Check if we searched a string of different length from the
+            // original. If so, then we give up on highlighting this hit
+            // because the offsets and length will not match. We still return
+            // true so the hit will still be recorded.
+            if (text != origText && text.length() != origText.length()) {
+                continue;
+            }
             while (true) {
                 int start = matcher.start();
-                // Check if we searched a string of different length from the
-                // original.
-                if (text != origText && text.length() != origText.length()) {
-                    // If so, and the preceding text from both strings doesn't
-                    // match, then we give up on highlighting this match because
-                    // the offsets will not match. We still return true so the
-                    // match will still be recorded.
-                    if (start >= origText.length() || !text.substring(0, start).equals(origText.substring(0, start))) {
-                        break;
-                    }
-                }
                 foundMatches.add(new SearchMatch(start, matcher.end()));
                 if (start >= text.length() || !matcher.find(start + 1)) {
                     break;

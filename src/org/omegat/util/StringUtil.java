@@ -567,95 +567,15 @@ public class StringUtil {
     // is nessesary to map one-by-one.
     private static final Map<Integer, String> fullHalfConvertMap = new HashMap<Integer, String>() {
         {
+            // Full/half width space
             put(0x0020, "(\u0020|\u3000)");
-            /*
-             * Not nessary convert because of normalizer convert to NFKC
-             * but leave here for clarify what intend to doing.
-            // Half width Katakana
-            put(0xFF61, "(\uFF61|\u3002)");
-            put(0xFF62, "(\uFF62|\u300C)");
-            put(0xFF63, "(\uFF63|\u300D)");
-            put(0xFF64, "(\uFF64|\u3001)");
-            put(0xFF65, "(\uFF65|\u30FB)");
-            put(0xFF66, "(\uFF66|\u30F2)");
-            put(0xFF67, "(\uFF67|\u30A1)");
-            put(0xFF68, "(\uFF68|\u30A3)");
-            put(0xFF69, "(\uFF69|\u30A5)");
-            put(0xFF6A, "(\uFF6A|\u30A7)");
-            put(0xFF6B, "(\uFF6B|\u30A9)");
-            put(0xFF6C, "(\uFF6C|\u30E3)");
-            put(0xFF6D, "(\uFF6D|\u30E5)");
-            put(0xFF6E, "(\uFF6E|\u30E7)");
-            put(0xFF6F, "(\uFF6F|\u30C3)");
-            put(0xFF70, "(\uFF70|\u30FC)");
-            put(0xFF71, "(\uFF71|\u30A2)");
-            put(0xFF72, "(\uFF72|\u30A4)");
-            put(0xFF73, "(\uFF73|\u30A6)");
-            put(0xFF74, "(\uFF74|\u30A8)");
-            put(0xFF75, "(\uFF75|\u30AA)");
-            put(0xFF76, "(\uFF76|\u30AB)");
-            put(0xFF77, "(\uFF77|\u30AD)");
-            put(0xFF78, "(\uFF78|\u30AF)");
-            put(0xFF79, "(\uFF79|\u30B1)");
-            put(0xFF7A, "(\uFF7A|\u30B3)");
-            put(0xFF7B, "(\uFF7B|\u30B5)");
-            put(0xFF7C, "(\uFF7C|\u30B7)");
-            put(0xFF7D, "(\uFF7D|\u30B9)");
-            put(0xFF7E, "(\uFF7E|\u30BB)");
-            put(0xFF7F, "(\uFF7F|\u30BD)");
-            put(0xFF80, "(\uFF80|\u30BF)");
-            put(0xFF81, "(\uFF81|\u30C1)");
-            put(0xFF82, "(\uFF82|\u30C4)");
-            put(0xFF83, "(\uFF83|\u30C6)");
-            put(0xFF84, "(\uFF84|\u30C8)");
-            put(0xFF85, "(\uFF85|\u30CA)");
-            put(0xFF86, "(\uFF86|\u30CB)");
-            put(0xFF87, "(\uFF87|\u30CC)");
-            put(0xFF88, "(\uFF88|\u30CD)");
-            put(0xFF89, "(\uFF89|\u30CE)");
-            put(0xFF8A, "(\uFF8A|\u30CF)");
-            put(0xFF8B, "(\uFF8B|\u30D2)");
-            put(0xFF8C, "(\uFF8C|\u30D5)");
-            put(0xFF8D, "(\uFF8D|\u30D8)");
-            put(0xFF8E, "(\uFF8E|\u30DB)");
-            put(0xFF8F, "(\uFF8F|\u30DE)");
-            put(0xFF90, "(\uFF90|\u30DF)");
-            put(0xFF91, "(\uFF91|\u30E0)");
-            put(0xFF92, "(\uFF92|\u30E1)");
-            put(0xFF93, "(\uFF93|\u30E2)");
-            put(0xFF94, "(\uFF94|\u30E4)");
-            put(0xFF95, "(\uFF95|\u30E6)");
-            put(0xFF96, "(\uFF96|\u30E8)");
-            put(0xFF97, "(\uFF97|\u30E9)");
-            put(0xFF98, "(\uFF98|\u30EA)");
-            put(0xFF99, "(\uFF99|\u30EB)");
-            put(0xFF9A, "(\uFF9A|\u30EC)");
-            put(0xFF9B, "(\uFF9B|\u30ED)");
-            put(0xFF9C, "(\uFF9C|\u30EF)");
-            put(0xFF9D, "(\uFF9D|\u30F3)");
-            put(0xFF9E, "(\uFF9E|\u3099)");
-            put(0xFF9F, "(\uFF9F|\u309A)");
-            // Half width Hangul
-            put(0xFFA0, "(\uFFA0|\u3164)");
-            put(0xFFDA, "(\uFFDA|\u3161)");
-            put(0xFFDB, "(\uFFDB|\u3162)");
-            put(0xFFDC, "(\uFFDC|\u3163)");
-            // Others
-            put(0xFFE8, "(\uFFE8|\u2502)");
-            put(0xFFE9, "(\uFFE9|\u2190)");
-            put(0xFFEA, "(\uFFEA|\u2191)");
-            put(0xFFEB, "(\uFFEB|\u2192)");
-            put(0xFFEC, "(\uFFEC|\u2193)");
-            put(0xFFED, "(\uFFED|\u25A0)");
-            put(0xFFEE, "(\uFFEE|\u25CB)");
-            */
-            // Full width space
             put(0x3000, "(\u3000|\u0020)");
-            // Katakana
+            // CJK Symbols and punctuation
             put(0x3002, "(\u3002|\uFF61)");
             put(0x300C, "(\u300C|\uFF62)");
             put(0x300D, "(\u300D|\uFF63)");
             put(0x3001, "(\u3001|\uFF64)");
+            // Katakana
             put(0x30FB, "(\u30FB|\uFF65)");
             put(0x30F2, "(\u30F2|\uFF66)");
             put(0x30A1, "(\u30A1|\uFF67)");
@@ -751,11 +671,29 @@ public class StringUtil {
             put(0x30F8, "(\u30F8|\u30F0\u3099)");
             put(0x30F9, "(\u30F9|\u30F1\u3099)");
             put(0x30FA, "(\u30FA|\u30F2\u3099)");
-            // Hangul
-            put(0x3164, "(\u3164|\uFFA0)");
+            // Hangul compatibility Jamo
+            put(0x314F, "(\u314F|\uFFC2)");
+            put(0x3150, "(\u3150|\uFFC3)");
+            put(0x3151, "(\u3151|\uFFC4)");
+            put(0x3152, "(\u3152|\uFFC5)");
+            put(0x3153, "(\u3153|\uFFC6)");
+            put(0x3154, "(\u3154|\uFFC7)");
+            put(0x3155, "(\u3155|\uFFCA)");
+            put(0x3156, "(\u3156|\uFFCB)");
+            put(0x3157, "(\u3157|\uFFCC)");
+            put(0x3158, "(\u3158|\uFFCD)");
+            put(0x3159, "(\u3159|\uFFCE)");
+            put(0x315A, "(\u315A|\uFFCF)");
+            put(0x315B, "(\u315B|\uFFD2)");
+            put(0x315C, "(\u315C|\uFFD3)");
+            put(0x315D, "(\u315D|\uFFD4)");
+            put(0x315E, "(\u315E|\uFFD5)");
+            put(0x315F, "(\u315F|\uFFD6)");
+            put(0x3160, "(\u3160|\uFFD7)");
             put(0x3161, "(\u3161|\uFFDA)");
             put(0x3162, "(\u3162|\uFFDB)");
             put(0x3163, "(\u3163|\uFFDC)");
+            put(0x3164, "(\u3164|\uFFA0)");
             // Others
             put(0x2502, "(\u2502|\uFFE8)");
             put(0x2190, "(\u2190|\uFFE9)");
@@ -764,6 +702,8 @@ public class StringUtil {
             put(0x2193, "(\u2193|\uFFEC)");
             put(0x25A0, "(\u25A0|\uFFED)");
             put(0x25CB, "(\u25CB|\uFFEE)");
+            put(0x2985, "(\u2985|\uFF5F)");
+            put(0x2986, "(\u2986|\uFF60)");
         }
     };
 

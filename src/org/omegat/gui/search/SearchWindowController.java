@@ -290,11 +290,15 @@ public class SearchWindowController {
         //
         // keep track of settings and only show what are valid choices
 
-        form.m_searchExactSearchRB.addActionListener(searchFieldRequestFocus);
+        form.m_searchExactSearchRB.addActionListener(searchFieldRequestFocusUpdateOption);
 
-        form.m_searchKeywordSearchRB.addActionListener(searchFieldRequestFocus);
+        form.m_searchKeywordSearchRB.addActionListener(searchFieldRequestFocusUpdateOption);
 
-        form.m_searchRegexpSearchRB.addActionListener(searchFieldRequestFocus);
+        form.m_searchRegexpSearchRB.addActionListener(searchFieldRequestFocusUpdateOption);
+
+        form.m_replaceExactSearchRB.addActionListener(searchFieldRequestFocusUpdateOption);
+
+        form.m_replaceRegexpSearchRB.addActionListener(searchFieldRequestFocusUpdateOption);
 
         form.m_searchCase.addActionListener(searchFieldRequestFocus);
         form.m_searchSpaceMatchNbsp.addActionListener(searchFieldRequestFocus);
@@ -338,6 +342,7 @@ public class SearchWindowController {
                     form.m_searchField.requestFocus();
             }
         });
+
         form.m_rbProject.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -435,6 +440,15 @@ public class SearchWindowController {
         public void actionPerformed(ActionEvent e) {
             // move focus to search edit field
             form.m_searchField.requestFocus();
+        }
+    };
+
+    ActionListener searchFieldRequestFocusUpdateOption = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // move focus to search edit field
+            form.m_searchField.requestFocus();
+            enableDisableFullHalfWidthInsensitive();
         }
     };
 
@@ -643,6 +657,7 @@ public class SearchWindowController {
         Preferences.setPreference(Preferences.SEARCHWINDOW_NUMBER_OF_RESULTS,
                 ((Integer) form.m_numberOfResults.getValue()));
         Preferences.setPreference(Preferences.SEARCHWINDOW_EXCLUDE_ORPHANS, form.m_excludeOrphans.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_FULLHALFWIDTH_INSENSITIVE, form.m_fullHalfWidthInsensitive.isSelected());
 
         // search dir options
         Preferences.setPreference(Preferences.SEARCHWINDOW_DIR, form.m_dirField.getText());
@@ -844,6 +859,7 @@ public class SearchWindowController {
                 s.searchTranslated = false;
                 s.searchUntranslated = true;
             }
+            s.fullHalfWidthInsensitive = form.m_fullHalfWidthInsensitive.isSelected();
             break;
         case REPLACE:
             if (form.m_replaceExactSearchRB.isSelected()) {
@@ -864,6 +880,7 @@ public class SearchWindowController {
             s.searchUntranslated = false;
             s.replaceTranslated = true;
             s.replaceUntranslated = form.m_replaceUntranslated.isSelected();
+            s.fullHalfWidthInsensitive = form.m_fullHalfWidthInsensitive.isSelected();
             break;
         }
 
@@ -1017,6 +1034,7 @@ public class SearchWindowController {
                 OConsts.ST_MAX_SEARCH_RESULTS));
 
         form.m_excludeOrphans.setSelected(Preferences.isPreference(Preferences.SEARCHWINDOW_EXCLUDE_ORPHANS));
+        form.m_fullHalfWidthInsensitive.setSelected(Preferences.isPreference(Preferences.SEARCHWINDOW_FULLHALFWIDTH_INSENSITIVE));
         
         // if advanced options are enabled (e.g. author/date search),
         // let the user see them anyway. This is important because
@@ -1027,12 +1045,19 @@ public class SearchWindowController {
         }
     }
 
+    private void enableDisableFullHalfWidthInsensitive() {
+        form.m_fullHalfWidthInsensitive.setEnabled(form.m_searchExactSearchRB.isSelected()
+            | form.m_searchKeywordSearchRB.isSelected()
+            | form.m_replaceExactSearchRB.isSelected());
+    }
+
     private void updateAdvancedOptionStatus() {
         form.m_authorField.setEditable(form.m_authorCB.isSelected());
         form.m_dateFromSpinner.setEnabled(form.m_dateFromCB.isSelected());
         form.m_dateFromButton.setEnabled(form.m_dateFromCB.isSelected());
         form.m_dateToSpinner.setEnabled(form.m_dateToCB.isSelected());
         form.m_dateToButton.setEnabled(form.m_dateToCB.isSelected());
+        enableDisableFullHalfWidthInsensitive();
     }
 
     /**

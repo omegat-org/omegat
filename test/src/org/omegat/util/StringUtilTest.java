@@ -265,4 +265,43 @@ public class StringUtilTest extends TestCase {
         assertEquals(test, StringUtil.truncate(test, 3));
         assertEquals(test, StringUtil.truncate(test, 100));
     }
+
+    public void testCreateFullHalfMatchExpression() {
+        String text = "\uff41\uff42\uff43";
+        assertEquals("Test for Full width Roman abc", "(a|\uff41)(b|\uff42)(c|\uff43)",
+            StringUtil.createFullHalfMatchExpression(text));
+        text = "\u1000";
+        assertEquals(text, StringUtil.createFullHalfMatchExpression(text));
+        text = "abc";
+        assertEquals("Test for ascii abc","(a|\uff41)(b|\uff42)(c|\uff43)",
+            StringUtil.createFullHalfMatchExpression(text));
+        text = "\u3000";
+        assertEquals("Test for Full width space", "(\u0020|\u3000)",
+            StringUtil.createFullHalfMatchExpression(text));
+        text = "\uff5c";
+        assertEquals("Test for ascii regex special char ",
+            "(\\||\uff5c)", StringUtil.createFullHalfMatchExpression(text));
+        text = "\ud840\udc0b\uff41";
+        assertEquals("Test for surrogate pair", "\ud840\udc0b(a|\uff41)",
+            StringUtil.createFullHalfMatchExpression(text));
+        text = "\uff76\uff9e";
+        assertEquals("Test for half-width voiced katakana",
+            "(\u30ac|\u30ab\u3099|\uff76\uff9e)",
+            StringUtil.createFullHalfMatchExpression(text));
+        text = "\u30ac";
+        assertEquals("Test for full-width katakana with voiced sound mark",
+            "(\u30ac|\u30ab\u3099|\uff76\uff9e)",
+            StringUtil.createFullHalfMatchExpression(text));
+        text = "\u30D1";
+        assertEquals("Test for full width katakana with semi voiced sound mark",
+            "(\u30D1|\u30CF\u309A|\uFF8A\uFF9F)",
+            StringUtil.createFullHalfMatchExpression(text));
+    }
+
+    public void testCodePoint2String() {
+        int cp = 0xff11;
+        assertEquals("\uff11", StringUtil.codePoint2String(cp));
+        cp = 0x2000b;
+        assertEquals("\ud840\udc0b", StringUtil.codePoint2String(cp));
+    }
 }

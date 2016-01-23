@@ -240,7 +240,7 @@ public class StringUtilTest extends TestCase {
 
     public void testCreateFullHalfMatchExpression() {
         String text = "\uff41\uff42\uff43";
-        assertEquals("Test for Full width Roman abc", "(\uff41|a)(\uff42|b)(\uff43|c)",
+        assertEquals("Test for Full width Roman abc", "(a|\uff41)(b|\uff42)(c|\uff43)",
             StringUtil.createFullHalfMatchExpression(text));
         text = "\u1000";
         assertEquals(text, StringUtil.createFullHalfMatchExpression(text));

@@ -43,7 +43,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import org.omegat.gui.dictionaries.IDictionaries;
+import org.omegat.gui.dictionaries.IDictionariesPane;
 import org.omegat.util.DirectoryMonitor;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
@@ -58,13 +58,13 @@ import org.omegat.util.OConsts;
 public class DictionariesManager implements DirectoryMonitor.Callback {
     public static final String IGNORE_FILE = "ignore.txt";
     protected DirectoryMonitor monitor;
-    protected final Map<String, DictionaryInfo> infos = new TreeMap<String, DictionaryInfo>();
-    private final IDictionaries pane;
+    protected final Map<String, IDictionary> infos = new TreeMap<String, IDictionary>();
+    private final IDictionariesPane pane;
     protected static String DICTIONARY_SUBDIR = "dictionary";
 
     protected final Set<String> ignoreWords = new TreeSet<String>();
 
-    public DictionariesManager(final IDictionaries pane) {
+    public DictionariesManager(final IDictionariesPane pane) {
         this.pane = pane;
     }
 
@@ -97,15 +97,18 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
                     loadIgnoreWords(file);
                 } else if (fn.endsWith(".ifo")) {
                     IDictionary dict = new StarDict(file);
-                    Map<String, Object> header = dict.readHeader();
                     synchronized (this) {
-                        infos.put(fn, new DictionaryInfo(dict, header));
+                        infos.put(fn, dict);
                     }
                 } else if (fn.endsWith(".dsl")) {
                     IDictionary dict = new LingvoDSL(file);
-                    Map<String, Object> header = dict.readHeader();
                     synchronized (this) {
-                        infos.put(fn, new DictionaryInfo(dict, header));
+                        infos.put(fn, dict);
+                    }
+                } else if (file.getName().toLowerCase().equals("catalogs")) {
+                    IDictionary dict = new EBDict(file);
+                    synchronized (this) {
+                        infos.put(fn, dict);
                     }
                 } else {
                     fn = null;
@@ -185,20 +188,20 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
      * @return articles list
      */
     public List<DictionaryEntry> findWords(Collection<String> words) {
-        List<DictionaryInfo> dicts;
+        List<IDictionary> dicts;
         synchronized (this) {
-            dicts = new ArrayList<DictionaryInfo>(infos.values());
+            dicts = new ArrayList<IDictionary>(infos.values());
         }
         List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
         for (String word : words) {
-            for (DictionaryInfo di : dicts) {
+            for (IDictionary di : dicts) {
                 try {
                     synchronized (ignoreWords) {
                         if (ignoreWords.contains(word)) {
                             continue;
                         }
                     }
-                    Object data = di.info.get(word);
+                    Object data = di.searchExactMatch(word);
                     if (data == null) {
                         String lowerCaseWord = word.toLowerCase();
                         synchronized (ignoreWords) {
@@ -206,16 +209,16 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
                                 continue;
                             }
                         }
-                        data = di.info.get(lowerCaseWord);
+                        data = di.searchExactMatch(lowerCaseWord);
                     }
                     if (data != null) {
                         if (data.getClass().isArray()) {
                             for (Object d : (Object[]) data) {
-                                String a = di.dict.readArticle(word, d);
+                                String a = di.readArticle(word, d);
                                 result.add(new DictionaryEntry(word, a));
                             }
                         } else {
-                            String a = di.dict.readArticle(word, data);
+                            String a = di.readArticle(word, data);
                             result.add(new DictionaryEntry(word, a));
                         }
                     }
@@ -225,15 +228,5 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
             }
         }
         return result;
-    }
-
-    protected static class DictionaryInfo {
-        public final IDictionary dict;
-        public final Map<String, Object> info;
-
-        public DictionaryInfo(final IDictionary dict, final Map<String, Object> info) {
-            this.dict = dict;
-            this.info = info;
-        }
     }
 }

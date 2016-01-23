@@ -76,7 +76,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
-public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEntry>> implements IDictionaries {
+public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEntry>> implements IDictionariesPane {
 
 	private static final String EXPLANATION = OStrings.getString("GUI_DICTIONARYWINDOW_explanation");
 

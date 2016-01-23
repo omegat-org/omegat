@@ -30,12 +30,13 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.omegat.gui.dictionaries.IDictionaries;
-
 import junit.framework.TestCase;
+
+import org.omegat.gui.dictionaries.IDictionariesPane;
 
 /**
  *
@@ -54,10 +55,9 @@ public class DictionariesManagerTest extends TestCase {
     
     @Before
     public void setUp() throws Exception {
-        manager = new DictionariesManager(new IDictionaries() {
+        manager = new DictionariesManager(new IDictionariesPane() {
             @Override
-            public void refresh() {
-            }
+            public void refresh() {}
         });
         PrintWriter fw = new PrintWriter(IGNORE_FILE, "UTF-8");
         fw.println(IGNORE_WORD);

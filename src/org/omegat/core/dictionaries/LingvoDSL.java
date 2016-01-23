@@ -46,14 +46,17 @@ public class LingvoDSL implements IDictionary {
 
     protected final File file;
 
-    public LingvoDSL(File file) {
+    protected Map<String, Object> result;
+
+    public LingvoDSL(File file) throws Exception {
         this.file = file;
+        readHeader();
     }
 
-    public Map<String, Object> readHeader() throws Exception {
+    private void readHeader() throws Exception {
         BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(file), CHARSET));
         try {
-            Map<String, Object> result = new HashMap<String, Object>();
+            result = new HashMap<String, Object>();
             String s;
             StringBuilder word = new StringBuilder();
             StringBuilder trans = new StringBuilder();
@@ -79,10 +82,23 @@ public class LingvoDSL implements IDictionary {
             if (word.length() > 0) {
                 result.put(word.toString(), trans.toString());
             }
-            return result;
         } finally {
             rd.close();
         }
+    }
+
+    public int size() {
+        return result.size();
+    }
+
+    /**
+     * Search with exact word match.
+     *
+     * @param key
+     * @return result Object which is String or String[]
+     */
+    public Object searchExactMatch(String key) {
+        return result.get(key);
     }
 
     public String readArticle(String word, Object articleData) throws Exception {

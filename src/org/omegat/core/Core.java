@@ -43,7 +43,7 @@ import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.comments.CommentsTextArea;
 import org.omegat.gui.comments.IComments;
 import org.omegat.gui.dictionaries.DictionariesTextArea;
-import org.omegat.gui.dictionaries.IDictionaries;
+import org.omegat.gui.dictionaries.IDictionariesPane;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.autotext.Autotext;
@@ -193,7 +193,7 @@ public class Core {
         return comments;
     }
     
-    public static IDictionaries getDictionaries() {
+    public static IDictionariesPane getDictionaries() {
         return dictionaries;
     }
     

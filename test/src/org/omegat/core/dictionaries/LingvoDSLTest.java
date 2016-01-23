@@ -44,12 +44,11 @@ public class LingvoDSLTest extends TestCase {
     @Test
     public void testReadFileDict() throws Exception {
         LingvoDSL l = new LingvoDSL(new File(TEST_DICT));
-        Map<String, Object> map = l.readHeader();
-        assertEquals(6, map.size());
+        assertEquals(6, l.size());
 
         String word = "space";
         String expect = "Only a single white space on first character\n";
-        Object data = map.get(word);
+        Object data = l.searchExactMatch(word);
         assertNotNull(data);
         String result = l.readArticle(word, data);
         assertEquals(expect, result);
@@ -58,10 +57,9 @@ public class LingvoDSLTest extends TestCase {
     @Test
     public void testReadArticle1() throws Exception {
         LingvoDSL l = new LingvoDSL(new File(TEST_DICT));
-        Map<String, Object> map = l.readHeader();
         String word = "tab";
         String expect = "Translation line also can have a single TAB char\n";
-        Object data = map.get(word);
+        Object data = l.searchExactMatch(word);
         String result = l.readArticle(word, data);
         assertEquals(expect, result);
     }
@@ -69,9 +67,8 @@ public class LingvoDSLTest extends TestCase {
     @Test
     public void testReadArticleRussian() throws Exception {
         LingvoDSL l = new LingvoDSL(new File(TEST_DICT));
-        Map<String, Object> map = l.readHeader();
         String word = "tool";
-        Object data = map.get(word);
+        Object data = l.searchExactMatch(word);
         assertNotNull(data);
         String result = l.readArticle(word, data);
         assertEquals("\u0441\u0442\u0430\u043d\u043e\u043a\n", result);

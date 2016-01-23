@@ -25,7 +25,7 @@
 
 package org.omegat.gui.dictionaries;
 
-public interface IDictionaries {
+public interface IDictionariesPane {
     /**
      * Refresh content on dictionary file changed.
      */

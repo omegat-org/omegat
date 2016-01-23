@@ -251,6 +251,11 @@ public class StringUtilTest extends TestCase {
         assertEquals("(\uff5c|\\|)", StringUtil.createFullHalfMatchExpression(text));
         text = "\ud840\udc0b\uff41";
         assertEquals("\ud840\udc0b(\uff41|a)", StringUtil.createFullHalfMatchExpression(text));
+        text = "\uff76\uff9e";
+        assertEquals("(\uff76\uff9e|\u30ac)", StringUtil.createFullHalfMatchExpression(text));
+        text = "\u30ac";
+        assertEquals("(\u30ac|\uff76\uff9e)", StringUtil.createFullHalfMatchExpression(text));
+
     }
 
     public void testCodePoint2String() {

@@ -208,9 +208,15 @@ public class Searcher {
                             : text.substring(wordStart, spacePos).trim();
 
                     if (!word.isEmpty()) {
-                        // escape the word, if it's not supposed to be a regular
-                        // expression
-                        word = StaticUtils.escapeNonRegex(word, false);
+                        if (!expression.fullHalfWidthInsensitive) {
+                            // escape the search string, it's not supposed to be a regular
+                            // expression
+                            word = StaticUtils.escapeNonRegex(word, false);
+                        } else {
+                            // handle half-width and full-width character insensitive match
+                            // create regex expression to match both
+                            word = StringUtil.createFullHalfMatchExpression(word);
+                        }
 
                         // create a matcher for the word
                         m_matchers.add(Pattern.compile(word, flags).matcher(""));

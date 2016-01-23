@@ -526,7 +526,7 @@ public class StringUtil {
      * @return String expresssion such as '(A|\uff21)(B|\uff22)(C|\uff23)'
      **/
     public static String createFullHalfMatchExpression(String text) {
-        StringBuilder sb = new StringBuilder(Normalizer.normalize(text, Normalizer.Form.NFKC));
+        StringBuilder sb = new StringBuilder(normalizeUnicode(text));
         StringBuilder result = new StringBuilder();
 
         for (int cp, i = 0; i < sb.length(); i += Character.charCount(cp)) {

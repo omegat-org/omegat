@@ -240,22 +240,34 @@ public class StringUtilTest extends TestCase {
 
     public void testCreateFullHalfMatchExpression() {
         String text = "\uff41\uff42\uff43";
-        assertEquals("(\uff41|a)(\uff42|b)(\uff43|c)", StringUtil.createFullHalfMatchExpression(text));
+        assertEquals("Test for Full width Roman abc", "(a|\uff41)(b|\uff42)(c|\uff43)",
+            StringUtil.createFullHalfMatchExpression(text));
         text = "\u1000";
         assertEquals(text, StringUtil.createFullHalfMatchExpression(text));
         text = "abc";
-        assertEquals("(a|\uff41)(b|\uff42)(c|\uff43)", StringUtil.createFullHalfMatchExpression(text));
+        assertEquals("Test for ascii abc","(a|\uff41)(b|\uff42)(c|\uff43)",
+            StringUtil.createFullHalfMatchExpression(text));
         text = "\u3000";
-        assertEquals("(\u3000|\u0020)", StringUtil.createFullHalfMatchExpression(text));
+        assertEquals("Test for Full width space", "(\u0020|\u3000)",
+            StringUtil.createFullHalfMatchExpression(text));
         text = "\uff5c";
-        assertEquals("(\uff5c|\\|)", StringUtil.createFullHalfMatchExpression(text));
+        assertEquals("Test for ascii regex special char ",
+            "(\\||\uff5c)", StringUtil.createFullHalfMatchExpression(text));
         text = "\ud840\udc0b\uff41";
-        assertEquals("\ud840\udc0b(\uff41|a)", StringUtil.createFullHalfMatchExpression(text));
+        assertEquals("Test for surrogate pair", "\ud840\udc0b(a|\uff41)",
+            StringUtil.createFullHalfMatchExpression(text));
         text = "\uff76\uff9e";
-        assertEquals("(\uff76\uff9e|\u30ac)", StringUtil.createFullHalfMatchExpression(text));
+        assertEquals("Test for half-width voiced katakana",
+            "(\u30ac|\u30ab\u3099|\uff76\uff9e)",
+            StringUtil.createFullHalfMatchExpression(text));
         text = "\u30ac";
-        assertEquals("(\u30ac|\uff76\uff9e)", StringUtil.createFullHalfMatchExpression(text));
-
+        assertEquals("Test for full-width katakana with voiced sound mark",
+            "(\u30ac|\u30ab\u3099|\uff76\uff9e)",
+            StringUtil.createFullHalfMatchExpression(text));
+        text = "\u30D1";
+        assertEquals("Test for full width katakana with semi voiced sound mark",
+            "(\u30D1|\u30CF\u309A|\uFF8A\uFF9F)",
+            StringUtil.createFullHalfMatchExpression(text));
     }
 
     public void testCodePoint2String() {

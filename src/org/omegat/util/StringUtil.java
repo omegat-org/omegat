@@ -526,7 +526,7 @@ public class StringUtil {
      * @return String expresssion such as '(A|\uff21)(B|\uff22)(C|\uff23)'
      **/
     public static String createFullHalfMatchExpression(String text) {
-        StringBuilder sb = new StringBuilder(text);
+        StringBuilder sb = new StringBuilder(Normalizer.normalize(text, Normalizer.Form.NFKC));
         StringBuilder result = new StringBuilder();
 
         for (int cp, i = 0; i < sb.length(); i += Character.charCount(cp)) {
@@ -568,6 +568,9 @@ public class StringUtil {
     private static final Map<Integer, String> fullHalfConvertMap = new HashMap<Integer, String>() {
         {
             put(0x0020, "(\u0020|\u3000)");
+            /*
+             * Not nessary convert because of normalizer convert to NFKC
+             * but leave here for clarify what intend to doing.
             // Half width Katakana
             put(0xFF61, "(\uFF61|\u3002)");
             put(0xFF62, "(\uFF62|\u300C)");
@@ -645,9 +648,10 @@ public class StringUtil {
             put(0xFFEC, "(\uFFEC|\u2193)");
             put(0xFFED, "(\uFFED|\u25A0)");
             put(0xFFEE, "(\uFFEE|\u25CB)");
+            */
             // Full width space
             put(0x3000, "(\u3000|\u0020)");
-            // Katakana to half width
+            // Katakana
             put(0x3002, "(\u3002|\uFF61)");
             put(0x300C, "(\u300C|\uFF62)");
             put(0x300D, "(\u300D|\uFF63)");
@@ -670,47 +674,83 @@ public class StringUtil {
             put(0x30A8, "(\u30A8|\uFF74)");
             put(0x30AA, "(\u30AA|\uFF75)");
             put(0x30AB, "(\u30AB|\uFF76)");
+            put(0x30AC, "(\u30AC|\u30AB\u3099|\uFF76\uFF9E)");
             put(0x30AD, "(\u30AD|\uFF77)");
+            put(0x30AE, "(\u30AE|\u30AD\u3099|\uFF77\uFF9E)");
             put(0x30AF, "(\u30AF|\uFF78)");
+            put(0x30B0, "(\u30AF|\u30AF\u3099|\uFF78\uFF9E)");
             put(0x30B1, "(\u30B1|\uFF79)");
+            put(0x30B2, "(\u30B2|\u30B1\u3099|\uFF79\uFF9E)");
             put(0x30B3, "(\u30B3|\uFF7A)");
+            put(0x30B4, "(\u30B4|\u30B3\u3099|\uFF7A\uFF9E)");
             put(0x30B5, "(\u30B5|\uFF7B)");
+            put(0x30B6, "(\u30B6|\u30B5\u3099|\uFF7B\uFF9E)");
             put(0x30B7, "(\u30B7|\uFF7C)");
+            put(0x30B8, "(\u30B8|\u30B7\u3099|\uFF7C\uFF9E)");
             put(0x30B9, "(\u30B9|\uFF7D)");
+            put(0x30BA, "(\u30BA|\u30B9\u3099|\uFF7D\uFF9E)");
             put(0x30BB, "(\u30BB|\uFF7E)");
+            put(0x30BC, "(\u30BC|\u30BB\u3099|\uFF7E\uFF9E)");
             put(0x30BD, "(\u30BD|\uFF7F)");
+            put(0x30BE, "(\u30BE|\u30BD\u3099|\uFF7F\uFF9E)");
             put(0x30BF, "(\u30BF|\uFF80)");
+            put(0x30C0, "(\u30C0|\u30BF\u3099|\uFF80\uFF9E)");
             put(0x30C1, "(\u30C1|\uFF81)");
+            put(0x30C2, "(\u30C2|\u30C1\u3099|\uFF81\uFF9E)");
+            put(0x30C3, "(\u30C3|\uFF82)"); // katakana small tsu
             put(0x30C4, "(\u30C4|\uFF82)");
+            put(0x30C5, "(\u30C5|\u30C4\u3099|\uFF82\uFF9E)");
             put(0x30C6, "(\u30C6|\uFF83)");
+            put(0x30C7, "(\u30C7|\u30C6\u3099|\uFF83\uFF9E)");
             put(0x30C8, "(\u30C8|\uFF84)");
+            put(0x30C9, "(\u30C9|\u30C8\u3099|\uFF84\uFF9E)");
             put(0x30CA, "(\u30CA|\uFF85)");
             put(0x30CB, "(\u30CB|\uFF86)");
             put(0x30CC, "(\u30CC|\uFF87)");
             put(0x30CD, "(\u30CD|\uFF88)");
             put(0x30CE, "(\u30CE|\uFF89)");
             put(0x30CF, "(\u30CF|\uFF8A)");
+            put(0x30D0, "(\u30D0|\u30CF\u3099|\uFF8A\uFF9E)");
+            put(0x30D1, "(\u30D1|\u30CF\u309A|\uFF8A\uFF9F)");
             put(0x30D2, "(\u30D2|\uFF8B)");
+            put(0x30D3, "(\u30D3|\u30D2\u3099|\uFF8B\uFF9E)");
+            put(0x30D4, "(\u30D4|\u30D2\u309A|\uFF8B\uFF9F)");
             put(0x30D5, "(\u30D5|\uFF8C)");
+            put(0x30D6, "(\u30D6|\u30D5\u3099|\uFF8C\uFF9E)");
+            put(0x30D7, "(\u30D7|\u30D5\u309A|\uFF8C\uFF9F)");
             put(0x30D8, "(\u30D8|\uFF8D)");
+            put(0x30D9, "(\u30D9|\u30D8\u3099|\uFF8D\uFF9E)");
+            put(0x30DA, "(\u30DA|\u30D8\u309A|\uFF8D\uFF9F)");
             put(0x30DB, "(\u30DB|\uFF8E)");
+            put(0x30DC, "(\u30DC|\u30DB\u3099|\uFF8E\uFF9E)");
+            put(0x30DD, "(\u30DD|\u30DB\u309A|\uFF8E\uFF9F)");
             put(0x30DE, "(\u30DE|\uFF8F)");
             put(0x30DF, "(\u30DF|\uFF90)");
             put(0x30E0, "(\u30E0|\uFF91)");
             put(0x30E1, "(\u30E1|\uFF92)");
             put(0x30E2, "(\u30E2|\uFF93)");
+            put(0x30E3, "(\u30E3|\uFF94)");
             put(0x30E4, "(\u30E4|\uFF94)");
+            put(0x30E5, "(\u30E5|\uFF95)");
             put(0x30E6, "(\u30E6|\uFF95)");
+            put(0x30E7, "(\u30E7|\uFF96)");
             put(0x30E8, "(\u30E8|\uFF96)");
             put(0x30E9, "(\u30E9|\uFF97)");
             put(0x30EA, "(\u30EA|\uFF98)");
             put(0x30EB, "(\u30EB|\uFF99)");
             put(0x30EC, "(\u30EC|\uFF9A)");
             put(0x30ED, "(\u30ED|\uFF9B)");
+            put(0x30EE, "(\u30EE|\uFF9C)");
             put(0x30EF, "(\u30EF|\uFF9C)");
             put(0x30F3, "(\u30F3|\uFF9D)");
+            put(0x30F4, "(\u30F4|\u30A6\u3099|\uFF73\uFF9E)");
+            put(0x30F7, "(\u30F7|\u30EF\u3099|\uEF9C\uFF9E)");
             put(0x3099, "(\u3099|\uFF9E)");
             put(0x309A, "(\u309A|\uFF9F)");
+            // Kana with voiced mark; catch decomposite char
+            put(0x30F8, "(\u30F8|\u30F0\u3099)");
+            put(0x30F9, "(\u30F9|\u30F1\u3099)");
+            put(0x30FA, "(\u30FA|\u30F2\u3099)");
             // Hangul
             put(0x3164, "(\u3164|\uFFA0)");
             put(0x3161, "(\u3161|\uFFDA)");

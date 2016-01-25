@@ -1027,7 +1027,7 @@ public class SearchWindowController {
         // let the user see them anyway. This is important because
         // search results will be affected by these settings
         if (form.m_authorCB.isSelected() || form.m_dateFromCB.isSelected() || form.m_dateToCB.isSelected()
-                || form.m_excludeOrphans.isSelected()) {
+                || form.m_excludeOrphans.isSelected() || form.m_fullHalfWidthInsensitive.isSelected()) {
             setAdvancedOptionsVisible(true);
         }
     }

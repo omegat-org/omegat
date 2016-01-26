@@ -1,4 +1,4 @@
-Comment installer Kolekti
+﻿Comment installer Kolekti
 
 
 /// Installation de l'environnement ///
@@ -72,6 +72,8 @@ virtualenv --system-site-packages <nom de l'environnement>
 Installer avec pip :
 pip install git+https://github.com/kolekti/kolekti.git@dev
 
+Pour mettre à jour Kolekti par la suite, vous pouvez utiliser :
+pip install git+https://github.com/kolekti/kolekti.git@dev --upgrade--no-deps
 
 /// Publication du UserGuide (en ligne de commande) ///
 
@@ -91,7 +93,9 @@ Avec :
 
 toc : trame à publier
 
-Exemple de ligne de commande :
+Exemples de ligne de commande :
 kolekti -b C:\[...]\trunk\doc_src2 publish [-j JOB] -l fr,en C:\[...]\trunk\doc_src2\sources\{LANG}\tocs\UserGuide.html
+kolekti -b . publish [-j JOB] -l fr sources/{LANG}/tocs/UserGuide.html
+
 
 Il est possible d'avoir le détail des opérations en écrivant -v après kolekti.

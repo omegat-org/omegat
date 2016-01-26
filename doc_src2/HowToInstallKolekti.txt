@@ -74,6 +74,8 @@ virtualenv --system-site-packages <envname>
 Install via pip:
 pip install git+https://github.com/kolekti/kolekti.git@dev
 
+To update Kolekti later on, you can use:
+pip install git+https://github.com/kolekti/kolekti.git@dev --upgrade--no-deps
 
 /// Publication of the UserGuide (from the command line) ///
 
@@ -93,7 +95,8 @@ With:
 
 toc: table of contents to publish
 
-Command line example:
+Command line examples:
 kolekti -b C:\[...]\trunk\doc_src2 publish [-j JOB] -l fr,en C:\[...]\trunk\doc_src2\sources\{LANG}\tocs\UserGuide.html
+kolekti -b . publish [-j JOB] -l fr sources/{LANG}/tocs/UserGuide.html
 
 It is possible to get a verbose output by adding -v after kolekti.

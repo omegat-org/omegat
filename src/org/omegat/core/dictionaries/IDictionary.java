@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,40 +26,33 @@
 
 package org.omegat.core.dictionaries;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  * Interface for dictionary access.
- * 
+ * <p>
  * Each dictionary format reader should implement this interface. Each instance
  * of this interface represents one dictionary.
- * 
- * Simplest dictionay implementation can just read full dictionary data into
+ * <p>
+ * Simplest dictionary implementation can just read full dictionary data into
  * map, but we don't recommend it, because it's very memory consuming algorithm.
  * Recommended way is to just read article's names and store some short data,
  * like position in dictionary file, in the value of map. After that,
- * 'readArticle' method could read dictionary file. OS will cache dictionary
- * file against slow access.
+ * {@link #readArticles(String)} method could read dictionary file. OS will
+ * cache dictionary file against slow access.
  * 
- * @author Alex Buloichik <alex73mail@gmail.com>
+ * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public interface IDictionary {
-    /**
-     * Read dictionary's articles list on startup.
-     * 
-     * @return map where key is dictionary article, value is object which allows
-     *         to read article's data by readArticle method
-     */
-    Map<String, Object> readHeader() throws Exception;
 
     /**
      * Read article's text.
      * 
      * @param word
-     *            acticle name from key from readHeader method
-     * @param acticleData
-     *            object from value from readHeader method
-     * @return article text
+     *            The word to look up in the dictionary
+     * 
+     * @return List of entries. May be empty, but cannot be null.
      */
-    String readArticle(String word, Object acticleData) throws Exception;
+    List<DictionaryEntry> readArticles(String word) throws Exception;
 }

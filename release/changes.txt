@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.6.0
 ----------------------------------------------------------------------
- 13 Enhancements
+ 14 Enhancements
   3 Bug fixes
 ----------------------------------------------------------------------
 3.6.0 vs 3.5.3
@@ -31,6 +31,9 @@
 
   - Open help in external browser 
   https://sourceforge.net/p/omegat/feature-requests/397/
+
+  - Make it possible to create dictionary plugins
+  https://sourceforge.net/p/omegat/feature-requests/1145/
 
   - Improve editor performance with very large files
   https://sourceforge.net/p/omegat/feature-requests/1173/

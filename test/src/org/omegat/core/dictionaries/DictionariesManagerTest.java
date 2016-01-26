@@ -58,6 +58,12 @@ public class DictionariesManagerTest extends TestCase {
             @Override
             public void refresh() {
             }
+            @Override
+            public void addDictionaryFactory(IDictionaryFactory factory) {
+            }
+            @Override
+            public void removeDictionaryFactory(IDictionaryFactory factory) {
+            }
         });
         PrintWriter fw = new PrintWriter(IGNORE_FILE, "UTF-8");
         fw.println(IGNORE_WORD);

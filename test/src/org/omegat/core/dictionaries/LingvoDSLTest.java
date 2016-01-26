@@ -26,9 +26,10 @@
 package org.omegat.core.dictionaries;
 
 import java.io.File;
-import java.util.Map;
+import java.util.List;
 
 import org.junit.Test;
+import org.omegat.core.dictionaries.LingvoDSL.LingvoDSLDict;
 
 import junit.framework.TestCase;
 
@@ -36,6 +37,7 @@ import junit.framework.TestCase;
  * Dictionary test
  *
  * @author Hiroshi Miura
+ * @author Aaron Madlon-Kay
  */
 public class LingvoDSLTest extends TestCase {
 
@@ -43,37 +45,35 @@ public class LingvoDSLTest extends TestCase {
 
     @Test
     public void testReadFileDict() throws Exception {
-        LingvoDSL l = new LingvoDSL(new File(TEST_DICT));
-        Map<String, Object> map = l.readHeader();
-        assertEquals(6, map.size());
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(new File(TEST_DICT));
+        assertEquals(6, dict.data.size());
 
         String word = "space";
-        String expect = "Only a single white space on first character\n";
-        Object data = map.get(word);
+        String data = dict.data.get(word);
         assertNotNull(data);
-        String result = l.readArticle(word, data);
-        assertEquals(expect, result);
+        List<DictionaryEntry> result = dict.readArticles(word);
+        assertFalse(result.isEmpty());
+        assertEquals(word, result.get(0).getWord());
+        assertEquals("Only a single white space on first character\n", result.get(0).getArticle());
     }
 
     @Test
     public void testReadArticle1() throws Exception {
-        LingvoDSL l = new LingvoDSL(new File(TEST_DICT));
-        Map<String, Object> map = l.readHeader();
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(new File(TEST_DICT));
         String word = "tab";
-        String expect = "Translation line also can have a single TAB char\n";
-        Object data = map.get(word);
-        String result = l.readArticle(word, data);
-        assertEquals(expect, result);
+        List<DictionaryEntry> result = dict.readArticles(word);
+        assertFalse(result.isEmpty());
+        assertEquals(word, result.get(0).getWord());
+        assertEquals("Translation line also can have a single TAB char\n", result.get(0).getArticle());
     }
 
     @Test
     public void testReadArticleRussian() throws Exception {
-        LingvoDSL l = new LingvoDSL(new File(TEST_DICT));
-        Map<String, Object> map = l.readHeader();
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(new File(TEST_DICT));
         String word = "tool";
-        Object data = map.get(word);
-        assertNotNull(data);
-        String result = l.readArticle(word, data);
-        assertEquals("\u0441\u0442\u0430\u043d\u043e\u043a\n", result);
+        List<DictionaryEntry> result = dict.readArticles(word);
+        assertFalse(result.isEmpty());
+        assertEquals(word, result.get(0).getWord());
+        assertEquals("\u0441\u0442\u0430\u043d\u043e\u043a\n", result.get(0).getArticle());
     }
 }

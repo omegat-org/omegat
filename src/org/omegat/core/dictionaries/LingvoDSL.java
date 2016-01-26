@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -29,31 +30,41 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
  * Dictionary implementation for Lingvo DSL format.
  * 
- * Lingvo DSL format described in Lingvo help. See also http://www.dsleditor.narod.ru/art_03.htm(russian).
+ * Lingvo DSL format described in Lingvo help. See also
+ * http://www.dsleditor.narod.ru/art_03.htm(russian).
  * 
- * @author Alex Buloichik <alex73mail@gmail.com>
+ * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
-public class LingvoDSL implements IDictionary {
+public class LingvoDSL implements IDictionaryFactory {
     protected static final String CHARSET = "UTF-16";
     protected static final Pattern RE_SKIP = Pattern.compile("\\[.+?\\]");
+    protected static final String[] EMPTY_RESULT = new String[0];
 
-    protected final File file;
-
-    public LingvoDSL(File file) {
-        this.file = file;
+    @Override
+    public boolean isSupportedFile(File file) {
+        return file.getPath().endsWith(".dsl");
     }
 
-    public Map<String, Object> readHeader() throws Exception {
+    @Override
+    public IDictionary loadDict(File file) throws Exception {
+        return new LingvoDSLDict(loadData(file));
+    }
+
+    private static Map<String, String> loadData(File file) throws Exception {
         BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(file), CHARSET));
         try {
-            Map<String, Object> result = new HashMap<String, Object>();
+            Map<String, String> result = new HashMap<String, String>();
             String s;
             StringBuilder word = new StringBuilder();
             StringBuilder trans = new StringBuilder();
@@ -85,7 +96,23 @@ public class LingvoDSL implements IDictionary {
         }
     }
 
-    public String readArticle(String word, Object articleData) throws Exception {
-        return (String) articleData;
+    static class LingvoDSLDict implements IDictionary {
+        protected final Map<String, String> data;
+
+        private LingvoDSLDict(Map<String, String> data) throws Exception {
+            this.data = data;
+        }
+
+        @Override
+        public List<DictionaryEntry> readArticles(String word) throws Exception {
+            String article = data.get(word);
+            if (article == null) {
+                return Collections.emptyList();
+            }
+            DictionaryEntry entry = new DictionaryEntry(word, article);
+            List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
+            result.add(entry);
+            return result;
+        }
     }
 }

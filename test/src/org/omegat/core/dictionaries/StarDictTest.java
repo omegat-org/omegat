@@ -27,11 +27,11 @@
 package org.omegat.core.dictionaries;
 
 import java.io.File;
-import java.util.Map;
+import java.util.List;
 
 import org.junit.Test;
-
 import org.omegat.core.TestCore;
+import org.omegat.core.dictionaries.StarDict.StarDictDict;
 
 /**
  * Dictionary test
@@ -44,27 +44,30 @@ public class StarDictTest extends TestCore {
 
     @Test
     public void testReadFileDict() throws Exception {
-        StarDict s = new StarDict(new File("test/data/dicts/latin-francais.ifo"));
-        Map<String, Object> map = s.readHeader();
-        assertEquals(10451, map.size());
+        StarDictDict dict = (StarDictDict) new StarDict().loadDict(new File("test/data/dicts/latin-francais.ifo"));
+        assertEquals(10451, dict.data.size());
         
         String word = "testudo";
-        Object data = map.get(word);
+        Object data = dict.data.get(word);
         assertNotNull(data);
-        String result = s.readArticle(word, data);
-        assertEquals("dinis, f. : tortue", result);
+        List<DictionaryEntry> result = dict.readArticles(word);
+        assertFalse(result.isEmpty());
+        assertEquals(word, result.get(0).getWord());
+        assertEquals("dinis, f. : tortue", result.get(0).getArticle());
     }
     
     @Test
     public void testReadZipDict() throws Exception {
-        StarDict s = new StarDict(new File("test/data/dicts-zipped/latin-francais.ifo"));
-        Map<String, Object> map = s.readHeader();
-        assertEquals(10451, map.size());
+        StarDictDict dict = (StarDictDict) new StarDict()
+                .loadDict(new File("test/data/dicts-zipped/latin-francais.ifo"));
+        assertEquals(10451, dict.data.size());
         
         String word = "testudo";
-        Object data = map.get(word);
+        Object data = dict.data.get(word);
         assertNotNull(data);
-        String result = s.readArticle(word, data);
-        assertEquals("dinis, f. : tortue", result);
+        List<DictionaryEntry> result = dict.readArticles(word);
+        assertFalse(result.isEmpty());
+        assertEquals(word, result.get(0).getWord());
+        assertEquals("dinis, f. : tortue", result.get(0).getArticle());
     }
 }

@@ -73,7 +73,7 @@ Installer avec pip :
 pip install git+https://github.com/kolekti/kolekti.git@dev
 
 Pour mettre à jour Kolekti par la suite, vous pouvez utiliser :
-pip install git+https://github.com/kolekti/kolekti.git@dev --upgrade--no-deps
+pip install --upgrade --no-deps git+https://github.com/kolekti/kolekti.git@dev
 
 /// Publication du UserGuide (en ligne de commande) ///
 

@@ -178,11 +178,15 @@ public class Language implements Comparable<Object> {
     }
 
     /**
-     * Determine whether or not the language is space-delimited.
-     * Only Chinese and Japanese are not space-delimited.
+     * Determine whether or not the language is space-delimited. Only Chinese,
+     * Japanese, and Tibetan are not space-delimited.
+     * 
+     * @see <a href="https://linguistlist.org/issues/6/6-1302.html">LINGUIST
+     *      List 6.1302</a>
      */
     public boolean isSpaceDelimited() {
-        return !"ZH".equalsIgnoreCase(this.languageCode) && !"JA".equalsIgnoreCase(this.languageCode);
+        return !"ZH".equalsIgnoreCase(this.languageCode) && !"JA".equalsIgnoreCase(this.languageCode)
+                && !"BO".equalsIgnoreCase(this.languageCode);
     }
 
     // /////////////////////////////////////////////////////////////////////////

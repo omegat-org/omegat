@@ -7,6 +7,7 @@
                2007 Didier Briel, Zoltan Bartko
                2010-2011 Didier Briel
                2012 Guido Leenders
+               2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -35,24 +36,25 @@ import java.util.regex.Matcher;
  * This class is here, because the Locale has hard-coded '_' inside, and we must
  * adhere to ISO standard LL-CC.
  * <p>
- * This class tries to follow <a
- * href="http://www.lisa.org/standards/tmx/tmx.html#xml:lang">TMX Specification
- * on languages</a>, which is based on <a
- * href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066</a>, i.e.
+ * This class tries to follow
+ * <a href="http://www.lisa.org/standards/tmx/tmx.html#xml:lang">TMX
+ * Specification on languages</a>, which is based on
+ * <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066</a>, i.e.
  * <ul>
  * <li>Language is composed from 1-8 alpha (A-Za-z) chars, then "-", then 1-8
  * alpha/digit chars (A-Za-z0-9).
  * <li>Case insensitive
  * <li>Case is not altered by this class, even though there exist conventions
- * for capitalization ([ISO 3166] recommends that country codes are capitalized
- * (MN Mongolia), and [ISO 639] recommends that language codes are written in
+ * for capitalization (ISO 3166 recommends that country codes are capitalized
+ * (MN Mongolia), and ISO 639 recommends that language codes are written in
  * lower case (mn Mongolian)).
- * <ul>
+ * </ul>
  * 
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Zoltan Bartko bartkozoltan@bartkozoltan.com
  * @author Guido Leenders
+ * @author Aaron Madlon-Kay
  */
 public class Language implements Comparable<Object> {
     private Locale locale = new Locale("");

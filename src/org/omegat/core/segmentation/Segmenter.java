@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,9 +27,7 @@
 package org.omegat.core.segmentation;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
@@ -262,16 +261,21 @@ public final class Segmenter {
     }
 
     /**
-     * Glues the sentences back to paragraph.
+     * Glues segments back into a paragraph.
      * <p>
-     * As sentences are returned by {@link #segment(String, List)} without spaces before and after them, this
-     * method adds spaces if needed:
+     * As segments are returned by {@link #segment(String, List)} without spaces
+     * before and after them, this method adds spaces if needed:
      * <ul>
-     * <li>For translation to Japanese does <b>not</b> add any spaces. <br>
-     * A special exceptions are the Break SRX rules that break on space, i.e. before and after patterns
-     * consist of spaces (they get trimmed to an empty string). For such rules all the spaces are added
-     * <li>For translation from Japanese adds one space
-     * <li>For all other language combinations adds those spaces as were in the paragraph before.
+     * <li>For translation <i>to</i> non-space-delimited languages (Japanese,
+     * Chinese, Tibetan) it does <b>not</b> add any spaces.
+     * <p>
+     * A special exceptions are the Break SRX rules that break on space, i.e.
+     * before and after patterns consist of spaces (they get trimmed to an empty
+     * string). For such rules all the spaces are added.
+     * <li>For translation <i>from</i> non-space-delimited languages it adds one
+     * space.
+     * <li>For all other language combinations it restores the spaces present
+     * before segmenting.
      * </ul>
      * 
      * @param sentences
@@ -284,9 +288,9 @@ public final class Segmenter {
      */
     public static String glue(Language sourceLang, Language targetLang, List<String> sentences,
             List<StringBuilder> spaces, List<Rule> brules) {
-        if (sentences.size() <= 0)
+        if (sentences.size() <= 0) {
             return "";
-
+        }
         StringBuilder res = new StringBuilder();
         res.append(sentences.get(0));
 
@@ -295,11 +299,11 @@ public final class Segmenter {
             sp.append(spaces.get(2 * i - 1));
             sp.append(spaces.get(2 * i));
 
-            if (CJK_LANGUAGES.contains(targetLang.getLanguageCode().toUpperCase(Locale.ENGLISH))) {
+            if (!targetLang.isSpaceDelimited()) {
                 Rule rule = brules.get(i - 1);
                 if (res.length() > 0) {
                     char lastChar = res.charAt(res.length() - 1);
-                    Matcher matcher = CJK_LINE_BREAK_OR_TAB_PATTERN.matcher(sp.toString());
+                    Matcher matcher = LINE_BREAK_OR_TAB_PATTERN.matcher(sp.toString());
                     if (matcher.find()) {
                         // If we found line break or tab, trim left spaces.
                         // Right spaces are left for indentation of the next line.
@@ -313,10 +317,9 @@ public final class Segmenter {
                         sp.setLength(0);
                     }
                 }
-            } else if (CJK_LANGUAGES.contains(sourceLang.getLanguageCode().toUpperCase(Locale.ENGLISH))
-                    && sp.length() == 0)
+            } else if (!sourceLang.isSpaceDelimited() && sp.length() == 0) {
                 sp.append(" ");
-
+            }
             res.append(sp);
             res.append(sentences.get(i));
         }
@@ -347,12 +350,6 @@ public final class Segmenter {
 
     }
 
-    /** CJK languages. */
-    private static final Pattern CJK_LINE_BREAK_OR_TAB_PATTERN = Pattern.compile("^( *)[\\r\\n\\t]");
-    private static final Set<String> CJK_LANGUAGES = new HashSet<String>();
-    static {
-        CJK_LANGUAGES.add("ZH");
-        CJK_LANGUAGES.add("JA");
-        CJK_LANGUAGES.add("KO");
-    }
+    /** For non-space-delimited languages. */
+    private static final Pattern LINE_BREAK_OR_TAB_PATTERN = Pattern.compile("^( *)[\\r\\n\\t]");
 }

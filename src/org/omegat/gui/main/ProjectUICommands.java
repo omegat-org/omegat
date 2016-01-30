@@ -415,17 +415,24 @@ public class ProjectUICommands {
                 Core.getProject().saveProject();
                 ProjectFactory.closeProject();
 
+                boolean onlineMode = true;
                 if (repository != null) {
-                    new RepositoryUtils.AskCredentials() {
-                        public void callRepository() throws Exception {
-                            Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
-                            repository.updateFullProject();
-                            Core.getMainWindow().showStatusMessageRB(null);
-                        }
-                    }.execute(repository);
+                    try {
+                        new RepositoryUtils.AskCredentials() {
+                            public void callRepository() throws Exception {
+                                Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
+                                repository.updateFullProject();
+                                Core.getMainWindow().showStatusMessageRB(null);
+                            }
+                        }.execute(repository);
+                    } catch (IRemoteRepository.NetworkException ex) {
+                        onlineMode = false;
+                        Log.logInfoRB("VCS_OFFLINE");
+                        Core.getMainWindow().displayWarningRB("VCS_OFFLINE");
+                    }
                 }
 
-                ProjectFactory.loadProject(props, repository, true);
+                ProjectFactory.loadProject(props, repository, onlineMode);
                 mainWindow.setCursor(oldCursor);
                 return null;
             }

@@ -38,7 +38,7 @@ import java.util.TimeZone;
  * Date parser for the 'basic' ISO 8601 format that is advised for TMX dates.
  * There are many variations of the ISO8601 standard (the good thing about
  * standards is that there are so many to choose from :( ) The
- * <a href="http://www.lisa.org/fileadmin/standards/tmx1.4/tmx.htm#refISO8601">
+ * <a href="http://ttt.org/oscarstandards/tmx/#refISO8601">
  * TMX specification</a> refers to
  * <a href="http://www.w3.org/TR/1998/NOTE-datetime-19980827">the 'extended'
  * format</a>, but although referring to this standard, it recommends the

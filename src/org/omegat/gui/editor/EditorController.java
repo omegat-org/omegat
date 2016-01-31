@@ -644,7 +644,7 @@ public class EditorController implements IEditor {
         
         applyOrientationToEditor();
 
-        loadDocument(displayedEntryIndex);
+        loadDocument();
         activateEntry();
     }
 
@@ -705,24 +705,10 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * Displays the first {@link Preferences#EDITOR_INITIAL_SEGMENT_LOAD_COUNT}
-     * segments of the current document. Convenience method for
-     * {@link #loadDocument(int)}.
+     * Displays the {@link Preferences#EDITOR_INITIAL_SEGMENT_LOAD_COUNT}
+     * segments surrounding the entry with index {@link #displayedEntryIndex}.
      */
     protected void loadDocument() {
-        loadDocument(0);
-    }
-
-    /**
-     * Displays the {@link Preferences#EDITOR_INITIAL_SEGMENT_LOAD_COUNT}
-     * segments surrounding the specified index. If the segment at the specified
-     * index has not been loaded yet, the document is reloaded centered at that
-     * index.
-     * 
-     * @param initialIndex
-     *            The index around which to load the document
-     */
-    protected void loadDocument(int initialIndex) {
         UIThreadsUtil.mustBeSwingThread();
 
         // Currently displayed file
@@ -749,13 +735,13 @@ public class EditorController implements IEditor {
 
         Document3 doc = new Document3(this);
 
-        // Clamp initialSegment to actually available entries.
-        initialIndex = Math.max(0, Math.min(file.entries.size() - 1, initialIndex));
+        // Clamp displayedSegment to actually available entries.
+        displayedEntryIndex = Math.max(0, Math.min(file.entries.size() - 1, displayedEntryIndex));
         // Calculate start, end indices of a span of initialSegCount segments
         // centered around initialIndex and clamped to [0, file.entries.size()).
         final int initialSegCount = Preferences.getPreferenceDefault(Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT,
                 Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT_DEFAULT);
-        firstLoaded = Math.max(0, initialIndex - initialSegCount / 2);
+        firstLoaded = Math.max(0, displayedEntryIndex - initialSegCount / 2);
         lastLoaded = Math.min(file.entries.size() - 1, firstLoaded + initialSegCount - 1);
 
         // Create all SegmentBuilders now...
@@ -806,8 +792,6 @@ public class EditorController implements IEditor {
         markerController.process(m_docSegList);
 
         editor.repaint();
-
-        displayedEntryIndex = initialIndex;
     }
 
     /*
@@ -846,7 +830,7 @@ public class EditorController implements IEditor {
         // loading large swaths of the document at once, we then re-load the
         // document centered at the destination segment.
         if (!builder.hasBeenCreated()) {
-            loadDocument(displayedEntryIndex);
+            loadDocument();
             activateEntry(pos);
             return;
         }

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Alex Buloichik
+               2016 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -35,6 +36,7 @@ import org.omegat.util.Token;
  * Output filter for limit line length.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public class LineLengthLimitWriter extends Writer {
     public static String PLATFORM_LINE_SEPARATOR = System.getProperty("line.separator");
@@ -137,8 +139,7 @@ public class LineLengthLimitWriter extends Writer {
         }
         // try to break on the space ends
         int spacesStart = -1;
-        for (int i = 0; i < tokens.length; i++) {
-            Token t = tokens[i];
+        for (Token t : tokens) {
             if (t == null) {
                 // less than begin
                 continue;
@@ -158,8 +159,7 @@ public class LineLengthLimitWriter extends Writer {
             }
         }
         // try to break on the space boundaries
-        for (int i = 0; i < tokens.length; i++) {
-            Token t = tokens[i];
+        for (Token t : tokens) {
             if (t == null) {
                 // less than begin
                 continue;
@@ -178,8 +178,7 @@ public class LineLengthLimitWriter extends Writer {
             }
         }
         // impossible to break on space boundaries - break at any token, except brackets
-        for (int i = 0; i < tokens.length; i++) {
-            Token t = tokens[i];
+        for (Token t : tokens) {
             if (t == null) {
                 // less than begin
                 continue;
@@ -238,7 +237,11 @@ public class LineLengthLimitWriter extends Writer {
      * Write part of line to specified position, and change token offsets.
      */
     void breakAt(int pos, Token[] tokens) throws IOException {
-        out.write(str.toString(), 0, pos);
+        if (str.toString().substring(0, pos).endsWith(" ")) { // In case there is a trailing space,
+            out.write(str.toString(), 0, pos - 1);            // do not write it
+        } else {
+            out.write(str.toString(), 0, pos);
+        }
         str.delete(0, pos);
         if (str.length() > 0) {
             writeBreakEol();

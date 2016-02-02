@@ -237,4 +237,20 @@ public class StringUtilTest extends TestCase {
         // matchTo is mixed
         assertSame(text, StringUtil.matchCapitalization(text, "bAzZ", locale));
     }
+    
+    public void testRstrip() {
+        assertEquals("", StringUtil.rstrip(""));
+        assertEquals("", StringUtil.rstrip(" "));
+        assertEquals("ABC", StringUtil.rstrip("ABC"));
+        assertEquals("ABC", StringUtil.rstrip("ABC "));
+        assertEquals(" ABC", StringUtil.rstrip(" ABC "));
+        assertEquals("ABC", StringUtil.rstrip("ABC       "));
+        assertEquals("ABC\u00a0", StringUtil.rstrip("ABC\u00a0")); // U+00A0 NO-BREAK SPACE
+        try {
+            StringUtil.rstrip(null);
+            fail();
+        } catch (NullPointerException ex) {
+            // Should fail when stripping null string.
+        }
+    }
 }

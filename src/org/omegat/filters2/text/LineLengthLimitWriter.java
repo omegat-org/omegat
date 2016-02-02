@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.Writer;
 
 import org.omegat.tokenizer.ITokenizer;
+import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 
 /**
@@ -237,11 +238,8 @@ public class LineLengthLimitWriter extends Writer {
      * Write part of line to specified position, and change token offsets.
      */
     void breakAt(int pos, Token[] tokens) throws IOException {
-        if (str.toString().substring(0, pos).endsWith(" ")) { // In case there is a trailing space,
-            out.write(str.toString(), 0, pos - 1);            // do not write it
-        } else {
-            out.write(str.toString(), 0, pos);
-        }
+        // Strip and discard whitespace from end of line
+        out.write(StringUtil.rstrip(str.substring(0, pos)));
         str.delete(0, pos);
         if (str.length() > 0) {
             writeBreakEol();

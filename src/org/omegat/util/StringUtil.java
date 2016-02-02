@@ -511,4 +511,25 @@ public class StringUtil {
         str = str.replaceAll("'", "''");
         return MessageFormat.format(str, arguments);
     }
+
+    /**
+     * Strip whitespace from the end of a string. Uses
+     * {@link Character#isWhitespace(int)}, so it does not strip the extra
+     * non-breaking whitespace included in {@link #isWhiteSpace(int)}.
+     * 
+     * @param text
+     * @return text with trailing whitespace removed
+     */
+    public static String rstrip(String text) {
+        for (int cp, i = text.length(); i >= 0; i -= Character.charCount(cp)) {
+            if (i == 0) {
+                return "";
+            }
+            cp = text.codePointBefore(i);
+            if (!Character.isWhitespace(cp)) {
+                return text.substring(0, i);
+            }
+        }
+        return text;
+    }
 }

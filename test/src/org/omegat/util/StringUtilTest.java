@@ -288,4 +288,20 @@ public class StringUtilTest extends TestCase {
         test = "\u30a2\uff71\u30ac\uff76\u3099\u3000";
         assertEquals("\u30a2\u30a2\u30ac\u30ac ", StringUtil.normalizeWidth(test));
     }
+    
+    public void testRstrip() {
+        assertEquals("", StringUtil.rstrip(""));
+        assertEquals("", StringUtil.rstrip(" "));
+        assertEquals("ABC", StringUtil.rstrip("ABC"));
+        assertEquals("ABC", StringUtil.rstrip("ABC "));
+        assertEquals(" ABC", StringUtil.rstrip(" ABC "));
+        assertEquals("ABC", StringUtil.rstrip("ABC       "));
+        assertEquals("ABC\u00a0", StringUtil.rstrip("ABC\u00a0")); // U+00A0 NO-BREAK SPACE
+        try {
+            StringUtil.rstrip(null);
+            fail();
+        } catch (NullPointerException ex) {
+            // Should fail when stripping null string.
+        }
+    }
 }

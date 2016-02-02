@@ -1,9 +1,9 @@
-ABC DEF 
+ABC DEF
 GEH
 
 ABC DEF GE
 
-ABC DEF 
+ABC DEF
 𝐆𝐄𝐇
 
 ABC DEF 𝐆𝐄

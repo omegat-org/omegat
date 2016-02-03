@@ -289,7 +289,7 @@ public class LineLengthLimitWriter extends Writer {
         try {
             // check previous char. Can't split after specified chars.
             int cp = str.codePointBefore(pos);
-            if ("([{<«„".indexOf(cp) >= 0) {
+            if (":\\([{<«„".indexOf(cp) >= 0) {
                 return false;
             }
         } catch (StringIndexOutOfBoundsException ex) {
@@ -297,7 +297,7 @@ public class LineLengthLimitWriter extends Writer {
         try {
             // check next char. Can't split before specified chars.
             int cp = str.codePointAt(pos);
-            if (")]}>»“,.".indexOf(cp) >= 0) {
+            if ("{:)]}>»“,.".indexOf(cp) >= 0) {
                 return false;
             }
         } catch (StringIndexOutOfBoundsException ex) {

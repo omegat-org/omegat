@@ -7,7 +7,7 @@
                2009 Didier Briel
                2012 Alex Buloichik, Didier Briel
                2014 Alex Buloichik, Aaron Madlon-Kay
-               2015 Aaron Madlon-Kay
+               2015-2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -136,24 +136,41 @@ public class FileUtil {
      * Read file as UTF-8 text.
      */
     public static String readTextFile(File file) throws IOException {
-        BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(file), OConsts.UTF8));
-
+        String result = null;
+        FileInputStream fis = null;
+        InputStreamReader isr = null;
+        BufferedReader rd = null;
         try {
-            return IOUtils.toString(rd);
-        } finally {
+            fis = new FileInputStream(file);
+            isr = new InputStreamReader(fis, OConsts.UTF8);
+            rd = new BufferedReader(isr);
+            result = IOUtils.toString(rd);
             rd.close();
+            isr.close();
+            fis.close();
+        } finally {
+            IOUtils.closeQuietly(rd);
+            IOUtils.closeQuietly(isr);
+            IOUtils.closeQuietly(fis);
         }
+        return result;
     }
 
     /**
      * Write text in file using UTF-8.
      */
     public static void writeTextFile(File file, String text) throws IOException {
-        Writer wr = new OutputStreamWriter(new FileOutputStream(file), OConsts.UTF8);
+        FileOutputStream fos = null;
+        Writer wr = null;
         try {
+            fos = new FileOutputStream(file);
+            wr = new OutputStreamWriter(fos, OConsts.UTF8);
             wr.write(text);
-        } finally {
             wr.close();
+            fos.close();
+        } finally {
+            IOUtils.closeQuietly(wr);
+            IOUtils.closeQuietly(fos);
         }
     }
 
@@ -180,47 +197,76 @@ public class FileUtil {
             FileUtils.copyFile(inFile, outFile, false);
             return;
         }
-        BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(inFile),
-                eolConversionCharset));
+        FileInputStream fis = null;
+        InputStreamReader isr = null;
+        BufferedReader in = null;
         try {
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile),
-                    eolConversionCharset));
+            fis = new FileInputStream(inFile);
+            isr = new InputStreamReader(fis, eolConversionCharset);
+            in = new BufferedReader(isr);
+            FileOutputStream fos = null;
+            OutputStreamWriter osw = null;
+            BufferedWriter out = null;
             try {
+                fos = new FileOutputStream(outFile);
+                osw = new OutputStreamWriter(fos, eolConversionCharset);
+                out = new BufferedWriter(osw);
                 String s;
                 while ((s = in.readLine()) != null) {
                     // copy using known EOL
                     out.write(s);
                     out.write(eol);
                 }
+                out.close();
+                osw.close();
+                fos.close();
             } finally {
                 IOUtils.closeQuietly(out);
+                IOUtils.closeQuietly(osw);
+                IOUtils.closeQuietly(fos);
             }
+            in.close();
+            isr.close();
+            fis.close();
         } finally {
             IOUtils.closeQuietly(in);
+            IOUtils.closeQuietly(isr);
+            IOUtils.closeQuietly(fis);
         }
     }
 
     public static String getEOL(File file, String eolConversionCharset) throws IOException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(file),
-                eolConversionCharset));
+        String r = null;
+        FileInputStream fis = null;
+        InputStreamReader isr = null;
+        BufferedReader in = null;
         try {
+            fis = new FileInputStream(file);
+            isr = new InputStreamReader(fis, eolConversionCharset);
+            in = new BufferedReader(isr);
             while (true) {
                 int ch = in.read();
                 if (ch < 0) {
-                    return null;
+                    break;
                 }
                 if (ch == '\n' || ch == '\r') {
-                    String r = Character.toString((char) ch);
+                    r = Character.toString((char) ch);
                     int ch2 = in.read();
                     if (ch2 == '\n' || ch2 == '\r') {
                         r += Character.toString((char) ch2);
                     }
-                    return r;
+                    break;
                 }
             }
+            in.close();
+            isr.close();
+            fis.close();
         } finally {
             IOUtils.closeQuietly(in);
+            IOUtils.closeQuietly(isr);
+            IOUtils.closeQuietly(fis);
         }
+        return r;
     }
 
     /**

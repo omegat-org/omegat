@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Alex Buloichik
+               2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,12 +27,13 @@
 package org.omegat.gui.editor;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.util.FileUtil;
-import org.omegat.util.OConsts;
+import org.omegat.util.Log;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -40,6 +42,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * script produce some results.
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
+ * @author Aaron Madlon-Kay
  */
 public class SegmentExportImport {
     static final int WAIT_TIME = 100;
@@ -47,6 +50,15 @@ public class SegmentExportImport {
     private final EditorController controller;
     private volatile long exportLastModified = Long.MAX_VALUE;
     private final File importFile;
+
+    /** The name of the file with the exported selection */
+    public static final String SELECTION_EXPORT = "selection.txt";
+
+    /** The name of the file with the target exported segment */
+    public static final String TARGET_EXPORT = "target.txt";
+
+    /** The name of the file with the source exported segment */
+    public static final String SOURCE_EXPORT = "source.txt";
 
     public SegmentExportImport(EditorController controller) {
         this.controller = controller;
@@ -67,6 +79,10 @@ public class SegmentExportImport {
         }.start();
     }
 
+    private static File getFile(String name) {
+        return new File(StaticUtils.getScriptDir(), name);
+    }
+
     /**
      * Export the current source and target segments in text files.
      */
@@ -82,9 +98,29 @@ public class SegmentExportImport {
         TMXEntry te = Core.getProject().getTranslationInfo(ste);
         String s2 = te.isTranslated() ? te.translation : "";
 
-        File sourceFile = FileUtil.writeScriptFile(s1, OConsts.SOURCE_EXPORT);
-        FileUtil.writeScriptFile(s2, OConsts.TARGET_EXPORT);
-        exportLastModified = sourceFile.lastModified();
+        File sourceFile = getFile(SOURCE_EXPORT);
+        File targetFile = getFile(TARGET_EXPORT);
+        try {
+            writeFile(sourceFile, s1);
+            writeFile(targetFile, s2);
+            exportLastModified = sourceFile.lastModified();
+        } catch (IOException ex) {
+            Log.log(ex);
+        }
+    }
+
+    private static void writeFile(File file, String content) throws IOException {
+        content = content.replaceAll("\n", System.getProperty("line.separator"));
+        file.delete();
+        FileUtil.writeTextFile(file, content);
+    }
+
+    public static synchronized void exportCurrentSelection(String selection) {
+        try {
+            writeFile(getFile(SELECTION_EXPORT), selection);
+        } catch (IOException ex) {
+            Log.log(ex);
+        }
     }
 
     synchronized void importText() {
@@ -93,13 +129,29 @@ public class SegmentExportImport {
             return;
         }
         exportLastModified = importFile.lastModified() + 1;
-        final String text = FileUtil.readScriptFile(importFile);
-        if (text != null) {
+        try {
+            final String text = FileUtil.readTextFile(importFile).replace(System.getProperty("line.separator"), "\n");
             UIThreadsUtil.executeInSwingThread(new Runnable() {
                 public void run() {
                     controller.replaceEditText(text);
                 }
             });
+        } catch (IOException ex) {
+            Log.log(ex);
+        }
+    }
+
+    /**
+     * Empties the exported segments.
+     */
+    public static synchronized void flushExportedSegments() {
+        File sourceFile = getFile(SOURCE_EXPORT);
+        File targetFile = getFile(TARGET_EXPORT);
+        try {
+            writeFile(sourceFile, "");
+            writeFile(targetFile, "");
+        } catch (IOException ex) {
+            Log.log(ex);
         }
     }
 }

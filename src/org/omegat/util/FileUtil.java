@@ -133,53 +133,6 @@ public class FileUtil {
     }
 
     /**
-     * Writes a text into a UTF-8 text file in the script directory.
-     * 
-     * @param textToWrite
-     *            The text to write in the file
-     * @param fileName
-     *            The file name without path
-     */
-    public static File writeScriptFile(String textToWrite, String fileName) {
-
-        File outFile = new File(StaticUtils.getScriptDir(), fileName);
-        File outFileTemp = new File(StaticUtils.getScriptDir(), fileName + ".temp");
-        outFile.delete();
-        BufferedWriter bw = null;
-        try {
-            textToWrite = textToWrite.replaceAll("\n", System.getProperty("line.separator"));
-            bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFileTemp), OConsts.UTF8));
-            bw.write(textToWrite);
-        } catch (Exception ex) {
-            // Eat exception silently
-        } finally {
-            try {
-                if (bw != null)
-                    bw.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-        outFileTemp.renameTo(outFile);
-        return outFile;
-    }
-
-    public static String readScriptFile(File file) {
-        try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(file), OConsts.UTF8));
-
-            try {
-                return IOUtils.toString(rd).replace(System.getProperty("line.separator"), "\n");
-            } finally {
-                rd.close();
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
      * Read file as UTF-8 text.
      */
     public static String readTextFile(File file) throws IOException {

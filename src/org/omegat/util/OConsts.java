@@ -147,13 +147,6 @@ public class OConsts {
     /** dictionary file extension */
     public static final String SC_DICTIONARY_EXTENSION = ".dic";
 
-    /** The name of the file with the source exported segment */
-    public static final String SOURCE_EXPORT = "source.txt";
-    /** The name of the file with the target exported segment */
-    public static final String TARGET_EXPORT = "target.txt";
-    /** The name of the file with the exported selection */
-    public static final String SELECTION_EXPORT = "selection.txt";
-
     /** The smallest threshold to detect a fuzzy match string */
     public static final int FUZZY_MATCH_THRESHOLD = 30;
 

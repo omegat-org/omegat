@@ -152,16 +152,6 @@ public class FileUtilTest extends TestCase {
         } catch (IOException ex) {
         }
     }
-    
-    public void testGetFileExtension() {
-        assertEquals("js", FileUtil.getFileExtension("foo.js"));
-        assertEquals("zip", FileUtil.getFileExtension("foo.js/bar.zip"));
-        assertEquals("zip", FileUtil.getFileExtension("C:\\foo.js\\bar.zip"));
-        assertEquals("tar.gz", FileUtil.getFileExtension("foo.tar.gz"));
-        assertEquals("", FileUtil.getFileExtension("foo"));
-        assertEquals("", FileUtil.getFileExtension("foo/.bar"));
-        assertEquals("", FileUtil.getFileExtension("foo\\.bar"));
-    }
 
     private abstract class CountingCallback implements ICollisionCallback {
         int calledTimes = 0;

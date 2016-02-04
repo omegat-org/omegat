@@ -37,8 +37,8 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import javax.script.SimpleBindings;
 
+import org.apache.commons.io.FilenameUtils;
 import org.omegat.core.Core;
-import org.omegat.util.FileUtil;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
@@ -103,7 +103,7 @@ public class ScriptRunner {
             bindings.putAll(additionalBindings);
         }
         bindings.put(VAR_RESOURCES, item.getResourceBundle());
-        ScriptEngine engine = MANAGER.getEngineByExtension(FileUtil.getFileExtension(item.getFile().getName()));
+        ScriptEngine engine = MANAGER.getEngineByExtension(FilenameUtils.getExtension(item.getFile().getName()));
         if (engine == null) {
             engine = MANAGER.getEngineByName(DEFAULT_SCRIPT);
         }

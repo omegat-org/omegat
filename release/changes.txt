@@ -2,7 +2,7 @@
  OmegaT 3.5.3 update 1
 ----------------------------------------------------------------------
    4 Enhancements
-   5 Bug fixes
+   6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 3.5.3 update 1 vs 3.5.3
@@ -36,6 +36,9 @@ Linux kaptain launcher
 
   - When using the line length limit in the Text filter, a trailing space
 remained at the end of lines when the line was cut on a space. 
+
+  - Word: specific tag processing not working when extension in uppercase 
+  https://sourceforge.net/p/omegat/bugs/794/
 
   Localisation Updates:
 

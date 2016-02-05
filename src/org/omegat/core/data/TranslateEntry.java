@@ -148,7 +148,8 @@ public abstract class TranslateEntry implements ITranslateCallback {
         // https://sourceforge.net/p/omegat/bugs/634/
         // This is a Word document, Remove Tags (from Project Properties) is not checked and Remove leading and 
         // trailing tags (from File Filters) is not checked
-        if ((getCurrentFile().endsWith(".docx") || getCurrentFile().endsWith(".docm")) &&
+        String fileName = getCurrentFile().toLowerCase();
+        if ((fileName.endsWith(".docx") || fileName.endsWith(".docm")) &&
             !m_config.isRemoveTags() && !Core.getFilterMaster().getConfig().isRemoveTags()) {
             // Locate the location of the first tag
             String firstTag = TagUtil.getFirstTag(r);

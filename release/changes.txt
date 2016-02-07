@@ -2,7 +2,7 @@
  OmegaT 3.5.3 update 1
 ----------------------------------------------------------------------
    4 Enhancements
-   6 Bug fixes
+   7 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 3.5.3 update 1 vs 3.5.3
@@ -39,6 +39,9 @@ remained at the end of lines when the line was cut on a space.
 
   - Word: specific tag processing not working when extension in uppercase 
   https://sourceforge.net/p/omegat/bugs/794/
+
+  - ResourceBundleFilter drops key in #NOI18N key=value pairs
+  https://sourceforge.net/p/omegat/bugs/795/
 
   Localisation Updates:
 

@@ -8,6 +8,7 @@
                2011 Martin Fleurke
                2013-2014 Enrique Estevez, Didier Briel
                2015 Aaron Madlon-Kay, Enrique Estevez
+               2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -48,8 +49,8 @@ import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
-import org.omegat.util.Log;
 import org.omegat.util.LinebreakPreservingReader;
+import org.omegat.util.Log;
 import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -83,6 +84,14 @@ import org.omegat.util.TagUtil;
  */
 public class ResourceBundleFilter extends AbstractFilter {
 
+    /**
+     * Key=value pairs with a preceding comment containing this string are not
+     * translated, and are output verbatim.
+     * <p>
+     * TODO: Make this optional
+     */
+    public static final String DO_NOT_TRANSLATE_COMMENT = "NOI18N";
+    
     public static final String OPTION_REMOVE_STRINGS_UNTRANSLATED = "unremoveStringsUntranslated";
     public static final String OPTION_DONT_UNESCAPE_U_LITERALS = "dontUnescapeULiterals";
     public static final String DEFAULT_TARGET_ENCODING = OConsts.ASCII;
@@ -379,7 +388,7 @@ public class ResourceBundleFilter extends AbstractFilter {
                 // Save the comments
                 comments = (comments == null ? str : comments + "\n" + str);
                 // checking if the next string shouldn't be internationalized
-                if (trimmed.indexOf("NOI18N") >= 0) {
+                if (trimmed.contains(DO_NOT_TRANSLATE_COMMENT)) {
                     noi18n = true;
                 }
                 continue;
@@ -434,7 +443,10 @@ public class ResourceBundleFilter extends AbstractFilter {
 
                 if (noi18n) {
                     // if we don't need to internationalize
-                    outfile.write(toAscii(value, false));
+                    outfile.write(toAscii(key, true));
+                    outfile.write(equals);
+                    outfile.write(value);
+                    outfile.write(lbpr.getLinebreak());
                     noi18n = false;
                 } else {
                     value = value.replaceAll("\\n\\n", "\n \n");

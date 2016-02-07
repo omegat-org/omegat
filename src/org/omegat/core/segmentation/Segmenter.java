@@ -53,11 +53,13 @@ public final class Segmenter {
     /**
      * Segments the paragraph to sentences according to currently setup rules.
      * <p>
-     * Bugfix for <a href="http://sourceforge.net/support/tracker.php?aid=1288742">issue 1288742</a>:
-     * Sentences are returned without spaces in the beginning and at the end of a sentence.
+     * Bugfix for <a href="https://sourceforge.net/p/omegat/bugs/83/">bug 83</a>
+     * : Sentences are returned without spaces in the beginning and at the end
+     * of a sentence.
      * <p>
-     * An additional list with space information is returned to be able to glue translation together with the
-     * same spaces between them as in original paragraph.
+     * An additional list with space information is returned to be able to glue
+     * translation together with the same spaces between them as in original
+     * paragraph.
      * 
      * @param paragraph
      *            the paragraph text
@@ -263,8 +265,9 @@ public final class Segmenter {
     /**
      * Glues segments back into a paragraph.
      * <p>
-     * As segments are returned by {@link #segment(String, List)} without spaces
-     * before and after them, this method adds spaces if needed:
+     * As segments are returned by
+     * {@link #segment(Language, String, List, List)} without spaces before and
+     * after them, this method adds spaces if needed:
      * <ul>
      * <li>For translation <i>to</i> non-space-delimited languages (Japanese,
      * Chinese, Tibetan) it does <b>not</b> add any spaces.

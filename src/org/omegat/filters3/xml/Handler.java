@@ -159,7 +159,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
 
     /**
      * Returns current entry we collect text into. If we collect normal text,
-     * returns {@link #entry}, else returns {@link #outofturnEntry}.
+     * returns {@link #entry}, else returns the last of
+     * {@link #outofturnEntries}.
      */
     private Entry currEntry() {
         if (collectingIntactText())

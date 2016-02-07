@@ -360,21 +360,25 @@ public abstract class AbstractFilter implements IFilter {
     }
 
     /**
-     * Processes a single file given a reader and a writer. Generally this method should read strings from the
-     * input reader and write them to the output reader. In order to let OmegaT know what strings are
-     * translatable and to get their translation, filter should call {@link #processEntry(String)} method.
+     * Processes a single file given a reader and a writer. Generally this
+     * method should read strings from the input reader and write them to the
+     * output reader. In order to let OmegaT know what strings are translatable
+     * and to get their translation, filter should call
+     * {@link #processEntry(String)} method.
      * <p>
-     * Note that outFile is never null, even when the project is loading. (in this case it writes no nowhere,
-     * but anyway you may use it...)
+     * Note that outFile is never null, even when the project is loading. (in
+     * this case it writes no nowhere, but anyway you may use it...)
      * <p>
-     * If you need more control over processed files, override {@link #processFile(File,String,File,String)}
-     * instead.
+     * If you need more control over processed files, override
+     * {@link #processFile(File, File, FilterContext)} instead.
      * 
      * @param inFile
-     *            Reader of the source file. It's the result of calling {@link #createReader(File,String)}.
+     *            Reader of the source file. It's the result of calling
+     *            {@link #createReader(File,String)}.
      * @param outFile
-     *            Writer of the target file on compilation (the result of calling
-     *            {@link #createWriter(File, String)}), or a fictive writer to /dev/null.
+     *            Writer of the target file on compilation (the result of
+     *            calling {@link #createWriter(File, String)}), or a fictive
+     *            writer to /dev/null.
      * @throws TranslationException
      *             Should be thrown when processed file has any format defects.
      * @throws IOException

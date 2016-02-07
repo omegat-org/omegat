@@ -380,8 +380,6 @@ class EntryListPane extends JTextPane {
      * 
      * @param message
      *            The message to display
-     * 
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     private void addMessage(StringBuilder m_stringBuf, String message) {
         // Insert entry/message separator if necessary

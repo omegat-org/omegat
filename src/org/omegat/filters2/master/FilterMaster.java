@@ -179,7 +179,8 @@ public class FilterMaster {
      * @param filename
      *            The name of the source file to load.
      * @return Whether the file was handled by one of OmegaT filters.
-     * @see #translateFile(String, String, String)
+     * @see #translateFile(String, String, String, FilterContext,
+     *      ITranslateCallback)
      */
     public IFilter loadFile(String filename, FilterContext fc, IParseCallback parseCallback)
             throws IOException, TranslationException {

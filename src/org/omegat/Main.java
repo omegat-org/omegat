@@ -206,10 +206,12 @@ public class Main {
     }
 
     /**
-     * Load System properties from a specified .properties file.
-     * In order to allow this to reliably change the display language, it must 
-     * called before any use of {@link Log#log}, thus it logs to {@link System.out}.
-     * @param path to config file
+     * Load System properties from a specified .properties file. In order to
+     * allow this to reliably change the display language, it must called before
+     * any use of {@link Log#log}, thus it logs to {@link System#out}.
+     * 
+     * @param path
+     *            to config file
      */
     private static void applyConfigFile(String path) {
         if (path == null) {

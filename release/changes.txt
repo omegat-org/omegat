@@ -2,7 +2,7 @@
  OmegaT 3.6.0
 ----------------------------------------------------------------------
  14 Enhancements
-  4 Bug fixes
+  3 Bug fixes
 ----------------------------------------------------------------------
 3.6.0 vs 3.5.3
 
@@ -59,9 +59,6 @@
   - Files can be clobbered when creating translated documents
   https://sourceforge.net/p/omegat/bugs/787/
 
-  - ResourceBundleFilter drops key in #NOI18N key=value pairs
-  https://sourceforge.net/p/omegat/bugs/795/
-
   Other changes:
 
   - The appearance under Windows "high-contrast" themes is improved
@@ -70,7 +67,7 @@
  OmegaT 3.5.3 update 1
 ----------------------------------------------------------------------
    4 Enhancements
-   6 Bug fixes
+   7 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 3.5.3 update 1 vs 3.5.3
@@ -107,6 +104,9 @@ remained at the end of lines when the line was cut on a space.
 
   - Word: specific tag processing not working when extension in uppercase 
   https://sourceforge.net/p/omegat/bugs/794/
+
+  - ResourceBundleFilter drops key in #NOI18N key=value pairs
+  https://sourceforge.net/p/omegat/bugs/795/
 
   Localisation Updates:
 

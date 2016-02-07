@@ -130,4 +130,9 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         
         translateText(filter, f);
     }
+
+    public void testNOI18N() throws Exception {
+        translateText(new ResourceBundleFilter(),
+                "test/data/filters/resourceBundle/file-ResourceBundleFilter-NOI18N.properties");
+    }
 }

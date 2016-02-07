@@ -2,7 +2,7 @@
  OmegaT 3.6.0
 ----------------------------------------------------------------------
  14 Enhancements
-  3 Bug fixes
+  4 Bug fixes
 ----------------------------------------------------------------------
 3.6.0 vs 3.5.3
 
@@ -58,6 +58,9 @@
 
   - Files can be clobbered when creating translated documents
   https://sourceforge.net/p/omegat/bugs/787/
+
+  - ResourceBundleFilter drops key in #NOI18N key=value pairs
+  https://sourceforge.net/p/omegat/bugs/795/
 
   Other changes:
 

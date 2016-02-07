@@ -51,7 +51,6 @@ import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.segmentation.Rule;
-import org.omegat.core.segmentation.Segmenter;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
@@ -235,7 +234,7 @@ public class FindMatches {
             List<Rule> brules = new ArrayList<Rule>();
             Language sourceLang = project.getProjectProperties().getSourceLanguage();
             Language targetLang = project.getProjectProperties().getTargetLanguage();
-            List<String> segments = Segmenter.segment(sourceLang, srcText, spaces, brules);
+            List<String> segments = Core.getSegmenter().segment(sourceLang, srcText, spaces, brules);
             if (segments.size() > 1) {
                 List<String> fsrc = new ArrayList<String>(segments.size());
                 List<String> ftrans = new ArrayList<String>(segments.size());
@@ -256,9 +255,9 @@ public class FindMatches {
                     }
                 }
                 // glue found sources
-                String foundSrc = Segmenter.glue(sourceLang, sourceLang, fsrc, spaces, brules);
+                String foundSrc = Core.getSegmenter().glue(sourceLang, sourceLang, fsrc, spaces, brules);
                 // glue found translations
-                String foundTrans = Segmenter.glue(sourceLang, targetLang, ftrans, spaces, brules);
+                String foundTrans = Core.getSegmenter().glue(sourceLang, targetLang, ftrans, spaces, brules);
                 processEntry(null, foundSrc, foundTrans, NearString.MATCH_SOURCE.TM, false, 0, "", "", 0, "",
                         0, null);
             }

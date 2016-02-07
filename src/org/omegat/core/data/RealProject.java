@@ -69,7 +69,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
 import org.omegat.core.data.TMXEntry.ExternalLinked;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.core.segmentation.Segmenter;
+import org.omegat.core.segmentation.SRX;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
@@ -262,11 +262,10 @@ public class RealProject implements IProject {
 
             saveProjectProperties();
 
-            // set project specific segmentation rules if they exist
-            Segmenter.srx = m_config.getProjectSRX();
-            if (Segmenter.srx == null) {
-                Segmenter.srx = Preferences.getSRX();
-            }
+            // Set project specific segmentation rules if they exist, or
+            // defaults otherwise.
+            SRX srx = m_config.getProjectSRX();
+            Core.getSegmenter().setSRX(srx == null ? Preferences.getSRX() : srx);
 
             loadTranslations();
             setProjectModified(true);
@@ -325,11 +324,10 @@ public class RealProject implements IProject {
             
             EntryKey.setIgnoreFileContext(filterMasterConfig.isIgnoreFileContext());
 
-            // set project specific segmentation rules if they exist
-            Segmenter.srx = m_config.getProjectSRX();
-            if (Segmenter.srx == null) {
-                Segmenter.srx = Preferences.getSRX();
-            }
+            // Set project specific segmentation rules if they exist, or
+            // defaults otherwise.
+            SRX srx = m_config.getProjectSRX();
+            Core.getSegmenter().setSRX(srx == null ? Preferences.getSRX() : srx);
 
             loadSourceFiles();
 
@@ -1814,8 +1812,9 @@ public class RealProject implements IProject {
 
                 PrepareTMXEntry tr = new PrepareTMXEntry();
                 if (config.isSentenceSegmentingEnabled()) {
-                    List<String> segmentsSource = Segmenter.segment(config.getSourceLanguage(), sourceS, null, null);
-                    List<String> segmentsTranslation = Segmenter
+                    List<String> segmentsSource = Core.getSegmenter().segment(config.getSourceLanguage(), sourceS, null,
+                            null);
+                    List<String> segmentsTranslation = Core.getSegmenter()
                             .segment(config.getTargetLanguage(), transS, null, null);
                     if (segmentsTranslation.size() != segmentsSource.size()) {
                         if (isFuzzy) {

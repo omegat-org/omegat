@@ -40,7 +40,6 @@ import java.util.Stack;
 import java.util.regex.Matcher;
 
 import org.omegat.core.Core;
-import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.xml.XMLReader;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
@@ -389,8 +388,8 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler {
         translation = upgradeSegment(translation);
 
         if (isUpgradeSentSeg()) {
-            List<String> srcSegments = Segmenter.segment(sourceLang, source, null, null);
-            List<String> tarSegments = Segmenter.segment(targetLang, translation, null, null);
+            List<String> srcSegments = Core.getSegmenter().segment(sourceLang, source, null, null);
+            List<String> tarSegments = Core.getSegmenter().segment(targetLang, translation, null, null);
 
             int n = srcSegments.size();
             if (n == tarSegments.size()) {

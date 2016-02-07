@@ -33,6 +33,7 @@ import java.util.Map;
 
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.NotLoadedProject;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.core.threads.IAutoSave;
@@ -110,6 +111,7 @@ public class Core {
     private static MultipleTransPane multiple;
     private static INotes notes;
     private static IComments comments;
+    private static final Segmenter segmenter = new Segmenter();
 
     private static Map<String, String> cmdLineParams = Collections.emptyMap();
 
@@ -197,6 +199,10 @@ public class Core {
         return dictionaries;
     }
     
+    public static Segmenter getSegmenter() {
+        return segmenter;
+    }
+
     /**
      * Initialize application components.
      */

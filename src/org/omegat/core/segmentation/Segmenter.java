@@ -37,17 +37,21 @@ import org.omegat.util.Language;
 import org.omegat.util.PatternConsts;
 
 /**
- * The class that sentences the paragraphs into sentences and glues translated sentences together to form a
- * paragraph.
- * 
+ * The class that sentences the paragraphs into sentences and glues translated
+ * sentences together to form a paragraph.
  * 
  * @author Maxym Mykhalchuk
  */
 public final class Segmenter {
     
-    public static volatile SRX srx;
-    /** private to disallow creation */
-    private Segmenter() {
+    private SRX srx;
+
+    public Segmenter() {
+        setSRX(SRX.getDefault());
+    }
+
+    public void setSRX(SRX srx) {
+        this.srx = srx;
     }
 
     /**
@@ -69,7 +73,7 @@ public final class Segmenter {
      *            list to store rules that account to breaks
      * @return list of sentences (String objects)
      */
-    public static List<String> segment(Language lang, String paragraph, List<StringBuilder> spaces,
+    public List<String> segment(Language lang, String paragraph, List<StringBuilder> spaces,
             List<Rule> brules) {
         if (paragraph == null) {
             return null;
@@ -124,8 +128,8 @@ public final class Segmenter {
      * @param brules
      *            list to store rules that account to breaks
      */
-    private static List<String> breakParagraph(Language lang, String paragraph, List<Rule> brules) {
-        List<Rule> rules = Segmenter.srx.lookupRulesForLanguage(lang);
+    private List<String> breakParagraph(Language lang, String paragraph, List<Rule> brules) {
+        List<Rule> rules = srx.lookupRulesForLanguage(lang);
         if (brules == null)
             brules = new ArrayList<Rule>();
 
@@ -289,7 +293,7 @@ public final class Segmenter {
      *            rules that account to breaks
      * @return glued translated paragraph
      */
-    public static String glue(Language sourceLang, Language targetLang, List<String> sentences,
+    public String glue(Language sourceLang, Language targetLang, List<String> sentences,
             List<StringBuilder> spaces, List<Rule> brules) {
         if (sentences.size() <= 0) {
             return "";
@@ -332,13 +336,13 @@ public final class Segmenter {
     /**
      * Segment source and target entries from TMX when counts are equals.
      */
-    public static void segmentEntries(boolean needResegment, Language sourceLang, String sourceEntry,
+    public void segmentEntries(boolean needResegment, Language sourceLang, String sourceEntry,
             Language targetLang, String targetEntry, List<String> sourceSegments, List<String> targetSegments) {
         if (needResegment) {
-            List<String> srcSegments = Segmenter.segment(sourceLang, sourceEntry, null, null);
+            List<String> srcSegments = segment(sourceLang, sourceEntry, null, null);
             if (targetEntry != null) { // There is no translation for this entry, because for instance it's a note
                                        // on an untranslated entry
-                List<String> tarSegments = Segmenter.segment(targetLang, targetEntry, null, null);
+                List<String> tarSegments = segment(targetLang, targetEntry, null, null);
 
                 if (srcSegments.size() == tarSegments.size()) {
                     sourceSegments.addAll(srcSegments);

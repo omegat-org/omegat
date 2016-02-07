@@ -38,7 +38,6 @@ import java.util.List;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.segmentation.Rule;
-import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.util.Language;
@@ -165,7 +164,7 @@ public abstract class ParseEntry implements IParseCallback {
             List<StringBuilder> spaces = new ArrayList<StringBuilder>();
             List<Rule> brules = new ArrayList<Rule>();
             Language sourceLang = m_config.getSourceLanguage();
-            List<String> segments = Segmenter.segment(sourceLang, source, spaces, brules);
+            List<String> segments = Core.getSegmenter().segment(sourceLang, source, spaces, brules);
             if (segments.size() == 1) {
                 internalAddSegment(id, (short) 0, segments.get(0), translation, isFuzzy, comment, path,
                         protectedParts);

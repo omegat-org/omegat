@@ -39,13 +39,9 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import junit.framework.Assert;
-import junit.framework.TestCase;
-
 import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Before;
 import org.omegat.core.Core;
-import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;
@@ -53,6 +49,9 @@ import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.text.TextFilter;
+
+import junit.framework.Assert;
+import junit.framework.TestCase;
 
 /**
  * Base methods for TMX compliance tests.
@@ -65,6 +64,8 @@ public abstract class TmxComplianceBase extends TestCase {
 
     protected File outFile;
 
+    private Segmenter segmenter = new Segmenter();
+
     @Before
     public void setUp() throws Exception {
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
@@ -76,8 +77,6 @@ public abstract class TmxComplianceBase extends TestCase {
                 throw new IOException("Can't remove " + outFile.getAbsolutePath());
             }
         }
-
-        Segmenter.srx = SRX.getDefault();
     }
 
     protected void compareTexts(File f1, String charset1, File f2, String charset2) throws Exception {
@@ -167,7 +166,7 @@ public abstract class TmxComplianceBase extends TestCase {
 
             public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
                     String path, IFilter filter, List<ProtectedPart> protectedParts) {
-                result.addAll(Segmenter.segment(context.getSourceLang(), source, null, null));
+                result.addAll(segmenter.segment(context.getSourceLang(), source, null, null));
             }
 
             public void linkPrevNextSegments() {

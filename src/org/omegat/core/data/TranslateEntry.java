@@ -29,10 +29,9 @@ package org.omegat.core.data;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.omegat.core.Core;
 
+import org.omegat.core.Core;
 import org.omegat.core.segmentation.Rule;
-import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.util.Language;
 import org.omegat.util.StringUtil;
@@ -115,7 +114,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
             List<Rule> brules = new ArrayList<Rule>();
             Language sourceLang = m_config.getSourceLanguage();
             Language targetLang = m_config.getTargetLanguage();
-            List<String> segments = Segmenter.segment(sourceLang, source, spaces, brules);
+            List<String> segments = Core.getSegmenter().segment(sourceLang, source, spaces, brules);
             for (int i = 0; i < segments.size(); i++) {
                 String onesrc = segments.get(i);
                 String tr = internalGetSegmentTranslation(id, i, onesrc, path);
@@ -129,7 +128,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
             if (!translated) {
                 return null; // there is no even one translated segment
             }
-            res.append(Segmenter.glue(sourceLang, targetLang, segments, spaces, brules));
+            res.append(Core.getSegmenter().glue(sourceLang, targetLang, segments, spaces, brules));
         } else {
             String tr = internalGetSegmentTranslation(id, 0, source, path);
             if (tr == null) {

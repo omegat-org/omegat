@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,100 +26,56 @@
 
 package org.omegat.util;
 
-import junit.framework.*;
 import java.util.Locale;
+
+import junit.framework.TestCase;
 
 /**
  * Tests for OmegaT language handling.
  *
  * @author Maxym Mykhalchuk
  */
-public class LanguageTest extends TestCase
-{
-    
-    public LanguageTest(String testName)
-    {
-        super(testName);
-    }
-
-    protected void setUp() throws Exception
-    {
-    }
-
-    protected void tearDown() throws Exception
-    {
-    }
-
-    public static Test suite()
-    {
-        TestSuite suite = new TestSuite(LanguageTest.class);
-        
-        return suite;
-    }
+public class LanguageTest extends TestCase {
 
     /**
      * Test of getLanguage method, of class org.omegat.util.Language.
+     * 
+     * @see <a href="https://sourceforge.net/p/omegat/bugs/185/">bug #185</a>
      */
-    public void testGetLanguage()
-    {
+    public void testGetLanguage() {
         String LANG_1 = "xx-YY";
-        Language lang = new Language(LANG_1);
-        if( !lang.getLanguage().equals(LANG_1) )
-            fail("http://sourceforge.net/support/tracker.php?aid=1473713\n" +
-                    "Language/Country code case is changed: '"+lang.getLanguage()+"', should be '"+LANG_1+"'.");
+        assertEquals(LANG_1, new Language(LANG_1).getLanguage());
         
         String LANG_2 = "XX-yy";
-        lang = new Language(LANG_2);
-        if( !lang.getLanguage().equals(LANG_2) )
-            fail("http://sourceforge.net/support/tracker.php?aid=1473713\n" +
-                    "Language/Country code case is changed: '"+lang.getLanguage()+"', should be '"+LANG_2+"'.");
+        assertEquals(LANG_2, new Language(LANG_2).getLanguage());
     }
 
     /**
      * Test of getLocale method, of class org.omegat.util.Language.
      */
-    public void testGetLocale()
-    {
+    public void testGetLocale() {
         String LANG = "XXX-yy";
-        Language lang = new Language(LANG);
-        if( !lang.getLocaleCode().equals("xxx_YY") )
-            fail("Locale is wrong '"+lang.getLocale()+"', should be 'xxx_YY'");
+        assertEquals("xxx_YY", new Language(LANG).getLocaleCode());
     }
 
     /**
      * Test of equals method, of class org.omegat.util.Language.
      */
-    public void testEquals()
-    {
-        String LANG_1 = "xxx-YY";
-        Language lang1 = new Language(LANG_1);
-        String LANG_2 = "XXX-yy";
-        Language lang2 = new Language(LANG_2);
-        String LANG_3 = "xxx_YY";
-        Language lang3 = new Language(LANG_3);
-        if( !lang1.equals(lang2) )
-            fail("'"+LANG_1+"' is reported to be different from '"+LANG_2+"'");
-        if( !lang1.equals(lang3) )
-            fail("'"+LANG_1+"' is reported to be different from '"+LANG_3+"'");
-        if( !lang2.equals(lang3) )
-            fail("'"+LANG_2+"' is reported to be different from '"+LANG_3+"'");
+    public void testEquals() {
+        Language lang1 = new Language("xxx-YY");
+        Language lang2 = new Language("XXX-yy");
+        Language lang3 = new Language("xxx_YY");
+        assertEquals(lang1, lang2);
+        assertEquals(lang1, lang3);
+        assertEquals(lang2, lang3);
     }
     
     /**
      * Test the constructor under lots of stress.
      */
-    public void testConstructor()
-    {
-        try
-        {
-            Language lang1 = new Language((Locale)null);
-            Language lang2 = new Language((String)null);
-            if( !lang1.equals(lang2) )
-                fail("Empty not equal");
-        }
-        catch( Exception e )
-        {
-            fail(e.getMessage());
-        }
+    public void testConstructor() {
+        Language lang1 = new Language((Locale) null);
+        Language lang2 = new Language((String) null);
+        assertEquals(lang1, lang2);
     }
 }

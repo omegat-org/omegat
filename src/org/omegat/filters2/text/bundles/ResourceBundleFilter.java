@@ -485,15 +485,12 @@ public class ResourceBundleFilter extends AbstractFilter {
 
     /**
      * Looks for the key-value separator (=,: or ' ') in the string.
-     * <p>
-     * See also bugreport <a
-     * href="http://sourceforge.net/support/tracker.php?aid=1606595"
-     * >#1606595</a>.
      * 
      * @return The char number of key-value separator in a string. Not that if
      *         the string does not contain any separator this string is
      *         considered to be a key with empty string value, and this method
      *         returns <code>-1</code> to indicate there's no equals.
+     * @see <a href="https://sourceforge.net/p/omegat/bugs/266/">bug #266</a>
      */
     private int searchEquals(String str) {
         int prevCp = 'a';

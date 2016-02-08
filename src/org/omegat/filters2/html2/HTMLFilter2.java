@@ -51,8 +51,8 @@ import org.omegat.util.StringUtil;
  * A filter to translate HTML and XHTML files.
  * <p>
  * Some useful discussion why HTML filter should behave like it does, happened
- * on a <a href="http://sourceforge.net/support/tracker.php?aid=1364265">bug
- * report</a> devoted to compressing space.
+ * on a <a href="https://sourceforge.net/p/omegat/bugs/108/">bug report</a>
+ * devoted to compressing space.
  * 
  * @author Maxym Mykhalchuk
  * @author Martin Fleurke

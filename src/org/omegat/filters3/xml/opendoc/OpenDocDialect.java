@@ -56,7 +56,7 @@ public class OpenDocDialect extends DefaultXMLDialect {
                 "seq",
 
                 // Donated by Didier Briel
-                // http://sourceforge.net/support/tracker.php?aid=1458673
+                // https://sourceforge.net/p/omegat/bugs/176/
                 "draw:image", "di", "draw:frame", "df", "draw:object-ole", "do",
 
                 "text:bookmark", "bk", "text:bookmark-start", "bs", "text:bookmark-end", "be",
@@ -67,7 +67,7 @@ public class OpenDocDialect extends DefaultXMLDialect {
                 "dc:date", "dd",
                 // End of contribution
 
-                // http://sourceforge.net/support/tracker.php?aid=1461154
+                // https://sourceforge.net/p/omegat/bugs/177/
                 "text:note-citation", "nc", "text:note-body", "nb", });
 
         defineParagraphTags(new String[] { "text:p", "text:h", "dc:title", "dc:description", "dc:subject",

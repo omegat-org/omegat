@@ -322,7 +322,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
      * 
      * RFE "Option: Insert best match (80%+) into target field"
      * 
-     * http://sourceforge.net/support/tracker.php?aid=1075976
+     * @see <a href="https://sourceforge.net/p/omegat/feature-requests/33/">RFE
+     *      #33</a>
      */
     private void checkForReplaceTranslation() {
         if (matches.isEmpty()) {

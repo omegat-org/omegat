@@ -47,9 +47,8 @@ import org.omegat.util.PatternConsts;
  * Note that if <code>encoding</code> parameter of the
  * {@link #HTMLWriter(String, String) constructor} is null, no encoding
  * declaration is added, and the file is written in OS-default encoding. This is
- * done to fix a bug <a
- * href="http://sourceforge.net/support/tracker.php?aid=1350320">[1.6 RC2] Bug
- * with Target Encoding set to &lt;auto&gt; for (x)HTML</a>.
+ * done to fix a bug <a href="https://sourceforge.net/p/omegat/bugs/101/">[1.6
+ * RC2] Bug with Target Encoding set to &lt;auto&gt; for (x)HTML</a>.
  * 
  * @author Maxym Mykhalchuk
  */

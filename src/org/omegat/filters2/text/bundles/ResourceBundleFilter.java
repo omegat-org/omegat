@@ -307,10 +307,8 @@ public class ResourceBundleFilter extends AbstractFilter {
      * Removes extra slashes from, e.g. "\ ", "\=" and "\:" typical in
      * machine-generated resource bundles. A slash at the end of a string means
      * a mandatory space has been trimmed.
-     * <p>
-     * See also bugreport <a
-     * href="http://sourceforge.net/support/tracker.php?aid=1606595"
-     * >#1606595</a>.
+     * 
+     * @see <a href="https://sourceforge.net/p/omegat/bugs/266/">bug #266</a>
      */
     private String removeExtraSlashes(String string) {
         StringBuilder result = new StringBuilder(string.length());

@@ -215,9 +215,8 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         String s = ste.getSrcText();
         TMXEntry te = Core.getProject().getTranslationInfo(ste);
 
-        // if there's no translation, skip the string
-        // bugfix for:
-        // http://sourceforge.net/support/tracker.php?aid=1209839
+        // if there's no translation, skip the string bugfix for:
+        // https://sourceforge.net/p/omegat/bugs/64/
         if (!te.isTranslated() || s.isEmpty()) {
             return null;
         }

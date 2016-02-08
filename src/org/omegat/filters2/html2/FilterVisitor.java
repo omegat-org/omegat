@@ -348,12 +348,14 @@ public class FilterVisitor extends NodeVisitor {
      * Does the tag lead to starting (ending) a paragraph.
      * <p>
      * Contains code donated by JC to have dictionary list parsed as segmenting.
-     * http://sourceforge.net/support/tracker.php?aid=1348792
+     * 
+     * @see <a href="https://sourceforge.net/p/omegat/feature-requests/102/">RFE
+     *      #102</a>
      */
     private boolean isParagraphTag(Tag tag) {
         String tagname = tag.getTagName();
         return
-        // Bugfix for http://sourceforge.net/support/tracker.php?aid=1288756
+        // Bugfix for https://sourceforge.net/p/omegat/bugs/84/
         // ADDRESS tag is also a paragraph tag
         tagname.equals("ADDRESS") || tagname.equals("BLOCKQUOTE") || tagname.equals("BODY")
                 || tagname.equals("CENTER") || tagname.equals("DIV") || tagname.equals("H1")
@@ -573,7 +575,7 @@ public class FilterVisitor extends NodeVisitor {
         // But if the translator does not translate the paragraph,
         // then we write out the uncompressed version,
         // as documented in
-        // http://sourceforge.net/support/tracker.php?aid=1364265
+        // https://sourceforge.net/p/omegat/bugs/108/
         // The spaces that are around the segment are not removed, unless
         // compressWhitespace option is enabled. Then the spaces are compressed to max 1.
         // (This changes the layout, therefore it is an option)

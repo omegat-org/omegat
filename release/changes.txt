@@ -120,7 +120,7 @@ remained at the end of lines when the line was cut on a space.
  OmegaT 3.5.3 (2015-12-02)
 ----------------------------------------------------------------------
   23 Enhancements
-   6 Bug fixes
+   7 Bug fixes
    8 Localisation updates
 ----------------------------------------------------------------------
 3.5.3 vs 3.5.2 update 1
@@ -220,6 +220,9 @@ Tag nesting is now only tested for OmegaT tags.
 
   - Fragments to be removed not colored correctly
   https://sourceforge.net/p/omegat/bugs/549/
+  
+  - Editor freezes when navigating segments by double-click (OS X only)
+  https://sourceforge.net/p/omegat/bugs/529/
 
   Localisation Updates:
 

@@ -132,8 +132,15 @@ public class ResourceBundleFilterTest extends TestFilterBase {
     }
 
     public void testNOI18N() throws Exception {
-        translateText(new ResourceBundleFilter(),
-                "test/data/filters/resourceBundle/file-ResourceBundleFilter-NOI18N.properties");
+        String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-NOI18N.properties";
+        ResourceBundleFilter filter = new ResourceBundleFilter();
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
+
+        checkMultiStart(fi, f);
+        checkMulti("Value", "ID", null, null, null, null);
+        checkMultiEnd();
+
+        translateText(filter, f);
     }
 
     public void testCommentEscaping() throws Exception {

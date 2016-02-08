@@ -226,6 +226,10 @@ public class ResourceBundleFilter extends AbstractFilter {
         return result.toString();
     }
 
+    private enum EscapeMode {
+        KEY, VALUE, COMMENT
+    }
+
     /**
      * Converts normal strings to ascii-encoded ones.
      * 
@@ -239,14 +243,14 @@ public class ResourceBundleFilter extends AbstractFilter {
      *            If false, keep the text in the source encoding (if assume what
      *            it is UTF-8, what is the another supported encoding)
      */
-    private String toAscii(String text, boolean key) {
+    private String toAscii(String text, EscapeMode mode) {
         CharsetEncoder charsetEncoder = Charset.forName(targetEncoding).newEncoder();
         
         StringBuilder result = new StringBuilder();
 
         for (int cp, len = text.length(), i = 0; i < len; i += Character.charCount(cp)) {
             cp = text.codePointAt(i);
-            if (cp == '\\') {
+            if (mode != EscapeMode.COMMENT && cp == '\\') {
                 if (dontUnescapeULiterals && containsUEscapeAt(text, i)) {
                     result.append("\\");
                 } else {
@@ -258,11 +262,11 @@ public class ResourceBundleFilter extends AbstractFilter {
                 result.append("\\r");
             } else if (cp == '\t') {
                 result.append("\\t");
-            } else if (key && cp == ' ') {
+            } else if (mode == EscapeMode.KEY && cp == ' ') {
                 result.append("\\ ");
-            } else if (key && cp == '=') {
+            } else if (mode == EscapeMode.KEY && cp == '=') {
                 result.append("\\=");
-            } else if (key && cp == ':') {
+            } else if (mode == EscapeMode.KEY && cp == ':') {
                 result.append("\\:");
             } else if ((cp >= 32 && cp < 127) || charsetEncoder.canEncode(text.substring(i, i + Character.charCount(cp)))) {
                 result.appendCodePoint(cp);
@@ -384,7 +388,8 @@ public class ResourceBundleFilter extends AbstractFilter {
             // skipping comments
             int firstCp = trimmed.codePointAt(0);
             if (firstCp == '#' || firstCp == '!') {
-                outfile.write(toAscii(str, false) + lbpr.getLinebreak());
+                outfile.write(toAscii(str, EscapeMode.COMMENT));
+                outfile.write(lbpr.getLinebreak());
                 // Save the comments
                 comments = (comments == null ? str : comments + "\n" + str);
                 // checking if the next string shouldn't be internationalized
@@ -443,9 +448,9 @@ public class ResourceBundleFilter extends AbstractFilter {
 
                 if (noi18n) {
                     // if we don't need to internationalize
-                    outfile.write(toAscii(key, true));
+                    outfile.write(toAscii(key, EscapeMode.KEY));
                     outfile.write(equals);
-                    outfile.write(value);
+                    outfile.write(toAscii(value, EscapeMode.VALUE));
                     outfile.write(lbpr.getLinebreak());
                     noi18n = false;
                 } else {
@@ -460,13 +465,13 @@ public class ResourceBundleFilter extends AbstractFilter {
                         trans = value;
                     }
                     trans = trans.replaceAll("\\n\\s\\n", "\n\n");
-                    trans = toAscii(trans, false);
+                    trans = toAscii(trans, EscapeMode.VALUE);
                     if (!trans.isEmpty() && trans.codePointAt(0) == ' ') {
                         trans = '\\' + trans;
                     }
                     // Non-translated segments are written based on the filter options 
-                    if (translatedSegment == true || removeStringsUntranslated == false) {
-                        outfile.write(toAscii(key, true));
+                    if (translatedSegment || !removeStringsUntranslated) {
+                        outfile.write(toAscii(key, EscapeMode.KEY));
                         outfile.write(equals);
                         outfile.write(trans);
                         outfile.write(lbpr.getLinebreak()); // fix for bug 1462566

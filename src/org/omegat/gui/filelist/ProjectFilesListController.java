@@ -365,7 +365,8 @@ public class ProjectFilesListController {
         menu.show(list.tableFiles, p.x, p.y);
     }
 
-    private void addContextMenuItem(JPopupMenu menu, final File toOpen, final String defaultTitle, final String modTitle) {
+    private void addContextMenuItem(final JPopupMenu menu, final File toOpen, final String defaultTitle,
+            final String modTitle) {
         final JMenuItem item = menu.add(OStrings.getString(defaultTitle));
         item.addActionListener(new ActionListener() {
             @Override
@@ -385,11 +386,17 @@ public class ProjectFilesListController {
             }
             @Override
             public void menuKeyReleased(MenuKeyEvent e) {
-                item.setText(OStrings.getString(defaultTitle));
+                setText(defaultTitle);
             }
             @Override
             public void menuKeyPressed(MenuKeyEvent e) {
-                item.setText(OStrings.getString(modTitle));
+                if ((e.getModifiers() & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
+                    setText(modTitle);
+                }
+            }
+            private void setText(String key) {
+                item.setText(OStrings.getString(key));
+                menu.pack();
             }
         });
     }

@@ -177,6 +177,14 @@ public class EditorUtilsTest extends TestCase {
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
         assertEquals("<g0>FOO</g0>", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
+        
+        // Includes surrounding punctuation
+        input = "\"Foo, Bar\"";
+        assertEquals("\"foo, bar\"", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
+        assertEquals("\"FOO, BAR\"", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
+        assertEquals("\"Foo, bar\"", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
+        assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
+        assertEquals("\"FOO, BAR\"", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
     }
 
     public void testReplaceGlossaryEntries() {

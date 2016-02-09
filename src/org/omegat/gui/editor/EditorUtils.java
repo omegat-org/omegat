@@ -39,7 +39,6 @@ import org.omegat.gui.editor.IEditor.CHANGE_CASE_TO;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.tokenizer.ITokenizer;
-import org.omegat.tokenizer.ITokenizer.StemmingMode;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 

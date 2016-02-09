@@ -102,6 +102,32 @@ public class StringUtilTest extends TestCase {
         assertFalse(StringUtil.isTitleCase(test));
     }
     
+    public void testAlphanumericStringCase() {
+        String test = "MQL5";
+        assertTrue(StringUtil.isUpperCase(test));
+        assertFalse(StringUtil.isLowerCase(test));
+        assertFalse(StringUtil.isTitleCase(test));
+        assertFalse(StringUtil.isMixedCase(test));
+
+        test = "mql5";
+        assertFalse(StringUtil.isUpperCase(test));
+        assertTrue(StringUtil.isLowerCase(test));
+        assertFalse(StringUtil.isTitleCase(test));
+        assertFalse(StringUtil.isMixedCase(test));
+
+        test = "Mql5";
+        assertFalse(StringUtil.isUpperCase(test));
+        assertFalse(StringUtil.isLowerCase(test));
+        assertTrue(StringUtil.isTitleCase(test));
+        assertFalse(StringUtil.isMixedCase(test));
+
+        test = "mQl5";
+        assertFalse(StringUtil.isUpperCase(test));
+        assertFalse(StringUtil.isLowerCase(test));
+        assertFalse(StringUtil.isTitleCase(test));
+        assertTrue(StringUtil.isMixedCase(test));
+    }
+    
     public void testEmptyStringCase() {
         String test = null;
         try {

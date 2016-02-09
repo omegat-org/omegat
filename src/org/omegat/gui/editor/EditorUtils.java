@@ -178,7 +178,7 @@ public class EditorUtils {
     public static String doChangeCase(String input, CHANGE_CASE_TO toWhat, Locale locale,
             ITokenizer tokenizer) {
         // tokenize the selection
-        Token[] tokenList = tokenizer.tokenizeWords(input, StemmingMode.NONE);
+        Token[] tokenList = tokenizer.tokenizeVerbatim(input);
 
         if (toWhat == CHANGE_CASE_TO.CYCLE) {
             int lower = 0;

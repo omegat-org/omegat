@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Alex Buloichik
+               2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -33,6 +34,7 @@ import junit.framework.TestCase;
  * Tests for (some) static utility methods.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public class StringUtilTest extends TestCase {
     public void testIsSubstringAfter() {
@@ -208,6 +210,11 @@ public class StringUtilTest extends TestCase {
         assertEquals("\u01CB", StringUtil.toTitleCase("\u01CC", locale));
         // LATIN SMALL LETTER I (U+0069) -> LATIN CAPITAL LETTER I WITH DOT ABOVE (U+0130) in Turkish
         assertEquals("\u0130jk", StringUtil.toTitleCase("ijk", new Locale("tr")));
+        // Non-letters in front
+        assertEquals("'Good day, sir.'", StringUtil.toTitleCase("'GOOD DAY, SIR.'", locale));
+        // No letters at all
+        String test = "!@#$%^&*()-=\"\\";
+        assertEquals(test, StringUtil.toTitleCase(test, locale));
     }
     
     public void testCompressSpace() {

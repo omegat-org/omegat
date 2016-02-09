@@ -9,6 +9,7 @@
                2008 Andrzej Sawula
                2010-2013 Alex Buloichik
                2015 Zoltan Bartko, Aaron Madlon-Kay
+               2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -42,6 +43,7 @@ import java.util.Locale;
  * @author Zoltan Bartko
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public class StringUtil {
 
@@ -233,8 +235,18 @@ public class StringUtil {
         if (text.isEmpty()) {
             return text;
         }
-        int firstTitleCase = Character.toTitleCase(text.codePointAt(0));
-        int remainderOffset = text.offsetByCodePoints(0, 1);
+        int firstLetterIndex = 0;
+        for (int cp; firstLetterIndex < text.length(); firstLetterIndex += Character.charCount(cp)) {
+            cp = text.codePointAt(firstLetterIndex);
+            if (Character.isLetter(cp)) {
+                break;
+            }
+        }
+        if (firstLetterIndex == text.length()) {
+            return text;
+        }
+        int firstTitleCase = Character.toTitleCase(text.codePointAt(firstLetterIndex));
+        int remainderOffset = text.offsetByCodePoints(firstLetterIndex, 1);
         // If the first codepoint has an actual title case variant (rare), use that.
         // Otherwise convert first codepoint to upper case according to locale.
         String first = Character.isTitleCase(firstTitleCase)

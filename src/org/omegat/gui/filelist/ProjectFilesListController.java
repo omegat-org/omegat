@@ -307,7 +307,11 @@ public class ProjectFilesListController {
         list.tableFiles.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                gotoFile(list.tableFiles.rowAtPoint(e.getPoint()));
+                if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
+                    showContextMenu(e.getPoint());
+                } else {
+                    gotoFile(list.tableFiles.rowAtPoint(e.getPoint()));
+                }
             }
         });
         
@@ -334,15 +338,6 @@ public class ProjectFilesListController {
         list.btnDown.addActionListener(moveAction);
         list.btnFirst.addActionListener(moveAction);
         list.btnLast.addActionListener(moveAction);
-
-        list.tableFiles.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
-                    showContextMenu(e.getPoint());
-                }
-            }
-        });
     }
     
     private void updateTitle(Object numFiles) {

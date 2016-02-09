@@ -30,6 +30,8 @@ package org.omegat.gui.notes;
 
 import java.awt.Dimension;
 
+import javax.swing.undo.UndoManager;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.common.EntryInfoPane;
@@ -51,6 +53,7 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes {
     private static final String EXPLANATION = OStrings.getString("GUI_NOTESWINDOW_explanation");
 
     SourceTextEntry ste;
+    UndoManager undoManager;
 
     /** Creates new Notes Text Area Pane */
     public NotesTextArea(MainWindow mw) {
@@ -64,6 +67,8 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes {
         setMinimumSize(new Dimension(100, 50));
         
         JTextPaneLinkifier.linkify(this);
+        undoManager = new UndoManager();
+        getDocument().addUndoableEditListener(undoManager);
     }
 
     @Override
@@ -83,6 +88,7 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes {
 
         setText(null);
         setEditable(false);
+        undoManager.discardAllEdits();
         ste = null;
     }
 
@@ -99,5 +105,19 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes {
         String text = getText();
         // Disallow empty note. Use null to indicate lack of note.
         return text.isEmpty() ? null : text;
+    }
+
+    @Override
+    public void undo() {
+        if (undoManager.canUndo()) {
+            undoManager.undo();
+        }
+    }
+
+    @Override
+    public void redo() {
+        if (undoManager.canRedo()) {
+            undoManager.redo();
+        }
     }
 }

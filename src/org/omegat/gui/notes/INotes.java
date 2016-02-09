@@ -50,4 +50,10 @@ public interface INotes {
      * Clear pane.
      */
     void clear();
+
+    /** Undo last edits */
+    void undo();
+
+    /** Redo last undone edits */
+    void redo();
 }

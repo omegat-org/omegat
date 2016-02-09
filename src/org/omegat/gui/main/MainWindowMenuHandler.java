@@ -36,6 +36,7 @@ package org.omegat.gui.main;
 
 import java.awt.Component;
 import java.awt.Desktop;
+import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
@@ -387,11 +388,21 @@ public class MainWindowMenuHandler {
     }
 
     public void editUndoMenuItemActionPerformed() {
-        Core.getEditor().undo();
+        Component focused = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
+        if (focused.equals(Core.getNotes())) {
+            Core.getNotes().undo();
+        } else {
+            Core.getEditor().undo();
+        }
     }
 
     public void editRedoMenuItemActionPerformed() {
-        Core.getEditor().redo();
+        Component focused = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
+        if (focused.equals(Core.getNotes())) {
+            Core.getNotes().redo();
+        } else {
+            Core.getEditor().redo();
+        }
     }
 
     public void editOverwriteTranslationMenuItemActionPerformed() {

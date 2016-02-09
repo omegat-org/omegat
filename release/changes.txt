@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.6.0
 ----------------------------------------------------------------------
- 15 Enhancements
+ 16 Enhancements
   4 Bug fixes
 ----------------------------------------------------------------------
 3.6.0 vs 3.5.3
@@ -46,6 +46,9 @@
 
   - Open source & target files from the Project Files window
   https://sourceforge.net/p/omegat/feature-requests/1146/
+
+  - Support Undo and Redo in the Notes pane
+  https://sourceforge.net/p/omegat/feature-requests/1181/
 
   Other changes:
 

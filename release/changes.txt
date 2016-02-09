@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.6.0
 ----------------------------------------------------------------------
- 14 Enhancements
+ 15 Enhancements
   4 Bug fixes
 ----------------------------------------------------------------------
 3.6.0 vs 3.5.3
@@ -43,6 +43,9 @@
 
   - Filters for Java Properties XML and Schematron 
   https://sourceforge.net/p/omegat/feature-requests/1147/
+
+  - Open source & target files from the Project Files window
+  https://sourceforge.net/p/omegat/feature-requests/1146/
 
   Other changes:
 

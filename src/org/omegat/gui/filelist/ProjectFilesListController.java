@@ -33,8 +33,10 @@ package org.omegat.gui.filelist;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -59,6 +61,8 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import javax.swing.AbstractAction;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -84,6 +88,7 @@ import javax.swing.text.BadLocationException;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
+import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IEntryEventListener;
@@ -91,6 +96,7 @@ import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.gui.main.MainWindow;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
@@ -123,7 +129,8 @@ import org.omegat.util.gui.UIThreadsUtil;
 public class ProjectFilesListController {
 
     private ProjectFilesList list;
-    private AbstractTableModel modelFiles, modelTotal;
+    private FileInfoModel modelFiles;
+    private AbstractTableModel modelTotal;
     private Sorter currentSorter;
 
     private TableFilterPanel filterPanel;
@@ -327,10 +334,70 @@ public class ProjectFilesListController {
         list.btnDown.addActionListener(moveAction);
         list.btnFirst.addActionListener(moveAction);
         list.btnLast.addActionListener(moveAction);
+
+        list.tableFiles.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
+                    showContextMenu(e.getPoint());
+                }
+            }
+        });
     }
     
     private void updateTitle(Object numFiles) {
         list.setTitle(StringUtil.format(OStrings.getString("PF_WINDOW_TITLE"), numFiles));
+    }
+
+    private void showContextMenu(Point p) {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        int row = list.tableFiles.rowAtPoint(p);
+        if (row == -1) {
+            return;
+        }
+        FileInfo info = modelFiles.getDataAtRow(row);
+        String sourceDir = Core.getProject().getProjectProperties().getSourceRoot();
+        final File sourceFile = new File(sourceDir, info.filePath);
+        String targetDir = Core.getProject().getProjectProperties().getTargetRoot();
+        final File targetFile = new File(targetDir, Core.getProject().getTargetPathForSourceFile(info.filePath));
+        JPopupMenu menu = new JPopupMenu();
+        JMenuItem item = new JMenuItem(OStrings.getString("PF_OPEN_SOURCE_FILE"));
+        item.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File toOpen = sourceFile;
+                if ((e.getModifiers() & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
+                    toOpen = toOpen.getParentFile();
+                }
+                try {
+                    Desktop.getDesktop().open(toOpen);
+                } catch (IOException ex) {
+                    Log.log(ex);
+                }
+            }
+        });
+        item.setEnabled(sourceFile.isFile());
+        menu.add(item);
+        item = new JMenuItem(OStrings.getString("PF_OPEN_TARGET_FILE"));
+        item.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File toOpen = targetFile;
+                if ((e.getModifiers() & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
+                    toOpen = toOpen.getParentFile();
+                }
+                try {
+                    Desktop.getDesktop().open(toOpen);
+                } catch (IOException ex) {
+                    Log.log(ex);
+                }
+            }
+        });
+        item.setEnabled(targetFile.isFile());
+        menu.add(item);
+        menu.show(list.tableFiles, p.x, p.y);
     }
 
     private final KeyListener filterTrigger = new KeyAdapter() {
@@ -821,7 +888,7 @@ public class ProjectFilesListController {
         list.statLabel.setFont(font);
     }
 
-    class FileInfoModel extends AbstractTableModel {
+    static class FileInfoModel extends AbstractTableModel {
         private final List<IProject.FileInfo> files;
 
         public FileInfoModel(List<IProject.FileInfo> files) {
@@ -881,7 +948,11 @@ public class ProjectFilesListController {
                 return null;
             }
         }
-    };
+
+        public FileInfo getDataAtRow(int row) {
+            return files.get(row);
+        }
+    }
 
     class Sorter extends RowSorter<FileInfoModel> {
         private final List<IProject.FileInfo> files;

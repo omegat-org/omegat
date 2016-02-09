@@ -75,6 +75,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.MenuKeyEvent;
+import javax.swing.event.MenuKeyListener;
 import javax.swing.event.TableColumnModelEvent;
 import javax.swing.event.TableColumnModelListener;
 import javax.swing.table.AbstractTableModel;
@@ -354,45 +356,42 @@ public class ProjectFilesListController {
         }
         FileInfo info = modelFiles.getDataAtRow(row);
         String sourceDir = Core.getProject().getProjectProperties().getSourceRoot();
-        final File sourceFile = new File(sourceDir, info.filePath);
+        File sourceFile = new File(sourceDir, info.filePath);
         String targetDir = Core.getProject().getProjectProperties().getTargetRoot();
-        final File targetFile = new File(targetDir, Core.getProject().getTargetPathForSourceFile(info.filePath));
+        File targetFile = new File(targetDir, Core.getProject().getTargetPathForSourceFile(info.filePath));
         JPopupMenu menu = new JPopupMenu();
-        JMenuItem item = new JMenuItem(OStrings.getString("PF_OPEN_SOURCE_FILE"));
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                File toOpen = sourceFile;
-                if ((e.getModifiers() & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
-                    toOpen = toOpen.getParentFile();
-                }
-                try {
-                    Desktop.getDesktop().open(toOpen);
-                } catch (IOException ex) {
-                    Log.log(ex);
-                }
-            }
-        });
-        item.setEnabled(sourceFile.isFile());
-        menu.add(item);
-        item = new JMenuItem(OStrings.getString("PF_OPEN_TARGET_FILE"));
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                File toOpen = targetFile;
-                if ((e.getModifiers() & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
-                    toOpen = toOpen.getParentFile();
-                }
-                try {
-                    Desktop.getDesktop().open(toOpen);
-                } catch (IOException ex) {
-                    Log.log(ex);
-                }
-            }
-        });
-        item.setEnabled(targetFile.isFile());
-        menu.add(item);
+        addContextMenuItem(menu, sourceFile, "PF_OPEN_SOURCE_FILE", "PF_REVEAL_SOURCE_FILE");
+        addContextMenuItem(menu, targetFile, "PF_OPEN_TARGET_FILE", "PF_REVEAL_TARGET_FILE");
         menu.show(list.tableFiles, p.x, p.y);
+    }
+
+    private void addContextMenuItem(JPopupMenu menu, final File toOpen, final String defaultTitle, final String modTitle) {
+        final JMenuItem item = menu.add(OStrings.getString(defaultTitle));
+        item.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean openParent = (e.getModifiers() & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0;
+                try {
+                    Desktop.getDesktop().open(openParent ? toOpen.getParentFile() : toOpen);
+                } catch (IOException ex) {
+                    Log.log(ex);
+                }
+            }
+        });
+        item.setEnabled(toOpen.isFile());
+        item.addMenuKeyListener(new MenuKeyListener() {
+            @Override
+            public void menuKeyTyped(MenuKeyEvent e) {
+            }
+            @Override
+            public void menuKeyReleased(MenuKeyEvent e) {
+                item.setText(OStrings.getString(defaultTitle));
+            }
+            @Override
+            public void menuKeyPressed(MenuKeyEvent e) {
+                item.setText(OStrings.getString(modTitle));
+            }
+        });
     }
 
     private final KeyListener filterTrigger = new KeyAdapter() {

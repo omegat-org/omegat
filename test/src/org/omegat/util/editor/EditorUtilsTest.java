@@ -169,6 +169,14 @@ public class EditorUtilsTest extends TestCase {
         assertEquals("Mql5", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
         assertEquals("Mql5", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
         assertEquals("mql5", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
+
+        // Includes OmegaT tag
+        input = "<g0>Foo</g0>";
+        assertEquals("<g0>foo</g0>", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
+        assertEquals("<g0>FOO</g0>", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
+        assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
+        assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
+        assertEquals("<g0>FOO</g0>", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
     }
 
     public void testReplaceGlossaryEntries() {

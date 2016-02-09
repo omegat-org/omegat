@@ -174,8 +174,7 @@ public class EditorUtils {
      *            A tokenizer for the input string language
      * @return The modified string
      */
-    public static String doChangeCase(String input, CHANGE_CASE_TO toWhat, Locale locale,
-            ITokenizer tokenizer) {
+    public static String doChangeCase(String input, CHANGE_CASE_TO toWhat, Locale locale, ITokenizer tokenizer) {
         // tokenize the selection
         Token[] tokenList = tokenizer.tokenizeVerbatim(input);
 
@@ -188,6 +187,9 @@ public class EditorUtils {
 
             for (Token token : tokenList) {
                 String word = token.getTextFromString(input);
+                if (!canChangeTokenCase(word)) {
+                    continue;
+                }
                 if (StringUtil.isLowerCase(word)) {
                     lower++;
                     continue;
@@ -212,39 +214,59 @@ public class EditorUtils {
                 // Ignore other tokens as they should be caseless text
                 // such as CJK ideographs or symbols only.
             }
-            
+
             if (lower == 0 && title == 0 && upper == 0 && mixed == 0 && ambiguous == 0) {
                 return input; // nothing to do here
             }
 
             toWhat = determineTargetCase(lower, upper, title, mixed, ambiguous);
         }
-        
-        if (toWhat == CHANGE_CASE_TO.SENTENCE) {
-            return StringUtil.toTitleCase(input, locale);
-        }
 
         StringBuilder buffer = new StringBuilder(input);
         int lengthIncrement = 0;
-        
+
         for (Token token : tokenList) {
             // find out the case and change to the selected
             String tokText = token.getTextFromString(input);
-            String result = toWhat == CHANGE_CASE_TO.LOWER ? tokText.toLowerCase(locale)
-                    : toWhat == CHANGE_CASE_TO.UPPER ? tokText.toUpperCase(locale)
-                    : toWhat == CHANGE_CASE_TO.TITLE ? StringUtil.toTitleCase(tokText, locale)
-                    : tokText;
+            if (!canChangeTokenCase(tokText)) {
+                continue;
+            }
+            String result;
+            if (toWhat == CHANGE_CASE_TO.LOWER) {
+                result = tokText.toLowerCase(locale);
+            } else if (toWhat == CHANGE_CASE_TO.UPPER) {
+                result = tokText.toUpperCase(locale);
+            } else if (toWhat == CHANGE_CASE_TO.TITLE) {
+                result = StringUtil.toTitleCase(tokText, locale);
+            } else if (toWhat == CHANGE_CASE_TO.SENTENCE) {
+                result = StringUtil.toTitleCase(tokText, locale);
+                toWhat = CHANGE_CASE_TO.LOWER;
+            } else {
+                result = tokText;
+            }
 
             // replace this token
-            buffer.replace(token.getOffset() + lengthIncrement, token.getLength() + token.getOffset()
-                    + lengthIncrement, result);
+            buffer.replace(token.getOffset() + lengthIncrement, token.getLength() + token.getOffset() + lengthIncrement,
+                    result);
 
             lengthIncrement += result.length() - token.getLength();
         }
-        
+
         return buffer.toString();
     }
-    
+
+    /**
+     * Determine whether or not the provided token should be considered when
+     * changing the case of a larger string. We don't want to consider, e.g.,
+     * OmegaT tags because changing their case can break them.
+     * 
+     * @param token
+     * @return Whether or not to change case
+     */
+    private static boolean canChangeTokenCase(String token) {
+        return Character.isLetter(token.codePointAt(0));
+    }
+
     private static CHANGE_CASE_TO determineTargetCase(int lower, int upper, int title, int mixed, int ambiguous) {
         int presentCaseTypes = 0;
         if (lower > 0) {

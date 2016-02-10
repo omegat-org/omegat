@@ -487,12 +487,15 @@ public class MainWindowMenuHandler {
             return;
         }
 
-        SearchWindowController search = mainWindow.peekLastSearchWindow();
-        if (search == null) {
-            editFindInProjectMenuItemActionPerformed();
-        } else {
-            search.makeVisible(getTrimmedSelectedTextInMainWindow());
+        List<SearchWindowController> windows = mainWindow.getSearchWindows();
+        for (int i = windows.size() - 1; i >= 0; i--) {
+            SearchWindowController swc = windows.get(i);
+            if (swc.getMode() == SearchMode.SEARCH) {
+                swc.makeVisible(getTrimmedSelectedTextInMainWindow());
+                return;
+            }
         }
+        editFindInProjectMenuItemActionPerformed();
     }
 
     public void editReplaceInProjectMenuItemActionPerformed() {

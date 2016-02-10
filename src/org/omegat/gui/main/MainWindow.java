@@ -44,6 +44,7 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JFileChooser;
@@ -315,14 +316,8 @@ public class MainWindow extends JFrame implements IMainWindow {
         }
     }
 
-    protected SearchWindowController peekLastSearchWindow() {
-        SearchWindowController result = null;
-        synchronized (m_searches) {
-            if (!m_searches.isEmpty()) {
-                result = m_searches.get(m_searches.size() - 1);
-            }
-        }
-        return result;
+    protected List<SearchWindowController> getSearchWindows() {
+        return Collections.unmodifiableList(m_searches);
     }
 
     /**

@@ -181,6 +181,10 @@ public class SearchWindowController {
         }
     }
 
+    public SearchMode getMode() {
+        return mode;
+    }
+
     final void initActions() {
 
         // ///////////////////////////////////

@@ -310,7 +310,14 @@ public class ProjectFilesListController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
-                    showContextMenu(e.getPoint());
+                    Point p = e.getPoint();
+                    int row = list.tableFiles.rowAtPoint(p);
+                    if (row != -1) {
+                        JPopupMenu popup = createContextMenuForRow(row);
+                        if (popup != null) {
+                            popup.show(list.tableFiles, p.x, p.y);
+                        }
+                    }
                 } else {
                     gotoFile(list.tableFiles.rowAtPoint(e.getPoint()));
                 }
@@ -325,6 +332,14 @@ public class ProjectFilesListController {
                     e.consume();
                 } else if (filterPanel != null && e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     endFilter();
+                    e.consume();
+                } else if (e.getKeyCode() == KeyEvent.VK_CONTEXT_MENU) {
+                    int row = list.tableFiles.getSelectedRow();
+                    Point p = list.tableFiles.getCellRect(row, 0, false).getLocation();
+                    JPopupMenu popup = createContextMenuForRow(row);
+                    if (popup != null) {
+                        popup.show(list.tableFiles, p.x, p.y);
+                    }
                     e.consume();
                 }
             }
@@ -346,15 +361,11 @@ public class ProjectFilesListController {
         list.setTitle(StringUtil.format(OStrings.getString("PF_WINDOW_TITLE"), numFiles));
     }
 
-    private void showContextMenu(Point p) {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
-        int row = list.tableFiles.rowAtPoint(p);
-        if (row == -1) {
-            return;
-        }
+    private JPopupMenu createContextMenuForRow(int row) {
         FileInfo info = modelFiles.getDataAtRow(row);
+        if (info == null) {
+            return null;
+        }
         String sourceDir = Core.getProject().getProjectProperties().getSourceRoot();
         File sourceFile = new File(sourceDir, info.filePath);
         String targetDir = Core.getProject().getProjectProperties().getTargetRoot();
@@ -362,7 +373,7 @@ public class ProjectFilesListController {
         JPopupMenu menu = new JPopupMenu();
         addContextMenuItem(menu, sourceFile, "PF_OPEN_SOURCE_FILE", "PF_REVEAL_SOURCE_FILE");
         addContextMenuItem(menu, targetFile, "PF_OPEN_TARGET_FILE", "PF_REVEAL_TARGET_FILE");
-        menu.show(list.tableFiles, p.x, p.y);
+        return menu;
     }
 
     private void addContextMenuItem(final JPopupMenu menu, final File toOpen, final String defaultTitle,
@@ -386,7 +397,10 @@ public class ProjectFilesListController {
             }
             @Override
             public void menuKeyReleased(MenuKeyEvent e) {
-                setText(defaultTitle);
+                if ((e.getModifiers() & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0
+                        || e.getKeyCode() == KeyEvent.VK_META || e.getKeyCode() == KeyEvent.VK_CONTROL) {
+                    setText(defaultTitle);
+                }
             }
             @Override
             public void menuKeyPressed(MenuKeyEvent e) {
@@ -951,7 +965,7 @@ public class ProjectFilesListController {
         }
 
         public FileInfo getDataAtRow(int row) {
-            return files.get(row);
+            return (row >= 0 && row < files.size()) ? files.get(row) : null;
         }
     }
 

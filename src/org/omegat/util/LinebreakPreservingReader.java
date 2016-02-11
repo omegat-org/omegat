@@ -107,16 +107,17 @@ public class LinebreakPreservingReader extends Reader {
             linebreak.append((char) chr);
 
             // If the linebreak character is \r, check if it's followed by \n
-            if (((char) chr) == '\r') {
+            if (chr == '\r') {
                 // Get the next character
                 chr = in.read();
 
                 // If the next character is \n, add it to the current linebreak,
                 // otherwise push it back into the input reader
-                if (((char) chr) == '\n')
+                if (chr == '\n') {
                     linebreak.append((char) chr);
-                else
+                } else {
                     in.unread(chr);
+                }
             }
         }
 
@@ -137,7 +138,7 @@ public class LinebreakPreservingReader extends Reader {
     }
 
     private final boolean isLinebreakCharacter(int chr) {
-        return (((char) chr) == '\n') || (((char) chr) == '\r');
+        return chr == '\n' || chr == '\r';
     }
 
     /* FOR TESTING ONLY */

@@ -25,9 +25,11 @@
 
 package org.omegat.filters;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
@@ -120,15 +122,27 @@ public class ResourceBundleFilterTest extends TestFilterBase {
     }
     
     public void testWhiteSpace() throws Exception {
+        // We want to see full whitespace for this test
+        boolean removeSpacesOrig = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
+        Core.getFilterMaster().getConfig().setRemoveSpacesNonseg(false);
+
         String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-WhiteSpace.properties";
         ResourceBundleFilter filter = new ResourceBundleFilter();
         IProject.FileInfo fi = loadSourceFiles(filter, f);
 
         checkMultiStart(fi, f);
         checkMulti("Value", "KEY", null, null, null, "# Tab->\t<-Tab");
+        checkMulti("Value    ", "KEY2", null, null, null, "# Trailing whitespace must be preserved");
+        checkMulti("Value1\tValue2", "KEY3", null, null, null, "# Significant whitespace on continuation line");
+        checkMulti("Value1 Value2", "KEY4", null, null, null, null);
         checkMultiEnd();
         
-        translateText(filter, f);
+        translate(filter, f);
+        compareBinary(new File("test/data/filters/resourceBundle/file-ResourceBundleFilter-WhiteSpace-gold.properties"),
+                outFile);
+
+        // Restore old value
+        Core.getFilterMaster().getConfig().setRemoveSpacesNonseg(removeSpacesOrig);
     }
 
     public void testNOI18N() throws Exception {

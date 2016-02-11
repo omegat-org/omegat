@@ -166,28 +166,27 @@ public class ResourceBundleFilter extends AbstractFilter {
     }
 
     /**
-     * Reads next line from the input and:
+     * Processes an input line for use in OmegaT by doing the following:
      * <ul>
-     * <li>Converts ascii-encoded \\uxxxx chars to normal characters.
+     * <li>Converts ASCII-encoded \\uxxxx chars to normal characters.
      * <li>Converts \r, \n and \t to CR, line feed and tab.
-     * <li>But! Keeps a backspace in '\ ', '\=', '\:' etc (non-trimmable space
-     * or non-key-value-breaking :-) equals).
+     * <li>But! Keeps a backspace in '\ ', '\=', '\:', etc. (non-trimmable space
+     * or non-key-value-breaking equals).
      * <ul>
-     * Change from BufferedReader to LinebreakPreservingReader was part of fix
-     * for bug 1462566
      */
-    protected String getNextLine(LinebreakPreservingReader reader) throws IOException, TranslationException {
-        String ascii = reader.readLine();
-        if (ascii == null) {
-            return null;
-        }
+    protected String normalizeInputLine(String line) throws IOException, TranslationException {
 
-        StringBuilder result = new StringBuilder();
-        for (int cp, len = ascii.length(), i = 0; i < len; i += Character.charCount(cp)) {
-            cp = ascii.codePointAt(i);
-            if (cp == '\\' && ascii.codePointCount(i, len) > 1) {
+        // Whitespace at the beginning of lines is ignored
+        boolean strippingWhitespace = true;
+        StringBuilder result = new StringBuilder(line.length());
+        for (int cp, len = line.length(), i = 0; i < len; i += Character.charCount(cp)) {
+            cp = line.codePointAt(i);
+            if (strippingWhitespace && (strippingWhitespace = Character.isWhitespace(cp))) {
+                continue;
+            }
+            if (cp == '\\' && line.codePointCount(i, len) > 1) {
                 i += Character.charCount(cp);
-                cp = ascii.codePointAt(i);
+                cp = line.codePointAt(i);
                 if (cp != 'u') {
                     if (cp == 'n') {
                         cp = '\n';
@@ -203,12 +202,12 @@ public class ResourceBundleFilter extends AbstractFilter {
                     result.append('\\');
                 } else {
                     // checking if the string is long enough
-                    if (ascii.codePointCount(i, len) < 1 + 4) {
+                    if (line.codePointCount(i, len) < 1 + 4) {
                         throw new TranslationException(OStrings.getString("RBFH_ERROR_ILLEGAL_U_SEQUENCE"));
                     }
-                    int uStart = ascii.offsetByCodePoints(i, 1);
-                    int uEnd = ascii.offsetByCodePoints(uStart, 4);
-                    String uStr = ascii.substring(uStart, uEnd);
+                    int uStart = line.offsetByCodePoints(i, 1);
+                    int uEnd = line.offsetByCodePoints(uStart, 4);
+                    String uStr = line.substring(uStart, uEnd);
                     try {
                         cp = Integer.parseInt(uStr, 16);
                         if (!Character.isValidCodePoint(cp)) {
@@ -332,152 +331,143 @@ public class ResourceBundleFilter extends AbstractFilter {
     }
 
     /**
-     * Trims the string from left. Also contains some code to strip a backspace
-     * from '\ ' (non-trimmable space), but doesn't trim this space.
-     */
-    private String leftTrim(String s) {
-        int i = 0;
-        while (i < s.length()) {
-            int cp = s.codePointAt(i);
-            if (cp != ' ' && cp != '\t') {
-                break;
-            }
-            i += Character.charCount(cp);
-        }
-        s = s.replaceAll("\\\\ ", " ");
-        return s.substring(i, s.length());
-    }
-
-    /**
      * Doing the processing of the file...
      */
     @Override
     public void processFile(BufferedReader reader, BufferedWriter outfile, FilterContext fc)
             throws IOException, TranslationException {
-        LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix for bug 1462566
-        String str;
-        // Support to show the comments (localization notes) into the Comments panel
-        String comments;
-        boolean noi18n = false;
-
         // Parameter in the options of filter to customize the target file
-        removeStringsUntranslated = processOptions != null && "true".equalsIgnoreCase(processOptions.get(OPTION_REMOVE_STRINGS_UNTRANSLATED));
-        
-        // Parameter in the options of filter to customize the behavior of the filter
-        dontUnescapeULiterals = processOptions != null && "true".equalsIgnoreCase(processOptions.get(OPTION_DONT_UNESCAPE_U_LITERALS));
-        
-        // Initialize the comments
-        comments = null;
-        while ((str = getNextLine(lbpr)) != null) {
+        removeStringsUntranslated = processOptions != null
+                && "true".equalsIgnoreCase(processOptions.get(OPTION_REMOVE_STRINGS_UNTRANSLATED));
 
-            // Variable to check if a segment is translated
-            boolean translatedSegment = true;
+        // Parameter in the options of filter to customize the behavior of the
+        // filter
+        dontUnescapeULiterals = processOptions != null
+                && "true".equalsIgnoreCase(processOptions.get(OPTION_DONT_UNESCAPE_U_LITERALS));
 
-            String trimmed = str.trim();
+        String raw;
+        boolean noi18n = false;
+        // Support to show the comments (localization notes) into the Comments
+        // panel
+        String comments = null;
 
-            // skipping empty strings
-            if (trimmed.isEmpty()) {
-                outfile.write(str + lbpr.getLinebreak());
-                // Delete the comments
-                comments = null;
-                continue;
-            }
+        LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix for bug 1462566
+        try {
+            while ((raw = lbpr.readLine()) != null) {
 
-            // skipping comments
-            int firstCp = trimmed.codePointAt(0);
-            if (firstCp == '#' || firstCp == '!') {
-                outfile.write(toAscii(str, EscapeMode.COMMENT));
-                outfile.write(lbpr.getLinebreak());
-                // Save the comments
-                comments = (comments == null ? str : comments + "\n" + str);
-                // checking if the next string shouldn't be internationalized
-                if (trimmed.contains(DO_NOT_TRANSLATE_COMMENT)) {
-                    noi18n = true;
-                }
-                continue;
-            }
+                String trimmed = raw.trim();
 
-            // reading the glued lines
-            while (str.codePointBefore(str.length()) == '\\') {
-                String next = getNextLine(lbpr);
-                if (next == null) {
-                    next = "";
-                }
-                // gluing this line (w/o '\' on this line)
-                // with next line (w/o leading spaces)
-                str = str.substring(0, str.offsetByCodePoints(str.length(), -1)) + leftTrim(next);
-            }
-
-            // key=value pairs
-            int equalsPos = searchEquals(str);
-
-            // writing out key
-            String key;
-            if (equalsPos >= 0) {
-                key = str.substring(0, equalsPos).trim();
-            } else {
-                key = str.trim();
-            }
-            key = removeExtraSlashes(key);
-            // writing segment is delayed until verifying that the translation was made
-            // outfile.write(toAscii(key, true));
-
-            // advance if there're spaces or tabs after =
-            if (equalsPos >= 0) {
-                int equalsEnd = str.offsetByCodePoints(equalsPos, 1);
-                while (equalsEnd < str.length()) {
-                    int cp = str.codePointAt(equalsEnd);
-                    if (cp != ' ' && cp != '\t') {
-                        break;
-                    }
-                    equalsEnd += Character.charCount(cp);
-                }
-                String equals = str.substring(equalsPos, equalsEnd);
-                // writing segment is delayed until verifying that the translation was made
-                // outfile.write(equals);
-
-                // value, if any
-                String value;
-                if (equalsEnd < str.length()) {
-                    value = removeExtraSlashes(str.substring(equalsEnd));
-                } else {
-                    value = "";
-                }
-
-                if (noi18n) {
-                    // if we don't need to internationalize
-                    outfile.write(toAscii(key, EscapeMode.KEY));
-                    outfile.write(equals);
-                    outfile.write(toAscii(value, EscapeMode.VALUE));
+                // skipping empty strings
+                if (trimmed.isEmpty()) {
+                    outfile.write(raw);
                     outfile.write(lbpr.getLinebreak());
-                    noi18n = false;
-                } else {
-                    value = value.replaceAll("\\n\\n", "\n \n");
-                    // If there is a comment, show it into the Comments panel
-                    String trans = process(key, value, comments);
                     // Delete the comments
                     comments = null;
-                    // Check if the segment is not translated
-                    if ("--untranslated_yet--".equals(trans)) {
-                        translatedSegment = false;
-                        trans = value;
+                    continue;
+                }
+
+                // Variable to check if a segment is translated
+                boolean translatedSegment = true;
+
+                // We are going to use the content of this line,
+                // so trim and unescape
+                String processed = normalizeInputLine(raw);
+
+                // skipping comments
+                int firstCp = trimmed.codePointAt(0);
+                if (firstCp == '#' || firstCp == '!') {
+                    outfile.write(toAscii(raw, EscapeMode.COMMENT));
+                    outfile.write(lbpr.getLinebreak());
+                    // Save the comments
+                    comments = (comments == null ? processed : comments + "\n" + processed);
+                    // checking if the next string shouldn't be
+                    // internationalized
+                    if (raw.contains(DO_NOT_TRANSLATE_COMMENT)) {
+                        noi18n = true;
                     }
-                    trans = trans.replaceAll("\\n\\s\\n", "\n\n");
-                    trans = toAscii(trans, EscapeMode.VALUE);
-                    if (!trans.isEmpty() && trans.codePointAt(0) == ' ') {
-                        trans = '\\' + trans;
+                    continue;
+                }
+
+                // reading the glued lines
+                while (processed.codePointBefore(processed.length()) == '\\') {
+                    String next = lbpr.readLine();
+                    if (next == null) {
+                        next = "";
                     }
-                    // Non-translated segments are written based on the filter options 
-                    if (translatedSegment || !removeStringsUntranslated) {
+                    // gluing this line (w/o '\' on this line)
+                    // with next line (w/o leading spaces)
+                    processed = processed.substring(0, processed.offsetByCodePoints(processed.length(), -1))
+                            + normalizeInputLine(next);
+                }
+
+                // key=value pairs
+                int equalsPos = searchEquals(processed);
+
+                // writing out key
+                String key;
+                if (equalsPos >= 0) {
+                    key = processed.substring(0, equalsPos).trim();
+                } else {
+                    key = processed.trim();
+                }
+                key = removeExtraSlashes(key);
+
+                // advance if there're spaces or tabs after =
+                if (equalsPos >= 0) {
+                    int equalsEnd = processed.offsetByCodePoints(equalsPos, 1);
+                    while (equalsEnd < processed.length()) {
+                        int cp = processed.codePointAt(equalsEnd);
+                        if (cp != ' ' && cp != '\t') {
+                            break;
+                        }
+                        equalsEnd += Character.charCount(cp);
+                    }
+                    String equals = processed.substring(equalsPos, equalsEnd);
+
+                    // value, if any
+                    String value;
+                    if (equalsEnd < processed.length()) {
+                        value = removeExtraSlashes(processed.substring(equalsEnd));
+                    } else {
+                        value = "";
+                    }
+
+                    if (noi18n) {
+                        // if we don't need to internationalize
                         outfile.write(toAscii(key, EscapeMode.KEY));
                         outfile.write(equals);
-                        outfile.write(trans);
-                        outfile.write(lbpr.getLinebreak()); // fix for bug 1462566
+                        outfile.write(toAscii(value, EscapeMode.VALUE));
+                        outfile.write(lbpr.getLinebreak());
+                        noi18n = false;
+                    } else {
+                        value = value.replaceAll("\\n\\n", "\n \n");
+                        // If there is a comment, show it into the Comments panel
+                        String trans = process(key, value, comments);
+                        // Delete the comments
+                        comments = null;
+                        // Check if the segment is not translated
+                        if ("--untranslated_yet--".equals(trans)) {
+                            translatedSegment = false;
+                            trans = value;
+                        }
+                        trans = trans.replaceAll("\\n\\s\\n", "\n\n");
+                        trans = toAscii(trans, EscapeMode.VALUE);
+                        if (!trans.isEmpty() && trans.codePointAt(0) == ' ') {
+                            trans = '\\' + trans;
+                        }
+                        // Non-translated segments are written based on the
+                        // filter options
+                        if (translatedSegment || !removeStringsUntranslated) {
+                            outfile.write(toAscii(key, EscapeMode.KEY));
+                            outfile.write(equals);
+                            outfile.write(trans);
+                            outfile.write(lbpr.getLinebreak()); // fix for bug 1462566
+                        }
                     }
                 }
             }
-            // This line of code is moved up to avoid blank lines
-            // outfile.write(lbpr.getLinebreak()); // fix for bug 1462566
+        } finally {
+            lbpr.close();
         }
     }
 

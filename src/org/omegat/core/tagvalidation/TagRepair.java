@@ -101,7 +101,7 @@ public class TagRepair {
 
     protected static void fixExtraneous(StringBuilder text, Tag tag) {
         int tagEnd = tag.pos + tag.tag.length();
-        if (tag.pos > 0 && tagEnd < text.length() && text.substring(tag.pos, tagEnd).equals(tag)) {
+        if (tag.pos > 0 && tagEnd < text.length() && text.substring(tag.pos, tagEnd).equals(tag.tag)) {
             text.delete(tag.pos, tagEnd);
         } else {
             int i = text.indexOf(tag.tag);

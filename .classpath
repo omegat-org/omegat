@@ -23,6 +23,7 @@
 	<classpathentry kind="lib" path="lib/sequence-library-1.0.3.jar"/>
 	<classpathentry kind="lib" path="lib/svnkit-1.8.11.jar"/>
 	<classpathentry kind="lib" path="lib/trilead-ssh2-1.0.0-build220.jar"/>
+	<classpathentry kind="lib" path="lib/trie4j-0.9.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/commons-lang-2.6.jar"/>
 	<classpathentry kind="lib" path="lib/lucene-analyzers-common-5.2.1.jar"/>

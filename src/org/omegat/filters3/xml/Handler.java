@@ -45,6 +45,7 @@ import java.util.Stack;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
+import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Element;
@@ -78,7 +79,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     private XMLDialect dialect;
     private File inFile;
     private File outFile;
-    private String outEncoding;
+    private FilterContext context;
 
     /** Main file writer to write translated text to. */
     private BufferedWriter mainWriter;
@@ -234,14 +235,18 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     /**
      * Creates a new instance of Handler
      */
-    public Handler(Translator translator, XMLDialect dialect, File inFile,
-            File outFile, String outEncoding) throws IOException {
+    public Handler(Translator translator, XMLDialect dialect, File inFile, File outFile, FilterContext fc)
+            throws IOException {
         this.translator = translator;
         this.dialect = dialect;
         this.inFile = inFile;
         this.outFile = outFile;
-        this.outEncoding = outEncoding;
-        this.mainWriter = translator.createWriter(outFile, outEncoding);
+        this.context = fc;
+        this.mainWriter = translator.createWriter(outFile, fc.getOutEncoding());
+    }
+
+    public FilterContext getContext() {
+        return context;
     }
 
     private static final String START_JARSCHEMA = "jar:";
@@ -379,7 +384,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
                         translateAndFlush();
                         File extFile = new File(outFile.getParentFile(), localizeSystemId(systemId));
                         processedFiles.add(new File(inFile.getParent(), localizeSystemId(systemId)));
-                        extWriter = translator.createWriter(extFile, outEncoding);
+                        extWriter = translator.createWriter(extFile, context.getOutEncoding());
                         extWriter.write("<?xml version=\"1.0\"?>\n");
                     }
                 }

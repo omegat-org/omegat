@@ -339,8 +339,8 @@ public class Entry {
             lastGood = textEnd;
 
         boolean removeTags;
-        if (Core.getProject().getProjectProperties().isRemoveTags()) { // If Remove Tags is on
-            removeTags = true;                                         // Remove leading and trailing tags must be on
+        if (handler.getContext().isRemoveAllTags()) { // If Remove Tags is on,
+            removeTags = true;                        // Remove leading and trailing tags must be on
         } else {
             removeTags = Core.getFilterMaster().getConfig().isRemoveTags();
         }

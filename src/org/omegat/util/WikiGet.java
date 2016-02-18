@@ -79,41 +79,37 @@ public class WikiGet {
      * @param projectdir
      *            string representation of path to the project-dir where the
      *            file should be saved.
+     * @throws IOException
      */
-    public static void doWikiGet(String remote_url, String projectdir) {
-        try {
-            String joined = null; // contains edited url
-            String name = null; // contains a useful page name which we can use
-                                // as our filename
-            if (remote_url.indexOf("index.php?title=") > 0) {
-                // We're directly calling the mediawiki index.php script
-                String[] splitted = remote_url.split("index.php\\?title=");
-                String s = splitted[splitted.length - 1];
-                name = s;
-                s = s.replaceAll(" ", "_");
-                // s=URLEncoder.encode(s, "UTF-8"); // breaks previously
-                // correctly encoded page names
-                splitted[splitted.length - 1] = s;
-                joined = joinString("index.php?title=", splitted);
-                joined = joined + "&action=raw";
-            } else {
-                // assume script is behind some sort
-                // of url-rewriting
-                String[] splitted = remote_url.split("/");
-                String s = splitted[splitted.length - 1];
-                name = s;
-                s = s.replaceAll(" ", "_");
-                // s=URLEncoder.encode(s, "UTF-8");
-                splitted[splitted.length - 1] = s;
-                joined = joinString("/", splitted);
-                joined = joined + "?action=raw";
-            }
-            String page = getURL(joined);
-            saveUTF8(projectdir, name + ".UTF8", page);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static void doWikiGet(String remote_url, String projectdir) throws IOException {
+        String joined = null; // contains edited url
+        String name = null; // contains a useful page name which we can use
+                            // as our filename
+        if (remote_url.indexOf("index.php?title=") > 0) {
+            // We're directly calling the mediawiki index.php script
+            String[] splitted = remote_url.split("index.php\\?title=");
+            String s = splitted[splitted.length - 1];
+            name = s;
+            s = s.replaceAll(" ", "_");
+            // s=URLEncoder.encode(s, "UTF-8"); // breaks previously
+            // correctly encoded page names
+            splitted[splitted.length - 1] = s;
+            joined = joinString("index.php?title=", splitted);
+            joined = joined + "&action=raw";
+        } else {
+            // assume script is behind some sort
+            // of url-rewriting
+            String[] splitted = remote_url.split("/");
+            String s = splitted[splitted.length - 1];
+            name = s;
+            s = s.replaceAll(" ", "_");
+            // s=URLEncoder.encode(s, "UTF-8");
+            splitted[splitted.length - 1] = s;
+            joined = joinString("/", splitted);
+            joined = joined + "?action=raw";
         }
-
+        String page = getURL(joined);
+        saveUTF8(projectdir, name + ".UTF8", page);
     }
 
     /**

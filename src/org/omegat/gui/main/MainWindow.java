@@ -69,6 +69,7 @@ import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.FileUtil;
 import org.omegat.util.FileUtil.ICollisionCallback;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -389,10 +390,16 @@ public class MainWindow extends JFrame implements IMainWindow {
         String remote_url = JOptionPane.showInputDialog(this, OStrings.getString("TF_WIKI_IMPORT_PROMPT"),
                 OStrings.getString("TF_WIKI_IMPORT_TITLE"), JOptionPane.OK_CANCEL_OPTION);
         String projectsource = Core.getProject().getProjectProperties().getSourceRoot();
-        // [1762625] Only try to get MediaWiki page if a string has been entered
-        if (remote_url != null && !remote_url.trim().isEmpty()) {
+        if (remote_url == null || remote_url.trim().isEmpty()) {
+            // [1762625] Only try to get MediaWiki page if a string has been entered
+            return;
+        }
+        try {
             WikiGet.doWikiGet(remote_url, projectsource);
             ProjectUICommands.projectReload();
+        } catch (Exception ex) {
+            Log.log(ex);
+            displayErrorRB(ex, "TF_WIKI_IMPORT_FAILED");
         }
     }
 

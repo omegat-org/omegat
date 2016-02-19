@@ -103,7 +103,7 @@ OmegaT を手早く使い慣れたい場合は、まず OmegaT を起動して�
  3. OmegaT をインストールする
 
 3.1 全般の確認事項
-OmegaT の実行には、Java Runtime Environment（JRE）バージョン 1.5 以降があらかじめインストールされている必要があります。JRE の選択や入手、またはインストールにおけるトラブルを回避するため、現在の OmegaT は JRE 付きパッケージが標準で提供されています。  
+OmegaT の実行には、Java Runtime Environment（JRE）バージョン 1.6 以降があらかじめインストールされている必要があります。JRE の選択や入手、またはインストールにおけるトラブルを回避するため、現在の OmegaT は JRE 付きパッケージが標準で提供されています。  
 
 すでに Java 実行環境があるなら、現バージョンの OmegaT をインストールするひとつの方法として、Java Web Start を使うことができます。
 この場合、以下のファイルをダウンロードし、実行してください：
@@ -195,6 +195,9 @@ OmegaT.app をドックか、ファインダーのツールバーへドラッグ
 OmegaT の開発に協力したい場合、以下のサイトから開発者たちと連絡を取ってください：
       http://lists.sourceforge.net/lists/listinfo/omegat-development
 
+プログラマーとして参加する場合は、開発者向け文書をお読みください。
+      https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/
+
 OmegaT のユーザーインターフェースや取扱説明書、他の関連文書の翻訳に協力したい場合、まず下記のファイルを読んでください：
       
       http://www.omegat.org/en/howtos/localizing_omegat.php
@@ -224,6 +227,7 @@ OmegaT のユーザーインターフェースや取扱説明書、他の関連�
   Enrique Estévez Fernández
   Martin Fleurke
   Wildrich Fourie
+  Tony Graham
   Phillip Hall
   Jean-Christophe Helary
   Chihiro Hio

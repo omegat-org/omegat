@@ -92,7 +92,7 @@
           <row><entry>訳文ファイルを生成</entry><entry><keycap>Ctrl+D</keycap></entry><entry>projectCompileMenuItem</entry></row>
           <row><entry>現在の訳文ファイルのみ生成</entry><entry><keycap>Shift+Ctrl+D</keycap></entry><entry>projectSingleCompileMenuItem</entry></row>
           <row><entry>プロジェクト設定...</entry><entry><keycap>Ctrl+E</keycap></entry><entry>projectEditMenuItem</entry></row>
-          <row><entry>翻訳対象ファイル一覧...</entry><entry><keycap>Ctrl+L</keycap></entry><entry>viewFileListMenuItem</entry></row>
+          <row><entry>翻訳対象ファイル一覧...</entry><entry></entry><entry>viewFileListMenuItem</entry></row>
           <row><entry>終了</entry><entry><keycap>Ctrl+Q</keycap></entry><entry>projectExitMenuItem</entry></row>
         </tbody>
       </tgroup>

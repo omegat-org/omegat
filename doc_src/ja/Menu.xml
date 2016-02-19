@@ -181,11 +181,7 @@
             <row>
               <entry><guimenuitem>翻訳対象ファイル一覧...</guimenuitem></entry>
 
-              <entry><keycombo>
-                  <keycap>Ctrl</keycap>
-
-                  <keycap>L</keycap>
-                </keycombo></entry>
+              <entry></entry>
 
               <entry><link linkend="section.project.files">翻訳対象ファイル一覧</link>ウィンドウを開くか、あるいは閉じます（どの動作をするかは、その時点でウィンドウが開いているかどうかによります）。</entry>
             </row>
@@ -587,7 +583,7 @@
                   <keycap>J</keycap>
                 </keycombo></entry>
 
-              <entry>指定した番号の分節を開きます。</entry>
+              <entry>分節を英文字で呼び出すか、または分節番号を入力すれば、対応する分節が開きます。</entry>
             </row>
 
             <row>
@@ -709,8 +705,7 @@
             <row>
               <entry><guimenuitem>双方向アルゴリズム制御文字を色付け</guimenuitem></entry>
 
-              <entry>チェックがある場合、<ulink url="http://www.w3.org/International/questions/qa-bidi-controls">双方向アルゴリズム制御文字</ulink>を表示します。
-              </entry>
+              <entry>チェックがある場合、<ulink url="http://www.w3.org/International/questions/qa-bidi-controls">双方向アルゴリズム制御文字</ulink>を表示します。</entry>
             </row>
 
             <row>
@@ -1363,18 +1358,6 @@
           <colspec align="left" colnum="2"/>
 
           <tbody>
-            <row>
-              <entry>翻訳対象ファイル一覧...</entry>
-
-              <entry><keycombo>
-                  <keycap>Ctrl</keycap>
-
-                  <keycap>L</keycap>
-                </keycombo></entry>
-
-              <entry>プロジェクト内の翻訳対象となるファイルを一覧表示します。</entry>
-            </row>
-
             <row>
               <entry>タグ検証</entry>
 

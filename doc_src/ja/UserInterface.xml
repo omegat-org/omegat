@@ -617,9 +617,11 @@
           <primary>OmegaT のウィンドウ</primary> <secondary>翻訳対象ファイル一覧</secondary>
         </indexterm></title>
 
-      <para>翻訳対象ファイル一覧ウィンドウには、プロジェクトに含まれるファイル一式と、プロジェクトに関する情報が表示されます。OmegaT がプロジェクトを読み込むと、翻訳対象ファイル一覧が自動的に表示されます。<keycap><guimenuitem>［Ctrl+L］<indexterm class="singular">
-          <primary>ショートカット</primary> <secondary>翻訳対象ファイル一覧 - Ctrl+L</secondary>
-        </indexterm></guimenuitem></keycap>で開き、<keycap>［Esc］</keycap>で閉じます。翻訳対象ファイル一覧ウィンドウは、次の情報を表示します：</para>
+      <para>翻訳対象ファイル一覧ウィンドウには、プロジェクトに含まれるファイル一式と、プロジェクトに関する情報が表示されます。OmegaT がプロジェクトを読み込むと、翻訳対象ファイル一覧が自動的に表示されます。</para>
+
+      <para><remark>注意：</remark>翻訳対象ファイル一覧ウィンドウが表示されないようにすることができます。それには、ファイル（［設定］→［設定フォルダー］メニューからアクセスできる <filename>omegat.prefs</filename> 中の <emphasis>project_files_show_on_load</emphasis> を <emphasis>false</emphasis> に設定します。</para>
+
+      <para>ウィンドウは、<keycap>［Esc］</keycap>で閉じます。翻訳対象ファイル一覧ウィンドウは、次の情報を表示します：</para>
 
       <itemizedlist>
         <listitem>

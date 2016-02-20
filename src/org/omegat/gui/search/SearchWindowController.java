@@ -740,6 +740,7 @@ public class SearchWindowController {
 
     private void doReplace() {
         String replaceString = form.m_replaceField.getEditor().getItem().toString();
+        replaceString = StringUtil.normalizeUnicode(replaceString);
         HistoryManager.addReplaceItem(replaceString);
         form.m_replaceField.setModel(new DefaultComboBoxModel(HistoryManager.getReplaceItems()));
         
@@ -752,6 +753,7 @@ public class SearchWindowController {
 
     private void doReplaceAll() {
         String replaceString = form.m_replaceField.getEditor().getItem().toString();
+        replaceString = StringUtil.normalizeUnicode(replaceString);
         HistoryManager.addReplaceItem(replaceString);
         form.m_replaceField.setModel(new DefaultComboBoxModel(HistoryManager.getReplaceItems()));
         
@@ -779,6 +781,7 @@ public class SearchWindowController {
         EntryListPane viewer = (EntryListPane) form.m_viewer;
 
         String queryString = form.m_searchField.getEditor().getItem().toString();
+        queryString = StringUtil.normalizeUnicode(queryString);
         
         HistoryManager.addSearchItem(queryString);
         form.m_searchField.setModel(new DefaultComboBoxModel(HistoryManager.getSearchItems()));

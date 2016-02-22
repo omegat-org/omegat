@@ -116,6 +116,9 @@ public class Main {
          * Parse command line arguments info map.
          */
         for (String arg : args) {
+            // Normalize Unicode here because e.g. OS X filesystem is NFD while
+            // in Java land things are NFC
+            arg = StringUtil.normalizeUnicode(arg);
             Matcher m = PARAM.matcher(arg);
             if (m.matches()) {
                 params.put(m.group(1), m.group(3));

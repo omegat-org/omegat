@@ -188,11 +188,6 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
         jPanel9.add(sortAlphabeticallyCheckBox, gridBagConstraints);
 
         sortFullTextCheckBox.setText(OStrings.getString("AC_AUTOTEXT_SORT_FULL_TEXT")); // NOI18N
-        sortFullTextCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sortFullTextCheckBoxActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
@@ -398,9 +393,6 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
             model.removeRow(entryTable.getSelectedRow());
         }
     }//GEN-LAST:event_removeEntryButtonActionPerformed
-
-    private void sortFullTextCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortFullTextCheckBoxActionPerformed
-    }//GEN-LAST:event_sortFullTextCheckBoxActionPerformed
 
     private void doClose(int retStatus) {
         returnStatus = retStatus;

@@ -180,7 +180,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(jLabel2, OStrings.getString("OpenDoc_TRANSLATE_ELEMENTS")); // NOI18N
         jPanel1.add(jLabel2);
 
-        jLabel3.setFont(new java.awt.Font("MS Sans Serif", 1, 11)); // NOI18N
+        jLabel3.setFont(jLabel3.getFont().deriveFont(jLabel3.getFont().getStyle() | java.awt.Font.BOLD, jLabel3.getFont().getSize()-2));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         org.openide.awt.Mnemonics.setLocalizedText(jLabel3, OStrings.getString("OpenXML_WORD")); // NOI18N
         jPanel1.add(jLabel3);
@@ -246,7 +246,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         });
         jPanel1.add(translateFallbackTextCB);
 
-        jLabel4.setFont(new java.awt.Font("MS Sans Serif", 1, 11)); // NOI18N
+        jLabel4.setFont(jLabel4.getFont().deriveFont(jLabel4.getFont().getStyle() | java.awt.Font.BOLD, jLabel4.getFont().getSize()-2));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         org.openide.awt.Mnemonics.setLocalizedText(jLabel4, OStrings.getString("OpenXML_EXCEL")); // NOI18N
         jPanel1.add(jLabel4);
@@ -268,7 +268,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         });
         jPanel1.add(translateSheetNamesCB);
 
-        jLabel5.setFont(new java.awt.Font("MS Sans Serif", 1, 11)); // NOI18N
+        jLabel5.setFont(jLabel5.getFont().deriveFont(jLabel5.getFont().getStyle() | java.awt.Font.BOLD, jLabel5.getFont().getSize()-2));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         org.openide.awt.Mnemonics.setLocalizedText(jLabel5, OStrings.getString("OpenXML_POWER_POINT")); // NOI18N
         jPanel1.add(jLabel5);
@@ -291,7 +291,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(translateSlideLinksCB, OStrings.getString("OpenXML_TRANSLATE_SLIDE_LINKS")); // NOI18N
         jPanel1.add(translateSlideLinksCB);
 
-        jLabel7.setFont(new java.awt.Font("MS Sans Serif", 1, 11)); // NOI18N
+        jLabel7.setFont(jLabel7.getFont().deriveFont(jLabel7.getFont().getStyle() | java.awt.Font.BOLD, jLabel7.getFont().getSize()-2));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         org.openide.awt.Mnemonics.setLocalizedText(jLabel7, OStrings.getString("OpenXML_GLOBAL")); // NOI18N
         jPanel1.add(jLabel7);

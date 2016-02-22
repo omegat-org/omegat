@@ -1102,6 +1102,11 @@ public class RealProject implements IProject {
         List<File> srcFileList = StaticUtils.buildFileList(root, true);
         List<String> srcPathList = new ArrayList<String>(srcFileList.size());
         for (File file : srcFileList) {
+            if (!file.getPath().startsWith(m_config.getSourceRoot())) {
+                // This can happen due to differences in Unicode composition
+                throw new RuntimeException("Can't calculate relative path: " + file.getPath()
+                        + " does not appear to begin with " + m_config.getSourceRoot());
+            }
             srcPathList.add(file.getPath().substring(m_config.getSourceRoot().length()).replace('\\', '/'));
         }
         StaticUtils.removeFilesByMasks(srcPathList, m_config.getSourceRootExcludes());

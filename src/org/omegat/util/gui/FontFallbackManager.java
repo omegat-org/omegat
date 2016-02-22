@@ -50,9 +50,9 @@ public class FontFallbackManager {
     
     private static final Logger LOGGER = Logger.getLogger(FontFallbackManager.class.getName());
     
-    private static Font[] recentFonts = new Font[8];
+    private static final Font[] recentFonts = new Font[8];
     private static int lastFontIndex = 0;
-    private static Map<Integer, Font> cache = new ConcurrentHashMap<Integer, Font>();
+    private static final Map<Integer, Font> cache = new ConcurrentHashMap<Integer, Font>();
     
     public static Font getCapableFont(int cp) {
         // Skip variation selectors

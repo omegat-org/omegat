@@ -394,16 +394,15 @@ public class RealProject implements IProject {
             throws Exception {
         FilterMaster fm = Core.getFilterMaster();
         
-        List<String> srcFileList = new ArrayList<String>();
         File root = new File(m_config.getSourceRoot());
-        StaticUtils.buildFileList(srcFileList, root, true);
+        List<File> srcFileList = StaticUtils.buildFileList(root, true);
 
         AlignFilesCallback alignFilesCallback = new AlignFilesCallback(props);
 
         String srcRoot = m_config.getSourceRoot();
-        for (String filename : srcFileList) {
+        for (File file : srcFileList) {
             // shorten filename to that which is relative to src root
-            String midName = filename.substring(srcRoot.length());
+            String midName = file.getPath().substring(srcRoot.length());
 
             fm.alignFile(srcRoot, midName, translatedDir.getPath(), new FilterContext(props),
                     alignFilesCallback);
@@ -552,32 +551,31 @@ public class RealProject implements IProject {
             throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") + "\n" + e.getMessage());
         }
 
-        // build mirror directory of source tree
-        List<String> fileList = new ArrayList<String>(256);
         String srcRoot = m_config.getSourceRoot();
         String locRoot = m_config.getTargetRoot();
 
         // build translated files
         FilterMaster fm = Core.getFilterMaster();
 
-        fileList.clear();
+        List<File> fileList;
         try {
-            StaticUtils.buildFileList(fileList, new File(srcRoot), true);
+            fileList = StaticUtils.buildFileList(new File(srcRoot), true);
         } catch (Exception e) {
             Log.logErrorRB("CT_ERROR_CREATING_TMX");
             Log.log(e);
             throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") + "\n" + e.getMessage());
         }
-        for (int i = 0; i < fileList.size(); i++) {
-            fileList.set(i, fileList.get(i).substring(m_config.getSourceRoot().length()).replace(File.separatorChar, '/'));
+        List<String> pathList = new ArrayList<String>(fileList.size());
+        for (File file : fileList) {
+            pathList.add(file.getPath().substring(m_config.getSourceRoot().length()).replace('\\', '/'));
         }
-        StaticUtils.removeFilesByMasks(fileList, m_config.getSourceRootExcludes());
+        StaticUtils.removeFilesByMasks(pathList, m_config.getSourceRootExcludes());
 
         TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback();
 
         int numberOfCompiled = 0;
 
-        for (String midName : fileList) {
+        for (String midName : pathList) {
             // shorten filename to that which is relative to src root
             Matcher fileMatch = FILE_PATTERN.matcher(midName);
             if (fileMatch.matches()) {
@@ -1100,20 +1098,16 @@ public class RealProject implements IProject {
         long st = System.currentTimeMillis();
         FilterMaster fm = Core.getFilterMaster();
 
-        List<String> srcFileList = new ArrayList<String>();
         File root = new File(m_config.getSourceRoot());
-        StaticUtils.buildFileList(srcFileList, root, true);
-        for (int i = 0; i < srcFileList.size(); i++) {
-            srcFileList.set(i, srcFileList.get(i).substring(m_config.getSourceRoot().length()).replace(File.separatorChar, '/'));
+        List<File> srcFileList = StaticUtils.buildFileList(root, true);
+        List<String> srcPathList = new ArrayList<String>(srcFileList.size());
+        for (File file : srcFileList) {
+            srcPathList.add(file.getPath().substring(m_config.getSourceRoot().length()).replace('\\', '/'));
         }
-        StaticUtils.removeFilesByMasks(srcFileList, m_config.getSourceRootExcludes());
-        StaticUtils.sortByList(srcFileList, getSourceFilesOrder());
+        StaticUtils.removeFilesByMasks(srcPathList, m_config.getSourceRootExcludes());
+        StaticUtils.sortByList(srcPathList, getSourceFilesOrder());
 
-        for (String filename : srcFileList) {
-            // strip leading path information;
-            // feed file name to project window
-            String filepath = filename;
-
+        for (String filepath : srcPathList) {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_FILE_MX", filepath);
 
             LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys);
@@ -1123,7 +1117,7 @@ public class RealProject implements IProject {
 
             loadFilesCallback.setCurrentFile(fi);
 
-            IFilter filter = fm.loadFile(m_config.getSourceRoot() + filename, new FilterContext(m_config),
+            IFilter filter = fm.loadFile(m_config.getSourceRoot() + filepath, new FilterContext(m_config),
                     loadFilesCallback);
 
             loadFilesCallback.fileFinished();

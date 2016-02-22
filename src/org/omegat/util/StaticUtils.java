@@ -133,29 +133,30 @@ public class StaticUtils {
     /**
      * Returns a list of all files under the root directory by absolute path.
      */
-    public static void buildFileList(final List<String> lst, File rootDir, boolean recursive) throws Exception {
+    public static List<File> buildFileList(File rootDir, boolean recursive) throws Exception {
+        final List<File> lst = new ArrayList<File>();
         iterateFileTree(rootDir.getCanonicalFile(), recursive, new ITreeIteratorCallback() {
             @Override
             public void processFile(File file) {
-                lst.add(file.getPath());
+                lst.add(file);
             }
         });
 
         // Get the local collator and set its strength to PRIMARY
         final Collator localCollator = Collator.getInstance(Locale.getDefault());
         localCollator.setStrength(Collator.PRIMARY);
-        Collections.sort(lst, new Comparator<String>() {
+        Collections.sort(lst, new Comparator<File>() {
             @Override
-            public int compare(String o1, String o2) {
-                return localCollator.compare(o1, o2);
+            public int compare(File o1, File o2) {
+                return localCollator.compare(o1.getPath(), o2.getPath());
             }
         });
+        return lst;
     }
 
     public static List<String> buildRelativeFilesList(File rootDir, List<String> includes,
             List<String> excludes) throws Exception {
-        List<String> files = new ArrayList<String>();
-        buildFileList(files, rootDir, true);
+        List<File> files = buildFileList(rootDir, true);
         Pattern[] includesMasks;
         if (includes != null) {
             includesMasks = new Pattern[includes.size()];
@@ -176,8 +177,8 @@ public class StaticUtils {
         }
         String prefix = rootDir.getCanonicalPath().replace('\\', '/');
         List<String> result = new ArrayList<String>();
-        for (String f : files) {
-            String fn = f.replace('\\', '/');
+        for (File f : files) {
+            String fn = f.getPath().replace('\\', '/');
             if (fn.startsWith(prefix)) {
                 // file path should starts from '/' for checking.
                 fn = fn.substring(prefix.length());

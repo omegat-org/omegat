@@ -28,7 +28,6 @@
 package org.omegat.util;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -78,16 +77,14 @@ public class StaticUtilsTest extends TestCase {
         aFile = new File(subDir, "bar");
         assertTrue(aFile.createNewFile());
 
-        List<String> list = new ArrayList<String>();
-        StaticUtils.buildFileList(list, tempDir, false);
-
+        List<File> list = StaticUtils.buildFileList(tempDir, false);
         assertTrue(list.isEmpty());
 
-        StaticUtils.buildFileList(list, tempDir, true);
+        list = StaticUtils.buildFileList(tempDir, true);
         assertEquals(2, list.size());
 
         Collections.sort(list);
-        assertTrue(list.get(0).endsWith("bar"));
+        assertTrue(list.get(0).getPath().endsWith("bar"));
 
         assertTrue(FileUtil.deleteTree(tempDir));
 

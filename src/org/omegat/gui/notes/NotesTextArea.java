@@ -33,7 +33,6 @@ import java.awt.Dimension;
 import javax.swing.undo.UndoManager;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.common.EntryInfoPane;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
@@ -52,7 +51,6 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes {
 
     private static final String EXPLANATION = OStrings.getString("GUI_NOTESWINDOW_explanation");
 
-    SourceTextEntry ste;
     UndoManager undoManager;
 
     /** Creates new Notes Text Area Pane */
@@ -89,7 +87,6 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes {
         setText(null);
         setEditable(false);
         undoManager.discardAllEdits();
-        ste = null;
     }
 
     public void setNoteText(String text) {

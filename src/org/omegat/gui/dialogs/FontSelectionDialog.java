@@ -181,11 +181,6 @@ public class FontSelectionDialog extends javax.swing.JDialog {
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         org.openide.awt.Mnemonics.setLocalizedText(applyToProjectFilesCheckBox, OStrings.getString("TF_APPLY_TO_PROJECT_FILES")); // NOI18N
-        applyToProjectFilesCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                applyToProjectFilesCheckBoxActionPerformed(evt);
-            }
-        });
         jPanel1.add(applyToProjectFilesCheckBox);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -224,42 +219,33 @@ public class FontSelectionDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fontComboBoxActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_fontComboBoxActionPerformed
-    {// GEN-HEADEREND:event_fontComboBoxActionPerformed
+    private void fontComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fontComboBoxActionPerformed
         previewTextArea.setFont(getSelectedFont());
-    }// GEN-LAST:event_fontComboBoxActionPerformed
+    }//GEN-LAST:event_fontComboBoxActionPerformed
 
-    private void sizeSpinnerStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sizeSpinnerStateChanged
-    {// GEN-HEADEREND:event_sizeSpinnerStateChanged
+    private void sizeSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sizeSpinnerStateChanged
         previewTextArea.setFont(getSelectedFont());
-    }// GEN-LAST:event_sizeSpinnerStateChanged
+    }//GEN-LAST:event_sizeSpinnerStateChanged
 
-    private void okButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_okButtonActionPerformed
-    {
-        if ((!getSelectedFont().equals(oldFont))
-                || (applyToProjectFilesCheckBox.isSelected() != Preferences
-                        .isPreference(Preferences.PROJECT_FILES_USE_FONT))) {
-            Preferences.setPreference(Preferences.PROJECT_FILES_USE_FONT,
-                    applyToProjectFilesCheckBox.isSelected());
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+        boolean applyToProjFiles = applyToProjectFilesCheckBox.isSelected();
+        if (!getSelectedFont().equals(oldFont)
+                || applyToProjFiles != Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
+            Preferences.setPreference(Preferences.PROJECT_FILES_USE_FONT, applyToProjFiles);
             doClose(RET_OK_CHANGED);
-        } else
+        } else {
             doClose(RET_CANCEL_OR_UNCHANGED);
-    }// GEN-LAST:event_okButtonActionPerformed
+        }
+    }//GEN-LAST:event_okButtonActionPerformed
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_cancelButtonActionPerformed
-    {
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         doClose(RET_CANCEL_OR_UNCHANGED);
-    }// GEN-LAST:event_cancelButtonActionPerformed
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     /** Closes the dialog */
-    private void closeDialog(java.awt.event.WindowEvent evt)// GEN-FIRST:event_closeDialog
-    {
+    private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
         doClose(RET_CANCEL_OR_UNCHANGED);
-    }// GEN-LAST:event_closeDialog
-
-    private void applyToProjectFilesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_applyToProjectFilesCheckBoxActionPerformed
-    // TODO add your handling code here:
-    }// GEN-LAST:event_applyToProjectFilesCheckBoxActionPerformed
+    }//GEN-LAST:event_closeDialog
 
     private void doClose(int retStatus) {
         returnStatus = retStatus;

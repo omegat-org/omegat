@@ -123,9 +123,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="TF_APPLY_TO_PROJECT_FILES" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="applyToProjectFilesCheckBoxActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

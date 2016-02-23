@@ -617,7 +617,11 @@
           <primary>Okna a podokna v OmegaT</primary> <secondary>Soubory projektu</secondary>
         </indexterm></title>
 
-      <para>Okno Soubory projektu zobrazuje seznam souborů projektu a udává ostatní informace o projektu. Když OmegaT načítá projekt, zobrazí toto okno automaticky. Dialogové okno otevřete stiskem <guimenuitem>Ctrl+L<indexterm class="singular">
+      <para>Okno Soubory projektu zobrazuje seznam souborů projektu a udává ostatní informace o projektu. Když OmegaT načítá projekt, zobrazí toto okno automaticky.</para>
+
+      <para><remark>Poznámka:</remark> můžete potlačit zobrazení okna Soubory projektu nastavením <emphasis>project_files_show_on_load</emphasis> na hodnotu <emphasis>false</emphasis> v souboru <filename>omegat.prefs</filename>  (přístupné přes nabídku Možnosti / Otevřít adresář nastavení).</para>
+
+      <para>Dialogové okno otevřete stiskem <guimenuitem>Ctrl+L<indexterm class="singular">
           <primary>Klávesové zkratky</primary> <secondary>Seznam souborů projektu - Ctrl+L</secondary>
         </indexterm></guimenuitem> a přes klávesu <keycap>Esc</keycap> jej zavřete. Okno Soubory projektu zobrazuje následující informace:</para>
 

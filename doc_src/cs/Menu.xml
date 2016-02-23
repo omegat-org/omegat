@@ -557,11 +557,7 @@
             <row>
               <entry><guimenuitem>Další segment</guimenuitem></entry>
 
-              <entry><keycombo>
-                  <keycap>Ctrl</keycap>
-
-                  <keycap>N</keycap>
-                </keycombo> or <keycap>Enter</keycap></entry>
+              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo> nebo <keycap>Enter</keycap></entry>
 
               <entry>Přesune se na další segment. Pokud je aktuální segment posledním v souboru, přesune se na první segment dalšího souboru.</entry>
             </row>
@@ -569,15 +565,7 @@
             <row>
               <entry><guimenuitem>Předchozí segment</guimenuitem></entry>
 
-              <entry><keycombo>
-                  <keycap>Ctrl</keycap>
-
-                  <keycap>P</keycap>
-                </keycombo> or <keycombo>
-                  <keycap>Ctrl</keycap>
-
-                  <keycap>Enter</keycap>
-                </keycombo></entry>
+              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo> nebo <keycombo> <keycap>Ctrl</keycap> <keycap>Enter</keycap> </keycombo></entry>
 
               <entry>Přesune se na předchozí segment. Pokud je aktuální segment prvním v souboru, přesune se na poslední segment předchozího souboru.</entry>
             </row>
@@ -591,7 +579,7 @@
                   <keycap>J</keycap>
                 </keycombo></entry>
 
-              <entry>Po zadání čísla segmentu bude daný segment otevřen.</entry>
+              <entry>Segment je otevřen když je zadána jeho identifikace nebo číslo.</entry>
             </row>
 
             <row>
@@ -713,8 +701,7 @@
             <row>
               <entry><guimenuitem>Označit řídicí znak bidirekcionálního algoritmu</guimenuitem></entry>
 
-              <entry>Tato možnost zobrazí <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">znaky obousměrného zápisu</ulink>
-              </entry>
+              <entry>Tato možnost zobrazí <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">znaky obousměrného zápisu</ulink></entry>
             </row>
 
             <row>

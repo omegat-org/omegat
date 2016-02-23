@@ -1,4 +1,4 @@
-Tento překlad vypracoval [Josef Molnár], copyright© [2015].
+Tento překlad vypracoval [Josef Molnár], copyright© [2016].
 
 ==============================================================================
   OmegaT 3.0, soubor Read Me / Čti mě
@@ -70,7 +70,7 @@ OmegaT bez problémů zvládá zpracovat následující formáty:
   - DocBook (*.xml)
   - jednojazyčné XLIFF (*.xlf, *.xliff, *.sdlxliff)
   - QuarkXPress CopyFlowGold (*.tag, *.xtg)
-  - ResX files (*.resx)
+  Soubory ResX (*.resx)
   - Zdrojové soubory pro Android (.*xml)
   - LaTex (*.tex, *.latex)
   - Soubory Nápovědy (*.xml) a Příručky (*.hmxp)
@@ -176,6 +176,9 @@ Přetáhněte OmegaT.app na svůj Dock nebo do nástrojové lišty v okně Finde
 Jestli chcete přispívat při vývoji aplikace OmegaT, spojte se s vývojáři na adrese:
     http://lists.sourceforge.net/lists/listinfo/omegat-development
 
+Programátoři, kteří se chtějí zapojit, naleznou vývojářskou dokumentaci na adrese:
+    https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/
+
 Jestli máte zájem o překlad uživatelského rozhraní OmegaT, uživatelské příručky nebo jiných příbuzných dokumentů, tak si nejprve přečtěte tyto informace:
       
       http://www.omegat.org/en/howtos/localizing_omegat.php
@@ -205,6 +208,7 @@ Do kódu přispěli
   Enrique Estévez Fernández
   Martin Fleurke  
   Wildrich Fourie
+  Tony Graham
   Phillip Hall
   Jean-Christophe Helary
   Chihiro Hio

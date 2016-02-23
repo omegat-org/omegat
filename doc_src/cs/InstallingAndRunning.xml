@@ -195,7 +195,8 @@
     <section id="which.package.to.download.OSX">
       <title>Stažení balíčku</title>
 
-      <para><application>OmegaT</application> obsahuje Java JRE 1.7</para>
+      <para><application>OmegaT</application> contains the Java JRE
+      1.8</para>
 
       <para>Stáhněte si <emphasis>OmegaT_3.n.n_Mac.zip.</emphasis></para>
     </section>
@@ -265,7 +266,7 @@
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Ne:</emphasis> doplňte si prostředí Java JRE pro svůj systém (vizte níže) a stáhněte <emphasis>OmegaT_3.x_Without_JRE.zip</emphasis>.</para>
+          <para><emphasis role="bold">Ne:</emphasis> doplňte si prostředí Java JRE pro svůj systém (vizte níže) a stáhněte <emphasis>OmegaT_3.n.n_Without_JRE.zip</emphasis>.</para>
 
           <para>Oracle poskytuje prostředí JRE pro Solaris SPARC/x86 (Java 1.6) a pro Linux x64, Solaris x64, Windows x64 (Java 1.6):<ulink url="http://www.oracle.com/technetwork/java/archive-139210.html">http://www.oracle.com/technetwork/java/archive-139210.html</ulink>.</para>
 
@@ -456,7 +457,6 @@
 
           <para><emphasis role="bold">-Dyandex.api.key=</emphasis><emphasis role="bold">trnsl.1.1.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</emphasis></para>
         </listitem>
-
       </itemizedlist>
 
       <para>Parametry lze kombinovat: pro spuštění aplikace <application>OmegaT</application> se všemi výše uvedenými příklady bude příkaz vypadat následovně:</para>

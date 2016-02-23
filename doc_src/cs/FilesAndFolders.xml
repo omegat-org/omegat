@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.files.and.folders">
-  <title><application>OmegaT</application> Files and Folders</title>
+  <title><application>OmegaT</application> Soubory a adresáře</title>
 
   <para><application>OmegaT</application> pracuje se třemi typy souborů.</para>
 

@@ -3,6 +3,7 @@
 ----------------------------------------------------------------------
  16 Enhancements
   7 Bug fixes
+  3 Localisation updates
 ----------------------------------------------------------------------
 3.6.0 vs 3.5.3
 
@@ -84,6 +85,12 @@ bug comments for instructions on adding the certificate to the trust store.
   Other changes:
 
   - The appearance under Windows "high-contrast" themes is improved
+
+  Localisation Updates:
+
+  - Czech localisation updated to 3.6 (UI, documentation, scripts, readme)
+  - Dutch localisation updated to 3.6 (UI, documentation, scripts, readme)
+  - Hungarian localisation updated to 3.6 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 3.5.3 update 1

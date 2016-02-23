@@ -153,7 +153,7 @@
         </listitem>
 
         <listitem>
-          <para>Otevřete projekt</para>
+          <para>otevřete projekt</para>
         </listitem>
       </orderedlist>
     </section>
@@ -297,9 +297,9 @@
           <primary>Překladové paměti</primary> <secondary>Alternativní jazykové páry</secondary>
         </indexterm></title>
 
-      <para>Například může být případ, že jste dokončili překlad s holandským zdrojem a cílový jazyk je angličtina. Pak ale potřebujete překlad např. do čínštiny, ale váš překladatel nerozumí holadsky; umí ale perfektně anglicky. In this case, the NL-EN translation memory can serve as a go-between to help generate NL to ZH translation.</para>
+      <para>Například může být případ, že jste dokončili překlad s holandským zdrojem a cílový jazyk je angličtina. Pak ale potřebujete překlad např. do čínštiny, ale váš překladatel nerozumí holadsky; umí ale perfektně anglicky. V takovém případě může posloužit NL-EN překladová paměť jako prostředník pro vygenerování překlad z NL do ZH.</para>
 
-      <para>The solution in our example is to copy the existing translation memory into the tm/tmx2source/ subfolder and rename it to ZH_CN.tmx to indicate the target language of the tmx. Překladateli se ukáží anglické překlady zdrojových segmentů v holandštině a použije je k vytvoření čínského překladu.</para>
+      <para>Řešení v našem případě je, zkopírovat existující překladovou paměť do podadresáře tm/tmx2source a přejmenovat jej na ZH_CN.tmx, aby se tak naznačil cílový jazyk překladové paměti. Překladateli se ukáží anglické překlady zdrojových segmentů v holandštině a použije je k vytvoření čínského překladu.</para>
 
       <para><emphasis role="bold">Důležitá informace:</emphasis> podpůrná překladová paměť musí být přejmenována na XX_YY.tmx, kde XX_YY je cílový jazyk překladové paměti, např. ZH_CN.tmx ve výše uvedeném případě. Zdrojové jazyky projektu a překladové paměti by ovšem měly být identické - v našem příkladě NL. Je přípustná pouze jedna překladová paměť pro daný jazykový pár, takže pokud by bylo nutno zahrnout několik překladových pamětí, budete je muset spojit všechny v XX_YY.tmx.</para>
     </section>

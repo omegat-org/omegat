@@ -84,7 +84,7 @@
         <primary>Woordenlijsten</primary> <secondary>Microsoft Terminology collectie</secondary>
       </indexterm>kan worden gedownload in bijna 100 talen en kan dienen als hoeksteen IT-woordenlijst.</para>
 
-    <para>Opmerking: de uitvoer <filename>.tbx</filename> van MultiTerm kijkt niet betrouwbaar te zijn (november 2013), het is beter om in plaats daarvan de uitvoer <filename>.tab</filename> van MultiTerm te gebruiken.</para>
+    <para>Opmerking: de uitvoer <filename>.tbx</filename> van MultiTerm lijkt niet betrouwbaar te zijn (november 2013), het is beter om in plaats daarvan de uitvoer <filename>.tab</filename> van MultiTerm te gebruiken.</para>
   </section>
 
   <section>

@@ -599,7 +599,7 @@
     <section>
       <title id="main.menu">Hoofdmenu</title>
 
-      <para>Het hoofdmenu geeft toegang tot alle functies van <application>OmegaT</application>. Zie de appendix <emphasis>Hoofdmenu</emphasis> voor een volledige beschrijving van alle menu's en menu-items. De meestgebruikte functies zijn te benaderen met sneltoetsen voor het toetsenbord, dus als u daar eenmaal aan gewend bent, zal er geen reden meer zijn om door de menu's te bladeren tijdens het vertalen. Bekijk hoofdstuk <link linkend="chapter.menu">Sneltoetsen voor menu en het toetsenbord</link> voor details.</para>
+      <para>Het hoofdmenu geeft toegang tot alle functies van <application>OmegaT</application>. Zie de appendix <emphasis>Hoofdmenu</emphasis> voor een volledige beschrijving van alle menu's en menu-items. De meest gebruikte functies zijn te benaderen met sneltoetsen voor het toetsenbord, dus als u daar eenmaal aan gewend bent, zal er geen reden meer zijn om door de menu's te bladeren tijdens het vertalen. Bekijk hoofdstuk <link linkend="chapter.menu">Sneltoetsen voor menu en het toetsenbord</link> voor details.</para>
     </section>
 
     <section id="status.bar">
@@ -617,7 +617,11 @@
           <primary>Vensters in OmegaT</primary> <secondary>Projectbestanden</secondary>
         </indexterm></title>
 
-      <para>Het venster Projectbestanden somt de projectbestanden op en geeft andere informatie over het project weer. Het wordt automatisch weergegeven als OmegaT een project laadt. Gebruik <guimenuitem>Ctrl+L<indexterm class="singular">
+      <para>Het venster Projectbestanden somt de projectbestanden op en geeft andere informatie over het project weer. Het wordt automatisch weergegeven als OmegaT een project laadt.</para>
+
+      <para><remark>Opmerking:</remark> het is mogelijk te verhinderen dat dit venster projectbestanden wordt weergegeven, door <emphasis>project_files_show_on_load</emphasis> in te stellen op <emphasis>false</emphasis> in het bestand <filename>omegat.prefs</filename> (toegankelijk via menu Opties / Toegang tot configuratiemap).</para>
+
+      <para>Gebruik <guimenuitem>Ctrl+L<indexterm class="singular">
           <primary>Sneltoetsen</primary> <secondary>Lijst projectbestanden - Ctrl+L</secondary>
         </indexterm></guimenuitem> om het te openen en <keycap>Esc</keycap> om het te sluiten. Het venster Projectbestanden geeft de volgende informatie weer:</para>
 

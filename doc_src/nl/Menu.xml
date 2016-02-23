@@ -63,7 +63,7 @@
                   <keycap>N</keycap>
                 </keycombo></entry>
 
-              <entry>Maakt en opent een nieuw project. Het dialoogvenster om een project te maken is hetzelfde als voor het bewerken van het project. Zie<xref linkend="chapter.project.properties"/></entry>
+              <entry>Maakt en opent een nieuw project. Het dialoogvenster om een project te maken is hetzelfde als voor het bewerken van het project. See<xref linkend="chapter.project.properties"/></entry>
             </row>
 
             <row>
@@ -87,7 +87,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Recent project openen</guimenuitem></entry>
+              <entry><guimenuitem>Open Recent Project</guimenuitem></entry>
 
               <entry/>
 
@@ -95,7 +95,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Kopieer bestanden naar map Bronbestanden...</guimenuitem></entry>
+              <entry><guimenuitem>Bestanden naar map Bronbestanden kopiëren...</guimenuitem></entry>
 
               <entry/>
 
@@ -499,7 +499,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Register Identieke Vertaling</guimenuitem></entry>
+              <entry><guimenuitem>Identieke vertaling registreren</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -593,7 +593,7 @@
                   <keycap>J</keycap>
                 </keycombo></entry>
 
-              <entry>Het segment wordt geopend als zijn segmentnummer wordt ingevoerd.</entry>
+              <entry>Het segment wordt geopend ofwel als de letter van de tekstballon of als het segmentnummer wordt ingevoerd.</entry>
             </row>
 
             <row>
@@ -715,8 +715,7 @@
             <row>
               <entry><guimenuitem>Bidirectional Algorithm Control Characters markeren</guimenuitem></entry>
 
-              <entry>Deze optie geef <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">bidirectional control characters</ulink> weer
-              </entry>
+              <entry>Deze optie geef <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">bidirectional control characters</ulink> weer</entry>
             </row>
 
             <row>

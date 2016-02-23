@@ -16,7 +16,7 @@
       <para>Alleen van belang voor gevorderde gebruikers!</para>
     </note>
 
-    <para>Het doel van de modus console (d.i. de opdrachtregel) is om het gebruiken <application>van OmegaT</application> als vertaalprogramma in een scriptomgeving mogelijk te maken. Indien gestart in de modus console, wordt geen GUI geladen (het zal daarom op elke console werken) en het opgegeven project wordt automatisch vertaald. Een voorbeeld zou een softwareproject zijn, waarvan de GUI is gelocaliseerd in een aantal talen. Door gebruik te maken van de modus console kan men het maken van een gelocaliseerde interface deel van het bouwproces laten zijn.</para>
+    <para>Het doel van de modus console (d.i. de opdrachtregel) is om het gebruiken <application>van OmegaT</application> als vertaalprogramma in een scriptomgeving mogelijk te maken. Indien gestart in de modus console, wordt geen GUI geladen (het zal daarom op elke console werken) en het opgegeven project wordt automatisch vertaald. Een voorbeeld zou een softwareproject zijn, waarvan de GUI is gelokaliseerd in een aantal talen. Door gebruik te maken van de modus console kan men het maken van een gelocaliseerde interface deel van het bouwproces laten zijn.</para>
 
     <section id="misc.console.mode.prerequisites">
       <title>Vooraf vereist</title>

@@ -74,7 +74,7 @@ modification follow.
 
   "This License" refers to version 3 of the GNU General Public License.
 
-  "Copyright" also means copyright-like laws that apply to other kinds of
+  "Auteursrecht" betekent ook op auteursrechten lijkend ebepalingen die van toepassing zijn op andersoortige
 works, such as semiconductor masks.
 
   "The Program" refers to any copyrightable work licensed under this
@@ -342,7 +342,7 @@ unpacking, reading or copying.
 
   7. Additional Terms.
 
-  "Additional permissions" are terms that supplement the terms of this
+  "Aanvullende rechten" zijn bepalingen in aanvulling op de nepalingen van deze
 License by making exceptions from one or more of its conditions.
 Additional permissions that are applicable to the entire Program shall
 be treated as though they were included in this License, to the extent

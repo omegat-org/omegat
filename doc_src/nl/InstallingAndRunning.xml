@@ -202,7 +202,7 @@
     <section id="which.package.to.download.OSX">
       <title>Downloaden van het pakket</title>
 
-      <para><application>OmegaT</application> bevat de Java JRE 1.7</para>
+      <para><application>OmegaT</application> bevat de Java JRE 1.8</para>
 
       <para>Download <emphasis>OmegaT_3.n.n_Mac.zip.</emphasis></para>
     </section>
@@ -460,7 +460,6 @@
 
           <para><emphasis role="bold">-Dyandex.api.key=</emphasis><emphasis role="bold">trnsl.1.1.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</emphasis></para>
         </listitem>
-
       </itemizedlist>
 
       <para>Argumenten mogen worden gecombineerd: Voor het starten van <application>OmegaT</application> met alle hierboven genoemde voorbeelden zou de opdracht zijn:</para>

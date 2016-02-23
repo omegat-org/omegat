@@ -162,11 +162,7 @@
       <term>Status voor automatisch vergroten van vertalingen opslaan</term>
 
       <listitem>
-        <para>Check this option to record in the
-        <filename>project_save.tmx</filename> file the information that a
-        segment has been auto-populated, so it can be displayed with a
-        specific color in the Editor (if the &quot;Mark Auto-Populated Segments&quot;
-        option, in the View menu, is checked).</para>
+        <para>Selecteer deze optie om in het bestand <filename>project_save.tmx</filename> de informatie op te nemen dat een segment automatisch is vergroot, zodat het met een specifieke kleur kan worden weergegeven in het venster Bewerken (als de optie &quot;Segmenten van Automatisch vergroten van vertalingen markeren &quot;, in het menu Weergave, is geselecteerd).</para>
       </listitem>
     </varlistentry>
   </variablelist>

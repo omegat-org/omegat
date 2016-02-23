@@ -1,4 +1,4 @@
-Deze vertaling is het werk van Dick Groskamp, copyright© 2015
+Deze vertaling is het werk van Dick Groskamp, copyright© 2016
 
 ==============================================================================
   ==============================================================================
@@ -18,8 +18,8 @@ OmegaT 3.0, Lees Mij-bestand
 De meest recente informatie over OmegaT is te vinden op
       http://www.omegat.org/
 
-User support, at the Yahoo user group (multilingual), where the archives are
-searchable without subscription:
+Gebruikersondersteuning op de Yahoo! gebruikersgroep (meertalig), waar zonder abonnement de archieven
+kunnen worden doorzocht:
      http://tech.groups.yahoo.com/group/OmegaT/
 
 Verzoeken tot verbeteringen (in het Engels) op de SourceForge-website:
@@ -246,6 +246,9 @@ in het zoekveld van Spotlight.
 Om deel te nemen aan de ontwikkeling van OmegaT neemt u contact op met de ontwikkelaars via:
     http://lists.sourceforge.net/lists/listinfo/omegat-development
 
+Bekijk, om te beginnen als programmeur, de documentatie voor de ontwikkeling op:
+    https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/
+
 Lees voor het vertalen van OmegaT's gebruikersinterface, gebruikershandleiding of andere gerelateerde
 documenten:
       
@@ -276,6 +279,7 @@ Code is bijgedragen door
   Enrique Estévez Fernández
   Martin Fleurke  
   Wildrich Fourie
+  Tony Graham
   Phillip Hall
   Jean-Christophe Helary
   Chihiro Hio

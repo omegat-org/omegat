@@ -80,10 +80,7 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Space matches nbsp</emphasis>: when this
-        option is checked, a space character put in search entry can match
-        either a normal space character or a non-breacking space (\u00A)
-        character.</para>
+        <para><emphasis role="bold">Spatie komt overeen met nbsp</emphasis>: als deze optie is geselecteerd mag een teken spatie in het zoekitem overeenkomen met ofwel een normaal teken spatie of een teken niet-afbreekbare spatie (\u00A).</para>
       </listitem>
 
       <listitem>

@@ -71,7 +71,8 @@ import org.xml.sax.InputSource;
  */
 @SuppressWarnings("unchecked")
 public abstract class TestFilterBase extends TestCore {
-    protected FilterContext context = new FilterContext(new Language("en"), new Language("be"), false);
+    protected FilterContext context = new FilterContext(new Language("en"), new Language("be"), false)
+            .setTargetTokenizerClass(DefaultTokenizer.class);
 
     protected File outFile;
 
@@ -362,8 +363,7 @@ public abstract class TestFilterBase extends TestCore {
     /**
      * RealProject successor for load file testing only.
      */
-    protected static class TestProject extends RealProject {
-        protected FilterContext context = new FilterContext(new Language("en"), new Language("be"), false);
+    protected class TestProject extends RealProject {
 
         public TestProject(ProjectProperties props) {
             super(props);

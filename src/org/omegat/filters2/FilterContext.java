@@ -26,6 +26,7 @@
 package org.omegat.filters2;
 
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
 
 /**
@@ -45,11 +46,17 @@ public class FilterContext {
 
     private boolean isRemoveAllTags;
 
+    private Class<?> sourceTokenizerClass;
+
+    private Class<?> targetTokenizerClass;
+
     public FilterContext(ProjectProperties props) {
         this.sourceLang = props.getSourceLanguage();
         this.targetLang = props.getTargetLanguage();
         this.sentenceSegmentingEnabled = props.isSentenceSegmentingEnabled();
         this.isRemoveAllTags = props.isRemoveTags();
+        this.sourceTokenizerClass = props.getSourceTokenizer();
+        this.targetTokenizerClass = props.getTargetTokenizer();
     }
 
     public FilterContext(Language sourceLang, Language targetLang, boolean sentenceSegmentingEnabled) {
@@ -97,5 +104,31 @@ public class FilterContext {
     /** Should all tags be removed from segments */
     public boolean isRemoveAllTags() {
         return isRemoveAllTags;
+    }
+
+    public FilterContext setSourceTokenizerClass(Class<?> sourceTokenizerClass) {
+        this.sourceTokenizerClass = sourceTokenizerClass;
+        return this;
+    }
+
+    public ITokenizer getSourceTokenizer() {
+        try {
+            return (ITokenizer) sourceTokenizerClass.newInstance();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public FilterContext setTargetTokenizerClass(Class<?> targetTokenizerClass) {
+        this.targetTokenizerClass = targetTokenizerClass;
+        return this;
+    }
+
+    public ITokenizer getTargetTokenizer() {
+        try {
+            return (ITokenizer) targetTokenizerClass.newInstance();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

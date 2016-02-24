@@ -134,8 +134,7 @@ public class TextFilter extends AbstractFilter {
         }
         Writer output;
         if (lineLength != 0 && maxLineLength != 0) {
-            output = new LineLengthLimitWriter(out, lineLength, maxLineLength, Core.getProject()
-                    .getTargetTokenizer());
+            output = new LineLengthLimitWriter(out, lineLength, maxLineLength, fc.getTargetTokenizer());
         } else {
             output = out;
         }

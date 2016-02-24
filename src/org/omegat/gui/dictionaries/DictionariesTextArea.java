@@ -147,11 +147,10 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     }
 
     /** Clears up the pane. */
-    protected void clear() {
-        UIThreadsUtil.mustBeSwingThread();
+    @Override
+    public void clear() {
+        super.clear();
         displayedWords.clear();
-        setText(null);
-        scrollRectToVisible(new Rectangle());
     }
 
     /**

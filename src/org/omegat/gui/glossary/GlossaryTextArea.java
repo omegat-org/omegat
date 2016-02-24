@@ -35,7 +35,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -238,10 +237,10 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
     }
 
     /** Clears up the pane. */
+    @Override
     public void clear() {
+        super.clear();
         nowEntries = Collections.emptyList();
-        setText(null);
-        scrollRectToVisible(new Rectangle());
     }
 
     List<GlossaryEntry> getDisplayedEntries() {

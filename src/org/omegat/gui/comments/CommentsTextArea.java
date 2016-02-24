@@ -28,7 +28,6 @@
 package org.omegat.gui.comments;
 
 import java.awt.Dimension;
-import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -140,14 +139,6 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
     protected void onProjectClose() {
         clear();
         setText(EXPLANATION);
-    }
-
-    /** Clears up the pane. */
-    public void clear() {
-        UIThreadsUtil.mustBeSwingThread();
-
-        setText(null);
-        scrollRectToVisible(new Rectangle());
     }
 
     @Override

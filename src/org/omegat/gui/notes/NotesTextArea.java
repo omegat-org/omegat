@@ -29,7 +29,6 @@
 package org.omegat.gui.notes;
 
 import java.awt.Dimension;
-import java.awt.Rectangle;
 
 import javax.swing.undo.UndoManager;
 
@@ -82,11 +81,9 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes {
     }
 
     /** Clears up the pane. */
+    @Override
     public void clear() {
-        UIThreadsUtil.mustBeSwingThread();
-
-        setText(null);
-        scrollRectToVisible(new Rectangle());
+        super.clear();
         setEditable(false);
         undoManager.discardAllEdits();
     }

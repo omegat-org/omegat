@@ -34,7 +34,6 @@ package org.omegat.gui.matches;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -446,16 +445,14 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     }
 
     /** Clears up the pane. */
+    @Override
     public void clear() {
-        UIThreadsUtil.mustBeSwingThread();
-
+        super.clear();
         activeMatch = -1;
         matches.clear();
         delimiters.clear();
         sourcePos.clear();
         diffInfos.clear();
-        setText(null);
-        scrollRectToVisible(new Rectangle());
     }
 
     protected MouseListener mouseListener = new MouseAdapter() {

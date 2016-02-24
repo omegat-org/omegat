@@ -29,6 +29,7 @@
 package org.omegat.gui.exttrans;
 
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -131,6 +132,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     
     private void clear() {
         setText("");
+        scrollRectToVisible(new Rectangle());
         displayed = null;
     }
 

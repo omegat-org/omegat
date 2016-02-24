@@ -151,6 +151,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         UIThreadsUtil.mustBeSwingThread();
         displayedWords.clear();
         setText(null);
+        scrollRectToVisible(new Rectangle());
     }
 
     /**

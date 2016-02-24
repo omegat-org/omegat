@@ -93,8 +93,8 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
             }
         }
 
-        this.setText(text.toString());
-        this.setCaretPosition(0);
+        setText(text.toString());
+        setCaretPosition(0);
     }
 
     static final ICommentProvider ENTRY_COMMENT_PROVIDER = new ICommentProvider() {
@@ -139,7 +139,7 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
     @Override
     protected void onProjectClose() {
         clear();
-        this.setText(EXPLANATION);
+        setText(EXPLANATION);
     }
 
     /** Clears up the pane. */

@@ -167,18 +167,19 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             return;
         }
         Element el = doc.getElement(Integer.toString(i));
-        if (el != null) {
-            try {
-                // rectangle to be visible
-                Rectangle rect = modelToView(el.getStartOffset());
-                // show 2 lines
-                if (rect != null) {
-                    rect.height *= 2;
-                    scrollRectToVisible(rect);
-                }
-            } catch (BadLocationException ex) {
-                // shouldn't be throwed
+        if (el == null) {
+            return;
+        }
+        try {
+            // rectangle to be visible
+            Rectangle rect = modelToView(el.getStartOffset());
+            // show 2 lines
+            if (rect != null) {
+                rect.height *= 2;
+                scrollRectToVisible(rect);
             }
+        } catch (BadLocationException ex) {
+            // shouldn't be throwed
         }
     }
 

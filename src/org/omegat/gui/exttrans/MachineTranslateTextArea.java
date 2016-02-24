@@ -131,7 +131,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     }
     
     private void clear() {
-        setText("");
+        setText(null);
         scrollRectToVisible(new Rectangle());
         displayed = null;
     }

@@ -95,7 +95,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         ((HTMLDocument) getDocument()).setPreservesUnknownTags(false);
         setFont(getFont());
 
-        // setEditable(false);
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Dictionary");
         Core.getMainWindow().addDockable(new DockableScrollPane("DICTIONARY", title, this, true));
 

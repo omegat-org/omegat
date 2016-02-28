@@ -494,7 +494,15 @@
                 </keycombo></entry>
 
               <entry>Allows the user create an entry in the default glossary
-              file.</entry>
+              file.<para>If you select a text string (in any pane) before
+              pressing <keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>G</keycap>
+                </keycombo>, the text will be pasted by default in the
+              <guilabel>Source term</guilabel> field.</para></entry>
             </row>
 
             <row>
@@ -507,7 +515,13 @@
                 </keycombo></entry>
 
               <entry>Opens a new <link linkend="section.search.window">Search
-              window</link>.</entry>
+              window</link>.<para>If you select a text string (in any pane)
+              before pressing <keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>F</keycap>
+                </keycombo>, the text will be pasted by default in the
+              <guilabel>Search for</guilabel> field.</para></entry>
             </row>
 
             <row>
@@ -521,7 +535,13 @@
 
               <entry>Opens a new <link
               linkend="section.searchreplace.window">Search and replace
-              window</link>.</entry>
+              window</link>.<para>If you select a text string (in any pane)
+              before pressing <keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>K</keycap>
+                </keycombo>, the text will be pasted by default in the
+              <guilabel>Search for</guilabel> field.</para></entry>
             </row>
 
             <row>
@@ -1069,7 +1089,13 @@
               <guimenuitem>Auto-text...</guimenuitem> to configure Auto-text
               options and to add or remove entries.</para><para>Click on
               <guimenuitem>Character Table...</guimenuitem> to set the
-              Character table auto-completer options.</para></entry>
+              Character table auto-completer
+              options.</para><para>Auto-completer is launched within the
+              target segment via <emphasis role="bold">Ctrl+Space</emphasis>
+              shortcut. By default, it opens automatically with relevant
+              suggestions, but this can be turned off by unchecking <emphasis
+              role="bold">Show Relevant Suggestions Automatically</emphasis>
+              option.</para><para>[vbdx: perso je ne vois pas de différence quand l'option est cochée et quand elle ne l'est pas</para></entry>
             </row>
 
             <row>
@@ -1123,7 +1149,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Tag Validation...</guimenuitem></entry>
+              <entry><guimenuitem>Tag Processing...</guimenuitem></entry>
 
               <entry>For programmers: Allows you to configure the Tag
               Validator options to check also programming (%...)

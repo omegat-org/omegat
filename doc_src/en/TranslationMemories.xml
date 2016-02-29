@@ -179,7 +179,7 @@
             unconditionally.</para>
 
             <para>Overwriting is operating until the TMX is removed from
-            /tm/enforce [vb: à confirmer].</para>
+            /tm/enforce.</para>
           </listitem>
         </varlistentry>
 

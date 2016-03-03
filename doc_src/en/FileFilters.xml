@@ -398,7 +398,7 @@
       If the appropriate filter is found, the file is assigned to it for
       processing. For example, by default, XHTML filters are used for
       processing files with the .xhtml extension. You can change or add
-      filename patterns for files to be handled by each file. Source filename
+      filename patterns for files to be handled by each file filter. Source filename
       patterns use wild card characters similar to those used in <emphasis
       role="bold">Searches. </emphasis>The '*' character matches zero or more
       characters. The '?' character matches exactly one character. All other

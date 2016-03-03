@@ -153,9 +153,9 @@
         <row>
           <entry><emphasis role="bold">Ctrl+Space</emphasis></entry>
 
-          <entry>open a dialog box with contextual suggestions (Mac: <emphasis
-          role="bold">Esc</emphasis>). Use <emphasis
-          role="bold">Ctrl+PgUp/PgDn</emphasis> (Cmd+PgUp/PgDn on Mac) to
+          <entry>open Auto-completer dialog box with contextual suggestions
+          (Mac: <emphasis role="bold">Esc</emphasis>). Once Auto-completer is
+          open, use <emphasis role="bold">Ctrl+Space</emphasis> again to
           switch successively from <emphasis>Glossaries entries</emphasis>,
           <emphasis>Auto-text entries,</emphasis> <emphasis>Missing
           tags</emphasis> and <emphasis>Character table</emphasis>

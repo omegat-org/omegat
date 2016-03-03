@@ -177,6 +177,9 @@
             <filename>project_save.tmx</filename> of OmegaT, put this TMX in
             /tm/enforce to overwrite existing default translations
             unconditionally.</para>
+
+            <para>Overwriting is operating until the TMX is removed from
+            /tm/enforce.</para>
           </listitem>
         </varlistentry>
 

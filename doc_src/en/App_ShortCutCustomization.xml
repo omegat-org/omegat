@@ -323,7 +323,7 @@
           <row><entry>Segmentation...</entry><entry/><entry>optionsSentsegMenuItem</entry></row>
           <row><entry>Spell checking...</entry><entry/><entry>optionsSpellCheckMenuItem</entry></row>
           <row><entry>Editing Behavior...</entry><entry/><entry>optionsWorkflowMenuItem</entry></row>
-          <row><entry>Tag Validation...</entry><entry/><entry>optionsTagValidationMenuItem</entry></row>
+          <row><entry>Tag Processing...</entry><entry/><entry>optionsTagValidationMenuItem<para>[vbdx: le chgt de nom a-t-il impact sur le code ?]</para></entry></row>
           <row><entry>Team...</entry><entry/><entry>optionsTeamMenuItem</entry></row>
           <row><entry>External TMXs...</entry><entry/><entry>optionsExtTMXMenuItem</entry></row>
           <row><entry>View...</entry><entry/><entry>optionsViewOptionsMenuItem</entry></row>

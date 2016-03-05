@@ -8,7 +8,7 @@ omtversion=$(grep -o -m1 "OmegaT\s*[\.0-9]*[0-9 a-z]*" ./changes.txt)
 
 # substitute underlines for spaces in version number
 
-omtversionul=${omtversion// /_}
+omtversionul=$(echo $omtversion | sed 's/ /_/g')
 
 # check whether /opt/omegat/<OmegaT version> exists
 # exit if it does

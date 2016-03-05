@@ -1,4 +1,4 @@
-#/bin/bash
+#!/usr/bin/env bash
 
 # installation script 2012-06-03
 

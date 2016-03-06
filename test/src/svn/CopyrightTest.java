@@ -66,7 +66,11 @@ public class CopyrightTest extends TestCase {
                 // skip Base64.java (public domain)
                 continue;
             }
-            FileUtils.copyFile(f, fdata);
+            if (f.getPath().replace('\\', '/').endsWith("util/Base64Test.java")) {
+                // skip Base64Test.java (public domain)
+                continue;
+            }
+             FileUtils.copyFile(f, fdata);
             String data = fdata.toString("ISO-8859-1");
             checkNote(f, data);
             fdata.reset();

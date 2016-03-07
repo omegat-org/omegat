@@ -39,10 +39,10 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.JAXBContext;
 
 import org.apache.commons.io.IOUtils;
-import org.omegat.util.Base64;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -93,7 +93,7 @@ public class TaaSClient {
             return;
         }
         this.basicAuth = "Basic "
-                + Base64.encodeBytes((M_USERNAME + ":" + M_PASSWORD).getBytes("ISO-8859-1"));
+                + DatatypeConverter.printBase64Binary((M_USERNAME + ":" + M_PASSWORD).getBytes("ISO-8859-1"));
         context = JAXBContext.newInstance(TaasCollections.class, TaasArrayOfTerm.class,
                 TaasExtractionResult.class, TaasDomains.class);
     }

@@ -39,12 +39,12 @@ import java.awt.Desktop;
 import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.text.JTextComponent;
+import javax.xml.bind.DatatypeConverter;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -1088,13 +1088,13 @@ public class MainWindowMenuHandler {
     public void optionsViewOptionsMenuLoginItemActionPerformed() {
         UserPassDialog proxyOptions = new UserPassDialog(mainWindow);
 
-        String encodedUser = (Preferences.getPreference(Preferences.PROXY_USER_NAME));
-        String encodedPassword = (Preferences.getPreference(Preferences.PROXY_PASSWORD));
+        String encodedUser = Preferences.getPreference(Preferences.PROXY_USER_NAME);
+        String encodedPassword = Preferences.getPreference(Preferences.PROXY_PASSWORD);
 
         try {
-            proxyOptions.userText.setText(new String(org.omegat.util.Base64.decode(encodedUser)));
-            proxyOptions.passwordField.setText(new String(org.omegat.util.Base64.decode(encodedPassword)));
-        } catch (IOException ex) {
+            proxyOptions.userText.setText(new String(DatatypeConverter.parseBase64Binary(encodedUser)));
+            proxyOptions.passwordField.setText(new String(DatatypeConverter.parseBase64Binary(encodedPassword)));
+        } catch (IllegalArgumentException ex) {
             Log.logErrorRB("LOG_DECODING_ERROR");
             Log.log(ex);
         }
@@ -1102,8 +1102,9 @@ public class MainWindowMenuHandler {
         proxyOptions.setVisible(true);
 
         if (proxyOptions.getReturnStatus() == UserPassDialog.RET_OK) {
-            encodedUser = org.omegat.util.Base64.encodeBytes(proxyOptions.userText.getText().getBytes());
-            encodedPassword = org.omegat.util.Base64.encodeBytes(new String(proxyOptions.passwordField.getPassword()).getBytes());
+            encodedUser = DatatypeConverter.printBase64Binary(proxyOptions.userText.getText().getBytes());
+            encodedPassword = DatatypeConverter
+                    .printBase64Binary(new String(proxyOptions.passwordField.getPassword()).getBytes());
 
             Preferences.setPreference(Preferences.PROXY_USER_NAME, encodedUser);
             Preferences.setPreference(Preferences.PROXY_PASSWORD, encodedPassword);

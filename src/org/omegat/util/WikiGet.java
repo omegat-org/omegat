@@ -40,6 +40,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Map;
 
+import javax.xml.bind.DatatypeConverter;
+
 import org.apache.commons.io.IOUtils;
 
 /**
@@ -233,15 +235,15 @@ public class WikiGet {
             }
 
             // Added to pass through authenticated proxy
-            String encodedUser = (Preferences.getPreference(Preferences.PROXY_USER_NAME));
+            String encodedUser = Preferences.getPreference(Preferences.PROXY_USER_NAME);
             if (!StringUtil.isEmpty(encodedUser)) { // There is a proxy user
-                String encodedPassword = (Preferences.getPreference(Preferences.PROXY_PASSWORD));
+                String encodedPassword = Preferences.getPreference(Preferences.PROXY_PASSWORD);
                 try {
-                    String pass = new String(org.omegat.util.Base64.decode(encodedUser));
-                    pass += ":" + new String(org.omegat.util.Base64.decode(encodedPassword));
-                    encodedPassword = org.omegat.util.Base64.encodeBytes(pass.getBytes());
+                    String pass = new String(DatatypeConverter.parseBase64Binary(encodedUser));
+                    pass += ":" + new String(DatatypeConverter.parseBase64Binary(encodedPassword));
+                    encodedPassword = DatatypeConverter.printBase64Binary(pass.getBytes());
                     conn.setRequestProperty("Proxy-Authorization", "Basic " + encodedPassword);
-                } catch (IOException ex) {
+                } catch (IllegalArgumentException ex) {
                     Log.logErrorRB("LOG_DECODING_ERROR");
                     Log.log(ex);
                 }
@@ -292,15 +294,15 @@ public class WikiGet {
             }
 
             // Added to pass through authenticated proxy
-            String encodedUser = (Preferences.getPreference(Preferences.PROXY_USER_NAME));
+            String encodedUser = Preferences.getPreference(Preferences.PROXY_USER_NAME);
             if (!StringUtil.isEmpty(encodedUser)) { // There is a proxy user
-                String encodedPassword = (Preferences.getPreference(Preferences.PROXY_PASSWORD));
+                String encodedPassword = Preferences.getPreference(Preferences.PROXY_PASSWORD);
                 try {
-                    String pass = new String(org.omegat.util.Base64.decode(encodedUser));
-                    pass += ":" + new String(org.omegat.util.Base64.decode(encodedPassword));
-                    encodedPassword = org.omegat.util.Base64.encodeBytes(pass.getBytes());
+                    String pass = new String(DatatypeConverter.parseBase64Binary(encodedUser));
+                    pass += ":" + new String(DatatypeConverter.parseBase64Binary(encodedPassword));
+                    encodedPassword = DatatypeConverter.printBase64Binary(pass.getBytes());
                     conn.setRequestProperty("Proxy-Authorization", "Basic " + encodedPassword);
-                } catch (IOException ex) {
+                } catch (IllegalArgumentException ex) {
                     Log.logErrorRB("LOG_DECODING_ERROR");
                     Log.log(ex);
                 }

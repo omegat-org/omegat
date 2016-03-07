@@ -34,6 +34,8 @@ import java.text.MessageFormat;
 import java.text.Normalizer;
 import java.util.Locale;
 
+import javax.xml.bind.DatatypeConverter;
+
 /**
  * Utilities for string processing.
  * 
@@ -817,5 +819,31 @@ public class StringUtil {
             }
         }
         return text;
+    }
+
+    /**
+     * Convert a byte array into a Base64-encoded String. Convenience method for
+     * {@link DatatypeConverter#printBase64Binary(byte[])} (available since Java
+     * 1.6) because it's so well hidden.
+     * 
+     * @param bytes
+     *            Data bytes
+     * @return Base64-encoded String
+     */
+    public static String encodeBase64(byte[] bytes) {
+        return DatatypeConverter.printBase64Binary(bytes);
+    }
+
+    /**
+     * Convert a Base64-encoded String into an array of bytes. Convenience
+     * method for {@link DatatypeConverter#parseBase64Binary(String)} (available
+     * since Java 1.6) because it's so well hidden.
+     * 
+     * @param b64data
+     *            Base64-encoded String
+     * @return Data bytes
+     */
+    public static byte[] decodeBase64(String b64data) {
+        return DatatypeConverter.parseBase64Binary(b64data);
     }
 }

@@ -40,8 +40,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Map;
 
-import javax.xml.bind.DatatypeConverter;
-
 import org.apache.commons.io.IOUtils;
 
 /**
@@ -239,9 +237,9 @@ public class WikiGet {
             if (!StringUtil.isEmpty(encodedUser)) { // There is a proxy user
                 String encodedPassword = Preferences.getPreference(Preferences.PROXY_PASSWORD);
                 try {
-                    String pass = new String(DatatypeConverter.parseBase64Binary(encodedUser));
-                    pass += ":" + new String(DatatypeConverter.parseBase64Binary(encodedPassword));
-                    encodedPassword = DatatypeConverter.printBase64Binary(pass.getBytes());
+                    String pass = new String(StringUtil.decodeBase64(encodedUser));
+                    pass += ":" + new String(StringUtil.decodeBase64(encodedPassword));
+                    encodedPassword = StringUtil.encodeBase64(pass.getBytes());
                     conn.setRequestProperty("Proxy-Authorization", "Basic " + encodedPassword);
                 } catch (IllegalArgumentException ex) {
                     Log.logErrorRB("LOG_DECODING_ERROR");
@@ -298,9 +296,9 @@ public class WikiGet {
             if (!StringUtil.isEmpty(encodedUser)) { // There is a proxy user
                 String encodedPassword = Preferences.getPreference(Preferences.PROXY_PASSWORD);
                 try {
-                    String pass = new String(DatatypeConverter.parseBase64Binary(encodedUser));
-                    pass += ":" + new String(DatatypeConverter.parseBase64Binary(encodedPassword));
-                    encodedPassword = DatatypeConverter.printBase64Binary(pass.getBytes());
+                    String pass = new String(StringUtil.decodeBase64(encodedUser));
+                    pass += ":" + new String(StringUtil.decodeBase64(encodedPassword));
+                    encodedPassword = StringUtil.encodeBase64(pass.getBytes());
                     conn.setRequestProperty("Proxy-Authorization", "Basic " + encodedPassword);
                 } catch (IllegalArgumentException ex) {
                     Log.logErrorRB("LOG_DECODING_ERROR");

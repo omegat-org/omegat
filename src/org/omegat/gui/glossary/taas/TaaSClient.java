@@ -39,7 +39,6 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.JAXBContext;
 
 import org.apache.commons.io.IOUtils;
@@ -93,7 +92,7 @@ public class TaaSClient {
             return;
         }
         this.basicAuth = "Basic "
-                + DatatypeConverter.printBase64Binary((M_USERNAME + ":" + M_PASSWORD).getBytes("ISO-8859-1"));
+                + StringUtil.encodeBase64((M_USERNAME + ":" + M_PASSWORD).getBytes("ISO-8859-1"));
         context = JAXBContext.newInstance(TaasCollections.class, TaasArrayOfTerm.class,
                 TaasExtractionResult.class, TaasDomains.class);
     }

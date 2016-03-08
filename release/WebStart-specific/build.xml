@@ -48,7 +48,13 @@
 			 TODO: Automate detection and application of this. -->
 		<unsignjar jarFile="${root}/build/webstart/org.eclipse.jgit-3.7.1.201504261725-r.jar" />
 		
-		<jar jarfile="${root}/build/webstart/docs.jar" basedir="${root}" includes="docs/changes.txt docs/OmegaT-license.txt" />
+		<jar jarfile="${root}/build/webstart/docs.jar" basedir="${root}" 
+			includes="docs/changes.txt docs/OmegaT-license.txt
+								docs/**/instantStartGuideNoTOC.html
+								docs/**/OmegaT.css
+								docs/**/images/NewProject.png
+								docs/**/images/InstantGuide_1.png 
+								docs/**/images/InstantGuide_2.png" />
 
 		<jar jarfile="${root}/build/webstart/hunspell-linux64.jar" basedir="${root}/native" includes="libhunspell-linux64.so" />
 		<jar jarfile="${root}/build/webstart/hunspell-linux32.jar" basedir="${root}/native" includes="libhunspell-linux32.so" />

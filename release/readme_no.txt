@@ -1,4 +1,4 @@
-OmegaT er oversatt av Ingeborg Hauge Clementsen, copyright© 2015
+OmegaT er oversatt av Ingeborg Hauge Clementsen, copyright© 2016
 
 ==============================================================================
   OmegaT 3.0, Viktig-fil
@@ -185,6 +185,9 @@ Spotlight-søkefeltet.
 For å ta del i utviklingen av OmegaT, ta kontakt med utviklerne her:
     http://lists.sourceforge.net/lists/listinfo/omegat-development
 
+Se denne utviklingsdoumentasjonen for å komme i gang som programmerer:
+    https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/
+
 For å oversette OmegaTs brukergrensesnitt, brukermanual eller andre relaterte dokumenter, les:
       
       http://www.omegat.org/en/howtos/localizing_omegat.php
@@ -214,6 +217,7 @@ Disse har bidratt med koder
   Enrique Estévez Fernández
   Martin Fleurke  
   Wildrich Fourie
+  Tony Graham
   Phillip Hall
   Jean-Christophe Helary
   Chihiro Hio

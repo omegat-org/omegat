@@ -58,9 +58,9 @@
                      <dt><span class="section"><a href="chapter.user.interface.html#section.project.files">3.1. 翻訳対象ファイル一覧</a></span></dt>
                      <dt><span class="section"><a href="chapter.user.interface.html#section.search.window">3.2. 検索ウィンドウ</a></span></dt>
                      <dt><span class="section"><a href="chapter.user.interface.html#section.tag.validation">3.3. タグ検証</a></span></dt>
-                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2640">3.4. 翻訳状況</a></span></dt>
-                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2691">3.5. 参考訳文の一致率</a></span></dt>
-                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2756">3.6. ヘルプウィンドウ</a></span></dt>
+                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2646">3.4. 翻訳状況</a></span></dt>
+                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2697">3.5. 参考訳文の一致率</a></span></dt>
+                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2762">3.6. ヘルプウィンドウ</a></span></dt>
                   </dl>
                </dd>
             </dl>
@@ -528,7 +528,10 @@
                      </div>
                   </div>
                </div>
-               <p>翻訳対象ファイル一覧ウィンドウには、プロジェクトに含まれるファイル一式と、プロジェクトに関する情報が表示されます。OmegaT がプロジェクトを読み込むと、翻訳対象ファイル一覧が自動的に表示されます。<span class="keycap"><strong><span class="guimenuitem">［Ctrl+L］<a class="indexterm" name="d0e2512"></a></span></strong></span>で開き、<span class="keycap"><strong>［Esc］</strong></span>で閉じます。翻訳対象ファイル一覧ウィンドウは、次の情報を表示します：
+               <p>翻訳対象ファイル一覧ウィンドウには、プロジェクトに含まれるファイル一式と、プロジェクトに関する情報が表示されます。OmegaT がプロジェクトを読み込むと、翻訳対象ファイル一覧が自動的に表示されます。</p>
+               <p><em><span class="remark">注意：</span></em>翻訳対象ファイル一覧ウィンドウが表示されないようにすることができます。それには、ファイル（［設定］→［設定フォルダー］メニューからアクセスできる <code class="filename">omegat.prefs</code> 中の <span class="emphasis"><em>project_files_show_on_load</em></span> を <span class="emphasis"><em>false</em></span> に設定します。
+               </p>
+               <p>ウィンドウは、<span class="keycap"><strong>［Esc］</strong></span>で閉じます。翻訳対象ファイル一覧ウィンドウは、次の情報を表示します：
                </p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -570,14 +573,14 @@
                </p>
                <p>分節化規則を修正すると、「すべての分節数」と「繰り返しを除いた分節数」が変わる可能性があります。しかし、いったんプロジェクトの翻訳を開始したら、規則の変更はなるべく行わないようにしてください。詳しくは「<span class="emphasis"><em>分節化規則</em></span>」の章を参照してください。
                </p>
-               <p><span class="bold"><strong><a class="indexterm" name="d0e2562"></a>プロジェクトへのファイル追加：</strong></span><span class="guimenuitem">［原文ファイル追加...］</span>ボタンをクリックして、原文ファイルを追加できます。選択したファイルは <code class="filename">source</code> フォルダーへ追加され、プロジェクトが再読み込みされます。<span class="guimenuitem">［MediaWiki から原文ファイルを追加...］</span>ボタンを押して URL を指定すると、MediaWiki 形式で記述されたウェブページを原文ファイルとして追加することができます。
+               <p><span class="bold"><strong><a class="indexterm" name="d0e2568"></a>プロジェクトへのファイル追加：</strong></span><span class="guimenuitem">［原文ファイル追加...］</span>ボタンをクリックして、原文ファイルを追加できます。選択したファイルは <code class="filename">source</code> フォルダーへ追加され、プロジェクトが再読み込みされます。<span class="guimenuitem">［MediaWiki から原文ファイルを追加...］</span>ボタンを押して URL を指定すると、MediaWiki 形式で記述されたウェブページを原文ファイルとして追加することができます。
                </p>
             </div>
             <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="section.search.window"></a>3.2. 検索ウィンドウ<a class="indexterm" name="d0e2580"></a></h3>
+                        <h3 class="title"><a name="section.search.window"></a>3.2. 検索ウィンドウ<a class="indexterm" name="d0e2586"></a></h3>
                      </div>
                   </div>
                </div>
@@ -588,13 +591,13 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="section.tag.validation"></a>3.3. タグ検証<a class="indexterm" name="d0e2600"></a><a class="indexterm" name="d0e2605"></a></h3>
+                        <h3 class="title"><a name="section.tag.validation"></a>3.3. タグ検証<a class="indexterm" name="d0e2606"></a><a class="indexterm" name="d0e2611"></a></h3>
                      </div>
                   </div>
                </div>
                <p>タグ検証ウィンドウには、訳文中のタグの間違いや不整合の可能性がある分節の一覧が表示されます。<span class="guimenuitem">［Ctrl+T］</span>でウィンドウを表示できます。ウィンドウは３列の表からなり、リンク付きの分節番号、原文、訳文の内容がそれぞれ表示されます：
                </p>
-               <div class="figure"><a name="tag.validator.window"></a><p class="title"><b>図4.6 <a class="indexterm" name="d0e2620"></a>タグ検証ウィンドウ</b></p>
+               <div class="figure"><a name="tag.validator.window"></a><p class="title"><b>図4.6 <a class="indexterm" name="d0e2626"></a>タグ検証ウィンドウ</b></p>
                   <div class="figure-contents">
                      <div class="mediaobject"><img src="images/TagValidator.png" alt="タグ検証ウィンドウ"></div>
                   </div>
@@ -608,11 +611,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2640"></a>3.4. 翻訳状況<a class="indexterm" name="d0e2643"></a></h3>
+                        <h3 class="title"><a name="d0e2646"></a>3.4. 翻訳状況<a class="indexterm" name="d0e2649"></a></h3>
                      </div>
                   </div>
                </div>
-               <p>翻訳状況ウィンドウは、<span class="bold"><strong>［ツール］→［翻訳状況］</strong></span>から開きます。現在のプロジェクトの翻訳状況について、全体の概要とファイル単位の詳細な統計情報の両方を表示します。翻訳状況は <code class="filename">omegat</code> フォルダーに <code class="filename">project_stats.txt</code> ファイルとしても出力されます。タブ区切り形式になっており、任意の表計算プログラムで開くことができます。またウィンドウの内容は <span class="guimenuitem">［Ctrl+A］<a class="indexterm" name="d0e2661"></a></span>、<span class="guimenuitem">［Ctrl+C］<a class="indexterm" name="d0e2669"></a></span>、<span class="guimenuitem">［Ctrl+V］<a class="indexterm" name="d0e2677"></a></span>でコピー/貼り付けできます。
+               <p>翻訳状況ウィンドウは、<span class="bold"><strong>［ツール］→［翻訳状況］</strong></span>から開きます。現在のプロジェクトの翻訳状況について、全体の概要とファイル単位の詳細な統計情報の両方を表示します。翻訳状況は <code class="filename">omegat</code> フォルダーに <code class="filename">project_stats.txt</code> ファイルとしても出力されます。タブ区切り形式になっており、任意の表計算プログラムで開くことができます。またウィンドウの内容は <span class="guimenuitem">［Ctrl+A］<a class="indexterm" name="d0e2667"></a></span>、<span class="guimenuitem">［Ctrl+C］<a class="indexterm" name="d0e2675"></a></span>、<span class="guimenuitem">［Ctrl+V］<a class="indexterm" name="d0e2683"></a></span>でコピー/貼り付けできます。
                </p>
                <div class="figure"><a name="ProjectStatistic.Window"></a><p class="title"><b>図4.7 プロジェクトの翻訳状況</b></p>
                   <div class="figure-contents">
@@ -625,14 +628,14 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2691"></a>3.5. 参考訳文の一致率<a class="indexterm" name="d0e2694"></a></h3>
+                        <h3 class="title"><a name="d0e2697"></a>3.5. 参考訳文の一致率<a class="indexterm" name="d0e2700"></a></h3>
                      </div>
                   </div>
                </div>
                <p>参考訳文の一致率は、<span class="guimenuitem">［ツール］→［参考訳文の一致率］</span>から開きます。値の計算には CPU を多く使用し、時間がかかることがあります。そのため、処理中にはプログレスバーが表示されます。一致率は、事実上の業界標準にしたがい、次のグループに分類されます：繰り返し、完全に一致、95% - 100%、85%
                   - 94%、75% - 84%、50% - 74%、一致しない。この情報は、分節数、単語数、文字数（空白を除く）、文字数（空白を含む）それぞれについて、計算されます。OmegaT と他の翻訳支援ツールでは、一致率に相違が見られる場合がありますので、注意してください。
                </p>
-               <div class="figure"><a name="d0e2704"></a><p class="title"><b>図4.8 参考訳文の一致率</b></p>
+               <div class="figure"><a name="d0e2710"></a><p class="title"><b>図4.8 参考訳文の一致率</b></p>
                   <div class="figure-contents">
                      <div class="mediaobject"><img src="images/MatchStatistics.png" alt="参考訳文の一致率"></div>
                   </div>
@@ -642,18 +645,18 @@
                <p>最終列の「文字数（空白を含む）」の値には、分節と分節のあいだの空白文字は含まれていません。「繰り返し」は、同一内容の分節が何度も使用されている場合を表しています。最初の分節とその内容は「一致しない」に分類されます。そして残りは、最初の分節の「繰り返し」として分類されます。プロジェクトの翻訳メモリの中に、同一の複数分節に対応する翻訳が存在する場合、これらの分節は、他の翻訳済みの繰り返しの無い分節と一緒に、「完全に一致」に分類されます。繰り返しの無い分節数が必要であれば、翻訳済みか否かにかかわらず、翻訳状況ウィンドウの方で確認できます。</p>
                <p>残りのグループ（50 - 100%）は、参考訳文を伴う未翻訳の分節から構成されます。「繰り返し」と「完全に一致」に対する参考訳文は、<code class="filename">omegat</code> フォルダーの内部翻訳メモリのみならず、<code class="filename">tm</code> フォルダーの外部補助メモリも参照します。内部翻訳メモリである <code class="filename">project_save.tmx</code> との唯一の違いは、外部補助メモリの方は「完全に一致」ではなく「100%」に分類されるという点です。外部補助メモリを一致率に含めたくない場合は、tm フォルダーを空にしておくか、またはプロジェクトの設定で翻訳メモリフォルダーを（一時的に）別の場所に変更してください。
                </p>
-               <p>参考訳文の一致率はタブ区切り形式になっており、<span class="guimenuitem">［Ctrl+A］<a class="indexterm" name="d0e2731"></a></span>、<span class="guimenuitem">［Ctrl+C］<a class="indexterm" name="d0e2739"></a></span>、<span class="guimenuitem">［Ctrl+V］<a class="indexterm" name="d0e2747"></a></span>でコピー/貼り付けして、任意の表計算プログラムや原価計算プログラムで利用することができます。いったん計算が終了すると、そのデータは <code class="filename">omegat/project_stats_match.txt</code> としてファイルに保存されます。ファイルの中には、タイムスタンプも出力されています。翻訳状況と違い、参考訳文の一致率はリアルタイムで計算されないので、すぐに古くなってしまいます。利用する際は、タイムスタンプをよく確認してください。
+               <p>参考訳文の一致率はタブ区切り形式になっており、<span class="guimenuitem">［Ctrl+A］<a class="indexterm" name="d0e2737"></a></span>、<span class="guimenuitem">［Ctrl+C］<a class="indexterm" name="d0e2745"></a></span>、<span class="guimenuitem">［Ctrl+V］<a class="indexterm" name="d0e2753"></a></span>でコピー/貼り付けして、任意の表計算プログラムや原価計算プログラムで利用することができます。いったん計算が終了すると、そのデータは <code class="filename">omegat/project_stats_match.txt</code> としてファイルに保存されます。ファイルの中には、タイムスタンプも出力されています。翻訳状況と違い、参考訳文の一致率はリアルタイムで計算されないので、すぐに古くなってしまいます。利用する際は、タイムスタンプをよく確認してください。
                </p>
             </div>
             <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2756"></a>3.6. ヘルプウィンドウ<a class="indexterm" name="d0e2759"></a></h3>
+                        <h3 class="title"><a name="d0e2762"></a>3.6. ヘルプウィンドウ<a class="indexterm" name="d0e2765"></a></h3>
                      </div>
                   </div>
                </div>
-               <p>この取扱説明書を表示するには、<span class="keycap"><strong><a class="indexterm" name="d0e2767"></a>［F1］</strong></span>を押すか、メニューから<span class="guimenuitem"><a class="indexterm" name="d0e2775"></a>［ヘルプ］→［取扱説明書...］</span>を選びます。ウィンドウには［戻る］と［目次］の２つのボタンがあります。この取扱説明書は、章から章へリンクした HTML 形式の文書です。ウェブブラウザー上での操作と同様に、各リンクをクリックすると対応したページを表示できます。
+               <p>この取扱説明書を表示するには、<span class="keycap"><strong><a class="indexterm" name="d0e2773"></a>［F1］</strong></span>を押すか、メニューから<span class="guimenuitem"><a class="indexterm" name="d0e2781"></a>［ヘルプ］→［取扱説明書...］</span>を選びます。ウィンドウには［戻る］と［目次］の２つのボタンがあります。この取扱説明書は、章から章へリンクした HTML 形式の文書です。ウェブブラウザー上での操作と同様に、各リンクをクリックすると対応したページを表示できます。
                </p>
                <p>取扱説明書は OmegaT のインストールフォルダー内の <code class="filename">docs</code> フォルダーにあります。たとえば英語版を見たければ <code class="filename">docs/en/index.html</code> ファイルをウェブブラウザーで開けば閲覧できます。こうすることで、OmegaT 組み込みのヘルプブラウザーからは開けない外部サイトへのリンクも、たどって開くことができます。
                </p>

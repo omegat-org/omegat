@@ -58,9 +58,9 @@
                      <dt><span class="section"><a href="chapter.user.interface.html#section.project.files">3.1. Project files</a></span></dt>
                      <dt><span class="section"><a href="chapter.user.interface.html#section.search.window">3.2. Search window</a></span></dt>
                      <dt><span class="section"><a href="chapter.user.interface.html#section.tag.validation">3.3. Tag validation</a></span></dt>
-                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2672">3.4. Statistics</a></span></dt>
-                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2722">3.5. Match statistics</a></span></dt>
-                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2786">3.6. Help browser</a></span></dt>
+                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2692">3.4. Statistics</a></span></dt>
+                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2742">3.5. Match statistics</a></span></dt>
+                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2806">3.6. Help browser</a></span></dt>
                   </dl>
                </dd>
             </dl>
@@ -683,7 +683,15 @@
                </div>
                <p>The Project Files window lists the project files and displays
                         other project information. It is displayed automatically when OmegaT
-                        loads a project. Use <span class="guimenuitem">Ctrl+L<a class="indexterm" name="d0e2540"></a></span> to open and <span class="keycap"><strong>Esc</strong></span> to close
+                        loads a project.
+               </p>
+               <p><em><span class="remark">Note:</span></em> it is possible to inhibit this Project
+                        Files window displaying, by setting
+                        <span class="emphasis"><em>project_files_show_on_load</em></span> to
+                        <span class="emphasis"><em>false</em></span> in <code class="filename">omegat.prefs</code> file
+                        (accessible by Options / Access Configuration Folder menu).
+               </p>
+               <p>Use <span class="guimenuitem">Ctrl+L<a class="indexterm" name="d0e2555"></a></span> to open and <span class="keycap"><strong>Esc</strong></span> to close
                         it. The Project Files Window displays the following information:
                </p>
                <div class="itemizedlist">
@@ -697,20 +705,16 @@
                      </li>
                      <li class="listitem">
                         <p>the list of all translatable files in the project. Clicking on
-                                     any file will open it for translation. Note: filenames (in first
-                                     column) can be sorted alphabetically by clicking in the header. It
-                                     also possible to change the position of a filename, by clicking on
-                                     it and pressing <span class="emphasis"><em>Move ...</em></span> buttons.
+                                     any file will open it for translation.
                         </p>
-                     </li>
-                  </ul>
-               </div>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" style="list-style-type: disc; ">
-                     <li class="listitem">
-                        <p>the file currently available in the Editor pane is highlighted
-                                     with a blue background. Pressing <span class="keycap"><strong>Enter</strong></span> will move
-                                     the Editor pane to the top of the file selected
+                        <p>Typing any text will open a Filter field where parts of
+                                     filenames can be entered. You can select a file with
+                                     <span class="keycap"><strong>Up</strong></span> and <span class="keycap"><strong>Down</strong></span> keys, and open it for
+                                     translation by pressing <span class="keycap"><strong>Enter</strong></span></p>
+                        <p>Note: filenames (in first column) can be sorted alphabetically
+                                     by clicking in the header. It also possible to change the position
+                                     of a filename, by clicking on it and pressing <span class="emphasis"><em>Move
+                                           ...</em></span> buttons. 
                         </p>
                      </li>
                   </ul>
@@ -755,7 +759,7 @@
                         chapter <span class="emphasis"><em>Segmentation rules</em></span> for more
                         information.
                </p>
-               <p><span class="bold"><strong><a class="indexterm" name="d0e2591"></a>Adding files to the project: </strong></span>You can add source
+               <p><span class="bold"><strong><a class="indexterm" name="d0e2611"></a>Adding files to the project: </strong></span>You can add source
                         files to the project by clicking on the "<span class="guimenuitem">Import Source
                            Files..."</span> button. This copies the selected files to the
                         <code class="filename">source</code> folder and reloads the project to import the
@@ -769,7 +773,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="section.search.window"></a>3.2.&nbsp;Search window<a class="indexterm" name="d0e2610"></a></h3>
+                        <h3 class="title"><a name="section.search.window"></a>3.2.&nbsp;Search window<a class="indexterm" name="d0e2630"></a></h3>
                      </div>
                   </div>
                </div>
@@ -786,7 +790,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="section.tag.validation"></a>3.3.&nbsp;Tag validation<a class="indexterm" name="d0e2632"></a><a class="indexterm" name="d0e2637"></a></h3>
+                        <h3 class="title"><a name="section.tag.validation"></a>3.3.&nbsp;Tag validation<a class="indexterm" name="d0e2652"></a><a class="indexterm" name="d0e2657"></a></h3>
                      </div>
                   </div>
                </div>
@@ -795,7 +799,7 @@
                         <span class="guimenuitem">Ctrl+T. </span>The window features a 3 column table
                         with a link to the segment and its source and target contents:
                </p>
-               <div class="figure"><a name="tag.validator.window"></a><p class="title"><b>Figure&nbsp;4.6.&nbsp;<a class="indexterm" name="d0e2652"></a>Tag validation window</b></p>
+               <div class="figure"><a name="tag.validator.window"></a><p class="title"><b>Figure&nbsp;4.6.&nbsp;<a class="indexterm" name="d0e2672"></a>Tag validation window</b></p>
                   <div class="figure-contents">
                      <div class="mediaobject"><img src="images/TagValidator.png" alt="Tag validation window"></div>
                   </div>
@@ -823,7 +827,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2672"></a>3.4.&nbsp;Statistics<a class="indexterm" name="d0e2675"></a></h3>
+                        <h3 class="title"><a name="d0e2692"></a>3.4.&nbsp;Statistics<a class="indexterm" name="d0e2695"></a></h3>
                      </div>
                   </div>
                </div>
@@ -833,7 +837,7 @@
                         tab-separated <code class="filename">project_stats.txt</code> file (subfolder
                         <code class="filename">omegat</code>), ready to be loaded into a spreadsheet
                         program for the user's convenience. You can use <span class="guimenuitem">Ctrl+A
-                           <a class="indexterm" name="d0e2693"></a></span><span class="guimenuitem">, Ctrl+C <a class="indexterm" name="d0e2700"></a></span>, <span class="guimenuitem">Ctrl+V <a class="indexterm" name="d0e2708"></a></span> to copy/paste the contents. 
+                           <a class="indexterm" name="d0e2713"></a></span><span class="guimenuitem">, Ctrl+C <a class="indexterm" name="d0e2720"></a></span>, <span class="guimenuitem">Ctrl+V <a class="indexterm" name="d0e2728"></a></span> to copy/paste the contents. 
                </p>
                <div class="figure"><a name="ProjectStatistic.Window"></a><p class="title"><b>Figure&nbsp;4.7.&nbsp;project statistics</b></p>
                   <div class="figure-contents">
@@ -846,7 +850,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2722"></a>3.5.&nbsp;Match statistics<a class="indexterm" name="d0e2725"></a></h3>
+                        <h3 class="title"><a name="d0e2742"></a>3.5.&nbsp;Match statistics<a class="indexterm" name="d0e2745"></a></h3>
                      </div>
                   </div>
                </div>
@@ -861,7 +865,7 @@
                         minor differences between the OmegaT counts and the numbers, provided by
                         other CAT tools.
                </p>
-               <div class="figure"><a name="d0e2735"></a><p class="title"><b>Figure&nbsp;4.8.&nbsp;Match statistics</b></p>
+               <div class="figure"><a name="d0e2755"></a><p class="title"><b>Figure&nbsp;4.8.&nbsp;Match statistics</b></p>
                   <div class="figure-contents">
                      <div class="mediaobject"><img src="images/MatchStatistics.png" alt="Match statistics"></div>
                   </div>
@@ -894,7 +898,7 @@
                         points to a different location.
                </p>
                <p>The Match Statistics are tab-separated and you can use
-                        <span class="guimenuitem">Ctrl+A <a class="indexterm" name="d0e2762"></a></span><span class="guimenuitem">, Ctrl+C <a class="indexterm" name="d0e2769"></a></span>, <span class="guimenuitem">Ctrl+V <a class="indexterm" name="d0e2777"></a></span> to copy/paste them, for instance into a
+                        <span class="guimenuitem">Ctrl+A <a class="indexterm" name="d0e2782"></a></span><span class="guimenuitem">, Ctrl+C <a class="indexterm" name="d0e2789"></a></span>, <span class="guimenuitem">Ctrl+V <a class="indexterm" name="d0e2797"></a></span> to copy/paste them, for instance into a
                         spreadsheet or into your cost-accounting application. Once computed, the
                         data also available in
                         <code class="filename">omegat/project_stats_match.txt.</code> Note that the file
@@ -907,12 +911,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2786"></a>3.6.&nbsp;Help browser<a class="indexterm" name="d0e2789"></a></h3>
+                        <h3 class="title"><a name="d0e2806"></a>3.6.&nbsp;Help browser<a class="indexterm" name="d0e2809"></a></h3>
                      </div>
                   </div>
                </div>
                <p>The help browser (which displays this manual) can be opened by
-                        pressing <span class="keycap"><strong><a class="indexterm" name="d0e2797"></a>F1</strong></span> or navigating to <span class="guimenuitem"><a class="indexterm" name="d0e2805"></a>Help → User Manual...</span> in the main menu. In
+                        pressing <span class="keycap"><strong><a class="indexterm" name="d0e2817"></a>F1</strong></span> or navigating to <span class="guimenuitem"><a class="indexterm" name="d0e2825"></a>Help → User Manual...</span> in the main menu. In
                         the window, the manual and two buttons are displayed: Back and Contents.
                         The user manual is an HTML document with links to different chapters.
                         Clicking on a link as you would do in a web browser brings the desired

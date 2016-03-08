@@ -58,9 +58,9 @@
                      <dt><span class="section"><a href="chapter.user.interface.html#section.project.files">3.1. Projectbestanden</a></span></dt>
                      <dt><span class="section"><a href="chapter.user.interface.html#section.search.window">3.2. venster Zoeken</a></span></dt>
                      <dt><span class="section"><a href="chapter.user.interface.html#section.tag.validation">3.3. Tags valideren</a></span></dt>
-                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2672">3.4. Statistieken</a></span></dt>
-                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2722">3.5. Statistieken voor overeenkomsten</a></span></dt>
-                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2786">3.6. Help-browser</a></span></dt>
+                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2687">3.4. Statistieken</a></span></dt>
+                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2737">3.5. Statistieken voor overeenkomsten</a></span></dt>
+                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2801">3.6. Help-browser</a></span></dt>
                   </dl>
                </dd>
             </dl>
@@ -548,7 +548,7 @@
                      </div>
                   </div>
                </div>
-               <p>Het hoofdmenu geeft toegang tot alle functies van <span class="application">OmegaT</span>. Zie de appendix <span class="emphasis"><em>Hoofdmenu</em></span> voor een volledige beschrijving van alle menu's en menu-items. De meestgebruikte functies zijn te benaderen met sneltoetsen
+               <p>Het hoofdmenu geeft toegang tot alle functies van <span class="application">OmegaT</span>. Zie de appendix <span class="emphasis"><em>Hoofdmenu</em></span> voor een volledige beschrijving van alle menu's en menu-items. De meest gebruikte functies zijn te benaderen met sneltoetsen
                   voor het toetsenbord, dus als u daar eenmaal aan gewend bent, zal er geen reden meer zijn om door de menu's te bladeren tijdens
                   het vertalen. Bekijk hoofdstuk <a class="link" href="chapter.menu.html" title="Hoofdstuk 5. Sneltoetsen voor menu en het toetsenbord">Sneltoetsen voor menu en het toetsenbord</a> voor details.
                </p>
@@ -586,7 +586,11 @@
                   </div>
                </div>
                <p>Het venster Projectbestanden somt de projectbestanden op en geeft andere informatie over het project weer. Het wordt automatisch
-                  weergegeven als OmegaT een project laadt. Gebruik <span class="guimenuitem">Ctrl+L<a class="indexterm" name="d0e2540"></a></span> om het te openen en <span class="keycap"><strong>Esc</strong></span> om het te sluiten. Het venster Projectbestanden geeft de volgende informatie weer:
+                  weergegeven als OmegaT een project laadt.
+               </p>
+               <p><em><span class="remark">Opmerking:</span></em> het is mogelijk te verhinderen dat dit venster projectbestanden wordt weergegeven, door <span class="emphasis"><em>project_files_show_on_load</em></span> in te stellen op <span class="emphasis"><em>false</em></span> in het bestand <code class="filename">omegat.prefs</code> (toegankelijk via menu Opties / Toegang tot configuratiemap).
+               </p>
+               <p>Gebruik <span class="guimenuitem">Ctrl+L<a class="indexterm" name="d0e2555"></a></span> om het te openen en <span class="keycap"><strong>Esc</strong></span> om het te sluiten. Het venster Projectbestanden geeft de volgende informatie weer:
                </p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -639,7 +643,7 @@
                   echter in het algemeen moeten worden vermeden nadat u eenmaal met de vertaling van het project bent begonnen. Zie het hoofdstuk
                   <span class="emphasis"><em>Segmentatieregels</em></span> voor meer informatie.
                </p>
-               <p><span class="bold"><strong><a class="indexterm" name="d0e2591"></a>bestanden toevoegen aan het project: </strong></span>U kunt bronbestanden toevoegen aan het project door te klikken op de knop "<span class="guimenuitem">Bronbestanden importeren..."</span>. Dit kopieert de geselecteerde bestanden naar de map <code class="filename">/source</code> en herlaadt het project om de nieuwe bestanden te importeren. U kunt ook bronbestanden toevoegen vanaf internetpagina's,
+               <p><span class="bold"><strong><a class="indexterm" name="d0e2606"></a>bestanden toevoegen aan het project: </strong></span>U kunt bronbestanden toevoegen aan het project door te klikken op de knop "<span class="guimenuitem">Bronbestanden importeren..."</span>. Dit kopieert de geselecteerde bestanden naar de map <code class="filename">/source</code> en herlaadt het project om de nieuwe bestanden te importeren. U kunt ook bronbestanden toevoegen vanaf internetpagina's,
                   geschreven in MediaWiki, door te klikken op de knop<span class="guimenuitem"> "Importeren vanuit MediaWiki"</span> en de corresponderende URL op te geven.
                </p>
             </div>
@@ -647,7 +651,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="section.search.window"></a>3.2. venster Zoeken<a class="indexterm" name="d0e2610"></a></h3>
+                        <h3 class="title"><a name="section.search.window"></a>3.2. venster Zoeken<a class="indexterm" name="d0e2625"></a></h3>
                      </div>
                   </div>
                </div>
@@ -661,14 +665,14 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="section.tag.validation"></a>3.3. Tags valideren<a class="indexterm" name="d0e2632"></a><a class="indexterm" name="d0e2637"></a></h3>
+                        <h3 class="title"><a name="section.tag.validation"></a>3.3. Tags valideren<a class="indexterm" name="d0e2647"></a><a class="indexterm" name="d0e2652"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Het venster Tags valideren detecteert de tagfouten en niet-consistente vertalingen in de vertaling en somt ze op. Open het
                   venster met <span class="guimenuitem">Ctrl+T. </span>Het venster heeft een kolom met 3 tabellen met een koppeling naar het segment en de inhoud van diens bron en doel:
                </p>
-               <div class="figure"><a name="tag.validator.window"></a><p class="title"><b>Afbeelding 4.6. <a class="indexterm" name="d0e2652"></a>venster Tags valideren</b></p>
+               <div class="figure"><a name="tag.validator.window"></a><p class="title"><b>Afbeelding 4.6. <a class="indexterm" name="d0e2667"></a>venster Tags valideren</b></p>
                   <div class="figure-contents">
                      <div class="mediaobject"><img src="images/TagValidator.png" alt="venster Tags valideren"></div>
                   </div>
@@ -689,12 +693,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2672"></a>3.4. Statistieken<a class="indexterm" name="d0e2675"></a></h3>
+                        <h3 class="title"><a name="d0e2687"></a>3.4. Statistieken<a class="indexterm" name="d0e2690"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Het venster Statistieken - te benaderen via <span class="bold"><strong>Extra &gt; Statistieken </strong></span>- geeft de statistieken voor het huidige project van OmegaT weer, zowel in de vorm van een overzicht als in detail voor elk
-                  bestand dat moet worden vertaald. De weergegeven statistieken zijn beschikbaar als een tab-gescheiden bestand <code class="filename">project_stats.txt</code> (submap <code class="filename">omegat</code>), klaar om te worden geladen in een programma met rekenbladen dat de gebruiker wil gebruiken. U kunt <span class="guimenuitem">Ctrl+A <a class="indexterm" name="d0e2693"></a></span><span class="guimenuitem">, Ctrl+C <a class="indexterm" name="d0e2700"></a></span>, <span class="guimenuitem">Ctrl+V <a class="indexterm" name="d0e2708"></a></span> gebruiken om de inhoud te kopiëren en te plakken.
+                  bestand dat moet worden vertaald. De weergegeven statistieken zijn beschikbaar als een tab-gescheiden bestand <code class="filename">project_stats.txt</code> (submap <code class="filename">omegat</code>), klaar om te worden geladen in een programma met rekenbladen dat de gebruiker wil gebruiken. U kunt <span class="guimenuitem">Ctrl+A <a class="indexterm" name="d0e2708"></a></span><span class="guimenuitem">, Ctrl+C <a class="indexterm" name="d0e2715"></a></span>, <span class="guimenuitem">Ctrl+V <a class="indexterm" name="d0e2723"></a></span> gebruiken om de inhoud te kopiëren en te plakken.
                </p>
                <div class="figure"><a name="ProjectStatistic.Window"></a><p class="title"><b>Afbeelding 4.7. projectstatistieken</b></p>
                   <div class="figure-contents">
@@ -707,7 +711,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2722"></a>3.5. Statistieken voor overeenkomsten<a class="indexterm" name="d0e2725"></a></h3>
+                        <h3 class="title"><a name="d0e2737"></a>3.5. Statistieken voor overeenkomsten<a class="indexterm" name="d0e2740"></a></h3>
                      </div>
                   </div>
                </div>
@@ -718,7 +722,7 @@
                   Onthoud dat er kleine verschillen zouden kunnen zijn tussen de tellingen van OmegaT en de getallen die worden verschaft door
                   andere CAT-programma's.
                </p>
-               <div class="figure"><a name="d0e2735"></a><p class="title"><b>Afbeelding 4.8. Statistieken voor overeenkomsten</b></p>
+               <div class="figure"><a name="d0e2750"></a><p class="title"><b>Afbeelding 4.8. Statistieken voor overeenkomsten</b></p>
                   <div class="figure-contents">
                      <div class="mediaobject"><img src="images/MatchStatistics.png" alt="Statistieken voor overeenkomsten"></div>
                   </div>
@@ -740,7 +744,7 @@
                   het tellen, moet men de map /tm leeg maken of de instelling van het project wijzigen (tijdelijk) zodat de waarde voor /tm
                   naar een andere locatie verwijst.
                </p>
-               <p>De overeenkomsten voor statistieken zijn tab-gescheiden en u kunt <span class="guimenuitem">Ctrl+A <a class="indexterm" name="d0e2762"></a></span><span class="guimenuitem">, Ctrl+C <a class="indexterm" name="d0e2769"></a></span>, <span class="guimenuitem">Ctrl+V <a class="indexterm" name="d0e2777"></a></span> gebruiken om ze te kopiëren/plakken, bijvoorbeeld in een werkblad of in uw toepassing voor kostenberekening. Eenmaal berekend
+               <p>De overeenkomsten voor statistieken zijn tab-gescheiden en u kunt <span class="guimenuitem">Ctrl+A <a class="indexterm" name="d0e2777"></a></span><span class="guimenuitem">, Ctrl+C <a class="indexterm" name="d0e2784"></a></span>, <span class="guimenuitem">Ctrl+V <a class="indexterm" name="d0e2792"></a></span> gebruiken om ze te kopiëren/plakken, bijvoorbeeld in een werkblad of in uw toepassing voor kostenberekening. Eenmaal berekend
                   zijn de gegevens ook beschikbaar in <code class="filename">omegat/project_stats_match.txt.</code> Onthoud dat het bestand voorzien is van een tijdstempel, omdat de berekening (in tegenstelling tot de standaard statistieken)
                   is niet onmiddellijk wordt uitgevoerd en dus snel niet meer van toepassing is.
                </p>
@@ -749,11 +753,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2786"></a>3.6. Help-browser<a class="indexterm" name="d0e2789"></a></h3>
+                        <h3 class="title"><a name="d0e2801"></a>3.6. Help-browser<a class="indexterm" name="d0e2804"></a></h3>
                      </div>
                   </div>
                </div>
-               <p>De Help-browser (die deze handleiding weergeeft) kan worden opgeroepen door op <span class="keycap"><strong><a class="indexterm" name="d0e2797"></a>F1</strong></span> te drukken of door te navigeren naar <span class="guimenuitem"><a class="indexterm" name="d0e2805"></a>Help → Gebruikershandleiding...</span> in het hoofdmenu. In het venster worden de handleiding en twee knoppen weergegeven: Terug en Inhoud. De gebruikershandleiding
+               <p>De Help-browser (die deze handleiding weergeeft) kan worden opgeroepen door op <span class="keycap"><strong><a class="indexterm" name="d0e2812"></a>F1</strong></span> te drukken of door te navigeren naar <span class="guimenuitem"><a class="indexterm" name="d0e2820"></a>Help → Gebruikershandleiding...</span> in het hoofdmenu. In het venster worden de handleiding en twee knoppen weergegeven: Terug en Inhoud. De gebruikershandleiding
                   is een HTML-document met koppelingen naar de verschillende hoofdstukken. Klikken op een koppeling, zoals u in een webbrowser
                   zou doen, brengt de gewenste pagina op de voorgrond.
                </p>

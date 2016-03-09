@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.6.0 (2016-03-09)
 ----------------------------------------------------------------------
- 15 Enhancements
+ 16 Enhancements
   7 Bug fixes
   5 Localisation updates
 ----------------------------------------------------------------------
@@ -55,6 +55,8 @@
 
   - Filter for Wordpress XML export
 
+  - The appearance under Windows "high-contrast" themes is improved
+
   Bug fixes:
 
   - Custom text color used for text in dialogs
@@ -81,10 +83,6 @@ digits
   Note: Java cannot establish SSL connections to servers using untrusted
 certificates; in case of an javax.net.ssl.SSLHandshakeException, see the
 bug comments for instructions on adding the certificate to the trust store.
-
-  Other changes:
-
-  - The appearance under Windows "high-contrast" themes is improved
 
   Localisation Updates:
 

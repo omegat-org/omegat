@@ -465,6 +465,10 @@ public class TestTeamIntegrationChild {
             public JMenu getGlossaryMenu() {
                 return null;
             }
+
+            public JMenu getAutoCompletionMenu() {
+                return null;
+            }
         };
 
         public IMainMenu getMainMenu() {

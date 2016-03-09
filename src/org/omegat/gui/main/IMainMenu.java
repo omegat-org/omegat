@@ -5,6 +5,7 @@
 
  Copyright (C) 2008 Alex Buloichik
                2011 Didier Briel
+               2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -34,6 +35,7 @@ import javax.swing.JMenuItem;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
+ * @author Aaron Madlon-Kay
  */
 public interface IMainMenu {
     JMenu getMachineTranslationMenu();
@@ -47,4 +49,6 @@ public interface IMainMenu {
     JMenu getProjectMenu();
     
     JMenuItem getProjectRecentMenuItem();
+
+    JMenu getAutoCompletionMenu();
 }

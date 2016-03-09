@@ -675,6 +675,10 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         return projectOpenRecentMenuItem;
     }
 
+    public JMenu getAutoCompletionMenu() {
+        return optionsAutoCompleteMenu;
+    }
+
     JMenuItem cycleSwitchCaseMenuItem;
     JMenuItem editFindInProjectMenuItem;
     JMenuItem editReplaceInProjectMenuItem;

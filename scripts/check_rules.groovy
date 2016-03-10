@@ -483,8 +483,14 @@ def getLanguageToolInstance(ltLang) {
 
 def getLTLanguage(lang)
 {
+   def LANGUAGES
+   if (org.languagetool.JLanguageTool.VERSION < "3.2") {
+       LANGUAGES = Language.LANGUAGES
+   }else{
+       LANGUAGES = org.languagetool.Languages.LANGUAGES
+   }
    def omLang = lang.getLanguageCode();
-   for (Language ltLang : Language.LANGUAGES) {
+   for (Language ltLang : LANGUAGES) {
        if (omLang.equalsIgnoreCase(ltLang.getShortName())) {
            return ltLang;
        }

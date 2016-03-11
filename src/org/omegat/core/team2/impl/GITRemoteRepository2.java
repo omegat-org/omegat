@@ -29,14 +29,18 @@ package org.omegat.core.team2.impl;
 import gen.core.project.RepositoryDefinition;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.logging.Logger;
 
 import javax.xml.namespace.QName;
 
 import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.LsRemoteCommand;
 import org.eclipse.jgit.api.ResetCommand.ResetType;
+import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
+import org.eclipse.jgit.api.errors.JGitInternalException;
 import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -225,5 +229,36 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             }
         }
         return (path.delete());
+    }
+
+    /**
+     * Determines whether or not the supplied URL represents a valid Git repository.
+     * 
+     * <p>
+     * Does the equivalent of <code>git ls-remote <i>url</i></code>.
+     * 
+     * @param url
+     *            URL of supposed remote repository
+     * @return true if repository appears to be valid, false otherwise
+     */
+    public static boolean isGitRepository(String url) {
+        // Heuristics to save some waiting time
+        try {
+            Collection<Ref> result = new LsRemoteCommand(null).setRemote(url).call();
+            return !result.isEmpty();
+        } catch (TransportException ex) {
+            String message = ex.getMessage();
+            if (message.endsWith("not authorized") || message.endsWith("Auth fail")
+                    || message.contains("Too many authentication failures")
+                    || message.contains("Authentication is required")) {
+                return true;
+            }
+            return false;
+        } catch (GitAPIException ex) {
+            return false;
+        } catch (JGitInternalException ex) {
+            // Happens if the URL is a Subversion URL like svn://...
+            return false;
+        }
     }
 }

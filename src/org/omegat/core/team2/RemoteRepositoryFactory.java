@@ -56,6 +56,11 @@ public class RemoteRepositoryFactory {
         } else if (url.startsWith("git")) {
             return "git";
         } else {
+            if (GITRemoteRepository2.isGitRepository(url)) {
+                return "git";
+            } else if (SVNRemoteRepository2.isSVNRepository(url)) {
+                return "svn";
+            }
             // unknown
             return null;
         }

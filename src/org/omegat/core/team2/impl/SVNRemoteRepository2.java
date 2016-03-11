@@ -39,6 +39,7 @@ import javax.xml.namespace.QName;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.TeamSettings;
 import org.omegat.util.Log;
+import org.tmatesoft.svn.core.SVNAuthenticationException;
 import org.tmatesoft.svn.core.SVNCommitInfo;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNErrorCode;
@@ -168,5 +169,32 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
                 throw new NetworkException(se);
             }
         }
+    }
+
+    /**
+     * Determines whether or not the supplied URL represents a valid Subversion repository.
+     * 
+     * <p>
+     * Does the equivalent of <code>svn info <i>url</i></code>.
+     * 
+     * @param url
+     *            URL of supposed remote repository
+     * @return true if repository appears to be valid, false otherwise
+     */
+    public static boolean isSVNRepository(String url) {
+        // Heuristics to save some waiting time
+        try {
+
+            ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
+            SVNClientManager ourClientManager = SVNClientManager.newInstance(options, (ISVNAuthenticationManager)null);
+
+            ourClientManager.getWCClient().doInfo(SVNURL.parseURIDecoded(url), SVNRevision.HEAD,
+                    SVNRevision.HEAD);
+        } catch (SVNAuthenticationException ex) {
+            return true;
+        } catch (SVNException ex) {
+            return false;
+        }
+        return true;
     }
 }

@@ -225,7 +225,7 @@ public class TestTeamIntegration {
         origDir.mkdir();
 
         ProjectProperties config = createConfig(origDir);
-        RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config);
+        RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config.getProjectRootDir(), config.getRepositories());
         remote.switchAllToLatest();
 
         new File(origDir, "omegat").mkdirs();

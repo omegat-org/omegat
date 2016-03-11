@@ -32,19 +32,23 @@ package org.omegat.gui.main;
 
 import java.awt.Cursor;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
-import org.omegat.CLIParameters;
+import org.apache.commons.io.FileUtils;
+import org.omegat.convert.ConvertProject;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.NewTeamProject;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
@@ -55,10 +59,14 @@ import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RecentProjects;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.omegat.util.WikiGet;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
 import org.omegat.util.gui.UIThreadsUtil;
+
+import gen.core.project.RepositoryDefinition;
+import gen.core.project.RepositoryMapping;
 
 /**
  * Handler for project UI commands, like open, save, compile, etc.
@@ -153,20 +161,42 @@ public class ProjectUICommands {
                 Cursor oldCursor = mainWindow.getCursor();
                 mainWindow.setCursor(hourglassCursor);
 
-                String projectFileURL=dialog.txtProjectFileURL.getText();
-                File localDirectory = new File(dialog.txtDirectory.getText());
-                try {
-                    localDirectory.mkdirs();
-                    byte[] projectFile = WikiGet.getURLasByteArray(projectFileURL);
-                    FileUtils.writeByteArrayToFile(new File(localDirectory, OConsts.FILE_PROJECT), projectFile);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    Core.getMainWindow().displayErrorRB(ex, "TEAM_CHECKOUT_ERROR");
-                    mainWindow.setCursor(oldCursor);
-                    return null;
-                }
+                // retrieve omegat.project
+                File projectRoot = new File(dialog.txtDirectory.getText());
+                List<RepositoryDefinition> repos = new ArrayList<RepositoryDefinition>();
+                RepositoryDefinition repo = new RepositoryDefinition();
+                repos.add(repo);
+                repo.setType(dialog.getRepoType());
+                repo.setUrl(dialog.txtRepositoryOrProjectFileURL.getText().trim());
+                RepositoryMapping mapping = new RepositoryMapping();
+                mapping.setLocal("");
+                mapping.setRepository("");
+                repo.getMapping().add(mapping);
 
-                projectOpen(localDirectory);
+                RemoteRepositoryProvider remoteRepositoryProvider = new RemoteRepositoryProvider(projectRoot,
+                        repos);
+                remoteRepositoryProvider.switchAllToLatest();
+                remoteRepositoryProvider.copyFilesFromRepoToProject("omegat.project");
+
+                // update repo into
+                ProjectProperties props = ProjectFileStorage.loadProjectProperties(projectRoot);
+                props.setRepositories(repos);
+                ProjectFileStorage.writeProjectFile(props);
+
+                //String projectFileURL = dialog.txtRepositoryOrProjectFileURL.getText();
+                //File localDirectory = new File(dialog.txtDirectory.getText());
+//                try {
+//                    localDirectory.mkdirs();
+//                    byte[] projectFile = WikiGet.getURLasByteArray(projectFileURL);
+//                    FileUtils.writeByteArrayToFile(new File(localDirectory, OConsts.FILE_PROJECT), projectFile);
+//                } catch (Exception ex) {
+//                    ex.printStackTrace();
+//                    Core.getMainWindow().displayErrorRB(ex, "TEAM_CHECKOUT_ERROR");
+//                    mainWindow.setCursor(oldCursor);
+//                    return null;
+//                }
+
+//                projectOpen(localDirectory);
 
                 mainWindow.setCursor(oldCursor);
                 return null;

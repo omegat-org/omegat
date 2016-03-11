@@ -35,7 +35,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import org.omegat.core.data.ProjectProperties;
+import org.apache.commons.io.FileUtils;
 import org.omegat.util.FileUtil;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
@@ -59,10 +59,10 @@ public class RemoteRepositoryProvider {
     final List<RepositoryDefinition> repositoriesDefinitions;
     final List<IRemoteRepository2> repositories = new ArrayList<IRemoteRepository2>();
 
-    public RemoteRepositoryProvider(ProjectProperties config) throws Exception {
-        projectRoot = config.getProjectRootDir();
+    public RemoteRepositoryProvider(File projectRoot, List<RepositoryDefinition> repositoriesDefinitions) throws Exception {
+        this.projectRoot = projectRoot;
         teamSettings = new TeamSettings(new File(projectRoot, REPO_SUBDIR));
-        repositoriesDefinitions = config.getRepositories();
+        this.repositoriesDefinitions = repositoriesDefinitions;
 
         checkDefinitions();
         initializeRepositories();
@@ -236,7 +236,7 @@ public class RemoteRepositoryProvider {
             FileUtil.copyFileWithEolConversion(from, to, eolConversionCharset);
         } else {
             // charset not defined - binary file
-            FileUtil.copyFile(from, to);
+            FileUtils.copyFile(from, to);
         }
     }
 

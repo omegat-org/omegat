@@ -108,7 +108,7 @@ public class TestTeamIntegrationChild {
             Preferences.setPreference(Preferences.TEAM_AUTHOR, source);
 
             ProjectProperties config = TestTeamIntegration.createConfig(new File(dir));
-            RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config);
+            RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config.getProjectRootDir(), config.getRepositories());
 
             // load project
             Core.initializeConsole(new TreeMap<String, String>());

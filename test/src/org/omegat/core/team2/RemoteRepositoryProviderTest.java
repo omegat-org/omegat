@@ -374,7 +374,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
     public class VirtualRemoteRepositoryProvider extends RemoteRepositoryProvider {
         public VirtualRemoteRepositoryProvider(List<RepositoryDefinition> repositoriesDefinitions)
                 throws Exception {
-            super(new ProjectPropertiesTest(repositoriesDefinitions));
+            super(new File(V), repositoriesDefinitions);
         }
 
         @Override

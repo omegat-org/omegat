@@ -29,7 +29,7 @@
     <Component class="javax.swing.JLabel" name="urlLabel">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="org/omegat/Bundle.properties" key="TEAM_NEW_PROJECT_FILE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="org/omegat/Bundle.properties" key="TEAM_NEW_PROJECT_URL_OR_FILE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
       <Constraints>
@@ -38,7 +38,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtProjectFileURL">
+    <Component class="javax.swing.JTextField" name="txtRepositoryOrProjectFileURL">
       <Properties>
         <Property name="columns" type="int" value="40"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -56,7 +56,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="detectedProjectFileLabel">
+    <Component class="javax.swing.JLabel" name="detectedRepoOrProjectFileLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value=" "/>
       </Properties>
@@ -134,6 +134,9 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="BUTTON_CANCEL" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
+          </AccessibilityProperties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelActionPerformed"/>
           </Events>

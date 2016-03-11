@@ -208,7 +208,8 @@ public class RealProject implements IProject {
         m_config = props;
         if (m_config.getRepositories() != null) {
             try {
-                remoteRepositoryProvider = new RemoteRepositoryProvider(m_config);
+                remoteRepositoryProvider = new RemoteRepositoryProvider(m_config.getProjectRootDir(),
+                        m_config.getRepositories());
             } catch (Exception ex) {
                 // TODO
                 throw new RuntimeException(ex);

@@ -46,4 +46,18 @@ public class RemoteRepositoryFactory {
             throw new RuntimeException("Unknown repository type: " + type);
         }
     }
+
+    /**
+     * Tries to detect repository type. Used for migrate old projects only.
+     */
+    public static String detectRepositoryType(String url) {
+        if (url.startsWith("svn")) {
+            return "svn";
+        } else if (url.startsWith("git")) {
+            return "git";
+        } else {
+            // unknown
+            return null;
+        }
+    }
 }

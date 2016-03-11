@@ -42,7 +42,7 @@ import org.omegat.util.Log;
 public class RebaseAndCommit {
     private static final Logger LOGGER = Logger.getLogger(RebaseAndCommit.class.getName());
 
-    private static final String VERSION_PREFIX = "version-based-on.";
+    public static final String VERSION_PREFIX = "version-based-on.";
 
     public static void rebaseAndCommit(RemoteRepositoryProvider provider, File projectDir, String path,
             IRebase rebaser) throws Exception {

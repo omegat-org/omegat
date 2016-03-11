@@ -25,9 +25,6 @@
 
 package org.omegat.convert;
 
-import gen.core.project.RepositoryDefinition;
-import gen.core.project.RepositoryMapping;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,6 +42,7 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.team2.RebaseAndCommit;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.team2.TeamSettings;
+import org.omegat.util.FileUtil;
 import org.omegat.util.OStrings;
 import org.omegat.util.ProjectFileStorage;
 import org.tmatesoft.svn.core.SVNDepth;
@@ -54,6 +52,9 @@ import org.tmatesoft.svn.core.wc2.SvnGetInfo;
 import org.tmatesoft.svn.core.wc2.SvnInfo;
 import org.tmatesoft.svn.core.wc2.SvnOperationFactory;
 import org.tmatesoft.svn.core.wc2.SvnTarget;
+
+import gen.core.project.RepositoryDefinition;
+import gen.core.project.RepositoryMapping;
 
 /**
  * Check if project is 2.6-style team project, i.e. 'inplace' repository working copy exit. Then convert it
@@ -118,8 +119,8 @@ public class ConvertProject26to36team {
         ProjectFileStorage.writeProjectFile(props);
 
         // all data saved - remove old repository
-        // FileUtil.deleteTree(new File(projectRootFolder, ".svn"));
-        // FileUtil.deleteTree(new File(projectRootFolder, ".git"));
+        FileUtil.deleteTree(new File(projectRootFolder, ".svn"));
+        FileUtil.deleteTree(new File(projectRootFolder, ".git"));
     }
 
     /**

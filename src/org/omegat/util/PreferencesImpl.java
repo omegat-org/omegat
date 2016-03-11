@@ -87,14 +87,7 @@ public class PreferencesImpl implements IPreferences {
 
     @Override
     public boolean existsPreference(String key) {
-        boolean exists = false;
-        if (key == null)
-            exists = false;
-        Integer i = m_preferenceMap.get(key);
-        if (i != null) {
-            exists = true;
-        }
-        return exists;
+        return m_preferenceMap.containsKey(key);
     }
 
     @Override

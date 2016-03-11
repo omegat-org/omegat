@@ -244,7 +244,7 @@ public class ProjectUICommands {
                 // check if project okay
                 ProjectProperties props;
                 try {
-                    props = ProjectFileStorage.loadProjectProperties(projectRootFolder);
+                    props = ProjectFileStorage.loadProjectProperties(projectRootFolder.getCanonicalFile());
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");

@@ -25,9 +25,6 @@
 
 package org.omegat.gui.dialogs;
 
-import gen.core.project.RepositoryDefinition;
-import gen.core.project.RepositoryMapping;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.MessageFormat;
@@ -46,6 +43,9 @@ import javax.swing.table.AbstractTableModel;
 import org.apache.commons.lang.StringUtils;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DockingUI;
+
+import gen.core.project.RepositoryDefinition;
+import gen.core.project.RepositoryMapping;
 
 /**
  * Controller for repositories mapping UI.
@@ -77,6 +77,7 @@ public class RepositoriesMappingController {
         return result;
     }
 
+    @SuppressWarnings("serial")
     void initTableModels() {
 
         modelRepo = new AbstractTableModel() {

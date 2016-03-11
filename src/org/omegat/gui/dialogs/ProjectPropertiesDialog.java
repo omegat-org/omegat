@@ -889,6 +889,8 @@ public class ProjectPropertiesDialog extends JDialog {
                 m_tmRootField.setForeground(Color.RED);
 
             break;
+        default:
+            break;
         }
 
         updateUIText(m_messageArea);

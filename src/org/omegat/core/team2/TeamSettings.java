@@ -32,7 +32,6 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
-import org.omegat.util.FileUtil;
 import org.omegat.util.StaticUtils;
 
 /**

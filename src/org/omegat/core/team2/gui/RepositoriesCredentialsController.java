@@ -92,6 +92,7 @@ public class RepositoriesCredentialsController {
         dialog.setVisible(true);
     }
 
+    @SuppressWarnings("serial")
     static class Model extends AbstractTableModel {
         List<String> lines;
 

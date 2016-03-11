@@ -29,9 +29,6 @@
 
 package org.omegat.core.data;
 
-import gen.core.filters.Filters;
-import gen.core.project.RepositoryDefinition;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -51,6 +48,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 
 import gen.core.filters.Filters;
+import gen.core.project.RepositoryDefinition;
 
 /**
  * Storage for project properties. May read and write project from/to disk.

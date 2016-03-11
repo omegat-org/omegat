@@ -43,6 +43,7 @@ import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -55,6 +56,7 @@ import java.util.TreeMap;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.apache.lucene.util.Version;
 import org.madlonkay.supertmxmerge.StmProperties;
@@ -94,8 +96,8 @@ import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
-import org.omegat.util.TagUtil;
 import org.omegat.util.TMXReader2;
+import org.omegat.util.TagUtil;
 import org.omegat.util.gui.UIThreadsUtil;
 import org.xml.sax.SAXParseException;
 
@@ -520,7 +522,7 @@ public class RealProject implements IProject {
      * @throws IOException
      * @throws TranslationException
      */
-    public void compileProject(String sourcePattern) throws IOException, TranslationException {
+    public void compileProject(String sourcePattern) throws Exception {
         compileProject(sourcePattern, true);
     }
     
@@ -534,7 +536,7 @@ public class RealProject implements IProject {
      * @throws IOException
      * @throws TranslationException
      */
-    public void compileProject(String sourcePattern, boolean doPostProcessing) throws IOException, TranslationException {
+    public void compileProject(String sourcePattern, boolean doPostProcessing) throws Exception {
         Log.logInfoRB("LOG_DATAENGINE_COMPILE_START");
         UIThreadsUtil.mustNotBeSwingThread();
 
@@ -572,18 +574,10 @@ public class RealProject implements IProject {
         // build translated files
         FilterMaster fm = Core.getFilterMaster();
 
-        List<File> fileList;
-        try {
-            fileList = StaticUtils.buildFileList(new File(srcRoot), true);
-        } catch (Exception e) {
-            Log.logErrorRB("CT_ERROR_CREATING_TMX");
-            Log.log(e);
-            throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") + "\n" + e.getMessage());
-        }
-        List<String> pathList = new ArrayList<String>(fileList.size());
-        for (File file : fileList) {
-            pathList.add(file.getPath().substring(m_config.getSourceRoot().length()).replace('\\', '/'));
-        }
+        Path srcRootPath = new File(srcRoot).toPath();
+        List<String> pathList = StaticUtils.buildFileList(new File(srcRoot), true).stream()
+                    .map((file) -> srcRootPath.relativize(file.toPath()).toString().replace('\\', '/'))
+                    .collect(Collectors.toList());
         StaticUtils.removeFilesByMasks(pathList, m_config.getSourceRootExcludes());
 
         TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback();
@@ -983,16 +977,10 @@ public class RealProject implements IProject {
         FilterMaster fm = Core.getFilterMaster();
 
         File root = new File(m_config.getSourceRoot());
-        List<File> srcFileList = StaticUtils.buildFileList(root, true);
-        List<String> srcPathList = new ArrayList<String>(srcFileList.size());
-        for (File file : srcFileList) {
-            if (!file.getPath().startsWith(m_config.getSourceRoot())) {
-                // This can happen due to differences in Unicode composition
-                throw new RuntimeException("Can't calculate relative path: " + file.getPath()
-                        + " does not appear to begin with " + m_config.getSourceRoot());
-            }
-            srcPathList.add(file.getPath().substring(m_config.getSourceRoot().length()).replace('\\', '/'));
-        }
+        Path sourceRootPath = new File(m_config.getSourceRoot()).toPath();
+        List<String> srcPathList = StaticUtils.buildFileList(root, true).stream()
+                .map((file) -> sourceRootPath.relativize(file.toPath()).toString().replace('\\', '/'))
+                .collect(Collectors.toList());
         StaticUtils.removeFilesByMasks(srcPathList, m_config.getSourceRootExcludes());
         StaticUtils.sortByList(srcPathList, getSourceFilesOrder());
 

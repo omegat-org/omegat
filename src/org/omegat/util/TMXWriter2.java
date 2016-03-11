@@ -155,6 +155,12 @@ public class TMXWriter2 {
      */
     public void writeEntry(String source, String translation, TMXEntry entry, List<String> propValues)
             throws Exception {
+        writeEntry(source, translation, entry.note, entry.creator, entry.creationDate, entry.changer, entry.changeDate,
+                propValues);
+    }
+
+    public void writeEntry(String source, String translation, String note, String creator, long creationDate,
+            String changer, long changeDate, List<String> propValues) throws Exception {
         xml.writeCharacters("    ");
         xml.writeStartElement("tu");
         xml.writeCharacters(FileUtil.LINE_SEPARATOR);
@@ -176,8 +182,8 @@ public class TMXWriter2 {
         }
         
         // add note
-        if (entry.note != null && !entry.note.equals("")) {
-            String note = StringUtil.removeXMLInvalidChars(entry.note);
+        if (!StringUtil.isEmpty(note)) {
+            note = StringUtil.removeXMLInvalidChars(note);
             if (forceValidTMX) {
                 note = TagUtil.stripXmlTags(note);
             }
@@ -225,17 +231,17 @@ public class TMXWriter2 {
             } else {
                 xml.writeAttribute("lang", langTar);
             }
-            if (!StringUtil.isEmpty(entry.changer)) {
-                xml.writeAttribute("changeid", entry.changer);
+            if (!StringUtil.isEmpty(changer)) {
+                xml.writeAttribute("changeid", changer);
             }
-            if (entry.changeDate > 0) {
-                xml.writeAttribute("changedate", tmxDateFormat.format(new Date(entry.changeDate)));
+            if (changeDate > 0) {
+                xml.writeAttribute("changedate", tmxDateFormat.format(new Date(changeDate)));
             }
-            if (!StringUtil.isEmpty(entry.creator)) {
-                xml.writeAttribute("creationid", entry.creator);
+            if (!StringUtil.isEmpty(creator)) {
+                xml.writeAttribute("creationid", creator);
             }
-            if (entry.creationDate > 0) {
-                xml.writeAttribute("creationdate", tmxDateFormat.format(new Date(entry.creationDate)));
+            if (creationDate > 0) {
+                xml.writeAttribute("creationdate", tmxDateFormat.format(new Date(creationDate)));
             }
             xml.writeCharacters(FileUtil.LINE_SEPARATOR);
 

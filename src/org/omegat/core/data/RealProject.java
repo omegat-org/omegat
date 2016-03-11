@@ -323,8 +323,12 @@ public class RealProject implements IProject {
             if (remoteRepositoryProvider != null) {
                 // copy files from repository to project
                 remoteRepositoryProvider.switchAllToLatest();
-                for (String dir : new String[] { m_config.getSourceRootRelative(),
-                        m_config.getGlossaryRootRelative(), m_config.getDictRootRelative() }) {
+                for (String dir : new String[] { m_config.getSourceDir().getUnderRoot(),
+                        m_config.getGlossaryDir().getUnderRoot(), m_config.getTmDir().getUnderRoot(),
+                        m_config.getDictDir().getUnderRoot() }) {
+                    if (dir == null) {
+                        continue;
+                    }
                     if (dir.startsWith("/") || dir.contains("..")) {
                         continue;
                     }
@@ -607,12 +611,12 @@ public class RealProject implements IProject {
                 numberOfCompiled++;
             }
         }
-        if (remoteRepositoryProvider != null) {
+        if (remoteRepositoryProvider != null && m_config.getTargetDir().isUnderRoot()) {
             // commit translations
             try {
                 remoteRepositoryProvider.switchAllToLatest();
-                remoteRepositoryProvider.copyFilesFromProjectToRepo(m_config.getTargetRootRelative() + '/');
-                remoteRepositoryProvider.commitFiles(m_config.getTargetRootRelative() + '/', "Project translation");
+                remoteRepositoryProvider.copyFilesFromProjectToRepo(m_config.getTargetDir().getUnderRoot());
+                remoteRepositoryProvider.commitFiles(m_config.getTargetDir().getUnderRoot(), "Project translation");
             } catch (Exception e) {
                 Log.logErrorRB("CT_ERROR_CREATING_TARGET_DIR");// TODO: change to better error
                 Log.log(e);
@@ -842,9 +846,11 @@ public class RealProject implements IProject {
             projectTMX.replaceContent(newTMX);
         }
 
-        final String glossaryPath = m_config.getGlossaryRootRelative() + "/" + OConsts.DEFAULT_W_GLOSSARY;
-        final File glossaryFile = new File(m_config.getProjectRootDir(), glossaryPath);
-        if (glossaryFile.exists() && remoteRepositoryProvider.isUnderMapping(glossaryPath)) {
+        final String glossaryPath = m_config.getWritableGlossaryFile().getUnderRoot();
+        final File glossaryFile = m_config.getWritableGlossaryFile().getAsFile();
+                new File(m_config.getProjectRootDir(), glossaryPath);
+        if (glossaryPath != null && glossaryFile.exists()
+                && remoteRepositoryProvider.isUnderMapping(glossaryPath)) {
             final List<GlossaryEntry> glossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
             RebaseAndCommit.rebaseAndCommit(remoteRepositoryProvider, m_config.getProjectRootDir(),
                     glossaryPath, new RebaseAndCommit.IRebase() {

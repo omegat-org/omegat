@@ -100,6 +100,8 @@ public class ProjectFileStorage {
             result.getSourceRootExcludes().addAll(Arrays.asList(ProjectProperties.DEFAULT_EXCLUDES));
         }
         result.setTMRoot(computeAbsolutePath(m_root, om.getProject().getTmDir(), OConsts.DEFAULT_TM));
+        result.setTMRootRelative(computeRelative(om.getProject().getTmDir(), OConsts.DEFAULT_TM));
+
         result.setGlossaryRoot(computeAbsolutePath(m_root, om.getProject().getGlossaryDir(),
                 OConsts.DEFAULT_GLOSSARY));
         result.setGlossaryRootRelative(computeRelative(om.getProject().getGlossaryDir(),
@@ -107,16 +109,15 @@ public class ProjectFileStorage {
 
         // Compute glossary file location
         String glossaryFile = om.getProject().getGlossaryFile();
+        String glossaryDir = null;
+        glossaryDir = computeAbsolutePath(m_root, glossaryDir, OConsts.DEFAULT_GLOSSARY);
         if (StringUtil.isEmpty(glossaryFile)) {
             glossaryFile = OConsts.DEFAULT_FOLDER_MARKER;
         }
         if (glossaryFile.equalsIgnoreCase(OConsts.DEFAULT_FOLDER_MARKER)) {
             glossaryFile = result.computeDefaultWriteableGlossaryFile();
-        } else {
-            result.setWriteableGlossary(glossaryFile);
-            glossaryFile = glossaryDir + new File(glossaryFile).getName();
         }
-        result.setWriteableGlossaryFileRelative(computeRelative(glossaryDir, OConsts.DEFAULT_GLOSSARY));
+        result.setWriteableGlossary(glossaryFile);
 
         result.setDictRoot(computeAbsolutePath(m_root, om.getProject().getDictionaryDir(),
                 OConsts.DEFAULT_DICT));

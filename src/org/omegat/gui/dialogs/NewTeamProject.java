@@ -28,6 +28,7 @@ package org.omegat.gui.dialogs;
 
 import java.io.File;
 import java.util.concurrent.CancellationException;
+import java.util.logging.Logger;
 
 import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
@@ -35,6 +36,7 @@ import javax.swing.event.DocumentListener;
 
 import org.omegat.core.Core;
 import org.omegat.core.team2.RemoteRepositoryFactory;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.StringUtil;
@@ -50,6 +52,7 @@ import org.omegat.util.gui.StaticUIUtils;
  */
 @SuppressWarnings("serial")
 public class NewTeamProject extends javax.swing.JDialog {
+    private static final Logger LOGGER = Logger.getLogger(NewTeamProject.class.getName());
 
     private RepoTypeWorker repoTypeWorker = null;
     private boolean detecting = false;
@@ -199,8 +202,10 @@ public class NewTeamProject extends javax.swing.JDialog {
             } catch (CancellationException ex) {
                 resultText = " ";
                 type = null;
-            } catch (Exception ex) {
+            } catch (Throwable ex) {
                 type = null;
+                resultText = OStrings.getString("TEAM_ERROR_DETECTING_PROJECT_FILE");
+                Log.logErrorRB(ex, "TEAM_ERROR_DETECTING_PROJECT_FILE");
             }
             detectedRepoOrProjectFileLabel.setText(resultText);
             updateDialog();

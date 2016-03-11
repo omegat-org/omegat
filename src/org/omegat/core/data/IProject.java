@@ -241,6 +241,14 @@ public interface IProject {
          */
         public String fileEncoding;
         public List<SourceTextEntry> entries = new ArrayList<SourceTextEntry>();
+
+        public static List<String> getFilterNames(List<FileInfo> infos) {
+            List<String> result = new ArrayList<String>();
+            for (FileInfo info : infos) {
+                result.add(info.filterFileFormatName);
+            }
+            return result;
+        }
     }
 
     public interface DefaultTranslationsIterator {

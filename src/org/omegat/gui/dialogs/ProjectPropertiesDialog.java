@@ -69,6 +69,7 @@ import org.apache.lucene.util.Version;
 import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.data.CommandVarExpansion;
+import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.master.FilterMaster;
@@ -805,6 +806,7 @@ public class ProjectPropertiesDialog extends JDialog {
                 JFrame mainWindow = Core.getMainWindow().getApplicationFrame();
                 FiltersCustomizer dlg = new FiltersCustomizer(mainWindow, true,
                         FilterMaster.createDefaultFiltersConfig(), Preferences.getFilters(), filters);
+                dlg.setInUseFilters(FileInfo.getFilterNames(Core.getProject().getProjectFiles()));
                 dlg.setVisible(true);
                 if (dlg.getReturnStatus() == FiltersCustomizer.RET_OK) {
                     // saving config

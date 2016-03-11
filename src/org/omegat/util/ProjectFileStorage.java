@@ -31,11 +31,6 @@
 
 package org.omegat.util;
 
-import gen.core.project.Masks;
-import gen.core.project.Omegat;
-import gen.core.project.Project;
-import gen.core.project.Project.Repositories;
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -46,10 +41,13 @@ import javax.xml.bind.Marshaller;
 
 import org.apache.commons.io.FileUtils;
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.TranslationException;
-import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
+
+import gen.core.project.Masks;
+import gen.core.project.Omegat;
+import gen.core.project.Project;
+import gen.core.project.Project.Repositories;
 
 /**
  * Class that reads and saves project definition file.
@@ -204,9 +202,6 @@ public class ProjectFileStorage {
         Marshaller m = CONTEXT.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         m.marshal(om, outFile);
-
-        SRX.saveTo(props.getProjectSRX(), new File(props.getProjectInternal(), SRX.CONF_SENTSEG));
-        FilterMaster.saveConfig(props.getProjectFilters(), props.getProjectInternal());
     }
 
     private static String computeRelative(String relativePath, String defaultName) {

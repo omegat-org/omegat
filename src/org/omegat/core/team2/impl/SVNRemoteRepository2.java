@@ -38,8 +38,6 @@ import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 
 import org.omegat.core.Core;
-import org.omegat.core.team.IRemoteRepository.Credentials;
-import org.omegat.core.team.IRemoteRepository.NetworkException;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.gui.dialogs.TeamUserPassDialog;
 import org.omegat.util.Log;

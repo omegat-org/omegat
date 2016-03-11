@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.omegat.core.statistics.StatisticsInfo;
-import org.omegat.core.team.IRemoteRepository;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
 
@@ -72,11 +71,6 @@ public interface IProject {
      * @return project properties
      */
     ProjectProperties getProjectProperties();
-    
-    /**
-     * Returns repository for team project, or null.
-     */
-    IRemoteRepository getRepository();
 
     /**
      * Get project loaded status.

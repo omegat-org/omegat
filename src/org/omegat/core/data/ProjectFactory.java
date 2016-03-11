@@ -30,7 +30,6 @@ package org.omegat.core.data;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.core.team.IRemoteRepository;
 
 /**
  * Factory for load project, create project, and create "not-loaded" project.
@@ -48,7 +47,7 @@ public class ProjectFactory {
      * Create new project.
      */
     public static void createProject(ProjectProperties newProps) {
-        RealProject p = new RealProject(newProps, null);
+        RealProject p = new RealProject(newProps);
         Core.setProject(p);
         p.createProject();
         Core.getAutoSave().enable();
@@ -62,9 +61,9 @@ public class ProjectFactory {
      * @param props
      *            properties for new project
      */
-    public static void loadProject(ProjectProperties props, IRemoteRepository repository, boolean onlineMode) {
+    public static void loadProject(ProjectProperties props, boolean onlineMode) {
         Core.getAutoSave().disable();
-        RealProject p = new RealProject(props, repository);
+        RealProject p = new RealProject(props);
         Core.setProject(p);
         p.loadProject(onlineMode);
         if (p.isProjectLoaded()) {

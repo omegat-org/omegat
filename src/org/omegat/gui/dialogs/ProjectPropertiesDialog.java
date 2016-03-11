@@ -130,13 +130,7 @@ public class ProjectPropertiesDialog extends JDialog {
          * This dialog is used to edit project's properties: where directories
          * reside, languages, etc.
          */
-        EDIT_PROJECT,
-        /**
-         * Project properties stored in omegat.project are not editable for team
-         * projects, but access is available through this dialog to the project-specific
-         * filter settings and segmentation settings.
-         */
-        EDIT_TEAM_PROJECT
+        EDIT_PROJECT
     }
 
     /**
@@ -146,7 +140,6 @@ public class ProjectPropertiesDialog extends JDialog {
      * <li>Resolving the project's directories (existing project with some dirs
      * missing) == {@link Mode#RESOLVE_DIRS}
      * <li>Editing project properties == {@link Mode#EDIT_PROJECT}
-     * <li>Editing filter or segmentation settings for team project == {@link Mode#EDIT_TEAM_PROJECT}
      * </ul>
      */
     private Mode dialogType;
@@ -874,34 +867,6 @@ public class ProjectPropertiesDialog extends JDialog {
                 m_tmRootField.setForeground(Color.RED);
 
             break;
-        case EDIT_TEAM_PROJECT:
-            m_sourceLocaleField.setEnabled(false);
-            m_targetLocaleField.setEnabled(false);
-            m_sourceTokenizerField.setEnabled(false);
-            m_targetTokenizerField.setEnabled(false);
-            m_sourceTokenizerBehaviorField.setEnabled(false);
-            m_targetTokenizerBehaviorField.setEnabled(false);
-            m_sentenceSegmentingCheckBox.setEnabled(false);
-            m_allowDefaultsCheckBox.setEnabled(false);
-            m_removeTagsCheckBox.setEnabled(false);
-            m_externalCommandTextArea.setEnabled(false);
-            m_insertButton.setEnabled(false);
-            m_variablesList.setEnabled(false);
-            m_srcBrowse.setEnabled(false);
-            m_srcRootField.setEnabled(false);
-            m_tmBrowse.setEnabled(false);
-            m_tmRootField.setEnabled(false);
-            m_glosBrowse.setEnabled(false);
-            m_glosRootField.setEnabled(false);
-            m_wGlosBrowse.setEnabled(false);
-            m_writeableGlosField.setEnabled(false);
-            m_dictBrowse.setEnabled(false);
-            m_dictRootField.setEnabled(false);
-            m_locBrowse.setEnabled(false);
-            m_locRootField.setEnabled(false);
-            m_srcExcludes.setEnabled(false);
-        default:
-            // Nothing
         }
 
         updateUIText(m_messageArea);
@@ -1279,7 +1244,6 @@ public class ProjectPropertiesDialog extends JDialog {
             m_messageArea.setText(OStrings.getString("PP_MESSAGE_BADPROJ"));
             break;
         case EDIT_PROJECT:
-        case EDIT_TEAM_PROJECT:
             setTitle(OStrings.getString("PP_EDIT_PROJECT"));
             m_messageArea.setText(OStrings.getString("PP_MESSAGE_EDITPROJ"));
             break;

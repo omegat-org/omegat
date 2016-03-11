@@ -69,7 +69,6 @@ import org.omegat.core.segmentation.SRX;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
-import org.omegat.core.team.IRemoteRepository;
 import org.omegat.core.team2.RebaseAndCommit;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.threads.CommandMonitor;
@@ -96,7 +95,6 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil;
 import org.omegat.util.TMXReader2;
-import org.omegat.util.TMXWriter2;
 import org.omegat.util.gui.UIThreadsUtil;
 import org.xml.sax.SAXParseException;
 
@@ -203,10 +201,6 @@ public class RealProject implements IProject {
      *            true if project need to be created
      */
     public RealProject(final ProjectProperties props) {
-        this(props, null);
-    }
-
-    public RealProject(final ProjectProperties props, IRemoteRepository repository) {
         PrepareTMXEntry empty = new PrepareTMXEntry();
         empty.source = "";
         EMPTY_TRANSLATION = new TMXEntry(empty, true, null);
@@ -229,10 +223,6 @@ public class RealProject implements IProject {
         targetTokenizer = createTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_TARGET), props.getTargetTokenizer());
         configTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_BEHAVIOR_TARGET), targetTokenizer);
         Log.log("Target tokenizer: " + targetTokenizer.getClass().getName() + " (" + targetTokenizer.getBehavior() + ")");
-    }
-    
-    public IRemoteRepository getRepository() {
-        return null;
     }
 
     public void saveProjectProperties() throws Exception {

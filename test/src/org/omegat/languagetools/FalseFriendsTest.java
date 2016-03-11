@@ -42,7 +42,6 @@ import org.omegat.core.data.TMXEntry;
 import org.omegat.core.data.TMXEntry.ExternalLinked;
 import org.omegat.core.events.IProjectEventListener.PROJECT_CHANGE_TYPE;
 import org.omegat.core.statistics.StatisticsInfo;
-import org.omegat.core.team.IRemoteRepository;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
@@ -129,10 +128,6 @@ public class FalseFriendsTest extends TestCore {
             }
 
             public ITokenizer getSourceTokenizer() {
-                return null;
-            }
-
-            public IRemoteRepository getRepository() {
                 return null;
             }
 

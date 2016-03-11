@@ -45,10 +45,7 @@ import org.omegat.core.KnownException;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.core.team.GITRemoteRepository;
-import org.omegat.core.team.IRemoteRepository;
-import org.omegat.core.team.RepositoryUtils;
-import org.omegat.core.team.SVNRemoteRepository;
+import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.NewTeamProject;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
@@ -151,7 +148,7 @@ public class ProjectUICommands {
                 Cursor oldCursor = mainWindow.getCursor();
                 mainWindow.setCursor(hourglassCursor);
 
-                final IRemoteRepository repository;
+                final IRemoteRepository2 repository;
                 File localDirectory = new File(dialog.txtDirectory.getText());
                 try {
                     if (!dialog.ok) {
@@ -279,6 +276,7 @@ public class ProjectUICommands {
                 mainWindow.setCursor(hourglassCursor);
 
                 try {
+                    // convert old projects if need
                     ConvertProject.convert(projectRootFolder);
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_CONVERT_PROJECT");
@@ -298,60 +296,6 @@ public class ProjectUICommands {
                     return null;
                 }
 
-                final IRemoteRepository repository;
-                // check for team-project
-                try {
-                    if (Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
-                        // disable team functionality
-                        repository = null;
-                    } else if (SVNRemoteRepository.isSVNDirectory(projectRootFolder)) {
-                        // SVN selected
-                        repository = new SVNRemoteRepository(projectRootFolder);
-                    } else if (GITRemoteRepository.isGITDirectory(projectRootFolder)) {
-                        repository = new GITRemoteRepository(projectRootFolder);
-                    } else {
-                        repository = null;
-                    }
-                } catch (Exception e) {
-                    return null;
-                }
-
-                if (repository != null) {
-                    boolean onlineMode = true;
-                    try {
-                        File tmxFile = new File(props.getProjectInternal() + OConsts.STATUS_EXTENSION);
-                        File GlossaryFile = new File(props.getWriteableGlossary());
-                        if (repository.isChanged(tmxFile) || repository.isChanged(GlossaryFile)) {
-                            Log.logWarningRB("TEAM_NOCHECKOUT");
-                            Core.getMainWindow().showErrorDialogRB("TEAM_NOCHECKOUT_TITLE", "TEAM_NOCHECKOUT");
-                        } else {
-                            new RepositoryUtils.AskCredentials() {
-                                public void callRepository() throws Exception {
-                                    Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
-                                 //   repository.updateFullProject(); // TODO
-                                    Core.getMainWindow().showStatusMessageRB(null);
-                                }
-                            }.execute(repository);
-                        }
-                    } catch (IRemoteRepository.NetworkException ex) {
-                        onlineMode = false;
-                        Log.logInfoRB("VCS_OFFLINE");
-                        Core.getMainWindow().displayWarningRB("VCS_OFFLINE");
-                    } catch (Exception ex) {
-                        Log.logErrorRB(ex, "TEAM_CHECKOUT_ERROR", ex.getMessage());
-                        Core.getMainWindow().displayErrorRB(ex, "TEAM_CHECKOUT_ERROR", ex.getMessage());
-                        mainWindow.setCursor(oldCursor);
-                        return null;
-                    }
-                    try {
-                        ProjectFactory.loadProject(props, repository, onlineMode);
-                    } catch (Exception ex) {
-                        Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                        Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                        mainWindow.setCursor(oldCursor);
-                        return null;
-                    }
-                } else {
                     try {
                         boolean needToSaveProperties = false;
                         while (!props.isProjectValid()) {
@@ -371,7 +315,7 @@ public class ProjectUICommands {
                             }
                         }
 
-                        ProjectFactory.loadProject(props, repository, true);
+                        ProjectFactory.loadProject(props, true);
                         if (needToSaveProperties) {
                             Core.getProject().saveProjectProperties();
                         }
@@ -381,7 +325,6 @@ public class ProjectUICommands {
                         mainWindow.setCursor(oldCursor);
                         return null;
                     }
-                }
 
 				RecentProjects.add(projectRootFolder.getAbsolutePath());
 
@@ -418,29 +361,11 @@ public class ProjectUICommands {
                 Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
                 Cursor oldCursor = mainWindow.getCursor();
                 mainWindow.setCursor(hourglassCursor);
-                final IRemoteRepository repository = Core.getProject().getRepository();
 
                 Core.getProject().saveProject();
                 ProjectFactory.closeProject();
 
-                boolean onlineMode = true;
-                if (repository != null) {
-                    try {
-                        new RepositoryUtils.AskCredentials() {
-                            public void callRepository() throws Exception {
-                                Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
-                                repository.updateFullProject();
-                                Core.getMainWindow().showStatusMessageRB(null);
-                            }
-                        }.execute(repository);
-                    } catch (IRemoteRepository.NetworkException ex) {
-                        onlineMode = false;
-                        Log.logInfoRB("VCS_OFFLINE");
-                        Core.getMainWindow().displayWarningRB("VCS_OFFLINE");
-                    }
-                }
-
-                ProjectFactory.loadProject(props, repository, onlineMode);
+                ProjectFactory.loadProject(props, true);
                 mainWindow.setCursor(oldCursor);
                 return null;
             }
@@ -538,8 +463,7 @@ public class ProjectUICommands {
         // displaying the dialog to change paths and other properties
         ProjectPropertiesDialog prj = new ProjectPropertiesDialog(Core.getProject().getProjectProperties(),
                 Core.getProject().getProjectProperties().getProjectName(),
-                Core.getProject().getRepository() == null ? ProjectPropertiesDialog.Mode.EDIT_PROJECT
-                        : ProjectPropertiesDialog.Mode.EDIT_TEAM_PROJECT);
+                ProjectPropertiesDialog.Mode.EDIT_PROJECT);
         prj.setVisible(true);
         final ProjectProperties newProps = prj.getResult();
         prj.dispose();
@@ -559,10 +483,9 @@ public class ProjectUICommands {
 
             protected Object doInBackground() throws Exception {
                 Core.getProject().saveProject();
-                IRemoteRepository repo = Core.getProject().getRepository();
                 ProjectFactory.closeProject();
 
-                ProjectFactory.loadProject(newProps, repo, true);
+                ProjectFactory.loadProject(newProps, true);
                 return null;
             }
 

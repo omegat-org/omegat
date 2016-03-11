@@ -39,7 +39,7 @@ import org.eclipse.jgit.transport.CredentialItem;
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.URIish;
 import org.omegat.core.Core;
-import org.omegat.core.team.IRemoteRepository.Credentials;
+import org.omegat.core.team2.IRemoteRepository2.Credentials;
 import org.omegat.gui.dialogs.TeamUserPassDialog;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DockingUI;

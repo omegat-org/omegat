@@ -44,8 +44,6 @@ import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
-import org.omegat.core.team.IRemoteRepository.BadRepositoryException;
-import org.omegat.core.team.IRemoteRepository.NetworkException;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;

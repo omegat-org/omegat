@@ -38,6 +38,6 @@ public class LanguageComboBoxRenderer extends DelegatingComboBoxRenderer<Languag
     
     @Override
     protected String getDisplayText(Language value) {
-    	return value + " - " + value.getDisplayName();
+        return value == null ? null : value + " - " + value.getDisplayName();
     }
 }

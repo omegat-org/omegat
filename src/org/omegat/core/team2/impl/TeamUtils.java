@@ -37,6 +37,9 @@ public class TeamUtils {
     static final Charset UTF8 = Charset.forName("UTF-8");
 
     public static String encodePassword(String pass) {
+        if (pass == null) {
+            return null;
+        }
         return Base64.getEncoder().encodeToString(pass.getBytes(UTF8));
     }
 

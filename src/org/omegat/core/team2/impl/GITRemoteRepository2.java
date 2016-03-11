@@ -60,17 +60,14 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     protected static String LOCAL_BRANCH = "master";
     protected static String REMOTE_BRANCH = "origin/master";
     protected static String REMOTE = "origin";
-    boolean readOnly;
 
     String repositoryURL;
     File localDirectory;
 
     protected Repository repository;
 
-    private GITCredentialsProvider myCredentialsProvider;
-
-    public void setReadOnly(boolean value) {
-        readOnly = value;
+    static {
+        CredentialsProvider.setDefault(new GITCredentialsProvider());
     }
 
     @Override
@@ -79,11 +76,6 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         localDirectory = dir;
 
         CredentialsProvider prevProvider = CredentialsProvider.getDefault();
-        myCredentialsProvider = new GITCredentialsProvider(this);
-        if (prevProvider instanceof GITCredentialsProvider) {
-            myCredentialsProvider.setCredentials(((GITCredentialsProvider) prevProvider).credentials);
-        }
-        CredentialsProvider.setDefault(myCredentialsProvider);
 
         File gitDir = new File(localDirectory, ".git");
         if (gitDir.exists() && gitDir.isDirectory()) {
@@ -130,7 +122,6 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 config.setString("core", null, "autocrlf", "input");
             }
             config.save();
-            myCredentialsProvider.saveCredentials();
             Log.logInfoRB("GIT_FINISH", "clone");
         }
     }

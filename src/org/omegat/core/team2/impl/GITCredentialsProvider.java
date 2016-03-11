@@ -26,9 +26,6 @@
 
 package org.omegat.core.team2.impl;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,12 +36,12 @@ import org.eclipse.jgit.transport.CredentialItem;
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.URIish;
 import org.omegat.core.Core;
-import org.omegat.core.team2.IRemoteRepository2.Credentials;
+import org.omegat.core.team2.TeamSettings;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DockingUI;
 
 /**
- * GIT repository connection implementation.
+ * GIT repository credentials provider. One credentials provider created for all git instances.
  * 
  * GIT supports protocols: file://, ssh:// git:// http://.
  * 
@@ -54,93 +51,87 @@ import org.omegat.util.gui.DockingUI;
  * @author Aaron Madlon-Kay
  */
 public class GITCredentialsProvider extends CredentialsProvider {
+    static final String KEY_USERNAME_PREFIX = "login.username.";
+    static final String KEY_PASSWORD_PREFIX = "login.password.";
+    static final String KEY_FINGERPRINT_PREFIX = "login.fingerprint.";
 
-    GITRemoteRepository2 gitRemoteRepository;
-    File credentialsFile;
-
-    Credentials credentials;
-
-    public GITCredentialsProvider(GITRemoteRepository2 repo) {
-        this.gitRemoteRepository = repo;
-        if (repo != null) {
-            credentialsFile = new File(gitRemoteRepository.localDirectory, "credentials.properties");
-        }
+    private Credentials loadCredentials(URIish uri) {
+        String url = uri.toASCIIString();
+        Credentials credentials = new Credentials();
+        credentials.username = TeamSettings.get(KEY_USERNAME_PREFIX + url);
+        credentials.password = TeamSettings.get(KEY_PASSWORD_PREFIX + url);
+        return credentials;
     }
 
-    public void setCredentials(Credentials credentials) {
-        if (credentials == null) {
-            return;
-        }
-        this.credentials = credentials.clone();
-    }
-
-    private void loadCredentials() {
-        if (credentialsFile == null || !credentialsFile.exists()) {
-            credentials = new Credentials();
-            return;
-        }
+    private void saveCredentials(URIish uri, Credentials credentials) {
+        String url = uri.toASCIIString();
         try {
-            credentials = Credentials.fromFile(credentialsFile);
-        } catch (FileNotFoundException ex) {
-            credentials = new Credentials();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void saveCredentials() {
-        if (credentials == null || credentialsFile == null || !credentials.saveAsPlainText) {
-            return;
-        }
-        try {
-            credentials.saveToPlainTextFile(credentialsFile);
-        } catch (FileNotFoundException e) {
+            TeamSettings.set(KEY_USERNAME_PREFIX + url, credentials.username);
+            if (credentials.saveAsPlainText) {
+                TeamSettings.set(KEY_PASSWORD_PREFIX + url, credentials.password);
+            } else {
+                TeamSettings.set(KEY_PASSWORD_PREFIX + url, null);
+            }
+        } catch (Exception e) {
             Core.getMainWindow().displayErrorRB(e, "TEAM_ERROR_SAVE_CREDENTIALS", null, "TF_ERROR");
-        } catch (IOException e) {
+        }
+    }
+
+    private String loadFingerprint(URIish uri) {
+        String url = uri.toASCIIString();
+        return TeamSettings.get(KEY_FINGERPRINT_PREFIX + url);
+    }
+
+    private void saveFingerprint(URIish uri, String fingerprint) {
+        String url = uri.toASCIIString();
+        try {
+            TeamSettings.set(KEY_FINGERPRINT_PREFIX + url, fingerprint);
+        } catch (Exception e) {
             Core.getMainWindow().displayErrorRB(e, "TEAM_ERROR_SAVE_CREDENTIALS", null, "TF_ERROR");
         }
     }
 
     @Override
     public boolean get(URIish uri, CredentialItem... items) throws UnsupportedCredentialItem {
-        if (credentials == null) {
-            loadCredentials();
-        }
+        Credentials credentials = loadCredentials(uri);
         boolean ok = false;
         // theoretically, username can be unknown, but in practice it is always set, so not requested.
         for (CredentialItem i : items) {
             if (i instanceof CredentialItem.Username) {
                 if (credentials.username == null) {
-                    ok = askCredentials(uri.getUser());
-                    if (!ok) {
+                    credentials = askCredentials(uri, credentials);
+                    if (credentials == null) {
                         throw new UnsupportedCredentialItem(uri,
                                 OStrings.getString("TEAM_CREDENTIALS_DENIED"));
                     }
+                    saveCredentials(uri, credentials);
+                    ok = true;
                 }
                 ((CredentialItem.Username) i).setValue(credentials.username);
                 continue;
             } else if (i instanceof CredentialItem.Password) {
                 if (credentials.password == null) {
-                    ok = askCredentials(uri.getUser());
-                    if (!ok) {
+                    credentials = askCredentials(uri, credentials);
+                    if (credentials == null) {
                         throw new UnsupportedCredentialItem(uri,
                                 OStrings.getString("TEAM_CREDENTIALS_DENIED"));
                     }
+                    saveCredentials(uri, credentials);
+                    ok = true;
                 }
-                ((CredentialItem.Password) i).setValue(credentials.password);
-                if (credentials.password != null) {
-                    uri.setPass(new String(credentials.password));
-                }
+                ((CredentialItem.Password) i).setValue(credentials.password.toCharArray());
+                uri.setPass(new String(credentials.password));
                 continue;
             } else if (i instanceof CredentialItem.StringType) {
                 if (i.getPromptText().equals("Password: ")) {
                     if (credentials.password == null) {
                         if (!ok) {
-                            ok = askCredentials(uri.getUser());
-                            if (!ok) {
+                            credentials = askCredentials(uri, credentials);
+                            if (credentials == null) {
                                 throw new UnsupportedCredentialItem(uri,
                                         OStrings.getString("TEAM_CREDENTIALS_DENIED"));
                             }
+                            saveCredentials(uri, credentials);
                         }
                     }
                     ((CredentialItem.StringType) i).setValue(new String(credentials.password));
@@ -150,9 +141,13 @@ public class GITCredentialsProvider extends CredentialsProvider {
                 // e.g.: The authenticity of host 'mygitserver' can't be established.
                 // RSA key fingerprint is e2:d3:84:d5:86:e7:68:69:a0:aa:a6:ad:a3:a0:ab:a2.
                 // Are you sure you want to continue connecting?
+                String storedFingerprint = loadFingerprint(uri);
                 String promptText = i.getPromptText();
                 String promptedFingerprint = extractFingerprint(promptText);
-                if (promptedFingerprint.equals(credentials.fingerprint)) {
+                if (promptedFingerprint == null) {
+                    throw new UnsupportedCredentialItem(uri, "Wrong fingerprint pattern");
+                }
+                if (promptedFingerprint.equals(storedFingerprint)) {
                     ((CredentialItem.YesNoType) i).setValue(true);
                     continue;
                 }
@@ -160,10 +155,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
                         JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 if (choice == JOptionPane.YES_OPTION) {
                     ((CredentialItem.YesNoType) i).setValue(true);
-                    if (promptedFingerprint != null) {
-                        credentials.fingerprint = promptedFingerprint;
-                    }
-                    saveCredentials();
+                    saveFingerprint(uri, promptedFingerprint);
                 } else {
                     ((CredentialItem.YesNoType) i).setValue(false);
                 }
@@ -202,37 +194,36 @@ public class GITCredentialsProvider extends CredentialsProvider {
      * 
      * @return true when entered, false on cancel.
      */
-    private boolean askCredentials(String usernameInUri) {
+    private Credentials askCredentials(URIish uri, Credentials credentials) {
         GITUserPassDialog userPassDialog = new GITUserPassDialog(Core.getMainWindow().getApplicationFrame());
         DockingUI.displayCentered(userPassDialog);
         userPassDialog.descriptionTextArea.setText(OStrings
                 .getString(credentials.username == null ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"));
         // if username is already available in uri, then we will not be asked for an username, so we cannot
         // change it.
-        if (usernameInUri != null && !"".equals(usernameInUri)) {
-            userPassDialog.userText.setText(usernameInUri);
+        if (uri.getUser() != null && !"".equals(uri.getUser())) {
+            userPassDialog.userText.setText(uri.getUser());
             userPassDialog.userText.setEditable(false);
             userPassDialog.userText.setEnabled(false);
         }
+        userPassDialog.cbSavePlainPassword.setSelected(true);
         userPassDialog.setVisible(true);
         if (userPassDialog.getReturnStatus() == GITUserPassDialog.RET_OK) {
             credentials.username = userPassDialog.userText.getText();
-            credentials.password = userPassDialog.passwordField.getPassword();
-            credentials.readOnly = userPassDialog.cbReadOnly.isSelected();
-            if (gitRemoteRepository != null) {
-                gitRemoteRepository.setReadOnly(credentials.readOnly);
-            }
-            credentials.saveAsPlainText = userPassDialog.cbForceSavePlainPassword.isSelected();
-            saveCredentials();
-            return true;
+            credentials.password = new String(userPassDialog.passwordField.getPassword());
+            credentials.saveAsPlainText = userPassDialog.cbSavePlainPassword.isSelected();
+            return credentials;
         } else {
-            return false;
+            return null;
         }
     }
 
     public void reset(URIish uri) {
         // reset is called after 5 authorization failures. After 3 resets, the transport gives up.
-        credentials.clear();
+        Credentials credentials = loadCredentials(uri);
+        credentials.username = null;
+        credentials.password = null;
+        saveCredentials(uri, credentials);
     }
 
     private static String extractFingerprint(String text) {
@@ -245,5 +236,11 @@ public class GITCredentialsProvider extends CredentialsProvider {
             return text.substring(start, end);
         }
         return null;
+    }
+
+    public static class Credentials {
+        public String username = null;
+        public String password = null;
+        public boolean saveAsPlainText;
     }
 }

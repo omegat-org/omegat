@@ -136,26 +136,10 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JCheckBox" name="cbReadOnly">
+    <Component class="javax.swing.JCheckBox" name="cbSavePlainPassword">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="org/omegat/Bundle.properties" key="VCS_READONLY" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-        <AuxValue name="generateMnemonicsCode" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-          <GridBagConstraints gridX="1" gridY="7" gridWidth="1" gridHeight="1" fill="2" ipadX="50" ipadY="0" insetsTop="4" insetsLeft="4" insetsBottom="4" insetsRight="4" anchor="17" weightX="1.0" weightY="0.0"/>
-        </Constraint>
-      </Constraints>
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="cbForceSavePlainPassword">
-      <Properties>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="org/omegat/Bundle.properties" key="VCS_SAVE_PLAINPASSWORD_FORCE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="org/omegat/Bundle.properties" key="GIT_SAVE_PLAINPASSWORD" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
       <AuxValues>

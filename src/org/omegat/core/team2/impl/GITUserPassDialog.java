@@ -101,8 +101,7 @@ public class GITUserPassDialog extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        cbReadOnly = new javax.swing.JCheckBox();
-        cbForceSavePlainPassword = new javax.swing.JCheckBox();
+        cbSavePlainPassword = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("TEAM_USERPASS_TITLE")); // NOI18N
         setMinimumSize(new java.awt.Dimension(250, 200));
@@ -189,18 +188,7 @@ public class GITUserPassDialog extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         getContentPane().add(jPanel1, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(cbReadOnly, OStrings.getString("VCS_READONLY")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(cbReadOnly, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(cbForceSavePlainPassword, OStrings.getString("VCS_SAVE_PLAINPASSWORD_FORCE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(cbSavePlainPassword, OStrings.getString("GIT_SAVE_PLAINPASSWORD")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 8;
@@ -208,7 +196,7 @@ public class GITUserPassDialog extends javax.swing.JDialog {
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(cbForceSavePlainPassword, gridBagConstraints);
+        getContentPane().add(cbSavePlainPassword, gridBagConstraints);
 
         pack();
         setLocationRelativeTo(null);
@@ -234,8 +222,7 @@ public class GITUserPassDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    public javax.swing.JCheckBox cbForceSavePlainPassword;
-    public javax.swing.JCheckBox cbReadOnly;
+    public javax.swing.JCheckBox cbSavePlainPassword;
     public javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton okButton;

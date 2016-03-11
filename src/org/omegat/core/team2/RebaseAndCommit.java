@@ -124,7 +124,7 @@ public class RebaseAndCommit {
         if (fileChangedLocally) {
             // new file already saved - need to commit
             String comment = rebaser.getCommentForCommit();
-            provider.copyFilesFromProjectToRepo(path);
+            provider.copyFilesFromProjectToRepo(path, rebaser.getFileCharset(new File(projectDir, path)));
             String newVersion = provider.commitFileAfterVersion(path, headVersion, comment);
             if (newVersion != null) {
                 // file was committed good
@@ -215,5 +215,11 @@ public class RebaseAndCommit {
          * Construct commit message.
          */
         String getCommentForCommit();
+
+        /**
+         * Get charset of file for convert EOL to repository. Implementation can return null if conversion not
+         * required.
+         */
+        String getFileCharset(File file) throws Exception;
     }
 }

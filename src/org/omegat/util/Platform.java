@@ -26,6 +26,7 @@
 
 package org.omegat.util;
 
+
 /**
  * A class to retrieve some platform information.
  * 

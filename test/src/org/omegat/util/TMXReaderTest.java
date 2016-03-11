@@ -25,9 +25,12 @@
 package org.omegat.util;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.apache.commons.io.ByteOrderMark;
+import org.apache.commons.io.IOUtils;
 import org.omegat.core.TestCore;
 
 /**
@@ -129,5 +132,31 @@ public class TMXReaderTest extends TestCore {
         assertEquals(tmx.getTuvByLang(new Language("EN-CA")), tuvENGB);
         
         assertNull(tmx.getTuvByLang(new Language("ZZ")));
+    }
+
+    public void testCharset() throws Exception {
+        File xml = new File("build/testdata/test.xml");
+        xml.getParentFile().mkdirs();
+
+        testXml(xml, ByteOrderMark.UTF_8, "<?xml version=\"1.0\"?>", "UTF-8");
+        testXml(xml, ByteOrderMark.UTF_16LE, "<?xml version=\"1.0\"?>", "UTF-16LE");
+        testXml(xml, ByteOrderMark.UTF_16BE, "<?xml version=\"1.0\"?>", "UTF-16BE");
+        testXml(xml, ByteOrderMark.UTF_32LE, "<?xml version=\"1.0\"?>", "UTF-32LE");
+        testXml(xml, ByteOrderMark.UTF_32BE, "<?xml version=\"1.0\"?>", "UTF-32BE");
+        testXml(xml, null, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "UTF-8");
+        testXml(xml, null, "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>", "ISO-8859-1");
+    }
+
+    void testXml(File xml, ByteOrderMark bom, String text, String charset) throws Exception {
+        FileOutputStream out = new FileOutputStream(xml);
+        try {
+            if (bom != null) {
+                out.write(bom.getBytes());
+            }
+            out.write(text.getBytes(charset));
+        } finally {
+            IOUtils.closeQuietly(out);
+        }
+        assertEquals(charset, TMXReader2.detectCharset(xml));
     }
 }

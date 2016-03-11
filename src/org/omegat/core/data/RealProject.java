@@ -95,6 +95,8 @@ import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil;
+import org.omegat.util.TMXReader2;
+import org.omegat.util.TMXWriter2;
 import org.omegat.util.gui.UIThreadsUtil;
 import org.xml.sax.SAXParseException;
 
@@ -613,7 +615,7 @@ public class RealProject implements IProject {
             // commit translations
             try {
                 remoteRepositoryProvider.switchAllToLatest();
-                remoteRepositoryProvider.copyFilesFromProjectToRepo(m_config.getTargetDir().getUnderRoot());
+                remoteRepositoryProvider.copyFilesFromProjectToRepo(m_config.getTargetDir().getUnderRoot(), null);
                 remoteRepositoryProvider.commitFiles(m_config.getTargetDir().getUnderRoot(), "Project translation");
             } catch (Exception e) {
                 Log.logErrorRB("CT_ERROR_CREATING_TARGET_DIR");// TODO: change to better error
@@ -820,6 +822,11 @@ public class RealProject implements IProject {
                         public String getCommentForCommit() {
                             return commitDetails.toString();
                         }
+
+                        @Override
+                        public String getFileCharset(File file) throws Exception {
+                            return TMXReader2.detectCharset(file);
+                        }
                     });
             ProjectTMX newTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(),
                     m_config.isSentenceSegmentingEnabled(), new File(m_config.getProjectInternalDir(),
@@ -868,6 +875,11 @@ public class RealProject implements IProject {
                             final String author = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
                                     System.getProperty("user.name"));
                             return "Glossary changes by " + author;
+                        }
+
+                        @Override
+                        public String getFileCharset(File file) throws Exception {
+                            return GlossaryReaderTSV.getCharset(file);
                         }
                     });
         }

@@ -52,4 +52,8 @@ public class GlossaryReaderTSVTest extends TestCore {
         assertEquals(g.get(1).getLocText(), "Little Endian");
         assertEquals(g.get(1).getCommentText(), "Comment #2");
     }
+
+    public void testCharset() throws Exception {
+        // TODO
+    }
 }

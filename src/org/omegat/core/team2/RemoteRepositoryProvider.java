@@ -201,13 +201,16 @@ public class RemoteRepositoryProvider {
      * 
      * @param localPath
      *            directory name(that should be ended by '/'), or file name
+     * @param eolConversionCharset
+     *            not null if EOL conversion required. EOL will be converted to repository-specific for
+     *            existing files, and to platform-specific for new files
      */
-    public void copyFilesFromProjectToRepo(String localPath) throws Exception {
+    public void copyFilesFromProjectToRepo(String localPath, String eolConversionCharset) throws Exception {
         if (localPath.startsWith("/")) {
             throw new RuntimeException("Wrong path mapping");
         }
         for (Mapping m : getMappings(localPath)) {
-            m.copyFromProjectToRepo();
+            m.copyFromProjectToRepo(eolConversionCharset);
         }
     }
 
@@ -218,8 +221,14 @@ public class RemoteRepositoryProvider {
         return oneMapping(file).getVersion();
     }
 
-    protected void copyFile(File from, File to) throws IOException {
-        FileUtil.copyFile(from, to);
+    protected void copyFile(File from, File to, String eolConversionCharset) throws IOException {
+        if (eolConversionCharset != null) {
+            // charset defined - text file for EOL conversion
+            FileUtil.copyFileWithEolConversion(from, to, eolConversionCharset);
+        } else {
+            // charset not defined - binary file
+            FileUtil.copyFile(from, to);
+        }
     }
 
     protected void addForCommit(IRemoteRepository2 repo, String path) throws Exception {
@@ -287,17 +296,17 @@ public class RemoteRepositoryProvider {
             File to = new File(projectRoot, repoMapping.getLocal());
             if (repoMapping.getRepository().endsWith("/") || repoMapping.getRepository().isEmpty()) {
                 // directory mapping
-                copy(from, to, filterPrefix, repoMapping.getIncludes(), repoMapping.getExcludes());
+                copy(from, to, filterPrefix, repoMapping.getIncludes(), repoMapping.getExcludes(), null);
             } else {
                 // file mapping
                 if (!filterPrefix.isEmpty()) {
                     throw new RuntimeException();
                 }
-                copyFile(from, to);
+                copyFile(from, to, null);
             }
         }
 
-        public void copyFromProjectToRepo() throws Exception {
+        public void copyFromProjectToRepo(String eolConversionCharset) throws Exception {
             if (filterPrefix == null) {
                 throw new RuntimeException("Doesn't matched");
             }
@@ -306,7 +315,7 @@ public class RemoteRepositoryProvider {
             if (repoMapping.getRepository().endsWith("/") || repoMapping.getRepository().isEmpty()) {
                 // directory mapping or full mapping
                 List<String> files = copy(from, to, filterPrefix, repoMapping.getIncludes(),
-                        repoMapping.getExcludes());
+                        repoMapping.getExcludes(), eolConversionCharset);
                 for (String f : files) {
                     addForCommit(repo, repoMapping.getRepository() + f);
                 }
@@ -315,7 +324,7 @@ public class RemoteRepositoryProvider {
                 if (!filterPrefix.isEmpty()) {
                     throw new RuntimeException();
                 }
-                copyFile(from, to);
+                copyFile(from, to, eolConversionCharset);
                 addForCommit(repo, repoMapping.getRepository());
             }
         }
@@ -331,7 +340,7 @@ public class RemoteRepositoryProvider {
         }
 
         protected List<String> copy(File from, File to, String prefix, List<String> includes,
-                List<String> excludes) throws Exception {
+                List<String> excludes, String eolConversionCharset) throws Exception {
             List<String> relativeFiles = StaticUtils.buildRelativeFilesList(from, includes, excludes);
             List<String> copied = new ArrayList<String>();
             for (String rf : relativeFiles) {
@@ -343,18 +352,18 @@ public class RemoteRepositoryProvider {
                 }
                 if (prefix.isEmpty()) {
                     // there is no filter
-                    copyFile(new File(from, rf), new File(to, rf));
+                    copyFile(new File(from, rf), new File(to, rf), eolConversionCharset);
                     copied.add(rf);
                 } else if (prefix.endsWith("/")) {
                     // prefix is directory
                     if (rf.startsWith(prefix)) {
-                        copyFile(new File(from, rf), new File(to, rf));
+                        copyFile(new File(from, rf), new File(to, rf), eolConversionCharset);
                         copied.add(rf);
                     }
                 } else {
                     // prefix is file
                     if (rf.equals(prefix)) {
-                        copyFile(new File(from, rf), new File(to, rf));
+                        copyFile(new File(from, rf), new File(to, rf), eolConversionCharset);
                         copied.add(rf);
                     }
                 }

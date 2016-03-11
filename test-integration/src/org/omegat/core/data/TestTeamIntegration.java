@@ -234,9 +234,9 @@ public class TestTeamIntegration {
 
         ProjectFileStorage.writeProjectFile(config);
 
-        remote.copyFilesFromProjectToRepo("omegat.project");
+        remote.copyFilesFromProjectToRepo("omegat.project", null);
         remote.commitFiles("omegat.project", "Prepare for team test");
-        remote.copyFilesFromProjectToRepo("omegat/project_save.tmx");
+        remote.copyFilesFromProjectToRepo("omegat/project_save.tmx", null);
         remote.commitFiles("omegat/project_save.tmx", "Prepare for team test");
 
         return remote.getVersion("omegat/project_save.tmx");

@@ -55,6 +55,8 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.input.XmlStreamReader;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -96,6 +98,18 @@ public class TMXReader2 {
     StringBuilder segContent = new StringBuilder();
     StringBuilder segInlineTag = new StringBuilder();
     InlineTagHandler inlineTagHandler = new InlineTagHandler();
+
+    /**
+     * Detects charset of XML file.
+     */
+    public static String detectCharset(File file) throws IOException {
+        XmlStreamReader rd = new XmlStreamReader(file);
+        try {
+            return rd.getEncoding();
+        } finally {
+            IOUtils.closeQuietly(rd);
+        }
+    }
 
     public TMXReader2() {
         factory = XMLInputFactory.newInstance();

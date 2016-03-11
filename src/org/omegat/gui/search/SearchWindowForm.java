@@ -714,6 +714,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JCheckBox m_excludeOrphans;
     javax.swing.JCheckBox m_fileNamesCB;
     javax.swing.JButton m_filterButton;
+    javax.swing.JCheckBox m_fullHalfWidthInsensitive;
     javax.swing.JLabel m_numberLabel;
     javax.swing.JSpinner m_numberOfResults;
     javax.swing.JPanel m_panelReplace;
@@ -748,6 +749,5 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JCheckBox m_searchTranslation;
     javax.swing.JRadioButton m_searchUntranslated;
     javax.swing.JTextPane m_viewer;
-    javax.swing.JCheckBox m_fullHalfWidthInsensitive;
     // End of variables declaration//GEN-END:variables
 }

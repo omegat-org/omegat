@@ -25,8 +25,6 @@
 
 package org.omegat.gui.glossary.taas;
 
-import gen.taas.TaasDomain;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.MessageFormat;
@@ -45,8 +43,9 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
+
+import gen.taas.TaasDomain;
 
 /**
  * Controller for select TaaS domains.
@@ -144,7 +143,7 @@ public class SelectDomainController {
             }
         });
 
-        DockingUI.displayCentered(dialog);
+        dialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
 
         dialog.setVisible(true);
     }

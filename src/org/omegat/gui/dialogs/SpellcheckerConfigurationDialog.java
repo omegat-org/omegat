@@ -45,7 +45,6 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -152,7 +151,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         } else {
             dictionaryUrlTextField.setText(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL));
         }
-        DockingUI.displayCentered(this);
+        setLocationRelativeTo(parent);
         updateDirectory();
         languageListValueChanged(null);
     }

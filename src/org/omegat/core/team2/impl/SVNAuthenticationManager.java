@@ -35,7 +35,6 @@ import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.core.team2.TeamSettings;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.DockingUI;
 import org.tmatesoft.svn.core.SVNErrorCode;
 import org.tmatesoft.svn.core.SVNErrorMessage;
 import org.tmatesoft.svn.core.SVNException;
@@ -115,7 +114,7 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         }
 
         SVNUserPassDialog userPassDialog = new SVNUserPassDialog(Core.getMainWindow().getApplicationFrame());
-        DockingUI.displayCentered(userPassDialog);
+        userPassDialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
         userPassDialog.descriptionTextArea.setText(message);
         userPassDialog.setVisible(true);
         if (userPassDialog.getReturnStatus() != SVNUserPassDialog.RET_OK) {

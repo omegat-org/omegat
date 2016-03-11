@@ -33,7 +33,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -62,7 +61,7 @@ public class CreateGlossaryEntry extends JDialog {
   
         invalidate();
         pack();
-        DockingUI.displayCentered(this);
+        setLocationRelativeTo(parent);
     }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */

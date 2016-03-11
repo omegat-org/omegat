@@ -34,7 +34,6 @@ import javax.swing.table.AbstractTableModel;
 
 import org.omegat.core.Core;
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -106,7 +105,7 @@ public class FilenamePatternsEditorController {
                 model.fireTableDataChanged();
             }
         });
-        DockingUI.displayCentered(dialog);
+        dialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
         StaticUIUtils.setEscapeClosable(dialog);
         dialog.setVisible(true);
 

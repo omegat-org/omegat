@@ -35,7 +35,6 @@ import javax.swing.JLabel;
 
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -89,7 +88,7 @@ public class WorkflowOptionsDialog extends JDialog {
         cbSaveAutoStatus.setSelected(Preferences.isPreference(Preferences.SAVE_AUTO_STATUS));
         initialSegCountSpinner.setValue(Preferences.getPreferenceDefault(Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT,
                 Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT_DEFAULT));
-        DockingUI.displayCentered(this);
+        setLocationRelativeTo(parent);
     }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */

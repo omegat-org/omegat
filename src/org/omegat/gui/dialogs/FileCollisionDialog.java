@@ -32,7 +32,6 @@ import javax.swing.UIManager;
 
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -59,17 +58,18 @@ public class FileCollisionDialog extends javax.swing.JDialog {
     public FileCollisionDialog(java.awt.Frame parent) {
         super(parent, true);
         grandInit();
+        setLocationRelativeTo(parent);
     }
     
     public FileCollisionDialog(javax.swing.JDialog parent) {
         super(parent, true);
         grandInit();
+        setLocationRelativeTo(parent);
     }
     
     private void grandInit() {
         initComponents();
         icon.setIcon(UIManager.getIcon("OptionPane.warningIcon"));
-        DockingUI.displayCentered(this);
         StaticUIUtils.setEscapeAction(this, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -53,7 +53,6 @@ import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.FiltersTableModel;
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TableColumnSizer;
 
@@ -156,7 +155,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         filtersScrollPane.setPreferredSize(tableSize);
         pack();
         StaticUIUtils.fitInScreen(this);
-        DockingUI.displayCentered(this);
+        setLocationRelativeTo(parent);
      }    
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */

@@ -34,7 +34,6 @@ import javax.swing.JTable;
 import org.omegat.gui.editor.chartable.CharTableModel;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -75,7 +74,7 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
         
         setPreferredSize(new Dimension(400, 500));
         pack();
-        DockingUI.displayCentered(this);
+        setLocationRelativeTo(parent);
     }
     
     private void panelSetEnabled(boolean enabled) {

@@ -49,7 +49,6 @@ import javax.swing.event.ChangeListener;
 
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.Styles.EditorColor;
@@ -87,7 +86,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
             }
         });
         colorStylesListValueChanged(null);
-        DockingUI.displayCentered(this);
+        setLocationRelativeTo(parent);
         colorStylesList.setCellRenderer(new DefaultListCellRenderer() {
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,

@@ -31,11 +31,10 @@ import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.util.Map;
 import java.util.TreeMap;
+
 import javax.swing.AbstractAction;
 
-
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -111,7 +110,7 @@ public class TextOptionsDialog extends javax.swing.JDialog {
                 doClose(RET_CANCEL);
             }
         });
-        DockingUI.displayCentered(this);
+        setLocationRelativeTo(parent);
     }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */

@@ -42,7 +42,6 @@ import javax.swing.table.AbstractTableModel;
 
 import org.apache.commons.lang.StringUtils;
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.DockingUI;
 
 import gen.core.project.RepositoryDefinition;
 import gen.core.project.RepositoryMapping;
@@ -63,7 +62,7 @@ public class RepositoriesMappingController {
 
     public List<RepositoryDefinition> show(JFrame parent, List<RepositoryDefinition> input) {
         dialog = new RepositoriesMappingDialog(parent, true);
-        DockingUI.displayCentered(dialog);
+        dialog.setLocationRelativeTo(parent);
 
         listRepo = new ArrayList<RowRepo>();
         listMapping = new ArrayList<RowMapping>();

@@ -34,7 +34,6 @@ import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.StringUtil;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -73,7 +72,7 @@ public class AboutDialog extends JDialog {
         pack();
 
         StaticUIUtils.fitInScreen(this);
-        DockingUI.displayCentered(this);
+        setLocationRelativeTo(parent);
     }
 
     private String getVersionString() {

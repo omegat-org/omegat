@@ -30,7 +30,6 @@ import java.awt.Frame;
 
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -60,7 +59,7 @@ public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
         sortBySourceCheckBox.setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_BY_SOURCE));
         longerFirstCheckBox.setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_BY_LENGTH));
         sortEntriesCheckBox.setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_ALPHABETICALLY));
-        DockingUI.displayCentered(this);
+        setLocationRelativeTo(parent);
     }
 
     /**

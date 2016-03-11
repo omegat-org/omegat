@@ -41,7 +41,6 @@ import org.omegat.gui.editor.AlphabeticalMarkers;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -88,7 +87,7 @@ public class GoToSegmentDialog extends javax.swing.JDialog {
             }
         });
         getRootPane().setDefaultButton(okButton);
-        DockingUI.displayCentered(this);
+        setLocationRelativeTo(parent);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {

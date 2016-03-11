@@ -36,7 +36,6 @@ import javax.swing.table.AbstractTableModel;
 
 import org.omegat.core.Core;
 import org.omegat.core.team2.TeamSettings;
-import org.omegat.util.gui.DockingUI;
 
 /**
  * Controller for forget credentials.
@@ -88,7 +87,7 @@ public class RepositoriesCredentialsController {
             }
         });
 
-        DockingUI.displayCentered(dialog);
+        dialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
         dialog.setVisible(true);
     }
 

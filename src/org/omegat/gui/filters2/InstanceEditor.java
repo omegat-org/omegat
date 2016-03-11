@@ -36,7 +36,6 @@ import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 import org.openide.awt.Mnemonics;
 
@@ -70,7 +69,6 @@ public class InstanceEditor extends JDialog {
         StaticUIUtils.setEscapeClosable(this);
 
         pack();
-        DockingUI.displayCentered(this);
     }
 
     /**
@@ -82,6 +80,7 @@ public class InstanceEditor extends JDialog {
         super(parent, true);
         initComponents();
         init2(sourceEncodingVariable, targetEncodingVariable, hint);
+        setLocationRelativeTo(parent);
         setTitle(OStrings.getString("INSTANCEEDITOR_TITLE_ADD"));
         Mnemonics.setLocalizedText(addOrUpdateButton, OStrings.getString("BUTTON_OK"));
     }
@@ -96,6 +95,7 @@ public class InstanceEditor extends JDialog {
         super(parent, true);
         initComponents();
         init2(sourceEncodingVariable, targetEncodingVariable, hint);
+        setLocationRelativeTo(parent);
         setTitle(OStrings.getString("INSTANCEEDITOR_TITLE_UPDATE"));
 
         Mnemonics.setLocalizedText(addOrUpdateButton, OStrings.getString("BUTTON_OK"));

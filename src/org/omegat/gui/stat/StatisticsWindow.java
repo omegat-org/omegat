@@ -40,7 +40,6 @@ import org.omegat.core.statistics.CalcMatchStatistics;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -108,7 +107,7 @@ public class StatisticsWindow extends javax.swing.JDialog {
         });
 
         setSize(800, 400);
-        DockingUI.displayCentered(this);
+        setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
     }
 
     /**

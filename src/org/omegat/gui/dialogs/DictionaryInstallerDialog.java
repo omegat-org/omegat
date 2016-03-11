@@ -44,7 +44,6 @@ import javax.swing.SwingWorker;
 
 import org.omegat.core.spellchecker.DictionaryManager;
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -80,7 +79,7 @@ public class DictionaryInstallerDialog extends JDialog {
 
         initComponents();
         
-        DockingUI.displayCentered(this);
+        setLocationRelativeTo(parent);
         
         dictionaryListValueChanged(null);
         

@@ -32,7 +32,6 @@ import java.util.Arrays;
 import javax.swing.JLabel;
 
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -60,7 +59,7 @@ public class GITUserPassDialog extends javax.swing.JDialog {
 
         invalidate();
         pack();
-        DockingUI.displayCentered(this);
+        setLocationRelativeTo(parent);
         
         userText.requestFocusInWindow();
     }

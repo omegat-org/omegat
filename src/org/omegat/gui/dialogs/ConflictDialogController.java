@@ -31,7 +31,6 @@ import java.text.MessageFormat;
 
 import org.omegat.core.Core;
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.DockingUI;
 
 /**
  * Show conflict dialog.
@@ -70,7 +69,7 @@ public class ConflictDialogController {
             }
         });
 
-        DockingUI.displayCentered(dialog);
+        dialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
         dialog.setVisible(true);
 
         return result;

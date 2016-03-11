@@ -39,7 +39,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -79,7 +78,7 @@ public class EditXOptionsDialog extends javax.swing.JDialog {
                 doClose(RET_CANCEL);
             }
         });
-        DockingUI.displayCentered(this);
+        setLocationRelativeTo(parent);
     }
 
     private final XHTMLOptions options;

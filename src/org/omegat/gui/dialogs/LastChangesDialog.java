@@ -34,7 +34,6 @@ import org.omegat.help.Help;
 import org.omegat.util.FileUtil;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 import org.openide.awt.Mnemonics;
 
@@ -56,7 +55,7 @@ public class LastChangesDialog extends JDialog {
         super(parent, true);
         initComponents();
         lastChangesTextPane.setCaretPosition(0);
-        DockingUI.displayCentered(this);
+        setLocationRelativeTo(parent);
     }
 
     /**

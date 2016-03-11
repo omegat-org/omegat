@@ -35,7 +35,6 @@ import java.util.TreeMap;
 import javax.swing.AbstractAction;
 
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -85,7 +84,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
                 doClose(RET_CANCEL);
             }
         });
-        DockingUI.displayCentered(this);
+        setLocationRelativeTo(parent);
     }
 
     private final OpenXMLOptions options;

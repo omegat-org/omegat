@@ -38,7 +38,6 @@ import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.StaticUIUtils;
 
@@ -70,7 +69,7 @@ public class LogDialog extends javax.swing.JDialog {
         StaticUIUtils.setEscapeClosable(this);
         
         setSize(600, 400);
-        DockingUI.displayCentered(this);
+        setLocationRelativeTo(parent);
         
         final File logLocation = new File(Log.getLogFilePath());
         new SwingWorker<String, Object>() {

@@ -34,7 +34,6 @@ import javax.swing.JDialog;
 import org.omegat.gui.editor.ModificationInfoManager;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -79,7 +78,7 @@ public class ViewOptionsDialog extends JDialog {
 
         invalidate();
         pack();
-        DockingUI.displayCentered(this);
+        setLocationRelativeTo(parent);
     }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */

@@ -35,7 +35,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.Window;
 import java.io.FileNotFoundException;
 
 import javax.swing.ImageIcon;
@@ -47,7 +46,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.plaf.ColorUIResource;
 
-import org.omegat.core.Core;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 
@@ -367,16 +365,6 @@ public class DockingUI {
         } catch (FileNotFoundException e) {
             return null;
         }
-    }
-
-    /**
-     * Move window to the center of main window.
-     * 
-     * @param window
-     *            window
-     */
-    public static void displayCentered(final Window window) {
-        window.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
     }
 
     /**

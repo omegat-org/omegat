@@ -33,7 +33,6 @@ import javax.swing.AbstractAction;
 
 
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -70,7 +69,7 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog {
                 doClose(RET_CANCEL);
             }
         });
-        DockingUI.displayCentered(this);
+        setLocationRelativeTo(parent);
     }
 
     private final OpenDocOptions options;

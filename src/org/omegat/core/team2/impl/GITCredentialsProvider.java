@@ -43,7 +43,6 @@ import org.omegat.core.KnownException;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.core.team2.TeamSettings;
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.DockingUI;
 
 /**
  * GIT repository credentials provider. One credentials provider created for all git instances.
@@ -241,7 +240,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
      */
     private Credentials askCredentials(URIish uri, Credentials credentials) {
         GITUserPassDialog userPassDialog = new GITUserPassDialog(Core.getMainWindow().getApplicationFrame());
-        DockingUI.displayCentered(userPassDialog);
+        userPassDialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
         userPassDialog.descriptionTextArea.setText(OStrings
                 .getString(credentials.username == null ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"));
         // if username is already available in uri, then we will not be asked for an username, so we cannot

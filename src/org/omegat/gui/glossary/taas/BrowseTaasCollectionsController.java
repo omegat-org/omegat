@@ -53,7 +53,6 @@ import org.omegat.core.Core;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 import gen.taas.TaasCollection;
@@ -129,7 +128,7 @@ public class BrowseTaasCollectionsController {
             }
         });
 
-        DockingUI.displayCentered(dialog);
+        dialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
 
         dialog.setVisible(true);
     }

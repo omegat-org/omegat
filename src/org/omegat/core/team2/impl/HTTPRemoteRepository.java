@@ -25,9 +25,6 @@
 
 package org.omegat.core.team2.impl;
 
-import gen.core.project.RepositoryDefinition;
-import gen.core.project.RepositoryMapping;
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,10 +38,13 @@ import java.util.Formatter;
 import java.util.Properties;
 import java.util.logging.Logger;
 
+import org.apache.commons.io.FileUtils;
 import org.omegat.core.team2.IRemoteRepository2;
-import org.omegat.core.team2.TeamSettings;
-import org.omegat.util.LFileCopy;
+import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.util.Log;
+
+import gen.core.project.RepositoryDefinition;
+import gen.core.project.RepositoryMapping;
 
 /**
  * HTTP/HTTPS repository connection implementation.
@@ -62,7 +62,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
     File baseDirectory;
 
     @Override
-    public void init(RepositoryDefinition repo, File dir, TeamSettings teamSettings) throws Exception {
+    public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {
         Log.logDebug(LOGGER, "Initialize HTTP remote repository");
         config = repo;
         baseDirectory = dir;
@@ -191,7 +191,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
             File temp = new File(out.getAbsolutePath() + ".tmp");
             InputStream in = conn.getInputStream();
             try {
-                LFileCopy.copy(in, temp);
+                FileUtils.copyInputStreamToFile(in, temp);
             } finally {
                 in.close();
             }

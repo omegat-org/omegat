@@ -224,14 +224,6 @@ public class DialogsTest extends TestCore {
         }
     }
 
-    public void testTeamUserPassDialog() {
-        try {
-            new TeamUserPassDialog(null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
-    }
-
     public void testUserPassDialog() {
         try {
             new UserPassDialog(null);

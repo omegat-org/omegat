@@ -46,7 +46,7 @@ public interface IRemoteRepository2 {
      * @param teamSettings
      *            team settings object for project
      */
-    void init(RepositoryDefinition repo, File dir, TeamSettings teamSettings) throws Exception;
+    void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception;
 
     /**
      * Get file version.

@@ -37,7 +37,7 @@ import java.util.logging.Logger;
 import javax.xml.namespace.QName;
 
 import org.omegat.core.team2.IRemoteRepository2;
-import org.omegat.core.team2.TeamSettings;
+import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.util.Log;
 import org.tmatesoft.svn.core.SVNAuthenticationException;
 import org.tmatesoft.svn.core.SVNCommitInfo;
@@ -68,7 +68,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     int credentialAskCount;
 
     @Override
-    public void init(RepositoryDefinition repo, File dir, TeamSettings teamSettings) throws Exception {
+    public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {
         config = repo;
         baseDirectory = dir;
 

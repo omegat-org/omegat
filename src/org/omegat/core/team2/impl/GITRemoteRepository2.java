@@ -51,7 +51,7 @@ import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.omegat.core.team2.IRemoteRepository2;
-import org.omegat.core.team2.TeamSettings;
+import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 
@@ -78,7 +78,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     }
 
     @Override
-    public void init(RepositoryDefinition repo, File dir, TeamSettings teamSettings) throws Exception {
+    public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {
         repositoryURL = repo.getUrl();
         localDirectory = dir;
 

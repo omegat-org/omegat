@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2016 Alex Buloichik
+ Copyright (C) 2015 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -31,32 +31,27 @@ import java.io.FileOutputStream;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
-import org.omegat.util.FileUtil;
-import org.omegat.util.StaticUtils;
 
 /**
- * Class for read/save repository-specific settings in the ~/.omegat/ directory.
+ * Class for read/save project-specific settings.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class TeamSettings {
-    private static File configFile;
+public class ProjectTeamSettings {
+    private final File configFile;
 
-    private synchronized static File getConfigFile() {
-        if (configFile == null) {
-            configFile = new File(StaticUtils.getConfigDir(), "repositories.properties");
-        }
-        return configFile;
+    public ProjectTeamSettings(File configDir) {
+        this.configFile = new File(configDir, "settings.properties");
     }
 
     /**
      * Get setting.
      */
-    public static synchronized String get(String key) {
+    public synchronized String get(String key) {
         try {
             Properties p = new Properties();
-            if (getConfigFile().exists()) {
-                FileInputStream in = new FileInputStream(getConfigFile());
+            if (configFile.exists()) {
+                FileInputStream in = new FileInputStream(configFile);
                 try {
                     p.load(in);
                 } finally {
@@ -72,11 +67,11 @@ public class TeamSettings {
     /**
      * Update setting.
      */
-    public static synchronized void set(String key, String newValue) {
+    public synchronized void set(String key, String newValue) {
         try {
             Properties p = new Properties();
-            File f = getConfigFile();
-            File fNew = new File(getConfigFile().getAbsolutePath() + ".new");
+            File f = configFile;
+            File fNew = new File(configFile.getAbsolutePath() + ".new");
             if (f.exists()) {
                 FileInputStream in = new FileInputStream(f);
                 try {

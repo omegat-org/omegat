@@ -25,9 +25,6 @@
 
 package org.omegat.core.data;
 
-import gen.core.project.RepositoryDefinition;
-import gen.core.project.RepositoryMapping;
-
 import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -57,6 +54,9 @@ import org.tmatesoft.svn.core.wc.ISVNOptions;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
 import org.tmatesoft.svn.core.wc.SVNRevision;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
+
+import gen.core.project.RepositoryDefinition;
+import gen.core.project.RepositoryMapping;
 
 /**
  * This is test for team project concurrent modification. It doesn't simple junit test, but looks like
@@ -289,7 +289,7 @@ public class TestTeamIntegration {
             for (URL u : cl.getURLs()) {
                 cp.add(u.getFile());
             }
-            FileUtil.copyFile(new File(DIR + "/repo/omegat.project"), new File(DIR + "/" + source
+            FileUtils.copyFile(new File(DIR + "/repo/omegat.project"), new File(DIR + "/" + source
                     + "/omegat.project"));
             new File(DIR + "/" + source + "/omegat/").mkdirs();
 

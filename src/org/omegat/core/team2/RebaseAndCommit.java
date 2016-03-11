@@ -28,8 +28,8 @@ package org.omegat.core.team2;
 import java.io.File;
 import java.util.logging.Logger;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
-import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 
 /**
@@ -70,7 +70,7 @@ public class RebaseAndCommit {
                 // there is no local file - just use remote
                 Log.logDebug(LOGGER, "local file '" + path + "' doesn't exist");
                 fileChangedLocally = false;
-            } else if (FileUtil.isFilesEqual(baseRepoFile, localFile)) {
+            } else if (FileUtils.contentEquals(baseRepoFile, localFile)) {
                 // versioned file was not changed - no need to commit
                 Log.logDebug(LOGGER, "local file '" + path + "' wasn't changed");
                 fileChangedLocally = false;
@@ -124,7 +124,7 @@ public class RebaseAndCommit {
             Log.logDebug(LOGGER, "only remote changes - get remote '" + path + "'");
             needBackup = true;
             if (headRepoFile.exists()) {// otherwise file was removed remotelly
-                FileUtil.copyFile(headRepoFile, tempOut);
+                FileUtils.copyFile(headRepoFile, tempOut);
             }
         } else {
             Log.logDebug(LOGGER, "there are no changes '" + path + "'");
@@ -136,11 +136,13 @@ public class RebaseAndCommit {
             // code below tries to update file "in transaction" with update version
             if (localFile.exists()) {
                 final File bakTemp = new File(projectDir, path + "#oldbased_on_" + currentBaseVersion);
-                FileUtil.move(localFile, bakTemp);
+                bakTemp.delete();
+                FileUtils.moveFile(localFile, bakTemp);
             }
             provider.getTeamSettings().set(VERSION_PREFIX + path, headVersion);
             if (tempOut.exists()) {
-                FileUtil.move(tempOut, localFile);
+                localFile.delete();
+                FileUtils.moveFile(tempOut, localFile);
             }
         }
 

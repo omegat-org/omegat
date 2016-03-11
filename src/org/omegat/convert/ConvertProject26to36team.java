@@ -41,7 +41,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.team2.RebaseAndCommit;
 import org.omegat.core.team2.RemoteRepositoryProvider;
-import org.omegat.core.team2.TeamSettings;
+import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.util.FileUtil;
 import org.omegat.util.OStrings;
 import org.omegat.util.ProjectFileStorage;
@@ -127,9 +127,9 @@ public class ConvertProject26to36team {
      * Save version of project_save.tmx to .repositories/versions.properties.
      */
     private static void saveVersion(File projectRootFolder, String file, String version) throws IOException {
-        TeamSettings TeamSettings = new TeamSettings(new File(projectRootFolder,
+        ProjectTeamSettings teamSettings = new ProjectTeamSettings(new File(projectRootFolder,
                 RemoteRepositoryProvider.REPO_SUBDIR));
-        TeamSettings.set(RebaseAndCommit.VERSION_PREFIX + file, version);
+        teamSettings.set(RebaseAndCommit.VERSION_PREFIX + file, version);
     }
 
     /**

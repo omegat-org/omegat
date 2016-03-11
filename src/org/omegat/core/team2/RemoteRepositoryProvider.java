@@ -55,20 +55,20 @@ public class RemoteRepositoryProvider {
     public static final String REPO_SUBDIR = ".repositories/";
 
     final File projectRoot;
-    final TeamSettings teamSettings;
+    final ProjectTeamSettings teamSettings;
     final List<RepositoryDefinition> repositoriesDefinitions;
     final List<IRemoteRepository2> repositories = new ArrayList<IRemoteRepository2>();
 
     public RemoteRepositoryProvider(File projectRoot, List<RepositoryDefinition> repositoriesDefinitions) throws Exception {
         this.projectRoot = projectRoot;
-        teamSettings = new TeamSettings(new File(projectRoot, REPO_SUBDIR));
+        teamSettings = new ProjectTeamSettings(new File(projectRoot, REPO_SUBDIR));
         this.repositoriesDefinitions = repositoriesDefinitions;
 
         checkDefinitions();
         initializeRepositories();
     }
 
-    public TeamSettings getTeamSettings() {
+    public ProjectTeamSettings getTeamSettings() {
         return teamSettings;
     }
 

@@ -31,6 +31,7 @@ import javax.net.ssl.TrustManager;
 
 import org.omegat.core.Core;
 import org.omegat.core.KnownException;
+import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.core.team2.TeamSettings;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -67,10 +68,10 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
     private final String repoUrl;
     private final String predefinedUser;
     private final String predefinedPass;
-    private final TeamSettings teamSettings;
+    private final ProjectTeamSettings teamSettings;
 
     public SVNAuthenticationManager(String repoUrl, String predefinedUser, String predefinedPass,
-            TeamSettings teamSettings) {
+            ProjectTeamSettings teamSettings) {
         this.repoUrl = repoUrl;
         this.predefinedUser = predefinedUser;
         this.predefinedPass = predefinedPass;
@@ -126,11 +127,11 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         String pass = new String(userPassDialog.passwordField.getPassword());
 
         if (userPassDialog.cbSavePlainPassword.isSelected()) {
-            teamSettings.set(KEY_USERNAME_PREFIX + repoUrl, user);
-            teamSettings.set(KEY_PASSWORD_PREFIX + repoUrl, pass);
+            TeamSettings.set(KEY_USERNAME_PREFIX + repoUrl, user);
+            TeamSettings.set(KEY_PASSWORD_PREFIX + repoUrl, pass);
         } else {
-            teamSettings.set(KEY_USERNAME_PREFIX + repoUrl, null);
-            teamSettings.set(KEY_PASSWORD_PREFIX + repoUrl, null);
+            TeamSettings.set(KEY_USERNAME_PREFIX + repoUrl, null);
+            TeamSettings.set(KEY_PASSWORD_PREFIX + repoUrl, null);
         }
 
         if (ISVNAuthenticationManager.PASSWORD.equals(kind)) {
@@ -155,8 +156,8 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
                 throw new SVNException(SVNErrorMessage.create(SVNErrorCode.AUTHN_NO_PROVIDER));
             }
         }
-        String user = teamSettings.get(KEY_USERNAME_PREFIX + repoUrl);
-        String pass = teamSettings.get(KEY_PASSWORD_PREFIX + repoUrl);
+        String user = TeamSettings.get(KEY_USERNAME_PREFIX + repoUrl);
+        String pass = TeamSettings.get(KEY_PASSWORD_PREFIX + repoUrl);
         if (user != null && pass != null) {
             if (ISVNAuthenticationManager.PASSWORD.equals(kind)) {
                 return new SVNPasswordAuthentication(user, pass, false, url, false);

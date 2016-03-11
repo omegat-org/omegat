@@ -57,6 +57,8 @@ import org.omegat.util.gui.StaticUIUtils;
 @SuppressWarnings("serial")
 public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
 
+    private static final String OLD_DICT_URL = "http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/";
+    
     private final JFileChooser fileChooser = new JFileChooser();
 
     /** A return status code - returned if Cancel button has been pressed */
@@ -145,7 +147,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         String dictionaryUrl = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL);
         if (dictionaryUrl.isEmpty()
                 || //string below was default prior to 2.5.0 update 5, but is not working. Override with new default.
-                "http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/".equalsIgnoreCase(dictionaryUrl)) {
+                OLD_DICT_URL.equalsIgnoreCase(dictionaryUrl)) {
             dictionaryUrlTextField.setText(OConsts.REMOTE_SC_DICTIONARY_LIST_LOCATION);
         } else {
             dictionaryUrlTextField.setText(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL));

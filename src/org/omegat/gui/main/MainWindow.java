@@ -650,4 +650,16 @@ public class MainWindow extends JFrame implements IMainWindow {
     public void showMessageDialog(String message) {
         JOptionPane.showMessageDialog(this, message);
     }
+
+    public void promptReload() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        // asking to reload a project
+        int res = JOptionPane.showConfirmDialog(this, OStrings.getString("MW_REOPEN_QUESTION"),
+                OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
+        if (res == JOptionPane.YES_OPTION) {
+            ProjectUICommands.projectReload();
+        }
+    }
 }

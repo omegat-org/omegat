@@ -906,11 +906,7 @@ public class MainWindowMenuHandler {
                     // non-project-specific filters are changed
                     return;
                 }
-                // asking to reload a project
-                int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"),
-                        OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
-                if (res == JOptionPane.YES_OPTION)
-                    ProjectUICommands.projectReload();
+                mainWindow.promptReload();
             }
         }
     }
@@ -971,13 +967,7 @@ public class MainWindowMenuHandler {
                 && Core.getProject().isProjectLoaded()) {
             // Redisplay according to new view settings
             Core.getEditor().getSettings().updateTagValidationPreferences();
-
-            // asking to reload a project
-            int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"),
-                    OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
-            if (res == JOptionPane.YES_OPTION) {
-                ProjectUICommands.projectReload();
-            }
+            mainWindow.promptReload();
         }
     }
 
@@ -998,13 +988,8 @@ public class MainWindowMenuHandler {
 
         if (externalTMXOptions.getReturnStatus() == ExternalTMXMatchesDialog.RET_OK
                 && Core.getProject().isProjectLoaded()) {
-            // asking to reload a project
-            int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"),
-                    OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
-            if (res == JOptionPane.YES_OPTION)
-                ProjectUICommands.projectReload();
+            mainWindow.promptReload();
         }
-
     }
 
     /**

@@ -208,12 +208,15 @@ public class ProjectUICommands {
                 Core.getMainWindow().showProgressMessage(" ");
                 try {
                     get();
-                    SwingUtilities.invokeLater(new Runnable() {
-                        public void run() {
-                            Core.getEditor().requestFocus();
-                            projectOpen(projectRoot);
-                        }
-                    });
+                    if (projectRoot != null) {
+                        // don't ask open if user cancelled previous dialog
+                        SwingUtilities.invokeLater(new Runnable() {
+                            public void run() {
+                                Core.getEditor().requestFocus();
+                                projectOpen(projectRoot);
+                            }
+                        });
+                    }
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_DOWNLOAD_TEAM_PROJECT");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_DOWNLOAD_TEAM_PROJECT");

@@ -30,6 +30,7 @@ import java.util.logging.Logger;
 import javax.net.ssl.TrustManager;
 
 import org.omegat.core.Core;
+import org.omegat.core.KnownException;
 import org.omegat.core.team2.TeamSettings;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -64,9 +65,13 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
     private static final Logger LOGGER = Logger.getLogger(SVNAuthenticationManager.class.getName());
 
     private final String repoUrl;
+    private final String predefinedUser;
+    private final String predefinedPass;
 
-    public SVNAuthenticationManager(String repoUrl) {
+    public SVNAuthenticationManager(String repoUrl, String predefinedUser, String predefinedPass) {
         this.repoUrl = repoUrl;
+        this.predefinedUser = predefinedUser;
+        this.predefinedPass = predefinedPass;
     }
 
     @Override
@@ -138,6 +143,15 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
     @Override
     public SVNAuthentication getFirstAuthentication(String kind, String realm, SVNURL url)
             throws SVNException {
+        if (predefinedUser != null && predefinedPass != null) {
+            if (ISVNAuthenticationManager.PASSWORD.equals(kind)) {
+                return new SVNPasswordAuthentication(predefinedUser, predefinedPass, false, url, false);
+            } else if (ISVNAuthenticationManager.SSH.equals(kind)) {
+                return new SVNSSHAuthentication(predefinedUser, predefinedPass, -1, false, url, false);
+            } else {
+                throw new SVNException(SVNErrorMessage.create(SVNErrorCode.AUTHN_NO_PROVIDER));
+            }
+        }
         String user = TeamSettings.get(KEY_USERNAME_PREFIX + repoUrl);
         String pass = TeamSettings.get(KEY_PASSWORD_PREFIX + repoUrl);
         if (user != null && pass != null) {
@@ -145,12 +159,17 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
                 return new SVNPasswordAuthentication(user, pass, false, url, false);
             } else if (ISVNAuthenticationManager.SSH.equals(kind)) {
                 return new SVNSSHAuthentication(user, pass, -1, false, url, false);
+            } else {
+                throw new SVNException(SVNErrorMessage.create(SVNErrorCode.AUTHN_NO_PROVIDER));
             }
         }
         return ask(kind, url, OStrings.getString("TEAM_USERPASS_FIRST"));
     }
 
     public SVNAuthentication getNextAuthentication(String kind, String realm, SVNURL url) throws SVNException {
+        if (predefinedUser != null && predefinedPass != null) {
+            throw new KnownException("TEAM_PREDEFINED_CREDENTIALS_ERROR");
+        }
         return ask(kind, url, OStrings.getString("TEAM_USERPASS_WRONG"));
     };
 

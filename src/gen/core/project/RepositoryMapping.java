@@ -43,9 +43,9 @@ public class RepositoryMapping {
 
     protected List<String> excludes;
     protected List<String> includes;
-    @XmlAttribute(required = true)
+    @XmlAttribute(name = "local", required = true)
     protected String local;
-    @XmlAttribute(required = true)
+    @XmlAttribute(name = "repository", required = true)
     protected String repository;
 
     /**

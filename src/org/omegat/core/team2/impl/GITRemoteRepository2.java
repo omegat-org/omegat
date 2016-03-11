@@ -31,6 +31,8 @@ import gen.core.project.RepositoryDefinition;
 import java.io.File;
 import java.util.logging.Logger;
 
+import javax.xml.namespace.QName;
+
 import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.ResetCommand.ResetType;
@@ -75,7 +77,11 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         repositoryURL = repo.getUrl();
         localDirectory = dir;
 
-        CredentialsProvider prevProvider = CredentialsProvider.getDefault();
+        String predefinedUser = repo.getOtherAttributes().get(new QName("gitUsername"));
+        String predefinedPass = repo.getOtherAttributes().get(new QName("gitPassword"));
+        String predefinedFingerprint = repo.getOtherAttributes().get(new QName("gitFingerprint"));
+        ((GITCredentialsProvider) CredentialsProvider.getDefault()).setPredefinedCredentials(repositoryURL,
+                predefinedUser, predefinedPass, predefinedFingerprint);
 
         File gitDir = new File(localDirectory, ".git");
         if (gitDir.exists() && gitDir.isDirectory()) {

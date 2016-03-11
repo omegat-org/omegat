@@ -30,19 +30,19 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Project }
+     * 
+     */
+    public Project createProject() {
+        return new Project();
+    }
+
+    /**
      * Create an instance of {@link Omegat }
      * 
      */
     public Omegat createOmegat() {
         return new Omegat();
-    }
-
-    /**
-     * Create an instance of {@link RepositoryMapping }
-     * 
-     */
-    public RepositoryMapping createRepositoryMapping() {
-        return new RepositoryMapping();
     }
 
     /**
@@ -62,11 +62,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Project }
+     * Create an instance of {@link RepositoryMapping }
      * 
      */
-    public Project createProject() {
-        return new Project();
+    public RepositoryMapping createRepositoryMapping() {
+        return new RepositoryMapping();
     }
 
     /**

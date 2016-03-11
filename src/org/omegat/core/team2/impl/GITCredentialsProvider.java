@@ -26,6 +26,9 @@
 
 package org.omegat.core.team2.impl;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,6 +39,7 @@ import org.eclipse.jgit.transport.CredentialItem;
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.URIish;
 import org.omegat.core.Core;
+import org.omegat.core.KnownException;
 import org.omegat.core.team2.TeamSettings;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DockingUI;
@@ -55,8 +59,17 @@ public class GITCredentialsProvider extends CredentialsProvider {
     static final String KEY_PASSWORD_PREFIX = "login.password.";
     static final String KEY_FINGERPRINT_PREFIX = "login.fingerprint.";
 
+    private Map<String, String> predefined = Collections.synchronizedMap(new HashMap<String, String>());
+
+    public void setPredefinedCredentials(String url, String predefinedUser, String predefinedPass,
+            String predefinedFingerprint) {
+        predefined.put("user." + url, predefinedUser);
+        predefined.put("pass." + url, predefinedPass);
+        predefined.put("fingerprint." + url, predefinedFingerprint);
+    }
+
     private Credentials loadCredentials(URIish uri) {
-        String url = uri.toASCIIString();
+        String url = uri.toString();
         Credentials credentials = new Credentials();
         credentials.username = TeamSettings.get(KEY_USERNAME_PREFIX + url);
         credentials.password = TeamSettings.get(KEY_PASSWORD_PREFIX + url);
@@ -64,7 +77,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
     }
 
     private void saveCredentials(URIish uri, Credentials credentials) {
-        String url = uri.toASCIIString();
+        String url = uri.toString();
         try {
             TeamSettings.set(KEY_USERNAME_PREFIX + url, credentials.username);
             if (credentials.saveAsPlainText) {
@@ -78,12 +91,12 @@ public class GITCredentialsProvider extends CredentialsProvider {
     }
 
     private String loadFingerprint(URIish uri) {
-        String url = uri.toASCIIString();
+        String url = uri.toString();
         return TeamSettings.get(KEY_FINGERPRINT_PREFIX + url);
     }
 
     private void saveFingerprint(URIish uri, String fingerprint) {
-        String url = uri.toASCIIString();
+        String url = uri.toString();
         try {
             TeamSettings.set(KEY_FINGERPRINT_PREFIX + url, fingerprint);
         } catch (Exception e) {
@@ -93,11 +106,24 @@ public class GITCredentialsProvider extends CredentialsProvider {
 
     @Override
     public boolean get(URIish uri, CredentialItem... items) throws UnsupportedCredentialItem {
+
+        // get predefined if exist
+        String url = uri.toString();
+        String predefinedUser = predefined.get("user." + url);
+        String predefinedPass = predefined.get("pass." + url);
+        String predefinedFingerprint = predefined.get("fingerprint." + url);
+
+        // get saved
         Credentials credentials = loadCredentials(uri);
+
         boolean ok = false;
         // theoretically, username can be unknown, but in practice it is always set, so not requested.
         for (CredentialItem i : items) {
             if (i instanceof CredentialItem.Username) {
+                if (predefinedUser != null && predefinedPass != null) {
+                    ((CredentialItem.Username) i).setValue(predefinedUser);
+                    continue;
+                }
                 if (credentials.username == null) {
                     credentials = askCredentials(uri, credentials);
                     if (credentials == null) {
@@ -110,6 +136,10 @@ public class GITCredentialsProvider extends CredentialsProvider {
                 ((CredentialItem.Username) i).setValue(credentials.username);
                 continue;
             } else if (i instanceof CredentialItem.Password) {
+                if (predefinedUser != null && predefinedPass != null) {
+                    ((CredentialItem.Password) i).setValue(predefinedPass.toCharArray());
+                    continue;
+                }
                 if (credentials.password == null) {
                     credentials = askCredentials(uri, credentials);
                     if (credentials == null) {
@@ -124,6 +154,10 @@ public class GITCredentialsProvider extends CredentialsProvider {
                 continue;
             } else if (i instanceof CredentialItem.StringType) {
                 if (i.getPromptText().equals("Password: ")) {
+                    if (predefinedUser != null && predefinedPass != null) {
+                        ((CredentialItem.StringType) i).setValue(predefinedPass);
+                        continue;
+                    }
                     if (credentials.password == null) {
                         if (!ok) {
                             credentials = askCredentials(uri, credentials);
@@ -134,7 +168,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
                             saveCredentials(uri, credentials);
                         }
                     }
-                    ((CredentialItem.StringType) i).setValue(new String(credentials.password));
+                    ((CredentialItem.StringType) i).setValue(credentials.password);
                     continue;
                 }
             } else if (i instanceof CredentialItem.YesNoType) {
@@ -146,6 +180,14 @@ public class GITCredentialsProvider extends CredentialsProvider {
                 String promptedFingerprint = extractFingerprint(promptText);
                 if (promptedFingerprint == null) {
                     throw new UnsupportedCredentialItem(uri, "Wrong fingerprint pattern");
+                }
+                if (predefinedFingerprint != null) {
+                    if (predefinedFingerprint.equals(predefinedFingerprint)) {
+                        ((CredentialItem.YesNoType) i).setValue(true);
+                    } else {
+                        ((CredentialItem.YesNoType) i).setValue(false);
+                    }
+                    continue;
                 }
                 if (promptedFingerprint.equals(storedFingerprint)) {
                     ((CredentialItem.YesNoType) i).setValue(true);
@@ -220,6 +262,13 @@ public class GITCredentialsProvider extends CredentialsProvider {
 
     public void reset(URIish uri) {
         // reset is called after 5 authorization failures. After 3 resets, the transport gives up.
+        String url = uri.toString();
+        String predefinedUser = predefined.get("user." + url);
+        String predefinedPass = predefined.get("pass." + url);
+        if (predefinedUser != null && predefinedPass != null) {
+            throw new KnownException("TEAM_PREDEFINED_CREDENTIALS_ERROR");
+        }
+
         Credentials credentials = loadCredentials(uri);
         credentials.username = null;
         credentials.password = null;

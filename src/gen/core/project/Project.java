@@ -94,7 +94,7 @@ public class Project {
     @XmlElement(name = "external_command")
     protected String externalCommand;
     protected Project.Repositories repositories;
-    @XmlAttribute(required = true)
+    @XmlAttribute(name = "version", required = true)
     protected String version;
 
     /**

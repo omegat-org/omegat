@@ -34,6 +34,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.xml.namespace.QName;
+
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.util.Log;
 import org.tmatesoft.svn.core.SVNCommitInfo;
@@ -67,8 +69,13 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     public void init(RepositoryDefinition repo, File dir) throws Exception {
         config = repo;
         baseDirectory = dir;
+
+        String predefinedUser = repo.getOtherAttributes().get(new QName("svnUsername"));
+        String predefinedPass = repo.getOtherAttributes().get(new QName("svnPassword"));
+
         ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
-        ISVNAuthenticationManager authManager = new SVNAuthenticationManager(repo.getUrl());
+        ISVNAuthenticationManager authManager = new SVNAuthenticationManager(repo.getUrl(), predefinedUser,
+                predefinedPass);
         ourClientManager = SVNClientManager.newInstance(options, authManager);
         if (baseDirectory.exists()) {
             ourClientManager.getWCClient().doCleanup(baseDirectory);

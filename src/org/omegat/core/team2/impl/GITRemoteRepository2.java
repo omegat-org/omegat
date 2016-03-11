@@ -134,6 +134,10 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     @Override
     public String getFileVersion(String file) throws Exception {
+        File f = new File(localDirectory, file);
+        if (!f.exists()) {
+            return null;
+        }
         return getCurrentVersion();
     }
 

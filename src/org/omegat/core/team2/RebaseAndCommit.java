@@ -28,6 +28,7 @@ package org.omegat.core.team2;
 import java.io.File;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang.StringUtils;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 
@@ -94,7 +95,7 @@ public class RebaseAndCommit {
                     // there is no remote file also
                     fileChangedRemotely = false;
                 }
-            } else if (currentBaseVersion.equals(headVersion)) {
+            } else if (StringUtils.equals(currentBaseVersion, headVersion)) {
                 Log.logDebug(LOGGER, "remote file '" + path + "' wasn't changed");
                 fileChangedRemotely = false;
             } else {

@@ -84,7 +84,11 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
 
     @Override
     public String getFileVersion(String file) throws Exception {
-        SVNInfo info = ourClientManager.getWCClient().doInfo(new File(baseDirectory, file), SVNRevision.BASE);
+        File f = new File(baseDirectory, file);
+        if (!f.exists()) {
+            return null;
+        }
+        SVNInfo info = ourClientManager.getWCClient().doInfo(f, SVNRevision.BASE);
         Log.logDebug(LOGGER, "SVN committed revision for file {0} is {1}", file, info.getCommittedRevision()
                 .getNumber());
 
@@ -116,13 +120,15 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
 
     @Override
     public void addForCommit(String path) throws Exception {
-        filesForCommit.add(new File(baseDirectory, path));
+        File f = new File(baseDirectory, path);
+        filesForCommit.add(f);
+        ourClientManager.getWCClient().doAdd(f, true, false, true, SVNDepth.EMPTY, false, true);
     }
 
     @Override
     public String commit(String version, String comment) throws Exception {
         Log.logInfoRB("SVN_START", "commit");
-        File[] forCommit = filesForCommit.toArray(new File[filesForCommit.size()]);
+        File[] forCommit = new File[]{baseDirectory};
         filesForCommit.clear();
 
         try {
@@ -130,7 +136,8 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
                     null, false, false, SVNDepth.INFINITY);
             Log.logDebug(LOGGER, "SVN committed into new revision {0}", info.getNewRevision());
             if (info.getNewRevision() < 0) {
-                throw new Exception("SVN commit returns -1");
+                // empty commit - file was not changed
+                info = new SVNCommitInfo(Long.parseLong(getFileVersion("")), null, null, null);
             }
             Log.logInfoRB("SVN_FINISH", "commit");
             return Long.toString(info.getNewRevision());

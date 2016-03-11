@@ -316,6 +316,8 @@ public class RealProject implements IProject {
 
                 // save changed TMX or just retrieve from repository
                 remoteRepositoryProvider.switchAllToLatest();
+
+                loadTranslations();
                 rebaseAndCommitProject();
 
                 // retrieve other directories
@@ -337,6 +339,8 @@ public class RealProject implements IProject {
                             '/' + m_config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION,
                             '/' + m_config.getWritableGlossaryFile().getUnderRoot());
                 }
+            } else {
+                loadTranslations();
             }
 
             // set project specific file filters if they exist
@@ -357,8 +361,6 @@ public class RealProject implements IProject {
             Core.getSegmenter().setSRX(srx == null ? Preferences.getSRX() : srx);
 
             loadSourceFiles();
-
-            loadTranslations();
 
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);
             importHandler = new ImportFromAutoTMX(this, allProjectEntries);

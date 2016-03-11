@@ -25,9 +25,6 @@
 
 package org.omegat.gui.filters2;
 
-import gen.core.filters.Files;
-import gen.core.filters.Filter;
-
 import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -49,6 +46,9 @@ import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
+
+import gen.core.filters.Files;
+import gen.core.filters.Filter;
 
 /**
  * Editor for a single filter. Filter is a class that allows for reading and
@@ -101,8 +101,8 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
         DockingUI.displayCentered(this);
     }
 
-    private JComboBox encodingComboBox() {
-        return new JComboBox(FilterMaster.getSupportedEncodings().toArray());
+    private JComboBox<String> encodingComboBox() {
+        return new JComboBox<>(FilterMaster.getSupportedEncodings().toArray(new String[0]));
     }
 
     @Override

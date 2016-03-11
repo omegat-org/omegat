@@ -69,7 +69,7 @@ public class SearchWindowMenu extends JMenuBar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String selection = form.m_viewer.getSelectedText();
-                JComboBox field = form.m_searchField;
+                JComboBox<String> field = form.m_searchField;
                 if (!StringUtil.isEmpty(selection)) {
                     JTextField editor = (JTextField) field.getEditor().getEditorComponent();
                     editor.setText(selection);
@@ -103,7 +103,7 @@ public class SearchWindowMenu extends JMenuBar {
         item.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JComboBox currentBox = form.m_searchField;
+                JComboBox<String> currentBox = form.m_searchField;
                 if (form.m_replaceField.hasFocus()) {
                     currentBox = form.m_replaceField;
                 }
@@ -123,7 +123,7 @@ public class SearchWindowMenu extends JMenuBar {
         item.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JComboBox currentBox = form.m_searchField;
+                JComboBox<String> currentBox = form.m_searchField;
                 if (form.m_replaceField.hasFocus()) {
                     currentBox = form.m_replaceField;
                 }

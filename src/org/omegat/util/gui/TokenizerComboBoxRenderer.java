@@ -31,16 +31,16 @@ package org.omegat.util.gui;
  * 
  * @author Aaron Madlon-Kay
  */
-public class TokenizerComboBoxRenderer extends DelegatingComboBoxRenderer<Object> {
+public class TokenizerComboBoxRenderer extends DelegatingComboBoxRenderer<Object, String> {
     
     @Override
-    protected Object getDisplayText(Object value) {
+    protected String getDisplayText(Object value) {
     	if (value instanceof Class<?>) {
             Class<?> cls = (Class<?>) value;
             return cls.getSimpleName();
         }
     	if (value instanceof String) {
-            return value;
+            return (String) value;
         }
     	
     	throw new RuntimeException("Unsupported type in tokenizer combobox");

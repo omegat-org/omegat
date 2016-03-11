@@ -28,6 +28,7 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.Frame;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 
@@ -60,11 +61,11 @@ public class ExternalTMXMatchesDialog extends JDialog {
 
         initComponents();
         
-        sortMatchesList.setModel(new DefaultComboBoxModel(
+        sortMatchesList.setModel(new DefaultComboBoxModel<>(
                 new SORT_KEY[] {SORT_KEY.SCORE, SORT_KEY.SCORE_NO_STEM, SORT_KEY.ADJUSTED_SCORE}));
-        sortMatchesList.setRenderer(new DelegatingComboBoxRenderer<SORT_KEY>() {
+        sortMatchesList.setRenderer(new DelegatingComboBoxRenderer<SORT_KEY, String>() {
             @Override
-            protected Object getDisplayText(SORT_KEY value) {
+            protected String getDisplayText(SORT_KEY value) {
                 return OStrings.getString("EXT_TMX_SORT_KEY_" + value.name());
             }
         });
@@ -100,7 +101,7 @@ public class ExternalTMXMatchesDialog extends JDialog {
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         sortMatchesLabel = new javax.swing.JLabel();
-        sortMatchesList = new javax.swing.JComboBox();
+        sortMatchesList = new javax.swing.JComboBox<SORT_KEY>();
         jPanel7 = new javax.swing.JPanel();
         tagHandlingLabel = new javax.swing.JLabel();
         displayLevel2Tags = new javax.swing.JCheckBox();
@@ -111,7 +112,7 @@ public class ExternalTMXMatchesDialog extends JDialog {
         matchesTemplate = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
         variablesLabel = new javax.swing.JLabel();
-        variablesList = new javax.swing.JComboBox();
+        variablesList = new javax.swing.JComboBox<String>();
         insertButton = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -176,7 +177,7 @@ public class ExternalTMXMatchesDialog extends JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(variablesLabel, bundle.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES")); // NOI18N
         jPanel4.add(variablesLabel, java.awt.BorderLayout.WEST);
 
-        variablesList.setModel(new DefaultComboBoxModel(org.omegat.gui.matches.MatchesVarExpansion.MATCHES_VARIABLES));
+        variablesList.setModel(new DefaultComboBoxModel<>(MatchesVarExpansion.MATCHES_VARIABLES));
         jPanel4.add(variablesList, java.awt.BorderLayout.CENTER);
 
         org.openide.awt.Mnemonics.setLocalizedText(insertButton, bundle.getString("BUTTON_INSERT")); // NOI18N
@@ -260,12 +261,12 @@ public class ExternalTMXMatchesDialog extends JDialog {
     private javax.swing.JTextArea matchesTemplate;
     private javax.swing.JButton okButton;
     private javax.swing.JLabel sortMatchesLabel;
-    private javax.swing.JComboBox sortMatchesList;
+    private javax.swing.JComboBox<SORT_KEY> sortMatchesList;
     private javax.swing.JLabel tagHandlingLabel;
     private javax.swing.JLabel templateLabel;
     private javax.swing.JCheckBox useSlash;
     private javax.swing.JLabel variablesLabel;
-    private javax.swing.JComboBox variablesList;
+    private javax.swing.JComboBox<String> variablesList;
     // End of variables declaration//GEN-END:variables
 
     private int returnStatus = RET_CANCEL;

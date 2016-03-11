@@ -103,7 +103,7 @@ public class SaveOptionsDialog extends JDialog {
         externalCommandTextArea = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
         variablesLabel = new javax.swing.JLabel();
-        variablesList = new javax.swing.JComboBox();
+        variablesList = new javax.swing.JComboBox<String>();
         insertButton = new javax.swing.JButton();
         allowProjectCmdCheckBox = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
@@ -199,7 +199,7 @@ public class SaveOptionsDialog extends JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(variablesLabel, OStrings.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES")); // NOI18N
         jPanel4.add(variablesLabel, java.awt.BorderLayout.WEST);
 
-        variablesList.setModel(new DefaultComboBoxModel(org.omegat.core.data.CommandVarExpansion.COMMAND_VARIABLES));
+        variablesList.setModel(new DefaultComboBoxModel<>(org.omegat.core.data.CommandVarExpansion.COMMAND_VARIABLES));
         jPanel4.add(variablesList, java.awt.BorderLayout.CENTER);
 
         org.openide.awt.Mnemonics.setLocalizedText(insertButton, OStrings.getString("BUTTON_INSERT")); // NOI18N
@@ -320,7 +320,7 @@ public class SaveOptionsDialog extends JDialog {
     private javax.swing.JLabel secondsLabel;
     private javax.swing.JSpinner secondsSpinner;
     private javax.swing.JLabel variablesLabel;
-    private javax.swing.JComboBox variablesList;
+    private javax.swing.JComboBox<String> variablesList;
     // End of variables declaration//GEN-END:variables
 
     private int returnStatus = RET_CANCEL;

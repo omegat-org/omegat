@@ -34,7 +34,7 @@ import org.apache.lucene.util.Version;
  * 
  * @author Aaron Madlon-Kay
  */
-public class TokenizerBehaviorComboBoxRenderer extends DelegatingComboBoxRenderer<Object> {
+public class TokenizerBehaviorComboBoxRenderer extends DelegatingComboBoxRenderer<Object, String> {
 
     private final Map<Version, String> names;
     private final Version recommended;
@@ -45,7 +45,7 @@ public class TokenizerBehaviorComboBoxRenderer extends DelegatingComboBoxRendere
     }
     
     @Override
-    protected Object getDisplayText(Object value) {
+    protected String getDisplayText(Object value) {
     	if (value instanceof Version) {
             String name = names.get((Version) value);
             if (name == null) {
@@ -54,7 +54,7 @@ public class TokenizerBehaviorComboBoxRenderer extends DelegatingComboBoxRendere
             return (Version)value == recommended ? "* " + name : name;
         }
     	if (value instanceof String) {
-            return value;
+            return (String) value;
         }
     	if (value != null) {
     		throw new RuntimeException("Unsupported type in tokenizer behavior combobox");

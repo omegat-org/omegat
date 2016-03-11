@@ -78,6 +78,7 @@ import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -208,7 +209,7 @@ public class ProjectPropertiesDialog extends JDialog {
         bL.add(bSL);
 
         // Source language field
-        final JComboBox m_sourceLocaleField = new JComboBox(Language.LANGUAGES);
+        final JComboBox<Language> m_sourceLocaleField = new JComboBox<>(Language.LANGUAGES);
         if (m_sourceLocaleField.getMaximumRowCount() < 20) 
             m_sourceLocaleField.setMaximumRowCount(20);
         m_sourceLocaleField.setEditable(true);
@@ -226,7 +227,7 @@ public class ProjectPropertiesDialog extends JDialog {
         bL.add(bLL);
 
         // Target language field
-        final JComboBox m_targetLocaleField = new JComboBox(Language.LANGUAGES);
+        final JComboBox<Language> m_targetLocaleField = new JComboBox<>(Language.LANGUAGES);
         if (m_targetLocaleField.getMaximumRowCount() < 20)
             m_targetLocaleField.setMaximumRowCount(20);
         m_targetLocaleField.setEditable(true);
@@ -237,7 +238,7 @@ public class ProjectPropertiesDialog extends JDialog {
         // Tokenizers box
         Box bT = Box.createVerticalBox();
         localesBox.add(bT);
-        Object[] tokenizers = PluginUtils.getTokenizerClasses().toArray();
+        Class<?>[] tokenizers = PluginUtils.getTokenizerClasses().toArray(new Class<?>[0]);
 
         // Source tokenizer label
         JLabel m_sourceTokenizerLabel = new JLabel();
@@ -249,7 +250,7 @@ public class ProjectPropertiesDialog extends JDialog {
         bT.add(bST);
 
         // Source tokenizer field
-        final JComboBox m_sourceTokenizerField = new JComboBox(tokenizers);
+        final JComboBox<Class<?>> m_sourceTokenizerField = new JComboBox<>(tokenizers);
         if (m_sourceTokenizerField.getMaximumRowCount() < 20)
             m_sourceTokenizerField.setMaximumRowCount(20);
         m_sourceTokenizerField.setEditable(false);
@@ -259,9 +260,14 @@ public class ProjectPropertiesDialog extends JDialog {
 
         String cliTokSrc = Core.getParams().get(CLIParameters.TOKENIZER_SOURCE);
         if (cliTokSrc != null) {
-            m_sourceTokenizerField.setEnabled(false);
-            m_sourceTokenizerField.addItem(cliTokSrc);
-            m_sourceTokenizerField.setSelectedItem(cliTokSrc);
+            try {
+                Class<?> srcTokClass = Class.forName(cliTokSrc);
+                m_sourceTokenizerField.setEnabled(false);
+                m_sourceTokenizerField.addItem(srcTokClass);
+                m_sourceTokenizerField.setSelectedItem(cliTokSrc);
+            } catch (ClassNotFoundException | LinkageError ex) {
+                Log.log(ex);
+            }
         }
 
         m_sourceLocaleField.addActionListener(new ActionListener() {
@@ -286,7 +292,7 @@ public class ProjectPropertiesDialog extends JDialog {
         bT.add(bTT);
 
         // Target tokenizer field
-        final JComboBox m_targetTokenizerField = new JComboBox(tokenizers);
+        final JComboBox<Class<?>> m_targetTokenizerField = new JComboBox<>(tokenizers);
         if (m_targetTokenizerField.getMaximumRowCount() < 20)
             m_targetTokenizerField.setMaximumRowCount(20);
         m_targetTokenizerField.setEditable(false);
@@ -296,9 +302,15 @@ public class ProjectPropertiesDialog extends JDialog {
 
         String cliTokTrg = Core.getParams().get(CLIParameters.TOKENIZER_TARGET);
         if (cliTokTrg != null) {
-            m_targetTokenizerField.setEnabled(false);
-            m_targetTokenizerField.addItem(cliTokTrg);
-            m_targetTokenizerField.setSelectedItem(cliTokTrg);
+            try {
+                Class<?> trgTokClass = Class.forName(cliTokTrg);
+                m_targetTokenizerField.setEnabled(false);
+                m_targetTokenizerField.addItem(trgTokClass);
+                m_targetTokenizerField.setSelectedItem(cliTokTrg);
+            } catch (ClassNotFoundException | LinkageError ex) {
+                Log.log(ex);
+            }
+
         }
 
         m_targetLocaleField.addActionListener(new ActionListener() {
@@ -334,8 +346,8 @@ public class ProjectPropertiesDialog extends JDialog {
         } catch (Exception e) {
             srcTok = new DefaultTokenizer();
         }
-        final JComboBox m_sourceTokenizerBehaviorField = new JComboBox(
-                srcTok.getSupportedBehaviors().keySet().toArray());
+        final JComboBox<Version> m_sourceTokenizerBehaviorField = new JComboBox<>(
+                srcTok.getSupportedBehaviors().keySet().toArray(new Version[0]));
         m_sourceTokenizerBehaviorField.setEnabled(!srcTok.getSupportedBehaviors().isEmpty());
         if (m_sourceTokenizerBehaviorField.getMaximumRowCount() < 20)
             m_sourceTokenizerBehaviorField.setMaximumRowCount(20);
@@ -352,9 +364,14 @@ public class ProjectPropertiesDialog extends JDialog {
 
         final String cliTokSrcBehavior = Core.getParams().get(CLIParameters.TOKENIZER_BEHAVIOR_SOURCE);
         if (cliTokSrcBehavior != null) {
-            m_sourceTokenizerBehaviorField.setEnabled(false);
-            m_sourceTokenizerBehaviorField.addItem(cliTokSrcBehavior);
-            m_sourceTokenizerBehaviorField.setSelectedItem(cliTokSrcBehavior);
+            try {
+                Version cliTokSrcVersion = Version.valueOf(cliTokSrcBehavior);
+                m_sourceTokenizerBehaviorField.setEnabled(false);
+                m_sourceTokenizerBehaviorField.addItem(cliTokSrcVersion);
+                m_sourceTokenizerBehaviorField.setSelectedItem(cliTokSrcBehavior);
+            } catch (IllegalArgumentException ex) {
+                Log.log(ex);
+            }
         }
 
         m_sourceTokenizerField.addActionListener(new ActionListener() {
@@ -376,8 +393,8 @@ public class ProjectPropertiesDialog extends JDialog {
                     m_sourceTokenizerBehaviorField.setRenderer(
                             new TokenizerBehaviorComboBoxRenderer(newTok.getSupportedBehaviors(),
                                     newTok.getDefaultBehavior()));
-                    m_sourceTokenizerBehaviorField.setModel(new DefaultComboBoxModel(
-                            newTok.getSupportedBehaviors().keySet().toArray()));
+                    m_sourceTokenizerBehaviorField.setModel(new DefaultComboBoxModel<>(
+                            newTok.getSupportedBehaviors().keySet().toArray(new Version[0])));
                     if (m_sourceTokenizerBehaviorField.getModel().getSize() > 0) {
                         m_sourceTokenizerBehaviorField.setEnabled(true);
                         m_sourceTokenizerBehaviorField.setSelectedItem(newTok.getBehavior());
@@ -405,8 +422,8 @@ public class ProjectPropertiesDialog extends JDialog {
         } catch (Exception e) {
             trgTok = new DefaultTokenizer();
         }
-        final JComboBox m_targetTokenizerBehaviorField = new JComboBox(
-                trgTok.getSupportedBehaviors().keySet().toArray());
+        final JComboBox<Version> m_targetTokenizerBehaviorField = new JComboBox<>(
+                trgTok.getSupportedBehaviors().keySet().toArray(new Version[0]));
         m_targetTokenizerBehaviorField.setEnabled(!trgTok.getSupportedBehaviors().isEmpty());
         if (m_targetTokenizerBehaviorField.getMaximumRowCount() < 20)
             m_targetTokenizerBehaviorField.setMaximumRowCount(20);
@@ -423,9 +440,14 @@ public class ProjectPropertiesDialog extends JDialog {
 
         final String cliTokTrgBehavior = Core.getParams().get(CLIParameters.TOKENIZER_BEHAVIOR_TARGET);
         if (cliTokTrgBehavior != null) {
-            m_targetTokenizerBehaviorField.setEnabled(false);
-            m_targetTokenizerBehaviorField.addItem(cliTokTrgBehavior);
-            m_targetTokenizerBehaviorField.setSelectedItem(cliTokTrgBehavior);
+            try {
+                Version cliTokTrgVersion = Version.valueOf(cliTokTrgBehavior);
+                m_targetTokenizerBehaviorField.setEnabled(false);
+                m_targetTokenizerBehaviorField.addItem(cliTokTrgVersion);
+                m_targetTokenizerBehaviorField.setSelectedItem(cliTokTrgBehavior);
+            } catch (IllegalArgumentException ex) {
+                Log.log(ex);
+            }
         }
 
         m_targetTokenizerField.addActionListener(new ActionListener() {
@@ -447,8 +469,8 @@ public class ProjectPropertiesDialog extends JDialog {
                     m_targetTokenizerBehaviorField.setRenderer(
                             new TokenizerBehaviorComboBoxRenderer(newTok.getSupportedBehaviors(),
                                     newTok.getDefaultBehavior()));
-                    m_targetTokenizerBehaviorField.setModel(new DefaultComboBoxModel(
-                            newTok.getSupportedBehaviors().keySet().toArray()));
+                    m_targetTokenizerBehaviorField.setModel(new DefaultComboBoxModel<Version>(
+                            newTok.getSupportedBehaviors().keySet().toArray(new Version[0])));
                     if (m_targetTokenizerBehaviorField.getModel().getSize() > 0) {
                         m_targetTokenizerBehaviorField.setEnabled(true);
                         m_targetTokenizerBehaviorField.setSelectedItem(newTok.getBehavior());
@@ -547,7 +569,7 @@ public class ProjectPropertiesDialog extends JDialog {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         optionsBox.add(m_externalCommandScrollPane, gbc);
         final JLabel m_variablesLabel = new javax.swing.JLabel();
-        final JComboBox m_variablesList = new javax.swing.JComboBox(CommandVarExpansion.COMMAND_VARIABLES);
+        final JComboBox<String> m_variablesList = new JComboBox<>(CommandVarExpansion.COMMAND_VARIABLES);
         final JButton m_insertButton = new javax.swing.JButton();
         // Add variable insertion controls only if project external commands are enabled.
         if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
@@ -561,7 +583,7 @@ public class ProjectPropertiesDialog extends JDialog {
             m_insertButton.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    insertButtonActionPerformed(m_externalCommandTextArea, m_variablesList);
+                    m_externalCommandTextArea.replaceSelection(m_variablesList.getSelectedItem().toString());
                 }
             });
             gbc.gridx = 0;
@@ -1082,9 +1104,9 @@ public class ProjectPropertiesDialog extends JDialog {
         }
     }
 
-    private void doOK(JComboBox m_sourceLocaleField, JComboBox m_targetLocaleField,
-            JComboBox m_sourceTokenizerField, JComboBox m_targetTokenizerField,
-            JComboBox m_sourceTokenizerBehaviorField, JComboBox m_targetTokenizerBehaviorField,
+    private void doOK(JComboBox<Language> m_sourceLocaleField, JComboBox<Language> m_targetLocaleField,
+            JComboBox<Class<?>> m_sourceTokenizerField, JComboBox<Class<?>> m_targetTokenizerField,
+            JComboBox<Version> m_sourceTokenizerBehaviorField, JComboBox<Version> m_targetTokenizerBehaviorField,
             JCheckBox m_sentenceSegmentingCheckBox, JTextField m_srcRootField, JTextField m_locRootField,
             JTextField m_glosRootField, JTextField m_writeableGlosField, JTextField m_tmRootField, JTextField m_dictRootField,
             JCheckBox m_allowDefaultsCheckBox, JCheckBox m_removeTagsCheckBox, JTextArea m_customCommandTextArea) {
@@ -1227,10 +1249,6 @@ public class ProjectPropertiesDialog extends JDialog {
 
         m_dialogCancelled = true;
         setVisible(false);
-    }
-    
-    private void insertButtonActionPerformed(JTextArea area, JComboBox box) {
-        area.replaceSelection(box.getSelectedItem().toString());
     }
 
     private void updateUIText(JTextArea m_messageArea) {

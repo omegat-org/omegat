@@ -34,10 +34,10 @@ import org.omegat.util.Language;
  * @author Maxym Mykhalchuk
  * @author Aaron Madlon-Kay
  */
-public class LanguageComboBoxRenderer extends DelegatingComboBoxRenderer<Language> {    
+public class LanguageComboBoxRenderer extends DelegatingComboBoxRenderer<Language, String> {
     
     @Override
-    protected Object getDisplayText(Language value) {
+    protected String getDisplayText(Language value) {
     	return value + " - " + value.getDisplayName();
     }
 }

@@ -115,12 +115,12 @@ public class SearchWindowController {
 
         m_dateFormat = new SimpleDateFormat(SAVED_DATE_FORMAT);
         
-        form.m_searchField.setModel(new DefaultComboBoxModel(HistoryManager.getSearchItems()));
+        form.m_searchField.setModel(new DefaultComboBoxModel<>(HistoryManager.getSearchItems()));
         if (form.m_searchField.getModel().getSize() > 0) {
             form.m_searchField.setSelectedIndex(-1);
         }
         
-        form.m_replaceField.setModel(new DefaultComboBoxModel(HistoryManager.getReplaceItems()));
+        form.m_replaceField.setModel(new DefaultComboBoxModel<>(HistoryManager.getReplaceItems()));
         if (form.m_replaceField.getModel().getSize() > 0) {
             form.m_replaceField.setSelectedIndex(-1);
         }
@@ -385,7 +385,7 @@ public class SearchWindowController {
         });
     }
     
-    private void configureHistoryComboBox(final JComboBox box) {
+    private void configureHistoryComboBox(final JComboBox<String> box) {
         final JTextField field = (JTextField) box.getEditor().getEditorComponent();
         InputMap map = field.getInputMap();
         
@@ -742,7 +742,7 @@ public class SearchWindowController {
         String replaceString = form.m_replaceField.getEditor().getItem().toString();
         replaceString = StringUtil.normalizeUnicode(replaceString);
         HistoryManager.addReplaceItem(replaceString);
-        form.m_replaceField.setModel(new DefaultComboBoxModel(HistoryManager.getReplaceItems()));
+        form.m_replaceField.setModel(new DefaultComboBoxModel<>(HistoryManager.getReplaceItems()));
         
         EntryListPane viewer = (EntryListPane) form.m_viewer;
         Core.getEditor().commitAndLeave(); // Otherwise, the current segment being edited is lost
@@ -755,7 +755,7 @@ public class SearchWindowController {
         String replaceString = form.m_replaceField.getEditor().getItem().toString();
         replaceString = StringUtil.normalizeUnicode(replaceString);
         HistoryManager.addReplaceItem(replaceString);
-        form.m_replaceField.setModel(new DefaultComboBoxModel(HistoryManager.getReplaceItems()));
+        form.m_replaceField.setModel(new DefaultComboBoxModel<>(HistoryManager.getReplaceItems()));
         
         EntryListPane viewer = (EntryListPane) form.m_viewer;
         Core.getEditor().commitAndDeactivate(); // Otherwise, the current segment being edited is lost
@@ -784,7 +784,7 @@ public class SearchWindowController {
         queryString = StringUtil.normalizeUnicode(queryString);
         
         HistoryManager.addSearchItem(queryString);
-        form.m_searchField.setModel(new DefaultComboBoxModel(HistoryManager.getSearchItems()));
+        form.m_searchField.setModel(new DefaultComboBoxModel<>(HistoryManager.getSearchItems()));
         form.m_searchField.requestFocus();
 
         viewer.reset();

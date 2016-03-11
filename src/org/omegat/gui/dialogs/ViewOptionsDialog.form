@@ -116,11 +116,12 @@
     <Component class="javax.swing.JComboBox" name="variablesList">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new DefaultComboBoxModel(org.omegat.gui.editor.ModificationInfoManager.MOD_INFO_VARIABLES)" type="code"/>
+          <Connection code="new DefaultComboBoxModel&lt;&gt;(ModificationInfoManager.MOD_INFO_VARIABLES)" type="code"/>
         </Property>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="ViewOptionsDialog_variablesList"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -177,11 +178,12 @@
     <Component class="javax.swing.JComboBox" name="variablesListND">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new DefaultComboBoxModel(org.omegat.gui.editor.ModificationInfoManager.MOD_INFO_VARIABLES_NO_DATE)" type="code"/>
+          <Connection code="new DefaultComboBoxModel&lt;&gt;(ModificationInfoManager.MOD_INFO_VARIABLES_NO_DATE)" type="code"/>
         </Property>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="ViewOptionsDialog_variablesListND"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">

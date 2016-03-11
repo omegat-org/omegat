@@ -34,10 +34,8 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JScrollBar;
-import javax.swing.ListModel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
@@ -54,9 +52,7 @@ import org.omegat.util.Token;
  */
 public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     
-    private static JList list;
-
-    ListModel listModel = new DefaultListModel();
+    private static JList<AutoCompleterItem> list;
     
     private static AutoCompleterItem NO_SUGGESTIONS = new AutoCompleterItem(
             OStrings.getString("AC_NO_SUGGESTIONS"), null, 0);
@@ -66,9 +62,9 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
         getList().setFocusable(false);
     }
     
-    public JList getList() {
+    public JList<AutoCompleterItem> getList() {
         if (list == null) {
-            list = new JList();
+            list = new JList<>();
             list.setCellRenderer(new CellRenderer());
             list.addMouseListener(mouseAdapter);
         }
@@ -178,7 +174,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     };
     
     protected void setData(List<AutoCompleterItem> entryList) {
-        getList().setListData(entryList.toArray());
+        getList().setListData(entryList.toArray(new AutoCompleterItem[entryList.size()]));
         if (!entryList.isEmpty()) {
             getList().setSelectedIndex(0);
             getList().invalidate();
@@ -248,7 +244,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     private class CellRenderer extends DefaultListCellRenderer {
         
         @Override
-        public Component getListCellRendererComponent(JList list, Object value,
+        public Component getListCellRendererComponent(JList<?> list, Object value,
                 int index, boolean isSelected, boolean cellHasFocus) {
             setBorder(LIST_MARGIN_BORDER);
             if (value == NO_SUGGESTIONS) {

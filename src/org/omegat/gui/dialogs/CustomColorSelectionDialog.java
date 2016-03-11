@@ -91,7 +91,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         DockingUI.displayCentered(this);
         colorStylesList.setCellRenderer(new DefaultListCellRenderer() {
             @Override
-            public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
                     boolean cellHasFocus) {
                 return super.getListCellRendererComponent(list, ((EditorColor) value).getDisplayName(), index,
                         isSelected, cellHasFocus);
@@ -135,7 +135,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         colorStylesLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        colorStylesList = new javax.swing.JList(Styles.EditorColor.values());
+        colorStylesList = new JList<>(Styles.EditorColor.values());
         colorChooser = new javax.swing.JColorChooser();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -253,7 +253,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
             return;
         }
 
-        ListModel model = colorStylesList.getModel();
+        ListModel<EditorColor> model = colorStylesList.getModel();
         for (int i = 0; i < model.getSize(); i++) {
             EditorColor style = (EditorColor) model.getElementAt(i);
             temporaryPreferences.put(style, style.getDefault());
@@ -339,7 +339,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
     private javax.swing.JButton cancelButton;
     private javax.swing.JColorChooser colorChooser;
     private javax.swing.JLabel colorStylesLabel;
-    private javax.swing.JList colorStylesList;
+    private javax.swing.JList<EditorColor> colorStylesList;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

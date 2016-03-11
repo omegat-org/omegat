@@ -79,7 +79,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
     /**
      * the language list model
      */
-    private final DefaultListModel languageListModel;
+    private final DefaultListModel<String> languageListModel;
 
     public int getReturnStatus() {
         return returnStatus;
@@ -104,7 +104,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
 
         currentLanguage = current;
 
-        languageListModel = new DefaultListModel();
+        languageListModel = new DefaultListModel<>();
 
         // initialize things from the preferences
         autoSpellcheckCheckBox.setSelected(Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING));
@@ -240,7 +240,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         contentLabel = new javax.swing.JLabel();
         languageScrollPane = new javax.swing.JScrollPane();
-        languageList = new javax.swing.JList();
+        languageList = new javax.swing.JList<String>();
         jPanel4 = new javax.swing.JPanel();
         uninstallButton = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -381,8 +381,8 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void languageListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_languageListValueChanged
-        Object[] selection = languageList.getSelectedValues();
-        uninstallButton.setEnabled(selection.length > 0 && autoSpellcheckCheckBox.isSelected());
+        List<String> selection = languageList.getSelectedValuesList();
+        uninstallButton.setEnabled(!selection.isEmpty() && autoSpellcheckCheckBox.isSelected());
     }//GEN-LAST:event_languageListValueChanged
 
     private void directoryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_directoryTextFieldActionPerformed
@@ -504,7 +504,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JList languageList;
+    private javax.swing.JList<String> languageList;
     private javax.swing.JScrollPane languageScrollPane;
     private javax.swing.JButton okButton;
     private javax.swing.JButton uninstallButton;

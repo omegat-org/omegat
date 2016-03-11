@@ -67,6 +67,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="sortMatchesList">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;SORT_KEY&gt;"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -191,11 +194,12 @@
             <Component class="javax.swing.JComboBox" name="variablesList">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new DefaultComboBoxModel(org.omegat.gui.matches.MatchesVarExpansion.MATCHES_VARIABLES)" type="code"/>
+                  <Connection code="new DefaultComboBoxModel&lt;&gt;(MatchesVarExpansion.MATCHES_VARIABLES)" type="code"/>
                 </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="ExternalTMXMatchesDialog_variablesList"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

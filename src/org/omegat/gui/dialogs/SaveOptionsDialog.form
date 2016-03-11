@@ -257,9 +257,12 @@
                 <Component class="javax.swing.JComboBox" name="variablesList">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="new DefaultComboBoxModel(org.omegat.core.data.CommandVarExpansion.COMMAND_VARIABLES)" type="code"/>
+                      <Connection code="new DefaultComboBoxModel&lt;&gt;(org.omegat.core.data.CommandVarExpansion.COMMAND_VARIABLES)" type="code"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
                       <BorderConstraints direction="Center"/>

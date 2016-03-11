@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2014 Aaron Madlon-Kay
+ Copyright (C) 2014, 2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -37,22 +37,15 @@ import javax.swing.ListCellRenderer;
  * 
  * @author Aaron Madlon-Kay
  */
-abstract public class DelegatingComboBoxRenderer<T> implements ListCellRenderer {
+abstract public class DelegatingComboBoxRenderer<T, U> implements ListCellRenderer<T> {
 
-    private final ListCellRenderer original = new JComboBox().getRenderer();
+    private final ListCellRenderer<Object> original = new JComboBox<Object>().getRenderer();
     
-    @SuppressWarnings("unchecked")
-	@Override
-    public Component getListCellRendererComponent(JList list, Object value, // value
-                                                                            // to
-                                                                            // display
-            int index, // cell index
-            boolean isSelected, // is the cell selected
-            boolean cellHasFocus) // the list and the cell have the focus
-    {
-        return original.getListCellRendererComponent(list, getDisplayText((T)value),
-        		index, isSelected, cellHasFocus);
+    @Override
+    public Component getListCellRendererComponent(JList<? extends T> list, T value, int index, boolean isSelected,
+            boolean cellHasFocus) {
+        return original.getListCellRendererComponent(list, getDisplayText(value), index, isSelected, cellHasFocus);
     }
-    
-    protected abstract Object getDisplayText(T value);
+
+    protected abstract U getDisplayText(T value);
 }

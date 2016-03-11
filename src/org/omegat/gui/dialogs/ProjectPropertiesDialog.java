@@ -33,6 +33,9 @@ package org.omegat.gui.dialogs;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.Label;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -53,6 +56,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -88,6 +92,7 @@ import org.omegat.util.gui.TokenizerComboBoxRenderer;
 import org.openide.awt.Mnemonics;
 
 import gen.core.filters.Filters;
+import gen.core.project.RepositoryDefinition;
 
 /**
  * The dialog for customizing the OmegaT project (where project properties are
@@ -465,66 +470,75 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // options
         centerBox.add(Box.createVerticalStrut(5));
-        Box optionsBox = Box.createVerticalBox();
+        JPanel optionsBox = new JPanel(new GridBagLayout());
         optionsBox.setBorder(new EtchedBorder());
-        optionsBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), OStrings.getString("PP_OPTIONS") ));
-        
+        optionsBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+                OStrings.getString("PP_OPTIONS")));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(3, 3, 3, 3);
+
         // sentence-segmenting
         final JCheckBox m_sentenceSegmentingCheckBox = new JCheckBox();
         Mnemonics
                 .setLocalizedText(m_sentenceSegmentingCheckBox, OStrings.getString("PP_SENTENCE_SEGMENTING"));
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.WEST;
+        optionsBox.add(m_sentenceSegmentingCheckBox, gbc);
 
         JButton m_sentenceSegmentingButton = new JButton();
         Mnemonics.setLocalizedText(m_sentenceSegmentingButton, OStrings.getString("MW_OPTIONSMENU_SENTSEG"));
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.EAST;
+        optionsBox.add(m_sentenceSegmentingButton, gbc);
 
-        Box bSent = Box.createHorizontalBox();
-        bSent.add(m_sentenceSegmentingCheckBox);
-        bSent.add(Box.createHorizontalGlue());
-        bSent.add(m_sentenceSegmentingButton);
-        optionsBox.add(bSent);
-        
-        //File Filters
+        // File Filters
         JButton m_fileFiltersButton = new JButton();
         Mnemonics.setLocalizedText(m_fileFiltersButton, OStrings.getString("WM_PROJECTMENU_FILEFILTERS"));
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        optionsBox.add(m_fileFiltersButton, gbc);
 
-        Box bFF = Box.createHorizontalBox();
-        bFF.add(Box.createHorizontalGlue());
-        bFF.add(m_fileFiltersButton);
-        optionsBox.add(bFF);
+        // Repositories mapping
+        JButton m_RepositoriesButton = new JButton();
+        Mnemonics.setLocalizedText(m_RepositoriesButton, OStrings.getString("PP_REPOSITORIES"));
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.EAST;
+        optionsBox.add(m_RepositoriesButton, gbc);
 
-        //multiple translations
+        // multiple translations
         final JCheckBox m_allowDefaultsCheckBox = new JCheckBox();
         Mnemonics.setLocalizedText(m_allowDefaultsCheckBox, OStrings.getString("PP_ALLOW_DEFAULTS"));
-        Box bMT = Box.createHorizontalBox();
-        bMT.setBorder(emptyBorder);
-        bMT.add(m_allowDefaultsCheckBox);
-        bMT.add(Box.createHorizontalGlue());
-        optionsBox.add(bMT);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.WEST;
+        optionsBox.add(m_allowDefaultsCheckBox, gbc);
 
-        //Remove Tags
+        // Remove Tags
         final JCheckBox m_removeTagsCheckBox = new JCheckBox();
         Mnemonics.setLocalizedText(m_removeTagsCheckBox, OStrings.getString("PP_REMOVE_TAGS"));
-        Box bRT = Box.createHorizontalBox();
-        bRT.setBorder(emptyBorder);
-        bRT.add(m_removeTagsCheckBox);
-        bRT.add(Box.createHorizontalGlue());
-        optionsBox.add(bRT);
-        
-        //Post-processing
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.WEST;
+        optionsBox.add(m_removeTagsCheckBox, gbc);
+
+        // Post-processing
         JLabel m_externalCommandLabel = new JLabel();
-        Box bEC = Box.createHorizontalBox();
-        bEC.setBorder(emptyBorder);
-        bEC.add(m_externalCommandLabel);
-        bEC.add(Box.createHorizontalGlue());
-        optionsBox.add(bEC);
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.anchor = GridBagConstraints.WEST;
+        optionsBox.add(m_externalCommandLabel, gbc);
         final JTextArea m_externalCommandTextArea = new JTextArea();
         m_externalCommandTextArea.setRows(2);
         m_externalCommandTextArea.setLineWrap(true);
         m_externalCommandTextArea.setText(projectProperties.getExternalCommand());
         if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
-        	Mnemonics.setLocalizedText(m_externalCommandLabel, OStrings.getString("PP_EXTERNAL_COMMAND"));
+            Mnemonics.setLocalizedText(m_externalCommandLabel, OStrings.getString("PP_EXTERNAL_COMMAND"));
         } else {
-        	Mnemonics.setLocalizedText(m_externalCommandLabel, OStrings.getString("PP_EXTERN_CMD_DISABLED"));
+            Mnemonics.setLocalizedText(m_externalCommandLabel, OStrings.getString("PP_EXTERN_CMD_DISABLED"));
             m_externalCommandTextArea.setEditable(false);
             m_externalCommandTextArea.setToolTipText(OStrings.getString("PP_EXTERN_CMD_DISABLED_TOOLTIP"));
             m_externalCommandLabel.setToolTipText(OStrings.getString("PP_EXTERN_CMD_DISABLED_TOOLTIP"));
@@ -532,17 +546,24 @@ public class ProjectPropertiesDialog extends JDialog {
         }
         final JScrollPane m_externalCommandScrollPane = new JScrollPane();
         m_externalCommandScrollPane.setViewportView(m_externalCommandTextArea);
-        optionsBox.add(m_externalCommandScrollPane);
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.weightx = 1;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        optionsBox.add(m_externalCommandScrollPane, gbc);
         final JLabel m_variablesLabel = new javax.swing.JLabel();
         final JComboBox m_variablesList = new javax.swing.JComboBox(CommandVarExpansion.COMMAND_VARIABLES);
         final JButton m_insertButton = new javax.swing.JButton();
         // Add variable insertion controls only if project external commands are enabled.
         if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
-            Box bIC = Box.createHorizontalBox();
-            bIC.setBorder(emptyBorder);
-            Mnemonics.setLocalizedText(m_variablesLabel, OStrings.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES"));
-            bIC.add(m_variablesLabel);
-            bIC.add(m_variablesList);
+            Mnemonics.setLocalizedText(m_variablesLabel,
+                    OStrings.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES"));
+            gbc.gridx = 0;
+            gbc.gridy = 5;
+            gbc.anchor = GridBagConstraints.WEST;
+            optionsBox.add(m_variablesLabel, gbc);
             Mnemonics.setLocalizedText(m_insertButton, OStrings.getString("BUTTON_INSERT"));
             m_insertButton.addActionListener(new java.awt.event.ActionListener() {
                 @Override
@@ -550,9 +571,13 @@ public class ProjectPropertiesDialog extends JDialog {
                     insertButtonActionPerformed(m_externalCommandTextArea, m_variablesList);
                 }
             });
-            bIC.add(m_insertButton);
-            bIC.add(Box.createHorizontalGlue());
-            optionsBox.add(bIC);
+            gbc.gridx = 0;
+            gbc.gridy = 6;
+            gbc.weightx = 1;
+            gbc.gridwidth = 2;
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            optionsBox.add(m_insertButton, gbc);
         }
 
         centerBox.add(optionsBox, BorderLayout.WEST);
@@ -772,6 +797,18 @@ public class ProjectPropertiesDialog extends JDialog {
                 if (dlg.getReturnStatus() == FiltersCustomizer.RET_OK) {
                     // saving config
                     filters = dlg.result;
+                }
+            }
+        });
+
+        m_RepositoriesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame mainWindow = Core.getMainWindow().getApplicationFrame();
+                List<RepositoryDefinition> r = new RepositoriesMappingController().show(mainWindow,
+                        projectProperties.getRepositories());
+                if (r != null) {
+                    projectProperties.setRepositories(r);
                 }
             }
         });

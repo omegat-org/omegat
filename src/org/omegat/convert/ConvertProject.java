@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2014 Alex Buloichik
+ Copyright (C) 2016 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -34,6 +34,6 @@ import java.io.File;
  */
 public class ConvertProject {
     public static void convert(File projectRootFolder) throws Exception {
-        ConvertProject26to36team.checkTeam(projectRootFolder);
+        ConvertProject26to37team.checkTeam(projectRootFolder);
     }
 }

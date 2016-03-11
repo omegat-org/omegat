@@ -62,19 +62,19 @@ import gen.core.project.RepositoryMapping;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class ConvertProject26to36team {
+public class ConvertProject26to37team {
     public static void checkTeam(File projectRootFolder) throws Exception {
         if (isSVNDirectory(projectRootFolder) || isGITDirectory(projectRootFolder)) {
             // project is 2.6-style team project
             if (isConsoleMode()) {
-                Core.getMainWindow().displayWarningRB("TEAM_26_TO_36_CONSOLE");
+                Core.getMainWindow().displayWarningRB("TEAM_26_TO_37_CONSOLE");
                 return;
             }
 
             // ask for convert
             int res = JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
-                    OStrings.getString("TEAM_26_to_36_CONFIRM_MESSAGE"),
-                    OStrings.getString("TEAM_26_to_36_CONFIRM_TITLE"), JOptionPane.OK_CANCEL_OPTION);
+                    OStrings.getString("TEAM_26_to_37_CONFIRM_MESSAGE"),
+                    OStrings.getString("TEAM_26_to_37_CONFIRM_TITLE"), JOptionPane.OK_CANCEL_OPTION);
             if (res != JOptionPane.OK_OPTION) {
                 return;
             }
@@ -82,8 +82,8 @@ public class ConvertProject26to36team {
             // convert
             convert(projectRootFolder);
             JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
-                    OStrings.getString("TEAM_26_to_36_CONVERTED_MESSAGE"),
-                    OStrings.getString("TEAM_26_to_36_CONFIRM_TITLE"), JOptionPane.INFORMATION_MESSAGE);
+                    OStrings.getString("TEAM_26_to_37_CONVERTED_MESSAGE"),
+                    OStrings.getString("TEAM_26_to_37_CONFIRM_TITLE"), JOptionPane.INFORMATION_MESSAGE);
         }
     }
 

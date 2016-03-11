@@ -46,7 +46,7 @@ org.eclipse.jgit-4.1.1.201511131810-r.jar is distributed under the
 Eclipse Distribution License (EDL) v 1.0 
 (required for GITRemoteRepository.java)
 
-jsch-0.1.49.jar is distributed under the JSch License
+jsch-0.1.52.jar is distributed under the JSch License
 (required for GITRemoteRepository.java)
 
 Base64 is public domain and is included in OmegaT sources

@@ -43,7 +43,7 @@
 				<jar href="sqljet-1.1.10.jar" />
 				<jar href="org.eclipse.jgit-3.7.1.201504261725-r.jar" />
 				<jar href="sequence-library-1.0.3.jar" />
-				<jar href="jsch-0.1.49.jar" />
+				<jar href="jsch-0.1.52.jar" />
 				<jar href="lucene-analyzers-3.6.2.jar" />
 				<jar href="lucene-core-3.6.2.jar" />
 				<jar href="lucene-kuromoji-3.6.2.jar" />

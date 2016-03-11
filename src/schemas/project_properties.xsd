@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by Alexander Buloichik (EPAM Systems) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:element name="omegat">
 		<xs:annotation>
-			<xs:documentation>Comment describing your root element</xs:documentation>
+			<xs:documentation>omegat.project definition</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
@@ -29,7 +28,14 @@
 				<xs:element name="support_default_translations" type="xs:boolean" minOccurs="0"/>
 				<xs:element name="remove_tags" type="xs:boolean" minOccurs="0"/>
 				<xs:element name="external_command" type="xs:string" minOccurs="0"/>
-			</xs:all>
+                <xs:element name="repositories" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="repository" minOccurs="0" maxOccurs="unbounded" type="RepositoryDefinition" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:all>
 			<xs:attribute name="version" type="xs:string" use="required"/>
 		</xs:complexType>
 	</xs:element>
@@ -39,4 +45,23 @@
 				maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
+    <xs:complexType name="RepositoryDefinition">
+        <xs:sequence>
+            <xs:element name="mapping" minOccurs="0" maxOccurs="unbounded" type="RepositoryMapping" />
+        </xs:sequence>
+        <xs:attribute name="type" type="xs:string" use="required" />
+        <xs:attribute name="url" type="xs:string" use="required" />
+    </xs:complexType>
+    <xs:complexType name="RepositoryMapping">
+        <xs:annotation>
+            <xs:documentation>Directory mapping to repository. Local and Repository attributes can be directory and files. In
+                case of directory it should be ended by '/'</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="excludes" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+            <xs:element name="includes" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+        </xs:sequence>
+        <xs:attribute name="local" type="xs:string" use="required" />
+        <xs:attribute name="repository" type="xs:string" use="required" />
+    </xs:complexType>
 </xs:schema>

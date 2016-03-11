@@ -34,6 +34,7 @@ package org.omegat.util;
 import gen.core.project.Masks;
 import gen.core.project.Omegat;
 import gen.core.project.Project;
+import gen.core.project.Project.Repositories;
 
 import java.io.File;
 import java.io.IOException;
@@ -85,8 +86,10 @@ public class ProjectFileStorage {
         // if folder is in default locations, name stored as __DEFAULT__
         String m_root = inFile.getParentFile().getAbsolutePath() + File.separator;
 
+        result.setTargetRootRelative(computeRelative(om.getProject().getTargetDir(), OConsts.DEFAULT_TARGET));
         result.setTargetRoot(computeAbsolutePath(m_root, om.getProject().getTargetDir(),
                 OConsts.DEFAULT_TARGET));
+        result.setSourceRootRelative(computeRelative(om.getProject().getSourceDir(), OConsts.DEFAULT_SOURCE));
         result.setSourceRoot(computeAbsolutePath(m_root, om.getProject().getSourceDir(),
                 OConsts.DEFAULT_SOURCE));
         result.getSourceRootExcludes().clear();
@@ -99,6 +102,8 @@ public class ProjectFileStorage {
         result.setTMRoot(computeAbsolutePath(m_root, om.getProject().getTmDir(), OConsts.DEFAULT_TM));
         result.setGlossaryRoot(computeAbsolutePath(m_root, om.getProject().getGlossaryDir(),
                 OConsts.DEFAULT_GLOSSARY));
+        result.setGlossaryRootRelative(computeRelative(om.getProject().getGlossaryDir(),
+                OConsts.DEFAULT_GLOSSARY));
 
         // Compute glossary file location
         String glossaryFile = om.getProject().getGlossaryFile();
@@ -107,14 +112,15 @@ public class ProjectFileStorage {
         }
         if (glossaryFile.equalsIgnoreCase(OConsts.DEFAULT_FOLDER_MARKER)) {
             glossaryFile = result.computeDefaultWriteableGlossaryFile();
-        } else if (! new File(glossaryFile).isAbsolute()) {
-            String absGlossaryRoot = computeAbsolutePath(m_root, result.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY);
-            glossaryFile = new File(absGlossaryRoot, glossaryFile).getPath();
+        } else {
+            result.setWriteableGlossary(glossaryFile);
+            glossaryFile = glossaryDir + new File(glossaryFile).getName();
         }
-        result.setWriteableGlossary(glossaryFile);
+        result.setWriteableGlossaryFileRelative(computeRelative(glossaryDir, OConsts.DEFAULT_GLOSSARY));
 
         result.setDictRoot(computeAbsolutePath(m_root, om.getProject().getDictionaryDir(),
                 OConsts.DEFAULT_DICT));
+        result.setDictRootRelative(computeRelative(om.getProject().getDictionaryDir(), OConsts.DEFAULT_DICT));
 
         result.setSourceLanguage(om.getProject().getSourceLang());
         result.setTargetLanguage(om.getProject().getTargetLang());
@@ -133,6 +139,10 @@ public class ProjectFileStorage {
         }
         if (om.getProject().getExternalCommand() != null) {
             result.setExternalCommand(om.getProject().getExternalCommand());
+        }
+
+        if (om.getProject().getRepositories() != null) {
+            result.setRepositories(om.getProject().getRepositories().getRepository());
         }
 
         return result;
@@ -179,12 +189,40 @@ public class ProjectFileStorage {
         om.getProject().setRemoveTags(props.isRemoveTags());
         om.getProject().setExternalCommand(props.getExternalCommand());
 
+        if (props.getRepositories() != null && !props.getRepositories().isEmpty()) {
+            om.getProject().setRepositories(new Repositories());
+            om.getProject().getRepositories().getRepository().addAll(props.getRepositories());
+        }
+
         Marshaller m = CONTEXT.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         m.marshal(om, outFile);
 
         SRX.saveTo(props.getProjectSRX(), new File(props.getProjectInternal(), SRX.CONF_SENTSEG));
         FilterMaster.saveConfig(props.getProjectFilters(), props.getProjectInternal());
+    }
+
+    private static String computeRelative(String relativePath, String defaultName) {
+        if (OConsts.DEFAULT_FOLDER_MARKER.equals(relativePath)) {
+            return asDirectory(defaultName);
+        } else {
+            return asDirectory(relativePath);
+        }
+    }
+
+    /**
+     * Constructs directory name like 'some/dir/'.
+     */
+    private static String asDirectory(String path) {
+        String r = path.replace(File.separatorChar, '/');
+        r = r.replaceAll("//+", "/");
+        if (r.startsWith("/")) {
+            r = r.substring(1);
+        }
+        if (!r.endsWith("")) {
+            r += "/";
+        }
+        return r;
     }
 
     /**

@@ -478,32 +478,38 @@ Custom strings from release\win32-specific must be added manually to the languag
 
     <target name="gen">
         <exec executable="xjc">
+            <arg line="-no-header"/>
             <arg line="-d src"/>
             <arg line="-p gen.core.segmentation"/>
             <arg value="src/schemas/srx20.xsd"/>
         </exec>
         <exec executable="xjc">
+            <arg line="-no-header"/>
             <arg line="-d src"/>
             <arg line="-p gen.core.filters"/>
             <arg value="src/schemas/filters.xsd"/>
         </exec>
         <exec executable="xjc">
+            <arg line="-no-header"/>
             <arg line="-d src"/>
             <arg line="-p gen.core.tbx"/>
             <arg value="src/schemas/tbx.xsd"/>
         </exec>
         <exec executable="xjc">
+            <arg line="-no-header"/>
             <arg line="-d src"/>
             <arg line="-p gen.core.project"/>
             <arg value="src/schemas/project_properties.xsd"/>
         </exec>
         <exec executable="xjc">
+            <arg line="-no-header"/>
             <arg line="-d src"/>
             <arg line="-p gen.core.tmx14"/>
             <arg line="-b src/schemas/tmx14.xjb"/>
             <arg value="src/schemas/tmx14.xsd"/>
         </exec>
         <exec executable="xjc">
+            <arg line="-no-header"/>
             <arg line="-d src"/>
             <arg line="-p gen.taas"/>
             <arg line="-b src/schemas/taas.xjb"/>

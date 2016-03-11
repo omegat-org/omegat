@@ -379,9 +379,11 @@ public class ProjectTMX {
 
         boolean existSourceInProject(String src);
     }
-    
+
     public void replaceContent(ProjectTMX tmx) {
-        defaults = tmx.defaults;
-        alternatives = tmx.alternatives;
+        synchronized (this) {
+            defaults = tmx.defaults;
+            alternatives = tmx.alternatives;
+        }
     }
 }

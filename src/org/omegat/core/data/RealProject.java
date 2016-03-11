@@ -58,8 +58,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.SwingUtilities;
-
 import org.apache.lucene.util.Version;
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
@@ -74,7 +72,8 @@ import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.core.team.IRemoteRepository;
-import org.omegat.core.team.RepositoryUtils;
+import org.omegat.core.team2.RebaseAndCommit;
+import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.threads.CommandMonitor;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IAlignCallback;
@@ -124,8 +123,8 @@ public class RealProject implements IProject {
     private static final Logger LOGGER = Logger.getLogger(RealProject.class.getName());
 
     protected final ProjectProperties m_config;
-    
-    private final IRemoteRepository repository;
+    protected final RemoteRepositoryProvider remoteRepositoryProvider;
+
     private boolean isOnlineMode;
 
     private RandomAccessFile raFile;
@@ -213,7 +212,16 @@ public class RealProject implements IProject {
         EMPTY_TRANSLATION = new TMXEntry(empty, true, null);
 
         m_config = props;
-        this.repository = repository;
+        if (m_config.getRepositories() != null) {
+            try {
+                remoteRepositoryProvider = new RemoteRepositoryProvider(m_config);
+            } catch (Exception ex) {
+                // TODO
+                throw new RuntimeException(ex);
+            }
+        } else {
+            remoteRepositoryProvider = null;
+        }
 
         sourceTokenizer = createTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_SOURCE), props.getSourceTokenizer());
         configTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_BEHAVIOR_SOURCE), sourceTokenizer);
@@ -224,7 +232,7 @@ public class RealProject implements IProject {
     }
     
     public IRemoteRepository getRepository() {
-        return repository;
+        return null;
     }
 
     public void saveProjectProperties() throws Exception {
@@ -311,6 +319,21 @@ public class RealProject implements IProject {
             }
 
             Core.getMainWindow().showStatusMessageRB("CT_LOADING_PROJECT");
+
+            if (remoteRepositoryProvider != null) {
+                // copy files from repository to project
+                remoteRepositoryProvider.switchAllToLatest();
+                for (String dir : new String[] { m_config.getSourceRootRelative(),
+                        m_config.getGlossaryRootRelative(), m_config.getDictRootRelative() }) {
+                    if (dir.startsWith("/") || dir.contains("..")) {
+                        continue;
+                    }
+                    if (!dir.endsWith("/")) {
+                        dir += "/";
+                    }
+                    remoteRepositoryProvider.copyFilesFromRepoToProject(dir);
+                }//TODO update project_save.tmx
+            }
 
             // set project specific file filters if they exist
             Filters filterMasterConfig = FilterMaster.loadConfig(m_config.getProjectInternal());
@@ -444,11 +467,6 @@ public class RealProject implements IProject {
         if (!RuntimePreferences.isProjectLockingEnabled()) {
             return true;
         }
-        if (repository != null) {
-            if (!repository.isFilesLockingAllowed()) {
-                return true;
-            }
-        }
         try {
             File lockFile = new File(m_config.getProjectRoot(), OConsts.FILE_PROJECT);
             raFile = new RandomAccessFile(lockFile, "rw");
@@ -475,11 +493,6 @@ public class RealProject implements IProject {
     protected void unlockProject() {
         if (!RuntimePreferences.isProjectLockingEnabled()) {
             return;
-        }
-        if (repository != null) {
-            if (!repository.isFilesLockingAllowed()) {
-                return;
-            }
         }
         try {
             if (lock != null) {
@@ -594,6 +607,20 @@ public class RealProject implements IProject {
                 numberOfCompiled++;
             }
         }
+        if (remoteRepositoryProvider != null) {
+            // commit translations
+            try {
+                remoteRepositoryProvider.switchAllToLatest();
+                remoteRepositoryProvider.copyFilesFromProjectToRepo(m_config.getTargetRootRelative() + '/');
+                remoteRepositoryProvider.commitFiles(m_config.getTargetRootRelative() + '/', "Project translation");
+            } catch (Exception e) {
+                Log.logErrorRB("CT_ERROR_CREATING_TARGET_DIR");// TODO: change to better error
+                Log.log(e);
+                throw new IOException(OStrings.getString("CT_ERROR_CREATING_TARGET_DIR") + "\n"
+                        + e.getMessage());
+            }
+        }
+
         if (numberOfCompiled == 1) {
             Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX_SINGULAR");
         } else {
@@ -685,16 +712,14 @@ public class RealProject implements IProject {
             try {
                 Preferences.save();
 
-                String s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
-
                 try {
                     saveProjectProperties();
 
-                    projectTMX.save(m_config, s, isProjectModified());
+                    projectTMX.save(m_config, m_config.getProjectInternal() + OConsts.STATUS_EXTENSION, isProjectModified());
 
-                    if (repository != null && doTeamSync) {
+                    if (remoteRepositoryProvider != null && doTeamSync) {
                         Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
-                        rebaseProject();
+                        rebaseAndCommitProject();
                     }
 
                     setProjectModified(false);
@@ -759,257 +784,105 @@ public class RealProject implements IProject {
      *
      * 4. Upload new revision into repository.
      */
-    private void rebaseProject() throws Exception {
-        File filenameTMXwithLocalChangesOnBase, filenameTMXwithLocalChangesOnHead;
-        ProjectTMX baseTMX, headTMX;
-
-        File filenameGlossarywithLocalChangesOnBase, filenameGlossarywithLocalChangesOnHead;
-        List<GlossaryEntry> glossaryEntries = null;
-        List<GlossaryEntry> baseGlossaryEntries = null;
-        List<GlossaryEntry> headGlossaryEntries = null;
-        final boolean updateGlossary;
-
+    private void rebaseAndCommitProject() throws Exception {
         Log.logInfoRB("TEAM_REBASE_START");
+        String tmxPath = m_config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION;
+        if (remoteRepositoryProvider.isUnderMapping(tmxPath)) {
+            RebaseAndCommit.rebaseAndCommit(remoteRepositoryProvider, m_config.getProjectRootDir(), tmxPath,
+                    new RebaseAndCommit.IRebase() {
+                        ProjectTMX baseTMX, headTMX;
 
-        final String projectTMXFilename = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
-        final File projectTMXFile = new File(projectTMXFilename);
-
-        //list of files to update. This is TMX and possibly the writable glossary file.
-        File[] modifiedFiles;
-        //do we have local changes?
-        boolean needUpload = false;
-        final StringBuilder commitDetails = new StringBuilder();
-
-        final String glossaryFilename = m_config.getWriteableGlossary();
-        final File glossaryFile = new File(glossaryFilename);
-
-        //Get current status in memory
-        //tmx is already in memory, as 'this.projectTMX'
-        //Writable glossary is also in memory, but 'outside our reach' and may change if we mess with the file on disk.
-        //Therefore load glossary in memory from file:
-        if (repository.isUnderVersionControl(glossaryFile)) {
-            Log.logDebug(LOGGER, "rebaseProject: glossary file {0} is under version control", glossaryFile);
-            //glossary is under version control
-            modifiedFiles = new File[]{projectTMXFile, glossaryFile};
-            updateGlossary = true;
-        } else {
-            Log.logDebug(LOGGER, "rebaseProject: glossary file {0} is not under version control", glossaryFile);
-            modifiedFiles = new File[]{projectTMXFile};
-            updateGlossary = false;
-        }
-        if (isProjectModified() || repository.isChanged(glossaryFile) || repository.isChanged(projectTMXFile)) {
-            needUpload = true;
-        }
-
-        while (true) {
-            boolean again = false;
-
-            if (updateGlossary) {
-                // Load glossary entries inside loop to make sure changes are synced properly.
-                glossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
-            }
-
-            //get revisions of files
-            String baseRevTMX = repository.getBaseRevisionId(projectTMXFile);
-            Log.logDebug(LOGGER, "rebaseProject: TMX base revision: {0}", baseRevTMX);
-            String baseRevGlossary = null;
-            if (updateGlossary) {
-                baseRevGlossary = repository.getBaseRevisionId(glossaryFile);
-                Log.logDebug(LOGGER, "rebaseProject: glossary base revision: {0}", baseRevGlossary);
-            }
-    
-            //save current status to file in case we encounter errors.
-            // save into ".new" file
-            filenameTMXwithLocalChangesOnBase = new File(projectTMXFilename + "-based_on_" + baseRevTMX + OConsts.NEWFILE_EXTENSION);
-            filenameGlossarywithLocalChangesOnBase = null;
-            projectTMX.exportTMX(m_config, filenameTMXwithLocalChangesOnBase, false, false, true); //overwrites file if it exists
-            if (System.getProperty("team.supersafe") != null) {
-                // save supersafe backup
-                File bak = new File(projectTMXFilename + "-based_on_" + baseRevTMX + "_at_"
-                        + new SimpleDateFormat("MMdd-HHmmss").format(new Date()) + OConsts.BACKUP_EXTENSION);
-                projectTMX.exportTMX(m_config, bak, false, false, true);
-            }
-            if (updateGlossary) {
-                filenameGlossarywithLocalChangesOnBase = new File(glossaryFilename + "-based_on_" + baseRevGlossary + OConsts.NEWFILE_EXTENSION);
-                if (filenameGlossarywithLocalChangesOnBase.exists()) {
-                    //empty file first, because we append to it.
-                    filenameGlossarywithLocalChangesOnBase.delete();
-                }
-                filenameGlossarywithLocalChangesOnBase.createNewFile();
-                for (GlossaryEntry ge : glossaryEntries) {
-                    GlossaryReaderTSV.append(filenameGlossarywithLocalChangesOnBase, ge);
-                }
-            }
-    
-            // restore BASE revision
-            repository.restoreBase(modifiedFiles);
-            // load base revision
-            baseTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), projectTMXFile, null);
-            if (updateGlossary) {
-                baseGlossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
-            }
-    
-            //Maybe user has made local changes to other files. We don't want that. 
-            //Every translator in a project should work on the SAME=equal project.
-            //Now is a good time to 'clean' the project.
-            //Note that we can replace restoreBase with reset for the same functionality.
-            //Here I keep a separate call, just to make it clear what and why we are doing
-            //and to allow to make this feature optional in future releases
-            unlockProject(); // So that we are able to replace omegat.project
-            try {
-                repository.reset();
-            } finally {
-                lockProject(); // we restore the lock
-            }
-    
-            /* project is now in a bad state!
-             * If an error is raised before we reach the end of this function, we have backups in .new files.
-             * The user can use them to fix stuff, because
-             * -The tmx is still in memory, and on save it will be updated (but we can't assume that).
-             * -the glossary will be updated to the base, so we lost that.
-             */
-    
-            // update to HEAD revision from repository and load
-            try {
-                //NB: if glossary is updated, this will cause the GlossaryManager to reload the file :(
-                //I can live with that; we will update it a few lines down, so loss of info is only temporary. Only reloading of big files might take resources.
-                repository.download(modifiedFiles);
-                //download succeeded, we are online!
-                setOnlineMode();
-            } catch (IRemoteRepository.NetworkException ex) {
-                //network problems, we are offline.
-                setOfflineMode();
-                //not on HEAD, so upload will fail
-                needUpload = false;
-                //go on to restore changes
-            } catch (Exception ex) {
-                //not on HEAD, so upload will fail
-                needUpload = false;
-                //go on to restore changes
-            }
-            String headRevTMX = repository.getBaseRevisionId(projectTMXFile);
-            Log.logDebug(LOGGER, "rebaseProject: TMX head revision: {0}", headRevTMX);
-    
-            if (headRevTMX.equals(baseRevTMX)) {
-                Log.logDebug(LOGGER, "rebaseProject: head equals base");
-                // don't need rebase
-                filenameTMXwithLocalChangesOnHead = filenameTMXwithLocalChangesOnBase;
-                filenameTMXwithLocalChangesOnBase = null;
-                //free up some memory
-                baseTMX = null;
-            } else {
-                Log.logDebug(LOGGER, "rebaseProject: real rebase");
-                // need rebase
-                again = true;
-                headTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), projectTMXFile, null);
-
-                mergeTMX(baseTMX, headTMX, commitDetails);
-
-                // Refresh view immediately to make sure changes are applied properly.
-                SwingUtilities.invokeAndWait(new Runnable() {
-                    @Override
-                    public void run() {
-                        Core.getEditor().refreshView(false);
-                    }
-                });
-                
-                filenameTMXwithLocalChangesOnHead = new File(projectTMXFilename + "-based_on_" + headRevTMX + OConsts.NEWFILE_EXTENSION);
-                projectTMX.exportTMX(m_config, filenameTMXwithLocalChangesOnHead, false, false, true);
-                if (System.getProperty("team.supersafe") != null) {
-                    // save supersafe backup
-                    File bak = new File(projectTMXFilename + "-merged_on_" + headRevTMX + "_at_"
-                            + new SimpleDateFormat("MMdd-HHmmss").format(new Date())
-                            + OConsts.BACKUP_EXTENSION);
-                    projectTMX.exportTMX(m_config, bak, false, false, true);
-                }
-                //free memory
-                headTMX = null;
-            }
-            if (updateGlossary) {
-                String headRevGlossary = repository.getBaseRevisionId(glossaryFile);
-                Log.logDebug(LOGGER, "rebaseProject: glossary head revision: {0}", headRevGlossary);
-                if (headRevGlossary.equals(baseRevGlossary)) {
-                    // don't need rebase
-                    filenameGlossarywithLocalChangesOnHead = filenameGlossarywithLocalChangesOnBase;
-                    filenameGlossarywithLocalChangesOnBase = null;
-                    //free up some memory
-                    baseGlossaryEntries = null;
-                } else {
-                    again = true;
-                    headGlossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
-                    List<GlossaryEntry> deltaAddedGlossaryLocal = new ArrayList<GlossaryEntry>(glossaryEntries);
-                    deltaAddedGlossaryLocal.removeAll(baseGlossaryEntries);
-                    List<GlossaryEntry> deltaRemovedGlossaryLocal = new ArrayList<GlossaryEntry>(baseGlossaryEntries);
-                    deltaRemovedGlossaryLocal.removeAll(glossaryEntries);
-                    headGlossaryEntries.addAll(deltaAddedGlossaryLocal);
-                    headGlossaryEntries.removeAll(deltaRemovedGlossaryLocal);
-    
-                    filenameGlossarywithLocalChangesOnHead = new File(glossaryFilename + "-based_on_" + headRevGlossary + OConsts.NEWFILE_EXTENSION);
-                    filenameGlossarywithLocalChangesOnHead.createNewFile();
-                    for (GlossaryEntry ge : headGlossaryEntries) {
-                        GlossaryReaderTSV.append(filenameGlossarywithLocalChangesOnHead, ge);
-                    }
-    
-                    //free memory
-                    headGlossaryEntries = null;
-                    baseGlossaryEntries = null;
-                }
-            } else {
-                filenameGlossarywithLocalChangesOnHead = null;
-            }
-            
-            /* project_save.tmx / writableGlossary are now the head version (or still the base version, if offline)
-             * the old situation is in based_on_<base>.new files
-             * the new situation is in based_on_<head>.new files
-             */
-
-            projectTMXFile.delete(); //delete head version (or base version, if offline)
-            // Rename new file into TMX file
-            FileUtil.rename(filenameTMXwithLocalChangesOnHead, projectTMXFile);
-            if (filenameTMXwithLocalChangesOnBase != null) {
-                // Remove temp backup file
-                if (!filenameTMXwithLocalChangesOnBase.delete()) {
-                    throw new IOException("Error remove old file");
-                }
-            }
-            if (updateGlossary) {
-                glossaryFile.delete();
-                FileUtil.rename(filenameGlossarywithLocalChangesOnHead, glossaryFile);
-                if (filenameGlossarywithLocalChangesOnBase != null) {
-                    // Remove temp backup file
-                    if (!filenameGlossarywithLocalChangesOnBase.delete()) {
-                        throw new IOException("Error remove old glossary file");
-                    }
-                }
-            }
-            
-            if (!again) {
-                // free memory
-                glossaryEntries = null;
-                break;
-            }
-        }
-
-        // upload updated
-        if (needUpload) {
-            final String author = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
-                    System.getProperty("user.name"));
-            try {
-                new RepositoryUtils.AskCredentials() {
-                    public void callRepository() throws Exception {
-                        repository.upload(projectTMXFile,
-                                "Translated by " + author + commitDetails.toString());
-                        if (updateGlossary) {
-                            repository.upload(glossaryFile, "Added glossaryitem(s) by " + author);
+                        @Override
+                        public void parseBaseFile(File file) throws Exception {
+                            baseTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config
+                                    .getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), file, null);
                         }
-                    }
-                }.execute(repository);
-                setOnlineMode();
-            } catch (IRemoteRepository.NetworkException ex) {
-                setOfflineMode();
-            } catch (Exception ex) {
-                throw new KnownException(ex, "TEAM_SYNCHRONIZATION_ERROR");
-            }
+
+                        @Override
+                        public void parseHeadFile(File file) throws Exception {
+                            headTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config
+                                    .getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), file, null);
+                        }
+
+                        @Override
+                        public void rebaseAndSave(File out) throws Exception {
+                            // Do 3-way merge of:
+                            // Base: baseTMX
+                            // File 1: projectTMX (mine)
+                            // File 2: headTMX (theirs)
+                            synchronized (projectTMX) { // TODO we shouldn't lock for so long time
+                                StmProperties props = new StmProperties()
+                                        .setBaseTmxName(OStrings.getString("TMX_MERGE_BASE"))
+                                        .setTmx1Name(OStrings.getString("TMX_MERGE_MINE"))
+                                        .setTmx2Name(OStrings.getString("TMX_MERGE_THEIRS"))
+                                        .setLanguageResource(OStrings.getResourceBundle())
+                                        .setParentWindow(Core.getMainWindow().getApplicationFrame())
+                                        // More than this number of conflicts will trigger List View by
+                                        // default.
+                                        .setListViewThreshold(5);
+                                ProjectTMX mergedTMX = SuperTmxMerge.merge(baseTMX, projectTMX, headTMX,
+                                        m_config.getSourceLanguage().getLanguage(), m_config
+                                                .getTargetLanguage().getLanguage(), props);
+                                projectTMX.replaceContent(mergedTMX);
+                            }
+
+                            projectTMX.exportTMX(m_config, out, false, false, true);
+                        }
+
+                        @Override
+                        public String getCommentForCommit() {
+                            final String author = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
+                                    System.getProperty("user.name"));
+                            return "Translated by " + author;
+                        }
+                    });
+            ProjectTMX newTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(),
+                    m_config.isSentenceSegmentingEnabled(), new File(m_config.getProjectInternalDir(),
+                            OConsts.STATUS_EXTENSION), null);
+            projectTMX.replaceContent(newTMX);
+        }
+
+        final String glossaryPath = m_config.getGlossaryRootRelative() + "/" + OConsts.DEFAULT_W_GLOSSARY;
+        final File glossaryFile = new File(m_config.getProjectRootDir(), glossaryPath);
+        if (glossaryFile.exists() && remoteRepositoryProvider.isUnderMapping(glossaryPath)) {
+            final List<GlossaryEntry> glossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
+            RebaseAndCommit.rebaseAndCommit(remoteRepositoryProvider, m_config.getProjectRootDir(),
+                    glossaryPath, new RebaseAndCommit.IRebase() {
+                        List<GlossaryEntry> baseGlossaryEntries, headGlossaryEntries;
+
+                        @Override
+                        public void parseBaseFile(File file) throws Exception {
+                            baseGlossaryEntries = GlossaryReaderTSV.read(file, true);
+                        }
+
+                        @Override
+                        public void parseHeadFile(File file) throws Exception {
+                            headGlossaryEntries = GlossaryReaderTSV.read(file, true);
+                        }
+
+                        @Override
+                        public void rebaseAndSave(File out) throws Exception {
+                            List<GlossaryEntry> deltaAddedGlossaryLocal = new ArrayList<GlossaryEntry>(
+                                    glossaryEntries);
+                            deltaAddedGlossaryLocal.removeAll(baseGlossaryEntries);
+                            List<GlossaryEntry> deltaRemovedGlossaryLocal = new ArrayList<GlossaryEntry>(
+                                    baseGlossaryEntries);
+                            deltaRemovedGlossaryLocal.removeAll(glossaryEntries);
+                            headGlossaryEntries.addAll(deltaAddedGlossaryLocal);
+                            headGlossaryEntries.removeAll(deltaRemovedGlossaryLocal);
+
+                            for (GlossaryEntry ge : headGlossaryEntries) {
+                                GlossaryReaderTSV.append(out, ge);
+                            }
+                        }
+
+                        @Override
+                        public String getCommentForCommit() {
+                            final String author = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
+                                    System.getProperty("user.name"));
+                            return "Glossary changes by " + author;
+                        }
+                    });
         }
         Log.logInfoRB("TEAM_REBASE_END");
     }
@@ -1065,25 +938,24 @@ public class RealProject implements IProject {
 
     /** Finds and loads project's TMX file with translations (project_save.tmx). */
     private void loadTranslations() throws Exception {
-
-        final File tmxFile = new File(m_config.getProjectInternal() + OConsts.STATUS_EXTENSION);
+        File file = new File(
+                m_config.getProjectInternalDir(), OConsts.STATUS_EXTENSION);
 
         try {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
 
-            projectTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), tmxFile, checkOrphanedCallback);
-            if (tmxFile.exists()) {
+            projectTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), file, checkOrphanedCallback);
+            if (file.exists()) {
                 // RFE 1001918 - backing up project's TMX upon successful read
-                FileUtil.backupFile(tmxFile);
-                FileUtil.removeOldBackups(tmxFile, System.getProperty("team.supersafe") != null ? 300
-                        : OConsts.MAX_BACKUPS);
+                // TODO check for repositories
+                FileUtil.backupFile(file);
+                FileUtil.removeOldBackups(file, OConsts.MAX_BACKUPS);
             }
         } catch (SAXParseException ex) {
             Log.logErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(), ex.getColumnNumber());
             throw ex;
         } catch (Exception ex) {
-            Log.logErrorRB(ex, "TMXR_EXCEPTION_WHILE_PARSING", tmxFile.getAbsolutePath(),
-                    Log.getLogLocation());
+            Log.logErrorRB(ex, "TMXR_EXCEPTION_WHILE_PARSING", file.getAbsolutePath(), Log.getLogLocation());
             throw ex;
         }
     }

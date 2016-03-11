@@ -29,6 +29,9 @@
 
 package org.omegat.core.data;
 
+import gen.core.filters.Filters;
+import gen.core.project.RepositoryDefinition;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -115,6 +118,10 @@ public class ProjectProperties {
         return targetRoot;
     }
 
+    public File getTargetRootDir() {
+        return new File(targetRoot);
+    }
+
     /** Sets The Target (Compiled) Files Directory */
     public void setTargetRoot(String targetRoot) {
         if (!StringUtil.isEmpty(targetRoot)) {
@@ -122,9 +129,21 @@ public class ProjectProperties {
         }
     }
 
+    public String getTargetRootRelative() {
+        return targetRootRelative;
+    }
+
+    public void setTargetRootRelative(String targetRootRelative) {
+        this.targetRootRelative = targetRootRelative;
+    }
+
     /** Returns The Glossary Files Directory */
     public String getGlossaryRoot() {
         return glossaryRoot;
+    }
+
+    public File getGlossaryRootDir() {
+        return new File(glossaryRoot);
     }
 
     /** Sets The Glossary Files Directory */
@@ -132,6 +151,14 @@ public class ProjectProperties {
         if (!StringUtil.isEmpty(glossaryRoot)) {
             this.glossaryRoot = glossaryRoot;
         }
+    }
+
+    public String getGlossaryRootRelative() {
+        return glossaryRootRelative;
+    }
+
+    public void setGlossaryRootRelative(String glossaryRootRelative) {
+        this.glossaryRootRelative = glossaryRootRelative;
     }
 
     /** Returns The Glossary File Location */
@@ -151,6 +178,14 @@ public class ProjectProperties {
         if (!StringUtil.isEmpty(writeableGlossaryFile)) {
             this.writeableGlossaryFile = writeableGlossaryFile;
         }
+    }
+
+    public String getWriteableGlossaryFileRelative() {
+        return writeableGlossaryFileRelative;
+    }
+
+    public void setWriteableGlossaryFileRelative(String writeableGlossaryFileRelative) {
+        this.writeableGlossaryFileRelative = writeableGlossaryFileRelative;
     }
 
     public boolean isDefaultWriteableGlossaryFile() {
@@ -197,11 +232,23 @@ public class ProjectProperties {
         return dictRoot;
     }
 
+    public File getDictRootDir() {
+        return new File(dictRoot);
+    }
+
     /** Sets Dictionaries Files Directory */
     public void setDictRoot(String dictRoot) {
         if (!StringUtil.isEmpty(dictRoot)) {
             this.dictRoot = dictRoot;
         }
+    }
+
+    public String getDictRootRelative() {
+        return dictRootRelative;
+    }
+
+    public void setDictRootRelative(String dictRootRelative) {
+        this.dictRootRelative = dictRootRelative;
     }
 
     /** Returns the name of the Project */
@@ -219,6 +266,10 @@ public class ProjectProperties {
         return projectRoot;
     }
 
+    public File getProjectRootDir() {
+        return new File(projectRoot);
+    }
+
     /** Sets The Project Root Directory */
     public void setProjectRoot(String projectRoot) {
         this.projectRoot = projectRoot;
@@ -229,9 +280,21 @@ public class ProjectProperties {
         return projectRoot + OConsts.DEFAULT_INTERNAL + File.separator;
     }
 
+    public File getProjectInternalDir() {
+        return new File(projectRoot + OConsts.DEFAULT_INTERNAL + File.separator);
+    }
+
+    public String getProjectInternalRelative() {
+        return OConsts.DEFAULT_INTERNAL + File.separator;
+    }
+
     /** Returns The Source (to be translated) Files Directory */
     public String getSourceRoot() {
         return sourceRoot;
+    }
+
+    public File getSourceRootDir() {
+        return new File(sourceRoot);
     }
 
     /** Sets The Source (to be translated) Files Directory */
@@ -239,6 +302,14 @@ public class ProjectProperties {
         if (!StringUtil.isEmpty(sourceRoot)) {
             this.sourceRoot = sourceRoot;
         }
+    }
+
+    public String getSourceRootRelative() {
+        return sourceRootRelative;
+    }
+
+    public void setSourceRootRelative(String sourceRootRelative) {
+        this.sourceRootRelative = sourceRootRelative;
     }
 
     public List<String> getSourceRootExcludes() {
@@ -343,6 +414,13 @@ public class ProjectProperties {
         this.removeTags = removeTags;
     }
 
+    public List<RepositoryDefinition> getRepositories() {
+        return repositories;
+    }
+
+    public void setRepositories(List<RepositoryDefinition> repositories) {
+        this.repositories = repositories;
+    }
 
     public SRX getProjectSRX() {
         return projectSRX;
@@ -473,12 +551,18 @@ public class ProjectProperties {
     private String projectName;
     private String projectRoot;
     private String sourceRoot;
+    private String sourceRootRelative;
     private final List<String> sourceRootExcludes = new ArrayList<String>();
     private String targetRoot;
+    private String targetRootRelative;
     private String glossaryRoot;
+    private String glossaryRootRelative;
     private String writeableGlossaryFile;
+    private String writeableGlossaryFileRelative;
     private String tmRoot;
     private String dictRoot;
+    private String dictRootRelative;
+    private List<RepositoryDefinition> repositories;
 
     private Language sourceLanguage;
     private Language targetLanguage;

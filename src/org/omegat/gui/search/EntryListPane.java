@@ -33,8 +33,8 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -158,7 +158,7 @@ class EntryListPane extends JTextPane {
             }
         });
 
-        addFocusListener(new FocusListener() {
+        addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 boolean useTabForAdvance = Core.getEditor().getSettings().isUseTabForAdvance();
@@ -166,11 +166,6 @@ class EntryListPane extends JTextPane {
                     EntryListPane.this.useTabForAdvance = useTabForAdvance;
                     initInputMap(useTabForAdvance);
                 }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                // do nothing
             }
         });
 

@@ -262,9 +262,9 @@ public class StringUtil {
      */
     @SafeVarargs
     public static <T> T nvl(T... values) {
-        for (int i = 0; i < values.length; i++) {
-            if (values[i] != null) {
-                return values[i];
+        for (T val : values) {
+            if (val != null) {
+                return val;
             }
         }
         return null;

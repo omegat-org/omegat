@@ -290,7 +290,7 @@ public class DictionaryInstallerDialog extends JDialog {
     }//GEN-LAST:event_closeButtonActionPerformed
 
     private void dictionaryListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_dictionaryListValueChanged
-        installButton.setEnabled(dictionaryList.getSelectedValues().length > 0);
+        installButton.setEnabled(!dictionaryList.getSelectedValuesList().isEmpty());
     }//GEN-LAST:event_dictionaryListValueChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

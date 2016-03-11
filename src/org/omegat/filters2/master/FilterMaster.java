@@ -334,6 +334,49 @@ public class FilterMaster {
         return null;
     }
 
+    /**
+     * Check to see if a file is supported by any filter. When
+     * <code>quick</code> is true, only the filename will be checked to see if
+     * it matches known supported patterns. When false, the filter may have to
+     * actually load some or all of the file in order to determine whether or
+     * not it is supported.
+     * 
+     * @param file
+     *            The file to check
+     * @param quick
+     *            When true, check only the file name
+     * @return Whether or not the file is supported
+     */
+    public boolean isFileSupported(File file, boolean quick) {
+        FilterContext fc = new FilterContext(null, null, true);
+        for (Filter f : config.getFilters()) {
+            if (!f.isEnabled()) {
+                continue;
+            }
+            for (Files ff : f.getFiles()) {
+                boolean matchesMask = matchesMask(file.getName(), ff.getSourceFilenameMask());
+                if (quick && matchesMask) {
+                    return true;
+                } else if (!matchesMask) {
+                    continue;
+                }
+                IFilter filterObject = getFilterInstance(f.getClassName());
+                if (filterObject == null) {
+                    continue;
+                }
+                fc.setInEncoding(ff.getSourceEncoding());
+                fc.setOutEncoding(ff.getTargetEncoding());
+                // only for exist filters
+                Map<String, String> config = forFilter(f.getOption());
+                if (!filterObject.isFileSupported(file, config, fc)) {
+                    break;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static List<String> supportedEncodings = null;
 
     /**

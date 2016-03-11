@@ -339,8 +339,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                 if (!te.isTranslated()) {
                     String prefix = "";
 
-                    if (!Preferences.getPreferenceDefaultAllowEmptyString(Preferences.BEST_MATCH_EXPLANATORY_TEXT)
-                            .equals("")) {
+                    if (!Preferences.getPreference(Preferences.BEST_MATCH_EXPLANATORY_TEXT).isEmpty()) {
                         prefix = Preferences.getPreferenceDefault(Preferences.BEST_MATCH_EXPLANATORY_TEXT,
                                 OStrings.getString("WF_DEFAULT_PREFIX"));
                     }

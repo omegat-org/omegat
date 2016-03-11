@@ -70,8 +70,8 @@ public class TagProcessingOptionsDialog extends JDialog {
         simpleCheckRadio.setSelected(Preferences.isPreference(Preferences.CHECK_SIMPLE_PRINTF_TAGS));
         fullCheckRadio.setSelected(Preferences.isPreference(Preferences.CHECK_ALL_PRINTF_TAGS));
         javaPatternCheckBox.setSelected(Preferences.isPreference(Preferences.CHECK_JAVA_PATTERN_TAGS));
-        customPatternRegExpTF.setText(Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_CUSTOM_PATTERN));
-        removePatternRegExpTF.setText(Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_REMOVE_PATTERN));
+        customPatternRegExpTF.setText(Preferences.getPreference(Preferences.CHECK_CUSTOM_PATTERN));
+        removePatternRegExpTF.setText(Preferences.getPreference(Preferences.CHECK_REMOVE_PATTERN));
         looseTagOrderCheckBox.setSelected(Preferences.isPreference(Preferences.LOOSE_TAG_ORDERING));
         cbTagsValidRequired.setSelected(Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED));
         cbCountingProtectedText.setSelected(StatisticsSettings.isCountingProtectedText()

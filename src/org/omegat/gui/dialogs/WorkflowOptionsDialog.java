@@ -72,8 +72,7 @@ public class WorkflowOptionsDialog extends JDialog {
         if (!Preferences.existsPreference(Preferences.BEST_MATCH_EXPLANATORY_TEXT)) {
             prefixText.setText(OStrings.getString("WF_DEFAULT_PREFIX"));
         } else {
-            prefixText.setText(Preferences.getPreferenceDefaultAllowEmptyString(
-                                         Preferences.BEST_MATCH_EXPLANATORY_TEXT));
+            prefixText.setText(Preferences.getPreference(Preferences.BEST_MATCH_EXPLANATORY_TEXT));
         }
         prefixText.setEnabled(insertFuzzyCheckBox.isSelected());
 

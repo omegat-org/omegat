@@ -293,11 +293,6 @@ public class PreferencesXML implements IPreferences {
     }
 
     @Override
-    public String getPreferenceDefaultAllowEmptyString(String key) {
-        return getPreference(key);
-    }
-
-    @Override
     public int getPreferenceDefault(String key, int defaultValue) {
         String val = getPreferenceDefault(key, Integer.toString(defaultValue));
         int res = defaultValue;

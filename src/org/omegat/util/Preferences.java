@@ -511,20 +511,6 @@ public class Preferences {
     }
 
     /**
-     * Returns the value of some preference out of OmegaT's preferences file, if
-     * it exists.
-     * <p>
-     * 
-     * @param key
-     *            name of the key to look up, usually a static string from this
-     *            class
-     * @return preference value as a string
-     */
-    public static String getPreferenceDefaultAllowEmptyString(String key) {
-        return m_preferences.getPreferenceDefaultAllowEmptyString(key);
-    }
-
-    /**
      * Returns the integer value of some preference out of OmegaT's preferences
      * file, if it exists.
      * <p>
@@ -602,8 +588,6 @@ public class Preferences {
         String getPreferenceDefault(String key, String value);
 
         <T extends Enum<T>> T getPreferenceEnumDefault(String key, T defaultValue);
-
-        String getPreferenceDefaultAllowEmptyString(String key);
 
         int getPreferenceDefault(String key, int defaultValue);
 

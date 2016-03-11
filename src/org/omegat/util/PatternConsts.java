@@ -243,7 +243,7 @@ public class PatternConsts {
                 regexp += "|"+RE_SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS;
             }
             //assume: customRegExp has already been validated.
-            String customRegExp = Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_CUSTOM_PATTERN);
+            String customRegExp = Preferences.getPreference(Preferences.CHECK_CUSTOM_PATTERN);
             if (!"".equalsIgnoreCase(customRegExp)) {
                 regexp += "|"+customRegExp;
             }
@@ -261,7 +261,7 @@ public class PatternConsts {
 
     public static Pattern getRemovePattern() {
         if (REMOVE == null) {
-            String removeRegExp = Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_REMOVE_PATTERN);
+            String removeRegExp = Preferences.getPreference(Preferences.CHECK_REMOVE_PATTERN);
             if (!"".equalsIgnoreCase(removeRegExp)) {
                 REMOVE = Pattern.compile(removeRegExp);
             }
@@ -278,7 +278,7 @@ public class PatternConsts {
 
     public static Pattern getCustomTagPattern() {
         if (CUSTOM_TAGS == null) {
-            String customTagsRegex = Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_CUSTOM_PATTERN);
+            String customTagsRegex = Preferences.getPreference(Preferences.CHECK_CUSTOM_PATTERN);
             if (!"".equalsIgnoreCase(customTagsRegex)) {
                 CUSTOM_TAGS = Pattern.compile(customTagsRegex);
             }

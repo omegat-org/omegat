@@ -4658,8 +4658,8 @@
         <rule break="yes">
           <!--numbered headers break rule 
          based on an idea by Jean-Christophe Helary -->
-          <beforebreak>^\s*\p{Nd}+[\p{Nd}\.\)\]]+\s+</beforebreak>
-          <afterbreak>\p{Lu}</afterbreak>
+          <beforebreak>^\s*\p{Nd}+[\p{Nd}\.\)\]]+</beforebreak>
+          <afterbreak>\s+\p{Lu}</afterbreak>
         </rule>
         <rule break="yes">
           <!-- .?! break rule -->

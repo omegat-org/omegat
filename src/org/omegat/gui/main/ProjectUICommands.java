@@ -54,6 +54,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RecentProjects;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.WikiGet;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
@@ -510,6 +511,25 @@ public class ProjectUICommands {
                 }
             }
         }.execute();
+    }
+
+    public static void projectRemote(String url) {
+        String dir = url.replace("/", "_").replace(':', '_');
+        File projectDir = new File(StaticUtils.getConfigDir() + "/remoteProjects/" + dir);
+        File projectFile = new File(projectDir, OConsts.FILE_PROJECT);
+
+        byte[] data;
+        try {
+            projectDir.mkdirs();
+            data = WikiGet.getURLasByteArray(url);
+            FileUtils.writeByteArrayToFile(projectFile, data);
+        } catch (Exception ex) {
+            Log.logErrorRB(ex, "TEAM_REMOTE_RETRIEVE_ERROR", url);
+            Core.getMainWindow().displayErrorRB(ex, "TEAM_REMOTE_RETRIEVE_ERROR", url);
+            return;
+        }
+
+        projectOpen(projectDir);
     }
 
     private static void performProjectMenuItemPreConditions() {

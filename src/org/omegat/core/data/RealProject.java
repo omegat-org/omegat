@@ -43,10 +43,8 @@ import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -790,6 +788,10 @@ public class RealProject implements IProject {
      */
     private void rebaseAndCommitProject() throws Exception {
         Log.logInfoRB("TEAM_REBASE_START");
+
+        final String author = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
+                System.getProperty("user.name"));
+        final StringBuilder commitDetails = new StringBuilder("Translated by " + author);
         String tmxPath = m_config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION;
         if (remoteRepositoryProvider.isUnderMapping(tmxPath)) {
             RebaseAndCommit.rebaseAndCommit(remoteRepositoryProvider, m_config.getProjectRootDir(), tmxPath,
@@ -810,34 +812,13 @@ public class RealProject implements IProject {
 
                         @Override
                         public void rebaseAndSave(File out) throws Exception {
-                            // Do 3-way merge of:
-                            // Base: baseTMX
-                            // File 1: projectTMX (mine)
-                            // File 2: headTMX (theirs)
-                            synchronized (projectTMX) { // TODO we shouldn't lock for so long time
-                                StmProperties props = new StmProperties()
-                                        .setBaseTmxName(OStrings.getString("TMX_MERGE_BASE"))
-                                        .setTmx1Name(OStrings.getString("TMX_MERGE_MINE"))
-                                        .setTmx2Name(OStrings.getString("TMX_MERGE_THEIRS"))
-                                        .setLanguageResource(OStrings.getResourceBundle())
-                                        .setParentWindow(Core.getMainWindow().getApplicationFrame())
-                                        // More than this number of conflicts will trigger List View by
-                                        // default.
-                                        .setListViewThreshold(5);
-                                ProjectTMX mergedTMX = SuperTmxMerge.merge(baseTMX, projectTMX, headTMX,
-                                        m_config.getSourceLanguage().getLanguage(), m_config
-                                                .getTargetLanguage().getLanguage(), props);
-                                projectTMX.replaceContent(mergedTMX);
-                            }
-
+                            mergeTMX(baseTMX, headTMX, commitDetails);
                             projectTMX.exportTMX(m_config, out, false, false, true);
                         }
 
                         @Override
                         public String getCommentForCommit() {
-                            final String author = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
-                                    System.getProperty("user.name"));
-                            return "Translated by " + author;
+                            return commitDetails.toString();
                         }
                     });
             ProjectTMX newTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(),

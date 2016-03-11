@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.7.0
 ----------------------------------------------------------------------
- 1 Enhancement
+ 2 Enhancements
 ----------------------------------------------------------------------
 3.7.0 vs 3.6.0
 
@@ -9,6 +9,9 @@
 
   - Allow searches across source, target simultaneously
   https://sourceforge.net/p/omegat/feature-requests/1185/
+
+  - Flexible use of spellcheck (with and w/o locale) 
+  https://sourceforge.net/p/omegat/feature-requests/455/
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 (2016-03-09)

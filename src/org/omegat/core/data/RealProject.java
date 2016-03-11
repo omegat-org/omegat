@@ -869,7 +869,7 @@ public class RealProject implements IProject {
 
                         @Override
                         public String getFileCharset(File file) throws Exception {
-                            return GlossaryReaderTSV.getCharset(file);
+                            return GlossaryReaderTSV.getFileEncoding(file);
                         }
                     });
         }

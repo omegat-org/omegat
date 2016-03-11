@@ -52,6 +52,8 @@ import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.IProject.DefaultTranslationsIterator;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.team.IRemoteRepository;
+import org.omegat.core.team2.IRemoteRepository2;
+import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.IEditor;
@@ -111,8 +113,8 @@ public class TestTeamIntegrationChild {
             // get initial project
             FileUtil.deleteTree(new File(dir));
 
-            IRemoteRepository repository = TestTeamIntegration.createRepo(repo, dir);
-            repository.checkoutFullProject(repo);
+            ProjectProperties config = TestTeamIntegration.createConfig(new File(dir));
+            RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config);
 
             // load project
             Core.initializeConsole(new TreeMap<String, String>());
@@ -122,7 +124,7 @@ public class TestTeamIntegrationChild {
             ProjectProperties projectProperties = ProjectFileStorage.loadProjectProperties(new File(dir));
 
             Core.getAutoSave().disable();
-            RealProject p = new TestRealProject(projectProperties, repository);
+            RealProject p = new TestRealProject(projectProperties);
             Core.setProject(p);
             p.loadProject(true);
             if (p.isProjectLoaded()) {
@@ -162,7 +164,7 @@ public class TestTeamIntegrationChild {
             Core.getProject().closeProject();
 
             // load again and check
-            ProjectFactory.loadProject(projectProperties, repository, true);
+            ProjectFactory.loadProject(projectProperties, null, true);
             checkAll();
 
             System.exit(200);
@@ -508,8 +510,8 @@ public class TestTeamIntegrationChild {
      * Override RealProject for own merge.
      */
     static class TestRealProject extends RealProject {
-        public TestRealProject(final ProjectProperties props, IRemoteRepository repository) {
-            super(props, repository);
+        public TestRealProject(final ProjectProperties props) {
+            super(props);
         }
 
         ProjectTMX mergedTMX;

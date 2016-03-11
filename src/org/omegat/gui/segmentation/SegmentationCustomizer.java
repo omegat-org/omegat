@@ -45,7 +45,6 @@ import org.omegat.core.segmentation.datamodels.MappingRulesModel;
 import org.omegat.core.segmentation.datamodels.SegmentationRulesModel;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -124,7 +123,6 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
         pack();
         setSize(getWidth() * 5 / 4, getHeight() * 5 / 4);
-        DockingUI.displayCentered(this);
     }
 
     /**
@@ -133,6 +131,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
     public SegmentationCustomizer(Frame parent, boolean projectSpecific, SRX defaultSRX, SRX userSRX, SRX projectSRX) {
         super(parent, true);
         constructor(projectSpecific, defaultSRX, userSRX, projectSRX);
+        setLocationRelativeTo(parent);
     }
 
     /**
@@ -141,6 +140,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
     public SegmentationCustomizer(Dialog parent, boolean projectSpecific, SRX defaultSRX, SRX userSRX, SRX projectSRX) {
         super(parent, true);
         constructor(projectSpecific, defaultSRX, userSRX, projectSRX);
+        setLocationRelativeTo(parent);
     }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */

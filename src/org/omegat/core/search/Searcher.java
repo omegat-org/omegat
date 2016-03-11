@@ -376,7 +376,7 @@ public class Searcher {
             }
         }
 
-        // search the TM, if requested
+        // search the glossary, if requested
         if (m_searchExpression.glossary) {
             String intro = OStrings.getString("SW_GLOSSARY_RESULT");
             List<GlossaryEntry> entries = Core.getGlossaryManager().search(m_searchExpression.text);

@@ -59,7 +59,10 @@ public class GITCredentialsProvider extends CredentialsProvider {
     static final String KEY_PASSWORD_PREFIX = "login.password.";
     static final String KEY_FINGERPRINT_PREFIX = "login.fingerprint.";
 
+    /** Predefined in the omegat.project file. */
     private Map<String, String> predefined = Collections.synchronizedMap(new HashMap<String, String>());
+    /** Known from previous enter in the session, but not saved. */
+    private Map<String, String> known = Collections.synchronizedMap(new HashMap<String, String>());
 
     public void setPredefinedCredentials(String url, String predefinedUser, String predefinedPass,
             String predefinedFingerprint) {
@@ -71,8 +74,12 @@ public class GITCredentialsProvider extends CredentialsProvider {
     private Credentials loadCredentials(URIish uri) {
         String url = uri.toString();
         Credentials credentials = new Credentials();
-        credentials.username = TeamSettings.get(KEY_USERNAME_PREFIX + url);
-        credentials.password = TeamSettings.get(KEY_PASSWORD_PREFIX + url);
+        credentials.username = known.get("user." + url);
+        credentials.password = known.get("pass." + url);
+        if (credentials.username == null || credentials.password == null) {
+            credentials.username = TeamSettings.get(KEY_USERNAME_PREFIX + url);
+            credentials.password = TeamSettings.get(KEY_PASSWORD_PREFIX + url);
+        }
         return credentials;
     }
 
@@ -85,6 +92,8 @@ public class GITCredentialsProvider extends CredentialsProvider {
             } else {
                 TeamSettings.set(KEY_PASSWORD_PREFIX + url, null);
             }
+            known.put("user." + url, credentials.username);
+            known.put("pass." + url, credentials.password);
         } catch (Exception e) {
             Core.getMainWindow().displayErrorRB(e, "TEAM_ERROR_SAVE_CREDENTIALS", null, "TF_ERROR");
         }
@@ -248,6 +257,9 @@ public class GITCredentialsProvider extends CredentialsProvider {
             userPassDialog.userText.setEditable(false);
             userPassDialog.userText.setEnabled(false);
         }
+        if (credentials.username != null) {
+            userPassDialog.userText.setText(credentials.username);
+        }
         userPassDialog.cbSavePlainPassword.setSelected(true);
         userPassDialog.setVisible(true);
         if (userPassDialog.getReturnStatus() == GITUserPassDialog.RET_OK) {
@@ -268,6 +280,9 @@ public class GITCredentialsProvider extends CredentialsProvider {
         if (predefinedUser != null && predefinedPass != null) {
             throw new KnownException("TEAM_PREDEFINED_CREDENTIALS_ERROR");
         }
+
+        known.remove("user." + url);
+        known.remove("pass." + url);
 
         Credentials credentials = loadCredentials(uri);
         credentials.username = null;

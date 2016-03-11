@@ -149,9 +149,11 @@ class EntryListPane extends JTextPane {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                if (!autoSyncWithEditor && e.getClickCount() == 2 && !m_entryList.isEmpty()) {
-                    getActiveDisplayedEntry().gotoEntryInEditor();
+                if (e.getClickCount() == 2) {
+                    if (!autoSyncWithEditor && !m_entryList.isEmpty()) {
+                        getActiveDisplayedEntry().gotoEntryInEditor();
+                    }
+                    Core.getMainWindow().getApplicationFrame().toFront();
                 }
             }
         });

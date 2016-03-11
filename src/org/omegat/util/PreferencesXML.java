@@ -35,8 +35,6 @@
 
 package org.omegat.util;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -47,45 +45,24 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.TranslationException;
-import org.omegat.filters2.master.FilterMaster;
-import org.omegat.util.Preferences.IPreferences;
+import org.omegat.util.PreferencesImpl.IPrefsPersistence;
 import org.omegat.util.xml.XMLBlock;
 import org.omegat.util.xml.XMLStreamReader;
 
-import gen.core.filters.Filters;
+public class PreferencesXML implements IPrefsPersistence {
 
-public class PreferencesXML implements IPreferences {
-    private boolean m_changed;
+    private final File loadFile;
+    private final File saveFile;
 
-    // use a hash map for fast lookup of data
-    // use array lists for orderly recovery of it for saving to disk
-    private List<String> m_nameList;
-    private List<String> m_valList;
-    private Map<String, Integer> m_preferenceMap;
-
-    // Support for firing property change events
-    private PropertyChangeSupport m_propChangeSupport;
-
-    private SRX srx;
-    private Filters filters;
-
-    public PreferencesXML(File prefsFile) {
-        m_preferenceMap = new HashMap<String, Integer>(64);
-        m_nameList = new ArrayList<String>(32);
-        m_valList = new ArrayList<String>(32);
-        m_propChangeSupport = new PropertyChangeSupport(this);
-        m_changed = false;
-        doLoad(prefsFile);
+    public PreferencesXML(File loadFile, File saveFile) {
+        this.loadFile = loadFile;
+        this.saveFile = saveFile;
     }
 
     /**
@@ -93,7 +70,8 @@ public class PreferencesXML implements IPreferences {
      * file is null, it attempts to load from a prefs file bundled inside
      * the JAR (not supplied by default).
      */
-    private void doLoad(File prefsFile) {
+    @Override
+    public void load(List<String> keys, List<String> values) {
         XMLStreamReader xml = new XMLStreamReader();
         xml.killEmptyBlocks();
 
@@ -101,7 +79,7 @@ public class PreferencesXML implements IPreferences {
         InputStreamReader isr = null;
         BufferedReader br = null;
         try {
-            if (prefsFile == null) {
+            if (loadFile == null) {
                 // If no prefs file is present, look inside JAR for
                 // defaults. Useful for e.g. Web Start.
                 is = getClass().getResourceAsStream(Preferences.FILE_PREFERENCES);
@@ -109,15 +87,15 @@ public class PreferencesXML implements IPreferences {
                     isr = new InputStreamReader(is);
                     br = new BufferedReader(isr);
                     xml.setStream(br);
-                    readXmlPrefs(xml);
+                    readXmlPrefs(xml, keys, values);
                     br.close();
                     isr.close();
                     is.close();
                     xml.close();
                 }
             } else {
-                xml.setStream(prefsFile);
-                readXmlPrefs(xml);
+                xml.setStream(loadFile);
+                readXmlPrefs(xml, keys, values);
                 xml.close();
             }
         } catch (TranslationException te) {
@@ -126,42 +104,27 @@ public class PreferencesXML implements IPreferences {
             // print an error to the console as an FYI
             Log.logWarningRB("PM_WARNING_PARSEERROR_ON_READ");
             Log.log(te);
-            makeBackup(prefsFile);
+            makeBackup(loadFile);
         } catch (IndexOutOfBoundsException e3) {
             // error loading preference file - keep whatever was
             // loaded then return gracefully to calling function
             // print an error to the console as an FYI
             Log.logWarningRB("PM_WARNING_PARSEERROR_ON_READ");
             Log.log(e3);
-            makeBackup(prefsFile);
+            makeBackup(loadFile);
         } catch (UnsupportedEncodingException e3) {
             // unsupported encoding - forget about it
             Log.logErrorRB(e3, "PM_UNSUPPORTED_ENCODING");
-            makeBackup(prefsFile);
+            makeBackup(loadFile);
         } catch (IOException e4) {
             // can't read file - forget about it and move on
             Log.logErrorRB(e4, "PM_ERROR_READING_FILE");
-            makeBackup(prefsFile);
+            makeBackup(loadFile);
         } finally {
             IOUtils.closeQuietly(xml);
             IOUtils.closeQuietly(is);
             IOUtils.closeQuietly(isr);
             IOUtils.closeQuietly(br);
-        }
-
-        File srxFile = new File(StaticUtils.getConfigDir(), SRX.CONF_SENTSEG);
-        srx = SRX.loadSRX(srxFile);
-        if (srx == null) {
-            srx = SRX.getDefault();
-        }
-        File filtersFile = new File(StaticUtils.getConfigDir(), FilterMaster.FILE_FILTERS);
-        try {
-            filters = FilterMaster.loadConfig(filtersFile);
-        } catch (Exception ex) {
-            Log.log(ex);
-        }
-        if (filters == null) {
-            filters = FilterMaster.createDefaultFiltersConfig();
         }
     }
 
@@ -179,11 +142,10 @@ public class PreferencesXML implements IPreferences {
         }
     }
 
-    private void readXmlPrefs(XMLStreamReader xml) throws TranslationException {
+    private void readXmlPrefs(XMLStreamReader xml, List<String> keys, List<String> values) throws TranslationException {
         XMLBlock blk;
         List<XMLBlock> lst;
 
-        m_preferenceMap.clear();
         String pref;
         String val;
         // advance to omegat tag
@@ -221,189 +183,41 @@ public class PreferencesXML implements IPreferences {
             }
             if (pref != null && val != null) {
                 // valid match - record these
-                m_preferenceMap.put(pref, m_valList.size());
-                m_nameList.add(pref);
-                m_valList.add(val);
+                keys.add(pref);
+                values.add(val);
             }
         }
     }
 
     @Override
-    public String getPreference(String key) {
-        if (StringUtil.isEmpty(key)) {
-            return "";
-        }
-        Integer i = m_preferenceMap.get(key);
-        Object v = "";
-        if (i != null) {
-            // mapping exists - recover defaultValue
-            v = m_valList.get(i);
-        }
-        return v.toString();
-    }
-
-    @Override
-    public boolean existsPreference(String key) {
-        boolean exists = false;
-        if (key == null)
-            exists = false;
-        Integer i = m_preferenceMap.get(key);
-        if (i != null) {
-            exists = true;
-        }
-        return exists;
-    }
-
-    @Override
-    public boolean isPreference(String key) {
-        return "true".equals(getPreference(key));
-    }
-
-    @Override
-    public boolean isPreferenceDefault(String key, boolean defaultValue) {
-        String val = getPreference(key);
-        if (StringUtil.isEmpty(val)) {
-            setPreference(key, defaultValue);
-            return defaultValue;
-        }
-        return "true".equals(val);
-    }
-
-    @Override
-    public String getPreferenceDefault(String key, String defaultValue) {
-        String val = getPreference(key);
-        if (val.equals("")) {
-            val = defaultValue;
-            setPreference(key, defaultValue);
-        }
-        return val;
-    }
-
-    @Override
-    public <T extends Enum<T>> T getPreferenceEnumDefault(String key, T defaultValue) {
-        String val = getPreference(key);
-        T r;
+    public void save(List<String> keys, List<String> values) throws Exception {
+        FileOutputStream fos = null;
+        OutputStreamWriter osw = null;
+        BufferedWriter out = null;
         try {
-            r = Enum.valueOf(defaultValue.getDeclaringClass(), val);
-        } catch (IllegalArgumentException ex) {
-            r = defaultValue;
-            setPreference(key, defaultValue);
-        }
-        return r;
-    }
-
-    @Override
-    public int getPreferenceDefault(String key, int defaultValue) {
-        String val = getPreferenceDefault(key, Integer.toString(defaultValue));
-        int res = defaultValue;
-        try {
-            res = Integer.parseInt(val);
-        } catch (NumberFormatException nfe) {
-        }
-        return res;
-    }
-
-    @Override
-    public void setPreference(String name, Object value) {
-        if (StringUtil.isEmpty(name) || value == null) {
-            return;
-        }
-        if (value instanceof Enum) {
-            if (!value.toString().equals(((Enum<?>) value).name())) {
-                throw new IllegalArgumentException(
-                        "Enum prefs must return the same thing from toString() and name()");
-            }
-        }
-        m_changed = true;
-        Object oldValue = null;
-        Integer i = m_preferenceMap.get(name);
-        if (i == null) {
-            // defaultValue doesn't exist - add it
-            i = m_valList.size();
-            m_preferenceMap.put(name, i);
-            m_valList.add(value.toString());
-            m_nameList.add(name);
-        } else {
-            // mapping exists - reset defaultValue to new
-            oldValue = m_valList.set(i.intValue(), value.toString());
-        }
-        m_propChangeSupport.firePropertyChange(name, oldValue, value);
-    }
-
-    @Override
-    public void save() {
-        try {
-            if (m_changed) {
-                doSave(new File(StaticUtils.getConfigDir(), Preferences.FILE_PREFERENCES));
-            }
-        } catch (IOException e) {
-            Log.logErrorRB("PM_ERROR_SAVE");
-            Log.log(e);
-        }
-    }
-
-    private void doSave(File outFile) throws IOException {
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile), "UTF-8"));
-        try {
+            fos = new FileOutputStream(saveFile);
+            osw = new OutputStreamWriter(fos, "UTF-8");
+            out = new BufferedWriter(osw);
             out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
             out.write("<omegat>\n");
             out.write("  <preference version=\"1.0\">\n");
 
-            for (int i = 0; i < m_nameList.size(); i++) {
-                String name = m_nameList.get(i);
-                String val = StringUtil.makeValidXML(m_valList.get(i).toString());
+            for (int i = 0; i < keys.size(); i++) {
+                String name = keys.get(i);
+                String val = StringUtil.makeValidXML(values.get(i).toString());
                 out.write("    <" + name + ">");
                 out.write(val);
                 out.write("</" + name + ">\n");
             }
             out.write("  </preference>\n");
             out.write("</omegat>\n");
-        } finally {
             out.close();
+            osw.close();
+            fos.close();
+        } finally {
+            IOUtils.closeQuietly(out);
+            IOUtils.closeQuietly(osw);
+            IOUtils.closeQuietly(fos);
         }
-        m_changed = false;
-    }
-
-    @Override
-    public void setFilters(Filters newFilters) {
-        Filters oldValue = filters;
-        filters = newFilters;
-
-        File filtersFile = new File(StaticUtils.getConfigDir(), FilterMaster.FILE_FILTERS);
-        try {
-            FilterMaster.saveConfig(filters, filtersFile);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        m_propChangeSupport.firePropertyChange(Preferences.PROPERTY_FILTERS, oldValue, newFilters);
-    }
-
-    @Override
-    public Filters getFilters() {
-        return filters;
-    }
-
-    @Override
-    public void setSRX(SRX newSrx) {
-        SRX oldValue = srx;
-        srx = newSrx;
-
-        File srxFile = new File(StaticUtils.getConfigDir() + SRX.CONF_SENTSEG);
-        try {
-            SRX.saveTo(srx, srxFile);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        m_propChangeSupport.firePropertyChange(Preferences.PROPERTY_SRX, oldValue, newSrx);
-    }
-
-    @Override
-    public SRX getSRX() {
-        return srx;
-    }
-
-    @Override
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        m_propChangeSupport.addPropertyChangeListener(listener);
     }
 }

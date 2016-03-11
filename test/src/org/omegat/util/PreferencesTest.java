@@ -63,7 +63,7 @@ public class PreferencesTest extends TestCase {
             assertFalse(out.checkError());
             
             // Load bad prefs file.
-            new PreferencesXML(prefsFile);
+            new PreferencesImpl(new PreferencesXML(prefsFile, null));
             
             // The actual backup file will have a timestamp in the filename,
             // so we have to loop through looking for it.

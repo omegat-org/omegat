@@ -37,9 +37,12 @@ package org.omegat.util;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.File;
+import java.io.IOException;
 
 import org.omegat.core.segmentation.SRX;
+import org.omegat.filters2.master.FilterMaster;
 
 import gen.core.filters.Filters;
 
@@ -51,8 +54,7 @@ import gen.core.filters.Filters;
  * testing and extensibility, or allowing different persistence formats.
  * <p>
  * This class's static methods remain for compatibility, but now they wrap a
- * singleton instance of a concrete implementation of {@link IPreferences}. The
- * XML-based implementation is now at {@link PreferencesXML}.
+ * singleton instance of a concrete implementation of {@link IPreferences}.
  * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
@@ -538,7 +540,8 @@ public class Preferences {
      *            preference value as an object
      */
     public static void setPreference(String name, Object value) {
-        m_preferences.setPreference(name, value);
+        Object oldValue = m_preferences.setPreference(name, value);
+        m_propChangeSupport.firePropertyChange(name, oldValue, value);
     }
 
     /**
@@ -552,23 +555,41 @@ public class Preferences {
      * @param listener
      */
     public static void addPropertyChangeListener(PropertyChangeListener listener) {
-        m_preferences.addPropertyChangeListener(listener);
-    }
-
-    public static SRX getSRX() {
-        return m_preferences.getSRX();
-    }
-
-    public static void setSRX(SRX newSrx) {
-        m_preferences.setSRX(newSrx);
-    }
-
-    public static Filters getFilters() {
-        return m_preferences.getFilters();
+        m_propChangeSupport.addPropertyChangeListener(listener);
     }
 
     public static void setFilters(Filters newFilters) {
-        m_preferences.setFilters(newFilters);
+        Filters oldValue = m_filters;
+        m_filters = newFilters;
+
+        File filtersFile = new File(StaticUtils.getConfigDir(), FilterMaster.FILE_FILTERS);
+        try {
+            FilterMaster.saveConfig(m_filters, filtersFile);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        m_propChangeSupport.firePropertyChange(Preferences.PROPERTY_FILTERS, oldValue, newFilters);
+    }
+
+    public static Filters getFilters() {
+        return m_filters;
+    }
+
+    public static void setSRX(SRX newSrx) {
+        SRX oldValue = m_srx;
+        m_srx = newSrx;
+
+        File srxFile = new File(StaticUtils.getConfigDir() + SRX.CONF_SENTSEG);
+        try {
+            SRX.saveTo(m_srx, srxFile);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        m_propChangeSupport.firePropertyChange(Preferences.PROPERTY_SRX, oldValue, newSrx);
+    }
+
+    public static SRX getSRX() {
+        return m_srx;
     }
 
     public static void save() {
@@ -591,22 +612,43 @@ public class Preferences {
 
         int getPreferenceDefault(String key, int defaultValue);
 
-        void setPreference(String key, Object value);
+        /** Return the old value, or null if not set */
+        Object setPreference(String key, Object value);
 
         void save();
-
-        void setFilters(Filters newFilters);
-
-        Filters getFilters();
-
-        void setSRX(SRX newSRX);
-
-        SRX getSRX();
-
-        void addPropertyChangeListener(PropertyChangeListener listener);
     }
 
-    private static final IPreferences m_preferences = new PreferencesXML(getPreferencesFile());
+    static {
+        File srxFile = new File(StaticUtils.getConfigDir(), SRX.CONF_SENTSEG);
+        SRX srx = SRX.loadSRX(srxFile);
+        if (srx == null) {
+            srx = SRX.getDefault();
+        }
+        m_srx = srx;
+
+        File filtersFile = new File(StaticUtils.getConfigDir(), FilterMaster.FILE_FILTERS);
+        Filters filters = null;
+        try {
+            filters = FilterMaster.loadConfig(filtersFile);
+        } catch (Exception ex) {
+            Log.log(ex);
+        }
+        if (filters == null) {
+            filters = FilterMaster.createDefaultFiltersConfig();
+        }
+        m_filters = filters;
+
+        File loadFile = getPreferencesFile();
+        File saveFile = new File(StaticUtils.getConfigDir(), Preferences.FILE_PREFERENCES);
+        m_preferences = new PreferencesImpl(new PreferencesXML(loadFile, saveFile));
+    }
+
+    private static final IPreferences m_preferences;
+    private static SRX m_srx;
+    private static Filters m_filters;
+
+    // Support for firing property change events
+    private static PropertyChangeSupport m_propChangeSupport = new PropertyChangeSupport(Preferences.class);
 
     /**
      * Gets the prefs file to use. Looks in these places in this order:
@@ -627,5 +669,4 @@ public class Preferences {
         }
         return null;
     }
-
 }

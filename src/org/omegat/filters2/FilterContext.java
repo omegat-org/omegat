@@ -106,6 +106,11 @@ public class FilterContext {
         return isRemoveAllTags;
     }
 
+    public FilterContext setRemoveAllTags(boolean isRemoveAllTags) {
+        this.isRemoveAllTags = isRemoveAllTags;
+        return this;
+    }
+
     public FilterContext setSourceTokenizerClass(Class<?> sourceTokenizerClass) {
         this.sourceTokenizerClass = sourceTokenizerClass;
         return this;

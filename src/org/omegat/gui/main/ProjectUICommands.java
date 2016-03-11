@@ -45,7 +45,6 @@ import org.omegat.core.KnownException;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.NewTeamProject;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
@@ -55,7 +54,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RecentProjects;
-import org.omegat.util.StringUtil;
+import org.omegat.util.WikiGet;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -143,74 +142,31 @@ public class ProjectUICommands {
                 final NewTeamProject dialog = new NewTeamProject(Core.getMainWindow().getApplicationFrame());
                 dialog.setVisible(true);
 
+                if (!dialog.ok) {
+                    Core.getMainWindow().showStatusMessageRB("TEAM_CANCELLED");
+                    return null;
+                }
+
                 IMainWindow mainWindow = Core.getMainWindow();
                 Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
                 Cursor oldCursor = mainWindow.getCursor();
                 mainWindow.setCursor(hourglassCursor);
 
-                final IRemoteRepository2 repository;
+                String projectFileURL=dialog.txtProjectFileURL.getText();
                 File localDirectory = new File(dialog.txtDirectory.getText());
                 try {
-                    if (!dialog.ok) {
-                        Core.getMainWindow().showStatusMessageRB("TEAM_CANCELLED");
-                        mainWindow.setCursor(oldCursor);
-                        return null;
-                    }
-                    if (dialog.repoType != null) {
-                        repository = dialog.repoType.getConstructor(File.class).newInstance(localDirectory);
-                        repository.setCredentials(dialog.credentials);
-                    } else {
-                        mainWindow.setCursor(oldCursor);
-                        return null;
-                    }
-
-                    //do checkoutFullProject. This can throw IRemoteRepository.AuthenticationException,
-                    //so we wrap it in a AskCredentials object that will show credentials dialog.
-                    new RepositoryUtils.AskCredentials() {
-                        public void callRepository() throws Exception {
-                            Core.getMainWindow().showStatusMessageRB("TEAM_CHECKOUT");
-                            repository.checkoutFullProject(dialog.txtRepositoryURL.getText());
-                            Core.getMainWindow().showStatusMessageRB(null);
-                        }
-                    }.execute(repository);
-                } catch (IRemoteRepository.BadRepositoryException bre) {
-                    Core.getMainWindow().showErrorDialogRB("TF_ERROR", "TEAM_BADREPOSITORY_ERROR",
-                            bre.getMessage());
-                    mainWindow.setCursor(oldCursor);
-                    return null;
+                    localDirectory.mkdirs();
+                    byte[] projectFile = WikiGet.getURLasByteArray(projectFileURL);
+                    FileUtils.writeByteArrayToFile(new File(localDirectory, OConsts.FILE_PROJECT), projectFile);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     Core.getMainWindow().displayErrorRB(ex, "TEAM_CHECKOUT_ERROR");
                     mainWindow.setCursor(oldCursor);
                     return null;
-                } finally {
-                    if (dialog.credentials != null) {
-                        dialog.credentials.clear();
-                    }
                 }
 
-                try {
-                    ProjectProperties props = ProjectFileStorage.loadProjectProperties(localDirectory);
-                    //empty directories might not exist in VCS. Some project folders can be empty. Let's try to make them if needed.
-                    File[] projectFolders = {new File(props.getGlossaryRoot()), new File(props.getTMRoot()), new File(props.getTMAutoRoot()),new File(props.getDictRoot()), new File(props.getTargetRoot())};
-                    for (File f : projectFolders) {
-                        try {
-                            if (!f.exists()) {
-                                f.mkdir();
-                            }
-                        } catch (Exception e) {
-                            Log.logErrorRB(e, "TEAM_MISSING_FOLDER", f.getName());
-                        };
-                    }
-                    //load project
-                    ProjectFactory.loadProject(props, repository, true);
-                } catch (Exception ex) {
-                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                }
-                
-                RecentProjects.add(localDirectory.getAbsolutePath());
-                
+                projectOpen(localDirectory);
+
                 mainWindow.setCursor(oldCursor);
                 return null;
             }

@@ -36,6 +36,7 @@ import gen.core.project.Omegat;
 import gen.core.project.Project;
 import gen.core.project.Project.Repositories;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -43,6 +44,7 @@ import java.util.Arrays;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
+import org.apache.commons.io.FileUtils;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.TranslationException;
@@ -70,12 +72,16 @@ public class ProjectFileStorage {
         }
     }
 
+    public static Omegat parseProjectFile(byte[] projectFile) throws Exception {
+        return (Omegat) CONTEXT.createUnmarshaller().unmarshal(new ByteArrayInputStream(projectFile));
+    }
+
     public static ProjectProperties loadProjectProperties(File projectDir) throws Exception {
         ProjectProperties result = new ProjectProperties(projectDir);
 
         File inFile = new File(projectDir, OConsts.FILE_PROJECT);
 
-        Omegat om = (Omegat) CONTEXT.createUnmarshaller().unmarshal(inFile);
+        Omegat om = parseProjectFile(FileUtils.readFileToByteArray(inFile));
 
         if (!OConsts.PROJ_CUR_VERSION.equals(om.getProject().getVersion())) {
             throw new TranslationException(StringUtil.format(

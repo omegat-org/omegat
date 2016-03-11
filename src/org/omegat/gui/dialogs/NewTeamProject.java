@@ -34,15 +34,10 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import org.omegat.core.Core;
-import org.omegat.core.team.GITRemoteRepository;
-import org.omegat.core.team.IRemoteRepository;
-import org.omegat.core.team.IRemoteRepository.Credentials;
-import org.omegat.core.team.RepositoryUtils.RepoTypeDetector;
-import org.omegat.core.team.SVNRemoteRepository;
-import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
+import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.StringUtil;
+import org.omegat.util.WikiGet;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.StaticUIUtils;
@@ -55,12 +50,10 @@ import org.omegat.util.gui.StaticUIUtils;
 @SuppressWarnings("serial")
 public class NewTeamProject extends javax.swing.JDialog {
 
-    
-    public Class<? extends IRemoteRepository> repoType = null;
-    public Credentials credentials = null;
     private RepoTypeWorker repoTypeWorker = null;
     private boolean detecting = false;
-    
+    private boolean projectFileValid = false;
+
     /**
      * Creates new form NewTeamProject
      */
@@ -68,7 +61,7 @@ public class NewTeamProject extends javax.swing.JDialog {
         super(parent, true);
         initComponents();
         
-        txtRepositoryURL.getDocument().addDocumentListener(new DocumentListener() {
+        txtProjectFileURL.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 clearRepo();
@@ -102,21 +95,7 @@ public class NewTeamProject extends javax.swing.JDialog {
         DockingUI.displayCentered(this);
     }
     
-    private void suggestSaveDirectory(String repoName) {
-        if (repoName == null || !txtDirectory.getText().isEmpty()) {
-            return;
-        }
-        String dir = Preferences.getPreferenceDefault(Preferences.CURRENT_FOLDER,
-                System.getProperty("user.home"));
-        File suggestion = new File(dir, repoName);
-        int suff = 1;
-        while (suggestion.exists()) {
-            suggestion = new File(dir, repoName + "-" + suff++);
-        }
-        txtDirectory.setText(suggestion.getAbsolutePath());
-    }
-    
-    private synchronized void detectRepo() {
+    private synchronized void detectFile() {
         if (detecting || !isVisible()) {
             return;
         }
@@ -125,82 +104,67 @@ public class NewTeamProject extends javax.swing.JDialog {
         if (StringUtil.isEmpty(url)) {
             return;
         }
-        if (url.startsWith("git!")) {
-            txtRepositoryURL.setText(url.substring("git!".length()));
-            detectedRepoLabel.setText(OStrings.getString("TEAM_DETECTED_REPO_GIT"));
-            repoType = GITRemoteRepository.class;
-        } else if (url.startsWith("svn!")) {
-            txtRepositoryURL.setText(url.substring("svn!".length()));
-            detectedRepoLabel.setText(OStrings.getString("TEAM_DETECTED_REPO_SVN"));
-            repoType = SVNRemoteRepository.class;
-        } else {
-            repoTypeWorker = new RepoTypeWorker(url);
-            repoTypeWorker.execute();
+        if (!url.startsWith("http://")&&!url.startsWith("https://")) {
+            detectedProjectFileLabel.setText(OStrings.getString("TEAM_ERROR_DETECTING_PROTOCOL"));
+            return;
         }
+        repoTypeWorker = new RepoTypeWorker(url);
+        repoTypeWorker.execute();
     }
     
     private synchronized void startDetectingRepo() {
         detecting = true;
     }
     
-    private synchronized void stopDetectingRepo() {
+    private synchronized void stopDetectingRepo(boolean valid) {
         detecting = false;
+        projectFileValid = true;
     }
     
     private void clearRepo() {
-        repoType = null;
-        detectedRepoLabel.setText(" ");
+        projectFileValid = false;
+        detectedProjectFileLabel.setText(" ");
         if (repoTypeWorker != null) {
             repoTypeWorker.cancel(true);
         }
         updateDialog();
     }
     
-    
-    private class RepoTypeWorker extends SwingWorker<RepoTypeDetector, Object> {
+    private class RepoTypeWorker extends SwingWorker<Object, Object> {
 
-        private String url = null;
+        private final String url;
+        private String resultText;
+        private boolean valid = false;
 
         public RepoTypeWorker(String url) {
             this.url = url;
         }
         
         @Override
-        protected RepoTypeDetector doInBackground() throws Exception {
+        protected Object doInBackground() throws Exception {
             startDetectingRepo();
-            detectedRepoLabel.setText(OStrings.getString("TEAM_DETECTING_REPO"));
-            RepoTypeDetector detector = new RepoTypeDetector(url, credentials);
-            detector.execute();
-            return detector;
+            detectedProjectFileLabel.setText(OStrings.getString("TEAM_DETECTING_PROJECT_FILE"));
+            
+            resultText = OStrings.getString("TEAM_ERROR_DETECTING_PROJECT_FILE");
+            byte[] file = WikiGet.getURLasByteArray(url);
+            resultText = OStrings.getString("TEAM_DETECTED_PROJECT_FILE_INVALID");
+            ProjectFileStorage.parseProjectFile(file);
+            valid = true;
+            return null;
         }
 
         @Override
         protected void done() {
-            String resultText = OStrings.getString("TEAM_DETECTED_REPO_UNKNOWN");
-            String repoName = null;
             try {
-                RepoTypeDetector detector = get();
-                repoType = detector.repoType;
-                credentials = detector.credentials;
-                if (repoType != null) {
-                    if (repoType.equals(GITRemoteRepository.class)) {
-                        resultText = OStrings.getString("TEAM_DETECTED_REPO_GIT");
-                        repoName = GITRemoteRepository.guessRepoName(url);
-                    } else if (repoType.equals(SVNRemoteRepository.class)) {
-                        resultText = OStrings.getString("TEAM_DETECTED_REPO_SVN");
-                        repoName = SVNRemoteRepository.guessRepoName(url);
-                    }
-                }
+                get();
+                resultText=OStrings.getString("TEAM_DETECTED_PROJECT_FILE");
             } catch (CancellationException ex) {
                 resultText = " ";
             } catch (Exception ex) {
-                resultText = OStrings.getString("TEAM_ERROR_DETECTING_REPO");
-                Log.logErrorRB(ex, "TEAM_ERROR_DETECTING_REPO");
             }
-            detectedRepoLabel.setText(resultText);
-            suggestSaveDirectory(repoName);
+            detectedProjectFileLabel.setText(resultText);
             updateDialog();
-            stopDetectingRepo();
+            stopDetectingRepo(valid);
         }
     };
 
@@ -214,8 +178,8 @@ public class NewTeamProject extends javax.swing.JDialog {
         java.awt.GridBagConstraints gridBagConstraints;
 
         urlLabel = new javax.swing.JLabel();
-        txtRepositoryURL = new javax.swing.JTextField();
-        detectedRepoLabel = new javax.swing.JLabel();
+        txtProjectFileURL = new javax.swing.JTextField();
+        detectedProjectFileLabel = new javax.swing.JLabel();
         localFolderLabel = new javax.swing.JLabel();
         txtDirectory = new javax.swing.JTextField();
         btnDirectory = new javax.swing.JButton();
@@ -227,7 +191,7 @@ public class NewTeamProject extends javax.swing.JDialog {
         setTitle(OStrings.getString("TEAM_NEW_HEADER")); // NOI18N
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        org.openide.awt.Mnemonics.setLocalizedText(urlLabel, OStrings.getString("TEAM_NEW_REPOSITORY_URL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(urlLabel, OStrings.getString("TEAM_NEW_PROJECT_FILE")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -235,16 +199,16 @@ public class NewTeamProject extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(urlLabel, gridBagConstraints);
 
-        txtRepositoryURL.setColumns(40);
-        txtRepositoryURL.setToolTipText("");
-        txtRepositoryURL.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtProjectFileURL.setColumns(40);
+        txtProjectFileURL.setToolTipText("");
+        txtProjectFileURL.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtRepositoryURLFocusLost(evt);
+                txtProjectFileURLFocusLost(evt);
             }
         });
-        txtRepositoryURL.addActionListener(new java.awt.event.ActionListener() {
+        txtProjectFileURL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRepositoryURLActionPerformed(evt);
+                txtProjectFileURLActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -254,16 +218,16 @@ public class NewTeamProject extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        getContentPane().add(txtRepositoryURL, gridBagConstraints);
+        getContentPane().add(txtProjectFileURL, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(detectedRepoLabel, " ");
+        org.openide.awt.Mnemonics.setLocalizedText(detectedProjectFileLabel, " ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        getContentPane().add(detectedRepoLabel, gridBagConstraints);
+        getContentPane().add(detectedProjectFileLabel, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(localFolderLabel, OStrings.getString("TEAM_NEW_DIRECTORY")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(localFolderLabel, OStrings.getString("TEAM_NEW_PROJECT_DIRECTORY")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -330,22 +294,12 @@ public class NewTeamProject extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateDialog() {
-        String repoUrl = txtRepositoryURL.getText();
-        if (repoUrl.trim().equals(" ")) {
-            detectedRepoLabel.setText("");
-        }
-        boolean enabled = repoType != null
-                && !StringUtil.isEmpty(repoUrl)
-                && !StringUtil.isEmpty(txtDirectory.getText());
+        boolean enabled = projectFileValid && !StringUtil.isEmpty(txtProjectFileURL.getText().trim())
+                && !StringUtil.isEmpty(txtDirectory.getText().trim());
         btnOk.setEnabled(enabled);
     }
     
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        repoType = null;
-        if (credentials != null) {
-            credentials.clear();
-            credentials = null;
-        }
         if (repoTypeWorker != null) {
             repoTypeWorker.cancel(true);
         }
@@ -370,13 +324,13 @@ public class NewTeamProject extends javax.swing.JDialog {
         updateDialog();
     }//GEN-LAST:event_btnDirectoryActionPerformed
 
-    private void txtRepositoryURLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRepositoryURLActionPerformed
-        detectRepo();
-    }//GEN-LAST:event_txtRepositoryURLActionPerformed
+    private void txtProjectFileURLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProjectFileURLActionPerformed
+        detectFile();
+    }//GEN-LAST:event_txtProjectFileURLActionPerformed
 
-    private void txtRepositoryURLFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtRepositoryURLFocusLost
-        detectRepo();
-    }//GEN-LAST:event_txtRepositoryURLFocusLost
+    private void txtProjectFileURLFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtProjectFileURLFocusLost
+        detectFile();
+    }//GEN-LAST:event_txtProjectFileURLFocusLost
 
     private void txtDirectoryFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDirectoryFocusLost
         updateDialog();
@@ -390,11 +344,11 @@ public class NewTeamProject extends javax.swing.JDialog {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDirectory;
     private javax.swing.JButton btnOk;
-    private javax.swing.JLabel detectedRepoLabel;
+    private javax.swing.JLabel detectedProjectFileLabel;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel localFolderLabel;
     public javax.swing.JTextField txtDirectory;
-    public javax.swing.JTextField txtRepositoryURL;
+    public javax.swing.JTextField txtProjectFileURL;
     private javax.swing.JLabel urlLabel;
     // End of variables declaration//GEN-END:variables
 

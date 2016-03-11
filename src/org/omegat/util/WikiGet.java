@@ -184,6 +184,34 @@ public class WikiGet {
     }
 
     /**
+     * Obtain byte array context from remote URL.
+     * 
+     * @param target
+     *            String representation of well-formed URL.
+     * @return byte array or null if status is not 200 OK
+     * @throws IOException
+     */
+    public static byte[] getURLasByteArray(String target) throws IOException {
+        URL url = new URL(target);
+        byte[] result;
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        try {
+            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                return null;
+            }
+            InputStream in = conn.getInputStream();
+            try {
+                result = IOUtils.toByteArray(in);
+            } finally {
+                IOUtils.closeQuietly(in);
+            }
+        } finally {
+            IOUtils.close(conn);
+        }
+        return result;
+    }
+
+    /**
      * Method call without additional headers for possible calls from plugins.
      */
     public static String post(String address, Map<String, String> params) throws IOException {

@@ -33,7 +33,6 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.swing.AbstractAction;
 import javax.swing.DefaultListCellRenderer;
@@ -64,7 +63,7 @@ import org.omegat.util.gui.Styles.EditorColor;
 @SuppressWarnings("serial")
 public class CustomColorSelectionDialog extends javax.swing.JDialog {
 
-    private final Map<EditorColor, Color> temporaryPreferences = new EnumMap<EditorColor, Color>(EditorColor.class);
+    private final Map<EditorColor, Color> temporaryPreferences = new EnumMap<>(EditorColor.class);
     private final ChangeListener colorChangeListener = new ChangeListener() {
         @Override
         public void stateChanged(ChangeEvent e) {
@@ -276,10 +275,9 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_resetThisColorButtonActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        for (Entry<EditorColor, Color> e : temporaryPreferences.entrySet()) {
-            EditorColor style = e.getKey();
-            style.setColor(e.getValue());
-        }
+        temporaryPreferences.entrySet().stream().forEach((e) -> {
+            e.getKey().setColor(e.getValue());
+        });
         Preferences.save();
         if (!temporaryPreferences.isEmpty()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("GUI_COLORS_CHANGED_RESTART"));

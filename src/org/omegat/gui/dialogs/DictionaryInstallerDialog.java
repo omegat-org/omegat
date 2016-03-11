@@ -106,9 +106,9 @@ public class DictionaryInstallerDialog extends JDialog {
         protected void done() {
             try {
                 List<String> list = get();
-                for (String str : list) {
+                list.stream().forEach((str) -> {
                     listModel.addElement(str);
-                }
+                });
                 
                 dictionaryList.setModel(listModel);
                 dictionaryList.setEnabled(true);
@@ -118,9 +118,7 @@ public class DictionaryInstallerDialog extends JDialog {
                     infoTextArea.setText(OStrings.getString("GUI_DICTIONARY_INSTALLER_TEXT_NOTHING"));
                 }
                 progressBar.setVisible(false);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(DictionaryInstallerDialog.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ExecutionException ex) {
+            } catch (InterruptedException | ExecutionException ex) {
                 Logger.getLogger(DictionaryInstallerDialog.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -233,8 +231,8 @@ public class DictionaryInstallerDialog extends JDialog {
         protected List<String> doInBackground() throws Exception {
             oldCursor = getCursor();
             setCursor(HOURGLASS_CURSOR);
-            Object[] selection = dictionaryList.getSelectedValues();
-            List<String> completed = new ArrayList<String>();
+            List<String> selection = dictionaryList.getSelectedValuesList();
+            List<String> completed = new ArrayList<>();
             for (Object o : selection) {
                 // install the respective dictionaries
                 String item = (String) o;
@@ -255,20 +253,18 @@ public class DictionaryInstallerDialog extends JDialog {
 
         @Override
         protected void process(List<Object> chunks) {
-            for (Object o : chunks) {
+            chunks.stream().forEach((o) -> {
                 listModel.removeElement(o);
-            }
+            });
         }
         
         @Override
         protected void done() {
             try {
-                for (Object o : get()) {
+                get().stream().forEach((o) -> {
                     listModel.removeElement(o);
-                }
-            } catch (InterruptedException e) {
-                // Ignore
-            } catch (ExecutionException e) {
+                });
+            } catch (InterruptedException | ExecutionException e) {
                 // Ignore
             }
             setCursor(oldCursor);

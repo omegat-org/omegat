@@ -151,7 +151,7 @@ public class ProjectPropertiesDialog extends JDialog {
     /** Project filters. */
     private Filters filters;
 
-    private List<String> srcExcludes = new ArrayList<String>();
+    private List<String> srcExcludes = new ArrayList<>();
 
     /**
      * Creates a dialog to create a new project / edit folders of existing one.
@@ -401,7 +401,7 @@ public class ProjectPropertiesDialog extends JDialog {
                     } else {
                         m_sourceTokenizerBehaviorField.setEnabled(false);
                     }
-                } catch (Exception ex) {
+                } catch (InstantiationException | IllegalAccessException ex) {
                 }
             }});
 
@@ -419,7 +419,7 @@ public class ProjectPropertiesDialog extends JDialog {
         ITokenizer trgTok;
         try {
             trgTok = (ITokenizer) trgTokClass.newInstance();
-        } catch (Exception e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             trgTok = new DefaultTokenizer();
         }
         final JComboBox<Version> m_targetTokenizerBehaviorField = new JComboBox<>(
@@ -477,7 +477,7 @@ public class ProjectPropertiesDialog extends JDialog {
                     } else {
                         m_targetTokenizerBehaviorField.setEnabled(false);
                     }
-                } catch (Exception ex) {
+                } catch (InstantiationException | IllegalAccessException ex) {
                 }
             }});
 

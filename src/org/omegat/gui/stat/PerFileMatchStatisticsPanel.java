@@ -26,8 +26,6 @@
 package org.omegat.gui.stat;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
@@ -36,9 +34,10 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.Scrollable;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
+
+import org.omegat.util.gui.ReasonablySizedPanel;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -60,35 +59,6 @@ public class PerFileMatchStatisticsPanel extends BaseMatchStatisticsPanel {
         scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         add(scrollPane);
-    }
-    
-    private static class ReasonablySizedPanel extends JPanel implements Scrollable {
-
-        @Override
-        public Dimension getPreferredScrollableViewportSize() {
-            return getPreferredSize();
-        }
-
-        @Override
-        public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
-            return getFont().getSize();
-        }
-
-        @Override
-        public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
-            return getFont().getSize();
-        }
-
-        @Override
-        public boolean getScrollableTracksViewportWidth() {
-            return true;
-        }
-
-        @Override
-        public boolean getScrollableTracksViewportHeight() {
-            return false;
-        }
-        
     }
     
     @Override

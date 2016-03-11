@@ -54,6 +54,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
@@ -709,17 +710,27 @@ public class Preferences {
 
         File prefsFile = getPreferencesFile();
         
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
         try {
             if (prefsFile == null) {
                 // If no prefs file is present, look inside JAR for defaults. Useful for e.g. Web Start.
-                InputStream is = Preferences.class.getResourceAsStream(FILE_PREFERENCES);
+                is = getClass().getResourceAsStream(FILE_PREFERENCES);
                 if (is != null) {
-                    xml.setStream(new BufferedReader(new InputStreamReader(is)));
+                    isr = new InputStreamReader(is);
+                    br = new BufferedReader(isr);
+                    xml.setStream(br);
                     readXmlPrefs(xml);
+                    br.close();
+                    isr.close();
+                    is.close();
+                    xml.close();
                 }
             } else {
                 xml.setStream(prefsFile);
                 readXmlPrefs(xml);
+                xml.close();
             }
         } catch (TranslationException te) {
             // error loading preference file - keep whatever was
@@ -744,11 +755,10 @@ public class Preferences {
             Log.logErrorRB(e4, "PM_ERROR_READING_FILE");
             makeBackup(prefsFile);
         } finally {
-            try {
-                xml.close();
-            } catch (IOException ex) {
-                Log.log(ex);
-            }
+            IOUtils.closeQuietly(xml);
+            IOUtils.closeQuietly(is);
+            IOUtils.closeQuietly(isr);
+            IOUtils.closeQuietly(br);
         }
 
         File srxFile = new File(StaticUtils.getConfigDir(), SRX.CONF_SENTSEG);

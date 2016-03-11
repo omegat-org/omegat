@@ -260,6 +260,7 @@ public class StringUtil {
     /**
      * Returns first not null object from list, or null if all values is null.
      */
+    @SafeVarargs
     public static <T> T nvl(T... values) {
         for (int i = 0; i < values.length; i++) {
             if (values[i] != null) {

@@ -276,6 +276,7 @@ public interface IProject {
      * Exception for optimistic locking fail. Used when segment changed remotely or by automatic translation,
      * but user also changed data.
      */
+    @SuppressWarnings("serial")
     public class OptimisticLockingFail extends Exception {
         private final String oldTranslationText;
         private final String newTranslationText;

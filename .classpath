@@ -13,7 +13,6 @@
 	<classpathentry kind="lib" path="lib/antlr-runtime-3.4.jar"/>
 	<classpathentry kind="lib" path="lib/dictzip.jar"/>
 	<classpathentry kind="lib" path="lib/diff.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="lib/lucene-analyzers-3.6.2.jar"/>
 	<classpathentry kind="lib" path="lib/lucene-core-3.6.2.jar"/>
 	<classpathentry kind="lib" path="lib/lucene-kuromoji-3.6.2.jar"/>
@@ -47,5 +46,6 @@
 	<classpathentry kind="lib" path="lib/org.eclipse.jgit-4.1.1.201511131810-r.jar"/>
 	<classpathentry kind="lib" path="lib/svnkit-1.8.11.jar"/>
 	<classpathentry kind="lib" path="lib/trilead-ssh2-1.0.0-build220.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

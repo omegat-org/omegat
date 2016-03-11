@@ -54,6 +54,7 @@ import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.NearString.MATCH_SOURCE;
 import org.omegat.core.search.SearchMode;
 import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.team2.gui.RepositoriesCredentialsController;
@@ -898,6 +899,7 @@ public class MainWindowMenuHandler {
         dlg.setVisible(true);
         if (dlg.getReturnStatus() == FiltersCustomizer.RET_OK) {
             // saving config
+            Core.setFilterMaster(new FilterMaster(dlg.result));
             Preferences.setFilters(dlg.result);
         }
     }
@@ -911,6 +913,7 @@ public class MainWindowMenuHandler {
         segment_window.setVisible(true);
 
         if (segment_window.getReturnStatus() == SegmentationCustomizer.RET_OK) {
+            Core.setSegmenter(new Segmenter(segment_window.getSRX()));
             Preferences.setSRX(segment_window.getSRX());
         }
     }

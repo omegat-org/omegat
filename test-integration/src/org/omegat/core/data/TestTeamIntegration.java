@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.lib.Repository;
@@ -288,6 +289,9 @@ public class TestTeamIntegration {
             for (URL u : cl.getURLs()) {
                 cp.add(u.getFile());
             }
+            FileUtil.copyFile(new File(DIR + "/repo/omegat.project"), new File(DIR + "/" + source
+                    + "/omegat.project"));
+            new File(DIR + "/" + source + "/omegat/").mkdirs();
 
             System.err.println("Execute: " + source + " " + (PROCESS_SECONDS * 1000) + " "
                     + dir.getAbsolutePath() + " " + REPO + " " + delay + " " + SEG_COUNT);

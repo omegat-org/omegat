@@ -110,9 +110,6 @@ public class TestTeamIntegrationChild {
 
             Preferences.setPreference(Preferences.TEAM_AUTHOR, source);
 
-            // get initial project
-            FileUtil.deleteTree(new File(dir));
-
             ProjectProperties config = TestTeamIntegration.createConfig(new File(dir));
             RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config);
 

@@ -651,4 +651,44 @@ public class Language implements Comparable<Object> {
 		return this.getLanguage().compareTo(o.toString());
 	}
 
+    /**
+     * Verify the correctness of a language or country code
+     * 
+     * @param code
+     *            A string containing a language or country code
+     * @return <code>true</code> or <code>false</code>
+     */
+    public static boolean verifyLangCode(String code) {
+        // Make sure all values are characters
+        for (int cp, i = 0; i < code.length(); i += Character.charCount(cp)) {
+            cp = code.codePointAt(i);
+            if (!Character.isLetter(cp)) {
+                return false;
+            }
+        }
+        return !new Language(code).getDisplayName().isEmpty();
+    }
+
+    /**
+     * Verifies whether the language code is OK.
+     */
+    public static boolean verifySingleLangCode(String code) {
+        int cpc = code.codePointCount(0, code.length());
+        if (cpc == 2 || cpc == 3) {
+            return Language.verifyLangCode(code);
+        } else if (cpc == 5 || cpc == 6) {
+            int shift = 0;
+            if (cpc == 6) {
+                shift = 1;
+            }
+            int sepOffset = code.offsetByCodePoints(0, 2 + shift);
+            int sep = code.codePointAt(sepOffset);
+            return verifyLangCode(code.substring(0, sepOffset))
+                    && (sep == '-' || sep == '_')
+                    && verifyLangCode(code.substring(code.offsetByCodePoints(sepOffset, 1),
+                            code.offsetByCodePoints(sepOffset, 3)));
+        }
+        return false;
+    }
+
 }

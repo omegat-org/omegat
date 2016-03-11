@@ -1112,7 +1112,7 @@ public class ProjectPropertiesDialog extends JDialog {
             JCheckBox m_sentenceSegmentingCheckBox, JTextField m_srcRootField, JTextField m_locRootField,
             JTextField m_glosRootField, JTextField m_writeableGlosField, JTextField m_tmRootField, JTextField m_dictRootField,
             JCheckBox m_allowDefaultsCheckBox, JCheckBox m_removeTagsCheckBox, JTextArea m_customCommandTextArea) {
-        if (!ProjectProperties.verifySingleLangCode(m_sourceLocaleField.getSelectedItem().toString())) {
+        if (!Language.verifySingleLangCode(m_sourceLocaleField.getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(
                     this,
                     OStrings.getString("NP_INVALID_SOURCE_LOCALE")
@@ -1123,7 +1123,7 @@ public class ProjectPropertiesDialog extends JDialog {
         }
         projectProperties.setSourceLanguage(m_sourceLocaleField.getSelectedItem().toString());
 
-        if (!ProjectProperties.verifySingleLangCode(m_targetLocaleField.getSelectedItem().toString())) {
+        if (!Language.verifySingleLangCode(m_targetLocaleField.getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(
                     this,
                     OStrings.getString("NP_INVALID_TARGET_LOCALE")

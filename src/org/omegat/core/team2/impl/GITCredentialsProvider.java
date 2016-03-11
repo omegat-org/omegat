@@ -63,8 +63,6 @@ public class GITCredentialsProvider extends CredentialsProvider {
     private ProjectTeamSettings teamSettings;
     /** Predefined in the omegat.project file. */
     private Map<String, String> predefined = Collections.synchronizedMap(new HashMap<String, String>());
-    /** Known from previous enter in the session, but not saved. */
-    private Map<String, String> known = Collections.synchronizedMap(new HashMap<String, String>());
 
     public void setTeamSettings(ProjectTeamSettings teamSettings) {
         this.teamSettings = teamSettings;
@@ -80,12 +78,8 @@ public class GITCredentialsProvider extends CredentialsProvider {
     private Credentials loadCredentials(URIish uri) {
         String url = uri.toString();
         Credentials credentials = new Credentials();
-        credentials.username = known.get("user." + url);
-        credentials.password = known.get("pass." + url);
-        if (credentials.username == null || credentials.password == null) {
-            credentials.username = TeamSettings.get(url + "!" + KEY_USERNAME_SUFFIX);
-            credentials.password = TeamSettings.get(url + "!" + KEY_PASSWORD_SUFFIX);
-        }
+        credentials.username = TeamSettings.get(url + "!" + KEY_USERNAME_SUFFIX);
+        credentials.password = TeamUtils.decodePassword(TeamSettings.get(url + "!" + KEY_PASSWORD_SUFFIX));
         return credentials;
     }
 
@@ -93,13 +87,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
         String url = uri.toString();
         try {
             TeamSettings.set(url + "!" + KEY_USERNAME_SUFFIX, credentials.username);
-            if (credentials.saveAsPlainText) {
-                TeamSettings.set(url + "!" + KEY_PASSWORD_SUFFIX, credentials.password);
-            } else {
-                TeamSettings.set(url + "!" + KEY_PASSWORD_SUFFIX, null);
-            }
-            known.put("user." + url, credentials.username);
-            known.put("pass." + url, credentials.password);
+            TeamSettings.set(url + "!" + KEY_PASSWORD_SUFFIX, TeamUtils.encodePassword(credentials.password));
         } catch (Exception e) {
             Core.getMainWindow().displayErrorRB(e, "TEAM_ERROR_SAVE_CREDENTIALS", null, "TF_ERROR");
         }
@@ -266,12 +254,10 @@ public class GITCredentialsProvider extends CredentialsProvider {
         if (credentials.username != null) {
             userPassDialog.userText.setText(credentials.username);
         }
-        userPassDialog.cbSavePlainPassword.setSelected(true);
         userPassDialog.setVisible(true);
         if (userPassDialog.getReturnStatus() == GITUserPassDialog.RET_OK) {
             credentials.username = userPassDialog.userText.getText();
             credentials.password = new String(userPassDialog.passwordField.getPassword());
-            credentials.saveAsPlainText = userPassDialog.cbSavePlainPassword.isSelected();
             return credentials;
         } else {
             return null;
@@ -286,9 +272,6 @@ public class GITCredentialsProvider extends CredentialsProvider {
         if (predefinedUser != null && predefinedPass != null) {
             throw new KnownException("TEAM_PREDEFINED_CREDENTIALS_ERROR");
         }
-
-        known.remove("user." + url);
-        known.remove("pass." + url);
 
         Credentials credentials = loadCredentials(uri);
         credentials.username = null;
@@ -311,6 +294,5 @@ public class GITCredentialsProvider extends CredentialsProvider {
     public static class Credentials {
         public String username = null;
         public String password = null;
-        public boolean saveAsPlainText;
     }
 }

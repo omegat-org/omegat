@@ -117,7 +117,6 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         SVNUserPassDialog userPassDialog = new SVNUserPassDialog(Core.getMainWindow().getApplicationFrame());
         DockingUI.displayCentered(userPassDialog);
         userPassDialog.descriptionTextArea.setText(message);
-        userPassDialog.cbSavePlainPassword.setSelected(true);
         userPassDialog.setVisible(true);
         if (userPassDialog.getReturnStatus() != SVNUserPassDialog.RET_OK) {
             return null;
@@ -125,14 +124,8 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
 
         String user = userPassDialog.userText.getText();
         String pass = new String(userPassDialog.passwordField.getPassword());
-
-        if (userPassDialog.cbSavePlainPassword.isSelected()) {
-            TeamSettings.set(repoUrl + "!" + KEY_USERNAME_SUFFIX, user);
-            TeamSettings.set(repoUrl + "!" + KEY_PASSWORD_SUFFIX, pass);
-        } else {
-            TeamSettings.set(repoUrl + "!" + KEY_USERNAME_SUFFIX, null);
-            TeamSettings.set(repoUrl + "!" + KEY_PASSWORD_SUFFIX, null);
-        }
+        TeamSettings.set(repoUrl + "!" + KEY_USERNAME_SUFFIX, user);
+        TeamSettings.set(repoUrl + "!" + KEY_PASSWORD_SUFFIX, TeamUtils.encodePassword(pass));
 
         if (ISVNAuthenticationManager.PASSWORD.equals(kind)) {
             return new SVNPasswordAuthentication(user, pass, false, url, false);
@@ -157,7 +150,7 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
             }
         }
         String user = TeamSettings.get(repoUrl + "!" + KEY_USERNAME_SUFFIX);
-        String pass = TeamSettings.get(repoUrl + "!" + KEY_PASSWORD_SUFFIX);
+        String pass = TeamUtils.decodePassword(TeamSettings.get(repoUrl + "!" + KEY_PASSWORD_SUFFIX));
         if (user != null && pass != null) {
             if (ISVNAuthenticationManager.PASSWORD.equals(kind)) {
                 return new SVNPasswordAuthentication(user, pass, false, url, false);

@@ -25,6 +25,7 @@
 
 package org.omegat.util.gui;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -32,6 +33,7 @@ import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.geom.Area;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
@@ -43,7 +45,7 @@ import javax.swing.border.AbstractBorder;
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
-class RoundedCornerBorder extends AbstractBorder {
+public class RoundedCornerBorder extends AbstractBorder {
     
     public static final int SIDE_TOP = 0;
     public static final int SIDE_LEFT = 1;
@@ -54,24 +56,33 @@ class RoundedCornerBorder extends AbstractBorder {
     private final int radius;
     private final Color color;
     private final int side;
+    private final int stroke;
+    private final Stroke strokeObj;
     
     public RoundedCornerBorder() {
         this(-1, Color.GRAY, SIDE_ALL);
     }
     
     public RoundedCornerBorder(int radius, Color color, int side) {
+        this(radius, color, side, 1);
+    }
+
+    public RoundedCornerBorder(int radius, Color color, int side, int stroke) {
         this.radius = radius;
         this.color = color;
         this.side = side;
+        this.stroke = stroke;
+        this.strokeObj = new BasicStroke(stroke);
     }
-    
+
     @Override
     public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setStroke(strokeObj);
         
-        int r = radius == -1 ? height - 1 : radius;
-        RoundRectangle2D roundRect = new RoundRectangle2D.Float(x, y, width - 0.5f, height - 1, r, r);
+        int r = radius == -1 ? height - stroke : radius;
+        RoundRectangle2D roundRect = new RoundRectangle2D.Float(x, y, width - (stroke - 0.5f), height - stroke, r, r);
         Rectangle2D sharpRect = new Rectangle2D.Float(x, y, width, height);
         Area corners = new Area(sharpRect);
         corners.subtract(new Area(roundRect));
@@ -92,17 +103,17 @@ class RoundedCornerBorder extends AbstractBorder {
             line1 = new Line2D.Float(x, y, x, y + height);
             line2 = new Line2D.Float(x + width - 0.5f, y, x + width - 0.5f, y + height);
         } else if (side == SIDE_LEFT) {
-            roundedHalfClip = new Rectangle2D.Float(x, y, width / 2 + 1, height);
+            roundedHalfClip = new Rectangle2D.Float(x, y, width / 2 + stroke, height);
             line1 = new Line2D.Float(x, y, x + width, y);
-            line2 = new Line2D.Float(x, y + height - 1, x + width, y + height - 1);
+            line2 = new Line2D.Float(x, y + height - stroke, x + width, y + height - stroke);
         } else if (side == SIDE_BOTTOM) {
-            roundedHalfClip = new Rectangle2D.Float(x, y + height / 2, width, height / 2 + 1);
+            roundedHalfClip = new Rectangle2D.Float(x, y + height / 2, width, height / 2 + stroke);
             line1 = new Line2D.Float(x, y, x, y + height);
-            line2 = new Line2D.Float(x + width - 0.5f, y, x + width - 0.5f, y + height);
+            line2 = new Line2D.Float(x + width - (stroke - 0.5f), y, x + width - (stroke - 0.5f), y + height);
         } else if (side == SIDE_RIGHT) {
-            roundedHalfClip = new Rectangle2D.Float(x + width / 2, y, width / 2 + 1, height);
+            roundedHalfClip = new Rectangle2D.Float(x + width / 2, y, width / 2 + stroke, height);
             line1 = new Line2D.Float(x, y, x + width, y);
-            line2 = new Line2D.Float(x, y + height - 1, x + width, y + height - 1);
+            line2 = new Line2D.Float(x, y + height - stroke, x + width, y + height - stroke);
         } else {
             throw new IllegalArgumentException();
         }

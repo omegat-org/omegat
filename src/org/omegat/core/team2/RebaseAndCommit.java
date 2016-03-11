@@ -54,7 +54,7 @@ public class RebaseAndCommit {
         Log.logDebug(LOGGER, "Rebase and commit '" + path + "'");
 
         final String currentBaseVersion;
-        String savedVersion = TeamSettings.get(VERSION_PREFIX + path);
+        String savedVersion = provider.getTeamSettings().get(VERSION_PREFIX + path);
         if (savedVersion != null) {
             currentBaseVersion = savedVersion;
         } else {
@@ -138,7 +138,7 @@ public class RebaseAndCommit {
                 final File bakTemp = new File(projectDir, path + "#oldbased_on_" + currentBaseVersion);
                 FileUtil.move(localFile, bakTemp);
             }
-            TeamSettings.set(VERSION_PREFIX + path, headVersion);
+            provider.getTeamSettings().set(VERSION_PREFIX + path, headVersion);
             if (tempOut.exists()) {
                 FileUtil.move(tempOut, localFile);
             }
@@ -151,7 +151,7 @@ public class RebaseAndCommit {
             String newVersion = provider.commitFileAfterVersion(path, headVersion, comment);
             if (newVersion != null) {
                 // file was committed good
-                TeamSettings.set(VERSION_PREFIX + path, newVersion);
+                provider.getTeamSettings().set(VERSION_PREFIX + path, newVersion);
             }
         }
     }

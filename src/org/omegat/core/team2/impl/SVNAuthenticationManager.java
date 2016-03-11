@@ -67,11 +67,14 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
     private final String repoUrl;
     private final String predefinedUser;
     private final String predefinedPass;
+    private final TeamSettings teamSettings;
 
-    public SVNAuthenticationManager(String repoUrl, String predefinedUser, String predefinedPass) {
+    public SVNAuthenticationManager(String repoUrl, String predefinedUser, String predefinedPass,
+            TeamSettings teamSettings) {
         this.repoUrl = repoUrl;
         this.predefinedUser = predefinedUser;
         this.predefinedPass = predefinedPass;
+        this.teamSettings = teamSettings;
     }
 
     @Override
@@ -123,11 +126,11 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         String pass = new String(userPassDialog.passwordField.getPassword());
 
         if (userPassDialog.cbSavePlainPassword.isSelected()) {
-            TeamSettings.set(KEY_USERNAME_PREFIX + repoUrl, user);
-            TeamSettings.set(KEY_PASSWORD_PREFIX + repoUrl, pass);
+            teamSettings.set(KEY_USERNAME_PREFIX + repoUrl, user);
+            teamSettings.set(KEY_PASSWORD_PREFIX + repoUrl, pass);
         } else {
-            TeamSettings.set(KEY_USERNAME_PREFIX + repoUrl, null);
-            TeamSettings.set(KEY_PASSWORD_PREFIX + repoUrl, null);
+            teamSettings.set(KEY_USERNAME_PREFIX + repoUrl, null);
+            teamSettings.set(KEY_PASSWORD_PREFIX + repoUrl, null);
         }
 
         if (ISVNAuthenticationManager.PASSWORD.equals(kind)) {
@@ -152,8 +155,8 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
                 throw new SVNException(SVNErrorMessage.create(SVNErrorCode.AUTHN_NO_PROVIDER));
             }
         }
-        String user = TeamSettings.get(KEY_USERNAME_PREFIX + repoUrl);
-        String pass = TeamSettings.get(KEY_PASSWORD_PREFIX + repoUrl);
+        String user = teamSettings.get(KEY_USERNAME_PREFIX + repoUrl);
+        String pass = teamSettings.get(KEY_PASSWORD_PREFIX + repoUrl);
         if (user != null && pass != null) {
             if (ISVNAuthenticationManager.PASSWORD.equals(kind)) {
                 return new SVNPasswordAuthentication(user, pass, false, url, false);

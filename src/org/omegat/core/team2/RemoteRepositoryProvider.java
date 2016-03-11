@@ -55,15 +55,21 @@ public class RemoteRepositoryProvider {
     public static final String REPO_SUBDIR = ".repositories/";
 
     final File projectRoot;
+    final TeamSettings teamSettings;
     final List<RepositoryDefinition> repositoriesDefinitions;
     final List<IRemoteRepository2> repositories = new ArrayList<IRemoteRepository2>();
 
     public RemoteRepositoryProvider(ProjectProperties config) throws Exception {
         projectRoot = config.getProjectRootDir();
+        teamSettings = new TeamSettings(new File(projectRoot, REPO_SUBDIR));
         repositoriesDefinitions = config.getRepositories();
 
         checkDefinitions();
         initializeRepositories();
+    }
+
+    public TeamSettings getTeamSettings() {
+        return teamSettings;
     }
 
     /**
@@ -100,7 +106,7 @@ public class RemoteRepositoryProvider {
     protected void initializeRepositories() throws Exception {
         for (RepositoryDefinition r : repositoriesDefinitions) {
             IRemoteRepository2 repo = RemoteRepositoryFactory.create(r.getType());
-            repo.init(r, getRepositoryDir(r));
+            repo.init(r, getRepositoryDir(r), teamSettings);
             repositories.add(repo);
         }
     }

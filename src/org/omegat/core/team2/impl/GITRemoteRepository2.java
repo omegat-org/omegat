@@ -47,6 +47,7 @@ import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.omegat.core.team2.IRemoteRepository2;
+import org.omegat.core.team2.TeamSettings;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 
@@ -73,7 +74,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     }
 
     @Override
-    public void init(RepositoryDefinition repo, File dir) throws Exception {
+    public void init(RepositoryDefinition repo, File dir, TeamSettings teamSettings) throws Exception {
         repositoryURL = repo.getUrl();
         localDirectory = dir;
 
@@ -82,6 +83,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         String predefinedFingerprint = repo.getOtherAttributes().get(new QName("gitFingerprint"));
         ((GITCredentialsProvider) CredentialsProvider.getDefault()).setPredefinedCredentials(repositoryURL,
                 predefinedUser, predefinedPass, predefinedFingerprint);
+        ((GITCredentialsProvider) CredentialsProvider.getDefault()).setTeamSettings(teamSettings);
 
         File gitDir = new File(localDirectory, ".git");
         if (gitDir.exists() && gitDir.isDirectory()) {

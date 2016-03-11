@@ -59,10 +59,15 @@ public class GITCredentialsProvider extends CredentialsProvider {
     static final String KEY_PASSWORD_PREFIX = "login.password.";
     static final String KEY_FINGERPRINT_PREFIX = "login.fingerprint.";
 
+    private TeamSettings teamSettings;
     /** Predefined in the omegat.project file. */
     private Map<String, String> predefined = Collections.synchronizedMap(new HashMap<String, String>());
     /** Known from previous enter in the session, but not saved. */
     private Map<String, String> known = Collections.synchronizedMap(new HashMap<String, String>());
+
+    public void setTeamSettings(TeamSettings teamSettings) {
+        this.teamSettings = teamSettings;
+    }
 
     public void setPredefinedCredentials(String url, String predefinedUser, String predefinedPass,
             String predefinedFingerprint) {
@@ -77,8 +82,8 @@ public class GITCredentialsProvider extends CredentialsProvider {
         credentials.username = known.get("user." + url);
         credentials.password = known.get("pass." + url);
         if (credentials.username == null || credentials.password == null) {
-            credentials.username = TeamSettings.get(KEY_USERNAME_PREFIX + url);
-            credentials.password = TeamSettings.get(KEY_PASSWORD_PREFIX + url);
+            credentials.username = teamSettings.get(KEY_USERNAME_PREFIX + url);
+            credentials.password = teamSettings.get(KEY_PASSWORD_PREFIX + url);
         }
         return credentials;
     }
@@ -86,11 +91,11 @@ public class GITCredentialsProvider extends CredentialsProvider {
     private void saveCredentials(URIish uri, Credentials credentials) {
         String url = uri.toString();
         try {
-            TeamSettings.set(KEY_USERNAME_PREFIX + url, credentials.username);
+            teamSettings.set(KEY_USERNAME_PREFIX + url, credentials.username);
             if (credentials.saveAsPlainText) {
-                TeamSettings.set(KEY_PASSWORD_PREFIX + url, credentials.password);
+                teamSettings.set(KEY_PASSWORD_PREFIX + url, credentials.password);
             } else {
-                TeamSettings.set(KEY_PASSWORD_PREFIX + url, null);
+                teamSettings.set(KEY_PASSWORD_PREFIX + url, null);
             }
             known.put("user." + url, credentials.username);
             known.put("pass." + url, credentials.password);
@@ -101,13 +106,13 @@ public class GITCredentialsProvider extends CredentialsProvider {
 
     private String loadFingerprint(URIish uri) {
         String url = uri.toString();
-        return TeamSettings.get(KEY_FINGERPRINT_PREFIX + url);
+        return teamSettings.get(KEY_FINGERPRINT_PREFIX + url);
     }
 
     private void saveFingerprint(URIish uri, String fingerprint) {
         String url = uri.toString();
         try {
-            TeamSettings.set(KEY_FINGERPRINT_PREFIX + url, fingerprint);
+            teamSettings.set(KEY_FINGERPRINT_PREFIX + url, fingerprint);
         } catch (Exception e) {
             Core.getMainWindow().displayErrorRB(e, "TEAM_ERROR_SAVE_CREDENTIALS", null, "TF_ERROR");
         }

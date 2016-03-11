@@ -37,6 +37,7 @@ import java.util.logging.Logger;
 import javax.xml.namespace.QName;
 
 import org.omegat.core.team2.IRemoteRepository2;
+import org.omegat.core.team2.TeamSettings;
 import org.omegat.util.Log;
 import org.tmatesoft.svn.core.SVNCommitInfo;
 import org.tmatesoft.svn.core.SVNDepth;
@@ -66,7 +67,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     int credentialAskCount;
 
     @Override
-    public void init(RepositoryDefinition repo, File dir) throws Exception {
+    public void init(RepositoryDefinition repo, File dir, TeamSettings teamSettings) throws Exception {
         config = repo;
         baseDirectory = dir;
 
@@ -75,7 +76,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
 
         ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
         ISVNAuthenticationManager authManager = new SVNAuthenticationManager(repo.getUrl(), predefinedUser,
-                predefinedPass);
+                predefinedPass, teamSettings);
         ourClientManager = SVNClientManager.newInstance(options, authManager);
         if (baseDirectory.exists()) {
             ourClientManager.getWCClient().doCleanup(baseDirectory);

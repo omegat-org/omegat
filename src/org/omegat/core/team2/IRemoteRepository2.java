@@ -29,12 +29,6 @@ package org.omegat.core.team2;
 import gen.core.project.RepositoryDefinition;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Properties;
 
 /**
  * Interface for any remote repository implementation.
@@ -49,8 +43,10 @@ public interface IRemoteRepository2 {
      *            repository description instance
      * @param dir
      *            directory for store files
+     * @param teamSettings
+     *            team settings object for project
      */
-    void init(RepositoryDefinition repo, File dir) throws Exception;
+    void init(RepositoryDefinition repo, File dir, TeamSettings teamSettings) throws Exception;
 
     /**
      * Get file version.

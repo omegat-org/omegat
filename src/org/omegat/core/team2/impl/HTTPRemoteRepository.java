@@ -42,6 +42,7 @@ import java.util.Properties;
 import java.util.logging.Logger;
 
 import org.omegat.core.team2.IRemoteRepository2;
+import org.omegat.core.team2.TeamSettings;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
 
@@ -61,7 +62,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
     File baseDirectory;
 
     @Override
-    public void init(RepositoryDefinition repo, File dir) throws Exception {
+    public void init(RepositoryDefinition repo, File dir, TeamSettings teamSettings) throws Exception {
         Log.logDebug(LOGGER, "Initialize HTTP remote repository");
         config = repo;
         baseDirectory = dir;

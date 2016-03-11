@@ -30,7 +30,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Properties;
 
-import org.omegat.core.Core;
 import org.omegat.util.FileUtil;
 
 /**
@@ -39,17 +38,20 @@ import org.omegat.util.FileUtil;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TeamSettings {
+    private final File configFile;
+
+    public TeamSettings(File configDir) {
+        this.configFile = new File(configDir, "settings.properties");
+    }
 
     /**
      * Get setting.
      */
-    public synchronized static String get(String key) {
+    public synchronized String get(String key) {
         try {
             Properties p = new Properties();
-            File versionsFile = new File(Core.getProject().getProjectProperties().getProjectRootDir(),
-                    RemoteRepositoryProvider.REPO_SUBDIR + "settings.properties");
-            if (versionsFile.exists()) {
-                FileInputStream in = new FileInputStream(versionsFile);
+            if (configFile.exists()) {
+                FileInputStream in = new FileInputStream(configFile);
                 try {
                     p.load(in);
                 } finally {
@@ -65,12 +67,11 @@ public class TeamSettings {
     /**
      * Update setting.
      */
-    public synchronized static void set(String key, String newValue) {
+    public synchronized void set(String key, String newValue) {
         try {
             Properties p = new Properties();
-            File projectDir = Core.getProject().getProjectProperties().getProjectRootDir();
-            File f = new File(projectDir, RemoteRepositoryProvider.REPO_SUBDIR + "settings.properties");
-            File fNew = new File(projectDir, RemoteRepositoryProvider.REPO_SUBDIR + "settings.properties.new");
+            File f = configFile;
+            File fNew = new File(configFile.getAbsolutePath() + ".new");
             if (f.exists()) {
                 FileInputStream in = new FileInputStream(f);
                 try {

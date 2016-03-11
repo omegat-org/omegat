@@ -13,6 +13,7 @@
                2013 Aaron Madlon-Kay, Zoltan Bartko
                2014 Piotr Kulik, Aaron Madlon-Kay
                2015 Aaron Madlon-Kay, Yu Tang, Didier Briel, Hiroshi Miura
+               2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -36,35 +37,22 @@ package org.omegat.util;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.omegat.core.segmentation.SRX;
-import org.omegat.filters2.TranslationException;
-import org.omegat.filters2.master.FilterMaster;
-import org.omegat.util.xml.XMLBlock;
-import org.omegat.util.xml.XMLStreamReader;
 
 import gen.core.filters.Filters;
 
 /**
- * Class to load & save OmegaT preferences. All methods are static here.
+ * Class to load & save global OmegaT preferences.
+ * <p>
+ * Initially this class was implemented with static members and methods directly
+ * implementing the interface, backed by XML storage. However this was bad for
+ * testing and extensibility, or allowing different persistence formats.
+ * <p>
+ * This class's static methods remain for compatibility, but now they wrap a
+ * singleton instance of a concrete implementation of {@link IPreferences}. The
+ * XML-based implementation is now at {@link PreferencesXML}.
  * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
@@ -422,14 +410,7 @@ public class Preferences {
     public static final String PROPERTY_FILTERS = "filters";
 
     /** Private constructor, because this file is singleton */
-    static {
-        m_loaded = false;
-        m_preferenceMap = new HashMap<String, Integer>(64);
-        m_nameList = new ArrayList<String>(32);
-        m_valList = new ArrayList<String>(32);
-        m_propChangeSupport = new PropertyChangeSupport(Preferences.class);
-        m_changed = false;
-        doLoad();
+    private Preferences() {
     }
 
     /**
@@ -439,47 +420,27 @@ public class Preferences {
      * If the key is not found, returns the empty string.
      * 
      * @param key
-     *            key of the key to look up, usually OConsts.PREF_...
+     *            key of the key to look up, usually a static string from this
+     *            class
      * @return preference defaultValue as a string
      */
     public static String getPreference(String key) {
-        if (key == null || key.equals(""))
-            return "";
-        if (!m_loaded)
-            doLoad();
-
-        Integer i = m_preferenceMap.get(key);
-        Object v = "";
-        if (i != null) {
-            // mapping exists - recover defaultValue
-            v = m_valList.get(i);
-        }
-        return v.toString();
+        return m_preferences.getPreference(key);
     }
     
 	/**
-	 * Returns true if the preference is in OmegaT's preferences
-	 * file.
-	 * <p>
-	 * If the key is not found return false
-	 * 
-	 * @param key
-	 *            key of the key to look up, usually OConsts.PREF_...
-	 * @return true if preferences exists
-	 */
-	public static boolean existsPreference(String key) {
-		boolean exists = false;
-		if (key == null)
-			exists = false;
-		if (!m_loaded)
-			doLoad();
-		Integer i = m_preferenceMap.get(key);
-		if (i != null) {
-			exists = true;
-		}		
-		return exists;
-	}
-    
+     * Returns true if the preference is in OmegaT's preferences file.
+     * <p>
+     * If the key is not found return false
+     * 
+     * @param key
+     *            key of the key to look up, usually a static string from this
+     *            class
+     * @return true if preferences exists
+     */
+    public static boolean existsPreference(String key) {
+        return m_preferences.existsPreference(key);
+    }
 
     /**
      * Returns the boolean defaultValue of some preference.
@@ -488,11 +449,11 @@ public class Preferences {
      * otherwise (no such preference, or it's equal to "false", etc).
      * 
      * @param key
-     *            preference key, usually OConsts.PREF_...
+     *            preference key, usually a static string from this class
      * @return preference defaultValue as a boolean
      */
     public static boolean isPreference(String key) {
-        return "true".equals(getPreference(key));
+        return m_preferences.isPreference(key);
     }
 
     /**
@@ -503,18 +464,14 @@ public class Preferences {
      * preference to the default value.
      * 
      * @param key
-     *            name of the key to look up, usually OConsts.PREF_...
+     *            name of the key to look up, usually a static string from this
+     *            class
      * @param defaultValue
      *            default value for the key
      * @return preference value as an boolean
      */
     public static boolean isPreferenceDefault(String key, boolean defaultValue) {
-        String val = getPreference(key);
-        if (StringUtil.isEmpty(val)) {
-            setPreference(key, defaultValue);
-            return defaultValue;
-        }
-        return "true".equals(val);
+        return m_preferences.isPreferenceDefault(key, defaultValue);
     }
 
     /**
@@ -525,55 +482,46 @@ public class Preferences {
      * preference to the default value.
      * 
      * @param key
-     *            name of the key to look up, usually OConsts.PREF_...
+     *            name of the key to look up, usually a static string from this
+     *            class
      * @param defaultValue
      *            default value for the key
      * @return preference value as a string
      */
     public static String getPreferenceDefault(String key, String defaultValue) {
-        String val = getPreference(key);
-        if (val.equals("")) {
-            val = defaultValue;
-            setPreference(key, defaultValue);
-        }
-        return val;
-    }
-
-    /**
-     * Returns the value of some preference out of OmegaT's preferences file, if it exists.
-     * <p>
-     * If the key is not found, returns the default value provided and sets the preference to the default
-     * value.
-     * 
-     * @param key
-     *            name of the key to look up, usually OConsts.PREF_...
-     * @param defaultValue
-     *            default value for the key
-     * @return preference value as enum
-     */
-    public static <T extends Enum<T>> T getPreferenceEnumDefault(String key, T defaultValue) {
-        String val = getPreference(key);
-        T r;
-        try {
-            r = Enum.valueOf(defaultValue.getDeclaringClass(), val);
-        } catch (IllegalArgumentException ex) {
-            r = defaultValue;
-            setPreference(key, defaultValue);
-        }
-        return r;
+        return m_preferences.getPreferenceDefault(key, defaultValue);
     }
 
     /**
      * Returns the value of some preference out of OmegaT's preferences file, if
      * it exists.
      * <p>
+     * If the key is not found, returns the default value provided and sets the
+     * preference to the default value.
+     * 
      * @param key
-     *            name of the key to look up, usually OConsts.PREF_...
+     *            name of the key to look up, usually a static string from this
+     *            class
+     * @param defaultValue
+     *            default value for the key
+     * @return preference value as enum
+     */
+    public static <T extends Enum<T>> T getPreferenceEnumDefault(String key, T defaultValue) {
+        return m_preferences.getPreferenceEnumDefault(key, defaultValue);
+    }
+
+    /**
+     * Returns the value of some preference out of OmegaT's preferences file, if
+     * it exists.
+     * <p>
+     * 
+     * @param key
+     *            name of the key to look up, usually a static string from this
+     *            class
      * @return preference value as a string
      */
     public static String getPreferenceDefaultAllowEmptyString(String key) {
-        String val = getPreference(key);
-        return val;
+        return m_preferences.getPreferenceDefaultAllowEmptyString(key);
     }
 
     /**
@@ -584,19 +532,14 @@ public class Preferences {
      * preference to the default value.
      * 
      * @param key
-     *            name of the key to look up, usually OConsts.PREF_...
+     *            name of the key to look up, usually a static string from this
+     *            class
      * @param defaultValue
      *            default value for the key
      * @return preference value as an integer
      */
     public static int getPreferenceDefault(String key, int defaultValue) {
-        String val = getPreferenceDefault(key, Integer.toString(defaultValue));
-        int res = defaultValue;
-        try {
-            res = Integer.parseInt(val);
-        } catch (NumberFormatException nfe) {
-        }
-        return res;
+        return m_preferences.getPreferenceDefault(key, defaultValue);
     }
 
     /**
@@ -609,31 +552,7 @@ public class Preferences {
      *            preference value as an object
      */
     public static void setPreference(String name, Object value) {
-        if (StringUtil.isEmpty(name) || value == null) {
-            return;
-        }
-        if (value instanceof Enum) {
-            if (!value.toString().equals(((Enum<?>) value).name())) {
-                throw new IllegalArgumentException("Enum prefs must return the same thing from toString() and name()");
-            }
-        }
-        m_changed = true;
-        Object oldValue = null;
-        if (!m_loaded) {
-            doLoad();
-        }
-        Integer i = m_preferenceMap.get(name);
-        if (i == null) {
-            // defaultValue doesn't exist - add it
-            i = m_valList.size();
-            m_preferenceMap.put(name, i);
-            m_valList.add(value.toString());
-            m_nameList.add(name);
-        } else {
-            // mapping exists - reset defaultValue to new
-            oldValue = m_valList.set(i.intValue(), value.toString());
-        }
-        m_propChangeSupport.firePropertyChange(name, oldValue, value);
+        m_preferences.setPreference(name, value);
     }
 
     /**
@@ -647,135 +566,63 @@ public class Preferences {
      * @param listener
      */
     public static void addPropertyChangeListener(PropertyChangeListener listener) {
-        m_propChangeSupport.addPropertyChangeListener(listener);
+        m_preferences.addPropertyChangeListener(listener);
     }
 
     public static SRX getSRX() {
-        return srx;
+        return m_preferences.getSRX();
     }
 
     public static void setSRX(SRX newSrx) {
-        SRX oldValue = srx;
-        srx = newSrx;
-
-        File srxFile = new File(StaticUtils.getConfigDir() + SRX.CONF_SENTSEG);
-        try {
-            SRX.saveTo(srx, srxFile);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        m_propChangeSupport.firePropertyChange(PROPERTY_SRX, oldValue, newSrx);
+        m_preferences.setSRX(newSrx);
     }
 
     public static Filters getFilters() {
-        return filters;
+        return m_preferences.getFilters();
     }
 
     public static void setFilters(Filters newFilters) {
-        Filters oldValue = filters;
-        filters = newFilters;
-
-        File filtersFile = new File(StaticUtils.getConfigDir(), FilterMaster.FILE_FILTERS);
-        try {
-            FilterMaster.saveConfig(filters, filtersFile);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        m_propChangeSupport.firePropertyChange(PROPERTY_FILTERS, oldValue, newFilters);
+        m_preferences.setFilters(newFilters);
     }
 
     public static void save() {
-        try {
-            if (m_changed)
-                doSave();
-        } catch (IOException e) {
-            Log.logErrorRB("PM_ERROR_SAVE");
-            Log.log(e);
-        }
+        m_preferences.save();
     }
 
-    /**
-     * Loads the preferences from disk, from a location determined by {@link #getPreferencesFile()}.
-     * This method is package-private for unit testing purposes. Otherwise it is only meant to be
-     * called from the static initializer in this class. DO NOT CALL IT UNLESS YOU KNOW WHAT YOU'RE
-     * DOING.
-     */
-    static void doLoad() {
-        // mark as loaded - if the load fails, there's no use
-        // trying again later
-        m_loaded = true;
+    interface IPreferences {
 
-        XMLStreamReader xml = new XMLStreamReader();
-        xml.killEmptyBlocks();
+        String getPreference(String key);
 
-        File prefsFile = getPreferencesFile();
-        
-        InputStream is = null;
-        InputStreamReader isr = null;
-        BufferedReader br = null;
-        try {
-            if (prefsFile == null) {
-                // If no prefs file is present, look inside JAR for defaults. Useful for e.g. Web Start.
-                is = getClass().getResourceAsStream(FILE_PREFERENCES);
-                if (is != null) {
-                    isr = new InputStreamReader(is);
-                    br = new BufferedReader(isr);
-                    xml.setStream(br);
-                    readXmlPrefs(xml);
-                    br.close();
-                    isr.close();
-                    is.close();
-                    xml.close();
-                }
-            } else {
-                xml.setStream(prefsFile);
-                readXmlPrefs(xml);
-                xml.close();
-            }
-        } catch (TranslationException te) {
-            // error loading preference file - keep whatever was
-            // loaded then return gracefully to calling function
-            // print an error to the console as an FYI
-            Log.logWarningRB("PM_WARNING_PARSEERROR_ON_READ");
-            Log.log(te);
-            makeBackup(prefsFile);
-        } catch (IndexOutOfBoundsException e3) {
-            // error loading preference file - keep whatever was
-            // loaded then return gracefully to calling function
-            // print an error to the console as an FYI
-            Log.logWarningRB("PM_WARNING_PARSEERROR_ON_READ");
-            Log.log(e3);
-            makeBackup(prefsFile);
-        } catch (UnsupportedEncodingException e3) {
-            // unsupported encoding - forget about it
-            Log.logErrorRB(e3, "PM_UNSUPPORTED_ENCODING");
-            makeBackup(prefsFile);
-        } catch (IOException e4) {
-            // can't read file - forget about it and move on
-            Log.logErrorRB(e4, "PM_ERROR_READING_FILE");
-            makeBackup(prefsFile);
-        } finally {
-            IOUtils.closeQuietly(xml);
-            IOUtils.closeQuietly(is);
-            IOUtils.closeQuietly(isr);
-            IOUtils.closeQuietly(br);
-        }
+        boolean existsPreference(String key);
 
-        File srxFile = new File(StaticUtils.getConfigDir(), SRX.CONF_SENTSEG);
-        srx = SRX.loadSRX(srxFile);
-        if (srx == null) {
-            srx = SRX.getDefault();
-        }
-        File filtersFile = new File(StaticUtils.getConfigDir(), FilterMaster.FILE_FILTERS);
-        try {
-            filters = FilterMaster.loadConfig(filtersFile);
-        } catch (Exception ex) {
-            Log.log(ex);
-        }
-        if (filters == null) {
-            filters = FilterMaster.createDefaultFiltersConfig();
-        }
+        boolean isPreference(String key);
+
+        boolean isPreferenceDefault(String key, boolean defaultValue);
+
+        String getPreferenceDefault(String key, String value);
+
+        <T extends Enum<T>> T getPreferenceEnumDefault(String key, T defaultValue);
+
+        String getPreferenceDefaultAllowEmptyString(String key);
+
+        int getPreferenceDefault(String key, int defaultValue);
+
+        void setPreference(String key, Object value);
+
+        void save();
+
+        void setFilters(Filters newFilters);
+
+        Filters getFilters();
+
+        void setSRX(SRX newSRX);
+
+        SRX getSRX();
+
+        void addPropertyChangeListener(PropertyChangeListener listener);
     }
+
+    private static final IPreferences m_preferences = new PreferencesXML(getPreferencesFile());
 
     /**
      * Gets the prefs file to use. Looks in these places in this order:
@@ -797,104 +644,4 @@ public class Preferences {
         return null;
     }
 
-    private static void readXmlPrefs(XMLStreamReader xml) throws TranslationException {
-        XMLBlock blk;
-        List<XMLBlock> lst;
-
-        m_preferenceMap.clear();
-        String pref;
-        String val;
-        // advance to omegat tag
-        if (xml.advanceToTag("omegat") == null) {
-            return;
-        }
-        // advance to project tag
-        if ((blk = xml.advanceToTag("preference")) == null) {
-            return;
-        }
-        String ver = blk.getAttribute("version");
-        if (ver != null && !ver.equals("1.0")) {
-            // unsupported preference file version - abort read
-            return;
-        }
-        lst = xml.closeBlock(blk);
-        if (lst == null) {
-            return;
-        }
-        for (int i = 0; i < lst.size(); i++) {
-            blk = lst.get(i);
-            if (blk.isClose()) {
-                continue;
-            }
-            if (!blk.isTag()) {
-                continue;
-            }
-            pref = blk.getTagName();
-            blk = lst.get(++i);
-            if (blk.isClose()) {
-                // allow empty string as a preference value
-                val = "";
-            } else {
-                val = blk.getText();
-            }
-            if (pref != null && val != null) {
-                // valid match - record these
-                m_preferenceMap.put(pref, m_valList.size());
-                m_nameList.add(pref);
-                m_valList.add(val);
-            }
-        }
-    }
-    
-    private static void makeBackup(File file) {
-        if (file == null || !file.isFile()) {
-            return;
-        }
-        String timestamp = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
-        File bakFile = new File(file.getAbsolutePath() + "." + timestamp + ".bak");
-        try {
-            FileUtils.copyFile(file, bakFile);
-            Log.logWarningRB("PM_BACKED_UP_PREFS_FILE", bakFile.getAbsolutePath());
-        } catch (IOException ex) {
-            Log.logErrorRB(ex, "PM_ERROR_BACKING_UP_PREFS_FILE");
-        }
-    }
-
-    private static void doSave() throws IOException {
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
-                StaticUtils.getConfigDir() + FILE_PREFERENCES), "UTF-8"));
-        try {
-            out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
-            out.write("<omegat>\n");
-            out.write("  <preference version=\"1.0\">\n");
-    
-            for (int i = 0; i < m_nameList.size(); i++) {
-                String name = m_nameList.get(i);
-                String val = StringUtil.makeValidXML(m_valList.get(i).toString());
-                out.write("    <" + name + ">");
-                out.write(val);
-                out.write("</" + name + ">\n");
-            }
-            out.write("  </preference>\n");
-            out.write("</omegat>\n");
-        } finally {
-            out.close();
-        }
-        m_changed = false;
-    }
-
-    private static boolean m_loaded;
-    private static boolean m_changed;
-
-    // use a hash map for fast lookup of data
-    // use array lists for orderly recovery of it for saving to disk
-    private static List<String> m_nameList;
-    private static List<String> m_valList;
-    private static Map<String, Integer> m_preferenceMap;
-
-    // Support for firing property change events
-    private static PropertyChangeSupport m_propChangeSupport;
-
-    private static SRX srx;
-    private static Filters filters;
 }

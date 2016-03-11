@@ -40,11 +40,6 @@ public class PreferencesTest extends TestCase {
     /**
      * Test that if an error is encountered when loading the
      * preferences file, the original file is backed up.
-     * <p>
-     * Note that this test can spuriously fail if run in a situation
-     * where the Preferences class has already been initialized, for
-     * instance when running the entire suite of tests in Eclipse. It
-     * behaves correctly when run individually, or with ant.
      */
     public void testPreferencesBackup() throws Exception {
         File tmpDir = FileUtil.createTempDir();
@@ -56,12 +51,11 @@ public class PreferencesTest extends TestCase {
             // the log file will be locked, so when we try to delete the
             // temp dir at the end of the test it will fail.
             Log.log("Dummy log line");
-            StaticUtils.setConfigDir(tmpDir.getAbsolutePath());
             
-            File prefs = new File(tmpDir, Preferences.FILE_PREFERENCES);
+            File prefsFile = new File(tmpDir, Preferences.FILE_PREFERENCES);
             
             // Write anything that is malformed XML, to force a parsing error.
-            PrintWriter out = new PrintWriter(prefs, "UTF-8");
+            PrintWriter out = new PrintWriter(prefsFile, "UTF-8");
             out.println("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
             out.println("<omegat>");
             out.println("<preference version=\"1.0\">");
@@ -69,7 +63,7 @@ public class PreferencesTest extends TestCase {
             assertFalse(out.checkError());
             
             // Load bad prefs file.
-            Preferences.doLoad();
+            new PreferencesXML(prefsFile);
             
             // The actual backup file will have a timestamp in the filename,
             // so we have to loop through looking for it.
@@ -85,7 +79,7 @@ public class PreferencesTest extends TestCase {
             assertNotNull(backup);
             assertTrue(backup.isFile());
             
-            TestFilterBase.compareBinary(prefs, backup);
+            TestFilterBase.compareBinary(prefsFile, backup);
         } finally {
             assertTrue(FileUtil.deleteTree(tmpDir));
         }

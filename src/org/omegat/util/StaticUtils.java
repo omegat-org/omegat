@@ -577,14 +577,6 @@ public class StaticUtils {
         // we should have a correct, existing config dir now
         return m_configDir;
     }
-    
-    /**
-     * Set the config dir path. This method is for unit testing purposes only.
-     * DO NOT CALL IT UNLESS YOU KNOW WHAT YOU'RE DOING.
-     */
-    static void setConfigDir(String path) {
-        m_configDir = path;
-    }
 
     public static String getScriptDir() {
         // If the script directory has already been determined, return it

@@ -43,6 +43,7 @@ import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
@@ -409,6 +410,10 @@ public class ProjectProperties {
         this.removeTags = removeTags;
     }
 
+    public boolean hasRepositories() {
+        return repositories != null && !repositories.isEmpty();
+    }
+
     public List<RepositoryDefinition> getRepositories() {
         return repositories;
     }
@@ -497,6 +502,22 @@ public class ProjectProperties {
             if (getDictRoot().equals(getProjectRoot() + OConsts.DEFAULT_DICT + '/')) {
                 dict.mkdirs();
             }
+        }
+    }
+
+    public void autocreateDirectories() {
+        autocreateOneDirectory(getProjectInternalDir());
+        autocreateOneDirectory(sourceDir.getAsFile());
+        autocreateOneDirectory(targetDir.getAsFile());
+        autocreateOneDirectory(glossaryDir.getAsFile());
+        autocreateOneDirectory(tmDir.getAsFile());
+        autocreateOneDirectory(dictDir.getAsFile());
+    }
+
+    private void autocreateOneDirectory(File dir) {
+        if (!dir.exists()) {
+            Log.logInfoRB("CT_AUTOCREATE_DIRECTORY", dir);
+            dir.mkdirs();
         }
     }
 

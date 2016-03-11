@@ -254,20 +254,26 @@ public class ProjectUICommands {
 
                     try {
                         boolean needToSaveProperties = false;
-                        while (!props.isProjectValid()) {
-                            needToSaveProperties = true;
-                            // something wrong with the project - display open dialog
-                            // to fix it
-                            ProjectPropertiesDialog prj = new ProjectPropertiesDialog(props, new File(
-                                    projectRootFolder, OConsts.FILE_PROJECT).getAbsolutePath(),
-                                    ProjectPropertiesDialog.Mode.RESOLVE_DIRS);
-                            prj.setVisible(true);
-                            props = prj.getResult();
-                            prj.dispose();
-                            if (props == null) {
-                                // user clicks on 'Cancel'
-                                mainWindow.setCursor(oldCursor);
-                                return null;
+                        if (props.hasRepositories()) {
+                            // team project - non-exist directories could be created from repo
+                            props.autocreateDirectories();
+                        } else {
+                            // not a team project - ask for non-exist directories
+                            while (!props.isProjectValid()) {
+                                needToSaveProperties = true;
+                                // something wrong with the project - display open dialog
+                                // to fix it
+                                ProjectPropertiesDialog prj = new ProjectPropertiesDialog(props, new File(
+                                        projectRootFolder, OConsts.FILE_PROJECT).getAbsolutePath(),
+                                        ProjectPropertiesDialog.Mode.RESOLVE_DIRS);
+                                prj.setVisible(true);
+                                props = prj.getResult();
+                                prj.dispose();
+                                if (props == null) {
+                                    // user clicks on 'Cancel'
+                                    mainWindow.setCursor(oldCursor);
+                                    return null;
+                                }
                             }
                         }
 

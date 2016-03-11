@@ -312,6 +312,12 @@ public class RealProject implements IProject {
 
             if (remoteRepositoryProvider != null) {
                 // copy files from repository to project
+
+                // save changed TMX or just retrieve from repository
+                remoteRepositoryProvider.switchAllToLatest();
+                rebaseAndCommitProject();
+
+                // retrieve other directories
                 remoteRepositoryProvider.switchAllToLatest();
                 for (String dir : new String[] { m_config.getSourceDir().getUnderRoot(),
                         m_config.getGlossaryDir().getUnderRoot(), m_config.getTmDir().getUnderRoot(),
@@ -326,7 +332,7 @@ public class RealProject implements IProject {
                         dir += "/";
                     }
                     remoteRepositoryProvider.copyFilesFromRepoToProject(dir);
-                }//TODO update project_save.tmx
+                }
             }
 
             // set project specific file filters if they exist
@@ -818,10 +824,13 @@ public class RealProject implements IProject {
                             return TMXReader2.detectCharset(file);
                         }
                     });
-            ProjectTMX newTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(),
-                    m_config.isSentenceSegmentingEnabled(), new File(m_config.getProjectInternalDir(),
-                            OConsts.STATUS_EXTENSION), null);
-            projectTMX.replaceContent(newTMX);
+            if (projectTMX != null) {
+                // it can be not loaded yet
+                ProjectTMX newTMX = new ProjectTMX(m_config.getSourceLanguage(),
+                        m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), new File(
+                                m_config.getProjectInternalDir(), OConsts.STATUS_EXTENSION), null);
+                projectTMX.replaceContent(newTMX);
+            }
         }
 
         final String glossaryPath = m_config.getWritableGlossaryFile().getUnderRoot();
@@ -836,12 +845,20 @@ public class RealProject implements IProject {
 
                         @Override
                         public void parseBaseFile(File file) throws Exception {
-                            baseGlossaryEntries = GlossaryReaderTSV.read(file, true);
+                            if (file.exists()) {
+                                baseGlossaryEntries = GlossaryReaderTSV.read(file, true);
+                            } else {
+                                baseGlossaryEntries = new ArrayList<GlossaryEntry>();
+                            }
                         }
 
                         @Override
                         public void parseHeadFile(File file) throws Exception {
-                            headGlossaryEntries = GlossaryReaderTSV.read(file, true);
+                            if (file.exists()) {
+                                headGlossaryEntries = GlossaryReaderTSV.read(file, true);
+                            } else {
+                                headGlossaryEntries = new ArrayList<GlossaryEntry>();
+                            }
                         }
 
                         @Override

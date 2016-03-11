@@ -61,11 +61,15 @@ public class RebaseAndCommit {
             provider.switchToVersion(path, null);
             currentBaseVersion = provider.getVersion(path);
         }
-
+        final File localFile = new File(projectDir, path);
         final boolean fileChangedLocally;
         {
             File baseRepoFile = provider.switchToVersion(path, currentBaseVersion);
-            if (FileUtil.isFilesEqual(baseRepoFile, new File(projectDir, path))) {
+            if (!localFile.exists()) {
+                // there is no local file - just use remote
+                Log.logDebug(LOGGER, "local file '" + path + "' doesn't exist");
+                fileChangedLocally = false;
+            } else if (FileUtil.isFilesEqual(baseRepoFile, localFile)) {
                 // versioned file was not changed - no need to commit
                 Log.logDebug(LOGGER, "local file '" + path + "' wasn't changed");
                 fileChangedLocally = false;
@@ -77,26 +81,39 @@ public class RebaseAndCommit {
             // baseRepoFile is not valid anymore because we will switch to other version
         }
 
-        final boolean fileChangedRemotely;
         final File headRepoFile = provider.switchToVersion(path, null);
         final String headVersion = provider.getVersion(path);
-        if (currentBaseVersion.equals(headVersion)) {
-            Log.logDebug(LOGGER, "remote file '" + path + "' wasn't changed");
-            fileChangedRemotely = false;
-        } else {
-            // base and head versions are differ - somebody else committed changes
-            Log.logDebug(LOGGER, "remote file '" + path + "' was changed");
-            fileChangedRemotely = true;
-            rebaser.parseHeadFile(headRepoFile);
+        final boolean fileChangedRemotely;
+        {
+            if (!localFile.exists()) {
+                // there is no local file - just use remote
+                if (headRepoFile.exists()) {
+                    fileChangedRemotely = true;
+                    rebaser.parseHeadFile(headRepoFile);
+                } else {
+                    // there is no remote file also
+                    fileChangedRemotely = false;
+                }
+            } else if (currentBaseVersion.equals(headVersion)) {
+                Log.logDebug(LOGGER, "remote file '" + path + "' wasn't changed");
+                fileChangedRemotely = false;
+            } else {
+                // base and head versions are differ - somebody else committed changes
+                Log.logDebug(LOGGER, "remote file '" + path + "' was changed");
+                fileChangedRemotely = true;
+                rebaser.parseHeadFile(headRepoFile);
+            }
         }
 
         final File tempOut = new File(projectDir, path + "#based_on_" + headVersion);
         if (tempOut.exists() && !tempOut.delete()) {
             throw new Exception("Unable to delete previous temp file");
         }
+        boolean needBackup = false;
         if (fileChangedLocally && fileChangedRemotely) {
             // rebase need only in case file was changed locally AND remotely
             Log.logDebug(LOGGER, "rebase and save '" + path + "'");
+            needBackup = true;
             rebaser.rebaseAndSave(tempOut);
         } else if (fileChangedLocally && !fileChangedRemotely) {
             // only local changes - just use local file
@@ -104,25 +121,32 @@ public class RebaseAndCommit {
         } else if (!fileChangedLocally && fileChangedRemotely) {
             // only remote changes - get remote
             Log.logDebug(LOGGER, "only remote changes - get remote '" + path + "'");
-            FileUtil.copyFile(headRepoFile, tempOut);
+            needBackup = true;
+            if (headRepoFile.exists()) {// otherwise file was removed remotelly
+                FileUtil.copyFile(headRepoFile, tempOut);
+            }
         } else {
             Log.logDebug(LOGGER, "there are no changes '" + path + "'");
             // there are no changes
         }
 
-        if (tempOut.exists()) {
+        if (needBackup) {
             // new file was saved, need to update version
             // code below tries to update file "in transaction" with update version
-            final File bakTemp = new File(projectDir, path + "#oldbased_on_" + currentBaseVersion);
-            FileUtil.move(new File(projectDir, path), bakTemp);
+            if (localFile.exists()) {
+                final File bakTemp = new File(projectDir, path + "#oldbased_on_" + currentBaseVersion);
+                FileUtil.move(localFile, bakTemp);
+            }
             TeamSettings.set(VERSION_PREFIX + path, headVersion);
-            FileUtil.move(tempOut, new File(projectDir, path));
+            if (tempOut.exists()) {
+                FileUtil.move(tempOut, localFile);
+            }
         }
 
         if (fileChangedLocally) {
             // new file already saved - need to commit
             String comment = rebaser.getCommentForCommit();
-            provider.copyFilesFromProjectToRepo(path, rebaser.getFileCharset(new File(projectDir, path)));
+            provider.copyFilesFromProjectToRepo(path, rebaser.getFileCharset(localFile));
             String newVersion = provider.commitFileAfterVersion(path, headVersion, comment);
             if (newVersion != null) {
                 // file was committed good
@@ -136,6 +160,10 @@ public class RebaseAndCommit {
          * Rebaser should read and parse BASE version of file. It can't just remember file path because file
          * will be removed after switch into other version. Rebase can be called after that or can not be
          * called.
+         * 
+         * Case for non-exist file: it's correct call. That means file is just created in local box. But after
+         * that, remote repository can also contain file, i.e. two users created file independently, then
+         * rebase will be called. Implementation should interpret non-exist file as empty data.
          */
         void parseBaseFile(File file) throws Exception;
 
@@ -143,6 +171,9 @@ public class RebaseAndCommit {
          * Rebaser should read and parse HEAD version of file. It can't just remember file path because file
          * will be removed after switch into other version. Rebase can be called after that or can not be
          * called.
+         * 
+         * Case for non-exist file: it's correct call. That means file was removed from repository.
+         * Implementation should interpret non-exist file as empty data.
          */
         void parseHeadFile(File file) throws Exception;
 

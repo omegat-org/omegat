@@ -50,7 +50,7 @@ public class TeamSettings {
         return configFile;
     }
 
-    public static synchronized Set<String> listKeys() {
+    public static synchronized Set<Object> listKeys() {
         try {
             Properties p = new Properties();
             if (getConfigFile().exists()) {
@@ -61,7 +61,7 @@ public class TeamSettings {
                     in.close();
                 }
             }
-            return (Set) p.keySet();
+            return p.keySet();
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }

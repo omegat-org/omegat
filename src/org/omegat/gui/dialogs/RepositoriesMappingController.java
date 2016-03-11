@@ -136,7 +136,7 @@ public class RepositoriesMappingController {
         };
         dialog.tableRepositories.setModel(modelRepo);
 
-        JComboBox comboBox = new JComboBox();
+        JComboBox<String> comboBox = new JComboBox<>();
         comboBox.addItem("svn");
         comboBox.addItem("git");
         dialog.tableRepositories.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(comboBox));
@@ -290,7 +290,7 @@ public class RepositoriesMappingController {
     }
 
     void reinitRepoUrlDropdown() {
-        JComboBox comboBox = new JComboBox();
+        JComboBox<String> comboBox = new JComboBox<>();
         for (RowRepo r : listRepo) {
             comboBox.addItem(r.url);
         }

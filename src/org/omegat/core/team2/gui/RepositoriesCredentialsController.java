@@ -48,7 +48,8 @@ public class RepositoriesCredentialsController {
 
     public static void show() {
         Set<String> urls = new TreeSet<String>();
-        for (String key : TeamSettings.listKeys()) {
+        for (Object o : TeamSettings.listKeys()) {
+            String key = o.toString();
             int p = key.lastIndexOf('!');
             if (p > 0) {
                 urls.add(key.substring(0, p));
@@ -69,7 +70,8 @@ public class RepositoriesCredentialsController {
                     return;
                 }
                 String selected = ((Model) dialog.list.getModel()).lines.get(selectedIndex);
-                for (String key : TeamSettings.listKeys()) {
+                for (Object o : TeamSettings.listKeys()) {
+                    String key = o.toString();
                     if (key.startsWith(selected + "!")) {
                         TeamSettings.set(key, null);
                     }

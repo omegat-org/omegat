@@ -30,14 +30,14 @@ import java.util.List;
 
 /**
  * Class for store protected part's info.
- * 
- * "Protected part" is common term for :
- * 
- * <m0>Acme</m0> - protected text(Acme) with related tags (<m0>,</m0>)
- * 
- * <i1> - tag
- * 
- * $1 - placeholder
+ * <p>
+ * "Protected part" is common term for:
+ * <ul>
+ * <li>&lt;m0&gt;Acme&lt;/m0&gt; - protected text (Acme) with related tags
+ * (&lt;m0&gt;, &lt;/m0&gt;)
+ * <li>&lt;i1&gt; - tag
+ * <li>$1 - placeholder
+ * </ul>
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */

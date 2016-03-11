@@ -66,6 +66,7 @@ import org.omegat.core.KnownException;
 import org.omegat.core.data.TMXEntry.ExternalLinked;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
@@ -230,7 +231,8 @@ public class RealProject implements IProject {
         unlockProject();
         try {
             SRX.saveTo(m_config.getProjectSRX(), new File(m_config.getProjectInternal(), SRX.CONF_SENTSEG));
-            FilterMaster.saveConfig(m_config.getProjectFilters(), m_config.getProjectInternal());
+            FilterMaster.saveConfig(m_config.getProjectFilters(),
+                    new File(m_config.getProjectInternal(), FilterMaster.FILE_FILTERS));
             ProjectFileStorage.writeProjectFile(m_config);
         } finally {
             lockProject();
@@ -266,7 +268,7 @@ public class RealProject implements IProject {
             // Set project specific segmentation rules if they exist, or
             // defaults otherwise.
             SRX srx = m_config.getProjectSRX();
-            Core.getSegmenter().setSRX(srx == null ? Preferences.getSRX() : srx);
+            Core.setSegmenter(new Segmenter(srx == null ? Preferences.getSRX() : srx));
 
             loadTranslations();
             setProjectModified(true);
@@ -346,21 +348,13 @@ public class RealProject implements IProject {
             }
 
             // set project specific file filters if they exist
-            Filters filterMasterConfig = FilterMaster.loadConfig(m_config.getProjectInternal());
-            if (filterMasterConfig == null) {
-                filterMasterConfig = FilterMaster.loadConfig(StaticUtils.getConfigDir());
-            }
-            if (filterMasterConfig == null) {
-                filterMasterConfig = FilterMaster.createDefaultFiltersConfig();
-            }
-            Core.setFilterMaster(new FilterMaster(filterMasterConfig));
+            Filters filters = m_config.getProjectFilters();
+            Core.setFilterMaster(new FilterMaster(filters == null ? Preferences.getFilters() : filters));
             
-            EntryKey.setIgnoreFileContext(filterMasterConfig.isIgnoreFileContext());
-
             // Set project specific segmentation rules if they exist, or
             // defaults otherwise.
             SRX srx = m_config.getProjectSRX();
-            Core.getSegmenter().setSRX(srx == null ? Preferences.getSRX() : srx);
+            Core.setSegmenter(new Segmenter(srx == null ? Preferences.getSRX() : srx));
 
             loadSourceFiles();
 

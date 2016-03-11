@@ -894,20 +894,11 @@ public class MainWindowMenuHandler {
     public void optionsSetupFileFiltersMenuItemActionPerformed() {
         FiltersCustomizer dlg = new FiltersCustomizer(mainWindow, false,
                 FilterMaster.createDefaultFiltersConfig(),
-                FilterMaster.loadConfig(StaticUtils.getConfigDir()), null);
+                Preferences.getFilters(), null);
         dlg.setVisible(true);
         if (dlg.getReturnStatus() == FiltersCustomizer.RET_OK) {
             // saving config
-            FilterMaster.saveConfig(dlg.result, StaticUtils.getConfigDir());
-
-            if (Core.getProject().isProjectLoaded()) {
-                if (FilterMaster.loadConfig(Core.getProject().getProjectProperties().getProjectInternal()) != null) {
-                    // project specific filters are in place. No need to reload project when
-                    // non-project-specific filters are changed
-                    return;
-                }
-                mainWindow.promptReload();
-            }
+            Preferences.setFilters(dlg.result);
         }
     }
 

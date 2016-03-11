@@ -180,16 +180,18 @@ public class MainWindow extends JFrame implements IMainWindow {
         
         updateTitle();
 
+        // Set up prompt to reload if segmentation or filters settings change
         Preferences.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                if (evt.getPropertyName().equals(Preferences.PROPERTY_SRX) && Core.getProject().isProjectLoaded()
-                        && Core.getProject().getProjectProperties().getProjectSRX() == null) {
-                    // asking to reload a project
-                    int res = JOptionPane.showConfirmDialog(MainWindow.this, OStrings.getString("MW_REOPEN_QUESTION"),
-                            OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
-                    if (res == JOptionPane.YES_OPTION) {
-                        ProjectUICommands.projectReload();
+                if (Core.getProject().isProjectLoaded()) {
+                    String prop = evt.getPropertyName();
+                    if (prop.equals(Preferences.PROPERTY_SRX)
+                            && Core.getProject().getProjectProperties().getProjectSRX() == null) {
+                        promptReload();
+                    } else if (prop.equals(Preferences.PROPERTY_FILTERS)
+                            && Core.getProject().getProjectProperties().getProjectFilters() == null) {
+                        promptReload();
                     }
                 }
             }

@@ -109,7 +109,7 @@ public class ProjectProperties {
         }
 
         projectSRX = SRX.loadSRX(new File(getProjectInternal(), SRX.CONF_SENTSEG));
-        projectFilters = FilterMaster.loadConfig(getProjectInternal());
+        projectFilters = FilterMaster.loadConfig(new File(getProjectInternal(), FilterMaster.FILE_FILTERS));
 
         setSourceTokenizer(PluginUtils.getTokenizerClassForLanguage(getSourceLanguage()));
         setTargetTokenizer(PluginUtils.getTokenizerClassForLanguage(getTargetLanguage()));

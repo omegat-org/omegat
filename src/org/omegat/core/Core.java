@@ -31,6 +31,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.segmentation.Segmenter;
@@ -111,7 +112,7 @@ public class Core {
     private static MultipleTransPane multiple;
     private static INotes notes;
     private static IComments comments;
-    private static final Segmenter segmenter = new Segmenter();
+    private static Segmenter segmenter;
 
     private static Map<String, String> cmdLineParams = Collections.emptyMap();
 
@@ -162,6 +163,7 @@ public class Core {
 
     public static void setFilterMaster(FilterMaster newFilterMaster) {
         filterMaster = newFilterMaster;
+        EntryKey.setIgnoreFileContext(newFilterMaster.getConfig().isIgnoreFileContext());
     }
 
     public static MachineTranslateTextArea getMachineTranslatePane() {
@@ -203,6 +205,10 @@ public class Core {
         return segmenter;
     }
 
+    public static void setSegmenter(Segmenter newSegmenter) {
+        segmenter = newSegmenter;
+    }
+
     /**
      * Initialize application components.
      */
@@ -234,6 +240,9 @@ public class Core {
         Core.registerMarker(new ComesFromAutoTMMarker());
         Core.registerMarker(new FontFallbackMarker());
         Core.registerMarker(new LanguageToolWrapper());
+
+        segmenter = new Segmenter(Preferences.getSRX());
+        filterMaster = new FilterMaster(Preferences.getFilters());
 
         // 3. Initialize other components. They add themselves to the main window.
         editor = new EditorController(me);

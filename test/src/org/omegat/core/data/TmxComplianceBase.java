@@ -42,6 +42,7 @@ import java.util.regex.Pattern;
 import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Before;
 import org.omegat.core.Core;
+import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;
@@ -64,11 +65,10 @@ public abstract class TmxComplianceBase extends TestCase {
 
     protected File outFile;
 
-    private Segmenter segmenter = new Segmenter();
-
     @Before
     public void setUp() throws Exception {
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
+        Core.setSegmenter(new Segmenter(SRX.getDefault()));
 
         outFile = new File("build/testdata/" + getClass().getSimpleName() + "-" + getName() + ".out");
         outFile.getParentFile().mkdirs();
@@ -166,7 +166,7 @@ public abstract class TmxComplianceBase extends TestCase {
 
             public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
                     String path, IFilter filter, List<ProtectedPart> protectedParts) {
-                result.addAll(segmenter.segment(context.getSourceLang(), source, null, null));
+                result.addAll(Core.getSegmenter().segment(context.getSourceLang(), source, null, null));
             }
 
             public void linkPrevNextSegments() {

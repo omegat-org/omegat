@@ -44,14 +44,14 @@ import org.omegat.util.PatternConsts;
  */
 public final class Segmenter {
     
-    private SRX srx;
+    private final SRX srx;
 
-    public Segmenter() {
-        setSRX(SRX.getDefault());
+    public Segmenter(SRX srx) {
+        this.srx = srx;
     }
 
-    public void setSRX(SRX srx) {
-        this.srx = srx;
+    public SRX getSRX() {
+        return srx;
     }
 
     /**

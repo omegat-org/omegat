@@ -48,7 +48,9 @@ import org.omegat.core.KnownException;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.team2.RemoteRepositoryProvider;
+import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.NewTeamProject;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
@@ -467,6 +469,9 @@ public class ProjectUICommands {
                 } catch (Exception ex) {
                     processSwingWorkerException(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                 }
+                // Restore global prefs in case project had project-specific ones
+                Core.setFilterMaster(new FilterMaster(Preferences.getFilters()));
+                Core.setSegmenter(new Segmenter(Preferences.getSRX()));
             }
         }.execute();
     }

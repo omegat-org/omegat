@@ -39,7 +39,7 @@ import junit.framework.TestCase;
  */
 public class SegmenterTest extends TestCase {
 
-    private Segmenter segmenter = new Segmenter();
+    private Segmenter segmenter = new Segmenter(SRX.getDefault());
 
     /**
      * Test of segment method, of class org.omegat.core.segmentation.Segmenter.

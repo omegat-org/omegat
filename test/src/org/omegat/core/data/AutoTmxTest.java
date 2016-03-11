@@ -28,11 +28,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import junit.framework.TestCase;
-
 import org.junit.Test;
 import org.omegat.core.Core;
+import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.tokenizer.LuceneFrenchTokenizer;
+
+import junit.framework.TestCase;
 
 /**
  * Tests for tm/auto/ tmx loading with replace translations.
@@ -41,6 +43,11 @@ import org.omegat.tokenizer.LuceneFrenchTokenizer;
  */
 public class AutoTmxTest extends TestCase {
     RealProject p;
+
+    @Override
+    protected void setUp() throws Exception {
+        Core.setSegmenter(new Segmenter(SRX.getDefault()));
+    }
 
     @Test
     public void test1() throws Exception {

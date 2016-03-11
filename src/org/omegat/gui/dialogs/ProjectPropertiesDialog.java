@@ -82,7 +82,6 @@ import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.LanguageComboBoxRenderer;
@@ -170,7 +169,7 @@ public class ProjectPropertiesDialog extends JDialog {
         this.projectProperties = projectProperties;
         this.srx = projectProperties.getProjectSRX();
         this.dialogType = dialogTypeValue;
-        filters = FilterMaster.loadConfig(projectProperties.getProjectInternal());
+        this.filters = projectProperties.getProjectFilters();
         srcExcludes.addAll(projectProperties.getSourceRootExcludes());
 
         Border emptyBorder = new EmptyBorder(2, 0, 2, 0);
@@ -805,9 +804,8 @@ public class ProjectPropertiesDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame mainWindow = Core.getMainWindow().getApplicationFrame();
-                FiltersCustomizer dlg = new FiltersCustomizer(mainWindow, true, FilterMaster
-                        .createDefaultFiltersConfig(), FilterMaster.loadConfig(StaticUtils.getConfigDir()),
-                        filters);
+                FiltersCustomizer dlg = new FiltersCustomizer(mainWindow, true,
+                        FilterMaster.createDefaultFiltersConfig(), Preferences.getFilters(), filters);
                 dlg.setVisible(true);
                 if (dlg.getReturnStatus() == FiltersCustomizer.RET_OK) {
                     // saving config

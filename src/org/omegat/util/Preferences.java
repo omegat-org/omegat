@@ -56,8 +56,11 @@ import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.TranslationException;
+import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.xml.XMLBlock;
 import org.omegat.util.xml.XMLStreamReader;
+
+import gen.core.filters.Filters;
 
 /**
  * Class to load & save OmegaT preferences. All methods are static here.
@@ -415,6 +418,7 @@ public class Preferences {
     public static final String TAAS_DOMAIN = "taas_domain";
 
     public static final String PROPERTY_SRX = "srx";
+    public static final String PROPERTY_FILTERS = "filters";
 
     /** Private constructor, because this file is singleton */
     static {
@@ -662,6 +666,23 @@ public class Preferences {
         m_propChangeSupport.firePropertyChange(PROPERTY_SRX, oldValue, newSrx);
     }
 
+    public static Filters getFilters() {
+        return filters;
+    }
+
+    public static void setFilters(Filters newFilters) {
+        Filters oldValue = filters;
+        filters = newFilters;
+
+        File filtersFile = new File(StaticUtils.getConfigDir(), FilterMaster.FILE_FILTERS);
+        try {
+            FilterMaster.saveConfig(filters, filtersFile);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        m_propChangeSupport.firePropertyChange(PROPERTY_FILTERS, oldValue, newFilters);
+    }
+
     public static void save() {
         try {
             if (m_changed)
@@ -730,10 +751,19 @@ public class Preferences {
             }
         }
 
-        File srxFile = new File(StaticUtils.getConfigDir() + SRX.CONF_SENTSEG);
+        File srxFile = new File(StaticUtils.getConfigDir(), SRX.CONF_SENTSEG);
         srx = SRX.loadSRX(srxFile);
         if (srx == null) {
             srx = SRX.getDefault();
+        }
+        File filtersFile = new File(StaticUtils.getConfigDir(), FilterMaster.FILE_FILTERS);
+        try {
+            filters = FilterMaster.loadConfig(filtersFile);
+        } catch (Exception ex) {
+            Log.log(ex);
+        }
+        if (filters == null) {
+            filters = FilterMaster.createDefaultFiltersConfig();
         }
     }
 
@@ -856,4 +886,5 @@ public class Preferences {
     private static PropertyChangeSupport m_propChangeSupport;
 
     private static SRX srx;
+    private static Filters filters;
 }

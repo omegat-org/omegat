@@ -46,13 +46,11 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
-import javax.swing.JOptionPane;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.io.FileUtils;
-import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IAlignCallback;
@@ -87,7 +85,7 @@ import gen.core.filters.Filters;
  */
 public class FilterMaster {
     /** name of the filter configuration file */
-    private final static String FILE_FILTERS = "filters.xml";
+    public final static String FILE_FILTERS = "filters.xml";
 
     private static final JAXBContext CONFIG_CTX;
 
@@ -417,9 +415,10 @@ public class FilterMaster {
     /**
      * Loads information about the filters from an XML file. If there's an error loading a file, it calls
      * <code>setupDefaultFilters</code>.
+     * 
+     * @throws IOException
      */
-    public static Filters loadConfig(String configDir) {
-        File configFile = new File(configDir, FILE_FILTERS);
+    public static Filters loadConfig(File configFile) throws IOException {
         if (!configFile.exists()) {
             return null;
         }
@@ -434,7 +433,7 @@ public class FilterMaster {
         }
 
         if (addNewFiltersToConfig(result)) {
-            saveConfig(result, configDir);
+            saveConfig(result, configFile);
         }
 
         return result;
@@ -442,9 +441,10 @@ public class FilterMaster {
 
     /**
      * Saves information about the filters to an XML file.
+     * 
+     * @throws IOException
      */
-    public static void saveConfig(Filters config, String configDir) {
-        File configFile = new File(configDir, FILE_FILTERS);
+    public static void saveConfig(Filters config, File configFile) throws IOException {
         if (config == null) {
             configFile.delete();
             return;
@@ -456,9 +456,7 @@ public class FilterMaster {
         } catch (Exception e) {
             Log.logErrorRB("FILTERMASTER_ERROR_SAVING_FILTERS_CONFIG");
             Log.log(e);
-            JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
-                    OStrings.getString("FILTERMASTER_ERROR_SAVING_FILTERS_CONFIG") + "\n" + e,
-                    OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+            throw new IOException(e);
         }
     }
 

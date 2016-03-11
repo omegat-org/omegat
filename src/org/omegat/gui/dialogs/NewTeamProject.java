@@ -100,6 +100,17 @@ public class NewTeamProject extends javax.swing.JDialog {
         return repoType;
     }
 
+    public String getRepoUrl() {
+        String url = txtRepositoryOrProjectFileURL.getText().trim();
+        if (url.startsWith("git!")) {
+            return url.substring("git!".length());
+        } else if (url.startsWith("svn!")) {
+            return url.substring("svn!".length());
+        } else {
+            return url;
+        }
+    }
+
     private synchronized void detectRepoOrFile() {
         if (detecting || !isVisible()) {
             return;
@@ -111,19 +122,15 @@ public class NewTeamProject extends javax.swing.JDialog {
             return;
         }
         if (url.startsWith("git!")) {
-            txtRepositoryOrProjectFileURL.setText(url.substring("git!".length()));
             detectedRepoOrProjectFileLabel.setText(OStrings.getString("TEAM_DETECTED_REPO_GIT"));
             repoType = "git";
         } else if (url.startsWith("svn!")) {
-            txtRepositoryOrProjectFileURL.setText(url.substring("svn!".length()));
             detectedRepoOrProjectFileLabel.setText(OStrings.getString("TEAM_DETECTED_REPO_SVN"));
             repoType = "svn";
         } else {
             repoTypeWorker = new RepoTypeWorker(url);
             repoTypeWorker.execute();
-            return;
         }
-        detectedRepoOrProjectFileLabel.setText(OStrings.getString("TEAM_ERROR_DETECTING_PROTOCOL"));
     }
 
     private synchronized void startDetectingRepo() {

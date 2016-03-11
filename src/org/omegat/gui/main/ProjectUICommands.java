@@ -145,6 +145,7 @@ public class ProjectUICommands {
             return;
         }
         new SwingWorker<Object, Void>() {
+            File projectRoot;
             protected Object doInBackground() throws Exception {
                 Core.getMainWindow().showStatusMessageRB(null);
 
@@ -160,14 +161,15 @@ public class ProjectUICommands {
                 Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
                 Cursor oldCursor = mainWindow.getCursor();
                 mainWindow.setCursor(hourglassCursor);
+                Core.getMainWindow().showStatusMessageRB("CT_DOWNLOADING_PROJECT");
 
                 // retrieve omegat.project
-                File projectRoot = new File(dialog.txtDirectory.getText());
+                projectRoot = new File(dialog.txtDirectory.getText());
                 List<RepositoryDefinition> repos = new ArrayList<RepositoryDefinition>();
                 RepositoryDefinition repo = new RepositoryDefinition();
                 repos.add(repo);
                 repo.setType(dialog.getRepoType());
-                repo.setUrl(dialog.txtRepositoryOrProjectFileURL.getText().trim());
+                repo.setUrl(dialog.getRepoUrl());
                 RepositoryMapping mapping = new RepositoryMapping();
                 mapping.setLocal("");
                 mapping.setRepository("");
@@ -200,6 +202,22 @@ public class ProjectUICommands {
 
                 mainWindow.setCursor(oldCursor);
                 return null;
+            }
+            @Override
+            protected void done() {
+                Core.getMainWindow().showProgressMessage(" ");
+                try {
+                    get();
+                    SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                            Core.getEditor().requestFocus();
+                            projectOpen(projectRoot);
+                        }
+                    });
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_DOWNLOAD_TEAM_PROJECT");
+                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_DOWNLOAD_TEAM_PROJECT");
+                }
             }
         }.execute();
     }

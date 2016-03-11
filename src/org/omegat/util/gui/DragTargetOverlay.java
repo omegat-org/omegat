@@ -58,6 +58,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import org.omegat.gui.main.MainWindow;
+import org.omegat.util.Log;
 
 /**
  * @author Aaron Madlon-Kay
@@ -194,7 +195,9 @@ public class DragTargetOverlay {
                 Object result = transferable.getTransferData(info.getDataFlavor());
                 success = info.handleDroppedObject(result);
             } catch (UnsupportedFlavorException e) {
+                Log.log(e);
             } catch (IOException e) {
+                Log.log(e);
             }
             dtde.dropComplete(success);
         }
@@ -208,7 +211,7 @@ public class DragTargetOverlay {
             try {
                 target.addDropTargetListener(listener);
             } catch (TooManyListenersException e) {
-                e.printStackTrace();
+                Log.log(e);
             }
         }
     }

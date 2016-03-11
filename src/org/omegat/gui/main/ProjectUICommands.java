@@ -278,6 +278,15 @@ public class ProjectUICommands {
                 Cursor oldCursor = mainWindow.getCursor();
                 mainWindow.setCursor(hourglassCursor);
 
+                try {
+                    ConvertProject.convert(projectRootFolder);
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_CONVERT_PROJECT");
+                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_CONVERT_PROJECT");
+                    mainWindow.setCursor(oldCursor);
+                    return null;
+                }
+
                 // check if project okay
                 ProjectProperties props;
                 try {

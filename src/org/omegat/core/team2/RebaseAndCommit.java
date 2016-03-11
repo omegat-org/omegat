@@ -26,10 +26,6 @@
 package org.omegat.core.team2;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Properties;
 import java.util.logging.Logger;
 
 import org.omegat.util.FileUtil;
@@ -45,6 +41,8 @@ import org.omegat.util.Log;
 public class RebaseAndCommit {
     private static final Logger LOGGER = Logger.getLogger(RebaseAndCommit.class.getName());
 
+    private static final String VERSION_PREFIX = "version-based-on.";
+
     public static void rebaseAndCommit(RemoteRepositoryProvider provider, File projectDir, String path,
             IRebase rebaser) throws Exception {
 
@@ -55,7 +53,7 @@ public class RebaseAndCommit {
         Log.logDebug(LOGGER, "Rebase and commit '" + path + "'");
 
         final String currentBaseVersion;
-        String savedVersion = readVersion(projectDir, path);
+        String savedVersion = TeamSettings.get(VERSION_PREFIX + path);
         if (savedVersion != null) {
             currentBaseVersion = savedVersion;
         } else {
@@ -116,9 +114,9 @@ public class RebaseAndCommit {
             // new file was saved, need to update version
             // code below tries to update file "in transaction" with update version
             final File bakTemp = new File(projectDir, path + "#oldbased_on_" + currentBaseVersion);
-            move(new File(projectDir, path), bakTemp);
-            saveVersion(projectDir, path, headVersion);
-            move(tempOut, new File(projectDir, path));
+            FileUtil.move(new File(projectDir, path), bakTemp);
+            TeamSettings.set(VERSION_PREFIX + path, headVersion);
+            FileUtil.move(tempOut, new File(projectDir, path));
         }
 
         if (fileChangedLocally) {
@@ -128,65 +126,9 @@ public class RebaseAndCommit {
             String newVersion = provider.commitFileAfterVersion(path, headVersion, comment);
             if (newVersion != null) {
                 // file was committed good
-                saveVersion(projectDir, path, newVersion);
+                TeamSettings.set(VERSION_PREFIX + path, newVersion);
             }
         }
-    }
-
-    /**
-     * Get version for file.
-     */
-    private synchronized static String readVersion(File projectRoot, String path) throws Exception {
-        Properties p = new Properties();
-        File versionsFile = new File(projectRoot, RemoteRepositoryProvider.REPO_SUBDIR
-                + "versions.properties");
-        if (versionsFile.exists()) {
-            FileInputStream in = new FileInputStream(versionsFile);
-            try {
-                p.load(in);
-            } finally {
-                in.close();
-            }
-        }
-        return p.getProperty(path);
-    }
-
-    /**
-     * Update version for file.
-     */
-    private synchronized static void saveVersion(File projectRoot, String path, String newVersion)
-            throws Exception {
-        Properties p = new Properties();
-        File f = new File(projectRoot, RemoteRepositoryProvider.REPO_SUBDIR + "versions.properties");
-        File fNew = new File(projectRoot, RemoteRepositoryProvider.REPO_SUBDIR + "versions.properties.new");
-        if (f.exists()) {
-            FileInputStream in = new FileInputStream(f);
-            try {
-                p.load(in);
-            } finally {
-                in.close();
-            }
-        }
-        p.setProperty(path, newVersion);
-        FileOutputStream out = new FileOutputStream(fNew);
-        try {
-            p.store(out, null);
-        } finally {
-            out.close();
-        }
-        move(fNew, f);
-    }
-
-    static void move(File f1, File f2) throws Exception {
-        if (f1.equals(f2)) {
-            return;
-        }
-        if (f2.exists()) {
-            if (!f2.delete()) {
-                throw new IOException("Unable to delete " + f2);
-            }
-        }
-        FileUtil.rename(f1, f2);
     }
 
     public interface IRebase {

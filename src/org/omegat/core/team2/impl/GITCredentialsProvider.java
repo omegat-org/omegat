@@ -40,7 +40,6 @@ import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.URIish;
 import org.omegat.core.Core;
 import org.omegat.core.team2.IRemoteRepository2.Credentials;
-import org.omegat.gui.dialogs.TeamUserPassDialog;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DockingUI;
 
@@ -204,7 +203,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
      * @return true when entered, false on cancel.
      */
     private boolean askCredentials(String usernameInUri) {
-        TeamUserPassDialog userPassDialog = new TeamUserPassDialog(Core.getMainWindow().getApplicationFrame());
+        GITUserPassDialog userPassDialog = new GITUserPassDialog(Core.getMainWindow().getApplicationFrame());
         DockingUI.displayCentered(userPassDialog);
         userPassDialog.descriptionTextArea.setText(OStrings
                 .getString(credentials.username == null ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"));
@@ -216,7 +215,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
             userPassDialog.userText.setEnabled(false);
         }
         userPassDialog.setVisible(true);
-        if (userPassDialog.getReturnStatus() == TeamUserPassDialog.RET_OK) {
+        if (userPassDialog.getReturnStatus() == GITUserPassDialog.RET_OK) {
             credentials.username = userPassDialog.userText.getText();
             credentials.password = userPassDialog.passwordField.getPassword();
             credentials.readOnly = userPassDialog.cbReadOnly.isSelected();

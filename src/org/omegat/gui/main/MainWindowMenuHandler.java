@@ -925,13 +925,6 @@ public class MainWindowMenuHandler {
 
         if (segment_window.getReturnStatus() == SegmentationCustomizer.RET_OK) {
             Preferences.setSRX(segment_window.getSRX());
-            if (Core.getProject().isProjectLoaded() && Core.getProject().getProjectProperties().getProjectSRX() == null) {
-                // asking to reload a project
-                int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"),
-                        OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
-                if (res == JOptionPane.YES_OPTION)
-                    ProjectUICommands.projectReload();
-            }
         }
     }
 

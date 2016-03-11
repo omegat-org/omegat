@@ -41,6 +41,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -177,6 +179,21 @@ public class MainWindow extends JFrame implements IMainWindow {
         MainWindowUI.handlePerProjectLayouts(this);
         
         updateTitle();
+
+        Preferences.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if (evt.getPropertyName().equals(Preferences.PROPERTY_SRX) && Core.getProject().isProjectLoaded()
+                        && Core.getProject().getProjectProperties().getProjectSRX() == null) {
+                    // asking to reload a project
+                    int res = JOptionPane.showConfirmDialog(MainWindow.this, OStrings.getString("MW_REOPEN_QUESTION"),
+                            OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
+                    if (res == JOptionPane.YES_OPTION) {
+                        ProjectUICommands.projectReload();
+                    }
+                }
+            }
+        });
     }
 
     /**

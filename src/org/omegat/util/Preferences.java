@@ -414,6 +414,8 @@ public class Preferences {
     public static final String TAAS_LOOKUP = "taas_lookup";
     public static final String TAAS_DOMAIN = "taas_domain";
 
+    public static final String PROPERTY_SRX = "srx";
+
     /** Private constructor, because this file is singleton */
     static {
         m_loaded = false;
@@ -648,6 +650,7 @@ public class Preferences {
     }
 
     public static void setSRX(SRX newSrx) {
+        SRX oldValue = srx;
         srx = newSrx;
 
         File srxFile = new File(StaticUtils.getConfigDir() + SRX.CONF_SENTSEG);
@@ -656,6 +659,7 @@ public class Preferences {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        m_propChangeSupport.firePropertyChange(PROPERTY_SRX, oldValue, newSrx);
     }
 
     public static void save() {

@@ -28,6 +28,7 @@ package org.omegat.core.team2;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -107,12 +108,12 @@ public class RemoteRepositoryProvider {
     /**
      * Find mappings for specified path.
      */
-    protected List<Mapping> getMappings(String path) {
+    protected List<Mapping> getMappings(String path, String... forceExcludes) {
         List<Mapping> result = new ArrayList<Mapping>();
         for (int i = 0; i < repositoriesDefinitions.size(); i++) {
             RepositoryDefinition rd = repositoriesDefinitions.get(i);
             for (RepositoryMapping repoMapping : rd.getMapping()) {
-                Mapping m = new Mapping(path, repositories.get(i), rd, repoMapping);
+                Mapping m = new Mapping(path, repositories.get(i), rd, repoMapping, forceExcludes);
                 if (m.matches()) {
                     result.add(m);
                 }
@@ -186,12 +187,14 @@ public class RemoteRepositoryProvider {
      * 
      * @param localPath
      *            directory name(that should be ended by '/'), or file name
+     * @param forceExcludes
+     *            exclude some path like project_save.tmx and glossary.txt
      */
-    public void copyFilesFromRepoToProject(String localPath) throws Exception {
+    public void copyFilesFromRepoToProject(String localPath, String... forceExcludes) throws Exception {
         if (localPath.startsWith("/")) {
             throw new RuntimeException("Wrong path mapping");
         }
-        for (Mapping m : getMappings(localPath)) {
+        for (Mapping m : getMappings(localPath, forceExcludes)) {
             m.copyFromRepoToProject();
         }
     }
@@ -248,12 +251,14 @@ public class RemoteRepositoryProvider {
         final IRemoteRepository2 repo;
         final RepositoryDefinition repoDefinition;
         final RepositoryMapping repoMapping;
+        final List<String> forceExcludes;
 
         public Mapping(String path, IRemoteRepository2 repo, RepositoryDefinition repoDefinition,
-                RepositoryMapping repoMapping) {
+                RepositoryMapping repoMapping, String... forceExcludes) {
             this.repo = repo;
             this.repoDefinition = repoDefinition;
             this.repoMapping = repoMapping;
+            this.forceExcludes = new ArrayList<String>();
             /**
              * Find common part - it should be one of path or local. If path and local have only common begin,
              * they will not be mapped. I.e. path=source/ and local=source/one - it's okay, path=source/one/
@@ -262,19 +267,32 @@ public class RemoteRepositoryProvider {
             if (path.isEmpty()) {
                 // root(full project path) mapping
                 filterPrefix = "";
+                this.forceExcludes.addAll(Arrays.asList(forceExcludes));
             } else if (repoMapping.getLocal().equals(path)) {
                 // path equals mapping (path="source/" for "source/"=>"...")
                 filterPrefix = "";
+                for (String fe : forceExcludes) {
+                    if (fe.startsWith('/' + repoMapping.getLocal())) {
+                        this.forceExcludes.add(fe.substring(repoMapping.getLocal().length() + 1));
+                    }
+                }
             } else if (repoMapping.getLocal().startsWith(path) && path.endsWith("/")) {
                 // path shorter than local and is directory (path="source/" for "source/first/..."=>"...")
                 filterPrefix = "";
+                for (String fe : forceExcludes) {
+                    if (fe.startsWith('/' + repoMapping.getLocal())) {
+                        this.forceExcludes.add(fe.substring(repoMapping.getLocal().length() + 1));
+                    }
+                }
             } else if (path.startsWith(repoMapping.getLocal()) && repoMapping.getLocal().endsWith("/")) {
                 // local is shorter than path and is directory (path="omegat/project_save" for
                 // "omegat/"=>"...")
                 filterPrefix = path.substring(repoMapping.getLocal().length());
+                this.forceExcludes.addAll(Arrays.asList(forceExcludes));
             } else if (repoMapping.getLocal().isEmpty()) {
                 // root(full project path) mapping (""=>"...")
                 filterPrefix = path;
+                this.forceExcludes.addAll(Arrays.asList(forceExcludes));
             } else {
                 // otherwise path doesn't correspond with repoMapping
                 filterPrefix = null;
@@ -296,11 +314,18 @@ public class RemoteRepositoryProvider {
             File to = new File(projectRoot, repoMapping.getLocal());
             if (repoMapping.getRepository().endsWith("/") || repoMapping.getRepository().isEmpty()) {
                 // directory mapping
-                copy(from, to, filterPrefix, repoMapping.getIncludes(), repoMapping.getExcludes(), null);
+                List<String> excludes = new ArrayList<String>(repoMapping.getExcludes());
+                if (forceExcludes.size() > 0) {
+                    excludes.addAll(forceExcludes);
+                }
+                copy(from, to, filterPrefix, repoMapping.getIncludes(), excludes, null);
             } else {
                 // file mapping
                 if (!filterPrefix.isEmpty()) {
                     throw new RuntimeException();
+                }
+                if (forceExcludes.size() > 0) {
+                    return;
                 }
                 copyFile(from, to, null);
             }

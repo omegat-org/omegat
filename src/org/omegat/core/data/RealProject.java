@@ -331,7 +331,10 @@ public class RealProject implements IProject {
                     if (!dir.endsWith("/")) {
                         dir += "/";
                     }
-                    remoteRepositoryProvider.copyFilesFromRepoToProject(dir);
+                    // copy but skip project_save.tmx and glossary.txt
+                    remoteRepositoryProvider.copyFilesFromRepoToProject(dir,
+                            '/' + m_config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION,
+                            '/' + m_config.getWritableGlossaryFile().getUnderRoot());
                 }
             }
 
@@ -836,9 +839,13 @@ public class RealProject implements IProject {
         final String glossaryPath = m_config.getWritableGlossaryFile().getUnderRoot();
         final File glossaryFile = m_config.getWritableGlossaryFile().getAsFile();
                 new File(m_config.getProjectRootDir(), glossaryPath);
-        if (glossaryPath != null && glossaryFile.exists()
-                && remoteRepositoryProvider.isUnderMapping(glossaryPath)) {
-            final List<GlossaryEntry> glossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
+        if (glossaryPath != null && remoteRepositoryProvider.isUnderMapping(glossaryPath)) {
+            final List<GlossaryEntry> glossaryEntries;
+            if (glossaryFile.exists()) {
+                glossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
+            } else {
+                glossaryEntries = Collections.emptyList();
+            }
             RebaseAndCommit.rebaseAndCommit(remoteRepositoryProvider, m_config.getProjectRootDir(),
                     glossaryPath, new RebaseAndCommit.IRebase() {
                         List<GlossaryEntry> baseGlossaryEntries, headGlossaryEntries;

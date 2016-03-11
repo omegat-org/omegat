@@ -49,6 +49,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
@@ -121,11 +122,18 @@ public class SpellChecker implements ISpellChecker {
      */
     public void initialize() {
         // initialize the spell checker - get the data from the preferences
-        String language = Core.getProject().getProjectProperties().getTargetLanguage().getLocaleCode();
+        Language targetLanguage = Core.getProject().getProjectProperties().getTargetLanguage();
 
         String dictionaryDir = Preferences.getPreferenceDefault(
                 Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
                 new File(StaticUtils.getConfigDir(), OConsts.SPELLING_DICT_DIR).getPath());
+
+        String language = findAvailableDictLanguage(dictionaryDir, targetLanguage);
+        if (language == null) {
+            checker = new SpellCheckerDummy();
+            Log.log("No spell checker found for language " + targetLanguage);
+            return;
+        }
 
         installBundledDictionary(dictionaryDir, language);
         
@@ -168,14 +176,56 @@ public class SpellChecker implements ISpellChecker {
         }
         if (checker == null) {
             checker = new SpellCheckerDummy();
-            Log.log("No spell checker loaded");
+            Log.log("No spell checker loaded for language " + targetLanguage);
         }
         for (String w : learnedList) {
             checker.learnWord(w);
         }
     }
     
-    /**
+    /** Check to see if there is a dictionary available corresponding to the 
+     * full locale code or fall back to language if none is found.
+     * 
+     * Note that this does not handle the case where the project is in a specific 
+     * locale (xx_YY) and only a dictionary with another specific locale is available
+     * (xx_ZZ). Thus, it's probably best to always have a generic language dictionary 
+     * installed.
+     * 
+     * @returns the locale code found (either xx_YY or xx). Returns {@code null} if 
+     * no matching dictionary is found.
+     */
+    private String findAvailableDictLanguage(String dictionaryDir, Language targetLanguage) {
+		
+		String localeCode = targetLanguage.getLocaleCode();
+    	String languageCode = targetLanguage.getLanguageCode();
+
+    	// Check installed dictionaries
+    	List<String> dicts = new DictionaryManager(new File(dictionaryDir)).getLocalDictionaryCodeList();
+    	boolean hasLanguageCode = false;
+		for (String code : dicts) {
+			if (code.equalsIgnoreCase(localeCode)) {
+				// We got the most specific dictionary, no need to go further.
+    			return localeCode;
+    		}
+			else if (code.equalsIgnoreCase(languageCode))
+			{
+				hasLanguageCode = true;
+			}
+    	}
+		
+		// Check bundled dictionaries
+		// XXX Not sure if the file is supposed to be named xx_YY.zip or xx-YY.zip
+		if (getClass().getResource(localeCode + ".zip") != null) {
+    		return localeCode;
+    	}
+		else if (getClass().getResource(languageCode + ".zip") != null) {
+			hasLanguageCode = true;
+		}
+
+		return hasLanguageCode ? languageCode : null;
+	}
+
+	/**
      * If there is a Hunspell dictionary for the current target language bundled inside
      * this OmegaT distribution, install it if necessary. 
      */

@@ -471,6 +471,7 @@ public class Searcher {
             String comment, TMXEntry entry, int entryNum, String intro) {
         SearchMatch[] srcMatches = null;
         SearchMatch[] targetMatches = null;
+        SearchMatch[] srcOrTargetMatches = null;
         SearchMatch[] noteMatches = null;
         SearchMatch[] commentMatches = null;
 
@@ -487,6 +488,18 @@ public class Searcher {
             }
             if (expression.searchTarget && searchString(locText)) {
                 targetMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
+            }
+            // If
+            // - we are searching both source and target
+            // - we and haven't found a match in either so far
+            // - we have a target
+            // then we also search the concatenation of source and target per
+            // https://sourceforge.net/p/omegat/feature-requests/1185/
+            // We join with U+E000 (private use) to prevent spuriously matching
+            // e.g. "abc" in "fab" + "cat"
+            if (expression.searchSource && expression.searchTarget && locText != null && srcMatches == null
+                    && targetMatches == null && searchString(srcText + '\ue000' + locText)) {
+                srcOrTargetMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
             }
             if (expression.searchNotes && searchString(note)) {
                 noteMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
@@ -508,12 +521,13 @@ public class Searcher {
             break;
         }
         // if the search expression is satisfied, report the hit
-        if ((srcMatches != null || targetMatches != null || noteMatches != null || commentMatches != null)
+        if ((srcMatches != null || targetMatches != null || srcOrTargetMatches != null || noteMatches != null
+                || commentMatches != null)
                 && (!expression.searchAuthor || entry != null && searchAuthor(entry))
-                && (!expression.searchDateBefore || entry != null && entry.changeDate != 0
-                        && entry.changeDate < expression.dateBefore)
-                && (!expression.searchDateAfter || entry != null && entry.changeDate != 0
-                        && entry.changeDate > expression.dateAfter)) {
+                && (!expression.searchDateBefore
+                        || entry != null && entry.changeDate != 0 && entry.changeDate < expression.dateBefore)
+                && (!expression.searchDateAfter
+                        || entry != null && entry.changeDate != 0 && entry.changeDate > expression.dateAfter)) {
             // found
             foundString(entryNum, intro, srcText, locText, note,
                     srcMatches, targetMatches, noteMatches);

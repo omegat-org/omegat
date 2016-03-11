@@ -56,6 +56,7 @@ import org.omegat.core.search.SearchMode;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.tagvalidation.ErrorReport;
+import org.omegat.core.team2.gui.RepositoriesCredentialsController;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dialogs.AboutDialog;
@@ -1047,6 +1048,10 @@ public class MainWindowMenuHandler {
 
     public void optionsAccessConfigDirMenuItemActionPerformed() {
         openFile(new File(StaticUtils.getConfigDir()));
+    }
+
+    public void optionsRepositoriesCredentialsItemActionPerformed() {
+        RepositoriesCredentialsController.show();
     }
 
     /**

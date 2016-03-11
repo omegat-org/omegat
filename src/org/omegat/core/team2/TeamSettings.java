@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Properties;
+import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.omegat.util.FileUtil;
@@ -47,6 +48,23 @@ public class TeamSettings {
             configFile = new File(StaticUtils.getConfigDir(), "repositories.properties");
         }
         return configFile;
+    }
+
+    public static synchronized Set<String> listKeys() {
+        try {
+            Properties p = new Properties();
+            if (getConfigFile().exists()) {
+                FileInputStream in = new FileInputStream(getConfigFile());
+                try {
+                    p.load(in);
+                } finally {
+                    in.close();
+                }
+            }
+            return (Set) p.keySet();
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     /**

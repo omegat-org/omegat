@@ -60,8 +60,8 @@ import org.tmatesoft.svn.core.io.SVNRepository;
 public class SVNAuthenticationManager implements ISVNAuthenticationManager {
     static final int CONNECT_TIMEOUT = 30 * 1000; // 30 seconds
     static final int READ_TIMEOUT = 60 * 1000; // 60 seconds
-    static final String KEY_USERNAME_PREFIX = "login.username.";
-    static final String KEY_PASSWORD_PREFIX = "login.password.";
+    static final String KEY_USERNAME_SUFFIX = "username";
+    static final String KEY_PASSWORD_SUFFIX = "password";
 
     private static final Logger LOGGER = Logger.getLogger(SVNAuthenticationManager.class.getName());
 
@@ -127,11 +127,11 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         String pass = new String(userPassDialog.passwordField.getPassword());
 
         if (userPassDialog.cbSavePlainPassword.isSelected()) {
-            TeamSettings.set(KEY_USERNAME_PREFIX + repoUrl, user);
-            TeamSettings.set(KEY_PASSWORD_PREFIX + repoUrl, pass);
+            TeamSettings.set(repoUrl + "!" + KEY_USERNAME_SUFFIX, user);
+            TeamSettings.set(repoUrl + "!" + KEY_PASSWORD_SUFFIX, pass);
         } else {
-            TeamSettings.set(KEY_USERNAME_PREFIX + repoUrl, null);
-            TeamSettings.set(KEY_PASSWORD_PREFIX + repoUrl, null);
+            TeamSettings.set(repoUrl + "!" + KEY_USERNAME_SUFFIX, null);
+            TeamSettings.set(repoUrl + "!" + KEY_PASSWORD_SUFFIX, null);
         }
 
         if (ISVNAuthenticationManager.PASSWORD.equals(kind)) {
@@ -156,8 +156,8 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
                 throw new SVNException(SVNErrorMessage.create(SVNErrorCode.AUTHN_NO_PROVIDER));
             }
         }
-        String user = TeamSettings.get(KEY_USERNAME_PREFIX + repoUrl);
-        String pass = TeamSettings.get(KEY_PASSWORD_PREFIX + repoUrl);
+        String user = TeamSettings.get(repoUrl + "!" + KEY_USERNAME_SUFFIX);
+        String pass = TeamSettings.get(repoUrl + "!" + KEY_PASSWORD_SUFFIX);
         if (user != null && pass != null) {
             if (ISVNAuthenticationManager.PASSWORD.equals(kind)) {
                 return new SVNPasswordAuthentication(user, pass, false, url, false);

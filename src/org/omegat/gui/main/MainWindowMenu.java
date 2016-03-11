@@ -412,6 +412,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         optionsMenu.add(new JSeparator());
         optionsMenu.add(optionsRestoreGUIMenuItem = createMenuItem("MW_OPTIONSMENU_RESTORE_GUI"));
         optionsMenu.add(optionsAccessConfigDirMenuItem = createMenuItem("MW_OPTIONSMENU_ACCESS_CONFIG_DIR"));
+        optionsMenu.add(optionsRepositoriesCredentialsItem = createMenuItem("TEAM_REPOSITORIES_DIALOG"));
         optionsMenu.add(new JSeparator());
 
         helpMenu.add(helpContentsMenuItem = createMenuItem("TF_MENU_HELP_CONTENTS"));
@@ -732,6 +733,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenu optionsMenu;
     JMenuItem optionsRestoreGUIMenuItem;
     JMenuItem optionsAccessConfigDirMenuItem;
+    JMenuItem optionsRepositoriesCredentialsItem;
     JMenuItem optionsSentsegMenuItem;
     JMenuItem optionsSetupFileFiltersMenuItem;
     JMenuItem optionsSpellCheckMenuItem;

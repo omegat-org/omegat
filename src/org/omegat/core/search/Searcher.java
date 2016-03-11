@@ -476,34 +476,23 @@ public class Searcher {
 
         switch (m_searchExpression.mode) {
         case SEARCH:
-            if (locText!=null) {
-                if (!expression.searchTranslated) {
-                    return;
-                }
-            }else {
-                if (!expression.searchUntranslated) {
-                    return;
-                }
+            if (expression.searchTranslated && !expression.searchUntranslated && locText == null) {
+                return;
             }
-            if (expression.searchSource) {
-                if (searchString(srcText)) {
-                    srcMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
-                }
+            if (!expression.searchTranslated && expression.searchUntranslated && locText != null) {
+                return;
             }
-            if (expression.searchTarget) {
-                if (searchString(locText)) {
-                    targetMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
-                }
+            if (expression.searchSource && searchString(srcText)) {
+                srcMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
             }
-            if (expression.searchNotes) {
-                if (note != null && searchString(note)) {
-                    noteMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
-                }
+            if (expression.searchTarget && searchString(locText)) {
+                targetMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
             }
-            if (expression.searchComments) {
-                if (comment != null && searchString(comment)) {
-                    commentMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
-                }
+            if (expression.searchNotes && searchString(note)) {
+                noteMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
+            }
+            if (expression.searchComments && searchString(comment)) {
+                commentMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
             }
             break;
         case REPLACE:

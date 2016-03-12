@@ -120,6 +120,8 @@ public class ProjectFileStorage {
         }
         if (glossaryFile.equalsIgnoreCase(OConsts.DEFAULT_FOLDER_MARKER)) {
             glossaryFile = result.computeDefaultWriteableGlossaryFile();
+        } else {
+            glossaryFile = glossaryDir + glossaryFile;
         }
         result.setWriteableGlossary(glossaryFile);
 

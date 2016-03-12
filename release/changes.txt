@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.7.0
 ----------------------------------------------------------------------
- 2 Enhancements
+ 3 Enhancements
 ----------------------------------------------------------------------
 3.7.0 vs 3.6.0
 
@@ -12,6 +12,9 @@
 
   - Flexible use of spellcheck (with and w/o locale) 
   https://sourceforge.net/p/omegat/feature-requests/455/
+
+  - New team mode implementation
+  https://sourceforge.net/p/omegat/feature-requests/1189/
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 (2016-03-09)

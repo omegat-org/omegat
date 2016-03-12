@@ -572,12 +572,12 @@ public class ProjectPropertiesDialog extends JDialog {
         final JButton m_insertButton = new javax.swing.JButton();
         // Add variable insertion controls only if project external commands are enabled.
         if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
+            Box bIC = Box.createHorizontalBox();
+            bIC.setBorder(emptyBorder);
             Mnemonics.setLocalizedText(m_variablesLabel,
                     OStrings.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES"));
-            gbc.gridx = 0;
-            gbc.gridy = 5;
-            gbc.anchor = GridBagConstraints.WEST;
-            optionsBox.add(m_variablesLabel, gbc);
+            bIC.add(m_variablesLabel);
+            bIC.add(m_variablesList);
             Mnemonics.setLocalizedText(m_insertButton, OStrings.getString("BUTTON_INSERT"));
             m_insertButton.addActionListener(new java.awt.event.ActionListener() {
                 @Override
@@ -585,13 +585,15 @@ public class ProjectPropertiesDialog extends JDialog {
                     m_externalCommandTextArea.replaceSelection(m_variablesList.getSelectedItem().toString());
                 }
             });
+            bIC.add(m_insertButton);
+            bIC.add(Box.createHorizontalGlue());
             gbc.gridx = 0;
-            gbc.gridy = 6;
+            gbc.gridy = 5;
             gbc.weightx = 1;
             gbc.gridwidth = 2;
             gbc.anchor = GridBagConstraints.WEST;
             gbc.fill = GridBagConstraints.HORIZONTAL;
-            optionsBox.add(m_insertButton, gbc);
+            optionsBox.add(bIC, gbc);
         }
 
         centerBox.add(optionsBox, BorderLayout.WEST);

@@ -219,10 +219,10 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
                 wr.write(w + System.getProperty("line.separator"));
             }
             outFile.delete();
-            FileUtil.rename(outFileTmp, outFile);
             wr.close();
             osw.close();
             fos.close();
+            FileUtil.rename(outFileTmp, outFile);
         } catch (Exception ex) {
             Log.log("Error saving ignore words: " + ex.getMessage());
         } finally {

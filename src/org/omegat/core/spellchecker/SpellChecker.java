@@ -27,23 +27,21 @@
 
 package org.omegat.core.spellchecker;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
+import org.apache.commons.io.IOUtils;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
@@ -81,12 +79,12 @@ public class SpellChecker implements ISpellChecker {
     /**
      * the file name with the ignored words
      */
-    private String ignoreFileName;
+    private Path ignoreFilePath;
 
     /**
      * the file name with the learned words
      */
-    private String learnedFileName;
+    private Path learnedFilePath;
 
     /** Creates a new instance of SpellChecker */
     public SpellChecker() {
@@ -117,137 +115,110 @@ public class SpellChecker implements ISpellChecker {
     }
 
     /**
-     * Initialize the library for the given project. Loads the lists of ignored
-     * and learned words for the project
+     * Initialize the library for the given project. Loads the lists of ignored and learned words for the
+     * project
      */
     public void initialize() {
-        // initialize the spell checker - get the data from the preferences
         Language targetLanguage = Core.getProject().getProjectProperties().getTargetLanguage();
 
-        String dictionaryDir = Preferences.getPreferenceDefault(
-                Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
-                new File(StaticUtils.getConfigDir(), OConsts.SPELLING_DICT_DIR).getPath());
+        Stream<String> toCheck = Stream.of(
+                targetLanguage.getLocaleCode(), // Full xx_YY
+                targetLanguage.getLocaleCode().replace('_', '-'), // Full xx-YY
+                targetLanguage.getLanguageCode()); // xx only
 
-        String language = findAvailableDictLanguage(dictionaryDir, targetLanguage);
-        if (language == null) {
-            checker = new SpellCheckerDummy();
+        checker = toCheck.map((lang) -> initializeWithLanguage(lang)).filter((c) -> c != null).findFirst()
+                .orElse(new SpellCheckerDummy());
+
+        if (checker instanceof SpellCheckerDummy) {
             Log.log("No spell checker found for language " + targetLanguage);
-            return;
         }
 
+        loadWordLists();
+    }
+
+    private static ISpellCheckerProvider initializeWithLanguage(String language) {
+        // initialize the spell checker - get the data from the preferences
+
+        String dictionaryDir = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
+                new File(StaticUtils.getConfigDir(), OConsts.SPELLING_DICT_DIR).getPath());
+
         installBundledDictionary(dictionaryDir, language);
-        
+
         File affixName = new File(dictionaryDir, language + OConsts.SC_AFFIX_EXTENSION);
         File dictionaryName = new File(dictionaryDir, language + OConsts.SC_DICTIONARY_EXTENSION);
 
-        // find out the internal project directory
-        String projectDir = Core.getProject().getProjectProperties().getProjectInternal();
-
-        // load the ignore list
-        ignoreFileName = projectDir + OConsts.IGNORED_WORD_LIST_FILE_NAME;
-
-        // Since we read from disk, we clean the list first
-        ignoreList = new ArrayList<String>();
-        fillWordList(ignoreFileName, ignoreList);
-
-        // now the correct words
-        learnedFileName = projectDir + OConsts.LEARNED_WORD_LIST_FILE_NAME;
-
-        // Since we read from disk, we clean the list first
-        learnedList = new ArrayList<String>();
-        fillWordList(learnedFileName, learnedList);
-
-        checker = null;
-        if (dictionaryName.isFile()) {
-            try {
-                checker = new SpellCheckerHunspell(language, dictionaryName.getPath(), affixName.getPath());
-            } catch (Exception ex) {
-                Log.log("Error loading hunspell: " + ex.getMessage());
-            } catch (Error err) {
-                Log.log("Error loading hunspell: " + err.getMessage());
-            }
-            if (checker == null) {
-                try {
-                    checker = new SpellCheckerJMySpell(language, dictionaryName.getPath(), affixName.getPath());
-                } catch (Exception ex) {
-                    Log.log("Error loading jmyspell: " + ex.getMessage());
-                }
-            }
+        if (!dictionaryName.isFile()) {
+            return null;
         }
-        if (checker == null) {
-            checker = new SpellCheckerDummy();
-            Log.log("No spell checker loaded for language " + targetLanguage);
+        try {
+            return new SpellCheckerHunspell(language, dictionaryName.getPath(), affixName.getPath());
+        } catch (Exception ex) {
+            Log.log("Error loading hunspell: " + ex.getMessage());
         }
-        for (String w : learnedList) {
-            checker.learnWord(w);
+        try {
+            return new SpellCheckerJMySpell(language, dictionaryName.getPath(), affixName.getPath());
+        } catch (Exception ex) {
+            Log.log("Error loading jmyspell: " + ex.getMessage());
         }
+        return null;
     }
-    
-    /** Check to see if there is a dictionary available corresponding to the 
-     * full locale code or fall back to language if none is found.
-     * 
-     * Note that this does not handle the case where the project is in a specific 
-     * locale (xx_YY) and only a dictionary with another specific locale is available
-     * (xx_ZZ). Thus, it's probably best to always have a generic language dictionary 
-     * installed.
-     * 
-     * @returns the locale code found (either xx_YY or xx). Returns {@code null} if 
-     * no matching dictionary is found.
+
+    /**
+     * If there is a Hunspell dictionary for the current target language bundled inside this OmegaT
+     * distribution, install it if necessary.
      */
-    private String findAvailableDictLanguage(String dictionaryDir, Language targetLanguage) {
-		
-		String localeCode = targetLanguage.getLocaleCode();
-    	String languageCode = targetLanguage.getLanguageCode();
-
-    	// Check installed dictionaries
-    	List<String> dicts = new DictionaryManager(new File(dictionaryDir)).getLocalDictionaryCodeList();
-    	boolean hasLanguageCode = false;
-		for (String code : dicts) {
-			if (code.equalsIgnoreCase(localeCode)) {
-				// We got the most specific dictionary, no need to go further.
-    			return localeCode;
-    		}
-			else if (code.equalsIgnoreCase(languageCode))
-			{
-				hasLanguageCode = true;
-			}
-    	}
-		
-		// Check bundled dictionaries
-		// XXX Not sure if the file is supposed to be named xx_YY.zip or xx-YY.zip
-		if (getClass().getResource(localeCode + ".zip") != null) {
-    		return localeCode;
-    	}
-		else if (getClass().getResource(languageCode + ".zip") != null) {
-			hasLanguageCode = true;
-		}
-
-		return hasLanguageCode ? languageCode : null;
-	}
-
-	/**
-     * If there is a Hunspell dictionary for the current target language bundled inside
-     * this OmegaT distribution, install it if necessary. 
-     */
-    private void installBundledDictionary(String dictionaryDir, String language) {
-        InputStream bundledDict = getClass().getResourceAsStream(language + ".zip");
+    private static void installBundledDictionary(String dictionaryDir, String language) {
+        InputStream bundledDict = SpellChecker.class.getResourceAsStream(language + ".zip");
         if (bundledDict == null) {
             // Relevant dictionary not present.
             return;
         }
-        
+
         File affix = new File(dictionaryDir, language + OConsts.SC_AFFIX_EXTENSION);
         File dict = new File(dictionaryDir, language + OConsts.SC_DICTIONARY_EXTENSION);
         if (affix.isFile() && dict.isFile()) {
             // Dictionary already installed.
             return;
         }
-        
+
         try {
-            StaticUtils.extractFileFromJar(bundledDict, Arrays.asList(affix.getName(), dict.getName()), dictionaryDir);
-            bundledDict.close();            
+            StaticUtils.extractFileFromJar(bundledDict, Arrays.asList(affix.getName(), dict.getName()),
+                    dictionaryDir);
+            bundledDict.close();
         } catch (IOException e) {
             Log.log(e);
+        } finally {
+            IOUtils.closeQuietly(bundledDict);
+        }
+    }
+
+    private void loadWordLists() {
+        // find out the internal project directory
+        String projectDir = Core.getProject().getProjectProperties().getProjectInternal();
+
+        // load the ignore list
+        ignoreFilePath = Paths.get(projectDir, OConsts.IGNORED_WORD_LIST_FILE_NAME);
+
+        ignoreList.clear();
+        if (ignoreFilePath.toFile().isFile()) {
+            try {
+                ignoreList.addAll(Files.readAllLines(ignoreFilePath));
+            } catch (Exception ex) {
+                Log.log(ex);
+            }
+        }
+
+        // now the correct words
+        learnedFilePath = Paths.get(projectDir, OConsts.LEARNED_WORD_LIST_FILE_NAME);
+
+        learnedList.clear();
+        if (learnedFilePath.toFile().isFile()) {
+            try {
+                learnedList.addAll(Files.readAllLines(learnedFilePath));
+                learnedList.stream().forEach((word) -> checker.learnWord(word));
+            } catch (Exception ex) {
+                Log.log(ex);
+            }
         }
     }
 
@@ -272,74 +243,30 @@ public class SpellChecker implements ISpellChecker {
      */
     public void saveWordLists() {
         // Write the ignored and learned words to the disk
-        dumpWordList(ignoreList, ignoreFileName);
-        dumpWordList(learnedList, learnedFileName);
-    }
-
-    /**
-     * fill the word list (ignore or learned) with contents from the disk
-     */
-    private void fillWordList(String filename, List<String> list) {
-        BufferedReader br = null;
         try {
-            br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), OConsts.UTF8));
-
-            String thisLine;
-            while ((thisLine = br.readLine()) != null) {
-                list.add(thisLine);
-            }
-        } catch (FileNotFoundException ex) {
-            // discard this
+            Files.write(ignoreFilePath, ignoreList);
         } catch (IOException ex) {
-            // so now what?
-        } finally {
-            try {
-                if (br != null)
-                    br.close();
-            } catch (IOException ex) {
-                // so now what?
-            }
+            Log.log(ex);
+        }
+        try {
+            Files.write(learnedFilePath, learnedList);
+        } catch (IOException ex) {
+            Log.log(ex);
         }
     }
 
     /**
-     * dump word list to a file
-     */
-    private void dumpWordList(List<String> list, String filename) {
-        if (filename == null)
-            return;
-        BufferedWriter bw = null;
-        try {
-            bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), OConsts.UTF8));
-
-            for (String text : list) {
-                bw.write(text);
-                bw.newLine();
-            }
-        } catch (IOException ex) {
-            // so now what?
-        } finally {
-            try {
-                if (bw != null)
-                    bw.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Check the word. If it is ignored or learned (valid), returns true.
-     * Otherwise false.
+     * Check the word. If it is ignored or learned (valid), returns true. Otherwise false.
      */
     public boolean isCorrect(String word) {
-        //check if spellchecker is already initialized. If not, skip checking
-        //to prevent nullPointerErrors.
-        if (checker==null) 
+        // check if spellchecker is already initialized. If not, skip checking
+        // to prevent nullPointerErrors.
+        if (checker == null) {
             return true;
+        }
 
         word = normalize(word);
-        
+
         // check in cache first
         synchronized (this) {
             if (incorrectWordsCache.contains(word)) {
@@ -408,10 +335,9 @@ public class SpellChecker implements ISpellChecker {
             }
         }
     }
-    
+
     /**
-     * Normalize the orthography of the word by replacing alternative characters
-     * with "canonical" ones.
+     * Normalize the orthography of the word by replacing alternative characters with "canonical" ones.
      */
     private static String normalize(String word) {
         // U+2019 RIGHT SINGLE QUOTATION MARK to U+0027 APOSTROPHE

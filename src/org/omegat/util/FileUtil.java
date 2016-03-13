@@ -139,17 +139,13 @@ public class FileUtil {
         String result = null;
         FileInputStream fis = null;
         InputStreamReader isr = null;
-        BufferedReader rd = null;
         try {
             fis = new FileInputStream(file);
             isr = new InputStreamReader(fis, OConsts.UTF8);
-            rd = new BufferedReader(isr);
-            result = IOUtils.toString(rd);
-            rd.close();
+            result = IOUtils.toString(isr);
             isr.close();
             fis.close();
         } finally {
-            IOUtils.closeQuietly(rd);
             IOUtils.closeQuietly(isr);
             IOUtils.closeQuietly(fis);
         }

@@ -74,12 +74,46 @@ public class ProjectFileStorage {
         return (Omegat) CONTEXT.createUnmarshaller().unmarshal(new ByteArrayInputStream(projectFile));
     }
 
+    /**
+     * Load the project properties file for the project at the specified directory. The properties file is
+     * assumed to exist at the root of the project and have the default name, {@link OConsts#FILE_PROJECT}.
+     * This is a convenience method for {@link #loadPropertiesFile(File, File)}.
+     * <p>
+     * If the supplied {@link File} is not a directory, an {@link IllegalArgumentException} will be thrown.
+     * 
+     * @param projectDir
+     *            The directory of the project
+     * @return The loaded project properties
+     * @throws Exception
+     */
     public static ProjectProperties loadProjectProperties(File projectDir) throws Exception {
+        return loadPropertiesFile(projectDir, new File(projectDir, OConsts.FILE_PROJECT));
+    }
+
+    /**
+     * Load the specified project properties file for the project at the specified directory.
+     * <p>
+     * If <code>projectDir</code> is not a directory or <code>projectFile</code> is not a file, an
+     * {@link IllegalArgumentException} will be thrown.
+     * 
+     * @param projectDir
+     *            The directory of the project
+     * @param projectFile
+     *            The project properties file to load
+     * @return The loaded project properties
+     * @throws Exception
+     */
+    public static ProjectProperties loadPropertiesFile(File projectDir, File projectFile) throws Exception {
+        if (!projectFile.isFile()) {
+            throw new IllegalArgumentException("Project file was not a file");
+        }
+        if (!projectDir.isDirectory()) {
+            throw new IllegalArgumentException("Project directory was not a directory");
+        }
+
         ProjectProperties result = new ProjectProperties(projectDir);
 
-        File inFile = new File(projectDir, OConsts.FILE_PROJECT);
-
-        Omegat om = parseProjectFile(FileUtils.readFileToByteArray(inFile));
+        Omegat om = parseProjectFile(FileUtils.readFileToByteArray(projectFile));
 
         if (!OConsts.PROJ_CUR_VERSION.equals(om.getProject().getVersion())) {
             throw new TranslationException(StringUtil.format(
@@ -88,7 +122,7 @@ public class ProjectFileStorage {
         }
 
         // if folder is in default locations, name stored as __DEFAULT__
-        String m_root = inFile.getParentFile().getAbsolutePath() + File.separator;
+        String m_root = projectDir.getAbsolutePath() + File.separator;
 
         result.setTargetRootRelative(computeRelative(om.getProject().getTargetDir(), OConsts.DEFAULT_TARGET));
         result.setTargetRoot(computeAbsolutePath(m_root, om.getProject().getTargetDir(),

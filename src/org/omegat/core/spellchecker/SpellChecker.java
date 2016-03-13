@@ -30,6 +30,7 @@ package org.omegat.core.spellchecker;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -202,7 +203,7 @@ public class SpellChecker implements ISpellChecker {
         ignoreList.clear();
         if (ignoreFilePath.toFile().isFile()) {
             try {
-                ignoreList.addAll(Files.readAllLines(ignoreFilePath));
+                ignoreList.addAll(Files.readAllLines(ignoreFilePath, StandardCharsets.UTF_8));
             } catch (Exception ex) {
                 Log.log(ex);
             }
@@ -214,7 +215,7 @@ public class SpellChecker implements ISpellChecker {
         learnedList.clear();
         if (learnedFilePath.toFile().isFile()) {
             try {
-                learnedList.addAll(Files.readAllLines(learnedFilePath));
+                learnedList.addAll(Files.readAllLines(learnedFilePath, StandardCharsets.UTF_8));
                 learnedList.stream().forEach((word) -> checker.learnWord(word));
             } catch (Exception ex) {
                 Log.log(ex);

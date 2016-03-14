@@ -119,7 +119,7 @@ public class DockingUI {
         
         // Panel notification (blinking tabs/headers) settings
         UIManager.put("DockingDesktop.notificationBlinkCount", 2);
-        UIManager.put("DockingDesktop.notificationColor", new Color(0xFFE8E8));
+        UIManager.put("DockingDesktop.notificationColor", Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
         
         ensureTitlebarReadability();
     }
@@ -182,6 +182,9 @@ public class DockingUI {
                 UIManager.put("InternalFrame.inactiveTitleForeground", res);
             }
         }
+
+        UIManager.put("DockingDesktop.notificationBlinkCount", 2);
+        UIManager.put("DockingDesktop.notificationColor", Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
     }
     
     private static void installFlatDesign() {

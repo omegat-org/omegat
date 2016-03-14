@@ -93,7 +93,9 @@ public final class Styles {
         COLOR_MATCHES_DEL_INACTIVE((Color) null),
         COLOR_MATCHES_INS_ACTIVE("#0000ff"),
         COLOR_MATCHES_INS_INACTIVE("#808080"), // Color.gray
-        COLOR_HYPERLINK("#0000ff"); // Blue
+        COLOR_HYPERLINK("#0000ff"), // Blue
+        COLOR_NOTIFICATION_MIN("#fff2d4"), // Light orange
+        COLOR_NOTIFICATION_MAX("#ff9900"); // Dark orange
 
         private static final String DEFAULT_COLOR = "__DEFAULT__";
         private Color color;

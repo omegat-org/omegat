@@ -102,4 +102,14 @@ public class DockableScrollPane extends JScrollPane implements Dockable {
         return this;
     }
 
+    public void notify(boolean onlyIfMinimized) {
+        if (onlyIfMinimized && dockKey.getLocation() != Location.HIDDEN) {
+            return;
+        }
+        dockKey.setNotification(true);
+    }
+    
+    public void stopNotifying() {
+        dockKey.setNotification(false);
+    }
 }

@@ -29,6 +29,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -363,6 +364,22 @@ public abstract class TestFilterBase extends TestCore {
         assertEquals(new EntryKey(fi.filePath, sourceText, id, prev, next, path), fi.entries.get(fiCount)
                 .getKey());
         assertEquals(comment, fi.entries.get(fiCount).getComment());
+        fiCount++;
+    }
+
+    protected void checkMultiProps(String sourceText, String id, String path, String prev, String next,
+            String... props) {
+        assertEquals(new EntryKey(fi.filePath, sourceText, id, prev, next, path),
+                fi.entries.get(fiCount).getKey());
+        List<String> expected = Arrays.asList(props);
+        String[] actual = fi.entries.get(fiCount).getRawProperties();
+        assertEquals(props.length, actual.length);
+        for (int i = 0; i < actual.length; i += 2) {
+            int keyIndex = expected.indexOf(actual[i]);
+            assertFalse(keyIndex == -1);
+            int valIndex = expected.indexOf(actual[i + 1]);
+            assertEquals(keyIndex + 1, valIndex);
+        }
         fiCount++;
     }
 

@@ -258,4 +258,25 @@ public class XLIFFFilterTest extends TestFilterBase {
             return wasCausedBy(cause, cls);
         }
     }
+
+    public void testProperties() throws Exception {
+        String f = "test/data/filters/xliff/file-XLIFFFilter-properties.xlf";
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
+
+        // Check reading as properties. We don't really care about the order of the content in the parsed
+        // properties array (as long as the key=value pairs are consistent), so we do lose checking.
+        checkMultiStart(fi, f);
+        checkMultiProps("tr1=This is test", null, null, "", "tr2=test2", "note", "foo", "group", "bazinga");
+        checkMultiProps("tr2=test2", null, null, "tr1=This is test", "", "note", "bar", "resname", "baz",
+                "group", "bazinga");
+        checkMultiEnd();
+
+        // Check reading as old comment string blobs. We don't really care about the order of the content in
+        // the parsed properties array, but the way the test currently works, it will break if the order
+        // changes.
+        checkMultiStart(fi, f);
+        checkMulti("tr1=This is test", null, null, "", "tr2=test2", "foo\nbazinga");
+        checkMulti("tr2=test2", null, null, "tr1=This is test", "", "bar\nbazinga\nbaz");
+        checkMultiEnd();
+    }
 }

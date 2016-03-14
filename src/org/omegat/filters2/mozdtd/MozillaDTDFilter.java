@@ -5,7 +5,7 @@
 
  Copyright (C) 2010 Alex Buloichik, Didier Briel
                2011-2012 Didier Briel
-               2014 Enrique Estévez Fernández
+               2014 Enrique Estevez Fernandez
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -54,17 +54,15 @@ import org.omegat.util.StringUtil;
 
 /**
  * Filter for support Mozilla DTD files.
- * 
- * Format described on
- * http://msdn.microsoft.com/en-us/library/aa380599(VS.85).aspx
+ * <p>
+ * Option to remove untranslated segments in the target files by Enrique Estevez (Code adapted from the file:
+ * PoFilter.java)
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
- *
- * Option to remove untranslated segments in the target files
- * Code adapted from the file: PoFilter.java
- *
- * @author Enrique Estévez (keko.gl@gmail.com)
+ * @author Enrique Estevez (keko.gl@gmail.com)
+ * @see <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa380599(v=vs.85).aspx">Format
+ *      description</a>
  */
 public class MozillaDTDFilter extends AbstractFilter {
 

@@ -71,6 +71,7 @@ import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.gui.multtrans.MultipleTransPane;
 import org.omegat.gui.notes.INotes;
 import org.omegat.gui.notes.NotesTextArea;
+import org.omegat.gui.properties.SegmentPropertiesArea;
 import org.omegat.gui.tagvalidation.ITagValidation;
 import org.omegat.gui.tagvalidation.TagValidationTool;
 import org.omegat.languagetools.LanguageToolWrapper;
@@ -256,6 +257,7 @@ public class Core {
         dictionaries = new DictionariesTextArea();
         spellChecker = new SpellChecker();
         multiple = new MultipleTransPane();
+        new SegmentPropertiesArea(me);
 
         SaveThread th = new SaveThread();
         saveThread = th;

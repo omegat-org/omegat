@@ -166,6 +166,14 @@ public abstract class TmxComplianceBase extends TestCase {
 
             public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
                     String path, IFilter filter, List<ProtectedPart> protectedParts) {
+                String[] props = comment == null ? null : new String[] { "comment", comment };
+                addEntryWithProperties(id, source, translation, isFuzzy, props, path, filter, protectedParts);
+            }
+
+            @Override
+            public void addEntryWithProperties(String id, String source, String translation,
+                    boolean isFuzzy, String[] props, String path,
+                    IFilter filter, List<ProtectedPart> protectedParts) {
                 result.addAll(Core.getSegmenter().segment(context.getSourceLang(), source, null, null));
             }
 

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -34,10 +35,11 @@ import org.omegat.core.data.ProtectedPart;
  * Callback for parse files.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public interface IParseCallback {
     /**
-     * Read entry from source file
+     * Read entry from source file, with arbitrary (optional) properties
      * 
      * @param id
      *            ID in source file, or null if ID not supported by format
@@ -47,14 +49,21 @@ public interface IParseCallback {
      *            exist translation text
      * @param isFuzzy
      *            true if translation is fuzzy
-     * @param comment
-     *            comment for entry, if format supports it
+     * @param props
+     *            an array of key=value metadata properties for the entry
      * @param path
      *            path of segment
      * @param filter
      *            filter which produces entry
      * @param protectedParts
      *            protected parts
+     */
+    void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy, String[] props,
+            String path, IFilter filter, List<ProtectedPart> protectedParts);
+    
+    /**
+     * Read entry from source file, with single "comment" property. Convenience method for
+     * {@link #addEntryWithProperties(String, String, String, boolean, String[], String, IFilter, List)}.
      */
     void addEntry(String id, String source, String translation, boolean isFuzzy, String comment, String path,
             IFilter filter, List<ProtectedPart> protectedParts);

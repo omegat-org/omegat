@@ -28,8 +28,11 @@
 package org.omegat.core.data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Source text entry represents an individual segment for translation pulled
@@ -47,8 +50,11 @@ public class SourceTextEntry {
     /** Storage for full entry's identifiers, including source text. */
     private final EntryKey key;
 
-    /** Comment in source file. */
-    private final String comment;
+    /** 
+     * String properties from source file. Contents are alternating 
+     * key (even index), value (odd index) strings. Should be of even length.
+     */
+    private final String[] props;
 
     /** Translation from source files. */
     private final String sourceTranslation;
@@ -93,17 +99,17 @@ public class SourceTextEntry {
      *            entry key
      * @param entryNum
      *            the number of this entry in a project
-     * @param comment
-     *            entry comment
+     * @param props
+     *            optional entry metadata
      * @param sourceTranslation
      *            translation from source file
      * @param shortcuts
      *            tags shortcuts
      */
-    public SourceTextEntry(EntryKey key, int entryNum, String comment, String sourceTranslation, List<ProtectedPart> protectedParts) {
+    public SourceTextEntry(EntryKey key, int entryNum, String[] props, String sourceTranslation, List<ProtectedPart> protectedParts) {
         this.key = key;
         m_entryNum = entryNum;
-        this.comment = comment;
+        this.props = props;
         this.sourceTranslation = sourceTranslation;
         if (protectedParts.isEmpty()) {
             this.protectedParts = EMPTY_PROTECTED_PARTS;
@@ -137,7 +143,23 @@ public class SourceTextEntry {
      * Returns comment of entry if exist in source document.
      */
     public String getComment() {
-        return comment;
+        if (props == null || props.length == 0) {
+            return null;
+        }
+        // Avoid creating a new string if we can avoid it.
+        // This should be the majority case.
+        if (props.length == 2) {
+            return props[1];
+        }
+        return IntStream.range(0, props.length).filter((i) -> i % 2 != 0).mapToObj((i) -> props[i])
+                .collect(Collectors.joining("\n"));
+    }
+    
+    public String[] getRawProperties() {
+        if (props != null) {
+            return Arrays.copyOf(props, props.length);
+        }
+        return new String[0];
     }
 
     /** Returns the number of this entry in a project. */

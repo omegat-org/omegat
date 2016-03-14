@@ -34,8 +34,11 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.JTextComponent;
 
+import org.omegat.util.gui.IPaneMenu;
+
 import com.vlsolutions.swing.docking.DockKey;
 import com.vlsolutions.swing.docking.Dockable;
+import com.vlsolutions.swing.docking.DockableState.Location;
 import com.vlsolutions.swing.docking.DockingConstants;
 
 /**
@@ -79,6 +82,14 @@ public class DockableScrollPane extends JScrollPane implements Dockable {
         dockKey = new DockKey(key, name, null, null, DockingConstants.HIDE_BOTTOM);
         dockKey.setFloatEnabled(detouchable);
         dockKey.setCloseEnabled(false);
+        
+        if (view instanceof IPaneMenu) {
+            setMenuProvider((IPaneMenu) view);
+        }
+    }
+
+    public void setMenuProvider(IPaneMenu provider) {
+        dockKey.putProperty(IPaneMenu.PROPERTY_PANE_MENU_ACTION_LISTENER, provider);
     }
 
     @Override

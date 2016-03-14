@@ -114,12 +114,6 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         this.mainWindowMenuHandler = mainWindowMenuHandler;
     }
 
-    /**
-     * Code for dispatching events from components to event handlers.
-     * 
-     * @param evt
-     *            event info
-     */
     @Override
     public void actionPerformed(ActionEvent evt) {
         // Get item name from actionCommand.
@@ -127,6 +121,17 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
         Log.logInfoRB("LOG_MENU_CLICK", action);
 
+        invokeAction(action, evt.getModifiers());
+    }
+    
+    /**
+     * Code for dispatching events from components to event handlers.
+     * 
+     * @param action ActionCommand of triggering menu item
+     * @param modifiers Modifier key flags (can be zero)
+     */
+    @Override
+    public void invokeAction(String action, int modifiers) {
         // Find method by item name.
         String methodName = action + "ActionPerformed";
         Method method = null;
@@ -142,7 +147,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         }
 
         // Call ...MenuItemActionPerformed method.
-        Object[] args = method.getParameterTypes().length == 0 ? null : new Object[] { evt.getModifiers() };
+        Object[] args = method.getParameterTypes().length == 0 ? null : new Object[] { modifiers };
         try {
             method.invoke(mainWindowMenuHandler, args);
         } catch (IllegalAccessException ex) {

@@ -465,6 +465,9 @@ public class TestTeamIntegrationChild {
             public JMenu getAutoCompletionMenu() {
                 return null;
             }
+
+            public void invokeAction(String action, int modifiers) {
+            }
         };
 
         public IMainMenu getMainMenu() {

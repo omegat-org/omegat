@@ -84,6 +84,9 @@ public abstract class TestCore extends XMLTestCase {
             public JMenu getAutoCompletionMenu() {
                 return menu;
             }
+
+            public void invokeAction(String action, int modifiers) {
+            }
         };
 
         Core.setMainWindow(new IMainWindow() {

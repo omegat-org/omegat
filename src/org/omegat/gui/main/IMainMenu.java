@@ -51,4 +51,6 @@ public interface IMainMenu {
     JMenuItem getProjectRecentMenuItem();
 
     JMenu getAutoCompletionMenu();
+    
+    void invokeAction(String action, int modifiers);
 }

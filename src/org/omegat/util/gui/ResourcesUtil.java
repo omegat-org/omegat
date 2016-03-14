@@ -38,6 +38,7 @@ import java.net.URL;
  * @author Aaron Madlon-Kay
  */
 public class ResourcesUtil {
+    
     /**
      * Load icon.
      * 
@@ -45,11 +46,19 @@ public class ResourcesUtil {
      *            resource name
      * @throws FileNotFoundException 
      */
-    public static Image getImage(final String resourceName) throws FileNotFoundException {
+    public static Image getImage(final String resourceName) {
         URL resourceURL = ResourcesUtil.class.getResource(resourceName);
-        if (resourceURL == null) {
-            throw new FileNotFoundException(resourceName);
-        }
         return Toolkit.getDefaultToolkit().getImage(resourceURL);
+    }
+    
+    /**
+     * Load icon from classpath.
+     * 
+     * @param iconName
+     *            icon file name
+     * @return icon instance
+     */
+    public static Image getBundledImage(String imageName) {
+        return getImage("/org/omegat/gui/resources/" + imageName);
     }
 }

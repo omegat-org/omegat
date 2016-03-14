@@ -26,7 +26,6 @@
 package org.omegat.gui.common;
 
 import java.awt.Image;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,16 +47,11 @@ public class OmegaTIcons {
      * http://iconhandbook.co.uk/reference/chart/
      */
     static {
-        try {
-            ICONS.add(ResourcesUtil.getImage(RESOURCES + "OmegaT_small.gif"));
-            ICONS.add(ResourcesUtil.getImage(RESOURCES + "OmegaT.gif"));
-        } catch (FileNotFoundException ex) {
-            throw new RuntimeException(ex);
-        }
+        ICONS.add(ResourcesUtil.getImage(RESOURCES + "OmegaT_small.gif"));
+        ICONS.add(ResourcesUtil.getImage(RESOURCES + "OmegaT.gif"));
     }
 
     public static void setIconImages(JFrame frame) {
         frame.setIconImages(ICONS);
     }
-
 }

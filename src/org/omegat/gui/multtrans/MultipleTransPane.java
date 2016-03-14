@@ -36,6 +36,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.text.JTextComponent;
@@ -47,7 +48,9 @@ import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.SegmentBuilder;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.IPaneMenu;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -59,17 +62,20 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
-public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFoundEntry>> {
+public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFoundEntry>> implements IPaneMenu {
 
     private static final String EXPLANATION = OStrings.getString("GUI_MULTIPLETRANSLATIONSWINDOW_explanation");
 
     private List<DisplayedEntry> entries = new ArrayList<DisplayedEntry>();
+    
+    private final DockableScrollPane scrollPane;
 
     public MultipleTransPane() {
         super(true);
 
         String title = OStrings.getString("MULT_TITLE");
-        Core.getMainWindow().addDockable(new DockableScrollPane("MULTIPLE_TRANS", title, this, true));
+        scrollPane = new DockableScrollPane("MULTIPLE_TRANS", title, this, true);
+        Core.getMainWindow().addDockable(scrollPane);
 
         setEditable(false);
         StaticUIUtils.makeCaretAlwaysVisible(this);
@@ -105,6 +111,12 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
     }
 
     @Override
+    public void onEntryActivated(SourceTextEntry newEntry) {
+        scrollPane.stopNotifying();
+        super.onEntryActivated(newEntry);
+    }
+    
+    @Override
     protected void setFoundResult(SourceTextEntry processedEntry, List<MultipleTransFoundEntry> data) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -115,8 +127,11 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
             return;
         }
         
+        if (!data.isEmpty() && Preferences.isPreference(Preferences.NOTIFY_MULTIPLE_TRANSLATIONS)) {
+            scrollPane.notify(true);
+        }
+        
         StringBuilder o = new StringBuilder();
-
         for (MultipleTransFoundEntry e : data) {
             DisplayedEntry de = new DisplayedEntry();
             de.entry = e;
@@ -169,37 +184,41 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
     protected void startSearchThread(SourceTextEntry newEntry) {
         new MultipleTransFindThread(this, Core.getProject(), newEntry).start();
     }
+    
+    private DisplayedEntry getEntryAtPosition(int pos) {
+        for (DisplayedEntry de : entries) {
+            if (de.start <= pos && de.end >= pos) {
+                return de;
+            }
+        }
+        return null;
+    }
 
     protected MouseListener mouseListener = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
             if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) { // righ click
                 // is there anything?
-                if (entries.isEmpty())
+                if (entries.isEmpty()) {
                     return;
-
-                // where did we click?
-                int mousepos = MultipleTransPane.this.viewToModel(e.getPoint());
-
-                // find clicked entry
-                for (DisplayedEntry de : entries) {
-                    if (de.start <= mousepos && de.end >= mousepos) {
-                        mouseRightClick(de, e.getPoint());
-                        break;
-                    }
                 }
+
+                JPopupMenu popup = new JPopupMenu();
+                Point p = e.getPoint();
+                populateContextMenu(popup, viewToModel(p));
+                popup.show(MultipleTransPane.this, p.x, p.y);
             }
         }
     };
 
-    private void mouseRightClick(final DisplayedEntry de, final Point clickedPoint) {
-        // create the menu
-        JPopupMenu popup = new JPopupMenu();
-
+    private void populateContextMenu(JPopupMenu popup, int pos) {
+        final DisplayedEntry de = getEntryAtPosition(pos);
+        
         JMenuItem item;
-        if (de.entry.key != null) {
-            // default translation
-            item = popup.add(OStrings.getString("MULT_POPUP_DEFAULT"));
+        // default translation
+        item = popup.add(OStrings.getString("MULT_POPUP_DEFAULT"));
+        item.setEnabled(de != null && de.entry.key != null);
+        if (de != null && de.entry.key != null) {
             item.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Core.getEditor().replaceEditText(de.entry.entry.translation);
@@ -210,24 +229,43 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
         }
         // non-default translation
         item = popup.add(OStrings.getString("MULT_POPUP_REPLACE"));
-        item.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Core.getEditor().replaceEditText(de.entry.entry.translation);
-            }
-        });
+        item.setEnabled(de != null);
+        if (de != null) {
+            item.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Core.getEditor().replaceEditText(de.entry.entry.translation);
+                }
+            });
+        }
 
         item = popup.add(OStrings.getString("MULT_POPUP_GOTO"));
-        item.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Core.getEditor().gotoEntry(de.entry.sourceText, de.entry.key);
-            }
-        });
-
-        popup.show(this, clickedPoint.x, clickedPoint.y);
+        item.setEnabled(de != null);
+        if (de != null) {
+            item.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Core.getEditor().gotoEntry(de.entry.sourceText, de.entry.key);
+                }
+            });
+        }
     }
 
     protected static class DisplayedEntry {
         int start, end;
         MultipleTransFoundEntry entry;
+    }
+
+    @Override
+    public void populatePaneMenu(JPopupMenu menu) {
+        //populateContextMenu(menu, getCaretPosition());
+        //menu.addSeparator();
+        final JMenuItem notify = new JCheckBoxMenuItem(OStrings.getString("MULT_SETTINGS_NOTIFY"));
+        notify.setSelected(Preferences.isPreference(Preferences.NOTIFY_MULTIPLE_TRANSLATIONS));
+        notify.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Preferences.setPreference(Preferences.NOTIFY_MULTIPLE_TRANSLATIONS, notify.isSelected());
+            }
+        });
+        menu.add(notify);
     }
 }

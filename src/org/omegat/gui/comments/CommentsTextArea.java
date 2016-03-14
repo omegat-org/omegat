@@ -28,10 +28,16 @@
 package org.omegat.gui.comments;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
@@ -40,6 +46,8 @@ import org.omegat.gui.common.EntryInfoPane;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
+import org.omegat.util.gui.IPaneMenu;
 import org.omegat.util.gui.JTextPaneLinkifier;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -52,18 +60,21 @@ import org.omegat.util.gui.UIThreadsUtil;
  */
 @SuppressWarnings("serial")
 public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements IEntryEventListener,
-        IComments {
+        IComments, IPaneMenu {
 
     private static final String EXPLANATION = OStrings.getString("GUI_COMMENTSWINDOW_explanation");
 
     private final List<ProviderStorage> providers = new ArrayList<ProviderStorage>();
+    
+    private final DockableScrollPane scrollPane;
 
     /** Creates new Comments Text Area Pane */
     public CommentsTextArea(MainWindow mw) {
         super(true);
 
         String title = OStrings.getString("GUI_COMMENTSWINDOW_SUBWINDOWTITLE_Comments");
-        mw.addDockable(new DockableScrollPane("COMMENTS", title, this, true));
+        scrollPane = new DockableScrollPane("COMMENTS", title, this, true);
+        mw.addDockable(scrollPane);
 
         setEditable(false);
         StaticUIUtils.makeCaretAlwaysVisible(this);
@@ -80,6 +91,8 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
     public void onEntryActivated(SourceTextEntry newEntry) {
         UIThreadsUtil.mustBeSwingThread();
 
+        scrollPane.stopNotifying();
+        
         List<ProviderStorage> list;
         synchronized (providers) {
             list = new ArrayList<ProviderStorage>(providers);
@@ -94,6 +107,9 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
 
         setText(text.toString());
         setCaretPosition(0);
+        if (text.length() > 0 && Preferences.isPreference(Preferences.NOTIFY_COMMENTS)) {
+            scrollPane.notify(true);
+        }
     }
 
     static final ICommentProvider ENTRY_COMMENT_PROVIDER = new ICommentProvider() {
@@ -172,5 +188,18 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
     static class ProviderStorage {
         ICommentProvider provider;
         int priority;
+    }
+
+    @Override
+    public void populatePaneMenu(JPopupMenu menu) {
+        final JMenuItem notify = new JCheckBoxMenuItem(OStrings.getString("GUI_COMMENTSWINDOW_SETTINGS_NOTIFICATIONS"));
+        notify.setSelected(Preferences.isPreference(Preferences.NOTIFY_COMMENTS));
+        notify.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Preferences.setPreference(Preferences.NOTIFY_COMMENTS, notify.isSelected());
+            }
+        });
+        menu.add(notify);
     }
 }

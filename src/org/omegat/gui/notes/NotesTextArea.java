@@ -29,14 +29,21 @@
 package org.omegat.gui.notes;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.undo.UndoManager;
 
-import org.omegat.core.Core;
 import org.omegat.gui.common.EntryInfoPane;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
+import org.omegat.util.gui.IPaneMenu;
 import org.omegat.util.gui.JTextPaneLinkifier;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -47,18 +54,20 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
-public class NotesTextArea extends EntryInfoPane<String> implements INotes {
+public class NotesTextArea extends EntryInfoPane<String> implements INotes, IPaneMenu {
 
     private static final String EXPLANATION = OStrings.getString("GUI_NOTESWINDOW_explanation");
 
     UndoManager undoManager;
+    private DockableScrollPane scrollPane;
 
     /** Creates new Notes Text Area Pane */
     public NotesTextArea(MainWindow mw) {
         super(true);
 
         String title = OStrings.getString("GUI_NOTESWINDOW_SUBWINDOWTITLE_Notes");
-        Core.getMainWindow().addDockable(new DockableScrollPane("NOTES", title, this, true));
+        scrollPane = new DockableScrollPane("NOTES", title, this, true);
+        mw.addDockable(scrollPane);
 
         setEditable(false);
         setText(EXPLANATION);
@@ -91,6 +100,13 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes {
     public void setNoteText(String text) {
         UIThreadsUtil.mustBeSwingThread();
 
+        if (Preferences.isPreference(Preferences.NOTIFY_NOTES)) {
+            if (StringUtil.isEmpty(text)) {
+                scrollPane.stopNotifying();
+            } else {
+                scrollPane.notify(true);
+            }
+        }
         setText(text);
         setEditable(true);
     }
@@ -115,5 +131,18 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes {
         if (undoManager.canRedo()) {
             undoManager.redo();
         }
+    }
+    
+    @Override
+    public void populatePaneMenu(JPopupMenu menu) {
+        final JMenuItem notify = new JCheckBoxMenuItem(OStrings.getString("GUI_NOTESWINDOW_NOTIFICATIONS"));
+        notify.setSelected(Preferences.isPreference(Preferences.NOTIFY_NOTES));
+        notify.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Preferences.setPreference(Preferences.NOTIFY_NOTES, notify.isSelected());
+            }
+        });
+        menu.add(notify);
     }
 }

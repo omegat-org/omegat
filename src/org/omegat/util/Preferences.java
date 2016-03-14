@@ -408,6 +408,14 @@ public class Preferences {
     public static final String TAAS_LOOKUP = "taas_lookup";
     public static final String TAAS_DOMAIN = "taas_domain";
 
+    /** Notification preferences */
+    public static final String NOTIFY_FUZZY_MATCHES = "notify_fuzzy_matches";
+    public static final String NOTIFY_GLOSSARY_HITS = "notify_glossary_hits";
+    public static final String NOTIFY_COMMENTS = "notify_comments";
+    public static final String NOTIFY_DICTIONARY_HITS = "notify_dictionary_hits";
+    public static final String NOTIFY_MULTIPLE_TRANSLATIONS = "notify_multiple_translations";
+    public static final String NOTIFY_NOTES = "notify_notes";
+
     public static final String PROPERTY_SRX = "srx";
     public static final String PROPERTY_FILTERS = "filters";
 

@@ -34,7 +34,9 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.TableColumnModelEvent;
@@ -421,9 +423,14 @@ public class TableColumnSizer {
     }
     
     private void notifyListeners() {
-        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "columnsAdjusted");
-        for (ActionListener listener : listeners) {
-            listener.actionPerformed(event);
-        }
+    	SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "columnsAdjusted");
+				for (ActionListener listener : listeners) {
+					listener.actionPerformed(event);
+				}
+			}
+		});
     }
 }

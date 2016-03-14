@@ -39,7 +39,7 @@ import javax.swing.undo.UndoManager;
 
 import org.omegat.gui.common.EntryInfoPane;
 import org.omegat.gui.main.DockableScrollPane;
-import org.omegat.gui.main.MainWindow;
+import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -62,7 +62,7 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes, IPan
     private DockableScrollPane scrollPane;
 
     /** Creates new Notes Text Area Pane */
-    public NotesTextArea(MainWindow mw) {
+    public NotesTextArea(IMainWindow mw) {
         super(true);
 
         String title = OStrings.getString("GUI_NOTESWINDOW_SUBWINDOWTITLE_Notes");

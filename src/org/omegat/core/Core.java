@@ -253,10 +253,10 @@ public class Core {
         glossaryManager = new GlossaryManager(glossary);
         notes = new NotesTextArea(me);
         comments = new CommentsTextArea(me);
-        machineTranslatePane = new MachineTranslateTextArea();
-        dictionaries = new DictionariesTextArea();
+        machineTranslatePane = new MachineTranslateTextArea(me);
+        dictionaries = new DictionariesTextArea(me);
         spellChecker = new SpellChecker();
-        multiple = new MultipleTransPane();
+        multiple = new MultipleTransPane(me);
         new SegmentPropertiesArea(me);
 
         SaveThread th = new SaveThread();

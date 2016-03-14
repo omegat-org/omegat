@@ -27,6 +27,7 @@ package org.omegat.gui.notes;
 
 import javax.swing.SwingUtilities;
 
+import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 
 /**
@@ -36,7 +37,7 @@ import org.omegat.core.TestCore;
 public class NotesTextAreaTest extends TestCore {
 
     public void testSetNote() throws Exception {
-        final INotes nta = new NotesTextArea(null);
+        final INotes nta = new NotesTextArea(Core.getMainWindow());
         final ResultHolder<String> holder = new ResultHolder<String>();
         
         final String s = "foobar";
@@ -74,7 +75,7 @@ public class NotesTextAreaTest extends TestCore {
     }
 
     public void testClear() throws Exception {
-        final INotes nta = new NotesTextArea(null);
+        final INotes nta = new NotesTextArea(Core.getMainWindow());
         final ResultHolder<String> holder = new ResultHolder<String>();
         
         SwingUtilities.invokeAndWait(new Runnable() {

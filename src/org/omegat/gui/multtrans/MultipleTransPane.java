@@ -47,6 +47,7 @@ import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.SegmentBuilder;
 import org.omegat.gui.main.DockableScrollPane;
+import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -70,12 +71,12 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
     
     private final DockableScrollPane scrollPane;
 
-    public MultipleTransPane() {
+    public MultipleTransPane(IMainWindow mw) {
         super(true);
 
         String title = OStrings.getString("MULT_TITLE");
         scrollPane = new DockableScrollPane("MULTIPLE_TRANS", title, this, true);
-        Core.getMainWindow().addDockable(scrollPane);
+        mw.addDockable(scrollPane);
 
         setEditable(false);
         StaticUIUtils.makeCaretAlwaysVisible(this);

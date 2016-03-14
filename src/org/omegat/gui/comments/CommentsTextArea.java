@@ -44,7 +44,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.gui.common.EntryInfoPane;
 import org.omegat.gui.main.DockableScrollPane;
-import org.omegat.gui.main.MainWindow;
+import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.IPaneMenu;
@@ -69,7 +69,7 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
     private final DockableScrollPane scrollPane;
 
     /** Creates new Comments Text Area Pane */
-    public CommentsTextArea(MainWindow mw) {
+    public CommentsTextArea(IMainWindow mw) {
         super(true);
 
         String title = OStrings.getString("GUI_COMMENTSWINDOW_SUBWINDOWTITLE_Comments");

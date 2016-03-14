@@ -62,6 +62,7 @@ import org.omegat.core.events.IEditorEventListener;
 import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.main.DockableScrollPane;
+import org.omegat.gui.main.IMainWindow;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.ITokenizer.StemmingMode;
 import org.omegat.util.OStrings;
@@ -92,7 +93,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     
     private final DockableScrollPane scrollPane;
 
-    public DictionariesTextArea() {
+    public DictionariesTextArea(IMainWindow mw) {
         super(true);
 
         setContentType("text/html");
@@ -101,7 +102,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Dictionary");
         scrollPane = new DockableScrollPane("DICTIONARY", title, this, true);
-        Core.getMainWindow().addDockable(scrollPane);
+        mw.addDockable(scrollPane);
 
         addMouseListener(mouseCallback);
 

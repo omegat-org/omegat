@@ -30,6 +30,7 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
+import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.EntryKey;
@@ -56,7 +57,7 @@ public class GlossaryTextAreaTest extends TestCore {
         final List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
         entries.add(new GlossaryEntry("source1", "translation1", "", false));
         entries.add(new GlossaryEntry("source2", "translation2", "comment2", false));
-        final GlossaryTextArea gta = new GlossaryTextArea(null);
+        final GlossaryTextArea gta = new GlossaryTextArea(Core.getMainWindow());
         SwingUtilities.invokeAndWait(new Runnable() {
             public void run() {
                 gta.setFoundResult(null, entries);
@@ -77,7 +78,7 @@ public class GlossaryTextAreaTest extends TestCore {
         final List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
         entries.add(new GlossaryEntry("source1", "translation1", "", false));
         entries.add(new GlossaryEntry("source2", "translation2", "comment2", false));
-        final GlossaryTextArea gta = new GlossaryTextArea(null);
+        final GlossaryTextArea gta = new GlossaryTextArea(Core.getMainWindow());
         SwingUtilities.invokeAndWait(new Runnable() {
             public void run() {
                 gta.setFoundResult(null, entries);

@@ -61,7 +61,7 @@ import org.omegat.core.matching.DiffDriver.TextRun;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.main.DockableScrollPane;
-import org.omegat.gui.main.MainWindow;
+import org.omegat.gui.main.IMainWindow;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -70,8 +70,8 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 import org.omegat.util.gui.DragTargetOverlay;
 import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
-import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.IPaneMenu;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -110,16 +110,13 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     private final List<Map<Integer, List<TextRun>>> diffInfos = new ArrayList<Map<Integer, List<TextRun>>>();
     private int activeMatch = -1;
 
-    private final MainWindow mw;
-
     /** Creates new form MatchGlossaryPane */
-    public MatchesTextArea(final MainWindow mw) {
+    public MatchesTextArea(IMainWindow mw) {
         super(true);
-        this.mw = mw;
 
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches");
         scrollPane = new DockableScrollPane("MATCHES", title, this, true);
-        Core.getMainWindow().addDockable(scrollPane);
+        mw.addDockable(scrollPane);
 
         setEditable(false);
         StaticUIUtils.makeCaretAlwaysVisible(this);

@@ -64,15 +64,15 @@ import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.dialogs.CreateGlossaryEntry;
 import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.main.DockableScrollPane;
-import org.omegat.gui.main.MainWindow;
+import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DragTargetOverlay;
-import org.omegat.util.gui.IPaneMenu;
 import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
+import org.omegat.util.gui.IPaneMenu;
 import org.omegat.util.gui.JTextPaneLinkifier;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles;
@@ -113,12 +113,12 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> i
     private final DockableScrollPane scrollPane;
 
     /** Creates new form MatchGlossaryPane */
-    public GlossaryTextArea(final MainWindow mw) {
+    public GlossaryTextArea(IMainWindow mw) {
         super(true);
 
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Glossary");
         scrollPane = new DockableScrollPane("GLOSSARY", title, this, true);
-        Core.getMainWindow().addDockable(scrollPane);
+        mw.addDockable(scrollPane);
 
         setEditable(false);
         StaticUIUtils.makeCaretAlwaysVisible(this);

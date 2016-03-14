@@ -162,7 +162,7 @@ public class ProjectFilesListController {
             }
         });
         
-        DragTargetOverlay.apply(list.tableFiles, new FileDropInfo(m_parent, true) {
+        DragTargetOverlay.apply(list.tableFiles, new FileDropInfo(true) {
             @Override
             public String getImportDestination() {
                 return Core.getProject().getProjectProperties().getSourceRoot();

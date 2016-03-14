@@ -130,7 +130,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> i
         Core.getEditor().registerPopupMenuConstructors(300, new TransTipsPopup());
         
         if (!GraphicsEnvironment.isHeadless()) {
-            DragTargetOverlay.apply(this, new FileDropInfo(mw, false) {
+            DragTargetOverlay.apply(this, new FileDropInfo(false) {
                 @Override
                 public boolean canAcceptDrop() {
                     return Core.getProject().isProjectLoaded();

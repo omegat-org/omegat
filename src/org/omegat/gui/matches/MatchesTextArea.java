@@ -128,7 +128,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
 
         addMouseListener(mouseListener);
         
-        DragTargetOverlay.apply(this, new FileDropInfo(mw, false) {
+        DragTargetOverlay.apply(this, new FileDropInfo(false) {
             @Override
             public String getImportDestination() {
                 return Core.getProject().getProjectProperties().getTMRoot();
@@ -541,7 +541,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                 if (StringUtil.isEmpty(getSelectedText())) {
                     setActiveMatch(index);
                 }
-                mw.doInsertTrans();
+                Core.getMainWindow().getMainMenu().invokeAction("editInsertTranslationMenuItem", 0);
             }
         });
         item.setEnabled(projectLoaded);
@@ -553,7 +553,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                 if (StringUtil.isEmpty(getSelectedText())) {
                     setActiveMatch(index);
                 }
-                mw.doRecycleTrans();
+                Core.getMainWindow().getMainMenu().invokeAction("editOverwriteTranslationMenuItem", 0);
             }
         });
         item.setEnabled(projectLoaded);

@@ -98,6 +98,7 @@ import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.gui.main.MainWindow;
+import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -827,11 +828,11 @@ public class ProjectFilesListController {
      * Imports the file/files/folder into project's source files.
      */
     private void doImportSourceFiles() {
-        m_parent.doPromptImportSourceFiles();
+        ProjectUICommands.doPromptImportSourceFiles();
     }
 
     private void doWikiImport() {
-        m_parent.doWikiImport();
+        ProjectUICommands.doWikiImport();
     }
 
     /** Updates the Import Files button status. */

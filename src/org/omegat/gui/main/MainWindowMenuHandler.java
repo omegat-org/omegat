@@ -144,11 +144,11 @@ public class MainWindowMenuHandler {
      * Imports the file/files/folder into project's source files.
      */
     public void projectImportMenuItemActionPerformed() {
-        mainWindow.doPromptImportSourceFiles();
+        ProjectUICommands.doPromptImportSourceFiles();
     }
 
     public void projectWikiImportMenuItemActionPerformed() {
-        mainWindow.doWikiImport();
+        ProjectUICommands.doWikiImport();
     }
 
     public void projectReloadMenuItemActionPerformed() {

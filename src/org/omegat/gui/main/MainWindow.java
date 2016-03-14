@@ -44,12 +44,10 @@ import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -65,20 +63,14 @@ import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.common.OmegaTIcons;
-import org.omegat.gui.dialogs.FileCollisionDialog;
 import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.search.SearchWindowController;
-import org.omegat.util.FileUtil;
-import org.omegat.util.FileUtil.ICollisionCallback;
-import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
-import org.omegat.util.WikiGet;
 import org.omegat.util.gui.DockingUI;
-import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.UIThreadsUtil;
 
 import com.vlsolutions.swing.docking.Dockable;
@@ -338,88 +330,6 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     protected List<SearchWindowController> getSearchWindows() {
         return Collections.unmodifiableList(m_searches);
-    }
-
-    /**
-     * Imports the file/files/folder into project's source files.
-     */
-    public void doPromptImportSourceFiles() {
-        OmegaTFileChooser chooser = new OmegaTFileChooser();
-        chooser.setMultiSelectionEnabled(true);
-        chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        chooser.setDialogTitle(OStrings.getString("TF_FILE_IMPORT_TITLE"));
-
-        int result = chooser.showOpenDialog(this);
-        if (result == OmegaTFileChooser.APPROVE_OPTION) {
-            File[] selFiles = chooser.getSelectedFiles();
-            importFiles(Core.getProject().getProjectProperties().getSourceRoot(), selFiles);
-        }
-    }
-    
-    public void importFiles(String destination, File[] toImport) {
-        importFiles(destination, toImport, true);
-    }
-    
-    public void importFiles(String destination, File[] toImport, boolean doReload) {
-        try {
-            FileUtil.copyFilesTo(new File(destination), toImport, new CollisionCallback());
-            if (doReload) {
-                ProjectUICommands.projectReload();
-            }
-        } catch (IOException ioe) {
-            displayErrorRB(ioe, "MAIN_ERROR_File_Import_Failed");
-        }
-    }
-    
-    private class CollisionCallback implements ICollisionCallback {
-        private boolean isCanceled = false;
-        private boolean yesToAll = false;
-        
-        @Override
-        public boolean shouldReplace(File file, int index, int total) {
-            if (isCanceled) {
-                return false;
-            }
-            if (yesToAll) {
-                return true;
-            }
-            FileCollisionDialog dialog = new FileCollisionDialog(MainWindow.this);
-            dialog.setFilename(file.getName());
-            dialog.enableApplyToAll(total - index > 1);
-            dialog.pack();
-            dialog.setVisible(true);
-            isCanceled = dialog.userDidCancel();
-            if (isCanceled) {
-                return false;
-            }
-            yesToAll = dialog.isApplyToAll() && dialog.shouldReplace();
-            return yesToAll || dialog.shouldReplace();
-        }
-        
-        @Override
-        public boolean isCanceled() {
-            return isCanceled;
-        }
-    };
-
-    /**
-     * Does wikiread
-     */
-    public void doWikiImport() {
-        String remote_url = JOptionPane.showInputDialog(this, OStrings.getString("TF_WIKI_IMPORT_PROMPT"),
-                OStrings.getString("TF_WIKI_IMPORT_TITLE"), JOptionPane.OK_CANCEL_OPTION);
-        String projectsource = Core.getProject().getProjectProperties().getSourceRoot();
-        if (remote_url == null || remote_url.trim().isEmpty()) {
-            // [1762625] Only try to get MediaWiki page if a string has been entered
-            return;
-        }
-        try {
-            WikiGet.doWikiGet(remote_url, projectsource);
-            ProjectUICommands.projectReload();
-        } catch (Exception ex) {
-            Log.log(ex);
-            displayErrorRB(ex, "TF_WIKI_IMPORT_FAILED");
-        }
     }
 
     /**

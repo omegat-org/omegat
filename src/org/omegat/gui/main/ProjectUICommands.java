@@ -32,10 +32,12 @@ package org.omegat.gui.main;
 
 import java.awt.Cursor;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
@@ -51,9 +53,12 @@ import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.filters2.master.FilterMaster;
+import org.omegat.gui.dialogs.FileCollisionDialog;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.NewTeamProject;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
+import org.omegat.util.FileUtil;
+import org.omegat.util.FileUtil.ICollisionCallback;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -586,6 +591,112 @@ public class ProjectUICommands {
         }
 
         projectOpen(projectDir);
+    }
+
+    /**
+     * Copy the specified files to the specified destination. The project will be reloaded afterward.
+     * <p>
+     * Convenience method for {@link #projectImportFiles(String, File[], boolean)}.
+     * 
+     * @param destination
+     *            The path to copy the files to
+     * @param toImport
+     *            Files to copy to destination path
+     */
+    public static void projectImportFiles(String destination, File[] toImport) {
+        projectImportFiles(destination, toImport, true);
+    }
+
+    /**
+     * Copy the specified files to the specified destination, then reload if indicated. Note that a modal
+     * dialog will be shown if any of the specified files would be overwritten.
+     * 
+     * @param destination
+     *            The path to copy the files to
+     * @param toImport
+     *            Files to copy to destination path
+     * @param doReload
+     *            If true, the project will be reloaded after the files are successfully copied
+     */
+    public static void projectImportFiles(String destination, File[] toImport, boolean doReload) {
+        performProjectMenuItemPreConditions();
+
+        try {
+            FileUtil.copyFilesTo(new File(destination), toImport, new CollisionCallback());
+            if (doReload) {
+                projectReload();
+            }
+        } catch (IOException ioe) {
+            Core.getMainWindow().displayErrorRB(ioe, "MAIN_ERROR_File_Import_Failed");
+        }
+    }
+
+    private static class CollisionCallback implements ICollisionCallback {
+        private boolean isCanceled = false;
+        private boolean yesToAll = false;
+
+        @Override
+        public boolean shouldReplace(File file, int index, int total) {
+            if (isCanceled) {
+                return false;
+            }
+            if (yesToAll) {
+                return true;
+            }
+            FileCollisionDialog dialog = new FileCollisionDialog(Core.getMainWindow().getApplicationFrame());
+            dialog.setFilename(file.getName());
+            dialog.enableApplyToAll(total - index > 1);
+            dialog.pack();
+            dialog.setVisible(true);
+            isCanceled = dialog.userDidCancel();
+            if (isCanceled) {
+                return false;
+            }
+            yesToAll = dialog.isApplyToAll() && dialog.shouldReplace();
+            return yesToAll || dialog.shouldReplace();
+        }
+
+        @Override
+        public boolean isCanceled() {
+            return isCanceled;
+        }
+    };
+
+    /**
+     * Imports the file/files/folder into project's source files.
+     */
+    public static void doPromptImportSourceFiles() {
+        OmegaTFileChooser chooser = new OmegaTFileChooser();
+        chooser.setMultiSelectionEnabled(true);
+        chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        chooser.setDialogTitle(OStrings.getString("TF_FILE_IMPORT_TITLE"));
+    
+        int result = chooser.showOpenDialog(Core.getMainWindow().getApplicationFrame());
+        if (result == OmegaTFileChooser.APPROVE_OPTION) {
+            File[] selFiles = chooser.getSelectedFiles();
+            projectImportFiles(Core.getProject().getProjectProperties().getSourceRoot(), selFiles);
+        }
+    }
+
+    /**
+     * Does wikiread
+     */
+    public static void doWikiImport() {
+        String remote_url = JOptionPane.showInputDialog(Core.getMainWindow().getApplicationFrame(),
+                OStrings.getString("TF_WIKI_IMPORT_PROMPT"),
+                OStrings.getString("TF_WIKI_IMPORT_TITLE"), JOptionPane.OK_CANCEL_OPTION);
+        String projectsource = Core.getProject().getProjectProperties().getSourceRoot();
+        if (remote_url == null || remote_url.trim().isEmpty()) {
+            // [1762625] Only try to get MediaWiki page if a string has been entered
+            return;
+        }
+        try {
+            WikiGet.doWikiGet(remote_url, projectsource);
+            projectReload();
+        } catch (Exception ex) {
+            Log.log(ex);
+            Core.getMainWindow().displayErrorRB(ex, "TF_WIKI_IMPORT_FAILED");
+        }
     }
 
     private static void performProjectMenuItemPreConditions() {

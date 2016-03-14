@@ -539,7 +539,7 @@ public class EditorController implements IEditor {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    mw.importFiles(Core.getProject().getProjectProperties().getSourceRoot(),
+                    ProjectUICommands.projectImportFiles(Core.getProject().getProjectProperties().getSourceRoot(),
                             files.toArray(new File[files.size()]));
                 }
             });

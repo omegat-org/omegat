@@ -506,9 +506,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     };
 
     private void populateContextMenu(JPopupMenu popup, final int index) {
-        boolean projectLoaded = Core.getProject().isProjectLoaded();
-        
-        if (projectLoaded && index >= 0) {
+        boolean hasMatches = Core.getProject().isProjectLoaded() && index >= 0 && index < matches.size();
+        if (hasMatches) {
             NearString m = matches.get(index);
             if (m.projs.length > 1) {
                 JMenuItem item = popup.add(OStrings.getString("MATCHES_PROJECTS"));
@@ -541,7 +540,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                 Core.getMainWindow().getMainMenu().invokeAction("editInsertTranslationMenuItem", 0);
             }
         });
-        item.setEnabled(projectLoaded);
+        item.setEnabled(hasMatches);
 
         item = popup.add(OStrings.getString("MATCHES_REPLACE"));
         item.addActionListener(new ActionListener() {
@@ -553,14 +552,14 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                 Core.getMainWindow().getMainMenu().invokeAction("editOverwriteTranslationMenuItem", 0);
             }
         });
-        item.setEnabled(projectLoaded);
+        item.setEnabled(hasMatches);
 
         popup.addSeparator();
 
         item = popup.add(OStrings.getString("MATCHES_GO_TO_SEGMENT_SOURCE"));
-        item.setEnabled(projectLoaded);
+        item.setEnabled(hasMatches);
 
-        if (projectLoaded) {
+        if (hasMatches) {
             final NearString ns = matches.get(index);
             String proj = ns.projs[0];
             

@@ -13,11 +13,6 @@
 	<classpathentry kind="lib" path="lib/antlr-runtime-3.4.jar"/>
 	<classpathentry kind="lib" path="lib/dictzip.jar"/>
 	<classpathentry kind="lib" path="lib/diff.jar"/>
-	<classpathentry kind="lib" path="lib/lucene-analyzers-3.6.2.jar"/>
-	<classpathentry kind="lib" path="lib/lucene-core-3.6.2.jar"/>
-	<classpathentry kind="lib" path="lib/lucene-kuromoji-3.6.2.jar"/>
-	<classpathentry kind="lib" path="lib/lucene-smartcn-3.6.2.jar"/>
-	<classpathentry kind="lib" path="lib/tinysegmenter.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang-2.4.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool/cjftransform-1.0.1.jar"/>
@@ -31,7 +26,6 @@
 	<classpathentry kind="lib" path="lib/LanguageTool/segment-1.4.1.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool/lucene-gosen-2.0.2-ipadic.jar"/>
 	<classpathentry kind="lib" path="lib/groovy-all-2.2.2.jar"/>
-	<classpathentry kind="lib" path="lib/KoreanAnalyzer-3x-120223.jar"/>
 	<classpathentry kind="lib" path="lib/SuperTMXMerge-for_OmegaT.jar"/>
 	<classpathentry kind="lib" path="lib/swing-layout-1.0.4.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.7.7.jar"/>
@@ -47,5 +41,9 @@
 	<classpathentry kind="lib" path="lib/svnkit-1.8.11.jar"/>
 	<classpathentry kind="lib" path="lib/trilead-ssh2-1.0.0-build220.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/lucene-analyzers-common-5.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-analyzers-kuromoji-5.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-analyzers-smartcn-5.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-core-5.2.1.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

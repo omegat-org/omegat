@@ -25,32 +25,31 @@
  **************************************************************************/
 package org.omegat.tokenizer;
 
+import java.io.IOException;
 import java.io.StringReader;
-import java.util.Collections;
-import java.util.Set;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cjk.CJKAnalyzer;
-import org.apache.lucene.analysis.cjk.CJKTokenizer;
+import org.apache.lucene.analysis.cjk.CJKBigramFilter;
+import org.apache.lucene.analysis.cjk.CJKWidthFilter;
+import org.apache.lucene.analysis.core.LowerCaseFilter;
+import org.apache.lucene.analysis.util.CharArraySet;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
-@SuppressWarnings("deprecation")
 @Tokenizer(languages = { "zh", "ja", "ko" })
 public class LuceneCJKTokenizer extends BaseTokenizer {
     @SuppressWarnings("resource")
     @Override
-    protected TokenStream getTokenStream(final String strOrig,
-            final boolean stemsAllowed, final boolean stopWordsAllowed) {
+    protected TokenStream getTokenStream(final String strOrig, final boolean stemsAllowed,
+            final boolean stopWordsAllowed) throws IOException {
         if (stemsAllowed) {
-            Set<?> stopWords = stopWordsAllowed ? CJKAnalyzer.getDefaultStopSet()
-                    : Collections.emptySet();
-            return new CJKAnalyzer(getBehavior(), stopWords).tokenStream("", new StringReader(
-                    strOrig));
+            CharArraySet stopWords = stopWordsAllowed ? CJKAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
+            return new CJKAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return new CJKTokenizer(new StringReader(strOrig));
+            return new LowerCaseFilter(new CJKBigramFilter(new CJKWidthFilter(super.getStandardTokenStream(strOrig))));
         }
     }
 }

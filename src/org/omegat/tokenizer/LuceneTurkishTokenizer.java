@@ -24,13 +24,12 @@
  **************************************************************************/
 package org.omegat.tokenizer;
 
+import java.io.IOException;
 import java.io.StringReader;
-import java.util.Collections;
-import java.util.Set;
 
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.analysis.tr.TurkishAnalyzer;
+import org.apache.lucene.analysis.util.CharArraySet;
 
 /**
  * @author Aaron Madlon-Kay
@@ -39,16 +38,13 @@ import org.apache.lucene.analysis.tr.TurkishAnalyzer;
 public class LuceneTurkishTokenizer extends BaseTokenizer {
     @SuppressWarnings("resource")
     @Override
-    protected TokenStream getTokenStream(final String strOrig,
-            final boolean stemsAllowed, final boolean stopWordsAllowed) {
+    protected TokenStream getTokenStream(final String strOrig, final boolean stemsAllowed,
+            final boolean stopWordsAllowed) throws IOException {
         if (stemsAllowed) {
-            Set<?> stopWords = stopWordsAllowed ? TurkishAnalyzer.getDefaultStopSet()
-                    : Collections.emptySet();
-            return new TurkishAnalyzer(getBehavior(), stopWords).tokenStream("",
-                    new StringReader(strOrig));
+            CharArraySet stopWords = stopWordsAllowed ? TurkishAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
+            return new TurkishAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return new StandardTokenizer(getBehavior(),
-                    new StringReader(strOrig));
+            return super.getStandardTokenStream(strOrig);
         }
     }
 }

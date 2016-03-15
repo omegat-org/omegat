@@ -25,13 +25,12 @@
  **************************************************************************/
 package org.omegat.tokenizer;
 
+import java.io.IOException;
 import java.io.StringReader;
-import java.util.Collections;
-import java.util.Set;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.nl.DutchAnalyzer;
-import org.apache.lucene.analysis.standard.StandardTokenizer;
+import org.apache.lucene.analysis.util.CharArraySet;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -41,16 +40,13 @@ import org.apache.lucene.analysis.standard.StandardTokenizer;
 public class LuceneDutchTokenizer extends BaseTokenizer {
     @SuppressWarnings("resource")
     @Override
-    protected TokenStream getTokenStream(final String strOrig,
-            final boolean stemsAllowed, final boolean stopWordsAllowed) {
+    protected TokenStream getTokenStream(final String strOrig, final boolean stemsAllowed,
+            final boolean stopWordsAllowed) throws IOException {
         if (stemsAllowed) {
-            Set<?> stopWords = stopWordsAllowed ? DutchAnalyzer.getDefaultStopSet()
-                    : Collections.emptySet();
-            return new DutchAnalyzer(getBehavior(), stopWords).tokenStream("",
-                    new StringReader(strOrig));
+            CharArraySet stopWords = stopWordsAllowed ? DutchAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
+            return new DutchAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return new StandardTokenizer(getBehavior(),
-                    new StringReader(strOrig));
+            return super.getStandardTokenStream(strOrig);
         }
     }
 }

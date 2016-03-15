@@ -25,16 +25,12 @@
  **************************************************************************/
 package org.omegat.tokenizer;
 
+import java.io.IOException;
 import java.io.StringReader;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.fr.FrenchAnalyzer;
-import org.apache.lucene.analysis.standard.StandardTokenizer;
-import org.apache.lucene.util.Version;
+import org.apache.lucene.analysis.util.CharArraySet;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -43,29 +39,15 @@ import org.apache.lucene.util.Version;
 @Tokenizer(languages = { "fr" }, isDefault = true)
 public class LuceneFrenchTokenizer extends BaseTokenizer {
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public Map<Version, String> getSupportedBehaviors() {
-        Map<Version, String> result = new LinkedHashMap<Version, String>();
-        result.putAll(super.getSupportedBehaviors());
-        result.put(Version.LUCENE_36, result.get(Version.LUCENE_36) + " (UniNE)");
-        result.put(Version.LUCENE_31, result.get(Version.LUCENE_31) + " (Snowball)");
-        result.put(Version.LUCENE_20, result.get(Version.LUCENE_20) + " (Porter)");
-        return result;
-    }
-
     @SuppressWarnings("resource")
     @Override
-    protected TokenStream getTokenStream(final String strOrig,
-            final boolean stemsAllowed, final boolean stopWordsAllowed) {
+    protected TokenStream getTokenStream(final String strOrig, final boolean stemsAllowed,
+            final boolean stopWordsAllowed) throws IOException {
         if (stemsAllowed) {
-            Set<?> stopWords = stopWordsAllowed ? FrenchAnalyzer.getDefaultStopSet()
-                    : Collections.emptySet();
-            return new FrenchAnalyzer(getBehavior(), stopWords).tokenStream("", new StringReader(
-                    strOrig));
+            CharArraySet stopWords = stopWordsAllowed ? FrenchAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
+            return new FrenchAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return new StandardTokenizer(getBehavior(),
-                    new StringReader(strOrig));
+            return super.getStandardTokenStream(strOrig);
         }
     }
 }

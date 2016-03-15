@@ -24,12 +24,12 @@
  **************************************************************************/
 package org.omegat.tokenizer;
 
+import java.io.IOException;
 import java.io.StringReader;
 
-import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.ga.IrishAnalyzer;
-import org.apache.lucene.analysis.standard.StandardTokenizer;
+import org.apache.lucene.analysis.util.CharArraySet;
 
 /**
  * @author Aaron Madlon-Kay
@@ -38,16 +38,13 @@ import org.apache.lucene.analysis.standard.StandardTokenizer;
 public class LuceneIrishTokenizer extends BaseTokenizer {
     @SuppressWarnings("resource")
     @Override
-    protected TokenStream getTokenStream(final String strOrig,
-            final boolean stemsAllowed, final boolean stopWordsAllowed) {
+    protected TokenStream getTokenStream(final String strOrig, final boolean stemsAllowed,
+            final boolean stopWordsAllowed) throws IOException {
         if (stemsAllowed) {
-            CharArraySet stopWords = stopWordsAllowed ? IrishAnalyzer.getDefaultStopSet()
-                    : new CharArraySet(getBehavior(), 0, false);
-            return new IrishAnalyzer(getBehavior(), stopWords).tokenStream("", new StringReader(
-                    strOrig));
+            CharArraySet stopWords = stopWordsAllowed ? IrishAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
+            return new IrishAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return new StandardTokenizer(getBehavior(),
-                    new StringReader(strOrig));
+            return super.getStandardTokenStream(strOrig);
         }
     }
 }

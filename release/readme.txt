@@ -340,14 +340,12 @@ OmegaT uses the following libraries:
   The English tokenizers (org.omegat.tokenizer.SnowballEnglishTokenizer and
 org.omegat.tokenizer.LuceneEnglishTokenizer) use stop words originally from
 Okapi (http://okapi.sourceforge.net) (LGPL license)
-  tinysegmenter.jar (Modified BSD license)
   commons-*.jar (Apache License 2.0)
   jWordSplitter (Apache License 2.0)
   LanguageTool.jar (LGPL license)
   morfologik-*.jar (Morfologik license)
   segment-1.4.1.jar (Segment license)
   pdfbox-app-1.8.1.jar (Apache License 2.0)
-  KoreanAnalyzer-3x-120223.jar (Apache License 2.0)
   SuperTMXMerge-for_OmegaT.jar (LGPL license)
   groovy-all-2.2.2.jar (Apache Licence 2.0)
   slf4j (MIT License)

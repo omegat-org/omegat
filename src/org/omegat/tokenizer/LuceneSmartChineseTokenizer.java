@@ -25,12 +25,12 @@
  **************************************************************************/
 package org.omegat.tokenizer;
 
+import java.io.IOException;
 import java.io.StringReader;
 
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.cn.smart.SentenceTokenizer;
+import org.apache.lucene.analysis.cn.smart.HMMChineseTokenizer;
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
-import org.apache.lucene.analysis.cn.smart.WordTokenFilter;
 import org.omegat.util.Token;
 
 /**
@@ -40,12 +40,11 @@ import org.omegat.util.Token;
 @Tokenizer(languages = { "zh" }, isDefault = true)
 public class LuceneSmartChineseTokenizer extends BaseTokenizer {
 
-
     @Override
     public Token[] tokenizeVerbatim(String strOrig) {
         return tokenizeByCodePoint(strOrig);
     }
-    
+
     @Override
     public String[] tokenizeVerbatimToStrings(String strOrig) {
         return tokenizeByCodePointToStrings(strOrig);
@@ -53,13 +52,15 @@ public class LuceneSmartChineseTokenizer extends BaseTokenizer {
 
     @SuppressWarnings("resource")
     @Override
-    protected TokenStream getTokenStream(final String strOrig,
-            final boolean stemsAllowed, final boolean stopWordsAllowed) {
+    protected TokenStream getTokenStream(final String strOrig, final boolean stemsAllowed,
+            final boolean stopWordsAllowed) throws IOException {
         if (stemsAllowed) {
-            SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer(getBehavior(), stopWordsAllowed);
+            SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer(stopWordsAllowed);
             return analyzer.tokenStream("", new StringReader(strOrig));
         } else {
-            return new WordTokenFilter(new SentenceTokenizer(new StringReader(strOrig)));
+            HMMChineseTokenizer tokenizer = new HMMChineseTokenizer();
+            tokenizer.setReader(new StringReader(strOrig));
+            return tokenizer;
         }
     }
 }

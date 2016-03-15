@@ -27,6 +27,7 @@ package org.omegat.tokenizer;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +36,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.hunspell.HunspellDictionary;
+import org.apache.lucene.analysis.hunspell.Dictionary;
 import org.apache.lucene.analysis.hunspell.HunspellStemFilter;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.omegat.util.Language;
@@ -55,9 +56,9 @@ public class HunspellTokenizer extends BaseTokenizer {
     private static Map<Language, File> AFFIX_FILES;
     private static Map<Language, File> DICTIONARY_FILES;
 
-    private HunspellDictionary dict;
+    private Dictionary dict;
 
-    private HunspellDictionary getDict() {
+    private Dictionary getDict() {
         if (dict != null) {
             return dict;
         }
@@ -76,8 +77,7 @@ public class HunspellTokenizer extends BaseTokenizer {
         }
 
         try {
-            dict = new HunspellDictionary(new FileInputStream(affixFile),
-                    new FileInputStream(dictionaryFile), getBehavior());
+            dict = new Dictionary(new FileInputStream(affixFile), new FileInputStream(dictionaryFile));
             return dict;
         } catch (Exception ex) {
             // Nothing
@@ -86,22 +86,21 @@ public class HunspellTokenizer extends BaseTokenizer {
     }
 
     @Override
-    protected TokenStream getTokenStream(final String strOrig,
-            final boolean stemsAllowed, final boolean stopWordsAllowed) {
+    protected TokenStream getTokenStream(final String strOrig, final boolean stemsAllowed,
+            final boolean stopWordsAllowed) throws IOException {
+        StandardTokenizer tokenizer = new StandardTokenizer();
+        tokenizer.setReader(new StringReader(strOrig));
         if (stemsAllowed) {
-            HunspellDictionary dictionary = getDict();
+            Dictionary dictionary = getDict();
             if (dictionary == null) {
-                return new StandardTokenizer(getBehavior(),
-                        new StringReader(strOrig));
+                return tokenizer;
             }
 
-            return new HunspellStemFilter(new StandardTokenizer(getBehavior(),
-                    new StringReader(strOrig)), dictionary);
+            return new HunspellStemFilter(tokenizer, dictionary);
 
             /// TODO: implement stop words checks
         } else {
-            return new StandardTokenizer(getBehavior(),
-                    new StringReader(strOrig));
+            return tokenizer;
         }
     }
 

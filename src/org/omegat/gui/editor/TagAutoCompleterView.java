@@ -27,17 +27,14 @@
 package org.omegat.gui.editor;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.apache.lucene.util.Version;
-import org.omegat.tokenizer.ITokenizer;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.gui.editor.autocompleter.AutoCompleterItem;
 import org.omegat.gui.editor.autocompleter.AutoCompleterListView;
+import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.OStrings;
 import org.omegat.util.TagUtil;
 import org.omegat.util.TagUtil.Tag;
@@ -116,24 +113,6 @@ public class TagAutoCompleterView extends AutoCompleterListView {
     }
     
     private static class TagTokenizer implements ITokenizer {
-
-        @Override
-        public Map<Version, String> getSupportedBehaviors() {
-            return Collections.emptyMap();
-        }
-
-        @Override
-        public Version getBehavior() {
-            return null;
-        }
-
-        @Override
-        public void setBehavior(Version behavior) {}
-
-        @Override
-        public Version getDefaultBehavior() {
-            return null;
-        }
 
         @Override
         public Token[] tokenizeWords(String str, StemmingMode stemmingMode) {

@@ -143,9 +143,6 @@ OmegaT-Plugin: tokenizer
 Name: org.omegat.tokenizer.LuceneCatalanTokenizer
 OmegaT-Plugin: tokenizer
 
-Name: org.omegat.tokenizer.LuceneChineseTokenizer
-OmegaT-Plugin: tokenizer
-
 Name: org.omegat.tokenizer.LuceneCJKTokenizer
 OmegaT-Plugin: tokenizer
 
@@ -191,9 +188,6 @@ OmegaT-Plugin: tokenizer
 Name: org.omegat.tokenizer.LuceneJapaneseTokenizer
 OmegaT-Plugin: tokenizer
 
-Name: org.omegat.tokenizer.LuceneKoreanTokenizer
-OmegaT-Plugin: tokenizer
-
 Name: org.omegat.tokenizer.LuceneLatvianTokenizer
 OmegaT-Plugin: tokenizer
 
@@ -225,60 +219,6 @@ Name: org.omegat.tokenizer.LuceneThaiTokenizer
 OmegaT-Plugin: tokenizer
 
 Name: org.omegat.tokenizer.LuceneTurkishTokenizer
-OmegaT-Plugin: tokenizer
-
-Name: org.omegat.tokenizer.SnowballDanishTokenizer
-OmegaT-Plugin: tokenizer
-
-Name: org.omegat.tokenizer.SnowballDutchTokenizer
-OmegaT-Plugin: tokenizer
-
-Name: org.omegat.tokenizer.SnowballEnglishTokenizer
-OmegaT-Plugin: tokenizer
-
-Name: org.omegat.tokenizer.SnowballFinnishTokenizer
-OmegaT-Plugin: tokenizer
-
-Name: org.omegat.tokenizer.SnowballFrenchTokenizer
-OmegaT-Plugin: tokenizer
-
-Name: org.omegat.tokenizer.SnowballGerman2Tokenizer
-OmegaT-Plugin: tokenizer
-
-Name: org.omegat.tokenizer.SnowballGermanTokenizer
-OmegaT-Plugin: tokenizer
-
-Name: org.omegat.tokenizer.SnowballHungarianTokenizer
-OmegaT-Plugin: tokenizer
-
-Name: org.omegat.tokenizer.SnowballItalianTokenizer
-OmegaT-Plugin: tokenizer
-
-Name: org.omegat.tokenizer.SnowballNorwegianTokenizer
-OmegaT-Plugin: tokenizer
-
-Name: org.omegat.tokenizer.SnowballPorterTokenizer
-OmegaT-Plugin: tokenizer
-
-Name: org.omegat.tokenizer.SnowballPortugueseTokenizer
-OmegaT-Plugin: tokenizer
-
-Name: org.omegat.tokenizer.SnowballRomanianTokenizer
-OmegaT-Plugin: tokenizer
-
-Name: org.omegat.tokenizer.SnowballRussianTokenizer
-OmegaT-Plugin: tokenizer
-
-Name: org.omegat.tokenizer.SnowballSpanishTokenizer
-OmegaT-Plugin: tokenizer
-
-Name: org.omegat.tokenizer.SnowballSwedishTokenizer
-OmegaT-Plugin: tokenizer
-
-Name: org.omegat.tokenizer.SnowballTurkishTokenizer
-OmegaT-Plugin: tokenizer
-
-Name: org.omegat.tokenizer.TinySegmenterJapaneseTokenizer
 OmegaT-Plugin: tokenizer
 
 Name: org.omegat.gui.glossary.TransTipsMarker

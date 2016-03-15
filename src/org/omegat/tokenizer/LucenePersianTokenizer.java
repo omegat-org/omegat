@@ -25,12 +25,12 @@
  **************************************************************************/
 package org.omegat.tokenizer;
 
+import java.io.IOException;
 import java.io.StringReader;
-import java.util.Collections;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.fa.PersianAnalyzer;
-import org.apache.lucene.analysis.standard.StandardTokenizer;
+import org.apache.lucene.analysis.util.CharArraySet;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -41,16 +41,14 @@ public class LucenePersianTokenizer extends BaseTokenizer {
 
     @SuppressWarnings("resource")
     @Override
-    protected TokenStream getTokenStream(final String strOrig,
-            final boolean stemsAllowed, final boolean stopWordsAllowed) {
+    protected TokenStream getTokenStream(final String strOrig, final boolean stemsAllowed,
+            final boolean stopWordsAllowed) throws IOException {
         if (stemsAllowed) {
-            PersianAnalyzer analyzer = stopWordsAllowed ?
-                    new PersianAnalyzer(getBehavior()) :
-                        new PersianAnalyzer(getBehavior(), Collections.emptySet());
+            CharArraySet stopWords = stopWordsAllowed ? PersianAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
+            PersianAnalyzer analyzer = new PersianAnalyzer(stopWords);
             return analyzer.tokenStream("", new StringReader(strOrig));
         } else {
-            return new StandardTokenizer(getBehavior(),
-                    new StringReader(strOrig));
+            return super.getStandardTokenStream(strOrig);
         }
     }
 }

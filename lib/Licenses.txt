@@ -62,8 +62,6 @@ The English tokenizers (org.omegat.tokenizer.SnowballEnglishTokenizer and
 org.omegat.tokenizer.LuceneEnglishTokenizer) use stop words originally from Okapi
 (http://okapi.sourceforge.net) under the LGPL license.
 
-tinysegmenter.jar is distributed under the Modified BSD license
-
 commons-*.jar are distributed under the Apache License 2.0
 (required for LanguageTool and some parts of OmegaT)
 

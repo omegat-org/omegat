@@ -32,7 +32,6 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.regex.Matcher;
 
-import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenFilter;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.ja.JapaneseAnalyzer;
@@ -40,6 +39,7 @@ import org.apache.lucene.analysis.ja.JapaneseTokenizer;
 import org.apache.lucene.analysis.ja.JapaneseTokenizer.Mode;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
+import org.apache.lucene.analysis.util.CharArraySet;
 import org.omegat.util.PatternConsts;
 
 /**
@@ -55,25 +55,22 @@ public class LuceneJapaneseTokenizer extends BaseTokenizer {
 
     @SuppressWarnings("resource")
     @Override
-    protected TokenStream getTokenStream(String strOrig, boolean stemsAllowed, boolean stopWordsAllowed) {
+    protected TokenStream getTokenStream(String strOrig, boolean stemsAllowed, boolean stopWordsAllowed)
+            throws IOException {
         if (stemsAllowed) {
             // Blank out tags when stemming only
             strOrig = blankOutTags(strOrig);
-            CharArraySet stopWords = stopWordsAllowed ? JapaneseAnalyzer.getDefaultStopSet()
-                    : new CharArraySet(getBehavior(), 0, false);
-            Set<String> stopTags;
-            if (stopWordsAllowed) {
-                stopTags = JapaneseAnalyzer.getDefaultStopTags();
-            } else {
-                stopTags = Collections.emptySet();
-            }
-            return new JapaneseAnalyzer(getBehavior(), null, Mode.SEARCH, stopWords, stopTags)
-                    .tokenStream("", new StringReader(strOrig));
+            CharArraySet stopWords = stopWordsAllowed ? JapaneseAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
+            Set<String> stopTags = stopWordsAllowed ? JapaneseAnalyzer.getDefaultStopTags() : Collections.emptySet();
+            return new JapaneseAnalyzer(null, Mode.SEARCH, stopWords, stopTags).tokenStream("",
+                    new StringReader(strOrig));
         } else {
-            return new TagJoiningFilter(new JapaneseTokenizer(new StringReader(strOrig), null, false, Mode.NORMAL));
+            JapaneseTokenizer tokenizer = new JapaneseTokenizer(null, false, Mode.NORMAL);
+            tokenizer.setReader(new StringReader(strOrig));
+            return new TagJoiningFilter(tokenizer);
         }
     }
-    
+
     /**
      * Replace all instances of OmegaT-style tags (&lt;x0>, etc.) with blank spaces
      * of equal length. This is done because

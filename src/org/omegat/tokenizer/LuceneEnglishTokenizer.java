@@ -25,16 +25,17 @@
 package org.omegat.tokenizer;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.util.Collections;
-import java.util.HashSet;
+import java.nio.charset.StandardCharsets;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
-import org.apache.lucene.analysis.standard.StandardTokenizer;
+import org.apache.lucene.analysis.util.CharArraySet;
 import org.omegat.core.Core;
 
 /**
@@ -42,31 +43,19 @@ import org.omegat.core.Core;
  */
 @Tokenizer(languages = { "en" }, isDefault = true)
 public class LuceneEnglishTokenizer extends BaseTokenizer {
-    public static final Set<String> STOP_WORDS = new HashSet<String>();
+
+    private static final CharArraySet STOP_WORDS;
 
     static {
-        // Load stopwords
-        try {
-            InputStream in = LuceneEnglishTokenizer.class
-                    .getResourceAsStream("StopList_en.txt");
-            try {
-                BufferedReader rd = new BufferedReader(new InputStreamReader(
-                        in, "UTF-8"));
-                String s;
-                while ((s = rd.readLine()) != null) {
-                    s = s.trim();
-                    if (s.isEmpty() || s.startsWith("#")) {
-                        continue;
-                    }
-                    STOP_WORDS.add(s);
-                }
-            } finally {
-                in.close();
-            }
+        try (InputStream is = LuceneEnglishTokenizer.class.getResourceAsStream(STOPWORDS_FILE_EN);
+                InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
+                BufferedReader br = new BufferedReader(isr)) {
+            Set<String> set = br.lines().map(String::trim).filter(line -> !line.isEmpty() && !line.startsWith("#"))
+                    .collect(Collectors.toSet());
+            STOP_WORDS = CharArraySet.copy(set);
         } catch (Exception ex) {
             throw new ExceptionInInitializerError(
-                    "Error load stopwords in SnowballEnglishTokenizer: "
-                            + ex.getMessage());
+                    "Error load stopwords in LuceneEnglishTokenizer: " + ex.getMessage());
         }
     }
 
@@ -82,15 +71,13 @@ public class LuceneEnglishTokenizer extends BaseTokenizer {
 
     @SuppressWarnings("resource")
     @Override
-    protected TokenStream getTokenStream(final String strOrig,
-            final boolean stemsAllowed, final boolean stopWordsAllowed) {
+    protected TokenStream getTokenStream(final String strOrig, final boolean stemsAllowed,
+            final boolean stopWordsAllowed) throws IOException {
         if (stemsAllowed) {
-            return new EnglishAnalyzer(getBehavior(),
-                    stopWordsAllowed ? STOP_WORDS : Collections.emptySet()).tokenStream("",
-                    new StringReader(strOrig));
+            CharArraySet stopWords = stopWordsAllowed ? STOP_WORDS : CharArraySet.EMPTY_SET;
+            return new EnglishAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return new StandardTokenizer(getBehavior(),
-                    new StringReader(strOrig));
+            return super.getStandardTokenStream(strOrig);
         }
     }
 }

@@ -53,10 +53,6 @@ public class CLIParameters {
     public static final String TOKENIZER_SOURCE = "ITokenizer";
     /** CLI parameter to specify target tokenizer */
     public static final String TOKENIZER_TARGET = "ITokenizerTarget";
-    /** CLI parameter to specify source tokenizer behavior mode */
-    public static final String TOKENIZER_BEHAVIOR_SOURCE = "ITokenizerBehavior";
-    /** CLI parameter to specify target tokenizer behavior mode */
-    public static final String TOKENIZER_BEHAVIOR_TARGET = "ITokenizerTargetBehavior";
     // TODO: Document this; see RealProject.patchFileNameForEntryKey()
     public static final String ALTERNATE_FILENAME_FROM = "alternate-filename-from";
     // TODO: Document this; see RealProject.patchFileNameForEntryKey()

@@ -37,8 +37,6 @@ Eclipse Distribution License (EDL) v 1.0
 jsch-0.1.52.jar is distributed under the JSch License
 (required for GITRemoteRepository.java)
 
-Base64 is public domain and is included in OmegaT sources
-
 diff.jar is distributed under the GNU General Public License version 1 and greater
 Sources are available in OmegaT sources, in the directory lib/sources
 
@@ -46,9 +44,8 @@ trilead-ssh2-1.0.0-build217.jar is distributed under the Trilead SSH license
 
 lucene-*.jar are distributed under the Apache License 2.0
 
-The English tokenizers (org.omegat.tokenizer.SnowballEnglishTokenizer and
-org.omegat.tokenizer.LuceneEnglishTokenizer) use stop words originally from Okapi
-(http://okapi.sourceforge.net) under the LGPL license.
+LuceneEnglishTokenizer uses stop words originally from Okapi (http://okapi.opentag.com/)
+under the LGPL license.
 
 commons-*.jar are distributed under the Apache License 2.0
 (required for LanguageTool and some parts of OmegaT)

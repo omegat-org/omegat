@@ -28,8 +28,15 @@ package org.omegat.tokenizer;
 import java.io.IOException;
 import java.io.StringReader;
 
+import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.core.LowerCaseFilter;
+import org.apache.lucene.analysis.core.StopFilter;
 import org.apache.lucene.analysis.de.GermanAnalyzer;
+import org.apache.lucene.analysis.de.GermanStemFilter;
+import org.apache.lucene.analysis.miscellaneous.SetKeywordMarkerFilter;
+import org.apache.lucene.analysis.standard.StandardFilter;
+import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.analysis.util.CharArraySet;
 
 /**
@@ -45,9 +52,40 @@ public class LuceneGermanTokenizer extends BaseTokenizer {
             final boolean stopWordsAllowed) throws IOException {
         if (stemsAllowed) {
             CharArraySet stopWords = stopWordsAllowed ? GermanAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
-            return new GermanAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
+            return new Lucene30GermanAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
             return super.getStandardTokenStream(strOrig);
         }
+    }
+
+    /**
+     * A German analyzer that recreates the behavior of the GermanAnalyzer in
+     * Lucene 3.0 and earlier.
+     * 
+     * @see <a href=
+     *      "https://groups.yahoo.com/neo/groups/OmegaT/conversations/messages/28395">
+     *      User group discussion</a>
+     * @see <a href=
+     *      "https://github.com/apache/lucene-solr/blob/e8e4245d9b36123446546ff15967ac95429ea2b0/lucene/analysis/common/src/java/org/apache/lucene/analysis/de/GermanAnalyzer.java#L172">
+     *      Behavior before version branching was removed</a>
+     */
+    private class Lucene30GermanAnalyzer extends Analyzer {
+        private final CharArraySet stopWords;
+
+        public Lucene30GermanAnalyzer(CharArraySet stopWords) {
+            this.stopWords = stopWords;
+        }
+
+        @Override
+        protected TokenStreamComponents createComponents(String arg0) {
+            final org.apache.lucene.analysis.Tokenizer source = new StandardTokenizer();
+            TokenStream result = new StandardFilter(source);
+            result = new LowerCaseFilter(result);
+            result = new StopFilter(result, stopWords);
+            result = new SetKeywordMarkerFilter(result, CharArraySet.EMPTY_SET);
+            result = new GermanStemFilter(result);
+            return new TokenStreamComponents(source, result);
+        }
+
     }
 }

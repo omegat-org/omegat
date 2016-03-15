@@ -176,10 +176,28 @@ public class TokenizerTest extends TestCase {
     }
     
     /**
-     * The DefaultTokenizer has a completely different implementation from the Lucene-base
-     * tokenizers (the latter were originally an external plugin, for licensing reasons).
-     * It's based on Java's BreakIterator. It warrants testing so that it doesn't get overlooked
-     * when changes are made to the other tokenizers.
+     * The behavior of the Lucene GermanAnalyzer was better for our purposes in
+     * Lucene 3.0, so we implement a custom analyzer that recreates that
+     * behavior.
+     * 
+     * @see <a href=
+     *      "https://groups.yahoo.com/neo/groups/OmegaT/conversations/messages/28395">
+     *      User group discussion</a>
+     */
+    public void testGerman() {
+        ITokenizer tok = new LuceneGermanTokenizer();
+        assertResult(new String[] { "prasentier", "pr\u00e4sentierte" },
+                tok.tokenizeWordsToStrings("pr\u00e4sentierte", StemmingMode.GLOSSARY));
+        assertResult(new String[] { "prasentier", "pr\u00e4sentieren" },
+                tok.tokenizeWordsToStrings("pr\u00e4sentieren", StemmingMode.GLOSSARY));
+    }
+
+    /**
+     * The DefaultTokenizer has a completely different implementation from the
+     * Lucene-base tokenizers (the latter were originally an external plugin,
+     * for licensing reasons). It's based on Java's BreakIterator. It warrants
+     * testing so that it doesn't get overlooked when changes are made to the
+     * other tokenizers.
      */
     public void testDefault() {
         ITokenizer tok = new DefaultTokenizer();

@@ -374,27 +374,26 @@ public abstract class BaseTokenizer implements ITokenizer {
             sb.append("Input:\n");
             sb.append(input).append("\n");
             sb.append("tokenizeVerbatim:\n");
-            sb.append(printTest(tokenizeVerbatim(input), input));
+            sb.append(printTest(tokenizeVerbatimToStrings(input), input));
             sb.append("tokenize:\n");
-            sb.append(printTest(tokenize(input, false, false, false, true), input));
+            sb.append(printTest(tokenizeToStrings(input, false, false, false, true), input));
             sb.append("tokenize (stemsAllowed):\n");
-            sb.append(printTest(tokenize(input, true, false, false, true), input));
+            sb.append(printTest(tokenizeToStrings(input, true, false, false, true), input));
             sb.append("tokenize (stemsAllowed stopWordsAllowed):\n");
-            sb.append(printTest(tokenize(input, true, true, false, true), input));
+            sb.append(printTest(tokenizeToStrings(input, true, true, false, true), input));
             sb.append("tokenize (stemsAllowed stopWordsAllowed filterDigits) (=tokenizeWords(MATCHING)):\n");
-            sb.append(printTest(tokenize(input, true, true, true, true), input));
+            sb.append(printTest(tokenizeToStrings(input, true, true, true, true), input));
             sb.append("tokenize (stemsAllowed filterDigits) (=tokenizeWords(GLOSSARY)):\n");
-            sb.append(printTest(tokenize(input, true, false, true, true), input));
+            sb.append(printTest(tokenizeToStrings(input, true, false, true, true), input));
             sb.append("tokenize (filterDigits) (=tokenizeWords(NONE)):\n");
-            sb.append(printTest(tokenize(input, false, false, true, true), input));
+            sb.append(printTest(tokenizeToStrings(input, false, false, true, true), input));
             sb.append("----------------------------------\n");
         }
         return sb.toString();
     }
     
-    protected String printTest(Token[] tokens, String input) {
+    protected String printTest(String[] strings, String input) {
         StringBuilder sb = new StringBuilder();
-        String[] strings = Token.getTextsFromString(tokens, input);
         sb.append(StringUtils.join(strings, ", ")).append('\n');
         sb.append("Is verbatim: ").append(StringUtils.join(strings, "").equals(input)).append('\n');
         return sb.toString();

@@ -37,6 +37,7 @@ import org.languagetool.Languages;
 import org.languagetool.rules.RuleMatch;
 import org.languagetool.rules.bitext.BitextRule;
 import org.languagetool.rules.bitext.DifferentLengthRule;
+import org.languagetool.rules.bitext.DifferentPunctuationRule;
 import org.languagetool.rules.bitext.SameTranslationRule;
 import org.languagetool.tools.Tools;
 import org.omegat.core.Core;
@@ -167,13 +168,15 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
         }
         for (int i = 0; i < result.size(); i++) {
             if (result.get(i) instanceof DifferentLengthRule) {
-                result.remove(i);
-                i--;
+                result.remove(i--);
                 continue;
             }
             if (result.get(i) instanceof SameTranslationRule) {
-                result.remove(i);
-                i--;
+                result.remove(i--);
+                continue;
+            }
+            if (result.get(i) instanceof DifferentPunctuationRule) {
+                result.remove(i--);
                 continue;
             }
         }

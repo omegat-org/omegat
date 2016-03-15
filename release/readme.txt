@@ -333,7 +333,6 @@ OmegaT uses the following libraries:
   SQLJet 1.1.10 (GPL v2)
   JGit (Eclipse Distribution License)
   JSch (JSch License)
-  Base64 (public domain)
   Diff (GPL)
   trilead-ssh2-1.0.0-build217 (Trilead SSH license)
   lucene-*.jar (Apache License 2.0)

@@ -33,6 +33,7 @@ import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
+import org.languagetool.Languages;
 import org.languagetool.rules.RuleMatch;
 import org.languagetool.rules.bitext.BitextRule;
 import org.languagetool.rules.bitext.DifferentLengthRule;
@@ -99,7 +100,6 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
         if (ltLang != null) {
             try {
                 result = new JLanguageTool(ltLang);
-                result.activateDefaultPatternRules();
             } catch (Exception ex) {
                 result = null;
                 Log.log(ex);
@@ -146,7 +146,7 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
 
     private Language getLTLanguage(org.omegat.util.Language lang) {
         String omLang = lang.getLanguageCode();
-        for (Language ltLang : Language.LANGUAGES) {
+        for (Language ltLang : Languages.get()) {
             if (omLang.equalsIgnoreCase(ltLang.getShortName())) {
                 return ltLang;
             }

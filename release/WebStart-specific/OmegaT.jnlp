@@ -51,16 +51,6 @@
 				<jar href="commons-lang-2.6.jar"  />
 				<jar href="commons-io-2.4.jar"  />
 				<jar href="commons-logging-1.1.1.jar"  />
-				<jar href="jwordsplitter-3.4.jar"  />
-				<jar href="LanguageTool-data.jar"  />
-				<jar href="languagetool-core-2.2.jar"  />
-				<jar href="morfologik-fsa-1.5.4.jar"  />
-				<jar href="morfologik-speller-1.5.4.jar"  />
-				<jar href="morfologik-stemming-1.5.4.jar"  />
-				<jar href="cjftransform-1.0.1.jar"  />
-				<jar href="ictclas4j-1.0.1.jar"  />
-				<jar href="segment-1.4.1.jar"  />		
-				<jar href="lucene-gosen-2.0.2-ipadic.jar"  />
 				<jar href="pdfbox-app-1.8.1.jar"  />
 				<jar href="groovy-all-2.2.2.jar"  />
 				<jar href="diff.jar" />
@@ -69,6 +59,34 @@
 				<jar href="slf4j-jdk14-1.7.18.jar" />
 				<jar href="trilead-ssh2-1.0.0-build217.jar" />
 				<jar href="juniversalchardet-1.0.3.jar" />
+
+				<!-- LanguageTool -->
+				<jar href="annotations.jar"  />
+				<jar href="berkeleylm.jar"  />
+				<jar href="cjftransform.jar"  />
+				<jar href="guava.jar"  />
+				<jar href="hamcrest-core.jar"  />
+				<jar href="hppc.jar"  />
+				<jar href="hunspell-native-libs.jar"  />
+				<jar href="ictclas4j.jar"  />
+				<jar href="jsonic.jar"  />
+				<jar href="jwordsplitter.jar"  />
+				<jar href="language-detector.jar"  />
+				<jar href="languagetool-core.jar"  />
+				<jar href="LanguageTool-data.jar"  />
+				<jar href="lucene-backward-codecs.jar"  />
+				<jar href="lucene-gosen-ipadic.jar"  />
+				<jar href="morfologik-fsa.jar"  />
+				<jar href="morfologik-polish.jar"  />
+				<jar href="morfologik-speller.jar"  />
+				<jar href="morfologik-stemming.jar"  />
+				<jar href="morfologik-tools.jar"  />
+				<jar href="opennlp-chunk-models.jar"  />
+				<jar href="opennlp-postag-models.jar"  />
+				<jar href="opennlp-tokenize-models.jar"  />
+				<jar href="opennlp-tools.jar"  />
+				<jar href="openregex.jar"  />
+				<jar href="segment.jar"  />				
 			</resources>
 			<resources os="Linux" arch="amd64">
 				<nativelib href="hunspell-linux64.jar" />

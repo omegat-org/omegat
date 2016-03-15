@@ -14,16 +14,6 @@
 	<classpathentry kind="lib" path="lib/dictzip.jar"/>
 	<classpathentry kind="lib" path="lib/diff.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/LanguageTool/cjftransform-1.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/LanguageTool/ictclas4j-1.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/LanguageTool/jwordsplitter-3.4.jar"/>
-	<classpathentry kind="lib" path="lib/LanguageTool/languagetool-core-2.2.jar"/>
-	<classpathentry kind="lib" path="lib/LanguageTool/LanguageTool-data.jar"/>
-	<classpathentry kind="lib" path="lib/LanguageTool/morfologik-fsa-1.5.4.jar"/>
-	<classpathentry kind="lib" path="lib/LanguageTool/morfologik-speller-1.5.4.jar"/>
-	<classpathentry kind="lib" path="lib/LanguageTool/morfologik-stemming-1.5.4.jar"/>
-	<classpathentry kind="lib" path="lib/LanguageTool/segment-1.4.1.jar"/>
-	<classpathentry kind="lib" path="lib/LanguageTool/lucene-gosen-2.0.2-ipadic.jar"/>
 	<classpathentry kind="lib" path="lib/groovy-all-2.2.2.jar"/>
 	<classpathentry kind="lib" path="lib/SuperTMXMerge-for_OmegaT.jar"/>
 	<classpathentry kind="lib" path="lib/swing-layout-1.0.4.jar"/>
@@ -45,5 +35,31 @@
 	<classpathentry kind="lib" path="lib/lucene-core-5.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.7.18.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-jdk14-1.7.18.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/annotations.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/berkeleylm.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/cjftransform.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/guava.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/hamcrest-core.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/hppc.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/hunspell-native-libs.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/ictclas4j.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/jsonic.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/jwordsplitter.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/language-detector.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/languagetool-core.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/LanguageTool-data.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/lucene-backward-codecs.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/lucene-gosen-ipadic.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/morfologik-fsa.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/morfologik-polish.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/morfologik-speller.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/morfologik-stemming.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/morfologik-tools.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/opennlp-chunk-models.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/opennlp-postag-models.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/opennlp-tokenize-models.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/opennlp-tools.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/openregex.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/segment.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

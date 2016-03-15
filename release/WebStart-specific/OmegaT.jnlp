@@ -65,8 +65,8 @@
 				<jar href="groovy-all-2.2.2.jar"  />
 				<jar href="diff.jar" />
 				<jar href="SuperTMXMerge-for_OmegaT.jar" />
-				<jar href="slf4j-api-1.7.7.jar" />
-				<jar href="slf4j-jdk14-1.7.7.jar" />
+				<jar href="slf4j-api-1.7.18.jar" />
+				<jar href="slf4j-jdk14-1.7.18.jar" />
 				<jar href="trilead-ssh2-1.0.0-build217.jar" />
 				<jar href="juniversalchardet-1.0.3.jar" />
 			</resources>

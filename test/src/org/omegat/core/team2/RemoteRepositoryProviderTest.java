@@ -362,8 +362,10 @@ public class RemoteRepositoryProviderTest extends TestCase {
     }
 
     void checkCopy(String from, String to) {
-        assertEquals("Wrong copy file from", from, copyFrom.get(copyCheckedIndex));
-        assertEquals("Wrong copy file to", to, copyTo.get(copyCheckedIndex));
+        assertEquals("Wrong copy file from2", from.replace('\\', '/'),
+                copyFrom.get(copyCheckedIndex).replace('\\', '/'));
+        assertEquals("Wrong copy file to2", to.replace('\\', '/'),
+                copyTo.get(copyCheckedIndex).replace('\\', '/'));
         copyCheckedIndex++;
     }
 

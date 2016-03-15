@@ -27,6 +27,7 @@ package org.omegat.util;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 
 import org.omegat.filters.TestFilterBase;
 import org.omegat.util.Preferences.IPreferences;
@@ -42,7 +43,7 @@ public class PreferencesTest extends TestCase {
 
     @Override
     protected void setUp() throws Exception {
-        tmpDir = FileUtil.createTempDir();
+        tmpDir = Files.createTempDirectory("oemgat").toFile();
         assertTrue(tmpDir.isDirectory());
     }
 

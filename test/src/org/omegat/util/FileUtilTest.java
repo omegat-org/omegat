@@ -31,6 +31,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.nio.file.Files;
 
 import org.apache.commons.io.FileUtils;
 import org.omegat.util.FileUtil.ICollisionCallback;
@@ -47,7 +48,7 @@ public class FileUtilTest extends TestCase {
 
     @Override
     protected void setUp() throws Exception {
-        base = FileUtil.createTempDir();
+        base = Files.createTempDirectory("omegat").toFile();
         System.out.println("Base: " + base.getAbsolutePath());
     }
 

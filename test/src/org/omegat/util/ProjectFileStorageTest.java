@@ -26,6 +26,7 @@
 package org.omegat.util;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.util.List;
 
 import org.omegat.core.data.ProjectException;
@@ -43,7 +44,7 @@ public class ProjectFileStorageTest extends TestCase {
 
     @Override
     protected void setUp() throws Exception {
-        tempDir = FileUtil.createTempDir();
+        tempDir = Files.createTempDirectory("omegat").toFile();
         assertTrue(tempDir.isDirectory());
     }
 

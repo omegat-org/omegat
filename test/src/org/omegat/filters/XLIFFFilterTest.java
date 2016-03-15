@@ -28,6 +28,7 @@ package org.omegat.filters;
 
 import java.io.File;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.util.TreeMap;
 
 import org.apache.commons.io.FileUtils;
@@ -230,7 +231,7 @@ public class XLIFFFilterTest extends TestFilterBase {
     public void testInvalidXMLOnWeirdPath() throws Exception {
         String f = "test/data/filters/xliff/file-XLIFFFilter-invalid-content.xlf";
 
-        File tmpDir = FileUtil.createTempDir();
+        File tmpDir = Files.createTempDirectory("omegat").toFile();
         assertTrue(tmpDir.isDirectory());
         File weirdDir = new File(tmpDir, "a b\u2603"); // U+2603 SNOWMAN
         File testFile = new File(weirdDir, "file-XLIFFFilter-invalid-content.xlf");

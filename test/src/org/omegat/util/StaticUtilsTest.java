@@ -28,6 +28,7 @@
 package org.omegat.util;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -66,7 +67,7 @@ public class StaticUtilsTest extends TestCase {
 
     public void testBuildFileList() throws Exception {
 
-        File tempDir = FileUtil.createTempDir();
+        File tempDir = Files.createTempDirectory("omegat").toFile();
         assertTrue(tempDir.isDirectory());
 
         File subDir = new File(tempDir, "a");

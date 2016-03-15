@@ -434,6 +434,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         mainWindow.getRootPane().getActionMap().put(key, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Log.logInfoRB("LOG_MENU_CLICK", key);
                 mainWindowMenuHandler.findInProjectReuseLastWindow();
             }
         });

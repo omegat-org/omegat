@@ -34,7 +34,6 @@
 				<jar href="docs.jar" />
 				<jar href="htmlparser.jar" />
 				<jar href="jmyspell-core-1.0.0-beta-2.jar" />
-				<jar href="jna.jar" />
 				<jar href="lib-mnemonics.jar" />
 				<jar href="swing-layout-1.0.4.jar" />
 				<jar href="vldocking-3.0.5-SNAPSHOT.jar" />
@@ -69,6 +68,7 @@
 				<jar href="hppc.jar"  />
 				<jar href="hunspell-native-libs.jar"  />
 				<jar href="ictclas4j.jar"  />
+				<jar href="jna.jar" />
 				<jar href="jsonic.jar"  />
 				<jar href="jwordsplitter.jar"  />
 				<jar href="language-detector.jar"  />
@@ -87,24 +87,6 @@
 				<jar href="opennlp-tools.jar"  />
 				<jar href="openregex.jar"  />
 				<jar href="segment.jar"  />				
-			</resources>
-			<resources os="Linux" arch="amd64">
-				<nativelib href="hunspell-linux64.jar" />
-			</resources>
-			<resources os="Linux" arch="i386">
-				<nativelib href="hunspell-linux32.jar" />
-			</resources>
-			<resources os="MacOS" arch="x86_64">
-				<nativelib href="hunspell-macos64.jar" />
-			</resources>
-			<resources os="MacOS" arch="i386">
-				<nativelib href="hunspell-macos32.jar" />
-			</resources>
-			<resources os="Windows" arch="amd64">
-				<nativelib href="hunspell-win64.jar" />
-			</resources>
-			<resources os="Windows" arch="x86">
-				<nativelib href="hunspell-win32.jar" />
 			</resources>
 		</j2se>
 		<property name="javaws.cfg.jauthenticator" value="true" />

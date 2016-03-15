@@ -4,19 +4,9 @@ htmlparser.jar version 1.6 is distributed under the GNU Lesser
 General Public License version 2.1 and greater
 Sources are available in OmegaT sources, in the directory lib/sources
 
-jna.jar is distributed under the Apache License 2.0
-
 vldocking-3.0.5-SNAPSHOT.jar is distributed under the GNU Lesser General
 Public License
 Sources are available in OmegaT sources, in the directory lib/sources
-
-Hunspell is distributed under the GNU Lesser General Public License  
-version 2.1 and greater, the GNU Public License version 2.0 and  
-greater or the Mozilla Public License version 1.1
-Sources are available in OmegaT sources, in the directory lib/sources
-Some Hunspell librairies may correspond to older versions
-Sources are all available from
-https://sourceforge.net/project/showfiles.php?group_id=143754&package_id=157912
 
 swing-layout-1.0.4.jar is distributed under the GNU Lesser General  
 Public License version 2.1.

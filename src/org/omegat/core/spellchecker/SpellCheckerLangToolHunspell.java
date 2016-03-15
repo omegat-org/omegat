@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Alex Buloichik
+ Copyright (C) 2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,42 +25,56 @@
 
 package org.omegat.core.spellchecker;
 
-import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.CharacterCodingException;
+import java.util.Collections;
 import java.util.List;
 
-import org.dts.spell.dictionary.OpenOfficeSpellDictionary;
-import org.dts.spell.dictionary.SpellDictionary;
+import org.languagetool.rules.spelling.hunspell.Hunspell;
+import org.omegat.util.Log;
 
 /**
- * JMySpell spell checker implementation.
+ * A thin wrapper around the LanguageTool Hunspell implementation (which itself
+ * wraps native libs)
  * 
- * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
-public class SpellCheckerJMySpell implements ISpellCheckerProvider {
-    /** Local logger. */
+public class SpellCheckerLangToolHunspell implements ISpellCheckerProvider {
 
-    private org.dts.spell.SpellChecker jmyspell;
+    private final String dictBasename;
+    private final Hunspell.Dictionary dict;
 
-    public SpellCheckerJMySpell(String dictionaryName, String affixName) throws Exception {
-
-        SpellDictionary dict = new OpenOfficeSpellDictionary(new File(dictionaryName), new File(affixName),
-                false);
-        jmyspell = new org.dts.spell.SpellChecker(dict);
-        jmyspell.setCaseSensitive(false);
+    public SpellCheckerLangToolHunspell(String dictBasename) throws Throwable {
+        this.dictBasename = dictBasename;
+        this.dict = Hunspell.getInstance().getDictionary(dictBasename);
     }
 
-    public void destroy() {
-        jmyspell = null;
-    }
-
+    @Override
     public boolean isCorrect(String word) {
-        return jmyspell.isCorrect(word);
+        return !dict.misspelled(word);
     }
 
+    @Override
     public List<String> suggest(String word) {
-        return jmyspell.getDictionary().getSuggestions(word, 20);
+        try {
+            return dict.suggest(word);
+        } catch (CharacterCodingException e) {
+            return Collections.emptyList();
+        }
     }
 
+    @Override
     public void learnWord(String word) {
+        try {
+            dict.addWord(word);
+        } catch (UnsupportedEncodingException e) {
+            Log.log(e);
+        }
+    }
+
+    @Override
+    public void destroy() {
+        dict.destroy();
+        Hunspell.getInstance().destroyDictionary(dictBasename);
     }
 }

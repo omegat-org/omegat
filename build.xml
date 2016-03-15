@@ -137,10 +137,6 @@
 
     <target name="-post-jar">
         <delete file="${dist.dir}/README.TXT"/>
-        <!-- copy the native libraries to the distribution directory -->
-        <copy todir="dist/native">
-            <fileset dir="native"/>
-        </copy>
         <!-- copy scripts to the distribution directory -->
         <copy todir="dist/scripts">
             <fileset dir="scripts"/>

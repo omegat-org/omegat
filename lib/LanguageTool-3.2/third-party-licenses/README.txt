@@ -10,6 +10,7 @@ hamcrest-core.jar: BSD License, https://github.com/hamcrest
 hunspell-native-libs.jar: GPL/LGPL/MPL triple license, http://hunspell.sourceforge.net/
 hppc.jar: Apache License 2.0, http://labs.carrotsearch.com/hppc.html
 ictclas4j: Apache License 2.0, http://code.google.com/p/ictclas4j/
+jna.jar: LGPL version 2.1 or later, or Apache License 2.0, https://github.com/twall/jna
 jsonic.jar: Apache License 2.0, http://jsonic.sourceforge.jp/
 jwordsplitter.jar: Apache License 2.0, http://www.danielnaber.de/jwordsplitter/
 language-detector.jar: Apache License 2.0, https://github.com/optimaize/language-detector

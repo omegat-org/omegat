@@ -145,6 +145,7 @@ public class SpellChecker implements ISpellChecker {
 
         installBundledDictionary(dictionaryDir, language);
 
+        File dictBasename = new File(dictionaryDir, language);
         File affixName = new File(dictionaryDir, language + OConsts.SC_AFFIX_EXTENSION);
         File dictionaryName = new File(dictionaryDir, language + OConsts.SC_DICTIONARY_EXTENSION);
 
@@ -152,12 +153,19 @@ public class SpellChecker implements ISpellChecker {
             return null;
         }
         try {
-            return new SpellCheckerHunspell(language, dictionaryName.getPath(), affixName.getPath());
-        } catch (Exception ex) {
+            ISpellCheckerProvider result = new SpellCheckerLangToolHunspell(dictBasename.getPath());
+            Log.log("Initialized LanguageTool Hunspell spell checker for language '" + language
+                    + "' dictionary " + dictionaryName);
+            return result;
+        } catch (Throwable ex) {
             Log.log("Error loading hunspell: " + ex.getMessage());
         }
         try {
-            return new SpellCheckerJMySpell(language, dictionaryName.getPath(), affixName.getPath());
+            ISpellCheckerProvider result = new SpellCheckerJMySpell(dictionaryName.getPath(),
+                    affixName.getPath());
+            Log.log("Initialized JMySpell spell checker for language '" + language + "' dictionary "
+                    + dictionaryName);
+            return result;
         } catch (Exception ex) {
             Log.log("Error loading jmyspell: " + ex.getMessage());
         }

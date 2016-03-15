@@ -55,13 +55,6 @@
 								docs/**/images/NewProject.png
 								docs/**/images/InstantGuide_1.png 
 								docs/**/images/InstantGuide_2.png" />
-
-		<jar jarfile="${root}/build/webstart/hunspell-linux64.jar" basedir="${root}/native" includes="libhunspell-linux64.so" />
-		<jar jarfile="${root}/build/webstart/hunspell-linux32.jar" basedir="${root}/native" includes="libhunspell-linux32.so" />
-		<jar jarfile="${root}/build/webstart/hunspell-macos64.jar" basedir="${root}/native" includes="libhunspell-macos64.dylib" />
-		<jar jarfile="${root}/build/webstart/hunspell-macos32.jar" basedir="${root}/native" includes="libhunspell-macos32.dylib" />
-		<jar jarfile="${root}/build/webstart/hunspell-win64.jar" basedir="${root}/native" includes="hunspell-win64.dll" />
-		<jar jarfile="${root}/build/webstart/hunspell-win32.jar" basedir="${root}/native" includes="hunspell-win32.dll" />
 	</target>
 	
 	<!-- Macro to un-sign a JAR. From:

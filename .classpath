@@ -6,7 +6,6 @@
 	<classpathentry kind="src" path="test/src"/>
 	<classpathentry kind="src" path="lib-mnemonics/src"/>
 	<classpathentry exported="true" kind="lib" path="lib/htmlparser.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/jna.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jmyspell-core-1.0.0-beta-2.jar"/>
 	<classpathentry exported="true" kind="lib" path="test/lib/junit-4.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/pdfbox-app-1.8.1.jar"/>
@@ -61,5 +60,6 @@
 	<classpathentry kind="lib" path="lib/LanguageTool-3.2/opennlp-tools.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool-3.2/openregex.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool-3.2/segment.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/jna.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

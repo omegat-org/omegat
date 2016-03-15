@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.7.0
 ----------------------------------------------------------------------
- 3 Enhancements
+ 4 Enhancements
 ----------------------------------------------------------------------
 3.7.0 vs 3.6.0
 
@@ -15,6 +15,9 @@
 
   - New team mode implementation
   https://sourceforge.net/p/omegat/feature-requests/1189/
+
+  - Update LanguageTool to 3.2 
+  https://sourceforge.net/p/omegat/feature-requests/970/
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 (2016-03-09)

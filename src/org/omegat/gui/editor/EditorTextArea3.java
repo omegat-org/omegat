@@ -435,7 +435,7 @@ public class EditorTextArea3 extends JEditorPane {
         if (!processed && e.getKeyChar() != 0 && isNavigationKey(e.getKeyCode())) {
             //if caret is moved over existing chars, check and fix caret position
             checkAndFixCaret(false); //works only in after-processing if translation length (start and end position) has not changed, because start and end position are not updated yet.
-            autoCompleter.updatePopup();
+            autoCompleter.updatePopup(true);
         }
     }
 

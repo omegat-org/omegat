@@ -119,7 +119,7 @@ abstract public class AbstractAutoCompleterView {
      * Update the view data
      * @return true if any update has been done.
      */
-    public abstract boolean updateViewData();
+    public abstract void updateViewData();
     
     /**
      * Obtain the content to put in the autocompleter popup.

@@ -203,14 +203,12 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     }
     
     @Override
-    public boolean updateViewData() {
+    public void updateViewData() {
         List<AutoCompleterItem> entryList = computeListData(getLeadingText(), false);    
         if (entryList.isEmpty()) {
             entryList.add(NO_SUGGESTIONS);
         }
         setData(entryList);
-        
-        return !entryList.isEmpty();
     }
     
     @Override

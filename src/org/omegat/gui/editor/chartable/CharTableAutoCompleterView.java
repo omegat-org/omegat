@@ -59,9 +59,8 @@ public class CharTableAutoCompleterView extends AutoCompleterTableView {
     }
 
     @Override
-    public boolean updateViewData() {
+    public void updateViewData() {
         updateModel();
-        return true;
     }
 
     /**

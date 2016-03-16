@@ -182,9 +182,9 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
         return width;
     };
     
-    protected void setData(List<AutoCompleterItem> entryList) {
-        getList().setListData(entryList.toArray(new AutoCompleterItem[entryList.size()]));
-        if (!entryList.isEmpty()) {
+    protected void setData(AutoCompleterItem... entries) {
+        getList().setListData(entries);
+        if (entries.length > 0) {
             getList().setSelectedIndex(0);
             getList().invalidate();
         }
@@ -206,9 +206,10 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     public void updateViewData() {
         List<AutoCompleterItem> entryList = computeListData(getLeadingText(), false);    
         if (entryList.isEmpty()) {
-            entryList.add(NO_SUGGESTIONS);
+            setData(NO_SUGGESTIONS);
+        } else {
+            setData(entryList.toArray(new AutoCompleterItem[entryList.size()]));
         }
-        setData(entryList);
     }
     
     @Override

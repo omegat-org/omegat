@@ -209,10 +209,10 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         }
         List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
         for (String word : words) {
+            if (isIgnoreWord(word)) {
+                continue;
+            }
             for (IDictionary di : dicts) {
-                if (isIgnoreWord(word)) {
-                    continue;
-                }
                 try {
                     List<DictionaryEntry> entries = di.readArticles(word);
                     if (entries.isEmpty()) {

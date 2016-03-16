@@ -88,7 +88,7 @@ public class AutoCompleter implements IAutoCompleter {
     
     public final static int PAGE_ROW_COUNT = 10;
     
-    private boolean didPopUpAutomatically = false;
+    boolean didPopUpAutomatically = false;
     
     /**
      * a list of the views associated with this auto-completer

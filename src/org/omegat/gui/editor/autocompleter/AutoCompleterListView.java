@@ -86,6 +86,15 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     
     @Override
     public boolean processKeys(KeyEvent e) {
+        if ((StaticUtils.isKey(e, KeyEvent.VK_LEFT, 0) || StaticUtils.isKey(e, KeyEvent.VK_RIGHT, 0))
+                && completer.isVisible() && completer.didPopUpAutomatically) {
+            // Close autocompleter if user presses left or right (we can't use these anyway since it's a
+            // vertical list) and the completer appeared automatically.
+            completer.setVisible(false);
+            // Don't consume here so that the cursor movement can still take place.
+            return false;
+        }
+
         if (StaticUtils.isKey(e, KeyEvent.VK_UP, 0)) {
             // process key UP
             selectPreviousPossibleValue();

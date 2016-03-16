@@ -52,6 +52,7 @@ import javax.swing.AbstractAction;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.InputMap;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
@@ -920,6 +921,7 @@ public class SearchWindowController {
             ((JTextField) form.m_searchField.getEditor().getEditorComponent()).setText(query);
         }
         form.setVisible(true);
+        form.setState(JFrame.NORMAL);
         form.m_searchField.requestFocus();
     }
 

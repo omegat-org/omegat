@@ -47,6 +47,7 @@ import java.util.Map;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
+import javax.swing.JFrame;
 import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
@@ -153,7 +154,9 @@ class EntryListPane extends JTextPane {
                     if (!autoSyncWithEditor && !m_entryList.isEmpty()) {
                         getActiveDisplayedEntry().gotoEntryInEditor();
                     }
-                    Core.getMainWindow().getApplicationFrame().toFront();
+                    JFrame frame = Core.getMainWindow().getApplicationFrame();
+                    frame.setState(JFrame.NORMAL);
+                    frame.toFront();
                 }
             }
         });

@@ -35,7 +35,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
-import javax.swing.table.DefaultTableModel;
 
 import org.omegat.util.OStrings;
 import org.openide.awt.Mnemonics;
@@ -85,17 +84,6 @@ public class RepositoriesCredentialsDialog extends javax.swing.JDialog {
 
         getContentPane().add(jPanel2, BorderLayout.EAST);
 
-        list.setModel(new DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(list);
 

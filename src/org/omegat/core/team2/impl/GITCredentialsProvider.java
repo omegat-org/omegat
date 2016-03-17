@@ -45,14 +45,19 @@ import org.omegat.core.team2.TeamSettings;
 import org.omegat.util.OStrings;
 
 /**
- * GIT repository credentials provider. One credentials provider created for all git instances.
- * 
- * GIT supports protocols: file://, ssh:// git:// http://.
- * 
- * See JGit Authentication Explained : http://www.codeaffine.com/2014/12/09/jgit-authentication/
+ * Git repository credentials provider. One credentials provider created for all git instances.
+ * <p>
+ * Git supports these protocols:
+ * <ul>
+ * <li>file://
+ * <li>ssh://
+ * <li>git://
+ * <li>http://
+ * </ul>
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
+ * @see <a href="http://www.codeaffine.com/2014/12/09/jgit-authentication/">JGit Authentication Explained</a>
  */
 public class GITCredentialsProvider extends CredentialsProvider {
     static final String KEY_USERNAME_SUFFIX = "username";

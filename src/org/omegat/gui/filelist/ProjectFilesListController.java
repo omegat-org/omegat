@@ -138,12 +138,9 @@ public class ProjectFilesListController {
 
     private TableFilterPanel filterPanel;
     
-    private final MainWindow m_parent;
-
     private Font defaultFont;
     
     public ProjectFilesListController(MainWindow parent) {
-        m_parent = parent;
 
         list = new ProjectFilesList();
         

@@ -64,8 +64,6 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
     private SRX defaultSRX;
     /** SRX from user preferences. */
     private SRX userSRX;
-    /** SRX from current project. */
-    private SRX projectSRX;
     /** SRX which editable now. */
     private SRX editableSRX;
 
@@ -78,7 +76,6 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         this.isProjectSpecific = projectSpecific;
         this.defaultSRX = defaultSRX;
         this.userSRX = userSRX;
-        this.projectSRX = projectSRX;
         this.editableSRX = isProjectSpecific && projectSRX != null ? projectSRX.clone() : userSRX.clone();
         
         StaticUIUtils.setEscapeAction(this, new AbstractAction() {

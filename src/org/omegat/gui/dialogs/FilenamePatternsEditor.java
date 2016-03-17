@@ -50,57 +50,23 @@ public class FilenamePatternsEditor extends javax.swing.JDialog {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
-        labelHelp = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        btnOk = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         btnAdd = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        labelHelp = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        btnOk = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(OStrings.getString("FILENAMEPATTERNS_TITLE")); // NOI18N
-        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jScrollPane1.setViewportView(table);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        getContentPane().add(jScrollPane1, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(labelHelp, OStrings.getString("FILENAMEPATTERNS_HELP")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        getContentPane().add(labelHelp, gridBagConstraints);
-
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
-
-        org.openide.awt.Mnemonics.setLocalizedText(btnOk, OStrings.getString("BUTTON_OK")); // NOI18N
-        jPanel1.add(btnOk);
-
-        org.openide.awt.Mnemonics.setLocalizedText(btnCancel, OStrings.getString("BUTTON_CANCEL")); // NOI18N
-        jPanel1.add(btnCancel);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        getContentPane().add(jPanel1, gridBagConstraints);
+        jPanel3.setLayout(new java.awt.BorderLayout());
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
@@ -108,6 +74,7 @@ public class FilenamePatternsEditor extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel2.add(btnAdd, gridBagConstraints);
 
@@ -115,15 +82,40 @@ public class FilenamePatternsEditor extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel2.add(btnRemove, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        getContentPane().add(jPanel2, gridBagConstraints);
+        jPanel3.add(jPanel2, java.awt.BorderLayout.EAST);
+
+        jScrollPane1.setViewportView(table);
+
+        jPanel3.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 0, 10));
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
+        org.openide.awt.Mnemonics.setLocalizedText(labelHelp, OStrings.getString("FILENAMEPATTERNS_HELP")); // NOI18N
+        jPanel5.add(labelHelp, java.awt.BorderLayout.SOUTH);
+
+        jPanel3.add(jPanel5, java.awt.BorderLayout.SOUTH);
+
+        getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jPanel4.setLayout(new java.awt.BorderLayout());
+
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(btnOk, OStrings.getString("BUTTON_OK")); // NOI18N
+        jPanel1.add(btnOk);
+
+        org.openide.awt.Mnemonics.setLocalizedText(btnCancel, OStrings.getString("BUTTON_CANCEL")); // NOI18N
+        jPanel1.add(btnCancel);
+
+        jPanel4.add(jPanel1, java.awt.BorderLayout.EAST);
+
+        getContentPane().add(jPanel4, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -135,6 +127,9 @@ public class FilenamePatternsEditor extends javax.swing.JDialog {
     public javax.swing.JButton btnRemove;
     public javax.swing.JPanel jPanel1;
     public javax.swing.JPanel jPanel2;
+    public javax.swing.JPanel jPanel3;
+    public javax.swing.JPanel jPanel4;
+    public javax.swing.JPanel jPanel5;
     public javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel labelHelp;
     public javax.swing.JTable table;

@@ -95,29 +95,30 @@ public class XMLStreamReaderTest extends TestCase {
     }
     
     public void testBadEntity() throws Exception {
-        XMLStreamReader xml = new XMLStreamReader();
-        xml.killEmptyBlocks();
-        
-        XMLBlock blk;
-        
-        xml.setStream(new File("test/data/xml/test-badDecimalEntity.xml"));
+        try (XMLStreamReader xml = new XMLStreamReader()) {
+            xml.killEmptyBlocks();
 
-        assertNotNull(xml.advanceToTag("root"));
-        assertNotNull(blk = xml.advanceToTag("body"));
-        try {
-            assertNotNull(xml.closeBlock(blk));
-            fail("XML parsing should fail on bad decimal entity");
-        } catch (TranslationException ex) {
-        }
-        
-        xml.setStream(new File("test/data/xml/test-badHexEntity.xml"));
+            XMLBlock blk;
 
-        assertNotNull(xml.advanceToTag("root"));
-        assertNotNull(blk = xml.advanceToTag("body"));
-        try {
-            assertNotNull(xml.closeBlock(blk));
-            fail("XML parsing should fail on bad hex entity");
-        } catch (TranslationException ex) {
+            xml.setStream(new File("test/data/xml/test-badDecimalEntity.xml"));
+
+            assertNotNull(xml.advanceToTag("root"));
+            assertNotNull(blk = xml.advanceToTag("body"));
+            try {
+                assertNotNull(xml.closeBlock(blk));
+                fail("XML parsing should fail on bad decimal entity");
+            } catch (TranslationException ex) {
+            }
+
+            xml.setStream(new File("test/data/xml/test-badHexEntity.xml"));
+
+            assertNotNull(xml.advanceToTag("root"));
+            assertNotNull(blk = xml.advanceToTag("body"));
+            try {
+                assertNotNull(xml.closeBlock(blk));
+                fail("XML parsing should fail on bad hex entity");
+            } catch (TranslationException ex) {
+            }
         }
     }
     

@@ -27,8 +27,6 @@
 
 package org.omegat.core.team2.impl;
 
-import java.util.Arrays;
-
 import javax.swing.JLabel;
 
 import org.omegat.util.OStrings;
@@ -62,20 +60,6 @@ public class GITUserPassDialog extends javax.swing.JDialog {
         setLocationRelativeTo(parent);
         
         userText.requestFocusInWindow();
-    }
-
-    public void setFixedUsername(String username) {
-        userText.setText(username);
-        userText.setEditable(false);
-        userText.setEnabled(false);
-        passwordField.requestFocusInWindow();
-    }
-    
-    public char[] getPasswordCopy() {
-        char[] arrayPassword = passwordField.getPassword();
-        char[] keepPassword = Arrays.copyOf(arrayPassword, arrayPassword.length);
-        Arrays.fill(arrayPassword, '0');
-        return keepPassword;
     }
     
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */

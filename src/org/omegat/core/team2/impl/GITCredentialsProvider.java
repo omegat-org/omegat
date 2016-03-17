@@ -172,6 +172,17 @@ public class GITCredentialsProvider extends CredentialsProvider {
                     }
                     ((CredentialItem.StringType) i).setValue(credentials.password);
                     continue;
+                } else if (i.getPromptText().startsWith("Passphrase for ")) {
+                    // Private key passphrase
+                    if (!ok) {
+                        credentials = askCredentials(uri, new Credentials());
+                        if (credentials == null) {
+                            throw new UnsupportedCredentialItem(uri,
+                                    OStrings.getString("TEAM_CREDENTIALS_DENIED"));
+                        }
+                        ((CredentialItem.StringType) i).setValue(credentials.password);
+                        continue;
+                    }
                 }
             } else if (i instanceof CredentialItem.YesNoType) {
                 // e.g.: The authenticity of host 'mygitserver' can't be established.

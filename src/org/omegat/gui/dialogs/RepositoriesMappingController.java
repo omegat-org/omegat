@@ -42,6 +42,7 @@ import javax.swing.table.AbstractTableModel;
 
 import org.apache.commons.lang.StringUtils;
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TableColumnSizer;
 
 import gen.core.project.RepositoryDefinition;
@@ -67,6 +68,10 @@ public class RepositoriesMappingController {
     public List<RepositoryDefinition> show(JFrame parent, List<RepositoryDefinition> input) {
         dialog = new RepositoriesMappingDialog(parent, true);
         dialog.setLocationRelativeTo(parent);
+
+        dialog.getRootPane().setDefaultButton(dialog.okButton);
+
+        StaticUIUtils.setEscapeClosable(dialog);
 
         listRepo = new ArrayList<RowRepo>();
         listMapping = new ArrayList<RowMapping>();

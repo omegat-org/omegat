@@ -49,7 +49,6 @@ public class FileUtilTest extends TestCase {
     @Override
     protected void setUp() throws Exception {
         base = Files.createTempDirectory("omegat").toFile();
-        System.out.println("Base: " + base.getAbsolutePath());
     }
 
     @Override
@@ -249,5 +248,34 @@ public class FileUtilTest extends TestCase {
             FileUtil.copyFileWithEolConversion(in, out, "UTF-8");
             assertEquals("\r\n", FileUtil.getEOL(out, "UTF-8"));
         }
+    }
+
+    public void testDeleteTree() throws Exception {
+        // /root
+        File root = new File(base, "root");
+        // /root/sub
+        File sub = new File(root, "sub");
+        assertTrue(sub.mkdirs());
+
+        // /root2
+        File root2 = new File(base, "root2");
+        assertTrue(root2.mkdirs());
+        File file = new File(root2, "file");
+        assertTrue(file.createNewFile());
+
+        try {
+            // /root/sub/subsub -> /root2
+            Files.createSymbolicLink(new File(sub, "subsub").toPath(), root2.toPath());
+        } catch (UnsupportedOperationException | IOException ex) {
+            // Creating symlinks not supported on this system
+        }
+
+        // Can't delete /root yet because it's not empty
+        assertFalse(root.delete());
+        assertTrue(FileUtil.deleteTree(root));
+        assertFalse(root.exists());
+
+        // Make sure we didn't follow the symlink
+        assertTrue(file.exists());
     }
 }

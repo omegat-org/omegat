@@ -744,38 +744,39 @@ public class RealProject implements IProject {
 
     /**
      * Rebase changes in project to remote HEAD and upload changes to remote if possible.
-     *
+     * <p>
      * How it works.
-     *
-     * On each moment we have 3 versions of translation(project_save.tmx file) or writable glossary:
-     *
-     * 1. BASE - version which current translator downloaded from remote repository previously(on previous
+     * <p>
+     * At each moment we have 3 versions of translation (project_save.tmx file) or writable glossary:
+     * <ol>
+     * <li>BASE - version which current translator downloaded from remote repository previously(on previous
      * synchronization or startup).
      *
-     * 2. WORKING - current version in translator's OmegaT. It doesn't exist it remote repository yet. It's
+     * <li>WORKING - current version in translator's OmegaT. It doesn't exist it remote repository yet. It's
      * inherited from BASE version, i.e. BASE + local changes.
      *
-     * 3. HEAD - latest version in repository, which other translators committed. It's also inherited from BASE
-     * version, i.e. BASE + remote changes.
-     *
-     * In the ideal world, we could just calculate diff between WORKING and BASE - it will be our local changes
+     * <li>HEAD - latest version in repository, which other translators committed. It's also inherited from
+     * BASE version, i.e. BASE + remote changes.
+     * </ol>
+     * In an ideal world, we could just calculate diff between WORKING and BASE - it will be our local changes
      * after latest synchronization, then rebase these changes on the HEAD revision, then commit into remote
      * repository.
-     *
-     * But we have some real world limitations: a) computers and networks work slowly, i.e. this synchronization
-     * will require some seconds, but translator should be able to edit translation in this time. b) we have to
-     * handle network errors, c) other translators can commit own data in the same time.
-     *
+     * <p>
+     * But we have some real world limitations:
+     * <ul>
+     * <li>Computers and networks work slowly, i.e. this synchronization will require some seconds, but
+     * translator should be able to edit translation in this time.
+     * <li>We have to handle network errors
+     * <li>Other translators can commit own data in the same time.
+     * </ul>
      * So, in the real world synchronization works by these steps:
-     *
-     * 1. Download HEAD revision from remote repository and load it in memory.
-     *
-     * 2. Load BASE revision from local disk.
-     *
-     * 3. Calculate diff between WORKING and BASE, then rebase it on the top of HEAD revision. This step
+     * <ol>
+     * <li>Download HEAD revision from remote repository and load it in memory.
+     * <li>Load BASE revision from local disk.
+     * <li>Calculate diff between WORKING and BASE, then rebase it on the top of HEAD revision. This step
      * synchronized around memory TMX, so, all edits are stopped. Since it's enough fast step, it's okay.
-     *
-     * 4. Upload new revision into repository.
+     * <li>Upload new revision into repository.
+     * </ol>
      */
     private void rebaseAndCommitProject() throws Exception {
         Log.logInfoRB("TEAM_REBASE_START");

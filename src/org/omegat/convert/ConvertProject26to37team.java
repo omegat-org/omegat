@@ -39,9 +39,9 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.core.team2.RebaseAndCommit;
 import org.omegat.core.team2.RemoteRepositoryProvider;
-import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.util.FileUtil;
 import org.omegat.util.OStrings;
 import org.omegat.util.ProjectFileStorage;
@@ -189,10 +189,11 @@ public class ConvertProject26to37team {
      */
     private static String getGITTmxVersion(File wc) throws Exception {
         Repository repository = Git.open(wc).getRepository();
-        RevWalk walk = new RevWalk(repository);
-        Ref localBranch = repository.getRef("HEAD");
-        RevCommit headCommit = walk.lookupCommit(localBranch.getObjectId());
-        return headCommit.getName();
+        try (RevWalk walk = new RevWalk(repository)) {
+            Ref localBranch = repository.getRef("HEAD");
+            RevCommit headCommit = walk.lookupCommit(localBranch.getObjectId());
+            return headCommit.getName();
+        }
     }
 
     /**

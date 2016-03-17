@@ -26,8 +26,6 @@
 
 package org.omegat.core.team2.impl;
 
-import gen.core.project.RepositoryDefinition;
-
 import java.io.File;
 import java.util.Collection;
 import java.util.logging.Logger;
@@ -54,6 +52,8 @@ import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
+
+import gen.core.project.RepositoryDefinition;
 
 /**
  * GIT repository connection implementation.
@@ -115,8 +115,10 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 throw e;
             }
             repository = Git.open(localDirectory).getRepository();
-            new Git(repository).submoduleInit().call();
-            new Git(repository).submoduleUpdate().call();
+            try (Git git = new Git(repository)) {
+                git.submoduleInit().call();
+                git.submoduleUpdate().call();
+            }
 
             // Deal with line endings. A normalized repo has LF line endings.
             // OmegaT uses line endings of OS for storing tmx files.
@@ -148,32 +150,34 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     }
 
     protected String getCurrentVersion() throws Exception {
-        RevWalk walk = new RevWalk(repository);
-        Ref localBranch = repository.getRef("HEAD");
-        RevCommit headCommit = walk.lookupCommit(localBranch.getObjectId());
-        return headCommit.getName();
+        try (RevWalk walk = new RevWalk(repository)) {
+            Ref localBranch = repository.getRef("HEAD");
+            RevCommit headCommit = walk.lookupCommit(localBranch.getObjectId());
+            return headCommit.getName();
+        }
     }
 
     @Override
     public void switchToVersion(String version) throws Exception {
-        if (version == null) {
-            version = REMOTE_BRANCH;
-            // TODO fetch
-            new Git(repository).fetch().setRemote(REMOTE).call();
+        try (Git git = new Git(repository)) {
+            if (version == null) {
+                version = REMOTE_BRANCH;
+                // TODO fetch
+                git.fetch().setRemote(REMOTE).call();
+            }
+            Log.logDebug(LOGGER, "GIT switchToVersion {0} ", version);
+            git.reset().setMode(ResetType.HARD).call();
+            git.checkout().setName(version).call();
+            git.branchDelete().setForce(true).setBranchNames(LOCAL_BRANCH).call();
+            git.checkout().setCreateBranch(true).setName(LOCAL_BRANCH).setStartPoint(version).call();
         }
-        Log.logDebug(LOGGER, "GIT switchToVersion {0} ", version);
-        new Git(repository).reset().setMode(ResetType.HARD).call();
-        new Git(repository).checkout().setName(version).call();
-        new Git(repository).branchDelete().setForce(true).setBranchNames(LOCAL_BRANCH).call();
-        new Git(repository).checkout().setCreateBranch(true).setName(LOCAL_BRANCH).setStartPoint(version)
-                .call();
     }
 
     @Override
     public void addForCommit(String path) throws Exception {
         Log.logInfoRB("GIT_START", "addForCommit");
-        try {
-            new Git(repository).add().addFilepattern(path).call();
+        try (Git git = new Git(repository)) {
+            git.add().addFilepattern(path).call();
             Log.logInfoRB("GIT_FINISH", "addForCommit");
         } catch (Exception ex) {
             Log.logErrorRB("GIT_ERROR", "addForCommit", ex.getMessage());
@@ -189,9 +193,9 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             }
         }
         Log.logInfoRB("GIT_START", "upload");
-        try {
-            RevCommit commit = new Git(repository).commit().setMessage(comment).call();
-            Iterable<PushResult> results = new Git(repository).push().setRemote(REMOTE).add(LOCAL_BRANCH)
+        try (Git git = new Git(repository)) {
+            RevCommit commit = git.commit().setMessage(comment).call();
+            Iterable<PushResult> results = git.push().setRemote(REMOTE).add(LOCAL_BRANCH)
                     .call();
             int count = 0;
             for (PushResult r : results) {

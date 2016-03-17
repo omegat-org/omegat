@@ -351,25 +351,31 @@ public class TestTeamIntegration {
         }
 
         public List<String> listRevisions(String from) throws Exception {
-            LogCommand cmd = new Git(repository).log();
-            List<String> result = new ArrayList<String>();
-            for (RevCommit commit : cmd.call()) {
-                if (commit.getName().equals(from)) {
-                    break;
+            try (Git git = new Git(repository)) {
+                LogCommand cmd = git.log();
+                List<String> result = new ArrayList<String>();
+                for (RevCommit commit : cmd.call()) {
+                    if (commit.getName().equals(from)) {
+                        break;
+                    }
+                    result.add(commit.getName());
                 }
-                result.add(commit.getName());
+                Collections.reverse(result);
+                return result;
             }
-            Collections.reverse(result);
-            return result;
         }
 
         public void update() throws Exception {
-            new Git(repository).fetch().call();
-            new Git(repository).checkout().setName("origin/master").call();
+            try (Git git = new Git(repository)) {
+                git.fetch().call();
+                git.checkout().setName("origin/master").call();
+            }
         }
 
         public void checkout(String rev) throws Exception {
-            new Git(repository).checkout().setName(rev).call();
+            try (Git git = new Git(repository)) {
+                git.checkout().setName(rev).call();
+            }
         }
     }
 

@@ -58,8 +58,8 @@ import gen.core.project.RepositoryMapping;
 public class HTTPRemoteRepository implements IRemoteRepository2 {
     private static final Logger LOGGER = Logger.getLogger(HTTPRemoteRepository.class.getName());
 
-    RepositoryDefinition config;
-    File baseDirectory;
+    private RepositoryDefinition config;
+    private File baseDirectory;
 
     @Override
     public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {

@@ -107,7 +107,7 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
             // ask username+password
         } else if (ISVNAuthenticationManager.USERNAME.equals(kind)) {
             // user auth shouldn't be null.
-            return new SVNUserNameAuthentication("", false, url, false);
+            return SVNUserNameAuthentication.newInstance("", false, url, false);
         } else {
             // auth type not supported for OmegaT
             throw new SVNException(SVNErrorMessage.create(SVNErrorCode.RA_UNKNOWN_AUTH));
@@ -127,9 +127,9 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         TeamSettings.set(repoUrl + "!" + KEY_PASSWORD_SUFFIX, TeamUtils.encodePassword(pass));
 
         if (ISVNAuthenticationManager.PASSWORD.equals(kind)) {
-            return new SVNPasswordAuthentication(user, pass, false, url, false);
+            return SVNPasswordAuthentication.newInstance(user, pass.toCharArray(), false, url, false);
         } else if (ISVNAuthenticationManager.SSH.equals(kind)) {
-            return new SVNSSHAuthentication(user, pass, -1, false, url, false);
+            return SVNSSHAuthentication.newInstance(user, pass.toCharArray(), -1, false, url, false);
         } else {
             // auth type not supported for OmegaT
             throw new SVNException(SVNErrorMessage.create(SVNErrorCode.RA_UNKNOWN_AUTH));
@@ -141,9 +141,11 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
             throws SVNException {
         if (predefinedUser != null && predefinedPass != null) {
             if (ISVNAuthenticationManager.PASSWORD.equals(kind)) {
-                return new SVNPasswordAuthentication(predefinedUser, predefinedPass, false, url, false);
+                return SVNPasswordAuthentication.newInstance(predefinedUser, predefinedPass.toCharArray(),
+                        false, url, false);
             } else if (ISVNAuthenticationManager.SSH.equals(kind)) {
-                return new SVNSSHAuthentication(predefinedUser, predefinedPass, -1, false, url, false);
+                return SVNSSHAuthentication.newInstance(predefinedUser, predefinedPass.toCharArray(), -1,
+                        false, url, false);
             } else {
                 throw new SVNException(SVNErrorMessage.create(SVNErrorCode.AUTHN_NO_PROVIDER));
             }
@@ -152,9 +154,9 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         String pass = TeamUtils.decodePassword(TeamSettings.get(repoUrl + "!" + KEY_PASSWORD_SUFFIX));
         if (user != null && pass != null) {
             if (ISVNAuthenticationManager.PASSWORD.equals(kind)) {
-                return new SVNPasswordAuthentication(user, pass, false, url, false);
+                return SVNPasswordAuthentication.newInstance(user, pass.toCharArray(), false, url, false);
             } else if (ISVNAuthenticationManager.SSH.equals(kind)) {
-                return new SVNSSHAuthentication(user, pass, -1, false, url, false);
+                return SVNSSHAuthentication.newInstance(user, pass.toCharArray(), -1, false, url, false);
             } else {
                 throw new SVNException(SVNErrorMessage.create(SVNErrorCode.AUTHN_NO_PROVIDER));
             }

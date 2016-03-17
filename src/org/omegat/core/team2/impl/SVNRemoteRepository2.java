@@ -26,8 +26,6 @@
 
 package org.omegat.core.team2.impl;
 
-import gen.core.project.RepositoryDefinition;
-
 import java.io.File;
 import java.net.SocketException;
 import java.util.ArrayList;
@@ -46,11 +44,14 @@ import org.tmatesoft.svn.core.SVNErrorCode;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNURL;
 import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
+import org.tmatesoft.svn.core.internal.util.SVNEncodingUtil;
 import org.tmatesoft.svn.core.wc.ISVNOptions;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
 import org.tmatesoft.svn.core.wc.SVNInfo;
 import org.tmatesoft.svn.core.wc.SVNRevision;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
+
+import gen.core.project.RepositoryDefinition;
 
 /**
  * SVN repository connection implementation.
@@ -102,7 +103,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
         Log.logInfoRB("SVN_START", "checkout");
         filesForCommit.clear();
 
-        SVNURL url = SVNURL.parseURIDecoded(config.getUrl());
+        SVNURL url = SVNURL.parseURIEncoded(SVNEncodingUtil.autoURIEncode(config.getUrl()));
         SVNRevision toRev;
         if (version != null) {
             toRev = SVNRevision.create(Long.parseLong(version));
@@ -112,7 +113,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
 
         try {
             Log.logInfoRB("SVN_FINISH", "checkout");
-            long rev = ourClientManager.getUpdateClient().doCheckout(url, baseDirectory, SVNRevision.HEAD,
+            ourClientManager.getUpdateClient().doCheckout(url, baseDirectory, SVNRevision.HEAD,
                     toRev, SVNDepth.INFINITY, false);
         } catch (Exception ex) {
             Log.logErrorRB("SVN_ERROR", "checkout", ex.getMessage());
@@ -188,7 +189,8 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
             ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
             SVNClientManager ourClientManager = SVNClientManager.newInstance(options, (ISVNAuthenticationManager)null);
 
-            ourClientManager.getWCClient().doInfo(SVNURL.parseURIDecoded(url), SVNRevision.HEAD,
+            ourClientManager.getWCClient().doInfo(SVNURL.parseURIEncoded(SVNEncodingUtil.autoURIEncode(url)),
+                    SVNRevision.HEAD,
                     SVNRevision.HEAD);
         } catch (SVNAuthenticationException ex) {
             return true;

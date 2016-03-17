@@ -346,6 +346,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
         }
     }
 
+    @Override
     public void reset(URIish uri) {
         // reset is called after 5 authorization failures. After 3 resets, the transport gives up.
         String url = uri.toString();

@@ -36,6 +36,7 @@ import javax.swing.table.AbstractTableModel;
 
 import org.omegat.core.Core;
 import org.omegat.core.team2.TeamSettings;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Controller for forget credentials.
@@ -86,6 +87,10 @@ public class RepositoriesCredentialsController {
                 dialog.dispose();
             }
         });
+
+        dialog.getRootPane().setDefaultButton(dialog.btnClose);
+
+        StaticUIUtils.setEscapeClosable(dialog);
 
         dialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
         dialog.setVisible(true);

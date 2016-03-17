@@ -92,11 +92,14 @@ public class GITUserPassDialog extends javax.swing.JDialog {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jPanel3 = new javax.swing.JPanel();
         descriptionTextArea = new javax.swing.JTextArea();
+        jPanel2 = new javax.swing.JPanel();
         userLabel = new javax.swing.JLabel();
         userText = new javax.swing.JTextField();
         passwordLabel = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
+        jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -108,22 +111,21 @@ public class GITUserPassDialog extends javax.swing.JDialog {
                 formWindowClosing(evt);
             }
         });
-        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        descriptionTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
         descriptionTextArea.setEditable(false);
         descriptionTextArea.setFont(new JLabel().getFont());
         descriptionTextArea.setLineWrap(true);
         descriptionTextArea.setWrapStyleWord(true);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(descriptionTextArea, gridBagConstraints);
+        descriptionTextArea.setOpaque(false);
+        jPanel3.add(descriptionTextArea, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel3, java.awt.BorderLayout.NORTH);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        jPanel2.setLayout(new java.awt.GridBagLayout());
 
         userLabel.setLabelFor(userText);
         org.openide.awt.Mnemonics.setLocalizedText(userLabel, OStrings.getString("LOGIN_USER")); // NOI18N
@@ -133,7 +135,7 @@ public class GITUserPassDialog extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(4, 16, 4, 4);
-        getContentPane().add(userLabel, gridBagConstraints);
+        jPanel2.add(userLabel, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
@@ -142,7 +144,7 @@ public class GITUserPassDialog extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(userText, gridBagConstraints);
+        jPanel2.add(userText, gridBagConstraints);
 
         passwordLabel.setLabelFor(passwordField);
         org.openide.awt.Mnemonics.setLocalizedText(passwordLabel, OStrings.getString("LOGIN_PASSWORD")); // NOI18N
@@ -152,7 +154,7 @@ public class GITUserPassDialog extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(4, 16, 4, 4);
-        getContentPane().add(passwordLabel, gridBagConstraints);
+        jPanel2.add(passwordLabel, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
@@ -161,7 +163,12 @@ public class GITUserPassDialog extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(passwordField, gridBagConstraints);
+        jPanel2.add(passwordField, gridBagConstraints);
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jPanel4.setLayout(new java.awt.BorderLayout());
 
         org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
         okButton.addActionListener(new java.awt.event.ActionListener() {
@@ -179,12 +186,9 @@ public class GITUserPassDialog extends javax.swing.JDialog {
         });
         jPanel1.add(cancelButton);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        getContentPane().add(jPanel1, gridBagConstraints);
+        jPanel4.add(jPanel1, java.awt.BorderLayout.EAST);
+
+        getContentPane().add(jPanel4, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -211,6 +215,9 @@ public class GITUserPassDialog extends javax.swing.JDialog {
     private javax.swing.JButton cancelButton;
     public javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JButton okButton;
     public javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;

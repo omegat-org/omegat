@@ -242,7 +242,9 @@ public class RepositoriesMappingController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 listRepo.add(new RowRepo());
-                modelRepo.fireTableRowsInserted(listRepo.size() - 1, listRepo.size() - 1);
+                int row = listRepo.size() - 1;
+                modelRepo.fireTableRowsInserted(row, row);
+                dialog.tableRepositories.setRowSelectionInterval(row, row);
             }
         });
         dialog.btnRepoRemove.addActionListener(new ActionListener() {
@@ -259,7 +261,9 @@ public class RepositoriesMappingController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 listMapping.add(new RowMapping());
-                modelMapping.fireTableRowsInserted(listMapping.size() - 1, listMapping.size() - 1);
+                int row = listMapping.size() - 1;
+                modelMapping.fireTableRowsInserted(row, row);
+                dialog.tableMapping.setRowSelectionInterval(row, row);
             }
         });
         dialog.btnMappingRemove.addActionListener(new ActionListener() {

@@ -211,7 +211,6 @@ public class GITCredentialsProvider extends CredentialsProvider {
                     ok = true;
                 }
                 ((CredentialItem.Password) i).setValue(credentials.password.toCharArray());
-                uri.setPass(new String(credentials.password));
                 continue;
             } else if (i instanceof CredentialItem.StringType) {
                 if (i.getPromptText().equals("Password: ")) {

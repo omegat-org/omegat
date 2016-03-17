@@ -37,6 +37,9 @@ Eclipse Distribution License (EDL) v 1.0
 jsch-0.1.52.jar is distributed under the JSch License
 (required for GITRemoteRepository.java)
 
+jsch-agent-proxy is distributed under the jsch-agent-proxy License
+(required for GITRemoteRepository.java)
+
 diff.jar is distributed under the GNU General Public License version 1 and greater
 Sources are available in OmegaT sources, in the directory lib/sources
 

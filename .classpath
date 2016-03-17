@@ -61,5 +61,11 @@
 	<classpathentry kind="lib" path="lib/LanguageTool-3.2/openregex.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool-3.2/segment.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool-3.2/jna.jar"/>
+	<classpathentry kind="lib" path="lib/jsch.agentproxy.connector-factory-0.0.9.jar"/>
+	<classpathentry kind="lib" path="lib/jsch.agentproxy.core-0.0.9.jar"/>
+	<classpathentry kind="lib" path="lib/jsch.agentproxy.jsch-0.0.9.jar"/>
+	<classpathentry kind="lib" path="lib/jsch.agentproxy.sshagent-0.0.9.jar"/>
+	<classpathentry kind="lib" path="lib/jsch.agentproxy.svnkit-trilead-ssh2-0.0.9.jar"/>
+	<classpathentry kind="lib" path="lib/jsch.agentproxy.usocket-jna-0.0.9.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

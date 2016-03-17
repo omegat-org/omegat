@@ -221,14 +221,13 @@ public class GITCredentialsProvider extends CredentialsProvider {
     @Override
     public boolean supports(CredentialItem... items) {
         for (CredentialItem i : items) {
-            if (i instanceof CredentialItem.Username)
+            if (i instanceof CredentialItem.Username) {
                 continue;
-
-            else if (i instanceof CredentialItem.Password)
+            } else if (i instanceof CredentialItem.Password) {
                 continue;
-
-            else
+            } else {
                 return false;
+            }
         }
         return true;
     }

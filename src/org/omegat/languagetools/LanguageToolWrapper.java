@@ -26,6 +26,7 @@
 
 package org.omegat.languagetools;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,6 +125,14 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
             return null;
         }
 
+        // Unicode: LanguageTool expects text in Normalization Form KC (NFKC).
+        // For example, the German character 'ü' (lowercase u umlaut) must be in
+        // the string as Unicode character U+00FC, not as 'u' followed by the
+        // combining diaeresis character.
+        // https://languagetool.org/development/api/org/languagetool/JLanguageTool.html
+        sourceText = normalizeNFKC(sourceText);
+        translationText = normalizeNFKC(translationText);
+
         List<Mark> r = new ArrayList<Mark>();
         List<RuleMatch> matches;
         if (ltSource != null && bRules != null) {
@@ -143,6 +152,11 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
         }
 
         return r;
+    }
+
+    private static String normalizeNFKC(String text) {
+        return Normalizer.isNormalized(text, Normalizer.Form.NFKC) ? text
+                : Normalizer.normalize(text, Normalizer.Form.NFKC);
     }
 
     private Language getLTLanguage(org.omegat.util.Language lang) {

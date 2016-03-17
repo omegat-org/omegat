@@ -180,12 +180,12 @@ public class GITCredentialsProvider extends CredentialsProvider {
                 } else if (i.getPromptText().startsWith("Passphrase for ")) {
                     // Private key passphrase
                     if (!ok) {
-                        credentials = askCredentials(uri, new Credentials());
-                        if (credentials == null) {
+                        String passphrase = askPassphrase(i.getPromptText());
+                        if (passphrase == null) {
                             throw new UnsupportedCredentialItem(uri,
                                     OStrings.getString("TEAM_CREDENTIALS_DENIED"));
                         }
-                        ((CredentialItem.StringType) i).setValue(credentials.password);
+                        ((CredentialItem.StringType) i).setValue(passphrase);
                         continue;
                     }
                 }
@@ -273,6 +273,21 @@ public class GITCredentialsProvider extends CredentialsProvider {
             credentials.username = userPassDialog.userText.getText();
             credentials.password = new String(userPassDialog.passwordField.getPassword());
             return credentials;
+        } else {
+            return null;
+        }
+    }
+
+    private String askPassphrase(String prompt) {
+        GITUserPassDialog userPassDialog = new GITUserPassDialog(Core.getMainWindow().getApplicationFrame());
+        userPassDialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
+        userPassDialog.descriptionTextArea.setText(prompt);
+        userPassDialog.userText.setVisible(false);
+        userPassDialog.userLabel.setVisible(false);
+        userPassDialog.passwordField.requestFocusInWindow();
+        userPassDialog.setVisible(true);
+        if (userPassDialog.getReturnStatus() == GITUserPassDialog.RET_OK) {
+            return new String(userPassDialog.passwordField.getPassword());
         } else {
             return null;
         }

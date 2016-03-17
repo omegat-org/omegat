@@ -221,7 +221,7 @@ public class GITUserPassDialog extends javax.swing.JDialog {
     private javax.swing.JButton okButton;
     public javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
-    private javax.swing.JLabel userLabel;
+    public javax.swing.JLabel userLabel;
     public javax.swing.JTextField userText;
     // End of variables declaration//GEN-END:variables
 

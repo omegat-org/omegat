@@ -107,6 +107,7 @@ public class FilenamePatternsEditorController {
         });
         dialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
         StaticUIUtils.setEscapeClosable(dialog);
+        dialog.getRootPane().setDefaultButton(dialog.btnOk);
         dialog.setVisible(true);
 
         return result;

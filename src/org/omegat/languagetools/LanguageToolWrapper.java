@@ -49,6 +49,7 @@ import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.Log;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -155,6 +156,9 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
     }
 
     private static String normalizeNFKC(String text) {
+        if (StringUtil.isEmpty(text)) {
+            return text;
+        }
         return Normalizer.isNormalized(text, Normalizer.Form.NFKC) ? text
                 : Normalizer.normalize(text, Normalizer.Form.NFKC);
     }

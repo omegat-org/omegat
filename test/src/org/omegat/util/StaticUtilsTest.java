@@ -77,18 +77,15 @@ public class StaticUtilsTest extends TestCase {
         aFile = new File(subDir, "bar");
         assertTrue(aFile.createNewFile());
 
-        List<File> list = StaticUtils.buildFileList(tempDir, false);
-        assertTrue(list.isEmpty());
+        List<File> list1 = StaticUtils.buildFileList(tempDir, false);
+        assertTrue(list1.isEmpty());
 
-        list = StaticUtils.buildFileList(tempDir, true);
-        assertEquals(2, list.size());
+        List<File> list2 = StaticUtils.buildFileList(tempDir, true);
+        assertEquals(2, list2.size());
 
-        Collections.sort(list);
-        assertTrue(list.get(0).getPath().endsWith("bar"));
-
+        Collections.sort(list2);
+        assertTrue(list2.get(0).getPath().endsWith("bar"));
+        
         assertTrue(FileUtil.deleteTree(tempDir));
-
-        // TODO: Once we can use Java 1.7, add a test with a symlink loop to
-        // make sure we aren't looping infinitely
     }
 }

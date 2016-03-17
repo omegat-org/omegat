@@ -395,16 +395,17 @@ public class FileUtil {
         if (!dir.exists()) {
             return false;
         }
-        if (dir.isDirectory()) {
-            for (File file : dir.listFiles()) {
-                if (file.isFile()) {
-                    file.delete();
-                } else if (file.isDirectory()) {
+        if (dir.delete()) {
+            return true;
+        } else {
+            File[] contents = dir.listFiles();
+            if (contents != null) {
+                for (File file : contents) {
                     deleteTree(file);
                 }
             }
+            return dir.delete();
         }
-        return dir.delete();
     }
     
     public interface ICollisionCallback {

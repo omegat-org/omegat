@@ -135,7 +135,7 @@ public class StaticUtils {
      */
     public static List<File> buildFileList(File rootDir, boolean recursive) throws Exception {
         final List<File> lst = new ArrayList<File>();
-        iterateFileTree(rootDir.getCanonicalFile(), recursive, new ITreeIteratorCallback() {
+        iterateFileTree(rootDir.getAbsoluteFile(), recursive, new ITreeIteratorCallback() {
             @Override
             public void processFile(File file) {
                 lst.add(file);
@@ -343,16 +343,17 @@ public class StaticUtils {
         if (!rootDir.isDirectory()) {
             return;
         }
-        if (visited.contains(rootDir)) {
+        File canonical = rootDir.getCanonicalFile();
+        if (visited.contains(canonical)) {
             return;
         }
-        visited.add(rootDir);
+        visited.add(canonical);
         for (File file : rootDir.listFiles()) {
             if (file.isDirectory() && recursive) {
-                iterateFileTree(file.getCanonicalFile(), recursive, visited, cb);
+                iterateFileTree(file.getAbsoluteFile(), recursive, visited, cb);
             }
             if (file.isFile()) {
-                cb.processFile(file.getCanonicalFile());
+                cb.processFile(file.getAbsoluteFile());
             }
         }
     }

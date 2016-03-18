@@ -84,7 +84,8 @@ public class GlossaryTextAreaTest extends TestCore {
                 gta.setFoundResult(null, entries);
             }
         });
-        gta.clear();
+        assertFalse(gta.getText().isEmpty());
+        SwingUtilities.invokeAndWait(() -> gta.clear());
         assertTrue(gta.getText().isEmpty());
     }
 

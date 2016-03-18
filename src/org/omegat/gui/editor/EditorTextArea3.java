@@ -32,6 +32,7 @@ package org.omegat.gui.editor;
 
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -185,7 +186,7 @@ public class EditorTextArea3 extends JEditorPane {
         public void mouseClicked(MouseEvent e) {
             autoCompleter.setVisible(false);
             
-            // where is the mouse
+            // Handle double-click
             if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
                 int mousepos = viewToModel(e.getPoint());
                 boolean changed = controller.goToSegmentAtLocation(getCaretPosition());
@@ -195,12 +196,27 @@ public class EditorTextArea3 extends JEditorPane {
                     }
                 }
             }
-            if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
-                int mousepos = viewToModel(e.getPoint());
-                JPopupMenu popup = makePopupMenu(mousepos);
-                if (popup.getComponentCount() > 0) {
-                    popup.show(EditorTextArea3.this, (int) e.getPoint().getX(), (int) e.getPoint().getY());
-                }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            if (e.isPopupTrigger()) {
+                doPopup(e.getPoint());
+            }
+        };
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            if (e.isPopupTrigger()) {
+                doPopup(e.getPoint());
+            }
+        }
+
+        private void doPopup(Point p) {
+            int mousepos = viewToModel(p);
+            JPopupMenu popup = makePopupMenu(mousepos);
+            if (popup.getComponentCount() > 0) {
+                popup.show(EditorTextArea3.this, p.x, p.y);
             }
         }
     };

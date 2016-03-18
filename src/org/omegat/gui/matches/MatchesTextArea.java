@@ -465,18 +465,37 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     protected MouseListener mouseListener = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
-            // is there anything?
-            if (matches == null || matches.isEmpty())
-                return;
+            if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() > 1) {
+                setActiveMatch(getClickedItem(e.getPoint()));
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            if (e.isPopupTrigger()) {
+                doPopup(e.getPoint());
+            }
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            if (e.isPopupTrigger()) {
+                doPopup(e.getPoint());
+            }
+        }
+
+        private int getClickedItem(Point p) {
+            if (matches == null || matches.isEmpty()) {
+                return -1;
+            }
 
             // find out the clicked item
             int clickedItem = -1;
 
             // where did we click?
-            int mousepos = MatchesTextArea.this.viewToModel(e.getPoint());
+            int mousepos = MatchesTextArea.this.viewToModel(p);
 
-            int i;
-            for (i = 0; i < delimiters.size() - 1; i++) {
+            for (int i = 0; i < delimiters.size() - 1; i++) {
                 int start = delimiters.get(i);
                 int end = delimiters.get(i + 1);
 
@@ -486,22 +505,25 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                 }
             }
 
-            if (clickedItem == -1)
+            if (clickedItem == -1) {
                 clickedItem = delimiters.size() - 1;
-
-            if (clickedItem >= matches.size())
-                return;
-
-            // set up the menu
-            if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
-                JPopupMenu popup = new JPopupMenu();
-                populateContextMenu(popup, clickedItem);
-                Point p = e.getPoint();
-                popup.show(MatchesTextArea.this, p.x, p.y);
             }
-            
-            if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() > 1)
-                setActiveMatch(clickedItem);
+
+            if (clickedItem >= matches.size()) {
+                return -1;
+            }
+
+            return clickedItem;
+        }
+
+        private void doPopup(Point p) {
+            int clickedItem = getClickedItem(p);
+            if (clickedItem == -1) {
+                return;
+            }
+            JPopupMenu popup = new JPopupMenu();
+            populateContextMenu(popup, clickedItem);
+            popup.show(MatchesTextArea.this, p.x, p.y);
         }
     };
 

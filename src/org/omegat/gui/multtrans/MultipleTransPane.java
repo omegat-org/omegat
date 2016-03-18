@@ -197,18 +197,26 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
 
     protected MouseListener mouseListener = new MouseAdapter() {
         @Override
-        public void mouseClicked(MouseEvent e) {
-            if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) { // righ click
-                // is there anything?
-                if (entries.isEmpty()) {
-                    return;
-                }
-
-                JPopupMenu popup = new JPopupMenu();
-                Point p = e.getPoint();
-                populateContextMenu(popup, viewToModel(p));
-                popup.show(MultipleTransPane.this, p.x, p.y);
+        public void mousePressed(MouseEvent e) {
+            if (e.isPopupTrigger()) {
+                doPopup(e.getPoint());
             }
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            if (e.isPopupTrigger()) {
+                doPopup(e.getPoint());
+            }
+        }
+
+        private void doPopup(Point p) {
+            if (entries.isEmpty()) {
+                return;
+            }
+            JPopupMenu popup = new JPopupMenu();
+            populateContextMenu(popup, viewToModel(p));
+            popup.show(MultipleTransPane.this, p.x, p.y);
         }
     };
 

@@ -251,13 +251,23 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> i
      */
     protected MouseListener mouseListener = new MouseAdapter() {
         @Override
-        public void mouseClicked(MouseEvent e) {
-            if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
-                JPopupMenu popup = new JPopupMenu();
-                populateContextMenu(popup);
-                Point p = e.getPoint();
-                popup.show(GlossaryTextArea.this, p.x, p.y);
+        public void mousePressed(MouseEvent e) {
+            if (e.isPopupTrigger()) {
+                doPopup(e.getPoint());
             }
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            if (e.isPopupTrigger()) {
+                doPopup(e.getPoint());
+            }
+        }
+
+        private void doPopup(Point p) {
+            JPopupMenu popup = new JPopupMenu();
+            populateContextMenu(popup);
+            popup.show(GlossaryTextArea.this, p.x, p.y);
         }
     };
     

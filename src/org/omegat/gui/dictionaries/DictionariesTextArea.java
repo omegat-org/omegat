@@ -29,6 +29,7 @@ package org.omegat.gui.dictionaries;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -244,22 +245,33 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
     protected final MouseAdapter mouseCallback = new MouseAdapter() {
         @Override
-        public void mouseClicked(MouseEvent e) {
-            if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
-                UIThreadsUtil.mustBeSwingThread();
+        public void mousePressed(MouseEvent e) {
+            if (e.isPopupTrigger()) {
+                doPopup(e.getPoint());
+            }
+        }
 
-                JPopupMenu popup = new JPopupMenu();
-                int mousepos = viewToModel(e.getPoint());
-                final String word = getWordAtOffset(mousepos);
-                if (word != null) {
-                    JMenuItem item = popup.add(StringUtil.format(OStrings.getString("DICTIONARY_HIDE"), word));
-                    item.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                            manager.addIgnoreWord(word);
-                        };
-                    });
-                    popup.show(DictionariesTextArea.this, e.getX(), e.getY());
-                }
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            if (e.isPopupTrigger()) {
+                doPopup(e.getPoint());
+            }
+        }
+
+        private void doPopup(Point p) {
+            UIThreadsUtil.mustBeSwingThread();
+
+            JPopupMenu popup = new JPopupMenu();
+            int mousepos = viewToModel(p);
+            final String word = getWordAtOffset(mousepos);
+            if (word != null) {
+                JMenuItem item = popup.add(StringUtil.format(OStrings.getString("DICTIONARY_HIDE"), word));
+                item.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        manager.addIgnoreWord(word);
+                    };
+                });
+                popup.show(DictionariesTextArea.this, p.x, p.y);
             }
         }
     };

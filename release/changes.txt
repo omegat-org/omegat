@@ -1,7 +1,9 @@
 ----------------------------------------------------------------------
  OmegaT 3.7.0
 ----------------------------------------------------------------------
- 5 Enhancements
+ 10 Enhancements
+  1 Bug fix
+  0 Localisation updates
 ----------------------------------------------------------------------
 3.7.0 vs 3.6.0
 
@@ -19,12 +21,32 @@
   - Update LanguageTool to 3.2 
   https://sourceforge.net/p/omegat/feature-requests/970/
 
+  - Dismiss auto-completer window after hitting right/left arrow keys
+  https://sourceforge.net/p/omegat/feature-requests/1192/
+
+  - Support ssh-agent for git public key authentication 
+  https://sourceforge.net/p/omegat/feature-requests/1126/
+
+  - Add action menus to panes
+  https://sourceforge.net/p/omegat/feature-requests/1196/
+
+  - Notify user when minimized panes have content 
+  https://sourceforge.net/p/omegat/feature-requests/1197/
+
+  - Add Segment Properties pane
+  https://sourceforge.net/p/omegat/feature-requests/1198/
+
   Other changes
 
   - Lucene updated to 5.2.1
 The tokenizer behaviour is removed in Project Properties. All behaviour
 used are "current", except for German, where "Lucene 3.0" was kept, as
 it gave better results.
+
+  Bug fixes:
+
+  - Ctrl+click does not activate context menu on OS X 
+  https://sourceforge.net/p/omegat/bugs/805/
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 (2016-03-09)

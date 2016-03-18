@@ -48,7 +48,6 @@
 	<classpathentry kind="lib" path="lib/LanguageTool-3.2/languagetool-core.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool-3.2/LanguageTool-data.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool-3.2/lucene-backward-codecs.jar"/>
-	<classpathentry kind="lib" path="lib/LanguageTool-3.2/lucene-gosen-ipadic.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool-3.2/morfologik-fsa.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool-3.2/morfologik-polish.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool-3.2/morfologik-speller.jar"/>
@@ -67,5 +66,6 @@
 	<classpathentry kind="lib" path="lib/jsch.agentproxy.sshagent-0.0.9.jar"/>
 	<classpathentry kind="lib" path="lib/jsch.agentproxy.svnkit-trilead-ssh2-0.0.9.jar"/>
 	<classpathentry kind="lib" path="lib/jsch.agentproxy.usocket-jna-0.0.9.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool-3.2/lucene-gosen-5.0.0-ipadic.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

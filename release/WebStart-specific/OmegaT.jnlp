@@ -81,7 +81,7 @@
 				<jar href="languagetool-core.jar"  />
 				<jar href="LanguageTool-data.jar"  />
 				<jar href="lucene-backward-codecs.jar"  />
-				<jar href="lucene-gosen-ipadic.jar"  />
+				<jar href="lucene-gosen-5.0.0-ipadic.jar"  />
 				<jar href="morfologik-fsa.jar"  />
 				<jar href="morfologik-polish.jar"  />
 				<jar href="morfologik-speller.jar"  />

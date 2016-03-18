@@ -27,20 +27,6 @@ used are "current", except for German, where "Lucene 3.0" was kept, as
 it gave better results.
 
 ----------------------------------------------------------------------
- OmegaT 3.6.0 update 1
-----------------------------------------------------------------------
-  0 Enhancement
-  1 Bug fix
-  0 Localisation update
-----------------------------------------------------------------------
-3.6.0 update 1 vs 3.5.3
-
-  Bug fixes:
-
-  - Cannot open projects residing in path with symbolic link
-  https://sourceforge.net/p/omegat/bugs/804/
-
-----------------------------------------------------------------------
  OmegaT 3.6.0 (2016-03-09)
 ----------------------------------------------------------------------
  16 Enhancements
@@ -138,7 +124,7 @@ bug comments for instructions on adding the certificate to the trust store.
  OmegaT 3.5.3 update 1
 ----------------------------------------------------------------------
    4 Enhancements
-   8 Bug fixes
+   9 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 3.5.3 update 1 vs 3.5.3
@@ -181,6 +167,9 @@ remained at the end of lines when the line was cut on a space.
 
   - Linux install script has invalid shebang, is incompatible with dash
   https://sourceforge.net/p/omegat/bugs/801/
+
+  - Cannot open projects residing in path with symbolic link
+  https://sourceforge.net/p/omegat/bugs/804/
 
   Localisation Updates:
 

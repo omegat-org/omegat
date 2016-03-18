@@ -40,7 +40,7 @@ public class ScriptingTest extends TestCore {
      * NPE while initializing quick script menu entries when the script folder path
      * member is null (failed to be set because it was invalid).
      * 
-     * @see bug https://sourceforge.net/p/omegat/bugs/775/
+     * @see <a href="https://sourceforge.net/p/omegat/bugs/775/">Bug #775</a>
      */
     public void testLoadScriptingWindow() throws Exception {
         // Set quick script

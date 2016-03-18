@@ -50,35 +50,104 @@ public class ConflictDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        text = new javax.swing.JTextArea();
-        jPanel1 = new javax.swing.JPanel();
-        btnOk = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        lblExplanation = new javax.swing.JTextArea();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        textLeft = new javax.swing.JTextArea();
+        jButton3 = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        textCenter = new javax.swing.JTextArea();
+        btnMine = new javax.swing.JButton();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        textRight = new javax.swing.JTextArea();
+        btnTheirs = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(OStrings.getString("CONFLICT_DIALOG_TITLE")); // NOI18N
-        setPreferredSize(new java.awt.Dimension(400, 250));
 
-        text.setEditable(false);
-        text.setColumns(20);
-        text.setLineWrap(true);
-        text.setRows(10);
-        text.setWrapStyleWord(true);
-        text.setOpaque(false);
-        jScrollPane1.setViewportView(text);
+        jPanel3.setLayout(new java.awt.BorderLayout());
 
-        getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jPanel5.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        lblExplanation.setEditable(false);
+        lblExplanation.setLineWrap(true);
+        lblExplanation.setText(OStrings.getString("CONFLICT_DIALOG_TEXT")); // NOI18N
+        lblExplanation.setWrapStyleWord(true);
+        lblExplanation.setOpaque(false);
+        jPanel5.add(lblExplanation, java.awt.BorderLayout.NORTH);
 
-        org.openide.awt.Mnemonics.setLocalizedText(btnOk, OStrings.getString("BUTTON_OK")); // NOI18N
-        jPanel1.add(btnOk);
+        jPanel3.add(jPanel5, java.awt.BorderLayout.NORTH);
 
-        org.openide.awt.Mnemonics.setLocalizedText(btnCancel, OStrings.getString("BUTTON_CANCEL")); // NOI18N
-        jPanel1.add(btnCancel);
+        jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
+        jPanel6.setLayout(new java.awt.BorderLayout());
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, OStrings.getString("CONFLICT_DIALOG_LABEL_BASE")); // NOI18N
+        jPanel6.add(jLabel1, java.awt.BorderLayout.NORTH);
+
+        textLeft.setEditable(false);
+        textLeft.setLineWrap(true);
+        textLeft.setWrapStyleWord(true);
+        textLeft.setOpaque(false);
+        jScrollPane4.setViewportView(textLeft);
+
+        jPanel6.add(jScrollPane4, java.awt.BorderLayout.CENTER);
+
+        jButton3.setBorderPainted(false);
+        jButton3.setEnabled(false);
+        jPanel6.add(jButton3, java.awt.BorderLayout.PAGE_END);
+
+        jPanel4.add(jPanel6);
+
+        jPanel7.setLayout(new java.awt.BorderLayout());
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, OStrings.getString("CONFLICT_DIALOG_LABEL_MINE")); // NOI18N
+        jPanel7.add(jLabel2, java.awt.BorderLayout.NORTH);
+
+        textCenter.setEditable(false);
+        textCenter.setLineWrap(true);
+        textCenter.setWrapStyleWord(true);
+        textCenter.setOpaque(false);
+        jScrollPane5.setViewportView(textCenter);
+
+        jPanel7.add(jScrollPane5, java.awt.BorderLayout.CENTER);
+
+        org.openide.awt.Mnemonics.setLocalizedText(btnMine, OStrings.getString("CONFLICT_DIALOG_BUTTON_MINE")); // NOI18N
+        jPanel7.add(btnMine, java.awt.BorderLayout.PAGE_END);
+
+        jPanel4.add(jPanel7);
+
+        jPanel9.setLayout(new java.awt.BorderLayout());
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, OStrings.getString("CONFLICT_DIALOG_LABEL_THEIRS")); // NOI18N
+        jPanel9.add(jLabel4, java.awt.BorderLayout.NORTH);
+
+        textRight.setEditable(false);
+        textRight.setLineWrap(true);
+        textRight.setWrapStyleWord(true);
+        textRight.setOpaque(false);
+        jScrollPane6.setViewportView(textRight);
+
+        jPanel9.add(jScrollPane6, java.awt.BorderLayout.CENTER);
+
+        org.openide.awt.Mnemonics.setLocalizedText(btnTheirs, OStrings.getString("CONFLICT_DIALOG_BUTTON_THEIRS")); // NOI18N
+        jPanel9.add(btnTheirs, java.awt.BorderLayout.PAGE_END);
+
+        jPanel4.add(jPanel9);
+
+        jPanel3.add(jPanel4, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -126,11 +195,25 @@ public class ConflictDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnCancel;
-    public javax.swing.JButton btnOk;
+    public javax.swing.JButton btnMine;
+    public javax.swing.JButton btnTheirs;
     public javax.swing.ButtonGroup buttonGroup1;
-    public javax.swing.JPanel jPanel1;
-    public javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTextArea text;
+    private javax.swing.JButton jButton3;
+    public javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel2;
+    public javax.swing.JLabel jLabel4;
+    public javax.swing.JPanel jPanel3;
+    public javax.swing.JPanel jPanel4;
+    public javax.swing.JPanel jPanel5;
+    public javax.swing.JPanel jPanel6;
+    public javax.swing.JPanel jPanel7;
+    public javax.swing.JPanel jPanel9;
+    public javax.swing.JScrollPane jScrollPane4;
+    public javax.swing.JScrollPane jScrollPane5;
+    public javax.swing.JScrollPane jScrollPane6;
+    public javax.swing.JTextArea lblExplanation;
+    public javax.swing.JTextArea textCenter;
+    public javax.swing.JTextArea textLeft;
+    public javax.swing.JTextArea textRight;
     // End of variables declaration//GEN-END:variables
 }

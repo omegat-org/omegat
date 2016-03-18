@@ -1175,9 +1175,9 @@ public class EditorController implements IEditor {
                             previousTranslations);
                     break;
                 } catch (OptimisticLockingFail ex) {
-                    boolean result = new ConflictDialogController().show(ex.getOldTranslationText(),
+                    String result = new ConflictDialogController().show(ex.getOldTranslationText(),
                             ex.getNewTranslationText(), newen.translation);
-                    if (result) {
+                    if (result == newen.translation) {
                         // next iteration
                         previousTranslations = ex.getPrevious();
                     } else {

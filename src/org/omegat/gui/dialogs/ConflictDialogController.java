@@ -27,10 +27,8 @@ package org.omegat.gui.dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.MessageFormat;
 
 import org.omegat.core.Core;
-import org.omegat.util.OStrings;
 
 /**
  * Show conflict dialog.
@@ -38,40 +36,46 @@ import org.omegat.util.OStrings;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ConflictDialogController {
-    private volatile boolean result;
+    private static final int MAX_CODEPOINTS = 100;
+    
+    private volatile String result;
 
-    public boolean show(String baseText, String remoteText, String localText) {
+    public String show(String baseText, String remoteText, String localText) {
         final ConflictDialog dialog = new ConflictDialog(Core.getMainWindow().getApplicationFrame(), true);
 
-        if (baseText != null && baseText.codePointCount(0, baseText.length()) > 25) {
-            baseText = baseText.substring(0, baseText.offsetByCodePoints(0, 25)) + "...";
-        }
-        if (remoteText != null && remoteText.codePointCount(0, remoteText.length()) > 25) {
-            remoteText = remoteText.substring(0, remoteText.offsetByCodePoints(0, 25)) + "...";
-        }
-        if (localText != null && localText.codePointCount(0, localText.length()) > 25) {
-            localText = localText.substring(0, localText.offsetByCodePoints(0, 25)) + "...";
-        }
-        dialog.text.setText(MessageFormat.format(OStrings.getString("CONFLICT_DIALOG_TEXT"), baseText,
-                remoteText, localText));
+        dialog.textLeft.setText(prepareText(baseText));
+        dialog.textCenter.setText(prepareText(localText));
+        dialog.textRight.setText(prepareText(remoteText));
 
-        dialog.btnOk.addActionListener(new ActionListener() {
+        dialog.btnMine.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                result = true;
+                result = localText;
                 dialog.dispose();
             }
         });
-        dialog.btnCancel.addActionListener(new ActionListener() {
+        dialog.btnTheirs.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                result = remoteText;
                 dialog.dispose();
             }
         });
 
         dialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
+        dialog.pack();
         dialog.setVisible(true);
 
         return result;
+    }
+    
+    private static String prepareText(String text) {
+        if (text == null) {
+            return String.valueOf(text);
+        } else if (text.codePointCount(0, text.length()) > MAX_CODEPOINTS) {
+            return text.substring(0, text.offsetByCodePoints(0, MAX_CODEPOINTS)) + "...";
+        } else {
+            return text;
+        }
     }
 }

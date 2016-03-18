@@ -70,7 +70,7 @@ public class ConflictDialog extends javax.swing.JDialog {
         textRight = new javax.swing.JTextArea();
         btnTheirs = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle(OStrings.getString("CONFLICT_DIALOG_TITLE")); // NOI18N
 
         jPanel3.setLayout(new java.awt.BorderLayout());

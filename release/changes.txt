@@ -2,7 +2,7 @@
  OmegaT 3.5.3 update 1
 ----------------------------------------------------------------------
    4 Enhancements
-   8 Bug fixes
+   9 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 3.5.3 update 1 vs 3.5.3
@@ -45,6 +45,9 @@ remained at the end of lines when the line was cut on a space.
 
   - Linux install script has invalid shebang, is incompatible with dash
   https://sourceforge.net/p/omegat/bugs/801/
+
+  - Cannot open projects residing in path with symbolic link
+  https://sourceforge.net/p/omegat/bugs/804/
 
   Localisation Updates:
 

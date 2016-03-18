@@ -54,35 +54,33 @@ public abstract class TestCore extends XMLTestCase {
 
         RuntimePreferences.setConfigDir(configDir.getAbsolutePath());
 
-        final JMenu menu = new JMenu();
-
         final IMainMenu mainMenu = new IMainMenu() {
             public JMenu getToolsMenu() {
-                return menu;
+                return new JMenu();
             }
 
             public JMenu getProjectMenu() {
-                return menu;
+                return new JMenu();
             }
 
             public JMenu getOptionsMenu() {
-                return menu;
+                return new JMenu();
             }
 
             public JMenu getMachineTranslationMenu() {
-                return menu;
+                return new JMenu();
             }
 
             public JMenu getGlossaryMenu() {
-                return menu;
+                return new JMenu();
             }
 
 			public JMenuItem getProjectRecentMenuItem() {
-				return menu;
+                return new JMenu();
 			}
 
             public JMenu getAutoCompletionMenu() {
-                return menu;
+                return new JMenu();
             }
 
             public void invokeAction(String action, int modifiers) {

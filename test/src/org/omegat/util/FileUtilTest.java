@@ -46,7 +46,6 @@ public class FileUtilTest extends TestCase {
     @Override
     protected void setUp() throws Exception {
         base = FileUtil.createTempDir();
-        System.out.println("Base: " + base.getAbsolutePath());
     }
 
     @Override
@@ -189,5 +188,18 @@ public class FileUtilTest extends TestCase {
         }
         stream.close();
         return sb.toString();
+    }
+
+    public void testDeleteTree() throws Exception {
+        // /root
+        File root = new File(base, "root");
+        // /root/sub
+        File sub = new File(root, "sub");
+        assertTrue(sub.mkdirs());
+
+        // Can't delete /root yet because it's not empty
+        assertFalse(root.delete());
+        assertTrue(FileUtil.deleteTree(root));
+        assertFalse(root.exists());
     }
 }

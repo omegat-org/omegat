@@ -58,6 +58,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.apache.commons.io.IOUtils;
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.omegat.CLIParameters;
@@ -477,11 +478,10 @@ public class RealProject implements IProject {
             Log.log(ex);
         }
         if (lock == null) {
-            try {
-                lockChannel.close();
-            } catch (Throwable ex) {
-            }
+            IOUtils.closeQuietly(lockChannel);
+            IOUtils.closeQuietly(raFile);
             lockChannel = null;
+            raFile = null;
             return false;
         } else {
             return true;
@@ -507,6 +507,9 @@ public class RealProject implements IProject {
             }
         } catch (Throwable ex) {
             Log.log(ex);
+        } finally {
+            IOUtils.closeQuietly(lockChannel);
+            IOUtils.closeQuietly(raFile);
         }
     }
 

@@ -40,7 +40,7 @@
                <dd>
                   <dl>
                      <dt><span class="section"><a href="chapter.menu.html#submenu.Project">1.1. Project</a></span></dt>
-                     <dt><span class="section"><a href="chapter.menu.html#d0e3077">1.2. Edit</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#d0e3109">1.2. Edit</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#submenu.GoTo">1.3. Go to</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#submenu.View">1.4. View</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#submenu.Tools">1.5. Tools</a></span></dt>
@@ -51,7 +51,7 @@
                <dt><span class="section"><a href="chapter.menu.html#keyboard.shortcuts">2. Keyboard shortcuts</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.menu.html#d0e4067">2.1. Project management</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#d0e4159">2.1. Project management</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#keyboard.editing">2.2. Editing</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#keyboard.moving.around">2.3. Moving around</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#keyboard.other">2.4. Other</a></span></dt>
@@ -63,7 +63,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="ch04.main.menu"></a>1.&nbsp;<a class="indexterm" name="d0e2842"></a>Main Menu
+                     <h2 class="title" style="clear: both"><a name="ch04.main.menu"></a>1.&nbsp;<a class="indexterm" name="d0e2863"></a>Main Menu
                      </h2>
                   </div>
                </div>
@@ -110,11 +110,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.Project"></a>1.1.&nbsp;Project<a class="indexterm" name="d0e2900"></a></h3>
+                        <h3 class="title"><a name="submenu.Project"></a>1.1.&nbsp;Project<a class="indexterm" name="d0e2921"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e2905"></a><p class="title"><b>Table&nbsp;5.2.&nbsp;Project menu</b></p>
+               <div class="table"><a name="d0e2926"></a><p class="title"><b>Table&nbsp;5.2.&nbsp;Project menu</b></p>
                   <div class="table-contents">
                      <table summary="Project menu" border="1">
                         <colgroup>
@@ -218,6 +218,20 @@
                               </td>
                            </tr>
                            <tr>
+                              <td align="left"><span class="guimenuitem">Access Project
+                                                  Contents</span></td>
+                              <td align="left"><span class="keycap"><strong></strong></span></td>
+                              <td>Gives access to the project folders.
+                                 <p>In addition,
+                                                  two menu entries allow opening directly the current source and
+                                                  target documents and the writable glossary. The documents are
+                                                  opened by the application chosen by the operating system. If the
+                                                  documents are not available, the entry is greyed
+                                                  out.
+                                 </p>
+                              </td>
+                           </tr>
+                           <tr>
                               <td align="left"><span class="guimenuitem">Quit</span></td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Q</strong></span></td>
                               <td>Saves the project and quits
@@ -234,7 +248,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e3077"></a>1.2.&nbsp;Edit<a class="indexterm" name="d0e3080"></a></h3>
+                        <h3 class="title"><a name="d0e3109"></a>1.2.&nbsp;Edit<a class="indexterm" name="d0e3112"></a></h3>
                      </div>
                   </div>
                </div>
@@ -242,7 +256,7 @@
                         are not displayed in this menu, but are available using your system
                         shortcuts. For example:
                </p>
-               <div class="table"><a name="d0e3087"></a><p class="title"><b>Table&nbsp;5.3.&nbsp;Copy/cut/paste shortcuts</b></p>
+               <div class="table"><a name="d0e3119"></a><p class="title"><b>Table&nbsp;5.3.&nbsp;Copy/cut/paste shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Copy/cut/paste shortcuts" border="1">
                         <colgroup>
@@ -274,7 +288,7 @@
                      </table>
                   </div>
                </div><br class="table-break"><p>The Edit menu itself contains the following items:</p>
-               <div class="table"><a name="d0e3132"></a><p class="title"><b>Table&nbsp;5.4.&nbsp;Edit menu</b></p>
+               <div class="table"><a name="d0e3164"></a><p class="title"><b>Table&nbsp;5.4.&nbsp;Edit menu</b></p>
                   <div class="table-contents">
                      <table summary="Edit menu" border="1">
                         <colgroup>
@@ -300,19 +314,29 @@
                               </td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Replace With Match</span></td>
+                              <td align="left"><span class="guimenuitem">Replace With Match or
+                                                  Selection</span></td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span></td>
                               <td>Replaces the whole target segment with the currently
                                                selected fuzzy match (by default the first match is
                                                selected).
+                                 <p>If some texts are selected within the fuzzy
+                                                  match, only this selection will replace the whole target
+                                                  segment.
+                                 </p>
                               </td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Insert Match</span></td>
+                              <td align="left"><span class="guimenuitem">Insert Match or
+                                                  Selection</span></td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span></td>
                               <td>Inserts the currently selected fuzzy match at the cursor
                                                position. If part of the target segment has been selected, this
                                                function overwrites the selected portion.
+                                 <p>If some texts are
+                                                  selected within the fuzzy match, only this selection will be
+                                                  inserted at the cursor position.
+                                 </p>
                               </td>
                            </tr>
                            <tr>
@@ -341,7 +365,7 @@
                               <td align="left"><span class="guimenuitem">Insert Missing Source
                                                   Tags</span></td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>T</strong></span></td>
-                              <td><a class="indexterm" name="d0e3240"></a>Inserts the source tags (if they where missing) at
+                              <td><a class="indexterm" name="d0e3276"></a>Inserts the source tags (if they where missing) at
                                                the cursor position.
                               </td>
                            </tr>
@@ -349,7 +373,7 @@
                               <td align="left"><span class="guimenuitem">Insert Next Missing
                                                   Tag</span></td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></td>
-                              <td><a class="indexterm" name="d0e3257"></a>Inserts only one tag (among the missing ones) at
+                              <td><a class="indexterm" name="d0e3293"></a>Inserts only one tag (among the missing ones) at
                                                the cursor position.
                               </td>
                            </tr>
@@ -404,10 +428,10 @@
                               <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>F3</strong></span> (see text)
                               </td>
                               <td>Changes the case of the highlighted text in the target
-                                               segment to the selected option (Lower case, Upper case or Title
-                                               case). Use Shift+F3 <a class="indexterm" name="d0e3377"></a>to cycle through the three alternatives. If no
-                                               text is selected, <span class="application">OmegaT</span> selects the
-                                               word that contains the letter immediately to the right of the
+                                               segment to the selected option (Lower case, Upper case, Title
+                                               case or Sentence case). Use Shift+F3 <a class="indexterm" name="d0e3413"></a>to cycle through the four alternatives. If no text
+                                               is selected, <span class="application">OmegaT</span> selects the word
+                                               that contains the letter immediately to the right of the
                                                cursor.
                               </td>
                            </tr>
@@ -473,11 +497,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.GoTo"></a>1.3.&nbsp;Go to<a class="indexterm" name="d0e3445"></a></h3>
+                        <h3 class="title"><a name="submenu.GoTo"></a>1.3.&nbsp;Go to<a class="indexterm" name="d0e3481"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3450"></a><p class="title"><b>Table&nbsp;5.5.&nbsp;Go To menu</b></p>
+               <div class="table"><a name="d0e3486"></a><p class="title"><b>Table&nbsp;5.5.&nbsp;Go To menu</b></p>
                   <div class="table-contents">
                      <table summary="Go To menu" border="1">
                         <colgroup>
@@ -572,11 +596,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.View"></a>1.4.&nbsp;View<a class="indexterm" name="d0e3598"></a></h3>
+                        <h3 class="title"><a name="submenu.View"></a>1.4.&nbsp;View<a class="indexterm" name="d0e3634"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3603"></a><p class="title"><b>Table&nbsp;5.6.&nbsp;View menu</b></p>
+               <div class="table"><a name="d0e3639"></a><p class="title"><b>Table&nbsp;5.6.&nbsp;View menu</b></p>
                   <div class="table-contents">
                      <table summary="View menu" border="1">
                         <colgroup>
@@ -655,6 +679,17 @@
                                                   For Enhancement</a></td>
                            </tr>
                            <tr>
+                              <td align="left"><span class="guimenuitem">Aggressive Font
+                                                  Fallback</span></td>
+                              <td>Check this option in case OmegaT does not display some
+                                               glyphs properly (even if the fonts containing the relevant
+                                               glyphs are installed on your machine). Note: on Windows it seems
+                                               that this manual font fallback mechanism can interfere with
+                                               standard font fallback, causing undesirable font substitution.
+                                               For that reason, it is OFF by default.
+                              </td>
+                           </tr>
+                           <tr>
                               <td align="left"><span class="guimenuitem">Modification Info</span></td>
                               <td>Setting the Display Modification option to
                                                <span class="emphasis"><em>Current segment</em></span> will display the time and
@@ -675,12 +710,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.Tools"></a>1.5.&nbsp;Tools<a class="indexterm" name="d0e3690"></a></h3>
+                        <h3 class="title"><a name="submenu.Tools"></a>1.5.&nbsp;Tools<a class="indexterm" name="d0e3732"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3695"></a><p class="title"><b>Table&nbsp;5.7.&nbsp;Tools menu</b></p>
-                  <div class="table-contents"><a class="indexterm" name="d0e3698"></a><a class="indexterm" name="d0e3703"></a><a class="indexterm" name="d0e3708"></a><table summary="Tools menu" border="1">
+               <div class="table"><a name="d0e3737"></a><p class="title"><b>Table&nbsp;5.7.&nbsp;Tools menu</b></p>
+                  <div class="table-contents"><a class="indexterm" name="d0e3740"></a><a class="indexterm" name="d0e3745"></a><a class="indexterm" name="d0e3750"></a><table summary="Tools menu" border="1">
                         <colgroup>
                            <col align="left">
                            <col>
@@ -738,12 +773,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.Options"></a>1.6.&nbsp;<a class="indexterm" name="d0e3764"></a>Options
+                        <h3 class="title"><a name="submenu.Options"></a>1.6.&nbsp;<a class="indexterm" name="d0e3806"></a>Options
                         </h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3770"></a><p class="title"><b>Table&nbsp;5.8.&nbsp;Options menu</b></p>
+               <div class="table"><a name="d0e3812"></a><p class="title"><b>Table&nbsp;5.8.&nbsp;Options menu</b></p>
                   <div class="table-contents">
                      <table summary="Options menu" border="1">
                         <colgroup>
@@ -770,6 +805,20 @@
                               <td>Allows you to activate/deactivate the Machine Translation
                                                tools offered. When active, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> will insert the suggestion into the target part of
                                                the current segment.
+                                 <p>For confidentiality reasons, you may
+                                                  want to not send all the segments to the Machine Translation
+                                                  tool. By unchecking <span class="bold"><strong>Automatically Fetch
+                                                        Translations</strong></span> option, machine translations will be
+                                                  fetched only upon invoking <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> (<span class="keycap"><strong>Cmd</strong></span>+<span class="keycap"><strong>M</strong></span> on OS X) on the current segment. Then you must use
+                                                  <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> a second time, to insert the
+                                                  suggestion.
+                                 </p>
+                                 <p>Check <span class="bold"><strong>Untranslated
+                                                        Segments Only</strong></span> option to deactivate Machine
+                                                  Translation tools on already translated segments. Note: in that
+                                                  case, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> can still be used, to force a Machine Translation
+                                                  call on an already translated segment.
+                                 </p>
                               </td>
                            </tr>
                            <tr>
@@ -779,9 +828,26 @@
                                                contextual information with the terms (that come from TBX
                                                glossaries located in <code class="filename">glossary</code> folder) in
                                                the Glossary pane.
-                                 <p>The 3 other options are described in the
-                                                  specific page concerning <a class="link" href="chapter.TaaS.html#section.TaaS.options" title="1.&nbsp;Generalities">TaaS</a> (Terminology as a
-                                                  Service).
+                                 <p>If <span class="guimenuitem">Use Terms Appearing
+                                                     Separately in the Source Text</span> option is ON, the
+                                                  glossary entry "itema itemb" will be found in the source text
+                                                  "itema other word itemb". If the option is OFF, the glossary
+                                                  entry above will not be found.
+                                 </p>
+                                 <p>If <span class="guimenuitem">Use
+                                                     Stemming for Glossary Entries</span> option is ON, with
+                                                  an English source text, the glossary entry "element" will be
+                                                  found if the source text contains "elements". If the option is
+                                                  OFF, the glossary entry above will not be found.
+                                 </p>
+                                 <p>The
+                                                  <span class="guimenuitem">Replace Glossary Hits when Inserting Source
+                                                     Text</span> option allows to [vbdx:??]
+                                 </p>
+                                 <p>The 3
+                                                  other options are described in the specific page concerning
+                                                  <a class="link" href="chapter.TaaS.html#section.TaaS.options" title="1.&nbsp;Generalities">TaaS</a> (Terminology as
+                                                  a Service).
                                  </p>
                               </td>
                            </tr>
@@ -816,11 +882,14 @@
                                  </p>
                                  <p>Auto-completer is launched within the
                                                   target segment via <span class="bold"><strong>Ctrl+Space</strong></span>
-                                                  shortcut. By default, it opens automatically with relevant
-                                                  suggestions, but this can be turned off by unchecking <span class="bold"><strong>Show Relevant Suggestions Automatically</strong></span>
-                                                  option.
+                                                  shortcut.
                                  </p>
-                                 <p></p>
+                                 <p>If <span class="bold"><strong>Show Relevant
+                                                        Suggestions Automatically</strong></span> option is checked,
+                                                  Auto-completer is launched automatically by typing the first
+                                                  letter of a translated glossary entry, or by typing "&lt;" in
+                                                  case of tags.
+                                 </p>
                               </td>
                            </tr>
                            <tr>
@@ -938,11 +1007,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.Help"></a>1.7.&nbsp;Help<a class="indexterm" name="d0e3980"></a></h3>
+                        <h3 class="title"><a name="submenu.Help"></a>1.7.&nbsp;Help<a class="indexterm" name="d0e4072"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3985"></a><p class="title"><b>Table&nbsp;5.9.&nbsp;Help menu</b></p>
+               <div class="table"><a name="d0e4077"></a><p class="title"><b>Table&nbsp;5.9.&nbsp;Help menu</b></p>
                   <div class="table-contents">
                      <table summary="Help menu" border="1">
                         <colgroup>
@@ -984,7 +1053,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="keyboard.shortcuts"></a>2.&nbsp;Keyboard shortcuts<a class="indexterm" name="d0e4020"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="keyboard.shortcuts"></a>2.&nbsp;Keyboard shortcuts<a class="indexterm" name="d0e4112"></a></h2>
                   </div>
                </div>
             </div>
@@ -1043,11 +1112,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4067"></a>2.1.&nbsp;<a class="indexterm" name="d0e4069"></a>Project management<a class="indexterm" name="d0e4075"></a></h3>
+                        <h3 class="title"><a name="d0e4159"></a>2.1.&nbsp;<a class="indexterm" name="d0e4161"></a>Project management<a class="indexterm" name="d0e4167"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e4080"></a><p class="title"><b>Table&nbsp;5.10.&nbsp;Project management shortcuts</b></p>
+               <div class="table"><a name="d0e4172"></a><p class="title"><b>Table&nbsp;5.10.&nbsp;Project management shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Project management shortcuts" border="1">
                         <colgroup>
@@ -1097,11 +1166,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.editing"></a>2.2.&nbsp;<a class="indexterm" name="d0e4149"></a>Editing<a class="indexterm" name="d0e4155"></a></h3>
+                        <h3 class="title"><a name="keyboard.editing"></a>2.2.&nbsp;<a class="indexterm" name="d0e4241"></a>Editing<a class="indexterm" name="d0e4247"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e4160"></a><p class="title"><b>Table&nbsp;5.11.&nbsp;Editing shortcuts</b></p>
+               <div class="table"><a name="d0e4252"></a><p class="title"><b>Table&nbsp;5.11.&nbsp;Editing shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Editing shortcuts" border="1">
                         <colgroup>
@@ -1205,12 +1274,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.moving.around"></a>2.3.&nbsp;<a class="indexterm" name="d0e4305"></a>Moving around
+                        <h3 class="title"><a name="keyboard.moving.around"></a>2.3.&nbsp;<a class="indexterm" name="d0e4397"></a>Moving around
                         </h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e4311"></a><p class="title"><b>Table&nbsp;5.12.&nbsp;Moving around shortcuts</b></p>
+               <div class="table"><a name="d0e4403"></a><p class="title"><b>Table&nbsp;5.12.&nbsp;Moving around shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Moving around shortcuts" border="1">
                         <colgroup>
@@ -1260,12 +1329,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.other"></a>2.4.&nbsp;<a class="indexterm" name="d0e4392"></a>Other
+                        <h3 class="title"><a name="keyboard.other"></a>2.4.&nbsp;<a class="indexterm" name="d0e4484"></a>Other
                         </h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e4398"></a><p class="title"><b>Table&nbsp;5.13.&nbsp;Various shortcuts</b></p>
+               <div class="table"><a name="d0e4490"></a><p class="title"><b>Table&nbsp;5.13.&nbsp;Various shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Various shortcuts" border="1">
                         <colgroup>

@@ -63,9 +63,9 @@
     <para>You can add new scripts there, so they will appear in the list of
     available scripts in the Scripting window.</para>
 
-    <para>An up-to-date list of available scripts can be found here: [vbdx:
-    existe-t-il une liste officielle, comme celle des plugins sur
-    https://sourceforge.net/p/omegat/wiki/Plugins/ ?] </para>
+    <para>Some additional scripts can be found here: 
+     <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink>
+    </para>
   </section>
 
   <section>

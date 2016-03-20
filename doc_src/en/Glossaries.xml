@@ -124,12 +124,14 @@
     information. You can have entries with the target column missing, i.e.
     just containing the source term and the comment.</para>
 
-    <para>Glossary files can be either in system default encoding (and
-    indicated by the extension .tab) or in UTF-8 (the extension .utf8 or .txt)
-    or in UTF-16 LE (the extension .txt). Also supported is the CSV format.
-    This format is the same as the tab separated one: source term, target
-    term. Comment fields are separated by a comma ','. Strings can be enclosed
-    by quotes ", which allows having a comma inside a string:</para>
+    <para>The encoding of glossaries is determined automatically. Of course,
+    the encoding must be compatible with both the languages contained, so
+    Unicode is recommended.</para>
+
+    <para>Also supported is the CSV format. This format is the same as the tab
+    separated one: source term, target term. Comment fields are separated by a
+    comma ','. Strings can be enclosed by quotes ", which allows having a
+    comma inside a string:</para>
 
     <para><literal>"This is a source term, which contains a comma","c'est un
     terme, qui contient une virgule"</literal></para>

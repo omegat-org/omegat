@@ -57,11 +57,15 @@
     </itemizedlist>
 
     <para>By default, scripts are stored in the "scripts" folder located in
-    OmegaT installation folder (the folder that contains the OmegaT.jar).
-    </para>
+    OmegaT installation folder (the folder that contains the
+    OmegaT.jar).</para>
 
     <para>You can add new scripts there, so they will appear in the list of
     available scripts in the Scripting window.</para>
+
+    <para>Some additional scripts can be found here: 
+     <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink>
+    </para>
   </section>
 
   <section>

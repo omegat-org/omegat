@@ -59,7 +59,8 @@
         <secondary>Dialog</secondary>
       </indexterm></title>
 
-    <para>This dialog lists available file filters. Should you wish not to use
+    <para>This dialog lists available file filters, where the filters used by
+    the current project are displayed in bold. Should you wish not to use
     OmegaT to translate files of a certain type, you can turn off the
     corresponding filter by deactivating the check box beside its name. OmegaT
     will then omit the appropriate files while loading projects, and will copy

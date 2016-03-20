@@ -104,36 +104,42 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
     @Override
     public boolean processKeys(KeyEvent e) {
         
-        if (StaticUtils.isKey(e, KeyEvent.VK_UP, 0)) {
+        if (StaticUtils.isKey(e, KeyEvent.VK_UP, 0)
+                || StaticUtils.isKey(e, KeyEvent.VK_P, KeyEvent.CTRL_MASK)) {
             // process key UP
             selectPreviousPossibleValueUp();
             return true;
         }
 
-        if (StaticUtils.isKey(e, KeyEvent.VK_LEFT, 0)) {
+        if (StaticUtils.isKey(e, KeyEvent.VK_LEFT, 0)
+                || StaticUtils.isKey(e, KeyEvent.VK_B, KeyEvent.CTRL_MASK)) {
             // process key LEFT
             selectPreviousPossibleValueLeft();
             return true;
         }
         
-        if (StaticUtils.isKey(e, KeyEvent.VK_DOWN, 0)) {
+        if (StaticUtils.isKey(e, KeyEvent.VK_DOWN, 0)
+                || StaticUtils.isKey(e, KeyEvent.VK_N, KeyEvent.CTRL_MASK)) {
             // process key DOWN
             selectNextPossibleValueDown();
             return true;
         }
 
-        if (StaticUtils.isKey(e, KeyEvent.VK_RIGHT, 0)) {
+        if (StaticUtils.isKey(e, KeyEvent.VK_RIGHT, 0)
+                || StaticUtils.isKey(e, KeyEvent.VK_F, KeyEvent.CTRL_MASK)) {
             // process key RIGHT
             selectNextPossibleValueRight();
             return true;
         }
         
-        if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_UP, 0)) {
+        if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_UP, 0)
+                || StaticUtils.isKey(e, KeyEvent.VK_V, KeyEvent.ALT_MASK)) {
             selectPreviousPossibleValueByPage();
             return true;
         }
 
-        if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_DOWN, 0)) {
+        if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_DOWN, 0)
+                || StaticUtils.isKey(e, KeyEvent.VK_V, KeyEvent.CTRL_MASK)) {
             selectNextPossibleValueByPage();
             return true;
         }

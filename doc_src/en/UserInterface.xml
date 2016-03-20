@@ -94,7 +94,7 @@
             <entry><guimenuitem><indexterm class="singular">
                 <primary>Shortcuts</primary>
 
-                <secondary>Tag validation - Ctrl+T</secondary>
+                <secondary>Tag validation - Ctrl+Shift+V</secondary>
               </indexterm>Tag Validation window</guimenuitem></entry>
 
             <entry><para>Used to validate tags (open with <keycombo>
@@ -453,6 +453,11 @@
       as a reference and replace or modify the contents of the editing field
       with your translation.</para>
 
+      <para>Note: the segment marker displays <literal>&lt;segment
+      nnnn +yy more&gt; when the segment is non-unique. In that case, yy is
+      the number of other occurrences of the segment in the
+      project.</literal></para>
+
       <para>Depending upon the preferred editing behavior, the editing field
       for the untranslated segment may be empty, contain the source text, or
       contain the translation of the string most similar to the one to be
@@ -480,8 +485,12 @@
           <keycap>Ctrl</keycap>
 
           <keycap>V</keycap>
-        </keycombo>) and the <emphasis role="bold">GoTo segment</emphasis>
-      functions.</para>
+        </keycombo>), <emphasis role="bold">GoTo segment</emphasis> and
+      <emphasis role="bold">Add glossary entry</emphasis> functions. In
+      addition, when the right click occurs on an opened segment, other
+      options concerning <emphasis role="bold">Alternative
+      translations</emphasis> are proposed, for example to to jump to another
+      instance of non-unique segments.</para>
     </section>
 
     <section id="match.viewer">
@@ -920,7 +929,7 @@
           <para>Note: filenames (in first column) can be sorted alphabetically
           by clicking in the header. It also possible to change the position
           of a filename, by clicking on it and pressing <emphasis>Move
-          ...</emphasis> buttons. </para>
+          ...</emphasis> buttons.</para>
         </listitem>
       </itemizedlist>
 

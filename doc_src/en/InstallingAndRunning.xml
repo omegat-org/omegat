@@ -315,8 +315,7 @@
     <section id="which.package.to.download.OSX">
       <title>Downloading the package</title>
 
-      <para><application>OmegaT</application> contains the Java JRE
-      1.8</para>
+      <para><application>OmegaT</application> contains the Java JRE 1.8</para>
 
       <para>Download <emphasis>OmegaT_3.n.n_Mac.zip.</emphasis></para>
     </section>
@@ -888,6 +887,8 @@
 
         <para><literal> --config-dir=/path/to/config-files/ \</literal></para>
 
+        <para><literal> --config-file=/path/to/config-file/ \</literal></para>
+
         <para><literal>
         --mode=console-translate|console-createpseudotranslatetmx|console-align</literal></para>
 
@@ -915,6 +916,12 @@
             (<application>OmegaT</application> folder under user home or, if
             unavailable, the current working folder). Note double -
             character</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>--config-file=&lt;config-file&gt;</literal> tells
+            <application>OmegaT</application> what configuration file to
+            use.</para>
           </listitem>
         </itemizedlist>
 

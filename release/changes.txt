@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.7.0
 ----------------------------------------------------------------------
- 10 Enhancements
+ 11 Enhancements
   1 Bug fix
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -35,6 +35,9 @@
 
   - Add Segment Properties pane
   https://sourceforge.net/p/omegat/feature-requests/1198/
+
+  - Emacs-style keyboard navigation in autocompleter
+  https://sourceforge.net/p/omegat/feature-requests/1200/
 
   Other changes
 

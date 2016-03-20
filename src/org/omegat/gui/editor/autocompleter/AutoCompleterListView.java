@@ -187,6 +187,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
         if (entries.length > 0) {
             getList().setSelectedIndex(0);
             getList().invalidate();
+            getList().scrollRectToVisible(new Rectangle());
         }
     }
     

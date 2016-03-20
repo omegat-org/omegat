@@ -1129,9 +1129,7 @@
               an English source text, the glossary entry "element" will be
               found if the source text contains "elements". If the option is
               OFF, the glossary entry above will not be found.</para><para>The
-              <guimenuitem>Replace Glossary Hits when Inserting Source
-              Text</guimenuitem> option allows to [vbdx:??]</para><para>The 3
-              other options are described in the specific page concerning
+              3 other options are described in the specific page concerning
               <link linkend="section.TaaS.options">TaaS</link> (Terminology as
               a Service).</para></entry>
             </row>

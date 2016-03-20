@@ -29,14 +29,14 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.TaaS"></a>Chapter&nbsp;20.&nbsp;Using TaaS in OmegaT<a class="indexterm" name="d0e8642"></a></h1>
+                  <h1 class="title"><a name="chapter.TaaS"></a>Chapter&nbsp;20.&nbsp;Using TaaS in OmegaT<a class="indexterm" name="d0e8829"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
                <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options">1. Generalities</a></span></dt>
-               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.collections">2. Public and private collections</a></span></dt>
+               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.collections">2. Creating a key</a></span></dt>
                <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.access">3. Accessing the TaaS service</a></span></dt>
             </dl>
          </div>
@@ -50,36 +50,27 @@
                </div>
             </div>
             <p>The TaaS service at https://demo.taas-project.eu/info provides
-               terminology services in European languages (plus Russian). It allows accessing both
-                  public and private data, where private glossaries (called "collections")
-                   can be extracted from existing documents, and the target terms partly
-                   populated automatically from various sources.
+               terminology services in European languages (plus Russian). It allows
+               accessing both public and private data, where private glossaries (called
+                   "collections") can be extracted from existing documents, and the target
+                   terms partly populated automatically from various sources.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="section.TaaS.options.collections"></a>2.&nbsp;Public and private collections
+                     <h2 class="title" style="clear: both"><a name="section.TaaS.options.collections"></a>2.&nbsp;Creating a key
                      </h2>
                   </div>
                </div>
             </div>
-            <p>OmegaT allows accessing the public part of TaaS without any
-                   registration.
-            </p>
-            <p>To access the private part, a user must create a key using
+            <p>To access the TaaS service, a user must create a key using
                    https://demo.taas-project.eu/account/keys/create?system=omegaT.
             </p>
             <p>The key must then be given to OmegaT using -Dtaas.user.key=xxxxx.
                    OmegaT configuration launchers (OmegaT.l4J.ini, omegat.kaptn and
                    OmegaT.sh) contain a template entry.
-            </p>
-            <p>When accessing the service without a private key, the following
-                   message will be put in the log: TaaS API key not found. Go to
-                   https://demo.taas-project.eu/account/keys/create?system=omegaT to create
-                   your own key then give it to OmegaT with -Dtaas.user.key=xxxxx
-                   (TAAS_API_KEY_NOT_FOUND)
             </p>
          </div>
          <div class="section">

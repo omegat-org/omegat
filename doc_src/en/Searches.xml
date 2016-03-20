@@ -20,8 +20,8 @@
       </keycombo> and enter the word or phrase you wish to search for in the
     <emphasis>Search for</emphasis> box.</para>
 
-    <para>Alternatively, in the Editor window, select a word or phrase in the
-    editing field (target text of the current segment) and hit <keycombo>
+    <para>Alternatively, you can select a word or phrase in the Editor pane,
+    Fuzzy matches pane or Glossary pane and hit <keycombo>
         <keycap>Ctrl</keycap>
 
         <keycap>F</keycap>
@@ -214,8 +214,8 @@
     </itemizedlist>
 
     <para>If you click on the button <guibutton>Advanced options</guibutton>
-    additional criteria (author of the translation, date translated etc) can
-    be selected.</para>
+    additional criteria (author or changer of the translation, date
+    translated, excluding orphan segments, etc) can be selected.</para>
   </section>
 
   <section id="search.result.display">
@@ -229,9 +229,21 @@
     are displayed with the original text at the top and the translated text at
     the bottom, untranslated segments are displayed as the source only.</para>
 
-    <para>Clicking on a segment opens it in the Editor for modifications. You
-    can then switch back to the Search window for the next segment found, for
+    <para>Double-clicking on a segment opens it in the Editor for
+    modifications (one single click does it when <emphasis
+    role="bold">Auto-sync with Editor</emphasis> option is checked). You can
+    then switch back to the Search window for the next segment found, for
     instance to check and, if necessary, correct the terminology.</para>
+
+    <para>In the Search window, you can use standard shortcuts (<keycombo>
+        <keycap>Ctrl</keycap>
+
+        <keycap>N</keycap>
+      </keycombo>, <keycombo>
+        <keycap>Ctrl</keycap>
+
+        <keycap>P</keycap>
+      </keycombo>) to move from one segment to another.</para>
 
     <para>You may have several Search windows open at the same time. You can
     quickly see their contents by looking at their title: it will contain the

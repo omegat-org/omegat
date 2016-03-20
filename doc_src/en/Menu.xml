@@ -231,6 +231,22 @@
             </row>
 
             <row>
+              <entry><guimenuitem>Access Project
+              Contents</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap/>
+                </keycombo></entry>
+
+              <entry>Gives access to the project folders.<para>In addition,
+              two menu entries allow opening directly the current source and
+              target documents and the writable glossary. The documents are
+              opened by the application chosen by the operating system. If the
+              documents are not available, the entry is greyed
+              out.</para></entry>
+            </row>
+
+            <row>
               <entry><guimenuitem>Quit</guimenuitem></entry>
 
               <entry><keycombo>
@@ -350,7 +366,8 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Replace With Match</guimenuitem></entry>
+              <entry><guimenuitem>Replace With Match or
+              Selection</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -360,11 +377,14 @@
 
               <entry>Replaces the whole target segment with the currently
               selected fuzzy match (by default the first match is
-              selected).</entry>
+              selected).<para>If some texts are selected within the fuzzy
+              match, only this selection will replace the whole target
+              segment.</para></entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Insert Match</guimenuitem></entry>
+              <entry><guimenuitem>Insert Match or
+              Selection</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -374,7 +394,9 @@
 
               <entry>Inserts the currently selected fuzzy match at the cursor
               position. If part of the target segment has been selected, this
-              function overwrites the selected portion.</entry>
+              function overwrites the selected portion.<para>If some texts are
+              selected within the fuzzy match, only this selection will be
+              inserted at the cursor position.</para></entry>
             </row>
 
             <row>
@@ -554,14 +576,14 @@
                 </keycombo> (see text)</entry>
 
               <entry>Changes the case of the highlighted text in the target
-              segment to the selected option (Lower case, Upper case or Title
-              case). Use Shift+F3 <indexterm>
+              segment to the selected option (Lower case, Upper case, Title
+              case or Sentence case). Use Shift+F3 <indexterm>
                   <primary>Shortcuts</primary>
 
                   <secondary>Case selection - Shift+F3</secondary>
-                </indexterm>to cycle through the three alternatives. If no
-              text is selected, <application>OmegaT</application> selects the
-              word that contains the letter immediately to the right of the
+                </indexterm>to cycle through the four alternatives. If no text
+              is selected, <application>OmegaT</application> selects the word
+              that contains the letter immediately to the right of the
               cursor.</entry>
             </row>
 
@@ -906,6 +928,18 @@
             </row>
 
             <row>
+              <entry><guimenuitem>Aggressive Font
+              Fallback</guimenuitem></entry>
+
+              <entry>Check this option in case OmegaT does not display some
+              glyphs properly (even if the fonts containing the relevant
+              glyphs are installed on your machine). Note: on Windows it seems
+              that this manual font fallback mechanism can interfere with
+              standard font fallback, causing undesirable font substitution.
+              For that reason, it is OFF by default.</entry>
+            </row>
+
+            <row>
               <entry><guimenuitem>Modification Info</guimenuitem></entry>
 
               <entry>Setting the Display Modification option to
@@ -1050,7 +1084,33 @@
 
                   <keycap>M</keycap>
                 </keycombo> will insert the suggestion into the target part of
-              the current segment.</entry>
+              the current segment.<para>For confidentiality reasons, you may
+              want to not send all the segments to the Machine Translation
+              tool. By unchecking <emphasis role="bold">Automatically Fetch
+              Translations</emphasis> option, machine translations will be
+              fetched only upon invoking <keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>M</keycap>
+                </keycombo> (<keycombo>
+                  <keycap>Cmd</keycap>
+
+                  <keycap>M</keycap>
+                </keycombo> on OS X) on the current segment. Then you must use
+              <keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>M</keycap>
+                </keycombo> a second time, to insert the
+              suggestion.</para><para>Check <emphasis role="bold">Untranslated
+              Segments Only</emphasis> option to deactivate Machine
+              Translation tools on already translated segments. Note: in that
+              case, <keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>M</keycap>
+                </keycombo> can still be used, to force a Machine Translation
+              call on an already translated segment.</para></entry>
             </row>
 
             <row>
@@ -1060,10 +1120,20 @@
               Glossaries</guimenuitem> option allows to show or hide
               contextual information with the terms (that come from TBX
               glossaries located in <filename>glossary</filename> folder) in
-              the Glossary pane.<para>The 3 other options are described in the
-              specific page concerning <link
-              linkend="section.TaaS.options">TaaS</link> (Terminology as a
-              Service).</para></entry>
+              the Glossary pane.<para>If <guimenuitem>Use Terms Appearing
+              Separately in the Source Text</guimenuitem> option is ON, the
+              glossary entry "itema itemb" will be found in the source text
+              "itema other word itemb". If the option is OFF, the glossary
+              entry above will not be found.</para><para>If <guimenuitem>Use
+              Stemming for Glossary Entries</guimenuitem> option is ON, with
+              an English source text, the glossary entry "element" will be
+              found if the source text contains "elements". If the option is
+              OFF, the glossary entry above will not be found.</para><para>The
+              <guimenuitem>Replace Glossary Hits when Inserting Source
+              Text</guimenuitem> option allows to [vbdx:??]</para><para>The 3
+              other options are described in the specific page concerning
+              <link linkend="section.TaaS.options">TaaS</link> (Terminology as
+              a Service).</para></entry>
             </row>
 
             <row>
@@ -1092,10 +1162,11 @@
               Character table auto-completer
               options.</para><para>Auto-completer is launched within the
               target segment via <emphasis role="bold">Ctrl+Space</emphasis>
-              shortcut. By default, it opens automatically with relevant
-              suggestions, but this can be turned off by unchecking <emphasis
-              role="bold">Show Relevant Suggestions Automatically</emphasis>
-              option.</para><para></para></entry>
+              shortcut.</para><para>If <emphasis role="bold">Show Relevant
+              Suggestions Automatically</emphasis> option is checked,
+              Auto-completer is launched automatically by typing the first
+              letter of a translated glossary entry, or by typing "&lt;" in
+              case of tags.</para></entry>
             </row>
 
             <row>

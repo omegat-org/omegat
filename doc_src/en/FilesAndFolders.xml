@@ -55,13 +55,14 @@
 
       <mediaobject>
         <imageobject role="html">
-		          <imagedata fileref="images/Omegatproject.png"/>
-       </imageobject>
-      <imageobject role="fo">
+          <imagedata fileref="images/Omegatproject.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
           <imagedata fileref="images/Omegatproject.png" width="60%"/>
         </imageobject>
       </mediaobject>
-	  </figure>
+    </figure>
 
     <para>Alternate locations for some of the folders can be chosen at project
     creation or during the translation. It is therefore possible to select
@@ -204,6 +205,13 @@
                 linkend="chapter.project.properties">Chapter Project
                 properties</link></entry>
               </row>
+
+              <row>
+                <entry>uiLayout.xml</entry>
+
+                <entry>if existing, it contains project-specific GUI
+                settings</entry>
+              </row>
             </tbody>
           </tgroup>
         </informaltable></para>
@@ -255,8 +263,7 @@
   </section>
 
   <section id="user.files">
-    <title>User settings files<indexterm
-        class="singular">
+    <title>User settings files<indexterm class="singular">
         <primary>Project files</primary>
 
         <secondary>User settings files</secondary>
@@ -350,8 +357,8 @@
             <entry>Linux/Solaris/FreeBSD</entry>
 
             <entry><literal>&lt;User Home&gt;/.omegat </literal>(.omegat is a
-            folder, the dot preceding its name makes it invisible unless
-            you type ls -a or an equivalent command)</entry>
+            folder, the dot preceding its name makes it invisible unless you
+            type ls -a or an equivalent command)</entry>
           </row>
 
           <row>
@@ -369,6 +376,12 @@
         </tbody>
       </tgroup>
     </informaltable>
+
+    <para>You can access that folder directly with the <menuchoice>
+        <guimenu>Options</guimenu>
+
+        <guimenuitem>Access Configuration Folder</guimenuitem>
+      </menuchoice> menu entry.</para>
   </section>
 
   <section id="application.files">
@@ -477,29 +490,22 @@
             <entry><application>OmegaT</application></entry>
 
             <entry><para>A text file containing two lines:</para>
-
             <programlisting>#!/bin/bash java
-java -jar OmegaT.jar $*</programlisting>
-
-            <para>Linux and OS X users may find this file useful. Make it
-executable (<literal>chmod +x OmegaT</literal>) from the command line after making
-sure you are in the OmegaT application folder. You will then be able
-to launch OmegaT by executing this file from the command
-line</para>
-            </entry>
+java -jar OmegaT.jar $*</programlisting> <para>Linux and OS X users may find
+            this file useful. Make it executable (<literal>chmod +x
+            OmegaT</literal>) from the command line after making sure you are
+            in the OmegaT application folder. You will then be able to launch
+            OmegaT by executing this file from the command line</para></entry>
           </row>
-          
+
           <row>
             <entry>OmegaT.bat</entry>
 
             <entry><para>A batch file, used to launch
             <application>OmegaT</application> from the Windows command line.
-            It contains just the following line:</para>
-
-            <programlisting>java -jar OmegaT.jar %*</programlisting>
-            </entry>
+            It contains just the following line:</para> <programlisting>java -jar OmegaT.jar %*</programlisting></entry>
           </row>
-          
+
           <row>
             <entry><literal>OmegaT.jar</literal></entry>
 

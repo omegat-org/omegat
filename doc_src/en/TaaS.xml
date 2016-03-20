@@ -10,30 +10,21 @@
     <title>Generalities</title>
 
     <para>The TaaS service at https://demo.taas-project.eu/info provides
-    terminology services in European languages (plus Russian). It allows accessing both
-    public and private data, where private glossaries (called "collections")
-    can be extracted from existing documents, and the target terms partly
-    populated automatically from various sources.</para>
+    terminology services in European languages (plus Russian). It allows
+    accessing both public and private data, where private glossaries (called
+    "collections") can be extracted from existing documents, and the target
+    terms partly populated automatically from various sources.</para>
   </section>
 
   <section id="section.TaaS.options.collections">
-    <title>Public and private collections</title>
+    <title>Creating a key</title>
 
-    <para>OmegaT allows accessing the public part of TaaS without any
-    registration.</para>
-
-    <para>To access the private part, a user must create a key using
+    <para>To access the TaaS service, a user must create a key using
     https://demo.taas-project.eu/account/keys/create?system=omegaT.</para>
 
     <para>The key must then be given to OmegaT using -Dtaas.user.key=xxxxx.
     OmegaT configuration launchers (OmegaT.l4J.ini, omegat.kaptn and
     OmegaT.sh) contain a template entry.</para>
-
-    <para>When accessing the service without a private key, the following
-    message will be put in the log: TaaS API key not found. Go to
-    https://demo.taas-project.eu/account/keys/create?system=omegaT to create
-    your own key then give it to OmegaT with -Dtaas.user.key=xxxxx
-    (TAAS_API_KEY_NOT_FOUND)</para>
   </section>
 
   <section id="section.TaaS.options.access">

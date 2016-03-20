@@ -377,11 +377,11 @@
       </tgroup>
     </informaltable>
 
-    <para>You can access directly to that folder with <menuchoice>
+    <para>You can access that folder directly with the <menuchoice>
         <guimenu>Options</guimenu>
 
         <guimenuitem>Access Configuration Folder</guimenuitem>
-      </menuchoice> menu.</para>
+      </menuchoice> menu entry.</para>
   </section>
 
   <section id="application.files">

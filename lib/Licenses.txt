@@ -58,7 +58,7 @@ LanguageTool sources are available from https://github.com/languagetool-org/lang
 For licenses of libraries required by LanguageTool, see
 lib/LanguageTool-*/third-party-licenses/README.txt
 
-pdfbox-app-1.8.1.jar is distributed under the Apache License 2.0
+pdfbox-*.jar and fontbox-*.jar are distributed under the Apache License 2.0
 
 groovy-all-2.2.2.jar is distributed under the Apache License 2.0
 (required for scripting)

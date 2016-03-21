@@ -8,7 +8,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/htmlparser.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jmyspell-core-1.0.0-beta-2.jar"/>
 	<classpathentry exported="true" kind="lib" path="test/lib/junit-4.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pdfbox-app-1.8.1.jar"/>
 	<classpathentry kind="lib" path="lib/antlr-runtime-3.4.jar"/>
 	<classpathentry kind="lib" path="lib/dictzip.jar"/>
 	<classpathentry kind="lib" path="lib/diff.jar"/>
@@ -67,5 +66,7 @@
 	<classpathentry kind="lib" path="lib/jsch.agentproxy.svnkit-trilead-ssh2-0.0.9.jar"/>
 	<classpathentry kind="lib" path="lib/jsch.agentproxy.usocket-jna-0.0.9.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool-3.2/lucene-gosen-5.0.0-ipadic.jar"/>
+	<classpathentry kind="lib" path="lib/pdfbox-2.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/fontbox-2.0.0.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

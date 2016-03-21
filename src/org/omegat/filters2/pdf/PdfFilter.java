@@ -35,7 +35,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.util.PDFTextStripper;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -80,7 +80,7 @@ public class PdfFilter  extends AbstractFilter {
         stripper.setLineSeparator("\n");
         stripper.setSortByPosition(true);
 
-        PDDocument document = PDDocument.load(infile.getAbsolutePath());
+        PDDocument document = PDDocument.load(infile);
         String text = stripper.getText(document);
         document.close();
 

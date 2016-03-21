@@ -339,7 +339,7 @@ OmegaT uses the following libraries:
 (http://okapi.sourceforge.net) (LGPL license)
   commons-*.jar (Apache License 2.0)
   LanguageTool (LGPL license and others)
-  pdfbox-app-1.8.1.jar (Apache License 2.0)
+  PDFBox (Apache License 2.0)
   SuperTMXMerge-for_OmegaT.jar (LGPL license)
   groovy-all-2.2.2.jar (Apache Licence 2.0)
   slf4j (MIT License)

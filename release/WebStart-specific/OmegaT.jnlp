@@ -56,7 +56,8 @@
 				<jar href="commons-lang-2.6.jar"  />
 				<jar href="commons-io-2.4.jar"  />
 				<jar href="commons-logging-1.1.1.jar"  />
-				<jar href="pdfbox-app-1.8.1.jar"  />
+				<jar href="pdfbox-2.0.0.jar" />
+				<jar href="fontbox-2.0.0.jar" />
 				<jar href="groovy-all-2.2.2.jar"  />
 				<jar href="diff.jar" />
 				<jar href="SuperTMXMerge-for_OmegaT.jar" />

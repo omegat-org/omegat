@@ -1230,9 +1230,10 @@
             <row>
               <entry><guimenuitem>Tag Processing...</guimenuitem></entry>
 
-              <entry>For programmers: Allows you to configure the Tag
+              <entry>When translating software-related files: Allows you to configure the Tag
               Validator options to check also programming (%...)
-              variables.</entry>
+              variables. It also allows to define various options related to tag validation 
+              and to define custom tags.</entry>
             </row>
 
             <row>

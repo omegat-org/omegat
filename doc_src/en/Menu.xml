@@ -1129,6 +1129,16 @@
               an English source text, the glossary entry "element" will be
               found if the source text contains "elements". If the option is
               OFF, the glossary entry above will not be found.</para><para>The
+              <emphasis>Replace Glossary Hits when Inserting Source
+              Text</emphasis> option allows to replace automatically glossary
+              hits with the target term when source text is inserted.           
+              This is effective upon <emphasis>Edit > Replace with Source</emphasis>, 
+              <emphasis>Edit > Insert Source</emphasis>, and when entering a segment
+              when <emphasis>Options > Editing Behavior > [Insert] The source
+              text</emphasis> is enabled. When multiple target terms are available, 
+              the first one (as shown in the Glossary pane) will be used. Glossary matching 
+              does not use stemming or stop words, but is case-insensitive. An attempt 
+              is made to match the capitalization of the source word.</para><para>The 
               3 other options are described in the specific page concerning
               <link linkend="section.TaaS.options">TaaS</link> (Terminology as
               a Service).</para></entry>

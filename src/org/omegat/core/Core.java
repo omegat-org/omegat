@@ -62,6 +62,7 @@ import org.omegat.gui.exttrans.IMachineTranslation;
 import org.omegat.gui.exttrans.MachineTranslateTextArea;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.GlossaryTextArea;
+import org.omegat.gui.glossary.IGlossaries;
 import org.omegat.gui.glossary.TransTipsMarker;
 import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainWindow;
@@ -105,7 +106,7 @@ public class Core {
 
     protected static IAutoSave saveThread;
 
-    private static GlossaryTextArea glossary;
+    protected static IGlossaries glossary;
     private static GlossaryManager glossaryManager;
     private static MachineTranslateTextArea machineTranslatePane;
     private static DictionariesTextArea dictionaries;
@@ -176,7 +177,7 @@ public class Core {
     }
 
     /** Get glossary instance. */
-    public static GlossaryTextArea getGlossary() {
+    public static IGlossaries getGlossary() {
         return glossary;
     }
 
@@ -249,8 +250,9 @@ public class Core {
         editor = new EditorController(me);
         tagValidation = new TagValidationTool(me);
         matcher = new MatchesTextArea(me);
-        glossary = new GlossaryTextArea(me);
-        glossaryManager = new GlossaryManager(glossary);
+        GlossaryTextArea glossaryArea = new GlossaryTextArea(me);
+        glossary = glossaryArea;
+        glossaryManager = new GlossaryManager(glossaryArea);
         notes = new NotesTextArea(me);
         comments = new CommentsTextArea(me);
         machineTranslatePane = new MachineTranslateTextArea(me);

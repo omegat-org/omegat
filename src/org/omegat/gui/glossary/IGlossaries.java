@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Alex Buloichik
+ Copyright (C) 2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -23,32 +23,13 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.core;
+package org.omegat.gui.glossary;
 
-import org.omegat.core.threads.IAutoSave;
-import org.omegat.gui.editor.IEditor;
-import org.omegat.gui.glossary.IGlossaries;
-import org.omegat.gui.main.IMainWindow;
+import java.awt.Frame;
+import java.util.List;
 
-/**
- * Core initializer for unit tests.
- * 
- * @author Alex Buloichik (alex73mail@gmail.com)
- */
-public class TestCoreInitializer {
-    public static void initEditor(IEditor editor) {
-        Core.editor = editor;
-    }
+public interface IGlossaries {
+    List<GlossaryEntry> getDisplayedEntries();
 
-    public static void initAutoSave(IAutoSave autoSave) {
-        Core.saveThread = autoSave;
-    }
-
-    public static void initMainWindow(IMainWindow mainWindow) {
-        Core.setMainWindow(mainWindow);
-    }
-
-    public static void initGlossary(IGlossaries glossaries) {
-        Core.glossary = glossaries;
-    }
+    void showCreateGlossaryEntryDialog(Frame parent);
 }

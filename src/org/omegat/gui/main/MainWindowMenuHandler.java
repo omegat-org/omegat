@@ -471,7 +471,7 @@ public class MainWindowMenuHandler {
         if (!Core.getProject().isProjectLoaded())
             return;
 
-        Core.getGlossary().showCreateGlossaryEntryDialog();
+        Core.getGlossary().showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame());
     }
 
     public void editFindInProjectMenuItemActionPerformed() {

@@ -90,7 +90,8 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
-public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> implements IPaneMenu {
+public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
+        implements IGlossaries, IPaneMenu {
 
     private static final String EXPLANATION = OStrings.getString("GUI_GLOSSARYWINDOW_explanation");
 
@@ -242,7 +243,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> i
         nowEntries = Collections.emptyList();
     }
 
-    List<GlossaryEntry> getDisplayedEntries() {
+    @Override
+    public List<GlossaryEntry> getDisplayedEntries() {
         return nowEntries;
     }
 
@@ -288,16 +290,12 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> i
         item.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                showCreateGlossaryEntryDialog();
+                showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame());
             }
         });
     }
 
-    public void showCreateGlossaryEntryDialog() {
-        Frame parent = Core.getMainWindow().getApplicationFrame();
-        showCreateGlossaryEntryDialog(parent);
-    }
-
+    @Override
     public void showCreateGlossaryEntryDialog(final Frame parent) {
         CreateGlossaryEntry d = createGlossaryEntryDialog;
         if (d != null) {

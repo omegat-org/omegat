@@ -27,7 +27,6 @@
 package org.omegat.gui.editor;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -37,7 +36,6 @@ import org.omegat.gui.editor.autocompleter.AutoCompleterItem;
 import org.omegat.gui.editor.autocompleter.AutoCompleterListView;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.OStrings;
-import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil;
 import org.omegat.util.TagUtil.Tag;
 import org.omegat.util.Token;
@@ -59,10 +57,6 @@ public class TagAutoCompleterView extends AutoCompleterListView {
     public List<AutoCompleterItem> computeListData(String prevText, boolean contextualOnly) {
         String wordChunk = getLastToken(prevText);
         
-        if (StringUtil.isEmpty(wordChunk)) {
-            return Collections.emptyList();
-        }
-
         List<String> missingGroups = TagUtil.getGroupedMissingTagsFromTarget();
         
         // If wordChunk is a tag, pretend we have a blank wordChunk.

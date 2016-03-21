@@ -51,7 +51,7 @@
                <dt><span class="section"><a href="chapter.menu.html#keyboard.shortcuts">2. Keyboard shortcuts</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.menu.html#d0e4159">2.1. Project management</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#d0e4168">2.1. Project management</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#keyboard.editing">2.2. Editing</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#keyboard.moving.around">2.3. Moving around</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#keyboard.other">2.4. Other</a></span></dt>
@@ -841,11 +841,19 @@
                                                   OFF, the glossary entry above will not be found.
                                  </p>
                                  <p>The
-                                                  <span class="guimenuitem">Replace Glossary Hits when Inserting Source
-                                                     Text</span> option allows to [vbdx:??]
+                                                  <span class="emphasis"><em>Replace Glossary Hits when Inserting Source
+                                                        Text</em></span> option allows to replace automatically glossary
+                                                  hits with the target term when source text is inserted.           
+                                                  This is effective upon <span class="emphasis"><em>Edit &gt; Replace with Source</em></span>, 
+                                                  <span class="emphasis"><em>Edit &gt; Insert Source</em></span>, and when entering a segment
+                                                  when <span class="emphasis"><em>Options &gt; Editing Behavior &gt; [Insert] The source
+                                                        text</em></span> is enabled. When multiple target terms are available, 
+                                                  the first one (as shown in the Glossary pane) will be used. Glossary matching 
+                                                  does not use stemming or stop words, but is case-insensitive. An attempt 
+                                                  is made to match the capitalization of the source word.
                                  </p>
-                                 <p>The 3
-                                                  other options are described in the specific page concerning
+                                 <p>The 
+                                                  3 other options are described in the specific page concerning
                                                   <a class="link" href="chapter.TaaS.html#section.TaaS.options" title="1.&nbsp;Generalities">TaaS</a> (Terminology as
                                                   a Service).
                                  </p>
@@ -937,9 +945,10 @@
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Tag Processing...</span></td>
-                              <td>For programmers: Allows you to configure the Tag
+                              <td>When translating software-related files: Allows you to configure the Tag
                                                Validator options to check also programming (%...)
-                                               variables.
+                                               variables. It also allows to define various options related to tag validation 
+                                               and to define custom tags.
                               </td>
                            </tr>
                            <tr>
@@ -1007,11 +1016,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.Help"></a>1.7.&nbsp;Help<a class="indexterm" name="d0e4072"></a></h3>
+                        <h3 class="title"><a name="submenu.Help"></a>1.7.&nbsp;Help<a class="indexterm" name="d0e4081"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e4077"></a><p class="title"><b>Table&nbsp;5.9.&nbsp;Help menu</b></p>
+               <div class="table"><a name="d0e4086"></a><p class="title"><b>Table&nbsp;5.9.&nbsp;Help menu</b></p>
                   <div class="table-contents">
                      <table summary="Help menu" border="1">
                         <colgroup>
@@ -1053,7 +1062,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="keyboard.shortcuts"></a>2.&nbsp;Keyboard shortcuts<a class="indexterm" name="d0e4112"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="keyboard.shortcuts"></a>2.&nbsp;Keyboard shortcuts<a class="indexterm" name="d0e4121"></a></h2>
                   </div>
                </div>
             </div>
@@ -1112,11 +1121,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4159"></a>2.1.&nbsp;<a class="indexterm" name="d0e4161"></a>Project management<a class="indexterm" name="d0e4167"></a></h3>
+                        <h3 class="title"><a name="d0e4168"></a>2.1.&nbsp;<a class="indexterm" name="d0e4170"></a>Project management<a class="indexterm" name="d0e4176"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e4172"></a><p class="title"><b>Table&nbsp;5.10.&nbsp;Project management shortcuts</b></p>
+               <div class="table"><a name="d0e4181"></a><p class="title"><b>Table&nbsp;5.10.&nbsp;Project management shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Project management shortcuts" border="1">
                         <colgroup>
@@ -1166,11 +1175,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.editing"></a>2.2.&nbsp;<a class="indexterm" name="d0e4241"></a>Editing<a class="indexterm" name="d0e4247"></a></h3>
+                        <h3 class="title"><a name="keyboard.editing"></a>2.2.&nbsp;<a class="indexterm" name="d0e4250"></a>Editing<a class="indexterm" name="d0e4256"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e4252"></a><p class="title"><b>Table&nbsp;5.11.&nbsp;Editing shortcuts</b></p>
+               <div class="table"><a name="d0e4261"></a><p class="title"><b>Table&nbsp;5.11.&nbsp;Editing shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Editing shortcuts" border="1">
                         <colgroup>
@@ -1274,12 +1283,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.moving.around"></a>2.3.&nbsp;<a class="indexterm" name="d0e4397"></a>Moving around
+                        <h3 class="title"><a name="keyboard.moving.around"></a>2.3.&nbsp;<a class="indexterm" name="d0e4406"></a>Moving around
                         </h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e4403"></a><p class="title"><b>Table&nbsp;5.12.&nbsp;Moving around shortcuts</b></p>
+               <div class="table"><a name="d0e4412"></a><p class="title"><b>Table&nbsp;5.12.&nbsp;Moving around shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Moving around shortcuts" border="1">
                         <colgroup>
@@ -1329,12 +1338,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.other"></a>2.4.&nbsp;<a class="indexterm" name="d0e4484"></a>Other
+                        <h3 class="title"><a name="keyboard.other"></a>2.4.&nbsp;<a class="indexterm" name="d0e4493"></a>Other
                         </h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e4490"></a><p class="title"><b>Table&nbsp;5.13.&nbsp;Various shortcuts</b></p>
+               <div class="table"><a name="d0e4499"></a><p class="title"><b>Table&nbsp;5.13.&nbsp;Various shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Various shortcuts" border="1">
                         <colgroup>

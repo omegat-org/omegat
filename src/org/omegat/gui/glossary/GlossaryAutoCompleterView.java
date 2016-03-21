@@ -68,11 +68,6 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
     @Override
     public List<AutoCompleterItem> computeListData(String prevText, boolean contextualOnly) {
         String wordChunk = getLastToken(prevText);
-
-        if (StringUtil.isEmpty(wordChunk)) {
-            return Collections.emptyList();
-        }
-
         String sortMatchTo = wordChunk;
         
         List<AutoCompleterItem> result = new ArrayList<AutoCompleterItem>();

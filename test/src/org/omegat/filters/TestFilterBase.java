@@ -70,7 +70,6 @@ import org.xml.sax.InputSource;
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
-@SuppressWarnings("unchecked")
 public abstract class TestFilterBase extends TestCore {
     protected FilterContext context = new FilterContext(new Language("en"), new Language("be"), false)
             .setTargetTokenizerClass(DefaultTokenizer.class);
@@ -80,7 +79,7 @@ public abstract class TestFilterBase extends TestCore {
     protected void setUp() throws Exception {
         super.setUp();
 
-        Core.initializeConsole(Collections.EMPTY_MAP);
+        Core.initializeConsole(Collections.emptyMap());
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         Core.setProject(new TestProject(new ProjectPropertiesTest()));
 
@@ -91,7 +90,7 @@ public abstract class TestFilterBase extends TestCore {
     protected List<String> parse(AbstractFilter filter, String filename) throws Exception {
         final List<String> result = new ArrayList<String>();
 
-        filter.parseFile(new File(filename), Collections.EMPTY_MAP, context, new IParseCallback() {
+        filter.parseFile(new File(filename), Collections.emptyMap(), context, new IParseCallback() {
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
                     String comment, IFilter filter) {
                 addEntry(id, source, translation, isFuzzy, comment, null, filter, null);
@@ -152,7 +151,7 @@ public abstract class TestFilterBase extends TestCore {
     protected void parse2(final AbstractFilter filter, final String filename,
             final Map<String, String> result, final Map<String, String> legacyTMX) throws Exception {
 
-        filter.parseFile(new File(filename), Collections.EMPTY_MAP, context, new IParseCallback() {
+        filter.parseFile(new File(filename), Collections.emptyMap(), context, new IParseCallback() {
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
                     String comment, IFilter filter) {
                 addEntry(id, source, translation, isFuzzy, comment, null, filter, null);
@@ -226,7 +225,7 @@ public abstract class TestFilterBase extends TestCore {
     }
 
     protected void translate(AbstractFilter filter, String filename) throws Exception {
-        translate(filter, filename, Collections.EMPTY_MAP);
+        translate(filter, filename, Collections.emptyMap());
     }
     
     protected void translate(AbstractFilter filter, String filename, Map<String, String> config) throws Exception {
@@ -251,11 +250,11 @@ public abstract class TestFilterBase extends TestCore {
     protected void align(IFilter filter, String in, String out, IAlignCallback callback) throws Exception {
         File inFile = new File("test/data/filters/" + in);
         File outFile = new File("test/data/filters/" + out);
-        filter.alignFile(inFile, outFile, Collections.EMPTY_MAP, context, callback);
+        filter.alignFile(inFile, outFile, Collections.emptyMap(), context, callback);
     }
 
     protected void translateText(AbstractFilter filter, String filename) throws Exception {
-        translateText(filter, filename, Collections.EMPTY_MAP);
+        translateText(filter, filename, Collections.emptyMap());
     }
     protected void translateText(AbstractFilter filter, String filename, Map<String, String> config) throws Exception {
         translate(filter, filename, config);
@@ -340,7 +339,7 @@ public abstract class TestFilterBase extends TestCore {
     }
 
     protected IProject.FileInfo loadSourceFiles(IFilter filter, String file) throws Exception {
-        return loadSourceFiles(filter, file, Collections.EMPTY_MAP);
+        return loadSourceFiles(filter, file, Collections.emptyMap());
     }
 
     protected IProject.FileInfo fi;

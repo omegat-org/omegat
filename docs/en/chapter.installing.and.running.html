@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;3.&nbsp;Installing and running OmegaT</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT 3.1 - User's Guide">
-      <link rel="up" href="index.html" title="OmegaT 3.1 - User's Guide">
+      <link rel="home" href="index.html" title="OmegaT 3.5 - User's Guide">
+      <link rel="up" href="index.html" title="OmegaT 3.5 - User's Guide">
       <link rel="prev" href="chapter.instant.start.guide.html" title="Chapter&nbsp;2.&nbsp;Learn to use OmegaT in 5 minutes!">
       <link rel="next" href="chapter.user.interface.html" title="Chapter&nbsp;4.&nbsp;The user interface">
    </head>
@@ -75,16 +75,17 @@
                      <dt><span class="section"><a href="chapter.installing.and.running.html#running.OmegaT.other">4.4. Running OmegaT</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.installing.and.running.html#using.Java.Web.Start">5. Using Java Web Start</a></span></dt>
-               <dt><span class="section"><a href="chapter.installing.and.running.html#d0e1049">6. Starting OmegaT from the command line</a></span></dt>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#drag.and.drop">5. Drag and drop</a></span></dt>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#using.Java.Web.Start">6. Using Java Web Start</a></span></dt>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#d0e1065">7. Starting OmegaT from the command line</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.installing.and.running.html#method1.opening.commandline.window">6.1. Opening a command line window</a></span></dt>
-                     <dt><span class="section"><a href="chapter.installing.and.running.html#launch.command.arguments">6.2. Launch command arguments</a></span></dt>
-                     <dt><span class="section"><a href="chapter.installing.and.running.html#omegat.command.arguments">6.3. OmegaT in the command line mode</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#method1.opening.commandline.window">7.1. Opening a command line window</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#launch.command.arguments">7.2. Launch command arguments</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#omegat.command.arguments">7.3. OmegaT in the command line mode</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.installing.and.running.html#building.OmegaT.from.source">7. Building <span class="application">OmegaT</span> From Source</a></span></dt>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#building.OmegaT.from.source">8. Building <span class="application">OmegaT</span> From Source</a></span></dt>
             </dl>
          </div>
          <div class="section">
@@ -668,7 +669,22 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.Java.Web.Start"></a>5.&nbsp;Using Java Web Start<a class="indexterm" name="d0e1003"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="drag.and.drop"></a>5.&nbsp;Drag and drop<a class="indexterm" name="d0e1003"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>In most systems, it is possible to open a project by dropping an 
+                   <code class="filename">omegat.project</code> file onto the OmegaT icon on the desktop.
+                   It might also be possible to open an OmegaT project by double-clicking on an 
+                   <code class="filename">omegat.project</code> file.
+                   
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="using.Java.Web.Start"></a>6.&nbsp;Using Java Web Start<a class="indexterm" name="d0e1019"></a></h2>
                   </div>
                </div>
             </div>
@@ -710,7 +726,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e1049"></a>6.&nbsp;Starting OmegaT from the command line<a class="indexterm" name="d0e1052"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e1065"></a>7.&nbsp;Starting OmegaT from the command line<a class="indexterm" name="d0e1068"></a></h2>
                   </div>
                </div>
             </div>
@@ -724,7 +740,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="method1.opening.commandline.window"></a>6.1.&nbsp;Opening a command line window
+                        <h3 class="title"><a name="method1.opening.commandline.window"></a>7.1.&nbsp;Opening a command line window
                         </h3>
                      </div>
                   </div>
@@ -784,7 +800,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="launch.command.arguments"></a>6.2.&nbsp;Launch command arguments<a class="indexterm" name="d0e1154"></a></h3>
+                        <h3 class="title"><a name="launch.command.arguments"></a>7.2.&nbsp;Launch command arguments<a class="indexterm" name="d0e1170"></a></h3>
                      </div>
                   </div>
                </div>
@@ -806,7 +822,7 @@
                      <li class="listitem">
                         <p><span class="bold"><strong>User interface language
                                            </strong></span></p>
-                        <p><span class="bold"><strong>-Duser.language=XX</strong></span><a class="indexterm" name="d0e1192"></a> Normally, i.e. when <span class="application">OmegaT</span>
+                        <p><span class="bold"><strong>-Duser.language=XX</strong></span><a class="indexterm" name="d0e1208"></a> Normally, i.e. when <span class="application">OmegaT</span>
                                      is launched without any arguments, the program first detects the
                                      language of the user's operating system. If a user interface in this
                                      language is available, <span class="application">OmegaT</span> uses it.
@@ -834,7 +850,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>User country</strong></span></p>
-                        <p><span class="bold"><strong>-Duser.country=XX</strong></span><a class="indexterm" name="d0e1240"></a> Besides the language, you can also specify the
+                        <p><span class="bold"><strong>-Duser.country=XX</strong></span><a class="indexterm" name="d0e1256"></a> Besides the language, you can also specify the
                                      country, for example CN or TW in case of the Chinese language. To
                                      display the instant start guide in the desired language, you need to
                                      specify both the language and the country. This is necessary even if
@@ -848,7 +864,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Memory assignment</strong></span></p>
-                        <p><span class="bold"><strong>-XmxZZM </strong></span><a class="indexterm" name="d0e1256"></a>This command assigns more memory to
+                        <p><span class="bold"><strong>-XmxZZM </strong></span><a class="indexterm" name="d0e1272"></a>This command assigns more memory to
                                      <span class="application">OmegaT</span>. By default, 512 MB are assigned,
                                      so there is no advantage in assigning less than this figure. "ZZ"
                                      stands for the amount of memory assigned, in megabytes. The command
@@ -860,28 +876,28 @@
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Proxy host IP address</strong></span></p>
-                        <p><span class="bold"><strong><span class="bold"><strong>-Dhttp.proxyHost=nnn.nnn.nnn.nnn</strong></span> <a class="indexterm" name="d0e1285"></a></strong></span> The IP address of your proxy server, if
+                        <p><span class="bold"><strong><span class="bold"><strong>-Dhttp.proxyHost=nnn.nnn.nnn.nnn</strong></span> <a class="indexterm" name="d0e1301"></a></strong></span> The IP address of your proxy server, if
                                      your system uses a proxy.
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Proxy host port number</strong></span></p>
                         <p><span class="bold"><strong>-Dhttp.proxyPort=NNNN</strong></span>
-                                     <a class="indexterm" name="d0e1301"></a> The port number your system uses to access the proxy
+                                     <a class="indexterm" name="d0e1317"></a> The port number your system uses to access the proxy
                                      server.
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Google Translate V2 </strong></span></p>
                         <p><span class="bold"><strong>-Dgoogle.api.key=A123456789B123456789C123456789D12345678
-                                           </strong></span><span class="bold"><strong><a class="indexterm" name="d0e1317"></a></strong></span> If you have signed up for the Google
+                                           </strong></span><span class="bold"><strong><a class="indexterm" name="d0e1333"></a></strong></span> If you have signed up for the Google
                                      Translate services, enter your private Google API key here. Note
                                      that the key is 38 characters long.
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Microsoft
-                                           Translator</strong></span><a class="indexterm" name="d0e1329"></a></p>
+                                           Translator</strong></span><a class="indexterm" name="d0e1345"></a></p>
                         <p>Make sure that you have a free Microsoft account. You’ll need
                                      this to sign-in to <a class="ulink" href="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema" target="_top">Windows
                                         Azure Marketplace</a> and use the Translator service. Note that
@@ -893,7 +909,7 @@
                         <p>-<span class="bold"><strong>Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</strong></span></p>
                      </li>
                      <li class="listitem">
-                        <p><span class="bold"><strong>Yandex Translate</strong></span><a class="indexterm" name="d0e1357"></a></p>
+                        <p><span class="bold"><strong>Yandex Translate</strong></span><a class="indexterm" name="d0e1373"></a></p>
                         <p>Make sure that you have a free Yandex account. You’ll need
                                      this to be able to obtain and use Yandex Translate API key. API keys
                                      can be requested using <a class="ulink" href="http://api.yandex.com/key/form.xml?service=trnsl" target="_top">API key
@@ -917,7 +933,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="omegat.command.arguments"></a>6.3.&nbsp;OmegaT in the command line mode<a class="indexterm" name="d0e1394"></a></h3>
+                        <h3 class="title"><a name="omegat.command.arguments"></a>7.3.&nbsp;OmegaT in the command line mode<a class="indexterm" name="d0e1410"></a></h3>
                      </div>
                   </div>
                </div>
@@ -930,7 +946,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="console.mode.prerequisites"></a>6.3.1.&nbsp;Prerequisites
+                           <h4 class="title"><a name="console.mode.prerequisites"></a>7.3.1.&nbsp;Prerequisites
                            </h4>
                         </div>
                      </div>
@@ -972,7 +988,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="starting.in.console.mode"></a>6.3.2.&nbsp;Starting in console mode
+                           <h4 class="title"><a name="starting.in.console.mode"></a>7.3.2.&nbsp;Starting in console mode
                            </h4>
                         </div>
                      </div>
@@ -1185,7 +1201,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="console.mode.option.quiet"></a>6.3.3.&nbsp;Quiet option
+                           <h4 class="title"><a name="console.mode.option.quiet"></a>7.3.3.&nbsp;Quiet option
                            </h4>
                         </div>
                      </div>
@@ -1202,7 +1218,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="console.mode.option.validatetags"></a>6.3.4.&nbsp;Tag validation option
+                           <h4 class="title"><a name="console.mode.option.validatetags"></a>7.3.4.&nbsp;Tag validation option
                            </h4>
                         </div>
                      </div>
@@ -1224,7 +1240,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>7.&nbsp;Building <span class="application">OmegaT</span> From Source<a class="indexterm" name="d0e1705"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>8.&nbsp;Building <span class="application">OmegaT</span> From Source<a class="indexterm" name="d0e1721"></a></h2>
                   </div>
                </div>
             </div>

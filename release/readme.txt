@@ -124,7 +124,7 @@ an access to the hard drive of the computer. Subsequent clicks on  OmegaT.jnlp
 will check for any upgrades, if you are online, install them if there are any, 
 and then start OmegaT. 
 
-The alternative ways and means of dowloading and installing OmegaT are
+The alternative ways and means of downloading and installing OmegaT are
 shown below. 
 
 Windows and Linux users: if you are confident that your system already has a 

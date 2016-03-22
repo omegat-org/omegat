@@ -506,6 +506,22 @@
       information.</para>
     </section>
   </section>
+  
+    <section id="drag.and.drop">
+    <title>Drag and drop<indexterm class="singular">
+        <primary>Running OmegaT</primary>
+
+        <secondary>Drag and grop</secondary>
+      </indexterm></title>
+    
+    <para>In most systems, it is possible to open a project by dropping an 
+    <filename>omegat.project</filename> file onto the OmegaT icon on the desktop.
+    It might also be possible to open an OmegaT project by double-clicking on an 
+    <filename>omegat.project</filename> file.
+    </para>
+    
+    </section>
+
 
   <section id="using.Java.Web.Start">
     <title>Using Java Web Start<indexterm class="singular">

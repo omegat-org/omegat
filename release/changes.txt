@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.7.0
 ----------------------------------------------------------------------
- 11 Enhancements
+ 12 Enhancements
   1 Bug fix
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -38,6 +38,9 @@
 
   - Emacs-style keyboard navigation in autocompleter
   https://sourceforge.net/p/omegat/feature-requests/1200/
+
+  - Add GUI aligner tool
+  https://sourceforge.net/p/omegat/feature-requests/1201/
 
   Other changes
 

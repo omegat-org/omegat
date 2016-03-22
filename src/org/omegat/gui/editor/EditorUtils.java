@@ -343,12 +343,16 @@ public class EditorUtils {
             return text;
         }
         StringBuilder sb = new StringBuilder();
-        for (String tok : tokenizer.tokenizeVerbatimToStrings(text)) {
+        String[] haystack = tokenizer.tokenizeVerbatimToStrings(text);
+        for (int i = 0; i < haystack.length; i++) {
+            String tok = haystack[i];
             boolean replaced = false;
             for (GlossaryEntry e : entries) {
-                if (tok.equalsIgnoreCase(e.getSrcText())) {
+                String[] needle = tokenizer.tokenizeVerbatimToStrings(e.getSrcText());
+                if (tokensPresentAt(needle, haystack, i)) {
                     sb.append(StringUtil.matchCapitalization(e.getLocText(), tok, locale));
                     replaced = true;
+                    i += needle.length - 1;
                     break;
                 }
             }
@@ -357,5 +361,19 @@ public class EditorUtils {
             }
         }
         return sb.toString();
+    }
+
+    private static boolean tokensPresentAt(String[] needle, String[] haystack, int offset) {
+        if (offset < 0 || offset + needle.length >= haystack.length) {
+            return false;
+        }
+        for (int i = 0; i < needle.length; i++) {
+            String hayToken = haystack[i + offset];
+            String needleToken = needle[i];
+            if (!hayToken.equalsIgnoreCase(needleToken)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -969,7 +969,7 @@ public class MainWindowMenuHandler {
                 && Core.getProject().isProjectLoaded()) {
             // Redisplay according to new view settings
             Core.getEditor().getSettings().updateTagValidationPreferences();
-            mainWindow.promptReload();
+            ProjectUICommands.promptReload();
         }
     }
 
@@ -990,7 +990,7 @@ public class MainWindowMenuHandler {
 
         if (externalTMXOptions.getReturnStatus() == ExternalTMXMatchesDialog.RET_OK
                 && Core.getProject().isProjectLoaded()) {
-            mainWindow.promptReload();
+            ProjectUICommands.promptReload();
         }
     }
 

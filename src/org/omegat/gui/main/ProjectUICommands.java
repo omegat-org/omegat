@@ -369,6 +369,22 @@ public class ProjectUICommands {
         }.execute();
     }
 
+    /**
+     * Prompt the user to reload the current project
+     */
+    public static void promptReload() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        // asking to reload a project
+        int res = JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
+                OStrings.getString("MW_REOPEN_QUESTION"), OStrings.getString("MW_REOPEN_TITLE"),
+                JOptionPane.YES_NO_OPTION);
+        if (res == JOptionPane.YES_OPTION) {
+            projectReload();
+        }
+    }
+
     public static void projectReload() {
         performProjectMenuItemPreConditions();
 

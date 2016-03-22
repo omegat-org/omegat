@@ -148,10 +148,10 @@ since this "local" JRE will not interfere with any other JRE installed
 on your system.
 
 Mac users: 
-The JRE is already installed on Mac OS X before Mac OS X 10.7 
-(Lion). Lion users will be prompted by the system when they first launch 
-an application that requires Java and the system will eventually 
-automatically download and install it.
+The Mac version comes bundled with a JRE. Otherwise you must download and
+install the Oracle JRE on your own.
+
+    https://java.com/en/download/
 
 Linux on PowerPC systems: 
 Users will need to download IBM's JRE, as Sun does 

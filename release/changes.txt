@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.7.0
 ----------------------------------------------------------------------
- 12 Enhancements
+ 13 Enhancements
   1 Bug fix
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -48,6 +48,8 @@
 The tokenizer behaviour is removed in Project Properties. All behaviour
 used are "current", except for German, where "Lucene 3.0" was kept, as
 it gave better results.
+
+  - Replace glossary hits now supports multi-word glossary replacements
 
   Bug fixes:
 

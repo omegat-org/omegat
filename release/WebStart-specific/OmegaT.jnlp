@@ -65,6 +65,7 @@
 				<jar href="slf4j-jdk14-1.7.18.jar" />
 				<jar href="trilead-ssh2-1.0.0-build217.jar" />
 				<jar href="juniversalchardet-1.0.3.jar" />
+                <jar href="maligna-3.0.0.jar" />
 
 				<!-- LanguageTool -->
 				<jar href="annotations.jar"  />

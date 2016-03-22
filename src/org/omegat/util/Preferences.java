@@ -422,6 +422,10 @@ public class Preferences {
     public static final String NOTIFY_MULTIPLE_TRANSLATIONS = "notify_multiple_translations";
     public static final String NOTIFY_NOTES = "notify_notes";
 
+    /** Aligner settings */
+    public static final String ALIGNER_HIGHLIGHT_PATTERN = "aligner_highlight_pattern";
+    public static final String ALIGNER_HIGHLIGHT_PATTERN_DEFAULT = "\\d+";
+
     public static final String PROPERTY_SRX = "srx";
     public static final String PROPERTY_FILTERS = "filters";
 

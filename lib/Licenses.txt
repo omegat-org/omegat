@@ -85,3 +85,5 @@ sources, in lib/sources/
 
 StringUtil uses code from the FullWidthConversionStep in the Okapi Framework
 (http://okapi.opentag.com/) under the GNU Public License version 2.1 or greater.
+
+mALIGNa is distributed under the MIT License (required for Aligner tool).

@@ -68,5 +68,6 @@
 	<classpathentry kind="lib" path="lib/LanguageTool-3.2/lucene-gosen-5.0.0-ipadic.jar"/>
 	<classpathentry kind="lib" path="lib/pdfbox-2.0.0.jar"/>
 	<classpathentry kind="lib" path="lib/fontbox-2.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/maligna-3.0.0.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

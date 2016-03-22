@@ -61,6 +61,7 @@ import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.team2.gui.RepositoriesCredentialsController;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.gui.align.AlignFilePickerController;
 import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.AutotextAutoCompleterOptionsDialog;
 import org.omegat.gui.dialogs.CharTableAutoCompleterOptionsDialog;
@@ -782,6 +783,31 @@ public class MainWindowMenuHandler {
 
     public void toolsShowStatisticsMatchesPerFileMenuItemActionPerformed() {
         new StatisticsWindow(StatisticsWindow.STAT_TYPE.MATCHES_PER_FILE).setVisible(true);
+    }
+
+    public void toolsAlignFilesMenuItemActionPerformed() {
+        AlignFilePickerController picker = new AlignFilePickerController();
+        if (Core.getProject().isProjectLoaded()) {
+            String srcRoot = Core.getProject().getProjectProperties().getSourceRoot();
+            String curFile = Core.getEditor().getCurrentFile();
+            if (curFile != null) {
+                picker.setSourceFile(srcRoot + curFile);
+            }
+            picker.setSourceDefaultDir(srcRoot);
+            picker.setDefaultSaveDir(Core.getProject().getProjectProperties().getTMRoot());
+            picker.setSourceLanguage(Core.getProject().getProjectProperties().getSourceLanguage());
+            picker.setTargetLanguage(Core.getProject().getProjectProperties().getTargetLanguage());
+        } else {
+            String srcLang = Preferences.getPreference(Preferences.SOURCE_LOCALE);
+            if (!StringUtil.isEmpty(srcLang)) {
+                picker.setSourceLanguage(new Language(srcLang));
+            }
+            String trgLang = Preferences.getPreference(Preferences.TARGET_LOCALE);
+            if (!StringUtil.isEmpty(trgLang)) {
+                picker.setTargetLanguage(new Language(trgLang));
+            }
+        }
+        picker.show(mainWindow);
     }
 
     public void optionsTabAdvanceCheckBoxMenuItemActionPerformed() {

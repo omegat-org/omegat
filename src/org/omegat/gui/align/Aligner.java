@@ -105,7 +105,7 @@ public class Aligner {
     private List<Entry<String, String>> idPairs;
     List<ComparisonMode> allowedModes;
 
-    public Aligner(String srcFile, Language srcLang, String trgFile, Language trgLang) throws Exception {
+    public Aligner(String srcFile, Language srcLang, String trgFile, Language trgLang) {
         this.srcFile = srcFile;
         this.srcLang = srcLang;
         this.trgFile = trgFile;

@@ -1,11 +1,11 @@
 ----------------------------------------------------------------------
- OmegaT 3.5.3 update 1
+ OmegaT 3.5.4
 ----------------------------------------------------------------------
    4 Enhancements
    9 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
-3.5.3 update 1 vs 3.5.3
+3.5.4 vs 3.5.3
 
   Other changes:
 
@@ -18,6 +18,8 @@ service
 
   - When using the line length limit in the Text filter, the filter tries
 preventing cutting after "\" and ":" and before "{" and ":"
+
+  - Updated documentation
 
  Bug fixes:
 

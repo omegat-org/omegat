@@ -296,7 +296,7 @@ public class Aligner {
      *         {@link #trgRaw}
      */
     private Stream<Alignment> alignParsewiseNotSegmented() {
-        if (srcRaw.size() != trgRaw.size()) {
+        if (!allowedModes.contains(ComparisonMode.PARSEWISE)) {
             throw new UnsupportedOperationException();
         }
         return IntStream.range(0, srcRaw.size())
@@ -311,7 +311,7 @@ public class Aligner {
      *         {@link #trgRaw}
      */
     private Stream<Alignment> alignParsewiseSegmented() {
-        if (srcRaw.size() != trgRaw.size()) {
+        if (!allowedModes.contains(ComparisonMode.PARSEWISE)) {
             throw new UnsupportedOperationException();
         }
         return IntStream.range(0, srcRaw.size()).mapToObj(i -> {
@@ -330,6 +330,9 @@ public class Aligner {
      * @return List of beads aligned by ID
      */
     private Stream<Alignment> alignByIdNotSegmented() {
+        if (!allowedModes.contains(ComparisonMode.ID)) {
+            throw new UnsupportedOperationException();
+        }
         return idPairs.stream()
                 .map(e -> new Alignment(Arrays.asList(e.getKey()), Arrays.asList(e.getValue())));
     }
@@ -341,6 +344,9 @@ public class Aligner {
      * @return List of beads aligned by ID
      */
     private Stream<Alignment> alignByIdSegmented() {
+        if (!allowedModes.contains(ComparisonMode.ID)) {
+            throw new UnsupportedOperationException();
+        }
         return idPairs.stream().map(e -> {
             List<String> source = Core.getSegmenter().segment(srcLang, e.getKey(), null, null).stream()
                     .filter(s -> !s.isEmpty()).collect(Collectors.toList());

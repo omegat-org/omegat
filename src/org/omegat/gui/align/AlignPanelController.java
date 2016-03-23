@@ -990,7 +990,6 @@ public class AlignPanelController {
         }
 
         private void makeCache() {
-            List<MutableBead> empty = new ArrayList<>();
             for (int i = 0; i < data.size(); i++) {
                 MutableBead bead = data.get(i);
                 // Cull empty beads (can be created by splitting top/bottom
@@ -1005,7 +1004,6 @@ public class AlignPanelController {
                     data.add(++i, bead);
                 }
             }
-            data.removeAll(empty);
             List<Float> rowToDistance = new ArrayList<>();
             List<MutableBead> rowToBead = new ArrayList<>();
             List<String> rowToSourceLine = new ArrayList<>();

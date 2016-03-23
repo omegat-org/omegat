@@ -12,15 +12,11 @@
   </section>
 
   <section id="section.TaaS.options.collections">
-    <title>Collections publics et privées</title>
+    <title>Création d'une clé</title>
 
-    <para>OmegaT permet d'accéder à la partie public de TaaS sans inscription.</para>
-
-    <para>Pour accéder à la partie privée, un utilisateur doit créer une clé en utilisant https://demo.taas-project.eu/account/keys/create?system=omegaT.</para>
+    <para>Pour accéder au service TaaS, un utilisateur doit créer une clé en utilisant https://term.tilde.com/account/keys/create?system=omegaT.</para>
 
     <para>La clé doit être transmise à OmegaT avec -Dtaas.user.key=xxxxx. Les lanceurs de configuration d'OmegaT (OmegaT.l4J.ini, omegat.kaptn et OmegaT.sh) contiennent un modèle d'entrée.</para>
-
-    <para>Lors de l'accès au service sans clé privée, le message suivant sera inscrit dans le journal : Clé API TaaS introuvable. Allez à https://demo.taas-project.eu/account/keys/create?system=omegaT pour créer votre propre clé et passez-la à OmegaT avec -Dtaas.user.key=xxxxx (TAAS_API_KEY_NOT_FOUND)</para>
   </section>
 
   <section id="section.TaaS.options.access">

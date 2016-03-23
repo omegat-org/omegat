@@ -77,7 +77,7 @@
         <tbody>
           <row>
             <entry><guimenuitem><indexterm class="singular">
-                <primary>Raccourcis</primary> <secondary>Validation des balises - Ctrl+T</secondary>
+                <primary>Raccourcis</primary> <secondary>Validation des balises - Ctrl+Maj+V</secondary>
               </indexterm>Fenêtre de validation des balises</guimenuitem></entry>
 
             <entry><para>Utiliser pour valider les balises (s'ouvre avec <keycombo> <keycap>Ctrl</keycap> <keycap>Maj</keycap> <keycap>V</keycap> </keycombo>, se ferme avec <keycap>Échap</keycap>)</para></entry>
@@ -280,6 +280,20 @@
         <primary>fenêtres d'OmegaT</primary> <secondary>Restaurer les réglages par défaut</secondary>
       </indexterm>Options → Réinitialiser la fenêtre principale</guimenuitem> pour retrouver la disposition d'origine.</para>
 
+    <para>Il est possible de glisser-déplacer des fichiers sur chaque volet, qui réagira en conséquence.<itemizedlist>
+        <listitem>
+          <para>Volet Éditeur : si un fichier projet OmegaT (<filename>omegat.project</filename>) est déposé sur ce volet, le projet correspondant sera ouvert, fermant au préalable un éventuel projet ouvert. Les autres fichiers déposés seront copiés dans le dossier <filename>source</filename>. Cela s'applique également à la fenêtre <link linkend="section.project.files">Fichiers du projet</link>.</para>
+        </listitem>
+        <listitem>
+          <para>Volet Correspondances : les fichiers <filename>.tmx</filename> déposés seront copiés dans le dossier <filename>tm</filename>.</para>
+        </listitem>
+        <listitem>
+          <para>Volet Glossaires : les fichiers déposés disposant d'extensions connues (<filename>.txt</filename>, <filename>.tab</filename>, etc.) seront copiés dans le dossier <filename>glossary</filename>.</para>
+        </listitem>
+      </itemizedlist>
+    </para>
+    
+    
     <para>Le compteur localisé dans le coin inférieur bas suit la progression de la traduction (les nombres de la colonne de gauche correspondent à l'image ci-dessus) :</para>
 
     <table>
@@ -331,9 +345,14 @@
           <primary>Marqueur de segments</primary>
         </indexterm>le marqueur est<literal>&lt;segment nnnn&gt;</literal> avec nnnn correspondant au numéro du segment dans le projet. Utilisez la partie supérieure comme référence et remplacez ou modifiez son contenu par votre traduction dans la ligne d'édition.</para>
 
+      <para>Note : lorsque le segment n'est pas unique, le marqueur de segment affiche <literal>&lt;segment nnnn +yy de plus d'infos&gt;. Dans ce cas, yy est le nombre d'autres occurrences de ce segment dans le projet.</literal></para>
+
       <para>En fonction du comportement que vous avez choisi pour la ligne d'édition, pour un segment non traduit celle-ci peut être : vide, contenir le texte source ou contenir la traduction de la chaîne de caractères la plus proche de celle que vous êtes en train de traduire. Lorsque vous passez au segment suivant, la traduction est validée et sauvegardée. Si vous voulez que la traduction soit identique à la source, il suffit de vider la ligne d'édition en supprimant tout le texte (sélectionnez le texte avec <keycap>Ctrl+A</keycap> et supprimez-le avec <keycap>Suppr</keycap>). OmegaT est capable d'enregistrer les traductions qui sont identiques à la source. Ceci est utile pour les documents qui contiennent des noms de marque, des noms propres, ou des parties qui sont dans une troisième langue et n'ont pas besoin d'être traduites. Voir <emphasis>Options de la ligne d'édition</emphasis> pour plus de détails.</para>
 
-      <para>Si vous effectuez un clic droit dans le volet Editeur, un menu contextuel s'ouvre et propose les options<emphasis role="bold"> Couper, Copier, Coller</emphasis> (soit les mêmes fonctions que les raccourcis <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> et <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>) ainsi que la fonction <emphasis role="bold">Atteindre un segment</emphasis>.</para>
+      <para>Si vous effectuez un clic droit dans le volet Editeur, un menu contextuel s'ouvre et propose les options<emphasis role="bold"> Couper, Copier, Coller</emphasis> (soit les mêmes fonctions que les raccourcis <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> et <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>) ainsi que les fonctions <emphasis role="bold">Atteindre un segment</emphasis> et <emphasis role="bold">Créer une entrée de glossaire</emphasis>. De plus, lorsque le clic droit se produit sur un segment ouvert, d'autres options concernant les <emphasis role="bold">Traductions alternatives</emphasis> sont proposées, par exemple de se déplacer à une autre instance d'un segment non unique.</para>
+      
+      <para>Il est possible de faire glisser du texte depuis un endroit quelconque de la fenêtre principale et de le déposer dans le segment. Le texte provenant de l'extérieur du segment cible est copié, le texte en provenance du segment est déplacé.</para>
+      
     </section>
 
     <section id="match.viewer">
@@ -360,7 +379,7 @@
         </figure></para>
 
       <para>Le volet Correspondances affiche les segments les plus proches provenant de la mémoire de traduction interne au projet qui est créée en temps réel au cours de votre traduction et des mémoires de traduction secondaires que vous avez importées depuis vos travaux précédents ou que vous avez reçues de la part de votre client ou de votre agence de traduction.</para>
-
+      
       <para>Lorsque vous passez au segment suivant, la première correspondance (celle ayant le meilleur pourcentage de correspondance) est sélectionnée automatiquement. Vous pouvez sélectionnez une correspondance différente en appuyant sur <guimenuitem>Ctrl+2, 3, 4, ou 5</guimenuitem>.<indexterm>
           <primary>Raccourcis</primary> <secondary>Sélectionner la correspondance - Ctrl+n (n=Numéro de la correspondance)</secondary>
         </indexterm> Bien sûr, s'il n'existe pas de correspondance n° 5, appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo> n'aura aucun effet. Pour utiliser la correspondance sélectionnée dans votre traduction, appuyez sur <guimenuitem>Ctrl+R</guimenuitem><indexterm class="singular">
@@ -617,7 +636,11 @@
           <primary>Les fenêtres et les volets dans OmegaT</primary> <secondary>Fichiers du projet</secondary>
         </indexterm></title>
 
-      <para>La fenêtre Fichiers du projet liste les fichiers du projet et affiche d'autres informations relatives au projet. Cette fenêtre s'affiche automatiquement lorsqu'OmegaT charge un projet. Utilisez <guimenuitem>Ctrl+L<indexterm class="singular">
+      <para>La fenêtre Fichiers du projet liste les fichiers du projet et affiche d'autres informations relatives au projet. Cette fenêtre s'affiche automatiquement lorsqu'OmegaT charge un projet.</para>
+
+      <para><remark>Note :</remark> il est possible d'empêcher cette fenêtre des Fichiers du projet de s'afficher, en définissant <emphasis>project_files_show_on_load</emphasis> à <emphasis>false</emphasis> dans <filename>omegat.prefs</filename> file (accessible par le menu Options / Accéder au dossier de configuration).</para>
+
+      <para>Utilisez <guimenuitem>Ctrl+L<indexterm class="singular">
           <primary>Raccourcis</primary> <secondary>Liste des fichiers du projet - Ctrl+L</secondary>
         </indexterm></guimenuitem> pour ouvrir cette fenêtre et <keycap>Echap</keycap> pour la fermer. La fenêtre Fichiers du projet affiche les informations suivantes :</para>
 
@@ -627,13 +650,11 @@
         </listitem>
 
         <listitem>
-          <para>La liste de tous les fichiers traduisibles du projet. Cliquer sur n'importe lequel de ces fichiers provoquera l'ouverture de celui-ci (dans l'Éditeur, ce qui permet d'effectuer sa traduction). Note : les noms des fichiers (dans la première colonne) peuvent être triés par ordre alphabétique en cliquant sur l'en-tête. Il est également possible de changer la position d'un nom de fichier, en cliquant dessus et en appuyant sur les boutons <emphasis>Placer/Glisser</emphasis>  </para>
-        </listitem>
-      </itemizedlist>
+          <para>La liste de tous les fichiers traduisibles du projet. Cliquer sur n'importe lequel de ces fichiers provoquera l'ouverture de celui-ci (dans l'Éditeur, ce qui permet d'effectuer sa traduction).</para>
 
-      <itemizedlist>
-        <listitem>
-          <para>Le fichier actuellement ouvert dans le volet Editeur est mis en évidence grâce à un fond bleu. Appuyer sur <keycap>Entrée</keycap> déplacera le volet Editeur au début du fichier sélectionné</para>
+          <para>Taper un texte quelconque ouvrira un champ de filtrage dans lequel il est possible d'entrer des noms de fichiers partiels. Il est possible de sélectionner un fichier avec les touches fléchées <keycap>Haut</keycap> et <keycap>Bas</keycap> et de l'ouvrir dans l'Éditeur en appuyant sur <keycap>Entrée</keycap></para>
+
+          <para>Note : les noms des fichiers (dans la première colonne) peuvent être triés par ordre alphabétique en cliquant sur l'en-tête. Il est également possible de changer la position d'un nom de fichier, en cliquant dessus et en appuyant sur les boutons <emphasis>Placer/Glisser</emphasis>  </para>
         </listitem>
       </itemizedlist>
 

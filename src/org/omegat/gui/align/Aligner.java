@@ -154,13 +154,6 @@ public class Aligner {
         trgRaw = null;
     }
 
-    boolean canAlignParsewise() throws Exception {
-        if (srcRaw == null || trgRaw == null) {
-            loadFiles();
-        }
-        return srcRaw.size() == trgRaw.size();
-    }
-
     private Entry<List<String>, List<String>> parseFile(String file) throws Exception {
         final List<String> ids = new ArrayList<>();
         final List<String> rawSegs = new ArrayList<>();

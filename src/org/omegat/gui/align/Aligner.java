@@ -36,6 +36,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ParseEntry;
@@ -204,15 +205,15 @@ public class Aligner {
                 .flatMap(List::stream).filter(s -> !s.isEmpty()).collect(Collectors.toList());
     }
 
-    private List<MutableBead> alignParsewiseNotSegmented() {
+    private Stream<Alignment> alignParsewiseNotSegmented() {
         if (srcRaw.size() != trgRaw.size()) {
             throw new UnsupportedOperationException();
         }
-        return IntStream.range(0, srcRaw.size()).mapToObj(i -> new MutableBead(srcRaw.get(i), trgRaw.get(i)))
-                .collect(Collectors.toList());
+        return IntStream.range(0, srcRaw.size())
+                .mapToObj(i -> new Alignment(Arrays.asList(srcRaw.get(i)), Arrays.asList(trgRaw.get(i))));
     }
 
-    private List<MutableBead> alignParsewiseSegmented() {
+    private Stream<Alignment> alignParsewiseSegmented() {
         if (srcRaw.size() != trgRaw.size()) {
             throw new UnsupportedOperationException();
         }
@@ -222,33 +223,28 @@ public class Aligner {
             List<String> target = Core.getSegmenter().segment(trgLang, trgRaw.get(i), null, null).stream()
                     .filter(s -> !s.isEmpty()).collect(Collectors.toList());
             return doAlign(algorithmClass, calculatorType, counterType, source, target);
-        }).flatMap(List::stream).map(MutableBead::new).collect(Collectors.toList());
+        }).flatMap(List::stream);
     }
 
-    private List<MutableBead> alignByIdNotSegmented() {
-        return idPairs.stream().map(e -> new MutableBead(e.getKey(), e.getKey()))
-                .collect(Collectors.toList());
+    private Stream<Alignment> alignByIdNotSegmented() {
+        return idPairs.stream()
+                .map(e -> new Alignment(Arrays.asList(e.getKey()), Arrays.asList(e.getValue())));
     }
 
-    private List<MutableBead> alignByIdSegmented() {
+    private Stream<Alignment> alignByIdSegmented() {
         return idPairs.stream().map(e -> {
             List<String> source = Core.getSegmenter().segment(srcLang, e.getKey(), null, null).stream()
                     .filter(s -> !s.isEmpty()).collect(Collectors.toList());
             List<String> target = Core.getSegmenter().segment(trgLang, e.getValue(), null, null).stream()
                     .filter(s -> !s.isEmpty()).collect(Collectors.toList());
             return doAlign(algorithmClass, calculatorType, counterType, source, target);
-        }).flatMap(List::stream).map(MutableBead::new).collect(Collectors.toList());
+        }).flatMap(List::stream);
     }
 
-    private List<MutableBead> alignHeapwise(boolean doSegmenting) {
+    private Stream<Alignment> alignHeapwise(boolean doSegmenting) {
         List<String> srcSegs = doSegmenting ? segmentAll(srcLang, srcRaw) : srcRaw;
         List<String> trgSegs = doSegmenting ? segmentAll(trgLang, trgRaw) : trgRaw;
-        return doAlign(algorithmClass, calculatorType, counterType, srcSegs, trgSegs).stream()
-                .map(MutableBead::new).collect(Collectors.toList());
-    }
-
-    static double calculateAvgDist(List<MutableBead> beads) {
-        return beads.stream().mapToDouble(bead -> bead.score).average().orElse(Double.MAX_VALUE);
+        return doAlign(algorithmClass, calculatorType, counterType, srcSegs, trgSegs).stream();
     }
 
     public void writePairsToTMX(File outFile, List<Entry<String, String>> pairs) throws Exception {
@@ -271,7 +267,7 @@ public class Aligner {
         }
     }
 
-    List<MutableBead> alignToBeads() throws Exception {
+    Stream<Alignment> alignImpl() throws Exception {
         if (srcRaw == null || trgRaw == null) {
             loadFiles();
         }
@@ -286,64 +282,12 @@ public class Aligner {
         throw new UnsupportedOperationException("Unknown comparison mode: " + comparisonMode);
     }
 
-    List<Entry<String, String>> beadsToEntries(List<MutableBead> beads) {
-        return beads.stream().filter(bead -> bead.enabled).map(bead -> {
-            String srcOut = join(srcLang, bead.sourceLines);
-            String trgOut = join(trgLang, bead.targetLines);
+    public List<Entry<String, String>> align() throws Exception {
+        return alignImpl().map(bead -> {
+            String srcOut = Util.join(srcLang, bead.getSourceSegmentList());
+            String trgOut = Util.join(trgLang, bead.getTargetSegmentList());
             return new AbstractMap.SimpleImmutableEntry<String, String>(srcOut, trgOut);
         }).collect(Collectors.toList());
-    }
-
-    public List<Entry<String, String>> align() throws Exception {
-        return beadsToEntries(alignToBeads());
-    }
-
-    static String join(Language lang, List<?> items) {
-        return Util.join(lang.isSpaceDelimited() ? " " : "", items);
-    }
-
-    enum Status {
-        DEFAULT, ACCEPTED, NEEDS_REVIEW
-    }
-
-    static class MutableBead {
-        public final float score;
-        public final List<String> sourceLines;
-        public final List<String> targetLines;
-        public boolean enabled;
-        public Status status;
-
-        private MutableBead(float score, List<String> sourceLines, List<String> targetLines) {
-            this.score = score;
-            this.sourceLines = new ArrayList<String>(sourceLines);
-            this.targetLines = new ArrayList<String>(targetLines);
-            this.enabled = !Util.deepEquals(sourceLines, targetLines);
-            this.status = Status.DEFAULT;
-        }
-
-        public MutableBead(Alignment alignment) {
-            this(alignment.getScore(), alignment.getSourceSegmentList(), alignment.getTargetSegmentList());
-        }
-
-        public MutableBead(List<String> sourceLines, List<String> targetLines) {
-            this(Float.MAX_VALUE, sourceLines, targetLines);
-        }
-
-        public MutableBead(String source, String target) {
-            this(Arrays.asList(source), Arrays.asList(target));
-        }
-
-        public MutableBead() {
-            this(Collections.emptyList(), Collections.emptyList());
-        }
-
-        public boolean isBalanced() {
-            return sourceLines.size() == targetLines.size();
-        }
-
-        public boolean isEmpty() {
-            return sourceLines.isEmpty() && targetLines.isEmpty();
-        }
     }
 
     private static Calculator getCalculator(CalculatorType calculatorType, CounterType counterType,

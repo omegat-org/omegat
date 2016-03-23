@@ -31,6 +31,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.omegat.util.Language;
+
 /**
  * @author Aaron Madlon-Kay
  */
@@ -77,6 +79,10 @@ public class Util {
         }
         sb.delete(sb.length() - delimiter.length(), sb.length());
         return sb.toString();
+    }
+
+    static String join(Language lang, List<?> items) {
+        return Util.join(lang.isSpaceDelimited() ? " " : "", items);
     }
 
     static <T> boolean deepEquals(Collection<T> items1, Collection<T> items2) {

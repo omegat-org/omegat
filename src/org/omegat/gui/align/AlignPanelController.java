@@ -50,6 +50,7 @@ import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import javax.swing.AbstractButton;
 import javax.swing.Action;
@@ -93,7 +94,6 @@ import org.omegat.gui.align.Aligner.AlgorithmClass;
 import org.omegat.gui.align.Aligner.CalculatorType;
 import org.omegat.gui.align.Aligner.ComparisonMode;
 import org.omegat.gui.align.Aligner.CounterType;
-import org.omegat.gui.align.Aligner.MutableBead;
 import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
@@ -384,7 +384,8 @@ public class AlignPanelController {
                         }
                         List<MutableBead> beads = ((BeadTableModel) panel.table.getModel()).getData();
                         try {
-                            aligner.writePairsToTMX(file, aligner.beadsToEntries(beads));
+                            aligner.writePairsToTMX(file,
+                                    MutableBead.beadsToEntries(aligner.srcLang, aligner.trgLang, beads));
                             modified = false;
                         } catch (Exception ex) {
                             Log.log(ex);
@@ -460,21 +461,21 @@ public class AlignPanelController {
         frame.markAcceptedItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setStatus(panel.table, Aligner.Status.ACCEPTED, panel.table.getSelectedRows());
+                setStatus(panel.table, MutableBead.Status.ACCEPTED, panel.table.getSelectedRows());
             }
         });
 
         frame.markNeedsReviewItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setStatus(panel.table, Aligner.Status.NEEDS_REVIEW, panel.table.getSelectedRows());
+                setStatus(panel.table, MutableBead.Status.NEEDS_REVIEW, panel.table.getSelectedRows());
             }
         });
 
         frame.clearMarkItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setStatus(panel.table, Aligner.Status.DEFAULT, panel.table.getSelectedRows());
+                setStatus(panel.table, MutableBead.Status.DEFAULT, panel.table.getSelectedRows());
             }
         });
 
@@ -670,7 +671,7 @@ public class AlignPanelController {
         table.repaint();
     }
 
-    private void setStatus(JTable table, Aligner.Status status, int... rows) {
+    private void setStatus(JTable table, MutableBead.Status status, int... rows) {
         if (rows.length == 0) {
             return;
         }
@@ -713,7 +714,7 @@ public class AlignPanelController {
         loader = new SwingWorker<List<MutableBead>, Object>() {
             @Override
             protected List<MutableBead> doInBackground() throws Exception {
-                return aligner.alignToBeads();
+                return aligner.alignImpl().map(MutableBead::new).collect(Collectors.toList());
             }
 
             @Override
@@ -734,7 +735,7 @@ public class AlignPanelController {
 
                 String distanceValue = null;
                 if (beads != null) {
-                    double avgDist = Aligner.calculateAvgDist(beads);
+                    double avgDist = MutableBead.calculateAvgDist(beads);
                     distanceValue = StringUtil.format(OStrings.getString("ALIGNER_PANEL_LABEL_AVGSCORE"),
                             avgDist == Long.MAX_VALUE ? "-" : String.format("%.3f", avgDist));
                     panel.table.setModel(new BeadTableModel(beads));
@@ -869,7 +870,7 @@ public class AlignPanelController {
         BeadTableModel model = (BeadTableModel) panel.table.getModel();
         boolean needsReview = false;
         for (MutableBead bead : model.getData()) {
-            if (bead.status == Aligner.Status.NEEDS_REVIEW) {
+            if (bead.status == MutableBead.Status.NEEDS_REVIEW) {
                 needsReview = true;
                 break;
             }
@@ -928,8 +929,8 @@ public class AlignPanelController {
                 comp.setBackground(table.getSelectionBackground());
                 comp.setForeground(table.getSelectionForeground());
             } else {
-                Aligner.Status status = ((BeadTableModel) table.getModel()).getStatusForRow(row);
-                if (column == BeadTableModel.COL_CHECKBOX && status != Aligner.Status.DEFAULT) {
+                MutableBead.Status status = ((BeadTableModel) table.getModel()).getStatusForRow(row);
+                if (column == BeadTableModel.COL_CHECKBOX && status != MutableBead.Status.DEFAULT) {
                     switch (status) {
                     case ACCEPTED:
                         comp.setBackground(Styles.EditorColor.COLOR_ALIGNER_ACCEPTED.getColor());
@@ -1198,7 +1199,7 @@ public class AlignPanelController {
             return data.indexOf(rowToBead.get(row));
         }
 
-        Aligner.Status getStatusForRow(int row) {
+        MutableBead.Status getStatusForRow(int row) {
             return rowToBead.get(row).status;
         }
 
@@ -1296,7 +1297,7 @@ public class AlignPanelController {
             MutableBead trgBead = rowToBead.get(rows.get(0));
             List<String> trgLines = col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines;
             Language lang = col == COL_SRC ? aligner.srcLang : aligner.trgLang;
-            String combined = Aligner.join(lang, toCombine);
+            String combined = Util.join(lang, toCombine);
             trgLines.set(Util.indexByIdentity(trgLines, toCombine.get(0)), combined);
             makeCache();
             if (origRowCount != getRowCount()) {
@@ -1460,7 +1461,7 @@ public class AlignPanelController {
             }
         }
 
-        void setStatusAtRow(int row, Aligner.Status status) {
+        void setStatusAtRow(int row, MutableBead.Status status) {
             MutableBead bead = rowToBead.get(row);
             bead.status = status;
         }

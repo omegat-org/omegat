@@ -63,7 +63,7 @@ it gave better results.
   7 Bug fixes
   5 Localisation updates
 ----------------------------------------------------------------------
-3.6.0 vs 3.5.3
+3.6.0 vs 3.5.4
 
   Implemented requests:  
 

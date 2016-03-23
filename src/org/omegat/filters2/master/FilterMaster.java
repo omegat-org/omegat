@@ -105,7 +105,7 @@ public class FilterMaster {
     private final Filters config;
 
     /** Classes of all filters. */
-    private static List<Class<?>> filtersClasses;
+    static List<Class<?>> filtersClasses;
 
     static {
         try {

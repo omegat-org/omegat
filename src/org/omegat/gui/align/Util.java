@@ -25,9 +25,7 @@
 
 package org.omegat.gui.align;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.omegat.util.Language;
 
@@ -53,14 +51,6 @@ public class Util {
             }
         }
         return false;
-    }
-
-    static <T, U> List<U> mapList(List<T> items, Map<T, U> map) {
-        List<U> result = new ArrayList<U>();
-        for (T item : items) {
-            result.add(map.get(item));
-        }
-        return result;
     }
 
     static String join(String delimiter, List<?> items) {

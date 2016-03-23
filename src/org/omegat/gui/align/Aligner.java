@@ -152,6 +152,7 @@ public class Aligner {
     void clearLoaded() {
         srcRaw = null;
         trgRaw = null;
+        idPairs = null;
     }
 
     private Entry<List<String>, List<String>> parseFile(String file) throws Exception {

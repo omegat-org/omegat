@@ -26,8 +26,6 @@
 package org.omegat.gui.align;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -83,28 +81,5 @@ public class Util {
 
     static String join(Language lang, List<?> items) {
         return Util.join(lang.isSpaceDelimited() ? " " : "", items);
-    }
-
-    static <T> boolean deepEquals(Collection<T> items1, Collection<T> items2) {
-        if (items1 == items2 || items1.equals(items2)) {
-            return true;
-        }
-        if (items1.size() != items2.size()) {
-            return false;
-        }
-        Iterator<T> i1 = items1.iterator();
-        Iterator<T> i2 = items2.iterator();
-        while (i1.hasNext()) {
-            T o1 = i1.next();
-            T o2 = i2.next();
-            if (o1 == null && o2 == null) {
-                // Fallthrough
-            } else if (o1 == null || o2 == null) {
-                return false;
-            } else if (!o1.equals(o2)) {
-                return false;
-            }
-        }
-        return true;
     }
 }

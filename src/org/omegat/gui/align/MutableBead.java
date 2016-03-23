@@ -52,7 +52,7 @@ class MutableBead {
         this.score = score;
         this.sourceLines = new ArrayList<String>(sourceLines);
         this.targetLines = new ArrayList<String>(targetLines);
-        this.enabled = !Util.deepEquals(sourceLines, targetLines);
+        this.enabled = !sourceLines.equals(targetLines);
         this.status = MutableBead.Status.DEFAULT;
     }
 

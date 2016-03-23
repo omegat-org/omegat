@@ -39,13 +39,14 @@
 
       <mediaobject>
         <imageobject role="html">
-		          <imagedata fileref="images/Omegatproject.png"/>
-       </imageobject>
-      <imageobject role="fo">
+          <imagedata fileref="images/Omegatproject.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
           <imagedata fileref="images/Omegatproject.png" width="60%"/>
         </imageobject>
       </mediaobject>
-	  </figure>
+    </figure>
 
     <para>Il est possible de changer l'emplacement de certains des dossiers lors de la création du projet ou durant la traduction. Il est donc possible de sélectionner des dossiers existants ou de créer des dossiers à des emplacements qui s'accordent avec vos habitudes de travail et de gestion de projets. Pour modifier l'emplacement d'un dossier après la création du projet, ouvrez <guimenuitem>Projet &gt; Propriétés...</guimenuitem> dans le menu ou grâce au raccourci<guibutton>Ctrl+E</guibutton> et faites les modifications nécessaires.</para>
 
@@ -129,6 +130,12 @@
                 <entry>Le fichier filters.xml</entry>
 
                 <entry>contient les filtres de fichier spécifiques au projet s'ils existent. Ces filtres peuvent être établis dans <guimenuitem>Projet &gt; Propriétés... </guimenuitem>Voir<link linkend="chapter.project.properties">le chapitre Propriétés du projet</link></entry>
+              </row>
+
+              <row>
+                <entry>uiLayout.xml</entry>
+
+                <entry>Si présent, il contient les paramètres d'interface utilisateur spécifiques au projet.</entry>
               </row>
             </tbody>
           </tgroup>
@@ -248,6 +255,8 @@
         </tbody>
       </tgroup>
     </informaltable>
+
+    <para>Vous pouvez accéder directement à ce dossier avec l'entrée de menu <menuchoice> <guimenu>Options</guimenu> <guimenuitem>Accéder au dossier de configuration</guimenuitem> </menuchoice>.</para>
   </section>
 
   <section id="application.files">
@@ -322,23 +331,16 @@
             <entry><application>OmegaT</application></entry>
 
             <entry><para>Un fichier texte contenant deux lignes :</para>
-
             <programlisting>#!/bin/bash java
-java -jar OmegaT.jar $*</programlisting>
-
-            <para>Ce fichier peut être utile aux utilisateurs de Linux et d'OS X. Rendez-le exécutable (<literal>chmod +x OmegaT</literal>) à partir de la ligne de commande après vous être assuré que vous êtes dans le dossier où se trouve OmegaT. Vous pourrez ainsi lancer OmegaT en exécutant ce fichier à partir de la ligne de commande.</para>
-            </entry>
+java -jar OmegaT.jar $*</programlisting> <para>Ce fichier peut être utile aux utilisateurs de Linux et d'OS X. Rendez-le exécutable (<literal>chmod +x OmegaT</literal>) à partir de la ligne de commande après vous être assuré que vous êtes dans le dossier où se trouve OmegaT. Vous pourrez ainsi lancer OmegaT en exécutant ce fichier à partir de la ligne de commande.</para></entry>
           </row>
-          
+
           <row>
             <entry>OmegaT.bat</entry>
 
-            <entry><para>Un fichier de traitement par lots, utilisé pour lancer <application>OmegaT</application> à partir de la ligne de commande Windows. Il ne contient que la ligne suivante :</para>
-
-            <programlisting>java -jar OmegaT.jar %*</programlisting>
-            </entry>
+            <entry><para>Un fichier de traitement par lots, utilisé pour lancer <application>OmegaT</application> à partir de la ligne de commande Windows. Il ne contient que la ligne suivante :</para> <programlisting>java -jar OmegaT.jar %*</programlisting></entry>
           </row>
-          
+
           <row>
             <entry><literal>OmegaT.jar</literal></entry>
 

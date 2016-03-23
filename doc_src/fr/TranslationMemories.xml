@@ -89,6 +89,8 @@
 
           <listitem>
             <para>Si vous êtes certains qu'une TMX est plus à jour que <filename>project_save.tmx</filename> d'OmegaT, placez cette TMX dans /tm/enforce pour remplacer les traductions existantes par défaut inconditionnellement.</para>
+
+            <para>L'écrasement est mis en œuvre jusqu'à ce que la TMX soit supprimée de /tm/enforce.</para>
           </listitem>
         </varlistentry>
 

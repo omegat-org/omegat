@@ -56,7 +56,7 @@
 
     <para>Exemple :</para>
 
-    <para><literal>&lt;b0&gt;Ce formatage&lt;/b0&gt; va être dupliqué ici.</literal></para>
+    <para><literal>&lt;b0&gt;Ce formatage&lt;/b0&gt; va être dupliqué ici.&lt;segment 0001&gt;</literal></para>
 
     <para>Après la duplication :</para>
 

@@ -183,6 +183,16 @@
             </row>
 
             <row>
+              <entry><guimenuitem>Accéder au contenu du projet</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap/>
+                </keycombo></entry>
+
+              <entry>Donne accès aux dossiers du projet<para>De plus, deux entrées de menu permettent d'ouvrir directement les documents source et cible actuels ainsi que le glossaire en écriture. Les documents sont ouverts par l'application choisie par le système d'exploitation. Si les documents ne sont pas disponibles, l'entrée est grisée.</para></entry>
+            </row>
+
+            <row>
               <entry><guimenuitem>Quitter</guimenuitem></entry>
 
               <entry><keycombo>
@@ -289,7 +299,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Remplacer par la correspondance</guimenuitem></entry>
+              <entry><guimenuitem>Remplacer par la correspondance ou la sélection</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -297,11 +307,11 @@
                   <keycap>R</keycap>
                 </keycombo></entry>
 
-              <entry>Remplace le segment cible complet par la correspondance sélectionnée (par défaut, c'est la première correspondance qui est sélectionnée).</entry>
+              <entry>Remplace le segment cible complet par la correspondance sélectionnée (par défaut, c'est la première correspondance qui est sélectionnée).<para>Si une partie du texte est sélectionnée dans la correspondance partielle, seule cette sélection remplacera l'ensemble du segment cible.</para></entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Insérer la correspondance</guimenuitem></entry>
+              <entry><guimenuitem>Insérer la correspondance ou la sélection</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -309,7 +319,7 @@
                   <keycap>I</keycap>
                 </keycombo></entry>
 
-              <entry>Insère la correspondance sélectionnée à l'endroit où se trouve le curseur. Si une partie du segment cible a été sélectionnée, cette fonction remplace la partie sélectionnée par la correspondance.</entry>
+              <entry>Insère la correspondance sélectionnée à l'endroit où se trouve le curseur. Si une partie du segment cible a été sélectionnée, cette fonction remplace la partie sélectionnée par la correspondance.<para>Si une partie du texte est sélectionnée dans la correspondance partielle, seule cette sélection sera insérée à la position du curseur.</para></entry>
             </row>
 
             <row>
@@ -387,7 +397,7 @@
                   <keycap>Ctrl</keycap> <keycap>Maj</keycap> <keycap>G</keycap>
                 </keycombo></entry>
 
-              <entry>Permet à l'utilisateur de créer une entrée dans le fichier glossaire par défaut.</entry>
+              <entry>Permet à l'utilisateur de créer une entrée dans le fichier glossaire par défaut.<para>Si vous sélectionnez du texte (dans n'importe quel volet) avant d'appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>Maj</keycap> <keycap>G</keycap> </keycombo>, le texte sera collé par défaut dans le champ <guilabel>Terme source</guilabel>.</para></entry>
             </row>
 
             <row>
@@ -399,7 +409,7 @@
                   <keycap>F</keycap>
                 </keycombo></entry>
 
-              <entry>Ouvre une nouvelle fenêtre de <link linkend="section.search.window">Recherche textuelle</link>.</entry>
+              <entry>Ouvre une nouvelle fenêtre de <link linkend="section.search.window">Recherche textuelle</link>.<para>Si vous sélectionnez du texte (dans n'importe quel volet) avant d'appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, le texte sera collé par défaut dans le champ <guilabel>Recherche</guilabel>.</para></entry>
             </row>
 
             <row>
@@ -411,7 +421,7 @@
                   <keycap>K</keycap>
                 </keycombo></entry>
 
-              <entry>Ouvre une nouvelle <link linkend="section.searchreplace.window">fenêtre de Recherche et remplacement</link>.</entry>
+              <entry>Ouvre une nouvelle <link linkend="section.searchreplace.window">fenêtre de Recherche et remplacement</link>.<para>Si vous sélectionnez du texte (dans n'importe quel volet) avant d'appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo>, le texte sera collé par défaut dans le champ <guilabel>Recherche</guilabel>.</para></entry>
             </row>
 
             <row>
@@ -419,7 +429,7 @@
 
               <entry><keycombo> <keycap>Maj</keycap> <keycap>F3</keycap> </keycombo> (voir texte)</entry>
 
-              <entry>Change la casse du texte sélectionné dans le segment cible en fonction de l'option sélectionnée (Minuscule, Majuscule ou 1ère lettre des mots en majuscule). Utilisez Maj+F3 <indexterm>
+              <entry>Change la casse du texte sélectionné dans le segment cible en fonction de l'option sélectionnée (Minuscule, Majuscule, 1ère lettre des mots en majuscule ou Phrase). Utilisez Maj+F3 <indexterm>
                   <primary>Raccourcis</primary> <secondary>Sélection de la casse - Maj+F3</secondary>
                 </indexterm> pour passer d'une option à l'autre. Si aucun texte n'est sélectionné, <application>OmegaT</application> sélectionne le mot qui contient la lettre se trouvant immédiatement à la droite du curseur.</entry>
             </row>
@@ -541,7 +551,7 @@
                   <keycap>J</keycap>
                 </keycombo></entry>
 
-              <entry>Le segment s'ouvre lorsque son numéro de segment est saisi.</entry>
+              <entry>Le segment s'ouvre lorsque son numéro de segment est saisi ou que son raccourci est entré.</entry>
             </row>
 
             <row>
@@ -651,14 +661,19 @@
             <row>
               <entry><guimenuitem>Marquer les caractères de contrôle de bidirectionnalité</guimenuitem></entry>
 
-              <entry>Cette option affiche les <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">caractères de contrôle de bidirectionnalité</ulink>
-              </entry>
+              <entry>Cette option affiche les <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">caractères de contrôle de bidirectionnalité</ulink></entry>
             </row>
 
             <row>
               <entry><guimenuitem>Marquer les segments traduits à partir du dossier auto</guimenuitem></entry>
 
               <entry>Si cochée, l'arrière-plan de tous les segments où le segment cible a été rempli automatiquement (à partir des TMX placées dans /tm/auto, par exemple) sont affichés en couleur. Les couleurs sont affichées si l'option « Enregistrer l'état des traductions issues du dossier auto » (dans Options/Ligne d'édition...) est cochée. Les traductions habituelles insérées depuis le dossier auto sont affichées en orange. D'autres traductions, identifiées spécifiquement dans la TMX, peuvent être affichées avec différentes couleurs. Pour les détails techniques, consultez la <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">demande d'amélioration</ulink></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Utilisation intensive des polices de repli</guimenuitem></entry>
+
+              <entry>Cochez cette option si OmegaT n'affiche par certains glyphes correctement (même si les polices contenant les glyphes appropriés sont installées sur votre machine). Note : sous Windows, ce mécanisme manuel de polices de repli peut interférer avec la méthode de repli standard, provoquant ainsi une substitution de polices non souhaitée. Pour cette raison, il est désactivé par défaut.</entry>
             </row>
 
             <row>
@@ -766,13 +781,13 @@
             <row>
               <entry><guimenuitem>Traduction automatique</guimenuitem></entry>
 
-              <entry>Vous permet d'activer/de désactiver les outils de traduction automatique proposés. Lorsqu'il est actif, <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> insérera la suggestion dans la partie cible du segment en cours.</entry>
+              <entry>Vous permet d'activer/de désactiver les outils de traduction automatique proposés. Lorsqu'il est actif, <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> insérera la suggestion dans la partie cible du segment en cours.<para>Pour des motifs de confidentialité, vous pouvez ne pas vouloir envoyer tous les segments à l'outil de traduction automatique. En décochant <emphasis role="bold">Récupérer automatiquement les traductions</emphasis>, les traductions automatiques seront récupérées uniquement lors de l'utilisation de <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> (<keycombo> <keycap>Cmd</keycap> <keycap>M</keycap> </keycombo> sur OS X) sur le segment actuel. Vous devez ensuite utiliser <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> une deuxième fois pour insérer la suggestion.</para><para>Cochez l'option <emphasis role="bold">Uniquement les segments non traduits</emphasis> pour désactiver les outils de traduction automatique sur les segments déjà traduits. Note : dans ce cas, <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> peut quand même être utilisé pour forcer l'appel à la traduction automatique sur un segment déjà traduit.</para></entry>
             </row>
 
             <row>
               <entry><guimenuitem>Glossaires</guimenuitem></entry>
 
-              <entry>L'option <guimenuitem>Afficher la description du contexte pour les glossaires TBX</guimenuitem> permet d'afficher ou de masquer les informations contextuelles des termes (provenant des glossaires TBX situés dans le dossier <filename>glossary</filename>) dans le volet Glossaires.<para>Les 3 autres options sont décrites dans la page spécifique concernant <link linkend="section.TaaS.options">TaaS</link> (Terminology as a Service).</para></entry>
+              <entry>L'option <guimenuitem>Afficher la description du contexte pour les glossaires TBX</guimenuitem> permet d'afficher ou de masquer les informations contextuelles des termes (provenant des glossaires TBX situés dans le dossier <filename>glossary</filename>) dans le volet Glossaires.<para>Si <guimenuitem>Utiliser les termes apparaissant séparément dans le texte source</guimenuitem> est activée, l'entrée de glossaire « itema itemb » sera trouvée dans le texte source « itema autre mot itemb ». Si l'option est désactivée, l'entrée de glossaire ci-dessus ne sera pas trouvée.</para><para>Si l'option <guimenuitem>Utiliser la lemmatisation pour les entrées de glossaire</guimenuitem> est activée, avec un texte source anglais l'entrée de glossaire « element » sera trouvée sir le texte source contient « elements ». Si l'option est désactivée, l'entrée de glossaire ci-dessus ne sera pas trouvée.</para><para>L'option <emphasis>Remplacer les entrées de glossaire lors de l'insertion du texte source</emphasis> permet de remplacer automatiquement les correspondances de glossaire avec le terme cible lorsque le texte source est inséré. Cela s'applique à <emphasis>Edition &gt; Remplacer par la source</emphasis>, <emphasis>Edition &gt; Insérer la source</emphasis> et lorsque qu'on active un segment avec l'option <emphasis>Options &gt; Ligne d'édition &gt; [Insérer] Le texte source</emphasis> est activée. Lorsque plusieurs termes cible sont disponibles, le premier (selon l'affichage du volet Glossaires) sera utilisé. La correspondance de glossaire n'utiliser pas la lemmatisation ou les mots non significatifs, mais est sensible à la casse. OmegaT essaye de faire correspondre la capitalisation du mot source.</para><para>Les 3 autres options sont décrites dans la page spécifique concernant <link linkend="section.TaaS.options">TaaS</link> (Terminology as a Service).</para></entry>
             </row>
 
             <row>
@@ -784,7 +799,7 @@
             <row>
               <entry><guimenuitem>Saisie automatique</guimenuitem></entry>
 
-              <entry><para>Cliquez sur <guimenuitem>Glossaire...</guimenuitem> pour configurer la vue Glossaire de la saisie automatique.</para><para>Cliquez sur <guimenuitem>Texte automatique...</guimenuitem> pour configurer les options de texte automatique et pour ajouter ou supprimer des entrées.</para><para>Cliquez sur <guimenuitem>Table de caractères...</guimenuitem> pour définir les options de la table de caractères de la saisie automatique.</para></entry>
+              <entry><para>Cliquez sur <guimenuitem>Glossaire...</guimenuitem> pour configurer la vue Glossaire de la saisie automatique.</para><para>Cliquez sur <guimenuitem>Texte automatique...</guimenuitem> pour configurer les options de texte automatique et pour ajouter ou supprimer des entrées.</para><para>Cliquez sur <guimenuitem>Table de caractères...</guimenuitem> pour définir les options de la table de caractères de la saisie automatique.</para><para>La saisie automatique s'ouvre dans le segment cible avec le raccourci <emphasis role="bold">Ctrl+Space</emphasis>.</para><para>Si l'option <emphasis role="bold">Afficher automatiquement les suggestions pertinentes</emphasis> est cochée, la saisie automatique s'ouvre autoamtiquement en tapant la première lettre de la traduction d'une entrée de glossaire ou un entrant « &lt; » dans le cas des balises.</para></entry>
             </row>
 
             <row>
@@ -824,9 +839,9 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Validation des balises...</guimenuitem></entry>
+              <entry><guimenuitem>Traitement des balises...</guimenuitem></entry>
 
-              <entry>Pour les programmeurs : permet de configurer les options de validation des balises afin de vérifier également les variables de programmation (%...).</entry>
+              <entry>Lors de la traduction de fichiers liés à des logiciels : permet de configurer les options de validation des balises afin de vérifier également les variables de programmation (%...). Elle permet également de définir différentes options liées à la validation des balises et de définir des balises personnalisées.</entry>
             </row>
 
             <row>

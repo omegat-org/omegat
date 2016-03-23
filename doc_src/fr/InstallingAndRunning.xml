@@ -195,7 +195,7 @@
     <section id="which.package.to.download.OSX">
       <title>Téléchargement du paquet</title>
 
-      <para><application>OmegaT</application> contient Java 1.7</para>
+      <para><application>OmegaT</application> contient Java 1.8</para>
 
       <para>Téléchargez<emphasis>OmegaT_3.n.n_Mac.zip.</emphasis></para>
     </section>
@@ -298,6 +298,16 @@
       <para>Une fois <application>OmegaT</application> installé, vous pouvez le lancer directement à partir de la ligne de commande, créer un script qui contient les paramètres de lancement de la ligne de commande ou encore cliquer sur <emphasis><application>OmegaT</application>.jar</emphasis> pour le lancer directement. Les méthodes diffèrent en fonction de la distribution. Assurez-vous que vos paramètres <emphasis>PATH</emphasis> sont corrects et que les fichiers<emphasis>.jar </emphasis> sont correctement associés à un lanceur Java. Voir « Lancement des lignes de commandes » ci-dessous pour plus d'informations.</para>
     </section>
   </section>
+  
+    <section id="drag.and.drop">
+    <title>Glisser-déplacer<indexterm class="singular">
+        <primary>Exécution d'OmegaT</primary> <secondary>Glisser/déplacer</secondary>
+      </indexterm></title>
+    
+    <para>Dans la plupart des systèmes, il est possible d'ouvrir un projet en déposant un fichier <filename>omegat.project</filename> sur l'icône d'OmegaT du bureau. Il est parfois également possible d'ouvrir un projet OmegaT en double-cliquant sur un fichier <filename>omegat.project</filename>.</para>
+    
+    </section>
+
 
   <section id="using.Java.Web.Start">
     <title>Utilisation de Java Web Start<indexterm class="singular">
@@ -453,7 +463,6 @@
 
           <para><emphasis role="bold">-Dyandex.api.key=</emphasis><emphasis role="bold">trnsl.1.1.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</emphasis></para>
         </listitem>
-
       </itemizedlist>
 
       <para>Les arguments peuvent être combinés. Pour lancer <application>OmegaT</application> avec tous les exemples décrits plus haut, la commande serait :</para>
@@ -499,6 +508,8 @@
 
         <para><literal>--config-dir=/chemin/vers/le/dossier de configuration/ \</literal></para>
 
+        <para><literal> --config-file=/path/to/config-file/ \</literal></para>
+
         <para><literal>
         --mode=console-translate|console-createpseudotranslatetmx|console-align</literal></para>
 
@@ -517,6 +528,10 @@
         <itemizedlist>
           <listitem>
             <para><literal>--config-dir=&lt;config-dir&gt;</literal> dit à <application>OmegaT</application> dans quel dossier sont conservés les fichiers de configuration. Si ce paramètre n'est pas donné, <application>OmegaT</application> retourne aux valeurs par défaut (dossier <application>OmegaT</application> dans le dossier personnel de l'utilisateur ou, s'il n'est pas disponible, dans le dossier de travail actuel). Notez bien les doubles caractères</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>--config-file=&lt;config-file&gt;</literal> spécifie à <application>OmegaT</application> le fichier de configuration à utiliser.</para>
           </listitem>
         </itemizedlist>
 

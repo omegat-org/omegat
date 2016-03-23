@@ -39,6 +39,9 @@
     <para>Par défaut, les scripts sont stockés dans le dossier « scripts » situé dans le dossier d'installation d'OmegaT (le dossier contenant OmegaT.jar).</para>
 
     <para>Vous pouvez y ajouter de nouveaux scripts afin qu'ils apparaissent dans le liste des scripts disponibles dans la fenêtre de Scripts.</para>
+
+    <para>Des scripts supplémentaires sont disponibles sur le site web suivant : <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink>
+    </para>
   </section>
 
   <section>

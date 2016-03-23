@@ -5,8 +5,8 @@
       <title>Chapitre&nbsp;15.&nbsp;Recherches</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT 3.1 - Guide de l'utilisateur">
-      <link rel="up" href="index.html" title="OmegaT 3.1 - Guide de l'utilisateur">
+      <link rel="home" href="index.html" title="OmegaT 3.5 - Guide de l'utilisateur">
+      <link rel="up" href="index.html" title="OmegaT 3.5 - Guide de l'utilisateur">
       <link rel="prev" href="chapter.segmentation.html" title="Chapitre&nbsp;14.&nbsp;Segmentation de la source">
       <link rel="next" href="chapter.searchandreplace.html" title="Chapitre&nbsp;16.&nbsp;Rechercher et remplacer">
    </head>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.searches"></a>Chapitre&nbsp;15.&nbsp;Recherches<a class="indexterm" name="d0e7396"></a></h1>
+                  <h1 class="title"><a name="chapter.searches"></a>Chapitre&nbsp;15.&nbsp;Recherches<a class="indexterm" name="d0e7628"></a></h1>
                </div>
             </div>
          </div>
@@ -46,13 +46,14 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="search.window"></a>1.&nbsp;La fenêtre Recherche textuelle<a class="indexterm" name="d0e7402"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="search.window"></a>1.&nbsp;La fenêtre Recherche textuelle<a class="indexterm" name="d0e7634"></a></h2>
                   </div>
                </div>
             </div>
             <p>Ouvrez la fenêtre de Recherche textuelle en utilisant  <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> &gt; et saisissez dans le champ <span class="emphasis"><em>Rechercher</em></span> le mot ou l'expression que vous souhaitez trouver.
             </p>
-            <p>Vous pouvez également sélectionner un mot ou une expression dans l'Éditeur et appuyer sur <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>. Le mot ou l'expression est alors saisi(e) automatiquement dans le champ <span class="emphasis"><em>Rechercher</em></span>. Il est possible d'avoir plusieurs fenêtres de recherche ouvertes en même temps mais il est préférable de les fermer lorsqu'elles
+            <p>Vous pouvez également sélectionner un mot ou une expression dans les volets Éditeur, Correspondances ou Glossaires et appuyer
+               sur <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>. Le mot ou l'expression est alors saisi(e) automatiquement dans le champ <span class="emphasis"><em>Rechercher</em></span>. Il est possible d'avoir plusieurs fenêtres de recherche ouvertes en même temps mais il est préférable de les fermer lorsqu'elles
                ne sont plus utiles afin de ne pas encombrer le bureau.
             </p>
             <p>Cliquez sur la flèche déroulante de la case <span class="emphasis"><em>Rechercher</em></span> pour accéder aux 10 dernières recherches.
@@ -62,7 +63,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Utilisation de caractères génériques<a class="indexterm" name="d0e7437"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Utilisation de caractères génériques<a class="indexterm" name="d0e7669"></a></h2>
                   </div>
                </div>
             </div>
@@ -95,7 +96,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Méthodes de recherche et options<a class="indexterm" name="d0e7481"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Méthodes de recherche et options<a class="indexterm" name="d0e7713"></a></h2>
                   </div>
                </div>
             </div>
@@ -189,7 +190,8 @@
                   </li>
                </ul>
             </div>
-            <p>Le bouton <span class="guibutton">Options avancées</span> vous donne accès à des critères supplémentaires (auteur de la traduction, date de traduction, etc.).
+            <p>Le bouton <span class="guibutton">Options avancées</span> vous donne accès à des critères supplémentaires (auteur ou réviseur de la traduction, date de traduction, exclusion des segments
+               orphelins, etc.).
             </p>
          </div>
          <div class="section">
@@ -206,8 +208,11 @@
                sont affichés dans l'ordre de leur apparition dans le projet. Les segments traduits sont affichés avec le texte original au-dessus
                et le texte traduit en dessous, les segments non traduits n'affichent que la source.
             </p>
-            <p>Cliquer sur un segment permet de l'ouvrir dans l'Éditeur afin d'y apporter des modifications. Il est ensuite possible de retourner
-               à la fenêtre de recherche pour voir le segment trouvé suivant, le vérifier et effectuer, si nécessaire, des corrections terminologiques.
+            <p>Double-cliquer sur un segment permet de l'ouvrir dans l'Éditeur afin d'y apporter des modifications (un clic unique suffit
+               lorsque <span class="bold"><strong>Synchronisation automatique avec l'Éditeur</strong></span> est activée. Il est ensuite possible de retourner à la fenêtre de recherche pour voir le segment trouvé suivant, le vérifier
+               et effectuer, si nécessaire, des corrections terminologiques.
+            </p>
+            <p>Dans la fenêtre de recherche, vous pouvez utiliser les raccourcis clavier standard (<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>N</strong></span>, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>P</strong></span>) pour vous déplacer d'un segment à l'autre.
             </p>
             <p>Plusieurs fenêtres de recherche peuvent être ouvertes en même temps. On peut rapidement connaître leur contenu en regardant
                leur titre : il contient les termes de recherche utilisés.

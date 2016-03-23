@@ -12,7 +12,7 @@
 
     <para>Ouvrez la fenêtre de Recherche textuelle en utilisant  <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> &gt; et saisissez dans le champ <emphasis>Rechercher</emphasis> le mot ou l'expression que vous souhaitez trouver.</para>
 
-    <para>Vous pouvez également sélectionner un mot ou une expression dans l'Éditeur et appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. Le mot ou l'expression est alors saisi(e) automatiquement dans le champ <emphasis>Rechercher</emphasis>. Il est possible d'avoir plusieurs fenêtres de recherche ouvertes en même temps mais il est préférable de les fermer lorsqu'elles ne sont plus utiles afin de ne pas encombrer le bureau.</para>
+    <para>Vous pouvez également sélectionner un mot ou une expression dans les volets Éditeur, Correspondances ou Glossaires et appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. Le mot ou l'expression est alors saisi(e) automatiquement dans le champ <emphasis>Rechercher</emphasis>. Il est possible d'avoir plusieurs fenêtres de recherche ouvertes en même temps mais il est préférable de les fermer lorsqu'elles ne sont plus utiles afin de ne pas encombrer le bureau.</para>
 
     <para>Cliquez sur la flèche déroulante de la case <emphasis>Rechercher</emphasis> pour accéder aux 10 dernières recherches.</para>
   </section>
@@ -128,7 +128,7 @@
       </listitem>
     </itemizedlist>
 
-    <para>Le bouton <guibutton>Options avancées</guibutton> vous donne accès à des critères supplémentaires (auteur de la traduction, date de traduction, etc.).</para>
+    <para>Le bouton <guibutton>Options avancées</guibutton> vous donne accès à des critères supplémentaires (auteur ou réviseur de la traduction, date de traduction, exclusion des segments orphelins, etc.).</para>
   </section>
 
   <section id="search.result.display">
@@ -136,7 +136,9 @@
 
     <para>Presser le bouton Rechercher après avoir saisi une chaîne de caractères dans le champ de recherche permet d'afficher tous les segments du projet qui incluent la chaîne de caractères saisie. Comme <application>OmegaT</application> traite les segments identiques comme étant une seule et même entité, seul le premier segment unique est affiché. Les segments sont affichés dans l'ordre de leur apparition dans le projet. Les segments traduits sont affichés avec le texte original au-dessus et le texte traduit en dessous, les segments non traduits n'affichent que la source.</para>
 
-    <para>Cliquer sur un segment permet de l'ouvrir dans l'Éditeur afin d'y apporter des modifications. Il est ensuite possible de retourner à la fenêtre de recherche pour voir le segment trouvé suivant, le vérifier et effectuer, si nécessaire, des corrections terminologiques.</para>
+    <para>Double-cliquer sur un segment permet de l'ouvrir dans l'Éditeur afin d'y apporter des modifications (un clic unique suffit lorsque <emphasis role="bold">Synchronisation automatique avec l'Éditeur</emphasis> est activée. Il est ensuite possible de retourner à la fenêtre de recherche pour voir le segment trouvé suivant, le vérifier et effectuer, si nécessaire, des corrections terminologiques.</para>
+
+    <para>Dans la fenêtre de recherche, vous pouvez utiliser les raccourcis clavier standard (<keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo>) pour vous déplacer d'un segment à l'autre.</para>
 
     <para>Plusieurs fenêtres de recherche peuvent être ouvertes en même temps. On peut rapidement connaître leur contenu en regardant leur titre : il contient les termes de recherche utilisés.</para>
   </section>

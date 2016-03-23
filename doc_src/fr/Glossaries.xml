@@ -72,7 +72,9 @@
 
     <para>Les fichiers glossaire sont de simples fichiers texte brut contenant trois colonnes, formant des listes délimitées par tabulation avec les termes source et cible situés respectivement dans la première et la deuxième colonne. La troisième colonne peut être utilisée pour insérer des informations complémentaires. Il est possible de créer des entrées avec une colonne cible vide, c.-à-d. contenant seulement le terme source et le commentaire.</para>
 
-    <para>Les fichiers glossaire peuvent être du type d'encodage par défaut du système (et indiqués par l'extension .tab) ou en UTF-8 (extension .utf8 ou .txt) ou en UTF-16 LE (extension .txt). Le format CSV est également pris en charge. Ce format est le même que celui à séparation par tabulation : terme source, terme cible. Les champs de commentaire sont séparés par une virgule. Les chaînes de caractères peuvent être encadrées par des guillemets, ce qui permet d'inclure des virgules à l'intérieur des chaînes de caractères :</para>
+    <para>L'encodage des glossaires est déterminé automatiquement. Comme il faut bien sûr qu'il soit compatible avec les deux langues impliquées, Unicode est recommandé.</para>
+
+    <para>Le format CSV est également pris en charge. Ce format est le même que celui à séparation par tabulation : terme source, terme cible. Les champs de commentaire sont séparés par une virgule. Les chaînes de caractères peuvent être encadrées par des guillemets, ce qui permet d'inclure des virgules à l'intérieur des chaînes de caractères :</para>
 
     <para><literal>&quot;This is a source term, which contains a comma&quot;,&quot;Ceci est un terme, qui contient une virgule&quot;</literal></para>
 

@@ -108,6 +108,8 @@ import org.omegat.util.gui.Styles;
 import gen.core.filters.Filters;
 
 /**
+ * Controller for the alignment UI
+ * 
  * @author Aaron Madlon-Kay
  */
 public class AlignPanelController {
@@ -124,6 +126,13 @@ public class AlignPanelController {
     private Pattern highlightPattern = Pattern.compile(Preferences.getPreferenceDefault(
             Preferences.ALIGNER_HIGHLIGHT_PATTERN, Preferences.ALIGNER_HIGHLIGHT_PATTERN_DEFAULT));
 
+    /**
+     * The alignment workflow is separated into two phases:
+     * <ol>
+     * <li>Align: Verify and tweak the results of automatic algorithmic alignment
+     * <li>Edit: Manually edit the results
+     * </ol>
+     */
     private enum Phase {
         ALIGN, EDIT
     }
@@ -135,6 +144,12 @@ public class AlignPanelController {
         this.defaultSaveDir = defaultSaveDir;
     }
 
+    /**
+     * Display the align tool. The tool is not modal, so this call will return immediately.
+     * 
+     * @param parent
+     *            Parent window of the align tool
+     */
     public void show(Component parent) {
         final AlignMenuFrame frame = new AlignMenuFrame();
         frame.setTitle(OStrings.getString("ALIGNER_PANEL"));
@@ -701,6 +716,13 @@ public class AlignPanelController {
                 OStrings.getString("ALIGNER_DIALOG_WARNING_TITLE"), JOptionPane.OK_CANCEL_OPTION);
     }
 
+    /**
+     * Reloads the beads with the current settings. The loading itself takes place on a background thread.
+     * Calls {@link #updatePanel(AlignPanel, AlignMenuFrame)} afterwards.
+     * 
+     * @param panel
+     * @param frame
+     */
     private void reloadBeads(final AlignPanel panel, final AlignMenuFrame frame) {
         if (loader != null) {
             loader.cancel(true);
@@ -749,6 +771,13 @@ public class AlignPanelController {
         loader.execute();
     }
 
+    /**
+     * Ensure that the panel controls and available menu items are synced with the settings of the underlying
+     * aligner.
+     * 
+     * @param panel
+     * @param frame
+     */
     private void updatePanel(final AlignPanel panel, AlignMenuFrame frame) {
         panel.comparisonComboBox.setSelectedItem(aligner.comparisonMode);
         panel.algorithmComboBox.setSelectedItem(aligner.algorithmClass);
@@ -813,6 +842,14 @@ public class AlignPanelController {
         }
     }
 
+    /**
+     * If the user has modified the SRX rules, offer to save them permanently. Otherwise they are simply
+     * discarded. Does nothing when OmegaT's main window is not available (changes are always discarded under
+     * standalone use).
+     * 
+     * @param comp
+     *            Parent component for dialog boxes
+     */
     private void confirmSaveSRX(Component comp) {
         if (Core.getMainWindow() == null || customizedSRX == null) {
             return;
@@ -837,6 +874,14 @@ public class AlignPanelController {
         }
     }
 
+    /**
+     * If the user has modified the file filter settings, offer to save them permanently. Otherwise they are
+     * simply discarded. Does nothing when OmegaT's main window is not available (changes are always discarded
+     * under standalone use).
+     * 
+     * @param comp
+     *            Parent component for dialog boxes
+     */
     private void confirmSaveFilters(Component comp) {
         if (Core.getMainWindow() == null || customizedFilters == null) {
             return;
@@ -973,12 +1018,16 @@ public class AlignPanelController {
 
     @SuppressWarnings("serial")
     class BeadTableModel extends AbstractTableModel {
+        // For debugging purposes, additional columns are defined as COL_CHECKBOX - n.
+        // To enable them, set COL_CHECKBOX > 0.
         static final int COL_CHECKBOX = 0;
         static final int COL_SRC = COL_CHECKBOX + 1;
         static final int COL_TRG = COL_SRC + 1;
 
         final List<MutableBead> data;
 
+        // Maintain an integer (index) mapping of the contents of each row. This is required when modifying
+        // the underlying beads, as all changes are destructive and non-atomic. It also speeds up access.
         List<Float> rowToDistance;
         List<MutableBead> rowToBead;
         List<String> rowToSourceLine;
@@ -992,8 +1041,7 @@ public class AlignPanelController {
         private void makeCache() {
             for (int i = 0; i < data.size(); i++) {
                 MutableBead bead = data.get(i);
-                // Cull empty beads (can be created by splitting top/bottom
-                // line)
+                // Cull empty beads (can be created by splitting top/bottom line)
                 if (bead.isEmpty()) {
                     data.remove(i--);
                     continue;
@@ -1121,6 +1169,17 @@ public class AlignPanelController {
             rowToBead.get(rowIndex).enabled = (Boolean) aValue;
         }
 
+        /**
+         * Move the specified lines located in <code>rows</code> and <code>col</code> into the bead indicated
+         * by <code>trgRow</code>.
+         * 
+         * @param rows
+         *            Rows to move
+         * @param col
+         *            Column of
+         * @param trgRow
+         * @return An array of two ints indicating the start and end rows of the selection after moving
+         */
         int[] move(List<Integer> rows, int col, int trgRow) {
             if (!isEditableColumn(col)) {
                 throw new IllegalArgumentException();
@@ -1163,6 +1222,13 @@ public class AlignPanelController {
                     Util.indexByIdentity(lines, selected.get(selected.size() - 1)) };
         }
 
+        /**
+         * Split the specified bead into two: one with an equal number of source and target lines (e.g. 1-1)
+         * and one with the remainder (e.g. 0-1). The new bead is inserted into the underlying data store.
+         * 
+         * @param bead
+         * @return The remainder bead
+         */
         private MutableBead splitBead(MutableBead bead) {
             if (bead.isBalanced()) {
                 return bead;
@@ -1173,6 +1239,14 @@ public class AlignPanelController {
             return bead;
         }
 
+        /**
+         * Split the specified bead into two: the first with the specified count of lines, and the second with
+         * the remainder.
+         * 
+         * @param bead
+         * @param count
+         * @return The remainder bead
+         */
         private MutableBead splitBeadByCount(MutableBead bead, int count) {
             List<String> splitSrc = new ArrayList<>(bead.sourceLines);
             bead.sourceLines.clear();
@@ -1197,6 +1271,16 @@ public class AlignPanelController {
             return rowToBead.get(row).status;
         }
 
+        /**
+         * Indicate whether the line at the specified <code>row</code> and <code>col</code> can be moved in
+         * the indicated direction. A line is movable if it is not blocked by another line in the same bead.
+         * 
+         * @param row
+         * @param col
+         * @param up
+         *            Up (toward index=0) when true, down when false
+         * @return
+         */
         boolean canMove(int row, int col, boolean up) {
             if (!isEditableColumn(col)) {
                 return false;
@@ -1211,10 +1295,24 @@ public class AlignPanelController {
             return up ? index == 0 : index == lines.size() - 1;
         }
 
+        /**
+         * Indicate whether the line at the specified <code>row</code> and <code>col</code> can be moved to
+         * the bead indicated by <code>trgRow</code>. In addition to requiring
+         * {@link #canMove(int, int, boolean)} to return true, the bead must be different from the current
+         * bead, and no non-empty cells can exist between the current and target rows.
+         * 
+         * @param trgRow
+         * @param row
+         * @param col
+         * @param up
+         *            Up (toward index=0) when true, down when false
+         * @return
+         */
         boolean canMoveTo(int trgRow, int row, int col, boolean up) {
             if (!canMove(row, col, up) || trgRow == row) {
                 return false;
             }
+            // Check same bead
             if (trgRow >= 0 && trgRow < rowToBead.size()) {
                 MutableBead srcBead = rowToBead.get(row);
                 MutableBead trgBead = rowToBead.get(trgRow);
@@ -1222,6 +1320,7 @@ public class AlignPanelController {
                     return false;
                 }
             }
+            // Check no non-empty cells in path
             int inc = up ? -1 : 1;
             for (int r = row + inc; r != trgRow && r >= 0 && r < rowToSourceLine.size(); r += inc) {
                 String line = (col == COL_SRC ? rowToSourceLine : rowToTargetLine).get(r);
@@ -1236,6 +1335,13 @@ public class AlignPanelController {
             return data;
         }
 
+        /**
+         * Get a two-member array indicating the first and last rows covered by the bead at the specified
+         * <code>row</code>.
+         * 
+         * @param row
+         * @return
+         */
         int[] getRowExtentsForBeadAtRow(int row) {
             MutableBead bead = rowToBead.get(row);
             return new int[] { rowToBead.indexOf(bead), rowToBead.lastIndexOf(bead) };
@@ -1245,6 +1351,14 @@ public class AlignPanelController {
             return col == COL_SRC || col == COL_TRG;
         }
 
+        /**
+         * Get a list of rows for which the cell in the specified <code>col</code> represents an actual line
+         * (is not empty).
+         * 
+         * @param col
+         * @param rows
+         * @return
+         */
         List<Integer> realCellsInRowSpan(int col, int... rows) {
             List<Integer> result = new ArrayList<Integer>();
             for (int row : rows) {
@@ -1255,10 +1369,22 @@ public class AlignPanelController {
             return result;
         }
 
+        /**
+         * Get the last row of the bead immediately preceding the one at the indicated <code>row</code>.
+         * 
+         * @param row
+         * @return The row, or -1 if there is no previous bead
+         */
         int prevBeadFromRow(int row) {
             return nextBeadFromRowByOffset(row, -1);
         }
 
+        /**
+         * Get the first row of the bead immediately after the one at the indicated <code>row</code>.
+         * 
+         * @param row
+         * @return The row, or -1 if there is no next bead
+         */
         int nextBeadFromRow(int row) {
             return nextBeadFromRowByOffset(row, 1);
         }
@@ -1273,6 +1399,15 @@ public class AlignPanelController {
             return -1;
         }
 
+        /**
+         * Merge all lines at the indicated <code>rows</code> and <code>col</code> into the first specified
+         * row. This is destructive in that it actually joins the strings together and replaces the existing
+         * value.
+         * 
+         * @param rows
+         * @param col
+         * @return The resulting row
+         */
         int mergeRows(List<Integer> rows, int col) {
             if (!isEditableColumn(col)) {
                 throw new IllegalArgumentException();
@@ -1301,6 +1436,16 @@ public class AlignPanelController {
             return Util.indexByIdentity(lines, combined);
         }
 
+        /**
+         * Replace the line at <code>row</code> and <code>col</code> with the specified <code>split</code>
+         * lines, which are inserted in its place. This is destructive in that it removes the original line
+         * entirely.
+         * 
+         * @param row
+         * @param col
+         * @param split
+         * @return A two-member array indicating the first and last resulting rows
+         */
         int[] splitRow(int row, int col, String[] split) {
             if (!isEditableColumn(col)) {
                 throw new IllegalArgumentException();
@@ -1323,6 +1468,14 @@ public class AlignPanelController {
                     Util.indexByIdentity(lines, split[split.length - 1]) };
         }
 
+        /**
+         * Replace the line at <code>row</code> and <code>col</code> with the specified <code>newVal</code>.
+         * This is destructive in that it removes the original line entirely.
+         * 
+         * @param row
+         * @param col
+         * @param newVal
+         */
         void editRow(int row, int col, String newVal) {
             if (!isEditableColumn(col)) {
                 throw new IllegalArgumentException();
@@ -1335,6 +1488,20 @@ public class AlignPanelController {
             makeCache();
         }
 
+        /**
+         * Move the lines at the specified <code>rows</code> and <code>col</code> by the specified offset,
+         * e.g. +1 or -1 where negative indicates the upwards direction in the table.
+         * <p>
+         * This is different from {@link #move(List, int, int)} in that the intended effect is to give the
+         * impression of each row moving by the offset relative to the opposing column. Because displayed rows
+         * don't map directly to lines, that means some rows won't move at all, e.g. if the target row is
+         * still the same bead.
+         * 
+         * @param rows
+         * @param col
+         * @param offset
+         * @return A two-member array indicating the first and last resulting rows
+         */
         int[] slide(List<Integer> rows, int col, int offset) {
             if (offset == 0) {
                 return new int[0];
@@ -1344,6 +1511,7 @@ public class AlignPanelController {
             }
             Collections.sort(rows);
             if (offset > 0) {
+                // Handling traversing empty rows when sliding down requires sliding in reverse order.
                 Collections.reverse(rows);
             }
             int origRowCount = getRowCount();
@@ -1372,8 +1540,8 @@ public class AlignPanelController {
                         // Already in target bead
                         continue;
                     } else {
-                        // Moving down in unbalanced bead where target is blank
-                        // cell -> split bead and
+                        // Moving down in unbalanced bead where target is blank cell -> split bead and place
+                        // into resulting remainder bead
                         trgBead = splitBead(trgBead);
                     }
                 }
@@ -1391,6 +1559,12 @@ public class AlignPanelController {
                     Util.indexByIdentity(lines, selected.get(selected.size() - 1)) };
         }
 
+        /**
+         * Get the number of beads contained within the specified rows.
+         * 
+         * @param rows
+         * @return
+         */
         int beadsInRowSpan(int... rows) {
             List<MutableBead> beads = new ArrayList<MutableBead>();
             for (int row : rows) {
@@ -1402,6 +1576,13 @@ public class AlignPanelController {
             return beads.size();
         }
 
+        /**
+         * Split the lines specified at <code>rows</code> and <code>col</code> into multiple beads.
+         * 
+         * @param rows
+         * @param col
+         * @return A two-member array indicating the first and last resulting rows
+         */
         int[] splitBead(int[] rows, int col) {
             if (!isEditableColumn(col)) {
                 throw new IllegalArgumentException();

@@ -26,6 +26,7 @@
 package org.omegat.gui.align;
 
 import javax.swing.DefaultComboBoxModel;
+
 import org.omegat.gui.align.Aligner.AlgorithmClass;
 import org.omegat.gui.align.Aligner.CalculatorType;
 import org.omegat.gui.align.Aligner.ComparisonMode;
@@ -33,6 +34,10 @@ import org.omegat.gui.align.Aligner.CounterType;
 import org.omegat.util.OStrings;
 
 /**
+ * UI component for displaying and editing the results of algorithmic alignment.
+ * <p>
+ * THIS MUST BE EDITED IN NETBEANS GUI BUILDER.
+ * 
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")

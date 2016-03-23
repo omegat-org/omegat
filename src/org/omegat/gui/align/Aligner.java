@@ -68,7 +68,12 @@ import net.loomchild.maligna.matrix.FullMatrixFactory;
 import net.loomchild.maligna.matrix.MatrixFactory;
 
 /**
+ * Class to drive alignment of input files. Responsible for filtering and performing automatic alignment with
+ * mALIGNa.
+ * 
  * @author Aaron Madlon-Kay
+ * 
+ * @see <a href="https://github.com/loomchild/maligna">mALIGNa</a>
  */
 public class Aligner {
 
@@ -80,20 +85,64 @@ public class Aligner {
     boolean segment = true;
     boolean removeTags = false;
 
+    /**
+     * Modes indicating the ways in which the source text can be sent to the alignment algorithm.
+     */
     enum ComparisonMode {
-        PARSEWISE, HEAPWISE, ID
+        /**
+         * Take all source lines and align against all target lines. This is the default as it makes no
+         * demands of the input files.
+         */
+        HEAPWISE,
+
+        /**
+         * This mode is only available when the source and target files extract to the same number of text
+         * units. Source and target strings with the same index are aligned separately.
+         */
+        PARSEWISE,
+
+        /**
+         * This mode is only available when the source and target files provide IDs for all their text units.
+         * Each unit with matching ID is aligned separately.
+         */
+        ID
     }
 
     enum AlgorithmClass {
-        VITERBI, FB
+        /**
+         * @see <a href=
+         *      "https://github.com/loomchild/maligna/blob/3.0.0/maligna/src/main/java/net/loomchild/maligna/filter/aligner/align/hmm/viterbi/ViterbiAlgorithm.java">
+         *      ViterbiAlgorithm.java</a>
+         */
+        VITERBI,
+
+        /**
+         * @see <a href=
+         *      "https://github.com/loomchild/maligna/blob/3.0.0/maligna/src/main/java/net/loomchild/maligna/filter/aligner/align/hmm/fb/ForwardBackwardAlgorithm.java">
+         *      ForwardBackwardAlgorithm.java</a>
+         */
+        FB
     }
 
     enum CalculatorType {
-        NORMAL, POISSON
+        /**
+         * @see <a href=
+         *      "https://github.com/loomchild/maligna/blob/3.0.0/maligna/src/main/java/net/loomchild/maligna/calculator/length/NormalDistributionCalculator.java">
+         *      NormalDistributionCalculator.java</a>
+         */
+        NORMAL,
+
+        /**
+         * @see <a href=
+         *      "https://github.com/loomchild/maligna/blob/3.0.0/maligna/src/main/java/net/loomchild/maligna/calculator/length/PoissonDistributionCalculator.java">
+         *      PoissonDistributionCalculator.java</a>
+         */
+        POISSON
     }
 
     enum CounterType {
-        CHAR, WORD
+        CHAR,
+        WORD
     }
 
     ComparisonMode comparisonMode = ComparisonMode.HEAPWISE;
@@ -116,6 +165,14 @@ public class Aligner {
         }
     }
 
+    /**
+     * Parse the input files and extract the alignable text, which is retained in memory so that different
+     * alignment settings can be tried without re-parsing the files. This determines the available
+     * {@link ComparisonMode}s, available in {@link #allowedModes}.
+     * 
+     * @throws Exception
+     *             If the parsing fails for whatever reason
+     */
     void loadFiles() throws Exception {
         Entry<List<String>, List<String>> srcResult = parseFile(srcFile);
         srcRaw = srcResult.getValue();
@@ -150,12 +207,28 @@ public class Aligner {
         allowedModes = Collections.unmodifiableList(allowed);
     }
 
+    /**
+     * Release all content loaded from the input files.
+     */
     void clearLoaded() {
         srcRaw = null;
         trgRaw = null;
         idPairs = null;
     }
 
+    /**
+     * Parse the specified file and return the contents as a pair of lists:
+     * <ul>
+     * <li>Key: A list of IDs for the parsed text units
+     * <li>Value: A list of parsed text units
+     * </ul>
+     * 
+     * @param file
+     *            Path to input file
+     * @return Pair of lists
+     * @throws Exception
+     *             If parsing fails
+     */
     private Entry<List<String>, List<String>> parseFile(String file) throws Exception {
         final List<String> ids = new ArrayList<>();
         final List<String> rawSegs = new ArrayList<>();
@@ -200,11 +273,28 @@ public class Aligner {
         return new AbstractMap.SimpleImmutableEntry<>(ids, rawSegs);
     }
 
+    /**
+     * Segment the specified list of strings into a flat list of strings. The resulting list will be free of
+     * empty strings.
+     * 
+     * @param language
+     *            The language of the texts to be segmented
+     * @param rawTexts
+     *            List of texts to be segmented
+     * @return Flattened list of segments
+     */
     private List<String> segmentAll(Language language, List<String> rawTexts) {
         return rawTexts.stream().map(text -> Core.getSegmenter().segment(language, text, null, null))
                 .flatMap(List::stream).filter(s -> !s.isEmpty()).collect(Collectors.toList());
     }
 
+    /**
+     * Align {@link ComparisonMode#PARSEWISE} without first segmenting the source and target strings. No
+     * alignment algorithm is applied.
+     * 
+     * @return List of beads where each entry of {@link #srcRaw} is aligned by index with each entry of
+     *         {@link #trgRaw}
+     */
     private Stream<Alignment> alignParsewiseNotSegmented() {
         if (srcRaw.size() != trgRaw.size()) {
             throw new UnsupportedOperationException();
@@ -213,6 +303,13 @@ public class Aligner {
                 .mapToObj(i -> new Alignment(Arrays.asList(srcRaw.get(i)), Arrays.asList(trgRaw.get(i))));
     }
 
+    /**
+     * Align {@link ComparisonMode#PARSEWISE} the source and target strings. Each pair is segmented and
+     * aligned separately by algorithm.
+     * 
+     * @return List of beads where each entry of {@link #srcRaw} is aligned by index with each entry of
+     *         {@link #trgRaw}
+     */
     private Stream<Alignment> alignParsewiseSegmented() {
         if (srcRaw.size() != trgRaw.size()) {
             throw new UnsupportedOperationException();
@@ -226,11 +323,23 @@ public class Aligner {
         }).flatMap(List::stream);
     }
 
+    /**
+     * Align by {@link ComparisonMode#ID} without first segmenting the source and target strings. No alignment
+     * algorithm is applied.
+     * 
+     * @return List of beads aligned by ID
+     */
     private Stream<Alignment> alignByIdNotSegmented() {
         return idPairs.stream()
                 .map(e -> new Alignment(Arrays.asList(e.getKey()), Arrays.asList(e.getValue())));
     }
 
+    /**
+     * Align source and target strings by {@link ComparisonMode#ID}. Each pair is segmented and aligned
+     * separately by algorithm.
+     * 
+     * @return List of beads aligned by ID
+     */
     private Stream<Alignment> alignByIdSegmented() {
         return idPairs.stream().map(e -> {
             List<String> source = Core.getSegmenter().segment(srcLang, e.getKey(), null, null).stream()
@@ -241,6 +350,13 @@ public class Aligner {
         }).flatMap(List::stream);
     }
 
+    /**
+     * Align {@link ComparisonMode#HEAPWISE}. Input text is optionally segmented, then aligned by algorithm.
+     * 
+     * @param doSegmenting
+     *            Whether to segment the text
+     * @return List of beads aligned heapwise
+     */
     private Stream<Alignment> alignHeapwise(boolean doSegmenting) {
         List<String> srcSegs = doSegmenting ? segmentAll(srcLang, srcRaw) : srcRaw;
         List<String> trgSegs = doSegmenting ? segmentAll(trgLang, trgRaw) : trgRaw;
@@ -267,6 +383,14 @@ public class Aligner {
         }
     }
 
+    /**
+     * Perform alignment according to the current settings and return the resulting list of beads. Will call
+     * {@link #loadFiles()} if it has not yet been called.
+     * 
+     * @return List of beads
+     * @throws Exception
+     *             If parsing the input files fails
+     */
     Stream<Alignment> alignImpl() throws Exception {
         if (srcRaw == null || trgRaw == null) {
             loadFiles();
@@ -282,6 +406,18 @@ public class Aligner {
         throw new UnsupportedOperationException("Unknown comparison mode: " + comparisonMode);
     }
 
+    /**
+     * Align the input files according to the current settings to a list of pairs where
+     * <ol>
+     * <li>key = source text
+     * <li>value = target text
+     * </ol>
+     * 
+     * Calls {@link #loadFiles()} if it has not yet been called.
+     * 
+     * @return
+     * @throws Exception
+     */
     public List<Entry<String, String>> align() throws Exception {
         return alignImpl().map(bead -> {
             String srcOut = Util.join(srcLang, bead.getSourceSegmentList());
@@ -290,6 +426,14 @@ public class Aligner {
         }).collect(Collectors.toList());
     }
 
+    /**
+     * Obtain appropriate calculator according to the specified {@link CalculatorType}.
+     * 
+     * @param calculatorType
+     * @param counterType
+     * @param aligns
+     * @return
+     */
     private static Calculator getCalculator(CalculatorType calculatorType, CounterType counterType,
             List<Alignment> aligns) {
         Counter counter = getCounter(counterType);
@@ -302,6 +446,12 @@ public class Aligner {
         throw new UnsupportedOperationException("Unsupported calculator type: " + calculatorType);
     }
 
+    /**
+     * Obtain appropriate counter according to the specified {@link CounterType}.
+     * 
+     * @param counterType
+     * @return
+     */
     private static Counter getCounter(CounterType counterType) {
         switch (counterType) {
         case CHAR:
@@ -312,6 +462,13 @@ public class Aligner {
         throw new UnsupportedOperationException("Unsupported counter type: " + counterType);
     }
 
+    /**
+     * Obtain appropriate align algorithm object according to the specified {@link AlgorithmClass}.
+     * 
+     * @param algorithmClass
+     * @param calculator
+     * @return
+     */
     private static AlignAlgorithm getAlgorithm(AlgorithmClass algorithmClass, Calculator calculator) {
         MatrixFactory matrixFactory = new FullMatrixFactory();
         Map<Category, Float> map = CategoryDefaults.BEST_CATEGORY_MAP;
@@ -324,6 +481,16 @@ public class Aligner {
         throw new UnsupportedOperationException("Unsupported algorithm class: " + algorithmClass);
     }
 
+    /**
+     * Use mALIGNa to align the specified source and target texts, according to the specified parameters.
+     * 
+     * @param algorithmClass
+     * @param calculatorType
+     * @param counterType
+     * @param source
+     * @param target
+     * @return
+     */
     private static List<Alignment> doAlign(AlgorithmClass algorithmClass, CalculatorType calculatorType,
             CounterType counterType, List<String> source, List<String> target) {
         List<Alignment> aligns = Arrays.asList(new Alignment(source, target));

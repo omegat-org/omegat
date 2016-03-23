@@ -38,11 +38,13 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JDialog;
 import javax.swing.WindowConstants;
-import org.omegat.util.OStrings;
 
+import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
+ * Controller for a simple text editing dialog.
+ * 
  * @author Aaron Madlon-Kay
  */
 public class EditingPanelController {
@@ -50,10 +52,23 @@ public class EditingPanelController {
     private final String text;
     private String result;
 
+    /**
+     * Create the controller with the default text.
+     * 
+     * @param text
+     *            The text to be shown in the editing area
+     */
     public EditingPanelController(String text) {
         this.text = text;
     }
 
+    /**
+     * Show the dialog. The dialog is modal, so this method will block until complete.
+     * 
+     * @param parent
+     *            The parent window of the dialog
+     * @return The result of editing
+     */
     public String show(Window parent) {
         final JDialog dialog = new JDialog(parent, OStrings.getString("ALIGNER_DIALOG_EDITOR"),
                 ModalityType.DOCUMENT_MODAL);

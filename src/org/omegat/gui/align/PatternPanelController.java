@@ -48,6 +48,8 @@ import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
+ * Controller for a simple regex editing dialog.
+ * 
  * @author Aaron Madlon-Kay
  */
 public class PatternPanelController {
@@ -55,10 +57,23 @@ public class PatternPanelController {
     private final Pattern initialPattern;
     private Pattern result;
 
+    /**
+     * Create the controller with the initial pattern.
+     * 
+     * @param pattern
+     *            The pattern to be shown in the editing area
+     */
     public PatternPanelController(Pattern pattern) {
         this.initialPattern = pattern;
     }
 
+    /**
+     * Show the dialog. The dialog is modal, so this method will block until complete.
+     * 
+     * @param parent
+     *            The parent window of the dialog
+     * @return The result of editing
+     */
     public Pattern show(Window parent) {
         final JDialog dialog = new JDialog(parent, OStrings.getString("ALIGNER_DIALOG_PATTERN"),
                 ModalityType.DOCUMENT_MODAL);

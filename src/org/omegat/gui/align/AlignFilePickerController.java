@@ -62,6 +62,8 @@ import org.omegat.util.gui.LanguageComboBoxRenderer;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
+ * Controller for align file picker UI
+ * 
  * @author Aaron Madlon-Kay
  */
 public class AlignFilePickerController {
@@ -103,6 +105,12 @@ public class AlignFilePickerController {
         this.defaultSaveDir = defaultSaveDir;
     }
 
+    /**
+     * Display the align tool file picker. The picker is not modal, so this call will return immediately.
+     * 
+     * @param parent
+     *            Parent window of file picker and align window
+     */
     @SuppressWarnings("serial")
     public void show(final Component parent) {
         final JFrame frame = new JFrame(OStrings.getString("ALIGNER_FILEPICKER"));
@@ -405,6 +413,18 @@ public class AlignFilePickerController {
         return null;
     }
 
+    /**
+     * Entry point for debugging or standalone use. Optionally accepts four arguments to pre-fill the picker:
+     * <ol>
+     * <li>Source language
+     * <li>Source file path
+     * <li>Target language
+     * <li>Target file path
+     * </ol>
+     * 
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         System.setProperty("apple.laf.useScreenMenuBar", "true");
 

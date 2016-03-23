@@ -37,7 +37,17 @@ import org.omegat.util.Language;
 
 import net.loomchild.maligna.coretypes.Alignment;
 
+/**
+ * A container class used to store data for alignment. "Bead" is used in NLP literature to refer to a grouping
+ * of source and target sentences that are held to correlate (are aligned together).
+ * 
+ * @author Aaron Madlon-Kay
+ */
 class MutableBead {
+
+    /**
+     * Status flags applied by the user; for user-directed data management only.
+     */
     enum Status {
         DEFAULT, ACCEPTED, NEEDS_REVIEW
     }
@@ -72,10 +82,20 @@ class MutableBead {
         this(Collections.emptyList(), Collections.emptyList());
     }
 
+    /**
+     * Get whether or not the bead contains the same number of source and target lines.
+     * 
+     * @return
+     */
     public boolean isBalanced() {
         return sourceLines.size() == targetLines.size();
     }
 
+    /**
+     * Get whether or not the bead is entirely empty (has 0 source lines and 0 target lines).
+     * 
+     * @return
+     */
     public boolean isEmpty() {
         return sourceLines.isEmpty() && targetLines.isEmpty();
     }

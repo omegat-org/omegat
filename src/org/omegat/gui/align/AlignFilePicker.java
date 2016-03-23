@@ -29,6 +29,10 @@ import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 
 /**
+ * UI component for picking source and target languages and files.
+ * <p>
+ * THIS MUST BE EDITED IN NETBEANS GUI BUILDER.
+ * 
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")

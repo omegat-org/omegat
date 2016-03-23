@@ -28,14 +28,17 @@ package org.omegat.gui.align;
 import org.omegat.util.OStrings;
 
 /**
- *
+ * Frame with menu for AlignPanel.
+ * <p>
+ * THIS MUST BE EDITED IN NETBEANS GUI BUILDER.
+ * 
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class AlignMenuFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form NewJFrame
+     * Creates new form AlignMenuFrame
      */
     public AlignMenuFrame() {
         initComponents();

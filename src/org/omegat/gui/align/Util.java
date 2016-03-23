@@ -34,6 +34,13 @@ import org.omegat.util.Language;
  */
 public class Util {
 
+    /**
+     * Get the index of an item in a list, not based on equality but on object identity (<code>==</code>).
+     * 
+     * @param items
+     * @param item
+     * @return
+     */
     static <T> int indexByIdentity(List<T> items, T item) {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i) == item) {
@@ -43,6 +50,13 @@ public class Util {
         return -1;
     }
 
+    /**
+     * Remove an item from a list, not based on equality but on object identity (<code>==</code>).
+     * 
+     * @param items
+     * @param item
+     * @return
+     */
     static <T> boolean removeByIdentity(List<T> items, T item) {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i) == item) {
@@ -53,6 +67,15 @@ public class Util {
         return false;
     }
 
+    /**
+     * Join a list of objects with a delimiter.
+     * 
+     * @param delimiter
+     *            String to insert between each item
+     * @param items
+     *            List of items to join
+     * @return String of items joined by delimiter
+     */
     static String join(String delimiter, List<?> items) {
         if (items.isEmpty()) {
             return "";
@@ -69,6 +92,16 @@ public class Util {
         return sb.toString();
     }
 
+    /**
+     * Join a list of objects with a delimiter appropriate for the given language (empty delimiter, or U+0020
+     * SPACE).
+     * 
+     * @param lang
+     *            Language of items
+     * @param items
+     *            List of items to join
+     * @return String of items joined by language-appropriate delimiter
+     */
     static String join(Language lang, List<?> items) {
         return Util.join(lang.isSpaceDelimited() ? " " : "", items);
     }

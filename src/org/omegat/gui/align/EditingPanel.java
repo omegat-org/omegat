@@ -29,13 +29,17 @@ import org.madlonkay.supertmxmerge.gui.ReasonablySizedPanel;
 import org.omegat.util.OStrings;
 
 /**
+ * A simple UI component for implementing text editing dialogs.
+ * <p>
+ * THIS MUST BE EDITED IN NETBEANS GUI BUILDER.
+ * 
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class EditingPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form SplittingPanel
+     * Creates new form EditingPanel
      */
     public EditingPanel() {
         initComponents();

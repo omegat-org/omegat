@@ -48,6 +48,8 @@ import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
+ * Controller for a simple text splitting dialog.
+ * 
  * @author Aaron Madlon-Kay
  */
 public class SplittingPanelController {
@@ -56,11 +58,30 @@ public class SplittingPanelController {
     private final String reference;
     private int splitOffset = -1;
 
+    /**
+     * Create the controller with the text to be split and an optional hint to the user.
+     * 
+     * @param text
+     *            The text to be split
+     * @param reference
+     *            Reference text to serve as a hint to the user
+     */
     public SplittingPanelController(String text, String reference) {
         this.text = text;
         this.reference = reference;
     }
 
+    /**
+     * Show the dialog. The dialog is modal, so this method will block until complete.
+     * <p>
+     * If the user cancels, the result array will contain as its sole member the original string provided to
+     * the constructor. Otherwise the array will contain the (trimmed) results of splitting the original
+     * string.
+     * 
+     * @param parent
+     *            The parent window of the dialog
+     * @return The result array
+     */
     public String[] show(Window parent) {
         final JDialog dialog = new JDialog(parent, OStrings.getString("ALIGNER_DIALOG_SPLITTER"), ModalityType.DOCUMENT_MODAL);
         dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);

@@ -1413,17 +1413,15 @@ public class AlignPanelController {
             List<String> selected = new ArrayList<>(rows.length);
             for (int row : rows) {
                 String line = lines.get(row);
-                List<String> beadLines = col == COL_SRC ? bead.sourceLines : bead.targetLines;
-                int index;
                 if (line == null) {
-                    index = beadLines.size();
-                } else {
-                    index = Util.indexByIdentity(beadLines, line);
-                    if (index == -1) {
-                        throw new IllegalArgumentException();
-                    }
-                    selected.add(line);
+                    throw new IllegalArgumentException();
                 }
+                List<String> beadLines = col == COL_SRC ? bead.sourceLines : bead.targetLines;
+                int index = Util.indexByIdentity(beadLines, line);
+                if (index == -1) {
+                    throw new IllegalArgumentException();
+                }
+                selected.add(line);
                 if (index > 0) {
                     bead = splitBeadByCount(bead, index);
                     data.add(++beadIndex, bead);

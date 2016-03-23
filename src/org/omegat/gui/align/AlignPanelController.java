@@ -53,7 +53,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import javax.swing.AbstractButton;
-import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -516,14 +515,14 @@ public class AlignPanelController {
 
         // emacs-like keys for table navigation
         // See javax.swing.plaf.BasicTableUI.Actions for supported action names.
-        setKeyboardShortcut(panel.table, "selectNextRow", KeyStroke.getKeyStroke('n'), null);
-        setKeyboardShortcut(panel.table, "selectNextRowExtendSelection", KeyStroke.getKeyStroke('N'), null);
-        setKeyboardShortcut(panel.table, "selectPreviousRow", KeyStroke.getKeyStroke('p'), null);
-        setKeyboardShortcut(panel.table, "selectPreviousRowExtendSelection", KeyStroke.getKeyStroke('P'), null);
-        setKeyboardShortcut(panel.table, "selectNextColumn", KeyStroke.getKeyStroke('f'), null);
-        setKeyboardShortcut(panel.table, "selectNextColumnExtendSelection", KeyStroke.getKeyStroke('F'), null);
-        setKeyboardShortcut(panel.table, "selectPreviousColumn", KeyStroke.getKeyStroke('b'), null);
-        setKeyboardShortcut(panel.table, "selectPreviousColumnExtendSelection", KeyStroke.getKeyStroke('B'), null);
+        setKeyboardShortcut(panel.table, "selectNextRow", 'n');
+        setKeyboardShortcut(panel.table, "selectNextRowExtendSelection", 'N');
+        setKeyboardShortcut(panel.table, "selectPreviousRow", 'p');
+        setKeyboardShortcut(panel.table, "selectPreviousRowExtendSelection", 'P');
+        setKeyboardShortcut(panel.table, "selectNextColumn", 'f');
+        setKeyboardShortcut(panel.table, "selectNextColumnExtendSelection", 'F');
+        setKeyboardShortcut(panel.table, "selectPreviousColumn", 'b');
+        setKeyboardShortcut(panel.table, "selectPreviousColumnExtendSelection", 'B');
 
         panel.table.setTransferHandler(new AlignTransferHandler());
         panel.table.addPropertyChangeListener("dropLocation", new DropLocationListener());
@@ -548,11 +547,8 @@ public class AlignPanelController {
         frame.setVisible(true);
     }
 
-    private static void setKeyboardShortcut(JComponent comp, Object actionName, KeyStroke stroke, Action action) {
-        comp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(stroke, actionName);
-        if (action != null) {
-            comp.getActionMap().put(actionName, action);
-        }
+    private static void setKeyboardShortcut(JComponent comp, Object actionName, char stroke) {
+        comp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(stroke), actionName);
     }
 
     private static void resizeRows(JTable table) {

@@ -35,13 +35,11 @@
 
 package org.omegat.util;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -76,20 +74,14 @@ public class PreferencesXML implements IPrefsPersistence {
         xml.killEmptyBlocks();
 
         InputStream is = null;
-        InputStreamReader isr = null;
-        BufferedReader br = null;
         try {
             if (loadFile == null) {
                 // If no prefs file is present, look inside JAR for
                 // defaults. Useful for e.g. Web Start.
                 is = getClass().getResourceAsStream(Preferences.FILE_PREFERENCES);
                 if (is != null) {
-                    isr = new InputStreamReader(is);
-                    br = new BufferedReader(isr);
-                    xml.setStream(br);
+                    xml.setStream(is);
                     readXmlPrefs(xml, keys, values);
-                    br.close();
-                    isr.close();
                     is.close();
                     xml.close();
                 }
@@ -123,8 +115,6 @@ public class PreferencesXML implements IPrefsPersistence {
         } finally {
             IOUtils.closeQuietly(xml);
             IOUtils.closeQuietly(is);
-            IOUtils.closeQuietly(isr);
-            IOUtils.closeQuietly(br);
         }
     }
 

@@ -29,6 +29,7 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,8 +85,15 @@ public class XMLStreamReader implements Closeable {
     /**
      * Provide an interface where stream can be opened elsewhere.
      */
-    public void setStream(BufferedReader rdr) throws IOException, TranslationException {
-        m_bufferedReader = rdr;
+    public void setStream(InputStream stream) throws IOException, TranslationException {
+        setStream(stream, "UTF-8");
+    }
+
+    /**
+     * Provide an interface where stream can be opened elsewhere.
+     */
+    public void setStream(InputStream stream, String encoding) throws IOException, TranslationException {
+        m_reader = new XMLReader(stream, encoding);
         _setStream();
     }
 

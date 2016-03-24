@@ -132,7 +132,8 @@ public class PreferencesXML implements IPrefsPersistence {
         }
     }
 
-    private void readXmlPrefs(XMLStreamReader xml, List<String> keys, List<String> values) throws TranslationException {
+    static void readXmlPrefs(XMLStreamReader xml, List<String> keys, List<String> values)
+            throws TranslationException {
         XMLBlock blk;
         List<XMLBlock> lst;
 

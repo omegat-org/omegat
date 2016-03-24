@@ -75,7 +75,7 @@ public class PreferencesTest extends TestCase {
         File backup = null;
         for (File f : tmpDir.listFiles()) {
             String name = f.getName();
-            if (name.startsWith("omegat.prefs") && name.endsWith(".bak")) {
+            if (name.startsWith(prefsFile.getName()) && name.endsWith(".bak")) {
                 backup = f;
                 break;
             }

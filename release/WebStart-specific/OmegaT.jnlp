@@ -66,6 +66,7 @@
 				<jar href="trilead-ssh2-1.0.0-build217.jar" />
 				<jar href="juniversalchardet-1.0.3.jar" />
                 <jar href="maligna-3.0.0.jar" />
+                <jar href="dictzip.jar" />
 
 				<!-- LanguageTool -->
 				<jar href="annotations.jar"  />

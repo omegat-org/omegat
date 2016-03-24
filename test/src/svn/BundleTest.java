@@ -63,16 +63,17 @@ public class BundleTest extends TestCase {
     }
     
     private void assertEncoding(String bundle) throws IOException {
-        InputStream stream = Main.class.getResourceAsStream(bundle);
-        if (stream == null) {
-            return;
+        try (InputStream stream = Main.class.getResourceAsStream(bundle)) {
+            if (stream == null) {
+                return;
+            }
+            String encoding = EncodingDetector.detectEncoding(stream);
+            System.out.println(bundle + ": " + encoding);
+            // The detector will give null for ASCII and Windows-1252 for ISO-8859-1;
+            // yes, this is not technically correct, but it's close enough. See:
+            // http://www.i18nqa.com/debug/table-iso8859-1-vs-windows-1252.html
+            assertTrue(encoding == null || "WINDOWS-1252".equals(encoding));
         }
-        String encoding = EncodingDetector.detectEncoding(stream);
-        System.out.println(bundle + ": " + encoding);
-        // The detector will give null for ASCII and Windows-1252 for ISO-8859-1;
-        // yes, this is not technically correct, but it's close enough. See:
-        // http://www.i18nqa.com/debug/table-iso8859-1-vs-windows-1252.html
-        assertTrue(encoding == null || "WINDOWS-1252".equals(encoding));
     }
     
     public void testBundleLoading() {

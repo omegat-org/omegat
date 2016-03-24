@@ -39,16 +39,13 @@ public class EncodingDetector {
      * Convenience method for {@link #detectEncoding(java.io.InputStream)}.
      */
     public static String detectEncoding(File inFile) throws IOException {
-        FileInputStream stream = new FileInputStream(inFile);
-        try {
+        try (FileInputStream stream = new FileInputStream(inFile)) {
             return detectEncoding(stream);
-        } finally {
-            stream.close();
         }
     }
     
     /**
-     * Detect the encoding of the supplied file.
+     * Detect the encoding of the supplied file. The caller is responsible for closing the stream.
      * 
      * @see <a href="https://code.google.com/p/juniversalchardet/">Original</a>
      * @see <a href="https://github.com/amake/juniversalchardet">Fork</a>

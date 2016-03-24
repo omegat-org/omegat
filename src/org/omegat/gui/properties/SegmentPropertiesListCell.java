@@ -30,10 +30,9 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.Caret;
-import javax.swing.text.DefaultCaret;
 
 import org.omegat.util.gui.JTextPaneLinkifier;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -81,14 +80,8 @@ public class SegmentPropertiesListCell extends javax.swing.JPanel {
         label.addMouseListener(revealSettingsIcon);
         value.addMouseListener(revealSettingsIcon);
         // Prevent list from scrolling down as new cells are added
-        Caret caret = label.getCaret();
-        if (caret instanceof DefaultCaret) {
-            ((DefaultCaret) caret).setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
-        }
-        caret = value.getCaret();
-        if (caret instanceof DefaultCaret) {
-            ((DefaultCaret) caret).setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
-        }
+        StaticUIUtils.setCaretUpdateEnabled(label, false);
+        StaticUIUtils.setCaretUpdateEnabled(value, false);
     }
 
     /**

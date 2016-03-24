@@ -190,7 +190,7 @@ public class ConvertProject26to37team {
     private static String getGITTmxVersion(File wc) throws Exception {
         Repository repository = Git.open(wc).getRepository();
         try (RevWalk walk = new RevWalk(repository)) {
-            Ref localBranch = repository.getRef("HEAD");
+            Ref localBranch = repository.findRef("HEAD");
             RevCommit headCommit = walk.lookupCommit(localBranch.getObjectId());
             return headCommit.getName();
         }

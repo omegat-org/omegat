@@ -151,7 +151,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     protected String getCurrentVersion() throws Exception {
         try (RevWalk walk = new RevWalk(repository)) {
-            Ref localBranch = repository.getRef("HEAD");
+            Ref localBranch = repository.findRef("HEAD");
             RevCommit headCommit = walk.lookupCommit(localBranch.getObjectId());
             return headCommit.getName();
         }

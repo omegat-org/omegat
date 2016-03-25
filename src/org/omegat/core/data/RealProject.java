@@ -315,6 +315,16 @@ public class RealProject implements IProject {
 
             Core.getMainWindow().showStatusMessageRB("CT_LOADING_PROJECT");
 
+            // Set project specific file filters if they exist, or defaults otherwise.
+            // This MUST happen before calling loadTranslations() because the setting to ignore file context
+            // for alt translations is a filter setting, and it affects how alt translations are hashed.
+            Filters filters = m_config.getProjectFilters();
+            Core.setFilterMaster(new FilterMaster(filters == null ? Preferences.getFilters() : filters));
+
+            // Set project specific segmentation rules if they exist, or defaults otherwise.
+            SRX srx = m_config.getProjectSRX();
+            Core.setSegmenter(new Segmenter(srx == null ? Preferences.getSRX() : srx));
+
             if (remoteRepositoryProvider != null) {
                 // copy files from repository to project
 
@@ -346,15 +356,6 @@ public class RealProject implements IProject {
             } else {
                 loadTranslations();
             }
-
-            // set project specific file filters if they exist
-            Filters filters = m_config.getProjectFilters();
-            Core.setFilterMaster(new FilterMaster(filters == null ? Preferences.getFilters() : filters));
-            
-            // Set project specific segmentation rules if they exist, or
-            // defaults otherwise.
-            SRX srx = m_config.getProjectSRX();
-            Core.setSegmenter(new Segmenter(srx == null ? Preferences.getSRX() : srx));
 
             loadSourceFiles();
 

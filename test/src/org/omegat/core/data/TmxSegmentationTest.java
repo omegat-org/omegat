@@ -33,7 +33,6 @@ import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.Language;
 
-import junit.framework.Assert;
 import junit.framework.TestCase;
 
 public class TmxSegmentationTest extends TestCase {
@@ -61,9 +60,9 @@ public class TmxSegmentationTest extends TestCase {
                     }
                 });
 
-        Assert.assertEquals(2, tmx.defaults.size());
-        Assert.assertEquals("Ceci est un test.", tmx.defaults.get("This is test.").translation);
-        Assert.assertEquals("Juste un test.", tmx.defaults.get("Just a test.").translation);
+        assertEquals(2, tmx.defaults.size());
+        assertEquals("Ceci est un test.", tmx.defaults.get("This is test.").translation);
+        assertEquals("Juste un test.", tmx.defaults.get("Just a test.").translation);
     }
 
     @Test
@@ -76,10 +75,10 @@ public class TmxSegmentationTest extends TestCase {
 
         ExternalTMX tmx = new ExternalTMX(props, new File("test/data/tmx/resegmenting.tmx"), false, false);
 
-        Assert.assertEquals(2, tmx.getEntries().size());
-        Assert.assertEquals("This is test.", tmx.getEntries().get(0).source);
-        Assert.assertEquals("Ceci est un test.", tmx.getEntries().get(0).translation);
-        Assert.assertEquals("Just a test.", tmx.getEntries().get(1).source);
-        Assert.assertEquals("Juste un test.", tmx.getEntries().get(1).translation);
+        assertEquals(2, tmx.getEntries().size());
+        assertEquals("This is test.", tmx.getEntries().get(0).source);
+        assertEquals("Ceci est un test.", tmx.getEntries().get(0).translation);
+        assertEquals("Just a test.", tmx.getEntries().get(1).source);
+        assertEquals("Juste un test.", tmx.getEntries().get(1).translation);
     }
 }

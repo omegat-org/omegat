@@ -37,8 +37,6 @@ import org.omegat.filters2.html2.HTMLOptions;
 import org.omegat.filters2.rc.RcFilter;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 
-import junit.framework.Assert;
-
 /**
  * TMX Compliance tests as described on http://www.localization.org/fileadmin/standards/tmx1.4/comp.htm
  * 
@@ -291,13 +289,13 @@ public class TmxComplianceTests extends TmxComplianceBase {
         // fix meta line, since OmegaT writes own meta line for encoding
         lines2.set(2, "<meta content=\"text/html; charset=windows-1252\" http-equiv=\"Content-Type\">");
         
-        Assert.assertEquals(lines1.size(), lines2.size());
+        assertEquals(lines1.size(), lines2.size());
         for (int i = 0; i < lines1.size(); i++) {
             // HTML spec allows unescaped U+0022 QUOTE MARK (outside of attribute values);
             // we produce unescaped but the test assumes escaped, so we normalize for comparison purposes.
             String line1 = normalize(lines1.get(i));
             String line2 = normalize(lines2.get(i));
-            Assert.assertEquals(line1, line2);
+            assertEquals(line1, line2);
         }
     }
     

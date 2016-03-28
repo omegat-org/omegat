@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.0
 ----------------------------------------------------------------------
- 13 Enhancements
+ 14 Enhancements
   1 Bug fix
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -44,11 +44,12 @@
 
   - Update Lucene to 5.2.1
   https://sourceforge.net/p/omegat/feature-requests/1203/
-  
 
   Other changes
 
   - Replace glossary hits now supports multi-word glossary replacements
+
+  - The default memory allocation is now 1024 MB on all platforms
 
   Bug fixes:
 

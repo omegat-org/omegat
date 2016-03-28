@@ -80,7 +80,7 @@ projectloc_hc :horizontal -> @close="Close" ;
 
 mem :framed "Memory" -> memory ;
 
-memory "Assign memory limit for OmegaT" -> defm | halfg | oneg | twog | memory_help ;
+memory "Assign memory limit for OmegaT" -> defm | halfg | ! oneg | twog | memory_help ;
 defm "Default" -> "" ;
 halfg "512 MB" -> " -Xmx512M" ;
 oneg "1 GB" -> " -Xmx1024M" ;

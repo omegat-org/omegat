@@ -26,7 +26,6 @@
 
 package org.omegat.languagetools;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -126,13 +125,15 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
             return null;
         }
 
-        // Unicode: LanguageTool expects text in Normalization Form KC (NFKC).
-        // For example, the German character 'ü' (lowercase u umlaut) must be in
-        // the string as Unicode character U+00FC, not as 'u' followed by the
-        // combining diaeresis character.
-        // https://languagetool.org/development/api/org/languagetool/JLanguageTool.html
-        sourceText = normalizeNFKC(sourceText);
-        translationText = normalizeNFKC(translationText);
+        // LanguageTool claims to expect text in NFKC, but that actually causes problems for some rules:
+        // https://github.com/languagetool-org/languagetool/issues/379
+        // From the discussion it seems the intent behind NFKC was to break up multi-letter codepoints such as
+        // U+FB00 LATIN SMALL LIGATURE FF. These are unlikely to be found in user input in our case, so
+        // instead we will use NFC. We already normalize our source to NFC when loading, so we only need to
+        // handle the translation here:
+        if (translationText != null) {
+            translationText = StringUtil.normalizeUnicode(translationText);
+        }
 
         List<Mark> r = new ArrayList<Mark>();
         List<RuleMatch> matches;
@@ -153,14 +154,6 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
         }
 
         return r;
-    }
-
-    private static String normalizeNFKC(String text) {
-        if (StringUtil.isEmpty(text)) {
-            return text;
-        }
-        return Normalizer.isNormalized(text, Normalizer.Form.NFKC) ? text
-                : Normalizer.normalize(text, Normalizer.Form.NFKC);
     }
 
     private Language getLTLanguage(org.omegat.util.Language lang) {

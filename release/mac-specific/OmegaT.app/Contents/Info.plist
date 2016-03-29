@@ -31,7 +31,7 @@
 <key>NSSupportsAutomaticGraphicsSwitching</key>
 <true/>
 <key>JVMVersion</key>
-<string>1.7</string>
+<string>1.8</string>
 <key>JVMMainClassName</key>
 <string>org.omegat.Main</string>
 <key>CFBundleDocumentTypes</key>

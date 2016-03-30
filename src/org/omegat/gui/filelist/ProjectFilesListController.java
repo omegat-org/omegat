@@ -857,21 +857,18 @@ public class ProjectFilesListController {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
-        int modelRow;
-        try {
-            modelRow = list.tableFiles.convertRowIndexToModel(row);
-            Core.getProject().getProjectFiles().get(modelRow);
-        } catch (IndexOutOfBoundsException ex) {
-            // data changed
-            return;
-        }
-
-        Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
+        Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
         Cursor oldCursor = list.getCursor();
         list.setCursor(hourglassCursor);
-        Core.getEditor().gotoFile(modelRow);
-        Core.getEditor().requestFocus();
-        list.setCursor(oldCursor);
+        try {
+            int modelRow = list.tableFiles.convertRowIndexToModel(row);
+            Core.getEditor().gotoFile(modelRow);
+            Core.getEditor().requestFocus();
+        } catch (IndexOutOfBoundsException ex) {
+            // Data changed.
+        } finally {
+            list.setCursor(oldCursor);
+        }
     }
 
     private TableCellRenderer getNumberCellRenderer(List<IProject.FileInfo> files) {

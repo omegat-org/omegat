@@ -196,8 +196,10 @@ public interface IEditor {
      * 
      * @param fileIndex
      *            file index in project
+     * @throws IndexOutOfBoundsException
+     *             If there is no file for the given index
      */
-    void gotoFile(int fileIndex);
+    void gotoFile(int fileIndex) throws IndexOutOfBoundsException;
 
     /**
      * Goto entry with specified number. Convenience method for

@@ -1464,12 +1464,17 @@ public class EditorController implements IEditor {
     public void gotoFile(int fileIndex) {
         UIThreadsUtil.mustBeSwingThread();
 
-        if (!Core.getProject().isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded()) {
             return;
+        }
 
         if (m_docSegList == null) {
             // document didn't loaded yet
             return;
+        }
+
+        if (fileIndex < 0 || fileIndex >= Core.getProject().getProjectFiles().size()) {
+            throw new IndexOutOfBoundsException();
         }
 
         commitAndDeactivate();

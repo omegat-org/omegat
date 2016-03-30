@@ -25,10 +25,7 @@
 
 package org.omegat.gui.stat;
 
-import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 
 import javax.swing.JPanel;
@@ -111,25 +108,6 @@ public abstract class BaseStatisticsPanel extends JPanel {
         panel.title.setText(title);
         panel.table.setModel(new StringArrayTableModel(data));
         setTableHeaders(panel.table, headers);
-        panel.table.setAutoCreateRowSorter(true);
-        
-        panel.table.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON1) {
-                    gotoFile(panel.table, panel.table.rowAtPoint(e.getPoint()));
-                }
-            }
-            @Override
-            public void mouseReleased(MouseEvent e) { /* empty */ }
-            @Override
-            public void mousePressed(MouseEvent e) { /* empty */ }
-            @Override
-            public void mouseExited(MouseEvent e) { /* empty */ }         
-            @Override
-            public void mouseEntered(MouseEvent e) { /* empty */ }
-        });
-        
         panel.table.getColumnModel().getColumn(0).setCellRenderer(
                 DataTableStyling.getHeaderTextCellRenderer());
         TableColumnSizer.autoSize(panel.table, 0, false);
@@ -137,28 +115,6 @@ public abstract class BaseStatisticsPanel extends JPanel {
         return panel;        
     }
     
-    /** lifted from org.omegat.gui.filelist.ProjectFilesListController.gotoFile(int) */
-    private void gotoFile(JTable table, int row) {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
-        int modelRow;
-        try {
-            modelRow = table.convertRowIndexToModel(row);
-            Core.getProject().getProjectFiles().get(modelRow);
-        } catch (IndexOutOfBoundsException ex) {
-            // data changed
-            return;
-        }
-
-        Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = table.getCursor();
-        table.setCursor(hourglassCursor);
-        Core.getEditor().gotoFile(modelRow);
-        Core.getEditor().requestFocus();
-        table.setCursor(oldCursor);
-    }
-
     protected static void setTableHeaders(JTable table, String[] headers) {
         for (int i = 0; i < headers.length; i++) {
             TableColumn col = table.getColumnModel().getColumn(i);

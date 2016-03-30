@@ -351,9 +351,9 @@ public class EditorTextArea3 extends JEditorPane {
         } else if (StaticUtils.isKey(e, KeyEvent.VK_O, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK)) {
             // handle Ctrl+Shift+O - toggle orientation LTR-RTL
             Cursor oldCursor = this.getCursor();
-            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             controller.toggleOrientation();
-            this.setCursor(oldCursor);
+            setCursor(oldCursor);
 
             IMainWindow mainWindow = Core.getMainWindow();
             // Timed warning is not available for console window

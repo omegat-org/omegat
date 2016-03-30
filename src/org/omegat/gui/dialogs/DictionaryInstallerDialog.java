@@ -223,7 +223,7 @@ public class DictionaryInstallerDialog extends JDialog {
 
     private class InstallerWorker extends SwingWorker<List<String>,Object> {
 
-        private final Cursor HOURGLASS_CURSOR = new Cursor(Cursor.WAIT_CURSOR);
+        private final Cursor HOURGLASS_CURSOR = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
         private Cursor oldCursor;
         
         @Override

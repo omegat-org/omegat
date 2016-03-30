@@ -132,7 +132,7 @@ public class ConsoleWindow implements IMainWindow {
     }
 
     public Cursor getCursor() {
-        return new Cursor(Cursor.DEFAULT_CURSOR);
+        return Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
     }
 
     public void setCursor(Cursor cursor) {

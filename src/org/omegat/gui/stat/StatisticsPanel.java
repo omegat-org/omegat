@@ -31,7 +31,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Comparator;
 
-import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -75,60 +74,60 @@ public class StatisticsPanel extends BaseStatisticsPanel {
         if (filesData == null || filesData.length == 0) {
             return;
         }
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                String title = OStrings.getString("CT_STATS_FILE_Statistics");
-                TitledTablePanel panel = generateTableDisplay(title, headers, filesData);
-                
-                TableModel dataModel = panel.table.getModel();
+        SwingUtilities.invokeLater(() -> {
+            String title = OStrings.getString("CT_STATS_FILE_Statistics");
+            TitledTablePanel panel = generateTableDisplay(title, headers, filesData);
 
-                TableRowSorter<TableModel> rowSorter = new TableRowSorter<TableModel>(dataModel);
-                Comparator<String> intComparator = new Comparator<String>() {
-                    @Override
-                    public int compare(String s1, String s2) {
-                        try {
-                            return ((Integer)Integer.parseInt(s1)).compareTo(Integer.parseInt(s2));
-                        }
-                        catch (NumberFormatException e) {
-                            return s1.compareTo(s2);
-                        }
-                    }
-                };                
-                for (int i = 0; i < dataModel.getColumnCount(); i++) {
-                    rowSorter.setComparator(i, intComparator);
+            TableModel dataModel = panel.table.getModel();
+
+            TableRowSorter<TableModel> rowSorter = new TableRowSorter<TableModel>(dataModel);
+            Comparator<String> intComparator = (s1, s2) -> {
+                try {
+                    return Integer.compare(Integer.parseInt(s1), Integer.parseInt(s2));
+                } catch (NumberFormatException e) {
+                    return s1.compareTo(s2);
                 }
+            };
+            for (int i = 0; i < dataModel.getColumnCount(); i++) {
+                rowSorter.setComparator(i, intComparator);
+            }
 
-                panel.table.setRowSorter(rowSorter);
-                
-                panel.table.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
-                            gotoFile(panel.table, panel.table.rowAtPoint(e.getPoint()));
+            panel.table.setRowSorter(rowSorter);
+
+            panel.table.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
+                        try {
+                            int row = panel.table.rowAtPoint(e.getPoint());
+                            int fileIndex = panel.table.convertRowIndexToModel(row);
+                            gotoFile(fileIndex);
+                        } catch (IndexOutOfBoundsException ex) {
+                            // Ignore
                         }
                     }
-                });
-                
-                
-                panel.table.getColumnModel().getColumn(0).setCellRenderer(
-                        DataTableStyling.getTextCellRenderer());
-                add(panel, BorderLayout.CENTER);
-            }
+                }
+            });
+
+            panel.table.getColumnModel().getColumn(0).setCellRenderer(DataTableStyling.getTextCellRenderer());
+            add(panel, BorderLayout.CENTER);
         });
     }
     
     /** code mostly from from org.omegat.gui.filelist.ProjectFilesListController.gotoFile(int) */
-    private void gotoFile(JTable table, int row) {
+    private void gotoFile(int fileIndex) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
-        Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = table.getCursor();
-        table.setCursor(hourglassCursor);
-        Core.getEditor().gotoFile(table.convertRowIndexToModel(row));
-        Core.getEditor().requestFocus();
-        table.setCursor(oldCursor);
+        Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
+        Cursor oldCursor = getCursor();
+        setCursor(hourglassCursor);
+        try {
+            Core.getEditor().gotoFile(fileIndex);
+            Core.getEditor().requestFocus();
+        } finally {
+            setCursor(oldCursor);
+        }
     }
 
 }

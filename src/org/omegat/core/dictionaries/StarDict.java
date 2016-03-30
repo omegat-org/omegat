@@ -38,8 +38,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -49,8 +47,12 @@ import org.apache.commons.io.IOUtils;
 import org.dict.zip.DictZipHeader;
 import org.dict.zip.DictZipInputStream;
 import org.dict.zip.RandomAccessInputStream;
+import org.trie4j.MapTrie;
+import org.trie4j.patricia.MapPatriciaTrie;
+import org.trie4j.doublearray.MapDoubleArray;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
+import org.omegat.util.Preferences;
 
 /**
  * Dictionary implementation for StarDict format.
@@ -105,7 +107,7 @@ public class StarDict implements IDictionaryFactory {
         private String dictName;
         private String dataFile;
 
-        protected final Map<String, Object> data;
+        protected final MapDoubleArray<Object> data;
 
         /**
          * @param ifoFile
@@ -159,7 +161,7 @@ public class StarDict implements IDictionaryFactory {
             data = readHeader();
         }
 
-        private Map<String, Object> readHeader() throws IOException {
+        private MapDoubleArray<Object> readHeader() throws IOException {
             File file = new File(dictName + ".idx");
             byte[] idxBytes;
             if (file.exists()) {
@@ -173,7 +175,7 @@ public class StarDict implements IDictionaryFactory {
                 }
             }
 
-            Map<String, Object> result = new HashMap<String, Object>();
+            MapTrie<Object> loaded = new MapPatriciaTrie<Object>();
             ByteArrayInputStream bais = null;
             DataInputStream idx = null;
             ByteArrayOutputStream mem = null;
@@ -191,7 +193,7 @@ public class StarDict implements IDictionaryFactory {
                         mem.reset();
                         int bodyOffset = idx.readInt();
                         int bodyLength = idx.readInt();
-                        addIndex(key, bodyOffset, bodyLength, result);
+                        addIndex(key, bodyOffset, bodyLength, loaded);
                     } else {
                         mem.write(b);
                     }
@@ -199,6 +201,7 @@ public class StarDict implements IDictionaryFactory {
                 mem.close();
                 idx.close();
                 bais.close();
+                MapDoubleArray<Object> result = new MapDoubleArray(loaded);
                 return result;
             } finally {
                 IOUtils.closeQuietly(mem);
@@ -219,11 +222,11 @@ public class StarDict implements IDictionaryFactory {
          * @param result
          *            result map
          */
-        private void addIndex(final String key, final int start, final int len, final Map<String, Object> result) {
+        private void addIndex(final String key, final int start, final int len, final MapTrie<Object> result) {
             Object data = result.get(key);
             if (data == null) {
                 Entry d = new Entry(start, len);
-                data = d;
+                result.insert(key, d);
             } else {
                 if (data instanceof Entry[]) {
                     Entry[] dobj = (Entry[]) data;
@@ -237,8 +240,8 @@ public class StarDict implements IDictionaryFactory {
                     d[1] = new Entry(start, len);
                     data = d;
                 }
+                result.put(key, data);
             }
-            result.put(key, data);
         }
 
         /*
@@ -252,19 +255,26 @@ public class StarDict implements IDictionaryFactory {
          */
         @Override
         public List<DictionaryEntry> readArticles(String word) {
-            Object dictData = data.get(word);
-            if (dictData == null) {
-                return Collections.emptyList();
-            }
             List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
-            if (dictData instanceof Entry) {
-                result.add(new DictionaryEntry(word, ((Entry) dictData).getArticle()));
-            } else if (dictData instanceof Entry[]) {
-                for (Entry entry : (Entry[]) dictData) {
-                    result.add(new DictionaryEntry(word, entry.getArticle()));
+            if (Preferences.isPreference(Preferences.DICTIONARY_FUZZY_MATCHING)) {
+                for (String s : data.predictiveSearch(word)) {
+                    addArticle(result, s);
                 }
+	          } else {
+                addArticle(result, word);
             }
             return result;
+        }
+
+        private void addArticle(List<DictionaryEntry> result, String s) {
+            Object dictData = data.get(s);
+            if (dictData instanceof Entry) {
+                result.add(new DictionaryEntry(s, ((Entry) dictData).getArticle()));
+            } else if (dictData instanceof Entry[]) {
+                for (Entry entry : (Entry[]) dictData) {
+                    result.add(new DictionaryEntry(s, entry.getArticle()));
+                }
+            }
         }
 
         /**

@@ -5,9 +5,6 @@
     <Property name="title" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
       <ResourceString bundle="org/omegat/Bundle.properties" key="OpenXML_FILTER_OPTIONS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
     </Property>
-    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-      <Color id="Default Cursor"/>
-    </Property>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -116,9 +113,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenXML_TRANSLATE_HIDDEN_TEXT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateHiddenTextCBradiosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateCommentsCB">
           <Properties>
@@ -127,9 +121,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenXML_TRANSLATE_COMMENTS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateCommentsCBradiosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateFootnotesCB">
           <Properties>
@@ -138,9 +129,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenXML_TRANSLATE_FOOTNOTES" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateFootnotesCBradiosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateEndnotesCB">
           <Properties>
@@ -149,9 +137,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenXML_TRANSLATE_ENDNOTES" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateEndnotesCBradiosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateHeadersCB">
           <Properties>
@@ -160,9 +145,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenXML_TRANSLATE_HEADERS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateHeadersCBradiosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateFootersCB">
           <Properties>
@@ -171,9 +153,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenXML_TRANSLATE_FOOTERS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateFootersCBradiosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateFallbackTextCB">
           <Properties>
@@ -181,9 +160,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenXML_TRANSLATE_FALLBACK_TEXT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateFallbackTextCBradiosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
@@ -205,9 +181,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenXML_TRANSLATE_EXCEL_COMMENTS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateExcelCommentsCBradiosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateSheetNamesCB">
           <Properties>
@@ -215,9 +188,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenXML_TRANSLATE_EXCEL_SHEET_NAMES" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateSheetNamesCBradiosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -239,9 +209,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenXML_TRANSLATE_SLIDE_COMMENTS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateSlideCommentsCBradiosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateSlideMastersCB">
           <Properties>
@@ -290,9 +257,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenXML_TRANSLATE_DIAGRAMS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateDiagramsCBradiosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateDrawingsCB">
           <Properties>
@@ -300,9 +264,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenXML_TRANSLATE_DRAWINGS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateDrawingsCBradiosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateWordArtCB">
           <Properties>
@@ -310,9 +271,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenXML_TRANSLATE_WORDART" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateWordArtCBradiosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -333,9 +291,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenXML_AGGREGATE_TAGS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aggregateTagsCBActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="preserveSpacesCB">
           <Properties>
@@ -343,9 +298,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenXML_PRESERVE_SPACES" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="preserveSpacesCBActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="breakOnBrCB">
           <Properties>
@@ -353,9 +305,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenXML_BREAK_ON_BR" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="breakOnBrCBradiosActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

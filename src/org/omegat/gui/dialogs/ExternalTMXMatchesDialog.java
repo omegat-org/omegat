@@ -100,7 +100,7 @@ public class ExternalTMXMatchesDialog extends JDialog {
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         sortMatchesLabel = new javax.swing.JLabel();
-        sortMatchesList = new javax.swing.JComboBox<SORT_KEY>();
+        sortMatchesList = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
         tagHandlingLabel = new javax.swing.JLabel();
         displayLevel2Tags = new javax.swing.JCheckBox();
@@ -111,7 +111,7 @@ public class ExternalTMXMatchesDialog extends JDialog {
         matchesTemplate = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
         variablesLabel = new javax.swing.JLabel();
-        variablesList = new javax.swing.JComboBox<String>();
+        variablesList = new javax.swing.JComboBox<>();
         insertButton = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -161,7 +161,6 @@ public class ExternalTMXMatchesDialog extends JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(templateLabel, bundle.getString("EXT_TMX_MATCHES_TEMPLATE")); // NOI18N
         jPanel3.add(templateLabel, java.awt.BorderLayout.NORTH);
 
-        jScrollPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setMinimumSize(new java.awt.Dimension(525, 25));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(446, 96));
 

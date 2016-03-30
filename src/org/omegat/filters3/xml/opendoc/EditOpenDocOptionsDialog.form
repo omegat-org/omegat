@@ -5,9 +5,6 @@
     <Property name="title" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
       <ResourceString bundle="org/omegat/Bundle.properties" key="OpenDoc_FILTER_OPTIONS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
     </Property>
-    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-      <Color id="Default Cursor"/>
-    </Property>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -105,9 +102,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenDoc_TRANSLATE_INDEXES" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateIndexesCBradiosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateBookmarksCB">
           <Properties>
@@ -115,9 +109,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenDoc_TRANSLATE_BOOKMARKS" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateBookmarksCBradiosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateBookmarkRefsCB">
           <Properties>
@@ -126,9 +117,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenDoc_TRANSLATE_BOOKMARKREFS" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateBookmarkRefsCBradiosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateNotesCB">
           <Properties>
@@ -137,9 +125,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenDoc_TRANSLATE_NOTES" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateNotesCBradiosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateCommentsCB">
           <Properties>
@@ -148,9 +133,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenDoc_TRANSLATE_COMMENTS" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translateCommentsCBradiosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translatePresNotesCB">
           <Properties>
@@ -159,9 +141,6 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="OpenDoc_TRANSLATE_PRES_NOTES" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translatePresNotesCBradiosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateLinksCB">
           <Properties>

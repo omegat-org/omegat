@@ -108,6 +108,7 @@ public abstract class BaseStatisticsPanel extends JPanel {
         panel.title.setText(title);
         panel.table.setModel(new StringArrayTableModel(data));
         setTableHeaders(panel.table, headers);
+        panel.table.setAutoCreateRowSorter(true);
         panel.table.getColumnModel().getColumn(0).setCellRenderer(
                 DataTableStyling.getHeaderTextCellRenderer());
         TableColumnSizer.autoSize(panel.table, 0, false);

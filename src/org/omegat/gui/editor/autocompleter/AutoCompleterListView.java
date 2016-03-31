@@ -109,14 +109,12 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
             return true;
         }
 
-        if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_UP, 0)
-                || StaticUtils.isKey(e, KeyEvent.VK_V, KeyEvent.ALT_MASK)) {
+        if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_UP, 0)) {
             selectPreviousPossibleValueByPage();
             return true;
         }
 
-        if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_DOWN, 0)
-                || StaticUtils.isKey(e, KeyEvent.VK_V, KeyEvent.CTRL_MASK)) {
+        if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_DOWN, 0)) {
             selectNextPossibleValueByPage();
             return true;
         }

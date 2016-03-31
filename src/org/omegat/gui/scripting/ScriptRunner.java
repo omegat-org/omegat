@@ -48,6 +48,7 @@ public class ScriptRunner {
     public static final String VAR_CONSOLE = "console";
     public static final String VAR_MAINWINDOW = "mainWindow";
     public static final String VAR_GLOSSARY = "glossary";
+    public static final String VAR_CORE = "Core";
     public static final String VAR_EDITOR = "editor";
     public static final String VAR_PROJECT = "project";
     public static final String VAR_RESOURCES = "res";
@@ -142,6 +143,7 @@ public class ScriptRunner {
         bindings.put(VAR_EDITOR, Core.getEditor());
         bindings.put(VAR_GLOSSARY, Core.getGlossary());
         bindings.put(VAR_MAINWINDOW, Core.getMainWindow());
+        bindings.put(VAR_CORE, Core.class);
 
         if (additionalBindings != null) {
             bindings.putAll(additionalBindings);

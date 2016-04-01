@@ -61,6 +61,7 @@ Source: "readme*.txt"; DestDir: "{app}";
 Source: "join.html"; DestDir: "{app}"
 Source: "index.html"; DestDir: "{app}"
 Source: "changes.txt"; DestDir: "{app}"; Flags: isreadme;
+Source: "omegat.prefs"; DestDir: "{app}"; Flags: skipifsourcedoesntexist;
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\plugins\"

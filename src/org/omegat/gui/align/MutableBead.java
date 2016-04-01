@@ -78,8 +78,14 @@ class MutableBead {
         this(Arrays.asList(source), Arrays.asList(target));
     }
 
+    /**
+     * Create an empty new bead. {@link #enabled} is <code>true</code> by
+     * default because it is assumed that the caller will populate the bead with
+     * interesting data.
+     */
     public MutableBead() {
         this(Collections.emptyList(), Collections.emptyList());
+        this.enabled = true;
     }
 
     /**

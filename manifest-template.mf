@@ -197,6 +197,9 @@ OmegaT-Plugin: tokenizer
 Name: org.omegat.tokenizer.LucenePersianTokenizer
 OmegaT-Plugin: tokenizer
 
+Name: org.omegat.tokenizer.LucenePolishTokenizer
+OmegaT-Plugin: tokenizer
+
 Name: org.omegat.tokenizer.LucenePortugueseTokenizer
 OmegaT-Plugin: tokenizer
 

@@ -28,6 +28,7 @@
 	<classpathentry kind="lib" path="lib/lucene-analyzers-common-5.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/lucene-analyzers-kuromoji-5.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/lucene-analyzers-smartcn-5.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-analyzers-stempel-5.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.7.18.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-jdk14-1.7.18.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool-3.2/annotations.jar"/>

@@ -114,8 +114,8 @@ class MutableBead {
     static List<Entry<String, String>> beadsToEntries(Language srcLang, Language trgLang,
             List<MutableBead> beads) {
         return beads.stream().filter(bead -> bead.enabled).map(bead -> {
-            String srcOut = Util.join(srcLang, bead.sourceLines);
-            String trgOut = Util.join(trgLang, bead.targetLines);
+            String srcOut = bead.sourceLines.isEmpty() ? null : Util.join(srcLang, bead.sourceLines);
+            String trgOut = bead.targetLines.isEmpty() ? null : Util.join(trgLang, bead.targetLines);
             return new AbstractMap.SimpleImmutableEntry<String, String>(srcOut, trgOut);
         }).collect(Collectors.toList());
     }

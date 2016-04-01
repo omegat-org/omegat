@@ -161,6 +161,11 @@ public class TMXWriter2 {
 
     public void writeEntry(String source, String translation, String note, String creator, long creationDate,
             String changer, long changeDate, List<String> propValues) throws Exception {
+        if (source == null && translation == null) {
+            throw new NullPointerException(
+                    "The TMX spec requires at least one <tuv> per <tu>. Source and translation can't both be null.");
+        }
+
         xml.writeCharacters("    ");
         xml.writeStartElement("tu");
         xml.writeCharacters(FileUtil.LINE_SEPARATOR);
@@ -195,27 +200,29 @@ public class TMXWriter2 {
         }
 
         // write source segment
-        source = StringUtil.removeXMLInvalidChars(source);
-        if (forceValidTMX) {
-            source = TagUtil.stripXmlTags(source);
+        if (source != null) {
+            source = StringUtil.removeXMLInvalidChars(source);
+            if (forceValidTMX) {
+                source = TagUtil.stripXmlTags(source);
+            }
+            xml.writeCharacters("      ");
+            xml.writeStartElement("tuv");
+            if (levelTwo) {
+                xml.writeAttribute("xml", "", "lang", langSrc);
+            } else {
+                xml.writeAttribute("lang", langSrc);
+            }
+            xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+            if (levelTwo) {
+                writeLevelTwo(platformLineSeparator(source));
+            } else {
+                writeLevelOne(platformLineSeparator(source));
+            }
+            xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+            xml.writeCharacters("      ");
+            xml.writeEndElement(); // tuv
+            xml.writeCharacters(FileUtil.LINE_SEPARATOR);
         }
-        xml.writeCharacters("      ");
-        xml.writeStartElement("tuv");
-        if (levelTwo) {
-            xml.writeAttribute("xml", "", "lang", langSrc);
-        } else {
-            xml.writeAttribute("lang", langSrc);
-        }
-        xml.writeCharacters(FileUtil.LINE_SEPARATOR);
-        if (levelTwo) {
-            writeLevelTwo(platformLineSeparator(source));
-        } else {
-            writeLevelOne(platformLineSeparator(source));
-        }
-        xml.writeCharacters(FileUtil.LINE_SEPARATOR);
-        xml.writeCharacters("      ");
-        xml.writeEndElement(); // tuv
-        xml.writeCharacters(FileUtil.LINE_SEPARATOR);
 
         // write target segment
         if (translation != null) {

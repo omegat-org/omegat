@@ -19,7 +19,6 @@ OutputBaseFilename=OmegaT_@VERSION_NUMBER_SUBST@_Windows
 Source: "docs\*"; DestDir: "{app}\docs"; Flags: recursesubdirs
 Source: "images\*"; DestDir: "{app}\images"; Flags: recursesubdirs
 Source: "lib\*"; DestDir: "{app}\lib"; Flags: recursesubdirs
-Source: "native\*"; DestDir: "{app}\native"; Flags: recursesubdirs
 Source: "plugins\*"; DestDir: "{app}\plugins"; Flags: recursesubdirs
 Source: "scripts\*"; DestDir: "{app}\scripts"; Flags: recursesubdirs
 Source: "..\..\jre\*"; DestDir: "{app}\jre"; Flags: recursesubdirs

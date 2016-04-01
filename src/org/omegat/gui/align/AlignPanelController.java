@@ -418,6 +418,9 @@ public class AlignPanelController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (confirmReset(frame)) {
+                    if (phase == Phase.ALIGN) {
+                        aligner.restoreDefaults();
+                    }
                     reloadBeads(panel, frame);
                 }
             }

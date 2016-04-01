@@ -145,10 +145,10 @@ public class Aligner {
         WORD
     }
 
-    ComparisonMode comparisonMode = ComparisonMode.HEAPWISE;
-    AlgorithmClass algorithmClass = AlgorithmClass.VITERBI;
-    CalculatorType calculatorType = CalculatorType.NORMAL;
-    CounterType counterType = CounterType.CHAR;
+    ComparisonMode comparisonMode;
+    AlgorithmClass algorithmClass;
+    CalculatorType calculatorType;
+    CounterType counterType;
 
     private List<String> srcRaw;
     private List<String> trgRaw;
@@ -160,9 +160,7 @@ public class Aligner {
         this.srcLang = srcLang;
         this.trgFile = trgFile;
         this.trgLang = trgLang;
-        if (!srcLang.isSpaceDelimited() || !trgLang.isSpaceDelimited()) {
-            this.counterType = CounterType.CHAR;
-        }
+        restoreDefaults();
     }
 
     /**
@@ -214,6 +212,17 @@ public class Aligner {
         srcRaw = null;
         trgRaw = null;
         idPairs = null;
+    }
+
+    void restoreDefaults() {
+        comparisonMode = ComparisonMode.HEAPWISE;
+        algorithmClass = AlgorithmClass.VITERBI;
+        calculatorType = CalculatorType.NORMAL;
+        if (!srcLang.isSpaceDelimited() || !trgLang.isSpaceDelimited()) {
+            counterType = CounterType.CHAR;
+        } else {
+            counterType = CounterType.WORD;
+        }
     }
 
     /**

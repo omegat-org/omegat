@@ -47,7 +47,7 @@ public class LuceneFrenchTokenizer extends BaseTokenizer {
             CharArraySet stopWords = stopWordsAllowed ? FrenchAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
             return new FrenchAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

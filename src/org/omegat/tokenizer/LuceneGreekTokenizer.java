@@ -46,7 +46,7 @@ public class LuceneGreekTokenizer extends BaseTokenizer {
             CharArraySet stopWords = stopWordsAllowed ? GreekAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
             return new GreekAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

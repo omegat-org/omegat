@@ -48,7 +48,7 @@ public class LucenePersianTokenizer extends BaseTokenizer {
             PersianAnalyzer analyzer = new PersianAnalyzer(stopWords);
             return analyzer.tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

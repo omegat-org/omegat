@@ -44,7 +44,7 @@ public class LuceneSpanishTokenizer extends BaseTokenizer {
             CharArraySet stopWords = stopWordsAllowed ? SpanishAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
             return new SpanishAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

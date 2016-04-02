@@ -54,7 +54,7 @@ public class LuceneGermanTokenizer extends BaseTokenizer {
             CharArraySet stopWords = stopWordsAllowed ? GermanAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
             return new Lucene30GermanAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 

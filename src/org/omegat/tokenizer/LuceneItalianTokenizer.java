@@ -44,7 +44,7 @@ public class LuceneItalianTokenizer extends BaseTokenizer {
             CharArraySet stopWords = stopWordsAllowed ? ItalianAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
             return new ItalianAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

@@ -46,7 +46,7 @@ public class LuceneBrazilianTokenizer extends BaseTokenizer {
             CharArraySet stopWords = stopWordsAllowed ? BrazilianAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
             return new BrazilianAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

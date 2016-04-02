@@ -77,7 +77,7 @@ public class LuceneEnglishTokenizer extends BaseTokenizer {
             CharArraySet stopWords = stopWordsAllowed ? STOP_WORDS : CharArraySet.EMPTY_SET;
             return new EnglishAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

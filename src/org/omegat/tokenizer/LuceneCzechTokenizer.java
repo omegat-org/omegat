@@ -46,7 +46,7 @@ public class LuceneCzechTokenizer extends BaseTokenizer {
             CharArraySet stopWords = stopWordsAllowed ? CzechAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
             return new CzechAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

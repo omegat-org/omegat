@@ -49,7 +49,7 @@ public class LuceneArabicTokenizer extends BaseTokenizer {
             ArabicAnalyzer analyzer = new ArabicAnalyzer(stopWords);
             return analyzer.tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

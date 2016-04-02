@@ -46,7 +46,7 @@ public class LuceneThaiTokenizer extends BaseTokenizer {
             CharArraySet stopWords = stopWordsAllowed ? ThaiAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
             return new ThaiAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

@@ -46,7 +46,7 @@ public class LuceneRussianTokenizer extends BaseTokenizer {
             CharArraySet stopWords = stopWordsAllowed ? RussianAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
             return new RussianAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

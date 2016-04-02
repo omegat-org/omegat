@@ -44,7 +44,7 @@ public class LuceneBasqueTokenizer extends BaseTokenizer {
             CharArraySet stopWords = stopWordsAllowed ? BasqueAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
             return new BasqueAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

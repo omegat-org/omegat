@@ -44,7 +44,7 @@ public class LuceneRomanianTokenizer extends BaseTokenizer {
             CharArraySet stopWords = stopWordsAllowed ? RomanianAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
             return new RomanianAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

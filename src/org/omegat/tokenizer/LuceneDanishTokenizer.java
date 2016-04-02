@@ -44,7 +44,7 @@ public class LuceneDanishTokenizer extends BaseTokenizer {
             CharArraySet stopWords = stopWordsAllowed ? DanishAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
             return new DanishAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

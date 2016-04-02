@@ -44,7 +44,7 @@ public class LuceneNorwegianTokenizer extends BaseTokenizer {
             CharArraySet stopWords = stopWordsAllowed ? NorwegianAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
             return new NorwegianAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

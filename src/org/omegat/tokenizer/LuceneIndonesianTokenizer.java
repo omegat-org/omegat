@@ -44,7 +44,7 @@ public class LuceneIndonesianTokenizer extends BaseTokenizer {
             CharArraySet stopWords = stopWordsAllowed ? IndonesianAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
             return new IndonesianAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

@@ -44,7 +44,7 @@ public class LuceneTurkishTokenizer extends BaseTokenizer {
             CharArraySet stopWords = stopWordsAllowed ? TurkishAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
             return new TurkishAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

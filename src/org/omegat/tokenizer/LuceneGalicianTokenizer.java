@@ -44,7 +44,7 @@ public class LuceneGalicianTokenizer extends BaseTokenizer {
             CharArraySet stopWords = stopWordsAllowed ? GalicianAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
             return new GalicianAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

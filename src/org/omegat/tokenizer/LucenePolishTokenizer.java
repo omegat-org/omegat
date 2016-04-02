@@ -49,7 +49,7 @@ public class LucenePolishTokenizer extends BaseTokenizer {
             PolishAnalyzer analyzer = new PolishAnalyzer(stopWords);
             return analyzer.tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

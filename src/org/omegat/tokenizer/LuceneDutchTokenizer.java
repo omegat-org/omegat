@@ -46,7 +46,7 @@ public class LuceneDutchTokenizer extends BaseTokenizer {
             CharArraySet stopWords = stopWordsAllowed ? DutchAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
             return new DutchAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

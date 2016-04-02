@@ -44,7 +44,7 @@ public class LuceneIrishTokenizer extends BaseTokenizer {
             CharArraySet stopWords = stopWordsAllowed ? IrishAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
             return new IrishAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
-            return super.getStandardTokenStream(strOrig);
+            return getStandardTokenStream(strOrig);
         }
     }
 }

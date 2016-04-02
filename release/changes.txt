@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.0
 ----------------------------------------------------------------------
- 14 Enhancements
+ 15 Enhancements
   1 Bug fix
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -50,6 +50,8 @@
   - Replace glossary hits now supports multi-word glossary replacements
 
   - The default memory allocation is now 1024 MB on all platforms
+
+  - There's now a Lucene Polish tokenizer
 
   Bug fixes:
 

@@ -5,7 +5,7 @@
  
  Copyright (C) 2009 Alex Buloichik (alex73mail@gmail.com)
                2013 Aaron Madlon-Kay
-	       2016 Piotr Kulik
+               2016 Piotr Kulik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -36,6 +36,7 @@ import org.apache.lucene.analysis.util.CharArraySet;
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
+ * @author Piotr Kulik
  */
 @Tokenizer(languages = { "pl" })
 public class LucenePolishTokenizer extends BaseTokenizer {

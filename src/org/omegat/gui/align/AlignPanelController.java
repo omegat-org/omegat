@@ -45,6 +45,7 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CancellationException;
@@ -599,8 +600,19 @@ public class AlignPanelController {
         BeadTableModel model = (BeadTableModel) table.getModel();
         List<Integer> realRows = model.realCellsInRowSpan(col, rows);
         int[] resultRows = model.slide(realRows, col, offset);
-        table.changeSelection(resultRows[0], col, false, false);
-        table.changeSelection(resultRows[1], col, false, true);
+        int selStart = resultRows[0];
+        int selEnd = resultRows[1];
+        // If we have a multi-cell selection, trim the selection so that the result remains slideable
+        if (selStart != selEnd) {
+            while (offset < 0 && !model.canMove(selStart, col, true)) {
+                selStart++;
+            }
+            while (offset > 0 && !model.canMove(selEnd, col, false)) {
+                selEnd--;
+            }
+        }
+        table.changeSelection(selStart, col, false, false);
+        table.changeSelection(selEnd, col, false, true);
         ensureSelectionVisible(table, initialRect);
     }
 
@@ -1570,8 +1582,11 @@ public class AlignPanelController {
                 fireTableDataChanged();
             }
             List<String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
-            return new int[] { Util.indexByIdentity(lines, selected.get(0)),
+            int[] resultRows = new int[] { Util.indexByIdentity(lines, selected.get(0)),
                     Util.indexByIdentity(lines, selected.get(selected.size() - 1)) };
+            // Sort result rows so that callers can expect high-to-low order
+            Arrays.sort(resultRows);
+            return resultRows;
         }
 
         /**

@@ -111,7 +111,12 @@ public class SegmentPropertiesListView implements ISegmentPropertiesView {
     public void notifyUser(List<Integer> notify) {
         UIThreadsUtil.mustBeSwingThread();
         for (int i : notify) {
-            ((SegmentPropertiesListCell) panel.getComponent(i / 2)).value.flash();
+            try {
+                ((SegmentPropertiesListCell) panel.getComponent(i / 2)).value.flash();
+            } catch (IndexOutOfBoundsException ex) {
+                // Contents of panel have changed. Don't bother continuing.
+                break;
+            }
         }
     }
 

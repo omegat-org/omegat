@@ -645,8 +645,8 @@ public class AlignPanelController {
             throw new IllegalArgumentException();
         }
         String text = table.getValueAt(row, col).toString();
-        String reference = table.getValueAt(row,
-                col == BeadTableModel.COL_SRC ? BeadTableModel.COL_TRG : BeadTableModel.COL_SRC).toString();
+        String reference = (String) table.getValueAt(row,
+                col == BeadTableModel.COL_SRC ? BeadTableModel.COL_TRG : BeadTableModel.COL_SRC);
         SplittingPanelController splitter = new SplittingPanelController(text, reference);
         String[] split = splitter.show(SwingUtilities.getWindowAncestor(table));
         if (split.length == 1) {

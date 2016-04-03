@@ -428,6 +428,14 @@ public class AlignPanelController {
         panel.resetButton.addActionListener(resetListener);
         frame.resetItem.addActionListener(resetListener);
 
+        ActionListener reloadListener = e -> {
+            if (confirmReset(frame)) {
+                aligner.clearLoaded();
+                reloadBeads(panel, frame);
+            }
+        };
+        frame.reloadItem.addActionListener(reloadListener);
+        
         ActionListener removeTagsListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

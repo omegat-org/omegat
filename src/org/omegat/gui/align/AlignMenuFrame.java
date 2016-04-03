@@ -56,6 +56,7 @@ public class AlignMenuFrame extends javax.swing.JFrame {
         fileMenu = new javax.swing.JMenu();
         saveItem = new javax.swing.JMenuItem();
         resetItem = new javax.swing.JMenuItem();
+        reloadItem = new javax.swing.JMenuItem();
         closeItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         moveUpItem = new javax.swing.JMenuItem();
@@ -89,6 +90,9 @@ public class AlignMenuFrame extends javax.swing.JFrame {
 
         org.openide.awt.Mnemonics.setLocalizedText(resetItem, OStrings.getString("ALIGNER_MENU_FILE_RESET")); // NOI18N
         fileMenu.add(resetItem);
+
+        org.openide.awt.Mnemonics.setLocalizedText(reloadItem, OStrings.getString("ALIGNER_MENU_FILE_RELOAD")); // NOI18N
+        fileMenu.add(reloadItem);
 
         org.openide.awt.Mnemonics.setLocalizedText(closeItem, OStrings.getString("ALIGNER_MENU_FILE_CLOSE")); // NOI18N
         fileMenu.add(closeItem);
@@ -197,6 +201,7 @@ public class AlignMenuFrame extends javax.swing.JFrame {
     public javax.swing.JMenuItem moveDownItem;
     public javax.swing.JMenuItem moveUpItem;
     public javax.swing.JMenu optionsMenu;
+    public javax.swing.JMenuItem reloadItem;
     public javax.swing.JCheckBoxMenuItem removeTagsItem;
     public javax.swing.JMenuItem resetItem;
     public javax.swing.JMenuItem saveItem;

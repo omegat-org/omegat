@@ -703,8 +703,12 @@ public class AlignPanelController {
             model.setStatusAtRow(row, status);
         }
         int nextBeadRow = model.nextBeadFromRow(rows[rows.length - 1]);
-        table.changeSelection(nextBeadRow, table.getSelectedColumn(), false, false);
-        ensureSelectionVisible(table, table.getVisibleRect());
+        if (nextBeadRow != -1) {
+            int[] cols = table.getSelectedColumns();
+            table.changeSelection(nextBeadRow, cols[0], false, false);
+            table.changeSelection(nextBeadRow, cols[cols.length - 1], false, true);
+            ensureSelectionVisible(table, table.getVisibleRect());
+        }
     }
 
     private void ensureSelectionVisible(JTable table, Rectangle initialView) {

@@ -73,13 +73,11 @@ import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
-import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.gui.common.OmegaTIcons;
-import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -673,15 +671,6 @@ public class ScriptingWindow extends JFrame {
         Preferences.setPreference(Preferences.SCRIPTWINDOW_HEIGHT, getHeight());
         Preferences.setPreference(Preferences.SCRIPTWINDOW_X, getX());
         Preferences.setPreference(Preferences.SCRIPTWINDOW_Y, getY());
-    }
-
-    public HighlightPainter getPainter() {
-        return null;
-    }
-
-    public List<Mark> getMarksForEntry(String sourceText, String translationText, boolean isActive)
-            throws Exception {
-        return Collections.emptyList();
     }
 
     private void onListSelectionChanged() {

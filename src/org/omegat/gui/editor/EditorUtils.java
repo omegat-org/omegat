@@ -35,12 +35,16 @@ import javax.swing.text.JTextComponent;
 import javax.swing.text.Utilities;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.ProtectedPart;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.IEditor.CHANGE_CASE_TO;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.StringUtil;
+import org.omegat.util.TagUtil;
 import org.omegat.util.Token;
+import org.omegat.util.TagUtil.Tag;
 
 /**
  * Some utilities methods.
@@ -123,7 +127,7 @@ public class EditorUtils {
      * @return true if it's direction char
      */
     private static boolean isDirectionChar(final char ch) {
-        return ch == '\u202A' || ch == '\u202B' || ch == '\u202C';
+        return ch == '\u202A' || ch == '\u202B' || ch == '\u202C' || ch == '\u200E' || ch == '\u200F';
     }
 
     /**
@@ -134,9 +138,30 @@ public class EditorUtils {
      * @return string without direction chars
      */
     public static String removeDirectionChars(String text) {
-        return text.replaceAll("[\u202A\u202B\u202C]", "");
+        return text.replaceAll("[\u202A\u202B\u202C\u200E\u200F]", "");
     }
-    
+
+    /**
+     * Remove bidi chars around tags only.
+     * 
+     * @param text
+     *            string with direction chars
+     * @return string without direction chars
+     */
+    public static String removeDirectionCharsAroundTags(String text, SourceTextEntry ste) {
+        for (ProtectedPart pp : ste.getProtectedParts()) {
+            int pos = -1;
+            while ((pos = text.indexOf(pp.getTextInSourceSegment(), pos + 1)) >= 0) {
+                if (hasBidiAroundTag(text, pp.getTextInSourceSegment(), pos)) {
+                    // remove bidi chars around
+                    text = text.substring(0, pos - 2) + pp.getTextInSourceSegment()
+                            + text.substring(pos + pp.getTextInSourceSegment().length() + 2);
+                }
+            }
+        }
+        return text;
+    }
+
     /**
      * Change the case of the input string to the indicated case. When toWhat is
      * {@link CHANGE_CASE_TO#CYCLE} the result will be UPPER > LOWER > SENTENCE
@@ -357,5 +382,48 @@ public class EditorUtils {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * Add RTL+LTR around tags. Used for display tags better in RTL text.
+     */
+    public static String addBidiAroundTags(String text, SourceTextEntry ste) {
+        List<Tag> tags = TagUtil.buildTagList(text, ste.getProtectedParts());
+
+        int pos = 0;
+        StringBuilder s = new StringBuilder(text.length() * 12 / 10);
+        for (Tag t : tags) {
+            if (pos < t.pos) {
+                s.append(text.substring(pos, t.pos));
+            }
+            s.append(SegmentBuilder.BIDI_RLM_CHAR);
+            s.append(SegmentBuilder.BIDI_LRM_CHAR);
+            s.append(t.tag);
+            s.append(SegmentBuilder.BIDI_LRM_CHAR);
+            s.append(SegmentBuilder.BIDI_RLM_CHAR);
+            pos = t.pos + t.tag.length();
+        }
+        if (pos < text.length()) {
+            s.append(text.substring(pos));
+        }
+        return s.toString();
+    }
+
+    public static boolean hasBidiAroundTag(String text, String tag, int pos) {
+        try {
+            boolean has = true;
+            if (text.charAt(pos - 1) != SegmentBuilder.BIDI_LRM_CHAR
+                    || text.charAt(pos - 2) != SegmentBuilder.BIDI_RLM_CHAR) {
+                has = false;
+            }
+            if (text.charAt(pos + tag.length()) != SegmentBuilder.BIDI_LRM_CHAR
+                    || text.charAt(pos + tag.length() + 1) != SegmentBuilder.BIDI_RLM_CHAR) {
+                has = false;
+            }
+            return has;
+        } catch (StringIndexOutOfBoundsException ex) {
+            // before or after known string - don't have bidi chars around this tag
+            return false;
+        }
     }
 }

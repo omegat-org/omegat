@@ -99,21 +99,30 @@ public class DocumentFilter3 extends DocumentFilter {
 
         // check protected parts
         if (!Preferences.isPreference(Preferences.ALLOW_TAG_EDITING)) {
-            SourceTextEntry ste = doc.controller.getCurrentEntry();
-            if (ste == null) {
+            SegmentBuilder sb = doc.controller.getCurrentSegmentBuilder();
+            if (sb == null) {
                 // there is no current active entry
                 return false;
             }
             // check if inside tag
             String text = doc.getText(doc.getTranslationStart(), doc.getTranslationEnd() - doc.getTranslationStart());
             int off = offset - doc.getTranslationStart();
-            for (ProtectedPart pp : ste.getProtectedParts()) {
+            for (ProtectedPart pp : sb.ste.getProtectedParts()) {
                 int pos = -1;
                 while ((pos = text.indexOf(pp.getTextInSourceSegment(), pos + 1)) >= 0) {
-                    if (off > pos && off < pos + pp.getTextInSourceSegment().length()) {
+                    int checkPos = pos;
+                    int checkLen = pp.getTextInSourceSegment().length();
+                    if (sb.hasRTL && doc.controller.targetLangIsRTL) {
+                        // should be bidi-chars around tags
+                        if (EditorUtils.hasBidiAroundTag(text, pp.getTextInSourceSegment(), pos)) {
+                            checkPos -= 2;
+                            checkLen += 4;
+                        }
+                    }
+                    if (off > checkPos && off < checkPos + checkLen) {
                         return false;
                     }
-                    if (off + length > pos && off + length < pos + pp.getTextInSourceSegment().length()) {
+                    if (off + length > checkPos && off + length < checkPos + checkLen) {
                         return false;
                     }
                 }

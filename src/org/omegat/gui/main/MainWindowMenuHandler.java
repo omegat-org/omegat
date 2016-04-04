@@ -756,7 +756,7 @@ public class MainWindowMenuHandler {
     public void editTagPainterMenuItemActionPerformed() {
         // insert tags
         for (Tag tag : TagUtil.getAllTagsMissingFromTarget()) {
-            Core.getEditor().insertText(tag.tag);
+            Core.getEditor().insertTag(tag.tag);
         }
     }
 
@@ -766,7 +766,7 @@ public class MainWindowMenuHandler {
         if (tags.isEmpty()) {
             return;
         }
-        Core.getEditor().insertText(tags.get(0).tag);
+        Core.getEditor().insertTag(tags.get(0).tag);
     }
 
     public void toolsShowStatisticsStandardMenuItemActionPerformed() {

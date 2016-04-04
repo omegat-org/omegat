@@ -304,6 +304,10 @@ public class SearchWindowTest extends TestCore {
             }
 
             @Override
+            public void insertTag(String tag) {
+            }
+
+            @Override
             public void gotoHistoryForward() {
             }
 

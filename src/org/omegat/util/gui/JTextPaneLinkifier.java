@@ -32,7 +32,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.regex.Matcher;
@@ -255,7 +254,7 @@ public class JTextPaneLinkifier {
                 public void execute() {
                     try {
                         Desktop.getDesktop().browse(target);
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         Log.log(e);
                     }
                 }

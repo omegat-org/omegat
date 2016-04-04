@@ -246,6 +246,10 @@ public class GlossaryAutoCompleterViewTest extends TestCore {
             }
 
             @Override
+            public void insertTag(String tag) {
+            }
+
+            @Override
             public void gotoHistoryForward() {
             }
 

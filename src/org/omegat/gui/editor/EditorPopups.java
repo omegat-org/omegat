@@ -70,6 +70,7 @@ public class EditorPopups {
         ec.registerPopupMenuConstructors(500, new DuplicateSegmentsPopup(ec));
         ec.registerPopupMenuConstructors(600, new EmptyNoneTranslationPopup(ec));
         ec.registerPopupMenuConstructors(700, new InsertTagsPopup(ec));
+        ec.registerPopupMenuConstructors(700, new InsertBidiPopup(ec));
     }
 
     /**
@@ -415,6 +416,38 @@ public class EditorPopups {
                 });
             }
             menu.addSeparator();
+        }
+    }
+
+    public static class InsertBidiPopup implements IPopupMenuConstructor {
+        protected final EditorController ec;
+        protected String[] names = new String[] { "TF_MENU_EDIT_INSERT_CHARS_LRM",
+                "TF_MENU_EDIT_INSERT_CHARS_RLM", "TF_MENU_EDIT_INSERT_CHARS_LRE",
+                "TF_MENU_EDIT_INSERT_CHARS_RLE", "TF_MENU_EDIT_INSERT_CHARS_PDF" };
+        protected String[] inserts = new String[] { "\u200E", "\u200F", "\u202A", "\u202B", "\u202C" };
+
+        public InsertBidiPopup(EditorController ec) {
+            this.ec = ec;
+        }
+
+        public void addItems(JPopupMenu menu, final JTextComponent comp, final int mousepos,
+                boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
+            if (!isInActiveTranslation) {
+                return;
+            }
+            JMenu submenu = new JMenu(OStrings.getString("TF_MENU_EDIT_INSERT_CHARS"));
+            for (int i = 0; i < names.length; i++) {
+                JMenuItem item = new JMenuItem(OStrings.getString(names[i]));
+                final String insertText = inserts[i];
+                item.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        Core.getEditor().insertText(insertText);
+                    }
+                });
+                submenu.add(item);
+            }
+            menu.add(submenu);
         }
     }
 }

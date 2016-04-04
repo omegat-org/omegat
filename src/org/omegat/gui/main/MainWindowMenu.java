@@ -299,6 +299,13 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         selectFuzzySubMenu.add(editSelectFuzzy3MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_3"));
         selectFuzzySubMenu.add(editSelectFuzzy4MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_4"));
         selectFuzzySubMenu.add(editSelectFuzzy5MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_5"));
+        editMenu.add(insertCharsSubMenu = createMenu("TF_MENU_EDIT_INSERT_CHARS"));
+        insertCharsSubMenu.add(insertCharsLRM = createMenuItem("TF_MENU_EDIT_INSERT_CHARS_LRM"));
+        insertCharsSubMenu.add(insertCharsRLM = createMenuItem("TF_MENU_EDIT_INSERT_CHARS_RLM"));
+        insertCharsSubMenu.add(new JSeparator());
+        insertCharsSubMenu.add(insertCharsLRE = createMenuItem("TF_MENU_EDIT_INSERT_CHARS_LRE"));
+        insertCharsSubMenu.add(insertCharsRLE = createMenuItem("TF_MENU_EDIT_INSERT_CHARS_RLE"));
+        insertCharsSubMenu.add(insertCharsPDF = createMenuItem("TF_MENU_EDIT_INSERT_CHARS_PDF"));
         editMenu.add(new JSeparator());
         editMenu.add(editMultipleDefault = createMenuItem("MULT_MENU_DEFAULT"));
         editMenu.add(editMultipleAlternate = createMenuItem("MULT_MENU_MULTIPLE"));
@@ -697,6 +704,12 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem editSelectFuzzy3MenuItem;
     JMenuItem editSelectFuzzy4MenuItem;
     JMenuItem editSelectFuzzy5MenuItem;
+    JMenu insertCharsSubMenu;
+    JMenuItem insertCharsLRM;
+    JMenuItem insertCharsRLM;
+    JMenuItem insertCharsLRE;
+    JMenuItem insertCharsRLE;
+    JMenuItem insertCharsPDF;
     public JMenuItem editMultipleDefault;
     public JMenuItem editMultipleAlternate;
     JMenuItem editUndoMenuItem;

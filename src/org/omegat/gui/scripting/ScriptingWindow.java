@@ -100,10 +100,6 @@ public class ScriptingWindow extends JFrame {
 
     static ScriptingWindow window;
 
-    // XXX Still needed ?
-    /**
-     * @deprecated
-     */
     public static void loadPlugins() {
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
             @Override
@@ -124,9 +120,6 @@ public class ScriptingWindow extends JFrame {
         super.dispose();
     }
 
-    /**
-     * @deprecated
-     */
     public static void unloadPlugins() {
         if (window != null) {
             window.dispose();

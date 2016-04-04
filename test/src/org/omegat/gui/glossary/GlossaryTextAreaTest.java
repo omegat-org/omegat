@@ -149,6 +149,9 @@ public class GlossaryTextAreaTest extends TestCore {
             public void insertText(String text) {
             }
 
+            public void insertTag(String tag) {
+            }
+
             public void setAlternateTranslationForCurrentEntry(boolean alternate) {
             }
 

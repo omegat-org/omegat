@@ -333,6 +333,9 @@ public class TestTeamIntegrationChild {
         public void insertText(String text) {
         }
 
+        public void insertTag(String tag) {
+        }
+
         public void gotoHistoryForward() {
         }
 

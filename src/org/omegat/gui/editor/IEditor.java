@@ -299,6 +299,13 @@ public interface IEditor {
     void insertText(String text);
 
     /**
+     * Inserts tag at the cursor position, probably with adding bidi control chars.
+     * 
+     * Must be called only from UI thread.
+     */
+    void insertTag(String tag);
+
+    /**
      * Go to next segment from history.
      * 
      * Must be called only from UI thread.

@@ -411,7 +411,7 @@ public class EditorPopups {
                 JMenuItem item = menu.add(StringUtil.format(OStrings.getString("TF_MENU_EDIT_TAG_INSERT_N"), tag.tag));
                 item.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        Core.getEditor().insertText(tag.tag);
+                        Core.getEditor().insertTag(tag.tag);
                     }
                 });
             }

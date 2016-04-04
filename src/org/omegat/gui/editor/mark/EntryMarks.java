@@ -51,7 +51,7 @@ public class EntryMarks {
         this.markerIndex = markerIndex;
         this.isActive = builder.isActive();
         this.ste = builder.getSourceTextEntry();
-        this.sourceText = builder.getSourceTextEntry().getSrcText();
+        this.sourceText = builder.getSourceText();
         this.translationText = builder.getTranslationText();
     }
 

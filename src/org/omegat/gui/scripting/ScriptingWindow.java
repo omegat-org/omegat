@@ -95,9 +95,8 @@ import org.openide.awt.Mnemonics;
  * @author Yu Tang
  * @author Aaron Madlon-Kay
  */
+@SuppressWarnings("serial")
 public class ScriptingWindow extends JFrame {
-
-    private static final long serialVersionUID = 1L;
 
     static ScriptingWindow window;
 

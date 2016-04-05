@@ -1368,11 +1368,14 @@ public class AlignPanelController {
             List<String> selected = new ArrayList<>(rows.size());
             List<String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
             int origRowCount = getRowCount();
+            // Bead to be modified selected here
             MutableBead trgBead;
             if (trgRow < 0) {
+                // New bead created
                 trgBead = new MutableBead();
                 data.add(0, trgBead);
             } else if (trgRow > rowToBead.size() - 1) {
+                // New bead created
                 trgBead = new MutableBead();
                 data.add(trgBead);
             } else {
@@ -1391,6 +1394,7 @@ public class AlignPanelController {
                 }
                 Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line);
                 int insertIndex = trgRow > row ? 0 : trgLines.size();
+                // XXX: Bead modified here
                 trgLines.add(insertIndex, line);
             }
             makeCache();
@@ -1429,6 +1433,7 @@ public class AlignPanelController {
          */
         private MutableBead splitBeadByCount(MutableBead bead, int count) {
             List<String> splitSrc = new ArrayList<>(bead.sourceLines);
+            // XXX: Bead modified here
             bead.sourceLines.clear();
             List<String> splitTrg = new ArrayList<>(bead.targetLines);
             bead.targetLines.clear();
@@ -1440,6 +1445,7 @@ public class AlignPanelController {
                     bead.targetLines.add(splitTrg.remove(0));
                 }
             }
+            // New bead created
             return new MutableBead(splitSrc, splitTrg);
         }
 
@@ -1610,6 +1616,7 @@ public class AlignPanelController {
                 int row = rows.get(i);
                 String line = lines.get(row);
                 toCombine.add(line);
+                // XXX: Bead modified
                 MutableBead bead = rowToBead.get(row);
                 Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line);
             }
@@ -1617,6 +1624,7 @@ public class AlignPanelController {
             List<String> trgLines = col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines;
             Language lang = col == COL_SRC ? aligner.srcLang : aligner.trgLang;
             String combined = Util.join(lang, toCombine);
+            // XXX: Bead modified
             trgLines.set(Util.indexByIdentity(trgLines, toCombine.get(0)), combined);
             makeCache();
             if (origRowCount != getRowCount()) {
@@ -1645,8 +1653,10 @@ public class AlignPanelController {
             List<String> trgLines = (col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines);
             String line = (col == COL_SRC ? rowToSourceLine : rowToTargetLine).get(row);
             int insertAt = Util.indexByIdentity(trgLines, line);
+            // XXX: Bead modified
             trgLines.set(insertAt++, split[0]);
             for (int i = 1; i < split.length; i++) {
+                // XXX: Bead modified
                 trgLines.add(insertAt++, split[i]);
             }
             makeCache();
@@ -1674,6 +1684,7 @@ public class AlignPanelController {
             List<String> trgLines = (col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines);
             String line = (col == COL_SRC ? rowToSourceLine : rowToTargetLine).get(row);
             int insertAt = Util.indexByIdentity(trgLines, line);
+            // XXX: Bead modified
             trgLines.set(insertAt, newVal);
             makeCache();
         }
@@ -1717,9 +1728,11 @@ public class AlignPanelController {
                 int trgRow = row + offset;
                 MutableBead trgBead;
                 if (trgRow < 0) {
+                    // New bead created
                     trgBead = new MutableBead();
                     data.add(0, trgBead);
                 } else if (trgRow > rowToBead.size() - 1) {
+                    // New bead created
                     trgBead = new MutableBead();
                     data.add(trgBead);
                 } else {
@@ -1735,6 +1748,7 @@ public class AlignPanelController {
                         trgBead = splitBead(trgBead);
                     }
                 }
+                // XXX: Bead modified here
                 Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line);
                 List<String> trgLines = col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines;
                 int insertIndex = trgRow > row ? 0 : trgLines.size();
@@ -1851,6 +1865,7 @@ public class AlignPanelController {
             MutableBead bead = rowToBead.get(row);
             List<String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
             String line = lines.get(row);
+            // XXX: Bead modified here
             Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line);
             return line;
         }
@@ -1861,10 +1876,12 @@ public class AlignPanelController {
             }
             int origRowCount = getRowCount();
             MutableBead bead = rowToBead.get(row);
+            // XXX: Bead modified here
             (col == COL_SRC ? bead.sourceLines : bead.targetLines).add(lines.get(0));
             int beadInsertIndex = data.indexOf(bead) + 1;
             List<MutableBead> newBeads = new ArrayList<>();
             for (int i = 1; i < lines.size(); i++) {
+                // New bead created
                 MutableBead newBead = new MutableBead();
                 (col == COL_SRC ? newBead.sourceLines : newBead.targetLines).add(lines.get(i));
                 newBeads.add(newBead);

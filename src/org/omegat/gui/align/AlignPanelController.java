@@ -972,7 +972,8 @@ public class AlignPanelController {
         int beads = model.beadsInRowSpan(rows);
         boolean canSplit = (realRows.size() == 1 && rows.length == 1) || (!realRows.isEmpty() && beads == 1);
         boolean canMerge = realRows.size() > 1
-                || (!realRows.isEmpty() && realRows.get(0) < panel.table.getRowCount() - 1);
+                || (realRows.size() == 1 && rows.length == 1
+                        && realRows.get(0) < panel.table.getRowCount() - 1);
         boolean canEdit = realRows.size() == 1;
         panel.moveDownButton.setEnabled(enabled && canDown);
         frame.moveDownItem.setEnabled(enabled && canDown);

@@ -1508,10 +1508,15 @@ public class AlignPanelController {
         List<Integer> getRowExtentsForBeadAtRow(int row) {
             MutableBead bead = rowToBead.get(row);
             List<Integer> result = new ArrayList<>();
-            for (int i = 0; i < rowToBead.size(); i++) {
-                if (rowToBead.get(i) == bead) {
-                    result.add(i);
+            int firstIndex = rowToBead.indexOf(bead);
+            if (firstIndex == -1) {
+                throw new IllegalArgumentException();
+            }
+            for (int i = firstIndex; i < rowToBead.size(); i++) {
+                if (rowToBead.get(i) != bead) {
+                    break;
                 }
+                result.add(i);
             }
             return result;
         }

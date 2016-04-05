@@ -63,6 +63,10 @@ import org.omegat.util.StaticUtils;
  * @author Aaron Madlon-Kay
  */
 public class SpellChecker implements ISpellChecker {
+
+    public static final File DEFAULT_DICTIONARY_DIR = new File(StaticUtils.getConfigDir(),
+            OConsts.SPELLING_DICT_DIR);
+
     /** The spell checking provider. */
     private ISpellCheckerProvider checker;
 
@@ -141,7 +145,7 @@ public class SpellChecker implements ISpellChecker {
         // initialize the spell checker - get the data from the preferences
 
         String dictionaryDir = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
-                new File(StaticUtils.getConfigDir(), OConsts.SPELLING_DICT_DIR).getPath());
+                DEFAULT_DICTIONARY_DIR.getPath());
 
         installBundledDictionary(dictionaryDir, language);
 

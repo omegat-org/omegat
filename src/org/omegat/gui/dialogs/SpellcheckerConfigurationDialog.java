@@ -40,6 +40,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import org.omegat.core.spellchecker.DictionaryManager;
+import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -125,7 +126,16 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
                 updateDirectory();
             }
         });
-        directoryTextField.setText(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY));
+
+        String dictDirPath = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
+                SpellChecker.DEFAULT_DICTIONARY_DIR.getPath());
+        directoryTextField.setText(dictDirPath);
+
+        // Create dict dir if it doesn't exist, so user can install immediately
+        File dictDir = new File(dictDirPath);
+        if (!dictDir.exists()) {
+            dictDir.mkdirs();
+        }
 
         dictionaryUrlTextField.getDocument().addDocumentListener(new DocumentListener() {
             @Override

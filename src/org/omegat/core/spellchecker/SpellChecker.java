@@ -149,7 +149,7 @@ public class SpellChecker implements ISpellChecker {
         File affixName = new File(dictionaryDir, language + OConsts.SC_AFFIX_EXTENSION);
         File dictionaryName = new File(dictionaryDir, language + OConsts.SC_DICTIONARY_EXTENSION);
 
-        if (!dictionaryName.isFile()) {
+        if (!isValidFile(affixName) || !isValidFile(dictionaryName)) {
             return null;
         }
         try {
@@ -170,6 +170,10 @@ public class SpellChecker implements ISpellChecker {
             Log.log("Error loading jmyspell: " + ex.getMessage());
         }
         return null;
+    }
+
+    private static boolean isValidFile(File file) {
+        return file.isFile() && file.canRead() && file.length() > 0L;
     }
 
     /**

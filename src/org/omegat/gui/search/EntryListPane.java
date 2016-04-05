@@ -256,7 +256,7 @@ class EntryListPane extends JTextPane {
         return ENTRY_LIST_INDEX_END_OF_TEXT;
     }
 
-    protected class DisplayMatches implements Runnable {
+    protected class DisplayMatches {
         protected final DefaultStyledDocument doc;
 
         private final List<SearchMatch> matches = new ArrayList<SearchMatch>();
@@ -292,7 +292,7 @@ class EntryListPane extends JTextPane {
             setDocument(doc);
 
             if (!matches.isEmpty()) {
-                SwingUtilities.invokeLater(this);
+                SwingUtilities.invokeLater(() -> doMarks());
             }
         }
 
@@ -353,8 +353,7 @@ class EntryListPane extends JTextPane {
             m_offsetList.add(m_stringBuf.length());
         }
 
-        @Override
-        public void run() {
+        public void doMarks() {
             UIThreadsUtil.mustBeSwingThread();
 
             if (currentlyDisplayedMatches != this) {
@@ -369,7 +368,7 @@ class EntryListPane extends JTextPane {
             display.clear();
 
             if (!matches.isEmpty()) {
-                SwingUtilities.invokeLater(this);
+                SwingUtilities.invokeLater(() -> doMarks());
             }
         }
     }

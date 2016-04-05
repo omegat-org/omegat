@@ -55,6 +55,7 @@ import java.util.concurrent.CancellationException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.swing.AbstractButton;
 import javax.swing.DefaultComboBoxModel;
@@ -744,10 +745,14 @@ public class AlignPanelController {
         modified = true;
         Rectangle initialRect = panel.table.getVisibleRect();
         BeadTableModel model = (BeadTableModel) panel.table.getModel();
-        List<Integer> rowspan = model.getRowExtentsForBeadAtRow(ppRow);
-        if (rowspan.size() > 1) {
-            splitBead(panel.table, rowspan.stream().mapToInt(Integer::intValue).toArray(), ppCol);
-        }
+        model.setStatusAtRow(ppRow, Status.DEFAULT);
+        model.setStatusAtRow(row, Status.DEFAULT);
+        IntStream.of(ppRow, row).forEach(i -> {
+            List<Integer> rowspan = model.getRowExtentsForBeadAtRow(i);
+            if (rowspan.size() > 1) {
+                model.splitBead(rowspan.stream().mapToInt(Integer::intValue).toArray());
+            }
+        });
         int relocateCol = ppRow < row ? ppCol : col;
         List<String> toRelocate = new ArrayList<>();
         for (int i = Math.min(ppRow, row); i <= Math.max(ppRow, row); i++) {

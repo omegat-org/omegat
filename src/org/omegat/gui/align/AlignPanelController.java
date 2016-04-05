@@ -590,6 +590,7 @@ public class AlignPanelController {
 
         // Set initial state
         updateHighlight(panel, frame);
+        updatePanel(panel, frame);
         reloadBeads(panel, frame);
 
         frame.add(panel);
@@ -840,6 +841,8 @@ public class AlignPanelController {
         }
         phase = Phase.ALIGN;
         panel.progressBar.setVisible(true);
+        panel.continueButton.setEnabled(false);
+        panel.controlsPanel.setVisible(false);
         loader = new SwingWorker<List<MutableBead>, Object>() {
             @Override
             protected List<MutableBead> doInBackground() throws Exception {
@@ -858,6 +861,7 @@ public class AlignPanelController {
                     JOptionPane.showMessageDialog(panel, OStrings.getString("ALIGNER_ERROR_LOADING"),
                             OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                 }
+                panel.continueButton.setEnabled(true);
                 panel.progressBar.setVisible(false);
                 panel.comparisonComboBox.setModel(
                         new DefaultComboBoxModel<>(aligner.allowedModes.toArray(new ComparisonMode[0])));
@@ -960,6 +964,9 @@ public class AlignPanelController {
     }
 
     private void updateCommandAvailability(AlignPanel panel, AlignMenuFrame frame) {
+        if (!(panel.table.getModel() instanceof BeadTableModel)) {
+            return;
+        }
         int[] rows = panel.table.getSelectedRows();
         int[] cols = panel.table.getSelectedColumns();
         int col = cols.length > 0 ? cols[0] : -1;

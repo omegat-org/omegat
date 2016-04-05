@@ -90,8 +90,9 @@ public class GlossaryAutoCompleterViewTest extends TestCore {
 
         result = view.computeListData("B", false);
         assertEquals(3, result.size());
-        assertEquals("Bar", result.get(0).payload);
-        assertEquals("BAZ", result.get(1).payload);
+        // BAZ comes first because it is a verbatim glossary term
+        assertEquals("BAZ", result.get(0).payload);
+        assertEquals("Bar", result.get(1).payload);
 
         result = view.computeListData("Ba", false);
         assertEquals(3, result.size());

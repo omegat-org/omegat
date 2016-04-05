@@ -690,9 +690,9 @@ public class AlignPanelController {
         table.clearSelection();
         BeadTableModel model = (BeadTableModel) table.getModel();
         Rectangle initialRect = table.getVisibleRect();
-        int resultRows[] = model.splitBead(rows, col);
-        table.changeSelection(resultRows[0], col, false, false);
-        table.changeSelection(resultRows[resultRows.length - 1], col, false, true);
+        model.splitBead(rows);
+        table.changeSelection(rows[0], col, false, false);
+        table.changeSelection(rows[rows.length - 1], col, false, true);
         ensureSelectionVisible(table, initialRect);
     }
 
@@ -965,7 +965,7 @@ public class AlignPanelController {
         boolean canUp = enabled ? model.canMove(realRows.get(0), col, true) : false;
         boolean canDown = enabled ? model.canMove(realRows.get(realRows.size() - 1), col, false) : false;
         int beads = model.beadsInRowSpan(rows);
-        boolean canSplit = (realRows.size() == 1 && rows.length == 1) || (realRows.size() > 1 && beads == 1);
+        boolean canSplit = (realRows.size() == 1 && rows.length == 1) || (!realRows.isEmpty() && beads == 1);
         boolean canMerge = realRows.size() > 1
                 || (!realRows.isEmpty() && realRows.get(0) < panel.table.getRowCount() - 1);
         boolean canEdit = realRows.size() == 1;
@@ -1760,26 +1760,21 @@ public class AlignPanelController {
          * @param col
          * @return A two-member array indicating the first and last resulting rows
          */
-        int[] splitBead(int[] rows, int col) {
-            if (!isEditableColumn(col)) {
-                throw new IllegalArgumentException();
-            }
+        void splitBead(int[] rows) {
             int origRowCount = getRowCount();
             MutableBead bead = rowToBead.get(rows[0]);
             int beadIndex = data.indexOf(bead);
-            List<String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
-            List<String> selected = new ArrayList<>(rows.length);
             for (int row : rows) {
-                String line = lines.get(row);
+                String line = rowToSourceLine.get(row);
+                List<String> indexFrom = bead.sourceLines;
                 if (line == null) {
-                    throw new IllegalArgumentException();
+                    line = rowToTargetLine.get(row);
+                    indexFrom = bead.targetLines;
                 }
-                List<String> beadLines = col == COL_SRC ? bead.sourceLines : bead.targetLines;
-                int index = Util.indexByIdentity(beadLines, line);
+                int index = Util.indexByIdentity(indexFrom, line);
                 if (index == -1) {
                     throw new IllegalArgumentException();
                 }
-                selected.add(line);
                 if (index > 0) {
                     bead = splitBeadByCount(bead, index);
                     data.add(++beadIndex, bead);
@@ -1789,9 +1784,6 @@ public class AlignPanelController {
             if (origRowCount != getRowCount()) {
                 fireTableDataChanged();
             }
-            lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
-            return new int[] { Util.indexByIdentity(lines, selected.get(0)),
-                    Util.indexByIdentity(lines, selected.get(selected.size() - 1)) };
         }
 
         void toggleBeadsAtRows(int... rows) {

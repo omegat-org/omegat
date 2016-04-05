@@ -27,6 +27,7 @@ package org.omegat.gui.align;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
@@ -38,6 +39,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
@@ -128,6 +131,9 @@ public class AlignPanelController {
     private Pattern highlightPattern = Pattern.compile(Preferences.getPreferenceDefault(
             Preferences.ALIGNER_HIGHLIGHT_PATTERN, Preferences.ALIGNER_HIGHLIGHT_PATTERN_DEFAULT));
 
+    private int ppRow = -1;
+    private int ppCol = -1;
+
     /**
      * The alignment workflow is separated into two phases:
      * <ol>
@@ -136,7 +142,7 @@ public class AlignPanelController {
      * </ol>
      */
     private enum Phase {
-        ALIGN, EDIT
+        ALIGN, EDIT, PINPOINT
     }
 
     private Phase phase = Phase.ALIGN;
@@ -350,29 +356,7 @@ public class AlignPanelController {
         ListSelectionListener selectionListener = new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                int[] rows = panel.table.getSelectedRows();
-                int col = panel.table.getSelectedColumn();
-                BeadTableModel model = (BeadTableModel) panel.table.getModel();
-                List<Integer> realRows = model.realCellsInRowSpan(col, rows);
-                boolean enabled = !realRows.isEmpty() && panel.table.getSelectedColumnCount() == 1
-                        && model.isEditableColumn(col);
-                boolean canUp = enabled ? model.canMove(realRows.get(0), col, true) : false;
-                boolean canDown = enabled ? model.canMove(realRows.get(realRows.size() - 1), col, false) : false;
-                int beads = model.beadsInRowSpan(rows);
-                boolean canSplit = (realRows.size() == 1 && rows.length == 1) || (realRows.size() > 1 && beads == 1);
-                boolean canMerge = realRows.size() > 1
-                        || (!realRows.isEmpty() && realRows.get(0) < panel.table.getRowCount() - 1);
-                boolean canEdit = realRows.size() == 1;
-                panel.moveDownButton.setEnabled(enabled && canDown);
-                frame.moveDownItem.setEnabled(enabled && canDown);
-                panel.moveUpButton.setEnabled(enabled && canUp);
-                frame.moveUpItem.setEnabled(enabled && canUp);
-                panel.splitButton.setEnabled(enabled && canSplit);
-                frame.splitItem.setEnabled(enabled && canSplit);
-                panel.mergeButton.setEnabled(enabled && canMerge);
-                frame.mergeItem.setEnabled(enabled && canMerge);
-                panel.editButton.setEnabled(enabled && canEdit);
-                frame.editItem.setEnabled(enabled && canEdit);
+                updateCommandAvailability(panel, frame);
             }
         };
         panel.table.getColumnModel().getSelectionModel().addListSelectionListener(selectionListener);
@@ -538,7 +522,42 @@ public class AlignPanelController {
             realignPending(panel.table);
         });
 
+        frame.pinpointAlignStartItem.addActionListener(e -> {
+            phase = Phase.PINPOINT;
+            ppRow = panel.table.getSelectedRow();
+            ppCol = panel.table.getSelectedColumn();
+            panel.table.clearSelection();
+            updatePanel(panel, frame);
+        });
+
+        frame.pinpointAlignEndItem.addActionListener(e -> {
+            pinpointAlign(panel, frame, panel.table.getSelectedRow(), panel.table.getSelectedColumn());
+        });
+
+        frame.pinpointAlignCancelItem.addActionListener(e -> {
+            phase = Phase.EDIT;
+            ppRow = -1;
+            ppCol = -1;
+            panel.table.repaint();
+            updatePanel(panel, frame);
+        });
+
+        panel.table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (phase == Phase.PINPOINT) {
+                    JTable table = (JTable) e.getSource();
+                    int row = table.rowAtPoint(e.getPoint());
+                    int col = table.columnAtPoint(e.getPoint());
+                    pinpointAlign(panel, frame, row, col);
+                }
+            }
+        });
+
         frame.resetItem.setAccelerator(
+                KeyStroke.getKeyStroke(KeyEvent.VK_R,
+                        Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() | KeyEvent.SHIFT_DOWN_MASK));
+        frame.realignPendingItem.setAccelerator(
                 KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         frame.saveItem.setAccelerator(
                 KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
@@ -718,6 +737,36 @@ public class AlignPanelController {
         resizeRows(table);
     }
 
+    private void pinpointAlign(AlignPanel panel, AlignMenuFrame frame, int row, int col) {
+        if (row == ppRow || col == ppCol) {
+            return;
+        }
+        modified = true;
+        Rectangle initialRect = panel.table.getVisibleRect();
+        BeadTableModel model = (BeadTableModel) panel.table.getModel();
+        List<Integer> rowspan = model.getRowExtentsForBeadAtRow(ppRow);
+        if (rowspan.size() > 1) {
+            splitBead(panel.table, rowspan.stream().mapToInt(Integer::intValue).toArray(), ppCol);
+        }
+        int relocateCol = ppRow < row ? ppCol : col;
+        List<String> toRelocate = new ArrayList<>();
+        for (int i = Math.min(ppRow, row); i <= Math.max(ppRow, row); i++) {
+            String line = model.removeLine(i, relocateCol);
+            if (line != null) {
+                toRelocate.add(line);
+            }
+        }
+        int resultRow = model.insertLines(toRelocate, Math.max(ppRow, row), relocateCol);
+        model.setStatusAtRow(resultRow, Status.ACCEPTED);
+        panel.table.changeSelection(resultRow, ppCol, false, false);
+        panel.table.changeSelection(resultRow, col, false, true);
+        ppRow = -1;
+        ppCol = -1;
+        phase = Phase.EDIT;
+        ensureSelectionVisible(panel.table, initialRect);
+        updatePanel(panel, frame);
+    }
+
     private void toggleEnabled(JTable table, int... rows) {
         if (rows.length == 0) {
             return;
@@ -851,18 +900,43 @@ public class AlignPanelController {
         panel.segmentationControlsPanel.setVisible(phase == Phase.ALIGN);
         panel.filteringControlsPanel.setVisible(phase == Phase.ALIGN);
         panel.continueButton.setVisible(phase == Phase.ALIGN);
-        panel.controlsPanel.setVisible(phase == Phase.EDIT);
-        panel.saveButton.setVisible(phase == Phase.EDIT);
-        String instructions = phase == Phase.ALIGN ? OStrings.getString("ALIGNER_PANEL_ALIGN_PHASE_HELP")
-                : phase == Phase.EDIT ? OStrings.getString("ALIGNER_PANEL_EDIT_PHASE_HELP") : null;
+        panel.controlsPanel.setVisible(phase != Phase.ALIGN);
+        panel.controlsPanel.setEnabled(phase == Phase.EDIT);
+        panel.saveButton.setVisible(phase != Phase.ALIGN);
+        panel.saveButton.setEnabled(phase == Phase.EDIT);
+        String instructions = null;
+        switch (phase) {
+        case ALIGN:
+            instructions = OStrings.getString("ALIGNER_PANEL_ALIGN_PHASE_HELP");
+            break;
+        case EDIT:
+            instructions = OStrings.getString("ALIGNER_PANEL_EDIT_PHASE_HELP");
+            break;
+        case PINPOINT:
+            instructions = OStrings.getString("ALIGNER_PANEL_PINPOINT_PHASE_HELP");
+        }
         panel.instructionsLabel.setText(instructions);
-        frame.editMenu.setEnabled(phase == Phase.EDIT);
+        frame.editMenu.setEnabled(phase != Phase.ALIGN);
+        for (Component c : frame.editMenu.getComponents()) {
+            // Batch-enable/disable Edit menu items here, then override later if necessary
+            c.setEnabled(phase == Phase.EDIT);
+        }
         frame.optionsMenu.setEnabled(phase == Phase.ALIGN);
         frame.saveItem.setEnabled(phase == Phase.EDIT);
+
+        panel.table.setCursor(Cursor.getPredefinedCursor(
+                phase == Phase.PINPOINT ? Cursor.CROSSHAIR_CURSOR : Cursor.DEFAULT_CURSOR));
+        frame.pinpointAlignStartItem.setVisible(phase != Phase.PINPOINT);
+        frame.pinpointAlignEndItem.setVisible(phase == Phase.PINPOINT);
+        // frame.pinpointAlign[Start|End]Item enabledness depends on table selection
+        frame.pinpointAlignCancelItem.setVisible(phase == Phase.PINPOINT);
+        frame.pinpointAlignCancelItem.setEnabled(phase == Phase.PINPOINT);
 
         JButton defaultButton = phase == Phase.ALIGN ? panel.continueButton
                 : phase == Phase.EDIT ? panel.saveButton : null;
         frame.getRootPane().setDefaultButton(defaultButton);
+
+        updateCommandAvailability(panel, frame);
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -878,6 +952,37 @@ public class AlignPanelController {
         panel.highlightPatternButton.setEnabled(doHighlight);
         frame.highlightPatternItem.setEnabled(doHighlight);
         panel.table.repaint();
+    }
+
+    private void updateCommandAvailability(AlignPanel panel, AlignMenuFrame frame) {
+        int[] rows = panel.table.getSelectedRows();
+        int[] cols = panel.table.getSelectedColumns();
+        int col = cols.length > 0 ? cols[0] : -1;
+        BeadTableModel model = (BeadTableModel) panel.table.getModel();
+        List<Integer> realRows = model.realCellsInRowSpan(col, rows);
+        boolean enabled = phase == Phase.EDIT && !realRows.isEmpty() && cols.length == 1
+                && model.isEditableColumn(col);
+        boolean canUp = enabled ? model.canMove(realRows.get(0), col, true) : false;
+        boolean canDown = enabled ? model.canMove(realRows.get(realRows.size() - 1), col, false) : false;
+        int beads = model.beadsInRowSpan(rows);
+        boolean canSplit = (realRows.size() == 1 && rows.length == 1) || (realRows.size() > 1 && beads == 1);
+        boolean canMerge = realRows.size() > 1
+                || (!realRows.isEmpty() && realRows.get(0) < panel.table.getRowCount() - 1);
+        boolean canEdit = realRows.size() == 1;
+        panel.moveDownButton.setEnabled(enabled && canDown);
+        frame.moveDownItem.setEnabled(enabled && canDown);
+        panel.moveUpButton.setEnabled(enabled && canUp);
+        frame.moveUpItem.setEnabled(enabled && canUp);
+        panel.splitButton.setEnabled(enabled && canSplit);
+        frame.splitItem.setEnabled(enabled && canSplit);
+        panel.mergeButton.setEnabled(enabled && canMerge);
+        frame.mergeItem.setEnabled(enabled && canMerge);
+        panel.editButton.setEnabled(enabled && canEdit);
+        frame.editItem.setEnabled(enabled && canEdit);
+        frame.pinpointAlignStartItem.setEnabled(enabled && rows.length == 1);
+        frame.pinpointAlignEndItem.setEnabled(phase == Phase.PINPOINT && rows.length == 1 && cols.length == 1
+                && realRows.size() == 1 && realRows.get(0) != ppRow && col != ppCol
+                && model.isEditableColumn(col));
     }
 
     private String getOutFileName() {
@@ -1039,6 +1144,8 @@ public class AlignPanelController {
                     case DEFAULT:
                         // Leave color as-is
                     }
+                } else if (row == ppRow && column == ppCol) {
+                    comp.setBackground(Color.GREEN);
                 } else {
                     comp.setBackground(
                             getBeadNumber(table, row) % 2 == 0 ? table.getBackground()
@@ -1393,15 +1500,20 @@ public class AlignPanelController {
         }
 
         /**
-         * Get a two-member array indicating the first and last rows covered by the bead at the specified
-         * <code>row</code>.
+         * Get a list of rows covered by the bead at <code>row</code>.
          * 
          * @param row
          * @return
          */
-        int[] getRowExtentsForBeadAtRow(int row) {
+        List<Integer> getRowExtentsForBeadAtRow(int row) {
             MutableBead bead = rowToBead.get(row);
-            return new int[] { rowToBead.indexOf(bead), rowToBead.lastIndexOf(bead) };
+            List<Integer> result = new ArrayList<>();
+            for (int i = 0; i < rowToBead.size(); i++) {
+                if (rowToBead.get(i) == bead) {
+                    result.add(i);
+                }
+            }
+            return result;
         }
 
         boolean isEditableColumn(int col) {
@@ -1718,6 +1830,39 @@ public class AlignPanelController {
             makeCache();
             fireTableDataChanged();
         }
+
+        String removeLine(int row, int col) {
+            if (!isEditableColumn(col)) {
+                throw new IllegalArgumentException();
+            }
+            MutableBead bead = rowToBead.get(row);
+            List<String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
+            String line = lines.get(row);
+            Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line);
+            return line;
+        }
+
+        int insertLines(List<String> lines, int row, int col) {
+            if (!isEditableColumn(col)) {
+                throw new IllegalArgumentException();
+            }
+            int origRowCount = getRowCount();
+            MutableBead bead = rowToBead.get(row);
+            (col == COL_SRC ? bead.sourceLines : bead.targetLines).add(lines.get(0));
+            int beadInsertIndex = data.indexOf(bead) + 1;
+            List<MutableBead> newBeads = new ArrayList<>();
+            for (int i = 1; i < lines.size(); i++) {
+                MutableBead newBead = new MutableBead();
+                (col == COL_SRC ? newBead.sourceLines : newBead.targetLines).add(lines.get(i));
+                newBeads.add(newBead);
+            }
+            data.addAll(beadInsertIndex, newBeads);
+            makeCache();
+            if (origRowCount != getRowCount()) {
+                fireTableDataChanged();
+            }
+            return Util.indexByIdentity(col == COL_SRC ? rowToSourceLine : rowToTargetLine, lines.get(0));
+        }
     }
 
     @SuppressWarnings("serial")
@@ -1885,9 +2030,9 @@ public class AlignPanelController {
 
         private Rectangle rectForTarget(JTable table, DropLocation loc) {
             BeadTableModel model = (BeadTableModel) table.getModel();
-            int[] rows = model.getRowExtentsForBeadAtRow(loc.getRow());
-            return table.getCellRect(rows[0], BeadTableModel.COL_SRC, true)
-                    .union(table.getCellRect(rows[1], BeadTableModel.COL_TRG, true));
+            List<Integer> rows = model.getRowExtentsForBeadAtRow(loc.getRow());
+            return table.getCellRect(rows.get(0), BeadTableModel.COL_SRC, true)
+                    .union(table.getCellRect(rows.get(rows.size() - 1), BeadTableModel.COL_TRG, true));
         }
     }
 }

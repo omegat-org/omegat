@@ -73,6 +73,10 @@ public class AlignMenuFrame extends javax.swing.JFrame {
         keepAllItem = new javax.swing.JMenuItem();
         keepNoneItem = new javax.swing.JMenuItem();
         toggleSelectedItem = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        pinpointAlignStartItem = new javax.swing.JMenuItem();
+        pinpointAlignEndItem = new javax.swing.JMenuItem();
+        pinpointAlignCancelItem = new javax.swing.JMenuItem();
         viewMenu = new javax.swing.JMenu();
         highlightItem = new javax.swing.JCheckBoxMenuItem();
         highlightPatternItem = new javax.swing.JMenuItem();
@@ -148,6 +152,19 @@ public class AlignMenuFrame extends javax.swing.JFrame {
         toggleSelectedItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, 0));
         org.openide.awt.Mnemonics.setLocalizedText(toggleSelectedItem, OStrings.getString("ALIGNER_MENU_EDIT_TOGGLESELECTED")); // NOI18N
         editMenu.add(toggleSelectedItem);
+        editMenu.add(jSeparator3);
+
+        pinpointAlignStartItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_SPACE, 0));
+        org.openide.awt.Mnemonics.setLocalizedText(pinpointAlignStartItem, OStrings.getString("ALIGNER_MENU_EDIT_PINPOINTALIGNSTART")); // NOI18N
+        editMenu.add(pinpointAlignStartItem);
+
+        pinpointAlignEndItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_SPACE, 0));
+        org.openide.awt.Mnemonics.setLocalizedText(pinpointAlignEndItem, OStrings.getString("ALIGNER_MENU_EDIT_PINPOINTALIGNEND")); // NOI18N
+        editMenu.add(pinpointAlignEndItem);
+
+        pinpointAlignCancelItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
+        org.openide.awt.Mnemonics.setLocalizedText(pinpointAlignCancelItem, OStrings.getString("ALIGNER_MENU_EDIT_PINPOINTALIGNCANCEL")); // NOI18N
+        editMenu.add(pinpointAlignCancelItem);
 
         menuBar.add(editMenu);
 
@@ -196,6 +213,7 @@ public class AlignMenuFrame extends javax.swing.JFrame {
     public javax.swing.JMenuItem highlightPatternItem;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     public javax.swing.JMenuItem keepAllItem;
     public javax.swing.JMenuItem keepNoneItem;
     public javax.swing.JMenuItem markAcceptedItem;
@@ -205,6 +223,9 @@ public class AlignMenuFrame extends javax.swing.JFrame {
     public javax.swing.JMenuItem moveDownItem;
     public javax.swing.JMenuItem moveUpItem;
     public javax.swing.JMenu optionsMenu;
+    public javax.swing.JMenuItem pinpointAlignCancelItem;
+    public javax.swing.JMenuItem pinpointAlignEndItem;
+    public javax.swing.JMenuItem pinpointAlignStartItem;
     public javax.swing.JMenuItem realignPendingItem;
     public javax.swing.JMenuItem reloadItem;
     public javax.swing.JCheckBoxMenuItem removeTagsItem;

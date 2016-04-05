@@ -749,8 +749,6 @@ public class AlignPanelController {
         modified = true;
         Rectangle initialRect = panel.table.getVisibleRect();
         BeadTableModel model = (BeadTableModel) panel.table.getModel();
-        model.setStatusAtRow(ppRow, Status.DEFAULT);
-        model.setStatusAtRow(row, Status.DEFAULT);
         IntStream.of(ppRow, row).forEach(i -> {
             List<Integer> rowspan = model.getRowExtentsForBeadAtRow(i);
             if (rowspan.size() > 1) {
@@ -1397,6 +1395,7 @@ public class AlignPanelController {
                 // XXX: Bead modified here
                 trgLines.add(insertIndex, line);
             }
+            trgBead.status = Status.DEFAULT;
             makeCache();
             if (origRowCount != getRowCount()) {
                 fireTableDataChanged();
@@ -1437,6 +1436,7 @@ public class AlignPanelController {
             bead.sourceLines.clear();
             List<String> splitTrg = new ArrayList<>(bead.targetLines);
             bead.targetLines.clear();
+            bead.status = Status.DEFAULT;
             for (int i = 0; i < count; i++) {
                 if (!splitSrc.isEmpty()) {
                     bead.sourceLines.add(splitSrc.remove(0));
@@ -1619,6 +1619,7 @@ public class AlignPanelController {
                 // XXX: Bead modified
                 MutableBead bead = rowToBead.get(row);
                 Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line);
+                bead.status = Status.DEFAULT;
             }
             MutableBead trgBead = rowToBead.get(rows.get(0));
             List<String> trgLines = col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines;
@@ -1626,6 +1627,7 @@ public class AlignPanelController {
             String combined = Util.join(lang, toCombine);
             // XXX: Bead modified
             trgLines.set(Util.indexByIdentity(trgLines, toCombine.get(0)), combined);
+            trgBead.status = Status.DEFAULT;
             makeCache();
             if (origRowCount != getRowCount()) {
                 fireTableDataChanged();
@@ -1659,6 +1661,7 @@ public class AlignPanelController {
                 // XXX: Bead modified
                 trgLines.add(insertAt++, split[i]);
             }
+            trgBead.status = Status.DEFAULT;
             makeCache();
             if (origRowCount != getRowCount()) {
                 fireTableDataChanged();
@@ -1750,9 +1753,11 @@ public class AlignPanelController {
                 }
                 // XXX: Bead modified here
                 Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line);
+                bead.status = Status.DEFAULT;
                 List<String> trgLines = col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines;
                 int insertIndex = trgRow > row ? 0 : trgLines.size();
                 trgLines.add(insertIndex, line);
+                trgBead.status = Status.DEFAULT;
             }
             makeCache();
             if (origRowCount != getRowCount()) {
@@ -1867,6 +1872,7 @@ public class AlignPanelController {
             String line = lines.get(row);
             // XXX: Bead modified here
             Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line);
+            bead.status = Status.DEFAULT;
             return line;
         }
 
@@ -1878,6 +1884,7 @@ public class AlignPanelController {
             MutableBead bead = rowToBead.get(row);
             // XXX: Bead modified here
             (col == COL_SRC ? bead.sourceLines : bead.targetLines).add(lines.get(0));
+            bead.status = Status.DEFAULT;
             int beadInsertIndex = data.indexOf(bead) + 1;
             List<MutableBead> newBeads = new ArrayList<>();
             for (int i = 1; i < lines.size(); i++) {

@@ -33,7 +33,6 @@ import javax.swing.text.DocumentFilter;
 import javax.swing.text.StyleConstants;
 
 import org.omegat.core.data.ProtectedPart;
-import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.UIThreadsUtil;
 

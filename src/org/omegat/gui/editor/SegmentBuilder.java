@@ -31,7 +31,6 @@ package org.omegat.gui.editor;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -52,8 +51,6 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
-import org.omegat.util.TagUtil;
-import org.omegat.util.TagUtil.Tag;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 

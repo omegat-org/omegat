@@ -64,6 +64,7 @@ import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -143,16 +144,10 @@ public class SegmentPropertiesArea implements IPaneMenu {
             try {
                 initModeClass = getClass().getClassLoader().loadClass(initModeClassName);
             } catch (ClassNotFoundException e1) {
+                Log.log(e1);
             }
         }
-        final Class<?> finalClass = initModeClass;
-
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                installView(finalClass);
-            }
-        });
+        installView(initModeClass);
 
         scrollPane.addMouseListener(contextMenuListener);
     }

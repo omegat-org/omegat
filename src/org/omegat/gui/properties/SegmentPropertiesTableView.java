@@ -75,7 +75,6 @@ public class SegmentPropertiesTableView implements ISegmentPropertiesView {
 
     @Override
     public void install(final SegmentPropertiesArea parent) {
-        UIThreadsUtil.mustBeSwingThread();
         this.parent = parent;
         model = new PropertiesTableModel();
         table = new FlashingTable(model);

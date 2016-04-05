@@ -57,7 +57,6 @@ public class SegmentPropertiesListView implements ISegmentPropertiesView {
     private JPanel panel;
 
     public void install(final SegmentPropertiesArea parent) {
-        UIThreadsUtil.mustBeSwingThread();
         this.parent = parent;
         panel = new ReasonablySizedPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));

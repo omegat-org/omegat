@@ -94,6 +94,7 @@ import org.omegat.gui.align.Aligner.AlgorithmClass;
 import org.omegat.gui.align.Aligner.CalculatorType;
 import org.omegat.gui.align.Aligner.ComparisonMode;
 import org.omegat.gui.align.Aligner.CounterType;
+import org.omegat.gui.align.MutableBead.Status;
 import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
@@ -533,6 +534,10 @@ public class AlignPanelController {
             }
         });
 
+        frame.realignPendingItem.addActionListener(e -> {
+            realignPending(panel.table);
+        });
+
         frame.resetItem.setAccelerator(
                 KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         frame.saveItem.setAccelerator(
@@ -686,6 +691,31 @@ public class AlignPanelController {
         model.editRow(row, col, newText);
         table.changeSelection(row, col, false, false);
         ensureSelectionVisible(table, initialRect);
+    }
+
+    private void realignPending(JTable table) {
+        BeadTableModel model = (BeadTableModel) table.getModel();
+        List<MutableBead> data = model.getData();
+        List<MutableBead> toAlign = new ArrayList<>();
+        List<MutableBead> result = new ArrayList<>(data.size());
+        for (MutableBead bead : data) {
+            if (bead.status == Status.ACCEPTED) {
+                if (!toAlign.isEmpty()) {
+                    result.addAll(aligner.doAlign(toAlign));
+                    toAlign.clear();
+                }
+                result.add(bead);
+            } else {
+                toAlign.add(bead);
+            }
+        }
+        if (!toAlign.isEmpty()) {
+            result.addAll(aligner.doAlign(toAlign));
+        }
+        modified = true;
+        model.replaceData(result);
+        table.repaint();
+        resizeRows(table);
     }
 
     private void toggleEnabled(JTable table, int... rows) {
@@ -1051,7 +1081,7 @@ public class AlignPanelController {
         static final int COL_SRC = COL_CHECKBOX + 1;
         static final int COL_TRG = COL_SRC + 1;
 
-        final List<MutableBead> data;
+        private final List<MutableBead> data;
 
         // Maintain an integer (index) mapping of the contents of each row. This is required when modifying
         // the underlying beads, as all changes are destructive and non-atomic. It also speeds up access.
@@ -1359,7 +1389,7 @@ public class AlignPanelController {
         }
 
         List<MutableBead> getData() {
-            return data;
+            return Collections.unmodifiableList(data);
         }
 
         /**
@@ -1680,6 +1710,13 @@ public class AlignPanelController {
                 }
             }
             return -1;
+        }
+
+        void replaceData(List<MutableBead> newData) {
+            data.clear();
+            data.addAll(newData);
+            makeCache();
+            fireTableDataChanged();
         }
     }
 

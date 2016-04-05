@@ -516,4 +516,14 @@ public class Aligner {
         return filter.apply(aligns);
     }
 
+    List<MutableBead> doAlign(List<MutableBead> beads) {
+        List<String> source = new ArrayList<>();
+        List<String> target = new ArrayList<>();
+        for (MutableBead bead : beads) {
+            source.addAll(bead.sourceLines);
+            target.addAll(bead.targetLines);
+        }
+        return doAlign(algorithmClass, calculatorType, counterType, source, target).stream()
+                .map(MutableBead::new).collect(Collectors.toList());
+    }
 }

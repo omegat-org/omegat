@@ -68,6 +68,7 @@ public class AlignMenuFrame extends javax.swing.JFrame {
         markAcceptedItem = new javax.swing.JMenuItem();
         markNeedsReviewItem = new javax.swing.JMenuItem();
         clearMarkItem = new javax.swing.JMenuItem();
+        realignPendingItem = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         keepAllItem = new javax.swing.JMenuItem();
         keepNoneItem = new javax.swing.JMenuItem();
@@ -133,6 +134,9 @@ public class AlignMenuFrame extends javax.swing.JFrame {
         clearMarkItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, 0));
         org.openide.awt.Mnemonics.setLocalizedText(clearMarkItem, OStrings.getString("ALIGNER_MENU_EDIT_CLEARMARK")); // NOI18N
         editMenu.add(clearMarkItem);
+
+        org.openide.awt.Mnemonics.setLocalizedText(realignPendingItem, OStrings.getString("ALIGNER_MENU_EDIT_REALIGN")); // NOI18N
+        editMenu.add(realignPendingItem);
         editMenu.add(jSeparator2);
 
         org.openide.awt.Mnemonics.setLocalizedText(keepAllItem, OStrings.getString("ALIGNER_MENU_EDIT_KEEPALL")); // NOI18N
@@ -201,6 +205,7 @@ public class AlignMenuFrame extends javax.swing.JFrame {
     public javax.swing.JMenuItem moveDownItem;
     public javax.swing.JMenuItem moveUpItem;
     public javax.swing.JMenu optionsMenu;
+    public javax.swing.JMenuItem realignPendingItem;
     public javax.swing.JMenuItem reloadItem;
     public javax.swing.JCheckBoxMenuItem removeTagsItem;
     public javax.swing.JMenuItem resetItem;

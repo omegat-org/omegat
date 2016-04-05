@@ -62,8 +62,9 @@ class MutableBead {
         this.score = score;
         this.sourceLines = new ArrayList<String>(sourceLines);
         this.targetLines = new ArrayList<String>(targetLines);
-        this.enabled = !sourceLines.equals(targetLines);
-        this.status = MutableBead.Status.DEFAULT;
+        boolean srcEqualsTrg = sourceLines.equals(targetLines);
+        this.enabled = !srcEqualsTrg;
+        this.status = srcEqualsTrg ? MutableBead.Status.ACCEPTED : MutableBead.Status.DEFAULT;
     }
 
     public MutableBead(Alignment alignment) {
@@ -86,6 +87,7 @@ class MutableBead {
     public MutableBead() {
         this(Collections.emptyList(), Collections.emptyList());
         this.enabled = true;
+        this.status = Status.DEFAULT;
     }
 
     /**

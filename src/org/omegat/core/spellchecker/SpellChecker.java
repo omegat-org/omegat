@@ -177,7 +177,29 @@ public class SpellChecker implements ISpellChecker {
     }
 
     private static boolean isValidFile(File file) {
-        return file.isFile() && file.canRead() && file.length() > 0L;
+        try {
+            if (!file.exists()) {
+                return false;
+            }
+            if (!file.isFile()) {
+                Log.log("Spelling dictionary exists but is not a file: " + file.getPath());
+                return false;
+            }
+            if (!file.canRead()) {
+                Log.log("Can't read spelling dictionary: " + file.getPath());
+                return false;
+            }
+            if (file.length() == 0L) {
+                // On OS X, attempting to load Hunspell with a zero-length .dic file causes
+                // a native exception that crashes the whole program.
+                Log.log("Spelling dictionary appears to be empty: " + file.getPath());
+                return false;
+            }
+            return true;
+        } catch (Throwable ex) {
+            Log.log(ex);
+            return false;
+        }
     }
 
     /**

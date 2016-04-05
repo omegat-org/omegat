@@ -80,19 +80,19 @@ public class AlignPanel extends javax.swing.JPanel {
         advancedPanel = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        comparisonComboBox = new javax.swing.JComboBox<ComparisonMode>();
+        comparisonComboBox = new javax.swing.JComboBox<>();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         averageDistanceLabel = new javax.swing.JLabel();
         filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jPanel6 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        algorithmComboBox = new javax.swing.JComboBox<AlgorithmClass>();
+        algorithmComboBox = new javax.swing.JComboBox<>();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         jLabel3 = new javax.swing.JLabel();
-        calculatorComboBox = new javax.swing.JComboBox<CalculatorType>();
+        calculatorComboBox = new javax.swing.JComboBox<>();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         jLabel5 = new javax.swing.JLabel();
-        counterComboBox = new javax.swing.JComboBox<CounterType>();
+        counterComboBox = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         segmentationControlsPanel = new javax.swing.JPanel();
         segmentingCheckBox = new javax.swing.JCheckBox();
@@ -116,6 +116,7 @@ public class AlignPanel extends javax.swing.JPanel {
         table.setCellSelectionEnabled(true);
         table.setDragEnabled(true);
         table.setDropMode(javax.swing.DropMode.ON);
+        table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         scrollPane.setViewportView(table);
 
         jPanel9.add(scrollPane, java.awt.BorderLayout.CENTER);

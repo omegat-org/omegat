@@ -33,6 +33,8 @@ import org.omegat.util.Language;
  * Context for filter calls.
  */
 public class FilterContext {
+    @Deprecated
+    private final ProjectProperties props;
 
     private final Language sourceLang;
 
@@ -51,6 +53,7 @@ public class FilterContext {
     private Class<?> targetTokenizerClass;
 
     public FilterContext(ProjectProperties props) {
+        this.props = props;
         this.sourceLang = props.getSourceLanguage();
         this.targetLang = props.getTargetLanguage();
         this.sentenceSegmentingEnabled = props.isSentenceSegmentingEnabled();
@@ -60,6 +63,7 @@ public class FilterContext {
     }
 
     public FilterContext(Language sourceLang, Language targetLang, boolean sentenceSegmentingEnabled) {
+        this.props = null;
         this.sourceLang = sourceLang;
         this.targetLang = targetLang;
         this.sentenceSegmentingEnabled = sentenceSegmentingEnabled;
@@ -104,6 +108,18 @@ public class FilterContext {
     /** Should all tags be removed from segments */
     public boolean isRemoveAllTags() {
         return isRemoveAllTags;
+    }
+
+    /**
+     * Get the properties of the current property. May be null. This method is
+     * deprecated and will be removed in OmegaT 4; use
+     * <code>Core.getProject().getProjectProperties()</code> instead.
+     * <p>
+     * This isn't used within OmegaT, but is offered for use by plugins.
+     */
+    @Deprecated
+    public ProjectProperties getProjectProperties() {
+        return props;
     }
 
     public FilterContext setSourceTokenizerClass(Class<?> sourceTokenizerClass) {

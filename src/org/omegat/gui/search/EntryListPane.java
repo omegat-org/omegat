@@ -75,6 +75,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.FontFallbackListener;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.Styles.EditorColor;
@@ -186,6 +187,7 @@ class EntryListPane extends JTextPane {
         });
 
         setDocument(new DefaultStyledDocument());
+        getDocument().addDocumentListener(new FontFallbackListener(EntryListPane.this));
 
         initActions();
         useTabForAdvance = Core.getEditor().getSettings().isUseTabForAdvance();

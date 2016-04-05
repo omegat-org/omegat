@@ -177,6 +177,13 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
                 if (!o1Matches && o2Matches) {
                     return 1;
                 }
+                boolean o1IsOriginal = isOriginalEntry(o1);
+                boolean o2IsOriginal = isOriginalEntry(o2);
+                if (o1IsOriginal && !o2IsOriginal) {
+                    return -1;
+                } else if (!o1IsOriginal && o2IsOriginal) {
+                    return 1;
+                }
             }
             
             // Sort alphabetically by source term
@@ -224,5 +231,15 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
             return 0;
         }
         
+        private boolean isOriginalEntry(AutoCompleterItem item) {
+            for (GlossaryEntry entry : entries) {
+                for (String term : entry.getLocTerms(true)) {
+                    if (item.payload.equals(term)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }

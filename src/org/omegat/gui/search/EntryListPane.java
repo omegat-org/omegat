@@ -56,9 +56,11 @@ import javax.swing.event.CaretListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.Document;
 import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
@@ -183,6 +185,8 @@ class EntryListPane extends JTextPane {
             }
         });
 
+        setDocument(new DefaultStyledDocument());
+
         initActions();
         useTabForAdvance = Core.getEditor().getSettings().isUseTabForAdvance();
         autoSyncWithEditor = Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_AUTO_SYNC, false);
@@ -257,14 +261,10 @@ class EntryListPane extends JTextPane {
     }
 
     protected class DisplayMatches {
-        protected final DefaultStyledDocument doc;
-
         private final List<SearchMatch> matches = new ArrayList<SearchMatch>();
 
         public DisplayMatches(final List<SearchResultEntry> entries) {
             UIThreadsUtil.mustBeSwingThread();
-
-            this.doc = new DefaultStyledDocument();
 
             StringBuilder m_stringBuf = new StringBuilder();
             // display what's been found so far
@@ -283,13 +283,13 @@ class EntryListPane extends JTextPane {
                         e.getTranslation(), e.getNote(), e.getSrcMatch(), e.getTargetMatch(), e.getNoteMatch());
             }
 
+            Document doc = getDocument();
             try {
                 doc.remove(0, doc.getLength());
                 doc.insertString(0, m_stringBuf.toString(), null);
             } catch (Exception ex) {
                 Log.log(ex);
             }
-            setDocument(doc);
 
             if (!matches.isEmpty()) {
                 SwingUtilities.invokeLater(() -> doMarks());
@@ -361,6 +361,7 @@ class EntryListPane extends JTextPane {
                 return;
             }
 
+            StyledDocument doc = (StyledDocument) getDocument();
             List<SearchMatch> display = matches.subList(0, Math.min(MARKS_PER_REQUEST, matches.size()));
             for (SearchMatch m : display) {
                 doc.setCharacterAttributes(m.getStart(), m.getLength(), FOUND_MARK, true);

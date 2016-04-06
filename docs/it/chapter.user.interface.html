@@ -58,9 +58,9 @@
                      <dt><span class="section"><a href="chapter.user.interface.html#section.project.files">3.1. File del progetto</a></span></dt>
                      <dt><span class="section"><a href="chapter.user.interface.html#section.search.window">3.2. Finestra di ricerca</a></span></dt>
                      <dt><span class="section"><a href="chapter.user.interface.html#section.tag.validation">3.3. Convalida dei tag</a></span></dt>
-                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2676">3.4. Statistiche</a></span></dt>
-                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2726">3.5. Statistiche delle concordanze</a></span></dt>
-                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2790">3.6. Navigatore della Guida</a></span></dt>
+                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2696">3.4. Statistiche</a></span></dt>
+                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2746">3.5. Statistiche delle concordanze</a></span></dt>
+                     <dt><span class="section"><a href="chapter.user.interface.html#d0e2810">3.6. Navigatore della Guida</a></span></dt>
                   </dl>
                </dd>
             </dl>
@@ -593,7 +593,11 @@
                   </div>
                </div>
                <p>La finestra “File del progetto” visualizza l'elenco dei file del progetto, con indicazione di altre informazioni relative
-                  al progetto stesso. Questa finestra viene aperta automaticamente ogni volta che OmegaT carica un progetto. Utilizzare <span class="guimenuitem">Ctrl+L<a class="indexterm" name="d0e2544"></a></span> per aprirla ed <span class="keycap"><strong>Esc</strong></span> per chiuderla. La finestra “File del progetto” visualizza le seguenti informazioni:
+                  al progetto stesso. Questa finestra viene aperta automaticamente ogni volta che OmegaT carica un progetto.
+               </p>
+               <p><em><span class="remark">Nota:</span></em> è possibile inibire la visualizzazione della finestra File del progetto impostando il comando <span class="emphasis"><em>project_files_show_on_load</em></span> a <span class="emphasis"><em>false</em></span> nel file <code class="filename">omegat.prefs</code> (raggiungibile dal menu Opzioni / Accedi alla cartella di configurazione).
+               </p>
+               <p>Utilizzare <span class="guimenuitem">Ctrl+L<a class="indexterm" name="d0e2559"></a></span> per aprirla ed <span class="keycap"><strong>Esc</strong></span> per chiuderla. La finestra “File del progetto” visualizza le seguenti informazioni:
                </p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -604,17 +608,12 @@
                      </li>
                      <li class="listitem">
                         <p>l'elenco di tutti i file da tradurre che compongono il progetto. Quando si fa clic su uno dei file, questo verrà aperto e
-                           su di esso si potrà immediatamente iniziare a lavorare. Nota: i nomi dei file (nella prima colonna) si possono ordinare alfabeticamente
-                           premendo l'intestazione di colonna. È anche possibile modificare la posizione di un nome di file, facendovi clic sopra e premendo
-                           i pulsanti <span class="emphasis"><em>Sposta...</em></span>.
+                           su di esso si potrà immediatamente iniziare a lavorare.
                         </p>
-                     </li>
-                  </ul>
-               </div>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" style="list-style-type: disc; ">
-                     <li class="listitem">
-                        <p>il file attivo disponibile nella finestra dell'Editor viene evidenziato con uno sfondo azzurro. Premere <span class="keycap"><strong>Invio</strong></span> per spostare il pannello dell'Editor all'inizio del file selezionato
+                        <p>Digitando del testo si aprirà un filtro in cui potranno essere immesse parti del nome dei file. È possibile selezionare un
+                           file tramite i tasti freccia <span class="keycap"><strong>Su</strong></span> e <span class="keycap"><strong>Giù</strong></span> e aprirlo per lavorarlo premendo <span class="keycap"><strong>Invio</strong></span></p>
+                        <p>Nota: i nomi dei file (nella prima colonna) si possono ordinare alfabeticamente premendo l'intestazione di colonna. È anche
+                           possibile modificare la posizione di un nome di file, facendovi clic sopra e premendo i pulsanti <span class="emphasis"><em>Sposta...</em></span>.
                         </p>
                      </li>
                   </ul>
@@ -649,14 +648,14 @@
                   procedura dovrebbe, però, essere evitata dopo aver iniziato la traduzione di un progetto. Per ulteriori informazioni si veda
                   il capitolo <span class="emphasis"><em>Regole di segmentazione</em></span>.
                </p>
-               <p><span class="bold"><strong><a class="indexterm" name="d0e2595"></a>Aggiunta di file al progetto: </strong></span>Facendo clic sul pulsante "<span class="guimenuitem">Importa i file di partenza..."</span> si ha la possibilità di aggiungere nuovi file al progetto. Il comando copia i file selezionati nella cartella <code class="filename">source</code> e ricarica il progetto per importare i nuovi file. Facendo clic sul pulsante <span class="guimenuitem">"Importa da MediaWiki"</span> e indicando l'URL corrispondente, si ha la possibilità di aggiungere pagine internet scritte in formato MediaWiki.
+               <p><span class="bold"><strong><a class="indexterm" name="d0e2615"></a>Aggiunta di file al progetto: </strong></span>Facendo clic sul pulsante "<span class="guimenuitem">Importa i file di partenza..."</span> si ha la possibilità di aggiungere nuovi file al progetto. Il comando copia i file selezionati nella cartella <code class="filename">source</code> e ricarica il progetto per importare i nuovi file. Facendo clic sul pulsante <span class="guimenuitem">"Importa da MediaWiki"</span> e indicando l'URL corrispondente, si ha la possibilità di aggiungere pagine internet scritte in formato MediaWiki.
                </p>
             </div>
             <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="section.search.window"></a>3.2.&nbsp;Finestra di ricerca<a class="indexterm" name="d0e2614"></a></h3>
+                        <h3 class="title"><a name="section.search.window"></a>3.2.&nbsp;Finestra di ricerca<a class="indexterm" name="d0e2634"></a></h3>
                      </div>
                   </div>
                </div>
@@ -671,14 +670,14 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="section.tag.validation"></a>3.3.&nbsp;Convalida dei tag<a class="indexterm" name="d0e2636"></a><a class="indexterm" name="d0e2641"></a></h3>
+                        <h3 class="title"><a name="section.tag.validation"></a>3.3.&nbsp;Convalida dei tag<a class="indexterm" name="d0e2656"></a><a class="indexterm" name="d0e2661"></a></h3>
                      </div>
                   </div>
                </div>
                <p>La finestra per la convalida dei tag individua ed elenca gli errori di formattazione e le inconsistenze nella traduzione.
                   Aprire la finestra con <span class="guimenuitem">Ctrl+T. </span>La finestra mostra una tabella a tre colonne con un collegamento al segmento e ai suoi contenuti partenza e di arrivo:
                </p>
-               <div class="figure"><a name="tag.validator.window"></a><p class="title"><b>Figure&nbsp;4.6.&nbsp;<a class="indexterm" name="d0e2656"></a>Finestra di convalida dei tag</b></p>
+               <div class="figure"><a name="tag.validator.window"></a><p class="title"><b>Figure&nbsp;4.6.&nbsp;<a class="indexterm" name="d0e2676"></a>Finestra di convalida dei tag</b></p>
                   <div class="figure-contents">
                      <div class="mediaobject"><img src="images/TagValidator.png" alt="Finestra di convalida dei tag"></div>
                   </div>
@@ -700,13 +699,13 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2676"></a>3.4.&nbsp;Statistiche<a class="indexterm" name="d0e2679"></a></h3>
+                        <h3 class="title"><a name="d0e2696"></a>3.4.&nbsp;Statistiche<a class="indexterm" name="d0e2699"></a></h3>
                      </div>
                   </div>
                </div>
                <p>La finestra delle statistiche - cui si può accedere tramite <span class="bold"><strong>Strumenti &gt; Statistiche </strong></span>- mostra le statistiche del progetto OmegaT attivo, sia sotto forma di riepilogo, sia nel dettaglio per ciascun file da tradurre.
                   Le stesse statistiche sono disponibili nel file <code class="filename">project_stats.txt</code> (nella sottocartella <code class="filename">omegat</code>), in un formato separato da tabulazioni, pronto per essere caricato in un foglio di calcolo, in base alle proprie esigenze.
-                  Per copiare e incollare il suo contenuto, è possibile usare la sequenza di comandi <span class="guimenuitem">Ctrl+A <a class="indexterm" name="d0e2697"></a></span><span class="guimenuitem">, Ctrl+C <a class="indexterm" name="d0e2704"></a></span>, <span class="guimenuitem">Ctrl+V <a class="indexterm" name="d0e2712"></a></span>.
+                  Per copiare e incollare il suo contenuto, è possibile usare la sequenza di comandi <span class="guimenuitem">Ctrl+A <a class="indexterm" name="d0e2717"></a></span><span class="guimenuitem">, Ctrl+C <a class="indexterm" name="d0e2724"></a></span>, <span class="guimenuitem">Ctrl+V <a class="indexterm" name="d0e2732"></a></span>.
                </p>
                <div class="figure"><a name="ProjectStatistic.Window"></a><p class="title"><b>Figure&nbsp;4.7.&nbsp;statistiche del progetto</b></p>
                   <div class="figure-contents">
@@ -719,7 +718,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2726"></a>3.5.&nbsp;Statistiche delle concordanze<a class="indexterm" name="d0e2729"></a></h3>
+                        <h3 class="title"><a name="d0e2746"></a>3.5.&nbsp;Statistiche delle concordanze<a class="indexterm" name="d0e2749"></a></h3>
                      </div>
                   </div>
                </div>
@@ -729,7 +728,7 @@
                   informazione viene calcolata sia per i segmenti, sia per le parole e i caratteri (con o senza spazi). Si noti che possono
                   verificarsi piccole differenze tra i conteggi eseguiti da OmegaT e quelli forniti da altri strumenti CAT.
                </p>
-               <div class="figure"><a name="d0e2739"></a><p class="title"><b>Figure&nbsp;4.8.&nbsp;Statistiche delle concordanze</b></p>
+               <div class="figure"><a name="d0e2759"></a><p class="title"><b>Figure&nbsp;4.8.&nbsp;Statistiche delle concordanze</b></p>
                   <div class="figure-contents">
                      <div class="mediaobject"><img src="images/MatchStatistics.png" alt="Statistiche delle concordanze"></div>
                   </div>
@@ -750,7 +749,7 @@
                   esterne per il conteggio, si deve eliminare il contenuto della cartella /tm o modificare (temporaneamente) le impostazioni
                   del progetto, in modo che il valore per la cartella /tm punti a una posizione differente.
                </p>
-               <p>Le statistiche delle concordanze sono separate da tabulazione ed è possibile usare i comandi <span class="guimenuitem">Ctrl+A <a class="indexterm" name="d0e2766"></a></span><span class="guimenuitem">, Ctrl+C <a class="indexterm" name="d0e2773"></a></span> e <span class="guimenuitem">Ctrl+V <a class="indexterm" name="d0e2781"></a></span> per copiarle e incollarle, per esempio, in un foglio di calcolo o nel proprio programma di conteggio dei costi. Una volta
+               <p>Le statistiche delle concordanze sono separate da tabulazione ed è possibile usare i comandi <span class="guimenuitem">Ctrl+A <a class="indexterm" name="d0e2786"></a></span><span class="guimenuitem">, Ctrl+C <a class="indexterm" name="d0e2793"></a></span> e <span class="guimenuitem">Ctrl+V <a class="indexterm" name="d0e2801"></a></span> per copiarle e incollarle, per esempio, in un foglio di calcolo o nel proprio programma di conteggio dei costi. Una volta
                   calcolati, i dati vengono resi disponibili anche nel file <code class="filename">omegat/project_stats_match.txt</code>. Si noti che il file reca la data e l'ora, dato che il calcolo non è istantaneo (a differenza delle statistiche standard)
                   è può dunque diventare obsoleto.
                </p>
@@ -759,11 +758,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2790"></a>3.6.&nbsp;Navigatore della Guida<a class="indexterm" name="d0e2793"></a></h3>
+                        <h3 class="title"><a name="d0e2810"></a>3.6.&nbsp;Navigatore della Guida<a class="indexterm" name="d0e2813"></a></h3>
                      </div>
                   </div>
                </div>
-               <p>Il sistema della guida (che contiene questo manuale) può essere richiamato premendo <span class="keycap"><strong><a class="indexterm" name="d0e2801"></a>F1</strong></span> oppure navigando in <span class="guimenuitem"><a class="indexterm" name="d0e2809"></a>Aiuto → Manuale dell'utente...</span>, all'interno del menu principale. La finestra che viene aperta contiene il manuale e due pulsanti: Indietro e Sommario. Il
+               <p>Il sistema della guida (che contiene questo manuale) può essere richiamato premendo <span class="keycap"><strong><a class="indexterm" name="d0e2821"></a>F1</strong></span> oppure navigando in <span class="guimenuitem"><a class="indexterm" name="d0e2829"></a>Aiuto → Manuale dell'utente...</span>, all'interno del menu principale. La finestra che viene aperta contiene il manuale e due pulsanti: Indietro e Sommario. Il
                   manuale dell'Utente è un documento HTML contenente i collegamenti ai vari capitoli. Quando si fa clic su un collegamento,
                   proprio come si farebbe all'interno di una comune pagina Web, si accede direttamente alla prima pagina del capitolo.
                </p>

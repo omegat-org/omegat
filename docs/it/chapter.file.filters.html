@@ -77,7 +77,7 @@
             si potrà aprire la finestra principale selezionando il comando <span class="bold"><strong> Opzioni → Filtri dei file...</strong></span> dalla barra dei menu. Si possono anche abilitare specifici filtri dei file per il progetto, che verranno utilizzati solo
             in quello attivo, selezionando l'opzione <span class="bold"><strong>Filtri dei file...</strong></span> nelle Proprietà del progetto.
          </p>
-         <p>Si possono abilitare specifici filtri dei file per il progetto tramite <span class="bold"><strong>Progetto → Proprietà...</strong></span>. Premere il pulsante <span class="guibutton">Filtri dei file</span> e attivare l'opzione <span class="guimenuitem">Rendi specifiche del progetto le impostazioni dei filtri dei file</span><a class="indexterm" name="d0e4600"></a>. In questo caso, una copia della configurazione dei filtri verrà memorizzata all'interno del progetto. Se i filtri verrano
+         <p>Si possono abilitare specifici filtri dei file per il progetto tramite <span class="bold"><strong>Progetto → Proprietà...</strong></span>. Premere il pulsante <span class="guibutton">Filtri dei file</span> e attivare l'opzione <span class="guimenuitem">Rendi specifiche del progetto le impostazioni dei filtri dei file</span><a class="indexterm" name="d0e4663"></a>. In questo caso, una copia della configurazione dei filtri verrà memorizzata all'interno del progetto. Se i filtri verrano
             modificati in seguito, solo quelli del progetto saranno aggiornati, lasciando inalterati quelli dell'utente.
          </p>
          <p><span class="bold"><strong>Attenzione!</strong></span> Se si modificano le opzioni dei filtri mentre un progetto è aperto, affinché le modifiche siano attivate il progetto va ricaricato.
@@ -86,7 +86,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;Finestra di dialogo "Filtri dei file"<a class="indexterm" name="d0e4613"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;Finestra di dialogo "Filtri dei file"<a class="indexterm" name="d0e4676"></a></h2>
                   </div>
                </div>
             </div>
@@ -131,7 +131,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Opzioni dei filtri<a class="indexterm" name="d0e4644"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Opzioni dei filtri<a class="indexterm" name="d0e4707"></a></h2>
                   </div>
                </div>
             </div>
@@ -355,7 +355,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Finestra di dialogo "Modifica filtro"<a class="indexterm" name="d0e4846"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Finestra di dialogo "Modifica filtro"<a class="indexterm" name="d0e4909"></a></h2>
                   </div>
                </div>
             </div>
@@ -370,7 +370,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4861"></a>Tipo del file di partenza, modello del nome del file<a class="indexterm" name="d0e4867"></a></h3>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4924"></a>Tipo del file di partenza, modello del nome del file<a class="indexterm" name="d0e4930"></a></h3>
                      </div>
                   </div>
                </div>
@@ -378,8 +378,8 @@
                   allo stesso file. Più precisamente, OmegaT tenta di associare i modelli del nome del file di partenza di ciascun filtro al
                   nome dello stesso file. Per esempio, il modello <code class="literal">*.xhtml</code> è associato ai file con estensione <code class="literal">.xhtml</code>. Se viene trovato il filtro appropriato, il file viene assegnato ad esso per essere lavorato. Per esempio, per impostazione
                   predefinita, per lavorare sui file con estensione .xhtml viene utilizzato il filtro XHTML. È possibile modificare o aggiungere
-                  modelli di nome del file per quei file che dovranno essere gestiti da ciascun filtro. I modelli di nome del file di partenza
-                  usano i caratteri jolly simili a quelli usati nelle <span class="bold"><strong>Ricerche. </strong></span>Il carattere '*' corrisponde a zero caratteri o più caratteri consecutivi. Il carattere '?' corrisponde esattamente a un carattere.
+                  modelli di nome del file per quei file che dovranno essere gestiti da ciascun filtro dei file. I modelli di nome del file
+                  di partenza usano i caratteri jolly simili a quelli usati nelle <span class="bold"><strong>Ricerche. </strong></span>Il carattere '*' corrisponde a zero caratteri o più caratteri consecutivi. Il carattere '?' corrisponde esattamente a un carattere.
                   Tutti gli altri caratteri rappresentano se stessi. Per esempio, se si desidera utilizzare il filtro di testo per la gestione
                   dei file "leggimi" (<code class="literal">leggimi, leggi.mi</code>, e <code class="literal">leggimi.txt</code>) si dovrebbe usare il modello <code class="literal">leggi*</code>.
                </p>
@@ -392,7 +392,7 @@
                         </h3>
                      </div>
                   </div>
-               </div><a class="indexterm" name="d0e4895"></a><a class="indexterm" name="d0e4900"></a><a class="indexterm" name="d0e4905"></a><p>Solo un numero limitato di formati di file specifica una codifica obbligatoria. I formati di file che non specificano la loro
+               </div><a class="indexterm" name="d0e4958"></a><a class="indexterm" name="d0e4963"></a><a class="indexterm" name="d0e4968"></a><p>Solo un numero limitato di formati di file specifica una codifica obbligatoria. I formati di file che non specificano la loro
                   codifica useranno la codifica impostata dall'utente per l'estensione che corrisponde al loro nome. Per esempio, per impostazione
                   predefinita, i file <code class="literal">.txt</code> verranno caricati utilizzando la codifica predefinita del sistema operativo. Per ogni modello di nome dei file di partenza
                   si ha la possibilità di modificare la codifica originaria. Tali file possono anche venire scritti utilizzando una qualsiasi
@@ -428,13 +428,13 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Nome del file di arrivo<a class="indexterm" name="d0e4933"></a></h3>
+                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Nome del file di arrivo<a class="indexterm" name="d0e4996"></a></h3>
                      </div>
                   </div>
                </div>
                <p>A volte, potrebbe essere necessario assegnare automaticamente un nuovo nome al file, o ai file, che vengono tradotti; è il
                   caso, per esempio, dell'aggiunta di un codice di lingua al nome del file finale. Il modello del nome del file di arrivo utilizza
-                  una sintassi particolare; pertanto, se si desidera intervenire su questo campo, si deve fare clic su <span class="bold"><strong>Modifica...</strong></span> e usare la finestra di dialogo <a class="indexterm" name="d0e4943"></a>Modifica filtro. Se si vuole tornare alla configurazione predefinita del filtro, fare clic su <span class="bold"><strong>Predefiniti.</strong></span> È possibile anche modificare direttamente il nome nel campo del modello del nome del file di arrivo della finestra di dialogo
+                  una sintassi particolare; pertanto, se si desidera intervenire su questo campo, si deve fare clic su <span class="bold"><strong>Modifica...</strong></span> e usare la finestra di dialogo <a class="indexterm" name="d0e5006"></a>Modifica filtro. Se si vuole tornare alla configurazione predefinita del filtro, fare clic su <span class="bold"><strong>Predefiniti.</strong></span> È possibile anche modificare direttamente il nome nel campo del modello del nome del file di arrivo della finestra di dialogo
                   dei filtri dei file. La finestra di dialogo "Modifica modello" offre, tra le altre, le opzioni seguenti:
                </p>
                <div class="itemizedlist">

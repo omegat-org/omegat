@@ -195,7 +195,7 @@
     <section id="which.package.to.download.OSX">
       <title>Scaricare il pacchetto</title>
 
-      <para><application>OmegaT</application> contiene Java JRE 1.7</para>
+      <para><application>OmegaT</application> contiene Java JRE 1.8</para>
 
       <para>Scaricare <emphasis>OmegaT_3.n.n_Mac.zip.</emphasis></para>
     </section>
@@ -452,10 +452,9 @@
 
           <para><emphasis role="bold">-Dyandex.api.key=</emphasis><emphasis role="bold">trnsl.1.1.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</emphasis></para>
         </listitem>
-
       </itemizedlist>
 
-      <para>Gli argomenti possono essere combinati: per avviare <application>OmegaT</application> con tutti gli esempi descritti sopra, il comando deve essere:</para>
+      <para>Gli argomenti possono essere combinati. Per avviare <application>OmegaT</application> con tutti gli esempi descritti sopra, il comando deve essere:</para>
 
       <para><literal>java -Dswing.aatext=true -Duser.language=pt
       -Duser.country=BR -Xmx1024M <application>-Dhttp.proxyHost=192.168.1.1

@@ -387,7 +387,7 @@
                   <keycap>Ctrl</keycap> <keycap>Maiusc</keycap> <keycap>G</keycap>
                 </keycombo></entry>
 
-              <entry>Permette all'utente di creare una voce nel file di glossario predefinito.</entry>
+              <entry>Permette all'utente di creare una voce nel file di glossario predefinito.<para>Selezionando una stringa di testo (in qualsiasi pannello) prima di premere <keycombo> <keycap>Ctrl</keycap> <keycap>Maiusc</keycap> <keycap>G</keycap> </keycombo>, il testo sarà incollato in maniera predefinita nel campo <guilabel>Termine di partenza</guilabel>.</para></entry>
             </row>
 
             <row>
@@ -399,7 +399,7 @@
                   <keycap>F</keycap>
                 </keycombo></entry>
 
-              <entry>Apre una nuova <link linkend="section.search.window">finestra di ricerca</link>.</entry>
+              <entry>Apre una nuova <link linkend="section.search.window">finestra di ricerca</link>.<para>Selezionando una stringa di testo (in qualsiasi pannello) prima di premere <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, il testo sarà incollato in maniera predefinita nel campo <guilabel>Cerca</guilabel>.</para></entry>
             </row>
 
             <row>
@@ -411,7 +411,7 @@
                   <keycap>K</keycap>
                 </keycombo></entry>
 
-              <entry>Apre una nuova <link linkend="section.searchreplace.window">finestra di ricerca e sostituzione</link>.</entry>
+              <entry>Apre una nuova <link linkend="section.searchreplace.window">finestra di ricerca e sostituzione</link>.<para>Selezionando una stringa di testo (in qualsiasi pannello) prima di premere <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo>, il testo sarà incollato in maniera predefinita nel campo <guilabel>Cerca</guilabel>.</para></entry>
             </row>
 
             <row>
@@ -543,7 +543,7 @@
                   <keycap>J</keycap>
                 </keycombo></entry>
 
-              <entry>Il segmento è aperto quando viene digitato il numero di segmento.</entry>
+              <entry>Il segmento è aperto quando viene digitato o il numero di segmento o il suo richiamo.</entry>
             </row>
 
             <row>
@@ -653,8 +653,7 @@
             <row>
               <entry><guimenuitem>Evidenzia caratteri di controllo algoritmo bidirezionale</guimenuitem></entry>
 
-              <entry>Questa opzione mostra i <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">caratteri di controllo bidirezionali</ulink>
-              </entry>
+              <entry>Questa opzione mostra i <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">caratteri di controllo bidirezionali</ulink></entry>
             </row>
 
             <row>
@@ -784,7 +783,7 @@
             <row>
               <entry><guimenuitem>Completamento automatico</guimenuitem></entry>
 
-              <entry><para>Fare clic su <guimenuitem>Glossario...</guimenuitem> per configurare la vista del glossario per il completamento automatico.</para><para>Fare clic su <guimenuitem>Testo automatico...</guimenuitem> per configurare le opzioni del testo automatico e aggiungere o rimuovere le voci.</para><para>Fare clic su <guimenuitem>Tabella caratteri...</guimenuitem> per impostare le opzioni di completamento automatico relativo alla tabella dei caratteri.</para></entry>
+              <entry><para>Fare clic su <guimenuitem>Glossario...</guimenuitem> per configurare la vista del glossario per il completamento automatico.</para><para>Fare clic su <guimenuitem>Testo automatico...</guimenuitem> per configurare le opzioni del testo automatico e aggiungere o rimuovere le voci.</para><para>Fare clic su <guimenuitem>Tabella caratteri...</guimenuitem> per impostare le opzioni di completamento automatico relativo alla tabella dei caratteri.</para><para>Il completamento automatico è avviato all'interno del segmento di arrivo tramite la combinazione di tasti <emphasis role="bold">Ctrl+Barra spaziatrice</emphasis>. Esso si apre automaticamente, per impostazione predefinita, al ritrovamento di suggerimenti pertinenti, ma può essere disattivato togliendo la spunta all'opzione <emphasis role="bold">Mostra automaticamente i suggerimenti pertinenti</emphasis>.</para><para/></entry>
             </row>
 
             <row>
@@ -824,7 +823,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Convalida dei tag...</guimenuitem></entry>
+              <entry><guimenuitem>Elaborazione dei tag...</guimenuitem></entry>
 
               <entry>Per i programmatori: permette di configurare le opzioni della Convalida dei tag anche per il controllo delle variabili di programmazione (%...).</entry>
             </row>

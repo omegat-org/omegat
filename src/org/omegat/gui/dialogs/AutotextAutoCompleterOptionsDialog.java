@@ -27,8 +27,8 @@ package org.omegat.gui.dialogs;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,9 +41,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
-import org.omegat.core.Core;
 import org.omegat.gui.editor.autotext.Autotext;
-import org.omegat.gui.editor.autotext.AutotextPair;
+import org.omegat.gui.editor.autotext.Autotext.AutotextItem;
 import org.omegat.gui.editor.autotext.AutotextTableModel;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -63,12 +62,7 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
     
     public int returnStatus = RET_CANCEL;
     
-    AutotextTableModel model = new AutotextTableModel();
-    
-    File theFile = null;
-    File files[];
-    
-    final JFileChooser fc = new JFileChooser();
+    private final JFileChooser fc = new JFileChooser();
     
     /**
      * Creates new form AutotextAutoCompleterOptionsDialog
@@ -90,9 +84,7 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
         fc.addChoosableFileFilter(filter);
         
         //entryTextArea.setFont(this.getFont());
-        model.load();
-        entryTable.setModel(model);
-        model.addTableModelListener(entryTable);
+        entryTable.setModel(new AutotextTableModel(Autotext.getItems()));
         
         setPreferredSize(new Dimension(500, 500));
         pack();
@@ -321,32 +313,24 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
-        int result = fc.showOpenDialog(this);
-        File selectedFile;
-        
-        if (result == JFileChooser.APPROVE_OPTION) {
-            selectedFile = fc.getSelectedFile();
+        if (JFileChooser.APPROVE_OPTION == fc.showOpenDialog(this)) {
             try {
-                Core.getAutoText().load(selectedFile.getCanonicalPath());
-                model.load();
+                List<AutotextItem> data = Autotext.load(fc.getSelectedFile());
+                entryTable.setModel(new AutotextTableModel(data));
             } catch (IOException ex) {
                 Logger.getLogger(AutotextAutoCompleterOptionsDialog.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_loadButtonActionPerformed
 
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        Autotext autoText = new Autotext(null);
-        
-        int result = fc.showSaveDialog(this);
-        if (result != JFileChooser.APPROVE_OPTION) {
-            return;
-        }
-        model.store(autoText);
-        try {
-            autoText.save(fc.getSelectedFile().getCanonicalPath());
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, OStrings.getString("AC_AUTOTEXT_UNABLE_TO_SAVE"));
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_saveButtonActionPerformed
+        if (JFileChooser.APPROVE_OPTION == fc.showSaveDialog(this)) {
+            try {
+                List<AutotextItem> data = ((AutotextTableModel) entryTable.getModel()).getData();
+                Autotext.save(data, fc.getSelectedFile());
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, OStrings.getString("AC_AUTOTEXT_UNABLE_TO_SAVE"));
+            }
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
@@ -360,11 +344,10 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
             editor.stopCellEditing();
         }
         
-        Autotext autoText = Core.getAutoText();
+        Autotext.setList(((AutotextTableModel) entryTable.getModel()).getData());
         
-        model.store(autoText);
         try {
-            autoText.save();
+            Autotext.save();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, OStrings.getString("AC_AUTOTEXT_UNABLE_TO_SAVE"));
         }
@@ -380,7 +363,8 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_sortAlphabeticallyCheckBoxActionPerformed
 
     private void addNewRowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewRowButtonActionPerformed
-        int newRow = model.addRow(new AutotextPair("","",""), entryTable.getSelectedRow());
+        int newRow = ((AutotextTableModel) entryTable.getModel()).addRow(new AutotextItem(),
+                entryTable.getSelectedRow());
         entryTable.changeSelection(newRow, 0, false, false);
         entryTable.changeSelection(newRow, entryTable.getColumnCount() - 1, false, true);
         entryTable.editCellAt(newRow, 0);
@@ -389,7 +373,7 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
 
     private void removeEntryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeEntryButtonActionPerformed
         if (entryTable.getSelectedRow() != -1) {
-            model.removeRow(entryTable.getSelectedRow());
+            ((AutotextTableModel) entryTable.getModel()).removeRow(entryTable.getSelectedRow());
         }
     }//GEN-LAST:event_removeEntryButtonActionPerformed
 

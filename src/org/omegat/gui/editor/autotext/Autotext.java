@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko
+               2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,96 +26,84 @@
 
 package org.omegat.gui.editor.autotext;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.String;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
-import org.omegat.util.OConsts;
-import org.omegat.util.Preferences;
+import java.util.stream.Collectors;
+
+import org.omegat.util.Log;
 import org.omegat.util.StaticUtils;
 
 /**
  *
  * @author bartkoz
+ * @author Aaron Madlon-Kay
  */
 public class Autotext {
+    private static final String AUTOTEXT_FILE_NAME = "omegat.autotext";
+    private static final File DEFAULT_FILE = new File(StaticUtils.getConfigDir(), AUTOTEXT_FILE_NAME);
     
-    private List<AutotextPair> list = new ArrayList<AutotextPair>();
+    private static volatile List<AutotextItem> list = Collections.emptyList();
         
-    public Autotext(String name) {        
-        if (name != null) {
-            load(name);
-        }
-    }
-    
-    public List<AutotextPair> getList() {
-        return list;
-    }
-
-    public void processLine(String thisLine) {
-        if (thisLine == null || thisLine.isEmpty() || thisLine.trim().isEmpty())
-            return;
-        
-        String parts[] = thisLine.split("\t");
-
-        if (parts.length == 2) {
-            list.add(new AutotextPair(parts[0], parts[1], ""));
-        }
-        if (parts.length == 3) {
-            list.add(new AutotextPair(parts[0], parts[1], parts[2]));
-        }
-    }
-    
-    public void load(String fileName) {
-        list.clear();
-        //separator = Core.get
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new InputStreamReader(new FileInputStream(
-                    fileName), OConsts.UTF8));
-
-            String thisLine;
-            while ((thisLine = br.readLine()) != null) {
-                processLine(thisLine);
-            }
-        } catch (FileNotFoundException ex) {
-            // there is no default, so load nothing
-        } catch (IOException ex) {
-            // so now what?
-        } finally {
+    static {
+        if (DEFAULT_FILE.isFile()) {
             try {
-                if (br != null) {
-                    br.close();
-                }
+                list = load(DEFAULT_FILE);
             } catch (IOException ex) {
-                // so now what?
+                Log.log(ex);
             }
         }
     }
 
-    public void save(String filename) throws IOException {
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), OConsts.UTF8));
-
-        StringBuilder builder = new StringBuilder();
-        for (AutotextPair pair:list) {
-            builder.replace(0, builder.length(), "");
-            builder.append(pair.source).append("\t");
-            builder.append(pair.target).append("\t");
-            builder.append(pair.comment).append("\n");
-            out.write(builder.toString());
-        }
-        
-        out.close();
+    public static List<AutotextItem> getItems() {
+        return Collections.unmodifiableList(list);
     }
     
-    public void save() throws IOException {
-        save(StaticUtils.getConfigDir() + Preferences.AC_AUTOTEXT_FILE_NAME);
+    public static void setList(Collection<AutotextItem> items) {
+        list = new ArrayList<>(items);
+    }
+
+    public static List<AutotextItem> load(File file) throws IOException {
+        return Files.lines(file.toPath()).filter(line -> !line.trim().isEmpty())
+                .map(line -> line.split("\t")).filter(parts -> parts.length >= 2)
+                .map(parts -> new AutotextItem(parts[0], parts[1],
+                        Arrays.copyOfRange(parts, 2, parts.length)))
+                .collect(Collectors.toList());
+    }
+
+    public static void save(Collection<AutotextItem> items, File file) throws IOException {
+        Files.write(file.toPath(), items.stream().map(AutotextItem::toString).collect(Collectors.toList()),
+                StandardCharsets.UTF_8);
+    }
+    
+    public static void save() throws IOException {
+        save(list, DEFAULT_FILE);
+    }
+
+    public static class AutotextItem {
+        public final String source;
+        public final String target;
+        public final String comment;
+
+        public AutotextItem() {
+            this("", "");
+        }
+
+        public AutotextItem(String source, String target, String... comment) {
+            this.source = source == null ? "" : source;
+            this.target = target == null ? "" : target;
+            this.comment = comment.length == 0 || comment[0] == null ? "" : comment[0];
+        }
+
+        @Override
+        public String toString() {
+            return source + '\t' + target + '\t' + comment;
+        }
     }
 }

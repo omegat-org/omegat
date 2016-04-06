@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko
+               2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,49 +27,38 @@
 package org.omegat.gui.editor.autotext;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.swing.table.AbstractTableModel;
-import org.omegat.core.Core;
+
+import org.omegat.gui.editor.autotext.Autotext.AutotextItem;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
 /**
  * The table model of the table in the autotext configuration window.
+ * 
  * @author bartkoz
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class AutotextTableModel extends AbstractTableModel {
 
-    private List<AutotextPair> data = new ArrayList<AutotextPair>();
+    private List<AutotextItem> data = Collections.emptyList();
     
-    public AutotextTableModel() {}
-    
-    /**
-     * Load the data from the core autotext list.
-     */
-    public void load() {
-        data.clear();
-        for (AutotextPair pair:Core.getAutoText().getList()) {
-            data.add(new AutotextPair(pair.source, pair.target, pair.comment));
-        }
+    public AutotextTableModel(Collection<AutotextItem> data) {
+        this.data = new ArrayList<>(data);
     }
     
     /**
      * Store the data to the specified autotext list. All items, where the target is not empty are stored.
      * @param autotext the target list
      */
-    public void store(Autotext autotext) {
-        List<AutotextPair> list = autotext.getList();
-        list.clear();
-        for (AutotextPair pair : data) {
-            if (!StringUtil.isEmpty(pair.target)) {
-                list.add(new AutotextPair(pair.source == null ? "" : pair.source,
-                        pair.target,
-                        pair.comment == null ? "" : pair.comment));
-            }
-                
-                
-        }
+    public List<AutotextItem> getData() {
+        return data.stream().filter(item -> !StringUtil.isEmpty(item.target)).collect(Collectors.toList());
     }
     
     private String[] columnNames = { OStrings.getString("AC_AUTOTEXT_ABBREVIATION"), 
@@ -87,13 +77,16 @@ public class AutotextTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int i, int i1) {
-        AutotextPair pair = data.get(i);
+        AutotextItem item = data.get(i);
         switch (i1) {
-            case 0: return pair.source;
-            case 1: return pair.target;
-            case 2: return pair.comment;
-            default: return null;
+        case 0:
+            return item.source;
+        case 1:
+            return item.target;
+        case 2:
+            return item.comment;
         }
+        throw new IllegalArgumentException();
     }
     
     @Override
@@ -103,12 +96,12 @@ public class AutotextTableModel extends AbstractTableModel {
     
     @Override
     public void setValueAt(Object value, int row, int col) {
-        AutotextPair pair = data.get(row);
-        switch (col) {
-            case 0: pair.source = (String) value; break;
-            case 1: pair.target = (String) value; break;
-            case 2: pair.comment = (String) value;
-        }
+        AutotextItem current = data.get(row);
+        String source = col == 0 ? (String) value : current.source;
+        String target = col == 1 ? (String) value : current.target;
+        String comment = col == 2 ? (String) value : current.comment;
+        AutotextItem item = new AutotextItem(source, target, comment);
+        data.set(row, item);
         fireTableCellUpdated(row, col);
     }
     
@@ -119,12 +112,12 @@ public class AutotextTableModel extends AbstractTableModel {
     
     /**
      * add a new row.
-     * @param pair what to add
+     * @param item what to add
      * @param position at which position
      */
-    public int addRow(AutotextPair pair, int position) {
+    public int addRow(AutotextItem item, int position) {
         int newPosition = position == -1 ? data.size() : position;
-        data.add(newPosition, pair);
+        data.add(newPosition, item);
         fireTableDataChanged();
         return newPosition;
     }

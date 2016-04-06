@@ -48,7 +48,6 @@ import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.dictionaries.IDictionaries;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
-import org.omegat.gui.editor.autotext.Autotext;
 import org.omegat.gui.editor.mark.BidiMarkerFactory;
 import org.omegat.gui.editor.mark.ComesFromAutoTMMarker;
 import org.omegat.gui.editor.mark.FontFallbackMarker;
@@ -79,7 +78,6 @@ import org.omegat.languagetools.LanguageToolWrapper;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Preferences;
 import org.omegat.util.RecentProjects;
-import org.omegat.util.StaticUtils;
 
 /**
  * Class which contains all components instances.
@@ -121,8 +119,6 @@ public class Core {
     private static List<String> pluginsLoadingErrors = Collections.synchronizedList(new ArrayList<String>());
 
     private static final List<IMarker> markers = new ArrayList<IMarker>();
-
-    private static Autotext autoText = new Autotext(StaticUtils.getConfigDir() + Preferences.AC_AUTOTEXT_FILE_NAME);
 
     /** Get project instance. */
     public static IProject getProject() {
@@ -340,9 +336,5 @@ public class Core {
      */
     public static void pluginLoadingError(String errorText) {
         pluginsLoadingErrors.add(errorText);
-    }
-
-    public static Autotext getAutoText() {
-        return autoText;
     }
 }

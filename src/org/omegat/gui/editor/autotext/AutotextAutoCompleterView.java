@@ -34,6 +34,7 @@ import java.util.List;
 import org.omegat.core.Core;
 import org.omegat.gui.editor.autocompleter.AutoCompleterItem;
 import org.omegat.gui.editor.autocompleter.AutoCompleterListView;
+import org.omegat.gui.editor.autotext.Autotext.AutotextItem;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.OStrings;
@@ -51,9 +52,9 @@ public class AutotextAutoCompleterView extends AutoCompleterListView {
             
     @Override
     public List<AutoCompleterItem> computeListData(String prevText, boolean contextualOnly) {
-        
-        List<AutoCompleterItem> result = new ArrayList<AutoCompleterItem>();
-        for (AutotextPair s : Core.getAutoText().getList()) {
+        List<AutotextItem> items = Autotext.getItems();
+        List<AutoCompleterItem> result = new ArrayList<>();
+        for (AutotextItem s : items) {
             if (prevText.endsWith(s.source)) {
                 result.add(new AutoCompleterItem(s.target,
                     new String[] { s.source, s.comment }, s.source.length()));
@@ -62,7 +63,7 @@ public class AutotextAutoCompleterView extends AutoCompleterListView {
         
         if (!Core.getProject().getProjectProperties().getTargetLanguage().isSpaceDelimited()
                 && result.isEmpty() && !contextualOnly) {
-            for (AutotextPair s : Core.getAutoText().getList()) {
+            for (AutotextItem s : items) {
                 result.add(new AutoCompleterItem(s.target, new String[] { s.source, s.comment }, 0));
             }
         }
@@ -77,14 +78,13 @@ public class AutotextAutoCompleterView extends AutoCompleterListView {
         StringBuilder b = new StringBuilder();
         
         if (item.extras != null && item.extras[0] != null && !item.extras[0].isEmpty()) {
-            b.append(item.extras[0]);
-            b.append(" \u2192 ");
+            b.append(item.extras[0]).append(" \u2192 ");
         }
-        if (item.payload != null) b.append(item.payload);
+        if (item.payload != null) {
+            b.append(item.payload);
+        }
         if (item.extras != null && item.extras[1] != null && !item.extras[1].isEmpty()) {
-            b.append(" (");
-            b.append(item.extras[1]);
-            b.append(")");
+            b.append(" (").append(item.extras[1]).append(")");
         }
         return b.toString();
     }
@@ -106,10 +106,11 @@ public class AutotextAutoCompleterView extends AutoCompleterListView {
             }
             
             if (alphabetically) {
-                if (sortFullText)
+                if (sortFullText) {
                     return o1.payload.compareTo(o2.payload);
-                else
+                } else {
                     return itemToString(o1).compareTo(itemToString(o2));
+                }
             }
             
             return 0;

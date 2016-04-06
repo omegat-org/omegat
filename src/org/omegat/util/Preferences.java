@@ -391,7 +391,6 @@ public class Preferences {
     public static final String AC_GLOSSARY_CAPITALIZE = "ac_glossary_capitalize";
 
     /** autotext auto-completion */
-    public static final String AC_AUTOTEXT_FILE_NAME = "omegat.autotext";
     public static final String AC_AUTOTEXT_SORT_BY_LENGTH = "ac_autotext_sort_by_length";
     public static final String AC_AUTOTEXT_SORT_ALPHABETICALLY = "ac_autotext_sort_alphabetically";
     public static final String AC_AUTOTEXT_SORT_FULL_TEXT = "ac_autotext_sort_full_text";

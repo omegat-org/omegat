@@ -101,6 +101,8 @@ import org.openide.awt.Mnemonics;
 @SuppressWarnings("serial")
 public class ScriptingWindow extends JFrame {
 
+    public static final int SCRIPT_EDITOR_MIN_FONT_SIZE = 13;
+
     static ScriptingWindow window;
 
     public static void loadPlugins() {
@@ -352,7 +354,7 @@ public class ScriptingWindow extends JFrame {
 
         m_txtScriptEditor.setComponentPopupMenu(editorPopUp);
         m_txtScriptEditor.setFont(new Font(Font.MONOSPACED, Font.PLAIN,
-                m_txtScriptEditor.getFont().getSize()));
+                Math.max(SCRIPT_EDITOR_MIN_FONT_SIZE, m_txtScriptEditor.getFont().getSize())));
         JScrollPane scrollPaneEditor = new JScrollPane(m_txtScriptEditor);
 
         JSplitPane splitPane1 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, scrollPaneEditor, scrollPaneResults);

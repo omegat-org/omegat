@@ -129,7 +129,6 @@ public class AutoCompleter implements IAutoCompleter {
         popup.setLayout(new BorderLayout());
         popup.add(scroll, BorderLayout.CENTER); 
         popup.add(viewLabel, BorderLayout.SOUTH);
-        selectNextView();
     } 
 
     @Override
@@ -138,7 +137,7 @@ public class AutoCompleter implements IAutoCompleter {
         views.add(view);
     }
 
-    public EditorTextArea3 getEditor() {
+    EditorTextArea3 getEditor() {
         return editor;
     }
     
@@ -152,6 +151,10 @@ public class AutoCompleter implements IAutoCompleter {
         if (!isVisible() && StaticUtils.isKey(e, TRIGGER_KEY, TRIGGER_KEY_MASK)) {
 
             if (!editor.isInActiveTranslation(editor.getCaretPosition())) {
+                return false;
+            }
+
+            if (!canBecomeVisible()) {
                 return false;
             }
 
@@ -220,6 +223,10 @@ public class AutoCompleter implements IAutoCompleter {
             return;
         }
 
+        if (!canBecomeVisible()) {
+            return;
+        }
+
         AbstractAutoCompleterView view = getCurrentView();
         
         view.updateViewData();
@@ -283,16 +290,28 @@ public class AutoCompleter implements IAutoCompleter {
      * get the view number of the next view
      * @return the number
      */
-    private int nextViewNumber() {
-        return (currentView + 1) % views.size();
+    private int nextViewNumber(int start) {
+        for (int n = 1; n <= views.size(); n++) {
+            int index = (start + n) % views.size();
+            if (views.get(index).isEnabled()) {
+                return index;
+            }
+        }
+        return -1;
     }
     
     /**
      * Get the view number of the previous view.
      * @return 
      */
-    private int prevViewNumber() {
-        return (currentView + views.size() - 1) % views.size();
+    private int prevViewNumber(int start) {
+        for (int n = 1; n <= views.size(); n++) {
+            int index = (currentView + views.size() - n) % views.size();
+            if (views.get(index).isEnabled()) {
+                return index;
+            }
+        }
+        return -1;
     }
     
     /**
@@ -308,18 +327,20 @@ public class AutoCompleter implements IAutoCompleter {
             String nextKeyString = keyText(GO_NEXT_KEY, GO_NEXT_MASK);
             String prevKeyString = keyText(GO_PREV_KEY, GO_PREV_MASK);
             
-            if (views.size() >= 2) {
+            int nextViewN = nextViewNumber(currentView);
+            if (views.size() >= 2 && nextViewN != -1) {
                 sb.append("<br>");
                 sb.append(StringUtil.format(OStrings.getString("AC_NEXT_VIEW"),
                         nextKeyString,
-                        views.get(nextViewNumber()).getName()));
+                        views.get(nextViewN).getName()));
             }
             
-            if (views.size() > 2) {
+            int prevViewN = prevViewNumber(currentView);
+            if (views.size() > 2 && prevViewN != -1) {
                 sb.append("<br>");
                 sb.append(StringUtil.format(OStrings.getString("AC_PREV_VIEW"),
                         prevKeyString,
-                        views.get(prevViewNumber()).getName()));
+                        views.get(prevViewN).getName()));
             }
         }
         sb.append("</html>");
@@ -332,9 +353,14 @@ public class AutoCompleter implements IAutoCompleter {
     }
     
     /** go to the next view */
-    private void selectNextView() {
-        currentView = nextViewNumber();
+    private boolean selectNextView() {
+        int nextViewN = nextViewNumber(currentView);
+        if (nextViewN == -1) {
+            return false;
+        }
+        currentView = nextViewN;
         activateView(true);
+        return true;
     }
 
     /** activate the current view */
@@ -345,9 +371,14 @@ public class AutoCompleter implements IAutoCompleter {
     }
     
     /** select the previous view */
-    private void selectPreviousView() {
-        currentView = prevViewNumber();
+    private boolean selectPreviousView() {
+        int prevViewN = prevViewNumber(currentView);
+        if (prevViewN == -1) {
+            return false;
+        }
+        currentView = prevViewN;
         activateView(true);
+        return true;
     }
 
     public boolean isVisible() {
@@ -370,6 +401,10 @@ public class AutoCompleter implements IAutoCompleter {
         }
     }
     
+    private boolean canBecomeVisible() {
+        return currentView != -1 || selectNextView();
+    }
+
     /** 
      * get the key text
      * @param base
@@ -389,6 +424,10 @@ public class AutoCompleter implements IAutoCompleter {
             return;
         }
         
+        if (!canBecomeVisible()) {
+            return;
+        }
+
         // Cycle through each view, stopping and showing it if it has some relevant content.
         int i = currentView;
         while (true) {
@@ -399,7 +438,7 @@ public class AutoCompleter implements IAutoCompleter {
                 setVisible(true);
                 return;
             }
-            i = (i + 1) % views.size();
+            i = nextViewNumber(i);
             if (i == currentView) {
                 // We made it full circle with no results.
                 break;

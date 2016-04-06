@@ -665,7 +665,7 @@ public class Preferences {
         m_preferences = new PreferencesImpl(new PreferencesXML(loadFile, saveFile));
     }
 
-    private static boolean didInit = false;
+    private static volatile boolean didInit = false;
     private static IPreferences m_preferences;
     private static SRX m_srx;
     private static Filters m_filters;

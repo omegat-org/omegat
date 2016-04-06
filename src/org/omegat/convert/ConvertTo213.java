@@ -29,6 +29,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 import org.omegat.util.Preferences;
+import org.omegat.util.Preferences.IPreferences;
+import org.omegat.util.PreferencesImpl;
+import org.omegat.util.PreferencesXML;
 import org.omegat.util.StaticUtils;
 
 /**
@@ -38,7 +41,12 @@ import org.omegat.util.StaticUtils;
  */
 public class ConvertTo213 {
     public static void convertUIConfig(File out) throws Exception {
-        String layout = Preferences.getPreference(Preferences.MAINWINDOW_LAYOUT);
+        File prefsFile = new File(StaticUtils.getConfigDir(), Preferences.FILE_PREFERENCES);
+        if (!prefsFile.isFile()) {
+            return;
+        }
+        IPreferences prefs = new PreferencesImpl(new PreferencesXML(prefsFile, null));
+        String layout = prefs.getPreference(Preferences.MAINWINDOW_LAYOUT);
         if (!layout.isEmpty()) {
             byte[] bytes = StaticUtils.uudecode(layout);
             String xml = new String(bytes, "UTF-8");

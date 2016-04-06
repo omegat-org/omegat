@@ -41,6 +41,7 @@ import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -105,16 +106,18 @@ public class FilterMaster {
     private final Filters config;
 
     /** Classes of all filters. */
-    static List<Class<?>> filtersClasses;
+    static List<Class<?>> filtersClasses = Collections.emptyList();
 
     static {
         try {
             CONFIG_CTX = JAXBContext.newInstance(Filters.class);
-            filtersClasses = new ArrayList<Class<?>>();
-            filtersClasses.addAll((List<Class<?>>) PluginUtils.getFilterClasses());
         } catch (Exception ex) {
             throw new ExceptionInInitializerError(ex);
         }
+    }
+
+    public static void setFilterClasses(List<Class<?>> classes) {
+        filtersClasses = new ArrayList<>(classes);
     }
 
     /**

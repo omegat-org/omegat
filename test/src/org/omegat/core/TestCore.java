@@ -40,6 +40,7 @@ import org.omegat.core.data.NotLoadedProject;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.FileUtil;
+import org.omegat.util.Preferences;
 import org.omegat.util.RuntimePreferences;
 
 import com.vlsolutions.swing.docking.Dockable;
@@ -54,6 +55,7 @@ public abstract class TestCore extends XMLTestCase {
 
     protected void setUp() throws Exception {
         configDir = Files.createTempDirectory("omegat").toFile();
+        Preferences.init();
         RuntimePreferences.setConfigDir(configDir.getAbsolutePath());
 
         final IMainMenu mainMenu = new IMainMenu() {

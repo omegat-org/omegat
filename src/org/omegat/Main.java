@@ -63,6 +63,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.tagvalidation.ErrorReport;
+import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.scripting.ScriptItem;
@@ -71,6 +72,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
+import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StaticUtils;
@@ -178,8 +180,11 @@ public class Main {
 
         System.setProperty("http.user", OStrings.getDisplayNameAndVersion());
 
+        // Do migration and load various settings. The order is important!
         ConvertConfigs.convert();
         PluginUtils.loadPlugins(params);
+        FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
+        Preferences.init();
 
         int result;
         try {

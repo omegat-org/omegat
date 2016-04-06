@@ -614,7 +614,7 @@ public class Preferences {
         m_preferences.save();
     }
 
-    interface IPreferences {
+    public interface IPreferences {
 
         String getPreference(String key);
 
@@ -636,7 +636,11 @@ public class Preferences {
         void save();
     }
 
-    static {
+    public static synchronized void init() {
+        if (didInit) {
+            return;
+        }
+        didInit = true;
         File srxFile = new File(StaticUtils.getConfigDir(), SRX.CONF_SENTSEG);
         SRX srx = SRX.loadSRX(srxFile);
         if (srx == null) {
@@ -661,7 +665,8 @@ public class Preferences {
         m_preferences = new PreferencesImpl(new PreferencesXML(loadFile, saveFile));
     }
 
-    private static final IPreferences m_preferences;
+    private static boolean didInit = false;
+    private static IPreferences m_preferences;
     private static SRX m_srx;
     private static Filters m_filters;
 

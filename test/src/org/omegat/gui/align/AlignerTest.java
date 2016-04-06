@@ -35,7 +35,6 @@ import org.omegat.core.Core;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.master.TestFilterMasterInitializer;
 import org.omegat.filters2.text.TextFilter;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 import org.omegat.gui.align.Aligner.ComparisonMode;
@@ -47,7 +46,7 @@ public class AlignerTest extends TestCase {
 
     @Override
     protected void setUp() throws Exception {
-        TestFilterMasterInitializer.setFilterClasses(Arrays.asList(TextFilter.class, ResourceBundleFilter.class));
+        FilterMaster.setFilterClasses(Arrays.asList(TextFilter.class, ResourceBundleFilter.class));
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
         assertTrue(Core.getFilterMaster().isFileSupported(new File("blah.txt"), true));

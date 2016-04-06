@@ -36,6 +36,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JDialog;
@@ -164,8 +165,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
             optionsButton.setEnabled(false);
         } else {
             editButton.setEnabled(true);
-            int fIdx = filtersTable.getSelectedRow();
-            Filter currFilter = editableFilters.getFilters().get(fIdx);
+            Filter currFilter = getFilterAtRow(filtersTable.getSelectedRow());
             IFilter f = FilterMaster.getFilterInstance(currFilter.getClassName());
             optionsButton.setEnabled(f.hasOptions());
         }
@@ -414,8 +414,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
     }//GEN-LAST:event_cbIgnoreFileContextActionPerformed
 
     private void optionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsButtonActionPerformed
-        int fIdx = filtersTable.getSelectedRow();
-        Filter currFilter = editableFilters.getFilters().get(fIdx);
+        Filter currFilter = getFilterAtRow(filtersTable.getSelectedRow());
         IFilter f = FilterMaster.getFilterInstance(currFilter.getClassName());
 
         // new options handling
@@ -439,13 +438,12 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void doEdit(int row) {
-        if (row < 0 || row >= editableFilters.getFilters().size()) {
-            return;
-        }
-        FilterEditor editor = new FilterEditor(this, editableFilters.getFilters().get(row));
+        Filter filter = getFilterAtRow(row);
+        FilterEditor editor = new FilterEditor(this, filter);
         editor.setVisible(true);
         if (editor.result != null) {
-            editableFilters.getFilters().set(row, editor.result);
+            List<Filter> filters = editableFilters.getFilters();
+            filters.set(filters.indexOf(filter), editor.result);
         }
     }
 
@@ -471,6 +469,10 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         }
         setVisible(false);
         dispose();
+    }
+
+    private Filter getFilterAtRow(int row) {
+        return ((FiltersTableModel) filtersTable.getModel()).getFilterAtRow(row);
     }
 
     private class FilterFormatCellRenderer extends DefaultTableCellRenderer {

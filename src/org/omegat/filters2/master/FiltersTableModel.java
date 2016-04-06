@@ -132,4 +132,8 @@ public class FiltersTableModel extends AbstractTableModel {
         }
         return false;
     }
+
+    public Filter getFilterAtRow(int row) {
+        return filters.get(row);
+    }
 }

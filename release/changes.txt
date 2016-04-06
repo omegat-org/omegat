@@ -122,7 +122,7 @@ bug comments for instructions on adding the certificate to the trust store.
 ----------------------------------------------------------------------
    1 Enhancement
    0 Bug fix
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 3.5.4 update 1 vs 3.5.4
 
@@ -130,6 +130,10 @@ bug comments for instructions on adding the certificate to the trust store.
 
   - The Windows setup program can now be launched in any of the 
 supported languages, regardless of the languages installed in Windows
+
+  Localisation Updates:
+
+  - Italian localisation updated to 3.5.4 (UI, documentation, scripts)
 
 ----------------------------------------------------------------------
  OmegaT 3.5.4 (2016-03-23)

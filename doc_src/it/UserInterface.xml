@@ -617,7 +617,11 @@
           <primary>Finestre e pannelli in OmegaT</primary> <secondary>File del progetto</secondary>
         </indexterm></title>
 
-      <para>La finestra “File del progetto” visualizza l'elenco dei file del progetto, con indicazione di altre informazioni relative al progetto stesso. Questa finestra viene aperta automaticamente ogni volta che OmegaT carica un progetto. Utilizzare <guimenuitem>Ctrl+L<indexterm class="singular">
+      <para>La finestra “File del progetto” visualizza l'elenco dei file del progetto, con indicazione di altre informazioni relative al progetto stesso. Questa finestra viene aperta automaticamente ogni volta che OmegaT carica un progetto.</para>
+
+      <para><remark>Nota:</remark> è possibile inibire la visualizzazione della finestra File del progetto impostando il comando <emphasis>project_files_show_on_load</emphasis> a <emphasis>false</emphasis> nel file <filename>omegat.prefs</filename> (raggiungibile dal menu Opzioni / Accedi alla cartella di configurazione).</para>
+
+      <para>Utilizzare <guimenuitem>Ctrl+L<indexterm class="singular">
           <primary>Scorciatoie</primary> <secondary>Elenco dei file del progetto - Ctrl+L</secondary>
         </indexterm></guimenuitem> per aprirla ed <keycap>Esc</keycap> per chiuderla. La finestra “File del progetto” visualizza le seguenti informazioni:</para>
 
@@ -627,13 +631,11 @@
         </listitem>
 
         <listitem>
-          <para>l'elenco di tutti i file da tradurre che compongono il progetto. Quando si fa clic su uno dei file, questo verrà aperto e su di esso si potrà immediatamente iniziare a lavorare. Nota: i nomi dei file (nella prima colonna) si possono ordinare alfabeticamente premendo l'intestazione di colonna. È anche possibile modificare la posizione di un nome di file, facendovi clic sopra e premendo i pulsanti <emphasis>Sposta...</emphasis>.</para>
-        </listitem>
-      </itemizedlist>
+          <para>l'elenco di tutti i file da tradurre che compongono il progetto. Quando si fa clic su uno dei file, questo verrà aperto e su di esso si potrà immediatamente iniziare a lavorare.</para>
 
-      <itemizedlist>
-        <listitem>
-          <para>il file attivo disponibile nella finestra dell'Editor viene evidenziato con uno sfondo azzurro. Premere <keycap>Invio</keycap> per spostare il pannello dell'Editor all'inizio del file selezionato</para>
+          <para>Digitando del testo si aprirà un filtro in cui potranno essere immesse parti del nome dei file. È possibile selezionare un file tramite i tasti freccia <keycap>Su</keycap> e <keycap>Giù</keycap> e aprirlo per lavorarlo premendo <keycap>Invio</keycap></para>
+
+          <para>Nota: i nomi dei file (nella prima colonna) si possono ordinare alfabeticamente premendo l'intestazione di colonna. È anche possibile modificare la posizione di un nome di file, facendovi clic sopra e premendo i pulsanti <emphasis>Sposta...</emphasis>.</para>
         </listitem>
       </itemizedlist>
 

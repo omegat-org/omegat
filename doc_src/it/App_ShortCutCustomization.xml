@@ -60,7 +60,7 @@
 
     <para><code>projectOpenMenuItem=shift ctrl O</code>.</para>
 
-    <para>Se si possiede un Mac e si vuole aggiungere una scorciatoia <keycombo> <keycap>Shift</keycap> <keycap>Command</keycap> <keycap>S</keycap> </keycombo> a <menuchoice> <guimenu>Strumenti</guimenu> <guimenuitem>Statistiche</guimenuitem> </menuchoice>, aggiungere la seguente riga al file <filename>MainMenuShortcuts.properties</filename>:<code/></para>
+    <para>Se si possiede un Mac e si vuole aggiungere una scorciatoia <keycombo> <keycap>Shift (Maiusc) </keycap> <keycap>Command</keycap> <keycap>S</keycap> </keycombo> a <menuchoice> <guimenu>Strumenti</guimenu> <guimenuitem>Statistiche</guimenuitem> </menuchoice>, aggiungere la seguente riga al file <filename>MainMenuShortcuts.properties</filename>:<code/></para>
 
     <para><code> toolsShowStatisticsStandardMenuItem=shift meta
     S</code></para>
@@ -261,7 +261,7 @@
           <row><entry>Segmentazione...</entry><entry/><entry>optionsSentsegMenuItem</entry></row>
           <row><entry>Correzione ortografica...</entry><entry/><entry>optionsSpellCheckMenuItem</entry></row>
           <row><entry>Comportamento di modifica...</entry><entry/><entry>optionsWorkflowMenuItem</entry></row>
-          <row><entry>Convalida dei tag...</entry><entry/><entry>optionsTagValidationMenuItem</entry></row>
+          <row><entry>Elaborazione dei tag...</entry><entry/><entry>optionsTagValidationMenuItem<para>[vbdx: le chgt de nom a-t-il impact sur le code ?]</para></entry></row>
           <row><entry>Squadra...</entry><entry/><entry>optionsTeamMenuItem</entry></row>
           <row><entry>TMX esterne...</entry><entry/><entry>optionsExtTMXMenuItem</entry></row>
           <row><entry>Vista...</entry><entry/><entry>optionsViewOptionsMenuItem</entry></row>

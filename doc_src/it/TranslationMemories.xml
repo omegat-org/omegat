@@ -89,6 +89,8 @@
 
           <listitem>
             <para>Se si è certi che una TMX è più accurata del file <filename>project_save.tmx</filename> di OmegaT, inserire questa TMX nella cartella /tm/enforce per sovrascrivere in modo categorico le traduzioni predefinite esistenti.</para>
+
+            <para>La sovrascrittura è operativa fino a quando la TMX rimane nella cartella /tm/enforce.</para>
           </listitem>
         </varlistentry>
 

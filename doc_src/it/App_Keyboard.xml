@@ -139,7 +139,7 @@
         <row>
           <entry><emphasis role="bold">Ctrl+Barra spaziatrice</emphasis></entry>
 
-          <entry>apre una finestra di dialogo con i suggerimenti di contesto (Mac: <emphasis role="bold">Esc</emphasis>). Usare <emphasis role="bold">Ctrl+PgSu/PgGiù</emphasis> (Cmd+PgSu/PgGiù su Mac) per passare in modo sequenziale alle <emphasis>voci di glossario</emphasis>, le <emphasis>voci del testo automatico</emphasis>, i <emphasis>tag mancanti</emphasis> e le opzioni della <emphasis>tabella caratteri</emphasis>.</entry>
+          <entry>apre la finestra di dialogo del completamento automatico con i suggerimenti di contesto (Mac: <emphasis role="bold">Esc</emphasis>). Una volta che la finestra è aperta, premere di nuovo <emphasis role="bold">Ctrl+Barra spaziatrice</emphasis> per alternare le opzioni <emphasis>Voci di glossario</emphasis>, <emphasis>Voci di testo automatico,</emphasis> <emphasis>Tag mancanti</emphasis> e <emphasis>Tabella caratteri</emphasis> options.</entry>
         </row>
       </tbody>
     </tgroup>

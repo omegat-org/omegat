@@ -45,7 +45,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableColumn;
 
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
@@ -110,26 +109,13 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         filtersTable.getSelectionModel().addListSelectionListener(this);
         filtersTable.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent me) {
-                if (isLeftDoubleClick(me) && isClickOnFileFormatColumn(me)) {
-                    editButtonActionPerformed(null);
+            public void mouseClicked(MouseEvent me) {
+                if (me.getClickCount() == 2 && me.getButton() == MouseEvent.BUTTON1) {
+                    doEdit(filtersTable.rowAtPoint(me.getPoint()));
                 }
             }
-
-            private boolean isLeftDoubleClick(MouseEvent me) {
-                return me.getClickCount() == 2
-                        && me.getButton() == MouseEvent.BUTTON1;
-            }
-
-            private boolean isClickOnFileFormatColumn(MouseEvent me) {
-                int viewColumnIndex = filtersTable.columnAtPoint(me.getPoint());
-                int modelColumnIndex = filtersTable.convertColumnIndexToModel(viewColumnIndex);
-                return modelColumnIndex == FiltersTableModel.COLUMN.FILTERS_FILE_FORMAT.index;
-            }
         });
-        String columnName = FiltersTableModel.COLUMN.FILTERS_FILE_FORMAT.getColumnName();
-        TableColumn column = filtersTable.getColumn(columnName);
-        column.setCellRenderer(new FilterFormatCellRenderer());
+        filtersTable.setDefaultRenderer(String.class, new FilterFormatCellRenderer());
         
         TableColumnSizer.autoSize(filtersTable, 0, true);
 
@@ -449,8 +435,11 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
     }//GEN-LAST:event_toDefaultsButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        int row = filtersTable.getSelectedRow();
-        if (row < 0) {
+        doEdit(filtersTable.getSelectedRow());
+    }//GEN-LAST:event_editButtonActionPerformed
+
+    private void doEdit(int row) {
+        if (row < 0 || row >= editableFilters.getFilters().size()) {
             return;
         }
         FilterEditor editor = new FilterEditor(this, editableFilters.getFilters().get(row));
@@ -458,7 +447,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         if (editor.result != null) {
             editableFilters.getFilters().set(row, editor.result);
         }
-    }//GEN-LAST:event_editButtonActionPerformed
+    }
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         doClose(RET_OK);

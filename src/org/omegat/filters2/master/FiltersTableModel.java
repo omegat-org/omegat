@@ -26,9 +26,6 @@
 
 package org.omegat.filters2.master;
 
-import gen.core.filters.Filter;
-import gen.core.filters.Filters;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +36,9 @@ import javax.swing.table.AbstractTableModel;
 import org.omegat.filters2.IFilter;
 import org.omegat.util.OStrings;
 
+import gen.core.filters.Filter;
+import gen.core.filters.Filters;
+
 /**
  * Wrapper around all the file filter classes. Is a JavaBean, so that it's easy
  * to write/read it to/from XML file and provides a table model.
@@ -48,27 +48,6 @@ import org.omegat.util.OStrings;
  */
 @SuppressWarnings("serial")
 public class FiltersTableModel extends AbstractTableModel {
-
-    public enum COLUMN {
-
-        FILTERS_FILE_FORMAT (0),
-        FILTERS_ON          (1);
-
-        public final int index;
-
-        private COLUMN(int index) {
-            this.index = index;
-        }
-
-        /**
-         * Returns a name for the column. This is a cover method that 
-         * delegates to the method of the same name in <code>FiltersTableModel</code>.
-         * @return a string containing the name of <code>column</code>
-         */
-        public String getColumnName() {
-            return OStrings.getString(name());
-        }
-    }
 
     private final List<Filter> filters;
     
@@ -85,19 +64,7 @@ public class FiltersTableModel extends AbstractTableModel {
                 filterNames.put(f.getClassName(), fi.getFileFormatName());
             }
         }
-        /*Collections.sort(filters, new Comparator<Filter>() {
-            @Override
-            public int compare(Filter o1, Filter o2) {
-                String s1 = filterNames.get(o1.getClassName());
-                String s2 = filterNames.get(o2.getClassName());
-                return s1.compareToIgnoreCase(s2);
-            }
-        });*/
     }
-
-    // ////////////////////////////////////////////////////////////////////////
-    // TableModel implementation
-    // ////////////////////////////////////////////////////////////////////////
 
     @Override
     public int getColumnCount() {

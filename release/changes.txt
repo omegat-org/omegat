@@ -2,7 +2,7 @@
  OmegaT 4.0.0
 ----------------------------------------------------------------------
  16 Enhancements
-  1 Bug fix
+  2 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 4.0.0 vs 3.6.0
@@ -60,6 +60,9 @@
 
   - Ctrl+click does not activate context menu on OS X 
   https://sourceforge.net/p/omegat/bugs/805/
+
+  - When the list of filters was changed, an entry could lead
+to the wrong filter
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 1

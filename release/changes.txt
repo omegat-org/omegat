@@ -2,7 +2,7 @@
  OmegaT 3.6.0 update 1
 ----------------------------------------------------------------------
   2 Enhancements
-  0 Bug fix
+  1 Bug fix
   0 Localisation update
 ----------------------------------------------------------------------
 3.6.0 update 1 vs 3.6.0
@@ -14,6 +14,10 @@
 
   - Add Insert Unicode Control Character menu and right-click menu
   https://sourceforge.net/p/omegat/feature-requests/1222/
+
+  Bug fixes:
+
+  - The Okapi Filters Plugin for OmegaT could crash
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 (2016-03-09)

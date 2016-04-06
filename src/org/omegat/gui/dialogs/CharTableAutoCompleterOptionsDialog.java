@@ -44,12 +44,10 @@ import org.omegat.util.gui.StaticUIUtils;
 @SuppressWarnings("serial")
 public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
 
-    CharTableModel allCharModel = new CharTableModel(null);
+    private CharTableModel allCharModel = new CharTableModel(null);
     
-    CharTableModel selCharModel = new CharTableModel("");
-    
-    StringBuilder builder = new StringBuilder();
-    
+    private CharTableModel selCharModel = new CharTableModel("");
+
     /**
      * Creates new form CharTableAutoCompleterDialog
      */
@@ -63,31 +61,16 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
         allCharTable.setModel(allCharModel);
         selCharTable.setModel(selCharModel);
         
-        selectedCharsCheckBox.setSelected(
-                Preferences.isPreference(Preferences.AC_CHARTABLE_USE_CUSTOM_CHARS));
-        uniqueCheckBox.setSelected(Preferences.isPreference(
-                Preferences.AC_CHARTABLE_UNIQUE_CUSTOM_CHARS));
-        selCharModel.setData(Preferences.getPreference(
-                Preferences.AC_CHARTABLE_CUSTOM_CHAR_STRING));
+        selectedCharsCheckBox.setSelected(Preferences.isPreference(Preferences.AC_CHARTABLE_USE_CUSTOM_CHARS));
+        uniqueCheckBox.setSelected(Preferences.isPreference(Preferences.AC_CHARTABLE_UNIQUE_CUSTOM_CHARS));
+        selCharModel.setData(Preferences.getPreference(Preferences.AC_CHARTABLE_CUSTOM_CHAR_STRING));
+        enabledCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.AC_CHARTABLE_ENABLED, true));
         
-        panelSetEnabled(selectedCharsCheckBox.isSelected());
-        
+        enabledCheckBoxActionPerformed(null);
+
         setPreferredSize(new Dimension(400, 500));
         pack();
         setLocationRelativeTo(parent);
-    }
-    
-    private void panelSetEnabled(boolean enabled) {
-        customPanel.setEnabled(enabled);
-        descriptionTextArea.setEnabled(enabled);
-        allCharLabel.setEnabled(enabled);
-        allCharTable.setEnabled(enabled);
-        if (!enabled) {
-            allCharTable.clearSelection();
-        }
-        selCharLabel.setEnabled(enabled);
-        selCharTable.setEnabled(enabled);
-        uniqueCheckBox.setEnabled(enabled);
     }
 
     /**
@@ -99,6 +82,8 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        enabledCheckBox = new javax.swing.JCheckBox();
         selectedCharsCheckBox = new javax.swing.JCheckBox();
         customPanel = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -126,13 +111,25 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
         jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         jPanel3.setLayout(new java.awt.BorderLayout());
 
-        selectedCharsCheckBox.setText(OStrings.getString("AC_CHARTABLE_CUSTOM")); // NOI18N
-        selectedCharsCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                selectedCharsCheckBoxStateChanged(evt);
+        jPanel9.setLayout(new java.awt.GridLayout(2, 0));
+
+        enabledCheckBox.setText(OStrings.getString("AC_CHARTABLE_ENABLED")); // NOI18N
+        enabledCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enabledCheckBoxActionPerformed(evt);
             }
         });
-        jPanel3.add(selectedCharsCheckBox, java.awt.BorderLayout.NORTH);
+        jPanel9.add(enabledCheckBox);
+
+        selectedCharsCheckBox.setText(OStrings.getString("AC_CHARTABLE_CUSTOM")); // NOI18N
+        selectedCharsCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectedCharsCheckBoxActionPerformed(evt);
+            }
+        });
+        jPanel9.add(selectedCharsCheckBox);
+
+        jPanel3.add(jPanel9, java.awt.BorderLayout.NORTH);
 
         customPanel.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(5, 0, 0, 0), javax.swing.BorderFactory.createEtchedBorder()));
         customPanel.setLayout(new java.awt.BorderLayout());
@@ -228,9 +225,9 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
         jPanel4.add(clearButton, java.awt.BorderLayout.EAST);
 
         uniqueCheckBox.setText(OStrings.getString("AC_CHARTABLE_CUSTOM_UNIQUE")); // NOI18N
-        uniqueCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                uniqueCheckBoxStateChanged(evt);
+        uniqueCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uniqueCheckBoxActionPerformed(evt);
             }
         });
         jPanel4.add(uniqueCheckBox, java.awt.BorderLayout.WEST);
@@ -279,40 +276,27 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
     private void selCharTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_selCharTableKeyReleased
         if (evt.getKeyCode() == KeyEvent.VK_DELETE || 
                 evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-            if (selCharTable.getSelectedColumnCount() < 1) 
+            if (selCharTable.getSelectedColumnCount() < 1) {
                 return;
-            
+            }
             int row1 = selCharTable.getSelectedRow();
             int col1 = selCharTable.getSelectedColumn();
-            int row2 = selCharTable.getSelectedRowCount()+row1-1;
-            int col2 = selCharTable.getSelectedColumnCount()+col1-1;
-            
+            int row2 = selCharTable.getSelectedRowCount() + row1 - 1;
+            int col2 = selCharTable.getSelectedColumnCount() + col1 - 1;
+
             selCharModel.removeSelection(row1, col1, row2, col2);
         }
     }//GEN-LAST:event_selCharTableKeyReleased
 
-    private void uniqueCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_uniqueCheckBoxStateChanged
-        if (uniqueCheckBox.isSelected()) {
-            selCharModel.allowOnlyUnique();
-        }
-    }//GEN-LAST:event_uniqueCheckBoxStateChanged
-
-    private void selectedCharsCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_selectedCharsCheckBoxStateChanged
-        panelSetEnabled(selectedCharsCheckBox.isSelected());
-    }//GEN-LAST:event_selectedCharsCheckBoxStateChanged
-
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        Preferences.setPreference(Preferences.AC_CHARTABLE_USE_CUSTOM_CHARS,
-                selectedCharsCheckBox.isSelected());
+        Preferences.setPreference(Preferences.AC_CHARTABLE_USE_CUSTOM_CHARS, selectedCharsCheckBox.isSelected());
         String customCharString = selCharModel.getData();
-        Preferences.setPreference(Preferences.AC_CHARTABLE_CUSTOM_CHAR_STRING, 
-            customCharString);
+        Preferences.setPreference(Preferences.AC_CHARTABLE_CUSTOM_CHAR_STRING, customCharString);
         if (customCharString.isEmpty()) {
-            Preferences.setPreference(Preferences.AC_CHARTABLE_USE_CUSTOM_CHARS,
-                    false);
+            Preferences.setPreference(Preferences.AC_CHARTABLE_USE_CUSTOM_CHARS, false);
         }
-        Preferences.setPreference(Preferences.AC_CHARTABLE_UNIQUE_CUSTOM_CHARS,
-                uniqueCheckBox.isSelected());
+        Preferences.setPreference(Preferences.AC_CHARTABLE_UNIQUE_CUSTOM_CHARS, uniqueCheckBox.isSelected());
+        Preferences.setPreference(Preferences.AC_CHARTABLE_ENABLED, enabledCheckBox.isSelected());
         doClose();
     }//GEN-LAST:event_okButtonActionPerformed
 
@@ -334,6 +318,21 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
         selCharModel.setData("");
     }//GEN-LAST:event_clearButtonActionPerformed
 
+    private void enabledCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enabledCheckBoxActionPerformed
+        StaticUIUtils.setHierarchyEnabled(customPanel, enabledCheckBox.isSelected() && selectedCharsCheckBox.isSelected());
+        selectedCharsCheckBox.setEnabled(enabledCheckBox.isSelected());
+    }//GEN-LAST:event_enabledCheckBoxActionPerformed
+
+    private void selectedCharsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectedCharsCheckBoxActionPerformed
+        StaticUIUtils.setHierarchyEnabled(customPanel, selectedCharsCheckBox.isSelected());
+    }//GEN-LAST:event_selectedCharsCheckBoxActionPerformed
+
+    private void uniqueCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uniqueCheckBoxActionPerformed
+        if (uniqueCheckBox.isSelected()) {
+            selCharModel.allowOnlyUnique();
+        }
+    }//GEN-LAST:event_uniqueCheckBoxActionPerformed
+
     private void doClose() {
         setVisible(false);
         dispose();
@@ -346,6 +345,7 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
     private javax.swing.JButton clearButton;
     private javax.swing.JPanel customPanel;
     private javax.swing.JTextArea descriptionTextArea;
+    private javax.swing.JCheckBox enabledCheckBox;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -354,6 +354,7 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton okButton;

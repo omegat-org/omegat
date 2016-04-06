@@ -249,4 +249,23 @@ public class StaticUIUtils {
         }
         return width;
     }
+
+    /**
+     * Toggle the enabled property of an entire hierarchy of components.
+     * 
+     * @param parent
+     *            The parent component, which will also be toggled
+     * @param isEnabled
+     *            Enabled or not
+     */
+    public static void setHierarchyEnabled(JComponent parent, boolean isEnabled) {
+        parent.setEnabled(isEnabled);
+        for (Component child : parent.getComponents()) {
+            if (child instanceof JComponent) {
+                setHierarchyEnabled((JComponent) child, isEnabled);
+            } else {
+                child.setEnabled(isEnabled);
+            }
+        }
+    }
 }

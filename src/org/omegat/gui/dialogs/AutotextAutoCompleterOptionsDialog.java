@@ -78,6 +78,9 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
         sortAlphabeticallyCheckBox.setSelected(Preferences.isPreference(Preferences.AC_AUTOTEXT_SORT_ALPHABETICALLY));
         sortFullTextCheckBox.setSelected(Preferences.isPreference(Preferences.AC_AUTOTEXT_SORT_FULL_TEXT));
         sortFullTextCheckBox.setEnabled(sortAlphabeticallyCheckBox.isSelected());
+        enabledCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.AC_AUTOTEXT_ENABLED, true));
+        
+        enabledCheckBoxActionPerformed(null);
         
         fc.setDialogType(JFileChooser.FILES_ONLY);
         FileFilter filter = new FileNameExtensionFilter(OStrings.getString("AC_AUTOTEXT_FILE"), "autotext");
@@ -104,12 +107,14 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        enabledCheckBox = new javax.swing.JCheckBox();
+        displayPanel = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         sortByLengthCheckBox = new javax.swing.JCheckBox();
         sortAlphabeticallyCheckBox = new javax.swing.JCheckBox();
         sortFullTextCheckBox = new javax.swing.JCheckBox();
-        jPanel2 = new javax.swing.JPanel();
+        entriesPanel = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         entryTable = new JTable() {
@@ -151,10 +156,23 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
         setTitle(OStrings.getString("AC_AUTOTEXT_OPTIONS_TITLE")); // NOI18N
 
         jPanel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel6.setLayout(new java.awt.BorderLayout());
+        jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.PAGE_AXIS));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("AC_AUTOTEXT_DISPLAY_PANEL"))); // NOI18N
-        jPanel3.setLayout(new java.awt.BorderLayout());
+        jPanel11.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 5, 0));
+        jPanel11.setLayout(new java.awt.BorderLayout());
+
+        enabledCheckBox.setText(OStrings.getString("AC_AUTOTEXT_ENABLED")); // NOI18N
+        enabledCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enabledCheckBoxActionPerformed(evt);
+            }
+        });
+        jPanel11.add(enabledCheckBox, java.awt.BorderLayout.CENTER);
+
+        jPanel6.add(jPanel11);
+
+        displayPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("AC_AUTOTEXT_DISPLAY_PANEL"))); // NOI18N
+        displayPanel.setLayout(new java.awt.BorderLayout());
 
         jPanel9.setLayout(new java.awt.GridBagLayout());
 
@@ -187,12 +205,12 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 25, 5, 0);
         jPanel9.add(sortFullTextCheckBox, gridBagConstraints);
 
-        jPanel3.add(jPanel9, java.awt.BorderLayout.WEST);
+        displayPanel.add(jPanel9, java.awt.BorderLayout.WEST);
 
-        jPanel6.add(jPanel3, java.awt.BorderLayout.NORTH);
+        jPanel6.add(displayPanel);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("AC_AUTOTEXT_ENTRIES_PANEL"))); // NOI18N
-        jPanel2.setLayout(new java.awt.BorderLayout());
+        entriesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("AC_AUTOTEXT_ENTRIES_PANEL"))); // NOI18N
+        entriesPanel.setLayout(new java.awt.BorderLayout());
 
         jPanel8.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 0));
         jPanel8.setLayout(new java.awt.BorderLayout());
@@ -280,9 +298,9 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
 
         jPanel8.add(jPanel10, java.awt.BorderLayout.EAST);
 
-        jPanel2.add(jPanel8, java.awt.BorderLayout.CENTER);
+        entriesPanel.add(jPanel8, java.awt.BorderLayout.CENTER);
 
-        jPanel6.add(jPanel2, java.awt.BorderLayout.CENTER);
+        jPanel6.add(entriesPanel);
 
         getContentPane().add(jPanel6, java.awt.BorderLayout.CENTER);
 
@@ -332,7 +350,7 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, OStrings.getString("AC_AUTOTEXT_UNABLE_TO_SAVE"));
             }
         }
-    }//GEN-LAST:event_saveButtonActionPerformed
+    }                                          
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         doClose(RET_CANCEL);
@@ -355,6 +373,7 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
         Preferences.setPreference(Preferences.AC_AUTOTEXT_SORT_BY_LENGTH, sortByLengthCheckBox.isSelected());
         Preferences.setPreference(Preferences.AC_AUTOTEXT_SORT_ALPHABETICALLY, sortAlphabeticallyCheckBox.isSelected());
         Preferences.setPreference(Preferences.AC_AUTOTEXT_SORT_FULL_TEXT, sortFullTextCheckBox.isSelected());
+        Preferences.setPreference(Preferences.AC_AUTOTEXT_ENABLED, enabledCheckBox.isSelected());
         doClose(RET_OK);
     }//GEN-LAST:event_okButtonActionPerformed
 
@@ -377,6 +396,11 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_removeEntryButtonActionPerformed
 
+    private void enabledCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enabledCheckBoxActionPerformed
+        StaticUIUtils.setHierarchyEnabled(displayPanel, enabledCheckBox.isSelected());
+        StaticUIUtils.setHierarchyEnabled(entriesPanel, enabledCheckBox.isSelected());
+    }//GEN-LAST:event_enabledCheckBoxActionPerformed
+
     private void doClose(int retStatus) {
         returnStatus = retStatus;
         setVisible(false);
@@ -386,14 +410,16 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addNewRowButton;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JPanel displayPanel;
+    private javax.swing.JCheckBox enabledCheckBox;
+    private javax.swing.JPanel entriesPanel;
     private javax.swing.JTable entryTable;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;

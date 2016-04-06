@@ -89,4 +89,9 @@ public class CharTableAutoCompleterView extends AutoCompleterTableView {
     public boolean shouldPopUp() {
         return false;
     }
+
+    @Override
+    protected boolean isEnabled() {
+        return Preferences.isPreferenceDefault(Preferences.AC_CHARTABLE_ENABLED, true);
+    }
 }

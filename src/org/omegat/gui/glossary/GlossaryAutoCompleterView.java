@@ -242,4 +242,9 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
             return false;
         }
     }
+
+    @Override
+    protected boolean isEnabled() {
+        return Preferences.isPreferenceDefault(Preferences.AC_GLOSSARY_ENABLED, true);
+    }
 }

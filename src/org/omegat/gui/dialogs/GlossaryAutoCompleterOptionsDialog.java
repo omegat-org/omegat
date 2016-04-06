@@ -59,6 +59,10 @@ public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
         sortBySourceCheckBox.setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_BY_SOURCE));
         longerFirstCheckBox.setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_BY_LENGTH));
         sortEntriesCheckBox.setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_ALPHABETICALLY));
+        enabledCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.AC_GLOSSARY_ENABLED, true));
+
+        enabledCheckBoxActionPerformed(null);
+
         setLocationRelativeTo(parent);
     }
 
@@ -72,7 +76,9 @@ public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
         java.awt.GridBagConstraints gridBagConstraints;
 
         sourceButtonGroup = new javax.swing.ButtonGroup();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        enabledCheckBox = new javax.swing.JCheckBox();
+        optionsPanel = new javax.swing.JPanel();
         displaySourceCheckBox = new javax.swing.JCheckBox();
         sourceFirstRadioButton = new javax.swing.JRadioButton();
         targetFirstRadioButton = new javax.swing.JRadioButton();
@@ -88,8 +94,21 @@ public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(OStrings.getString("AC_OPTIONS_GLOSSARY_FRAME")); // NOI18N
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 0, 10));
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
+        enabledCheckBox.setText(OStrings.getString("AC_GLOSSARY_ENABLED")); // NOI18N
+        enabledCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enabledCheckBoxActionPerformed(evt);
+            }
+        });
+        jPanel5.add(enabledCheckBox, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel5, java.awt.BorderLayout.NORTH);
+
+        optionsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        optionsPanel.setLayout(new java.awt.GridBagLayout());
 
         displaySourceCheckBox.setText(OStrings.getString("AC_OPTIONS_DISPLAY_SOURCE")); // NOI18N
         displaySourceCheckBox.setToolTipText(OStrings.getString("AC_OPTIONS_DISPLAY_SOURCE_TOOLTIP")); // NOI18N
@@ -103,7 +122,7 @@ public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel2.add(displaySourceCheckBox, gridBagConstraints);
+        optionsPanel.add(displaySourceCheckBox, gridBagConstraints);
 
         sourceButtonGroup.add(sourceFirstRadioButton);
         sourceFirstRadioButton.setText(OStrings.getString("AC_OPTIONS_SOURCE_FIRST")); // NOI18N
@@ -114,7 +133,7 @@ public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 0);
-        jPanel2.add(sourceFirstRadioButton, gridBagConstraints);
+        optionsPanel.add(sourceFirstRadioButton, gridBagConstraints);
 
         sourceButtonGroup.add(targetFirstRadioButton);
         targetFirstRadioButton.setText(OStrings.getString("AC_OPTIONS_TARGET_FIRST")); // NOI18N
@@ -124,7 +143,7 @@ public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel2.add(targetFirstRadioButton, gridBagConstraints);
+        optionsPanel.add(targetFirstRadioButton, gridBagConstraints);
 
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
         sortBySourceCheckBox.setText(bundle.getString("AC_OPTIONS_SORT_SOURCE_ALPHABETICALLY")); // NOI18N
@@ -134,7 +153,7 @@ public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 0);
-        jPanel2.add(sortBySourceCheckBox, gridBagConstraints);
+        optionsPanel.add(sortBySourceCheckBox, gridBagConstraints);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("AC_GLOSSARY_TARGET_PANEL"))); // NOI18N
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
@@ -153,9 +172,9 @@ public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        jPanel2.add(jPanel1, gridBagConstraints);
+        optionsPanel.add(jPanel1, gridBagConstraints);
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+        getContentPane().add(optionsPanel, java.awt.BorderLayout.CENTER);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
         jPanel4.setLayout(new java.awt.BorderLayout());
@@ -212,18 +231,25 @@ public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
         }
         Preferences.setPreference(Preferences.AC_GLOSSARY_SORT_BY_LENGTH, longerFirstCheckBox.isSelected());
         Preferences.setPreference(Preferences.AC_GLOSSARY_SORT_ALPHABETICALLY, sortEntriesCheckBox.isSelected());
+        Preferences.setPreference(Preferences.AC_GLOSSARY_ENABLED, enabledCheckBox.isSelected());
         doClose();
     }//GEN-LAST:event_okButtonActionPerformed
+
+    private void enabledCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enabledCheckBoxActionPerformed
+        StaticUIUtils.setHierarchyEnabled(optionsPanel, enabledCheckBox.isSelected());
+    }//GEN-LAST:event_enabledCheckBoxActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JCheckBox displaySourceCheckBox;
+    private javax.swing.JCheckBox enabledCheckBox;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JCheckBox longerFirstCheckBox;
     private javax.swing.JButton okButton;
+    private javax.swing.JPanel optionsPanel;
     private javax.swing.JCheckBox sortBySourceCheckBox;
     private javax.swing.JCheckBox sortEntriesCheckBox;
     private javax.swing.ButtonGroup sourceButtonGroup;

@@ -121,4 +121,9 @@ public class AutotextAutoCompleterView extends AutoCompleterListView {
     public ITokenizer getTokenizer() {
         return new DefaultTokenizer();
     }
+
+    @Override
+    protected boolean isEnabled() {
+        return Preferences.isPreferenceDefault(Preferences.AC_AUTOTEXT_ENABLED, true);
+    }
 }

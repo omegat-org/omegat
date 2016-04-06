@@ -103,7 +103,7 @@ public class ScriptingWindow extends JFrame {
 
     public static final int SCRIPT_EDITOR_MIN_FONT_SIZE = 13;
 
-    static ScriptingWindow window;
+    private static ScriptingWindow window;
 
     public static void loadPlugins() {
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {

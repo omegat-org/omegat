@@ -84,7 +84,7 @@ public class DictionaryInstallerDialog extends JDialog {
         dictionaryList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
+                if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
                     installButtonActionPerformed(null);
                 }
             }

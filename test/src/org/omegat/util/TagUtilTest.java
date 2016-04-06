@@ -49,6 +49,8 @@ public class TagUtilTest extends TestCase {
      * Test of buildTagList method, of class org.omegat.util.StaticUtils.
      */
     public void testBuildTagList() {
+        Preferences.init();
+
         String str = "Tag <test> case <b0>one</b0>.<b1>";
         List<ProtectedPart> pps = TagUtil.applyCustomProtectedParts(str, PatternConsts.OMEGAT_TAG, null);
         List<Tag> tagList = TagUtil.buildTagList(str, new SourceTextEntry(null, 0, null, null, pps).getProtectedParts());

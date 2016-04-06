@@ -29,12 +29,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
-import junit.framework.TestCase;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.tokenizer.DefaultTokenizer;
+import org.omegat.util.Preferences;
+
+import junit.framework.TestCase;
 
 /**
  * Tests for RealProject classs.
@@ -49,6 +50,7 @@ public class RealProjectTest extends TestCase {
     @Before
     public void setUp() throws Exception {
         Core.initializeConsole(new TreeMap<String, String>());
+        Preferences.init();
     }
 
     /**

@@ -28,14 +28,14 @@ package org.omegat.core.tagvalidation;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.tagvalidation.ErrorReport.TagError;
 import org.omegat.util.Preferences;
 import org.omegat.util.TagUtil.Tag;
+
+import junit.framework.TestCase;
 
 /**
  * @author Aaron Madlon-Kay
@@ -161,6 +161,7 @@ public class TagValidationTest extends TestCase {
     }
     
     public void testRemovePattern() {
+        Preferences.init();
         Preferences.setPreference(Preferences.CHECK_REMOVE_PATTERN, "foo");
         
         // No error

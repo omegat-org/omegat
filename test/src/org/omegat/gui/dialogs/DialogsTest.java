@@ -28,6 +28,7 @@ package org.omegat.gui.dialogs;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.HeadlessException;
+import java.io.File;
 import java.nio.file.Files;
 import java.util.Locale;
 
@@ -184,11 +185,14 @@ public class DialogsTest extends TestCore {
     }
 
     public void testProjectPropertiesDialog() throws Exception {
+        File dir = Files.createTempDirectory("omegat").toFile();
         try {
-            new ProjectPropertiesDialog(new ProjectProperties(Files.createTempDirectory("omegat").toFile()),
+            new ProjectPropertiesDialog(new ProjectProperties(dir),
                     "project", Mode.NEW_PROJECT);
         } catch (HeadlessException ignore) {
             // Can't do this test when headless
+        } finally {
+            assertTrue(dir.delete());
         }
     }
 

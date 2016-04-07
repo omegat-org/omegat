@@ -1106,7 +1106,6 @@ public class EditorController implements IEditor {
         // remove internal bidi chars
         String transWithControlChars = doc.extractTranslation();
         String newTrans = EditorUtils.removeDirectionCharsAroundTags(transWithControlChars, getCurrentEntry());
-        System.out.println("Convert bidi on save: from '" + transWithControlChars.replace("\u200e", "\\u200e").replace("\u200f", "\\u200f") + "' to '" + newTrans.replace("\u200e", "\\u200e").replace("\u200f", "\\u200f") + "'");
         if (newTrans != null) {
             commitAndDeactivate(null, newTrans);
         }

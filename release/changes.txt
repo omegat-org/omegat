@@ -2,7 +2,7 @@
  OmegaT 4.0.0
 ----------------------------------------------------------------------
  16 Enhancements
-  2 Bug fixes
+  3 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 4.0.0 vs 3.6.0
@@ -63,6 +63,9 @@
 
   - When the list of filters was changed, an entry could lead
 to the wrong filter
+
+  - TMX not loaded when extension is in uppercase
+  https://sourceforge.net/p/omegat/bugs/809/
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 1

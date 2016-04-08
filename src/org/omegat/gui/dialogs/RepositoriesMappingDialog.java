@@ -88,6 +88,7 @@ public class RepositoriesMappingDialog extends javax.swing.JDialog {
         jPanel3.add(jLabel1, java.awt.BorderLayout.NORTH);
 
         tableRepositories.setAutoCreateRowSorter(true);
+        tableRepositories.setFillsViewportHeight(true);
         tableRepositories.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tableRepositories);
 
@@ -127,6 +128,7 @@ public class RepositoriesMappingDialog extends javax.swing.JDialog {
         jPanel4.add(jLabel2, java.awt.BorderLayout.NORTH);
 
         tableMapping.setAutoCreateRowSorter(true);
+        tableMapping.setFillsViewportHeight(true);
         tableMapping.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tableMapping);
 

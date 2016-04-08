@@ -86,6 +86,7 @@
                 <Component class="javax.swing.JTable" name="tableRepositories">
                   <Properties>
                     <Property name="autoCreateRowSorter" type="boolean" value="true"/>
+                    <Property name="fillsViewportHeight" type="boolean" value="true"/>
                     <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
                       <JTableSelectionModel selectionMode="0"/>
                     </Property>
@@ -172,6 +173,7 @@
                 <Component class="javax.swing.JTable" name="tableMapping">
                   <Properties>
                     <Property name="autoCreateRowSorter" type="boolean" value="true"/>
+                    <Property name="fillsViewportHeight" type="boolean" value="true"/>
                     <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
                       <JTableSelectionModel selectionMode="0"/>
                     </Property>

@@ -61,33 +61,35 @@ public class RepositoriesCredentialsDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new JPanel();
-        btnClose = new JButton();
-        jPanel2 = new JPanel();
-        btnRemove = new JButton();
-        jScrollPane2 = new JScrollPane();
-        list = new JTable();
+        jPanel1 = new javax.swing.JPanel();
+        btnClose = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        btnRemove = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        list = new javax.swing.JTable();
 
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(OStrings.getString("TEAM_REPOSITORIES_DIALOG")); // NOI18N
-        setMinimumSize(new Dimension(300, 200));
+        setMinimumSize(new java.awt.Dimension(300, 200));
 
-        jPanel1.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        Mnemonics.setLocalizedText(btnClose, OStrings.getString("BUTTON_CLOSE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(btnClose, OStrings.getString("BUTTON_CLOSE")); // NOI18N
         jPanel1.add(btnClose);
 
-        getContentPane().add(jPanel1, BorderLayout.SOUTH);
+        getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
 
-        Mnemonics.setLocalizedText(btnRemove, OStrings.getString("BUTTON_REMOVE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(btnRemove, OStrings.getString("BUTTON_REMOVE")); // NOI18N
         jPanel2.add(btnRemove);
 
-        getContentPane().add(jPanel2, BorderLayout.EAST);
+        getContentPane().add(jPanel2, java.awt.BorderLayout.EAST);
 
-        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list.setAutoCreateColumnsFromModel(false);
+        list.setFillsViewportHeight(true);
+        list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(list);
 
-        getContentPane().add(jScrollPane2, BorderLayout.CENTER);
+        getContentPane().add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -135,11 +137,11 @@ public class RepositoriesCredentialsDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public JButton btnClose;
-    public JButton btnRemove;
-    public JPanel jPanel1;
-    public JPanel jPanel2;
-    public JScrollPane jScrollPane2;
-    public JTable list;
+    public javax.swing.JButton btnClose;
+    public javax.swing.JButton btnRemove;
+    public javax.swing.JPanel jPanel1;
+    public javax.swing.JPanel jPanel2;
+    public javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JTable list;
     // End of variables declaration//GEN-END:variables
 }

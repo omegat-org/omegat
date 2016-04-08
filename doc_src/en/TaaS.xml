@@ -6,7 +6,7 @@
       <primary>Search</primary>
     </indexterm></title>
 
-  <section id="section.TaaS.options">
+  <section id="section.TaaS.generalities">
     <title>Generalities</title>
 
     <para>The TaaS service at https://demo.taas-project.eu/info provides
@@ -16,7 +16,7 @@
     terms partly populated automatically from various sources.</para>
   </section>
 
-  <section id="section.TaaS.options.collections">
+  <section id="section.TaaS.options.key">
     <title>Creating a key</title>
 
     <para>To access the TaaS service, a user must create a key using

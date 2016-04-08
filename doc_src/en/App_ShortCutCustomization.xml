@@ -155,7 +155,7 @@
           <row>
             <entry>New</entry>
 
-            <entry><keycap>Shift+Ctrl+N</keycap></entry>
+            <entry><keycap>Ctrl+Shift+N</keycap></entry>
 
             <entry>projectNewMenuItem</entry>
           </row>
@@ -227,7 +227,7 @@
           <row>
             <entry>Create Current Translated Documents</entry>
 
-            <entry><keycap>Shift+Ctrl+D</keycap></entry>
+            <entry><keycap>Ctrl+Shift+D</keycap></entry>
 
             <entry>projectSingleCompileMenuItem</entry>
           </row>
@@ -301,7 +301,7 @@
           </row>
 
           <row>
-            <entry>Replace With Match</entry>
+            <entry>Replace With Match or Selection</entry>
 
             <entry><keycap>Ctrl+R</keycap></entry>
 
@@ -309,7 +309,7 @@
           </row>
 
           <row>
-            <entry>Insert Match</entry>
+            <entry>Insert Match or Selection</entry>
 
             <entry><keycap>Ctrl+I</keycap></entry>
 
@@ -327,7 +327,7 @@
           <row>
             <entry>Replace With Source</entry>
 
-            <entry><keycap>Shift+Ctrl+R</keycap></entry>
+            <entry><keycap>Ctrl+Shift+R</keycap></entry>
 
             <entry>editOverwriteSourceMenuItem</entry>
           </row>
@@ -335,15 +335,15 @@
           <row>
             <entry>Insert Source</entry>
 
-            <entry><keycap>Shift+Ctrl+I</keycap></entry>
+            <entry><keycap>Ctrl+Shift+I</keycap></entry>
 
             <entry>editInsertSourceMenuItem</entry>
           </row>
 
           <row>
-            <entry>Insert Source Tags</entry>
+            <entry>Insert Missing Source Tags</entry>
 
-            <entry><keycap>Shift+Ctrl+T</keycap></entry>
+            <entry><keycap>Ctrl+Shift+T</keycap></entry>
 
             <entry>editTagPainterMenuItem</entry>
           </row>
@@ -359,7 +359,7 @@
           <row>
             <entry>Export Selection</entry>
 
-            <entry><keycap>Shift+Ctrl+C</keycap></entry>
+            <entry><keycap>Ctrl+Shift+C</keycap></entry>
 
             <entry>editExportSelectionMenuItem</entry>
           </row>
@@ -367,7 +367,7 @@
           <row>
             <entry>Create Glossary Entry</entry>
 
-            <entry><keycap>Shift+Ctrl+G</keycap></entry>
+            <entry><keycap>Ctrl+Shift+G</keycap></entry>
 
             <entry>editCreateGlossaryEntryMenuItem</entry>
           </row>
@@ -405,7 +405,7 @@
           </row>
 
           <row>
-            <entry>Select Fuzzy Match 1</entry>
+            <entry>Select Match #1</entry>
 
             <entry><keycap>Ctrl+1</keycap></entry>
 
@@ -413,7 +413,7 @@
           </row>
 
           <row>
-            <entry>Select Fuzzy Match 2</entry>
+            <entry>Select Match #2</entry>
 
             <entry><keycap>Ctrl+2</keycap></entry>
 
@@ -421,7 +421,7 @@
           </row>
 
           <row>
-            <entry>Select Fuzzy Match 3</entry>
+            <entry>Select Match #3</entry>
 
             <entry><keycap>Ctrl+3</keycap></entry>
 
@@ -429,7 +429,7 @@
           </row>
 
           <row>
-            <entry>Select Fuzzy Match 4</entry>
+            <entry>Select Match #4</entry>
 
             <entry><keycap>Ctrl+4</keycap></entry>
 
@@ -437,7 +437,7 @@
           </row>
 
           <row>
-            <entry>Select Fuzzy Match 5</entry>
+            <entry>Select Match #5</entry>
 
             <entry><keycap>Ctrl+5</keycap></entry>
 
@@ -469,7 +469,7 @@
           </row>
 
           <row>
-            <entry>Cycle Case To...</entry>
+            <entry>Cycle</entry>
 
             <entry><keycap>Shift+F3</keycap></entry>
 
@@ -493,9 +493,17 @@
           </row>
 
           <row>
-            <entry>Register Identical Translation</entry>
+            <entry>Set empty translation</entry>
 
             <entry/>
+
+            <entry>editRegisterEmptyMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Register Identical Translation</entry>
+
+            <entry><keycap>Ctrl+Shift+S</keycap></entry>
 
             <entry>editRegisterIdenticalMenuItem</entry>
           </row>
@@ -539,7 +547,7 @@
           <row>
             <entry>Next Translated Segment</entry>
 
-            <entry><keycap>Shift+Ctrl+U</keycap></entry>
+            <entry><keycap>Ctrl+Shift+U</keycap></entry>
 
             <entry>gotoNextTranslatedMenuItem</entry>
           </row>
@@ -755,7 +763,7 @@
           <row>
             <entry>Validate Tags</entry>
 
-            <entry><keycap>Shift+Ctrl+V</keycap></entry>
+            <entry><keycap>Ctrl+Shift+V</keycap></entry>
 
             <entry>toolsValidateTagsMenuItem</entry>
           </row>

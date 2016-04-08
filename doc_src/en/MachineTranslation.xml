@@ -154,7 +154,7 @@
 
       <listitem>
         <para>tools to manage the linguistic data necessary to build a machine
-        translation system for a given language pair </para>
+        translation system for a given language pair</para>
       </listitem>
 
       <listitem>
@@ -173,6 +173,59 @@
     XML-based standard formats to encode the linguistic data needed (either by
     hand or by converting existing data), which are compiled using the
     provided tools into the high-speed formats used by the engine.</para>
+  </section>
+
+  <section>
+    <title>MyMemory (machine)<indexterm class="singular">
+        <primary>Machine Translation</primary>
+
+        <secondary>MyMemory</secondary>
+      </indexterm></title>
+
+    <para>As explained <ulink
+    url="https://mymemory.translated.net/doc/">here</ulink>, "MyMemory gives
+    you quick access to a large number of translations originating from
+    professional translators, LSPs, customers and multilingual web
+    content".</para>
+
+    <para>By default, MyMemory allows a maximum of 100 requests per day. By
+    specifying an email address, it is possible to use 1000 requests per day
+    instead of 100 ones.</para>
+
+    <para>There are at least 3 ways to specify your address:</para>
+
+    <para><itemizedlist>
+        <listitem>
+          <para>in the OmegaT.l4J.ini file (Windows only), change:</para>
+
+          <para># MyMemory email</para>
+
+          <para>to:</para>
+
+          <para>MyMemory your@email-address.com</para>
+        </listitem>
+
+        <listitem>
+          <para>When starting OmegaT from the command line, specify in the
+          command:</para>
+
+          <para>-Dmymemory.api.email=your@email-address.com</para>
+        </listitem>
+
+        <listitem>
+          <para>in the Kaptain launcher (Linux only), enter the address in the
+          corresponding field on the "Online Services" tab.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <para>An other way to use MyMemory is to generate <ulink
+    url="http://mymemory.translated.net/">online</ulink> a TMX file based on a
+    source file you upload, and place the TMX file in the /tm/ or /tm/auto/
+    folder of your OmegaT project.</para>
+
+    <para>During this online process, MyMemory can use <emphasis
+    role="bold">Human translations</emphasis> instead of Machine ones (see
+    their website for details).</para>
   </section>
 
   <section>

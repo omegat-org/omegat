@@ -32,12 +32,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.events.IStopped;
 import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.LevenshteinDistance;
@@ -105,19 +106,17 @@ public class CalcMatchStatistics extends LongProcessThread {
 
     @Override
     public void run() {
-            finder = new FindMatches(Core.getProject().getSourceTokenizer(), OConsts.MAX_NEAR_STRINGS, true,
-                    false);
-            distanceCalculator = new LevenshteinDistance();
-            if (perFile) {
-                entriesToProcess = Core.getProject().getAllEntries().size() * 2;
-                calcPerFile();
-            } else {
-                entriesToProcess = Core.getProject().getAllEntries().size();
-                calcTotal(true);
-            }
-            callback.finishData();
+        finder = getMatchesFinder(true);
+        distanceCalculator = getDistanceCalculator(true);
+        if (perFile) {
+            entriesToProcess = Core.getProject().getAllEntries().size() * 2;
+            calcPerFile();
+        } else {
+            entriesToProcess = Core.getProject().getAllEntries().size();
+            calcTotal(true);
+        }
+        callback.finishData();
     }
-
     
     void appendText(String text) {
         textForLog.append(text);
@@ -268,44 +267,64 @@ public class CalcMatchStatistics extends LongProcessThread {
      * Similarity calculates between tokens tokenized by ITokenizer.tokenizeAllExactly() (adjustedScore)
      */
     void calcSimilarity(List<SourceTextEntry> untranslatedEntries, MatchStatCounts counts) {
-        for (SourceTextEntry ste : untranslatedEntries) {
-            checkInterrupted();
-            String srcNoXmlTags = ste.getSrcText();
-            for (ProtectedPart pp : ste.getProtectedParts()) {
-                srcNoXmlTags = srcNoXmlTags.replace(pp.getTextInSourceSegment(),
-                        pp.getReplacementMatchCalculation());
-            }
+        // If we have more than one available processor then we do the
+        // calculation in parallel.
+        boolean doParallel = Runtime.getRuntime().availableProcessors() > 1;
+        Stream<SourceTextEntry> stream = doParallel ? untranslatedEntries.parallelStream()
+                : untranslatedEntries.stream();
+        long startTime = System.currentTimeMillis();
+        try {
+            stream.forEach(ste -> {
+                checkInterrupted();
 
-            List<NearString> nears;
-            try {
-                nears = finder.search(Core.getProject(), srcNoXmlTags, true, false, new IStopped() {
-                    @Override
-                    public boolean isStopped() {
-                        return isInterrupted();
-                    }
-                });
-            } catch (FindMatches.StoppedException ex) {
-                return;
-            }
-
-            final Token[] strTokensStem = finder.tokenizeAll(ste.getSrcText());
-            int maxSimilarity = 0;
-            CACHE: for (NearString near : nears) {
-                final Token[] candTokens = finder.tokenizeAll(near.source);
-                int newSimilarity = FuzzyMatcher
-                        .calcSimilarity(distanceCalculator, strTokensStem, candTokens);
-                if (newSimilarity > maxSimilarity) {
-                    maxSimilarity = newSimilarity;
-                    if (newSimilarity >= 95) // enough to say that we are in row 2
-                        break CACHE;
+                String srcNoXmlTags = ste.getSrcText();
+                for (ProtectedPart pp : ste.getProtectedParts()) {
+                    srcNoXmlTags = srcNoXmlTags.replace(pp.getTextInSourceSegment(),
+                            pp.getReplacementMatchCalculation());
                 }
-            }
+                FindMatches localFinder = getMatchesFinder(doParallel);
+                List<NearString> nears = localFinder.search(Core.getProject(), srcNoXmlTags, true, false,
+                        () -> isInterrupted());
 
-            StatCount count = new StatCount(ste);
-            counts.addForPercents(maxSimilarity, count);
+                final Token[] strTokensStem = localFinder.tokenizeAll(ste.getSrcText());
+                int maxSimilarity = 0;
+                CACHE: for (NearString near : nears) {
+                    final Token[] candTokens = localFinder.tokenizeAll(near.source);
+                    int newSimilarity = FuzzyMatcher.calcSimilarity(getDistanceCalculator(doParallel), strTokensStem,
+                            candTokens);
+                    if (newSimilarity > maxSimilarity) {
+                        maxSimilarity = newSimilarity;
+                        if (newSimilarity >= 95) // enough to say that we are in row 2
+                            break CACHE;
+                    }
+                }
 
-            entryProcessed();
+                StatCount count = new StatCount(ste);
+                if (doParallel) {
+                    synchronized (counts) {
+                        counts.addForPercents(maxSimilarity, count);
+                        entryProcessed();
+                    }
+                } else {
+                    counts.addForPercents(maxSimilarity, count);
+                    entryProcessed();
+                }
+            });
+        } catch (FindMatches.StoppedException ex) {
         }
+        long endTime = System.currentTimeMillis();
+        Logger.getLogger(getClass().getName()).fine(String.format("Calc similarity took %d s (%s)",
+                (endTime - startTime) / 1000, doParallel ? "parallel" : "sequential"));
+    }
+
+    ISimilarityCalculator getDistanceCalculator(boolean newInstance) {
+        return newInstance ? new LevenshteinDistance() : distanceCalculator;
+    }
+
+    FindMatches getMatchesFinder(boolean newInstance) {
+        return newInstance
+                ? new FindMatches(Core.getProject().getSourceTokenizer(), OConsts.MAX_NEAR_STRINGS, true, false)
+                : finder;
     }
 
     int treated, percent;

@@ -35,6 +35,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.nio.charset.Charset;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -116,6 +117,10 @@ public class Main {
                     OStrings.getNameAndVersion()));
             System.exit(0);
         }
+
+        // Workaround for bug #812. Remove this when appropriate; see
+        // https://sourceforge.net/p/omegat/bugs/812/
+        System.setProperty("jna.encoding", Charset.defaultCharset().name());
 
         /*
          * Parse command line arguments info map.

@@ -58,6 +58,8 @@ public class GroovySyntaxHighlighter extends AbstractSyntaxHighlighter {
                         + "instanceof|interface|new|null|package|return|super|switch|this|"
                         + "throw|throws|trait|true|try|while)\\b"),
                 getAttributeSet(COLOR_ECLIPSE_KEYWORDS, true, false)));
+        PATTERNS.add(new SimpleImmutableEntry<>(PATTERN_STATIC_VARIABLE,
+                getAttributeSet(COLOR_ECLIPSE_STATIC, true, true)));
         PATTERNS.add(new SimpleImmutableEntry<>(PATTERN_DOUBLEQUOTE_STRINGS,
                 getAttributeSet(COLOR_ECLIPSE_STRINGS, false, false)));
         PATTERNS.add(new SimpleImmutableEntry<>(PATTERN_SINGLEQUOTE_STRINGS,

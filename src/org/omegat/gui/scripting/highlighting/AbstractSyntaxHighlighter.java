@@ -47,11 +47,16 @@ public abstract class AbstractSyntaxHighlighter implements IScriptHighlighter {
     static final Color COLOR_ECLIPSE_KEYWORDS = Color.decode("#7F0055");
     static final Color COLOR_ECLIPSE_STRINGS = Color.decode("#2A00FF");
     static final Color COLOR_ECLIPSE_COMMENTS = Color.decode("#3F7F5F");
+    static final Color COLOR_ECLIPSE_STATIC = Color.decode("#0000C0");
 
     static final Pattern PATTERN_DOUBLEQUOTE_STRINGS = Pattern.compile("\".*?(?<!\\\\)(?:\\\\{2})*\"");
     static final Pattern PATTERN_SINGLEQUOTE_STRINGS = Pattern.compile("'.*?(?<!\\\\)(?:\\\\{2})*'");
     static final Pattern PATTERN_SINGLE_LINE_COMMENT = Pattern.compile("//.*$", Pattern.MULTILINE);
     static final Pattern PATTERN_MULTILINE_COMMENT = Pattern.compile("/\\*.*?\\*/", Pattern.DOTALL);
+    // This is for matching identifiers written in typical ALL_CAPS_WITH_UNDERSCORES style, but obviously
+    // cannot match *actual* static variables (if the language even has such a concept) since we do no lexical
+    // analysis.
+    static final Pattern PATTERN_STATIC_VARIABLE = Pattern.compile("\\b[A-Z_][A-Z0-9_]*\\b", Pattern.DOTALL);
 
     protected StyledDocument doc;
 

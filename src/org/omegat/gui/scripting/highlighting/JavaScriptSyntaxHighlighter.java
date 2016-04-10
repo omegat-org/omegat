@@ -61,6 +61,8 @@ public class JavaScriptSyntaxHighlighter extends AbstractSyntaxHighlighter {
                                 + "public|return|short|static|super|switch|synchronized|this|throw|throws|transient|"
                                 + "true|try|typeof|var|void|volatile|while|with|yield)\\b"),
                         getAttributeSet(COLOR_ECLIPSE_KEYWORDS, true, false)));
+        PATTERNS.add(new SimpleImmutableEntry<>(PATTERN_STATIC_VARIABLE,
+                getAttributeSet(COLOR_ECLIPSE_STATIC, true, true)));
         PATTERNS.add(new SimpleImmutableEntry<>(PATTERN_DOUBLEQUOTE_STRINGS,
                 getAttributeSet(COLOR_ECLIPSE_STRINGS, false, false)));
         PATTERNS.add(new SimpleImmutableEntry<>(PATTERN_SINGLEQUOTE_STRINGS,

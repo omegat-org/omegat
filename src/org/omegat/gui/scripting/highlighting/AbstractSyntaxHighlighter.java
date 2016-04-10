@@ -31,6 +31,7 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -73,15 +74,21 @@ public abstract class AbstractSyntaxHighlighter implements IScriptHighlighter {
         }
         // Clear current styles
         doc.setCharacterAttributes(0, doc.getLength(), new SimpleAttributeSet(), true);
-        for (Entry<Pattern, Color> e : getPatterns()) {
-            SimpleAttributeSet attrs = new SimpleAttributeSet();
-            StyleConstants.setForeground(attrs, e.getValue());
+        for (Entry<Pattern, AttributeSet> e : getPatterns()) {
             Matcher m = e.getKey().matcher(text);
             while (m.find()) {
-                doc.setCharacterAttributes(m.start(), m.end() - m.start(), attrs, true);
+                doc.setCharacterAttributes(m.start(), m.end() - m.start(), e.getValue(), true);
             }
         }
     }
 
-    protected abstract Collection<Entry<Pattern, Color>> getPatterns();
+    protected abstract Collection<Entry<Pattern, AttributeSet>> getPatterns();
+
+    protected static AttributeSet getAttributeSet(Color foreground, boolean bold, boolean italic) {
+        SimpleAttributeSet attrs = new SimpleAttributeSet();
+        StyleConstants.setForeground(attrs, foreground);
+        StyleConstants.setBold(attrs, bold);
+        StyleConstants.setItalic(attrs, italic);
+        return attrs;
+    }
 }

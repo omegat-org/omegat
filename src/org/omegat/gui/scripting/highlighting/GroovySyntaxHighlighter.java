@@ -25,13 +25,14 @@
 
 package org.omegat.gui.scripting.highlighting;
 
-import java.awt.Color;
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
+
+import javax.swing.text.AttributeSet;
 
 /**
  * A simple, regex-based syntax highlighter for Groovy.
@@ -45,7 +46,7 @@ public class GroovySyntaxHighlighter extends AbstractSyntaxHighlighter {
     /**
      * Using a list because order of application matters for this implementation
      */
-    private static final List<Entry<Pattern, Color>> PATTERNS;
+    private static final List<Entry<Pattern, AttributeSet>> PATTERNS;
 
     static {
         PATTERNS = new ArrayList<>();
@@ -56,15 +57,19 @@ public class GroovySyntaxHighlighter extends AbstractSyntaxHighlighter {
                         + "enum|extends|false|finally|for|goto|if|implements|import|in|"
                         + "instanceof|interface|new|null|package|return|super|switch|this|"
                         + "throw|throws|trait|true|try|while)\\b"),
-                COLOR_ECLIPSE_KEYWORDS));
-        PATTERNS.add(new SimpleImmutableEntry<>(PATTERN_DOUBLEQUOTE_STRINGS, COLOR_ECLIPSE_STRINGS));
-        PATTERNS.add(new SimpleImmutableEntry<>(PATTERN_SINGLEQUOTE_STRINGS, COLOR_ECLIPSE_STRINGS));
-        PATTERNS.add(new SimpleImmutableEntry<>(PATTERN_SINGLE_LINE_COMMENT, COLOR_ECLIPSE_COMMENTS));
-        PATTERNS.add(new SimpleImmutableEntry<>(PATTERN_MULTILINE_COMMENT, COLOR_ECLIPSE_COMMENTS));
+                getAttributeSet(COLOR_ECLIPSE_KEYWORDS, true, false)));
+        PATTERNS.add(new SimpleImmutableEntry<>(PATTERN_DOUBLEQUOTE_STRINGS,
+                getAttributeSet(COLOR_ECLIPSE_STRINGS, false, false)));
+        PATTERNS.add(new SimpleImmutableEntry<>(PATTERN_SINGLEQUOTE_STRINGS,
+                getAttributeSet(COLOR_ECLIPSE_STRINGS, false, false)));
+        PATTERNS.add(new SimpleImmutableEntry<>(PATTERN_SINGLE_LINE_COMMENT,
+                getAttributeSet(COLOR_ECLIPSE_COMMENTS, false, false)));
+        PATTERNS.add(new SimpleImmutableEntry<>(PATTERN_MULTILINE_COMMENT,
+                getAttributeSet(COLOR_ECLIPSE_COMMENTS, false, false)));
     }
 
     @Override
-    protected Collection<Entry<Pattern, Color>> getPatterns() {
+    protected Collection<Entry<Pattern, AttributeSet>> getPatterns() {
         return PATTERNS;
     }
 }

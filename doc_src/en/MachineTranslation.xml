@@ -182,12 +182,6 @@
         <secondary>MyMemory</secondary>
       </indexterm></title>
 
-    <para>As explained <ulink
-    url="https://mymemory.translated.net/doc/">here</ulink>, "MyMemory gives
-    you quick access to a large number of translations originating from
-    professional translators, LSPs, customers and multilingual web
-    content".</para>
-
     <para>By default, MyMemory allows a maximum of 100 requests per day. By
     specifying an email address, it is possible to use 1000 requests per day
     instead of 100 ones.</para>
@@ -218,14 +212,17 @@
         </listitem>
       </itemizedlist></para>
 
-    <para>An other way to use MyMemory is to generate <ulink
-    url="http://mymemory.translated.net/">online</ulink> a TMX file based on a
-    source file you upload, and place the TMX file in the /tm/ or /tm/auto/
+    <para>MyMemory provides also <emphasis role="bold">Human
+    translations</emphasis> originating from professional translators, LSPs,
+    customers and multilingual web content. To get these translations, you
+    must upload your source file <ulink
+    url="http://mymemory.translated.net/">on their site</ulink> that generates
+    a TMX file. Then you must put this TMX file in the /tm/ or /tm/auto/
     folder of your OmegaT project.</para>
 
-    <para>During this online process, MyMemory can use <emphasis
-    role="bold">Human translations</emphasis> instead of Machine ones (see
-    their website for details).</para>
+    <para>MyMemory offers also the possibility to manage <emphasis
+    role="bold">private TMs</emphasis>. Note: OmegaT does not interact
+    dynamically with them (you must export/import TMX files manually).</para>
   </section>
 
   <section>

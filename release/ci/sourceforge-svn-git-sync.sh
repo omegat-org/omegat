@@ -19,10 +19,10 @@
 # [3] https://documentation.cloudbees.com/docs/dev-at-cloud/Sharing+Files+with+Build+Executors.html
 
 if [ ! -d $HOME/perl5 ]; then
-	SVNCORE=$(pwd)/svncore.tar.gz
-	cd $HOME
-	tar -zxf $SVNCORE
-	cd -
+    SVNCORE=$(pwd)/svncore.tar.gz
+    cd $HOME
+    tar -zxf $SVNCORE
+    cd -
 fi
 
 PATH="$HOME/perl5/bin${PATH+:}${PATH}"; export PATH;
@@ -35,12 +35,12 @@ REPO=omegat-git-svn
 
 # If we have copied the tarred repo from a previous build, use it.
 if [ "$COPY_FROM_WEBDAV" != true ] && [ ! -d $REPO ] && [ -f prev/$REPO.tar ]; then
-	tar -xf prev/$REPO.tar
+    tar -xf prev/$REPO.tar
 fi
 
 # If we still don't have a repo, use the archive.
 if [ ! -d $REPO ]; then
-	tar -xf /private/omegat/$REPO.tar
+    tar -xf /private/omegat/$REPO.tar
 fi
 
 cd $REPO

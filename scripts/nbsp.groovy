@@ -2,13 +2,13 @@
  *
  * @author  Didier Briel
  * @author  Briac Pilpre
- * @date    2015-11-17
- * @version 0.1
+ * @date    2016-04-12
+ * @version 0.2
  */
 
 // search_string_before and replace_string_before are two variables representing the text to search and to replace, 
 // respectively. search_string_after and replace_string_after have the same function
-def search_string_before  = /\s([:?!;»])/
+def search_string_before  = /\s([:?!;»%])/
 def replace_string_before = /\u00A0$1/
 def search_string_after = /«\s/
 def replace_string_after = /«\u00A0/

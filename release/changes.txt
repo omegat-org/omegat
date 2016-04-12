@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 2
 ----------------------------------------------------------------------
-  0 Enhancements
+  1 Enhancement
   1 Bug fix
-  0 Localisation updates
+  0 Localisation update
 ----------------------------------------------------------------------
 3.6.0 update 2 vs 3.6.0 update 1
+
+  Other changes:
+
+  - In the Nbsp script, % was added to the list of characters that
+must be preceded by a non-breaking space
 
   Bug fixes:
 

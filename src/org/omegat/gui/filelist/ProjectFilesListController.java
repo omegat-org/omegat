@@ -59,6 +59,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import javax.swing.AbstractAction;
 import javax.swing.JMenuItem;
@@ -375,35 +378,63 @@ public class ProjectFilesListController {
     }
 
     private JPopupMenu createContextMenuForRow(int row) {
-        FileInfo info = modelFiles.getDataAtRow(row);
-        if (info == null) {
+        int[] rows;
+        if (IntStream.of(list.tableFiles.getSelectedRows()).anyMatch(r -> r == row)) {
+            // If clicked on selection, use selection
+            rows = list.tableFiles.getSelectedRows();
+        } else {
+            // Otherwise use the clicked row
+            rows = new int[] { row };
+        }
+        List<FileInfo> infos = IntStream.of(rows).mapToObj(r -> modelFiles.getDataAtRow(r))
+                .collect(Collectors.toList());
+        if (infos.isEmpty() || infos.stream().anyMatch(i -> i == null)) {
             return null;
         }
         String sourceDir = Core.getProject().getProjectProperties().getSourceRoot();
-        File sourceFile = new File(sourceDir, info.filePath);
         String targetDir = Core.getProject().getProjectProperties().getTargetRoot();
-        File targetFile = new File(targetDir, Core.getProject().getTargetPathForSourceFile(info.filePath));
         JPopupMenu menu = new JPopupMenu();
-        addContextMenuItem(menu, sourceFile, "PF_OPEN_SOURCE_FILE", "PF_REVEAL_SOURCE_FILE");
-        addContextMenuItem(menu, targetFile, "PF_OPEN_TARGET_FILE", "PF_REVEAL_TARGET_FILE");
+        addContextMenuItem(menu, true,
+                infos.stream().map(i -> new File(sourceDir, i.filePath)).collect(Collectors.toList()));
+        addContextMenuItem(menu, false,
+                infos.stream().map(i -> new File(targetDir, Core.getProject().getTargetPathForSourceFile(i.filePath)))
+                        .collect(Collectors.toList()));
         return menu;
     }
 
-    private void addContextMenuItem(final JPopupMenu menu, final File toOpen, final String defaultTitle,
-            final String modTitle) {
-        final JMenuItem item = menu.add(OStrings.getString(defaultTitle));
+    private void addContextMenuItem(JPopupMenu menu, boolean isSource, List<File> files) {
+        long presentFiles = files.stream().filter(File::isFile).count();
+        String defaultTitle, modTitle;
+        if (presentFiles > 1) {
+            defaultTitle = StringUtil.format(
+                    OStrings.getString(isSource ? "PF_OPEN_SOURCE_FILES" : "PF_OPEN_TARGET_FILES"), presentFiles);
+            modTitle = StringUtil.format(OStrings.getString(isSource ? "PF_OPEN_SOURCE_FILES" : "PF_OPEN_TARGET_FILES"),
+                    presentFiles);
+        } else {
+            defaultTitle = OStrings.getString(isSource ? "PF_OPEN_SOURCE_FILE" : "PF_OPEN_TARGET_FILE");
+            modTitle = OStrings.getString(isSource ? "PF_REVEAL_SOURCE_FILE" : "PF_REVEAL_TARGET_FILE");
+        }
+        JMenuItem item = menu.add(defaultTitle);
         item.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean openParent = (e.getModifiers() & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0;
-                try {
-                    Desktop.getDesktop().open(openParent ? toOpen.getParentFile() : toOpen);
-                } catch (IOException ex) {
-                    Log.log(ex);
+                Stream<File> stream;
+                if (openParent) {
+                    stream = files.stream().map(File::getParentFile).distinct().filter(File::isDirectory);
+                } else {
+                    stream = files.stream().filter(File::isFile);
                 }
+                stream.forEach(f -> {
+                    try {
+                        Desktop.getDesktop().open(f);
+                    } catch (IOException ex) {
+                        Log.log(ex);
+                    }
+                });
             }
         });
-        item.setEnabled(toOpen.isFile());
+        item.setEnabled(presentFiles > 0);
         item.addMenuKeyListener(new MenuKeyListener() {
             @Override
             public void menuKeyTyped(MenuKeyEvent e) {
@@ -421,8 +452,9 @@ public class ProjectFilesListController {
                     setText(modTitle);
                 }
             }
-            private void setText(String key) {
-                item.setText(OStrings.getString(key));
+
+            private void setText(String text) {
+                item.setText(text);
                 menu.pack();
             }
         });

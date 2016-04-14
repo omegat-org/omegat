@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.0
 ----------------------------------------------------------------------
- 16 Enhancements
+ 17 Enhancements
   3 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -47,6 +47,9 @@
 
   - Apply aggressive font fallback to Search results
   https://sourceforge.net/p/omegat/feature-requests/1220/
+
+  - Handle multiple selection in Project Files list context menu 
+  https://sourceforge.net/p/omegat/feature-requests/1231/
 
   Other changes
 

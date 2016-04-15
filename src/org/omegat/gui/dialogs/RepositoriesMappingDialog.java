@@ -108,6 +108,7 @@ public class RepositoriesMappingDialog extends javax.swing.JDialog {
         jPanel6.add(btnRepoAdd, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(btnRepoRemove, OStrings.getString("RMD_BTN_REMOVE")); // NOI18N
+        btnRepoRemove.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -139,6 +140,7 @@ public class RepositoriesMappingDialog extends javax.swing.JDialog {
         jPanel8.setLayout(new java.awt.GridBagLayout());
 
         org.openide.awt.Mnemonics.setLocalizedText(btnMappingRemove, OStrings.getString("RMD_BTN_REMOVE")); // NOI18N
+        btnMappingRemove.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 7;
@@ -148,6 +150,7 @@ public class RepositoriesMappingDialog extends javax.swing.JDialog {
         jPanel8.add(btnMappingRemove, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(btnMappingAdd, OStrings.getString("RMD_BTN_ADD")); // NOI18N
+        btnMappingAdd.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;

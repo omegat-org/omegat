@@ -81,11 +81,23 @@ public class RepositoriesMappingController {
         initButtons();
         reinitRepoUrlDropdown();
 
+        dialog.tableRepositories.getSelectionModel().addListSelectionListener(e -> updateState());
+        dialog.tableMapping.getSelectionModel().addListSelectionListener(e -> updateState());
+        dialog.tableRepositories.getModel().addTableModelListener(e -> updateState());
+
         repoSizer = TableColumnSizer.autoSize(dialog.tableRepositories, 1, true);
         mappingSizer = TableColumnSizer.autoSize(dialog.tableMapping, 0, true);
 
+        updateState();
+
         dialog.setVisible(true);
         return result;
+    }
+
+    private void updateState() {
+        dialog.btnRepoRemove.setEnabled(dialog.tableRepositories.getSelectedRow() != -1);
+        dialog.btnMappingRemove.setEnabled(dialog.tableMapping.getSelectedRow() != -1);
+        dialog.btnMappingAdd.setEnabled(dialog.tableRepositories.getRowCount() > 0);
     }
 
     @SuppressWarnings("serial")

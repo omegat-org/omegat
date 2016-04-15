@@ -80,6 +80,7 @@ public class RepositoriesCredentialsDialog extends javax.swing.JDialog {
         getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
 
         org.openide.awt.Mnemonics.setLocalizedText(btnRemove, OStrings.getString("BUTTON_REMOVE")); // NOI18N
+        btnRemove.setEnabled(false);
         jPanel2.add(btnRemove);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.EAST);

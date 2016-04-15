@@ -50,6 +50,7 @@ import org.omegat.core.KnownException;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.filters2.master.FilterMaster;
@@ -185,7 +186,11 @@ public class ProjectUICommands {
                 RemoteRepositoryProvider remoteRepositoryProvider = new RemoteRepositoryProvider(projectRoot,
                         repos);
                 remoteRepositoryProvider.switchAllToLatest();
-                remoteRepositoryProvider.copyFilesFromRepoToProject("omegat.project");
+                for (String file : new String[] { OConsts.FILE_PROJECT,
+                        OConsts.DEFAULT_INTERNAL + '/' + FilterMaster.FILE_FILTERS,
+                        OConsts.DEFAULT_INTERNAL + '/' + SRX.CONF_SENTSEG }) {
+                    remoteRepositoryProvider.copyFilesFromRepoToProject(file);
+                }
 
                 // update repo into
                 ProjectProperties props = ProjectFileStorage.loadProjectProperties(projectRoot);

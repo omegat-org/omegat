@@ -60,7 +60,6 @@ public class RepositoriesCredentialsController {
                 Core.getMainWindow().getApplicationFrame(), true);
 
         dialog.list.setModel(new Model(urls));
-        dialog.list.getTableHeader().setVisible(false);
         dialog.list.getSelectionModel().addListSelectionListener(
                 e -> dialog.btnRemove.setEnabled(dialog.list.getSelectedRow() != -1));
         dialog.btnRemove.addActionListener(new ActionListener() {

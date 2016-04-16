@@ -87,6 +87,7 @@ public class RepositoriesCredentialsDialog extends javax.swing.JDialog {
 
         list.setFillsViewportHeight(true);
         list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        list.setTableHeader(null);
         jScrollPane2.setViewportView(list);
 
         getContentPane().add(jScrollPane2, java.awt.BorderLayout.CENTER);

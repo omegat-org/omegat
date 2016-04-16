@@ -4,8 +4,8 @@ Building OmegaT
 OmegaT is built with Apache Ant. Run `ant` from the top level.
 
 OmegaT will run on the latest Java, but is required to be compatible with Java
-1.6. Further, JREs other than Oracle's are not officially supported. You are
-thus recommended to build with Oracle JDK 1.6.
+1.8. Further, JREs other than Oracle's are not officially supported. You are
+thus recommended to build with Oracle JDK 1.8.
 
 Eclipse and NetBeans are recommended IDEs for working with OmegaT source
 code. NetBeans is required to modify *.form-based GUI layouts.

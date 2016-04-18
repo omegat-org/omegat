@@ -26,7 +26,7 @@ Subversion repository:
 
 Git mirrors are also provided (svn trunk is synced to git master):
     SourceForge: https://sourceforge.net/p/omegat/code/ci/master/tree/
-    GitHub:      https://github.com/OmegaT-Project/OmegaT
+    GitHub:      https://github.com/omegat-org/omegat
 
 If you would like to submit a patch, the recommended procedure is as follows:
 

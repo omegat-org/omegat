@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.0
 ----------------------------------------------------------------------
- 18 Enhancements
+ 19 Enhancements
   3 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -61,6 +61,8 @@
 
   - When the list of online spelling dictionaries is displayed,
 it is possible to double-click on a dictionary instead of pressing Install
+
+  - It's possible to disable individual autocompleter views
 
   Bug fixes:
 

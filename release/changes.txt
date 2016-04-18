@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.0
 ----------------------------------------------------------------------
- 17 Enhancements
+ 18 Enhancements
   3 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -58,6 +58,9 @@
   - The default memory allocation is now 1024 MB on all platforms
 
   - There's now a Lucene Polish tokenizer
+
+  - When the list of online spelling dictionaries is displayed,
+it is possible to double-click on a dictionary instead of pressing Install
 
   Bug fixes:
 

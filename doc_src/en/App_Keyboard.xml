@@ -93,14 +93,14 @@
         <row>
           <entry><emphasis role="bold">Ctrl+PgUp</emphasis></entry>
 
-          <entry>move to the start of the document (Mac: <emphasis
+          <entry>move to the first segment of the document (Mac: <emphasis
           role="bold">Cmd+PgUp</emphasis>)</entry>
         </row>
 
         <row>
           <entry><emphasis role="bold">Ctrl+PgDn</emphasis></entry>
 
-          <entry>move to the end of the document (Mac: <emphasis
+          <entry>move to the last segment of the document (Mac: <emphasis
           role="bold">Cmd+PgDn</emphasis>)</entry>
         </row>
 

@@ -960,16 +960,22 @@ public class EditorController implements IEditor {
 
     /**
      * Get a rectangle that bounds the specified segment in editor-space pixel
-     * coordinates.
+     * coordinates. Returns null if the specified segment index is invalid or if
+     * the segment has not been loaded yet.
      */
     private Rectangle getSegmentBounds(int index) {
+        if (index < 0 || index >= m_docSegList.length) {
+            return null;
+        }
         Rectangle result = null;
         try {
             SegmentBuilder sb = m_docSegList[index];
-            Rectangle start = editor.modelToView(sb.getStartPosition());
-            Rectangle end = editor.modelToView(sb.getEndPosition());
-            if (start != null && end != null) {
-                result = start.union(end);
+            if (sb.hasBeenCreated()) {
+                Rectangle start = editor.modelToView(sb.getStartPosition());
+                Rectangle end = editor.modelToView(sb.getEndPosition());
+                if (start != null && end != null) {
+                    result = start.union(end);
+                }
             }
         } catch (BadLocationException ex) {
             Log.log(ex);

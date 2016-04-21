@@ -276,4 +276,17 @@
       </listitem>
     </varlistentry>
   </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Initially load this many segments</term>
+
+      <listitem>
+        <para>By default the editor displays 2,000 of initial segments, and
+        progressively loads more as you scroll up or down. If you have a
+        powerful machine, and/or if you don't like how the scrollbar behaves
+        during progressive loading, you can increase this number.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
 </chapter>

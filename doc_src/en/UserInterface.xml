@@ -376,27 +376,29 @@
       </indexterm>Options → Restore the main window</guimenuitem> any time to
     return to the original layout.</para>
 
-    <para>It is possible to drag and drop files to each pane, which will react accordingly.
-    <itemizedlist>
+    <para>It is possible to drag and drop files to each pane, which will react
+    accordingly. <itemizedlist>
         <listitem>
-          <para>Editor pane: If an OmegaT project file (<filename>omegat.project</filename>) is 
-          dropped on this pane, the corresponding project will be opened, closing first any 
-          opened project.
-          Other dropped files will be copied to the <filename>source</filename> folder. 
-          This applies also to the <link linkend="section.project.files">Project files</link> window.</para>
+          <para>Editor pane: If an OmegaT project file
+          (<filename>omegat.project</filename>) is dropped on this pane, the
+          corresponding project will be opened, closing first any opened
+          project. Other dropped files will be copied to the
+          <filename>source</filename> folder. This applies also to the <link
+          linkend="section.project.files">Project files</link> window.</para>
         </listitem>
+
         <listitem>
-          <para>Fuzzy Matches pane: Dropped <filename>.tmx</filename> files will be copied 
-          to the <filename>tm</filename> folder.</para>
+          <para>Fuzzy Matches pane: Dropped <filename>.tmx</filename> files
+          will be copied to the <filename>tm</filename> folder.</para>
         </listitem>
+
         <listitem>
-          <para>Glossary pane: Dropped files with known glossary extensions (<filename>.txt</filename>, 
-          <filename>.tab</filename>, etc.) will be copied to the <filename>glossary</filename> folder.</para>
+          <para>Glossary pane: Dropped files with known glossary extensions
+          (<filename>.txt</filename>, <filename>.tab</filename>, etc.) will be
+          copied to the <filename>glossary</filename> folder.</para>
         </listitem>
-      </itemizedlist>
-    </para>
-    
-    
+      </itemizedlist></para>
+
     <para>The counters in the lower right corner keep track of the progress of
     the translation (numbers in the left hand column refer to the figure
     above):</para>
@@ -512,11 +514,11 @@
       options concerning <emphasis role="bold">Alternative
       translations</emphasis> are proposed, for example to to jump to another
       instance of non-unique segments.</para>
-      
-      <para>It is possible to drag text from anywhere in the main window and to drop 
-      it within the segment. Texted dragged from outside the target segment is copied, 
-      while text dragged from within the segment is moved.</para>
-      
+
+      <para>It is possible to drag text from anywhere in the main window and
+      to drop it within the segment. Texted dragged from outside the target
+      segment is copied, while text dragged from within the segment is
+      moved.</para>
     </section>
 
     <section id="match.viewer">
@@ -553,7 +555,7 @@
       time as you translate your project and from ancillary translation
       memories you have imported from your earlier jobs, or received from your
       client or translation agency.</para>
-      
+
       <para>When you move to the next segment, the first fuzzy match (the one
       with the best matching percentage) is automatically selected. You may
       select a different match by pressing <guimenuitem>Ctrl+2, 3, 4, or
@@ -956,6 +958,9 @@
           by clicking in the header. It also possible to change the position
           of a filename, by clicking on it and pressing <emphasis>Move
           ...</emphasis> buttons.</para>
+
+          <para>Right-clicking on a filename opens a popup that allows to open
+          the source file and (if it exists) the target file.</para>
         </listitem>
       </itemizedlist>
 

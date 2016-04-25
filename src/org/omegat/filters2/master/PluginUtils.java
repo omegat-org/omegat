@@ -41,9 +41,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Properties;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
+import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
@@ -120,20 +122,21 @@ public final class PluginUtils {
                 loadFromManifest(m, pluginsClassLoader);
             }
             if (!foundMain) {
-                // development mode - load main manifest template
-                String manifests = params.get("dev-manifests");
-                if (manifests == null) {
-                    manifests = "manifest-template.mf";
-                }
-                for (String mf : manifests.split(File.pathSeparator)) {
-                    Manifest m;
-                    InputStream in = new FileInputStream(mf);
-                    try {
-                        m = new Manifest(in);
-                    } finally {
-                        in.close();
+                // development mode - load from dev-manifests CLI arg
+                String manifests = params.get(CLIParameters.DEV_MANIFESTS);
+                if (manifests != null) {
+                    for (String mf : manifests.split(File.pathSeparator)) {
+                        try (InputStream in = new FileInputStream(mf)) {
+                            loadFromManifest(new Manifest(in), pluginsClassLoader);
+                        }
                     }
-                    loadFromManifest(m, pluginsClassLoader);
+                } else {
+                    // load from plugins property list
+                    Properties props = new Properties();
+                    try (FileInputStream fis = new FileInputStream("Plugins.properties")) {
+                        props.load(fis);
+                        loadFromProperties(props, pluginsClassLoader);
+                    }
                 }
             }
         } catch (Exception ex) {
@@ -266,21 +269,41 @@ public final class PluginUtils {
                 if (clazz.trim().isEmpty()) {
                     continue;
                 }
-                try {
-                    Class<?> c = classLoader.loadClass(clazz);
-                    Method load = c.getMethod("loadPlugins");
-                    load.invoke(c);
-                    loadedPlugins.add(c);
-                    Log.logInfoRB("PLUGIN_LOAD_OK", clazz);
-                } catch (Throwable ex) {
-                    Log.logErrorRB(ex, "PLUGIN_LOAD_ERROR", clazz, ex.getClass().getSimpleName(), ex.getMessage());
-                    Core.pluginLoadingError(StringUtil.format(OStrings.getString("PLUGIN_LOAD_ERROR"), clazz, ex
-                            .getClass().getSimpleName(), ex.getMessage()));
-                }
+                loadClass(clazz, classLoader);
             }
         }
 
         loadFromManifestOld(m, classLoader);
+    }
+
+    protected static void loadFromProperties(Properties props, ClassLoader classLoader) throws ClassNotFoundException {
+        for (Object o : props.keySet()) {
+            String key = o.toString();
+            String[] classes = props.getProperty(key).split("\\s+");
+            if (key.equals("plugin")) {
+                for (String clazz : classes) {
+                    loadClass(clazz, classLoader);
+                }
+            } else {
+                for (String clazz : classes) {
+                    loadClassOld(key, clazz, classLoader);
+                }
+            }
+        }
+    }
+
+    protected static void loadClass(String clazz, ClassLoader classLoader) {
+        try {
+            Class<?> c = classLoader.loadClass(clazz);
+            Method load = c.getMethod("loadPlugins");
+            load.invoke(c);
+            loadedPlugins.add(c);
+            Log.logInfoRB("PLUGIN_LOAD_OK", clazz);
+        } catch (Throwable ex) {
+            Log.logErrorRB(ex, "PLUGIN_LOAD_ERROR", clazz, ex.getClass().getSimpleName(), ex.getMessage());
+            Core.pluginLoadingError(StringUtil.format(OStrings.getString("PLUGIN_LOAD_ERROR"), clazz,
+                    ex.getClass().getSimpleName(), ex.getMessage()));
+        }
     }
 
     public static void unloadPlugins() {
@@ -316,40 +339,45 @@ public final class PluginUtils {
                 // WebStart signing section, or other section
                 continue;
             }
-            PLUGIN_TYPE pType;
-            try {
-                pType = PLUGIN_TYPE.valueOf(sType.toUpperCase(Locale.ENGLISH));
-            } catch (Exception ex) {
-                pType = PLUGIN_TYPE.UNKNOWN;
-            }
-            switch (pType) {
-            case FILTER:
-                filterClasses.add(classLoader.loadClass(key));
-                Log.logInfoRB("PLUGIN_LOAD_OK", key);
-                break;
-            case TOKENIZER:
-                tokenizerClasses.add(classLoader.loadClass(key));
-                Log.logInfoRB("PLUGIN_LOAD_OK", key);
-                break;
-            case MARKER:
-                markerClasses.add(classLoader.loadClass(key));
-                Log.logInfoRB("PLUGIN_LOAD_OK", key);
-                break;
-            case MACHINETRANSLATOR:
-                machineTranslationClasses.add(classLoader.loadClass(key));
-                Log.logInfoRB("PLUGIN_LOAD_OK", key);
-                break;
-            case BASE:
-                basePluginClasses.add(classLoader.loadClass(key));
-                Log.logInfoRB("PLUGIN_LOAD_OK", key);
-                break;
-            case GLOSSARY:
-                glossaryClasses.add(classLoader.loadClass(key));
-                Log.logInfoRB("PLUGIN_LOAD_OK", key);
-                break;
-            default:
-                Log.logErrorRB("PLUGIN_UNKNOWN", key);
-            }
+            loadClassOld(sType, key, classLoader);
+        }
+    }
+
+    protected static void loadClassOld(String sType, String key, ClassLoader classLoader)
+            throws ClassNotFoundException {
+        PLUGIN_TYPE pType;
+        try {
+            pType = PLUGIN_TYPE.valueOf(sType.toUpperCase(Locale.ENGLISH));
+        } catch (Exception ex) {
+            pType = PLUGIN_TYPE.UNKNOWN;
+        }
+        switch (pType) {
+        case FILTER:
+            filterClasses.add(classLoader.loadClass(key));
+            Log.logInfoRB("PLUGIN_LOAD_OK", key);
+            break;
+        case TOKENIZER:
+            tokenizerClasses.add(classLoader.loadClass(key));
+            Log.logInfoRB("PLUGIN_LOAD_OK", key);
+            break;
+        case MARKER:
+            markerClasses.add(classLoader.loadClass(key));
+            Log.logInfoRB("PLUGIN_LOAD_OK", key);
+            break;
+        case MACHINETRANSLATOR:
+            machineTranslationClasses.add(classLoader.loadClass(key));
+            Log.logInfoRB("PLUGIN_LOAD_OK", key);
+            break;
+        case BASE:
+            basePluginClasses.add(classLoader.loadClass(key));
+            Log.logInfoRB("PLUGIN_LOAD_OK", key);
+            break;
+        case GLOSSARY:
+            glossaryClasses.add(classLoader.loadClass(key));
+            Log.logInfoRB("PLUGIN_LOAD_OK", key);
+            break;
+        default:
+            Log.logErrorRB("PLUGIN_UNKNOWN", key);
         }
     }
 }

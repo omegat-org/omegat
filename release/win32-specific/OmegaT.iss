@@ -1,4 +1,4 @@
-; -- OmegaT.iss --
+﻿; -- OmegaT.iss --
 
 [Setup]
 AppName=OmegaT @VERSION_NUMBER_SUBST@
@@ -12,8 +12,8 @@ AllowNoIcons=yes
 Compression=lzma
 SolidCompression=yes
 LicenseFile=OmegaT-license.txt
-OutputDir=..\dist2
-OutputBaseFilename=OmegaT_@VERSION_NUMBER_SUBST@_Windows_without_JRE
+OutputDir=@OUTPUT_DIR_SUBST@
+OutputBaseFilename=OmegaT_@VERSION_NUMBER_SUBST@_Windows@JRE_SUFFIX_SUBST@
 
 [Files]
 Source: "docs\*"; DestDir: "{app}\docs"; Flags: recursesubdirs
@@ -61,6 +61,7 @@ Source: "join.html"; DestDir: "{app}"
 Source: "index.html"; DestDir: "{app}"
 Source: "changes.txt"; DestDir: "{app}"; Flags: isreadme;
 Source: "omegat.prefs"; DestDir: "{app}"; Flags: skipifsourcedoesntexist;
+@JRE_COMMENT_SUBST@Source: "@JRE_PATH_SUBST@\*"; DestDir: "{app}\jre"; Flags: recursesubdirs
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\plugins\"
@@ -136,6 +137,9 @@ Name: "sv"; MessagesFile: "compiler:Languages\Swedish.isl"
 Name: "tr"; MessagesFile: "compiler:Languages\Turkish.isl"
 Name: "uk"; MessagesFile: "compiler:Languages\Ukrainian.isl"
 ;Name: "ca_VAL"; MessagesFile: "compiler:Languages\Valencian.isl"
+
+[CustomMessages]
+@CUSTOM_MESSAGES_SUBST@
 
 [Code]
 var

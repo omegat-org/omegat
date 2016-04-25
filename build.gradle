@@ -1,0 +1,606 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id 'de.gliderpilot.jnlp' version '0.2.1'
+}
+
+apply plugin: 'application'
+apply plugin: 'eclipse'
+apply plugin: 'de.gliderpilot.jnlp'
+
+
+applicationName = 'OmegaT'
+mainClassName = 'org.omegat.Main'
+
+def javaVersion = '1.8'
+
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
+
+def omtVersion = loadProperties file('src/org/omegat/Version.properties')
+version = omtVersion.version + getUpdateSuffix(omtVersion.update)
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+            srcDir 'gen/src'
+        }
+        resources {
+            srcDir 'src'
+            srcDir 'gen/src'
+        }
+    }
+    test {
+        java {
+            srcDir 'test/src'
+        }
+        resources {
+            srcDir 'test/src'
+            srcDir 'test/data'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    dependency {
+        // Special configuration to facilitate storing dependency
+        // artifacts locally, instead of pulling from Maven Central.
+    }
+    all {
+        // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/813/
+        exclude module: 'lucene-core'
+    }
+}
+
+dependencies {
+    // Gradle-managed compile and runtime dependencies.
+    // To change dependencies:
+    // 1. Add/modify/remove listing here
+    // 2. Run `gradlew getDependencies [eclipse]`
+    // 3. Commit changes to lib/auto
+    // To get source packages in IDE, change "dependency" keyword to "compile".
+    dependency 'org.languagetool:languagetool-core:3.2'
+    dependency 'org.languagetool:hunspell-native-libs:2.9'
+    dependency 'org.apache.lucene:lucene-analyzers-common:5.2.1'
+    dependency 'org.apache.lucene:lucene-analyzers-kuromoji:5.2.1'
+    dependency 'org.apache.lucene:lucene-analyzers-smartcn:5.2.1'
+    dependency 'org.apache.lucene:lucene-analyzers-stempel:5.2.1'
+    dependency 'org.eclipse.jgit:org.eclipse.jgit:4.2.0.201601211800-r'
+    dependency 'com.jcraft:jsch.agentproxy.jsch:0.0.9'
+    // Specify the following two here just to make sure all jsch.agentproxy libs are the same version.
+    dependency 'com.jcraft:jsch.agentproxy.connector-factory:0.0.9'
+    dependency 'com.jcraft:jsch.agentproxy.svnkit-trilead-ssh2:0.0.9'
+    dependency 'org.tmatesoft.svnkit:svnkit:1.8.11'
+    dependency 'org.apache.pdfbox:pdfbox:2.0.0'
+    dependency 'net.loomchild:maligna:3.0.0'
+    dependency 'commons-io:commons-io:2.4'
+    dependency 'commons-lang:commons-lang:2.6'
+    dependency 'org.slf4j:slf4j-jdk14:1.7.18'
+    // Groovy used at runtime for scripting only
+    dependency 'org.codehaus.groovy:groovy-all:2.2.2'
+
+    compile fileTree(dir: 'lib', include: '**/*.jar')
+
+    // Test dependencies
+    testCompile 'junit:junit:4.12'
+    testCompile 'xmlunit:xmlunit:1.6'
+
+    // WebStart-only
+    jnlp project(path: ':release:WebStart-specific', configuration: 'docs')
+}
+
+task getDependencies(type: Copy) {
+    description = 'Save all dependencies locally for storage in repository.'
+    doFirst {
+        delete 'lib/auto'
+    }
+    from configurations.dependency
+    into 'lib/auto'
+}
+
+def omtPlugins = loadProperties file('Plugins.properties')
+
+jar {
+    manifest {
+        attributes('License': 'GNU Public License version 3 or later',
+                'Implementation-Version': project.version,
+                'Permissions': 'all-permissions',
+                'OmegaT-Plugins': omtPlugins.plugin,
+                'OmegaT-Plugin': 'true',
+                'Main-Class': mainClassName,
+                'Class-Path': configurations.compile.collect { "lib/${it.name}" }.join(' '))
+        omtPlugins.keys().each { key ->
+            if (key != 'plugins') {
+                omtPlugins[key].tokenize().each { cls ->
+                    attributes('OmegaT-Plugin': key, cls)
+                }
+            }
+        }
+    }
+    // Don't include extra stuff like version number in JAR name
+    archiveName = "${jar.baseName}.${jar.extension}"
+}
+
+def assetDir = [System.getProperty('asset.dir'), '../'].find { it != null }
+
+def macExecutable = file("${assetDir}/JavaAppLauncher")
+def macJRE = file("${assetDir}/jre-mac-root")
+def macDistEnabled = macExecutable.file && macJRE.directory
+
+def linuxJRE = file("${assetDir}/jre-linux")
+def linux64JRE = file("${assetDir}/jre-linux-64")
+
+def windowsJRE = file("${assetDir}/jre")
+
+distributions {
+    main {
+        contents {
+            from('docs') {
+                into 'docs'
+            }
+            from('release') {
+                into 'docs'
+                include 'changes.txt', 'doc-license.txt', 'OmegaT-license.txt'
+            }
+            from('scripts') {
+                into 'scripts'
+            }
+            from('images') {
+                into 'images'
+            }
+            from('release') {
+                include '*.txt', '*.html'
+                exclude 'readme.txt'
+            }
+            from('release') {
+                include 'readme.txt'
+                expand(translationNotice: '')
+            }
+            from('release/plugins-specific') {
+                into 'plugins'
+            }
+            from('release/linux-specific') {
+                filter(ReplaceTokens, tokens:
+                    ['VERSION_NUMBER_SUBST': project.version,
+                     'JAR_SUBST': jar.archiveName])
+                fileMode 0755
+            }
+            from('release/win32-specific') {
+                include 'OmegaT.bat'
+                filter(ReplaceTokens, tokens: ['JAR_SUBST': jar.archiveName])
+            }
+            from('lib/licenses') {
+                into 'lib'
+            }
+            eachFile {
+                // Move main JAR up one level from lib.
+                if (it.name == jar.archiveName) {
+                    it.relativePath = it.relativePath.parent.parent.append(true, jar.archiveName)
+                }
+            }
+        }
+        distZip.archiveName = "${applicationName}_${version}${omtVersion.beta}_Without_JRE.zip"
+    }
+
+    source {
+        contents {
+            from(rootDir) {
+                include 'docs/**', 'images/**', 'lib/**', 'lib-mnemonics/**', 'release/**',
+                    'src/**', 'test/**', 'gen/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
+                    '*.gradle', 'README.md', '*.properties'
+            }
+        }
+        sourceDistZip.archiveName = "${applicationName}_${version}${omtVersion.beta}_Source.zip"
+    }
+
+    if (macDistEnabled) {
+        mac {
+            contents {
+                from('release/mac-specific') {
+                    include '**/Info.plist'
+                    expand(version: project.version,
+                        configfile: '$APP_ROOT/Contents/Resources/Configuration.properties')
+                }
+                from('release/mac-specific') {
+                    exclude '**/Info.plist'
+                }
+                into('OmegaT.app/Contents/Java') {
+                    with main.contents
+                    exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat'
+                }
+                from(macExecutable) {
+                    into 'OmegaT.app/Contents/MacOS'
+                    fileMode 0755
+                }
+                from(macJRE) {
+                    into 'OmegaT.app/Contents/PlugIns/jre'
+                    fileMode 0755
+                }
+            }
+            macDistZip.archiveName = "${applicationName}_${version}${omtVersion.beta}_Mac.zip"
+        }
+    }
+
+    [linux: linuxJRE, linux64: linux64JRE].each { distName, jrePath ->
+        create(distName) {
+            contents {
+                into('/') {
+                    with main.contents
+                    exclude 'OmegaT.bat'
+                }
+                from(jrePath) {
+                    into 'jre'
+                    fileMode 0755
+                }
+            }
+        }
+    }
+
+    l10nMinimal {
+        contents {
+            from 'release/l10n-project'
+            from('doc_src') {
+                include 'en/InstantStartGuide.xml',
+                    'en/images/InstantGuide_1.png',
+                    'en/images/InstantGuide_2.png'
+                into 'source/doc_src'
+            }
+            from('src') {
+                include 'org/omegat/Bundle.properties'
+                into 'source/src'
+            }
+            from('release') {
+                include 'win32-specific/CustomMessages.ini'
+                into 'source/release'
+            }
+            from('scripts') {
+                include 'properties/check_rules.properties',
+                    'properties/spellcheck.properties',
+                    'properties/svn_cleanup_selected.properties',
+                    'properties/search_replace.properties',
+                    'properties/replace_strip_tags.properties',
+                    'properties/svn_clear_auth.properties',
+                    'properties/strip_bidi_marks.properties',
+                    'properties/nbsp.properties'
+                into 'source/scripts'
+            }
+            from('release') {
+                include 'mac-specific/OmegaT.app/Contents/Resources/en.lproj/Localizable.strings'
+                into 'source/release'
+            }
+            from('release') {
+                include 'readme.txt'
+                into 'source'
+                expand(translationNotice: 'This translation is the work of [insert your name], copyright© [insert year].')
+                rename '.txt$', '.utf8'
+            }
+        }
+        l10nMinimalDistZip.archiveName = "${applicationName}_${version}${omtVersion.beta}_L10N_Minimal.zip"
+    }
+
+    l10nFull {
+        contents {
+            with l10nMinimal.contents
+            from('doc_src') {
+                include 'en/**'
+                exclude 'en/html/**', 'en/pdf/**'
+                into 'source/doc_src'
+            }
+        }
+        l10nFullDistZip.archiveName = "${applicationName}_${version}${omtVersion.beta}_L10N_Full.zip"
+    }
+}
+
+task linux(dependsOn: [linuxDistTar, linux64DistTar]) {
+    description = 'Build the Linux distributions.'
+}
+[(linuxDistTar): linuxJRE, (linux64DistTar): linux64JRE].each { task, requirement ->
+    task.onlyIf {
+        requirement.directory
+    }
+    // Gradle's BZIP2 compression is super slow, so first tar uncompressed and then bz2 it later.
+    // This will be fixed in Gradle 2.14.
+    def suffix = task.name.contains('64') ? 'Linux_64' : 'Linux'
+    task.archiveName = "${applicationName}_${version}${omtVersion.beta}_${suffix}.tar"
+    task.compression = Compression.NONE
+    task.doLast {
+        ant.bzip2(src: task.archivePath, destfile: "${task.archivePath}.bz2")
+        delete task.archivePath
+    }
+}
+
+task l10n(dependsOn: [l10nMinimalDistZip, l10nFullDistZip]) {
+    description = 'Build the L10N distributions.'
+}
+
+// We bundle our startup scripts separately, so disable startScripts.
+startScripts.enabled = false
+
+// installDist and installApp are hard-coded to require a bin folder, so we trick them.
+[installDist, installApp].each {
+    it.doFirst {
+        def bin = file("${installDist.destinationDir}/bin")
+        bin.mkdirs()
+        file("${bin}/${applicationName}").createNewFile()
+    }
+    // Delete our decoy script afterwards.
+    it.doLast {
+        delete "${installDist.destinationDir}/bin"
+    }
+}
+
+def haveInnoSetup = {
+    try {
+        def findIscc = 'where iscc'.execute()
+        findIscc.waitForProcessOutput()
+        return findIscc.exitValue() == 0
+    } catch (any) {
+        return false
+    }
+}
+
+// Read in all our custom messages and massage them for inclusion in the .iss
+def getInnoSetupCustomMessages = {
+    // Don't include languages that InnoSetup doesn't have strings for
+    def blacklist = ['cy', 'ia']
+    def iniFiles = fileTree(dir: 'release/win32-specific', include: 'CustomMessages*.ini')
+    def result = new StringBuilder()
+    iniFiles.each { f ->
+        def match = f.name =~ /CustomMessages_?([^\.]*).ini/
+        if (match) {
+            def lang = match.group(1)
+            if (!blacklist.contains(lang)) {
+                result << f.text.replaceAll(/(?m)^([^=]+)/) {
+                    lang.empty ? it[0] : "${lang}.${it[0]}"
+                }
+                result << System.lineSeparator()
+            }
+        }
+    }
+    return result.toString()
+}
+
+task win {
+    description = 'Build the Windows distributions.'
+}
+
+[winNoJRE: null, winJRE: windowsJRE].each { taskName, jrePath ->
+    task(taskName) {
+        description = "Create a Windows installer for ${taskName} distro. " +
+            'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
+        dependsOn jar
+        outputs.dir distsDir
+        onlyIf {
+            haveInnoSetup()
+        }
+        doLast {
+            def innoSetupDir = file("${buildDir}/innosetup/${taskName}")
+            delete innoSetupDir
+            def customMessages = getInnoSetupCustomMessages()
+            copy {
+                with distributions.main.contents
+                from('release/win32-specific') {
+                    include 'OmegaT.exe', 'OmegaT.l4J.ini'
+                }
+                into innoSetupDir
+            }
+            // Use Ant filtering because we need Unicode output. See
+            // https://issues.gradle.org/browse/GRADLE-1267
+            ant.copy(todir: innoSetupDir, encoding: 'utf8', outputencoding: 'utf8') {
+                fileset(dir: 'release/win32-specific', includes: 'OmegaT.iss')
+                filterchain {
+                    replacetokens {
+                        ['VERSION_NUMBER_SUBST': project.version + omtVersion.beta,
+                         'OUTPUT_DIR_SUBST': distsDir.path,
+                         'JRE_SUFFIX_SUBST': jrePath == null ? '_without_JRE' : '',
+                         'JRE_COMMENT_SUBST': jrePath == null ? ';' : '',
+                         'JRE_PATH_SUBST': jrePath == null ? '' : jrePath.path,
+                         'CUSTOM_MESSAGES_SUBST': customMessages].each { key, tok ->
+                            token(key: key, value: tok)
+                        }
+                    }
+                }
+            }
+            exec {
+                commandLine 'iscc', "${innoSetupDir}/OmegaT.iss"
+            }
+        }
+    }
+    assemble.dependsOn taskName
+    win.dependsOn taskName
+}
+
+// Disable .tar distributions for everyone but Linux
+tasks.findAll { it.name =~ /[dD]istTar$/ && !it.name.contains('linux') }.each { it.enabled = false }
+// Disable .zip distributions for Linux
+tasks.findAll { it.name =~ /[dD]istZip$/ && it.name.contains('linux') }.each { it.enabled = false }
+
+def webstartProps = loadProperties file("${assetDir}/webstart.properties")
+
+jnlp {
+    href "${applicationName}.jnlp"
+    if (webstartProps.codebase) {
+        codebase webstartProps.codebase
+    }
+    withXml {
+        information {
+            title applicationName
+            vendor "${applicationName} Development Team"
+            homepage href: 'http://www.omegat.org'
+            shortcut(online: false) {
+                desktop()
+                menu submenu: "${applicationName} from WebStart"
+            }
+        }
+        'offline-allowed'()
+        association 'mime-type': 'application/x-omegat-project', extensions: 'project'
+        security {
+            'all-permissions'()
+        }
+        resources {
+            property name: 'javaws.cfg.jauthenticator', value: true
+        }
+    }
+    if (webstartProps.keystore) {
+        signJarAddedManifestEntries = ['Codebase': webstartProps.codebase,
+            'Permissions': 'all-permissions',
+            'Application-Name': applicationName]
+        signJarRemovedManifestEntries = '(?:Trusted-Only|Trusted-Library|.*-Digest)'
+        signJarParams = ['keystore', 'alias', 'storepass', 'keypass', 'tsaurl'].collectEntries {
+            [(it): webstartProps[it]]
+        }.findAll { k, v -> v != null }
+    }
+}
+
+processResources << {
+    /* Set the revision number included in version strings. The value is chosen from the first valid value in:
+    1. src/org/omegat/Version.properties (only if not "dev", i.e. this is a source package not under VCS)
+    2. This svn checkout's revision
+    3. This git clone's SHA-1
+    4. If none of the above, the value "unknown"
+     */
+    def git = file('.git').directory ? doCmd('git rev-parse --short HEAD') : ''
+    def svn = file('.svn').directory ? doCmd('svnversion') : ''
+    def revision = [omtVersion.revision, git, svn, 'unknown'].find {
+        it != 'dev' && !it.empty
+    }
+    println "Detected revision ${revision}"
+    def versionFile = file("${sourceSets.main.output.resourcesDir}/org/omegat/Version.properties")
+    ant.propertyfile(file: versionFile) {
+        entry(key: 'revision', value: revision)
+    }
+}
+
+task checksums {
+    def algos = ['SHA-512', 'MD5']
+    description = "Generate ${algos.join(', ')} checksums for distribution files"
+    inputs.files fileTree(dir: distsDir, include: 'OmegaT*')
+    def checksumsDir = file("${distsDir}/checksums")
+    outputs.dir checksumsDir
+    doFirst {
+        delete checksumsDir
+    }
+    doLast {
+        distsDir.listFiles().findAll { it.file }.each { f ->
+            algos.each { algo ->
+                ant.checksum file: f, algorithm: algo, todir: checksumsDir
+            }
+        }
+    }
+}
+
+task genDocIndex(type: JavaExec, dependsOn: [classes]) {
+    description = 'Regenerate the docs index file'
+    main = 'util.CreateDocIndexUtil'
+    classpath = sourceSets.main.runtimeClasspath
+    outputs.file 'docs/index.html'
+}
+jar.finalizedBy genDocIndex
+
+task genJAXB {
+    description = 'Generate classes for loading and manipulating XML formats'
+    outputs.dir 'src/gen'
+    doLast {
+        ['gen.core.segmentation': 'src/schemas/srx20.xsd',
+         'gen.core.filters': 'src/schemas/filters.xsd',
+         'gen.core.tbx': 'src/schemas/tbx.xsd',
+         'gen.core.project': 'src/schemas/project_properties.xsd'].each { pkg, xsd ->
+            exec {
+                commandLine 'xjc', '-no-header', '-d', 'src', '-p', pkg, xsd
+            }
+        }
+        [[p: 'gen.core.tmx14', b: 'src/schemas/tmx14.xjb', xsd: 'src/schemas/tmx14.xsd'],
+            [p: 'gen.taas', b: 'src/schemas/taas.xjb', xsd: 'src/schemas/taas.xsd']].each { cfg ->
+            exec {
+                commandLine 'xjc', '-no-header', '-d', 'src', '-p', cfg.p, '-b', cfg.b, cfg.xsd
+            }
+        }
+    }
+}
+
+task genMac {
+    description = 'Generate the Mac .app skeleton. Requires AppBundler (https://bitbucket.org/infinitekind/appbundler) ' +
+        'to be available in ~/.ant/lib'
+    def appbundlerJar = file("${System.getProperty('user.home')}/.ant/lib/appbundler-1.0ea.jar")
+    onlyIf {
+        appbundlerJar.file
+    }
+    doLast {
+        ant.taskdef(name: 'appbundler', classname: 'com.oracle.appbundler.AppBundlerTask',
+            classpath: appbundlerJar)
+        ant.appbundler(outputdirectory: 'release/mac-specific',
+            name: applicationName,
+            displayname: applicationName,
+            identifier: 'org.omegat.OmegaT',
+            icon: 'images/OmegaT.icns',
+            version: '${version}',
+            jvmrequired: javaVersion,
+            shortversion: '${version}',
+            mainclassname: mainClassName) {
+            option(value: "-Xdock:name=${applicationName}")
+            argument(value: '--config-file=${configfile}')
+            bundledocument(extensions: 'project',
+                name: "${applicationName} Project",
+                role: 'editor',
+                icon: 'images/OmegaT.icns')
+            bundledocument(extensions: '*',
+                name: 'All Files',
+                role: 'none')
+            plistentry(key: 'JVMRuntime', value: 'jre')
+        }
+    }
+}
+
+allprojects {
+    javadoc {
+        failOnError = false
+    }
+}
+
+task(jar2, dependsOn: jar, type: Sync) {
+    description = 'Create minimal executable output for debugging.'
+    destinationDir = file("${buildDir}/install/jar2")
+    from jar
+    from(configurations.compile) {
+        into 'lib'
+    }
+    from('scripts') {
+        into 'scripts'
+    }
+}
+
+task(debug, dependsOn: classes, type: JavaExec) {
+    description = 'Launch app for debugging.' // Special debug task for NetBeans
+    main = mainClassName
+    classpath = sourceSets.main.runtimeClasspath
+    debug true
+}
+
+def Properties loadProperties(File propFile) {
+    def config = new Properties()
+    if (propFile.canRead()) {
+        config.load(new FileInputStream(propFile))
+    }
+    return config
+}
+
+def doCmd(String cmd) {
+    StringBuilder output = new StringBuilder()
+    cmd.execute().waitForProcessOutput(output, null)
+    return output.toString().trim()
+}
+
+def getUpdateSuffix(String update) {
+    if (!update || update == '0') {
+        return ''
+    }
+    if (update.length() == 1) {
+        return '0' + update
+    }
+    return update
+}

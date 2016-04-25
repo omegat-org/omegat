@@ -1,4 +1,4 @@
-﻿@@TRANSLATION_NOTICE@@
+﻿${translationNotice}
 
 ==============================================================================
   OmegaT 4.0, Read Me file

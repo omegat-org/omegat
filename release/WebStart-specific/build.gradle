@@ -1,0 +1,23 @@
+apply plugin: 'base'
+
+configurations {
+    docs
+}
+
+task docsJar(type: Jar) {
+    description = 'Bundle documents for Java WebStart.'
+    baseName = 'docs'
+    destinationDir = file("${buildDir}/webstartDocs")
+    from(rootProject.file('release')) {
+        include 'changes.txt', 'OmegaT-license.txt'
+        into 'docs'
+    }
+    from(rootProject.file('docs')) {
+        include '**/instantStartGuideNoTOC.html', '**/OmegaT.css'
+        into 'docs'
+    }
+}
+
+artifacts {
+    docs docsJar
+}

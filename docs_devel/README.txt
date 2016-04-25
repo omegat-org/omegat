@@ -1,7 +1,8 @@
 Building OmegaT
 ===============
 
-OmegaT is built with Apache Ant. Run `ant` from the top level.
+OmegaT is built with Gradle. Run `gradlew tasks` from the top level to
+see the available tasks.
 
 OmegaT will run on the latest Java, but is required to be compatible with Java
 1.8. Further, JREs other than Oracle's are not officially supported. You are
@@ -11,10 +12,32 @@ Eclipse and NetBeans are recommended IDEs for working with OmegaT source
 code. NetBeans is required to modify *.form-based GUI layouts.
 
 Check the other files in this directory for documentation. You can
-produce Javadoc by running `ant javadoc`, or browse online:
+produce Javadoc by running `gradlew javadoc`, or browse online:
     Trunk:    https://omegat.ci.cloudbees.com/job/omegat-trunk/javadoc/
     Releases: https://omegat.ci.cloudbees.com/job/omegat-javadoc/
               (Open desired version and click "Javadoc" link on left)
+
+
+Working with Dependencies
+=========================
+
+OmegaT uses Gradle to manage and fetch dependencies. To modify dependencies:
+
+1. Add, change, or remove the appropriate entry in build.gradle
+
+2. Run `gradlew getDependencies` (and `gradlew eclipse` if using Eclipse)
+
+3. Commit the changes to the /lib/auto directory
+
+When writing code that directly uses external libraries, it is helpful
+to have access to the library's source code. To achieve this, change
+the keyword "dependency" to "compile". Ex:
+
+    dependency 'commons-io:commons-io:2.4'
+
+becomes
+
+    compile 'commons-io:commons-io:2.4'
 
 
 Contributing to OmegaT

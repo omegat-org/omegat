@@ -12,7 +12,7 @@
   <customProcName>true</customProcName>
   <stayAlive>false</stayAlive>
   <manifest></manifest>
-  <icon>..\..\Images\OmegaT.ico</icon>
+  <icon>..\..\images\OmegaT.ico</icon>
   <jre>
     <path>jre</path>
     <minVersion>1.8.0</minVersion>

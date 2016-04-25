@@ -1,4 +1,10 @@
 #!/bin/bash
+
 # readlink follows any symbolic links to get the real file
 REALOMEGATPATH=`dirname "$(readlink -nf $0)"`
-java -jar -Xmx1024M "${REALOMEGATPATH}/OmegaT.jar" $*
+
+JAVA="java"
+BUNDLED_JAVA="${REALOMEGATPATH}/jre/bin/java"
+[ -f "${BUNDLED_JAVA}" ] && JAVA="${BUNDLED_JAVA}"
+
+"${JAVA}" -jar -Xmx1024M "${REALOMEGATPATH}/@JAR_SUBST@" "$@"

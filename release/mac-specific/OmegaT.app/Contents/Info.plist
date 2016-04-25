@@ -19,9 +19,9 @@
 <key>CFBundlePackageType</key>
 <string>APPL</string>
 <key>CFBundleShortVersionString</key>
-<string>@VERSION_NUMBER_SUBST@</string>
+<string>${version}</string>
 <key>CFBundleVersion</key>
-<string>@VERSION_NUMBER_SUBST@</string>
+<string>${version}</string>
 <key>CFBundleSignature</key>
 <string>????</string>
 <key>NSHumanReadableCopyright</key>
@@ -47,8 +47,7 @@
 <string>OmegaT Project</string>
 <key>CFBundleTypeRole</key>
 <string>Editor</string>
-<key>LSTypeIsPackage</key>
-<false/></dict>
+</dict>
 <dict>
 <key>CFBundleTypeExtensions</key>
 <array>
@@ -58,8 +57,7 @@
 <string>All Files</string>
 <key>CFBundleTypeRole</key>
 <string>None</string>
-<key>LSTypeIsPackage</key>
-<false/></dict>
+</dict>
 </array>
 <key>LSArchitecturePriority</key>
 <array>
@@ -72,14 +70,13 @@
 <key>JVMOptions</key>
 <array>
 <string>-Xdock:name=OmegaT</string>
-<string>-Xmx1024M</string>
 </array>
 <key>JVMDefaultOptions</key>
 <dict>
 </dict>
 <key>JVMArguments</key>
 <array>
-<string>--config-file=$APP_ROOT/Contents/Resources/Configuration.properties</string>
+<string>--config-file=${configfile}</string>
 </array>
 <key>JVMRuntime</key>
 <string>jre</string>

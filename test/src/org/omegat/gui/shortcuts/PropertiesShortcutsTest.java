@@ -27,7 +27,9 @@ package org.omegat.gui.shortcuts;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -66,26 +68,24 @@ public class PropertiesShortcutsTest {
     @BeforeClass
     public static void setUpClass() throws IOException {
         // Copy user-defined properties to user config dir
-        ClassLoader classLoader = PropertiesShortcuts.class.getClassLoader();
-        InputStream in = classLoader.getResourceAsStream("org/omegat/gui/shortcuts/test.user.properties");
-        File file = new File(StaticUtils.getConfigDir(), "test.properties");
-        try {
-            FileUtils.copyInputStreamToFile(in, file);
-        } finally {
-            in.close();
+        File userFile = new File(StaticUtils.getConfigDir(), "test.properties");
+        try (InputStream in = PropertiesShortcutsTest.class.getResourceAsStream("test.user.properties")) {
+            FileUtils.copyInputStreamToFile(in, userFile);
         }
+        assertTrue(userFile.isFile());
     }
 
     @AfterClass
     public static void tearDownClass() {
         // Delete user-defined properties
         File file = new File(StaticUtils.getConfigDir(), "test.properties");
-        file.delete();
+        assertTrue(file.delete());
     }
 
     @Before
     public void setUp() {
         shotcuts = new PropertiesShortcuts("/org/omegat/gui/shortcuts/test.properties");
+        assertFalse(shotcuts.properties.isEmpty());
     }
 
     @After
@@ -98,8 +98,6 @@ public class PropertiesShortcutsTest {
      */
     @Test
     public void testGetKeyStroke() {
-        System.out.println("getKeyStroke()");
-
         KeyStroke expected = CTRL_S;
         KeyStroke result = shotcuts.getKeyStroke(TEST_SAVE);
         assertEquals(expected, result);
@@ -127,8 +125,6 @@ public class PropertiesShortcutsTest {
      */
     @Test
     public void testBindKeyStrokes_JMenuBar() {
-        System.out.println("bindKeyStrokes(JMenuBar)");
-
         JMenuBar menu = new JMenuBar();
         JMenu parent = new JMenu();
         JMenuItem child1 = new JMenu();
@@ -172,8 +168,6 @@ public class PropertiesShortcutsTest {
      */
     @Test
     public void testBindKeyStrokes_JMenuItem() {
-        System.out.println("bindKeyStrokes(JMenuItem)");
-
         // case JMenuItem with no children
         JMenuItem item = new JMenuItem();
         item.setActionCommand(TEST_SAVE);
@@ -202,8 +196,6 @@ public class PropertiesShortcutsTest {
      */
     @Test
     public void testBindKeyStrokes_JMenuItem_Recursive() {
-        System.out.println("bindKeyStrokes(JMenuItem)");
-
         // case JMenu with children
         JMenu parent = new JMenu();
         JMenuItem child1 = new JMenu();
@@ -246,8 +238,6 @@ public class PropertiesShortcutsTest {
      */
     @Test
     public void testBindKeyStrokes_InputMap_ObjectArr() {
-        System.out.println("bindKeyStrokes(InputMap, Object[])");
-
         // bind
         InputMap inputMap = new InputMap();
         shotcuts.bindKeyStrokes(inputMap, TEST_SAVE, TEST_CUT, TEST_USER_1);

@@ -80,7 +80,7 @@ dependencies {
     dependency 'net.loomchild:maligna:3.0.0'
     dependency 'commons-io:commons-io:2.4'
     dependency 'commons-lang:commons-lang:2.6'
-    dependency 'org.slf4j:slf4j-jdk14:1.7.18'
+    dependency 'org.slf4j:slf4j-jdk14:1.7.19'
     // Groovy used at runtime for scripting only
     dependency 'org.codehaus.groovy:groovy-all:2.2.2'
 

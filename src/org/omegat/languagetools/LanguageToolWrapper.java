@@ -34,11 +34,13 @@ import javax.swing.text.Highlighter.HighlightPainter;
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
 import org.languagetool.Languages;
+import org.languagetool.rules.Rule;
 import org.languagetool.rules.RuleMatch;
 import org.languagetool.rules.bitext.BitextRule;
 import org.languagetool.rules.bitext.DifferentLengthRule;
 import org.languagetool.rules.bitext.DifferentPunctuationRule;
 import org.languagetool.rules.bitext.SameTranslationRule;
+import org.languagetool.rules.spelling.SpellingCheckRule;
 import org.languagetool.tools.Tools;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -97,15 +99,17 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
     }
 
     protected JLanguageTool getLanguageToolInstance(Language ltLang) {
+        if (ltLang == null) {
+            return null;
+        }
         JLanguageTool result = null;
 
-        if (ltLang != null) {
-            try {
-                result = new JLanguageTool(ltLang);
-            } catch (Exception ex) {
-                result = null;
-                Log.log(ex);
-            }
+        try {
+            result = new JLanguageTool(ltLang);
+            result.getAllRules().stream().filter(rule -> rule instanceof SpellingCheckRule).map(Rule::getId)
+                    .forEach(result::disableRule);
+        } catch (Exception ex) {
+            Log.log(ex);
         }
 
         return result;

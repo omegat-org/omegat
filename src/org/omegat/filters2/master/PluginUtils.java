@@ -65,6 +65,8 @@ import org.omegat.util.StringUtil;
  */
 public final class PluginUtils {
 
+    public static final String PLUGINS_LIST_FILE = "Plugins.properties";
+
     enum PLUGIN_TYPE {
         FILTER, TOKENIZER, MARKER, MACHINETRANSLATOR, BASE, GLOSSARY, UNKNOWN
     };
@@ -133,7 +135,7 @@ public final class PluginUtils {
                 } else {
                     // load from plugins property list
                     Properties props = new Properties();
-                    try (FileInputStream fis = new FileInputStream("Plugins.properties")) {
+                    try (FileInputStream fis = new FileInputStream(PLUGINS_LIST_FILE)) {
                         props.load(fis);
                         loadFromProperties(props, pluginsClassLoader);
                     }

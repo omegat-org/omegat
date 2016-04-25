@@ -27,13 +27,12 @@
 package org.omegat.gui.dialogs;
 
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
 
+import org.apache.commons.io.IOUtils;
 import org.omegat.help.Help;
-import org.omegat.util.FileUtil;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.StaticUIUtils;
 import org.openide.awt.Mnemonics;
 
@@ -105,10 +104,9 @@ public class LicenseDialog extends javax.swing.JDialog {
         sb.append(OStrings.getString("LICENSEDIALOG_PREFACE"));
         sb.append("\n\n===================================================\n\n");
         try {
-            String text = FileUtil.readTextFile(Paths
-                    .get(StaticUtils.installDir(), OConsts.HELP_DIR, OConsts.LICENSE_FILE).toFile());
+            String text = IOUtils.toString(Help.getHelpFileURI(OConsts.LICENSE_FILE), StandardCharsets.UTF_8);
             sb.append(text);
-        } catch (IOException ex) {
+        } catch (NullPointerException | IOException ex) {
             sb.append(Help.errorHaiku());
         }
         licenseTextPane.setText(sb.toString());

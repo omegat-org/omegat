@@ -42,8 +42,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Paths;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -368,45 +371,6 @@ public class StaticUtils {
         return graphics.getAvailableFontFamilyNames();
     }
 
-    /**
-     * Extracts an element of a class path.
-     *
-     * @param fullcp
-     *            the classpath
-     * @param posInsideElement
-     *            position inside a class path string, that fits inside some
-     *            classpath element.
-     */
-    private static String classPathElement(String fullcp, int posInsideElement) {
-        // semicolon before the path to the Jar
-        int semicolon1 = fullcp.lastIndexOf(File.pathSeparatorChar, posInsideElement);
-        // semicolon after the path to the Jar
-        int semicolon2 = fullcp.indexOf(File.pathSeparatorChar, posInsideElement);
-        if (semicolon1 < 0)
-            semicolon1 = -1;
-        if (semicolon2 < 0)
-            semicolon2 = fullcp.length();
-        return fullcp.substring(semicolon1 + 1, semicolon2);
-    }
-
-    /**
-     * Extract classpath element that ends with <code>ending</code> from
-     * the full classpath <code>cp</code>, if present. If not present, returns
-     * null.
-     */
-    private static String extractClasspathElement(String cp, String ending) {
-        try {
-            int pos = cp.indexOf(ending);
-            if (pos >= 0) {
-                String path = classPathElement(cp, pos);
-                return path.substring(0, path.indexOf(ending));
-            }
-        } catch (Exception e) {
-            // should never happen, but just in case ;-)
-        }
-        return null;
-    }
-
     /** Caching install dir */
     private static String INSTALLDIR = null;
 
@@ -416,23 +380,27 @@ public class StaticUtils {
      */
     public static String installDir() {
         if (INSTALLDIR == null) {
-            String cp = System.getProperty("java.class.path");
-            
-            // See if we are running from a JAR
-            String path = extractClasspathElement(cp, File.separator + OConsts.APPLICATION_JAR);
-            
-            if (path == null) {
-                // We're not running from a JAR; probably debug mode (in IDE, etc.)
-                path = extractClasspathElement(cp, OConsts.DEBUG_CLASSPATH);
+            File file = null;
+            try {
+                URI sourceUri = StaticUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI();
+                if (sourceUri.getScheme().equals("file")) {
+                    File uriFile = Paths.get(sourceUri).toFile();
+                    // If running from a JAR, get the enclosing folder
+                    // (the JAR is assumed to be at the installation root)
+                    if (uriFile.getName().endsWith(".jar")) {
+                        file = uriFile.getParentFile();
+                    } else {
+                        // Running from an IDE or build tool; use CWD.
+                    }
+                } else {
+                    // Running from Java WebStart; use CWD.
+                }
+            } catch (URISyntaxException e) {
             }
-            
-            // WTF?!! Falling back to current directory
-            if (path == null) {
-                path = ".";
+            if (file == null) {
+                file = Paths.get(".").toFile();
             }
-            
-            // Cache the absolute path
-            INSTALLDIR = new File(path).getAbsolutePath();
+            INSTALLDIR = file.getAbsolutePath();
         }
         return INSTALLDIR;
     }

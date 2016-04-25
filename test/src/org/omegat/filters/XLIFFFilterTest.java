@@ -29,7 +29,9 @@ package org.omegat.filters;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
+import java.util.List;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -130,9 +132,9 @@ public class XLIFFFilterTest extends TestFilterBase {
                     }
                 });
         File trFile = new File(outFile.getPath() + "-translated");
-        String text = FileUtil.readTextFile(inFile);
-        text = text.replace("NONTRANSLATED", "TRANSLATED");
-        FileUtil.writeTextFile(trFile, text);
+        List<String> lines = Files.lines(inFile.toPath()).map(line -> line.replace("NONTRANSLATED", "TRANSLATED"))
+                .collect(Collectors.toList());
+        Files.write(trFile.toPath(), lines);
         compareXML(trFile, outFile);
     }
 

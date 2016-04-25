@@ -26,13 +26,17 @@
 
 package org.omegat.gui.editor;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
+import org.apache.commons.io.IOUtils;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
-import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -112,7 +116,9 @@ public class SegmentExportImport {
     private static void writeFile(File file, String content) throws IOException {
         content = content.replaceAll("\n", System.getProperty("line.separator"));
         file.delete();
-        FileUtil.writeTextFile(file, content);
+        try (BufferedWriter writer = Files.newBufferedWriter(file.toPath(), StandardCharsets.UTF_8)) {
+            writer.write(content);
+        }
     }
 
     public static synchronized void exportCurrentSelection(String selection) {
@@ -129,8 +135,9 @@ public class SegmentExportImport {
             return;
         }
         exportLastModified = importFile.lastModified() + 1;
-        try {
-            final String text = FileUtil.readTextFile(importFile).replace(System.getProperty("line.separator"), "\n");
+        try (FileInputStream fis = new FileInputStream(importFile)) {
+            String text = IOUtils.toString(fis, StandardCharsets.UTF_8).replace(System.getProperty("line.separator"),
+                    "\n");
             UIThreadsUtil.executeInSwingThread(new Runnable() {
                 public void run() {
                     controller.replaceEditText(text);

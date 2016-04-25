@@ -38,7 +38,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -126,44 +125,6 @@ public class FileUtil {
             if (e - b > RENAME_RETRY_TIMEOUT) {
                 throw new IOException("Error renaming " + from + " to " + to);
             }
-        }
-    }
-
-    /**
-     * Read file as UTF-8 text.
-     */
-    public static String readTextFile(File file) throws IOException {
-        String result = null;
-        FileInputStream fis = null;
-        InputStreamReader isr = null;
-        try {
-            fis = new FileInputStream(file);
-            isr = new InputStreamReader(fis, OConsts.UTF8);
-            result = IOUtils.toString(isr);
-            isr.close();
-            fis.close();
-        } finally {
-            IOUtils.closeQuietly(isr);
-            IOUtils.closeQuietly(fis);
-        }
-        return result;
-    }
-
-    /**
-     * Write text in file using UTF-8.
-     */
-    public static void writeTextFile(File file, String text) throws IOException {
-        FileOutputStream fos = null;
-        Writer wr = null;
-        try {
-            fos = new FileOutputStream(file);
-            wr = new OutputStreamWriter(fos, OConsts.UTF8);
-            wr.write(text);
-            wr.close();
-            fos.close();
-        } finally {
-            IOUtils.closeQuietly(wr);
-            IOUtils.closeQuietly(fos);
         }
     }
 

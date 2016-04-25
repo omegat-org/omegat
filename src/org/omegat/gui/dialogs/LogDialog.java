@@ -28,13 +28,15 @@
 package org.omegat.gui.dialogs;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import javax.swing.JFileChooser;
 import javax.swing.SwingWorker;
 
 import org.apache.commons.io.FileUtils;
-import org.omegat.util.FileUtil;
+import org.apache.commons.io.IOUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -75,8 +77,8 @@ public class LogDialog extends javax.swing.JDialog {
         new SwingWorker<String, Object>() {
             @Override
             protected String doInBackground() throws Exception {
-                try {
-                    return FileUtil.readTextFile(logLocation);
+                try (FileInputStream fis = new FileInputStream(logLocation)) {
+                    return IOUtils.toString(fis, StandardCharsets.UTF_8);
                 } catch (Exception e) {
                     return "";
                 }

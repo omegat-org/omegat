@@ -36,6 +36,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.Random;
@@ -84,8 +85,7 @@ public class Help {
     public static URI getHelpFileURI(String lang, String filename) {
         // find in install dir
         String path = lang == null ? filename : lang + File.separator + filename;
-        File file = new File(StaticUtils.installDir(), OConsts.HELP_DIR + File.separator
-                + path);
+        File file = Paths.get(StaticUtils.installDir(), OConsts.HELP_DIR, path).toFile();
         if (file.isFile()) {
             return file.toURI();
         }

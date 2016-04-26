@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.0
 ----------------------------------------------------------------------
- 20 Enhancements
+ 21 Enhancements
   3 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -50,6 +50,9 @@
 
   - Handle multiple selection in Project Files list context menu 
   https://sourceforge.net/p/omegat/feature-requests/1231/
+
+  - Compatibility with MED format 
+  https://sourceforge.net/p/omegat/feature-requests/1240/
 
   Other changes
 

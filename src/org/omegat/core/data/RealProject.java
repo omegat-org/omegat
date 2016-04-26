@@ -5,11 +5,11 @@
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2007 Zoltan Bartko
-               2008 Alex Buloichik
+               2008-2016 Alex Buloichik
                2009-2010 Didier Briel
-               2012 Alex Buloichik, Guido Leenders, Didier Briel, Martin Fleurke
+               2012 Guido Leenders, Didier Briel, Martin Fleurke
                2013 Aaron Madlon-Kay, Didier Briel
-               2014 Aaron Madlon-Kay, Alex Buloichik, Didier Briel
+               2014 Aaron Madlon-Kay, Didier Briel
                2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -274,8 +274,12 @@ public class RealProject implements IProject {
             setProjectModified(true);
             saveProject(false);
 
+            loadSourceFiles();
+
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);
             importHandler = new ImportFromAutoTMX(this, allProjectEntries);
+
+            importTranslationsFromSources();
 
             loadTM();
 

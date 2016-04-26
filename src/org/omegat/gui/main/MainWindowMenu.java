@@ -230,6 +230,9 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         projectMenu.add(projectCompileMenuItem = createMenuItem("TF_MENU_FILE_COMPILE"));
         projectMenu.add(projectSingleCompileMenuItem = createMenuItem("TF_MENU_FILE_SINGLE_COMPILE"));
         projectMenu.add(new JSeparator());
+        projectMenu.add(projectMedOpenMenuItem = createMenuItem("TF_MENU_FILE_MED_OPEN"));
+        projectMenu.add(projectMedCreateMenuItem = createMenuItem("TF_MENU_FILE_MED_CREATE"));
+        projectMenu.add(new JSeparator());
         projectMenu.add(projectEditMenuItem = createMenuItem("MW_PROJECTMENU_EDIT"));
         projectMenu.add(viewFileListMenuItem = createMenuItem("TF_MENU_FILE_PROJWIN"));
         projectMenu.add(projectAccessProjectFilesMenu = createMenu("TF_MENU_FILE_ACCESS_PROJECT_FILES")); 
@@ -634,11 +637,11 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
      *            project open status: true if opened, false if closed
      */
     private void onProjectStatusChanged(final boolean isProjectOpened) {
-        JMenuItem[] itemsToSwitchOff = new JMenuItem[] { projectNewMenuItem, projectTeamNewMenuItem, projectOpenMenuItem };
+        JMenuItem[] itemsToSwitchOff = new JMenuItem[] { projectNewMenuItem, projectTeamNewMenuItem, projectOpenMenuItem, projectMedOpenMenuItem };
 
         JMenuItem[] itemsToSwitchOn = new JMenuItem[] { projectImportMenuItem, projectWikiImportMenuItem,
                 projectReloadMenuItem, projectCloseMenuItem, projectSaveMenuItem, projectEditMenuItem,
-                projectCompileMenuItem, projectSingleCompileMenuItem, projectAccessProjectFilesMenu,
+                projectCompileMenuItem, projectSingleCompileMenuItem, projectAccessProjectFilesMenu, projectMedCreateMenuItem,
 
                 editMenu, editFindInProjectMenuItem, editReplaceInProjectMenuItem, editInsertSourceMenuItem,
                 editInsertTranslationMenuItem, editTagPainterMenuItem, editOverwriteSourceMenuItem,
@@ -787,6 +790,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem projectCloseMenuItem;
     JMenuItem projectCompileMenuItem;
     JMenuItem projectSingleCompileMenuItem;
+    JMenuItem projectMedOpenMenuItem;
+    JMenuItem projectMedCreateMenuItem;
     JMenuItem projectEditMenuItem;
     JMenuItem projectExitMenuItem;
     JMenuItem projectImportMenuItem;

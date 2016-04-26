@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2008-2010 Alex Buloichik
+ Copyright (C) 2008-2016 Alex Buloichik
                2011 Martin Fleurke
                2012 Thomas Cordonnier
                2013 Yu Tang
@@ -54,6 +54,7 @@ import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.filters2.master.FilterMaster;
+import org.omegat.gui.dialogs.ChooseMedProject;
 import org.omegat.gui.dialogs.FileCollisionDialog;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.NewTeamProject;
@@ -142,6 +143,135 @@ public class ProjectUICommands {
                 
                 mainWindow.setCursor(oldCursor);
                 return null;
+            }
+        }.execute();
+    }
+
+    public static void projectOpenMED() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (Core.getProject().isProjectLoaded()) {
+            return;
+        }
+
+        // ask for MED file
+        ChooseMedProject ndm = new ChooseMedProject();
+        int ndmResult = ndm.showOpenDialog(Core.getMainWindow().getApplicationFrame());
+        if (ndmResult != OmegaTFileChooser.APPROVE_OPTION) {
+            // user press 'Cancel' in project creation dialog
+            return;
+        }
+        final File med = ndm.getSelectedFile();
+
+        // ask for new project dir
+        NewProjectFileChooser ndc = new NewProjectFileChooser();
+        int ndcResult = ndc.showSaveDialog(Core.getMainWindow().getApplicationFrame());
+        if (ndcResult != OmegaTFileChooser.APPROVE_OPTION) {
+            // user press 'Cancel' in project creation dialog
+            return;
+        }
+        final File dir = ndc.getSelectedFile();
+
+        new SwingWorker<Object, Void>() {
+            protected Object doInBackground() throws Exception {
+                dir.mkdirs();
+
+                final ProjectProperties newProps = new ProjectProperties(dir);
+                ProjectMedProcessing.extractFromMed(med, newProps);
+                // create project
+                try {
+                    ProjectFactory.createProject(newProps);
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                }
+
+                RecentProjects.add(dir.getAbsolutePath());
+
+                return null;
+            }
+
+            protected void done() {
+                try {
+                    get();
+                    SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                            Core.getEditor().requestFocus();
+                        }
+                    });
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                }
+            }
+        }.execute();
+    }
+
+    public static void projectCreateMED() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+
+        // commit the current entry first
+        Core.getEditor().commitAndLeave();
+
+        // ask for new MED file
+        ChooseMedProject ndm = new ChooseMedProject();
+        // default name
+        String zipName = null;
+        try {
+            File origin = ProjectMedProcessing.getOriginMedFile(Core.getProject().getProjectProperties());
+            if (origin != null) {
+                zipName = origin.getName();
+            }
+        } catch (Exception ex) {
+        }
+        if (zipName == null) {
+            zipName = Core.getProject().getProjectProperties().getProjectName() + "-MED.zip";
+        }
+        ndm.setSelectedFile(new File(
+                Core.getProject().getProjectProperties().getProjectRootDir().getParentFile(), zipName));
+        int ndmResult = ndm.showSaveDialog(Core.getMainWindow().getApplicationFrame());
+        if (ndmResult != OmegaTFileChooser.APPROVE_OPTION) {
+            // user press 'Cancel' in project creation dialog
+            return;
+        }
+        // add .zip extension if there is no
+        final File med = ndm.getSelectedFile().getName().toLowerCase().endsWith(".zip")
+                ? ndm.getSelectedFile() : new File(ndm.getSelectedFile().getAbsolutePath() + ".zip");
+
+        new SwingWorker<Object, Void>() {
+            protected Object doInBackground() throws Exception {
+                IMainWindow mainWindow = Core.getMainWindow();
+                Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
+                Cursor oldCursor = mainWindow.getCursor();
+                mainWindow.setCursor(hourglassCursor);
+
+                mainWindow.showStatusMessageRB("MW_STATUS_SAVING");
+
+                Core.getProject().saveProject(true);
+                Core.getProject().compileProject(".*");
+                ProjectMedProcessing.createMed(med, Core.getProject().getProjectProperties());
+
+                mainWindow.showStatusMessageRB("MW_STATUS_SAVED");
+                mainWindow.setCursor(oldCursor);
+                return null;
+            }
+
+            protected void done() {
+                try {
+                    get();
+                    SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                            Core.getEditor().requestFocus();
+                        }
+                    });
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                }
             }
         }.execute();
     }

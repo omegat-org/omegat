@@ -391,7 +391,14 @@ public class ProjectUICommands {
     }
 
     public static void projectReload() {
-        performProjectMenuItemPreConditions();
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+
+        // commit the current entry first
+        Core.getEditor().commitAndLeave();
 
         final ProjectProperties props = Core.getProject().getProjectProperties();
 
@@ -431,7 +438,14 @@ public class ProjectUICommands {
     }
 
     public static void projectSave() {
-        performProjectMenuItemPreConditions();
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+
+        // commit the current entry first
+        Core.getEditor().commitAndLeave();
 
         new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
@@ -460,7 +474,14 @@ public class ProjectUICommands {
     }
 
     public static void projectClose() {
-        performProjectMenuItemPreConditions();
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+
+        // commit the current entry first
+        Core.getEditor().commitAndLeave();
 
         new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
@@ -503,7 +524,14 @@ public class ProjectUICommands {
     }
 
     public static void projectEditProperties() {
-        performProjectMenuItemPreConditions();
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+
+        // commit the current entry first
+        Core.getEditor().commitAndLeave();
 
         // displaying the dialog to change paths and other properties
         ProjectPropertiesDialog prj = new ProjectPropertiesDialog(Core.getProject().getProjectProperties(),
@@ -554,7 +582,14 @@ public class ProjectUICommands {
     }
 
     public static void projectCompile() {
-        performProjectMenuItemPreConditions();
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+
+        // commit the current entry first
+        Core.getEditor().commitAndLeave();
 
         new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
@@ -574,7 +609,14 @@ public class ProjectUICommands {
     }
 
     public static void projectSingleCompile(final String sourcePattern) {
-        performProjectMenuItemPreConditions();
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+
+        // commit the current entry first
+        Core.getEditor().commitAndLeave();
 
         new SwingWorker<Object, Void>() {
             @Override
@@ -640,7 +682,14 @@ public class ProjectUICommands {
      *            If true, the project will be reloaded after the files are successfully copied
      */
     public static void projectImportFiles(String destination, File[] toImport, boolean doReload) {
-        performProjectMenuItemPreConditions();
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+
+        // commit the current entry first
+        Core.getEditor().commitAndLeave();
 
         try {
             FileUtil.copyFilesTo(new File(destination), toImport, new CollisionCallback());
@@ -718,17 +767,6 @@ public class ProjectUICommands {
             Log.log(ex);
             Core.getMainWindow().displayErrorRB(ex, "TF_WIKI_IMPORT_FAILED");
         }
-    }
-
-    private static void performProjectMenuItemPreConditions() {
-        UIThreadsUtil.mustBeSwingThread();
-
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
-
-        // commit the current entry first
-        Core.getEditor().commitAndLeave();
     }
 
     private static void processSwingWorkerException(Exception ex, String errorCode) {

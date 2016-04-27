@@ -28,6 +28,7 @@ package org.omegat.gui.dialogs;
 import java.io.File;
 
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
 
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -41,6 +42,19 @@ public class ChooseMedProject extends JFileChooser {
         setFileHidingEnabled(true);
         setFileSelectionMode(FILES_ONLY);
         setDialogTitle(OStrings.getString("PP_MED_OPEN"));
+        setAcceptAllFileFilterUsed(false);
+        addChoosableFileFilter(new FileFilter() {
+
+            @Override
+            public String getDescription() {
+                return OStrings.getString("PP_MED_OPEN_FILTER");
+            }
+
+            @Override
+            public boolean accept(File f) {
+                return f.isFile() && f.getName().toLowerCase().endsWith(".zip");
+            }
+        });
     }
 
     @Override
@@ -48,6 +62,6 @@ public class ChooseMedProject extends JFileChooser {
         if (f.isDirectory()) {
             return true;
         }
-        return f.isFile() && f.getName().endsWith(".zip");
+        return f.isFile() && f.getName().toLowerCase().endsWith(".zip");
     }
 }

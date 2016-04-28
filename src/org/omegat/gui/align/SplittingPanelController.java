@@ -133,12 +133,12 @@ public class SplittingPanelController {
 
         if (reference != null) {
             JPanel referencePanel = new JPanel(new BorderLayout());
-            // HTML to make the text wrap
             JTextArea textArea = new JTextArea(reference);
             textArea.setOpaque(false);
             textArea.setWrapStyleWord(true);
             textArea.setLineWrap(true);
             textArea.setEditable(false);
+            textArea.setFocusable(false);
             referencePanel.add(textArea);
             referencePanel.setBorder(new EmptyBorder(10, 10, 10, 10));
             panel.add(referencePanel, BorderLayout.NORTH);

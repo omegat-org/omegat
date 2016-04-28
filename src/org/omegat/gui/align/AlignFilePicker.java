@@ -57,19 +57,19 @@ public class AlignFilePicker extends javax.swing.JPanel {
         jPanel6 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        sourceLanguagePicker = new javax.swing.JComboBox<Language>();
+        sourceLanguagePicker = new javax.swing.JComboBox<>();
         sourceLanguageFileField = new javax.swing.JTextField();
         sourceChooseFileButton = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        targetLanguagePicker = new javax.swing.JComboBox<Language>();
+        targetLanguagePicker = new javax.swing.JComboBox<>();
         targetLanguageFileField = new javax.swing.JTextField();
         targetChooseFileButton = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        cancelButton = new javax.swing.JButton();
         okButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
         progressBar = new javax.swing.JProgressBar();
 
         setLayout(new java.awt.BorderLayout());
@@ -126,11 +126,11 @@ public class AlignFilePicker extends javax.swing.JPanel {
         jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 0));
         jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.LINE_AXIS));
 
-        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
-        jPanel5.add(cancelButton);
-
         org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
         jPanel5.add(okButton);
+
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
+        jPanel5.add(cancelButton);
 
         jPanel4.add(jPanel5, java.awt.BorderLayout.EAST);
 

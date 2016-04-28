@@ -3,12 +3,11 @@
  *
  * @author	Yu Tang
  * @author	Kos Ivatsov
- * @date	2014-06-04
- * @version	0.3
+ * @date	2016-04-28
+ * @version	0.4
  */
 
 import javax.swing.JFileChooser
-import org.omegat.core.team.SVNRemoteRepository
 import org.tmatesoft.svn.core.wc.*
 
 def folder
@@ -30,7 +29,13 @@ if (project.isProjectLoaded()) {
 	folder = new File(fc.getSelectedFile().toString())
 	}
 
-if (SVNRemoteRepository.isSVNDirectory(folder)) { 
+
+public static boolean isSVNDirectory(File localDirectory) {
+	File svnDir = new File(localDirectory, ".svn");
+	return svnDir.exists() && svnDir.isDirectory();
+	}
+
+if (isSVNDirectory(folder)) { 
 	def clientManager = SVNClientManager.newInstance()
 	clientManager.getWCClient().doCleanup(folder)
 	console.println(res.getString("done"))

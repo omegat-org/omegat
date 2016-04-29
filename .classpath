@@ -9,7 +9,7 @@
 	<classpathentry exported="true" kind="lib" path="lib/jmyspell-core-1.0.0-beta-2.jar"/>
 	<classpathentry exported="true" kind="lib" path="test/lib/junit-4.4.jar"/>
 	<classpathentry kind="lib" path="lib/antlr-runtime-3.4.jar"/>
-	<classpathentry kind="lib" path="lib/dictzip.jar"/>
+	<classpathentry kind="lib" path="lib/dictzip-lib-0.8.1.jar"/>
 	<classpathentry kind="lib" path="lib/diff.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/groovy-all-2.2.2.jar"/>

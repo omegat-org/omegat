@@ -83,6 +83,11 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
         if (baseDirectory.exists()) {
             ourClientManager.getWCClient().doCleanup(baseDirectory);
         }
+
+        // cleanup repository
+        ourClientManager.getWCClient().doCleanup(baseDirectory);
+        ourClientManager.getWCClient().doRevert(new File[] { baseDirectory }, SVNDepth.fromRecurse(true),
+                null);
     }
 
     @Override

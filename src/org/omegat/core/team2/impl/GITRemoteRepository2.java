@@ -138,6 +138,11 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             config.save();
             Log.logInfoRB("GIT_FINISH", "clone");
         }
+
+        // cleanup repository
+        try (Git git = new Git(repository)) {
+            git.reset().setMode(ResetType.HARD).call();
+        }
     }
 
     @Override

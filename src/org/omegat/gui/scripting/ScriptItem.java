@@ -160,15 +160,14 @@ public class ScriptItem implements Comparable<ScriptItem> {
     }
 
     public String getText() throws FileNotFoundException, IOException {
-        String ret = "";
-        LinebreakPreservingReader lpin = null;
-        try {
-            lpin = getUTF8LinebreakPreservingReader(m_file);
-            StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
+        try (LinebreakPreservingReader lpin = getUTF8LinebreakPreservingReader(m_file)) {
             String s = lpin.readLine();
-            startsWithBOM = s.startsWith(BOM);
-            if (startsWithBOM) {
-                s = s.substring(1);  // eat BOM
+            if (s != null) {
+                startsWithBOM = s.startsWith(BOM);
+                if (startsWithBOM) {
+                    s = s.substring(1); // eat BOM
+                }
             }
             while (s != null) {
                 sb.append(s);
@@ -179,17 +178,8 @@ public class ScriptItem implements Comparable<ScriptItem> {
                 }
                 s = lpin.readLine();
             }
-            ret = sb.toString();
-        } finally {
-            if (lpin != null) {
-                try {
-                    lpin.close();
-                } catch (IOException ex) {
-                    // Eat exception silently
-                }
-            }
         }
-        return ret;
+        return sb.toString();
     }
 
     private LinebreakPreservingReader getUTF8LinebreakPreservingReader(File file) throws FileNotFoundException, UnsupportedEncodingException {

@@ -44,6 +44,7 @@ sourceSets {
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 configurations {
@@ -87,6 +88,7 @@ dependencies {
     dependency 'org.slf4j:slf4j-jdk14:1.7.19'
     // Groovy used at runtime for scripting only
     dependency 'org.codehaus.groovy:groovy-all:2.2.2'
+    dependency 'org.dict.zip:dictzip-lib:0.8.1'
 
     compile fileTree(dir: 'lib', include: '**/*.jar')
 

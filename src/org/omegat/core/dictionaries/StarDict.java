@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
-               2015 Hiroshi Miura, Aaron Madlon-Kay
+               2015-2016 Hiroshi Miura, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -46,7 +46,6 @@ import java.util.TreeMap;
 import java.util.zip.GZIPInputStream;
 
 import org.apache.commons.io.IOUtils;
-import org.dict.zip.DictZipHeader;
 import org.dict.zip.DictZipInputStream;
 import org.dict.zip.RandomAccessInputStream;
 import org.omegat.util.Log;
@@ -71,12 +70,12 @@ import org.omegat.util.OConsts;
  */
 public class StarDict implements IDictionaryFactory {
 
-    public enum DictType {
+    private enum DictType {
         DICTZIP,
         DICTFILE
     }
 
-    protected static final int BUFFER_SIZE = 64 * 1024;
+    private static final int BUFFER_SIZE = 64 * 1024;
 
     @Override
     public boolean isSupportedFile(File file) {
@@ -100,7 +99,6 @@ public class StarDict implements IDictionaryFactory {
          */
         private int idxoffsetbits = 32;
 
-        private DictZipHeader fHeader;
         private DictType dictType;
         private String dictName;
         private String dataFile;
@@ -173,14 +171,9 @@ public class StarDict implements IDictionaryFactory {
                 }
             }
 
-            Map<String, Object> result = new HashMap<String, Object>();
-            ByteArrayInputStream bais = null;
-            DataInputStream idx = null;
-            ByteArrayOutputStream mem = null;
-            try {
-                bais = new ByteArrayInputStream(idxBytes);
-                idx = new DataInputStream(bais);
-                mem = new ByteArrayOutputStream();
+            Map<String, Object> result = new HashMap<>();
+            try (DataInputStream idx = new DataInputStream(new ByteArrayInputStream(idxBytes));
+                  ByteArrayOutputStream mem = new ByteArrayOutputStream()) {
                 while (true) {
                     int b = idx.read();
                     if (b == -1) {
@@ -196,15 +189,8 @@ public class StarDict implements IDictionaryFactory {
                         mem.write(b);
                     }
                 }
-                mem.close();
-                idx.close();
-                bais.close();
-                return result;
-            } finally {
-                IOUtils.closeQuietly(mem);
-                IOUtils.closeQuietly(idx);
-                IOUtils.closeQuietly(bais);
             }
+            return result;
         }
 
         /**
@@ -214,16 +200,17 @@ public class StarDict implements IDictionaryFactory {
          * 
          * @param key
          *            translated word
-         * @param index,
-         *            offset article index and offset
+         * @param start
+         *            offset article index
+         * @param len
+         *            article offset
          * @param result
          *            result map
          */
         private void addIndex(final String key, final int start, final int len, final Map<String, Object> result) {
             Object data = result.get(key);
             if (data == null) {
-                Entry d = new Entry(start, len);
-                data = d;
+                data = new Entry(start, len);
             } else {
                 if (data instanceof Entry[]) {
                     Entry[] dobj = (Entry[]) data;
@@ -256,7 +243,7 @@ public class StarDict implements IDictionaryFactory {
             if (dictData == null) {
                 return Collections.emptyList();
             }
-            List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
+            List<DictionaryEntry> result = new ArrayList<>();
             if (dictData instanceof Entry) {
                 result.add(new DictionaryEntry(word, ((Entry) dictData).getArticle()));
             } else if (dictData instanceof Entry[]) {
@@ -304,34 +291,23 @@ public class StarDict implements IDictionaryFactory {
          */
         private String readDictArticleText(int start, int len) {
             String result = null;
-            FileInputStream in = null;
-            try {
-                in = new FileInputStream(dataFile);
+            try (FileInputStream in = new FileInputStream(dataFile)) {
                 byte[] data = new byte[len];
-                in.skip(start);
-                in.read(data);
-                result = new String(data, OConsts.UTF8);
-                in.close();
+                long moved = in.skip(start);
+                if (moved < start) {
+                    long moved2 = in.skip(start - moved);
+                    if (moved2 < start - moved) {
+                        throw new IOException("Cannot seek dictionary.");
+                    }
+                }
+                int readLen = in.read(data);
+                result = new String(data, 0, readLen, OConsts.UTF8);
             } catch (IOException e) {
-                System.err.println(e);
-            } finally {
-                IOUtils.closeQuietly(in);
+                System.err.println(e.getMessage());
             }
             return result;
         }
 
-        /**
-         * Return DictZip header
-         *
-         * DictZip has a header that indicates data offset. When try retrieving
-         * data, use header information as an index for random access.
-         */
-        private DictZipHeader getDZHeader(DictZipInputStream din) throws IOException {
-            if (fHeader == null) {
-                fHeader = din.readHeader();
-            }
-            return fHeader;
-        }
 
         /**
          * Read .dict.dz file data. Intended to be called only from
@@ -344,28 +320,15 @@ public class StarDict implements IDictionaryFactory {
          * @return Raw article text
          */
         private String readDictZipArticleText(int start, int len) {
-            RandomAccessInputStream in = null;
-            DictZipInputStream din = null;
             String result = null;
-            try {
-                in = new RandomAccessInputStream(dataFile, "r");
-                din = new DictZipInputStream(in);
-                DictZipHeader h = getDZHeader(din);
-                int off = h.getOffset(start);
-                int pos = h.getPosition(start);
-                in.seek(pos);
-                byte[] b = new byte[off + len];
-                din.readFully(b);
+            try (DictZipInputStream din = new DictZipInputStream(new
+                    RandomAccessInputStream(dataFile, "r"))) {
+                din.seek(start);
                 byte[] data = new byte[len];
-                System.arraycopy(b, off, data, 0, len);
+                din.readFully(data);
                 result = new String(data, OConsts.UTF8);
-                din.close();
-                in.close();
             } catch (IOException e) {
                 Log.log(e);
-            } finally {
-                IOUtils.closeQuietly(in);
-                IOUtils.closeQuietly(din);
             }
             return result;
         }
@@ -374,42 +337,27 @@ public class StarDict implements IDictionaryFactory {
          * Reads plain idx file.
          * 
          * @param file
-         *            file to read without suffixes
-         * @return
+         *            file to read.
+         * @return byte array which contents is IDX file.
+         * @throws IOException if I/O error occurred.
          */
         private byte[] readIDX(File file) throws IOException {
-            FileInputStream fis = null;
-            BufferedInputStream bis = null;
-            try {
-                fis = new FileInputStream(file);
-                bis = new BufferedInputStream(fis, BUFFER_SIZE);
-                byte[] result = IOUtils.toByteArray(bis);
-                bis.close();
-                fis.close();
-                return result;
-            } finally {
-                IOUtils.closeQuietly(fis);
-                IOUtils.closeQuietly(bis);
+            try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file),
+                    BUFFER_SIZE)) {
+                return IOUtils.toByteArray(bis);
             }
         }
 
+        /**
+         * Reads Idx.gz file.
+         * @param file to read.
+         * @return byte array which contents is IDX file.
+         * @throws IOException if I/O error occurred.
+         */
         private byte[] readIDXGZ(File file) throws IOException {
-            FileInputStream fis = null;
-            BufferedInputStream bis = null;
-            InputStream is = null;
-            try {
-                fis = new FileInputStream(file);
-                bis = new BufferedInputStream(fis, BUFFER_SIZE);
-                is = new GZIPInputStream(bis);
-                byte[] result = IOUtils.toByteArray(is);
-                is.close();
-                bis.close();
-                fis.close();
-                return result;
-            } finally {
-                IOUtils.closeQuietly(is);
-                IOUtils.closeQuietly(fis);
-                IOUtils.closeQuietly(bis);
+            try (InputStream is = new GZIPInputStream(new BufferedInputStream(
+                    new FileInputStream(file), BUFFER_SIZE))) {
+                return IOUtils.toByteArray(is);
             }
         }
 
@@ -417,19 +365,13 @@ public class StarDict implements IDictionaryFactory {
          * Read header.
          */
         private Map<String, String> readIFO(File ifoFile) throws Exception {
-            FileInputStream fis = null;
-            InputStreamReader isr = null;
-            BufferedReader rd = null;
-            try {
-                fis = new FileInputStream(ifoFile);
-                isr = new InputStreamReader(fis, OConsts.UTF8);
-                rd = new BufferedReader(isr);
-                String line = null;
+            Map<String, String> result = new TreeMap<>();
+            try (BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(ifoFile), OConsts.UTF8))) {
+                String line;
                 String first = rd.readLine();
                 if (!"StarDict's dict ifo file".equals(first)) {
                     throw new Exception("Invalid header of .ifo file: " + first);
                 }
-                Map<String, String> result = new TreeMap<String, String>();
                 while ((line = rd.readLine()) != null) {
                     if (line.trim().isEmpty()) {
                         continue;
@@ -440,15 +382,8 @@ public class StarDict implements IDictionaryFactory {
                     }
                     result.put(line.substring(0, pos), line.substring(pos + 1));
                 }
-                rd.close();
-                isr.close();
-                fis.close();
-                return result;
-            } finally {
-                IOUtils.closeQuietly(rd);
-                IOUtils.closeQuietly(isr);
-                IOUtils.closeQuietly(fis);
             }
+            return result;
         }
         
         private class Entry {

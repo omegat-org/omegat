@@ -6,7 +6,8 @@
 # Known likely false positives
 SKIP_KEYS=('HF_HAIKU_*'
            'STM_*'
-           'SEGPROP_KEY_*')
+           'SEGPROP_KEY_*'
+           'ALIGNER_ENUM_*')
 
 function skip() {
     for K in ${SKIP_KEYS[@]}; do

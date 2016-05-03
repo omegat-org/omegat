@@ -51,6 +51,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.MissingResourceException;
 import java.util.concurrent.CancellationException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -108,6 +109,7 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.DelegatingComboBoxRenderer;
 import org.omegat.util.gui.RoundedCornerBorder;
 import org.omegat.util.gui.Styles;
 
@@ -186,6 +188,8 @@ public class AlignPanelController {
             }
         };
         panel.comparisonComboBox.addActionListener(comparisonListener);
+        panel.comparisonComboBox
+                .setRenderer(new EnumRenderer<ComparisonMode>("ALIGNER_ENUM_COMPARISON_MODE_"));
 
         ActionListener algorithmListener = e -> {
             AlgorithmClass newValue = (AlgorithmClass) ((JComboBox<?>) e.getSource()).getSelectedItem();
@@ -197,6 +201,8 @@ public class AlignPanelController {
             }
         };
         panel.algorithmComboBox.addActionListener(algorithmListener);
+        panel.algorithmComboBox
+                .setRenderer(new EnumRenderer<AlgorithmClass>("ALIGNER_ENUM_ALGORITHM_CLASS_"));
 
         ActionListener calculatorListener = e -> {
             CalculatorType newValue = (CalculatorType) ((JComboBox<?>) e.getSource()).getSelectedItem();
@@ -208,6 +214,8 @@ public class AlignPanelController {
             }
         };
         panel.calculatorComboBox.addActionListener(calculatorListener);
+        panel.calculatorComboBox
+                .setRenderer(new EnumRenderer<CalculatorType>("ALIGNER_ENUM_CALCULATOR_TYPE_"));
 
         ActionListener counterListener = e -> {
             CounterType newValue = (CounterType) ((JComboBox<?>) e.getSource()).getSelectedItem();
@@ -219,6 +227,7 @@ public class AlignPanelController {
             }
         };
         panel.counterComboBox.addActionListener(counterListener);
+        panel.counterComboBox.setRenderer(new EnumRenderer<CounterType>("ALIGNER_ENUM_COUNTER_TYPE_"));
 
         ActionListener segmentingListener = new ActionListener() {
             @Override
@@ -2069,6 +2078,26 @@ public class AlignPanelController {
             List<Integer> rows = model.getRowExtentsForBeadAtRow(loc.getRow());
             return table.getCellRect(rows.get(0), BeadTableModel.COL_SRC, true)
                     .union(table.getCellRect(rows.get(rows.size() - 1), BeadTableModel.COL_TRG, true));
+        }
+    }
+
+    static class EnumRenderer<T extends Enum<?>> extends DelegatingComboBoxRenderer<T, String> {
+        private final String keyPrefix;
+
+        public EnumRenderer(String keyPrefix) {
+            this.keyPrefix = keyPrefix;
+        }
+
+        @Override
+        protected String getDisplayText(T value) {
+            if (value == null) {
+                return null;
+            }
+            try {
+                return OStrings.getString(keyPrefix + value.name());
+            } catch (MissingResourceException ex) {
+                return value.name();
+            }
         }
     }
 }

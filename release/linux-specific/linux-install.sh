@@ -1,19 +1,11 @@
 #!/usr/bin/env bash
 
-# installation script 2012-06-03
-
-# read version number from changes.txt
-
-omtversion=$(grep -o -m1 "OmegaT\s*[\.0-9]*[0-9 a-z]*" ./changes.txt)
-
-# substitute underlines for spaces in version number
-
-omtversionul=$(echo $omtversion | sed 's/ /_/g')
+OMTVERSION="OmegaT_@VERSION_NUMBER_SUBST@"
 
 # check whether /opt/omegat/<OmegaT version> exists
 # exit if it does
 
-if  [ -d /opt/omegat/$omtversionul ] ; then
+if  [ -d /opt/omegat/$OMTVERSION ] ; then
 
    echo "$omtversion is already installed"
 
@@ -24,14 +16,14 @@ else
    # create /opt/omegat and
    # /opt/omegat/<OmegaT version>
 
-   sudo mkdir -p /opt/omegat/$omtversionul
+   sudo mkdir -p /opt/omegat/$OMTVERSION
 
    # copy OmegaT files and folders
    # to /opt/omegat/<OmegaT version>
 
-   sudo cp -r ./* /opt/omegat/$omtversionul
+   sudo cp -r ./* /opt/omegat/$OMTVERSION
 
-   cd /opt/omegat/$omtversionul
+   cd /opt/omegat/$OMTVERSION
 
 fi
 
@@ -43,20 +35,20 @@ if  [ -d /opt/omegat/plugins ] ; then
    # /opt/omegat/plugins exists,
    # delete /opt/omegat/<OmegaT version>/plugins
 
-   sudo rm -d -f -r /opt/omegat/$omtversionul/plugins
+   sudo rm -d -f -r /opt/omegat/$OMTVERSION/plugins
 
 else
 
    # /opt/omegat/plugins does not exist,
    # move plugins folder from within application
 
-   sudo mv /opt/omegat/$omtversionul/plugins /opt/omegat
+   sudo mv /opt/omegat/$OMTVERSION/plugins /opt/omegat
 
 fi
 
 # symlink from /opt/omegat/plugins to plugins folder within OmegaT
 
-sudo ln -s /opt/omegat/plugins /opt/omegat/$omtversionul/plugins
+sudo ln -s /opt/omegat/plugins /opt/omegat/$OMTVERSION/plugins
 
 # handling scripts folder
 
@@ -65,24 +57,24 @@ if  [ -d /opt/omegat/scripts ] ; then
    # /opt/omegat/scripts exists,
    # delete /opt/omegat/<OmegaT version>/scripts
 
-   sudo rm -d -f -r /opt/omegat/$omtversionul/scripts
+   sudo rm -d -f -r /opt/omegat/$OMTVERSION/scripts
 
 else
 
    # /opt/omegat/scripts does not exist,
    # move scripts folder from within application
 
-   sudo mv /opt/omegat/$omtversionul/scripts /opt/omegat
+   sudo mv /opt/omegat/$OMTVERSION/scripts /opt/omegat
 
 fi
 
 # symlink from /opt/omegat/scripts to scripts folder within OmegaT
 
-sudo ln -s /opt/omegat/scripts /opt/omegat/$omtversionul/scripts
+sudo ln -s /opt/omegat/scripts /opt/omegat/$OMTVERSION/scripts
 
 # handling jre folder
 
-if  [ -d /opt/omegat/$omtversionul/jre ] ; then
+if  [ -d /opt/omegat/$OMTVERSION/jre ] ; then
 
    # user is installing OmegaT with JRE
    # deletes old local JRE, if present
@@ -91,9 +83,9 @@ if  [ -d /opt/omegat/$omtversionul/jre ] ; then
 
    sudo rm -d -f -r /opt/omegat/jre
 
-   sudo mv /opt/omegat/$omtversionul/jre /opt/omegat
+   sudo mv /opt/omegat/$OMTVERSION/jre /opt/omegat
 
-   sudo ln -s /opt/omegat/jre /opt/omegat/$omtversionul/jre
+   sudo ln -s /opt/omegat/jre /opt/omegat/$OMTVERSION/jre
 
 else
 
@@ -105,7 +97,7 @@ else
       # /opt/omegat/jre exists,
       # symlink from /opt/omegat/jre to jre folder within OmegaT
 
-      sudo ln -s /opt/omegat/jre /opt/omegat/$omtversionul/jre
+      sudo ln -s /opt/omegat/jre /opt/omegat/$OMTVERSION/jre
 
    else
 
@@ -119,7 +111,7 @@ fi
 
 ## symlink just installed version to /opt/omegat/OmegaT-default
 
-sudo ln -s -b -T /opt/omegat/$omtversionul /opt/omegat/OmegaT-default
+sudo ln -s -b -T /opt/omegat/$OMTVERSION /opt/omegat/OmegaT-default
 
 # symlink bash OmegaT launch script
 # from <OmegaT version> to /usr/local/bin

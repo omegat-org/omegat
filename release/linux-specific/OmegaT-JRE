@@ -1,5 +1,0 @@
-#!/bin/bash
-# readlink follows any symbolic links to get the real file
-REALOMEGATPATH=`dirname "$(readlink -nf $0)"`
-"${REALOMEGATPATH}/jre/bin/java" -jar -Xmx1024M "${REALOMEGATPATH}/OmegaT.jar" $*
-

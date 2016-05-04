@@ -53,10 +53,9 @@ under the LGPL license.
 commons-*.jar are distributed under the Apache License 2.0
 (required for LanguageTool and some parts of OmegaT)
 
-LanguageTool-data.jar and languagetool-core.jar are distributed under the LGPL license
+LanguageTool is distributed under the LGPL license.
 LanguageTool sources are available from https://github.com/languagetool-org/languagetool
-For licenses of libraries required by LanguageTool, see
-lib/LanguageTool-*/third-party-licenses/README.txt
+For licenses of libraries required by LanguageTool, see https://github.com/languagetool-org/languagetool/blob/master/languagetool-standalone/src/main/resources/third-party-licenses/README.txt
 
 pdfbox-*.jar and fontbox-*.jar are distributed under the Apache License 2.0
 

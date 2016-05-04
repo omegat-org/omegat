@@ -3,4 +3,12 @@ dist
 build
 dist2
 manifest.mf
-/nbproject/private/
+nbproject
+
+# Gradle
+.gradle
+.settings
+.project
+.classpath
+bin
+.nb-gradle

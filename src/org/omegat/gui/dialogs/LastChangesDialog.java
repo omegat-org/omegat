@@ -28,15 +28,14 @@ package org.omegat.gui.dialogs;
 
 import java.awt.Frame;
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
 
 import javax.swing.JDialog;
 
+import org.apache.commons.io.IOUtils;
 import org.omegat.help.Help;
-import org.omegat.util.FileUtil;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.StaticUIUtils;
 import org.openide.awt.Mnemonics;
 
@@ -104,10 +103,9 @@ public class LastChangesDialog extends JDialog {
 
         lastChangesTextPane.setEditable(false);
         try {
-            String text = FileUtil.readTextFile(Paths
-                    .get(StaticUtils.installDir(), OConsts.HELP_DIR, OConsts.LAST_CHANGES_FILE).toFile());
+            String text = IOUtils.toString(Help.getHelpFileURI(OConsts.LAST_CHANGES_FILE), StandardCharsets.UTF_8);
             lastChangesTextPane.setText(text);
-        } catch (IOException ex) {
+        } catch (NullPointerException | IOException ex) {
             lastChangesTextPane.setText(Help.errorHaiku());
         }
         scroll.setViewportView(lastChangesTextPane);

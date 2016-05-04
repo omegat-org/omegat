@@ -82,6 +82,10 @@ public class Help {
         Desktop.getDesktop().browse(uri);
     }
 
+    public static URI getHelpFileURI(String filename) {
+        return getHelpFileURI(null, filename);
+    }
+
     public static URI getHelpFileURI(String lang, String filename) {
         // find in install dir
         String path = lang == null ? filename : lang + File.separator + filename;

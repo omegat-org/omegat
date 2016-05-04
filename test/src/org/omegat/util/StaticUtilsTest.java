@@ -100,4 +100,14 @@ public class StaticUtilsTest extends TestCase {
         
         assertTrue(FileUtil.deleteTree(tempDir));
     }
+
+    public void testInstallDir() {
+        File installDir = new File(StaticUtils.installDir());
+
+        assertTrue(installDir.isDirectory());
+
+        for (String dir : new String[] { "src", "docs", "lib" }) {
+            assertTrue(new File(installDir, dir).isDirectory());
+        }
+    }
 }

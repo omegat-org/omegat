@@ -32,7 +32,7 @@ import org.omegat.filters3.xml.wordpress.WordpressFilter;
 public class Wordpress extends TestFilterBase {
     public void testParse() throws Exception {
         List<String> lines = parse(new WordpressFilter(),
-                "test/data/filters/Wordpress/Wordpress.xml", null);
+                "test/data/filters/wordpress/Wordpress.xml", null);
         assertTrue(lines.size()== 3);
         assertEquals("This is a description", lines.get(0));
     }

@@ -28,6 +28,7 @@
 package org.omegat.core.spellchecker;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -38,10 +39,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
+import org.languagetool.JLanguageTool;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
@@ -130,8 +133,8 @@ public class SpellChecker implements ISpellChecker {
                 targetLanguage.getLocaleCode().replace('_', '-'), // Full xx-YY
                 targetLanguage.getLanguageCode()); // xx only
 
-        checker = toCheck.map((lang) -> initializeWithLanguage(lang)).filter((c) -> c != null).findFirst()
-                .orElse(new SpellCheckerDummy());
+        checker = toCheck.map(SpellChecker::initializeWithLanguage).filter(Optional::isPresent).findFirst()
+                .orElse(Optional.of(new SpellCheckerDummy())).get();
 
         if (checker instanceof SpellCheckerDummy) {
             Log.log("No spell checker found for language " + targetLanguage);
@@ -140,26 +143,36 @@ public class SpellChecker implements ISpellChecker {
         loadWordLists();
     }
 
-    private static ISpellCheckerProvider initializeWithLanguage(String language) {
+    private static Optional<ISpellCheckerProvider> initializeWithLanguage(String language) {
         // initialize the spell checker - get the data from the preferences
 
         String dictionaryDir = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
                 DEFAULT_DICTIONARY_DIR.getPath());
 
-        installBundledDictionary(dictionaryDir, language);
-
         File dictBasename = new File(dictionaryDir, language);
         File affixName = new File(dictionaryDir, language + OConsts.SC_AFFIX_EXTENSION);
         File dictionaryName = new File(dictionaryDir, language + OConsts.SC_DICTIONARY_EXTENSION);
 
-        if (!isValidFile(affixName) || !isValidFile(dictionaryName)) {
-            return null;
+        if (!dictionaryName.exists()) {
+            // Try installing from bundled resources
+            installBundledDictionary(dictionaryDir, language);
         }
+
+        if (!dictionaryName.exists()) {
+            // Try installing from LanguageTool bundled resources
+            installLTBundledDictionary(dictionaryDir, language);
+        }
+
+        if (!isValidFile(affixName) || !isValidFile(dictionaryName)) {
+            // If we still don't have a dictionary then return
+            return Optional.empty();
+        }
+
         try {
             ISpellCheckerProvider result = new SpellCheckerLangToolHunspell(dictBasename.getPath());
             Log.log("Initialized LanguageTool Hunspell spell checker for language '" + language
                     + "' dictionary " + dictionaryName);
-            return result;
+            return Optional.of(result);
         } catch (Throwable ex) {
             Log.log("Error loading hunspell: " + ex.getMessage());
         }
@@ -168,11 +181,11 @@ public class SpellChecker implements ISpellChecker {
                     affixName.getPath());
             Log.log("Initialized JMySpell spell checker for language '" + language + "' dictionary "
                     + dictionaryName);
-            return result;
+            return Optional.of(result);
         } catch (Exception ex) {
             Log.log("Error loading jmyspell: " + ex.getMessage());
         }
-        return null;
+        return Optional.empty();
     }
 
     private static boolean isValidFile(File file) {
@@ -202,30 +215,45 @@ public class SpellChecker implements ISpellChecker {
     }
 
     /**
-     * If there is a Hunspell dictionary for the current target language bundled inside this OmegaT
-     * distribution, install it if necessary.
+     * If there is a Hunspell dictionary for the current target language bundled
+     * inside this OmegaT distribution, install it.
      */
     private static void installBundledDictionary(String dictionaryDir, String language) {
-        InputStream bundledDict = SpellChecker.class.getResourceAsStream(language + ".zip");
-        if (bundledDict == null) {
-            // Relevant dictionary not present.
-            return;
-        }
-
-        File affix = new File(dictionaryDir, language + OConsts.SC_AFFIX_EXTENSION);
-        File dict = new File(dictionaryDir, language + OConsts.SC_DICTIONARY_EXTENSION);
-        if (affix.isFile() && dict.isFile()) {
-            // Dictionary already installed.
-            return;
-        }
-
-        try {
-            StaticUtils.extractFileFromJar(bundledDict, dictionaryDir, affix.getName(), dict.getName());
-            bundledDict.close();
+        try (InputStream bundledDict = SpellChecker.class.getResourceAsStream(language + ".zip")) {
+            if (bundledDict == null) {
+                // Relevant dictionary not present.
+                return;
+            }
+            StaticUtils.extractFileFromJar(bundledDict, dictionaryDir, language + OConsts.SC_AFFIX_EXTENSION,
+                    language + OConsts.SC_DICTIONARY_EXTENSION);
         } catch (IOException e) {
             Log.log(e);
-        } finally {
-            IOUtils.closeQuietly(bundledDict);
+        }
+    }
+
+    /**
+     * If there is a Hunspell dictionary for the current target language bundled
+     * with LanguageTool, install it. See <code>init()</code> and
+     * <code>getDictionaryPath(String, String)</code> internal methods of
+     * <code>org.languagetool.rules.spelling.hunspell.HunspellRule</code>.
+     */
+    private static void installLTBundledDictionary(String dictionaryDir, String language) {
+        String resPath = "/" + new Language(language).getLanguageCode() + "/hunspell/" + language + ".dic";
+        if (!JLanguageTool.getDataBroker().resourceExists(resPath)) {
+            return;
+        }
+        try {
+            try (InputStream dicStream = JLanguageTool.getDataBroker().getFromResourceDirAsStream(resPath);
+                    FileOutputStream fos = new FileOutputStream(new File(dictionaryDir, language + ".dic"))) {
+                IOUtils.copy(dicStream, fos);
+            }
+            try (InputStream affStream = JLanguageTool.getDataBroker()
+                    .getFromResourceDirAsStream(resPath.replaceFirst(".dic$", ".aff"));
+                    FileOutputStream fos = new FileOutputStream(new File(dictionaryDir, language + ".aff"))) {
+                IOUtils.copy(affStream, fos);
+            }
+        } catch (Exception ex) {
+            Log.log(ex);
         }
     }
 

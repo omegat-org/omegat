@@ -64,7 +64,11 @@ dependencies {
     // 2. Run `gradlew getDependencies [eclipse]`
     // 3. Commit changes to lib/auto
     // To get source packages in IDE, change "dependency" keyword to "compile".
-    dependency 'org.languagetool:languagetool-core:3.2'
+    dependency 'org.languagetool:languagetool-core:3.3'
+    dependency('org.languagetool:language-all:3.3') {
+        // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
+        exclude module: 'lucene-gosen-ipadic'
+    }
     dependency 'org.languagetool:hunspell-native-libs:2.9'
     dependency 'org.apache.lucene:lucene-analyzers-common:5.2.1'
     dependency 'org.apache.lucene:lucene-analyzers-kuromoji:5.2.1'

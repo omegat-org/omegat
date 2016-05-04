@@ -53,43 +53,49 @@ public class PropertiesShortcuts {
 
     public static final PropertiesShortcuts MainMenuShortcuts = new PropertiesShortcuts(MAIN_MENU_SHORTCUTS_FILE);
 
-    private final Properties properties = new Properties();
+    final Properties properties = new Properties();
 
     /**
-     * Creates shortcut list with the specified defaults and user shortcuts. Load defaults from properties
-     * file in classpath and user-defined one in the user's config dir. For each shortcut, user shortcuts have
-     * priority, then defaults (for Mac-specific or others).
+     * Creates shortcut list with the specified defaults and user shortcuts.
+     * Look for specified file in these places in this order:
+     * <ol>
+     * <li>Stream in classpath
+     * <li>File of same name in the user's config dir
+     * </ol>
+     * For each shortcut, user shortcuts have priority, then defaults (for
+     * Mac-specific or others).
      *
      * @param conf
      *            ShortcutsConfiguration
      */
-    public PropertiesShortcuts(String propertiesFileInClasspath) {
+    public PropertiesShortcuts(String propertiesFile) {
         try {
             if (Platform.isMacOSX()) {
-                String macSpecific = propertiesFileInClasspath
-                        .replaceAll("\\.properties$", ".mac.properties");
-                loadProperties(PropertiesShortcuts.class.getResourceAsStream(macSpecific));
+                String macSpecific = propertiesFile.replaceAll("\\.properties$", ".mac.properties");
+                loadProperties(macSpecific);
             }
             if (properties.isEmpty()) {
-                loadProperties(PropertiesShortcuts.class.getResourceAsStream(propertiesFileInClasspath));
+                loadProperties(propertiesFile);
             }
-            String userFile = propertiesFileInClasspath
-                    .substring(propertiesFileInClasspath.lastIndexOf('/') + 1);
-            File userShortcutsFile = new File(StaticUtils.getConfigDir(), userFile);
-            if (userShortcutsFile.exists()) {
-                loadProperties(new FileInputStream(userShortcutsFile));
-            }
+            File userFile = new File(StaticUtils.getConfigDir(), new File(propertiesFile).getName());
+            loadProperties(userFile);
         } catch (IOException ex) {
             throw new ExceptionInInitializerError(ex);
         }
     }
 
-    private void loadProperties(final InputStream in) throws IOException {
-        if (in != null) {
-            try {
+    private void loadProperties(String path) throws IOException {
+        try (InputStream in = getClass().getResourceAsStream(path)) {
+            if (in != null) {
                 properties.load(in);
-            } finally {
-                in.close();
+            }
+        }
+    }
+
+    private void loadProperties(File file) throws IOException {
+        if (file.isFile()) {
+            try (FileInputStream fis = new FileInputStream(file)) {
+                properties.load(fis);
             }
         }
     }

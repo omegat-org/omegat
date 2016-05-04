@@ -73,6 +73,9 @@ public class CLIParameters {
     // CONSOLE_ALIGN mode
     public static final String ALIGNDIR = "alignDir";
 
+    // Development
+    public static final String DEV_MANIFESTS = "dev-manifests";
+
     /**
      * Application execution mode. Value of {@link #MODE}.
      */

@@ -468,9 +468,10 @@ processResources << {
     3. This git clone's SHA-1
     4. If none of the above, the value "unknown"
      */
+    def provided = System.getProperty('repo.revision') ?: ''
     def git = file('.git').directory ? doCmd('git rev-parse --short HEAD') : ''
     def svn = file('.svn').directory ? doCmd('svnversion') : ''
-    def revision = [omtVersion.revision, git, svn, 'unknown'].find {
+    def revision = [provided, omtVersion.revision, git, svn, 'unknown'].find {
         it != 'dev' && !it.empty
     }
     println "Detected revision ${revision}"

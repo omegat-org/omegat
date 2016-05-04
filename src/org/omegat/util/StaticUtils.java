@@ -46,6 +46,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -788,39 +789,40 @@ public class StaticUtils {
         }
     }
 
-    public static void extractFileFromJar(File archive, List<String> filenames, String destination)
+    public static void extractFileFromJar(File archive, String destination, String... filenames)
             throws IOException {
         InputStream is = new FileInputStream(archive);
-        extractFileFromJar(is, filenames, destination);
+        extractFileFromJar(is, destination, filenames);
         is.close();
     }
     
-    public static void extractFileFromJar(InputStream in, List<String> filenames, String destination) throws IOException {
-        if (filenames == null || filenames.isEmpty()) {
+    public static void extractFileFromJar(InputStream in, String destination, String... filenames) throws IOException {
+        if (filenames == null || filenames.length == 0) {
             throw new IllegalArgumentException("Caller must provide non-empty list of files to extract.");
         }
-        List<String> toExtract = new ArrayList<String>(filenames);
-        JarInputStream jis = new JarInputStream(in);
-        // parse the entries
-        JarEntry entry;
-        while ((entry = jis.getNextJarEntry()) != null) {
-            if (toExtract.contains(entry.getName())) {
+        List<String> toExtract = new ArrayList<>(Arrays.asList(filenames));
+        try (JarInputStream jis = new JarInputStream(in)) {
+            // parse the entries
+            JarEntry entry;
+            while ((entry = jis.getNextJarEntry()) != null) {
+                if (!toExtract.contains(entry.getName())) {
+                    continue;
+                }
                 // match found
                 File f = new File(destination, entry.getName());
                 f.getParentFile().mkdirs();
-                BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(f));
 
-                byte[] byteBuffer = new byte[1024];
-
-                int numRead;
-                while ((numRead = jis.read(byteBuffer)) != -1) {
-                    out.write(byteBuffer, 0, numRead);
+                try (FileOutputStream fos = new FileOutputStream(f);
+                        BufferedOutputStream out = new BufferedOutputStream(fos)) {
+                    byte[] byteBuffer = new byte[1024];
+                    int numRead;
+                    while ((numRead = jis.read(byteBuffer)) != -1) {
+                        out.write(byteBuffer, 0, numRead);
+                    }
                 }
-                out.close();
                 toExtract.remove(entry.getName());
             }
         }
-        jis.close();
         if (!toExtract.isEmpty()) {
             throw new FileNotFoundException("Failed to extract all of the specified files.");
         }

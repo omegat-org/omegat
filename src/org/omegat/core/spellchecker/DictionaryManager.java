@@ -31,7 +31,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -256,8 +255,8 @@ public class DictionaryManager {
 
         try {
             StaticUtils.extractFileFromJar(tempFile,
-                    Arrays.asList(langCode + OConsts.SC_AFFIX_EXTENSION, langCode + OConsts.SC_DICTIONARY_EXTENSION),
-                    dir.getAbsolutePath());
+                    dir.getAbsolutePath(), langCode + OConsts.SC_AFFIX_EXTENSION,
+                    langCode + OConsts.SC_DICTIONARY_EXTENSION);
         } catch (FileNotFoundException ex) {
             throw new RuntimeException(OStrings.getString("GUI_SPELLCHECKER_ERROR_ON_INSTALL"), ex);
         }

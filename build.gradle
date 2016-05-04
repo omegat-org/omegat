@@ -325,16 +325,16 @@ task l10n(dependsOn: [l10nMinimalDistZip, l10nFullDistZip]) {
 // We bundle our startup scripts separately, so disable startScripts.
 startScripts.enabled = false
 
-// installDist and installApp are hard-coded to require a bin folder, so we trick them.
+// installDist and installApp insist on installing a script. Trick them with a dummy script.
 [installDist, installApp].each {
     it.doFirst {
-        def bin = file("${installDist.destinationDir}/bin")
-        bin.mkdirs()
-        file("${bin}/${applicationName}").createNewFile()
+        startScripts.outputDir.mkdirs()
+        file("${startScripts.outputDir}/${applicationName}").createNewFile()
     }
-    // Delete our decoy script afterwards.
+    // Delete dummy afterwards.
     it.doLast {
         delete "${installDist.destinationDir}/bin"
+        delete startScripts.outputDir
     }
 }
 

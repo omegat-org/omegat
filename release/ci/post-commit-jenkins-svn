@@ -24,3 +24,4 @@ if did_change "$1/branches/release-3-5" "$2"; then
 fi
 
 exit 0
+

@@ -586,6 +586,10 @@ task(debug, dependsOn: classes, type: JavaExec) {
     debug true
 }
 
+// Allow setting the max heap size for the run task from the command line, e.g.
+// `gradle -Drun.maxHeapSize=1024M run`
+run.maxHeapSize = System.getProperty('run.maxHeapSize')
+
 def Properties loadProperties(File propFile) {
     def config = new Properties()
     if (propFile.canRead()) {

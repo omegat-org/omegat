@@ -15,5 +15,5 @@ The git-svn sync grabs the latest version of authors.txt before fetching the
 latest changes, so new authors should be added to the authors.txt here as
 necessary.
 
-As of November 2015, CI functions are maintained by Aaron Madlon-Kay
+As of May 2016, CI functions are maintained by Aaron Madlon-Kay
 <aaron@madlon-kay.com>.

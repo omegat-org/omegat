@@ -3,7 +3,7 @@ CloudBees: https://omegat.ci.cloudbees.com/
 
 There are two main functions:
 
-1. Building and testing OmegaT trunk (nightly builds)
+1. Building and testing OmegaT trunk and active branches (nightly builds)
 
 2. Syncing SourceForge Subversion and git repositories
 

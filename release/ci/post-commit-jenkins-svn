@@ -11,16 +11,16 @@ function did_change() {
 }
 
 if did_change "$1/trunk" "$2"; then
-    /usr/bin/curl -s $JENKINS/job/omegat-trunk/build?token=REDACTED
+    curl -s $JENKINS/job/omegat-trunk/build?token=REDACTED
     /usr/bin/curl -s $JENKINS/job/sourceforge-svn-git-sync/buildWithParameters?token=REDACTED
 fi
 
 if did_change "$1/branches/release-3-6" "$2"; then
-   /usr/bin/curl -s $JENKINS/job/omegat-release-3-6/build?token=REDACTED
+   curl -s $JENKINS/job/omegat-release-3-6/build?token=REDACTED
 fi
 
 if did_change "$1/branches/release-3-5" "$2"; then
-   /usr/bin/curl -s $JENKINS/job/omegat-release-3-5/build?token=REDACTED
+   curl -s $JENKINS/job/omegat-release-3-5/build?token=REDACTED
 fi
 
 exit 0

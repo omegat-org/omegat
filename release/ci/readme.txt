@@ -15,5 +15,7 @@ The git-svn sync grabs the latest version of authors.txt before fetching the
 latest changes, so new authors should be added to the authors.txt here as
 necessary.
 
+Instead of polling the repositories, builds are triggered by webhooks.
+
 As of May 2016, CI functions are maintained by Aaron Madlon-Kay
 <aaron@madlon-kay.com>.

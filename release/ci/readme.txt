@@ -15,7 +15,11 @@ The git-svn sync grabs the latest version of authors.txt before fetching the
 latest changes, so new authors should be added to the authors.txt here as
 necessary.
 
-Instead of polling the repositories, builds are triggered by post-commit hooks.
+Instead of polling the repositories, builds are triggered by post-commit
+hooks. This is because Jenkins's Cross-Site Request Forgery (CSRF) protection
+requires an authentication "crumb" on POST requests; SourceForge's webhooks make
+POST requests even though a mere GET is sufficient (and this is not
+configurable).
 
 As of May 2016, CI functions are maintained by Aaron Madlon-Kay
 <aaron@madlon-kay.com>.

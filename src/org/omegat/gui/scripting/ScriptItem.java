@@ -62,6 +62,11 @@ public class ScriptItem implements Comparable<ScriptItem> {
 
     public ScriptItem(File scriptFile) {
         m_file = scriptFile;
+        
+        if (m_file == null) {
+            return;
+        }
+
         try {
             ClassLoader loader = new URLClassLoader(new URL[]{scriptFile.getParentFile().toURI().toURL()});
             String shortName = FilenameUtils.removeExtension(scriptFile.getName());

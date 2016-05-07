@@ -44,7 +44,7 @@ import org.omegat.util.StringUtil;
 
 public class ScriptRunner {
 
-    public static final String DEFAULT_SCRIPT = "javascript";
+    public static final String DEFAULT_SCRIPT = "groovy";
     public static final String VAR_CONSOLE = "console";
     public static final String VAR_MAINWINDOW = "mainWindow";
     public static final String VAR_GLOSSARY = "glossary";
@@ -104,7 +104,11 @@ public class ScriptRunner {
             bindings.putAll(additionalBindings);
         }
         bindings.put(VAR_RESOURCES, item.getResourceBundle());
-        ScriptEngine engine = MANAGER.getEngineByExtension(FilenameUtils.getExtension(item.getFile().getName()));
+        String extension = DEFAULT_SCRIPT;
+        if (item.getFile() != null) {
+            extension = FilenameUtils.getExtension(item.getFile().getName());
+        }
+        ScriptEngine engine = MANAGER.getEngineByExtension(extension);
         if (engine == null) {
             engine = MANAGER.getEngineByName(DEFAULT_SCRIPT);
         }

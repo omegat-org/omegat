@@ -87,6 +87,14 @@ dependencies {
     dependency 'org.slf4j:slf4j-jdk14:1.7.19'
     // Groovy used at runtime for scripting only
     dependency 'org.codehaus.groovy:groovy-all:2.2.2'
+    
+    //RSyntaxUI and additional modules
+    dependency 'com.fifesoft:rsyntaxtextarea:2.5.8'
+    dependency 'com.fifesoft:rstaui:2.5.7'
+    dependency ('com.fifesoft:languagesupport:2.5.8') {
+	    exclude module: 'rhino'
+    }
+    dependency 'com.fifesoft:autocomplete:2.5.8'
 
     compile fileTree(dir: 'lib', include: '**/*.jar')
 

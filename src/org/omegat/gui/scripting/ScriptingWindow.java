@@ -214,6 +214,11 @@ public class ScriptingWindow extends JFrame {
     private void unsetQuickScriptMenu(int index) {
         m_quickScripts[index] = null;
         removeAllQuickScriptActionListenersFrom(m_quickMenus[index]);
+        
+        if (m_quickMenus.length < index || m_quickMenus[index] == null) {
+        	return;
+        }
+        
         m_quickMenus[index].setEnabled(false);
         Mnemonics.setLocalizedText(m_quickMenus[index], "&" + scriptKey(index) + " - " + OStrings.getString("SCW_SCRIPTS_NONE"));
     }
@@ -617,6 +622,11 @@ public class ScriptingWindow extends JFrame {
                 m_quickScriptButtons[i].setText("<" + key + ">");
             } else {
                 unsetQuickScriptMenu(i);
+                
+                if (m_quickScriptButtons.length < i || m_quickScriptButtons[i] == null) {
+                	return;
+                }
+
                 m_quickScriptButtons[i].setToolTipText(OStrings.getString("SCW_NO_SCRIPT_SET"));
                 m_quickScriptButtons[i].setText(String.valueOf(key));
             }
@@ -897,6 +907,10 @@ public class ScriptingWindow extends JFrame {
         m_setsMenu.add(item);
         m_setsMenu.addSeparator();
 
+        if (m_scriptsDirectory == null) {
+        	return;
+        }
+        
         for (File script : m_scriptsDirectory.listFiles(new FileFilter(){
 
             @Override

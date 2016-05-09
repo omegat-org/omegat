@@ -10,6 +10,7 @@
                2013 Yu Tang, Aaron Madlon-Kay
                2014 Piotr Kulik
                2015 Yu Tang, Aaron Madlon-Kay
+               2016 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -93,6 +94,7 @@ import com.vlsolutions.swing.docking.FloatingDialog;
  * @author Yu Tang
  * @author Aaron Madlon-Kay
  * @author Piotr Kulik
+ * @author Didier Briel
  */
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame implements IMainWindow {
@@ -250,14 +252,24 @@ public class MainWindow extends JFrame implements IMainWindow {
         }
 
         String text = getSelectedTextInMatcher();
+        boolean fromMT = false;
         if (StringUtil.isEmpty(text)) {
             NearString near = Core.getMatcher().getActiveMatch();
             if (near != null) {
                 text = near.translation;
+                if (near.comesFrom == NearString.MATCH_SOURCE.TM
+                    && ExternalTMX.isInPath(new File(Core.getProject().getProjectProperties().getTMRoot(), "mt"),
+                    new File(near.projs[0]))) {
+                    fromMT = true;    
+                }
             }
         }
         if (!StringUtil.isEmpty(text)) {
-            Core.getEditor().insertText(text);
+            if (fromMT) {
+                Core.getEditor().insertTextAndMark(text);
+            } else {
+                Core.getEditor().insertText(text);
+            }
             Core.getEditor().requestFocus();
         }
     }

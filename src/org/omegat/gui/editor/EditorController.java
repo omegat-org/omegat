@@ -13,6 +13,7 @@
                2013 Zoltan Bartko, Alex Buloichik, Aaron Madlon-Kay
                2014 Aaron Madlon-Kay, Piotr Kulik
                2015 Aaron Madlon-Kay, Yu Tang
+               2016 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -1822,6 +1823,21 @@ public class EditorController implements IEditor {
             text = EditorUtils.addBidiAroundTags(EditorUtils.removeDirectionCharsAroundTags(text, builder.ste), builder.ste);
         }
         editor.replaceSelection(text);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void insertTextAndMark (String text) {
+        insertText(text);
+
+        // mark as comes from TM
+        SegmentBuilder sb = m_docSegList[displayedEntryIndex];
+        CalcMarkersThread thread = markerController.markerThreads[markerController
+                .getMarkerIndex(ComesFromTMMarker.class.getName())];
+        ((ComesFromTMMarker) thread.marker).setMark(sb.getSourceTextEntry(), text);
+        markerController.reprocessImmediately(sb);        
     }
 
     public void insertTag(final String tag) {

@@ -304,6 +304,10 @@ public class SearchWindowTest extends TestCore {
             }
 
             @Override
+            public void insertTextAndMark(String text) {
+            }
+            
+            @Override
             public void insertTag(String tag) {
             }
 

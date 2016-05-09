@@ -8,6 +8,7 @@
                2012 Guido Leenders, Didier Briel
                2013 Zoltan Bartko, Aaron Madlon-Kay
                2014 Aaron Madlon-Kay
+               2016 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -284,8 +285,8 @@ public interface IEditor {
     void replaceEditText(String text);
 
     /**
-     * Replaces the entire edit area with a given text and mark for to be
-     * changed by translator, i.e. background of segment should be marked
+     * Inserts text at the cursor position and mark as to be changed
+     * by the translator, i.e, background of segment should be marked
      * 
      * Must be called only from UI thread.
      */
@@ -297,6 +298,15 @@ public interface IEditor {
      * Must be called only from UI thread.
      */
     void insertText(String text);
+
+    /**
+     * Inserts text at the cursor position and mark as to be changed
+     * by the translator, i.e, background of segment should be marked
+     * 
+     * Must be called only from UI thread.
+     * @param text The text to insert
+     */
+    void insertTextAndMark(String text);
 
     /**
      * Inserts tag at the cursor position, probably with adding bidi control chars.

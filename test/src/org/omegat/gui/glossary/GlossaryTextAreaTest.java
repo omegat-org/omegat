@@ -4,6 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 Maxym Mykhalchuk
+               2008-2014 Alex Buloichik
+               2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -46,6 +48,8 @@ import org.omegat.util.Preferences;
 /**
  * 
  * @author Maxym Mykhalchuk
+ * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public class GlossaryTextAreaTest extends TestCore {
     /**
@@ -147,6 +151,9 @@ public class GlossaryTextAreaTest extends TestCore {
             }
 
             public void insertText(String text) {
+            }
+            
+            public void insertTextAndMark(String text) {
             }
 
             public void insertTag(String tag) {

@@ -138,7 +138,7 @@ jar {
     archiveName = "${jar.baseName}.${jar.extension}"
 }
 
-def assetDir = [System.getProperty('asset.dir'), '../'].find { it != null }
+def assetDir = System.getProperty('asset.dir', '../')
 
 def macExecutable = file("${assetDir}/JavaAppLauncher")
 def macJRE = file("${assetDir}/jre-mac-root")
@@ -476,7 +476,7 @@ processResources << {
     3. This git clone's SHA-1
     4. If none of the above, the value "unknown"
      */
-    def provided = System.getProperty('repo.revision') ?: ''
+    def provided = System.getProperty('repo.revision', '')
     def git = file('.git').directory ? doCmd('git rev-parse --short HEAD') : ''
     def svn = file('.svn').directory ? doCmd('svnversion') : ''
     def revision = [provided, omtVersion.revision, git, svn, 'unknown'].find {

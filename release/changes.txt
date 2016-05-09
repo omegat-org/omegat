@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.0
 ----------------------------------------------------------------------
- 21 Enhancements
+ 22 Enhancements
   4 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -53,6 +53,9 @@
 
   - Compatibility with MED format 
   https://sourceforge.net/p/omegat/feature-requests/1240/
+
+  - Scripting Editor Enhancements 
+  https://sourceforge.net/p/omegat/feature-requests/1244/
 
   Other changes
 

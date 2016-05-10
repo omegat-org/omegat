@@ -100,7 +100,7 @@ import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.gui.dialogs.ConflictDialogController;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.CalcMarkersThread;
-import org.omegat.gui.editor.mark.ComesFromTMMarker;
+import org.omegat.gui.editor.mark.ComesFromMTMarker;
 import org.omegat.gui.editor.mark.EntryMarks;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.main.DockablePanel;
@@ -1707,8 +1707,8 @@ public class EditorController implements IEditor {
         int end = editor.getOmDocument().getTranslationEnd();
 
         CalcMarkersThread thread = markerController.markerThreads[markerController
-                .getMarkerIndex(ComesFromTMMarker.class.getName())];
-        ((ComesFromTMMarker) thread.marker).setMark(null, null);
+                .getMarkerIndex(ComesFromMTMarker.class.getName())];
+        ((ComesFromMTMarker) thread.marker).setMark(null, null);
 
         // remove text
         editor.select(start, end);
@@ -1719,8 +1719,8 @@ public class EditorController implements IEditor {
         UIThreadsUtil.mustBeSwingThread();
 
         CalcMarkersThread thread = markerController.markerThreads[markerController
-                .getMarkerIndex(ComesFromTMMarker.class.getName())];
-        ((ComesFromTMMarker) thread.marker).setMark(null, null);
+                .getMarkerIndex(ComesFromMTMarker.class.getName())];
+        ((ComesFromMTMarker) thread.marker).setMark(null, null);
 
         int off = editor.getOmDocument().getTranslationStart();
         // remove text
@@ -1740,8 +1740,8 @@ public class EditorController implements IEditor {
     private void markAsComesFromMT(String text) {
         SegmentBuilder sb = m_docSegList[displayedEntryIndex];
         CalcMarkersThread thread = markerController.markerThreads[markerController
-                .getMarkerIndex(ComesFromTMMarker.class.getName())];
-        ((ComesFromTMMarker) thread.marker).setMark(sb.getSourceTextEntry(), text);
+                .getMarkerIndex(ComesFromMTMarker.class.getName())];
+        ((ComesFromMTMarker) thread.marker).setMark(sb.getSourceTextEntry(), text);
         markerController.reprocessImmediately(sb);
     }
 

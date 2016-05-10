@@ -41,19 +41,19 @@ import org.omegat.util.gui.Styles;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class ComesFromTMMarker implements IMarker {
+public class ComesFromMTMarker implements IMarker {
     protected final HighlightPainter PAINTER = new TransparentHighlightPainter(Styles.EditorColor.COLOR_MARK_COMES_FROM_TM.getColor(), 0.5F);
 
     private SourceTextEntry markedSte;
     private String markedText;
 
-    public ComesFromTMMarker() {
+    public ComesFromMTMarker() {
         CoreEvents.registerEntryEventListener(new IEntryEventListener() {
             public void onNewFile(String activeFileName) {
             }
 
             public void onEntryActivated(SourceTextEntry newEntry) {
-                synchronized (ComesFromTMMarker.this) {
+                synchronized (ComesFromMTMarker.this) {
                     markedSte = null;
                     markedText = null;
                 }

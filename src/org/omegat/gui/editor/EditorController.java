@@ -1734,10 +1734,10 @@ public class EditorController implements IEditor {
     @Override
     public void replaceEditTextAndMark(String text) {
         replaceEditText(text);
-        markAsComesFromTM(text);
+        markAsComesFromMT(text);
     }
 
-    private void markAsComesFromTM(String text) {
+    private void markAsComesFromMT(String text) {
         SegmentBuilder sb = m_docSegList[displayedEntryIndex];
         CalcMarkersThread thread = markerController.markerThreads[markerController
                 .getMarkerIndex(ComesFromTMMarker.class.getName())];
@@ -1822,7 +1822,7 @@ public class EditorController implements IEditor {
     @Override
     public void insertTextAndMark (String text) {
         insertText(text);
-        markAsComesFromTM(text);
+        markAsComesFromMT(text);
     }
 
     public void insertTag(final String tag) {

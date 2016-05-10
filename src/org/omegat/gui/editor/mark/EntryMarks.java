@@ -42,7 +42,10 @@ public class EntryMarks {
     private final long entryVersion;
     public List<Mark> result;
     public final SourceTextEntry ste;
-    public final String sourceText, translationText;
+    /** May be null if source not displayed */
+    public final String sourceText;
+    /** May be null if not translated */
+    public final String translationText;
     public final boolean isActive;
 
     public EntryMarks(SegmentBuilder builder, long entryVersion, int markerIndex) {

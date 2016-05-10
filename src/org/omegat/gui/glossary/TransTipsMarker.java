@@ -48,7 +48,7 @@ public class TransTipsMarker implements IMarker {
 
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive) {
-        if (!isActive) {
+        if (!isActive || sourceText == null) {
             return null;
         }
         if (!Preferences.isPreference(Preferences.TRANSTIPS)) {

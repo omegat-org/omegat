@@ -37,11 +37,13 @@ import org.omegat.core.data.SourceTextEntry;
 public interface IMarker {
     /**
      * Calculate marks for specific entry.
-     * 
+     * <p>
      * Method will be called NOT in Swing thread.
+     * <p>
+     * Note to implementers: Both <code>sourceText</code> and <code>translationText</code> might be null!
      * 
-     * @return null if nothing changed, or list of new marks. Empty list must be
-     *         returned if marks shouldn't be displayed
+     * @return null if nothing changed, or list of new marks. Empty list must be returned if marks shouldn't
+     *         be displayed
      */
     List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive)
             throws Exception;

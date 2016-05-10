@@ -385,10 +385,12 @@ public class SegmentBuilder {
         return active;
     }
 
+    /** Get source text of entry with internal bidi chars, or null if not displayed. */
     public String getSourceText() {
         return sourceText;
     }
 
+    /** Get translation text of entry with internal bidi chars, or null if not displayed. */
     public String getTranslationText() {
         return translationText;
     }

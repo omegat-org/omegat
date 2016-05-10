@@ -61,14 +61,8 @@ public class FontFallbackMarker implements IMarker {
         if (!isEnabled()) {
             return null;
         }
-        
-        int srcGlyphMissing;
-        if (isActive || Core.getEditor().getSettings().isDisplaySegmentSources() || translationText == null) {
-            srcGlyphMissing = editorFont.canDisplayUpTo(sourceText);
-        } else {
-            srcGlyphMissing = -1;
-        }
-                
+
+        int srcGlyphMissing = sourceText == null ? -1 : editorFont.canDisplayUpTo(sourceText);       
         int trgGlyphMissing = translationText == null ? -1 : editorFont.canDisplayUpTo(translationText);
                 
         if (srcGlyphMissing == -1 && trgGlyphMissing == -1) {

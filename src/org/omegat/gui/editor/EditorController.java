@@ -1734,15 +1734,16 @@ public class EditorController implements IEditor {
     @Override
     public void replaceEditTextAndMark(String text) {
         replaceEditText(text);
+        markAsComesFromTM(text);
+    }
 
-        // mark as comes from TM
+    private void markAsComesFromTM(String text) {
         SegmentBuilder sb = m_docSegList[displayedEntryIndex];
         CalcMarkersThread thread = markerController.markerThreads[markerController
                 .getMarkerIndex(ComesFromTMMarker.class.getName())];
         ((ComesFromTMMarker) thread.marker).setMark(sb.getSourceTextEntry(), text);
         markerController.reprocessImmediately(sb);
     }
-
 
     public String getCurrentTranslation() {
         UIThreadsUtil.mustBeSwingThread();
@@ -1821,13 +1822,7 @@ public class EditorController implements IEditor {
     @Override
     public void insertTextAndMark (String text) {
         insertText(text);
-
-        // mark as comes from TM
-        SegmentBuilder sb = m_docSegList[displayedEntryIndex];
-        CalcMarkersThread thread = markerController.markerThreads[markerController
-                .getMarkerIndex(ComesFromTMMarker.class.getName())];
-        ((ComesFromTMMarker) thread.marker).setMark(sb.getSourceTextEntry(), text);
-        markerController.reprocessImmediately(sb);        
+        markAsComesFromTM(text);
     }
 
     public void insertTag(final String tag) {

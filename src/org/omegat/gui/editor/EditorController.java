@@ -1743,16 +1743,6 @@ public class EditorController implements IEditor {
         markerController.reprocessImmediately(sb);
     }
 
-    public void replacePartOfTextAndMark(String text, int start, int end) {
-        replacePartOfText(text, start, end);
-
-        // mark as comes from TM
-        SegmentBuilder sb = m_docSegList[displayedEntryIndex];
-        CalcMarkersThread thread = markerController.markerThreads[markerController
-                .getMarkerIndex(ComesFromTMMarker.class.getName())];
-        ((ComesFromTMMarker) thread.marker).setMark(sb.getSourceTextEntry(), text);
-        markerController.reprocessImmediately(sb);
-    }
 
     public String getCurrentTranslation() {
         UIThreadsUtil.mustBeSwingThread();

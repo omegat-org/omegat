@@ -119,16 +119,20 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
         JLanguageTool ltSource = sourceLt;
         JLanguageTool ltTarget = targetLt;
         if (ltTarget == null) {
-            // LT doesn't know anything about source language
+            // LT doesn't know anything about target language
             return null;
         }
 
         List<Mark> r = new ArrayList<Mark>();
         List<RuleMatch> matches;
         if (ltSource != null && bRules != null) {
-            // LT knows about source and target languages both and has bitext
-            // rules
-            matches = Tools.checkBitext(sourceText, translationText, ltSource, ltTarget, bRules);
+            // LT knows about source and target languages both and has bitext rules.
+
+            // sourceText represents the displayed source text: it may be null (not displayed) or have extra
+            // bidi characters for display. Since we need it for linguistic comparison here, if it's null then
+            // we pull from the SourceTextEntry, which is guaranteed not to be null.
+            matches = Tools.checkBitext(sourceText == null ? ste.getSrcText() : sourceText, translationText,
+                    ltSource, ltTarget, bRules);
         } else {
             // LT knows about target language only
             matches = ltTarget.check(translationText);

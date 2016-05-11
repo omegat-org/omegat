@@ -71,16 +71,19 @@ public class ProtectedPartsMarker implements IMarker {
 
         // find protected parts
         for (ProtectedPart pp : ste.getProtectedParts()) {
-            int pos = -1;
-            while ((pos = sourceText.indexOf(pp.getTextInSourceSegment(), pos + 1)) >= 0) {
-                Mark m = new Mark(Mark.ENTRY_PART.SOURCE, pos, pos + pp.getTextInSourceSegment().length());
-                m.painter = painter;
-                m.attributes = attrs;
-                m.toolTipText = escapeHtml(pp.getDetailsFromSourceFile());
-                r.add(m);
+            if (sourceText != null) {
+                int pos = -1;
+                while ((pos = sourceText.indexOf(pp.getTextInSourceSegment(), pos + 1)) >= 0) {
+                    Mark m = new Mark(Mark.ENTRY_PART.SOURCE, pos,
+                            pos + pp.getTextInSourceSegment().length());
+                    m.painter = painter;
+                    m.attributes = attrs;
+                    m.toolTipText = escapeHtml(pp.getDetailsFromSourceFile());
+                    r.add(m);
+                }
             }
             if (translationText != null) {
-                pos = -1;
+                int pos = -1;
                 while ((pos = translationText.indexOf(pp.getTextInSourceSegment(), pos + 1)) >= 0) {
                     Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, pos, pos + pp.getTextInSourceSegment().length());
                     m.painter = painter;

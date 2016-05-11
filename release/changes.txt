@@ -2,7 +2,7 @@
  OmegaT 3.6.0 update 2
 ----------------------------------------------------------------------
   1 Enhancement
-  1 Bug fix
+  2 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
 3.6.0 update 2 vs 3.6.0 update 1
@@ -16,6 +16,9 @@ must be preceded by a non-breaking space
 
   - When the text color is customized, the caret color does not match
   https://sourceforge.net/p/omegat/bugs/811/
+
+  - Some markers throw NPE when source text is not shown in editor
+  https://sourceforge.net/p/omegat/bugs/818/
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 1 (2016-04-07)

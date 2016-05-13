@@ -220,5 +220,10 @@ public class EditorUtilsTest extends TestCase {
         srcText = "Snowman Bob went to the snowman party. SnOwMaN!";
         expected = "Sneeuwpop Blub went to the sneeuwpop parti. sneeuwpop!";
         assertEquals(expected, EditorUtils.replaceGlossaryEntries(srcText, entries, locale, tokenizer));
+
+        // Replace final token (see https://sourceforge.net/p/omegat/bugs/819/)
+        srcText = "Snowman Bob went to the snowman party. SnOwMaN";
+        expected = "Sneeuwpop Blub went to the sneeuwpop parti. sneeuwpop";
+        assertEquals(expected, EditorUtils.replaceGlossaryEntries(srcText, entries, locale, tokenizer));
     }
 }

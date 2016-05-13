@@ -43,8 +43,8 @@ import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil;
-import org.omegat.util.Token;
 import org.omegat.util.TagUtil.Tag;
+import org.omegat.util.Token;
 
 /**
  * Some utilities methods.
@@ -389,7 +389,7 @@ public class EditorUtils {
     }
 
     private static boolean tokensPresentAt(String[] needle, String[] haystack, int offset) {
-        if (offset < 0 || offset + needle.length >= haystack.length) {
+        if (offset < 0 || offset + needle.length > haystack.length) {
             return false;
         }
         for (int i = 0; i < needle.length; i++) {

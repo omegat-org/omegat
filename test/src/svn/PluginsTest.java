@@ -25,12 +25,14 @@
 
 package svn;
 
+import java.awt.HeadlessException;
 import java.io.File;
 import java.io.FileReader;
 import java.nio.file.Files;
 import java.util.Properties;
 
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 
 import junit.framework.TestCase;
@@ -50,6 +52,8 @@ public class PluginsTest extends TestCase {
         try (FileReader fr = new FileReader(PLUGINS_FILE)) {
             plugins.load(fr);
         }
+
+        Preferences.init(); // Some plugins depend on inited prefs
         for (Object o : plugins.keySet()) {
             String[] classes = plugins.getProperty(o.toString()).split(" ");
             for (String cls : classes) {
@@ -57,14 +61,8 @@ public class PluginsTest extends TestCase {
                     Class.forName(cls);
                 } catch (ClassNotFoundException ex) {
                     fail(ex.toString());
-                } catch (ExceptionInInitializerError ex) {
-                    // Don't care about this.
-                } catch (NoClassDefFoundError ex) {
-                    // Don't care about this either. It looks similar to
-                    // ClassNotFoundException, but this actually means a class
-                    // that failed to instantiate due to
-                    // ExceptionInInitializerError was then again referenced in
-                    // another class.
+                } catch (HeadlessException ex) {
+                    // Don't care about this
                 }
             }
         }

@@ -816,7 +816,7 @@ public class ScriptingWindow extends JFrame {
         menu.addSeparator();
 
         item = new JMenuItem();
-        Mnemonics.setLocalizedText(item, OStrings.getString("SCW_SCRIPTS_FOLDER_CHOOSE_TITLE"));
+        Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_SET_SCRIPTS_FOLDER"));
         item.addActionListener(new SelectScriptFolderAction());
         menu.add(item);
 

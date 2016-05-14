@@ -401,12 +401,13 @@ public class StringUtil {
     }
 
     /**
-     * Replace invalid XML chars by spaces. See supported chars at
-     * http://www.w3.org/TR/2006/REC-xml-20060816/#charsets.
-     *
+     * Replace invalid XML chars by spaces.
+     * 
      * @param str
      *            input stream
      * @return result stream
+     * @see <a href="http://www.w3.org/TR/2006/REC-xml-20060816/#charsets">
+     *      Supported chars</a>
      */
     public static String removeXMLInvalidChars(String str) {
         StringBuilder sb = new StringBuilder(str.length());

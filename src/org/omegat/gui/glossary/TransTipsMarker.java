@@ -67,6 +67,7 @@ public class TransTipsMarker implements IMarker {
             public void found(GlossaryEntry ge, int start, int end) {
                 Mark m = new Mark(Mark.ENTRY_PART.SOURCE, start, end);
                 m.painter = TransTipsMarker.transTipsUnderliner;
+                m.toolTipText = ge.toStyledString().toHTML();
                 marks.add(m);
             }
         };

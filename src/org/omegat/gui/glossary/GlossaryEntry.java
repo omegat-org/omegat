@@ -216,6 +216,16 @@ public class GlossaryEntry {
         public void append(String str) {
             text.append(str);
         }
+
+        public String toHTML() {
+            StringBuilder sb = new StringBuilder(text);
+            for (int i = boldStarts.size() - 1; i >= 0; i--) {
+                sb.insert(boldStarts.get(i) + boldLengths.get(i), "</b>");
+                sb.insert(boldStarts.get(i), "<b>");
+            }
+            sb.insert(0, "<html><p>").append("</p></html>");
+            return sb.toString().replaceAll("\n", "<br>");
+        }
     }
     
     private void normalize(String[] strs) {

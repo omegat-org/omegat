@@ -32,6 +32,7 @@ import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -794,19 +795,22 @@ public class ScriptingWindow extends JFrame {
         item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_NEW_SCRIPT"));
         item.addActionListener(new NewScriptAction());
-        item.setAccelerator(KeyStroke.getKeyStroke("ctrl N"));
+        item.setAccelerator(
+                KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         menu.add(item);
 
         item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_SAVE_SCRIPT"));
         item.addActionListener(new SaveScriptAction());
-        item.setAccelerator(KeyStroke.getKeyStroke("ctrl S"));
+        item.setAccelerator(
+                KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         menu.add(item);
 
         item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_RUN_SCRIPT"));
         item.addActionListener(new RunScriptAction());
-        item.setAccelerator(KeyStroke.getKeyStroke("ctrl R"));
+        item.setAccelerator(
+                KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         menu.add(item);
                 
         menu.addSeparator();
@@ -825,7 +829,8 @@ public class ScriptingWindow extends JFrame {
         
         item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_CLOSE"));
-        item.setAccelerator(KeyStroke.getKeyStroke("ctrl W"));
+        item.setAccelerator(
+                KeyStroke.getKeyStroke(KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         item.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {

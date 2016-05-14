@@ -494,23 +494,21 @@ public class ScriptingWindow extends JFrame {
             return;
         }
 
+        String scriptSource = "<EDITOR>";
         if (m_currentScriptItem.getFile() != null) {
             if (!m_currentScriptItem.getFile().canRead()) {
                 logResult(OStrings.getString("SCW_CANNOT_READ_SCRIPT"));
                 return;
             }
-
-            logResult(StringUtil.format(OStrings.getString("SCW_RUNNING_SCRIPT"),
-                    m_currentScriptItem.getFile().getAbsolutePath()));
-            
+            scriptSource = m_currentScriptItem.getFile().getAbsolutePath();
         }
-        else {
-            logResult(StringUtil.format(OStrings.getString("SCW_RUNNING_SCRIPT"), "<EDITOR>"));
-        }
-        
 
+        logResult(StringUtil.format(OStrings.getString("SCW_RUNNING_SCRIPT"), scriptSource));
+
+        long start = System.currentTimeMillis();
         executeScriptFile(m_currentScriptItem, false);
 
+        logResult(StringUtil.format(OStrings.getString("SCW_SCRIPT_DONE"), System.currentTimeMillis() - start));
     }
 
     public void executeScriptFile(ScriptItem scriptItem, boolean forceFromFile) {

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.0
 ----------------------------------------------------------------------
- 22 Enhancements
+ 23 Enhancements
   4 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -56,6 +56,9 @@
 
   - Scripting Editor Enhancements 
   https://sourceforge.net/p/omegat/feature-requests/1244/
+
+  - Show glossary entries in tooltips on TransTips marks
+  https://sourceforge.net/p/omegat/feature-requests/1246/
 
   Other changes
 

@@ -209,7 +209,7 @@ public class RealProject implements IProject {
         EMPTY_TRANSLATION = new TMXEntry(empty, true, null);
 
         m_config = props;
-        if (m_config.getRepositories() != null) {
+        if (m_config.getRepositories() != null && !Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
             try {
                 remoteRepositoryProvider = new RemoteRepositoryProvider(m_config.getProjectRootDir(),
                         m_config.getRepositories());

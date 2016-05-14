@@ -722,8 +722,7 @@ public class ScriptingWindow extends JFrame {
                 m_fileChooser.setDialogTitle(OStrings.getString("SCW_SAVE_SCRIPT"));
                 m_fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
                 m_fileChooser.setCurrentDirectory(m_scriptsDirectory);
-                m_fileChooser.setFileSelectionMode(JFileChooser.SAVE_DIALOG);
-                int result = m_fileChooser.showOpenDialog(ScriptingWindow.this);
+                int result = m_fileChooser.showSaveDialog(ScriptingWindow.this);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     m_currentScriptItem = new ScriptItem(m_fileChooser.getSelectedFile());
                 }

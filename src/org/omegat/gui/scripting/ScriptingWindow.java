@@ -719,12 +719,11 @@ public class ScriptingWindow extends JFrame {
         public void actionPerformed(ActionEvent e) {
             
             if (m_currentScriptItem == null || m_currentScriptItem.getFile() == null) {
-                m_fileChooser.setDialogTitle(OStrings.getString("SCW_SAVE_SCRIPT"));
-                m_fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
-                m_fileChooser.setCurrentDirectory(m_scriptsDirectory);
-                int result = m_fileChooser.showSaveDialog(ScriptingWindow.this);
+                JFileChooser chooser = new JFileChooser(m_scriptsDirectory);
+                chooser.setDialogTitle(OStrings.getString("SCW_SAVE_SCRIPT"));
+                int result = chooser.showSaveDialog(ScriptingWindow.this);
                 if (result == JFileChooser.APPROVE_OPTION) {
-                    m_currentScriptItem = new ScriptItem(m_fileChooser.getSelectedFile());
+                    m_currentScriptItem = new ScriptItem(chooser.getSelectedFile());
                 }
                 else if (result == JFileChooser.APPROVE_OPTION) {
                     return;
@@ -750,14 +749,13 @@ public class ScriptingWindow extends JFrame {
 
     private class SelectScriptFolderAction  implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            m_fileChooser.setDialogTitle(OStrings.getString("SCW_SCRIPTS_FOLDER_CHOOSE_TITLE"));
-            m_fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
-            m_fileChooser.setCurrentDirectory(m_scriptsDirectory);
-            m_fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            int result = m_fileChooser.showOpenDialog(ScriptingWindow.this);
+            JFileChooser chooser = new JFileChooser(m_scriptsDirectory);
+            chooser.setDialogTitle(OStrings.getString("SCW_SCRIPTS_FOLDER_CHOOSE_TITLE"));
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int result = chooser.showOpenDialog(ScriptingWindow.this);
             if (result == JFileChooser.APPROVE_OPTION) {
                 // we should write the result into the directory text field
-                File file = m_fileChooser.getSelectedFile();            
+                File file = chooser.getSelectedFile();            
                 setScriptsDirectory(file);
             }
         }
@@ -954,7 +952,6 @@ public class ScriptingWindow extends JFrame {
     private File m_scriptsDirectory;
     private ScriptItem m_currentScriptItem;
     private JTextField m_txtScriptsDir;
-    private final JFileChooser m_fileChooser = new JFileChooser();
 
     private JMenu m_setsMenu = new JMenu();
 

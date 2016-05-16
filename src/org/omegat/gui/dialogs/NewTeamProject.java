@@ -37,6 +37,7 @@ import org.omegat.core.Core;
 import org.omegat.core.team2.RemoteRepositoryFactory;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.StringUtil;
 import org.omegat.util.WikiGet;
@@ -124,9 +125,11 @@ public class NewTeamProject extends javax.swing.JDialog {
         if (url.startsWith("git!")) {
             detectedRepoOrProjectFileLabel.setText(OStrings.getString("TEAM_DETECTED_REPO_GIT"));
             repoType = "git";
+            suggestLocalFolder();
         } else if (url.startsWith("svn!")) {
             detectedRepoOrProjectFileLabel.setText(OStrings.getString("TEAM_DETECTED_REPO_SVN"));
             repoType = "svn";
+            suggestLocalFolder();
         } else {
             repoTypeWorker = new RepoTypeWorker(url);
             repoTypeWorker.execute();
@@ -150,7 +153,19 @@ public class NewTeamProject extends javax.swing.JDialog {
             } else if ("project-file".equals(type)) {
                 detectedRepoOrProjectFileLabel.setText(OStrings.getString("TEAM_DETECTED_PROJECT_FILE"));
             }
+            suggestLocalFolder();
         }
+    }
+
+    private void suggestLocalFolder() {
+        if (!txtDirectory.getText().isEmpty()) {
+            return;
+        }
+        String url = txtRepositoryOrProjectFileURL.getText().trim();
+        String strippedUrl = StringUtil.stripFromEnd(url, ".git", "/", "trunk", "/", "svn");
+        String dir = Preferences.getPreferenceDefault(Preferences.CURRENT_FOLDER, System.getProperty("user.home"));
+        File suggestion = new File(dir, new File(strippedUrl).getName());
+        txtDirectory.setText(suggestion.getAbsolutePath());
     }
 
     private void clearRepo() {

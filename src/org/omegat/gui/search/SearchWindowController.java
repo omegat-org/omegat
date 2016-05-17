@@ -691,10 +691,11 @@ public class SearchWindowController {
                 viewer.displaySearchResult(searcher, ((Integer) form.m_numberOfResults.getValue()));
                 form.m_resultsLabel.setText(StringUtil.format(OStrings.getString("SW_NR_OF_RESULTS"),
                         viewer.getNrEntries()));
-                form.m_filterButton.setEnabled(true);
-                form.m_replaceButton.setEnabled(true);
-                form.m_replaceAllButton.setEnabled(true);
-                if (searcher.getSearchResults().isEmpty()) {
+                boolean haveResults = !searcher.getSearchResults().isEmpty();
+                form.m_filterButton.setEnabled(haveResults);
+                form.m_replaceButton.setEnabled(haveResults);
+                form.m_replaceAllButton.setEnabled(haveResults);
+                if (!haveResults) {
                     // RFE#1143 https://sourceforge.net/p/omegat/feature-requests/1143/
                     form.m_searchField.requestFocus();
                     form.m_searchField.getEditor().selectAll();

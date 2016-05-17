@@ -79,9 +79,9 @@ it is possible to double-click on a dictionary instead of pressing Install
 
   - It's possible to disable individual autocompleter views
 
-  - Parallelize part of match statistics calculation for big speed 
-improvement. When more than one processor is available, a parallel stream 
-is used to to calculate best match for untranslated entries. Gives 100-200% boost 
+  - Parallelize part of match statistics calculation for big speed
+improvement. When more than one processor is available, a parallel stream is
+used to to calculate best match for untranslated entries. Gives 100-200% boost
 on a 4-core processor (4-core 2.3 GHz Core i7 I7-4850HQ).
 
 

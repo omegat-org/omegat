@@ -178,6 +178,7 @@ public class SearchWindowController {
             form.m_numberOfResults.setVisible(false);
             form.m_panelSearch.setVisible(false);
             form.m_panelReplace.setVisible(true);
+            form.m_excludeOrphans.setVisible(false);
             break;
         }
     }
@@ -853,6 +854,7 @@ public class SearchWindowController {
                 s.searchUntranslated = true;
             }
             s.widthInsensitive = form.m_fullHalfWidthInsensitive.isSelected();
+            s.excludeOrphans = form.m_excludeOrphans.isSelected();
             break;
         case REPLACE:
             if (form.m_replaceExactSearchRB.isSelected()) {
@@ -874,6 +876,7 @@ public class SearchWindowController {
             s.replaceTranslated = true;
             s.replaceUntranslated = form.m_replaceUntranslated.isSelected();
             s.widthInsensitive = form.m_fullHalfWidthInsensitive.isSelected();
+            s.excludeOrphans = true;
             break;
         }
 
@@ -887,7 +890,6 @@ public class SearchWindowController {
         s.dateBefore = m_dateToModel.getDate().getTime();
         s.numberOfResults = mode == SearchMode.SEARCH ? ((Integer) form.m_numberOfResults.getValue())
                 : Integer.MAX_VALUE;
-        s.excludeOrphans = form.m_excludeOrphans.isSelected();
 
         Searcher searcher = new Searcher(Core.getProject(), s);
         // start the search in a separate thread

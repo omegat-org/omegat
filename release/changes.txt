@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.0
 ----------------------------------------------------------------------
- 24 Enhancements
+ 25 Enhancements
   5 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -26,6 +26,9 @@
 
   - Support ssh-agent for git public key authentication 
   https://sourceforge.net/p/omegat/feature-requests/1126/
+
+  - Put archive contents in self-titled root folder for all distributions
+  https://sourceforge.net/p/omegat/feature-requests/1186/
 
   - Add action menus to panes
   https://sourceforge.net/p/omegat/feature-requests/1196/

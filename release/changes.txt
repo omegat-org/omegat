@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.0
 ----------------------------------------------------------------------
- 23 Enhancements
+ 24 Enhancements
   5 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -59,6 +59,9 @@
 
   - Show glossary entries in tooltips on TransTips marks
   https://sourceforge.net/p/omegat/feature-requests/1246/
+
+  - Port build system to Gradle
+  https://sourceforge.net/p/omegat/feature-requests/1248/
 
   Other changes
 

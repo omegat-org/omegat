@@ -18,7 +18,7 @@
   - New team mode implementation
   https://sourceforge.net/p/omegat/feature-requests/1189/
 
-  - Update LanguageTool to 3.2 
+  - Update LanguageTool to 3.3 
   https://sourceforge.net/p/omegat/feature-requests/970/
 
   - Dismiss auto-completer window after hitting right/left arrow keys

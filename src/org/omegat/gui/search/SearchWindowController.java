@@ -604,13 +604,11 @@ public class SearchWindowController {
 
         if (form.m_searchTranslatedUntranslated.isSelected()) {
             Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_STATE,
-                    SearchExpression.SearchState.TRANSLATED_UNTRANSLATED.name());
+                    SearchExpression.SearchState.TRANSLATED_UNTRANSLATED);
         } else if (form.m_searchTranslated.isSelected()) {
-            Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_STATE,
-                    SearchExpression.SearchState.TRANSLATED.name());
+            Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_STATE, SearchExpression.SearchState.TRANSLATED);
         } else if (form.m_searchUntranslated.isSelected()) {
-            Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_STATE,
-                    SearchExpression.SearchState.UNTRANSLATED.name());
+            Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_STATE, SearchExpression.SearchState.UNTRANSLATED);
         }
 
         // replace options

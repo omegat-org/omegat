@@ -85,6 +85,7 @@ dependencies {
     dependency 'commons-io:commons-io:2.4'
     dependency 'commons-lang:commons-lang:2.6'
     dependency 'org.slf4j:slf4j-jdk14:1.7.19'
+    dependency 'org.dict.zip:dictzip-lib:0.8.1'
     // Groovy used at runtime for scripting only
     dependency 'org.codehaus.groovy:groovy-all:2.2.2'
     

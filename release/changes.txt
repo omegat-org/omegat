@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.0
 ----------------------------------------------------------------------
- 28 Enhancements
+ 29 Enhancements
   5 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -93,6 +93,7 @@ improvement. When more than one processor is available, a parallel stream is
 used to to calculate best match for untranslated entries. Gives 100-200% boost
 on a 4-core processor (4-core 2.3 GHz Core i7 I7-4850HQ).
 
+  - English tokenizer: two stop words were added: in, or
 
   Bug fixes:
 

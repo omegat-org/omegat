@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.0
 ----------------------------------------------------------------------
- 26 Enhancements
+ 27 Enhancements
   5 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -23,6 +23,9 @@
 
   - Dismiss auto-completer window after hitting right/left arrow keys
   https://sourceforge.net/p/omegat/feature-requests/1192/
+
+  - Support prefix search for dictionary
+  https://sourceforge.net/p/omegat/feature-requests/1124/
 
   - Support ssh-agent for git public key authentication 
   https://sourceforge.net/p/omegat/feature-requests/1126/

@@ -28,7 +28,6 @@ package org.omegat.core.dictionaries;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.File;
@@ -36,18 +35,21 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.zip.GZIPInputStream;
 
-import org.apache.commons.io.IOUtils;
 import org.dict.zip.DictZipInputStream;
 import org.dict.zip.RandomAccessInputStream;
+import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 
@@ -75,8 +77,6 @@ public class StarDict implements IDictionaryFactory {
         DICTFILE
     }
 
-    private static final int BUFFER_SIZE = 64 * 1024;
-
     @Override
     public boolean isSupportedFile(File file) {
         return file.getPath().endsWith(".ifo");
@@ -84,10 +84,17 @@ public class StarDict implements IDictionaryFactory {
 
     @Override
     public IDictionary loadDict(File file) throws Exception {
-        return new StarDictDict(file);
+        return loadDict(file, new Language(Locale.getDefault()));
+    }
+
+    @Override
+    public IDictionary loadDict(File file, Language language) throws Exception {
+        return new StarDictDict(file, language);
     }
 
     static class StarDictDict implements IDictionary {
+
+        private final Language language;
 
         /**
          * Field in StarDict .ifo file, added in version 3.0.0. This must be
@@ -99,18 +106,20 @@ public class StarDict implements IDictionaryFactory {
          */
         private int idxoffsetbits = 32;
 
-        private DictType dictType;
-        private String dictName;
-        private String dataFile;
+        private final String dictName;
+        private final DictType dictType;
+        private final String dataFile;
 
-        protected final Map<String, Object> data;
+        protected final DictionaryData<Entry> data;
 
         /**
          * @param ifoFile
          *            ifo file with dictionary
          */
-        public StarDictDict(File ifoFile) throws Exception {
+        public StarDictDict(File ifoFile, Language language) throws Exception {
     
+            this.language = language;
+
             Map<String, String> header = readIFO(ifoFile);
             String version = header.get("version");
             if (!"2.4.2".equals(version) && !"3.0.0".equals(version)) {
@@ -141,38 +150,32 @@ public class StarDict implements IDictionaryFactory {
             }
             dictName = f;
     
-            String dzFile = f + ".dict.dz";
-            if (new File(dzFile).isFile()) {
-                dictType = DictType.DICTZIP;
-                dataFile = dzFile;
-            } else {
-                String dictFile = f + ".dict";
-                if (!new File(dictFile).isFile()) {
-                    throw new FileNotFoundException("No .dict.dz or .dict files were found for " + dictName);
-                }
-                dictType = DictType.DICTFILE;
-                dataFile = dictFile;
+            try {
+                dataFile = getFile(".dict.dz", ".dict").get().getPath();
+                dictType = dataFile.endsWith(".dz") ? DictType.DICTZIP : DictType.DICTFILE;
+            } catch (NoSuchElementException ex) {
+                throw new FileNotFoundException("No .dict.dz or .dict files were found for " + dictName);
             }
 
-            data = readHeader();
+            try {
+                data = loadData(getFile(".idx.gz", ".idx").get());
+            } catch (NoSuchElementException ex) {
+                throw new FileNotFoundException("No .idx file could be found");
+            }
         }
 
-        private Map<String, Object> readHeader() throws IOException {
-            File file = new File(dictName + ".idx");
-            byte[] idxBytes;
-            if (file.exists()) {
-                idxBytes = readIDX(file);
-            } else {
-                file = new File(dictName + ".idx.gz");
-                if (file.exists()) {
-                    idxBytes = readIDXGZ(file);
-                } else {
-                    throw new FileNotFoundException("No .idx file could be found");
-                }
-            }
+        private Optional<File> getFile(String... suffixes) {
+            return Stream.of(suffixes).map(suff -> new File(dictName + suff)).filter(f -> f.isFile())
+                    .findFirst();
+        }
 
-            Map<String, Object> result = new HashMap<>();
-            try (DataInputStream idx = new DataInputStream(new ByteArrayInputStream(idxBytes));
+        private DictionaryData<Entry> loadData(File idxFile) throws IOException {
+            InputStream is = new FileInputStream(idxFile);
+            if (idxFile.getName().endsWith(".gz")) {
+                is = new GZIPInputStream(is);
+            }
+            DictionaryData<Entry> newData = new DictionaryData<>(language);
+            try (DataInputStream idx = new DataInputStream(new BufferedInputStream(is));
                   ByteArrayOutputStream mem = new ByteArrayOutputStream()) {
                 while (true) {
                     int b = idx.read();
@@ -184,74 +187,27 @@ public class StarDict implements IDictionaryFactory {
                         mem.reset();
                         int bodyOffset = idx.readInt();
                         int bodyLength = idx.readInt();
-                        addIndex(key, bodyOffset, bodyLength, result);
+                        newData.add(key, new Entry(bodyOffset, bodyLength));
                     } else {
                         mem.write(b);
                     }
                 }
             }
-            return result;
+            is.close();
+            newData.done();
+            return newData;
         }
 
-        /**
-         * Add new index to dictionary map. If index for this words was already
-         * added, it create array with all indexes. It required to support
-         * multiple translations for one word in dictionary.
-         * 
-         * @param key
-         *            translated word
-         * @param start
-         *            offset article index
-         * @param len
-         *            article offset
-         * @param result
-         *            result map
-         */
-        private void addIndex(final String key, final int start, final int len, final Map<String, Object> result) {
-            Object data = result.get(key);
-            if (data == null) {
-                data = new Entry(start, len);
-            } else {
-                if (data instanceof Entry[]) {
-                    Entry[] dobj = (Entry[]) data;
-                    Entry[] d = new Entry[dobj.length + 1];
-                    System.arraycopy(dobj, 0, d, 0, dobj.length);
-                    d[d.length - 1] = new Entry(start, len);
-                    data = d;
-                } else {
-                    Entry[] d = new Entry[2];
-                    d[0] = (Entry) data;
-                    d[1] = new Entry(start, len);
-                    data = d;
-                }
-            }
-            result.put(key, data);
-        }
-
-        /*
-         * (non-Javadoc)
-         * 
-         * @see org.omegat.core.dictionaries.IDictionary#readArticle(java.lang.
-         * String, java.lang.Object)
-         * 
-         * Returns not the raw text, but the formatted article ready for
-         * upstream use (\n replaced with <br>, etc.
-         */
         @Override
-        public List<DictionaryEntry> readArticles(String word) {
-            Object dictData = data.get(word);
-            if (dictData == null) {
-                return Collections.emptyList();
-            }
-            List<DictionaryEntry> result = new ArrayList<>();
-            if (dictData instanceof Entry) {
-                result.add(new DictionaryEntry(word, ((Entry) dictData).getArticle()));
-            } else if (dictData instanceof Entry[]) {
-                for (Entry entry : (Entry[]) dictData) {
-                    result.add(new DictionaryEntry(word, entry.getArticle()));
-                }
-            }
-            return result;
+        public List<DictionaryEntry> readArticles(String word) throws Exception {
+            return data.lookUp(word).stream().map(e -> new DictionaryEntry(e.getKey(), e.getValue().getArticle()))
+                    .collect(Collectors.toList());
+        }
+
+        @Override
+        public List<DictionaryEntry> readArticlesPredictive(String word) {
+            return data.lookUpPredictive(word).stream()
+                    .map(e -> new DictionaryEntry(e.getKey(), e.getValue().getArticle())).collect(Collectors.toList());
         }
 
         /**
@@ -334,39 +290,11 @@ public class StarDict implements IDictionaryFactory {
         }
 
         /**
-         * Reads plain idx file.
-         * 
-         * @param file
-         *            file to read.
-         * @return byte array which contents is IDX file.
-         * @throws IOException if I/O error occurred.
-         */
-        private byte[] readIDX(File file) throws IOException {
-            try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file),
-                    BUFFER_SIZE)) {
-                return IOUtils.toByteArray(bis);
-            }
-        }
-
-        /**
-         * Reads Idx.gz file.
-         * @param file to read.
-         * @return byte array which contents is IDX file.
-         * @throws IOException if I/O error occurred.
-         */
-        private byte[] readIDXGZ(File file) throws IOException {
-            try (InputStream is = new GZIPInputStream(new BufferedInputStream(
-                    new FileInputStream(file), BUFFER_SIZE))) {
-                return IOUtils.toByteArray(is);
-            }
-        }
-
-        /**
          * Read header.
          */
         private Map<String, String> readIFO(File ifoFile) throws Exception {
             Map<String, String> result = new TreeMap<>();
-            try (BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(ifoFile), OConsts.UTF8))) {
+            try (BufferedReader rd = Files.newBufferedReader(ifoFile.toPath(), StandardCharsets.UTF_8)) {
                 String line;
                 String first = rd.readLine();
                 if (!"StarDict's dict ifo file".equals(first)) {
@@ -386,7 +314,7 @@ public class StarDict implements IDictionaryFactory {
             return result;
         }
         
-        private class Entry {
+        class Entry {
             private volatile String cache;
             private final int start;
             private final int len;

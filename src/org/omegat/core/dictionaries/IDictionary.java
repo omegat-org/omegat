@@ -34,12 +34,19 @@ import java.util.List;
  * Each dictionary format reader should implement this interface. Each instance
  * of this interface represents one dictionary.
  * <p>
- * Simplest dictionary implementation can just read full dictionary data into
- * map, but we don't recommend it, because it's very memory consuming algorithm.
- * Recommended way is to just read article's names and store some short data,
- * like position in dictionary file, in the value of map. After that,
- * {@link #readArticles(String)} method could read dictionary file. OS will
+ * Implementers are encouraged to use {@link DictionaryData} to store their
+ * data. A simple implementation can just load its entire data at once, but we
+ * don't recommend it because it's very memory-intensive.
+ * <p>
+ * Instead we recommend that you read the dictionary's index (article titles)
+ * and store some short data, like article offsets into the dictionary file, as
+ * the value. In your implementation of the <code>readArticles*</code> methods
+ * you can use these offsets to actually load the content from disk. The OS will
  * cache dictionary file against slow access.
+ * <p>
+ * See {@link StarDict} for an example of the recommended deferred-loading
+ * implementation, and {@link LingvoDSL} for an example of an simpler, up-front
+ * loading implementation.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
@@ -55,4 +62,20 @@ public interface IDictionary {
      * @return List of entries. May be empty, but cannot be null.
      */
     List<DictionaryEntry> readArticles(String word) throws Exception;
+
+    /**
+     * Read article's text. Matching is predictive, so e.g. supplying "term"
+     * will return articles for "term", "terminology", "termite", etc. The
+     * default implementation simply calls {@link #readArticles(String)} for
+     * backwards compatibility.
+     * 
+     * @param word
+     *            The word to look up in the dictionary
+     * 
+     * @return List of entries. May be empty, but cannot be null.
+     */
+    default List<DictionaryEntry> readArticlesPredictive(String word) throws Exception {
+        // Default implementation for backwards compatibility
+        return readArticles(word);
+    }
 }

@@ -26,16 +26,15 @@
 
 package org.omegat.core.dictionaries;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.List;
-import java.util.Map;
+import java.util.Locale;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import org.omegat.util.Language;
 
 /**
  * Dictionary implementation for Lingvo DSL format.
@@ -47,7 +46,6 @@ import java.util.regex.Pattern;
  * @author Aaron Madlon-Kay
  */
 public class LingvoDSL implements IDictionaryFactory {
-    protected static final String CHARSET = "UTF-16";
     protected static final Pattern RE_SKIP = Pattern.compile("\\[.+?\\]");
     protected static final String[] EMPTY_RESULT = new String[0];
 
@@ -58,61 +56,55 @@ public class LingvoDSL implements IDictionaryFactory {
 
     @Override
     public IDictionary loadDict(File file) throws Exception {
-        return new LingvoDSLDict(loadData(file));
+        return loadDict(file, new Language(Locale.getDefault()));
     }
 
-    private static Map<String, String> loadData(File file) throws Exception {
-        BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(file), CHARSET));
-        try {
-            Map<String, String> result = new HashMap<String, String>();
-            String s;
-            StringBuilder word = new StringBuilder();
-            StringBuilder trans = new StringBuilder();
-            while ((s = rd.readLine()) != null) {
-                if (s.isEmpty()) {
-                    continue;
-                }
-                if (s.codePointAt(0) == '#') {
-                    continue;
-                }
-                s = RE_SKIP.matcher(s).replaceAll("");
-                if (Character.isWhitespace(s.codePointAt(0))) {
-                    trans.append(s.trim()).append('\n');
-                } else {
-                    if (word.length() > 0) {
-                        result.put(word.toString(), trans.toString());
-                        word.setLength(0);
-                        trans.setLength(0);
+    @Override
+    public IDictionary loadDict(File file, Language language) throws Exception {
+        return new LingvoDSLDict(loadData(file, language));
+    }
+
+    private static DictionaryData<String> loadData(File file, Language language) throws Exception {
+        DictionaryData<String> data = new DictionaryData<>(language);
+        StringBuilder word = new StringBuilder();
+        StringBuilder trans = new StringBuilder();
+        Files.lines(file.toPath(), StandardCharsets.UTF_16).filter(line -> !line.isEmpty() && !line.startsWith("#"))
+                .map(line -> RE_SKIP.matcher(line).replaceAll("")).forEach(line -> {
+                    if (Character.isWhitespace(line.codePointAt(0))) {
+                        trans.append(line.trim()).append('\n');
+                    } else {
+                        if (word.length() > 0) {
+                            data.add(word.toString(), trans.toString());
+                            word.setLength(0);
+                            trans.setLength(0);
+                        }
+                        word.append(line);
                     }
-                    word.append(s);
-                }
-            }
-            if (word.length() > 0) {
-                result.put(word.toString(), trans.toString());
-            }
-            return result;
-        } finally {
-            rd.close();
+                });
+        if (word.length() > 0) {
+            data.add(word.toString(), trans.toString());
         }
+        data.done();
+        return data;
     }
 
     static class LingvoDSLDict implements IDictionary {
-        protected final Map<String, String> data;
+        protected final DictionaryData<String> data;
 
-        private LingvoDSLDict(Map<String, String> data) throws Exception {
+        private LingvoDSLDict(DictionaryData<String> data) throws Exception {
             this.data = data;
         }
 
         @Override
         public List<DictionaryEntry> readArticles(String word) throws Exception {
-            String article = data.get(word);
-            if (article == null) {
-                return Collections.emptyList();
-            }
-            DictionaryEntry entry = new DictionaryEntry(word, article);
-            List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
-            result.add(entry);
-            return result;
+            return data.lookUp(word).stream().map(e -> new DictionaryEntry(e.getKey(), e.getValue()))
+                    .collect(Collectors.toList());
+        }
+
+        @Override
+        public List<DictionaryEntry> readArticlesPredictive(String word) throws Exception {
+            return data.lookUpPredictive(word).stream().map(e -> new DictionaryEntry(e.getKey(), e.getValue()))
+                    .collect(Collectors.toList());
         }
     }
 }

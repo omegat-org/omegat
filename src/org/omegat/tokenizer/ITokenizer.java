@@ -55,8 +55,8 @@ public interface ITokenizer {
      * tokens are NOT included in the result. Stemming can be used depending on
      * the supplied {@link StemmingMode}.
      * <p>
-     * When stemming is used, both the original word and its stem may be included
-     * in the results, if they differ.
+     * When stemming is used, both the original word and its stem may be
+     * included in the results, if they differ. (The stem will come first.)
      * <p>
      * This method used for dictionary lookup.
      * <p>

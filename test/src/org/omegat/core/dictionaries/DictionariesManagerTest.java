@@ -30,10 +30,14 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.omegat.gui.dictionaries.IDictionaries;
+import org.omegat.tokenizer.DefaultTokenizer;
+import org.omegat.util.Language;
 
 import junit.framework.TestCase;
 
@@ -64,7 +68,15 @@ public class DictionariesManagerTest extends TestCase {
             @Override
             public void removeDictionaryFactory(IDictionaryFactory factory) {
             }
-        });
+        }) {
+            @Override
+            protected boolean doFuzzyMatching() {
+                return true;
+            }
+        };
+        manager.setIndexLanguage(new Language(Locale.ENGLISH));
+        manager.setTokenizer(new DefaultTokenizer());
+
         PrintWriter fw = new PrintWriter(IGNORE_FILE, "UTF-8");
         fw.println(IGNORE_WORD);
         fw.close();

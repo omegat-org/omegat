@@ -40,12 +40,18 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
-import org.omegat.core.Core;
 import org.omegat.gui.dictionaries.IDictionaries;
+import org.omegat.tokenizer.DefaultTokenizer;
+import org.omegat.tokenizer.ITokenizer;
+import org.omegat.tokenizer.ITokenizer.StemmingMode;
 import org.omegat.util.DirectoryMonitor;
 import org.omegat.util.FileUtil;
+import org.omegat.util.Language;
 import org.omegat.util.Log;
+import org.omegat.util.Preferences;
 
 /**
  * Class for load dictionaries.
@@ -64,10 +70,15 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
     protected final Map<String, IDictionary> dictionaries = new TreeMap<String, IDictionary>();
     protected final Set<String> ignoreWords = new TreeSet<String>();
 
+    private Language indexLanguage;
+    private ITokenizer tokenizer;
+
     public DictionariesManager(final IDictionaries pane) {
         this.pane = pane;
         factories.add(new LingvoDSL());
         factories.add(new StarDict());
+        indexLanguage = new Language(Locale.getDefault());
+        tokenizer = new DefaultTokenizer();
     }
 
     public void addDictionaryFactory(IDictionaryFactory dict) {
@@ -144,8 +155,9 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         }
         for (IDictionaryFactory factory : currFactories) {
             if (factory.isSupportedFile(file)) {
+                IDictionary dict = factory.loadDict(file, indexLanguage);
                 synchronized (this) {
-                    dictionaries.put(file.getPath(), factory.loadDict(file));
+                    dictionaries.put(file.getPath(), dict);
                 }
                 return true;
             }
@@ -207,28 +219,42 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         synchronized (this) {
             dicts = new ArrayList<IDictionary>(dictionaries.values());
         }
-        List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
-        for (String word : words) {
-            if (isIgnoreWord(word)) {
-                continue;
-            }
-            for (IDictionary di : dicts) {
-                try {
-                    List<DictionaryEntry> entries = di.readArticles(word);
-                    if (entries.isEmpty()) {
-                        Locale loc = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
-                        String lowerCaseWord = word.toLowerCase(loc);
-                        if (isIgnoreWord(lowerCaseWord)) {
-                            continue;
-                        }
-                        entries = di.readArticles(lowerCaseWord);
-                    }
-                    result.addAll(entries);
-                } catch (Exception ex) {
-                    Log.log(ex);
-                }
-            }
+        return words.stream().filter(word -> !isIgnoreWord(word)).map(word -> {
+            return dicts.stream().map(dict -> doLookUp(dict, word)).flatMap(List::stream);
+        }).flatMap(Function.identity()).collect(Collectors.toList());
+    }
+
+    private List<DictionaryEntry> doLookUp(IDictionary dict, String word) {
+        String[] stemmed = tokenizer.tokenizeWordsToStrings(word, StemmingMode.MATCHING);
+        if (stemmed.length == 0) {
+            // Stop word. Skip.
+            return Collections.<DictionaryEntry> emptyList();
         }
-        return result;
+        try {
+            List<DictionaryEntry> result = dict.readArticles(word);
+            if (!result.isEmpty()) {
+                return result;
+            }
+            // The verbatim word didn't get any hits; try the stem.
+            if (stemmed.length > 1 && doFuzzyMatching()) {
+                return dict.readArticlesPredictive(stemmed[0]);
+            }
+        } catch (Exception ex) {
+            Log.log(ex);
+        }
+        return Collections.<DictionaryEntry> emptyList();
+    }
+
+    public void setIndexLanguage(Language indexLanguage) {
+        this.indexLanguage = indexLanguage;
+    }
+
+    public void setTokenizer(ITokenizer tokenizer) {
+        this.tokenizer = tokenizer;
+    }
+
+    // Implemented as method for testing purposes
+    protected boolean doFuzzyMatching() {
+        return Preferences.isPreferenceDefault(Preferences.DICTIONARY_FUZZY_MATCHING, true);
     }
 }

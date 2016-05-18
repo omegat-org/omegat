@@ -30,7 +30,7 @@ package org.omegat.core.dictionaries;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class DictionaryEntry {
+public class DictionaryEntry implements Comparable<DictionaryEntry> {
     private final String word;
     private final String article;
 
@@ -45,5 +45,10 @@ public class DictionaryEntry {
 
     public String getArticle() {
         return article;
+    }
+
+    @Override
+    public int compareTo(DictionaryEntry o) {
+        return word.compareTo(o.word);
     }
 }

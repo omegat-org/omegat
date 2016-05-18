@@ -38,10 +38,9 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
@@ -141,6 +140,8 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         clear();
         IProject project = Core.getProject();
         tokenizer = project.getSourceTokenizer();
+        manager.setIndexLanguage(project.getProjectProperties().getSourceLanguage());
+        manager.setTokenizer(tokenizer);
         manager.start(new File(project.getProjectProperties().getDictRoot()));
     }
 
@@ -308,22 +309,15 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             if (tok == null) {
                 return null;
             }
-            
-            StemmingMode mode = Preferences.isPreferenceDefault(Preferences.DICTIONARY_FUZZY_MATCHING, true)
-                    ? StemmingMode.MATCHING : StemmingMode.NONE;
-            String[] tokenList = tok.tokenizeWordsToStrings(src, mode);
-            Set<String> words = new TreeSet<String>();
-            for (String tok : tokenList) {
-                checkEntryChanged();
-                words.add(tok);
-            }
-            List<DictionaryEntry> result = manager.findWords(words);
 
-            Collections.sort(result, new Comparator<DictionaryEntry>() {
-                public int compare(DictionaryEntry o1, DictionaryEntry o2) {
-                    return o1.getWord().compareTo(o2.getWord());
-                }
-            });
+            // Just get the words. Stemming and other complex lookup logic is
+            // left to DictionaryManager.
+            List<String> words = Stream.of(tok.tokenizeWordsToStrings(src, StemmingMode.NONE)).distinct()
+                    .collect(Collectors.toList());
+
+            List<DictionaryEntry> result = manager.findWords(words);
+            Collections.sort(result);
+
             return result;
         }
     }

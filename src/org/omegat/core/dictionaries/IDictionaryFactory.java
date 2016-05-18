@@ -27,6 +27,8 @@ package org.omegat.core.dictionaries;
 
 import java.io.File;
 
+import org.omegat.util.Language;
+
 /**
  * An interface that defines support for a particular dictionary format.
  * 
@@ -46,9 +48,8 @@ public interface IDictionaryFactory {
     boolean isSupportedFile(File file);
 
     /**
-     * Load the given file and return an {@link IDictionary} that wraps it. The
-     * supplied file is guaranteed to have returned true from
-     * {@link #isSupportedFile(File)}.
+     * Load the given file and return an {@link IDictionary} that wraps it.
+     * Deprecated; use {@link #loadDict(File, Language)} instead.
      * 
      * @param file
      *            The file to load
@@ -58,4 +59,23 @@ public interface IDictionaryFactory {
      *             determined by {@link #isSupportedFile(File)}
      */
     IDictionary loadDict(File file) throws Exception;
+
+    /**
+     * Load the given file and return an {@link IDictionary} that wraps it. The
+     * supplied file is guaranteed to have returned true from
+     * {@link #isSupportedFile(File)}.
+     * 
+     * @param file
+     *            The file to load
+     * @param language
+     *            The language of the dictionary's index (e.g. English for an
+     *            English-French dictionary)
+     * @return An IDictionary file that can read articles from the file
+     * @throws Exception
+     *             If the file could not be loaded for reasons that were not
+     *             determined by {@link #isSupportedFile(File)}
+     */
+    default IDictionary loadDict(File file, Language language) throws Exception {
+        return loadDict(file);
+    }
 }

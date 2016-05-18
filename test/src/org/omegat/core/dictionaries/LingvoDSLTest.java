@@ -27,9 +27,12 @@ package org.omegat.core.dictionaries;
 
 import java.io.File;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map.Entry;
 
 import org.junit.Test;
 import org.omegat.core.dictionaries.LingvoDSL.LingvoDSLDict;
+import org.omegat.util.Language;
 
 import junit.framework.TestCase;
 
@@ -41,15 +44,16 @@ import junit.framework.TestCase;
  */
 public class LingvoDSLTest extends TestCase {
 
-    private static final String TEST_DICT = "test/data/dicts-lingvo/test.dsl";
+    private static final Language ENGLISH = new Language(Locale.ENGLISH);
+    private static final File TEST_DICT = new File("test/data/dicts-lingvo/test.dsl");
 
     @Test
     public void testReadFileDict() throws Exception {
-        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(new File(TEST_DICT));
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT, ENGLISH);
         assertEquals(6, dict.data.size());
 
         String word = "space";
-        String data = dict.data.get(word);
+        List<Entry<String, String>> data = dict.data.lookUp(word);
         assertNotNull(data);
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
@@ -59,7 +63,7 @@ public class LingvoDSLTest extends TestCase {
 
     @Test
     public void testReadArticle1() throws Exception {
-        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(new File(TEST_DICT));
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT, ENGLISH);
         String word = "tab";
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
@@ -69,7 +73,7 @@ public class LingvoDSLTest extends TestCase {
 
     @Test
     public void testReadArticleRussian() throws Exception {
-        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(new File(TEST_DICT));
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT, ENGLISH);
         String word = "tool";
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());

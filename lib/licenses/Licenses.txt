@@ -47,9 +47,6 @@ trilead-ssh2-1.0.0-build217.jar is distributed under the Trilead SSH license
 
 lucene-*.jar are distributed under the Apache License 2.0
 
-LuceneEnglishTokenizer uses stop words originally from Okapi (http://okapi.opentag.com/)
-under the LGPL license.
-
 commons-*.jar are distributed under the Apache License 2.0
 (required for LanguageTool and some parts of OmegaT)
 

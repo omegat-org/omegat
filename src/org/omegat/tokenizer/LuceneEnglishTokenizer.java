@@ -24,14 +24,8 @@
  **************************************************************************/
 package org.omegat.tokenizer;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.nio.charset.StandardCharsets;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
@@ -43,21 +37,6 @@ import org.omegat.core.Core;
  */
 @Tokenizer(languages = { "en" }, isDefault = true)
 public class LuceneEnglishTokenizer extends BaseTokenizer {
-
-    private static final CharArraySet STOP_WORDS;
-
-    static {
-        try (InputStream is = LuceneEnglishTokenizer.class.getResourceAsStream(STOPWORDS_FILE_EN);
-                InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
-                BufferedReader br = new BufferedReader(isr)) {
-            Set<String> set = br.lines().map(String::trim).filter(line -> !line.isEmpty() && !line.startsWith("#"))
-                    .collect(Collectors.toSet());
-            STOP_WORDS = CharArraySet.copy(set);
-        } catch (Exception ex) {
-            throw new ExceptionInInitializerError(
-                    "Error load stopwords in LuceneEnglishTokenizer: " + ex.getMessage());
-        }
-    }
 
     /**
      * Register plugin into OmegaT.
@@ -74,7 +53,7 @@ public class LuceneEnglishTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig, final boolean stemsAllowed,
             final boolean stopWordsAllowed) throws IOException {
         if (stemsAllowed) {
-            CharArraySet stopWords = stopWordsAllowed ? STOP_WORDS : CharArraySet.EMPTY_SET;
+            CharArraySet stopWords = stopWordsAllowed ? EnglishAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
             return new EnglishAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         } else {
             return getStandardTokenStream(strOrig);

@@ -60,8 +60,6 @@ import org.omegat.util.Token;
  */
 public abstract class BaseTokenizer implements ITokenizer {
 
-    public static final String STOPWORDS_FILE_EN = "StopList_en.txt";
-
     private static final Map<String, Token[]> tokenCacheNone = new HashMap<String, Token[]>(
             5000);
     private static final Map<String, Token[]> tokenCacheMatching = new HashMap<String, Token[]>(

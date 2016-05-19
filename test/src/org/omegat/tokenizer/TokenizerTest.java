@@ -45,7 +45,7 @@ public class TokenizerTest extends TestCase {
                 tok.tokenizeWordsToStrings(orig, StemmingMode.NONE));
         assertResult(new String[] { "the", "quick", "brown", "x0", "jump", "jumped", "over", "1", "lazi", "lazy", "dog" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.GLOSSARY));
-        assertResult(new String[] { "quick", "brown", "jump", "jumped", "lazi", "lazy", "dog" },
+        assertResult(new String[] { "quick", "brown", "jump", "jumped", "over", "lazi", "lazy", "dog" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.MATCHING));
     }
     

@@ -40,6 +40,11 @@ sourceSets {
             srcDir 'test/data'
         }
     }
+    testIntegration {
+        java {
+            srcDir 'test-integration/src'
+        }
+    }
 }
 
 repositories {

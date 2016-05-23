@@ -105,6 +105,7 @@ public class TestTeamIntegrationChild {
 
             finishTime = System.currentTimeMillis() + time;
 
+            Preferences.init();
             Preferences.setPreference(Preferences.TEAM_AUTHOR, source);
 
             ProjectProperties config = TestTeamIntegration.createConfig(new File(dir));
@@ -405,6 +406,10 @@ public class TestTeamIntegrationChild {
         @Override
         public String getCurrentTargetFile() {
             return null;
+        }
+
+        @Override
+        public void insertTextAndMark(String text) {
         }
     };
 

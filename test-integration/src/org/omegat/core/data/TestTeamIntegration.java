@@ -91,6 +91,9 @@ public class TestTeamIntegration {
     static int MAX_DELAY_SECONDS = 15;
     static int SEG_COUNT = 4;
 
+    static Language SRC_LANG = new Language("en");
+    static Language TRG_LANG = new Language("be");
+
     static final String[] THREADS = new String[] { "s1", "s2", "s3" };
 
     static Team repo;
@@ -227,12 +230,15 @@ public class TestTeamIntegration {
 
         Preferences.init();
         ProjectProperties config = createConfig(origDir);
+        config.setSourceLanguage(SRC_LANG);
+        config.setTargetLanguage(TRG_LANG);
+
         RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config.getProjectRootDir(), config.getRepositories());
         remote.switchAllToLatest();
 
         new File(origDir, "omegat").mkdirs();
         File f = new File(origDir, "omegat/project_save.tmx");
-        TMXWriter2 wr = new TMXWriter2(f, new Language("en"), new Language("be"), true, false, true);
+        TMXWriter2 wr = new TMXWriter2(f, SRC_LANG, TRG_LANG, true, false, true);
         wr.close();
 
         ProjectFileStorage.writeProjectFile(config);

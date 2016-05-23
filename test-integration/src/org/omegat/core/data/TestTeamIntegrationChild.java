@@ -61,7 +61,6 @@ import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
-import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
@@ -190,8 +189,8 @@ public class TestTeamIntegrationChild {
      * Check in memory and in file.
      */
     static void checkAll() throws Exception {
-        ProjectTMX tmx = new ProjectTMX(new Language("en"), new Language("be"), false, new File(dir
-                + "/omegat/project_save.tmx"), TestTeamIntegration.checkOrphanedCallback);
+        ProjectTMX tmx = new ProjectTMX(TestTeamIntegration.SRC_LANG, TestTeamIntegration.TRG_LANG, false,
+                new File(dir + "/omegat/project_save.tmx"), TestTeamIntegration.checkOrphanedCallback);
         for (int c = 0; c < segCount; c++) {
             checkTranslation(c);
             checkTranslationFromFile(tmx, c);

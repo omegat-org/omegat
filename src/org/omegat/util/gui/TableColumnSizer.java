@@ -32,8 +32,8 @@ import java.awt.event.HierarchyBoundsAdapter;
 import java.awt.event.HierarchyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -63,7 +63,7 @@ public class TableColumnSizer {
     private boolean didApplySizes;
     
     private final JTable table;
-    private final List<ActionListener> listeners = new ArrayList<ActionListener>();
+    private final List<ActionListener> listeners = new CopyOnWriteArrayList<>();
     
     /**
      * Automatically optimize the column widths of a table. The {@link #remainderColumn}

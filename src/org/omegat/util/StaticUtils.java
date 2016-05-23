@@ -179,7 +179,7 @@ public class StaticUtils {
         } else {
             excludesMasks = new Pattern[0];
         }
-        String prefix = rootDir.getCanonicalPath().replace('\\', '/');
+        String prefix = rootDir.getAbsolutePath().replace('\\', '/');
         List<String> result = new ArrayList<String>();
         for (File f : files) {
             String fn = f.getPath().replace('\\', '/');

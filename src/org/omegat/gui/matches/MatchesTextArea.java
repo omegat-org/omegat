@@ -42,9 +42,13 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
@@ -233,14 +237,19 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     }
 
     /**
-     * Attemps to subtitute numbers in a match with numbers from the source segment.
-     * For substitution to be done, the number of numbers must be the same between source and matches, and
-     * the numbers must be the same between the source match and the target match. The order of the numbers
-     * can be different between the source match and the target match. Numbers will be substituted at the 
-     * correct location.
-     * @param source The source segment
-     * @param sourceMatch The source of the match
-     * @param targetMatch The target of the match
+     * Attempts to substitute numbers in a match with numbers from the source
+     * segment. For substitution to be done, the number of numbers must be the
+     * same between source and matches, and the numbers must be the same between
+     * the source match and the target match. The order of the numbers can be
+     * different between the source match and the target match. Numbers will be
+     * substituted at the correct location.
+     * 
+     * @param source
+     *            The source segment
+     * @param sourceMatch
+     *            The source of the match
+     * @param targetMatch
+     *            The target of the match
      * @return The target match with numbers possibly substituted
      */
     @Override
@@ -253,80 +262,86 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     static String substituteNumbers(String source, String sourceMatch, String targetMatch, ITokenizer sourceTok,
             ITokenizer targetTok) {
 
-        Token[] sourceMatchStrTokensAll = sourceTok.tokenizeVerbatim(sourceMatch);
-        List<String> sourceMatchNumbers = getNumberList(sourceMatchStrTokensAll, sourceMatch);
+        List<String> sourceMatchNumbers = Stream.of(sourceTok.tokenizeVerbatimToStrings(sourceMatch))
+                .filter(MatchesTextArea::isNumber).collect(Collectors.toList());
 
-        Token[] targetMatchStrTokensAll = targetTok.tokenizeVerbatim(targetMatch);
-        List<String> targetMatchNumbers = getNumberList(targetMatchStrTokensAll, targetMatch);
+        String[] targetTokens = targetTok.tokenizeVerbatimToStrings(targetMatch);
+        List<String> targetMatchNumbers = Stream.of(targetTokens)
+                .filter(MatchesTextArea::isNumber).collect(Collectors.toList());
 
-        Token[] sourceStrTokensAll = sourceTok.tokenizeVerbatim(source);
-        List <String> sourceNumbers = getNumberList(sourceStrTokensAll, source);
+        List<String> sourceNumbers = Stream.of(sourceTok.tokenizeVerbatimToStrings(source))
+                .filter(MatchesTextArea::isNumber).collect(Collectors.toList());
 
-        if (sourceMatchNumbers.size() != targetMatchNumbers.size() || //Not the same number of numbers
-            sourceMatchNumbers.size() != sourceNumbers.size()) {
+        if (sourceMatchNumbers.size() != sourceNumbers.size() || sourceMatchNumbers.size() != targetMatchNumbers.size()
+                || !new HashSet<>(sourceMatchNumbers).equals(new HashSet<>(targetMatchNumbers))) {
             return targetMatch; 
         }
 
-        List<Integer> matchingNumbers = new ArrayList<Integer>();
-        List<Integer> foundLocation = new ArrayList<Integer>();
-
-        // Compute the location of numbers in the target match
-        for (String oneNumber : sourceMatchNumbers) {
-            int pos = -1;
-            for (Token oneToken : targetMatchStrTokensAll) {
-                pos ++;
-                if (oneNumber.equals(oneToken.getTextFromString(targetMatch)) && !foundLocation.contains(pos)) {
-                   matchingNumbers.add(pos);
-                   foundLocation.add(pos);
-                }
-            }
-            if (pos == -1) { // One of the number in source is not in target
-                return targetMatch; 
-            } 
-        }
+        Map<Integer, Integer> locationMap = mapIndices(sourceMatchNumbers, targetMatchNumbers);
 
         // Substitute new numbers in the target match
-        String finalString = "";
-        int pos = -1;
-        boolean replaced;
-        for (Token oneToken : targetMatchStrTokensAll) {
-            pos ++;
-            replaced = false;
-            for (int numberRank = 0; numberRank < matchingNumbers.size(); numberRank++){
-                if (matchingNumbers.get(numberRank) == pos) {
-                    finalString += sourceNumbers.get(numberRank);
-                    replaced = true;
-                }
-            }
-            if (!replaced) {// No subtitution was done
-                finalString += oneToken.getTextFromString(targetMatch);
+        StringBuilder result = new StringBuilder();
+        int i = 0;
+        for (String tok : targetTokens) {
+            if (isNumber(tok)) {
+                result.append(sourceNumbers.get(locationMap.get(i)));
+                i++;
+            } else {
+                result.append(tok);
             }
         }
 
-        return finalString;
+        return result.toString();
     }
 
     /**
-     * Compute a list of numerals inside a string. Integers and simple doubles (not localized) are recognized.
-     * @param strTokenAll A list of tokens from a string
-     * @param text A string
-     * @return A list of strings of tokens which can be considered being numerals
+     * Determine whether the given string is a number. Integers and simple
+     * doubles (not localized) are recognized.
+     * 
+     * @param text
+     *            A string
+     * @return True if the string represents a number
      */
-    private static List<String> getNumberList(Token[] strTokenAll, String text) {
-        List<String> numberList = new ArrayList<String>();
-        for (Token oneToken : strTokenAll) {
-            try {
-                Integer.parseInt(oneToken.getTextFromString(text));
-                numberList.add(oneToken.getTextFromString(text));
-            } catch (NumberFormatException nfe) {
-                try {
-                    Double.parseDouble(oneToken.getTextFromString(text));
-                    numberList.add(oneToken.getTextFromString(text));
-                } catch (NumberFormatException nfe2) {
-                } // Eat exception silently
-            } // Eat exception silently
+    private static boolean isNumber(String text) {
+        try {
+            Integer.parseInt(text);
+            return true;
+        } catch (NumberFormatException nfe) {
+            // Eat exception silently
         }
-        return numberList;
+        try {
+            Double.parseDouble(text);
+            return true;
+        } catch (NumberFormatException nfe) {
+            // Eat exception silently
+        }
+        return false;
+    }
+
+    /**
+     * Create a mapping of indices of equivalent items in the given list.
+     * Handles duplicated items correctly.
+     * 
+     * @param source
+     *            Source list
+     * @param target
+     *            Target list
+     * @return Map of indices from source list to target list
+     */
+    private static Map<Integer, Integer> mapIndices(List<?> source, List<?> target) {
+        Map<Integer, Integer> result = new HashMap<>();
+
+        for (int i = 0; i < source.size(); i++) {
+            for (int j = 0; j < target.size(); j++) {
+                Object src = source.get(i);
+                Object trg = target.get(j);
+                if ((src == trg || src.equals(trg)) && !result.values().contains(j)) {
+                    result.put(i, j);
+                    break;
+                }
+            }
+        }
+        return result;
     }
 
     /**

@@ -59,6 +59,14 @@ public class MatchesTextAreaTest extends TestCase {
         trgMatch = "bing 3 bang 2 bop 1";
         assertEquals("bing 7 bang 8 bop 9",
                 MatchesTextArea.substituteNumbers(source, srcMatch, trgMatch, tok, tok));
+
+        // User-reported problem string (duplicate numbers)
+        source = "Point C : Recommence les \u00E9tapes 16 \u00E0 21 \u2013 pages 16 et 17";
+        srcMatch = "Point B : Recommence les \u00E9tapes 9 \u00E0 15 \u2013 page 14 et 15";
+        trgMatch = "Point B: Repeat steps 9 to 15 \u2013 pages 14 and 15";
+        assertEquals("Point B: Repeat steps 16 to 21 \u2013 pages 16 and 17",
+                MatchesTextArea.substituteNumbers(source, srcMatch, trgMatch, tok, tok));
+
         // Substitution not possible: differing number counts
         source = "hoge 9 fuga 8 piyo 7";
         srcMatch = "foo 1 bar 2 baz";
@@ -80,6 +88,12 @@ public class MatchesTextAreaTest extends TestCase {
         // Substitution not possible: differing number counts
         source = "hoge 9 fuga 8 piyo 7";
         srcMatch = "foo 1 bar 2 baz 3 3";
+        trgMatch = "bing 3 bang 2 bop 1";
+        assertEquals("bing 3 bang 2 bop 1", MatchesTextArea.substituteNumbers(source, srcMatch, trgMatch, tok, tok));
+
+        // Substitution not possible: differing numbers
+        source = "hoge 9 fuga 8 piyo 7";
+        srcMatch = "foo 1 bar 2 baz 33";
         trgMatch = "bing 3 bang 2 bop 1";
         assertEquals("bing 3 bang 2 bop 1", MatchesTextArea.substituteNumbers(source, srcMatch, trgMatch, tok, tok));
     }

@@ -245,9 +245,13 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
      */
     @Override
     public String substituteNumbers(String source, String sourceMatch, String targetMatch) {
-
         ITokenizer sourceTok = Core.getProject().getSourceTokenizer();
         ITokenizer targetTok = Core.getProject().getTargetTokenizer();
+        return substituteNumbers(source, sourceMatch, targetMatch, sourceTok, targetTok);
+    }
+
+    static String substituteNumbers(String source, String sourceMatch, String targetMatch, ITokenizer sourceTok,
+            ITokenizer targetTok) {
 
         Token[] sourceMatchStrTokensAll = sourceTok.tokenizeVerbatim(sourceMatch);
         List<String> sourceMatchNumbers = getNumberList(sourceMatchStrTokensAll, sourceMatch);
@@ -308,7 +312,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
      * @param text A string
      * @return A list of strings of tokens which can be considered being numerals
      */
-    private List<String> getNumberList(Token[] strTokenAll, String text) {
+    private static List<String> getNumberList(Token[] strTokenAll, String text) {
         List<String> numberList = new ArrayList<String>();
         for (Token oneToken : strTokenAll) {
             try {

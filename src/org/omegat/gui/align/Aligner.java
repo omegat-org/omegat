@@ -293,8 +293,8 @@ public class Aligner {
      * @return Flattened list of segments
      */
     private List<String> segmentAll(Language language, List<String> rawTexts) {
-        return rawTexts.stream().map(text -> Core.getSegmenter().segment(language, text, null, null))
-                .flatMap(List::stream).filter(s -> !s.isEmpty()).collect(Collectors.toList());
+        return rawTexts.stream().flatMap(text -> Core.getSegmenter().segment(language, text, null, null).stream())
+                .filter(s -> !s.isEmpty()).collect(Collectors.toList());
     }
 
     /**

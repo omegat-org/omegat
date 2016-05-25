@@ -40,7 +40,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.omegat.gui.dictionaries.IDictionaries;
@@ -219,9 +218,9 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         synchronized (this) {
             dicts = new ArrayList<IDictionary>(dictionaries.values());
         }
-        return words.stream().filter(word -> !isIgnoreWord(word)).map(word -> {
-            return dicts.stream().map(dict -> doLookUp(dict, word)).flatMap(List::stream);
-        }).flatMap(Function.identity()).collect(Collectors.toList());
+        return words.stream().filter(word -> !isIgnoreWord(word)).flatMap(word -> {
+            return dicts.stream().flatMap(dict -> doLookUp(dict, word).stream());
+        }).collect(Collectors.toList());
     }
 
     private List<DictionaryEntry> doLookUp(IDictionary dict, String word) {

@@ -2,7 +2,7 @@
  OmegaT 4.0.0
 ----------------------------------------------------------------------
  29 Enhancements
-  5 Bug fixes
+  6 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 4.0.0 vs 3.6.0 update 2
@@ -112,6 +112,9 @@ to the wrong filter
 
   - Incorrect count of proposed changes in find/replace 
   https://sourceforge.net/p/omegat/bugs/820/
+
+  - When replacing the target text with a match, the number substitution
+could fail with duplicate numbers
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 2

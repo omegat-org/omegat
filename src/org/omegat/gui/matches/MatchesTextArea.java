@@ -327,8 +327,13 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
      * @param target
      *            Target list
      * @return Map of indices from source list to target list
+     * @throws IllegalArgumentException
+     *             If the lists are not the same size
      */
     private static Map<Integer, Integer> mapIndices(List<?> source, List<?> target) {
+        if (source.size() != target.size()) {
+            throw new IllegalArgumentException("Lists must be the same size");
+        }
         Map<Integer, Integer> result = new HashMap<>();
 
         for (int i = 0; i < source.size(); i++) {

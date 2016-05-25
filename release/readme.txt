@@ -341,7 +341,7 @@ OmegaT uses the following libraries:
   LanguageTool (LGPL license and others)
   PDFBox (Apache License 2.0)
   SuperTMXMerge-for_OmegaT.jar (LGPL license)
-  groovy-all-2.2.2.jar (Apache Licence 2.0)
+  groovy-all-2.4.6.jar (Apache Licence 2.0)
   slf4j (MIT License)
   juniversalchardet-1.0.3.jar (GPL v2)
   DictZip from JDictd (GPL v2)

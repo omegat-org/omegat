@@ -56,7 +56,7 @@ For licenses of libraries required by LanguageTool, see https://github.com/langu
 
 pdfbox-*.jar and fontbox-*.jar are distributed under the Apache License 2.0
 
-groovy-all-2.2.2.jar is distributed under the Apache License 2.0
+groovy-all-2.4.6.jar is distributed under the Apache License 2.0
 (required for scripting)
 
 SuperTMXMerge-for_OmegaT.jar is distributed under the GNU Lesser General  

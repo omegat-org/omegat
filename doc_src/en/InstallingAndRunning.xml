@@ -354,16 +354,18 @@
 
       <para>You can modify OmegaT's behaviour by editing the
       <emphasis>Properties</emphasis> as well as the
-      <emphasis>OmegaT.sh</emphasis> file in the package.</para>
+      <emphasis>Configuration.properties</emphasis> file in the
+      package.</para>
 
       <para>To access
-      <application><emphasis>OmegaT.sh</emphasis></application>, right-click
-      on <emphasis><application>OmegaT</application>.app</emphasis> and select
-      "Show Package Contents", then open the file in Contents/MacOS by
+      <application><emphasis>Configuration.properties</emphasis></application>,
+      right-click on
+      <emphasis><application>OmegaT</application>.app</emphasis> and select
+      "Show Package Contents", then open the file in Contents/Resources by
       right-clicking on it and selecting your text editor of choice. You can
       also "cd" there directly from the command line and open
-      <application><emphasis>OmegaT.sh</emphasis> in a command line editor
-      like emacs or vi</application>.<indexterm class="singular">
+      <application><emphasis>Configuration.properties</emphasis> in a command
+      line editor like emacs or vi</application>.<indexterm class="singular">
           <primary>Customizing OmegaT</primary>
 
           <secondary>OS X</secondary>
@@ -371,18 +373,18 @@
           <tertiary>Launch parameters</tertiary>
         </indexterm></para>
 
-      <para>Options are changed by modifying <emphasis>OmegaT.sh</emphasis>.
-      For pre-defined options, remove the # before a parameter to enable it.
-      For example, <filename>LANGUAGE="-Duser.language=ja"</filename> (without
-      the #) will launch <application>OmegaT</application> with the user
-      interface in Japanese.</para>
+      <para>Options are changed by modifying
+      <emphasis>Configuration.properties</emphasis>. For pre-defined options,
+      remove the # before a parameter to enable it. For example,
+      <filename>LANGUAGE="-Duser.language=ja"</filename> (without the #) will
+      launch <application>OmegaT</application> with the user interface in
+      Japanese.</para>
 
-      <para>To change the amount of memory available, edit directly the
-      lauching line. For instance, <filename>${JAVA} -Xmx2048m ${MACOS}
-      ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY}
-      ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY}
-      -jar OmegaT.jar</filename> will launch OmegaT with 2 gigas of
-      memory.</para>
+      <para>To change the amount of memory available, edit
+      <emphasis>OmegaT.app/Contents/Info.plist</emphasis> file and change
+      change the content of &lt;string&gt;-Xmx1024M&lt;/string&gt;. For
+      instance, &lt;string&gt;-Xmx2048M&lt;/string&gt; will launch OmegaT with
+      2 gigas of memory.</para>
 
       <para>To launch multiple instances of
       <emphasis><application>OmegaT</application>.app</emphasis>, double-click
@@ -506,22 +508,19 @@
       information.</para>
     </section>
   </section>
-  
-    <section id="drag.and.drop">
+
+  <section id="drag.and.drop">
     <title>Drag and drop<indexterm class="singular">
         <primary>Running OmegaT</primary>
 
         <secondary>Drag and drop</secondary>
       </indexterm></title>
-    
-    <para>In most systems, it is possible to open a project by dropping an 
-    <filename>omegat.project</filename> file onto the OmegaT icon on the desktop.
-    It might also be possible to open an OmegaT project by double-clicking on an 
-    <filename>omegat.project</filename> file.
-    </para>
-    
-    </section>
 
+    <para>In most systems, it is possible to open a project by dropping an
+    <filename>omegat.project</filename> file onto the OmegaT icon on the
+    desktop. It might also be possible to open an OmegaT project by
+    double-clicking on an <filename>omegat.project</filename> file.</para>
+  </section>
 
   <section id="using.Java.Web.Start">
     <title>Using Java Web Start<indexterm class="singular">
@@ -653,8 +652,8 @@
       <emphasis>"-jar <application>OmegaT</application>.jar"</emphasis>. Note
       that in Windows you can change the <filename>OmegaT.l4J.ini</filename>
       file to reflect your preferences. In other platforms, you can modify
-      your launcher (e.g., <filename>OmegaT.sh</filename> on the Mac,
-      <filename>OmegaT</filename> under Linux) to do the same.</para>
+      <filename>Configuration.properties</filename> file on the Mac, or
+      <filename>OmegaT</filename> launcher under Linux to do the same.</para>
 
       <para>A list of possible arguments is given below. Advanced users can
       obtain more information on the arguments by typing <emphasis>man

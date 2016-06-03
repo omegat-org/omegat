@@ -114,8 +114,7 @@
               </indexterm>Help browser</guimenuitem></entry>
 
             <entry><para>Used to display the user manual (open with
-            <keycap>F1</keycap>, close with
-            <keycap>Esc)</keycap></para></entry>
+            <keycap>F1</keycap>)<keycap/></para></entry>
           </row>
 
           <row>
@@ -519,6 +518,14 @@
       to drop it within the segment. Texted dragged from outside the target
       segment is copied, while text dragged from within the segment is
       moved.</para>
+
+      <para>By default. it is not possible to select words in the source
+      segment using the keyboard rather than the mouse. Pressing
+      <keycap>F2</keycap> key allows to move the cursor into the source
+      segment (or anywhere in the editor) with the keyboard arrows. In this
+      mode, "<guilabel>Cursor lock of</guilabel>" is displayed at the bottom
+      of the pane. To come back to the standard mode "<guilabel>Cursor lock
+      on</guilabel>", press <keycap>F2</keycap> again.</para>
     </section>
 
     <section id="match.viewer">

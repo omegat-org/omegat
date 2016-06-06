@@ -193,6 +193,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         try {
             File outFileTmp = new File(outFile.getPath() + ".new");
             Files.write(outFileTmp.toPath(), words);
+            outFile.delete();
             FileUtil.rename(outFileTmp, outFile);
         } catch (IOException ex) {
             Log.log("Error saving ignore words");

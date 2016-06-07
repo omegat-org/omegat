@@ -32,6 +32,58 @@
 
     <para>Click the dropdown arrow of the <emphasis>Search for</emphasis> box
     to access the last 10 searches.</para>
+
+    <para>The Search window has its own menus:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>File &gt; Search for selection (<keycombo>
+            <keycap>Ctrl</keycap>
+
+            <keycap>F</keycap>
+          </keycombo>): refocus on the search field and select all its
+        contents.</para>
+      </listitem>
+
+      <listitem>
+        <para>File &gt; Close (<keycombo>
+            <keycap>Ctrl</keycap>
+
+            <keycap>W</keycap>
+          </keycombo>): close the search window (in the same way as
+        <keycap>Esc</keycap>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Edit &gt; Insert source (<keycombo>
+            <keycap>Ctrl</keycap>
+
+            <keycap>Shift</keycap>
+
+            <keycap>I</keycap>
+          </keycombo>): insert current segment source.</para>
+      </listitem>
+
+      <listitem>
+        <para>Edit &gt; Replace with source (<keycombo>
+            <keycap>Ctrl</keycap>
+
+            <keycap>Shift</keycap>
+
+            <keycap>R</keycap>
+          </keycombo>): replace with current segment source.</para>
+      </listitem>
+
+      <listitem>
+        <para>Edit &gt; Create Glossary Entry (<keycombo>
+            <keycap>Ctrl</keycap>
+
+            <keycap>Shift</keycap>
+
+            <keycap>G</keycap>
+          </keycombo>): add a new glossary item.</para>
+      </listitem>
+    </itemizedlist>
   </section>
 
   <section id="using.wild.cards">
@@ -215,7 +267,10 @@
 
     <para>If you click on the button <guibutton>Advanced options</guibutton>
     additional criteria (author or changer of the translation, date
-    translated, excluding orphan segments, etc) can be selected.</para>
+    translated, excluding orphan segments, etc) can be selected. When
+    <emphasis>Full/Half width char insensitive</emphasis> option is checked,
+    searches for full-width forms such as ＡＢＣ１２３アカサタ（＄！℀ will match
+    ABC123ｱｶｻﾀ($!a/c and vice versa.</para>
   </section>
 
   <section id="search.result.display">

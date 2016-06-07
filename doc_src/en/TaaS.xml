@@ -24,7 +24,7 @@
 
     <para>The key must then be given to OmegaT using -Dtaas.user.key=xxxxx.
     OmegaT configuration launchers (OmegaT.l4J.ini, omegat.kaptn and
-    OmegaT.sh) contain a template entry.</para>
+    Configuration.properties) contain a template entry.</para>
   </section>
 
   <section id="section.TaaS.options.access">

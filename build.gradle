@@ -514,7 +514,7 @@ task checksums {
     }
 }
 
-task genDocIndex(type: JavaExec, dependsOn: [classes]) {
+task genDocIndex(type: JavaExec) {
     description = 'Regenerate the docs index file'
     main = 'util.CreateDocIndexUtil'
     classpath = sourceSets.main.runtimeClasspath
@@ -582,7 +582,7 @@ allprojects {
     }
 }
 
-task(jar2, dependsOn: jar, type: Sync) {
+task jar2(type: Sync) {
     description = 'Create minimal executable output for debugging.'
     destinationDir = file("${buildDir}/install/jar2")
     from jar
@@ -594,7 +594,7 @@ task(jar2, dependsOn: jar, type: Sync) {
     }
 }
 
-task(debug, dependsOn: classes, type: JavaExec) {
+task debug(type: JavaExec) {
     description = 'Launch app for debugging.' // Special debug task for NetBeans
     main = mainClassName
     classpath = sourceSets.main.runtimeClasspath

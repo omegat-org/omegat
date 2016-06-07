@@ -111,6 +111,8 @@ dependencies {
 
     // WebStart-only
     jnlp project(path: ':release:WebStart-specific', configuration: 'docs')
+    
+    testIntegrationCompile sourceSets.main.output, sourceSets.test.output, configurations.compile
 }
 
 task getDependencies(type: Copy) {
@@ -599,6 +601,13 @@ task debug(type: JavaExec) {
     main = mainClassName
     classpath = sourceSets.main.runtimeClasspath
     debug true
+}
+
+task testIntegration(type: JavaExec) {
+    description = 'Run integration tests. Pass repo URL as -Domegat.test.repo=<repo>'
+    main = 'org.omegat.core.data.TestTeamIntegration'
+    classpath = sourceSets.testIntegration.runtimeClasspath
+    systemProperties = System.properties
 }
 
 // Allow setting the max heap size for the run task from the command line, e.g.

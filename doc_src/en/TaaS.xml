@@ -23,8 +23,8 @@
     https://term.tilde.com/account/keys/create?system=omegaT.</para>
 
     <para>The key must then be given to OmegaT using -Dtaas.user.key=xxxxx.
-    OmegaT configuration launchers (OmegaT.l4J.ini, omegat.kaptn and OmegaT.sh
-    [vbdx: Configuration.properties ??]) contain a template entry.</para>
+    OmegaT configuration launchers (OmegaT.l4J.ini, omegat.kaptn and
+    Configuration.properties) contain a template entry.</para>
   </section>
 
   <section id="section.TaaS.options.access">

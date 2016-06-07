@@ -83,7 +83,7 @@ import gen.core.project.RepositoryMapping;
  */
 public class TestTeamIntegration {
     static final String DIR = "/tmp/teamtest";
-    static final String REPO = "git@github.com:alex73/trans.git";
+    static final String REPO = System.getProperty("omegat.test.repo", "git@github.com:alex73/trans.git");
     // static final String REPO = "svn+ssh://alex73@svn.code.sf.net/p/mappy/test/";
     // static final String REPO = "https://github.com/alex73/trans/trunk/";
     static int PROCESS_SECONDS = 4 * 60 * 60;

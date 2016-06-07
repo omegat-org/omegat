@@ -43,7 +43,6 @@ import org.omegat.core.data.ProjectTMX.CheckOrphanedCallback;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
-import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TMXWriter2;
 import org.tmatesoft.svn.core.ISVNLogEntryHandler;
@@ -228,10 +227,7 @@ public class TestTeamIntegration {
         File origDir = new File(tmp, "repo");
         origDir.mkdir();
 
-        Preferences.init();
         ProjectProperties config = createConfig(origDir);
-        config.setSourceLanguage(SRC_LANG);
-        config.setTargetLanguage(TRG_LANG);
 
         RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config.getProjectRootDir(), config.getRepositories());
         remote.switchAllToLatest();
@@ -253,6 +249,8 @@ public class TestTeamIntegration {
 
     static ProjectProperties createConfig(File dir) throws Exception {
         ProjectProperties config = new ProjectProperties(dir);
+        config.setSourceLanguage(SRC_LANG);
+        config.setTargetLanguage(TRG_LANG);
         RepositoryDefinition def = new RepositoryDefinition();
         if (REPO.startsWith("git")) {
             def.setType("git");

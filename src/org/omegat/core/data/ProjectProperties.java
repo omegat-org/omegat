@@ -44,7 +44,6 @@ import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
-import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 
 import gen.core.filters.Filters;
@@ -78,7 +77,10 @@ public class ProjectProperties {
     protected ProjectProperties() {
     }
 
-    /** Default constructor to initialize fields (to get no NPEs). */
+    /**
+     * Default constructor to initialize fields (to get no NPEs). Real values
+     * should be applied after creation.
+     */
     public ProjectProperties(File projectDir) throws Exception {
         projectRootDir = projectDir;
         projectName = projectDir.getName();
@@ -94,19 +96,8 @@ public class ProjectProperties {
         setSupportDefaultTranslations(true);
         setRemoveTags(false);
 
-        String sourceLocale = Preferences.getPreference(Preferences.SOURCE_LOCALE);
-        if (!StringUtil.isEmpty(sourceLocale)) {
-            setSourceLanguage(sourceLocale);
-        } else {
-            setSourceLanguage("EN-US");
-        }
-
-        String targetLocale = Preferences.getPreference(Preferences.TARGET_LOCALE);
-        if (!StringUtil.isEmpty(targetLocale)) {
-            setTargetLanguage(targetLocale);
-        } else {
-            setTargetLanguage("EN-GB");
-        }
+        setSourceLanguage("EN-US");
+        setTargetLanguage("EN-GB");
 
         projectSRX = SRX.loadSRX(new File(getProjectInternal(), SRX.CONF_SENTSEG));
         projectFilters = FilterMaster.loadConfig(new File(getProjectInternal(), FilterMaster.FILE_FILTERS));

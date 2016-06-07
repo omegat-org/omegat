@@ -108,8 +108,11 @@ public class ProjectUICommands {
                 dir.mkdirs();
 
                 // ask about new project properties
+                ProjectProperties props = new ProjectProperties(dir);
+                props.setSourceLanguage(Preferences.getPreferenceDefault(Preferences.SOURCE_LOCALE, "EN-US"));
+                props.setTargetLanguage(Preferences.getPreferenceDefault(Preferences.TARGET_LOCALE, "EN-GB"));
                 ProjectPropertiesDialog newProjDialog = new ProjectPropertiesDialog(
-                        new ProjectProperties(dir), dir.getAbsolutePath(),
+                        props, dir.getAbsolutePath(),
                         ProjectPropertiesDialog.Mode.NEW_PROJECT);
                 newProjDialog.setVisible(true);
                 newProjDialog.dispose();

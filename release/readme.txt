@@ -325,7 +325,7 @@ OmegaT uses the following libraries:
   VLDocking Framework 3.0.5-SNAPSHOT (LGPL License)
   Swing-Layout 1.0.4 (LGPL License)
   Jmyspell 2.1.4 (LGPL License)
-  SVNKit 1.8.11 (TMate License)
+  SVNKit 1.8.12 (TMate License)
   Sequence Library (Sequence Library License)
   ANTLR 3.4 (ANTLR 3 license)
   SQLJet 1.1.10 (GPL v2)

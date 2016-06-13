@@ -84,7 +84,7 @@ dependencies {
     // Specify the following two here just to make sure all jsch.agentproxy libs are the same version.
     dependency 'com.jcraft:jsch.agentproxy.connector-factory:0.0.9'
     dependency 'com.jcraft:jsch.agentproxy.svnkit-trilead-ssh2:0.0.9'
-    dependency 'org.tmatesoft.svnkit:svnkit:1.8.11'
+    dependency 'org.tmatesoft.svnkit:svnkit:1.8.12'
     dependency 'org.apache.pdfbox:pdfbox:2.0.0'
     dependency 'net.loomchild:maligna:3.0.0'
     dependency 'commons-io:commons-io:2.4'

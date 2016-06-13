@@ -84,6 +84,7 @@ dependencies {
     // Specify the following two here just to make sure all jsch.agentproxy libs are the same version.
     dependency 'com.jcraft:jsch.agentproxy.connector-factory:0.0.9'
     dependency 'com.jcraft:jsch.agentproxy.svnkit-trilead-ssh2:0.0.9'
+    dependency 'org.json:json:20160212'
     dependency 'org.tmatesoft.svnkit:svnkit:1.8.12'
     dependency 'org.apache.pdfbox:pdfbox:2.0.0'
     dependency 'net.loomchild:maligna:3.0.0'
@@ -94,7 +95,7 @@ dependencies {
     dependency 'com.github.takawitter:trie4j:0.9.2'
     // Groovy used at runtime for scripting only
     dependency 'org.codehaus.groovy:groovy-all:2.4.6'
-    
+
     //RSyntaxUI and additional modules
     dependency 'com.fifesoft:rsyntaxtextarea:2.5.8'
     dependency 'com.fifesoft:rstaui:2.5.7'
@@ -111,7 +112,7 @@ dependencies {
 
     // WebStart-only
     jnlp project(path: ':release:WebStart-specific', configuration: 'docs')
-    
+
     testIntegrationCompile sourceSets.main.output, sourceSets.test.output, configurations.compile
 }
 

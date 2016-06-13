@@ -29,10 +29,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.omegat.core.Core;
 import org.omegat.util.FileUtil;
@@ -388,5 +391,12 @@ public class ProjectTMX {
             defaults = tmx.defaults;
             alternatives = tmx.alternatives;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "[" + Stream.concat(defaults.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getKey)).map(e -> e.getKey() + ": " + e.getValue().translation),
+                alternatives.entrySet().stream().sorted(Comparator.comparing(e -> e.getKey().sourceText)).map(e -> e.getKey().sourceText + ": " + e.getValue().translation))
+                .collect(Collectors.joining(", ")) + "]";
     }
 }

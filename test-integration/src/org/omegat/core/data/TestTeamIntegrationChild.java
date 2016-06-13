@@ -61,6 +61,7 @@ import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
@@ -174,6 +175,7 @@ public class TestTeamIntegrationChild {
         PrepareTMXEntry prep = new PrepareTMXEntry();
         prep.translation = "" + System.currentTimeMillis();
         Core.getProject().setTranslation(steC, prep, true, null);
+        Log.log("Wrote: " + prep.source + "=" + prep.translation);
     }
 
     static void checksavecheck(int index) throws Exception {
@@ -244,6 +246,7 @@ public class TestTeamIntegrationChild {
         PrepareTMXEntry prep = new PrepareTMXEntry();
         prep.translation = "" + value;
         Core.getProject().setTranslation(ste, prep, true, null);
+        Log.log("Wrote: " + prep.source + "=" + prep.translation);
         Core.getProject().saveProject();
     }
 
@@ -524,6 +527,9 @@ public class TestTeamIntegrationChild {
 
         @Override
         protected void mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
+            Log.log("Base:   " + baseTMX);
+            Log.log("Mine:   " + projectTMX);
+            Log.log("Theirs: " + headTMX);
             StmProperties props = new StmProperties().setBaseTmxName(OStrings.getString("TMX_MERGE_BASE"))
                     .setTmx1Name(OStrings.getString("TMX_MERGE_MINE"))
                     .setTmx2Name(OStrings.getString("TMX_MERGE_THEIRS"))
@@ -562,6 +568,7 @@ public class TestTeamIntegrationChild {
                 ProjectTMX mergedTMX = SuperTmxMerge
                         .merge(baseTMX, projectTMX, headTMX, m_config.getSourceLanguage().getLanguage(),
                                 m_config.getTargetLanguage().getLanguage(), props);
+                Log.log("Merged: " + mergedTMX);
                 projectTMX.replaceContent(mergedTMX);
             }
             commitDetails.append('\n');

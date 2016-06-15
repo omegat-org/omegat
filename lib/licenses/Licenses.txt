@@ -8,10 +8,6 @@ vldocking-*.jar is distributed under the GNU Lesser General Public
 License. Sources are available in OmegaT sources, in the directory
 lib/sources.
 
-swing-layout-*.jar is distributed under the GNU Lesser General Public
-License version 2.1. Sources are available in OmegaT sources, in the
-directory lib/sources.
-
 jmyspell-core-*.jar is distributed under the GNU Lesser General Public
 License version 2.1 and greater. Sources are available in OmegaT
 sources, in the directory lib/sources.

@@ -324,15 +324,9 @@ task linux(dependsOn: [linuxDistTar, linux64DistTar]) {
     task.onlyIf {
         requirement.directory
     }
-    // Gradle's BZIP2 compression is super slow, so first tar uncompressed and then bz2 it later.
-    // This will be fixed in Gradle 2.14.
     def suffix = task.name.contains('64') ? 'Linux_64' : 'Linux'
-    task.archiveName = "${applicationName}_${version}${omtVersion.beta}_${suffix}.tar"
-    task.compression = Compression.NONE
-    task.doLast {
-        ant.bzip2(src: task.archivePath, destfile: "${task.archivePath}.bz2")
-        delete task.archivePath
-    }
+    task.archiveName = "${applicationName}_${version}${omtVersion.beta}_${suffix}.bz2"
+    task.compression = Compression.BZIP2
 }
 
 task l10n(dependsOn: [l10nMinimalDistZip, l10nFullDistZip]) {

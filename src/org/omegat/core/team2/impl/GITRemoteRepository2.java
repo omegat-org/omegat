@@ -28,7 +28,10 @@ package org.omegat.core.team2.impl;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import javax.xml.namespace.QName;
 
@@ -48,6 +51,7 @@ import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
+import org.eclipse.jgit.transport.RemoteRefUpdate.Status;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.util.FileUtil;
@@ -202,20 +206,18 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             RevCommit commit = git.commit().setMessage(comment).call();
             Iterable<PushResult> results = git.push().setRemote(REMOTE).add(LOCAL_BRANCH)
                     .call();
-            int count = 0;
-            for (PushResult r : results) {
-                for (RemoteRefUpdate update : r.getRemoteUpdates()) {
-                    count++;
-                    if (update.getStatus() != RemoteRefUpdate.Status.OK) {
-                        Log.logWarningRB("GIT_CONFLICT");
-                    }
-                }
-            }
-            if (count < 1) {
+            List<Status> statuses = StreamSupport.stream(results.spliterator(), false)
+                    .flatMap(r -> r.getRemoteUpdates().stream()).map(RemoteRefUpdate::getStatus)
+                    .collect(Collectors.toList());
+            String result;
+            if (statuses.isEmpty() || statuses.stream().anyMatch(s -> s != RemoteRefUpdate.Status.OK)) {
                 Log.logWarningRB("GIT_CONFLICT");
+                result = null;
+            } else {
+                result = commit.getName();
             }
             Log.logInfoRB("GIT_FINISH", "upload");
-            return commit.getName();
+            return result;
         } catch (Exception ex) {
             Log.logErrorRB("GIT_ERROR", "upload", ex.getMessage());
             if (ex instanceof TransportException) {

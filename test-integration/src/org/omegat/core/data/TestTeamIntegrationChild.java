@@ -575,6 +575,12 @@ public class TestTeamIntegrationChild {
             commitDetails.append(props.getReport().toString());
         }
 
+        @Override
+        public synchronized void saveProject() {
+            Log.log("Saving: " + projectTMX);
+            super.saveProject();
+        }
+
         protected void mergeTMXOld(ProjectTMX baseTMX, ProjectTMX headTMX) {
             mergedTMX = new ProjectTMX();
             this.baseTMX = baseTMX;

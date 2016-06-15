@@ -530,6 +530,17 @@ public class TestTeamIntegrationChild {
             Log.log("Base:   " + baseTMX);
             Log.log("Mine:   " + projectTMX);
             Log.log("Theirs: " + headTMX);
+            if (!checkMergeInput(baseTMX, projectTMX)) {
+                Log.log("'Mine' TM is not a valid derivative of 'Base' TM");
+                // Exceptions thrown here are suppressed in
+                // RealProject.saveProject(boolean) so this is the easiest way
+                // to early-exit
+                System.exit(1);
+            }
+            if (!checkMergeInput(baseTMX, headTMX)) {
+                Log.log("'Theirs' TM is not a valid derivative of 'Base' TM");
+                System.exit(1);
+            }
             StmProperties props = new StmProperties().setBaseTmxName(OStrings.getString("TMX_MERGE_BASE"))
                     .setTmx1Name(OStrings.getString("TMX_MERGE_MINE"))
                     .setTmx2Name(OStrings.getString("TMX_MERGE_THEIRS"))
@@ -569,10 +580,31 @@ public class TestTeamIntegrationChild {
                         .merge(baseTMX, projectTMX, headTMX, m_config.getSourceLanguage().getLanguage(),
                                 m_config.getTargetLanguage().getLanguage(), props);
                 Log.log("Merged: " + mergedTMX);
+                if (!checkMergeInput(baseTMX, mergedTMX)) {
+                    Log.log("'Merged' TM is not a valid derivative of 'Base' TM");
+                    System.exit(1);
+                }
                 projectTMX.replaceContent(mergedTMX);
             }
             commitDetails.append('\n');
             commitDetails.append(props.getReport().toString());
+        }
+
+        /**
+         * Check a TM against the base TM to ensure it's a valid modification of
+         * the base. This integration test never deletes entries, only adds or
+         * modifies them, so modified versions must be supersets of their base
+         * versions.
+         * 
+         * @param base
+         *            Base TM from which the other TM is derived
+         * @param other
+         *            Other TM
+         * @return Valid or not
+         */
+        boolean checkMergeInput(ProjectTMX base, ProjectTMX other) {
+            return base.defaults.keySet().stream().allMatch(other.defaults::containsKey)
+                    && base.alternatives.keySet().stream().allMatch(other.alternatives::containsKey);
         }
 
         @Override

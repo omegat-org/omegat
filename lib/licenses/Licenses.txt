@@ -4,29 +4,29 @@ htmlparser.jar version 1.6 is distributed under the GNU Lesser
 General Public License version 2.1 and greater
 Sources are available in OmegaT sources, in the directory lib/sources
 
-vldocking-3.0.5-SNAPSHOT.jar is distributed under the GNU Lesser General
+vldocking-*.jar is distributed under the GNU Lesser General
 Public License
 Sources are available in OmegaT sources, in the directory lib/sources
 
-swing-layout-1.0.4.jar is distributed under the GNU Lesser General  
+swing-layout-*.jar is distributed under the GNU Lesser General  
 Public License version 2.1.
 Sources are available in OmegaT sources, in the directory lib/sources
 
-jmyspell-core-1.0.0-beta-2-1.4.jar is distributed under the 
+jmyspell-core-*.jar is distributed under the 
 GNU Lesser General Public License version 2.1 and greater
 Sources are available in OmegaT sources, in the directory lib/sources
 
-svnkit-1.8.12.jar is distributed under the
+svnkit-*.jar is distributed under the
 TMate Open Source / Commercial dual license
 (required for SVNRemoteRepository.java)
 
-sequence-library-1.0.3.jar is distributed under the Sequence Library License
+sequence-library-*.jar is distributed under the Sequence Library License
 (required for SVNRemoteRepository.java)
 
-antlr-runtime-3.4.jar is distributed under the ANTLR 3 License
+antlr-runtime-*.jar is distributed under the ANTLR 3 License
 (required for SVNRemoteRepository.java)
 
-sqljet-1.1.10.jar is distributed under the GNU General Public License version 2
+sqljet-*.jar is distributed under the GNU General Public License version 2
 (required for SVNRemoteRepository.java)
 Sources are available in OmegaT sources, in the directory lib/sources
 
@@ -43,7 +43,7 @@ jsch-agent-proxy is distributed under the jsch-agent-proxy License
 diff.jar is distributed under the GNU General Public License version 1 and greater
 Sources are available in OmegaT sources, in the directory lib/sources
 
-trilead-ssh2-1.0.0-build217.jar is distributed under the Trilead SSH license
+trilead-ssh2-*.jar is distributed under the Trilead SSH license
 
 lucene-*.jar are distributed under the Apache License 2.0
 
@@ -56,7 +56,7 @@ For licenses of libraries required by LanguageTool, see https://github.com/langu
 
 pdfbox-*.jar and fontbox-*.jar are distributed under the Apache License 2.0
 
-groovy-all-2.4.6.jar is distributed under the Apache License 2.0
+groovy-all-*.jar is distributed under the Apache License 2.0
 (required for scripting)
 
 SuperTMXMerge-for_OmegaT.jar is distributed under the GNU Lesser General  
@@ -67,7 +67,7 @@ slf4j-*.jar is distributed under the MIT License.
 
 OmegaT uses icons from the Modern UI Icons project. See ModernUIIcons-license.txt.
 
-juniversalchardet-1.0.3.jar is distributed under the GNU Lesser General
+juniversalchardet-*.jar is distributed under the GNU Lesser General
 Public License version 2.1 and greater, the GNU Public License version 2.0
 and greater or the Mozilla Public License version 1.1.
 Sources are available in OmegaT sources, in the directory lib/sources

@@ -51,11 +51,8 @@ public class ProjectTeamSettings {
         try {
             Properties p = new Properties();
             if (configFile.exists()) {
-                FileInputStream in = new FileInputStream(configFile);
-                try {
+                try (FileInputStream in = new FileInputStream(configFile)) {
                     p.load(in);
-                } finally {
-                    in.close();
                 }
             }
             return p.getProperty(key);
@@ -73,11 +70,8 @@ public class ProjectTeamSettings {
             File f = configFile;
             File fNew = new File(configFile.getAbsolutePath() + ".new");
             if (f.exists()) {
-                FileInputStream in = new FileInputStream(f);
-                try {
+                try (FileInputStream in = new FileInputStream(f)) {
                     p.load(in);
-                } finally {
-                    in.close();
                 }
             } else {
                 f.getParentFile().mkdirs();
@@ -87,11 +81,8 @@ public class ProjectTeamSettings {
             } else {
                 p.remove(key);
             }
-            FileOutputStream out = new FileOutputStream(fNew);
-            try {
+            try (FileOutputStream out = new FileOutputStream(fNew)) {
                 p.store(out, null);
-            } finally {
-                out.close();
             }
             f.delete();
             FileUtils.moveFile(fNew, f);

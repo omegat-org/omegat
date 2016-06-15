@@ -1,84 +1,85 @@
 Licenses:
 
-htmlparser.jar version 1.6 is distributed under the GNU Lesser  
-General Public License version 2.1 and greater
-Sources are available in OmegaT sources, in the directory lib/sources
+htmlparser.jar version 1.6 is distributed under the GNU Lesser General
+Public License version 2.1 and greater. Sources are available in
+OmegaT sources, in the directory lib/sources.
 
-vldocking-*.jar is distributed under the GNU Lesser General
-Public License
-Sources are available in OmegaT sources, in the directory lib/sources
+vldocking-*.jar is distributed under the GNU Lesser General Public
+License. Sources are available in OmegaT sources, in the directory
+lib/sources.
 
-swing-layout-*.jar is distributed under the GNU Lesser General  
-Public License version 2.1.
-Sources are available in OmegaT sources, in the directory lib/sources
+swing-layout-*.jar is distributed under the GNU Lesser General Public
+License version 2.1. Sources are available in OmegaT sources, in the
+directory lib/sources.
 
-jmyspell-core-*.jar is distributed under the 
-GNU Lesser General Public License version 2.1 and greater
-Sources are available in OmegaT sources, in the directory lib/sources
+jmyspell-core-*.jar is distributed under the GNU Lesser General Public
+License version 2.1 and greater. Sources are available in OmegaT
+sources, in the directory lib/sources.
 
-svnkit-*.jar is distributed under the
-TMate Open Source / Commercial dual license
-(required for SVNRemoteRepository.java)
+svnkit-*.jar is distributed under the TMate Open Source / Commercial
+dual license.
 
-sequence-library-*.jar is distributed under the Sequence Library License
-(required for SVNRemoteRepository.java)
+sequence-library-*.jar is distributed under the Sequence Library
+License.
 
-antlr-runtime-*.jar is distributed under the ANTLR 3 License
-(required for SVNRemoteRepository.java)
+antlr-runtime-*.jar is distributed under the ANTLR 3 License.
 
-sqljet-*.jar is distributed under the GNU General Public License version 2
-(required for SVNRemoteRepository.java)
-Sources are available in OmegaT sources, in the directory lib/sources
+sqljet-*.jar is distributed under the GNU General Public License
+version 2. Sources are available in OmegaT sources, in the directory
+lib/sources.
 
-org.eclipse.jgit-*-r.jar is distributed under the
-Eclipse Distribution License (EDL) v 1.0 
-(required for GITRemoteRepository.java)
+org.eclipse.jgit-*-r.jar is distributed under the Eclipse Distribution
+License (EDL) v 1.0.
 
-jsch-*.jar is distributed under the JSch License
-(required for GITRemoteRepository.java)
+jsch-*.jar is distributed under the JSch License.
 
-jsch-agent-proxy is distributed under the jsch-agent-proxy License
-(required for GITRemoteRepository.java)
+jsch-agent-proxy is distributed under the jsch-agent-proxy License.
 
-diff.jar is distributed under the GNU General Public License version 1 and greater
-Sources are available in OmegaT sources, in the directory lib/sources
+diff.jar is distributed under the GNU General Public License version 1
+and greater. Sources are available in OmegaT sources, in the directory
+lib/sources.
 
-trilead-ssh2-*.jar is distributed under the Trilead SSH license
+trilead-ssh2-*.jar is distributed under the Trilead SSH license.
 
-lucene-*.jar are distributed under the Apache License 2.0
+lucene-*.jar are distributed under the Apache License 2.0.
 
-commons-*.jar are distributed under the Apache License 2.0
-(required for LanguageTool and some parts of OmegaT)
+commons-*.jar are distributed under the Apache License 2.0.
 
-LanguageTool is distributed under the LGPL license.
-LanguageTool sources are available from https://github.com/languagetool-org/languagetool
-For licenses of libraries required by LanguageTool, see https://github.com/languagetool-org/languagetool/blob/master/languagetool-standalone/src/main/resources/third-party-licenses/README.txt
+LanguageTool is distributed under the LGPL license.  LanguageTool
+sources are available from
+https://github.com/languagetool-org/languagetool
+For licenses of libraries required by LanguageTool, see
+https://github.com/languagetool-org/languagetool/blob/master/languagetool-standalone/src/main/resources/third-party-licenses/README.txt
 
-pdfbox-*.jar and fontbox-*.jar are distributed under the Apache License 2.0
+pdfbox-*.jar and fontbox-*.jar are distributed under the Apache
+License 2.0.
 
-groovy-all-*.jar is distributed under the Apache License 2.0
-(required for scripting)
+groovy-all-*.jar is distributed under the Apache License 2.0 (required
+for scripting).
 
-SuperTMXMerge-for_OmegaT.jar is distributed under the GNU Lesser General  
-Public License version 2.1 and greater
-Sources are available in OmegaT sources, in the directory lib/sources
+SuperTMXMerge-for_OmegaT.jar is distributed under the GNU Lesser
+General Public License version 2.1 and greater. Sources are available
+in OmegaT sources, in the directory lib/sources.
 
 slf4j-*.jar is distributed under the MIT License.
 
-OmegaT uses icons from the Modern UI Icons project. See ModernUIIcons-license.txt.
+OmegaT uses icons from the Modern UI Icons project. See
+ModernUIIcons-license.txt.
 
 juniversalchardet-*.jar is distributed under the GNU Lesser General
-Public License version 2.1 and greater, the GNU Public License version 2.0
-and greater or the Mozilla Public License version 1.1.
-Sources are available in OmegaT sources, in the directory lib/sources
+Public License version 2.1 and greater, the GNU Public License version
+2.0 and greater or the Mozilla Public License version 1.1. Sources
+are available in OmegaT sources, in the directory lib/sources.
 
-JTextPaneLinkifier uses a regex from dperini/regex-web.js (https://gist.github.com/dperini/729294)
-under the MIT License.
+JTextPaneLinkifier uses a regex from dperini/regex-web.js
+(https://gist.github.com/dperini/729294) under the MIT License.
 
-dictzip is distributed under the GNU General Public License version 2.0 and greater
-with classpath link exception.
+dictzip is distributed under the GNU General Public License version
+2.0 and greater with classpath link exception.
 
-StringUtil uses code from the FullWidthConversionStep in the Okapi Framework
-(http://okapi.opentag.com/) under the GNU Public License version 2.1 or greater.
+StringUtil uses code from the FullWidthConversionStep in the Okapi
+Framework (http://okapi.opentag.com/) under the GNU Public License
+version 2.1 or greater.
 
-mALIGNa is distributed under the MIT License (required for Aligner tool).
+mALIGNa is distributed under the MIT License (required for Aligner
+tool).

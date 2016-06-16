@@ -35,7 +35,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.TreeMap;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -112,7 +111,7 @@ public class TestTeamIntegrationChild {
             RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config.getProjectRootDir(), config.getRepositories());
 
             // load project
-            Core.initializeConsole(new TreeMap<String, String>());
+            Core.initializeConsole(Collections.emptyMap());
             TestCoreInitializer.initMainWindow(mainWindow);
             TestCoreInitializer.initAutoSave(autoSave);
             TestCoreInitializer.initEditor(editor);

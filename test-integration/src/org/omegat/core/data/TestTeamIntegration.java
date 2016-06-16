@@ -33,16 +33,21 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
+import org.omegat.core.Core;
 import org.omegat.core.data.ProjectTMX.CheckOrphanedCallback;
+import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
+import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TMXWriter2;
 import org.tmatesoft.svn.core.ISVNLogEntryHandler;
@@ -126,11 +131,13 @@ public class TestTeamIntegration {
             Thread.sleep(500);
         } while (alive);
 
-        repo = createRepo2(REPO, new File(DIR, "repo").getAbsolutePath());
+        repo = createRepo2(REPO, new File(DIR, "repo"));
         repo.update();
 
         System.err.println("Check repo");
 
+        Preferences.init();
+        Core.setSegmenter(new Segmenter(SRX.getDefault()));
         checkRepo(startVersion);
 
         System.err.println("Processed successfully");
@@ -159,8 +166,8 @@ public class TestTeamIntegration {
         int tmxCount = 0;
         for (String rev : repo.listRevisions(startVersion)) {
             repo.checkout(rev);
-            tmx = new ProjectTMX(new Language("en"), new Language("be"), false, new File(DIR
-                    + "/repo/omegat/project_save.tmx"), checkOrphanedCallback);
+            tmx = new ProjectTMX(SRC_LANG, TRG_LANG, false, new File(repo.getDir(), "omegat/project_save.tmx"),
+                    checkOrphanedCallback);
 
             for (String th : data.keySet()) {
                 TMXEntry en = tmx.getDefaultTranslation(th);
@@ -269,11 +276,13 @@ public class TestTeamIntegration {
         return config;
     }
 
-    static Team createRepo2(String url, String dir) throws Exception {
+    static Team createRepo2(String url, File dir) throws Exception {
+        File repoDir = Stream.of(new File(dir, RemoteRepositoryProvider.REPO_SUBDIR).listFiles())
+                .filter(File::isDirectory).findFirst().get();
         if (url.startsWith("git")) {
-            return new GitTeam(new File(dir));
+            return new GitTeam(repoDir);
         } else if (url.startsWith("svn") || url.startsWith("https")) {
-            return new SvnTeam(new File(dir));
+            return new SvnTeam(repoDir);
         } else {
             throw new Exception("Unknown repo");
         }
@@ -347,12 +356,16 @@ public class TestTeamIntegration {
         void checkout(String rev) throws Exception;
 
         void update() throws Exception;
+
+        File getDir();
     }
 
     public static class GitTeam implements Team {
         final Repository repository;
+        final File dir;
 
         public GitTeam(File dir) throws Exception {
+            this.dir = dir;
             repository = Git.open(dir).getRepository();
         }
 
@@ -382,6 +395,10 @@ public class TestTeamIntegration {
             try (Git git = new Git(repository)) {
                 git.checkout().setName(rev).call();
             }
+        }
+
+        public File getDir() {
+            return dir;
         }
     }
 
@@ -417,6 +434,10 @@ public class TestTeamIntegration {
         public void checkout(String rev) throws Exception {
             ourClientManager.getUpdateClient().doUpdate(dir, SVNRevision.create(Long.parseLong(rev)),
                     SVNDepth.INFINITY, false, false);
+        }
+
+        public File getDir() {
+            return dir;
         }
     }
 }

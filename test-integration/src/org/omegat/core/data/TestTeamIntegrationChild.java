@@ -107,14 +107,18 @@ public class TestTeamIntegrationChild {
             Preferences.init();
             Preferences.setPreference(Preferences.TEAM_AUTHOR, source);
 
-            ProjectProperties config = TestTeamIntegration.createConfig(new File(dir));
-            RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config.getProjectRootDir(), config.getRepositories());
-
-            // load project
+            // Init UI stubs. In a CI environment, errors can occur when
+            // initializing the RemoteRepositoryProvider, so we need to make
+            // sure the "main window" is available for logging first.
             Core.initializeConsole(Collections.emptyMap());
             TestCoreInitializer.initMainWindow(mainWindow);
             TestCoreInitializer.initAutoSave(autoSave);
             TestCoreInitializer.initEditor(editor);
+
+            ProjectProperties config = TestTeamIntegration.createConfig(new File(dir));
+            RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config.getProjectRootDir(), config.getRepositories());
+
+            // load project
             ProjectProperties projectProperties = ProjectFileStorage.loadProjectProperties(new File(dir));
 
             Core.getAutoSave().disable();

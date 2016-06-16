@@ -321,7 +321,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
             @Override
             public void windowGainedFocus(WindowEvent e) {
                 String sel = null;
-                Component component = parent.getMostRecentFocusOwner();
+                Component component = e.getOppositeWindow().getMostRecentFocusOwner();
                 if (component instanceof JTextComponent) {
                     sel = ((JTextComponent) component).getSelectedText();
                     if (!StringUtil.isEmpty(sel)) {

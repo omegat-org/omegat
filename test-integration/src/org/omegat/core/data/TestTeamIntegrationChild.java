@@ -115,7 +115,7 @@ public class TestTeamIntegrationChild {
             TestCoreInitializer.initAutoSave(autoSave);
             TestCoreInitializer.initEditor(editor);
 
-            ProjectProperties config = TestTeamIntegration.createConfig(new File(dir));
+            ProjectProperties config = TestTeamIntegration.createConfig(repo, new File(dir));
             RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config.getProjectRootDir(), config.getRepositories());
 
             // load project

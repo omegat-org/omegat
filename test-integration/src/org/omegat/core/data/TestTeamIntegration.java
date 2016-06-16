@@ -234,7 +234,7 @@ public class TestTeamIntegration {
         File origDir = new File(tmp, "repo");
         origDir.mkdir();
 
-        ProjectProperties config = createConfig(origDir);
+        ProjectProperties config = createConfig(REPO, origDir);
 
         RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config.getProjectRootDir(), config.getRepositories());
         remote.switchAllToLatest();
@@ -254,19 +254,19 @@ public class TestTeamIntegration {
         return remote.getVersion("omegat/project_save.tmx");
     }
 
-    static ProjectProperties createConfig(File dir) throws Exception {
+    static ProjectProperties createConfig(String repoUrl, File dir) throws Exception {
         ProjectProperties config = new ProjectProperties(dir);
         config.setSourceLanguage(SRC_LANG);
         config.setTargetLanguage(TRG_LANG);
         RepositoryDefinition def = new RepositoryDefinition();
-        if (REPO.startsWith("git") || REPO.endsWith(".git")) {
+        if (repoUrl.startsWith("git") || repoUrl.endsWith(".git")) {
             def.setType("git");
-        } else if (REPO.startsWith("svn") || REPO.startsWith("https")) {
+        } else if (repoUrl.startsWith("svn") || repoUrl.startsWith("https")) {
             def.setType("svn");
         } else {
             throw new RuntimeException("Unknown repo");
         }
-        def.setUrl(REPO);
+        def.setUrl(repoUrl);
         RepositoryMapping m = new RepositoryMapping();
         m.setLocal("");
         m.setRepository("");

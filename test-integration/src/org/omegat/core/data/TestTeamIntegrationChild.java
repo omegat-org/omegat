@@ -541,9 +541,7 @@ public class TestTeamIntegrationChild {
                 Log.log("'Theirs' TM is not a valid derivative of 'Base' TM");
                 System.exit(1);
             }
-            StmProperties props = new StmProperties().setBaseTmxName(OStrings.getString("TMX_MERGE_BASE"))
-                    .setTmx1Name(OStrings.getString("TMX_MERGE_MINE"))
-                    .setTmx2Name(OStrings.getString("TMX_MERGE_THEIRS"))
+            StmProperties props = new StmProperties()
                     .setLanguageResource(OStrings.getResourceBundle())
                     .setResolutionStrategy(new ResolutionStrategy() {
                         @Override
@@ -575,10 +573,13 @@ public class TestTeamIntegrationChild {
                             }
                         }
                     });
+            String srcLang = m_config.getSourceLanguage().getLanguage();
+            String trgLang = m_config.getTargetLanguage().getLanguage();
             synchronized (projectTMX) {
-                ProjectTMX mergedTMX = SuperTmxMerge
-                        .merge(baseTMX, projectTMX, headTMX, m_config.getSourceLanguage().getLanguage(),
-                                m_config.getTargetLanguage().getLanguage(), props);
+                ProjectTMX mergedTMX = SuperTmxMerge.merge(
+                        new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),
+                        new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
+                        new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
                 Log.log("Merged: " + mergedTMX);
                 if (!checkMergeInput(baseTMX, mergedTMX)) {
                     Log.log("'Merged' TM is not a valid derivative of 'Base' TM");

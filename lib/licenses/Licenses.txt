@@ -53,9 +53,7 @@ License 2.0.
 groovy-all-*.jar is distributed under the Apache License 2.0 (required
 for scripting).
 
-SuperTMXMerge-for_OmegaT.jar is distributed under the GNU Lesser
-General Public License version 2.1 and greater. Sources are available
-in OmegaT sources, in the directory lib/sources.
+supertmxmerge-*.jar is distributed under the Apache License 2.0.
 
 slf4j-*.jar is distributed under the MIT License.
 

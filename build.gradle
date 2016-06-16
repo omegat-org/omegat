@@ -92,6 +92,7 @@ dependencies {
     dependency 'org.slf4j:slf4j-jdk14:1.7.19'
     dependency 'org.dict.zip:dictzip-lib:0.8.1'
     dependency 'com.github.takawitter:trie4j:0.9.2'
+    dependency 'org.madlonkay.supertmxmerge:supertmxmerge:2.0.1'
     // Groovy used at runtime for scripting only
     dependency 'org.codehaus.groovy:groovy-all:2.4.6'
     

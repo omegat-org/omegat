@@ -909,15 +909,17 @@ public class RealProject implements IProject {
      * File 2: headTMX (theirs)
      */
     protected void mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
-        StmProperties props = new StmProperties().setBaseTmxName(OStrings.getString("TMX_MERGE_BASE"))
-                .setTmx1Name(OStrings.getString("TMX_MERGE_MINE"))
-                .setTmx2Name(OStrings.getString("TMX_MERGE_THEIRS"))
+        StmProperties props = new StmProperties()
                 .setLanguageResource(OStrings.getResourceBundle())
                 .setParentWindow(Core.getMainWindow().getApplicationFrame())
                 // More than this number of conflicts will trigger List View by default.
                 .setListViewThreshold(5);
-        ProjectTMX mergedTMX = SuperTmxMerge.merge(baseTMX, projectTMX, headTMX, m_config.getSourceLanguage()
-                .getLanguage(), m_config.getTargetLanguage().getLanguage(), props);
+        String srcLang = m_config.getSourceLanguage().getLanguage();
+        String trgLang = m_config.getTargetLanguage().getLanguage();
+        ProjectTMX mergedTMX = SuperTmxMerge.merge(
+                new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),
+                new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
+                new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
         projectTMX.replaceContent(mergedTMX);
         Log.logDebug(LOGGER, "Merge report: {0}", props.getReport());
         commitDetails.append('\n');

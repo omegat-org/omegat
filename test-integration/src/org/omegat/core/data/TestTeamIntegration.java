@@ -259,7 +259,7 @@ public class TestTeamIntegration {
         config.setSourceLanguage(SRC_LANG);
         config.setTargetLanguage(TRG_LANG);
         RepositoryDefinition def = new RepositoryDefinition();
-        if (REPO.startsWith("git")) {
+        if (REPO.startsWith("git") || REPO.endsWith(".git")) {
             def.setType("git");
         } else if (REPO.startsWith("svn") || REPO.startsWith("https")) {
             def.setType("svn");

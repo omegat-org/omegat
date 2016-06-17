@@ -13,7 +13,7 @@ task docsJar(type: Jar) {
         into 'docs'
     }
     from(rootProject.file('docs')) {
-        include '**/instantStartGuideNoTOC.html', '**/OmegaT.css'
+        include '**/instantStartGuideNoTOC.html', '**/OmegaT.css', '**/images/InstantGuide_*.png'
         into 'docs'
     }
 }

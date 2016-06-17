@@ -171,9 +171,6 @@ public class OConsts {
      */
     public static final int MAX_PARENT_DIRECTORIES_ABS2REL = 5;
 
-    /** Encoding: "ISO-8859-2". */
-    public static final String ISO88592 = "ISO-8859-2";
-
     public static final String REMOTE_SC_DICTIONARY_LIST_LOCATION = "http://download.services.openoffice.org/files/contrib/dictionaries/";
 
     public static final String segmentMarkerString = "<" + OStrings.getSegmentMarker() + ">";

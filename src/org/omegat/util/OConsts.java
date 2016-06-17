@@ -171,8 +171,6 @@ public class OConsts {
      */
     public static final int MAX_PARENT_DIRECTORIES_ABS2REL = 5;
 
-    /** Encoding: "ISO-8859-1". */
-    public static final String ISO88591 = "ISO-8859-1";
     /** Encoding: "ISO-8859-2". */
     public static final String ISO88592 = "ISO-8859-2";
     /** Encoding: "UTF-16LE". */

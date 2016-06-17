@@ -40,7 +40,6 @@ import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.Log;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 
 /**
@@ -95,8 +94,9 @@ public class TextFilter extends AbstractFilter {
 
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.txt"), new Instance("*.txt1", OConsts.ISO88591, OConsts.ISO88591),
-                new Instance("*.txt2", OConsts.ISO88592, OConsts.ISO88592),
+        return new Instance[] { new Instance("*.txt"),
+                new Instance("*.txt1", StandardCharsets.ISO_8859_1.name(), StandardCharsets.ISO_8859_1.name()),
+                new Instance("*.txt2", StandardCharsets.ISO_8859_1.name(), StandardCharsets.ISO_8859_1.name()),
                 new Instance("*.utf8", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()) };
     }
 

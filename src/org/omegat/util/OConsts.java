@@ -29,8 +29,6 @@
 
 package org.omegat.util;
 
-import java.io.File;
-
 /**
  * OmegaT-wide Constants.
  * <p>
@@ -138,9 +136,6 @@ public class OConsts {
     /** The name of the file with the correct (learned) words: one word per line */
     public static final String LEARNED_WORD_LIST_FILE_NAME = "learned_words.txt";
 
-    /** the native library directory */
-    public static final String NATIVE_LIBRARY_DIR = "native";
-
     /** affix file extension */
     public static final String SC_AFFIX_EXTENSION = ".aff";
 
@@ -180,18 +175,6 @@ public class OConsts {
      * of the project folder.
      */
     public static final int MAX_PARENT_DIRECTORIES_ABS2REL = 5;
-    
-    /**
-     * The name of the OmegaT Jar file. It is used to calculate the installation
-     * directory.
-     */
-    public static final String APPLICATION_JAR = "OmegaT.jar";
-
-    /**
-     * Application debug classpath. It is used to calculate the installation
-     * directory (in case of debugging -- the sources directory).
-     */
-    public static final String DEBUG_CLASSPATH = File.separator + "classes";
 
     /** Encoding: "UTF-8". */
     public static final String UTF8 = "UTF-8";

@@ -35,6 +35,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -48,9 +49,8 @@ import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.Language;
-import org.omegat.util.OStrings;
 import org.omegat.util.Log;
-import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil;
@@ -289,7 +289,8 @@ public class PoFilter extends AbstractFilter {
     @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] 
-            { new Instance("*.po", OConsts.UTF8, OConsts.UTF8), new Instance("*.pot", OConsts.UTF8, OConsts.UTF8) };
+        { new Instance("*.po", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()),
+                new Instance("*.pot", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()) };
     }
 
     @Override

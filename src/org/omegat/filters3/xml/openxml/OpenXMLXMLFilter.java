@@ -25,9 +25,10 @@
 
 package org.omegat.filters3.xml.openxml;
 
+import java.nio.charset.StandardCharsets;
+
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
-import org.omegat.util.OConsts;
 
 /**
  * Filter for Open XML XML files that are inside there the Open XML file (which
@@ -44,7 +45,7 @@ public class OpenXMLXMLFilter extends XMLFilter {
 
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.xml", OConsts.UTF8, OConsts.UTF8), };
+        return new Instance[] { new Instance("*.xml", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()), };
     }
 
     @Override

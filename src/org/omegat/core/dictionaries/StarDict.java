@@ -51,7 +51,6 @@ import org.dict.zip.DictZipInputStream;
 import org.dict.zip.RandomAccessInputStream;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
-import org.omegat.util.OConsts;
 
 /**
  * Dictionary implementation for StarDict format.
@@ -183,7 +182,7 @@ public class StarDict implements IDictionaryFactory {
                         break;
                     }
                     if (b == 0) {
-                        String key = new String(mem.toByteArray(), 0, mem.size(), OConsts.UTF8);
+                        String key = new String(mem.toByteArray(), 0, mem.size(), StandardCharsets.UTF_8);
                         mem.reset();
                         int bodyOffset = idx.readInt();
                         int bodyLength = idx.readInt();
@@ -257,7 +256,7 @@ public class StarDict implements IDictionaryFactory {
                     }
                 }
                 int readLen = in.read(data);
-                result = new String(data, 0, readLen, OConsts.UTF8);
+                result = new String(data, 0, readLen, StandardCharsets.UTF_8);
             } catch (IOException e) {
                 System.err.println(e.getMessage());
             }
@@ -282,7 +281,7 @@ public class StarDict implements IDictionaryFactory {
                 din.seek(start);
                 byte[] data = new byte[len];
                 din.readFully(data);
-                result = new String(data, OConsts.UTF8);
+                result = new String(data, StandardCharsets.UTF_8);
             } catch (IOException e) {
                 Log.log(e);
             }

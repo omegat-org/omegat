@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,7 +45,6 @@ import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.OStrings;
-import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.TagUtil;
 
@@ -92,7 +92,7 @@ public class MozillaLangFilter extends AbstractFilter {
     @Override
     public BufferedReader createReader(File infile, String encoding) throws UnsupportedEncodingException,
             IOException {
-        return new BufferedReader(new InputStreamReader(new FileInputStream(infile), OConsts.UTF8));
+        return new BufferedReader(new InputStreamReader(new FileInputStream(infile), StandardCharsets.UTF_8));
     }
 
     /**
@@ -105,7 +105,7 @@ public class MozillaLangFilter extends AbstractFilter {
     public BufferedWriter createWriter(File outfile, String encoding) throws UnsupportedEncodingException,
             IOException {
         // lang file use UTF8 encoding
-        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outfile), OConsts.UTF8));
+        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outfile), StandardCharsets.UTF_8));
     }
     
     @Override
@@ -120,7 +120,7 @@ public class MozillaLangFilter extends AbstractFilter {
     
     @Override
     public String getInEncodingLastParsedFile() {
-        return OConsts.UTF8;
+        return StandardCharsets.UTF_8.name();
     }
 
 

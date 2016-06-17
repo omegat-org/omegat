@@ -32,6 +32,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -93,9 +94,9 @@ public class TMXWriter2 {
         this.forceValidTMX = forceValidTMX;
 
         out = new BufferedOutputStream(new FileOutputStream(file));
-        xml = FACTORY.createXMLStreamWriter(out, OConsts.UTF8);
+        xml = FACTORY.createXMLStreamWriter(out, StandardCharsets.UTF_8.name());
 
-        xml.writeStartDocument(OConsts.UTF8, "1.0");
+        xml.writeStartDocument(StandardCharsets.UTF_8.name(), "1.0");
         xml.writeCharacters(FileUtil.LINE_SEPARATOR);
 
         if (levelTwo) {

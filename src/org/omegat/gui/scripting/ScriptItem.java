@@ -36,6 +36,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -46,7 +47,6 @@ import java.util.regex.MatchResult;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.omegat.util.LinebreakPreservingReader;
-import org.omegat.util.OConsts;
 
 /**
  * A script file in the script list is represented as ScriptListFile to allow
@@ -189,7 +189,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
 
     private LinebreakPreservingReader getUTF8LinebreakPreservingReader(File file) throws FileNotFoundException, UnsupportedEncodingException {
         InputStream is = new FileInputStream(file);
-        InputStreamReader isr = new InputStreamReader(is, OConsts.UTF8);
+        InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
         BufferedReader in = new BufferedReader(isr);
         return new LinebreakPreservingReader(in);
     }
@@ -200,7 +200,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
             text = BOM + text;
         }
 
-        FileUtils.writeStringToFile(m_file, text, OConsts.UTF8);
+        FileUtils.writeStringToFile(m_file, text, StandardCharsets.UTF_8);
     }
 
     @Override

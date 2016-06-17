@@ -31,6 +31,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import org.omegat.core.Core;
@@ -95,7 +96,8 @@ public class TextFilter extends AbstractFilter {
     @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.txt"), new Instance("*.txt1", OConsts.ISO88591, OConsts.ISO88591),
-                new Instance("*.txt2", OConsts.ISO88592, OConsts.ISO88592), new Instance("*.utf8", OConsts.UTF8, OConsts.UTF8) };
+                new Instance("*.txt2", OConsts.ISO88592, OConsts.ISO88592),
+                new Instance("*.utf8", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()) };
     }
 
     @Override

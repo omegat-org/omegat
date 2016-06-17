@@ -35,10 +35,10 @@ import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 
 import org.omegat.util.Log;
-import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
 
 /**
@@ -82,7 +82,7 @@ public class XMLWriter extends Writer {
 
         OutputStreamWriter osw;
         if (encoding == null) // Without precision, an XML file is UTF-8
-            osw = new OutputStreamWriter(fos, OConsts.UTF8);
+            osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
         else
             osw = new OutputStreamWriter(fos, encoding);
 

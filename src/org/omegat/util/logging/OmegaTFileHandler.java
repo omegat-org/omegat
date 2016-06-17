@@ -30,6 +30,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -40,7 +41,6 @@ import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 import java.util.logging.StreamHandler;
 
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 
@@ -115,7 +115,7 @@ public class OmegaTFileHandler extends StreamHandler {
             lockStream = new FileOutputStream(lockFile);
             if (lockStream.getChannel().tryLock() != null) {
                 rotate(dir, fileName);
-                setEncoding(OConsts.UTF8);
+                setEncoding(StandardCharsets.UTF_8.name());
                 setOutputStream(new FileOutputStream(new File(dir, fileName + ".log"), true));
                 break;
             }

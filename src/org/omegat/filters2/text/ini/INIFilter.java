@@ -30,6 +30,7 @@ package org.omegat.filters2.text.ini;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +39,6 @@ import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.NullBufferedWriter;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
@@ -68,7 +68,7 @@ public class INIFilter extends AbstractFilter {
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.ini"), 
                                 new Instance("*.lng"), 
-                                new Instance("*.strings", OConsts.UTF8, OConsts.UTF8) };
+                new Instance("*.strings", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()) };
     }
 
     /**

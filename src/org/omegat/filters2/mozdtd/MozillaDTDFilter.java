@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -48,7 +49,6 @@ import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.Log;
 import org.omegat.util.NullBufferedWriter;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
@@ -102,13 +102,13 @@ public class MozillaDTDFilter extends AbstractFilter {
     @Override
     protected BufferedReader createReader(File inFile, String inEncoding)
             throws UnsupportedEncodingException, IOException {
-        return new BufferedReader(new InputStreamReader(new FileInputStream(inFile), OConsts.UTF8));
+        return new BufferedReader(new InputStreamReader(new FileInputStream(inFile), StandardCharsets.UTF_8));
     }
 
     @Override
     protected BufferedWriter createWriter(File outFile, String outEncoding)
             throws UnsupportedEncodingException, IOException {
-        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile), OConsts.UTF8));
+        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile), StandardCharsets.UTF_8));
     }
 
     @Override
@@ -203,7 +203,7 @@ public class MozillaDTDFilter extends AbstractFilter {
 
     @Override
     public String getInEncodingLastParsedFile() {
-        return OConsts.UTF8;
+        return StandardCharsets.UTF_8.name();
     }
 
 

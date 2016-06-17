@@ -36,6 +36,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +58,7 @@ public class GlossaryReaderTSV {
         if (fname_lower.endsWith(OConsts.EXT_TSV_DEF) || fname_lower.endsWith(OConsts.EXT_TSV_TXT)) {
             return EncodingDetector.detectEncodingDefault(file, Charset.defaultCharset().name());
         } else if (fname_lower.endsWith(OConsts.EXT_TSV_UTF8)) {
-            return OConsts.UTF8;
+            return StandardCharsets.UTF_8.name();
         } else {
             return null;
         }
@@ -112,12 +113,12 @@ public class GlossaryReaderTSV {
      * @throws IOException
      */
     public static synchronized void append(final File file, GlossaryEntry newEntry) throws IOException {
-        String encoding = OConsts.UTF8;
+        String encoding = StandardCharsets.UTF_8.name();
         if (!file.exists()) {
             file.getParentFile().mkdirs();
             file.createNewFile();
         } else {
-            encoding = EncodingDetector.detectEncodingDefault(file, OConsts.UTF8);
+            encoding = EncodingDetector.detectEncodingDefault(file, StandardCharsets.UTF_8.name());
         }
         Writer wr = new OutputStreamWriter(new FileOutputStream(file, true), encoding);
         wr.append(newEntry.getSrcText()).append('\t').append(newEntry.getLocText());

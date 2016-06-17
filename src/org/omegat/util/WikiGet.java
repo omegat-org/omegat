@@ -38,6 +38,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
@@ -246,7 +247,7 @@ public class WikiGet {
                 }
                 s.append(p.getKey());
                 s.append('=');
-                s.append(URLEncoder.encode(p.getValue(), OConsts.UTF8));
+                s.append(URLEncoder.encode(p.getValue(), StandardCharsets.UTF_8.name()));
             }
             url = s.toString();
         }
@@ -303,9 +304,9 @@ public class WikiGet {
             if (pout.size() > 0) {
                 pout.write('&');
             }
-            pout.write(p.getKey().getBytes(OConsts.UTF8));
+            pout.write(p.getKey().getBytes(StandardCharsets.UTF_8));
             pout.write('=');
-            pout.write(URLEncoder.encode(p.getValue(), OConsts.UTF8).getBytes(OConsts.UTF8));
+            pout.write(URLEncoder.encode(p.getValue(), StandardCharsets.UTF_8.name()).getBytes(StandardCharsets.UTF_8));
         }
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();

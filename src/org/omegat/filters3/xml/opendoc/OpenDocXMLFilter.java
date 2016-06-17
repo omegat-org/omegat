@@ -25,9 +25,10 @@
 
 package org.omegat.filters3.xml.opendoc;
 
+import java.nio.charset.StandardCharsets;
+
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
-import org.omegat.util.OConsts;
 
 /**
  * Filter for OpenDocument XML files that are inside there the OpenDocument file
@@ -43,7 +44,7 @@ public class OpenDocXMLFilter extends XMLFilter {
     }
 
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.xml", OConsts.UTF8, OConsts.UTF8), };
+        return new Instance[] { new Instance("*.xml", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()), };
     }
 
     public String getFileFormatName() {

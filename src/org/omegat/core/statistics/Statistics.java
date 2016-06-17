@@ -30,13 +30,13 @@ package org.omegat.core.statistics;
 
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.text.BreakIterator;
 import java.text.DateFormat;
 import java.util.Date;
 
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.util.Log;
-import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
 
@@ -123,7 +123,7 @@ public class Statistics {
      */
     public static void writeStat(String filename, String text) {
         try {
-            OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(filename), OConsts.UTF8);
+            OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8);
             try {
                 out.write(DateFormat.getInstance().format(new Date()) + "\n");
                 out.write(text);

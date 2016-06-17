@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 
 import org.omegat.util.OConsts;
@@ -154,7 +155,7 @@ public class XMLReader extends Reader {
 
         // UTF-8 if we couldn't detect it ourselves
         try {
-            return createReaderAndDetectEOL(is, OConsts.UTF8);
+            return createReaderAndDetectEOL(is, StandardCharsets.UTF_8.name());
         } catch (Exception e) {
             return createReaderAndDetectEOL(is, null);
         }

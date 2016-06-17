@@ -47,7 +47,6 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 import org.omegat.core.Core;
-import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -200,7 +199,7 @@ public abstract class AlphabeticalMarkers extends JPanel {
                 .contains(DEFAULT_MARKER_FONT_NAME);
         String fontName = fontAvailable ? DEFAULT_MARKER_FONT_NAME : Font.SERIF;
         int fontSize = Preferences.getPreferenceDefault(
-                OConsts.TF_SRC_FONT_SIZE, OConsts.TF_FONT_SIZE_DEFAULT);
+                Preferences.TF_SRC_FONT_SIZE, Preferences.TF_FONT_SIZE_DEFAULT);
         return new Font(fontName, Font.BOLD, fontSize);
     }
 

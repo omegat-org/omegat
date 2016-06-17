@@ -67,7 +67,6 @@ import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.search.SearchWindowController;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -137,9 +136,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         });
 
         // load default font from preferences
-        String fontName = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_NAME, OConsts.TF_FONT_DEFAULT);
-        int fontSize = Preferences.getPreferenceDefault(OConsts.TF_SRC_FONT_SIZE,
-                OConsts.TF_FONT_SIZE_DEFAULT);
+        String fontName = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_NAME, Preferences.TF_FONT_DEFAULT);
+        int fontSize = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_SIZE,
+                Preferences.TF_FONT_SIZE_DEFAULT);
         m_font = new Font(fontName, Font.PLAIN, fontSize);
 
         MainWindowUI.createMainComponents(this, m_font);
@@ -221,8 +220,8 @@ public class MainWindow extends JFrame implements IMainWindow {
      */
     protected void setApplicationFont(final Font newFont) {
         m_font = newFont;
-        Preferences.setPreference(OConsts.TF_SRC_FONT_NAME, newFont.getName());
-        Preferences.setPreference(OConsts.TF_SRC_FONT_SIZE, newFont.getSize());
+        Preferences.setPreference(Preferences.TF_SRC_FONT_NAME, newFont.getName());
+        Preferences.setPreference(Preferences.TF_SRC_FONT_SIZE, newFont.getSize());
 
         CoreEvents.fireFontChanged(newFont);
     }

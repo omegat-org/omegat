@@ -188,8 +188,8 @@ public class ProjectFilesListController {
         
         defaultFont = list.tableFiles.getFont();
         if (Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
-            String fontName = Preferences.getPreference(OConsts.TF_SRC_FONT_NAME);
-            int fontSize = Integer.parseInt(Preferences.getPreference(OConsts.TF_SRC_FONT_SIZE));
+            String fontName = Preferences.getPreference(Preferences.TF_SRC_FONT_NAME);
+            int fontSize = Integer.parseInt(Preferences.getPreference(Preferences.TF_SRC_FONT_SIZE));
             setFont(new Font(fontName, Font.PLAIN, fontSize));
         } else {
             setFont(defaultFont);

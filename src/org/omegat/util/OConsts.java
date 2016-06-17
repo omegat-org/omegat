@@ -147,11 +147,6 @@ public class OConsts {
 
     public static final int ST_MAX_SEARCH_RESULTS = 1000;
 
-    public static final String TF_SRC_FONT_NAME = "source_font";
-    public static final String TF_SRC_FONT_SIZE = "source_font_size";
-    public static final String TF_FONT_DEFAULT = "Dialog";
-    public static final int TF_FONT_SIZE_DEFAULT = 12;
-
     public static final String XB_COMMENT_SHORTCUT = "!comment";
 
     /** Number of fuzzy matches to display */

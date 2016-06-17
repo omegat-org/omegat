@@ -82,6 +82,11 @@ public class Preferences {
     public static final String DICT_FOLDER = "dict_folder";
     public static final String GLOSSARY_FOLDER = "glossary_folder";
     public static final String GLOSSARY_FILE = "glossary_file";
+
+    public static final String TF_SRC_FONT_NAME = "source_font";
+    public static final String TF_FONT_DEFAULT = "Dialog";
+    public static final String TF_SRC_FONT_SIZE = "source_font_size";
+    public static final int TF_FONT_SIZE_DEFAULT = 12;
     
     /** Whether to automatically perform MT requests on entering segment */
     public static final String MT_AUTO_FETCH = "mt_auto_fetch";

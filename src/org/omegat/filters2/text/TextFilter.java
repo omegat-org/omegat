@@ -50,6 +50,7 @@ import org.omegat.util.OStrings;
  * @author Didier Briel
  */
 public class TextFilter extends AbstractFilter {
+    public static final String ISO88592 = "ISO-8859-2";
 
     /**
      * Text filter should segmentOn text into paragraphs on line breaks.
@@ -96,7 +97,7 @@ public class TextFilter extends AbstractFilter {
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.txt"),
                 new Instance("*.txt1", StandardCharsets.ISO_8859_1.name(), StandardCharsets.ISO_8859_1.name()),
-                new Instance("*.txt2", StandardCharsets.ISO_8859_1.name(), StandardCharsets.ISO_8859_1.name()),
+                new Instance("*.txt2", ISO88592, ISO88592),
                 new Instance("*.utf8", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()) };
     }
 

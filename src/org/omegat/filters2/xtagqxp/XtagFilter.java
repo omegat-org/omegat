@@ -30,6 +30,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,6 @@ import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 
 /**
@@ -58,8 +58,9 @@ public class XtagFilter extends AbstractFilter {
 
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.tag", OConsts.UTF16LE, OConsts.UTF16LE),
-                new Instance("*.xtg", OConsts.UTF16LE, OConsts.UTF16LE), };
+        return new Instance[] {
+                new Instance("*.tag", StandardCharsets.UTF_16LE.name(), StandardCharsets.UTF_16LE.name()),
+                new Instance("*.xtg", StandardCharsets.UTF_16LE.name(), StandardCharsets.UTF_16LE.name()), };
     }
 
     @Override

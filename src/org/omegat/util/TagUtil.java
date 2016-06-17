@@ -26,11 +26,13 @@
 package org.omegat.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
@@ -201,25 +203,17 @@ public class TagUtil {
     }
     
     public static List<String> getGroupedMissingTagsFromTarget() {
-        String sourceText = Core.getEditor().getCurrentEntry().getSrcText();
         List<String> result = new ArrayList<String>();
         
-        int index = -1;
-        List<Tag> group = new ArrayList<Tag>();
         List<Tag> tags = getAllTagsMissingFromTarget();
         for (int i = 0; i < tags.size(); i++) {
             Tag tag = tags.get(i);
             
-            if (sourceText.startsWith(tag.tag, index)) {
-                // We are continuing an existing group.
-                group.add(tag);
-                index += tag.tag.length();
-            } else {
-                // We are starting a new group.
-                dumpGroup(group, result);
-                group.clear();
-                group.add(tag);
-                index = sourceText.indexOf(tag.tag, index) + tag.tag.length();
+            // Compile the longest possible list of contiguous tags and offer as
+            // a group.
+            List<String> group = getGroupAt(tags, i).stream().map(t -> t.tag).collect(Collectors.toList());
+            if (group.size() > 1) {
+                result.add(String.join("", group));
             }
             
             // See if this tag and next tag make a pair and offer them as a set,
@@ -229,33 +223,38 @@ public class TagUtil {
             if (i + 1 < tags.size()) {
                 Tag next = tags.get(i + 1);
                 String pair = tag.getPairedTag();
-                if ((pair != null && pair.equals(next.tag))
-                        || (tag.getType() == TagType.SINGLE && next.getType() == TagType.SINGLE)) {
+                if (next.tag.equals(pair) || (tag.getType() == TagType.SINGLE && next.getType() == TagType.SINGLE)) {
                     // Insert sentinel to allow cursor relocating.
                     result.add(tag.tag + TAG_SEPARATOR_SENTINEL + next.tag);
                 }
             }
+
+            result.addAll(group);
         }
-        // Catch the last group.
-        dumpGroup(group, result);
         
-        return result;
+        return result.stream().distinct().collect(Collectors.toList());
     }
     
-    private static void dumpGroup(List<Tag> groupTags, List<String> result) {
-        if (groupTags.isEmpty()) {
-            return;
-        }
-        if (groupTags.size() > 1) {
-            StringBuilder sb = new StringBuilder();
-            for (Tag t : groupTags) {
-                sb.append(t.tag);
+    private static List<Tag> getGroupAt(List<Tag> tags, int index) {
+        Tag tag = tags.get(index);
+        if (index > 0) {
+            Tag prev = tags.get(index - 1);
+            if (prev.pos + prev.tag.length() == tag.pos) {
+                // This tag is in the middle of a group; return just this tag.
+                return Arrays.asList(tag);
             }
-            result.add(sb.toString());
         }
-        for (Tag t : groupTags) {
-            result.add(t.tag);
+        List<Tag> group = new ArrayList<>();
+        group.add(tag);
+        for (int j = index + 1; j < tags.size(); j++) {
+            Tag prev = tags.get(j - 1);
+            Tag next = tags.get(j);
+            if (prev.pos + prev.tag.length() != next.pos) {
+                break;
+            }
+            group.add(next);
         }
+        return group;
     }
 
     /**

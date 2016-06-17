@@ -279,7 +279,7 @@ public class TestTeamIntegration {
     static Team createRepo2(String url, File dir) throws Exception {
         File repoDir = Stream.of(new File(dir, RemoteRepositoryProvider.REPO_SUBDIR).listFiles())
                 .filter(File::isDirectory).findFirst().get();
-        if (url.startsWith("git")) {
+        if (url.startsWith("git") || url.endsWith(".git")) {
             return new GitTeam(repoDir);
         } else if (url.startsWith("svn") || url.startsWith("https")) {
             return new SvnTeam(repoDir);

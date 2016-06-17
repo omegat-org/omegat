@@ -40,6 +40,7 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +53,6 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.Log;
 import org.omegat.util.NullBufferedWriter;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StringUtil;
@@ -94,7 +94,7 @@ public class ResourceBundleFilter extends AbstractFilter {
     
     public static final String OPTION_REMOVE_STRINGS_UNTRANSLATED = "unremoveStringsUntranslated";
     public static final String OPTION_DONT_UNESCAPE_U_LITERALS = "dontUnescapeULiterals";
-    public static final String DEFAULT_TARGET_ENCODING = OConsts.ASCII;
+    public static final String DEFAULT_TARGET_ENCODING = StandardCharsets.US_ASCII.name();
 
     protected Map<String, String> align;
     
@@ -138,7 +138,8 @@ public class ResourceBundleFilter extends AbstractFilter {
     */
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.properties", OConsts.ASCII, OConsts.ASCII, TFP_NAMEONLY + "_"
+        return new Instance[] { new Instance("*.properties", StandardCharsets.US_ASCII.name(),
+                StandardCharsets.US_ASCII.name(), TFP_NAMEONLY + "_"
                 + TFP_TARGET_LOCALE + "." + TFP_EXTENSION) };
     }
 

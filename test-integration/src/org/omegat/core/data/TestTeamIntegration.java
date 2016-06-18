@@ -421,7 +421,7 @@ public class TestTeamIntegration {
         public List<String> listRevisions(String from) throws Exception {
             final List<String> result = new ArrayList<String>();
             ourClientManager.getLogClient().doLog(
-                    new File[] { new File(DIR + "/repo/omegat/project_save.tmx") },
+                    new File[] { new File(repo.getDir(), "omegat/project_save.tmx") },
                     SVNRevision.create(Long.parseLong(from)), SVNRevision.HEAD, false, false,
                     Integer.MAX_VALUE, new ISVNLogEntryHandler() {
                         public void handleLogEntry(SVNLogEntry en) throws SVNException {

@@ -29,6 +29,7 @@ package org.omegat.core.team2.impl;
 import java.io.File;
 import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -149,9 +150,11 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
             Log.logInfoRB("SVN_FINISH", "commit");
             return Long.toString(info.getNewRevision());
         } catch (SVNException ex) {
-            if (ex.getErrorMessage().getErrorCode() == SVNErrorCode.FS_TXN_OUT_OF_DATE) {
+            if (Arrays.asList(SVNErrorCode.FS_TXN_OUT_OF_DATE, SVNErrorCode.WC_NOT_UP_TO_DATE, SVNErrorCode.FS_CONFLICT)
+                    .contains(ex.getErrorMessage().getErrorCode())) {
                 // Somebody else committed changes - it's normal. Will upload on next save.
                 Log.logWarningRB("SVN_CONFLICT");
+                ourClientManager.getWCClient().doRevert(new File[] { baseDirectory }, SVNDepth.fromRecurse(true), null);
                 return null;
             } else {
                 Log.logErrorRB("SVN_ERROR", "commit", ex.getMessage());

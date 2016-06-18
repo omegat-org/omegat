@@ -48,6 +48,10 @@ import org.tmatesoft.svn.core.auth.SVNSSHAuthentication;
 import org.tmatesoft.svn.core.auth.SVNUserNameAuthentication;
 import org.tmatesoft.svn.core.io.SVNRepository;
 
+import com.jcraft.jsch.agentproxy.AgentProxyException;
+import com.jcraft.jsch.agentproxy.ConnectorFactory;
+import com.jcraft.jsch.agentproxy.TrileadAgentProxy;
+
 /**
  * Authentication manager for SVN. See details about authentication at the
  * http://wiki.svnkit.com/Authentication. Authentication manager created for each repository instance.
@@ -148,6 +152,13 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
                         false, url, false);
             } else {
                 throw new SVNException(SVNErrorMessage.create(SVNErrorCode.AUTHN_NO_PROVIDER));
+            }
+        } else if (predefinedUser != null) {
+            try {
+                return SVNSSHAuthentication.newInstance(predefinedUser,
+                        new TrileadAgentProxy(ConnectorFactory.getDefault().createConnector()), -1, url, false);
+            } catch (AgentProxyException e) {
+                Log.logDebug(LOGGER, "ssh-agent support couldn't be initialized: {0}", e.getMessage());
             }
         }
         String user = TeamSettings.get(repoUrl + "!" + KEY_USERNAME_SUFFIX);

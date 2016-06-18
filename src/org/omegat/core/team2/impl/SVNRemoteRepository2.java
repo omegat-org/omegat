@@ -75,6 +75,9 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
 
         String predefinedUser = repo.getOtherAttributes().get(new QName("svnUsername"));
         String predefinedPass = repo.getOtherAttributes().get(new QName("svnPassword"));
+        if (predefinedUser == null) {
+            predefinedUser = SVNURL.parseURIEncoded(repo.getUrl()).getUserInfo();
+        }
 
         ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
         ISVNAuthenticationManager authManager = new SVNAuthenticationManager(repo.getUrl(), predefinedUser,

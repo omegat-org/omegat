@@ -46,6 +46,7 @@ import org.omegat.core.data.ProjectTMX.CheckOrphanedCallback;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.team2.RemoteRepositoryProvider;
+import org.omegat.core.team2.impl.SVNAuthenticationManager;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
@@ -55,6 +56,7 @@ import org.tmatesoft.svn.core.ISVNLogEntryHandler;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNLogEntry;
+import org.tmatesoft.svn.core.SVNURL;
 import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
 import org.tmatesoft.svn.core.wc.ISVNOptions;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
@@ -287,7 +289,7 @@ public class TestTeamIntegration {
         if (url.startsWith("git") || url.endsWith(".git")) {
             return new GitTeam(repoDir);
         } else if (url.startsWith("svn") || url.startsWith("https") || url.endsWith(".svn")) {
-            return new SvnTeam(repoDir);
+            return new SvnTeam(repoDir, url);
         } else {
             throw new Exception("Unknown repo");
         }
@@ -411,10 +413,11 @@ public class TestTeamIntegration {
         SVNClientManager ourClientManager;
         File dir;
 
-        public SvnTeam(File dir) throws Exception {
+        public SvnTeam(File dir, String url) throws Exception {
             this.dir = dir;
             ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
-            ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager();
+            ISVNAuthenticationManager authManager = new SVNAuthenticationManager(url,
+                    SVNURL.parseURIEncoded(url).getUserInfo(), null, null);
             ourClientManager = SVNClientManager.newInstance(options, authManager);
         }
 

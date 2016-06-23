@@ -227,7 +227,7 @@ public abstract class AbstractFilter implements IFilter {
 
     /**
      * Returns whether the file is supported by the filter, given the reader with file's contents. There
-     * exists a version of this method that takes file and encoding {@link #isFileSupported(File,String)}. You
+     * exists a version of this method that takes file and encoding {@link #isFileSupported(File, Map, FilterContext))}. You
      * should override only one of the two.
      * <p>
      * By default returns true, because this method should be overriden only by filters that differentiate

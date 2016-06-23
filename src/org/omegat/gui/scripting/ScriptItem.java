@@ -215,7 +215,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
 
     private final String BOM = "\uFEFF";
     private boolean startsWithBOM = false;
-    private String lineBreak = System.getProperty("line.separator");
+    private String lineBreak = System.lineSeparator();
 
     private File m_file = null;
     private String m_scriptName = null;

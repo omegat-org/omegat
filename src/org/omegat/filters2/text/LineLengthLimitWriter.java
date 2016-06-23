@@ -40,7 +40,7 @@ import org.omegat.util.Token;
  * @author Didier Briel
  */
 public class LineLengthLimitWriter extends Writer {
-    public static String PLATFORM_LINE_SEPARATOR = System.getProperty("line.separator");
+    public static String PLATFORM_LINE_SEPARATOR = System.lineSeparator();
 
     final Writer out;
     final int lineLength;

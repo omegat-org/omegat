@@ -63,7 +63,7 @@ import org.apache.commons.io.IOUtils;
  * @author Aaron Madlon-Kay
  */
 public class FileUtil {
-    public static String LINE_SEPARATOR = System.getProperty("line.separator");
+    public static String LINE_SEPARATOR = System.lineSeparator();
     public static long RENAME_RETRY_TIMEOUT = 3000;
 
     /**
@@ -144,7 +144,7 @@ public class FileUtil {
             eol = getEOL(outFile, eolConversionCharset);
         } else {
             // file not exist - use system-dependent
-            eol = Platform.getEOL();
+            eol = LINE_SEPARATOR;
         }
         if (eol == null) {
             // EOL wasn't detected - just copy

@@ -114,7 +114,7 @@ public class SegmentExportImport {
     }
 
     private static void writeFile(File file, String content) throws IOException {
-        content = content.replaceAll("\n", System.getProperty("line.separator"));
+        content = content.replaceAll("\n", System.lineSeparator());
         file.delete();
         try (BufferedWriter writer = Files.newBufferedWriter(file.toPath(), StandardCharsets.UTF_8)) {
             writer.write(content);
@@ -136,7 +136,7 @@ public class SegmentExportImport {
         }
         exportLastModified = importFile.lastModified() + 1;
         try (FileInputStream fis = new FileInputStream(importFile)) {
-            String text = IOUtils.toString(fis, StandardCharsets.UTF_8).replace(System.getProperty("line.separator"),
+            String text = IOUtils.toString(fis, StandardCharsets.UTF_8).replace(System.lineSeparator(),
                     "\n");
             UIThreadsUtil.executeInSwingThread(new Runnable() {
                 public void run() {

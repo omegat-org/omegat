@@ -49,7 +49,7 @@ public class OmegaTLogFormatter extends Formatter {
 
     protected static String lineMark;
 
-    protected static String lineSeparator = System.getProperty("line.separator");
+    protected static String lineSeparator = System.lineSeparator();
 
     private String logMask;
     private boolean isMaskContainsMark;

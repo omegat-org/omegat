@@ -125,7 +125,7 @@ public class GlossaryReaderTSV {
         if (!StringUtil.isEmpty(newEntry.getCommentText())) {
             wr.append('\t').append(newEntry.getCommentText());
         }
-        wr.append(System.getProperty("line.separator"));
+        wr.append(System.lineSeparator());
         wr.close();
     }
 }

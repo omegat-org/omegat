@@ -26,6 +26,7 @@
 package org.omegat.filters;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -78,7 +79,7 @@ public class HTMLFilter2Test extends TestFilterBase {
         HTMLFilter2 filter = new HTMLFilter2();
 
         Core.getFilterMaster().getConfig().setRemoveTags(false);
-        filter.isFileSupported(new File(f), new TreeMap<String, String>(), new FilterContext(new Language("en"),
+        filter.isFileSupported(new File(f), Collections.emptyMap(), new FilterContext(new Language("en"),
                 new Language("be"), false));
         IProject.FileInfo fi = loadSourceFiles(filter, f);
 
@@ -87,7 +88,7 @@ public class HTMLFilter2Test extends TestFilterBase {
         translateXML(filter, f);
 
         Core.getFilterMaster().getConfig().setRemoveTags(true);
-        filter.isFileSupported(new File(f), new TreeMap<String, String>(), new FilterContext(new Language("en"),
+        filter.isFileSupported(new File(f), Collections.emptyMap(), new FilterContext(new Language("en"),
                 new Language("be"), false));
         fi = loadSourceFiles(filter, f);
 

@@ -157,8 +157,10 @@ public class OConsts {
     public static final int MAX_BACKUPS = 11;
 
     /**
-     * The limit of bytes that AbstractFilter.isFileSupported may read. 8k (8192
-     * bytes) for now, as this is the default buffer size for BufferedReader.
+     * The limit of bytes that various filters may read ahead to inspect files.
+     * Increased from 8k (8192 bytes; the default buffer size for
+     * {@link java.io.BufferedReader}) to this number because otherwise EOL
+     * detection on <code>.sdlxliff</code> files with large headers can fail.
      */
     public static final int READ_AHEAD_LIMIT = 65536;
 

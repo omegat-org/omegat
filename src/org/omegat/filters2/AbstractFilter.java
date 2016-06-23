@@ -259,20 +259,10 @@ public abstract class AbstractFilter implements IFilter {
      * @return Does the filter support the file.
      */
     public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext fc) {
-        BufferedReader reader = null;
-        try {
-            reader = createReader(inFile, fc.getInEncoding());
+        try (BufferedReader reader = createReader(inFile, fc.getInEncoding())) {
             return isFileSupported(reader);
         } catch (IOException e) {
             return false;
-        } finally {
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-            } catch (Exception e) {
-                // ignore it
-            }
         }
     }
 

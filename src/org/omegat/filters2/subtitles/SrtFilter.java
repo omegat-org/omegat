@@ -36,6 +36,7 @@ import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
+import org.omegat.util.MixedEolHandlingReader;
 import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
@@ -89,20 +90,23 @@ public class SrtFilter extends AbstractFilter {
         key = null;
         text.setLength(0);
 
+        MixedEolHandlingReader reader = new MixedEolHandlingReader(inFile);
+
         String s;
-        while ((s = inFile.readLine()) != null) {
+        while ((s = reader.readLine()) != null) {
+            String trimmed = s.trim();
             switch (state) {
             case WAIT_TIME:
-                if (PATTERN_TIME_INTERVAL.matcher(s).matches()) {
+                if (PATTERN_TIME_INTERVAL.matcher(trimmed).matches()) {
                     state = READ_STATE.WAIT_TEXT;
                 }
-                key = s;
+                key = trimmed;
                 text.setLength(0);
                 outFile.write(s);
                 outFile.write(EOL);
                 break;
             case WAIT_TEXT:
-                if (s.trim().isEmpty()) {
+                if (trimmed.isEmpty()) {
                     flush();
                     outFile.write(EOL);
                     state = READ_STATE.WAIT_TIME;
@@ -114,6 +118,8 @@ public class SrtFilter extends AbstractFilter {
                 break;
             }
         }
+
+        reader.close();
         flush();
     }
 

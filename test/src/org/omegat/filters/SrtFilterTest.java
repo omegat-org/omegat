@@ -53,4 +53,15 @@ public class SrtFilterTest extends TestFilterBase {
         checkMulti("Third title\nand again", "00:01:04,002 --> 00:01:05,200", null, null, null, null);
         checkMultiEnd();
     }
+
+    public void testLoadMixedEol() throws Exception {
+        String f = "test/data/filters/srt/file-SrtFilter-mixedEol.srt";
+        IProject.FileInfo fi = loadSourceFiles(new SrtFilter(), f);
+
+        checkMultiStart(fi, f);
+        checkMulti("First title", "00:00:11,201 --> 00:01:00,005", null, null, null, null);
+        checkMulti("Second title", "00:01:00,407 --> 00:01:02,300", null, null, null, null);
+        checkMulti("Third title\nand again", "00:01:04,002 --> 00:01:05,200", null, null, null, null);
+        checkMultiEnd();
+    }
 }

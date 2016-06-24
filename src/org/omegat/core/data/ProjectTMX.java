@@ -29,9 +29,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import org.omegat.core.Core;
@@ -384,4 +387,32 @@ public class ProjectTMX {
         defaults = tmx.defaults;
         alternatives = tmx.alternatives;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("[");
+        List<Map.Entry<String, TMXEntry>> d = new ArrayList<Map.Entry<String, TMXEntry>>(defaults.entrySet());
+        Collections.sort(d, new Comparator<Map.Entry<String, TMXEntry>>() {
+            @Override
+            public int compare(Entry<String, TMXEntry> o1, Entry<String, TMXEntry> o2) {
+                return o1.getKey().compareTo(o2.getKey());
+            }
+        });
+        for (Map.Entry<String, TMXEntry> e : d) {
+            sb.append(e.getKey()).append(": ").append(e.getValue().translation).append(", ");
+        }
+        List<Map.Entry<EntryKey, TMXEntry>> a = new ArrayList<Map.Entry<EntryKey, TMXEntry>>(alternatives.entrySet());
+        Collections.sort(a, new Comparator<Map.Entry<EntryKey, TMXEntry>>() {
+            @Override
+            public int compare(Entry<EntryKey, TMXEntry> o1, Entry<EntryKey, TMXEntry> o2) {
+                return o1.getKey().sourceText.compareTo(o2.getKey().sourceText);
+            }
+        });
+        for (Map.Entry<EntryKey, TMXEntry> e : a) {
+            sb.append(e.getKey().sourceText).append(": ").append(e.getValue().translation).append(", ");
+        }
+        sb.append(']');
+        return sb.toString();
+    }
+
 }

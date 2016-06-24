@@ -246,7 +246,8 @@ public class SVNRemoteRepository implements IRemoteRepository {
             Log.logWarningRB("SVN_ERROR", "update", ex.getMessage());
             throw new AuthenticationException(ex);
         } catch (SVNException ex) {
-            if (ex.getErrorMessage().getErrorCode() == SVNErrorCode.FS_CONFLICT) {
+            if (Arrays.asList(SVNErrorCode.FS_TXN_OUT_OF_DATE, SVNErrorCode.WC_NOT_UP_TO_DATE, SVNErrorCode.FS_CONFLICT)
+                    .contains(ex.getErrorMessage().getErrorCode())) {
                 // Somebody else committed changes - it's normal. Will upload on next save.
                 Log.logWarningRB("SVN_CONFLICT");
                 return;

@@ -36,6 +36,7 @@ import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
+import org.omegat.util.MixedEolHandlingReader;
 import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
@@ -89,29 +90,32 @@ public class SrtFilter extends AbstractFilter {
         key = null;
         text.setLength(0);
 
-        String s;
-        while ((s = inFile.readLine()) != null) {
-            switch (state) {
-            case WAIT_TIME:
-                if (PATTERN_TIME_INTERVAL.matcher(s).matches()) {
-                    state = READ_STATE.WAIT_TEXT;
-                }
-                key = s;
-                text.setLength(0);
-                outFile.write(s);
-                outFile.write(EOL);
-                break;
-            case WAIT_TEXT:
-                if (s.trim().isEmpty()) {
-                    flush();
+        try (MixedEolHandlingReader reader = new MixedEolHandlingReader(inFile)) {
+            String s;
+            while ((s = reader.readLine()) != null) {
+                String trimmed = s.trim();
+                switch (state) {
+                case WAIT_TIME:
+                    if (PATTERN_TIME_INTERVAL.matcher(trimmed).matches()) {
+                        state = READ_STATE.WAIT_TEXT;
+                    }
+                    key = trimmed;
+                    text.setLength(0);
+                    outFile.write(s);
                     outFile.write(EOL);
-                    state = READ_STATE.WAIT_TIME;
+                    break;
+                case WAIT_TEXT:
+                    if (trimmed.isEmpty()) {
+                        flush();
+                        outFile.write(EOL);
+                        state = READ_STATE.WAIT_TIME;
+                    }
+                    if (text.length() > 0) {
+                        text.append('\n');
+                    }
+                    text.append(s);
+                    break;
                 }
-                if (text.length() > 0) {
-                    text.append('\n');
-                }
-                text.append(s);
-                break;
             }
         }
         flush();

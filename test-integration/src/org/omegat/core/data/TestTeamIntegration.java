@@ -268,7 +268,7 @@ public class TestTeamIntegration {
         RepositoryDefinition def = new RepositoryDefinition();
         if (repoUrl.startsWith("git") || repoUrl.endsWith(".git")) {
             def.setType("git");
-        } else if (repoUrl.startsWith("svn") || repoUrl.startsWith("https") || repoUrl.endsWith(".svn")) {
+        } else if (repoUrl.startsWith("svn") || repoUrl.startsWith("http") || repoUrl.endsWith(".svn")) {
             def.setType("svn");
         } else {
             throw new RuntimeException("Unknown repo");
@@ -288,7 +288,7 @@ public class TestTeamIntegration {
                 .filter(File::isDirectory).findFirst().get();
         if (url.startsWith("git") || url.endsWith(".git")) {
             return new GitTeam(repoDir);
-        } else if (url.startsWith("svn") || url.startsWith("https") || url.endsWith(".svn")) {
+        } else if (url.startsWith("svn") || url.startsWith("http") || url.endsWith(".svn")) {
             return new SvnTeam(repoDir, url);
         } else {
             throw new Exception("Unknown repo");

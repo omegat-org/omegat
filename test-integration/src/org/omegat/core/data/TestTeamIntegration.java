@@ -233,9 +233,9 @@ public class TestTeamIntegration {
     }
 
     static IRemoteRepository createRepo(String url, String dir) throws Exception {
-        if (url.startsWith("git")) {
+        if (url.startsWith("git") || url.endsWith(".git")) {
             return new GITRemoteRepository(new File(dir));
-        } else if (url.startsWith("svn") || url.startsWith("https")) {
+        } else if (url.startsWith("svn") || url.startsWith("http") || url.endsWith(".svn")) {
             return new SVNRemoteRepository(new File(dir));
         } else {
             throw new Exception("Unknown repo");
@@ -243,9 +243,9 @@ public class TestTeamIntegration {
     }
 
     static Team createRepo2(String url, String dir) throws Exception {
-        if (url.startsWith("git")) {
+        if (url.startsWith("git") || url.endsWith(".git")) {
             return new GitTeam(new File(dir));
-        } else if (url.startsWith("svn") || url.startsWith("https")) {
+        } else if (url.startsWith("svn") || url.startsWith("http") || url.endsWith(".svn")) {
             return new SvnTeam(new File(dir));
         } else {
             throw new Exception("Unknown repo");

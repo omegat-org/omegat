@@ -87,13 +87,14 @@ public class LinebreakPreservingReader extends Reader {
         // Clear linebreak buffer
         linebreak.setLength(0);
 
-        // Create a buffer to contain the result
-        StringBuilder line = new StringBuilder(1024);
-
         // Get the next character and check if it's not the end of the stream
         int chr = in.read();
-        if (chr == -1)
+        if (chr == -1) {
             return null; // end of the stream reached
+        }
+
+        // Create a buffer to contain the result
+        StringBuilder line = new StringBuilder(1024);
 
         // Read and store characters until a linebreak character is encountered
         while ((chr != -1) && !isLinebreakCharacter(chr)) {

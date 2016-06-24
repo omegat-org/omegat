@@ -119,11 +119,16 @@ could fail with duplicate numbers
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 2
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancements
   2 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
 3.6.0 update 2 vs 3.6.0 update 1
+
+  Implemented requests:
+
+  - Make SRT filter robust against inconsistent EOL chars
+  https://sourceforge.net/p/omegat/feature-requests/1255/
 
   Other changes:
 

@@ -41,10 +41,10 @@ import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
 /**
- * Filter for subtitles files. Format described on
- * http://en.wikipedia.org/wiki/SubRip.
+ * Filter for subtitles files.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @see <a href="http://en.wikipedia.org/wiki/SubRip">Format description</a>
  */
 public class SrtFilter extends AbstractFilter {
     protected static final Pattern PATTERN_TIME_INTERVAL = Pattern

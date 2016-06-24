@@ -80,10 +80,17 @@ import org.tmatesoft.svn.core.wc.SVNWCUtil;
  */
 public class TestTeamIntegration {
     static final String DIR = "/tmp/teamtest";
-    static final String REPO = "git@github.com:alex73/trans.git";
+    static final String REPO = System.getProperty("omegat.test.repo", "git@github.com:alex73/trans.git");
     // static final String REPO = "svn+ssh://alex73@svn.code.sf.net/p/mappy/test/";
     // static final String REPO = "https://github.com/alex73/trans/trunk/";
     static int PROCESS_SECONDS = 4 * 60 * 60;
+    static {
+        String duration = System.getProperty("omegat.test.duration");
+        if (duration != null) {
+            PROCESS_SECONDS = Integer.parseInt(duration);
+        }
+    }
+
     static int MAX_DELAY_SECONDS = 15;
     static int SEG_COUNT = 4;
 

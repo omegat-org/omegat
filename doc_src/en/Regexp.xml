@@ -419,7 +419,7 @@
 
   <note>
     <para>greedy quantifiers will match as much as they can. For example,
-    <emphasis>a+?</emphasis> will match the aaa in
+    <emphasis>a+</emphasis> will match the aaa in
     <emphasis>aaabbb</emphasis></para>
   </note>
 

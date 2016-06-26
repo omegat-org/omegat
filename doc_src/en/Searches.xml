@@ -269,8 +269,8 @@
     additional criteria (author or changer of the translation, date
     translated, excluding orphan segments, etc) can be selected. When
     <emphasis>Full/Half width char insensitive</emphasis> option is checked,
-    searches for full-width forms such as ＡＢＣ１２３アカサタ（＄！℀ will match
-    ABC123ｱｶｻﾀ($!a/c and vice versa.</para>
+    searches for fullwidth forms (CJK characters) will match halfwidth forms
+    and vice versa.</para>
   </section>
 
   <section id="search.result.display">

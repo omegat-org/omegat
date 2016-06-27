@@ -87,7 +87,7 @@ public class ProjectTMX {
         alternatives = new HashMap<EntryKey, TMXEntry>();
         defaults = new HashMap<String, TMXEntry>();
 
-        if (!file.exists()) {
+        if (file == null || !file.exists()) {
             // file not exist - new project
             return;
         }

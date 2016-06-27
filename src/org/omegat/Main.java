@@ -149,7 +149,7 @@ public class Main {
             }
         }
 
-        remoteProject = params.get("remote-project");
+        remoteProject = params.get(CLIParameters.REMOTE_PROJECT);
 
         applyConfigFile(params.get(CLIParameters.CONFIG_FILE));
 

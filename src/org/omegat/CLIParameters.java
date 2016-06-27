@@ -40,6 +40,9 @@ public class CLIParameters {
     public static final String HELP_SHORT = "-h";
     public static final String HELP = "--help";
 
+    /** CLI parameter to specify a remote project to load instead of a local one */
+    public static final String REMOTE_PROJECT = "remote-project";
+
     // All modes
     public static final String MODE = "mode";
     public static final String CONFIG_FILE = "config-file";

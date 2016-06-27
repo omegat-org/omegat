@@ -187,7 +187,7 @@ public class DialogsTest extends TestCore {
     public void testProjectPropertiesDialog() throws Exception {
         File dir = Files.createTempDirectory("omegat").toFile();
         try {
-            new ProjectPropertiesDialog(new ProjectProperties(dir),
+            new ProjectPropertiesDialog(null, new ProjectProperties(dir),
                     "project", Mode.NEW_PROJECT);
         } catch (HeadlessException ignore) {
             // Can't do this test when headless

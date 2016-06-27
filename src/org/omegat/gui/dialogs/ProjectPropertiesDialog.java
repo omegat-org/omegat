@@ -33,6 +33,7 @@ package org.omegat.gui.dialogs;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -52,7 +53,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -158,9 +158,9 @@ public class ProjectPropertiesDialog extends JDialog {
      *            type of the dialog ({@link Mode#NEW_PROJECT},
      *            {@link Mode#RESOLVE_DIRS} or {@link Mode#EDIT_PROJECT}).
      */
-    public ProjectPropertiesDialog(final ProjectProperties projectProperties, String projFileName,
+    public ProjectPropertiesDialog(Frame parent, final ProjectProperties projectProperties, String projFileName,
             Mode dialogTypeValue) {
-        super(Core.getMainWindow().getApplicationFrame(), true);
+        super(parent, true);
         this.projectProperties = projectProperties;
         this.srx = projectProperties.getProjectSRX();
         this.dialogType = dialogTypeValue;
@@ -646,10 +646,11 @@ public class ProjectPropertiesDialog extends JDialog {
         m_fileFiltersButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame mainWindow = Core.getMainWindow().getApplicationFrame();
-                FiltersCustomizer dlg = new FiltersCustomizer(mainWindow, true,
+                FiltersCustomizer dlg = new FiltersCustomizer(parent, true,
                         FilterMaster.createDefaultFiltersConfig(), Preferences.getFilters(), filters);
-                dlg.setInUseFilters(FileInfo.getFilterNames(Core.getProject().getProjectFiles()));
+                if (Core.getProject().isProjectLoaded()) {
+                    dlg.setInUseFilters(FileInfo.getFilterNames(Core.getProject().getProjectFiles()));
+                }
                 dlg.setVisible(true);
                 if (dlg.getReturnStatus() == FiltersCustomizer.RET_OK) {
                     // saving config
@@ -661,8 +662,7 @@ public class ProjectPropertiesDialog extends JDialog {
         m_RepositoriesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame mainWindow = Core.getMainWindow().getApplicationFrame();
-                List<RepositoryDefinition> r = new RepositoriesMappingController().show(mainWindow,
+                List<RepositoryDefinition> r = new RepositoriesMappingController().show(parent,
                         projectProperties.getRepositories());
                 if (r != null) {
                     projectProperties.setRepositories(r);
@@ -740,7 +740,7 @@ public class ProjectPropertiesDialog extends JDialog {
         setSize(9 * getWidth() / 8, getHeight() + 10);
         setResizable(true);
         StaticUIUtils.fitInScreen(this);
-        setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
+        setLocationRelativeTo(parent);
     }
 
     /**

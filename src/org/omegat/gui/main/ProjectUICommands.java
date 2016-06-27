@@ -112,6 +112,7 @@ public class ProjectUICommands {
                 props.setSourceLanguage(Preferences.getPreferenceDefault(Preferences.SOURCE_LOCALE, "EN-US"));
                 props.setTargetLanguage(Preferences.getPreferenceDefault(Preferences.TARGET_LOCALE, "EN-GB"));
                 ProjectPropertiesDialog newProjDialog = new ProjectPropertiesDialog(
+                        Core.getMainWindow().getApplicationFrame(),
                         props, dir.getAbsolutePath(),
                         ProjectPropertiesDialog.Mode.NEW_PROJECT);
                 newProjDialog.setVisible(true);
@@ -460,7 +461,8 @@ public class ProjectUICommands {
                             needToSaveProperties = true;
                             // something wrong with the project - display open dialog
                             // to fix it
-                            ProjectPropertiesDialog prj = new ProjectPropertiesDialog(props,
+                            ProjectPropertiesDialog prj = new ProjectPropertiesDialog(
+                                    Core.getMainWindow().getApplicationFrame(), props,
                                     new File(projectRootFolder, OConsts.FILE_PROJECT).getAbsolutePath(),
                                     ProjectPropertiesDialog.Mode.RESOLVE_DIRS);
                             prj.setVisible(true);
@@ -667,7 +669,8 @@ public class ProjectUICommands {
         Core.getEditor().commitAndLeave();
 
         // displaying the dialog to change paths and other properties
-        ProjectPropertiesDialog prj = new ProjectPropertiesDialog(Core.getProject().getProjectProperties(),
+        ProjectPropertiesDialog prj = new ProjectPropertiesDialog(Core.getMainWindow().getApplicationFrame(),
+                Core.getProject().getProjectProperties(),
                 Core.getProject().getProjectProperties().getProjectName(),
                 ProjectPropertiesDialog.Mode.EDIT_PROJECT);
         prj.setVisible(true);

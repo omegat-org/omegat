@@ -155,6 +155,18 @@ public class Log {
     }
 
     /**
+     * Set the level for the global logger. This is normally determined by the
+     * <code>logger.properties</code> file; use this method to override for
+     * special use cases.
+     * 
+     * @param level
+     *            The new level
+     */
+    public static void setLevel(Level level) {
+        LOGGER.setLevel(level);
+    }
+
+    /**
      * Logs what otherwise would go to System.out
      */
     public static void log(String s) {

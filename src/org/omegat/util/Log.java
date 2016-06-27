@@ -58,28 +58,18 @@ public class Log {
 
         boolean loaded = false;
         File usersLogSettings = new File(StaticUtils.getConfigDir(), "logger.properties");
-        if (usersLogSettings.exists()) {
+        if (usersLogSettings.isFile() && usersLogSettings.canRead()) {
             // try to load logger settings from user home dir
-            try {
-                InputStream in = new FileInputStream(usersLogSettings);
-                try {
-                    init(in);
-                    loaded = true;
-                } finally {
-                    in.close();
-                }
+            try (InputStream in = new FileInputStream(usersLogSettings)) {
+                init(in);
+                loaded = true;
             } catch (Exception e) {
             }
         }
         if (!loaded) {
             // load built-in logger settings
-            try {
-                InputStream in = Log.class.getResourceAsStream("/org/omegat/logger.properties");
-                try {
-                    init(in);
-                } finally {
-                    in.close();
-                }
+            try (InputStream in = Log.class.getResourceAsStream("/org/omegat/logger.properties")) {
+                init(in);
             } catch (IOException ex) {
                 LOGGER.log(Level.SEVERE, "Can't open file for logging", ex);
             }

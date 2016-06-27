@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.text.MessageFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -64,6 +65,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.tagvalidation.ErrorReport;
+import org.omegat.core.team2.TeamTool;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.main.ProjectUICommands;
@@ -116,6 +118,10 @@ public class Main {
             System.out.println(StringUtil.format(OStrings.getString("COMMAND_LINE_HELP"),
                     OStrings.getNameAndVersion()));
             System.exit(0);
+        }
+
+        if (args.length > 0 && CLIParameters.TEAM_TOOL.equals(args[0])) {
+            TeamTool.main(Arrays.copyOfRange(args, 1, args.length));
         }
 
         // Workaround for bug #812. Remove this when appropriate; see

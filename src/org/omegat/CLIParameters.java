@@ -79,6 +79,9 @@ public class CLIParameters {
     // Development
     public static final String DEV_MANIFESTS = "dev-manifests";
 
+    // Team tool
+    public static final String TEAM_TOOL = "team";
+
     /**
      * Application execution mode. Value of {@link #MODE}.
      */

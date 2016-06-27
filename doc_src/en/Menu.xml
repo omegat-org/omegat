@@ -545,7 +545,15 @@
 
                   <keycap>F</keycap>
                 </keycombo>, the text will be pasted by default in the
-              <guilabel>Search for</guilabel> field.</para></entry>
+              <guilabel>Search for</guilabel> field.</para><para>Pressing
+              <keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>F</keycap>
+                </keycombo> displays the last already opened Search window
+              (instead of opening a new one).</para></entry>
             </row>
 
             <row>
@@ -1144,8 +1152,8 @@
               attempt is made to match the capitalization of the source
               word.</para><para>The 3 other options are described in the
               specific page concerning <link
-              linkend="section.TaaS.options.access">TaaS</link> (Terminology as a
-              Service).</para></entry>
+              linkend="section.TaaS.options.access">TaaS</link> (Terminology
+              as a Service).</para></entry>
             </row>
 
             <row>

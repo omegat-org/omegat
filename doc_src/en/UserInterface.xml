@@ -707,8 +707,15 @@
                 <entry><literal>${diff}</literal></entry>
 
                 <entry>String showing the differences between the source and
-                the match.<emphasis> Hint:</emphasis> use this if the text,
+                the match.<emphasis> Hint:</emphasis> use this if the text
                 you are translating has been updated.</entry>
+              </row>
+
+              <row>
+                <entry><literal>${diffReversed}</literal></entry>
+
+                <entry>Same as {$diff}, but with the differences (what is to be
+                inserted and deleted) inverted.</entry>
               </row>
 
               <row>
@@ -748,17 +755,28 @@
               </row>
 
               <row>
-                <entry><literal>${creationID}</literal></entry>
+                <entry><literal>${initialCreationID}</literal></entry>
 
-                <entry>Author of the match</entry>
+                <entry>Author of the match when the match was created</entry>
               </row>
 
               <row>
-                <entry><literal>${creationDate}</literal></entry>
+                <entry><literal>${initialCreationDate}</literal></entry>
 
-                <entry>Date of the match</entry>
+                <entry>Date of the match when the match was created</entry>
               </row>
 
+              <row>
+                <entry><literal>${changedID}</literal></entry>
+
+                <entry>Author of the match when the match was last updated</entry>
+              </row>
+
+              <row>
+                <entry><literal>${changedDate}</literal></entry>
+
+                <entry>Date of the match when the match was last updated</entry>
+              </row>
               <row>
                 <entry><literal>${fuzzyFlag}</literal></entry>
 

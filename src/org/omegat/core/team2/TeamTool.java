@@ -25,8 +25,10 @@
 
 package org.omegat.core.team2;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.logging.Level;
 
@@ -40,6 +42,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.StringUtil;
 import org.tmatesoft.svn.core.SVNDepth;
+import org.tmatesoft.svn.core.SVNPropertyValue;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
 
 /**
@@ -91,11 +94,20 @@ public class TeamTool {
                 null).save(props, new File(props.getProjectInternal(), OConsts.STATUS_EXTENSION).getPath(), false);
 
         // If the supplied dir is under version control, add everything we made
+        // and set EOL handling correctly for cross-platform work
         if (new File(dir, ".svn").isDirectory()) {
             SVNClientManager mgr = SVNClientManager.newInstance();
+            mgr.getWCClient().doSetProperty(dir, "svn:auto-props",
+                    SVNPropertyValue.create("*.txt = svn:eol-style=native\n*.tmx = svn:eol-style=native\n"), false,
+                    SVNDepth.EMPTY, null, null);
             mgr.getWCClient().doAdd(dir.listFiles(f -> !f.getName().startsWith(".")), false, false, true,
-                    SVNDepth.fromRecurse(true), false, false, false);
+                    SVNDepth.fromRecurse(true), false, false, false, true);
         } else if (new File(dir, ".git").isDirectory()) {
+            try (BufferedWriter writer = Files.newBufferedWriter(new File(dir, ".gitattributes").toPath())) {
+                writer.write("* text=auto\n");
+                writer.write("*.tmx text\n");
+                writer.write("*.txt text\n");
+            }
             Git.open(dir).add().addFilepattern(".").call();
         }
 

@@ -714,7 +714,7 @@
               <row>
                 <entry><literal>${diffReversed}</literal></entry>
 
-                <entry>Same as {$diff}, but with the differences (what is to be
+                <entry>Same as ${diff}, but with the differences (what is to be
                 inserted and deleted) inverted.</entry>
               </row>
 

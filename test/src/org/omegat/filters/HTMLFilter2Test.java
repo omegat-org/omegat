@@ -28,7 +28,6 @@ package org.omegat.filters;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
-import java.util.TreeMap;
 
 import org.junit.Test;
 import org.omegat.core.Core;

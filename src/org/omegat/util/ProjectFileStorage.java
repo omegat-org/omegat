@@ -61,6 +61,11 @@ import gen.core.project.Project.Repositories;
  */
 public class ProjectFileStorage {
 
+    /**
+     * A marker that tells OmegaT that project's subfolder has default location.
+     */
+    public static final String DEFAULT_FOLDER_MARKER = "__DEFAULT__";
+
     static private final JAXBContext CONTEXT;
     static {
         try {
@@ -148,9 +153,9 @@ public class ProjectFileStorage {
         // Compute glossary file location
         String glossaryFile = om.getProject().getGlossaryFile();
         if (StringUtil.isEmpty(glossaryFile)) {
-            glossaryFile = OConsts.DEFAULT_FOLDER_MARKER;
+            glossaryFile = DEFAULT_FOLDER_MARKER;
         }
-        if (glossaryFile.equalsIgnoreCase(OConsts.DEFAULT_FOLDER_MARKER)) {
+        if (glossaryFile.equalsIgnoreCase(DEFAULT_FOLDER_MARKER)) {
             glossaryFile = result.computeDefaultWriteableGlossaryFile();
         } else {
             glossaryFile = result.getGlossaryDir().getAsString() + glossaryFile;
@@ -211,9 +216,9 @@ public class ProjectFileStorage {
         // Compute glossary file location
         String glossaryFile = computeRelativePath(props.getGlossaryRoot(), props.getWriteableGlossary(), null); // Rel file name
         String glossaryDir = computeRelativePath(m_root, props.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY);
-        if (glossaryDir.equalsIgnoreCase(OConsts.DEFAULT_FOLDER_MARKER) && props.isDefaultWriteableGlossaryFile()) {
+        if (glossaryDir.equalsIgnoreCase(DEFAULT_FOLDER_MARKER) && props.isDefaultWriteableGlossaryFile()) {
             // Everything equals to default
-            glossaryFile = OConsts.DEFAULT_FOLDER_MARKER;
+            glossaryFile = DEFAULT_FOLDER_MARKER;
         }
         om.getProject().setGlossaryFile(glossaryFile);
 
@@ -239,7 +244,7 @@ public class ProjectFileStorage {
     }
 
     private static String computeRelative(String relativePath, String defaultName) {
-        if (OConsts.DEFAULT_FOLDER_MARKER.equals(relativePath)) {
+        if (DEFAULT_FOLDER_MARKER.equals(relativePath)) {
             return asDirectory(defaultName);
         } else {
             return asDirectory(relativePath);
@@ -274,7 +279,7 @@ public class ProjectFileStorage {
             // Not exist in project file ? Use default.
             return m_root + defaultName + File.separator;
         }
-        if (OConsts.DEFAULT_FOLDER_MARKER.equals(relativePath))
+        if (DEFAULT_FOLDER_MARKER.equals(relativePath))
             return m_root + defaultName + File.separator;
         else {
             try {
@@ -320,7 +325,7 @@ public class ProjectFileStorage {
      */
     private static String computeRelativePath(String m_root, String absolutePath, String defaultName) {
         if (defaultName != null && new File(absolutePath).equals(new File(m_root, defaultName))) {
-            return OConsts.DEFAULT_FOLDER_MARKER;
+            return DEFAULT_FOLDER_MARKER;
         }
 
         try {

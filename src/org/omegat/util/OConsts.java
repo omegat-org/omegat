@@ -111,11 +111,6 @@ public class OConsts {
     public static final String EXT_TBX = ".tbx";
 
     /**
-     * A marker that tells OmegaT that project's subfolder has default location.
-     */
-    public static final String DEFAULT_FOLDER_MARKER = "__DEFAULT__";
-
-    /**
      * The name of the file with project statistics: segments, words, chars
      * count.
      */

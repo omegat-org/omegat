@@ -168,8 +168,6 @@ public class OConsts {
      */
     public static final int MAX_PARENT_DIRECTORIES_ABS2REL = 5;
 
-    public static final String REMOTE_SC_DICTIONARY_LIST_LOCATION = "http://download.services.openoffice.org/files/contrib/dictionaries/";
-
     public static final String segmentMarkerString = "<" + OStrings.getSegmentMarker() + ">";
     
     /** Max number of recent projects to remember */

@@ -42,7 +42,6 @@ import javax.swing.event.DocumentListener;
 import org.omegat.core.spellchecker.DictionaryManager;
 import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.util.Language;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -58,6 +57,7 @@ import org.omegat.util.gui.StaticUIUtils;
 public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
 
     private static final String OLD_DICT_URL = "http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/";
+    public static final String DICT_URL = "http://download.services.openoffice.org/files/contrib/dictionaries/";
     
     private final JFileChooser fileChooser = new JFileChooser();
 
@@ -157,10 +157,9 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         if (dictionaryUrl.isEmpty()
                 || //string below was default prior to 2.5.0 update 5, but is not working. Override with new default.
                 OLD_DICT_URL.equalsIgnoreCase(dictionaryUrl)) {
-            dictionaryUrlTextField.setText(OConsts.REMOTE_SC_DICTIONARY_LIST_LOCATION);
-        } else {
-            dictionaryUrlTextField.setText(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL));
+            dictionaryUrl = DICT_URL;
         }
+        dictionaryUrlTextField.setText(dictionaryUrl);
         setLocationRelativeTo(parent);
         updateDirectory();
         languageListValueChanged(null);

@@ -342,6 +342,9 @@ startScripts.enabled = false
     it.doFirst {
         startScripts.outputDir.mkdirs()
         file("${startScripts.outputDir}/${applicationName}").createNewFile()
+        if (it.destinationDir.directory) {
+            file("${it.destinationDir}/bin").mkdirs()
+        }
     }
     // Delete dummy afterwards.
     it.doLast {

@@ -27,6 +27,7 @@
 package org.omegat.util;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -139,8 +140,10 @@ public abstract class VarExpansion<Param> {
             numHint = "";
         }
         localTemplate = localTemplate.replace(VAR_FILE_PATH, filePath + numHint);
-        if (filePath.startsWith(baseDir)) 
-            filePath = filePath.substring(baseDir.length());
+        try {
+            filePath = Paths.get(baseDir).relativize(Paths.get(filePath)).toString();
+        } catch (IllegalArgumentException ex) {
+        }
         localTemplate = localTemplate.replace(VAR_FILE_SHORT_PATH, filePath + numHint); // path without TMRoot
         if (filePath.contains(File.separator)) 
             filePath = filePath.substring(filePath.lastIndexOf(File.separator) + 1); 

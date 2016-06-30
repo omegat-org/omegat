@@ -132,12 +132,10 @@ public abstract class VarExpansion<Param> {
     public String expandFileNames(String localTemplate, String[] filePaths, String baseDir) {
         if (localTemplate == null) localTemplate = this.template; // copy
         String filePath = filePaths[0];
-        String numHint;
+        String numHint = "";
         if (filePaths.length > 1) {
             numHint = filePath.equals("") ? OStrings.getString("MATCHES_THIS_PROJECT") : "";
             numHint += " " + StringUtil.format(OStrings.getString("MATCHES_MULTI_FILE_HINT"), filePaths.length - 1);
-        } else {
-            numHint = "";
         }
         localTemplate = localTemplate.replace(VAR_FILE_PATH, filePath + numHint);
         try {
@@ -145,8 +143,9 @@ public abstract class VarExpansion<Param> {
         } catch (IllegalArgumentException ex) {
         }
         localTemplate = localTemplate.replace(VAR_FILE_SHORT_PATH, filePath + numHint); // path without TMRoot
-        if (filePath.contains(File.separator)) 
-            filePath = filePath.substring(filePath.lastIndexOf(File.separator) + 1); 
+        if (filePath.contains(File.separator)) {
+            filePath = filePath.substring(filePath.lastIndexOf(File.separator) + 1);
+        }
         localTemplate = localTemplate.replace(VAR_FILE_NAME, filePath + numHint);
         if (filePath.contains(".")) {
             String[] splitName = filePath.split("\\.");

@@ -178,8 +178,39 @@
             /tm/enforce to overwrite existing default translations
             unconditionally.</para>
 
-            <para>Overwriting is operating until the TMX is removed from
-            /tm/enforce.</para>
+            <para>Unlike in the tm/auto folder, the TMX present in /tm/enforce
+            has a temporary effect:<orderedlist>
+                <listitem>
+                  <para>Put the TMX in /tm/enforce.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Reload the project.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Make a slight change anywhere in the project (this
+                  rewrites <filename>project_save.tmx</filename>).</para>
+                </listitem>
+
+                <listitem>
+                  <para>Make decision about immunity of the enforced
+                  segments:<itemizedlist>
+                      <listitem>
+                        <para>If they DON'T NEED to stay immune from further
+                        changes, then remove the TMX from /tm/enforce.</para>
+                      </listitem>
+
+                      <listitem>
+                        <para>If they NEED to stay immune from further
+                        changes, then keep the TMX in /tm/enforce.</para>
+                      </listitem>
+                    </itemizedlist></para>
+                </listitem>
+              </orderedlist></para>
+
+            <para>Note: if TMX is removed before step 3, enforcements aren't
+            kept at all.</para>
           </listitem>
         </varlistentry>
 

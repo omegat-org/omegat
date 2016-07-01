@@ -93,13 +93,17 @@ public class StatisticsWindow extends javax.swing.JDialog {
 
         // Run calculation
         thread.setPriority(Thread.MIN_PRIORITY);
-        thread.start();
 
         displayPanel.add(output);
 
         StaticUIUtils.setEscapeClosable(this);
 
         addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                thread.start();
+            }
+
             @Override
             public void windowClosing(WindowEvent e) {
                 thread.fin();

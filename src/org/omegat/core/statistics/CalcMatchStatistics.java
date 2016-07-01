@@ -31,6 +31,7 @@ package org.omegat.core.statistics;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -43,6 +44,8 @@ import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.matching.NearString;
+import org.omegat.core.statistics.FindMatches.StoppedException;
+import org.omegat.core.threads.LongProcessInterruptedException;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.gui.stat.BaseMatchStatisticsPanel;
 import org.omegat.util.OConsts;
@@ -95,8 +98,9 @@ public class CalcMatchStatistics extends LongProcessThread {
     private final Set<String> alreadyProcessedInFile = new HashSet<String>();
     private final Set<String> alreadyProcessedInProject = new HashSet<String>();
 
-    private ISimilarityCalculator distanceCalculator;
-    private FindMatches finder;
+    private ThreadLocal<ISimilarityCalculator> distanceCalculator = ThreadLocal.withInitial(LevenshteinDistance::new);
+    private ThreadLocal<FindMatches> finder = ThreadLocal.withInitial(
+            () -> new FindMatches(Core.getProject().getSourceTokenizer(), OConsts.MAX_NEAR_STRINGS, true, false));
     private final StringBuilder textForLog = new StringBuilder();
 
     public CalcMatchStatistics(BaseMatchStatisticsPanel callback, boolean perFile) {
@@ -106,8 +110,6 @@ public class CalcMatchStatistics extends LongProcessThread {
 
     @Override
     public void run() {
-        finder = getMatchesFinder(true);
-        distanceCalculator = getDistanceCalculator(true);
         if (perFile) {
             entriesToProcess = Core.getProject().getAllEntries().size() * 2;
             calcPerFile();
@@ -157,7 +159,7 @@ public class CalcMatchStatistics extends LongProcessThread {
 
         String title = OStrings.getString("CT_STATSMATCH_FileTotal");
         appendText(title + "\n");
-        String[][] table = total.calcTable(rowsTotal);
+        String[][] table = total.calcTable(rowsTotal, i -> i != 1);
         String outText = TextUtil.showTextTable(header, table, align);
         appendText(outText + "\n");
         appendTable(title, table);
@@ -169,7 +171,7 @@ public class CalcMatchStatistics extends LongProcessThread {
     }
 
     MatchStatCounts calcTotal(boolean outData) {
-        MatchStatCounts result = new MatchStatCounts(true);
+        MatchStatCounts result = new MatchStatCounts();
         alreadyProcessedInProject.clear();
 
         final List<SourceTextEntry> untranslatedEntries = new ArrayList<SourceTextEntry>();
@@ -200,10 +202,10 @@ public class CalcMatchStatistics extends LongProcessThread {
             showTable(table);
         }
 
-        calcSimilarity(untranslatedEntries, result);
+        calcSimilarity(untranslatedEntries).ifPresent(result::addCounts);
 
         if (outData) {
-            String[][] table = result.calcTable(rowsTotal);
+            String[][] table = result.calcTable(rowsTotal, i -> i != 1);
             String outText = TextUtil.showTextTable(header, table, align);
             showText(outText);
             showTable(table);
@@ -217,7 +219,7 @@ public class CalcMatchStatistics extends LongProcessThread {
     }
 
     MatchStatCounts forFile(IProject.FileInfo fi) {
-        MatchStatCounts result = new MatchStatCounts(false);
+        MatchStatCounts result = new MatchStatCounts();
         alreadyProcessedInFile.clear();
 
         final List<SourceTextEntry> untranslatedEntries = new ArrayList<SourceTextEntry>();
@@ -249,7 +251,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         }
         alreadyProcessedInProject.addAll(alreadyProcessedInFile);
 
-        calcSimilarity(untranslatedEntries, result);
+        calcSimilarity(untranslatedEntries).ifPresent(result::addCounts);
 
         return result;
     }
@@ -266,65 +268,54 @@ public class CalcMatchStatistics extends LongProcessThread {
      * 
      * Similarity calculates between tokens tokenized by ITokenizer.tokenizeAllExactly() (adjustedScore)
      */
-    void calcSimilarity(List<SourceTextEntry> untranslatedEntries, MatchStatCounts counts) {
+    Optional<MatchStatCounts> calcSimilarity(List<SourceTextEntry> untranslatedEntries) {
         // If we have more than one available processor then we do the
         // calculation in parallel.
         boolean doParallel = Runtime.getRuntime().availableProcessors() > 1;
         Stream<SourceTextEntry> stream = doParallel ? untranslatedEntries.parallelStream()
                 : untranslatedEntries.stream();
         long startTime = System.currentTimeMillis();
+        MatchStatCounts result = null;
         try {
-            stream.forEach(ste -> {
-                checkInterrupted();
-
-                String srcNoXmlTags = ste.getSrcText();
-                for (ProtectedPart pp : ste.getProtectedParts()) {
-                    srcNoXmlTags = srcNoXmlTags.replace(pp.getTextInSourceSegment(),
-                            pp.getReplacementMatchCalculation());
-                }
-                FindMatches localFinder = getMatchesFinder(doParallel);
-                List<NearString> nears = localFinder.search(Core.getProject(), srcNoXmlTags, true, false,
-                        () -> isInterrupted());
-
-                final Token[] strTokensStem = localFinder.tokenizeAll(ste.getSrcText());
-                int maxSimilarity = 0;
-                CACHE: for (NearString near : nears) {
-                    final Token[] candTokens = localFinder.tokenizeAll(near.source);
-                    int newSimilarity = FuzzyMatcher.calcSimilarity(getDistanceCalculator(doParallel), strTokensStem,
-                            candTokens);
-                    if (newSimilarity > maxSimilarity) {
-                        maxSimilarity = newSimilarity;
-                        if (newSimilarity >= 95) // enough to say that we are in row 2
-                            break CACHE;
-                    }
-                }
-
-                StatCount count = new StatCount(ste);
-                if (doParallel) {
-                    synchronized (counts) {
-                        counts.addForPercents(maxSimilarity, count);
+            result = stream.collect(MatchStatCounts::new,
+                    (counts, ste) -> {
+                        checkInterrupted();
+                        counts.addForPercents(calcMaxSimilarity(ste), new StatCount(ste));
                         entryProcessed();
-                    }
-                } else {
-                    counts.addForPercents(maxSimilarity, count);
-                    entryProcessed();
-                }
-            });
-        } catch (FindMatches.StoppedException ex) {
+                    },
+                    MatchStatCounts::addCounts);
+        } catch (StoppedException | LongProcessInterruptedException ex) {
         }
         long endTime = System.currentTimeMillis();
         Logger.getLogger(getClass().getName()).fine(String.format("Calc similarity took %d s (%s)",
                 (endTime - startTime) / 1000, doParallel ? "parallel" : "sequential"));
+        return Optional.ofNullable(result);
     }
 
-    ISimilarityCalculator getDistanceCalculator(boolean newInstance) {
-        return newInstance ? new LevenshteinDistance() : distanceCalculator;
+    int calcMaxSimilarity(SourceTextEntry ste) {
+        String srcNoXmlTags = removeXmlTags(ste);
+        FindMatches localFinder = finder.get();
+        List<NearString> nears = localFinder.search(Core.getProject(), srcNoXmlTags, true, false, this::isInterrupted);
+        final Token[] strTokensStem = localFinder.tokenizeAll(ste.getSrcText());
+        int maxSimilarity = 0;
+        CACHE: for (NearString near : nears) {
+            final Token[] candTokens = localFinder.tokenizeAll(near.source);
+            int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator.get(), strTokensStem, candTokens);
+            if (newSimilarity > maxSimilarity) {
+                maxSimilarity = newSimilarity;
+                if (newSimilarity >= 95) // enough to say that we are in row 2
+                    break CACHE;
+            }
+        }
+        return maxSimilarity;
     }
 
-    FindMatches getMatchesFinder(boolean newInstance) {
-        return newInstance
-                ? new FindMatches(Core.getProject().getSourceTokenizer(), OConsts.MAX_NEAR_STRINGS, true, false)
-                : finder;
+    String removeXmlTags(SourceTextEntry ste) {
+        String srcNoXmlTags = ste.getSrcText();
+        for (ProtectedPart pp : ste.getProtectedParts()) {
+            srcNoXmlTags = srcNoXmlTags.replace(pp.getTextInSourceSegment(), pp.getReplacementMatchCalculation());
+        }
+        return srcNoXmlTags;
     }
 
     int treated, percent;

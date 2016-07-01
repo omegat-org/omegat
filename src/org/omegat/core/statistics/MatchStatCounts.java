@@ -25,6 +25,10 @@
 
 package org.omegat.core.statistics;
 
+import java.util.function.IntPredicate;
+import java.util.stream.Collector;
+import java.util.stream.Stream;
+
 /**
  * Bean for store match count for one file or for full project, i.e. "Repetitions", "Exact match", "95%-100%",
  * "85%-94%", etc.
@@ -32,12 +36,11 @@ package org.omegat.core.statistics;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class MatchStatCounts {
+    private final static int BASE_FOR_PERCENTS = 2;
     private final StatCount[] counts;
-    private final int baseForPercents;
 
-    public MatchStatCounts(boolean isTotal) {
-        counts = new StatCount[isTotal ? 8 : 9];
-        baseForPercents = isTotal ? 1 : 2;
+    public MatchStatCounts() {
+        counts = new StatCount[8];
         for (int i = 0; i < counts.length; i++) {
             counts[i] = new StatCount();
         }
@@ -64,6 +67,21 @@ public class MatchStatCounts {
     }
 
     /**
+     * Add all counts contained in another MatchStatCounts instance into this
+     * instance.
+     * 
+     * @param other
+     *            Counts to add
+     * @return This instance
+     */
+    public MatchStatCounts addCounts(MatchStatCounts other) {
+        for (int i = 0; i < counts.length; i++) {
+            counts[i].add(other.counts[i]);
+        }
+        return this;
+    }
+
+    /**
      * Get row index by match percent.
      * 
      * @param percent
@@ -73,17 +91,17 @@ public class MatchStatCounts {
     private int getRowByPercent(int percent) {
         if (percent == Statistics.PERCENT_EXACT_MATCH) {
             // exact match
-            return baseForPercents;
+            return BASE_FOR_PERCENTS;
         } else if (percent >= 95) {
-            return baseForPercents + 1;
+            return BASE_FOR_PERCENTS + 1;
         } else if (percent >= 85) {
-            return baseForPercents + 2;
+            return BASE_FOR_PERCENTS + 2;
         } else if (percent >= 75) {
-            return baseForPercents + 3;
+            return BASE_FOR_PERCENTS + 3;
         } else if (percent >= 50) {
-            return baseForPercents + 4;
+            return BASE_FOR_PERCENTS + 4;
         } else {
-            return baseForPercents + 5;
+            return BASE_FOR_PERCENTS + 5;
         }
     }
 
@@ -95,10 +113,10 @@ public class MatchStatCounts {
      * @return text table
      */
     public String[][] calcTableWithoutPercentage(String[] rows) {
-        String[][] table = new String[baseForPercents + 1][5];
+        String[][] table = new String[BASE_FOR_PERCENTS + 1][5];
 
         // dump result - will be changed for UI
-        for (int i = 0; i <= baseForPercents; i++) {
+        for (int i = 0; i <= BASE_FOR_PERCENTS; i++) {
             table[i][0] = rows[i];
             table[i][1] = Integer.toString(counts[i].segments);
             table[i][2] = Integer.toString(counts[i].words);
@@ -109,28 +127,50 @@ public class MatchStatCounts {
     }
 
     /**
-     * Extract result to text table.
+     * Extract result to text table. Convenience method for
+     * {@link #calcTable(String[], IntPredicate)} that accepts all rows.
      * 
-     * @param result
-     *            result
+     * @param rows
+     *            An array of row headers
      * @return text table
      */
     public String[][] calcTable(String[] rows) {
-        // calculate total
-        counts[counts.length - 1].reset();
-        for (int i = 0; i < counts.length - 1; i++) {
-            counts[counts.length - 1].add(counts[i]);
+        if (rows.length != counts.length + 1) {
+            throw new IllegalArgumentException("Must supply headers for " + (counts.length + 1) + " rows");
         }
+        return calcTable(rows, i-> true);
+    }
 
-        String[][] table = new String[counts.length][5];
+    /**
+     * Extract result to text table. Rows for which the <code>rowFilter</code>
+     * returns <code>false</code> will be skipped.
+     * 
+     * @param rows
+     *            An array of row headers
+     * @param rowFilter
+     *            A filter indicating rows that should be kept
+     * @return text table
+     */
+    public String[][] calcTable(String[] rows, IntPredicate rowFilter) {
+        // calculate total
+        StatCount total = Stream.of(counts).collect(Collector.of(StatCount::new, StatCount::add, StatCount::add));
+
+        String[][] table = new String[rows.length][5];
 
         // dump result - will be changed for UI
-        for (int i = 0; i < counts.length; i++) {
-            table[i][0] = rows[i];
-            table[i][1] = Integer.toString(counts[i].segments);
-            table[i][2] = Integer.toString(counts[i].words);
-            table[i][3] = Integer.toString(counts[i].charsWithoutSpaces);
-            table[i][4] = Integer.toString(counts[i].charsWithSpaces);
+        for (int i = 0, offset = 0; i <= counts.length; i++) {
+            if (!rowFilter.test(i)) {
+                // Null row header means skip this row
+                offset++;
+                continue;
+            }
+            StatCount c = i == counts.length ? total : counts[i];
+            int offsetIndex = i - offset;
+            table[offsetIndex][0] = rows[offsetIndex];
+            table[offsetIndex][1] = Integer.toString(c.segments);
+            table[offsetIndex][2] = Integer.toString(c.words);
+            table[offsetIndex][3] = Integer.toString(c.charsWithoutSpaces);
+            table[offsetIndex][4] = Integer.toString(c.charsWithSpaces);
         }
         return table;
     }

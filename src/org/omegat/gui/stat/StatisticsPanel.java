@@ -51,6 +51,21 @@ public class StatisticsPanel extends BaseStatisticsPanel {
         setLayout(new BorderLayout());
     }
 
+    @Override
+    public void appendTable(String title, String[] headers, String[][] data) {
+        // Nothing
+    }
+
+    @Override
+    public void appendTextData(String result) {
+        // Nothing
+    }
+
+    @Override
+    public void setTable(String[] headers, String[][] data) {
+        // Nothing
+    }
+
     public void setProjectTableData(final String[] headers, final String[][] projectData) {
         if (headers == null || headers.length == 0) {
             return;

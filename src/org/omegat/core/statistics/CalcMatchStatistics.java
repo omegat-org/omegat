@@ -47,7 +47,6 @@ import org.omegat.core.matching.NearString;
 import org.omegat.core.statistics.FindMatches.StoppedException;
 import org.omegat.core.threads.LongProcessInterruptedException;
 import org.omegat.core.threads.LongProcessThread;
-import org.omegat.gui.stat.BaseMatchStatisticsPanel;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
@@ -90,7 +89,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             OStrings.getString("CT_STATSMATCH_RowNoMatch"), OStrings.getString("CT_STATSMATCH_Total") };
     private final boolean[] align = new boolean[] { false, true, true, true, true };
 
-    private final BaseMatchStatisticsPanel callback;
+    private final IStatsConsumer callback;
     private final boolean perFile;
     private int entriesToProcess;
 
@@ -103,7 +102,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             () -> new FindMatches(Core.getProject().getSourceTokenizer(), OConsts.MAX_NEAR_STRINGS, true, false));
     private final StringBuilder textForLog = new StringBuilder();
 
-    public CalcMatchStatistics(BaseMatchStatisticsPanel callback, boolean perFile) {
+    public CalcMatchStatistics(IStatsConsumer callback, boolean perFile) {
         this.callback = callback;
         this.perFile = perFile;
     }

@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2015 Aaron Madlon-Kay
+ Copyright (C) 2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -23,30 +23,27 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.stat;
+package org.omegat.core.statistics;
 
 /**
- *
+ * An interface for consumers of statistical information.
+ * <p>
+ * TODO: Separate "setting" and "appending" into different interfaces.
+ * 
  * @author Aaron Madlon-Kay
  */
-@SuppressWarnings("serial")
-public abstract class BaseMatchStatisticsPanel extends BaseStatisticsPanel {
+public interface IStatsConsumer {
+    public void appendTextData(String result);
 
-    private final StringBuilder buffer = new StringBuilder();
-    
-    public BaseMatchStatisticsPanel(StatisticsWindow window) {
-        super(window);
-    }
-    
-    @Override
-    public void appendTextData(final String result) {
-        buffer.append(result);
-        setTextData(buffer.toString());
-    }
+    public void appendTable(String title, String[] headers, String[][] data);
 
-    @Override
-    public void finishData() {
-        super.finishData();
-        buffer.setLength(0);
-    }
+    public void setTextData(String data);
+
+    public void setTable(String[] headers, String[][] data);
+
+    public void setDataFile(String path);
+
+    public void finishData();
+
+    public void showProgress(int percent);
 }

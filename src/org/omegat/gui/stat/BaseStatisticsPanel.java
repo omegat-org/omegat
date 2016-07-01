@@ -34,6 +34,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 
 import org.omegat.core.Core;
+import org.omegat.core.statistics.IStatsConsumer;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.DataTableStyling;
 import org.omegat.util.gui.OSXIntegration;
@@ -44,7 +45,7 @@ import org.omegat.util.gui.TableColumnSizer;
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
-public abstract class BaseStatisticsPanel extends JPanel {
+public abstract class BaseStatisticsPanel extends JPanel implements IStatsConsumer {
 
     private final StatisticsWindow window;
     
@@ -52,18 +53,22 @@ public abstract class BaseStatisticsPanel extends JPanel {
         this.window = window;
     }
     
+    @Override
     public void showProgress(int percent) {
         window.showProgress(percent);
     }
 
+    @Override
     public void finishData() {
         window.finishData();
     }
     
+    @Override
     public void setTextData(String data) {
         window.setTextData(data);
     }
     
+    @Override
     public void setDataFile(String path) {
         File file = new File(path);
         OSXIntegration.setProxyIcon(getRootPane(), file.isFile() ? file : null);

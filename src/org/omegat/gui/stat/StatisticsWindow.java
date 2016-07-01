@@ -27,6 +27,7 @@
 
 package org.omegat.gui.stat;
 
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.WindowAdapter;
@@ -35,7 +36,6 @@ import java.awt.event.WindowEvent;
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 
-import org.omegat.core.Core;
 import org.omegat.core.statistics.CalcMatchStatistics;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.threads.LongProcessThread;
@@ -63,8 +63,8 @@ public class StatisticsWindow extends javax.swing.JDialog {
     /**
      * Creates new form StatisticsWindow
      */
-    public StatisticsWindow(STAT_TYPE statType) {
-        super(Core.getMainWindow().getApplicationFrame(), true);
+    public StatisticsWindow(Frame parent, STAT_TYPE statType) {
+        super(parent, true);
         initComponents();
         copyDataButton.setVisible(false);
         
@@ -107,7 +107,7 @@ public class StatisticsWindow extends javax.swing.JDialog {
         });
 
         setSize(800, 400);
-        setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
+        setLocationRelativeTo(parent);
     }
 
     /**

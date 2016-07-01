@@ -808,15 +808,18 @@ public class MainWindowMenuHandler {
     }
 
     public void toolsShowStatisticsStandardMenuItemActionPerformed() {
-        new StatisticsWindow(StatisticsWindow.STAT_TYPE.STANDARD).setVisible(true);
+        new StatisticsWindow(Core.getMainWindow().getApplicationFrame(), StatisticsWindow.STAT_TYPE.STANDARD)
+                .setVisible(true);
     }
 
     public void toolsShowStatisticsMatchesMenuItemActionPerformed() {
-        new StatisticsWindow(StatisticsWindow.STAT_TYPE.MATCHES).setVisible(true);
+        new StatisticsWindow(Core.getMainWindow().getApplicationFrame(), StatisticsWindow.STAT_TYPE.MATCHES)
+                .setVisible(true);
     }
 
     public void toolsShowStatisticsMatchesPerFileMenuItemActionPerformed() {
-        new StatisticsWindow(StatisticsWindow.STAT_TYPE.MATCHES_PER_FILE).setVisible(true);
+        new StatisticsWindow(Core.getMainWindow().getApplicationFrame(), StatisticsWindow.STAT_TYPE.MATCHES_PER_FILE)
+                .setVisible(true);
     }
 
     public void toolsAlignFilesMenuItemActionPerformed() {

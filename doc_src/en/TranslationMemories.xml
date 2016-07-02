@@ -178,38 +178,40 @@
             /tm/enforce to overwrite existing default translations
             unconditionally.</para>
 
-            <para>Unlike in the tm/auto folder, the TMX present in /tm/enforce
-            has a temporary effect:<orderedlist>
+            <para><orderedlist>
                 <listitem>
                   <para>Put the TMX in /tm/enforce.</para>
                 </listitem>
 
                 <listitem>
-                  <para>Reload the project.</para>
+                  <para>Reload the project. The changes are displayed.</para>
                 </listitem>
 
                 <listitem>
-                  <para>Make a slight change anywhere in the project (this
-                  rewrites <filename>project_save.tmx</filename>).</para>
+                  <para>Make a slight change anywhere in the project. This
+                  modifies <filename>project_save.tmx</filename>.</para>
                 </listitem>
 
                 <listitem>
                   <para>Make decision about immunity of the enforced
                   segments:<itemizedlist>
                       <listitem>
-                        <para>If they DON'T NEED to stay immune from further
-                        changes, then remove the TMX from /tm/enforce.</para>
+                        <para>If they <emphasis>don't need</emphasis> to stay
+                        immune from further changes, then remove the TMX from
+                        /tm/enforce.</para>
                       </listitem>
 
                       <listitem>
-                        <para>If they NEED to stay immune from further
-                        changes, then keep the TMX in /tm/enforce.</para>
+                        <para>If they <emphasis>need</emphasis> to stay immune
+                        from further changes, then keep the TMX in
+                        /tm/enforce.</para>
                       </listitem>
                     </itemizedlist></para>
                 </listitem>
               </orderedlist></para>
 
-            <para>Note: if TMX is removed before step 3, enforcements aren't
+            <para>Note that the behaviour is different than in tm/auto: if TMX
+            is removed from /tm/enforce before step 3, enforcements aren't
             kept at all.</para>
           </listitem>
         </varlistentry>

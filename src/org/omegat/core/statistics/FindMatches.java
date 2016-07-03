@@ -102,7 +102,7 @@ public class FindMatches {
     private final int maxCount;
 
     /** Result list. */
-    private List<NearString> result = new ArrayList<NearString>(OConsts.MAX_NEAR_STRINGS + 1);
+    private List<NearString> result;
 
     private final boolean searchExactlyTheSame;
     private String srcText;
@@ -141,7 +141,7 @@ public class FindMatches {
 
     public List<NearString> search(final String searchText, final boolean requiresTranslation,
             final boolean fillSimilarityData, final IStopped stop) throws StoppedException {
-        result.clear();
+        result = new ArrayList<>(OConsts.MAX_NEAR_STRINGS + 1);
 
         srcText = searchText;
         removedText = "";

@@ -519,9 +519,8 @@ public class ScriptingWindow extends JFrame {
 
             @Override
             protected void done() {
-                long start;
                 try {
-                    start = get();
+                    long start = get();
                     logResult(StringUtil.format(OStrings.getString("SCW_SCRIPT_DONE"), System.currentTimeMillis() - start));
                 } catch (CancellationException e) {
                     // TODO: Log cancellation?

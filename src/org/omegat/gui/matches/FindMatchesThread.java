@@ -30,7 +30,6 @@ package org.omegat.gui.matches;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.omegat.core.data.IProject;
@@ -78,11 +77,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
             return null;
         }
 
-        long before = 0;
-        if (LOGGER.isLoggable(Level.FINER)) {
-            // only if need to be logged
-            before = System.currentTimeMillis();
-        }
+        long before = System.currentTimeMillis();
 
         try {
             FindMatches finder = new FindMatches(project.getSourceTokenizer(), OConsts.MAX_NEAR_STRINGS, true, false);
@@ -92,12 +87,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
                             return isEntryChanged();
                         }
                     });
-
-            if (LOGGER.isLoggable(Level.FINER)) {
-                // only if need to be logged
-                long after = System.currentTimeMillis();
-                LOGGER.finer("Time for find matches: " + (after - before));
-            }
+            LOGGER.finer(() -> "Time for find matches: " + (System.currentTimeMillis() - before));
             return result;
         } catch (FindMatches.StoppedException ex) {
             throw new EntryChangedException();

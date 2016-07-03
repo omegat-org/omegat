@@ -33,7 +33,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.omegat.core.data.EntryKey;
-import org.omegat.util.Preferences;
 import org.omegat.util.TMXProp;
 
 /**
@@ -151,10 +150,6 @@ public class NearString {
         
         private final SORT_KEY key;
         
-        public ScoresComparator() {
-            this.key = Preferences.getPreferenceEnumDefault(Preferences.EXT_TMX_SORT_KEY, SORT_KEY.SCORE);
-        }
-        
         public ScoresComparator(SORT_KEY key) {
             this.key = key;
         }
@@ -213,27 +208,6 @@ public class NearString {
             default:
                 return s.scoreNoStem;
             }
-        }
-    }
-    
-    public static class NearStringComparator implements Comparator<NearString> {
-        
-        private final SORT_KEY key;
-        private final ScoresComparator c;
-        
-        public NearStringComparator() {
-            this.key = Preferences.getPreferenceEnumDefault(Preferences.EXT_TMX_SORT_KEY, SORT_KEY.SCORE);
-            this.c = new ScoresComparator(key);
-        }
-        
-        public NearStringComparator(SORT_KEY key) {
-            this.key = key;
-            this.c = new ScoresComparator(key);
-        }
-        
-        @Override
-        public int compare(NearString o1, NearString o2) {
-            return c.compare(o1.scores[0], o2.scores[0]);
         }
     }
 }

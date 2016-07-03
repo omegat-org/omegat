@@ -41,7 +41,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -63,6 +63,8 @@ import org.omegat.core.data.StringData;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.matching.DiffDriver.TextRun;
 import org.omegat.core.matching.NearString;
+import org.omegat.core.matching.NearString.SORT_KEY;
+import org.omegat.core.matching.NearString.ScoresComparator;
 import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
@@ -182,7 +184,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             scrollPane.notify(true);
         }
         
-        Collections.sort(newMatches, Collections.reverseOrder(new NearString.NearStringComparator()));
+        NearString.SORT_KEY key = Preferences.getPreferenceEnumDefault(Preferences.EXT_TMX_SORT_KEY, SORT_KEY.SCORE);
+        newMatches.sort(Comparator.comparing(ns -> ns.scores[0], new ScoresComparator(key).reversed()));
 
         matches.addAll(newMatches);
         delimiters.add(0);

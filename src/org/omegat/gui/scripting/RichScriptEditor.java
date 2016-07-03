@@ -192,31 +192,30 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
 
         JMenuItem item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_FIND"));
-        item.setAccelerator(KeyStroke.getKeyStroke("ctrl F"));
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, getToolkit().getMenuShortcutKeyMask()));
         item.addActionListener(new ShowFindDialogAction());
         menu.add(item);
 
         item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_REPLACE"));
-        item.setAccelerator(KeyStroke.getKeyStroke("ctrl H"));
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, getToolkit().getMenuShortcutKeyMask()));
         item.addActionListener(new ShowReplaceDialogAction());
         menu.add(item);
 
         item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_GOTO_LINE"));
-        item.setAccelerator(KeyStroke.getKeyStroke("ctrl L"));
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, getToolkit().getMenuShortcutKeyMask()));
         item.addActionListener(new GoToLineAction());
         menu.add(item);
 
         menu.addSeparator();
 
-        int ctrl = getToolkit().getMenuShortcutKeyMask();
-        int shift = InputEvent.SHIFT_MASK;
-        KeyStroke ks = KeyStroke.getKeyStroke(KeyEvent.VK_F, ctrl | shift);
+        int metaShiftMask = getToolkit().getMenuShortcutKeyMask() | InputEvent.SHIFT_MASK;
+        KeyStroke ks = KeyStroke.getKeyStroke(KeyEvent.VK_F, metaShiftMask);
         Action a = m_csp.addBottomComponent(ks, m_findToolBar);
         a.putValue(Action.NAME, OStrings.getString("SCW_MENU_SHOW_FIND_BAR"));
         menu.add(new JMenuItem(a));
-        ks = KeyStroke.getKeyStroke(KeyEvent.VK_H, ctrl | shift);
+        ks = KeyStroke.getKeyStroke(KeyEvent.VK_H, metaShiftMask);
         a = m_csp.addBottomComponent(ks, m_replaceToolBar);
         a.putValue(Action.NAME, OStrings.getString("SCW_MENU_SHOW_REPLACE_BAR"));
         menu.add(new JMenuItem(a));

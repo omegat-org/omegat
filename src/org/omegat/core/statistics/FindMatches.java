@@ -142,18 +142,21 @@ public class FindMatches {
 
         originalText = searchText;
         srcText = searchText;
+        removedText = "";
 
-        this.removedText = "";
         // remove part that is to be removed according to user settings.
         // Rationale: it might be a big string influencing the 'editing distance', while it is not really part
         // of the translatable text
         if (removePattern != null) {
+            StringBuilder removedBuffer = new StringBuilder();
             Matcher removeMatcher = removePattern.matcher(srcText);
             while (removeMatcher.find()) {
-                removedText += srcText.substring(removeMatcher.start(), removeMatcher.end());
+                removedBuffer.append(removeMatcher.group());
             }
             srcText = removeMatcher.replaceAll("");
+            removedText = removedBuffer.toString();
         }
+
         // get tokens for original string
         strTokensStem = tokenizeStem(srcText);
         strTokensNoStem = tokenizeNoStem(srcText);
@@ -288,16 +291,16 @@ public class FindMatches {
             final List<TMXProp> props) {
         // remove part that is to be removed prior to tokenize
         String realSource = source;
-        String entryRemovedText = "";
         int realPenaltyForRemoved = 0;
-        if (this.removePattern != null) {
+        if (removePattern != null) {
+            StringBuilder entryRemovedText = new StringBuilder();
             Matcher removeMatcher = removePattern.matcher(realSource);
             while (removeMatcher.find()) {
-                entryRemovedText += source.substring(removeMatcher.start(), removeMatcher.end());
+                entryRemovedText.append(removeMatcher.group());
             }
             realSource = removeMatcher.replaceAll("");
             // calculate penalty if something has been removed, otherwise different strings get 100% match.
-            if (!entryRemovedText.equals(this.removedText)) {
+            if (!entryRemovedText.toString().equals(removedText)) {
                 // penalty for different 'removed'-part
                 realPenaltyForRemoved = PENALTY_FOR_REMOVED;
             }

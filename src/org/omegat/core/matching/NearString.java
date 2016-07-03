@@ -34,6 +34,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.omegat.core.data.EntryKey;
+import org.omegat.util.StringUtil;
 import org.omegat.util.TMXProp;
 
 /**
@@ -98,6 +99,11 @@ public class NearString {
         merged.projs = projs.toArray(new String[projs.size()]);
         merged.scores = scores.toArray(new Scores[scores.size()]);
         return merged;
+    }
+
+    @Override
+    public String toString() {
+        return String.join(" ", StringUtil.truncate(source, 20), scores[0].toString(), "x" + scores.length);
     }
 
     public EntryKey key;

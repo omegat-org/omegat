@@ -34,7 +34,6 @@ import java.util.logging.Logger;
 
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.events.IStopped;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.statistics.FindMatches;
 import org.omegat.gui.common.EntryInfoSearchThread;
@@ -80,13 +79,8 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         long before = System.currentTimeMillis();
 
         try {
-            FindMatches finder = new FindMatches(project.getSourceTokenizer(), OConsts.MAX_NEAR_STRINGS, true, false);
-            List<NearString> result = finder.search(project, processedEntry.getSrcText(), true, true,
-                    new IStopped() {
-                        public boolean isStopped() {
-                            return isEntryChanged();
-                        }
-                    });
+            FindMatches finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, true, false);
+            List<NearString> result = finder.search(processedEntry.getSrcText(), true, true, this::isEntryChanged);
             LOGGER.finer(() -> "Time for find matches: " + (System.currentTimeMillis() - before));
             return result;
         } catch (FindMatches.StoppedException ex) {

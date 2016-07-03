@@ -85,8 +85,6 @@ public class FindMatches {
     private static final int PENALTY_FOR_REMOVED = 5;
     private static final int SUBSEGMENT_MATCH_THRESHOLD = 85;
 
-    private static final boolean ALLOW_PARTIALY_MATCH = true;
-
     private static final Pattern SEARCH_FOR_PENALTY = Pattern.compile("penalty-(\\d+)");
 
     private static final String ORPHANED_FILE_NAME = OStrings.getString("CT_ORPHAN_STRINGS");
@@ -98,6 +96,7 @@ public class FindMatches {
      */
     private final Pattern removePattern = PatternConsts.getRemovePattern();
 
+    private final IProject project;
     private final ITokenizer tok;
     private final Locale srcLocale;
     private final int maxCount;
@@ -120,7 +119,7 @@ public class FindMatches {
     private Token[] strTokensAll;
 
     // This finder used for search separate segment matches
-    FindMatches separateSegmentMatcher;
+    private FindMatches separateSegmentMatcher;
 
     /**
      * @param searchExactlyTheSame
@@ -128,19 +127,20 @@ public class FindMatches {
      *            separate sentence match in paragraph project, i.e. where source is just part of current
      *            source.
      */
-    public FindMatches(ITokenizer sourceTokenizer, int maxCount, boolean allowSeparateSegmentMatch, boolean searchExactlyTheSame) {
-        tok = sourceTokenizer;
-        srcLocale = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
+    public FindMatches(IProject project, int maxCount, boolean allowSeparateSegmentMatch,
+            boolean searchExactlyTheSame) {
+        this.project = project;
+        this.tok = project.getSourceTokenizer();
+        this.srcLocale = project.getProjectProperties().getSourceLanguage().getLocale();
         this.maxCount = maxCount;
         this.searchExactlyTheSame = searchExactlyTheSame;
-        if (allowSeparateSegmentMatch) {
-            separateSegmentMatcher = new FindMatches(sourceTokenizer, 1, false, true);
+        if (allowSeparateSegmentMatch && !project.getProjectProperties().isSentenceSegmentingEnabled()) {
+            separateSegmentMatcher = new FindMatches(project, 1, false, true);
         }
     }
 
-    public List<NearString> search(final IProject project, final String searchText,
-            final boolean requiresTranslation, final boolean fillSimilarityData, final IStopped stop)
-            throws StoppedException {
+    public List<NearString> search(final String searchText, final boolean requiresTranslation,
+            final boolean fillSimilarityData, final IStopped stop) throws StoppedException {
         result.clear();
 
         srcText = searchText;
@@ -229,8 +229,7 @@ public class FindMatches {
             }
         }
 
-        if (ALLOW_PARTIALY_MATCH && separateSegmentMatcher != null
-                && !project.getProjectProperties().isSentenceSegmentingEnabled()) {
+        if (separateSegmentMatcher != null) {
             // split paragraph even when segmentation disabled, then find matches for every segment
             List<StringBuilder> spaces = new ArrayList<StringBuilder>();
             List<Rule> brules = new ArrayList<Rule>();
@@ -245,8 +244,8 @@ public class FindMatches {
                     String onesrc = segments.get(i);
 
                     // find match for separate segment
-                    List<NearString> segmentMatch = separateSegmentMatcher.search(project, onesrc,
-                            requiresTranslation, false, stop);
+                    List<NearString> segmentMatch = separateSegmentMatcher.search(onesrc, requiresTranslation, false,
+                            stop);
                     if (!segmentMatch.isEmpty()
                             && segmentMatch.get(0).scores[0].score >= SUBSEGMENT_MATCH_THRESHOLD) {
                         fsrc.add(segmentMatch.get(0).source);

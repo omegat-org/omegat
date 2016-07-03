@@ -28,7 +28,7 @@
 
 package org.omegat.gui.matches;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -69,7 +69,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
     protected List<NearString> search() throws Exception {
         if (!project.isProjectLoaded()) {
             // project is closed
-            return new ArrayList<NearString>();
+            return Collections.emptyList();
         }
 
         if (project.getSourceTokenizer() == null) {

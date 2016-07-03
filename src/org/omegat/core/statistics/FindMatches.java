@@ -374,19 +374,14 @@ public class FindMatches {
             return true;
         }
         NearString st = result.get(result.size() - 1);
-        int chance = checkScore(st.scores[0].score, simStem);
+        int chance = Integer.compare(st.scores[0].score, simStem);
         if (chance == 0) {
-            chance = checkScore(st.scores[0].scoreNoStem, simNoStem);
+            chance = Integer.compare(st.scores[0].scoreNoStem, simNoStem);
         }
         if (chance == 0) {
-            chance = checkScore(st.scores[0].adjustedScore, simExactly);
+            chance = Integer.compare(st.scores[0].adjustedScore, simExactly);
         }
         return chance != 1;
-    }
-
-    private int checkScore(final int storedScore, final int checkedStore) {
-        return storedScore < checkedStore ? -1
-                : storedScore > checkedStore ? 1 : 0;
     }
 
     /**

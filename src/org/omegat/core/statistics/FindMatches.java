@@ -106,7 +106,6 @@ public class FindMatches {
     private List<NearString> result = new ArrayList<NearString>(OConsts.MAX_NEAR_STRINGS + 1);
 
     private final boolean searchExactlyTheSame;
-    private String originalText;
     private String srcText;
 
     /**
@@ -144,7 +143,6 @@ public class FindMatches {
             throws StoppedException {
         result.clear();
 
-        originalText = searchText;
         srcText = searchText;
         removedText = "";
 
@@ -172,7 +170,7 @@ public class FindMatches {
             project.iterateByDefaultTranslations(new DefaultTranslationsIterator() {
                 public void iterate(String source, TMXEntry trans) {
                     checkStopped(stop);
-                    if (!searchExactlyTheSame && source.equals(originalText)) {
+                    if (!searchExactlyTheSame && source.equals(searchText)) {
                         // skip original==original entry comparison
                         return;
                     }
@@ -189,7 +187,7 @@ public class FindMatches {
         project.iterateByMultipleTranslations(new MultipleTranslationsIterator() {
             public void iterate(EntryKey source, TMXEntry trans) {
                 checkStopped(stop);
-                if (!searchExactlyTheSame && source.sourceText.equals(originalText)) {
+                if (!searchExactlyTheSame && source.sourceText.equals(searchText)) {
                     // skip original==original entry comparison
                     return;
                 }

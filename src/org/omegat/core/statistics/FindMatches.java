@@ -398,8 +398,7 @@ public class FindMatches {
         for (int i = 0; i < result.size(); i++) {
             NearString st = result.get(i);
             if (source.equals(st.source)
-                    && (translation == null && st.translation == null || translation != null
-                            && translation.equals(st.translation))) {
+                    && (translation == st.translation || translation != null && translation.equals(st.translation))) {
                 // Consolidate identical matches from different sources into a single NearString with
                 // multiple project entries.
                 result.set(i, NearString.merge(st, key, source, translation, comesFrom, fuzzy, similarity,

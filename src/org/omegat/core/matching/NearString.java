@@ -29,6 +29,7 @@
 package org.omegat.core.matching;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -75,31 +76,28 @@ public class NearString {
             MATCH_SOURCE comesFrom, final boolean fuzzyMark, final int nearScore, final int nearScoreNoStem,
             final int adjustedScore, final byte[] nearData, final String projName, final String creator,
             final long creationDate, final String changer, final long changedDate, final List<TMXProp> props) {
-        
-        List<String> projs = new ArrayList<String>();
-        List<Scores> scores = new ArrayList<Scores>();
-        for (String p : ns.projs) {
-            projs.add(p);
-        }
-        for (Scores s : ns.scores) {
-            scores.add(s);
-        }
-        
+
+        List<String> projs = new ArrayList<>();
+        List<Scores> scores = new ArrayList<>();
+        projs.addAll(Arrays.asList(ns.projs));
+        scores.addAll(Arrays.asList(ns.scores));
+
+        NearString merged;
         if (nearScore > ns.scores[0].score) {
+            merged = new NearString(key, source, translation, comesFrom, fuzzyMark, nearScore,
+                    nearScoreNoStem, adjustedScore, nearData, null, creator, creationDate, changer, changedDate, props);
             projs.add(0, projName);
-            NearString merged = new NearString(key, source, translation, comesFrom, fuzzyMark, nearScore, nearScoreNoStem,
-                    adjustedScore, nearData, null, creator, creationDate, changer, changedDate, props);
             scores.add(0, merged.scores[0]);
-            merged.projs = projs.toArray(new String[projs.size()]);
-            merged.scores = scores.toArray(new Scores[scores.size()]);
-            return merged;
         } else {
+            merged = new NearString(ns.key, ns.source, ns.translation, ns.comesFrom, ns.fuzzyMark, nearScore,
+                    nearScoreNoStem, adjustedScore, ns.attr, null, ns.creator, ns.creationDate, ns.changer,
+                    ns.changedDate, ns.props);
             projs.add(projName);
-            scores.add(new Scores(nearScore, nearScoreNoStem, adjustedScore));
-            ns.projs = projs.toArray(new String[projs.size()]);
-            ns.scores = scores.toArray(new Scores[scores.size()]);
-            return ns;
+            scores.add(merged.scores[0]);
         }
+        merged.projs = projs.toArray(new String[projs.size()]);
+        merged.scores = scores.toArray(new Scores[scores.size()]);
+        return merged;
     }
 
     public EntryKey key;

@@ -29,10 +29,10 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.text.BreakIterator;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -60,12 +60,9 @@ import org.omegat.util.Token;
  */
 public abstract class BaseTokenizer implements ITokenizer {
 
-    private static final Map<String, Token[]> tokenCacheNone = new HashMap<String, Token[]>(
-            5000);
-    private static final Map<String, Token[]> tokenCacheMatching = new HashMap<String, Token[]>(
-            5000);
-    private static final Map<String, Token[]> tokenCacheGlossary = new HashMap<String, Token[]>(
-            5000);
+    private static final Map<String, Token[]> tokenCacheNone = new ConcurrentHashMap<String, Token[]>(5000);
+    private static final Map<String, Token[]> tokenCacheMatching = new ConcurrentHashMap<String, Token[]>(5000);
+    private static final Map<String, Token[]> tokenCacheGlossary = new ConcurrentHashMap<String, Token[]>(5000);
 
     protected static final String[] EMPTY_STRING_LIST = new String[0];
     protected static final Token[] EMPTY_TOKENS_LIST = new Token[0];
@@ -88,15 +85,9 @@ public abstract class BaseTokenizer implements ITokenizer {
             @Override
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
                 if (eventType == PROJECT_CHANGE_TYPE.CLOSE) {
-                    synchronized (tokenCacheNone) {
-                        tokenCacheNone.clear();
-                    }
-                    synchronized (tokenCacheMatching) {
-                        tokenCacheMatching.clear();
-                    }
-                    synchronized (tokenCacheGlossary) {
-                        tokenCacheGlossary.clear();
-                    }
+                    tokenCacheNone.clear();
+                    tokenCacheMatching.clear();
+                    tokenCacheGlossary.clear();
                 }
             }
         });
@@ -121,10 +112,7 @@ public abstract class BaseTokenizer implements ITokenizer {
         default:
             throw new RuntimeException("No cache for specified stemming mode");
         }
-        Token[] result;
-        synchronized (cache) {
-            result = cache.get(strOrig);
-        }
+        Token[] result = cache.get(strOrig);
         if (result != null) {
             return result;
         }
@@ -135,9 +123,7 @@ public abstract class BaseTokenizer implements ITokenizer {
                 true);
 
         // put result in the cache
-        synchronized (cache) {
-            cache.put(strOrig, result);
-        }
+        cache.put(strOrig, result);
         return result;
     }
     

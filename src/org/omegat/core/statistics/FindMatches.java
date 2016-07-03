@@ -419,9 +419,8 @@ public class FindMatches {
                         break;
                     }
                     // Patch contributed by Antonio Vilei
-                    String entrySource = srcText;
                     // text with the same case has precedence
-                    if (similarity == 100 && !st.source.equals(entrySource) && source.equals(entrySource)) {
+                    if (similarity == 100 && !st.source.equals(srcText) && source.equals(srcText)) {
                         break;
                     }
                 }

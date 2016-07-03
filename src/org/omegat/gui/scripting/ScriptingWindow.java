@@ -45,6 +45,8 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
 
 import javax.script.ScriptEngineFactory;
 import javax.swing.AbstractAction;
@@ -68,6 +70,7 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.ListModel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -505,10 +508,28 @@ public class ScriptingWindow extends JFrame {
 
         logResult(StringUtil.format(OStrings.getString("SCW_RUNNING_SCRIPT"), scriptSource));
 
-        long start = System.currentTimeMillis();
-        executeScriptFile(m_currentScriptItem, false);
+        new SwingWorker<Long, Object>() {
 
-        logResult(StringUtil.format(OStrings.getString("SCW_SCRIPT_DONE"), System.currentTimeMillis() - start));
+            @Override
+            protected Long doInBackground() throws Exception {
+                long start = System.currentTimeMillis();
+                executeScriptFile(m_currentScriptItem, false);
+                return start;
+            }
+
+            @Override
+            protected void done() {
+                long start;
+                try {
+                    start = get();
+                    logResult(StringUtil.format(OStrings.getString("SCW_SCRIPT_DONE"), System.currentTimeMillis() - start));
+                } catch (CancellationException e) {
+                    // TODO: Log cancellation?
+                } catch (InterruptedException | ExecutionException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.execute();
     }
 
     public void executeScriptFile(ScriptItem scriptItem, boolean forceFromFile) {

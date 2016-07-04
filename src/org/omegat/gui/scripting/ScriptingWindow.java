@@ -371,7 +371,7 @@ public class ScriptingWindow extends JFrame {
          // RichScriptEditor not present, fallback to the standard editor
             logResult("RichScriptEditor not present, fallback to the standard editor");
         } catch (InstantiationException | IllegalAccessException e) {
-            logResult("Error loading RichScriptEditor: " + e.getMessage());
+            logResult("Error loading RichScriptEditor: ", e);
         }
 
         return new StandardScriptEditor();
@@ -584,6 +584,9 @@ public class ScriptingWindow extends JFrame {
             logResult(e.getMessage());
             //e.printStackTrace();
         }
+
+    private void logResult(String s, Throwable t) {
+        logResult(s + "\n" + t.getMessage());
     }
 
     private void logResult(String s) {
@@ -757,8 +760,7 @@ public class ScriptingWindow extends JFrame {
                 logResult(StringUtil.format(OStrings.getString("SCW_SAVE_OK"),
                         m_currentScriptItem.getFile().getAbsolutePath()));
             } catch (IOException ex) {
-                logResult(OStrings.getString("SCW_SAVE_ERROR"));
-                logResult(ex.getMessage());
+                logResult(OStrings.getString("SCW_SAVE_ERROR"), ex);
             }
         }
 

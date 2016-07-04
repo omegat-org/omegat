@@ -43,15 +43,24 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
 import org.eclipse.jgit.api.errors.JGitInternalException;
 import org.eclipse.jgit.api.errors.TransportException;
+import org.eclipse.jgit.diff.DiffEntry;
+import org.eclipse.jgit.dircache.DirCache;
+import org.eclipse.jgit.dircache.DirCacheIterator;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.ObjectReader;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.StoredConfig;
 import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.revwalk.RevTree;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.RemoteRefUpdate.Status;
+import org.eclipse.jgit.treewalk.AbstractTreeIterator;
+import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.util.FileUtil;
@@ -201,6 +210,11 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 throw new RuntimeException("Version changed");
             }
         }
+        if (indexIsEmpty(DirCache.read(repository))) {
+            // Nothing was actually added to the index so we can just return.
+            Log.logInfoRB("GIT_NO_CHANGES", "upload");
+            return null;
+        }
         Log.logInfoRB("GIT_START", "upload");
         try (Git git = new Git(repository)) {
             RevCommit commit = git.commit().setMessage(comment).call();
@@ -225,6 +239,28 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             } else {
                 throw ex;
             }
+        }
+    }
+
+    private boolean indexIsEmpty(DirCache dc) throws Exception {
+        DirCacheIterator dci = new DirCacheIterator(dc);
+        AbstractTreeIterator old = prepareTreeParser(repository, repository.resolve(Constants.HEAD));
+        try (Git git = new Git(repository)) {
+            List<DiffEntry> diffs = git.diff().setOldTree(old).setNewTree(dci).call();
+            return diffs.isEmpty();
+        }
+    }
+
+    private static AbstractTreeIterator prepareTreeParser(Repository repository, ObjectId objId) throws Exception {
+        // from the commit we can build the tree which allows us to construct
+        // the TreeParser
+        try (RevWalk walk = new RevWalk(repository)) {
+            RevCommit commit = walk.parseCommit(objId);
+            RevTree tree = walk.parseTree(commit.getTree().getId());
+            CanonicalTreeParser treeParser = new CanonicalTreeParser();
+            ObjectReader reader = repository.newObjectReader();
+            treeParser.reset(reader, tree.getId());
+            return treeParser;
         }
     }
 

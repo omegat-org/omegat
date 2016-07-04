@@ -422,6 +422,14 @@ public class ScriptingWindow extends JFrame {
         });
         panel.add(m_btnRunScript);
 
+        m_btnCancelScript = new JButton();
+        Mnemonics.setLocalizedText(m_btnCancelScript, OStrings.getString("SCW_CANCEL_SCRIPT"));
+        m_btnCancelScript.setToolTipText(OStrings.getString("SCW_CANCEL_BUTTON_TOOLTIP"));
+        m_btnCancelScript.setAlignmentX(Component.LEFT_ALIGNMENT);
+        m_btnCancelScript.setHorizontalAlignment(SwingConstants.LEFT);
+        m_btnCancelScript.addActionListener(e -> cancelCurrentScript());
+        panel.add(m_btnCancelScript);
+
         for (int i = 0; i < NUMBERS_OF_QUICK_SCRIPTS; i++) {
             final int index = i;
             final int scriptKey = scriptKey(index);
@@ -1008,6 +1016,7 @@ public class ScriptingWindow extends JFrame {
     private JEditorPane m_txtResult;
     private AbstractScriptEditor m_txtScriptEditor;
     private JButton m_btnRunScript;
+    private JButton m_btnCancelScript;
     private JMenuBar mb;
 
     private ScriptWorker scriptWorker;

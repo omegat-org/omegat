@@ -43,6 +43,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CancellationException;
@@ -280,7 +281,7 @@ public class ScriptingWindow extends JFrame {
         logResult(StringUtil.format(OStrings.getString("SCW_QUICK_RUN"), (index + 1)));
         ScriptItem scriptFile = new ScriptItem(new File(m_scriptsDirectory, m_quickScripts[index]));
 
-        executeScriptFile(scriptFile, true);
+        executeScriptFile(scriptFile);
     }
 
     private void addRunShortcutToOmegaT() {
@@ -506,84 +507,126 @@ public class ScriptingWindow extends JFrame {
             scriptSource = m_currentScriptItem.getFile().getAbsolutePath();
         }
 
+        String scriptString = null;
+        if (m_txtScriptEditor.getTextArea().getText().trim().isEmpty()) {
+            try {
+                scriptString = m_currentScriptItem.getText();
+                m_txtScriptEditor.getTextArea().setText(scriptString);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            scriptString = m_txtScriptEditor.getTextArea().getText();
+        }
+
         logResult(StringUtil.format(OStrings.getString("SCW_RUNNING_SCRIPT"), scriptSource));
 
-        new SwingWorker<Long, Object>() {
-
-            @Override
-            protected Long doInBackground() throws Exception {
-                long start = System.currentTimeMillis();
-                executeScriptFile(m_currentScriptItem, false);
-                return start;
-            }
-
-            @Override
-            protected void done() {
-                try {
-                    long start = get();
-                    logResult(StringUtil.format(OStrings.getString("SCW_SCRIPT_DONE"), System.currentTimeMillis() - start));
-                } catch (CancellationException e) {
-                    // TODO: Log cancellation?
-                } catch (InterruptedException | ExecutionException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.execute();
+        executeScript(scriptString, m_currentScriptItem);
     }
 
-    public void executeScriptFile(ScriptItem scriptItem, boolean forceFromFile) {
-        executeScriptFile(scriptItem, forceFromFile, null);
-    }
+    private class ScriptWorker extends SwingWorker<String, Object> {
 
-    public void executeScriptFile(ScriptItem scriptItem, boolean forceFromFile,
-            Map<String, Object> additionalBindings) {
-        try {
-            String scriptString;
-            if (forceFromFile) {
-                scriptString = scriptItem.getText();
-            } else if (m_txtScriptEditor.getTextArea().getText().trim().isEmpty()) {
-                scriptString = scriptItem.getText();
-                m_txtScriptEditor.getTextArea().setText(scriptString);
-            } else {
-                scriptString = m_txtScriptEditor.getTextArea().getText();
-            }
+        private final String scriptString;
+        private final ScriptItem scriptItem;
+        private final Map<String, Object> bindings;
+        private long start;
 
-            if (!scriptString.endsWith("\n")) {
-                scriptString += "\n";
-            }
-
-            Map<String, Object> bindings = new HashMap<String, Object>();
-            if (additionalBindings != null) {
-                bindings.putAll(additionalBindings);
-            }
-            bindings.put(ScriptRunner.VAR_CONSOLE, new IScriptLogger() {
-                @Override
-                public void print(Object o) {
-                    Document doc = m_txtResult.getDocument();
-
-                    try {
-                        doc.insertString(doc.getLength(), o.toString(), null);
-                    } catch (BadLocationException e) {
-                        /* empty */
-                    }
-                }
-                @Override
-                public void println(Object o) {
-                    print(o.toString() + "\n");
-                }
-                @Override
-                public void clear() {
-                    m_txtResult.setText("");
-                }
-            });
-
-            String result = ScriptRunner.executeScript(scriptString, scriptItem, bindings);
-            logResult(result);
-        } catch (Throwable e) {
-            logResult(OStrings.getString("SCW_SCRIPT_ERROR"));
-            logResult(e.getMessage());
-            //e.printStackTrace();
+        public ScriptWorker(String scriptString, ScriptItem scriptItem, Map<String, Object> bindings) {
+            this.scriptString = scriptString;
+            this.scriptItem = scriptItem;
+            this.bindings = bindings;
         }
+
+        @Override
+        protected String doInBackground() throws Exception {
+            start = System.currentTimeMillis();
+            return ScriptRunner.executeScript(scriptString, scriptItem, bindings);
+        }
+
+        @Override
+        protected void done() {
+            try {
+                String result = get();
+                logResult(result);
+                logResult(StringUtil.format(OStrings.getString("SCW_SCRIPT_DONE"), System.currentTimeMillis() - start));
+            } catch (CancellationException e) {
+                logResult(StringUtil.format(OStrings.getString("SCW_SCRIPT_CANCELED"),
+                        System.currentTimeMillis() - start));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                logResult(OStrings.getString("SCW_SCRIPT_ERROR"), e);
+            }
+        }
+    }
+
+    public void executeScript(String scriptString, ScriptItem scriptItem) {
+        executeScript(scriptString, scriptItem, Collections.emptyMap());
+    }
+
+    public void executeScriptFile(ScriptItem scriptItem) {
+        executeScriptFile(scriptItem, Collections.emptyMap());
+    }
+
+    public void executeScriptFile(ScriptItem scriptItem, Map<String, Object> additionalBindings) {
+        try {
+            String scriptString = scriptItem.getText();
+            executeScript(scriptString, scriptItem, additionalBindings);
+        } catch (IOException e) {
+            // TODO: Do we really want to handle the exception here, like this?
+            // This method can be called in instances when the Scripting Window
+            // is not visible, so it might make more sense to let the caller
+            // handle the exception.
+            logResult(StringUtil.format(OStrings.getString("SCW_SCRIPT_LOAD_ERROR"), scriptItem.getFile()), e);
+        }
+    }
+
+    public void executeScript(String scriptString, ScriptItem scriptItem, Map<String, Object> additionalBindings) {
+
+        if (!scriptString.endsWith("\n")) {
+            scriptString += "\n";
+        }
+
+        Map<String, Object> bindings = new HashMap<String, Object>(additionalBindings);
+        bindings.put(ScriptRunner.VAR_CONSOLE, new IScriptLogger() {
+            @Override
+            public void print(Object o) {
+                logResult(m_txtResult, o.toString());
+            }
+
+            @Override
+            public void println(Object o) {
+                print(o.toString() + "\n");
+            }
+
+            @Override
+            public void clear() {
+                m_txtResult.setText("");
+            }
+        });
+
+        cancelCurrentScript();
+
+        scriptWorker = new ScriptWorker(scriptString, scriptItem, bindings);
+        scriptWorker.execute();
+
+    }
+
+    /**
+     * Cancel the currently running script, if any.
+     * <p>
+     * <b>Note!</b> Canceling the worker does not do anything in and of itself.
+     * The running script must poll for interruption with e.g.
+     * {@link java.lang.Thread#interrupted()}.
+     * 
+     * @see <a href="http://stackoverflow.com/a/24875881/448068">StackOverflow
+     *      answer about interrupting scripts</a>
+     */
+    private void cancelCurrentScript() {
+        if (scriptWorker != null) {
+            scriptWorker.cancel(true);
+        }
+    }
 
     private void logResult(String s, Throwable t) {
         logResult(s + "\n" + t.getMessage());
@@ -966,7 +1009,9 @@ public class ScriptingWindow extends JFrame {
     private AbstractScriptEditor m_txtScriptEditor;
     private JButton m_btnRunScript;
     private JMenuBar mb;
-    
+
+    private ScriptWorker scriptWorker;
+
     protected ScriptsMonitor monitor;
 
     private File m_scriptsDirectory;

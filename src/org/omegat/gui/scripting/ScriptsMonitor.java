@@ -86,7 +86,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
             addEventScripts(EventType.APPLICATION_STARTUP);
             ArrayList<ScriptItem> scripts = m_eventsScript.get(EventType.APPLICATION_STARTUP);
             for (ScriptItem si : scripts) {
-                m_scriptingWindow.executeScriptFile(si, true);
+                m_scriptingWindow.executeScriptFile(si);
             }
             scripts.clear();
         }
@@ -148,7 +148,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 				binding.put("activeFileName", activeFileName);
 				for (ScriptItem si : m_eventsScript.get(EventType.NEW_FILE))
 				{
-					m_scriptingWindow.executeScriptFile(si, true, binding);
+                    m_scriptingWindow.executeScriptFile(si, binding);
 				}
 			}
 
@@ -159,7 +159,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 
 				for (ScriptItem si : m_eventsScript.get(EventType.ENTRY_ACTIVATED))
 				{
-					m_scriptingWindow.executeScriptFile(si, true, binding);
+                    m_scriptingWindow.executeScriptFile(si, binding);
 				}
 			}
 		};
@@ -182,7 +182,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 				binding.put("eventType", eventType);
 
 				for (ScriptItem si : m_eventsScript.get(EventType.PROJECT_CHANGED)) {
-					m_scriptingWindow.executeScriptFile(si, true, binding);
+                    m_scriptingWindow.executeScriptFile(si, binding);
 				}				
 			}
 		};
@@ -212,7 +212,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 			@Override
 			public void onApplicationShutdown() {
 				for (ScriptItem si : m_eventsScript.get(EventType.APPLICATION_SHUTDOWN)) {
-					m_scriptingWindow.executeScriptFile(si, true);
+                    m_scriptingWindow.executeScriptFile(si);
 				}
 			}
 		};
@@ -235,7 +235,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 				binding.put("newWord", newWord);
 				
 				for (ScriptItem si : m_eventsScript.get(EventType.NEW_WORD)) {
-					m_scriptingWindow.executeScriptFile(si, true, binding);
+                    m_scriptingWindow.executeScriptFile(si, binding);
 				}
 			}
 		};

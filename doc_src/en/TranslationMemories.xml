@@ -161,11 +161,26 @@
             <para>If it is clear from the very start, that translations in a
             given TM (or TMs) are all correct, one can put them into
             the<emphasis role="bold"> tm/auto</emphasis> folder and avoid
-            confirming a lot of<emphasis> [fuzzy]</emphasis> cases. This will
-            effectively <emphasis role="bold">pre-translate </emphasis>the
-            source text: all the segments in the source text, for which
-            translations can be found in those "auto" TMs, will land in the
-            main TM of the project without any user intervention.</para>
+            confirming a lot of<emphasis> [fuzzy]</emphasis> cases.</para>
+
+            <para><orderedlist>
+                <listitem>
+                  <para>Put the TMX in /tm/auto.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Open the project. The changes are displayed.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Make a slight change anywhere in the project. This
+                  modifies <filename>project_save.tmx</filename> (by adding
+                  proper Translation Units from "auto" TMX)</para>
+                </listitem>
+              </orderedlist></para>
+
+            <para>Note: if TMX is removed from /tm/auto before step 3, no
+            extra Translation Unit is added.</para>
           </listitem>
         </varlistentry>
 
@@ -178,8 +193,40 @@
             /tm/enforce to overwrite existing default translations
             unconditionally.</para>
 
-            <para>Overwriting is operating until the TMX is removed from
-            /tm/enforce.</para>
+            <para><orderedlist>
+                <listitem>
+                  <para>Put the TMX in /tm/enforce.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Open the project. The changes are displayed.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Make a slight change anywhere in the project. This
+                  modifies <filename>project_save.tmx</filename>.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Make decision about immunity of the enforced
+                  segments:<itemizedlist>
+                      <listitem>
+                        <para>If they <emphasis>don't need</emphasis> to stay
+                        immune from further changes, then remove the TMX from
+                        /tm/enforce.</para>
+                      </listitem>
+
+                      <listitem>
+                        <para>If they <emphasis>need</emphasis> to stay immune
+                        from further changes, then keep the TMX in
+                        /tm/enforce.</para>
+                      </listitem>
+                    </itemizedlist></para>
+                </listitem>
+              </orderedlist></para>
+
+            <para>Note: if TMX is removed from /tm/enforce before step 3,
+            enforcements aren't kept at all.</para>
           </listitem>
         </varlistentry>
 

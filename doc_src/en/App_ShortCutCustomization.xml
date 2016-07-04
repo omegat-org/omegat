@@ -161,14 +161,6 @@
           </row>
 
           <row>
-            <entry>Open</entry>
-
-            <entry><keycap>Ctrl+O</keycap></entry>
-
-            <entry>projectOpenMenuItem</entry>
-          </row>
-
-          <row>
             <entry>Download Team Project</entry>
 
             <entry/>
@@ -177,7 +169,23 @@
           </row>
 
           <row>
-            <entry>Import Source Files...</entry>
+            <entry>Open</entry>
+
+            <entry><keycap>Ctrl+O</keycap></entry>
+
+            <entry>projectOpenMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Open Recent Project</entry>
+
+            <entry/>
+
+            <entry>projectOpenRecentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Copy Files to Source Folder...</entry>
 
             <entry/>
 
@@ -185,7 +193,7 @@
           </row>
 
           <row>
-            <entry>Import From MediaWiki...</entry>
+            <entry>Download MediaWiki Page...</entry>
 
             <entry/>
 
@@ -246,6 +254,70 @@
             <entry><keycap>Ctrl+L</keycap></entry>
 
             <entry>viewFileListMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Access Project Contents/Root</entry>
+
+            <entry/>
+
+            <entry>projectAccessRootMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Access Project Contents/Dictionaries</entry>
+
+            <entry/>
+
+            <entry>projectAccessDictionaryMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Access Project Contents/Glossaries</entry>
+
+            <entry/>
+
+            <entry>projectAccessGlossaryMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Access Project Contents/Source Files</entry>
+
+            <entry/>
+
+            <entry>projectAccessSourceMenuItem </entry>
+          </row>
+
+          <row>
+            <entry>Access Project Contents/Target Files</entry>
+
+            <entry/>
+
+            <entry>projectAccessTargetMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Access Project Contents/Current Source Document</entry>
+
+            <entry/>
+
+            <entry>projectAccessCurrentSourceDocumentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Access Project Contents/Current Target Document</entry>
+
+            <entry/>
+
+            <entry>projectAccessCurrentTargetDocumentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Access Project Contents/Writeable Glossary</entry>
+
+            <entry/>
+
+            <entry>projectAccessWriteableGlossaryMenuItem</entry>
           </row>
 
           <row>
@@ -381,11 +453,59 @@
           </row>
 
           <row>
+            <entry/>
+
+            <entry><keycap>Ctrl+Shift+F</keycap></entry>
+
+            <entry>findInProjectReuseLastWindow</entry>
+          </row>
+
+          <row>
             <entry>Search and Replace...</entry>
 
             <entry><keycap>Ctrl+K</keycap></entry>
 
             <entry>editReplaceInProjectMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Switch Case To/Lower Case</entry>
+
+            <entry/>
+
+            <entry>lowerCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Switch Case To/Upper Case</entry>
+
+            <entry/>
+
+            <entry>upperCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Switch Case To/Title Case</entry>
+
+            <entry/>
+
+            <entry>titleCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Switch Case To/Sentence Case</entry>
+
+            <entry/>
+
+            <entry>sentenceCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Switch Case To/Cycle</entry>
+
+            <entry><keycap>Shift+F3</keycap></entry>
+
+            <entry>cycleSwitchCaseMenuItem</entry>
           </row>
 
           <row>
@@ -445,38 +565,6 @@
           </row>
 
           <row>
-            <entry>Switch Case To/Lower Case</entry>
-
-            <entry/>
-
-            <entry>lowerCaseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Switch Case To/Upper Case</entry>
-
-            <entry/>
-
-            <entry>upperCaseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Switch Case To/Title Case</entry>
-
-            <entry/>
-
-            <entry>titleCaseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Cycle</entry>
-
-            <entry><keycap>Shift+F3</keycap></entry>
-
-            <entry>cycleSwitchCaseMenuItem</entry>
-          </row>
-
-          <row>
             <entry>Use as Default Translation</entry>
 
             <entry/>
@@ -490,6 +578,14 @@
             <entry/>
 
             <entry>editMultipleAlternate</entry>
+          </row>
+
+          <row>
+            <entry>Remove translation</entry>
+
+            <entry/>
+
+            <entry>editRegisterUntranslatedMenuItem</entry>
           </row>
 
           <row>
@@ -592,6 +688,22 @@
             <entry/>
 
             <entry>gotoPreviousNoteMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Next Unique Segment</entry>
+
+            <entry><keycap>Ctrl+Shift+Q</keycap></entry>
+
+            <entry>gotoNextUniqueMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Source of Selected Match</entry>
+
+            <entry><keycap>Ctrl+Shift+M</keycap></entry>
+
+            <entry>gotoMatchSourceSegment</entry>
           </row>
 
           <row>
@@ -706,6 +818,14 @@
             <entry/>
 
             <entry>viewMarkBidiCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Mark Auto-Populated Segments</entry>
+
+            <entry/>
+
+            <entry>viewMarkAutoPopulatedCheckBoxMenuItem</entry>
           </row>
 
           <row>
@@ -845,11 +965,28 @@
           </row>
 
           <row>
-            <entry>Machine Translate</entry>
+            <entry>Glossary/Display Context Description for TBX
+            Glossaries</entry>
 
             <entry/>
 
+            <entry>optionsGlossaryTBXDisplayContextCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Use Terms Appearing Separately in the Source Text</entry>
+
             <entry/>
+
+            <entry>optionsGlossaryExactMatchCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Glossary/Use Stemming for Glossary Entries</entry>
+
+            <entry/>
+
+            <entry>optionsGlossaryStemmingCheckBoxMenuItem</entry>
           </row>
 
           <row>
@@ -861,11 +998,12 @@
           </row>
 
           <row>
-            <entry>TransTips/Exact Match</entry>
+            <entry>Auto-completion/Show Relevant Suggestions
+            Automatically</entry>
 
             <entry/>
 
-            <entry>optionsTransTipsExactMatchMenuItem</entry>
+            <entry>optionsAutoCompleteShowAutomaticallyItem</entry>
           </row>
 
           <row>
@@ -898,6 +1036,14 @@
             <entry/>
 
             <entry>optionsFontSelectionMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Custom Colours...</entry>
+
+            <entry/>
+
+            <entry>optionsColorsSelectionMenuItem</entry>
           </row>
 
           <row>
@@ -986,6 +1132,14 @@
             <entry/>
 
             <entry>optionsRestoreGUIMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Access Configuration Folder</entry>
+
+            <entry/>
+
+            <entry>optionsAccessConfigDirMenuItem</entry>
           </row>
         </tbody>
       </tgroup>

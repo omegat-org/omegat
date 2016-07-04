@@ -497,7 +497,7 @@
 
             <entry/>
 
-            <entry>[vbdx : manque dans MainMenuShortcuts.properties?]</entry>
+            <entry>sentenceCaseMenuItem</entry>
           </row>
 
           <row>
@@ -974,7 +974,7 @@
           </row>
 
           <row>
-            <entry>[vbdx : ?]</entry>
+            <entry>Use Terms Appearing Separately in the Source Text</entry>
 
             <entry/>
 

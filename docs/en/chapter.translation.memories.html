@@ -41,7 +41,7 @@
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.location.and.purpose">1.1. tmx folders - location and purpose</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.backup">1.2. tmx backup</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.and.language">1.3. tmx files and language</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e7170">1.4. Orphan segments</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e7213">1.4. Orphan segments</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.translation.memories.html#using.translation.memories.from.previous.projects">2. Reusing translation memories</a></span></dt>
@@ -50,10 +50,10 @@
                      <dt><span class="section"><a href="chapter.translation.memories.html#importing.and.exporting.translation.memories">2.1. Importing and exporting translation memories</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#Creating.a.translation.memory.for.selected.documents">2.2. Creating a translation memory for selected documents</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#sharing.translation.memories">2.3. Sharing translation memories</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e7323">2.4. Using TMX with alternative language pairs</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e7366">2.4. Using TMX with alternative language pairs</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.translation.memories.html#d0e7339">3. Sources with existing translations</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.memories.html#d0e7382">3. Sources with existing translations</a></span></dt>
                <dt><span class="section"><a href="chapter.translation.memories.html#pseudo.translated.memory">4. Pseudo-translated memory</a></span></dt>
                <dt><span class="section"><a href="chapter.translation.memories.html#upgrading.translation.memories">5. Upgrading translation memories</a></span></dt>
             </dl>
@@ -175,11 +175,26 @@
                         <p>If it is clear from the very start, that translations in a
                                        given TM (or TMs) are all correct, one can put them into
                                        the<span class="bold"><strong> tm/auto</strong></span> folder and avoid
-                                       confirming a lot of<span class="emphasis"><em> [fuzzy]</em></span> cases. This will
-                                       effectively <span class="bold"><strong>pre-translate </strong></span>the
-                                       source text: all the segments in the source text, for which
-                                       translations can be found in those "auto" TMs, will land in the
-                                       main TM of the project without any user intervention.
+                                       confirming a lot of<span class="emphasis"><em> [fuzzy]</em></span> cases.
+                        </p>
+                        <div class="orderedlist">
+                           <ol class="orderedlist" type="1">
+                              <li class="listitem">
+                                 <p>Put the TMX in /tm/auto.</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Open the project. The changes are displayed.</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Make a slight change anywhere in the project. This
+                                                      modifies <code class="filename">project_save.tmx</code> (by adding
+                                                      proper Translation Units from "auto" TMX)
+                                 </p>
+                              </li>
+                           </ol>
+                        </div>
+                        <p>Note: if TMX is removed from /tm/auto before step 3, no
+                                       extra Translation Unit is added.
                         </p>
                      </dd>
                      <dt><span class="term">tm/enforce folder</span></dt>
@@ -189,8 +204,44 @@
                                        /tm/enforce to overwrite existing default translations
                                        unconditionally.
                         </p>
-                        <p>Overwriting is operating until the TMX is removed from
-                                       /tm/enforce.
+                        <div class="orderedlist">
+                           <ol class="orderedlist" type="1">
+                              <li class="listitem">
+                                 <p>Put the TMX in /tm/enforce.</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Open the project. The changes are displayed.</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Make a slight change anywhere in the project. This
+                                                      modifies <code class="filename">project_save.tmx</code>.
+                                 </p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Make decision about immunity of the enforced
+                                                      segments:
+                                 </p>
+                                 <div class="itemizedlist">
+                                    <ul class="itemizedlist" style="list-style-type: disc; ">
+                                       <li class="listitem">
+                                          <p>If they <span class="emphasis"><em>don't need</em></span> to stay
+                                                                     immune from further changes, then remove the TMX from
+                                                                     /tm/enforce.
+                                          </p>
+                                       </li>
+                                       <li class="listitem">
+                                          <p>If they <span class="emphasis"><em>need</em></span> to stay immune
+                                                                     from further changes, then keep the TMX in
+                                                                     /tm/enforce.
+                                          </p>
+                                       </li>
+                                    </ul>
+                                 </div>
+                              </li>
+                           </ol>
+                        </div>
+                        <p>Note: if TMX is removed from /tm/enforce before step 3,
+                                       enforcements aren't kept at all.
                         </p>
                      </dd>
                      <dt><span class="term">tm/mt folder</span></dt>
@@ -201,7 +252,7 @@
                                        background is restored to normal when the segment is left.
                         </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e7038"></a>tm/penalty-xxx folders</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e7081"></a>tm/penalty-xxx folders</span></dt>
                      <dd>
                         <p>Sometimes, it is useful to distinguish between high-quality
                                        translation memories and those that are, because of the subject
@@ -262,7 +313,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.backup"></a>1.2.&nbsp;tmx backup<a class="indexterm" name="d0e7091"></a></h3>
+                        <h3 class="title"><a name="tmx.backup"></a>1.2.&nbsp;tmx backup<a class="indexterm" name="d0e7134"></a></h3>
                      </div>
                   </div>
                </div>
@@ -308,7 +359,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3.&nbsp;tmx files and language<a class="indexterm" name="d0e7143"></a></h3>
+                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3.&nbsp;tmx files and language<a class="indexterm" name="d0e7186"></a></h3>
                      </div>
                   </div>
                </div>
@@ -345,7 +396,7 @@
                         country, the segments still get loaded. If neither the language code not
                         the country code match, the segments will be ignored.
                </p>
-               <p><a class="indexterm" name="d0e7164"></a>TMX files can generally contain translation units with
+               <p><a class="indexterm" name="d0e7207"></a>TMX files can generally contain translation units with
                         several candidate languages. If for a given source segment there is no
                         entry for the selected target language, all other target segments are
                         loaded, regardless of the language. For instance, if the language pair
@@ -357,7 +408,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e7170"></a>1.4.&nbsp;Orphan segments<a class="indexterm" name="d0e7173"></a></h3>
+                        <h3 class="title"><a name="d0e7213"></a>1.4.&nbsp;Orphan segments<a class="indexterm" name="d0e7216"></a></h3>
                      </div>
                   </div>
                </div>
@@ -375,7 +426,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2.&nbsp;Reusing translation memories<a class="indexterm" name="d0e7189"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2.&nbsp;Reusing translation memories<a class="indexterm" name="d0e7232"></a></h2>
                   </div>
                </div>
             </div>
@@ -457,7 +508,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="importing.and.exporting.translation.memories"></a>2.1.&nbsp;Importing and exporting translation memories<a class="indexterm" name="d0e7252"></a></h3>
+                        <h3 class="title"><a name="importing.and.exporting.translation.memories"></a>2.1.&nbsp;Importing and exporting translation memories<a class="indexterm" name="d0e7295"></a></h3>
                      </div>
                   </div>
                </div>
@@ -571,7 +622,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="sharing.translation.memories"></a>2.3.&nbsp;Sharing translation memories<a class="indexterm" name="d0e7312"></a></h3>
+                        <h3 class="title"><a name="sharing.translation.memories"></a>2.3.&nbsp;Sharing translation memories<a class="indexterm" name="d0e7355"></a></h3>
                      </div>
                   </div>
                </div>
@@ -591,7 +642,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e7323"></a>2.4.&nbsp;Using TMX with alternative language pairs<a class="indexterm" name="d0e7326"></a></h3>
+                        <h3 class="title"><a name="d0e7366"></a>2.4.&nbsp;Using TMX with alternative language pairs<a class="indexterm" name="d0e7369"></a></h3>
                      </div>
                   </div>
                </div>
@@ -622,7 +673,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7339"></a>3.&nbsp;Sources with existing translations<a class="indexterm" name="d0e7342"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e7382"></a>3.&nbsp;Sources with existing translations<a class="indexterm" name="d0e7385"></a></h2>
                   </div>
                </div>
             </div>
@@ -650,7 +701,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>4.&nbsp;Pseudo-translated memory<a class="indexterm" name="d0e7361"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>4.&nbsp;Pseudo-translated memory<a class="indexterm" name="d0e7404"></a></h2>
                   </div>
                </div>
             </div>
@@ -699,7 +750,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>5.&nbsp;Upgrading translation memories<a class="indexterm" name="d0e7413"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>5.&nbsp;Upgrading translation memories<a class="indexterm" name="d0e7456"></a></h2>
                   </div>
                </div>
             </div>

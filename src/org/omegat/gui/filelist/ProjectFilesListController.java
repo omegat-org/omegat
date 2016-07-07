@@ -310,7 +310,7 @@ public class ProjectFilesListController {
         list.tableFiles.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON1) {
+                if (e.getButton() == MouseEvent.BUTTON1 && e.getModifiersEx() == 0) {
                     gotoFile(list.tableFiles.rowAtPoint(e.getPoint()));
                 }
             }

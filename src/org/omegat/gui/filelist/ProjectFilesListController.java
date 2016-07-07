@@ -31,6 +31,7 @@
 package org.omegat.gui.filelist;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Desktop;
@@ -67,10 +68,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.MatteBorder;
 import javax.swing.event.ChangeEvent;
@@ -857,7 +858,8 @@ public class ProjectFilesListController {
         TableColumn cUnique = new TableColumn(4, 50);
         cUnique.setCellRenderer(getNumberCellRenderer(null));
         TableColumn cScrollbarMargin = new TableColumn(5, 0);
-        cScrollbarMargin.setCellRenderer(new CustomRenderer(null).setDoHighlight(false));
+        cScrollbarMargin.setCellRenderer(
+                new CustomRenderer(null, new DataTableStyling.AlternatingHighlightRenderer().setDoHighlight(false)));
         columns.addColumn(cFile);
         columns.addColumn(cFilter);
         columns.addColumn(cEncoding);
@@ -903,26 +905,41 @@ public class ProjectFilesListController {
     }
 
     private TableCellRenderer getNumberCellRenderer(List<IProject.FileInfo> files) {
-        return new CustomRenderer(files).setAlignment(SwingConstants.RIGHT)
-                .setNumberFormat(DataTableStyling.NUMBER_FORMAT);
+        return new CustomRenderer(files, DataTableStyling.getNumberCellRenderer());
     }
     
     private TableCellRenderer getTextCellRenderer(List<IProject.FileInfo> files) {
-        return new CustomRenderer(files);
+        return new CustomRenderer(files, DataTableStyling.getTextCellRenderer());
     }
     
+    private static final Color COLOR_SPECIAL_FG = Color.BLACK;
+    private static final Color COLOR_SPECIAL_BG = new Color(0xC8DDF2);
+
     /**
      * Render for table cells.
      */
-    private class CustomRenderer extends DataTableStyling.AlternatingHighlightRenderer {
+    private class CustomRenderer implements TableCellRenderer {
+
         private final List<IProject.FileInfo> files;
+        private final TableCellRenderer childRenderer;
         
-        public CustomRenderer(List<IProject.FileInfo> files) {
+        public CustomRenderer(List<IProject.FileInfo> files, TableCellRenderer childRenderer) {
             this.files = files;
+            this.childRenderer = childRenderer;
         }
 
         @Override
-        protected boolean isSpecialHighlightRow(int row) {
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+                int row, int column) {
+            Component c = childRenderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            if (!isSelected && isSpecialHighlightRow(row)) {
+                c.setForeground(COLOR_SPECIAL_FG);
+                c.setBackground(COLOR_SPECIAL_BG);
+            }
+            return c;
+        }
+
+        private boolean isSpecialHighlightRow(int row) {
             if (files == null) {
                 return false;
             }

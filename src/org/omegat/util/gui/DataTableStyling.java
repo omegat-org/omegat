@@ -52,8 +52,6 @@ public class DataTableStyling {
     
     public static final Color COLOR_STANDARD_FG = Color.BLACK;
     public static final Color COLOR_STANDARD_BG = Color.WHITE;
-    public static final Color COLOR_SPECIAL_FG = Color.BLACK;
-    public static final Color COLOR_SPECIAL_BG = new Color(0xC8DDF2);
     public static final Color COLOR_SELECTION_FG = Color.WHITE;
     public static final Color COLOR_SELECTION_BG = new Color(0x2F77DA);
     public static final Color COLOR_ALTERNATING_HILITE = new Color(245, 245, 245);
@@ -159,9 +157,6 @@ public class DataTableStyling {
             if (isSelected) {
                 result.setForeground(table.getSelectionForeground());
                 result.setBackground(table.getSelectionBackground());
-            } else if (isSpecialHighlightRow(row)) {
-                result.setForeground(COLOR_SPECIAL_FG);
-                result.setBackground(COLOR_SPECIAL_BG);
             } else if (row % 2 != 0 && doHighlight) {
                 result.setForeground(table.getForeground());
                 result.setBackground(COLOR_ALTERNATING_HILITE);
@@ -172,10 +167,6 @@ public class DataTableStyling {
             result.setBorder(hasFocus ? TABLE_FOCUS_BORDER : TABLE_NO_FOCUS_BORDER);
             applyValue(transformValue(value));
             return result;
-        }
-        
-        protected boolean isSpecialHighlightRow(int row) {
-            return false;
         }
     }
 

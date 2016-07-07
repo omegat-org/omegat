@@ -347,7 +347,7 @@ public class ProjectFilesListController {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     gotoFile(list.tableFiles.getSelectedRow());
                     e.consume();
-                } else if (filterPanel != null && e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                } else if (isFiltering() && e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     endFilter();
                     e.consume();
                 } else if (e.getKeyCode() == KeyEvent.VK_CONTEXT_MENU) {
@@ -467,10 +467,10 @@ public class ProjectFilesListController {
             char c = e.getKeyChar();
             if ((e.getModifiers() == 0 || e.getModifiers() == KeyEvent.SHIFT_MASK)
                     && !Character.isWhitespace(c) && !Character.isISOControl(c)) {
-                if (filterPanel == null) {
-                    startFilter(e.getKeyChar());
-                } else {
+                if (isFiltering()) {
                     resumeFilter(e.getKeyChar());
+                } else {
+                    startFilter(e.getKeyChar());
                 }
                 e.consume();
             }
@@ -478,8 +478,8 @@ public class ProjectFilesListController {
     };
     
     private void startFilter(char c) {
-        if (filterPanel != null) {
-            return;
+        if (isFiltering()) {
+            throw new IllegalStateException("Already filtering!");
         }
         filterPanel = new TableFilterPanel();
         list.btnDown.setEnabled(false);
@@ -545,9 +545,13 @@ public class ProjectFilesListController {
         list.repaint();
     }
     
+    private boolean isFiltering() {
+        return filterPanel != null;
+    }
+
     private void resumeFilter(char c) {
-        if (filterPanel == null) {
-            return;
+        if (!isFiltering()) {
+            throw new IllegalStateException("Can't resume filtering when we're not filtering!");
         }
         try {
             filterPanel.filterTextField.getDocument().insertString(filterPanel.filterTextField.getText().length(),
@@ -559,8 +563,8 @@ public class ProjectFilesListController {
     }
     
     private void applyFilter() {
-        if (filterPanel == null) {
-            return;
+        if (!isFiltering()) {
+            throw new IllegalStateException("Can't apply filter when we're not filtering!");
         }
         String quoted = Pattern.quote(filterPanel.filterTextField.getText());
         Pattern findPattern = Pattern.compile(quoted, Pattern.CASE_INSENSITIVE);
@@ -571,8 +575,8 @@ public class ProjectFilesListController {
     }
 
     private void endFilter() {
-        if (filterPanel == null) {
-            return;
+        if (!isFiltering()) {
+            throw new IllegalStateException("Can't end filtering when we're not filtering!");
         }
         fileRenderer.setPattern(null);
         list.tablesOuterPanel.remove(filterPanel);

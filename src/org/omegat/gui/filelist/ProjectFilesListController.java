@@ -1135,9 +1135,7 @@ public class ProjectFilesListController {
 
         @Override
         public List<? extends SortKey> getSortKeys() {
-            List<SortKey> r = new ArrayList<RowSorter.SortKey>();
-            r.add(sortKey);
-            return r;
+            return Arrays.asList(sortKey);
         }
 
         @Override

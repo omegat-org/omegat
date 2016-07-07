@@ -64,6 +64,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
+import org.omegat.util.TestPreferencesInitializer;
 
 import com.vlsolutions.swing.docking.Dockable;
 
@@ -104,7 +105,7 @@ public class TestTeamIntegrationChild {
 
             finishTime = System.currentTimeMillis() + time;
 
-            Preferences.init();
+            TestPreferencesInitializer.init();
             Preferences.setPreference(Preferences.TEAM_AUTHOR, source);
 
             // Init UI stubs. In a CI environment, errors can occur when

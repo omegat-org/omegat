@@ -28,7 +28,7 @@ package org.omegat.util.gui;
 import java.util.MissingResourceException;
 
 import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
+import org.omegat.util.TestPreferencesInitializer;
 
 import junit.framework.TestCase;
 
@@ -36,9 +36,11 @@ public class StylesTest extends TestCase {
 
     /**
      * All colors should have a localizable name in Bundle.properties.
+     * 
+     * @throws Exception
      */
-    public void testColorStrings() {
-        Preferences.init();
+    public void testColorStrings() throws Exception {
+        TestPreferencesInitializer.init();
         for (Styles.EditorColor c : Styles.EditorColor.values()) {
             try {
                 OStrings.getString(c.name());

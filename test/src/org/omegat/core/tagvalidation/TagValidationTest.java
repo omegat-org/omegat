@@ -34,6 +34,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.tagvalidation.ErrorReport.TagError;
 import org.omegat.util.Preferences;
 import org.omegat.util.TagUtil.Tag;
+import org.omegat.util.TestPreferencesInitializer;
 
 import junit.framework.TestCase;
 
@@ -160,8 +161,8 @@ public class TagValidationTest extends TestCase {
         assertTrue(report.transErrors.get(new Tag(18, "%d")) == TagError.UNSPECIFIED);
     }
     
-    public void testRemovePattern() {
-        Preferences.init();
+    public void testRemovePattern() throws Exception {
+        TestPreferencesInitializer.init();
         Preferences.setPreference(Preferences.CHECK_REMOVE_PATTERN, "foo");
         
         // No error

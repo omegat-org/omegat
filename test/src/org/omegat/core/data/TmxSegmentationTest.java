@@ -32,7 +32,7 @@ import org.omegat.core.Core;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.Language;
-import org.omegat.util.Preferences;
+import org.omegat.util.TestPreferencesInitializer;
 
 import junit.framework.TestCase;
 
@@ -40,7 +40,7 @@ public class TmxSegmentationTest extends TestCase {
 
     @Override
     protected void setUp() throws Exception {
-        Preferences.init();
+        TestPreferencesInitializer.init();
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
     }
 

@@ -27,7 +27,7 @@ package org.omegat.gui.matches;
 
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
-import org.omegat.util.Preferences;
+import org.omegat.util.TestPreferencesInitializer;
 
 import junit.framework.TestCase;
 
@@ -35,7 +35,7 @@ public class MatchesTextAreaTest extends TestCase {
 
     @Override
     protected void setUp() throws Exception {
-        Preferences.init();
+        TestPreferencesInitializer.init();
     }
 
     public void testReplaceNumbers() {

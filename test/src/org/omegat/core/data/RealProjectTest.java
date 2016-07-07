@@ -33,7 +33,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.tokenizer.DefaultTokenizer;
-import org.omegat.util.Preferences;
+import org.omegat.util.TestPreferencesInitializer;
 
 import junit.framework.TestCase;
 
@@ -50,7 +50,7 @@ public class RealProjectTest extends TestCase {
     @Before
     public void setUp() throws Exception {
         Core.initializeConsole(new TreeMap<String, String>());
-        Preferences.init();
+        TestPreferencesInitializer.init();
     }
 
     /**

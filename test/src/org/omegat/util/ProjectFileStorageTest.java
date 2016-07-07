@@ -46,7 +46,7 @@ public class ProjectFileStorageTest extends TestCase {
     protected void setUp() throws Exception {
         tempDir = Files.createTempDirectory("omegat").toFile();
         assertTrue(tempDir.isDirectory());
-        Preferences.init();
+        TestPreferencesInitializer.init(tempDir.getAbsolutePath());
     }
 
     @Override

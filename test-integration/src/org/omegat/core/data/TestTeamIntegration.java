@@ -49,9 +49,9 @@ import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.team2.impl.SVNAuthenticationManager;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
-import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TMXWriter2;
+import org.omegat.util.TestPreferencesInitializer;
 import org.tmatesoft.svn.core.ISVNLogEntryHandler;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNException;
@@ -143,7 +143,7 @@ public class TestTeamIntegration {
 
         System.err.println("Check repo");
 
-        Preferences.init();
+        TestPreferencesInitializer.init();
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
         checkRepo(startVersion);
 

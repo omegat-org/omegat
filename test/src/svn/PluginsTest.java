@@ -32,8 +32,8 @@ import java.nio.file.Files;
 import java.util.Properties;
 
 import org.omegat.filters2.master.PluginUtils;
-import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.TestPreferencesInitializer;
 
 import junit.framework.TestCase;
 
@@ -53,7 +53,7 @@ public class PluginsTest extends TestCase {
             plugins.load(fr);
         }
 
-        Preferences.init(); // Some plugins depend on inited prefs
+        TestPreferencesInitializer.init(); // Some plugins depend on inited prefs
         for (Object o : plugins.keySet()) {
             String[] classes = plugins.getProperty(o.toString()).split(" ");
             for (String cls : classes) {

@@ -136,6 +136,7 @@ public class ProjectFilesListController {
 
     private ProjectFilesList list;
     private FileInfoModel modelFiles;
+    private DataTableStyling.PatternHighlightRenderer fileRenderer;
     private AbstractTableModel modelTotal;
     private Sorter currentSorter;
 
@@ -561,8 +562,10 @@ public class ProjectFilesListController {
         if (filterPanel == null) {
             return;
         }
-        String regex = ".*" + Pattern.quote(filterPanel.filterTextField.getText()) + ".*";
-        currentSorter.setFilter(regex);
+        String quoted = Pattern.quote(filterPanel.filterTextField.getText());
+        fileRenderer.setPattern(Pattern.compile(quoted));
+        String matchRegex = ".*" + quoted + ".*";
+        currentSorter.setFilter(matchRegex);
         selectRow(0);
     }
 
@@ -570,6 +573,7 @@ public class ProjectFilesListController {
         if (filterPanel == null) {
             return;
         }
+        fileRenderer.setPattern(null);
         list.tablesOuterPanel.remove(filterPanel);
         list.btnDown.setEnabled(true);
         list.btnUp.setEnabled(true);
@@ -747,7 +751,8 @@ public class ProjectFilesListController {
         TableColumnModel columns = new DefaultTableColumnModel();
         TableColumn cFile = new TableColumn(0, 150);
         cFile.setHeaderValue(OStrings.getString("PF_FILENAME"));
-        cFile.setCellRenderer(getTextCellRenderer(files));
+        fileRenderer = new DataTableStyling.PatternHighlightRenderer();
+        cFile.setCellRenderer(new CustomRenderer(files, fileRenderer));
         TableColumn cFilter = new TableColumn(1, 100);
         cFilter.setHeaderValue(OStrings.getString("PF_FILTERNAME"));
         cFilter.setCellRenderer(getTextCellRenderer(files));

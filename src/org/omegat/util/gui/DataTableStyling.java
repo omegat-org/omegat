@@ -30,10 +30,13 @@ import java.awt.Component;
 import java.awt.Font;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextPane;
 import javax.swing.JViewport;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
@@ -41,6 +44,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import org.omegat.util.Platform;
 
@@ -186,6 +193,48 @@ public class DataTableStyling {
         @Override
         protected void applyValue(String value) {
             component.setText(value);
+        }
+    }
+
+    public static class PatternHighlightRenderer extends FancyRenderer<JTextPane> {
+        private static final Color HIGHLIGHT_FG_COLOR = Color.BLACK;
+        private static final Color HIGHLIGHT_BG_COLOR = Color.YELLOW;
+        private static final AttributeSet EMPTY_ATTR = new SimpleAttributeSet();
+        private static final AttributeSet HIGHLIGHT_ATTR;
+        static {
+            SimpleAttributeSet sas = new SimpleAttributeSet();
+            StyleConstants.setBackground(sas, HIGHLIGHT_BG_COLOR);
+            StyleConstants.setForeground(sas, HIGHLIGHT_FG_COLOR);
+            HIGHLIGHT_ATTR = sas;
+        }
+        private final JTextPane component = new JTextPane();
+        private Pattern pattern;
+
+        public PatternHighlightRenderer setPattern(Pattern pattern) {
+            this.pattern = pattern;
+            return this;
+        }
+
+        @Override
+        protected JTextPane getComponent() {
+            return component;
+        }
+
+        @Override
+        protected void applyValue(String value) {
+            component.setText(value);
+            doHighlighting(value);
+        }
+
+        void doHighlighting(String text) {
+            StyledDocument doc = component.getStyledDocument();
+            doc.setCharacterAttributes(0, text.length(), EMPTY_ATTR, true);
+            if (pattern != null) {
+                Matcher m = pattern.matcher(text);
+                while (m.find()) {
+                    doc.setCharacterAttributes(m.start(), m.end() - m.start(), HIGHLIGHT_ATTR, true);
+                }
+            }
         }
     }
 }

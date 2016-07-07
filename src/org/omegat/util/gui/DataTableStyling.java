@@ -223,7 +223,9 @@ public class DataTableStyling {
         @Override
         protected void applyValue(String value) {
             component.setText(value);
-            doHighlighting(value);
+            if (value != null) {
+                doHighlighting(value);
+            }
         }
 
         void doHighlighting(String text) {

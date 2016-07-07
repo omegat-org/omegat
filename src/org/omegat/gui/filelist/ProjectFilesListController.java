@@ -54,11 +54,11 @@ import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -563,9 +563,10 @@ public class ProjectFilesListController {
             return;
         }
         String quoted = Pattern.quote(filterPanel.filterTextField.getText());
-        fileRenderer.setPattern(Pattern.compile(quoted));
-        String matchRegex = ".*" + quoted + ".*";
-        currentSorter.setFilter(matchRegex);
+        Pattern findPattern = Pattern.compile(quoted, Pattern.CASE_INSENSITIVE);
+        fileRenderer.setPattern(findPattern);
+        Pattern matchPattern = Pattern.compile(".*" + quoted + ".*", Pattern.CASE_INSENSITIVE);
+        currentSorter.setFilter(matchPattern);
         selectRow(0);
     }
 
@@ -1247,20 +1248,11 @@ public class ProjectFilesListController {
             Core.getProject().setSourceFilesOrder(filenames);
         }
         
-        public void setFilter(String regex) {
-            if (filter == null && regex == null) {
+        public void setFilter(Pattern pattern) {
+            if (filter == pattern || pattern != null && pattern.equals(filter)) {
                 return;
             }
-            Pattern newFilter;
-            try {
-                newFilter = regex == null ? null : Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-            } catch (PatternSyntaxException ex) {
-                return;
-            }
-            if (filter != null && filter.equals(newFilter)) {
-                return;
-            }
-            filter = newFilter;
+            filter = pattern;
             int[] lastViewToModel = getIntArrayFromIntegerList(viewToModel);
             init();
             sort();

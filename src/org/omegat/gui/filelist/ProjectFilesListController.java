@@ -244,7 +244,6 @@ public class ProjectFilesListController {
                 case CLOSE:
                     list.tableFiles.setModel(new DefaultTableModel());
                     list.tableFiles.repaint();
-                    updateTitle("-");
                     modelTotal.fireTableDataChanged();
                     list.setVisible(false);
                     break;
@@ -374,8 +373,14 @@ public class ProjectFilesListController {
         list.btnLast.addActionListener(moveAction);
     }
     
-    private void updateTitle(Object numFiles) {
-        list.setTitle(StringUtil.format(OStrings.getString("PF_WINDOW_TITLE"), numFiles));
+    private void updateTitle() {
+        int numFiles = currentSorter.getModelRowCount();
+        if (isFiltering()) {
+            int showingFiles = currentSorter.getViewRowCount();
+            list.setTitle(StringUtil.format(OStrings.getString("PF_WINDOW_TITLE_FILTERED"), showingFiles, numFiles));
+        } else {
+            list.setTitle(StringUtil.format(OStrings.getString("PF_WINDOW_TITLE"), numFiles));
+        }
     }
 
     private JPopupMenu createContextMenuForRow(int row) {
@@ -722,11 +727,11 @@ public class ProjectFilesListController {
         list.statLabel.setText(statText);
 
         uiUpdateImportButtonStatus();
-        updateTitle(files.size());
 
         OSXIntegration.setProxyIcon(list.getRootPane(), new File(Core.getProject().getProjectProperties().getSourceRoot()));
 
         setTableFilesModel(files);
+        updateTitle();
     }
 
     private void createTableFiles() {
@@ -800,6 +805,7 @@ public class ProjectFilesListController {
         list.tableFiles.setColumnModel(columns);
 
         currentSorter = new Sorter(files);
+        currentSorter.addRowSorterListener(e -> updateTitle());
         list.tableFiles.setRowSorter(currentSorter);
     }
 
@@ -1096,7 +1102,7 @@ public class ProjectFilesListController {
 
         @Override
         public int getModelRowCount() {
-            throw new RuntimeException("Not implemented");
+            return files.size();
         }
 
         @Override

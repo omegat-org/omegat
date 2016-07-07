@@ -906,6 +906,9 @@ public class ProjectFilesListController {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
+        if (row < 0) {
+            return;
+        }
         Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
         Cursor oldCursor = list.getCursor();
         list.setCursor(hourglassCursor);

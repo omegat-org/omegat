@@ -93,26 +93,35 @@ public class DataTableStyling {
     }
     
     public static TableCellRenderer getNumberCellRenderer() {
-        return new AlternatingHighlightRenderer(SwingConstants.RIGHT, NUMBER_FORMAT, true, FONT_NO_CHANGE);
+        return new AlternatingHighlightRenderer().setAlignment(SwingConstants.RIGHT).setNumberFormat(NUMBER_FORMAT);
     }
     
     public static TableCellRenderer getTextCellRenderer() {
-        return new AlternatingHighlightRenderer(SwingConstants.LEFT, null, true, FONT_NO_CHANGE);
+        return new AlternatingHighlightRenderer();
     }
     
     public static TableCellRenderer getHeaderTextCellRenderer() {
-        return new AlternatingHighlightRenderer(SwingConstants.LEFT, null, true, Font.BOLD);
+        return new AlternatingHighlightRenderer().setFontStyle(Font.BOLD);
     }
     
     public static abstract class FancyRenderer<T extends JComponent> implements TableCellRenderer {
-        private final NumberFormat numberFormat;
-        private final boolean doHighlight;
-        private final int fontStyle;
+        private NumberFormat numberFormat = null;
+        private boolean doHighlight = true;
+        private int fontStyle = FONT_NO_CHANGE;
 
-        public FancyRenderer(NumberFormat numberFormat, boolean doHighlight, int fontStyle) {
+        public FancyRenderer<T> setNumberFormat(NumberFormat numberFormat) {
             this.numberFormat = numberFormat;
+            return this;
+        }
+
+        public FancyRenderer<T> setDoHighlight(boolean doHighlight) {
             this.doHighlight = doHighlight;
+            return this;
+        }
+
+        public FancyRenderer<T> setFontStyle(int fontStyle) {
             this.fontStyle = fontStyle;
+            return this;
         }
 
         protected String transformValue(Object value) {
@@ -172,10 +181,10 @@ public class DataTableStyling {
 
     public static class AlternatingHighlightRenderer extends FancyRenderer<DefaultTableCellRenderer> {
         private final DefaultTableCellRenderer component = new DefaultTableCellRenderer();
-        
-        public AlternatingHighlightRenderer(int alignment, NumberFormat numberFormat, boolean doHighlight, int fontStyle) {
-            super(numberFormat, doHighlight, fontStyle);
+
+        public AlternatingHighlightRenderer setAlignment(int alignment) {
             component.setHorizontalAlignment(alignment);
+            return this;
         }
 
         @Override

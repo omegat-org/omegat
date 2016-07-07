@@ -52,7 +52,6 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -858,7 +857,7 @@ public class ProjectFilesListController {
         TableColumn cUnique = new TableColumn(4, 50);
         cUnique.setCellRenderer(getNumberCellRenderer(null));
         TableColumn cScrollbarMargin = new TableColumn(5, 0);
-        cScrollbarMargin.setCellRenderer(new CustomRenderer(null, SwingConstants.LEFT, null, false));
+        cScrollbarMargin.setCellRenderer(new CustomRenderer(null).setDoHighlight(false));
         columns.addColumn(cFile);
         columns.addColumn(cFilter);
         columns.addColumn(cEncoding);
@@ -904,11 +903,12 @@ public class ProjectFilesListController {
     }
 
     private TableCellRenderer getNumberCellRenderer(List<IProject.FileInfo> files) {
-        return new CustomRenderer(files, SwingConstants.RIGHT, DataTableStyling.NUMBER_FORMAT, true);
+        return new CustomRenderer(files).setAlignment(SwingConstants.RIGHT)
+                .setNumberFormat(DataTableStyling.NUMBER_FORMAT);
     }
     
     private TableCellRenderer getTextCellRenderer(List<IProject.FileInfo> files) {
-        return new CustomRenderer(files, SwingConstants.LEFT, DataTableStyling.NUMBER_FORMAT, true);
+        return new CustomRenderer(files);
     }
     
     /**
@@ -917,9 +917,7 @@ public class ProjectFilesListController {
     private class CustomRenderer extends DataTableStyling.AlternatingHighlightRenderer {
         private final List<IProject.FileInfo> files;
         
-        public CustomRenderer(List<IProject.FileInfo> files, int alignment, NumberFormat numberFormat,
-                boolean doHighlight) {
-            super(alignment, numberFormat, doHighlight, DataTableStyling.FONT_NO_CHANGE);
+        public CustomRenderer(List<IProject.FileInfo> files) {
             this.files = files;
         }
 

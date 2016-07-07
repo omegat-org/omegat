@@ -114,11 +114,13 @@ public class ProjectFilesList extends javax.swing.JFrame {
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
         org.openide.awt.Mnemonics.setLocalizedText(btnFirst, OStrings.getString("PF_MOVE_FIRST")); // NOI18N
+        btnFirst.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel2.add(btnFirst, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(btnUp, OStrings.getString("PF_MOVE_UP")); // NOI18N
+        btnUp.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -128,12 +130,14 @@ public class ProjectFilesList extends javax.swing.JFrame {
         jPanel2.add(filler3, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(btnDown, OStrings.getString("PF_MOVE_DOWN")); // NOI18N
+        btnDown.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel2.add(btnDown, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(btnLast, OStrings.getString("PF_MOVE_LAST")); // NOI18N
+        btnLast.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;

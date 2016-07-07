@@ -360,6 +360,7 @@ public class ProjectFilesListController {
                 }
             }
         });
+        list.tableFiles.getSelectionModel().addListSelectionListener(e -> updateButtonState());
         list.tableFiles.addKeyListener(filterTrigger);
         list.tableTotal.addKeyListener(filterTrigger);
         list.btnUp.addKeyListener(filterTrigger);
@@ -381,6 +382,14 @@ public class ProjectFilesListController {
         } else {
             list.setTitle(StringUtil.format(OStrings.getString("PF_WINDOW_TITLE"), numFiles));
         }
+    }
+
+    private void updateButtonState() {
+        boolean enabled = list.tableFiles.getSelectedRow() != -1;
+        list.btnDown.setEnabled(enabled);
+        list.btnFirst.setEnabled(enabled);
+        list.btnLast.setEnabled(enabled);
+        list.btnUp.setEnabled(enabled);
     }
 
     private JPopupMenu createContextMenuForRow(int row) {

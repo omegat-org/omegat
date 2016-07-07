@@ -1255,7 +1255,7 @@ public class ProjectFilesListController {
                 return;
             }
             filter = pattern;
-            int[] lastViewToModel = getIntArrayFromIntegerList(viewToModel);
+            int[] lastViewToModel = viewToModel.stream().mapToInt(Integer::intValue).toArray();
             init();
             sort();
             fireRowSorterChanged(lastViewToModel);
@@ -1266,14 +1266,6 @@ public class ProjectFilesListController {
                 return true;
             }
             return filter.matcher(item.filePath).matches();
-        }
-        
-        private int[] getIntArrayFromIntegerList(List<Integer> list) {
-            int[] result = new int[list.size()];
-            for (int i = 0; i < result.length; i++) {
-                result[i] = list.get(i);
-            }
-            return result;
         }
     }
 }

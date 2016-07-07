@@ -37,6 +37,7 @@ import javax.swing.JTable;
 import javax.swing.JViewport;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
@@ -57,6 +58,7 @@ public class DataTableStyling {
     public static final Color COLOR_SELECTION_BG = new Color(0x2F77DA);
     public static final Color COLOR_ALTERNATING_HILITE = new Color(245, 245, 245);
     public static final Border TABLE_FOCUS_BORDER = new MatteBorder(1, 1, 1, 1, new Color(0x76AFE8));
+    public static final Border TABLE_NO_FOCUS_BORDER = new EmptyBorder(1, 1, 1, 1);
     
     public static final DecimalFormat NUMBER_FORMAT = new DecimalFormat(",##0");
 
@@ -102,46 +104,49 @@ public class DataTableStyling {
         return new AlternatingHighlightRenderer(SwingConstants.LEFT, null, true, Font.BOLD);
     }
     
-    @SuppressWarnings("serial")
-    public static class AlternatingHighlightRenderer extends DefaultTableCellRenderer {
-        private final NumberFormat numberFormat;        
+    public static abstract class FancyRenderer<T extends JComponent> implements TableCellRenderer {
+        private final NumberFormat numberFormat;
         private final boolean doHighlight;
         private final int fontStyle;
-        
-        public AlternatingHighlightRenderer(int alignment, NumberFormat numberFormat, boolean doHighlight, int fontStyle) {
-            setHorizontalAlignment(alignment);
+
+        public FancyRenderer(NumberFormat numberFormat, boolean doHighlight, int fontStyle) {
             this.numberFormat = numberFormat;
             this.doHighlight = doHighlight;
             this.fontStyle = fontStyle;
         }
 
-        @Override
-        protected void setValue(Object value) {
+        protected String transformValue(Object value) {
+            if (value == null) {
+                return null;
+            }
             if (numberFormat != null) {
                 if (value instanceof Number) {
-                    super.setValue(numberFormat.format((Number) value));
-                    return;
+                    return numberFormat.format((Number) value);
                 }
                 if (value instanceof String) {
                     try {
                         long lVal = Long.parseLong((String) value);
-                        super.setValue(numberFormat.format(lVal));
-                        return;
+                        return numberFormat.format(lVal);
                     } catch (NumberFormatException ignore) {
                     }
                 }
             }
-            super.setValue(value);
+            return value.toString();
         }
 
+        protected abstract T getComponent();
+
+        protected abstract void applyValue(String value);
+
         @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
-                boolean hasFocus, int row, int column) {
-            Component result = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row,
-                    column);
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+                int row, int column) {
+            T result = getComponent();
+            Font font = table.getFont();
             if (fontStyle != FONT_NO_CHANGE) {
-                result.setFont(table.getFont().deriveFont(fontStyle));
+                font = font.deriveFont(fontStyle);
             }
+            result.setFont(font);
             if (isSelected) {
                 result.setForeground(table.getSelectionForeground());
                 result.setBackground(table.getSelectionBackground());
@@ -155,14 +160,32 @@ public class DataTableStyling {
                 result.setForeground(table.getForeground());
                 result.setBackground(table.getBackground());
             }
-            if (hasFocus && result instanceof JComponent) {
-                ((JComponent) result).setBorder(TABLE_FOCUS_BORDER);
-            }
+            result.setBorder(hasFocus ? TABLE_FOCUS_BORDER : TABLE_NO_FOCUS_BORDER);
+            applyValue(transformValue(value));
             return result;
         }
         
         protected boolean isSpecialHighlightRow(int row) {
             return false;
+        }
+    }
+
+    public static class AlternatingHighlightRenderer extends FancyRenderer<DefaultTableCellRenderer> {
+        private final DefaultTableCellRenderer component = new DefaultTableCellRenderer();
+        
+        public AlternatingHighlightRenderer(int alignment, NumberFormat numberFormat, boolean doHighlight, int fontStyle) {
+            super(numberFormat, doHighlight, fontStyle);
+            component.setHorizontalAlignment(alignment);
+        }
+
+        @Override
+        protected DefaultTableCellRenderer getComponent() {
+            return component;
+        }
+
+        @Override
+        protected void applyValue(String value) {
+            component.setText(value);
         }
     }
 }

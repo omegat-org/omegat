@@ -27,6 +27,7 @@ package org.omegat.gui.editor.history;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -42,6 +43,7 @@ import org.omegat.util.Preferences;
 
 public class HistoryCompleter extends AutoCompleterListView {
 
+    private static final Logger LOGGER = Logger.getLogger(HistoryCompleter.class.getName());
 
     WordCompleter completer = new WordCompleter();
     private SourceTextEntry currentEntry;
@@ -91,9 +93,12 @@ public class HistoryCompleter extends AutoCompleterListView {
     }
     
     synchronized void train() {
+        long start = System.currentTimeMillis();
         completer.reset();
         Core.getProject().iterateByDefaultTranslations((source, trans) -> trainString(trans.translation));
         Core.getProject().iterateByMultipleTranslations((source, trans) -> trainString(trans.translation));
+        LOGGER.finer(() -> String.join(" ", "Time to train History Completer:",
+                Long.toString(System.currentTimeMillis() - start), "ms"));
     }
     
     private void trainString(String text) {

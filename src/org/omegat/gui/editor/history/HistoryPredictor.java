@@ -28,6 +28,7 @@ package org.omegat.gui.editor.history;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -43,6 +44,7 @@ import org.omegat.util.Preferences;
 
 public class HistoryPredictor extends AutoCompleterListView {
 
+    private static final Logger LOGGER = Logger.getLogger(HistoryPredictor.class.getName());
 
     WordPredictor predictor = new WordPredictor();
     private SourceTextEntry currentEntry;
@@ -89,9 +91,12 @@ public class HistoryPredictor extends AutoCompleterListView {
     }
     
     synchronized void train() {
+        long start = System.currentTimeMillis();
         predictor.reset();
         Core.getProject().iterateByDefaultTranslations((source, trans) -> trainString(trans.translation));
         Core.getProject().iterateByMultipleTranslations((source, trans) -> trainString(trans.translation));
+        LOGGER.finer(() -> String.join(" ", "Time to train History Predictor:",
+                Long.toString(System.currentTimeMillis() - start), "ms"));
     }
     
     private void trainString(String text) {

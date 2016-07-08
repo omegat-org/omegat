@@ -565,7 +565,12 @@ public class EditorController implements IEditor {
     };
     
     private void updateTitle() {
-        pane.setName(StaticUIUtils.truncateToFit(title, pane, 70));
+       pane.setName(StaticUIUtils.truncateToFit(title, pane, 70));
+       // In some cases, depending on the layout of the panes, the Editor 
+       // title is not updated when going from file to file, so we have
+       // to force the repaint.
+       // see https://sourceforge.net/p/omegat/bugs/802/
+       pane.repaint();
     }
     
     private void setFont(final Font font) {

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.0
 ----------------------------------------------------------------------
- 31 Enhancements
+ 32 Enhancements
   6 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -83,6 +83,9 @@
 
   - Paralellize match statistics calculations
   https://sourceforge.net/p/omegat/feature-requests/1260/
+
+  - Make scripts cancelable
+  https://sourceforge.net/p/omegat/feature-requests/1261/
 
   Other changes
 

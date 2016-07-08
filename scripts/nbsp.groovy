@@ -15,12 +15,18 @@ def replace_string_percent = /$1\u00A0%/
 def search_string_after = /«\s/
 def replace_string_after = /«\u00A0/
 
+def fix_apostrophes = false;
+
 // The segment_count variable will be incremented each time a segment is modified.
 def segment_count = 0
 // cur_num stores the current segment number
 def cur_num = editor.getCurrentEntry().entryNum()
 
 project.allEntries.each { ste ->
+  if (java.lang.Thread.interrupted()) {
+    break;
+  }
+
   source = ste.getSrcText();
   // If the segment has been translated, we get store translated text in the target variable.
   target = project.getTranslationInfo(ste) ? project.getTranslationInfo(ste).translation : null;
@@ -36,6 +42,10 @@ project.allEntries.each { ste ->
   target = target.replaceAll(search_string_before, replace_string_before)
   target = target.replaceAll(search_string_percent, replace_string_percent)
   target = target.replaceAll(search_string_after, replace_string_after)
+
+  if (fix_apostrophes) {
+  	target = target.replaceAll(/'/, "’")
+  }
 
   // The old translation is checked against the replaced text, if it is different,
   // we jump to the segment number and replace the old text by the new one.

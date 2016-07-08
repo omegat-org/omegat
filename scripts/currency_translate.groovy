@@ -25,6 +25,9 @@ targetCurrency.setCurrency(sourceCurrency.currency);
 def segment_count = 0
 
 project.allEntries.each { ste ->
+    if (java.lang.Thread.interrupted()) {
+      break;
+    }
     source = ste.getSrcText();
     target = project.getTranslationInfo(ste) ? project.getTranslationInfo(ste).translation : null;
 

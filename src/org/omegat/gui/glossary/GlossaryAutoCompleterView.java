@@ -134,7 +134,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
     }
     
     private Locale getTargetLocale() {
-        return Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
+        return getTargetLanguage().getLocale();
     }
 
     @Override

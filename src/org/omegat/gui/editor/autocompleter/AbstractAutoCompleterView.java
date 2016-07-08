@@ -34,6 +34,7 @@ import javax.swing.text.BadLocationException;
 import org.omegat.core.Core;
 import org.omegat.gui.editor.EditorTextArea3;
 import org.omegat.tokenizer.ITokenizer;
+import org.omegat.util.Language;
 
 /**
  * An abstract auto-completer view.
@@ -84,6 +85,13 @@ abstract public class AbstractAutoCompleterView {
         return Core.getProject().getTargetTokenizer();
     }
     
+    /**
+     * Return the target language currently in use.
+     */
+    public Language getTargetLanguage() {
+        return Core.getProject().getProjectProperties().getTargetLanguage();
+    }
+
     /**
      * Process the autocompletion keys
      * @param e the key event to process

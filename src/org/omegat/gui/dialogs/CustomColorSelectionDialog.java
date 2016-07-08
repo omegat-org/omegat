@@ -274,9 +274,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_resetThisColorButtonActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        temporaryPreferences.entrySet().stream().forEach((e) -> {
-            e.getKey().setColor(e.getValue());
-        });
+        temporaryPreferences.entrySet().forEach(e -> e.getKey().setColor(e.getValue()));
         Preferences.save();
         if (!temporaryPreferences.isEmpty()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("GUI_COLORS_CHANGED_RESTART"));

@@ -116,9 +116,7 @@ public class DictionaryInstallerDialog extends JDialog {
         protected void done() {
             try {
                 List<String> list = get();
-                list.stream().forEach((str) -> {
-                    listModel.addElement(str);
-                });
+                list.forEach(str -> listModel.addElement(str));
                 
                 dictionaryList.setModel(listModel);
                 dictionaryList.setEnabled(true);
@@ -263,17 +261,13 @@ public class DictionaryInstallerDialog extends JDialog {
 
         @Override
         protected void process(List<Object> chunks) {
-            chunks.stream().forEach((o) -> {
-                listModel.removeElement(o);
-            });
+            chunks.forEach(o -> listModel.removeElement(o));
         }
         
         @Override
         protected void done() {
             try {
-                get().stream().forEach((o) -> {
-                    listModel.removeElement(o);
-                });
+                get().forEach(o -> listModel.removeElement(o));
             } catch (InterruptedException | ExecutionException e) {
                 // Ignore
             }

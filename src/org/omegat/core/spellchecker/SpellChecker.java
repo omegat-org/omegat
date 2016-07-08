@@ -280,7 +280,7 @@ public class SpellChecker implements ISpellChecker {
         if (learnedFilePath.toFile().isFile()) {
             try {
                 learnedList.addAll(Files.readAllLines(learnedFilePath, StandardCharsets.UTF_8));
-                learnedList.stream().forEach((word) -> checker.learnWord(word));
+                learnedList.stream().forEach(word -> checker.learnWord(word));
             } catch (Exception ex) {
                 Log.log(ex);
             }

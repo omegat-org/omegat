@@ -171,7 +171,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         List<String> lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
         synchronized (ignoreWords) {
             ignoreWords.clear();
-            lines.stream().map(String::trim).forEach((line) -> ignoreWords.add(line));
+            lines.stream().map(String::trim).forEach(line -> ignoreWords.add(line));
         }
     }
 

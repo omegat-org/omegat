@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.0
 ----------------------------------------------------------------------
- 33 Enhancements
+ 34 Enhancements
   6 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -107,6 +107,11 @@ it is possible to double-click on a dictionary instead of pressing Install
 (simply by typing characters), the filter is reflected in the 
 title -- e.g., Project Files (2 of 48) -- and the filter pattern 
 is highlighted in the file paths.
+
+  - In the script nbsp.groovy, it is now possible to replace
+straight apostrophes with curly ones. At the beginning of 
+the script, def fix_apostrophes = false; must be replaced
+with def fix_apostrophes = true;
 
   Bug fixes:
 

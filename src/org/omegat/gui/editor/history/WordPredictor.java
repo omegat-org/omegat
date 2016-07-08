@@ -39,6 +39,11 @@ public class WordPredictor {
     final static double MIN_FREQUENCY = 10d;
 
     private Map<String, FrequencyStrings> data;
+    private boolean isLanguageSpaceDelimited = true;
+
+    public void setisLanguageSpaceDelimited(boolean langIsSpaceDelimited) {
+        this.isLanguageSpaceDelimited = langIsSpaceDelimited;
+    }
 
     void reset() {
         data = new HashMap<>();
@@ -80,15 +85,21 @@ public class WordPredictor {
     }
 
     /**
-     * Find the last <em>completed</em> word. That means ignoring the last token
+     * Find the last <em>completed</em> word.
+     * <p>
+     * If the language is space-delimited, that means ignoring the last token
      * (which should be a partially input word) and then iterating backwards to
      * find the first non-whitespace token.
+     * <p>
+     * If the language is not space-delimited, use the last token, as we have no
+     * way of distinguishing a completed word from an incomplete one.
      * 
      * @param tokens
      * @return
      */
     private String lastFullWordToken(String[] tokens) {
-        for (int i = tokens.length - 2; i >= 0; i--) {
+        int startOffset = isLanguageSpaceDelimited ? 2 : 1;
+        for (int i = tokens.length - startOffset; i >= 0; i--) {
             String token = tokens[i];
             if (!token.trim().isEmpty()) {
                 return token;

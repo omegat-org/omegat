@@ -57,6 +57,7 @@ public class HistoryPredictor extends AutoCompleterListView {
             @Override
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
                 if (eventType == PROJECT_CHANGE_TYPE.LOAD) {
+                    predictor.setisLanguageSpaceDelimited(isLanguageSpaceDelimited());
                     train();
                 }
             }
@@ -122,6 +123,12 @@ public class HistoryPredictor extends AutoCompleterListView {
             return predictions;
         }
 
+        // We have a non-space-delimited language, so it's not possible to
+        // distinguish between a new-word situation and a completion situation.
+        if (!isLanguageSpaceDelimited()) {
+            return predictions;
+        }
+
         // We are starting a new word so all predictions are relevant
         if (tokens[tokens.length - 1].trim().isEmpty()) {
             return predictions;
@@ -146,5 +153,9 @@ public class HistoryPredictor extends AutoCompleterListView {
     @Override
     protected boolean isEnabled() {
         return Preferences.isPreference(Preferences.AC_HISTORY_PREDICTION_ENABLED);
+    }
+
+    private boolean isLanguageSpaceDelimited() {
+        return getTargetLanguage().isSpaceDelimited();
     }
 }

@@ -413,6 +413,10 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         optionsAutoCompleteMenu.add(optionsAutoCompleteGlossaryMenuItem = createMenuItem("MW_OPTIONSMENU_AUTOCOMPLETE_GLOSSARY"));
         optionsAutoCompleteMenu.add(optionsAutoCompleteAutoTextMenuItem = createMenuItem("MW_OPTIONSMENU_AUTOCOMPLETE_AUTOTEXT"));
         optionsAutoCompleteMenu.add(optionsAutoCompleteCharTableMenuItem = createMenuItem("MW_OPTIONSMENU_AUTOCOMPLETE_CHARTABLE"));
+        optionsAutoCompleteMenu.add(optionsAutoCompleteHistoryCompletionMenuItem = createCheckboxMenuItem(
+                "MW_OPTIONSMENU_AUTOCOMPLETE_HISTORY_COMPLETION"));
+        optionsAutoCompleteMenu.add(optionsAutoCompleteHistoryPredictionMenuItem = createCheckboxMenuItem(
+                "MW_OPTIONSMENU_AUTOCOMPLETE_HISTORY_PREDICTION"));
         optionsMenu.add(new JSeparator());
         optionsMenu.add(optionsFontSelectionMenuItem = createMenuItem("TF_MENU_DISPLAY_FONT"));
         optionsMenu.add(optionsColorsSelectionMenuItem = createMenuItem("TF_MENU_COLORS"));
@@ -518,6 +522,10 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
         optionsAutoCompleteShowAutomaticallyItem.setSelected(Preferences.isPreferenceDefault(
                 Preferences.AC_SHOW_SUGGESTIONS_AUTOMATICALLY, true));
+        optionsAutoCompleteHistoryCompletionMenuItem
+                .setSelected(Preferences.isPreference(Preferences.AC_HISTORY_COMPLETION_ENABLED));
+        optionsAutoCompleteHistoryPredictionMenuItem
+                .setSelected(Preferences.isPreference(Preferences.AC_HISTORY_PREDICTION_ENABLED));
         optionsMTAutoFetchCheckboxMenuItem.setSelected(Preferences.isPreferenceDefault(
                 Preferences.MT_AUTO_FETCH, true));
         optionsMTOnlyUntranslatedCheckboxMenuItem.setSelected(Preferences.isPreference(
@@ -778,6 +786,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem optionsAutoCompleteGlossaryMenuItem;
     JMenuItem optionsAutoCompleteAutoTextMenuItem;
     JMenuItem optionsAutoCompleteCharTableMenuItem;
+    JMenuItem optionsAutoCompleteHistoryCompletionMenuItem;
+    JMenuItem optionsAutoCompleteHistoryPredictionMenuItem;
     JMenuItem optionsWorkflowMenuItem;
     JMenuItem optionsTagValidationMenuItem;
     JMenuItem optionsTeamMenuItem;

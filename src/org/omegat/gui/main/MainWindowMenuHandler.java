@@ -884,6 +884,16 @@ public class MainWindowMenuHandler {
         new CharTableAutoCompleterOptionsDialog(mainWindow).setVisible(true);
     }
 
+    public void optionsAutoCompleteHistoryCompletionMenuItemActionPerformed() {
+        Preferences.setPreference(Preferences.AC_HISTORY_COMPLETION_ENABLED,
+                mainWindow.menu.optionsAutoCompleteHistoryCompletionMenuItem.isSelected());
+    }
+
+    public void optionsAutoCompleteHistoryPredictionMenuItemActionPerformed() {
+        Preferences.setPreference(Preferences.AC_HISTORY_PREDICTION_ENABLED,
+                mainWindow.menu.optionsAutoCompleteHistoryPredictionMenuItem.isSelected());
+    }
+
     public void optionsMTAutoFetchCheckboxMenuItemActionPerformed() {
         boolean enabled = mainWindow.menu.optionsMTAutoFetchCheckboxMenuItem.isSelected();
         Preferences.setPreference(Preferences.MT_AUTO_FETCH, enabled);

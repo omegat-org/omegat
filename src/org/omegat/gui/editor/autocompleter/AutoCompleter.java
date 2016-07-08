@@ -48,6 +48,8 @@ import org.omegat.gui.editor.EditorTextArea3;
 import org.omegat.gui.editor.TagAutoCompleterView;
 import org.omegat.gui.editor.autotext.AutotextAutoCompleterView;
 import org.omegat.gui.editor.chartable.CharTableAutoCompleterView;
+import org.omegat.gui.editor.history.HistoryCompleter;
+import org.omegat.gui.editor.history.HistoryPredictor;
 import org.omegat.gui.glossary.GlossaryAutoCompleterView;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -119,6 +121,8 @@ public class AutoCompleter implements IAutoCompleter {
         addView(new AutotextAutoCompleterView());
         addView(new TagAutoCompleterView());
         addView(new CharTableAutoCompleterView());
+        addView(new HistoryCompleter());
+        addView(new HistoryPredictor());
 
         viewLabel = new JLabel();
         viewLabel.setBorder(new CompoundBorder(

@@ -2,7 +2,7 @@
  OmegaT 4.0.0
 ----------------------------------------------------------------------
  34 Enhancements
-  7 Bug fixes
+  6 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 4.0.0 vs 3.6.0 update 2
@@ -132,9 +132,6 @@ to the wrong filter
 
   - When replacing the target text with a match, the number substitution
 could fail with duplicate numbers
-
-  - Editor title doesn't update after panes rearrangement
-  https://sourceforge.net/p/omegat/bugs/802/
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 2

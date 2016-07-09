@@ -222,7 +222,7 @@ public class EditorController implements IEditor {
 
         editor = new EditorTextArea3(this);
         DragTargetOverlay.apply(editor, dropInfo);
-        setFont(Core.getMainWindow().getApplicationFont());
+        setFont(mainWindow.getApplicationFont());
 
         markerController = new MarkerController(this);
 
@@ -374,7 +374,7 @@ public class EditorController implements IEditor {
         pane.setLayout(new BorderLayout());
         pane.add(scrollPane, BorderLayout.CENTER);
 
-        Core.getMainWindow().addDockable(pane);
+        mw.addDockable(pane);
 
         Container c = pane;
         while (c != null && !(c instanceof DockingDesktop)) {
@@ -913,7 +913,7 @@ public class EditorController implements IEditor {
         if (trans != null) {
             SourceTextEntry ste = m_docSegList[displayedEntryIndex].ste;
             String lMsg = " " + ste.getSrcText().length() + "/" + trans.length() + " ";
-            Core.getMainWindow().showLengthMessage(lMsg);
+            mw.showLengthMessage(lMsg);
         }
     }
 
@@ -1018,7 +1018,7 @@ public class EditorController implements IEditor {
             pMsg.append(translatedInFile).append("/").append(fi.entries.size()).append(" (")
                     .append(stat.numberofTranslatedSegments).append("/").append(stat.numberOfUniqueSegments)
                     .append(", ").append(stat.numberOfSegmentsTotal).append(") ");
-            Core.getMainWindow().showProgressMessage(pMsg.toString());
+            mw.showProgressMessage(pMsg.toString());
         } else {
             /*
              * Percentage mode based on idea by Yu Tang
@@ -1037,7 +1037,7 @@ public class EditorController implements IEditor {
                     stat.numberOfUniqueSegments - stat.numberofTranslatedSegments,
                     stat.numberOfSegmentsTotal);
 
-            Core.getMainWindow().showProgressMessage(message);
+            mw.showProgressMessage(message);
         }
     }
 
@@ -1923,7 +1923,7 @@ public class EditorController implements IEditor {
         emptyProjectPane = new JTextPane();
         emptyProjectPane.setEditable(false);
         emptyProjectPane.setText(OStrings.getString("TF_INTRO_EMPTYPROJECT"));
-        emptyProjectPane.setFont(Core.getMainWindow().getApplicationFont());
+        emptyProjectPane.setFont(mw.getApplicationFont());
         DragTargetOverlay.apply(emptyProjectPane, dropInfo);
     }
 

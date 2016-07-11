@@ -379,7 +379,7 @@ public final class PluginUtils {
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         default:
-            Log.logErrorRB("PLUGIN_UNKNOWN", key);
+            Log.logErrorRB("PLUGIN_UNKNOWN", sType, key);
         }
     }
 }

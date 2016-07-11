@@ -23,9 +23,6 @@ def segment_count = 0
 def cur_num = editor.getCurrentEntry().entryNum()
 
 project.allEntries.each { ste ->
-  if (java.lang.Thread.interrupted()) {
-    break;
-  }
 
   source = ste.getSrcText();
   // If the segment has been translated, we get store translated text in the target variable.

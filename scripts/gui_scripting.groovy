@@ -15,6 +15,7 @@ data = []
 files = project.projectFiles;
 segment_count=0
 
+fileLoop:
 for (i in 0 ..< files.size())
 {
     fi = files[i];
@@ -22,6 +23,10 @@ for (i in 0 ..< files.size())
     console.println(fi.filePath);
     for (j in 0 ..< fi.entries.size())
     {
+        if (java.lang.Thread.interrupted()) {
+            break fileLoop;
+        }
+
         ste = fi.entries[j];
         source = ste.getSrcText();
         target = project.getTranslationInfo(ste) ? project.getTranslationInfo(ste).translation : null;

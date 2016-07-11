@@ -24,10 +24,14 @@ targetCurrency.setCurrency(sourceCurrency.currency);
 
 def segment_count = 0
 
-project.allEntries.each { ste ->
+def allEntries = project.allEntries;
+for (def i = 0; i < allEntries.size(); i++) {
+
     if (java.lang.Thread.interrupted()) {
       break;
     }
+    
+    def ste = allEntries.get(i);
     source = ste.getSrcText();
     target = project.getTranslationInfo(ste) ? project.getTranslationInfo(ste).translation : null;
 

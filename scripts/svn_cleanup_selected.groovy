@@ -7,6 +7,9 @@
  * @version	0.4
  */
 
+// For 4.0 team project, this script has to be used with the project closed, otherwise the
+// SVN repository will not be found.
+
 import javax.swing.JFileChooser
 import org.tmatesoft.svn.core.wc.*
 

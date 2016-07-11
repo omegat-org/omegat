@@ -48,7 +48,7 @@ public class HistoryPredictor extends AutoCompleterListView {
 
     WordPredictor predictor = new WordPredictor();
     private SourceTextEntry currentEntry;
-    private TMXEntry currentEntryTranslation;
+    private boolean isCurrentEntryTranslated;
 
     public HistoryPredictor() {
         super(OStrings.getString("AC_HISTORY_PREDICTIONS_VIEW"));
@@ -68,14 +68,19 @@ public class HistoryPredictor extends AutoCompleterListView {
             }
             @Override
             public void onEntryActivated(SourceTextEntry newEntry) {
+                if (!isEnabled()) {
+                    return;
+                }
                 SourceTextEntry lastEntry = currentEntry;
-                TMXEntry lastEntryTranslation = currentEntryTranslation;
-                if (lastEntry != null && lastEntryTranslation != null && !lastEntryTranslation.isTranslated()) {
+                boolean wasTranslated = isCurrentEntryTranslated;
+                if (lastEntry != null && !wasTranslated) {
                     TMXEntry newTranslation = Core.getProject().getTranslationInfo(lastEntry);
-                    trainString(newTranslation.translation);
+                    if (newTranslation.isTranslated()) {
+                        trainString(newTranslation.translation);
+                    }
                 }
                 currentEntry = newEntry;
-                currentEntryTranslation = Core.getProject().getTranslationInfo(newEntry);
+                isCurrentEntryTranslated = Core.getProject().getTranslationInfo(newEntry).isTranslated();
             }
         });
         Preferences.addPropertyChangeListener(evt -> {

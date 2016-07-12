@@ -44,6 +44,8 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.omegat.CLIParameters;
 import org.omegat.core.Core;
@@ -87,17 +89,10 @@ public final class PluginUtils {
         File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
         try {
             // list all jars in /plugins/
-            List<File> fs = FileUtil.findFiles(pluginsDir, new FileFilter() {
-                public boolean accept(File pathname) {
-                    return pathname.getName().endsWith(".jar");
-                }
-            });
-            List<File> fsHome = FileUtil.findFiles(homePluginsDir, new FileFilter() {
-                public boolean accept(File pathname) {
-                    return pathname.getName().endsWith(".jar");
-                }
-            });
-            fs.addAll(fsHome);
+            FileFilter jarFilter = pathname -> pathname.getName().endsWith(".jar");
+            List<File> fs = Stream.of(pluginsDir, homePluginsDir)
+                    .flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
+                    .collect(Collectors.toList());
             URL[] urls = new URL[fs.size()];
             for (int i = 0; i < urls.length; i++) {
                 urls[i] = fs.get(i).toURI().toURL();

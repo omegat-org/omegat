@@ -1008,7 +1008,7 @@ public class ScriptingWindow extends JFrame {
         //m_scriptList.setListData(items.toArray(new ScriptItem[items.size()]));
     }
     
-    private static final String DEFAULT_SCRIPTS_DIR = "scripts";
+    public static final String DEFAULT_SCRIPTS_DIR = "scripts";
 
     protected static final int NUMBERS_OF_QUICK_SCRIPTS = 12;
 

@@ -26,10 +26,17 @@
 package org.omegat.gui.scripting;
 
 import java.awt.HeadlessException;
+import java.io.BufferedReader;
 import java.io.File;
+import java.nio.file.Files;
 
+import javax.script.Compilable;
+import javax.script.ScriptEngine;
+
+import org.apache.commons.io.FilenameUtils;
 import org.omegat.core.TestCore;
 import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
 
 public class ScriptingTest extends TestCore {
 
@@ -56,6 +63,24 @@ public class ScriptingTest extends TestCore {
             ex.printStackTrace();
         } finally {
             assertTrue(tmp.delete());
+        }
+    }
+
+    public void testCompileScripts() throws Exception {
+        File scriptDir = new File(StaticUtils.installDir(), ScriptingWindow.DEFAULT_SCRIPTS_DIR);
+        assertTrue(scriptDir.isDirectory());
+        for (File f : scriptDir.listFiles()) {
+            if (!f.isFile()) {
+                continue;
+            }
+            String ext = FilenameUtils.getExtension(f.getName());
+            ScriptEngine engine = ScriptRunner.MANAGER.getEngineByExtension(ext);
+            if (engine instanceof Compilable) {
+                Compilable cEngine = (Compilable) engine;
+                try (BufferedReader br = Files.newBufferedReader(f.toPath())) {
+                    assertNotNull(cEngine.compile(br));
+                }
+            }
         }
     }
 }

@@ -137,7 +137,7 @@ jar {
                 'Main-Class': mainClassName,
                 'Class-Path': configurations.compile.collect { "lib/${it.name}" }.join(' '))
         omtPlugins.keys().each { key ->
-            if (key != 'plugins') {
+            if (key != 'plugin') {
                 omtPlugins[key].tokenize().each { cls ->
                     attributes('OmegaT-Plugin': key, cls)
                 }

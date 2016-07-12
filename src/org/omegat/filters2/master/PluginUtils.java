@@ -71,7 +71,6 @@ public final class PluginUtils {
         FILTER, TOKENIZER, MARKER, MACHINETRANSLATOR, BASE, GLOSSARY, UNKNOWN
     };
 
-    protected static URLClassLoader pluginsClassLoader;
     protected static List<Class<?>> loadedPlugins = new ArrayList<Class<?>>();
 
     /** Private constructor to disallow creation */
@@ -106,7 +105,7 @@ public final class PluginUtils {
             }
             boolean foundMain = false;
             // look on all manifests
-            pluginsClassLoader = new URLClassLoader(urls, PluginUtils.class.getClassLoader());
+            URLClassLoader pluginsClassLoader = new URLClassLoader(urls, PluginUtils.class.getClassLoader());
             for (Enumeration<URL> mlist = pluginsClassLoader.getResources("META-INF/MANIFEST.MF"); mlist
                     .hasMoreElements();) {
                 URL mu = mlist.nextElement();

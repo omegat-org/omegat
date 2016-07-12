@@ -109,18 +109,14 @@ public final class PluginUtils {
             for (Enumeration<URL> mlist = pluginsClassLoader.getResources("META-INF/MANIFEST.MF"); mlist
                     .hasMoreElements();) {
                 URL mu = mlist.nextElement();
-                InputStream in = mu.openStream();
-                Manifest m;
-                try {
-                    m = new Manifest(in);
-                } finally {
-                    in.close();
+                try (InputStream in = mu.openStream()) {
+                    Manifest m = new Manifest(in);
+                    if ("org.omegat.Main".equals(m.getMainAttributes().getValue("Main-Class"))) {
+                        // found main manifest - not in development mode
+                        foundMain = true;
+                    }
+                    loadFromManifest(m, pluginsClassLoader);
                 }
-                if ("org.omegat.Main".equals(m.getMainAttributes().getValue("Main-Class"))) {
-                    // found main manifest - not in development mode
-                    foundMain = true;
-                }
-                loadFromManifest(m, pluginsClassLoader);
             }
             if (!foundMain) {
                 // development mode - load from dev-manifests CLI arg

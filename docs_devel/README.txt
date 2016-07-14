@@ -40,6 +40,24 @@ becomes
     compile 'commons-io:commons-io:2.4'
 
 
+Customized Dependencies
+=======================
+
+OmegaT uses unmodified packages as much as possible, but when modifications are
+required and the upstream project is abandoned or unresponsive, custom-patched
+libraries are also used.
+
+Patched forks can be found on GitHub:
+    https://github.com/omegat-org
+
+In some cases (especially defunct projects) OmegaT forks are also published for
+general use on Bintray/JCenter:
+    https://bintray.com/omegat-org
+
+Dependencies not available for consumption via Maven/Gradle are committed to
+/lib/manual.
+
+
 Contributing to OmegaT
 ======================
 

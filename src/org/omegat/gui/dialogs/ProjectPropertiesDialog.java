@@ -43,6 +43,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.AbstractAction;
@@ -232,7 +233,8 @@ public class ProjectPropertiesDialog extends JDialog {
         // Tokenizers box
         Box bT = Box.createVerticalBox();
         localesBox.add(bT);
-        Class<?>[] tokenizers = PluginUtils.getTokenizerClasses().toArray(new Class<?>[0]);
+        Class<?>[] tokenizers = PluginUtils.getTokenizerClasses().stream().sorted(Comparator.comparing(Class::getName))
+                .toArray(Class[]::new);
 
         // Source tokenizer label
         JLabel m_sourceTokenizerLabel = new JLabel();

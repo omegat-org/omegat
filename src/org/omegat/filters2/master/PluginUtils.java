@@ -34,8 +34,6 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
@@ -134,14 +132,6 @@ public final class PluginUtils {
         } catch (Exception ex) {
             Log.log(ex);
         }
-        
-        // Sort tokenizer list for display in Project Properties dialog.
-        Collections.sort(tokenizerClasses, new Comparator<Class<?>>() {
-            @Override
-            public int compare(Class<?> c1, Class<?> c2) {
-                return c1.getName().compareTo(c2.getName());
-            }
-        });
         
         // run base plugins
         for (Class<?> pl : basePluginClasses) {

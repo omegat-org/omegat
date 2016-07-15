@@ -282,6 +282,36 @@ public class Preferences {
     public static final String SPELLCHECKER_DICTIONARY_URL = "dictionary_url";
 
     /**
+     * Use buildin LanguageTool
+     */
+    public static final String LANGUAGETOOL_USE_BUILDIN = "lt_useBuildin";
+
+    /**
+     * Spawn own LanguageTool server
+     */
+    public static final String LANGUAGETOOL_SPAWN_SERVER = "lt_spawnServer";
+
+    /**
+     * URL of external LanguageTool server
+     */
+    public static final String LANGUAGETOOL_EXTERNAL_SERVER_URL = "lt_externalServerURL";
+
+    /**
+     * Port for spawned LanguageTool server
+     */
+    public static final String LANGUAGETOOL_LOCAL_PORT = "lt_localPort";
+
+    /**
+     * Local LanguageTool directory
+     */
+    public static final String LANGUAGETOOL_INSTALL_DIR = "lt_installDir";
+
+    /**
+     * Apply different punctuation bitext rule in LanguageTool
+     */
+    public static final String LANGUAGETOOL_BITEXT_RULE_DIFF_PUNCTUATION = "lt_diffPunctuationRule";
+
+    /**
      * The location of the scripts
      */
     public static final String SCRIPTS_DIRECTORY = "scripts_dir";

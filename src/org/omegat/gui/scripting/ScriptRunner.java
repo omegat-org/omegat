@@ -26,13 +26,12 @@
 package org.omegat.gui.scripting;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.script.ScriptEngine;
-import javax.script.ScriptEngineFactory;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import javax.script.SimpleBindings;
@@ -157,12 +156,7 @@ public class ScriptRunner {
     }
 
     public static List<String> getAvailableScriptExtensions() {
-        ArrayList<String> extensions = new ArrayList<String>();
-        for (ScriptEngineFactory engine : MANAGER.getEngineFactories()) {
-            for (String ext : engine.getExtensions()) {
-                extensions.add(ext);
-            }
-        }
-        return extensions;
+        return MANAGER.getEngineFactories().stream().flatMap(factory -> factory.getExtensions().stream())
+                .collect(Collectors.toList());
     }
 }

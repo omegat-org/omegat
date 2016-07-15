@@ -26,22 +26,33 @@
 package org.omegat.gui.scripting;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.script.Bindings;
+import javax.script.Invocable;
+import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import javax.script.SimpleBindings;
+import javax.swing.SwingUtilities;
 
 import org.apache.commons.io.FilenameUtils;
 import org.omegat.core.Core;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
 public class ScriptRunner {
+
+    /**
+     * Scripts that want to run on the Event Dispatch Thread should define a
+     * top-level function with this name and NOT evaluate it.
+     */
+    public static final String SCRIPT_GUI_FUNCTION_NAME = "gui";
 
     public static final String DEFAULT_SCRIPT = "groovy";
     public static final String VAR_CONSOLE = "console";
@@ -141,7 +152,7 @@ public class ScriptRunner {
             throws ScriptException {
         // logResult(StaticUtils.format(OStrings.getString("SCW_SELECTED_LANGUAGE"),
         // engine.getFactory().getEngineName()));
-        SimpleBindings bindings = new SimpleBindings();
+        Bindings bindings = engine.createBindings();
         bindings.put(VAR_PROJECT, Core.getProject());
         bindings.put(VAR_EDITOR, Core.getEditor());
         bindings.put(VAR_GLOSSARY, Core.getGlossary());
@@ -151,8 +162,40 @@ public class ScriptRunner {
         if (additionalBindings != null) {
             bindings.putAll(additionalBindings);
         }
+        engine.setBindings(bindings, ScriptContext.ENGINE_SCOPE);
+        Object result = engine.eval(script);
+        if (engine instanceof Invocable) {
+            invokeGuiScript((Invocable) engine);
+        }
+        return result;
+    }
 
-        return engine.eval(script, bindings);
+    private static void invokeGuiScript(Invocable engine) throws ScriptException {
+        Runnable invoke = () -> {
+            try {
+                engine.invokeFunction(SCRIPT_GUI_FUNCTION_NAME);
+            } catch (NoSuchMethodException e) {
+                // No GUI invocation defined
+            } catch (ScriptException e) {
+                throw new RuntimeException(e);
+            }
+        };
+        if (SwingUtilities.isEventDispatchThread()) {
+            invoke.run();
+        } else {
+            try {
+                SwingUtilities.invokeAndWait(invoke);
+            } catch (InvocationTargetException e) {
+                // The original cause is double-wrapped at this point
+                if (e.getCause().getCause() instanceof ScriptException) {
+                    throw (ScriptException) e.getCause().getCause();
+                } else {
+                    Log.log(e);
+                }
+            } catch (InterruptedException e) {
+                Log.log(e);
+            }
+        }
     }
 
     public static List<String> getAvailableScriptExtensions() {

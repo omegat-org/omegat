@@ -85,9 +85,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
     }
 
     private void scanFileForDescription(File file) {
-        Scanner scan = null;
-        try {
-            scan = new Scanner(file);
+        try (Scanner scan = new Scanner(file)) {
             scan.findInLine(":name\\s*=\\s*(.*)\\s+:description\\s*=\\s*(.*)");
             MatchResult results = scan.match();
             m_scriptName = results.group(1).trim();
@@ -96,12 +94,6 @@ public class ScriptItem implements Comparable<ScriptItem> {
             /* bad luck */
         } catch (FileNotFoundException e) {
             /* ignore - it should not happen here */
-        }
-        finally {
-            if (scan != null)
-            {
-                scan.close();
-            }
         }
     }
 

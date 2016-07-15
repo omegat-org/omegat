@@ -1,12 +1,14 @@
 /* Remove tags in the current target or in selection
  * 
  * @author   Kos Ivantsov
- * @date     2014-06-05
- * @version  0.3
+ * @date     2016-07-15
+ * @version  0.4
  */
+
 import static javax.swing.JOptionPane.*
 import static org.omegat.util.Platform.*
 
+def gui() {
 // abort if a project is not opened yet
 def prop = project.projectProperties
 if (!prop) {
@@ -32,3 +34,4 @@ if (editor.selectedText){
 	}else{
 	editor.replaceEditText(target)
 	}
+}

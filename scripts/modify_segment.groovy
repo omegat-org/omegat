@@ -1,5 +1,6 @@
 // :name=Example - Modify Segment :description=Example of segment modification
 
+def gui() {
 def ste = editor.currentEntry;
 
 if (ste .srcText != "enu"  ) 
@@ -15,4 +16,5 @@ if (ste .srcText != "enu"  )
 
     editor.replaceEditText(target);
     editor.nextEntry();
+}
 }

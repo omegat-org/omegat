@@ -4,11 +4,12 @@
  *  This will translate a string like "$123,399.99" to "123 399,99 USD"
  *
  * @author  Briac Pilpré
- * @date    2011-10-30
- * @version 0.1
+ * @date    2016-07-15
+ * @version 0.2
  */
 import java.text.NumberFormat
  
+def gui() {
 console.println("Convert currencies according to source and target locales.\n");
 
 // USD Currency Format
@@ -46,4 +47,4 @@ project.allEntries.each { ste ->
 }
 
 console.println("Segments modifier: " + segment_count);
-
+}

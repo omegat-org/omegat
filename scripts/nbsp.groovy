@@ -2,12 +2,13 @@
  *
  * @author  Didier Briel
  * @author  Briac Pilpre
- * @date    2016-20-04
- * @version 0.3
+ * @date    2016-07-15
+ * @version 0.4
  */
 
 // search_string_before and replace_string_before are two variables representing the text to search and to replace, 
 // respectively. search_string_after and replace_string_after have the same function
+def gui() {
 def search_string_before  = /\s([:?!;»])/
 def replace_string_before = /\u00A0$1/
 def search_string_percent = /(\d)\s%/
@@ -61,3 +62,4 @@ project.allEntries.each { ste ->
  // We return to the initial segment
  editor.gotoEntry(cur_num)
  console.println("modified_segments: " + segment_count);
+}

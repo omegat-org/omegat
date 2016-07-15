@@ -4,14 +4,15 @@
  * #Details: href="http://wp.me/p3fHEs-4W
  * 
  * @author   Kos Ivantsov
- * @date     2013-06-26
- * @version  0.1
+ * @date     2016-07-15
+ * @version  0.2
  */
  
 import static javax.swing.JOptionPane.*
 import static org.omegat.util.Platform.*
 import org.omegat.core.Core;
  
+def gui() {
 // abort if a project is not opened yet
 def prop = project.projectProperties
 if (!prop) {
@@ -27,4 +28,5 @@ if (near != null) {
   def matchtranslation = "$near.translation"
   matchtranslation = matchtranslation.replaceAll(/<\/?[a-z]+[0-9]* ?\/?>/, '')
   editor.replaceEditText(matchtranslation);
+}
 }

@@ -1,12 +1,13 @@
 /* Remove bidi mark in the current target or in selection
  * 
  * @author   Manuel Souto Pico (based on Kos Ivantsov's Strip Tags script)
- * @date     2015-09-21
- * @version  0.1
+ * @date     2016-07-15
+ * @version  0.2
  */
 import static javax.swing.JOptionPane.*
 import static org.omegat.util.Platform.*
 
+def gui() {
 // abort if a project is not opened yet
 def prop = project.projectProperties
 if (!prop) {
@@ -31,4 +32,5 @@ if (editor.selectedText){
 	editor.insertText(target)
 	}else{
 	editor.replaceEditText(target)
+}
 }

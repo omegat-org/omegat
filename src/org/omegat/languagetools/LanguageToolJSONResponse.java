@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 public class LanguageToolJSONResponse {
 
-    private final static String currentApiVersion = "1";
+    private final static String CURRENT_API_VERSION = "1";
 
     class Software {
         public String name;
@@ -100,5 +100,9 @@ public class LanguageToolJSONResponse {
         this.software = new Software();
         this.language = new Language();
         this.matches = new ArrayList<>();
+    }
+
+    public boolean apiVersionIsValid() {
+        return software.apiVersion.equals(CURRENT_API_VERSION);
     }
 }

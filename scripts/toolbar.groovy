@@ -15,13 +15,13 @@ def toolBar = new JToolBar("Still draggable");
 
 def scriptsDir = new File(Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY, "."));
 
-scriptsDir.list().each{ f ->
-	if ( f.find(/\.groovy$/) )
+scriptsDir.listFiles().each{ f ->
+	if ( f.getPath().endsWith('.groovy') )
 	{
 		console.println("button \"" + f + "\"")
-		def item = new ScriptItem(f, scriptsDir);
+		def item = new ScriptItem(f);
 		def button = new JButton()
-		button.setText(item.name)
+		button.setText(item.scriptName)
 		button.setToolTipText(item.description)
 		//button.addMouseListener(null)
 		toolBar.add(button)

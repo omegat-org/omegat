@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010-2013 Alex Buloichik
@@ -26,9 +26,7 @@
 
 package org.omegat.languagetools;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -38,9 +36,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.text.Highlighter.HighlightPainter;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
+import net.arnx.jsonic.JSON;
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
 import org.languagetool.Languages;
@@ -62,22 +59,19 @@ import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
+import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.Styles;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  * Marker implementation for LanguageTool support.
- * 
+ *
  * Bilingual check described <a href=
  * "http://languagetool.wikidot.com/checking-translations-bilingual-texts">here
  * </a>
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  * @author Lev Abashkin
@@ -85,18 +79,13 @@ import org.w3c.dom.NodeList;
 public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApplicationEventListener {
     protected static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
 
-    /* Preferences */
-    private final String LT_USE_BUILDIN = "languagetool_use_buildin";
-    private final String LT_SPAWN_SERVER = "languagetool_spawn_server";
-    private final String LT_EXT_SERVER_URL = "languagetool_external_server_url";
-    private final String LT_LOCAL_PORT = "languagetool_local_port";
-    private final String LT_DIR = "languagetool_directory";
+    /* Constants */
+    private final static int DEFAULT_LOCAL_PORT = 8081;
+    private final static String URL_PATH = "/v2/check";
+    private final static String SERVER_JAR_NAME = "languagetool-server.jar";
+    private final static String SERVER_CLASS_NAME = "org.languagetool.server.HTTPServer";
 
-    /* Default values */
-    private final String DEFAULT_LT_DIR = "LanguageTool";
-    private final int DEFAULT_LT_PORT = 8081;
-
-    /* Properties of build-in LT */
+    /* Properties of built-in LT */
     private JLanguageTool sourceLt, targetLt;
     private List<BitextRule> bRules;
 
@@ -104,21 +93,27 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
     private Process server;
     private String sourceLang, targetLang, serverUrl, ltPath;
     private int serverPort;
-    private boolean spawnServer, useBuildin;
+    private boolean spawnServer, ruleDiffPunctuation;
+    private Boolean useBuiltIn = null;
 
     public LanguageToolWrapper() throws Exception {
+        this(null);
+    }
+
+    public LanguageToolWrapper(Boolean useBuiltIn) throws Exception {
+        this.useBuiltIn = useBuiltIn;
         CoreEvents.registerProjectChangeListener(this);
         CoreEvents.registerApplicationEventListener(this);
         loadPreferences();
+
     }
 
     public synchronized void onApplicationShutdown(){
+        // Terminate spawned server on application shutdown without closing a project before.
         terminateLanguageToolServer();
     }
 
-    public synchronized void onApplicationStartup(){
-        spawnLanguageToolServer();
-    }
+    public synchronized void onApplicationStartup(){}
 
     public boolean isEnabled() {
         return Core.getEditor().getSettings().isMarkLanguageChecker();
@@ -128,7 +123,7 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
         switch (eventType) {
         case CREATE:
         case LOAD:
-            if (useBuildin) {
+            if (useBuiltIn) {
                 Language sl = getLTLanguage(Core.getProject().getProjectProperties().getSourceLanguage());
                 Language tl = getLTLanguage(Core.getProject().getProjectProperties().getTargetLanguage());
                 sourceLt = getLanguageToolInstance(sl);
@@ -139,11 +134,13 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
             } else {
                 sourceLang = Core.getProject().getProjectProperties().getSourceLanguage().toString();
                 targetLang = Core.getProject().getProjectProperties().getTargetLanguage().toString();
+                spawnLanguageToolServer();
             }
             break;
         case CLOSE:
             sourceLt = null;
             targetLt = null;
+            terminateLanguageToolServer();
             break;
         default:
             // Nothing
@@ -170,16 +167,18 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
     @Override
     public synchronized List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
             boolean isActive) throws Exception {
-        // Return when disabled or translation text is empty
-        if (translationText == null || "".equals(translationText) || !isEnabled()) {
-            return null;
-        }
-        // Return when external LT is misconfigured or not available
-        if (!useBuildin && server == null && spawnServer) {
+
+        if (translationText == null || !isEnabled()) {
+            // Return when disabled or translation text is empty
             return null;
         }
 
-        if (useBuildin && targetLt == null) {
+        if (!useBuiltIn && server == null && spawnServer) {
+            // Return when external LT is misconfigured or not available
+            return null;
+        }
+
+        if (useBuiltIn && targetLt == null) {
             // LT doesn't know anything about target language
             return null;
         }
@@ -192,8 +191,8 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
         // handle the translation here:
         translationText = StringUtil.normalizeUnicode(translationText);
 
-        if (useBuildin) {
-            return getMarksForEntryBuildin(ste, sourceText, translationText);
+        if (useBuiltIn) {
+            return getMarksForEntryBuiltIn(ste, sourceText, translationText);
         } else {
             return getMarksForEntryExternal(sourceText, translationText);
         }
@@ -204,7 +203,7 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
     /**
      * Get marks for build-in path
      */
-    private List<Mark> getMarksForEntryBuildin(SourceTextEntry ste, String sourceText, String translationText)
+    private List<Mark> getMarksForEntryBuiltIn(SourceTextEntry ste, String sourceText, String translationText)
             throws Exception {
         List<Mark> r = new ArrayList<>();
         List<RuleMatch> matches;
@@ -236,38 +235,30 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
      */
     private List<Mark> getMarksForEntryExternal(String sourceText, String translationText)
             throws Exception {
-        InputStream stream;
 
-        String requestString = getRequestUrl(sourceText, translationText);
-        URLConnection connection = new URL(requestString).openConnection();
-        stream = connection.getInputStream();
-        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        Document doc = builder.parse(stream);
-        stream.close();
-        NodeList eNodes = doc.getElementsByTagName("error");
+        URL url = new URL(serverUrl);
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+        writer.write(buildPostData(sourceText, translationText));
+        writer.flush();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        LanguageToolJSONResponse response = JSON.decode(reader, LanguageToolJSONResponse.class);
+        writer.close();
+        reader.close();
 
-        int offset, errorLength;
-        String errorMessage, ruleId;
+        if (!response.apiVersionIsValid()) {
+            Log.logWarningRB("LT_API_VERSION_MISMATCH");
+        }
+
         List<Mark> r = new ArrayList<>();
-
-        for (int i = 0; i < eNodes.getLength(); i++) {
-            Node eNode = eNodes.item(i);
-
-            if (eNode.getNodeType() == Node.ELEMENT_NODE) {
-                Element eElement = (Element) eNode;
-                // Skip undesired rules
-                ruleId = eElement.getAttribute("ruleId");
-                if ("SAME_TRANSLATION".equals(ruleId) || "TRANSLATION_LENGTH".equals(ruleId)) {
-                    continue;
-                }
-                offset = Integer.parseInt(eElement.getAttribute("offset"));
-                errorLength = Integer.parseInt(eElement.getAttribute("errorlength"));
-                errorMessage = eElement.getAttribute("msg");
-                Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, offset, offset + errorLength);
-                m.toolTipText = addSuggestionTags(errorMessage);
-                m.painter = PAINTER;
-                r.add(m);
-            }
+        for (LanguageToolJSONResponse.Match match : response.matches) {
+            Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION,
+                              match.offset.intValue(),
+                              match.offset.intValue() + match.length.intValue());
+            m.toolTipText = addSuggestionTags(match.message);
+            m.painter = PAINTER;
+            r.add(m);
         }
         return r;
      }
@@ -302,7 +293,7 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
                 result.remove(i--);
                 continue;
             }
-            if (result.get(i) instanceof DifferentPunctuationRule) {
+            if (result.get(i) instanceof DifferentPunctuationRule && !ruleDiffPunctuation) {
                 result.remove(i--);
             }
         }
@@ -313,11 +304,16 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
      * Load and initialize preferences
      */
     private void loadPreferences() {
-        useBuildin = Preferences.isPreferenceDefault(LT_USE_BUILDIN, true);
-        spawnServer = Preferences.isPreferenceDefault(LT_SPAWN_SERVER, true);
-        serverUrl = Preferences.getPreferenceDefault(LT_EXT_SERVER_URL,"");
-        serverPort = Preferences.getPreferenceDefault(LT_LOCAL_PORT, DEFAULT_LT_PORT);
-        ltPath = Preferences.getPreferenceDefault(LT_DIR, DEFAULT_LT_DIR);
+        if (useBuiltIn == null) {
+            useBuiltIn = Preferences.isPreferenceDefault(Preferences.LANGUAGETOOL_USE_BUILDIN, true);
+        }
+        spawnServer = Preferences.isPreferenceDefault(Preferences.LANGUAGETOOL_SPAWN_SERVER, true);
+        serverUrl = Preferences.getPreferenceDefault(Preferences.LANGUAGETOOL_EXTERNAL_SERVER_URL,"");
+        serverPort = Preferences.getPreferenceDefault(Preferences.LANGUAGETOOL_LOCAL_PORT, DEFAULT_LOCAL_PORT);
+        ltPath = Preferences.getPreferenceDefault(Preferences.LANGUAGETOOL_INSTALL_DIR, "");
+        ruleDiffPunctuation = Preferences.isPreferenceDefault(Preferences.LANGUAGETOOL_BITEXT_RULE_DIFF_PUNCTUATION, false);
+
+        if (useBuiltIn) return;
 
         if (!spawnServer) {
             try {
@@ -333,25 +329,25 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
             ltPath = Paths.get(StaticUtils.installDir(), ltPath).toString();
         }
 
-        ltPath = Paths.get(ltPath, "languagetool-server.jar").toString();
-        serverUrl = "http://localhost:" + Integer.toString(serverPort);
+        ltPath = Paths.get(ltPath, SERVER_JAR_NAME).toString();
+        serverUrl = "http://localhost:" + Integer.toString(serverPort) + URL_PATH;
     }
 
     /**
      * Spawn LanguageTool server instanse
      */
     private void spawnLanguageToolServer() {
-        if (!useBuildin && spawnServer) {
+        if (!useBuiltIn && spawnServer) {
             try {
                 ProcessBuilder pb = new ProcessBuilder("java",
                         "-cp",
                         ltPath,
-                        "org.languagetool.server.HTTPServer",
+                        SERVER_CLASS_NAME,
                         "--port",
                         Integer.toString(serverPort));
                 pb.inheritIO();
                 server = pb.start();
-                Log.log("LanguageTool sever started.");
+                Log.log(OStrings.getString("LT_SERVER_STARTED"));
             } catch (IOException ex) {
                 Log.log(ex);
                 server = null;
@@ -368,7 +364,7 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
         if (server != null) {
             try {
                 server.destroy();
-                Log.log("LanguageTool server terminated.");
+                Log.log(OStrings.getString("LT_SERVER_TERMINATED"));
             } catch (Exception ex) {
                 Log.log(ex);
             }
@@ -376,25 +372,29 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
     }
 
     /**
-     * Replace single quotes with <suggestion/> tags in error message
-     * to imitate build-in LanguageTool behavior
+     * Replace double quotes with <suggestion></suggestion> tags
+     * in error message to imitate native LanguageTool behavior
      */
     private static String addSuggestionTags(String str) {
-        return str.replaceAll("^([^:]+:\\s?)'([^']+)'", "$1<suggestion>$2</suggestion>");
+        return str.replaceAll("^([^:]+:\\s?)\"([^']+)\"", "$1<suggestion>$2</suggestion>");
     }
 
     /**
-     * Create LanguageTool request URL
+     * Construct POST request data
      */
-    private String getRequestUrl(String sourceText, String targetText) throws UnsupportedEncodingException {
+    private String buildPostData(String sourceText, String targetText) throws UnsupportedEncodingException {
         String encoding = "UTF-8";
-        String url = serverUrl +
-                "?text=" + URLEncoder.encode(targetText, encoding) +
+        String result = "text=" + URLEncoder.encode(targetText, encoding) +
                 "&language=" + URLEncoder.encode(targetLang, encoding);
         if (sourceText != null) {
-            url += "&srctext=" + URLEncoder.encode(sourceText, encoding) +
-                   "&motherTongue=" + URLEncoder.encode(sourceLang, encoding);
+            result += "&srctext=" + URLEncoder.encode(sourceText, encoding) +
+                    "&motherTongue=" + URLEncoder.encode(sourceLang, encoding);
         }
-        return url;
+        // Exclude spelling rules
+        result += "&disabledCategories=TYPOS";
+        // Exclude bitext rules
+        result += "&disabledRules=" + URLEncoder.encode("SAME_TRANSLATION,TRANSLATION_LENGTH", encoding);
+        if (!ruleDiffPunctuation) result += URLEncoder.encode(",DIFFERENT_PUNCTUATION", encoding);
+        return result;
     }
 }

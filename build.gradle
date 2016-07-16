@@ -97,7 +97,7 @@ dependencies {
     dependency 'org.omegat:juniversalchardet:1.0.4'
     // Groovy used for scripts only
     dependency 'org.codehaus.groovy:groovy-all:2.4.6'
-    
+
     //RSyntaxUI and additional modules
     dependency 'com.fifesoft:rsyntaxtextarea:2.5.8'
     dependency 'com.fifesoft:rstaui:2.5.7'
@@ -114,7 +114,7 @@ dependencies {
 
     // WebStart-only
     jnlp project(path: ':release:WebStart-specific', configuration: 'docs')
-    
+
     testIntegrationCompile sourceSets.main.output, sourceSets.test.output, configurations.compile
 }
 

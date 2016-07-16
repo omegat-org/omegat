@@ -169,7 +169,7 @@ public class FalseFriendsTest extends TestCore {
 
     @Test
     public void testExecute() throws Exception {
-        LanguageToolWrapper wrapper = new LanguageToolWrapper() {
+        LanguageToolWrapper wrapper = new LanguageToolWrapper(true) {
             public boolean isEnabled() {
                 return true;
             };
@@ -184,7 +184,7 @@ public class FalseFriendsTest extends TestCore {
 
     @Test
     public void testRemoveRules() throws Exception {
-        LanguageToolWrapper wrapper = new LanguageToolWrapper() {
+        LanguageToolWrapper wrapper = new LanguageToolWrapper(true) {
             public boolean isEnabled() {
                 return true;
             };

@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2010 Didier Briel
                2010 Antonio Vilei
-               2011-2015 Didier Briel
+               2011-2016 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -47,7 +47,7 @@ public class OpenXMLDialect extends DefaultXMLDialect {
     public void defineDialect(OpenXMLOptions options) {
         defineParagraphTags(new String[] {
                 // Word
-                "w:p", "w:tab", 
+                "w:p", "w:tab", "dc:title", "dc:subject", "dc:creator",
                 // Excel
                 "si", "comment", "definedName",
                 // PowerPoint
@@ -76,7 +76,8 @@ public class OpenXMLDialect extends DefaultXMLDialect {
                 // Charts
                 "c:f", "c:formatCode",
                 // Word
-                "wp:align", "wp:posOffset", "wp14:pctWidth", "wp14:pctHeight", "w:fldChar",
+                "wp:align", "wp:posOffset", "wp14:pctWidth", "wp14:pctHeight", "w:fldChar", "cp:lastModifiedBy",
+                "cp:revision", "cp:lastPrinted", "dcterms:created", "dcterms:modified", "cp:version",
                 // Drawings
                 "xdr:col", "xdr:row", "xdr:colOff", "xdr:rowOff", 
                 // Visio (copied directly from the Visio filter. As far as we know, the dialect is the same)

@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2010 Didier Briel
                2010 Antonio Vilei
-               2011-2015 Didier Briel
+               2011-2016 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -64,6 +64,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         translateHeadersCB.setSelected(options.getTranslateHeaders());
         translateFootersCB.setSelected(options.getTranslateFooters());
         translateFallbackTextCB.setSelected(options.getTranslateFallbackText());
+        translateDocumentPropertiesCB.setSelected(options.getTranslateDocumentProperties());
         translateDiagramsCB.setSelected(options.getTranslateDiagrams());
         translateExcelCommentsCB.setSelected(options.getTranslateExcelComments());
         translateSheetNamesCB.setSelected(options.getTranslateSheetNames());
@@ -122,6 +123,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         translateHeadersCB = new javax.swing.JCheckBox();
         translateFootersCB = new javax.swing.JCheckBox();
         translateFallbackTextCB = new javax.swing.JCheckBox();
+        translateDocumentPropertiesCB = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
         translateExcelCommentsCB = new javax.swing.JCheckBox();
         translateSheetNamesCB = new javax.swing.JCheckBox();
@@ -208,6 +210,9 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(translateFallbackTextCB, OStrings.getString("OpenXML_TRANSLATE_FALLBACK_TEXT")); // NOI18N
         jPanel1.add(translateFallbackTextCB);
 
+        org.openide.awt.Mnemonics.setLocalizedText(translateDocumentPropertiesCB, OStrings.getString("OpenXML_TRANSLATE_DOCUMENT_PROPERTIES")); // NOI18N
+        jPanel1.add(translateDocumentPropertiesCB);
+
         jLabel4.setFont(jLabel4.getFont().deriveFont(jLabel4.getFont().getStyle() | java.awt.Font.BOLD, jLabel4.getFont().getSize()-2));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         org.openide.awt.Mnemonics.setLocalizedText(jLabel4, OStrings.getString("OpenXML_EXCEL")); // NOI18N
@@ -284,6 +289,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         options.setTranslateHeaders(translateHeadersCB.isSelected());
         options.setTranslateFooters(translateFootersCB.isSelected());
         options.setTranslateFallbackText(translateFallbackTextCB.isSelected());
+        options.setTranslateDocumentProperties(translateDocumentPropertiesCB.isSelected());
         options.setTranslateDiagrams(translateDiagramsCB.isSelected());
         options.setTranslateExcelComments(translateExcelCommentsCB.isSelected());
         options.setTranslateSheetNames(translateSheetNamesCB.isSelected());
@@ -334,6 +340,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox translateChartsCB;
     private javax.swing.JCheckBox translateCommentsCB;
     private javax.swing.JCheckBox translateDiagramsCB;
+    private javax.swing.JCheckBox translateDocumentPropertiesCB;
     private javax.swing.JCheckBox translateDrawingsCB;
     private javax.swing.JCheckBox translateEndnotesCB;
     private javax.swing.JCheckBox translateExcelCommentsCB;

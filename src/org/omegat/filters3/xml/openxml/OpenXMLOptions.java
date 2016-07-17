@@ -5,7 +5,7 @@
 
  Copyright (C) 2007-2010 Didier Briel
                2010 Antonio Vilei
-               2011-2015 Didier Briel               
+               2011-2016 Didier Briel               
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -45,6 +45,7 @@ import org.omegat.filters2.AbstractOptions;
  * <li>[+] Header (Word)
  * <li>[+] Footer (Word)
  * <li>[] Duplicate fallback text (Word)
+ * <li>[] Document properties (Word)
  * <li>[+] Comments (Excel)
  * <li>[] Sheet names (Excel)
  * <li>[+] Slide comments (PowerPoint)
@@ -86,6 +87,7 @@ public class OpenXMLOptions extends AbstractOptions {
     private static final String OPTION_AGGREGATE_TAGS = "aggregateTags";
     private static final String OPTION_PRESERVE_SPACES = "preserveSpaces";
     private static final String OPTION_BREAK_ON_BR = "breakOnBr";
+    private static final String OPTION_DOCUMENT_PROPERTIES = "documentProperties";
 
     public OpenXMLOptions(Map<String, String> options) {
         super(options);
@@ -377,5 +379,20 @@ public class OpenXMLOptions extends AbstractOptions {
         setBoolean(OPTION_BREAK_ON_BR, breakOnBr);
     }
             
+    /**
+     * Returns whether Word document properties should be translated
+     * @return the state of OPTION_DOCUMENT_PROPERTIES
+     */
+    public boolean getTranslateDocumentProperties() {
+        return getBoolean(OPTION_DOCUMENT_PROPERTIES, false);
+    }
+    
+    /**
+     * Sets whether Word document properties should be translated
+     * @param translateDocumentProperties The option whether to translate document properties or not
+     */
+    public void setTranslateDocumentProperties(boolean translateDocumentProperties) {
+        setBoolean(OPTION_DOCUMENT_PROPERTIES, translateDocumentProperties);
+    }
 
 }

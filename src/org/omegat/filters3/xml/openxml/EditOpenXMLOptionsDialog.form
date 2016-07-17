@@ -161,6 +161,13 @@
             </Property>
           </Properties>
         </Component>
+        <Component class="javax.swing.JCheckBox" name="translateDocumentPropertiesCB">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="OpenXML_TRANSLATE_DOCUMENT_PROPERTIES" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">

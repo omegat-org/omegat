@@ -288,7 +288,6 @@ distributions {
                     'properties/svn_cleanup_selected.properties',
                     'properties/search_replace.properties',
                     'properties/replace_strip_tags.properties',
-                    'properties/svn_clear_auth.properties',
                     'properties/strip_bidi_marks.properties',
                     'properties/nbsp.properties'
                 into 'source/scripts'

@@ -80,7 +80,23 @@
             </indexterm></term>
 
           <listitem>
-            <para>S'il est certain dès le début que toutes les traductions d'une ou de plusieurs mémoires de traduction sont correctes, les placer dans le dossier <emphasis role="bold"> tm/auto</emphasis> permet d'éviter de devoir confirmer de nombreux cas de <emphasis> [correspondance]</emphasis>. Cela va en effet <emphasis role="bold">prétraduire</emphasis> le texte source : tous les segments du texte source pour lesquels il est possible de trouver des traductions dans les mémoires de traduction « auto » seront transférés dans la mémoire de traduction principale du projet sans que l'utilisateur n'ait besoin d'intervenir.</para>
+            <para>S'il est certain dès le début que toutes les traductions d'une ou de plusieurs mémoires de traduction sont correctes, les placer dans le dossier <emphasis role="bold"> tm/auto</emphasis> permet d'éviter de devoir confirmer de nombreux cas de <emphasis> [correspondance]</emphasis>.</para>
+
+            <para><orderedlist>
+                <listitem>
+                  <para>Placez la TMX dans /tm/auto.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Ouvrez le projet. Les modifications sont affichées.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Effectuez une légère modification à un emplacement quelconque du projet. Cela modifie <filename>project_save.tmx</filename> (en ajoutant les unités de traduction pertinentes depuis la TMX « auto »)</para>
+                </listitem>
+              </orderedlist></para>
+
+            <para>Note : si la TMX est supprimée de /tm/auto avant l'étape 3, no aucune traduction supplémentaire n'est ajoutée.</para>
           </listitem>
         </varlistentry>
 
@@ -90,7 +106,33 @@
           <listitem>
             <para>Si vous êtes certains qu'une TMX est plus à jour que <filename>project_save.tmx</filename> d'OmegaT, placez cette TMX dans /tm/enforce pour remplacer les traductions existantes par défaut inconditionnellement.</para>
 
-            <para>L'écrasement est mis en œuvre jusqu'à ce que la TMX soit supprimée de /tm/enforce.</para>
+            <para><orderedlist>
+                <listitem>
+                  <para>Placez la TMX dans /tm/enforce.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Ouvrez le projet. Les modifications sont affichées.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Effectuez une légère modification à un emplacement quelconque du projet. Cela modifie <filename>project_save.tmx</filename>.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Prenez une décision sur la pérennité des segments forcés :<itemizedlist>
+                      <listitem>
+                        <para>S'il n'est <emphasis>pas nécessaire</emphasis> qu'ils restent protégés de futurs changements, supprimez la TMX de /tm/enforce.</para>
+                      </listitem>
+
+                      <listitem>
+                        <para>S'il est <emphasis>nécessaire</emphasis> qu'ils restent protégés de futurs changements, conservez la TMX dans /tm/enforce.</para>
+                      </listitem>
+                    </itemizedlist></para>
+                </listitem>
+              </orderedlist></para>
+
+            <para>Note : si la TMX est supprimée de /tm/enforce avant l'étape 3, les segments forcés ne sont pas conservés.</para>
           </listitem>
         </varlistentry>
 

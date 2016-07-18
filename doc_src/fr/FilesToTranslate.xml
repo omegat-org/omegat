@@ -166,6 +166,14 @@
           <listitem>
             <para>Visio (*.vxd)</para>
           </listitem>
+
+          <listitem>
+            <para>Propriété XML Java (*.xml)</para>
+          </listitem>
+
+          <listitem>
+            <para> Schematron (*.sch)</para>
+          </listitem>
         </itemizedlist></para>
 
       <para>D'autres types de fichier texte formaté peuvent également être pris en charge par OmegaT en associant leur extension de fichier à un type de fichier déjà pris en charge, ceci en supposant que les règles de segmentation correspondantes les segmenteront correctement.</para>
@@ -283,12 +291,12 @@
         </indexterm></title>
 
       <para>Lorsque le document traduit est créé, la direction qu'il affiche est la même que celle du document original. Si le document original était en LTR, la direction affichée par le document cible doit être basculée manuellement en RTL dans son application de lecture. Chaque format de sortie gère l'affichage RTL à sa façon ; consultez le guide de l'application appropriée pour plus de détails.</para>
-      
+
       <para>Pour les fichiers .docx, un certain nombre de changements sont cependant effectués automatiquement :<itemizedlist>
-      <listitem>Les paragraphes, les sections et les tableaux sont définis de façon bidirectionnelle</listitem>
-      <listitem>Les exécutions (éléments textes) sont définies en RTL</listitem>     
-      </itemizedlist>
-      </para>
+          <listitem>Les paragraphes, les sections et les tableaux sont définis de façon bidirectionnelle</listitem>
+
+          <listitem>Les exécutions (éléments textes) sont définies en RTL</listitem>
+        </itemizedlist></para>
 
       <para>Pour éviter que les paramètres d'affichage des fichiers cible ne changent à chaque fois que les fichiers sont ouverts, il est possible de changer les paramètres d'affichage des fichiers source de sorte que les fichiers cible héritent de ces paramètres. De telles modification sont possibles, par exemple, dans les fichiers ODF.</para>
     </section>

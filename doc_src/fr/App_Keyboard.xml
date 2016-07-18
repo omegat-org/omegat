@@ -85,13 +85,13 @@
         <row>
           <entry><emphasis role="bold">Ctrl+Pg préc</emphasis></entry>
 
-          <entry>Aller au début du document (Mac : <emphasis role="bold">Cmd+Pg préc</emphasis>).</entry>
+          <entry>Aller au premier segment du document (Mac : <emphasis role="bold">Cmd+Pg préc</emphasis>)</entry>
         </row>
 
         <row>
           <entry><emphasis role="bold">Ctrl+Pg suiv</emphasis></entry>
 
-          <entry>Aller à la fin du document (Mac : <emphasis role="bold">Cmd+Pg suiv</emphasis>).</entry>
+          <entry>Aller au dernier segment du document (Mac : <emphasis role="bold">Cmd+Pg suiv</emphasis>)</entry>
         </row>
 
         <row>

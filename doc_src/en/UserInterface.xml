@@ -519,11 +519,11 @@
       segment is copied, while text dragged from within the segment is
       moved.</para>
 
-      <para>By default. it is not possible to select words in the source
+      <para>By default, it is not possible to select words in the source
       segment using the keyboard rather than the mouse. Pressing
       <keycap>F2</keycap> key allows to move the cursor into the source
       segment (or anywhere in the editor) with the keyboard arrows. In this
-      mode, "<guilabel>Cursor lock of</guilabel>" is displayed at the bottom
+      mode, "<guilabel>Cursor lock off</guilabel>" is displayed at the bottom
       of the pane. To come back to the standard mode "<guilabel>Cursor lock
       on</guilabel>", press <keycap>F2</keycap> again.</para>
     </section>

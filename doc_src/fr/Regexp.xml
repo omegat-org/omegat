@@ -396,7 +396,7 @@
   </table>
 
   <note>
-    <para>les quantificateurs avides feront le plus de correspondances possible. Par exemple, <emphasis>a+?</emphasis> correspondra au aaa dans <emphasis>aaabbb</emphasis></para>
+    <para>les quantificateurs avides feront le plus de correspondances possible. Par exemple, <emphasis>a+</emphasis> correspondra au aaa dans <emphasis>aaabbb</emphasis></para>
   </note>
 
   <table>

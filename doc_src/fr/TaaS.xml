@@ -5,18 +5,18 @@
       <primary>Rechercher</primary>
     </indexterm></title>
 
-  <section id="section.TaaS.options">
+  <section id="section.TaaS.generalities">
     <title>Généralités</title>
 
     <para>Le service TaaS (https://demo.taas-project.eu/info) fournit des services de terminologie dans les langues européennes (plus le russe). Il permet l'accès à des données publiques et privées, où des glossaires privés (appelés des « collections ») peuvent être extraits à partir de documents existants et les termes cible peuvent être en partie remplis automatiquement à partir de différentes sources.</para>
   </section>
 
-  <section id="section.TaaS.options.collections">
+  <section id="section.TaaS.options.key">
     <title>Création d'une clé</title>
 
     <para>Pour accéder au service TaaS, un utilisateur doit créer une clé en utilisant https://term.tilde.com/account/keys/create?system=omegaT.</para>
 
-    <para>La clé doit être transmise à OmegaT avec -Dtaas.user.key=xxxxx. Les lanceurs de configuration d'OmegaT (OmegaT.l4J.ini, omegat.kaptn et OmegaT.sh) contiennent un modèle d'entrée.</para>
+    <para>La clé doit être transmise à OmegaT avec -Dtaas.user.key=xxxxx. Les lanceurs de configuration d'OmegaT (OmegaT.l4J.ini, omegat.kaptn et Configuration.properties) contiennent un modèle d'entrée.</para>
   </section>
 
   <section id="section.TaaS.options.access">

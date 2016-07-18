@@ -150,9 +150,7 @@
               <entry><guimenuitem>Créer le document actuel traduit</guimenuitem></entry>
 
               <entry><keycombo>
-                  <keycap>Ctrl</keycap>
-
-                  <keycap>D</keycap>
+                  <keycap>Ctrl</keycap> <keycap>Maj</keycap> <keycap>D</keycap>
                 </keycombo></entry>
 
               <entry>Crée le document cible correspondant au document actuel traduit.</entry>
@@ -409,7 +407,7 @@
                   <keycap>F</keycap>
                 </keycombo></entry>
 
-              <entry>Ouvre une nouvelle fenêtre de <link linkend="section.search.window">Recherche textuelle</link>.<para>Si vous sélectionnez du texte (dans n'importe quel volet) avant d'appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, le texte sera collé par défaut dans le champ <guilabel>Recherche</guilabel>.</para></entry>
+              <entry>Ouvre une nouvelle fenêtre de <link linkend="section.search.window">Recherche textuelle</link>.<para>Si vous sélectionnez du texte (dans n'importe quel volet) avant d'appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, le texte sera collé par défaut dans le champ <guilabel>Recherche</guilabel>.</para><para>Un appui sur <keycombo> <keycap>Ctrl</keycap> <keycap>Maj</keycap> <keycap>F</keycap> </keycombo> affiche la dernière fenêtre de recherche ouverte (au lieu d'en ouvrir une nouvelle).</para></entry>
             </row>
 
             <row>
@@ -787,7 +785,7 @@
             <row>
               <entry><guimenuitem>Glossaires</guimenuitem></entry>
 
-              <entry>L'option <guimenuitem>Afficher la description du contexte pour les glossaires TBX</guimenuitem> permet d'afficher ou de masquer les informations contextuelles des termes (provenant des glossaires TBX situés dans le dossier <filename>glossary</filename>) dans le volet Glossaires.<para>Si <guimenuitem>Utiliser les termes apparaissant séparément dans le texte source</guimenuitem> est activée, l'entrée de glossaire « itema itemb » sera trouvée dans le texte source « itema autre mot itemb ». Si l'option est désactivée, l'entrée de glossaire ci-dessus ne sera pas trouvée.</para><para>Si l'option <guimenuitem>Utiliser la lemmatisation pour les entrées de glossaire</guimenuitem> est activée, avec un texte source anglais l'entrée de glossaire « element » sera trouvée sir le texte source contient « elements ». Si l'option est désactivée, l'entrée de glossaire ci-dessus ne sera pas trouvée.</para><para>L'option <emphasis>Remplacer les entrées de glossaire lors de l'insertion du texte source</emphasis> permet de remplacer automatiquement les correspondances de glossaire avec le terme cible lorsque le texte source est inséré. Cela s'applique à <emphasis>Edition &gt; Remplacer par la source</emphasis>, <emphasis>Edition &gt; Insérer la source</emphasis> et lorsque qu'on active un segment avec l'option <emphasis>Options &gt; Ligne d'édition &gt; [Insérer] Le texte source</emphasis> est activée. Lorsque plusieurs termes cible sont disponibles, le premier (selon l'affichage du volet Glossaires) sera utilisé. La correspondance de glossaire n'utiliser pas la lemmatisation ou les mots non significatifs, mais est sensible à la casse. OmegaT essaye de faire correspondre la capitalisation du mot source.</para><para>Les 3 autres options sont décrites dans la page spécifique concernant <link linkend="section.TaaS.options">TaaS</link> (Terminology as a Service).</para></entry>
+              <entry>L'option <guimenuitem>Afficher la description du contexte pour les glossaires TBX</guimenuitem> permet d'afficher ou de masquer les informations contextuelles des termes (provenant des glossaires TBX situés dans le dossier <filename>glossary</filename>) dans le volet Glossaires.<para>Si <guimenuitem>Utiliser les termes apparaissant séparément dans le texte source</guimenuitem> est activée, l'entrée de glossaire « itema itemb » sera trouvée dans le texte source « itema autre mot itemb ». Si l'option est désactivée, l'entrée de glossaire ci-dessus ne sera pas trouvée.</para><para>Si l'option <guimenuitem>Utiliser la lemmatisation pour les entrées de glossaire</guimenuitem> est activée, avec un texte source anglais l'entrée de glossaire « element » sera trouvée sir le texte source contient « elements ». Si l'option est désactivée, l'entrée de glossaire ci-dessus ne sera pas trouvée.</para><para>L'option <emphasis>Remplacer les entrées de glossaire lors de l'insertion du texte source</emphasis> permet de remplacer automatiquement les correspondances de glossaire avec le terme cible lorsque le texte source est inséré. Cela s'applique à <emphasis>Edition &gt; Remplacer par la source</emphasis>, <emphasis>Edition &gt; Insérer la source</emphasis> et lorsque qu'on active un segment avec l'option <emphasis>Options &gt; Ligne d'édition &gt; [Insérer] Le texte source</emphasis> est activée. Lorsque plusieurs termes cible sont disponibles, le premier (selon l'affichage du volet Glossaires) sera utilisé. La correspondance de glossaire n'utiliser pas la lemmatisation ou les mots non significatifs, mais est sensible à la casse. OmegaT essaye de faire correspondre la capitalisation du mot source.</para><para>Les 3 autres options sont décrites dans la page spécifique concernant <link linkend="section.TaaS.options.access">TaaS</link> (Terminology as a Service).</para></entry>
             </row>
 
             <row>
@@ -905,7 +903,7 @@
             <row>
               <entry><guimenuitem>Guide de l'utilisateur...</guimenuitem></entry>
 
-              <entry><keycap>F1 :</keycap> ouvre le navigateur d'aide qui affiche ce guide dans une fenêtre séparée.</entry>
+              <entry><keycap>F1 :</keycap> Ouvre ce manuel dans le navigateur par défaut.</entry>
             </row>
 
             <row>

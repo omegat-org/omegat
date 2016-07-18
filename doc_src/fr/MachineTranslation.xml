@@ -94,6 +94,42 @@
   </section>
 
   <section>
+    <title>MyMemory (traduction automatique)<indexterm class="singular">
+        <primary>Traduction automatique</primary> <secondary>MyMemory</secondary>
+      </indexterm></title>
+
+    <para>Par défaut, MyMemory autorise un maximum de 100 requêtes par jour. En spécifiant une adresse électronique, il est possible d'utiliser 1000 requêtes par jour au lieu de 100.</para>
+
+    <para>Il existe au moins 3 façons de spécifier votre adresse :</para>
+
+    <para><itemizedlist>
+        <listitem>
+          <para>Dans le fichier OmegaT.l4J.ini (Windows uniquement), remplacez :</para>
+
+          <para># MyMemory email</para>
+
+          <para>par :</para>
+
+          <para>MyMemory votre@adresse-email.com</para>
+        </listitem>
+
+        <listitem>
+          <para>Si vous démarrez OmegaT depuis la ligne de commande, spécifiez dans la commande :</para>
+
+          <para>-Dmymemory.api.email=votre@adresse-email.com</para>
+        </listitem>
+
+        <listitem>
+          <para>Dans le lanceur Kaptain (Linux uniquement), entrez l'adresse dans le chant correspondant de l'onglet « Online Services ».</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <para>MyMemory fournit également des <emphasis role="bold">traduction humaines</emphasis> provenant de traducteurs professionnels, d'agences de traduction, de clients et de contenu web multilingue. Pour obtenir ces traductions, vous devez envoyer votre fichier source <ulink url="http://mymemory.translated.net/">sur leur site</ulink> qui génère un fichier TMX. Vous devez ensuite placer de fichier TMX dans le dossier /tm/ou /tm/auto/ de votre projet OmegaT.</para>
+
+    <para>MyMemory offre également la possibilité de gérer des <emphasis role="bold">mémoires de traduction privées</emphasis>. Note : OmegaT n’interagit pas de façon dynamique avec ces mémoires (vous devez exporter/importer ces fichiers TMX manuellement).</para>
+  </section>
+
+  <section>
     <title>Microsoft Translator<indexterm class="singular">
         <primary>Traduction Automatique</primary> <secondary>Microsoft Translator</secondary>
       </indexterm></title>

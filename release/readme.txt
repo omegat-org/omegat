@@ -335,8 +335,6 @@ OmegaT uses the following libraries:
   Diff (GPL)
   trilead-ssh2-1.0.0-build220 (Trilead SSH license)
   lucene-*.jar (Apache License 2.0)
-  LuceneEnglishTokenizer uses stop words originally from Okapi
-(http://okapi.sourceforge.net) (LGPL license)
   commons-*.jar (Apache License 2.0)
   LanguageTool (LGPL license and others)
   PDFBox (Apache License 2.0)

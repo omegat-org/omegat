@@ -35,6 +35,7 @@ import java.awt.BorderLayout as BL
 import java.awt.GridBagConstraints
 import org.omegat.core.Core
 import org.omegat.tokenizer.ITokenizer.StemmingMode
+import org.omegat.languagetools.LanguageToolWrapper
 
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
@@ -472,59 +473,15 @@ def interfejs(locationxy = new Point(0, 0), width = 900, height = 550, scrollpos
 }
 
 def getLanguageToolInstance(ltLang) {
-    def result = null;
-
-    if (ltLang != null) {
-        try {
-            result = new JLanguageTool(ltLang);
-            result.activateDefaultPatternRules();
-        } catch (Exception ex) {
-            result = null;
-            log.error(ex);
-        }
-    }
-
-    return result;
+    return LanguageToolWrapper.getLanguageToolInstance(ltLang).orElse(null)
 }
 
-def getLTLanguage(lang)
-{
-   def LANGUAGES
-   if (org.languagetool.JLanguageTool.VERSION < "3.2") {
-       LANGUAGES = Language.LANGUAGES
-   }else{
-       LANGUAGES = org.languagetool.Languages.LANGUAGES
-   }
-   def omLang = lang.getLanguageCode();
-   for (Language ltLang : LANGUAGES) {
-       if (omLang.equalsIgnoreCase(ltLang.getShortName())) {
-           return ltLang;
-       }
-   }
-   return null;
+def getLTLanguage(lang) {
+   return LanguageToolWrapper.getLTLanguage(lang).orElse(null)
 }
 
 def getBiTextRules(Language sourceLang, Language targetLang) {
-    def result;
-    try {
-        result = Tools.getBitextRules(sourceLang, targetLang);
-    } catch (Exception ex) {
-        // bitext rules can be not defined
-        return null;
-    }
-    for (int i = 0; i < result.size(); i++) {
-        if (result.get(i) instanceof DifferentLengthRule) {
-            result.remove(i);
-            i--;
-            continue;
-        }
-        if (result.get(i) instanceof SameTranslationRule) {
-            result.remove(i);
-            i--;
-            continue;
-        }
-    }
-    return result;
+    return LanguageToolWrapper.getBiTextRules(sourceLang, targetLang)
 }
 
 def getRuleMatchesForEntry(sourceText, translationText) {

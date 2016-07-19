@@ -27,7 +27,10 @@
 package org.omegat.languagetools;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.swing.text.Highlighter.HighlightPainter;
 
@@ -81,12 +84,12 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
         switch (eventType) {
         case CREATE:
         case LOAD:
-            Language sourceLang = getLTLanguage(Core.getProject().getProjectProperties().getSourceLanguage());
-            Language targetLang = getLTLanguage(Core.getProject().getProjectProperties().getTargetLanguage());
-            sourceLt = getLanguageToolInstance(sourceLang);
-            targetLt = getLanguageToolInstance(targetLang);
+            Optional<Language> sourceLang = getLTLanguage(Core.getProject().getProjectProperties().getSourceLanguage());
+            Optional<Language> targetLang = getLTLanguage(Core.getProject().getProjectProperties().getTargetLanguage());
+            sourceLt = sourceLang.flatMap(LanguageToolWrapper::getLanguageToolInstance).orElse(null);
+            targetLt = targetLang.flatMap(LanguageToolWrapper::getLanguageToolInstance).orElse(null);
             if (sourceLt != null && targetLt != null) {
-                bRules = getBiTextRules(sourceLang, targetLang);
+                bRules = getBiTextRules(sourceLang.get(), targetLang.get());
             }
             break;
         case CLOSE:
@@ -98,21 +101,17 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
         }
     }
 
-    protected JLanguageTool getLanguageToolInstance(Language ltLang) {
-        if (ltLang == null) {
-            return null;
-        }
-        JLanguageTool result = null;
-
+    public static Optional<JLanguageTool> getLanguageToolInstance(Language ltLang) {
         try {
-            result = new JLanguageTool(ltLang);
+            JLanguageTool result = new JLanguageTool(ltLang);
             result.getAllRules().stream().filter(rule -> rule instanceof SpellingCheckRule).map(Rule::getId)
                     .forEach(result::disableRule);
+            return Optional.of(result);
         } catch (Exception ex) {
             Log.log(ex);
         }
 
-        return result;
+        return Optional.empty();
     }
 
     @Override
@@ -135,9 +134,7 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
         // U+FB00 LATIN SMALL LIGATURE FF. These are unlikely to be found in user input in our case, so
         // instead we will use NFC. We already normalize our source to NFC when loading, so we only need to
         // handle the translation here:
-        if (translationText != null) {
-            translationText = StringUtil.normalizeUnicode(translationText);
-        }
+        translationText = StringUtil.normalizeUnicode(translationText);
 
         List<Mark> r = new ArrayList<Mark>();
         List<RuleMatch> matches;
@@ -147,8 +144,11 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
             // sourceText represents the displayed source text: it may be null (not displayed) or have extra
             // bidi characters for display. Since we need it for linguistic comparison here, if it's null then
             // we pull from the SourceTextEntry, which is guaranteed not to be null.
-            matches = Tools.checkBitext(sourceText == null ? ste.getSrcText() : sourceText, translationText,
-                    ltSource, ltTarget, bRules);
+            // It doesn't need to be normalized because OmegaT normalizes all source text to NFC on load.
+            if (sourceText == null) {
+                sourceText = ste.getSrcText();
+            }
+            matches = Tools.checkBitext(sourceText, translationText, ltSource, ltTarget, bRules);
         } else {
             // LT knows about target language only
             matches = ltTarget.check(translationText);
@@ -164,41 +164,24 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
         return r;
     }
 
-    private Language getLTLanguage(org.omegat.util.Language lang) {
+    public static Optional<Language> getLTLanguage(org.omegat.util.Language lang) {
         String omLang = lang.getLanguageCode();
-        for (Language ltLang : Languages.get()) {
-            if (omLang.equalsIgnoreCase(ltLang.getShortName())) {
-                return ltLang;
-            }
-        }
-        return null;
+        return Languages.get().stream().filter(ltLang -> omLang.equalsIgnoreCase(ltLang.getShortName())).findFirst();
     }
+
+    private static List<Class<?>> LT_BIRULE_BLACKLIST = Arrays.asList(DifferentLengthRule.class,
+            SameTranslationRule.class, DifferentPunctuationRule.class);
 
     /**
      * Retrieve bitext rules for specified languages, but remove some rules, which not required in OmegaT
      */
-    private List<BitextRule> getBiTextRules(Language sourceLang, Language targetLang) {
-        List<BitextRule> result;
+    public static List<BitextRule> getBiTextRules(Language sourceLang, Language targetLang) {
         try {
-            result = Tools.getBitextRules(sourceLang, targetLang);
+            return Tools.getBitextRules(sourceLang, targetLang).stream()
+                    .filter(rule -> !LT_BIRULE_BLACKLIST.contains(rule.getClass())).collect(Collectors.toList());
         } catch (Exception ex) {
             // bitext rules can be not defined
             return null;
         }
-        for (int i = 0; i < result.size(); i++) {
-            if (result.get(i) instanceof DifferentLengthRule) {
-                result.remove(i--);
-                continue;
-            }
-            if (result.get(i) instanceof SameTranslationRule) {
-                result.remove(i--);
-                continue;
-            }
-            if (result.get(i) instanceof DifferentPunctuationRule) {
-                result.remove(i--);
-                continue;
-            }
-        }
-        return result;
     }
 }

@@ -140,7 +140,7 @@ could fail with duplicate numbers
  OmegaT 3.6.0 update 2
 ----------------------------------------------------------------------
   3 Enhancements
-  3 Bug fixes
+  4 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
 3.6.0 update 2 vs 3.6.0 update 1
@@ -167,6 +167,9 @@ supported languages, regardless of the languages installed in Windows
   https://sourceforge.net/p/omegat/bugs/818/
 
   - Team projects: Improved error handling for Subversion
+
+  - In the script search_replace.groovy, the values entered in the form
+were not taken into account, only the predefined values were used
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 1 (2016-04-07)

@@ -14,8 +14,6 @@ import groovy.swing.SwingBuilder
 // tell the GUI where to put the different elements.
 import java.awt.BorderLayout as BL
 
-def gui() { // Since the script will call the Editor, we must wrap it in the gui() function
-
 // The @Bindable annotation is required to take into accounts the values in the form 
 import groovy.beans.Bindable
 
@@ -25,11 +23,12 @@ import groovy.beans.Bindable
 // update the variables when the user changes them in the GUI. 
 @Bindable
 class FormData { String search, replace }
-def formData = new FormData()
 
+def gui() { // Since the script will call the Editor, we must wrap it in the gui() function
 // The doReplace function above currently does nothing on its own. We will
 // build a simple GUI to allow the user to enter the search and replace strings,
 // and a button to launch the replacement.
+def formData = new FormData()
 new SwingBuilder().edt {
 	frame(title:res.getString("name"), size: [350, 200], show: true) {
 		borderLayout(vgap: 5)
@@ -69,6 +68,7 @@ new SwingBuilder().edt {
 	}
 }
 
+}
 
 // doReplace is a Groovy function. It will do the actual work of searching and replacing text. Note that the
 // search_string and replace_string are the parameters of the function, and are not the same as the two 

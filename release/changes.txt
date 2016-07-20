@@ -31,7 +31,7 @@ supported languages, regardless of the languages installed in Windows
   - Team projects: Improved error handling for Subversion
 
   - In the script search_replace.groovy, the values entered in the form
-were not taken into account, only the pre-defined values were used
+were not taken into account, only the predefined values were used
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 1 (2016-04-07)

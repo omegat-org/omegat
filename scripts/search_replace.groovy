@@ -23,7 +23,13 @@ import groovy.beans.Bindable
 // update the variables when the user changes them in the GUI. 
 @Bindable
 class FormData { String search, replace }
+
+def search_string  = "" // You can use these two variables to pre-define the values
+def replace_string = "" // of the search and replace fields
+
 def formData = new FormData()
+formData.search = search_string
+formData.replace = replace_string
 
 // The doReplace function above currently does nothing on its own. We will
 // build a simple GUI to allow the user to enter the search and replace strings,
@@ -61,7 +67,7 @@ new SwingBuilder().edt {
 				}
 			}
 
-	 		// Binding of textfield's to t he formData object.
+	 		// Binding of textfields to the formData object.
         		bean formData,
             		search:  bind { searchField.text },
             		replace: bind { replaceField.text }

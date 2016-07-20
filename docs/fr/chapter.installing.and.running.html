@@ -404,15 +404,15 @@
                </div>
                <p>Double-cliquez sur <span class="emphasis"><em> <span class="application">OmegaT</span>.app</em></span> ou cliquez sur son emplacement dans le Dock.
                </p>
-               <p>Vous pouvez modifier le comportement d'OmegaT en modifiant les <span class="emphasis"><em>Propriétés</em></span> ainsi que le fichier <span class="emphasis"><em>OmegaT.sh</em></span> dans le paquet.
+               <p>Vous pouvez modifier le comportement d'OmegaT en modifiant les <span class="emphasis"><em>Propriétés</em></span> ainsi que le fichier <span class="emphasis"><em>Configuration.properties</em></span> dans le paquet.
                </p>
-               <p>Pour accéder à <span class="application"><span class="emphasis"><em>OmegaT.sh</em></span></span>, faites un clic droit sur <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> et sélectionnez «&nbsp;Afficher le contenu du paquet&nbsp;», puis ouvrez le fichier dans Contents/MacOS avec un clic droit et en sélectionnant
-                  l'éditeur de texte de votre choix. Vous pouvez également utiliser la commande Unix «&nbsp;cd&nbsp;» directement à partir de la ligne
-                  de commande et ouvrir <span class="application"><span class="emphasis"><em>OmegaT.sh</em></span> dans un éditeur de ligne de commande comme emacs ou vi</span>.<a class="indexterm" name="d0e828"></a></p>
-               <p>Les options se modifient en éditant <span class="emphasis"><em>OmegaT.sh</em></span>. Pour les options prédéfinies, supprimer le # devant un paramètre pour l'activer. Par exemple, <code class="filename">LANGUAGE="-Duser.language=ja"</code> (sans le #) lancera <span class="application">OmegaT</span> avec l'interface utilisateur en japonais.
+               <p>Pour accéder à <span class="application"><span class="emphasis"><em>Configuration.properties</em></span></span>, effectuez un clic droit sur <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> et sélectionnez «&nbsp;Afficher le contenu du paquet&nbsp;», puis ouvrez le fichier dans Contents/Resources avec un clic droit et en
+                  sélectionnant l'éditeur de texte de votre choix. Vous pouvez également utiliser la commande Unix «&nbsp;cd&nbsp;» directement à partir
+                  de la ligne de commande et ouvrir <span class="application"><span class="emphasis"><em>Configuration.properties</em></span> dans un éditeur en ligne de commande comme emacs ou vi</span>.<a class="indexterm" name="d0e828"></a></p>
+               <p>Les options se modifient en éditant <span class="emphasis"><em>Configuration.properties</em></span>. Pour les options prédéfinies, supprimer le # devant un paramètre pour l'activer. Par exemple, <code class="filename">LANGUAGE="-Duser.language=ja"</code> (sans le #) lancera <span class="application">OmegaT</span> avec l'interface utilisateur en japonais.
                </p>
-               <p>Pour modifier la quantité de mémoire disponible, modifiez directement la ligne de lancement. Par exemple, <code class="filename">${JAVA} -Xmx2048m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET}
-                     ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY} -jar OmegaT.jar</code> lancera OmegaT avec 2 gigas de mémoire.
+               <p>Pour modifier la quantité de mémoire disponible, modifiez le fichier <span class="emphasis"><em>OmegaT.app/Contents/Info.plist</em></span> et changez le contenu de &lt;string&gt;-Xmx1024M&lt;/string&gt;. Par exemple, &lt;string&gt;-Xmx2048M&lt;/string&gt; lancera OmegaT avec 2 gigas
+                  de mémoire.
                </p>
                <p>Pour lancer plusieurs instances d'<span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span>, double-cliquez sur le fichier <span class="emphasis"><em>OmegaT.sh</em></span> situé dans <span class="emphasis"><em><span class="application">OmegaT</span>.app/ Contents/MacOS/</em></span>.
                </p>
@@ -620,7 +620,7 @@
                   </div>
                </div>
                <p>La commande de base a déjà été mentionnée plus haut. La modification de cette commande implique l'ajout « d'arguments ». Les
-                  arguments sont ajoutés après le premier <span class="emphasis"><em>« java »</em></span>, et avant <span class="emphasis"><em>« -jar <span class="application">OmegaT</span>.jar »</em></span>. Notez que dans Windows, vous pouvez modifier le fichier <code class="filename">OmegaT.l4J.ini</code> selon vos préférences. Sur les autres plateformes, vous pouvez modifier votre lanceur (ex. : <code class="filename">OmegaT.sh</code> sur Mac, <code class="filename">OmegaT</code> sous Linux) pour faire de même.
+                  arguments sont ajoutés après le premier <span class="emphasis"><em>« java »</em></span>, et avant <span class="emphasis"><em>« -jar <span class="application">OmegaT</span>.jar »</em></span>. Notez que dans Windows, vous pouvez modifier le fichier <code class="filename">OmegaT.l4J.ini</code> selon vos préférences. Sur les autres plateformes, vous pouvez modifier le fichier <code class="filename">Configuration.properties</code> sur le Mac, ou le lanceur <code class="filename">OmegaT</code> sous Linux pour effectuer la même tâche.
                </p>
                <p>Vous trouverez ci-dessous une liste des arguments possibles. Les utilisateurs expérimentés pourront obtenir plus d'informations
                   sur les arguments en tapant <span class="emphasis"><em>man java</em></span> dans la fenêtre de terminal.

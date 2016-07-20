@@ -34,10 +34,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Stream;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 import org.apache.commons.lang.StringUtils;
@@ -256,6 +258,11 @@ public class RepositoriesMappingController {
         dialog.okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                boolean doneEditing = Stream.of(dialog.tableMapping, dialog.tableRepositories)
+                        .map(JTable::getCellEditor).allMatch(editor -> editor == null || editor.stopCellEditing());
+                if (!doneEditing) {
+                    return;
+                }
                 String r = isValid();
                 if (r != null) {
                     JOptionPane.showMessageDialog(dialog, r, OStrings.getString("TF_ERROR"),

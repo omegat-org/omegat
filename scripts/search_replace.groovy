@@ -3,8 +3,8 @@
  *
  * @author  Didier Briel
  * @author  Briac Pilpre
- * @date    2016-07-19
- * @version 0.4
+ * @date    2016-07-20
+ * @version 0.5
  */
 
  // The two following lines are there to allow the script to build a nice GUI for the text interface.
@@ -16,13 +16,18 @@ import java.awt.BorderLayout as BL
 
 def gui() { // Since the script will call the Editor, we must wrap it in the gui() function
 
-// search_string and replace_string are two variables representing the text to search and to replace, 
-// respectively. These variables are used by the SwingBuilder component which will update the variables 
-// when the user changes them in the GUI. 
-def search_string  = ""
-def replace_string = ""
+// The @Bindable annotation is required to take into accounts the values in the form 
+import groovy.beans.Bindable
 
-// The doReplace function below currently does nothing on its own. We will
+// The SearchReplaceForm class is here to hold the data from the form.
+// search and replace are two fields representing the text to search and to replace, 
+// respectively. These fields are used by the SwingBuilder component which will 
+// update the variables when the user changes them in the GUI. 
+@Bindable
+class FormData { String search, replace }
+def formData = new FormData()
+
+// The doReplace function above currently does nothing on its own. We will
 // build a simple GUI to allow the user to enter the search and replace strings,
 // and a button to launch the replacement.
 new SwingBuilder().edt {
@@ -39,26 +44,31 @@ new SwingBuilder().edt {
 			tableLayout {
 				tr {
 					td { label res.getString("search") }
-					td { textField search_string, columns: 20  }
+					td { textField id:"searchField", text:formData.search, columns: 20  }
 				}
 				tr {
 					td { label res.getString("replace") }
-					td { textField replace_string, columns: 20  }
+					td { textField id:"replaceField", text:formData.replace, columns: 20  }
 				}
 				tr {
 					td { label "" }
 					td {
 						// When the button is clicked, the doReplace function will be called
 						button(text:res.getString("button"),
-						actionPerformed: { doReplace(search_string, replace_string) },
+						actionPerformed: { doReplace(formData.search, formData.replace) },
 						constraints:BL.SOUTH)
 					}
 				}
 			}
+
+	 		// Binding of textfield's to t he formData object.
+        		bean formData,
+            		search:  bind { searchField.text },
+            		replace: bind { replaceField.text }
 		}
 	}
 }
-}
+
 
 // doReplace is a Groovy function. It will do the actual work of searching and replacing text. Note that the
 // search_string and replace_string are the parameters of the function, and are not the same as the two 

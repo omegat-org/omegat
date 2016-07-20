@@ -519,6 +519,7 @@ task genDocIndex(type: JavaExec) {
     description = 'Regenerate the docs index file'
     main = 'util.CreateDocIndexUtil'
     classpath = sourceSets.main.runtimeClasspath
+    inputs.files fileTree(dir: 'docs', include: '**/version.properties')
     outputs.file 'docs/index.html'
 }
 jar.finalizedBy genDocIndex

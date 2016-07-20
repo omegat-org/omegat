@@ -66,7 +66,7 @@ new SwingBuilder().edt {
 				}
 			}
 
-	 		// Binding of textfield's to t he formData object.
+	 		// Binding of textfields to the formData object.
         		bean formData,
             		search:  bind { searchField.text },
             		replace: bind { replaceField.text }

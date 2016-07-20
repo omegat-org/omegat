@@ -28,7 +28,13 @@ def gui() { // Since the script will call the Editor, we must wrap it in the gui
 // The doReplace function above currently does nothing on its own. We will
 // build a simple GUI to allow the user to enter the search and replace strings,
 // and a button to launch the replacement.
+def search_string  = "" // You can use these two variables to pre-define the values
+def replace_string = "" // of the search and replace fields
+
 def formData = new FormData()
+formData.search = search_string
+formData.replace = replace_string
+
 new SwingBuilder().edt {
 	frame(title:res.getString("name"), size: [350, 200], show: true) {
 		borderLayout(vgap: 5)

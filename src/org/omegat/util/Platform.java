@@ -85,6 +85,14 @@ public final class Platform {
         OsType os = getOsType();
         return os == OsType.MAC32 || os == OsType.MAC64;
     }
+
+    /**
+     * Returns true if running on Windows
+     */
+    public static boolean isWindows() {
+        OsType os = getOsType();
+        return os == OsType.WIN32 || os == OsType.WIN64;
+    }
     
     /**
      * Returns true if the JVM (NOT the OS) is 64-bit

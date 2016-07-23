@@ -139,7 +139,7 @@ could fail with duplicate numbers
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 2
 ----------------------------------------------------------------------
-  3 Enhancements
+  4 Enhancements
   4 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
@@ -149,6 +149,9 @@ could fail with duplicate numbers
 
   - Make SRT filter robust against inconsistent EOL chars
   https://sourceforge.net/p/omegat/feature-requests/1255/
+
+  - Script to adapt match tags to target 
+  https://sourceforge.net/p/omegat/feature-requests/1263/
 
   Other changes:
 

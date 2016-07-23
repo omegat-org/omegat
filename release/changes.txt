@@ -2,7 +2,7 @@
  OmegaT 4.0.0
 ----------------------------------------------------------------------
  34 Enhancements
-  6 Bug fixes
+  7 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 4.0.0 vs 3.6.0 update 2
@@ -133,11 +133,14 @@ to the wrong filter
   - When replacing the target text with a match, the number substitution
 could fail with duplicate numbers
 
+  - Word document properties are not translated
+  https://sourceforge.net/p/omegat/bugs/828/
+
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 2
 ----------------------------------------------------------------------
-  2 Enhancements
-  3 Bug fixes
+  4 Enhancements
+  4 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
 3.6.0 update 2 vs 3.6.0 update 1
@@ -147,10 +150,16 @@ could fail with duplicate numbers
   - Make SRT filter robust against inconsistent EOL chars
   https://sourceforge.net/p/omegat/feature-requests/1255/
 
+  - Script to adapt match tags to target 
+  https://sourceforge.net/p/omegat/feature-requests/1263/
+
   Other changes:
 
   - In the Nbsp script, % was added to the list of characters that
 must be preceded by a non-breaking space
+
+  - The Windows setup program can now be launched in any of the 
+supported languages, regardless of the languages installed in Windows
 
   Bug fixes:
 
@@ -161,6 +170,9 @@ must be preceded by a non-breaking space
   https://sourceforge.net/p/omegat/bugs/818/
 
   - Team projects: Improved error handling for Subversion
+
+  - In the script search_replace.groovy, the values entered in the form
+were not taken into account, only the predefined values were used
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 1 (2016-04-07)

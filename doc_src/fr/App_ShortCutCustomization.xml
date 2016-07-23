@@ -38,9 +38,9 @@
       </itemizedlist></para>
 
     <para>Par exemple, pour les raccourcis par défaut d'OmegaT<footnote>
-        <para>Les raccourcis par défaut d'OmegaT sont disponibles sur Sourceforge à partir de : <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/branches/release-3-5/src/org/omegat/gui/main/MainMenuShortcuts.properties">Raccourcis clavier d'OmegaT par défaut</ulink></para>
+        <para>Les raccourcis par défaut d'OmegaT sont disponibles sur Sourceforge à partir de : <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties">Raccourcis clavier d'OmegaT par défaut</ulink></para>
 
-        <para>Les raccourcis par défaut d'OmegaT sur Mac sont également disponibles sur Sourceforge, ils utilisent tous « meta » à la place de « ctrl » : <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/branches/release-3-5/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Raccourcis clavier d'OmegaT par défaut sur Mac</ulink></para>
+        <para>Les raccourcis par défaut d'OmegaT sur Mac sont également disponibles sur Sourceforge, ils utilisent tous « meta » à la place de « ctrl » : <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Raccourcis clavier d'OmegaT par défaut sur Mac</ulink></para>
       </footnote>, on peut trouver :</para>
 
     <itemizedlist>
@@ -95,17 +95,9 @@
           <row>
             <entry>Nouveau...</entry>
 
-            <entry><keycap>Shift+Ctrl+N</keycap></entry>
+            <entry><keycap>Ctrl+Maj+N</keycap></entry>
 
             <entry>projectNewMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Ouvrir...</entry>
-
-            <entry><keycap>Ctrl+O</keycap></entry>
-
-            <entry>projectOpenMenuItem</entry>
           </row>
 
           <row>
@@ -117,7 +109,23 @@
           </row>
 
           <row>
-            <entry>Importer des fichiers source...</entry>
+            <entry>Ouvrir...</entry>
+
+            <entry><keycap>Ctrl+O</keycap></entry>
+
+            <entry>projectOpenMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Ou&amp;vrir un projet récent</entry>
+
+            <entry/>
+
+            <entry>projectOpenRecentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Copier des fichiers dans le dossier source</entry>
 
             <entry/>
 
@@ -125,7 +133,7 @@
           </row>
 
           <row>
-            <entry>Importer depuis MediaWiki...</entry>
+            <entry>Télécharger une page MediaWiki...</entry>
 
             <entry/>
 
@@ -167,7 +175,7 @@
           <row>
             <entry>Créer le document actuel traduit</entry>
 
-            <entry><keycap>Shift+Ctrl+D</keycap></entry>
+            <entry><keycap>Ctrl+Maj+D</keycap></entry>
 
             <entry>projectSingleCompileMenuItem</entry>
           </row>
@@ -186,6 +194,70 @@
             <entry><keycap>Ctrl+L</keycap></entry>
 
             <entry>viewFileListMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Accéder au contenu du projet/Racine</entry>
+
+            <entry/>
+
+            <entry>projectAccessRootMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Accéder au contenu du projet/Dictionnaires</entry>
+
+            <entry/>
+
+            <entry>projectAccessDictionaryMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Accéder au contenu du projet/Glossaires</entry>
+
+            <entry/>
+
+            <entry>projectAccessGlossaryMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Accéder au contenu du projet/Fichiers source</entry>
+
+            <entry/>
+
+            <entry>projectAccessSourceMenuItem </entry>
+          </row>
+
+          <row>
+            <entry>Accéder au contenu du projet/Fichiers cible</entry>
+
+            <entry/>
+
+            <entry>projectAccessTargetMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Accéder au contenu du projet/Document source actuel</entry>
+
+            <entry/>
+
+            <entry>projectAccessCurrentSourceDocumentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Accéder au contenu du projet/Document cible actuel</entry>
+
+            <entry/>
+
+            <entry>projectAccessCurrentTargetDocumentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Access Project Contents/Glossaire en écriture</entry>
+
+            <entry/>
+
+            <entry>projectAccessWriteableGlossaryMenuItem</entry>
           </row>
 
           <row>
@@ -241,7 +313,7 @@
           </row>
 
           <row>
-            <entry>Remplacer par la correspondance</entry>
+            <entry>Remplacer par la correspondance ou la sélection</entry>
 
             <entry><keycap>Ctrl+R</keycap></entry>
 
@@ -249,7 +321,7 @@
           </row>
 
           <row>
-            <entry>Insérer la correspondance</entry>
+            <entry>Insérer la correspondance ou la sélection</entry>
 
             <entry><keycap>Ctrl+I</keycap></entry>
 
@@ -267,7 +339,7 @@
           <row>
             <entry>Remplacer par la source</entry>
 
-            <entry><keycap>Maj+Ctrl+R</keycap></entry>
+            <entry><keycap>Ctrl+Maj+R</keycap></entry>
 
             <entry>editOverwriteSourceMenuItem</entry>
           </row>
@@ -275,15 +347,15 @@
           <row>
             <entry>Insérer le texte source</entry>
 
-            <entry><keycap>Maj+Ctrl+I</keycap></entry>
+            <entry><keycap>Ctrl+Maj+I</keycap></entry>
 
             <entry>editInsertSourceMenuItem</entry>
           </row>
 
           <row>
-            <entry>Insérer les balises source</entry>
+            <entry>Insérer les balises source manquantes</entry>
 
-            <entry><keycap>Maj+Ctrl+T</keycap></entry>
+            <entry><keycap>Ctrl+Maj+T</keycap></entry>
 
             <entry>editTagPainterMenuItem</entry>
           </row>
@@ -299,7 +371,7 @@
           <row>
             <entry>Exporter la sélection</entry>
 
-            <entry><keycap>Maj+Ctrl+C</keycap></entry>
+            <entry><keycap>Ctrl+Maj+C</keycap></entry>
 
             <entry>editExportSelectionMenuItem</entry>
           </row>
@@ -307,7 +379,7 @@
           <row>
             <entry>Créer une entrée de glossaire</entry>
 
-            <entry><keycap>Maj+Ctrl+G</keycap></entry>
+            <entry><keycap>Ctrl+Maj+G</keycap></entry>
 
             <entry>editCreateGlossaryEntryMenuItem</entry>
           </row>
@@ -321,67 +393,19 @@
           </row>
 
           <row>
+            <entry/>
+
+            <entry><keycap>Ctrl+Maj+F</keycap></entry>
+
+            <entry>findInProjectReuseLastWindow</entry>
+          </row>
+
+          <row>
             <entry>Rechercher et rem&amp;placer...</entry>
 
             <entry><keycap>Ctrl+K</keycap></entry>
 
             <entry>editReplaceInProjectMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Choisir la correspondance précédente</entry>
-
-            <entry><keycap>Ctrl+↑</keycap></entry>
-
-            <entry>editSelectFuzzyPrevMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Choisir la correspondance suivante</entry>
-
-            <entry><keycap>Ctrl+↓</keycap></entry>
-
-            <entry>editSelectFuzzyNextMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Choisir la correspondance # 1</entry>
-
-            <entry><keycap>Ctrl+1</keycap></entry>
-
-            <entry>editSelectFuzzy1MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Choisir la correspondance # 2</entry>
-
-            <entry><keycap>Ctrl+2</keycap></entry>
-
-            <entry>editSelectFuzzy2MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Chosir la correspondance # 3</entry>
-
-            <entry><keycap>Ctrl+3</keycap></entry>
-
-            <entry>editSelectFuzzy3MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Choisir la correspondance # 4</entry>
-
-            <entry><keycap>Ctrl+4</keycap></entry>
-
-            <entry>editSelectFuzzy4MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Chosir la correspondance # 5</entry>
-
-            <entry><keycap>Ctrl+5</keycap></entry>
-
-            <entry>editSelectFuzzy5MenuItem</entry>
           </row>
 
           <row>
@@ -409,11 +433,75 @@
           </row>
 
           <row>
-            <entry>Basculer la casse en &gt; Parcourir</entry>
+            <entry>Basculer la casse en/Phrase</entry>
+
+            <entry/>
+
+            <entry>sentenceCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Basculer la casse en/Parcourir</entry>
 
             <entry><keycap>Maj+F3</keycap></entry>
 
             <entry>cycleSwitchCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Choisir la correspondance précédente</entry>
+
+            <entry><keycap>Ctrl+↑</keycap></entry>
+
+            <entry>editSelectFuzzyPrevMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Choisir la correspondance suivante</entry>
+
+            <entry><keycap>Ctrl+↓</keycap></entry>
+
+            <entry>editSelectFuzzyNextMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Choisir la correspondance #1</entry>
+
+            <entry><keycap>Ctrl+1</keycap></entry>
+
+            <entry>editSelectFuzzy1MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Choisir la correspondance #2</entry>
+
+            <entry><keycap>Ctrl+2</keycap></entry>
+
+            <entry>editSelectFuzzy2MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Choisir la correspondance #3</entry>
+
+            <entry><keycap>Ctrl+3</keycap></entry>
+
+            <entry>editSelectFuzzy3MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Choisir la correspondance #4</entry>
+
+            <entry><keycap>Ctrl+4</keycap></entry>
+
+            <entry>editSelectFuzzy4MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Choisir la correspondance #5</entry>
+
+            <entry><keycap>Ctrl+5</keycap></entry>
+
+            <entry>editSelectFuzzy5MenuItem</entry>
           </row>
 
           <row>
@@ -433,9 +521,25 @@
           </row>
 
           <row>
-            <entry>Enregistrer une traduction identique à la source</entry>
+            <entry>Supprimer la traduction</entry>
 
             <entry/>
+
+            <entry>editRegisterUntranslatedMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Définir traduction vide</entry>
+
+            <entry/>
+
+            <entry>editRegisterEmptyMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Enregistrer une traduction identique à la source</entry>
+
+            <entry><keycap>Ctrl+Maj+S</keycap></entry>
 
             <entry>editRegisterIdenticalMenuItem</entry>
           </row>
@@ -479,7 +583,7 @@
           <row>
             <entry>Segment traduit suivant</entry>
 
-            <entry><keycap>Shift+Ctrl+U</keycap></entry>
+            <entry><keycap>Ctrl+Maj+U</keycap></entry>
 
             <entry>gotoNextTranslatedMenuItem</entry>
           </row>
@@ -522,6 +626,22 @@
             <entry/>
 
             <entry>gotoPreviousNoteMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Segment unique suivant</entry>
+
+            <entry><keycap>Ctrl+Maj+Q</keycap></entry>
+
+            <entry>gotoNextUniqueMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Source de la correspondance sélectionnée</entry>
+
+            <entry><keycap>Ctrl+Maj+M</keycap></entry>
+
+            <entry>gotoMatchSourceSegment</entry>
           </row>
 
           <row>
@@ -637,6 +757,14 @@
           </row>
 
           <row>
+            <entry>Marquer les segments traduits à partir du dossier auto</entry>
+
+            <entry/>
+
+            <entry>viewMarkAutoPopulatedCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
             <entry>Information de modification &gt; Ne rien afficher</entry>
 
             <entry/>
@@ -691,7 +819,7 @@
           <row>
             <entry>Valider les balises</entry>
 
-            <entry><keycap>Shift+Ctrl+V</keycap></entry>
+            <entry><keycap>Ctrl+Maj+V</keycap></entry>
 
             <entry>toolsValidateTagsMenuItem</entry>
           </row>
@@ -773,11 +901,27 @@
           </row>
 
           <row>
-            <entry>Traduction automatique</entry>
+            <entry>Glossaires/Afficher la description du contexte pour les glossaires TBX</entry>
 
             <entry/>
 
+            <entry>optionsGlossaryTBXDisplayContextCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Utiliser les termes apparaissant séparément dans le texte source</entry>
+
             <entry/>
+
+            <entry>optionsGlossaryExactMatchCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Glossaires/Utiliser la lemmatisation pour les entrées de glossaire</entry>
+
+            <entry/>
+
+            <entry>optionsGlossaryStemmingCheckBoxMenuItem</entry>
           </row>
 
           <row>
@@ -789,11 +933,11 @@
           </row>
 
           <row>
-            <entry>TransTips &gt; Correspondance exacte</entry>
+            <entry>Saisie automatique/Afficher automatiquement les suggestions pertinentes</entry>
 
             <entry/>
 
-            <entry>optionsTransTipsExactMatchMenuItem</entry>
+            <entry>optionsAutoCompleteShowAutomaticallyItem</entry>
           </row>
 
           <row>
@@ -826,6 +970,14 @@
             <entry/>
 
             <entry>optionsFontSelectionMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Couleurs personnalisées...</entry>
+
+            <entry/>
+
+            <entry>optionsColorsSelectionMenuItem</entry>
           </row>
 
           <row>
@@ -914,6 +1066,14 @@
             <entry/>
 
             <entry>optionsRestoreGUIMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Accéder au dossier de configuration</entry>
+
+            <entry/>
+
+            <entry>optionsAccessConfigDirMenuItem</entry>
           </row>
         </tbody>
       </tgroup>

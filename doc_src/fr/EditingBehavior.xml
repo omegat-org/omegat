@@ -166,4 +166,14 @@
       </listitem>
     </varlistentry>
   </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Nombre de segments à charger initialement</term>
+
+      <listitem>
+        <para>Par défaut, l'éditeur affiche 2000µ segments initiaux, et en charge progressivement davantage lorsque vous faites défiler l'affichage vers le haut ou vers le bas. Si vous disposez d'une machine puissante, ou que vous n'appréciez pas le comportement de la barre de défilement durant le chargement progressif, vous pouvez utiliser un nombre plus grand.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
 </chapter>

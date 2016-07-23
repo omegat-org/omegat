@@ -2,8 +2,8 @@
  *
  * @author  Didier Briel
  * @author  Briac Pilpre
- * @date    2016-07-15
- * @version 0.4
+ * @date    2016-07-19
+ * @version 0.5
  */
 
 // search_string_before and replace_string_before are two variables representing the text to search and to replace, 
@@ -25,6 +25,9 @@ def cur_num = editor.getCurrentEntry().entryNum()
 
 project.allEntries.each { ste ->
 
+  if (java.lang.Thread.interrupted()) {
+          throw new Exception("Cancel")
+  }
   source = ste.getSrcText();
   // If the segment has been translated, we get store translated text in the target variable.
   target = project.getTranslationInfo(ste) ? project.getTranslationInfo(ste).translation : null;

@@ -27,7 +27,10 @@
 package org.omegat.languagetools;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
 import org.languagetool.Languages;
@@ -52,12 +55,12 @@ public class LanguageToolNativeBridge extends LanguageToolAbstractBridge {
 
     @Override
     public void onProjectLoad() {
-        Language sl = getLTLanguage(Core.getProject().getProjectProperties().getSourceLanguage());
-        Language tl = getLTLanguage(Core.getProject().getProjectProperties().getTargetLanguage());
-        sourceLt = getLanguageToolInstance(sl);
-        targetLt = getLanguageToolInstance(tl);
+        Optional<Language> sourceLang = getLTLanguage(Core.getProject().getProjectProperties().getSourceLanguage());
+        Optional<Language> targetLang = getLTLanguage(Core.getProject().getProjectProperties().getTargetLanguage());
+        sourceLt = sourceLang.flatMap(LanguageToolNativeBridge::getLanguageToolInstance).orElse(null);
+        targetLt = targetLang.flatMap(LanguageToolNativeBridge::getLanguageToolInstance).orElse(null);
         if (sourceLt != null && targetLt != null) {
-            bRules = getBiTextRules(sl, tl);
+            bRules = getBiTextRules(sourceLang.get(), targetLang.get());
         }
     }
 
@@ -74,6 +77,9 @@ public class LanguageToolNativeBridge extends LanguageToolAbstractBridge {
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText)
             throws Exception {
 
+        JLanguageTool ltSource = sourceLt;
+        JLanguageTool ltTarget = targetLt;
+
         if (targetLt == null) {
             // LT doesn't know anything about target language
             return null;
@@ -87,8 +93,11 @@ public class LanguageToolNativeBridge extends LanguageToolAbstractBridge {
             // sourceText represents the displayed source text: it may be null (not displayed) or have extra
             // bidi characters for display. Since we need it for linguistic comparison here, if it's null then
             // we pull from the SourceTextEntry, which is guaranteed not to be null.
-            matches = Tools.checkBitext(sourceText == null ? ste.getSrcText() : sourceText, translationText,
-                    sourceLt, targetLt, bRules);
+            // It doesn't need to be normalized because OmegaT normalizes all source text to NFC on load.
+            if (sourceText == null) {
+                sourceText = ste.getSrcText();
+            }
+            matches = Tools.checkBitext(sourceText, translationText, ltSource, ltTarget, bRules);
         } else {
             // LT knows about target language only
             matches = targetLt.check(translationText);
@@ -104,57 +113,40 @@ public class LanguageToolNativeBridge extends LanguageToolAbstractBridge {
         return r;
     }
 
-    private Language getLTLanguage(org.omegat.util.Language lang) {
+    public static Optional<Language> getLTLanguage(org.omegat.util.Language lang) {
         String omLang = lang.getLanguageCode();
-        for (Language ltLang : Languages.get()) {
-            if (omLang.equalsIgnoreCase(ltLang.getShortName())) {
-                return ltLang;
-            }
-        }
-        return null;
+        return Languages.get().stream().filter(ltLang -> omLang.equalsIgnoreCase(ltLang.getShortName())).findFirst();
     }
+
+
+    private static List<Class<?>> LT_BIRULE_BLACKLIST = Arrays.asList(DifferentLengthRule.class,
+            SameTranslationRule.class, DifferentPunctuationRule.class);
 
     /**
      * Retrieve bitext rules for specified languages, but remove some rules, which not required in OmegaT
      */
-    private List<BitextRule> getBiTextRules(Language sourceLang, Language targetLang) {
-        List<BitextRule> result;
+    public static List<BitextRule> getBiTextRules(Language sourceLang, Language targetLang) {
         try {
-            result = Tools.getBitextRules(sourceLang, targetLang);
+            return Tools.getBitextRules(sourceLang, targetLang).stream()
+                    .filter(rule -> !LT_BIRULE_BLACKLIST.contains(rule.getClass())
+                        || (useDifferentPunctuationRule && rule.getClass()
+                        == DifferentPunctuationRule.class)).collect(Collectors.toList());
         } catch (Exception ex) {
             // bitext rules can be not defined
             return null;
         }
-        for (int i = 0; i < result.size(); i++) {
-            if (result.get(i) instanceof DifferentLengthRule) {
-                result.remove(i--);
-                continue;
-            }
-            if (result.get(i) instanceof SameTranslationRule) {
-                result.remove(i--);
-                continue;
-            }
-            if (result.get(i) instanceof DifferentPunctuationRule && !useDifferentPunctuationRule) {
-                result.remove(i--);
-            }
-        }
-        return result;
     }
 
-    private JLanguageTool getLanguageToolInstance(Language ltLang) {
-        if (ltLang == null) {
-            return null;
-        }
-        JLanguageTool result = null;
-
+    public static Optional<JLanguageTool> getLanguageToolInstance(Language ltLang) {
         try {
-            result = new JLanguageTool(ltLang);
+            JLanguageTool result = new JLanguageTool(ltLang);
             result.getAllRules().stream().filter(rule -> rule instanceof SpellingCheckRule).map(Rule::getId)
                     .forEach(result::disableRule);
+            return Optional.of(result);
         } catch (Exception ex) {
             Log.log(ex);
         }
 
-        return result;
+        return Optional.empty();
     }
 }

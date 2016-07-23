@@ -15,6 +15,30 @@
     <para>Vous pouvez également sélectionner un mot ou une expression dans les volets Éditeur, Correspondances ou Glossaires et appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. Le mot ou l'expression est alors saisi(e) automatiquement dans le champ <emphasis>Rechercher</emphasis>. Il est possible d'avoir plusieurs fenêtres de recherche ouvertes en même temps mais il est préférable de les fermer lorsqu'elles ne sont plus utiles afin de ne pas encombrer le bureau.</para>
 
     <para>Cliquez sur la flèche déroulante de la case <emphasis>Rechercher</emphasis> pour accéder aux 10 dernières recherches.</para>
+
+    <para>La fenêtre de recherche dispose de ses propres menus :</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Fichier &gt; Rechercher la sélection (<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>) : redonne le focus au champ de recherche et sélectionne tout son contenu.</para>
+      </listitem>
+
+      <listitem>
+        <para>Fichier &gt; Fermer (<keycombo> <keycap>Ctrl</keycap> <keycap>W</keycap> </keycombo>) : ferme la fenêtre de recherche (de la même façon qu'<keycap>Échap</keycap>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Edition &gt; Insérer le texte source (<keycombo> <keycap>Ctrl</keycap> <keycap>Maj</keycap> <keycap>I</keycap> </keycombo>) : insère le segment source actuel.</para>
+      </listitem>
+
+      <listitem>
+        <para>Edition &gt; Remplacer par la source (<keycombo> <keycap>Ctrl</keycap> <keycap>Maj</keycap> <keycap>R</keycap> </keycombo>) : remplace par le segment source actuel.</para>
+      </listitem>
+
+      <listitem>
+        <para>Edition &gt; Créer une entrée de glossaire (<keycombo> <keycap>Ctrl</keycap> <keycap>Maj</keycap> <keycap>G</keycap> </keycombo>) : ajoute une nouvelle entrée de glossaire.</para>
+      </listitem>
+    </itemizedlist>
   </section>
 
   <section id="using.wild.cards">
@@ -128,7 +152,7 @@
       </listitem>
     </itemizedlist>
 
-    <para>Le bouton <guibutton>Options avancées</guibutton> vous donne accès à des critères supplémentaires (auteur ou réviseur de la traduction, date de traduction, exclusion des segments orphelins, etc.).</para>
+    <para>Le bouton <guibutton>Options avancées</guibutton> vous donne accès à des critères supplémentaires (auteur ou réviseur de la traduction, date de traduction, exclusion des segments orphelins, etc.). Lorsque l'option <emphasis>Ignorer la différence entre pleine et demi-largeur de caractère</emphasis> est cochée, les recherches des formes de pleine largeur (caractères CJK) correspondront aux formes de demi-largeur et vice-versa.</para>
   </section>
 
   <section id="search.result.display">

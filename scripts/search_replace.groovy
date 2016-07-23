@@ -3,8 +3,8 @@
  *
  * @author  Didier Briel
  * @author  Briac Pilpre
- * @date    2014-03-13
- * @version 0.3
+ * @date    2016-07-20
+ * @version 0.5
  */
 
  // The two following lines are there to allow the script to build a nice GUI for the text interface.
@@ -14,11 +14,67 @@ import groovy.swing.SwingBuilder
 // tell the GUI where to put the different elements.
 import java.awt.BorderLayout as BL
 
-// search_string and replace_string are two variables representing the text to search and to replace, 
-// respectively. These variables are used by the SwingBuilder component which will update the variables 
-// when the user changes them in the GUI. 
-def search_string  = ""
-def replace_string = ""
+// The @Bindable annotation is required to take into accounts the values in the form 
+import groovy.beans.Bindable
+
+// The SearchReplaceForm class is here to hold the data from the form.
+// search and replace are two fields representing the text to search and to replace, 
+// respectively. These fields are used by the SwingBuilder component which will 
+// update the variables when the user changes them in the GUI. 
+@Bindable
+class FormData { String search, replace }
+
+def gui() { // Since the script will call the Editor, we must wrap it in the gui() function
+// The doReplace function above currently does nothing on its own. We will
+// build a simple GUI to allow the user to enter the search and replace strings,
+// and a button to launch the replacement.
+def search_string  = "" // You can use these two variables to pre-define the values
+def replace_string = "" // of the search and replace fields
+
+def formData = new FormData()
+formData.search = search_string
+formData.replace = replace_string
+
+new SwingBuilder().edt {
+	frame(title:res.getString("name"), size: [350, 200], show: true) {
+		borderLayout(vgap: 5)
+
+		panel(constraints: BL.CENTER,
+		border: compoundBorder([
+			emptyBorder(10),
+			titledBorder(res.getString("description"))
+		])) {
+	        // Just as in a HTML form, we can use a Table layout
+	        // To with labels and Textfields.
+			tableLayout {
+				tr {
+					td { label res.getString("search") }
+					td { textField id:"searchField", text:formData.search, columns: 20  }
+				}
+				tr {
+					td { label res.getString("replace") }
+					td { textField id:"replaceField", text:formData.replace, columns: 20  }
+				}
+				tr {
+					td { label "" }
+					td {
+						// When the button is clicked, the doReplace function will be called
+						button(text:res.getString("button"),
+						actionPerformed: { doReplace(formData.search, formData.replace) },
+						constraints:BL.SOUTH)
+					}
+				}
+			}
+
+	 		// Binding of textfields to the formData object.
+        		bean formData,
+            		search:  bind { searchField.text },
+            		replace: bind { replaceField.text }
+		}
+	}
+}
+
+}
 
 // doReplace is a Groovy function. It will do the actual work of searching and replacing text. Note that the
 // search_string and replace_string are the parameters of the function, and are not the same as the two 
@@ -37,6 +93,11 @@ def doReplace(search_string, replace_string) {
 	// be processed by the Groovy function between { ... }.
 	// The current processed segment is named "ste" (for SourceTextEntry).
 	project.allEntries.each { ste ->
+
+		if (java.lang.Thread.interrupted()) { // If the Cancel button is pressed
+          	throw new Exception("Cancel")    // We exit the "each" loop with an Exception
+  		}
+		
 		// Each segment has a source text, stored here in the source variable.
 		source = ste.getSrcText();
 		// If the segment has been translated, we get store translated text in the target variable.
@@ -67,43 +128,3 @@ def doReplace(search_string, replace_string) {
 
 	console.println(res.getString("modified_segments") + segment_count);
 }
-
-
-// The doReplace function above currently does nothing on its own. We will
-// build a simple GUI to allow the user to enter the search and replace strings,
-// and a button to launch the replacement.
-
-new SwingBuilder().edt {
-	frame(title:res.getString("name"), size: [350, 200], show: true) {
-		borderLayout(vgap: 5)
-
-		panel(constraints: BL.CENTER,
-		border: compoundBorder([
-			emptyBorder(10),
-			titledBorder(res.getString("description"))
-		])) {
-	        // Just as in a HTML form, we can use a Table layout
-	        // To with labels and Textfields.
-			tableLayout {
-				tr {
-					td { label res.getString("search") }
-					td { textField search_string, columns: 20  }
-				}
-				tr {
-					td { label res.getString("replace") }
-					td { textField replace_string, columns: 20  }
-				}
-				tr {
-					td { label "" }
-					td {
-						// When the button is clicked, the doReplace function will be called
-						button(text:res.getString("button"),
-						actionPerformed: { doReplace(search_string, replace_string) },
-						constraints:BL.SOUTH)
-					}
-				}
-			}
-		}
-	}
-}
-

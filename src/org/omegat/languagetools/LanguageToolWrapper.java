@@ -27,8 +27,6 @@
 
 package org.omegat.languagetools;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.List;
 
 import javax.swing.text.Highlighter.HighlightPainter;
@@ -87,7 +85,7 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
                 localDir = Preferences.getPreferenceDefault(Preferences.LANGUAGETOOL_LOCAL_DIR, "");
                 // … and create bridge based on them
                 createBridge();
-                bridge.setDifferentPunctuationRule(Preferences.isPreferenceDefault(Preferences.LANGUAGETOOL_USE_DIFF_PUNCTUATION_RULE, false));
+                LanguageToolAbstractBridge.setDifferentPunctuationRule(Preferences.isPreferenceDefault(Preferences.LANGUAGETOOL_USE_DIFF_PUNCTUATION_RULE, false));
                 break;
             case TEST_NATIVE:
                 this.bridge = new LanguageToolNativeBridge();

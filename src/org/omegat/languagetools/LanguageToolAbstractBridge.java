@@ -30,7 +30,7 @@ import org.omegat.gui.editor.mark.Mark;
 
 public abstract class LanguageToolAbstractBridge {
 
-    protected boolean useDifferentPunctuationRule = false;
+    protected static boolean useDifferentPunctuationRule = false;
 
     /**
      * Handle project load
@@ -58,7 +58,7 @@ public abstract class LanguageToolAbstractBridge {
     public abstract List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText)
         throws Exception;
 
-    public void setDifferentPunctuationRule(boolean flag) {
+    public static void setDifferentPunctuationRule(boolean flag) {
         useDifferentPunctuationRule = flag;
     }
 }

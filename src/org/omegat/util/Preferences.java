@@ -281,10 +281,8 @@ public class Preferences {
      */
     public static final String SPELLCHECKER_DICTIONARY_URL = "dictionary_url";
 
-    /** Use native (built-in) LanguageTool */
-    public static final String LANGUAGETOOL_USE_NATIVE = "lt_useNative";
-    /** Spawn own LanguageTool server */
-    public static final String LANGUAGETOOL_SPAWN_SERVER = "lt_spawnServer";
+    /** LanguageTool implementation to use */
+    public static final String LANGUAGETOOL_BRIDGE_TYPE = "lt_bridgeType";
     /** URL of remote LanguageTool server */
     public static final String LANGUAGETOOL_REMOTE_URL = "lt_remoteURL";
     /** Local port for spawning of LanguageTool server */

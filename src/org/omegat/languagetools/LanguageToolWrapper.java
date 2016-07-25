@@ -56,7 +56,8 @@ import org.omegat.util.gui.Styles;
  * @author Lev Abashkin
  */
 public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApplicationEventListener {
-    protected static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
+    static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(
+            Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
 
 
     // Preferences cache
@@ -119,12 +120,13 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
     }
 
     @Override
-    public synchronized void onApplicationShutdown(){
+    public synchronized void onApplicationShutdown() {
         bridge.destroy();
     }
 
     @Override
-    public synchronized void onApplicationStartup(){}
+    public synchronized void onApplicationStartup() {
+    }
 
     public boolean isEnabled() {
         return Core.getEditor().getSettings().isMarkLanguageChecker();

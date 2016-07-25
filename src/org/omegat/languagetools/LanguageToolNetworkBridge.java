@@ -38,15 +38,15 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import net.arnx.jsonic.JSON;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.mark.Mark;
-import static org.omegat.languagetools.LanguageToolWrapper.PAINTER;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 
+import net.arnx.jsonic.JSON;
 
 public class LanguageToolNetworkBridge implements ILanguageToolBridge {
 
@@ -66,7 +66,9 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
 
     /**
      * Get instance talking to remote server
-     * @param url URL of remote LanguageTool server
+     * 
+     * @param url
+     *            URL of remote LanguageTool server
      * @return new LanguageToolNetworkBridge instance
      * @throws java.lang.Exception
      */
@@ -76,8 +78,11 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
 
     /**
      * Get instance spawning and talking to local server
-     * @param path local LanguageTool directory
-     * @param port local port for spawned server to listen
+     * 
+     * @param path
+     *            local LanguageTool directory
+     * @param port
+     *            local port for spawned server to listen
      * @return new LanguageToolNetworkBridge instance
      * @throws java.lang.Exception
      */
@@ -181,8 +186,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
                 while (true) {
                     try {
                         (new Socket("localhost", localPort)).close();
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         break;
                     }
                 }
@@ -220,7 +224,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
                               match.offset.intValue(),
                               match.offset.intValue() + match.length.intValue());
             m.toolTipText = addSuggestionTags(match.message);
-            m.painter = PAINTER;
+            m.painter = LanguageToolWrapper.PAINTER;
             r.add(m);
         }
         return r;

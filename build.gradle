@@ -111,6 +111,11 @@ dependencies {
     // Test dependencies
     testCompile 'junit:junit:4.12'
     testCompile 'xmlunit:xmlunit:1.6'
+    testCompile('org.languagetool:languagetool-server:3.4') {
+        exclude module: 'languagetool-core'
+        exclude module: 'language-all'
+        exclude group: 'org.slf4j'
+    }
 
     // WebStart-only
     jnlp project(path: ':release:WebStart-specific', configuration: 'docs')

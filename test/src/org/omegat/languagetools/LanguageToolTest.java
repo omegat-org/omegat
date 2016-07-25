@@ -36,6 +36,9 @@ import org.languagetool.rules.RuleMatch;
 import org.languagetool.rules.UppercaseSentenceStartRule;
 import org.languagetool.rules.patterns.PatternRule;
 import org.languagetool.rules.spelling.morfologik.MorfologikSpellerRule;
+import org.languagetool.server.HTTPServer;
+import org.omegat.util.Preferences;
+import org.omegat.util.TestPreferencesInitializer;
 
 import junit.framework.TestCase;
 
@@ -72,5 +75,28 @@ public class LanguageToolTest extends TestCase {
 
         List<RuleMatch> matches = lt.check("Check test");
         assertEquals(0, matches.size());
+    }
+
+    public void testRemoteServer() throws Exception {
+        HTTPServer server = new HTTPServer();
+        server.run();
+
+        new LanguageToolNetworkBridge("http://localhost:8081");
+
+        server.stop();
+    }
+
+    public void testWrapperInit() throws Exception {
+        TestPreferencesInitializer.init();
+
+        // Defaults: Local implementation
+        ILanguageToolBridge bridge = LanguageToolWrapper.createBridgeFromPrefs();
+        assertTrue(bridge instanceof LanguageToolNativeBridge);
+
+        // Bad URL: fall back to local implementation
+        Preferences.setPreference(Preferences.LANGUAGETOOL_BRIDGE_TYPE, LanguageToolWrapper.BridgeType.REMOTE_URL);
+        Preferences.setPreference(Preferences.LANGUAGETOOL_REMOTE_URL, "blah");
+        bridge = LanguageToolWrapper.createBridgeFromPrefs();
+        assertTrue(bridge instanceof LanguageToolNativeBridge);
     }
 }

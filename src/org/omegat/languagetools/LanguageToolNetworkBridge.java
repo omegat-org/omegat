@@ -34,7 +34,6 @@ import java.net.Socket;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,9 +41,9 @@ import java.util.Map;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 
 import net.arnx.jsonic.JSON;
 
@@ -62,7 +61,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
     private String serverUrl;
 
     /* Project scope fields */
-    private String sourceLang, targetLang;
+    private Language sourceLang, targetLang;
 
     /**
      * Get instance talking to remote server
@@ -143,8 +142,8 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
 
     @Override
     public void onProjectLoad() {
-        sourceLang = Core.getProject().getProjectProperties().getSourceLanguage().toString();
-        targetLang = Core.getProject().getProjectProperties().getTargetLanguage().toString();
+        sourceLang = Core.getProject().getProjectProperties().getSourceLanguage();
+        targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
     }
 
     @Override
@@ -183,7 +182,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
         OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
-        writer.write(buildPostData(sourceText, translationText));
+        writer.write(buildPostData(sourceLang.toString(), targetLang.toString(), sourceText, translationText));
         writer.flush();
         BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         LanguageToolJSONResponse response = JSON.decode(reader, LanguageToolJSONResponse.class);
@@ -237,26 +236,20 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
     /**
      * Try to talk with LT server and return result
      */
-    private boolean testServer(String testUrl) {
-        boolean result = false;
-        String targetLangBackup = targetLang;
-        targetLang = "en-US";
+    static boolean testServer(String testUrl) {
         try {
             URL url = new URL(testUrl);
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
             try (OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream())) {
-                writer.write(buildPostData(null, "Test"));
+                writer.write(buildPostData(null, "en-US", null, "Test"));
                 writer.flush();
             }
             Map<String, List<String>> headerFields = conn.getHeaderFields();
-            result = headerFields.get(null).toString().indexOf("200") > 0;
+            return headerFields.get(null).toString().indexOf("200") > 0;
+        } catch (Exception e) {
+            return false;
         }
-        catch (Exception e) {
-            // Do nothing
-        }
-        targetLang = targetLangBackup;
-        return result;
     }
 
 }

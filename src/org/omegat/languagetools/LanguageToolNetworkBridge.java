@@ -45,7 +45,6 @@ import org.omegat.gui.editor.mark.Mark;
 import static org.omegat.languagetools.LanguageToolWrapper.PAINTER;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.Platform;
 import org.omegat.util.StaticUtils;
 
 
@@ -284,7 +283,7 @@ public class LanguageToolNetworkBridge extends LanguageToolAbstractBridge {
      */
     private static String getClassPath(String dir, boolean test) {
         if (test) {
-            return "lib/auto/languagetool-server-*" + (Platform.isWindows() ? ";" : ":") + "lib/auto/*";
+            return "lib/auto/languagetool-server-*" + File.pathSeparatorChar + "lib/auto/*";
         } else {
             return Paths.get(dir, SERVER_JAR_NAME).toString();
         }

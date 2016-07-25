@@ -56,75 +56,59 @@ import org.omegat.util.gui.Styles;
  * @author Lev Abashkin
  */
 public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApplicationEventListener {
-    protected static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
+    static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(
+            Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
 
-    private LanguageToolAbstractBridge bridge;
-
-    // Preferences cache
-    private boolean useNative, spawnServer;
-    private String remoteUrl, localDir;
-    private int port;
-
-    public enum BRIDGE_TYPE {CONFIGURED, TEST_NATIVE, TEST_NETWORK};
-
-    public LanguageToolWrapper() throws Exception {
-        this(BRIDGE_TYPE.CONFIGURED);
+    public enum BridgeType {
+        NATIVE, REMOTE_URL, LOCAL_INSTALLATION
     }
 
-    public LanguageToolWrapper(BRIDGE_TYPE type) throws Exception {
+    private ILanguageToolBridge bridge;
+
+    public LanguageToolWrapper() throws Exception {
         CoreEvents.registerProjectChangeListener(this);
         CoreEvents.registerApplicationEventListener(this);
 
-        switch (type) {
-            case CONFIGURED:
-                // Cache preferences…
-                useNative = Preferences.isPreferenceDefault(Preferences.LANGUAGETOOL_USE_NATIVE, true);
-                spawnServer = Preferences.isPreferenceDefault(Preferences.LANGUAGETOOL_SPAWN_SERVER, true);
-                remoteUrl = Preferences.getPreferenceDefault(Preferences.LANGUAGETOOL_REMOTE_URL,"");
-                port = Preferences.getPreferenceDefault(Preferences.LANGUAGETOOL_LOCAL_PORT, 8081);
-                localDir = Preferences.getPreferenceDefault(Preferences.LANGUAGETOOL_LOCAL_DIR, "");
-                // … and create bridge based on them
-                createBridge();
-                LanguageToolAbstractBridge.setDifferentPunctuationRule(Preferences.isPreferenceDefault(Preferences.LANGUAGETOOL_USE_DIFF_PUNCTUATION_RULE, false));
-                break;
-            case TEST_NATIVE:
-                this.bridge = new LanguageToolNativeBridge();
-                break;
-            case TEST_NETWORK:
-                this.bridge = LanguageToolNetworkBridge.getLocalTestInstance();
-                break;
-            default:
-                // Nothing
-        }
-
+        bridge = createBridgeFromPrefs();
     }
 
     /**
-     * Create and assign LanguageTool bridge
+     * Create LanguageTool bridge based on user preferences. Falls back to
+     * {@link BridgeType#NATIVE} if non-native bridges fail to initialize (bad
+     * config, etc.).
      */
-    private void createBridge() {
-        // If configured try to create network bridge and fallback to native on fail
-        if (!useNative) {
-            try {
-                if (spawnServer) bridge = LanguageToolNetworkBridge.getLocalInstance(localDir, port);
-                else bridge = LanguageToolNetworkBridge.getRemoteInstance(remoteUrl);
+    static ILanguageToolBridge createBridgeFromPrefs() {
+        // If configured try to create network bridge and fallback to native on
+        // fail
+        BridgeType type = Preferences.getPreferenceEnumDefault(Preferences.LANGUAGETOOL_BRIDGE_TYPE,
+                BridgeType.NATIVE);
+        try {
+            switch (type) {
+            case LOCAL_INSTALLATION:
+                String localDir = Preferences.getPreference(Preferences.LANGUAGETOOL_LOCAL_DIR);
+                int port = Preferences.getPreferenceDefault(Preferences.LANGUAGETOOL_LOCAL_PORT, 8081);
+                return new LanguageToolNetworkBridge(localDir, port);
+            case REMOTE_URL:
+                String remoteUrl = Preferences.getPreference(Preferences.LANGUAGETOOL_REMOTE_URL);
+                return new LanguageToolNetworkBridge(remoteUrl);
+            case NATIVE:
+            default:
+                return new LanguageToolNativeBridge();
             }
-            catch (Exception e) {
-                Log.logWarningRB("LT_BAD_CONFIGURATION");
-                useNative = true;
-            }
+        } catch (Exception e) {
+            Log.logWarningRB("LT_BAD_CONFIGURATION");
+            return new LanguageToolNativeBridge();
         }
-
-        if (useNative) bridge = new LanguageToolNativeBridge();
     }
 
     @Override
-    public synchronized void onApplicationShutdown(){
+    public synchronized void onApplicationShutdown() {
         bridge.destroy();
     }
 
     @Override
-    public synchronized void onApplicationStartup(){}
+    public synchronized void onApplicationStartup() {
+    }
 
     public boolean isEnabled() {
         return Core.getEditor().getSettings().isMarkLanguageChecker();

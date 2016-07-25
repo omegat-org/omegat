@@ -31,6 +31,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
 import org.languagetool.Languages;
@@ -45,10 +46,9 @@ import org.languagetool.tools.Tools;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.mark.Mark;
-import static org.omegat.languagetools.LanguageToolWrapper.PAINTER;
 import org.omegat.util.Log;
 
-public class LanguageToolNativeBridge extends LanguageToolAbstractBridge {
+public class LanguageToolNativeBridge implements ILanguageToolBridge {
 
     private JLanguageTool sourceLt, targetLt;
     private List<BitextRule> bRules;
@@ -106,7 +106,7 @@ public class LanguageToolNativeBridge extends LanguageToolAbstractBridge {
         for (RuleMatch match : matches) {
             Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, match.getFromPos(), match.getToPos());
             m.toolTipText = match.getMessage();
-            m.painter = PAINTER;
+            m.painter = LanguageToolWrapper.PAINTER;
             r.add(m);
         }
 
@@ -128,9 +128,7 @@ public class LanguageToolNativeBridge extends LanguageToolAbstractBridge {
     public static List<BitextRule> getBiTextRules(Language sourceLang, Language targetLang) {
         try {
             return Tools.getBitextRules(sourceLang, targetLang).stream()
-                    .filter(rule -> !LT_BIRULE_BLACKLIST.contains(rule.getClass())
-                        || (useDifferentPunctuationRule && rule.getClass()
-                        == DifferentPunctuationRule.class)).collect(Collectors.toList());
+                    .filter(rule -> !LT_BIRULE_BLACKLIST.contains(rule.getClass())).collect(Collectors.toList());
         } catch (Exception ex) {
             // bitext rules can be not defined
             return null;

@@ -25,27 +25,26 @@
 package org.omegat.languagetools;
 
 import java.util.List;
+
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.mark.Mark;
 
-public abstract class LanguageToolAbstractBridge {
-
-    protected static boolean useDifferentPunctuationRule = false;
+public interface ILanguageToolBridge {
 
     /**
      * Handle project load
      */
-    public abstract void onProjectLoad();
+    void onProjectLoad();
 
     /**
      * Handle project closing
      */
-    public abstract void onProjectClose();
+    void onProjectClose();
 
     /**
      * Free resources before destruction
      */
-    public abstract void destroy();
+    void destroy();
 
     /**
      * Get marks for Entry
@@ -55,10 +54,7 @@ public abstract class LanguageToolAbstractBridge {
      * @return List of Marks or null
      * @throws java.lang.Exception
      */
-    public abstract List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText)
+    public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText)
         throws Exception;
 
-    public static void setDifferentPunctuationRule(boolean flag) {
-        useDifferentPunctuationRule = flag;
-    }
 }

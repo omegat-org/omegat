@@ -34,22 +34,20 @@ import java.net.Socket;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import net.arnx.jsonic.JSON;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.mark.Mark;
-import static org.omegat.languagetools.LanguageToolWrapper.PAINTER;
+import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.Platform;
-import org.omegat.util.StaticUtils;
 
+import net.arnx.jsonic.JSON;
 
-public class LanguageToolNetworkBridge extends LanguageToolAbstractBridge {
+public class LanguageToolNetworkBridge implements ILanguageToolBridge {
 
     /* Constants */
     private final static String URL_PATH = "/v2/check";
@@ -63,108 +61,89 @@ public class LanguageToolNetworkBridge extends LanguageToolAbstractBridge {
     private String serverUrl;
 
     /* Project scope fields */
-    private String sourceLang, targetLang;
+    private Language sourceLang, targetLang;
 
     /**
      * Get instance talking to remote server
-     * @param url URL of remote LanguageTool server
+     * 
+     * @param url
+     *            URL of remote LanguageTool server
      * @return new LanguageToolNetworkBridge instance
      * @throws java.lang.Exception
      */
-    public static LanguageToolNetworkBridge getRemoteInstance(String url) throws Exception {
-        return new LanguageToolNetworkBridge(false, url, null, 0, false);
+    public LanguageToolNetworkBridge(String url) throws Exception {
+        // Try to connect URL
+        if (!testServer(url)) {
+            Log.logWarningRB("LT_BAD_URL");
+            throw new Exception();
+        }
+        // OK, URL seems valid, let's use it.
+        serverUrl = url;
     }
 
     /**
      * Get instance spawning and talking to local server
-     * @param path local LanguageTool directory
-     * @param port local port for spawned server to listen
+     * 
+     * @param path
+     *            local LanguageTool directory
+     * @param port
+     *            local port for spawned server to listen
      * @return new LanguageToolNetworkBridge instance
      * @throws java.lang.Exception
      */
-    public static LanguageToolNetworkBridge getLocalInstance(String path, int port) throws Exception {
-        return new LanguageToolNetworkBridge(true, null, getClassPath(path, false), port, false);
-    }
-
-    /**
-     * Get test instance. Server started from bundled libs.
-     * @return new LanguageToolNetworkBridge instance
-     * @throws java.lang.Exception
-     */
-    public static LanguageToolNetworkBridge getLocalTestInstance() throws Exception {
-        return new LanguageToolNetworkBridge(true, null, getClassPath(null, true), 8081, true);
-    }
-
-
-    private LanguageToolNetworkBridge (boolean doSpawn, String url, String classPath, int port, boolean test) throws Exception {
+    public LanguageToolNetworkBridge(String path, int port) throws Exception {
         // Remember port
         localPort = port;
 
-        if (doSpawn) {
-            if (!test) {
-                // Check if ClassPath points to a real file
-                if (!new File(classPath).exists()) {
-                    Log.logWarningRB("LT_BAD_LOCAL_PATH");
-                    throw new Exception();
-                }
+        File serverJar = new File(path, SERVER_JAR_NAME);
 
-                // Check if socket is available
-                try {
-                    (new ServerSocket(localPort)).close();
-                }
-                catch (Exception e) {
-                    Log.logWarningRB("LT_BAD_SOCKET");
-                    throw new Exception();
-                }
-            }
-            // Run the server
-            ProcessBuilder pb = new ProcessBuilder("java",
-                    "-cp",
-                    classPath,
-                    SERVER_CLASS_NAME,
-                    "--port",
-                    Integer.toString(localPort));
-            pb.inheritIO();
-
-            server = pb.start();
-
-            // Wait for server to start
-            int timeout = 10000;
-            int timeWaiting = 0;
-            int interval = 10;
-            while (true) {
-                Thread.sleep(interval);
-                timeWaiting += interval;
-                try {
-                    (new Socket("localhost", localPort)).close();
-                    break;
-                }
-                catch (Exception e) {}
-                if (timeWaiting >= timeout) {
-                    Log.logWarningRB("LT_SERVER_START_TIMEOUT");
-                    server.destroy();
-                    if (!test) throw new Exception();
-                }
-            }
-
-            serverUrl = "http://localhost:" + Integer.toString(localPort) + URL_PATH;
-            Log.log(OStrings.getString("LT_SERVER_STARTED"));
+        // Check if ClassPath points to a real file
+        if (!serverJar.isFile()) {
+            Log.logWarningRB("LT_BAD_LOCAL_PATH");
+            throw new Exception();
         }
-        else {
-            // Try to connect URL
-            if (!testServer(url)) {
-                Log.logWarningRB("LT_BAD_URL");
+
+        // Check if socket is available
+        try {
+            new ServerSocket(port).close();
+        } catch (Exception e) {
+            Log.logWarningRB("LT_BAD_SOCKET");
+            throw new Exception();
+        }
+        // Run the server
+        ProcessBuilder pb = new ProcessBuilder("java", "-cp", serverJar.getAbsolutePath(), SERVER_CLASS_NAME, "--port",
+                Integer.toString(port));
+        pb.inheritIO();
+
+        server = pb.start();
+
+        // Wait for server to start
+        int timeout = 10000;
+        int timeWaiting = 0;
+        int interval = 10;
+        while (true) {
+            Thread.sleep(interval);
+            timeWaiting += interval;
+            try {
+                new Socket("localhost", port).close();
+                break;
+            } catch (Exception e) {
+            }
+            if (timeWaiting >= timeout) {
+                Log.logWarningRB("LT_SERVER_START_TIMEOUT");
+                server.destroy();
                 throw new Exception();
             }
-            // OK, URL seems valid, let's use it.
-            serverUrl = url;
         }
+
+        serverUrl = "http://localhost:" + Integer.toString(port) + URL_PATH;
+        Log.log(OStrings.getString("LT_SERVER_STARTED"));
     }
 
     @Override
     public void onProjectLoad() {
-        sourceLang = Core.getProject().getProjectProperties().getSourceLanguage().toString();
-        targetLang = Core.getProject().getProjectProperties().getTargetLanguage().toString();
+        sourceLang = Core.getProject().getProjectProperties().getSourceLanguage();
+        targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
     }
 
     @Override
@@ -182,8 +161,7 @@ public class LanguageToolNetworkBridge extends LanguageToolAbstractBridge {
                 while (true) {
                     try {
                         (new Socket("localhost", localPort)).close();
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         break;
                     }
                 }
@@ -204,7 +182,7 @@ public class LanguageToolNetworkBridge extends LanguageToolAbstractBridge {
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
         OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
-        writer.write(buildPostData(sourceText, translationText));
+        writer.write(buildPostData(sourceLang.toString(), targetLang.toString(), sourceText, translationText));
         writer.flush();
         BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         LanguageToolJSONResponse response = JSON.decode(reader, LanguageToolJSONResponse.class);
@@ -221,7 +199,7 @@ public class LanguageToolNetworkBridge extends LanguageToolAbstractBridge {
                               match.offset.intValue(),
                               match.offset.intValue() + match.length.intValue());
             m.toolTipText = addSuggestionTags(match.message);
-            m.painter = PAINTER;
+            m.painter = LanguageToolWrapper.PAINTER;
             r.add(m);
         }
         return r;
@@ -238,55 +216,40 @@ public class LanguageToolNetworkBridge extends LanguageToolAbstractBridge {
     /**
      * Construct POST request data
      */
-    private String buildPostData(String sourceText, String targetText) throws UnsupportedEncodingException {
+    static String buildPostData(String sourceLang, String targetLang, String sourceText, String targetText)
+            throws UnsupportedEncodingException {
         String encoding = "UTF-8";
-        String result = "text=" + URLEncoder.encode(targetText, encoding) +
-                "&language=" + URLEncoder.encode(targetLang, encoding);
+        StringBuilder result = new StringBuilder();
+        result.append("text=").append(URLEncoder.encode(targetText, encoding)).append("&language=")
+                .append(URLEncoder.encode(targetLang, encoding));
         if (sourceText != null) {
-            result += "&srctext=" + URLEncoder.encode(sourceText, encoding) +
-                    "&motherTongue=" + URLEncoder.encode(sourceLang, encoding);
+            result.append("&srctext=").append(URLEncoder.encode(sourceText, encoding)).append("&motherTongue=")
+                    .append(URLEncoder.encode(sourceLang, encoding));
         }
         // Exclude spelling rules
-        result += "&disabledCategories=TYPOS";
+        result.append("&disabledCategories=TYPOS");
         // Exclude bitext rules
-        result += "&disabledRules=" + URLEncoder.encode("SAME_TRANSLATION,TRANSLATION_LENGTH", encoding);
-        if (!useDifferentPunctuationRule) result += URLEncoder.encode(",DIFFERENT_PUNCTUATION", encoding);
-        return result;
+        result.append("&disabledRules=").append(URLEncoder.encode("SAME_TRANSLATION,TRANSLATION_LENGTH", encoding));
+        return result.toString();
     }
 
     /**
      * Try to talk with LT server and return result
      */
-    private boolean testServer(String testUrl) {
-        boolean result = false;
-        String targetLangBackup = targetLang;
-        targetLang = "en-US";
+    static boolean testServer(String testUrl) {
         try {
             URL url = new URL(testUrl);
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
             try (OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream())) {
-                writer.write(buildPostData(null, "Test"));
+                writer.write(buildPostData(null, "en-US", null, "Test"));
                 writer.flush();
             }
             Map<String, List<String>> headerFields = conn.getHeaderFields();
-            result = headerFields.get(null).toString().indexOf("200") > 0;
+            return headerFields.get(null).toString().indexOf("200") > 0;
+        } catch (Exception e) {
+            return false;
         }
-        catch (Exception e) {
-            // Do nothing
-        }
-        targetLang = targetLangBackup;
-        return result;
     }
 
-    /**
-     * Get ClassPath for local server
-     */
-    private static String getClassPath(String dir, boolean test) {
-        if (test) {
-            return "lib/auto/languagetool-server-*" + (Platform.isWindows() ? ";" : ":") + "lib/auto/*";
-        } else {
-            return Paths.get(dir, SERVER_JAR_NAME).toString();
-        }
-    }
 }

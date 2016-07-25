@@ -241,19 +241,21 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
     /**
      * Construct POST request data
      */
-    private String buildPostData(String sourceText, String targetText) throws UnsupportedEncodingException {
+    static String buildPostData(String sourceLang, String targetLang, String sourceText, String targetText)
+            throws UnsupportedEncodingException {
         String encoding = "UTF-8";
-        String result = "text=" + URLEncoder.encode(targetText, encoding) +
-                "&language=" + URLEncoder.encode(targetLang, encoding);
+        StringBuilder result = new StringBuilder();
+        result.append("text=").append(URLEncoder.encode(targetText, encoding)).append("&language=")
+                .append(URLEncoder.encode(targetLang, encoding));
         if (sourceText != null) {
-            result += "&srctext=" + URLEncoder.encode(sourceText, encoding) +
-                    "&motherTongue=" + URLEncoder.encode(sourceLang, encoding);
+            result.append("&srctext=").append(URLEncoder.encode(sourceText, encoding)).append("&motherTongue=")
+                    .append(URLEncoder.encode(sourceLang, encoding));
         }
         // Exclude spelling rules
-        result += "&disabledCategories=TYPOS";
+        result.append("&disabledCategories=TYPOS");
         // Exclude bitext rules
-        result += "&disabledRules=" + URLEncoder.encode("SAME_TRANSLATION,TRANSLATION_LENGTH", encoding);
-        return result;
+        result.append("&disabledRules=").append(URLEncoder.encode("SAME_TRANSLATION,TRANSLATION_LENGTH", encoding));
+        return result.toString();
     }
 
     /**

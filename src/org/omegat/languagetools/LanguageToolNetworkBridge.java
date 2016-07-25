@@ -48,7 +48,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 
 
-public class LanguageToolNetworkBridge extends LanguageToolAbstractBridge {
+public class LanguageToolNetworkBridge implements ILanguageToolBridge {
 
     /* Constants */
     private final static String URL_PATH = "/v2/check";
@@ -249,7 +249,6 @@ public class LanguageToolNetworkBridge extends LanguageToolAbstractBridge {
         result += "&disabledCategories=TYPOS";
         // Exclude bitext rules
         result += "&disabledRules=" + URLEncoder.encode("SAME_TRANSLATION,TRANSLATION_LENGTH", encoding);
-        if (!useDifferentPunctuationRule) result += URLEncoder.encode(",DIFFERENT_PUNCTUATION", encoding);
         return result;
     }
 

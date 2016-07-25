@@ -58,7 +58,6 @@ import org.omegat.util.gui.Styles;
 public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApplicationEventListener {
     protected static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
 
-    private LanguageToolAbstractBridge bridge;
 
     // Preferences cache
     private boolean useNative, spawnServer;
@@ -66,6 +65,7 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
     private int port;
 
     public enum BRIDGE_TYPE {CONFIGURED, TEST_NATIVE, TEST_NETWORK};
+    private ILanguageToolBridge bridge;
 
     public LanguageToolWrapper() throws Exception {
         this(BRIDGE_TYPE.CONFIGURED);

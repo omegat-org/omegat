@@ -72,8 +72,14 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
      * @return new LanguageToolNetworkBridge instance
      * @throws java.lang.Exception
      */
-    public static LanguageToolNetworkBridge getRemoteInstance(String url) throws Exception {
-        return new LanguageToolNetworkBridge(false, url, null, 0, false);
+    public LanguageToolNetworkBridge(String url) throws Exception {
+        // Try to connect URL
+        if (!testServer(url)) {
+            Log.logWarningRB("LT_BAD_URL");
+            throw new Exception();
+        }
+        // OK, URL seems valid, let's use it.
+        serverUrl = url;
     }
 
     /**
@@ -86,83 +92,53 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
      * @return new LanguageToolNetworkBridge instance
      * @throws java.lang.Exception
      */
-    public static LanguageToolNetworkBridge getLocalInstance(String path, int port) throws Exception {
-        return new LanguageToolNetworkBridge(true, null, getClassPath(path, false), port, false);
-    }
-
-    /**
-     * Get test instance. Server started from bundled libs.
-     * @return new LanguageToolNetworkBridge instance
-     * @throws java.lang.Exception
-     */
-    public static LanguageToolNetworkBridge getLocalTestInstance() throws Exception {
-        return new LanguageToolNetworkBridge(true, null, getClassPath(null, true), 8081, true);
-    }
-
-
-    private LanguageToolNetworkBridge (boolean doSpawn, String url, String classPath, int port, boolean test) throws Exception {
+    public LanguageToolNetworkBridge(String path, int port) throws Exception {
         // Remember port
         localPort = port;
 
-        if (doSpawn) {
-            if (!test) {
-                // Check if ClassPath points to a real file
-                if (!new File(classPath).exists()) {
-                    Log.logWarningRB("LT_BAD_LOCAL_PATH");
-                    throw new Exception();
-                }
+        File serverJar = new File(path, SERVER_JAR_NAME);
 
-                // Check if socket is available
-                try {
-                    (new ServerSocket(localPort)).close();
-                }
-                catch (Exception e) {
-                    Log.logWarningRB("LT_BAD_SOCKET");
-                    throw new Exception();
-                }
-            }
-            // Run the server
-            ProcessBuilder pb = new ProcessBuilder("java",
-                    "-cp",
-                    classPath,
-                    SERVER_CLASS_NAME,
-                    "--port",
-                    Integer.toString(localPort));
-            pb.inheritIO();
-
-            server = pb.start();
-
-            // Wait for server to start
-            int timeout = 10000;
-            int timeWaiting = 0;
-            int interval = 10;
-            while (true) {
-                Thread.sleep(interval);
-                timeWaiting += interval;
-                try {
-                    (new Socket("localhost", localPort)).close();
-                    break;
-                }
-                catch (Exception e) {}
-                if (timeWaiting >= timeout) {
-                    Log.logWarningRB("LT_SERVER_START_TIMEOUT");
-                    server.destroy();
-                    if (!test) throw new Exception();
-                }
-            }
-
-            serverUrl = "http://localhost:" + Integer.toString(localPort) + URL_PATH;
-            Log.log(OStrings.getString("LT_SERVER_STARTED"));
+        // Check if ClassPath points to a real file
+        if (!serverJar.isFile()) {
+            Log.logWarningRB("LT_BAD_LOCAL_PATH");
+            throw new Exception();
         }
-        else {
-            // Try to connect URL
-            if (!testServer(url)) {
-                Log.logWarningRB("LT_BAD_URL");
+
+        // Check if socket is available
+        try {
+            new ServerSocket(port).close();
+        } catch (Exception e) {
+            Log.logWarningRB("LT_BAD_SOCKET");
+            throw new Exception();
+        }
+        // Run the server
+        ProcessBuilder pb = new ProcessBuilder("java", "-cp", serverJar.getAbsolutePath(), SERVER_CLASS_NAME, "--port",
+                Integer.toString(port));
+        pb.inheritIO();
+
+        server = pb.start();
+
+        // Wait for server to start
+        int timeout = 10000;
+        int timeWaiting = 0;
+        int interval = 10;
+        while (true) {
+            Thread.sleep(interval);
+            timeWaiting += interval;
+            try {
+                new Socket("localhost", port).close();
+                break;
+            } catch (Exception e) {
+            }
+            if (timeWaiting >= timeout) {
+                Log.logWarningRB("LT_SERVER_START_TIMEOUT");
+                server.destroy();
                 throw new Exception();
             }
-            // OK, URL seems valid, let's use it.
-            serverUrl = url;
         }
+
+        serverUrl = "http://localhost:" + Integer.toString(port) + URL_PATH;
+        Log.log(OStrings.getString("LT_SERVER_STARTED"));
     }
 
     @Override
@@ -283,14 +259,4 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
         return result;
     }
 
-    /**
-     * Get ClassPath for local server
-     */
-    private static String getClassPath(String dir, boolean test) {
-        if (test) {
-            return "lib/auto/languagetool-server-*" + File.pathSeparatorChar + "lib/auto/*";
-        } else {
-            return Paths.get(dir, SERVER_JAR_NAME).toString();
-        }
-    }
 }

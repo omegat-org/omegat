@@ -313,7 +313,7 @@ public class RealProject implements IProject {
 
             if (RuntimePreferences.isLocationSaveEnabled()) {
                 Preferences.setPreference(Preferences.CURRENT_FOLDER, new File(m_config.getProjectRoot())
-                        .getParentFile().getAbsolutePath());
+                        .getAbsoluteFile().getParent());
                 Preferences.save();
             }
 

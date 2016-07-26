@@ -197,7 +197,7 @@ public class ProjectFileStorage {
      */
     public static void writeProjectFile(ProjectProperties props) throws Exception {
         File outFile = new File(props.getProjectRoot(), OConsts.FILE_PROJECT);
-        String m_root = outFile.getParentFile().getAbsolutePath() + File.separator;
+        String m_root = outFile.getAbsoluteFile().getParent() + File.separator;
 
         Omegat om = new Omegat();
         om.setProject(new Project());

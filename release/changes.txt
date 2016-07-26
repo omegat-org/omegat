@@ -2,7 +2,7 @@
  OmegaT 4.0.0
 ----------------------------------------------------------------------
  34 Enhancements
-  7 Bug fixes
+  8 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 4.0.0 vs 3.6.0 update 2
@@ -135,6 +135,9 @@ could fail with duplicate numbers
 
   - Word document properties are not translated
   https://sourceforge.net/p/omegat/bugs/828/
+
+  - Some CLI modes don't accept "." as project path
+  https://sourceforge.net/p/omegat/bugs/830/
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 2

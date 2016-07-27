@@ -39,8 +39,8 @@ import java.util.zip.ZipOutputStream;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.util.FileUtil;
 import org.omegat.util.OConsts;
-import org.omegat.util.StaticUtils;
 
 /**
  * Class for support some MED-specific operations.
@@ -221,7 +221,7 @@ public class ProjectMedProcessing {
     }
 
     private static void packDir(File dir, String namePrefix, ZipOutputStream zip) throws Exception {
-        List<String> srcPathList = StaticUtils.buildRelativeFilesList(dir, null, null);
+        List<String> srcPathList = FileUtil.buildRelativeFilesList(dir, null, null);
         for (String f : srcPathList) {
             if (f.startsWith("/")) {
                 f = f.substring(1);

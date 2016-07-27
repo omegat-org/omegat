@@ -31,7 +31,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.io.UncheckedIOException;
+import java.nio.file.FileSystemLoopException;
 import java.nio.file.Files;
+import java.util.Collections;
+import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 import org.apache.commons.io.FileUtils;
 import org.omegat.util.FileUtil.ICollisionCallback;
@@ -277,5 +283,182 @@ public class FileUtilTest extends TestCase {
 
         // Make sure we didn't follow the symlink
         assertTrue(file.exists());
+    }
+
+    public void testCompileFileMask() {
+        Pattern r = FileUtil.compileFileMask("Ab1-&*/**");
+        assertEquals("(?:|.*/)Ab1\\-\\&[^/]*(?:|/.*)", r.pattern());
+    }
+
+    public void testFilePatterns() {
+        // From
+        // https://confluence.atlassian.com/fisheye/pattern-matching-guide-298976797.html
+
+        String p = "*.txt";
+        assertTrue(patternMatches(p, "/foo.txt"));
+        assertTrue(patternMatches(p, "/bar/foo.txt"));
+        assertFalse(patternMatches(p, "/foo.txty"));
+        assertFalse(patternMatches(p, "/bar/foo.txty/"));
+
+        p = "/*.txt";
+        assertTrue(patternMatches(p, "/foo.txt"));
+        assertFalse(patternMatches(p, "/bar/foo.txt"));
+
+        p = "dir1/file.txt";
+        assertTrue(patternMatches(p, "/dir1/file.txt"));
+        assertTrue(patternMatches(p, "/dir3/dir1/file.txt"));
+        assertTrue(patternMatches(p, "/dir3/dir2/dir1/file.txt"));
+
+        p = "**/dir1/file.txt";
+        assertTrue(patternMatches(p, "/dir1/file.txt"));
+        assertTrue(patternMatches(p, "/dir3/dir1/file.txt"));
+        assertTrue(patternMatches(p, "/dir3/dir2/dir1/file.txt"));
+
+        p = "/**/dir1/file.txt";
+        assertTrue(patternMatches(p, "/dir1/file.txt"));
+        assertTrue(patternMatches(p, "/dir3/dir1/file.txt"));
+        assertTrue(patternMatches(p, "/dir3/dir2/dir1/file.txt"));
+
+        p = "/dir3/**/dir1/file.txt";
+        assertTrue(patternMatches(p, "/dir3/dir1/file.txt"));
+        assertTrue(patternMatches(p, "/dir3/dir2/dir1/file.txt"));
+        assertFalse(patternMatches(p, "/dir3/file.txt"));
+        assertFalse(patternMatches(p, "/dir1/file.txt"));
+
+        p = "/dir1/**";
+        assertTrue(patternMatches(p, "/dir1/foo"));
+        assertTrue(patternMatches(p, "/dir1/foo/bar"));
+        assertTrue(patternMatches(p, "/dir1/foo.baz"));
+        assertFalse(patternMatches(p, "/dir11/foo"));
+
+        p = "/dir1*";
+        assertTrue(patternMatches(p, "/dir11"));
+        assertTrue(patternMatches(p, "/dir12"));
+        assertTrue(patternMatches(p, "/dir12345"));
+        assertFalse(patternMatches(p, "/dir1/dir2"));
+
+        p = "/dir??";
+        assertTrue(patternMatches(p, "/dir11"));
+        assertTrue(patternMatches(p, "/dir12"));
+        assertFalse(patternMatches(p, "/dir12345"));
+
+        // From https://ant.apache.org/manual/dirtasks.html#patterns
+
+        p = "*.java";
+        assertTrue(patternMatches(p, ".java"));
+        assertTrue(patternMatches(p, "x.java"));
+        assertTrue(patternMatches(p, "FooBar.java"));
+        assertFalse(patternMatches(p, "FooBar.xml"));
+
+        p = "?.java";
+        assertTrue(patternMatches(p, "x.java"));
+        assertTrue(patternMatches(p, "A.java"));
+        assertFalse(patternMatches(p, ".java"));
+        assertFalse(patternMatches(p, "xyz.java"));
+
+        p = "/?abc/*/*.java";
+        assertTrue(patternMatches(p, "/xabc/foobar/test.java"));
+
+        p = "/test/**";
+        assertTrue(patternMatches(p, "/test/x.java"));
+        assertTrue(patternMatches(p, "/test/foo/bar/xyz.html"));
+        assertFalse(patternMatches(p, "/xyz.xml"));
+
+        assertEquals(FileUtil.compileFileMask("mypackage/test/**").pattern(),
+                FileUtil.compileFileMask("mypackage/test/").pattern());
+
+        p = "**/CVS/*";
+        assertTrue(patternMatches(p, "CVS/Repository"));
+        assertTrue(patternMatches(p, "org/apache/CVS/Entries"));
+        assertTrue(patternMatches(p, "org/apache/jakarta/tools/ant/CVS/Entries"));
+        assertFalse(patternMatches(p, "org/apache/CVS/foo/bar/Entries"));
+
+        p = "org/apache/jakarta/**";
+        assertTrue(patternMatches(p, "org/apache/jakarta/tools/ant/docs/index.html"));
+        assertTrue(patternMatches(p, "org/apache/jakarta/test.xml"));
+        assertFalse(patternMatches(p, "org/apache/xyz.java"));
+
+        p = "org/apache/**/CVS/*";
+        assertTrue(patternMatches(p, "org/apache/CVS/Entries"));
+        assertTrue(patternMatches(p, "org/apache/jakarta/tools/ant/CVS/Entries"));
+        assertFalse(patternMatches(p, "org/apache/CVS/foo/bar/Entries"));
+
+        // Ant docs claim this pattern "Matches all files that have a test
+        // element in their path, including test as a filename."
+        p = "**/test/**";
+        assertTrue(patternMatches(p, "test"));
+        assertTrue(patternMatches(p, "/test"));
+        assertTrue(patternMatches(p, "foo/test"));
+        assertTrue(patternMatches(p, "/foo/test"));
+        assertTrue(patternMatches(p, "foo/test/bar"));
+        assertTrue(patternMatches(p, "/foo/test/bar"));
+        assertFalse(patternMatches(p, "/foo/tests/bar"));
+        assertFalse(patternMatches(p, "/foo/tests.bar"));
+
+        p = "foo/**/bar";
+        assertFalse(patternMatches(p, "foobar"));
+        assertFalse(patternMatches(p, "foobaz/bar"));
+    }
+
+    private static boolean patternMatches(String pattern, String path) {
+        Pattern p = FileUtil.compileFileMask(pattern);
+        return p.matcher(path).matches();
+    }
+
+    public void testBuildFileList() throws Exception {
+        File tempDir = Files.createTempDirectory("omegat").toFile();
+        assertTrue(tempDir.isDirectory());
+
+        File subDir = new File(tempDir, "a");
+        assertTrue(subDir.mkdirs());
+
+        File aFile = new File(subDir, "foo");
+        assertTrue(aFile.createNewFile());
+        aFile = new File(subDir, "bar");
+        assertTrue(aFile.createNewFile());
+
+        List<File> list1 = FileUtil.buildFileList(tempDir, false);
+        assertTrue(list1.isEmpty());
+
+        List<File> list2 = FileUtil.buildFileList(tempDir, true);
+        assertEquals(2, list2.size());
+
+        Collections.sort(list2);
+        assertTrue(list2.get(0).getPath().endsWith("bar"));
+
+        try {
+            File lnk = new File(tempDir, "hoge");
+            Files.createSymbolicLink(lnk.toPath(), subDir.toPath());
+            List<File> list3 = FileUtil.buildFileList(lnk, true);
+            List<File> list4 = FileUtil.buildFileList(subDir, true);
+            assertEquals(list3.size(), list4.size());
+            assertTrue(IntStream.range(0, list3.size()).allMatch(i -> {
+                try {
+                    return list3.get(i).getCanonicalFile().equals(list4.get(i).getCanonicalFile());
+                } catch (IOException e) {
+                    throw new UncheckedIOException(e);
+                }
+            }));
+        } catch (UnsupportedOperationException | IOException ex) {
+            // Creating symbolic links appears to not be supported on this
+            // system
+        }
+
+        try {
+            Files.createSymbolicLink(new File(tempDir, "baz").toPath(), tempDir.toPath());
+            FileUtil.buildFileList(tempDir, true);
+            fail("Should die from file system loop");
+        } catch (UnsupportedOperationException | IOException ex) {
+            // Creating symbolic links appears to not be supported on this
+            // system
+        } catch (UncheckedIOException ex) {
+            if (!(ex.getCause() instanceof FileSystemLoopException)) {
+                throw ex;
+            }
+            // Creating symbolic links appears to not be supported on this
+            // system
+        }
+
+        FileUtils.deleteDirectory(tempDir);
     }
 }

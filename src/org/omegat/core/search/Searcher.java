@@ -58,10 +58,11 @@ import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.glossary.GlossaryEntry;
+import org.omegat.util.FileUtil;
+import org.omegat.util.FileUtil.ITreeIteratorCallback;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
-import org.omegat.util.StaticUtils.ITreeIteratorCallback;
 import org.omegat.util.StringUtil;
 
 /**
@@ -542,7 +543,7 @@ public class Searcher {
 
         final SearchCallback searchCallback = new SearchCallback(m_project.getProjectProperties());
         
-        StaticUtils.iterateFileTree(new File(expression.rootDir), expression.recursive, new ITreeIteratorCallback() {
+        FileUtil.iterateFileTree(new File(expression.rootDir), expression.recursive, new FileUtil.ITreeIteratorCallback() {
             @Override
             public void processFile(File file) throws Exception {
                 String filename = file.getPath();

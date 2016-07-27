@@ -425,7 +425,7 @@ public class RealProject implements IProject {
         FilterMaster fm = Core.getFilterMaster();
         
         File root = new File(m_config.getSourceRoot());
-        List<File> srcFileList = StaticUtils.buildFileList(root, true);
+        List<File> srcFileList = FileUtil.buildFileList(root, true);
 
         AlignFilesCallback alignFilesCallback = new AlignFilesCallback(props);
 
@@ -579,7 +579,7 @@ public class RealProject implements IProject {
         // build translated files
         FilterMaster fm = Core.getFilterMaster();
 
-        List<String> pathList = StaticUtils.buildRelativeFilesList(new File(srcRoot), Collections.emptyList(),
+        List<String> pathList = FileUtil.buildRelativeFilesList(new File(srcRoot), Collections.emptyList(),
                 m_config.getSourceRootExcludes());
 
         TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback();
@@ -982,7 +982,7 @@ public class RealProject implements IProject {
         FilterMaster fm = Core.getFilterMaster();
 
         File root = new File(m_config.getSourceRoot());
-        List<String> srcPathList = StaticUtils
+        List<String> srcPathList = FileUtil
                 .buildRelativeFilesList(root, Collections.emptyList(), m_config.getSourceRootExcludes()).stream()
                 .sorted(StreamUtil.comparatorByList(getSourceFilesOrder())).collect(Collectors.toList());
 

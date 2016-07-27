@@ -46,24 +46,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.file.FileVisitOption;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.function.BiPredicate;
-import java.util.function.Function;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
 import org.omegat.util.Platform.OsType;
@@ -136,136 +124,6 @@ public class StaticUtils {
      */
     public static boolean isKey(KeyEvent e, int code, int modifiers) {
         return e.getKeyCode() == code && e.getModifiers() == modifiers;
-    }
-
-    /**
-     * Returns a list of all files under the root directory by absolute path.
-     * 
-     * @throws IOException
-     */
-    public static List<File> buildFileList(File rootDir, boolean recursive) throws IOException {
-        int depth = recursive ? Integer.MAX_VALUE : 0;
-        try (Stream<Path> stream = Files.find(rootDir.toPath(), depth, (p, attr) -> p.toFile().isFile(),
-                FileVisitOption.FOLLOW_LINKS)) {
-            return stream.map(Path::toFile).sorted(StreamUtil.localeComparator(File::getPath))
-                    .collect(Collectors.toList());
-        }
-    }
-
-    public static List<String> buildRelativeFilesList(File rootDir, List<String> includes, List<String> excludes)
-            throws IOException {
-        Path root = rootDir.toPath();
-        Pattern[] includeMasks = compileFileMasks(includes);
-        Pattern[] excludeMasks = compileFileMasks(excludes);
-        BiPredicate<Path, BasicFileAttributes> pred = (p, attr) -> {
-            return p.toFile().isFile() && checkFileInclude(root.relativize(p).toString(), includeMasks, excludeMasks);
-        };
-        try (Stream<Path> stream = Files.find(root, Integer.MAX_VALUE, pred, FileVisitOption.FOLLOW_LINKS)) {
-            return stream.map(p -> root.relativize(p).toString().replace('\\', '/'))
-                .sorted(StreamUtil.localeComparator(Function.identity()))
-                .collect(Collectors.toList());
-        }
-    }
-
-    public static boolean checkFileInclude(String filePath, Pattern[] includes, Pattern[] excludes) {
-        String normalized = filePath.replace('\\', '/');
-        String checkPath = normalized.startsWith("/") ? normalized : '/' + normalized;
-        boolean included = Stream.of(includes).map(p -> p.matcher(checkPath)).anyMatch(Matcher::matches);
-        boolean excluded = false;
-        if (!included) {
-            excluded = Stream.of(excludes).map(p -> p.matcher(checkPath)).anyMatch(Matcher::matches);
-        }
-        return included || !excluded;
-    }
-
-    static final Pattern[] NO_PATTERNS = new Pattern[0];
-
-    static Pattern[] compileFileMasks(List<String> masks) {
-        if (masks == null) {
-            return NO_PATTERNS;
-        }
-        return masks.stream().map(StaticUtils::compileFileMask).toArray(Pattern[]::new);
-    }
-
-    static Pattern compileFileMask(String mask) {
-        StringBuilder m = new StringBuilder();
-        // "Relative" masks can match at any directory level
-        if (!mask.startsWith("/")) {
-            mask = "**/" + mask;
-        }
-        // Masks ending with a slash match everything in subtree
-        if (mask.endsWith("/")) {
-            mask += "**";
-        }
-        for (int cp, i = 0; i < mask.length(); i += Character.charCount(cp)) {
-            cp = mask.codePointAt(i);
-            if (cp >= 'A' && cp <= 'Z') {
-                m.appendCodePoint(cp);
-            } else if (cp >= 'a' && cp <= 'z') {
-                m.appendCodePoint(cp);
-            } else if (cp >= '0' && cp <= '9') {
-                m.appendCodePoint(cp);
-            } else if (cp == '/') {
-                if (mask.regionMatches(i, "/**/", 0, 4)) {
-                    // The sequence /**/ matches *zero* or more levels
-                    m.append("(?:/|/.*/)");
-                    i += 3;
-                } else if (mask.regionMatches(i, "/**", 0, 3)) {
-                    // The sequence /** matches *zero* or more levels
-                    m.append("(?:|/.*)");
-                    i += 2;
-                } else {
-                    m.appendCodePoint(cp);
-                }
-            } else if (cp == '?') {
-                // ? matches anything but a directory separator
-                m.append("[^/]");
-            } else if (cp == '*') {
-                if (mask.regionMatches(i, "**/", 0, 3)) {
-                    // The sequence **/ matches *zero* or more levels
-                    m.append("(?:|.*/)");
-                    i += 2;
-                } else if (mask.regionMatches(i, "**", 0, 2)) {
-                    // **
-                    m.append(".*");
-                    i++;
-                } else {
-                    // *
-                    m.append("[^/]*");
-                }
-            } else {
-                m.append('\\').appendCodePoint(cp);
-            }
-        }
-        return Pattern.compile(m.toString());
-    }
-
-    public interface ITreeIteratorCallback {
-        public void processFile(File file) throws Exception;
-    }
-
-    public static void iterateFileTree(File rootDir, boolean recursive, ITreeIteratorCallback cb) throws Exception {
-        iterateFileTree(rootDir, recursive, new HashSet<File>(), cb);
-    }
-
-    private static void iterateFileTree(File rootDir, boolean recursive, Set<File> visited, ITreeIteratorCallback cb)
-            throws Exception {
-        if (!rootDir.isDirectory()) {
-            return;
-        }
-        File canonical = rootDir.getCanonicalFile();
-        if (visited.contains(canonical)) {
-            return;
-        }
-        visited.add(canonical);
-        for (File file : rootDir.listFiles()) {
-            if (file.isDirectory() && recursive) {
-                iterateFileTree(file.getAbsoluteFile(), recursive, visited, cb);
-            }
-            if (file.isFile()) {
-                cb.processFile(file.getAbsoluteFile());
-            }
-        }
     }
 
     /**

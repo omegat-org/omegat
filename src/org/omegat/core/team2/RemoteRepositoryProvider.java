@@ -37,7 +37,6 @@ import java.util.TreeSet;
 
 import org.apache.commons.io.FileUtils;
 import org.omegat.util.FileUtil;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
 import gen.core.project.RepositoryDefinition;
@@ -372,7 +371,7 @@ public class RemoteRepositoryProvider {
 
         protected List<String> copy(File from, File to, String prefix, List<String> includes,
                 List<String> excludes, String eolConversionCharset) throws Exception {
-            List<String> relativeFiles = StaticUtils.buildRelativeFilesList(from, includes, excludes);
+            List<String> relativeFiles = FileUtil.buildRelativeFilesList(from, includes, excludes);
             List<String> copied = new ArrayList<String>();
             for (String rf : relativeFiles) {
                 if (rf.startsWith("/")) {

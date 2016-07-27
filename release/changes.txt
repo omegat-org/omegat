@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 2 (2016-07-27)
 ----------------------------------------------------------------------
-  4 Enhancements
+  5 Enhancements
   4 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
@@ -22,6 +22,8 @@ must be preceded by a non-breaking space
 
   - The Windows setup program can now be launched in any of the 
 supported languages, regardless of the languages installed in Windows
+
+  - Revised user manual
 
   Bug fixes:
 

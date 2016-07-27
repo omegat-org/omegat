@@ -63,7 +63,6 @@ import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
-import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 
 import gen.core.project.RepositoryDefinition;
@@ -137,7 +136,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             // OmegaT uses line endings of OS for storing tmx files.
             // To do auto converting, we need to change a setting:
             StoredConfig config = repository.getConfig();
-            if ("\r\n".equals(FileUtil.LINE_SEPARATOR)) {
+            if ("\r\n".equals(System.lineSeparator())) {
                 // on windows machines, convert text files to CRLF
                 config.setBoolean("core", null, "autocrlf", true);
             } else {

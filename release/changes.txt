@@ -140,7 +140,6 @@ could fail with duplicate numbers
   https://sourceforge.net/p/omegat/bugs/830/
 
 ----------------------------------------------------------------------
- OmegaT 3.6.0 update 2
  OmegaT 3.6.0 update 2 (2016-07-27)
 ----------------------------------------------------------------------
   4 Enhancements

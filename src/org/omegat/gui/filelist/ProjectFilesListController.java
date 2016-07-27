@@ -107,7 +107,7 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.StreamUtil;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DataTableStyling;
 import org.omegat.util.gui.DragTargetOverlay;
@@ -1089,11 +1089,9 @@ public class ProjectFilesListController {
         }
         
         private void applyPrefs() {
-            final List<String> filenames = new ArrayList<String>();
-            for (IProject.FileInfo fi : files) {
-                filenames.add(fi.filePath);
-            }
-            StaticUtils.sortByList(filenames, Core.getProject().getSourceFilesOrder());
+            List<String> filenames = files.stream().map(fi -> fi.filePath)
+                    .sorted(StreamUtil.comparatorByList(Core.getProject().getSourceFilesOrder()))
+                    .collect(Collectors.toList());
             Collections.sort(viewToModel, new Comparator<Integer>() {
                 @Override
                 public int compare(Integer o1, Integer o2) {

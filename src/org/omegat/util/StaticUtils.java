@@ -50,8 +50,6 @@ import java.nio.file.Paths;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -323,38 +321,6 @@ public class StaticUtils {
             }
         }
         return Pattern.compile(m.toString());
-    }
-
-    /**
-     * Sorts list by order. New lines sorted by alphabet.
-     */
-    public static void sortByList(final List<String> list, final List<String> order) {
-        Collections.sort(list, new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                int pos1, pos2;
-                if (order != null) {
-                    pos1 = order.indexOf(o1);
-                    pos2 = order.indexOf(o2);
-                } else {
-                    pos1 = 0;
-                    pos2 = 0;
-                }
-                if (pos1 < 0) {
-                    pos1 = Integer.MAX_VALUE;
-                }
-                if (pos2 < 0) {
-                    pos2 = Integer.MAX_VALUE;
-                }
-                if (pos1 < pos2) {
-                    return -1;
-                } else if (pos1 > pos2) {
-                    return 1;
-                } else {
-                    return o1.compareToIgnoreCase(o2);
-                }
-            }
-        });
     }
 
     public interface ITreeIteratorCallback {

@@ -43,7 +43,6 @@ import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -95,6 +94,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StreamUtil;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader2;
 import org.omegat.util.TagUtil;
@@ -579,11 +579,8 @@ public class RealProject implements IProject {
         // build translated files
         FilterMaster fm = Core.getFilterMaster();
 
-        Path srcRootPath = new File(srcRoot).toPath();
-        List<String> pathList = StaticUtils.buildFileList(new File(srcRoot), true).stream()
-                    .map((file) -> srcRootPath.relativize(file.toPath()).toString().replace('\\', '/'))
-                    .collect(Collectors.toList());
-        StaticUtils.removeFilesByMasks(pathList, m_config.getSourceRootExcludes());
+        List<String> pathList = StaticUtils.buildRelativeFilesList(new File(srcRoot), Collections.emptyList(),
+                m_config.getSourceRootExcludes());
 
         TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback();
 
@@ -985,12 +982,9 @@ public class RealProject implements IProject {
         FilterMaster fm = Core.getFilterMaster();
 
         File root = new File(m_config.getSourceRoot());
-        Path sourceRootPath = new File(m_config.getSourceRoot()).toPath();
-        List<String> srcPathList = StaticUtils.buildFileList(root, true).stream()
-                .map((file) -> sourceRootPath.relativize(file.toPath()).toString().replace('\\', '/'))
-                .collect(Collectors.toList());
-        StaticUtils.removeFilesByMasks(srcPathList, m_config.getSourceRootExcludes());
-        StaticUtils.sortByList(srcPathList, getSourceFilesOrder());
+        List<String> srcPathList = StaticUtils
+                .buildRelativeFilesList(root, Collections.emptyList(), m_config.getSourceRootExcludes()).stream()
+                .sorted(StreamUtil.comparatorByList(getSourceFilesOrder())).collect(Collectors.toList());
 
         for (String filepath : srcPathList) {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_FILE_MX", filepath);

@@ -1,0 +1,62 @@
+/**************************************************************************
+ OmegaT - Computer Assisted Translation (CAT) tool 
+          with fuzzy matching, translation memory, keyword search, 
+          glossaries, and translation leveraging into updated projects.
+
+ Copyright (C) 2016 Aaron Madlon-Kay
+               Home page: http://www.omegat.org/
+               Support center: http://groups.yahoo.com/group/OmegaT/
+
+ This file is part of OmegaT.
+
+ OmegaT is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ OmegaT is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ **************************************************************************/
+
+package org.omegat.util;
+
+import java.util.Comparator;
+import java.util.List;
+
+public class StreamUtil {
+
+    /**
+     * Get a comparator that sorts according to the provided list. Items not
+     * appearing in the list are sorted alphabetically.
+     */
+    public static Comparator<String> comparatorByList(List<String> order) {
+        return (o1, o2) -> {
+            int pos1, pos2;
+            if (order != null) {
+                pos1 = order.indexOf(o1);
+                pos2 = order.indexOf(o2);
+            } else {
+                pos1 = 0;
+                pos2 = 0;
+            }
+            if (pos1 < 0) {
+                pos1 = Integer.MAX_VALUE;
+            }
+            if (pos2 < 0) {
+                pos2 = Integer.MAX_VALUE;
+            }
+            if (pos1 < pos2) {
+                return -1;
+            } else if (pos1 > pos2) {
+                return 1;
+            } else {
+                return o1.compareToIgnoreCase(o2);
+            }
+        };
+    }
+}

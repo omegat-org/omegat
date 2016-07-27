@@ -134,7 +134,7 @@ public class RemoteRepositoryProvider {
         List<Mapping> mappings = getMappings(path);
         if (mappings.size() > 1) {
             throw new RuntimeException("Multiple mapping for file");
-        } else if (mappings.size() == 0) {
+        } else if (mappings.isEmpty()) {
             throw new RuntimeException("There is no mapping for file");
         }
 
@@ -145,7 +145,7 @@ public class RemoteRepositoryProvider {
      * Checks if path is under mapping.
      */
     public boolean isUnderMapping(String path) {
-        return getMappings(path).size() > 0;
+        return !getMappings(path).isEmpty();
     }
 
     /**
@@ -263,7 +263,7 @@ public class RemoteRepositoryProvider {
             this.repo = repo;
             this.repoDefinition = repoDefinition;
             this.repoMapping = repoMapping;
-            this.forceExcludes = new ArrayList<String>();
+            this.forceExcludes = new ArrayList<>();
             /**
              * Find common part - it should be one of path or local. If path and local have only common begin,
              * they will not be mapped. I.e. path=source/ and local=source/one - it's okay, path=source/one/
@@ -312,24 +312,22 @@ public class RemoteRepositoryProvider {
         }
 
         public void copyFromRepoToProject() throws Exception {
-            if (filterPrefix == null) {
+            if (!matches()) {
                 throw new RuntimeException("Doesn't matched");
             }
             File from = new File(getRepositoryDir(repoDefinition), repoMapping.getRepository());
             File to = new File(projectRoot, repoMapping.getLocal());
             if (repoMapping.getRepository().endsWith("/") || repoMapping.getRepository().isEmpty()) {
                 // directory mapping
-                List<String> excludes = new ArrayList<String>(repoMapping.getExcludes());
-                if (forceExcludes.size() > 0) {
-                    excludes.addAll(forceExcludes);
-                }
+                List<String> excludes = new ArrayList<>(repoMapping.getExcludes());
+                excludes.addAll(forceExcludes);
                 copy(from, to, filterPrefix, repoMapping.getIncludes(), excludes, null);
             } else {
                 // file mapping
                 if (!filterPrefix.isEmpty()) {
                     throw new RuntimeException();
                 }
-                if (forceExcludes.size() > 0) {
+                if (!forceExcludes.isEmpty()) {
                     return;
                 }
                 copyFile(from, to, null);
@@ -337,7 +335,7 @@ public class RemoteRepositoryProvider {
         }
 
         public void copyFromProjectToRepo(String eolConversionCharset) throws Exception {
-            if (filterPrefix == null) {
+            if (!matches()) {
                 throw new RuntimeException("Doesn't matched");
             }
             File from = new File(projectRoot, repoMapping.getLocal());

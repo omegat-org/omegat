@@ -25,10 +25,29 @@
 
 package org.omegat.util;
 
+import java.text.Collator;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
 
 public class StreamUtil {
+
+    /**
+     * Get a comparator that compares based on PRIMARY differences with the
+     * current default locale.
+     * 
+     * @param keyExtractor
+     *            Function for obtaining strings that the {@link Collator} can
+     *            compare
+     * @return A comparator useful for e.g. sorting lists of files in a stable
+     *         fashion
+     */
+    public static <T> Comparator<T> localeComparator(Function<? super T, ? extends String> keyExtractor) {
+        // Get the locale collator and set its strength to PRIMARY
+        Collator localeCollator = Collator.getInstance();
+        localeCollator.setStrength(Collator.PRIMARY);
+        return Comparator.comparing(keyExtractor, localeCollator::compare);
+    }
 
     /**
      * Get a comparator that sorts according to the provided list. Items not

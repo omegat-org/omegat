@@ -46,18 +46,21 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
 import org.omegat.util.Platform.OsType;
@@ -134,140 +137,45 @@ public class StaticUtils {
 
     /**
      * Returns a list of all files under the root directory by absolute path.
+     * 
+     * @throws IOException
      */
-    public static List<File> buildFileList(File rootDir, boolean recursive) throws Exception {
-        final List<File> lst = new ArrayList<File>();
-        iterateFileTree(rootDir.getAbsoluteFile(), recursive, new ITreeIteratorCallback() {
-            @Override
-            public void processFile(File file) {
-                lst.add(file);
-            }
-        });
-
-        // Get the local collator and set its strength to PRIMARY
-        final Collator localCollator = Collator.getInstance(Locale.getDefault());
-        localCollator.setStrength(Collator.PRIMARY);
-        Collections.sort(lst, new Comparator<File>() {
-            @Override
-            public int compare(File o1, File o2) {
-                return localCollator.compare(o1.getPath(), o2.getPath());
-            }
-        });
-        return lst;
+    public static List<File> buildFileList(File rootDir, boolean recursive) throws IOException {
+        int depth = recursive ? Integer.MAX_VALUE : 0;
+        return Files.find(rootDir.toPath(), depth, (p, attr) -> p.toFile().isFile()).map(Path::toFile)
+                .sorted(StreamUtil.localeComparator(File::getPath))
+                .collect(Collectors.toList());
     }
 
-    public static List<String> buildRelativeFilesList(File rootDir, List<String> includes,
-            List<String> excludes) throws Exception {
-        List<File> files = buildFileList(rootDir, true);
-        Pattern[] includesMasks;
-        if (includes != null) {
-            includesMasks = new Pattern[includes.size()];
-            for (int i = 0; i < includes.size(); i++) {
-                includesMasks[i] = compileFileMask(includes.get(i));
-            }
-        } else {
-            includesMasks = new Pattern[0];
-        }
-        Pattern[] excludesMasks;
-        if (excludes != null) {
-            excludesMasks = new Pattern[excludes.size()];
-            for (int i = 0; i < excludes.size(); i++) {
-                excludesMasks[i] = compileFileMask(excludes.get(i));
-            }
-        } else {
-            excludesMasks = new Pattern[0];
-        }
-        String prefix = rootDir.getAbsolutePath().replace('\\', '/');
-        List<String> result = new ArrayList<String>();
-        for (File f : files) {
-            String fn = f.getPath().replace('\\', '/');
-            if (fn.startsWith(prefix)) {
-                // file path should starts from '/' for checking.
-                fn = fn.substring(prefix.length());
-            }
-            boolean add = false;
-            // check include masks
-            for (Pattern p : includesMasks) {
-                if (p.matcher(fn).matches()) {
-                    add = true;
-                    break;
-                }
-            }
-            if (!add) {
-                add = true;
-                // check exclude masks
-                for (Pattern p : excludesMasks) {
-                    if (p.matcher(fn).matches()) {
-                        add = false;
-                        break;
-                    }
-                }
-            }
-            if (add) {
-                result.add(fn);
-            }
-        }
-        return result;
+    public static List<String> buildRelativeFilesList(File rootDir, List<String> includes, List<String> excludes)
+            throws IOException {
+        Path root = rootDir.toPath();
+        Pattern[] includeMasks = compileFileMasks(includes);
+        Pattern[] excludeMasks = compileFileMasks(excludes);
+        return Files.find(root, Integer.MAX_VALUE, (p, attr) -> {
+            return p.toFile().isFile() && checkFileInclude(root.relativize(p).toString(), includeMasks, excludeMasks);
+        }).map(p -> root.relativize(p).toString().replace('\\', '/')).sorted(StreamUtil.localeComparator(Function.identity()))
+                .collect(Collectors.toList());
     }
 
-    public static boolean checkFileInclude(String filePath, List<String> includes, List<String> excludes) {
-        if (!filePath.startsWith("/")) {
-            // file path should starts from '/' for checking.
-            filePath = '/' + filePath;
+    public static boolean checkFileInclude(String filePath, Pattern[] includes, Pattern[] excludes) {
+        String normalized = filePath.replace('\\', '/');
+        String checkPath = normalized.startsWith("/") ? normalized : '/' + normalized;
+        boolean included = Stream.of(includes).map(p -> p.matcher(checkPath)).anyMatch(Matcher::matches);
+        boolean excluded = false;
+        if (!included) {
+            excluded = Stream.of(excludes).map(p -> p.matcher(checkPath)).anyMatch(Matcher::matches);
         }
-        Pattern[] includesMasks;
-        if (includes != null) {
-            includesMasks = new Pattern[includes.size()];
-            for (int i = 0; i < includes.size(); i++) {
-                includesMasks[i] = compileFileMask(includes.get(i));
-            }
-        } else {
-            includesMasks = new Pattern[0];
-        }
-        Pattern[] excludesMasks;
-        if (excludes != null) {
-            excludesMasks = new Pattern[excludes.size()];
-            for (int i = 0; i < excludes.size(); i++) {
-                excludesMasks[i] = compileFileMask(excludes.get(i));
-            }
-        } else {
-            excludesMasks = new Pattern[0];
-        }
-        boolean add = false;
-        // check include masks
-        for (Pattern p : includesMasks) {
-            if (p.matcher(filePath).matches()) {
-                add = true;
-                break;
-            }
-        }
-        if (!add) {
-            add = true;
-            // check exclude masks
-            for (Pattern p : excludesMasks) {
-                if (p.matcher(filePath).matches()) {
-                    add = false;
-                    break;
-                }
-            }
-        }
-        return add;
+        return included || !excluded;
     }
 
-    /**
-     * Remove files by masks.
-     */
-    public static void removeFilesByMasks(List<String> lst, List<String> excludeMasks) {
-        // exclude by masks
-        for (String mask : excludeMasks) {
-            Pattern re = compileFileMask(mask);
-            for (Iterator<String> it = lst.iterator(); it.hasNext();) {
-                String fn = "/" + it.next();
-                if (re.matcher(fn).matches()) {
-                    it.remove();
-                }
-            }
+    static final Pattern[] NO_PATTERNS = new Pattern[0];
+
+    static Pattern[] compileFileMasks(List<String> masks) {
+        if (masks == null) {
+            return NO_PATTERNS;
         }
+        return masks.stream().map(StaticUtils::compileFileMask).toArray(Pattern[]::new);
     }
 
     static Pattern compileFileMask(String mask) {

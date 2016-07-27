@@ -396,22 +396,11 @@ public class RepositoriesMappingController {
                 m.repoUrl = rd.getUrl();
                 m.local = rm.getLocal();
                 m.remote = rm.getRepository();
-                m.excludes = merge(rm.getExcludes());
-                m.includes = merge(rm.getIncludes());
+                m.excludes = String.join(";", rm.getExcludes());
+                m.includes = String.join(";", rm.getIncludes());
                 listMapping.add(m);
             }
         }
-    }
-
-    String merge(List<String> data) {
-        if (data.isEmpty()) {
-            return "";
-        }
-        String r = "";
-        for (String d : data) {
-            r += ";" + d;
-        }
-        return r.substring(1);
     }
 
     List<RepositoryDefinition> getData() {

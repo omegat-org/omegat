@@ -274,6 +274,14 @@ public class StaticUtils {
 
     static Pattern compileFileMask(String mask) {
         StringBuilder m = new StringBuilder();
+        // "Relative" masks can match at any directory level
+        if (!mask.startsWith("/")) {
+            mask = "**/" + mask;
+        }
+        // Masks ending with a slash match everything in subtree
+        if (mask.endsWith("/")) {
+            mask += "**";
+        }
         for (int cp, i = 0; i < mask.length(); i += Character.charCount(cp)) {
             cp = mask.codePointAt(i);
             if (cp >= 'A' && cp <= 'Z') {
@@ -283,11 +291,26 @@ public class StaticUtils {
             } else if (cp >= '0' && cp <= '9') {
                 m.appendCodePoint(cp);
             } else if (cp == '/') {
-                m.appendCodePoint(cp);
+                if (mask.regionMatches(i, "/**/", 0, 4)) {
+                    // The sequence /**/ matches *zero* or more levels
+                    m.append("(?:/|/.*/)");
+                    i += 3;
+                } else if (mask.regionMatches(i, "/**", 0, 3)) {
+                    // The sequence /** matches *zero* or more levels
+                    m.append("(?:|/.*)");
+                    i += 2;
+                } else {
+                    m.appendCodePoint(cp);
+                }
             } else if (cp == '?') {
-                m.append('.');
+                // ? matches anything but a directory separator
+                m.append("[^/]");
             } else if (cp == '*') {
-                if (mask.codePointCount(i, mask.length()) > 1 && mask.codePointAt(mask.offsetByCodePoints(i, 1)) == '*') {
+                if (mask.regionMatches(i, "**/", 0, 3)) {
+                    // The sequence **/ matches *zero* or more levels
+                    m.append("(?:|.*/)");
+                    i += 2;
+                } else if (mask.regionMatches(i, "**", 0, 2)) {
                     // **
                     m.append(".*");
                     i++;

@@ -37,6 +37,7 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.StoredConfig;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
+import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.team2.ProjectTeamSettings;
@@ -66,6 +67,12 @@ public class ConvertProject26to37team {
     public static void checkTeam(File projectRootFolder) throws Exception {
         if (isSVNDirectory(projectRootFolder) || isGITDirectory(projectRootFolder)) {
             // project is 2.6-style team project
+
+            // When --no-team option is given, we skip conversion silently.
+            if (Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
+                return;
+            }
+
             if (isConsoleMode()) {
                 Core.getMainWindow().displayWarningRB("TEAM_26_TO_37_CONSOLE");
                 return;

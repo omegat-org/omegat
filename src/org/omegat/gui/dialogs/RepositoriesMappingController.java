@@ -43,8 +43,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
-import org.apache.commons.lang.StringUtils;
 import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DelegatingComboBoxRenderer;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TableColumnSizer;
@@ -361,7 +361,7 @@ public class RepositoriesMappingController {
     String isValid() {
         Set<String> urls = new TreeSet<String>();
         for (RowRepo r : listRepo) {
-            if (StringUtils.isBlank(r.url)) {
+            if (StringUtil.isEmpty(r.url)) {
                 return OStrings.getString("RMD_INVALID_BLANK_REPO");
             }
             if (r.type == null) {
@@ -372,7 +372,7 @@ public class RepositoriesMappingController {
             }
         }
         for (RowMapping r : listMapping) {
-            if (StringUtils.isBlank(r.repoUrl)) {
+            if (StringUtil.isEmpty(r.repoUrl)) {
                 return OStrings.getString("RMD_INVALID_BLANK_REPO");
             }
             if (!urls.contains(r.repoUrl)) {
@@ -426,10 +426,10 @@ public class RepositoriesMappingController {
                     RepositoryMapping rm = new RepositoryMapping();
                     rm.setLocal(m.local != null ? m.local : "");
                     rm.setRepository(m.remote != null ? m.remote : "");
-                    if (StringUtils.isNotBlank(m.excludes)) {
+                    if (!StringUtil.isEmpty(m.excludes)) {
                         rm.getExcludes().addAll(Arrays.asList(m.excludes.trim().split(";")));
                     }
-                    if (StringUtils.isNotBlank(m.includes)) {
+                    if (!StringUtil.isEmpty(m.includes)) {
                         rm.getIncludes().addAll(Arrays.asList(m.includes.trim().split(";")));
                     }
                     rd.getMapping().add(rm);

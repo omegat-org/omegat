@@ -102,18 +102,10 @@ public class RemoteRepositoryProviderTest extends TestCase {
     }
 
     public void testNames() throws Exception {
-        try {
-            provider.copyFilesFromRepoToProject("/dir");
-            fail();
-        } catch (RuntimeException ex) {
-        }
+        provider.copyFilesFromRepoToProject("/dir");
         provider.copyFilesFromRepoToProject("dir/");
         provider.copyFilesFromRepoToProject("file");
-        try {
-            provider.copyFilesFromProjectToRepo("/dir", null);
-            fail();
-        } catch (RuntimeException ex) {
-        }
+        provider.copyFilesFromProjectToRepo("/dir", null);
         provider.copyFilesFromProjectToRepo("dir/", null);
         provider.copyFilesFromProjectToRepo("file", null);
     }

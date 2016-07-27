@@ -314,7 +314,11 @@ public class RepositoriesMappingController {
         dialog.btnMappingAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                listMapping.add(new RowMapping());
+                RowMapping mapping = new RowMapping();
+                if (dialog.tableRepositories.getRowCount() == 1) {
+                    mapping.repoUrl = (String) dialog.tableRepositories.getValueAt(0, 1);
+                }
+                listMapping.add(mapping);
                 int row = listMapping.size() - 1;
                 modelMapping.fireTableRowsInserted(row, row);
                 dialog.tableMapping.setRowSelectionInterval(row, row);

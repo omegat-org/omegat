@@ -394,8 +394,8 @@ public class RepositoriesMappingController {
             for (RepositoryMapping rm : rd.getMapping()) {
                 RowMapping m = new RowMapping();
                 m.repoUrl = rd.getUrl();
-                m.local = rm.getLocal();
-                m.remote = rm.getRepository();
+                m.local = normalizeMapping(rm.getLocal());
+                m.remote = normalizeMapping(rm.getRepository());
                 m.excludes = String.join(";", rm.getExcludes());
                 m.includes = String.join(";", rm.getIncludes());
                 listMapping.add(m);
@@ -413,8 +413,8 @@ public class RepositoriesMappingController {
             for (RowMapping m : listMapping) {
                 if (r.url.equals(m.repoUrl)) {
                     RepositoryMapping rm = new RepositoryMapping();
-                    rm.setLocal(m.local != null ? m.local : "");
-                    rm.setRepository(m.remote != null ? m.remote : "");
+                    rm.setLocal(normalizeMapping(m.local));
+                    rm.setRepository(normalizeMapping(m.remote));
                     if (!StringUtil.isEmpty(m.excludes)) {
                         rm.getExcludes().addAll(Arrays.asList(m.excludes.trim().split(";")));
                     }
@@ -428,6 +428,10 @@ public class RepositoriesMappingController {
         return result;
     }
 
+    String normalizeMapping(String mapping) {
+        return StringUtil.isEmpty(mapping) ? "/" : mapping;
+    }
+
     static class RowRepo {
         public RepoType type;
         public String url;
@@ -435,8 +439,8 @@ public class RepositoriesMappingController {
 
     static class RowMapping {
         public String repoUrl;
-        public String local;
-        public String remote;
+        public String local = "/";
+        public String remote = "/";
         public String excludes;
         public String includes;
     }

@@ -32,6 +32,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Stream;
@@ -44,6 +45,7 @@ import javax.swing.table.AbstractTableModel;
 
 import org.apache.commons.lang.StringUtils;
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.DelegatingComboBoxRenderer;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TableColumnSizer;
 
@@ -56,6 +58,19 @@ import gen.core.project.RepositoryMapping;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class RepositoriesMappingController {
+
+    /**
+     * Enum of supported repository types corresponding to
+     * org.omegat.core.team2.impl.*RemoteRepository*
+     */
+    enum RepoType {
+        GIT, SVN, HTTP;
+
+        public String getLocalizedString() {
+            return OStrings.getString("RMD_TABLE_REPO_TYPE_" + name());
+        }
+    }
+
     private List<RepositoryDefinition> result;
 
     private RepositoriesMappingDialog dialog;
@@ -111,7 +126,7 @@ public class RepositoriesMappingController {
                 RowRepo r = listRepo.get(rowIndex);
                 switch (columnIndex) {
                 case 0:
-                    return r.type;
+                    return r.type == null ? null : r.type.getLocalizedString();
                 case 1:
                     return r.url;
                 }
@@ -123,7 +138,7 @@ public class RepositoriesMappingController {
                 RowRepo r = listRepo.get(rowIndex);
                 switch (columnIndex) {
                 case 0:
-                    r.type = (String) aValue;
+                    r.type = (RepoType) aValue;
                     break;
                 case 1:
                     String old = r.url;
@@ -164,9 +179,13 @@ public class RepositoriesMappingController {
         };
         dialog.tableRepositories.setModel(modelRepo);
 
-        JComboBox<String> comboBox = new JComboBox<>();
-        comboBox.addItem("svn");
-        comboBox.addItem("git");
+        JComboBox<RepoType> comboBox = new JComboBox<>(RepoType.values());
+        comboBox.setRenderer(new DelegatingComboBoxRenderer<RepoType, String>() {
+            @Override
+            protected String getDisplayText(RepoType value) {
+                return value == null ? "" : value.getLocalizedString();
+            }
+        });
         dialog.tableRepositories.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(comboBox));
 
         modelMapping = new AbstractTableModel() {
@@ -345,7 +364,7 @@ public class RepositoriesMappingController {
             if (StringUtils.isBlank(r.url)) {
                 return OStrings.getString("RMD_INVALID_BLANK_REPO");
             }
-            if (!"svn".equals(r.type) && !"git".equals(r.type)) {
+            if (r.type == null) {
                 return MessageFormat.format(OStrings.getString("RMD_INVALID_REPO_TYPE"), r.type);
             }
             if (!urls.add(r.url)) {
@@ -369,7 +388,7 @@ public class RepositoriesMappingController {
         }
         for (RepositoryDefinition rd : data) {
             RowRepo r = new RowRepo();
-            r.type = rd.getType();
+            r.type = RepoType.valueOf(rd.getType().toUpperCase(Locale.ENGLISH));
             r.url = rd.getUrl();
             listRepo.add(r);
             for (RepositoryMapping rm : rd.getMapping()) {
@@ -399,7 +418,7 @@ public class RepositoriesMappingController {
         List<RepositoryDefinition> result = new ArrayList<RepositoryDefinition>();
         for (RowRepo r : listRepo) {
             RepositoryDefinition rd = new RepositoryDefinition();
-            rd.setType(r.type);
+            rd.setType(r.type.name().toLowerCase(Locale.ENGLISH));
             rd.setUrl(r.url);
             result.add(rd);
             for (RowMapping m : listMapping) {
@@ -421,7 +440,7 @@ public class RepositoriesMappingController {
     }
 
     static class RowRepo {
-        public String type;
+        public RepoType type;
         public String url;
     }
 

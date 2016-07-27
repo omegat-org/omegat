@@ -61,6 +61,7 @@
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="org/omegat/Bundle.properties" key="FILENAMEPATTERNS_REMOVE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -83,6 +84,9 @@
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
             <Component class="javax.swing.JTable" name="table">
+              <Properties>
+                <Property name="fillsViewportHeight" type="boolean" value="true"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

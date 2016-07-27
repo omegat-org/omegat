@@ -46,6 +46,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -142,7 +143,8 @@ public class StaticUtils {
      */
     public static List<File> buildFileList(File rootDir, boolean recursive) throws IOException {
         int depth = recursive ? Integer.MAX_VALUE : 0;
-        return Files.find(rootDir.toPath(), depth, (p, attr) -> p.toFile().isFile()).map(Path::toFile)
+        return Files.find(rootDir.toPath(), depth, (p, attr) -> p.toFile().isFile(), FileVisitOption.FOLLOW_LINKS)
+                .map(Path::toFile)
                 .sorted(StreamUtil.localeComparator(File::getPath))
                 .collect(Collectors.toList());
     }
@@ -154,7 +156,8 @@ public class StaticUtils {
         Pattern[] excludeMasks = compileFileMasks(excludes);
         return Files.find(root, Integer.MAX_VALUE, (p, attr) -> {
             return p.toFile().isFile() && checkFileInclude(root.relativize(p).toString(), includeMasks, excludeMasks);
-        }).map(p -> root.relativize(p).toString().replace('\\', '/')).sorted(StreamUtil.localeComparator(Function.identity()))
+        }, FileVisitOption.FOLLOW_LINKS).map(p -> root.relativize(p).toString().replace('\\', '/'))
+                .sorted(StreamUtil.localeComparator(Function.identity()))
                 .collect(Collectors.toList());
     }
 

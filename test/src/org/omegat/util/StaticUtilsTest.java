@@ -29,6 +29,8 @@ package org.omegat.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.file.FileSystemLoopException;
 import java.nio.file.Files;
 import java.util.Collections;
 import java.util.List;
@@ -206,11 +208,35 @@ public class StaticUtilsTest extends TestCase {
         assertTrue(list2.get(0).getPath().endsWith("bar"));
 
         try {
-            Files.createSymbolicLink(new File(tempDir, "baz").toPath(), tempDir.toPath());
-            List<File> list3 = StaticUtils.buildFileList(tempDir, true);
-            assertEquals(list2.size(), list3.size());
-            IntStream.range(0, list2.size()).forEach(i -> assertEquals(list2.get(i), list3.get(i)));
+            File lnk = new File(tempDir, "hoge");
+            Files.createSymbolicLink(lnk.toPath(), subDir.toPath());
+            List<File> list3 = StaticUtils.buildFileList(lnk, true);
+            List<File> list4 = StaticUtils.buildFileList(subDir, true);
+            assertEquals(list3.size(), list4.size());
+            assertTrue(IntStream.range(0, list3.size())
+                    .allMatch(i -> {
+                        try {
+                            return list3.get(i).getCanonicalFile().equals(list4.get(i).getCanonicalFile());
+                        } catch (IOException e) {
+                            throw new UncheckedIOException(e);
+                        }
+                    }));
         } catch (UnsupportedOperationException | IOException ex) {
+            // Creating symbolic links appears to not be supported on this
+            // system
+        }
+
+        try {
+            Files.createSymbolicLink(new File(tempDir, "baz").toPath(), tempDir.toPath());
+            StaticUtils.buildFileList(tempDir, true);
+            fail("Should die from file system loop");
+        } catch (UnsupportedOperationException | IOException ex) {
+            // Creating symbolic links appears to not be supported on this
+            // system
+        } catch (UncheckedIOException ex) {
+            if (!(ex.getCause() instanceof FileSystemLoopException)) {
+                throw ex;
+            }
             // Creating symbolic links appears to not be supported on this system
         }
         

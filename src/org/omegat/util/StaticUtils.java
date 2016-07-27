@@ -50,11 +50,13 @@ import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
@@ -143,10 +145,11 @@ public class StaticUtils {
      */
     public static List<File> buildFileList(File rootDir, boolean recursive) throws IOException {
         int depth = recursive ? Integer.MAX_VALUE : 0;
-        return Files.find(rootDir.toPath(), depth, (p, attr) -> p.toFile().isFile(), FileVisitOption.FOLLOW_LINKS)
-                .map(Path::toFile)
-                .sorted(StreamUtil.localeComparator(File::getPath))
-                .collect(Collectors.toList());
+        try (Stream<Path> stream = Files.find(rootDir.toPath(), depth, (p, attr) -> p.toFile().isFile(),
+                FileVisitOption.FOLLOW_LINKS)) {
+            return stream.map(Path::toFile).sorted(StreamUtil.localeComparator(File::getPath))
+                    .collect(Collectors.toList());
+        }
     }
 
     public static List<String> buildRelativeFilesList(File rootDir, List<String> includes, List<String> excludes)
@@ -154,11 +157,14 @@ public class StaticUtils {
         Path root = rootDir.toPath();
         Pattern[] includeMasks = compileFileMasks(includes);
         Pattern[] excludeMasks = compileFileMasks(excludes);
-        return Files.find(root, Integer.MAX_VALUE, (p, attr) -> {
+        BiPredicate<Path, BasicFileAttributes> pred = (p, attr) -> {
             return p.toFile().isFile() && checkFileInclude(root.relativize(p).toString(), includeMasks, excludeMasks);
-        }, FileVisitOption.FOLLOW_LINKS).map(p -> root.relativize(p).toString().replace('\\', '/'))
+        };
+        try (Stream<Path> stream = Files.find(root, Integer.MAX_VALUE, pred, FileVisitOption.FOLLOW_LINKS)) {
+            return stream.map(p -> root.relativize(p).toString().replace('\\', '/'))
                 .sorted(StreamUtil.localeComparator(Function.identity()))
                 .collect(Collectors.toList());
+        }
     }
 
     public static boolean checkFileInclude(String filePath, Pattern[] includes, Pattern[] excludes) {

@@ -53,7 +53,7 @@ public class FileUtilTest extends TestCase {
 
     @Override
     protected void tearDown() throws Exception {
-        assertTrue(FileUtil.deleteTree(base));
+        FileUtils.deleteDirectory(base);
     }
 
     public void testCopyFilesTo() throws Exception {
@@ -272,7 +272,7 @@ public class FileUtilTest extends TestCase {
 
         // Can't delete /root yet because it's not empty
         assertFalse(root.delete());
-        assertTrue(FileUtil.deleteTree(root));
+        FileUtils.deleteDirectory(root);
         assertFalse(root.exists());
 
         // Make sure we didn't follow the symlink

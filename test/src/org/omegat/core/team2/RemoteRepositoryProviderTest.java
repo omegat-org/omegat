@@ -25,19 +25,18 @@
 
 package org.omegat.core.team2;
 
-import gen.core.project.RepositoryDefinition;
-import gen.core.project.RepositoryMapping;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import junit.framework.TestCase;
-
+import org.apache.commons.io.FileUtils;
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.util.FileUtil;
+
+import gen.core.project.RepositoryDefinition;
+import gen.core.project.RepositoryMapping;
+import junit.framework.TestCase;
 
 public class RemoteRepositoryProviderTest extends TestCase {
     String V;
@@ -54,7 +53,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
     @Override
     protected void setUp() throws Exception {
         File dir = new File("build/testdata/repotest");
-        FileUtil.deleteTree(dir);
+        FileUtils.deleteDirectory(dir);
         dir.mkdirs();
         V = dir.getAbsolutePath() + "/";
         VR = dir.getAbsolutePath() + "/.repositories/url/";

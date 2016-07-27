@@ -304,27 +304,6 @@ public class FileUtil {
         }
         return fileAbs.substring(rootAbs.length());
     }
-
-    /**
-     * Recursively delete a directory and all of its contents.
-     * @param dir The directory to delete
-     */
-    public static boolean deleteTree(File dir) {
-        if (!dir.exists()) {
-            return false;
-        }
-        if (dir.delete()) {
-            return true;
-        } else {
-            File[] contents = dir.listFiles();
-            if (contents != null) {
-                for (File file : contents) {
-                    deleteTree(file);
-                }
-            }
-            return dir.delete();
-        }
-    }
     
     public interface ICollisionCallback {
         public boolean isCanceled();
@@ -364,7 +343,7 @@ public class FileUtil {
         }
         if (onCollision == null || !onCollision.isCanceled()) {
             for (File file : toDelete) {
-                deleteTree(file);
+                FileUtils.deleteDirectory(file);
             }
             copyFilesTo(destination, toReplace.toArray(new File[toReplace.size()]), (File) null);
         }

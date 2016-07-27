@@ -45,7 +45,6 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.xml.xliff.XLIFFDialect;
 import org.omegat.filters3.xml.xliff.XLIFFFilter;
 import org.omegat.filters3.xml.xliff.XLIFFOptions;
-import org.omegat.util.FileUtil;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -248,7 +247,7 @@ public class XLIFFFilterTest extends TestFilterBase {
             assertFalse(wasCausedBy(ex, URISyntaxException.class));
         }
 
-        assertTrue(FileUtil.deleteTree(tmpDir));
+        FileUtils.deleteDirectory(tmpDir);
     }
 
     private static boolean wasCausedBy(Throwable ex, Class<?> cls) {

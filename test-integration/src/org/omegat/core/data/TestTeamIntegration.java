@@ -47,7 +47,6 @@ import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.team2.impl.SVNAuthenticationManager;
-import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TMXWriter2;
@@ -232,7 +231,7 @@ public class TestTeamIntegration {
      */
     static String prepareRepo() throws Exception {
         File tmp = new File(DIR);
-        FileUtil.deleteTree(tmp);
+        FileUtils.deleteDirectory(tmp);
         if (tmp.exists()) {
             throw new Exception("Impossible to delete test dir");
         }

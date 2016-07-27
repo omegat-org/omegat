@@ -35,6 +35,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
+import org.apache.commons.io.FileUtils;
+
 import junit.framework.TestCase;
 
 /**
@@ -212,7 +214,7 @@ public class StaticUtilsTest extends TestCase {
             // Creating symbolic links appears to not be supported on this system
         }
         
-        assertTrue(FileUtil.deleteTree(tempDir));
+        FileUtils.deleteDirectory(tempDir);
     }
 
     public void testInstallDir() {

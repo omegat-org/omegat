@@ -317,10 +317,6 @@ public class FileUtil {
         public boolean isCanceled();
         public boolean shouldReplace(File file, int thisFile, int totalFiles);
     }
-    
-    public interface ITreeIteratorCallback {
-        public void processFile(File file) throws Exception;
-    }
 
     /**
      * Copy a collection of files to a destination. Recursively copies contents of directories
@@ -522,29 +518,5 @@ public class FileUtil {
             }
         }
         return Pattern.compile(m.toString());
-    }
-
-    public static void iterateFileTree(File rootDir, boolean recursive, ITreeIteratorCallback cb) throws Exception {
-        iterateFileTree(rootDir, recursive, new HashSet<File>(), cb);
-    }
-
-    private static void iterateFileTree(File rootDir, boolean recursive, Set<File> visited, ITreeIteratorCallback cb)
-            throws Exception {
-        if (!rootDir.isDirectory()) {
-            return;
-        }
-        File canonical = rootDir.getCanonicalFile();
-        if (visited.contains(canonical)) {
-            return;
-        }
-        visited.add(canonical);
-        for (File file : rootDir.listFiles()) {
-            if (file.isDirectory() && recursive) {
-                iterateFileTree(file.getAbsoluteFile(), recursive, visited, cb);
-            }
-            if (file.isFile()) {
-                cb.processFile(file.getAbsoluteFile());
-            }
-        }
     }
 }

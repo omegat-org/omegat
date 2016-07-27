@@ -141,6 +141,7 @@ could fail with duplicate numbers
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 2
+ OmegaT 3.6.0 update 2 (2016-07-27)
 ----------------------------------------------------------------------
   4 Enhancements
   4 Bug fixes
@@ -295,24 +296,6 @@ bug comments for instructions on adding the certificate to the trust store.
   - Dutch localisation updated to 3.6 (UI, documentation, scripts, readme)
   - Hungarian localisation updated to 3.6 (UI)
   - Norvegian localisation updated to 3.6 (UI, scripts, readme)
-
-----------------------------------------------------------------------
- OmegaT 3.5.4 update 1
-----------------------------------------------------------------------
-   1 Enhancement
-   0 Bug fix
-   1 Localisation update
-----------------------------------------------------------------------
-3.5.4 update 1 vs 3.5.4
-
-  Other changes:
-
-  - The Windows setup program can now be launched in any of the 
-supported languages, regardless of the languages installed in Windows
-
-  Localisation Updates:
-
-  - Italian localisation updated to 3.5.4 (UI, documentation, scripts)
 
 ----------------------------------------------------------------------
  OmegaT 3.5.4 (2016-03-23)

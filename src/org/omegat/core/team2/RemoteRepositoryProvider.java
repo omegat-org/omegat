@@ -27,6 +27,7 @@ package org.omegat.core.team2;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -220,7 +221,7 @@ public class RemoteRepositoryProvider {
     protected void copyFile(File from, File to, String eolConversionCharset) throws IOException {
         if (eolConversionCharset != null) {
             // charset defined - text file for EOL conversion
-            FileUtil.copyFileWithEolConversion(from, to, eolConversionCharset);
+            FileUtil.copyFileWithEolConversion(from, to, Charset.forName(eolConversionCharset));
         } else {
             // charset not defined - binary file
             FileUtils.copyFile(from, to);

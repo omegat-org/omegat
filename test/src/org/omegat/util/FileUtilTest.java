@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.UncheckedIOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystemLoopException;
 import java.nio.file.Files;
 import java.util.Collections;
@@ -232,27 +233,27 @@ public class FileUtilTest extends TestCase {
         byte[][] eols = new byte[][] { eoln, eolr, eolrn };
 
         FileUtils.writeByteArrayToFile(out, eoln);
-        assertEquals("\n", FileUtil.getEOL(out, "UTF-8"));
+        assertEquals("\n", FileUtil.getEOL(out, StandardCharsets.UTF_8));
         for (byte[] eolfrom : eols) {
             FileUtils.writeByteArrayToFile(in, eolfrom);
-            FileUtil.copyFileWithEolConversion(in, out, "UTF-8");
-            assertEquals("\n", FileUtil.getEOL(out, "UTF-8"));
+            FileUtil.copyFileWithEolConversion(in, out, StandardCharsets.UTF_8);
+            assertEquals("\n", FileUtil.getEOL(out, StandardCharsets.UTF_8));
         }
 
         FileUtils.writeByteArrayToFile(out, eolr);
-        assertEquals("\r", FileUtil.getEOL(out, "UTF-8"));
+        assertEquals("\r", FileUtil.getEOL(out, StandardCharsets.UTF_8));
         for (byte[] eolfrom : eols) {
             FileUtils.writeByteArrayToFile(in, eolfrom);
-            FileUtil.copyFileWithEolConversion(in, out, "UTF-8");
-            assertEquals("\r", FileUtil.getEOL(out, "UTF-8"));
+            FileUtil.copyFileWithEolConversion(in, out, StandardCharsets.UTF_8);
+            assertEquals("\r", FileUtil.getEOL(out, StandardCharsets.UTF_8));
         }
 
         FileUtils.writeByteArrayToFile(out, eolrn);
-        assertEquals("\r\n", FileUtil.getEOL(out, "UTF-8"));
+        assertEquals("\r\n", FileUtil.getEOL(out, StandardCharsets.UTF_8));
         for (byte[] eolfrom : eols) {
             FileUtils.writeByteArrayToFile(in, eolfrom);
-            FileUtil.copyFileWithEolConversion(in, out, "UTF-8");
-            assertEquals("\r\n", FileUtil.getEOL(out, "UTF-8"));
+            FileUtil.copyFileWithEolConversion(in, out, StandardCharsets.UTF_8);
+            assertEquals("\r\n", FileUtil.getEOL(out, StandardCharsets.UTF_8));
         }
     }
 

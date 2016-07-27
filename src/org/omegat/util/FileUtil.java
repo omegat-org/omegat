@@ -33,11 +33,8 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -61,7 +58,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 
 /**
  * Files processing utilities.
@@ -139,7 +135,7 @@ public class FileUtil {
      * Copy file and create output directory if need. EOL will be converted into target-specific or into
      * platform-specific if target doesn't exist.
      */
-    public static void copyFileWithEolConversion(File inFile, File outFile, String eolConversionCharset)
+    public static void copyFileWithEolConversion(File inFile, File outFile, Charset charset)
             throws IOException {
         File dir = outFile.getParentFile();
         if (!dir.exists()) {
@@ -148,63 +144,26 @@ public class FileUtil {
         String eol;
         if (outFile.exists()) {
             // file exist - read EOL from file
-            eol = getEOL(outFile, eolConversionCharset);
+            eol = getEOL(outFile, charset);
         } else {
             // file not exist - use system-dependent
             eol = System.lineSeparator();
         }
-        if (eol == null) {
-            // EOL wasn't detected - just copy
-            FileUtils.copyFile(inFile, outFile, false);
-            return;
-        }
-        FileInputStream fis = null;
-        InputStreamReader isr = null;
-        BufferedReader in = null;
-        try {
-            fis = new FileInputStream(inFile);
-            isr = new InputStreamReader(fis, eolConversionCharset);
-            in = new BufferedReader(isr);
-            FileOutputStream fos = null;
-            OutputStreamWriter osw = null;
-            BufferedWriter out = null;
-            try {
-                fos = new FileOutputStream(outFile);
-                osw = new OutputStreamWriter(fos, eolConversionCharset);
-                out = new BufferedWriter(osw);
+        try (BufferedReader in = Files.newBufferedReader(inFile.toPath(), charset)) {
+            try (BufferedWriter out = Files.newBufferedWriter(outFile.toPath(), charset)) {
                 String s;
                 while ((s = in.readLine()) != null) {
                     // copy using known EOL
                     out.write(s);
                     out.write(eol);
                 }
-                out.close();
-                osw.close();
-                fos.close();
-            } finally {
-                IOUtils.closeQuietly(out);
-                IOUtils.closeQuietly(osw);
-                IOUtils.closeQuietly(fos);
             }
-            in.close();
-            isr.close();
-            fis.close();
-        } finally {
-            IOUtils.closeQuietly(in);
-            IOUtils.closeQuietly(isr);
-            IOUtils.closeQuietly(fis);
         }
     }
 
-    public static String getEOL(File file, String eolConversionCharset) throws IOException {
+    public static String getEOL(File file, Charset charset) throws IOException {
         String r = null;
-        FileInputStream fis = null;
-        InputStreamReader isr = null;
-        BufferedReader in = null;
-        try {
-            fis = new FileInputStream(file);
-            isr = new InputStreamReader(fis, eolConversionCharset);
-            in = new BufferedReader(isr);
+        try (BufferedReader in = Files.newBufferedReader(file.toPath(), charset)) {
             while (true) {
                 int ch = in.read();
                 if (ch < 0) {
@@ -219,13 +178,6 @@ public class FileUtil {
                     break;
                 }
             }
-            in.close();
-            isr.close();
-            fis.close();
-        } finally {
-            IOUtils.closeQuietly(in);
-            IOUtils.closeQuietly(isr);
-            IOUtils.closeQuietly(fis);
         }
         return r;
     }

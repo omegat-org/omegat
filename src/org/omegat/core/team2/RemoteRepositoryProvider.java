@@ -249,8 +249,16 @@ public class RemoteRepositoryProvider {
         return s.startsWith("/") ? s.substring(1) : s;
     }
 
+    static String withoutTrailingSlash(String s) {
+        return s.endsWith("/") ? s.substring(0, s.length() - 1) : s;
+    }
+
     static String withSlashes(String s) {
         return withTrailingSlash(withLeadingSlash(s));
+    }
+
+    static String withoutSlashes(String s) {
+        return withoutTrailingSlash(withoutLeadingSlash(s));
     }
 
     /**
@@ -359,7 +367,7 @@ public class RemoteRepositoryProvider {
                 List<String> files = copy(from, to, filterPrefix, repoMapping.getIncludes(), repoMapping.getExcludes(),
                         eolConversionCharset);
                 for (String f : files) {
-                    addForCommit(repo, new File(repoMapping.getRepository(), f).getPath());
+                    addForCommit(repo, withoutSlashes(f));
                 }
             } else {
                 // file mapping
@@ -368,7 +376,7 @@ public class RemoteRepositoryProvider {
                             "Filter prefix should have been / for file mapping, but was " + filterPrefix);
                 }
                 copyFile(from, to, eolConversionCharset);
-                addForCommit(repo, repoMapping.getRepository());
+                addForCommit(repo, withoutSlashes(repoMapping.getRepository()));
             }
         }
 

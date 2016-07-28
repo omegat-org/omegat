@@ -26,9 +26,9 @@
 
 package org.omegat.core.team2;
 
-import gen.core.project.RepositoryDefinition;
-
 import java.io.File;
+
+import gen.core.project.RepositoryDefinition;
 
 /**
  * Interface for any remote repository implementation.
@@ -55,6 +55,15 @@ public interface IRemoteRepository2 {
 
     void switchToVersion(String version) throws Exception;
 
+    /**
+     * Add the specified file in preparation for commit (e.g.
+     * <code>git add</code>, <code>svn add</code>).
+     * 
+     * @param path
+     *            The relative path of the item from the root of the repo
+     *            (should not start with a <code>/</code>)
+     * @throws Exception
+     */
     void addForCommit(String path) throws Exception;
 
     /**

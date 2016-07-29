@@ -86,8 +86,7 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
             switch (type) {
             case LOCAL_INSTALLATION:
                 String localDir = Preferences.getPreference(Preferences.LANGUAGETOOL_LOCAL_DIR);
-                int port = Preferences.getPreferenceDefault(Preferences.LANGUAGETOOL_LOCAL_PORT, 8081);
-                return new LanguageToolNetworkBridge(localDir, port);
+                return new LanguageToolNetworkBridge(localDir, 8081);
             case REMOTE_URL:
                 String remoteUrl = Preferences.getPreference(Preferences.LANGUAGETOOL_REMOTE_URL);
                 return new LanguageToolNetworkBridge(remoteUrl);

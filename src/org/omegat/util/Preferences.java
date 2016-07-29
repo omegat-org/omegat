@@ -285,8 +285,6 @@ public class Preferences {
     public static final String LANGUAGETOOL_BRIDGE_TYPE = "lt_bridgeType";
     /** URL of remote LanguageTool server */
     public static final String LANGUAGETOOL_REMOTE_URL = "lt_remoteURL";
-    /** Local port for spawning of LanguageTool server */
-    public static final String LANGUAGETOOL_LOCAL_PORT = "lt_localPort";
     /** Local directory for LanguageTool */
     public static final String LANGUAGETOOL_LOCAL_DIR = "lt_localDir";
     /** Apply different punctuation bitext rule in LanguageTool */

@@ -26,6 +26,8 @@ package org.omegat.languagetools;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
@@ -65,7 +67,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
 
     /**
      * Get instance talking to remote server
-     * 
+     *
      * @param url
      *            URL of remote LanguageTool server
      * @return new LanguageToolNetworkBridge instance
@@ -83,7 +85,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
 
     /**
      * Get instance spawning and talking to local server
-     * 
+     *
      * @param path
      *            local LanguageTool directory
      * @param port
@@ -113,9 +115,24 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
         // Run the server
         ProcessBuilder pb = new ProcessBuilder("java", "-cp", serverJar.getAbsolutePath(), SERVER_CLASS_NAME, "--port",
                 Integer.toString(port));
-        pb.inheritIO();
-
+        pb.redirectErrorStream(true);
         server = pb.start();
+
+        // Create a thread to consume server output
+        new Thread(new Runnable() {
+            InputStream is = server.getInputStream();
+            @Override
+            public void run() {
+                int b;
+                try {
+                    do {
+                        b = is.read();
+                    } while (b != -1);
+                } catch (IOException e) {
+                    // Do nothing
+                }
+            }
+        }).start();
 
         // Wait for server to start
         int timeout = 10000;

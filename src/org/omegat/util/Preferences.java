@@ -286,7 +286,7 @@ public class Preferences {
     /** URL of remote LanguageTool server */
     public static final String LANGUAGETOOL_REMOTE_URL = "lt_remoteURL";
     /** Local directory for LanguageTool */
-    public static final String LANGUAGETOOL_LOCAL_DIR = "lt_localDir";
+    public static final String LANGUAGETOOL_LOCAL_SERVER_JAR_PATH = "lt_localServerJarPath";
     /** Apply different punctuation bitext rule in LanguageTool */
     public static final String LANGUAGETOOL_USE_DIFF_PUNCTUATION_RULE = "lt_diffPunctuationRule";
 

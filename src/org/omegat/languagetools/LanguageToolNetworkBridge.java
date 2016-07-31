@@ -53,7 +53,6 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
 
     /* Constants */
     private final static String URL_PATH = "/v2/check";
-    private final static String SERVER_JAR_NAME = "languagetool-server.jar";
     private final static String SERVER_CLASS_NAME = "org.languagetool.server.HTTPServer";
 
     /* Instance scope fields */
@@ -97,7 +96,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
         // Remember port
         localPort = port;
 
-        File serverJar = new File(path, SERVER_JAR_NAME);
+        File serverJar = new File(path);
 
         // Check if ClassPath points to a real file
         if (!serverJar.isFile()) {

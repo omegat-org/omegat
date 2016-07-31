@@ -119,18 +119,14 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
         server = pb.start();
 
         // Create a thread to consume server output
-        new Thread(new Runnable() {
-            InputStream is = server.getInputStream();
-            @Override
-            public void run() {
+        new Thread(() -> {
+            try (InputStream is = server.getInputStream()) {
                 int b;
-                try {
-                    do {
-                        b = is.read();
-                    } while (b != -1);
-                } catch (IOException e) {
-                    // Do nothing
+                while ((b = is.read()) != -1) {
+                    // Discard
                 }
+            } catch (IOException e) {
+                // Do nothing
             }
         }).start();
 

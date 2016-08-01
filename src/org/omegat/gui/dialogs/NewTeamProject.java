@@ -350,8 +350,10 @@ public class NewTeamProject extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateDialog() {
-        boolean enabled = repoType != null;
-        btnOk.setEnabled(enabled);
+        String dir = txtDirectory.getText().trim();
+        boolean dirOK = !dir.isEmpty() && !new File(dir).exists();
+        boolean typeDetected = repoType != null;
+        btnOk.setEnabled(dirOK && typeDetected);
     }
     
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed

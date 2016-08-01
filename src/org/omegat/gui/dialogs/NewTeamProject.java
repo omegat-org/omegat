@@ -33,7 +33,6 @@ import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import org.omegat.core.Core;
 import org.omegat.core.team2.RemoteRepositoryFactory;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -374,7 +373,7 @@ public class NewTeamProject extends javax.swing.JDialog {
         if (!saveDir.isEmpty()) {
             ndc.setSelectedFile(new File(saveDir));
         }
-        int ndcResult = ndc.showSaveDialog(Core.getMainWindow().getApplicationFrame());
+        int ndcResult = ndc.showSaveDialog(this);
         if (ndcResult == OmegaTFileChooser.APPROVE_OPTION) {
             txtDirectory.setText(ndc.getSelectedFile().getPath());
         }

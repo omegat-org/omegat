@@ -162,8 +162,22 @@ public class NewTeamProject extends javax.swing.JDialog {
         String url = txtRepositoryOrProjectFileURL.getText().trim();
         String strippedUrl = StringUtil.stripFromEnd(url, ".git", "/", "trunk", "/", "svn");
         String dir = Preferences.getPreferenceDefault(Preferences.CURRENT_FOLDER, System.getProperty("user.home"));
-        File suggestion = new File(dir, new File(strippedUrl).getName());
-        txtDirectory.setText(suggestion.getAbsolutePath());
+        File suggestion = new File(dir, new File(strippedUrl).getName()).getAbsoluteFile();
+        txtDirectory.setText(ensureUniquePath(suggestion).getPath());
+    }
+
+    private static File ensureUniquePath(File path) {
+        File result = path;
+        int suff = 2;
+        while (result.exists()) {
+            result = new File(path.getPath() + suff);
+            suff++;
+            if (suff > 1000) {
+                // Give up after 1000
+                break;
+            }
+        }
+        return result;
     }
 
     private void clearRepo() {

@@ -115,9 +115,8 @@ public class NewTeamProject extends javax.swing.JDialog {
         if (detecting || !isVisible()) {
             return;
         }
-        txtRepositoryOrProjectFileURL.setText(txtRepositoryOrProjectFileURL.getText().trim()); 
         repoType = null;
-        String url = txtRepositoryOrProjectFileURL.getText();
+        String url = txtRepositoryOrProjectFileURL.getText().trim();
         if (StringUtil.isEmpty(url)) {
             return;
         }
@@ -157,7 +156,7 @@ public class NewTeamProject extends javax.swing.JDialog {
     }
 
     private void suggestLocalFolder() {
-        if (!txtDirectory.getText().isEmpty()) {
+        if (!txtDirectory.getText().trim().isEmpty()) {
             return;
         }
         String url = txtRepositoryOrProjectFileURL.getText().trim();
@@ -369,7 +368,7 @@ public class NewTeamProject extends javax.swing.JDialog {
 
     private void btnDirectoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDirectoryActionPerformed
         NewProjectFileChooser ndc = new NewProjectFileChooser();
-        String saveDir = txtDirectory.getText();
+        String saveDir = txtDirectory.getText().trim();
         if (!saveDir.isEmpty()) {
             ndc.setSelectedFile(new File(saveDir));
         }

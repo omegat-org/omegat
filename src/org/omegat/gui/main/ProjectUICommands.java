@@ -306,7 +306,7 @@ public class ProjectUICommands {
                 Core.getMainWindow().showStatusMessageRB("CT_DOWNLOADING_PROJECT");
 
                 // retrieve omegat.project
-                projectRoot = new File(dialog.txtDirectory.getText());
+                projectRoot = new File(dialog.getSaveLocation());
                 List<RepositoryDefinition> repos = new ArrayList<RepositoryDefinition>();
                 RepositoryDefinition repo = new RepositoryDefinition();
                 repos.add(repo);

@@ -134,7 +134,7 @@ public class SpellChecker implements ISpellChecker {
                 targetLanguage.getLanguageCode()); // xx only
 
         checker = toCheck.map(SpellChecker::initializeWithLanguage).filter(Optional::isPresent).findFirst()
-                .orElse(Optional.of(new SpellCheckerDummy())).get();
+                .orElseGet(() -> Optional.of(new SpellCheckerDummy())).get();
 
         if (checker instanceof SpellCheckerDummy) {
             Log.log("No spell checker found for language " + targetLanguage);

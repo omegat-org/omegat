@@ -62,6 +62,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -1278,11 +1279,7 @@ public class EditorController implements IEditor {
         activateEntry(new CaretPosition(currentPosition));
     }
 
-    interface IIterateSegments {
-        boolean shouldStop(SourceTextEntry ste);
-    }
-
-    private void iterateToEntry(boolean forward, IIterateSegments test) {
+    private void iterateToEntry(boolean forward, Predicate<SourceTextEntry> shouldStop) {
         UIThreadsUtil.mustBeSwingThread();
 
         if (!Core.getProject().isProjectLoaded())
@@ -1327,7 +1324,7 @@ public class EditorController implements IEditor {
                 }
             }
             ste = getCurrentEntry();
-            if (test.shouldStop(ste)) {
+            if (shouldStop.test(ste)) {
             	break;
             }
             if (looped && displayedFileIndex == startFileIndex) {
@@ -1351,12 +1348,7 @@ public class EditorController implements IEditor {
     }
 
     private void anyEntry(boolean forwards) {
-        iterateToEntry(forwards, new IIterateSegments() {
-            @Override
-            public boolean shouldStop(SourceTextEntry ste) {
-                return ste != null;
-            }
-        });
+        iterateToEntry(forwards, ste -> ste != null);
     }
 
     public void nextEntry() {
@@ -1372,33 +1364,30 @@ public class EditorController implements IEditor {
      * @param findTranslated should the next entry be translated or not.
      */
     private void nextTranslatedEntry(final boolean findTranslated) {
-        iterateToEntry(true, new IIterateSegments() {
-            @Override
-            public boolean shouldStop(SourceTextEntry ste) {
-                if (ste == null) {
+        iterateToEntry(true, ste -> {
+            if (ste == null) {
+                return true;
+            }
+            if (!findTranslated) {
+                if (!Core.getProject().getTranslationInfo(ste).isTranslated()) {
+                    return true; // non-translated
+                }
+            } else {
+                if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
+                    return true; // translated
+                }
+            }
+            if (Preferences.isPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION)) {
+                // when there is at least one alternative translation, then
+                // we can consider that segment is not translated
+                HasMultipleTranslations checker = new HasMultipleTranslations(ste.getSrcText());
+                Core.getProject().iterateByMultipleTranslations(checker);
+                if (checker.found) {
+                    // stop - alternative translation exist
                     return true;
                 }
-                if (!findTranslated) {
-                    if (!Core.getProject().getTranslationInfo(ste).isTranslated()) {
-                        return true; // non-translated
-                    }
-                } else {
-                    if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
-                        return true; // translated
-                    }
-                }
-                if (Preferences.isPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION)) {
-                    // when there is at least one alternative translation, then
-                    // we can consider that segment is not translated
-                    HasMultipleTranslations checker = new HasMultipleTranslations(ste.getSrcText());
-                    Core.getProject().iterateByMultipleTranslations(checker);
-                    if (checker.found) {
-                        // stop - alternative translation exist
-                        return true;
-                    }
-                }
-                return false;
             }
+            return false;
         });
     }
     
@@ -1417,17 +1406,14 @@ public class EditorController implements IEditor {
     }
 
     private void entryWithNote(boolean forward) {
-        iterateToEntry(forward, new IIterateSegments() {
-            @Override
-            public boolean shouldStop(SourceTextEntry ste) {
-                if (ste == null) {
-                    return true;
-                }
-                if (Core.getProject().getTranslationInfo(ste).hasNote()) {
-                    return true;
-                }
-                return false;
+        iterateToEntry(forward, ste -> {
+            if (ste == null) {
+                return true;
             }
+            if (Core.getProject().getTranslationInfo(ste).hasNote()) {
+                return true;
+            }
+            return false;
         });
     }
 
@@ -1450,17 +1436,14 @@ public class EditorController implements IEditor {
      * @param findTranslated should the next entry be translated or not.
      */
     public void nextUniqueEntry() {
-        iterateToEntry(true, new IIterateSegments() {
-            @Override
-            public boolean shouldStop(SourceTextEntry ste) {
-                if (ste == null) {
-                    return true;
-                }
-                if (ste.getDuplicate() != DUPLICATE.NEXT) {
-                    return true;
-                }
-                return false;
+        iterateToEntry(true, ste -> {
+            if (ste == null) {
+                return true;
             }
+            if (ste.getDuplicate() != DUPLICATE.NEXT) {
+                return true;
+            }
+            return false;
         });
     }
 

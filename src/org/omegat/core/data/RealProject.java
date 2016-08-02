@@ -49,6 +49,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
@@ -322,12 +323,12 @@ public class RealProject implements IProject {
             // Set project specific file filters if they exist, or defaults otherwise.
             // This MUST happen before calling loadTranslations() because the setting to ignore file context
             // for alt translations is a filter setting, and it affects how alt translations are hashed.
-            Filters filters = m_config.getProjectFilters();
-            Core.setFilterMaster(new FilterMaster(filters == null ? Preferences.getFilters() : filters));
+            Filters filters = Optional.ofNullable(m_config.getProjectFilters()).orElse(Preferences.getFilters());
+            Core.setFilterMaster(new FilterMaster(filters));
 
             // Set project specific segmentation rules if they exist, or defaults otherwise.
-            SRX srx = m_config.getProjectSRX();
-            Core.setSegmenter(new Segmenter(srx == null ? Preferences.getSRX() : srx));
+            SRX srx = Optional.ofNullable(m_config.getProjectSRX()).orElse(Preferences.getSRX());
+            Core.setSegmenter(new Segmenter(srx));
 
             if (remoteRepositoryProvider != null) {
                 // copy files from repository to project

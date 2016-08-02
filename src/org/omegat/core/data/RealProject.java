@@ -343,14 +343,8 @@ public class RealProject implements IProject {
                 for (String dir : new String[] { m_config.getSourceDir().getUnderRoot(),
                         m_config.getGlossaryDir().getUnderRoot(), m_config.getTmDir().getUnderRoot(),
                         m_config.getDictDir().getUnderRoot() }) {
-                    if (dir == null) {
+                    if (dir == null || dir.contains("..")) {
                         continue;
-                    }
-                    if (dir.startsWith("/") || dir.contains("..")) {
-                        continue;
-                    }
-                    if (!dir.endsWith("/")) {
-                        dir += "/";
                     }
                     // copy but skip project_save.tmx and glossary.txt
                     remoteRepositoryProvider.copyFilesFromRepoToProject(dir,

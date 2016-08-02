@@ -1368,14 +1368,12 @@ public class EditorController implements IEditor {
             if (ste == null) {
                 return true;
             }
-            if (!findTranslated) {
-                if (!Core.getProject().getTranslationInfo(ste).isTranslated()) {
-                    return true; // non-translated
-                }
-            } else {
-                if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
-                    return true; // translated
-                }
+            boolean isTranslated = Core.getProject().getTranslationInfo(ste).isTranslated();
+            if (findTranslated && isTranslated) {
+                return true; // translated
+            }
+            if (!findTranslated && !isTranslated) {
+                return true; // non-translated
             }
             if (Preferences.isPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION)) {
                 // when there is at least one alternative translation, then

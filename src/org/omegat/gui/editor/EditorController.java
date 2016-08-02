@@ -61,6 +61,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Level;
@@ -1348,7 +1349,7 @@ public class EditorController implements IEditor {
     }
 
     private void anyEntry(boolean forwards) {
-        iterateToEntry(forwards, ste -> ste != null);
+        iterateToEntry(forwards, Objects::nonNull);
     }
 
     public void nextEntry() {

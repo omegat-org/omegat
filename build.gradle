@@ -394,14 +394,16 @@ task win {
         description = "Create a Windows installer for ${taskName} distro. " +
             'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
         dependsOn jar
-        outputs.dir distsDir
+        def innoSetupDir = file("${buildDir}/innosetup/${taskName}")
+        def fullVersion = project.version + omtVersion.beta
+        def suffix = jrePath == null ? 'Windows_without_JRE' : 'Windows'
+        def installerBasename = "OmegaT_${fullVersion}_${suffix}"
+        outputs.dir innoSetupDir
+        outputs.file "${distsDir}/${installerBasename}.exe"
         onlyIf {
             haveInnoSetup()
         }
         doLast {
-            def innoSetupDir = file("${buildDir}/innosetup/${taskName}")
-            delete innoSetupDir
-            def customMessages = getInnoSetupCustomMessages()
             copy {
                 with distributions.main.contents
                 from('release/win32-specific') {
@@ -415,12 +417,12 @@ task win {
                 fileset(dir: 'release/win32-specific', includes: 'OmegaT.iss')
                 filterchain {
                     replacetokens {
-                        ['VERSION_NUMBER_SUBST': project.version + omtVersion.beta,
+                        ['VERSION_NUMBER_SUBST': fullVersion,
                          'OUTPUT_DIR_SUBST': distsDir.path,
-                         'JRE_SUFFIX_SUBST': jrePath == null ? '_without_JRE' : '',
+                         'OUTPUT_BASENAME_SUBST': installerBasename,
                          'JRE_COMMENT_SUBST': jrePath == null ? ';' : '',
                          'JRE_PATH_SUBST': jrePath == null ? '' : jrePath.path,
-                         'CUSTOM_MESSAGES_SUBST': customMessages].each { key, tok ->
+                         'CUSTOM_MESSAGES_SUBST': getInnoSetupCustomMessages()].each { key, tok ->
                             token(key: key, value: tok)
                         }
                     }

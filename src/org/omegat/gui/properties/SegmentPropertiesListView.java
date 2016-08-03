@@ -25,6 +25,7 @@
 
 package org.omegat.gui.properties;
 
+import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -121,7 +122,10 @@ public class SegmentPropertiesListView implements ISegmentPropertiesView {
 
     @Override
     public String getKeyAtPoint(Point p) {
-        SegmentPropertiesListCell cell = ((SegmentPropertiesListCell) panel.getComponentAt(p));
-        return cell == null ? null : cell.key;
+        Component comp = panel.getComponentAt(p);
+        if (comp instanceof SegmentPropertiesListCell) {
+            return ((SegmentPropertiesListCell) comp).key;
+        }
+        return null;
     }
 }

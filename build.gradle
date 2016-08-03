@@ -547,6 +547,7 @@ task genJAXB {
 task genMac {
     description = 'Generate the Mac .app skeleton. Requires AppBundler (https://bitbucket.org/infinitekind/appbundler) ' +
         'to be available in ~/.ant/lib'
+    outputs.dir file('release/mac-specific')
     def appbundlerJar = file("${System.getProperty('user.home')}/.ant/lib/appbundler-1.0ea.jar")
     onlyIf {
         appbundlerJar.file

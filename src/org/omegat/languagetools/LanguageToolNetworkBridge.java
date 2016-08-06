@@ -40,6 +40,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.mark.Mark;
@@ -47,19 +50,25 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
-import net.arnx.jsonic.JSON;
+
+class LanguageToolMatch {
+    public String message, rule, category;
+    public int begin, end;
+}
+
 
 public class LanguageToolNetworkBridge implements ILanguageToolBridge {
 
     /* Constants */
     private final static String URL_PATH = "/v2/check";
     private final static String SERVER_CLASS_NAME = "org.languagetool.server.HTTPServer";
+    private final static String API_VERSION = "1";
 
     /* Instance scope fields */
-
     private Process server;
     private int localPort;
     private String serverUrl;
+    private ScriptEngine engine;
 
     /* Project scope fields */
     private Language sourceLang, targetLang;
@@ -156,6 +165,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
     public void onProjectLoad() {
         sourceLang = Core.getProject().getProjectProperties().getSourceLanguage();
         targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
+        engine = new ScriptEngineManager().getEngineByName("javascript");
     }
 
     @Override
@@ -196,20 +206,45 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
         OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
         writer.write(buildPostData(sourceLang.toString(), targetLang.toString(), sourceText, translationText));
         writer.flush();
+        // Read response into string specially wrapped for Nashorn
         BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        LanguageToolJSONResponse response = JSON.decode(reader, LanguageToolJSONResponse.class);
+        String line;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Java.asJSONCompatible(");
+        while ((line = reader.readLine()) != null) {
+            sb.append(line);
+        }
+        sb.append(")");
         writer.close();
         reader.close();
 
-        if (!response.apiVersionIsValid()) {
+        Map<String, Object> response = (Map) engine.eval(sb.toString());
+        Map<String, String> software = (Map<String, String>) response.get("software");
+
+        if (!software.get("apiVersion").equals(API_VERSION)) {
             Log.logWarningRB("LT_API_VERSION_MISMATCH");
         }
 
+        List<Map<String,Object>> matches = (List) response.get("matches");
+        ArrayList<LanguageToolMatch> ltMatches = new ArrayList<>();
+
+        matches.stream().forEach((match) -> {
+            LanguageToolMatch m = new LanguageToolMatch();
+            m.message = (String) match.get("message");
+            m.begin = (int) match.get("offset");
+            m.end = (int) match.get("length") + m.begin;
+            Map<String,Object> rule = (Map) match.get("rule");
+            m.rule = (String) rule.get("id");
+            Map<String,Object> category = (Map) rule.get("category");
+            m.category = (String) category.get("id");
+            ltMatches.add(m);
+        });
+
         List<Mark> r = new ArrayList<>();
-        for (LanguageToolJSONResponse.Match match : response.matches) {
+        for (LanguageToolMatch match : ltMatches) {
             Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION,
-                              match.offset.intValue(),
-                              match.offset.intValue() + match.length.intValue());
+                              match.begin,
+                              match.end);
             m.toolTipText = addSuggestionTags(match.message);
             m.painter = LanguageToolWrapper.PAINTER;
             r.add(m);

@@ -61,7 +61,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Level;
@@ -1325,7 +1324,7 @@ public class EditorController implements IEditor {
                 }
             }
             ste = getCurrentEntry();
-            if (shouldStop.test(ste)) {
+            if (ste == null || shouldStop.test(ste)) {
             	break;
             }
             if (looped && displayedFileIndex == startFileIndex) {
@@ -1349,7 +1348,7 @@ public class EditorController implements IEditor {
     }
 
     private void anyEntry(boolean forwards) {
-        iterateToEntry(forwards, Objects::nonNull);
+        iterateToEntry(forwards, ste -> true);
     }
 
     public void nextEntry() {
@@ -1366,9 +1365,6 @@ public class EditorController implements IEditor {
      */
     private void nextTranslatedEntry(final boolean findTranslated) {
         iterateToEntry(true, ste -> {
-            if (ste == null) {
-                return true;
-            }
             boolean isTranslated = Core.getProject().getTranslationInfo(ste).isTranslated();
             if (findTranslated && isTranslated) {
                 return true; // translated
@@ -1405,15 +1401,7 @@ public class EditorController implements IEditor {
     }
 
     private void entryWithNote(boolean forward) {
-        iterateToEntry(forward, ste -> {
-            if (ste == null) {
-                return true;
-            }
-            if (Core.getProject().getTranslationInfo(ste).hasNote()) {
-                return true;
-            }
-            return false;
-        });
+        iterateToEntry(forward, ste -> Core.getProject().getTranslationInfo(ste).hasNote());
     }
 
     /**
@@ -1435,15 +1423,7 @@ public class EditorController implements IEditor {
      * @param findTranslated should the next entry be translated or not.
      */
     public void nextUniqueEntry() {
-        iterateToEntry(true, ste -> {
-            if (ste == null) {
-                return true;
-            }
-            if (ste.getDuplicate() != DUPLICATE.NEXT) {
-                return true;
-            }
-            return false;
-        });
+        iterateToEntry(true, ste -> ste.getDuplicate() != DUPLICATE.NEXT);
     }
 
     /**

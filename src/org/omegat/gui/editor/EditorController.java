@@ -1211,6 +1211,10 @@ public class EditorController implements IEditor {
                 continue;
             }
             SegmentBuilder builder = m_docSegList[i];
+            if (!builder.hasBeenCreated()) {
+                // Skip because segment has not been drawn yet
+                continue;
+            }
             if (builder.ste.getSrcText().equals(entry.getSrcText())) {
                 // the same source text - need to update
                 builder.createSegmentElement(false,

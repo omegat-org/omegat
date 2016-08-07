@@ -203,23 +203,24 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
         URL url = new URL(serverUrl);
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
-        writer.write(buildPostData(sourceLang.toString(), targetLang.toString(), sourceText, translationText));
-        writer.flush();
-        // Read response into string specially wrapped for Nashorn
-        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        String line;
-        StringBuilder sb = new StringBuilder();
-        sb.append("Java.asJSONCompatible(");
-        while ((line = reader.readLine()) != null) {
-            sb.append(line);
+        try (OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream())) {
+            writer.write(buildPostData(sourceLang.toString(), targetLang.toString(), sourceText, translationText));
+            writer.flush();
         }
-        sb.append(")");
-        writer.close();
-        reader.close();
+
+        // Read response into string specially wrapped for Nashorn
+        StringBuilder sb;
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+            String line;
+            sb = new StringBuilder();
+            sb.append("Java.asJSONCompatible(");
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+            }   sb.append(")");
+        }
 
         Map<String, Object> response = (Map) engine.eval(sb.toString());
-        Map<String, String> software = (Map<String, String>) response.get("software");
+        Map<String, String> software = (Map) response.get("software");
 
         if (!software.get("apiVersion").equals(API_VERSION)) {
             Log.logWarningRB("LT_API_VERSION_MISMATCH");

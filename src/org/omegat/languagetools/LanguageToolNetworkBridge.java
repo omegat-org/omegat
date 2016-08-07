@@ -51,12 +51,6 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
 
-class LanguageToolMatch {
-    public String message, rule, category;
-    public int begin, end;
-}
-
-
 public class LanguageToolNetworkBridge implements ILanguageToolBridge {
 
     /* Constants */
@@ -216,7 +210,8 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
             sb.append("Java.asJSONCompatible(");
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
-            }   sb.append(")");
+            }
+            sb.append(")");
         }
 
         Map<String, Object> response = (Map) engine.eval(sb.toString());
@@ -227,29 +222,18 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
         }
 
         List<Map<String,Object>> matches = (List) response.get("matches");
-        ArrayList<LanguageToolMatch> ltMatches = new ArrayList<>();
+        List<Mark> r = new ArrayList<>();
 
         matches.stream().forEach((match) -> {
-            LanguageToolMatch m = new LanguageToolMatch();
-            m.message = (String) match.get("message");
-            m.begin = (int) match.get("offset");
-            m.end = (int) match.get("length") + m.begin;
-            Map<String,Object> rule = (Map) match.get("rule");
-            m.rule = (String) rule.get("id");
-            Map<String,Object> category = (Map) rule.get("category");
-            m.category = (String) category.get("id");
-            ltMatches.add(m);
-        });
-
-        List<Mark> r = new ArrayList<>();
-        for (LanguageToolMatch match : ltMatches) {
-            Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION,
-                              match.begin,
-                              match.end);
-            m.toolTipText = addSuggestionTags(match.message);
+            int begin, end;
+            begin = (int) match.get("offset");
+            end = (int) match.get("length") + begin;
+            Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, begin, end);
+            m.toolTipText = addSuggestionTags((String) match.get("message"));
             m.painter = LanguageToolWrapper.PAINTER;
             r.add(m);
-        }
+        });
+
         return r;
     }
 

@@ -27,6 +27,7 @@ package org.omegat.core.team2;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,10 +35,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
 import org.omegat.util.FileUtil;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
 import gen.core.project.RepositoryDefinition;
@@ -88,14 +90,6 @@ public class RemoteRepositoryProvider {
                 if (m.getLocal() == null || m.getRepository() == null) {
                     throw new RuntimeException("Wrong mapping");
                 }
-                if (m.getLocal().startsWith("/") || m.getRepository().startsWith("/")) {
-                    throw new RuntimeException("Wrong mapping");
-                }
-                boolean localIsDir = m.getLocal().endsWith("/") || m.getLocal().isEmpty();
-                boolean repositoryIsDir = m.getRepository().endsWith("/") || m.getRepository().isEmpty();
-                if (localIsDir != repositoryIsDir) {
-                    throw new RuntimeException("Wrong mapping");
-                }
             }
         }
     }
@@ -135,7 +129,7 @@ public class RemoteRepositoryProvider {
         List<Mapping> mappings = getMappings(path);
         if (mappings.size() > 1) {
             throw new RuntimeException("Multiple mapping for file");
-        } else if (mappings.size() == 0) {
+        } else if (mappings.isEmpty()) {
             throw new RuntimeException("There is no mapping for file");
         }
 
@@ -146,7 +140,7 @@ public class RemoteRepositoryProvider {
      * Checks if path is under mapping.
      */
     public boolean isUnderMapping(String path) {
-        return getMappings(path).size() > 0;
+        return !getMappings(path).isEmpty();
     }
 
     /**
@@ -192,14 +186,11 @@ public class RemoteRepositoryProvider {
      * Copy all mappings that under specified directory path into project directory.
      * 
      * @param localPath
-     *            directory name(that should be ended by '/'), or file name
+     *            directory name or file name
      * @param forceExcludes
      *            exclude some path like project_save.tmx and glossary.txt
      */
     public void copyFilesFromRepoToProject(String localPath, String... forceExcludes) throws Exception {
-        if (localPath.startsWith("/")) {
-            throw new RuntimeException("Wrong path mapping");
-        }
         for (Mapping m : getMappings(localPath, forceExcludes)) {
             m.copyFromRepoToProject();
         }
@@ -209,15 +200,12 @@ public class RemoteRepositoryProvider {
      * Copy all mappings that under specified directory path into repository directory.
      * 
      * @param localPath
-     *            directory name(that should be ended by '/'), or file name
+     *            directory name or file name
      * @param eolConversionCharset
      *            not null if EOL conversion required. EOL will be converted to repository-specific for
      *            existing files, and to platform-specific for new files
      */
     public void copyFilesFromProjectToRepo(String localPath, String eolConversionCharset) throws Exception {
-        if (localPath.startsWith("/")) {
-            throw new RuntimeException("Wrong path mapping");
-        }
         for (Mapping m : getMappings(localPath)) {
             m.copyFromProjectToRepo(eolConversionCharset);
         }
@@ -233,7 +221,7 @@ public class RemoteRepositoryProvider {
     protected void copyFile(File from, File to, String eolConversionCharset) throws IOException {
         if (eolConversionCharset != null) {
             // charset defined - text file for EOL conversion
-            FileUtil.copyFileWithEolConversion(from, to, eolConversionCharset);
+            FileUtil.copyFileWithEolConversion(from, to, Charset.forName(eolConversionCharset));
         } else {
             // charset not defined - binary file
             FileUtils.copyFile(from, to);
@@ -247,6 +235,30 @@ public class RemoteRepositoryProvider {
     protected File getRepositoryDir(RepositoryDefinition repo) {
         String path = repo.getUrl().replaceAll("[^A-Za-z0-9\\.]", "_").replaceAll("__+", "_");
         return new File(new File(projectRoot, REPO_SUBDIR), path);
+    }
+
+    static String withLeadingSlash(String s) {
+        return s.startsWith("/") ? s : "/" + s;
+    }
+
+    static String withTrailingSlash(String s) {
+        return s.endsWith("/") ? s : s + "/";
+    }
+
+    static String withoutLeadingSlash(String s) {
+        return s.startsWith("/") ? s.substring(1) : s;
+    }
+
+    static String withoutTrailingSlash(String s) {
+        return s.endsWith("/") ? s.substring(0, s.length() - 1) : s;
+    }
+
+    static String withSlashes(String s) {
+        return withTrailingSlash(withLeadingSlash(s));
+    }
+
+    static String withoutSlashes(String s) {
+        return withoutTrailingSlash(withoutLeadingSlash(s));
     }
 
     /**
@@ -264,38 +276,32 @@ public class RemoteRepositoryProvider {
             this.repo = repo;
             this.repoDefinition = repoDefinition;
             this.repoMapping = repoMapping;
-            this.forceExcludes = new ArrayList<String>();
+            this.forceExcludes = new ArrayList<>();
             /**
              * Find common part - it should be one of path or local. If path and local have only common begin,
              * they will not be mapped. I.e. path=source/ and local=source/one - it's okay, path=source/one/
              * and local=source/ - also okay, but path=source/one/ and local=source/two - wrong.
              */
-            if (path.isEmpty()) {
+            path = withSlashes(path);
+            String local = withSlashes(repoMapping.getLocal());
+            if (path.equals("/")) {
                 // root(full project path) mapping
-                filterPrefix = "";
+                filterPrefix = "/";
                 this.forceExcludes.addAll(Arrays.asList(forceExcludes));
-            } else if (repoMapping.getLocal().equals(path)) {
+            } else if (local.equals(path)) {
                 // path equals mapping (path="source/" for "source/"=>"...")
-                filterPrefix = "";
-                for (String fe : forceExcludes) {
-                    if (fe.startsWith('/' + repoMapping.getLocal())) {
-                        this.forceExcludes.add(fe.substring(repoMapping.getLocal().length() + 1));
-                    }
-                }
-            } else if (repoMapping.getLocal().startsWith(path) && path.endsWith("/")) {
+                filterPrefix = "/";
+                this.forceExcludes.addAll(getTruncatedExclusions(local, forceExcludes));
+            } else if (local.startsWith(path)) {
                 // path shorter than local and is directory (path="source/" for "source/first/..."=>"...")
-                filterPrefix = "";
-                for (String fe : forceExcludes) {
-                    if (fe.startsWith('/' + repoMapping.getLocal())) {
-                        this.forceExcludes.add(fe.substring(repoMapping.getLocal().length() + 1));
-                    }
-                }
-            } else if (path.startsWith(repoMapping.getLocal()) && repoMapping.getLocal().endsWith("/")) {
+                filterPrefix = "/";
+                this.forceExcludes.addAll(getTruncatedExclusions(local, forceExcludes));
+            } else if (path.startsWith(local)) {
                 // local is shorter than path and is directory (path="omegat/project_save" for
                 // "omegat/"=>"...")
-                filterPrefix = path.substring(repoMapping.getLocal().length());
+                filterPrefix = withSlashes(path.substring(local.length()));
                 this.forceExcludes.addAll(Arrays.asList(forceExcludes));
-            } else if (repoMapping.getLocal().isEmpty()) {
+            } else if (local.equals("/")) {
                 // root(full project path) mapping (""=>"...")
                 filterPrefix = path;
                 this.forceExcludes.addAll(Arrays.asList(forceExcludes));
@@ -303,6 +309,14 @@ public class RemoteRepositoryProvider {
                 // otherwise path doesn't correspond with repoMapping
                 filterPrefix = null;
             }
+        }
+
+        List<String> getTruncatedExclusions(String prefix, String... excludes) {
+            String normalizedPrefix = withSlashes(prefix);
+            return Stream.of(excludes).map(RemoteRepositoryProvider::withLeadingSlash)
+                    .filter(e -> e.startsWith(normalizedPrefix))
+                    .map(e -> withLeadingSlash(e.substring(normalizedPrefix.length())))
+                    .collect(Collectors.toList());
         }
 
         /**
@@ -313,24 +327,26 @@ public class RemoteRepositoryProvider {
         }
 
         public void copyFromRepoToProject() throws Exception {
-            if (filterPrefix == null) {
+            if (!matches()) {
                 throw new RuntimeException("Doesn't matched");
             }
-            File from = new File(getRepositoryDir(repoDefinition), repoMapping.getRepository());
-            File to = new File(projectRoot, repoMapping.getLocal());
-            if (repoMapping.getRepository().endsWith("/") || repoMapping.getRepository().isEmpty()) {
+            // Remove leading slashes on child args to avoid doing `new
+            // File("foo", "/")` which treats the "/" as an actual child element
+            // name and prevents proper slash normalization later on.
+            File from = new File(getRepositoryDir(repoDefinition), withoutLeadingSlash(repoMapping.getRepository()));
+            File to = new File(projectRoot, withoutLeadingSlash(repoMapping.getLocal()));
+            if (from.isDirectory()) {
                 // directory mapping
-                List<String> excludes = new ArrayList<String>(repoMapping.getExcludes());
-                if (forceExcludes.size() > 0) {
-                    excludes.addAll(forceExcludes);
-                }
+                List<String> excludes = new ArrayList<>(repoMapping.getExcludes());
+                excludes.addAll(forceExcludes);
                 copy(from, to, filterPrefix, repoMapping.getIncludes(), excludes, null);
             } else {
                 // file mapping
-                if (!filterPrefix.isEmpty()) {
-                    throw new RuntimeException();
+                if (!filterPrefix.equals("/")) {
+                    throw new RuntimeException(
+                            "Filter prefix should have been / for file mapping, but was " + filterPrefix);
                 }
-                if (forceExcludes.size() > 0) {
+                if (!forceExcludes.isEmpty()) {
                     return;
                 }
                 copyFile(from, to, null);
@@ -338,25 +354,29 @@ public class RemoteRepositoryProvider {
         }
 
         public void copyFromProjectToRepo(String eolConversionCharset) throws Exception {
-            if (filterPrefix == null) {
+            if (!matches()) {
                 throw new RuntimeException("Doesn't matched");
             }
-            File from = new File(projectRoot, repoMapping.getLocal());
-            File to = new File(getRepositoryDir(repoDefinition), repoMapping.getRepository());
-            if (repoMapping.getRepository().endsWith("/") || repoMapping.getRepository().isEmpty()) {
+            // Remove leading slashes on child args to avoid doing `new
+            // File("foo", "/")` which treats the "/" as an actual child element
+            // name and prevents proper slash normalization later on.
+            File from = new File(projectRoot, withoutLeadingSlash(repoMapping.getLocal()));
+            File to = new File(getRepositoryDir(repoDefinition), withoutLeadingSlash(repoMapping.getRepository()));
+            if (from.isDirectory()) {
                 // directory mapping or full mapping
-                List<String> files = copy(from, to, filterPrefix, repoMapping.getIncludes(),
-                        repoMapping.getExcludes(), eolConversionCharset);
+                List<String> files = copy(from, to, filterPrefix, repoMapping.getIncludes(), repoMapping.getExcludes(),
+                        eolConversionCharset);
                 for (String f : files) {
-                    addForCommit(repo, repoMapping.getRepository() + f);
+                    addForCommit(repo, withoutSlashes(f));
                 }
             } else {
                 // file mapping
-                if (!filterPrefix.isEmpty()) {
-                    throw new RuntimeException();
+                if (!filterPrefix.equals("/")) {
+                    throw new RuntimeException(
+                            "Filter prefix should have been / for file mapping, but was " + filterPrefix);
                 }
                 copyFile(from, to, eolConversionCharset);
-                addForCommit(repo, repoMapping.getRepository());
+                addForCommit(repo, withoutSlashes(repoMapping.getRepository()));
             }
         }
 
@@ -367,36 +387,26 @@ public class RemoteRepositoryProvider {
         }
 
         public String getVersion() throws Exception {
-            return repo.getFileVersion(repoMapping.getRepository() + filterPrefix);
+            return repo.getFileVersion(new File(repoMapping.getRepository(), filterPrefix).getPath());
         }
 
+        /**
+         * @return Relative paths of copied files, <em>with <code>/</code> at
+         *         start and end</em>
+         */
         protected List<String> copy(File from, File to, String prefix, List<String> includes,
                 List<String> excludes, String eolConversionCharset) throws Exception {
-            List<String> relativeFiles = StaticUtils.buildRelativeFilesList(from, includes, excludes);
+            prefix = withSlashes(prefix);
+            List<String> relativeFiles = FileUtil.buildRelativeFilesList(from, includes, excludes);
             List<String> copied = new ArrayList<String>();
             for (String rf : relativeFiles) {
-                if (rf.startsWith("/")) {
-                    rf = rf.substring(1);
-                }
-                if (rf.startsWith(".repositories/")) {
+                rf = withSlashes(rf);
+                if (rf.startsWith("/.repositories/")) {
                     continue; // list from root - shouldn't travel to .repositories/
                 }
-                if (prefix.isEmpty()) {
-                    // there is no filter
+                if (prefix.isEmpty() || prefix.equals("/") || rf.startsWith(prefix)) {
                     copyFile(new File(from, rf), new File(to, rf), eolConversionCharset);
                     copied.add(rf);
-                } else if (prefix.endsWith("/")) {
-                    // prefix is directory
-                    if (rf.startsWith(prefix)) {
-                        copyFile(new File(from, rf), new File(to, rf), eolConversionCharset);
-                        copied.add(rf);
-                    }
-                } else {
-                    // prefix is file
-                    if (rf.equals(prefix)) {
-                        copyFile(new File(from, rf), new File(to, rf), eolConversionCharset);
-                        copied.add(rf);
-                    }
                 }
             }
             return copied;

@@ -399,14 +399,16 @@ task win {
         description = "Create a Windows installer for ${taskName} distro. " +
             'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
         dependsOn jar
-        outputs.dir distsDir
+        def innoSetupDir = file("${buildDir}/innosetup/${taskName}")
+        def fullVersion = project.version + omtVersion.beta
+        def suffix = jrePath == null ? 'Windows_without_JRE' : 'Windows'
+        def installerBasename = "OmegaT_${fullVersion}_${suffix}"
+        outputs.dir innoSetupDir
+        outputs.file "${distsDir}/${installerBasename}.exe"
         onlyIf {
             haveInnoSetup()
         }
         doLast {
-            def innoSetupDir = file("${buildDir}/innosetup/${taskName}")
-            delete innoSetupDir
-            def customMessages = getInnoSetupCustomMessages()
             copy {
                 with distributions.main.contents
                 from('release/win32-specific') {
@@ -420,12 +422,12 @@ task win {
                 fileset(dir: 'release/win32-specific', includes: 'OmegaT.iss')
                 filterchain {
                     replacetokens {
-                        ['VERSION_NUMBER_SUBST': project.version + omtVersion.beta,
+                        ['VERSION_NUMBER_SUBST': fullVersion,
                          'OUTPUT_DIR_SUBST': distsDir.path,
-                         'JRE_SUFFIX_SUBST': jrePath == null ? '_without_JRE' : '',
+                         'OUTPUT_BASENAME_SUBST': installerBasename,
                          'JRE_COMMENT_SUBST': jrePath == null ? ';' : '',
                          'JRE_PATH_SUBST': jrePath == null ? '' : jrePath.path,
-                         'CUSTOM_MESSAGES_SUBST': customMessages].each { key, tok ->
+                         'CUSTOM_MESSAGES_SUBST': getInnoSetupCustomMessages()].each { key, tok ->
                             token(key: key, value: tok)
                         }
                     }
@@ -505,12 +507,9 @@ processResources << {
 task checksums {
     def algos = ['SHA-512', 'MD5']
     description = "Generate ${algos.join(', ')} checksums for distribution files"
-    inputs.files fileTree(dir: distsDir, include: 'OmegaT*')
+    inputs.files fileTree(dir: distsDir, exclude: 'checksums')
     def checksumsDir = file("${distsDir}/checksums")
     outputs.dir checksumsDir
-    doFirst {
-        delete checksumsDir
-    }
     doLast {
         distsDir.listFiles().findAll { it.file }.each { f ->
             algos.each { algo ->
@@ -553,6 +552,7 @@ task genJAXB {
 task genMac {
     description = 'Generate the Mac .app skeleton. Requires AppBundler (https://bitbucket.org/infinitekind/appbundler) ' +
         'to be available in ~/.ant/lib'
+    outputs.dir file('release/mac-specific')
     def appbundlerJar = file("${System.getProperty('user.home')}/.ant/lib/appbundler-1.0ea.jar")
     onlyIf {
         appbundlerJar.file

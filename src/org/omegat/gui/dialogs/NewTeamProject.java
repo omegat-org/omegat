@@ -33,7 +33,6 @@ import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import org.omegat.core.Core;
 import org.omegat.core.team2.RemoteRepositoryFactory;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -53,7 +52,6 @@ import org.omegat.util.gui.StaticUIUtils;
 public class NewTeamProject extends javax.swing.JDialog {
 
     private RepoTypeWorker repoTypeWorker = null;
-    private boolean detecting = false;
     private String repoType;
 
     /**
@@ -112,13 +110,15 @@ public class NewTeamProject extends javax.swing.JDialog {
         }
     }
 
+    public String getSaveLocation() {
+        return txtDirectory.getText().trim();
+    }
+
     private synchronized void detectRepoOrFile() {
-        if (detecting || !isVisible()) {
+        if (repoType != null || isDetectingRepo()) {
             return;
         }
-        txtRepositoryOrProjectFileURL.setText(txtRepositoryOrProjectFileURL.getText().trim()); 
-        repoType = null;
-        String url = txtRepositoryOrProjectFileURL.getText();
+        String url = txtRepositoryOrProjectFileURL.getText().trim();
         if (StringUtil.isEmpty(url)) {
             return;
         }
@@ -131,41 +131,51 @@ public class NewTeamProject extends javax.swing.JDialog {
             repoType = "svn";
             suggestLocalFolder();
         } else {
+            detectedRepoOrProjectFileLabel.setText(OStrings.getString("TEAM_DETECTING_REPO_OR_PROJECT_FILE"));
             repoTypeWorker = new RepoTypeWorker(url);
             repoTypeWorker.execute();
         }
     }
 
-    private synchronized void startDetectingRepo() {
-        detecting = true;
+    private synchronized boolean isDetectingRepo() {
+        return repoTypeWorker != null && !repoTypeWorker.isDone();
     }
 
-    private synchronized void stopDetectingRepo(String type) {
-        detecting = false;
-        repoType = type;
-        if (type == null) {
-            detectedRepoOrProjectFileLabel.setText(OStrings.getString("TEAM_DETECTED_REPO_UNKNOWN"));
+    private static String getMessageForRepoType(String type) {
+        if ("svn".equals(type)) {
+            return OStrings.getString("TEAM_DETECTED_REPO_SVN");
+        } else if ("git".equals(type)) {
+            return OStrings.getString("TEAM_DETECTED_REPO_GIT");
+        } else if ("project-file".equals(type)) {
+            return OStrings.getString("TEAM_DETECTED_PROJECT_FILE");
         } else {
-            if ("svn".equals(type)) {
-                detectedRepoOrProjectFileLabel.setText(OStrings.getString("TEAM_DETECTED_REPO_SVN"));
-            } else if ("git".equals(type)) {
-                detectedRepoOrProjectFileLabel.setText(OStrings.getString("TEAM_DETECTED_REPO_GIT"));
-            } else if ("project-file".equals(type)) {
-                detectedRepoOrProjectFileLabel.setText(OStrings.getString("TEAM_DETECTED_PROJECT_FILE"));
-            }
-            suggestLocalFolder();
+            return OStrings.getString("TEAM_DETECTED_REPO_UNKNOWN");
         }
     }
 
     private void suggestLocalFolder() {
-        if (!txtDirectory.getText().isEmpty()) {
+        if (!getSaveLocation().isEmpty()) {
             return;
         }
         String url = txtRepositoryOrProjectFileURL.getText().trim();
         String strippedUrl = StringUtil.stripFromEnd(url, ".git", "/", "trunk", "/", "svn");
         String dir = Preferences.getPreferenceDefault(Preferences.CURRENT_FOLDER, System.getProperty("user.home"));
-        File suggestion = new File(dir, new File(strippedUrl).getName());
-        txtDirectory.setText(suggestion.getAbsolutePath());
+        File suggestion = new File(dir, new File(strippedUrl).getName()).getAbsoluteFile();
+        txtDirectory.setText(ensureUniquePath(suggestion).getPath());
+    }
+
+    private static File ensureUniquePath(File path) {
+        File result = path;
+        int suff = 2;
+        while (result.exists()) {
+            result = new File(path.getPath() + suff);
+            suff++;
+            if (suff > 1000) {
+                // Give up after 1000
+                break;
+            }
+        }
+        return result;
     }
 
     private void clearRepo() {
@@ -180,7 +190,6 @@ public class NewTeamProject extends javax.swing.JDialog {
     private class RepoTypeWorker extends SwingWorker<String, Object> {
 
         private final String url;
-        private String resultText;
 
         public RepoTypeWorker(String url) {
             this.url = url;
@@ -188,42 +197,43 @@ public class NewTeamProject extends javax.swing.JDialog {
 
         @Override
         protected String doInBackground() throws Exception {
-            startDetectingRepo();
-            detectedRepoOrProjectFileLabel.setText(OStrings.getString("TEAM_DETECTING_REPO_OR_PROJECT_FILE"));
             if ((url.startsWith("http://") || url.startsWith("https://")) && url.endsWith("/omegat.project")) {
                 return detectProjectFile();
             }
-
             return RemoteRepositoryFactory.detectRepositoryType(url);
         }
 
         protected String detectProjectFile() throws Exception {
-            resultText = OStrings.getString("TEAM_ERROR_DETECTING_PROJECT_FILE");
             byte[] file = WikiGet.getURLasByteArray(url);
-            resultText = OStrings.getString("TEAM_DETECTED_PROJECT_FILE_INVALID");
             ProjectFileStorage.parseProjectFile(file);
             return "project-file";
         }
 
         @Override
         protected void done() {
-            String type;
+            String type, resultText;
             try {
                 type = get();
-                resultText = OStrings.getString("TEAM_DETECTED_PROJECT_FILE");
+                resultText = getMessageForRepoType(type);
             } catch (CancellationException ex) {
-                resultText = " ";
                 type = null;
+                resultText = " ";
             } catch (Throwable ex) {
                 type = null;
+                // Error strings are project-file-specific because
+                // RemoteRepositoryFactory.detectRepositoryType() doesn't throw
+                // exceptions, so any thrown must be from detectProjectFile().
                 resultText = OStrings.getString("TEAM_ERROR_DETECTING_PROJECT_FILE");
                 Log.logErrorRB(ex, "TEAM_ERROR_DETECTING_PROJECT_FILE");
             }
             detectedRepoOrProjectFileLabel.setText(resultText);
+            if (type != null) {
+                suggestLocalFolder();
+            }
+            repoType = type;
             updateDialog();
-            stopDetectingRepo(type);
         }
-    };
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -352,8 +362,10 @@ public class NewTeamProject extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateDialog() {
-        boolean enabled = repoType != null;
-        btnOk.setEnabled(enabled);
+        String dir = getSaveLocation();
+        boolean dirOK = !dir.isEmpty() && !new File(dir).exists();
+        boolean typeDetected = repoType != null;
+        btnOk.setEnabled(dirOK && typeDetected);
     }
     
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -370,11 +382,11 @@ public class NewTeamProject extends javax.swing.JDialog {
 
     private void btnDirectoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDirectoryActionPerformed
         NewProjectFileChooser ndc = new NewProjectFileChooser();
-        String saveDir = txtDirectory.getText();
+        String saveDir = getSaveLocation();
         if (!saveDir.isEmpty()) {
             ndc.setSelectedFile(new File(saveDir));
         }
-        int ndcResult = ndc.showSaveDialog(Core.getMainWindow().getApplicationFrame());
+        int ndcResult = ndc.showSaveDialog(this);
         if (ndcResult == OmegaTFileChooser.APPROVE_OPTION) {
             txtDirectory.setText(ndc.getSelectedFile().getPath());
         }

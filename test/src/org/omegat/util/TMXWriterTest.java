@@ -151,9 +151,9 @@ public class TMXWriterTest extends TestFilterBase {
     }
 
     public void testEOLwrite() throws Exception {
-        String eol = FileUtil.LINE_SEPARATOR;
+        String eol = TMXWriter2.LINE_SEPARATOR;
         try {
-            FileUtil.LINE_SEPARATOR = "\r\n";
+            TMXWriter2.LINE_SEPARATOR = "\r\n";
 
             TMXWriter2 wr = new TMXWriter2(outFile, new Language("en-US"), new Language("be-BY"), false,
                     true, false);
@@ -176,7 +176,7 @@ public class TMXWriterTest extends TestFilterBase {
             load(null, trs, true, false);
             assertTrue(trs.get(0).contains("tar\nget"));
         } finally {
-            FileUtil.LINE_SEPARATOR = eol;
+            TMXWriter2.LINE_SEPARATOR = eol;
         }
 
         final List<String> trs = new ArrayList<String>();

@@ -33,11 +33,12 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
+import java.nio.file.FileVisitOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,11 +50,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.function.BiPredicate;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 
 /**
  * Files processing utilities.
@@ -63,7 +67,6 @@ import org.apache.commons.io.IOUtils;
  * @author Aaron Madlon-Kay
  */
 public class FileUtil {
-    public static String LINE_SEPARATOR = System.lineSeparator();
     public static long RENAME_RETRY_TIMEOUT = 3000;
 
     /**
@@ -132,7 +135,7 @@ public class FileUtil {
      * Copy file and create output directory if need. EOL will be converted into target-specific or into
      * platform-specific if target doesn't exist.
      */
-    public static void copyFileWithEolConversion(File inFile, File outFile, String eolConversionCharset)
+    public static void copyFileWithEolConversion(File inFile, File outFile, Charset charset)
             throws IOException {
         File dir = outFile.getParentFile();
         if (!dir.exists()) {
@@ -141,63 +144,26 @@ public class FileUtil {
         String eol;
         if (outFile.exists()) {
             // file exist - read EOL from file
-            eol = getEOL(outFile, eolConversionCharset);
+            eol = getEOL(outFile, charset);
         } else {
             // file not exist - use system-dependent
-            eol = LINE_SEPARATOR;
+            eol = System.lineSeparator();
         }
-        if (eol == null) {
-            // EOL wasn't detected - just copy
-            FileUtils.copyFile(inFile, outFile, false);
-            return;
-        }
-        FileInputStream fis = null;
-        InputStreamReader isr = null;
-        BufferedReader in = null;
-        try {
-            fis = new FileInputStream(inFile);
-            isr = new InputStreamReader(fis, eolConversionCharset);
-            in = new BufferedReader(isr);
-            FileOutputStream fos = null;
-            OutputStreamWriter osw = null;
-            BufferedWriter out = null;
-            try {
-                fos = new FileOutputStream(outFile);
-                osw = new OutputStreamWriter(fos, eolConversionCharset);
-                out = new BufferedWriter(osw);
+        try (BufferedReader in = Files.newBufferedReader(inFile.toPath(), charset)) {
+            try (BufferedWriter out = Files.newBufferedWriter(outFile.toPath(), charset)) {
                 String s;
                 while ((s = in.readLine()) != null) {
                     // copy using known EOL
                     out.write(s);
                     out.write(eol);
                 }
-                out.close();
-                osw.close();
-                fos.close();
-            } finally {
-                IOUtils.closeQuietly(out);
-                IOUtils.closeQuietly(osw);
-                IOUtils.closeQuietly(fos);
             }
-            in.close();
-            isr.close();
-            fis.close();
-        } finally {
-            IOUtils.closeQuietly(in);
-            IOUtils.closeQuietly(isr);
-            IOUtils.closeQuietly(fis);
         }
     }
 
-    public static String getEOL(File file, String eolConversionCharset) throws IOException {
+    public static String getEOL(File file, Charset charset) throws IOException {
         String r = null;
-        FileInputStream fis = null;
-        InputStreamReader isr = null;
-        BufferedReader in = null;
-        try {
-            fis = new FileInputStream(file);
-            isr = new InputStreamReader(fis, eolConversionCharset);
-            in = new BufferedReader(isr);
+        try (BufferedReader in = Files.newBufferedReader(file.toPath(), charset)) {
             while (true) {
                 int ch = in.read();
                 if (ch < 0) {
@@ -212,13 +178,6 @@ public class FileUtil {
                     break;
                 }
             }
-            in.close();
-            isr.close();
-            fis.close();
-        } finally {
-            IOUtils.closeQuietly(in);
-            IOUtils.closeQuietly(isr);
-            IOUtils.closeQuietly(fis);
         }
         return r;
     }
@@ -304,33 +263,12 @@ public class FileUtil {
         }
         return fileAbs.substring(rootAbs.length());
     }
-
-    /**
-     * Recursively delete a directory and all of its contents.
-     * @param dir The directory to delete
-     */
-    public static boolean deleteTree(File dir) {
-        if (!dir.exists()) {
-            return false;
-        }
-        if (dir.delete()) {
-            return true;
-        } else {
-            File[] contents = dir.listFiles();
-            if (contents != null) {
-                for (File file : contents) {
-                    deleteTree(file);
-                }
-            }
-            return dir.delete();
-        }
-    }
     
     public interface ICollisionCallback {
         public boolean isCanceled();
         public boolean shouldReplace(File file, int thisFile, int totalFiles);
     }
-    
+
     /**
      * Copy a collection of files to a destination. Recursively copies contents of directories
      * while preserving relative paths. Provide an {@link ICollisionCallback} to determine
@@ -364,7 +302,7 @@ public class FileUtil {
         }
         if (onCollision == null || !onCollision.isCanceled()) {
             for (File file : toDelete) {
-                deleteTree(file);
+                FileUtils.deleteDirectory(file);
             }
             copyFilesTo(destination, toReplace.toArray(new File[toReplace.size()]), (File) null);
         }
@@ -429,5 +367,107 @@ public class FileUtil {
             }
         }
         return path;
+    }
+
+    /**
+     * Returns a list of all files under the root directory by absolute path.
+     * 
+     * @throws IOException
+     */
+    public static List<File> buildFileList(File rootDir, boolean recursive) throws IOException {
+        int depth = recursive ? Integer.MAX_VALUE : 0;
+        try (Stream<Path> stream = Files.find(rootDir.toPath(), depth, (p, attr) -> p.toFile().isFile(),
+                FileVisitOption.FOLLOW_LINKS)) {
+            return stream.map(Path::toFile).sorted(StreamUtil.localeComparator(File::getPath))
+                    .collect(Collectors.toList());
+        }
+    }
+
+    public static List<String> buildRelativeFilesList(File rootDir, List<String> includes, List<String> excludes)
+            throws IOException {
+        Path root = rootDir.toPath();
+        Pattern[] includeMasks = FileUtil.compileFileMasks(includes);
+        Pattern[] excludeMasks = FileUtil.compileFileMasks(excludes);
+        BiPredicate<Path, BasicFileAttributes> pred = (p, attr) -> {
+            return p.toFile().isFile() && FileUtil.checkFileInclude(root.relativize(p).toString(), includeMasks, excludeMasks);
+        };
+        try (Stream<Path> stream = Files.find(root, Integer.MAX_VALUE, pred, FileVisitOption.FOLLOW_LINKS)) {
+            return stream.map(p -> root.relativize(p).toString().replace('\\', '/'))
+                .sorted(StreamUtil.localeComparator(Function.identity()))
+                .collect(Collectors.toList());
+        }
+    }
+
+    public static boolean checkFileInclude(String filePath, Pattern[] includes, Pattern[] excludes) {
+        String normalized = filePath.replace('\\', '/');
+        String checkPath = normalized.startsWith("/") ? normalized : '/' + normalized;
+        boolean included = Stream.of(includes).map(p -> p.matcher(checkPath)).anyMatch(Matcher::matches);
+        boolean excluded = false;
+        if (!included) {
+            excluded = Stream.of(excludes).map(p -> p.matcher(checkPath)).anyMatch(Matcher::matches);
+        }
+        return included || !excluded;
+    }
+
+    static Pattern[] compileFileMasks(List<String> masks) {
+        if (masks == null) {
+            return FileUtil.NO_PATTERNS;
+        }
+        return masks.stream().map(FileUtil::compileFileMask).toArray(Pattern[]::new);
+    }
+
+    private static final Pattern[] NO_PATTERNS = new Pattern[0];
+
+    static Pattern compileFileMask(String mask) {
+        StringBuilder m = new StringBuilder();
+        // "Relative" masks can match at any directory level
+        if (!mask.startsWith("/")) {
+            mask = "**/" + mask;
+        }
+        // Masks ending with a slash match everything in subtree
+        if (mask.endsWith("/")) {
+            mask += "**";
+        }
+        for (int cp, i = 0; i < mask.length(); i += Character.charCount(cp)) {
+            cp = mask.codePointAt(i);
+            if (cp >= 'A' && cp <= 'Z') {
+                m.appendCodePoint(cp);
+            } else if (cp >= 'a' && cp <= 'z') {
+                m.appendCodePoint(cp);
+            } else if (cp >= '0' && cp <= '9') {
+                m.appendCodePoint(cp);
+            } else if (cp == '/') {
+                if (mask.regionMatches(i, "/**/", 0, 4)) {
+                    // The sequence /**/ matches *zero* or more levels
+                    m.append("(?:/|/.*/)");
+                    i += 3;
+                } else if (mask.regionMatches(i, "/**", 0, 3)) {
+                    // The sequence /** matches *zero* or more levels
+                    m.append("(?:|/.*)");
+                    i += 2;
+                } else {
+                    m.appendCodePoint(cp);
+                }
+            } else if (cp == '?') {
+                // ? matches anything but a directory separator
+                m.append("[^/]");
+            } else if (cp == '*') {
+                if (mask.regionMatches(i, "**/", 0, 3)) {
+                    // The sequence **/ matches *zero* or more levels
+                    m.append("(?:|.*/)");
+                    i += 2;
+                } else if (mask.regionMatches(i, "**", 0, 2)) {
+                    // **
+                    m.append(".*");
+                    i++;
+                } else {
+                    // *
+                    m.append("[^/]*");
+                }
+            } else {
+                m.append('\\').appendCodePoint(cp);
+            }
+        }
+        return Pattern.compile(m.toString());
     }
 }

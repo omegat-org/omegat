@@ -31,7 +31,11 @@
 
 package org.omegat.core.search;
 
-import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileVisitOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -56,12 +60,13 @@ import org.omegat.core.data.TMXEntry;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IParseCallback;
+import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
-import org.omegat.util.StaticUtils.ITreeIteratorCallback;
 import org.omegat.util.StringUtil;
 
 /**
@@ -535,27 +540,28 @@ public class Searcher {
     }
 
     private void searchFiles() throws Exception {
-        if (!expression.rootDir.endsWith(File.separator))
-            expression.rootDir += File.separator;
+        Path root = Paths.get(expression.rootDir);
 
-        final FilterMaster fm = Core.getFilterMaster();
+        FilterMaster fm = Core.getFilterMaster();
 
         final SearchCallback searchCallback = new SearchCallback(m_project.getProjectProperties());
         
-        StaticUtils.iterateFileTree(new File(expression.rootDir), expression.recursive, new ITreeIteratorCallback() {
-            @Override
-            public void processFile(File file) throws Exception {
-                String filename = file.getPath();
-                FileInfo fi = new FileInfo();
-                // determine actual file name w/ no root path info
-                fi.filePath = filename.substring(expression.rootDir.length());
+        int depth = expression.recursive ? Integer.MAX_VALUE : 0;
+        Files.walk(root, depth, FileVisitOption.FOLLOW_LINKS).forEach(path -> {
+            String filename = path.toString();
+            FileInfo fi = new FileInfo();
+            // determine actual file name w/ no root path info
+            fi.filePath = root.relativize(path).toString();
 
-                searchCallback.setCurrentFile(fi);
+            searchCallback.setCurrentFile(fi);
+            try {
                 fm.loadFile(filename, new FilterContext(m_project.getProjectProperties()), searchCallback);
-                searchCallback.fileFinished();
-
-                checkStop.checkInterrupted();
+            } catch (TranslationException | IOException ex) {
+                Log.log(ex);
             }
+            searchCallback.fileFinished();
+
+            checkStop.checkInterrupted();
         });
     }
 

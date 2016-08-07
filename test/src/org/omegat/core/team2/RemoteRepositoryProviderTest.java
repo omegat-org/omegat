@@ -25,19 +25,18 @@
 
 package org.omegat.core.team2;
 
-import gen.core.project.RepositoryDefinition;
-import gen.core.project.RepositoryMapping;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import junit.framework.TestCase;
-
+import org.apache.commons.io.FileUtils;
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.util.FileUtil;
+
+import gen.core.project.RepositoryDefinition;
+import gen.core.project.RepositoryMapping;
+import junit.framework.TestCase;
 
 public class RemoteRepositoryProviderTest extends TestCase {
     String V;
@@ -54,7 +53,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
     @Override
     protected void setUp() throws Exception {
         File dir = new File("build/testdata/repotest");
-        FileUtil.deleteTree(dir);
+        FileUtils.deleteDirectory(dir);
         dir.mkdirs();
         V = dir.getAbsolutePath() + "/";
         VR = dir.getAbsolutePath() + "/.repositories/url/";
@@ -90,31 +89,41 @@ public class RemoteRepositoryProviderTest extends TestCase {
         addRepo("dir/local/", "remote/", "/*.bak", "/*.png", "/1.jpg");
     }
 
+    void mapping1a() {
+        addRepo("/dir/localfile", "/remotefile");
+        // bak should be excluded, but png - no
+        addRepo("/dir/local", "/remote", "*.bak", "*.png", "1.jpg");
+    }
+
     void mapping2() {
         addRepo("", "", "**/*.bak", "/*.png", "/dir/local/1.jpg", "/remote/1.jpg");
+    }
+
+    void mapping2a() {
+        addRepo("/", "/", "**/*.bak", "*.png", "dir/local/1.jpg", "remote/1.jpg");
     }
 
     void mapping3() {
         addRepo("dir/", "", "**/*.bak", "/*.png", "/local/1.jpg", "/remote/1.jpg");
     }
 
+    void mapping3a() {
+        addRepo("/dir", "/", "**/*.bak", "*.png", "local/1.jpg/", "remote/1.jpg/");
+    }
+
     void mapping4() {
         addRepo("", "remote/", "**/*.bak", "/*.png", "/dir/local/1.jpg", "/1.jpg");
     }
 
+    void mapping4a() {
+        addRepo("/", "/remote", "**/*.bak", "*.png", "dir/local/1.jpg", "1.jpg");
+    }
+
     public void testNames() throws Exception {
-        try {
-            provider.copyFilesFromRepoToProject("/dir");
-            fail();
-        } catch (RuntimeException ex) {
-        }
+        provider.copyFilesFromRepoToProject("/dir");
         provider.copyFilesFromRepoToProject("dir/");
         provider.copyFilesFromRepoToProject("file");
-        try {
-            provider.copyFilesFromProjectToRepo("/dir", null);
-            fail();
-        } catch (RuntimeException ex) {
-        }
+        provider.copyFilesFromProjectToRepo("/dir", null);
         provider.copyFilesFromProjectToRepo("dir/", null);
         provider.copyFilesFromProjectToRepo("file", null);
     }
@@ -127,10 +136,26 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    public void testCopyFilesFromRepoToProject11a() throws Exception {
+        filesRemote();
+        mapping1a();
+        provider.copyFilesFromRepoToProject("/dir/localfile");
+        checkCopy(VR + "remotefile", V + "dir/localfile");
+        checkCopyEnd();
+    }
+
     public void testCopyFilesFromRepoToProject12() throws Exception {
         filesRemote();
         mapping1();
         provider.copyFilesFromRepoToProject("dir/local/1.txt");
+        checkCopy(VR + "remote/1.txt", V + "dir/local/1.txt");
+        checkCopyEnd();
+    }
+
+    public void testCopyFilesFromRepoToProject12a() throws Exception {
+        filesRemote();
+        mapping1a();
+        provider.copyFilesFromRepoToProject("/dir/local/1.txt");
         checkCopy(VR + "remote/1.txt", V + "dir/local/1.txt");
         checkCopyEnd();
     }
@@ -146,11 +171,32 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    public void testCopyFilesFromRepoToProject13a() throws Exception {
+        filesRemote();
+        mapping1a();
+        provider.copyFilesFromRepoToProject("/dir");
+        checkCopy(VR + "remotefile", V + "dir/localfile");
+        checkCopy(VR + "remote/1.txt", V + "dir/local/1.txt");
+        checkCopy(VR + "remote/2.xml", V + "dir/local/2.xml");
+        // Unlike 13, this time *.png on all levels is excluded
+        // checkCopy(VR + "remote/subdir/3.png", V + "dir/local/subdir/3.png");
+        checkCopyEnd();
+    }
+
     public void testCopyFilesFromRepoToProject14() throws Exception {
         filesRemote();
         mapping1();
         provider.copyFilesFromRepoToProject("dir/local/subdir/");
         checkCopy(VR + "remote/subdir/3.png", V + "dir/local/subdir/3.png");
+        checkCopyEnd();
+    }
+
+    public void testCopyFilesFromRepoToProject14a() throws Exception {
+        filesRemote();
+        mapping1a();
+        provider.copyFilesFromRepoToProject("/dir/local/subdir");
+        // Unlike 14, this time *.png on all levels is excluded
+        // checkCopy(VR + "remote/subdir/3.png", V + "dir/local/subdir/3.png");
         checkCopyEnd();
     }
 
@@ -161,10 +207,24 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    public void testCopyFilesFromRepoToProject15a() throws Exception {
+        filesRemote();
+        mapping1a();
+        provider.copyFilesFromRepoToProject("/dir/lo/");
+        checkCopyEnd();
+    }
+
     public void testCopyFilesFromRepoToProject16() throws Exception {
         filesRemote();
         mapping1();
         provider.copyFilesFromRepoToProject("dir/lo/");
+        checkCopyEnd();
+    }
+
+    public void testCopyFilesFromRepoToProject16a() throws Exception {
+        filesRemote();
+        mapping1a();
+        provider.copyFilesFromRepoToProject("/dir/lo");
         checkCopyEnd();
     }
 
@@ -176,6 +236,18 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopy(VR + "remote/1.txt", V + "dir/local/1.txt");
         checkCopy(VR + "remote/2.xml", V + "dir/local/2.xml");
         checkCopy(VR + "remote/subdir/3.png", V + "dir/local/subdir/3.png");
+        checkCopyEnd();
+    }
+
+    public void testCopyFilesFromRepoToProject17a() throws Exception {
+        filesRemote();
+        mapping1a();
+        provider.copyFilesFromRepoToProject("/");
+        checkCopy(VR + "remotefile", V + "dir/localfile");
+        checkCopy(VR + "remote/1.txt", V + "dir/local/1.txt");
+        checkCopy(VR + "remote/2.xml", V + "dir/local/2.xml");
+        // Unlike 14, this time *.png on all levels is excluded
+        // checkCopy(VR + "remote/subdir/3.png", V + "dir/local/subdir/3.png");
         checkCopyEnd();
     }
 
@@ -191,10 +263,31 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    public void testCopyFilesFromRepoToProject21a() throws Exception {
+        filesRemote();
+        mapping2a();
+        provider.copyFilesFromRepoToProject("/");
+        checkCopy(VR + "otherremote/4.file", V + "otherremote/4.file");
+        checkCopy(VR + "remote/1.txt", V + "remote/1.txt");
+        checkCopy(VR + "remote/2.xml", V + "remote/2.xml");
+        // Unlike 21, this time *.png on all levels is excluded
+        // checkCopy(VR + "remote/subdir/3.png", V + "remote/subdir/3.png");
+        checkCopy(VR + "remotefile", V + "remotefile");
+        checkCopyEnd();
+    }
+
     public void testCopyFilesFromRepoToProject22() throws Exception {
         filesRemote();
         mapping2();
         provider.copyFilesFromRepoToProject("otherremote/4.file");
+        checkCopy(VR + "otherremote/4.file", V + "otherremote/4.file");
+        checkCopyEnd();
+    }
+
+    public void testCopyFilesFromRepoToProject22a() throws Exception {
+        filesRemote();
+        mapping2a();
+        provider.copyFilesFromRepoToProject("/otherremote/4.file/");
         checkCopy(VR + "otherremote/4.file", V + "otherremote/4.file");
         checkCopyEnd();
     }
@@ -211,6 +304,18 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    public void testCopyFilesFromRepoToProject31a() throws Exception {
+        filesRemote();
+        mapping3a();
+        provider.copyFilesFromRepoToProject("");
+        checkCopy(VR + "otherremote/4.file", V + "dir/otherremote/4.file");
+        checkCopy(VR + "remote/1.txt", V + "dir/remote/1.txt");
+        checkCopy(VR + "remote/2.xml", V + "dir/remote/2.xml");
+        // checkCopy(VR + "remote/subdir/3.png", V + "dir/remote/subdir/3.png");
+        checkCopy(VR + "remotefile", V + "dir/remotefile");
+        checkCopyEnd();
+    }
+
     public void testCopyFilesFromRepoToProject41() throws Exception {
         filesRemote();
         mapping4();
@@ -221,12 +326,31 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    public void testCopyFilesFromRepoToProject41a() throws Exception {
+        filesRemote();
+        mapping4a();
+        provider.copyFilesFromRepoToProject("/");
+        checkCopy(VR + "remote/1.txt", V + "1.txt");
+        checkCopy(VR + "remote/2.xml", V + "2.xml");
+        // checkCopy(VR + "remote/subdir/3.png", V + "subdir/3.png");
+        checkCopyEnd();
+    }
+
     public void testCopyFilesFromRepoToProject51() throws Exception {
         filesRemote();
         mapping4();
         provider.copyFilesFromRepoToProject("", "/1.txt");
         checkCopy(VR + "remote/2.xml", V + "2.xml");
         checkCopy(VR + "remote/subdir/3.png", V + "subdir/3.png");
+        checkCopyEnd();
+    }
+
+    public void testCopyFilesFromRepoToProject51a() throws Exception {
+        filesRemote();
+        mapping4a();
+        provider.copyFilesFromRepoToProject("/", "1.txt/");
+        checkCopy(VR + "remote/2.xml", V + "2.xml");
+        // checkCopy(VR + "remote/subdir/3.png", V + "subdir/3.png");
         checkCopyEnd();
     }
 
@@ -240,6 +364,16 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    public void testCopyFilesFromRepoToProject52a() throws Exception {
+        filesRemote();
+        mapping1a();
+        provider.copyFilesFromRepoToProject("/", "**/localfile/");
+        checkCopy(VR + "remote/1.txt", V + "dir/local/1.txt");
+        checkCopy(VR + "remote/2.xml", V + "dir/local/2.xml");
+        // checkCopy(VR + "remote/subdir/3.png", V + "dir/local/subdir/3.png");
+        checkCopyEnd();
+    }
+
     public void testCopyFilesFromProjectToRepo11() throws Exception {
         filesLocal();
         mapping1();
@@ -248,10 +382,26 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    public void testCopyFilesFromProjectToRepo11a() throws Exception {
+        filesLocal();
+        mapping1a();
+        provider.copyFilesFromProjectToRepo("/dir/localfile/", null);
+        checkCopy(V + "dir/localfile", VR + "remotefile");
+        checkCopyEnd();
+    }
+
     public void testCopyFilesFromProjectToRepo12() throws Exception {
         filesLocal();
         mapping1();
         provider.copyFilesFromProjectToRepo("dir/local/1.txt", null);
+        checkCopy(V + "dir/local/1.txt", VR + "remote/1.txt");
+        checkCopyEnd();
+    }
+
+    public void testCopyFilesFromProjectToRepo12a() throws Exception {
+        filesLocal();
+        mapping1a();
+        provider.copyFilesFromProjectToRepo("/dir/local/1.txt/", null);
         checkCopy(V + "dir/local/1.txt", VR + "remote/1.txt");
         checkCopyEnd();
     }
@@ -267,11 +417,30 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    public void testCopyFilesFromProjectToRepo13a() throws Exception {
+        filesLocal();
+        mapping1a();
+        provider.copyFilesFromProjectToRepo("/dir", null);
+        checkCopy(V + "dir/localfile", VR + "remotefile");
+        checkCopy(V + "dir/local/1.txt", VR + "remote/1.txt");
+        checkCopy(V + "dir/local/2.xml", VR + "remote/2.xml");
+        // checkCopy(V + "dir/local/subdir/3.png", VR + "remote/subdir/3.png");
+        checkCopyEnd();
+    }
+
     public void testCopyFilesFromProjectToRepo14() throws Exception {
         filesLocal();
         mapping1();
         provider.copyFilesFromProjectToRepo("dir/local/subdir/", null);
         checkCopy(V + "dir/local/subdir/3.png", VR + "remote/subdir/3.png");
+        checkCopyEnd();
+    }
+
+    public void testCopyFilesFromProjectToRepo14a() throws Exception {
+        filesLocal();
+        mapping1a();
+        provider.copyFilesFromProjectToRepo("/dir/local/subdir", null);
+        // checkCopy(V + "dir/local/subdir/3.png", VR + "remote/subdir/3.png");
         checkCopyEnd();
     }
 
@@ -282,10 +451,24 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    public void testCopyFilesFromProjectToRepo15a() throws Exception {
+        filesLocal();
+        mapping1a();
+        provider.copyFilesFromProjectToRepo("/dir/lo/", null);
+        checkCopyEnd();
+    }
+
     public void testCopyFilesFromProjectToRepo16() throws Exception {
         filesLocal();
         mapping1();
         provider.copyFilesFromProjectToRepo("dir/lo/", null);
+        checkCopyEnd();
+    }
+
+    public void testCopyFilesFromProjectToRepo16a() throws Exception {
+        filesLocal();
+        mapping1a();
+        provider.copyFilesFromProjectToRepo("/dir/lo", null);
         checkCopyEnd();
     }
 
@@ -297,6 +480,17 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopy(V + "dir/local/1.txt", VR + "remote/1.txt");
         checkCopy(V + "dir/local/2.xml", VR + "remote/2.xml");
         checkCopy(V + "dir/local/subdir/3.png", VR + "remote/subdir/3.png");
+        checkCopyEnd();
+    }
+
+    public void testCopyFilesFromProjectToRepo17a() throws Exception {
+        filesLocal();
+        mapping1a();
+        provider.copyFilesFromProjectToRepo("/", null);
+        checkCopy(V + "dir/localfile", VR + "remotefile");
+        checkCopy(V + "dir/local/1.txt", VR + "remote/1.txt");
+        checkCopy(V + "dir/local/2.xml", VR + "remote/2.xml");
+        // checkCopy(V + "dir/local/subdir/3.png", VR + "remote/subdir/3.png");
         checkCopyEnd();
     }
 
@@ -312,10 +506,30 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    public void testCopyFilesFromProjectToRepo21a() throws Exception {
+        filesLocal();
+        mapping2a();
+        provider.copyFilesFromProjectToRepo("/", null);
+        checkCopy(V + "dir/local/1.txt", VR + "dir/local/1.txt");
+        checkCopy(V + "dir/local/2.xml", VR + "dir/local/2.xml");
+        //checkCopy(V + "dir/local/subdir/3.png", VR + "dir/local/subdir/3.png");
+        checkCopy(V + "dir/localfile", VR + "dir/localfile");
+        checkCopy(V + "otherdir/local/4.file", VR + "otherdir/local/4.file");
+        checkCopyEnd();
+    }
+
     public void testCopyFilesFromProjectToRepo22() throws Exception {
         filesLocal();
         mapping2();
         provider.copyFilesFromProjectToRepo("dir/localfile", null);
+        checkCopy(V + "dir/localfile", VR + "dir/localfile");
+        checkCopyEnd();
+    }
+
+    public void testCopyFilesFromProjectToRepo22a() throws Exception {
+        filesLocal();
+        mapping2a();
+        provider.copyFilesFromProjectToRepo("/dir/localfile/", null);
         checkCopy(V + "dir/localfile", VR + "dir/localfile");
         checkCopyEnd();
     }
@@ -331,6 +545,17 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    public void testCopyFilesFromProjectToRepo31a() throws Exception {
+        filesLocal();
+        mapping3a();
+        provider.copyFilesFromProjectToRepo("/", null);
+        checkCopy(V + "dir/local/1.txt", VR + "local/1.txt");
+        checkCopy(V + "dir/local/2.xml", VR + "local/2.xml");
+        // checkCopy(V + "dir/local/subdir/3.png", VR + "local/subdir/3.png");
+        checkCopy(V + "dir/localfile", VR + "localfile");
+        checkCopyEnd();
+    }
+
     public void testCopyFilesFromProjectToRepo41() throws Exception {
         filesLocal();
         mapping4();
@@ -338,6 +563,18 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopy(V + "dir/local/1.txt", VR + "remote/dir/local/1.txt");
         checkCopy(V + "dir/local/2.xml", VR + "remote/dir/local/2.xml");
         checkCopy(V + "dir/local/subdir/3.png", VR + "remote/dir/local/subdir/3.png");
+        checkCopy(V + "dir/localfile", VR + "remote/dir/localfile");
+        checkCopy(V + "otherdir/local/4.file", VR + "remote/otherdir/local/4.file");
+        checkCopyEnd();
+    }
+
+    public void testCopyFilesFromProjectToRepo41a() throws Exception {
+        filesLocal();
+        mapping4a();
+        provider.copyFilesFromProjectToRepo("/", null);
+        checkCopy(V + "dir/local/1.txt", VR + "remote/dir/local/1.txt");
+        checkCopy(V + "dir/local/2.xml", VR + "remote/dir/local/2.xml");
+        // checkCopy(V + "dir/local/subdir/3.png", VR + "remote/dir/local/subdir/3.png");
         checkCopy(V + "dir/localfile", VR + "remote/dir/localfile");
         checkCopy(V + "otherdir/local/4.file", VR + "remote/otherdir/local/4.file");
         checkCopyEnd();

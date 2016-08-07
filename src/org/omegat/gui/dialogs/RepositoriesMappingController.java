@@ -32,6 +32,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Stream;
@@ -42,8 +43,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
-import org.apache.commons.lang.StringUtils;
 import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
+import org.omegat.util.gui.DelegatingComboBoxRenderer;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TableColumnSizer;
 
@@ -56,6 +58,19 @@ import gen.core.project.RepositoryMapping;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class RepositoriesMappingController {
+
+    /**
+     * Enum of supported repository types corresponding to
+     * org.omegat.core.team2.impl.*RemoteRepository*
+     */
+    enum RepoType {
+        GIT, SVN, HTTP;
+
+        public String getLocalizedString() {
+            return OStrings.getString("RMD_TABLE_REPO_TYPE_" + name());
+        }
+    }
+
     private List<RepositoryDefinition> result;
 
     private RepositoriesMappingDialog dialog;
@@ -111,7 +126,7 @@ public class RepositoriesMappingController {
                 RowRepo r = listRepo.get(rowIndex);
                 switch (columnIndex) {
                 case 0:
-                    return r.type;
+                    return r.type == null ? null : r.type.getLocalizedString();
                 case 1:
                     return r.url;
                 }
@@ -123,7 +138,7 @@ public class RepositoriesMappingController {
                 RowRepo r = listRepo.get(rowIndex);
                 switch (columnIndex) {
                 case 0:
-                    r.type = (String) aValue;
+                    r.type = (RepoType) aValue;
                     break;
                 case 1:
                     String old = r.url;
@@ -164,9 +179,13 @@ public class RepositoriesMappingController {
         };
         dialog.tableRepositories.setModel(modelRepo);
 
-        JComboBox<String> comboBox = new JComboBox<>();
-        comboBox.addItem("svn");
-        comboBox.addItem("git");
+        JComboBox<RepoType> comboBox = new JComboBox<>(RepoType.values());
+        comboBox.setRenderer(new DelegatingComboBoxRenderer<RepoType, String>() {
+            @Override
+            protected String getDisplayText(RepoType value) {
+                return value == null ? "" : value.getLocalizedString();
+            }
+        });
         dialog.tableRepositories.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(comboBox));
 
         modelMapping = new AbstractTableModel() {
@@ -295,7 +314,11 @@ public class RepositoriesMappingController {
         dialog.btnMappingAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                listMapping.add(new RowMapping());
+                RowMapping mapping = new RowMapping();
+                if (dialog.tableRepositories.getRowCount() == 1) {
+                    mapping.repoUrl = (String) dialog.tableRepositories.getValueAt(0, 1);
+                }
+                listMapping.add(mapping);
                 int row = listMapping.size() - 1;
                 modelMapping.fireTableRowsInserted(row, row);
                 dialog.tableMapping.setRowSelectionInterval(row, row);
@@ -342,10 +365,10 @@ public class RepositoriesMappingController {
     String isValid() {
         Set<String> urls = new TreeSet<String>();
         for (RowRepo r : listRepo) {
-            if (StringUtils.isBlank(r.url)) {
+            if (StringUtil.isEmpty(r.url)) {
                 return OStrings.getString("RMD_INVALID_BLANK_REPO");
             }
-            if (!"svn".equals(r.type) && !"git".equals(r.type)) {
+            if (r.type == null) {
                 return MessageFormat.format(OStrings.getString("RMD_INVALID_REPO_TYPE"), r.type);
             }
             if (!urls.add(r.url)) {
@@ -353,7 +376,7 @@ public class RepositoriesMappingController {
             }
         }
         for (RowMapping r : listMapping) {
-            if (StringUtils.isBlank(r.repoUrl)) {
+            if (StringUtil.isEmpty(r.repoUrl)) {
                 return OStrings.getString("RMD_INVALID_BLANK_REPO");
             }
             if (!urls.contains(r.repoUrl)) {
@@ -369,48 +392,37 @@ public class RepositoriesMappingController {
         }
         for (RepositoryDefinition rd : data) {
             RowRepo r = new RowRepo();
-            r.type = rd.getType();
+            r.type = RepoType.valueOf(rd.getType().toUpperCase(Locale.ENGLISH));
             r.url = rd.getUrl();
             listRepo.add(r);
             for (RepositoryMapping rm : rd.getMapping()) {
                 RowMapping m = new RowMapping();
                 m.repoUrl = rd.getUrl();
-                m.local = rm.getLocal();
-                m.remote = rm.getRepository();
-                m.excludes = merge(rm.getExcludes());
-                m.includes = merge(rm.getIncludes());
+                m.local = normalizeMapping(rm.getLocal());
+                m.remote = normalizeMapping(rm.getRepository());
+                m.excludes = String.join(";", rm.getExcludes());
+                m.includes = String.join(";", rm.getIncludes());
                 listMapping.add(m);
             }
         }
-    }
-
-    String merge(List<String> data) {
-        if (data.isEmpty()) {
-            return "";
-        }
-        String r = "";
-        for (String d : data) {
-            r += ";" + d;
-        }
-        return r.substring(1);
     }
 
     List<RepositoryDefinition> getData() {
         List<RepositoryDefinition> result = new ArrayList<RepositoryDefinition>();
         for (RowRepo r : listRepo) {
             RepositoryDefinition rd = new RepositoryDefinition();
-            rd.setType(r.type);
+            rd.setType(r.type.name().toLowerCase(Locale.ENGLISH));
             rd.setUrl(r.url);
             result.add(rd);
             for (RowMapping m : listMapping) {
                 if (r.url.equals(m.repoUrl)) {
                     RepositoryMapping rm = new RepositoryMapping();
-                    rm.setLocal(m.local != null ? m.local : "");
-                    rm.setRepository(m.remote != null ? m.remote : "");
-                    if (StringUtils.isNotBlank(m.excludes)) {
+                    rm.setLocal(normalizeMapping(m.local));
+                    rm.setRepository(normalizeMapping(m.remote));
+                    if (!StringUtil.isEmpty(m.excludes)) {
                         rm.getExcludes().addAll(Arrays.asList(m.excludes.trim().split(";")));
                     }
-                    if (StringUtils.isNotBlank(m.includes)) {
+                    if (!StringUtil.isEmpty(m.includes)) {
                         rm.getIncludes().addAll(Arrays.asList(m.includes.trim().split(";")));
                     }
                     rd.getMapping().add(rm);
@@ -420,15 +432,19 @@ public class RepositoriesMappingController {
         return result;
     }
 
+    String normalizeMapping(String mapping) {
+        return StringUtil.isEmpty(mapping) ? "/" : mapping;
+    }
+
     static class RowRepo {
-        public String type;
+        public RepoType type;
         public String url;
     }
 
     static class RowMapping {
         public String repoUrl;
-        public String local;
-        public String remote;
+        public String local = "/";
+        public String remote = "/";
         public String excludes;
         public String includes;
     }

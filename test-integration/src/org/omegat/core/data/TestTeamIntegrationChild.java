@@ -121,6 +121,7 @@ public class TestTeamIntegrationChild {
 
             // load project
             ProjectProperties projectProperties = ProjectFileStorage.loadProjectProperties(new File(dir));
+            projectProperties.autocreateDirectories();
 
             Core.getAutoSave().disable();
             RealProject p = new TestRealProject(projectProperties);

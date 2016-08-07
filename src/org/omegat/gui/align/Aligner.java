@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -198,7 +199,7 @@ public class Aligner {
                 } else {
                     return null;
                 }
-            }).filter(e -> e != null).collect(Collectors.toList());
+            }).filter(Objects::nonNull).collect(Collectors.toList());
         } else {
             idPairs = Collections.emptyList();
         }

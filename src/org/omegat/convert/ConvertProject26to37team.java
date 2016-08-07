@@ -31,6 +31,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -42,7 +43,6 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.core.team2.RebaseAndCommit;
 import org.omegat.core.team2.RemoteRepositoryProvider;
-import org.omegat.util.FileUtil;
 import org.omegat.util.OStrings;
 import org.omegat.util.ProjectFileStorage;
 import org.tmatesoft.svn.core.SVNDepth;
@@ -119,8 +119,8 @@ public class ConvertProject26to37team {
         ProjectFileStorage.writeProjectFile(props);
 
         // all data saved - remove old repository
-        FileUtil.deleteTree(new File(projectRootFolder, ".svn"));
-        FileUtil.deleteTree(new File(projectRootFolder, ".git"));
+        FileUtils.deleteDirectory(new File(projectRootFolder, ".svn"));
+        FileUtils.deleteDirectory(new File(projectRootFolder, ".git"));
     }
 
     /**

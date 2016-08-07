@@ -132,7 +132,7 @@ public class SrtFilter extends AbstractFilter {
         
         if (entryParseCallback != null) {
             entryParseCallback.addEntry(key, text.toString(), null, false, null, null, this, null);
-        } else {
+        } else if (entryTranslateCallback != null) {
             String tr = entryTranslateCallback.getTranslation(key, text.toString(), null);
             if (tr == null) {
                 tr = text.toString();

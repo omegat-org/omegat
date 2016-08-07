@@ -57,6 +57,8 @@ import org.omegat.core.data.TMXEntry;
  * @author Aaron Madlon-Kay
  */
 public class TMXWriter2 {
+    static String LINE_SEPARATOR = System.lineSeparator();
+
     private static XMLOutputFactory FACTORY;
 
     private final OutputStream out;
@@ -97,26 +99,26 @@ public class TMXWriter2 {
         xml = FACTORY.createXMLStreamWriter(out, StandardCharsets.UTF_8.name());
 
         xml.writeStartDocument(StandardCharsets.UTF_8.name(), "1.0");
-        xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+        xml.writeCharacters(LINE_SEPARATOR);
 
         if (levelTwo) {
             xml.writeDTD("<!DOCTYPE tmx SYSTEM \"tmx14.dtd\">");
-            xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+            xml.writeCharacters(LINE_SEPARATOR);
             xml.writeStartElement("tmx");
             xml.writeAttribute("version", "1.4");
         } else {
             xml.writeDTD("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">");
-            xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+            xml.writeCharacters(LINE_SEPARATOR);
             xml.writeStartElement("tmx");
             xml.writeAttribute("version", "1.1");
         }
-        xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+        xml.writeCharacters(LINE_SEPARATOR);
 
         writeHeader(sourceLanguage, targetLanguage, sentenceSegmentingEnabled);
 
         xml.writeCharacters("  ");
         xml.writeStartElement("body");
-        xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+        xml.writeCharacters(LINE_SEPARATOR);
 
         langSrc = sourceLanguage.toString();
         langTar = targetLanguage.toString();
@@ -130,10 +132,10 @@ public class TMXWriter2 {
             xml.writeCharacters("  ");
             xml.writeEndElement(); // body
 
-            xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+            xml.writeCharacters(LINE_SEPARATOR);
             xml.writeEndElement(); // tmx
 
-            xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+            xml.writeCharacters(LINE_SEPARATOR);
             xml.writeEndDocument();
         } finally {
             xml.close();
@@ -143,7 +145,7 @@ public class TMXWriter2 {
 
     public void writeComment(String comment) throws Exception {
         xml.writeComment(comment);
-        xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+        xml.writeCharacters(LINE_SEPARATOR);
     }
 
     /**
@@ -169,7 +171,7 @@ public class TMXWriter2 {
 
         xml.writeCharacters("    ");
         xml.writeStartElement("tu");
-        xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+        xml.writeCharacters(LINE_SEPARATOR);
 
         // add properties
         if (propValues != null) {
@@ -183,7 +185,7 @@ public class TMXWriter2 {
                 xml.writeAttribute("type", propValues.get(i));
                 xml.writeCharacters(propValues.get(i + 1));
                 xml.writeEndElement(); // prop
-                xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+                xml.writeCharacters(LINE_SEPARATOR);
             }
         }
         
@@ -197,7 +199,7 @@ public class TMXWriter2 {
             xml.writeStartElement("note");
             xml.writeCharacters(platformLineSeparator(note));
             xml.writeEndElement(); // note
-            xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+            xml.writeCharacters(LINE_SEPARATOR);
         }
 
         // write source segment
@@ -213,16 +215,16 @@ public class TMXWriter2 {
             } else {
                 xml.writeAttribute("lang", langSrc);
             }
-            xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+            xml.writeCharacters(LINE_SEPARATOR);
             if (levelTwo) {
                 writeLevelTwo(platformLineSeparator(source));
             } else {
                 writeLevelOne(platformLineSeparator(source));
             }
-            xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+            xml.writeCharacters(LINE_SEPARATOR);
             xml.writeCharacters("      ");
             xml.writeEndElement(); // tuv
-            xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+            xml.writeCharacters(LINE_SEPARATOR);
         }
 
         // write target segment
@@ -251,22 +253,22 @@ public class TMXWriter2 {
             if (creationDate > 0) {
                 xml.writeAttribute("creationdate", tmxDateFormat.format(new Date(creationDate)));
             }
-            xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+            xml.writeCharacters(LINE_SEPARATOR);
 
             if (levelTwo) {
                 writeLevelTwo(platformLineSeparator(translation));
             } else {
                 writeLevelOne(platformLineSeparator(translation));
             }
-            xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+            xml.writeCharacters(LINE_SEPARATOR);
             xml.writeCharacters("      ");
             xml.writeEndElement(); // tuv
-            xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+            xml.writeCharacters(LINE_SEPARATOR);
         }
 
         xml.writeCharacters("    ");
         xml.writeEndElement(); // tu
-        xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+        xml.writeCharacters(LINE_SEPARATOR);
     }
 
     private void writeHeader(final Language sourceLanguage, final Language targetLanguage,
@@ -286,7 +288,7 @@ public class TMXWriter2 {
 
         xml.writeAttribute("srclang", sourceLanguage.toString());
 
-        xml.writeCharacters(FileUtil.LINE_SEPARATOR);
+        xml.writeCharacters(LINE_SEPARATOR);
     }
 
     /**
@@ -384,6 +386,6 @@ public class TMXWriter2 {
      * @return The converted string
      */
     private String platformLineSeparator(String text) {
-        return text.replace("\n", FileUtil.LINE_SEPARATOR);
+        return text.replace("\n", LINE_SEPARATOR);
     }
 }

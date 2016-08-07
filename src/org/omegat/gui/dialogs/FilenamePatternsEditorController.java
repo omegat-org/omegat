@@ -30,6 +30,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
 import org.omegat.core.Core;
@@ -105,6 +106,11 @@ public class FilenamePatternsEditorController {
                 model.fireTableDataChanged();
             }
         });
+
+        ListSelectionListener listener = e -> dialog.btnRemove.setEnabled(dialog.table.getSelectedRow() != -1);
+        dialog.table.getSelectionModel().addListSelectionListener(listener);
+        listener.valueChanged(null);
+
         dialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
         StaticUIUtils.setEscapeClosable(dialog);
         dialog.getRootPane().setDefaultButton(dialog.btnOk);

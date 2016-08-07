@@ -35,11 +35,11 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import org.apache.commons.io.FileUtils;
 import org.custommonkey.xmlunit.XMLTestCase;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
-import org.omegat.util.FileUtil;
 import org.omegat.util.TestPreferencesInitializer;
 
 import com.vlsolutions.swing.docking.Dockable;
@@ -152,6 +152,6 @@ public abstract class TestCore extends XMLTestCase {
 
     @Override
     protected void tearDown() throws Exception {
-        assertTrue(FileUtil.deleteTree(configDir));
+        FileUtils.deleteDirectory(configDir);
     }
 }

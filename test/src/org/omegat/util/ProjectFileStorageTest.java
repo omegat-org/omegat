@@ -29,6 +29,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.omegat.core.data.ProjectException;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
@@ -51,7 +52,7 @@ public class ProjectFileStorageTest extends TestCase {
 
     @Override
     protected void tearDown() throws Exception {
-        assertTrue(FileUtil.deleteTree(tempDir));
+        FileUtils.deleteDirectory(tempDir);
     }
 
     public void testLoadDefaults() throws Exception {

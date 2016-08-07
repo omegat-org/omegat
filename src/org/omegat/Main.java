@@ -144,7 +144,7 @@ public class Main {
                     params.put(CLIParameters.RESOURCE_BUNDLE,
                             arg.substring(CLIParameters.RESOURCE_BUNDLE.length()));
                 } else {
-                    File f = new File(arg);
+                    File f = new File(arg).getAbsoluteFile();
                     if (f.getName().equals(OConsts.FILE_PROJECT)) {
                         f = f.getParentFile();
                     }

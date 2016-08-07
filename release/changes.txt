@@ -2,7 +2,7 @@
  OmegaT 4.0.0
 ----------------------------------------------------------------------
  34 Enhancements
-  7 Bug fixes
+  8 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 4.0.0 vs 3.6.0 update 2
@@ -136,10 +136,13 @@ could fail with duplicate numbers
   - Word document properties are not translated
   https://sourceforge.net/p/omegat/bugs/828/
 
+  - Some CLI modes don't accept "." as project path
+  https://sourceforge.net/p/omegat/bugs/830/
+
 ----------------------------------------------------------------------
- OmegaT 3.6.0 update 2
+ OmegaT 3.6.0 update 2 (2016-07-27)
 ----------------------------------------------------------------------
-  4 Enhancements
+  5 Enhancements
   4 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
@@ -160,6 +163,8 @@ must be preceded by a non-breaking space
 
   - The Windows setup program can now be launched in any of the 
 supported languages, regardless of the languages installed in Windows
+
+  - Revised user manual
 
   Bug fixes:
 
@@ -292,24 +297,6 @@ bug comments for instructions on adding the certificate to the trust store.
   - Dutch localisation updated to 3.6 (UI, documentation, scripts, readme)
   - Hungarian localisation updated to 3.6 (UI)
   - Norvegian localisation updated to 3.6 (UI, scripts, readme)
-
-----------------------------------------------------------------------
- OmegaT 3.5.4 update 1
-----------------------------------------------------------------------
-   1 Enhancement
-   0 Bug fix
-   1 Localisation update
-----------------------------------------------------------------------
-3.5.4 update 1 vs 3.5.4
-
-  Other changes:
-
-  - The Windows setup program can now be launched in any of the 
-supported languages, regardless of the languages installed in Windows
-
-  Localisation Updates:
-
-  - Italian localisation updated to 3.5.4 (UI, documentation, scripts)
 
 ----------------------------------------------------------------------
  OmegaT 3.5.4 (2016-03-23)

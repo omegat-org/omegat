@@ -43,13 +43,13 @@ import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
@@ -95,6 +95,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StreamUtil;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader2;
 import org.omegat.util.TagUtil;
@@ -313,7 +314,7 @@ public class RealProject implements IProject {
 
             if (RuntimePreferences.isLocationSaveEnabled()) {
                 Preferences.setPreference(Preferences.CURRENT_FOLDER, new File(m_config.getProjectRoot())
-                        .getParentFile().getAbsolutePath());
+                        .getAbsoluteFile().getParent());
                 Preferences.save();
             }
 
@@ -322,12 +323,12 @@ public class RealProject implements IProject {
             // Set project specific file filters if they exist, or defaults otherwise.
             // This MUST happen before calling loadTranslations() because the setting to ignore file context
             // for alt translations is a filter setting, and it affects how alt translations are hashed.
-            Filters filters = m_config.getProjectFilters();
-            Core.setFilterMaster(new FilterMaster(filters == null ? Preferences.getFilters() : filters));
+            Filters filters = Optional.ofNullable(m_config.getProjectFilters()).orElse(Preferences.getFilters());
+            Core.setFilterMaster(new FilterMaster(filters));
 
             // Set project specific segmentation rules if they exist, or defaults otherwise.
-            SRX srx = m_config.getProjectSRX();
-            Core.setSegmenter(new Segmenter(srx == null ? Preferences.getSRX() : srx));
+            SRX srx = Optional.ofNullable(m_config.getProjectSRX()).orElse(Preferences.getSRX());
+            Core.setSegmenter(new Segmenter(srx));
 
             if (remoteRepositoryProvider != null) {
                 // copy files from repository to project
@@ -343,14 +344,8 @@ public class RealProject implements IProject {
                 for (String dir : new String[] { m_config.getSourceDir().getUnderRoot(),
                         m_config.getGlossaryDir().getUnderRoot(), m_config.getTmDir().getUnderRoot(),
                         m_config.getDictDir().getUnderRoot() }) {
-                    if (dir == null) {
+                    if (dir == null || dir.contains("..")) {
                         continue;
-                    }
-                    if (dir.startsWith("/") || dir.contains("..")) {
-                        continue;
-                    }
-                    if (!dir.endsWith("/")) {
-                        dir += "/";
                     }
                     // copy but skip project_save.tmx and glossary.txt
                     remoteRepositoryProvider.copyFilesFromRepoToProject(dir,
@@ -425,7 +420,7 @@ public class RealProject implements IProject {
         FilterMaster fm = Core.getFilterMaster();
         
         File root = new File(m_config.getSourceRoot());
-        List<File> srcFileList = StaticUtils.buildFileList(root, true);
+        List<File> srcFileList = FileUtil.buildFileList(root, true);
 
         AlignFilesCallback alignFilesCallback = new AlignFilesCallback(props);
 
@@ -579,11 +574,8 @@ public class RealProject implements IProject {
         // build translated files
         FilterMaster fm = Core.getFilterMaster();
 
-        Path srcRootPath = new File(srcRoot).toPath();
-        List<String> pathList = StaticUtils.buildFileList(new File(srcRoot), true).stream()
-                    .map((file) -> srcRootPath.relativize(file.toPath()).toString().replace('\\', '/'))
-                    .collect(Collectors.toList());
-        StaticUtils.removeFilesByMasks(pathList, m_config.getSourceRootExcludes());
+        List<String> pathList = FileUtil.buildRelativeFilesList(new File(srcRoot), Collections.emptyList(),
+                m_config.getSourceRootExcludes());
 
         TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback();
 
@@ -985,12 +977,9 @@ public class RealProject implements IProject {
         FilterMaster fm = Core.getFilterMaster();
 
         File root = new File(m_config.getSourceRoot());
-        Path sourceRootPath = new File(m_config.getSourceRoot()).toPath();
-        List<String> srcPathList = StaticUtils.buildFileList(root, true).stream()
-                .map((file) -> sourceRootPath.relativize(file.toPath()).toString().replace('\\', '/'))
-                .collect(Collectors.toList());
-        StaticUtils.removeFilesByMasks(srcPathList, m_config.getSourceRootExcludes());
-        StaticUtils.sortByList(srcPathList, getSourceFilesOrder());
+        List<String> srcPathList = FileUtil
+                .buildRelativeFilesList(root, Collections.emptyList(), m_config.getSourceRootExcludes()).stream()
+                .sorted(StreamUtil.comparatorByList(getSourceFilesOrder())).collect(Collectors.toList());
 
         for (String filepath : srcPathList) {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_FILE_MX", filepath);

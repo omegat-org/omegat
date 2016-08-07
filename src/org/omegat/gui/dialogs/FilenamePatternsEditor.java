@@ -79,6 +79,7 @@ public class FilenamePatternsEditor extends javax.swing.JDialog {
         jPanel2.add(btnAdd, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(btnRemove, OStrings.getString("FILENAMEPATTERNS_REMOVE")); // NOI18N
+        btnRemove.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -88,6 +89,7 @@ public class FilenamePatternsEditor extends javax.swing.JDialog {
 
         jPanel3.add(jPanel2, java.awt.BorderLayout.EAST);
 
+        table.setFillsViewportHeight(true);
         jScrollPane1.setViewportView(table);
 
         jPanel3.add(jScrollPane1, java.awt.BorderLayout.CENTER);

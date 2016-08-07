@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 
+import org.apache.commons.io.FileUtils;
 import org.omegat.filters.TestFilterBase;
 import org.omegat.util.Preferences.IPreferences;
 
@@ -49,7 +50,7 @@ public class PreferencesTest extends TestCase {
 
     @Override
     protected void tearDown() throws Exception {
-        assertTrue(FileUtil.deleteTree(tmpDir));
+        FileUtils.deleteDirectory(tmpDir);
     }
 
     /**

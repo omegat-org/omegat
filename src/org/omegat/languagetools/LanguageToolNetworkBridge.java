@@ -39,6 +39,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -222,20 +223,17 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
         }
 
         List<Map<String,Object>> matches = (List) response.get("matches");
-        List<Mark> r = new ArrayList<>();
 
-        matches.stream().forEach((match) -> {
+        return matches.stream().map((match) -> {
             int begin, end;
             begin = (int) match.get("offset");
             end = (int) match.get("length") + begin;
             Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, begin, end);
             m.toolTipText = addSuggestionTags((String) match.get("message"));
             m.painter = LanguageToolWrapper.PAINTER;
-            r.add(m);
-        });
-
-        return r;
-    }
+            return m;
+        }).collect(Collectors.toList());
+     }
 
     /**
      * Replace double quotes with <suggestion></suggestion> tags

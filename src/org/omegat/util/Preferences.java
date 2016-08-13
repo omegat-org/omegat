@@ -285,10 +285,14 @@ public class Preferences {
     public static final String LANGUAGETOOL_BRIDGE_TYPE = "lt_bridgeType";
     /** URL of remote LanguageTool server */
     public static final String LANGUAGETOOL_REMOTE_URL = "lt_remoteURL";
-    /** Local directory for LanguageTool */
+    /** Local path to LanguageTool server jar file */
     public static final String LANGUAGETOOL_LOCAL_SERVER_JAR_PATH = "lt_localServerJarPath";
-    /** Apply different punctuation bitext rule in LanguageTool */
-    public static final String LANGUAGETOOL_USE_DIFF_PUNCTUATION_RULE = "lt_diffPunctuationRule";
+    /** Disabled categories */
+    public static final String LANGUAGETOOL_DISABLED_CATEGORIES = "lt_disabledCategories";
+    /** Disabled rules prefix */
+    public static final String LANGUAGETOOL_DISABLED_RULES_PREFIX = "lt_disabledRules";
+    /** Enabled rules prefix */
+    public static final String LANGUAGETOOL_ENABLED_RULES_PREFIX = "lt_enabledRules";
 
     /**
      * The location of the scripts

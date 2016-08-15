@@ -400,9 +400,9 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
                 collect(Collectors.toList());
         // Create ExternalRule instances for rules not found in built-in LT
         // and add them to our rules list
-        List<String> combinedRuleIds = new ArrayList<>(disabledRuleIds);
-        combinedRuleIds.addAll(enabledRuleIds);
-        rules.addAll(combinedRuleIds.stream().
+        List<String> externalRuleIds = new ArrayList<>(disabledRuleIds);
+        externalRuleIds.addAll(enabledRuleIds);
+        rules.addAll(externalRuleIds.stream().
                 distinct().
                 filter((p) -> !internalRuleIds.contains(p)).
                 map((p) -> new ExternalRule(p)).

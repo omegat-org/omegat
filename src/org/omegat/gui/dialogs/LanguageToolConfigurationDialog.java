@@ -477,7 +477,6 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
     private void savePreferences() {
         Preferences.setPreference(Preferences.LANGUAGETOOL_REMOTE_URL, urlTextField.getText());
         Preferences.setPreference(Preferences.LANGUAGETOOL_LOCAL_SERVER_JAR_PATH, directoryTextField.getText());
-        Preferences.setPreference(Preferences.LANGUAGETOOL_BRIDGE_TYPE, selectedBridgeType);
 
         String targetLanguageCode = Core.getProject().getProjectProperties().getTargetLanguage().getLanguageCode();
         Preferences.setPreference(Preferences.LANGUAGETOOL_DISABLED_CATEGORIES,
@@ -486,6 +485,8 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
                 enabledRuleIds.stream().reduce((t, u) -> t + "," + u).orElse(""));
         Preferences.setPreference(Preferences.LANGUAGETOOL_DISABLED_RULES_PREFIX + "_" + targetLanguageCode,
                 disabledRuleIds.stream().reduce((t, u) -> t + "," + u).orElse(""));
+
+        Preferences.setPreference(Preferences.LANGUAGETOOL_BRIDGE_TYPE, selectedBridgeType);
     }
 
     private DefaultMutableTreeNode createTree(List<Rule> rules) {

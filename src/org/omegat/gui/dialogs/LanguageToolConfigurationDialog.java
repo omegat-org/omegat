@@ -383,17 +383,15 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
             rulesTree.setEnabled(false);
             return;
         }
-        // If sourceLang is absent targetLang for bitext rules instead
-        if (!sourceLang.isPresent()) {
-            sourceLang = targetLang;
-        }
 
         JLanguageTool ltInstance = new JLanguageTool(targetLang.get());
         List<Rule> rules = ltInstance.getAllRules();
-        try {
-            rules.addAll(Tools.getBitextRules(sourceLang.get(), targetLang.get()));
-        } catch (IOException | ParserConfigurationException | SAXException e) {
-            // Do nothing
+        if (sourceLang.isPresent()) {
+            try {
+                rules.addAll(Tools.getBitextRules(sourceLang.get(), targetLang.get()));
+            } catch (IOException | ParserConfigurationException | SAXException e) {
+                // Do nothing
+            }
         }
         // Collect internal rule IDs
         List<String> internalRuleIds = rules.stream().map((p) -> p.getId()).

@@ -361,6 +361,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
     private final JFileChooser fileChooser = new JFileChooser();
     private BridgeType selectedBridgeType;
     private Set<String> disabledCategories, disabledRuleIds, enabledRuleIds;
+    private final static String NEW_RULE_PATTERN = "^[A-Za-z_\\.]+$";
 
     /**
      * Creates new form LanguageToolConfigurationDialog
@@ -904,7 +905,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
             return; // Nothing to do
         }
 
-        if (!Pattern.matches("^[A-Za-z_]+$", newRuleId)) {
+        if (!Pattern.matches(NEW_RULE_PATTERN, newRuleId)) {
             JOptionPane.showMessageDialog(this, OStrings.getString("GUI_LANGUAGETOOL_BAD_RULE_ID"));
             return;
         }

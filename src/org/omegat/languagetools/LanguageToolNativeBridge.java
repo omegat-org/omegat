@@ -1,4 +1,4 @@
-/**************************************************************************
+ /**************************************************************************
  OmegaT - Computer Assisted Translation (CAT) tool
  with fuzzy matching, translation memory, keyword search,
  glossaries, and translation leveraging into updated projects.
@@ -38,10 +38,8 @@ import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
 import org.languagetool.Languages;
 import org.languagetool.rules.CategoryId;
-import org.languagetool.rules.Rule;
 import org.languagetool.rules.RuleMatch;
 import org.languagetool.rules.bitext.BitextRule;
-import org.languagetool.rules.spelling.SpellingCheckRule;
 import org.languagetool.tools.Tools;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
@@ -127,20 +125,6 @@ public class LanguageToolNativeBridge implements ILanguageToolBridge {
     public static Optional<Language> getLTLanguage(org.omegat.util.Language lang) {
         String omLang = lang.getLanguageCode();
         return Languages.get().stream().filter(ltLang -> omLang.equalsIgnoreCase(ltLang.getShortName())).findFirst();
-    }
-
-    /**
-     * Retrieve bitext rules for specified languages, but remove some rules, which not required in OmegaT
-     */
-    public static List<BitextRule> getBiTextRules(Language sourceLang, Language targetLang) {
-        try {
-            return Tools.getBitextRules(sourceLang, targetLang).stream()
-                    //.filter(rule -> !LT_BIRULE_BLACKLIST.contains(rule.getClass()))
-                    .collect(Collectors.toList());
-        } catch (Exception ex) {
-            // bitext rules can be not defined
-            return null;
-        }
     }
 
     public static Optional<JLanguageTool> getLanguageToolInstance(Language ltLang) {

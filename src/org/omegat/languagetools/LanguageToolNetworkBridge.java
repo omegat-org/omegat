@@ -66,6 +66,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
 
     /* Project scope fields */
     private Language sourceLang, targetLang;
+    private String disabledCategories, disabledRules, enabledRules;
 
     /**
      * Get instance talking to remote server
@@ -83,6 +84,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
         }
         // OK, URL seems valid, let's use it.
         serverUrl = url;
+        init();
     }
 
     /**
@@ -120,7 +122,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
         pb.redirectErrorStream(true);
         server = pb.start();
 
-        // Create a thread to consume server output
+        // Create thread to consume server output
         new Thread(() -> {
             try (InputStream is = server.getInputStream()) {
                 int b;
@@ -153,23 +155,22 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
 
         serverUrl = "http://localhost:" + Integer.toString(port) + URL_PATH;
         Log.log(OStrings.getString("LT_SERVER_STARTED"));
+        init();
     }
 
-    @Override
-    public void onProjectLoad() {
+    /**
+     * Common initialization for both constuctors
+     */
+    private void init() {
         sourceLang = Core.getProject().getProjectProperties().getSourceLanguage();
         targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
         engine = new ScriptEngineManager().getEngineByName("javascript");
     }
 
     @Override
-    public void onProjectClose() {
+    public void stop() {
         sourceLang = null;
         targetLang = null;
-    }
-
-    @Override
-    public void destroy() {
         if (server != null) {
             try {
                 server.destroy();
@@ -191,6 +192,13 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
     }
 
     @Override
+    public void applyRuleFilters(String disabledCategories, String disabledRules, String enabledRules) {
+        this.disabledCategories = disabledCategories;
+        this.disabledRules = disabledRules;
+        this.enabledRules = enabledRules;
+    }
+
+    @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText)
             throws Exception {
 
@@ -198,7 +206,8 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
         try (OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream())) {
-            writer.write(buildPostData(sourceLang.toString(), targetLang.toString(), sourceText, translationText));
+            writer.write(buildPostData(sourceLang.toString(), targetLang.toString(),
+                    sourceText, translationText, disabledCategories, disabledRules, enabledRules));
             writer.flush();
         }
 
@@ -245,7 +254,8 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
     /**
      * Construct POST request data
      */
-    static String buildPostData(String sourceLang, String targetLang, String sourceText, String targetText)
+    static String buildPostData(String sourceLang, String targetLang, String sourceText,
+            String targetText, String disabledCategories, String disabledRules, String enabledRules)
             throws UnsupportedEncodingException {
         String encoding = "UTF-8";
         StringBuilder result = new StringBuilder();
@@ -255,10 +265,15 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
             result.append("&srctext=").append(URLEncoder.encode(sourceText, encoding)).append("&motherTongue=")
                     .append(URLEncoder.encode(sourceLang, encoding));
         }
-        // Exclude spelling rules
-        result.append("&disabledCategories=TYPOS");
-        // Exclude bitext rules
-        result.append("&disabledRules=").append(URLEncoder.encode("SAME_TRANSLATION,TRANSLATION_LENGTH", encoding));
+        if (disabledCategories != null) {
+            result.append("&disabledCategories=").append(URLEncoder.encode(disabledCategories, encoding));
+        }
+        if (disabledRules != null) {
+            result.append("&disabledRules=").append(URLEncoder.encode(disabledRules, encoding));
+        }
+        if (enabledRules != null) {
+            result.append("&enabledRules=").append(URLEncoder.encode(enabledRules, encoding));
+        }
         return result.toString();
     }
 
@@ -271,7 +286,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
             try (OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream())) {
-                writer.write(buildPostData(null, "en-US", null, "Test"));
+                writer.write(buildPostData(null, "en-US", null, "Test", null, null, null));
                 writer.flush();
             }
             Map<String, List<String>> headerFields = conn.getHeaderFields();

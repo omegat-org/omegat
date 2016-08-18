@@ -32,19 +32,17 @@ import org.omegat.gui.editor.mark.Mark;
 public interface ILanguageToolBridge {
 
     /**
-     * Handle project load
+     * Handle project or application closing
      */
-    void onProjectLoad();
-
-    /**
-     * Handle project closing
-     */
-    void onProjectClose();
+    void stop();
 
     /**
      * Free resources before destruction
+     * @param disabledCategories Comma-separated list of disabled category IDs
+     * @param disabledRules Comma-separated list of disabled rule IDs
+     * @param enabledRules Comma-separated list of enabled rule IDs
      */
-    void destroy();
+    void applyRuleFilters(String disabledCategories, String disabledRules, String enabledRules);
 
     /**
      * Get marks for Entry
@@ -56,5 +54,4 @@ public interface ILanguageToolBridge {
      */
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText)
         throws Exception;
-
 }

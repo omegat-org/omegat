@@ -28,19 +28,19 @@ package org.omegat.languagetools;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
 import org.languagetool.Languages;
+import org.languagetool.rules.CategoryId;
 import org.languagetool.rules.Rule;
 import org.languagetool.rules.RuleMatch;
 import org.languagetool.rules.bitext.BitextRule;
-import org.languagetool.rules.bitext.DifferentLengthRule;
-import org.languagetool.rules.bitext.DifferentPunctuationRule;
-import org.languagetool.rules.bitext.SameTranslationRule;
 import org.languagetool.rules.spelling.SpellingCheckRule;
 import org.languagetool.tools.Tools;
 import org.omegat.core.Core;
@@ -53,25 +53,36 @@ public class LanguageToolNativeBridge implements ILanguageToolBridge {
     private JLanguageTool sourceLt, targetLt;
     private List<BitextRule> bRules;
 
-    @Override
-    public void onProjectLoad() {
+    public LanguageToolNativeBridge() {
         Optional<Language> sourceLang = getLTLanguage(Core.getProject().getProjectProperties().getSourceLanguage());
         Optional<Language> targetLang = getLTLanguage(Core.getProject().getProjectProperties().getTargetLanguage());
         sourceLt = sourceLang.flatMap(LanguageToolNativeBridge::getLanguageToolInstance).orElse(null);
         targetLt = targetLang.flatMap(LanguageToolNativeBridge::getLanguageToolInstance).orElse(null);
-        if (sourceLt != null && targetLt != null) {
-            bRules = getBiTextRules(sourceLang.get(), targetLang.get());
+        if (sourceLang.isPresent() && targetLang.isPresent()) {
+            try {
+                bRules = Tools.getBitextRules(sourceLang.get(), targetLang.get());
+            } catch (Exception e) {
+                bRules = null;
+            }
         }
     }
 
     @Override
-    public void onProjectClose() {
-        sourceLt = null;
-        targetLt = null;
+    public void stop() {
+        // Nothting to do here
     }
 
     @Override
-    public void destroy() {}
+    public void applyRuleFilters(String disabledCategories, String disabledRules, String enabledRules) {
+        Set<CategoryId> dc = Arrays.asList(disabledCategories.split(",")).stream().
+                map(p -> new CategoryId(p)).collect(Collectors.toSet());
+        Set<String> dr = Arrays.asList(disabledRules.split(",")).stream().collect(Collectors.toSet());
+        Set<String> er = Arrays.asList(enabledRules.split(",")).stream().collect(Collectors.toSet());
+        Tools.selectRules(targetLt, dc, new HashSet<>(), dr, er, false);
+        if (bRules != null) {
+            bRules = bRules.stream().filter(rule -> !dr.contains(rule.getId())).collect(Collectors.toList());
+        }
+    }
 
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText)
@@ -118,17 +129,14 @@ public class LanguageToolNativeBridge implements ILanguageToolBridge {
         return Languages.get().stream().filter(ltLang -> omLang.equalsIgnoreCase(ltLang.getShortName())).findFirst();
     }
 
-
-    private static List<Class<?>> LT_BIRULE_BLACKLIST = Arrays.asList(DifferentLengthRule.class,
-            SameTranslationRule.class, DifferentPunctuationRule.class);
-
     /**
      * Retrieve bitext rules for specified languages, but remove some rules, which not required in OmegaT
      */
     public static List<BitextRule> getBiTextRules(Language sourceLang, Language targetLang) {
         try {
             return Tools.getBitextRules(sourceLang, targetLang).stream()
-                    .filter(rule -> !LT_BIRULE_BLACKLIST.contains(rule.getClass())).collect(Collectors.toList());
+                    //.filter(rule -> !LT_BIRULE_BLACKLIST.contains(rule.getClass()))
+                    .collect(Collectors.toList());
         } catch (Exception ex) {
             // bitext rules can be not defined
             return null;
@@ -138,8 +146,6 @@ public class LanguageToolNativeBridge implements ILanguageToolBridge {
     public static Optional<JLanguageTool> getLanguageToolInstance(Language ltLang) {
         try {
             JLanguageTool result = new JLanguageTool(ltLang);
-            result.getAllRules().stream().filter(rule -> rule instanceof SpellingCheckRule).map(Rule::getId)
-                    .forEach(result::disableRule);
             return Optional.of(result);
         } catch (Exception ex) {
             Log.log(ex);

@@ -27,6 +27,8 @@
 
 package org.omegat.languagetools;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.List;
 
 import javax.swing.text.Highlighter.HighlightPainter;
@@ -55,9 +57,12 @@ import org.omegat.util.gui.Styles;
  * @author Aaron Madlon-Kay
  * @author Lev Abashkin
  */
-public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApplicationEventListener {
+public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApplicationEventListener, PropertyChangeListener {
     static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(
             Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
+
+    private final static String DEFAULT_DISABLED_CATEGORIES = "SPELL,TYPOS";
+    private final static String DEFAULT_DISABLED_RULES = "SAME_TRANSLATION,TRANSLATION_LENGTH,DIFFERENT_PUNCTUATION";
 
     public enum BridgeType {
         NATIVE, REMOTE_URL, LOCAL_INSTALLATION
@@ -68,8 +73,7 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
     public LanguageToolWrapper() throws Exception {
         CoreEvents.registerProjectChangeListener(this);
         CoreEvents.registerApplicationEventListener(this);
-
-        bridge = createBridgeFromPrefs();
+        Preferences.addPropertyChangeListener(this);
     }
 
     /**
@@ -80,29 +84,43 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
     static ILanguageToolBridge createBridgeFromPrefs() {
         // If configured try to create network bridge and fallback to native on
         // fail
+        ILanguageToolBridge bridge;
         BridgeType type = Preferences.getPreferenceEnumDefault(Preferences.LANGUAGETOOL_BRIDGE_TYPE,
                 BridgeType.NATIVE);
         try {
             switch (type) {
             case LOCAL_INSTALLATION:
                 String localServerJarPath = Preferences.getPreference(Preferences.LANGUAGETOOL_LOCAL_SERVER_JAR_PATH);
-                return new LanguageToolNetworkBridge(localServerJarPath, 8081);
+                bridge =  new LanguageToolNetworkBridge(localServerJarPath, 8081);
+                break;
             case REMOTE_URL:
                 String remoteUrl = Preferences.getPreference(Preferences.LANGUAGETOOL_REMOTE_URL);
-                return new LanguageToolNetworkBridge(remoteUrl);
+                bridge = new LanguageToolNetworkBridge(remoteUrl);
+                break;
             case NATIVE:
             default:
-                return new LanguageToolNativeBridge();
+                bridge = new LanguageToolNativeBridge();
             }
         } catch (Exception e) {
             Log.logWarningRB("LT_BAD_CONFIGURATION");
-            return new LanguageToolNativeBridge();
+            bridge = new LanguageToolNativeBridge();
         }
+        String disabledCategories = Preferences.getPreferenceDefault(
+                Preferences.LANGUAGETOOL_DISABLED_CATEGORIES, DEFAULT_DISABLED_CATEGORIES);
+
+        String lc = Core.getProject().getProjectProperties().getTargetLanguage().getLanguageCode();
+        String disabledRules = Preferences.getPreferenceDefault(
+                Preferences.LANGUAGETOOL_DISABLED_RULES_PREFIX + "_" + lc, DEFAULT_DISABLED_RULES);
+        String enabledRules = Preferences.getPreferenceDefault(
+                Preferences.LANGUAGETOOL_ENABLED_RULES_PREFIX + "_" + lc, "");
+
+        bridge.applyRuleFilters(disabledCategories, disabledRules, enabledRules);
+        return bridge;
     }
 
     @Override
     public synchronized void onApplicationShutdown() {
-        bridge.destroy();
+        bridge.stop();
     }
 
     @Override
@@ -118,10 +136,10 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
         switch (eventType) {
         case CREATE:
         case LOAD:
-            bridge.onProjectLoad();
+            bridge = createBridgeFromPrefs();
             break;
         case CLOSE:
-            bridge.onProjectClose();
+            bridge.stop();
             break;
         default:
             // Nothing
@@ -146,5 +164,15 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
         translationText = StringUtil.normalizeUnicode(translationText);
 
         return bridge.getMarksForEntry(ste, sourceText, translationText);
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        // This property is changed in the end of configuration dialog saving,
+        // so at this point every other related properties are already changed.
+        if (evt.getPropertyName().equals(Preferences.LANGUAGETOOL_BRIDGE_TYPE)) {
+            bridge.stop();
+            bridge = createBridgeFromPrefs();
+        }
     }
 }

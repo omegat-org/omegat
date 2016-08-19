@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010-2013 Alex Buloichik
@@ -25,6 +25,7 @@
 
 package org.omegat.languagetools;
 
+import java.io.File;
 import java.util.List;
 
 import org.junit.Test;
@@ -41,11 +42,31 @@ import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
 
 import junit.framework.TestCase;
+import org.omegat.core.Core;
+import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.data.RealProject;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class LanguageToolTest extends TestCase {
+
+    private final static String TMP_DIR = "tmp_lt_test";
+    private File projectDir;
+
+    public void setUp() throws Exception {
+        TestPreferencesInitializer.init();
+        projectDir = new File(TMP_DIR);
+        projectDir.mkdir();
+        ProjectProperties props = new ProjectProperties(projectDir);
+        RealProject project = new RealProject(props);
+        Core.setProject(project);
+    }
+
+    public void tearDown() throws Exception {
+        projectDir.delete();
+    }
+
     @Test
     public void testExecute() throws Exception {
         JLanguageTool lt = new JLanguageTool(new Belarusian());
@@ -87,8 +108,6 @@ public class LanguageToolTest extends TestCase {
     }
 
     public void testWrapperInit() throws Exception {
-        TestPreferencesInitializer.init();
-
         // Defaults: Local implementation
         ILanguageToolBridge bridge = LanguageToolWrapper.createBridgeFromPrefs();
         assertTrue(bridge instanceof LanguageToolNativeBridge);

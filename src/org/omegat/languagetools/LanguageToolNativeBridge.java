@@ -72,6 +72,9 @@ public class LanguageToolNativeBridge implements ILanguageToolBridge {
 
     @Override
     public void applyRuleFilters(String disabledCategories, String disabledRules, String enabledRules) {
+        if (targetLt == null) {
+            return;
+        }
         Set<CategoryId> dc = Arrays.asList(disabledCategories.split(",")).stream().
                 map(p -> new CategoryId(p)).collect(Collectors.toSet());
         Set<String> dr = Arrays.asList(disabledRules.split(",")).stream().collect(Collectors.toSet());

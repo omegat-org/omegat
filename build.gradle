@@ -503,6 +503,9 @@ task checksums {
     inputs.files fileTree(dir: distsDir, exclude: 'checksums')
     def checksumsDir = file("${distsDir}/checksums")
     outputs.dir checksumsDir
+    onlyIf {
+        checksumsDir.directory
+    }
     doLast {
         distsDir.listFiles().findAll { it.file }.each { f ->
             algos.each { algo ->

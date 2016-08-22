@@ -78,7 +78,6 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.gui.FontFallbackListener;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles;
-import org.omegat.util.gui.Styles.EditorColor;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -595,7 +594,10 @@ class EntryListPane extends JTextPane {
             StyleConstants.setBackground(attrNormal, getBackground());
 
             attrActive = new SimpleAttributeSet();
-            StyleConstants.setBackground(attrActive, EditorColor.COLOR_ACTIVE_SOURCE.getColor());
+            // This is the same as the default value for
+            // Styles.EditorColor.COLOR_ACTIVE_SOURCE, but we hard-code it here
+            // because this panel does not currently support customized colors.
+            StyleConstants.setBackground(attrActive, Color.decode("#c0ffc0"));
         }
 
         @Override

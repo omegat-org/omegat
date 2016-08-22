@@ -590,7 +590,7 @@ class EntryListPane extends JTextPane {
 
         public SegmentHighlighter() {
             attrNormal = new SimpleAttributeSet();
-            StyleConstants.setBackground(attrNormal, EditorColor.COLOR_BACKGROUND.getColor());
+            StyleConstants.setBackground(attrNormal, getBackground());
 
             attrActive = new SimpleAttributeSet();
             StyleConstants.setBackground(attrActive, EditorColor.COLOR_ACTIVE_SOURCE.getColor());

@@ -582,22 +582,24 @@ class EntryListPane extends JTextPane {
 
     private class SegmentHighlighter implements Runnable {
 
-        private final MutableAttributeSet attrNormal;
-        private final MutableAttributeSet attrActive;
+        private final AttributeSet attrNormal;
+        private final AttributeSet attrActive;
         
         private int entryListIndex = -1;
         private int offset         = -1;
         private int length         = -1;
 
         public SegmentHighlighter() {
-            attrNormal = new SimpleAttributeSet();
+            MutableAttributeSet attrNormal = new SimpleAttributeSet();
             StyleConstants.setBackground(attrNormal, getBackground());
+            this.attrNormal = attrNormal;
 
-            attrActive = new SimpleAttributeSet();
+            MutableAttributeSet attrActive = new SimpleAttributeSet();
             // This is the same as the default value for
             // Styles.EditorColor.COLOR_ACTIVE_SOURCE, but we hard-code it here
             // because this panel does not currently support customized colors.
             StyleConstants.setBackground(attrActive, Color.decode("#c0ffc0"));
+            this.attrActive = attrActive;
         }
 
         @Override

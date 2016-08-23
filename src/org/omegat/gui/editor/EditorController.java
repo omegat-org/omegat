@@ -413,7 +413,7 @@ public class EditorController implements IEditor {
     };
 
     private synchronized void loadDown(int count) {
-        if (lastLoaded < 0 || lastLoaded > m_docSegList.length) {
+        if (lastLoaded < 0 || lastLoaded >= m_docSegList.length - 1) {
             return;
         }
         int loadFrom = lastLoaded + 1;

@@ -24,6 +24,8 @@
  **************************************************************************/
 package org.omegat.gui.dialogs;
 
+import static org.omegat.languagetools.LanguageToolNativeBridge.getLTLanguage;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
@@ -43,8 +45,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import javax.swing.JCheckBox;
 
+import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -59,6 +61,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreePath;
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.jetbrains.annotations.NotNull;
 import org.languagetool.AnalyzedSentence;
 import org.languagetool.JLanguageTool;
@@ -69,12 +72,10 @@ import org.languagetool.rules.Rule;
 import org.languagetool.rules.RuleMatch;
 import org.languagetool.tools.Tools;
 import org.omegat.core.Core;
+import org.omegat.languagetools.LanguageToolWrapper.BridgeType;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.StaticUIUtils;
-
-import org.omegat.languagetools.LanguageToolWrapper.BridgeType;
-import static org.omegat.languagetools.LanguageToolNativeBridge.getLTLanguage;
 import org.xml.sax.SAXException;
 
 

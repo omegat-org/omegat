@@ -24,11 +24,9 @@
  **************************************************************************/
 package org.omegat.languagetools;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.ServerSocket;
@@ -44,6 +42,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
 import org.omegat.core.Core;
+import org.apache.commons.io.IOUtils;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.Language;
@@ -212,18 +211,12 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
         }
 
         // Read response into string specially wrapped for Nashorn
-        StringBuilder sb;
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
-            String line;
-            sb = new StringBuilder();
-            sb.append("Java.asJSONCompatible(");
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-            }
-            sb.append(")");
+        String json = "";
+        try (InputStream in = conn.getInputStream()) {
+            json = IOUtils.toString(in);
         }
 
-        Map<String, Object> response = (Map) engine.eval(sb.toString());
+        Map<String, Object> response = (Map) engine.eval("Java.asJSONCompatible(" + json + ')');
         Map<String, String> software = (Map) response.get("software");
 
         if (!software.get("apiVersion").equals(API_VERSION)) {

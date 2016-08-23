@@ -67,7 +67,7 @@ public class LanguageToolNativeBridge implements ILanguageToolBridge {
 
     @Override
     public void stop() {
-        // Nothting to do here
+        // Nothing to do here
     }
 
     @Override

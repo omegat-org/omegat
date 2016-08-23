@@ -398,13 +398,13 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
             }
         }
         // Collect internal rule IDs
-        List<String> internalRuleIds = rules.stream().map((p) -> p.getId()).collect(Collectors.toList());
+        List<String> internalRuleIds = rules.stream().map(Rule::getId).collect(Collectors.toList());
         // Create ExternalRule instances for rules not found in built-in LT
         // and add them to our rules list
         List<String> externalRuleIds = new ArrayList<>(disabledRuleIds);
         externalRuleIds.addAll(enabledRuleIds);
-        rules.addAll(externalRuleIds.stream().distinct().filter((p) -> !internalRuleIds.contains(p))
-                .map((p) -> new ExternalRule(p)).collect(Collectors.toList()));
+        rules.addAll(externalRuleIds.stream().distinct().filter(p -> !internalRuleIds.contains(p))
+                .map(ExternalRule::new).collect(Collectors.toList()));
 
         DefaultMutableTreeNode rootNode = createTree(rules);
         rulesTree.setModel(getTreeModel(rootNode));

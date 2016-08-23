@@ -41,7 +41,6 @@ import org.languagetool.rules.CategoryId;
 import org.languagetool.rules.RuleMatch;
 import org.languagetool.rules.bitext.BitextRule;
 import org.languagetool.tools.Tools;
-import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.Log;
@@ -51,14 +50,14 @@ public class LanguageToolNativeBridge implements ILanguageToolBridge {
     private JLanguageTool sourceLt, targetLt;
     private List<BitextRule> bRules;
 
-    public LanguageToolNativeBridge() {
-        Optional<Language> sourceLang = getLTLanguage(Core.getProject().getProjectProperties().getSourceLanguage());
-        Optional<Language> targetLang = getLTLanguage(Core.getProject().getProjectProperties().getTargetLanguage());
-        sourceLt = sourceLang.flatMap(LanguageToolNativeBridge::getLanguageToolInstance).orElse(null);
-        targetLt = targetLang.flatMap(LanguageToolNativeBridge::getLanguageToolInstance).orElse(null);
-        if (sourceLang.isPresent() && targetLang.isPresent()) {
+    public LanguageToolNativeBridge(org.omegat.util.Language sourceLang, org.omegat.util.Language targetLang) {
+        Optional<Language> sourceLtLang = getLTLanguage(sourceLang);
+        Optional<Language> targetLtLang = getLTLanguage(targetLang);
+        sourceLt = sourceLtLang.flatMap(LanguageToolNativeBridge::getLanguageToolInstance).orElse(null);
+        targetLt = targetLtLang.flatMap(LanguageToolNativeBridge::getLanguageToolInstance).orElse(null);
+        if (sourceLtLang.isPresent() && targetLtLang.isPresent()) {
             try {
-                bRules = Tools.getBitextRules(sourceLang.get(), targetLang.get());
+                bRules = Tools.getBitextRules(sourceLtLang.get(), targetLtLang.get());
             } catch (Exception e) {
                 bRules = null;
             }

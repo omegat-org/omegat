@@ -41,6 +41,7 @@ import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -81,7 +82,7 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
      * {@link BridgeType#NATIVE} if non-native bridges fail to initialize (bad
      * config, etc.).
      */
-    static ILanguageToolBridge createBridgeFromPrefs() {
+    static ILanguageToolBridge createBridgeFromPrefs(Language sourceLang, Language targetLang) {
         // If configured try to create network bridge and fallback to native on
         // fail
         ILanguageToolBridge bridge;
@@ -91,24 +92,24 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
             switch (type) {
             case LOCAL_INSTALLATION:
                 String localServerJarPath = Preferences.getPreference(Preferences.LANGUAGETOOL_LOCAL_SERVER_JAR_PATH);
-                bridge =  new LanguageToolNetworkBridge(localServerJarPath, 8081);
+                bridge = new LanguageToolNetworkBridge(sourceLang, targetLang, localServerJarPath, 8081);
                 break;
             case REMOTE_URL:
                 String remoteUrl = Preferences.getPreference(Preferences.LANGUAGETOOL_REMOTE_URL);
-                bridge = new LanguageToolNetworkBridge(remoteUrl);
+                bridge = new LanguageToolNetworkBridge(sourceLang, targetLang, remoteUrl);
                 break;
             case NATIVE:
             default:
-                bridge = new LanguageToolNativeBridge();
+                bridge = new LanguageToolNativeBridge(sourceLang, targetLang);
             }
         } catch (Exception e) {
             Log.logWarningRB("LT_BAD_CONFIGURATION");
-            bridge = new LanguageToolNativeBridge();
+            bridge = new LanguageToolNativeBridge(sourceLang, targetLang);
         }
         String disabledCategories = Preferences.getPreferenceDefault(
                 Preferences.LANGUAGETOOL_DISABLED_CATEGORIES, DEFAULT_DISABLED_CATEGORIES);
 
-        String lc = Core.getProject().getProjectProperties().getTargetLanguage().getLanguageCode();
+        String lc = targetLang.getLanguageCode();
         String disabledRules = Preferences.getPreferenceDefault(
                 Preferences.LANGUAGETOOL_DISABLED_RULES_PREFIX + "_" + lc, DEFAULT_DISABLED_RULES);
         String enabledRules = Preferences.getPreferenceDefault(
@@ -136,7 +137,9 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
         switch (eventType) {
         case CREATE:
         case LOAD:
-            bridge = createBridgeFromPrefs();
+            Language sourceLang = Core.getProject().getProjectProperties().getSourceLanguage();
+            Language targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
+            bridge = createBridgeFromPrefs(sourceLang, targetLang);
             break;
         case CLOSE:
             bridge.stop();
@@ -168,11 +171,16 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
         // This property is changed in the end of configuration dialog saving,
         // so at this point every other related properties are already changed.
         if (evt.getPropertyName().equals(Preferences.LANGUAGETOOL_BRIDGE_TYPE)) {
             bridge.stop();
-            bridge = createBridgeFromPrefs();
+            Language sourceLang = Core.getProject().getProjectProperties().getSourceLanguage();
+            Language targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
+            bridge = createBridgeFromPrefs(sourceLang, targetLang);
         }
     }
 }

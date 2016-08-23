@@ -124,6 +124,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
         // Create thread to consume server output
         new Thread(() -> {
             try (InputStream is = server.getInputStream()) {
+                @SuppressWarnings("unused")
                 int b;
                 while ((b = is.read()) != -1) {
                     // Discard
@@ -198,6 +199,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText)
             throws Exception {
 
@@ -216,14 +218,14 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
             json = IOUtils.toString(in);
         }
 
-        Map<String, Object> response = (Map) engine.eval("Java.asJSONCompatible(" + json + ')');
-        Map<String, String> software = (Map) response.get("software");
+        Map<String, Object> response = (Map<String, Object>) engine.eval("Java.asJSONCompatible(" + json + ')');
+        Map<String, String> software = (Map<String, String>) response.get("software");
 
         if (!software.get("apiVersion").equals(API_VERSION)) {
             Log.logWarningRB("LT_API_VERSION_MISMATCH");
         }
 
-        List<Map<String,Object>> matches = (List) response.get("matches");
+        List<Map<String, Object>> matches = (List<Map<String, Object>>) response.get("matches");
 
         return matches.stream().map((match) -> {
             int begin, end;

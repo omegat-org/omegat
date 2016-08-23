@@ -78,10 +78,9 @@ import org.omegat.util.Preferences;
 import org.omegat.util.gui.StaticUIUtils;
 import org.xml.sax.SAXException;
 
-
 /**
- * Helper class to work with manually defined rules
- * unknown to built-in LanguageTool
+ * Helper class to work with manually defined rules unknown to built-in
+ * LanguageTool
  *
  * @author Lev Abashkin
  */
@@ -126,9 +125,9 @@ class ExternalRule extends Rule {
 class TreeListener implements KeyListener, MouseListener {
 
     static void install(JTree tree) {
-      TreeListener listener = new TreeListener(tree);
-      tree.addMouseListener(listener);
-      tree.addKeyListener(listener);
+        TreeListener listener = new TreeListener(tree);
+        tree.addMouseListener(listener);
+        tree.addKeyListener(listener);
     }
 
     private static final Dimension CHECKBOX_DIMENSION = new JCheckBox().getPreferredSize();
@@ -136,7 +135,7 @@ class TreeListener implements KeyListener, MouseListener {
     private final JTree tree;
 
     private TreeListener(JTree tree) {
-      this.tree = tree;
+        this.tree = tree;
     }
 
     @Override
@@ -145,14 +144,14 @@ class TreeListener implements KeyListener, MouseListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-      if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-        TreePath[] paths = tree.getSelectionPaths();
-        if (paths != null) {
-          for (TreePath path : paths) {
-            handle(path);
-          }
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            TreePath[] paths = tree.getSelectionPaths();
+            if (paths != null) {
+                for (TreePath path : paths) {
+                    handle(path);
+                }
+            }
         }
-      }
     }
 
     @Override
@@ -165,14 +164,14 @@ class TreeListener implements KeyListener, MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-      TreePath path = tree.getPathForLocation(e.getX(), e.getY());
-      if ((path != null) && (path.getPathCount() > 0)) {
-        if (isValidNode(path.getLastPathComponent())) {
-          if (isOverCheckBox(e.getX(), e.getY(), path)) {
-            handle(path);
-          }
+        TreePath path = tree.getPathForLocation(e.getX(), e.getY());
+        if ((path != null) && (path.getPathCount() > 0)) {
+            if (isValidNode(path.getLastPathComponent())) {
+                if (isOverCheckBox(e.getX(), e.getY(), path)) {
+                    handle(path);
+                }
+            }
         }
-      }
     }
 
     @Override
@@ -188,45 +187,45 @@ class TreeListener implements KeyListener, MouseListener {
     }
 
     private void handle(TreePath path) {
-      if ((path != null) && (path.getPathCount() > 0)) {
-        if (path.getLastPathComponent() instanceof CategoryNode) {
-          DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
+        if ((path != null) && (path.getPathCount() > 0)) {
+            if (path.getLastPathComponent() instanceof CategoryNode) {
+                DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
 
-          CategoryNode node = (CategoryNode) path.getLastPathComponent();
-          node.setEnabled(!node.isEnabled());
-          model.nodeChanged(node);
+                CategoryNode node = (CategoryNode) path.getLastPathComponent();
+                node.setEnabled(!node.isEnabled());
+                model.nodeChanged(node);
 
-          for (int i = 0; i < node.getChildCount(); i++) {
-            RuleNode child = (RuleNode) node.getChildAt(i);
-            if (child.isEnabled() != node.isEnabled()) {
-              child.setEnabled(node.isEnabled());
-              model.nodeChanged(child);
+                for (int i = 0; i < node.getChildCount(); i++) {
+                    RuleNode child = (RuleNode) node.getChildAt(i);
+                    if (child.isEnabled() != node.isEnabled()) {
+                        child.setEnabled(node.isEnabled());
+                        model.nodeChanged(child);
+                    }
+                }
             }
-          }
-        }
-        if (path.getLastPathComponent() instanceof RuleNode) {
-          DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
+            if (path.getLastPathComponent() instanceof RuleNode) {
+                DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
 
-          RuleNode node = (RuleNode) path.getLastPathComponent();
-          node.setEnabled(!node.isEnabled());
-          model.nodeChanged(node);
+                RuleNode node = (RuleNode) path.getLastPathComponent();
+                node.setEnabled(!node.isEnabled());
+                model.nodeChanged(node);
 
-          if (node.isEnabled()) {
-            CategoryNode parent = (CategoryNode) node.getParent();
-            parent.setEnabled(true);
-          }
-          model.nodeChanged(node.getParent());
+                if (node.isEnabled()) {
+                    CategoryNode parent = (CategoryNode) node.getParent();
+                    parent.setEnabled(true);
+                }
+                model.nodeChanged(node.getParent());
+            }
         }
-      }
     }
 
     private boolean isOverCheckBox(int x, int y, TreePath path) {
-      int offset = tree.getPathBounds(path).x + CHECKBOX_DIMENSION.width;
-      return x <= offset;
+        int offset = tree.getPathBounds(path).x + CHECKBOX_DIMENSION.width;
+        return x <= offset;
     }
 
     private boolean isValidNode(Object c) {
-      return ((c instanceof CategoryNode) || (c instanceof RuleNode));
+        return ((c instanceof CategoryNode) || (c instanceof RuleNode));
     }
 }
 
@@ -262,7 +261,6 @@ class RuleNode extends DefaultMutableTreeNode {
         return rule.getDescription();
     }
 }
-
 
 /**
  * @author Panagiotis Minos
@@ -305,7 +303,6 @@ class CategoryNode extends DefaultMutableTreeNode {
     }
 }
 
-
 /**
  * @author Panagiotis Minos
  */
@@ -326,8 +323,10 @@ class CheckBoxTreeCellRenderer extends JPanel implements TreeCellRenderer {
     }
 
     @Override
-    public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
-        Component component = renderer.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
+    public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded,
+            boolean leaf, int row, boolean hasFocus) {
+        Component component = renderer.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row,
+                hasFocus);
 
         if (value instanceof CategoryNode) {
             if (defaultComponent != null) {
@@ -354,7 +353,6 @@ class CheckBoxTreeCellRenderer extends JPanel implements TreeCellRenderer {
         return component;
     }
 }
-
 
 /**
  * @author Panagiotis Minos
@@ -400,17 +398,13 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
             }
         }
         // Collect internal rule IDs
-        List<String> internalRuleIds = rules.stream().map((p) -> p.getId()).
-                collect(Collectors.toList());
+        List<String> internalRuleIds = rules.stream().map((p) -> p.getId()).collect(Collectors.toList());
         // Create ExternalRule instances for rules not found in built-in LT
         // and add them to our rules list
         List<String> externalRuleIds = new ArrayList<>(disabledRuleIds);
         externalRuleIds.addAll(enabledRuleIds);
-        rules.addAll(externalRuleIds.stream().
-                distinct().
-                filter((p) -> !internalRuleIds.contains(p)).
-                map((p) -> new ExternalRule(p)).
-                collect(Collectors.toList()));
+        rules.addAll(externalRuleIds.stream().distinct().filter((p) -> !internalRuleIds.contains(p))
+                .map((p) -> new ExternalRule(p)).collect(Collectors.toList()));
 
         DefaultMutableTreeNode rootNode = createTree(rules);
         rulesTree.setModel(getTreeModel(rootNode));
@@ -429,52 +423,50 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
     private void handleBridgeTypeChange(BridgeType type) {
         selectedBridgeType = type;
         switch (type) {
-            case NATIVE:
-                directoryTextField.setEnabled(false);
-                directoryChooseButton.setEnabled(false);
-                urlTextField.setEnabled(false);
-                break;
-            case REMOTE_URL:
-                directoryTextField.setEnabled(false);
-                directoryChooseButton.setEnabled(false);
-                urlTextField.setEnabled(true);
-                break;
-            case LOCAL_INSTALLATION:
-                directoryTextField.setEnabled(true);
-                directoryChooseButton.setEnabled(true);
-                urlTextField.setEnabled(false);
-                break;
+        case NATIVE:
+            directoryTextField.setEnabled(false);
+            directoryChooseButton.setEnabled(false);
+            urlTextField.setEnabled(false);
+            break;
+        case REMOTE_URL:
+            directoryTextField.setEnabled(false);
+            directoryChooseButton.setEnabled(false);
+            urlTextField.setEnabled(true);
+            break;
+        case LOCAL_INSTALLATION:
+            directoryTextField.setEnabled(true);
+            directoryChooseButton.setEnabled(true);
+            urlTextField.setEnabled(false);
+            break;
         }
     }
 
     private void loadPreferences() {
-        BridgeType type = Preferences.getPreferenceEnumDefault(Preferences.LANGUAGETOOL_BRIDGE_TYPE,
-                BridgeType.NATIVE);
+        BridgeType type = Preferences.getPreferenceEnumDefault(Preferences.LANGUAGETOOL_BRIDGE_TYPE, BridgeType.NATIVE);
         switch (type) {
-            case NATIVE:
-                bridgeNativeRadioButton.setSelected(true);
-                break;
-            case REMOTE_URL:
-                bridgeRemoteRadioButton.setSelected(true);
-                break;
-            case LOCAL_INSTALLATION:
-                bridgeLocalRadioButton.setSelected(true);
-                break;
+        case NATIVE:
+            bridgeNativeRadioButton.setSelected(true);
+            break;
+        case REMOTE_URL:
+            bridgeRemoteRadioButton.setSelected(true);
+            break;
+        case LOCAL_INSTALLATION:
+            bridgeLocalRadioButton.setSelected(true);
+            break;
         }
 
         urlTextField.setText(Preferences.getPreference(Preferences.LANGUAGETOOL_REMOTE_URL));
         directoryTextField.setText(Preferences.getPreference(Preferences.LANGUAGETOOL_LOCAL_SERVER_JAR_PATH));
 
-
-
         String targetLanguageCode = Core.getProject().getProjectProperties().getTargetLanguage().getLanguageCode();
-        disabledCategories = Arrays.asList(Preferences.getPreference(Preferences.LANGUAGETOOL_DISABLED_CATEGORIES).
-                split(",")).stream().filter(s -> !s.isEmpty()).collect(Collectors.toSet());
-        disabledRuleIds = Arrays.asList(Preferences.getPreference(Preferences.LANGUAGETOOL_DISABLED_RULES_PREFIX + "_" + targetLanguageCode).
-                        split(","))
+        disabledCategories = Arrays
+                .asList(Preferences.getPreference(Preferences.LANGUAGETOOL_DISABLED_CATEGORIES).split(",")).stream()
+                .filter(s -> !s.isEmpty()).collect(Collectors.toSet());
+        disabledRuleIds = Arrays.asList(Preferences
+                .getPreference(Preferences.LANGUAGETOOL_DISABLED_RULES_PREFIX + "_" + targetLanguageCode).split(","))
                 .stream().filter(s -> !s.isEmpty()).collect(Collectors.toSet());
-        enabledRuleIds = Arrays.asList(Preferences.getPreference(Preferences.LANGUAGETOOL_ENABLED_RULES_PREFIX + "_" + targetLanguageCode).
-                        split(","))
+        enabledRuleIds = Arrays.asList(Preferences
+                .getPreference(Preferences.LANGUAGETOOL_ENABLED_RULES_PREFIX + "_" + targetLanguageCode).split(","))
                 .stream().filter(s -> !s.isEmpty()).collect(Collectors.toSet());
 
         handleBridgeTypeChange(type);
@@ -518,7 +510,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
             lastRuleId = rule.getId();
         }
         return root;
-   }
+    }
 
     private boolean getEnabledState(Rule rule) {
         boolean ret = true;
@@ -531,8 +523,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         if ((rule.isDefaultOff() || rule.getCategory().isDefaultOff()) && !enabledRuleIds.contains(rule.getId())) {
             ret = false;
         }
-        if (rule.isDefaultOff() && rule.getCategory().isDefaultOff()
-                && enabledRuleIds.contains(rule.getId())) {
+        if (rule.isDefaultOff() && rule.getCategory().isDefaultOff() && enabledRuleIds.contains(rule.getId())) {
             disabledCategories.remove(rule.getCategory().getId().toString());
         }
         return ret;
@@ -575,8 +566,8 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
                     // Clean up disabled rules already disabled by category.
                     // Do not remove IDs of external rules.
-                    if (disabledCategories.contains(o.getRule().getCategory().getId().toString()) &&
-                            !o.getRule().getCategory().getId().toString().equals(ExternalRule.CATEGORY_ID)) {
+                    if (disabledCategories.contains(o.getRule().getCategory().getId().toString())
+                            && !o.getRule().getCategory().getId().toString().equals(ExternalRule.CATEGORY_ID)) {
                         disabledRuleIds.remove(o.getRule().getId());
                     }
                 }
@@ -589,6 +580,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
                     }
                 }
             }
+
             @Override
             public void treeNodesInserted(TreeModelEvent e) {
                 DefaultMutableTreeNode newNode = (DefaultMutableTreeNode) e.getChildren()[0];
@@ -599,6 +591,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
                 }
             }
+
             @Override
             public void treeNodesRemoved(TreeModelEvent e) {
                 DefaultMutableTreeNode removedNode = (DefaultMutableTreeNode) e.getChildren()[0];
@@ -613,8 +606,10 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
                     disabledCategories.remove(((CategoryNode) removedNode).getCategory().getId().toString());
                 }
             }
+
             @Override
-            public void treeStructureChanged(TreeModelEvent e) {}
+            public void treeStructureChanged(TreeModelEvent e) {
+            }
         });
         return treeModel;
     }
@@ -651,7 +646,8 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         setTitle(OStrings.getString("GUI_LANGUAGETOOL_DIALOG_TITLE")); // NOI18N
         setResizable(false);
 
-        typePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("GUI_LANGUAGETOOL_BRIDGE_TYPE"))); // NOI18N
+        typePanel.setBorder(
+                javax.swing.BorderFactory.createTitledBorder(OStrings.getString("GUI_LANGUAGETOOL_BRIDGE_TYPE"))); // NOI18N
 
         buttonGroup1.add(bridgeNativeRadioButton);
         bridgeNativeRadioButton.setSelected(true);
@@ -682,29 +678,24 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
         javax.swing.GroupLayout typePanelLayout = new javax.swing.GroupLayout(typePanel);
         typePanel.setLayout(typePanelLayout);
-        typePanelLayout.setHorizontalGroup(
-            typePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(typePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(bridgeNativeRadioButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bridgeRemoteRadioButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bridgeLocalRadioButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        typePanelLayout.setVerticalGroup(
-            typePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(typePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(typePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bridgeNativeRadioButton)
-                    .addComponent(bridgeRemoteRadioButton)
-                    .addComponent(bridgeLocalRadioButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        typePanelLayout
+                .setHorizontalGroup(typePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(typePanelLayout.createSequentialGroup().addContainerGap()
+                                .addComponent(bridgeNativeRadioButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bridgeRemoteRadioButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bridgeLocalRadioButton)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+        typePanelLayout.setVerticalGroup(typePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(typePanelLayout.createSequentialGroup().addContainerGap()
+                        .addGroup(typePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(bridgeNativeRadioButton).addComponent(bridgeRemoteRadioButton)
+                                .addComponent(bridgeLocalRadioButton))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
-        externalOptionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("GUI_LANGUAGETOOL_EXTERNAL_SETTINGS"))); // NOI18N
+        externalOptionsPanel.setBorder(
+                javax.swing.BorderFactory.createTitledBorder(OStrings.getString("GUI_LANGUAGETOOL_EXTERNAL_SETTINGS"))); // NOI18N
 
         directoryTextField.setToolTipText("");
 
@@ -723,38 +714,39 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
         javax.swing.GroupLayout externalOptionsPanelLayout = new javax.swing.GroupLayout(externalOptionsPanel);
         externalOptionsPanel.setLayout(externalOptionsPanelLayout);
-        externalOptionsPanelLayout.setHorizontalGroup(
-            externalOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(externalOptionsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(externalOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, externalOptionsPanelLayout.createSequentialGroup()
-                        .addComponent(directoryTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(directoryChooseButton))
-                    .addComponent(urlTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(externalOptionsPanelLayout.createSequentialGroup()
-                        .addGroup(externalOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(urlLabel)
-                            .addComponent(localPathLabel))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        externalOptionsPanelLayout.setVerticalGroup(
-            externalOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(externalOptionsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(urlLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(urlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(localPathLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(externalOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(directoryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(directoryChooseButton))
-                .addGap(40, 40, 40))
-        );
+        externalOptionsPanelLayout.setHorizontalGroup(externalOptionsPanelLayout
+                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(externalOptionsPanelLayout.createSequentialGroup().addContainerGap()
+                        .addGroup(externalOptionsPanelLayout
+                                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                        externalOptionsPanelLayout.createSequentialGroup()
+                                                .addComponent(directoryTextField, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                        454, Short.MAX_VALUE)
+                                                .addGap(18, 18, 18).addComponent(directoryChooseButton))
+                                .addComponent(urlTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(externalOptionsPanelLayout.createSequentialGroup()
+                                        .addGroup(externalOptionsPanelLayout
+                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(urlLabel).addComponent(localPathLabel))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap()));
+        externalOptionsPanelLayout.setVerticalGroup(externalOptionsPanelLayout
+                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(externalOptionsPanelLayout.createSequentialGroup().addContainerGap().addComponent(urlLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(urlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 24,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(localPathLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(externalOptionsPanelLayout
+                                .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(directoryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 24,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(directoryChooseButton))
+                        .addGap(40, 40, 40)));
 
         bottomPanel.setPreferredSize(new java.awt.Dimension(631, 40));
 
@@ -816,50 +808,52 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
         javax.swing.GroupLayout rulesPanelLayout = new javax.swing.GroupLayout(rulesPanel);
         rulesPanel.setLayout(rulesPanelLayout);
-        rulesPanelLayout.setHorizontalGroup(
-            rulesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(rulesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
-            .addGroup(rulesPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(addRuleButton)
-                .addGap(18, 18, 18)
-                .addComponent(deleteRuleButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        rulesPanelLayout
+                .setHorizontalGroup(rulesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(rulesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
+                        .addGroup(rulesPanelLayout.createSequentialGroup().addContainerGap().addComponent(addRuleButton)
+                                .addGap(18, 18, 18).addComponent(deleteRuleButton).addContainerGap(
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
-        rulesPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {addRuleButton, deleteRuleButton});
+        rulesPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
+                new java.awt.Component[] { addRuleButton, deleteRuleButton });
 
-        rulesPanelLayout.setVerticalGroup(
-            rulesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(rulesPanelLayout.createSequentialGroup()
-                .addComponent(rulesScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(rulesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addRuleButton)
-                    .addComponent(deleteRuleButton)))
-        );
+        rulesPanelLayout
+                .setVerticalGroup(
+                        rulesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(rulesPanelLayout.createSequentialGroup()
+                                        .addComponent(rulesScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 208,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(rulesPanelLayout
+                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(addRuleButton).addComponent(deleteRuleButton))));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(typePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(externalOptionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(bottomPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
-            .addComponent(rulesPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(typePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(externalOptionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rulesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(typePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                        Short.MAX_VALUE)
+                .addComponent(externalOptionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE,
+                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bottomPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+                .addComponent(rulesPanel, javax.swing.GroupLayout.Alignment.TRAILING,
+                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                        .addComponent(typePanel, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(externalOptionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 138,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rulesPanel, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -899,12 +893,9 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
     private void addRuleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRuleButtonActionPerformed
         String newRuleId = (String) JOptionPane.showInputDialog(this,
-                    OStrings.getString("GUI_LANGUAGETOOL_ADD_RULE_MESSAGE"),
-                    OStrings.getString("GUI_LANGUAGETOOL_ADD_RULE_DIALOG_TITLE"),
-                    JOptionPane.PLAIN_MESSAGE,
-                    null,
-                    null,
-                    null);
+                OStrings.getString("GUI_LANGUAGETOOL_ADD_RULE_MESSAGE"),
+                OStrings.getString("GUI_LANGUAGETOOL_ADD_RULE_DIALOG_TITLE"), JOptionPane.PLAIN_MESSAGE, null, null,
+                null);
 
         if (newRuleId == null) {
             return; // Nothing to do
@@ -947,8 +938,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
     private void deleteRuleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRuleButtonActionPerformed
         TreePath currentSelection = rulesTree.getSelectionPath();
         if (currentSelection != null) {
-            DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode)
-                         (currentSelection.getLastPathComponent());
+            DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) currentSelection.getLastPathComponent();
             if (currentNode instanceof RuleNode && ((RuleNode) currentNode).getRule() instanceof ExternalRule) {
                 DefaultTreeModel model = (DefaultTreeModel) rulesTree.getModel();
                 DefaultMutableTreeNode parent = (DefaultMutableTreeNode) currentNode.getParent();

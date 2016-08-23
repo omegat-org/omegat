@@ -1,4 +1,4 @@
- /**************************************************************************
+/**************************************************************************
  OmegaT - Computer Assisted Translation (CAT) tool
  with fuzzy matching, translation memory, keyword search,
  glossaries, and translation leveraging into updated projects.

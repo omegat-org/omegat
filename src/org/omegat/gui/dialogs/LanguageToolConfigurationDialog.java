@@ -468,11 +468,13 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
         String targetLanguageCode = Core.getProject().getProjectProperties().getTargetLanguage().getLanguageCode();
         disabledCategories = Arrays.asList(Preferences.getPreference(Preferences.LANGUAGETOOL_DISABLED_CATEGORIES).
-                                split(",")).stream().filter(s -> !s.equals("")).collect(Collectors.toSet());
+                split(",")).stream().filter(s -> !s.isEmpty()).collect(Collectors.toSet());
         disabledRuleIds = Arrays.asList(Preferences.getPreference(Preferences.LANGUAGETOOL_DISABLED_RULES_PREFIX + "_" + targetLanguageCode).
-                                split(",")).stream().filter(s -> !s.equals("")).collect(Collectors.toSet());
+                        split(","))
+                .stream().filter(s -> !s.isEmpty()).collect(Collectors.toSet());
         enabledRuleIds = Arrays.asList(Preferences.getPreference(Preferences.LANGUAGETOOL_ENABLED_RULES_PREFIX + "_" + targetLanguageCode).
-                                split(",")).stream().filter(s -> !s.equals("")).collect(Collectors.toSet());
+                        split(","))
+                .stream().filter(s -> !s.isEmpty()).collect(Collectors.toSet());
 
         handleBridgeTypeChange(type);
     }

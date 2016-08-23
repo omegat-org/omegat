@@ -1328,7 +1328,7 @@ public class EditorController implements IEditor {
                 }
             }
             ste = getCurrentEntry();
-            if (ste == null || shouldStop.test(ste)) {
+            if (ste != null && shouldStop.test(ste)) {
             	break;
             }
             if (looped && displayedFileIndex == startFileIndex) {

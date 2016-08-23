@@ -482,12 +482,11 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         Preferences.setPreference(Preferences.LANGUAGETOOL_LOCAL_SERVER_JAR_PATH, directoryTextField.getText());
 
         String targetLanguageCode = Core.getProject().getProjectProperties().getTargetLanguage().getLanguageCode();
-        Preferences.setPreference(Preferences.LANGUAGETOOL_DISABLED_CATEGORIES,
-                disabledCategories.stream().reduce((t, u) -> t + "," + u).orElse(""));
+        Preferences.setPreference(Preferences.LANGUAGETOOL_DISABLED_CATEGORIES, String.join(",", disabledCategories));
         Preferences.setPreference(Preferences.LANGUAGETOOL_ENABLED_RULES_PREFIX + "_" + targetLanguageCode,
-                enabledRuleIds.stream().reduce((t, u) -> t + "," + u).orElse(""));
+                String.join(",", enabledRuleIds));
         Preferences.setPreference(Preferences.LANGUAGETOOL_DISABLED_RULES_PREFIX + "_" + targetLanguageCode,
-                disabledRuleIds.stream().reduce((t, u) -> t + "," + u).orElse(""));
+                String.join(",", disabledRuleIds));
 
         Preferences.setPreference(Preferences.LANGUAGETOOL_BRIDGE_TYPE, selectedBridgeType);
     }

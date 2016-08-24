@@ -343,20 +343,18 @@ task l10n(dependsOn: [l10nMinimalDistZip, l10nFullDistZip]) {
 // We bundle our startup scripts separately, so disable startScripts.
 startScripts.enabled = false
 
-// installDist and installApp insist on installing a script. Trick them with a dummy script.
-[installDist, installApp].each {
-    it.doFirst {
-        startScripts.outputDir.mkdirs()
-        file("${startScripts.outputDir}/${applicationName}").createNewFile()
-        if (it.destinationDir.directory) {
-            file("${it.destinationDir}/bin").mkdirs()
-        }
+// installDist insists on installing a script. Trick them with a dummy script.
+installDist.doFirst {
+    startScripts.outputDir.mkdirs()
+    file("${startScripts.outputDir}/${applicationName}").createNewFile()
+    if (it.destinationDir.directory) {
+        file("${it.destinationDir}/bin").mkdirs()
     }
-    // Delete dummy afterwards.
-    it.doLast {
-        delete "${installDist.destinationDir}/bin"
-        delete startScripts.outputDir
-    }
+}
+// Delete dummy afterwards.
+installDist.doLast {
+    delete "${installDist.destinationDir}/bin"
+    delete startScripts.outputDir
 }
 
 def haveInnoSetup = {
@@ -510,6 +508,9 @@ task checksums {
     inputs.files fileTree(dir: distsDir, exclude: 'checksums')
     def checksumsDir = file("${distsDir}/checksums")
     outputs.dir checksumsDir
+    onlyIf {
+        checksumsDir.directory
+    }
     doLast {
         distsDir.listFiles().findAll { it.file }.each { f ->
             algos.each { algo ->

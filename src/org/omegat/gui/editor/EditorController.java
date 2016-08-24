@@ -413,7 +413,7 @@ public class EditorController implements IEditor {
     };
 
     private synchronized void loadDown(int count) {
-        if (lastLoaded == m_docSegList.length - 1) {
+        if (lastLoaded < 0 || lastLoaded >= m_docSegList.length - 1) {
             return;
         }
         int loadFrom = lastLoaded + 1;
@@ -429,7 +429,7 @@ public class EditorController implements IEditor {
     };
 
     private synchronized void loadUp(int count) {
-        if (firstLoaded == 0) {
+        if (firstLoaded <= 0 || firstLoaded >= m_docSegList.length) {
             return;
         }
         int loadFrom = firstLoaded - 1;
@@ -1328,7 +1328,7 @@ public class EditorController implements IEditor {
                 }
             }
             ste = getCurrentEntry();
-            if (ste == null || shouldStop.test(ste)) {
+            if (ste != null && shouldStop.test(ste)) {
             	break;
             }
             if (looped && displayedFileIndex == startFileIndex) {

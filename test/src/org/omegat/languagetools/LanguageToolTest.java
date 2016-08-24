@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool
-          with fuzzy matching, translation memory, keyword search,
+ OmegaT - Computer Assisted Translation (CAT) tool 
+          with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010-2013 Alex Buloichik
@@ -25,8 +25,8 @@
 
 package org.omegat.languagetools;
 
-import java.io.File;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.Test;
 import org.languagetool.JLanguageTool;
@@ -38,34 +38,18 @@ import org.languagetool.rules.UppercaseSentenceStartRule;
 import org.languagetool.rules.patterns.PatternRule;
 import org.languagetool.rules.spelling.morfologik.MorfologikSpellerRule;
 import org.languagetool.server.HTTPServer;
+import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
 
 import junit.framework.TestCase;
-import org.omegat.core.Core;
-import org.omegat.core.data.ProjectProperties;
-import org.omegat.core.data.RealProject;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class LanguageToolTest extends TestCase {
-
-    private final static String TMP_DIR = "tmp_lt_test";
-    private File projectDir;
-
-    public void setUp() throws Exception {
-        TestPreferencesInitializer.init();
-        projectDir = new File(TMP_DIR);
-        projectDir.mkdir();
-        ProjectProperties props = new ProjectProperties(projectDir);
-        RealProject project = new RealProject(props);
-        Core.setProject(project);
-    }
-
-    public void tearDown() throws Exception {
-        projectDir.delete();
-    }
+    private static final Language SOURCE_LANG = new Language(Locale.FRENCH);
+    private static final Language TARGET_LANG = new Language(Locale.ENGLISH);
 
     @Test
     public void testExecute() throws Exception {
@@ -102,20 +86,22 @@ public class LanguageToolTest extends TestCase {
         HTTPServer server = new HTTPServer();
         server.run();
 
-        new LanguageToolNetworkBridge("http://localhost:8081");
+        new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG, "http://localhost:8081");
 
         server.stop();
     }
 
     public void testWrapperInit() throws Exception {
+        TestPreferencesInitializer.init();
+
         // Defaults: Local implementation
-        ILanguageToolBridge bridge = LanguageToolWrapper.createBridgeFromPrefs();
+        ILanguageToolBridge bridge = LanguageToolWrapper.createBridgeFromPrefs(SOURCE_LANG, TARGET_LANG);
         assertTrue(bridge instanceof LanguageToolNativeBridge);
 
         // Bad URL: fall back to local implementation
         Preferences.setPreference(Preferences.LANGUAGETOOL_BRIDGE_TYPE, LanguageToolWrapper.BridgeType.REMOTE_URL);
         Preferences.setPreference(Preferences.LANGUAGETOOL_REMOTE_URL, "blah");
-        bridge = LanguageToolWrapper.createBridgeFromPrefs();
+        bridge = LanguageToolWrapper.createBridgeFromPrefs(SOURCE_LANG, TARGET_LANG);
         assertTrue(bridge instanceof LanguageToolNativeBridge);
     }
 }

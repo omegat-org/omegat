@@ -24,11 +24,9 @@
  **************************************************************************/
 package org.omegat.languagetools;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.ServerSocket;
@@ -43,7 +41,7 @@ import java.util.stream.Collectors;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
-import org.omegat.core.Core;
+import org.apache.commons.io.IOUtils;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.Language;
@@ -76,7 +74,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
      * @return new LanguageToolNetworkBridge instance
      * @throws java.lang.Exception
      */
-    public LanguageToolNetworkBridge(String url) throws Exception {
+    public LanguageToolNetworkBridge(Language sourceLang, Language targetLang, String url) throws Exception {
         // Try to connect URL
         if (!testServer(url)) {
             Log.logWarningRB("LT_BAD_URL");
@@ -84,7 +82,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
         }
         // OK, URL seems valid, let's use it.
         serverUrl = url;
-        init();
+        init(sourceLang, targetLang);
     }
 
     /**
@@ -97,7 +95,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
      * @return new LanguageToolNetworkBridge instance
      * @throws java.lang.Exception
      */
-    public LanguageToolNetworkBridge(String path, int port) throws Exception {
+    public LanguageToolNetworkBridge(Language sourceLang, Language targetLang, String path, int port) throws Exception {
         // Remember port
         localPort = port;
 
@@ -125,6 +123,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
         // Create thread to consume server output
         new Thread(() -> {
             try (InputStream is = server.getInputStream()) {
+                @SuppressWarnings("unused")
                 int b;
                 while ((b = is.read()) != -1) {
                     // Discard
@@ -155,15 +154,15 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
 
         serverUrl = "http://localhost:" + Integer.toString(port) + URL_PATH;
         Log.log(OStrings.getString("LT_SERVER_STARTED"));
-        init();
+        init(sourceLang, targetLang);
     }
 
     /**
      * Common initialization for both constuctors
      */
-    private void init() {
-        sourceLang = Core.getProject().getProjectProperties().getSourceLanguage();
-        targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
+    private void init(Language sourceLang, Language targetLang) {
+        this.sourceLang = sourceLang;
+        this.targetLang = targetLang;
         engine = new ScriptEngineManager().getEngineByName("javascript");
     }
 
@@ -199,6 +198,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText)
             throws Exception {
 
@@ -212,25 +212,19 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
         }
 
         // Read response into string specially wrapped for Nashorn
-        StringBuilder sb;
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
-            String line;
-            sb = new StringBuilder();
-            sb.append("Java.asJSONCompatible(");
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-            }
-            sb.append(")");
+        String json = "";
+        try (InputStream in = conn.getInputStream()) {
+            json = IOUtils.toString(in);
         }
 
-        Map<String, Object> response = (Map) engine.eval(sb.toString());
-        Map<String, String> software = (Map) response.get("software");
+        Map<String, Object> response = (Map<String, Object>) engine.eval("Java.asJSONCompatible(" + json + ')');
+        Map<String, String> software = (Map<String, String>) response.get("software");
 
         if (!software.get("apiVersion").equals(API_VERSION)) {
             Log.logWarningRB("LT_API_VERSION_MISMATCH");
         }
 
-        List<Map<String,Object>> matches = (List) response.get("matches");
+        List<Map<String, Object>> matches = (List<Map<String, Object>>) response.get("matches");
 
         return matches.stream().map((match) -> {
             int begin, end;

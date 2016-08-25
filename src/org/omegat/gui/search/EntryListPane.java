@@ -293,7 +293,7 @@ class EntryListPane extends JTextPane {
             }
 
             if (!matches.isEmpty()) {
-                SwingUtilities.invokeLater(() -> doMarks());
+                SwingUtilities.invokeLater(this::doMarks);
             }
         }
 
@@ -370,7 +370,7 @@ class EntryListPane extends JTextPane {
             display.clear();
 
             if (!matches.isEmpty()) {
-                SwingUtilities.invokeLater(() -> doMarks());
+                SwingUtilities.invokeLater(this::doMarks);
             }
         }
     }

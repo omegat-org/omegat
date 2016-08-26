@@ -244,7 +244,7 @@ public class DictionaryInstallerDialog extends JDialog {
             for (Object o : selection) {
                 // install the respective dictionaries
                 String item = (String) o;
-                String langCode = (item).substring(0, item.indexOf(" "));
+                String langCode = item.substring(0, item.indexOf(" "));
                 try {
                     dicMan.installRemoteDictionary(langCode);
                     completed.add(item);
@@ -261,13 +261,13 @@ public class DictionaryInstallerDialog extends JDialog {
 
         @Override
         protected void process(List<Object> chunks) {
-            chunks.forEach(o -> listModel.removeElement(o));
+            chunks.forEach(listModel::removeElement);
         }
         
         @Override
         protected void done() {
             try {
-                get().forEach(o -> listModel.removeElement(o));
+                get().forEach(listModel::removeElement);
             } catch (InterruptedException | ExecutionException e) {
                 // Ignore
             }

@@ -58,6 +58,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -403,7 +404,7 @@ public class ProjectFilesListController {
         }
         List<FileInfo> infos = IntStream.of(rows).mapToObj(r -> modelFiles.getDataAtRow(r))
                 .collect(Collectors.toList());
-        if (infos.isEmpty() || infos.stream().anyMatch(i -> i == null)) {
+        if (infos.isEmpty() || infos.stream().anyMatch(Objects::isNull)) {
             return null;
         }
         String sourceDir = Core.getProject().getProjectProperties().getSourceRoot();
@@ -430,24 +431,21 @@ public class ProjectFilesListController {
             modTitle = OStrings.getString(isSource ? "PF_REVEAL_SOURCE_FILE" : "PF_REVEAL_TARGET_FILE");
         }
         JMenuItem item = menu.add(defaultTitle);
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean openParent = (e.getModifiers() & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0;
-                Stream<File> stream;
-                if (openParent) {
-                    stream = files.stream().map(File::getParentFile).distinct().filter(File::isDirectory);
-                } else {
-                    stream = files.stream().filter(File::isFile);
-                }
-                stream.forEach(f -> {
-                    try {
-                        Desktop.getDesktop().open(f);
-                    } catch (IOException ex) {
-                        Log.log(ex);
-                    }
-                });
+        item.addActionListener(e -> {
+            boolean openParent = (e.getModifiers() & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0;
+            Stream<File> stream;
+            if (openParent) {
+                stream = files.stream().map(File::getParentFile).distinct().filter(File::isDirectory);
+            } else {
+                stream = files.stream().filter(File::isFile);
             }
+            stream.forEach(f -> {
+                try {
+                    Desktop.getDesktop().open(f);
+                } catch (IOException ex) {
+                    Log.log(ex);
+                }
+            });
         });
         item.setEnabled(presentFiles > 0);
         item.addMenuKeyListener(new MenuKeyListener() {

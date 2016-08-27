@@ -402,7 +402,8 @@ public class ProjectFilesListController {
             // Otherwise use the clicked row
             rows = new int[] { row };
         }
-        List<FileInfo> infos = IntStream.of(rows).mapToObj(r -> modelFiles.getDataAtRow(r))
+        List<FileInfo> infos = IntStream.of(rows).map(list.tableFiles.getRowSorter()::convertRowIndexToModel)
+                .mapToObj(modelFiles::getDataAtRow)
                 .collect(Collectors.toList());
         if (infos.isEmpty() || infos.stream().anyMatch(Objects::isNull)) {
             return null;

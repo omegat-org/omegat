@@ -39,6 +39,8 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
@@ -102,8 +104,7 @@ import org.openide.awt.Mnemonics;
  * @author Yu Tang
  * @author Aaron Madlon-Kay
  */
-@SuppressWarnings("serial")
-public class ScriptingWindow extends JFrame {
+public class ScriptingWindow {
 
     static ScriptingWindow window;
 
@@ -122,22 +123,26 @@ public class ScriptingWindow extends JFrame {
 
     public static void unloadPlugins() {
         if (window != null) {
-            window.dispose();
+            window.frame.dispose();
         }
     }
-
-    @Override
-    public void dispose() {
-        monitor.stop();
-        super.dispose();
-    }
     
+    final JFrame frame;
+
     public ScriptingWindow() {
-        setTitle(OStrings.getString("SCW_TITLE"));
+        
+        frame = new JFrame(OStrings.getString("SCW_TITLE"));
+        
+        OmegaTIcons.setIconImages(frame);
 
-        OmegaTIcons.setIconImages(this);
+        StaticUIUtils.setEscapeClosable(frame);
 
-        StaticUIUtils.setEscapeClosable(this);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                monitor.stop();
+            }
+        });
 
         setScriptsDirectory(Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY, DEFAULT_SCRIPTS_DIR));
         
@@ -188,12 +193,7 @@ public class ScriptingWindow extends JFrame {
 
         JMenuItem scriptMenu = new JMenuItem();
         Mnemonics.setLocalizedText(scriptMenu, OStrings.getString("TF_MENU_TOOLS_SCRIPTING"));
-        scriptMenu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ScriptingWindow.this.setVisible(true);
-            }
-        });
+        scriptMenu.addActionListener(e -> frame.setVisible(true));
 
         toolsMenu.add(scriptMenu);
 
@@ -299,10 +299,10 @@ public class ScriptingWindow extends JFrame {
 
     private void initWindowLayout() {
         // set default size and position
-        setBounds(50, 80, 1150, 650);
-        StaticUIUtils.persistGeometry(this, Preferences.SCRIPTWINDOW_GEOMETRY_PREFIX);
+        frame.setBounds(50, 80, 1150, 650);
+        StaticUIUtils.persistGeometry(frame, Preferences.SCRIPTWINDOW_GEOMETRY_PREFIX);
 
-        getContentPane().setLayout(new BorderLayout(0, 0));
+        frame.getContentPane().setLayout(new BorderLayout(0, 0));
 
         m_scriptList = new JList<>();
         JScrollPane scrollPaneList = new JScrollPane(m_scriptList);
@@ -352,17 +352,17 @@ public class ScriptingWindow extends JFrame {
         scrollPaneList.setMinimumSize(minimumSize);
         scrollPaneResults.setMinimumSize(minimumSize);
 
-        getContentPane().add(splitPane, BorderLayout.CENTER);
+        frame.getContentPane().add(splitPane, BorderLayout.CENTER);
 
         JPanel panelSouth = new JPanel();
         FlowLayout fl_panelSouth = (FlowLayout) panelSouth.getLayout();
         fl_panelSouth.setAlignment(FlowLayout.LEFT);
-        getContentPane().add(panelSouth, BorderLayout.SOUTH);
+        frame.getContentPane().add(panelSouth, BorderLayout.SOUTH);
         setupRunButtons(panelSouth);
 
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        setJMenuBar(createMenuBar());
+        frame.setJMenuBar(createMenuBar());
     }
 
     private AbstractScriptEditor getScriptEditor() {
@@ -673,7 +673,7 @@ public class ScriptingWindow extends JFrame {
         }
         m_scriptsDirectory = scriptsDir;
         Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, scriptsDir.getPath());
-        OSXIntegration.setProxyIcon(getRootPane(), m_scriptsDirectory);
+        OSXIntegration.setProxyIcon(frame.getRootPane(), m_scriptsDirectory);
 
         if (m_txtScriptsDir != null) {
             m_txtScriptsDir.setText(scriptsDir.getPath());
@@ -762,7 +762,7 @@ public class ScriptingWindow extends JFrame {
             if (m_currentScriptItem == null || m_currentScriptItem.getFile() == null) {
                 JFileChooser chooser = new JFileChooser(m_scriptsDirectory);
                 chooser.setDialogTitle(OStrings.getString("SCW_SAVE_SCRIPT"));
-                int result = chooser.showSaveDialog(ScriptingWindow.this);
+                int result = chooser.showSaveDialog(frame);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     m_currentScriptItem = new ScriptItem(chooser.getSelectedFile());
                 }
@@ -792,7 +792,7 @@ public class ScriptingWindow extends JFrame {
             JFileChooser chooser = new JFileChooser(m_scriptsDirectory);
             chooser.setDialogTitle(OStrings.getString("SCW_SCRIPTS_FOLDER_CHOOSE_TITLE"));
             chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            int result = chooser.showOpenDialog(ScriptingWindow.this);
+            int result = chooser.showOpenDialog(frame);
             if (result == JFileChooser.APPROVE_OPTION) {
                 // we should write the result into the directory text field
                 File file = chooser.getSelectedFile();            
@@ -868,12 +868,9 @@ public class ScriptingWindow extends JFrame {
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_CLOSE"));
         item.setAccelerator(
                 KeyStroke.getKeyStroke(KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-        item.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                    setVisible(false);
-                    dispose();   
-            }
+        item.addActionListener(e -> {
+            frame.setVisible(false);
+            frame.dispose();
         });
         menu.add(item);
         
@@ -893,7 +890,7 @@ public class ScriptingWindow extends JFrame {
     private class SaveSetAction implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
-            String setName = JOptionPane.showInputDialog(ScriptingWindow.this,
+            String setName = JOptionPane.showInputDialog(frame,
                     OStrings.getString("SCW_SAVE_SET_MSG"), OStrings.getString("SCW_MENU_SAVE_SET"),
                     JOptionPane.QUESTION_MESSAGE);
 

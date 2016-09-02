@@ -114,10 +114,7 @@ public class Preferences {
     public static final String PROJECT_FILES_SHOW_ON_LOAD = "project_files_show_on_load";
 
     // Search window size and position
-    public static final String SEARCHWINDOW_WIDTH = "search_window_width";
-    public static final String SEARCHWINDOW_HEIGHT = "search_window_height";
-    public static final String SEARCHWINDOW_X = "search_window_x";
-    public static final String SEARCHWINDOW_Y = "search_window_y";
+    public static final String SEARCHWINDOW_GEOMETRY_PREFIX = "search_window";
     public static final String SEARCHWINDOW_SEARCH_TYPE = "search_window_search_type";
     public static final String SEARCHWINDOW_REPLACE_TYPE = "search_window_replace_type";
     public static final String SEARCHWINDOW_CASE_SENSITIVE = "search_window_case_sensitive";

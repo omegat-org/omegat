@@ -35,12 +35,15 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.WindowEvent;
+import java.util.Optional;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -49,11 +52,13 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
+import javax.swing.Timer;
 import javax.swing.text.Caret;
 import javax.swing.text.DefaultCaret;
 import javax.swing.text.JTextComponent;
 
 import org.omegat.util.Platform;
+import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 
 /**
@@ -267,5 +272,51 @@ public class StaticUIUtils {
                 child.setEnabled(isEnabled);
             }
         }
+    }
+
+    private static Optional<Rectangle> getStoredRectangle(String key) {
+        try {
+            int x = Integer.parseInt(Preferences.getPreference(key + "_x"));
+            int y = Integer.parseInt(Preferences.getPreference(key + "_y"));
+            int w = correctFrameWidth(Integer.parseInt(Preferences.getPreference(key + "_width")));
+            int h = Integer.parseInt(Preferences.getPreference(key + "_height"));
+            return Optional.of(new Rectangle(x, y, w, h));
+        } catch (NumberFormatException e) {
+            return Optional.empty();
+        }
+    }
+
+    public static void persistGeometry(Window window, String key) {
+        persistGeometry(window, key, null);
+    }
+
+    public static void persistGeometry(Window window, String key, Runnable extraProcessing) {
+        getStoredRectangle(key).ifPresent(window::setBounds);
+        String xKey = key + "_x";
+        String yKey = key + "_y";
+        String widthKey = key + "_width";
+        String heightKey = key + "_height";
+        Timer timer = new Timer(500, e -> {
+            Rectangle bounds = window.getBounds();
+            Preferences.setPreference(xKey, bounds.x);
+            Preferences.setPreference(yKey, bounds.y);
+            Preferences.setPreference(widthKey, bounds.width);
+            Preferences.setPreference(heightKey, bounds.height);
+            if (extraProcessing != null) {
+                extraProcessing.run();
+            }
+        });
+        timer.setRepeats(false);
+        window.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                timer.restart();
+            }
+
+            @Override
+            public void componentResized(ComponentEvent e) {
+                timer.restart();
+            }
+        });
     }
 }

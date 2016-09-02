@@ -40,9 +40,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -305,30 +305,14 @@ public class MainWindowUI {
     }
 
     /**
-     * Load the main window layout from the specified file. Convenience method for
-     * {@link #loadScreenLayout(MainWindow, InputStream)}.
+     * Load the main window layout from the specified file. Will reset to
+     * defaults if an error occurs.
      */
     private static void loadScreenLayout(MainWindow mainWindow, File uiLayoutFile) {
-        try {
-            loadScreenLayout(mainWindow, new FileInputStream(uiLayoutFile));
-        } catch (FileNotFoundException ex) {
+        try (InputStream in = new FileInputStream(uiLayoutFile)) {
+            mainWindow.desktop.readXML(in);
+        } catch (Exception ex) {
             Log.log(ex);
-        }
-    }
-    
-    /**
-     * Load the main window layout from the global preferences file. Will reset to defaults
-     * if an error occurs.
-     */
-    private static void loadScreenLayout(MainWindow mainWindow, InputStream in) {
-        try {
-            try {
-                mainWindow.desktop.readXML(in);
-            } finally {
-                in.close();
-            }
-        } catch (Exception e) {
-            Log.log(e);
             resetDesktopLayout(mainWindow);
         }
     }
@@ -350,13 +334,8 @@ public class MainWindowUI {
         Preferences.setPreference(Preferences.MAINWINDOW_WIDTH, mainWindow.getWidth());
         Preferences.setPreference(Preferences.MAINWINDOW_HEIGHT, mainWindow.getHeight());
 
-        try {
-            FileOutputStream out = new FileOutputStream(uiLayoutFile);
-            try {
-                mainWindow.desktop.writeXML(out);
-            } finally {
-                out.close();
-            }
+        try (OutputStream out = new FileOutputStream(uiLayoutFile)) {
+            mainWindow.desktop.writeXML(out);
         } catch (Exception ex) {
             Log.log(ex);
         }
@@ -366,6 +345,10 @@ public class MainWindowUI {
      * Restores main window layout to the default values (distinct from global preferences).
      */
     public static void resetDesktopLayout(MainWindow mainWindow) {
-        loadScreenLayout(mainWindow, MainWindowUI.class.getResourceAsStream("DockingDefaults.xml"));
+        try (InputStream in = MainWindowUI.class.getResourceAsStream("DockingDefaults.xml")) {
+            mainWindow.desktop.readXML(in);
+        } catch (Exception e) {
+            Log.log(e);
+        }
     }
 }

@@ -96,7 +96,6 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
@@ -294,17 +293,6 @@ public class ProjectFilesListController {
                     newFont = defaultFont;
                 }
                 setFont(newFont);
-            }
-        });
-
-        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
-            @Override
-            public void onApplicationStartup() {
-            }
-
-            @Override
-            public void onApplicationShutdown() {
-                saveWindowLayout();
             }
         });
 
@@ -683,33 +671,10 @@ public class ProjectFilesListController {
      * Loads/sets the position and size of the project files window.
      */
     private void initWindowLayout() {
-        // main window
-        try {
-            String dx = Preferences.getPreference(Preferences.PROJECT_FILES_WINDOW_X);
-            String dy = Preferences.getPreference(Preferences.PROJECT_FILES_WINDOW_Y);
-            int x = Integer.parseInt(dx);
-            int y = Integer.parseInt(dy);
-            list.setLocation(x, y);
-            String dw = Preferences.getPreference(Preferences.PROJECT_FILES_WINDOW_WIDTH);
-            String dh = Preferences.getPreference(Preferences.PROJECT_FILES_WINDOW_HEIGHT);
-            int w = Integer.parseInt(dw);
-            int h = Integer.parseInt(dh);
-            list.setSize(w, h);
-        } catch (NumberFormatException nfe) {
-            // set default size and position
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            list.setBounds((screenSize.width - 640) / 2, (screenSize.height - 400) / 2, 640, 400);
-        }
-    }
-
-    /**
-     * Saves the size and position of the project files window
-     */
-    private void saveWindowLayout() {
-        Preferences.setPreference(Preferences.PROJECT_FILES_WINDOW_WIDTH, list.getWidth());
-        Preferences.setPreference(Preferences.PROJECT_FILES_WINDOW_HEIGHT, list.getHeight());
-        Preferences.setPreference(Preferences.PROJECT_FILES_WINDOW_X, list.getX());
-        Preferences.setPreference(Preferences.PROJECT_FILES_WINDOW_Y, list.getY());
+        // set default size and position
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        list.setBounds((screenSize.width - 640) / 2, (screenSize.height - 400) / 2, 640, 400);
+        StaticUIUtils.persistGeometry(list, Preferences.PROJECT_FILES_WINDOW_GEOMETRY_PREFIX);
     }
 
     private void doCancel() {

@@ -103,10 +103,7 @@ public class Preferences {
     public static final String MAINWINDOW_LAYOUT = "docking_layout";
 
     // Project files window size and position
-    public static final String PROJECT_FILES_WINDOW_WIDTH = "project_files_window_width";
-    public static final String PROJECT_FILES_WINDOW_HEIGHT = "project_files_window_height";
-    public static final String PROJECT_FILES_WINDOW_X = "project_files_window_x";
-    public static final String PROJECT_FILES_WINDOW_Y = "project_files_window_y";
+    public static final String PROJECT_FILES_WINDOW_GEOMETRY_PREFIX = "project_files_window";
     // Using the main font for the Project Files window
     public static final String PROJECT_FILES_USE_FONT = "project_files_use_font";
     // Determines whether or not the Project Files window is shown on project load.

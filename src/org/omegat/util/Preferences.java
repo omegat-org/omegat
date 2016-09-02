@@ -99,10 +99,7 @@ public class Preferences {
     public static final String GLOSSARY_REPLACE_ON_INSERT = "glossary_replace_on_insert";
     public static final String DICTIONARY_FUZZY_MATCHING = "dictionary_fuzzy_matching";
 
-    public static final String MAINWINDOW_WIDTH = "screen_width";
-    public static final String MAINWINDOW_HEIGHT = "screen_height";
-    public static final String MAINWINDOW_X = "screen_x";
-    public static final String MAINWINDOW_Y = "screen_y";
+    public static final String MAINWINDOW_GEOMETRY_PREFIX = "screen";
     public static final String MAINWINDOW_LAYOUT = "docking_layout";
 
     // Project files window size and position

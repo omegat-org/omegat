@@ -254,43 +254,32 @@ public class MainWindowUI {
 
     /**
      * Initialize the size of OmegaT window, then load the layout prefs.
-     * <p>
-     * Assume screen size is 800x600 if width less than 900, and 1024x768 if
-     * larger. Assume task bar at bottom of screen. If screen size saved,
-     * recover that and use instead (18may04).
      */
     public static void initializeScreenLayout(MainWindow mainWindow) {
-        int x, y, w, h;
-        // main window
-        try {
-            x = Integer.parseInt(Preferences.getPreference(Preferences.MAINWINDOW_X));
-            y = Integer.parseInt(Preferences.getPreference(Preferences.MAINWINDOW_Y));
-            w = Integer.parseInt(Preferences.getPreference(Preferences.MAINWINDOW_WIDTH));
-            h = Integer.parseInt(Preferences.getPreference(Preferences.MAINWINDOW_HEIGHT));
-        } catch (NumberFormatException nfe) {
-            // size info missing - put window in default position
-            GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            Rectangle scrSize = env.getMaximumWindowBounds();
-            if (scrSize.width < 900) {
-                // assume 800x600
-                x = 0;
-                y = 0;
-                w = 580;
-                h = 536;
-            } else {
-                // assume 1024x768 or larger
-                x = 0;
-                y = 0;
-                w = 690;
-                h = 700;
-            }
-        }
-        w = StaticUIUtils.correctFrameWidth(w);
-        mainWindow.setBounds(x, y, w, h);
+        mainWindow.setBounds(getDefaultBounds());
+        StaticUIUtils.persistGeometry(mainWindow, Preferences.MAINWINDOW_GEOMETRY_PREFIX);
 
         loadScreenLayoutFromPreferences(mainWindow);
     }
     
+    /**
+     * Assume screen size is 800x600 if width less than 900, and 1024x768 if
+     * larger. Assume task bar at bottom of screen. If screen size saved,
+     * recover that and use instead (18may04).
+     */
+    static Rectangle getDefaultBounds() {
+        // size info missing - put window in default position
+        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        Rectangle scrSize = env.getMaximumWindowBounds();
+        if (scrSize.width < 900) {
+            // assume 800x600
+            return new Rectangle(0, 0, 580, 536);
+        } else {
+            // assume 1024x768 or larger
+            return new Rectangle(0, 0, 690, 700);
+        }
+    }
+
     /**
      * Load the main window layout from the global preferences file. Will reset to defaults
      * if global preferences are not present or if an error occurs.
@@ -318,7 +307,7 @@ public class MainWindowUI {
     }
 
     /**
-     * Stores main window layout (width, height, position, etc.) to global preferences.
+     * Stores main window docking layout to disk.
      */
     public static void saveScreenLayout(MainWindow mainWindow) {
         File uiLayoutFile = new File(StaticUtils.getConfigDir(), MainWindowUI.UI_LAYOUT_FILE);
@@ -329,11 +318,6 @@ public class MainWindowUI {
      * Stores main window layout to the specified output file.
      */
     private static void saveScreenLayout(MainWindow mainWindow, File uiLayoutFile) {
-        Preferences.setPreference(Preferences.MAINWINDOW_X, mainWindow.getX());
-        Preferences.setPreference(Preferences.MAINWINDOW_Y, mainWindow.getY());
-        Preferences.setPreference(Preferences.MAINWINDOW_WIDTH, mainWindow.getWidth());
-        Preferences.setPreference(Preferences.MAINWINDOW_HEIGHT, mainWindow.getHeight());
-
         try (OutputStream out = new FileOutputStream(uiLayoutFile)) {
             mainWindow.desktop.writeXML(out);
         } catch (Exception ex) {

@@ -242,6 +242,9 @@ public class DictionaryInstallerDialog extends JDialog {
             List<String> selection = dictionaryList.getSelectedValuesList();
             List<String> completed = new ArrayList<>();
             for (Object o : selection) {
+                if (isCancelled()) {
+                    break;
+                }
                 // install the respective dictionaries
                 String item = (String) o;
                 String langCode = item.substring(0, item.indexOf(" "));

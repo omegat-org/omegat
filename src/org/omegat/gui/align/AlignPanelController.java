@@ -855,7 +855,8 @@ public class AlignPanelController {
         loader = new SwingWorker<List<MutableBead>, Object>() {
             @Override
             protected List<MutableBead> doInBackground() throws Exception {
-                return aligner.alignImpl().map(MutableBead::new).collect(Collectors.toList());
+                return aligner.alignImpl().filter(o -> !isCancelled()).map(MutableBead::new)
+                        .collect(Collectors.toList());
             }
 
             @Override

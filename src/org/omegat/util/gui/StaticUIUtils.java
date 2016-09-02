@@ -43,7 +43,10 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -263,15 +266,23 @@ public class StaticUIUtils {
      * @param isEnabled
      *            Enabled or not
      */
-    public static void setHierarchyEnabled(JComponent parent, boolean isEnabled) {
-        parent.setEnabled(isEnabled);
-        for (Component child : parent.getComponents()) {
-            if (child instanceof JComponent) {
-                setHierarchyEnabled((JComponent) child, isEnabled);
-            } else {
-                child.setEnabled(isEnabled);
+    public static void setHierarchyEnabled(Component parent, boolean isEnabled) {
+        visitHierarchy(parent, c -> c.setEnabled(isEnabled));
+    }
+
+    public static void visitHierarchy(Component parent, Consumer<Component> consumer) {
+        consumer.accept(parent);
+        if (parent instanceof JComponent) {
+            for (Component child : ((JComponent) parent).getComponents()) {
+                visitHierarchy(child, consumer);
             }
         }
+    }
+
+    public static List<Component> listHierarchy(Component parent) {
+        List<Component> cs = new ArrayList<>();
+        visitHierarchy(parent, cs::add);
+        return cs;
     }
 
     private static Optional<Rectangle> getStoredRectangle(String key) {

@@ -26,8 +26,8 @@
 
 package org.omegat.languagetools;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -69,7 +69,8 @@ import org.omegat.util.gui.Styles;
 public class LanguageToolWrapper implements IMarker, IProjectEventListener {
     protected static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
 
-    private JLanguageTool sourceLt, targetLt;
+    private ThreadLocal<JLanguageTool> sourceLt;
+    private ThreadLocal<JLanguageTool> targetLt;
     private List<BitextRule> bRules;
 
     public LanguageToolWrapper() throws Exception {
@@ -86,15 +87,16 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
         case LOAD:
             Optional<Language> sourceLang = getLTLanguage(Core.getProject().getProjectProperties().getSourceLanguage());
             Optional<Language> targetLang = getLTLanguage(Core.getProject().getProjectProperties().getTargetLanguage());
-            sourceLt = sourceLang.flatMap(LanguageToolWrapper::getLanguageToolInstance).orElse(null);
-            targetLt = targetLang.flatMap(LanguageToolWrapper::getLanguageToolInstance).orElse(null);
-            if (sourceLt != null && targetLt != null) {
-                bRules = getBiTextRules(sourceLang.get(), targetLang.get());
-            }
+            sourceLt = ThreadLocal
+                    .withInitial(() -> sourceLang.flatMap(LanguageToolWrapper::getLanguageToolInstance).orElse(null));
+            targetLt = ThreadLocal
+                    .withInitial(() -> targetLang.flatMap(LanguageToolWrapper::getLanguageToolInstance).orElse(null));
+            sourceLang.ifPresent(s -> targetLang.ifPresent(t -> bRules = getBiTextRules(s, t)));
             break;
         case CLOSE:
             sourceLt = null;
             targetLt = null;
+            bRules = null;
             break;
         default:
             // Nothing
@@ -121,12 +123,31 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
             return null;
         }
 
-        JLanguageTool ltSource = sourceLt;
-        JLanguageTool ltTarget = targetLt;
+        // sourceText represents the displayed source text: it may be null (not
+        // displayed) or have extra bidi characters for display. Since we need
+        // it for linguistic comparison here, if it's null then we pull from the
+        // SourceTextEntry, which is guaranteed not to be null.
+        // It doesn't need to be normalized because OmegaT normalizes all source
+        // text to NFC on load.
+        if (sourceText == null) {
+            sourceText = ste.getSrcText();
+        }
+
+        return getRuleMatches(sourceText, translationText).stream().map(match -> {
+            Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, match.getFromPos(), match.getToPos());
+            m.toolTipText = match.getMessage();
+            m.painter = PAINTER;
+            return m;
+        }).collect(Collectors.toList());
+    }
+
+    List<RuleMatch> getRuleMatches(String sourceText, String translationText) throws Exception {
+        JLanguageTool ltTarget = targetLt.get();
         if (ltTarget == null) {
             // LT doesn't know anything about target language
-            return null;
+            return Collections.emptyList();
         }
+        JLanguageTool ltSource = sourceLt.get();
 
         // LanguageTool claims to expect text in NFKC, but that actually causes problems for some rules:
         // https://github.com/languagetool-org/languagetool/issues/379
@@ -136,32 +157,13 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
         // handle the translation here:
         translationText = StringUtil.normalizeUnicode(translationText);
 
-        List<Mark> r = new ArrayList<Mark>();
-        List<RuleMatch> matches;
         if (ltSource != null && bRules != null) {
             // LT knows about source and target languages both and has bitext rules.
-
-            // sourceText represents the displayed source text: it may be null (not displayed) or have extra
-            // bidi characters for display. Since we need it for linguistic comparison here, if it's null then
-            // we pull from the SourceTextEntry, which is guaranteed not to be null.
-            // It doesn't need to be normalized because OmegaT normalizes all source text to NFC on load.
-            if (sourceText == null) {
-                sourceText = ste.getSrcText();
-            }
-            matches = Tools.checkBitext(sourceText, translationText, ltSource, ltTarget, bRules);
+            return Tools.checkBitext(sourceText, translationText, ltSource, ltTarget, bRules);
         } else {
             // LT knows about target language only
-            matches = ltTarget.check(translationText);
+            return ltTarget.check(translationText);
         }
-
-        for (RuleMatch match : matches) {
-            Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, match.getFromPos(), match.getToPos());
-            m.toolTipText = match.getMessage();
-            m.painter = PAINTER;
-            r.add(m);
-        }
-
-        return r;
     }
 
     public static Optional<Language> getLTLanguage(org.omegat.util.Language lang) {

@@ -220,7 +220,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         if (!te.isTranslated() || s.isEmpty()) {
             return null;
         }
-        ErrorReport report = new ErrorReport(ste, te.translation);
+        ErrorReport report = new ErrorReport(ste, te);
 
         // Check printf variables
         if (Preferences.isPreference(Preferences.CHECK_ALL_PRINTF_TAGS)) {

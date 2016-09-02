@@ -32,6 +32,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TMXEntry;
 import org.omegat.util.OStrings;
 import org.omegat.util.TagUtil.Tag;
 
@@ -50,14 +51,34 @@ public class ErrorReport {
 
     final public SourceTextEntry ste;
     final public String source;
+    final public TMXEntry tmxEntry;
     final public String translation;
     final public int entryNum;
 
-    public ErrorReport(SourceTextEntry ste, String translation) {
+    public ErrorReport(SourceTextEntry ste, TMXEntry tmxEntry) {
         this.ste = ste;
-        this.source = ste != null ? ste.getSrcText() : null;
+        this.source = ste.getSrcText();
+        this.tmxEntry = tmxEntry;
+        this.translation = tmxEntry.translation;
+        this.entryNum = ste.entryNum();
+    }
+
+    /**
+     * For testing
+     */
+    ErrorReport() {
+        this((String) null, (String) null);
+    }
+
+    /**
+     * For testing
+     */
+    ErrorReport(String source, String translation) {
+        this.ste = null;
+        this.tmxEntry = null;
+        this.entryNum = -1;
+        this.source = source;
         this.translation = translation;
-        this.entryNum = ste != null ? ste.entryNum() : -1;
     }
 
     public boolean isEmpty() {

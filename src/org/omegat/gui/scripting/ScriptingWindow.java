@@ -532,7 +532,7 @@ public class ScriptingWindow extends JFrame {
         executeScript(scriptString, m_currentScriptItem);
     }
 
-    private class ScriptWorker extends SwingWorker<String, Object> {
+    private class ScriptWorker extends SwingWorker<String, Void> {
 
         private final String scriptString;
         private final ScriptItem scriptItem;

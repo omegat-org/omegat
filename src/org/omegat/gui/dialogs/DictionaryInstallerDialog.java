@@ -103,7 +103,7 @@ public class DictionaryInstallerDialog extends JDialog {
         });
     }
 
-    private class LoaderWorker extends SwingWorker<List<String>,Object> {
+    private class LoaderWorker extends SwingWorker<List<String>, Void> {
 
         @Override
         protected List<String> doInBackground() throws Exception {

@@ -52,6 +52,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
 import org.omegat.util.Platform.OsType;
@@ -389,79 +390,47 @@ public class StaticUtils {
     }
 
     /**
-     * Escapes the passed string for use in regex matching, so special regex
-     * characters are interpreted as normal characters during regex searches.
-     *
-     * This is done by prepending a backslash before each occurrence of the
-     * following characters: \^.*+[]{}()&|-:=?!<>
+     * Translates a string containing word-processing "glob"-style wildcards
+     * (<code>?</code> matches a single non-whitespace character, <code>*</code>
+     * matches zero or more non-whitespace characters) to standard regex.
+     * <ul>
+     * <li><code>?</code> is translated to <code>\S</code>
+     * <li><code>*</code> is translated to <code>\S*</code>
+     * <li>All other special regex characters are escaped as literals
+     * </ul>
      *
      * @param text
      *            The text to escape
      *
      * @return The escaped text
      */
-    public static String escapeNonRegex(String text) {
-        return escapeNonRegex(text, true);
-    }
+    public static String globToRegex(String text) {
+        String quoted = Pattern.quote(text);
 
-    /**
-     * Escapes the passed string for use in regex matching, so special regex
-     * characters are interpreted as normal characters during regex searches.
-     *
-     * This is done by prepending a backslash before each occurrence of the
-     * following characters: \^.+[]{}()&|-:=!<>
-     *
-     * If the parameter escapeWildcards is true, asterisks (*) and questions
-     * marks (?) will also be escaped. If false, these will be converted to
-     * regex tokens (* ->
-     *
-     * @param text
-     *            The text to escape
-     * @param escapeWildcards
-     *            If true, asterisks and question marks are also escaped. If
-     *            false, these are converted to there regex equivalents.
-     *
-     * @return The escaped text
-     */
-    public static String escapeNonRegex(String text, boolean escapeWildcards) {
-        // handle backslash
-        text = text.replaceAll("\\\\", "\\\\\\\\"); // yes, that's the correct
-                                                    // nr of backslashes
+        StringBuilder sb = new StringBuilder(quoted);
 
-        // [3021915] Search window - search items containing $ behave strangely
-        // If $ is included in "escape" below, it creates a
-        // java.lang.StringIndexOutOfBoundsException: String index out of range:
-        // 3
-        // See http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=5024613
-        text = text.replace("$", "\\" + "$");
+        // We should blow up if the standard library implementation ever
+        // switches to a scheme other than using \Q and \E.
+        assert quoted.startsWith("\\Q");
+        assert quoted.endsWith("\\E");
 
-        // handle rest of characters to be escaped
-        // String escape = "^.*+[]{}()&|-:=?!<>";
-        for (char c : "^.+[]{}()&|-:=!<>".toCharArray()) {
-            text = text.replaceAll("\\" + c, "\\\\" + c);
+        int current = 0;
+        int globIndex = 0;
+        String replacement = "\\E\\S*\\Q";
+        while ((globIndex = sb.indexOf("*", current)) != -1) {
+            sb.replace(globIndex, globIndex + 1, replacement);
+            current = globIndex + replacement.length();
         }
 
-        // handle "wildcard characters" ? and * (only if requested)
-        // do this last, or the additional period (.) will cause trouble
-        if (escapeWildcards) {
-            // simply escape * and ?
-            text = text.replaceAll("\\?", "\\\\?");
-            text = text.replaceAll("\\*", "\\\\*");
-        } else {
-            // convert * (0 or more characters) and ? (1 character)
-            // to their regex equivalents (\S* and \S? respectively)
-            // text = text.replaceAll("\\?", "\\S?"); // do ? first, or * will
-            // be converted twice
-            // text = text.replaceAll("\\*", "\\S*");
-            // The above lines were not working:
-            // [ 1680081 ] Search: simple wilcards do not work
-            // The following correction was contributed by Tiago Saboga
-            text = text.replaceAll("\\?", "\\\\S"); // do ? first, or * will be
-                                                    // converted twice
-            text = text.replaceAll("\\*", "\\\\S*");
+        current = 0;
+        globIndex = 0;
+        replacement = "\\E\\S\\Q";
+        while ((globIndex = sb.indexOf("?", current)) != -1) {
+            sb.replace(globIndex, globIndex + 1, replacement);
+            current = globIndex + replacement.length();
         }
 
-        return text;
+        return sb.toString();
     }
 
     /**

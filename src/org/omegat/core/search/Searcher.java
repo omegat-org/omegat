@@ -188,7 +188,7 @@ public class Searcher {
         default:
             // escape the search string, it's not supposed to be a regular
             // expression
-            text = StaticUtils.escapeNonRegex(text, false);
+            text = StaticUtils.globToRegex(text);
 
             // space match nbsp (\u00a0)
             if (expression.spaceMatchNbsp) {
@@ -216,7 +216,7 @@ public class Searcher {
                     if (!word.isEmpty()) {
                         // escape the word, if it's not supposed to be a regular
                         // expression
-                        word = StaticUtils.escapeNonRegex(word, false);
+                        word = StaticUtils.globToRegex(word);
 
                         // create a matcher for the word
                         m_matchers.add(Pattern.compile(word, flags).matcher(""));
@@ -239,8 +239,9 @@ public class Searcher {
             break;
         }
         // create a matcher for the author search string
-        if (expression.searchExpressionType != SearchExpression.SearchExpressionType.REGEXP)
-            author = StaticUtils.escapeNonRegex(author, false);
+        if (expression.searchExpressionType != SearchExpression.SearchExpressionType.REGEXP) {
+            author = StaticUtils.globToRegex(author);
+        }
 
         m_author = Pattern.compile(author, flags).matcher("");
 

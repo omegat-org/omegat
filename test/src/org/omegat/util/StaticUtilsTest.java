@@ -28,6 +28,7 @@
 package org.omegat.util;
 
 import java.io.File;
+import java.util.regex.Pattern;
 
 import junit.framework.TestCase;
 
@@ -64,5 +65,20 @@ public class StaticUtilsTest extends TestCase {
         for (String dir : new String[] { "src", "docs", "lib" }) {
             assertTrue(new File(installDir, dir).isDirectory());
         }
+    }
+
+    public void testGlobToRegex() {
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("ab?d"), "abcd"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("ab?d"), "abd"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("ab*d"), "abcccccd"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("ab*d"), "abd"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("ab*d"), "abde"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("ab*"), "abdefg"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("$a[b-c]!?*d{}"), "$a[b-c]!?1234d{}"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("a?"), "a b"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a ?"), "a b"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("a*"), "a b"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a* b"), "a b"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("a*b"), "a b"));
     }
 }

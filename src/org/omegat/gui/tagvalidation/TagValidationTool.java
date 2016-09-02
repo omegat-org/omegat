@@ -28,11 +28,12 @@
 package org.omegat.gui.tagvalidation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -261,20 +262,20 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         }
 
         // Sort the map first to ensure that fixing works properly.
-        Map<Tag, TagError> sortedErrors = new TreeMap<Tag, TagError>(new Comparator<Tag>() {
+        List<Entry<Tag, TagError>> sortedErrors = new ArrayList<Entry<Tag, TagError>>();
+        sortedErrors.addAll(report.srcErrors.entrySet());
+        sortedErrors.addAll(report.transErrors.entrySet());
+        Collections.sort(sortedErrors, new Comparator<Entry<Tag, TagError>>() {
             @Override
-            public int compare(Tag o1, Tag o2) {
-                return o1.pos < o2.pos ? -1
-                        : o1.pos > o2.pos ? 1
+            public int compare(Entry<Tag, TagError> o1, Entry<Tag, TagError> o2) {
+                return o1.getKey().pos < o2.getKey().pos ? -1 : o1.getKey().pos > o2.getKey().pos ? 1
                         : 0;
             }
         });
-        sortedErrors.putAll(report.srcErrors);
-        sortedErrors.putAll(report.transErrors);
 
         StringBuilder sb = new StringBuilder(report.translation);
 
-        for (Map.Entry<Tag, TagError> e : sortedErrors.entrySet()) {
+        for (Entry<Tag, TagError> e : sortedErrors) {
             TagRepair.fixTag(report.ste, e.getKey(), e.getValue(), sb, report.source);
         }
 

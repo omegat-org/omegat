@@ -285,11 +285,8 @@ public class Preferences {
     public static final String SCRIPTS_QUICK_0 = "scripts_quick_0";
 
     /** Script window */
-    public static final String SCRIPTWINDOW_WIDTH = "script_window_width";
-    public static final String SCRIPTWINDOW_HEIGHT = "script_window_height";
-    public static final String SCRIPTWINDOW_X = "script_window_x";
-    public static final String SCRIPTWINDOW_Y = "script_window_y";
-    
+    public static final String SCRIPTWINDOW_GEOMETRY_PREFIX = "script_window";
+
     /** Most recent projects list */
     public static final String MOST_RECENT_PROJECTS_SIZE = "most_recent_projects_size";
     public static final String MOST_RECENT_PROJECTS_PREFIX = "most_recent_projects_";

@@ -41,6 +41,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
@@ -50,11 +51,13 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.tokenizer.ITokenizer.StemmingMode;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.Token;
 
 /**
  * Common spell checker interface for use any spellchecker providers.
@@ -407,5 +410,11 @@ public class SpellChecker implements ISpellChecker {
     private static String normalize(String word) {
         // U+2019 RIGHT SINGLE QUOTATION MARK to U+0027 APOSTROPHE
         return word.replace('\u2019', '\'');
+    }
+
+    @Override
+    public List<Token> getMisspelledTokens(String text) {
+        return Stream.of(Core.getProject().getTargetTokenizer().tokenizeWords(text, StemmingMode.NONE))
+                .filter(tok -> !isCorrect(tok.getTextFromString(text))).collect(Collectors.toList());
     }
 }

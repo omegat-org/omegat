@@ -2,7 +2,7 @@
  OmegaT 3.6.0 update 3
 ----------------------------------------------------------------------
   0 Enhancement
-  3 Bug fixes
+  4 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
 3.6.0 update 3 vs 3.6.0 update 2
@@ -16,6 +16,8 @@
 
   - Incorrect search result highlighting with custom colors
   https://sourceforge.net/p/omegat/bugs/835/
+
+  - Tag fix failure when tag has same offset in source and target
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 2 (2016-07-27)

@@ -393,18 +393,27 @@ public class StaticUtils {
      * Translates a string containing word-processing "glob"-style wildcards
      * (<code>?</code> matches a single non-whitespace character, <code>*</code>
      * matches zero or more non-whitespace characters) to standard regex.
+     * <p>
+     * If <code>spaceMatchesNbsp</code> is <code>true</code>, non-breaking
+     * spaces (<code>U+00A0</code>) will also be considered whitespace.
      * <ul>
-     * <li><code>?</code> is translated to <code>\S</code>
-     * <li><code>*</code> is translated to <code>\S*</code>
+     * <li><code>?</code> is translated to <code>\S</code> (or
+     * <code>[^\s\u00A0]</code>)
+     * <li><code>*</code> is translated to <code>\S*</code> (or
+     * <code>[^\s\u00A0]*</code>)
+     * <li>If <code>spaceMatchesNbsp</code> is <code>true</code>, then
+     * '<code> </code>' is translated to <code>( |\u00A0)</code>
      * <li>All other special regex characters are escaped as literals
      * </ul>
      *
      * @param text
      *            The text to escape
-     *
+     * @param spaceMatchesNbsp
+     *            Whether to consider regular spaces to also match non-breaking
+     *            spaces
      * @return The escaped text
      */
-    public static String globToRegex(String text) {
+    public static String globToRegex(String text, boolean spaceMatchesNbsp) {
         String quoted = Pattern.quote(text);
 
         StringBuilder sb = new StringBuilder(quoted);
@@ -414,23 +423,26 @@ public class StaticUtils {
         assert quoted.startsWith("\\Q");
         assert quoted.endsWith("\\E");
 
-        int current = 0;
-        int globIndex = 0;
-        String replacement = "\\E\\S*\\Q";
-        while ((globIndex = sb.indexOf("*", current)) != -1) {
-            sb.replace(globIndex, globIndex + 1, replacement);
-            current = globIndex + replacement.length();
-        }
-
-        current = 0;
-        globIndex = 0;
-        replacement = "\\E\\S\\Q";
-        while ((globIndex = sb.indexOf("?", current)) != -1) {
-            sb.replace(globIndex, globIndex + 1, replacement);
-            current = globIndex + replacement.length();
+        if (spaceMatchesNbsp) {
+            replaceGlobs(sb, " ", "( |\u00A0)");
+            replaceGlobs(sb, "*", "[^\\s\u00A0]*");
+            replaceGlobs(sb, "?", "[^\\s\u00A0]");
+        } else {
+            replaceGlobs(sb, "*", "\\S*");
+            replaceGlobs(sb, "?", "\\S");
         }
 
         return sb.toString();
+    }
+
+    private static void replaceGlobs(StringBuilder haystack, String needle, String replacement) {
+        replacement = "\\E" + replacement + "\\Q";
+        int current = 0;
+        int globIndex = 0;
+        while ((globIndex = haystack.indexOf(needle, current)) != -1) {
+            haystack.replace(globIndex, globIndex + 1, replacement);
+            current = globIndex + replacement.length();
+        }
     }
 
     /**

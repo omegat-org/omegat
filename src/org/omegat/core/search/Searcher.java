@@ -188,12 +188,7 @@ public class Searcher {
         default:
             // escape the search string, it's not supposed to be a regular
             // expression
-            text = StaticUtils.globToRegex(text);
-
-            // space match nbsp (\u00a0)
-            if (expression.spaceMatchNbsp) {
-                text = text.replaceAll(" ", "( |\u00A0)");
-            }
+            text = StaticUtils.globToRegex(text, expression.spaceMatchNbsp);
 
             // create a matcher for the search string
             m_matchers.add(Pattern.compile(text, flags).matcher(""));
@@ -201,31 +196,10 @@ public class Searcher {
         case KEYWORD:
             // break the search string into keywords,
             // each of which is a separate search string
-            text = text.trim();
-            if (!text.isEmpty()) {
-                int wordStart = 0;
-                while (wordStart < text.length()) {
-                    // get the location of the next space
-                    int spacePos = text.indexOf(' ', wordStart);
-
-                    // get the next word
-                    String word = (spacePos == -1) // last word reached
-                    ? text.substring(wordStart, text.length()).trim()
-                            : text.substring(wordStart, spacePos).trim();
-
-                    if (!word.isEmpty()) {
-                        // escape the word, if it's not supposed to be a regular
-                        // expression
-                        word = StaticUtils.globToRegex(word);
-
-                        // create a matcher for the word
-                        m_matchers.add(Pattern.compile(word, flags).matcher(""));
-                    }
-
-                    // set the position for the start of the next word
-                    wordStart = (spacePos == -1) ? text.length() : spacePos + 1;
-                }
-            }
+            Pattern.compile(" ").splitAsStream(text.trim()).filter(word -> !word.isEmpty()).map(word -> {
+                String glob = StaticUtils.globToRegex(word, false);
+                return Pattern.compile(glob, flags).matcher("");
+            }).forEach(m_matchers::add);
             break;
         case REGEXP:
             // space match nbsp (\u00a0)
@@ -240,7 +214,7 @@ public class Searcher {
         }
         // create a matcher for the author search string
         if (expression.searchExpressionType != SearchExpression.SearchExpressionType.REGEXP) {
-            author = StaticUtils.globToRegex(author);
+            author = StaticUtils.globToRegex(author, expression.spaceMatchNbsp);
         }
 
         m_author = Pattern.compile(author, flags).matcher("");

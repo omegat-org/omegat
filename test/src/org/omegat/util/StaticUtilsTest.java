@@ -68,17 +68,29 @@ public class StaticUtilsTest extends TestCase {
     }
 
     public void testGlobToRegex() {
-        assertTrue(Pattern.matches(StaticUtils.globToRegex("ab?d"), "abcd"));
-        assertFalse(Pattern.matches(StaticUtils.globToRegex("ab?d"), "abd"));
-        assertTrue(Pattern.matches(StaticUtils.globToRegex("ab*d"), "abcccccd"));
-        assertTrue(Pattern.matches(StaticUtils.globToRegex("ab*d"), "abd"));
-        assertFalse(Pattern.matches(StaticUtils.globToRegex("ab*d"), "abde"));
-        assertTrue(Pattern.matches(StaticUtils.globToRegex("ab*"), "abdefg"));
-        assertTrue(Pattern.matches(StaticUtils.globToRegex("$a[b-c]!?*d{}"), "$a[b-c]!?1234d{}"));
-        assertFalse(Pattern.matches(StaticUtils.globToRegex("a?"), "a b"));
-        assertTrue(Pattern.matches(StaticUtils.globToRegex("a ?"), "a b"));
-        assertFalse(Pattern.matches(StaticUtils.globToRegex("a*"), "a b"));
-        assertTrue(Pattern.matches(StaticUtils.globToRegex("a* b"), "a b"));
-        assertFalse(Pattern.matches(StaticUtils.globToRegex("a*b"), "a b"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("ab?d", false), "abcd"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("ab?d", false), "abd"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("ab*d", false), "abcccccd"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("ab*d", false), "abd"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("ab*d", false), "abde"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("ab*", false), "abdefg"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("$a[b-c]!?*d{}", false), "$a[b-c]!?1234d{}"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("a?", false), "a b"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a ?", false), "a b"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("a*", false), "a b"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a* b", false), "a b"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a* b", true), "a b"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("a*b", false), "a b"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a*b", false), "a\u00A0b"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("a*b", true), "a\u00A0b"));
+
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a b", false), "a b"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a b", true), "a b"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("a b", false), "a\u00A0b"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a b", true), "a\u00A0b"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("a *", false), "a\u00A0b"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a *", true), "a\u00A0b"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("a ?", false), "a\u00A0b"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a ?", true), "a\u00A0b"));
     }
 }

@@ -1030,7 +1030,9 @@ public class MainWindowMenuHandler {
      * Opens the LanguageTool window
      */
     public void optionsLanguageToolMenuItemActionPerformed() {
-        LanguageToolConfigurationDialog ld = new LanguageToolConfigurationDialog(mainWindow, true);
+        LanguageToolConfigurationDialog ld = new LanguageToolConfigurationDialog(mainWindow, true,
+                Core.getProject().getProjectProperties().getSourceLanguage(),
+                Core.getProject().getProjectProperties().getTargetLanguage());
 
         ld.setVisible(true);
     }

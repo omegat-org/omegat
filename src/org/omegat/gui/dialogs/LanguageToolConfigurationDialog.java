@@ -64,7 +64,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.languagetool.AnalyzedSentence;
 import org.languagetool.JLanguageTool;
-import org.languagetool.Language;
 import org.languagetool.rules.Category;
 import org.languagetool.rules.CategoryId;
 import org.languagetool.rules.Rule;
@@ -72,6 +71,7 @@ import org.languagetool.rules.RuleMatch;
 import org.languagetool.tools.Tools;
 import org.omegat.core.Core;
 import org.omegat.languagetools.LanguageToolWrapper.BridgeType;
+import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.StaticUIUtils;
@@ -368,7 +368,8 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
     /**
      * Creates new form LanguageToolConfigurationDialog
      */
-    public LanguageToolConfigurationDialog(java.awt.Frame parent, boolean modal) {
+    public LanguageToolConfigurationDialog(java.awt.Frame parent, boolean modal, Language sourceLang,
+            Language targetLang) {
         super(parent, modal);
         StaticUIUtils.setEscapeClosable(this);
         initComponents();
@@ -377,21 +378,21 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         loadPreferences();
 
         // Load rule tree
-        Optional<Language> targetLang = getLTLanguage(Core.getProject().getProjectProperties().getTargetLanguage());
-        Optional<Language> sourceLang = getLTLanguage(Core.getProject().getProjectProperties().getSourceLanguage());
+        Optional<org.languagetool.Language> targetLtLang = getLTLanguage(targetLang);
+        Optional<org.languagetool.Language> sourceLtLang = getLTLanguage(sourceLang);
 
         // Disable tree and return if targetLang wasn't found
-        if (!targetLang.isPresent()) {
+        if (!targetLtLang.isPresent()) {
             ((DefaultTreeModel) rulesTree.getModel()).setRoot(null);
             rulesTree.setEnabled(false);
             return;
         }
 
-        JLanguageTool ltInstance = new JLanguageTool(targetLang.get());
+        JLanguageTool ltInstance = new JLanguageTool(targetLtLang.get());
         List<Rule> rules = ltInstance.getAllRules();
-        if (sourceLang.isPresent()) {
+        if (sourceLtLang.isPresent()) {
             try {
-                rules.addAll(Tools.getBitextRules(sourceLang.get(), targetLang.get()));
+                rules.addAll(Tools.getBitextRules(sourceLtLang.get(), targetLtLang.get()));
             } catch (IOException | ParserConfigurationException | SAXException e) {
                 // Do nothing
             }
@@ -407,7 +408,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
         DefaultMutableTreeNode rootNode = createTree(rules);
         rulesTree.setModel(getTreeModel(rootNode));
-        rulesTree.applyComponentOrientation(ComponentOrientation.getOrientation(targetLang.get().getLocale()));
+        rulesTree.applyComponentOrientation(ComponentOrientation.getOrientation(targetLtLang.get().getLocale()));
         rulesTree.setRootVisible(false);
         rulesTree.setEditable(false);
         rulesTree.setCellRenderer(new CheckBoxTreeCellRenderer());

@@ -38,9 +38,9 @@
       </itemizedlist></para>
 
     <para>Par exemple, pour les raccourcis par défaut d'OmegaT<footnote>
-        <para>Les raccourcis par défaut d'OmegaT sont disponibles sur Sourceforge à partir de : <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties">Raccourcis clavier d'OmegaT par défaut</ulink></para>
+        <para>Les raccourcis par défaut d'OmegaT sont disponibles sur Sourceforge à partir de : <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/branches/release-3-6/src/org/omegat/gui/main/MainMenuShortcuts.properties">Raccourcis clavier d'OmegaT par défaut</ulink></para>
 
-        <para>Les raccourcis par défaut d'OmegaT sur Mac sont également disponibles sur Sourceforge, ils utilisent tous « meta » à la place de « ctrl » : <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Raccourcis clavier d'OmegaT par défaut sur Mac</ulink></para>
+        <para>Les raccourcis par défaut d'OmegaT sur Mac sont également disponibles sur Sourceforge, ils utilisent tous « meta » à la place de « ctrl » : <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/branches/release-3-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Raccourcis clavier d'OmegaT par défaut sur Mac</ulink></para>
       </footnote>, on peut trouver :</para>
 
     <itemizedlist>

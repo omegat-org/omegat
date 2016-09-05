@@ -68,6 +68,9 @@ public class LanguageToolWrapper {
 
     private static volatile ILanguageToolBridge BRIDGE;
 
+    private LanguageToolWrapper() {
+    }
+
     public static void init() {
 
         Core.registerMarker(new LanguageToolMarker());

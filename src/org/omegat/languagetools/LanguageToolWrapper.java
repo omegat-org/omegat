@@ -121,7 +121,9 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
 
     @Override
     public synchronized void onApplicationShutdown() {
-        bridge.stop();
+        if (bridge != null) {
+            bridge.stop();
+        }
     }
 
     @Override
@@ -143,6 +145,7 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
             break;
         case CLOSE:
             bridge.stop();
+            bridge = null;
             break;
         default:
             // Nothing

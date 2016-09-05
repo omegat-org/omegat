@@ -78,6 +78,18 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
     }
 
     /**
+     * Set this instance's LanguageTool bridge based on the current project.
+     */
+    void setBridgeFromCurrentProject() {
+        if (bridge != null) {
+            bridge.stop();
+        }
+        Language sourceLang = Core.getProject().getProjectProperties().getSourceLanguage();
+        Language targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
+        bridge = createBridgeFromPrefs(sourceLang, targetLang);
+    }
+
+    /**
      * Create LanguageTool bridge based on user preferences. Falls back to
      * {@link BridgeType#NATIVE} if non-native bridges fail to initialize (bad
      * config, etc.).
@@ -139,9 +151,7 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
         switch (eventType) {
         case CREATE:
         case LOAD:
-            Language sourceLang = Core.getProject().getProjectProperties().getSourceLanguage();
-            Language targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
-            bridge = createBridgeFromPrefs(sourceLang, targetLang);
+            setBridgeFromCurrentProject();
             break;
         case CLOSE:
             bridge.stop();
@@ -190,10 +200,7 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
         // This property is changed in the end of configuration dialog saving,
         // so at this point every other related properties are already changed.
         if (evt.getPropertyName().equals(Preferences.LANGUAGETOOL_BRIDGE_TYPE)) {
-            bridge.stop();
-            Language sourceLang = Core.getProject().getProjectProperties().getSourceLanguage();
-            Language targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
-            bridge = createBridgeFromPrefs(sourceLang, targetLang);
+            setBridgeFromCurrentProject();
         }
     }
 }

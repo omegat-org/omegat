@@ -28,7 +28,6 @@ package org.omegat.languagetools;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -81,7 +80,7 @@ public class LanguageToolNativeBridge implements ILanguageToolBridge {
                 map(p -> new CategoryId(p)).collect(Collectors.toSet());
         Set<String> dr = Arrays.asList(disabledRules.split(",")).stream().collect(Collectors.toSet());
         Set<String> er = Arrays.asList(enabledRules.split(",")).stream().collect(Collectors.toSet());
-        Tools.selectRules(targetLt.get(), dc, new HashSet<>(), dr, er, false);
+        Tools.selectRules(targetLt.get(), dc, Collections.emptySet(), dr, er, false);
         if (bRules != null) {
             bRules = bRules.stream().filter(rule -> !dr.contains(rule.getId())).collect(Collectors.toList());
         }

@@ -73,13 +73,14 @@ public class LanguageToolNativeBridge implements ILanguageToolBridge {
 
     @Override
     public void applyRuleFilters(String disabledCategories, String disabledRules, String enabledRules) {
-        if (targetLt == null) {
+        JLanguageTool ltTarget = targetLt.get();
+        if (ltTarget == null) {
             return;
         }
         Set<CategoryId> dc = Stream.of(disabledCategories.split(",")).map(CategoryId::new).collect(Collectors.toSet());
         Set<String> dr = Stream.of(disabledRules.split(",")).collect(Collectors.toSet());
         Set<String> er = Stream.of(enabledRules.split(",")).collect(Collectors.toSet());
-        Tools.selectRules(targetLt.get(), dc, Collections.emptySet(), dr, er, false);
+        Tools.selectRules(ltTarget, dc, Collections.emptySet(), dr, er, false);
         if (bRules != null) {
             bRules = bRules.stream().filter(rule -> !dr.contains(rule.getId())).collect(Collectors.toList());
         }

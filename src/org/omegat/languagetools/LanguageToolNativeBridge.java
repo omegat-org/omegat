@@ -26,12 +26,12 @@
  **************************************************************************/
 package org.omegat.languagetools;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
@@ -76,10 +76,9 @@ public class LanguageToolNativeBridge implements ILanguageToolBridge {
         if (targetLt == null) {
             return;
         }
-        Set<CategoryId> dc = Arrays.asList(disabledCategories.split(",")).stream().
-                map(p -> new CategoryId(p)).collect(Collectors.toSet());
-        Set<String> dr = Arrays.asList(disabledRules.split(",")).stream().collect(Collectors.toSet());
-        Set<String> er = Arrays.asList(enabledRules.split(",")).stream().collect(Collectors.toSet());
+        Set<CategoryId> dc = Stream.of(disabledCategories.split(",")).map(CategoryId::new).collect(Collectors.toSet());
+        Set<String> dr = Stream.of(disabledRules.split(",")).collect(Collectors.toSet());
+        Set<String> er = Stream.of(enabledRules.split(",")).collect(Collectors.toSet());
         Tools.selectRules(targetLt.get(), dc, Collections.emptySet(), dr, er, false);
         if (bRules != null) {
             bRules = bRules.stream().filter(rule -> !dr.contains(rule.getId())).collect(Collectors.toList());

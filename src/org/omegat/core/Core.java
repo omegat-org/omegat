@@ -237,7 +237,8 @@ public class Core {
         Core.registerMarker(new ReplaceMarker());
         Core.registerMarker(new ComesFromAutoTMMarker());
         Core.registerMarker(new FontFallbackMarker());
-        Core.registerMarker(new LanguageToolWrapper());
+
+        LanguageToolWrapper.init();
 
         segmenter = new Segmenter(Preferences.getSRX());
         filterMaster = new FilterMaster(Preferences.getFilters());

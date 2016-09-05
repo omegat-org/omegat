@@ -62,7 +62,6 @@ import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreePath;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jetbrains.annotations.NotNull;
 import org.languagetool.AnalyzedSentence;
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
@@ -529,7 +528,6 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         return ret;
     }
 
-    @NotNull
     private DefaultTreeModel getTreeModel(DefaultMutableTreeNode rootNode) {
         DefaultTreeModel treeModel = new DefaultTreeModel(rootNode);
         treeModel.addTreeModelListener(new TreeModelListener() {

@@ -380,15 +380,16 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         // Load rule tree
         Optional<org.languagetool.Language> targetLtLang = getLTLanguage(targetLang);
         Optional<org.languagetool.Language> sourceLtLang = getLTLanguage(sourceLang);
-
-        // Disable tree and return if targetLang wasn't found
-        if (!targetLtLang.isPresent()) {
+        JLanguageTool ltInstance;
+        try {
+            ltInstance = new JLanguageTool(targetLtLang.get());
+        } catch (Throwable e) {
+            // Disable tree and return if instance couldn't be gotten
             ((DefaultTreeModel) rulesTree.getModel()).setRoot(null);
             rulesTree.setEnabled(false);
             return;
         }
 
-        JLanguageTool ltInstance = new JLanguageTool(targetLtLang.get());
         List<Rule> rules = ltInstance.getAllRules();
         sourceLtLang.ifPresent(srcLtLang -> {
             try {

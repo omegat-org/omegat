@@ -37,7 +37,6 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -45,6 +44,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
@@ -390,21 +390,22 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
         JLanguageTool ltInstance = new JLanguageTool(targetLtLang.get());
         List<Rule> rules = ltInstance.getAllRules();
-        if (sourceLtLang.isPresent()) {
+        sourceLtLang.ifPresent(srcLtLang -> {
             try {
-                rules.addAll(Tools.getBitextRules(sourceLtLang.get(), targetLtLang.get()));
+                rules.addAll(Tools.getBitextRules(srcLtLang, targetLtLang.get()));
             } catch (IOException | ParserConfigurationException | SAXException e) {
                 // Do nothing
             }
-        }
+        });
+
         // Collect internal rule IDs
         List<String> internalRuleIds = rules.stream().map(Rule::getId).collect(Collectors.toList());
         // Create ExternalRule instances for rules not found in built-in LT
         // and add them to our rules list
         List<String> externalRuleIds = new ArrayList<>(disabledRuleIds);
         externalRuleIds.addAll(enabledRuleIds);
-        rules.addAll(externalRuleIds.stream().distinct().filter(p -> !internalRuleIds.contains(p))
-                .map(ExternalRule::new).collect(Collectors.toList()));
+        externalRuleIds.removeAll(internalRuleIds);
+        externalRuleIds.stream().distinct().map(ExternalRule::new).forEach(rules::add);
 
         DefaultMutableTreeNode rootNode = createTree(rules);
         rulesTree.setModel(getTreeModel(rootNode));
@@ -459,15 +460,15 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         directoryTextField.setText(Preferences.getPreference(Preferences.LANGUAGETOOL_LOCAL_SERVER_JAR_PATH));
 
         String targetLanguageCode = Core.getProject().getProjectProperties().getTargetLanguage().getLanguageCode();
-        disabledCategories = Arrays
-                .asList(Preferences.getPreference(Preferences.LANGUAGETOOL_DISABLED_CATEGORIES).split(",")).stream()
+        disabledCategories = Stream
+                .of(Preferences.getPreference(Preferences.LANGUAGETOOL_DISABLED_CATEGORIES).split(","))
                 .filter(s -> !s.isEmpty()).collect(Collectors.toSet());
-        disabledRuleIds = Arrays.asList(Preferences
+        disabledRuleIds = Stream.of(Preferences
                 .getPreference(Preferences.LANGUAGETOOL_DISABLED_RULES_PREFIX + "_" + targetLanguageCode).split(","))
-                .stream().filter(s -> !s.isEmpty()).collect(Collectors.toSet());
-        enabledRuleIds = Arrays.asList(Preferences
+                .filter(s -> !s.isEmpty()).collect(Collectors.toSet());
+        enabledRuleIds = Stream.of(Preferences
                 .getPreference(Preferences.LANGUAGETOOL_ENABLED_RULES_PREFIX + "_" + targetLanguageCode).split(","))
-                .stream().filter(s -> !s.isEmpty()).collect(Collectors.toSet());
+                .filter(s -> !s.isEmpty()).collect(Collectors.toSet());
 
         handleBridgeTypeChange(type);
     }

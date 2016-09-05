@@ -286,8 +286,8 @@ public class CalcMatchStatistics extends LongProcessThread {
         } catch (StoppedException | LongProcessInterruptedException ex) {
         }
         long endTime = System.currentTimeMillis();
-        Logger.getLogger(getClass().getName()).fine(String.format("Calc similarity took %d s (%s)",
-                (endTime - startTime) / 1000, doParallel ? "parallel" : "sequential"));
+        Logger.getLogger(getClass().getName()).fine(String.format("Calc similarity took %.3f s (%s)",
+                (endTime - startTime) / 1000f, doParallel ? "parallel" : "sequential"));
         return Optional.ofNullable(result);
     }
 

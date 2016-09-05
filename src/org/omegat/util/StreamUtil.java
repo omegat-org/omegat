@@ -29,6 +29,8 @@ import java.text.Collator;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
 
 public class StreamUtil {
 
@@ -77,5 +79,10 @@ public class StreamUtil {
                 return o1.compareToIgnoreCase(o2);
             }
         };
+    }
+
+    public static <T> Predicate<T> patternFilter(String regex, Function<T, String> stringExtractor) {
+        Pattern p = Pattern.compile(regex);
+        return o -> p.matcher(stringExtractor.apply(o)).matches();
     }
 }

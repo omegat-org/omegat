@@ -26,8 +26,8 @@
  **************************************************************************/
 package org.omegat.languagetools;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -47,21 +47,24 @@ import org.omegat.util.Log;
 
 public class LanguageToolNativeBridge implements ILanguageToolBridge {
 
-    private JLanguageTool sourceLt, targetLt;
+    private ThreadLocal<JLanguageTool> sourceLt;
+    private ThreadLocal<JLanguageTool> targetLt;
     private List<BitextRule> bRules;
 
     public LanguageToolNativeBridge(org.omegat.util.Language sourceLang, org.omegat.util.Language targetLang) {
         Optional<Language> sourceLtLang = getLTLanguage(sourceLang);
         Optional<Language> targetLtLang = getLTLanguage(targetLang);
-        sourceLt = sourceLtLang.flatMap(LanguageToolNativeBridge::getLanguageToolInstance).orElse(null);
-        targetLt = targetLtLang.flatMap(LanguageToolNativeBridge::getLanguageToolInstance).orElse(null);
-        if (sourceLtLang.isPresent() && targetLtLang.isPresent()) {
+        sourceLt = ThreadLocal.withInitial(
+                () -> sourceLtLang.flatMap(LanguageToolNativeBridge::getLanguageToolInstance).orElse(null));
+        targetLt = ThreadLocal.withInitial(
+                () -> targetLtLang.flatMap(LanguageToolNativeBridge::getLanguageToolInstance).orElse(null));
+        sourceLtLang.ifPresent(s -> targetLtLang.ifPresent(t -> {
             try {
-                bRules = Tools.getBitextRules(sourceLtLang.get(), targetLtLang.get());
+                bRules = Tools.getBitextRules(s, t);
             } catch (Exception e) {
-                bRules = null;
+                Log.log(e);
             }
-        }
+        }));
     }
 
     @Override
@@ -78,7 +81,7 @@ public class LanguageToolNativeBridge implements ILanguageToolBridge {
                 map(p -> new CategoryId(p)).collect(Collectors.toSet());
         Set<String> dr = Arrays.asList(disabledRules.split(",")).stream().collect(Collectors.toSet());
         Set<String> er = Arrays.asList(enabledRules.split(",")).stream().collect(Collectors.toSet());
-        Tools.selectRules(targetLt, dc, new HashSet<>(), dr, er, false);
+        Tools.selectRules(targetLt.get(), dc, new HashSet<>(), dr, er, false);
         if (bRules != null) {
             bRules = bRules.stream().filter(rule -> !dr.contains(rule.getId())).collect(Collectors.toList());
         }
@@ -87,41 +90,30 @@ public class LanguageToolNativeBridge implements ILanguageToolBridge {
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText)
             throws Exception {
-
-        JLanguageTool ltSource = sourceLt;
-        JLanguageTool ltTarget = targetLt;
-
-        if (targetLt == null) {
-            // LT doesn't know anything about target language
-            return null;
-        }
-
-        List<Mark> r = new ArrayList<>();
-        List<RuleMatch> matches;
-        if (sourceLt != null && bRules != null) {
-            // LT knows about source and target languages both and has bitext rules.
-
-            // sourceText represents the displayed source text: it may be null (not displayed) or have extra
-            // bidi characters for display. Since we need it for linguistic comparison here, if it's null then
-            // we pull from the SourceTextEntry, which is guaranteed not to be null.
-            // It doesn't need to be normalized because OmegaT normalizes all source text to NFC on load.
-            if (sourceText == null) {
-                sourceText = ste.getSrcText();
-            }
-            matches = Tools.checkBitext(sourceText, translationText, ltSource, ltTarget, bRules);
-        } else {
-            // LT knows about target language only
-            matches = targetLt.check(translationText);
-        }
-
-        for (RuleMatch match : matches) {
+        return getRuleMatches(sourceText, translationText).stream().map(match -> {
             Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, match.getFromPos(), match.getToPos());
             m.toolTipText = match.getMessage();
             m.painter = LanguageToolWrapper.PAINTER;
-            r.add(m);
-        }
+            return m;
+        }).collect(Collectors.toList());
+    }
 
-        return r;
+    List<RuleMatch> getRuleMatches(String sourceText, String translationText) throws Exception {
+        JLanguageTool ltTarget = targetLt.get();
+        if (ltTarget == null) {
+            // LT doesn't know anything about target language
+            return Collections.emptyList();
+        }
+        JLanguageTool ltSource = sourceLt.get();
+
+        if (ltSource != null && bRules != null) {
+            // LT knows about source and target languages both and has bitext
+            // rules.
+            return Tools.checkBitext(sourceText, translationText, ltSource, ltTarget, bRules);
+        } else {
+            // LT knows about target language only
+            return ltTarget.check(translationText);
+        }
     }
 
     public static Optional<Language> getLTLanguage(org.omegat.util.Language lang) {

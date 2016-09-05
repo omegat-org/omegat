@@ -28,6 +28,7 @@
 package org.omegat.util;
 
 import java.io.File;
+import java.util.regex.Pattern;
 
 import junit.framework.TestCase;
 
@@ -64,5 +65,32 @@ public class StaticUtilsTest extends TestCase {
         for (String dir : new String[] { "src", "docs", "lib" }) {
             assertTrue(new File(installDir, dir).isDirectory());
         }
+    }
+
+    public void testGlobToRegex() {
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("ab?d", false), "abcd"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("ab?d", false), "abd"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("ab*d", false), "abcccccd"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("ab*d", false), "abd"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("ab*d", false), "abde"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("ab*", false), "abdefg"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("$a[b-c]!?*d{}", false), "$a[b-c]!?1234d{}"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("a?", false), "a b"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a ?", false), "a b"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("a*", false), "a b"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a* b", false), "a b"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a* b", true), "a b"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("a*b", false), "a b"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a*b", false), "a\u00A0b"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("a*b", true), "a\u00A0b"));
+
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a b", false), "a b"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a b", true), "a b"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("a b", false), "a\u00A0b"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a b", true), "a\u00A0b"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("a *", false), "a\u00A0b"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a *", true), "a\u00A0b"));
+        assertFalse(Pattern.matches(StaticUtils.globToRegex("a ?", false), "a\u00A0b"));
+        assertTrue(Pattern.matches(StaticUtils.globToRegex("a ?", true), "a\u00A0b"));
     }
 }

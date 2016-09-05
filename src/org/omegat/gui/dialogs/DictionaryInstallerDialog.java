@@ -68,7 +68,7 @@ public class DictionaryInstallerDialog extends JDialog {
      */
     private final DefaultListModel<String> listModel = new DefaultListModel<>();
     
-    private SwingWorker<List<String>, Object> loader = null;
+    private LoaderWorker loader = null;
     private InstallerWorker installer = null;
 
     /** Creates new form DictionaryInstallerDialog */
@@ -97,18 +97,18 @@ public class DictionaryInstallerDialog extends JDialog {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {
+                progressBar.setVisible(true);
                 loader = new LoaderWorker();
                 loader.execute();
             }
         });
     }
 
-    private class LoaderWorker extends SwingWorker<List<String>,Object> {
+    private class LoaderWorker extends SwingWorker<List<String>, Void> {
 
         @Override
         protected List<String> doInBackground() throws Exception {
             //Connect with remote URL to get list of dictionaries.
-            progressBar.setVisible(true);
             return dicMan.getInstallableDictionaryNameList();
         }
 
@@ -230,7 +230,7 @@ public class DictionaryInstallerDialog extends JDialog {
         installer.execute();
     }//GEN-LAST:event_installButtonActionPerformed
 
-    private class InstallerWorker extends SwingWorker<List<String>,Object> {
+    private class InstallerWorker extends SwingWorker<List<String>, String> {
 
         private final Cursor HOURGLASS_CURSOR = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
         private Cursor oldCursor;
@@ -241,10 +241,12 @@ public class DictionaryInstallerDialog extends JDialog {
             setCursor(HOURGLASS_CURSOR);
             List<String> selection = dictionaryList.getSelectedValuesList();
             List<String> completed = new ArrayList<>();
-            for (Object o : selection) {
+            for (String item : selection) {
+                if (isCancelled()) {
+                    break;
+                }
                 // install the respective dictionaries
-                String item = (String) o;
-                String langCode = (item).substring(0, item.indexOf(" "));
+                String langCode = item.substring(0, item.indexOf(" "));
                 try {
                     dicMan.installRemoteDictionary(langCode);
                     completed.add(item);
@@ -260,14 +262,14 @@ public class DictionaryInstallerDialog extends JDialog {
         }
 
         @Override
-        protected void process(List<Object> chunks) {
-            chunks.forEach(o -> listModel.removeElement(o));
+        protected void process(List<String> chunks) {
+            chunks.forEach(listModel::removeElement);
         }
         
         @Override
         protected void done() {
             try {
-                get().forEach(o -> listModel.removeElement(o));
+                get().forEach(listModel::removeElement);
             } catch (InterruptedException | ExecutionException e) {
                 // Ignore
             }

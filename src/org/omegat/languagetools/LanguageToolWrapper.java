@@ -166,6 +166,16 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
         // handle the translation here:
         translationText = StringUtil.normalizeUnicode(translationText);
 
+        // sourceText represents the displayed source text: it may be null (not
+        // displayed) or have extra bidi characters for display. Since we need
+        // it for linguistic comparison here, if it's null then we pull from the
+        // SourceTextEntry, which is guaranteed not to be null.
+        // It doesn't need to be normalized because OmegaT normalizes all source
+        // text to NFC on load.
+        if (sourceText == null) {
+            sourceText = ste.getSrcText();
+        }
+
         return bridge.getMarksForEntry(ste, sourceText, translationText);
     }
 

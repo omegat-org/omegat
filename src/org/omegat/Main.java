@@ -388,11 +388,11 @@ public class Main {
     
     /**
      * Validates tags according to command line specs:
-     * --tag-validation=[abort|warn]
-     * 
-     * On abort, the program is aborted when tag validation finds errors. 
-     * On warn the errors are printed but the program continues.
-     * In all other cases no tag validation is done.
+     * <code>--tag-validation=[abort|warn]</code>
+     * <p>
+     * On abort, the program is aborted when tag validation finds errors. On
+     * warn the errors are printed but the program continues. In all other cases
+     * no tag validation is done.
      */
     private static void validateTagsConsoleMode() {
         TAG_VALIDATION_MODE mode = TAG_VALIDATION_MODE.parse(params.get(CLIParameters.TAG_VALIDATION));

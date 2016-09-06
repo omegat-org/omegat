@@ -141,7 +141,7 @@ could fail with duplicate numbers
 
   Localisation Updates:
 
-  - Interlingua localisation updated to 4.6 (UI, documentation, readme, scripts)
+  - Interlingua localisation updated to 4.0 (UI, documentation, readme, scripts)
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 3

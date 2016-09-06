@@ -318,6 +318,8 @@ class CheckBoxTreeCellRenderer extends JPanel implements TreeCellRenderer {
         setOpaque(false);
         checkBox.setOpaque(false);
         renderer.setLeafIcon(null);
+        renderer.setOpenIcon(null);
+        renderer.setClosedIcon(null);
         add(checkBox, BorderLayout.WEST);
     }
 
@@ -647,8 +649,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         setTitle(OStrings.getString("GUI_LANGUAGETOOL_DIALOG_TITLE")); // NOI18N
         setResizable(false);
 
-        typePanel.setBorder(
-                javax.swing.BorderFactory.createTitledBorder(OStrings.getString("GUI_LANGUAGETOOL_BRIDGE_TYPE"))); // NOI18N
+        typePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("GUI_LANGUAGETOOL_BRIDGE_TYPE"))); // NOI18N
 
         buttonGroup1.add(bridgeNativeRadioButton);
         bridgeNativeRadioButton.setSelected(true);
@@ -679,24 +680,29 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
         javax.swing.GroupLayout typePanelLayout = new javax.swing.GroupLayout(typePanel);
         typePanel.setLayout(typePanelLayout);
-        typePanelLayout
-                .setHorizontalGroup(typePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(typePanelLayout.createSequentialGroup().addContainerGap()
-                                .addComponent(bridgeNativeRadioButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(bridgeRemoteRadioButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(bridgeLocalRadioButton)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-        typePanelLayout.setVerticalGroup(typePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(typePanelLayout.createSequentialGroup().addContainerGap()
-                        .addGroup(typePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(bridgeNativeRadioButton).addComponent(bridgeRemoteRadioButton)
-                                .addComponent(bridgeLocalRadioButton))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+        typePanelLayout.setHorizontalGroup(
+            typePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(typePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bridgeNativeRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bridgeRemoteRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bridgeLocalRadioButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        typePanelLayout.setVerticalGroup(
+            typePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(typePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(typePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bridgeNativeRadioButton)
+                    .addComponent(bridgeRemoteRadioButton)
+                    .addComponent(bridgeLocalRadioButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        externalOptionsPanel.setBorder(
-                javax.swing.BorderFactory.createTitledBorder(OStrings.getString("GUI_LANGUAGETOOL_EXTERNAL_SETTINGS"))); // NOI18N
+        externalOptionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("GUI_LANGUAGETOOL_EXTERNAL_SETTINGS"))); // NOI18N
 
         directoryTextField.setToolTipText("");
 
@@ -715,39 +721,38 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
         javax.swing.GroupLayout externalOptionsPanelLayout = new javax.swing.GroupLayout(externalOptionsPanel);
         externalOptionsPanel.setLayout(externalOptionsPanelLayout);
-        externalOptionsPanelLayout.setHorizontalGroup(externalOptionsPanelLayout
-                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(externalOptionsPanelLayout.createSequentialGroup().addContainerGap()
-                        .addGroup(externalOptionsPanelLayout
-                                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                        externalOptionsPanelLayout.createSequentialGroup()
-                                                .addComponent(directoryTextField, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        454, Short.MAX_VALUE)
-                                                .addGap(18, 18, 18).addComponent(directoryChooseButton))
-                                .addComponent(urlTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(externalOptionsPanelLayout.createSequentialGroup()
-                                        .addGroup(externalOptionsPanelLayout
-                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(urlLabel).addComponent(localPathLabel))
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap()));
-        externalOptionsPanelLayout.setVerticalGroup(externalOptionsPanelLayout
-                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(externalOptionsPanelLayout.createSequentialGroup().addContainerGap().addComponent(urlLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(urlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 24,
-                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(localPathLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(externalOptionsPanelLayout
-                                .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(directoryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 24,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(directoryChooseButton))
-                        .addGap(40, 40, 40)));
+        externalOptionsPanelLayout.setHorizontalGroup(
+            externalOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(externalOptionsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(externalOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, externalOptionsPanelLayout.createSequentialGroup()
+                        .addComponent(directoryTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(directoryChooseButton))
+                    .addComponent(urlTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(externalOptionsPanelLayout.createSequentialGroup()
+                        .addGroup(externalOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(urlLabel)
+                            .addComponent(localPathLabel))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        externalOptionsPanelLayout.setVerticalGroup(
+            externalOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(externalOptionsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(urlLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(urlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(localPathLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(externalOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(directoryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(directoryChooseButton))
+                .addGap(40, 40, 40))
+        );
 
         bottomPanel.setPreferredSize(new java.awt.Dimension(631, 40));
 
@@ -782,7 +787,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         bottomPanelLayout.setVerticalGroup(
             bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bottomPanelLayout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(11, Short.MAX_VALUE)
                 .addGroup(bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton)
                     .addComponent(okButton)))
@@ -790,6 +795,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
         rulesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("GUI_LANGUAGETOOL_RULES"))); // NOI18N
 
+        rulesTree.setShowsRootHandles(true);
         rulesScrollPane.setViewportView(rulesTree);
 
         org.openide.awt.Mnemonics.setLocalizedText(addRuleButton, OStrings.getString("BUTTON_ADD_NODOTS")); // NOI18N
@@ -809,52 +815,50 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
         javax.swing.GroupLayout rulesPanelLayout = new javax.swing.GroupLayout(rulesPanel);
         rulesPanel.setLayout(rulesPanelLayout);
-        rulesPanelLayout
-                .setHorizontalGroup(rulesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(rulesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
-                        .addGroup(rulesPanelLayout.createSequentialGroup().addContainerGap().addComponent(addRuleButton)
-                                .addGap(18, 18, 18).addComponent(deleteRuleButton).addContainerGap(
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+        rulesPanelLayout.setHorizontalGroup(
+            rulesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(rulesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
+            .addGroup(rulesPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(addRuleButton)
+                .addGap(18, 18, 18)
+                .addComponent(deleteRuleButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        rulesPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
-                new java.awt.Component[] { addRuleButton, deleteRuleButton });
+        rulesPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {addRuleButton, deleteRuleButton});
 
-        rulesPanelLayout
-                .setVerticalGroup(
-                        rulesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(rulesPanelLayout.createSequentialGroup()
-                                        .addComponent(rulesScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 208,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(rulesPanelLayout
-                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(addRuleButton).addComponent(deleteRuleButton))));
+        rulesPanelLayout.setVerticalGroup(
+            rulesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rulesPanelLayout.createSequentialGroup()
+                .addComponent(rulesScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(rulesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addRuleButton)
+                    .addComponent(deleteRuleButton)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(typePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                        Short.MAX_VALUE)
-                .addComponent(externalOptionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE,
-                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bottomPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
-                .addComponent(rulesPanel, javax.swing.GroupLayout.Alignment.TRAILING,
-                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                        .addComponent(typePanel, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(externalOptionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 138,
-                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rulesPanel, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap()));
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(typePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(externalOptionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bottomPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+            .addComponent(rulesPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(typePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(externalOptionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rulesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

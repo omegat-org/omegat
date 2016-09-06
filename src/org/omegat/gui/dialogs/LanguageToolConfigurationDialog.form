@@ -33,7 +33,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="typePanel" max="32767" attributes="0"/>
           <Component id="externalOptionsPanel" alignment="0" max="32767" attributes="0"/>
-          <Component id="bottomPanel" alignment="0" pref="608" max="32767" attributes="0"/>
+          <Component id="bottomPanel" alignment="0" pref="610" max="32767" attributes="0"/>
           <Component id="rulesPanel" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
@@ -253,7 +253,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                  <EmptySpace pref="11" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="okButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -334,6 +334,9 @@
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
             <Component class="javax.swing.JTree" name="rulesTree">
+              <Properties>
+                <Property name="showsRootHandles" type="boolean" value="true"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

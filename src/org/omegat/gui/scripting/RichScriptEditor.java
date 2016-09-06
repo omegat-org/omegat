@@ -97,8 +97,8 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
 
     public void initSearchDialogs() {
 
-        m_findDialog = new FindDialog(m_scriptingWindow, this);
-        m_replaceDialog = new ReplaceDialog(m_scriptingWindow, this);
+        m_findDialog = new FindDialog(m_scriptingWindow.frame, this);
+        m_replaceDialog = new ReplaceDialog(m_scriptingWindow.frame, this);
 
         // This ties the properties of the two dialogs together (match case, regex, etc.).
         SearchContext context = m_findDialog.getSearchContext();
@@ -159,7 +159,7 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
             if (m_replaceDialog.isVisible()) {
                 m_replaceDialog.setVisible(false);
             }
-            GoToDialog dialog = new GoToDialog(m_scriptingWindow);
+            GoToDialog dialog = new GoToDialog(m_scriptingWindow.frame);
             dialog.setMaxLineNumberAllowed(m_scriptEditor.getLineCount());
             dialog.setVisible(true);
             int line = dialog.getLineNumber();
@@ -234,7 +234,7 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
         RTextScrollPane scrollPaneEditor = new RTextScrollPane(m_scriptEditor);
         // scrollPaneEditor.setMinimumSize(minimumSize1);
         m_csp = new CollapsibleSectionPanel();
-        m_scriptingWindow.getContentPane().add(m_csp);
+        m_scriptingWindow.frame.getContentPane().add(m_csp);
         m_csp.add(scrollPaneEditor);
 
         initSearchDialogs();

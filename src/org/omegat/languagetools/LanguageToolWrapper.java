@@ -27,8 +27,6 @@
 
 package org.omegat.languagetools;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.List;
 
 import javax.swing.text.Highlighter.HighlightPainter;
@@ -37,7 +35,6 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IApplicationEventListener;
-import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
@@ -58,7 +55,7 @@ import org.omegat.util.gui.Styles;
  * @author Aaron Madlon-Kay
  * @author Lev Abashkin
  */
-public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApplicationEventListener, PropertyChangeListener {
+public class LanguageToolWrapper {
     static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(
             Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
 
@@ -69,12 +66,104 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
         NATIVE, REMOTE_URL, LOCAL_INSTALLATION
     }
 
-    private ILanguageToolBridge bridge;
+    private static volatile ILanguageToolBridge BRIDGE;
 
-    public LanguageToolWrapper() throws Exception {
-        CoreEvents.registerProjectChangeListener(this);
-        CoreEvents.registerApplicationEventListener(this);
-        Preferences.addPropertyChangeListener(this);
+    private LanguageToolWrapper() {
+    }
+
+    public static void init() {
+
+        Core.registerMarker(new LanguageToolMarker());
+        
+        CoreEvents.registerProjectChangeListener(e -> {
+            switch (e) {
+                case CREATE:
+                case LOAD:
+                    setBridgeFromCurrentProject();
+                    break;
+                case CLOSE:
+                    BRIDGE.stop();
+                    BRIDGE = null;
+                    break;
+                default:
+                    // Nothing
+                }
+        });
+
+        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
+            @Override
+            public synchronized void onApplicationShutdown() {
+                if (BRIDGE != null) {
+                    BRIDGE.stop();
+                }
+            }
+
+            @Override
+            public synchronized void onApplicationStartup() {
+            }
+        });
+
+        Preferences.addPropertyChangeListener(evt -> {
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            // This property is changed in the end of configuration dialog
+            // saving, so at this point every other related properties are
+            // already changed.
+            if (evt.getPropertyName().equals(Preferences.LANGUAGETOOL_BRIDGE_TYPE)) {
+                setBridgeFromCurrentProject();
+            }
+        });
+    }
+
+    static class LanguageToolMarker implements IMarker {
+        @Override
+        public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
+                boolean isActive) throws Exception {
+
+            if (translationText == null || !isEnabled()) {
+                // Return when disabled or translation text is empty
+                return null;
+            }
+
+            // LanguageTool claims to expect text in NFKC, but that actually
+            // causes problems for some rules:
+            // https://github.com/languagetool-org/languagetool/issues/379
+            // From the discussion it seems the intent behind NFKC was to break
+            // up multi-letter codepoints such as U+FB00 LATIN SMALL LIGATURE
+            // FF. These are unlikely to be found in user input in our case, so
+            // instead we will use NFC. We already normalize our source to NFC
+            // when loading, so we only need to handle the translation here:
+            translationText = StringUtil.normalizeUnicode(translationText);
+
+            // sourceText represents the displayed source text: it may be null
+            // (not displayed) or have extra bidi characters for display. Since
+            // we need it for linguistic comparison here, if it's null then we
+            // pull from the SourceTextEntry, which is guaranteed not to be
+            // null. It doesn't need to be normalized because OmegaT normalizes
+            // all source text to NFC on load.
+            if (sourceText == null) {
+                sourceText = ste.getSrcText();
+            }
+
+            return BRIDGE.getMarksForEntry(ste, sourceText, translationText);
+        }
+
+        protected boolean isEnabled() {
+            return Core.getEditor().getSettings().isMarkLanguageChecker();
+        }
+    }
+
+    /**
+     * Set this instance's LanguageTool bridge based on the current project.
+     */
+    static void setBridgeFromCurrentProject() {
+        if (BRIDGE != null) {
+            BRIDGE.stop();
+        }
+        Language sourceLang = Core.getProject().getProjectProperties().getSourceLanguage();
+        Language targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
+        BRIDGE = createBridgeFromPrefs(sourceLang, targetLang);
     }
 
     /**
@@ -117,70 +206,5 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener, IApp
 
         bridge.applyRuleFilters(disabledCategories, disabledRules, enabledRules);
         return bridge;
-    }
-
-    @Override
-    public synchronized void onApplicationShutdown() {
-        bridge.stop();
-    }
-
-    @Override
-    public synchronized void onApplicationStartup() {
-    }
-
-    public boolean isEnabled() {
-        return Core.getEditor().getSettings().isMarkLanguageChecker();
-    }
-
-    @Override
-    public synchronized void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-        switch (eventType) {
-        case CREATE:
-        case LOAD:
-            Language sourceLang = Core.getProject().getProjectProperties().getSourceLanguage();
-            Language targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
-            bridge = createBridgeFromPrefs(sourceLang, targetLang);
-            break;
-        case CLOSE:
-            bridge.stop();
-            break;
-        default:
-            // Nothing
-        }
-    }
-
-    @Override
-    public synchronized List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
-            boolean isActive) throws Exception {
-
-        if (translationText == null || !isEnabled()) {
-            // Return when disabled or translation text is empty
-            return null;
-        }
-
-        // LanguageTool claims to expect text in NFKC, but that actually causes problems for some rules:
-        // https://github.com/languagetool-org/languagetool/issues/379
-        // From the discussion it seems the intent behind NFKC was to break up multi-letter codepoints such as
-        // U+FB00 LATIN SMALL LIGATURE FF. These are unlikely to be found in user input in our case, so
-        // instead we will use NFC. We already normalize our source to NFC when loading, so we only need to
-        // handle the translation here:
-        translationText = StringUtil.normalizeUnicode(translationText);
-
-        return bridge.getMarksForEntry(ste, sourceText, translationText);
-    }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
-        // This property is changed in the end of configuration dialog saving,
-        // so at this point every other related properties are already changed.
-        if (evt.getPropertyName().equals(Preferences.LANGUAGETOOL_BRIDGE_TYPE)) {
-            bridge.stop();
-            Language sourceLang = Core.getProject().getProjectProperties().getSourceLanguage();
-            Language targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
-            bridge = createBridgeFromPrefs(sourceLang, targetLang);
-        }
     }
 }

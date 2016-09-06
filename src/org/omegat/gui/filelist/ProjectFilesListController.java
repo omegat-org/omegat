@@ -58,6 +58,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -95,7 +96,6 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
@@ -296,17 +296,6 @@ public class ProjectFilesListController {
             }
         });
 
-        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
-            @Override
-            public void onApplicationStartup() {
-            }
-
-            @Override
-            public void onApplicationShutdown() {
-                saveWindowLayout();
-            }
-        });
-
         list.tableFiles.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -401,9 +390,10 @@ public class ProjectFilesListController {
             // Otherwise use the clicked row
             rows = new int[] { row };
         }
-        List<FileInfo> infos = IntStream.of(rows).mapToObj(r -> modelFiles.getDataAtRow(r))
+        List<FileInfo> infos = IntStream.of(rows).map(list.tableFiles.getRowSorter()::convertRowIndexToModel)
+                .mapToObj(modelFiles::getDataAtRow)
                 .collect(Collectors.toList());
-        if (infos.isEmpty() || infos.stream().anyMatch(i -> i == null)) {
+        if (infos.isEmpty() || infos.stream().anyMatch(Objects::isNull)) {
             return null;
         }
         String sourceDir = Core.getProject().getProjectProperties().getSourceRoot();
@@ -430,24 +420,21 @@ public class ProjectFilesListController {
             modTitle = OStrings.getString(isSource ? "PF_REVEAL_SOURCE_FILE" : "PF_REVEAL_TARGET_FILE");
         }
         JMenuItem item = menu.add(defaultTitle);
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean openParent = (e.getModifiers() & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0;
-                Stream<File> stream;
-                if (openParent) {
-                    stream = files.stream().map(File::getParentFile).distinct().filter(File::isDirectory);
-                } else {
-                    stream = files.stream().filter(File::isFile);
-                }
-                stream.forEach(f -> {
-                    try {
-                        Desktop.getDesktop().open(f);
-                    } catch (IOException ex) {
-                        Log.log(ex);
-                    }
-                });
+        item.addActionListener(e -> {
+            boolean openParent = (e.getModifiers() & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0;
+            Stream<File> stream;
+            if (openParent) {
+                stream = files.stream().map(File::getParentFile).distinct().filter(File::isDirectory);
+            } else {
+                stream = files.stream().filter(File::isFile);
             }
+            stream.forEach(f -> {
+                try {
+                    Desktop.getDesktop().open(f);
+                } catch (IOException ex) {
+                    Log.log(ex);
+                }
+            });
         });
         item.setEnabled(presentFiles > 0);
         item.addMenuKeyListener(new MenuKeyListener() {
@@ -684,33 +671,10 @@ public class ProjectFilesListController {
      * Loads/sets the position and size of the project files window.
      */
     private void initWindowLayout() {
-        // main window
-        try {
-            String dx = Preferences.getPreference(Preferences.PROJECT_FILES_WINDOW_X);
-            String dy = Preferences.getPreference(Preferences.PROJECT_FILES_WINDOW_Y);
-            int x = Integer.parseInt(dx);
-            int y = Integer.parseInt(dy);
-            list.setLocation(x, y);
-            String dw = Preferences.getPreference(Preferences.PROJECT_FILES_WINDOW_WIDTH);
-            String dh = Preferences.getPreference(Preferences.PROJECT_FILES_WINDOW_HEIGHT);
-            int w = Integer.parseInt(dw);
-            int h = Integer.parseInt(dh);
-            list.setSize(w, h);
-        } catch (NumberFormatException nfe) {
-            // set default size and position
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            list.setBounds((screenSize.width - 640) / 2, (screenSize.height - 400) / 2, 640, 400);
-        }
-    }
-
-    /**
-     * Saves the size and position of the project files window
-     */
-    private void saveWindowLayout() {
-        Preferences.setPreference(Preferences.PROJECT_FILES_WINDOW_WIDTH, list.getWidth());
-        Preferences.setPreference(Preferences.PROJECT_FILES_WINDOW_HEIGHT, list.getHeight());
-        Preferences.setPreference(Preferences.PROJECT_FILES_WINDOW_X, list.getX());
-        Preferences.setPreference(Preferences.PROJECT_FILES_WINDOW_Y, list.getY());
+        // set default size and position
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        list.setBounds((screenSize.width - 640) / 2, (screenSize.height - 400) / 2, 640, 400);
+        StaticUIUtils.persistGeometry(list, Preferences.PROJECT_FILES_WINDOW_GEOMETRY_PREFIX);
     }
 
     private void doCancel() {

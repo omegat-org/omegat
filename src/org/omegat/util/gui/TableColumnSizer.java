@@ -146,7 +146,9 @@ public class TableColumnSizer {
                 }
                 if (shouldAdjust) {
                     reset();
-                    adjustTableColumns();
+                    // Queue up the adjustment because when the table has a
+                    // RowSorter things can be out of sync at this point.
+                    SwingUtilities.invokeLater(TableColumnSizer.this::adjustTableColumns);
                 }
             }
         });

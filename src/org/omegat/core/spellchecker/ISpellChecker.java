@@ -31,6 +31,8 @@ package org.omegat.core.spellchecker;
 
 import java.util.List;
 
+import org.omegat.util.Token;
+
 /**
  * Interface for access to spell checker.
  * 
@@ -68,4 +70,10 @@ public interface ISpellChecker {
      * Add a word to the list of ignored words
      */
     void ignoreWord(String word);
+
+    /**
+     * Get a list of misspelled tokens from the given text
+     */
+    List<Token> getMisspelledTokens(String text);
+
 }

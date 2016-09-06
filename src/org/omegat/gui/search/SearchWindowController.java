@@ -450,22 +450,9 @@ public class SearchWindowController {
      * state.
      */
     private void loadPreferences() {
-        // window size and position
-        try {
-            String dx = Preferences.getPreference(Preferences.SEARCHWINDOW_X);
-            String dy = Preferences.getPreference(Preferences.SEARCHWINDOW_Y);
-            int x = Integer.parseInt(dx);
-            int y = Integer.parseInt(dy);
-            form.setLocation(x, y);
-            String dw = Preferences.getPreference(Preferences.SEARCHWINDOW_WIDTH);
-            String dh = Preferences.getPreference(Preferences.SEARCHWINDOW_HEIGHT);
-            int w = StaticUIUtils.correctFrameWidth(Integer.parseInt(dw));
-            int h = Integer.parseInt(dh);
-            form.setSize(w, h);
-        } catch (NumberFormatException nfe) {
-            // set default size and position
-            form.setSize(800, 700);
-        }
+        // set default size and position
+        form.setSize(800, 700);
+        StaticUIUtils.persistGeometry(form, Preferences.SEARCHWINDOW_GEOMETRY_PREFIX);
 
         // search dir options
         if (Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_FILES, false)) {
@@ -578,12 +565,6 @@ public class SearchWindowController {
      * state
      */
     private void savePreferences() {
-        // window size and position
-        Preferences.setPreference(Preferences.SEARCHWINDOW_WIDTH, form.getWidth());
-        Preferences.setPreference(Preferences.SEARCHWINDOW_HEIGHT, form.getHeight());
-        Preferences.setPreference(Preferences.SEARCHWINDOW_X, form.getX());
-        Preferences.setPreference(Preferences.SEARCHWINDOW_Y, form.getY());
-
         // search type
         if (form.m_searchExactSearchRB.isSelected()) {
             Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE,
@@ -922,7 +903,7 @@ public class SearchWindowController {
             ((JTextField) form.m_searchField.getEditor().getEditorComponent()).setText(query);
         }
         form.setVisible(true);
-        form.setState(JFrame.NORMAL);
+        form.setExtendedState(JFrame.NORMAL);
         form.m_searchField.requestFocus();
     }
 

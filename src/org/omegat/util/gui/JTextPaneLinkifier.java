@@ -151,7 +151,6 @@ public class JTextPaneLinkifier {
         
         static {
             MutableAttributeSet tmp = new SimpleAttributeSet();
-            tmp = new SimpleAttributeSet();
             StyleConstants.setUnderline(tmp, true);
             StyleConstants.setForeground(tmp, Styles.EditorColor.COLOR_HYPERLINK.getColor());
             LINK_ATTRIBUTES = tmp;

@@ -55,7 +55,6 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.XmlStreamReader;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
@@ -103,11 +102,8 @@ public class TMXReader2 {
      * Detects charset of XML file.
      */
     public static String detectCharset(File file) throws IOException {
-        XmlStreamReader rd = new XmlStreamReader(file);
-        try {
+        try (XmlStreamReader rd = new XmlStreamReader(file)) {
             return rd.getEncoding();
-        } finally {
-            IOUtils.closeQuietly(rd);
         }
     }
 
@@ -151,16 +147,9 @@ public class TMXReader2 {
         Log.logRB("TMXR_INFO_READING_FILE", file.getAbsolutePath());
 
         boolean allFound = true;
-
         
-        InputStream in;
-        if (file.getName().endsWith(".gz")) {
-            in = new BufferedInputStream(new GZIPInputStream(new FileInputStream(file)));
-        } else {
-            in = new BufferedInputStream(new FileInputStream(file));
-        }
-        xml = factory.createXMLEventReader(in);
-        try {
+        try (InputStream in = getInputStream(file)) {
+            xml = factory.createXMLEventReader(in);
             while (xml.hasNext()) {
                 XMLEvent e = xml.nextEvent();
                 switch (e.getEventType()) {
@@ -178,8 +167,9 @@ public class TMXReader2 {
                 }
             }
         } finally {
-            xml.close();
-            in.close();
+            if (xml != null) {
+                xml.close();
+            }
         }
 
         if (!allFound) {
@@ -191,6 +181,14 @@ public class TMXReader2 {
         if (errorsCount > 0 || warningsCount > 0) {
             Log.logDebug(Logger.getLogger(getClass().getName()), "Errors: {0}, Warnings: {1}", errorsCount,
                     warningsCount);
+        }
+    }
+
+    private InputStream getInputStream(File file) throws IOException {
+        if (file.getName().endsWith(".gz")) {
+            return new BufferedInputStream(new GZIPInputStream(new FileInputStream(file)));
+        } else {
+            return new BufferedInputStream(new FileInputStream(file));
         }
     }
 

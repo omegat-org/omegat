@@ -32,9 +32,9 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 import javax.swing.JOptionPane;
 
@@ -220,7 +220,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         if (!te.isTranslated() || s.isEmpty()) {
             return null;
         }
-        ErrorReport report = new ErrorReport(ste, te.translation);
+        ErrorReport report = new ErrorReport(ste, te);
 
         // Check printf variables
         if (Preferences.isPreference(Preferences.CHECK_ALL_PRINTF_TAGS)) {
@@ -260,23 +260,12 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
             return null;
         }
 
-        // Sort the map first to ensure that fixing works properly.
-        Map<Tag, TagError> sortedErrors = new TreeMap<Tag, TagError>(new Comparator<Tag>() {
-            @Override
-            public int compare(Tag o1, Tag o2) {
-                return o1.pos < o2.pos ? -1
-                        : o1.pos > o2.pos ? 1
-                        : 0;
-            }
-        });
-        sortedErrors.putAll(report.srcErrors);
-        sortedErrors.putAll(report.transErrors);
-
         StringBuilder sb = new StringBuilder(report.translation);
 
-        for (Map.Entry<Tag, TagError> e : sortedErrors.entrySet()) {
-            TagRepair.fixTag(report.ste, e.getKey(), e.getValue(), sb, report.source);
-        }
+        Stream.of(report.srcErrors, report.transErrors).flatMap(m -> m.entrySet().stream())
+                .sorted(Comparator.comparing(e -> e.getKey().pos)).forEach(e -> {
+                    TagRepair.fixTag(report.ste, e.getKey(), e.getValue(), sb, report.source);
+                });
 
         return sb.toString();
     }

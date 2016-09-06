@@ -25,8 +25,8 @@
 
 package org.omegat.core.spellchecker;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.text.Highlighter.HighlightPainter;
 
@@ -35,8 +35,6 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
-import org.omegat.tokenizer.ITokenizer.StemmingMode;
-import org.omegat.util.Token;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -59,17 +57,12 @@ public class SpellCheckerMarker implements IMarker {
             // spell checker disabled
             return null;
         }
-        List<Mark> result = new ArrayList<Mark>();
-        for (Token tok : Core.getProject().getTargetTokenizer().tokenizeWords(translationText, StemmingMode.NONE)) {
-            String word = tok.getTextFromString(translationText);
-            if (!Core.getSpellChecker().isCorrect(word)) {
-                int st = tok.getOffset();
-                int en = st + tok.getLength();
-                Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, st, en);
-                m.painter = PAINTER;
-                result.add(m);
-            }
-        }
-        return result;
+        return Core.getSpellChecker().getMisspelledTokens(translationText).stream().map(tok -> {
+            int st = tok.getOffset();
+            int en = st + tok.getLength();
+            Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, st, en);
+            m.painter = PAINTER;
+            return m;
+        }).collect(Collectors.toList());
     }
 }

@@ -40,6 +40,7 @@ import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
 import java.io.File;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
@@ -209,7 +210,7 @@ public class MainWindowMenuHandler {
             return;
         }
 
-        String sourcePattern = StaticUtils.escapeNonRegex(midName);
+        String sourcePattern = Pattern.quote(midName);
         if (Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED)) {
             List<ErrorReport> stes = Core.getTagValidation().listInvalidTags(sourcePattern);
             if (stes != null) {
@@ -783,7 +784,7 @@ public class MainWindowMenuHandler {
         String midName = Core.getEditor().getCurrentFile();
         List<ErrorReport> stes = null;
         if (!StringUtil.isEmpty(midName)) {
-            String sourcePattern = StaticUtils.escapeNonRegex(midName);
+            String sourcePattern = Pattern.quote(midName);
             stes = Core.getTagValidation().listInvalidTags(sourcePattern);
         }
         Core.getTagValidation().displayTagValidationErrors(stes, null);
@@ -1029,7 +1030,9 @@ public class MainWindowMenuHandler {
      * Opens the LanguageTool window
      */
     public void optionsLanguageToolMenuItemActionPerformed() {
-        LanguageToolConfigurationDialog ld = new LanguageToolConfigurationDialog(mainWindow, true);
+        LanguageToolConfigurationDialog ld = new LanguageToolConfigurationDialog(mainWindow, true,
+                Core.getProject().getProjectProperties().getSourceLanguage(),
+                Core.getProject().getProjectProperties().getTargetLanguage());
 
         ld.setVisible(true);
     }

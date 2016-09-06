@@ -187,7 +187,7 @@ public class NewTeamProject extends javax.swing.JDialog {
         updateDialog();
     }
 
-    private class RepoTypeWorker extends SwingWorker<String, Object> {
+    private class RepoTypeWorker extends SwingWorker<String, Void> {
 
         private final String url;
 

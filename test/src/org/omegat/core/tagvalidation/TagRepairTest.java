@@ -60,7 +60,7 @@ public class TagRepairTest extends TestCase {
         TagRepair.fixMissing(TagValidationTest.getList(tags3), text, new Tag(-1, "{tag1}"));
         assertEquals("Foo bar baz{tag1}", text.toString());
         
-        // Fix maformed
+        // Fix malformed
         text = new StringBuilder("Foo bar {tag2}baz{tag1}");
         String[] tags4 = {"{tag1}", "{tag2}"};
         TagRepair.fixMalformed(TagValidationTest.getList(tags4), text, new Tag(-1, "{tag1}"));

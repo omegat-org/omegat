@@ -165,6 +165,14 @@
           <listitem>
             <para>Visio (*.vxd)</para>
           </listitem>
+
+          <listitem>
+            <para>XML (*.xml) proprietate de Java</para>
+          </listitem>
+
+          <listitem>
+            <para> Schematron (*.sch)</para>
+          </listitem>
         </itemizedlist></para>
 
       <para>Altere typos de file de texto formattate pote alsi esser tractate per OmegaT con lor extension associate al typo de file supportate, e con le regulas de segmentation correspondente, OmegaT segmentara los correctemente.</para>
@@ -282,12 +290,12 @@
         </indexterm></title>
 
       <para>Quando es create le documento rendite, su direction de monstra essera le mesme que celle del documento fonte. Si le documento original esseva LTR, le direction de monstra del documento de destination debe esser cambiate manualmente a RTL in su application de vista. Cata formato emittite ha manieras specific de tractar con le monstra RTL; controla le manuales del application pertinente pro le detalios.</para>
-      
-      <para>Pro le files .docx, alicun cambios son totevia facite automaticamente:<itemizedlist>
-      <listitem>Le paragraphos, le sectiones e le tabellas son ordinarimente bidirectional</listitem>
-      <listitem>Le elementos de texto son fixate a RTL</listitem>     
-      </itemizedlist>
-      </para>
+
+      <para>Pro le files .docx, alicun cambiamentos son totevia facite automaticamente:<itemizedlist>
+          <listitem>Le paragraphos, le sectiones e le tabellas son ordinarimente bidirectional</listitem>
+
+          <listitem>Le elementos de texto son fixate a RTL</listitem>
+        </itemizedlist></para>
 
       <para>Pro evitar de cambiar del parametros de apparentia del files de destination cata vice le files es aperte, on pote cambiar le parametros de apparentia del files fonte, como tal parametros es hereditate per le files final. Tal modificationes es possibile in le files ODF, per exemplo.</para>
     </section>

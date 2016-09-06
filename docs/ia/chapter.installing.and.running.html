@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;3.&nbsp;Installar e executar OmegaT</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT 3.1 - Guida del usator">
-      <link rel="up" href="index.html" title="OmegaT 3.1 - Guida del usator">
+      <link rel="home" href="index.html" title="OmegaT 3.5 - Guida del usator">
+      <link rel="up" href="index.html" title="OmegaT 3.5 - Guida del usator">
       <link rel="prev" href="chapter.instant.start.guide.html" title="Chapter&nbsp;2.&nbsp;Apprende a usar OmegaT in 5 minutas!">
       <link rel="next" href="chapter.user.interface.html" title="Chapter&nbsp;4.&nbsp;Le interfacie del usator">
    </head>
@@ -72,16 +72,17 @@
                      <dt><span class="section"><a href="chapter.installing.and.running.html#running.OmegaT.other">4.4. Executar OmegaT</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.installing.and.running.html#using.Java.Web.Start">5. Usar Java Web Start</a></span></dt>
-               <dt><span class="section"><a href="chapter.installing.and.running.html#d0e1050">6. Lancear OmegaT per le linea de commando</a></span></dt>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#drag.and.drop">5. Traher e deponer</a></span></dt>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#using.Java.Web.Start">6. Usar Java Web Start</a></span></dt>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#d0e1066">7. Lancear OmegaT per le linea de commando</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.installing.and.running.html#method1.opening.commandline.window">6.1. Aperir un fenestra pro linea de commando</a></span></dt>
-                     <dt><span class="section"><a href="chapter.installing.and.running.html#launch.command.arguments">6.2. Lancear le argumentos de commando</a></span></dt>
-                     <dt><span class="section"><a href="chapter.installing.and.running.html#omegat.command.arguments">6.3. OmegaT in modo linea de commando</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#method1.opening.commandline.window">7.1. Aperir un fenestra pro linea de commando</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#launch.command.arguments">7.2. Lancear le argumentos de commando</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#omegat.command.arguments">7.3. OmegaT in modo linea de commando</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.installing.and.running.html#building.OmegaT.from.source">7. Construer <span class="application">OmegaT</span> ex le fonte</a></span></dt>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#building.OmegaT.from.source">8. Construer <span class="application">OmegaT</span> ex le fonte</a></span></dt>
             </dl>
          </div>
          <div class="section">
@@ -174,7 +175,7 @@
                      <li class="listitem">
                         <p><span class="bold"><strong>Installar super le installation existente. </strong></span>Pro facer isto, selige simplemente le mesme plica del installation existente, quando tu installara le version nove. Le version
                            "vetule" de OmegaT essera superscribite, ma omne le configurationes essera retenite. Isto include preferentias fixate intra
-                           OmegaT, qualcunque cambios que tu faceva a tu file <code class="filename">OmegaT.l4J.ini</code> , e alsi a tu script de lanceamento (file .bat), si tu usa illo.
+                           OmegaT, qualcunque cambiamentos que tu faceva a tu file <code class="filename">OmegaT.l4J.ini</code> , e alsi a tu script de lanceamento (file .bat), si tu usa illo.
                         </p>
                      </li>
                   </ul>
@@ -294,7 +295,7 @@
                            </p>
                         </li>
                         <li class="listitem">
-                           <p>Finalmente, salva le cambios con <span class="emphasis"><em>Salva - File.</em></span></p>
+                           <p>Finalmente, salva le cambiamentos con <span class="emphasis"><em>Salva - File.</em></span></p>
                         </li>
                      </ul>
                   </div>
@@ -321,7 +322,7 @@
                         </li>
                         <li class="listitem">
                            <p>Clicca sur le button icone, pois pulsa <span class="emphasis"><em>Naviga...</em></span> al sub plica /images in le plica del application <span class="application">OmegaT</span>. Selige le icone <span class="emphasis"><em><span class="application">OmegaT</span>.png</em></span>. GNOME pote faller a monstrar le files icone in le formatos disponibile e initialmente appare pro expectar un file SVG, ma
-                              si le plica es seligite, le files deberea apparer e <span class="application">OmegaT</span>.png pote esser seligite.
+                              si le plica es seligite, le files debe apparer e <span class="application">OmegaT</span>.png pote esser seligite.
                            </p>
                         </li>
                      </ul>
@@ -358,7 +359,7 @@
                      </div>
                   </div>
                </div>
-               <p><span class="application">OmegaT</span> contine le Java JRE 1.7
+               <p><span class="application">OmegaT</span> contine le Java JRE 1.8
                </p>
                <p>Discarga <span class="emphasis"><em>OmegaT_3.n.n_Mac.zip.</em></span></p>
             </div>
@@ -395,15 +396,14 @@
                </div>
                <p>Clicca duo vices sur<span class="emphasis"><em> <span class="application">OmegaT</span>.app</em></span> o clicca sur su location in le Dock.
                </p>
-               <p>Tu pote modificar le comportamento de OmegaT per rediger in le pacchetto le file <span class="emphasis"><em>Proprietates</em></span> o le file<span class="emphasis"><em>OmegaT.sh</em></span>.
+               <p>Tu pote modificar le comportamento de OmegaT per rediger le <span class="emphasis"><em>Proprietates</em></span> assi ben como le file <span class="emphasis"><em>Configuration.properties</em></span> in le pacchetto.
                </p>
-               <p>Pro acceder <span class="application"><span class="emphasis"><em>OmegaT.sh</em></span></span>, cliccar con le dextero sur <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> e seliger "monstrar le contentos del pacchetto", tunc aperir le file in Contents/MacOS cliccante con le dextero sur lo e
-                  seliger le editor de texto preferite Tu pote alsi poner "cd" ibi directemente ab linea de commando e aperir <span class="application"><span class="emphasis"><em>OmegaT.sh</em></span> in un editor de linea de commando como emacs o vi</span>.<a class="indexterm" name="d0e825"></a></p>
-               <p>Le optiones es cambiate con le modification del file <span class="emphasis"><em>OmegaT.sh</em></span>. Per optiones pre-definite, remover le # ante un parametro pro habilitar lo. Per exemplo, <code class="filename">LANGUAGE="-Duser.language=ja"</code> (sin le #) lanceara <span class="application">OmegaT</span> con le Interfacie del Usator in japonese.
+               <p>Pro acceder a <span class="application"><span class="emphasis"><em>Configuration.properties</em></span></span>, clicca dextre sur <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> e elige "Monstrar le contentos del pacchetto", pois aperi le file in Contentos/Ressources per cliccar dextre sur lo e elige
+                  tu editor de texto. Tu pote alsi "cd" ibi directemente ab le linea de commando e aperir <span class="application"><span class="emphasis"><em>Configuration.properties</em></span> in un editor de linea de commando como emacs o vi</span>.<a class="indexterm" name="d0e825"></a></p>
+               <p>Le optiones es cambiate per modificar le file <span class="emphasis"><em>Configuration.properties</em></span>. Per optiones pre-definite, remover le # ante un parametro pro habilitar lo. Per exemplo, <code class="filename">LANGUAGE="-Duser.language=ja"</code> (sin le #) lanceara <span class="application">OmegaT</span> con le Interfacie del Usator in japonese.
                </p>
-               <p>Pro cambiar le quantitate de memoria disponibile, cambiar directemente le fila de commando del lanceamento. Pro instantia,
-                  <code class="filename">${JAVA} -Xmx2048m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET}
-                     ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY} -jar OmegaT.jar</code> lanceara OmegaT con 2 gigabytes de memoria.
+               <p>Pro cambiar le quantitate del memoria disponibile, rediger le file <span class="emphasis"><em>OmegaT.app/Contentos/Info.plist</em></span> e cambiar le contento del fila &lt;string&gt;-Xmx1024M&lt;/string&gt;. Pro instance, &lt;string&gt;-Xmx2048M&lt;/string&gt; will lanceamento OmegaT
+                  con le 2 gigas del memoria.
                </p>
                <p>Pro lancear instantias multiple de <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span>, clicca duo vices le file <span class="emphasis"><em>OmegaT.sh</em></span> locate in <span class="emphasis"><em><span class="application">OmegaT</span>.app/ Contents/MacOS/</em></span>.
                </p>
@@ -508,7 +508,19 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.Java.Web.Start"></a>5.&nbsp;Usar Java Web Start<a class="indexterm" name="d0e1004"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="drag.and.drop"></a>5.&nbsp;Traher e deponer<a class="indexterm" name="d0e1004"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>In plure systemas, il es possibile aperir un projecto per traher un file <code class="filename">omegat.project</code> e deponer lo in le icone de OmegaT sur le scriptorio. Il pote alsi esser possibile aperir un projecto OmegaT per duple-clic
+               sur un file <code class="filename">omegat.project</code>.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="using.Java.Web.Start"></a>6.&nbsp;Usar Java Web Start<a class="indexterm" name="d0e1020"></a></h2>
                   </div>
                </div>
             </div>
@@ -534,7 +546,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e1050"></a>6.&nbsp;Lancear OmegaT per le linea de commando<a class="indexterm" name="d0e1053"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e1066"></a>7.&nbsp;Lancear OmegaT per le linea de commando<a class="indexterm" name="d0e1069"></a></h2>
                   </div>
                </div>
             </div>
@@ -545,7 +557,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="method1.opening.commandline.window"></a>6.1.&nbsp;Aperir un fenestra pro linea de commando
+                        <h3 class="title"><a name="method1.opening.commandline.window"></a>7.1.&nbsp;Aperir un fenestra pro linea de commando
                         </h3>
                      </div>
                   </div>
@@ -589,12 +601,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="launch.command.arguments"></a>6.2.&nbsp;Lancear le argumentos de commando<a class="indexterm" name="d0e1155"></a></h3>
+                        <h3 class="title"><a name="launch.command.arguments"></a>7.2.&nbsp;Lancear le argumentos de commando<a class="indexterm" name="d0e1171"></a></h3>
                      </div>
                   </div>
                </div>
-               <p>Le commando basic esseva ja mentionate precedentemente. Le cambios a iste commando implica le addition de "argumentos". Le
-                  argumentos es addite post le <span class="emphasis"><em>"java"</em></span> initial, e ante  <span class="emphasis"><em>"-jar <span class="application">OmegaT</span>.jar"</em></span>. Nota que in Windows tu pote cambiar le file <code class="filename">OmegaT.l4J.ini</code> pro reflecter tu preferentias. In altere platteformas, tu pote modificar tu lanceator (per exemplo, <code class="filename">OmegaT.sh</code> sur le Mac, <code class="filename">OmegaT</code> sub Linux) pro le mesme proposito.
+               <p>Le commando basic esseva ja mentionate precedentemente. Le cambiamentos a iste commando implica le addition de "argumentos".
+                  Le argumentos es addite post le <span class="emphasis"><em>"java"</em></span> initial, e ante  <span class="emphasis"><em>"-jar <span class="application">OmegaT</span>.jar"</em></span>. Nota que in Windows tu pote cambiar le file <code class="filename">OmegaT.l4J.ini</code> pro reflecter tu preferentias. In altere platteformas, tu pote modificar le file <code class="filename">Configuration.proprieties</code> sur Mac, o le lanceator de <code class="filename">OmegaT</code> sub Linux pro facer le mesmo.
                </p>
                <p>Un lista de argumentos possibile is fornite in sequito. Le usatores experte pote obtener re le argumentos plus de informationes
                   scribente <span class="emphasis"><em>man java</em></span> in le fenestra de terminal.
@@ -603,7 +615,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Lingua del interfacie de usator</strong></span></p>
-                        <p><span class="bold"><strong>-Duser.language=XX</strong></span><a class="indexterm" name="d0e1193"></a> Normalmente, id es quando <span class="application">OmegaT</span> es lanceate sin alicun argumento, le programma releva antea le lingua del systema operative del usator. Si es disponibile
+                        <p><span class="bold"><strong>-Duser.language=XX</strong></span><a class="indexterm" name="d0e1209"></a> Normalmente, id es quando <span class="application">OmegaT</span> es lanceate sin alicun argumento, le programma releva antea le lingua del systema operative del usator. Si es disponibile
                            un interfacie de usator in tal lingua, <span class="application">OmegaT</span> usara lo. Assi, si le systema operative del usator es russe e <span class="application">OmegaT</span> esseva localisate in russo, <span class="application">OmegaT</span> es monstrate con un interfacie del usator russe, menus russe, et cetera. Si le lingua del systema del usator non es disponibile,
                            <span class="application">OmegaT</span> adopta normalmente le anglese. Isto es le comportamento standard.
                         </p>
@@ -619,7 +631,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Pais del usator</strong></span></p>
-                        <p><span class="bold"><strong>-Duser.country=XX</strong></span><a class="indexterm" name="d0e1241"></a> In ultra al lingua, tu pote alsi specificar le pais, per exemplo CN o TW in caso del lingua Chinese. Pro monstrar le guida
+                        <p><span class="bold"><strong>-Duser.country=XX</strong></span><a class="indexterm" name="d0e1257"></a> In ultra al lingua, tu pote alsi specificar le pais, per exemplo CN o TW in caso del lingua Chinese. Pro monstrar le guida
                            de initio celere in le lingua desiderate, tu necessita specificar ambe le lingua e le pais. Isto es necessari etiam si il
                            ha sol un combination disponibile, como pt_BR in caso de portugese / Brasil.
                         </p>
@@ -630,29 +642,29 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Assignation del memoria</strong></span></p>
-                        <p><span class="bold"><strong>-XmxZZM </strong></span><a class="indexterm" name="d0e1257"></a>Iste commando assigna plus memoria a <span class="application">OmegaT</span>. Normalmente, es assignate 512 MB, assi il non ha beneficio assignar minus de iste cifra. "ZZ" sta pro le amontar de memoria
+                        <p><span class="bold"><strong>-XmxZZM </strong></span><a class="indexterm" name="d0e1273"></a>Iste commando assigna plus memoria a <span class="application">OmegaT</span>. Normalmente, es assignate 512 MB, assi il non ha beneficio assignar minus de iste cifra. "ZZ" sta pro le amontar de memoria
                            assignate, in megabytes. Le commando pro lancear  <span class="application">OmegaT</span> con assignation de 1024 MB (1 gigabyte) de memoria es in consequentia:
                         </p>
                         <p><code class="literal">java -Xmx1024M -jar <span class="application">OmegaT</span> .jar</code></p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Adresse IP del hospite proxy</strong></span></p>
-                        <p><span class="bold"><strong><span class="bold"><strong>-Dhttp.proxyHost=nnn.nnn.nnn.nnn</strong></span> <a class="indexterm" name="d0e1286"></a></strong></span> Le adresse IP de tu server proxy, si tu systema usa un proxy.
+                        <p><span class="bold"><strong><span class="bold"><strong>-Dhttp.proxyHost=nnn.nnn.nnn.nnn</strong></span> <a class="indexterm" name="d0e1302"></a></strong></span> Le adresse IP de tu servitor proxy, si tu systema usa un proxy.
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Numero del porta del hospite proxy</strong></span></p>
-                        <p><span class="bold"><strong>-Dhttp.proxyPort=NNNN</strong></span> <a class="indexterm" name="d0e1302"></a> The numero del porta que tu systema usa pro acceder al server proxy.
+                        <p><span class="bold"><strong>-Dhttp.proxyPort=NNNN</strong></span> <a class="indexterm" name="d0e1318"></a> The numero del porta que tu systema usa pro acceder al servitor proxy.
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Google Translate v2</strong></span></p>
-                        <p><span class="bold"><strong>-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </strong></span><span class="bold"><strong><a class="indexterm" name="d0e1318"></a></strong></span> Si tu ha signate pro le servicios Google Translate, scribe ci tu clave private de API Google. Note que le clave es longe
+                        <p><span class="bold"><strong>-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </strong></span><span class="bold"><strong><a class="indexterm" name="d0e1334"></a></strong></span> Si tu ha signate pro le servicios Google Translate, scribe ci tu clave private de API Google. Note que le clave es longe
                            38 characteres.
                         </p>
                      </li>
                      <li class="listitem">
-                        <p><span class="bold"><strong>Traductor Microsoft</strong></span><a class="indexterm" name="d0e1330"></a></p>
+                        <p><span class="bold"><strong>Traductor Microsoft</strong></span><a class="indexterm" name="d0e1346"></a></p>
                         <p>Face te secur que tu ha un conto gratuite Microsoft. Tu necessitara isto pro tu connexion a <a class="ulink" href="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema" target="_top">Windows Azure Marketplace</a> e pro usar le servicio de traductor. Nota que usque 2M characteres per mense es gratuite. Le duo entratas requirite son disponibile
                            in tu <a class="ulink" href="https://datamarket.azure.com/account" target="_top">pagina del conto</a> sub clave del conto Primari e Customer-ID:
                         </p>
@@ -660,7 +672,7 @@
                         <p>-<span class="bold"><strong>Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</strong></span></p>
                      </li>
                      <li class="listitem">
-                        <p><span class="bold"><strong>Yandex Translate</strong></span><a class="indexterm" name="d0e1358"></a></p>
+                        <p><span class="bold"><strong>Yandex Translate</strong></span><a class="indexterm" name="d0e1374"></a></p>
                         <p>Face te secur que tu ha un conto gratuite Yandex. Tu necesstara lo pro esser habile a obtener e usar le clave AP de traducton
                            de Yandex Translate. Le claves API pote esser requirite per un <a class="ulink" href="http://api.yandex.com/key/form.xml?service=trnsl" target="_top">modulo de requesta de clave API </a>, e viste sur le pagina <a class="ulink" href="http://api.yandex.com/key/keyslist.xml" target="_top">My Keys</a> page.
                         </p>
@@ -679,7 +691,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="omegat.command.arguments"></a>6.3.&nbsp;OmegaT in modo linea de commando<a class="indexterm" name="d0e1395"></a></h3>
+                        <h3 class="title"><a name="omegat.command.arguments"></a>7.3.&nbsp;OmegaT in modo linea de commando<a class="indexterm" name="d0e1411"></a></h3>
                      </div>
                   </div>
                </div>
@@ -691,7 +703,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="console.mode.prerequisites"></a>6.3.1.&nbsp;Pre-requisitos
+                           <h4 class="title"><a name="console.mode.prerequisites"></a>7.3.1.&nbsp;Pre-requisitos
                            </h4>
                         </div>
                      </div>
@@ -719,7 +731,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="starting.in.console.mode"></a>6.3.2.&nbsp;Lancear in modo consola
+                           <h4 class="title"><a name="starting.in.console.mode"></a>7.3.2.&nbsp;Lancear in modo consola
                            </h4>
                         </div>
                      </div>
@@ -729,6 +741,7 @@
                   <p><code class="literal">java -jar <span class="application">OmegaT</span>.jar
                                 /path/to/project \</code></p>
                   <p><code class="literal"> --config-dir=/path/to/config-files/ \</code></p>
+                  <p><code class="literal"> --config-file=/path/to/config-file/ \</code></p>
                   <p><code class="literal">
                                 --mode=console-translate|console-createpseudotranslatetmx|console-align</code></p>
                   <p><code class="literal"> --source-pattern={regexp}</code></p>
@@ -748,6 +761,10 @@
                            <p><code class="literal">--config-dir=&lt;config-dir&gt;</code> indica a <span class="application">OmegaT</span> in qual plica es servate le files de configuration. Si non date, <span class="application">OmegaT</span> reveni al plica del valores de preparation base (<span class="application">OmegaT</span> sub le home del usator o, si indisponibile, in le plica de labor actual). Nota le character "duple -" 
                            </p>
                         </li>
+                        <li class="listitem">
+                           <p><code class="literal">--config-file=&lt;config-file&gt;</code> dice a <span class="application">OmegaT</span> qual file de configuration usar.
+                           </p>
+                        </li>
                      </ul>
                   </div>
                   <div class="itemizedlist">
@@ -760,7 +777,7 @@
                                  <li class="listitem">
                                     <p><span class="emphasis"><em><code class="literal">--mode=console-translate</code></em></span></p>
                                     <p>In iste modo, OmegaT tentara de traducer le files in /source/ con le memorias de traduction disponibile. Isto es utile pro
-                                       exequer OmegaT sur un server con le files TMX que alimenta automaticamente un projecto.
+                                       exequer OmegaT sur un servitor con le files TMX que alimenta automaticamente un projecto.
                                     </p>
                                  </li>
                                  <li class="listitem">
@@ -870,7 +887,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="console.mode.option.quiet"></a>6.3.3.&nbsp;Option quiete
+                           <h4 class="title"><a name="console.mode.option.quiet"></a>7.3.3.&nbsp;Option quiete
                            </h4>
                         </div>
                      </div>
@@ -884,7 +901,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="console.mode.option.validatetags"></a>6.3.4.&nbsp;Optiones de validation del tag
+                           <h4 class="title"><a name="console.mode.option.validatetags"></a>7.3.4.&nbsp;Optiones de validation del tag
                            </h4>
                         </div>
                      </div>
@@ -899,7 +916,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>7.&nbsp;Construer <span class="application">OmegaT</span> ex le fonte<a class="indexterm" name="d0e1695"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>8.&nbsp;Construer <span class="application">OmegaT</span> ex le fonte<a class="indexterm" name="d0e1722"></a></h2>
                   </div>
                </div>
             </div>

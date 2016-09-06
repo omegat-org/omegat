@@ -24,13 +24,13 @@
 
     <itemizedlist>
       <listitem>
-        <para>Discarga le file - isto deberea esser un archivo  <filename>tarball</filename>  (extension <emphasis>tar.bz</emphasis> or <emphasis>tar.bz2</emphasis>).</para>
+        <para>Discarga le file - isto debe esser un archivo  <filename>tarball</filename>  (extension <emphasis>tar.bz</emphasis> or <emphasis>tar.bz2</emphasis>).</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Usa le utilitate untar (o su equivalente, per exemplo<filename> winrar</filename> in Windows) pro extraher su contentos in le plica &quot;Dictionary&quot; del projecto. Ibi deberea esser tres files, con extensiones <emphasis>dz, idx </emphasis>e <emphasis>ifo</emphasis>.</para>
+        <para>Usa le utilitate untar (o su equivalente, per exemplo<filename> winrar</filename> in Windows) pro extraher su contentos in le plica &quot;Dictionary&quot; del projecto. Ibi debe esser tres files, con extensiones <emphasis>dz, idx </emphasis>e <emphasis>ifo</emphasis>.</para>
       </listitem>
     </itemizedlist>
 

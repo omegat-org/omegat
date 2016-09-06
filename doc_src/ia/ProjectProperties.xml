@@ -8,9 +8,9 @@
   <section id="properties.dialog">
     <title>Generalitates</title>
 
-    <para>Le dialogo <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Projecto</guimenu> <guimenuitem>Proprietates...</guimenuitem> </menuchoice> es usate pro definir e modificar le plicas e le linguas del projecto.</para>
+    <para>Le fenestra de dialogo <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Projecto,</guimenu> <guimenuitem>Proprietates...</guimenuitem> </menuchoice> es usate pro definir e modificar le plicas e le linguas del projecto.</para>
 
-    <para>Il es possibile modificar le proprietates del projecto durante un session de traduction. Nota que le cambios al preparation del projecto pote haber alicun consequentias, specialmente quando le projecto esseva jam initiate. Usque tu ha qualque experientia con OmegaT, il es plus secur considerar tote le preparationes final un vice que le traduction ha initiate – a minus que, naturalmente, tu percipe que esseva facite un error major. Vide le section Impedir perdita del datos pro manieras e medios de protection de tu opera.</para>
+    <para>Il es possibile modificar le proprietates del projecto durante un session de traduction. Nota que le cambiamentos al preparation del projecto pote haber alicun consequentias, specialmente quando le projecto esseva jam initiate. Usque tu ha qualque experientia con OmegaT, il es plus secur considerar tote le preparationes final un vice que le traduction ha initiate – a minus que, naturalmente, tu percipe que esseva facite un error major. Vide le section Impedir perdita del datos pro manieras e medios de protection de tu opera.</para>
   </section>
 
   <section>
@@ -18,7 +18,7 @@
 
     <para>Tu pote o inserer le linguas fonte e destination con mano o usar le menus a tenta cadente. Memora que cambiar le linguas pote render inutile le memorias de traduction actualmente usate, pois que lor copula de linguas pote non concordar plus longe con le nove linguas.</para>
 
-    <para>Le Tokenizers correspondente al linguas seligite es monstrate. Vider pro le detalios le <link linkend="appendix.Tokenizers.inOmegaT">Appendice del Tokenizers</link>.</para>
+    <para>Le cercatores de radicales correspondente al linguas seligite es monstrate. Vider pro le detalios le <link linkend="appendix.Tokenizers.inOmegaT">Appendice del cercatores de radicales</link>.</para>
   </section>
 
   <section>
@@ -29,7 +29,7 @@
         <term>Habilita le segmentation a nivello de phrase</term>
 
         <listitem>
-          <para>Le configurationes del segmentation adressa sol le maniera con le qual le files fonte es tractate per <application>OmegaT</application>. Le maniera prevalente del segmentation del fontes es le segmentation a nivello de phrase, assi iste quadrato de option deberea in caso normal restar marcate.</para>
+          <para>Le configurationes del segmentation adressa sol le maniera con le qual le files fonte es tractate per <application>OmegaT</application>. Le maniera prevalente del segmentation del fontes es le segmentation a nivello de phrase, assi iste quadrato de option debe in caso normal restar marcate.</para>
 
           <para>In alicun rar casos le alternativa, id es le segmentation per paragraphos, pote esser preferite. Cambiar iste flag non modifica le segmentation del memorias de traduction jam existente. Si tu decide in medio al traduction de cambiar ab le segmentation per phrase al segmentation per paragrapho, le memoria de traduction interne del projecto non essera cambiate (OmegaT pote promover vetule memorias de traduction que non usa segmentation a phrase, ma non vice versa), sed OmegaT creara le concordantias partial de paragrapho, collante insimul traductiones de sententias existente. </para>
 
@@ -73,7 +73,7 @@
         <term>Remover le Tags</term>
 
         <listitem>
-          <para>Quando habilitate, tote le tags de formato es removite ex le segmentos fonte. Isto es specialmente utile in le tractamento del textos ubi le formattation in linea non es vermente utile (per exemplo,  PDF ex OCR,  .odt o .docx mal convertite, et cetera) In un caso normal il deberea semper esser possibile aperir le documentos de destination, pois que es removite sol le tags in linea. Le formattation non-visibile (id es, que non appare como tags in le editor de OmegaT) es retenite in le documentos final.</para>
+          <para>Quando habilitate, tote le tags de formato es removite ex le segmentos fonte. Isto es specialmente utile in le tractamento del textos ubi le formattation in linea non es vermente utile (per exemplo,  PDF ex OCR,  .odt o .docx mal convertite, et cetera) In un caso normal il debe semper esser possibile aperir le documentos de destination, pois que es removite sol le tags in linea. Le formattation non-visibile (id es, que non appare como tags in le editor de OmegaT) es retenite in le documentos final.</para>
         </listitem>
       </varlistentry>
 

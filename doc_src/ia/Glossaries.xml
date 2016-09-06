@@ -11,7 +11,7 @@
 
   <para>Si un projecto de <application>OmegaT</application> contine uno o plus glossarios, qualcunque terminos in le glossario que alsi es trovate in le actual segmento essera automaticamente monstrate in le quadro &quot;Glossario&quot;.</para>
 
-  <para>Tu defini su ubication e nomine in le fenestra de dialogo Proprietates de projecto. Le extension debe esser <filename>.txt</filename> o <filename>.utf8</filename> (si non, illo essera addite). Le ubication del file debe esser intra le plica <filename>/glossary</filename>, ma illo pote esser in un plica plus profunde (per exemplo, <filename>glossary/sub/glossary.txt</filename>). Le file pote non exister quando on configura lo, illo essera create (si necessari) quando tu addera le prime entrata. Si le file existe jam, nulle tentativa es facite pro verificar le formato o le filas de character del file: le nove entratas essera semper in formato texto simple, 'separate per signo de tabulation' e codificate UTF-8. Pois que le contento existente non essera alterate, eventual damnos a un file existente deberea esser limitate.</para>
+  <para>Tu defini su ubication e nomine in le fenestra de dialogo Proprietates de projecto. Le extension debe esser <filename>.txt</filename> o <filename>.utf8</filename> (si non, illo essera addite). Le ubication del file debe esser intra le plica <filename>/glossary </filename> , ma illo pote esser in un plica plus profunde (per exemplo, <filename>glossary/sub/glossary.txt</filename>). Le file pote non exister quando on configura lo, illo essera create (si necessari) quando tu addera le prime entrata. Si le file existe jam, nulle tentativa es facite pro verificar le formato o le filas de character del file: le nove entratas essera semper in formato texto simple, 'separate per signo de tabulation' e codificate UTF-8. Pois que le contento existente non essera alterate, eventual damnos a un file existente debe esser limitate.</para>
 
   <section>
     <title>Costume</title>
@@ -72,7 +72,9 @@
 
     <para>Le formato de file glossario es le texto simple, continente listas de tres columnas, delimitate per signo de tabulation, con le terminos fonte e de destination respectivemente in le prime e in le secunde columna. Le tertie columna pote esser usate pro information additional (commentos). Tu pote haber entratas con le columna de destination mancante, id es continente justo le termino fonte e le commento.</para>
 
-    <para>Le files Glossarios pote esser sia in le codifica prefixate del systema (e indicate per the le extension .tab) o in UTF-8 (con extension .utf8 o .txt) o in UTF-16 LE (con le extension .txt). Alsi supportate es le formato CSV. Iste formato es identic al formato separate per tabulation: termino fonte, termino de destination. Le campo Commento es alsi separate per un virgula ','. Le filas de character pote esser incluse in virgulettas &quot;, le qual permitte de haber un virgula intra un linea de character:</para>
+    <para>Le codification del glossarios es determinate automaticamente Naturalmente, le codification debe esser compatibile con ambe le linguas contente, assi Unicode es recommendate.</para>
+
+    <para>Alsi supportate es le formato CSV. Iste formato es identic al formato separate per tabulation: termino fonte, termino de destination. Le campo Commento es alsi separate per un virgula ','. Le filas de character pote esser incluse in virgulettas &quot;, le qual permitte de haber un virgula intra un linea de character:</para>
 
     <para><literal>&quot;Iste es un termino original, que contine un virgula&quot;,&quot;c'est un terme, qui contient une virgule&quot;</literal></para>
 

@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;20.&nbsp;Usar TaaS in OmegaT</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT 3.1 - Guida del usator">
-      <link rel="up" href="index.html" title="OmegaT 3.1 - Guida del usator">
+      <link rel="home" href="index.html" title="OmegaT 3.5 - Guida del usator">
+      <link rel="up" href="index.html" title="OmegaT 3.5 - Guida del usator">
       <link rel="prev" href="chapter.glossaries.html" title="Chapter&nbsp;19.&nbsp;Glossarios">
       <link rel="next" href="chapter.machine.translate.html" title="Chapter&nbsp;21.&nbsp;Traduction automatic">
    </head>
@@ -29,14 +29,14 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.TaaS"></a>Chapter&nbsp;20.&nbsp;Usar TaaS in OmegaT<a class="indexterm" name="d0e8649"></a></h1>
+                  <h1 class="title"><a name="chapter.TaaS"></a>Chapter&nbsp;20.&nbsp;Usar TaaS in OmegaT<a class="indexterm" name="d0e9058"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options">1. Generalitates</a></span></dt>
-               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.collections">2. Collectiones public e private</a></span></dt>
+               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.generalities">1. Generalitates</a></span></dt>
+               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.key">2. Crear un clave</a></span></dt>
                <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.access">3. Accesso al servicio TaaS</a></span></dt>
             </dl>
          </div>
@@ -44,7 +44,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="section.TaaS.options"></a>1.&nbsp;Generalitates
+                     <h2 class="title" style="clear: both"><a name="section.TaaS.generalities"></a>1.&nbsp;Generalitates
                      </h2>
                   </div>
                </div>
@@ -58,18 +58,14 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="section.TaaS.options.collections"></a>2.&nbsp;Collectiones public e private
+                     <h2 class="title" style="clear: both"><a name="section.TaaS.options.key"></a>2.&nbsp;Crear un clave
                      </h2>
                   </div>
                </div>
             </div>
-            <p>OmegaT permitte acceder le parte public de TaaS sin ulle registration.</p>
-            <p>Pro acceder Le parte private, un usator debe crear un clave usante https://demo.taas-project.eu/account/keys/create?system=omegaT.</p>
-            <p>Le clave debe alora esser date a OmegaT usante -Dtaas.user.key=xxxxx. Le lanceatores de configuration de OmegaT (OmegaT.l4J.ini,
-               omegat.kaptn e OmegaT.sh) contine un modello insertion.
-            </p>
-            <p>Quando on accede al servicio sin un clave private, essera mittite in le log le message sequente: Clave API del TaaS non trovate.
-               Vade a https://demo.taas-project.eu/account/keys/create?system=omegaT pro crear tu proprie clave, tum da lo a OmegaT con -Dtaas.user.key=xxxxx
+            <p>Pro acceder le servicio TaaS, un usator debe crear un clave per https://term.tilde.com/account/keys/crear?systema=OmegaT.</p>
+            <p>Le clave debe alora esser date a OmegaT per -Dtaas.user.key=xxxxx. Le lanceatores del configuration de OmegaT (OmegaT.l4J.ini,
+               omegat.kaptn e Configuration.properties) contine un entrata de patrono.
             </p>
          </div>
          <div class="section">
@@ -84,7 +80,7 @@
             <p>Clicca sur <span class="bold"><strong>Optiones, glossario</strong></span> pro monstrar le optiones sequente:
             </p>
             <p><span class="bold"><strong>Navigar per le collectiones TaaS</strong></span> permittera le navigation inter le existente collectiones pro le linguas fonte e destination del projecto, e discargar los.
-               Le collectiones private es displicate in nigrato. le collectiones es discargate qual glossarios TBX in le plica del currente
+               Le collectiones private es displicate in nigrato. Le collectiones es discargate qual glossarios TBX in le plica del currente
                glossario.
             </p>
             <p><span class="bold"><strong>Recerca del terminologia TaaS</strong></span>: quando controlate, permittera querer a TaaS datos sur le base de segmento per segmento. Tote le collectiones (public e private)

@@ -64,7 +64,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Installar super le installation existente. </emphasis>Pro facer isto, selige simplemente le mesme plica del installation existente, quando tu installara le version nove. Le version &quot;vetule&quot; de OmegaT essera superscribite, ma omne le configurationes essera retenite. Isto include preferentias fixate intra OmegaT, qualcunque cambios que tu faceva a tu file <filename>OmegaT.l4J.ini</filename> , e alsi a tu script de lanceamento (file .bat), si tu usa illo.</para>
+          <para><emphasis role="bold">Installar super le installation existente. </emphasis>Pro facer isto, selige simplemente le mesme plica del installation existente, quando tu installara le version nove. Le version &quot;vetule&quot; de OmegaT essera superscribite, ma omne le configurationes essera retenite. Isto include preferentias fixate intra OmegaT, qualcunque cambiamentos que tu faceva a tu file <filename>OmegaT.l4J.ini</filename> , e alsi a tu script de lanceamento (file .bat), si tu usa illo.</para>
         </listitem>
       </itemizedlist>
 
@@ -153,7 +153,7 @@
           </listitem>
 
           <listitem>
-            <para>Finalmente, salva le cambios con <emphasis>Salva - File.</emphasis></para>
+            <para>Finalmente, salva le cambiamentos con <emphasis>Salva - File.</emphasis></para>
           </listitem>
         </itemizedlist>
       </section>
@@ -173,7 +173,7 @@
           </listitem>
 
           <listitem>
-            <para>Clicca sur le button icone, pois pulsa <emphasis>Naviga...</emphasis> al sub plica /images in le plica del application <application>OmegaT</application>. Selige le icone <emphasis><application>OmegaT</application>.png</emphasis>. GNOME pote faller a monstrar le files icone in le formatos disponibile e initialmente appare pro expectar un file SVG, ma si le plica es seligite, le files deberea apparer e <application>OmegaT</application>.png pote esser seligite.</para>
+            <para>Clicca sur le button icone, pois pulsa <emphasis>Naviga...</emphasis> al sub plica /images in le plica del application <application>OmegaT</application>. Selige le icone <emphasis><application>OmegaT</application>.png</emphasis>. GNOME pote faller a monstrar le files icone in le formatos disponibile e initialmente appare pro expectar un file SVG, ma si le plica es seligite, le files debe apparer e <application>OmegaT</application>.png pote esser seligite.</para>
           </listitem>
         </itemizedlist>
       </section>
@@ -196,7 +196,7 @@
     <section id="which.package.to.download.OSX">
       <title>Discargar le pacchetto</title>
 
-      <para><application>OmegaT</application> contine le Java JRE 1.7</para>
+      <para><application>OmegaT</application> contine le Java JRE 1.8</para>
 
       <para>Discarga <emphasis>OmegaT_3.n.n_Mac.zip.</emphasis></para>
     </section>
@@ -220,15 +220,15 @@
 
       <para>Clicca duo vices sur<emphasis> <application>OmegaT</application>.app</emphasis> o clicca sur su location in le Dock.</para>
 
-      <para>Tu pote modificar le comportamento de OmegaT per rediger in le pacchetto le file <emphasis>Proprietates</emphasis> o le file<emphasis>OmegaT.sh</emphasis>.</para>
+      <para>Tu pote modificar le comportamento de OmegaT per rediger le <emphasis>Proprietates</emphasis> assi ben como le file <emphasis>Configuration.properties</emphasis> in le pacchetto.</para>
 
-      <para>Pro acceder <application><emphasis>OmegaT.sh</emphasis></application>, cliccar con le dextero sur <emphasis><application>OmegaT</application>.app</emphasis> e seliger &quot;monstrar le contentos del pacchetto&quot;, tunc aperir le file in Contents/MacOS cliccante con le dextero sur lo e seliger le editor de texto preferite Tu pote alsi poner &quot;cd&quot; ibi directemente ab linea de commando e aperir <application><emphasis>OmegaT.sh</emphasis> in un editor de linea de commando como emacs o vi</application>.<indexterm class="singular">
+      <para>Pro acceder a <application><emphasis>Configuration.properties</emphasis></application>, clicca dextre sur <emphasis><application>OmegaT</application>.app</emphasis> e elige &quot;Monstrar le contentos del pacchetto&quot;, pois aperi le file in Contentos/Ressources per cliccar dextre sur lo e elige tu editor de texto. Tu pote alsi &quot;cd&quot; ibi directemente ab le linea de commando e aperir <application><emphasis>Configuration.properties</emphasis> in un editor de linea de commando como emacs o vi</application>.<indexterm class="singular">
           <primary>Personalisar OmegaT</primary> <secondary>OS X</secondary> <tertiary>Parametros de lanceamento</tertiary>
         </indexterm></para>
 
-      <para>Le optiones es cambiate con le modification del file <emphasis>OmegaT.sh</emphasis>. Per optiones pre-definite, remover le # ante un parametro pro habilitar lo. Per exemplo, <filename>LANGUAGE=&quot;-Duser.language=ja&quot;</filename> (sin le #) lanceara <application>OmegaT</application> con le Interfacie del Usator in japonese.</para>
+      <para>Le optiones es cambiate per modificar le file <emphasis>Configuration.properties</emphasis>. Per optiones pre-definite, remover le # ante un parametro pro habilitar lo. Per exemplo, <filename>LANGUAGE=&quot;-Duser.language=ja&quot;</filename> (sin le #) lanceara <application>OmegaT</application> con le Interfacie del Usator in japonese.</para>
 
-      <para>Pro cambiar le quantitate de memoria disponibile, cambiar directemente le fila de commando del lanceamento. Pro instantia, <filename>${JAVA} -Xmx2048m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY} -jar OmegaT.jar</filename> lanceara OmegaT con 2 gigabytes de memoria.</para>
+      <para>Pro cambiar le quantitate del memoria disponibile, rediger le file <emphasis>OmegaT.app/Contentos/Info.plist</emphasis> e cambiar le contento del fila &lt;string&gt;-Xmx1024M&lt;/string&gt;. Pro instance, &lt;string&gt;-Xmx2048M&lt;/string&gt; will lanceamento OmegaT con le 2 gigas del memoria.</para>
 
       <para>Pro lancear instantias multiple de <emphasis><application>OmegaT</application>.app</emphasis>, clicca duo vices le file <emphasis>OmegaT.sh</emphasis> locate in <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
 
@@ -300,6 +300,14 @@
     </section>
   </section>
 
+  <section id="drag.and.drop">
+    <title>Traher e deponer<indexterm class="singular">
+        <primary>Facer fluer OmegaT</primary> <secondary>Traher e deponer</secondary>
+      </indexterm></title>
+
+    <para>In plure systemas, il es possibile aperir un projecto per traher un file <filename>omegat.project</filename> e deponer lo in le icone de OmegaT sur le scriptorio. Il pote alsi esser possibile aperir un projecto OmegaT per duple-clic sur un file <filename>omegat.project</filename>.</para>
+  </section>
+
   <section id="using.Java.Web.Start">
     <title>Usar Java Web Start<indexterm class="singular">
         <primary>Executar OmegaT</primary> <secondary>In Java Web Start</secondary>
@@ -368,7 +376,7 @@
           <primary>Facer fluer OmegaT</primary> <secondary>Lancear le argumentos de script</secondary>
         </indexterm></title>
 
-      <para>Le commando basic esseva ja mentionate precedentemente. Le cambios a iste commando implica le addition de &quot;argumentos&quot;. Le argumentos es addite post le <emphasis>&quot;java&quot;</emphasis> initial, e ante  <emphasis>&quot;-jar <application>OmegaT</application>.jar&quot;</emphasis>. Nota que in Windows tu pote cambiar le file <filename>OmegaT.l4J.ini</filename> pro reflecter tu preferentias. In altere platteformas, tu pote modificar tu lanceator (per exemplo, <filename>OmegaT.sh</filename> sur le Mac, <filename>OmegaT</filename> sub Linux) pro le mesme proposito.</para>
+      <para>Le commando basic esseva ja mentionate precedentemente. Le cambiamentos a iste commando implica le addition de &quot;argumentos&quot;. Le argumentos es addite post le <emphasis>&quot;java&quot;</emphasis> initial, e ante  <emphasis>&quot;-jar <application>OmegaT</application>.jar&quot;</emphasis>. Nota que in Windows tu pote cambiar le file <filename>OmegaT.l4J.ini</filename> pro reflecter tu preferentias. In altere platteformas, tu pote modificar le file <filename>Configuration.proprieties</filename> sur Mac, o le lanceator de <filename>OmegaT</filename> sub Linux pro facer le mesmo.</para>
 
       <para>Un lista de argumentos possibile is fornite in sequito. Le usatores experte pote obtener re le argumentos plus de informationes scribente <emphasis>man java</emphasis> in le fenestra de terminal.</para>
 
@@ -413,7 +421,7 @@
 
           <para><emphasis role="bold"><emphasis role="bold">-Dhttp.proxyHost=nnn.nnn.nnn.nnn</emphasis> <indexterm class="singular">
               <primary>Executar OmegaT</primary> <secondary>Argumentos del script de lanceamento</secondary> <tertiary>Adresse IP del proxy hospite</tertiary>
-            </indexterm></emphasis> Le adresse IP de tu server proxy, si tu systema usa un proxy.</para>
+            </indexterm></emphasis> Le adresse IP de tu servitor proxy, si tu systema usa un proxy.</para>
         </listitem>
 
         <listitem>
@@ -421,7 +429,7 @@
 
           <para><emphasis role="bold">-Dhttp.proxyPort=NNNN</emphasis> <indexterm class="singular">
               <primary>Executar OmegaT</primary> <secondary>Argumentos del script de lanceamento</secondary> <tertiary>Numero del porta del proxy hospite</tertiary>
-            </indexterm> The numero del porta que tu systema usa pro acceder al server proxy.</para>
+            </indexterm> The numero del porta que tu systema usa pro acceder al servitor proxy.</para>
         </listitem>
 
         <listitem>
@@ -453,7 +461,6 @@
 
           <para><emphasis role="bold">-Dyandex.api.key=</emphasis><emphasis role="bold">trnsl.1.1.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</emphasis></para>
         </listitem>
-
       </itemizedlist>
 
       <para>Le argumentos pote esser combinate: pro lancear <application>OmegaT</application> con tote le exemplos describite precedentemente, le commando esserea:</para>
@@ -499,6 +506,8 @@
 
         <para><literal> --config-dir=/path/to/config-files/ \</literal></para>
 
+        <para><literal> --config-file=/path/to/config-file/ \</literal></para>
+
         <para><literal>
         --mode=console-translate|console-createpseudotranslatetmx|console-align</literal></para>
 
@@ -518,6 +527,10 @@
           <listitem>
             <para><literal>--config-dir=&lt;config-dir&gt;</literal> indica a <application>OmegaT</application> in qual plica es servate le files de configuration. Si non date, <application>OmegaT</application> reveni al plica del valores de preparation base (<application>OmegaT</application> sub le home del usator o, si indisponibile, in le plica de labor actual). Nota le character &quot;duple -&quot; </para>
           </listitem>
+
+          <listitem>
+            <para><literal>--config-file=&lt;config-file&gt;</literal> dice a <application>OmegaT</application> qual file de configuration usar.</para>
+          </listitem>
         </itemizedlist>
 
         <itemizedlist>
@@ -528,7 +541,7 @@
               <listitem>
                 <para><emphasis><literal>--mode=console-translate</literal></emphasis></para>
 
-                <para>In iste modo, OmegaT tentara de traducer le files in /source/ con le memorias de traduction disponibile. Isto es utile pro exequer OmegaT sur un server con le files TMX que alimenta automaticamente un projecto.</para>
+                <para>In iste modo, OmegaT tentara de traducer le files in /source/ con le memorias de traduction disponibile. Isto es utile pro exequer OmegaT sur un servitor con le files TMX que alimenta automaticamente un projecto.</para>
               </listitem>
 
               <listitem>

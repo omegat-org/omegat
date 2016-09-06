@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
  34 Enhancements
   8 Bug fixes
-  0 Localisation updates
+  1 Localisation update
 ----------------------------------------------------------------------
 4.0.0 vs 3.6.0 update 2
 
@@ -138,6 +138,10 @@ could fail with duplicate numbers
 
   - Some CLI modes don't accept "." as project path
   https://sourceforge.net/p/omegat/bugs/830/
+
+  Localisation Updates:
+
+  - Interlingua localisation updated to 4.6 (UI, documentation, readme, scripts)
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 3

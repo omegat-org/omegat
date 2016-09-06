@@ -39,15 +39,16 @@
 
       <mediaobject>
         <imageobject role="html">
-		          <imagedata fileref="images/Omegatproject.png"/>
-       </imageobject>
-      <imageobject role="fo">
+          <imagedata fileref="images/Omegatproject.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
           <imagedata fileref="images/Omegatproject.png" width="60%"/>
         </imageobject>
       </mediaobject>
-	  </figure>
+    </figure>
 
-    <para>On pote seliger locationes alternative pro alicun del plicas al creation del projecto o durante le traduction. Il es dunque possibile seliger plicas existente o crear plicas in ubicationes que reflecte tu fluxo de labor e tu habitudes de gestion del projecto. Pro cambiar le position del plicas post que un projecto esseva create, aperi <guimenuitem>Projecto &gt; Proprietates...</guimenuitem> in le menu o con <guibutton>Ctrl+E</guibutton> e face le cambios necessari.</para>
+    <para>On pote seliger locationes alternative pro alicun del plicas al creation del projecto o durante le traduction. Il es dunque possibile seliger plicas existente o crear plicas in ubicationes que reflecte tu fluxo de labor e tu habitudes de gestion del projecto. Pro cambiar le position del plicas post que un projecto esseva create, aperi <guimenuitem>Projecto &gt; Proprietates...</guimenuitem> in le menu o con <guibutton>Ctrl+E</guibutton> e face le cambiamentos necessari.</para>
 
     <para>In un gerente de files un projecto de traduction appare e age justo como omne altere plica. In le sequente exemplo le plica <filename>my projects</filename> contine tres projectos OmegaT:</para>
 
@@ -130,6 +131,12 @@
 
                 <entry>si existente, illo contine le filtros de file projecto-specific, si requirite in <guimenuitem>Projecto &gt; Proprietates ... </guimenuitem>Vide <link linkend="chapter.project.properties">Capitulo Proprietates de projecto</link></entry>
               </row>
+
+              <row>
+                <entry>uiLayout.xml</entry>
+
+                <entry>si existente, illo contine le configurationes GUI specific pro le projectoject-</entry>
+              </row>
             </tbody>
           </tgroup>
         </informaltable></para>
@@ -167,7 +174,7 @@
           <row>
             <entry>logs/OmegaT.log</entry>
 
-            <entry>Iste file recorda le messages de error de Java  durante que <application>OmegaT</application> es functionante. Si OmegaT deberea apparer comportar se erraticamente, il es importante includer iste file o su parte pertinente in omne reporto de defecto</entry>
+            <entry>Iste file recorda le messages de error de Java  durante que <application>OmegaT</application> es functionante. Si OmegaT debe apparer comportar se erraticamente, il es importante includer iste file o su parte pertinente in omne reporto de defecto</entry>
           </row>
 
           <row>
@@ -252,6 +259,8 @@
         </tbody>
       </tgroup>
     </informaltable>
+
+    <para>Tu pote acceder ille plica directemente con le entrata<menuchoice> <guimenu>Optiones</guimenu> <guimenuitem>Acceder le plica de configuration</guimenuitem> </menuchoice> del menu.</para>
   </section>
 
   <section id="application.files">
@@ -327,34 +336,27 @@
           <row>
             <entry><filename>readme.txt</filename></entry>
 
-            <entry>Iste file es multo importante tu deberea assecurar te que tu lege lo ante lancear OmegaT. Illo include informationes general re OmegaT, ubi trovar plus information, como contribuer, et cetera. Illo ha essite rendite in plure linguas.</entry>
+            <entry>Iste file es multo importante tu debe assecurar te que tu lege lo ante lancear OmegaT. Illo include informationes general re OmegaT, ubi trovar plus information, como contribuer, et cetera. Illo ha essite rendite in plure linguas.</entry>
           </row>
 
           <row>
             <entry><application>OmegaT</application></entry>
 
             <entry><para>Un file texto continente duo lineas:</para>
-
             <programlisting>#!/bin/bash java
-java -jar OmegaT.jar $*</programlisting>
-
-            <para>Le usatores de Linux e OS X pote trovar iste file utile. Rende lo executabile (<literal>chmod +x OmegaT</literal>) ab le linea de commando post esser te assecurate que tu es in le plica del application OmegaT. Tu alora essera capace a lancear OmegaT con le execution de iste file ab le linea de commando</para>
-            </entry>
+java -jar OmegaT.jar $*</programlisting> <para>Le usatores de Linux e OS X pote trovar iste file utile. Rende lo executabile (<literal>chmod +x OmegaT</literal>) ab le linea de commando post esser te assecurate que tu es in le plica del application OmegaT. Tu alora essera capace a lancear OmegaT con le execution de iste file ab le linea de commando</para></entry>
           </row>
-          
+
           <row>
             <entry>OmegaT.bat</entry>
 
-            <entry><para>Un file batch, usate pro lancear  <application>OmegaT</application> a partir del linea de commando de Windows. Il contine sol le linea sequente:</para>
-
-            <programlisting>java -jar OmegaT.jar %*</programlisting>
-            </entry>
+            <entry><para>Un file batch, usate pro lancear  <application>OmegaT</application> a partir del linea de commando de Windows. Il contine sol le linea sequente:</para> <programlisting>java -jar OmegaT.jar %*</programlisting></entry>
           </row>
-          
+
           <row>
             <entry><literal>OmegaT.jar</literal></entry>
 
-            <entry>Le application principal de OmegaT. Pro lancear OmegaT, tu debe lancear iste file o per le linea de commando o per tu administrator de file, habitualmente per duple-clic sur illo.</entry>
+            <entry>Le application principal de OmegaT. Pro lancear OmegaT, tu debe lancear iste file o per le linea de commando o per tu gestor de file, habitualmente per duple-clic sur illo.</entry>
           </row>
         </tbody>
       </tgroup>

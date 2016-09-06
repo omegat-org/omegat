@@ -106,11 +106,11 @@
 
     <para>Exemplo:</para>
 
-    <para><literal>&lt;b0&gt;Formattation&lt;/b0&gt; &lt;b1&gt;uno&lt;/b1&gt; va esser confuse.&lt;segment 0001&gt;</literal></para>
+    <para><literal>Le &lt;b0&gt;Formattation&lt;/b0&gt; &lt;b1&gt;uno&lt;/b1&gt; va esser confuse. &lt;segmento 0001&gt;</literal></para>
 
     <para>Post un manipulation mal:</para>
 
-    <para><literal>&lt;b0&gt;Formattation &lt;b1&gt;uno&lt;/b0&gt; &lt;/b1&gt;es multo confuse ora.&lt;segment 0001&gt;</literal></para>
+    <para><literal>Le &lt;b0&gt;Formattation &lt;b1&gt;uno&lt;/b0&gt;&lt;/b1&gt; es multo confuse ora.&lt;segment 0001&gt;</literal></para>
   </section>
 
   <section>
@@ -152,7 +152,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Le fragmento(s) que deberea esser removite ex le expression regular del traduction</emphasis></para>
+        <para><emphasis role="bold">Le fragmento(s) que debe esser removite ex le expression regular del traduction</emphasis></para>
 
         <para>On pote scriber un expression regular pro contentos importun in le destination. Tote le concordantias in le segmento de destination essera alora colorate in rubre, id es facile a identificar e corriger. Quando on quere pro concordantias partial, le remover modello es ignorate. Un penalitate fixe de 5 es addite si le parte removite non concorda alicun altere segmento, assi le concordantia non es monstrate usque qual 100%</para>
       </listitem>
@@ -164,7 +164,7 @@
         <primary>Tags</primary> <secondary>Validation de gruppo</secondary>
       </indexterm></title>
 
-    <para>Le function valida tags releva cambios al sequentias del tag (an deliberate o accidental), e monstra le segmentos affligite. Lanceante iste function – <guimenuitem>Ctrl+Shift+V<indexterm class="singular">
+    <para>Le function valida tags releva cambiamentos al sequentias del tag (an deliberate o accidental), e monstra le segmentos affligite. Lanceante iste function – <guimenuitem>Ctrl+Shift+V<indexterm class="singular">
         <primary>Vias breve</primary> <secondary>Validation del tag - Ctrl+T</secondary>
       </indexterm></guimenuitem> - tu aperi un fenestra continente omne le segmentos in le file rendite, con tags suspecte rupte o mal. Reparar le tags e recrear le documentos de destination es facile con le function Valida tags. Le fenestra que aperi quando es pulsate <guimenuitem>Ctrl+Shift+V</guimenuitem> presenta un tabella a tres columnas con un ligamine al segmento, le segmento fonte e le segmento de destination.</para>
 

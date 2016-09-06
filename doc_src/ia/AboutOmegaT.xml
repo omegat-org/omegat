@@ -6,13 +6,13 @@
   <section id="OmegaT-Highlists">
     <title>OmegaT - evidentias</title>
 
-    <para><application>OmegaT</application> es un application gratuite de Traduction Assistite per le Computator (Computer Aided Translation - CAT), que opera in plure systemas operative e con le sequente aspectos notabile:</para>
+    <para><application>OmegaT</application> es un application gratuite, avantiate e professional de Traduction Assistite per le Computator (Computer Aided Translation - CAT), que opera sur plure systemas operative e con le sequente aspectos notabile:</para>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Memoria de traduction</emphasis> - <application> OmegaT </application>archiva tu traductiones in un file typo memoria de traduction. Al mesme tempore illo pote usar pro referentia le memorias de traduction salvate in previe traductiones, etiam con altere applicationes e per altere personas. On pote mesmo producer memorias de traduction con le copulas de segmentos con su traductiones, comocunque generate. Le memorias de traduction pote esser multo utile in un traduction ubi il ha plure repetitiones o segmentos de texto rationabilemente similante. OmegaT usa le memorias de traduction de tu traductiones precedente e pois suggere traductiones verosimilante pro le texto que tu actualmente va render.</para>
+        <para><emphasis role="bold">Memoria de traduction</emphasis> - <application> OmegaT </application>archiva tu traductiones in un file typo memoria de traduction. Al mesme tempore illo pote usar pro referentia le memorias de traduction salvate in previe traductiones, etiam con altere applicationes e per altere personas. On pote mesmo producer memorias de traduction con le copulas de segmentos con lor traductiones, comocunque generate. Le memorias de traduction pote esser multo utile in un traduction ubi il ha plure repetitiones o segmentos de texto rationabilemente similante. OmegaT usa le memorias de traduction de tu traductiones precedente e pois suggere traductiones verosimilante pro le texto que tu actualmente va render.</para>
 
-        <para>Iste memorias de traduction pote esser multo utile pro ajornar un documento ja rendite. Le phrases non alterate es automaticamente rendite, in vice le phrases ajornate es monstrate con le phrases del traductiones precedente le plus similabile, si on ha. Le modificationes al documento original es assi tractate rapidemente e con major facilitate. Si tu ha memorias de traduction vetule, per exemplo per tu agentia de traduction o per un cliente, OmegaT pote usar las pro referentia.</para>
+        <para>Iste memorias de traduction pote esser multo utile pro actualisar un documento ja rendite. Le phrases non alterate es automaticamente rendite, in vice le phrases actualisate es monstrate con le phrases del traductiones precedente le plus similabile, si il ha. Le modificationes al documento original es assi tractate rapidemente e con major facilitate. Si tu ha memorias de traduction vetule, per exemplo per tu agentia de traduction o per un cliente, OmegaT pote usar las pro referentia.</para>
 
         <para>Pro registrar e acceder al memorias de traduction, OmegaT usa le formato de file standard TMX, le qual garanti que tu pote excambiar tu production de traduction con altere applicationes CAT que supporta le mesme formato de file.</para>
       </listitem>
@@ -20,7 +20,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Le gestion del terminologia</emphasis>: le gestion del terminologia es importante pro le consistentia del traduction. OmegaT usa glossarios continente traductiones de parolas singule o parve phrases: un simplice dictionario bilingue pro specific dominios. Pro tu referentia, OmegaT monstra le traduction de tote le parolas del glossario que sia presente in le segmento e registrate in le glossario.</para>
+        <para><emphasis role="bold">Le gestion del terminologia</emphasis>: le gestion del terminologia es importante pro le consistentia del traduction. OmegaT usa glossarios continente traductiones de parolas singule o breve phrases: un simplice dictionario bilingue pro un specific dominio. Pro tu referentia, OmegaT monstra le traduction de tote le parolas del glossario que sia presente in le segmento e registrate in le glossario.</para>
       </listitem>
     </itemizedlist>
 
@@ -120,7 +120,7 @@
 
         <itemizedlist>
           <listitem>
-            <para><emphasis role="bold">Introduction al tokenizeres e al scriptes</emphasis></para>
+            <para><emphasis role="bold">Introduction al cercator de radicales e al scriptes</emphasis></para>
           </listitem>
 
           <listitem>

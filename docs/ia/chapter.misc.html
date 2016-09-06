@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;23.&nbsp;Subjectos miscellanee</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT 3.1 - Guida del usator">
-      <link rel="up" href="index.html" title="OmegaT 3.1 - Guida del usator">
+      <link rel="home" href="index.html" title="OmegaT 3.5 - Guida del usator">
+      <link rel="up" href="index.html" title="OmegaT 3.5 - Guida del usator">
       <link rel="prev" href="chapter.spellchecker.html" title="Chapter&nbsp;22.&nbsp;Corrector orthographic">
       <link rel="next" href="appendix.languages.html" title="Appendix&nbsp;A.&nbsp;Linguas - lista del codices ISO 639">
    </head>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.misc"></a>Chapter&nbsp;23.&nbsp;Subjectos miscellanee<a class="indexterm" name="d0e9068"></a></h1>
+                  <h1 class="title"><a name="chapter.misc"></a>Chapter&nbsp;23.&nbsp;Subjectos miscellanee<a class="indexterm" name="d0e9517"></a></h1>
                </div>
             </div>
          </div>
@@ -44,7 +44,7 @@
                      <dt><span class="section"><a href="chapter.misc.html#misc.console.mode.option.validatetags">1.4. Optiones de validation del tag</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.misc.html#d0e9247">2. Alineator automatic pro le proprietates de Java</a></span></dt>
+               <dt><span class="section"><a href="chapter.misc.html#d0e9696">2. Alineator automatic pro le proprietates de Java</a></span></dt>
                <dt><span class="section"><a href="chapter.misc.html#font.settings">3. Configurationes del typo de character</a></span></dt>
                <dt><span class="section"><a href="chapter.misc.html#preventing.data.loss">4. Prevenir le Perdita del datos</a></span></dt>
             </dl>
@@ -53,7 +53,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="omegat.misc.console.mode"></a>1.&nbsp;<span class="application"><a class="indexterm" name="d0e9074"></a>OmegaT</span> Modo Consola<a class="indexterm" name="d0e9081"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="omegat.misc.console.mode"></a>1.&nbsp;<span class="application"><a class="indexterm" name="d0e9523"></a>OmegaT</span> Modo Consola<a class="indexterm" name="d0e9530"></a></h2>
                   </div>
                </div>
             </div>
@@ -61,10 +61,10 @@
                <h3 class="title">Note</h3>
                <p>Interessante sol pro usatores experte!</p>
             </div>
-            <p>Le proposito del modo consola id es linea de commando) es pro permitter le uso <span class="application">de OmegaT</span> como instrumento de traduction in un ambiente de script. Quando on lancea in modo consola, nulle GUI es cargate (illo in
+            <p>Le proposito del modo consola (id es linea de commando) es permitter le uso <span class="application">de OmegaT</span> como instrumento de traduction in un ambiente de script. Quando on lancea in modo consola, nulle GUI es cargate (illo in
                consequentia operara sur qualcunque consola) e le projecto date es rendite automaticamente. Un exemplo esserea un projecto
                software, con un GUI localisate in plure linguas. Le uso del modo consola pote render un parte del processo de production
-               generante un interfacie localisate .
+               generante un interfacie localisate.
             </p>
             <div class="section">
                <div class="titlepage">
@@ -87,8 +87,8 @@
                         </p>
                      </li>
                      <li class="listitem">
-                        <p>Si tu non pote lancear <span class="application">OmegaT</span> normalmente (nulle ambiente graphic disponibile): copia le files del configurationes ex alicun altere installation <span class="application">OmegaT</span> sur un altere machina in un plica specific. Le ubication non face substantia, pois que tu pote adder lo al linea de commando
-                           al lanceamento (vide successivemente). Le files pertinente <code class="literal">filters.conf</code> e <code class="literal">segmentation.conf</code> pote esser trovate in le plica principal del usator (Per exemplo <code class="literal">C:\Documents and Settings\%User%\<span class="application">OmegaT</span></code> sub Windows, <code class="literal">%user%/.omegat/</code> sub Linux)
+                        <p>Si tu non pote lancear <span class="application">OmegaT</span> normalmente (nulle ambiente graphic disponibile): copia le files del configurationes ex alicun altere installation <span class="application">OmegaT</span> sur un altere machina in un plica specific. Le ubication non es importante, pois que tu pote adder la al linea de commando
+                           al lanceamento (vide in basso). Le files pertinente <code class="literal">filters.conf</code> e <code class="literal">segmentation.conf</code> pote esser trovate in le plica principal del usator (Per exemplo <code class="literal">C:\Documents and Settings\%User%\<span class="application">OmegaT</span></code> sub Windows, <code class="literal">%user%/.omegat/</code> sub Linux)
                         </p>
                      </li>
                   </ul>
@@ -103,8 +103,8 @@
                      </div>
                   </div>
                </div>
-               <p>Pro lancear OmegaT in modo consola, tu debe specificar parametros additional al lanceamento. Le plus importante de istos es
-                  <code class="literal">&lt;project-dir&gt;</code>, e optionalmente <code class="literal">--config-dir=&lt;config-dir&gt;</code>. Exemplo:
+               <p>Pro lancear OmegaT in modo consola, tu debe specificar le parametros additional al lanceamento. Le plus importante de istos
+                  es <code class="literal">&lt;project-dir&gt;</code>, e optionalmente <code class="literal">--config-dir=&lt;config-dir&gt;</code>. Exemplo:
                </p>
                <p><code class="literal">$&gt; java -jar <span class="application">OmegaT</span>.jar
                            /path/to/project \</code></p>
@@ -124,9 +124,8 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p><code class="literal">--config-dir=&lt;config-dir&gt;</code> habilita OmegaT a esser instruite in qual plica son servate le files de configuration. Si non specificate, OmegaT reveni
-                           al plica del valores prefixate initial (le plica OmegaT in le plica domo del usator o, si non disponibile: le plica de labor
-                           actual).
+                        <p><code class="literal">--config-dir=&lt;config-dir&gt;</code> activa OmegaT a esser instruite in qual plica es servate le files de configuration. Si non specificate, OmegaT reveni al
+                           plica del valores predefinite (le plica OmegaT in le plica domo del usator o, si non disponibile: le plica de labor actual).
                         </p>
                      </li>
                   </ul>
@@ -180,7 +179,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e9247"></a>2.&nbsp;Alineator automatic pro le proprietates de Java<a class="indexterm" name="d0e9250"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e9696"></a>2.&nbsp;Alineator automatic pro le proprietates de Java<a class="indexterm" name="d0e9699"></a></h2>
                   </div>
                </div>
             </div>
@@ -197,7 +196,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="font.settings"></a>3.&nbsp;Configurationes del typo de character<a class="indexterm" name="d0e9273"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="font.settings"></a>3.&nbsp;Configurationes del typo de character<a class="indexterm" name="d0e9722"></a></h2>
                   </div>
                </div>
             </div>
@@ -225,7 +224,7 @@
                   </li>
                </ul>
             </div>
-            <p>Le fenestra de dialogo pote esser accedite via le commando <a class="indexterm" name="d0e9299"></a><span class="guimenu">Optiones</span> → <span class="guimenuitem">Typo de character...</span> in le menu principal. Le fenestra de dialogo contine:
+            <p>Le fenestra de dialogo pote esser accedite via le commando <a class="indexterm" name="d0e9748"></a><span class="guimenu">Optiones</span> → <span class="guimenuitem">Typo de character...</span> in le menu principal. Le fenestra de dialogo contine:
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -262,11 +261,11 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="preventing.data.loss"></a>4.&nbsp;Prevenir le Perdita del datos<a class="indexterm" name="d0e9335"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="preventing.data.loss"></a>4.&nbsp;Prevenir le Perdita del datos<a class="indexterm" name="d0e9784"></a></h2>
                   </div>
                </div>
             </div>
-            <p><span class="application">OmegaT</span> es un application robuste. Tamen, tu deberea sumer precautiones re le perdita de datos quando usa <span class="application">OmegaT</span>, justo como con omne le altere application. Quando tu rende tu files, <span class="application">OmegaT</span> registra tote tu progresso in le memoria de traduction <code class="literal">project_save.tmx</code> que reside in le sub plica del projecto <code class="literal">/omegat</code>.
+            <p><span class="application">OmegaT</span> es un application robuste. Tamen, tu debe sumer precautiones re le perdita de datos quando usa <span class="application">OmegaT</span>, justo como con omne le altere application. Quando tu rende tu files, <span class="application">OmegaT</span> registra tote tu progresso in le memoria de traduction <code class="literal">project_save.tmx</code> que reside in le sub plica del projecto <code class="literal">/omegat</code>.
             </p>
             <p>OmegaT alsi reserva le memoria de traduction in project_save.tmx.YEARMMDDHHNN.bak in le identic sub plica cata vice que un
                projecto es aperte o recargate. YEAR es le anno in 4 cifras, MM es le mense, DD le die del mense, e HH e NN son le horas e
@@ -306,7 +305,7 @@
                      </p>
                   </li>
                   <li class="listitem">
-                     <p>Presta cura particular al cambios al files in  le plica <code class="literal">/source</code> durante que es in le medio de un projecto. Si le file fonte es modificate post que tu ha initiate a render, <span class="application">OmegaT</span> pote esser incapace a trovar un segmento que tu jam habeva rendite.
+                     <p>Respice particularmente al cambiamentos del files in le plica <code class="literal">/source</code> quando tu es in medio de un projecto. Si le file fonte es modificate post que tu ha initiate a render, <span class="application">OmegaT</span> pote esser incapace a trovar un segmento que tu jam habeva rendite.
                      </p>
                   </li>
                </ul>
@@ -314,7 +313,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Usa iste textos de Adjuta pro initiar. Si tu deberea haber problemas, posta un message in le Gruppo del usator de <a class="ulink" href="http://tech.groups.yahoo.com/group/OmegaT/" target="_top"><span class="application">OmegaT</span></a>. Non hesitar a postar in le lingua con le qual senti te plus familiar.
+                     <p>Usa iste textos de Adjuta pro initiar. Si tu debe haber problemas, posta un message in le Gruppo del usator de <a class="ulink" href="http://tech.groups.yahoo.com/group/OmegaT/" target="_top"><span class="application">OmegaT</span></a>. Non hesitar a postar in le lingua con le qual senti te plus familiar.
                      </p>
                   </li>
                </ul>

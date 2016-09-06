@@ -1,8 +1,8 @@
-This translation is the work of Carmelo SERRAINO copyright© 2013, 2015.
-Iste traduction es obra de Carmelo SERRAINO, copyright© 2013, 2015.
+This translation is the work of Carmelo SERRAINO copyright© 2013, 2016.
+Iste traduction es obra de Carmelo SERRAINO, copyright© 2013, 2016.
 
 ==============================================================================
-  OmegaT 3.0, File lege me
+  OmegaT 4.0, File lege me
 
   1.  Informationes re OmegaT
   2.  OmegaT, que es?
@@ -88,10 +88,10 @@ OmegaT supporta le formatos de file sequente:
 
 OmegaT pote esser personalisate pro supportar anque altere formatos de file.
 
-OmegaT analysara automaticamente etiam le plus complexe hierarchias de plicas fonte, pro acceder omne files supportate, e producer un plica final
-con exactemente le mesme structura del files rendite, includente etiam le copias de omne le files fonte non supportate.
+OmegaT analysara automaticamente etiam le plus complexe hierarchias de plicas fonte, pro acceder omne files supportate, e producer un plica de destination
+con exactemente le mesme structura, includente etiam le copias de omne le files fonte non supportate.
 
-Pro un parve instruction de initio rapide, lancea OmegaT e lege le "Initio instantanee" exponite.
+Pro un parve instruction de initio rapide, lancea OmegaT e lege le "Initio instantanee" displicate.
 
 Le manual del usator es in le pacchetto que tu ha justo discargate, tu pote lo acceder per le menu [Adjuta] post lanceate OmegaT.
 
@@ -99,8 +99,8 @@ Le manual del usator es in le pacchetto que tu ha justo discargate, tu pote lo a
  3. Installar OmegaT
 
 3.1 General
-Pro fluer, OmegaT necessita le Java Runtime Environment (JRE), version 
-1.6 o superior installate sur tu systema. Le pacchettos de OmegaT includente Java Runtime Environment es nunc disponibile pro sparniar al usatores le difficultate de  
+Pro facer fluer, OmegaT necessita Java Runtime Environment (JRE), version 
+1.8 o superior installate sur tu systema. Le pacchettos de OmegaT includente Java Runtime Environment es nunc disponibile pro sparniar al usatores le difficultate de  
 eliger, obtener e installar lo. 
 
 Si tu ja ha Java, un maniera pro installar le actual version de OmegaT es usar le Java Web Start. 
@@ -119,7 +119,7 @@ e pois lanceara OmegaT.
 Le manieras alternative de discargar e installar OmegaT es
 monstrate in basso. 
 
-Usatores de Windows e de Linuxsi tu es confidente que tu systema ha ja un 
+Usatores de Windows e de Linux: si tu es confidente que tu systema ha ja un 
 version convenibile del JRE installate, tu pote installar le version de OmegaT 
 sin JRE (isto es indicate in le nomine del version,"Without_JRE"). 
 Si tu es dubitose, nos recommenda que tu usa le version supplite con
@@ -138,10 +138,11 @@ que tu installa un version de OmegaT includente JRE. Isto es secur,
 proque iste "local" JRE non interferera con necun altere JRE installate
 sur tu systema.
 
-Usatores de Mac: 
-Le JRE es ja installate sur Mac OS X ante que Mac OS X 10.7 Le usatores de Lion essera suggerite per le systema quando isto lancea
-un application que necessita Java e le systema eventualmente 
-automaticamente discarga e installa lo.
+Mac usatores: 
+Le version pro Mac veni impacchettate con un JRE. Alias tu debe discargar e
+installar le JRE de Oracle sur tu proprie systema.
+
+    https://java.com/en/download/
 
 Systemas Linux sur PowerPC: 
 Le usatores debera discargar le JRE de IBM, pois que Sun non
@@ -162,7 +163,7 @@ continente le scriptes OmegaT.jar e linux-install.sh, e exeque le
 script per ./linux-install.sh.
 
 * Usatores de Mac:
-Copia le archivo OmegaT.zip in un location commode e discassa lo ibi 
+Copia le archivo OmegaT.zip in un position commode e discassa lo ibi 
 pro obtener un plica que contine un file indice del documentation HTML e
 OmegaT.app, le file del application.
 
@@ -179,7 +180,7 @@ gerente de files (Windows Explorer), cambia le configurationes assi que le exten
 es monstrate.
 
 * Usatores de Linux:
-Si tu ha usate le script de installation supplite, tu deberea ser habile a lancear OmegaT con:
+Si tu ha usate le script de installation supplite, tu debe ser habile a lancear OmegaT con:
 Alt+F2
 e pois:
 omegat
@@ -202,7 +203,7 @@ cd <plica ubi le file OmegaT.jar es locate>
 Si Java es installate a nivello de systema e es in le percurso del commando,  
 non necessita inserer le percurso integral.)
 
-Personalisar tu experientia de lancea de OmegaT:
+Personalisar tu experientia de lanceamento de OmegaT:
 
 * Usatores de Windows: 
 Le programma de installation pote crear vias breve pro te, in le menu  initio, sur le scriptorio e in le riga de lanceamento rapide. Tu pote alsi traher manualmente
@@ -228,6 +229,9 @@ campo de recerca de Spotlight.
 
 Pro participar al disveloppamento de OmegaT, continge le disveloppatores a:
     http://lists.sourceforge.net/lists/listinfo/omegat-development
+
+Pro initiar como un programmator, vide le documentation del disveloppator a:
+    https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/
 
 Pro traducer le interfacie del usator de OmegaT, le manual del usator o altere documentos pertinente,
 lege:
@@ -261,6 +265,7 @@ Le codice esseva contribuite per
   Enrique Estévez Fernández
   Martin Fleurke  
   Wildrich Fourie
+  Tony Graham
   Phillip Hall
   Jean-Christophe Helary
   Chihiro Hio
@@ -305,36 +310,27 @@ ma tu non vide tu nomine in le listas, senti te libere de nos continger.)
 OmegaT usa le sequente librerias:
   HTMLParser 1.6 ex Somik Raha, Derrick Oswald e alteres (Licentia LGPL)
   VLDocking Framework 3.0.5-SNAPSHOT (Licentia LGPL)
-  Hunspell ex László Németh e alteres (Licentia LGPL)
-  JNA ex Todd Fast, Timothy Wall e alteres (Licentia LGPL)
   Swing-Layout 1.0.4 (Licentia LGPL)
   Jmyspell 2.1.4 (Licentia LGPL)
-  SVNKit 1.8.5 (Licentia TMate)
+  SVNKit 1.8.12 (Licentia TMate)
   Sequence Library (Licentia Sequence Library)
   ANTLR 3.4 (Licentia ANTLR 3)
   SQLJet 1.1.10 (GPL v2)
   JGit (Licentia Eclipse Distribution)
   JSch (Licentia JSch)
-  Base64 (public dominio)
+  jsch-agent-proxy (Licentia jsch-agent-proxy)
   Diff (GPL)
-  trilead-ssh2-1.0.0-build217 (Licentia Trilead SSH)
+  trilead-ssh2-1.0.0-build220 (Licentia Trilead SSH)
   lucene-*.jar (Licentia Apache 2.0)
-  Le tokenizeres anglese (org.omegat.tokenizer.SnowballEnglishTokenizer e
-org.omegat.tokenizer.LuceneEnglishTokenizer) usa parolas de stop originari ex
-Okapi (http://okapi.sourceforge.net) (Licentia LGPL)
-  tinysegmenter.jar (Licentia BSD modificate)
   commons-*.jar (Licentia Apache 2.0)
-  jWordSplitter (Licentia Apache 2.0)
-  LanguageTool.jar (Licentia LGPL)
-  morfologik-*.jar (Licentia Morfologik)
-  segment-1.4.1.jar (Licentia Segment)
-  pdfbox-app-1.8.1.jar (Licentia Apache 2.0)
-  KoreanAnalyzer-3x-120223.jar (Licentia Apache 2.0)
+  LanguageTool (Licentia LGPL e alteres)
+  PDFBox (Licentia Apache 2.0)
   SuperTMXMerge-for_OmegaT.jar (Licentia LGPL)
-  groovy-all-2.2.2.jar (Licentia Apache 2.0)
+  groovy-all-2.2.6.jar (Licentia Apache 2.0)
   slf4j (Licentia MIT)
   juniversalchardet-1.0.3.jar (GPL v2)
   DictZip ex JDictd (GPL v2)
+  trie4j (Licentia Apache 2.0)
 
 ==============================================================================
  5.  Esque OmegaT es te importunante? Necessita tu adjuta?
@@ -350,7 +346,7 @@ Le cosa sequente a facer es confirmar lo que tu ha discoperte con altere usatore
 tranquillisar te que isto non ha essite ja reportate. Tu pote alsi verificar le pagina de reporto de defecto a
 SourceForge. Sol quando tu es secur que tu es le prime que ha discoperte alicun
 sequentia reproducibile de eventos que ha discatenate alicun cosa impreviste
-accider, tu deberea archivar un reporto de defecto.
+accider, tu debe archivar un reporto de defecto.
 
 Cata bon reporto de defecto, necessita justo tres cosas:
   - Le grados pro lo reproducer
@@ -358,7 +354,7 @@ Cata bon reporto de defecto, necessita justo tres cosas:
   - Lo que tu vide in vice
 
 Tu pote adder copias del files, portiones del diario, instantanees, tote le cosas que
-tu pensa poterea adjutar le developpatores a trovar e fixar le defecto tu ha revelate.
+tu pensa poterea adjutar le disveloppatores a trovar e fixar le defecto tu ha revelate.
 
 Pro navigar in le archivos del gruppo del usatores, vide:
      http://tech.groups.yahoo.com/group/OmegaT/

@@ -5,7 +5,7 @@
   8 Bug fixes
   1 Localisation update
 ----------------------------------------------------------------------
-4.0.0 vs 3.6.0 update 2
+4.0.0 vs 3.6.0 update 3
 
   Implemented requests:
 

@@ -36,6 +36,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -488,6 +489,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
                 String.join(",", disabledRuleIds));
 
         Preferences.setPreference(Preferences.LANGUAGETOOL_BRIDGE_TYPE, selectedBridgeType);
+        Preferences.setPreference(Preferences.LANGUAGETOOL_PREFS_CHANGED_AT, LocalDateTime.now());
     }
 
     private DefaultMutableTreeNode createTree(List<Rule> rules) {

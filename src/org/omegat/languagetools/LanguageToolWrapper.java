@@ -110,7 +110,7 @@ public class LanguageToolWrapper {
             // This property is changed in the end of configuration dialog
             // saving, so at this point every other related properties are
             // already changed.
-            if (evt.getPropertyName().equals(Preferences.LANGUAGETOOL_BRIDGE_TYPE)) {
+            if (evt.getPropertyName().equals(Preferences.LANGUAGETOOL_PREFS_CHANGED_AT)) {
                 setBridgeFromCurrentProject();
             }
         });

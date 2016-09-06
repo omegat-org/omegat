@@ -278,6 +278,8 @@ public class Preferences {
     public static final String LANGUAGETOOL_DISABLED_RULES_PREFIX = "lt_disabledRules";
     /** Enabled rules prefix */
     public static final String LANGUAGETOOL_ENABLED_RULES_PREFIX = "lt_enabledRules";
+    /** Enabled rules prefix */
+    public static final String LANGUAGETOOL_PREFS_CHANGED_AT = "lt_prefsChangedAt";
 
     /**
      * The location of the scripts

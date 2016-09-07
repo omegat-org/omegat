@@ -59,6 +59,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreePath;
 import javax.xml.parsers.ParserConfigurationException;
@@ -377,6 +378,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         StaticUIUtils.setEscapeClosable(this);
         initComponents();
         getRootPane().setDefaultButton(okButton);
+        setMinimumSize(new Dimension(500, 350));
         setLocationRelativeTo(parent);
         loadPreferences();
 
@@ -392,6 +394,8 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
             rulesTree.setEnabled(false);
             return;
         }
+        
+        rulesTree.addTreeSelectionListener(e -> updateButtonState());
 
         List<Rule> rules = ltInstance.getAllRules();
         sourceLtLang.ifPresent(srcLtLang -> {
@@ -418,6 +422,20 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         rulesTree.setEditable(false);
         rulesTree.setCellRenderer(new CheckBoxTreeCellRenderer());
         TreeListener.install(rulesTree);
+
+        updateButtonState();
+    }
+
+    void updateButtonState() {
+        TreePath[] selected = rulesTree.getSelectionPaths();
+        boolean deletable = selected != null
+                && Stream.of(selected).map(TreePath::getLastPathComponent)
+                        .allMatch(LanguageToolConfigurationDialog::isExternalRuleNode);
+        deleteRuleButton.setEnabled(deletable);
+    }
+
+    static boolean isExternalRuleNode(Object node) {
+        return node instanceof RuleNode && ((RuleNode) node).getRule() instanceof ExternalRule;
     }
 
     private void doClose() {
@@ -757,6 +775,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
         org.openide.awt.Mnemonics.setLocalizedText(deleteRuleButton, OStrings.getString("BUTTON_REMOVE")); // NOI18N
         deleteRuleButton.setToolTipText("");
+        deleteRuleButton.setEnabled(false);
         deleteRuleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteRuleButtonActionPerformed(evt);
@@ -770,7 +789,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
         getContentPane().add(centerPanel, java.awt.BorderLayout.CENTER);
 
-        bottomPanel.setPreferredSize(new java.awt.Dimension(631, 40));
+        bottomPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         bottomPanel.setLayout(new java.awt.BorderLayout());
 
         buttonsPanel.setLayout(new javax.swing.BoxLayout(buttonsPanel, javax.swing.BoxLayout.LINE_AXIS));
@@ -876,17 +895,19 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_addRuleButtonActionPerformed
 
     private void deleteRuleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRuleButtonActionPerformed
-        TreePath currentSelection = rulesTree.getSelectionPath();
-        if (currentSelection != null) {
-            DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) currentSelection.getLastPathComponent();
-            if (currentNode instanceof RuleNode && ((RuleNode) currentNode).getRule() instanceof ExternalRule) {
-                DefaultTreeModel model = (DefaultTreeModel) rulesTree.getModel();
-                DefaultMutableTreeNode parent = (DefaultMutableTreeNode) currentNode.getParent();
-                model.removeNodeFromParent(currentNode);
-                if (parent.getChildCount() == 0) {
-                    model.removeNodeFromParent(parent);
-                }
-            }
+        TreePath[] currentSelections = rulesTree.getSelectionPaths();
+        if (currentSelections != null) {
+            DefaultTreeModel model = (DefaultTreeModel) rulesTree.getModel();
+            Stream.of(currentSelections).map(TreePath::getLastPathComponent)
+                    .filter(LanguageToolConfigurationDialog::isExternalRuleNode)
+                    .forEach(node -> {
+                        MutableTreeNode currentNode = (MutableTreeNode) node;
+                        MutableTreeNode parent = (MutableTreeNode) currentNode.getParent();
+                        model.removeNodeFromParent(currentNode);
+                        if (parent.getChildCount() == 0) {
+                            model.removeNodeFromParent(parent);
+                        }
+                    });
         }
     }//GEN-LAST:event_deleteRuleButtonActionPerformed
 

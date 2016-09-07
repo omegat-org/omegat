@@ -58,6 +58,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreePath;
 import javax.xml.parsers.ParserConfigurationException;
@@ -392,6 +393,8 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
             rulesTree.setEnabled(false);
             return;
         }
+        
+        rulesTree.addTreeSelectionListener(e -> updateButtonState());
 
         List<Rule> rules = ltInstance.getAllRules();
         sourceLtLang.ifPresent(srcLtLang -> {
@@ -418,6 +421,17 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         rulesTree.setEditable(false);
         rulesTree.setCellRenderer(new CheckBoxTreeCellRenderer());
         TreeListener.install(rulesTree);
+
+        updateButtonState();
+    }
+
+    void updateButtonState() {
+        TreePath[] selected = rulesTree.getSelectionPaths();
+        boolean deletable = selected != null
+                && Stream.of(selected).map(TreePath::getLastPathComponent)
+                        .allMatch(LanguageToolConfigurationDialog::isExternalRuleNode);
+        deleteRuleButton.setEnabled(deletable);
+    }
 
     static boolean isExternalRuleNode(Object node) {
         return node instanceof RuleNode && ((RuleNode) node).getRule() instanceof ExternalRule;
@@ -759,6 +773,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
         org.openide.awt.Mnemonics.setLocalizedText(deleteRuleButton, OStrings.getString("BUTTON_REMOVE")); // NOI18N
         deleteRuleButton.setToolTipText("");
+        deleteRuleButton.setEnabled(false);
         deleteRuleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteRuleButtonActionPerformed(evt);

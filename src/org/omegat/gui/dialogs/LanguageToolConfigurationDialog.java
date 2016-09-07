@@ -376,6 +376,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         StaticUIUtils.setEscapeClosable(this);
         initComponents();
         getRootPane().setDefaultButton(okButton);
+        setMinimumSize(new Dimension(500, 350));
         setLocationRelativeTo(parent);
         loadPreferences();
 
@@ -768,7 +769,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
         getContentPane().add(centerPanel, java.awt.BorderLayout.CENTER);
 
-        bottomPanel.setPreferredSize(new java.awt.Dimension(631, 40));
+        bottomPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         bottomPanel.setLayout(new java.awt.BorderLayout());
 
         buttonsPanel.setLayout(new javax.swing.BoxLayout(buttonsPanel, javax.swing.BoxLayout.LINE_AXIS));

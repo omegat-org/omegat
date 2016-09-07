@@ -418,6 +418,9 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         rulesTree.setEditable(false);
         rulesTree.setCellRenderer(new CheckBoxTreeCellRenderer());
         TreeListener.install(rulesTree);
+
+    static boolean isExternalRuleNode(Object node) {
+        return node instanceof RuleNode && ((RuleNode) node).getRule() instanceof ExternalRule;
     }
 
     private void doClose() {
@@ -875,17 +878,19 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_addRuleButtonActionPerformed
 
     private void deleteRuleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRuleButtonActionPerformed
-        TreePath currentSelection = rulesTree.getSelectionPath();
-        if (currentSelection != null) {
-            DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) currentSelection.getLastPathComponent();
-            if (currentNode instanceof RuleNode && ((RuleNode) currentNode).getRule() instanceof ExternalRule) {
-                DefaultTreeModel model = (DefaultTreeModel) rulesTree.getModel();
-                DefaultMutableTreeNode parent = (DefaultMutableTreeNode) currentNode.getParent();
-                model.removeNodeFromParent(currentNode);
-                if (parent.getChildCount() == 0) {
-                    model.removeNodeFromParent(parent);
-                }
-            }
+        TreePath[] currentSelections = rulesTree.getSelectionPaths();
+        if (currentSelections != null) {
+            DefaultTreeModel model = (DefaultTreeModel) rulesTree.getModel();
+            Stream.of(currentSelections).map(TreePath::getLastPathComponent)
+                    .filter(LanguageToolConfigurationDialog::isExternalRuleNode)
+                    .forEach(node -> {
+                        MutableTreeNode currentNode = (MutableTreeNode) node;
+                        MutableTreeNode parent = (MutableTreeNode) currentNode.getParent();
+                        model.removeNodeFromParent(currentNode);
+                        if (parent.getChildCount() == 0) {
+                            model.removeNodeFromParent(parent);
+                        }
+                    });
         }
     }//GEN-LAST:event_deleteRuleButtonActionPerformed
 

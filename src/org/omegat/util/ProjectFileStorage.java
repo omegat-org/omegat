@@ -75,6 +75,10 @@ public class ProjectFileStorage {
         }
     }
 
+    public static Omegat parseProjectFile(File file) throws Exception {
+        return parseProjectFile(FileUtils.readFileToByteArray(file));
+    }
+
     public static Omegat parseProjectFile(byte[] projectFile) throws Exception {
         return (Omegat) CONTEXT.createUnmarshaller().unmarshal(new ByteArrayInputStream(projectFile));
     }
@@ -112,13 +116,16 @@ public class ProjectFileStorage {
         if (!projectFile.isFile()) {
             throw new IllegalArgumentException("Project file was not a file");
         }
+        Omegat om = parseProjectFile(projectFile);
+        return loadPropertiesFile(projectDir, om);
+    }
+
+    static ProjectProperties loadPropertiesFile(File projectDir, Omegat om) throws Exception {
         if (!projectDir.isDirectory()) {
             throw new IllegalArgumentException("Project directory was not a directory");
         }
 
         ProjectProperties result = new ProjectProperties(projectDir);
-
-        Omegat om = parseProjectFile(FileUtils.readFileToByteArray(projectFile));
 
         if (!OConsts.PROJ_CUR_VERSION.equals(om.getProject().getVersion())) {
             throw new TranslationException(StringUtil.format(

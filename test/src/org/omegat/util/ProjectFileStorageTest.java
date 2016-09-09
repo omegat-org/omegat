@@ -27,6 +27,8 @@ package org.omegat.util;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -35,6 +37,7 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
 import org.omegat.tokenizer.LuceneFrenchTokenizer;
 
+import gen.core.project.Omegat;
 import junit.framework.TestCase;
 
 public class ProjectFileStorageTest extends TestCase {
@@ -45,9 +48,9 @@ public class ProjectFileStorageTest extends TestCase {
 
     @Override
     protected void setUp() throws Exception {
-        tempDir = Files.createTempDirectory("omegat").toFile();
+        tempDir = Files.createTempDirectory("omegat").toFile().getAbsoluteFile();
         assertTrue(tempDir.isDirectory());
-        TestPreferencesInitializer.init(tempDir.getAbsolutePath());
+        TestPreferencesInitializer.init(tempDir.getPath());
     }
 
     @Override
@@ -107,5 +110,188 @@ public class ProjectFileStorageTest extends TestCase {
         props.autocreateDirectories();
         props.verifyProject();
         assertTrue(props.getWriteableGlossary().endsWith("foo/bar.txt"));
+    }
+
+    public void testNearAbsolutePaths() throws Exception {
+        File projFile = new File(PROJECT_DIR, "defaultdirs.project");
+        Omegat omt = ProjectFileStorage.parseProjectFile(projFile);
+
+        for (int i = 0; i < OConsts.MAX_PARENT_DIRECTORIES_ABS2REL; i++) {
+
+            String prefix = repeat(i, "a/");
+            File projRoot = Paths.get(tempDir.getAbsolutePath(), prefix, "root").toFile();
+            projRoot.mkdirs();
+    
+            // Set project folders to absolute paths
+            File srcDir = new File(tempDir, "source").getAbsoluteFile();
+            File trgDir = new File(tempDir, "target").getAbsoluteFile();
+            File dictDir = new File(tempDir, "dictionary").getAbsoluteFile();
+            File glosDir = new File(tempDir, "glossary").getAbsoluteFile();
+            File tmDir = new File(tempDir, "tm").getAbsoluteFile();
+            omt.getProject().setSourceDir(srcDir.getPath());
+            omt.getProject().setTargetDir(trgDir.getPath());
+            omt.getProject().setDictionaryDir(dictDir.getPath());
+            omt.getProject().setGlossaryDir(glosDir.getPath());
+            omt.getProject().setTmDir(tmDir.getPath());
+    
+            // Make all the actual folders
+            Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir).forEach(File::mkdirs);
+    
+            // Load the ProjectProperties and verify that the project folders
+            // are resolved correctly
+            ProjectProperties props = ProjectFileStorage.loadPropertiesFile(projRoot, omt);
+            props.verifyProject();
+
+            // Write the project file out and read it again to make sure the
+            // paths are correctly round-tripped. Since these are "near" paths
+            // they should become relative and not be absolute.
+            ProjectFileStorage.writeProjectFile(props);
+            File outProjFile = new File(projRoot, OConsts.FILE_PROJECT);
+            assertTrue(outProjFile.isFile());
+            Omegat outOmt = ProjectFileStorage.parseProjectFile(outProjFile);
+            String relPrefix = repeat(i + 1, "../");
+            assertEquals(relPrefix + srcDir.getName(), outOmt.getProject().getSourceDir());
+            assertEquals(relPrefix + trgDir.getName(), outOmt.getProject().getTargetDir());
+            assertEquals(relPrefix + dictDir.getName(), outOmt.getProject().getDictionaryDir());
+            assertEquals(relPrefix + glosDir.getName(), outOmt.getProject().getGlossaryDir());
+            assertEquals(relPrefix + tmDir.getName(), outOmt.getProject().getTmDir());
+        }
+    }
+
+    public void testNearRelativePaths() throws Exception {
+        File projFile = new File(PROJECT_DIR, "defaultdirs.project");
+        Omegat omt = ProjectFileStorage.parseProjectFile(projFile);
+
+        for (int i = 0; i < OConsts.MAX_PARENT_DIRECTORIES_ABS2REL; i++) {
+            File projRoot = Paths.get(tempDir.getAbsolutePath(), repeat(i, "a/"), "root").toFile();
+            projRoot.mkdirs();
+
+            // Set project folders to relative paths
+            File srcDir = new File(tempDir, "source").getAbsoluteFile();
+            File trgDir = new File(tempDir, "target").getAbsoluteFile();
+            File dictDir = new File(tempDir, "dictionary").getAbsoluteFile();
+            File glosDir = new File(tempDir, "glossary").getAbsoluteFile();
+            File tmDir = new File(tempDir, "tm").getAbsoluteFile();
+            String prefix = repeat(i + 1, "../");
+            omt.getProject().setSourceDir(prefix + srcDir.getName());
+            omt.getProject().setTargetDir(prefix + trgDir.getName());
+            omt.getProject().setDictionaryDir(prefix + dictDir.getName());
+            omt.getProject().setGlossaryDir(prefix + glosDir.getName());
+            omt.getProject().setTmDir(prefix + tmDir.getName());
+
+            // Make all the actual folders
+            Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir).forEach(File::mkdirs);
+
+            // Load the ProjectProperties and verify that the project folders
+            // are resolved correctly
+            ProjectProperties props = ProjectFileStorage.loadPropertiesFile(projRoot, omt);
+            props.verifyProject();
+
+            // Write the project file out and read it again to make sure the
+            // paths are correctly round-tripped. Since these are "near" paths
+            // they should remain relative and not absolute.
+            ProjectFileStorage.writeProjectFile(props);
+            File outProjFile = new File(projRoot, OConsts.FILE_PROJECT);
+            assertTrue(outProjFile.isFile());
+            Omegat outOmt = ProjectFileStorage.parseProjectFile(outProjFile);
+            assertEquals(prefix + srcDir.getName(), outOmt.getProject().getSourceDir());
+            assertEquals(prefix + trgDir.getName(), outOmt.getProject().getTargetDir());
+            assertEquals(prefix + dictDir.getName(), outOmt.getProject().getDictionaryDir());
+            assertEquals(prefix + glosDir.getName(), outOmt.getProject().getGlossaryDir());
+            assertEquals(prefix + tmDir.getName(), outOmt.getProject().getTmDir());
+        }
+    }
+
+    public void testFarAbsolutePaths() throws Exception {
+        File projFile = new File(PROJECT_DIR, "defaultdirs.project");
+        Omegat omt = ProjectFileStorage.parseProjectFile(projFile);
+
+        String prefix = repeat(OConsts.MAX_PARENT_DIRECTORIES_ABS2REL, "a/");
+        File projRoot = Paths.get(tempDir.getAbsolutePath(), prefix, "root").toFile();
+        projRoot.mkdirs();
+
+        // Set project folders to absolute paths
+        File srcDir = new File(tempDir, "source").getAbsoluteFile();
+        File trgDir = new File(tempDir, "target").getAbsoluteFile();
+        File dictDir = new File(tempDir, "dictionary").getAbsoluteFile();
+        File glosDir = new File(tempDir, "glossary").getAbsoluteFile();
+        File tmDir = new File(tempDir, "tm").getAbsoluteFile();
+        omt.getProject().setSourceDir(srcDir.getPath());
+        omt.getProject().setTargetDir(trgDir.getPath());
+        omt.getProject().setDictionaryDir(dictDir.getPath());
+        omt.getProject().setGlossaryDir(glosDir.getPath());
+        omt.getProject().setTmDir(tmDir.getPath());
+
+        // Make all the actual folders
+        Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir).forEach(File::mkdirs);
+
+        // Load the ProjectProperties and verify that the project folders
+        // are resolved correctly
+        ProjectProperties props = ProjectFileStorage.loadPropertiesFile(projRoot, omt);
+        props.verifyProject();
+
+        // Write the project file out and read it again to make sure the
+        // paths are correctly round-tripped. Since these are "far" paths
+        // they should remain absolute.
+        ProjectFileStorage.writeProjectFile(props);
+        File outProjFile = new File(projRoot, OConsts.FILE_PROJECT);
+        assertTrue(outProjFile.isFile());
+        Omegat outOmt = ProjectFileStorage.parseProjectFile(outProjFile);
+        assertEquals(ProjectFileStorage.normalizeSlashes(srcDir.getPath()), outOmt.getProject().getSourceDir());
+        assertEquals(ProjectFileStorage.normalizeSlashes(trgDir.getPath()), outOmt.getProject().getTargetDir());
+        assertEquals(ProjectFileStorage.normalizeSlashes(dictDir.getPath()), outOmt.getProject().getDictionaryDir());
+        assertEquals(ProjectFileStorage.normalizeSlashes(glosDir.getPath()), outOmt.getProject().getGlossaryDir());
+        assertEquals(ProjectFileStorage.normalizeSlashes(tmDir.getPath()), outOmt.getProject().getTmDir());
+    }
+
+    public void testFarRelativePaths() throws Exception {
+        File projFile = new File(PROJECT_DIR, "defaultdirs.project");
+        Omegat omt = ProjectFileStorage.parseProjectFile(projFile);
+
+        String prefix = repeat(OConsts.MAX_PARENT_DIRECTORIES_ABS2REL, "a/");
+        File projRoot = Paths.get(tempDir.getAbsolutePath(), prefix, "root").toFile();
+        projRoot.mkdirs();
+
+        // Set project folders to absolute paths
+        File srcDir = new File(tempDir, "source").getAbsoluteFile();
+        File trgDir = new File(tempDir, "target").getAbsoluteFile();
+        File dictDir = new File(tempDir, "dictionary").getAbsoluteFile();
+        File glosDir = new File(tempDir, "glossary").getAbsoluteFile();
+        File tmDir = new File(tempDir, "tm").getAbsoluteFile();
+        String relPrefix = repeat(OConsts.MAX_PARENT_DIRECTORIES_ABS2REL + 1, "../");
+        omt.getProject().setSourceDir(relPrefix + srcDir.getName());
+        omt.getProject().setTargetDir(relPrefix + trgDir.getName());
+        omt.getProject().setDictionaryDir(relPrefix + dictDir.getName());
+        omt.getProject().setGlossaryDir(relPrefix + glosDir.getName());
+        omt.getProject().setTmDir(relPrefix + tmDir.getName());
+
+        // Make all the actual folders
+        Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir).forEach(File::mkdirs);
+
+        // Load the ProjectProperties and verify that the project folders
+        // are resolved correctly
+        ProjectProperties props = ProjectFileStorage.loadPropertiesFile(projRoot, omt);
+        props.verifyProject();
+
+        // Write the project file out and read it again to make sure the
+        // paths are correctly round-tripped. Since these are "far" paths
+        // they should become absolute and not remain relative.
+        ProjectFileStorage.writeProjectFile(props);
+        File outProjFile = new File(projRoot, OConsts.FILE_PROJECT);
+        assertTrue(outProjFile.isFile());
+        Omegat outOmt = ProjectFileStorage.parseProjectFile(outProjFile);
+        assertEquals(ProjectFileStorage.normalizeSlashes(srcDir.getPath()), outOmt.getProject().getSourceDir());
+        assertEquals(ProjectFileStorage.normalizeSlashes(trgDir.getPath()), outOmt.getProject().getTargetDir());
+        assertEquals(ProjectFileStorage.normalizeSlashes(dictDir.getPath()), outOmt.getProject().getDictionaryDir());
+        assertEquals(ProjectFileStorage.normalizeSlashes(glosDir.getPath()), outOmt.getProject().getGlossaryDir());
+        assertEquals(ProjectFileStorage.normalizeSlashes(tmDir.getPath()), outOmt.getProject().getTmDir());
+    }
+
+    private static String repeat(int n, String s) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            sb.append(s);
+        }
+        return sb.toString();
     }
 }

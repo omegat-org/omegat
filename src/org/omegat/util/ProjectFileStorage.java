@@ -133,15 +133,8 @@ public class ProjectFileStorage {
                     om.getProject().getVersion()));
         }
 
-        // if folder is in default locations, name stored as __DEFAULT__
-        String m_root = projectDir.getAbsolutePath() + File.separator;
-
-        result.setTargetRootRelative(computeRelative(om.getProject().getTargetDir(), OConsts.DEFAULT_TARGET));
-        result.setTargetRoot(computeAbsolutePath(m_root, om.getProject().getTargetDir(),
-                OConsts.DEFAULT_TARGET));
-        result.setSourceRootRelative(computeRelative(om.getProject().getSourceDir(), OConsts.DEFAULT_SOURCE));
-        result.setSourceRoot(computeAbsolutePath(m_root, om.getProject().getSourceDir(),
-                OConsts.DEFAULT_SOURCE));
+        result.setTargetRoot(normalizeLoadedPath(om.getProject().getTargetDir(), OConsts.DEFAULT_TARGET));
+        result.setSourceRoot(normalizeLoadedPath(om.getProject().getSourceDir(), OConsts.DEFAULT_SOURCE));
         result.getSourceRootExcludes().clear();
         if (om.getProject().getSourceDirExcludes() != null) {
             result.getSourceRootExcludes().addAll(om.getProject().getSourceDirExcludes().getMask());
@@ -149,13 +142,9 @@ public class ProjectFileStorage {
             // sourceRootExclude was not defined
             result.getSourceRootExcludes().addAll(Arrays.asList(ProjectProperties.DEFAULT_EXCLUDES));
         }
-        result.setTMRoot(computeAbsolutePath(m_root, om.getProject().getTmDir(), OConsts.DEFAULT_TM));
-        result.setTMRootRelative(computeRelative(om.getProject().getTmDir(), OConsts.DEFAULT_TM));
+        result.setTMRoot(normalizeLoadedPath(om.getProject().getTmDir(), OConsts.DEFAULT_TM));
 
-        result.setGlossaryRoot(computeAbsolutePath(m_root, om.getProject().getGlossaryDir(),
-                OConsts.DEFAULT_GLOSSARY));
-        result.setGlossaryRootRelative(computeRelative(om.getProject().getGlossaryDir(),
-                OConsts.DEFAULT_GLOSSARY));
+        result.setGlossaryRoot(normalizeLoadedPath(om.getProject().getGlossaryDir(), OConsts.DEFAULT_GLOSSARY));
 
         // Compute glossary file location
         String glossaryFile = om.getProject().getGlossaryFile();
@@ -169,9 +158,8 @@ public class ProjectFileStorage {
         }
         result.setWriteableGlossary(glossaryFile);
 
-        result.setDictRoot(computeAbsolutePath(m_root, om.getProject().getDictionaryDir(),
+        result.setDictRoot(normalizeLoadedPath(om.getProject().getDictionaryDir(),
                 OConsts.DEFAULT_DICT));
-        result.setDictRootRelative(computeRelative(om.getProject().getDictionaryDir(), OConsts.DEFAULT_DICT));
 
         result.setSourceLanguage(om.getProject().getSourceLang());
         result.setTargetLanguage(om.getProject().getTargetLang());
@@ -250,73 +238,11 @@ public class ProjectFileStorage {
         m.marshal(om, outFile);
     }
 
-    private static String computeRelative(String relativePath, String defaultName) {
-        if (DEFAULT_FOLDER_MARKER.equals(relativePath)) {
-            return asDirectory(defaultName);
+    private static String normalizeLoadedPath(String path, String defaultValue) {
+        if (DEFAULT_FOLDER_MARKER.equals(path)) {
+            return defaultValue;
         } else {
-            return asDirectory(relativePath);
-        }
-    }
-
-    /**
-     * Constructs directory name like 'some/dir/'.
-     */
-    private static String asDirectory(String path) {
-        String r = path.replace(File.separatorChar, '/');
-        r = r.replaceAll("//+", "/");
-        if (r.startsWith("/")) {
-            r = r.substring(1);
-        }
-        if (!r.endsWith("")) {
-            r += "/";
-        }
-        return r;
-    }
-
-    /**
-     * Returns absolute path for any project's folder. Since 1.6.0 supports relative paths (RFE 1111956).
-     * 
-     * @param relativePath
-     *            relative path from project file.
-     * @param defaultName
-     *            default name for such a project's folder, if relativePath is "__DEFAULT__".
-     */
-    private static String computeAbsolutePath(String m_root, String relativePath, String defaultName) {
-        if (relativePath == null) {
-            // Not exist in project file ? Use default.
-            return m_root + defaultName + File.separator;
-        }
-        if (DEFAULT_FOLDER_MARKER.equals(relativePath))
-            return m_root + defaultName + File.separator;
-        else {
-            try {
-                // check if path starts with a system root
-                boolean startsWithRoot = false;
-                for (File root : File.listRoots()) {
-                    try // Under Windows and Java 1.4, there is an exception if
-                    { // using getCanonicalPath on a non-existent drive letter
-                      // [1875331] Relative paths not working under
-                      // Windows/Java 1.4
-                        String platformRelativePath = relativePath.replace('/', File.separatorChar);
-                        // If a plaform-dependent form of relativePath is not
-                        // used, startWith will always fail under Windows,
-                        // because Windows uses C:\, while the path is stored as
-                        // C:/ in omegat.project
-                        startsWithRoot = platformRelativePath.startsWith(root.getCanonicalPath());
-                    } catch (IOException e) {
-                        startsWithRoot = false;
-                    }
-                    if (startsWithRoot)
-                        // path starts with a root --> path is already absolute
-                        return new File(relativePath).getCanonicalPath() + File.separator;
-                }
-
-                // path does not start with a system root --> relative to
-                // project root
-                return new File(m_root, relativePath).getCanonicalPath() + File.separator;
-            } catch (IOException e) {
-                return relativePath;
-            }
+            return normalizeSlashes(path);
         }
     }
 
@@ -393,5 +319,21 @@ public class ProjectFileStorage {
             }
         }
         return PluginUtils.getTokenizerClassForLanguage(fallback);
+    }
+
+    /**
+     * Replace \ with / and remove / from the end if present. Within OmegaT we
+     * generally require a / on the end of directories, but for storage we
+     * prefer no trailing /.
+     */
+    static String normalizeSlashes(String path) {
+        return withoutTrailingSlash(path.replace('\\', '/'));
+    }
+
+    static String withoutTrailingSlash(String path) {
+        while (path.endsWith("/")) {
+            path = path.substring(0, path.length() - 1);
+        }
+        return path;
     }
 }

@@ -113,13 +113,7 @@ public class ProjectProperties {
 
     /** Sets The Target (Compiled) Files Directory */
     public void setTargetRoot(String targetRoot) {
-        if (!StringUtil.isEmpty(targetRoot)) {
-            targetDir.setRelativeOrAbsolute(targetRoot);
-        }
-    }
-
-    public void setTargetRootRelative(String targetRootRelative) {
-        targetDir.setRelativeOrAbsolute(targetRootRelative);
+        targetDir.setRelativeOrAbsolute(targetRoot);
     }
 
     public ProjectPath getTargetDir() {
@@ -133,17 +127,11 @@ public class ProjectProperties {
 
     /** Sets The Glossary Files Directory */
     public void setGlossaryRoot(String glossaryRoot) {
-        if (!StringUtil.isEmpty(glossaryRoot)) {
-            glossaryDir.setRelativeOrAbsolute(glossaryRoot);
-        }
+        glossaryDir.setRelativeOrAbsolute(glossaryRoot);
     }
 
     public ProjectPath getGlossaryDir() {
         return glossaryDir;
-    }
-
-    public void setGlossaryRootRelative(String glossaryRootRelative) {
-        glossaryDir.setRelativeOrAbsolute(glossaryRootRelative);
     }
 
     public ProjectPath getWritableGlossaryFile() {
@@ -163,9 +151,7 @@ public class ProjectProperties {
 
     /** Sets The Writeable Glossary File Location */
     public void setWriteableGlossary(String writeableGlossaryFile) {
-        if (!StringUtil.isEmpty(writeableGlossaryFile)) {
-            writableGlossaryFile.setRelativeOrAbsolute(writeableGlossaryFile);
-        }
+        writableGlossaryFile.setRelativeOrAbsolute(writeableGlossaryFile);
     }
 
     public boolean isDefaultWriteableGlossaryFile() {
@@ -193,15 +179,9 @@ public class ProjectProperties {
         return tmDir.getAsString();
     }
 
-    public void setTMRootRelative(String tmRootRelative) {
-        tmDir.setRelativeOrAbsolute(tmRootRelative);
-    }
-
     /** Sets The Translation Memory (TMX) Files Directory */
     public void setTMRoot(String tmRoot) {
-        if (!StringUtil.isEmpty(tmRoot)) {
-            tmDir.setRelativeOrAbsolute(tmRoot);
-        }
+        tmDir.setRelativeOrAbsolute(tmRoot);
     }
     
   
@@ -226,17 +206,11 @@ public class ProjectProperties {
 
     /** Sets Dictionaries Files Directory */
     public void setDictRoot(String dictRoot) {
-        if (!StringUtil.isEmpty(dictRoot)) {
-            this.dictDir.setRelativeOrAbsolute(dictRoot);
-        }
+        dictDir.setRelativeOrAbsolute(dictRoot);
     }
 
     public String getDictRootRelative() {
         return dictDir.getAsString();
-    }
-
-    public void setDictRootRelative(String dictRootRelative) {
-        this.dictDir.setRelativeOrAbsolute(dictRootRelative);
     }
 
     /** Returns the name of the Project */

@@ -160,11 +160,25 @@ public class OConsts {
     public static final int READ_AHEAD_LIMIT = 65536;
 
     /**
-     * The maximum level of parent directories considered a file related to
-     * a project can be rewritten in terms of a path relative to an absolute path.
-     *
-     * Files related to a project includes glossaries, which may be located outside
-     * of the project folder.
+     * The maximum "distance" in parent directories a path can be at when
+     * relativizing a path for storage. I.e. how many instances of
+     * <code>../</code> are in front.
+     * <p>
+     * This is used when storing project folders (source, target, tm, glossary,
+     * etc.) located outside of the project root folder.
+     * <p>
+     * This limit is based on the following logic:
+     * <ul>
+     * <li>Users may move their project around locally. This can break relative
+     * paths, so absolute paths are desired in this sense.
+     * <li>Users may want to share projects via a mechanism that changes the
+     * filesystem root (e.g. differing drive letter mapping on Windows). In this
+     * case relative paths are desired.
+     * </ul>
+     * This limit is a heuristic for determining if a path is "related" to the
+     * root: If it's "too far" away then it is assumed to be unrelated, whereas
+     * a "nearby" path may be part of a related subtree like
+     * <code>~/Projects</code>.
      */
     public static final int MAX_PARENT_DIRECTORIES_ABS2REL = 5;
 

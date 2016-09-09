@@ -287,6 +287,19 @@ public class ProjectFileStorageTest extends TestCase {
         assertEquals(ProjectFileStorage.normalizeSlashes(tmDir.getPath()), outOmt.getProject().getTmDir());
     }
 
+    public void testMissingDirs() throws Exception {
+        // Older project files can be missing path definitions, in which case
+        // we should fall back to the default values.
+        File projFile = new File(PROJECT_DIR, "missingdirs.project");
+        ProjectProperties props = ProjectFileStorage.loadPropertiesFile(tempDir, projFile);
+
+        assertTrue(props.getSourceRoot().endsWith(OConsts.DEFAULT_SOURCE + '/'));
+        assertTrue(props.getTargetRoot().endsWith(OConsts.DEFAULT_TARGET + '/'));
+        assertTrue(props.getDictRoot().endsWith(OConsts.DEFAULT_DICT + '/'));
+        assertTrue(props.getGlossaryRoot().endsWith(OConsts.DEFAULT_GLOSSARY + '/'));
+        assertTrue(props.getTMRoot().endsWith(OConsts.DEFAULT_TM + '/'));
+    }
+
     private static String repeat(int n, String s) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < n; i++) {

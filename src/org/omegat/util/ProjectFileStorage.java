@@ -238,7 +238,9 @@ public class ProjectFileStorage {
     }
 
     private static String normalizeLoadedPath(String path, String defaultValue) {
-        if (DEFAULT_FOLDER_MARKER.equals(path)) {
+        // Older project files can be missing path definitions, in which case
+        // path will be null here. In that case return the default.
+        if (StringUtil.isEmpty(path) || DEFAULT_FOLDER_MARKER.equals(path)) {
             return defaultValue;
         } else {
             return normalizeSlashes(path);

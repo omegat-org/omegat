@@ -157,7 +157,7 @@ class EntryListPane extends JTextPane {
                         getActiveDisplayedEntry().gotoEntryInEditor();
                     }
                     JFrame frame = Core.getMainWindow().getApplicationFrame();
-                    frame.setExtendedState(JFrame.NORMAL);
+                    frame.setState(JFrame.NORMAL);
                     frame.toFront();
                 }
             }

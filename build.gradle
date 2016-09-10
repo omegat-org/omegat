@@ -327,6 +327,7 @@ task linux(dependsOn: [linuxDistTar, linux64DistTar]) {
     def suffix = task.name.contains('64') ? 'Linux_64' : 'Linux'
     task.archiveName = "${applicationName}_${version}${omtVersion.beta}_${suffix}.bz2"
     task.compression = Compression.BZIP2
+    task.extension = 'bz2'
 }
 
 task l10n(dependsOn: [l10nMinimalDistZip, l10nFullDistZip]) {

@@ -253,10 +253,8 @@ distributions {
     [linux: linuxJRE, linux64: linux64JRE].each { distName, jrePath ->
         create(distName) {
             contents {
-                into('/') {
-                    with main.contents
-                    exclude 'OmegaT.bat'
-                }
+                with main.contents
+                exclude 'OmegaT.bat'
                 from(jrePath) {
                     into 'jre'
                     fileMode 0755

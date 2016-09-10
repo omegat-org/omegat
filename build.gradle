@@ -634,7 +634,7 @@ def getUpdateSuffix(String update) {
         return ''
     }
     if (update.length() == 1) {
-        return '0' + update
+        return "_0${update}"
     }
-    return update
+    return "_${update}"
 }

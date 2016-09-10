@@ -2,7 +2,7 @@
  OmegaT 4.0.0 update 1
 ----------------------------------------------------------------------
   0 Enhancement
-  1 Bug fix
+  3 Bug fix
   0 Localisation update
 ----------------------------------------------------------------------
 4.0.0 update 1 vs 4.0.0
@@ -11,6 +11,11 @@
 
   - OmegaT could fail to load some projects where folders were not
 below the root of the project
+
+  - It was not possible to open projects where one folder (e.g., 
+/dictionary) was not defined
+
+  - The tree structure of Linux packages was wrong
 
 ----------------------------------------------------------------------
  OmegaT 4.0.0 (2016-09-06)

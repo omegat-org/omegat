@@ -75,7 +75,6 @@ import org.languagetool.rules.CategoryId;
 import org.languagetool.rules.Rule;
 import org.languagetool.rules.RuleMatch;
 import org.languagetool.tools.Tools;
-import org.omegat.core.Core;
 import org.omegat.languagetools.LanguageToolWrapper.BridgeType;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
@@ -372,6 +371,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
     private BridgeType selectedBridgeType;
     private Set<String> disabledCategories, disabledRuleIds, enabledRuleIds;
     private final static String NEW_RULE_PATTERN = "^[A-Za-z_\\.]+$";
+    private String targetLanguageCode;
 
     /**
      * Creates new form LanguageToolConfigurationDialog
@@ -384,6 +384,8 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         getRootPane().setDefaultButton(okButton);
         setMinimumSize(new Dimension(500, 350));
         setLocationRelativeTo(parent);
+
+        targetLanguageCode = targetLang.getLanguageCode();
         loadPreferences();
 
         // Load rule tree
@@ -485,7 +487,6 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         urlTextField.setText(Preferences.getPreference(Preferences.LANGUAGETOOL_REMOTE_URL));
         directoryTextField.setText(Preferences.getPreference(Preferences.LANGUAGETOOL_LOCAL_SERVER_JAR_PATH));
 
-        String targetLanguageCode = Core.getProject().getProjectProperties().getTargetLanguage().getLanguageCode();
         disabledCategories = Stream
                 .of(Preferences.getPreference(Preferences.LANGUAGETOOL_DISABLED_CATEGORIES).split(","))
                 .filter(s -> !s.isEmpty()).collect(Collectors.toSet());
@@ -503,7 +504,6 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         Preferences.setPreference(Preferences.LANGUAGETOOL_REMOTE_URL, urlTextField.getText());
         Preferences.setPreference(Preferences.LANGUAGETOOL_LOCAL_SERVER_JAR_PATH, directoryTextField.getText());
 
-        String targetLanguageCode = Core.getProject().getProjectProperties().getTargetLanguage().getLanguageCode();
         Preferences.setPreference(Preferences.LANGUAGETOOL_DISABLED_CATEGORIES, String.join(",", disabledCategories));
         Preferences.setPreference(Preferences.LANGUAGETOOL_ENABLED_RULES_PREFIX + "_" + targetLanguageCode,
                 String.join(",", enabledRuleIds));

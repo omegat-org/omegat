@@ -398,7 +398,7 @@ task win {
         outputs.dir innoSetupDir
         outputs.file "${distsDir}/${installerBasename}.exe"
         onlyIf {
-            haveInnoSetup()
+            (jrePath == null || jrePath.directory) && haveInnoSetup()
         }
         doLast {
             copy {

@@ -387,30 +387,25 @@ task win {
 }
 
 [winNoJRE: null, winJRE: windowsJRE].each { taskName, jrePath ->
-    task(taskName) {
+    task(type: Sync, taskName) {
         description = "Create a Windows installer for ${taskName} distro. " +
             'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
-        dependsOn jar
-        def innoSetupDir = file("${buildDir}/innosetup/${taskName}")
+        with distributions.main.contents
+        from ('release/win32-specific') {
+            include 'OmegaT.exe', 'OmegaT.l4J.ini'
+        }
+        destinationDir = file("${buildDir}/innosetup/${taskName}")
         def fullVersion = project.version + omtVersion.beta
         def suffix = jrePath == null ? 'Windows_without_JRE' : 'Windows'
         def installerBasename = "OmegaT_${fullVersion}_${suffix}"
-        outputs.dir innoSetupDir
         outputs.file "${distsDir}/${installerBasename}.exe"
         onlyIf {
             (jrePath == null || jrePath.directory) && haveInnoSetup()
         }
         doLast {
-            copy {
-                with distributions.main.contents
-                from('release/win32-specific') {
-                    include 'OmegaT.exe', 'OmegaT.l4J.ini'
-                }
-                into innoSetupDir
-            }
             // Use Ant filtering because we need Unicode output. See
             // https://issues.gradle.org/browse/GRADLE-1267
-            ant.copy(todir: innoSetupDir, encoding: 'utf8', outputencoding: 'utf8') {
+            ant.copy(todir: destinationDir, encoding: 'utf8', outputencoding: 'utf8') {
                 fileset(dir: 'release/win32-specific', includes: 'OmegaT.iss')
                 filterchain {
                     replacetokens {
@@ -426,7 +421,7 @@ task win {
                 }
             }
             exec {
-                commandLine 'iscc', "${innoSetupDir}/OmegaT.iss"
+                commandLine 'iscc', "${destinationDir}/OmegaT.iss"
             }
         }
     }

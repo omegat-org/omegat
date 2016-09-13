@@ -25,17 +25,17 @@
 
 package org.omegat.gui.editor.history;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IEntryEventListener;
-import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.events.IProjectEventListener.PROJECT_CHANGE_TYPE;
 import org.omegat.gui.editor.autocompleter.AutoCompleterItem;
 import org.omegat.gui.editor.autocompleter.AutoCompleterListView;
 import org.omegat.tokenizer.ITokenizer.StemmingMode;
@@ -53,13 +53,9 @@ public class HistoryPredictor extends AutoCompleterListView {
     public HistoryPredictor() {
         super(OStrings.getString("AC_HISTORY_PREDICTIONS_VIEW"));
         
-        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
-            @Override
-            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-                if (eventType == PROJECT_CHANGE_TYPE.LOAD) {
-                    predictor.setisLanguageSpaceDelimited(isLanguageSpaceDelimited());
-                    train();
-                }
+        CoreEvents.registerProjectChangeListener(eventType -> {
+            if (isEnabled() && eventType == PROJECT_CHANGE_TYPE.LOAD) {
+                train();
             }
         });
         CoreEvents.registerEntryEventListener(new IEntryEventListener() {            
@@ -101,8 +97,8 @@ public class HistoryPredictor extends AutoCompleterListView {
         predictor.reset();
         Core.getProject().iterateByDefaultTranslations((source, trans) -> trainString(trans.translation));
         Core.getProject().iterateByMultipleTranslations((source, trans) -> trainString(trans.translation));
-        LOGGER.finer(() -> String.join(" ", "Time to train History Predictor:",
-                Long.toString(System.currentTimeMillis() - start), "ms"));
+        long time = System.currentTimeMillis() - start;
+        LOGGER.finer(() -> String.format("Time to train History Predictor: %d ms", time));
     }
     
     private void trainString(String text) {
@@ -111,7 +107,7 @@ public class HistoryPredictor extends AutoCompleterListView {
         }
         String[] tokens = getTokenizer().tokenizeWordsToStrings(text, StemmingMode.NONE);
         
-        predictor.trainStringPrediction(text, tokens);
+        predictor.train(tokens);
     }
 
     @Override
@@ -122,7 +118,15 @@ public class HistoryPredictor extends AutoCompleterListView {
 
         String[] tokens = getTokenizer().tokenizeVerbatimToStrings(prevText);
 
-        List<AutoCompleterItem> predictions = predictor.predictWord(tokens);
+        String seed = lastFullWordToken(tokens);
+        if (seed.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        List<AutoCompleterItem> predictions = predictor.predictWord(seed).stream().map(p -> {
+            return new AutoCompleterItem(p.getWord(),
+                    new String[] { String.valueOf(Math.round(p.getFrequency())) + "%" }, 0);
+        }).collect(Collectors.toList());
 
         if (predictions.isEmpty()) {
             return predictions;
@@ -141,13 +145,33 @@ public class HistoryPredictor extends AutoCompleterListView {
 
         // We have context to filter on
         String context = tokens[tokens.length - 1];
-        List<AutoCompleterItem> result = new ArrayList<>();
-        for (AutoCompleterItem item : predictions) {
-            if (item.payload.startsWith(context) && !item.payload.equals(context)) {
-                result.add(new AutoCompleterItem(item.payload, item.extras, context.length()));
+        return predictions.stream().filter(item -> item.payload.startsWith(context) && !item.payload.equals(context))
+                .map(item -> new AutoCompleterItem(item.payload, item.extras, context.length()))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Find the last <em>completed</em> word.
+     * <p>
+     * If the language is space-delimited, that means ignoring the last token
+     * (which should be a partially input word) and then iterating backwards to
+     * find the first non-whitespace token.
+     * <p>
+     * If the language is not space-delimited, use the last token, as we have no
+     * way of distinguishing a completed word from an incomplete one.
+     * 
+     * @param tokens
+     * @return
+     */
+    private String lastFullWordToken(String[] tokens) {
+        int startOffset = isLanguageSpaceDelimited() ? 2 : 1;
+        for (int i = tokens.length - startOffset; i >= 0; i--) {
+            String token = tokens[i];
+            if (!token.trim().isEmpty()) {
+                return token;
             }
         }
-        return result;
+        return "";
     }
 
     @Override

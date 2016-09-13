@@ -310,7 +310,6 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         String txt = dialog.getGlossaryFileText().getText();
         txt = MessageFormat.format(txt, out.getAbsolutePath());
         dialog.getGlossaryFileText().setText(txt);
-        dialog.setVisible(true);
         dialog.getSourceText().requestFocus();
 
         dialog.addWindowFocusListener(new WindowFocusListener() {
@@ -364,6 +363,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
                 }
             }
         });
+        StaticUIUtils.persistGeometry(dialog, Preferences.CREATE_GLOSSARY_GEOMETRY_PREFIX);
+        dialog.setVisible(true);
         createGlossaryEntryDialog = dialog;
     }
 

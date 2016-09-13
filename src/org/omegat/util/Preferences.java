@@ -419,6 +419,9 @@ public class Preferences {
     public static final String ALIGNER_HIGHLIGHT_PATTERN = "aligner_highlight_pattern";
     public static final String ALIGNER_HIGHLIGHT_PATTERN_DEFAULT = "\\d+";
 
+    /** Create Glossary Entry dialog */
+    public static final String CREATE_GLOSSARY_GEOMETRY_PREFIX = "create_glossary_dialog";
+
     public static final String PROPERTY_SRX = "srx";
     public static final String PROPERTY_FILTERS = "filters";
 

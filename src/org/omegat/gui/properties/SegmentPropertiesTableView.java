@@ -29,6 +29,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -120,13 +121,18 @@ public class SegmentPropertiesTableView implements ISegmentPropertiesView {
 
     private void updateRollover() {
         Point point = table.getMousePosition();
+        int oldRow = mouseoverRow;
+        int oldCol = mouseoverCol;
         int newRow = point == null ? -1 : table.rowAtPoint(point);
         int newCol = point == null ? -1 : table.columnAtPoint(point);
-        boolean doRepaint = newRow != mouseoverRow || newCol != mouseoverCol;
+        boolean doRepaint = newRow != oldRow || newCol != oldCol;
         mouseoverRow = newRow;
         mouseoverCol = newCol;
         if (doRepaint) {
-            table.repaint();
+            Rectangle rect = table.getCellRect(oldRow, 2, true);
+            table.repaint(rect);
+            rect = table.getCellRect(newRow, 2, true);
+            table.repaint(rect);
         }
     }
 

@@ -49,12 +49,15 @@ sourceSets {
 
 repositories {
     jcenter()
+    maven {
+        url 'http://dl.bintray.com/omegat-org/maven'
+    }
 }
 
 configurations {
     all {
         // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/813/
-        exclude module: 'lucene-core'
+        exclude group: 'org.apache.lucene', module: 'lucene-core'
     }
 }
 
@@ -68,6 +71,8 @@ dependencies {
             exclude module: 'lucene-gosen-ipadic'
         }
         compile 'org.languagetool:hunspell-native-libs:2.9'
+        // Temporary use of custom build; see https://sourceforge.net/p/omegat/bugs/813/
+        compile 'org.omegat.lucene:lucene-core:5.2.1'
         compile 'org.apache.lucene:lucene-analyzers-common:5.2.1'
         compile 'org.apache.lucene:lucene-analyzers-kuromoji:5.2.1'
         compile 'org.apache.lucene:lucene-analyzers-smartcn:5.2.1'

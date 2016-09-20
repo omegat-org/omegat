@@ -31,6 +31,8 @@ package org.omegat.core.data;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -537,7 +539,8 @@ public class ProjectProperties {
         public void setRelativeOrAbsolute(String path) {
             underRoot = null;
             if (FileUtil.isRelative(path)) {
-                fs = new File(projectRootDir, path);
+                Path p = projectRootDir == null ? Paths.get(path) : projectRootDir.toPath().resolve(path);
+                fs = p.normalize().toFile();
                 if (!path.contains("..")) {
                     underRoot = path.replace('\\', '/');
                     if (isDirectory && !underRoot.endsWith("/")) {

@@ -187,6 +187,13 @@ public class ProjectFileStorageTest extends TestCase {
             ProjectProperties props = ProjectFileStorage.loadPropertiesFile(projRoot, omt);
             props.verifyProject();
 
+            // Indirections should be resolved.
+            assertFalse(props.getSourceRoot().contains("../"));
+            assertFalse(props.getTargetRoot().contains("../"));
+            assertFalse(props.getDictRoot().contains("../"));
+            assertFalse(props.getGlossaryRoot().contains("../"));
+            assertFalse(props.getTMRoot().contains("../"));
+
             // Write the project file out and read it again to make sure the
             // paths are correctly round-tripped. Since these are "near" paths
             // they should remain relative and not absolute.
@@ -272,6 +279,13 @@ public class ProjectFileStorageTest extends TestCase {
         // are resolved correctly
         ProjectProperties props = ProjectFileStorage.loadPropertiesFile(projRoot, omt);
         props.verifyProject();
+
+        // Indirections should be resolved.
+        assertFalse(props.getSourceRoot().contains("../"));
+        assertFalse(props.getTargetRoot().contains("../"));
+        assertFalse(props.getDictRoot().contains("../"));
+        assertFalse(props.getGlossaryRoot().contains("../"));
+        assertFalse(props.getTMRoot().contains("../"));
 
         // Write the project file out and read it again to make sure the
         // paths are correctly round-tripped. Since these are "far" paths

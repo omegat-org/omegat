@@ -65,6 +65,7 @@ def depsProvided = file('lib/auto').directory
 
 dependencies {
     if (!depsProvided) {
+        compile 'org.omegat:lib-mnemonics:1.0'
         compile 'org.languagetool:languagetool-core:3.3'
         compile('org.languagetool:language-all:3.3') {
             // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/

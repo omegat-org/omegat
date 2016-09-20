@@ -52,59 +52,53 @@ repositories {
 }
 
 configurations {
-    dependency {
-        // Special configuration to facilitate storing dependency
-        // artifacts locally, instead of pulling from Maven Central.
-    }
     all {
         // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/813/
         exclude module: 'lucene-core'
     }
 }
 
+def depsProvided = file('lib/auto').directory
+
 dependencies {
-    // Gradle-managed compile and runtime dependencies.
-    // To change dependencies:
-    // 1. Add/modify/remove listing here
-    // 2. Run `gradlew getDependencies [eclipse]`
-    // 3. Commit changes to lib/auto
-    // To get source packages in IDE, change "dependency" keyword to "compile".
-    dependency 'org.languagetool:languagetool-core:3.3'
-    dependency('org.languagetool:language-all:3.3') {
-        // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
-        exclude module: 'lucene-gosen-ipadic'
+    if (!depsProvided) {
+        compile 'org.languagetool:languagetool-core:3.3'
+        compile('org.languagetool:language-all:3.3') {
+            // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
+            exclude module: 'lucene-gosen-ipadic'
+        }
+        compile 'org.languagetool:hunspell-native-libs:2.9'
+        compile 'org.apache.lucene:lucene-analyzers-common:5.2.1'
+        compile 'org.apache.lucene:lucene-analyzers-kuromoji:5.2.1'
+        compile 'org.apache.lucene:lucene-analyzers-smartcn:5.2.1'
+        compile 'org.apache.lucene:lucene-analyzers-stempel:5.2.1'
+        compile 'org.eclipse.jgit:org.eclipse.jgit:4.2.0.201601211800-r'
+        compile 'com.jcraft:jsch.agentproxy.jsch:0.0.9'
+        // Specify the following two here just to make sure all jsch.agentproxy libs are the same version.
+        compile 'com.jcraft:jsch.agentproxy.connector-factory:0.0.9'
+        compile 'com.jcraft:jsch.agentproxy.svnkit-trilead-ssh2:0.0.9'
+        compile 'org.tmatesoft.svnkit:svnkit:1.8.12'
+        compile 'org.apache.pdfbox:pdfbox:2.0.0'
+        compile 'net.loomchild:maligna:3.0.0'
+        compile 'commons-io:commons-io:2.4'
+        compile 'commons-lang:commons-lang:2.6'
+        compile 'org.slf4j:slf4j-jdk14:1.7.21'
+        compile 'org.dict.zip:dictzip-lib:0.8.1'
+        compile 'com.github.takawitter:trie4j:0.9.2'
+        compile 'org.madlonkay.supertmxmerge:supertmxmerge:2.0.1'
+        compile 'org.omegat:vldocking:3.0.5'
+        compile 'org.omegat:juniversalchardet:1.0.4'
+        // Groovy used for scripts only
+        compile 'org.codehaus.groovy:groovy-all:2.4.6'
+        
+        //RSyntaxUI and additional modules
+        compile 'com.fifesoft:rsyntaxtextarea:2.5.8'
+        compile 'com.fifesoft:rstaui:2.5.7'
+        compile ('com.fifesoft:languagesupport:2.5.8') {
+    	    exclude module: 'rhino'
+        }
+        compile 'com.fifesoft:autocomplete:2.5.8'
     }
-    dependency 'org.languagetool:hunspell-native-libs:2.9'
-    dependency 'org.apache.lucene:lucene-analyzers-common:5.2.1'
-    dependency 'org.apache.lucene:lucene-analyzers-kuromoji:5.2.1'
-    dependency 'org.apache.lucene:lucene-analyzers-smartcn:5.2.1'
-    dependency 'org.apache.lucene:lucene-analyzers-stempel:5.2.1'
-    dependency 'org.eclipse.jgit:org.eclipse.jgit:4.2.0.201601211800-r'
-    dependency 'com.jcraft:jsch.agentproxy.jsch:0.0.9'
-    // Specify the following two here just to make sure all jsch.agentproxy libs are the same version.
-    dependency 'com.jcraft:jsch.agentproxy.connector-factory:0.0.9'
-    dependency 'com.jcraft:jsch.agentproxy.svnkit-trilead-ssh2:0.0.9'
-    dependency 'org.tmatesoft.svnkit:svnkit:1.8.12'
-    dependency 'org.apache.pdfbox:pdfbox:2.0.0'
-    dependency 'net.loomchild:maligna:3.0.0'
-    dependency 'commons-io:commons-io:2.4'
-    dependency 'commons-lang:commons-lang:2.6'
-    dependency 'org.slf4j:slf4j-jdk14:1.7.21'
-    dependency 'org.dict.zip:dictzip-lib:0.8.1'
-    dependency 'com.github.takawitter:trie4j:0.9.2'
-    dependency 'org.madlonkay.supertmxmerge:supertmxmerge:2.0.1'
-    dependency 'org.omegat:vldocking:3.0.5'
-    dependency 'org.omegat:juniversalchardet:1.0.4'
-    // Groovy used for scripts only
-    dependency 'org.codehaus.groovy:groovy-all:2.4.6'
-    
-    //RSyntaxUI and additional modules
-    dependency 'com.fifesoft:rsyntaxtextarea:2.5.8'
-    dependency 'com.fifesoft:rstaui:2.5.7'
-    dependency ('com.fifesoft:languagesupport:2.5.8') {
-	    exclude module: 'rhino'
-    }
-    dependency 'com.fifesoft:autocomplete:2.5.8'
 
     compile fileTree(dir: 'lib', include: '**/*.jar')
 
@@ -116,15 +110,6 @@ dependencies {
     jnlp project(path: ':release:WebStart-specific', configuration: 'docs')
     
     testIntegrationCompile sourceSets.main.output, sourceSets.test.output, configurations.compile
-}
-
-task getDependencies(type: Copy) {
-    description = 'Save all dependencies locally for storage in repository.'
-    doFirst {
-        delete 'lib/auto'
-    }
-    from configurations.dependency
-    into 'lib/auto'
 }
 
 def omtPlugins = loadProperties file('Plugins.properties')
@@ -214,9 +199,12 @@ distributions {
     source {
         contents {
             from(rootDir) {
-                include 'docs/**', 'images/**', 'lib/**', 'lib-mnemonics/**', 'release/**',
+                include 'docs/**', 'images/**', 'lib/**', 'release/**',
                     'src/**', 'test/**', 'gen/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
-                    '*.gradle', 'README.md', '*.properties'
+                    'gradle/**', 'gradlew*', '*.gradle', 'README.md', '*.properties'
+            }
+            into('lib/auto') {
+                from configurations.compile
             }
         }
         sourceDistZip.archiveName = "${applicationName}_${version}${omtVersion.beta}_Source.zip"

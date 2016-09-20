@@ -1,7 +1,7 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
-    id 'de.gliderpilot.jnlp' version '0.2.1'
+    id 'de.gliderpilot.jnlp' version '1.0.2'
 }
 
 apply plugin: 'application'

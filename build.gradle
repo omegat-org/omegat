@@ -65,6 +65,7 @@ def depsProvided = file('lib/auto').directory
 
 dependencies {
     if (!depsProvided) {
+        compile 'org.omegat:gnudiff4j:1.15'
         compile 'org.omegat:lib-mnemonics:1.0'
         compile 'org.omegat:jmyspell:1.0.0-beta-2'
         compile 'org.languagetool:languagetool-core:3.3'

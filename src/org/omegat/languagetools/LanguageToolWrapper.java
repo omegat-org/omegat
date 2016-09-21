@@ -59,9 +59,6 @@ public class LanguageToolWrapper {
     static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(
             Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
 
-    private final static String DEFAULT_DISABLED_CATEGORIES = "SPELL,TYPOS";
-    private final static String DEFAULT_DISABLED_RULES = "SAME_TRANSLATION,TRANSLATION_LENGTH,DIFFERENT_PUNCTUATION";
-
     public enum BridgeType {
         NATIVE, REMOTE_URL, LOCAL_INSTALLATION
     }

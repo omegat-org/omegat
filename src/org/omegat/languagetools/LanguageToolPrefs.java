@@ -38,6 +38,9 @@ import org.omegat.util.Preferences;
  */
 public class LanguageToolPrefs {
 
+    private final static String DEFAULT_DISABLED_CATEGORIES = "SPELL,TYPOS";
+    private final static String DEFAULT_DISABLED_RULES = "SAME_TRANSLATION,TRANSLATION_LENGTH,DIFFERENT_PUNCTUATION";
+
     private LanguageToolPrefs() {
 
     }
@@ -93,23 +96,23 @@ public class LanguageToolPrefs {
 
     public static Set<String> getDisabledRules(String languageCode) {
         return getLangauageSpecificPreference(Preferences.LANGUAGETOOL_DISABLED_RULES_PREFIX,
-                languageCode);
+                languageCode, DEFAULT_DISABLED_RULES);
     }
 
     public static Set<String> getEnabledRules(String languageCode) {
         return getLangauageSpecificPreference(Preferences.LANGUAGETOOL_ENABLED_RULES_PREFIX,
-                languageCode);
+                languageCode, "");
     }
 
     public static Set<String> getDisabledCategories(String languageCode) {
         return getLangauageSpecificPreference(Preferences.LANGUAGETOOL_DISABLED_CATEGORIES_PREFIX,
-                languageCode);
+                languageCode, DEFAULT_DISABLED_CATEGORIES);
     }
 
     private static Set<String> getLangauageSpecificPreference(String namePrefix,
-            String languageCode) {
+            String languageCode, String defaultValue) {
         return Stream.of(Preferences
-                .getPreference(namePrefix + "_" + languageCode).split(","))
+                .getPreferenceDefault(namePrefix + "_" + languageCode, defaultValue).split(","))
                 .filter(s -> !s.isEmpty()).collect(Collectors.toSet());
     }
 

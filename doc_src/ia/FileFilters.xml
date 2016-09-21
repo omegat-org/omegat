@@ -31,14 +31,14 @@
       <primary>Filtros de file</primary> <secondary>Filtros del file specific pro le projecto</secondary>
     </indexterm>. In iste caso un copia del configuration del filtros essera immagazinate con le projecto. Si tu plus tarde cambiara le filtros, sol le filtros del projecto essera ajornate, dum le filtros del usator restara sin alteration.</para>
 
-  <para><emphasis role="bold">Advertimento!</emphasis> si tu cambia le optiones del filtro con un projecto aperte, postea tu debe recargar le projecto pro que le cambios sume effecto.</para>
+  <para><emphasis role="bold">Advertimento!</emphasis> si tu cambia le optiones del filtro con un projecto aperte, postea tu debe recargar le projecto pro que le cambiamentos sume effecto.</para>
 
   <section id="file.filters.dialog">
     <title>Le fenestra de dialogo filtros del file<indexterm class="singular">
         <primary>Filtros del file,</primary> <secondary>Fenestra de dialogo</secondary>
       </indexterm></title>
 
-    <para>Iste fenestra de dialogo lista le filtros de file disponibile. Si tu desira non usar OmegaT pro render files de un certe typo, e clauder le filtro correspondente, tu pote in-activar le quadrato de controlo al latere de su nomine. OmegaT omittera alora le files appropriate durante le cargamento del projectos, e copiara los identic quando creara le documentos rendite. Quando tu desidera usar de nove le filtro, marca justo le quadrato de controlo. Pulsa <emphasis role="bold">Configurationes base </emphasis> pro prefixar le filtros de file al preparationes base. Pro rediger qual files in qual codificationes le filtro debera processar, elige le filtro ex le lista e pulsa <emphasis role="bold">Modification.</emphasis></para>
+    <para>Iste fenestra de dialogo lista le filtros de file disponibile, ubi le filtros usate per le actual projecto es displicate in nigrate. Si tu desira non usar OmegaT pro render files de un certe typo, e clauder le filtro correspondente, tu pote in-activar le quadrato de controlo al latere de su nomine. OmegaT omittera alora le files appropriate durante le cargamento del projectos, e copiara los identic quando creara le documentos rendite. Quando tu desidera usar de nove le filtro, marca justo le quadrato de controlo. Pulsa <emphasis role="bold">Configurationes base </emphasis> pro prefixar le filtros de file al preparationes base. Pro rediger qual files in qual codificationes le filtro debera processar, elige le filtro ex le lista e pulsa <emphasis role="bold">Modification.</emphasis></para>
 
     <para>Le fenestra de dialogo permitte preparar le optiones sequente:</para>
 
@@ -246,7 +246,7 @@
         <primary>Filtros de file,</primary> <secondary>Modification</secondary>
       </indexterm></title>
 
-    <para>Iste fenestra de dialogo habilita te a preparar le modellos de nomine del file fonte a esser processate per le filtro, a personalisar le nomines de file rendite, e a seliger qual codificationes deberea esser usate pro cargar le file e salvar su pendant traducite. Pro modificar un modello de filtro del file, modifica le campos directemente o pulsa <emphasis role="bold">Modification.</emphasis> Pro adder un nove modello de filtro del file, pulsa <emphasis role="bold">Adde</emphasis>. Le fenestra de dialogo pro adder un modello es le mesme que lo pro modificar un modello particular. Le fenestra de dialogo es utile pois que include un editor special  pro le modello de nomine de file rendite con le qual tu pote personalisar le nomines de file de output.</para>
+    <para>Iste fenestra de dialogo habilita te a preparar le modellos de nomine del file fonte a esser processate per le filtro, a personalisar le nomines de file rendite, e a seliger qual codificationes debe esser usate pro cargar le file e salvar su pendant traducite. Pro modificar un modello de filtro del file, modifica le campos directemente o pulsa <emphasis role="bold">Modification.</emphasis> Pro adder un nove modello de filtro del file, pulsa <emphasis role="bold">Adde</emphasis>. Le fenestra de dialogo pro adder un modello es le mesme que lo pro modificar un modello particular. Le fenestra de dialogo es utile pois que include un editor special  pro le modello de nomine de file rendite con le qual tu pote personalisar le nomines de file de output.</para>
 
     <section id="source.filetype.and.filename.pattern">
       <title><indexterm class="singular">
@@ -255,7 +255,7 @@
           <primary>Filtros de File,</primary> <secondary>Modellos de typo e de nomine de file</secondary>
         </indexterm></title>
 
-      <para>Quando OmegaT incontra un file in su plica fonte, illo tenta de seliger le filtro basate sur le extension del file. Plus precisemente, OmegaT tenta de concordar cata modello del filtro de nomine de file fonte, con le nomine de file. Per exemplo, le modello <literal>*.xhtml </literal>concorda con omne file con le extension <literal>.xhtml</literal>. Si le filtro appropriate es trovate, le file es assignate a Illo pro le processo successive. Per exemplo, normalmente le filtros XHTML son usate pro processar le files con le extension .xhtml. Tu pote mutar o adder modellos de nomine de file, pro tractar cata file. Le modellos de nomine de file fonte usa characteres 'jolly' similabile a los usate in le <emphasis role="bold">Recercas. </emphasis>Le character jolly '*' equala zero o plus characteres. Le character jolly '?' equala exactemente un character qualcunque. Omne le altere characteres representa se ipse. Per exemplo, si vos vole le filtro de texto pro tractar le files readme  (<literal>readme, read.me</literal>, e  <literal>readme.txt</literal>) tu deberea usar le modello <literal>read*</literal>.</para>
+      <para>Quando OmegaT incontra un file in su plica fonte, illo tenta de seliger le filtro basate sur le extension del file. Plus precisemente, OmegaT tenta de concordar cata modello del filtro de nomine de file fonte, con le nomine de file. Per exemplo, le modello <literal>*.xhtml </literal>concorda con omne file con le extension <literal>.xhtml</literal>. Si le filtro appropriate es trovate, le file es assignate a Illo pro le processo successive. Per exemplo, normalmente le filtros XHTML son usate pro processar le files con le extension .xhtml. Tu pote cambiar o adder modellos de nomine de file pro files a ser tractate per cata filtro de file. Le modellos de nomine de file fonte usa characteres 'jolly' similabile a los usate in le <emphasis role="bold">Recercas. </emphasis>Le character jolly '*' equala zero o plus characteres. Le character jolly '?' equala exactemente un character qualcunque. Omne le altere characteres representa se ipse. Per exemplo, si vos vole le filtro de texto pro tractar le files readme  (<literal>readme, read.me</literal>, e  <literal>readme.txt</literal>) tu debe usar le modello <literal>read*</literal>.</para>
     </section>
 
     <section id="source.and.target.files.encoding">

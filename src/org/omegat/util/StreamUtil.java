@@ -82,7 +82,7 @@ public class StreamUtil {
     }
 
     public static <T> Predicate<T> patternFilter(String regex, Function<T, String> stringExtractor) {
-        Pattern p = Pattern.compile(regex);
-        return o -> p.matcher(stringExtractor.apply(o)).matches();
+        Predicate<String> p = Pattern.compile(regex).asPredicate();
+        return o -> p.test(stringExtractor.apply(o));
     }
 }

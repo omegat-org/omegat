@@ -11,7 +11,7 @@
 
   <para>Son jam disponibile regulas de segmentation utile pro plurime linguas, assi il es verisimile que tu non necessitara de ser implicate con le scriptura de tu proprie regulas de segmentation. Per altere latere iste functionalitate pote esser multo utile in casos particular, ubi tu pote accrescer tu productivitate accordante le regulas de segmentation al texto fonte a traducer.</para>
 
-  <para><emphasis role="bold">Advertimento: </emphasis>viste que le texto essera segmentate differentemente post que le optiones del filtro esseva cambiate, ergo tu pote deber reinitiar a render de zero. Al mesme tempore le segmentos valide antea in le memoria de traduction del projecto essera convertite a segmentos orphane. Si tu cambia le optiones de segmentation dum un projecto es aperte, tu debe recargar le projecto pro que le cambios sume effecto.</para>
+  <para><emphasis role="bold">Advertimento: </emphasis>viste que le texto essera segmentate differentemente post que le optiones del filtro esseva cambiate, ergo tu pote deber reinitiar a render de zero. Al mesme tempore le segmentos valide antea in le memoria de traduction del projecto essera convertite a segmentos orphane. Si tu cambia le optiones de segmentation dum un projecto es aperte, tu debe recargar le projecto pro que le cambiamentos sume effecto.</para>
 
   <para><application>OmegaT</application> usa le sequentia de grados sequente:</para>
 
@@ -55,7 +55,7 @@
           </indexterm>Regula de interruption</term>
 
         <listitem>
-          <para>Separa le texto fonte in segmentos. Per exemplo, &quot;<emphasis>Did it make sense? I was not sure</emphasis>.&quot; deberea esser fisse in duo segmentos. Pro que isto accide, ibi deberea esser un regula de interruption pro le &quot;?&quot;, quando sequite per spatios e un parola majuscule. Pro definir un regula qual regula de interruption, marca le quadrato de controlo Interruption/Exception.</para>
+          <para>Separa le texto fonte in segmentos. Per exemplo, &quot;<emphasis>Did it make sense? I was not sure</emphasis>.&quot; debe esser fisse in duo segmentos. Pro que isto accide, ibi debe esser un regula de interruption pro le &quot;?&quot;, quando sequite per spatios e un parola majuscule. Pro definir un regula qual regula de interruption, marca le quadrato de controlo Interruption/Exception.</para>
         </listitem>
       </varlistentry>
     </variablelist>
@@ -72,7 +72,7 @@
       </varlistentry>
     </variablelist>
 
-    <para>Le regulas de interruption prefixate deberea esser bastante pro le major parte del linguas europee e le japonese. In vista del flexibilitate, tu pote considerar de definir plus de regulas de exception pro tu lingua fonte, pro suppler segmentos plus significative e coherente.</para>
+    <para>Le regulas de interruption prefixate debe esser bastante pro le major parte del linguas europee e le japonese. In vista del flexibilitate, tu pote considerar de definir plus de regulas de exception pro tu lingua fonte, pro suppler segmentos plus significative e coherente.</para>
   </section>
 
   <section id="rules.priority">
@@ -80,7 +80,7 @@
         <primary>Segmentation</primary> <secondary>Prioritate del regulas</secondary>
       </indexterm></title>
 
-    <para>Omne le collectiones de regula de segmentation pro un modello de lingua que concorda es active e son applicate in le ordine date de prioritate, assi le regulas pro un lingua specific deberea esser superior in ordine de prioritate que los base. Per exemplo, le regulas pro le francese canadian (FR-CA) debe esser superior que le regulas pro le francese (FR.*), e superior que los Base (.*) . Assi, quando tu rende ab francese canadian, le regulas pro francese canadian - si alicun ha - essera applicate antea, sequite per le regulas pro le francese e in fin, per le regulas base.</para>
+    <para>Omne le collectiones de regula de segmentation pro un modello de lingua que concorda es active e son applicate in le ordine date de prioritate, assi le regulas pro un lingua specific debe esser superior in ordine de prioritate que los base. Per exemplo, le regulas pro le francese canadian (FR-CA) debe esser superior que le regulas pro le francese (FR.*), e superior que los Base (.*) . Assi, quando tu rende ab francese canadian, le regulas pro francese canadian - si alicun ha - essera applicate antea, sequite per le regulas pro le francese e in fin, per le regulas base.</para>
   </section>
 
   <section id="creating.new.rule">
@@ -88,7 +88,7 @@
         <primary>Segmentation</primary> <secondary>Crear un regula nove</secondary> <seealso>Expressiones regular</seealso>
       </indexterm></title>
 
-    <para>Major cambios al regulas de segmentation deberea esser generalmente evitate, in modo special post le completamento del prime minuta, sed cambios minor, qual addition de un abbreviation admittite, pote esser avantagiose.</para>
+    <para>Major cambiamentos al regulas de segmentation debe esser generalmente evitate, in modo special post le completamento del prime minuta, sed cambiamentos minor, qual addition de un abbreviation admittite, pote esser avantagiose.</para>
 
     <para>Pro modificar o expander un collection de regulas existente, clicca simplemente sur illo in le summitate del tabella. Le regulas pro ce collection apparera in le medietate basse del fenestra.</para>
 

@@ -1,7 +1,7 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
-    id 'de.gliderpilot.jnlp' version '0.2.1'
+    id 'de.gliderpilot.jnlp' version '1.0.2'
 }
 
 apply plugin: 'application'
@@ -49,87 +49,85 @@ sourceSets {
 
 repositories {
     jcenter()
+    maven {
+        url 'http://dl.bintray.com/omegat-org/maven'
+    }
 }
 
 configurations {
-    dependency {
-        // Special configuration to facilitate storing dependency
-        // artifacts locally, instead of pulling from Maven Central.
-    }
     all {
         // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/813/
-        exclude module: 'lucene-core'
+        exclude group: 'org.apache.lucene', module: 'lucene-core'
     }
 }
 
+def depsProvided = file('lib/provided').directory
+
 dependencies {
-    // Gradle-managed compile and runtime dependencies.
-    // To change dependencies:
-    // 1. Add/modify/remove listing here
-    // 2. Run `gradlew getDependencies [eclipse]`
-    // 3. Commit changes to lib/auto
-    // To get source packages in IDE, change "dependency" keyword to "compile".
-    dependency 'org.languagetool:languagetool-core:3.4'
-    dependency('org.languagetool:language-all:3.4') {
-        // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
-        exclude module: 'lucene-gosen-ipadic'
+    if (!depsProvided) {
+        compile 'org.omegat:htmlparser:1.5'
+        compile 'org.omegat:gnudiff4j:1.15'
+        compile 'org.omegat:lib-mnemonics:1.0'
+        compile 'org.omegat:jmyspell:1.0.0-beta-2'
+        compile 'org.languagetool:languagetool-core:3.4'
+        compile('org.languagetool:language-all:3.4') {
+            // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
+            exclude module: 'lucene-gosen-ipadic'
+        }
+        compile 'org.omegat.lucene:lucene-gosen:5.0.0:ipadic'
+        compile 'org.languagetool:hunspell-native-libs:2.9'
+        // Temporary use of custom build; see https://sourceforge.net/p/omegat/bugs/813/
+        compile 'org.omegat.lucene:lucene-core:5.2.1'
+        compile 'org.apache.lucene:lucene-analyzers-common:5.2.1'
+        compile 'org.apache.lucene:lucene-analyzers-kuromoji:5.2.1'
+        compile 'org.apache.lucene:lucene-analyzers-smartcn:5.2.1'
+        compile 'org.apache.lucene:lucene-analyzers-stempel:5.2.1'
+        compile 'org.eclipse.jgit:org.eclipse.jgit:4.2.0.201601211800-r'
+        compile 'com.jcraft:jsch.agentproxy.jsch:0.0.9'
+        // Specify the following two here just to make sure all jsch.agentproxy libs are the same version.
+        compile 'com.jcraft:jsch.agentproxy.connector-factory:0.0.9'
+        compile 'com.jcraft:jsch.agentproxy.svnkit-trilead-ssh2:0.0.9'
+        compile 'org.tmatesoft.svnkit:svnkit:1.8.12'
+        compile 'org.apache.pdfbox:pdfbox:2.0.0'
+        compile 'net.loomchild:maligna:3.0.0'
+        compile 'commons-io:commons-io:2.4'
+        compile 'commons-lang:commons-lang:2.6'
+        compile 'org.slf4j:slf4j-jdk14:1.7.21'
+        compile 'org.dict.zip:dictzip-lib:0.8.1'
+        compile 'com.github.takawitter:trie4j:0.9.2'
+        compile 'org.madlonkay.supertmxmerge:supertmxmerge:2.0.1'
+        compile 'org.omegat:vldocking:3.0.5'
+        compile 'org.omegat:juniversalchardet:1.0.4'
+
+        // Groovy used for (runtime) scripts, tests only
+        runtime 'org.codehaus.groovy:groovy-all:2.4.6'
+        
+        //RSyntaxUI and additional modules
+        compile 'com.fifesoft:rsyntaxtextarea:2.5.8'
+        compile 'com.fifesoft:rstaui:2.5.7'
+        compile ('com.fifesoft:languagesupport:2.5.8') {
+    	    exclude module: 'rhino'
+        }
+        compile 'com.fifesoft:autocomplete:2.5.8'
     }
-    dependency 'org.languagetool:hunspell-native-libs:2.9'
-    dependency 'org.apache.lucene:lucene-analyzers-common:5.2.1'
-    dependency 'org.apache.lucene:lucene-analyzers-kuromoji:5.2.1'
-    dependency 'org.apache.lucene:lucene-analyzers-smartcn:5.2.1'
-    dependency 'org.apache.lucene:lucene-analyzers-stempel:5.2.1'
-    dependency 'org.eclipse.jgit:org.eclipse.jgit:4.2.0.201601211800-r'
-    dependency 'com.jcraft:jsch.agentproxy.jsch:0.0.9'
-    // Specify the following two here just to make sure all jsch.agentproxy libs are the same version.
-    dependency 'com.jcraft:jsch.agentproxy.connector-factory:0.0.9'
-    dependency 'com.jcraft:jsch.agentproxy.svnkit-trilead-ssh2:0.0.9'
-    dependency 'org.tmatesoft.svnkit:svnkit:1.8.12'
-    dependency 'org.apache.pdfbox:pdfbox:2.0.0'
-    dependency 'net.loomchild:maligna:3.0.0'
-    dependency 'commons-io:commons-io:2.4'
-    dependency 'commons-lang:commons-lang:2.6'
-    dependency 'org.slf4j:slf4j-jdk14:1.7.21'
-    dependency 'org.dict.zip:dictzip-lib:0.8.1'
-    dependency 'com.github.takawitter:trie4j:0.9.2'
-    dependency 'org.madlonkay.supertmxmerge:supertmxmerge:2.0.1'
-    dependency 'org.omegat:vldocking:3.0.5'
-    dependency 'org.omegat:juniversalchardet:1.0.4'
-    // Groovy used for scripts only
-    dependency 'org.codehaus.groovy:groovy-all:2.4.6'
-    
-    //RSyntaxUI and additional modules
-    dependency 'com.fifesoft:rsyntaxtextarea:2.5.8'
-    dependency 'com.fifesoft:rstaui:2.5.7'
-    dependency ('com.fifesoft:languagesupport:2.5.8') {
-	    exclude module: 'rhino'
-    }
-    dependency 'com.fifesoft:autocomplete:2.5.8'
 
     compile fileTree(dir: 'lib', include: '**/*.jar')
 
     // Test dependencies
     testCompile 'junit:junit:4.12'
     testCompile 'xmlunit:xmlunit:1.6'
+    testCompile 'org.codehaus.groovy:groovy-all:2.4.6'
     testCompile('org.languagetool:languagetool-server:3.4') {
         exclude module: 'languagetool-core'
         exclude module: 'language-all'
         exclude group: 'org.slf4j'
     }
+    
 
     // WebStart-only
     jnlp project(path: ':release:WebStart-specific', configuration: 'docs')
     
     testIntegrationCompile sourceSets.main.output, sourceSets.test.output, configurations.compile
-}
-
-task getDependencies(type: Copy) {
-    description = 'Save all dependencies locally for storage in repository.'
-    doFirst {
-        delete 'lib/auto'
-    }
-    from configurations.dependency
-    into 'lib/auto'
 }
 
 def omtPlugins = loadProperties file('Plugins.properties')
@@ -219,9 +217,12 @@ distributions {
     source {
         contents {
             from(rootDir) {
-                include 'docs/**', 'images/**', 'lib/**', 'lib-mnemonics/**', 'release/**',
+                include 'docs/**', 'images/**', 'lib/**', 'release/**',
                     'src/**', 'test/**', 'gen/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
-                    '*.gradle', 'README.md', '*.properties'
+                    'gradle/**', 'gradlew*', '*.gradle', 'README.md', '*.properties'
+            }
+            into('lib/provided') {
+                from configurations.compile, configurations.runtime
             }
         }
         sourceDistZip.archiveName = "${applicationName}_${version}${omtVersion.beta}_Source.zip"
@@ -258,10 +259,8 @@ distributions {
     [linux: linuxJRE, linux64: linux64JRE].each { distName, jrePath ->
         create(distName) {
             contents {
-                into('/') {
-                    with main.contents
-                    exclude 'OmegaT.bat'
-                }
+                with main.contents
+                exclude 'OmegaT.bat'
                 from(jrePath) {
                     into 'jre'
                     fileMode 0755
@@ -334,6 +333,7 @@ task linux(dependsOn: [linuxDistTar, linux64DistTar]) {
     def suffix = task.name.contains('64') ? 'Linux_64' : 'Linux'
     task.archiveName = "${applicationName}_${version}${omtVersion.beta}_${suffix}.bz2"
     task.compression = Compression.BZIP2
+    task.extension = 'bz2'
 }
 
 task l10n(dependsOn: [l10nMinimalDistZip, l10nFullDistZip]) {
@@ -393,30 +393,25 @@ task win {
 }
 
 [winNoJRE: null, winJRE: windowsJRE].each { taskName, jrePath ->
-    task(taskName) {
+    task(type: Sync, taskName) {
         description = "Create a Windows installer for ${taskName} distro. " +
             'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
-        dependsOn jar
-        def innoSetupDir = file("${buildDir}/innosetup/${taskName}")
+        with distributions.main.contents
+        from ('release/win32-specific') {
+            include 'OmegaT.exe', 'OmegaT.l4J.ini'
+        }
+        destinationDir = file("${buildDir}/innosetup/${taskName}")
         def fullVersion = project.version + omtVersion.beta
         def suffix = jrePath == null ? 'Windows_without_JRE' : 'Windows'
         def installerBasename = "OmegaT_${fullVersion}_${suffix}"
-        outputs.dir innoSetupDir
         outputs.file "${distsDir}/${installerBasename}.exe"
         onlyIf {
-            haveInnoSetup()
+            (jrePath == null || jrePath.directory) && haveInnoSetup()
         }
         doLast {
-            copy {
-                with distributions.main.contents
-                from('release/win32-specific') {
-                    include 'OmegaT.exe', 'OmegaT.l4J.ini'
-                }
-                into innoSetupDir
-            }
             // Use Ant filtering because we need Unicode output. See
             // https://issues.gradle.org/browse/GRADLE-1267
-            ant.copy(todir: innoSetupDir, encoding: 'utf8', outputencoding: 'utf8') {
+            ant.copy(todir: destinationDir, encoding: 'utf8', outputencoding: 'utf8') {
                 fileset(dir: 'release/win32-specific', includes: 'OmegaT.iss')
                 filterchain {
                     replacetokens {
@@ -432,7 +427,7 @@ task win {
                 }
             }
             exec {
-                commandLine 'iscc', "${innoSetupDir}/OmegaT.iss"
+                commandLine 'iscc', "${destinationDir}/OmegaT.iss"
             }
         }
     }
@@ -639,7 +634,7 @@ def getUpdateSuffix(String update) {
         return ''
     }
     if (update.length() == 1) {
-        return '0' + update
+        return "_0${update}"
     }
-    return update
+    return "_${update}"
 }

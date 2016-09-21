@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;12.&nbsp;Operar con le texto formattate</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT 3.1 - Guida del usator">
-      <link rel="up" href="index.html" title="OmegaT 3.1 - Guida del usator">
+      <link rel="home" href="index.html" title="OmegaT 3.5 - Guida del usator">
+      <link rel="up" href="index.html" title="OmegaT 3.5 - Guida del usator">
       <link rel="prev" href="chapter.plain.text.html" title="Chapter&nbsp;11.&nbsp;Operar con le texto simple">
       <link rel="next" href="chapter.translation.memories.html" title="Chapter&nbsp;13.&nbsp;Memorias de traduction:">
    </head>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;Operar con le texto formattate<a class="indexterm" name="d0e6320"></a><a class="indexterm" name="d0e6325"></a></h1>
+                  <h1 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;Operar con le texto formattate<a class="indexterm" name="d0e6605"></a><a class="indexterm" name="d0e6610"></a></h1>
                </div>
             </div>
          </div>
@@ -39,7 +39,7 @@
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Operationes del Tag</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Annidamento de gruppos de tags</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. Superposition de gruppo de tag</a></span></dt>
-               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6470">5. Optiones de validation del tag</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6755">5. Optiones de validation del tag</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">6. Validation de gruppo de tag</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">7. Consilios pro le gestion del tags</a></span></dt>
             </dl>
@@ -54,23 +54,23 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Formattar le tags<a class="indexterm" name="d0e6335"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Formattar le tags<a class="indexterm" name="d0e6620"></a></h2>
                   </div>
                </div>
             </div>
-            <p><a class="indexterm" name="d0e6339"></a><span class="bold"><strong>Denomination del tag:</strong></span></p>
+            <p><a class="indexterm" name="d0e6624"></a><span class="bold"><strong>Denomination del tag:</strong></span></p>
             <p>Le tags consiste de uno a tres characteres e un numero. Le numeration unic permitte al tags, correspondente a cata altere,
                de esser regruppate insimul e distincte inter le tags que ha le mesme character de connexion, ma son de facto differente.
                Le characteres de connexion usate tende a reflecter le significato obvie del tag (per exemplo b pro nigrato o bold, i pro
                italics, et cetera)
             </p>
-            <p><a class="indexterm" name="d0e6349"></a><span class="bold"><strong>Numeration de tag:</strong></span></p>
+            <p><a class="indexterm" name="d0e6634"></a><span class="bold"><strong>Numeration de tag:</strong></span></p>
             <p>Le tags es numerate in modo incremental secundo le gruppo de tag. Le "gruppos de tag" in iste contexto son tag singule (assi
                como &lt;i0&gt; e &lt;/i0&gt;). Intra un segmento, le prime gruppo (copula o singule) recipe le numero 0, le secunde le numero 1 et cetera.
                Le prime exemplo in ultra ha 3 gruppos de tag (un copula, un singulo, e pois un altere copula), le secunde exemplo ha un gruppo
                solmente (un copula).
             </p>
-            <p><a class="indexterm" name="d0e6359"></a><span class="bold"><strong>Copulas e singulos:</strong></span></p>
+            <p><a class="indexterm" name="d0e6644"></a><span class="bold"><strong>Copulas e singulos:</strong></span></p>
             <p>Le tags es sempre o singulos o accopulate. Le tags singule indica information de formattation que non affice le contexto (un
                spatio extra o un interruption de linea per exemplo).
             </p>
@@ -90,7 +90,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Operationes del Tag<a class="indexterm" name="d0e6383"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Operationes del Tag<a class="indexterm" name="d0e6668"></a></h2>
                   </div>
                </div>
             </div>
@@ -98,7 +98,7 @@
                Le regula basic es que le sequentia de tags debe esser conservate in le identic arrangiamento. Comocunque, il es possibile,
                si certe regulas son sequite strictemente, deviar ab iste regula basic.
             </p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6392"></a>Duplication del tag:</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6677"></a>Duplication del tag:</strong></span></p>
             <p>Pro duplicar gruppos de tag, copia exactemente los in le position que tu desira. Serva in mente que in un copula, le tag de
                apertura debe venir ante que le tag de clausura. Le formattation representate per le gruppo tu ha duplicate essera applicate
                a ambe sectiones.
@@ -107,7 +107,7 @@
             <p><code class="literal">&lt;b0&gt;Iste formattation&lt;/b0&gt; va a esser duplicate ci.&lt;segment 0001&gt;</code></p>
             <p>Post le duplication:</p>
             <p><code class="literal">&lt;b0&gt;Iste formattation&lt;/b0&gt; esseva &lt;b0&gt;duplicate ci&lt;/b0&gt;.&lt;segment 0001&gt;</code></p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6412"></a>Cancellation de gruppo de tag:</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6697"></a>Cancellation de gruppo de tag:</strong></span></p>
             <p>Pro cancellar le gruppos de tag, remove solmente los ex le segmento. Serva in mente que un copula debe haber cancellate ambe
                su tags de apertura e de clausura pro assecurar que omne le tracias del formattation son cancellate debitemente, alias le
                file rendite pote devenir corrupte. Cancellante un gruppo de tag tu removera le formattation pertinente del file rendite.
@@ -121,7 +121,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Annidamento de gruppos de tags<a class="indexterm" name="d0e6433"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Annidamento de gruppos de tags<a class="indexterm" name="d0e6718"></a></h2>
                   </div>
                </div>
             </div>
@@ -139,7 +139,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Superposition de gruppo de tag<a class="indexterm" name="d0e6453"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Superposition de gruppo de tag<a class="indexterm" name="d0e6738"></a></h2>
                   </div>
                </div>
             </div>
@@ -147,15 +147,15 @@
                e alicun vices in le file rendite que non aperi del toto.
             </p>
             <p>Exemplo:</p>
-            <p><code class="literal">&lt;b0&gt;Formattation&lt;/b0&gt; &lt;b1&gt;uno&lt;/b1&gt; va esser confuse.&lt;segment 0001&gt;</code></p>
+            <p><code class="literal">Le &lt;b0&gt;Formattation&lt;/b0&gt; &lt;b1&gt;uno&lt;/b1&gt; va esser confuse. &lt;segmento 0001&gt;</code></p>
             <p>Post un manipulation mal:</p>
-            <p><code class="literal">&lt;b0&gt;Formattation &lt;b1&gt;uno&lt;/b0&gt; &lt;/b1&gt;es multo confuse ora.&lt;segment 0001&gt;</code></p>
+            <p><code class="literal">Le &lt;b0&gt;Formattation &lt;b1&gt;uno&lt;/b0&gt;&lt;/b1&gt; es multo confuse ora.&lt;segment 0001&gt;</code></p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e6470"></a>5.&nbsp;Optiones de validation del tag
+                     <h2 class="title" style="clear: both"><a name="d0e6755"></a>5.&nbsp;Optiones de validation del tag
                      </h2>
                   </div>
                </div>
@@ -198,7 +198,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="bold"><strong>Le fragmento(s) que deberea esser removite ex le expression regular del traduction</strong></span></p>
+                     <p><span class="bold"><strong>Le fragmento(s) que debe esser removite ex le expression regular del traduction</strong></span></p>
                      <p>On pote scriber un expression regular pro contentos importun in le destination. Tote le concordantias in le segmento de destination
                         essera alora colorate in rubre, id es facile a identificar e corriger. Quando on quere pro concordantias partial, le remover
                         modello es ignorate. Un penalitate fixe de 5 es addite si le parte removite non concorda alicun altere segmento, assi le concordantia
@@ -212,12 +212,12 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;Validation de gruppo de tag<a class="indexterm" name="d0e6514"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;Validation de gruppo de tag<a class="indexterm" name="d0e6799"></a></h2>
                   </div>
                </div>
             </div>
-            <p>Le function valida tags releva cambios al sequentias del tag (an deliberate o accidental), e monstra le segmentos affligite.
-               Lanceante iste function – <span class="guimenuitem">Ctrl+Shift+V<a class="indexterm" name="d0e6523"></a></span> - tu aperi un fenestra continente omne le segmentos in le file rendite, con tags suspecte rupte o mal. Reparar le tags e
+            <p>Le function valida tags releva cambiamentos al sequentias del tag (an deliberate o accidental), e monstra le segmentos affligite.
+               Lanceante iste function – <span class="guimenuitem">Ctrl+Shift+V<a class="indexterm" name="d0e6808"></a></span> - tu aperi un fenestra continente omne le segmentos in le file rendite, con tags suspecte rupte o mal. Reparar le tags e
                recrear le documentos de destination es facile con le function Valida tags. Le fenestra que aperi quando es pulsate <span class="guimenuitem">Ctrl+Shift+V</span> presenta un tabella a tres columnas con un ligamine al segmento, le segmento fonte e le segmento de destination.
             </p>
             <div class="figure"><a name="tag.validation"></a><p class="title"><b>Figure&nbsp;12.1.&nbsp;Entrata de validation de tag</b></p>
@@ -235,7 +235,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;Consilios pro le gestion del tags<a class="indexterm" name="d0e6548"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;Consilios pro le gestion del tags<a class="indexterm" name="d0e6833"></a></h2>
                   </div>
                </div>
             </div>

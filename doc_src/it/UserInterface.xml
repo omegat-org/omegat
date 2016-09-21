@@ -77,7 +77,7 @@
         <tbody>
           <row>
             <entry><guimenuitem><indexterm class="singular">
-                <primary>Scorciatoie</primary> <secondary>Convalida dei tag - Ctrl+T</secondary>
+                <primary>Scorciatoie</primary> <secondary>Convalida dei tag - Ctrl+Maiusc+V</secondary>
               </indexterm>Finestra di convalida dei tag</guimenuitem></entry>
 
             <entry><para>Usata per convalidare i tag (aprire con <keycombo> <keycap>Ctrl</keycap> <keycap>Maiusc</keycap> <keycap>V</keycap> </keycombo>, chiudere con <keycap>Esc</keycap>)</para></entry>
@@ -88,7 +88,7 @@
                 <primary>Scorciatoie</primary> <secondary>Aiuto - F1</secondary>
               </indexterm>Navigatore della Guida</guimenuitem></entry>
 
-            <entry><para>Usato per visualizzare il manuale dell'utente (aprire con <keycap>F1</keycap>, chiudere con <keycap>Esc)</keycap></para></entry>
+            <entry><para>Usato per visualizzare il manuale dell'utente (aprire con <keycap>F1</keycap>)<keycap/></para></entry>
           </row>
 
           <row>
@@ -280,6 +280,20 @@
         <primary>Finestre di OmegaT</primary> <secondary>Ripristino alle impostazioni di fabbrica</secondary>
       </indexterm>Opzioni → Ripristina la finestra principale</guimenuitem> in qualsiasi momento per tornare alla disposizione originale.</para>
 
+    <para>È possibile trascinare e rilasciare file in ciascun pannello, che reagirà di conseguenza.<itemizedlist>
+        <listitem>
+          <para>Finestra dell'Editor: se un file di progetto OmegaT (<filename>omegat.project</filename>) viene rilasciato in questa finestra, sarà aperto il progetto corrispondente, chiudendo prima qualsiasi altro progetto aperto. Gli altri file rilasciati verranno copiati nella cartella <filename>source</filename>. Questa procedura è valida anche per la finestra <link linkend="section.project.files">File del progetto</link>.</para>
+        </listitem>
+
+        <listitem>
+          <para>Pannello delle Concordanze parziali: i file <filename>.tmx</filename> trascinati qui saranno copiati nella cartella <filename>tm</filename>.</para>
+        </listitem>
+
+        <listitem>
+          <para>Pannello del Glossario: i file con estensione di glossario conosciuta rilasciati qui (<filename>.txt</filename>, <filename>.tab</filename>, ecc.) saranno copiati nella cartella <filename>glossary</filename>.</para>
+        </listitem>
+      </itemizedlist></para>
+
     <para>I contatori nella parte inferiore destra della finestra tengono traccia dell'avanzamento della traduzione (i numeri nella colonna sinistra si riferiscono alla figura sopra riportata):</para>
 
     <table>
@@ -331,9 +345,15 @@
           <primary>Marcatore di segmenti</primary>
         </indexterm>il marcatore è il <literal>&lt;segmento nnnn&gt;</literal> dove nnnn corrisponde al numero del segmento all'interno del progetto. La parte superiore del segmento viene utilizzata come riferimento del testo da tradurre, mentre la parte inferiore (il “campo di modifica”) è quella dove viene scritta, o modificata, la traduzione.</para>
 
+      <para>Nota: il marcatore di segmento visualizza <literal>&lt;segmento nnnn +yy in più&gt; quando il segmento non è univoco. In questo caso, yy rappresenta il numero di altre occorrenze del segmento all'interno del progetto.</literal></para>
+
       <para>A seconda dell'impostazione del comportamento di modifica, il campo di modifica del segmento da tradurre può risultare vuoto oppure contenere il testo di partenza o la traduzione della stringa più simile a quella da tradurre. Quando ci si sposta a un altro segmento, la traduzione verrà confermata e memorizzata. Se si desidera che la traduzione sia uguale al testo originario, sarà sufficiente svuotare il campo di modifica, rimuovendo tutto il testo (selezionare il contenuto con <keycap>Ctrl+A</keycap> ed eliminarlo con <keycap>Canc</keycap>). OmegaT è in grado di memorizzare traduzioni che risultano uguali al testo di partenza. Si tratta di una funzione particolarmente utile quando i documenti contengono marchi di fabbrica, nomi o altri nomi propri, oppure parti che devono rimanere nella loro lingua originaria e non richiedono, quindi, traduzione. Per ulteriori informazioni si veda <emphasis>Modifica della traduzione</emphasis>.</para>
 
-      <para>Il clic col pulsante destro del mouse, all'interno della finestra dell'Editor, apre un menu contestuale in cui è possibile scegliere le funzioni <emphasis role="bold">Taglia, Copia, Incolla</emphasis> (ossia le stesse funzioni relative alla combinazione di tasti <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> e <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>) <emphasis role="bold">Vai al segmento</emphasis>.</para>
+      <para>Il clic col pulsante destro del mouse, all'interno della finestra dell'Editor, apre un menu contestuale in cui è possibile scegliere le funzioni<emphasis role="bold"> Taglia, Copia, Incolla</emphasis> (ossia le stesse funzioni relative alla combinazione di tasti <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> e <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>), <emphasis role="bold">Vai al segmento</emphasis> e <emphasis role="bold">Aggiungi voce di glossario</emphasis>. In aggiunta, quando si fa il clic col pulsante destro del mouse su un segmento aperto, vengono offerte altre opzioni riguardanti le <emphasis role="bold">traduzioni alternative</emphasis>, per esempio di passare a un'altra istanza di segmenti non univoci.</para>
+
+      <para>È possibile trascinare del testo da qualsiasi punto all'interno della finestra principale e rilasciarlo all'interno del segmento. Il testo trascinato dall'esterno all'interno del segmento di arrivo viene copiato, mentre quello trascinato al suo interno viene spostato.</para>
+
+      <para>Per impostazione predefinita, non è possibile selezionare le parole nel segmento di partenza utilizzando la tastiera anziché il mouse. La pressione del tasto <keycap>F2</keycap> consente di spostare il cursore all'interno del segmento di partenza (o in qualsiasi punto dell'editor) tramite i tasti freccia. In questa modalità , la dicitura &quot;<guilabel>Blocco cursore disattivo</guilabel>&quot; viene visualizzata nella parte inferiore del pannello. Per tornare alla modalità standard &quot;<guilabel>Blocco cursore attivo</guilabel>&quot;, premere di nuovo <keycap>F2</keycap>.</para>
     </section>
 
     <section id="match.viewer">
@@ -460,6 +480,12 @@
               </row>
 
               <row>
+                <entry><literal>${diffReversed}</literal></entry>
+
+                <entry>Uguale a ${diff}, ma con le differenze (quello che va inserito ed eliminato) invertite.</entry>
+              </row>
+
+              <row>
                 <entry><literal>${score}</literal></entry>
 
                 <entry>Percentuale con tokenizer</entry>
@@ -496,17 +522,28 @@
               </row>
 
               <row>
-                <entry><literal>${creationID}</literal></entry>
+                <entry><literal>${initialCreationID}</literal></entry>
 
-                <entry>Autore della concordanza</entry>
+                <entry>Autore della concordanza quando è stata creata la concordanza</entry>
               </row>
 
               <row>
-                <entry><literal>${creationDate}</literal></entry>
+                <entry><literal>${initialCreationDate}</literal></entry>
 
-                <entry>Data della concordanza</entry>
+                <entry>Data della concordanza quando è stata creata la concordanza</entry>
               </row>
 
+              <row>
+                <entry><literal>${changedID}</literal></entry>
+
+                <entry>Autore della concordanza quando la concordanza è stata aggiornata l'ultima volta</entry>
+              </row>
+
+              <row>
+                <entry><literal>${changedDate}</literal></entry>
+
+                <entry>Data della concordanza quando la concordanza è stata aggiornata l'ultima volta</entry>
+              </row>
               <row>
                 <entry><literal>${fuzzyFlag}</literal></entry>
 
@@ -636,6 +673,8 @@
           <para>Digitando del testo si aprirà un filtro in cui potranno essere immesse parti del nome dei file. È possibile selezionare un file tramite i tasti freccia <keycap>Su</keycap> e <keycap>Giù</keycap> e aprirlo per lavorarlo premendo <keycap>Invio</keycap></para>
 
           <para>Nota: i nomi dei file (nella prima colonna) si possono ordinare alfabeticamente premendo l'intestazione di colonna. È anche possibile modificare la posizione di un nome di file, facendovi clic sopra e premendo i pulsanti <emphasis>Sposta...</emphasis>.</para>
+
+          <para>Il clic col pulsante destro del mouse su un nome di file apre un riquadro che consente di aprire il file di partenza e (se è presente) il file di arrivo.</para>
         </listitem>
       </itemizedlist>
 

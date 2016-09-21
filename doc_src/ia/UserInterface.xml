@@ -77,7 +77,7 @@
         <tbody>
           <row>
             <entry><guimenuitem><indexterm class="singular">
-                <primary>Vias breve</primary> <secondary>Validation del tag - Ctrl+T</secondary>
+                <primary>Vias breve</primary> <secondary>Validation de tag - Ctrl+Shift+V</secondary>
               </indexterm>Fenestra Validation del tags</guimenuitem></entry>
 
             <entry><para>Usate pro validar le tags (aperir con <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>V</keycap> </keycombo>, clauder con <keycap>Esc</keycap>)</para></entry>
@@ -88,7 +88,7 @@
                 <primary>Vias breve</primary> <secondary>Adjuta - F1</secondary>
               </indexterm>Lector del Adjuta</guimenuitem></entry>
 
-            <entry><para>Utilisate pro monstrar le manual del usator (aperir con <keycap>F1</keycap>, clauder con <keycap>Esc)</keycap></para></entry>
+            <entry><para>Usate pro monstrar al usator le manual (aperir con le <keycap>F1</keycap>)<keycap/></para></entry>
           </row>
 
           <row>
@@ -274,13 +274,27 @@
       </tgroup>
     </table>
 
-    <para>Si tu vole, tu pote superponer le quadros. Quando isto is facite le quadros monstra un linguetta al summitate. Le separatores inter le quadros pote ser trahite pro re-dimensionar le quadros. Si tu deberea perder tracia de tu cambios al interfacie del usator, tu pote usar <guimenuitem><indexterm class="singular">
+    <para>Si tu vole, tu pote superponer le quadros. Quando isto is facite le quadros monstra un linguetta al summitate. Le separatores inter le quadros pote ser trahite pro re-dimensionar le quadros. Si tu debe perder tracia de tu cambiamentos al interfacie del usator, tu pote usar <guimenuitem><indexterm class="singular">
         <primary>Fenestras de OmegaT</primary> <seealso>Fenestras e quadros in OmegaT</seealso>
       </indexterm> <indexterm class="singular">
         <primary>Fenestras de OmegaT</primary> <secondary>Restauration al configuration de fabrica</secondary>
       </indexterm>Optiones → Restaura le Fenestra Principal</guimenuitem> in omne tempore pro retornar al arrangiamento original.</para>
 
-    <para>Le contatores in le angulo dextre inferior tene tracia del progresso del traduction (le numeros in le columna sinistre refere se al figura precedente):</para>
+    <para>Il es possibile traher e deponer files pro cata quadro, que reagera in accordo.<itemizedlist>
+        <listitem>
+          <para>Quadro del Editor: si un file de projecto OmegaT (<filename>omegat.project</filename>) es deponite in iste quadro, le correspondente projecto essera aperte, claudente antea qualcunque projecto aperte. Altere files deponite essera copiate al plica <filename>fonte</filename>. Isto se applica alsi al fenestra del <link linkend="section.project.files">Files de projecto</link>.</para>
+        </listitem>
+
+        <listitem>
+          <para>Quadro del concordantias partial: le files <filename>.tmx</filename> ibi deponite essera copiate al plica <filename>tm</filename>.</para>
+        </listitem>
+
+        <listitem>
+          <para>Quadro del Glossario: le files deponite con le extensiones note del glossario (<filename>.txt</filename>, <filename>.tab</filename>, et cetera.) essera copiate al plica del <filename>glossario</filename>.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <para>Le contatores in le angulo dextre inferior tene tracia del progresso del traduction (le numeros in le columna sinistre se refere al figura precedente):</para>
 
     <table>
       <title>Fenestra principal - contatores<indexterm class="singular">
@@ -331,9 +345,15 @@
           <primary>Marcator del segmento</primary>
         </indexterm>le marcator es <literal>&lt;segment nnnn&gt;</literal> ubi nnnn es un numero del segmento in le projecto. Usa le parte superior como un referentia e reimplacia o modifica le contentos del campo de modification con tu traduction.</para>
 
+      <para>Nota: le marcator del segmento monstra <literal>&lt;segmento nnnn +yy plus&gt; quando le segmento es non-unic. In ille caso, yy es le numero del altere occurrentias del segmento in le projecto.</literal></para>
+
       <para>Secundo le preferentias del comportamento del modification, le campo pro le modification del segmentos non rendite pote essere vacue, continer le texto original, o continer le traduction del linea de character le plus simile a illo a render. Quando tu move a un altere segmento, le traduction es validate e registrate in le memoria de traduction. Si tu vole que le traduction sia identic al origine, vacua simplemente le campo de modification, removente omne le texto (selige omne con <keycap>Ctrl+A</keycap> e dele lo con <keycap>Del</keycap>). OmegaT es capabile de registrar traductiones que es identic al texto fonte. Isto es utile pro textos continente marcas commercial, nomines o altere nomines proprie, o partes in un lingua tertia que non require traduction. Vide <emphasis>Modification (redaction) del traduction</emphasis> for plus de detalios.</para>
 
-      <para>Si tu clicca con le dextra sur le quadro Modification, se displica un menu pop-up, offerente <emphasis role="bold"> Taliar, Copiar, Collar</emphasis> (id es le mesme functiones que <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> e <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>) e le function <emphasis role="bold">Vade al segmento</emphasis>.</para>
+      <para>Si tu clicca dextre sur le quadro del Editor, se aperi un menu que offere:<emphasis role="bold"> Secar, Copiar, Collar</emphasis> (le mesme functiones que: <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> e <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>), le functiones <emphasis role="bold">Ir al segmento</emphasis> e <emphasis role="bold">Adder un entrata al glossario</emphasis>. In addition, quando le clic dextre occurre sur un segmento aperte, es proponite altere optiones concernente <emphasis role="bold">Traductiones alternative</emphasis>, per exemplo pro saltar a un altere instantia del segmentos non-unic.</para>
+
+      <para>Il es possibile traher texto ab ubicunque in le fenestra e deponer lo in le segmento de destination. Le texto trahite ex le externo del segmento de destination es copiate, in vice le texto trahite ab le interno del segmento es movite.</para>
+
+      <para>Per option predefinite, il non es possibile eliger parolas in le segmento fonte per le claviero plus tosto que per le mus. Pulsante le clave <keycap>F2</keycap> consenti mover le cursor in le segmento fonte (o ubicunque in le editor) con flechas del claviero. In iste modo, &quot;<guilabel>Cursor non blocate</guilabel>&quot; es displicate al  basso del quadro. Pro revenir al modo standard &quot;<guilabel>Cursor blocate</guilabel>&quot;, pulsar ancora <keycap>F2</keycap>.</para>
     </section>
 
     <section id="match.viewer">
@@ -379,7 +399,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>percentage de concordantia (tenente conto del tokenizers)</para>
+          <para>percentage de concordantia (tenente conto del cercatores de radicales)</para>
         </listitem>
       </itemizedlist>
 
@@ -460,9 +480,15 @@
               </row>
 
               <row>
+                <entry><literal>${diffReversed}</literal></entry>
+
+                <entry>Simile a ${diff}, ma con le differentias (que debe esser inserite e delite) invertite.</entry>
+              </row>
+
+              <row>
                 <entry><literal>${score}</literal></entry>
 
-                <entry>Percentage con le tokenizer</entry>
+                <entry>Percentage con le cercator de radicales</entry>
               </row>
 
               <row>
@@ -496,17 +522,28 @@
               </row>
 
               <row>
-                <entry><literal>${creationID}</literal></entry>
+                <entry><literal>${initialCreationID}</literal></entry>
 
-                <entry>Autor del concordantia</entry>
+                <entry>Autor del concordantia quando le concordantia ha essite create</entry>
               </row>
 
               <row>
-                <entry><literal>${creationDate}</literal></entry>
+                <entry><literal>${initialCreationDate}</literal></entry>
 
-                <entry>Data del concordantia</entry>
+                <entry>Data del concordantia quando le concordantia ha essite create</entry>
               </row>
 
+              <row>
+                <entry><literal>${changedID}</literal></entry>
+
+                <entry>Autor del concordantia le ultime vice que le concordantia ha essite actualisate</entry>
+              </row>
+
+              <row>
+                <entry><literal>${changedDate}</literal></entry>
+
+                <entry>Data del concordantia le ultime vice que le concordantia ha essite actualisate</entry>
+              </row>
               <row>
                 <entry><literal>${fuzzyFlag}</literal></entry>
 
@@ -617,7 +654,11 @@
           <primary>Fenestras e quadros in OmegaT</primary> <secondary>Files de Projecto</secondary>
         </indexterm></title>
 
-      <para>Le fenestra Files de Projecto lista le files del projecto e monstra altere information de projecto. Il es monstrate automaticamente quando OmegaT carga un projecto. Usa <guimenuitem>Ctrl+L<indexterm class="singular">
+      <para>Le fenestra Files de Projecto lista le files del projecto e monstra altere information de projecto. Il es monstrate automaticamente quando OmegaT carga un projecto.</para>
+
+      <para><remark>Nota:</remark> Il es possibile inhibir de monstrar ce fenestra Files del projecto, per le fixation de <emphasis>project_files_show_on_load</emphasis> a <emphasis>false</emphasis> in le file <filename>omegat.prefs</filename> (accessibile per le  menu Optiones / Acceder le plica de configuration).</para>
+
+      <para>Usa <guimenuitem>Ctrl+L<indexterm class="singular">
           <primary>Vias breve</primary> <secondary>Lista de files del Projecto - Ctrl+L</secondary>
         </indexterm></guimenuitem> pro aperir e  <keycap>Esc</keycap> pro clauder lo. Le fenestra Files de projecto monstra le information sequente:</para>
 
@@ -627,13 +668,13 @@
         </listitem>
 
         <listitem>
-          <para>le lista de omne files traducibile in le projecto. Cliccar sur qualcunque file aperira lo pro le traduction Nota: le nomines de file (in le prime columna) pote ser ordinate alphabeticamente cliccante in le titulo. Il es alsi possibile cambiar le position de un nomine de file, cliccante sur lo e pulsante le buttones <emphasis>Mover...</emphasis>.</para>
-        </listitem>
-      </itemizedlist>
+          <para>le lista de omne files traducibile in le projecto. Cliccar sur qualcunque file aperira lo pro le traduction</para>
 
-      <itemizedlist>
-        <listitem>
-          <para>le file actualmente disponibile in le quadro de Modification es marcate con un fundo blau. Pulsante <keycap>Enter</keycap> movera le quadro del Modification al summitate del file seligite</para>
+          <para>Inserer qualcunque texto aperira un campo de filtro ubi le partes del nomines de file pote esser inserite. Tu pote eliger un file con le claves <keycap>In alto</keycap> e <keycap>In basso</keycap>, e aperir lo pro le traduction per pulsar <keycap>Insere</keycap></para>
+
+          <para>Nota: le nomines de file (in le prime columna) pote ser ordinate alphabeticamente cliccante in le titulo. Il es alsi possibile cambiar le position de un nomine de file, cliccante sur lo e pulsante le buttones <emphasis>Mover...</emphasis>.</para>
+
+          <para>Le clic dextre sur un nomine de file aperi un popup que consenti aperir le file fonte e (si illo existe) le file de destination.</para>
         </listitem>
       </itemizedlist>
 
@@ -653,7 +694,7 @@
 
       <para>Le differentia inter &quot;Numero de segmentos&quot; e &quot;Numero de segmentos unic&quot; provide un idea approximative del numero del repetitiones in le texto. Nota totevia que le numeros non indica quanto es relevante le repetitiones: illos poterea significar phrases relativemente longe repetite plure vices (in le qual caso tu es fortunate) o illo poterea describer un tabula de parolas clave (non assi fortunate). Le file <filename>project_stats.txt</filename> ubicate in le plica omegat de tu projecto, contine informationes plus detaliate re le segmentos, partite pro cata file.</para>
 
-      <para>Le modifica del regulas de segmentation pote modificar le numero del segmentos e del segmentos unic. Isto, comocunque, deberea generalmente esser evitate un vice que tu ha initiate le traduction del projecto. Vider le capitulo <emphasis>Regulas de segmentation</emphasis>pro plus de informationes.</para>
+      <para>Le modifica del regulas de segmentation pote modificar le numero del segmentos e del segmentos unic. Isto, comocunque, debe generalmente esser evitate un vice que tu ha initiate le traduction del projecto. Vider le capitulo <emphasis>Regulas de segmentation</emphasis>pro plus de informationes.</para>
 
       <para><emphasis role="bold"><indexterm class="singular">
           <primary>Files fonte</primary> <secondary>Adder files al projecto</secondary>
@@ -695,7 +736,7 @@
 
       <para>Le tags es marcate in blau nigrato pro un facile comparation inter le fonte e le contentos rendite. Clicca sur le ligamine pro saltar al segmento in le quadro del Modifica. Corrige le error si necesse e calca <guimenuitem>Ctrl+T</guimenuitem> pro retornar al fenestra de validation del tag e corriger altere errores. In le prime e tertie caso le tags precedente es arrangiate in copulas in modo errate, e in le secunde caso le signo &lt; es mancante in le prime tag.</para>
 
-      <para>le errores de tag es le casos in le qual le tags in le traduction non corresponde in ordine e numero al segmento fonte. Alicun tag scenarios displicate in le fenestra de validation del tag es necessari e benigne, alteres producera problemas quando essera create le documento rendite. Le tags representa generalmente un sorta de formattation in le texto original. Simplificar le formato del texto original in le file fonte, ante le initio del traduction, contribue assatis a reducer le numero de tags.</para>
+      <para>le errores de tag es le casos in le qual le tags in le traduction non corresponde in ordine e numero al segmento fonte. Alicun tag scenarios displicate in le fenestra de validation del tag es necessari e benigne, alteres producera problemas quando essera create le documento rendite. Le tags representa generalmente un sorta de formattation in le texto original. Simplificar le formato del texto original in le file fonte, ante le initio del traduction, contribue assatis a reducer le numero del tags.</para>
     </section>
 
     <section>
@@ -704,11 +745,11 @@
         </indexterm></title>
 
       <para>Le fenestra de statisticas - accedite via <emphasis role="bold">Instrumentos&gt;Statisticas </emphasis>- monstra le statisticas del projecto OmegaT actual, sia in le forma summario, sia in detalio, pro cata file a traducer. Le statisticas monstrate es disponibile como un file 'separate per signos de tabulation' <filename>project_stats.txt</filename> (sub le plica <filename>omegat</filename>), preste a esser cargate in un programma de folio de calculo pro le commoditate del usator. Tu pote usar <guimenuitem>Ctrl+A <indexterm class="singular">
-          <primary>Vias breve</primary> <secondary>Selige Toto - Ctrl+A</secondary>
+          <primary>Vias breve</primary> <secondary>Seliger Toto - Ctrl+A</secondary>
         </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
-          <primary>Vias breve</primary> <secondary>Copia texto - Ctrl+C</secondary>
+          <primary>Vias breve</primary> <secondary>Copiar le texto - Ctrl+C</secondary>
         </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
-          <primary>Vias breve</primary> <secondary>Colla texto - Ctrl+V</secondary>
+          <primary>Vias breve</primary> <secondary>Collar le texto - Ctrl+V</secondary>
         </indexterm></guimenuitem> pro copiar/collar le contentos.<figure id="ProjectStatistic.Window">
           <title>statistica del projecto</title>
 
@@ -750,11 +791,11 @@
       <para>Le resto del categorias (50-100%) involve le segmentos non rendite con un concordantia partial. Le concordantias partial pote venir etiam ex le plica <filename>/tm</filename> - e non sol ex le memoria de traduction interne in le plica <filename>/omegaT,</filename> ut pro le repetitiones e le concordantias exacte. Le sol differentia con le concordantias ex le memoria de traduction <filename>project_save</filename> es que le TMs externe non pote dar concordantias exacte, ma sol 100%. Si on non desidera usar TMs externe pro le computo, on habera o vacuar le plica /tm o cambiar le preparation del projecto (temporaneemente) de maniera que le valor pro /tm puncta a un position differente.</para>
 
       <para>Le Statisticas del Concordantia es tabellas del texto  'separate per signos de tabulation' e tu pote usar <guimenuitem>Ctrl+A <indexterm class="singular">
-          <primary>Vias breve</primary> <secondary>Selige Toto - Ctrl+A</secondary>
+          <primary>Vias breve</primary> <secondary>Seliger Toto - Ctrl+A</secondary>
         </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
           <primary>Vias breve</primary> <secondary>copia texto - Ctrl+C</secondary>
         </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
-          <primary>Vias breve</primary> <secondary>Colla texto - Ctrl+V</secondary>
+          <primary>Vias breve</primary> <secondary>Collar le texto - Ctrl+V</secondary>
         </indexterm></guimenuitem> pro copiar e collar los, per exemplo in un folio de calculo o in tu application pro le computo del costos. Un vice computate, le datos es alsi disponibile in <filename>omegat/project_stats_match.txt.</filename> Nota que le file es annotate con le tempores, pois que le calculo (contrarimente al statisticas standard) non es instantanee e pote assi rapidemente devenir obsolete.</para>
     </section>
 

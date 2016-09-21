@@ -8,7 +8,7 @@
   <section>
     <title>Controlo del version - introduction</title>
 
-    <para>Le traduction in equipa (facite in collaboration) offerite per OmegaT es basate sur le function de controlo del version o de revision, largemente usate per le communitates de software pro mantener le controlo del cambios al codice de un programma e permitter le collaboration sin impedimentos intra le membros del equipa de disveloppamento. OmegaT supporta duo del popular 'systemas de controlo de version' (Version Control Systems = VCS in pauco), <ulink url="http://subversion.apache.org">&quot;Subversion&quot; ex Apache</ulink> frequentemente abbreviate in SVN, secundo le nomine del commando svn) e <ulink url="http://git-scm.com/">Git</ulink>. Le avantages de un systema VC pro un equipa de traductores in breve es le sequente:</para>
+    <para>Le traduction in equipa (facite in collaboration) offerite per OmegaT es basate sur le function de controlo de version o de revision, largemente usate per le communitates de software pro mantener le controlo del cambiamentos al codice de un programma e permitter le collaboration sin impedimentos intra le membros del equipa de disveloppamento. OmegaT supporta duo del popular 'systemas de controlo de version' (Version Control Systems = VCS in breve), <ulink url="http://subversion.apache.org">&quot;Subversion&quot; ex Apache</ulink> frequentemente abbreviate in SVN, secundo le nomine del commando svn) e <ulink url="http://git-scm.com/">Git</ulink>. Le avantages de un systema VC pro un equipa de traductores in breve es le sequente:</para>
 
     <itemizedlist>
       <listitem>
@@ -16,7 +16,7 @@
       </listitem>
 
       <listitem>
-        <para>Illes pote compartir material in commun, como la memorias de traduction del projecto e su glossarios</para>
+        <para>Illes pote compartir material in commun, como le memorias de traduction del projecto e su glossarios</para>
       </listitem>
 
       <listitem>
@@ -36,7 +36,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Le server VCS - </emphasis>id es le server SVN o le GIT es le ambiente ubi le material commun es conservate e mantenite sur le rete. Le servitor pote exister in le rete local, ma in le majoritate del casos illo essera disponibile sur interrete, id es via un adresse URL. Un membro del equipa, le administrator del projecto, necessita cognoscer le tractamento del latere del server, id es le labor re le preparation del ambiente, como importar le projecto OmegaT, como assignar le derectos de accesso pro e membros del equipa, como resolver le conflictos et cetera.&lt;t13/&gt;.</para>
+        <para><emphasis role="bold">Le servitor VCS - </emphasis>id es le servitor SVN o le GIT es le ambiente ubi le material commun es conservate e mantenite sur le rete. Le servitor pote exister in le rete local, ma in le majoritate del casos illo essera disponibile sur Internet, id es via un adresse URL. Un membro del equipa, le administrator del projecto, necessita cognoscer le tractamento del latere del servitor, id es le labor re le preparation del ambiente, como importar le projecto OmegaT, como assignar le derectos de accesso pro e membros del equipa, como resolver le conflictos et cetera.&lt;t13/&gt;.</para>
       </listitem>
 
       <listitem>
@@ -52,11 +52,11 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">consigna: </emphasis>un vice que un nove version local  del material discargate es preste, on pote la consignar al repositorio e assi render la disponibile al resto del equipa. Le servitor assecura se que omne cambios que conflige, per duo membros que opera sur le mesme contentos discargate, essera resolute.</para>
+        <para><emphasis role="bold">consigna: </emphasis>un vice que un nove version local  del material discargate es preste, on pote la consignar al repositorio e assi render la disponibile al resto del equipa. Le servitor assecura se que omne cambiamentos que conflige, per duo membros que opera sur le mesme contentos discargate, essera resolute.</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">administrator: </emphasis>le persona responsabile del creation e del mantenimento del deposito, id es le cura del labor del latere del servitor. Pro evitar problemas, sol un persona  deberea haber iste privilegios al minus initialmente.</para>
+        <para><emphasis role="bold">administrator: </emphasis>le persona responsabile del creation e del mantenimento del repositorio, id es le cura del labor del latere del servitor. Pro evitar problemas, sol un persona  debe haber iste privilegios, al minus initialmente.</para>
       </listitem>
 
       <listitem>
@@ -70,7 +70,7 @@
         <primary>Projecto in equipa</primary> <secondary>Subversion</secondary>
       </indexterm></title>
 
-    <para>Il ha duo possibilitates pro exequer un servitor SVN: tu pote installar SVN sur tu proprie servitor o tu pote usar un servicio hospite. Quando tu usa un servicio externe tu debe esser al currente del implicationes possibile in terminos de confidentialitate, pois que tu es cargante le documento original sur un servitor foras de tu controlo directe. Alias, pro evitar iste question, tu pote preparar un servitor SVN private, per exemplo si tu ja ha un server Apache que include le software in question (per exemplo VisualSVN).</para>
+    <para>Il ha duo possibilitates pro exequer un servitor SVN: tu pote installar SVN sur tu proprie servitor o tu pote usar un servicio hospite. Quando tu usa un servicio externe tu debe esser al currente del implicationes possibile in terminos de confidentialitate, pois que tu es cargante le documento original sur un servitor foras de tu controlo directe. Alias, pro evitar iste question, tu pote preparar un servitor SVN private, per exemplo si tu ja ha un servitor Apache que include le software in question (per exemplo VisualSVN).</para>
 
     <para>Un vice que le servitor SVN is disponibile, le administratores del projecto debe installar localmente un cliente SVN, pro gerer le contentos del projecto sur lor computatores. Pro Windows nos recommenda <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink>. Pro Mac tu pote discargar le cliente per exemplo ex <ulink url="https://sourceforge.net/projects/macsvn/">SourceForge</ulink>, Pro Linux vide <ulink url="http://www.yolinux.com/TUTORIALS/Subversion.html">Subversion Commands and Scripts</ulink>.</para>
 
@@ -107,9 +107,9 @@
     </section>
 
     <section>
-      <title>Como importar le projecto al deposito SVN - Windows</title>
+      <title>Como importar le projecto al repositorio SVN - Windows</title>
 
-      <para>Le deposito es vacue in iste momento. Crea in prime loco un plica cliente sur tu disco dur. Crea un plica vacue, ubi tu retenera tu projecto e clicca con le dextere sur illo. Elige<guilabel> TortoiseSVN &gt; Checkout.</guilabel> Appare le fenestra de dialogo sequente:</para>
+      <para>Le repositorio es vacue in iste momento. Crea in prime loco un plica cliente sur tu disco dur. Crea un plica vacue, ubi tu retenera tu projecto e clicca con le dextere sur illo. Elige<guilabel> TortoiseSVN &gt; Checkout.</guilabel> Appare le fenestra de dialogo sequente:</para>
  
       <mediaobject>
         <imageobject role="html">
@@ -120,7 +120,7 @@
         </imageobject>
       </mediaobject>
  
-      <para>Inscribe le URL, supplite per ProjectLocker, in le campo <emphasis role="bold">URL of repository</emphasis>. Assecura te que le campo <emphasis role="bold">Checkout directory</emphasis> es correcte, id es illo specifica le plica vacue que tu ha create, e pulsa <emphasis role="bold">OK</emphasis>. Un vice que le operation ha finite, tu pote controlar le plica dicite: illo deberea ora continer un sub plica .svn e un placa OK verde sur su icone monstrara, que le contentos del plica son renovate:</para>
+      <para>Inscribe le URL, supplite per ProjectLocker, in le campo <emphasis role="bold">URL of repository</emphasis>. Assecura te que le campo <emphasis role="bold">Checkout directory</emphasis> es correcte, id es illo specifica le plica vacue que tu ha create, e pulsa <emphasis role="bold">OK</emphasis>. Un vice que le operation ha finite, tu pote controlar le plica dicite: illa debe ora continer un sub plica .svn e un placa OK verde sur su icone monstrara, que le contentos del plica son renovate:</para>
 
       <para>In le grado successive, nos addera le files OmegaT al plica local. Le files sequente debe esser in commun inter le membros del equipa e assi debe ser includite in omne caso:</para>
 
@@ -144,7 +144,7 @@
 
       <para>Le administrator pote decider pro comprender le plicas sequente e lor contentos assi como: <filename>tm</filename>, <filename>glossary</filename> e <filename>dictionary</filename>. Etiam <filename>ignored_words.txt</filename> e <filename>learned_words.txt</filename> in le plica <filename>omegat</filename> poter esser conveniente compartir e mantener al nivello del equipa. Evitar in omne caso de adder files <filename>bak</filename>, <filename>project_stats.txt</filename> e <filename>project_stats_match.txt</filename>, in le sub plica <filename>omegat</filename>, pois que facerea los sin alicun necessitate ni profito justo inflar le repositorio Tu pote desirar applicar lo identic al plica <filename>target</filename> e su contentos.</para>
 
-      <para>Post copiate le files necessari in le plica checkout tu remarcara que su icone cambiava: le placa OK verde cambiava a un signo de exclamation rubre, marca del cambio in le copia local del deposito. Le duo grados sequente renovara le version del server:</para>
+      <para>Post copiate le files necessari in le plica checkout tu remarcara que su icone cambiava: le placa OK verde cambiava a un signo de exclamation rubre, marca del cambio in le copia local del repositorio. Le duo grados sequente renovara le version del servitor:</para>
 
       <itemizedlist>
         <listitem>
@@ -172,7 +172,7 @@
 
         </listitem>
         <listitem>
-          <para><emphasis role="bold">consignar le cambios local al server: </emphasis>clicca con le dextero sur le plica del checkout local e selige <guilabel>SVN Commit....</guilabel> Le fenestra de Commit - se displica, vide in sequito. Controla le cambios a facer - id es le plicas e le files addite in iste caso.</para>
+          <para><emphasis role="bold">consignar le cambiamentos local al servitor: </emphasis>clicca con le dextero sur le plica del checkout local e selige <guilabel>SVN Commit....</guilabel> Le fenestra de Commit - se displica, vide in sequito. Controla le cambiamentos a facer - id es le plicas e le files addite in iste caso.</para>
  
           <mediaobject>
             <imageobject role="html">
@@ -183,11 +183,11 @@
             </imageobject>
           </mediaobject>
 
-          <para>Inscribe un message appropriate in le fenestra message e pulsa <guilabel>OK</guilabel>. Se aperira le fenestra Commit e monstrara le progresso del commando commit. Illo committera in prime loco le contentos currente al deposito del server e pois renovate le copia local  del deposito - id es le contentos del sub plica .svn - de maniera que illo es renovate con le ultime version del deposito.</para>
+          <para>Inscribe un message appropriate in le fenestra message e pulsa <guilabel>OK</guilabel>. Se aperira le fenestra Commit e monstrara le progresso del commando commit. Illo committera in prime loco le contentos currente al repositorio del servitor e pois renovate le copia local  del repositorio - id es le contentos del sub plica .svn - de maniera que illo es renovate con le ultime version del repositorio.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">renova le files local ex le copia local del deposito</emphasis> - le cambios recipite del deposito del servitor demora intra le sub plica .svn ma non ancora in le files e plicas mesme. Pro renovar le files local , clicca con le pulsante dextere sur le plica del checkout e selige <guilabel>SVN Update</guilabel>. Controla le contentos del plica pro confirmar que le copia local del repositorio e le files e plicas correspondente corresponde al ultime version del servitor:</para>
+          <para><emphasis role="bold">renova le files local ex le copia local del repositorio</emphasis> - le cambiamentos recipite del repositorio del servitor demora intra le sub plica .svn ma non ancora in le files e plicas mesme. Pro renovar le files local , clicca con le pulsante dextere sur le plica del checkout e selige <guilabel>SVN Update</guilabel>. Controla le contentos del plica pro confirmar que le copia local del repositorio e le files e plicas correspondente corresponde al ultime version del servitor:</para>
 
           <mediaobject>
             <imageobject role="html">

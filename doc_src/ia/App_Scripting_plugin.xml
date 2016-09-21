@@ -38,7 +38,10 @@
 
     <para>Normalmente, le scriptes es continite in le plica &quot;scripts&quot; ubicate in le plica de installation de OmegaT (le plica que contine OmegaT.jar).</para>
 
-    <para>Tu pote adder nove scriptes ibi, si que Illos apparera in le lista del scriptes disponibile in le fenestra de Script.</para>
+    <para>Tu pote adder nove scriptes ibi, si que illos apparera in le lista del scriptes disponibile in le fenestra Script.</para>
+
+    <para>On pote trovar additional scriptes ci: <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink>
+    </para>
   </section>
 
   <section>
@@ -52,9 +55,9 @@
         </listitem>
       </itemizedlist><itemizedlist>
         <listitem>
-          <para><emphasis role="bold">JavaScript</emphasis> (alicun vices abbreviate JS, non confunder con Java): es un lingua de scripting, basate sur prototypo,  que es dynamic, debilemente typate, e ha le functiones de prima classe. Illo es un lingua de programmation multo-paradigma, que supporta stilos de programmation orientate al objecto, imperative, e functional. Pois que illo es le lingua de un software ultra popular como Firefox, illo es un instrumento de programmation familiar e ideal in le dominio del open-source.</para>
+          <para><emphasis role="bold">JavaScript</emphasis> (alicun vices abbreviate JS, non confunder con Java): es un lingua de scripting, basate sur prototypo,  que es dynamic, debilemente typate, e ha functiones de prima classe. Illo es un lingua de programmation plure-paradigma, que supporta stilos de programmation orientate al objecto, imperative, e functional. Pois que illo es le lingua de un software ultra popular como Firefox, illo es un instrumento de programmation familiar e ideal in le dominio del open-source.</para>
         </listitem>
-      </itemizedlist>Omne le linguas ha accesso al modello a objectos OmegaT, con le projecto como objecto culmine. Le sequente retalio de codice in groovy per exemplo, scande a transverso de omne le segmentos in omne le files in le projecto currente e, si le traduction existe, stampa le segmento fonte e le traduction del segmento:</para>
+      </itemizedlist>Omne le linguas ha accesso al modello a objectos OmegaT, con le projecto como objecto culmine. Le sequente retalio de codice in groovy per exemplo, scande trans tote le segmentos in omne le files del projecto actual e, si le traduction existe, stampa le segmento fonte e su traduction:</para>
 
     <programlisting>    files = project.projectFiles;
     for (i in 0 ..&lt; files.size())

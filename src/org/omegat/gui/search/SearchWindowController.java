@@ -903,7 +903,7 @@ public class SearchWindowController {
             ((JTextField) form.m_searchField.getEditor().getEditorComponent()).setText(query);
         }
         form.setVisible(true);
-        form.setExtendedState(JFrame.NORMAL);
+        form.setState(JFrame.NORMAL);
         form.m_searchField.requestFocus();
     }
 

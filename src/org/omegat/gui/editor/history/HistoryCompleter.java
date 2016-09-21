@@ -28,13 +28,14 @@ package org.omegat.gui.editor.history;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IEntryEventListener;
-import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.events.IProjectEventListener.PROJECT_CHANGE_TYPE;
 import org.omegat.gui.editor.autocompleter.AutoCompleterItem;
 import org.omegat.gui.editor.autocompleter.AutoCompleterListView;
 import org.omegat.tokenizer.ITokenizer.StemmingMode;
@@ -52,12 +53,9 @@ public class HistoryCompleter extends AutoCompleterListView {
     public HistoryCompleter() {
         super(OStrings.getString("AC_HISTORY_COMPLETIONS_VIEW"));
         
-        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
-            @Override
-            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-                if (isEnabled() && eventType == PROJECT_CHANGE_TYPE.LOAD) {
-                    train();
-                }
+        CoreEvents.registerProjectChangeListener(eventType -> {
+            if (isEnabled() && eventType == PROJECT_CHANGE_TYPE.LOAD) {
+                train();
             }
         });
         CoreEvents.registerEntryEventListener(new IEntryEventListener() {            
@@ -99,8 +97,8 @@ public class HistoryCompleter extends AutoCompleterListView {
         completer.reset();
         Core.getProject().iterateByDefaultTranslations((source, trans) -> trainString(trans.translation));
         Core.getProject().iterateByMultipleTranslations((source, trans) -> trainString(trans.translation));
-        LOGGER.finer(() -> String.join(" ", "Time to train History Completer:",
-                Long.toString(System.currentTimeMillis() - start), "ms"));
+        long time = System.currentTimeMillis() - start;
+        LOGGER.finer(() -> String.format("Time to train History Completer: %d ms", time));
     }
     
     private void trainString(String text) {
@@ -109,7 +107,7 @@ public class HistoryCompleter extends AutoCompleterListView {
         }
         String[] tokens = getTokenizer().tokenizeWordsToStrings(text, StemmingMode.NONE);
         
-        completer.train(text, tokens);
+        completer.train(tokens);
     }
 
     @Override
@@ -117,7 +115,12 @@ public class HistoryCompleter extends AutoCompleterListView {
         if (prevText == null || prevText.isEmpty()) {
             return Collections.emptyList();
         }
-        return completer.completeWord(getLastToken(prevText));
+        String lastToken = getLastToken(prevText);
+        if (lastToken.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return completer.completeWord(lastToken).stream().map(s -> new AutoCompleterItem(s, null, lastToken.length()))
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -396,7 +396,7 @@
   </table>
 
   <note>
-    <para>i quantificatori di ripetizione rileveranno tutte le ripetizioni possibili. Per esempio, <emphasis>a+?</emphasis> rileverà aaa in <emphasis>aaabbb</emphasis></para>
+    <para>i quantificatori di ripetizione rileveranno tutte le ripetizioni possibili. Per esempio, <emphasis>a+</emphasis> rileverà aaa in <emphasis>aaabbb</emphasis></para>
   </note>
 
   <table>
@@ -436,7 +436,7 @@
   </table>
 
   <note>
-    <para>i quantificatori riluttanti rileveranno il minor numero di ripetizioni possibili. Per esempio, <emphasis>a+?</emphasis> rleverà la prima <emphasis>a</emphasis> in <emphasis>aaabbb</emphasis></para>
+    <para>i quantificatori riluttanti rileveranno il minor numero di ripetizioni possibili. Per esempio, <emphasis>a+?</emphasis> rileverà la prima <emphasis>a</emphasis> in <emphasis>aaabbb</emphasis></para>
   </note>
 
   <table>

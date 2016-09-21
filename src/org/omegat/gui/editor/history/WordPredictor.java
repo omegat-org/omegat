@@ -32,24 +32,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import org.omegat.gui.editor.autocompleter.AutoCompleterItem;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class WordPredictor {
-    final static double MIN_FREQUENCY = 10d;
+    static final double MIN_FREQUENCY = 10d;
+    static final private Comparator<Prediction> RESULT_SORTER = Comparator.comparing(Prediction::getFrequency)
+            .reversed().thenComparing(Prediction::getWord);
 
-    private Map<String, FrequencyStrings> data;
-    private boolean isLanguageSpaceDelimited = true;
+    private Map<String, FrequencyStrings> data = new HashMap<>();
 
-    public void setisLanguageSpaceDelimited(boolean langIsSpaceDelimited) {
-        this.isLanguageSpaceDelimited = langIsSpaceDelimited;
+    public void reset() {
+        data.clear();
     }
 
-    void reset() {
-        data = new HashMap<>();
-    }
-
-    void trainStringPrediction(String text, String[] tokens) {
+    public void train(String[] tokens) {
+        if (tokens.length == 0) {
+            return;
+        }
         for (int i = 0; i < tokens.length - 1; i++) {
             String token = tokens[i];
             FrequencyStrings strings = data.get(token);
@@ -61,75 +61,57 @@ public class WordPredictor {
         }
     }
 
-    List<AutoCompleterItem> predictWord(String[] tokens) {
-        String seed = lastFullWordToken(tokens);
-        if (data == null || seed == null) {
+    public List<Prediction> predictWord(String seed) {
+        if (seed == null) {
+            throw new NullPointerException("Prediction seed can't be null");
+        }
+        if (data.isEmpty() || seed.isEmpty()) {
             return Collections.emptyList();
         }
 
-        FrequencyStrings predictions = data.get(seed);
-        if (predictions == null) {
+        FrequencyStrings candidates = data.get(seed);
+        if (candidates == null) {
             return Collections.emptyList();
         }
-        List<AutoCompleterItem> result = new ArrayList<>();
-        List<Entry<String, Integer>> entries = predictions.getSortedEntries();
+        // Only consider candidates that have appeared more than once.
+        List<Entry<String, Integer>> entries = candidates.getEntries().stream().filter(e -> e.getValue() > 1)
+                .collect(Collectors.toList());
         int total = entries.stream().mapToInt(Entry::getValue).sum();
-        for (Entry<String, Integer> e : entries) {
+        return entries.stream().map(e -> {
             double percent = ((double) e.getValue() / total) * 100;
-            if (percent >= MIN_FREQUENCY) {
-                result.add(new AutoCompleterItem(e.getKey(), new String[] { String.valueOf(Math.round(percent)) + "%" },
-                        0));
-            }
-        }
-        return result;
+            // Only retain predictions meeting the minimum frequency.
+            return percent >= MIN_FREQUENCY ? new Prediction(e.getKey(), percent) : null;
+        }).filter(Objects::nonNull).sorted(RESULT_SORTER).collect(Collectors.toList());
     }
 
-    /**
-     * Find the last <em>completed</em> word.
-     * <p>
-     * If the language is space-delimited, that means ignoring the last token
-     * (which should be a partially input word) and then iterating backwards to
-     * find the first non-whitespace token.
-     * <p>
-     * If the language is not space-delimited, use the last token, as we have no
-     * way of distinguishing a completed word from an incomplete one.
-     * 
-     * @param tokens
-     * @return
-     */
-    private String lastFullWordToken(String[] tokens) {
-        int startOffset = isLanguageSpaceDelimited ? 2 : 1;
-        for (int i = tokens.length - startOffset; i >= 0; i--) {
-            String token = tokens[i];
-            if (!token.trim().isEmpty()) {
-                return token;
-            }
-        }
-        return null;
-    }
-
-    static class FrequencyStrings {
-        final private Map<String, Integer> map = new HashMap<>();
+    private static class FrequencyStrings {
+        private final Map<String, Integer> map = new HashMap<>();
 
         public void encounter(String string) {
-            synchronized (map) {
-                Integer count = map.get(string);
-                map.put(string, count == null ? 0 : count + 1);
-            }
+            Integer count = map.get(string);
+            map.put(string, count == null ? 1 : count + 1);
         }
 
-        public List<Entry<String, Integer>> getSortedEntries() {
-            List<Entry<String, Integer>> entries;
-            synchronized (map) {
-                entries = new ArrayList<>(map.entrySet());
-            }
-            Collections.sort(entries, new Comparator<Entry<String, Integer>>() {
-                @Override
-                public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {
-                    return -Integer.compare(o1.getValue(), o2.getValue());
-                }
-            });
-            return entries;
+        public List<Entry<String, Integer>> getEntries() {
+            return new ArrayList<>(map.entrySet());
+        }
+    }
+
+    public static class Prediction {
+        private final String word;
+        private final double frequency;
+
+        public Prediction(String word, double frequency) {
+            this.word = word;
+            this.frequency = frequency;
+        }
+
+        public String getWord() {
+            return word;
+        }
+
+        public double getFrequency() {
+            return frequency;
         }
     }
 }

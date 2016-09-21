@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.omegat.gui.editor.autocompleter.AutoCompleterItem;
 import org.trie4j.patricia.PatriciaTrie;
 
 public class WordCompleter {
@@ -38,29 +37,31 @@ public class WordCompleter {
 
     private PatriciaTrie data;
 
-    void reset() {
+    public WordCompleter() {
+        reset();
+    }
+
+    public void reset() {
         data = new PatriciaTrie();
     }
 
-    void train(String text, String[] tokens) {
-        if (text.codePointCount(0, text.length()) >= MIN_CHARS + 1) {
-            for (String token : tokens) {
-                if (token.codePointCount(0, token.length()) > MIN_CHARS) {
-                    data.insert(token);
-                }
+    public void train(String[] tokens) {
+        for (String token : tokens) {
+            if (token.codePointCount(0, token.length()) > MIN_CHARS) {
+                data.insert(token);
             }
         }
     }
 
-    List<AutoCompleterItem> completeWord(String seed) {
-        if (data == null || seed.codePointCount(0, seed.length()) < MIN_CHARS) {
+    public List<String> completeWord(String seed) {
+        if (data.size() == 0 || seed.codePointCount(0, seed.length()) < MIN_CHARS) {
             return Collections.emptyList();
         }
 
-        List<AutoCompleterItem> result = new ArrayList<AutoCompleterItem>();
+        List<String> result = new ArrayList<String>();
         for (String s : data.predictiveSearch(seed)) {
             if (!s.equalsIgnoreCase(seed)) {
-                result.add(new AutoCompleterItem(s, null, seed.length()));
+                result.add(s);
             }
         }
         return result;

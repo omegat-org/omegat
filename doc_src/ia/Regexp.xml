@@ -5,7 +5,7 @@
       <primary>Expressiones regular</primary> <seealso>Segmentation</seealso> <seealso>Cerca</seealso>
     </indexterm></title>
 
-  <para>Le expressiones regular (o in breve regex) usate in le regulas de recercas e de segmentation, es illos supportate per Java. Si tu deberea necessitar information plus specific, consulta le <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html">documentation Regex Java</ulink>. Vide referentias additional e exemplos successivemente.</para>
+  <para>Le expressiones regular (o in breve regex) usate in le regulas de recercas e de segmentation, es illos supportate per Java. Si tu debe necessitar information plus specific, consulta le <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html">documentation Regex Java</ulink>. Vide referentias additional e exemplos successivemente.</para>
 
   <note>
     <para>Iste capitulo es designate pro usatores experte, que debe definir lor proprie variantes de regulas de segmentation o imaginar elementos clave de recerca plus complexe e potente.</para>
@@ -396,7 +396,7 @@
   </table>
 
   <note>
-    <para>La quantificatores avide concordara tanto como illos pote. Per exemplo, <emphasis>a+?</emphasis>concordara le aaa in <emphasis>aaabbb</emphasis></para>
+    <para>La quantificatores avide concordara tanto como illos pote. Per exemplo, <emphasis>a+</emphasis>concordara le aaa in <emphasis>aaabbb</emphasis></para>
   </note>
 
   <table>
@@ -538,7 +538,7 @@
           <row>
             <entry>\s+a\s+[aeiou]</entry>
 
-            <entry>Anglese: le parolas, incipiente con le vocales, deberea generalmente esser precedite per &quot;an&quot;, non &quot;a&quot;</entry>
+            <entry>Anglese: le parolas, incipiente con le vocales, debe generalmente esser precedite per &quot;an&quot;, non &quot;a&quot;</entry>
           </row>
 
           <row>

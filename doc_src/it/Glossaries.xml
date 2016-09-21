@@ -72,7 +72,9 @@
 
     <para>I file di glossario sono dei semplici file di solo testo composti da elenchi su tre colonne, delimitate da tabulatori, con il termine di partenza e quello di destinazione inseriti, rispettivamente, nella prima e nella seconda colonna. La terza colonna è utilizzata per l'inserimento di ulteriori informazioni. È possibile avere voci senza il termine di destinazione, per esempio solo col termine di partenza e il commento relativo.</para>
 
-    <para>I file di glossario possono prevedere la codifica predefinita dal sistema (indicata dall'estensione .tab) o in UTF-8 (estensione .utf8) oppure in UTF-16 LE (estensione .txt). È supportato anche il formato CSV. Questo formato è uguale a quello separato da tabulazione: termine sorgente, termine di destinazione. I campi del commento sono separati da una virgola ','. Le stringhe possono essere racchiuse da virgolette &quot;, che permettono di contenere una virgola all'interno di una stringa:</para>
+    <para>La codifica dei glossari viene determinata automaticamente. Naturalmente la codifica deve essere compatibile con entrambe le lingue di riferimento, è dunque raccomandato l'uso di Unicode.</para>
+
+    <para>È supportato anche il formato CSV. Questo formato è uguale a quello separato da tabulazione: termine sorgente, termine di destinazione. I campi del commento sono separati da una virgola ','. Le stringhe possono essere racchiuse da virgolette &quot;, che permettono di contenere una virgola all'interno di una stringa:</para>
 
     <para><literal>&quot;This is a source term, which contains a comma&quot;,&quot;questo è un termine di partenza, che contiene una virgola&quot;</literal></para>
 

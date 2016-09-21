@@ -39,13 +39,14 @@
 
       <mediaobject>
         <imageobject role="html">
-		          <imagedata fileref="images/Omegatproject.png"/>
-       </imageobject>
-      <imageobject role="fo">
+          <imagedata fileref="images/Omegatproject.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
           <imagedata fileref="images/Omegatproject.png" width="60%"/>
         </imageobject>
       </mediaobject>
-	  </figure>
+    </figure>
 
     <para>Le posizioni alternative per le cartelle possono essere scelte alla creazione del progetto o durante la traduzione. È, dunque, possibile selezionare cartelle esistenti o di crearne nuove, in modo da adattarsi alle abitudini di lavoro dell'utente. Per modificare la posizione delle cartelle dopo la creazione di un progetto, aprire il menu <guimenuitem>Progetto &gt; Proprietà...</guimenuitem>, o usare la combinazione di tasti <guibutton>Ctrl+E</guibutton>, e apportare le necessarie modifiche.</para>
 
@@ -129,6 +130,12 @@
                 <entry>filters.xml</entry>
 
                 <entry>se esistente, contiene i filtri dei file propri del progetto, se richiesto in <guimenuitem>Progetto &gt; Proprietà...</guimenuitem> Si veda il <link linkend="chapter.project.properties">capitolo Proprietà del progetto</link></entry>
+              </row>
+
+              <row>
+                <entry>uiLayout.xml</entry>
+
+                <entry>se esistente, contiene le impostazioni specifiche del progetto relative all'interfaccia</entry>
               </row>
             </tbody>
           </tgroup>
@@ -248,6 +255,8 @@
         </tbody>
       </tgroup>
     </informaltable>
+
+    <para>È possibile accedere direttamente a questa cartella dalla voce di menu <menuchoice> <guimenu>Opzioni</guimenu> <guimenuitem>Accedi alla cartella di configurazione</guimenuitem> </menuchoice>.</para>
   </section>
 
   <section id="application.files">
@@ -322,23 +331,16 @@
             <entry><application>OmegaT</application></entry>
 
             <entry><para>È un file di testo che contiene due righe:</para>
-
             <programlisting>#!/bin/bash java
-java -jar OmegaT.jar $*</programlisting>
-
-            <para>Gli utenti di Linux e OS X potrebbero trovare utile questo file. Rendere eseguibile (<literal>chmod +x OmegaT</literal>) dalla riga di comando dopo essersi assicurati di essere nella cartella dell'applicazione di OmegaT. Si sarà in grado di avviare OmegaT eseguendo questo file dalla riga di comando</para>
-            </entry>
+java -jar OmegaT.jar $*</programlisting> <para>Gli utenti di Linux e OS X potrebbero trovare utile questo file. Rendere eseguibile (<literal>chmod +x OmegaT</literal>) dalla riga di comando dopo essersi assicurati di essere nella cartella dell'applicazione di OmegaT. Si sarà in grado di avviare OmegaT eseguendo questo file dalla riga di comando</para></entry>
           </row>
-          
+
           <row>
             <entry>OmegaT.bat</entry>
 
-            <entry><para>Un file batch, usato per avviare <application>OmegaT</application> dalla riga di comando di Windows. Contiene solo la seguente riga:</para>
-
-            <programlisting>java -jar OmegaT.jar %*</programlisting>
-            </entry>
+            <entry><para>Un file batch, usato per avviare <application>OmegaT</application> dalla riga di comando di Windows. Contiene solo la seguente riga:</para> <programlisting>java -jar OmegaT.jar %*</programlisting></entry>
           </row>
-          
+
           <row>
             <entry><literal>OmegaT.jar</literal></entry>
 

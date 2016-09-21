@@ -94,6 +94,42 @@
   </section>
 
   <section>
+    <title>MyMemory (automatic)<indexterm class="singular">
+        <primary>Traduction automatic</primary> <secondary>MyMemory</secondary>
+      </indexterm></title>
+
+    <para>Per option predefinite, MyMemory consenti un maximo de 100 requestas per die. Per specificar un adresse de E-mail, il es possibile usar 1000 requestas per die in vice del centos.</para>
+
+    <para>Il ha al minus 3 manieras pro specificar tu adresse</para>
+
+    <para><itemizedlist>
+        <listitem>
+          <para>in le file OmegaT.l4J.ini (Windows solmente), cambiar:</para>
+
+          <para># MyMemory email</para>
+
+          <para>a:</para>
+
+          <para>MyMemory tu@email-address.com</para>
+        </listitem>
+
+        <listitem>
+          <para>Quando tu lancea OmegaT per le linea de commando, specificar in le commando:</para>
+
+          <para>-Dmymemory.api.email=tu@email-address.com</para>
+        </listitem>
+
+        <listitem>
+          <para>in le lanceator de Kaptain (Linux solmente), insere le adresse in le campo correspondente sur le scheda &quot;Servicios in linea&quot;.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <para>MyMemory forni alsi <emphasis role="bold">Traductiones human</emphasis> original per traductores professional, LSPs, contento web pro clientes e multilingual. Pro obtener iste traductiones, tu debe cargar tu file fonte <ulink url="http://mymemory.translated.net/">sur lor sito</ulink> que genera un file TMX. Pois tu debe poner iste file TMX in le plica /tm/ o /tm/auto/ de tu projecto OmegaT.</para>
+
+    <para>MyMemory offere alsi le possibilitate pro tractar <emphasis role="bold">TMs private</emphasis>. Nota: OmegaT non interage dynamicamente con illes (tu debe exportar/importar manualmente le files TMX).</para>
+  </section>
+
+  <section>
     <title>Traductor Microsoft<indexterm class="singular">
         <primary>Traduction Automatic</primary> <secondary>Microsoft Translator</secondary>
       </indexterm></title>

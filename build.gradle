@@ -135,7 +135,7 @@ jar {
                 'OmegaT-Plugins': omtPlugins.plugin,
                 'OmegaT-Plugin': 'true',
                 'Main-Class': mainClassName,
-                'Class-Path': configurations.compile.collect { "lib/${it.name}" }.join(' '))
+                'Class-Path': configurations.runtime.collect { "lib/${it.name}" }.join(' '))
         omtPlugins.keys().each { key ->
             if (key != 'plugin') {
                 omtPlugins[key].tokenize().each { cls ->
@@ -217,7 +217,7 @@ distributions {
                     'gradle/**', 'gradlew*', '*.gradle', 'README.md', '*.properties'
             }
             into('lib/provided') {
-                from configurations.compile, configurations.runtime
+                from configurations.runtime
             }
         }
         sourceDistZip.archiveName = "${applicationName}_${version}${omtVersion.beta}_Source.zip"
@@ -584,7 +584,7 @@ task jar2(type: Sync) {
     description = 'Create minimal executable output for debugging.'
     destinationDir = file("${buildDir}/install/jar2")
     from jar
-    from(configurations.compile) {
+    from(configurations.runtime) {
         into 'lib'
     }
     from('scripts') {

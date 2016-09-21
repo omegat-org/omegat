@@ -61,7 +61,7 @@ configurations {
     }
 }
 
-def depsProvided = file('lib/auto').directory
+def depsProvided = file('lib/provided').directory
 
 dependencies {
     if (!depsProvided) {
@@ -213,7 +213,7 @@ distributions {
                     'src/**', 'test/**', 'gen/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
                     'gradle/**', 'gradlew*', '*.gradle', 'README.md', '*.properties'
             }
-            into('lib/auto') {
+            into('lib/provided') {
                 from configurations.compile
             }
         }

@@ -25,10 +25,10 @@ OmegaT uses Gradle to manage and fetch dependencies automatically. To add,
 change, or remove a dependency, see the dependencies block in build.gradle.
 
 Dependency JARs are provided in the "source" distribution of OmegaT under
-/lib/auto, as insurance in case any dependencies should become unavailable
-online. When /lib/auto is present, compile-time dependencies will be resolved
-locally, minimizing network access (network access is still required for
-initializing the Gradle wrapper, fetching Gradle plugins, and fetching test
+/lib/provided, as insurance in case any dependencies should become unavailable
+online. When /lib/provided is present, compile-time dependencies will be
+resolved locally, minimizing network access (network access is still required
+for initializing the Gradle wrapper, fetching Gradle plugins, and fetching test
 dependencies).
 
 

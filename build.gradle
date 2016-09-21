@@ -98,8 +98,9 @@ dependencies {
         compile 'org.madlonkay.supertmxmerge:supertmxmerge:2.0.1'
         compile 'org.omegat:vldocking:3.0.5'
         compile 'org.omegat:juniversalchardet:1.0.4'
-        // Groovy used for scripts only
-        compile 'org.codehaus.groovy:groovy-all:2.4.6'
+
+        // Groovy used for (runtime) scripts, tests only
+        runtime 'org.codehaus.groovy:groovy-all:2.4.6'
         
         //RSyntaxUI and additional modules
         compile 'com.fifesoft:rsyntaxtextarea:2.5.8'
@@ -115,6 +116,8 @@ dependencies {
     // Test dependencies
     testCompile 'junit:junit:4.12'
     testCompile 'xmlunit:xmlunit:1.6'
+    testCompile 'org.codehaus.groovy:groovy-all:2.4.6'
+    
 
     // WebStart-only
     jnlp project(path: ':release:WebStart-specific', configuration: 'docs')
@@ -214,7 +217,7 @@ distributions {
                     'gradle/**', 'gradlew*', '*.gradle', 'README.md', '*.properties'
             }
             into('lib/provided') {
-                from configurations.compile
+                from configurations.compile, configurations.runtime
             }
         }
         sourceDistZip.archiveName = "${applicationName}_${version}${omtVersion.beta}_Source.zip"

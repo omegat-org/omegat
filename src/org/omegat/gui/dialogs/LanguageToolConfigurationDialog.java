@@ -36,16 +36,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.TimeZone;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -75,10 +70,11 @@ import org.languagetool.rules.CategoryId;
 import org.languagetool.rules.Rule;
 import org.languagetool.rules.RuleMatch;
 import org.languagetool.tools.Tools;
+import org.omegat.languagetools.LanguageToolPrefs;
+import org.omegat.languagetools.LanguageToolWrapper;
 import org.omegat.languagetools.LanguageToolWrapper.BridgeType;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 import org.omegat.util.gui.StaticUIUtils;
 import org.xml.sax.SAXException;
 
@@ -471,7 +467,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
     }
 
     private void loadPreferences() {
-        BridgeType type = Preferences.getPreferenceEnumDefault(Preferences.LANGUAGETOOL_BRIDGE_TYPE, BridgeType.NATIVE);
+        BridgeType type = LanguageToolPrefs.getBridgeType();
         switch (type) {
         case NATIVE:
             bridgeNativeRadioButton.setSelected(true);
@@ -484,37 +480,24 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
             break;
         }
 
-        urlTextField.setText(Preferences.getPreference(Preferences.LANGUAGETOOL_REMOTE_URL));
-        directoryTextField.setText(Preferences.getPreference(Preferences.LANGUAGETOOL_LOCAL_SERVER_JAR_PATH));
-
-        disabledCategories = Stream
-                .of(Preferences.getPreference(Preferences.LANGUAGETOOL_DISABLED_CATEGORIES).split(","))
-                .filter(s -> !s.isEmpty()).collect(Collectors.toSet());
-        disabledRuleIds = Stream.of(Preferences
-                .getPreference(Preferences.LANGUAGETOOL_DISABLED_RULES_PREFIX + "_" + targetLanguageCode).split(","))
-                .filter(s -> !s.isEmpty()).collect(Collectors.toSet());
-        enabledRuleIds = Stream.of(Preferences
-                .getPreference(Preferences.LANGUAGETOOL_ENABLED_RULES_PREFIX + "_" + targetLanguageCode).split(","))
-                .filter(s -> !s.isEmpty()).collect(Collectors.toSet());
+        urlTextField.setText(LanguageToolPrefs.getRemoteUrl());
+        directoryTextField.setText(LanguageToolPrefs.getLocalServerJarPath());
+        disabledCategories = LanguageToolPrefs.getDisabledCategories(targetLanguageCode);
+        disabledRuleIds = LanguageToolPrefs.getDisabledRules(targetLanguageCode);
+        enabledRuleIds = LanguageToolPrefs.getEnabledRules(targetLanguageCode);
 
         handleBridgeTypeChange(type);
     }
 
     private void savePreferences() {
-        Preferences.setPreference(Preferences.LANGUAGETOOL_REMOTE_URL, urlTextField.getText());
-        Preferences.setPreference(Preferences.LANGUAGETOOL_LOCAL_SERVER_JAR_PATH, directoryTextField.getText());
+        LanguageToolPrefs.setBridgeType(selectedBridgeType);
+        LanguageToolPrefs.setRemoteUrl(urlTextField.getText());
+        LanguageToolPrefs.setLocalServerJarPath(directoryTextField.getText());
+        LanguageToolPrefs.setDisabledCategories(disabledCategories, targetLanguageCode);
+        LanguageToolPrefs.setDisabledRules(disabledRuleIds, targetLanguageCode);
+        LanguageToolPrefs.setEnabledRules(enabledRuleIds, targetLanguageCode);
 
-        Preferences.setPreference(Preferences.LANGUAGETOOL_DISABLED_CATEGORIES, String.join(",", disabledCategories));
-        Preferences.setPreference(Preferences.LANGUAGETOOL_ENABLED_RULES_PREFIX + "_" + targetLanguageCode,
-                String.join(",", enabledRuleIds));
-        Preferences.setPreference(Preferences.LANGUAGETOOL_DISABLED_RULES_PREFIX + "_" + targetLanguageCode,
-                String.join(",", disabledRuleIds));
-
-        Preferences.setPreference(Preferences.LANGUAGETOOL_BRIDGE_TYPE, selectedBridgeType);
-
-        DateFormat format = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
-        format.setTimeZone(TimeZone.getTimeZone("UTC"));
-        Preferences.setPreference(Preferences.LANGUAGETOOL_PREFS_CHANGED_AT, format.format(new Date()));
+        LanguageToolWrapper.setBridgeFromCurrentProject();
     }
 
     private DefaultMutableTreeNode createTree(List<Rule> rules) {

@@ -273,13 +273,11 @@ public class Preferences {
     /** Local path to LanguageTool server jar file */
     public static final String LANGUAGETOOL_LOCAL_SERVER_JAR_PATH = "lt_localServerJarPath";
     /** Disabled categories */
-    public static final String LANGUAGETOOL_DISABLED_CATEGORIES = "lt_disabledCategories";
+    public static final String LANGUAGETOOL_DISABLED_CATEGORIES_PREFIX = "lt_disabledCategories";
     /** Disabled rules prefix */
     public static final String LANGUAGETOOL_DISABLED_RULES_PREFIX = "lt_disabledRules";
     /** Enabled rules prefix */
     public static final String LANGUAGETOOL_ENABLED_RULES_PREFIX = "lt_enabledRules";
-    /** Enabled rules prefix */
-    public static final String LANGUAGETOOL_PREFS_CHANGED_AT = "lt_prefsChangedAt";
 
     /**
      * The location of the scripts

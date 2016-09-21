@@ -36,6 +36,7 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.script.ScriptEngine;
@@ -191,10 +192,11 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
     }
 
     @Override
-    public void applyRuleFilters(String disabledCategories, String disabledRules, String enabledRules) {
-        this.disabledCategories = disabledCategories;
-        this.disabledRules = disabledRules;
-        this.enabledRules = enabledRules;
+    public void applyRuleFilters(Set<String> disabledCategories,
+            Set<String> disabledRules, Set<String> enabledRules) {
+        this.disabledCategories = String.join(",", disabledCategories);
+        this.disabledRules = String.join(",", disabledRules);
+        this.enabledRules = String.join(",", enabledRules);
     }
 
     @Override

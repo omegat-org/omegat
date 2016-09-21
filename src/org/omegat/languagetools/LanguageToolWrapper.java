@@ -28,6 +28,7 @@
 package org.omegat.languagetools;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.text.Highlighter.HighlightPainter;
 
@@ -40,7 +41,6 @@ import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
-import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.Styles;
 
@@ -102,18 +102,6 @@ public class LanguageToolWrapper {
             public synchronized void onApplicationStartup() {
             }
         });
-
-        Preferences.addPropertyChangeListener(evt -> {
-            if (!Core.getProject().isProjectLoaded()) {
-                return;
-            }
-            // This property is changed in the end of configuration dialog
-            // saving, so at this point every other related properties are
-            // already changed.
-            if (evt.getPropertyName().equals(Preferences.LANGUAGETOOL_PREFS_CHANGED_AT)) {
-                setBridgeFromCurrentProject();
-            }
-        });
     }
 
     static class LanguageToolMarker implements IMarker {
@@ -157,7 +145,7 @@ public class LanguageToolWrapper {
     /**
      * Set this instance's LanguageTool bridge based on the current project.
      */
-    static void setBridgeFromCurrentProject() {
+    public static void setBridgeFromCurrentProject() {
         if (BRIDGE != null) {
             BRIDGE.stop();
         }
@@ -175,16 +163,15 @@ public class LanguageToolWrapper {
         // If configured try to create network bridge and fallback to native on
         // fail
         ILanguageToolBridge bridge;
-        BridgeType type = Preferences.getPreferenceEnumDefault(Preferences.LANGUAGETOOL_BRIDGE_TYPE,
-                BridgeType.NATIVE);
+        BridgeType type = LanguageToolPrefs.getBridgeType();
         try {
             switch (type) {
             case LOCAL_INSTALLATION:
-                String localServerJarPath = Preferences.getPreference(Preferences.LANGUAGETOOL_LOCAL_SERVER_JAR_PATH);
+                String localServerJarPath = LanguageToolPrefs.getLocalServerJarPath();
                 bridge = new LanguageToolNetworkBridge(sourceLang, targetLang, localServerJarPath, 8081);
                 break;
             case REMOTE_URL:
-                String remoteUrl = Preferences.getPreference(Preferences.LANGUAGETOOL_REMOTE_URL);
+                String remoteUrl = LanguageToolPrefs.getRemoteUrl();
                 bridge = new LanguageToolNetworkBridge(sourceLang, targetLang, remoteUrl);
                 break;
             case NATIVE:
@@ -195,14 +182,11 @@ public class LanguageToolWrapper {
             Log.logWarningRB("LT_BAD_CONFIGURATION");
             bridge = new LanguageToolNativeBridge(sourceLang, targetLang);
         }
-        String disabledCategories = Preferences.getPreferenceDefault(
-                Preferences.LANGUAGETOOL_DISABLED_CATEGORIES, DEFAULT_DISABLED_CATEGORIES);
 
         String lc = targetLang.getLanguageCode();
-        String disabledRules = Preferences.getPreferenceDefault(
-                Preferences.LANGUAGETOOL_DISABLED_RULES_PREFIX + "_" + lc, DEFAULT_DISABLED_RULES);
-        String enabledRules = Preferences.getPreferenceDefault(
-                Preferences.LANGUAGETOOL_ENABLED_RULES_PREFIX + "_" + lc, "");
+        Set<String> disabledCategories = LanguageToolPrefs.getDisabledCategories(lc);
+        Set<String> disabledRules = LanguageToolPrefs.getDisabledRules(lc);
+        Set<String> enabledRules = LanguageToolPrefs.getEnabledRules(lc);
 
         bridge.applyRuleFilters(disabledCategories, disabledRules, enabledRules);
         return bridge;

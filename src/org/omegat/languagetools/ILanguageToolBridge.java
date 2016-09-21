@@ -25,6 +25,7 @@
 package org.omegat.languagetools;
 
 import java.util.List;
+import java.util.Set;
 
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.mark.Mark;
@@ -42,7 +43,7 @@ public interface ILanguageToolBridge {
      * @param disabledRules Comma-separated list of disabled rule IDs
      * @param enabledRules Comma-separated list of enabled rule IDs
      */
-    void applyRuleFilters(String disabledCategories, String disabledRules, String enabledRules);
+    void applyRuleFilters(Set<String> disabledCategories, Set<String> disabledRules, Set<String> enabledRules);
 
     /**
      * Get marks for Entry

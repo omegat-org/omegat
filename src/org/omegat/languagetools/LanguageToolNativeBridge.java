@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
@@ -72,17 +71,22 @@ public class LanguageToolNativeBridge implements ILanguageToolBridge {
     }
 
     @Override
-    public void applyRuleFilters(String disabledCategories, String disabledRules, String enabledRules) {
+    public void applyRuleFilters(Set<String> disabledCategories,
+            Set<String> disabledRules, Set<String> enabledRules) {
         JLanguageTool ltTarget = targetLt.get();
         if (ltTarget == null) {
             return;
         }
-        Set<CategoryId> dc = Stream.of(disabledCategories.split(",")).map(CategoryId::new).collect(Collectors.toSet());
-        Set<String> dr = Stream.of(disabledRules.split(",")).collect(Collectors.toSet());
-        Set<String> er = Stream.of(enabledRules.split(",")).collect(Collectors.toSet());
-        Tools.selectRules(ltTarget, dc, Collections.emptySet(), dr, er, false);
+        Set<CategoryId> dc = disabledCategories.stream()
+                .map(CategoryId::new)
+                .collect(Collectors.toSet());
+        Tools.selectRules(ltTarget, dc, Collections.emptySet(), disabledRules,
+                enabledRules, false);
         if (bRules != null) {
-            bRules = bRules.stream().filter(rule -> !dr.contains(rule.getId())).collect(Collectors.toList());
+            bRules = bRules.stream()
+                    .filter(rule -> !disabledRules
+                    .contains(rule.getId()))
+                    .collect(Collectors.toList());
         }
     }
 

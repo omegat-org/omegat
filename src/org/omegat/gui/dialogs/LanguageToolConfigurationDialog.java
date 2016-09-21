@@ -74,6 +74,7 @@ import org.omegat.languagetools.LanguageToolPrefs;
 import org.omegat.languagetools.LanguageToolWrapper;
 import org.omegat.languagetools.LanguageToolWrapper.BridgeType;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
 import org.xml.sax.SAXException;
@@ -410,6 +411,10 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
         // Collect internal rule IDs
         List<String> internalRuleIds = rules.stream().map(Rule::getId).collect(Collectors.toList());
+
+        // Remove rule IDs of rules disabled by default from set of disabled rules
+        rules.stream().filter(Rule::isDefaultOff).forEach(r -> disabledRuleIds.remove(r.getId()));
+
         // Create ExternalRule instances for rules not found in built-in LT
         // and add them to our rules list
         List<String> externalRuleIds = new ArrayList<>(disabledRuleIds);

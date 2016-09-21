@@ -449,17 +449,17 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         selectedBridgeType = type;
         switch (type) {
         case NATIVE:
-            directoryTextField.setEnabled(false);
+            localServerJarPathTextField.setEnabled(false);
             directoryChooseButton.setEnabled(false);
             urlTextField.setEnabled(false);
             break;
         case REMOTE_URL:
-            directoryTextField.setEnabled(false);
+            localServerJarPathTextField.setEnabled(false);
             directoryChooseButton.setEnabled(false);
             urlTextField.setEnabled(true);
             break;
         case LOCAL_INSTALLATION:
-            directoryTextField.setEnabled(true);
+            localServerJarPathTextField.setEnabled(true);
             directoryChooseButton.setEnabled(true);
             urlTextField.setEnabled(false);
             break;
@@ -481,7 +481,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         }
 
         urlTextField.setText(LanguageToolPrefs.getRemoteUrl());
-        directoryTextField.setText(LanguageToolPrefs.getLocalServerJarPath());
+        localServerJarPathTextField.setText(LanguageToolPrefs.getLocalServerJarPath());
         disabledCategories = LanguageToolPrefs.getDisabledCategories(targetLanguageCode);
         disabledRuleIds = LanguageToolPrefs.getDisabledRules(targetLanguageCode);
         enabledRuleIds = LanguageToolPrefs.getEnabledRules(targetLanguageCode);
@@ -492,7 +492,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
     private void savePreferences() {
         LanguageToolPrefs.setBridgeType(selectedBridgeType);
         LanguageToolPrefs.setRemoteUrl(urlTextField.getText());
-        LanguageToolPrefs.setLocalServerJarPath(directoryTextField.getText());
+        LanguageToolPrefs.setLocalServerJarPath(localServerJarPathTextField.getText());
         LanguageToolPrefs.setDisabledCategories(disabledCategories, targetLanguageCode);
         LanguageToolPrefs.setDisabledRules(disabledRuleIds, targetLanguageCode);
         LanguageToolPrefs.setEnabledRules(enabledRuleIds, targetLanguageCode);
@@ -649,7 +649,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         localPanel = new javax.swing.JPanel();
         localPathLabel = new javax.swing.JLabel();
         directoryPanel = new javax.swing.JPanel();
-        directoryTextField = new javax.swing.JTextField();
+        localServerJarPathTextField = new javax.swing.JTextField();
         directoryChooseButton = new javax.swing.JButton();
         rulesPanel = new javax.swing.JPanel();
         rulesScrollPane = new javax.swing.JScrollPane();
@@ -728,8 +728,8 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
         directoryPanel.setLayout(new java.awt.BorderLayout());
 
-        directoryTextField.setToolTipText("");
-        directoryPanel.add(directoryTextField, java.awt.BorderLayout.CENTER);
+        localServerJarPathTextField.setToolTipText("");
+        directoryPanel.add(localServerJarPathTextField, java.awt.BorderLayout.CENTER);
 
         directoryChooseButton.setText(OStrings.getString("GUI_LANGUAGETOOL_CHOOSE_BUTTON")); // NOI18N
         directoryChooseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -828,7 +828,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         int result = fileChooser.showOpenDialog(LanguageToolConfigurationDialog.this);
         if (result == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            directoryTextField.setText(file.getAbsolutePath());
+            localServerJarPathTextField.setText(file.getAbsolutePath());
         }
     }//GEN-LAST:event_directoryChooseButtonActionPerformed
 
@@ -914,10 +914,10 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
     private javax.swing.JButton deleteRuleButton;
     private javax.swing.JButton directoryChooseButton;
     private javax.swing.JPanel directoryPanel;
-    private javax.swing.JTextField directoryTextField;
     private javax.swing.JPanel externalOptionsPanel;
     private javax.swing.JPanel localPanel;
     private javax.swing.JLabel localPathLabel;
+    private javax.swing.JTextField localServerJarPathTextField;
     private javax.swing.JButton okButton;
     private javax.swing.JPanel remotePanel;
     private javax.swing.JPanel rulesButtonsPanel;

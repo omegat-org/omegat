@@ -72,6 +72,7 @@ dependencies {
             // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
             exclude module: 'lucene-gosen-ipadic'
         }
+        compile 'org.omegat.lucene:lucene-gosen:5.0.0:ipadic'
         compile 'org.languagetool:hunspell-native-libs:2.9'
         // Temporary use of custom build; see https://sourceforge.net/p/omegat/bugs/813/
         compile 'org.omegat.lucene:lucene-core:5.2.1'

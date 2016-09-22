@@ -227,7 +227,10 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
             String message = addSuggestionTags((String) match.get("message"));
             int start = (int) match.get("offset");
             int end = start + (int) match.get("length");
-            return new LanguageToolResult(message, start, end);
+            Map<String, Object> rule = (Map<String, Object>) match.get("rule");
+            String ruleId = (String) rule.get("id");
+            String ruleDescription = (String) rule.get("description");
+            return new LanguageToolResult(message, start, end, ruleId, ruleDescription);
         }).collect(Collectors.toList());
      }
 

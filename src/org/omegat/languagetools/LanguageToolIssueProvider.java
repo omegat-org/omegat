@@ -27,25 +27,29 @@ package org.omegat.languagetools;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.swing.Icon;
+import javax.swing.JMenuItem;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import org.omegat.core.Core;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.gui.issues.IIssue;
 import org.omegat.gui.issues.IIssueProvider;
 import org.omegat.gui.issues.IssueDetailSplitPanel;
 import org.omegat.gui.issues.SimpleColorIcon;
-import org.omegat.languagetools.LanguageToolIssueProvider.LanguageToolIssue;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.Styles.EditorColor;
 
 /**
@@ -132,6 +136,27 @@ public class LanguageToolIssueProvider implements IIssueProvider {
             doc.setCharacterAttributes(result.start, result.end - result.start, ERROR_STYLE, false);
             panel.setMinimumSize(new Dimension(0, panel.firstTextPane.getFont().getSize() * 6));
             return panel;
+        }
+
+        @Override
+        public boolean hasMenuComponents() {
+            return true;
+        }
+
+        @Override
+        public List<? extends JMenuItem> getMenuComponents() {
+            JMenuItem item = new JMenuItem(
+                    StringUtil.format(OStrings.getString("ISSUES_LT_DISABLE_RULE"), result.ruleDescription));
+            IProject project = Core.getProject();
+            item.setEnabled(project.isProjectLoaded());
+            if (project.isProjectLoaded()) {
+                String lang = project.getProjectProperties().getTargetLanguage().getLanguageCode();
+                item.addActionListener(e -> {
+                    LanguageToolPrefs.disableRule(result.ruleId, lang);
+                    LanguageToolPrefs.applyRules(LanguageToolWrapper.getBridge(), lang);
+                });
+            }
+            return Arrays.asList(item);
         }
     }
 }

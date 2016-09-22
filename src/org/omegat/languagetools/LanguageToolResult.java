@@ -36,10 +36,14 @@ public class LanguageToolResult {
     final public String message;
     final public int start;
     final public int end;
+    final public String ruleId;
+    final public String ruleDescription;
 
-    public LanguageToolResult(String message, int start, int end) {
+    public LanguageToolResult(String message, int start, int end, String ruleId, String ruleDescription) {
         this.message = message;
         this.start = start;
         this.end = end;
+        this.ruleId = ruleId;
+        this.ruleDescription = ruleDescription;
     }
 }

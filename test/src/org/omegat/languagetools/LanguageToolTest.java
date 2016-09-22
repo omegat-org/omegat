@@ -26,6 +26,7 @@
 package org.omegat.languagetools;
 
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.Test;
 import org.languagetool.JLanguageTool;
@@ -36,6 +37,10 @@ import org.languagetool.rules.RuleMatch;
 import org.languagetool.rules.UppercaseSentenceStartRule;
 import org.languagetool.rules.patterns.PatternRule;
 import org.languagetool.rules.spelling.morfologik.MorfologikSpellerRule;
+import org.languagetool.server.HTTPServer;
+import org.omegat.util.Language;
+import org.omegat.util.Preferences;
+import org.omegat.util.TestPreferencesInitializer;
 
 import junit.framework.TestCase;
 
@@ -43,6 +48,9 @@ import junit.framework.TestCase;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class LanguageToolTest extends TestCase {
+    private static final Language SOURCE_LANG = new Language(Locale.FRENCH);
+    private static final Language TARGET_LANG = new Language(Locale.ENGLISH);
+
     @Test
     public void testExecute() throws Exception {
         JLanguageTool lt = new JLanguageTool(new Belarusian());
@@ -72,5 +80,28 @@ public class LanguageToolTest extends TestCase {
 
         List<RuleMatch> matches = lt.check("Check test");
         assertEquals(0, matches.size());
+    }
+
+    public void testRemoteServer() throws Exception {
+        HTTPServer server = new HTTPServer();
+        server.run();
+
+        new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG, "http://localhost:8081");
+
+        server.stop();
+    }
+
+    public void testWrapperInit() throws Exception {
+        TestPreferencesInitializer.init();
+
+        // Defaults: Local implementation
+        ILanguageToolBridge bridge = LanguageToolWrapper.createBridgeFromPrefs(SOURCE_LANG, TARGET_LANG);
+        assertTrue(bridge instanceof LanguageToolNativeBridge);
+
+        // Bad URL: fall back to local implementation
+        Preferences.setPreference(Preferences.LANGUAGETOOL_BRIDGE_TYPE, LanguageToolWrapper.BridgeType.REMOTE_URL);
+        Preferences.setPreference(Preferences.LANGUAGETOOL_REMOTE_URL, "blah");
+        bridge = LanguageToolWrapper.createBridgeFromPrefs(SOURCE_LANG, TARGET_LANG);
+        assertTrue(bridge instanceof LanguageToolNativeBridge);
     }
 }

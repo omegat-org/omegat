@@ -142,6 +142,9 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
     }
 
     List<RuleMatch> getRuleMatches(String sourceText, String translationText) throws Exception {
+        if (targetLt == null || sourceLt == null) {
+            throw new NotLoadedException();
+        }
         JLanguageTool ltTarget = targetLt.get();
         if (ltTarget == null) {
             // LT doesn't know anything about target language
@@ -185,5 +188,9 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
             // bitext rules can be not defined
             return null;
         }
+    }
+
+    @SuppressWarnings("serial")
+    public static class NotLoadedException extends RuntimeException {
     }
 }

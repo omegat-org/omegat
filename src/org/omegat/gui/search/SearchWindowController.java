@@ -77,8 +77,10 @@ import org.omegat.gui.editor.filter.SearchFilter;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -114,6 +116,9 @@ public class SearchWindowController {
         initialEntry = Core.getEditor().getCurrentEntryNumber();
         initialCaret = getCurrentPositionInEntryTranslationInEditor(Core.getEditor());
 
+        if (Platform.isMacOSX()) {
+            OSXIntegration.enableFullScreen(form);
+        }
         m_dateFormat = new SimpleDateFormat(SAVED_DATE_FORMAT);
         
         form.m_searchField.setModel(new DefaultComboBoxModel<>(HistoryManager.getSearchItems()));

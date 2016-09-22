@@ -40,9 +40,9 @@ import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.data.TMXEntry.ExternalLinked;
-import org.omegat.core.events.IProjectEventListener.PROJECT_CHANGE_TYPE;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.languagetools.LanguageToolWrapper.LanguageToolMarker;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
 
@@ -165,37 +165,34 @@ public class FalseFriendsTest extends TestCore {
                 return null;
             }
         });
+        LanguageToolWrapper.setBridgeFromCurrentProject();
     }
 
     @Test
     public void testExecute() throws Exception {
-        LanguageToolWrapper wrapper = new LanguageToolWrapper() {
+        LanguageToolMarker marker = new LanguageToolMarker() {
             public boolean isEnabled() {
                 return true;
             };
         };
 
-        wrapper.onProjectChanged(PROJECT_CHANGE_TYPE.LOAD);
-
-        List<Mark> marks = wrapper.getMarksForEntry(null, "This is abnegation.", "To jest abnegacja.", true);
+        List<Mark> marks = marker.getMarksForEntry(null, "This is abnegation.", "To jest abnegacja.", true);
         assertEquals(1, marks.size());
         assertTrue(marks.get(0).toolTipText.contains("slovenliness"));
     }
 
     @Test
     public void testRemoveRules() throws Exception {
-        LanguageToolWrapper wrapper = new LanguageToolWrapper() {
+        LanguageToolMarker marker = new LanguageToolMarker() {
             public boolean isEnabled() {
                 return true;
             };
         };
 
-        wrapper.onProjectChanged(PROJECT_CHANGE_TYPE.LOAD);
-
-        List<Mark> marks = wrapper.getMarksForEntry(null, "This is some long text without translation.", "", true);
+        List<Mark> marks = marker.getMarksForEntry(null, "This is some long text without translation.", "", true);
         assertEquals(0, marks.size());
 
-        marks = wrapper.getMarksForEntry(null, "This is text with the same translation.",
+        marks = marker.getMarksForEntry(null, "This is text with the same translation.",
                 "This is text with the same translation.", true);
         assertEquals(0, marks.size());
     }

@@ -25,7 +25,9 @@
 
 package org.omegat.languagetools;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.Test;
 import org.languagetool.JLanguageTool;
@@ -36,6 +38,10 @@ import org.languagetool.rules.RuleMatch;
 import org.languagetool.rules.UppercaseSentenceStartRule;
 import org.languagetool.rules.patterns.PatternRule;
 import org.languagetool.rules.spelling.morfologik.MorfologikSpellerRule;
+import org.languagetool.server.HTTPServer;
+import org.omegat.util.Language;
+import org.omegat.util.Preferences;
+import org.omegat.util.TestPreferencesInitializer;
 
 import junit.framework.TestCase;
 
@@ -43,6 +49,9 @@ import junit.framework.TestCase;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class LanguageToolTest extends TestCase {
+    private static final Language SOURCE_LANG = new Language(Locale.FRENCH);
+    private static final Language TARGET_LANG = new Language(Locale.ENGLISH);
+
     @Test
     public void testExecute() throws Exception {
         JLanguageTool lt = new JLanguageTool(new Belarusian());
@@ -72,5 +81,59 @@ public class LanguageToolTest extends TestCase {
 
         List<RuleMatch> matches = lt.check("Check test");
         assertEquals(0, matches.size());
+    }
+
+    public void testRemoteServer() throws Exception {
+        HTTPServer server = new HTTPServer();
+        server.run();
+
+        try {
+            new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG, "http://localhost:8081");
+            fail("URL not specifying API v2 should fail due to XML response instead of JSON");
+            // TODO: LanguageTool will drop XML entirely in version 3.6; this
+            // test might need to be adjusted then.
+        } catch (Exception e) {
+            // OK
+        }
+
+        ILanguageToolBridge bridge = new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG,
+                "http://localhost:8081/v2/check");
+
+        // Set some rules to prevent the server from looking at config files.
+        // User config files can specify languages we aren't providing at test
+        // runtime, in which case queries will fail.
+        bridge.applyRuleFilters(Collections.singleton("FOO"), Collections.emptySet(), Collections.emptySet());
+        
+        // We don't care about the actual content of the results as long as
+        // there are some: we just want to make sure we are parsing the JSON
+        // result correctly.
+        List<LanguageToolResult> results = bridge.getCheckResults("foo", "foo bar");
+        assertFalse(results.isEmpty());
+
+        server.stop();
+    }
+
+    public void testNativeBridge() throws Exception {
+        ILanguageToolBridge bridge = new LanguageToolNativeBridge(SOURCE_LANG, TARGET_LANG);
+
+        // We don't care about the actual content of the results as long as
+        // there are some: we just want to make sure we are wrapping the result
+        // correctly.
+        List<LanguageToolResult> results = bridge.getCheckResults("foo", "foo bar");
+        assertFalse(results.isEmpty());
+    }
+
+    public void testWrapperInit() throws Exception {
+        TestPreferencesInitializer.init();
+
+        // Defaults: Local implementation
+        ILanguageToolBridge bridge = LanguageToolWrapper.createBridgeFromPrefs(SOURCE_LANG, TARGET_LANG);
+        assertTrue(bridge instanceof LanguageToolNativeBridge);
+
+        // Bad URL: fall back to local implementation
+        Preferences.setPreference(Preferences.LANGUAGETOOL_BRIDGE_TYPE, LanguageToolWrapper.BridgeType.REMOTE_URL);
+        Preferences.setPreference(Preferences.LANGUAGETOOL_REMOTE_URL, "blah");
+        bridge = LanguageToolWrapper.createBridgeFromPrefs(SOURCE_LANG, TARGET_LANG);
+        assertTrue(bridge instanceof LanguageToolNativeBridge);
     }
 }

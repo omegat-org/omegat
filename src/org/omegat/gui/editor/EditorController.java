@@ -62,9 +62,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import javax.swing.JComponent;
 import javax.swing.JScrollBar;
@@ -108,7 +110,6 @@ import org.omegat.gui.main.DockablePanel;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.MainWindowUI;
 import org.omegat.gui.main.ProjectUICommands;
-import org.omegat.gui.tagvalidation.ITagValidation;
 import org.omegat.help.Help;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -1235,14 +1236,21 @@ public class EditorController implements IEditor {
 
         // validate tags if required
         if (entry != null && Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE)) {
-            final SourceTextEntry ste = entry;
-            new SwingWorker<Object, Void>() {
-                protected Object doInBackground() throws Exception {
-                    ITagValidation tv = Core.getTagValidation();
-                    if (!tv.checkInvalidTags(ste)) {
-                        tv.displayTagValidationErrors(tv.listInvalidTags(), null);
+            String file = getCurrentFile();
+            new SwingWorker<Boolean, Void>() {
+                protected Boolean doInBackground() throws Exception {
+                    return Core.getTagValidation().checkInvalidTags(entry);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        if (!get()) {
+                            Core.getIssues().showForFiles(Pattern.quote(file), entry.entryNum());
+                        }
+                    } catch (InterruptedException | ExecutionException e) {
+                        LOGGER.log(Level.SEVERE, "Exception when validating tags on leave", e);
                     }
-                    return null;
                 }
             }.execute();
         }

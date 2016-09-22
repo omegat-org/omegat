@@ -37,6 +37,8 @@ import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.SpellChecker;
+import org.omegat.core.tagvalidation.ITagValidation;
+import org.omegat.core.tagvalidation.TagValidationTool;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.core.threads.SaveThread;
 import org.omegat.filters2.IFilter;
@@ -63,6 +65,8 @@ import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.glossary.IGlossaries;
 import org.omegat.gui.glossary.TransTipsMarker;
+import org.omegat.gui.issues.IIssues;
+import org.omegat.gui.issues.IssuesPanelController;
 import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.main.MainWindow;
@@ -72,8 +76,6 @@ import org.omegat.gui.multtrans.MultipleTransPane;
 import org.omegat.gui.notes.INotes;
 import org.omegat.gui.notes.NotesTextArea;
 import org.omegat.gui.properties.SegmentPropertiesArea;
-import org.omegat.gui.tagvalidation.ITagValidation;
-import org.omegat.gui.tagvalidation.TagValidationTool;
 import org.omegat.languagetools.LanguageToolWrapper;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Preferences;
@@ -98,6 +100,7 @@ public class Core {
     private static IMainWindow mainWindow;
     protected static IEditor editor;
     private static ITagValidation tagValidation;
+    private static IIssues issuesWindow;
     private static IMatcher matcher;
     private static ISpellChecker spellChecker;
     private static FilterMaster filterMaster;
@@ -143,6 +146,10 @@ public class Core {
     /** Get tag validation component instance. */
     public static ITagValidation getTagValidation() {
         return tagValidation;
+    }
+
+    public static IIssues getIssues() {
+        return issuesWindow;
     }
 
     /** Get matcher component instance. */
@@ -244,7 +251,8 @@ public class Core {
 
         // 3. Initialize other components. They add themselves to the main window.
         editor = new EditorController(me);
-        tagValidation = new TagValidationTool(me);
+        tagValidation = new TagValidationTool();
+        issuesWindow = new IssuesPanelController(me);
         matcher = new MatchesTextArea(me);
         GlossaryTextArea glossaryArea = new GlossaryTextArea(me);
         glossary = glossaryArea;

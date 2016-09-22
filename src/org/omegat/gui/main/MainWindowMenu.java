@@ -376,8 +376,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         viewMarkFontFallbackCheckBoxMenuItem.setIcon(MainMenuIcons.newTextIcon(UIManager.getColor("Label.foreground"),
                 new Font("Serif", Font.ITALIC, 16), 'F'));
         
-        toolsMenu.add(toolsValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_VALIDATE"));
-        toolsMenu.add(toolsSingleValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_SINGLE_VALIDATE"));
+        toolsMenu.add(toolsCheckIssuesMenuItem = createMenuItem("TF_MENU_TOOLS_CHECK_ISSUES"));
+        toolsMenu.add(toolsCheckIssuesCurrentFileMenuItem = createMenuItem("TF_MENU_TOOLS_CHECK_ISSUES_CURRENT_FILE"));
         toolsMenu.add(toolsShowStatisticsStandardMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_STANDARD"));
         toolsMenu.add(toolsShowStatisticsMatchesMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_MATCHES"));
         toolsMenu.add(toolsShowStatisticsMatchesPerFileMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_MATCHES_PER_FILE"));
@@ -662,7 +662,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 gotoMenu, gotoNextSegmentMenuItem, gotoNextUntranslatedMenuItem, gotoPreviousSegmentMenuItem,
                 gotoSegmentMenuItem, gotoNextNoteMenuItem, gotoPreviousNoteMenuItem, gotoMatchSourceSegment,
 
-                viewFileListMenuItem, toolsValidateTagsMenuItem, toolsSingleValidateTagsMenuItem,
+                viewFileListMenuItem, toolsCheckIssuesMenuItem, toolsCheckIssuesCurrentFileMenuItem,
                 toolsShowStatisticsStandardMenuItem, toolsShowStatisticsMatchesMenuItem,
                 toolsShowStatisticsMatchesPerFileMenuItem };
 
@@ -827,8 +827,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenu switchCaseSubMenu;
     JMenuItem titleCaseMenuItem;
     JMenu toolsMenu;
-    JMenuItem toolsValidateTagsMenuItem;
-    JMenuItem toolsSingleValidateTagsMenuItem;
+    JMenuItem toolsCheckIssuesMenuItem;
+    JMenuItem toolsCheckIssuesCurrentFileMenuItem;
     JMenuItem toolsShowStatisticsStandardMenuItem;
     JMenuItem toolsShowStatisticsMatchesMenuItem;
     JMenuItem toolsShowStatisticsMatchesPerFileMenuItem;

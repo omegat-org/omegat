@@ -52,6 +52,7 @@ import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.gui.issues.IssueProviders;
 import org.omegat.util.Log;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.Styles;
@@ -75,6 +76,7 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
 
     public LanguageToolWrapper() throws Exception {
         CoreEvents.registerProjectChangeListener(this);
+        IssueProviders.addIssueProvider(new LanguageToolIssueProvider(this));
     }
 
     public boolean isEnabled() {

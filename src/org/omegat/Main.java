@@ -403,8 +403,8 @@ public class Main {
         case ABORT:
             System.out.println(OStrings.getString("CONSOLE_VALIDATING_TAGS"));
             stes = Core.getTagValidation().listInvalidTags();
-            if (stes != null) {
-                Core.getTagValidation().displayTagValidationErrors(stes, null);
+            if (!stes.isEmpty()) {
+                Core.getTagValidation().logTagValidationErrors(stes);
                 System.out.println(OStrings.getString("CONSOLE_TAGVALIDATION_FAIL"));
                 System.out.println(OStrings.getString("CONSOLE_TAGVALIDATION_ABORT"));
                 System.exit(1);
@@ -413,8 +413,8 @@ public class Main {
         case WARN:
             System.out.println(OStrings.getString("CONSOLE_VALIDATING_TAGS"));
             stes = Core.getTagValidation().listInvalidTags();
-            if (stes != null) {
-                Core.getTagValidation().displayTagValidationErrors(stes, null);
+            if (!stes.isEmpty()) {
+                Core.getTagValidation().logTagValidationErrors(stes);
                 System.out.println(OStrings.getString("CONSOLE_TAGVALIDATION_FAIL"));
             }
             break;

@@ -425,6 +425,12 @@ public class Preferences {
     public static final String PROPERTY_SRX = "srx";
     public static final String PROPERTY_FILTERS = "filters";
 
+    /** Issues */
+    public static final String ISSUES_WINDOW_GEOMETRY_PREFIX = "issues_window";
+    public static final String ISSUES_WINDOW_DIVIDER_LOCATION_TOP = "issues_window_divider_location_top";
+    public static final String ISSUES_WINDOW_DIVIDER_LOCATION_BOTTOM = "issues_window_divider_location_bottom";
+    public static final String ISSUE_PROVIDERS_DISABLED = "issue_providers_disabled";
+
     /** Private constructor, because this file is singleton */
     private Preferences() {
     }

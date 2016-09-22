@@ -23,12 +23,11 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.tagvalidation;
+package org.omegat.core.tagvalidation;
 
 import java.util.List;
 
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.tagvalidation.ErrorReport;
 
 /**
  * Interface for tag validation.
@@ -39,18 +38,19 @@ public interface ITagValidation {
     /**
      * Get invalid tags entries.
      * 
-     * @return list of entries with invalid tags, or null if all entries are
-     *         valid
+     * @return List of entries with invalid tags. Will be empty if no invalid
+     *         tags are found.
      */
     List<ErrorReport> listInvalidTags();
 
     /**
-     * Get invalid tags entries from specified files corresponding to sourcePattern.
+     * Get invalid tags entries from specified files corresponding to
+     * sourcePattern.
      * 
      * @param sourcePattern
      *            The regexp of files to validate
-     * @return list of entries with invalid tags, or null if all entries are
-     *         valid
+     * @return List of entries with invalid tags. Will be empty if no invalid
+     *         tags are found.
      */
     List<ErrorReport> listInvalidTags(String sourcePattern);
 
@@ -59,15 +59,16 @@ public interface ITagValidation {
      * 
      * @param ste
      *            entry
-     * @return true if all tags are valid
+     * @return true if there are no invalid tags
      */
     boolean checkInvalidTags(SourceTextEntry ste);
 
     /**
-     * Show invalid tags entries.
+     * Log invalid tags entries to console.
      * 
      * @param invalidTagsEntries
-     *            list of invalid tags entries(from listInvalidTags() method)
+     *            list of invalid tags entries(from {@link #listInvalidTags()}
+     *            method)
      */
-    void displayTagValidationErrors(List<ErrorReport> invalidTagsEntries, String message);
+    void logTagValidationErrors(List<ErrorReport> invalidTagsEntries);
 }

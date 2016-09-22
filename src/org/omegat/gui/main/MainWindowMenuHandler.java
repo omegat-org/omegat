@@ -191,8 +191,8 @@ public class MainWindowMenuHandler {
     public void projectCompileMenuItemActionPerformed() {
         if (Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED)) {
             List<ErrorReport> stes = Core.getTagValidation().listInvalidTags();
-            if (stes != null) {
-                Core.getTagValidation().displayTagValidationErrors(stes, OStrings.getString("TF_MESSAGE_COMPILE"));
+            if (!stes.isEmpty()) {
+                Core.getIssues().showAll(OStrings.getString("TF_MESSAGE_COMPILE"));
                 return;
             }
         }
@@ -212,8 +212,8 @@ public class MainWindowMenuHandler {
         String sourcePattern = Pattern.quote(midName);
         if (Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED)) {
             List<ErrorReport> stes = Core.getTagValidation().listInvalidTags(sourcePattern);
-            if (stes != null) {
-                Core.getTagValidation().displayTagValidationErrors(stes, OStrings.getString("TF_MESSAGE_COMPILE"));
+            if (!stes.isEmpty()) {
+                Core.getIssues().showForFiles(midName, OStrings.getString("TF_MESSAGE_COMPILE"));
                 return;
             }
         }
@@ -775,18 +775,12 @@ public class MainWindowMenuHandler {
                 .setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_ALL);
     }
 
-    public void toolsValidateTagsMenuItemActionPerformed() {
-        Core.getTagValidation().displayTagValidationErrors(Core.getTagValidation().listInvalidTags(), null);
+    public void toolsCheckIssuesMenuItemActionPerformed() {
+        Core.getIssues().showAll();
     }
 
-    public void toolsSingleValidateTagsMenuItemActionPerformed() {
-        String midName = Core.getEditor().getCurrentFile();
-        List<ErrorReport> stes = null;
-        if (!StringUtil.isEmpty(midName)) {
-            String sourcePattern = Pattern.quote(midName);
-            stes = Core.getTagValidation().listInvalidTags(sourcePattern);
-        }
-        Core.getTagValidation().displayTagValidationErrors(stes, null);
+    public void toolsCheckIssuesCurrentFileMenuItemActionPerformed() {
+        Core.getIssues().showForFiles(Pattern.quote(Core.getEditor().getCurrentFile()));
     }
 
     /**

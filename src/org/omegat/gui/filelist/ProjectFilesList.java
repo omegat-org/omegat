@@ -28,8 +28,8 @@ package org.omegat.gui.filelist;
 
 import javax.swing.JLabel;
 
-import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -42,7 +42,7 @@ public class ProjectFilesList extends javax.swing.JFrame {
      * Creates new form ProjectFilesList
      */
     public ProjectFilesList() {
-        OmegaTIcons.setIconImages(this);
+        StaticUIUtils.setWindowIcon(this);
         initComponents();
     }
 

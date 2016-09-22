@@ -63,7 +63,6 @@ import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
-import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.search.SearchWindowController;
@@ -71,6 +70,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
 import com.vlsolutions.swing.docking.Dockable;
@@ -147,7 +147,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         pack();
         getContentPane().add(MainWindowUI.createStatusBar(this), BorderLayout.SOUTH);
         
-        OmegaTIcons.setIconImages(this);
+        StaticUIUtils.setWindowIcon(this);
 
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {

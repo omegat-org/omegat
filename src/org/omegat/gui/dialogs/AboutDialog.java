@@ -30,10 +30,10 @@ import java.awt.Frame;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 
-import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.ResourcesUtil;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -156,7 +156,7 @@ public class AboutDialog extends JDialog {
 
         getContentPane().add(buttonPanel, java.awt.BorderLayout.SOUTH);
 
-        versionLabel.setIcon(new ImageIcon(OmegaTIcons.ICONS.get(1)));
+        versionLabel.setIcon(new ImageIcon(ResourcesUtil.APP_ICON_32X32));
         org.openide.awt.Mnemonics.setLocalizedText(versionLabel, OStrings.getString("ABOUTDIALOG_VERSION_REVISION")); // NOI18N
         versionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         getContentPane().add(versionLabel, java.awt.BorderLayout.NORTH);

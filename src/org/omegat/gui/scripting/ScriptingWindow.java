@@ -86,7 +86,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
-import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -133,7 +132,7 @@ public class ScriptingWindow {
         
         frame = new JFrame(OStrings.getString("SCW_TITLE"));
         
-        OmegaTIcons.setIconImages(frame);
+        StaticUIUtils.setWindowIcon(frame);
 
         StaticUIUtils.setEscapeClosable(frame);
 

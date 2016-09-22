@@ -44,6 +44,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -329,5 +330,9 @@ public class StaticUIUtils {
                 timer.restart();
             }
         });
+    }
+
+    public static void setWindowIcon(Window window) {
+        window.setIconImages(Arrays.asList(ResourcesUtil.APP_ICON_16X16, ResourcesUtil.APP_ICON_32X32));
     }
 }

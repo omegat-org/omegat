@@ -31,7 +31,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 
-import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -46,43 +45,33 @@ import org.omegat.util.StaticUtils;
 @SuppressWarnings("serial")
 public class OmegaTFileChooser extends JFileChooser {
 
+    /** OmegaT project icon */
+    private static final ImageIcon OMEGAT_ICON = new ImageIcon(ResourcesUtil.APP_ICON_16X16);
+
     /**
      * Constructs an <code>OmegaTFileChooser</code> pointing to OmegaT's current
      * directory.
      */
     public OmegaTFileChooser() {
-        this(Preferences.getPreference(Preferences.CURRENT_FOLDER));
+        super(Preferences.getPreference(Preferences.CURRENT_FOLDER));
     }
 
-    /**
-     * Constructs an <code>OmegaTFileChooser</code> using the given path.
-     */
-    public OmegaTFileChooser(String path) {
-        super(path);
-        try {
-            if (omegatIcon == null)
-                omegatIcon = new ImageIcon(OmegaTIcons.ICONS.get(0));
-        } catch (Exception e) {
-            // do nothing
-        }
-    }
-
-    /** OmegaT project icon */
-    private static ImageIcon omegatIcon = null;
 
     /** Redefines the icon for OmegaT projects. */
     public Icon getIcon(File f) {
-        if (StaticUtils.isProjectDir(f) && omegatIcon != null)
-            return omegatIcon;
-        else
+        if (StaticUtils.isProjectDir(f)) {
+            return OMEGAT_ICON;
+        } else {
             return super.getIcon(f);
+        }
     }
 
     /** Redefines the file type for OmegaT projects. */
     public String getTypeDescription(File f) {
-        if (StaticUtils.isProjectDir(f))
+        if (StaticUtils.isProjectDir(f)) {
             return OStrings.getString("PFC_OMEGAT_PROJECT");
-        else
+        } else {
             return super.getTypeDescription(f);
+        }
     }
 }

@@ -39,6 +39,15 @@ import java.net.URL;
  */
 public class ResourcesUtil {
     
+    private static final String RESOURCES = "/org/omegat/gui/resources/";
+
+    /**
+     * @see <a href="http://iconhandbook.co.uk/reference/chart/">Icon Reference
+     *      Chart</a>
+     */
+    public static final Image APP_ICON_32X32 = getImage(RESOURCES + "OmegaT.gif");
+    public static final Image APP_ICON_16X16 = getImage(RESOURCES + "OmegaT_small.gif");
+
     /**
      * Load icon.
      * 
@@ -59,6 +68,6 @@ public class ResourcesUtil {
      * @return icon instance
      */
     public static Image getBundledImage(String imageName) {
-        return getImage("/org/omegat/gui/resources/" + imageName);
+        return getImage(RESOURCES + imageName);
     }
 }

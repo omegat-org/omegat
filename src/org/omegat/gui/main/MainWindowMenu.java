@@ -423,6 +423,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         optionsMenu.add(optionsSetupFileFiltersMenuItem = createMenuItem("TF_MENU_DISPLAY_FILTERS"));
         optionsMenu.add(optionsSentsegMenuItem = createMenuItem("MW_OPTIONSMENU_SENTSEG"));
         optionsMenu.add(optionsSpellCheckMenuItem = createMenuItem("MW_OPTIONSMENU_SPELLCHECK"));
+        optionsMenu.add(optionsLanguageToolMenuItem = createMenuItem("MW_OPTIONSMENU_LANGUAGETOOL"));
         optionsMenu.add(optionsWorkflowMenuItem = createMenuItem("MW_OPTIONSMENU_WORKFLOW"));
         optionsMenu.add(optionsTagValidationMenuItem = createMenuItem("MW_OPTIONSMENU_TAGVALIDATION"));
         optionsMenu.add(optionsTeamMenuItem = createMenuItem("MW_OPTIONSMENU_TEAM"));
@@ -664,7 +665,9 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
                 viewFileListMenuItem, toolsCheckIssuesMenuItem, toolsCheckIssuesCurrentFileMenuItem,
                 toolsShowStatisticsStandardMenuItem, toolsShowStatisticsMatchesMenuItem,
-                toolsShowStatisticsMatchesPerFileMenuItem };
+                toolsShowStatisticsMatchesPerFileMenuItem,
+
+                optionsLanguageToolMenuItem};
 
         for (JMenuItem item : itemsToSwitchOff) {
             item.setEnabled(!isProjectOpened);
@@ -769,6 +772,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem optionsSentsegMenuItem;
     JMenuItem optionsSetupFileFiltersMenuItem;
     JMenuItem optionsSpellCheckMenuItem;
+    JMenuItem optionsLanguageToolMenuItem;
     JCheckBoxMenuItem optionsTabAdvanceCheckBoxMenuItem;
     JMenu optionsMachineTranslateMenu;
     JMenu optionsGlossaryMenu;

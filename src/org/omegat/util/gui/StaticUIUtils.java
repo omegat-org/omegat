@@ -93,23 +93,25 @@ public class StaticUIUtils {
     public static void setEscapeClosable(JFrame frame) {
         setEscapeAction(frame.getRootPane(), makeCloseAction(frame));
     }
-    
-    /**
-     * Create an action that sends a {@link WindowEvent#WINDOW_CLOSING} event
-     * to the supplied window. This mimics closing by clicking the window close button.
-     * @param window
-     * @return action
-     */
+
     @SuppressWarnings("serial")
-    public static AbstractAction makeCloseAction(final Window window) {
+    public static Action makeCloseAction(final Window window) {
         return new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
+                closeWindowByEvent(window);
             }
         };
     }
-    
+
+    /**
+     * Send a {@link WindowEvent#WINDOW_CLOSING} event to the supplied window.
+     * This mimics closing by clicking the window close button.
+     */
+    public static void closeWindowByEvent(Window window) {
+        window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
+    }
+
     /**
      * Associate a custom action to be called when the Esc key is pressed.
      * 

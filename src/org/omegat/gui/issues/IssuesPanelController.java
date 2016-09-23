@@ -250,6 +250,8 @@ public class IssuesPanelController implements IIssues {
             }
         });
 
+        panel.closeButton.addActionListener(e -> StaticUIUtils.closeWindowByEvent(frame));
+
         MouseAdapter adapter = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -451,6 +453,7 @@ public class IssuesPanelController implements IIssues {
         panel.outerSplitPane.setBottomComponent(panel.messageLabel);
         panel.messageLabel.setText(OStrings.getString("ISSUES_LOADING"));
         StaticUIUtils.setHierarchyEnabled(panel, false);
+        panel.closeButton.setEnabled(true);
         panel.showAllButtonPanel.setVisible(!isShowingAllFiles());
         panel.instructionsPanel.setVisible(!instructions.equals(NO_INSTRUCTIONS));
         panel.instructionsTextArea.setText(instructions);

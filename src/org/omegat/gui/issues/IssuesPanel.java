@@ -69,6 +69,8 @@ public class IssuesPanel extends javax.swing.JPanel {
         showAllButton = new javax.swing.JButton();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         reloadButton = new javax.swing.JButton();
+        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
+        closeButton = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jPanel2 = new javax.swing.JPanel();
         progressBar = new javax.swing.JProgressBar();
@@ -138,6 +140,10 @@ public class IssuesPanel extends javax.swing.JPanel {
         reloadButton.setText(OStrings.getString("ISSUES_BUTTON_REFRESH")); // NOI18N
         reloadButton.setEnabled(false);
         jPanel1.add(reloadButton);
+        jPanel1.add(filler5);
+
+        org.openide.awt.Mnemonics.setLocalizedText(closeButton, OStrings.getString("BUTTON_CLOSE")); // NOI18N
+        jPanel1.add(closeButton);
         jPanel1.add(filler2);
 
         jPanel3.add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -153,10 +159,12 @@ public class IssuesPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    javax.swing.JButton closeButton;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
+    private javax.swing.Box.Filler filler5;
     javax.swing.JSplitPane innerSplitPane;
     javax.swing.JPanel instructionsPanel;
     javax.swing.JTextArea instructionsTextArea;

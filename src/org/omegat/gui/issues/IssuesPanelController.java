@@ -461,7 +461,11 @@ public class IssuesPanelController implements IIssues {
 
     synchronized void refreshData() {
         reset();
-        frame.setVisible(true);
+        if (!frame.isVisible()) {
+            // Don't call setVisible if already visible, because the window will
+            // steal focus
+            frame.setVisible(true);
+        }
         frame.setState(JFrame.NORMAL);
         panel.progressBar.setValue(0);
         panel.progressBar.setMaximum(Core.getProject().getAllEntries().size());

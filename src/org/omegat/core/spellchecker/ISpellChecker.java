@@ -76,4 +76,14 @@ public interface ISpellChecker {
      */
     List<Token> getMisspelledTokens(String text);
 
+    /**
+     * Determine if the given word is on the ignored list
+     */
+    boolean isIgnoredWord(String word);
+
+    /**
+     * Determine if the given word is on the learned list
+     */
+    boolean isLearnedWord(String word);
+
 }

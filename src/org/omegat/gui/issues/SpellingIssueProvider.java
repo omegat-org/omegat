@@ -43,6 +43,7 @@ import javax.swing.text.StyledDocument;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
@@ -142,15 +143,19 @@ class SpellingIssueProvider implements IIssueProvider {
         @Override
         public List<? extends JMenuItem> getMenuComponents() {
             List<JMenuItem> result = new ArrayList<>();
+            ISpellChecker checker = Core.getSpellChecker();
             misspelledTokens.stream().map(tok -> tok.getTextFromString(tmxEntry.translation)).distinct()
                     .forEach(word -> {
+                        boolean enabled = !checker.isIgnoredWord(word) && !checker.isLearnedWord(word);
                         JMenuItem item = new JMenuItem(
                                 StringUtil.format(OStrings.getString("ISSUES_SPELLING_LEARN_ITEM"), word));
-                        item.addActionListener(e -> Core.getSpellChecker().learnWord(word));
+                        item.addActionListener(e -> checker.learnWord(word));
+                        item.setEnabled(enabled);
                         result.add(item);
                         item = new JMenuItem(
                                 StringUtil.format(OStrings.getString("ISSUES_SPELLING_IGNORE_ITEM"), word));
-                        item.addActionListener(e -> Core.getSpellChecker().ignoreWord(word));
+                        item.addActionListener(e -> checker.ignoreWord(word));
+                        item.setEnabled(enabled);
                         result.add(item);
                     });
             return result;

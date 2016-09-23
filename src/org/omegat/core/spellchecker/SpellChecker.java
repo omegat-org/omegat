@@ -404,6 +404,16 @@ public class SpellChecker implements ISpellChecker {
         }
     }
 
+    @Override
+    public boolean isIgnoredWord(String word) {
+        return ignoreList.contains(normalize(word));
+    }
+
+    @Override
+    public boolean isLearnedWord(String word) {
+        return learnedList.contains(normalize(word));
+    }
+
     /**
      * Normalize the orthography of the word by replacing alternative characters with "canonical" ones.
      */

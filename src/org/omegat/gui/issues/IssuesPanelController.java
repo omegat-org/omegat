@@ -374,7 +374,12 @@ public class IssuesPanelController implements IIssues {
     }
 
     void jumpToSelectedIssue() {
-        getSelectedIssue().map(IIssue::getSegmentNumber).ifPresent(Core.getEditor()::gotoEntry);
+        getSelectedIssue().map(IIssue::getSegmentNumber).ifPresent(i -> {
+            Core.getEditor().gotoEntry(i);
+            JFrame mwf = Core.getMainWindow().getApplicationFrame();
+            mwf.setState(JFrame.NORMAL);
+            mwf.toFront();
+        });
     }
 
     Optional<IIssue> getIssueAt(Point p) {

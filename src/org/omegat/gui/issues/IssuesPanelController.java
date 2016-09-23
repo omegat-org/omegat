@@ -320,7 +320,7 @@ public class IssuesPanelController implements IIssues {
                 break;
             case MODIFIED:
                 if (frame.isVisible()) {
-                    SwingUtilities.invokeLater(IssuesPanelController.this::refreshData);
+                    SwingUtilities.invokeLater(this::refreshData);
                 }
                 break;
             default:

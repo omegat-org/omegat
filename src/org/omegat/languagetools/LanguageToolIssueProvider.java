@@ -125,7 +125,7 @@ public class LanguageToolIssueProvider implements IIssueProvider {
         @Override
         public String getDescription() {
             return "<html>" + match.getMessage().replace("<suggestion>", "<i>").replace("</suggestion>", "</i>")
-                    + "<html>";
+                    + "</html>";
         }
 
         @Override

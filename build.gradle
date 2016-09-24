@@ -64,7 +64,7 @@ configurations {
 }
 
 def depsProvided = file('lib/provided').directory
-def languageToolVersion = '3.3'
+def languageToolVersion = '3.4'
 
 dependencies {
     if (!depsProvided) {

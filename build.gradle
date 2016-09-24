@@ -61,6 +61,9 @@ configurations {
         // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/813/
         exclude group: 'org.apache.lucene', module: 'lucene-core'
     }
+    testRuntime {
+        exclude group: 'org.languagetool', module: 'language-all'
+    }
 }
 
 def depsProvided = file('lib/provided').directory
@@ -140,6 +143,7 @@ dependencies {
     ['be', 'en', 'fr'].each {
         testCompile "org.languagetool:language-${it}:${languageToolVersion}"
     }
+    testRuntime "org.languagetool:language-pl:${languageToolVersion}"
 
     // WebStart-only
     jnlp project(path: ':release:WebStart-specific', configuration: 'docs')

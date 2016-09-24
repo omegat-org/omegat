@@ -2,9 +2,11 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
     id 'de.gliderpilot.jnlp' version '1.0.2'
+    id 'com.jfrog.bintray' version '1.7.1'
 }
 
 apply plugin: 'application'
+apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 apply plugin: 'de.gliderpilot.jnlp'
 
@@ -145,21 +147,25 @@ dependencies {
     testIntegrationCompile sourceSets.main.output, sourceSets.test.output, configurations.compile
 }
 
-def omtPlugins = loadProperties file('Plugins.properties')
-
 jar {
-    manifest {
-        attributes('License': 'GNU Public License version 3 or later',
-                'Implementation-Version': project.version,
-                'Permissions': 'all-permissions',
-                'OmegaT-Plugins': omtPlugins.plugin,
-                'OmegaT-Plugin': 'true',
-                'Main-Class': mainClassName,
-                'Class-Path': configurations.runtime.collect { "lib/${it.name}" }.join(' '))
-        omtPlugins.keys().each { key ->
-            if (key != 'plugin') {
-                omtPlugins[key].tokenize().each { cls ->
-                    attributes('OmegaT-Plugin': key, cls)
+    // Set manifest entries at execution time because accessing configurations.runtime as an
+    // instance forces configuration blocks to be evaluated and this causes problems like
+    // introducing ordering dependencies on various definitions in this file.
+    doFirst {
+        def omtPlugins = loadProperties file('Plugins.properties')
+        manifest {
+            attributes('License': 'GNU Public License version 3 or later',
+                    'Implementation-Version': project.version,
+                    'Permissions': 'all-permissions',
+                    'OmegaT-Plugins': omtPlugins.plugin,
+                    'OmegaT-Plugin': 'true',
+                    'Main-Class': mainClassName,
+                    'Class-Path': configurations.runtime.collect { "lib/${it.name}" }.join(' '))
+            omtPlugins.keys().each { key ->
+                if (key != 'plugin') {
+                    omtPlugins[key].tokenize().each { cls ->
+                        attributes('OmegaT-Plugin': key, cls)
+                    }
                 }
             }
         }
@@ -624,6 +630,50 @@ task testIntegration(type: JavaExec) {
     main = 'org.omegat.core.data.TestTeamIntegration'
     classpath = sourceSets.testIntegration.runtimeClasspath
     systemProperties = System.properties
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+
+task javadocJar(type: Jar) {
+    from javadoc.outputs
+}
+
+def mavenStyleVersion = version.replace('_', '-')
+
+publishing {
+    publications {
+        forBintray(MavenPublication) {
+            groupId 'org.omegat'
+            artifactId 'omegat'
+            version mavenStyleVersion
+    
+            from components.java
+            artifact sourceJar {
+                classifier 'sources'
+            }
+            artifact javadocJar {
+                classifier 'javadoc'
+            }
+        }
+    }
+}
+
+bintray {
+    user = System.getProperty('bintray.user')
+    key = System.getProperty('bintray.key')
+    pkg {
+        repo = 'maven'
+        name = 'OmegaT'
+        userOrg = 'omegat-org'
+        licenses = ['GPL-3.0']
+        vcsUrl = 'https://svn.code.sf.net/p/omegat/svn/'
+        version {
+            name = mavenStyleVersion
+        }
+    }
+    publications = ['forBintray']
 }
 
 // Allow setting the max heap size for the run task from the command line, e.g.

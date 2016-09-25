@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.0 update 2
 ----------------------------------------------------------------------
-  3 Enhancements
+  4 Enhancements
   1 Bug fix
   1 Localisation update
 ----------------------------------------------------------------------
@@ -14,6 +14,9 @@
 
   - Batch-mode spellchecking
   https://sourceforge.net/p/omegat/feature-requests/717/
+
+  - Add UI for checking all translation issues
+  https://sourceforge.net/p/omegat/feature-requests/1271/
 
   Other changes:
 

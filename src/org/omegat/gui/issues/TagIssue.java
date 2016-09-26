@@ -119,7 +119,7 @@ public class TagIssue implements IIssue {
             panel.middleButton.setVisible(false);
         } else {
             panel.lastTextPane.setText(fixText);
-            panel.lastButton.setText(OStrings.getString("ISSUES_TAGS_BUTTON_APPLY_FIX"));
+            org.openide.awt.Mnemonics.setLocalizedText(panel.lastButton, OStrings.getString("ISSUES_TAGS_BUTTON_APPLY_FIX"));
             panel.lastButton.addActionListener(getFixActionListener(fixText));
             minHeight += panel.lastButton.getPreferredSize().height;
         }

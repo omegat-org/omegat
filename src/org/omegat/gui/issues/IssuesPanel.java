@@ -55,7 +55,7 @@ public class IssuesPanel extends javax.swing.JPanel {
         outerSplitPane = new javax.swing.JSplitPane();
         innerSplitPane = new javax.swing.JSplitPane();
         typeListScrollPanel = new javax.swing.JScrollPane();
-        typeList = new javax.swing.JList<>();
+        typeList = new javax.swing.JList<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         messagePanel = new javax.swing.JPanel();
@@ -123,21 +123,21 @@ public class IssuesPanel extends javax.swing.JPanel {
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
         jPanel1.add(filler1);
 
-        jumpButton.setText(OStrings.getString("ISSUES_BUTTON_JUMP_TO_SEGMENT")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jumpButton, OStrings.getString("ISSUES_BUTTON_JUMP_TO_SEGMENT")); // NOI18N
         jumpButton.setEnabled(false);
         jPanel1.add(jumpButton);
         jPanel1.add(filler3);
 
         showAllButtonPanel.setLayout(new javax.swing.BoxLayout(showAllButtonPanel, javax.swing.BoxLayout.LINE_AXIS));
 
-        showAllButton.setText(OStrings.getString("ISSUES_BUTTON_SHOW_ALL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(showAllButton, OStrings.getString("ISSUES_BUTTON_SHOW_ALL")); // NOI18N
         showAllButton.setEnabled(false);
         showAllButtonPanel.add(showAllButton);
         showAllButtonPanel.add(filler4);
 
         jPanel1.add(showAllButtonPanel);
 
-        reloadButton.setText(OStrings.getString("ISSUES_BUTTON_REFRESH")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(reloadButton, OStrings.getString("ISSUES_BUTTON_REFRESH")); // NOI18N
         reloadButton.setEnabled(false);
         jPanel1.add(reloadButton);
         jPanel1.add(filler5);

@@ -365,7 +365,6 @@ class CheckBoxTreeCellRenderer extends JPanel implements TreeCellRenderer {
 @SuppressWarnings("serial")
 public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
-    private final JFileChooser fileChooser = new JFileChooser();
     private BridgeType selectedBridgeType;
     private Set<String> disabledCategories, disabledRuleIds, enabledRuleIds;
     private final static String NEW_RULE_PATTERN = "^[A-Za-z_.]+$";
@@ -886,6 +885,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void directoryChooseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_directoryChooseButtonActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         FileFilter filter = new FileNameExtensionFilter(OStrings.getString("GUI_LANGUAGETOOL_JAR_FILE_FILTER"), "jar");
         fileChooser.setFileFilter(filter);

@@ -138,7 +138,6 @@ dependencies {
     // Test dependencies
     testCompile 'junit:junit:4.12'
     testCompile 'xmlunit:xmlunit:1.6'
-    testCompile 'org.codehaus.groovy:groovy-all:2.4.6'
     // LanguageTool unit tests exercise these languages
     ['be', 'en', 'fr'].each {
         testCompile "org.languagetool:language-${it}:${languageToolVersion}"

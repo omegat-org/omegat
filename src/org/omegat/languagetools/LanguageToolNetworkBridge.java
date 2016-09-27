@@ -151,7 +151,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
             }
         }
 
-        serverUrl = "http://localhost:" + Integer.toString(port) + URL_PATH;
+        serverUrl = "http://localhost:" + port + URL_PATH;
         Log.log(OStrings.getString("LT_SERVER_STARTED"));
         init(sourceLang, targetLang);
     }

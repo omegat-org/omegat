@@ -47,7 +47,6 @@ import org.omegat.gui.issues.IIssue;
 import org.omegat.gui.issues.IIssueProvider;
 import org.omegat.gui.issues.IssueDetailSplitPanel;
 import org.omegat.gui.issues.SimpleColorIcon;
-import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.Styles.EditorColor;
@@ -62,17 +61,14 @@ public class LanguageToolIssueProvider implements IIssueProvider {
 
     @Override
     public List<IIssue> getIssues(SourceTextEntry sourceEntry, TMXEntry tmxEntry) {
-        try {
-            ILanguageToolBridge bridge = LanguageToolWrapper.getBridge();
-            if (bridge != null) {
-                return bridge.getCheckResults(sourceEntry.getSrcText(), tmxEntry.translation).stream()
-                        .map(match -> new LanguageToolIssue(sourceEntry, tmxEntry.translation, match))
-                        .collect(Collectors.toList());
-            }
-        } catch (Exception e) {
-            Log.log(e);
+        ILanguageToolBridge bridge = LanguageToolWrapper.getBridge();
+        if (bridge != null) {
+            return bridge.getCheckResults(sourceEntry.getSrcText(), tmxEntry.translation).stream()
+                    .map(match -> new LanguageToolIssue(sourceEntry, tmxEntry.translation, match))
+                    .collect(Collectors.toList());
+        } else {
+            return Collections.emptyList();
         }
-        return Collections.emptyList();
     }
 
     @Override

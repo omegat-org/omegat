@@ -370,6 +370,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
     private Set<String> disabledCategories, disabledRuleIds, enabledRuleIds;
     private final static String NEW_RULE_PATTERN = "^[A-Za-z_.]+$";
     private String targetLanguageCode;
+    private boolean userDidConfirm = false;
 
     public LanguageToolConfigurationDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -675,6 +676,10 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         return treeModel;
     }
 
+    public boolean userDidConfirm() {
+        return userDidConfirm;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -872,6 +877,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         savePreferences();
+        userDidConfirm = true;
         doClose();
     }//GEN-LAST:event_okButtonActionPerformed
 

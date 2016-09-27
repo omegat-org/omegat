@@ -368,7 +368,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
     private final JFileChooser fileChooser = new JFileChooser();
     private BridgeType selectedBridgeType;
     private Set<String> disabledCategories, disabledRuleIds, enabledRuleIds;
-    private final static String NEW_RULE_PATTERN = "^[A-Za-z_\\.]+$";
+    private final static String NEW_RULE_PATTERN = "^[A-Za-z_.]+$";
     private String targetLanguageCode;
 
     public LanguageToolConfigurationDialog(java.awt.Frame parent, boolean modal) {

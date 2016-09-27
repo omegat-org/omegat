@@ -41,7 +41,7 @@ import org.languagetool.rules.bitext.BitextRule;
 import org.languagetool.tools.Tools;
 import org.omegat.util.Log;
 
-public class LanguageToolNativeBridge implements ILanguageToolBridge {
+public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
 
     private final Language sourceLtLang;
     private final Language targetLtLang;
@@ -94,7 +94,7 @@ public class LanguageToolNativeBridge implements ILanguageToolBridge {
     }
 
     @Override
-    public List<LanguageToolResult> getCheckResults(String sourceText, String translationText) throws Exception {
+    protected List<LanguageToolResult> getCheckResultsImpl(String sourceText, String translationText) throws Exception {
         return getRuleMatches(sourceText, translationText).stream().map(m -> new LanguageToolResult(m.getMessage(),
                 m.getFromPos(), m.getToPos(), m.getRule().getId(), m.getRule().getDescription()))
                 .collect(Collectors.toList());

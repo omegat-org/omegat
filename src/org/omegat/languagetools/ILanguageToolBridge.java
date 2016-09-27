@@ -48,8 +48,6 @@ public interface ILanguageToolBridge {
      * @param sourceText
      * @param translationText
      * @return List of results
-     * @throws java.lang.Exception
      */
-    public List<LanguageToolResult> getCheckResults(String sourceText, String translationText)
-        throws Exception;
+    public List<LanguageToolResult> getCheckResults(String sourceText, String translationText);
 }

@@ -48,7 +48,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
 
-public class LanguageToolNetworkBridge implements ILanguageToolBridge {
+public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
 
     /* Constants */
     private final static String URL_PATH = "/v2/check";
@@ -197,7 +197,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<LanguageToolResult> getCheckResults(String sourceText, String translationText) throws Exception {
+    protected List<LanguageToolResult> getCheckResultsImpl(String sourceText, String translationText) throws Exception {
 
         URL url = new URL(serverUrl);
         URLConnection conn = url.openConnection();

@@ -706,3 +706,9 @@ def getUpdateSuffix(String update) {
     }
     return "_${update}"
 }
+
+eclipse {
+    classpath {
+        plusConfigurations << configurations.runtime
+    }
+}

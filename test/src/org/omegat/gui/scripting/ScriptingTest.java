@@ -29,9 +29,12 @@ import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.nio.file.Files;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.script.Compilable;
 import javax.script.ScriptEngine;
+import javax.script.ScriptEngineFactory;
 
 import org.apache.commons.io.FilenameUtils;
 import org.omegat.core.TestCore;
@@ -82,5 +85,25 @@ public class ScriptingTest extends TestCore {
                 }
             }
         }
+    }
+
+    /**
+     * Check that engines for OmegaT built-in scripting languages are available.
+     * Currently those are:
+     * <ul>
+     * <li>JavaScript
+     * <li>Groovy
+     * </ul>
+     * This is more a check on the test classpath than anything else
+     * ({@link #testCompileScripts()} won't indicate if Groovy goes missing, for
+     * instance), though presumably if an engine is available on the test
+     * runtime classpath then it will be available in the runtime classpath as
+     * well.
+     */
+    public void testAvailableEngines() {
+        List<String> extensions = ScriptRunner.MANAGER.getEngineFactories().stream()
+                .map(ScriptEngineFactory::getExtensions).flatMap(List::stream).collect(Collectors.toList());
+        assertTrue(extensions.contains("js"));
+        assertTrue(extensions.contains("groovy"));
     }
 }

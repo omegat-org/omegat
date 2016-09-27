@@ -96,7 +96,7 @@ public class FalseFriendsTest extends TestCore {
             }
 
             public boolean isProjectLoaded() {
-                return false;
+                return true;
             }
 
             public boolean isOrphaned(EntryKey entry) {

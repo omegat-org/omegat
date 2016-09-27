@@ -158,9 +158,11 @@ public class LanguageToolWrapper {
         if (BRIDGE != null) {
             BRIDGE.stop();
         }
-        Language sourceLang = Core.getProject().getProjectProperties().getSourceLanguage();
-        Language targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
-        BRIDGE = createBridgeFromPrefs(sourceLang, targetLang);
+        if (Core.getProject().isProjectLoaded()) {
+            Language sourceLang = Core.getProject().getProjectProperties().getSourceLanguage();
+            Language targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
+            BRIDGE = createBridgeFromPrefs(sourceLang, targetLang);
+        }
     }
 
     /**

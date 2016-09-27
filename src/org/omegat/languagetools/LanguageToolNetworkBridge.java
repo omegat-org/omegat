@@ -201,6 +201,7 @@ public class LanguageToolNetworkBridge implements ILanguageToolBridge {
 
         URL url = new URL(serverUrl);
         URLConnection conn = url.openConnection();
+        conn.setRequestProperty("User-Agent", OStrings.getNameAndVersion());
         conn.setDoOutput(true);
         try (OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream())) {
             writer.write(buildPostData(sourceLang.toString(), targetLang.toString(),

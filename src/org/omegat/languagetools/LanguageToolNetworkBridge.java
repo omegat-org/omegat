@@ -35,6 +35,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -273,6 +274,13 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
      * Try to talk with LT server and return result
      */
     static boolean testServer(String testUrl) {
+        if (testUrl.trim().toLowerCase(Locale.ENGLISH).startsWith("https://languagetool.org/api/v2/check")) {
+            // Blacklist the official LanguageTool public API specifically
+            // because this is what users are most likely to try, but they ask
+            // not to send automated requests:
+            // http://wiki.languagetool.org/public-http-api
+            return false;
+        }
         try {
             URL url = new URL(testUrl);
             URLConnection conn = url.openConnection();

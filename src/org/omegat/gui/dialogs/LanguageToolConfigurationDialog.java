@@ -74,6 +74,7 @@ import org.omegat.languagetools.LanguageToolPrefs;
 import org.omegat.languagetools.LanguageToolWrapper;
 import org.omegat.languagetools.LanguageToolWrapper.BridgeType;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.StaticUIUtils;
@@ -370,20 +371,22 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
     private final static String NEW_RULE_PATTERN = "^[A-Za-z_\\.]+$";
     private String targetLanguageCode;
 
+    public LanguageToolConfigurationDialog(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initCommon();
+        loadPreferences();
+        disableRulesUI(OStrings.getString("GUI_LANGUAGETOOL_RULES_UNAVAILABLE_NO_PROJECT"));
+    }
+
     /**
      * Creates new form LanguageToolConfigurationDialog
      */
     public LanguageToolConfigurationDialog(java.awt.Frame parent, boolean modal, Language sourceLang,
             Language targetLang) {
         super(parent, modal);
-        StaticUIUtils.setEscapeClosable(this);
-        initComponents();
-        getRootPane().setDefaultButton(okButton);
-        bridgeNativeRadioButton.setText(
-                StringUtil.format(OStrings.getString("GUI_LANGUAGETOOL_NATIVE_BRIDGE"), JLanguageTool.VERSION));
+        initCommon();
 
-        setMinimumSize(new Dimension(500, 350));
-        setLocationRelativeTo(parent);
+        rulesMessagePanel.setVisible(false);
 
         targetLanguageCode = targetLang.getLanguageCode();
         loadPreferences();
@@ -391,13 +394,19 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         // Load rule tree
         Optional<org.languagetool.Language> targetLtLang = getLTLanguage(targetLang);
         Optional<org.languagetool.Language> sourceLtLang = getLTLanguage(sourceLang);
+
+        if (!targetLtLang.isPresent()) {
+            disableRulesUI(OStrings.getString("GUI_LANGUAGETOOL_RULES_UNAVAILABLE"));
+            return;
+        }
+
         JLanguageTool ltInstance;
         try {
             ltInstance = new JLanguageTool(targetLtLang.get());
         } catch (Throwable e) {
             // Disable tree and return if instance couldn't be gotten
-            ((DefaultTreeModel) rulesTree.getModel()).setRoot(null);
-            rulesTree.setEnabled(false);
+            disableRulesUI(OStrings.getString("GUI_LANGUAGETOOL_RULES_UNAVAILABLE_ERROR"));
+            Log.log(e);
             return;
         }
         
@@ -408,7 +417,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
             try {
                 rules.addAll(Tools.getBitextRules(srcLtLang, targetLtLang.get()));
             } catch (IOException | ParserConfigurationException | SAXException e) {
-                // Do nothing
+                Log.log(e);
             }
         });
 
@@ -434,6 +443,25 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         TreeListener.install(rulesTree);
 
         updateButtonState();
+    }
+
+    final private void initCommon() {
+        StaticUIUtils.setEscapeClosable(this);
+        initComponents();
+        getRootPane().setDefaultButton(okButton);
+        bridgeNativeRadioButton.setText(
+                StringUtil.format(OStrings.getString("GUI_LANGUAGETOOL_NATIVE_BRIDGE"), JLanguageTool.VERSION));
+        setMinimumSize(new Dimension(500, 350));
+        setLocationRelativeTo(getParent());
+    }
+
+    final private void disableRulesUI(String message) {
+        rulesMessagePanel.setVisible(true);
+        rulesMessageLabel.setText(message);
+        rulesScrollPane.setVisible(false);
+        rulesButtonsPanel.setVisible(false);
+        pack();
+        setLocationRelativeTo(getParent());
     }
 
     void updateButtonState() {
@@ -490,9 +518,12 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
         urlTextField.setText(LanguageToolPrefs.getRemoteUrl());
         localServerJarPathTextField.setText(LanguageToolPrefs.getLocalServerJarPath());
-        disabledCategories = LanguageToolPrefs.getDisabledCategories(targetLanguageCode);
-        disabledRuleIds = LanguageToolPrefs.getDisabledRules(targetLanguageCode);
-        enabledRuleIds = LanguageToolPrefs.getEnabledRules(targetLanguageCode);
+
+        if (targetLanguageCode != null) {
+            disabledCategories = LanguageToolPrefs.getDisabledCategories(targetLanguageCode);
+            disabledRuleIds = LanguageToolPrefs.getDisabledRules(targetLanguageCode);
+            enabledRuleIds = LanguageToolPrefs.getEnabledRules(targetLanguageCode);
+        }
 
         handleBridgeTypeChange(type);
     }
@@ -501,11 +532,13 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         LanguageToolPrefs.setBridgeType(selectedBridgeType);
         LanguageToolPrefs.setRemoteUrl(urlTextField.getText());
         LanguageToolPrefs.setLocalServerJarPath(localServerJarPathTextField.getText());
-        LanguageToolPrefs.setDisabledCategories(disabledCategories, targetLanguageCode);
-        LanguageToolPrefs.setDisabledRules(disabledRuleIds, targetLanguageCode);
-        LanguageToolPrefs.setEnabledRules(enabledRuleIds, targetLanguageCode);
 
-        LanguageToolWrapper.setBridgeFromCurrentProject();
+        if (targetLanguageCode != null) {
+            LanguageToolPrefs.setDisabledCategories(disabledCategories, targetLanguageCode);
+            LanguageToolPrefs.setDisabledRules(disabledRuleIds, targetLanguageCode);
+            LanguageToolPrefs.setEnabledRules(enabledRuleIds, targetLanguageCode);
+            LanguageToolWrapper.setBridgeFromCurrentProject();
+        }
     }
 
     private DefaultMutableTreeNode createTree(List<Rule> rules) {
@@ -667,6 +700,8 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         localServerJarPathTextField = new javax.swing.JTextField();
         directoryChooseButton = new javax.swing.JButton();
         rulesPanel = new javax.swing.JPanel();
+        rulesMessagePanel = new javax.swing.JPanel();
+        rulesMessageLabel = new javax.swing.JLabel();
         rulesScrollPane = new javax.swing.JScrollPane();
         rulesTree = new javax.swing.JTree();
         rulesButtonsPanel = new javax.swing.JPanel();
@@ -763,6 +798,14 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
 
         rulesPanel.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 5, 5), javax.swing.BorderFactory.createTitledBorder(OStrings.getString("GUI_LANGUAGETOOL_RULES")))); // NOI18N
         rulesPanel.setLayout(new java.awt.BorderLayout());
+
+        rulesMessagePanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        rulesMessagePanel.setLayout(new java.awt.BorderLayout());
+
+        rulesMessageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rulesMessagePanel.add(rulesMessageLabel, java.awt.BorderLayout.CENTER);
+
+        rulesPanel.add(rulesMessagePanel, java.awt.BorderLayout.NORTH);
 
         rulesTree.setShowsRootHandles(true);
         rulesScrollPane.setViewportView(rulesTree);
@@ -938,6 +981,8 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
     private javax.swing.JButton okButton;
     private javax.swing.JPanel remotePanel;
     private javax.swing.JPanel rulesButtonsPanel;
+    private javax.swing.JLabel rulesMessageLabel;
+    private javax.swing.JPanel rulesMessagePanel;
     private javax.swing.JPanel rulesPanel;
     private javax.swing.JScrollPane rulesScrollPane;
     private javax.swing.JTree rulesTree;

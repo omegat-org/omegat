@@ -266,17 +266,18 @@ public class ProjectPropertiesDialog extends JDialog {
             }
         }
 
-        m_sourceLocaleField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!m_sourceLocaleField.isEnabled()) return;
-                Object newLang = m_sourceLocaleField.getSelectedItem();
-                if (newLang instanceof String) {
-                    newLang = new Language((String)newLang);
-                }
-                Class<?> newTok = PluginUtils.getTokenizerClassForLanguage((Language)newLang);
-                m_sourceTokenizerField.setSelectedItem(newTok);
-            }});
+        ActionListener sourceLocaleListener = e -> {
+            if (!m_sourceLocaleField.isEnabled()) {
+                return;
+            }
+            Object newLang = m_sourceLocaleField.getSelectedItem();
+            if (newLang instanceof String) {
+                newLang = new Language((String) newLang);
+            }
+            Class<?> newTok = PluginUtils.getTokenizerClassForLanguage((Language) newLang);
+            m_sourceTokenizerField.setSelectedItem(newTok);
+        };
+        m_sourceLocaleField.addActionListener(sourceLocaleListener);
 
         // Target tokenizer label
         JLabel m_targetTokenizerLabel = new JLabel();
@@ -309,22 +310,26 @@ public class ProjectPropertiesDialog extends JDialog {
 
         }
 
-        m_targetLocaleField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!m_targetLocaleField.isEnabled()) return;
-                Object newLang = m_targetLocaleField.getSelectedItem();
-                if (newLang instanceof String) {
-                    newLang = new Language((String)newLang);
-                }
-                Class<?> newTok = PluginUtils.getTokenizerClassForLanguage((Language)newLang);
-                m_targetTokenizerField.setSelectedItem(newTok);
-            }});
+        ActionListener targetLocaleListener = e -> {
+            if (!m_targetLocaleField.isEnabled()) {
+                return;
+            }
+            Object newLang = m_targetLocaleField.getSelectedItem();
+            if (newLang instanceof String) {
+                newLang = new Language((String) newLang);
+            }
+            Class<?> newTok = PluginUtils.getTokenizerClassForLanguage((Language) newLang);
+            m_targetTokenizerField.setSelectedItem(newTok);
+        };
+        m_targetLocaleField.addActionListener(targetLocaleListener);
 
-        // Tokenizer behavior box
-        Box bB = Box.createVerticalBox();
-        localesBox.add(bB);
         centerBox.add(localesBox);
+
+        if (dialogTypeValue == Mode.NEW_PROJECT) {
+            // Infer appropriate tokenizers from source languages
+            sourceLocaleListener.actionPerformed(null);
+            targetLocaleListener.actionPerformed(null);
+        }
 
         // options
         centerBox.add(Box.createVerticalStrut(5));

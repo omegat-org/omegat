@@ -33,6 +33,7 @@ package org.omegat.gui.dialogs;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -180,6 +181,9 @@ public class ProjectPropertiesDialog extends JDialog {
         m_messageArea.setEditable(false);
         m_messageArea.setOpaque(false);
         m_messageArea.setFont(new Label().getFont());
+        m_messageArea.setLineWrap(true);
+        m_messageArea.setWrapStyleWord(true);
+        m_messageArea.setBorder(new EmptyBorder(5, 5, 5, 5));
         Box bMes = Box.createHorizontalBox();
         bMes.setBorder(emptyBorder);
         bMes.add(m_messageArea);
@@ -740,12 +744,18 @@ public class ProjectPropertiesDialog extends JDialog {
             break;
         }
 
-        updateUIText(m_messageArea);
-
+        // Pack once to get the width...
         pack();
-
+        updateUIText(m_messageArea);
+        // Then again to expand the height to accomodate the message.
+        // This is needed because the height isn't known until the
+        // amount of linewrapping is known.
+        pack();
+        // The result is still slightly too small on some LAFs, so enlarge
+        // slightly with magic numbers.
         setSize(9 * getWidth() / 8, getHeight() + 10);
         setResizable(true);
+
         StaticUIUtils.fitInScreen(this);
         setLocationRelativeTo(parent);
     }
@@ -1080,9 +1090,9 @@ public class ProjectPropertiesDialog extends JDialog {
         // to fix bug 1476591 the project root is created before everything else
         // and if the new project is cancelled, the project root still exists,
         // so it must be deleted
-        if (dialogType == Mode.NEW_PROJECT)
+        if (dialogType == Mode.NEW_PROJECT) {
             new File(projectProperties.getProjectRoot()).delete();
-
+        }
         m_dialogCancelled = true;
         setVisible(false);
     }
@@ -1096,6 +1106,7 @@ public class ProjectPropertiesDialog extends JDialog {
         case RESOLVE_DIRS:
             setTitle(OStrings.getString("PP_OPEN_PROJ"));
             m_messageArea.setText(OStrings.getString("PP_MESSAGE_BADPROJ"));
+            m_messageArea.setFont(m_messageArea.getFont().deriveFont(Font.BOLD));
             break;
         case EDIT_PROJECT:
             setTitle(OStrings.getString("PP_EDIT_PROJECT"));

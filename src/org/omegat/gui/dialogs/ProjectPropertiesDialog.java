@@ -710,31 +710,31 @@ public class ProjectPropertiesDialog extends JDialog {
 
             // marking missing folder RED
             File f = new File(m_srcRootField.getText());
-            if (!f.exists() || !f.isDirectory())
+            if (!f.isDirectory()) {
                 m_srcRootField.setForeground(Color.RED);
-
-            f = new File(m_locRootField.getText());
-            if (!f.exists() || !f.isDirectory())
-                m_locRootField.setForeground(Color.RED);
-
-            f = new File(m_glosRootField.getText());
-            if (!f.exists() || !f.isDirectory())
-                m_glosRootField.setForeground(Color.RED);
-
-            f = new File(m_writeableGlosField.getText());
-            String wGlos = f.getParent(); // Remove the file name
-            if (!wGlos.endsWith(File.separator)) {
-                wGlos += File.separator;
             }
-            f = new File(wGlos);
+            f = new File(m_locRootField.getText());
+            if (!f.isDirectory()) {
+                m_locRootField.setForeground(Color.RED);
+            }
+            f = new File(m_glosRootField.getText());
+            if (!f.isDirectory()) {
+                m_glosRootField.setForeground(Color.RED);
+            }
+            f = new File(m_writeableGlosField.getText());
+            File wGlos = f.getParentFile(); // Remove the file name
             // The writeable glossary must be in in the /glossary folder
-            if (!f.exists() || !f.isDirectory() || !wGlos.contains(m_glosRootField.getText()))
+            if (!wGlos.isDirectory() || !wGlos.equals(new File(m_glosRootField.getText()))) {
                 m_writeableGlosField.setForeground(Color.RED);  
-
+            }
             f = new File(m_tmRootField.getText());
-            if (!f.exists() || !f.isDirectory())
+            if (!f.isDirectory()) {
                 m_tmRootField.setForeground(Color.RED);
-
+            }
+            f = new File(m_dictRootField.getText());
+            if (!f.isDirectory()) {
+                m_dictRootField.setForeground(Color.RED);
+            }
             break;
         default:
             break;

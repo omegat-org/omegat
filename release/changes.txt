@@ -2,7 +2,7 @@
  OmegaT 4.0.1
 ----------------------------------------------------------------------
   4 Enhancements
-  1 Bug fix
+  2 Bug fixes
   1 Localisation update
 ----------------------------------------------------------------------
 4.0.1 vs 4.0.0 update 1
@@ -26,6 +26,9 @@
 
   - Relative project paths not normalized
   https://sourceforge.net/p/omegat/bugs/837/
+
+  - Tokenizers were not automatically switched when
+languages were set
 
   Localisation Updates:
 

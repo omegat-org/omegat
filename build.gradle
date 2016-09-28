@@ -91,7 +91,7 @@ dependencies {
         compile 'org.omegat:htmlparser:1.5'
         compile 'org.omegat:gnudiff4j:1.15'
         compile 'org.omegat:lib-mnemonics:1.0'
-        compile 'org.omegat:jmyspell:1.0.0-beta-2'
+        compile 'org.omegat:jmyspell-core:1.0.0-beta-2'
 
         // LanguageTool
         compile "org.languagetool:languagetool-core:${languageToolVersion}"

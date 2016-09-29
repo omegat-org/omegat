@@ -210,6 +210,7 @@ Les personnes qui ont contribué incluent :
 (ordre alphabétique)
 
 Contributions au code :
+  Lev Abashkin
   Zoltan Bartko
   Volker Berlin
   Didier Briel
@@ -276,8 +277,6 @@ OmegaT utilise les bibliothèques suivantes :
   Diff (GPL)
   trilead-ssh2-1.0.0-build220 (licence Trilead SSH)
   lucene-*.jar (licence Apache 2.0)
-  LuceneEnglishTokenizer) utilisent des mots non significatifs d'Okapi
-(http://okapi.sourceforge.net) (licence LGPL)
   commons-*.jar (licence Apache 2.0)
   LanguageTool (licence LGPL et autres)
   PDFBox (licence Apache 2.0)

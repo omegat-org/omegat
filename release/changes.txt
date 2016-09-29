@@ -27,8 +27,8 @@
   - Relative project paths not normalized
   https://sourceforge.net/p/omegat/bugs/837/
 
-  - Tokenizers were not automatically switched when
-languages were set
+  - Tokenizers did not automatically match languages when creating a
+new project
 
   Localisation Updates:
 

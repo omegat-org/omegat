@@ -46,6 +46,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.Set;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
@@ -70,6 +71,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
+import javax.swing.ListModel;
 import javax.swing.RowFilter;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
@@ -142,10 +144,11 @@ public class IssuesPanelController implements IIssues {
     
     String filePattern;
     String instructions;
-    int jumpToEntry;
 
     int mouseoverCol = -1;
     int mouseoverRow = -1;
+    int selectedEntry = -1;
+    String selectedType = null;
 
     IssueLoader loader;
 
@@ -178,7 +181,7 @@ public class IssuesPanelController implements IIssues {
                     JCheckBoxMenuItem item = new JCheckBoxMenuItem(label);
                     item.addActionListener(e -> {
                         IssueProviders.setProviderEnabled(provider.getId(), item.isSelected());
-                        refreshData();
+                        refreshData(selectedEntry, selectedType);
                     });
                     item.setSelected(!disabledProviders.contains(provider.getId()));
                     menu.add(item);
@@ -224,6 +227,7 @@ public class IssuesPanelController implements IIssues {
         panel.table.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 viewSelectedIssueDetail();
+                selectedEntry = getSelectedIssue().map(IIssue::getSegmentNumber).orElse(-1);
             }
         });
 
@@ -296,12 +300,13 @@ public class IssuesPanelController implements IIssues {
         panel.typeList.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 updateFilter();
+                selectedType = getSelectedType().orElse(null);
             }
         });
 
         panel.jumpButton.addActionListener(e -> jumpToSelectedIssue());
 
-        panel.reloadButton.addActionListener(e -> refreshData());
+        panel.reloadButton.addActionListener(e -> refreshData(selectedEntry, selectedType));
 
         panel.showAllButton.addActionListener(e -> showAll());
 
@@ -313,14 +318,13 @@ public class IssuesPanelController implements IIssues {
                 SwingUtilities.invokeLater(() -> {
                     filePattern = ALL_FILES_PATTERN;
                     instructions = NO_INSTRUCTIONS;
-                    jumpToEntry = -1;
                     reset();
                     frame.setVisible(false);
                 });
                 break;
             case MODIFIED:
                 if (frame.isVisible()) {
-                    SwingUtilities.invokeLater(this::refreshData);
+                    SwingUtilities.invokeLater(() -> refreshData(selectedEntry, selectedType));
                 }
                 break;
             default:
@@ -403,6 +407,22 @@ public class IssuesPanelController implements IIssues {
         return Optional.of(imodel.getIssueAt(realSelection));
     }
 
+    Optional<String> getSelectedType() {
+        return getTypeAtRow(panel.typeList.getSelectedIndex());
+    }
+
+    Optional<String> getTypeAtRow(int row) {
+        if (row < 0) {
+            return Optional.empty();
+        }
+        ListModel<String> model = panel.typeList.getModel();
+        if (!(model instanceof TypeListModel)) {
+            return Optional.empty();
+        }
+        TypeListModel tModel = (TypeListModel) model;
+        return Optional.of(tModel.getTypeAt(row));
+    }
+
     void showPopupMenu(Component source, Point p, IIssue issue) {
         List<? extends JMenuItem> items = issue.getMenuComponents();
         if (items.isEmpty()) {
@@ -443,9 +463,8 @@ public class IssuesPanelController implements IIssues {
     private void show(String filePattern, String instructions, int jumpToEntry) {
         this.filePattern = filePattern;
         this.instructions = instructions;
-        this.jumpToEntry = jumpToEntry;
         init();
-        SwingUtilities.invokeLater(this::refreshData);
+        SwingUtilities.invokeLater(() -> refreshData(jumpToEntry, null));
     }
 
     void reset() {
@@ -464,7 +483,7 @@ public class IssuesPanelController implements IIssues {
         panel.instructionsTextArea.setText(instructions);
     }
 
-    synchronized void refreshData() {
+    synchronized void refreshData(int jumpToEntry, String jumpToType) {
         reset();
         if (!frame.isVisible()) {
             // Don't call setVisible if already visible, because the window will
@@ -476,7 +495,7 @@ public class IssuesPanelController implements IIssues {
         panel.progressBar.setMaximum(Core.getProject().getAllEntries().size());
         panel.progressBar.setVisible(true);
         panel.progressBar.setEnabled(true);
-        loader = new IssueLoader();
+        loader = new IssueLoader(jumpToEntry, jumpToType);
         loader.execute();
     }
 
@@ -497,7 +516,15 @@ public class IssuesPanelController implements IIssues {
 
     class IssueLoader extends SwingWorker<List<IIssue>, Integer> {
 
+        private final int jumpToEntry;
+        private final String jumpToType;
+
         private int progress = 0;
+
+        public IssueLoader(int jumpToEntry, String jumpToType) {
+            this.jumpToEntry = jumpToEntry;
+            this.jumpToType = jumpToType;
+        }
 
         @Override
         protected List<IIssue> doInBackground() throws Exception {
@@ -566,9 +593,13 @@ public class IssuesPanelController implements IIssues {
             }
             colSizer.reset();
             colSizer.adjustTableColumns();
+            if (jumpToType != null) {
+                ((TypeListModel) panel.typeList.getModel()).indexOfType(jumpToType)
+                        .ifPresent(panel.typeList::setSelectedIndex);
+            }
             if (jumpToEntry >= 0) {
                 IntStream.range(0, panel.table.getRowCount())
-                        .filter(row -> (int) panel.table.getValueAt(row, IssueColumn.SEG_NUM.index) == jumpToEntry)
+                        .filter(row -> (int) panel.table.getValueAt(row, IssueColumn.SEG_NUM.index) >= jumpToEntry)
                         .findFirst().ifPresent(jump -> panel.table.changeSelection(jump, 0, false, false));
             }
             panel.table.requestFocusInWindow();
@@ -735,8 +766,7 @@ public class IssuesPanelController implements IIssues {
             List<Map.Entry<String, Long>> result = new ArrayList<>();
             result.add(new AbstractMap.SimpleImmutableEntry<String, Long>(ALL_TYPES,
                     (long) issues.size()));
-            result.addAll(counts.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getKey))
-                    .collect(Collectors.toList()));
+            counts.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getKey)).forEach(result::add);
             return result;
         }
 
@@ -758,6 +788,10 @@ public class IssuesPanelController implements IIssues {
 
         long getCountAt(int index) {
             return types.get(index).getValue();
+        }
+
+        OptionalInt indexOfType(String type) {
+            return IntStream.range(0, types.size()).filter(i -> types.get(i).getKey().equals(type)).findFirst();
         }
     }
 }

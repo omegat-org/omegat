@@ -95,8 +95,9 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
 
     @Override
     protected List<LanguageToolResult> getCheckResultsImpl(String sourceText, String translationText) throws Exception {
-        return getRuleMatches(sourceText, translationText).stream()
-                .map(m -> new LanguageToolResult(m.getMessage(), m.getFromPos(), m.getToPos())).collect(Collectors.toList());
+        return getRuleMatches(sourceText, translationText).stream().map(m -> new LanguageToolResult(m.getMessage(),
+                m.getFromPos(), m.getToPos(), m.getRule().getId(), m.getRule().getDescription()))
+                .collect(Collectors.toList());
     }
 
     List<RuleMatch> getRuleMatches(String sourceText, String translationText) throws Exception {

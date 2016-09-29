@@ -268,6 +268,7 @@ Previous contributors include:
 (alphabetical order)
 
 Code has been contributed by
+  Lev Abashkin
   Zoltan Bartko
   Volker Berlin
   Didier Briel

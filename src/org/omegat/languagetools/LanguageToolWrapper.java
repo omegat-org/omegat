@@ -5,6 +5,7 @@
 
  Copyright (C) 2010-2013 Alex Buloichik
                2015 Aaron Madlon-Kay
+               2016 Lev Abashkin
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,33 +27,20 @@
 
 package org.omegat.languagetools;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.swing.text.Highlighter.HighlightPainter;
 
-import org.languagetool.JLanguageTool;
-import org.languagetool.Language;
-import org.languagetool.Languages;
-import org.languagetool.rules.Rule;
-import org.languagetool.rules.RuleMatch;
-import org.languagetool.rules.bitext.BitextRule;
-import org.languagetool.rules.bitext.DifferentLengthRule;
-import org.languagetool.rules.bitext.DifferentPunctuationRule;
-import org.languagetool.rules.bitext.SameTranslationRule;
-import org.languagetool.rules.spelling.SpellingCheckRule;
-import org.languagetool.tools.Tools;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.issues.IssueProviders;
+import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.Styles;
@@ -66,133 +54,147 @@ import org.omegat.util.gui.Styles;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
+ * @author Lev Abashkin
  */
-public class LanguageToolWrapper implements IMarker, IProjectEventListener {
-    protected static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
+public class LanguageToolWrapper {
 
-    private ThreadLocal<JLanguageTool> sourceLt;
-    private ThreadLocal<JLanguageTool> targetLt;
-    private List<BitextRule> bRules;
-
-    public LanguageToolWrapper() throws Exception {
-        CoreEvents.registerProjectChangeListener(this);
-        IssueProviders.addIssueProvider(new LanguageToolIssueProvider(this));
+    public enum BridgeType {
+        NATIVE, REMOTE_URL, LOCAL_INSTALLATION
     }
 
-    public boolean isEnabled() {
-        return Core.getEditor().getSettings().isMarkLanguageChecker();
+    private static volatile ILanguageToolBridge BRIDGE;
+
+    private LanguageToolWrapper() {
     }
 
-    public synchronized void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-        switch (eventType) {
-        case CREATE:
-        case LOAD:
-            Optional<Language> sourceLang = getLTLanguage(Core.getProject().getProjectProperties().getSourceLanguage());
-            Optional<Language> targetLang = getLTLanguage(Core.getProject().getProjectProperties().getTargetLanguage());
-            sourceLt = ThreadLocal
-                    .withInitial(() -> sourceLang.flatMap(LanguageToolWrapper::getLanguageToolInstance).orElse(null));
-            targetLt = ThreadLocal
-                    .withInitial(() -> targetLang.flatMap(LanguageToolWrapper::getLanguageToolInstance).orElse(null));
-            sourceLang.ifPresent(s -> targetLang.ifPresent(t -> bRules = getBiTextRules(s, t)));
-            break;
-        case CLOSE:
-            sourceLt = null;
-            targetLt = null;
-            bRules = null;
-            break;
-        default:
-            // Nothing
-        }
+    public static void init() {
+
+        Core.registerMarker(new LanguageToolMarker());
+        IssueProviders.addIssueProvider(new LanguageToolIssueProvider());
+        
+        CoreEvents.registerProjectChangeListener(e -> {
+            switch (e) {
+                case CREATE:
+                case LOAD:
+                    setBridgeFromCurrentProject();
+                    break;
+                case CLOSE:
+                    BRIDGE.stop();
+                    BRIDGE = null;
+                    break;
+                default:
+                    // Nothing
+                }
+        });
+
+        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
+            @Override
+            public synchronized void onApplicationShutdown() {
+                if (BRIDGE != null) {
+                    BRIDGE.stop();
+                }
+            }
+
+            @Override
+            public synchronized void onApplicationStartup() {
+            }
+        });
     }
 
-    public static Optional<JLanguageTool> getLanguageToolInstance(Language ltLang) {
-        try {
-            JLanguageTool result = new JLanguageTool(ltLang);
-            result.getAllRules().stream().filter(rule -> rule instanceof SpellingCheckRule).map(Rule::getId)
-                    .forEach(result::disableRule);
-            return Optional.of(result);
-        } catch (Exception ex) {
-            Log.log(ex);
-        }
-
-        return Optional.empty();
+    static ILanguageToolBridge getBridge() {
+        return BRIDGE;
     }
 
-    @Override
-    public synchronized List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
-            boolean isActive) throws Exception {
-        if (translationText == null || !isEnabled()) {
-            return null;
+    static class LanguageToolMarker implements IMarker {
+        static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(
+                Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
+
+        @Override
+        public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
+                boolean isActive) throws Exception {
+
+            if (translationText == null || !isEnabled()) {
+                // Return when disabled or translation text is empty
+                return null;
+            }
+
+            // LanguageTool claims to expect text in NFKC, but that actually
+            // causes problems for some rules:
+            // https://github.com/languagetool-org/languagetool/issues/379
+            // From the discussion it seems the intent behind NFKC was to break
+            // up multi-letter codepoints such as U+FB00 LATIN SMALL LIGATURE
+            // FF. These are unlikely to be found in user input in our case, so
+            // instead we will use NFC. We already normalize our source to NFC
+            // when loading, so we only need to handle the translation here:
+            translationText = StringUtil.normalizeUnicode(translationText);
+
+            // sourceText represents the displayed source text: it may be null
+            // (not displayed) or have extra bidi characters for display. Since
+            // we need it for linguistic comparison here, if it's null then we
+            // pull from the SourceTextEntry, which is guaranteed not to be
+            // null. It doesn't need to be normalized because OmegaT normalizes
+            // all source text to NFC on load.
+            if (sourceText == null) {
+                sourceText = ste.getSrcText();
+            }
+
+            return BRIDGE.getCheckResults(sourceText, translationText).stream().map(match -> {
+                Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, match.start, match.end);
+                m.toolTipText = match.message;
+                m.painter = PAINTER;
+                return m;
+            }).collect(Collectors.toList());
         }
 
-        // sourceText represents the displayed source text: it may be null (not
-        // displayed) or have extra bidi characters for display. Since we need
-        // it for linguistic comparison here, if it's null then we pull from the
-        // SourceTextEntry, which is guaranteed not to be null.
-        // It doesn't need to be normalized because OmegaT normalizes all source
-        // text to NFC on load.
-        if (sourceText == null) {
-            sourceText = ste.getSrcText();
-        }
-
-        return getRuleMatches(sourceText, translationText).stream().map(match -> {
-            Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, match.getFromPos(), match.getToPos());
-            m.toolTipText = match.getMessage();
-            m.painter = PAINTER;
-            return m;
-        }).collect(Collectors.toList());
-    }
-
-    List<RuleMatch> getRuleMatches(String sourceText, String translationText) throws Exception {
-        if (targetLt == null || sourceLt == null) {
-            throw new NotLoadedException();
-        }
-        JLanguageTool ltTarget = targetLt.get();
-        if (ltTarget == null) {
-            // LT doesn't know anything about target language
-            return Collections.emptyList();
-        }
-        JLanguageTool ltSource = sourceLt.get();
-
-        // LanguageTool claims to expect text in NFKC, but that actually causes problems for some rules:
-        // https://github.com/languagetool-org/languagetool/issues/379
-        // From the discussion it seems the intent behind NFKC was to break up multi-letter codepoints such as
-        // U+FB00 LATIN SMALL LIGATURE FF. These are unlikely to be found in user input in our case, so
-        // instead we will use NFC. We already normalize our source to NFC when loading, so we only need to
-        // handle the translation here:
-        translationText = StringUtil.normalizeUnicode(translationText);
-
-        if (ltSource != null && bRules != null) {
-            // LT knows about source and target languages both and has bitext rules.
-            return Tools.checkBitext(sourceText, translationText, ltSource, ltTarget, bRules);
-        } else {
-            // LT knows about target language only
-            return ltTarget.check(translationText);
+        protected boolean isEnabled() {
+            return Core.getEditor().getSettings().isMarkLanguageChecker();
         }
     }
-
-    public static Optional<Language> getLTLanguage(org.omegat.util.Language lang) {
-        String omLang = lang.getLanguageCode();
-        return Languages.get().stream().filter(ltLang -> omLang.equalsIgnoreCase(ltLang.getShortName())).findFirst();
-    }
-
-    private static List<Class<?>> LT_BIRULE_BLACKLIST = Arrays.asList(DifferentLengthRule.class,
-            SameTranslationRule.class, DifferentPunctuationRule.class);
 
     /**
-     * Retrieve bitext rules for specified languages, but remove some rules, which not required in OmegaT
+     * Set this instance's LanguageTool bridge based on the current project.
      */
-    public static List<BitextRule> getBiTextRules(Language sourceLang, Language targetLang) {
-        try {
-            return Tools.getBitextRules(sourceLang, targetLang).stream()
-                    .filter(rule -> !LT_BIRULE_BLACKLIST.contains(rule.getClass())).collect(Collectors.toList());
-        } catch (Exception ex) {
-            // bitext rules can be not defined
-            return null;
+    public static void setBridgeFromCurrentProject() {
+        if (BRIDGE != null) {
+            BRIDGE.stop();
+        }
+        if (Core.getProject().isProjectLoaded()) {
+            Language sourceLang = Core.getProject().getProjectProperties().getSourceLanguage();
+            Language targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
+            BRIDGE = createBridgeFromPrefs(sourceLang, targetLang);
         }
     }
 
-    @SuppressWarnings("serial")
-    public static class NotLoadedException extends RuntimeException {
+    /**
+     * Create LanguageTool bridge based on user preferences. Falls back to
+     * {@link BridgeType#NATIVE} if non-native bridges fail to initialize (bad
+     * config, etc.).
+     */
+    static ILanguageToolBridge createBridgeFromPrefs(Language sourceLang, Language targetLang) {
+        // If configured try to create network bridge and fallback to native on
+        // fail
+        ILanguageToolBridge bridge;
+        BridgeType type = LanguageToolPrefs.getBridgeType();
+        try {
+            switch (type) {
+            case LOCAL_INSTALLATION:
+                String localServerJarPath = LanguageToolPrefs.getLocalServerJarPath();
+                bridge = new LanguageToolNetworkBridge(sourceLang, targetLang, localServerJarPath, 8081);
+                break;
+            case REMOTE_URL:
+                String remoteUrl = LanguageToolPrefs.getRemoteUrl();
+                bridge = new LanguageToolNetworkBridge(sourceLang, targetLang, remoteUrl);
+                break;
+            case NATIVE:
+            default:
+                bridge = new LanguageToolNativeBridge(sourceLang, targetLang);
+            }
+        } catch (Exception e) {
+            Log.logWarningRB("LT_BAD_CONFIGURATION");
+            bridge = new LanguageToolNativeBridge(sourceLang, targetLang);
+        }
+
+        LanguageToolPrefs.applyRules(bridge, targetLang.getLanguageCode());
+        return bridge;
     }
 }

@@ -35,7 +35,7 @@ import java.awt.BorderLayout as BL
 import java.awt.GridBagConstraints
 import org.omegat.core.Core
 import org.omegat.tokenizer.ITokenizer.StemmingMode
-import org.omegat.languagetools.LanguageToolWrapper
+import org.omegat.languagetools.LanguageToolNativeBridge
 
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
@@ -473,15 +473,15 @@ def interfejs(locationxy = new Point(0, 0), width = 900, height = 550, scrollpos
 }
 
 def getLanguageToolInstance(ltLang) {
-    return LanguageToolWrapper.getLanguageToolInstance(ltLang).orElse(null)
+    return LanguageToolNativeBridge.getLanguageToolInstance(ltLang).orElse(null)
 }
 
 def getLTLanguage(lang) {
-   return LanguageToolWrapper.getLTLanguage(lang).orElse(null)
+   return LanguageToolNativeBridge.getLTLanguage(lang).orElse(null)
 }
 
 def getBiTextRules(Language sourceLang, Language targetLang) {
-    return LanguageToolWrapper.getBiTextRules(sourceLang, targetLang)
+    return LanguageToolNativeBridge.getBiTextRules(sourceLang, targetLang)
 }
 
 def getRuleMatchesForEntry(sourceText, translationText) {

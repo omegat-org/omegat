@@ -247,7 +247,7 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="directoryChooseButtonActionPerformed"/>
                       </Events>
                       <AuxValues>
-                        <AuxValue name="generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+                        <AuxValue name="generateMnemonicsCode" type="java.lang.Boolean" value="true"/>
                       </AuxValues>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

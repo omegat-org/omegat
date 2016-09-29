@@ -786,7 +786,7 @@ public class LanguageToolConfigurationDialog extends javax.swing.JDialog {
         localServerJarPathTextField.setToolTipText("");
         directoryPanel.add(localServerJarPathTextField, java.awt.BorderLayout.CENTER);
 
-        directoryChooseButton.setText(OStrings.getString("GUI_LANGUAGETOOL_CHOOSE_BUTTON")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(directoryChooseButton, OStrings.getString("GUI_LANGUAGETOOL_CHOOSE_BUTTON")); // NOI18N
         directoryChooseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 directoryChooseButtonActionPerformed(evt);

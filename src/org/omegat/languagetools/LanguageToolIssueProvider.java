@@ -27,26 +27,28 @@ package org.omegat.languagetools;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.swing.Icon;
+import javax.swing.JMenuItem;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
-import org.languagetool.rules.RuleMatch;
+import org.omegat.core.Core;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.gui.issues.IIssue;
 import org.omegat.gui.issues.IIssueProvider;
 import org.omegat.gui.issues.IssueDetailSplitPanel;
 import org.omegat.gui.issues.SimpleColorIcon;
-import org.omegat.languagetools.LanguageToolWrapper.NotLoadedException;
-import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.Styles.EditorColor;
 
 /**
@@ -57,23 +59,16 @@ import org.omegat.util.gui.Styles.EditorColor;
  */
 public class LanguageToolIssueProvider implements IIssueProvider {
 
-    private final LanguageToolWrapper wrapper;
-
-    public LanguageToolIssueProvider(LanguageToolWrapper languageToolWrapper) {
-        this.wrapper = languageToolWrapper;
-    }
-
     @Override
     public List<IIssue> getIssues(SourceTextEntry sourceEntry, TMXEntry tmxEntry) {
-        try {
-            return wrapper.getRuleMatches(sourceEntry.getSrcText(), tmxEntry.translation).stream()
+        ILanguageToolBridge bridge = LanguageToolWrapper.getBridge();
+        if (bridge != null) {
+            return bridge.getCheckResults(sourceEntry.getSrcText(), tmxEntry.translation).stream()
                     .map(match -> new LanguageToolIssue(sourceEntry, tmxEntry.translation, match))
                     .collect(Collectors.toList());
-        } catch (NotLoadedException e) {
-        } catch (Exception e) {
-            Log.log(e);
+        } else {
+            return Collections.emptyList();
         }
-        return Collections.emptyList();
     }
 
     @Override
@@ -99,12 +94,12 @@ public class LanguageToolIssueProvider implements IIssueProvider {
 
         private final SourceTextEntry ste;
         private final String targetText;
-        private final RuleMatch match;
+        private final LanguageToolResult result;
 
-        public LanguageToolIssue(SourceTextEntry ste, String targetText, RuleMatch match) {
+        public LanguageToolIssue(SourceTextEntry ste, String targetText, LanguageToolResult result) {
             this.ste = ste;
             this.targetText = targetText;
-            this.match = match;
+            this.result = result;
         }
 
         @Override
@@ -124,7 +119,7 @@ public class LanguageToolIssueProvider implements IIssueProvider {
 
         @Override
         public String getDescription() {
-            return "<html>" + match.getMessage().replace("<suggestion>", "<i>").replace("</suggestion>", "</i>")
+            return "<html>" + result.message.replace("<suggestion>", "<i>").replace("</suggestion>", "</i>")
                     + "</html>";
         }
 
@@ -134,9 +129,30 @@ public class LanguageToolIssueProvider implements IIssueProvider {
             panel.firstTextPane.setText(ste.getSrcText());
             panel.lastTextPane.setText(targetText);
             StyledDocument doc = panel.lastTextPane.getStyledDocument();
-            doc.setCharacterAttributes(match.getFromPos(), match.getToPos() - match.getFromPos(), ERROR_STYLE, false);
+            doc.setCharacterAttributes(result.start, result.end - result.start, ERROR_STYLE, false);
             panel.setMinimumSize(new Dimension(0, panel.firstTextPane.getFont().getSize() * 6));
             return panel;
+        }
+
+        @Override
+        public boolean hasMenuComponents() {
+            return true;
+        }
+
+        @Override
+        public List<? extends JMenuItem> getMenuComponents() {
+            JMenuItem item = new JMenuItem(
+                    StringUtil.format(OStrings.getString("ISSUES_LT_DISABLE_RULE"), result.ruleDescription));
+            IProject project = Core.getProject();
+            item.setEnabled(project.isProjectLoaded());
+            if (project.isProjectLoaded()) {
+                String lang = project.getProjectProperties().getTargetLanguage().getLanguageCode();
+                item.addActionListener(e -> {
+                    LanguageToolPrefs.disableRule(result.ruleId, lang);
+                    LanguageToolPrefs.applyRules(LanguageToolWrapper.getBridge(), lang);
+                });
+            }
+            return Arrays.asList(item);
         }
     }
 }

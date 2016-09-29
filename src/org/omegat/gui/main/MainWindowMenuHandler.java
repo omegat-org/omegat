@@ -71,6 +71,7 @@ import org.omegat.gui.dialogs.ExternalTMXMatchesDialog;
 import org.omegat.gui.dialogs.FontSelectionDialog;
 import org.omegat.gui.dialogs.GlossaryAutoCompleterOptionsDialog;
 import org.omegat.gui.dialogs.GoToSegmentDialog;
+import org.omegat.gui.dialogs.LanguageToolConfigurationDialog;
 import org.omegat.gui.dialogs.LastChangesDialog;
 import org.omegat.gui.dialogs.LogDialog;
 import org.omegat.gui.dialogs.SaveOptionsDialog;
@@ -1016,6 +1017,24 @@ public class MainWindowMenuHandler {
                 sc.initialize();
             }
             Core.getEditor().getSettings().setAutoSpellChecking(isNeedToSpell);
+        }
+    }
+
+    /**
+     * Opens the LanguageTool window
+     */
+    public void optionsLanguageToolMenuItemActionPerformed() {
+        if (Core.getProject().isProjectLoaded()) {
+            LanguageToolConfigurationDialog ld = new LanguageToolConfigurationDialog(mainWindow, true,
+                Core.getProject().getProjectProperties().getSourceLanguage(),
+                Core.getProject().getProjectProperties().getTargetLanguage());
+            ld.setVisible(true);
+            if (ld.userDidConfirm()) {
+                Core.getEditor().refreshView(true);
+            }
+        } else {
+            LanguageToolConfigurationDialog ld = new LanguageToolConfigurationDialog(mainWindow, true);
+            ld.setVisible(true);
         }
     }
 

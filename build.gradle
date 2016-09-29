@@ -61,9 +61,7 @@ configurations {
         // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/813/
         exclude group: 'org.apache.lucene', module: 'lucene-core'
     }
-    testRuntime {
-        exclude group: 'org.languagetool', module: 'language-all'
-    }
+    [testRuntime, testCompile]*.exclude group: 'org.languagetool', module: 'language-all'
 }
 
 def depsProvided = file('lib/provided').directory
@@ -138,6 +136,9 @@ dependencies {
     // Test dependencies
     testCompile 'junit:junit:4.12'
     testCompile 'xmlunit:xmlunit:1.6'
+    testCompile("org.languagetool:languagetool-server:${languageToolVersion}") {
+        exclude group: 'org.slf4j'
+    }
     // LanguageTool unit tests exercise these languages
     ['be', 'en', 'fr'].each {
         testCompile "org.languagetool:language-${it}:${languageToolVersion}"

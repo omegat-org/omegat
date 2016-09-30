@@ -67,7 +67,7 @@ if (sourceLt != null && targetLt != null) {
     bRules = getBiTextRules(sourceLang, targetLang);
 }
 
-checkLanguageTools = true
+checkLanguageTools = false
 nameLanguageTools = res.getString("nameLanguageTools")
 checkLeadSpace = true
 nameLeadSpace = res.getString("nameLeadSpace")

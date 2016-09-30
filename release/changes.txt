@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.1
 ----------------------------------------------------------------------
-  4 Enhancements
+  6 Enhancements
   2 Bug fixes
   1 Localisation update
 ----------------------------------------------------------------------
@@ -17,6 +17,12 @@
 
   - Add UI for checking all translation issues
   https://sourceforge.net/p/omegat/feature-requests/1271/
+
+  - Allow enabling/disabling individual LanguageTool rules
+  https://sourceforge.net/p/omegat/feature-requests/608/
+
+  - Enable use of LanguageTool remote servers or local installations
+  https://sourceforge.net/p/omegat/feature-requests/1273/
 
   Other changes:
 

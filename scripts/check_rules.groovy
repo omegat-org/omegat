@@ -481,7 +481,7 @@ def getLTLanguage(lang) {
 }
 
 def getBiTextRules(Language sourceLang, Language targetLang) {
-    return LanguageToolNativeBridge.getBiTextRules(sourceLang, targetLang)
+    return Tools.getBitextRules(sourceLang, targetLang)
 }
 
 def getRuleMatchesForEntry(sourceText, translationText) {

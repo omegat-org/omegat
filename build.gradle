@@ -368,17 +368,17 @@ task l10n(dependsOn: [l10nMinimalDistZip, l10nFullDistZip]) {
 // We bundle our startup scripts separately, so disable startScripts.
 startScripts.enabled = false
 
-// installDist insists on installing a script. Trick them with a dummy script.
+// installDist insists on installing a script. Trick it with a dummy script.
 installDist.doFirst {
     startScripts.outputDir.mkdirs()
     file("${startScripts.outputDir}/${applicationName}").createNewFile()
-    if (it.destinationDir.directory) {
-        file("${it.destinationDir}/bin").mkdirs()
+    if (destinationDir.directory) {
+        file("${destinationDir}/bin").mkdirs()
     }
 }
 // Delete dummy afterwards.
 installDist.doLast {
-    delete "${installDist.destinationDir}/bin"
+    delete "${destinationDir}/bin"
     delete startScripts.outputDir
 }
 

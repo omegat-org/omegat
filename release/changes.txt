@@ -26,7 +26,7 @@
 
   Other changes:
 
-  - Update LanguageTool to 3.4
+  - Update LanguageTool to 3.5
 
   Bug fixes:
 

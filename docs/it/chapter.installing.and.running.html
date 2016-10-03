@@ -72,16 +72,17 @@
                      <dt><span class="section"><a href="chapter.installing.and.running.html#running.OmegaT.other">4.4. Avvio di OmegaT</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.installing.and.running.html#using.Java.Web.Start">5. Uso di Java Web Start</a></span></dt>
-               <dt><span class="section"><a href="chapter.installing.and.running.html#d0e1053">6. Avvio di OmegaT da riga di comando</a></span></dt>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#drag.and.drop">5. Drag and drop</a></span></dt>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#using.Java.Web.Start">6. Uso di Java Web Start</a></span></dt>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#d0e1069">7. Avvio di OmegaT da riga di comando</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.installing.and.running.html#method1.opening.commandline.window">6.1. Aprire una finestra di terminale</a></span></dt>
-                     <dt><span class="section"><a href="chapter.installing.and.running.html#launch.command.arguments">6.2. Argomenti di comando per l'avvio</a></span></dt>
-                     <dt><span class="section"><a href="chapter.installing.and.running.html#omegat.command.arguments">6.3. OmegaT in modalità a riga di comando</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#method1.opening.commandline.window">7.1. Aprire una finestra di terminale</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#launch.command.arguments">7.2. Argomenti di comando per l'avvio</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#omegat.command.arguments">7.3. OmegaT in modalità a riga di comando</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.installing.and.running.html#building.OmegaT.from.source">7. Costruire un pacchetto <span class="application">OmegaT</span> dai sorgenti</a></span></dt>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#building.OmegaT.from.source">8. Costruire un pacchetto <span class="application">OmegaT</span> dai sorgenti</a></span></dt>
             </dl>
          </div>
          <div class="section">
@@ -400,15 +401,16 @@
                </div>
                <p>Fare doppio-clic su <span class="emphasis"><em> <span class="application">OmegaT</span>.app</em></span> o sulla sua posizione nella Dock.
                </p>
-               <p>È possibile cambiare il comportamento di OmegaT modificando sia la sezione <span class="emphasis"><em>Properties</em></span>, sia il file <span class="emphasis"><em>OmegaT.sh</em></span> contenuti nel pacchetto.
+               <p>È possibile cambiare il comportamento di OmegaT modificando sia la sezione <span class="emphasis"><em>Properties</em></span>, sia il file <span class="emphasis"><em>Configuration.properties</em></span> contenuti nel pacchetto.
                </p>
-               <p>Aprire il file <span class="application"><span class="emphasis"><em>OmegaT.sh</em></span></span>, facendo clic col pulsante destro su <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> e selezionare "Show Package Contents", poi aprirlo facendovi sopra clic col pulsante destro e selezionando il proprio editor
-                  di testo preferito. È possibile anche arrivare direttamente alla cartella dalla riga di comando (con "cd") e aprire <span class="application"><span class="emphasis"><em>OmegaT.sh</em></span> in un editor a riga di comando come emacs o vi</span>.<a class="indexterm" name="d0e827"></a></p>
-               <p>Le opzioni vengono cambiate modificando <span class="emphasis"><em>OmegaT.sh</em></span>. Per ottenere delle opzioni predefinite, abilitare un parametro rimuovendo il carattere # all'inizio della riga. Per esempio,
+               <p>Per aprire <span class="application"><span class="emphasis"><em>Configuration.properties</em></span></span>, facendo clic col pulsante destro su <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> e selezionare "Show Package Contents", poi aprirlo in Contents/Resources facendovi sopra clic col pulsante destro e selezionando
+                  il proprio editor di testo preferito. È possibile anche arrivare direttamente alla cartella dalla riga di comando (con "cd")
+                  e aprire <span class="application"><span class="emphasis"><em>Configuration.properties</em></span> in un editor a riga di comando come emacs o vi</span>.<a class="indexterm" name="d0e827"></a></p>
+               <p>Le opzioni vengono cambiate modificando <span class="emphasis"><em>Configuration.properties</em></span>. Per ottenere delle opzioni predefinite, abilitare un parametro rimuovendo il carattere # all'inizio della riga. Per esempio,
                   <code class="filename">LANGUAGE="-Duser.language=ja"</code> (senza #) avvierà <span class="application">OmegaT</span> con l'interfaccia giapponese.
                </p>
-               <p>Per cambiare la quantità di memoria disponibile, modificare direttamente la riga di avvio. Per esempio, <code class="filename">${JAVA} -Xmx2048m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET}
-                     ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY} -jar OmegaT.jar</code> avvierà OmegaT con due GB di memoria.
+               <p>Per cambiare la quantità di memoria disponibile, modificare il file <span class="emphasis"><em>OmegaT.app/Contents/Info.plist</em></span> e modificare il contenuto di &lt;string&gt;-Xmx1024M&lt;/string&gt;. Per esempio, &lt;string&gt;-Xmx2048M&lt;/string&gt; avvierà OmegaT con 2 GB
+                  di memoria.
                </p>
                <p>Per avviare più istanze di <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span>, fare doppio clic sul file <span class="emphasis"><em>OmegaT.sh</em></span> che si trova in <span class="emphasis"><em><span class="application">OmegaT</span>.app/ Contents/MacOS/</em></span>.
                </p>
@@ -512,7 +514,19 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.Java.Web.Start"></a>5.&nbsp;Uso di Java Web Start<a class="indexterm" name="d0e1007"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="drag.and.drop"></a>5.&nbsp;Drag and drop<a class="indexterm" name="d0e1007"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Nella maggior parte dei sistemi, è possibile aprire un progetto trascinando e rilasciando un file <code class="filename">omegat.project</code> sull'icona OmegaT presente nel desktop. Dovrebbe essere anche possibile aprire un progetto OmegaT facendo doppio clic su
+               un file <code class="filename">omegat.project</code>.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="using.Java.Web.Start"></a>6.&nbsp;Uso di Java Web Start<a class="indexterm" name="d0e1023"></a></h2>
                   </div>
                </div>
             </div>
@@ -538,7 +552,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e1053"></a>6.&nbsp;Avvio di OmegaT da riga di comando<a class="indexterm" name="d0e1056"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e1069"></a>7.&nbsp;Avvio di OmegaT da riga di comando<a class="indexterm" name="d0e1072"></a></h2>
                   </div>
                </div>
             </div>
@@ -549,7 +563,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="method1.opening.commandline.window"></a>6.1.&nbsp;Aprire una finestra di terminale
+                        <h3 class="title"><a name="method1.opening.commandline.window"></a>7.1.&nbsp;Aprire una finestra di terminale
                         </h3>
                      </div>
                   </div>
@@ -592,12 +606,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="launch.command.arguments"></a>6.2.&nbsp;Argomenti di comando per l'avvio<a class="indexterm" name="d0e1158"></a></h3>
+                        <h3 class="title"><a name="launch.command.arguments"></a>7.2.&nbsp;Argomenti di comando per l'avvio<a class="indexterm" name="d0e1174"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Il comando di base è stato già citato prima. Le modifiche a questo comando implicano l'aggiunta di "argomenti". Gli argomenti
-                  sono aggiunti dopo la parte <span class="emphasis"><em>"java"</em></span> iniziale e prima di <span class="emphasis"><em>"-jar <span class="application">OmegaT</span>.jar"</em></span>. Si noti che in Windows è possibile cambiare il file <code class="filename">OmegaT.l4J.ini</code> per farle coincidere con proprie preferenze. In altre piattaforme è possibile modificare l'avviatore (ossia <code class="filename">OmegaT.sh</code> sul Mac, <code class="filename">OmegaT</code> in Linux) in modo che esegua le stesse operazioni.
+                  sono aggiunti dopo la parte <span class="emphasis"><em>"java"</em></span> iniziale e prima di <span class="emphasis"><em>"-jar <span class="application">OmegaT</span>.jar"</em></span>. Si noti che in Windows è possibile cambiare il file <code class="filename">OmegaT.l4J.ini</code> per farle coincidere con proprie preferenze. In altre piattaforme è possibile modificare il file <code class="filename">Configuration.properties</code> in Mac, o l'avviatore <code class="filename">OmegaT</code> in Linux in modo che esegua le stesse operazioni.
                </p>
                <p>Sotto viene fornito un elenco di argomenti possibili. Gli utenti avanzati possono ottenere ulteriori informazioni sugli argomenti
                   digitando <span class="emphasis"><em>man java</em></span> nella finestra di terminale.
@@ -606,7 +620,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Lingua interfaccia utente</strong></span></p>
-                        <p><span class="bold"><strong>-Duser.language=XX</strong></span><a class="indexterm" name="d0e1196"></a> In genere, per esempio, quando <span class="application">OmegaT</span> è avviato senza argomenti, il programma individua prima la lingua del sistema operativo dell'utente. <span class="application">OmegaT</span> usa l'interfaccia in questa lingua, se disponibile. Ad esempio, se il sistema operativo dell'utente è in Italiano e <span class="application">OmegaT</span> è stato localizzato in Italiano,  <span class="application">OmegaT</span> visualizzerà l'interfaccia italiana, i menu italiani, e via discorrendo. Se la lingua del sistema dell'utente non è disponibile,
+                        <p><span class="bold"><strong>-Duser.language=XX</strong></span><a class="indexterm" name="d0e1212"></a> In genere, per esempio, quando <span class="application">OmegaT</span> è avviato senza argomenti, il programma individua prima la lingua del sistema operativo dell'utente. <span class="application">OmegaT</span> usa l'interfaccia in questa lingua, se disponibile. Ad esempio, se il sistema operativo dell'utente è in Italiano e <span class="application">OmegaT</span> è stato localizzato in Italiano,  <span class="application">OmegaT</span> visualizzerà l'interfaccia italiana, i menu italiani, e via discorrendo. Se la lingua del sistema dell'utente non è disponibile,
                            <span class="application">OmegaT</span> sarà visualizzato in Inglese in modo predefinito. Questo è il comportamento standard.
                         </p>
                         <p>L'argomento <span class="emphasis"><em>"-Duser.language=XX"</em></span> fa sì che <span class="application">OmegaT</span> usi la lingua specificata piuttosto che quella del sistema operativo dell'utente. "XX" nel comando rappresenta il codice
@@ -621,7 +635,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Nazione utente</strong></span></p>
-                        <p><span class="bold"><strong>-Duser.country=XX</strong></span><a class="indexterm" name="d0e1244"></a> Oltre alla lingua è possibile specificare la nazione, per esempio CN o TW, nel caso della lingua cinese. Per visualizzare
+                        <p><span class="bold"><strong>-Duser.country=XX</strong></span><a class="indexterm" name="d0e1260"></a> Oltre alla lingua è possibile specificare la nazione, per esempio CN o TW, nel caso della lingua cinese. Per visualizzare
                            la corretta guida rapida, è necessario specificare sia la lingua sia la nazione. Ciò è necessario anche se esiste solo una
                            combinazione disponibile, come pt_BR nel caso di Portoghese / Brasile.
                         </p>
@@ -632,7 +646,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Attribuzione memoria</strong></span></p>
-                        <p><span class="bold"><strong>-XmxZZM </strong></span><a class="indexterm" name="d0e1260"></a>Questo comando attribuisce più memoria a <span class="application">OmegaT</span>. Per impostazione predefinita sono attribuiti 512 MB, e non vi è dunque alcun vantaggio nell'attribuirne meno. "ZZ" rappresenta
+                        <p><span class="bold"><strong>-XmxZZM </strong></span><a class="indexterm" name="d0e1276"></a>Questo comando attribuisce più memoria a <span class="application">OmegaT</span>. Per impostazione predefinita sono attribuiti 512 MB, e non vi è dunque alcun vantaggio nell'attribuirne meno. "ZZ" rappresenta
                            la quantità di memoria attribuita, in megabyte. Il comando per avviare <span class="application">OmegaT</span> con un'attribuzione di 1024 MB (1 gigabyte) di memoria è dunque:
                         </p>
                         <p><code class="literal">java -Xmx1024M -jar
@@ -640,23 +654,23 @@
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Indirizzo IP dell'host proxy</strong></span></p>
-                        <p><span class="bold"><strong><span class="bold"><strong>-Dhttp.proxyHost=nnn.nnn.nnn.nnn</strong></span> <a class="indexterm" name="d0e1289"></a></strong></span> L'indirizzo IP del server proxy, se il proprio sistema ne utilizza uno.
+                        <p><span class="bold"><strong><span class="bold"><strong>-Dhttp.proxyHost=nnn.nnn.nnn.nnn</strong></span> <a class="indexterm" name="d0e1305"></a></strong></span> L'indirizzo IP del server proxy, se il proprio sistema ne utilizza uno.
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Numero di porta dell'host proxy</strong></span></p>
-                        <p><span class="bold"><strong>-Dhttp.proxyPort=NNNN</strong></span> <a class="indexterm" name="d0e1305"></a> Il numero di porta che il proprio sistema utilizza per accedere al server proxy.
+                        <p><span class="bold"><strong>-Dhttp.proxyPort=NNNN</strong></span> <a class="indexterm" name="d0e1321"></a> Il numero di porta che il proprio sistema utilizza per accedere al server proxy.
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Google Translate V2 </strong></span></p>
-                        <p><span class="bold"><strong>-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </strong></span><span class="bold"><strong><a class="indexterm" name="d0e1321"></a></strong></span> Se si possiede un account per i servizi di Google Translate, immettere qui la propria chiave Google API privata. Notare che
+                        <p><span class="bold"><strong>-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </strong></span><span class="bold"><strong><a class="indexterm" name="d0e1337"></a></strong></span> Se si possiede un account per i servizi di Google Translate, immettere qui la propria chiave Google API privata. Notare che
                            la chiave è lunga 38 caratteri.
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Microsoft
-                                           Translator</strong></span><a class="indexterm" name="d0e1333"></a></p>
+                                           Translator</strong></span><a class="indexterm" name="d0e1349"></a></p>
                         <p>Assicurarsi di avere un account Microsoft gratuito. È necessario autenticarsi in <a class="ulink" href="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema" target="_top">Windows Azure Marketplace</a> e usare il servizio Translator. Si noti che è possibile utilizzare gratuitamente fino a due milioni di caratteri al mese.
                            Le voci necessarie al suo utilizzo sono disponibili nella propria <a class="ulink" href="https://datamarket.azure.com/account" target="_top">pagina di account</a> sotto la chiave di account primaria e il Customer-ID:
                         </p>
@@ -664,7 +678,7 @@
                         <p>-<span class="bold"><strong>Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</strong></span></p>
                      </li>
                      <li class="listitem">
-                        <p><span class="bold"><strong>Yandex Translate</strong></span><a class="indexterm" name="d0e1361"></a></p>
+                        <p><span class="bold"><strong>Yandex Translate</strong></span><a class="indexterm" name="d0e1377"></a></p>
                         <p>Assicurarsi di avere un account Yandex gratuito. Esso è necessario al fine di ottenere e usare la chiave API di Yandex Translate.
                            Le chiavi API si possono richiedere utilizzando il <a class="ulink" href="http://api.yandex.com/key/form.xml?service=trnsl" target="_top">modulo di richiesta chiave API</a>, e visualizzate nella pagina <a class="ulink" href="http://api.yandex.com/key/keyslist.xml" target="_top">My Keys</a>.
                         </p>
@@ -683,7 +697,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="omegat.command.arguments"></a>6.3.&nbsp;OmegaT in modalità a riga di comando<a class="indexterm" name="d0e1398"></a></h3>
+                        <h3 class="title"><a name="omegat.command.arguments"></a>7.3.&nbsp;OmegaT in modalità a riga di comando<a class="indexterm" name="d0e1414"></a></h3>
                      </div>
                   </div>
                </div>
@@ -695,7 +709,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="console.mode.prerequisites"></a>6.3.1.&nbsp;Prerequisiti
+                           <h4 class="title"><a name="console.mode.prerequisites"></a>7.3.1.&nbsp;Prerequisiti
                            </h4>
                         </div>
                      </div>
@@ -723,7 +737,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="starting.in.console.mode"></a>6.3.2.&nbsp;Avvio in modalità console
+                           <h4 class="title"><a name="starting.in.console.mode"></a>7.3.2.&nbsp;Avvio in modalità console
                            </h4>
                         </div>
                      </div>
@@ -732,6 +746,7 @@
                   </p>
                   <p><code class="literal">java -jar <span class="application">OmegaT</span>.jar /percorso/al/progetto \</code></p>
                   <p><code class="literal">--config-dir=/percorso/ai/file-di-configurazione/ \</code></p>
+                  <p><code class="literal">--config-file=/percorso/ai/file-di-configurazione/ \</code></p>
                   <p><code class="literal">
                                 --mode=console-translate|console-createpseudotranslatetmx|console-align</code></p>
                   <p><code class="literal"> --source-pattern={regexp}</code></p>
@@ -749,6 +764,10 @@
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
                            <p><code class="literal">--config-dir=&lt;config-dir&gt;</code> dice a <span class="application">OmegaT</span> in quale cartella sono memorizzati i file di configurazione. Se non indicato, <span class="application">OmegaT</span> torna ai valori predefiniti (la cartella <span class="application">OmegaT</span> nella home dell'utente o, se non disponibile, la cartella di lavoro corrente). Si noti il carattere trattino - doppio
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p><code class="literal">--config-file=&lt;config-file&gt;</code> dice a <span class="application">OmegaT</span> quale file di configurazione utilizzare.
                            </p>
                         </li>
                      </ul>
@@ -878,7 +897,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="console.mode.option.quiet"></a>6.3.3.&nbsp;Opzione quiet
+                           <h4 class="title"><a name="console.mode.option.quiet"></a>7.3.3.&nbsp;Opzione quiet
                            </h4>
                         </div>
                      </div>
@@ -892,7 +911,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="console.mode.option.validatetags"></a>6.3.4.&nbsp;Opzione di convalida dei tag
+                           <h4 class="title"><a name="console.mode.option.validatetags"></a>7.3.4.&nbsp;Opzione di convalida dei tag
                            </h4>
                         </div>
                      </div>
@@ -909,7 +928,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>7.&nbsp;Costruire un pacchetto <span class="application">OmegaT</span> dai sorgenti<a class="indexterm" name="d0e1698"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>8.&nbsp;Costruire un pacchetto <span class="application">OmegaT</span> dai sorgenti<a class="indexterm" name="d0e1725"></a></h2>
                   </div>
                </div>
             </div>

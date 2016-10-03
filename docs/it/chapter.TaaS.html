@@ -29,14 +29,14 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.TaaS"></a>Chapter&nbsp;20.&nbsp;Uso di TaaS in OmegaT<a class="indexterm" name="d0e8715"></a></h1>
+                  <h1 class="title"><a name="chapter.TaaS"></a>Chapter&nbsp;20.&nbsp;Uso di TaaS in OmegaT<a class="indexterm" name="d0e9060"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options">1. Generalità</a></span></dt>
-               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.collections">2. Raccolte pubbliche e private</a></span></dt>
+               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.generalities">1. Generalità</a></span></dt>
+               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.key">2. Creazione di una chiave</a></span></dt>
                <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.access">3. Accesso al servizio TaaS</a></span></dt>
             </dl>
          </div>
@@ -44,7 +44,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="section.TaaS.options"></a>1.&nbsp;Generalità
+                     <h2 class="title" style="clear: both"><a name="section.TaaS.generalities"></a>1.&nbsp;Generalità
                      </h2>
                   </div>
                </div>
@@ -58,19 +58,14 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="section.TaaS.options.collections"></a>2.&nbsp;Raccolte pubbliche e private
+                     <h2 class="title" style="clear: both"><a name="section.TaaS.options.key"></a>2.&nbsp;Creazione di una chiave
                      </h2>
                   </div>
                </div>
             </div>
-            <p>OmegaT consente l'accesso alla parte pubblica di TaaS, senza necessità di registrazione.</p>
-            <p>Per accedere alla parte privata, l'utente deve creare una chiave utilizzando l'indirizzo https://demo.taas-project.eu/account/keys/create?system=omegaT.</p>
+            <p>Per accedere al servizio TaaS, l'utente deve creare una chiave utilizzando l'indirizzo https://term.tilde.com/account/keys/create?system=omegaT.</p>
             <p>La chiave deve essere fornita a OmegaT tramite il comando -Dtaas.user.key=xxxxx. Gli avviatori di configurazione di OmegaT
-               (OmegaT.l4J.ini, omegat.kaptn e OmegaT.sh) contengono un modello.
-            </p>
-            <p>Quando si accede al servizio senza chiave privata, nel registro viene inserito il messaggio seguente: Chiave TaaS API non
-               trovata. Andare all'indirizzo https://demo.taas-project.eu/account/keys/create?system=omegaT per creare la propria chiave
-               e inserirla col comando -Dtaas.user.key=xxxxx (TAAS_API_KEY_NOT_FOUND)
+               (OmegaT.l4J.ini, omegat.kaptn e Configuration.properties) contengono un modello.
             </p>
          </div>
          <div class="section">

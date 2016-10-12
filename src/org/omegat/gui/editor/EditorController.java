@@ -740,31 +740,34 @@ public class EditorController implements IEditor {
 
         Document3 doc = new Document3(this);
 
+        // Create all SegmentBuilders now...
+        ArrayList<SegmentBuilder> tmpSegList = new ArrayList<SegmentBuilder>(file.entries.size());
+        for (SourceTextEntry ste : file.entries) {
+            if (entriesFilter == null || entriesFilter.allowed(ste)) {
+                SegmentBuilder sb = new SegmentBuilder(this, doc, settings, ste, ste.entryNum(), hasRTL);
+                tmpSegList.add(sb);
+            }
+        }
+        m_docSegList = tmpSegList.toArray(new SegmentBuilder[tmpSegList.size()]);
+
         // Clamp displayedSegment to actually available entries.
-        displayedEntryIndex = Math.max(0, Math.min(file.entries.size() - 1, displayedEntryIndex));
+        displayedEntryIndex = Math.max(0, Math.min(m_docSegList.length - 1, displayedEntryIndex));
         // Calculate start, end indices of a span of initialSegCount segments
-        // centered around initialIndex and clamped to [0, file.entries.size()).
+        // centered around displayedEntryIndex and clamped to [0, m_docSegList.length).
         final int initialSegCount = Preferences.getPreferenceDefault(Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT,
                 Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT_DEFAULT);
         firstLoaded = Math.max(0, displayedEntryIndex - initialSegCount / 2);
         lastLoaded = Math.min(file.entries.size() - 1, firstLoaded + initialSegCount - 1);
 
-        // Create all SegmentBuilders now...
-        ArrayList<SegmentBuilder> temp_docSegList2 = new ArrayList<SegmentBuilder>(file.entries.size());
-        for (int i = 0; i < file.entries.size(); i++) {
-            SourceTextEntry ste = file.entries.get(i);
-            if (entriesFilter == null || entriesFilter.allowed(ste)) {
-                SegmentBuilder sb = new SegmentBuilder(this, doc, settings, ste, ste.entryNum(), hasRTL);
-                temp_docSegList2.add(sb);
-
-                // ...but only display the ones in [firstLoaded, lastLoaded]
-                if (i >= firstLoaded && i <= lastLoaded) {
-                    sb.createSegmentElement(false, Core.getProject().getTranslationInfo(ste));
-                    sb.addSegmentSeparator();
-                }
+        // ...but only display the ones in [firstLoaded, lastLoaded]
+        for (int i = 0; i < m_docSegList.length; i++) {
+            if (i >= firstLoaded && i <= lastLoaded) {
+                SegmentBuilder sb = m_docSegList[i];
+                sb.createSegmentElement(false, Core.getProject().getTranslationInfo(sb.ste));
+                sb.addSegmentSeparator();
             }
         }
-        m_docSegList = temp_docSegList2.toArray(new SegmentBuilder[temp_docSegList2.size()]);
+
         doc.setDocumentFilter(new DocumentFilter3());
 
         // add locate for target language to editor

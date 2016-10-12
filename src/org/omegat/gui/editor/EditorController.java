@@ -1070,7 +1070,8 @@ public class EditorController implements IEditor {
     protected int getSegmentIndexAtLocation(int location) {
         for (int i = 0; i < m_docSegList.length; i++) {
             SegmentBuilder builder = m_docSegList[i];
-            if (builder.hasBeenCreated() && location >= builder.getStartPosition()) {
+            if (builder.hasBeenCreated() && location >= builder.getStartPosition()
+                    && location < builder.getEndPosition()) {
                 return i;
             }
         }

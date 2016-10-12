@@ -1068,15 +1068,13 @@ public class EditorController implements IEditor {
     }
 
     protected int getSegmentIndexAtLocation(int location) {
-        int segmentAtLocation = m_docSegList.length - 1;
         for (int i = 0; i < m_docSegList.length; i++) {
             SegmentBuilder builder = m_docSegList[i];
-            if (builder.hasBeenCreated() && location < builder.getStartPosition()) {
-                segmentAtLocation = i - 1;
-                break;
+            if (builder.hasBeenCreated() && location >= builder.getStartPosition()) {
+                return i;
             }
         }
-        return segmentAtLocation;
+        return m_docSegList.length - 1;
     }
 
     /**

@@ -246,8 +246,8 @@ public class Main {
             return;
         }
         System.out.println("Reading config from " + path);
-        try {
-            PropertyResourceBundle config = new PropertyResourceBundle(new FileInputStream(configFile));
+        try (FileInputStream in = new FileInputStream(configFile)) {
+            PropertyResourceBundle config = new PropertyResourceBundle(in);
             // Put config properties into System properties and into OmegaT params.
             for (String key : config.keySet()) {
                 String value = config.getString(key);

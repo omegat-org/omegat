@@ -208,7 +208,7 @@ could fail with duplicate numbers
  OmegaT 3.6.0 update 3 (2016-09-06)
 ----------------------------------------------------------------------
   0 Enhancement
-  4 Bug fixes
+  5 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
 3.6.0 update 3 vs 3.6.0 update 2
@@ -224,6 +224,9 @@ could fail with duplicate numbers
   https://sourceforge.net/p/omegat/bugs/835/
 
   - Tag fix failure when tag has same offset in source and target
+
+  - Editor not responding after filtering search results
+  https://sourceforge.net/p/omegat/bugs/839/
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 2 (2016-07-27)

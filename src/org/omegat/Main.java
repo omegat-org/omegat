@@ -45,8 +45,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -78,7 +76,6 @@ import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter;
 import org.omegat.util.gui.OSXIntegration;
@@ -96,9 +93,6 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Kyle Katarn
  */
 public class Main {
-
-    /** Regexp for parse parameters. */
-    protected static final Pattern PARAM = Pattern.compile("\\-\\-([A-Za-z\\-]+)(=(.+))?");
 
     /** Project location for load on startup. */
     protected static File projectLocation = null;
@@ -128,33 +122,12 @@ public class Main {
         // https://sourceforge.net/p/omegat/bugs/812/
         System.setProperty("jna.encoding", Charset.defaultCharset().name());
 
-        /*
-         * Parse command line arguments info map.
-         */
-        for (String arg : args) {
-            // Normalize Unicode here because e.g. OS X filesystem is NFD while
-            // in Java land things are NFC
-            arg = StringUtil.normalizeUnicode(arg);
-            Matcher m = PARAM.matcher(arg);
-            if (m.matches()) {
-                params.put(m.group(1), m.group(3));
-            } else {
-                if (arg.startsWith(CLIParameters.RESOURCE_BUNDLE + "=")) {
-                    // backward compatibility
-                    params.put(CLIParameters.RESOURCE_BUNDLE,
-                            arg.substring(CLIParameters.RESOURCE_BUNDLE.length() + 1));
-                } else {
-                    File f = new File(arg).getAbsoluteFile();
-                    if (f.getName().equals(OConsts.FILE_PROJECT)) {
-                        f = f.getParentFile();
-                    }
-                    if (StaticUtils.isProjectDir(f)) {
-                        projectLocation = f;
-                    }
-                }
-            }
-        }
+        params.putAll(CLIParameters.parseArgs(args));
 
+        String projectDir = params.get(CLIParameters.PROJECT_DIR);
+        if (projectDir != null) {
+            projectLocation = new File(projectDir);
+        }
         remoteProject = params.get(CLIParameters.REMOTE_PROJECT);
 
         applyConfigFile(params.get(CLIParameters.CONFIG_FILE));

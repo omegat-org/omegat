@@ -25,7 +25,15 @@
 
 package org.omegat;
 
+import java.io.File;
 import java.util.Locale;
+import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.omegat.util.OConsts;
+import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 /**
  * A class to hold all command-line arguments understood by OmegaT.
@@ -36,9 +44,14 @@ import java.util.Locale;
  */
 public class CLIParameters {
 
+    /** Regexp for parse parameters. */
+    protected static final Pattern PARAM = Pattern.compile("\\-\\-([A-Za-z\\-]+)(=(.+))?");
+
     // Help
     public static final String HELP_SHORT = "-h";
     public static final String HELP = "--help";
+
+    public static final String PROJECT_DIR = "project";
 
     /** CLI parameter to specify a remote project to load instead of a local one */
     public static final String REMOTE_PROJECT = "remote-project";
@@ -131,5 +144,35 @@ public class CLIParameters {
 
     private static String normalize(String s) {
         return s.toUpperCase(Locale.ENGLISH).replace('-', '_');
+    }
+
+    static TreeMap<String, String> parseArgs(String... args) {
+        TreeMap<String, String> params = new TreeMap<>();
+
+        /*
+         * Parse command line arguments info map.
+         */
+        for (String arg : args) {
+            // Normalize Unicode here because e.g. OS X filesystem is NFD while
+            // in Java land things are NFC
+            arg = StringUtil.normalizeUnicode(arg);
+            Matcher m = PARAM.matcher(arg);
+            if (m.matches()) {
+                params.put(m.group(1), m.group(3));
+            } else if (arg.startsWith(RESOURCE_BUNDLE + "=")) {
+                // backward compatibility
+                params.put(RESOURCE_BUNDLE, arg.substring(RESOURCE_BUNDLE.length() + 1));
+            } else {
+                File f = new File(arg).getAbsoluteFile();
+                if (f.getName().equals(OConsts.FILE_PROJECT)) {
+                    f = f.getParentFile();
+                }
+                if (StaticUtils.isProjectDir(f)) {
+                    params.put(PROJECT_DIR, f.getPath());
+                }
+            }
+        }
+
+        return params;
     }
 }

@@ -142,7 +142,7 @@ public class Main {
                 if (arg.startsWith(CLIParameters.RESOURCE_BUNDLE + "=")) {
                     // backward compatibility
                     params.put(CLIParameters.RESOURCE_BUNDLE,
-                            arg.substring(CLIParameters.RESOURCE_BUNDLE.length()));
+                            arg.substring(CLIParameters.RESOURCE_BUNDLE.length() + 1));
                 } else {
                     File f = new File(arg).getAbsoluteFile();
                     if (f.getName().equals(OConsts.FILE_PROJECT)) {

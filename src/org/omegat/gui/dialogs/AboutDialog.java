@@ -56,6 +56,11 @@ public class AboutDialog extends JDialog {
         StaticUIUtils.setEscapeClosable(this);
 
         initComponents();
+
+        StaticUIUtils.setCaretUpdateEnabled(abouttext, false);
+        abouttext.setText(StringUtil.format(OStrings.getString("ABOUTDIALOG_CONTRIBUTORS"),
+                OStrings.getString("ABOUTDIALOG_CONTRIBUTOR_NAMES"), OStrings.getString("ABOUTDIALOG_LIBRARIES")));
+
         versionLabel.setText(getVersionString());
 
         Object[] args = { Runtime.getRuntime().totalMemory() / 1024 / 1024,

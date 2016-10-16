@@ -80,7 +80,7 @@ dependencies {
         compile 'net.loomchild:maligna:3.0.0'
 
         // Dictionary
-        compile 'org.dict.zip:dictzip-lib:0.8.1'
+        compile 'org.dict.zip:dictzip-lib:0.8.2'
         compile 'com.github.takawitter:trie4j:0.9.2'
 
         // Legacy projects re-hosted on GitHub + Bintray

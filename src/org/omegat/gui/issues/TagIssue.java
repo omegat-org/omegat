@@ -147,7 +147,8 @@ public class TagIssue implements IIssue {
         if (fixText == null) {
             return Collections.emptyList();
         } else {
-            JMenuItem doFix = new JMenuItem(OStrings.getString("ISSUES_TAGS_BUTTON_APPLY_FIX"));
+            JMenuItem doFix = new JMenuItem();
+            org.openide.awt.Mnemonics.setLocalizedText(doFix, OStrings.getString("ISSUES_TAGS_BUTTON_APPLY_FIX"));
             doFix.addActionListener(getFixActionListener(fixText));
             return Arrays.asList(doFix);
         }

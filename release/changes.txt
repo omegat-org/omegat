@@ -66,7 +66,7 @@ below the root of the project
   8 Bug fixes
   1 Localisation update
 ----------------------------------------------------------------------
-4.0.0 vs 3.6.0 update 3
+4.0.0 vs 3.6.0 update 4
 
   Implemented requests:
 

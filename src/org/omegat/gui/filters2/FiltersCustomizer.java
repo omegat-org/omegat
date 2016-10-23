@@ -479,7 +479,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            if (inUseFilters.contains(value.toString())) {
+            if (value != null && inUseFilters.contains(value.toString())) {
                 component.setFont(component.getFont().deriveFont(Font.BOLD));
             }
             return component;

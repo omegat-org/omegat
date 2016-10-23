@@ -205,7 +205,7 @@ could fail with duplicate numbers
   - Interlingua localisation updated to 4.0 (UI, documentation, readme, scripts)
 
 ----------------------------------------------------------------------
- OmegaT 3.6.0 update 4
+  OmegaT 3.6.0 update 4 (2016-22-10)
 ----------------------------------------------------------------------
   0 Enhancement
   1 Bug fix

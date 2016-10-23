@@ -46,6 +46,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
@@ -69,7 +71,6 @@ import javax.swing.border.EtchedBorder;
 import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.data.CommandVarExpansion;
-import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.master.FilterMaster;
@@ -660,7 +661,9 @@ public class ProjectPropertiesDialog extends JDialog {
                 FiltersCustomizer dlg = new FiltersCustomizer(parent, true,
                         FilterMaster.createDefaultFiltersConfig(), Preferences.getFilters(), filters);
                 if (Core.getProject().isProjectLoaded()) {
-                    dlg.setInUseFilters(FileInfo.getFilterNames(Core.getProject().getProjectFiles()));
+                    Set<String> inUseFilters = Core.getProject().getProjectFiles().stream()
+                            .map(info -> info.filterFileFormatName).collect(Collectors.toSet());
+                    dlg.setInUseFilters(inUseFilters);
                 }
                 dlg.setVisible(true);
                 if (dlg.getReturnStatus() == FiltersCustomizer.RET_OK) {

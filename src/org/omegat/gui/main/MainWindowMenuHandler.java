@@ -40,7 +40,9 @@ import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
 import java.io.File;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
@@ -49,7 +51,6 @@ import javax.swing.text.JTextComponent;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
-import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.matching.NearString;
@@ -970,7 +971,9 @@ public class MainWindowMenuHandler {
             // Don't highlight project in-use filters on global view if project
             // has project-specific filters
             if (Core.getProject().getProjectProperties().getProjectFilters() == null) {
-                dlg.setInUseFilters(FileInfo.getFilterNames(Core.getProject().getProjectFiles()));
+                Set<String> inUseFilters = Core.getProject().getProjectFiles().stream()
+                        .map(info -> info.filterFileFormatName).collect(Collectors.toSet());
+                dlg.setInUseFilters(inUseFilters);
             }
         }
         dlg.setVisible(true);

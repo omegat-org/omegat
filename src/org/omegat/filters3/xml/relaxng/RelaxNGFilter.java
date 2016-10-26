@@ -33,7 +33,6 @@ import java.util.regex.Matcher;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLDialect;
 import org.omegat.filters3.xml.XMLFilter;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 
 /**
@@ -98,29 +97,4 @@ public class RelaxNGFilter extends XMLFilter {
     protected boolean requirePrevNextFields() {
         return true;
     }
-
-   /**
-    * Returns whether the file is supported by the filter by checking
-    * RELAX NG element and namespace constraints.
-    * 
-    * @return <code>true</code> or <code>false</code>
-    */
-    public boolean isFileSupported(BufferedReader reader) {
-        XMLDialect dialect = getDialect();
-        if (dialect.getConstraints() == null || dialect.getConstraints().isEmpty()) {
-            return true;
-        }
-        try {
-	    char[] cbuf = new char[OConsts.READ_AHEAD_LIMIT];
-	    int cbuf_len = reader.read(cbuf);
-	    String buf = new String(cbuf, 0, cbuf_len);
-	    Matcher matcher = RelaxNGDialect.RELAXNG_XMLNS.matcher(buf);
-	    if (!matcher.find()) { // not RELAX NG
-		return false;
-            }
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-   }
 }

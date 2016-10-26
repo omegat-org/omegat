@@ -27,7 +27,6 @@
 package org.omegat.filters3.xml.docbook;
 
 import java.io.BufferedReader;
-import java.util.regex.Matcher;
 
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLDialect;
@@ -122,17 +121,10 @@ public class DocBookFilter extends XMLFilter {
             char[] cbuf = new char[OConsts.READ_AHEAD_LIMIT];
             int cbuf_len = reader.read(cbuf);
             String buf = new String(cbuf, 0, cbuf_len);
-            Matcher matcher = DocBookDialect.DOCBOOK_PUBLIC_DTD.matcher(buf);
-            if (matcher.find()) { // We can safely assume we have a db4 doc...
-                return true;
-            } else { // Let's see if we have a db5 doc...
-                matcher = DocBookDialect.DB5_XMLNS.matcher(buf);
-                if (!matcher.find()) // Neither db4, nor db5
-                    return false;
-            }
+            return DocBookDialect.DOCBOOK_PUBLIC_DTD.matcher(buf).find()
+                    || DocBookDialect.DB5_XMLNS.matcher(buf).find();
         } catch (Exception e) {
             return false;
         }
-        return true;
     }
 }

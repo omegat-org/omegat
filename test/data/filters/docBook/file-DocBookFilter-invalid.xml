@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<book>
+<bookinfo>
+  <title>My First Book</title>
+  <author><firstname>Jane</firstname><surname>Doe</surname></author>
+  <copyright><year>1998</year><holder>Jane Doe</holder></copyright>
+</bookinfo>
+<preface><title>Foreword</title> ... </preface>
+<chapter>&mystring;</chapter>
+<chapter> ... </chapter>
+<chapter> ... </chapter>
+<chapter> ... </chapter>
+<appendix> ... </appendix>
+<appendix> ... </appendix>
+<index> ... </index>
+</book>

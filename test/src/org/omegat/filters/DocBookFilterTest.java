@@ -25,6 +25,10 @@
 
 package org.omegat.filters;
 
+import java.io.BufferedReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.omegat.core.data.IProject;
@@ -55,5 +59,17 @@ public class DocBookFilterTest extends TestFilterBase {
         checkMulti("Introduction to Linux", null, null, "", "A Hands on Guide", null);
         checkMulti("A Hands on Guide", null, null, "Introduction to Linux", "Machtelt", null);
         checkMulti("Machtelt", null, null, "A Hands on Guide", "Garrels", null);
+    }
+
+    public void testIsSupported() throws Exception {
+        DocBookFilter filter = new DocBookFilter();
+        Path goodFile = Paths.get("test/data/filters/docBook/file-DocBookFilter.xml");
+        try (BufferedReader reader = Files.newBufferedReader(goodFile)) {
+            assertTrue(filter.isFileSupported(reader));
+        }
+        Path badFile = Paths.get("test/data/filters/docBook/file-DocBookFilter-invalid.xml");
+        try (BufferedReader reader = Files.newBufferedReader(badFile)) {
+            assertFalse(filter.isFileSupported(reader));
+        }
     }
 }

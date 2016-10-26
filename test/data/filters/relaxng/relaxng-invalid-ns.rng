@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://not-relaxng.org/ns/structure/1.0" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <!-- testTranslate() requires: minimal XML Declaration; newline after XML Declaration; only one space before attributes; no newline at end of file. -->
+    <start>
+        <ref name="a"/>
+    </start>
+    <define name="a">
+        <element name="an-element"><a:documentation>RELAX NG is a schema language for XML.</a:documentation>
+            <ref name="b"/>
+        </element>
+    </define>
+    <define name="b">
+        <element name="an-element"><a:documentation>RELAX NG is simple and easy to learn.</a:documentation>
+            <text/>
+        </element>
+    </define>
+</grammar>

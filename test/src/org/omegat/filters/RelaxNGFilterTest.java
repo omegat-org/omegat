@@ -26,6 +26,10 @@
 
 package org.omegat.filters;
 
+import java.io.BufferedReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.omegat.core.data.IProject;
@@ -54,5 +58,21 @@ public class RelaxNGFilterTest extends TestFilterBase {
 
         checkMultiStart(fi, f);
         checkMulti("RELAX NG is a schema language for XML.", null, null, "", "RELAX NG is simple and easy to learn.", null);
+    }
+
+    public void testIsSupported() throws Exception {
+        RelaxNGFilter filter = new RelaxNGFilter();
+        Path goodFile = Paths.get("test/data/filters/relaxng/relaxng.rng");
+        try (BufferedReader reader = Files.newBufferedReader(goodFile)) {
+            assertTrue(filter.isFileSupported(reader));
+        }
+        Path badFile = Paths.get("test/data/filters/relaxng/relaxng-invalid.rng");
+        try (BufferedReader reader = Files.newBufferedReader(badFile)) {
+            assertFalse(filter.isFileSupported(reader));
+        }
+        badFile = Paths.get("test/data/filters/relaxng/relaxng-invalid-ns.rng");
+        try (BufferedReader reader = Files.newBufferedReader(badFile)) {
+            assertFalse(filter.isFileSupported(reader));
+        }
     }
 }

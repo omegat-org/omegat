@@ -32,12 +32,12 @@ package org.omegat.filters3.xml.relaxng;
 import java.util.regex.Pattern;
 import java.util.HashMap;
 
-import org.omegat.filters3.Attribute;
-import org.omegat.filters3.Attributes;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
  * This class specifies the RELAX NG XML Dialect.
+ *
+ * RELAX NG is a schema language for XML.  See http://relaxng.org/
  * 
  * @author Tony Graham
  */
@@ -45,26 +45,13 @@ public class RelaxNGDialect extends DefaultXMLDialect {
     public static final Pattern RELAXNG_ROOT_TAG = Pattern.compile("grammar");
     public static final Pattern RELAXNG_XMLNS = Pattern.compile("xmlns(:\\w+)?=\"http://relaxng.org/ns/structure/1.0\"");
 
-    /*
-     * A map of attribute-name and attribute value pairs that, if
-     * exist in a tag, indicate that this tag should not be translated
-     */
-    private HashMap<String, String> ignoreTagsAttributes;
-
     public RelaxNGDialect() {
-        //defineConstraint(CONSTRAINT_ROOT, RELAXNG_ROOT_TAG);
-        //defineConstraint(CONSTRAINT_XMLNS, RELAXNG_XMLNS);
+        defineConstraint(CONSTRAINT_ROOT, RELAXNG_ROOT_TAG);
+        defineConstraint(CONSTRAINT_XMLNS, RELAXNG_XMLNS);
 
         defineParagraphTags(new String[] { "documentation", "a:documentation", });
 
 	defineIntactTags(new String[] { "value", "name", "nsName", });
-
-        ignoreTagsAttributes = new HashMap<String, String>();
-        ignoreTagsAttributes.put("TRANSLATE=FALSE", "");
-    }
-
-    private boolean checkIgnoreTags(String key, String value) {
-        return ignoreTagsAttributes.containsKey(key.toUpperCase() + "=" + value.toUpperCase());
     }
 
 }

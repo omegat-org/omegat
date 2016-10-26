@@ -27,12 +27,19 @@
 
 package org.omegat.filters3.xml.relaxng;
 
+import java.io.BufferedReader;
+import java.util.regex.Matcher;
+
 import org.omegat.filters2.Instance;
+import org.omegat.filters3.xml.XMLDialect;
 import org.omegat.filters3.xml.XMLFilter;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 
 /**
  * Filter for RELAX NG XML files.
+ *
+ * RELAX NG is a schema language for XML.  See http://relaxng.org/
  * 
  * @author Tony Graham
  */
@@ -92,30 +99,28 @@ public class RelaxNGFilter extends XMLFilter {
         return true;
     }
 
-    /**
-     * Returns whether the file is supported by the filter by checking
-     * RELAX NG element and namespace constraints.
-     * 
-     * @return <code>true</code> or <code>false</code>
-     */
-    /*
+   /**
+    * Returns whether the file is supported by the filter by checking
+    * RELAX NG element and namespace constraints.
+    * 
+    * @return <code>true</code> or <code>false</code>
+    */
     public boolean isFileSupported(BufferedReader reader) {
         XMLDialect dialect = getDialect();
         if (dialect.getConstraints() == null || dialect.getConstraints().isEmpty()) {
             return true;
         }
         try {
-            char[] cbuf = new char[OConsts.READ_AHEAD_LIMIT];
-            int cbuf_len = reader.read(cbuf);
-            String buf = new String(cbuf, 0, cbuf_len);
-            Matcher matcher = RelaxNGDialect.RELAXNG_XMLNS.matcher(buf);
-	    if (!matcher.find()) // not RELAX NG
+	    char[] cbuf = new char[OConsts.READ_AHEAD_LIMIT];
+	    int cbuf_len = reader.read(cbuf);
+	    String buf = new String(cbuf, 0, cbuf_len);
+	    Matcher matcher = RelaxNGDialect.RELAXNG_XMLNS.matcher(buf);
+	    if (!matcher.find()) { // not RELAX NG
 		return false;
             }
         } catch (Exception e) {
             return false;
         }
         return true;
-    }
-    */
+   }
 }

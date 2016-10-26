@@ -29,9 +29,6 @@
 
 package org.omegat.filters3.xml.relaxng;
 
-import java.util.regex.Pattern;
-import java.util.HashMap;
-
 import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
@@ -42,13 +39,8 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  * @author Tony Graham
  */
 public class RelaxNGDialect extends DefaultXMLDialect {
-    public static final Pattern RELAXNG_ROOT_TAG = Pattern.compile("grammar");
-    public static final Pattern RELAXNG_XMLNS = Pattern.compile("xmlns(:\\w+)?=\"http://relaxng.org/ns/structure/1.0\"");
 
     public RelaxNGDialect() {
-        defineConstraint(CONSTRAINT_ROOT, RELAXNG_ROOT_TAG);
-        defineConstraint(CONSTRAINT_XMLNS, RELAXNG_XMLNS);
-
         defineParagraphTags(new String[] { "documentation", "a:documentation", });
 
 	defineIntactTags(new String[] { "value", "name", "nsName", });

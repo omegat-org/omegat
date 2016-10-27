@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.1 update 1
 ----------------------------------------------------------------------
-  0 Enhancements
+  1 Enhancement
   1 Bug fix
   0 Localisation updates
 ----------------------------------------------------------------------
 4.0.1 update 1 vs 4.0.1
+
+  Implemented requests:
+
+  - Filter for RELAX NG XML
+  https://sourceforge.net/p/omegat/feature-requests/1281/
 
   Bug fixes:
 

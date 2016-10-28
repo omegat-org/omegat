@@ -81,7 +81,7 @@ dependencies {
 
         // Dictionary
         compile 'org.dict.zip:dictzip-lib:0.8.2'
-        compile 'com.github.takawitter:trie4j:0.9.2'
+        compile 'com.github.takawitter:trie4j:0.9.5'
 
         // Legacy projects re-hosted on GitHub + Bintray
         compile 'org.omegat:vldocking:3.0.5'

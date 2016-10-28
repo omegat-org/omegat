@@ -27,6 +27,7 @@
 
 package org.omegat.util.gui;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -336,5 +337,41 @@ public class StaticUIUtils {
 
     public static void setWindowIcon(Window window) {
         window.setIconImages(Arrays.asList(ResourcesUtil.APP_ICON_16X16, ResourcesUtil.APP_ICON_32X32));
+    }
+
+    /**
+     * Calculate a highlight color from a base color, with a given amount of
+     * adjustment.
+     * <p>
+     * The adjustment is added to each of the base color's RGB values and
+     * rebounds from the boundaries [0, 255]. E.g. 250 + 4 -> 254 but 250 + 11
+     * -> 249, and 5 - 4 -> 1 but 5 - 11 -> 6.
+     */
+    public static Color getHighlightColor(Color base, int adjustment) {
+        return new Color(reboundClamp(0, 255, base.getRed() + adjustment),
+                reboundClamp(0, 255, base.getGreen() + adjustment), reboundClamp(0, 255, base.getBlue() + adjustment),
+                base.getAlpha());
+    }
+
+    /**
+     * Convenience method for {@link #getHighlightColor(Color, int)} using the
+     * default adjustment (10 darker than base).
+     */
+    public static Color getHighlightColor(Color base) {
+        return getHighlightColor(base, -10);
+    }
+
+    /**
+     * Clamp value between min and max by "rebounding" within the range [min,
+     * max].
+     */
+    static int reboundClamp(int min, int max, int value) {
+        if (value < min) {
+            return reboundClamp(min, max, min + (min - value));
+        } else if (value > max) {
+            return reboundClamp(min, max, max - (value - max));
+        } else {
+            return value;
+        }
     }
 }

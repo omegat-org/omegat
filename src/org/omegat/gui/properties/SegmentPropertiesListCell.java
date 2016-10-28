@@ -25,6 +25,7 @@
 
 package org.omegat.gui.properties;
 
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -50,18 +51,20 @@ public class SegmentPropertiesListCell extends javax.swing.JPanel {
      */
     public SegmentPropertiesListCell() {
         initComponents();
+        Color highlightColor = StaticUIUtils
+                .getHighlightColor(Styles.EditorColor.COLOR_BACKGROUND.getColor());
         setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
-        labelPanel.setBackground(ISegmentPropertiesView.ROW_HIGHLIGHT_COLOR);
+        labelPanel.setBackground(highlightColor);
         labelPanel.setBorder(ISegmentPropertiesView.MARGIN_BORDER);
         label.setFont(UIManager.getFont("Label.font"));
         label.setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
-        label.setBackground(ISegmentPropertiesView.ROW_HIGHLIGHT_COLOR);
+        label.setBackground(highlightColor);
         value.setEditorKit(new ForcedWrappingEditorKit());
         value.setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
         value.setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
         value.setBorder(ISegmentPropertiesView.MARGIN_BORDER);
         JTextPaneLinkifier.linkify(value);
-        settingsButton.setBackground(ISegmentPropertiesView.ROW_HIGHLIGHT_COLOR);
+        settingsButton.setBackground(highlightColor);
         settingsButton.setIcon(ISegmentPropertiesView.SETTINGS_ICON_INVISIBLE);
         settingsButton.setRolloverIcon(ISegmentPropertiesView.SETTINGS_ICON);
         settingsButton.setPressedIcon(ISegmentPropertiesView.SETTINGS_ICON_PRESSED);

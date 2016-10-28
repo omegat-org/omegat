@@ -57,6 +57,7 @@ import org.omegat.core.Core;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.DataTableStyling;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TableColumnSizer;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -298,7 +299,8 @@ public class SegmentPropertiesTableView implements ISegmentPropertiesView {
                 result.setBackground(table.getSelectionBackground());
                 result.setForeground(table.getSelectionForeground());
             } else {
-                result.setBackground(row % 2 == 0 ? table.getBackground() : ROW_HIGHLIGHT_COLOR);
+                Color bg = table.getBackground();
+                result.setBackground(row % 2 == 0 ? bg : StaticUIUtils.getHighlightColor(bg));
                 result.setForeground(table.getForeground());
             }
             Border marginBorder = new EmptyBorder(1, column == 0 ? 5 : 1, 1,
@@ -359,7 +361,8 @@ public class SegmentPropertiesTableView implements ISegmentPropertiesView {
                 setBackground(table.getSelectionBackground());
                 setForeground(table.getSelectionForeground());
             } else {
-                setBackground(row % 2 == 0 ? table.getBackground() : ROW_HIGHLIGHT_COLOR);
+                Color bg = table.getBackground();
+                setBackground(row % 2 == 0 ? bg : StaticUIUtils.getHighlightColor(bg));
                 setForeground(table.getForeground());
             }
             Border marginBorder = new EmptyBorder(1, column == 0 ? 5 : 1, 1,

@@ -69,7 +69,6 @@ public interface ISegmentPropertiesView {
     };
 
     static final String PROPERTY_TRANSLATION_KEY = "SEGPROP_KEY_";
-    static final Color ROW_HIGHLIGHT_COLOR = new Color(245, 245, 245);
     static final Border FOCUS_BORDER = new MatteBorder(1, 1, 1, 1, new Color(0x76AFE8));
     static final Border MARGIN_BORDER = new EmptyBorder(1, 5, 1, 5);
     static final Border FOCUS_COMPOUND_BORDER = new CompoundBorder(MARGIN_BORDER, FOCUS_BORDER);

@@ -502,7 +502,7 @@ jnlp {
     }
 }
 
-processResources << {
+processResources.doLast {
     /* Set the revision number included in version strings. The value is chosen from the first valid value in:
     1. src/org/omegat/Version.properties (only if not "dev", i.e. this is a source package not under VCS)
     2. This svn checkout's revision

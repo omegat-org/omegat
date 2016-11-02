@@ -245,7 +245,7 @@ distributions {
                 include 'docs/**', 'images/**', 'lib/**', 'release/**',
                     'src/**', 'test/**', 'gen/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
                     'gradle/**', 'gradlew*', '*.gradle', 'README.md', '*.properties'
-                exclude '**/build/**', '**/pdf/**'
+                exclude '**/build/**', 'doc_src/**/pdf/**'
             }
             into('lib/provided') {
                 from configurations.runtime

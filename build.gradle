@@ -102,7 +102,7 @@ dependencies {
 
         // Lucene for tokenizers
         // Temporary use of custom lucene-core; see https://sourceforge.net/p/omegat/bugs/813/
-        compile 'org.omegat.lucene:lucene-core:5.2.1'
+        compile 'org.omegat.lucene:lucene-core:5.2.1-1'
         compile 'org.apache.lucene:lucene-analyzers-common:5.2.1'
         compile 'org.apache.lucene:lucene-analyzers-kuromoji:5.2.1'
         compile 'org.apache.lucene:lucene-analyzers-smartcn:5.2.1'

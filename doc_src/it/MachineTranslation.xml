@@ -95,7 +95,7 @@
 
   <section>
     <title>MyMemory (automatico)<indexterm class="singular">
-        <primary>Traduzionne automatica</primary> <secondary>MyMemory</secondary>
+        <primary>Traduzione automatica</primary> <secondary>MyMemory</secondary>
       </indexterm></title>
 
     <para>Per impostazione predefinita, MyMemory consente un massimo di cento richieste al giorno. Se si fornisce un indirizzo di posta elettronica, è possibile usare mille richieste anziché cento.</para>

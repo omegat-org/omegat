@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   2 Enhancements
   1 Bug fix
-  0 Localisation updates
+  1 Localisation update
 ----------------------------------------------------------------------
 4.0.1 update 1 vs 4.0.1
 
@@ -18,6 +18,10 @@
   Bug fixes:
 
   - Fixed an issue with the File Filters dialog on some Linux systems
+
+  Localisation Updates:
+
+  - Italian localisation updated to 4.0.1 (UI, readme, documentation)
 
 ----------------------------------------------------------------------
  OmegaT 4.0.1 (2016-10-03)

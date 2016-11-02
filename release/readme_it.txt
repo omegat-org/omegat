@@ -1,7 +1,7 @@
-Questa traduzione è frutto del lavoro di Valter Mura, copyright© 2014 e revisione di Valter Mura e Carmelo Serraino copyright© 2014.
+Questa traduzione è frutto del lavoro di Valter Mura, copyright© 2016 e revisione di Valter Mura, copyright© 2016.
 
 ==============================================================================
-  File Leggimi di OmegaT 3.0
+  File Leggimi di OmegaT 4.0
 
   1.  Informazioni su OmegaT
   2.  Che cosa è OmegaT?
@@ -93,7 +93,7 @@ Il manuale per l'utente si trova nel pacchetto appena scaricato e vi si potrà a
  3. Installazione di OmegaT
 
 3.1 Generale
-Per funzionare, OmegaT richiede che sul sistema sia installato Java Runtime Environment (JRE) versione 1.6 o superiore. Sono ora disponibili i pacchetti OmegaT che includono il Java Runtime Environment, e che evitano agli utenti l'incombenza di selezionarlo, scaricarlo e installarlo. 
+Per funzionare, OmegaT richiede che sul sistema sia installato Java Runtime Environment (JRE) versione 1.8 o superiore. Sono ora disponibili i pacchetti OmegaT che includono il Java Runtime Environment, e che evitano agli utenti l'incombenza di selezionarlo, scaricarlo e installarlo. 
 
 Se Java è già installato, un metodo per installare la versione corrente di OmegaT è usare "Java Web Start". 
 A questo proposito, scaricare ed eseguire il file seguente:
@@ -112,7 +112,11 @@ Se si è in dubbio, raccomandiamo di usare la versione fornita con JRE. Essa è 
 
 Per gli utenti di Linux: OmegaT funzionerà con l'implementazione Java open source fornita in molte distribuzioni Linux (per esempio Ubuntu), ma in tale caso è possibile riscontrare errori, problemi di visualizzazione o mancanza di alcune funzionalità. Raccomandiamo dunque di scaricare e installare "Oracle Java Runtime Environment" (JRE) o il pacchetto OmegaT completo di JRE (quello .tar.bz2) contrassegnato "Linux"). Se si installa una versione di Java a livello di sistema, è necessario assicurarsi che questa sia nel proprio percorso di avvio o che sia richiamata in modo esplicito durante l'avvio di OmegaT. Se non si è esperti di Linux, raccomandiamo di installare una versione di OmegaT con JRE. Essa è sicura, dato che questo JRE "locale" non interferisce con gli altri JRE installati nel sistema.
 
-Per gli utenti di Mac: JRE è già installato nel Mac OS X precedente alla versione 10.7 (Lion). Agli utenti di Lion verrà fatta una richiesta dal sistema (al primo avvio di un'applicazione che ha bisogno di Java), il quale eventualmente lo scaricherà e installerà in modo automatico.
+Utenti Mac: 
+la versione Mac contiene una copia di JRE. In alternativa, è necessario scaricare e
+installare Oracle JRE per proprio conto.
+
+    https://java.com/en/download/
 
 Per Linux sui sistemi PowerPC: gli utenti devono scaricare il JRE di IBM, dato che Sun non fornisce una versione JRE per sistemi PPC. In questo caso, scaricarlo da:
 
@@ -166,6 +170,9 @@ Utenti di Mac: trascinare OmegaT.app nella propria dock o nella barra degli stru
 Per partecipare allo sviluppo di OmegaT, mettersi in contatto con gli sviluppatori all'indirizzo:
     http://lists.sourceforge.net/lists/listinfo/omegat-development
 
+Per iniziare a collaborare come programmatore, si veda la documentazione per gli sviluppatori:
+    https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/
+
 Per tradurre l'interfaccia utente di OmegaT, il manuale per l'utente o altri documenti correlati, leggere:
       
       http://www.omegat.org/en/howtos/localizing_omegat.php
@@ -184,6 +191,7 @@ Avrete così un'idea di che cosa accade nel mondo di OmegaT...
 Elenco dei contributi precedenti (in ordine alfabetico)
 
 Contributi al codice:
+  Lev Abashkin
   (in ordine alfabetico)
   Volker Berlin
   Didier Briel
@@ -194,6 +202,7 @@ Contributi al codice:
   Enrique Estévez Fernández
   Martin Fleurke  
   Wildrich Fourie
+  Tony Graham
   Phillip Hall
   Jean-Christophe Helary
   Chihiro Hio
@@ -237,35 +246,27 @@ Altri contributi:
 OmegaT usa le seguenti librerie:
   HTMLParser 1.6 di Somik Raha, Derrick Oswald et al (licenza LGPL)
   VLDocking Framework 3.0.5-SNAPSHOT (licenza LGPL)
-  Hunspell di László Németh et al (licenza LGPL)
-  JNA di Todd Fast, Timothy Wall et al (licenza LGPL)
   Swing-Layout 1.0.4 (licenza LGPL)
   Jmyspell 2.1.4 (licenza LGPL)
-  SVNKit 1.8.5 (licenza TMate)
+  SVNKit 1.8.12 (licenza TMate)
   Sequence Library (licenza Sequence Library)
   ANTLR 3.4 (licenza ANTLR 3)
   SQLJet 1.1.10 (GPL v2)
   JGit (licenza di distribuzione Eclipse)
   JSch (licenza JSch)
-  Base64 (dominio pubblico)
+  jsch-agent-proxy (licenza jsch-agent-proxy)
   Diff (GPL)
-  trilead-ssh2-1.0.0-build217 (licenza Trilead SSH)
+  trilead-ssh2-1.0.0-build220 (licenza Trilead SSH)
   lucene-*.jar (licenza Apache 2.0)
-  I tokenizer inglesi (org.omegat.tokenizer.SnowballEnglishTokenizer e
-org.omegat.tokenizer.LuceneEnglishTokenizer) mutuano originariamente le stop words da Okapi (http://okapi.sourceforge.net) (LGPL license)
-  tinysegmenter.jar (licenza BSD modificata)
   commons-*.jar (licenza Apache 2.0)
-  jWordSplitter (licenza Apache 2.0)
-  LanguageTool.jar (licenza LGPL)
-  morfologik-*.jar (licenza Morfologik)
-  segment-1.4.1.jar (licenza Segment)
-  pdfbox-app-1.8.1.jar (licenza Apache 2.0)
-  KoreanAnalyzer-3x-120223.jar (licenza Apache 2.0)
+  LanguageTool (licenza LGPL e altre)
+  PDFBox (licenza Apache 2.0)
   SuperTMXMerge-for_OmegaT.jar (licenza LGPL)
-  groovy-all-2.2.2.jar (licenza Apache 2.0)
+  groovy-all-2.4.6.jar (licenza Apache 2.0)
   slf4j (licenza MIT)
   juniversalchardet-1.0.3.jar (GPL v2)
   DictZip da JDictd (GPL v2)
+  trie4j (licenza Apache 2.0)
 
 ==============================================================================
  5.  OmegaT genera problemi? Si ha bisogno di assistenza?

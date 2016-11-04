@@ -105,7 +105,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
 
     @Override
     public void switchToVersion(String version) throws Exception {
-        Log.logInfoRB("SVN_START", "checkout");
+        Log.logInfoRB("SVN_START", "checkout to " + version);
         filesForCommit.clear();
 
         SVNURL url = SVNURL.parseURIEncoded(SVNEncodingUtil.autoURIEncode(config.getUrl()));
@@ -117,9 +117,9 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
         }
 
         try {
-            Log.logInfoRB("SVN_FINISH", "checkout");
             ourClientManager.getUpdateClient().doCheckout(url, baseDirectory, SVNRevision.HEAD,
                     toRev, SVNDepth.INFINITY, false);
+            Log.logInfoRB("SVN_FINISH", "checkout");
         } catch (Exception ex) {
             Log.logErrorRB("SVN_ERROR", "checkout", ex.getMessage());
             throw ex;

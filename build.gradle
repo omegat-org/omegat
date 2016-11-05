@@ -435,22 +435,18 @@ task win {
             (jrePath == null || jrePath.directory) && haveInnoSetup()
         }
         doLast {
-            // Use Ant filtering because we need Unicode output. See
-            // https://issues.gradle.org/browse/GRADLE-1267
-            ant.copy(todir: destinationDir, encoding: 'utf8', outputencoding: 'utf8') {
-                fileset(dir: 'release/win32-specific', includes: 'OmegaT.iss')
-                filterchain {
-                    replacetokens {
-                        ['VERSION_NUMBER_SUBST': fullVersion,
+            project.copy {
+                from('release/win32-specific') {
+                    include 'OmegaT.iss'
+                }
+                into(destinationDir)
+                filter(ReplaceTokens, tokens: ['VERSION_NUMBER_SUBST': fullVersion,
                          'OUTPUT_DIR_SUBST': distsDir.path,
-                         'OUTPUT_BASENAME_SUBST': installerBasename,
+                         'OUTPUT_BASENAME_SUBST': installerBasename.toString(),
                          'JRE_COMMENT_SUBST': jrePath == null ? ';' : '',
                          'JRE_PATH_SUBST': jrePath == null ? '' : jrePath.path,
-                         'CUSTOM_MESSAGES_SUBST': getInnoSetupCustomMessages()].each { key, tok ->
-                            token(key: key, value: tok)
-                        }
-                    }
-                }
+                         'CUSTOM_MESSAGES_SUBST': getInnoSetupCustomMessages()])
+                filteringCharset = 'UTF-8'
             }
             exec {
                 commandLine 'iscc', "${destinationDir}/OmegaT.iss"

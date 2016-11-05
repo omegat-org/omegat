@@ -289,7 +289,9 @@ public class LineLengthLimitWriter extends Writer {
         try {
             // check previous char. Can't split after specified chars.
             int cp = str.codePointBefore(pos);
-            if (":\\([{<«„".indexOf(cp) >= 0) {
+            // U+00AB LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+            // U+201E DOUBLE LOW-9 QUOTATION MARK
+            if (":\\([{<\u00ab\u201e".indexOf(cp) >= 0) {
                 return false;
             }
         } catch (StringIndexOutOfBoundsException ex) {
@@ -297,7 +299,9 @@ public class LineLengthLimitWriter extends Writer {
         try {
             // check next char. Can't split before specified chars.
             int cp = str.codePointAt(pos);
-            if ("{:)]}>»“,.".indexOf(cp) >= 0) {
+            // U+00BB RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+            // U+201C LEFT DOUBLE QUOTATION MARK
+            if ("{:)]}>\u00bb\u201c,.".indexOf(cp) >= 0) {
                 return false;
             }
         } catch (StringIndexOutOfBoundsException ex) {

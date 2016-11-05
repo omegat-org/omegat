@@ -90,7 +90,8 @@ public class YandexTranslate extends BaseTranslate {
         String lvSourceLang = sLang.getLanguageCode().substring(0, 2).toLowerCase();
         String lvTargetLang = tLang.getLanguageCode().substring(0, 2).toLowerCase();
 
-        String lvShorText = text.length() > 10000 ? text.substring(0, 9999) + "…" : text;
+        // U+2026 HORIZONTAL ELLIPSIS
+        String lvShorText = text.length() > 10000 ? text.substring(0, 9999) + "\u2026" : text;
         String prev = getFromCache(sLang, tLang, lvShorText);
         if (prev != null) {
             return prev;

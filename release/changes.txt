@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.1 update 1
 ----------------------------------------------------------------------
-  2 Enhancements
+  3 Enhancements
   1 Bug fix
   2 Localisation updates
 ----------------------------------------------------------------------
@@ -14,6 +14,14 @@
 
   - Improve Segment Properties pane appearance with dark themes
   https://sourceforge.net/p/omegat/feature-requests/1284/
+
+  Other changes:
+
+  - New external_spellcheck script, to help spell checking in a
+word processor when the source document is not a word processing
+document. The script writes all segments (or only segments
+from the current file) to a file named [project_name].doc and then 
+opens it.
 
   Bug fixes:
 

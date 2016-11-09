@@ -2,7 +2,7 @@
  OmegaT 4.0.1 update 1
 ----------------------------------------------------------------------
   3 Enhancements
-  1 Bug fix
+  2 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
 4.0.1 update 1 vs 4.0.1
@@ -26,6 +26,9 @@ opens it.
   Bug fixes:
 
   - Fixed an issue with the File Filters dialog on some Linux systems
+
+  - Password-protected PDF prevents project from loading
+  https://sourceforge.net/p/omegat/bugs/842/
 
   Localisation Updates:
 

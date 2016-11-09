@@ -31,6 +31,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,6 +41,7 @@ import org.apache.pdfbox.text.PDFTextStripper;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
+import org.omegat.filters2.TranslationException;
 import org.omegat.util.OStrings;
 
 /**
@@ -74,17 +77,20 @@ public class PdfFilter  extends AbstractFilter {
 
     @Override
     public BufferedReader createReader(File infile, String encoding)
-            throws IOException {
+            throws IOException, TranslationException {
         PDFTextStripper stripper;
         stripper = new PDFTextStripper();
         stripper.setLineSeparator("\n");
         stripper.setSortByPosition(true);
 
-        PDDocument document = PDDocument.load(infile);
-        String text = stripper.getText(document);
-        document.close();
-
-        return new BufferedReader(new StringReader(text));
+        try (PDDocument document = PDDocument.load(infile)) {
+            String text = stripper.getText(document);
+            return new BufferedReader(new StringReader(text));
+        } catch (NoClassDefFoundError ex) {
+            Logger.getLogger(getClass().getName()).log(Level.WARNING,
+                    OStrings.getString("PDFFILTER_ENCRYPTED_FILE"), infile);
+            throw new TranslationException(ex);
+        }
     }
 
     @Override

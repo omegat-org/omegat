@@ -29,6 +29,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.omegat.core.data.IProject;
+import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.pdf.PdfFilter;
 
 public class PdfFilterTest extends TestFilterBase {
@@ -50,5 +51,15 @@ public class PdfFilterTest extends TestFilterBase {
         checkMultiStart(fi, f);
         checkMulti("This is some text. This is also some text.", null, null, null, null, null);
         checkMultiEnd();
+    }
+
+    public void testPasswordProtected() throws Exception {
+        String f = "test/data/filters/pdf/file-PdfFilter-password.pdf";
+        try {
+            loadSourceFiles(new PdfFilter(), f);
+            fail("Password-protected PDFs are not supported");
+        } catch (TranslationException ex) {
+            // OK
+        }
     }
 }

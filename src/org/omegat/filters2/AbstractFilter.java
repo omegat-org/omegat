@@ -261,7 +261,7 @@ public abstract class AbstractFilter implements IFilter {
     public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext fc) {
         try (BufferedReader reader = createReader(inFile, fc.getInEncoding())) {
             return isFileSupported(reader);
-        } catch (IOException e) {
+        } catch (IOException | TranslationException e) {
             return false;
         }
     }
@@ -315,9 +315,11 @@ public abstract class AbstractFilter implements IFilter {
      *             Thrown if JVM doesn't support the specified inEncoding
      * @throws IOException
      *             If any I/O Error occurs upon reader creation
+     * @throws TranslationException
+     *             Should be thrown when processed file has any format defects.
      */
     protected BufferedReader createReader(File inFile, String inEncoding)
-            throws UnsupportedEncodingException, IOException {
+            throws UnsupportedEncodingException, IOException, TranslationException {
         InputStreamReader isr;
         if (inEncoding == null)
             isr = new InputStreamReader(new FileInputStream(inFile));

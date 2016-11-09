@@ -38,7 +38,7 @@ def nl = System.getProperty('line.separator')
             if (target == null) {
                 target = source 
             }
-            wordFile.append(target + nl, 'UTF-8')
+            wordFile.append(target + nl + nl, 'UTF-8')
             //console.println(target)
         }
     }

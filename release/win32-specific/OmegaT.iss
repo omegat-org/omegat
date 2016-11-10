@@ -14,6 +14,8 @@ SolidCompression=yes
 LicenseFile=OmegaT-license.txt
 OutputDir=@OUTPUT_DIR_SUBST@
 OutputBaseFilename=@OUTPUT_BASENAME_SUBST@
+ArchitecturesAllowed=@ARCHITECTURE_SUBST@
+ArchitecturesInstallIn64BitMode=@ARCHITECTURE_SUBST@
 
 [Files]
 Source: "docs\*"; DestDir: "{app}\docs"; Flags: recursesubdirs

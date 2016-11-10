@@ -188,6 +188,7 @@ def linuxJRE = file("${assetDir}/jre-linux")
 def linux64JRE = file("${assetDir}/jre-linux-64")
 
 def windowsJRE = file("${assetDir}/jre")
+def windowsJRE64 = file("${assetDir}/jre-64")
 
 distributions {
     main {
@@ -418,7 +419,7 @@ task win {
     description = 'Build the Windows distributions.'
 }
 
-[winNoJRE: null, winJRE: windowsJRE].each { taskName, jrePath ->
+[winNoJRE: null, winJRE: windowsJRE, winJRE64: windowsJRE64].each { taskName, jrePath ->
     task(type: Sync, taskName) {
         description = "Create a Windows installer for ${taskName} distro. " +
             'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
@@ -429,6 +430,9 @@ task win {
         destinationDir = file("${buildDir}/innosetup/${taskName}")
         def fullVersion = project.version + omtVersion.beta
         def suffix = jrePath == null ? 'Windows_without_JRE' : 'Windows'
+        if (jrePath == windowsJRE64) {
+             suffix = 'Windows-64'
+        }
         def installerBasename = "OmegaT_${fullVersion}_${suffix}"
         outputs.file "${distsDir}/${installerBasename}.exe"
         onlyIf {
@@ -445,7 +449,8 @@ task win {
                          'OUTPUT_BASENAME_SUBST': installerBasename.toString(),
                          'JRE_COMMENT_SUBST': jrePath == null ? ';' : '',
                          'JRE_PATH_SUBST': jrePath == null ? '' : jrePath.path,
-                         'CUSTOM_MESSAGES_SUBST': getInnoSetupCustomMessages()])
+                         'CUSTOM_MESSAGES_SUBST': getInnoSetupCustomMessages(),
+                         'ARCHITECTURE_SUBST': jrePath == windowsJRE64 ? 'x64' : ''])
                 filteringCharset = 'UTF-8'
             }
             exec {

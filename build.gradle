@@ -419,24 +419,21 @@ task win {
     description = 'Build the Windows distributions.'
 }
 
-[winNoJRE: null, winJRE: windowsJRE, winJRE64: windowsJRE64].each { taskName, jrePath ->
-    task(type: Sync, taskName) {
-        description = "Create a Windows installer for ${taskName} distro. " +
+def makeWinTask = { args ->
+    task(type: Sync, args.name) {
+        description = "Create a Windows installer for ${args.name} distro. " +
             'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
         with distributions.main.contents
         from ('release/win32-specific') {
             include 'OmegaT.exe', 'OmegaT.l4J.ini'
         }
-        destinationDir = file("${buildDir}/innosetup/${taskName}")
+        destinationDir = file("${buildDir}/innosetup/${args.name}")
         def fullVersion = project.version + omtVersion.beta
-        def suffix = jrePath == null ? 'Windows_without_JRE' : 'Windows'
-        if (jrePath == windowsJRE64) {
-             suffix = 'Windows-64'
-        }
-        def installerBasename = "OmegaT_${fullVersion}_${suffix}"
+        def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
+        def hasJRE = args.jrePath != null
         outputs.file "${distsDir}/${installerBasename}.exe"
         onlyIf {
-            (jrePath == null || jrePath.directory) && haveInnoSetup()
+            (!hasJRE || args.jrePath.directory) && haveInnoSetup()
         }
         doLast {
             project.copy {
@@ -444,13 +441,13 @@ task win {
                     include 'OmegaT.iss'
                 }
                 into(destinationDir)
-                filter(ReplaceTokens, tokens: ['VERSION_NUMBER_SUBST': fullVersion,
-                         'OUTPUT_DIR_SUBST': distsDir.path,
-                         'OUTPUT_BASENAME_SUBST': installerBasename.toString(),
-                         'JRE_COMMENT_SUBST': jrePath == null ? ';' : '',
-                         'JRE_PATH_SUBST': jrePath == null ? '' : jrePath.path,
-                         'CUSTOM_MESSAGES_SUBST': getInnoSetupCustomMessages(),
-                         'ARCHITECTURE_SUBST': jrePath == windowsJRE64 ? 'x64' : ''])
+                filter(ReplaceTokens, tokens: [VERSION_NUMBER_SUBST: fullVersion,
+                         OUTPUT_DIR_SUBST: distsDir.path,
+                         OUTPUT_BASENAME_SUBST: installerBasename.toString(),
+                         JRE_COMMENT_SUBST: hasJRE ? '' : ';',
+                         JRE_PATH_SUBST: hasJRE ? args.jrePath.path : '',
+                         CUSTOM_MESSAGES_SUBST: getInnoSetupCustomMessages(),
+                         ARCHITECTURE_SUBST: args.get('arch', '')])
                 filteringCharset = 'UTF-8'
             }
             exec {
@@ -458,9 +455,12 @@ task win {
             }
         }
     }
-    assemble.dependsOn taskName
-    win.dependsOn taskName
+    assemble.dependsOn args.name
+    win.dependsOn args.name
 }
+makeWinTask name: 'winNoJRE', suffix: 'Windows_without_JRE'
+makeWinTask name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE
+makeWinTask name: 'winJRE64', suffix: 'Windows-64', jrePath: windowsJRE64, arch: 'x64'
 
 // Disable .tar distributions for everyone but Linux
 tasks.findAll { it.name =~ /[dD]istTar$/ && !it.name.contains('linux') }.each { it.enabled = false }

@@ -102,7 +102,7 @@ below the root of the project
 ----------------------------------------------------------------------
  OmegaT 4.0.0 (2016-09-06)
 ----------------------------------------------------------------------
- 34 Enhancements
+ 35 Enhancements
   8 Bug fixes
   1 Localisation update
 ----------------------------------------------------------------------
@@ -190,6 +190,9 @@ below the root of the project
 
   - Add history prediction and completion
   https://sourceforge.net/p/omegat/feature-requests/1262/
+
+  - Sortable and clickable Statistics file list
+  https://sourceforge.net/p/omegat/feature-requests/1208/
 
   Other changes
 

@@ -85,6 +85,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.DataUtils;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.util.Log;
@@ -470,6 +471,7 @@ public class IssuesPanelController implements IIssues {
     void reset() {
         if (loader != null) {
             loader.cancel(true);
+            loader = null;
         }
         frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE"));
         panel.table.setModel(new DefaultTableModel());
@@ -500,11 +502,11 @@ public class IssuesPanelController implements IIssues {
     }
 
     Map.Entry<SourceTextEntry, TMXEntry> makeEntryPair(SourceTextEntry ste) {
-        TMXEntry tmxEntry = Core.getProject().getTranslationInfo(ste);
-        if (tmxEntry == null) {
-            // Project was closed
+        IProject project = Core.getProject();
+        if (!project.isProjectLoaded()) {
             return null;
         }
+        TMXEntry tmxEntry = project.getTranslationInfo(ste);
         if (!tmxEntry.isTranslated()) {
             return null;
         }
@@ -560,6 +562,9 @@ public class IssuesPanelController implements IIssues {
 
         @Override
         protected void done() {
+            if (isCancelled()) {
+                return;
+            }
             List<IIssue> allIssues = Collections.emptyList();
             try {
                 allIssues = get();

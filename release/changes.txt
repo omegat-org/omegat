@@ -248,6 +248,20 @@ could fail with duplicate numbers
   - Interlingua localisation updated to 4.0 (UI, documentation, readme, scripts)
 
 ----------------------------------------------------------------------
+ OmegaT 3.6.0 update 5
+----------------------------------------------------------------------
+  0 Enhancement
+  1 Bug fix
+  0 Localisation update
+----------------------------------------------------------------------
+3.6.0 update 5 vs 3.6.0 update 4
+
+  Bug fixes:
+
+  - DocBook XML filter ignores some content
+  https://sourceforge.net/p/omegat/bugs/844/
+
+----------------------------------------------------------------------
  OmegaT 3.6.0 update 4 (2016-10-22)
 ----------------------------------------------------------------------
   0 Enhancement

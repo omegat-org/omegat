@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Didier Briel
                2008 Fabian Mandelbaum, Didier Briel
+               2016 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -46,22 +47,26 @@ public class DocBookDialect extends DefaultXMLDialect {
     public DocBookDialect() {
         defineConstraint(CONSTRAINT_PUBLIC_DOCTYPE, DOCBOOK_PUBLIC_DTD);
 
+        // Some paragraph and preformat tags added because content was missing
+        // See https://sourceforge.net/p/omegat/bugs/844/
         defineParagraphTags(new String[] { "book", "bookinfo", "title", "subtitle", "authorgroup", "author",
-                "firstname", "surname", "affiliation", "orgname", "address", "email", "edition", "pubdate",
-                "copyright", "year", "holder", "isbn", "keywordset", "keyword", "preface", "title", "para",
-                "chapter", "table", "tgroup", "thead", "tbody", "row", "entry", "revhistory", "revision",
-                "revnumber", "date", "authorinitials", "revremark", "itemizedlist", "listitem", "member", 
-                "releaseinfo"});
+                       "firstname", "surname", "affiliation", "orgname", "address", "email", "edition", "pubdate",
+                       "copyright", "year", "holder", "isbn", "keywordset", "keyword", "preface", "title", "simpara", "para",
+                       "chapter", "table", "tgroup", "thead", "tbody", "row", "entry", "revhistory", "revision",
+                       "revnumber", "date", "authorinitials", "revremark", "itemizedlist", "listitem", "member", 
+                       "releaseinfo", "bibliomixed", "bibliomset", "bridgehead", "glossseealso",
+                       "primaryie", "refentrytitle", "secondaryie", "seealsoie", "seeie", "subtitle",
+                       "synopfragmentref", "term", "tertiaryie", "tocentry", "glosssee"});
 
         defineOutOfTurnTags(new String[] { "indexterm", });
 
-        definePreformatTags(new String[] { "screen", "programlisting", });
+        definePreformatTags(new String[] { "screen", "programlisting", "synopsis", "literallayout", "address" });
 
         defineTranslatableAttributes(new String[] { "url", "lang", "xml:lang" });
 
     }
 
-    // TODO: Can we can read db xml content here to try to determinate if
+    // TODO: Can we read db xml content here to try to determinate if
     // the root element has a NS declaration to be able to handle
     // namespaced-tags properly? We'd actually need to read only the
     // root element together with its attributes.

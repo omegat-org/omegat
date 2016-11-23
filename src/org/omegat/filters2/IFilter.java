@@ -26,6 +26,7 @@
 package org.omegat.filters2;
 
 import java.awt.Dialog;
+import java.awt.Window;
 import java.io.File;
 import java.util.Map;
 
@@ -171,6 +172,8 @@ public interface IFilter {
 
     /**
      * Show change options dialog for able to change options.
+     * <p>
+     * Deprecated; please use {@link #changeOptions(Window, Map)} instead.
      * 
      * @param parent
      *            parent window
@@ -178,7 +181,25 @@ public interface IFilter {
      *            old options
      * @return new options or null if options not changed
      */
+    @Deprecated
     Map<String, String> changeOptions(Dialog parent, Map<String, String> config);
+
+    /**
+     * Show change options dialog for able to change options.
+     * 
+     * @param parent
+     *            parent window
+     * @param config
+     *            old options
+     * @return new options or null if options not changed
+     */
+    default Map<String, String> changeOptions(Window parent, Map<String, String> config) {
+        if (parent instanceof Dialog) {
+            return changeOptions((Dialog) parent, config);
+        } else {
+            return changeOptions((Dialog) null, config);
+        }
+    }
 
     /**
      * Returns the encoding of the last parsed source file.

@@ -27,7 +27,7 @@
 
 package org.omegat.filters2.mozdtd;
 
-import java.awt.Dialog;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.util.Map;
 import java.util.TreeMap;
@@ -56,8 +56,9 @@ public class MozillaDTDOptionsDialog extends javax.swing.JDialog {
     /**
      * Creates new form MozillaDTDOptionsDialog
      */
-    public MozillaDTDOptionsDialog(Dialog parent, Map<String, String> options) {
-        super(parent, true);
+    public MozillaDTDOptionsDialog(Window parent, Map<String, String> options) {
+        super(parent);
+        setModal(true);
         this.options = new TreeMap<String, String>(options);
         initComponents();
 

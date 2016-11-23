@@ -27,7 +27,7 @@
 
 package org.omegat.filters2.html2;
 
-import java.awt.Dialog;
+import java.awt.Window;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -252,7 +252,7 @@ public class HTMLFilter2 extends AbstractFilter {
      *         options otherwise.
      */
     @Override
-    public Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
+    public Map<String, String> changeOptions(Window parent, Map<String, String> config) {
         try {
             EditOptionsDialog dialog = new EditOptionsDialog(parent, config);
             dialog.setVisible(true);

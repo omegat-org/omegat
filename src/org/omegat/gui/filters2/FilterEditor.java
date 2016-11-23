@@ -25,9 +25,9 @@
 
 package org.omegat.gui.filters2;
 
-import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.Window;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
@@ -63,8 +63,9 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
     public Filter result;
 
     /** Creates new form SingleFilterEditor */
-    public FilterEditor(Dialog parent, Filter filter) {
-        super(parent, true);
+    public FilterEditor(Window parent, Filter filter) {
+        super(parent);
+        setModal(true);
         this.filter = FilterMaster.cloneFilter(filter);
 
         StaticUIUtils.setEscapeClosable(this);

@@ -188,6 +188,7 @@ public abstract class AbstractFilter implements IFilter {
      * 
      * @return File format name
      */
+    @Override
     public abstract String getFileFormatName();
 
     /**
@@ -198,6 +199,7 @@ public abstract class AbstractFilter implements IFilter {
      * 
      * @return Default filter instances
      */
+    @Override
     public abstract Instance[] getDefaultInstances();
 
     /**
@@ -211,6 +213,7 @@ public abstract class AbstractFilter implements IFilter {
      * 
      * @return whether source encoding can be changed by the user
      */
+    @Override
     public abstract boolean isSourceEncodingVariable();
 
     /**
@@ -223,6 +226,7 @@ public abstract class AbstractFilter implements IFilter {
      * 
      * @return whether target encoding can be changed by the user
      */
+    @Override
     public abstract boolean isTargetEncodingVariable();
 
     /**
@@ -258,6 +262,7 @@ public abstract class AbstractFilter implements IFilter {
      *            Filter context.
      * @return Does the filter support the file.
      */
+    @Override
     public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext fc) {
         try (BufferedReader reader = createReader(inFile, fc.getInEncoding())) {
             return isFileSupported(reader);
@@ -272,6 +277,7 @@ public abstract class AbstractFilter implements IFilter {
      * 
      * @return fuzzy mark prefix
      */
+    @Override
     public String getFuzzyMark() {
         return "fuzzy";
     }
@@ -282,6 +288,7 @@ public abstract class AbstractFilter implements IFilter {
      * 
      * @return The hint for editing the filter in a non-geek language.
      */
+    @Override
     public String getHint() {
         return "";
     }
@@ -292,6 +299,7 @@ public abstract class AbstractFilter implements IFilter {
      * 
      * @return True if the filter has any options, and false otherwise.
      */
+    @Override
     public boolean hasOptions() {
         return false;
     }
@@ -299,6 +307,7 @@ public abstract class AbstractFilter implements IFilter {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
         return null;
     }
@@ -475,6 +484,7 @@ public abstract class AbstractFilter implements IFilter {
         return encoding;
     }
 
+    @Override
     public final void parseFile(File inFile, Map<String, String> config, FilterContext fc,
             IParseCallback callback) throws Exception {
         entryParseCallback = callback;
@@ -494,6 +504,7 @@ public abstract class AbstractFilter implements IFilter {
         }
     }
 
+    @Override
     public final void alignFile(File inFile, File outFile, Map<String, String> config, FilterContext fc,
             IAlignCallback callback) throws Exception {
         entryParseCallback = null;
@@ -531,6 +542,7 @@ public abstract class AbstractFilter implements IFilter {
         return false;
     }
 
+    @Override
     public final void translateFile(File inFile, File outFile, Map<String, String> config, FilterContext fc,
        ITranslateCallback callback) throws Exception {
         entryParseCallback = null;
@@ -599,6 +611,7 @@ public abstract class AbstractFilter implements IFilter {
         this.entryTranslateCallback = translateCallback;
     }
 
+    @Override
     public String getInEncodingLastParsedFile() {
         return inEncodingLastParsedFile;
     }

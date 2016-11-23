@@ -26,7 +26,7 @@
 
 package org.omegat.filters3.xml.xhtml;
 
-import java.awt.Dialog;
+import java.awt.Window;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
@@ -168,7 +168,7 @@ public class XHTMLFilter extends XMLFilter {
      * @return Updated filter options if user confirmed the changes, and current options otherwise.
      */
     @Override
-    public Map<String, String> changeOptions(Dialog parent, Map<String, String> currentOptions) {
+    public Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {
         try {
             EditXOptionsDialog dialog = new EditXOptionsDialog(parent, currentOptions);
             dialog.setVisible(true);

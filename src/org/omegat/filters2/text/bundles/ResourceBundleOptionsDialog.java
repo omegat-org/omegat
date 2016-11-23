@@ -25,12 +25,12 @@ OmegaT - Computer Assisted Translation (CAT) tool
 
 package org.omegat.filters2.text.bundles;
 
-import java.awt.Dialog;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.util.Map;
 import java.util.TreeMap;
-import javax.swing.AbstractAction;
 
+import javax.swing.AbstractAction;
 
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
@@ -54,8 +54,9 @@ public class ResourceBundleOptionsDialog extends javax.swing.JDialog {
     /**
      * Creates new form ResourceBundleDTDOptionsDialog
      */
-    public ResourceBundleOptionsDialog(Dialog parent, Map<String, String> options) {
-        super(parent, true);
+    public ResourceBundleOptionsDialog(Window parent, Map<String, String> options) {
+        super(parent);
+        setModal(true);
         this.options = new TreeMap<String, String>(options);
         initComponents();
 

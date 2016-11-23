@@ -27,7 +27,7 @@
 
 package org.omegat.filters3.xml.openxml;
 
-import java.awt.Dialog;
+import java.awt.Window;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -389,7 +389,7 @@ public class OpenXMLFilter extends AbstractFilter {
      * @return Updated filter options if user confirmed the changes, and current options otherwise.
      */
     @Override
-    public Map<String, String> changeOptions(Dialog parent, Map<String, String> currentOptions) {
+    public Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {
         try {
             EditOpenXMLOptionsDialog dialog = new EditOpenXMLOptionsDialog(parent, currentOptions);
             dialog.setVisible(true);

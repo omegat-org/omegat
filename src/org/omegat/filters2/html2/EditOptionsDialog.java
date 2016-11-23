@@ -33,8 +33,8 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
-import javax.swing.AbstractAction;
 
+import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -56,8 +56,9 @@ public class EditOptionsDialog extends javax.swing.JDialog {
     public static final int RET_OK = 1;
 
     /** Creates new form EditOptionsDialog */
-    public EditOptionsDialog(java.awt.Dialog parent, Map<String, String> config) {
-        super(parent, true);
+    public EditOptionsDialog(java.awt.Window parent, Map<String, String> config) {
+        super(parent);
+        setModal(true);
         initComponents();
 
         options = new HTMLOptions(new TreeMap<String, String>(config));

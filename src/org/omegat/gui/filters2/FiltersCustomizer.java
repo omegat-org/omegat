@@ -32,6 +32,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Collection;
@@ -418,7 +419,8 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         IFilter f = FilterMaster.getFilterInstance(currFilter.getClassName());
 
         // new options handling
-        Map<String, String> newConfig = f.changeOptions(this, FilterMaster.forFilter(currFilter.getOption()));
+        Map<String, String> newConfig = f.changeOptions((Window) this,
+                FilterMaster.forFilter(currFilter.getOption()));
         if (newConfig != null) {
             FilterMaster.setOptions(currFilter, newConfig);
         }

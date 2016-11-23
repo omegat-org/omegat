@@ -25,7 +25,7 @@
 
 package org.omegat.filters3.xml.opendoc;
 
-import java.awt.Dialog;
+import java.awt.Window;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -202,7 +202,7 @@ public class OpenDocFilter extends AbstractFilter {
      *            Current options to edit.
      * @return Updated filter options if user confirmed the changes, and current options otherwise.
      */
-    public Map<String, String> changeOptions(Dialog parent, Map<String, String> currentOptions) {
+    public Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {
         try {
             EditOpenDocOptionsDialog dialog = new EditOpenDocOptionsDialog(parent, currentOptions);
             dialog.setVisible(true);

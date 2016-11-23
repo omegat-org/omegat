@@ -28,7 +28,7 @@
 
 package org.omegat.filters3.xml.xliff;
 
-import java.awt.Dialog;
+import java.awt.Window;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -158,7 +158,7 @@ public class XLIFFFilter extends XMLFilter {
      * @return Updated filter options if user confirmed the changes, and current options otherwise.
      */
     @Override
-    public Map<String, String> changeOptions(Dialog parent, Map<String, String> currentOptions) {
+    public Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {
         try {
             EditXLIFFOptionsDialog dialog = new EditXLIFFOptionsDialog(parent, currentOptions);
             dialog.setVisible(true);

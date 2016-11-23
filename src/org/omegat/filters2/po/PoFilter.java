@@ -30,7 +30,7 @@
 
 package org.omegat.filters2.po;
 
-import java.awt.Dialog;
+import java.awt.Window;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -864,7 +864,7 @@ public class PoFilter extends AbstractFilter {
     }
 
     @Override
-    public Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
+    public Map<String, String> changeOptions(Window parent, Map<String, String> config) {
         try {
             PoOptionsDialog dialog = new PoOptionsDialog(parent, config);
             dialog.setVisible(true);

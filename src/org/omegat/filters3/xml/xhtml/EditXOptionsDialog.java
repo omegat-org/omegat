@@ -56,8 +56,9 @@ public class EditXOptionsDialog extends javax.swing.JDialog {
     public static final int RET_OK = 1;
 
     /** Creates new form EditOptionsDialog */
-    public EditXOptionsDialog(java.awt.Dialog parent, Map<String, String> config) {
-        super(parent, true);
+    public EditXOptionsDialog(java.awt.Window parent, Map<String, String> config) {
+        super(parent);
+        setModal(true);
         this.options = new XHTMLOptions(new TreeMap<String, String>(config));
         initComponents();
 

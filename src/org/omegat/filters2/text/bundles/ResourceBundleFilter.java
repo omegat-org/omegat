@@ -30,7 +30,7 @@
 
 package org.omegat.filters2.text.bundles;
 
-import java.awt.Dialog;
+import java.awt.Window;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -542,7 +542,7 @@ public class ResourceBundleFilter extends AbstractFilter {
 
     
     @Override
-    public Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
+    public Map<String, String> changeOptions(Window parent, Map<String, String> config) {
         try {
             ResourceBundleOptionsDialog dialog = new ResourceBundleOptionsDialog(parent, config);
             dialog.setVisible(true);

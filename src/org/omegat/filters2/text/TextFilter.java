@@ -26,7 +26,7 @@
 
 package org.omegat.filters2.text;
 
-import java.awt.Dialog;
+import java.awt.Window;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -224,7 +224,7 @@ public class TextFilter extends AbstractFilter {
     }
 
     @Override
-    public Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
+    public Map<String, String> changeOptions(Window parent, Map<String, String> config) {
         try {
             TextOptionsDialog dialog = new TextOptionsDialog(parent, config);
             dialog.setVisible(true);

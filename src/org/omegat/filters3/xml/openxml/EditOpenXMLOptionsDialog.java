@@ -52,8 +52,9 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
     public static final int RET_OK = 1;
 
     /** Creates new form EditOpenXMLOptionsDialog */
-    public EditOpenXMLOptionsDialog(java.awt.Dialog parent, Map<String, String> config) {
-        super(parent, true);
+    public EditOpenXMLOptionsDialog(java.awt.Window parent, Map<String, String> config) {
+        super(parent);
+        setModal(true);
         this.options = new OpenXMLOptions(new TreeMap<String, String>(config));
         initComponents();
 

@@ -49,8 +49,9 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog {
     public static final int RET_OK = 1;
 
     /** Creates new form EditOpenDocOptionsDialog */
-    public EditOpenDocOptionsDialog(java.awt.Dialog parent, Map<String, String> config) {
-        super(parent, true);
+    public EditOpenDocOptionsDialog(java.awt.Window parent, Map<String, String> config) {
+        super(parent);
+        setModal(true);
         this.options = new OpenDocOptions(new TreeMap<String, String>(config));
         initComponents();
 

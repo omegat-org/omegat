@@ -27,7 +27,7 @@
 
 package org.omegat.filters2.text;
 
-import java.awt.Dialog;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.util.Map;
 import java.util.TreeMap;
@@ -77,8 +77,9 @@ public class TextOptionsDialog extends javax.swing.JDialog {
     /**
      * Creates new form TextOptionsDialog
      */
-    public TextOptionsDialog(Dialog parent, Map<String, String> options) {
-        super(parent, true);
+    public TextOptionsDialog(Window parent, Map<String, String> options) {
+        super(parent);
+        setModal(true);
         this.options = new TreeMap<String, String>(options);
         initComponents();
 

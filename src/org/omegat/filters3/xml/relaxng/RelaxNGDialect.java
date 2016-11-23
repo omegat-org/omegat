@@ -30,7 +30,6 @@
 package org.omegat.filters3.xml.relaxng;
 
 import java.util.regex.Pattern;
-import java.util.HashMap;
 
 import org.omegat.filters3.xml.DefaultXMLDialect;
 

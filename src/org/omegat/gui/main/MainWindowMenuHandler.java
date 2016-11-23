@@ -946,9 +946,6 @@ public class MainWindowMenuHandler {
         FontSelectionDialog dlg = new FontSelectionDialog(Core.getMainWindow().getApplicationFrame(), Core
                 .getMainWindow().getApplicationFont());
         dlg.setVisible(true);
-        if (dlg.getReturnStatus() == FontSelectionDialog.RET_OK_CHANGED) {
-            mainWindow.setApplicationFont(dlg.getSelectedFont());
-        }
     }
 
     /**

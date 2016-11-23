@@ -169,6 +169,8 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
         });
 
+        CoreEvents.registerFontChangedEventListener(newFont -> m_font = newFont);
+
         MainWindowUI.handlePerProjectLayouts(this);
         
         updateTitle();
@@ -210,20 +212,6 @@ public class MainWindow extends JFrame implements IMainWindow {
      */
     public IMainMenu getMainMenu() {
         return menu;
-    }
-
-    /**
-     * Set new font to application.
-     * 
-     * @param newFont
-     *            new font
-     */
-    protected void setApplicationFont(final Font newFont) {
-        m_font = newFont;
-        Preferences.setPreference(Preferences.TF_SRC_FONT_NAME, newFont.getName());
-        Preferences.setPreference(Preferences.TF_SRC_FONT_SIZE, newFont.getSize());
-
-        CoreEvents.fireFontChanged(newFont);
     }
 
     /**

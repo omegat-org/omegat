@@ -28,8 +28,10 @@ package org.omegat.gui.dialogs;
 
 import java.awt.Font;
 import java.awt.Frame;
+
 import javax.swing.DefaultComboBoxModel;
 
+import org.omegat.core.CoreEvents;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -230,9 +232,13 @@ public class FontSelectionDialog extends javax.swing.JDialog {
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         boolean applyToProjFiles = applyToProjectFilesCheckBox.isSelected();
-        if (!getSelectedFont().equals(oldFont)
+        Font newFont = getSelectedFont();
+        if (!newFont.equals(oldFont)
                 || applyToProjFiles != Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
             Preferences.setPreference(Preferences.PROJECT_FILES_USE_FONT, applyToProjFiles);
+            Preferences.setPreference(Preferences.TF_SRC_FONT_NAME, newFont.getName());
+            Preferences.setPreference(Preferences.TF_SRC_FONT_SIZE, newFont.getSize());
+            CoreEvents.fireFontChanged(newFont);
             doClose(RET_OK_CHANGED);
         } else {
             doClose(RET_CANCEL_OR_UNCHANGED);

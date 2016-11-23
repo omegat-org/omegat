@@ -307,7 +307,7 @@ public class AlignFilePickerController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 picker.progressBar.setVisible(true);
-                new SwingWorker<Aligner, Object>() {
+                new SwingWorker<Aligner, Void>() {
                     @Override
                     protected Aligner doInBackground() throws Exception {
                         Aligner aligner = new Aligner(sourceFile, sourceLanguage, targetFile, targetLanguage);
@@ -361,7 +361,7 @@ public class AlignFilePickerController {
             picker.okButton.setEnabled(false);
             return;
         }
-        new SwingWorker<Boolean, Object>() {
+        new SwingWorker<Object, Void>() {
             @Override
             protected Boolean doInBackground() throws Exception {
                 FilterMaster fm = Core.getFilterMaster();

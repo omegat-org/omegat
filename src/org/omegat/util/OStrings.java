@@ -110,6 +110,14 @@ public class OStrings {
     }
 
     /**
+     * Returns a localized string for a key, formatted with the given arguments. Formatting is done by
+     * {@link StringUtil#format(String, Object...)}.
+     */
+    public static String getString(String key, Object... formatArgs) {
+        return StringUtil.format(getString(key), formatArgs);
+    }
+
+    /**
      * Get the application name for display purposes (includes branding)
      */
     public static String getApplicationDisplayName() {

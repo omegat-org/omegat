@@ -591,6 +591,20 @@ public class Preferences {
         m_propChangeSupport.addPropertyChangeListener(listener);
     }
 
+    /**
+     * Register to receive notifications when the specified preference changes.
+     * <p>
+     * Note: The value returned by {@link PropertyChangeEvent#getNewValue()}
+     * will be of the "correct" type (Integer, Boolean, Enum, etc.) but the
+     * value returned by {@link PropertyChangeEvent#getOldValue()} will be the
+     * String equivalent for storing in XML.
+     * 
+     * @param listener
+     */
+    public static void addPropertyChangeListener(String property, PropertyChangeListener listener) {
+        m_propChangeSupport.addPropertyChangeListener(property, listener);
+    }
+
     public static void setFilters(Filters newFilters) {
         Filters oldValue = m_filters;
         m_filters = newFilters;

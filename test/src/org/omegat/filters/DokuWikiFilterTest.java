@@ -80,4 +80,18 @@ public class DokuWikiFilterTest extends TestFilterBase {
         checkMulti("This is a flow text.", null, null, "Header", "multiple spaces in text", null);
         checkMulti("multiple spaces in text", null, null, "This is a flow text.", "* asterisk * asterisk", null);
     }
+
+    public void testDetectHeadingLevel() {
+        assertEquals(0, DokuWikiFilter.getHeadingLevel(""));
+        assertEquals(0, DokuWikiFilter.getHeadingLevel("abc"));
+        assertEquals(0, DokuWikiFilter.getHeadingLevel("="));
+        assertEquals(0, DokuWikiFilter.getHeadingLevel("=="));
+        assertEquals(0, DokuWikiFilter.getHeadingLevel("==="));
+        assertEquals(0, DokuWikiFilter.getHeadingLevel("= ="));
+        assertEquals(0, DokuWikiFilter.getHeadingLevel("== =="));
+        assertEquals(1, DokuWikiFilter.getHeadingLevel("= a ="));
+        assertEquals(2, DokuWikiFilter.getHeadingLevel("== a =="));
+        assertEquals(3, DokuWikiFilter.getHeadingLevel("=== a ==="));
+    }
+    
 }

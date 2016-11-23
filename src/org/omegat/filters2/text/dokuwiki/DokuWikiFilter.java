@@ -195,7 +195,7 @@ public class DokuWikiFilter extends AbstractFilter {
      *            the lien to check
      * @return the level, 0 means no heading
      */
-    private static int getHeadingLevel(String line) {
+    public static int getHeadingLevel(String line) {
         int level = 0;
         int start = 0;
         int end = line.length();
@@ -209,7 +209,7 @@ public class DokuWikiFilter extends AbstractFilter {
             end -= Character.charCount(ecp);
             level++;
         }
-        if (line.codePointCount(start, end) > 1) {
+        if (start < end && line.codePointCount(start, end) > 1) {
             return level;
         } else {
             return 0;

@@ -53,6 +53,7 @@ public class AlignFilePicker extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        progressBar = new javax.swing.JProgressBar();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -66,11 +67,13 @@ public class AlignFilePicker extends javax.swing.JPanel {
         targetLanguagePicker = new javax.swing.JComboBox<>();
         targetLanguageFileField = new javax.swing.JTextField();
         targetChooseFileButton = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
+        bottomPanel = new javax.swing.JPanel();
+        messageTextArea = new javax.swing.JTextArea();
         jPanel5 = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        progressBar = new javax.swing.JProgressBar();
+
+        progressBar.setIndeterminate(true);
 
         setLayout(new java.awt.BorderLayout());
 
@@ -120,8 +123,14 @@ public class AlignFilePicker extends javax.swing.JPanel {
 
         add(jPanel3, java.awt.BorderLayout.CENTER);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
-        jPanel4.setLayout(new java.awt.BorderLayout());
+        bottomPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        bottomPanel.setLayout(new java.awt.BorderLayout());
+
+        messageTextArea.setEditable(false);
+        messageTextArea.setLineWrap(true);
+        messageTextArea.setWrapStyleWord(true);
+        messageTextArea.setOpaque(false);
+        bottomPanel.add(messageTextArea, java.awt.BorderLayout.CENTER);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 0));
         jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.LINE_AXIS));
@@ -132,26 +141,24 @@ public class AlignFilePicker extends javax.swing.JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
         jPanel5.add(cancelButton);
 
-        jPanel4.add(jPanel5, java.awt.BorderLayout.EAST);
+        bottomPanel.add(jPanel5, java.awt.BorderLayout.EAST);
 
-        progressBar.setIndeterminate(true);
-        jPanel4.add(progressBar, java.awt.BorderLayout.CENTER);
-
-        add(jPanel4, java.awt.BorderLayout.SOUTH);
+        add(bottomPanel, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JPanel bottomPanel;
     public javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    public javax.swing.JTextArea messageTextArea;
     public javax.swing.JButton okButton;
     public javax.swing.JProgressBar progressBar;
     public javax.swing.JButton sourceChooseFileButton;

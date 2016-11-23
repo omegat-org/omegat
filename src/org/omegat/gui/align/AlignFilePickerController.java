@@ -25,6 +25,7 @@
 
 package org.omegat.gui.align;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.event.ActionEvent;
@@ -306,7 +307,9 @@ public class AlignFilePickerController {
         picker.okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                picker.progressBar.setVisible(true);
+                picker.bottomPanel.remove(picker.messageTextArea);
+                picker.bottomPanel.add(picker.progressBar, BorderLayout.CENTER);
+                picker.bottomPanel.revalidate();
                 new SwingWorker<Aligner, Void>() {
                     @Override
                     protected Aligner doInBackground() throws Exception {
@@ -338,8 +341,6 @@ public class AlignFilePickerController {
             }
         });
 
-        picker.progressBar.setVisible(false);
-
         frame.getRootPane().setDefaultButton(picker.okButton);
 
         updatePicker(picker);
@@ -352,32 +353,46 @@ public class AlignFilePickerController {
 
     private void updatePicker(final AlignFilePicker picker) {
         if (sourceFile == null || targetFile == null || sourceLanguage == null || targetLanguage == null) {
+            picker.messageTextArea.setText(null);
             picker.okButton.setEnabled(false);
             return;
         }
         final File srcFile = new File(sourceFile);
         final File trgFile = new File(targetFile);
         if (!srcFile.isFile() || !trgFile.isFile() || srcFile.equals(trgFile)) {
+            picker.messageTextArea.setText(null);
             picker.okButton.setEnabled(false);
             return;
         }
-        new SwingWorker<Object, Void>() {
+        new SwingWorker<boolean[], Void>() {
             @Override
-            protected Boolean doInBackground() throws Exception {
+            protected boolean[] doInBackground() throws Exception {
                 FilterMaster fm = Core.getFilterMaster();
-                return fm.isFileSupported(srcFile, false) && fm.isFileSupported(trgFile, false);
+                return new boolean[] {
+                        fm.isFileSupported(srcFile, false), fm.isFileSupported(trgFile, false) };
             }
             @Override
             protected void done() {
                 boolean enabled = false;
+                String message = null;
                 try {
-                    enabled = get();
+                    boolean[] results = get();
+                    enabled = results[0] && results[1];
+                    if (!results[0] && results[1]) {
+                        message = OStrings.getString("ALIGNER_FILEPICKER_ERROR_ONE_FILE", srcFile.getName());
+                    } else if (results[0] && !results[1]) {
+                        message = OStrings.getString("ALIGNER_FILEPICKER_ERROR_ONE_FILE", trgFile.getName());
+                    } else if (!results[0] && !results[1]) {
+                        message = OStrings.getString("ALIGNER_FILEPICKER_ERROR_BOTH_FILES");
+                    }
                 } catch (CancellationException e) {
                     // Ignore
                 } catch (Exception e) {
                     Log.log(e);
+                    message = e.getLocalizedMessage();
                 }
                 picker.okButton.setEnabled(enabled);
+                picker.messageTextArea.setText(message);
             }
         }.execute();
     }

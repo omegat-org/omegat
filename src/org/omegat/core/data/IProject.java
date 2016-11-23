@@ -51,8 +51,6 @@ public interface IProject {
     /**
      * Save project.
      */
-    void saveProject();
-
     void saveProject(boolean doTeamSync);
 
     /**

@@ -252,7 +252,7 @@ public class TestTeamIntegrationChild {
         prep.translation = "" + value;
         Core.getProject().setTranslation(ste, prep, true, null);
         Log.log("Wrote: " + prep.source + "=" + prep.translation);
-        Core.getProject().saveProject();
+        Core.getProject().saveProject(true);
     }
 
     static IAutoSave autoSave = new IAutoSave() {
@@ -611,12 +611,6 @@ public class TestTeamIntegrationChild {
         boolean checkMergeInput(ProjectTMX base, ProjectTMX other) {
             return base.defaults.keySet().stream().allMatch(other.defaults::containsKey)
                     && base.alternatives.keySet().stream().allMatch(other.alternatives::containsKey);
-        }
-
-        @Override
-        public synchronized void saveProject() {
-            Log.log("Saving: " + projectTMX);
-            super.saveProject();
         }
 
         protected void mergeTMXOld(ProjectTMX baseTMX, ProjectTMX headTMX) {

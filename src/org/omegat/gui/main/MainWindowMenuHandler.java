@@ -51,6 +51,7 @@ import javax.swing.text.JTextComponent;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
+import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.matching.NearString;
@@ -376,7 +377,13 @@ public class MainWindowMenuHandler {
                     ISpellChecker sc = Core.getSpellChecker();
                     sc.saveWordLists();
                     try {
-                        Core.getProject().saveProject();
+                        Core.projectLoadSaveExecute(new Runnable() {
+                            @Override
+                            public void run() {
+                                Core.getProject().saveProject(true);
+                                ProjectFactory.closeProject();
+                            }
+                        });
                     } catch (KnownException ex) {
                         // hide exception on shutdown
                     }

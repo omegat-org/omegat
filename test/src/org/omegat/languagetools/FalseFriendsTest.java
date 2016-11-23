@@ -79,9 +79,6 @@ public class FalseFriendsTest extends TestCore {
             public void saveProjectProperties() throws Exception {
             }
 
-            public void saveProject() {
-            }
-            
             public void saveProject(boolean doTeamSync) {
             }
 

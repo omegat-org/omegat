@@ -115,9 +115,6 @@ public class NotLoadedProject implements IProject {
         return false;
     }
 
-    public void saveProject() {
-    }
-
     public void saveProject(boolean doTeamSync) {
     }
 

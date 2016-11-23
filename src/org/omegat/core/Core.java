@@ -30,6 +30,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
@@ -106,6 +109,7 @@ public class Core {
     private static FilterMaster filterMaster;
 
     protected static IAutoSave saveThread;
+    private static final ReentrantLock projectLoadSave = new ReentrantLock();
 
     protected static IGlossaries glossary;
     private static GlossaryManager glossaryManager;
@@ -345,5 +349,27 @@ public class Core {
      */
     public static void pluginLoadingError(String errorText) {
         pluginsLoadingErrors.add(errorText);
+    }
+
+    /**
+     * All project load/save/compile/autosave operations much not be executed in
+     * parallel because it will break project files, especially during team
+     * synchronization. For guarantee non-parallel execution, all such
+     * operations must be executed via this method.
+     * 
+     * @param run
+     *            code for execute
+     * @throws InterruptedException,
+     *             TimeoutException
+     */
+    public static void projectLoadSaveExecute(Runnable run) throws InterruptedException, TimeoutException {
+        if (!projectLoadSave.tryLock(3, TimeUnit.MINUTES)) {
+            throw new TimeoutException();
+        }
+        try {
+            run.run();
+        } finally {
+            projectLoadSave.unlock();
+        }
     }
 }

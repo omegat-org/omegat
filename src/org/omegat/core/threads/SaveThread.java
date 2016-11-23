@@ -30,6 +30,7 @@ package org.omegat.core.threads;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -98,9 +99,16 @@ public class SaveThread extends Thread implements IAutoSave {
                     IProject dataEngine = Core.getProject();
                     LOGGER.fine("Start project save from SaveThread");
                     try {
-                        dataEngine.saveProject();
+                        Core.projectLoadSaveExecute(new Runnable() {
+                            @Override
+                            public void run() {
+                                dataEngine.saveProject(true);
+                            }
+                        });
                         Core.getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",
                                 DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
+                    } catch (TimeoutException ex) {
+                        LOGGER.warning("Lock trying timeout during autosave");
                     } catch (KnownException ex) {
                         Core.getMainWindow().showStatusMessageRB(ex.getMessage(), ex.getParams());
                     }

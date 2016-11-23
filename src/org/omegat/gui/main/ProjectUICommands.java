@@ -255,8 +255,18 @@ public class ProjectUICommands {
 
                 mainWindow.showStatusMessageRB("MW_STATUS_SAVING");
 
-                Core.getProject().saveProject(true);
-                Core.getProject().compileProject(".*");
+                Core.projectLoadSaveExecute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Core.getProject().saveProject(true);
+                        try {
+                            Core.getProject().compileProject(".*");
+                        } catch (Exception ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                });
+
                 ProjectMedProcessing.createMed(med, Core.getProject().getProjectProperties());
 
                 mainWindow.showStatusMessageRB("MW_STATUS_SAVED");
@@ -476,7 +486,13 @@ public class ProjectUICommands {
                         }
                     }
 
-                    ProjectFactory.loadProject(props, true);
+                    final ProjectProperties propsP = props;
+                    Core.projectLoadSaveExecute(new Runnable() {
+                        @Override
+                        public void run() {
+                            ProjectFactory.loadProject(propsP, true);
+                        }
+                    });
                     if (needToSaveProperties) {
                         Core.getProject().saveProjectProperties();
                     }
@@ -546,10 +562,15 @@ public class ProjectUICommands {
                 Cursor oldCursor = mainWindow.getCursor();
                 mainWindow.setCursor(hourglassCursor);
 
-                Core.getProject().saveProject();
-                ProjectFactory.closeProject();
+                Core.projectLoadSaveExecute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Core.getProject().saveProject(true);
+                        ProjectFactory.closeProject();
 
-                ProjectFactory.loadProject(props, true);
+                        ProjectFactory.loadProject(props, true);
+                    }
+                });
                 mainWindow.setCursor(oldCursor);
                 return null;
             }
@@ -591,7 +612,12 @@ public class ProjectUICommands {
 
                 mainWindow.showStatusMessageRB("MW_STATUS_SAVING");
 
-                Core.getProject().saveProject();
+                Core.projectLoadSaveExecute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Core.getProject().saveProject(true);
+                    }
+                });
 
                 mainWindow.showStatusMessageRB("MW_STATUS_SAVED");
                 mainWindow.setCursor(oldCursor);
@@ -629,7 +655,13 @@ public class ProjectUICommands {
 
                 Preferences.save();
 
-                Core.getProject().saveProject();
+                Core.projectLoadSaveExecute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Core.getProject().saveProject(true);
+                        ProjectFactory.closeProject();
+                    }
+                });
 
                 Core.getMainWindow().showStatusMessageRB("MW_STATUS_SAVED");
                 mainWindow.setCursor(oldCursor);
@@ -647,7 +679,6 @@ public class ProjectUICommands {
             protected void done() {
                 try {
                     get();
-                    ProjectFactory.closeProject();
                 } catch (Exception ex) {
                     processSwingWorkerException(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                 }
@@ -691,10 +722,15 @@ public class ProjectUICommands {
             int previousCurEntryNum = Core.getEditor().getCurrentEntryNumber();
 
             protected Object doInBackground() throws Exception {
-                Core.getProject().saveProject();
-                ProjectFactory.closeProject();
+                Core.projectLoadSaveExecute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Core.getProject().saveProject(true);
+                        ProjectFactory.closeProject();
 
-                ProjectFactory.loadProject(newProps, true);
+                        ProjectFactory.loadProject(newProps, true);
+                    }
+                });
                 return null;
             }
 
@@ -729,8 +765,17 @@ public class ProjectUICommands {
 
         new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
-                Core.getProject().saveProject(true);
-                Core.getProject().compileProject(".*");
+                Core.projectLoadSaveExecute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Core.getProject().saveProject(true);
+                        try {
+                            Core.getProject().compileProject(".*");
+                        } catch (Exception ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                });
                 return null;
             }
 
@@ -757,8 +802,17 @@ public class ProjectUICommands {
         new SwingWorker<Object, Void>() {
             @Override
             protected Object doInBackground() throws Exception {
-                Core.getProject().saveProject(false);
-                Core.getProject().compileProject(sourcePattern);
+                Core.projectLoadSaveExecute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Core.getProject().saveProject(false);
+                        try {
+                            Core.getProject().compileProject(sourcePattern);
+                        } catch (Exception ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                });
                 return null;
             }
 

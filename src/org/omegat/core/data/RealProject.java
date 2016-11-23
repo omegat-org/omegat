@@ -301,7 +301,7 @@ public class RealProject implements IProject {
     /**
      * Load exist project in a "big" sense -- loads project's properties, glossaries, tms, source files etc.
      */
-    public void loadProject(boolean onlineMode) {
+    public synchronized void loadProject(boolean onlineMode) {
         Log.logInfoRB("LOG_DATAENGINE_LOAD_START");
         UIThreadsUtil.mustNotBeSwingThread();
 
@@ -685,10 +685,6 @@ public class RealProject implements IProject {
     }
 
     /** Saves the translation memory and preferences */
-    public synchronized void saveProject() {
-        saveProject(true);
-    }
-    
     public synchronized void saveProject(boolean doTeamSync) {
         if (isSaving) {
             return;

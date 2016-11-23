@@ -28,6 +28,7 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.Cursor;
+import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -72,8 +73,8 @@ public class DictionaryInstallerDialog extends JDialog {
     private InstallerWorker installer = null;
 
     /** Creates new form DictionaryInstallerDialog */
-    public DictionaryInstallerDialog(JDialog parent, DictionaryManager dicMan) {
-        super(parent, true);
+    public DictionaryInstallerDialog(Window parent, DictionaryManager dicMan) {
+        super(parent, JDialog.DEFAULT_MODALITY_TYPE);
 
         StaticUIUtils.setEscapeClosable(this);
 
@@ -116,7 +117,7 @@ public class DictionaryInstallerDialog extends JDialog {
         protected void done() {
             try {
                 List<String> list = get();
-                list.forEach(str -> listModel.addElement(str));
+                list.forEach(listModel::addElement);
                 
                 dictionaryList.setModel(listModel);
                 dictionaryList.setEnabled(true);

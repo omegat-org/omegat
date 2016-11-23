@@ -28,8 +28,6 @@
 
 package org.omegat.core.threads;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.logging.Level;
@@ -60,15 +58,10 @@ public class SaveThread extends Thread implements IAutoSave {
     public SaveThread() {
         setName("Save thread");
         setWaitDuration(Preferences.getPreferenceDefault(Preferences.AUTO_SAVE_INTERVAL, Preferences.AUTO_SAVE_DEFAULT));
-        Preferences.addPropertyChangeListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                if (evt.getPropertyName().equals(Preferences.AUTO_SAVE_INTERVAL)) {
-                    setWaitDuration((Integer) evt.getNewValue());
-                    synchronized (SaveThread.this) {
-                        SaveThread.this.notify();
-                    }
-                }
+        Preferences.addPropertyChangeListener(Preferences.AUTO_SAVE_INTERVAL, evt -> {
+            setWaitDuration((Integer) evt.getNewValue());
+            synchronized (SaveThread.this) {
+                SaveThread.this.notify();
             }
         });
     }

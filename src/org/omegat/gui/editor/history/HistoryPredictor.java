@@ -79,15 +79,13 @@ public class HistoryPredictor extends AutoCompleterListView {
                 isCurrentEntryTranslated = Core.getProject().getTranslationInfo(newEntry).isTranslated();
             }
         });
-        Preferences.addPropertyChangeListener(evt -> {
-            if (evt.getPropertyName().equals(Preferences.AC_HISTORY_PREDICTION_ENABLED)) {
-                if ((Boolean) evt.getNewValue()) {
-                    if (Core.getProject().isProjectLoaded()) {
-                        train();
-                    }
-                } else {
-                    predictor.reset();
+        Preferences.addPropertyChangeListener(Preferences.AC_HISTORY_PREDICTION_ENABLED, evt -> {
+            if ((Boolean) evt.getNewValue()) {
+                if (Core.getProject().isProjectLoaded()) {
+                    train();
                 }
+            } else {
+                predictor.reset();
             }
         });
     }

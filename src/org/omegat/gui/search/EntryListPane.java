@@ -100,6 +100,7 @@ class EntryListPane extends JTextPane {
     private static final String KEY_GO_TO_PREVIOUS_SEGMENT = "gotoPreviousSegmentMenuItem";
     private static final String KEY_TRANSFER_FOCUS = "transferFocus";
     private static final String KEY_TRANSFER_FOCUS_BACKWARD = "transferFocusBackward";
+    private static final String KEY_JUMP_TO_ENTRY_IN_EDITOR = "jumpToEntryInEditor";
     private static final int ENTRY_LIST_INDEX_NO_ENTRIES  = -1;
     private static final int ENTRY_LIST_INDEX_END_OF_TEXT = -2;
 
@@ -138,6 +139,8 @@ class EntryListPane extends JTextPane {
                 KEY_TRANSFER_FOCUS);
         map.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK),
                 KEY_TRANSFER_FOCUS_BACKWARD);
+        // Enter to jump to selected segment in editor
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), KEY_JUMP_TO_ENTRY_IN_EDITOR);
         return map;
     }
 
@@ -439,6 +442,15 @@ class EntryListPane extends JTextPane {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 transferFocusBackward();
+            }
+        });
+
+        actionMap.put(KEY_JUMP_TO_ENTRY_IN_EDITOR, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!autoSyncWithEditor && !m_entryList.isEmpty()) {
+                    getActiveDisplayedEntry().gotoEntryInEditor();
+                }
             }
         });
     }

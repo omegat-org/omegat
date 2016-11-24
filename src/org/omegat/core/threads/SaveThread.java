@@ -99,7 +99,7 @@ public class SaveThread extends Thread implements IAutoSave {
                     IProject dataEngine = Core.getProject();
                     LOGGER.fine("Start project save from SaveThread");
                     try {
-                        Core.projectLoadSaveExecute(() -> dataEngine.saveProject(true));
+                        Core.executeExclusively(() -> dataEngine.saveProject(true));
                         Core.getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",
                                 DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
                     } catch (TimeoutException ex) {

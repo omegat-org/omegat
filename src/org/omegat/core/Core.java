@@ -109,7 +109,7 @@ public class Core {
     private static FilterMaster filterMaster;
 
     protected static IAutoSave saveThread;
-    private static final ReentrantLock projectLoadSave = new ReentrantLock();
+    private static final ReentrantLock exclusiveRunLock = new ReentrantLock();
 
     protected static IGlossaries glossary;
     private static GlossaryManager glossaryManager;
@@ -352,24 +352,25 @@ public class Core {
     }
 
     /**
-     * All project load/save/compile/autosave operations much not be executed in
-     * parallel because it will break project files, especially during team
-     * synchronization. For guarantee non-parallel execution, all such
-     * operations must be executed via this method.
+     * Use this to perform operations that must not be run concurrently.
+     * <p>
+     * For instance project load/save/compile/autosave operations must not be executed in parallel because it
+     * will break project files, especially during team synchronization. For guaranteed non-parallel
+     * execution, all such operations must be executed via this method.
      * 
      * @param run
      *            code for execute
      * @throws InterruptedException,
      *             TimeoutException
      */
-    public static void projectLoadSaveExecute(Runnable run) throws InterruptedException, TimeoutException {
-        if (!projectLoadSave.tryLock(3, TimeUnit.MINUTES)) {
+    public static void executeExclusively(Runnable run) throws InterruptedException, TimeoutException {
+        if (!exclusiveRunLock.tryLock(3, TimeUnit.MINUTES)) {
             throw new TimeoutException();
         }
         try {
             run.run();
         } finally {
-            projectLoadSave.unlock();
+            exclusiveRunLock.unlock();
         }
     }
 }

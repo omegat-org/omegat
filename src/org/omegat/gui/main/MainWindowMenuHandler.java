@@ -377,7 +377,7 @@ public class MainWindowMenuHandler {
                     ISpellChecker sc = Core.getSpellChecker();
                     sc.saveWordLists();
                     try {
-                        Core.projectLoadSaveExecute(() -> {
+                        Core.executeExclusively(() -> {
                             Core.getProject().saveProject(true);
                             ProjectFactory.closeProject();
                         });

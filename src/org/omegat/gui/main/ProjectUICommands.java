@@ -251,7 +251,7 @@ public class ProjectUICommands {
 
                 mainWindow.showStatusMessageRB("MW_STATUS_SAVING");
 
-                Core.projectLoadSaveExecute(() -> {
+                Core.executeExclusively(() -> {
                     Core.getProject().saveProject(true);
                     try {
                         Core.getProject().compileProject(".*");
@@ -475,7 +475,7 @@ public class ProjectUICommands {
                     }
 
                     final ProjectProperties propsP = props;
-                    Core.projectLoadSaveExecute(() -> ProjectFactory.loadProject(propsP, true));
+                    Core.executeExclusively(() -> ProjectFactory.loadProject(propsP, true));
                     if (needToSaveProperties) {
                         Core.getProject().saveProjectProperties();
                     }
@@ -541,7 +541,7 @@ public class ProjectUICommands {
                 Cursor oldCursor = mainWindow.getCursor();
                 mainWindow.setCursor(hourglassCursor);
 
-                Core.projectLoadSaveExecute(() -> {
+                Core.executeExclusively(() -> {
                     Core.getProject().saveProject(true);
                     ProjectFactory.closeProject();
 
@@ -585,7 +585,7 @@ public class ProjectUICommands {
 
                 mainWindow.showStatusMessageRB("MW_STATUS_SAVING");
 
-                Core.projectLoadSaveExecute(() -> Core.getProject().saveProject(true));
+                Core.executeExclusively(() -> Core.getProject().saveProject(true));
 
                 mainWindow.showStatusMessageRB("MW_STATUS_SAVED");
                 mainWindow.setCursor(oldCursor);
@@ -623,7 +623,7 @@ public class ProjectUICommands {
 
                 Preferences.save();
 
-                Core.projectLoadSaveExecute(() -> {
+                Core.executeExclusively(() -> {
                     Core.getProject().saveProject(true);
                     ProjectFactory.closeProject();
                 });
@@ -687,7 +687,7 @@ public class ProjectUICommands {
             int previousCurEntryNum = Core.getEditor().getCurrentEntryNumber();
 
             protected Object doInBackground() throws Exception {
-                Core.projectLoadSaveExecute(() -> {
+                Core.executeExclusively(() -> {
                     Core.getProject().saveProject(true);
                     ProjectFactory.closeProject();
 
@@ -724,7 +724,7 @@ public class ProjectUICommands {
 
         new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
-                Core.projectLoadSaveExecute(() -> {
+                Core.executeExclusively(() -> {
                     Core.getProject().saveProject(true);
                     try {
                         Core.getProject().compileProject(".*");
@@ -758,7 +758,7 @@ public class ProjectUICommands {
         new SwingWorker<Object, Void>() {
             @Override
             protected Object doInBackground() throws Exception {
-                Core.projectLoadSaveExecute(() -> {
+                Core.executeExclusively(() -> {
                     Core.getProject().saveProject(false);
                     try {
                         Core.getProject().compileProject(sourcePattern);

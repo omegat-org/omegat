@@ -377,12 +377,9 @@ public class MainWindowMenuHandler {
                     ISpellChecker sc = Core.getSpellChecker();
                     sc.saveWordLists();
                     try {
-                        Core.projectLoadSaveExecute(new Runnable() {
-                            @Override
-                            public void run() {
-                                Core.getProject().saveProject(true);
-                                ProjectFactory.closeProject();
-                            }
+                        Core.projectLoadSaveExecute(() -> {
+                            Core.getProject().saveProject(true);
+                            ProjectFactory.closeProject();
                         });
                     } catch (KnownException ex) {
                         // hide exception on shutdown

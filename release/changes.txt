@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.1 update 1
 ----------------------------------------------------------------------
-  4 Enhancements
+  5 Enhancements
   3 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
@@ -25,6 +25,9 @@ opens it.
 
   - Windows 64-bit version. It installs as a 64-bit version and 
 contains a 64-bit JRE. It cannot be installed on a 32-bit system.
+
+  - The Align Files file picker shows feedback when the selected
+files are not supported.
 
   Bug fixes:
 

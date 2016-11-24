@@ -73,18 +73,14 @@ public class DokuWikiFilter extends AbstractFilter {
 
     @Override
     protected boolean isFileSupported(BufferedReader reader) {
-        LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader);
-
-        try {
+        try (LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader)) {
             String line;
             while ((line = lbpr.readLine()) != null) {
                 String trimmed = line.trim();
                 if (getHeadingLevel(trimmed) > 0) {
-                    lbpr.close();
                     return true;
                 }
             }
-            lbpr.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -186,6 +182,7 @@ public class DokuWikiFilter extends AbstractFilter {
             text.append(trimmed);
         }
         writeTranslate(outfile, text, lbpr);
+        lbpr.close();
     }
 
     /**

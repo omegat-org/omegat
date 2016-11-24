@@ -56,7 +56,7 @@ public class DocBookDialect extends DefaultXMLDialect {
                        "revnumber", "date", "authorinitials", "revremark", "itemizedlist", "listitem", "member", 
                        "releaseinfo", "bibliomixed", "bibliomset", "bridgehead", "glossseealso",
                        "primaryie", "refentrytitle", "secondaryie", "seealsoie", "seeie", "subtitle",
-                       "synopfragmentref", "term", "tertiaryie", "tocentry", "glosssee"});
+                       "synopfragmentref", "term", "tertiaryie", "tocentry", "glosssee", "section"});
 
         defineOutOfTurnTags(new String[] { "indexterm", });
 

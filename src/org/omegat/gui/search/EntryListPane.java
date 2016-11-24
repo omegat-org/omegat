@@ -128,15 +128,15 @@ class EntryListPane extends JTextPane {
         map.setParent(parent);
         bindKeyStrokesFromMainMenuShortcuts(map);
 
-        // Add KeyStrokes: TAB, Shift+TAB, Ctrl+TAB (Cmd+TAB for MacOS), Ctrl+Shift+TAB (Cmd+Shift+TAB for MacOS)
-        int CTRL_CMD_MASK = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+        // Add KeyStrokes: Tab, Shift+Tab, Ctrl+Tab, Ctrl+Shift+Tab
+        // (Cmd+Tab is used by the system on OS X)
         map.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0),
                 KEY_GO_TO_NEXT_SEGMENT);
         map.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, InputEvent.SHIFT_DOWN_MASK),
                 KEY_GO_TO_PREVIOUS_SEGMENT);
-        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, CTRL_CMD_MASK),
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, InputEvent.CTRL_DOWN_MASK),
                 KEY_TRANSFER_FOCUS);
-        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, CTRL_CMD_MASK | InputEvent.SHIFT_DOWN_MASK),
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK),
                 KEY_TRANSFER_FOCUS_BACKWARD);
         return map;
     }

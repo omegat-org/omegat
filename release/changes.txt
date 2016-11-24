@@ -2,7 +2,7 @@
  OmegaT 4.0.1 update 1
 ----------------------------------------------------------------------
   4 Enhancements
-  2 Bug fixes
+  3 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
 4.0.1 update 1 vs 4.0.1
@@ -32,6 +32,9 @@ contains a 64-bit JRE. It cannot be installed on a 32-bit system.
 
   - Password-protected PDF prevents project from loading
   https://sourceforge.net/p/omegat/bugs/842/
+
+  - The Doku Wiki filter no longer throws an exception when
+encountering certain malformed header lines.
 
   Localisation Updates:
 

@@ -36,6 +36,7 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -319,25 +320,32 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
 
             @Override
             public void windowGainedFocus(WindowEvent e) {
-                String sel = null;
-                Component component = e.getOppositeWindow().getMostRecentFocusOwner();
-                if (component instanceof JTextComponent) {
-                    sel = ((JTextComponent) component).getSelectedText();
+                Window w = e.getOppositeWindow();
+                if (w != null) {
+                    String sel = getSelectedText(w.getMostRecentFocusOwner());
                     if (!StringUtil.isEmpty(sel)) {
-                        sel = EditorUtils.removeDirectionChars(sel);
-                    }
-                }
-                if (!StringUtil.isEmpty(sel)) {
-                    if (StringUtil.isEmpty(dialog.getSourceText().getText())) {
-                        setText(dialog.getSourceText(), sel);
-                    } else if (StringUtil.isEmpty(dialog.getTargetText().getText())) {
-                        setText(dialog.getTargetText(), sel);
-                    } else if (StringUtil.isEmpty(dialog.getCommentText().getText())) {
-                        setText(dialog.getCommentText(), sel);
+                        if (StringUtil.isEmpty(dialog.getSourceText().getText())) {
+                            setText(dialog.getSourceText(), sel);
+                        } else if (StringUtil.isEmpty(dialog.getTargetText().getText())) {
+                            setText(dialog.getTargetText(), sel);
+                        } else if (StringUtil.isEmpty(dialog.getCommentText().getText())) {
+                            setText(dialog.getCommentText(), sel);
+                        }
                     }
                 }
             }
-            
+
+            private String getSelectedText(Component comp) {
+                String result = null;
+                if (comp instanceof JTextComponent) {
+                    result = ((JTextComponent) comp).getSelectedText();
+                    if (!StringUtil.isEmpty(result)) {
+                        result = EditorUtils.removeDirectionChars(result);
+                    }
+                }
+                return result;
+            }
+
             private void setText(JTextComponent comp, String text) {
                 comp.setText(text);
                 comp.requestFocus();

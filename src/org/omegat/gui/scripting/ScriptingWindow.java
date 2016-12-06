@@ -50,6 +50,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.script.ScriptEngineFactory;
 import javax.swing.AbstractAction;
@@ -104,6 +106,8 @@ import org.openide.awt.Mnemonics;
  * @author Aaron Madlon-Kay
  */
 public class ScriptingWindow {
+
+    private static final Logger LOGGER = Logger.getLogger(ScriptingWindow.class.getName());
 
     static ScriptingWindow window;
 
@@ -600,7 +604,7 @@ public class ScriptingWindow {
         bindings.put(ScriptRunner.VAR_CONSOLE, new IScriptLogger() {
             @Override
             public void print(Object o) {
-                logResult(m_txtResult, o.toString());
+                logResult(o.toString());
             }
 
             @Override
@@ -638,17 +642,23 @@ public class ScriptingWindow {
     }
 
     private void logResult(String s, Throwable t) {
-        logResult(s + "\n" + t.getMessage());
+        logResultToWindow(s + "\n" + t.getMessage());
+        LOGGER.log(Level.SEVERE, s, t);
     }
 
     private void logResult(String s) {
-        logResult(m_txtResult, s + "\n");
+        logResultToWindow(s);
+        LOGGER.log(Level.INFO, s);
     }
 
-    private void logResult(JEditorPane e, String s) {
-        Document doc = e.getDocument();
+    /**
+     * Print log text to the Scripting Window's console area. A trailing line break will be added
+     * automatically.
+     */
+    private void logResultToWindow(String s) {
+        Document doc = m_txtResult.getDocument();
         try {
-            doc.insertString(doc.getLength(), s, null);
+            doc.insertString(doc.getLength(), s + "\n", null);
         } catch (BadLocationException e1) {
             /* empty */
         }

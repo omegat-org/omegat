@@ -54,6 +54,21 @@ public interface IProject {
     void saveProject(boolean doTeamSync);
 
     /**
+     * Prepare for team synchronization from save thread.
+     */
+    void teamSyncPrepare() throws Exception;
+
+    /**
+     * Check if team synchronization prepared.
+     */
+    boolean isTeamSyncPrepared();
+
+    /**
+     * Execute synchronization.
+     */
+    void teamSync();
+
+    /**
      * Close project.
      */
     void closeProject();

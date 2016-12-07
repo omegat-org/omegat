@@ -55,6 +55,7 @@ import gen.core.project.RepositoryMapping;
  */
 public class RemoteRepositoryProvider {
     public static final String REPO_SUBDIR = ".repositories/";
+    public static final String REPO_PREPARE_SUBDIR = ".repositories/prep/";
 
     final File projectRoot;
     final ProjectTeamSettings teamSettings;
@@ -141,6 +142,26 @@ public class RemoteRepositoryProvider {
      */
     public boolean isUnderMapping(String path) {
         return !getMappings(path).isEmpty();
+    }
+
+    public void cleanPrepared() throws Exception {
+        File[] ls = new File(projectRoot, REPO_PREPARE_SUBDIR).listFiles();
+        if (ls != null && ls.length > 0) {
+            for (File f : ls) {
+                f.delete();
+            }
+        }
+    }
+
+    /**
+     * Saves file into 'prepared' dir. 
+     */
+    public File toPrepared(File inFile) throws Exception {
+        File dir = new File(projectRoot, REPO_PREPARE_SUBDIR);
+        dir.mkdirs();
+        File out = File.createTempFile("prepared", "", dir);
+        FileUtils.copyFile(inFile, out);
+        return out;
     }
 
     /**

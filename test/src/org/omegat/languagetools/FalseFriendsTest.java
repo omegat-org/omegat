@@ -161,6 +161,19 @@ public class FalseFriendsTest extends TestCore {
             public String getTargetPathForSourceFile(String sourceFile) {
                 return null;
             }
+
+            @Override
+            public boolean isTeamSyncPrepared() {
+                return false;
+            }
+
+            @Override
+            public void teamSync() {
+            }
+
+            @Override
+            public void teamSyncPrepare() throws Exception {
+            }
         });
         LanguageToolWrapper.setBridgeFromCurrentProject();
     }

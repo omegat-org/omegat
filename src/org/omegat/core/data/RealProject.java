@@ -127,6 +127,17 @@ public class RealProject implements IProject {
     protected final ProjectProperties m_config;
     protected final RemoteRepositoryProvider remoteRepositoryProvider;
 
+    enum PreparedStatus {
+        NONE, PREPARED, REBASED
+    };
+
+    /**
+     * Status required for execute prepare/rebase/commit in the correct order.
+     */
+    private volatile PreparedStatus preparedStatus = PreparedStatus.NONE;
+    private volatile RebaseAndCommit.Prepared tmxPrepared;
+    private volatile RebaseAndCommit.Prepared glossaryPrepared;
+
     private boolean isOnlineMode;
 
     private RandomAccessFile raFile;
@@ -331,13 +342,15 @@ public class RealProject implements IProject {
             Core.setSegmenter(new Segmenter(srx));
 
             if (remoteRepositoryProvider != null) {
+                tmxPrepared = null;
+                glossaryPrepared = null;
                 // copy files from repository to project
 
                 // save changed TMX or just retrieve from repository
                 remoteRepositoryProvider.switchAllToLatest();
 
                 loadTranslations();
-                rebaseAndCommitProject();
+                rebaseAndCommitProject(true);
 
                 // retrieve other directories
                 remoteRepositoryProvider.switchAllToLatest();
@@ -601,6 +614,8 @@ public class RealProject implements IProject {
             }
         }
         if (remoteRepositoryProvider != null && m_config.getTargetDir().isUnderRoot()) {
+            tmxPrepared = null;
+            glossaryPrepared = null;
             // commit translations
             try {
                 remoteRepositoryProvider.switchAllToLatest();
@@ -684,7 +699,11 @@ public class RealProject implements IProject {
         }
     }
 
-    /** Saves the translation memory and preferences */
+    /** 
+     * Saves the translation memory and preferences.
+     * 
+     * This method must be executed in the Core.executeExclusively.
+     */
     public synchronized void saveProject(boolean doTeamSync) {
         if (isSaving) {
             return;
@@ -707,8 +726,12 @@ public class RealProject implements IProject {
                     projectTMX.save(m_config, m_config.getProjectInternal() + OConsts.STATUS_EXTENSION, isProjectModified());
 
                     if (remoteRepositoryProvider != null && doTeamSync) {
+                        tmxPrepared = null;
+                        glossaryPrepared = null;
+                        remoteRepositoryProvider.cleanPrepared();
+                        preparedStatus = PreparedStatus.NONE;
                         Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
-                        rebaseAndCommitProject();
+                        rebaseAndCommitProject(true);
                     }
 
                     setProjectModified(false);
@@ -736,6 +759,87 @@ public class RealProject implements IProject {
         Log.logInfoRB("LOG_DATAENGINE_SAVE_END");
         
         isSaving = false;
+    }
+
+    /**
+     * Prepare for future team sync.
+     * 
+     * This method must be executed in the Core.executeExclusively.
+     */
+    @Override
+    public void teamSyncPrepare() throws Exception {
+        if (remoteRepositoryProvider == null || preparedStatus != PreparedStatus.NONE) {
+            return;
+        }
+        LOGGER.fine("Prepare team sync");
+        tmxPrepared = null;
+        glossaryPrepared = null;
+        remoteRepositoryProvider.cleanPrepared();
+
+        String tmxPath = m_config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION;
+        if (remoteRepositoryProvider.isUnderMapping(tmxPath)) {
+            tmxPrepared = RebaseAndCommit.prepare(remoteRepositoryProvider, m_config.getProjectRootDir(), tmxPath);
+        }
+
+        final String glossaryPath = m_config.getWritableGlossaryFile().getUnderRoot();
+        new File(m_config.getProjectRootDir(), glossaryPath);
+        if (glossaryPath != null && remoteRepositoryProvider.isUnderMapping(glossaryPath)) {
+            glossaryPrepared = RebaseAndCommit.prepare(remoteRepositoryProvider, m_config.getProjectRootDir(),
+                    glossaryPath);
+        }
+        preparedStatus = PreparedStatus.PREPARED;
+    }
+
+    @Override
+    public boolean isTeamSyncPrepared() {
+        return preparedStatus == PreparedStatus.PREPARED;
+    }
+
+    /**
+     * Fast team sync for execute from SaveThread.
+     * 
+     * This method must be executed in the Core.executeExclusively.
+     */
+    @Override
+    public void teamSync() {
+        if (remoteRepositoryProvider == null || preparedStatus != PreparedStatus.PREPARED) {
+            return;
+        }
+        LOGGER.fine("Rebase team sync");
+        try {
+            rebaseAndCommitProject(glossaryPrepared != null);
+            preparedStatus = PreparedStatus.REBASED;
+
+            Runnable commit = () -> {
+                try {
+                    Core.executeExclusively(true, () -> {
+                        if (preparedStatus != PreparedStatus.REBASED) {
+                            return;
+                        }
+                        LOGGER.fine("Commit team sync");
+                        try {
+                            RebaseAndCommit.commitPrepared(tmxPrepared, remoteRepositoryProvider);
+                            if (glossaryPrepared != null) {
+                                RebaseAndCommit.commitPrepared(glossaryPrepared, remoteRepositoryProvider);
+                            }
+
+                            tmxPrepared = null;
+                            glossaryPrepared = null;
+
+                            remoteRepositoryProvider.cleanPrepared();
+                        } catch (Exception ex) {
+                            Log.logErrorRB(ex, "CT_ERROR_SAVING_PROJ");
+                        }
+                        preparedStatus = PreparedStatus.NONE;
+                    });
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "CT_ERROR_SAVING_PROJ");
+                }
+            };
+            new Thread(commit).start();
+        } catch (Exception ex) {
+            Log.logErrorRB(ex, "CT_ERROR_SAVING_PROJ");
+        }
     }
 
     /**
@@ -774,7 +878,7 @@ public class RealProject implements IProject {
      * <li>Upload new revision into repository.
      * </ol>
      */
-    private void rebaseAndCommitProject() throws Exception {
+    private void rebaseAndCommitProject(boolean processGlossary) throws Exception {
         Log.logInfoRB("TEAM_REBASE_START");
 
         final String author = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
@@ -782,8 +886,8 @@ public class RealProject implements IProject {
         final StringBuilder commitDetails = new StringBuilder("Translated by " + author);
         String tmxPath = m_config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION;
         if (remoteRepositoryProvider.isUnderMapping(tmxPath)) {
-            RebaseAndCommit.rebaseAndCommit(remoteRepositoryProvider, m_config.getProjectRootDir(), tmxPath,
-                    new RebaseAndCommit.IRebase() {
+            RebaseAndCommit.rebaseAndCommit(tmxPrepared, remoteRepositoryProvider, m_config.getProjectRootDir(),
+                    tmxPath, new RebaseAndCommit.IRebase() {
                         ProjectTMX baseTMX, headTMX;
 
                         @Override
@@ -823,66 +927,68 @@ public class RealProject implements IProject {
             }
         }
 
-        final String glossaryPath = m_config.getWritableGlossaryFile().getUnderRoot();
-        final File glossaryFile = m_config.getWritableGlossaryFile().getAsFile();
-                new File(m_config.getProjectRootDir(), glossaryPath);
-        if (glossaryPath != null && remoteRepositoryProvider.isUnderMapping(glossaryPath)) {
-            final List<GlossaryEntry> glossaryEntries;
-            if (glossaryFile.exists()) {
-                glossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
-            } else {
-                glossaryEntries = Collections.emptyList();
+        if (processGlossary) {
+            final String glossaryPath = m_config.getWritableGlossaryFile().getUnderRoot();
+            final File glossaryFile = m_config.getWritableGlossaryFile().getAsFile();
+            new File(m_config.getProjectRootDir(), glossaryPath);
+            if (glossaryPath != null && remoteRepositoryProvider.isUnderMapping(glossaryPath)) {
+                final List<GlossaryEntry> glossaryEntries;
+                if (glossaryFile.exists()) {
+                    glossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
+                } else {
+                    glossaryEntries = Collections.emptyList();
+                }
+                RebaseAndCommit.rebaseAndCommit(glossaryPrepared, remoteRepositoryProvider,
+                        m_config.getProjectRootDir(), glossaryPath, new RebaseAndCommit.IRebase() {
+                            List<GlossaryEntry> baseGlossaryEntries, headGlossaryEntries;
+
+                            @Override
+                            public void parseBaseFile(File file) throws Exception {
+                                if (file.exists()) {
+                                    baseGlossaryEntries = GlossaryReaderTSV.read(file, true);
+                                } else {
+                                    baseGlossaryEntries = new ArrayList<GlossaryEntry>();
+                                }
+                            }
+
+                            @Override
+                            public void parseHeadFile(File file) throws Exception {
+                                if (file.exists()) {
+                                    headGlossaryEntries = GlossaryReaderTSV.read(file, true);
+                                } else {
+                                    headGlossaryEntries = new ArrayList<GlossaryEntry>();
+                                }
+                            }
+
+                            @Override
+                            public void rebaseAndSave(File out) throws Exception {
+                                List<GlossaryEntry> deltaAddedGlossaryLocal = new ArrayList<GlossaryEntry>(
+                                        glossaryEntries);
+                                deltaAddedGlossaryLocal.removeAll(baseGlossaryEntries);
+                                List<GlossaryEntry> deltaRemovedGlossaryLocal = new ArrayList<GlossaryEntry>(
+                                        baseGlossaryEntries);
+                                deltaRemovedGlossaryLocal.removeAll(glossaryEntries);
+                                headGlossaryEntries.addAll(deltaAddedGlossaryLocal);
+                                headGlossaryEntries.removeAll(deltaRemovedGlossaryLocal);
+
+                                for (GlossaryEntry ge : headGlossaryEntries) {
+                                    GlossaryReaderTSV.append(out, ge);
+                                }
+                            }
+
+                            @Override
+                            public String getCommentForCommit() {
+                                final String author = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
+                                        System.getProperty("user.name"));
+                                return "Glossary changes by " + author;
+                            }
+
+                            @Override
+                            public String getFileCharset(File file) throws Exception {
+                                return GlossaryReaderTSV.getFileEncoding(file);
+                            }
+                        });
             }
-            RebaseAndCommit.rebaseAndCommit(remoteRepositoryProvider, m_config.getProjectRootDir(),
-                    glossaryPath, new RebaseAndCommit.IRebase() {
-                        List<GlossaryEntry> baseGlossaryEntries, headGlossaryEntries;
-
-                        @Override
-                        public void parseBaseFile(File file) throws Exception {
-                            if (file.exists()) {
-                                baseGlossaryEntries = GlossaryReaderTSV.read(file, true);
-                            } else {
-                                baseGlossaryEntries = new ArrayList<GlossaryEntry>();
-                            }
-                        }
-
-                        @Override
-                        public void parseHeadFile(File file) throws Exception {
-                            if (file.exists()) {
-                                headGlossaryEntries = GlossaryReaderTSV.read(file, true);
-                            } else {
-                                headGlossaryEntries = new ArrayList<GlossaryEntry>();
-                            }
-                        }
-
-                        @Override
-                        public void rebaseAndSave(File out) throws Exception {
-                            List<GlossaryEntry> deltaAddedGlossaryLocal = new ArrayList<GlossaryEntry>(
-                                    glossaryEntries);
-                            deltaAddedGlossaryLocal.removeAll(baseGlossaryEntries);
-                            List<GlossaryEntry> deltaRemovedGlossaryLocal = new ArrayList<GlossaryEntry>(
-                                    baseGlossaryEntries);
-                            deltaRemovedGlossaryLocal.removeAll(glossaryEntries);
-                            headGlossaryEntries.addAll(deltaAddedGlossaryLocal);
-                            headGlossaryEntries.removeAll(deltaRemovedGlossaryLocal);
-
-                            for (GlossaryEntry ge : headGlossaryEntries) {
-                                GlossaryReaderTSV.append(out, ge);
-                            }
-                        }
-
-                        @Override
-                        public String getCommentForCommit() {
-                            final String author = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
-                                    System.getProperty("user.name"));
-                            return "Glossary changes by " + author;
-                        }
-
-                        @Override
-                        public String getFileCharset(File file) throws Exception {
-                            return GlossaryReaderTSV.getFileEncoding(file);
-                        }
-                    });
         }
         Log.logInfoRB("TEAM_REBASE_END");
     }

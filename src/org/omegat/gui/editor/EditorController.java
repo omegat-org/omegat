@@ -63,6 +63,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -1255,6 +1256,17 @@ public class EditorController implements IEditor {
                     }
                 }
             }.execute();
+        }
+
+        // team sync for save thread
+        if (Core.getProject().isTeamSyncPrepared()) {
+            try {
+                Core.executeExclusively(false, () -> {
+                    Core.getProject().teamSync();
+                });
+            } catch (InterruptedException ex) {
+            } catch (TimeoutException ex) {
+            }
         }
     }
 

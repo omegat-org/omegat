@@ -358,13 +358,15 @@ public class Core {
      * will break project files, especially during team synchronization. For guaranteed non-parallel
      * execution, all such operations must be executed via this method.
      * 
+     * @param waitForUnlock
+     *            should execution wait for unlock 3 minutes
      * @param run
      *            code for execute
      * @throws InterruptedException,
      *             TimeoutException
      */
-    public static void executeExclusively(Runnable run) throws InterruptedException, TimeoutException {
-        if (!exclusiveRunLock.tryLock(3, TimeUnit.MINUTES)) {
+    public static void executeExclusively(boolean waitForUnlock, Runnable run) throws InterruptedException, TimeoutException {
+        if (!exclusiveRunLock.tryLock(waitForUnlock ? 180000 : 1, TimeUnit.MILLISECONDS)) {
             throw new TimeoutException();
         }
         try {

@@ -782,7 +782,6 @@ public class RealProject implements IProject {
         }
 
         final String glossaryPath = m_config.getWritableGlossaryFile().getUnderRoot();
-        new File(m_config.getProjectRootDir(), glossaryPath);
         if (glossaryPath != null && remoteRepositoryProvider.isUnderMapping(glossaryPath)) {
             glossaryPrepared = RebaseAndCommit.prepare(remoteRepositoryProvider, m_config.getProjectRootDir(),
                     glossaryPath);
@@ -810,7 +809,7 @@ public class RealProject implements IProject {
             rebaseAndCommitProject(glossaryPrepared != null);
             preparedStatus = PreparedStatus.REBASED;
 
-            Runnable commit = () -> {
+            new Thread(() -> {
                 try {
                     Core.executeExclusively(true, () -> {
                         if (preparedStatus != PreparedStatus.REBASED) {
@@ -835,8 +834,7 @@ public class RealProject implements IProject {
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "CT_ERROR_SAVING_PROJ");
                 }
-            };
-            new Thread(commit).start();
+            }).start();
         } catch (Exception ex) {
             Log.logErrorRB(ex, "CT_ERROR_SAVING_PROJ");
         }

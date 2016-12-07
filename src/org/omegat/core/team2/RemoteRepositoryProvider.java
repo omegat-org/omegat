@@ -145,12 +145,7 @@ public class RemoteRepositoryProvider {
     }
 
     public void cleanPrepared() throws Exception {
-        File[] ls = new File(projectRoot, REPO_PREPARE_SUBDIR).listFiles();
-        if (ls != null && ls.length > 0) {
-            for (File f : ls) {
-                f.delete();
-            }
-        }
+        FileUtils.deleteDirectory(new File(projectRoot, REPO_PREPARE_SUBDIR));
     }
 
     /**

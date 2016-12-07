@@ -1261,9 +1261,7 @@ public class EditorController implements IEditor {
         // team sync for save thread
         if (Core.getProject().isTeamSyncPrepared()) {
             try {
-                Core.executeExclusively(false, () -> {
-                    Core.getProject().teamSync();
-                });
+                Core.executeExclusively(false, Core.getProject()::teamSync);
             } catch (InterruptedException ex) {
             } catch (TimeoutException ex) {
             }

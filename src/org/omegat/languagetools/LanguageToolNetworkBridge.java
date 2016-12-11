@@ -34,6 +34,7 @@ import java.net.Socket;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -213,7 +214,7 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
         // Read response into string specially wrapped for Nashorn
         String json = "";
         try (InputStream in = conn.getInputStream()) {
-            json = IOUtils.toString(in);
+            json = IOUtils.toString(in, StandardCharsets.UTF_8);
         }
 
         Map<String, Object> response = (Map<String, Object>) engine.eval("Java.asJSONCompatible(" + json + ')');
@@ -297,7 +298,7 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
                 return false;
             }
             try (InputStream in = conn.getInputStream()) {
-                String response = IOUtils.toString(in);
+                String response = IOUtils.toString(in, StandardCharsets.UTF_8);
                 if (response.contains("<?xml")) {
                     Log.logErrorRB("LT_WRONG_FORMAT_RESPONSE");
                     return false;

@@ -78,6 +78,9 @@ public class DTD extends XMLPseudoTag {
             res.append(" PUBLIC \"").append(publicId).append("\"");
         }
         if (systemId != null) {
+            if (publicId == null) {
+                res.append(" SYSTEM");
+            }
             res.append(" \"").append(systemId).append("\"");
         }
 

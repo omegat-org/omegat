@@ -111,6 +111,9 @@ import gen.core.filters.Filters;
  * All components can read all data directly without synchronization. All synchronization implemented inside
  * RealProject.
  * 
+ * Since team sync is long operation, autosaving was splitted into 3 phrases: get remote data in background, then rebase
+ * during segment deactivation, then commit in background.
+ * 
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Maxym Mykhalchuk
@@ -806,6 +809,9 @@ public class RealProject implements IProject {
         }
         LOGGER.fine("Rebase team sync");
         try {
+            synchronized (RealProject.this) {
+                projectTMX.save(m_config, m_config.getProjectInternal() + OConsts.STATUS_EXTENSION, isProjectModified());
+            }
             rebaseAndCommitProject(glossaryPrepared != null);
             preparedStatus = PreparedStatus.REBASED;
 

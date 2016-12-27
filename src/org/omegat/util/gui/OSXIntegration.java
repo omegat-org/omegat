@@ -260,7 +260,30 @@ public class OSXIntegration {
             Log.log(ex);
         }
     }
-    
+
+    public static void setPreferencesHandler(ActionListener listener) {
+        try {
+            // Handler must implement com.apple.eawt.PreferencesHandler interface.
+            Class<?> preferencesHandlerClass = Class.forName("com.apple.eawt.PreferencesHandler");
+            InvocationHandler ih = (Object proxy, Method method, Object[] args) -> {
+                if (method.getName().equals("handlePreferences")) {
+                    // Respond to
+                    // handlePreferences(com.apple.eawt.AppEvent.PreferencesHandler)
+                    listener.actionPerformed(null);
+                }
+                return null;
+            };
+            Object handler = Proxy.newProxyInstance(OSXIntegration.class.getClassLoader(),
+                    new Class<?>[] { preferencesHandlerClass }, ih);
+            // Set handler:
+            // app.setPreferencesHandler(handler);
+            Method setAboutHandler = getAppClass().getDeclaredMethod("setPreferencesHandler", preferencesHandlerClass);
+            setAboutHandler.invoke(getApp(), handler);
+        } catch (Exception ex) {
+            Log.log(ex);
+        }
+    }
+
     public static void enableFullScreen(Window window) {
         try {
             // Enable full-screen mode:

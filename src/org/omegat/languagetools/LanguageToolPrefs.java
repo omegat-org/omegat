@@ -89,17 +89,17 @@ public class LanguageToolPrefs {
     }
 
     public static void setDisabledRules(Set<String> rules, String languageCode) {
-        setLanguageSpecificPrefernce(rules,
+        setLanguageSpecificPreference(rules,
                 Preferences.LANGUAGETOOL_DISABLED_RULES_PREFIX, languageCode);
     }
 
     public static void setEnabledRules(Set<String> rules, String languageCode) {
-        setLanguageSpecificPrefernce(rules,
+        setLanguageSpecificPreference(rules,
                 Preferences.LANGUAGETOOL_ENABLED_RULES_PREFIX, languageCode);
     }
 
     public static void setDisabledCategories(Set<String> categories, String languageCode) {
-        setLanguageSpecificPrefernce(categories,
+        setLanguageSpecificPreference(categories,
                 Preferences.LANGUAGETOOL_DISABLED_CATEGORIES_PREFIX, languageCode);
     }
 
@@ -125,7 +125,7 @@ public class LanguageToolPrefs {
                 .filter(s -> !s.isEmpty()).collect(Collectors.toSet());
     }
 
-    private static void setLanguageSpecificPrefernce(Set<String> data,
+    private static void setLanguageSpecificPreference(Set<String> data,
             String namePrefix, String languageCode) {
         Preferences.setPreference(namePrefix + "_" + languageCode, String.join(",", data));
     }

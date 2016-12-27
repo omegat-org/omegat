@@ -39,8 +39,9 @@ import org.omegat.util.Preferences;
  */
 public class LanguageToolPrefs {
 
-    private final static String DEFAULT_DISABLED_CATEGORIES = "SPELL,TYPOS";
-    private final static String DEFAULT_DISABLED_RULES = "SAME_TRANSLATION,TRANSLATION_LENGTH,DIFFERENT_PUNCTUATION";
+    public final static String DEFAULT_DISABLED_CATEGORIES = "SPELL,TYPOS";
+    public final static String DEFAULT_DISABLED_RULES = "SAME_TRANSLATION,TRANSLATION_LENGTH,DIFFERENT_PUNCTUATION";
+    public final static BridgeType DEFAULT_BRIDGE_TYPE = BridgeType.NATIVE;
 
     private LanguageToolPrefs() {
 
@@ -69,7 +70,7 @@ public class LanguageToolPrefs {
 
     public static BridgeType getBridgeType() {
         return Preferences.getPreferenceEnumDefault(Preferences.LANGUAGETOOL_BRIDGE_TYPE,
-                BridgeType.NATIVE);
+                DEFAULT_BRIDGE_TYPE);
     }
 
     public static void setRemoteUrl(String url) {
@@ -108,6 +109,10 @@ public class LanguageToolPrefs {
                 languageCode, DEFAULT_DISABLED_RULES);
     }
 
+    public static Set<String> getDefaultDisabledRules() {
+        return setOf(DEFAULT_DISABLED_RULES);
+    }
+
     public static Set<String> getEnabledRules(String languageCode) {
         return getLangauageSpecificPreference(Preferences.LANGUAGETOOL_ENABLED_RULES_PREFIX,
                 languageCode, "");
@@ -118,11 +123,17 @@ public class LanguageToolPrefs {
                 languageCode, DEFAULT_DISABLED_CATEGORIES);
     }
 
-    private static Set<String> getLangauageSpecificPreference(String namePrefix,
-            String languageCode, String defaultValue) {
-        return Stream.of(Preferences
-                .getPreferenceDefault(namePrefix + "_" + languageCode, defaultValue).split(","))
-                .filter(s -> !s.isEmpty()).collect(Collectors.toSet());
+    public static Set<String> getDefaultDisabledCategories() {
+        return setOf(DEFAULT_DISABLED_CATEGORIES);
+    }
+
+    private static Set<String> getLangauageSpecificPreference(String namePrefix, String languageCode,
+            String defaultValue) {
+        return setOf(Preferences.getPreferenceDefault(namePrefix + "_" + languageCode, defaultValue));
+    }
+
+    private static Set<String> setOf(String commaDelimited) {
+        return Stream.of(commaDelimited.split(",")).filter(s -> !s.isEmpty()).collect(Collectors.toSet());
     }
 
     private static void setLanguageSpecificPreference(Set<String> data,

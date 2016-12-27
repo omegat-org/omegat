@@ -119,6 +119,9 @@ dependencies {
         // Team project conflict resolution
         compile 'org.madlonkay.supertmxmerge:supertmxmerge:2.0.1'
 
+        // Credentials encryption
+        compile 'org.jasypt:jasypt:1.9.2'
+
         // Groovy used for (runtime) scripts, tests only
         runtime 'org.codehaus.groovy:groovy-all:2.4.6'
         

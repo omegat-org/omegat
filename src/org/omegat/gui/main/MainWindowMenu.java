@@ -374,7 +374,9 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         viewMarkLanguageCheckerCheckBoxMenuItem.setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor()));
         viewMarkFontFallbackCheckBoxMenuItem.setIcon(MainMenuIcons.newTextIcon(UIManager.getColor("Label.foreground"),
                 new Font("Serif", Font.ITALIC, 16), 'F'));
-        
+        viewMenu.addSeparator();
+        viewMenu.add(viewRestoreGUIMenuItem = createMenuItem("MW_OPTIONSMENU_RESTORE_GUI"));
+
         toolsMenu.add(toolsCheckIssuesMenuItem = createMenuItem("TF_MENU_TOOLS_CHECK_ISSUES"));
         toolsMenu.add(toolsCheckIssuesCurrentFileMenuItem = createMenuItem("TF_MENU_TOOLS_CHECK_ISSUES_CURRENT_FILE"));
         toolsMenu.add(toolsShowStatisticsStandardMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_STANDARD"));
@@ -431,7 +433,6 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         optionsMenu.add(optionsSaveOptionsMenuItem = createMenuItem("MW_OPTIONSMENU_SAVE"));
         optionsMenu.add(optionsViewOptionsMenuLoginItem = createMenuItem("MW_OPTIONSMENU_LOGIN"));
         optionsMenu.addSeparator();
-        optionsMenu.add(optionsRestoreGUIMenuItem = createMenuItem("MW_OPTIONSMENU_RESTORE_GUI"));
         optionsMenu.add(optionsAccessConfigDirMenuItem = createMenuItem("MW_OPTIONSMENU_ACCESS_CONFIG_DIR"));
         optionsMenu.add(optionsRepositoriesCredentialsItem = createMenuItem("TEAM_REPOSITORIES_DIALOG"));
         optionsMenu.addSeparator();
@@ -763,7 +764,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem optionsFontSelectionMenuItem;
     JMenuItem optionsColorsSelectionMenuItem;
     JMenu optionsMenu;
-    JMenuItem optionsRestoreGUIMenuItem;
+    JMenuItem viewRestoreGUIMenuItem;
     JMenuItem optionsAccessConfigDirMenuItem;
     JMenuItem optionsRepositoriesCredentialsItem;
     JMenuItem optionsSentsegMenuItem;

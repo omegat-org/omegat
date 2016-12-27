@@ -1114,7 +1114,7 @@ public class MainWindowMenuHandler {
      * Restores defaults for all dockable parts. May be expanded in the future to reset the entire GUI to its
      * defaults.
      */
-    public void optionsRestoreGUIMenuItemActionPerformed() {
+    public void viewRestoreGUIMenuItemActionPerformed() {
         MainWindowUI.resetDesktopLayout(mainWindow);
     }
 

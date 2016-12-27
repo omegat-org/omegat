@@ -85,7 +85,7 @@ public class BrowseTaasCollectionsController {
             
             @Override
             protected List<TaasCollection> doInBackground() throws Exception {
-                return TaaSPlugin.client.getCollectionsList();
+                return TaaSPlugin.getClient().getCollectionsList();
             }
 
             @Override
@@ -219,7 +219,7 @@ public class BrowseTaasCollectionsController {
 
                             File glossaryFile = getFileForCollection(c);
                             File newFile = new File(glossaryFile.getAbsolutePath() + ".new");
-                            TaaSPlugin.client.downloadCollection(c.getId(), newFile);
+                            TaaSPlugin.getClient().downloadCollection(c.getId(), newFile);
 
                             if (glossaryFile.exists()) {
                                 glossaryFile.delete();

@@ -64,7 +64,7 @@ public class SelectDomainController {
             
             @Override
             protected List<TaasDomain> doInBackground() throws Exception {
-                List<TaasDomain> result = TaaSPlugin.client.getDomainsList();
+                List<TaasDomain> result = TaaSPlugin.getClient().getDomainsList();
 
                 Collections.sort(result, new Comparator<TaasDomain>() {
                     @Override

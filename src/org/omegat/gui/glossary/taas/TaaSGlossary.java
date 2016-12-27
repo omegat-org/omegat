@@ -25,8 +25,6 @@
 
 package org.omegat.gui.glossary.taas;
 
-import gen.taas.TaasExtractionResult;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
@@ -38,6 +36,8 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.Preferences;
 
+import gen.taas.TaasExtractionResult;
+
 /**
  * TaaS glossary implementation.
  * 
@@ -48,11 +48,12 @@ public class TaaSGlossary implements IGlossary {
 
     @Override
     public List<GlossaryEntry> search(Language sLang, Language tLang, String srcText) throws Exception {
-        if (!Preferences.isPreferenceDefault(Preferences.TAAS_LOOKUP, false)) {
+        if (!Preferences.isPreferenceDefault(Preferences.TAAS_LOOKUP, false)
+                || !TaaSPlugin.getClient().isAllowed()) {
             return Collections.emptyList();
         }
 
-        TaasExtractionResult res = TaaSPlugin.client.termExtraction(sLang, tLang, srcText,
+        TaasExtractionResult res = TaaSPlugin.getClient().termExtraction(sLang, tLang, srcText,
                 Preferences.getPreference(Preferences.TAAS_DOMAIN));
         String data = TaaSPlugin.filterTaasResult(res.getTerms());
         List<GlossaryEntry> entries = GlossaryReaderTBX.read(data, false);

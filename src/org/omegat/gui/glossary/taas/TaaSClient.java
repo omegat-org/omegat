@@ -43,6 +43,7 @@ import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
 
 import org.apache.commons.io.IOUtils;
+import org.omegat.util.CredentialsManager;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -66,6 +67,8 @@ public class TaaSClient {
 
     private static final Logger LOGGER = Logger.getLogger(TaaSClient.class.getName());
 
+    private static final String PROPERTY_API_KEY = "taas.user.key";
+
     public static final String WS_URL = "https://api.taas-project.eu";
     /** Machine user name */
     public static final String M_USERNAME = "OmegaT";
@@ -81,25 +84,57 @@ public class TaaSClient {
      */
     public static final String EXTRACTION_METHOD = "4";
 
-    private final JAXBContext context;
+    private JAXBContext context;
 
-    private final String taasUserKey;
+    private String taasUserKey;
 
-    public TaaSClient() throws Exception {
-        String key = System.getProperty("taas.user.key");
-        if (key == null || key.isEmpty()) {
-            // TaaS disabled without user key
-            taasUserKey = null;
-            context = null;
-            return;
+    public void init() throws Exception {
+        loadApiKey();
+        if (isAllowed()) {
+            initContext();
         }
+    }
+
+    public String getApiKey() {
+        return taasUserKey;
+    }
+
+    private void loadApiKey() {
+        String property = System.getProperty(PROPERTY_API_KEY);
+        if (!StringUtil.isEmpty(property)) {
+            taasUserKey = property;
+        } else {
+            taasUserKey = CredentialsManager.getInstance().retrieve(PROPERTY_API_KEY).orElse("");
+        }
+    }
+
+    public void setApiKey(String key, boolean temporary) throws Exception {
         taasUserKey = key;
-        context = JAXBContext.newInstance(TaasCollections.class, TaasArrayOfTerm.class,
-                TaasExtractionResult.class, TaasDomains.class);
+        storeApiKey(key, temporary);
+        if (isAllowed()) {
+            initContext();
+        }
+    }
+
+    private void storeApiKey(String key, boolean temporary) {
+        System.setProperty(PROPERTY_API_KEY, key);
+        CredentialsManager.getInstance().store(PROPERTY_API_KEY, temporary ? "" : key);
+    }
+
+    public boolean isApiKeyStoredTemporarily() {
+        return !CredentialsManager.getInstance().isStored(PROPERTY_API_KEY)
+                && !System.getProperty(PROPERTY_API_KEY, "").isEmpty();
+    }
+
+    private void initContext() throws Exception {
+        if (context == null) {
+            context = JAXBContext.newInstance(TaasCollections.class, TaasArrayOfTerm.class,
+                    TaasExtractionResult.class, TaasDomains.class);
+        }
     }
 
     public boolean isAllowed() {
-        return taasUserKey != null;
+        return !StringUtil.isEmpty(taasUserKey);
     }
 
     /**
@@ -111,7 +146,7 @@ public class TaaSClient {
         conn = (HttpURLConnection) new URL(url).openConnection();
 
         conn.setRequestProperty("Authorization", BASIC_AUTH);
-        if (taasUserKey != null && !taasUserKey.isEmpty()) {
+        if (!StringUtil.isEmpty(taasUserKey)) {
             conn.setRequestProperty("TaaS-User-Key", taasUserKey);
         }
         conn.setRequestProperty("Accept", "text/xml");

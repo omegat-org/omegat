@@ -57,31 +57,39 @@ import org.openide.awt.Mnemonics;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TaaSPlugin {
-    public static TaaSClient client;
 
     static JMenuItem browse;
+
+    private static class ClientHolder {
+        private static TaaSClient CLIENT = new TaaSClient();
+    }
+
+    public static TaaSClient getClient() {
+        return ClientHolder.CLIENT;
+    }
+
+    private TaaSPlugin() {
+    }
+
     static Transformer filterTransformer, filterTransformerContext;
 
     /**
      * Register plugin into OmegaT.
      */
     public static void loadPlugins() {
-        final TaaSGlossary glossary;
+        TaaSGlossary glossary;
+        TaaSClient client = getClient();
         try {
-            client = new TaaSClient();
+            client.init();
             if (client.isAllowed()) {
                 glossary = new TaaSGlossary();
-
-                InputStream in = TaaSGlossary.class.getResourceAsStream("filter.xslt");
-                if (in == null) {
-                    throw new Exception("filter.xslt is unaccessible");
-                }
-                try {
+                try (InputStream in = TaaSGlossary.class.getResourceAsStream("filter.xslt")) {
+                    if (in == null) {
+                        throw new Exception("filter.xslt is unaccessible");
+                    }
                     TransformerFactory factory = TransformerFactory.newInstance();
                     Source xslt = new StreamSource(in);
                     filterTransformer = factory.newTransformer(xslt);
-                } finally {
-                    in.close();
                 }
             } else {
                 glossary = null;

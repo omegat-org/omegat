@@ -687,12 +687,17 @@ public class Preferences {
             return;
         }
         didInit = true;
-        File srxFile = new File(StaticUtils.getConfigDir(), SRX.CONF_SENTSEG);
-        SRX srx = SRX.loadSRX(srxFile);
-        if (srx == null) {
-            srx = SRX.getDefault();
+
+        File loadFile = getPreferencesFile();
+        File saveFile = new File(StaticUtils.getConfigDir(), Preferences.FILE_PREFERENCES);
+        m_preferences = new PreferencesImpl(new PreferencesXML(loadFile, saveFile));
+    }
+
+    public static synchronized void initFilters() {
+        if (didInitFilters) {
+            return;
         }
-        m_srx = srx;
+        didInitFilters = true;
 
         File filtersFile = new File(StaticUtils.getConfigDir(), FilterMaster.FILE_FILTERS);
         Filters filters = null;
@@ -705,15 +710,27 @@ public class Preferences {
             filters = FilterMaster.createDefaultFiltersConfig();
         }
         m_filters = filters;
+    }
 
-        File loadFile = getPreferencesFile();
-        File saveFile = new File(StaticUtils.getConfigDir(), Preferences.FILE_PREFERENCES);
-        m_preferences = new PreferencesImpl(new PreferencesXML(loadFile, saveFile));
+    public static synchronized void initSegmentation() {
+        if (didInitSegmentation) {
+            return;
+        }
+        didInitSegmentation = true;
+
+        File srxFile = new File(StaticUtils.getConfigDir(), SRX.CONF_SENTSEG);
+        SRX srx = SRX.loadSRX(srxFile);
+        if (srx == null) {
+            srx = SRX.getDefault();
+        }
+        m_srx = srx;
     }
 
     private static volatile boolean didInit = false;
     private static IPreferences m_preferences;
+    private static volatile boolean didInitSegmentation = false;
     private static SRX m_srx;
+    private static volatile boolean didInitFilters = false;
     private static Filters m_filters;
 
     // Support for firing property change events

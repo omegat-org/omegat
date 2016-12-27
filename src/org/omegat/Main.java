@@ -166,9 +166,11 @@ public class Main {
 
         // Do migration and load various settings. The order is important!
         ConvertConfigs.convert();
+        Preferences.init();
         PluginUtils.loadPlugins(params);
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
-        Preferences.init();
+        Preferences.initFilters();
+        Preferences.initSegmentation();
 
         int result;
         try {

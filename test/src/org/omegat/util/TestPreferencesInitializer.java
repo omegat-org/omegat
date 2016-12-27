@@ -59,5 +59,7 @@ public class TestPreferencesInitializer {
     public static synchronized void init(String configDir) {
         RuntimePreferences.setConfigDir(configDir);
         Preferences.init();
+        Preferences.initFilters();
+        Preferences.initSegmentation();
     }
 }

@@ -49,6 +49,9 @@ public class IssueProviders {
         addIssueProvider(new SpellingIssueProvider());
     }
 
+    private IssueProviders() {
+    }
+
     public static void addIssueProvider(IIssueProvider provider) {
         ISSUE_PROVIDERS.add(provider);
     }

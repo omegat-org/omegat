@@ -49,6 +49,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -286,10 +287,17 @@ public class StaticUIUtils {
     }
 
     public static void visitHierarchy(Component parent, Consumer<Component> consumer) {
-        consumer.accept(parent);
-        if (parent instanceof JComponent) {
-            for (Component child : ((JComponent) parent).getComponents()) {
-                visitHierarchy(child, consumer);
+        visitHierarchy(parent, c -> true, consumer);
+    }
+
+    public static void visitHierarchy(Component parent, Predicate<Component> filter,
+            Consumer<Component> consumer) {
+        if (filter.test(parent)) {
+            consumer.accept(parent);
+            if (parent instanceof JComponent) {
+                for (Component child : ((JComponent) parent).getComponents()) {
+                    visitHierarchy(child, filter, consumer);
+                }
             }
         }
     }

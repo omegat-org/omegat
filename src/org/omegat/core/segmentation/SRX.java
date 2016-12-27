@@ -532,4 +532,46 @@ public class SRX implements Serializable, Cloneable {
         version = value;
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (includeEndingTags ? 1231 : 1237);
+        result = prime * result + (includeIsolatedTags ? 1231 : 1237);
+        result = prime * result + (includeStartingTags ? 1231 : 1237);
+        result = prime * result + ((mappingRules == null) ? 0 : mappingRules.hashCode());
+        result = prime * result + (segmentSubflows ? 1231 : 1237);
+        result = prime * result + ((version == null) ? 0 : version.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        SRX other = (SRX) obj;
+        if (includeEndingTags != other.includeEndingTags)
+            return false;
+        if (includeIsolatedTags != other.includeIsolatedTags)
+            return false;
+        if (includeStartingTags != other.includeStartingTags)
+            return false;
+        if (mappingRules == null) {
+            if (other.mappingRules != null)
+                return false;
+        } else if (!mappingRules.equals(other.mappingRules))
+            return false;
+        if (segmentSubflows != other.segmentSubflows)
+            return false;
+        if (version == null) {
+            if (other.version != null)
+                return false;
+        } else if (!version.equals(other.version))
+            return false;
+        return true;
+    }
 }

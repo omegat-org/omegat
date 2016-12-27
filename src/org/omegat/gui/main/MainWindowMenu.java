@@ -53,7 +53,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.event.MenuEvent;
@@ -224,15 +223,15 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         projectMenu.add(projectWikiImportMenuItem = createMenuItem("TF_MENU_WIKI_IMPORT"));
         projectMenu.add(projectReloadMenuItem = createMenuItem("TF_MENU_PROJECT_RELOAD"));
         projectMenu.add(projectCloseMenuItem = createMenuItem("TF_MENU_FILE_CLOSE"));
-        projectMenu.add(new JSeparator());
+        projectMenu.addSeparator();
         projectMenu.add(projectSaveMenuItem = createMenuItem("TF_MENU_FILE_SAVE"));
-        projectMenu.add(new JSeparator());
+        projectMenu.addSeparator();
         projectMenu.add(projectCompileMenuItem = createMenuItem("TF_MENU_FILE_COMPILE"));
         projectMenu.add(projectSingleCompileMenuItem = createMenuItem("TF_MENU_FILE_SINGLE_COMPILE"));
-        projectMenu.add(new JSeparator());
+        projectMenu.addSeparator();
         projectMenu.add(projectMedOpenMenuItem = createMenuItem("TF_MENU_FILE_MED_OPEN"));
         projectMenu.add(projectMedCreateMenuItem = createMenuItem("TF_MENU_FILE_MED_CREATE"));
-        projectMenu.add(new JSeparator());
+        projectMenu.addSeparator();
         projectMenu.add(projectEditMenuItem = createMenuItem("MW_PROJECTMENU_EDIT"));
         projectMenu.add(viewFileListMenuItem = createMenuItem("TF_MENU_FILE_PROJWIN"));
         projectMenu.add(projectAccessProjectFilesMenu = createMenu("TF_MENU_FILE_ACCESS_PROJECT_FILES")); 
@@ -242,7 +241,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         projectAccessProjectFilesMenu.add(projectAccessSourceMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_SOURCE"));
         projectAccessProjectFilesMenu.add(projectAccessTargetMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_TARGET"));
         projectAccessProjectFilesMenu.add(projectAccessTMMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_TM"));
-        projectAccessProjectFilesMenu.add(new JSeparator());
+        projectAccessProjectFilesMenu.addSeparator();
         projectAccessProjectFilesMenu.add(projectAccessCurrentSourceDocumentMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_CURRENT_SOURCE_DOCUMENT"));
         projectAccessProjectFilesMenu.add(projectAccessCurrentTargetDocumentMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_CURRENT_TARGET_DOCUMENT"));
         projectAccessProjectFilesMenu.add(projectAccessWriteableGlossaryMenuItem = 
@@ -273,35 +272,35 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
         // all except MacOSX
         if (!Platform.isMacOSX()) {
-            projectMenu.add(new JSeparator());
+            projectMenu.addSeparator();
             projectMenu.add(projectExitMenuItem);
         }
 
         editMenu.add(editUndoMenuItem = createMenuItem("TF_MENU_EDIT_UNDO"));
         editMenu.add(editRedoMenuItem = createMenuItem("TF_MENU_EDIT_REDO"));
-        editMenu.add(new JSeparator());
+        editMenu.addSeparator();
         editMenu.add(editOverwriteTranslationMenuItem = createMenuItem("TF_MENU_EDIT_RECYCLE"));
         editMenu.add(editInsertTranslationMenuItem = createMenuItem("TF_MENU_EDIT_INSERT"));
-        editMenu.add(new JSeparator());
+        editMenu.addSeparator();
         editMenu.add(editOverwriteMachineTranslationMenuItem = createMenuItem("TF_MENU_EDIT_OVERWRITE_MACHITE_TRANSLATION"));
-        editMenu.add(new JSeparator());
+        editMenu.addSeparator();
         editMenu.add(editOverwriteSourceMenuItem = createMenuItem("TF_MENU_EDIT_SOURCE_OVERWRITE"));
         editMenu.add(editInsertSourceMenuItem = createMenuItem("TF_MENU_EDIT_SOURCE_INSERT"));
-        editMenu.add(new JSeparator());
+        editMenu.addSeparator();
         editMenu.add(editTagPainterMenuItem = createMenuItem("TF_MENU_EDIT_TAGPAINT"));
         editMenu.add(editTagNextMissedMenuItem = createMenuItem("TF_MENU_EDIT_TAG_NEXT_MISSED"));
-        editMenu.add(new JSeparator());
+        editMenu.addSeparator();
         editMenu.add(editExportSelectionMenuItem = createMenuItem("TF_MENU_EDIT_EXPORT_SELECTION"));
         editMenu.add(editCreateGlossaryEntryMenuItem = createMenuItem("TF_MENU_EDIT_CREATE_GLOSSARY_ENTRY"));
-        editMenu.add(new JSeparator());
+        editMenu.addSeparator();
         editMenu.add(editFindInProjectMenuItem = createMenuItem("TF_MENU_EDIT_FIND"));
         editMenu.add(editReplaceInProjectMenuItem = createMenuItem("TF_MENU_EDIT_REPLACE"));
-        editMenu.add(new JSeparator());
+        editMenu.addSeparator();
         editMenu.add(switchCaseSubMenu = createMenu("TF_EDIT_MENU_SWITCH_CASE"));
         editMenu.add(selectFuzzySubMenu = createMenu("TF_MENU_EDIT_COMPARE"));
         selectFuzzySubMenu.add(editSelectFuzzyPrevMenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_PREV"));
         selectFuzzySubMenu.add(editSelectFuzzyNextMenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_NEXT"));
-        selectFuzzySubMenu.add(new JSeparator());
+        selectFuzzySubMenu.addSeparator();
         selectFuzzySubMenu.add(editSelectFuzzy1MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_1"));
         selectFuzzySubMenu.add(editSelectFuzzy2MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_2"));
         selectFuzzySubMenu.add(editSelectFuzzy3MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_3"));
@@ -310,14 +309,14 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         editMenu.add(insertCharsSubMenu = createMenu("TF_MENU_EDIT_INSERT_CHARS"));
         insertCharsSubMenu.add(insertCharsLRM = createMenuItem("TF_MENU_EDIT_INSERT_CHARS_LRM"));
         insertCharsSubMenu.add(insertCharsRLM = createMenuItem("TF_MENU_EDIT_INSERT_CHARS_RLM"));
-        insertCharsSubMenu.add(new JSeparator());
+        insertCharsSubMenu.addSeparator();
         insertCharsSubMenu.add(insertCharsLRE = createMenuItem("TF_MENU_EDIT_INSERT_CHARS_LRE"));
         insertCharsSubMenu.add(insertCharsRLE = createMenuItem("TF_MENU_EDIT_INSERT_CHARS_RLE"));
         insertCharsSubMenu.add(insertCharsPDF = createMenuItem("TF_MENU_EDIT_INSERT_CHARS_PDF"));
-        editMenu.add(new JSeparator());
+        editMenu.addSeparator();
         editMenu.add(editMultipleDefault = createMenuItem("MULT_MENU_DEFAULT"));
         editMenu.add(editMultipleAlternate = createMenuItem("MULT_MENU_MULTIPLE"));
-        editMenu.add(new JSeparator());
+        editMenu.addSeparator();
         editMenu.add(editRegisterUntranslatedMenuItem = createMenuItem("TF_MENU_EDIT_UNTRANSLATED_TRANSLATION"));
         editMenu.add(editRegisterEmptyMenuItem = createMenuItem("TF_MENU_EDIT_EMPTY_TRANSLATION"));
         editMenu.add(editRegisterIdenticalMenuItem = createMenuItem("TF_MENU_EDIT_IDENTICAL_TRANSLATION"));
@@ -326,7 +325,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         switchCaseSubMenu.add(upperCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_UPPER"));
         switchCaseSubMenu.add(titleCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_TITLE"));
         switchCaseSubMenu.add(sentenceCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_SENTENCE"));
-        switchCaseSubMenu.add(new JSeparator());
+        switchCaseSubMenu.addSeparator();
         switchCaseSubMenu.add(cycleSwitchCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_CYCLE"));
 
         gotoMenu.add(gotoNextUntranslatedMenuItem = createMenuItem("TF_MENU_EDIT_UNTRANS"));
@@ -338,7 +337,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         gotoMenu.add(gotoPreviousNoteMenuItem = createMenuItem("TF_MENU_EDIT_PREV_NOTE"));
         gotoMenu.add(gotoNextUniqueMenuItem = createMenuItem("TF_MENU_GOTO_NEXT_UNIQUE"));
         gotoMenu.add(gotoMatchSourceSegment = createMenuItem("TF_MENU_GOTO_SELECTED_MATCH_SOURCE"));
-        gotoMenu.add(new JSeparator());
+        gotoMenu.addSeparator();
         gotoMenu.add(gotoHistoryForwardMenuItem = createMenuItem("TF_MENU_GOTO_FORWARD_IN_HISTORY"));
         gotoMenu.add(gotoHistoryBackMenuItem = createMenuItem("TF_MENU_GOTO_BACK_IN_HISTORY"));
 
@@ -417,7 +416,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 "MW_OPTIONSMENU_AUTOCOMPLETE_HISTORY_COMPLETION"));
         optionsAutoCompleteMenu.add(optionsAutoCompleteHistoryPredictionMenuItem = createCheckboxMenuItem(
                 "MW_OPTIONSMENU_AUTOCOMPLETE_HISTORY_PREDICTION"));
-        optionsMenu.add(new JSeparator());
+        optionsMenu.addSeparator();
         optionsMenu.add(optionsFontSelectionMenuItem = createMenuItem("TF_MENU_DISPLAY_FONT"));
         optionsMenu.add(optionsColorsSelectionMenuItem = createMenuItem("TF_MENU_COLORS"));
         optionsMenu.add(optionsSetupFileFiltersMenuItem = createMenuItem("TF_MENU_DISPLAY_FILTERS"));
@@ -431,11 +430,11 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         optionsMenu.add(optionsViewOptionsMenuItem = createMenuItem("MW_OPTIONSMENU_VIEW"));
         optionsMenu.add(optionsSaveOptionsMenuItem = createMenuItem("MW_OPTIONSMENU_SAVE"));
         optionsMenu.add(optionsViewOptionsMenuLoginItem = createMenuItem("MW_OPTIONSMENU_LOGIN"));
-        optionsMenu.add(new JSeparator());
+        optionsMenu.addSeparator();
         optionsMenu.add(optionsRestoreGUIMenuItem = createMenuItem("MW_OPTIONSMENU_RESTORE_GUI"));
         optionsMenu.add(optionsAccessConfigDirMenuItem = createMenuItem("MW_OPTIONSMENU_ACCESS_CONFIG_DIR"));
         optionsMenu.add(optionsRepositoriesCredentialsItem = createMenuItem("TEAM_REPOSITORIES_DIALOG"));
-        optionsMenu.add(new JSeparator());
+        optionsMenu.addSeparator();
 
         helpMenu.add(helpContentsMenuItem = createMenuItem("TF_MENU_HELP_CONTENTS"));
         helpMenu.add(helpAboutMenuItem = createMenuItem("TF_MENU_HELP_ABOUT"));

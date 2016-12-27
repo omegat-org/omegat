@@ -212,9 +212,20 @@ public class StaticUIUtils {
     }
 
     public static void fitInScreen(Component comp) {
-        Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-        if (comp.getHeight() > rect.height) {
-            comp.setSize(comp.getWidth(), rect.height);
+        Rectangle maxBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+        Rectangle compBounds = comp.getBounds();
+        Rectangle newBounds = new Rectangle(Math.max(compBounds.x, maxBounds.x),
+                Math.max(compBounds.y, maxBounds.y),
+                Math.min(compBounds.width, maxBounds.width - maxBounds.y),
+                Math.min(compBounds.height, maxBounds.height - maxBounds.y));
+        if (newBounds.x + newBounds.width > maxBounds.width) {
+            newBounds.x = Math.max(maxBounds.x, maxBounds.width - newBounds.width);
+        }
+        if (newBounds.y + newBounds.height > maxBounds.height) {
+            newBounds.y = Math.max(maxBounds.y, maxBounds.height - newBounds.height);
+        }
+        if (!newBounds.equals(compBounds)) {
+            comp.setBounds(newBounds);
         }
     }
 

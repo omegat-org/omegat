@@ -44,6 +44,7 @@ import java.util.Objects;
 
 import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.master.FilterMaster;
+import org.omegat.filters2.master.FiltersUtil;
 
 import gen.core.filters.Filters;
 
@@ -623,7 +624,10 @@ public class Preferences {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        m_propChangeSupport.firePropertyChange(Preferences.PROPERTY_FILTERS, oldValue, newFilters);
+        // Must manually check for equality (see FiltersUtil.filtersEqual() Javadoc)
+        if (!FiltersUtil.filtersEqual(oldValue, newFilters)) {
+            m_propChangeSupport.firePropertyChange(Preferences.PROPERTY_FILTERS, oldValue, newFilters);
+        }
     }
 
     public static Filters getFilters() {

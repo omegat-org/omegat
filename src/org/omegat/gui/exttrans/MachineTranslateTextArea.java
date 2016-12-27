@@ -29,13 +29,12 @@
 package org.omegat.gui.exttrans;
 
 import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.core.machinetranslators.MachineTranslators;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.gui.common.EntryInfoThreadPane;
@@ -61,8 +60,6 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
 
     private static final String EXPLANATION = OStrings.getString("GUI_MACHINETRANSLATESWINDOW_explanation");
 
-    protected final IMachineTranslation[] translators;
-
     protected String displayed;
 
     public MachineTranslateTextArea(IMainWindow mw) {
@@ -77,15 +74,13 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_MachineTranslate");
         mw.addDockable(new DockableScrollPane("MACHINE_TRANSLATE", title, this, true));
 
-        List<IMachineTranslation> tr = new ArrayList<IMachineTranslation>();
         for (Class<?> mtc : PluginUtils.getMachineTranslationClasses()) {
             try {
-                tr.add((IMachineTranslation) mtc.newInstance());
+                MachineTranslators.add((IMachineTranslation) mtc.newInstance());
             } catch (Exception ex) {
                 Log.log(ex);
             }
         }
-        translators = tr.toArray(new IMachineTranslation[tr.size()]);
     }
 
     public String getDisplayedTranslation() {
@@ -111,7 +106,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         UIThreadsUtil.mustBeSwingThread();
 
         clear();
-        for (IMachineTranslation mt : translators) {
+        for (IMachineTranslation mt : MachineTranslators.getMachineTranslators()) {
             if (mt.isEnabled()) {
                 new FindThread(mt, newEntry, force).start();
             }

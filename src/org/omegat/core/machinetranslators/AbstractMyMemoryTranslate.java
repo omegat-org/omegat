@@ -28,24 +28,27 @@
 
 package org.omegat.core.machinetranslators;
 
+import java.awt.Window;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Locale;
-
-import org.omegat.tokenizer.ITokenizer;
-import org.omegat.util.Language;
-import org.omegat.util.StringUtil;
-import org.omegat.util.Token;
-import org.omegat.util.WikiGet;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.omegat.core.Core;
-import org.omegat.core.matching.LevenshteinDistance;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+
+import org.omegat.core.Core;
+import org.omegat.core.matching.LevenshteinDistance;
+import org.omegat.gui.exttrans.MTConfigDialog;
+import org.omegat.tokenizer.ITokenizer;
+import org.omegat.util.Language;
+import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
+import org.omegat.util.Token;
+import org.omegat.util.WikiGet;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 
 /**
@@ -178,7 +181,7 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
         String url = buildMyMemoryUrl(sLang, tLang, text, format);
         
         // Get email from systemProperties to enable 1000rq/day instead of 100 rq/day
-        String email = System.getProperty(MYMEMORY_API_EMAIL);
+        String email = getCredential(MYMEMORY_API_EMAIL);
         if (!StringUtil.isEmpty(email)) {
             url = url + "&de=" + email;
         }
@@ -219,5 +222,27 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
         }
         return str;
     }
-    
+
+    @Override
+    public boolean isConfigurable() {
+        return true;
+    }
+
+    @Override
+    public void showConfigurationUI(Window parent) {
+        MTConfigDialog dialog = new MTConfigDialog(parent, getName()) {
+            @Override
+            protected void onConfirm() {
+                String email = panel.valueField1.getText().trim();
+                boolean temporary = panel.temporaryCheckBox.isSelected();
+                setCredential(MYMEMORY_API_EMAIL, email, temporary);
+            }
+        };
+        dialog.panel.valueLabel1.setText(OStrings.getString("MT_ENGINE_MYMEMORY_EMAIL_LABEL"));
+        dialog.panel.valueField1.setText(getCredential(MYMEMORY_API_EMAIL));
+        dialog.panel.valueLabel2.setVisible(false);
+        dialog.panel.valueField2.setVisible(false);
+        dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(MYMEMORY_API_EMAIL));
+        dialog.show();
+    }
 }

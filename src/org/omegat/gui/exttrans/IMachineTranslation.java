@@ -26,6 +26,8 @@
 
 package org.omegat.gui.exttrans;
 
+import java.awt.Window;
+
 import org.omegat.util.Language;
 
 /**
@@ -44,6 +46,13 @@ public interface IMachineTranslation {
      * Determine whether or not the MT provider has been enabled by the user.
      */
     boolean isEnabled();
+
+    /**
+     * Turn the MT provider on or off
+     */
+    default void setEnabled(boolean enabled) {
+        // Nothing
+    }
 
     /**
      * Translate.
@@ -70,4 +79,20 @@ public interface IMachineTranslation {
      * @return translated text, or null if translation impossible
      */
     String getCachedTranslation(Language sLang, Language tLang, String text);
+
+    /**
+     * Indicates that the MT provider has options that can be configured.
+     * Configurable implementations should override this to return
+     * <code>true</code>, and implement their configuration UI by overriding
+     * {@link #showConfigurationUI(Window)}.
+     */
+    default boolean isConfigurable() {
+        return false;
+    }
+
+    /**
+     * Invoke the configuration UI of this MT provider.
+     */
+    default void showConfigurationUI(Window parent) {
+    }
 }

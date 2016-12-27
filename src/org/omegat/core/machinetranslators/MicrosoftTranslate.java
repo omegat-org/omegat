@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Alex Buloichik, Didier Briel
+               2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,27 +26,34 @@
 
 package org.omegat.core.machinetranslators;
 
+import java.awt.Window;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
 import org.omegat.util.WikiGet;
 
 /**
  * Support of Microsoft Translator machine translation.
  * 
- * http://www.microsofttranslator.com/dev/
- * http://msdn.microsoft.com/en-us/library/ff512421.aspx
- * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
+ * @author Aaron Madlon-Kay
+ *
+ * @see <a href="https://www.microsoft.com/en-us/translator/translatorapi.aspx">Translator API</a>
+ * @see <a href="https://msdn.microsoft.com/en-us/library/ff512421.aspx">Translate Method reference</a>
  */
 public class MicrosoftTranslate extends BaseTranslate {
+    protected static final String PROPERTY_CLIENT_ID = "microsoft.api.client_id";
+    protected static final String PROPERTY_CLIENT_SECRET = "microsoft.api.client_secret";
+
     protected static final String URL_TOKEN = "https://datamarket.accesscontrol.windows.net/v2/OAuth2-13/";
     protected static final String URL_TRANSLATE = "http://api.microsofttranslator.com/v2/Http.svc/Translate";
     protected static final Pattern RE_RESPONSE = Pattern.compile("<string.+?>(.+)</string>");
@@ -120,13 +128,14 @@ public class MicrosoftTranslate extends BaseTranslate {
     private void requestToken() throws Exception {
         Map<String, String> p = new TreeMap<String, String>();
 
-        if (System.getProperty("microsoft.api.client_id") == null
-                || System.getProperty("microsoft.api.client_secret") == null) {
+        String id = getCredential(PROPERTY_CLIENT_ID);
+        String secret = getCredential(PROPERTY_CLIENT_SECRET);
+        if (StringUtil.isEmpty(id) || StringUtil.isEmpty(secret)) {
             throw new Exception(OStrings.getString("MT_ENGINE_MICROSOFT_KEY_NOTFOUND"));
         }
 
-        p.put("client_id", System.getProperty("microsoft.api.client_id"));
-        p.put("client_secret", System.getProperty("microsoft.api.client_secret"));
+        p.put("client_id", id);
+        p.put("client_secret", secret);
         p.put("scope", "http://api.microsofttranslator.com");
         p.put("grant_type", "client_credentials");
         String r = WikiGet.post(URL_TOKEN, p, null);
@@ -202,5 +211,30 @@ public class MicrosoftTranslate extends BaseTranslate {
             throw new RuntimeException("Wrong");
         }
         pos += Character.charCount(cp);
+    }
+
+    @Override
+    public boolean isConfigurable() {
+        return true;
+    }
+
+    @Override
+    public void showConfigurationUI(Window parent) {
+        MTConfigDialog dialog = new MTConfigDialog(parent, getName()) {
+            @Override
+            protected void onConfirm() {
+                String id = panel.valueField1.getText().trim();
+                String secret = panel.valueField2.getText().trim();
+                boolean temporary = panel.temporaryCheckBox.isSelected();
+                setCredential(PROPERTY_CLIENT_ID, id, temporary);
+                setCredential(PROPERTY_CLIENT_SECRET, secret, temporary);
+            }
+        };
+        dialog.panel.valueLabel1.setText(OStrings.getString("MT_ENGINE_MICROSOFT_CLIENT_ID_LABEL"));
+        dialog.panel.valueField1.setText(getCredential(PROPERTY_CLIENT_ID));
+        dialog.panel.valueLabel2.setText(OStrings.getString("MT_ENGINE_MICROSOFT_CLIENT_SECRET_LABEL"));
+        dialog.panel.valueField2.setText(getCredential(PROPERTY_CLIENT_SECRET));
+        dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(PROPERTY_CLIENT_SECRET));
+        dialog.show();
     }
 }

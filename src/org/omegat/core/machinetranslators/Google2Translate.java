@@ -6,6 +6,7 @@
  Copyright (C) 2010 Alex Buloichik, Didier Briel
                2011 Briac Pilpre, Alex Buloichik
                2013 Didier Briel
+               2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -27,12 +28,14 @@
 
 package org.omegat.core.machinetranslators;
 
+import java.awt.Window;
 import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -40,13 +43,16 @@ import org.omegat.util.WikiGet;
 
 /**
  * Support of Google Translate API v.2 machine translation.
- * https://code.google.com/apis/language/translate/v2/getting_started.html
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Briac Pilpre
+ * @author Aaron Madlon-Kay
+ * 
+ * @see <a href="https://cloud.google.com/translate/docs/getting-started">Translation API</a>
  */
 public class Google2Translate extends BaseTranslate {
+    protected static final String PROPERTY_API_KEY = "google.api.key";
     protected static final String  GT_URL   = "https://www.googleapis.com/language/translate/v2";
     protected static final Pattern RE_UNICODE = Pattern.compile("\\\\u([0-9A-Fa-f]{4})");
     protected static final Pattern RE_HTML  = Pattern.compile("&#([0-9]+);");
@@ -77,7 +83,7 @@ public class Google2Translate extends BaseTranslate {
         else if ((tLang.getLanguage().compareToIgnoreCase("zh-hk") == 0))
             targetLang = "ZH-TW"; // Google doesn't recognize ZH-HK
 
-        String googleKey = System.getProperty("google.api.key");
+        String googleKey = System.getProperty(PROPERTY_API_KEY);
         
         if (googleKey == null) {
             return OStrings.getString("GOOGLE_API_KEY_NOTFOUND");
@@ -136,5 +142,28 @@ public class Google2Translate extends BaseTranslate {
 
         putToCache(sLang, tLang, trText, tr);
         return tr;
+    }
+
+    @Override
+    public boolean isConfigurable() {
+        return true;
+    }
+
+    @Override
+    public void showConfigurationUI(Window parent) {
+        MTConfigDialog dialog = new MTConfigDialog(parent, getName()) {
+            @Override
+            protected void onConfirm() {
+                String key = panel.valueField1.getText().trim();
+                boolean temporary = panel.temporaryCheckBox.isSelected();
+                setCredential(PROPERTY_API_KEY, key, temporary);
+            }
+        };
+        dialog.panel.valueLabel1.setText(OStrings.getString("MT_ENGINE_GOOGLE2_API_KEY_LABEL"));
+        dialog.panel.valueField1.setText(getCredential(PROPERTY_API_KEY));
+        dialog.panel.valueLabel2.setVisible(false);
+        dialog.panel.valueField2.setVisible(false);
+        dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(PROPERTY_API_KEY));
+        dialog.show();
     }
 }

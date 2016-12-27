@@ -26,8 +26,6 @@
 
 package org.omegat.core.machinetranslators;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +35,7 @@ import javax.swing.JCheckBoxMenuItem;
 
 import org.omegat.core.Core;
 import org.omegat.gui.exttrans.IMachineTranslation;
+import org.omegat.util.CredentialsManager;
 import org.omegat.util.Language;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
@@ -48,8 +47,7 @@ import org.openide.awt.Mnemonics;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  */
-public abstract class BaseTranslate implements IMachineTranslation, ActionListener {
-    protected final JCheckBoxMenuItem menuItem;
+public abstract class BaseTranslate implements IMachineTranslation {
 
     protected boolean enabled;
 
@@ -60,23 +58,33 @@ public abstract class BaseTranslate implements IMachineTranslation, ActionListen
     private final Map<String, String> cache = Collections.synchronizedMap(new HashMap<String, String>());
 
     public BaseTranslate() {
-        menuItem = new JCheckBoxMenuItem();
+        // Options menu item
+        JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem();
         Mnemonics.setLocalizedText(menuItem, getName());
-        menuItem.addActionListener(this);
+        menuItem.addActionListener(e -> setEnabled(menuItem.isSelected()));
         enabled = Preferences.isPreference(getPreferenceName());
         menuItem.setState(enabled);
         Core.getMainWindow().getMainMenu().getMachineTranslationMenu().add(menuItem);
+        // Preferences listener
+        Preferences.addPropertyChangeListener(getPreferenceName(), e -> {
+            boolean newValue = (Boolean) e.getNewValue();
+            menuItem.setSelected(newValue);
+            enabled = newValue;
+        });
     }
 
+    @Override
     public boolean isEnabled() {
         return enabled;
     }
 
-    public void actionPerformed(ActionEvent e) {
-        enabled = menuItem.isSelected();
+    @Override
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
         Preferences.setPreference(getPreferenceName(), enabled);
     }
 
+    @Override
     public String getTranslation(Language sLang, Language tLang, String text) throws Exception {
         if (enabled) {
             return translate(sLang, tLang, text);
@@ -84,7 +92,8 @@ public abstract class BaseTranslate implements IMachineTranslation, ActionListen
             return null;
         }
     }
-    
+
+    @Override
     public String getCachedTranslation(Language sLang, Language tLang, String text) {
         if (enabled) {
             return getFromCache(sLang, tLang, text);
@@ -134,5 +143,54 @@ public abstract class BaseTranslate implements IMachineTranslation, ActionListen
 
     protected String putToCache(Language sLang, Language tLang, String text, String result) {
         return cache.put(sLang + "/" + tLang + "/" + text, result);
+    }
+
+    /**
+     * Retrieve a credential with the given ID. First checks temporary system properties, then falls back to
+     * the program's persistent preferences. Store a credential with
+     * {@link #setCredential(String, String, boolean)}.
+     * 
+     * @param id
+     *            ID or key of the credential to retrieve
+     * @return the credential value in plain text
+     */
+    protected String getCredential(String id) {
+        String property = System.getProperty(id);
+        if (property != null) {
+            return property;
+        }
+        return CredentialsManager.getInstance().retrieve(id).orElse("");
+    }
+
+    /**
+     * Store a credential. Credentials are stored in temporary system properties and, if
+     * <code>temporary</code> is <code>false</code>, in the program's persistent preferences encoded in
+     * Base64. Retrieve a credential with {@link #getCredential(String)}.
+     * 
+     * @param id
+     *            ID or key of the credential to store
+     * @param value
+     *            value of the credential to store
+     * @param temporary
+     *            if <code>false</code>, encode with Base64 and store in persistent preferences as well
+     */
+    protected void setCredential(String id, String value, boolean temporary) {
+        System.setProperty(id, value);
+        CredentialsManager.getInstance().store(id, temporary ? "" : value);
+    }
+
+    /**
+     * Determine whether a credential has been stored "temporarily" according to the definition in
+     * {@link #setCredential(String, String, boolean)}. The result will be <code>false</code> if the
+     * credential is not stored at all, or if it is stored permanently.
+     * 
+     * @param id
+     *            ID or key of credential
+     * @return <code>true</code> only if the credential is stored temporarily
+     * @see #setCredential(String, String, boolean)
+     * @see #getCredential(String)
+     */
+    protected boolean isCredentialStoredTemporarily(String id) {
+        return !CredentialsManager.getInstance().isStored(id) && !System.getProperty(id, "").isEmpty();
     }
 }

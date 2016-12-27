@@ -27,6 +27,7 @@
 
 package org.omegat.core.machinetranslators;
 
+import java.awt.Window;
 import java.io.StringReader;
 import java.util.Map;
 import java.util.TreeMap;
@@ -34,6 +35,7 @@ import java.util.TreeMap;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 
+import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -62,11 +64,11 @@ public class YandexTranslate extends BaseTranslate {
     public static final int ERR_UNPROCESSABLE_TEXT = 422;
     public static final int ERR_LANG_NOT_SUPPORTED = 501;
 
+    private static final String PROPERTY_API_KEY = "yandex.api.key";
+
     protected static final String USER_AGENT = "Mozilla/5.0";
 
     protected static final String GT_URL = "https://translate.yandex.net/api/v1.5/tr/translate";
-
-    protected static String mvYandexKey = System.getProperty("yandex.api.key");
 
     @Override
     protected String getPreferenceName() {
@@ -74,16 +76,13 @@ public class YandexTranslate extends BaseTranslate {
     }
 
     public String getName() {
-        if (mvYandexKey == null) {
-            return OStrings.getString("MT_ENGINE_YANDEX_KEY_NOTFOUND");
-        } else {
-            return OStrings.getString("MT_ENGINE_YANDEX");
-        }
+        return OStrings.getString("MT_ENGINE_YANDEX");
     }
 
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
-        if (mvYandexKey == null) {
+        String mvYandexKey = getCredential(PROPERTY_API_KEY);
+        if (mvYandexKey.isEmpty()) {
             return "";
         }
 
@@ -151,6 +150,29 @@ public class YandexTranslate extends BaseTranslate {
             response.code = ex.code;
         }
         return response;
+    }
+
+    @Override
+    public boolean isConfigurable() {
+        return true;
+    }
+
+    @Override
+    public void showConfigurationUI(Window parent) {
+        MTConfigDialog dialog = new MTConfigDialog(parent, getName()) {
+            @Override
+            protected void onConfirm() {
+                String key = panel.valueField1.getText().trim();
+                boolean temporary = panel.temporaryCheckBox.isSelected();
+                setCredential(PROPERTY_API_KEY, key, temporary);
+            }
+        };
+        dialog.panel.valueLabel1.setText(OStrings.getString("MT_ENGINE_YANDEX_API_KEY_LABEL"));
+        dialog.panel.valueField1.setText(getCredential(PROPERTY_API_KEY));
+        dialog.panel.valueLabel2.setVisible(false);
+        dialog.panel.valueField2.setVisible(false);
+        dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(PROPERTY_API_KEY));
+        dialog.show();
     }
 }
 

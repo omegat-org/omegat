@@ -39,6 +39,7 @@ import java.awt.Desktop;
 import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -1167,8 +1168,9 @@ public class MainWindowMenuHandler {
         String encodedPassword = Preferences.getPreference(Preferences.PROXY_PASSWORD);
 
         try {
-            proxyOptions.userText.setText(new String(StringUtil.decodeBase64(encodedUser)));
-            proxyOptions.passwordField.setText(new String(StringUtil.decodeBase64(encodedPassword)));
+            proxyOptions.userText.setText(StringUtil.decodeBase64(encodedUser, StandardCharsets.ISO_8859_1));
+            proxyOptions.passwordField
+                    .setText(StringUtil.decodeBase64(encodedPassword, StandardCharsets.ISO_8859_1));
         } catch (IllegalArgumentException ex) {
             Log.logErrorRB("LOG_DECODING_ERROR");
             Log.log(ex);
@@ -1177,8 +1179,10 @@ public class MainWindowMenuHandler {
         proxyOptions.setVisible(true);
 
         if (proxyOptions.getReturnStatus() == UserPassDialog.RET_OK) {
-            encodedUser = StringUtil.encodeBase64(proxyOptions.userText.getText().getBytes());
-            encodedPassword = StringUtil.encodeBase64(new String(proxyOptions.passwordField.getPassword()).getBytes());
+            encodedUser = StringUtil.encodeBase64(proxyOptions.userText.getText(),
+                    StandardCharsets.ISO_8859_1);
+            encodedPassword = StringUtil.encodeBase64(proxyOptions.passwordField.getPassword(),
+                    StandardCharsets.ISO_8859_1);
 
             Preferences.setPreference(Preferences.PROXY_USER_NAME, encodedUser);
             Preferences.setPreference(Preferences.PROXY_PASSWORD, encodedPassword);

@@ -36,6 +36,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -92,7 +93,7 @@ public class TaaSClient {
             return;
         }
         this.basicAuth = "Basic "
-                + StringUtil.encodeBase64((M_USERNAME + ":" + M_PASSWORD).getBytes("ISO-8859-1"));
+                + StringUtil.encodeBase64(M_USERNAME + ":" + M_PASSWORD, StandardCharsets.ISO_8859_1);
         context = JAXBContext.newInstance(TaasCollections.class, TaasArrayOfTerm.class,
                 TaasExtractionResult.class, TaasDomains.class);
     }

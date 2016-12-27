@@ -30,8 +30,12 @@
  **************************************************************************/
 package org.omegat.util;
 
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 import java.text.MessageFormat;
 import java.text.Normalizer;
+import java.util.Arrays;
 import java.util.Locale;
 
 import javax.xml.bind.DatatypeConverter;
@@ -832,8 +836,40 @@ public class StringUtil {
      *            Data bytes
      * @return Base64-encoded String
      */
-    public static String encodeBase64(byte[] bytes) {
+    private static String encodeBase64(byte[] bytes) {
         return DatatypeConverter.printBase64Binary(bytes);
+    }
+
+    /**
+     * Convert a string's <code>charset</code> bytes into a Base64-encoded String.
+     * 
+     * @param string
+     *            a string
+     * @param charset
+     *            the charset with which to obtain the bytes
+     * @return Base64-encoded String
+     */
+    public static String encodeBase64(String string, Charset charset) {
+        return encodeBase64(string.getBytes(charset));
+    }
+
+    /**
+     * Convert a char array's <code>charset</code> bytes into a Base64-encoded String.
+     * Useful for handling passwords. Intermediate buffers are cleared after use.
+     * 
+     * @param chars
+     *            a char array
+     * @param charset
+     *            the charset with which to obtain the bytes
+     * @return Base64-encoded String
+     */
+    public static String encodeBase64(char[] chars, Charset charset) {
+        CharBuffer charBuf = CharBuffer.wrap(chars);
+        ByteBuffer byteBuf = charset.encode(charBuf);
+        String result = encodeBase64(byteBuf.array());
+        Arrays.fill(charBuf.array(), '\0');
+        Arrays.fill(byteBuf.array(), (byte) 0);
+        return result;
     }
 
     /**
@@ -845,7 +881,20 @@ public class StringUtil {
      *            Base64-encoded String
      * @return Data bytes
      */
-    public static byte[] decodeBase64(String b64data) {
+    private static byte[] decodeBase64(String b64data) {
         return DatatypeConverter.parseBase64Binary(b64data);
+    }
+
+    /**
+     * Decode the Base64-encoded <code>charset</code> bytes back to a String.
+     * 
+     * @param b64data
+     *            Base64-encoded String
+     * @param charset
+     *            charset of decoded bytes
+     * @return String
+     */
+    public static String decodeBase64(String b64data, Charset charset) {
+        return new String(decodeBase64(b64data), charset);
     }
 }

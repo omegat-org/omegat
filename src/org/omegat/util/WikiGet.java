@@ -266,9 +266,9 @@ public class WikiGet {
             if (!StringUtil.isEmpty(encodedUser)) { // There is a proxy user
                 String encodedPassword = Preferences.getPreference(Preferences.PROXY_PASSWORD);
                 try {
-                    String pass = new String(StringUtil.decodeBase64(encodedUser));
-                    pass += ":" + new String(StringUtil.decodeBase64(encodedPassword));
-                    encodedPassword = StringUtil.encodeBase64(pass.getBytes());
+                    String pass = StringUtil.decodeBase64(encodedUser, StandardCharsets.ISO_8859_1);
+                    pass += ":" + StringUtil.decodeBase64(encodedPassword, StandardCharsets.ISO_8859_1);
+                    encodedPassword = StringUtil.encodeBase64(pass, StandardCharsets.ISO_8859_1);
                     conn.setRequestProperty("Proxy-Authorization", "Basic " + encodedPassword);
                 } catch (IllegalArgumentException ex) {
                     Log.logErrorRB("LOG_DECODING_ERROR");
@@ -325,9 +325,9 @@ public class WikiGet {
             if (!StringUtil.isEmpty(encodedUser)) { // There is a proxy user
                 String encodedPassword = Preferences.getPreference(Preferences.PROXY_PASSWORD);
                 try {
-                    String pass = new String(StringUtil.decodeBase64(encodedUser));
-                    pass += ":" + new String(StringUtil.decodeBase64(encodedPassword));
-                    encodedPassword = StringUtil.encodeBase64(pass.getBytes());
+                    String pass = StringUtil.decodeBase64(encodedUser, StandardCharsets.ISO_8859_1);
+                    pass += ":" + StringUtil.decodeBase64(encodedPassword, StandardCharsets.ISO_8859_1);
+                    encodedPassword = StringUtil.encodeBase64(pass, StandardCharsets.ISO_8859_1);
                     conn.setRequestProperty("Proxy-Authorization", "Basic " + encodedPassword);
                 } catch (IllegalArgumentException ex) {
                     Log.logErrorRB("LOG_DECODING_ERROR");

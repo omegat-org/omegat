@@ -35,8 +35,8 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -63,7 +63,6 @@ import gen.taas.TaasTerm;
  */
 @SuppressWarnings("serial")
 public class TaaSClient {
-    static final Charset UTF8 = Charset.forName("UTF-8");
 
     private static final Logger LOGGER = Logger.getLogger(TaaSClient.class.getName());
 
@@ -73,6 +72,9 @@ public class TaaSClient {
     /** Machine password */
     public static final String M_PASSWORD = "Ts1DW4^UpE";
 
+    private static final String BASIC_AUTH = "Basic " + Base64.getMimeEncoder()
+            .encodeToString((M_USERNAME + ":" + M_PASSWORD).getBytes(StandardCharsets.ISO_8859_1));
+
     /**
      * 1-statistical terminology annotation, 2- statistical terminology annotation with references to
      * terminology entries, 4- Terminology DB based terminology annotation (fast)
@@ -81,25 +83,23 @@ public class TaaSClient {
 
     private final JAXBContext context;
 
-    private final String basicAuth;
     private final String taasUserKey;
 
     public TaaSClient() throws Exception {
-        this.taasUserKey = System.getProperty("taas.user.key");
-        if (this.taasUserKey == null || this.taasUserKey.isEmpty()) {
+        String key = System.getProperty("taas.user.key");
+        if (key == null || key.isEmpty()) {
             // TaaS disabled without user key
-            basicAuth = null;
+            taasUserKey = null;
             context = null;
             return;
         }
-        this.basicAuth = "Basic "
-                + StringUtil.encodeBase64(M_USERNAME + ":" + M_PASSWORD, StandardCharsets.ISO_8859_1);
+        taasUserKey = key;
         context = JAXBContext.newInstance(TaasCollections.class, TaasArrayOfTerm.class,
                 TaasExtractionResult.class, TaasDomains.class);
     }
 
     public boolean isAllowed() {
-        return basicAuth != null;
+        return taasUserKey != null;
     }
 
     /**
@@ -110,7 +110,7 @@ public class TaaSClient {
         HttpURLConnection conn;
         conn = (HttpURLConnection) new URL(url).openConnection();
 
-        conn.setRequestProperty("Authorization", basicAuth);
+        conn.setRequestProperty("Authorization", BASIC_AUTH);
         if (taasUserKey != null && !taasUserKey.isEmpty()) {
             conn.setRequestProperty("TaaS-User-Key", taasUserKey);
         }
@@ -134,7 +134,7 @@ public class TaaSClient {
         HttpURLConnection conn;
         conn = (HttpURLConnection) new URL(url).openConnection();
 
-        conn.setRequestProperty("Authorization", basicAuth);
+        conn.setRequestProperty("Authorization", BASIC_AUTH);
         if (taasUserKey != null) {
             conn.setRequestProperty("TaaS-User-Key", taasUserKey);
         }
@@ -145,7 +145,7 @@ public class TaaSClient {
         conn.setDoOutput(true);
         OutputStream out = conn.getOutputStream();
         try {
-            out.write(body.getBytes(UTF8));
+            out.write(body.getBytes(StandardCharsets.UTF_8));
         } finally {
             out.close();
         }
@@ -194,7 +194,7 @@ public class TaaSClient {
     String readUTF8(HttpURLConnection conn) throws IOException {
         InputStream in = conn.getInputStream();
         try {
-            return IOUtils.toString(in, UTF8);
+            return IOUtils.toString(in, StandardCharsets.UTF_8);
         } finally {
             in.close();
         }

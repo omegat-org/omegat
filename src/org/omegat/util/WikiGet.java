@@ -39,6 +39,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
@@ -261,20 +262,7 @@ public class WikiGet {
                 }
             }
 
-            // Added to pass through authenticated proxy
-            String encodedUser = Preferences.getPreference(Preferences.PROXY_USER_NAME);
-            if (!StringUtil.isEmpty(encodedUser)) { // There is a proxy user
-                String encodedPassword = Preferences.getPreference(Preferences.PROXY_PASSWORD);
-                try {
-                    String pass = StringUtil.decodeBase64(encodedUser, StandardCharsets.ISO_8859_1);
-                    pass += ":" + StringUtil.decodeBase64(encodedPassword, StandardCharsets.ISO_8859_1);
-                    encodedPassword = StringUtil.encodeBase64(pass, StandardCharsets.ISO_8859_1);
-                    conn.setRequestProperty("Proxy-Authorization", "Basic " + encodedPassword);
-                } catch (IllegalArgumentException ex) {
-                    Log.logErrorRB("LOG_DECODING_ERROR");
-                    Log.log(ex);
-                }
-             }
+            addProxyAuthentication(conn);
 
             conn.setDoOutput(true);
 
@@ -320,20 +308,7 @@ public class WikiGet {
                 }
             }
 
-            // Added to pass through authenticated proxy
-            String encodedUser = Preferences.getPreference(Preferences.PROXY_USER_NAME);
-            if (!StringUtil.isEmpty(encodedUser)) { // There is a proxy user
-                String encodedPassword = Preferences.getPreference(Preferences.PROXY_PASSWORD);
-                try {
-                    String pass = StringUtil.decodeBase64(encodedUser, StandardCharsets.ISO_8859_1);
-                    pass += ":" + StringUtil.decodeBase64(encodedPassword, StandardCharsets.ISO_8859_1);
-                    encodedPassword = StringUtil.encodeBase64(pass, StandardCharsets.ISO_8859_1);
-                    conn.setRequestProperty("Proxy-Authorization", "Basic " + encodedPassword);
-                } catch (IllegalArgumentException ex) {
-                    Log.logErrorRB("LOG_DECODING_ERROR");
-                    Log.log(ex);
-                }
-             }
+            addProxyAuthentication(conn);
 
             conn.setDoInput(true);
             conn.setDoOutput(true);
@@ -345,6 +320,24 @@ public class WikiGet {
             return getStringContent(conn);
         } finally {
             conn.disconnect();
+        }
+    }
+
+    private static void addProxyAuthentication(HttpURLConnection conn) {
+        // Added to pass through authenticated proxy
+        String encodedUser = Preferences.getPreference(Preferences.PROXY_USER_NAME);
+        if (!StringUtil.isEmpty(encodedUser)) { // There is a proxy user
+            String encodedPassword = Preferences.getPreference(Preferences.PROXY_PASSWORD);
+            try {
+                String userPass = StringUtil.decodeBase64(encodedUser, StandardCharsets.ISO_8859_1) + ":"
+                        + StringUtil.decodeBase64(encodedPassword, StandardCharsets.ISO_8859_1);
+                String encodedUserPass = Base64.getMimeEncoder()
+                        .encodeToString(userPass.getBytes(StandardCharsets.ISO_8859_1));
+                conn.setRequestProperty("Proxy-Authorization", "Basic " + encodedUserPass);
+            } catch (IllegalArgumentException ex) {
+                Log.logErrorRB("LOG_DECODING_ERROR");
+                Log.log(ex);
+            }
         }
     }
 

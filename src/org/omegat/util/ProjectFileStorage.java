@@ -33,7 +33,6 @@ package org.omegat.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -287,7 +286,7 @@ public class ProjectFileStorage {
                 //
                 result = absPath.toString();
             }
-        } catch (InvalidPathException e) {
+        } catch (IllegalArgumentException e) {
         }
         return normalizeSlashes(result);
     }

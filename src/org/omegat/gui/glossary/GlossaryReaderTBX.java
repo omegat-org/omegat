@@ -167,7 +167,8 @@ public class GlossaryReaderTBX {
             if (o instanceof Descrip) {
                 Descrip d = (Descrip) o;
                 if ("context".equalsIgnoreCase(d.getType())) {
-                    if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT, true)) {
+                    if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT,
+                            Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT_DEFAULT)) {
                         line = d.getType() + ": " + readContent(d.getContent());
                     }
                 } else {
@@ -177,7 +178,8 @@ public class GlossaryReaderTBX {
                 DescripGrp dg = (DescripGrp) o;
                 if (dg.getDescrip() != null) {
                     if ("context".equalsIgnoreCase(dg.getDescrip().getType())) {
-                        if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT, true)) {
+                        if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT,
+                                Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT_DEFAULT)) {
                             line = dg.getDescrip().getType() + ": " + readContent(dg.getDescrip().getContent());
                         }
                     } else {

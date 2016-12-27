@@ -96,8 +96,11 @@ public class Preferences {
     public static final String MT_ONLY_UNTRANSLATED = "mt_only_untranslated";
     
     public static final String GLOSSARY_TBX_DISPLAY_CONTEXT = "glossary_tbx_display_context";
+    public static final boolean GLOSSARY_TBX_DISPLAY_CONTEXT_DEFAULT = true;
     public static final String GLOSSARY_NOT_EXACT_MATCH = "glossary_not_exact_match";
+    public static final boolean GLOSSARY_NOT_EXACT_MATCH_DEFAULT = true;
     public static final String GLOSSARY_STEMMING = "glossary_stemming";
+    public static final boolean GLOSSARY_STEMMING_DEFAULT = true;
     public static final String GLOSSARY_REPLACE_ON_INSERT = "glossary_replace_on_insert";
     public static final String DICTIONARY_FUZZY_MATCHING = "dictionary_fuzzy_matching";
 
@@ -233,6 +236,7 @@ public class Preferences {
     
     /** Tag Validation Option: Don't check printf-tags */
     public static final String DONT_CHECK_PRINTF_TAGS = "tagValidation_noCheck";
+    public static final boolean DONT_CHECK_PRINTF_TAGS_DEFAULT = true;
     /** Tag Validation Option: check simple printf-tags */
     public static final String CHECK_SIMPLE_PRINTF_TAGS = "tagValidation_simpleCheck";
     /** Tag Validation Option: check all printf-tags */
@@ -332,12 +336,15 @@ public class Preferences {
 
     /** View options: Show all sources in bold */
     public static final String VIEW_OPTION_SOURCE_ALL_BOLD = "view_option_source_all_bold";
+    public static final boolean VIEW_OPTION_SOURCE_ALL_BOLD_DEFAULT = true;
     /** View options: Mark first non-unique */
     public static final String VIEW_OPTION_UNIQUE_FIRST = "view_option_unique_first";
     /** View options: Simplify protected parts tooltips */
     public static final String VIEW_OPTION_PPT_SIMPLIFY = "view_option_ppt_simplify";
+    public static final boolean VIEW_OPTION_PPT_SIMPLIFY_DEFAULT = true;
     /** View options: Modification Info display templates **/
     public static final String VIEW_OPTION_TEMPLATE_ACTIVE = "view_option_template_active";
+    public static final boolean VIEW_OPTION_TEMPLATE_ACTIVE_DEFAULT = true;
     public static final String VIEW_OPTION_MOD_INFO_TEMPLATE = "view_option_mod_info_template";
     public static final String VIEW_OPTION_MOD_INFO_TEMPLATE_WO_DATE = "view_option_mod_info_template_wo_date";
 
@@ -365,13 +372,16 @@ public class Preferences {
     public static final String FILTERS_VERSION = "filters_version";
 
     public static final String LT_DISABLED = "lt_disabled";
+    public static final boolean LT_DISABLED_DEFAULT = true;
 
     public static final String LOOSE_TAG_ORDERING = "loose_tag_ordering";
 
     public static final String TAGS_VALID_REQUIRED = "tags_valid_required";
 
     public static final String STAT_COUNTING_PROTECTED_TEXT = "stat_counting_protected_text";
+    public static final boolean STAT_COUNTING_PROTECTED_TEXT_DEFAULT = true;
     public static final String STAT_COUNTING_CUSTOM_TAGS = "stat_counting_custom_tags";
+    public static final boolean STAT_COUNTING_CUSTOM_TAGS_DEFAULT = true;
 
     /**
      * Prefix for keys used to record default tokenizer behavior settings.
@@ -386,6 +396,7 @@ public class Preferences {
     
     /** glossary auto-completion */
     public static final String AC_GLOSSARY_ENABLED = "ac_glossary_enabled";
+    public static final boolean AC_GLOSSARY_ENABLED_DEFAULT = true;
     public static final String AC_GLOSSARY_SHOW_SOURCE = "ac_glossary_show_source";
     public static final String AC_GLOSSARY_SHOW_TARGET_BEFORE_SOURCE = "ac_glossary_show_target_before_source";
     public static final String AC_GLOSSARY_SORT_BY_SOURCE = "ac_glossary_sort_by_source";
@@ -395,12 +406,14 @@ public class Preferences {
 
     /** autotext auto-completion */
     public static final String AC_AUTOTEXT_ENABLED = "ac_autotext_enabled";
+    public static final boolean AC_AUTOTEXT_ENABLED_DEFAULT = true;
     public static final String AC_AUTOTEXT_SORT_BY_LENGTH = "ac_autotext_sort_by_length";
     public static final String AC_AUTOTEXT_SORT_ALPHABETICALLY = "ac_autotext_sort_alphabetically";
     public static final String AC_AUTOTEXT_SORT_FULL_TEXT = "ac_autotext_sort_full_text";
 
     /** char table auto-completion */
     public static final String AC_CHARTABLE_ENABLED = "ac_chartable_enabled";
+    public static final boolean AC_CHARTABLE_ENABLED_DEFAULT = true;
     public static final String AC_CHARTABLE_USE_CUSTOM_CHARS = "ac_chartable_use_custom_chars";
     public static final String AC_CHARTABLE_CUSTOM_CHAR_STRING = "ac_chartable_custom_char_string";
     public static final String AC_CHARTABLE_UNIQUE_CUSTOM_CHARS = "ac_chartable_unique_custom_chars";

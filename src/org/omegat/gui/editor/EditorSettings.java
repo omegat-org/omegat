@@ -90,9 +90,11 @@ public class EditorSettings implements IEditorSettings {
         markAutoPopulated = Preferences.isPreference(Preferences.MARK_AUTOPOPULATED);
 
         //options from menu options->view
-        viewSourceBold = Preferences.isPreference(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD);
+        viewSourceBold = Preferences.isPreferenceDefault(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD,
+                Preferences.VIEW_OPTION_SOURCE_ALL_BOLD_DEFAULT);
         markFirstNonUnique = Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST);
-        markLanguageChecker = !Preferences.isPreferenceDefault(Preferences.LT_DISABLED, true);
+        markLanguageChecker = !Preferences.isPreferenceDefault(Preferences.LT_DISABLED,
+                Preferences.LT_DISABLED_DEFAULT);
         doFontFallback = Preferences.isPreference(Preferences.FONT_FALLBACK);
     }
 

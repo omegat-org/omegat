@@ -98,7 +98,8 @@ public class ProtectedPartsMarker implements IMarker {
     }
 
     private String escapeHtml(String s) {
-        boolean doSimplify = Preferences.isPreferenceDefault(Preferences.VIEW_OPTION_PPT_SIMPLIFY, true);
+        boolean doSimplify = Preferences.isPreferenceDefault(Preferences.VIEW_OPTION_PPT_SIMPLIFY,
+                Preferences.VIEW_OPTION_PPT_SIMPLIFY_DEFAULT);
         // See if tooltip is enclosed by tags. If so, either strip the tags (doSimplify == true)
         // or make the enclosed text bold (doSimplify != true).
         Matcher m = PatternConsts.PROTECTED_PARTS_PAIRED_TAG_DECOMPILE.matcher(s);

@@ -34,7 +34,8 @@ import org.omegat.util.Preferences;
  */
 public class StatisticsSettings {
     public static boolean isCountingProtectedText() {
-        return Preferences.isPreferenceDefault(Preferences.STAT_COUNTING_PROTECTED_TEXT, true);
+        return Preferences.isPreferenceDefault(Preferences.STAT_COUNTING_PROTECTED_TEXT,
+                Preferences.STAT_COUNTING_PROTECTED_TEXT_DEFAULT);
     }
 
     public static void setCountingProtectedText(boolean value) {
@@ -46,7 +47,8 @@ public class StatisticsSettings {
     }
 
     public static boolean isCountingCustomTags() {
-        return Preferences.isPreferenceDefault(Preferences.STAT_COUNTING_CUSTOM_TAGS, true);
+        return Preferences.isPreferenceDefault(Preferences.STAT_COUNTING_CUSTOM_TAGS,
+                Preferences.STAT_COUNTING_CUSTOM_TAGS_DEFAULT);
     }
 
     public static void setCountingCustomTags(boolean value) {

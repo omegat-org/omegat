@@ -115,7 +115,8 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
             }
 
             if (DefaultTokenizer.isContainsAll(strTokens, glosTokens, 
-                    Preferences.isPreferenceDefault(Preferences.GLOSSARY_NOT_EXACT_MATCH, true))) {
+                    Preferences.isPreferenceDefault(Preferences.GLOSSARY_NOT_EXACT_MATCH,
+                            Preferences.GLOSSARY_NOT_EXACT_MATCH_DEFAULT))) {
                 result.add(glosEntry);
                 continue;
             }
@@ -136,7 +137,8 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
     }
     
     private Token[] tokenize(ITokenizer tok, String str) {
-        if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_STEMMING, true)) {
+        if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_STEMMING,
+                Preferences.GLOSSARY_STEMMING_DEFAULT)) {
             return tok.tokenizeWords(str, StemmingMode.GLOSSARY);
         } else {
             return tok.tokenizeVerbatim(str);

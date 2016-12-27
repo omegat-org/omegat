@@ -533,11 +533,11 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 Preferences.MT_ONLY_UNTRANSLATED));
         optionsMTOnlyUntranslatedCheckboxMenuItem.setEnabled(optionsMTAutoFetchCheckboxMenuItem.isSelected());
         optionsGlossaryTBXDisplayContextCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
-                Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT, true));
+                Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT, Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT_DEFAULT));
         optionsGlossaryExactMatchCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
-                Preferences.GLOSSARY_NOT_EXACT_MATCH, true));
+                Preferences.GLOSSARY_NOT_EXACT_MATCH, Preferences.GLOSSARY_NOT_EXACT_MATCH_DEFAULT));
         optionsGlossaryStemmingCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
-                Preferences.GLOSSARY_STEMMING, true));
+                Preferences.GLOSSARY_STEMMING, Preferences.GLOSSARY_STEMMING_DEFAULT));
         optionsGlossaryReplacementCheckBoxMenuItem.setSelected(Preferences.isPreference(
                 Preferences.GLOSSARY_REPLACE_ON_INSERT));
         optionsDictionaryFuzzyMatchingCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(

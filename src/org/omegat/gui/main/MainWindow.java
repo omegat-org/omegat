@@ -183,10 +183,10 @@ public class MainWindow extends JFrame implements IMainWindow {
                     String prop = evt.getPropertyName();
                     if (prop.equals(Preferences.PROPERTY_SRX)
                             && Core.getProject().getProjectProperties().getProjectSRX() == null) {
-                        ProjectUICommands.promptReload();
+                        SwingUtilities.invokeLater(ProjectUICommands::promptReload);
                     } else if (prop.equals(Preferences.PROPERTY_FILTERS)
                             && Core.getProject().getProjectProperties().getProjectFilters() == null) {
-                        ProjectUICommands.promptReload();
+                        SwingUtilities.invokeLater(ProjectUICommands::promptReload);
                     }
                 }
             }

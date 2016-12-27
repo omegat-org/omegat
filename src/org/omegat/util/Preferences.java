@@ -40,6 +40,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.master.FilterMaster;
@@ -574,7 +575,14 @@ public class Preferences {
      */
     public static void setPreference(String name, Object value) {
         Object oldValue = m_preferences.setPreference(name, value);
-        m_propChangeSupport.firePropertyChange(name, oldValue, value);
+        // Manually compare retrieved new value to old value and check before firing.
+        // This is because the preferences store may only store the serialized (string) value
+        // so the regular equality check within PropertyChangeSupport will always fail
+        // (e.g. when value is Boolean but oldValue is "true"/"false").
+        Object storedNewValue = m_preferences.getPreference(name);
+        if (!Objects.equals(oldValue, storedNewValue)) {
+            m_propChangeSupport.firePropertyChange(name, oldValue, value);
+        }
     }
 
     /**

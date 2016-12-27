@@ -1,0 +1,116 @@
+/**************************************************************************
+ OmegaT - Computer Assisted Translation (CAT) tool 
+          with fuzzy matching, translation memory, keyword search, 
+          glossaries, and translation leveraging into updated projects.
+
+ Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2012 Didier Briel, Aaron Madlon-Kay
+               2015 Aaron Madlon-Kay
+               2016 Aaron Madlon-Kay
+               Home page: http://www.omegat.org/
+               Support center: http://groups.yahoo.com/group/OmegaT/
+
+ This file is part of OmegaT.
+
+ OmegaT is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ OmegaT is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ **************************************************************************/
+
+package org.omegat.gui.preferences.view;
+
+import javax.swing.JComponent;
+
+import org.omegat.gui.preferences.BasePreferencesController;
+import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
+
+/**
+ * @author Maxym Mykhalchuk
+ * @author Didier Briel
+ * @author Aaron Madlon-Kay
+ */
+public class SaveOptionsController extends BasePreferencesController {
+
+    private SaveOptionsPanel panel;
+
+    @Override
+    public JComponent getGui() {
+        if (panel == null) {
+            initGui();
+            initFromPrefs();
+        }
+        return panel;
+    }
+
+    @Override
+    public String toString() {
+        return OStrings.getString("PREFS_TITLE_SAVING_AND_OUTPUT");
+    }
+
+    private void initGui() {
+        panel = new SaveOptionsPanel();
+
+        panel.insertButton.addActionListener(
+                e -> panel.externalCommandTextArea.replaceSelection(panel.variablesList.getSelectedItem().toString()));
+    }
+
+    @Override
+    protected void initFromPrefs() {
+        int saveInterval = Preferences.getPreferenceDefault(Preferences.AUTO_SAVE_INTERVAL,
+                Preferences.AUTO_SAVE_DEFAULT);
+
+        panel.minutesSpinner.setValue(saveInterval / 60);
+        panel.secondsSpinner.setValue(saveInterval % 60);
+
+        panel.externalCommandTextArea.setText(Preferences.getPreference(Preferences.EXTERNAL_COMMAND));
+        panel.allowProjectCmdCheckBox.setSelected(Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD));
+    }
+    
+    @Override
+    public void restoreDefaults() {
+        panel.minutesSpinner.setValue(Preferences.AUTO_SAVE_DEFAULT / 60);
+        panel.secondsSpinner.setValue(Preferences.AUTO_SAVE_DEFAULT % 60);
+
+        panel.externalCommandTextArea.setText("");
+        panel.allowProjectCmdCheckBox.setSelected(false);
+    }
+
+    @Override
+    public void persist() {
+        int saveMinutes = 0;
+        int saveSeconds = 0;
+
+        try {
+            saveMinutes = Integer.parseInt(panel.minutesSpinner.getValue().toString());
+        } catch (NumberFormatException nfe) {
+            // Eat exception silently
+        }
+
+        try {
+            saveSeconds = Integer.parseInt(panel.secondsSpinner.getValue().toString());
+        } catch (NumberFormatException nfe) {
+            // Eat exception silently
+        }
+
+        int saveInterval = saveMinutes * 60 + saveSeconds;
+
+        if (saveInterval < 10) {
+            saveInterval = 10; // 10 seconds minimum
+        }
+
+        Preferences.setPreference(Preferences.AUTO_SAVE_INTERVAL, saveInterval);
+
+        Preferences.setPreference(Preferences.EXTERNAL_COMMAND, panel.externalCommandTextArea.getText());
+        Preferences.setPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD, panel.allowProjectCmdCheckBox.isSelected());
+    }
+}

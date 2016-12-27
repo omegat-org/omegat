@@ -385,56 +385,38 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         toolsMenu.addSeparator();
         toolsMenu.add(toolsAlignFilesMenuItem = createMenuItem("TF_MENU_TOOLS_ALIGN_FILES"));
 
-        optionsMenu.add(optionsTabAdvanceCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_ADVANCE"));
-        optionsMenu.add(optionsAlwaysConfirmQuitCheckBoxMenuItem = createCheckboxMenuItem("MW_OPTIONSMENU_ALWAYS_CONFIRM_QUIT"));
+        optionsPreferencesMenuItem = createMenuItem("MW_OPTIONSMENU_PREFERENCES");
+        if (!Platform.isMacOSX()) {
+            optionsMenu.add(optionsPreferencesMenuItem);
+            optionsMenu.addSeparator();
+        }
+
         optionsMenu.add(optionsMachineTranslateMenu = createMenu("TF_OPTIONSMENU_MACHINETRANSLATE"));
         
         optionsMachineTranslateMenu.add(optionsMTAutoFetchCheckboxMenuItem = createCheckboxMenuItem("MT_AUTO_FETCH"));
-        optionsMachineTranslateMenu.add(optionsMTOnlyUntranslatedCheckboxMenuItem = createCheckboxMenuItem("MT_ONLY_UNTRANSLATED"));
         optionsMachineTranslateMenu.addSeparator();
         
         optionsMenu.add(optionsGlossaryMenu = createMenu("TF_OPTIONSMENU_GLOSSARY"));
 
-        optionsGlossaryMenu.add(optionsGlossaryTBXDisplayContextCheckBoxMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_GLOSSARY_TBX_DISPLAY_CONTEXT"));
-        optionsGlossaryMenu.add(optionsGlossaryExactMatchCheckBoxMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_GLOSSARY_EXACT_MATCH"));
-        optionsGlossaryMenu.add(optionsGlossaryStemmingCheckBoxMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_GLOSSARY_STEMMING"));
-        optionsGlossaryMenu.add(optionsGlossaryReplacementCheckBoxMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_GLOSSARY_REPLACE_ON_INSERT"));
         optionsGlossaryMenu.addSeparator();
         // TaaS options come next (but are added from elsewhere)
 
         optionsMenu.add(optionsDictionaryMenu= createMenu("TF_OPTIONSMENU_DICTIONARY"));
         optionsDictionaryMenu.add(optionsDictionaryFuzzyMatchingCheckBoxMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_DICTIONARY_FUZZY"));
         
-        optionsMenu.add(optionsTransTipsMenu = createMenu("TF_OPTIONSMENU_TRANSTIPS"));
-        optionsTransTipsMenu.add(optionsTransTipsEnableMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_TRANSTIPS_ENABLE"));
-        optionsTransTipsMenu.add(optionsTransTipsExactMatchMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_TRANSTIPS_EXACTMATCH"));
         optionsMenu.add(optionsAutoCompleteMenu = createMenu("MW_OPTIONSMENU_AUTOCOMPLETE"));
         // add any autocomplete view configuration menu items below
         optionsAutoCompleteMenu.add(optionsAutoCompleteShowAutomaticallyItem = createCheckboxMenuItem("MW_OPTIONSMENU_AUTOCOMPLETE_SHOW_AUTOMATICALLY"));
-        optionsAutoCompleteMenu.add(optionsAutoCompleteGlossaryMenuItem = createMenuItem("MW_OPTIONSMENU_AUTOCOMPLETE_GLOSSARY"));
-        optionsAutoCompleteMenu.add(optionsAutoCompleteAutoTextMenuItem = createMenuItem("MW_OPTIONSMENU_AUTOCOMPLETE_AUTOTEXT"));
-        optionsAutoCompleteMenu.add(optionsAutoCompleteCharTableMenuItem = createMenuItem("MW_OPTIONSMENU_AUTOCOMPLETE_CHARTABLE"));
         optionsAutoCompleteMenu.add(optionsAutoCompleteHistoryCompletionMenuItem = createCheckboxMenuItem(
                 "MW_OPTIONSMENU_AUTOCOMPLETE_HISTORY_COMPLETION"));
         optionsAutoCompleteMenu.add(optionsAutoCompleteHistoryPredictionMenuItem = createCheckboxMenuItem(
                 "MW_OPTIONSMENU_AUTOCOMPLETE_HISTORY_PREDICTION"));
         optionsMenu.addSeparator();
-        optionsMenu.add(optionsFontSelectionMenuItem = createMenuItem("TF_MENU_DISPLAY_FONT"));
-        optionsMenu.add(optionsColorsSelectionMenuItem = createMenuItem("TF_MENU_COLORS"));
         optionsMenu.add(optionsSetupFileFiltersMenuItem = createMenuItem("TF_MENU_DISPLAY_FILTERS"));
         optionsMenu.add(optionsSentsegMenuItem = createMenuItem("MW_OPTIONSMENU_SENTSEG"));
-        optionsMenu.add(optionsSpellCheckMenuItem = createMenuItem("MW_OPTIONSMENU_SPELLCHECK"));
-        optionsMenu.add(optionsLanguageToolMenuItem = createMenuItem("MW_OPTIONSMENU_LANGUAGETOOL"));
         optionsMenu.add(optionsWorkflowMenuItem = createMenuItem("MW_OPTIONSMENU_WORKFLOW"));
-        optionsMenu.add(optionsTagValidationMenuItem = createMenuItem("MW_OPTIONSMENU_TAGVALIDATION"));
-        optionsMenu.add(optionsTeamMenuItem = createMenuItem("MW_OPTIONSMENU_TEAM"));
-        optionsMenu.add(optionsExtTMXMenuItem = createMenuItem("MW_OPTIONSMENU_EXT_TMX"));
-        optionsMenu.add(optionsViewOptionsMenuItem = createMenuItem("MW_OPTIONSMENU_VIEW"));
-        optionsMenu.add(optionsSaveOptionsMenuItem = createMenuItem("MW_OPTIONSMENU_SAVE"));
-        optionsMenu.add(optionsViewOptionsMenuLoginItem = createMenuItem("MW_OPTIONSMENU_LOGIN"));
         optionsMenu.addSeparator();
         optionsMenu.add(optionsAccessConfigDirMenuItem = createMenuItem("MW_OPTIONSMENU_ACCESS_CONFIG_DIR"));
-        optionsMenu.add(optionsRepositoriesCredentialsItem = createMenuItem("TEAM_REPOSITORIES_DIALOG"));
         optionsMenu.addSeparator();
 
         helpMenu.add(helpContentsMenuItem = createMenuItem("TF_MENU_HELP_CONTENTS"));
@@ -476,18 +458,37 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
             }
         });
 
+        Preferences.addPropertyChangeListener(e -> {
+            if (e.getNewValue() instanceof Boolean) {
+                JMenuItem item = getItemForPreference(e.getPropertyName());
+                if (item != null) {
+                    item.setSelected((Boolean) e.getNewValue());
+                }
+            }
+        });
+
         return mainMenu;
+    }
+
+    private JMenuItem getItemForPreference(String preference) {
+        switch (preference) {
+        case Preferences.AC_SHOW_SUGGESTIONS_AUTOMATICALLY:
+            return optionsAutoCompleteShowAutomaticallyItem;
+        case Preferences.AC_HISTORY_COMPLETION_ENABLED:
+            return optionsAutoCompleteHistoryCompletionMenuItem;
+        case Preferences.AC_HISTORY_PREDICTION_ENABLED:
+            return optionsAutoCompleteHistoryPredictionMenuItem;
+        case Preferences.MT_AUTO_FETCH:
+            return optionsMTAutoFetchCheckboxMenuItem;
+        case Preferences.DICTIONARY_FUZZY_MATCHING:
+            return optionsDictionaryFuzzyMatchingCheckBoxMenuItem;
+        default:
+            return null;
+        }
     }
 
     /** Updates menu checkboxes from preferences on start */
     private void updateCheckboxesOnStart() {
-        optionsTabAdvanceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isUseTabForAdvance());
-        optionsAlwaysConfirmQuitCheckBoxMenuItem.setSelected(Preferences
-                .isPreference(Preferences.ALWAYS_CONFIRM_QUIT));
-        optionsTransTipsEnableMenuItem.setSelected(Preferences.isPreference(Preferences.TRANSTIPS));
-        optionsTransTipsExactMatchMenuItem.setSelected(Preferences
-                .isPreference(Preferences.TRANSTIPS_EXACT_SEARCH));
-
         viewMarkTranslatedSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
                 .isMarkTranslated());
         viewMarkUntranslatedSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
@@ -529,17 +530,6 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 .setSelected(Preferences.isPreference(Preferences.AC_HISTORY_PREDICTION_ENABLED));
         optionsMTAutoFetchCheckboxMenuItem.setSelected(Preferences.isPreferenceDefault(
                 Preferences.MT_AUTO_FETCH, true));
-        optionsMTOnlyUntranslatedCheckboxMenuItem.setSelected(Preferences.isPreference(
-                Preferences.MT_ONLY_UNTRANSLATED));
-        optionsMTOnlyUntranslatedCheckboxMenuItem.setEnabled(optionsMTAutoFetchCheckboxMenuItem.isSelected());
-        optionsGlossaryTBXDisplayContextCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
-                Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT, Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT_DEFAULT));
-        optionsGlossaryExactMatchCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
-                Preferences.GLOSSARY_NOT_EXACT_MATCH, Preferences.GLOSSARY_NOT_EXACT_MATCH_DEFAULT));
-        optionsGlossaryStemmingCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
-                Preferences.GLOSSARY_STEMMING, Preferences.GLOSSARY_STEMMING_DEFAULT));
-        optionsGlossaryReplacementCheckBoxMenuItem.setSelected(Preferences.isPreference(
-                Preferences.GLOSSARY_REPLACE_ON_INSERT));
         optionsDictionaryFuzzyMatchingCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
                 Preferences.DICTIONARY_FUZZY_MATCHING, true));
     }
@@ -559,6 +549,9 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 public void actionPerformed(ActionEvent e) {
                     mainWindowMenuHandler.helpAboutMenuItemActionPerformed();
                 }
+            });
+            OSXIntegration.setPreferencesHandler(e -> {
+                mainWindowMenuHandler.optionsPreferencesMenuItemActionPerformed();
             });
         } catch (NoClassDefFoundError e) {
             Log.log(e);
@@ -760,45 +753,22 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenu helpMenu;
     JMenuItem lowerCaseMenuItem;
     JMenuBar mainMenu;
-    JCheckBoxMenuItem optionsAlwaysConfirmQuitCheckBoxMenuItem;
-    JMenuItem optionsFontSelectionMenuItem;
-    JMenuItem optionsColorsSelectionMenuItem;
     JMenu optionsMenu;
     JMenuItem viewRestoreGUIMenuItem;
     JMenuItem optionsAccessConfigDirMenuItem;
-    JMenuItem optionsRepositoriesCredentialsItem;
     JMenuItem optionsSentsegMenuItem;
     JMenuItem optionsSetupFileFiltersMenuItem;
-    JMenuItem optionsSpellCheckMenuItem;
-    JMenuItem optionsLanguageToolMenuItem;
-    JCheckBoxMenuItem optionsTabAdvanceCheckBoxMenuItem;
     JMenu optionsMachineTranslateMenu;
     JMenu optionsGlossaryMenu;
-    JMenuItem optionsGlossaryTBXDisplayContextCheckBoxMenuItem;
-    JMenuItem optionsGlossaryExactMatchCheckBoxMenuItem;
-    JMenuItem optionsGlossaryStemmingCheckBoxMenuItem;
-    JMenuItem optionsGlossaryReplacementCheckBoxMenuItem;
     JMenu optionsDictionaryMenu;
     JMenuItem optionsDictionaryFuzzyMatchingCheckBoxMenuItem;
-    JMenu optionsTransTipsMenu;
-    JCheckBoxMenuItem optionsTransTipsEnableMenuItem;
-    JCheckBoxMenuItem optionsTransTipsExactMatchMenuItem;
     JMenu optionsAutoCompleteMenu;
     JMenuItem optionsAutoCompleteShowAutomaticallyItem;
-    JMenuItem optionsAutoCompleteGlossaryMenuItem;
-    JMenuItem optionsAutoCompleteAutoTextMenuItem;
-    JMenuItem optionsAutoCompleteCharTableMenuItem;
     JMenuItem optionsAutoCompleteHistoryCompletionMenuItem;
     JMenuItem optionsAutoCompleteHistoryPredictionMenuItem;
     JMenuItem optionsWorkflowMenuItem;
-    JMenuItem optionsTagValidationMenuItem;
-    JMenuItem optionsTeamMenuItem;
-    JMenuItem optionsExtTMXMenuItem;
-    JMenuItem optionsViewOptionsMenuItem;
-    JMenuItem optionsSaveOptionsMenuItem;
-    JMenuItem optionsViewOptionsMenuLoginItem;
     JCheckBoxMenuItem optionsMTAutoFetchCheckboxMenuItem;
-    JCheckBoxMenuItem optionsMTOnlyUntranslatedCheckboxMenuItem;
+    JMenuItem optionsPreferencesMenuItem;
     JMenuItem projectCloseMenuItem;
     JMenuItem projectCompileMenuItem;
     JMenuItem projectSingleCompileMenuItem;

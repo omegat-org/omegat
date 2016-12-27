@@ -248,11 +248,10 @@ public class AlignPanelController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (confirmReset(frame)) {
-                    SegmentationCustomizer customizer = new SegmentationCustomizer(frame, false, SRX.getDefault(),
+                    SegmentationCustomizer customizer = new SegmentationCustomizer(false, SRX.getDefault(),
                             Core.getSegmenter().getSRX(), null);
-                    customizer.setVisible(true);
-                    if (customizer.getReturnStatus() == SegmentationCustomizer.RET_OK) {
-                        customizedSRX = customizer.getSRX();
+                    if (customizer.show(frame)) {
+                        customizedSRX = customizer.getResult();
                         Core.setSegmenter(new Segmenter(customizedSRX));
                         reloadBeads();
                     }
@@ -266,11 +265,11 @@ public class AlignPanelController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (confirmReset(frame)) {
-                    FiltersCustomizer customizer = new FiltersCustomizer(frame, false,
-                            FilterMaster.createDefaultFiltersConfig(), Core.getFilterMaster().getConfig(), null);
-                    customizer.setVisible(true);
-                    if (customizer.getReturnStatus() == SegmentationCustomizer.RET_OK) {
-                        customizedFilters = customizer.result;
+                    FiltersCustomizer customizer = new FiltersCustomizer(false,
+                            FilterMaster.createDefaultFiltersConfig(), Core.getFilterMaster().getConfig(),
+                            null);
+                    if (customizer.show(frame)) {
+                        customizedFilters = customizer.getResult();
                         Core.setFilterMaster(new FilterMaster(customizedFilters));
                         aligner.clearLoaded();
                         reloadBeads();

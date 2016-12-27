@@ -25,7 +25,6 @@
 
 package org.omegat.gui.dialogs;
 
-import java.awt.Font;
 import java.awt.Frame;
 import java.awt.HeadlessException;
 import java.io.File;
@@ -35,7 +34,6 @@ import java.util.Locale;
 import org.omegat.core.TestCore;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog.Mode;
-import org.omegat.util.Language;
 
 public class DialogsTest extends TestCore {
 
@@ -56,22 +54,6 @@ public class DialogsTest extends TestCore {
         }
     }
 
-    public void testAutotestAutoCompleterOptionsDialog() {
-        try {
-            new AutotextAutoCompleterOptionsDialog(null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
-    }
-
-    public void testCharTableAutoCompleterOptionsDialog() {
-        try {
-            new CharTableAutoCompleterOptionsDialog(null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
-    }
-
     public void testCreateGlossaryEntryDialog() {
         try {
             new CreateGlossaryEntry(null);
@@ -80,25 +62,9 @@ public class DialogsTest extends TestCore {
         }
     }
 
-    public void testCustomColorSelectionDialog() {
-        try {
-            new CustomColorSelectionDialog(null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
-    }
-
     public void testDictionaryInstallerDialog() {
         try {
             new DictionaryInstallerDialog(null, null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
-    }
-
-    public void testExternalTMXMatchesDialog() {
-        try {
-            new ExternalTMXMatchesDialog(null);
         } catch (HeadlessException ignore) {
             // Can't do this test when headless
         }
@@ -115,22 +81,6 @@ public class DialogsTest extends TestCore {
     public void testFilenamePatternsEditor() {
         try {
             new FilenamePatternsEditor(null, true);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
-    }
-
-    public void testFontSelectionDialog() {
-        try {
-            new FontSelectionDialog(null, new Font(Font.DIALOG, Font.PLAIN, 12));
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
-    }
-
-    public void testGlossaryAutoCompleterOptionsDialog() {
-        try {
-            new GlossaryAutoCompleterOptionsDialog(null);
         } catch (HeadlessException ignore) {
             // Can't do this test when headless
         }
@@ -193,62 +143,6 @@ public class DialogsTest extends TestCore {
             // Can't do this test when headless
         } finally {
             assertTrue(dir.delete());
-        }
-    }
-
-    public void testSaveOptionsDialog() {
-        try {
-            new SaveOptionsDialog(null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
-    }
-
-    public void testSpellcheckerConfigurationDialog() {
-        try {
-            new SpellcheckerConfigurationDialog(null, new Language(Locale.ENGLISH));
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
-    }
-
-    public void testTagProcessingOptionsDialog() {
-        try {
-            new TagProcessingOptionsDialog(null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
-    }
-
-    public void testTeamOptionsDialog() {
-        try {
-            new TeamOptionsDialog(null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
-    }
-
-    public void testUserPassDialog() {
-        try {
-            new UserPassDialog(null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
-    }
-
-    public void testViewOptionsDialog() {
-        try {
-            new ViewOptionsDialog(null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
-    }
-
-    public void testWorkflowOptionsDialog() {
-        try {
-            new WorkflowOptionsDialog(null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
         }
     }
 }

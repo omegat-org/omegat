@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2016 Alex Buloichick
+ Copyright (C) 2016 Alex Buloichick, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,29 +25,58 @@
 
 package org.omegat.core.team2.gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.swing.JComponent;
 import javax.swing.table.AbstractTableModel;
 
-import org.omegat.core.Core;
 import org.omegat.core.team2.TeamSettings;
-import org.omegat.util.gui.StaticUIUtils;
+import org.omegat.gui.preferences.BasePreferencesController;
+import org.omegat.util.OStrings;
 
 /**
  * Controller for forget credentials.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
-public class RepositoriesCredentialsController {
-    private static final String PREFIX = "login.username.";
+public class RepositoriesCredentialsController extends BasePreferencesController {
 
-    public static void show() {
-        Set<String> urls = new TreeSet<String>();
+    private static final int MAX_ROW_COUNT = 10;
+
+    private RepositoriesCredentialsPanel dialog;
+
+    @Override
+    public JComponent getGui() {
+        if (dialog == null) {
+            initGui();
+            initFromPrefs();
+        }
+        return dialog;
+    }
+
+    @Override
+    public String toString() {
+        return OStrings.getString("TEAM_REPOSITORIES_DIALOG");
+    }
+
+    private void initGui() {
+        dialog = new RepositoriesCredentialsPanel();
+        dialog.list.getSelectionModel()
+                .addListSelectionListener(e -> dialog.btnRemove.setEnabled(dialog.list.getSelectedRow() != -1));
+        dialog.btnRemove.addActionListener(e -> removeSelected());
+        Dimension tableSize = dialog.list.getPreferredSize();
+        dialog.list.setPreferredScrollableViewportSize(
+                new Dimension(tableSize.width, dialog.list.getRowHeight() * MAX_ROW_COUNT));
+    }
+
+    @Override
+    public void initFromPrefs() {
+        Set<String> urls = new TreeSet<>();
         for (Object o : TeamSettings.listKeys()) {
             String key = o.toString();
             int p = key.lastIndexOf('!');
@@ -55,46 +84,32 @@ public class RepositoriesCredentialsController {
                 urls.add(key.substring(0, p));
             }
         }
-
-        final RepositoriesCredentialsDialog dialog = new RepositoriesCredentialsDialog(
-                Core.getMainWindow().getApplicationFrame(), true);
-
         dialog.list.setModel(new Model(urls));
-        dialog.list.getSelectionModel().addListSelectionListener(
-                e -> dialog.btnRemove.setEnabled(dialog.list.getSelectedRow() != -1));
-        dialog.btnRemove.addActionListener(new ActionListener() {
+    }
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int selectedIndex = dialog.list.getSelectedRow();
-                if (selectedIndex < 0) {
-                    return;
-                }
-                String selected = ((Model) dialog.list.getModel()).lines.get(selectedIndex);
-                for (Object o : TeamSettings.listKeys()) {
-                    String key = o.toString();
-                    if (key.startsWith(selected + "!")) {
-                        TeamSettings.set(key, null);
-                    }
-                }
-                ((Model) dialog.list.getModel()).lines.remove(selected);
-                ((Model) dialog.list.getModel()).fireTableDataChanged();
+    @Override
+    public void restoreDefaults() {
+    }
+
+    private void removeSelected() {
+        int selectedIndex = dialog.list.getSelectedRow();
+        if (selectedIndex < 0) {
+            return;
+        }
+        Model model = (Model) dialog.list.getModel();
+        String selected = model.lines.get(selectedIndex);
+        for (Object o : TeamSettings.listKeys()) {
+            String key = o.toString();
+            if (key.startsWith(selected + "!")) {
+                TeamSettings.set(key, null);
             }
-        });
-        dialog.btnClose.addActionListener(new ActionListener() {
+        }
+        model.lines.remove(selected);
+        model.fireTableDataChanged();
+    }
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dialog.dispose();
-            }
-        });
-
-        dialog.getRootPane().setDefaultButton(dialog.btnClose);
-
-        StaticUIUtils.setEscapeClosable(dialog);
-
-        dialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
-        dialog.setVisible(true);
+    @Override
+    public void persist() {
     }
 
     @SuppressWarnings("serial")

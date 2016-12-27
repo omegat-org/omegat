@@ -43,6 +43,7 @@ import org.omegat.util.DirectoryMonitor;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
+import org.omegat.util.Preferences;
 
 /**
  * Class that loads glossary files and adds glossary entries to strings of the source files.
@@ -76,6 +77,19 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
             }
         }
         externalGlossaries = gl.toArray(new IGlossary[gl.size()]);
+        Preferences.addPropertyChangeListener(e -> {
+            if (Core.getProject().isProjectLoaded()) {
+                switch (e.getPropertyName()) {
+                case Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT:
+                    forceReloadTBX();
+                    break;
+                case Preferences.GLOSSARY_NOT_EXACT_MATCH:
+                case Preferences.GLOSSARY_STEMMING:
+                    forceUpdateGlossary();
+                    break;
+                }
+            }
+        });
     }
 
     public void addGlossaryProvider(IGlossary provider) {

@@ -39,11 +39,8 @@ import java.awt.Desktop;
 import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
 import java.io.File;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
@@ -58,39 +55,23 @@ import org.omegat.core.data.TMXEntry;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.NearString.MATCH_SOURCE;
 import org.omegat.core.search.SearchMode;
-import org.omegat.core.segmentation.SRX;
-import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.tagvalidation.ErrorReport;
-import org.omegat.core.team2.gui.RepositoriesCredentialsController;
-import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.align.AlignFilePickerController;
 import org.omegat.gui.dialogs.AboutDialog;
-import org.omegat.gui.dialogs.AutotextAutoCompleterOptionsDialog;
-import org.omegat.gui.dialogs.CharTableAutoCompleterOptionsDialog;
-import org.omegat.gui.dialogs.CustomColorSelectionDialog;
-import org.omegat.gui.dialogs.ExternalTMXMatchesDialog;
-import org.omegat.gui.dialogs.FontSelectionDialog;
-import org.omegat.gui.dialogs.GlossaryAutoCompleterOptionsDialog;
 import org.omegat.gui.dialogs.GoToSegmentDialog;
-import org.omegat.gui.dialogs.LanguageToolConfigurationDialog;
 import org.omegat.gui.dialogs.LastChangesDialog;
 import org.omegat.gui.dialogs.LogDialog;
-import org.omegat.gui.dialogs.SaveOptionsDialog;
-import org.omegat.gui.dialogs.SpellcheckerConfigurationDialog;
-import org.omegat.gui.dialogs.TagProcessingOptionsDialog;
-import org.omegat.gui.dialogs.TeamOptionsDialog;
-import org.omegat.gui.dialogs.UserPassDialog;
-import org.omegat.gui.dialogs.ViewOptionsDialog;
-import org.omegat.gui.dialogs.WorkflowOptionsDialog;
 import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.SegmentExportImport;
-import org.omegat.gui.filters2.FiltersCustomizer;
+import org.omegat.gui.filters2.FiltersCustomizerController;
+import org.omegat.gui.preferences.PreferencesWindowController;
+import org.omegat.gui.preferences.view.EditingBehaviorController;
 import org.omegat.gui.search.SearchWindowController;
-import org.omegat.gui.segmentation.SegmentationCustomizer;
+import org.omegat.gui.segmentation.SegmentationCustomizerController;
 import org.omegat.gui.stat.StatisticsWindow;
 import org.omegat.help.Help;
 import org.omegat.util.Language;
@@ -621,6 +602,11 @@ public class MainWindowMenuHandler {
         Core.getEditor().registerIdenticalTranslation();
     }
 
+    public void optionsPreferencesMenuItemActionPerformed() {
+        PreferencesWindowController pwc = new PreferencesWindowController();
+        pwc.show(Core.getMainWindow().getApplicationFrame());
+    }
+
     public void cycleSwitchCaseMenuItemActionPerformed() {
         Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.CYCLE);
     }
@@ -849,41 +835,9 @@ public class MainWindowMenuHandler {
         picker.show(mainWindow);
     }
 
-    public void optionsTabAdvanceCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings()
-                .setUseTabForAdvance(mainWindow.menu.optionsTabAdvanceCheckBoxMenuItem.isSelected());
-    }
-
-    public void optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed() {
-        Preferences.setPreference(Preferences.ALWAYS_CONFIRM_QUIT,
-                mainWindow.menu.optionsAlwaysConfirmQuitCheckBoxMenuItem.isSelected());
-    }
-
-    public void optionsTransTipsEnableMenuItemActionPerformed() {
-        Preferences.setPreference(Preferences.TRANSTIPS,
-                mainWindow.menu.optionsTransTipsEnableMenuItem.isSelected());
-    }
-
-    public void optionsTransTipsExactMatchMenuItemActionPerformed() {
-        Preferences.setPreference(Preferences.TRANSTIPS_EXACT_SEARCH,
-                mainWindow.menu.optionsTransTipsExactMatchMenuItem.isSelected());
-    }
-
     public void optionsAutoCompleteShowAutomaticallyItemActionPerformed() {
         Preferences.setPreference(Preferences.AC_SHOW_SUGGESTIONS_AUTOMATICALLY,
                 mainWindow.menu.optionsAutoCompleteShowAutomaticallyItem.isSelected());
-    }
-    
-    public void optionsAutoCompleteGlossaryMenuItemActionPerformed() {
-        new GlossaryAutoCompleterOptionsDialog(mainWindow).setVisible(true);
-    }
-
-    public void optionsAutoCompleteAutoTextMenuItemActionPerformed() {
-        new AutotextAutoCompleterOptionsDialog(mainWindow).setVisible(true);
-    }
-
-    public void optionsAutoCompleteCharTableMenuItemActionPerformed() {
-        new CharTableAutoCompleterOptionsDialog(mainWindow).setVisible(true);
     }
 
     public void optionsAutoCompleteHistoryCompletionMenuItemActionPerformed() {
@@ -899,215 +853,34 @@ public class MainWindowMenuHandler {
     public void optionsMTAutoFetchCheckboxMenuItemActionPerformed() {
         boolean enabled = mainWindow.menu.optionsMTAutoFetchCheckboxMenuItem.isSelected();
         Preferences.setPreference(Preferences.MT_AUTO_FETCH, enabled);
-        mainWindow.menu.optionsMTOnlyUntranslatedCheckboxMenuItem.setEnabled(enabled);
-    }
-    
-    public void optionsMTOnlyUntranslatedCheckboxMenuItemActionPerformed() {
-        Preferences.setPreference(Preferences.MT_ONLY_UNTRANSLATED,
-                mainWindow.menu.optionsMTOnlyUntranslatedCheckboxMenuItem.isSelected());
-    }
-    
-    public void optionsGlossaryTBXDisplayContextCheckBoxMenuItemActionPerformed() {
-        Preferences.setPreference(Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT,
-                mainWindow.menu.optionsGlossaryTBXDisplayContextCheckBoxMenuItem.isSelected());
-        Preferences.save();
-
-        Core.getGlossaryManager().forceReloadTBX();
-    }
-    
-    public void optionsGlossaryExactMatchCheckBoxMenuItemActionPerformed() {
-        Preferences.setPreference(Preferences.GLOSSARY_NOT_EXACT_MATCH,
-                mainWindow.menu.optionsGlossaryExactMatchCheckBoxMenuItem.isSelected());
-        Preferences.save();
-        Core.getGlossaryManager().forceUpdateGlossary();
-
-    }
-    
-    public void optionsGlossaryStemmingCheckBoxMenuItemActionPerformed() {
-        Preferences.setPreference(Preferences.GLOSSARY_STEMMING,
-                mainWindow.menu.optionsGlossaryStemmingCheckBoxMenuItem.isSelected());
-        Preferences.save();
-        Core.getGlossaryManager().forceUpdateGlossary();
-
-    }
-
-    public void optionsGlossaryReplacementCheckBoxMenuItemActionPerformed() {
-        Preferences.setPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT,
-                mainWindow.menu.optionsGlossaryReplacementCheckBoxMenuItem.isSelected());
     }
     
     public void optionsDictionaryFuzzyMatchingCheckBoxMenuItemActionPerformed() {
         Preferences.setPreference(Preferences.DICTIONARY_FUZZY_MATCHING,
                 mainWindow.menu.optionsDictionaryFuzzyMatchingCheckBoxMenuItem.isSelected());
         Preferences.save();
-        Core.getDictionaries().refresh();
     }
-
-    /**
-     * Displays the font dialog to allow selecting the font for source, target text (in main window) and for
-     * match and glossary windows.
-     */
-    public void optionsFontSelectionMenuItemActionPerformed() {
-        FontSelectionDialog dlg = new FontSelectionDialog(Core.getMainWindow().getApplicationFrame(), Core
-                .getMainWindow().getApplicationFont());
-        dlg.setVisible(true);
-    }
-
-    /**
-     * Displays the color dialog selection. It needs an application restart after color changes.
-     */
-    public void optionsColorsSelectionMenuItemActionPerformed() {
-        CustomColorSelectionDialog dlg = new CustomColorSelectionDialog(Core.getMainWindow().getApplicationFrame());
-        dlg.setVisible(true);
-    }
-
     
     /**
      * Displays the filters setup dialog to allow customizing file filters in detail.
      */
     public void optionsSetupFileFiltersMenuItemActionPerformed() {
-        FiltersCustomizer dlg = new FiltersCustomizer(mainWindow, false,
-                FilterMaster.createDefaultFiltersConfig(),
-                Preferences.getFilters(), null);
-        if (Core.getProject().isProjectLoaded()) {
-            // Don't highlight project in-use filters on global view if project
-            // has project-specific filters
-            if (Core.getProject().getProjectProperties().getProjectFilters() == null) {
-                Set<String> inUseFilters = Core.getProject().getProjectFiles().stream()
-                        .map(info -> info.filterFileFormatName).collect(Collectors.toSet());
-                dlg.setInUseFilters(inUseFilters);
-            }
-        }
-        dlg.setVisible(true);
-        if (dlg.getReturnStatus() == FiltersCustomizer.RET_OK) {
-            // saving config
-            Core.setFilterMaster(new FilterMaster(dlg.result));
-            Preferences.setFilters(dlg.result);
-        }
+        new PreferencesWindowController().show(mainWindow, FiltersCustomizerController.class);
     }
 
     /**
      * Displays the segmentation setup dialog to allow customizing the segmentation rules in detail.
      */
     public void optionsSentsegMenuItemActionPerformed() {
-        SegmentationCustomizer segment_window = new SegmentationCustomizer(mainWindow, false, SRX.getDefault(),
-                Preferences.getSRX(), null);
-        segment_window.setVisible(true);
+        new PreferencesWindowController().show(mainWindow, SegmentationCustomizerController.class);
 
-        if (segment_window.getReturnStatus() == SegmentationCustomizer.RET_OK) {
-            Core.setSegmenter(new Segmenter(segment_window.getSRX()));
-            Preferences.setSRX(segment_window.getSRX());
-        }
-    }
-
-    /**
-     * Opens the spell checking window
-     */
-    public void optionsSpellCheckMenuItemActionPerformed() {
-        Language currentLanguage;
-        if (Core.getProject().isProjectLoaded()) {
-            currentLanguage = Core.getProject().getProjectProperties().getTargetLanguage();
-        } else {
-            currentLanguage = new Language(Preferences.getPreference(Preferences.TARGET_LOCALE));
-        }
-        SpellcheckerConfigurationDialog sd = new SpellcheckerConfigurationDialog(mainWindow, currentLanguage);
-
-        sd.setVisible(true);
-
-        if (sd.getReturnStatus() == SpellcheckerConfigurationDialog.RET_OK) {
-            boolean isNeedToSpell = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
-            if (isNeedToSpell && Core.getProject().isProjectLoaded()) {
-                ISpellChecker sc = Core.getSpellChecker();
-                sc.destroy();
-                sc.initialize();
-            }
-            Core.getEditor().getSettings().setAutoSpellChecking(isNeedToSpell);
-        }
-    }
-
-    /**
-     * Opens the LanguageTool window
-     */
-    public void optionsLanguageToolMenuItemActionPerformed() {
-        if (Core.getProject().isProjectLoaded()) {
-            LanguageToolConfigurationDialog ld = new LanguageToolConfigurationDialog(mainWindow, true,
-                Core.getProject().getProjectProperties().getSourceLanguage(),
-                Core.getProject().getProjectProperties().getTargetLanguage());
-            ld.setVisible(true);
-            if (ld.userDidConfirm()) {
-                Core.getEditor().refreshView(true);
-            }
-        } else {
-            LanguageToolConfigurationDialog ld = new LanguageToolConfigurationDialog(mainWindow, true);
-            ld.setVisible(true);
-        }
     }
 
     /**
      * Displays the workflow setup dialog to allow customizing the diverse workflow options.
      */
     public void optionsWorkflowMenuItemActionPerformed() {
-        new WorkflowOptionsDialog(mainWindow).setVisible(true);
-    }
-
-    /**
-     * Displays the tag validation setup dialog to allow customizing the diverse tag validation options.
-     */
-    public void optionsTagValidationMenuItemActionPerformed() {
-        TagProcessingOptionsDialog tagProcessingOptionsDialog = new TagProcessingOptionsDialog(mainWindow);
-        tagProcessingOptionsDialog.setVisible(true);
-        
-        if (tagProcessingOptionsDialog.getReturnStatus() == TagProcessingOptionsDialog.RET_OK
-                && Core.getProject().isProjectLoaded()) {
-            // Redisplay according to new view settings
-            Core.getEditor().getSettings().updateTagValidationPreferences();
-            ProjectUICommands.promptReload();
-        }
-    }
-
-    /**
-     * Displays the team options dialog to allow customizing the diverse team options.
-     */
-    public void optionsTeamMenuItemActionPerformed() {
-        new TeamOptionsDialog(mainWindow).setVisible(true);
-    }
-
-    /**
-     * Displays the external TMX dialog to allow customizing the external TMX options.
-     */
-    public void optionsExtTMXMenuItemActionPerformed() {
-
-        ExternalTMXMatchesDialog externalTMXOptions = new ExternalTMXMatchesDialog(mainWindow);
-        externalTMXOptions.setVisible(true);
-
-        if (externalTMXOptions.getReturnStatus() == ExternalTMXMatchesDialog.RET_OK
-                && Core.getProject().isProjectLoaded()) {
-            ProjectUICommands.promptReload();
-        }
-    }
-
-    /**
-     * Displays the view options dialog to allow customizing the view options.
-     */
-    public void optionsViewOptionsMenuItemActionPerformed() {
-
-        ViewOptionsDialog viewOptions = new ViewOptionsDialog(mainWindow);
-        viewOptions.setVisible(true);
-
-        if (viewOptions.getReturnStatus() == ViewOptionsDialog.RET_OK
-                && Core.getProject().isProjectLoaded()) {
-            // Redisplay according to new view settings
-            Core.getEditor().getSettings().updateViewPreferences();
-        }
-
-    }
-
-   /**
-    * Display the save options dialog to allow setting the save interval
-    */
-    public void optionsSaveOptionsMenuItemActionPerformed() {
-        SaveOptionsDialog saveOptions = new SaveOptionsDialog(mainWindow);
-        saveOptions.setVisible(true);
+        new PreferencesWindowController().show(mainWindow, EditingBehaviorController.class);
     }
 
     /**
@@ -1120,10 +893,6 @@ public class MainWindowMenuHandler {
 
     public void optionsAccessConfigDirMenuItemActionPerformed() {
         openFile(new File(StaticUtils.getConfigDir()));
-    }
-
-    public void optionsRepositoriesCredentialsItemActionPerformed() {
-        RepositoriesCredentialsController.show();
     }
 
     /**
@@ -1156,36 +925,5 @@ public class MainWindowMenuHandler {
      */
     public void helpLogMenuItemActionPerformed() {
         new LogDialog(mainWindow).setVisible(true);
-    }
-    
-    /**
-     * Displays the dialog to set login and password for proxy.
-     */
-    public void optionsViewOptionsMenuLoginItemActionPerformed() {
-        UserPassDialog proxyOptions = new UserPassDialog(mainWindow);
-
-        String encodedUser = Preferences.getPreference(Preferences.PROXY_USER_NAME);
-        String encodedPassword = Preferences.getPreference(Preferences.PROXY_PASSWORD);
-
-        try {
-            proxyOptions.userText.setText(StringUtil.decodeBase64(encodedUser, StandardCharsets.ISO_8859_1));
-            proxyOptions.passwordField
-                    .setText(StringUtil.decodeBase64(encodedPassword, StandardCharsets.ISO_8859_1));
-        } catch (IllegalArgumentException ex) {
-            Log.logErrorRB("LOG_DECODING_ERROR");
-            Log.log(ex);
-        }
-
-        proxyOptions.setVisible(true);
-
-        if (proxyOptions.getReturnStatus() == UserPassDialog.RET_OK) {
-            encodedUser = StringUtil.encodeBase64(proxyOptions.userText.getText(),
-                    StandardCharsets.ISO_8859_1);
-            encodedPassword = StringUtil.encodeBase64(proxyOptions.passwordField.getPassword(),
-                    StandardCharsets.ISO_8859_1);
-
-            Preferences.setPreference(Preferences.PROXY_USER_NAME, encodedUser);
-            Preferences.setPreference(Preferences.PROXY_PASSWORD, encodedPassword);
-        }
     }
 }

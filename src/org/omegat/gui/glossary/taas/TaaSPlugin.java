@@ -25,17 +25,13 @@
 
 package org.omegat.gui.glossary.taas;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 
 import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -45,7 +41,8 @@ import javax.xml.transform.stream.StreamSource;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
-import org.omegat.core.events.IProjectEventListener;
+import org.omegat.gui.preferences.PreferencesControllers;
+import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -57,8 +54,6 @@ import org.openide.awt.Mnemonics;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TaaSPlugin {
-
-    static JMenuItem browse;
 
     private static class ClientHolder {
         private static TaaSClient CLIENT = new TaaSClient();
@@ -101,82 +96,29 @@ public class TaaSPlugin {
 
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
             public void onApplicationStartup() {
-                JMenu menu = Core.getMainWindow().getMainMenu().getGlossaryMenu();
-
-                browse = new JMenuItem();
-                Mnemonics.setLocalizedText(browse, OStrings.getString("TAAS_MENU_BROWSE"));
-                browse.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        if (client.isAllowed()) {
-                            BrowseTaasCollectionsController.show();
-                        } else {
-                            JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
-                                    OStrings.getString("TAAS_API_KEY_NOT_FOUND"),
-                                    OStrings.getString("TF_WARNING"), JOptionPane.WARNING_MESSAGE);
-                        }
-                    }
-                });
-                browse.setEnabled(false);
-                menu.add(browse);
-
-                JMenuItem select = new JMenuItem();
-                Mnemonics.setLocalizedText(select, OStrings.getString("TAAS_MENU_DOMAINS"));
-                select.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        if (client.isAllowed()) {
-                            SelectDomainController.show();
-                        } else {
-                            JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
-                                    OStrings.getString("TAAS_API_KEY_NOT_FOUND"),
-                                    OStrings.getString("TF_WARNING"), JOptionPane.WARNING_MESSAGE);
-                        }
-                    }
-                });
-                menu.add(select);
-
-                final JMenuItem lookup = new JCheckBoxMenuItem();
+                JMenuItem lookup = new JCheckBoxMenuItem();
                 lookup.setSelected(Preferences.isPreferenceDefault(Preferences.TAAS_LOOKUP, false));
                 Mnemonics.setLocalizedText(lookup, OStrings.getString("TAAS_MENU_LOOKUP"));
-                lookup.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
+                lookup.addActionListener(e -> {
+                    if (client.isAllowed()) {
                         Preferences.setPreference(Preferences.TAAS_LOOKUP, lookup.isSelected());
                         Preferences.save();
-                        if (!client.isAllowed()) {
-                            JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
-                                    OStrings.getString("TAAS_API_KEY_NOT_FOUND"),
-                                    OStrings.getString("TF_WARNING"), JOptionPane.WARNING_MESSAGE);
-                        }
+                    } else {
+                        lookup.setSelected(false);
+                        new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(),
+                                TaaSPreferencesController.class);
                     }
                 });
-                menu.add(lookup);
-
+                Core.getMainWindow().getMainMenu().getGlossaryMenu().add(lookup);
+                PreferencesControllers.addSupplier(TaaSPreferencesController::new);
+                Preferences.addPropertyChangeListener(Preferences.TAAS_LOOKUP,
+                        e -> lookup.setSelected((Boolean) e.getNewValue()));
                 if (client.isAllowed()) {
                     Core.getGlossaryManager().addGlossaryProvider(glossary);
                 }
             }
 
             public void onApplicationShutdown() {
-            }
-        });
-        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
-            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-                if (browse == null) {
-                    return;
-                }
-                switch (eventType) {
-                case CLOSE:
-                    browse.setEnabled(false);
-                    break;
-                case CREATE:
-                case LOAD:
-                    browse.setEnabled(true);
-                    break;
-                default:
-                    // Nothing
-                }
             }
         });
     }

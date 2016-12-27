@@ -46,8 +46,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
@@ -542,7 +540,9 @@ public class ProjectPropertiesDialog extends JDialog {
         centerBox.add(dirsBox);
 
         JScrollPane scrollPane = new JScrollPane(centerBox);
-        scrollPane.getViewport().setBackground(getBackground());
+        // Prevent ugly white viewport background with GTK LAF
+        scrollPane.setBackground(getBackground());
+        scrollPane.getViewport().setOpaque(false);
         getContentPane().add(scrollPane, "Center");
 
         JButton m_okButton = new JButton();
@@ -638,19 +638,13 @@ public class ProjectPropertiesDialog extends JDialog {
             }
         });
 
-        final JDialog self = this;
         m_sentenceSegmentingButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SegmentationCustomizer segmentationCustomizer = new SegmentationCustomizer(self, true,
+                SegmentationCustomizer segmentationCustomizer = new SegmentationCustomizer(true,
                         SRX.getDefault(), Preferences.getSRX(), srx);
-                segmentationCustomizer.setVisible(true);
-                if (segmentationCustomizer.getReturnStatus() == SegmentationCustomizer.RET_OK) {
-                    if (segmentationCustomizer.isProjectSpecific()) {
-                        srx = segmentationCustomizer.getSRX();
-                    } else {
-                        srx = null;
-                    }
+                if (segmentationCustomizer.show(ProjectPropertiesDialog.this)) {
+                    srx = segmentationCustomizer.getResult();
                 }
             }
         });
@@ -658,17 +652,11 @@ public class ProjectPropertiesDialog extends JDialog {
         m_fileFiltersButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FiltersCustomizer dlg = new FiltersCustomizer(parent, true,
+                FiltersCustomizer dlg = new FiltersCustomizer(true,
                         FilterMaster.createDefaultFiltersConfig(), Preferences.getFilters(), filters);
-                if (Core.getProject().isProjectLoaded()) {
-                    Set<String> inUseFilters = Core.getProject().getProjectFiles().stream()
-                            .map(info -> info.filterFileFormatName).collect(Collectors.toSet());
-                    dlg.setInUseFilters(inUseFilters);
-                }
-                dlg.setVisible(true);
-                if (dlg.getReturnStatus() == FiltersCustomizer.RET_OK) {
+                if (dlg.show(ProjectPropertiesDialog.this)) {
                     // saving config
-                    filters = dlg.result;
+                    filters = dlg.getResult();
                 }
             }
         });

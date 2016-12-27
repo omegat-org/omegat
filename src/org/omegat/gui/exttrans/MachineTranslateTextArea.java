@@ -30,6 +30,9 @@ package org.omegat.gui.exttrans;
 
 import java.awt.Dimension;
 
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
@@ -40,10 +43,13 @@ import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.preferences.PreferencesWindowController;
+import org.omegat.gui.preferences.view.MachineTranslationPreferencesController;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.IPaneMenu;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -56,7 +62,8 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
-public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTranslationInfo> {
+public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTranslationInfo>
+        implements IPaneMenu {
 
     private static final String EXPLANATION = OStrings.getString("GUI_MACHINETRANSLATESWINDOW_explanation");
 
@@ -175,5 +182,13 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
             }
             return translator.getTranslation(source, target, src);
         }
+    }
+
+    @Override
+    public void populatePaneMenu(JPopupMenu menu) {
+        final JMenuItem prefs = new JMenuItem(OStrings.getString("GUI_MACHINETRANSLATESWINDOW_OPEN_PREFS"));
+        prefs.addActionListener(e -> new PreferencesWindowController().show(
+                Core.getMainWindow().getApplicationFrame(), MachineTranslationPreferencesController.class));
+        menu.add(prefs);
     }
 }

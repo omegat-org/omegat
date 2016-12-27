@@ -68,6 +68,8 @@ import org.omegat.core.matching.NearString.ScoresComparator;
 import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.preferences.PreferencesWindowController;
+import org.omegat.gui.preferences.view.TMMatchesPreferencesController;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -660,12 +662,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         menu.add(notify);
         menu.addSeparator();
         final JMenuItem prefs = new JMenuItem(OStrings.getString("MATCHES_OPEN_PREFERENCES"));
-        prefs.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Core.getMainWindow().getMainMenu().invokeAction("optionsExtTMXMenuItem", e.getModifiers());
-            }
-        });
+        prefs.addActionListener(e -> new PreferencesWindowController()
+                .show(Core.getMainWindow().getApplicationFrame(), TMMatchesPreferencesController.class));
         menu.add(prefs);
     }
 }

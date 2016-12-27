@@ -116,6 +116,8 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
                 callDictionary(newWord);
             }
         });
+
+        Preferences.addPropertyChangeListener(Preferences.DICTIONARY_FUZZY_MATCHING, e -> refresh());
     }
 
     @Override

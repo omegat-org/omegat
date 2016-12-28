@@ -218,13 +218,14 @@ public class RebaseAndCommit {
     /**
      * Commit later.
      */
-    public static void commitPrepared(Prepared prep, RemoteRepositoryProvider provider) throws Exception {
+    public static String commitPrepared(Prepared prep, RemoteRepositoryProvider provider) throws Exception {
         provider.copyFilesFromProjectToRepo(prep.path, prep.charset);
         String newVersion = provider.commitFileAfterVersion(prep.path, prep.versionHead, prep.commitComment);
         if (newVersion != null) {
             // file was committed good
             provider.getTeamSettings().set(VERSION_PREFIX + prep.path, newVersion);
         }
+        return newVersion;
     }
 
     public interface IRebase {
@@ -272,11 +273,11 @@ public class RebaseAndCommit {
      * Info about prepared file.
      */
     public static class Prepared {
-        String path;
-        File fileBase, fileHead;
-        String versionBase, versionHead;
-        boolean needToCommit;
-        String commitComment;
-        String charset;
+        public String path;
+        public File fileBase, fileHead;
+        public String versionBase, versionHead;
+        public boolean needToCommit;
+        public String commitComment;
+        public String charset;
     }
 }

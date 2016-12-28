@@ -205,8 +205,9 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     @Override
     public String commit(String version, String comment) throws Exception {
         if (version != null) {
-            if (!version.equals(getCurrentVersion())) {
-                throw new RuntimeException("Version changed");
+            String currentVersion = getCurrentVersion();
+            if (!version.equals(currentVersion)) {
+                throw new RuntimeException("Version changed from " + version + " to " + currentVersion);
             }
         }
         if (indexIsEmpty(DirCache.read(repository))) {
@@ -229,6 +230,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             } else {
                 result = commit.getName();
             }
+            Log.logDebug(LOGGER, "GIT committed into new version {0} ", result);
             Log.logInfoRB("GIT_FINISH", "upload");
             return result;
         } catch (Exception ex) {

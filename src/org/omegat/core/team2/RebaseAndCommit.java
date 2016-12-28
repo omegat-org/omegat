@@ -219,6 +219,10 @@ public class RebaseAndCommit {
      * Commit later.
      */
     public static String commitPrepared(Prepared prep, RemoteRepositoryProvider provider) throws Exception {
+        if (!prep.needToCommit) {
+            // there was no changes
+            return null;
+        }
         provider.copyFilesFromProjectToRepo(prep.path, prep.charset);
         String newVersion = provider.commitFileAfterVersion(prep.path, prep.versionHead, prep.commitComment);
         if (newVersion != null) {

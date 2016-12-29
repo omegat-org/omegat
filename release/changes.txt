@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.0.1 update 1
 ----------------------------------------------------------------------
-  5 Enhancements
+  8 Enhancements
   3 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
@@ -14,6 +14,15 @@
 
   - Improve Segment Properties pane appearance with dark themes
   https://sourceforge.net/p/omegat/feature-requests/1284/
+
+  - Reorganize preferences into a consolidated window
+  https://sourceforge.net/p/omegat/feature-requests/1296/
+
+  - Securely store sensitive settings
+  https://sourceforge.net/p/omegat/feature-requests/1297/
+
+  - Make MT, TaaS connectors configurable in the GUI
+  https://sourceforge.net/p/omegat/feature-requests/1298/
 
   Other changes:
 

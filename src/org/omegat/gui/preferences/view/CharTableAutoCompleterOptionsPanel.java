@@ -79,10 +79,10 @@ public class CharTableAutoCompleterOptionsPanel extends javax.swing.JPanel {
 
         jPanel9.setLayout(new java.awt.GridLayout(2, 0));
 
-        enabledCheckBox.setText(OStrings.getString("AC_CHARTABLE_ENABLED")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(enabledCheckBox, OStrings.getString("AC_CHARTABLE_ENABLED")); // NOI18N
         jPanel9.add(enabledCheckBox);
 
-        selectedCharsCheckBox.setText(OStrings.getString("AC_CHARTABLE_CUSTOM")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(selectedCharsCheckBox, OStrings.getString("AC_CHARTABLE_CUSTOM")); // NOI18N
         jPanel9.add(selectedCharsCheckBox);
 
         jPanel3.add(jPanel9, java.awt.BorderLayout.NORTH);
@@ -108,7 +108,7 @@ public class CharTableAutoCompleterOptionsPanel extends javax.swing.JPanel {
         jPanel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         jPanel6.setLayout(new java.awt.BorderLayout());
 
-        allCharLabel.setText(OStrings.getString("AC_CHARTABLE_ALL_LABEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(allCharLabel, OStrings.getString("AC_CHARTABLE_ALL_LABEL")); // NOI18N
         jPanel6.add(allCharLabel, java.awt.BorderLayout.NORTH);
 
         allCharTable.setCellSelectionEnabled(true);
@@ -124,7 +124,7 @@ public class CharTableAutoCompleterOptionsPanel extends javax.swing.JPanel {
         jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 5, 5));
         jPanel5.setLayout(new java.awt.BorderLayout());
 
-        selCharLabel.setText(OStrings.getString("AC_CHARTABLE_CUSTOM_LABEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(selCharLabel, OStrings.getString("AC_CHARTABLE_CUSTOM_LABEL")); // NOI18N
         jPanel5.add(selCharLabel, java.awt.BorderLayout.NORTH);
 
         selCharTable.setCellSelectionEnabled(true);
@@ -141,10 +141,10 @@ public class CharTableAutoCompleterOptionsPanel extends javax.swing.JPanel {
         jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 5, 5));
         jPanel4.setLayout(new java.awt.BorderLayout());
 
-        clearButton.setText(OStrings.getString("AC_CHARTABLE_CLEAR_BUTTON")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(clearButton, OStrings.getString("AC_CHARTABLE_CLEAR_BUTTON")); // NOI18N
         jPanel4.add(clearButton, java.awt.BorderLayout.EAST);
 
-        uniqueCheckBox.setText(OStrings.getString("AC_CHARTABLE_CUSTOM_UNIQUE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(uniqueCheckBox, OStrings.getString("AC_CHARTABLE_CUSTOM_UNIQUE")); // NOI18N
         jPanel4.add(uniqueCheckBox, java.awt.BorderLayout.WEST);
 
         customPanel.add(jPanel4, java.awt.BorderLayout.SOUTH);

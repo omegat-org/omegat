@@ -81,7 +81,7 @@ public class LanguageToolConfigurationPanel extends javax.swing.JPanel {
         nativePanel.setLayout(new java.awt.BorderLayout());
 
         buttonGroup1.add(bridgeNativeRadioButton);
-        bridgeNativeRadioButton.setText(OStrings.getString("GUI_LANGUAGETOOL_NATIVE_BRIDGE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(bridgeNativeRadioButton, OStrings.getString("GUI_LANGUAGETOOL_NATIVE_BRIDGE")); // NOI18N
         bridgeNativeRadioButton.setName(""); // NOI18N
         nativePanel.add(bridgeNativeRadioButton, java.awt.BorderLayout.CENTER);
 
@@ -91,14 +91,14 @@ public class LanguageToolConfigurationPanel extends javax.swing.JPanel {
         remotePanel.setLayout(new java.awt.BorderLayout());
 
         buttonGroup1.add(bridgeRemoteRadioButton);
-        bridgeRemoteRadioButton.setText(OStrings.getString("GUI_LANGUAGETOOL_REMOTE_BRIDGE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(bridgeRemoteRadioButton, OStrings.getString("GUI_LANGUAGETOOL_REMOTE_BRIDGE")); // NOI18N
         bridgeRemoteRadioButton.setName(""); // NOI18N
         remotePanel.add(bridgeRemoteRadioButton, java.awt.BorderLayout.NORTH);
 
         urlPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 25, 0, 0));
         urlPanel.setLayout(new java.awt.BorderLayout());
 
-        urlLabel.setText(OStrings.getString("GUI_LANGUAGETOOL_URL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(urlLabel, OStrings.getString("GUI_LANGUAGETOOL_URL")); // NOI18N
         urlPanel.add(urlLabel, java.awt.BorderLayout.NORTH);
 
         urlTextField.setToolTipText("");
@@ -112,13 +112,13 @@ public class LanguageToolConfigurationPanel extends javax.swing.JPanel {
         localPanel.setLayout(new java.awt.BorderLayout());
 
         buttonGroup1.add(bridgeLocalRadioButton);
-        bridgeLocalRadioButton.setText(OStrings.getString("GUI_LANGUAGETOOL_LOCAL_BRIDGE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(bridgeLocalRadioButton, OStrings.getString("GUI_LANGUAGETOOL_LOCAL_BRIDGE")); // NOI18N
         localPanel.add(bridgeLocalRadioButton, java.awt.BorderLayout.NORTH);
 
         directoryPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 25, 0, 0));
         directoryPanel.setLayout(new java.awt.BorderLayout());
 
-        localPathLabel.setText(OStrings.getString("GUI_LANGUAGETOOL_LOCAL_SERVER_PATH")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(localPathLabel, OStrings.getString("GUI_LANGUAGETOOL_LOCAL_SERVER_PATH")); // NOI18N
         directoryPanel.add(localPathLabel, java.awt.BorderLayout.NORTH);
 
         localServerJarPathTextField.setToolTipText("");

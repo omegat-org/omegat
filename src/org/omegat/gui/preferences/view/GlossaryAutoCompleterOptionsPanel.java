@@ -70,7 +70,7 @@ public class GlossaryAutoCompleterOptionsPanel extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
-        enabledCheckBox.setText(OStrings.getString("AC_GLOSSARY_ENABLED")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(enabledCheckBox, OStrings.getString("AC_GLOSSARY_ENABLED")); // NOI18N
         enabledCheckBox.setAlignmentY(0.0F);
         add(enabledCheckBox);
         add(filler1);
@@ -79,7 +79,7 @@ public class GlossaryAutoCompleterOptionsPanel extends javax.swing.JPanel {
         optionsPanel.setAlignmentY(0.0F);
         optionsPanel.setLayout(new javax.swing.BoxLayout(optionsPanel, javax.swing.BoxLayout.PAGE_AXIS));
 
-        displaySourceCheckBox.setText(OStrings.getString("AC_OPTIONS_DISPLAY_SOURCE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(displaySourceCheckBox, OStrings.getString("AC_OPTIONS_DISPLAY_SOURCE")); // NOI18N
         displaySourceCheckBox.setToolTipText(OStrings.getString("AC_OPTIONS_DISPLAY_SOURCE_TOOLTIP")); // NOI18N
         displaySourceCheckBox.setAlignmentY(0.0F);
         optionsPanel.add(displaySourceCheckBox);
@@ -94,19 +94,19 @@ public class GlossaryAutoCompleterOptionsPanel extends javax.swing.JPanel {
         jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
 
         sourceButtonGroup.add(sourceFirstRadioButton);
-        sourceFirstRadioButton.setText(OStrings.getString("AC_OPTIONS_SOURCE_FIRST")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(sourceFirstRadioButton, OStrings.getString("AC_OPTIONS_SOURCE_FIRST")); // NOI18N
         sourceFirstRadioButton.setToolTipText(OStrings.getString("AC_OPTIONS_SOURCE_FIRST")); // NOI18N
         jPanel2.add(sourceFirstRadioButton);
 
         sourceButtonGroup.add(targetFirstRadioButton);
-        targetFirstRadioButton.setText(OStrings.getString("AC_OPTIONS_TARGET_FIRST")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(targetFirstRadioButton, OStrings.getString("AC_OPTIONS_TARGET_FIRST")); // NOI18N
         targetFirstRadioButton.setToolTipText(OStrings.getString("AC_OPTIONS_TARGET_FIRST_TOOLTIP")); // NOI18N
         jPanel2.add(targetFirstRadioButton);
 
         jPanel3.add(jPanel2);
 
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
-        sortBySourceCheckBox.setText(bundle.getString("AC_OPTIONS_SORT_SOURCE_ALPHABETICALLY")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(sortBySourceCheckBox, bundle.getString("AC_OPTIONS_SORT_SOURCE_ALPHABETICALLY")); // NOI18N
         sortBySourceCheckBox.setAlignmentY(0.0F);
         jPanel3.add(sortBySourceCheckBox);
 
@@ -119,11 +119,11 @@ public class GlossaryAutoCompleterOptionsPanel extends javax.swing.JPanel {
         jPanel1.setAlignmentY(0.0F);
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.PAGE_AXIS));
 
-        longerFirstCheckBox.setText(OStrings.getString("AC_OPTIONS_SORT_BY_LENGTH")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(longerFirstCheckBox, OStrings.getString("AC_OPTIONS_SORT_BY_LENGTH")); // NOI18N
         longerFirstCheckBox.setToolTipText(OStrings.getString("AC_OPTIONS_SORT_BY_LENGTH_TOOLTIP")); // NOI18N
         jPanel1.add(longerFirstCheckBox);
 
-        sortEntriesCheckBox.setText(OStrings.getString("AC_OPTIONS_SORT_TARGET_ALPHABETICALLY")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(sortEntriesCheckBox, OStrings.getString("AC_OPTIONS_SORT_TARGET_ALPHABETICALLY")); // NOI18N
         sortEntriesCheckBox.setToolTipText(OStrings.getString("AC_OPTIONS_SORT_ALPHABETICALLY_TOOLTIP")); // NOI18N
         jPanel1.add(sortEntriesCheckBox);
 

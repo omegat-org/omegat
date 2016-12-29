@@ -95,7 +95,7 @@ public class AutotextAutoCompleterOptionsPanel extends javax.swing.JPanel {
         jPanel11.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 5, 0));
         jPanel11.setLayout(new java.awt.BorderLayout());
 
-        enabledCheckBox.setText(OStrings.getString("AC_AUTOTEXT_ENABLED")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(enabledCheckBox, OStrings.getString("AC_AUTOTEXT_ENABLED")); // NOI18N
         jPanel11.add(enabledCheckBox, java.awt.BorderLayout.CENTER);
 
         jPanel6.add(jPanel11);
@@ -105,14 +105,14 @@ public class AutotextAutoCompleterOptionsPanel extends javax.swing.JPanel {
 
         jPanel9.setLayout(new java.awt.GridBagLayout());
 
-        sortByLengthCheckBox.setText(OStrings.getString("AC_AUTOTEXT_SORT_BY_LENGTH")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(sortByLengthCheckBox, OStrings.getString("AC_AUTOTEXT_SORT_BY_LENGTH")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel9.add(sortByLengthCheckBox, gridBagConstraints);
 
-        sortAlphabeticallyCheckBox.setText(OStrings.getString("AC_AUTOTEXT_ALPHABETICALLY")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(sortAlphabeticallyCheckBox, OStrings.getString("AC_AUTOTEXT_ALPHABETICALLY")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
@@ -120,7 +120,7 @@ public class AutotextAutoCompleterOptionsPanel extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel9.add(sortAlphabeticallyCheckBox, gridBagConstraints);
 
-        sortFullTextCheckBox.setText(OStrings.getString("AC_AUTOTEXT_SORT_FULL_TEXT")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(sortFullTextCheckBox, OStrings.getString("AC_AUTOTEXT_SORT_FULL_TEXT")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;

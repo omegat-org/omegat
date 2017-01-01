@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.0
 ----------------------------------------------------------------------
-  8 Enhancements
+  9 Enhancements
   3 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
@@ -23,6 +23,9 @@
 
   - Make MT, TaaS connectors configurable in the GUI
   https://sourceforge.net/p/omegat/feature-requests/1298/
+
+  - Additional parameter for neural net translation on Google translate 
+  https://sourceforge.net/p/omegat/feature-requests/1291/
 
   Other changes:
 

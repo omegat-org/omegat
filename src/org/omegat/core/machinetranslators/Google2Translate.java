@@ -52,7 +52,8 @@ import org.omegat.util.WikiGet;
  * @see <a href="https://cloud.google.com/translate/docs/getting-started">Translation API</a>
  */
 public class Google2Translate extends BaseTranslate {
-    protected static final String PROPERTY_API_KEY = "google.api.key";
+	protected static final String PROPERTY_PREMIUM_KEY = "google.api.premium";
+	protected static final String PROPERTY_API_KEY = "google.api.key";
     protected static final String  GT_URL   = "https://www.googleapis.com/language/translate/v2";
     protected static final Pattern RE_UNICODE = Pattern.compile("\\\\u([0-9A-Fa-f]{4})");
     protected static final Pattern RE_HTML  = Pattern.compile("&#([0-9]+);");
@@ -83,14 +84,18 @@ public class Google2Translate extends BaseTranslate {
         else if ((tLang.getLanguage().compareToIgnoreCase("zh-hk") == 0))
             targetLang = "ZH-TW"; // Google doesn't recognize ZH-HK
 
-        String googleKey = System.getProperty(PROPERTY_API_KEY);
-        
-        if (googleKey == null) {
+        String googleKey = getCredential(PROPERTY_API_KEY);
+
+        if (googleKey == null || googleKey.isEmpty()) {
             return OStrings.getString("GOOGLE_API_KEY_NOTFOUND");
         }
 
+        // Uses the new Neural Machine Translation System - https://research.googleblog.com/2016/09/a-neural-network-for-machine.html
+        boolean isPremium = Boolean.parseBoolean(Preferences.getPreferenceDefault(Preferences.MT_GOOGLE2_PREMIUM, "false"));
+        
         Map<String, String> params = new TreeMap<String, String>();
 
+        params.put("model", isPremium ? "nmt" : "base");
         params.put("key", googleKey);
         params.put("source", sLang.getLanguageCode());
         params.put("target", targetLang);
@@ -157,12 +162,18 @@ public class Google2Translate extends BaseTranslate {
                 String key = panel.valueField1.getText().trim();
                 boolean temporary = panel.temporaryCheckBox.isSelected();
                 setCredential(PROPERTY_API_KEY, key, temporary);
+                
+                boolean isPremium = Boolean.parseBoolean(panel.valueField2.getText().trim());
+                Preferences.setPreference(Preferences.MT_GOOGLE2_PREMIUM, Boolean.toString(isPremium));
             }
         };
+
         dialog.panel.valueLabel1.setText(OStrings.getString("MT_ENGINE_GOOGLE2_API_KEY_LABEL"));
         dialog.panel.valueField1.setText(getCredential(PROPERTY_API_KEY));
-        dialog.panel.valueLabel2.setVisible(false);
-        dialog.panel.valueField2.setVisible(false);
+
+        dialog.panel.valueLabel2.setText(OStrings.getString("MT_ENGINE_GOOGLE2_PREMIUM_LABEL"));
+        dialog.panel.valueField2.setText(Preferences.getPreference(Preferences.MT_GOOGLE2_PREMIUM));
+
         dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(PROPERTY_API_KEY));
         dialog.show();
     }

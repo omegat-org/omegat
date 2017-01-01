@@ -169,6 +169,9 @@ public class Preferences {
 
     public static final String ALLOW_GOOGLE_TRANSLATE = "allow_google_translate";
     public static final String ALLOW_GOOGLE2_TRANSLATE = "allow_google2_translate";
+    
+    /** Uses the new Neural Machine Translation System */
+    public static final String MT_GOOGLE2_PREMIUM = "mt_google2_premium";
 
     public static final String ALLOW_BELAZAR_TRANSLATE = "allow_belazar_translate";
 

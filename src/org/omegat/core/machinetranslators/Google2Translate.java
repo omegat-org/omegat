@@ -83,7 +83,7 @@ public class Google2Translate extends BaseTranslate {
             targetLang = tLang.getLanguage();
         else if ((tLang.getLanguage().compareToIgnoreCase("zh-hk") == 0))
             targetLang = "ZH-TW"; // Google doesn't recognize ZH-HK
-
+        
         String googleKey = getCredential(PROPERTY_API_KEY);
 
         if (googleKey == null || googleKey.isEmpty()) {
@@ -91,7 +91,7 @@ public class Google2Translate extends BaseTranslate {
         }
 
         // Uses the new Neural Machine Translation System - https://research.googleblog.com/2016/09/a-neural-network-for-machine.html
-        boolean isPremium = Boolean.parseBoolean(Preferences.getPreferenceDefault(Preferences.MT_GOOGLE2_PREMIUM, "false"));
+        boolean isPremium = Boolean.parseBoolean(Preferences.getPreferenceDefault(Preferences.MT_GOOGLE2_PREMIUM, System.getProperty(PROPERTY_PREMIUM_KEY, "false")));
         
         Map<String, String> params = new TreeMap<String, String>();
 

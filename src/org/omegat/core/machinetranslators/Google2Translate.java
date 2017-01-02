@@ -35,6 +35,8 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.JCheckBox;
+
 import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
@@ -90,12 +92,9 @@ public class Google2Translate extends BaseTranslate {
             return OStrings.getString("GOOGLE_API_KEY_NOTFOUND");
         }
 
-        // Uses the new Neural Machine Translation System - https://research.googleblog.com/2016/09/a-neural-network-for-machine.html
-        boolean isPremium = Boolean.parseBoolean(Preferences.getPreferenceDefault(Preferences.MT_GOOGLE2_PREMIUM, System.getProperty(PROPERTY_PREMIUM_KEY, "false")));
-        
         Map<String, String> params = new TreeMap<String, String>();
 
-        params.put("model", isPremium ? "nmt" : "base");
+        params.put("model", isPremium() ? "nmt" : "base");
         params.put("key", googleKey);
         params.put("source", sLang.getLanguageCode());
         params.put("target", targetLang);
@@ -149,6 +148,18 @@ public class Google2Translate extends BaseTranslate {
         return tr;
     }
 
+    /**
+     * Whether or not to use the new Neural Machine Translation System
+     * 
+     * @see <a href="https://research.googleblog.com/2016/09/a-neural-network-for-machine.html">A Neural
+     *      Network for Machine Translation, at Production Scale</a>
+     */
+    private boolean isPremium() {
+        String value = System.getProperty(PROPERTY_PREMIUM_KEY,
+                Preferences.getPreference(PROPERTY_PREMIUM_KEY));
+        return Boolean.parseBoolean(value);
+    }
+
     @Override
     public boolean isConfigurable() {
         return true;
@@ -156,6 +167,9 @@ public class Google2Translate extends BaseTranslate {
 
     @Override
     public void showConfigurationUI(Window parent) {
+        JCheckBox premiumCheckBox = new JCheckBox(OStrings.getString("MT_ENGINE_GOOGLE2_PREMIUM_LABEL"));
+        premiumCheckBox.setSelected(isPremium());
+
         MTConfigDialog dialog = new MTConfigDialog(parent, getName()) {
             @Override
             protected void onConfirm() {
@@ -163,18 +177,21 @@ public class Google2Translate extends BaseTranslate {
                 boolean temporary = panel.temporaryCheckBox.isSelected();
                 setCredential(PROPERTY_API_KEY, key, temporary);
                 
-                boolean isPremium = Boolean.parseBoolean(panel.valueField2.getText().trim());
-                Preferences.setPreference(Preferences.MT_GOOGLE2_PREMIUM, Boolean.toString(isPremium));
+                System.setProperty(PROPERTY_PREMIUM_KEY, Boolean.toString(premiumCheckBox.isSelected()));
+                Preferences.setPreference(PROPERTY_PREMIUM_KEY, premiumCheckBox.isSelected());
             }
         };
 
         dialog.panel.valueLabel1.setText(OStrings.getString("MT_ENGINE_GOOGLE2_API_KEY_LABEL"));
         dialog.panel.valueField1.setText(getCredential(PROPERTY_API_KEY));
 
-        dialog.panel.valueLabel2.setText(OStrings.getString("MT_ENGINE_GOOGLE2_PREMIUM_LABEL"));
-        dialog.panel.valueField2.setText(Preferences.getPreference(Preferences.MT_GOOGLE2_PREMIUM));
+        dialog.panel.valueLabel2.setVisible(false);
+        dialog.panel.valueField2.setVisible(false);
 
         dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(PROPERTY_API_KEY));
+
+        dialog.panel.itemsPanel.add(premiumCheckBox);
+
         dialog.show();
     }
 }

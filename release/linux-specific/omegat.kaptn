@@ -122,8 +122,9 @@ services :framed "Online Services" -> gt ms mymem taas yand ;
 
 # Google Translate API key
 
-gt "Google Translate API key" -> @password="" gt_help ;
+gt "Google Translate API key" -> @password="" gt_prem gt_help ;
 
+gt_prem :beside "Enable Premium Service" -> " -Dgoogle.api.premium=true" | @ ;
 gt_help :dialog "Help" -> gt_m gt_hc ;
 gt_m :horizontal ->  gt_t ;
 gt_t "To use Google Translate within OmegaT, you must order \na password from Google and enter it here." -> @ ;

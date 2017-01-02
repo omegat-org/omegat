@@ -50,35 +50,39 @@ public class MTConfigPanel extends JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        descriptionPanel = new javax.swing.JPanel();
         descriptionTextArea = new javax.swing.JTextArea();
+        itemsPanel = new javax.swing.JPanel();
+        credentialsPanel = new javax.swing.JPanel();
         valueLabel1 = new javax.swing.JLabel();
         valueField1 = new javax.swing.JTextField();
         valueLabel2 = new javax.swing.JLabel();
         valueField2 = new javax.swing.JTextField();
         temporaryCheckBox = new javax.swing.JCheckBox();
-        jPanel1 = new javax.swing.JPanel();
+        buttonsPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
-        setLayout(new java.awt.GridBagLayout());
+        setLayout(new java.awt.BorderLayout());
 
         descriptionTextArea.setEditable(false);
         descriptionTextArea.setFont(new JLabel().getFont());
         descriptionTextArea.setLineWrap(true);
         descriptionTextArea.setWrapStyleWord(true);
+        descriptionTextArea.setAlignmentX(0.0F);
         descriptionTextArea.setOpaque(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        add(descriptionTextArea, gridBagConstraints);
+        descriptionPanel.add(descriptionTextArea);
+
+        add(descriptionPanel, java.awt.BorderLayout.NORTH);
+
+        itemsPanel.setLayout(new javax.swing.BoxLayout(itemsPanel, javax.swing.BoxLayout.PAGE_AXIS));
+
+        credentialsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
+        credentialsPanel.setAlignmentX(0.0F);
+        credentialsPanel.setLayout(new java.awt.GridBagLayout());
 
         valueLabel1.setLabelFor(valueField1);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -86,8 +90,8 @@ public class MTConfigPanel extends JPanel {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 16, 4, 4);
-        add(valueLabel1, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 5);
+        credentialsPanel.add(valueLabel1, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -95,8 +99,8 @@ public class MTConfigPanel extends JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        add(valueField1, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        credentialsPanel.add(valueField1, gridBagConstraints);
 
         valueLabel2.setLabelFor(valueField2);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -104,8 +108,8 @@ public class MTConfigPanel extends JPanel {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 16, 4, 4);
-        add(valueLabel2, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 5);
+        credentialsPanel.add(valueLabel2, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -113,17 +117,22 @@ public class MTConfigPanel extends JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        add(valueField2, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        credentialsPanel.add(valueField2, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(temporaryCheckBox, OStrings.getString("PREFS_CREDENTIAL_TEMPORARY_LABEL")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
-        add(temporaryCheckBox, gridBagConstraints);
+        credentialsPanel.add(temporaryCheckBox, gridBagConstraints);
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        itemsPanel.add(credentialsPanel);
+
+        add(itemsPanel, java.awt.BorderLayout.CENTER);
+
+        buttonsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
+        buttonsPanel.setAlignmentX(0.0F);
+        buttonsPanel.setLayout(new java.awt.BorderLayout());
 
         jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -133,27 +142,18 @@ public class MTConfigPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
         jPanel2.add(cancelButton);
 
-        jPanel1.add(jPanel2, java.awt.BorderLayout.EAST);
+        buttonsPanel.add(jPanel2, java.awt.BorderLayout.EAST);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(14, 0, 0, 0);
-        add(jPanel1, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        add(filler1, gridBagConstraints);
+        add(buttonsPanel, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel buttonsPanel;
     public javax.swing.JButton cancelButton;
+    private javax.swing.JPanel credentialsPanel;
+    private javax.swing.JPanel descriptionPanel;
     public javax.swing.JTextArea descriptionTextArea;
-    private javax.swing.Box.Filler filler1;
-    private javax.swing.JPanel jPanel1;
+    public javax.swing.JPanel itemsPanel;
     private javax.swing.JPanel jPanel2;
     public javax.swing.JButton okButton;
     public javax.swing.JCheckBox temporaryCheckBox;

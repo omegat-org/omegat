@@ -2,7 +2,7 @@
  OmegaT 4.1.0
 ----------------------------------------------------------------------
   8 Enhancements
-  3 Bug fixes
+  4 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
 4.1.0 vs 4.0.1
@@ -46,7 +46,10 @@ files are not supported.
   https://sourceforge.net/p/omegat/bugs/842/
 
   - The Doku Wiki filter no longer throws an exception when
-encountering certain malformed header lines.
+encountering certain malformed header lines
+
+  - Changes to segments get lost in team projects randomly and silently 
+  https://sourceforge.net/p/omegat/bugs/836/
 
   Localisation Updates:
 

@@ -32,13 +32,13 @@
         </Constraint>
       </Constraints>
 
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
       <SubComponents>
         <Component class="javax.swing.JTextArea" name="descriptionTextArea">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new JLabel().getFont()" type="code"/>
+              <Connection component="valueLabel1" name="getFont" type="method"/>
             </Property>
             <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="wrapStyleWord" type="boolean" value="true"/>
@@ -48,6 +48,11 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+              <BorderConstraints direction="Center"/>
+            </Constraint>
+          </Constraints>
         </Component>
       </SubComponents>
     </Container>

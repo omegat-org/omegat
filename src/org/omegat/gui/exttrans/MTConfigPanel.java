@@ -68,13 +68,15 @@ public class MTConfigPanel extends JPanel {
         setMinimumSize(new java.awt.Dimension(250, 200));
         setLayout(new java.awt.BorderLayout());
 
+        descriptionPanel.setLayout(new java.awt.BorderLayout());
+
         descriptionTextArea.setEditable(false);
-        descriptionTextArea.setFont(new JLabel().getFont());
+        descriptionTextArea.setFont(valueLabel1.getFont());
         descriptionTextArea.setLineWrap(true);
         descriptionTextArea.setWrapStyleWord(true);
         descriptionTextArea.setAlignmentX(0.0F);
         descriptionTextArea.setOpaque(false);
-        descriptionPanel.add(descriptionTextArea);
+        descriptionPanel.add(descriptionTextArea, java.awt.BorderLayout.CENTER);
 
         add(descriptionPanel, java.awt.BorderLayout.NORTH);
 

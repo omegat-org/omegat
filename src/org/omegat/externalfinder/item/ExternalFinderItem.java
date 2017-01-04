@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2016 Chihiro Hio
+ Copyright (C) 2016 Chihiro Hio, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -30,126 +30,95 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.swing.KeyStroke;
 
+import org.omegat.util.OStrings;
+
+/**
+ * A data class representing an ExternalFinder "item". Immutable. Use
+ * {@link Builder} to construct.
+ * <p>
+ * In the original plugin, the character <code>_</code> in the name was used to
+ * indicate a mnemonic; upon setting the name the mnemonic character was
+ * extracted and the <code>_</code> removed. We now do not modify the name, and
+ * we leave mnemonic setting up to the Mnemonics library so <code>&</code> is
+ * the character to use.
+ */
 public class ExternalFinderItem {
+
+    public static final String PLACEHOLDER_TARGET = "{target}";
 
     public enum TARGET {
 
         // default BOTH for URL and command
-        ASCII_ONLY, NON_ASCII_ONLY, BOTH
+        ASCII_ONLY, NON_ASCII_ONLY, BOTH;
+
+        @Override
+        public String toString() {
+            return OStrings.getString("EXTERNALFINDER_TARGET_" + name());
+        }
     }
 
     public enum ENCODING {
 
         // default DEFAULT for URL
         // default NONE for command
-        DEFAULT, ESCAPE, NONE
-    }
+        DEFAULT, ESCAPE, NONE;
 
-    private static final int UNDEFINED_KEYCODE = -2;
-
-    private String name;
-    private List<ExternalFinderItemURL> URLs;
-    private List<ExternalFinderItemCommand> commands;
-    private KeyStroke keystroke;
-    private boolean nopopup = false;
-    private Boolean asciiOnly = null;
-    private Boolean nonAsciiOnly = null;
-    private int keycode = UNDEFINED_KEYCODE;
-
-    public ExternalFinderItem() {
-        this.URLs = new ArrayList<ExternalFinderItemURL>();
-        this.commands = new ArrayList<ExternalFinderItemCommand>();
-    }
-
-    public ExternalFinderItem(String name, List<ExternalFinderItemURL> URLs, List<ExternalFinderItemCommand> commands, KeyStroke keystroke, boolean nopopup) {
-        int mnemonic = mnemonicPosition(name);
-        if (mnemonic != -1) {
-            this.name = name.substring(0, mnemonic) + name.substring(mnemonic + 1);
-            this.keycode = (int) Character.toUpperCase(name.charAt(mnemonic + 1));
-        } else {
-            this.name = name;
-            this.keycode = -1;
+        @Override
+        public String toString() {
+            return OStrings.getString("EXTERNALFINDER_ENCODING_" + name());
         }
-        this.URLs = URLs;
-        this.commands = commands;
-        this.keystroke = keystroke;
-        this.nopopup = nopopup;
+    }
+
+    private final String name;
+    private final List<ExternalFinderItemURL> urls;
+    private final List<ExternalFinderItemCommand> commands;
+    private final KeyStroke keystroke;
+    private final boolean nopopup;
+
+    private ExternalFinderItem(Builder builder) {
+        this.name = builder.name;
+        this.urls = builder.urls.isEmpty() ? Collections.emptyList() : new ArrayList<>(builder.urls);
+        this.commands = builder.commands.isEmpty() ? Collections.emptyList() : new ArrayList<>(builder.commands);
+        this.keystroke = builder.keystroke;
+        this.nopopup = builder.nopopup;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        int mnemonic = mnemonicPosition(name);
-        if (mnemonic != -1) {
-            this.name = name.substring(0, mnemonic) + name.substring(mnemonic + 1);
-            this.keycode = (int) Character.toUpperCase(name.charAt(mnemonic + 1));
-        } else {
-            this.name = name;
-            this.keycode = -1;
-        }
-    }
-
     public List<ExternalFinderItemURL> getURLs() {
-        return URLs;
-    }
-
-    public void setURLs(List<ExternalFinderItemURL> URLs) {
-        this.asciiOnly = null;
-        this.nonAsciiOnly = null;
-        this.URLs = URLs;
+        return Collections.unmodifiableList(urls);
     }
 
     public List<ExternalFinderItemCommand> getCommands() {
-        return commands;
-    }
-
-    public void setCommands(List<ExternalFinderItemCommand> commands) {
-        this.asciiOnly = null;
-        this.nonAsciiOnly = null;
-        this.commands = commands;
+        return Collections.unmodifiableList(commands);
     }
 
     public KeyStroke getKeystroke() {
         return keystroke;
     }
 
-    public void setKeystroke(KeyStroke keystroke) {
-        this.keystroke = keystroke;
-    }
-
     public boolean isNopopup() {
         return nopopup;
     }
 
-    public void setNopopup(boolean nopopup) {
-        this.nopopup = nopopup;
-    }
-
     public boolean isAsciiOnly() {
-        if (asciiOnly == null) {
-            asciiOnly = isTargetOnly(TARGET.ASCII_ONLY);
-        }
-
-        return asciiOnly;
+        return isTargetOnly(TARGET.ASCII_ONLY);
     }
 
     public boolean isNonAsciiOnly() {
-        if (nonAsciiOnly == null) {
-            nonAsciiOnly = isTargetOnly(TARGET.NON_ASCII_ONLY);
-        }
-
-        return nonAsciiOnly;
+        return isTargetOnly(TARGET.NON_ASCII_ONLY);
     }
 
     private boolean isTargetOnly(final TARGET target) {
-        for (ExternalFinderItemURL url : URLs) {
+        for (ExternalFinderItemURL url : urls) {
             if (url.getTarget() != target) {
                 return false;
             }
@@ -162,38 +131,6 @@ public class ExternalFinderItem {
         }
 
         return true;
-    }
-
-    public int getKeycode() {
-        return keycode;
-    }
-
-    private static int mnemonicPosition(String name) {
-        int ret = name.indexOf("_");
-        if (ret != -1 && (ret + 1) != name.length()) {
-            char ch = name.charAt(ret + 1);
-            if (ch == ' ') {
-                ret = -1;
-            }
-        } else {
-            ret = -1;
-        }
-
-        return ret;
-    }
-
-    public ExternalFinderItem replaceRefs(final ExternalFinderItem item) {
-        this.name = item.name;
-        this.URLs = item.URLs;
-        this.commands = item.commands;
-        this.keystroke = item.keystroke;
-        this.nopopup = item.nopopup;
-        this.keycode = item.keycode;
-
-        this.asciiOnly = null; // item.isAsciiOnly();
-        this.nonAsciiOnly = null; // item.isNonAsciiOnly();
-
-        return this;
     }
 
     public static final boolean isASCII(String s) {
@@ -217,7 +154,7 @@ public class ExternalFinderItem {
             }
         }
 
-        String replaced = url.getURL().replace("{target}", encodedWords);
+        String replaced = url.getURL().replace(PLACEHOLDER_TARGET, encodedWords);
         return new URI(replaced);
     }
 
@@ -235,31 +172,179 @@ public class ExternalFinderItem {
         String[] ret = command.getCommand().split(Pattern.quote(command.getDelimiter()));
         for (int i = 0; i < ret.length; i++) {
             String s = ret[i];
-            ret[i] = s.replace("{target}", encodedWords);
+            ret[i] = s.replace(PLACEHOLDER_TARGET, encodedWords);
         }
 
         return ret;
     }
 
+    public Object getContentSummary() {
+        StringBuilder sb = new StringBuilder();
+        if (!getURLs().isEmpty()) {
+            String urls = OStrings.getString("EXTERNALFINDER_CONTENT_TEMPLATE",
+                    OStrings.getString("EXTERNALFINDER_CONTENT_URLS"), getURLs().size());
+            sb.append(urls);
+        }
+        if (!getCommands().isEmpty()) {
+            if (sb.length() > 0) {
+                sb.append(OStrings.getString("EXTERNALFINDER_CONTENT_DELIMITER"));
+            }
+            String commands = OStrings.getString("EXTERNALFINDER_CONTENT_TEMPLATE",
+                    OStrings.getString("EXTERNALFINDER_CONTENT_COMMANDS"), getCommands().size());
+            sb.append(commands);
+        }
+        return sb.toString();
+    }
+
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 73 * hash + (this.name != null ? this.name.hashCode() : 0);
-        return hash;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((urls == null) ? 0 : urls.hashCode());
+        result = prime * result + ((commands == null) ? 0 : commands.hashCode());
+        result = prime * result + ((keystroke == null) ? 0 : keystroke.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + (nopopup ? 1231 : 1237);
+        return result;
     }
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ExternalFinderItem other = (ExternalFinderItem) obj;
-        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+        ExternalFinderItem other = (ExternalFinderItem) obj;
+        if (urls == null) {
+            if (other.urls != null) {
+                return false;
+            }
+        } else if (!urls.equals(other.urls)) {
+            return false;
+        }
+        if (commands == null) {
+            if (other.commands != null) {
+                return false;
+            }
+        } else if (!commands.equals(other.commands)) {
+            return false;
+        }
+        if (keystroke == null) {
+            if (other.keystroke != null) {
+                return false;
+            }
+        } else if (!keystroke.equals(other.keystroke)) {
+            return false;
+        }
+        if (name == null) {
+            if (other.name != null) {
+                return false;
+            }
+        } else if (!name.equals(other.name)) {
+            return false;
+        }
+        if (nopopup != other.nopopup) {
             return false;
         }
         return true;
+    }
+
+    public static class Builder {
+        private String name;
+        private List<ExternalFinderItemURL> urls = new ArrayList<>();
+        private List<ExternalFinderItemCommand> commands = new ArrayList<>();
+        private KeyStroke keystroke;
+        private boolean nopopup = false;
+
+        public static Builder from(ExternalFinderItem item) {
+            return new Builder().setName(item.getName()).setURLs(item.getURLs())
+                    .setCommands(item.getCommands()).setKeyStroke(item.getKeystroke())
+                    .setNopopup(item.isNopopup());
+        }
+
+        /**
+         * Optionally prepend <code>&</code> to a character to set a mnemonic
+         * for use in menus.
+         */
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public Builder addURL(ExternalFinderItemURL url) {
+            urls.add(url);
+            return this;
+        }
+
+        public Builder setURLs(List<ExternalFinderItemURL> urls) {
+            this.urls.clear();
+            this.urls.addAll(urls);
+            return this;
+        }
+
+        public List<ExternalFinderItemURL> getURLs() {
+            return urls;
+        }
+
+        public Builder addCommand(ExternalFinderItemCommand command) {
+            commands.add(command);
+            return this;
+        }
+
+        public Builder setCommands(List<ExternalFinderItemCommand> commands) {
+            this.commands.clear();
+            this.commands.addAll(commands);
+            return this;
+        }
+
+        public List<ExternalFinderItemCommand> getCommands() {
+            return commands;
+        }
+
+        public Builder setKeyStroke(KeyStroke keystroke) {
+            this.keystroke = keystroke;
+            return this;
+        }
+
+        public KeyStroke getKeyStroke() {
+            return keystroke;
+        }
+
+        public Builder setNopopup(boolean nopopup) {
+            this.nopopup = nopopup;
+            return this;
+        }
+
+        public boolean isNopopup() {
+            return nopopup;
+        }
+
+        public ExternalFinderItem build() throws IllegalStateException {
+            validate();
+            return new ExternalFinderItem(this);
+        }
+
+        public void validate() throws IllegalStateException {
+            String className = ExternalFinderItem.class.getSimpleName();
+            if (name != null && name.isEmpty()) {
+                throw new IllegalStateException(className + " name is missing or empty");
+            }
+            boolean hasUrls = urls != null && !urls.isEmpty();
+            boolean hasCommands = commands != null && !commands.isEmpty();
+            if (!hasUrls && !hasCommands) {
+                throw new IllegalStateException(
+                        String.format("%s has neither URLs nor commands. Name: %s", className, name));
+            }
+        }
     }
 }

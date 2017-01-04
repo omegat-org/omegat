@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2016 Chihiro Hio
+ Copyright (C) 2016 Chihiro Hio, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -27,8 +27,15 @@ package org.omegat.externalfinder;
 
 import java.awt.Component;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JMenu;
 
@@ -38,34 +45,49 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.externalfinder.item.ExternalFinderConfiguration;
 import org.omegat.externalfinder.item.ExternalFinderItem;
 import org.omegat.externalfinder.item.ExternalFinderItemMenuGenerator;
 import org.omegat.externalfinder.item.ExternalFinderItemPopupMenuConstructor;
-import org.omegat.externalfinder.item.ExternalFinderXMLItemLoader;
+import org.omegat.externalfinder.item.ExternalFinderXMLLoader;
+import org.omegat.externalfinder.item.ExternalFinderXMLWriter;
 import org.omegat.externalfinder.item.IExternalFinderItemLoader;
 import org.omegat.externalfinder.item.IExternalFinderItemMenuGenerator;
 import org.omegat.util.StaticUtils;
 
+/**
+ * Entry point for ExternalFinder functionality.
+ * <p>
+ * ExternalFinder was originally a plugin developed by Chihiro Hio, and
+ * generously donated for inclusion in OmegaT itself.
+ * <p>
+ * See {@link #getProjectFile(IProject)} and {@link ExternalFinderItem} for
+ * details about how this implementation's behavior differs from the original
+ * plugin.
+ * <p>
+ * See the plugin page or <code>package.html</code> for information about the
+ * XML format.
+ * 
+ * @see <a href=
+ *      "https://github.com/hiohiohio/omegat-plugin-externalfinder">omegat-plugin-externalfinder
+ *      on GitHub</a>
+ */
 public class ExternalFinder {
 
     public static final String FINDER_FILE = "finder.xml";
 
-    // the default value means the items may be placed at the top of popup menu.
-    private static final int DEFAULT_POPUP_PRIORITY = 50;
+    private static Logger LOGGER = Logger.getLogger(ExternalFinder.class.getName());
 
     /**
      * OmegaT will call this method when loading.
      */
     public static void loadPlugins() {
-        // shared list of items loaded when a project is opened and cleared when a project is closed.
-        final List<ExternalFinderItem> finderItems = new ArrayList<ExternalFinderItem>();
-
         // register listeners
-        CoreEvents.registerApplicationEventListener(ExternalFinder.generateIApplicationEventListener(finderItems));
-        CoreEvents.registerProjectChangeListener(ExternalFinder.generateIProjectEventListener(finderItems));
+        CoreEvents.registerApplicationEventListener(generateIApplicationEventListener());
+        CoreEvents.registerProjectChangeListener(generateIProjectEventListener());
     }
 
-    private static IProjectEventListener generateIProjectEventListener(final List<ExternalFinderItem> finderItems) {
+    private static IProjectEventListener generateIProjectEventListener() {
         return new IProjectEventListener() {
             private final List<Component> menuItems = new ArrayList<Component>();
 
@@ -86,51 +108,10 @@ public class ExternalFinder {
             private void onLoad() {
                 // clear old items
                 menuItems.clear();
-                synchronized (finderItems) {
-                    finderItems.clear();
-                }
-
-                // load user's xml file
-                // Even though the file is independent from projects, it is
-                // loaded when a project is loaded for providing a chance to reload it.
-                final String configDir = StaticUtils.getConfigDir();
-                final File userFile = new File(configDir, FINDER_FILE);
-                if (userFile.canRead()) {
-                    final IExternalFinderItemLoader userItemLoader = new ExternalFinderXMLItemLoader(userFile);
-                    final List<ExternalFinderItem> loadedUserItems = userItemLoader.load();
-
-                    synchronized (finderItems) {
-                        finderItems.addAll(loadedUserItems);
-                    }
-                }
-
-                // load project's xml file
-                final IProject currentProject = Core.getProject();
-                final ProjectProperties projectProperties = currentProject.getProjectProperties();
-                final String projectRoot = projectProperties.getProjectRoot();
-                final File projectFile = new File(projectRoot, FINDER_FILE);
-                if (projectFile.canRead()) {
-                    final IExternalFinderItemLoader projectItemLoader = new ExternalFinderXMLItemLoader(projectFile);
-                    final List<ExternalFinderItem> loadedProjectItems = projectItemLoader.load();
-
-                    synchronized (finderItems) {
-                        // replace duplicated items based on name
-                        for (ExternalFinderItem item : finderItems) {
-                            if (loadedProjectItems.contains(item)) {
-                                final int index = loadedProjectItems.indexOf(item);
-                                final ExternalFinderItem newItem = loadedProjectItems.get(index);
-                                item.replaceRefs(newItem);
-                                loadedProjectItems.remove(index);
-                            }
-                        }
-
-                        finderItems.addAll(loadedProjectItems);
-                    }
-                }
 
                 // add finder items to menuItems
                 final IExternalFinderItemMenuGenerator generator
-                        = new ExternalFinderItemMenuGenerator(finderItems, ExternalFinderItem.TARGET.BOTH, false);
+                        = new ExternalFinderItemMenuGenerator(ExternalFinderItem.TARGET.BOTH, false);
                 final List<Component> newMenuItems = generator.generate();
                 menuItems.addAll(newMenuItems);
 
@@ -144,34 +125,21 @@ public class ExternalFinder {
             private void onClose() {
                 // remove menu items
                 final JMenu menu = Core.getMainWindow().getMainMenu().getToolsMenu();
-                for (int i = 0, n = menuItems.size(); i < n; i++) {
-                    menu.remove(menuItems.get(i));
-                }
+                menuItems.forEach(menu::remove);
                 menuItems.clear();
 
-                synchronized (finderItems) {
-                    finderItems.clear();
-                }
+                PROJECT_CONFIG = null;
             }
         };
     }
 
-    private static IApplicationEventListener generateIApplicationEventListener(final List<ExternalFinderItem> finderItems) {
+    private static IApplicationEventListener generateIApplicationEventListener() {
         return new IApplicationEventListener() {
 
             @Override
             public void onApplicationStartup() {
-                int priority = DEFAULT_POPUP_PRIORITY;
-
-                // load user's xml file for priority of popup items
-                final String configDir = StaticUtils.getConfigDir();
-                final File userFile = new File(configDir, FINDER_FILE);
-                if (userFile.canRead()) {
-                    final IExternalFinderItemLoader userItemLoader = new ExternalFinderXMLItemLoader(userFile);
-                    priority = userItemLoader.loadPopupPriority(priority);
-                }
-
-                Core.getEditor().registerPopupMenuConstructors(priority, new ExternalFinderItemPopupMenuConstructor(finderItems));
+                Core.getEditor().registerPopupMenuConstructors(getGlobalConfig().getPriority(),
+                        new ExternalFinderItemPopupMenuConstructor());
             }
 
             @Override
@@ -181,5 +149,143 @@ public class ExternalFinder {
     }
 
     public static void unloadPlugins() {
+    }
+
+    private static ExternalFinderConfiguration GLOBAL_CONFIG;
+
+    /**
+     * Get the global configuration. This is stored in the user's OmegaT
+     * configuration directory. If the file does not exist, an empty
+     * configuration will be created and returned.
+     * 
+     * @return The configuration (will never be null)
+     */
+    public static ExternalFinderConfiguration getGlobalConfig() {
+        if (GLOBAL_CONFIG == null) {
+            try {
+                File globalFile = getGlobalConfigFile();
+                IExternalFinderItemLoader userItemLoader = new ExternalFinderXMLLoader(globalFile);
+                GLOBAL_CONFIG = userItemLoader.load();
+            } catch (FileNotFoundException e) {
+                // Ignore
+            } catch (Exception e) {
+                LOGGER.log(Level.SEVERE, e.getMessage(), e);
+            }
+            if (GLOBAL_CONFIG == null) {
+                GLOBAL_CONFIG = ExternalFinderConfiguration.empty();
+            }
+        }
+        return GLOBAL_CONFIG;
+    }
+
+    /**
+     * Set the global configuration. Any existing configuration file will be
+     * overwritten with the new one. Pass null to delete the config file.
+     */
+    public static void setGlobalConfig(ExternalFinderConfiguration newConfig) {
+        ExternalFinderConfiguration oldConfig = GLOBAL_CONFIG;
+        GLOBAL_CONFIG = newConfig;
+        if (!Objects.equals(newConfig, oldConfig)) {
+            writeConfig(newConfig, getGlobalConfigFile());
+        }
+    }
+
+    private static File getGlobalConfigFile() {
+        String configDir = StaticUtils.getConfigDir();
+        return new File(configDir, FINDER_FILE);
+    }
+
+    private static ExternalFinderConfiguration PROJECT_CONFIG;
+
+    /**
+     * Get the project-specific configuration.
+     * 
+     * @return The configuration, or null if no project is loaded or the project
+     *         has no config file
+     */
+    public static ExternalFinderConfiguration getProjectConfig() {
+        IProject currentProject = Core.getProject();
+        if (!currentProject.isProjectLoaded()) {
+            return null;
+        }
+        if (PROJECT_CONFIG == null) {
+            // load project's xml file
+            File projectFile = getProjectFile(currentProject);
+            IExternalFinderItemLoader projectItemLoader = new ExternalFinderXMLLoader(projectFile);
+            try {
+                PROJECT_CONFIG = projectItemLoader.load();
+            } catch (FileNotFoundException e) {
+                // Ignore
+            } catch (Exception e) {
+                LOGGER.log(Level.SEVERE, e.getMessage(), e);
+            }
+        }
+        return PROJECT_CONFIG;
+    }
+
+    /**
+     * Set the project-specific configuration. Has no effect if no project is
+     * loaded. Any existing configuration file will be overwritten with the new
+     * one. Pass null to delete the config file.
+     */
+    public static void setProjectConfig(ExternalFinderConfiguration newConfig) {
+        IProject currentProject = Core.getProject();
+        if (!currentProject.isProjectLoaded()) {
+            return;
+        }
+        ExternalFinderConfiguration oldConfig = PROJECT_CONFIG;
+        PROJECT_CONFIG = newConfig;
+        if (!Objects.equals(newConfig, oldConfig)) {
+            File projectFile = getProjectFile(currentProject);
+            writeConfig(newConfig, projectFile);
+        }
+    }
+
+    private static void writeConfig(ExternalFinderConfiguration config, File toFile) {
+        if (config == null) {
+            boolean deleted = toFile.delete();
+            if (!deleted) {
+                LOGGER.log(Level.SEVERE, "Unable to delete ExternalFinder config file: {0}", toFile);
+            }
+        } else {
+            try {
+                File tmpFile = File.createTempFile("omt", "externalfinder");
+                ExternalFinderXMLWriter writer = new ExternalFinderXMLWriter(tmpFile);
+                writer.write(config);
+                Files.move(tmpFile.toPath(), toFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            } catch (Exception e) {
+                LOGGER.log(Level.SEVERE, e.getMessage(), e);
+            }
+        }
+    }
+
+    /**
+     * Get the project-specific config file. In the original plugin this was
+     * stored in the project root ({@link ProjectProperties#getProjectRoot()});
+     * now it's in the <code>omegat</code> directory for consistency with other
+     * project-specific config files.
+     */
+    private static File getProjectFile(IProject project) {
+        ProjectProperties projectProperties = project.getProjectProperties();
+        File projectRoot = projectProperties.getProjectInternalDir();
+        return new File(projectRoot, FINDER_FILE);
+    }
+
+    public static List<ExternalFinderItem> getItems() {
+        // replace duplicated items based on name
+        List<ExternalFinderItem> result = new ArrayList<>(getGlobalConfig().getItems());
+        ExternalFinderConfiguration projectConfig = getProjectConfig();
+        if (projectConfig != null) {
+            projectConfig.getItems().forEach(item -> replaceByName(result, item));
+        }
+        return Collections.unmodifiableList(result);
+    }
+
+    static void replaceByName(List<ExternalFinderItem> items, ExternalFinderItem item) {
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getName().equals(item)) {
+                items.set(i, item);
+            }
+        }
     }
 }

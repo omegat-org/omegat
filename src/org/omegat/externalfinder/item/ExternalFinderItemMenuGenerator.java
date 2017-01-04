@@ -41,15 +41,15 @@ import javax.swing.JPopupMenu;
 import javax.swing.JToolBar;
 
 import org.omegat.core.Core;
+import org.omegat.externalfinder.ExternalFinder;
+import org.openide.awt.Mnemonics;
 
 public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuGenerator {
 
-    private final List<ExternalFinderItem> finderItems;
     private final ExternalFinderItem.TARGET target;
     private final boolean popup;
 
-    public ExternalFinderItemMenuGenerator(List<ExternalFinderItem> finderItems, ExternalFinderItem.TARGET target, boolean popup) {
-        this.finderItems = finderItems;
+    public ExternalFinderItemMenuGenerator(ExternalFinderItem.TARGET target, boolean popup) {
         this.target = target;
         this.popup = popup;
     }
@@ -57,45 +57,43 @@ public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuG
     @Override
     public List<Component> generate() {
         List<Component> menuItems = new ArrayList<Component>();
-        synchronized (finderItems) {
-            if (finderItems.isEmpty()) {
-                return menuItems;
+        List<ExternalFinderItem> finderItems = ExternalFinder.getItems();
+        if (finderItems.isEmpty()) {
+            return menuItems;
+        }
+
+        // generate menu
+        if (popup) {
+            menuItems.add(new JPopupMenu.Separator());
+        } else {
+            menuItems.add(new JToolBar.Separator());
+        }
+        for (int i = 0, n = finderItems.size(); i < n; i++) {
+            ExternalFinderItem finderItem = finderItems.get(i);
+            if (popup && finderItem.isNopopup()) {
+                continue;
+            }
+            if (target == ExternalFinderItem.TARGET.ASCII_ONLY
+                    && finderItem.isNonAsciiOnly()) {
+                continue;
+            } else if (target == ExternalFinderItem.TARGET.NON_ASCII_ONLY
+                    && finderItem.isAsciiOnly()) {
+                continue;
             }
 
-            // generate menu
-            if (popup) {
-                menuItems.add(new JPopupMenu.Separator());
-            } else {
-                menuItems.add(new JToolBar.Separator());
-            }
-            for (int i = 0, n = finderItems.size(); i < n; i++) {
-                ExternalFinderItem finderItem = finderItems.get(i);
-                if (popup && finderItem.isNopopup()) {
-                    continue;
-                }
-                if (target == ExternalFinderItem.TARGET.ASCII_ONLY
-                        && finderItem.isNonAsciiOnly()) {
-                    continue;
-                } else if (target == ExternalFinderItem.TARGET.NON_ASCII_ONLY
-                        && finderItem.isAsciiOnly()) {
-                    continue;
-                }
+            JMenuItem item = new JMenuItem();
+            Mnemonics.setLocalizedText(item, finderItem.getName());
 
-                JMenuItem item = new JMenuItem(finderItem.getName());
-                // adding mnemonic
-                item.setMnemonic(finderItem.getKeycode());
-
-                // set keyboard shortcut
-                if (!popup) {
-                    item.setAccelerator(finderItem.getKeystroke());
-                }
-                item.addActionListener(new ExternalFinderItemActionListener(finderItem));
-
-                menuItems.add(item);
+            // set keyboard shortcut
+            if (!popup) {
+                item.setAccelerator(finderItem.getKeystroke());
             }
-            if (popup) {
-                menuItems.add(new JPopupMenu.Separator());
-            }
+            item.addActionListener(new ExternalFinderItemActionListener(finderItem));
+
+            menuItems.add(item);
+        }
+        if (popup) {
+            menuItems.add(new JPopupMenu.Separator());
         }
         return menuItems;
     }

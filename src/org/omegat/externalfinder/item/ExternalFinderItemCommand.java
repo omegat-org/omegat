@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2016 Chihiro Hio
+ Copyright (C) 2016 Chihiro Hio, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,15 +25,16 @@
 
 package org.omegat.externalfinder.item;
 
+/**
+ * A data class representing an ExternalFinder "command". Immutable. Optionally
+ * use {@link Builder} to construct.
+ */
 public class ExternalFinderItemCommand {
 
-    private String command;
-    private ExternalFinderItem.TARGET target;
-    private ExternalFinderItem.ENCODING encoding;
-    private String delimiter;
-
-    public ExternalFinderItemCommand() {
-    }
+    private final String command;
+    private final ExternalFinderItem.TARGET target;
+    private final ExternalFinderItem.ENCODING encoding;
+    private final String delimiter;
 
     public ExternalFinderItemCommand(String command, ExternalFinderItem.TARGET target, ExternalFinderItem.ENCODING encoding, String delimiter) {
         this.command = command;
@@ -46,31 +47,132 @@ public class ExternalFinderItemCommand {
         return command;
     }
 
-    public void setCommand(String command) {
-        this.command = command;
-    }
-
     public ExternalFinderItem.TARGET getTarget() {
         return target;
-    }
-
-    public void setTarget(ExternalFinderItem.TARGET target) {
-        this.target = target;
     }
 
     public ExternalFinderItem.ENCODING getEncoding() {
         return encoding;
     }
 
-    public void setEncoding(ExternalFinderItem.ENCODING encoding) {
-        this.encoding = encoding;
-    }
-
     public String getDelimiter() {
         return delimiter;
     }
 
-    public void setDelimiter(String delimiter) {
-        this.delimiter = delimiter;
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((command == null) ? 0 : command.hashCode());
+        result = prime * result + ((delimiter == null) ? 0 : delimiter.hashCode());
+        result = prime * result + ((encoding == null) ? 0 : encoding.hashCode());
+        result = prime * result + ((target == null) ? 0 : target.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        ExternalFinderItemCommand other = (ExternalFinderItemCommand) obj;
+        if (command == null) {
+            if (other.command != null) {
+                return false;
+            }
+        } else if (!command.equals(other.command)) {
+            return false;
+        }
+        if (delimiter == null) {
+            if (other.delimiter != null) {
+                return false;
+            }
+        } else if (!delimiter.equals(other.delimiter)) {
+            return false;
+        }
+        if (encoding != other.encoding) {
+            return false;
+        }
+        if (target != other.target) {
+            return false;
+        }
+        return true;
+    }
+
+    public static class Builder {
+        private String command;
+        private ExternalFinderItem.TARGET target = ExternalFinderItem.TARGET.BOTH;
+        private ExternalFinderItem.ENCODING encoding = ExternalFinderItem.ENCODING.NONE;
+        private String delimiter = "|";
+
+        public static Builder from(ExternalFinderItemCommand item) {
+            return new Builder().setCommand(item.getCommand()).setTarget(item.getTarget())
+                    .setEncoding(item.getEncoding()).setDelimiter(item.getDelimiter());
+        }
+
+        public Builder setCommand(String command) {
+            this.command = command;
+            return this;
+        }
+
+        public String getCommand() {
+            return command;
+        }
+
+        public Builder setTarget(ExternalFinderItem.TARGET target) {
+            this.target = target;
+            return this;
+        }
+
+        public ExternalFinderItem.TARGET getTarget() {
+            return target;
+        }
+
+        public Builder setEncoding(ExternalFinderItem.ENCODING encoding) {
+            this.encoding = encoding;
+            return this;
+        }
+
+        public ExternalFinderItem.ENCODING getEncoding() {
+            return encoding;
+        }
+
+        public Builder setDelimiter(String delimiter) {
+            this.delimiter = delimiter;
+            return this;
+        }
+
+        public String getDelimiter() {
+            return delimiter;
+        }
+
+        public ExternalFinderItemCommand build() throws IllegalStateException {
+            validate();
+            return new ExternalFinderItemCommand(command, target, encoding, delimiter);
+        }
+
+        public void validate() throws IllegalStateException {
+            String className = ExternalFinderItemCommand.class.getSimpleName();
+            if (command == null || !command.contains(ExternalFinderItem.PLACEHOLDER_TARGET)) {
+                throw new IllegalStateException(String.format("%s command is missing or does not contain %s", className,
+                        ExternalFinderItem.PLACEHOLDER_TARGET));
+            }
+            if (target == null) {
+                throw new IllegalStateException(className + " target is missing");
+            }
+            if (encoding == null) {
+                throw new IllegalStateException(className + " encoding is missing");
+            }
+            if (delimiter == null || delimiter.isEmpty()) {
+                throw new IllegalStateException(className + " delimiter is missing or empty");
+            }
+        }
     }
 }

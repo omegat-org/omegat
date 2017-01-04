@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2016 Chihiro Hio
+ Copyright (C) 2016 Chihiro Hio, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,42 +25,127 @@
 
 package org.omegat.externalfinder.item;
 
+/**
+ * A data class representing an ExternalFinder "url". Immutable. Optionally use
+ * {@link Builder} to construct.
+ */
 public class ExternalFinderItemURL {
 
-    private String URL;
-    private ExternalFinderItem.TARGET target;
-    private ExternalFinderItem.ENCODING encoding;
+    private final String url;
+    private final ExternalFinderItem.TARGET target;
+    private final ExternalFinderItem.ENCODING encoding;
 
-    public ExternalFinderItemURL() {
-    }
-
-    public ExternalFinderItemURL(String URL, ExternalFinderItem.TARGET target, ExternalFinderItem.ENCODING encoding) {
-        this.URL = URL;
+    public ExternalFinderItemURL(String url, ExternalFinderItem.TARGET target,
+            ExternalFinderItem.ENCODING encoding) {
+        this.url = url;
         this.target = target;
         this.encoding = encoding;
     }
 
     public String getURL() {
-        return URL;
-    }
-
-    public void setURL(String URL) {
-        this.URL = URL;
+        return url;
     }
 
     public ExternalFinderItem.TARGET getTarget() {
         return target;
     }
 
-    public void setTarget(ExternalFinderItem.TARGET target) {
-        this.target = target;
-    }
-
     public ExternalFinderItem.ENCODING getEncoding() {
         return encoding;
     }
 
-    public void setEncoding(ExternalFinderItem.ENCODING encoding) {
-        this.encoding = encoding;
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((encoding == null) ? 0 : encoding.hashCode());
+        result = prime * result + ((target == null) ? 0 : target.hashCode());
+        result = prime * result + ((url == null) ? 0 : url.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        ExternalFinderItemURL other = (ExternalFinderItemURL) obj;
+        if (encoding != other.encoding) {
+            return false;
+        }
+        if (target != other.target) {
+            return false;
+        }
+        if (url == null) {
+            if (other.url != null) {
+                return false;
+            }
+        } else if (!url.equals(other.url)) {
+            return false;
+        }
+        return true;
+    }
+
+    public static class Builder {
+        private String url;
+        private ExternalFinderItem.TARGET target = ExternalFinderItem.TARGET.BOTH;
+        private ExternalFinderItem.ENCODING encoding = ExternalFinderItem.ENCODING.DEFAULT;
+
+        public static Builder from(ExternalFinderItemURL item) {
+            return new Builder().setURL(item.getURL()).setTarget(item.getTarget())
+                    .setEncoding(item.getEncoding());
+        }
+
+        public Builder setURL(String url) {
+            this.url = url;
+            return this;
+        }
+
+        public String getURL() {
+            return url;
+        }
+
+        public Builder setTarget(ExternalFinderItem.TARGET target) {
+            this.target = target;
+            return this;
+        }
+
+        public ExternalFinderItem.TARGET getTarget() {
+            return target;
+        }
+
+        public Builder setEncoding(ExternalFinderItem.ENCODING encoding) {
+            this.encoding = encoding;
+            return this;
+        }
+
+        public ExternalFinderItem.ENCODING getEncoding() {
+            return encoding;
+        }
+
+        public ExternalFinderItemURL build() throws IllegalStateException {
+            validate();
+            return new ExternalFinderItemURL(url, target, encoding);
+        }
+
+        public void validate() throws IllegalStateException {
+            String className = ExternalFinderItemURL.class.getSimpleName();
+            if (url == null || !url.contains(ExternalFinderItem.PLACEHOLDER_TARGET)) {
+                throw new IllegalStateException(String.format("%s URL is missing or does not contain %s", className,
+                        ExternalFinderItem.PLACEHOLDER_TARGET));
+            }
+            if (target == null) {
+                throw new IllegalStateException(className + " target is missing");
+            }
+            if (encoding == null) {
+                throw new IllegalStateException(className + " encoding is missing");
+            }
+        }
     }
 }

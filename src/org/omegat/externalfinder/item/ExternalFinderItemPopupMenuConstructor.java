@@ -37,12 +37,6 @@ import org.omegat.gui.editor.SegmentBuilder;
 
 public class ExternalFinderItemPopupMenuConstructor implements IPopupMenuConstructor {
 
-    private final List<ExternalFinderItem> finderItems;
-
-    public ExternalFinderItemPopupMenuConstructor(List<ExternalFinderItem> finderItems) {
-        this.finderItems = finderItems;
-    }
-
     public void addItems(JPopupMenu menu, JTextComponent comp, int mousepos,
             boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
         final String selection = Core.getEditor().getSelectedText();
@@ -57,7 +51,7 @@ public class ExternalFinderItemPopupMenuConstructor implements IPopupMenuConstru
             target = ExternalFinderItem.TARGET.NON_ASCII_ONLY;
         }
 
-        IExternalFinderItemMenuGenerator generator = new ExternalFinderItemMenuGenerator(finderItems, target, true);
+        IExternalFinderItemMenuGenerator generator = new ExternalFinderItemMenuGenerator(target, true);
         final List<Component> newMenuItems = generator.generate();
 
         for (Component component : newMenuItems) {

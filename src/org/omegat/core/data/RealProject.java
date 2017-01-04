@@ -823,13 +823,9 @@ public class RealProject implements IProject {
                         }
                         LOGGER.fine("Commit team sync");
                         try {
-                            String newVersion = RebaseAndCommit.commitPrepared(tmxPrepared, remoteRepositoryProvider);
+                            String newVersion = RebaseAndCommit.commitPrepared(tmxPrepared, remoteRepositoryProvider, null);
                             if (glossaryPrepared != null) {
-                                if (newVersion != null) {
-                                    // hack for git: version of full repository was changed
-                                    glossaryPrepared.versionHead = newVersion;
-                                }
-                                RebaseAndCommit.commitPrepared(glossaryPrepared, remoteRepositoryProvider);
+                                RebaseAndCommit.commitPrepared(glossaryPrepared, remoteRepositoryProvider, newVersion);
                             }
 
                             tmxPrepared = null;

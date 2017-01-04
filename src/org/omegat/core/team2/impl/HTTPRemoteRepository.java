@@ -126,7 +126,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
     }
 
     @Override
-    public String commit(String version, String comment) throws Exception {
+    public String commit(String[] onVersions, String comment) throws Exception {
         throw new RuntimeException("Not supported");
     }
 

@@ -71,16 +71,16 @@ public interface IRemoteRepository2 {
      * 
      * @param path
      *            path for commit
-     * @param version
-     *            if version defined, then commit must be just after this version. Otherwise(if remote
-     *            repository was updated after rebase), commit shouldn't be processed and should return null.
-     *            If version is null, then commit can be after any version, i.e. previous version shouldn't be
-     *            checked.
+     * @param onVersions
+     *            if version defined, then commit must be just after this version. Otherwise(if remote repository was
+     *            updated after rebase), commit shouldn't be processed and should return null. If version is null, then
+     *            commit can be after any version, i.e. previous version shouldn't be checked. It can be several
+     *            versions defined since glossary will be committed after project_save.tmx.
      * @param comment
      *            comment for commit
      * @return new version if commit was processed, or null if remote repository was updated by other user
      */
-    String commit(String version, String comment) throws Exception;
+    String commit(String[] onVersions, String comment) throws Exception;
 
     /**
      * Given repository does not exist on the remote machine

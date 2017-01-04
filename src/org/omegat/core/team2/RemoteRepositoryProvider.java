@@ -179,8 +179,8 @@ public class RemoteRepositoryProvider {
     /**
      * Commit specific file after rebase. Used for omegat/project_save.tmx, glossaries, etc.
      */
-    public String commitFileAfterVersion(String path, String version, String commentText) throws Exception {
-        return oneMapping(path).repo.commit(version, commentText);
+    public String commitFileAfterVersion(String path, String commentText, String... onVersions) throws Exception {
+        return oneMapping(path).repo.commit(onVersions, commentText);
     }
 
     /**

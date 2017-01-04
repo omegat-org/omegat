@@ -27,6 +27,7 @@
 package org.omegat.core.team2.impl;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
@@ -203,11 +204,31 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     }
 
     @Override
-    public String commit(String version, String comment) throws Exception {
-        if (version != null) {
+    public String commit(String[] onVersions, String comment) throws Exception {
+        if (onVersions != null) {
+            // check versions
             String currentVersion = getCurrentVersion();
-            if (!version.equals(currentVersion)) {
-                throw new RuntimeException("Version changed from " + version + " to " + currentVersion);
+            boolean hasVersion = false;
+            for (String v : onVersions) {
+                if (v != null) {
+                    hasVersion = true;
+                    break;
+                }
+            }
+            if (hasVersion) {
+                boolean found = false;
+                for (String v : onVersions) {
+                    if (v != null) {
+                        if (v.equals(currentVersion)) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                if (!found) {
+                    throw new RuntimeException(
+                            "Version changed from " + Arrays.toString(onVersions) + " to " + currentVersion);
+                }
             }
         }
         if (indexIsEmpty(DirCache.read(repository))) {

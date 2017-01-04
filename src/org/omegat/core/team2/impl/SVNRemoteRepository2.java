@@ -134,7 +134,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     }
 
     @Override
-    public String commit(String version, String comment) throws Exception {
+    public String commit(String[] onVersions, String comment) throws Exception {
         Log.logInfoRB("SVN_START", "commit");
         File[] forCommit = new File[]{baseDirectory};
         filesForCommit.clear();

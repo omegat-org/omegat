@@ -207,7 +207,7 @@ public class RebaseAndCommit {
             // new file already saved - need to commit
             String comment = rebaser.getCommentForCommit();
             provider.copyFilesFromProjectToRepo(path, rebaser.getFileCharset(localFile));
-            String newVersion = provider.commitFileAfterVersion(path, headVersion, comment);
+            String newVersion = provider.commitFileAfterVersion(path, comment, headVersion, null);
             if (newVersion != null) {
                 // file was committed good
                 provider.getTeamSettings().set(VERSION_PREFIX + path, newVersion);
@@ -218,13 +218,14 @@ public class RebaseAndCommit {
     /**
      * Commit later.
      */
-    public static String commitPrepared(Prepared prep, RemoteRepositoryProvider provider) throws Exception {
+    public static String commitPrepared(Prepared prep, RemoteRepositoryProvider provider, String possibleHeadVersion)
+            throws Exception {
         if (!prep.needToCommit) {
             // there was no changes
             return null;
         }
         provider.copyFilesFromProjectToRepo(prep.path, prep.charset);
-        String newVersion = provider.commitFileAfterVersion(prep.path, prep.versionHead, prep.commitComment);
+        String newVersion = provider.commitFileAfterVersion(prep.path, prep.commitComment, prep.versionHead, possibleHeadVersion);
         if (newVersion != null) {
             // file was committed good
             provider.getTeamSettings().set(VERSION_PREFIX + prep.path, newVersion);

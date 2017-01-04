@@ -40,7 +40,8 @@ public class ExternalFinderCustomizer {
     private final PreferencesDialog dialog;
 
     public ExternalFinderCustomizer(boolean projectSpecific, ExternalFinderConfiguration config) {
-        this.view = new ExternalFinderPreferencesController(projectSpecific, config);
+        this.view = new ExternalFinderPreferencesController(projectSpecific,
+                config == null ? ExternalFinderConfiguration.empty() : config);
         this.dialog = new PreferencesDialog(view);
     }
 

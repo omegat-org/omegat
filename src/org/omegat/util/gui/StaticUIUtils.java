@@ -393,4 +393,18 @@ public class StaticUIUtils {
             return value;
         }
     }
+
+    public static String getKeyStrokeText(KeyStroke ks) {
+        StringBuilder sb = new StringBuilder();
+        String modifierText = KeyEvent.getKeyModifiersText(ks.getModifiers());
+        sb.append(modifierText);
+        String keyText = KeyEvent.getKeyText(ks.getKeyCode());
+        if (!keyText.isEmpty() && !modifierText.contains(keyText)) {
+            if (sb.length() > 0) {
+                sb.append('+');
+            }
+            sb.append(keyText);
+        }
+        return sb.toString();
+    }
 }

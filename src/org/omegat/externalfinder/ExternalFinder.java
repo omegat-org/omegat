@@ -276,16 +276,18 @@ public class ExternalFinder {
         List<ExternalFinderItem> result = new ArrayList<>(getGlobalConfig().getItems());
         ExternalFinderConfiguration projectConfig = getProjectConfig();
         if (projectConfig != null) {
-            projectConfig.getItems().forEach(item -> replaceByName(result, item));
+            projectConfig.getItems().forEach(item -> addOrReplaceByName(result, item));
         }
         return Collections.unmodifiableList(result);
     }
 
-    static void replaceByName(List<ExternalFinderItem> items, ExternalFinderItem item) {
+    static void addOrReplaceByName(List<ExternalFinderItem> items, ExternalFinderItem item) {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getName().equals(item)) {
                 items.set(i, item);
+                return;
             }
         }
+        items.add(item);
     }
 }

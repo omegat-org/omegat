@@ -70,6 +70,11 @@ public interface IPreferencesController {
     boolean isReloadRequired();
 
     /**
+     * Implementors should override this to return the name of the view as shown in the view tree.
+     */
+    String toString();
+
+    /**
      * Get the GUI (the "view") controlled by this controller. This should not
      * be a window (e.g. JDialog, JFrame) but rather a component embeddable in a
      * window (e.g. JPanel).

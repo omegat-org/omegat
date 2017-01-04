@@ -93,4 +93,9 @@ public abstract class BasePreferencesController implements IPreferencesControlle
      * Apply current user preferences to the GUI.
      */
     protected abstract void initFromPrefs();
+
+    // Re-declared as abstract here to ensure that subclasses override
+    // with a meaningful return value
+    @Override
+    public abstract String toString();
 }

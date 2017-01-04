@@ -14,14 +14,8 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.hiohiohio.omegat.plugin.externalfinder;
+package org.omegat.externalfinder;
 
-import com.hiohiohio.omegat.plugin.externalfinder.item.IExternalFinderItemLoader;
-import com.hiohiohio.omegat.plugin.externalfinder.item.IExternalFinderItemMenuGenerator;
-import com.hiohiohio.omegat.plugin.externalfinder.item.ExternalFinderXMLItemLoader;
-import com.hiohiohio.omegat.plugin.externalfinder.item.ExternalFinderItemPopupMenuConstructor;
-import com.hiohiohio.omegat.plugin.externalfinder.item.ExternalFinderItem;
-import com.hiohiohio.omegat.plugin.externalfinder.item.ExternalFinderItemMenuGenerator;
 import java.awt.Component;
 import java.io.File;
 import java.util.ArrayList;
@@ -33,6 +27,12 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.externalfinder.item.ExternalFinderItem;
+import org.omegat.externalfinder.item.ExternalFinderItemMenuGenerator;
+import org.omegat.externalfinder.item.ExternalFinderItemPopupMenuConstructor;
+import org.omegat.externalfinder.item.ExternalFinderXMLItemLoader;
+import org.omegat.externalfinder.item.IExternalFinderItemLoader;
+import org.omegat.externalfinder.item.IExternalFinderItemMenuGenerator;
 import org.omegat.util.StaticUtils;
 
 public class ExternalFinder {

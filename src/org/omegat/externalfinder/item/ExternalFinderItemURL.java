@@ -14,31 +14,29 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.hiohiohio.omegat.plugin.externalfinder.item;
+package org.omegat.externalfinder.item;
 
-public class ExternalFinderItemCommand {
+public class ExternalFinderItemURL {
 
-    private String command;
+    private String URL;
     private ExternalFinderItem.TARGET target;
     private ExternalFinderItem.ENCODING encoding;
-    private String delimiter;
 
-    public ExternalFinderItemCommand() {
+    public ExternalFinderItemURL() {
     }
 
-    public ExternalFinderItemCommand(String command, ExternalFinderItem.TARGET target, ExternalFinderItem.ENCODING encoding, String delimiter) {
-        this.command = command;
+    public ExternalFinderItemURL(String URL, ExternalFinderItem.TARGET target, ExternalFinderItem.ENCODING encoding) {
+        this.URL = URL;
         this.target = target;
         this.encoding = encoding;
-        this.delimiter = delimiter;
     }
 
-    public String getCommand() {
-        return command;
+    public String getURL() {
+        return URL;
     }
 
-    public void setCommand(String command) {
-        this.command = command;
+    public void setURL(String URL) {
+        this.URL = URL;
     }
 
     public ExternalFinderItem.TARGET getTarget() {
@@ -55,13 +53,5 @@ public class ExternalFinderItemCommand {
 
     public void setEncoding(ExternalFinderItem.ENCODING encoding) {
         this.encoding = encoding;
-    }
-
-    public String getDelimiter() {
-        return delimiter;
-    }
-
-    public void setDelimiter(String delimiter) {
-        this.delimiter = delimiter;
     }
 }

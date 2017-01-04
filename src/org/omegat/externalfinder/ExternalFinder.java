@@ -283,7 +283,7 @@ public class ExternalFinder {
 
     static void addOrReplaceByName(List<ExternalFinderItem> items, ExternalFinderItem item) {
         for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).getName().equals(item)) {
+            if (items.get(i).getName().equals(item.getName())) {
                 items.set(i, item);
                 return;
             }

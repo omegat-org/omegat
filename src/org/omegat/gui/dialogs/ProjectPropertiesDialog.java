@@ -71,6 +71,9 @@ import org.omegat.core.Core;
 import org.omegat.core.data.CommandVarExpansion;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.segmentation.SRX;
+import org.omegat.externalfinder.ExternalFinder;
+import org.omegat.externalfinder.gui.ExternalFinderCustomizer;
+import org.omegat.externalfinder.item.ExternalFinderConfiguration;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.filters2.FiltersCustomizer;
@@ -146,6 +149,9 @@ public class ProjectPropertiesDialog extends JDialog {
     /** Project filters. */
     private Filters filters;
 
+    /** Project ExternalFinder config */
+    private ExternalFinderConfiguration externalFinderConfig;
+
     private List<String> srcExcludes = new ArrayList<>();
 
     /**
@@ -167,6 +173,7 @@ public class ProjectPropertiesDialog extends JDialog {
         this.dialogType = dialogTypeValue;
         this.filters = projectProperties.getProjectFilters();
         srcExcludes.addAll(projectProperties.getSourceRootExcludes());
+        externalFinderConfig = ExternalFinder.getProjectConfig();
 
         Border emptyBorder = new EmptyBorder(2, 0, 2, 0);
         Box centerBox = new ScrollableBox(BoxLayout.Y_AXIS);
@@ -374,6 +381,14 @@ public class ProjectPropertiesDialog extends JDialog {
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.EAST;
         optionsBox.add(m_RepositoriesButton, gbc);
+
+        // Repositories mapping
+        JButton m_ExternalFinderButton = new JButton();
+        Mnemonics.setLocalizedText(m_ExternalFinderButton, OStrings.getString("PP_EXTERNALFINDER"));
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.anchor = GridBagConstraints.EAST;
+        optionsBox.add(m_ExternalFinderButton, gbc);
 
         // multiple translations
         final JCheckBox m_allowDefaultsCheckBox = new JCheckBox();
@@ -669,6 +684,13 @@ public class ProjectPropertiesDialog extends JDialog {
                 if (r != null) {
                     projectProperties.setRepositories(r);
                 }
+            }
+        });
+
+        m_ExternalFinderButton.addActionListener(e -> {
+            ExternalFinderCustomizer dlg = new ExternalFinderCustomizer(true, externalFinderConfig);
+            if (dlg.show(ProjectPropertiesDialog.this)) {
+                externalFinderConfig = dlg.getResult();
             }
         });
 
@@ -1071,6 +1093,8 @@ public class ProjectPropertiesDialog extends JDialog {
         projectProperties.setProjectFilters(filters);
         projectProperties.getSourceRootExcludes().clear();
         projectProperties.getSourceRootExcludes().addAll(srcExcludes);
+
+        ExternalFinder.setProjectConfig(externalFinderConfig);
 
         m_dialogCancelled = false;
         setVisible(false);

@@ -97,6 +97,7 @@ import javax.swing.tree.TreeSelectionModel;
 
 import org.omegat.core.Core;
 import org.omegat.core.team2.gui.RepositoriesCredentialsController;
+import org.omegat.externalfinder.gui.ExternalFinderPreferencesController;
 import org.omegat.gui.filters2.FiltersCustomizerController;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.preferences.IPreferencesController.FurtherActionListener;
@@ -370,6 +371,7 @@ public class PreferencesWindowController implements FurtherActionListener {
         root.add(acNode);
         root.add(new HideableNode(new SpellcheckerConfigurationController()));
         root.add(new HideableNode(new LanguageToolConfigurationController()));
+        root.add(new HideableNode(new ExternalFinderPreferencesController()));
         root.add(new HideableNode(new EditingBehaviorController()));
         root.add(new HideableNode(new TagProcessingOptionsController()));
         HideableNode teamNode = new HideableNode(new TeamOptionsController());

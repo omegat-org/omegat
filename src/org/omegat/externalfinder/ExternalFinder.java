@@ -54,14 +54,6 @@ public class ExternalFinder {
     private static final int DEFAULT_POPUP_PRIORITY = 50;
 
     /**
-     * to support v2 of OmegaT, this class will be registered as a base-plugin
-     * class.
-     */
-    public ExternalFinder() {
-        loadPlugins();
-    }
-
-    /**
      * OmegaT will call this method when loading.
      */
     public static void loadPlugins() {
@@ -186,5 +178,8 @@ public class ExternalFinder {
             public void onApplicationShutdown() {
             }
         };
+    }
+
+    public static void unloadPlugins() {
     }
 }

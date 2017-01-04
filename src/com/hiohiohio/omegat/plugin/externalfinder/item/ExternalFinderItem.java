@@ -17,10 +17,13 @@
 package com.hiohiohio.omegat.plugin.externalfinder.item;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+
 import javax.swing.KeyStroke;
 
 public class ExternalFinderItem {
@@ -193,7 +196,8 @@ public class ExternalFinderItem {
         return true;
     }
 
-    public static final String generateURL(ExternalFinderItemURL url, String findingWords) throws UnsupportedEncodingException {
+    public static final URI generateURL(ExternalFinderItemURL url, String findingWords)
+            throws UnsupportedEncodingException, URISyntaxException {
         String encodedWords;
         if (url.getEncoding() == ENCODING.NONE) {
             encodedWords = findingWords;
@@ -204,7 +208,8 @@ public class ExternalFinderItem {
             }
         }
 
-        return url.getURL().replace("{target}", encodedWords);
+        String replaced = url.getURL().replace("{target}", encodedWords);
+        return new URI(replaced);
     }
 
     public static final String[] generateCommand(ExternalFinderItemCommand command, String findingWords) throws UnsupportedEncodingException {

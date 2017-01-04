@@ -16,19 +16,21 @@
  */
 package com.hiohiohio.omegat.plugin.externalfinder.item;
 
-import com.hiohiohio.omegat.plugin.externalfinder.util.BareBonesBrowserLaunch;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JToolBar;
+
 import org.omegat.core.Core;
 
 public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuGenerator {
@@ -118,9 +120,8 @@ public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuG
                         }
 
                         try {
-                            // for JDK 1.5, we cannot use Desktop.
-                            BareBonesBrowserLaunch.openURL(ExternalFinderItem.generateURL(url, targetWords));
-                        } catch (UnsupportedEncodingException ex) {
+                            Desktop.getDesktop().browse(ExternalFinderItem.generateURL(url, targetWords));
+                        } catch (IOException | URISyntaxException ex) {
                             Logger.getLogger(ExternalFinderItemMenuGenerator.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }

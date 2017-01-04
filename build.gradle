@@ -66,6 +66,7 @@ configurations {
 
 def depsProvided = file('lib/provided').directory
 def languageToolVersion = '3.5'
+def luceneVersion = '5.2.1'
 
 dependencies {
     if (!depsProvided) {
@@ -102,11 +103,11 @@ dependencies {
 
         // Lucene for tokenizers
         // Temporary use of custom lucene-core; see https://sourceforge.net/p/omegat/bugs/813/
-        compile 'org.omegat.lucene:lucene-core:5.2.1-1'
-        compile 'org.apache.lucene:lucene-analyzers-common:5.2.1'
-        compile 'org.apache.lucene:lucene-analyzers-kuromoji:5.2.1'
-        compile 'org.apache.lucene:lucene-analyzers-smartcn:5.2.1'
-        compile 'org.apache.lucene:lucene-analyzers-stempel:5.2.1'
+        compile "org.omegat.lucene:lucene-core:${luceneVersion}-1"
+        compile "org.apache.lucene:lucene-analyzers-common:${luceneVersion}"
+        compile "org.apache.lucene:lucene-analyzers-kuromoji:${luceneVersion}"
+        compile "org.apache.lucene:lucene-analyzers-smartcn:${luceneVersion}"
+        compile "org.apache.lucene:lucene-analyzers-stempel:${luceneVersion}"
 
         // Team project server support
         compile 'org.eclipse.jgit:org.eclipse.jgit:4.2.0.201601211800-r'

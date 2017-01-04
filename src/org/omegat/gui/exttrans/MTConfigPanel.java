@@ -25,7 +25,6 @@
 
 package org.omegat.gui.exttrans;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.omegat.util.OStrings;

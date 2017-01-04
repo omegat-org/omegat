@@ -27,11 +27,7 @@
 
 package org.omegat.gui.preferences.view;
 
-import javax.swing.JList;
-
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.Styles;
-import org.omegat.util.gui.Styles.EditorColor;
 
 /**
  * @author Briac Pilpre

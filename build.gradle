@@ -71,7 +71,7 @@ dependencies {
     if (!depsProvided) {
         compile 'commons-io:commons-io:2.4'
         compile 'commons-lang:commons-lang:2.6'
-        compile 'org.slf4j:slf4j-jdk14:1.7.21'        
+        compile 'org.slf4j:slf4j-jdk14:1.7.21'
 
         // PDF Filter
         compile 'org.apache.pdfbox:pdfbox:2.0.3'
@@ -124,12 +124,12 @@ dependencies {
 
         // Groovy used for (runtime) scripts, tests only
         runtime 'org.codehaus.groovy:groovy-all:2.4.6'
-        
+
         // Script editor
         compile 'com.fifesoft:rsyntaxtextarea:2.5.8'
         compile 'com.fifesoft:rstaui:2.5.7'
         compile ('com.fifesoft:languagesupport:2.5.8') {
-    	    exclude module: 'rhino'
+            exclude module: 'rhino'
         }
         compile 'com.fifesoft:autocomplete:2.5.8'
     }
@@ -150,7 +150,7 @@ dependencies {
 
     // WebStart-only
     jnlp project(path: ':release:WebStart-specific', configuration: 'docs')
-    
+
     testIntegrationCompile sourceSets.main.output, sourceSets.test.output, configurations.compile
 }
 

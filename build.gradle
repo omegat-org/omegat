@@ -1,8 +1,8 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
-    id 'de.gliderpilot.jnlp' version '1.0.2'
-    id 'com.jfrog.bintray' version '1.7.1'
+    id 'de.gliderpilot.jnlp' version '1.1.0'
+    id 'com.jfrog.bintray' version '1.7.3'
 }
 
 apply plugin: 'application'
@@ -70,12 +70,12 @@ def luceneVersion = '5.2.1'
 
 dependencies {
     if (!depsProvided) {
-        compile 'commons-io:commons-io:2.4'
+        compile 'commons-io:commons-io:2.5'
         compile 'commons-lang:commons-lang:2.6'
-        compile 'org.slf4j:slf4j-jdk14:1.7.21'
+        compile 'org.slf4j:slf4j-jdk14:1.7.22'
 
         // PDF Filter
-        compile 'org.apache.pdfbox:pdfbox:2.0.3'
+        compile 'org.apache.pdfbox:pdfbox:2.0.4'
 
         // Aligner
         compile 'net.loomchild:maligna:3.0.0'
@@ -124,7 +124,7 @@ dependencies {
         compile 'org.jasypt:jasypt:1.9.2'
 
         // Groovy used for (runtime) scripts, tests only
-        runtime 'org.codehaus.groovy:groovy-all:2.4.6'
+        runtime 'org.codehaus.groovy:groovy-all:2.4.7'
 
         // Script editor
         compile 'com.fifesoft:rsyntaxtextarea:2.5.8'

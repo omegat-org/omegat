@@ -172,22 +172,7 @@ public class IssuesPanelController implements IIssues {
         panel = new IssuesPanel();
         frame.add(panel);
 
-        JMenuBar menuBar = new JMenuBar();
-        JMenu menu = menuBar.add(new JMenu(OStrings.getString("ISSUES_WINDOW_MENU_OPTIONS")));
-        Set<String> disabledProviders = IssueProviders.getDisabledProviderIds();
-        IssueProviders.getIssueProviders().stream().sorted(Comparator.comparing(IIssueProvider::getId))
-                .forEach(provider -> {
-                    String label = StringUtil.format(OStrings.getString("ISSUES_WINDOW_MENU_OPTIONS_TOGGLE_PROVIDER"),
-                            provider.getName());
-                    JCheckBoxMenuItem item = new JCheckBoxMenuItem(label);
-                    item.addActionListener(e -> {
-                        IssueProviders.setProviderEnabled(provider.getId(), item.isSelected());
-                        refreshData(selectedEntry, selectedType);
-                    });
-                    item.setSelected(!disabledProviders.contains(provider.getId()));
-                    menu.add(item);
-                });
-        frame.setJMenuBar(menuBar);
+        frame.setJMenuBar(generateMenuBar());
 
         frame.setPreferredSize(new Dimension(600, 400));
         frame.pack();
@@ -335,6 +320,38 @@ public class IssuesPanelController implements IIssues {
             setFont(f);
             viewSelectedIssueDetail();
         });
+    }
+
+    JMenuBar generateMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = menuBar.add(new JMenu(OStrings.getString("ISSUES_WINDOW_MENU_OPTIONS")));
+
+        {
+            // Tags item is hard-coded because it is not disableable and is implemented differently from all
+            // others.
+            JCheckBoxMenuItem tagsItem = new JCheckBoxMenuItem(
+                    OStrings.getString("ISSUES_WINDOW_MENU_OPTIONS_TOGGLE_PROVIDER",
+                            OStrings.getString("ISSUES_TAGS_PROVIDER_NAME")));
+            tagsItem.setSelected(true);
+            tagsItem.setEnabled(false);
+            menu.add(tagsItem);
+        }
+
+        Set<String> disabledProviders = IssueProviders.getDisabledProviderIds();
+        IssueProviders.getIssueProviders().stream().sorted(Comparator.comparing(IIssueProvider::getId))
+                .forEach(provider -> {
+                    String label = StringUtil.format(
+                            OStrings.getString("ISSUES_WINDOW_MENU_OPTIONS_TOGGLE_PROVIDER"),
+                            provider.getName());
+                    JCheckBoxMenuItem item = new JCheckBoxMenuItem(label);
+                    item.addActionListener(e -> {
+                        IssueProviders.setProviderEnabled(provider.getId(), item.isSelected());
+                        refreshData(selectedEntry, selectedType);
+                    });
+                    item.setSelected(!disabledProviders.contains(provider.getId()));
+                    menu.add(item);
+                });
+        return menuBar;
     }
 
     void updateRollover() {

@@ -75,11 +75,11 @@ public class ExternalFinderPreferencesPanel extends javax.swing.JPanel {
         priorityPanel.setLayout(new javax.swing.BoxLayout(priorityPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel1.setLabelFor(prioritySpinner);
-        jLabel1.setText(OStrings.getString("PREFS_EXTERNALFINDER_PRIORITY_LABEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, OStrings.getString("PREFS_EXTERNALFINDER_PRIORITY_LABEL")); // NOI18N
         priorityPanel.add(jLabel1);
         priorityPanel.add(filler1);
 
-        prioritySpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 50));
+        prioritySpinner.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(50)));
         priorityPanel.add(prioritySpinner);
 
         jPanel5.add(priorityPanel, java.awt.BorderLayout.WEST);
@@ -101,14 +101,14 @@ public class ExternalFinderPreferencesPanel extends javax.swing.JPanel {
 
         jPanel4.setLayout(new java.awt.GridLayout(0, 1));
 
-        addButton.setText(OStrings.getString("PREFS_EXTERNALFINDER_BUTTON_ADD_ITEM")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(addButton, OStrings.getString("PREFS_EXTERNALFINDER_BUTTON_ADD_ITEM")); // NOI18N
         jPanel4.add(addButton);
 
-        removeButton.setText(OStrings.getString("PREFS_EXTERNALFINDER_BUTTON_REMOVE_ITEM")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(removeButton, OStrings.getString("PREFS_EXTERNALFINDER_BUTTON_REMOVE_ITEM")); // NOI18N
         jPanel4.add(removeButton);
         jPanel4.add(filler2);
 
-        editButton.setText(OStrings.getString("PREFS_EXTERNALFINDER_BUTTON_EDIT_ITEM")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(editButton, OStrings.getString("PREFS_EXTERNALFINDER_BUTTON_EDIT_ITEM")); // NOI18N
         jPanel4.add(editButton);
 
         jPanel3.add(jPanel4, java.awt.BorderLayout.NORTH);
@@ -116,7 +116,7 @@ public class ExternalFinderPreferencesPanel extends javax.swing.JPanel {
         jPanel2.add(jPanel3, java.awt.BorderLayout.EAST);
 
         jLabel2.setLabelFor(itemTable);
-        jLabel2.setText(OStrings.getString("PREFS_EXTERNALFINDER_ITEMS_LABEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, OStrings.getString("PREFS_EXTERNALFINDER_ITEMS_LABEL")); // NOI18N
         jPanel2.add(jLabel2, java.awt.BorderLayout.PAGE_START);
 
         add(jPanel2);

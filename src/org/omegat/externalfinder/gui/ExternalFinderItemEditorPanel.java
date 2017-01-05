@@ -94,7 +94,7 @@ public class ExternalFinderItemEditorPanel extends javax.swing.JPanel {
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel1.setLabelFor(nameField);
-        jLabel1.setText(OStrings.getString("EXTERNALFINDER_EDITOR_NAME_LABEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, OStrings.getString("EXTERNALFINDER_EDITOR_NAME_LABEL")); // NOI18N
         jPanel3.add(jLabel1);
         jPanel3.add(filler1);
 
@@ -103,23 +103,23 @@ public class ExternalFinderItemEditorPanel extends javax.swing.JPanel {
 
         add(jPanel3);
 
-        popupCheckBox.setText(OStrings.getString("EXTERNALFINDER_EDITOR_POPUP_CHECKBOX")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(popupCheckBox, OStrings.getString("EXTERNALFINDER_EDITOR_POPUP_CHECKBOX")); // NOI18N
         add(popupCheckBox);
 
         jPanel4.setAlignmentX(0.0F);
         jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel2.setLabelFor(keystrokeLabel);
-        jLabel2.setText(OStrings.getString("EXTERNALFINDER_EDITOR_KEYSTROKE_LABEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, OStrings.getString("EXTERNALFINDER_EDITOR_KEYSTROKE_LABEL")); // NOI18N
         jPanel4.add(jLabel2);
         jPanel4.add(filler2);
 
         keystrokeLabel.setFont(keystrokeLabel.getFont().deriveFont(keystrokeLabel.getFont().getStyle() | java.awt.Font.BOLD));
-        keystrokeLabel.setText(OStrings.getString("KEYSTROKE_EDITOR_NOT_SET")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(keystrokeLabel, OStrings.getString("KEYSTROKE_EDITOR_NOT_SET")); // NOI18N
         jPanel4.add(keystrokeLabel);
         jPanel4.add(filler8);
 
-        setKeystrokeButton.setText(OStrings.getString("EXTERNALFINDER_EDITOR_KEYSTROKE_SET_BUTTON")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(setKeystrokeButton, OStrings.getString("EXTERNALFINDER_EDITOR_KEYSTROKE_SET_BUTTON")); // NOI18N
         jPanel4.add(setKeystrokeButton);
 
         add(jPanel4);
@@ -134,21 +134,21 @@ public class ExternalFinderItemEditorPanel extends javax.swing.JPanel {
         jPanel5.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jLabel3.setLabelFor(urlsTable);
-        jLabel3.setText(OStrings.getString("EXTERNALFINDER_EDITOR_URLS_LABEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, OStrings.getString("EXTERNALFINDER_EDITOR_URLS_LABEL")); // NOI18N
         jPanel5.add(jLabel3, java.awt.BorderLayout.PAGE_START);
 
         jPanel6.setLayout(new java.awt.BorderLayout());
 
         jPanel7.setLayout(new java.awt.GridLayout(0, 1));
 
-        addUrlButton.setText(OStrings.getString("EXTERNALFINDER_EDITOR_BUTTON_ADD_URL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(addUrlButton, OStrings.getString("EXTERNALFINDER_EDITOR_BUTTON_ADD_URL")); // NOI18N
         jPanel7.add(addUrlButton);
 
-        removeUrlButton.setText(OStrings.getString("EXTERNALFINDER_EDITOR_BUTTON_REMOVE_URL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(removeUrlButton, OStrings.getString("EXTERNALFINDER_EDITOR_BUTTON_REMOVE_URL")); // NOI18N
         jPanel7.add(removeUrlButton);
         jPanel7.add(filler3);
 
-        editUrlButton.setText(OStrings.getString("EXTERNALFINDER_EDITOR_BUTTON_EDIT_URL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(editUrlButton, OStrings.getString("EXTERNALFINDER_EDITOR_BUTTON_EDIT_URL")); // NOI18N
         jPanel7.add(editUrlButton);
 
         jPanel6.add(jPanel7, java.awt.BorderLayout.NORTH);
@@ -162,7 +162,7 @@ public class ExternalFinderItemEditorPanel extends javax.swing.JPanel {
         jPanel8.setLayout(new java.awt.BorderLayout());
 
         jLabel4.setLabelFor(commandsTable);
-        jLabel4.setText(OStrings.getString("EXTERNALFINDER_EDITOR_COMMANDS_LABEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, OStrings.getString("EXTERNALFINDER_EDITOR_COMMANDS_LABEL")); // NOI18N
         jPanel8.add(jLabel4, java.awt.BorderLayout.PAGE_START);
 
         commandsTable.setFillsViewportHeight(true);
@@ -174,14 +174,14 @@ public class ExternalFinderItemEditorPanel extends javax.swing.JPanel {
 
         jPanel10.setLayout(new java.awt.GridLayout(0, 1));
 
-        addCommandButton.setText(OStrings.getString("EXTERNALFINDER_EDITOR_BUTTON_ADD_COMMAND")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(addCommandButton, OStrings.getString("EXTERNALFINDER_EDITOR_BUTTON_ADD_COMMAND")); // NOI18N
         jPanel10.add(addCommandButton);
 
-        removeCommandButton.setText(OStrings.getString("EXTERNALFINDER_EDITOR_BUTTON_REMOVE_COMMAND")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(removeCommandButton, OStrings.getString("EXTERNALFINDER_EDITOR_BUTTON_REMOVE_COMMAND")); // NOI18N
         jPanel10.add(removeCommandButton);
         jPanel10.add(filler4);
 
-        editCommandButton.setText(OStrings.getString("EXTERNALFINDER_EDITOR_BUTTON_EDIT_COMMAND")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(editCommandButton, OStrings.getString("EXTERNALFINDER_EDITOR_BUTTON_EDIT_COMMAND")); // NOI18N
         jPanel10.add(editCommandButton);
 
         jPanel9.add(jPanel10, java.awt.BorderLayout.NORTH);

@@ -74,12 +74,12 @@ public class ExternalFinderSubItemEditorPanel extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
-        targetComboBox = new javax.swing.JComboBox<>();
+        targetComboBox = new javax.swing.JComboBox<ExternalFinderItem.TARGET>();
         filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
-        encodingComboBox = new javax.swing.JComboBox<>();
+        encodingComboBox = new javax.swing.JComboBox<ExternalFinderItem.ENCODING>();
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -106,14 +106,13 @@ public class ExternalFinderSubItemEditorPanel extends javax.swing.JPanel {
         jPanel7.setAlignmentX(0.0F);
         jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel1.setText(OStrings.getString("EXTERNALFINDER_SUBEDITOR_URL_LABEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, OStrings.getString("EXTERNALFINDER_SUBEDITOR_URL_LABEL")); // NOI18N
         jPanel7.add(jLabel1);
         jPanel7.add(filler1);
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         urlTextArea.setColumns(50);
-        urlTextArea.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         urlTextArea.setLineWrap(true);
         urlTextArea.setRows(5);
         jScrollPane1.setViewportView(urlTextArea);
@@ -142,14 +141,13 @@ public class ExternalFinderSubItemEditorPanel extends javax.swing.JPanel {
         jPanel5.setAlignmentX(0.0F);
         jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel5.setText(OStrings.getString("EXTERNALFINDER_SUBEDITOR_COMMAND_LABEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel5, OStrings.getString("EXTERNALFINDER_SUBEDITOR_COMMAND_LABEL")); // NOI18N
         jPanel5.add(jLabel5);
         jPanel5.add(filler3);
 
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         commandTextArea.setColumns(50);
-        commandTextArea.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         commandTextArea.setLineWrap(true);
         commandTextArea.setRows(5);
         jScrollPane2.setViewportView(commandTextArea);
@@ -161,7 +159,7 @@ public class ExternalFinderSubItemEditorPanel extends javax.swing.JPanel {
         jPanel6.setAlignmentX(0.0F);
         jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel4.setText(OStrings.getString("EXTERNALFINDER_SUBEDITOR_DELIMITER_LABEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, OStrings.getString("EXTERNALFINDER_SUBEDITOR_DELIMITER_LABEL")); // NOI18N
         jPanel6.add(jLabel4);
         jPanel6.add(filler5);
 
@@ -177,7 +175,7 @@ public class ExternalFinderSubItemEditorPanel extends javax.swing.JPanel {
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel2.setLabelFor(targetComboBox);
-        jLabel2.setText(OStrings.getString("EXTERNALFINDER_SUBEDITOR_TARGET_LABEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, OStrings.getString("EXTERNALFINDER_SUBEDITOR_TARGET_LABEL")); // NOI18N
         jPanel3.add(jLabel2);
         jPanel3.add(filler2);
         jPanel3.add(targetComboBox);
@@ -189,7 +187,7 @@ public class ExternalFinderSubItemEditorPanel extends javax.swing.JPanel {
         jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel3.setLabelFor(encodingComboBox);
-        jLabel3.setText(OStrings.getString("EXTERNALFINDER_SUBEDITOR_ENCODING_LABEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, OStrings.getString("EXTERNALFINDER_SUBEDITOR_ENCODING_LABEL")); // NOI18N
         jPanel4.add(jLabel3);
         jPanel4.add(filler4);
         jPanel4.add(encodingComboBox);

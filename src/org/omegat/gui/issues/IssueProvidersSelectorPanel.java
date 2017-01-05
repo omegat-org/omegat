@@ -72,7 +72,7 @@ public class IssueProvidersSelectorPanel extends javax.swing.JPanel {
         providersPanel.setLayout(new javax.swing.BoxLayout(providersPanel, javax.swing.BoxLayout.PAGE_AXIS));
         add(providersPanel);
 
-        dontAskCheckBox.setText(OStrings.getString("ISSUE_PROVIDERS_SELECTOR_DONT_ASK_CHECKBOX")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(dontAskCheckBox, OStrings.getString("ISSUE_PROVIDERS_SELECTOR_DONT_ASK_CHECKBOX")); // NOI18N
         add(dontAskCheckBox);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));

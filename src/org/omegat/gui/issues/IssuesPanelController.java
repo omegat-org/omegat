@@ -160,6 +160,8 @@ public class IssuesPanelController implements IIssues {
     @SuppressWarnings("serial")
     synchronized void init() {
         if (frame != null) {
+            // Regenerate menu bar to reflect current prefs
+            frame.setJMenuBar(generateMenuBar());
             return;
         }
 
@@ -351,6 +353,17 @@ public class IssuesPanelController implements IIssues {
                     item.setSelected(!disabledProviders.contains(provider.getId()));
                     menu.add(item);
                 });
+
+        menu.addSeparator();
+
+        {
+            JCheckBoxMenuItem askItem = new JCheckBoxMenuItem(
+                    OStrings.getString("ISSUES_WINDOW_MENU_DONT_ASK"));
+            askItem.setSelected(Preferences.isPreference(Preferences.ISSUE_PROVIDERS_DONT_ASK));
+            askItem.addActionListener(e -> Preferences.setPreference(Preferences.ISSUE_PROVIDERS_DONT_ASK,
+                    askItem.isSelected()));
+            menu.add(askItem);
+        }
         return menuBar;
     }
 

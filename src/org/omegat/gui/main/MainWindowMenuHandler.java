@@ -68,6 +68,7 @@ import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.SegmentExportImport;
 import org.omegat.gui.filters2.FiltersCustomizerController;
+import org.omegat.gui.issues.IssueProvidersSelectorController;
 import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.gui.preferences.view.EditingBehaviorController;
 import org.omegat.gui.search.SearchWindowController;
@@ -769,6 +770,12 @@ public class MainWindowMenuHandler {
     }
 
     public void toolsCheckIssuesMenuItemActionPerformed() {
+        if (!Preferences.isPreference(Preferences.ISSUE_PROVIDERS_DONT_ASK)) {
+            IssueProvidersSelectorController dialog = new IssueProvidersSelectorController();
+            if (!dialog.show(mainWindow)) {
+                return;
+            }
+        }
         Core.getIssues().showAll();
     }
 

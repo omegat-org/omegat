@@ -229,6 +229,7 @@ public class ExternalFinderItemEditorController {
         if (row >= 0) {
             builder.getURLs().remove(row);
             panel.urlsTable.repaint();
+            validate();
         }
     }
 
@@ -240,6 +241,7 @@ public class ExternalFinderItemEditorController {
             if (editor.show(SwingUtilities.windowForComponent(panel))) {
                 builder.getURLs().set(row, editor.getResult());
                 panel.urlsTable.repaint();
+                validate();
             }
         }
     }
@@ -261,6 +263,7 @@ public class ExternalFinderItemEditorController {
         if (row >= 0) {
             builder.getCommands().remove(row);
             panel.commandsTable.repaint();
+            validate();
         }
     }
 
@@ -273,6 +276,7 @@ public class ExternalFinderItemEditorController {
             if (editor.show(SwingUtilities.windowForComponent(panel))) {
                 builder.getCommands().set(row, editor.getResult());
                 panel.commandsTable.repaint();
+                validate();
             }
         }
     }

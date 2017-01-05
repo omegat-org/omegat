@@ -26,7 +26,9 @@
 package org.omegat.gui.issues;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -72,12 +74,18 @@ public class IssueProviders {
     }
 
     public static void setProviderEnabled(String id, boolean enabled) {
-        Set<String> disabled = getDisabledProviderIds();
         if (enabled) {
-            disabled.remove(id);
+            setProviders(Collections.singleton(id), Collections.emptySet());
         } else {
-            disabled.add(id);
+            setProviders(Collections.emptySet(), Collections.singleton(id));
         }
-        Preferences.setPreference(Preferences.ISSUE_PROVIDERS_DISABLED, String.join(ISSUE_IDS_DELIMITER, disabled));
+    }
+
+    public static void setProviders(Collection<String> enabled, Collection<String> disabled) {
+        Set<String> toDisable = new HashSet<>(getDisabledProviderIds());
+        toDisable.removeAll(enabled);
+        toDisable.addAll(disabled);
+        Preferences.setPreference(Preferences.ISSUE_PROVIDERS_DISABLED,
+                String.join(ISSUE_IDS_DELIMITER, toDisable));
     }
 }

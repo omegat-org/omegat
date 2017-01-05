@@ -196,15 +196,11 @@ public class IssuesPanelController implements IIssues {
         panel.outerSplitPane.setDividerLocation(OUTER_SPLIT_INITIAL_RATIO);
 
         StaticUIUtils.persistGeometry(frame, Preferences.ISSUES_WINDOW_GEOMETRY_PREFIX, () -> {
-            Preferences.setPreference(Preferences.ISSUES_WINDOW_DIVIDER_LOCATION_TOP,
-                    panel.innerSplitPane.getDividerLocation());
             Preferences.setPreference(Preferences.ISSUES_WINDOW_DIVIDER_LOCATION_BOTTOM,
                     panel.outerSplitPane.getDividerLocation());
         });
 
         try {
-            int topDL = Integer.parseInt(Preferences.getPreference(Preferences.ISSUES_WINDOW_DIVIDER_LOCATION_TOP));
-            panel.innerSplitPane.setDividerLocation(topDL);
             int bottomDL = Integer
                     .parseInt(Preferences.getPreference(Preferences.ISSUES_WINDOW_DIVIDER_LOCATION_BOTTOM));
             panel.outerSplitPane.setDividerLocation(bottomDL);
@@ -592,9 +588,13 @@ public class IssuesPanelController implements IIssues {
             panel.typeList.setSelectedIndex(0);
             // Hide Types list if we have fewer than 3 items ("All" and at least
             // two others)
-            panel.typeListScrollPanel.setVisible(panel.typeList.getModel().getSize() > 2);
-            if (panel.typeListScrollPanel.isVisible() && panel.innerSplitPane.getDividerLocation() == 0) {
-                panel.innerSplitPane.setDividerLocation(INNER_SPLIT_INITIAL_RATIO);
+            boolean typeListIsVisible = panel.typeList.getModel().getSize() > 2;
+            panel.typeListScrollPanel.setVisible(typeListIsVisible);
+            if (typeListIsVisible) {
+                SwingUtilities.invokeLater(() -> {
+                    int width = panel.typeListScrollPanel.getPreferredSize().width + 10;
+                    panel.innerSplitPane.setDividerLocation(width);
+                });
             }
             colSizer.reset();
             colSizer.adjustTableColumns();

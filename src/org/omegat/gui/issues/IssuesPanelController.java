@@ -366,8 +366,7 @@ public class IssuesPanelController implements IIssues {
         issue.map(IIssue::getDetailComponent).ifPresent(comp -> {
             if (Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
                 Font font = Core.getMainWindow().getApplicationFont();
-                StaticUIUtils.listHierarchy(comp).stream().filter(c -> c instanceof JTextComponent)
-                        .forEach(c -> c.setFont(font));
+                StaticUIUtils.visitHierarchy(comp, c -> c instanceof JTextComponent, c -> c.setFont(font));
             }
             panel.outerSplitPane.setBottomComponent(comp);
         });
@@ -497,21 +496,6 @@ public class IssuesPanelController implements IIssues {
         loader.execute();
     }
 
-    Map.Entry<SourceTextEntry, TMXEntry> makeEntryPair(SourceTextEntry ste) {
-        IProject project = Core.getProject();
-        if (!project.isProjectLoaded()) {
-            return null;
-        }
-        TMXEntry tmxEntry = project.getTranslationInfo(ste);
-        if (!tmxEntry.isTranslated()) {
-            return null;
-        }
-        if (isShowingAllFiles() && DataUtils.isDuplicate(ste, tmxEntry)) {
-            return null;
-        }
-        return new AbstractMap.SimpleImmutableEntry<SourceTextEntry, TMXEntry>(ste, tmxEntry);
-    }
-
     class IssueLoader extends SwingWorker<List<IIssue>, Integer> {
 
         private final int jumpToEntry;
@@ -532,13 +516,28 @@ public class IssuesPanelController implements IIssues {
             List<IIssueProvider> providers = IssueProviders.getEnabledProviders();
             Stream<IIssue> providerIssues = Core.getProject().getAllEntries().parallelStream()
                     .filter(StreamUtil.patternFilter(filePattern, ste -> ste.getKey().file))
-                    .filter(this::progressFilter).map(IssuesPanelController.this::makeEntryPair)
+                    .filter(this::progressFilter).map(this::makeEntryPair)
                     .filter(Objects::nonNull).flatMap(e -> providers.stream()
                             .flatMap(provider -> provider.getIssues(e.getKey(), e.getValue()).stream()));
             List<IIssue> result = Stream.concat(tagErrors, providerIssues).collect(Collectors.toList());
             Logger.getLogger(IssuesPanelController.class.getName()).log(Level.FINEST,
                     () -> String.format("Issue detection took %.3f s", (System.currentTimeMillis() - start) / 1000f));
             return result;
+        }
+
+        Map.Entry<SourceTextEntry, TMXEntry> makeEntryPair(SourceTextEntry ste) {
+            IProject project = Core.getProject();
+            if (!project.isProjectLoaded()) {
+                return null;
+            }
+            TMXEntry tmxEntry = project.getTranslationInfo(ste);
+            if (!tmxEntry.isTranslated()) {
+                return null;
+            }
+            if (isShowingAllFiles() && DataUtils.isDuplicate(ste, tmxEntry)) {
+                return null;
+            }
+            return new AbstractMap.SimpleImmutableEntry<SourceTextEntry, TMXEntry>(ste, tmxEntry);
         }
 
         boolean progressFilter(SourceTextEntry ste) {

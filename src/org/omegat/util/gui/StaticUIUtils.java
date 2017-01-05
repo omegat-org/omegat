@@ -191,7 +191,7 @@ public class StaticUIUtils {
             }
             chomp = text.substring(chompStart, chompEnd);
             int newWidth = fullWidth - metrics.stringWidth(chomp) + truncateCharWidth + margin;
-            if (newWidth <= comp.getWidth()) {
+            if (newWidth <= targetWidth) {
                 break;
             }
             chompStart = text.offsetByCodePoints(chompStart, -1);

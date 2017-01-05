@@ -77,13 +77,13 @@ public class KeyStrokeEditorPanel extends javax.swing.JPanel {
         jPanel1.setAlignmentX(0.0F);
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel1.setText(OStrings.getString("KEYSTROKE_EDITOR_CURRENT_LABEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, OStrings.getString("KEYSTROKE_EDITOR_CURRENT_LABEL")); // NOI18N
         jLabel1.setFocusable(false);
         jPanel1.add(jLabel1);
         jPanel1.add(filler1);
 
         shortcutLabel.setFont(shortcutLabel.getFont().deriveFont(shortcutLabel.getFont().getStyle() | java.awt.Font.BOLD));
-        shortcutLabel.setText(OStrings.getString("KEYSTROKE_EDITOR_NOT_SET")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(shortcutLabel, OStrings.getString("KEYSTROKE_EDITOR_NOT_SET")); // NOI18N
         shortcutLabel.setFocusable(false);
         jPanel1.add(shortcutLabel);
 
@@ -94,7 +94,7 @@ public class KeyStrokeEditorPanel extends javax.swing.JPanel {
 
         jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
 
-        clearButton.setText(OStrings.getString("KEYSTROKE_EDITOR_CLEAR_BUTTON")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(clearButton, OStrings.getString("KEYSTROKE_EDITOR_CLEAR_BUTTON")); // NOI18N
         clearButton.setFocusable(false);
         jPanel4.add(clearButton);
 

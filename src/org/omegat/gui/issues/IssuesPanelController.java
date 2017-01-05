@@ -175,7 +175,7 @@ public class IssuesPanelController implements IIssues {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = menuBar.add(new JMenu(OStrings.getString("ISSUES_WINDOW_MENU_OPTIONS")));
         Set<String> disabledProviders = IssueProviders.getDisabledProviderIds();
-        IssueProviders.ISSUE_PROVIDERS.stream().sorted(Comparator.comparing(IIssueProvider::getId))
+        IssueProviders.getIssueProviders().stream().sorted(Comparator.comparing(IIssueProvider::getId))
                 .forEach(provider -> {
                     String label = StringUtil.format(OStrings.getString("ISSUES_WINDOW_MENU_OPTIONS_TOGGLE_PROVIDER"),
                             provider.getName());

@@ -26,6 +26,7 @@
 package org.omegat.gui.issues;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -44,12 +45,16 @@ public class IssueProviders {
 
     static final String ISSUE_IDS_DELIMITER = ",";
 
-    static final List<IIssueProvider> ISSUE_PROVIDERS = new ArrayList<>();
+    private static final List<IIssueProvider> ISSUE_PROVIDERS = new ArrayList<>();
     static {
         addIssueProvider(new SpellingIssueProvider());
     }
 
     private IssueProviders() {
+    }
+
+    public static List<IIssueProvider> getIssueProviders() {
+        return Collections.unmodifiableList(ISSUE_PROVIDERS);
     }
 
     public static void addIssueProvider(IIssueProvider provider) {

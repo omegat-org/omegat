@@ -147,8 +147,11 @@ public class FilterMaster {
             }
             if (!found) {
                 // filter not found in config
-                conf.getFilters().add(getDefaultSettingsFromFilter(fclass.getName()));
-                result = true;
+                Filter f = getDefaultSettingsFromFilter(fclass.getName());
+                if (f != null) {
+                    conf.getFilters().add(f);
+                    result = true;
+                }
             }
         }
         return result;

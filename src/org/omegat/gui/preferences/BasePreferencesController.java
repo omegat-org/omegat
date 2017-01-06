@@ -27,6 +27,8 @@ package org.omegat.gui.preferences;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.omegat.util.Preferences;
+
 /**
  * A base preferences controller implementation.
  * 
@@ -48,6 +50,11 @@ public abstract class BasePreferencesController implements IPreferencesControlle
     @Override
     public void removeFurtherActionListener(FurtherActionListener listener) {
         listeners.remove(listener);
+    }
+
+    protected boolean valueIsDifferent(String prefsKey, Object newValue) {
+        String oldValue = Preferences.getPreference(prefsKey);
+        return !oldValue.equals(newValue.toString());
     }
 
     protected void fireRestartRequired() {

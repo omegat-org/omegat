@@ -94,10 +94,10 @@ public class TagProcessingOptionsController extends BasePreferencesController {
     }
 
     private void checkReloadRequired() {
-        boolean customPatternChanged = !panel.customPatternRegExpTF.getText()
-                .equals(Preferences.getPreference(Preferences.CHECK_CUSTOM_PATTERN));
-        boolean removePatternChanged = !panel.removePatternRegExpTF.getText()
-                .equals(Preferences.getPreference(Preferences.CHECK_REMOVE_PATTERN));
+        boolean customPatternChanged = valueIsDifferent(Preferences.CHECK_CUSTOM_PATTERN,
+                panel.customPatternRegExpTF.getText());
+        boolean removePatternChanged = valueIsDifferent(Preferences.CHECK_REMOVE_PATTERN,
+                panel.removePatternRegExpTF.getText());
         setReloadRequired(customPatternChanged || removePatternChanged);
     }
 

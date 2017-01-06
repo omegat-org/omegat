@@ -743,6 +743,9 @@ public class FilterMaster {
      */
     public static Filter getDefaultSettingsFromFilter(final String filterClassname) {
         IFilter f = getFilterInstance(filterClassname);
+        if (f == null) {
+            return null;
+        }
         Filter fc = new Filter();
         fc.setClassName(f.getClass().getName());
         fc.setEnabled(true);

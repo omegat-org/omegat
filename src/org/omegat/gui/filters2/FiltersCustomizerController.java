@@ -126,7 +126,7 @@ public class FiltersCustomizerController extends BasePreferencesController {
                 panel.editButton.setEnabled(true);
                 Filter currFilter = getFilterAtRow(panel.filtersTable.getSelectedRow());
                 IFilter f = FilterMaster.getFilterInstance(currFilter.getClassName());
-                panel.optionsButton.setEnabled(f.hasOptions());
+                panel.optionsButton.setEnabled(f != null && f.hasOptions());
             }
         });
         panel.filtersTable.addMouseListener(new MouseAdapter() {
@@ -153,12 +153,13 @@ public class FiltersCustomizerController extends BasePreferencesController {
         panel.optionsButton.addActionListener(e -> {
             Filter currFilter = getFilterAtRow(panel.filtersTable.getSelectedRow());
             IFilter f = FilterMaster.getFilterInstance(currFilter.getClassName());
-
-            // new options handling
-            Map<String, String> newConfig = f.changeOptions(SwingUtilities.windowForComponent(panel),
-                    FilterMaster.forFilter(currFilter.getOption()));
-            if (newConfig != null) {
-                FilterMaster.setOptions(currFilter, newConfig);
+            if (f != null) {
+                // new options handling
+                Map<String, String> newConfig = f.changeOptions(SwingUtilities.windowForComponent(panel),
+                        FilterMaster.forFilter(currFilter.getOption()));
+                if (newConfig != null) {
+                    FilterMaster.setOptions(currFilter, newConfig);
+                }
             }
         });
         panel.editButton.addActionListener(e -> doEdit(panel.filtersTable.getSelectedRow()));

@@ -73,12 +73,13 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
         initComponents();
 
         IFilter f = FilterMaster.getFilterInstance(filter.getClassName());
-        fileFormatTextField.setText(f.getFileFormatName());
-        if (!StringUtil.isEmpty(f.getHint())) {
-            hintTextArea.setText(f.getHint());
-        } else {
-            hintTextArea.setVisible(false);
+        String hint = null;
+        if (f != null) {
+            fileFormatTextField.setText(f.getFileFormatName());
+            hint = f.getHint();
         }
+        hintTextArea.setText(hint);
+        hintTextArea.setVisible(!StringUtil.isEmpty(hint));
 
         getRootPane().setDefaultButton(okButton);
 
@@ -334,6 +335,9 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         IFilter f = FilterMaster.getFilterInstance(filter.getClassName());
+        if (f == null) {
+            return;
+        }
 
         InstanceEditor ie = new InstanceEditor(this, f.isSourceEncodingVariable(),
                 f.isTargetEncodingVariable(), f.getHint());
@@ -353,6 +357,9 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
         int row = instances.getSelectedRow();
 
         IFilter f = FilterMaster.getFilterInstance(filter.getClassName());
+        if (f == null) {
+            return;
+        }
         InstanceEditor ie = new InstanceEditor(this, f.isSourceEncodingVariable(),
                 f.isTargetEncodingVariable(), f.getHint(),
                 instances.getModel().getValueAt(row, 0).toString(), instances.getModel().getValueAt(row, 1)

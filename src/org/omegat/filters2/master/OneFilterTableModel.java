@@ -25,13 +25,13 @@
 
 package org.omegat.filters2.master;
 
-import gen.core.filters.Files;
-import gen.core.filters.Filter;
-
 import javax.swing.table.AbstractTableModel;
 
 import org.omegat.filters2.IFilter;
 import org.omegat.util.OStrings;
+
+import gen.core.filters.Files;
+import gen.core.filters.Filter;
 
 /**
  * Wrapper around a single file filter class Manages entries in XML config file
@@ -50,8 +50,10 @@ public class OneFilterTableModel extends AbstractTableModel {
     public OneFilterTableModel(final Filter f) {
         this.filter = f;
         IFilter fi = FilterMaster.getFilterInstance(f.getClassName());
-        sourceEncodingVariable = fi.isSourceEncodingVariable();
-        targetEncodingVariable = fi.isTargetEncodingVariable();
+        if (fi != null) {
+            sourceEncodingVariable = fi.isSourceEncodingVariable();
+            targetEncodingVariable = fi.isTargetEncodingVariable();
+        }
     }
 
     // ////////////////////////////////////////////////////////////////////////

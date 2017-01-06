@@ -70,7 +70,10 @@ public class TMMatchesPreferencesController extends BasePreferencesController {
                 return OStrings.getString("EXT_TMX_SORT_KEY_" + value.name());
             }
         });
-        panel.sortMatchesList.addActionListener(e -> setReloadRequired(true));
+        panel.sortMatchesList.addActionListener(e -> {
+            boolean changed = valueIsDifferent(Preferences.EXT_TMX_SORT_KEY, panel.sortMatchesList.getSelectedItem());
+            setReloadRequired(changed);
+        });
         panel.insertButton
                 .addActionListener(
                         e -> panel.matchesTemplate.replaceSelection(panel.variablesList.getSelectedItem().toString()));

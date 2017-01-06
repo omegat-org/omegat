@@ -170,6 +170,7 @@ public class FilterMaster {
                 try {
                     return (IFilter) f.newInstance();
                 } catch (Exception ex) {
+                    Log.log("Failed to instantiate filter: " + classname);
                     Log.log(ex);
                 }
             }

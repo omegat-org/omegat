@@ -57,7 +57,7 @@ encountering certain malformed header lines
   Localisation Updates:
 
   - Italian localisation updated to 4.0.1 (UI, readme, documentation)
-  - Russian localisation updated to 4.0.1 (UI)
+  - Russian localisation updated to 4.1.0 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 4.0.1 (2016-10-03)

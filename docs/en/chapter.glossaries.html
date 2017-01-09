@@ -29,18 +29,18 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.glossaries"></a>Chapter&nbsp;19.&nbsp;Glossaries<a class="indexterm" name="d0e8779"></a><a class="indexterm" name="d0e8784"></a></h1>
+                  <h1 class="title"><a name="chapter.glossaries"></a>Chapter&nbsp;19.&nbsp;Glossaries<a class="indexterm" name="d0e8782"></a><a class="indexterm" name="d0e8787"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8811">1. Usage</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8866">2. File format</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8926">3. How to create glossaries</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8971">4. Priority glossary</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8983">5. Using Trados MultiTerm</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8999">6. Common glossary problems</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8814">1. Usage</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8869">2. File format</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8929">3. How to create glossaries</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8974">4. Priority glossary</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8986">5. Using Trados MultiTerm</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e9002">6. Common glossary problems</a></span></dt>
             </dl>
          </div>
          <p>Glossaries are files created and updated manually for use in
@@ -65,17 +65,17 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8811"></a>1.&nbsp;Usage
+                     <h2 class="title" style="clear: both"><a name="d0e8814"></a>1.&nbsp;Usage
                      </h2>
                   </div>
                </div>
             </div>
-            <p>To use an existing glossary, simply place it in the<a class="indexterm" name="d0e8816"></a> <code class="filename">/glossary</code> folder after creating the
+            <p>To use an existing glossary, simply place it in the<a class="indexterm" name="d0e8819"></a> <code class="filename">/glossary</code> folder after creating the
                    project. <span class="application">OmegaT</span> automatically detects glossary
                    files in this folder when a project is opened. Terms in the current
                    segment which <span class="application">OmegaT</span> finds in the glossary
                    file(s) are displayed in the Glossary pane:
-            </p><a class="indexterm" name="d0e8831"></a><div class="figure"><a name="d0e8834"></a><p class="title"><b>Figure&nbsp;19.1.&nbsp;Glossary pane</b></p>
+            </p><a class="indexterm" name="d0e8834"></a><div class="figure"><a name="d0e8837"></a><p class="title"><b>Figure&nbsp;19.1.&nbsp;Glossary pane</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/GlossaryPane_25.png" alt="Glossary pane"></div>
                </div>
@@ -90,20 +90,20 @@
             <p>The source term does not have to be a single-word item, as the next
                    example shows:
             </p>
-            <div class="figure"><a name="d0e8846"></a><p class="title"><b>Figure&nbsp;19.2.&nbsp;multiple words entries in glossaries - example<a class="indexterm" name="d0e8849"></a></b></p>
+            <div class="figure"><a name="d0e8849"></a><p class="title"><b>Figure&nbsp;19.2.&nbsp;multiple words entries in glossaries - example<a class="indexterm" name="d0e8852"></a></b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="multiple words entries in glossaries - example"></div>
                </div>
             </div><br class="figure-break"><p>The underlined item "pop-up menu" can be found in the glossary pane
                    as "pojavni menu". Highlighting it in the Glossary pane and then
                    rightclicking insets at the cursor position in the target
-                   segment.<a href="#ftn.d0e8863" class="footnote" name="d0e8863"><sup class="footnote">[1]</sup></a></p>
+                   segment.<a href="#ftn.d0e8866" class="footnote" name="d0e8866"><sup class="footnote">[1]</sup></a></p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8866"></a>2.&nbsp;<a class="indexterm" name="d0e8868"></a>File format<a class="indexterm" name="d0e8874"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8869"></a>2.&nbsp;<a class="indexterm" name="d0e8871"></a>File format<a class="indexterm" name="d0e8877"></a></h2>
                   </div>
                </div>
             </div>
@@ -124,7 +124,7 @@
             </p>
             <p><code class="literal">"This is a source term, which contains a comma","c'est un
                       terme, qui contient une virgule"</code></p>
-            <p>In addition to the plain text format, TBX format <a class="indexterm" name="d0e8892"></a> is also supported as a read-only glossary format. The
+            <p>In addition to the plain text format, TBX format <a class="indexterm" name="d0e8895"></a> is also supported as a read-only glossary format. The
                    location of the <code class="filename">.tbx</code> file must be within the
                    <code class="filename">/glossary</code> folder, but it can be in a deeper folder
                    (e.g., <code class="filename">glossary/sub/MyGlossary.tbx</code>).
@@ -134,7 +134,7 @@
                    international standard by LISA and ISO. If you have an existing
                    terminology handling system it is quite possible it offers the export of
                    terminology data via TBX format. <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Microsoft
-                      Terminology Collection</a> <a class="indexterm" name="d0e8912"></a> can be downloaded in nearly 100 languages and can serve as
+                      Terminology Collection</a> <a class="indexterm" name="d0e8915"></a> can be downloaded in nearly 100 languages and can serve as
                    a cornerstone IT glossary.
             </p>
             <p>Note: the <code class="filename">.tbx</code> output of MultiTerm seems to not
@@ -146,7 +146,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8926"></a>3.&nbsp;How to create glossaries<a class="indexterm" name="d0e8929"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8929"></a>3.&nbsp;How to create glossaries<a class="indexterm" name="d0e8932"></a></h2>
                   </div>
                </div>
             </div>
@@ -164,7 +164,7 @@
                    between the fields) and save the file. The contents of the glossary pane
                    will be updated accordingly.
             </p>
-            <p><a class="indexterm" name="d0e8950"></a>The location of the writable glossary file can be set in the
+            <p><a class="indexterm" name="d0e8953"></a>The location of the writable glossary file can be set in the
                    <span class="guimenuitem">Project &gt; Properties ... </span>dialog. The
                    recognized extensions are <code class="filename">TXT</code> and
                    <code class="filename">UTF8</code></p>
@@ -180,7 +180,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8971"></a>4.&nbsp;<a class="indexterm" name="d0e8973"></a>Priority glossary
+                     <h2 class="title" style="clear: both"><a name="d0e8974"></a>4.&nbsp;<a class="indexterm" name="d0e8976"></a>Priority glossary
                      </h2>
                   </div>
                </div>
@@ -197,7 +197,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8983"></a>5.&nbsp;<a class="indexterm" name="d0e8985"></a>Using Trados MultiTerm
+                     <h2 class="title" style="clear: both"><a name="d0e8986"></a>5.&nbsp;<a class="indexterm" name="d0e8988"></a>Using Trados MultiTerm
                      </h2>
                   </div>
                </div>
@@ -214,7 +214,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8999"></a>6.&nbsp;<a class="indexterm" name="d0e9001"></a>Common glossary problems
+                     <h2 class="title" style="clear: both"><a name="d0e9002"></a>6.&nbsp;<a class="indexterm" name="d0e9004"></a>Common glossary problems
                      </h2>
                   </div>
                </div>
@@ -298,8 +298,8 @@
             </div>
          </div>
          <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
-            <div id="ftn.d0e8863" class="footnote">
-               <p><a href="#d0e8863" class="para"><sup class="para">[1] </sup></a>Note that in the above case, this is just half (or even less) of
+            <div id="ftn.d0e8866" class="footnote">
+               <p><a href="#d0e8866" class="para"><sup class="para">[1] </sup></a>Note that in the above case, this is just half (or even less) of
                           the story, as the target language (Slovenian) uses declension. So the
                           inserted "pojavni meni" in the nominative form - has to be changed to
                           "pojavnem meniju" , i.e. to the locative. So it is probably faster to

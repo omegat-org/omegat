@@ -464,7 +464,7 @@ def makeWinTask = { args ->
 }
 makeWinTask name: 'winNoJRE', suffix: 'Windows_without_JRE'
 makeWinTask name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE
-makeWinTask name: 'winJRE64', suffix: 'Windows-64', jrePath: windowsJRE64, arch: 'x64'
+makeWinTask name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE64, arch: 'x64'
 
 // Disable .tar distributions for everyone but Linux
 tasks.findAll { it.name =~ /[dD]istTar$/ && !it.name.contains('linux') }.each { it.enabled = false }

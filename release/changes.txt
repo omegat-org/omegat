@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.1
 ----------------------------------------------------------------------
-  0 Enhancements
+  1 Enhancement
   0 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 4.1.1 vs 4.1.0
+
+  Implemented requests:
+
+  - Improve validation feedback when editing External Search items
+  https://sourceforge.net/p/omegat/feature-requests/1303/
 
 ----------------------------------------------------------------------
  OmegaT 4.1.0 (2017-01-09)

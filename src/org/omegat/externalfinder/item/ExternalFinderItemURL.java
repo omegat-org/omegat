@@ -160,7 +160,14 @@ public class ExternalFinderItemURL {
             return new ExternalFinderItemURL(url, target, encoding);
         }
 
-        public void validate() throws IllegalStateException {
+        /**
+         * Check the current builder parameters to see if they constitute a valid URL.
+         * 
+         * @return A sample URL illustrating what the output will look like
+         * @throws IllegalStateException
+         *             If any parameter is not valid
+         */
+        public URI validate() throws IllegalStateException {
             String className = ExternalFinderItemURL.class.getSimpleName();
             if (url == null || !url.contains(ExternalFinderItem.PLACEHOLDER_TARGET)) {
                 throw new IllegalStateException(String.format("%s URL is missing or does not contain %s", className,
@@ -172,6 +179,17 @@ public class ExternalFinderItemURL {
             if (encoding == null) {
                 throw new IllegalStateException(className + " encoding is missing");
             }
+            try {
+                return generateSampleURL();
+            } catch (Throwable e) {
+                throw new IllegalStateException(e);
+            }
+        }
+        
+        public URI generateSampleURL() throws UnsupportedEncodingException, URISyntaxException {
+            String findingWords = target == ExternalFinderItem.TARGET.NON_ASCII_ONLY
+                    ? "f\u00f8\u00f8 b\u00e5r" : "foo bar";
+            return generateURL(url, encoding, findingWords);
         }
     }
 }

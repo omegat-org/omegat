@@ -112,6 +112,11 @@ public class ExternalFinderItemCommand {
     }
 
     public final String[] generateCommand(String findingWords) throws UnsupportedEncodingException {
+        return generateCommand(command, delimiter, encoding, findingWords);
+    }
+
+    private static final String[] generateCommand(String command, String delimiter,
+            ExternalFinderItem.ENCODING encoding, String findingWords) throws UnsupportedEncodingException {
         String encodedWords;
         if (encoding == ExternalFinderItem.ENCODING.NONE) {
             encodedWords = findingWords;
@@ -183,7 +188,14 @@ public class ExternalFinderItemCommand {
             return new ExternalFinderItemCommand(command, target, encoding, delimiter);
         }
 
-        public void validate() throws IllegalStateException {
+        /**
+         * Check the current builder parameters to see if they constitute a valid command.
+         * 
+         * @return A sample array of arguments illustrating what the output will look like
+         * @throws IllegalStateException
+         *             If any parameter is not valid
+         */
+        public String[] validate() throws IllegalStateException {
             String className = ExternalFinderItemCommand.class.getSimpleName();
             if (command == null || !command.contains(ExternalFinderItem.PLACEHOLDER_TARGET)) {
                 throw new IllegalStateException(String.format("%s command is missing or does not contain %s", className,
@@ -198,6 +210,17 @@ public class ExternalFinderItemCommand {
             if (delimiter == null || delimiter.isEmpty()) {
                 throw new IllegalStateException(className + " delimiter is missing or empty");
             }
+            try {
+                return generateSampleCommand();
+            } catch (Throwable e) {
+                throw new IllegalStateException(e);
+            }
+        }
+
+        public String[] generateSampleCommand() throws UnsupportedEncodingException {
+            String findingWords = target == ExternalFinderItem.TARGET.NON_ASCII_ONLY
+                    ? "f\u00f8\u00f8 b\u00e5r" : "foo bar";
+            return generateCommand(command, delimiter, encoding, findingWords);
         }
     }
 }

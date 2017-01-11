@@ -25,7 +25,9 @@
 
 package org.omegat.externalfinder.gui;
 
+import java.awt.Color;
 import java.awt.Window;
+import java.net.URISyntaxException;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
@@ -97,13 +99,17 @@ public class ExternalFinderItemURLEditorController {
 
         panel.targetComboBox.setModel(new DefaultComboBoxModel<>(ExternalFinderItem.TARGET.values()));
         panel.targetComboBox.setSelectedItem(builder.getTarget());
-        panel.targetComboBox.addActionListener(
-                e -> builder.setTarget((ExternalFinderItem.TARGET) panel.targetComboBox.getSelectedItem()));
+        panel.targetComboBox.addActionListener(e -> {
+            builder.setTarget((ExternalFinderItem.TARGET) panel.targetComboBox.getSelectedItem());
+            validate();
+        });
 
         panel.encodingComboBox.setModel(new DefaultComboBoxModel<>(ExternalFinderItem.ENCODING.values()));
         panel.encodingComboBox.setSelectedItem(builder.getEncoding());
-        panel.encodingComboBox.addActionListener(e -> builder
-                .setEncoding((ExternalFinderItem.ENCODING) panel.encodingComboBox.getSelectedItem()));
+        panel.encodingComboBox.addActionListener(e -> {
+            builder.setEncoding((ExternalFinderItem.ENCODING) panel.encodingComboBox.getSelectedItem());
+            validate();
+        });
 
         panel.okButton.addActionListener(e -> {
             if (validate()) {
@@ -132,12 +138,18 @@ public class ExternalFinderItemURLEditorController {
 
     private boolean validate() {
         boolean isValid = true;
+        String sampleOutput = null;
         try {
-            builder.validate();
+            sampleOutput = builder.validate().toString();
         } catch (IllegalStateException e) {
             isValid = false;
+            if (e.getCause() instanceof URISyntaxException) {
+                sampleOutput = ((URISyntaxException) e.getCause()).getLocalizedMessage();
+            }
         }
         panel.okButton.setEnabled(isValid);
+        panel.sampleOutputTextArea.setText(sampleOutput);
+        panel.sampleOutputTextArea.setForeground(isValid ? Color.BLACK : Color.RED);
         return isValid;
     }
 }

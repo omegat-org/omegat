@@ -74,13 +74,16 @@ public class ExternalFinderSubItemEditorPanel extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
-        targetComboBox = new javax.swing.JComboBox<ExternalFinderItem.TARGET>();
+        targetComboBox = new javax.swing.JComboBox<>();
         filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
-        encodingComboBox = new javax.swing.JComboBox<ExternalFinderItem.ENCODING>();
+        encodingComboBox = new javax.swing.JComboBox<>();
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
+        jPanel8 = new javax.swing.JPanel();
+        sampleOutputTextArea = new javax.swing.JTextArea();
+        filler13 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
@@ -195,6 +198,20 @@ public class ExternalFinderSubItemEditorPanel extends javax.swing.JPanel {
         add(jPanel4);
         add(filler9);
 
+        jPanel8.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("EXTERNALFINDER_SUBEDITOR_SAMPLE_OUTPUT")), javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5))); // NOI18N
+        jPanel8.setAlignmentX(0.0F);
+        jPanel8.setLayout(new java.awt.BorderLayout());
+
+        sampleOutputTextArea.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+        sampleOutputTextArea.setLineWrap(true);
+        sampleOutputTextArea.setWrapStyleWord(true);
+        sampleOutputTextArea.setFocusable(false);
+        sampleOutputTextArea.setOpaque(false);
+        jPanel8.add(sampleOutputTextArea, java.awt.BorderLayout.CENTER);
+
+        add(jPanel8);
+        add(filler13);
+
         jPanel1.setAlignmentX(0.0F);
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -222,6 +239,7 @@ public class ExternalFinderSubItemEditorPanel extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler10;
     private javax.swing.Box.Filler filler11;
     private javax.swing.Box.Filler filler12;
+    private javax.swing.Box.Filler filler13;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
@@ -241,11 +259,13 @@ public class ExternalFinderSubItemEditorPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     javax.swing.JButton okButton;
+    javax.swing.JTextArea sampleOutputTextArea;
     javax.swing.JComboBox<ExternalFinderItem.TARGET> targetComboBox;
     javax.swing.JPanel urlPanel;
     javax.swing.JTextArea urlTextArea;

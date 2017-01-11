@@ -25,6 +25,7 @@
 
 package org.omegat.externalfinder.gui;
 
+import java.awt.Color;
 import java.awt.Window;
 
 import javax.swing.DefaultComboBoxModel;
@@ -120,13 +121,17 @@ public class ExternalFinderItemCommandEditorController {
 
         panel.targetComboBox.setModel(new DefaultComboBoxModel<>(ExternalFinderItem.TARGET.values()));
         panel.targetComboBox.setSelectedItem(builder.getTarget());
-        panel.targetComboBox.addActionListener(
-                e -> builder.setTarget((ExternalFinderItem.TARGET) panel.targetComboBox.getSelectedItem()));
+        panel.targetComboBox.addActionListener(e -> {
+            builder.setTarget((ExternalFinderItem.TARGET) panel.targetComboBox.getSelectedItem());
+            validate();
+        });
 
         panel.encodingComboBox.setModel(new DefaultComboBoxModel<>(ExternalFinderItem.ENCODING.values()));
         panel.encodingComboBox.setSelectedItem(builder.getEncoding());
-        panel.encodingComboBox.addActionListener(e -> builder
-                .setEncoding((ExternalFinderItem.ENCODING) panel.encodingComboBox.getSelectedItem()));
+        panel.encodingComboBox.addActionListener(e -> {
+            builder.setEncoding((ExternalFinderItem.ENCODING) panel.encodingComboBox.getSelectedItem());
+            validate();
+        });
 
         panel.okButton.addActionListener(e -> {
             if (validate()) {
@@ -155,12 +160,16 @@ public class ExternalFinderItemCommandEditorController {
 
     private boolean validate() {
         boolean isValid = true;
+        String sampleOutput = null;
         try {
-            builder.validate();
+            String[] args = builder.validate();
+            sampleOutput = String.join("\u2423", args);
         } catch (IllegalStateException e) {
             isValid = false;
         }
         panel.okButton.setEnabled(isValid);
+        panel.sampleOutputTextArea.setText(sampleOutput);
+        panel.sampleOutputTextArea.setForeground(isValid ? Color.BLACK : Color.RED);
         return isValid;
     }
 }

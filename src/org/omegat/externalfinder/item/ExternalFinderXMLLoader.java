@@ -68,7 +68,7 @@ public class ExternalFinderXMLLoader implements IExternalFinderItemLoader {
             try {
                 finderItems.add(generateFinderItem(nodeList.item(i)));
             } catch (ExternalFinderValidationException ex) {
-                LOGGER.warning(ex.getMessage());
+                LOGGER.warning("ExternalFinder: " + ex.getMessage());
             }
         }
 
@@ -134,13 +134,13 @@ public class ExternalFinderXMLLoader implements IExternalFinderItemLoader {
                 try {
                     builder.addURL(generateFinderURL(childNode));
                 } catch (ExternalFinderValidationException ex) {
-                    LOGGER.warning(ex.getMessage());
+                    LOGGER.warning("ExternalFinder: " + ex.getMessage());
                 }
             } else if (nodeName.equals("command")) {
                 try {
                     builder.addCommand(generateFinderCommand(childNode));
                 } catch (ExternalFinderValidationException ex) {
-                    LOGGER.warning(ex.getMessage());
+                    LOGGER.warning("ExternalFinder: " + ex.getMessage());
                 }
             } else if (nodeName.equals("keystroke")) {
                 KeyStroke keyStroke = KeyStroke.getKeyStroke(childNode.getTextContent());

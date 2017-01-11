@@ -27,7 +27,6 @@ package org.omegat.externalfinder.gui;
 
 import java.awt.Color;
 import java.awt.Window;
-import java.net.URISyntaxException;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
@@ -53,7 +52,7 @@ public class ExternalFinderItemURLEditorController {
     private boolean userDidConfirm;
 
     public ExternalFinderItemURLEditorController() {
-        this(new ExternalFinderItemURL.Builder());
+        this(new ExternalFinderItemURL.Builder().setURL(""));
     }
 
     public ExternalFinderItemURLEditorController(ExternalFinderItemURL item) {
@@ -144,9 +143,7 @@ public class ExternalFinderItemURLEditorController {
             sampleOutput = builder.validate().toString();
         } catch (ExternalFinderValidationException e) {
             isValid = false;
-            if (e.getCause() instanceof URISyntaxException) {
-                sampleOutput = ((URISyntaxException) e.getCause()).getLocalizedMessage();
-            }
+            sampleOutput = e.getLocalizedMessage();
         }
         panel.okButton.setEnabled(isValid);
         panel.sampleOutputTextArea.setText(sampleOutput);

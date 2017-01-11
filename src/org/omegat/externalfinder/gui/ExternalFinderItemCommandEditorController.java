@@ -52,7 +52,7 @@ public class ExternalFinderItemCommandEditorController {
     private boolean userDidConfirm;
 
     public ExternalFinderItemCommandEditorController() {
-        this(new ExternalFinderItemCommand.Builder());
+        this(new ExternalFinderItemCommand.Builder().setCommand(""));
     }
 
     public ExternalFinderItemCommandEditorController(ExternalFinderItemCommand item) {
@@ -167,6 +167,7 @@ public class ExternalFinderItemCommandEditorController {
             sampleOutput = String.join("\u2423", args);
         } catch (ExternalFinderValidationException e) {
             isValid = false;
+            sampleOutput = e.getLocalizedMessage();
         }
         panel.okButton.setEnabled(isValid);
         panel.sampleOutputTextArea.setText(sampleOutput);

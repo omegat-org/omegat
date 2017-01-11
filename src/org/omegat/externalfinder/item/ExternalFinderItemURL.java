@@ -31,6 +31,8 @@ import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
+import org.omegat.util.OStrings;
+
 /**
  * A data class representing an ExternalFinder "url". Immutable. Optionally use
  * {@link Builder} to construct.
@@ -168,17 +170,19 @@ public class ExternalFinderItemURL {
          *             If any parameter is not valid
          */
         public URI validate() throws ExternalFinderValidationException {
-            String className = ExternalFinderItemURL.class.getSimpleName();
-            if (url == null || !url.contains(ExternalFinderItem.PLACEHOLDER_TARGET)) {
+            if (url == null) {
                 throw new ExternalFinderValidationException(
-                        String.format("%s URL is missing or does not contain %s", className,
-                        ExternalFinderItem.PLACEHOLDER_TARGET));
+                        OStrings.getString("EXTERNALFINDER_URL_ERROR_NOURL"));
+            }
+            if (!url.contains(ExternalFinderItem.PLACEHOLDER_TARGET)) {
+                throw new ExternalFinderValidationException(OStrings.getString(
+                        "EXTERNALFINDER_URL_ERROR_NOTOKEN", ExternalFinderItem.PLACEHOLDER_TARGET));
             }
             if (target == null) {
-                throw new ExternalFinderValidationException(className + " target is missing");
+                throw new ExternalFinderValidationException("EXTERNALFINDER_URL_ERROR_NOTARGET");
             }
             if (encoding == null) {
-                throw new ExternalFinderValidationException(className + " encoding is missing");
+                throw new ExternalFinderValidationException("EXTERNALFINDER_URL_ERROR_NOENCODING");
             }
             try {
                 return generateSampleURL();

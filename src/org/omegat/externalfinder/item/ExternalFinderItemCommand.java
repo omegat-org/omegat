@@ -30,6 +30,8 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Pattern;
 
+import org.omegat.util.OStrings;
+
 /**
  * A data class representing an ExternalFinder "command". Immutable. Optionally
  * use {@link Builder} to construct.
@@ -196,20 +198,29 @@ public class ExternalFinderItemCommand {
          *             If any parameter is not valid
          */
         public String[] validate() throws ExternalFinderValidationException {
-            String className = ExternalFinderItemCommand.class.getSimpleName();
-            if (command == null || !command.contains(ExternalFinderItem.PLACEHOLDER_TARGET)) {
+            if (command == null) {
                 throw new ExternalFinderValidationException(
-                        String.format("%s command is missing or does not contain %s", className,
-                        ExternalFinderItem.PLACEHOLDER_TARGET));
+                        OStrings.getString("EXTERNALFINDER_COMMAND_ERROR_NOCOMMAND"));
+            }
+            if (!command.contains(ExternalFinderItem.PLACEHOLDER_TARGET)) {
+                throw new ExternalFinderValidationException(OStrings.getString(
+                        "EXTERNALFINDER_COMMAND_ERROR_NOTOKEN", ExternalFinderItem.PLACEHOLDER_TARGET));
             }
             if (target == null) {
-                throw new ExternalFinderValidationException(className + " target is missing");
+                throw new ExternalFinderValidationException(
+                        OStrings.getString("EXTERNALFINDER_COMMAND_ERROR_NOTARGET"));
             }
             if (encoding == null) {
-                throw new ExternalFinderValidationException(className + " encoding is missing");
+                throw new ExternalFinderValidationException(
+                        OStrings.getString("EXTERNALFINDER_COMMAND_ERROR_NOENCODING"));
             }
-            if (delimiter == null || delimiter.isEmpty()) {
-                throw new ExternalFinderValidationException(className + " delimiter is missing or empty");
+            if (delimiter == null) {
+                throw new ExternalFinderValidationException(
+                        OStrings.getString("EXTERNALFINDER_COMMAND_ERROR_NODELIMITER"));
+            }
+            if (delimiter.isEmpty()) {
+                throw new ExternalFinderValidationException(
+                        OStrings.getString("EXTERNALFINDER_COMMAND_ERROR_DELIMITEREMPTY"));
             }
             try {
                 return generateSampleCommand();

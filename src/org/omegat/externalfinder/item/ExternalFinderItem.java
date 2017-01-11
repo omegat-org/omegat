@@ -294,15 +294,15 @@ public class ExternalFinderItem {
         }
 
         public void validate() throws ExternalFinderValidationException {
-            String className = ExternalFinderItem.class.getSimpleName();
-            if (name != null && name.isEmpty()) {
-                throw new ExternalFinderValidationException(className + " name is missing or empty");
+            if (name == null || name.isEmpty()) {
+                throw new ExternalFinderValidationException(
+                        OStrings.getString("EXTERNALFINDER_ITEM_ERROR_NAME"));
             }
             boolean hasUrls = urls != null && !urls.isEmpty();
             boolean hasCommands = commands != null && !commands.isEmpty();
             if (!hasUrls && !hasCommands) {
                 throw new ExternalFinderValidationException(
-                        String.format("%s has neither URLs nor commands. Name: %s", className, name));
+                        OStrings.getString("EXTERNALFINDER_ITEM_ERROR_EMPTY", name));
             }
         }
     }

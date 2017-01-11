@@ -288,20 +288,20 @@ public class ExternalFinderItem {
             return nopopup;
         }
 
-        public ExternalFinderItem build() throws IllegalStateException {
+        public ExternalFinderItem build() throws ExternalFinderValidationException {
             validate();
             return new ExternalFinderItem(this);
         }
 
-        public void validate() throws IllegalStateException {
+        public void validate() throws ExternalFinderValidationException {
             String className = ExternalFinderItem.class.getSimpleName();
             if (name != null && name.isEmpty()) {
-                throw new IllegalStateException(className + " name is missing or empty");
+                throw new ExternalFinderValidationException(className + " name is missing or empty");
             }
             boolean hasUrls = urls != null && !urls.isEmpty();
             boolean hasCommands = commands != null && !commands.isEmpty();
             if (!hasUrls && !hasCommands) {
-                throw new IllegalStateException(
+                throw new ExternalFinderValidationException(
                         String.format("%s has neither URLs nor commands. Name: %s", className, name));
             }
         }

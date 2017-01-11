@@ -37,6 +37,7 @@ import javax.swing.event.DocumentListener;
 
 import org.omegat.externalfinder.item.ExternalFinderItem;
 import org.omegat.externalfinder.item.ExternalFinderItemURL;
+import org.omegat.externalfinder.item.ExternalFinderValidationException;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
 
@@ -141,7 +142,7 @@ public class ExternalFinderItemURLEditorController {
         String sampleOutput = null;
         try {
             sampleOutput = builder.validate().toString();
-        } catch (IllegalStateException e) {
+        } catch (ExternalFinderValidationException e) {
             isValid = false;
             if (e.getCause() instanceof URISyntaxException) {
                 sampleOutput = ((URISyntaxException) e.getCause()).getLocalizedMessage();

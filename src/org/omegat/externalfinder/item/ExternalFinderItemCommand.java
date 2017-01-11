@@ -183,7 +183,7 @@ public class ExternalFinderItemCommand {
             return delimiter;
         }
 
-        public ExternalFinderItemCommand build() throws IllegalStateException {
+        public ExternalFinderItemCommand build() throws ExternalFinderValidationException {
             validate();
             return new ExternalFinderItemCommand(command, target, encoding, delimiter);
         }
@@ -192,28 +192,29 @@ public class ExternalFinderItemCommand {
          * Check the current builder parameters to see if they constitute a valid command.
          * 
          * @return A sample array of arguments illustrating what the output will look like
-         * @throws IllegalStateException
+         * @throws ExternalFinderValidationException
          *             If any parameter is not valid
          */
-        public String[] validate() throws IllegalStateException {
+        public String[] validate() throws ExternalFinderValidationException {
             String className = ExternalFinderItemCommand.class.getSimpleName();
             if (command == null || !command.contains(ExternalFinderItem.PLACEHOLDER_TARGET)) {
-                throw new IllegalStateException(String.format("%s command is missing or does not contain %s", className,
+                throw new ExternalFinderValidationException(
+                        String.format("%s command is missing or does not contain %s", className,
                         ExternalFinderItem.PLACEHOLDER_TARGET));
             }
             if (target == null) {
-                throw new IllegalStateException(className + " target is missing");
+                throw new ExternalFinderValidationException(className + " target is missing");
             }
             if (encoding == null) {
-                throw new IllegalStateException(className + " encoding is missing");
+                throw new ExternalFinderValidationException(className + " encoding is missing");
             }
             if (delimiter == null || delimiter.isEmpty()) {
-                throw new IllegalStateException(className + " delimiter is missing or empty");
+                throw new ExternalFinderValidationException(className + " delimiter is missing or empty");
             }
             try {
                 return generateSampleCommand();
             } catch (Throwable e) {
-                throw new IllegalStateException(e);
+                throw new ExternalFinderValidationException(e);
             }
         }
 

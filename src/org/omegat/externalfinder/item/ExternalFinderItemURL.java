@@ -155,7 +155,7 @@ public class ExternalFinderItemURL {
             return encoding;
         }
 
-        public ExternalFinderItemURL build() throws IllegalStateException {
+        public ExternalFinderItemURL build() throws ExternalFinderValidationException {
             validate();
             return new ExternalFinderItemURL(url, target, encoding);
         }
@@ -164,25 +164,26 @@ public class ExternalFinderItemURL {
          * Check the current builder parameters to see if they constitute a valid URL.
          * 
          * @return A sample URL illustrating what the output will look like
-         * @throws IllegalStateException
+         * @throws ExternalFinderValidationException
          *             If any parameter is not valid
          */
-        public URI validate() throws IllegalStateException {
+        public URI validate() throws ExternalFinderValidationException {
             String className = ExternalFinderItemURL.class.getSimpleName();
             if (url == null || !url.contains(ExternalFinderItem.PLACEHOLDER_TARGET)) {
-                throw new IllegalStateException(String.format("%s URL is missing or does not contain %s", className,
+                throw new ExternalFinderValidationException(
+                        String.format("%s URL is missing or does not contain %s", className,
                         ExternalFinderItem.PLACEHOLDER_TARGET));
             }
             if (target == null) {
-                throw new IllegalStateException(className + " target is missing");
+                throw new ExternalFinderValidationException(className + " target is missing");
             }
             if (encoding == null) {
-                throw new IllegalStateException(className + " encoding is missing");
+                throw new ExternalFinderValidationException(className + " encoding is missing");
             }
             try {
                 return generateSampleURL();
             } catch (Throwable e) {
-                throw new IllegalStateException(e);
+                throw new ExternalFinderValidationException(e);
             }
         }
         

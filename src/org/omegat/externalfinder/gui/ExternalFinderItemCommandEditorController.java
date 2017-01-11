@@ -36,6 +36,7 @@ import javax.swing.event.DocumentListener;
 
 import org.omegat.externalfinder.item.ExternalFinderItem;
 import org.omegat.externalfinder.item.ExternalFinderItemCommand;
+import org.omegat.externalfinder.item.ExternalFinderValidationException;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
 
@@ -164,7 +165,7 @@ public class ExternalFinderItemCommandEditorController {
         try {
             String[] args = builder.validate();
             sampleOutput = String.join("\u2423", args);
-        } catch (IllegalStateException e) {
+        } catch (ExternalFinderValidationException e) {
             isValid = false;
         }
         panel.okButton.setEnabled(isValid);

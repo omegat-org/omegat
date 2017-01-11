@@ -25,14 +25,9 @@
 
 package org.omegat.externalfinder.item;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import javax.swing.KeyStroke;
 
@@ -140,42 +135,6 @@ public class ExternalFinderItem {
             }
         }
         return true;
-    }
-
-    public static final URI generateURL(ExternalFinderItemURL url, String findingWords)
-            throws UnsupportedEncodingException, URISyntaxException {
-        String encodedWords;
-        if (url.getEncoding() == ENCODING.NONE) {
-            encodedWords = findingWords;
-        } else {
-            encodedWords = URLEncoder.encode(findingWords, "UTF-8");
-            if (url.getEncoding() == ENCODING.ESCAPE) {
-                encodedWords = encodedWords.replace("+", "%20");
-            }
-        }
-
-        String replaced = url.getURL().replace(PLACEHOLDER_TARGET, encodedWords);
-        return new URI(replaced);
-    }
-
-    public static final String[] generateCommand(ExternalFinderItemCommand command, String findingWords) throws UnsupportedEncodingException {
-        String encodedWords;
-        if (command.getEncoding() == ENCODING.NONE) {
-            encodedWords = findingWords;
-        } else {
-            encodedWords = URLEncoder.encode(findingWords, "UTF-8");
-            if (command.getEncoding() == ENCODING.ESCAPE) {
-                encodedWords = encodedWords.replace("+", "%20");
-            }
-        }
-
-        String[] ret = command.getCommand().split(Pattern.quote(command.getDelimiter()));
-        for (int i = 0; i < ret.length; i++) {
-            String s = ret[i];
-            ret[i] = s.replace(PLACEHOLDER_TARGET, encodedWords);
-        }
-
-        return ret;
     }
 
     public Object getContentSummary() {

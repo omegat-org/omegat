@@ -127,7 +127,7 @@ public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuG
                         }
 
                         try {
-                            Desktop.getDesktop().browse(ExternalFinderItem.generateURL(url, targetWords));
+                            Desktop.getDesktop().browse(url.generateURL(targetWords));
                         } catch (IOException | URISyntaxException ex) {
                             Logger.getLogger(ExternalFinderItemMenuGenerator.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -145,7 +145,7 @@ public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuG
                         }
 
                         try {
-                            Runtime.getRuntime().exec(ExternalFinderItem.generateCommand(command, targetWords));
+                            Runtime.getRuntime().exec(command.generateCommand(targetWords));
                         } catch (IOException ex) {
                             Logger.getLogger(ExternalFinderItemMenuGenerator.class.getName()).log(Level.SEVERE, null, ex);
                         }

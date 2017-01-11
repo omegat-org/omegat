@@ -25,6 +25,12 @@
 
 package org.omegat.externalfinder.item;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 /**
  * A data class representing an ExternalFinder "url". Immutable. Optionally use
  * {@link Builder} to construct.
@@ -90,6 +96,26 @@ public class ExternalFinderItemURL {
             return false;
         }
         return true;
+    }
+
+    public URI generateURL(String findingWords) throws UnsupportedEncodingException, URISyntaxException {
+        return generateURL(url, encoding, findingWords);
+    }
+
+    private static final URI generateURL(String url, ExternalFinderItem.ENCODING encoding,
+            String findingWords) throws UnsupportedEncodingException, URISyntaxException {
+        String encodedWords;
+        if (encoding == ExternalFinderItem.ENCODING.NONE) {
+            encodedWords = findingWords;
+        } else {
+            encodedWords = URLEncoder.encode(findingWords, StandardCharsets.UTF_8.name());
+            if (encoding == ExternalFinderItem.ENCODING.ESCAPE) {
+                encodedWords = encodedWords.replace("+", "%20");
+            }
+        }
+
+        String replaced = url.replace(ExternalFinderItem.PLACEHOLDER_TARGET, encodedWords);
+        return new URI(replaced);
     }
 
     public static class Builder {

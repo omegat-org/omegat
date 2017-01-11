@@ -25,6 +25,11 @@
 
 package org.omegat.externalfinder.item;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.regex.Pattern;
+
 /**
  * A data class representing an ExternalFinder "command". Immutable. Optionally
  * use {@link Builder} to construct.
@@ -104,6 +109,26 @@ public class ExternalFinderItemCommand {
             return false;
         }
         return true;
+    }
+
+    public final String[] generateCommand(String findingWords) throws UnsupportedEncodingException {
+        String encodedWords;
+        if (encoding == ExternalFinderItem.ENCODING.NONE) {
+            encodedWords = findingWords;
+        } else {
+            encodedWords = URLEncoder.encode(findingWords, StandardCharsets.UTF_8.name());
+            if (encoding == ExternalFinderItem.ENCODING.ESCAPE) {
+                encodedWords = encodedWords.replace("+", "%20");
+            }
+        }
+
+        String[] ret = command.split(Pattern.quote(delimiter));
+        for (int i = 0; i < ret.length; i++) {
+            String s = ret[i];
+            ret[i] = s.replace(ExternalFinderItem.PLACEHOLDER_TARGET, encodedWords);
+        }
+
+        return ret;
     }
 
     public static class Builder {

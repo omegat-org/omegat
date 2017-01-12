@@ -56,7 +56,7 @@ import org.omegat.util.WikiGet;
 public class Google2Translate extends BaseTranslate {
 	protected static final String PROPERTY_PREMIUM_KEY = "google.api.premium";
 	protected static final String PROPERTY_API_KEY = "google.api.key";
-    protected static final String  GT_URL   = "https://www.googleapis.com/language/translate/v2";
+    protected static final String  GT_URL   = "https://translation.googleapis.com/language/translate/v2";
     protected static final Pattern RE_UNICODE = Pattern.compile("\\\\u([0-9A-Fa-f]{4})");
     protected static final Pattern RE_HTML  = Pattern.compile("&#([0-9]+);");
 
@@ -66,7 +66,7 @@ public class Google2Translate extends BaseTranslate {
     }
 
     public String getName() {
-        return OStrings.getString("MT_ENGINE_GOOGLE2");
+        return OStrings.getString("MT_ENGINE_GOOGLE2") + (isPremium() ? " Premium" : "");
     }
 
     @Override
@@ -131,8 +131,7 @@ public class Google2Translate extends BaseTranslate {
             char c = (char) Integer.parseInt(m.group(1));
             v = v.replace(g, Character.toString(c));
         }
-
-        Pattern pattern = java.util.regex.Pattern.compile("\\{\\s*\"translatedText\"\\s*:\\s*\"(.*?)\"\\s*\\s*\\}\\s*]");
+        Pattern pattern = java.util.regex.Pattern.compile("\\{\\s*\"translatedText\"\\s*:\\s*\"(.*?)\"\\s*(,\\s*\"model\"\\s*:\\s*\"\\w+\")?\\s*\\}\\s*]");
         Matcher matcher = pattern.matcher(v);
         boolean matchFound = matcher.find();
 
@@ -141,6 +140,7 @@ public class Google2Translate extends BaseTranslate {
         if (matchFound) {
             tr = matcher.group(1);
         }
+
 
         tr = cleanSpacesAroundTags(tr, text);
 

@@ -354,6 +354,29 @@ distributions {
     }
 }
 
+task installMacSignedDist(type: Sync) {
+    onlyIf {
+        // Set this in e.g. gradle.properties
+        project.hasProperty('codesignIdentity')
+    }
+    with distributions.mac.contents
+    destinationDir = file("${buildDir}/install/${applicationName}-macSigned")
+    doLast {
+        exec {
+           commandLine 'codesign', '--deep', '-s', project.property('codesignIdentity'), file("${destinationDir}/OmegaT.app")
+        }
+    }
+}
+
+task macSignedDistZip(type: Zip) {
+    from installMacSignedDist.outputs
+    archiveName = "${applicationName}_${version}${omtVersion.beta}_Mac_Signed.zip"
+}
+
+task mac(dependsOn: [macDistZip, macSignedDistZip]) {
+    description = 'Build the Mac distributions.'
+}
+
 task linux(dependsOn: [linuxDistTar, linux64DistTar]) {
     description = 'Build the Linux distributions.'
 }

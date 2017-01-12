@@ -671,8 +671,8 @@ publishing {
 }
 
 bintray {
-    user = System.getProperty('bintray.user')
-    key = System.getProperty('bintray.key')
+    user = findProperty('bintrayUser')
+    key = findProperty('bintrayKey')
     pkg {
         repo = 'maven'
         name = 'OmegaT'

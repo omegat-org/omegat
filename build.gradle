@@ -279,7 +279,7 @@ distributions {
                     fileMode 0755
                 }
                 from(macJRE) {
-                    into 'OmegaT.app/Contents/PlugIns/jre'
+                    into 'OmegaT.app/Contents/PlugIns/jre.bundle'
                     fileMode 0755
                 }
             }
@@ -605,7 +605,7 @@ task genMac {
             bundledocument(extensions: '*',
                 name: 'All Files',
                 role: 'none')
-            plistentry(key: 'JVMRuntime', value: 'jre')
+            plistentry(key: 'JVMRuntime', value: 'jre.bundle')
         }
     }
 }

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.1
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancements
   0 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -11,6 +11,9 @@
 
   - Improve validation feedback when editing External Search items
   https://sourceforge.net/p/omegat/feature-requests/1303/
+
+  - Additional parameter for neural net translation on Google translate
+  https://sourceforge.net/p/omegat/feature-requests/1291/
 
 ----------------------------------------------------------------------
  OmegaT 4.1.0 (2017-01-09)

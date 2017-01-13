@@ -95,7 +95,10 @@ public class Google2Translate extends BaseTranslate {
 
         Map<String, String> params = new TreeMap<String, String>();
 
-        params.put("model", isPremium() ? "nmt" : "base");
+        if (isPremium()) {
+        	params.put("model", "nmt");
+        }
+
         params.put("key", googleKey);
         params.put("source", sLang.getLanguageCode());
         params.put("target", targetLang);

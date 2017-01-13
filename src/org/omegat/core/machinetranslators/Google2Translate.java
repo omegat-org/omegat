@@ -65,8 +65,9 @@ public class Google2Translate extends BaseTranslate {
         return Preferences.ALLOW_GOOGLE2_TRANSLATE;
     }
 
+    @Override
     public String getName() {
-        return OStrings.getString("MT_ENGINE_GOOGLE2") + (isPremium() ? " Premium" : "");
+        return OStrings.getString("MT_ENGINE_GOOGLE2");
     }
 
     @Override

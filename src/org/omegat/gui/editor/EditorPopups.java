@@ -52,6 +52,7 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil;
 import org.omegat.util.TagUtil.Tag;
 import org.omegat.util.Token;
+import org.omegat.util.gui.MenuItemPager;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -310,7 +311,6 @@ public class EditorPopups {
     
     public static class DuplicateSegmentsPopup implements IPopupMenuConstructor {
         protected final EditorController ec;
-        private static int MAX_ITEMS_PER_PAGE = 10;
         
         public DuplicateSegmentsPopup(EditorController ec) {
             this.ec = ec;
@@ -330,28 +330,12 @@ public class EditorPopups {
             }
             JMenuItem header = menu.add(StringUtil.format(OStrings.getString("MW_GO_TO_DUPLICATE_HEADER"), dups.size()));
             header.setEnabled(false);
-            JMenu submenu = null;
-            for (int i = 0; i < dups.size(); i++) {
-                final int entryNum = dups.get(i).entryNum();
-                // Put the first n items in the main popup, but put every subsequent batch of n in
-                // nested submenus to prevent any single menu from getting too tall.
-                if (i > 0 && i % MAX_ITEMS_PER_PAGE == 0) {
-                    JMenu newSubmenu = new JMenu(OStrings.getString("MW_MORE_SUBMENU"));
-                    if (submenu == null) {
-                        menu.add(newSubmenu);
-                    } else {
-                        submenu.add(newSubmenu);
-                    }
-                    submenu = newSubmenu;
-                }
+            MenuItemPager pager = new MenuItemPager(menu);
+            for (SourceTextEntry entry : dups) {
+                int entryNum = entry.entryNum();
                 String label = StringUtil.format(OStrings.getString("MW_GO_TO_DUPLICATE_ITEM"), entryNum);
-                JMenuItem item = submenu == null ? menu.add(label) : submenu.add(label);
-                item.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        ec.gotoEntry(entryNum);
-                    }
-                });
+                JMenuItem item = pager.add(new JMenuItem(label));
+                item.addActionListener(e -> ec.gotoEntry(entryNum));
             }
             menu.addSeparator();
         }

@@ -25,20 +25,18 @@
 
 package org.omegat.externalfinder.item;
 
-import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.JToolBar;
 
 import org.omegat.core.Core;
 import org.omegat.externalfinder.ExternalFinder;
@@ -55,21 +53,15 @@ public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuG
     }
 
     @Override
-    public List<Component> generate() {
-        List<Component> menuItems = new ArrayList<Component>();
+    public List<JMenuItem> generate() {
         List<ExternalFinderItem> finderItems = ExternalFinder.getItems();
         if (finderItems.isEmpty()) {
-            return menuItems;
+            return Collections.emptyList();
         }
+        List<JMenuItem> menuItems = new ArrayList<>();
 
         // generate menu
-        if (popup) {
-            menuItems.add(new JPopupMenu.Separator());
-        } else {
-            menuItems.add(new JToolBar.Separator());
-        }
-        for (int i = 0, n = finderItems.size(); i < n; i++) {
-            ExternalFinderItem finderItem = finderItems.get(i);
+        for (ExternalFinderItem finderItem : finderItems) {
             if (popup && finderItem.isNopopup()) {
                 continue;
             }
@@ -91,9 +83,6 @@ public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuG
             item.addActionListener(new ExternalFinderItemActionListener(finderItem));
 
             menuItems.add(item);
-        }
-        if (popup) {
-            menuItems.add(new JPopupMenu.Separator());
         }
         return menuItems;
     }

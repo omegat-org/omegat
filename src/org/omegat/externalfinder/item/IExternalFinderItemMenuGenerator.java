@@ -25,10 +25,11 @@
 
 package org.omegat.externalfinder.item;
 
-import java.awt.Component;
 import java.util.List;
+
+import javax.swing.JMenuItem;
 
 public interface IExternalFinderItemMenuGenerator {
 
-    List<Component> generate();
+    List<JMenuItem> generate();
 }

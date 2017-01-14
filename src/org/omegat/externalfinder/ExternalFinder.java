@@ -38,6 +38,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -54,6 +56,7 @@ import org.omegat.externalfinder.item.ExternalFinderXMLWriter;
 import org.omegat.externalfinder.item.IExternalFinderItemLoader;
 import org.omegat.externalfinder.item.IExternalFinderItemMenuGenerator;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.MenuItemPager;
 
 /**
  * Entry point for ExternalFinder functionality.
@@ -110,16 +113,23 @@ public class ExternalFinder {
                 menuItems.clear();
 
                 // add finder items to menuItems
-                final IExternalFinderItemMenuGenerator generator
+                IExternalFinderItemMenuGenerator generator
                         = new ExternalFinderItemMenuGenerator(ExternalFinderItem.TARGET.BOTH, false);
-                final List<Component> newMenuItems = generator.generate();
-                menuItems.addAll(newMenuItems);
+                List<JMenuItem> newMenuItems = generator.generate();
+
+                JMenu toolsMenu = Core.getMainWindow().getMainMenu().getToolsMenu();
+
+                // Separator
+                Component separator = new JPopupMenu.Separator();
+                toolsMenu.add(separator);
+                menuItems.add(separator);
 
                 // add menuItems to menu
-                final JMenu toolsMenu = Core.getMainWindow().getMainMenu().getToolsMenu();
-                for (Component component : menuItems) {
-                    toolsMenu.add(component);
+                MenuItemPager pager = new MenuItemPager(toolsMenu);
+                for (JMenuItem component : newMenuItems) {
+                    pager.add(component);
                 }
+                menuItems.addAll(pager.getFirstPage());
             }
 
             private void onClose() {

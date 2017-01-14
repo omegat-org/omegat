@@ -25,15 +25,16 @@
 
 package org.omegat.externalfinder.item;
 
-import java.awt.Component;
 import java.util.List;
 
+import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.text.JTextComponent;
 
 import org.omegat.core.Core;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.SegmentBuilder;
+import org.omegat.util.gui.MenuItemPager;
 
 public class ExternalFinderItemPopupMenuConstructor implements IPopupMenuConstructor {
 
@@ -52,10 +53,13 @@ public class ExternalFinderItemPopupMenuConstructor implements IPopupMenuConstru
         }
 
         IExternalFinderItemMenuGenerator generator = new ExternalFinderItemMenuGenerator(target, true);
-        final List<Component> newMenuItems = generator.generate();
+        List<JMenuItem> newMenuItems = generator.generate();
 
-        for (Component component : newMenuItems) {
-            menu.add(component);
+        menu.addSeparator();
+        MenuItemPager pager = new MenuItemPager(menu);
+        for (JMenuItem component : newMenuItems) {
+            pager.add(component);
         }
+        menu.addSeparator();
     }
 }

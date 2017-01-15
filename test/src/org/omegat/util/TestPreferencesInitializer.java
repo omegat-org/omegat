@@ -29,6 +29,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import org.apache.commons.io.FileUtils;
+
 /**
  * An initializer for ensuring that tests can't pollute (or be polluted by)
  * actual user preferences.
@@ -48,6 +50,7 @@ public class TestPreferencesInitializer {
     public static void init() throws IOException {
         Path tmp = Files.createTempDirectory("omegat");
         init(tmp.toString());
+        FileUtils.forceDeleteOnExit(tmp.toFile());
     }
 
     /**

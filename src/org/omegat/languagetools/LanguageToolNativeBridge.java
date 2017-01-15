@@ -28,7 +28,6 @@ package org.omegat.languagetools;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -50,12 +49,12 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
     private List<BitextRule> bRules;
 
     public LanguageToolNativeBridge(org.omegat.util.Language sourceLang, org.omegat.util.Language targetLang) {
-        sourceLtLang = getLTLanguage(sourceLang).orElse(null);
-        targetLtLang = getLTLanguage(targetLang).orElse(null);
+        sourceLtLang = getLTLanguage(sourceLang);
+        targetLtLang = getLTLanguage(targetLang);
         sourceLt = ThreadLocal.withInitial(
-                () -> sourceLtLang == null ? null : getLanguageToolInstance(sourceLtLang).orElse(null));
+                () -> sourceLtLang == null ? null : new JLanguageTool(sourceLtLang));
         targetLt = ThreadLocal.withInitial(
-                () -> targetLtLang == null ? null : getLanguageToolInstance(targetLtLang).orElse(null));
+                () -> targetLtLang == null ? null : new JLanguageTool(targetLtLang));
         if (sourceLtLang != null && targetLtLang != null) {
             try {
                 bRules = Tools.getBitextRules(sourceLtLang, targetLtLang);
@@ -85,10 +84,9 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
     ThreadLocal<JLanguageTool> reinitWithRules(Language lang, Set<CategoryId> disabledCategories,
             Set<String> disabledRules, Set<String> enabledRules) {
         return ThreadLocal.withInitial(() -> {
-            JLanguageTool lt = getLanguageToolInstance(lang).orElse(null);
-            if (lt != null) {
-                Tools.selectRules(lt, disabledCategories, Collections.emptySet(), disabledRules, enabledRules, false);
-            }
+            JLanguageTool lt = new JLanguageTool(lang);
+            Tools.selectRules(lt, disabledCategories, Collections.emptySet(), disabledRules, enabledRules,
+                    false);
             return lt;
         });
     }
@@ -118,19 +116,9 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
         }
     }
 
-    public static Optional<Language> getLTLanguage(org.omegat.util.Language lang) {
+    public static Language getLTLanguage(org.omegat.util.Language lang) {
         String omLang = lang.getLanguageCode();
-        return Languages.get().stream().filter(ltLang -> omLang.equalsIgnoreCase(ltLang.getShortName())).findFirst();
-    }
-
-    public static Optional<JLanguageTool> getLanguageToolInstance(Language ltLang) {
-        try {
-            JLanguageTool result = new JLanguageTool(ltLang);
-            return Optional.of(result);
-        } catch (Exception ex) {
-            Log.log(ex);
-        }
-
-        return Optional.empty();
+        return Languages.get().stream().filter(ltLang -> omLang.equalsIgnoreCase(ltLang.getShortName()))
+                .findFirst().orElse(null);
     }
 }

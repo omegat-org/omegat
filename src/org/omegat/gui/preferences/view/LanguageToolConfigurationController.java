@@ -41,7 +41,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
@@ -224,17 +223,17 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
 
     private void loadRules(org.omegat.util.Language sourceLang, org.omegat.util.Language targetLang) {
         // Load rule tree
-        Optional<org.languagetool.Language> targetLtLang = getLTLanguage(targetLang);
-        Optional<org.languagetool.Language> sourceLtLang = getLTLanguage(sourceLang);
+        org.languagetool.Language targetLtLang = getLTLanguage(targetLang);
+        org.languagetool.Language sourceLtLang = getLTLanguage(sourceLang);
 
-        if (!targetLtLang.isPresent()) {
+        if (targetLtLang == null) {
             disableRulesUI(OStrings.getString("GUI_LANGUAGETOOL_RULES_UNAVAILABLE"));
             return;
         }
 
         JLanguageTool ltInstance;
         try {
-            ltInstance = new JLanguageTool(targetLtLang.get());
+            ltInstance = new JLanguageTool(targetLtLang);
         } catch (Throwable e) {
             // Disable tree and return if instance couldn't be gotten
             disableRulesUI(OStrings.getString("GUI_LANGUAGETOOL_RULES_UNAVAILABLE_ERROR"));
@@ -243,13 +242,13 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
         }
 
         List<Rule> rules = ltInstance.getAllRules();
-        sourceLtLang.ifPresent(srcLtLang -> {
+        if (sourceLtLang != null) {
             try {
-                rules.addAll(Tools.getBitextRules(srcLtLang, targetLtLang.get()));
+                rules.addAll(Tools.getBitextRules(sourceLtLang, targetLtLang));
             } catch (IOException | ParserConfigurationException | SAXException e) {
                 Log.log(e);
             }
-        });
+        }
 
         // Collect internal rule IDs
         List<String> internalRuleIds = rules.stream().map(Rule::getId).collect(Collectors.toList());
@@ -267,7 +266,8 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
 
         DefaultMutableTreeNode rootNode = createTree(rules);
         panel.rulesTree.setModel(getTreeModel(rootNode));
-        panel.rulesTree.applyComponentOrientation(ComponentOrientation.getOrientation(targetLtLang.get().getLocale()));
+        panel.rulesTree
+                .applyComponentOrientation(ComponentOrientation.getOrientation(targetLtLang.getLocale()));
 
         updateButtonState();
     }

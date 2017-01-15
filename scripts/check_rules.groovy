@@ -473,11 +473,11 @@ def interfejs(locationxy = new Point(0, 0), width = 900, height = 550, scrollpos
 }
 
 def getLanguageToolInstance(ltLang) {
-    return LanguageToolNativeBridge.getLanguageToolInstance(ltLang).orElse(null)
+    return new JLanguageTool(ltLang)
 }
 
 def getLTLanguage(lang) {
-   return LanguageToolNativeBridge.getLTLanguage(lang).orElse(null)
+   return LanguageToolNativeBridge.getLTLanguage(lang)
 }
 
 def getBiTextRules(Language sourceLang, Language targetLang) {

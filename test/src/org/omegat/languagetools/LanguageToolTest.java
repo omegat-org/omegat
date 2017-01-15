@@ -33,6 +33,8 @@ import org.junit.Test;
 import org.languagetool.JLanguageTool;
 import org.languagetool.language.AmericanEnglish;
 import org.languagetool.language.Belarusian;
+import org.languagetool.language.CanadianEnglish;
+import org.languagetool.language.English;
 import org.languagetool.language.French;
 import org.languagetool.rules.RuleMatch;
 import org.languagetool.rules.UppercaseSentenceStartRule;
@@ -141,5 +143,38 @@ public class LanguageToolTest extends TestCase {
         Preferences.setPreference(Preferences.LANGUAGETOOL_REMOTE_URL, "blah");
         bridge = LanguageToolWrapper.createBridgeFromPrefs(SOURCE_LANG, TARGET_LANG);
         assertTrue(bridge instanceof LanguageToolNativeBridge);
+    }
+
+    public void testLanguageMapping() {
+        {
+            org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("en-US"));
+            assertEquals(AmericanEnglish.class, lang.getClass());
+        }
+        {
+            org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("en-CA"));
+            assertEquals(CanadianEnglish.class, lang.getClass());
+        }
+        {
+            org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("en"));
+            assertEquals(English.class, lang.getClass());
+        }
+        {
+            // Unknown region--fall back to generic class
+            org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("en-JA"));
+            assertEquals(English.class, lang.getClass());
+        }
+        {
+            org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("be-BY"));
+            assertEquals(Belarusian.class, lang.getClass());
+        }
+        {
+            // Belarusian is offered in be-BY only; ensure hit with just "be"
+            org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("be"));
+            assertEquals(Belarusian.class, lang.getClass());
+        }
+        {
+            org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("xyz"));
+            assertNull(lang);
+        }
     }
 }

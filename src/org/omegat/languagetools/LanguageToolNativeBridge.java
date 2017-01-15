@@ -26,6 +26,7 @@
  **************************************************************************/
 package org.omegat.languagetools;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -120,20 +121,38 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
         }
     }
 
+    /**
+     * Get the closest LanguageTool language to the supplied OmegaT language, or null if none can be found.
+     * 
+     * @see <code>getLanguageForLanguageNameAndCountry</code> and <code>getLanguageForLanguageNameOnly</code>
+     *      in {@link Languages}.
+     */
     public static Language getLTLanguage(org.omegat.util.Language lang) {
         List<Language> ltLangs = Languages.get();
 
         // Search for full xx-YY match
-        String omLocale = lang.getLanguage();
-        for (Language ltLang : ltLangs) {
-            if (omLocale.equalsIgnoreCase(ltLang.getShortNameWithCountryAndVariant())) {
-                return ltLang;
-            }
-        }
-        // Search for just xx match
         String omLang = lang.getLanguageCode();
+        String omCountry = lang.getCountryCode();
         for (Language ltLang : ltLangs) {
             if (omLang.equalsIgnoreCase(ltLang.getShortName())) {
+                List<String> countries = Arrays.asList(ltLang.getCountries());
+                if (countries.contains(omCountry)) {
+                    return ltLang;
+                }
+            }
+        }
+
+        // Search for just xx match
+        for (Language ltLang : ltLangs) {
+            if (omLang.equalsIgnoreCase(ltLang.getShortName()) && ltLang.hasVariant()) {
+                Language defaultVariant = ltLang.getDefaultLanguageVariant();
+                if (defaultVariant != null) {
+                    return ltLang;
+                }
+            }
+        }
+        for (Language ltLang : ltLangs) {
+            if (omLang.equalsIgnoreCase(ltLang.getShortName()) && !ltLang.hasVariant()) {
                 return ltLang;
             }
         }

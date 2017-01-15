@@ -379,6 +379,12 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
         String omLang = desiredLang.getLanguageCode();
         for (Object obj : serverLangs) {
             Map<String, String> lang = (Map<String, String>) obj;
+            if (omLang.equalsIgnoreCase(lang.get("longCode"))) {
+                return new Language(desiredLang.getLanguageCode());
+            }
+        }
+        for (Object obj : serverLangs) {
+            Map<String, String> lang = (Map<String, String>) obj;
             if (omLang.equalsIgnoreCase(lang.get("code"))) {
                 return new Language(desiredLang.getLanguageCode());
             }

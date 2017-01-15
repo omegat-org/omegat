@@ -36,6 +36,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -52,7 +53,8 @@ import org.omegat.util.OStrings;
 public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
 
     /* Constants */
-    private final static String URL_PATH = "/v2/check";
+    private final static String CHECK_PATH = "/v2/check";
+    private final static String LANGS_PATH = "/v2/languages";
     private final static String SERVER_CLASS_NAME = "org.languagetool.server.HTTPServer";
     private final static String API_VERSION = "1";
 
@@ -151,17 +153,28 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
             }
         }
 
-        serverUrl = "http://localhost:" + port + URL_PATH;
+        serverUrl = "http://localhost:" + port + CHECK_PATH;
         Log.log(OStrings.getString("LT_SERVER_STARTED"));
-        init(sourceLang, targetLang);
+        try {
+            init(sourceLang, targetLang);
+        } catch (Exception ex) {
+            stop();
+            throw ex;
+        }
     }
 
     /**
      * Common initialization for both constructors
+     * 
+     * @throws Exception
+     *             If unable to determine the server's supported languages
      */
-    private void init(Language sourceLang, Language targetLang) {
-        this.sourceLang = sourceLang;
-        this.targetLang = targetLang;
+    private void init(Language sourceLang, Language targetLang) throws Exception {
+        List<Object> serverLanguages = getSupportedLanguages();
+        this.sourceLang = negotiateLanguage(serverLanguages, sourceLang);
+        this.targetLang = negotiateLanguage(serverLanguages, targetLang);
+        Log.log("Negotiated LanguageTool source language: " + this.sourceLang);
+        Log.log("Negotiated LanguageTool target language: " + this.targetLang);
     }
 
     @Override
@@ -172,12 +185,11 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
                 // Wait for server to release socket
                 while (true) {
                     try {
-                        (new Socket("localhost", localPort)).close();
+                        new Socket("localhost", localPort).close();
                     } catch (Exception e) {
                         break;
                     }
                 }
-
                 Log.log(OStrings.getString("LT_SERVER_TERMINATED"));
                 server = null;
             } catch (Exception ex) {
@@ -197,14 +209,18 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
     @Override
     @SuppressWarnings("unchecked")
     protected List<LanguageToolResult> getCheckResultsImpl(String sourceText, String translationText) throws Exception {
+        if (targetLang == null) {
+            return Collections.emptyList();
+        }
 
         URL url = new URL(serverUrl);
         URLConnection conn = url.openConnection();
         conn.setRequestProperty("User-Agent", OStrings.getNameAndVersion());
         conn.setDoOutput(true);
         try (OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream())) {
-            writer.write(buildPostData(sourceLang.toString(), targetLang.toString(),
-                    sourceText, translationText, disabledCategories, disabledRules, enabledRules));
+            String srcLang = sourceLang == null ? null : sourceLang.toString();
+            writer.write(buildPostData(srcLang, targetLang.toString(), sourceText, translationText,
+                    disabledCategories, disabledRules, enabledRules));
             writer.flush();
         }
 
@@ -233,7 +249,27 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
             String ruleDescription = (String) rule.get("description");
             return new LanguageToolResult(message, start, end, ruleId, ruleDescription);
         }).collect(Collectors.toList());
-     }
+    }
+
+    @SuppressWarnings("unchecked")
+    protected List<Object> getSupportedLanguages() throws Exception {
+        // This is a really stupid way to get the /languages endpoint URL, but it'll do for now.
+        String langsUrl = serverUrl.replace(CHECK_PATH, LANGS_PATH);
+
+        URL url = new URL(langsUrl);
+        URLConnection conn = url.openConnection();
+        conn.setRequestProperty("User-Agent", OStrings.getNameAndVersion());
+        conn.setDoOutput(true);
+
+        checkHttpError(conn);
+
+        String json = "";
+        try (InputStream in = conn.getInputStream()) {
+            json = IOUtils.toString(in, StandardCharsets.UTF_8);
+        }
+
+        return (List<Object>) JsonParser.parse(json);
+    }
 
     static void checkHttpError(URLConnection conn) throws Exception {
         if (conn instanceof HttpURLConnection) {
@@ -265,7 +301,7 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
         StringBuilder result = new StringBuilder();
         result.append("text=").append(URLEncoder.encode(targetText, encoding)).append("&language=")
                 .append(URLEncoder.encode(targetLang, encoding));
-        if (sourceText != null) {
+        if (sourceText != null && sourceLang != null) {
             result.append("&srctext=").append(URLEncoder.encode(sourceText, encoding)).append("&motherTongue=")
                     .append(URLEncoder.encode(sourceLang, encoding));
         }
@@ -314,8 +350,39 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
                 }
             }
         } catch (Exception e) {
+            Log.log(e);
             return false;
         }
     }
 
+    /**
+     * Find the best-matching language from the provided options.
+     * 
+     * @param serverLangs
+     *            The raw response objects from {@link #getSupportedLanguages()}
+     * @param desiredLang
+     *            The language to match
+     * @return The best-matching language, or null if no languages matched at all
+     */
+    @SuppressWarnings("unchecked")
+    static Language negotiateLanguage(List<Object> serverLangs, Language desiredLang) {
+        // Search for full xx-YY match
+        String omLocale = desiredLang.getLanguage();
+        for (Object obj : serverLangs) {
+            Map<String, String> lang = (Map<String, String>) obj;
+            if (omLocale.equalsIgnoreCase(lang.get("longCode"))) {
+                return desiredLang;
+            }
+        }
+
+        // Search for just xx match
+        String omLang = desiredLang.getLanguageCode();
+        for (Object obj : serverLangs) {
+            Map<String, String> lang = (Map<String, String>) obj;
+            if (omLang.equalsIgnoreCase(lang.get("code"))) {
+                return new Language(desiredLang.getLanguageCode());
+            }
+        }
+        return null;
+    }
 }

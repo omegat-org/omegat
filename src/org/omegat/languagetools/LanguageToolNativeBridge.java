@@ -51,6 +51,10 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
     public LanguageToolNativeBridge(org.omegat.util.Language sourceLang, org.omegat.util.Language targetLang) {
         sourceLtLang = getLTLanguage(sourceLang);
         targetLtLang = getLTLanguage(targetLang);
+        Log.log("Selected LanguageTool source language: "
+                + (sourceLtLang == null ? null : sourceLtLang.getShortNameWithCountryAndVariant()));
+        Log.log("Selected LanguageTool target language: "
+                + (targetLtLang == null ? null : targetLtLang.getShortNameWithCountryAndVariant()));
         sourceLt = ThreadLocal.withInitial(
                 () -> sourceLtLang == null ? null : new JLanguageTool(sourceLtLang));
         targetLt = ThreadLocal.withInitial(
@@ -117,8 +121,22 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
     }
 
     public static Language getLTLanguage(org.omegat.util.Language lang) {
+        List<Language> ltLangs = Languages.get();
+
+        // Search for full xx-YY match
+        String omLocale = lang.getLanguage();
+        for (Language ltLang : ltLangs) {
+            if (omLocale.equalsIgnoreCase(ltLang.getShortNameWithCountryAndVariant())) {
+                return ltLang;
+            }
+        }
+        // Search for just xx match
         String omLang = lang.getLanguageCode();
-        return Languages.get().stream().filter(ltLang -> omLang.equalsIgnoreCase(ltLang.getShortName()))
-                .findFirst().orElse(null);
+        for (Language ltLang : ltLangs) {
+            if (omLang.equalsIgnoreCase(ltLang.getShortName())) {
+                return ltLang;
+            }
+        }
+        return null;
     }
 }

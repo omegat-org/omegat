@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
@@ -211,6 +212,8 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
             writer.flush();
         }
 
+        checkHttpError(conn);
+
         // Read response into string specially wrapped for Nashorn
         String json = "";
         try (InputStream in = conn.getInputStream()) {
@@ -236,6 +239,18 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
             return new LanguageToolResult(message, start, end, ruleId, ruleDescription);
         }).collect(Collectors.toList());
      }
+
+    static void checkHttpError(URLConnection conn) throws Exception {
+        if (conn instanceof HttpURLConnection) {
+            HttpURLConnection httpConn = (HttpURLConnection) conn;
+            if (httpConn.getResponseCode() != 200) {
+                try (InputStream err = httpConn.getErrorStream()) {
+                    String errMsg = IOUtils.toString(err, StandardCharsets.UTF_8);
+                    throw new Exception(errMsg);
+                }
+            }
+        }
+    }
 
     /**
      * Replace double quotes with <suggestion></suggestion> tags
@@ -293,10 +308,7 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
                 writer.write(buildPostData(null, "en-US", null, "Test", "FOO", null, null));
                 writer.flush();
             }
-            Map<String, List<String>> headerFields = conn.getHeaderFields();
-            if (!headerFields.get(null).toString().contains("200")) {
-                return false;
-            }
+            checkHttpError(conn);
             try (InputStream in = conn.getInputStream()) {
                 String response = IOUtils.toString(in, StandardCharsets.UTF_8);
                 if (response.contains("<?xml")) {

@@ -52,6 +52,11 @@ public class LanguageToolTest extends TestCase {
     private static final Language SOURCE_LANG = new Language(Locale.FRENCH);
     private static final Language TARGET_LANG = new Language(Locale.ENGLISH);
 
+    @Override
+    protected void setUp() throws Exception {
+        TestPreferencesInitializer.init();
+    }
+
     @Test
     public void testExecute() throws Exception {
         JLanguageTool lt = new JLanguageTool(new Belarusian());
@@ -85,32 +90,35 @@ public class LanguageToolTest extends TestCase {
 
     public void testRemoteServer() throws Exception {
         HTTPServer server = new HTTPServer();
-        server.run();
-
         try {
-            new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG, "http://localhost:8081");
-            fail("URL not specifying API v2 should fail due to XML response instead of JSON");
-            // TODO: LanguageTool will drop XML entirely in version 3.6; this
-            // test might need to be adjusted then.
-        } catch (Exception e) {
-            // OK
+            server.run();
+
+            try {
+                new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG, "http://localhost:8081");
+                fail("URL not specifying API v2 should fail due to XML response instead of JSON");
+                // TODO: LanguageTool will drop XML entirely in version 3.6; this
+                // test might need to be adjusted then.
+            } catch (Exception e) {
+                // OK
+            }
+
+            ILanguageToolBridge bridge = new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG,
+                    "http://localhost:8081/v2/check");
+
+            // Set some rules to prevent the server from looking at config files.
+            // User config files can specify languages we aren't providing at test
+            // runtime, in which case queries will fail.
+            bridge.applyRuleFilters(Collections.singleton("FOO"), Collections.emptySet(),
+                    Collections.emptySet());
+
+            // We don't care about the actual content of the results as long as
+            // there are some: we just want to make sure we are parsing the JSON
+            // result correctly.
+            List<LanguageToolResult> results = bridge.getCheckResults("foo", "foo bar");
+            assertFalse(results.isEmpty());
+        } finally {
+            server.stop();
         }
-
-        ILanguageToolBridge bridge = new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG,
-                "http://localhost:8081/v2/check");
-
-        // Set some rules to prevent the server from looking at config files.
-        // User config files can specify languages we aren't providing at test
-        // runtime, in which case queries will fail.
-        bridge.applyRuleFilters(Collections.singleton("FOO"), Collections.emptySet(), Collections.emptySet());
-        
-        // We don't care about the actual content of the results as long as
-        // there are some: we just want to make sure we are parsing the JSON
-        // result correctly.
-        List<LanguageToolResult> results = bridge.getCheckResults("foo", "foo bar");
-        assertFalse(results.isEmpty());
-
-        server.stop();
     }
 
     public void testNativeBridge() throws Exception {
@@ -124,8 +132,6 @@ public class LanguageToolTest extends TestCase {
     }
 
     public void testWrapperInit() throws Exception {
-        TestPreferencesInitializer.init();
-
         // Defaults: Local implementation
         ILanguageToolBridge bridge = LanguageToolWrapper.createBridgeFromPrefs(SOURCE_LANG, TARGET_LANG);
         assertTrue(bridge instanceof LanguageToolNativeBridge);

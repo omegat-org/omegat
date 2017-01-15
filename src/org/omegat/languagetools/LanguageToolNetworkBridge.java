@@ -169,7 +169,7 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
     }
 
     @Override
-    public void stop() {
+    public synchronized void stop() {
         if (server != null) {
             try {
                 server.destroy();

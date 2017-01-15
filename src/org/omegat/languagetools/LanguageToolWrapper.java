@@ -89,14 +89,14 @@ public class LanguageToolWrapper {
 
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
             @Override
-            public synchronized void onApplicationShutdown() {
+            public void onApplicationShutdown() {
                 if (BRIDGE != null) {
                     BRIDGE.stop();
                 }
             }
 
             @Override
-            public synchronized void onApplicationStartup() {
+            public void onApplicationStartup() {
             }
         });
     }

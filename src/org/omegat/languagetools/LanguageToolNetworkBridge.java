@@ -42,10 +42,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-
 import org.apache.commons.io.IOUtils;
+import org.omegat.util.JsonParser;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -62,7 +60,6 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
     private Process server;
     private int localPort;
     private String serverUrl;
-    private ScriptEngine engine;
 
     /* Project scope fields */
     private Language sourceLang, targetLang;
@@ -165,7 +162,6 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
     private void init(Language sourceLang, Language targetLang) {
         this.sourceLang = sourceLang;
         this.targetLang = targetLang;
-        engine = new ScriptEngineManager().getEngineByName("javascript");
     }
 
     @Override
@@ -214,13 +210,12 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
 
         checkHttpError(conn);
 
-        // Read response into string specially wrapped for Nashorn
         String json = "";
         try (InputStream in = conn.getInputStream()) {
             json = IOUtils.toString(in, StandardCharsets.UTF_8);
         }
 
-        Map<String, Object> response = (Map<String, Object>) engine.eval("Java.asJSONCompatible(" + json + ')');
+        Map<String, Object> response = (Map<String, Object>) JsonParser.parse(json);
         Map<String, String> software = (Map<String, String>) response.get("software");
 
         if (!software.get("apiVersion").equals(API_VERSION)) {

@@ -45,7 +45,14 @@
           <primary>Avvio di OmegaT</primary> <secondary>Windows</secondary> <tertiary>file INI</tertiary>
         </indexterm>In questo caso, le opzioni per l'avvio del programma saranno lette dal file <emphasis><application>OmegaT</application>.l4J.ini </emphasis>, che si trova nella stessa cartella del file eseguibile e che può essere modificato affinché rispecchi le proprie impostazioni. L'esempio di file INI che segue riserva 1GB di memoria, richiede il francese come lingua dell'utente e il Canada come nazione:</para>
 
-      <literallayout><code># OmegaT.exe runtime configuration # Per usare un parametro, rimuovere '#' prima del '-' # Memory -Xmx1024M # Language -Duser.language=FR # Country -Duser.country=CA</code></literallayout>
+      <literallayout><code># OmegaT.exe runtime configuration
+# Per usare un parametro, rimuovere '#' prima del '-'
+# Memory 
+-Xmx1024M 
+# Language 
+-Duser.language=FR
+# Country 
+-Duser.country=CA </code></literallayout>
 
       <para>Nota: se OmegaT risultasse lento durante le sessioni di desktop remoto in Windows, sarà possibile usare questa opzione:</para>
 
@@ -300,7 +307,7 @@
   </section>
 
   <section id="drag.and.drop">
-    <title>Drag and drop<indexterm class="singular">
+    <title>Trascinare e rilasciare (Drag and drop)<indexterm class="singular">
         <primary>Avvio di OmegaT</primary> <secondary>Drag and drop</secondary>
       </indexterm></title>
 

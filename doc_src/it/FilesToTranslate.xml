@@ -175,6 +175,10 @@
           <listitem>
             <para> Schematron (*.sch)</para>
           </listitem>
+
+          <listitem>
+            <para>schema RELAX NG per XML (*.rng)</para>
+          </listitem>
         </itemizedlist></para>
 
       <para>Gli altri tipi di file di testo formattato possono essere gestiti da OmegaT associando le loro estensioni di file a un tipo supportato, presupponendo che le regole di segmentazione corrispondenti li segmentino correttamente.</para>

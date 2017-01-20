@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   3 Enhancements
   0 Bug fix
-  1 Localisation update
+  2 Localisation updates
 ----------------------------------------------------------------------
 4.1.1 vs 4.1.0
 
@@ -21,6 +21,7 @@
 accommodate users with numerous item definitions.
 
   - Italian localisation updated to 4.1.0 (UI, documentation)
+  - Polish localisation updated to 4.0.0 (UI, readme, scripts)
 
 ----------------------------------------------------------------------
  OmegaT 4.1.0 (2017-01-09)

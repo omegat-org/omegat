@@ -205,7 +205,6 @@ public class ExternalFinderSubItemEditorPanel extends javax.swing.JPanel {
         sampleOutputTextArea.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         sampleOutputTextArea.setLineWrap(true);
         sampleOutputTextArea.setWrapStyleWord(true);
-        sampleOutputTextArea.setFocusable(false);
         sampleOutputTextArea.setOpaque(false);
         jPanel8.add(sampleOutputTextArea, java.awt.BorderLayout.CENTER);
 

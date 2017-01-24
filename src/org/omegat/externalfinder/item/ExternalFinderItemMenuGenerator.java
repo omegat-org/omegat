@@ -28,18 +28,19 @@ package org.omegat.externalfinder.item;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.FocusManager;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import org.omegat.core.Core;
 import org.omegat.externalfinder.ExternalFinder;
+import org.omegat.util.OStrings;
 import org.openide.awt.Mnemonics;
 
 public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuGenerator {
@@ -117,8 +118,12 @@ public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuG
 
                         try {
                             Desktop.getDesktop().browse(url.generateURL(targetWords));
-                        } catch (IOException | URISyntaxException ex) {
-                            Logger.getLogger(ExternalFinderItemMenuGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (Exception ex) {
+                            Logger.getLogger(ExternalFinderItemMenuGenerator.class.getName())
+                                    .log(Level.SEVERE, null, ex);
+                            JOptionPane.showMessageDialog(FocusManager.getCurrentManager().getFocusedWindow(),
+                                    ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
+                                    JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -135,8 +140,12 @@ public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuG
 
                         try {
                             Runtime.getRuntime().exec(command.generateCommand(targetWords));
-                        } catch (IOException ex) {
-                            Logger.getLogger(ExternalFinderItemMenuGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (Exception ex) {
+                            Logger.getLogger(ExternalFinderItemMenuGenerator.class.getName())
+                                    .log(Level.SEVERE, null, ex);
+                            JOptionPane.showMessageDialog(FocusManager.getCurrentManager().getFocusedWindow(),
+                                    ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
+                                    JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }

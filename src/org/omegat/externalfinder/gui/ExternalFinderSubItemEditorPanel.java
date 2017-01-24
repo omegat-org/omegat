@@ -81,8 +81,10 @@ public class ExternalFinderSubItemEditorPanel extends javax.swing.JPanel {
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         encodingComboBox = new javax.swing.JComboBox<>();
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
+        jPanel9 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         sampleOutputTextArea = new javax.swing.JTextArea();
+        testButton = new javax.swing.JButton();
         filler13 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -198,6 +200,9 @@ public class ExternalFinderSubItemEditorPanel extends javax.swing.JPanel {
         add(jPanel4);
         add(filler9);
 
+        jPanel9.setAlignmentX(0.0F);
+        jPanel9.setLayout(new javax.swing.BoxLayout(jPanel9, javax.swing.BoxLayout.LINE_AXIS));
+
         jPanel8.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("EXTERNALFINDER_SUBEDITOR_SAMPLE_OUTPUT")), javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5))); // NOI18N
         jPanel8.setAlignmentX(0.0F);
         jPanel8.setLayout(new java.awt.BorderLayout());
@@ -208,7 +213,12 @@ public class ExternalFinderSubItemEditorPanel extends javax.swing.JPanel {
         sampleOutputTextArea.setOpaque(false);
         jPanel8.add(sampleOutputTextArea, java.awt.BorderLayout.CENTER);
 
-        add(jPanel8);
+        jPanel9.add(jPanel8);
+
+        org.openide.awt.Mnemonics.setLocalizedText(testButton, OStrings.getString("EXTERNALFINDER_SUBEDITOR_TEST_BUTTON")); // NOI18N
+        jPanel9.add(testButton);
+
+        add(jPanel9);
         add(filler13);
 
         jPanel1.setAlignmentX(0.0F);
@@ -259,6 +269,7 @@ public class ExternalFinderSubItemEditorPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
@@ -266,6 +277,7 @@ public class ExternalFinderSubItemEditorPanel extends javax.swing.JPanel {
     javax.swing.JButton okButton;
     javax.swing.JTextArea sampleOutputTextArea;
     javax.swing.JComboBox<ExternalFinderItem.TARGET> targetComboBox;
+    javax.swing.JButton testButton;
     javax.swing.JPanel urlPanel;
     javax.swing.JTextArea urlTextArea;
     // End of variables declaration//GEN-END:variables

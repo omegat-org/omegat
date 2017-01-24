@@ -26,10 +26,14 @@
 package org.omegat.externalfinder.gui;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Window;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -124,6 +128,17 @@ public class ExternalFinderItemURLEditorController {
             StaticUIUtils.closeWindowByEvent(dialog);
         });
 
+        panel.testButton.addActionListener(e -> {
+            try {
+                Desktop.getDesktop().browse(builder.generateSampleURL());
+            } catch (Exception ex) {
+                Logger.getLogger(ExternalFinderItemURLEditorController.class.getName()).log(Level.SEVERE,
+                        null, ex);
+                JOptionPane.showMessageDialog(dialog, ex.getLocalizedMessage(),
+                        OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
         validate();
 
         dialog.pack();
@@ -146,6 +161,7 @@ public class ExternalFinderItemURLEditorController {
             sampleOutput = e.getLocalizedMessage();
         }
         panel.okButton.setEnabled(isValid);
+        panel.testButton.setEnabled(isValid);
         panel.sampleOutputTextArea.setText(sampleOutput);
         panel.sampleOutputTextArea.setForeground(isValid ? Color.BLACK : Color.RED);
         return isValid;

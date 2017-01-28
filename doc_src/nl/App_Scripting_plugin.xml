@@ -36,9 +36,12 @@
       </listitem>
     </itemizedlist>
 
-    <para>Standaard worden scripts opgeslagen in de map &quot;scripts&quot; die zich bevindt in de installatiemap van OmegaT (de map waarin OmegaT.jar staat).</para>
+    <para>Standaard worden scripts opgeslagen in de map &quot;scripts&quot; die zich bevindt in de installatiemap van OmegaT (de map waarin OmegaT.jar staat).e</para>
 
-    <para>U kunt daar nieuwe scripts toevoegen, zodat zij zullen verschijnen in de lijst met beschikbare scripts in het venster Scripten.</para>
+    <para>U kunt daar nieuwe scripts toevoegen, zodat ze zullen verschijnen in de lijst met beschikbare scripts in het venster Scripten.</para>
+
+    <para>Enkele aanvullende scripts zijn hier te vinden: <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink>
+    </para>
   </section>
 
   <section>

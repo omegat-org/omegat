@@ -5,22 +5,18 @@
       <primary>Zoeken</primary>
     </indexterm></title>
 
-  <section id="section.TaaS.options">
+  <section id="section.TaaS.generalities">
     <title>Algemeen</title>
 
     <para>De service TaaS op https://demo.taas-project.eu/info verschaft services voor terminologie in Europese talen (plus Russisch). Het maakt het mogelijk toegang te krijgen tot zowel publieke als private gegevens, waar private woordenlijsten (&quot;collections&quot; genaamd) uit bestaande documenten kunnen worden uitgenomen, en de doeltermen gedeeltelijk automatisch kunnen worden gevuld vanuit verschillende bronnen.</para>
   </section>
 
-  <section id="section.TaaS.options.collections">
-    <title>Publieke en private collecties</title>
-
-    <para>OmegaT maakt het mogelijk toegang te krijgen tot het publieke gedeelte van TaaS zonder enige registratie.</para>
+  <section id="section.TaaS.options.key">
+    <title>Een sleutel maken</title>
 
     <para>Een gebruiker moet, om toegang te krijgen tot het private gedeelte, een sleutel maken met behulp van https://demo.taas-project.eu/account/keys/create?system=omegaT.</para>
 
-    <para>De sleutel moet dan worden opgegeven aan OmegaT door middel van -Dtaas.user.key=xxxxx. De OmegaT configuratie-starters (OmegaT.l4J.ini, omegat.kaptn en OmegaT.sh) bevatten een sjabloon-item.</para>
-
-    <para>Bij toegang tot de service zonder een private sleutel, zal de het volgende bericht worden geplaatst in het log: TaaS API key not found. Ga naar https://demo.taas-project.eu/account/keys/create?system=omegaT om uw eigen sleutel te maken en geef die dan door aan OmegaT met -Dtaas.user.key=xxxxx (TAAS_API_KEY_NOT_FOUND)</para>
+    <para>De sleutel moet dan worden opgegeven aan OmegaT door middel van -Dtaas.user.key=xxxxx. De OmegaT configuratie-starters (OmegaT.l4J.ini, omegat.kaptn en Configuration.properties) bevatten een sjabloon-item.</para>
   </section>
 
   <section id="section.TaaS.options.access">

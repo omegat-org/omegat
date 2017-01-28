@@ -39,13 +39,14 @@
 
       <mediaobject>
         <imageobject role="html">
-		          <imagedata fileref="images/Omegatproject.png"/>
-       </imageobject>
-      <imageobject role="fo">
+          <imagedata fileref="images/Omegatproject.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
           <imagedata fileref="images/Omegatproject.png" width="60%"/>
         </imageobject>
       </mediaobject>
-	  </figure>
+    </figure>
 
     <para>Alternatieve locaties voor sommige mappen kunnen worden gekozen bij het maken van het project of tijdens de vertaling. Het is daarom mogelijk om bestaande mappen te kiezen of mappen te maken op locaties die passen bij uw eigen werkwijze en projectbeheer. Open <guimenuitem>Project &gt; Eigenschappen...</guimenuitem> of met <guibutton>Ctrl+E</guibutton> en maak de nodige aanpassingen om de locaties van de mappen te wijzigen nadat een project is gemaakt.</para>
 
@@ -129,6 +130,12 @@
                 <entry>filters.xml</entry>
 
                 <entry>indien aanwezig bevat het projectspecifieke bestandsfilters, indien vereist in <guimenuitem>Project &gt; Eigenschappen ... </guimenuitem>Bekijk <link linkend="chapter.project.properties">hoofdstuk Projecteigenschappen</link></entry>
+              </row>
+
+              <row>
+                <entry>uiLayout.xml</entry>
+
+                <entry>als het bestaat, bevat het project-specifieke instellingen voor de GUI&gt;</entry>
               </row>
             </tbody>
           </tgroup>
@@ -248,6 +255,8 @@
         </tbody>
       </tgroup>
     </informaltable>
+
+    <para>De map kan direct worden aangeroepen door het item in het hoofdmenu <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Toegang tot configuratiemap</guimenuitem> </menuchoice>.</para>
   </section>
 
   <section id="application.files">
@@ -322,23 +331,16 @@
             <entry><application>OmegaT</application></entry>
 
             <entry><para>Een tekstbestand dat twee regels bevat:</para>
-
             <programlisting>#!/bin/bash java
-java -jar OmegaT.jar $*</programlisting>
-
-            <para>Linux- en OS X-gebruikers zouden dit handig kunnen vinden. Maak het uitvoerbaar (<literal>chmod +x OmegaT</literal>) vanaf de opdrachtregel nadat u zich er van overtuigd hebt dat u in de toepassingsmap van OmegaT bent. U kunt dan OmegaT starten door dit bestand vanaf de opdrachtregel uit te voeren.</para>
-            </entry>
+java -jar OmegaT.jar $*</programlisting> <para>Linux- en OS X-gebruikers zouden dit handig kunnen vinden. Maak het uitvoerbaar (<literal>chmod +x OmegaT</literal>) vanaf de opdrachtregel nadat u zich er van overtuigd hebt dat u in de toepassingsmap van OmegaT bent. U kunt dan OmegaT starten door dit bestand vanaf de opdrachtregel uit te voeren.</para></entry>
           </row>
-          
+
           <row>
             <entry>OmegaT.bat</entry>
 
-            <entry><para>Een batch-bestand gebruikt om <application>OmegaT</application> te starten vanaf de opdrachtregel van Windows. Het bevat slechts de volgende regel:</para>
-
-            <programlisting>java -jar OmegaT.jar %*</programlisting>
-            </entry>
+            <entry><para>Een batch-bestand gebruikt om <application>OmegaT</application> te starten vanaf de opdrachtregel van Windows. Het bevat slechts de volgende regel:</para> <programlisting>java -jar OmegaT.jar %*</programlisting></entry>
           </row>
-          
+
           <row>
             <entry><literal>OmegaT.jar</literal></entry>
 

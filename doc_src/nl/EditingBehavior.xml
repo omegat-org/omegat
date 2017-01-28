@@ -40,7 +40,7 @@
         </indexterm></term>
 
       <listitem>
-        <para>OmegaT laat het bewerkingsveld leeg. Deze optie stelt u in staat om de vertaling in te voeren zonder de brontekst te hoeven verwijderen, hetgeen u een aantal toetsaanslagen scheelt (<emphasis role="bold">Ctrl+A </emphasis>en <emphasis role="bold">Del). </emphasis> Lege vertalingen zijn nu toegestaan. Zij worden als &lt;LEEG&gt; weergegeven in het bewerkingsvenster. Klik met rechts in een segment en selecteer &quot;<emphasis role="bold">Lege vertaling instellen</emphasis>&quot;. Het item <emphasis role="bold">Vertaling verwijderen</emphasis> in hetzelfde pop-upmenu maakt het ook mogelijk de bestaande vertaling van het huidige segment te verwijderen. U bereikt hetzelfde door het doelsegment leeg te maken en te drukken op <guibutton>Enter.</guibutton></para>
+        <para>OmegaT laat het bewerkingsveld leeg. Deze optie stelt u in staat om de vertaling in te voeren zonder de brontekst te hoeven verwijderen, hetgeen u een aantal toetsaanslagen scheelt (<emphasis role="bold">Ctrl+A </emphasis>en <emphasis role="bold">Del). </emphasis> Lege vertalingen zijn nu toegestaan. Zij worden als &lt;LEEG&gt; weergegeven in het venster Bewerken. Klik met rechts in een segment en selecteer &quot;<emphasis role="bold">Lege vertaling instellen</emphasis>&quot;. Het item <emphasis role="bold">Vertaling verwijderen</emphasis> in hetzelfde pop-upmenu maakt het ook mogelijk de bestaande vertaling van het huidige segment te verwijderen. U bereikt hetzelfde door het doelsegment leeg te maken en te drukken op <guibutton>Enter.</guibutton></para>
       </listitem>
     </varlistentry>
 
@@ -163,6 +163,16 @@
 
       <listitem>
         <para>Selecteer deze optie om in het bestand <filename>project_save.tmx</filename> de informatie op te nemen dat een segment automatisch is vergroot, zodat het met een specifieke kleur kan worden weergegeven in het venster Bewerken (als de optie &quot;Segmenten van Automatisch vergroten van vertalingen markeren &quot;, in het menu Weergave, is geselecteerd).</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Initieel dit aantal segmenten laden</term>
+
+      <listitem>
+        <para>Standaard geeft het venster Bewerken 2.000 initiële segmenten weer, en laadt progressief meer als u naar boven of beneden scrollt. Als u een krachtige machine heeft, en/of als u vindt dat de schuifbalk zich niet gedraagt gedurende het progressief laden, kunt u dit aantal verhogen.</para>
       </listitem>
     </varlistentry>
   </variablelist>

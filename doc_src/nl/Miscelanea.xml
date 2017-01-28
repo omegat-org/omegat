@@ -47,7 +47,7 @@
 
       <para><literal> --mode=console-translate \</literal></para>
 
-      <para><literal>--source-pattern={reguliere uitdrukking} \</literal></para>
+      <para><literal> --source-pattern={regexp} \</literal></para>
 
       <para><literal> --tag-validation=[block|warn] </literal></para>
 

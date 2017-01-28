@@ -63,7 +63,7 @@
                   <keycap>N</keycap>
                 </keycombo></entry>
 
-              <entry>Maakt en opent een nieuw project. Het dialoogvenster om een project te maken is hetzelfde als voor het bewerken van het project. See<xref linkend="chapter.project.properties"/></entry>
+              <entry>Maakt en opent een nieuw project. Het dialoogvenster om een project te maken is hetzelfde als voor het bewerken van het project. Bekijk<xref linkend="chapter.project.properties"/></entry>
             </row>
 
             <row>
@@ -87,7 +87,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Open Recent Project</guimenuitem></entry>
+              <entry><guimenuitem>Recent project openen</guimenuitem></entry>
 
               <entry/>
 
@@ -162,6 +162,8 @@
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
+                  <keycap>Shift</keycap>
+
                   <keycap>D</keycap>
                 </keycombo></entry>
 
@@ -190,6 +192,16 @@
                 </keycombo></entry>
 
               <entry>Sluit of opent het venster <link linkend="section.project.files">Projectbestanden</link> (afhankelijk van het feit of het geopend of gesloten is).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Ga naar inhoud van project</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap/>
+                </keycombo></entry>
+
+              <entry>Geeft toegang tot de mappen van het project.<para>In aanvulling daarop maken twee menu-items het mogelijk direct de huidige bron- en doeldocumenten en de te beschrijven woordenlijst te openen. De documenten worden geopend door de toepassing die door het systeem wordt gekozen. Als de documenten niet beschikbaar zijn, is het item grijs gemaakt.</para></entry>
             </row>
 
             <row>
@@ -299,7 +311,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Vervangen door overeenkomst</guimenuitem></entry>
+              <entry><guimenuitem>Door overeenkomst of selectie vervangen</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -307,11 +319,11 @@
                   <keycap>R</keycap>
                 </keycombo></entry>
 
-              <entry>Vervangt het gehele doelsegment door de huidige geselecteerde overeenkomst (de eerste overeenkomst is standaard geselecteerd)</entry>
+              <entry>Vervangt het gehele doelsegment door de huidige geselecteerde overeenkomst (de eerste overeenkomst is standaard geselecteerd)<para>Indien binnen de fuzzy overeenkomst enkele teksten zijn geselecteerd, zal alleen die selectie het gehele doelsegment vervangen.</para></entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Overeenkomst invoegen</guimenuitem></entry>
+              <entry><guimenuitem>Overeenkomst of selectie invoegen</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -319,7 +331,7 @@
                   <keycap>I</keycap>
                 </keycombo></entry>
 
-              <entry>Voegt de huidige geselecteerde overeenkomst in op de cursorpositie. Indien een gedeelte van het doelsegment is geselecteerd, overschrijft deze functie het geselecteerde gedeelte.</entry>
+              <entry>Voegt de huidige geselecteerde overeenkomst in op de cursorpositie. Indien een gedeelte van het doelsegment is geselecteerd, overschrijft deze functie het geselecteerde gedeelte.<para>Indien binnen de fuzzy overeenkomst enkele teksten zijn geselecteerd, zal alleen die selectie op de positie van de cursor worden ingevoegd.</para></entry>
             </row>
 
             <row>
@@ -417,7 +429,7 @@
                   <keycap>G</keycap>
                 </keycombo></entry>
 
-              <entry>Laat de gebruiker een item maken in het standaard bestand voor de woordenlijst.</entry>
+              <entry>Laat de gebruiker een item maken in het standaard bestand voor de woordenlijst.<para>Als u een tekstreeks selecteert (in enig paneel) vóórdat u drukt op <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>, zal die tekst standaard worden geplakt in het veld <guilabel>Bronterm</guilabel>.</para></entry>
             </row>
 
             <row>
@@ -429,7 +441,7 @@
                   <keycap>F</keycap>
                 </keycombo></entry>
 
-              <entry>Opent een nieuw <link linkend="section.search.window">venster Zoeken</link>.</entry>
+              <entry>Opent een nieuw <link linkend="section.search.window">venster Zoeken</link>.<para>Als u een tekstreeks selecteert (in enig paneel) vóórdat u drukt op <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap>  </keycombo>, zal die tekst standaard worden geplakt in het veld <guilabel>Zoeken naar</guilabel>.</para><para>Drukken op <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>F</keycap> </keycombo> geeft het laatst geopende venster Zoeken weer (in plaats van een nieuw te openen).</para></entry>
             </row>
 
             <row>
@@ -441,7 +453,7 @@
                   <keycap>K</keycap>
                 </keycombo></entry>
 
-              <entry>Opent een nieuw <link linkend="section.searchreplace.window">venster Zoeken en vervangen</link>.</entry>
+              <entry>Opent een nieuw <link linkend="section.searchreplace.window">venster Zoeken en vervangen</link>.<para>Als u een tekstreeks selecteert (in enig paneel) vóórdat u drukt op <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap>  </keycombo>, zal die tekst standaard worden geplakt in het veld <guilabel>Zoeken naar</guilabel>.</para></entry>
             </row>
 
             <row>
@@ -450,8 +462,8 @@
               <entry><keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo> (zie tekst)</entry>
 
               <entry>Wijzigt hoofd-/kleine letters van de geaccentueerde tekst in het doelsegment naar de geselecteerde optie (Kleine letters, Hoofdletters of Alle woorden hoofdletters). Gebruik Shift+F3 <indexterm>
-                  <primary>Sbeltoetsen</primary> <secondary>Selectie hoofd-/kleine letters - Shift+F3</secondary>
-                </indexterm>om tussen de drie keuzes te schakelen. Indien geen tekst is geselecteerd, selecteert <application>OmegaT</application> het woord dat de letter bevat direct rechts naast de cursor.</entry>
+                  <primary>Sneltoetsen</primary> <secondary>Selectie hoofd-/kleine letters - Shift+F3</secondary>
+                </indexterm>om tussen de vier keuzes te schakelen. Indien geen tekst is geselecteerd, selecteert <application>OmegaT</application> het woord dat de letter bevat direct rechts naast de cursor.</entry>
             </row>
 
             <row>
@@ -495,7 +507,7 @@
 
               <entry/>
 
-              <entry>De vertaling als leeg definiëren. In het doeldocument zal voor dit segment niets verschijnen. In de bewerker wordt de vertaling weergegeven als &lt;LEEG&gt;</entry>
+              <entry>De vertaling als leeg definiëren. In het doeldocument zal voor dit segment niets verschijnen. In het venster Bewerken wordt de vertaling weergegeven als &lt;LEEG&gt;</entry>
             </row>
 
             <row>
@@ -559,11 +571,7 @@
             <row>
               <entry><guimenuitem>Volgende segment</guimenuitem></entry>
 
-              <entry><keycombo>
-                  <keycap>Ctrl</keycap>
-
-                  <keycap>N</keycap>
-                </keycombo> or <keycap>Enter</keycap></entry>
+              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo> of <keycap>Enter</keycap></entry>
 
               <entry>Verplaatst naar het volgende segment. Als het huidige segment het laatste in een bestand is, verplaatst het naar het eerste segment van het volgende bestand.</entry>
             </row>
@@ -571,15 +579,7 @@
             <row>
               <entry><guimenuitem>Vorige segment</guimenuitem></entry>
 
-              <entry><keycombo>
-                  <keycap>Ctrl</keycap>
-
-                  <keycap>P</keycap>
-                </keycombo> or <keycombo>
-                  <keycap>Ctrl</keycap>
-
-                  <keycap>Enter</keycap>
-                </keycombo></entry>
+              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo> of <keycombo> <keycap>Ctrl</keycap> <keycap>Enter</keycap> </keycombo></entry>
 
               <entry>Verplaatst naar het vorige segment. Als het huidige segment het eerste in een bestand is, verplaatst het naar het laatste segment van het vorige bestand.</entry>
             </row>
@@ -623,7 +623,7 @@
                   <keycap>M</keycap>
                 </keycombo></entry>
 
-              <entry>Verplaatst naar het segment dat correspondeert met de huidige geselecteerde overeenkomst in de <guilabel>Fuzzy overeenkomsten</guilabel> pane.</entry>
+              <entry>Verplaatst naar het segment dat correspondeert met de huidige geselecteerde overeenkomst in het venster <guilabel>Fuzzy overeenkomsten</guilabel>.</entry>
             </row>
 
             <row>
@@ -715,13 +715,19 @@
             <row>
               <entry><guimenuitem>Bidirectional Algorithm Control Characters markeren</guimenuitem></entry>
 
-              <entry>Deze optie geef <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">bidirectional control characters</ulink> weer</entry>
+              <entry>Deze optie geeft <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">bidirectional control characters</ulink> weer</entry>
             </row>
 
             <row>
               <entry><guimenuitem>Segmenten van Automatisch vergroten van vertalingen markeren</guimenuitem></entry>
 
               <entry>Indien aangevinkt wordt de achtergrond van alle segmenten waar het doelsegment automatisch is gevuld (vanuit TMX-en geplaatst in /tm/auto bijvoorbeeld) in kleur weergegeven. De kleuren worden weergegeven zolang als de optie &quot;Status voor automatisch vergroten van vertalingen opslaan&quot; (in Opties/Bewerken (gedrag)..) is aangevinkt. Normaal gesproken worden vertalingen die worden ingevoegd vanuit de map auto weergegeven in oranje. Andere vertalingen, specifiek geïdentificeerd in de TMX, kunnen met behulp van verschillende kleuren worden weergegeven. Bekijk het <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Request For Enhancement</ulink> voor technische details</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Agressief terugvallen op lettertype</guimenuitem></entry>
+
+              <entry>Selecteer deze optie in het geval dat OmegaT sommige tekens niet juist weergeeft (zelfs niet als de lettertypen de de relevante tekens bevatten op uw machine zijn geïnstalleerd). Opmerking: op Windows lijkt het erop dat dit handmatige mechanisme voor terugvallen op lettertype kan botsen met de standaard voor terugvallen op lettertype, wat ongewenst vervangen van het lettertype kan veroorzaken. Daarom staat het standaard op OFF.</entry>
             </row>
 
             <row>
@@ -827,13 +833,13 @@
             <row>
               <entry><guimenuitem>Machinevertaling</guimenuitem></entry>
 
-              <entry>Stelt u in staat om de aangeboden programma's voor machinevertaling te activeren/deactiveren. Indien actief, zal <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> de suggestie in het doelgedeelte van het huidige segment invoegen.</entry>
+              <entry>Stelt u in staat om de aangeboden programma's voor machinevertaling te activeren/deactiveren. Indien actief, zal <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> de suggestie in het doelgedeelte van het huidige segment invoegen.<para>U zou misschien, om redenen van vetrouwelijheid, niet alle segmenten naar het gereedschap Machinevertaling willen versturen. Door de optie <emphasis role="bold">Automatisch vertalingen ophalen</emphasis> uit te schakelen, zullen machinevertalingen alleen worden opgehaald door <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> (<keycombo> <keycap>Cmd</keycap> <keycap>M</keycap> </keycombo> op OS X) in te drukken voor het huidige segment. Daarna moet u <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> een tweede keer gebruiken, om de suggestie in te voeren.</para><para>Selecteer de optie <emphasis role="bold">Alleen niet-vertaalde segmenten</emphasis> om machinevertaling uit te schakelen voor reeds vertaalde segmenten. Opmerking: in dat geval kan <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> nog steeds worden gebruikt, om een aanroep voor machinevertaling te forceren voor een reeds vertaald segment.</para></entry>
             </row>
 
             <row>
               <entry><guimenuitem>Woordenlijst</guimenuitem></entry>
 
-              <entry>De optie <guimenuitem>Contextbeschrijving voor TBX-woordenlijsten tonen</guimenuitem> stelt u in staat contextinformatie voor de termen (die komt uit de TBX-woordenlijsten die zijn geplaatst in de map <filename>glossary</filename>) in het venster Woordenlijst weer te geven of te verbergen.<para>De 3 andere opties worden beschreven op de specifieke pagina met betrekking tot <link linkend="section.TaaS.options">TaaS</link> (Terminology as a Service).</para></entry>
+              <entry>De optie <guimenuitem>Contextbeschrijving voor TBX-woordenlijsten tonen</guimenuitem> stelt u in staat contextinformatie voor de termen (die komt uit de TBX-woordenlijsten die zijn geplaatst in de map <filename>glossary</filename>) in het venster Woordenlijst weer te geven of te verbergen.<para>Als de optie <guimenuitem>Termen die afzonderlijk in de brontekst verschijnen gebruiken</guimenuitem> op AAN staat, zal het item voor de woordenlijst &quot;itema itemb&quot; worden gevonden in de brontekst &quot;itema ander woord itemb&quot;. Als de optie UIT staat, zal het bovenstaande item voor de woordenlijst niet worden gevonden.</para><para>Als de optie <guimenuitem>Stemmen voor items van woordenlijst gebruiken</guimenuitem> AAN staat, met een Engelse brontekst, zal het item voor de woordenlijst &quot;element&quot; worden gevonden als de brontekst &quot;elements&quot; bevat. Als de optie UIT staat, zal het bovenstaande item voor de woordenlijst niet worden gevonden.</para><para>De optie <emphasis>Hits in woordenlijst vervangen bij invoegen brontekst</emphasis> maakt het mogelijk automatisch hits uit de woordenlijst te vervangen met de doelterm als de brontekst wordt ingevoegd. Dit is effectief bij <emphasis>Bewerken &gt; Vervangen door Bron</emphasis>, <emphasis>Bewerken &gt; Bron invoegen</emphasis>, en bij het invoeren van een segment als <emphasis>Opties &gt; Bewerken (gedrag) &gt; [Invoegen] de brontekst</emphasis> is ingeschakeld. Wanneer meerdere doeltermen beschikbaar zijn, zal de eerste (zoals weergegeven in het venster Woordenlijst) worden gebruikt. Overeenkomsten van de woordenlijst gebruiken geen stemming of stopwoorden, maar is niet gevoelig voor hoofdletters. Een poging wordt ondernomen om hoofdletters in het bronwoord overeen te laten komen.</para><para>De 3 andere opties worden beschreven op de specifieke pagina met betrekking tot <link linkend="section.TaaS.options.access">TaaS</link> (Terminology as a Service).</para></entry>
             </row>
 
             <row>
@@ -845,7 +851,7 @@
             <row>
               <entry><guimenuitem>Auto-aanvullen</guimenuitem></entry>
 
-              <entry><para>Klik op <guimenuitem>Woordenlijst...</guimenuitem> om de weergave woordenlijst Auto-aanvullen te configureren.</para><para>Klik op <guimenuitem>Auto-tekst...</guimenuitem> om opties voor Auto-tekst te configureren en items toe te voegen of te verwijderen.</para><para>Klik op <guimenuitem>Tabel met tekens...</guimenuitem> om de opties voor de Tabel met tekens voor auto-aanvullen in te stellen.</para></entry>
+              <entry><para>Klik op <guimenuitem>Woordenlijst...</guimenuitem> om de weergave woordenlijst Auto-aanvullen te configureren.</para><para>Klik op <guimenuitem>Auto-tekst...</guimenuitem> om opties voor Auto-tekst te configureren en items toe te voegen of te verwijderen.</para><para>Klik op <guimenuitem>Tabel met tekens...</guimenuitem> om de opties voor de Tabel met tekens voor auto-aanvullen in te stellen.</para><para>Auto-aanvullen wordt gestart in het doelsegment met de sneltoets <emphasis role="bold">Ctrl+Space</emphasis>.</para><para>Als de optie <emphasis role="bold">Relevante suggesties automatisch weergeven</emphasis> is geselecteerd, wordt Auto-aanvullen automatisch gestart door de eerste letter te typen van een vertaald item voor de woordenlijst, of door &quot;&lt;&quot; te typen in het geval van tags.</para></entry>
             </row>
 
             <row>
@@ -885,9 +891,9 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Tags valideren...</guimenuitem></entry>
+              <entry><guimenuitem>Tag verwerken...</guimenuitem></entry>
 
-              <entry>Voor programmeurs: Stelt u in staat om de opties voor Tags valideren te configureren en variabelen in het programma (%...) ook te controleren.</entry>
+              <entry>Bij het vertalen van aan software gerelateerde bestanden: maakt het mogelijk voor u om de opties voor Tags valideren te configureren om ook (%...) variabelen voor programmeren te controleren. Het maakt het ook mogelijk om verscheidene opties te definiëren die zijn gerelateerd aan het valideren van tags en om aangepaste tags te definiëren.</entry>
             </row>
 
             <row>
@@ -953,7 +959,7 @@
             <row>
               <entry><guimenuitem>Gebruikershandleiding...</guimenuitem></entry>
 
-              <entry><keycap>F1:</keycap> Opent de Help-browser met deze handleiding in een afzonderlijk venster.</entry>
+              <entry><keycap>F1:</keycap> Opent de standaard browser met deze handleiding.</entry>
             </row>
 
             <row>
@@ -1299,7 +1305,12 @@
             <row>
               <entry>Volgende segment</entry>
 
-              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo>, <keycap>Enter</keycap> of <keycap>Return</keycap></entry>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>N</keycap>
+                </keycombo>, <keycap>Enter</keycap> or
+              <keycap>Return</keycap></entry>
 
               <entry>Verplaatst het bewerkingsveld naar het volgende segment</entry>
             </row>
@@ -1337,7 +1348,7 @@
                   <keycap>Shift+P</keycap>
                 </keycombo></entry>
 
-              <entry>Verplaats één segment terug in de geschiedenis.</entry>
+              <entry>Verplaatst één segment terug in de geschiedenis.</entry>
             </row>
 
             <row>

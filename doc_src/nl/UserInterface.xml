@@ -88,7 +88,7 @@
                 <primary>Sneltoetsen</primary> <secondary>Help - F1</secondary>
               </indexterm>Help-browser</guimenuitem></entry>
 
-            <entry><para>Gebruikt om de gebruikershandleiding weer te geven (openen met <keycap>F1</keycap>, sluiten met <keycap>Esc</keycap>)</para></entry>
+            <entry><para>Gebruikt om de gebruikershandleiding weer te geven (openen met <keycap>F1</keycap>, sluiten met &lt;k1&gt;Esc&lt;/k1&gt;)<keycap/></para></entry>
           </row>
 
           <row>
@@ -193,7 +193,7 @@
     </note>
 
     <table>
-      <title>pictogrammen voor vensters<indexterm class="singular">
+      <title>Pictogrammen voor vensters<indexterm class="singular">
           <primary>Vensters in OmegaT</primary> <secondary>Pictogrammen voor vensters</secondary>
         </indexterm></title>
 
@@ -280,6 +280,20 @@
         <primary>Vensters van OmegaT</primary> <secondary>terugzetten naar fabrieksinstellingen</secondary>
       </indexterm>Opties → Hoofdvenster herstellen</guimenuitem> gebruiken om terug te keren naar de originele lay-out.</para>
 
+    <para>Het is mogelijk om bestanden naar elk venster te slepen en te laten vallen, het venster zal overeenkomstig reageren.<itemizedlist>
+        <listitem>
+          <para>Venster Bewerken: als een OmegaT projectbestand (<filename>omegat.project</filename>) op dit venster wordt gezet, zal het overeenkomstige project worden geopend, waarbij eerst een geopend project zal worden gesloten. Andere neergezette bestanden zullen wordne gekopieerd naar de map <filename>source</filename>. Dit is ook van toepassing op het venster <link linkend="section.project.files">Projectbestanden</link>.</para>
+        </listitem>
+
+        <listitem>
+          <para>Venster Fuzzy overeenkomsten: Neergezette <filename>.tmx</filename>-bestanden zullen worden gekopieerd naar de map <filename>tm</filename>.</para>
+        </listitem>
+
+        <listitem>
+          <para>Venster Woordenlijst: Neergezette bestanden met bekende extensies voor woordenlijsten (<filename>.txt</filename>, <filename>.tab</filename>, etc.) zullen worden gekopieerd naar de map <filename>glossary</filename>.</para>
+        </listitem>
+      </itemizedlist></para>
+
     <para>De tellers in de rechter benedenhoek houden de voortgang van de vertaling bij (getallen in de linkerkolom verwijzen naar de afbeelding hierboven):</para>
 
     <table>
@@ -325,15 +339,21 @@
           <primary>Vensters in OmegaT</primary> <secondary>venster Bewerken</secondary>
         </indexterm></title>
 
-      <para>Hier typt en bewerkt u uw vertaling. Het venster Bewerken geeft de tekst van het gedeeltelijk vertaalde document weer: de tekst die al vertaald is wordt vertaald weergegeven en de tekst die nog niet vertaald is wordt weergegeven in de originele taal. De weergegeven tekst is gesplitst in segmenten en u kunt door het document scrollen en op een willekeurig segment dubbelklikken om het te bewerken. In het bovenstaande geval worden de reeds vertaalde segmenten weergegeven in geel.</para>
+      <para>Hier typt en bewerkt u uw vertaling. Het venster Bewerken geeft de tekst van het gedeeltelijk vertaalde document weer: de tekst die al vertaald is, wordt vertaald weergegeven en de tekst die nog niet vertaald is, wordt weergegeven in de originele taal. De weergegeven tekst is gesplitst in segmenten en u kunt door het document scrollen en op een willekeurig segment dubbelklikken om het te bewerken. In het bovenstaande geval worden de reeds vertaalde segmenten weergegeven in geel.</para>
 
       <para>Eén van de bovenstaande segmenten is het huidige segment. Het is het segment dat wordt weergegeven in twee gedeelten. Het bovenste gedeelte is weergegeven in de brontaal, in vette tekens met een groene achtergrondkleur, het onderste gedeelte is het bewerkingsveld, gescheiden door een markering: <indexterm class="singular">
           <primary>Segment markering</primary>
         </indexterm>de markering is <literal>&lt;segment nnnn&gt;</literal> waarbij nnnn het getal is van het segment in het project. Gebruik het bovenste gedeelte als een verwijzing en vervang of pas de inhoud van het bewerkingsveld aan door/met uw vertaling.</para>
 
+      <para>Opmerking: de markering voor het segment geeft <literal>&lt;segment nnnn +yy meer&gt; weer als het segment niet uniek is. In dat geval is yy het aantal andere keren dat het segment voorkomt in het project.</literal></para>
+
       <para>Afhankelijk van het gedrag van uw voorkeur tijdens het bewerken kan het bewerkingsveld voor het niet-vertaalde segment leeg zijn, de brontekst bevatten of de vertaling bevatten van de tekenreeks die het meeste lijkt op die welke u gaat vertalen. Als u verder gaat naar een ander segment wordt de vertaling gevalideerd en opgeslagen. Als u wilt dat het segment niet vertaald wordt, maakt u eenvoudigweg het bewerkingsveld leeg door alle tekst te verwijderen (selecteer alles met <keycap>Ctrl+A</keycap> en verwijder het met <keycap>Del</keycap>). OmegaT is in staat om vertalingen op te slaan die identiek aan de bron zijn. Het is handig voor documenten die handelsmerken, (bedrijfs-)namen of andere woorden met hoofdletters bevatten of delen in een derde taal die niet vertaald behoeven te worden. Zie <emphasis>Vertaling bewerken</emphasis> voor meer details.</para>
 
-      <para>Als u met rechts klikt op het venster bewerken opent een pop-upmenu waarin<emphasis role="bold"> Knippen, Kopiëren, Plakken</emphasis> (d.i. dezelfde functies als <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> en <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>) en de functies <emphasis role="bold">Ga naar segment</emphasis>.</para>
+      <para>Als u met rechts klikt op het venster bewerken opent een pop-upmenu waarin<emphasis role="bold"> Knippen, Kopiëren, Plakken</emphasis> (d.i. dezelfde functies als <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> en <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>) en de functies <emphasis role="bold">Ga naar segment</emphasis> en <emphasis role="bold">Item voor woordenlijst toevoegen</emphasis>. In aanvulling daarop worden, als het met rechts klikken gebeurt op een geopend segment, andere opties met betrekking tot <emphasis role="bold">Alternatieve vertalingen</emphasis> voorgesteld, bijvoorbeeld om naar een andere instantie van een niet uniek segment te springen.</para>
+
+      <para>Het is mogelijk om tekst te slepen, vanaf elke plek vanuit het hoofdvenster, en het neer te zetten in het segment. Gesleepte tekst van buiten het doelsegment wordt gekopieerd, waar tekst vanuit het segement wordt verplaatst.</para>
+
+      <para>Standaard is het niet mogelijk woorden in het bronsegment te selecteren  met behulp van het toetsenbord in plaats van met de muis. Drukken op de toets <keycap>F2</keycap> maakt het mogelijk de cursor binnen het segment te verplaatsen (of ergens anders in het venster Bewerken) met de pijltjestoetsen. In deze modus wordt &quot;<guilabel>Cursor los gemaakt</guilabel>&quot; weergegeven aan de onderzijde van het paneel. Druk opnieuw op  <keycap>F2</keycap> om terug te gaan naar de standaard modus &quot;<guilabel>Cursor vastgezet</guilabel>&quot;,.</para>
     </section>
 
     <section id="match.viewer">
@@ -460,6 +480,12 @@
               </row>
 
               <row>
+                <entry><literal>${diffReversed}</literal></entry>
+
+                <entry>Hetzelfde als ${diff}, maar met de verschillen (wat moet worden ingevoegd en verwijderd) geïnverteerd.</entry>
+              </row>
+
+              <row>
                 <entry><literal>${score}</literal></entry>
 
                 <entry>Percentage met tokenizer</entry>
@@ -496,17 +522,28 @@
               </row>
 
               <row>
-                <entry><literal>${creationID}</literal></entry>
+                <entry><literal>${initialCreationID}</literal></entry>
 
-                <entry>Auteur van de overeenkomst</entry>
+                <entry>Auteur van de overeenkomst toen de overeenkomst werd gemaakt</entry>
               </row>
 
               <row>
-                <entry><literal>${creationDate}</literal></entry>
+                <entry><literal>${initialCreationDate}</literal></entry>
 
-                <entry>Datum van de overeenkomst</entry>
+                <entry>Datum van de overeenkomst toen de overeenkomst werd gemaakt</entry>
               </row>
 
+              <row>
+                <entry><literal>${changedID}</literal></entry>
+
+                <entry>Auteur van de overeenkomst toen de overeenkomst voor het laatst werd bijgewerkt</entry>
+              </row>
+
+              <row>
+                <entry><literal>${changedDate}</literal></entry>
+
+                <entry>Datum van de overeenkomst toen de overeenkomst voor het laatst werd bijgewerkt</entry>
+              </row>
               <row>
                 <entry><literal>${fuzzyFlag}</literal></entry>
 
@@ -631,13 +668,13 @@
         </listitem>
 
         <listitem>
-          <para>de lijst met alle vertaalbare bestanden in het project. Klikken op een bestand zal het openen voor vertaling Opmerking: bestandsnamen (in de eerste kolom) kunnen alfabetisch worden gesorteerd door te klikken in de kop. Het is ook mogelijk om de positie van een bestandsnaam te wijzigen door er op te klikken en te drukken op de knoppen <emphasis>Naar ...</emphasis>.</para>
-        </listitem>
-      </itemizedlist>
+          <para>de lijst met alle vertaalbare bestanden in het project. Klikken op een bestand zal het openen voor vertaling</para>
 
-      <itemizedlist>
-        <listitem>
-          <para>het bestand dat momenteel beschikbaar is in het venster Bewerken is geaccentueerd met een blauwe achtergrond. Drukken op <keycap>Enter</keycap> zal het venster Bewerken verplaatsen naar het begin van het geselecteerde bestand</para>
+          <para>Typen van enige tekst zal een veld Filter openen waar delen van bestandsnamen kunnen worden ingevoegd. U kunt een bestand selecteren met de toetsen <keycap>Naar boven</keycap> en <keycap>Naar beneden</keycap>, en het voor vertaling openen door te drukken op <keycap>Enter</keycap></para>
+
+          <para>Opmerking: bestandsnamen (in de eerste kolom) kunnen alfabetisch worden gesorteerd door te klikken in de kop. Het is ook mogelijk om de positie van een bestandsnaam te wijzigen door er op te klikken en te drukken op de knoppen <emphasis>Naar ...</emphasis>.</para>
+
+          <para>Met rechts klikken op ene bestandsnaam opent een pop-up die het mogelijk maakt het bronbestand te openen en (als het al bestaat) het doelbestand.</para>
         </listitem>
       </itemizedlist>
 

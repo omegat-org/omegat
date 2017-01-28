@@ -30,7 +30,7 @@
   <section>
     <title>Installatie en gebruik</title>
 
-    <para>De plug-in LanguageTool is opgenomen in OmegaT. De plug-in zal automatisch door OmegaT worden gebruikt als <guimenuitem>Opties &gt; Taalcontrole</guimenuitem> is aangevinkt. De toegepaste regels (indien aanwezig) zullen afhankelijk zijn van de bron- en doeltaal van het project. Wanneer een regel wordt geactiveerd zal de overeenkomende frase met blauw worden onderstreept in het Bewerkingsvenster (bekijk <emphasis>ook </emphasis>en <emphasis>Ik deed niets</emphasis> in de afbeelding hierboven). Indien met de muis over een onderstreepte frase wordt gegaan, zal een omschrijving verschijnen.</para>
+    <para>De plug-in LanguageTool is opgenomen in OmegaT. De plug-in zal automatisch door OmegaT worden gebruikt als <guimenuitem>Opties &gt; Taalcontrole</guimenuitem> is aangevinkt. De toegepaste regels (indien aanwezig) zullen afhankelijk zijn van de bron- en doeltaal van het project. Wanneer een regel wordt geactiveerd zal de overeenkomende frase met blauw worden onderstreept in het venster Bewerken (bekijk <emphasis>ook </emphasis>en <emphasis>Ik deed niets</emphasis> in de afbeelding hierboven). Indien met de muis over een onderstreepte frase wordt gegaan, zal een omschrijving verschijnen.</para>
     
 	<warning>
 		<title>Niet compatibel</title>

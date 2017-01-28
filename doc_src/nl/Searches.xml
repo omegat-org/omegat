@@ -15,6 +15,30 @@
     <para>Als alternatief: selecteer een woord of frase ergens in het bewerkingsveld en druk op <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. Het woord of de frase wordt automatisch ingevoegd in het vak <emphasis>Zoeken naar</emphasis>. U kunt verschillende vensters Zoeken tegelijkertijd geopend hebben, maar sluit ze als u ze niet langer nodig hebt zodat zij uw bureaublad niet vol zetten.</para>
 
     <para>Klik op de pijl naar beneden van het vak <emphasis>Zoeken naar</emphasis> on toegang te krijgen tot de 10 laatste zoekacties.</para>
+
+    <para>Het venster Zoeken heeft zijn eigen menu's:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Bestand &gt; Zoeken naar selectie (<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>): focus opnieuw op het zoekveld en selecteer alle inhoud.</para>
+      </listitem>
+
+      <listitem>
+        <para>Bestand &gt; Sluiten (<keycombo> <keycap>Ctrl</keycap> <keycap>W</keycap> </keycombo>): sluit het venster Zoeken (op dezelfde manier als <keycap>Esc</keycap>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Bewerken &gt; Bron invoegen (<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>I</keycap> </keycombo>): voeg het huidige bronsegment in.</para>
+      </listitem>
+
+      <listitem>
+        <para>Bewerken &gt; Vervangen door bron (<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>R</keycap> </keycombo>): vervangen met huidige bronsegment.</para>
+      </listitem>
+
+      <listitem>
+        <para>Bewerken &gt; Item voor woordenlijst maken (<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>): een nieuw item voor de woordenlijst toevoegen.</para>
+      </listitem>
+    </itemizedlist>
   </section>
 
   <section id="using.wild.cards">
@@ -128,7 +152,7 @@
       </listitem>
     </itemizedlist>
 
-    <para>Als u klikt op de knop <guibutton>Gevorderde opties</guibutton> kunnen aanvullende criteria (auteur van de vertaling, datum van vertaling etc) worden geselecteerd.</para>
+    <para>Als u klikt op de knop <guibutton>Gevorderde opties</guibutton> kunnen aanvullende criteria (auteur of maker van wijziging van de vertaling, datum van vertaling, Wezen-segmenten uitsluiten, etc) worden geselecteerd. Als de optie <emphasis>Volledige/Halve breedte tekens ongevoelig</emphasis> is geselecteerd, zullen zoekacties voor volledige vormen (CJK-tekens) overeenkomen met half brede vormen en vice versa.</para>
   </section>
 
   <section id="search.result.display">
@@ -136,15 +160,17 @@
 
     <para>Door op de knop Zoeken te drukken na het invoeren van een tekenreeks in het zoekveld zullen alle segmenten in het project, die de gezochte tekenreeks bevatten, worden weergegeven. Omdat <application>OmegaT</application> identieke segmenten behandelt als één entiteit wordt alleen het eerste unieke segment getoond. De segmenten worden weergegeven in de volgorde waarin zij in het project voorkomen. Vertaalde segmenten worden weergegeven met de originele tekst boven en de vertaalde tekst eronder, niet-vertaalde segmenten worden alleen als bron weergegeven.</para>
 
-    <para>Klikken op een segment opent het in het venster Bewerken om het aan te kunnen passen. Daarna kunt u teruggaan naar het venster Zoeken en naar het volgende gevonden segment gaan, bijvoorbeeld om het te controleren en, indien nodig, de terminologie aan te passen.</para>
+    <para>Dubbelklikken op een segment opent het in het venster Bewerken voor aanpassingen (één enkele klik doet dat als de optie <emphasis role="bold">Automatisch synchroniseren met venster Bewerken</emphasis> is geselecteerd). Daarna kunt u teruggaan naar het venster Zoeken en naar het volgende gevonden segment gaan, bijvoorbeeld om het te controleren en, indien nodig, de terminologie aan te passen.</para>
+
+    <para>U kunt, in het venster Zoeken, standaard sneltoetsen gebruiken (<keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo>) om van het ene segment naar een ander te gaan.</para>
 
     <para>U kunt meerdere vensters Tekst zoeken tegelijkertijd geopend hebben. U kunt hun inhoud snel zien door te kijken naar hun titel: het zal de gebruikte zoekterm bevatten.</para>
   </section>
 
   <section id="search.filter">
-    <title>Filteritems in bewerker overeenkomstig de zoekactie</title>
+    <title>Filteritems in venster Bewerken overeenkomstig de zoekactie</title>
 
-    <para>Om eenvoudiger te navigeren in de resultaten van de zoekactie, kunt u de zoekactie toepassen in de bewerker. Druk onderaan op de knop <emphasis role="bold">Filter</emphasis> om de weergegeven items in het venster Bewerken te beperken tot die welke overeenkomen met de huidige zoekactie. U kunt de normale navigatie gebruiken om bijv. naar het volgende (niet-vertaalde) segment te gaan dat overeenkomt met de zoekcriteria.</para>
+    <para>Om eenvoudiger te navigeren in de resultaten van de zoekactie, kunt u de zoekactie toepassen in het venster Bewerken. Druk onderaan op de knop <emphasis role="bold">Filter</emphasis> om de weergegeven items in het venster Bewerken te beperken tot die welke overeenkomen met de huidige zoekactie. U kunt de normale navigatie gebruiken om bijv. naar het volgende (niet-vertaalde) segment te gaan dat overeenkomt met de zoekcriteria.</para>
 
     <para>NB:</para>
 

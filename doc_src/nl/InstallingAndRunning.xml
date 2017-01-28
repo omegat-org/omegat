@@ -54,7 +54,7 @@
 # Country 
 -Duser.country=CA </code></literallayout>
 
-      <para>Advies: als OmegaT traag werkt in  sessies van Remote Desktop onder Windows, zou u deze optie kunnen gebruiken:</para>
+      <para>Advies: als OmegaT traag werkt in sessies van Remote Desktop onder Windows, zou u deze optie kunnen gebruiken:</para>
 
       <literallayout><code>-Dsun.java2d.noddraw=false</code></literallayout>
     </section>
@@ -108,7 +108,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Ja: </emphasis>download <emphasis>OmegaT_3.n.n_Windows_without_JRE.exe</emphasis>.</para>
+          <para><emphasis role="bold">Ja: </emphasis>download <emphasis>OmegaT_3.n.n_without_JRE.exe</emphasis>.</para>
         </listitem>
 
         <listitem>
@@ -226,15 +226,15 @@
 
       <para>Dubbelklik op<emphasis> <application>OmegaT</application>.app</emphasis> of klik op zijn locatie in het dock</para>
 
-      <para>U kunt het gedrag van OmegaT' aanpassen door de <emphasis>Eigenschappen</emphasis> als ook het bestand <emphasis>OmegaT.sh</emphasis> in het pakket te bewerken.</para>
+      <para>U kunt het gedrag van OmegaT' aanpassen door de <emphasis>Eigenschappen</emphasis> als ook het bestand <emphasis>Configuration.properties</emphasis> in het pakket te bewerken.</para>
 
-      <para>Klik met rechts op <emphasis><application>OmegaT</application>.app</emphasis> en selecteer &quot;Pakketinhoud weergeven&quot; om toegang te krijgen tot <application><emphasis>OmegaT.sh</emphasis></application>, en open het bestand door er met rechts op te klikken en selecteer uw tekstverwerker van uw keuze. U kunt ook met &quot;cd&quot; daar rechtstreeks naartoe gaan vanaf de opdrachtregel en <application><emphasis>OmegaT.sh</emphasis> openen in een verwerker voor de opdrachtregel zoals emacs of vi</application>.<indexterm class="singular">
+      <para>Klik met rechts op <emphasis><application>OmegaT</application>.app</emphasis> en selecteer &quot;Pakketinhoud weergeven&quot; om toegang te krijgen tot <application><emphasis>Configuration.properties</emphasis></application>, en open dan het bestand door er met rechts op te klikken en selecteer uw tekstverwerker van uw keuze. U kunt ook met &quot;cd&quot; daar rechtstreeks naartoe gaan vanaf de opdrachtregel en <application><emphasis>Configuration.properties</emphasis> openen in een verwerker voor de opdrachtregel zoals emacs of vi</application>.<indexterm class="singular">
           <primary>OmegaT aanpassen</primary> <secondary>OS X</secondary> <tertiary>Startparameters</tertiary>
         </indexterm></para>
 
-      <para>Opties worden gewijzigd door <emphasis>OmegaT.sh</emphasis> aan te passen. Verwijder, voor vooraf gedefinieerde opties, de # vóór een parameter om het in te schakelen. Bijvoorbeeld: <filename>LANGUAGE=&quot;-Duser.language=ja&quot;</filename> (zonder de #) zal <application>OmegaT</application> starten met de gebruikersinterface in het Japans.</para>
+      <para>Opties worden gewijzigd door <emphasis>Configuration.properties</emphasis> aan te passen. Verwijder, voor vooraf gedefinieerde opties, de # vóór een parameter om het in te schakelen. Bijvoorbeeld: <filename>LANGUAGE=&quot;-Duser.language=ja&quot;</filename> (zonder de #) zal <application>OmegaT</application> starten met de gebruikersinterface in het Japans.</para>
 
-      <para>Bewerk de startregel direct om de beschikbare hoeveelheid geheugen te wijzigen. Bijvoorbeeld: <filename>${JAVA} -Xmx2048m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY} -jar OmegaT.jar</filename> zal OmegaT starten met 2 gigabyte geheugen.</para>
+      <para>Bewerk het bestand <emphasis>OmegaT.app/Contents/Info.plist</emphasis> en wijzig de inhoud van &lt;string&gt;-Xmx1024M&lt;/string&gt; om de beschikbare hoeveelheid geheugen te wijzigen. Bijvoorbeeld: &lt;string&gt;-Xmx2048M&lt;/string&gt; zal OmegaT starten met 2 gigabyte geheugen.</para>
 
       <para>Als u meerdere instanties van <emphasis><application>OmegaT</application>.app</emphasis> moet uitvoeren, gebruik dan in plaats daarvan het bestand <emphasis>OmegaT.sh</emphasis> dat zich bevind in <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
 
@@ -306,6 +306,14 @@
     </section>
   </section>
 
+  <section id="drag.and.drop">
+    <title>Slepen en neerzetten<indexterm class="singular">
+        <primary>OmegaT uitvoeren</primary> <secondary>Slepen en neerzetten</secondary>
+      </indexterm></title>
+
+    <para>Op de meeste systemen, is het mogelijk een project te openen door een bestand <filename>omegat.project</filename> op het pictogram van OmegaT op hte bureaublad te laten vallen. Het zou ook mogelijk kunnen zijn een project van OmegaT te openen door te dubbelklikken op een bestand <filename>omegat.project</filename>.</para>
+  </section>
+
   <section id="using.Java.Web.Start">
     <title>Java Web Start gebruiken<indexterm class="singular">
         <primary>OmegaT uitvoeren</primary> <secondary>Java Web Start gebruiken</secondary>
@@ -315,7 +323,7 @@
 
     <para><emphasis>http://omegat.sourceforge.net/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
 
-    <para>Download het bestand<emphasis> <application>OmegaT</application>.jnlp</emphasis> en klik er dan op. Gedurende de installatie, afhankelijk van uw besturingssysteem, zou u verschillende beveiligingswaarschuwingen kunnen ontvangen. De rechten die u aan deze versie geeft (welke kunnen lijken op &quot;onbeperkte toegang tot de computer&quot;) zijn identiek aan de rechten die u geeft voor de locale versie, d.i. zij geven toegang tot de harde schijf van de computer. Opvolgende klikken op <emphasis><application>OmegaT</application>.jnlp</emphasis> zal leiden tot het controleren op upgrades, ze installeren als ze er zijn, en dan <application>OmegaT</application> starten. Na de initiële installatie kunt u natuurlijk <emphasis><application>OmegaT</application>.jnlp</emphasis> ook gebruiken als u offline bent.</para>
+    <para>Download het bestand<emphasis> <application>OmegaT</application>.jnlp</emphasis> en klik er dan op. Gedurende de installatie, afhankelijk van uw besturingssysteem, zou u verschillende beveiligingswaarschuwingen kunnen ontvangen. De rechten die u aan deze versie geeft (welke kunnen lijken op &quot;onbeperkte toegang tot de computer&quot;) zijn identiek aan de rechten die u geeft voor de lokale versie, d.i. zij geven toegang tot de harde schijf van de computer. Opvolgende klikken op <emphasis><application>OmegaT</application>.jnlp</emphasis> zal leiden tot het controleren op upgrades, ze installeren als ze er zijn, en dan <application>OmegaT</application> starten. Na de initiële installatie kunt u natuurlijk <emphasis><application>OmegaT</application>.jnlp</emphasis> ook gebruiken als u offline bent.</para>
 
     <para><emphasis role="bold">Privacy</emphasis>: <application>OmegaT</application> Java Web Start slaat geen informatie van u op buiten de computer waarop het wordt uitgevoerd. De toepassing wordt slechts uitgevoerd op uw machine. Uw documenten en vertaalgeheugens blijven op uw computer, en het <application>OmegaT</application>project zal geen toegang hebben tot uw werk of informatie.</para>
 
@@ -373,7 +381,7 @@
           <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary>
         </indexterm></title>
 
-      <para>De basisopdracht is hierboven al genoemd. Wijzigingen voor deze opdracht behelzen het daaraan toevoegen van &quot;argumenten&quot;. Argumenten worden toegevoegd ná het initiële <emphasis>&quot;java&quot;</emphasis> en vóór het gedeelte <emphasis>&quot;-jar <application>OmegaT</application>.jar&quot;</emphasis>. Onthoud dat u in Windows het bestand <filename>OmegaT.l4J.ini</filename> kunt wijzigen om uw voorkeuren weer te geven. Op andere platformen kunt u uw startprogramma aanpassen (bijv., <filename>OmegaT.sh</filename> op de Mac, <filename>OmegaT</filename> onder Linux) om hetzelfde te doen.</para>
+      <para>De basisopdracht is hierboven al genoemd. Wijzigingen voor deze opdracht behelzen het daaraan toevoegen van &quot;argumenten&quot;. Argumenten worden toegevoegd ná het initiële <emphasis>&quot;java&quot;</emphasis> en vóór het gedeelte <emphasis>&quot;-jar <application>OmegaT</application>.jar&quot;</emphasis>. Onthoud dat u in Windows het bestand <filename>OmegaT.l4J.ini</filename> kunt wijzigen om uw voorkeuren weer te geven. Op andere platformen kunt u het bestand <filename>Configuration.properties</filename> aanpassen op de Mac, of de starter voor <filename>OmegaT</filename> onder Linux, om hetzelfde te doen.</para>
 
       <para>Een lijst van mogelijke argumenten wordt hieronder weergegeven. Gevorderde gebruikers kunnen meer informatie over de argumenten vinden door <emphasis>man java</emphasis> in het terminalvenster te typen.</para>
 
@@ -504,6 +512,8 @@
 
         <para><literal>--config-dir=/pad/naar/config-bestanden/ \</literal></para>
 
+        <para><literal>--config-dir=/pad/naar/config-bestanden/ \</literal></para>
+
         <para><literal>
         --mode=console-translate|console-createpseudotranslatetmx|console-align</literal></para>
 
@@ -522,6 +532,10 @@
         <itemizedlist>
           <listitem>
             <para><literal>--config-dir=&lt;config-dir&gt;</literal> vertelt <application>OmegaT</application> in welke map de configuratiebestanden zijn opgeslagen. Indien niet opgegeven gaat <application>OmegaT</application> terug naar de standaard waarden (<application>OmegaT</application>-dir onder beginmap van de gebruiker, of indien niet beschikbaar: de huidige werkmap). Onthoud het dubbele &quot;-&quot;-teken</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>--config-dir=&lt;config-dir&gt;</literal> vertelt <application>OmegaT</application> in welke map de configuratiebestanden zijn opgeslagen.</para>
           </listitem>
         </itemizedlist>
 

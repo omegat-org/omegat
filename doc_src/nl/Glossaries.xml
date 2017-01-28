@@ -38,7 +38,7 @@
       </mediaobject>
     </figure>
 
-    <para>Het woord voor het =-teken is de bronterm en de vertaling is (of zijn) de woorden na =. Het item voor de woordenlijst kan een opmerking toegevoegd hebben. De functie woordenlijst vindt alleen exacte overeenkomsten met het woordenlijst-item (bijv. vindt geen afgeleide vormen etc.). Nieuwe termen kunnen handmatig aan de bestanden voor de woordenlijst worden toegevoegd tijdens het vertalen,bijvoorbeeld in een tekstverwerkingsprogramma. Nieuw toegevoegde termen worden niet herkend vóórdat de wijzigingen in het tekstbestand zijn opgeslagen.</para>
+    <para>Het woord voor het =-teken is de bronterm en de vertaling is (of zijn) de woorden na =. Het item voor de woordenlijst kan een opmerking toegevoegd hebben. De functie woordenlijst vindt alleen exacte overeenkomsten met het woordenlijst-item (bijv. vindt geen afgeleide vormen etc.). Nieuwe termen kunnen handmatig aan de bestanden voor de woordenlijst worden toegevoegd tijdens het vertalen, bijvoorbeeld in een tekstverwerkingsprogramma. Nieuw toegevoegde termen worden niet herkend vóórdat de wijzigingen in het tekstbestand zijn opgeslagen.</para>
 
     <para>De bronterm behoeft geen item met één woord te zijn, zoals het volgende voorbeeld laat zien:</para>
 
@@ -72,7 +72,9 @@
 
     <para>Woordenlijstbestanden zijn eenvoudige platte tekst-bestanden die drie-kolommen, tabgescheiden lijsten bevatten met de bron- en doeltermen in respectievelijk de eerste en tweede kolom. De derde kolom kan worden gebruikt voor aanvullende informatie. Er kunnen items zijn waarin de doelkolom ontbreekt, d.i. bevatten slechts de bronterm en de opmerking.</para>
 
-    <para>Woordenlijstbestanden kunnen of in de standaard systeemcodering (en aangegeven door de extensie .tab) zijn of in UTF-8 (de extensie .utf8 of .txt) of in UTF-16 LE (de extensie .txt). Ook het CSV-formaat wordt ondersteund. Dit formaat is hetzelfde als de tabgescheiden: bronterm, doelterm. Velden met opmerkingen worden gescheiden door een komma ','. Tekenreeksen kunnen worden omsloten door aanhalingstekens &quot;, die het mogelijk maken een komma binnen een tekenreeks te hebben:</para>
+    <para>De codering van uw woordenlijsten wordt automatisch vastgesteld. Natuurlijk moet de codering compatibel zijn met zowel de talen die het bevat, dus wordt Unicode aanbevolen.</para>
+
+    <para>Ook de indeling CSV wordt ondersteund. Deze indeling is hetzelfde als die voor tabgescheiden: bronterm, doelterm. Velden met opmerkingen worden gescheiden door een komma ','. Tekenreeksen kunnen worden omsloten door aanhalingstekens &quot;, die het mogelijk maken een komma binnen een tekenreeks te hebben:</para>
 
     <para><literal>&quot;This is a source term, which contains a comma&quot;,&quot;Dit is een bronterm, die een komma bevat&quot;</literal></para>
 

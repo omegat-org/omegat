@@ -94,8 +94,46 @@
   </section>
 
   <section>
+    <title>MyMemory (machine)<indexterm class="singular">
+        <primary>Machinevertaling</primary> <secondary>MyMemory</secondary>
+      </indexterm></title>
+
+    <para>Standaard staat MyMemory een maximum van 100 verzoeken per dag toe. Het is mogelijk, door een e-mailadres op te geven, om 1000 verzoeken per dag te gebruiken in plaats van de 100.</para>
+
+    <para>er zijn tenminste 3 manieren om uw adres op te geven:</para>
+
+    <para><itemizedlist>
+        <listitem>
+          <para>in het bestand van OmegaT.l4J.ini (alleen op Windows), wijzig:</para>
+
+          <para># MyMemory email</para>
+
+          <para>naar:</para>
+
+          <para>MyMemory uwr@e-mailadres.com</para>
+        </listitem>
+
+        <listitem>
+          <para>Specificeer, bij het starten van OmegaT vanaf de opdrachtregel, in de opdracht:</para>
+
+          <para>-Dmymemory.api.email=uw@e-mailadres.com</para>
+        </listitem>
+
+        <listitem>
+          <para>in de  starter van Kaptain (alleen op Linux), voer het adres in in het overeenkomstige veld op de tab &quot;Online Services&quot;.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <para>MyMemory verschaft ook <emphasis role="bold">Vertalingen door mensen</emphasis> afkomstig van professionele vertalers, LSP's, klanten en meertalige webinhoud. U moet, om deze vertalingen te verkrijgen, uw bronbestand uploaden <ulink url="http://mymemory.translated.net/">naar hun site</ulink> waar dan een TMX-bestand gegenereerd wordt. Dat TMX-bestand dient u dan te plaatsen in de map /tm/ of /tm/auto/ van uw project van OmegaT.</para>
+
+    <para>MyMemory biedt ook de mogelijkheid om <emphasis role="bold">private TM's</emphasis> te beheren. Opmerking: OmegaT heeft geen dynamische interactie met ze (u moet handmatig TMX-bestanden exporteren/importeren).</para>
+  </section>
+
+  <section>
     <title>Microsoft Translator<indexterm class="singular">
-        <primary>Machinevertaling</primary> <secondary>Microsoft Translatator</secondary>
+        <primary>Machine Translation</primary>
+
+        <secondary>Microsoft Translator</secondary>
       </indexterm></title>
 
     <para>Volg deze stappen om inloggegevens voor MS Translator te verkrijgen:</para>
@@ -112,7 +150,7 @@
       </listitem>
 
       <listitem>
-        <para>nabij de onderzijde zult u items en waarden zien voor:<itemizedlist>
+        <para>Nabij de onderzijde zult u items en waarden zien voor:<itemizedlist>
             <listitem>
               <para>Primary Account Key (correspondeert met de <code>microsoft.api.client_secret</code> parameter voor de opdrachtregel)</para>
             </listitem>

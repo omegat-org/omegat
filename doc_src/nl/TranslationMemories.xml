@@ -80,7 +80,23 @@
             </indexterm></term>
 
           <listitem>
-            <para>Als het vanaf het begin duidelijk is dat de vertalingen in een bepaald TM (of TM's) allemaal juist zijn, kan één van hen in de map<emphasis role="bold"> tm/auto</emphasis> worden geplaatst en heel veel van de gevallen van bevestiging met<emphasis> [fuzzy]</emphasis> worden voorkomen. Dit zal de brontekst effectief <emphasis role="bold">vooraf vertalen </emphasis>: alle segmenten in de brontekst, waarvoor vertalingen kunnen worden gevonden in deze &quot;auto&quot;-TM's, zullen zonder interventie van de gebruiker belanden in de belangrijkste TM van het project.</para>
+            <para>Als het vanaf het begin duidelijk is dat de vertalingen in een bepaald TM (of TM's) allemaal juist zijn, kan één van hen in de map<emphasis role="bold"> tm/auto</emphasis> worden geplaatst en heel veel van de gevallen van bevestiging met<emphasis> [fuzzy]</emphasis> worden voorkomen.</para>
+
+            <para><orderedlist>
+                <listitem>
+                  <para>Dat TMX-bestand dient u dan te plaatsen in de map /tm/ of /tm/auto/ van uw project van OmegaT.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Open het project. De wijzigingen worden weergegeven.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Maak een kleine wijziging ergens in het project. Dit past <filename>project_save.tmx</filename> aan (door toevoegen van juiste vertaaleenheden uit de TMX vanuit &quot;auto&quot;)</para>
+                </listitem>
+              </orderedlist></para>
+
+            <para>Opmerking: als de TMX  uit /tm/auto  vóór stap 3 wordt verwijderd, worden geen extra vertaaleenheden toegevoegd.</para>
           </listitem>
         </varlistentry>
 
@@ -88,7 +104,35 @@
           <term>map tm/enforce</term>
 
           <listitem>
-            <para>Als u er niet aan twijfelt dat een TMX meer nauwkeurig is dan het bestand <filename>project_save.tmx</filename> van OmegaT, pplaats die TMX dan in /tm/enforce om bestaande standaard vertalingen onvoorwaardelijk te overschrijven.</para>
+            <para>Als u er niet aan twijfelt dat een TMX meer nauwkeurig is dan het bestand <filename>project_save.tmx</filename> van OmegaT, plaats die TMX dan in /tm/enforce om bestaande standaard vertalingen onvoorwaardelijk te overschrijven.</para>
+
+            <para><orderedlist>
+                <listitem>
+                  <para>Plaats de TMX in /tm/enforce.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Open het project. De wijzigingen worden weergegeven.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Maak een kleine wijziging ergens in het project. Dit past <filename>project_save.tmx</filename> aan.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Neem een beslissing over de immuniteit van de geforceerde segmenten:<itemizedlist>
+                      <listitem>
+                        <para>Als zij <emphasis>niet immuun</emphasis> moeten blijven voor nadere wijzigingen, verwijder dan de TMX uit /tm/enforce.</para>
+                      </listitem>
+
+                      <listitem>
+                        <para>Als zij <emphasis>immuun</emphasis> moeten blijven voor verdere wijzigingen, laat dan de TMX in /tm/enforce staan.</para>
+                      </listitem>
+                    </itemizedlist></para>
+                </listitem>
+              </orderedlist></para>
+
+            <para>Opmerking: als de TMX  uit /tm/enforce vóór stap 3 wordt verwijderd, worden in het geheel geen forceringen behouden.</para>
           </listitem>
         </varlistentry>
 
@@ -247,7 +291,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>maak een project, afzonderlijk van andere projecten, in het gewenste paar van talen, met een toepasselijke naam - onthoud dat de gemaakte TMX-en deze naam zullen bevatten.</para>
+          <para>Maak een project, afzonderlijk van andere projecten, in het gewenste paar van talen, met een toepasselijke naam - onthoud dat de gemaakte TMX-en deze naam zullen bevatten.</para>
         </listitem>
       </itemizedlist>
 
@@ -277,7 +321,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>Verwijder de map van het project of archiveer het ergens weg van uw werkplek ot te vermijden dat het project opnieuw wordt gebruikt en dus toekomstige gevallen besmet.</para>
+          <para>Verwijder de map van het project of archiveer het ergens weg van uw werkplek om te vermijden dat het project opnieuw wordt gebruikt en dus toekomstige gevallen besmet.</para>
         </listitem>
       </itemizedlist>
     </section>
@@ -310,7 +354,7 @@
         <primary>Vertaalgeheugens</primary> <secondary>PO en OKAPI TTX-bestanden</secondary> <seealso>Vertaalgeheugens submap tm/auto</seealso>
       </indexterm></title>
 
-    <para>Sommige typen bronbestanden (bijvoorbeeld PO, TTX, etc.) zijn tweetalig, d.i. zij dienen zowel als bron als als vertaalgeheugen. In zulke gevallen wordt een bestaande vertaling, die wordt gevonden in het bestand, opgenomen in <filename>project_save.tmx</filename>. Het wordt behandelt als een standaard vertaling, indien geen overeenkomst werd gevonden, of als een alternatieve vertaling, in het geval dat hetzelfde bronsegment bestaat, maar met een doeltekst. Het resultaat zal dus afhangen van de volgorde waarin de bronsegmenten zijn geladen.</para>
+    <para>Sommige typen bronbestanden (bijvoorbeeld PO, TTX, etc.) zijn tweetalig, d.i. zij dienen zowel als bron als als vertaalgeheugen. In zulke gevallen wordt een bestaande vertaling, die wordt gevonden in het bestand, opgenomen in <filename>project_save.tmx</filename>. Het wordt behandeld als een standaard vertaling, indien geen overeenkomst werd gevonden, of als een alternatieve vertaling, in het geval dat hetzelfde bronsegment bestaat, maar met een doeltekst. Het resultaat zal dus afhangen van de volgorde waarin de bronsegmenten zijn geladen.</para>
 
     <para>Alle vertalingen van brondocumenten worden ook weergegeven in het venster Opmerkingen, aanvullend op het venster Overeenkomsten. In het geval van PO-bestanden wordt een straf van 20% toegepast op de alternatieve vertaling (d.i. een overeenkomst van 100% wordt een overeenkomst van 80%). Het woord [Fuzzy] wordt weergegeven op het bronsegment.</para>
 
@@ -349,7 +393,7 @@
 
   <section id="upgrading.translation.memories">
     <title>Vertaalgeheugens bijwerken<indexterm class="singular">
-        <primary>Vertaalgeheugens</primary> <secondary>bijwerken naar zinsegmentatie</secondary>
+        <primary>Vertaalgeheugens</primary> <secondary>Bijwerken naar zinsegmentatie</secondary>
       </indexterm></title>
 
     <para>Hele vroege versies van <application>OmegaT</application> waren slechts in staat bronbestanden in alinea's te segmenteren en nummerden de tags voor opmaak in HTML- en Open Document-bestanden niet consistent. <application>OmegaT</application> kan dergelijke TMX-bestanden herkennen en direct bijwerken om de kwaliteit van de fuzzy overeenkomsten te vergroten en uw vertaling op peil te brengen, zodat u dat werk niet handmatig hoeft te doen.</para>

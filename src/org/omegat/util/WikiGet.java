@@ -121,10 +121,8 @@ public class WikiGet {
      *            The UTF-8 format string to be printed.
      */
     public static void printUTF8(String output) {
-        try {
-            BufferedWriter out = UTF8WriterBuilder(System.out);
+        try (BufferedWriter out = UTF8WriterBuilder(System.out)) {
             out.write(output);
-
             out.flush();
         } catch (Exception e) {
             e.printStackTrace();
@@ -153,15 +151,12 @@ public class WikiGet {
      *            UTF-8 format text to write
      */
     public static void saveUTF8(String dir, String filename, String output) {
-        try {
-            // Page name can contain invalid characters, see [1878113]
-            // Contributed by Anatoly Techtonik
-            filename = filename.replaceAll("[\\\\/:\\*\\?\\\"\\|\\<\\>]", "_");
-            File path = new File(dir, filename);
-            FileOutputStream f = new FileOutputStream(path);
-            BufferedWriter out = UTF8WriterBuilder(f);
+        // Page name can contain invalid characters, see [1878113]
+        // Contributed by Anatoly Techtonik
+        filename = filename.replaceAll("[\\\\/:\\*\\?\\\"\\|\\<\\>]", "_");
+        File path = new File(dir, filename);
+        try (BufferedWriter out = UTF8WriterBuilder(new FileOutputStream(path))) {
             out.write(output);
-            out.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -195,22 +190,15 @@ public class WikiGet {
      */
     public static byte[] getURLasByteArray(String target) throws IOException {
         URL url = new URL(target);
-        byte[] result;
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        try {
-            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                return null;
-            }
-            InputStream in = conn.getInputStream();
-            try {
-                result = IOUtils.toByteArray(in);
-            } finally {
-                IOUtils.closeQuietly(in);
-            }
-        } finally {
-            IOUtils.close(conn);
+        if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+            return null;
         }
-        return result;
+        try (InputStream in = conn.getInputStream()) {
+            return IOUtils.toByteArray(in);
+        } finally {
+            conn.disconnect();
+        }
     }
 
     /**
@@ -298,25 +286,23 @@ public class WikiGet {
         }
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        try {
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            conn.setRequestProperty("Content-Length", Integer.toString(pout.size()));
-            if (additionalHeaders != null) {
-                for (Map.Entry<String, String> en : additionalHeaders.entrySet()) {
-                    conn.setRequestProperty(en.getKey(), en.getValue());
-                }
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        conn.setRequestProperty("Content-Length", Integer.toString(pout.size()));
+        if (additionalHeaders != null) {
+            for (Map.Entry<String, String> en : additionalHeaders.entrySet()) {
+                conn.setRequestProperty(en.getKey(), en.getValue());
             }
+        }
 
-            addProxyAuthentication(conn);
+        addProxyAuthentication(conn);
 
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
+        conn.setDoInput(true);
+        conn.setDoOutput(true);
 
-            OutputStream cout = conn.getOutputStream();
+        try (OutputStream cout = conn.getOutputStream()) {
             cout.write(pout.toByteArray());
             cout.flush();
-
             return getStringContent(conn);
         } finally {
             conn.disconnect();
@@ -351,11 +337,9 @@ public class WikiGet {
         String contentType = conn.getHeaderField("Content-Type");
         int cp = contentType != null ? contentType.indexOf(CHARSET_MARK) : -1;
         String charset = cp >= 0 ? contentType.substring(cp + CHARSET_MARK.length()) : "ISO8859-1";
-        InputStream in = conn.getInputStream();
-        try {
+
+        try (InputStream in = conn.getInputStream()) {
             return IOUtils.toString(in, charset);
-        } finally {
-            in.close();
         }
     }
 

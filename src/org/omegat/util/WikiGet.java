@@ -137,7 +137,7 @@ public class WikiGet {
      *            Outputstream to connect to.
      */
     public static BufferedWriter UTF8WriterBuilder(OutputStream out) throws Exception {
-        return new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
+        return new BufferedWriter(new OutputStreamWriter(out, StandardCharsets.UTF_8.name()));
     }
 
     /**

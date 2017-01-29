@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.1
 ----------------------------------------------------------------------
-  3 Enhancements
+  4 Enhancements
   0 Bug fix
   4 Localisation updates
 ----------------------------------------------------------------------
@@ -14,6 +14,9 @@
 
   - Additional parameter for neural net translation on Google translate
   https://sourceforge.net/p/omegat/feature-requests/1291/
+
+  - Support new Azure-based Microsoft Translator API for MT
+  https://sourceforge.net/p/omegat/feature-requests/1280/
 
   Other changes:
 

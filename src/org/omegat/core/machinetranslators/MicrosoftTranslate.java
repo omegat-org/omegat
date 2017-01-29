@@ -126,14 +126,13 @@ public class MicrosoftTranslate extends BaseTranslate {
         
     }
     private void requestToken() throws Exception {
-        Map<String, String> p = new TreeMap<String, String>();
-
         String id = getCredential(PROPERTY_CLIENT_ID);
         String secret = getCredential(PROPERTY_CLIENT_SECRET);
         if (StringUtil.isEmpty(id) || StringUtil.isEmpty(secret)) {
             throw new Exception(OStrings.getString("MT_ENGINE_MICROSOFT_KEY_NOTFOUND"));
         }
 
+        Map<String, String> p = new TreeMap<String, String>();
         p.put("client_id", id);
         p.put("client_secret", secret);
         p.put("scope", "http://api.microsofttranslator.com");

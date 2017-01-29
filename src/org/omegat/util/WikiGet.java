@@ -276,13 +276,16 @@ public class WikiGet {
         URL url = new URL(address);
 
         ByteArrayOutputStream pout = new ByteArrayOutputStream();
-        for (Map.Entry<String, String> p : params.entrySet()) {
-            if (pout.size() > 0) {
-                pout.write('&');
+        if (params != null) {
+            for (Map.Entry<String, String> p : params.entrySet()) {
+                if (pout.size() > 0) {
+                    pout.write('&');
+                }
+                pout.write(p.getKey().getBytes(StandardCharsets.UTF_8));
+                pout.write('=');
+                pout.write(URLEncoder.encode(p.getValue(), StandardCharsets.UTF_8.name())
+                        .getBytes(StandardCharsets.UTF_8));
             }
-            pout.write(p.getKey().getBytes(StandardCharsets.UTF_8));
-            pout.write('=');
-            pout.write(URLEncoder.encode(p.getValue(), StandardCharsets.UTF_8.name()).getBytes(StandardCharsets.UTF_8));
         }
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();

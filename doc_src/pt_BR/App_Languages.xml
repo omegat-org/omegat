@@ -2,7 +2,7 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <appendix id="appendix.languages">
   <title>Línguas - lista de códigos ISO 639<indexterm class="singular">
-    <primary>Línguas</primary>
+    <primary>Idiomas</primary>
   </indexterm>
   <indexterm class="singular">
     <primary>Código de línguas ISO</primary>
@@ -164,12 +164,12 @@
 	  <entry>cha</entry>
 	</row>
         <row>
-	  <entry>Checheno</entry>
+	  <entry>cha</entry>
 	  <entry>ce</entry>
 	  <entry>che</entry>
 	</row>
         <row>
-	  <entry>Cinianja, Chewa, Nianja</entry>
+	  <entry>Chichewa, Chewa, Nyanja</entry>
 	  <entry>ny</entry>
 	  <entry>nya</entry>
 	</row>
@@ -194,7 +194,7 @@
 	  <entry>cos</entry>
 	</row>
         <row>
-	  <entry>Cree</entry>
+	  <entry>cos</entry>
 	  <entry>cr</entry>
 	  <entry>cre</entry>
 	</row>
@@ -204,7 +204,7 @@
 	  <entry>hrv</entry>
 	</row>
         <row>
-	  <entry>Checo</entry>
+	  <entry>hrv</entry>
 	  <entry>cs</entry>
 	  <entry>ces</entry>
 	</row>
@@ -405,8 +405,8 @@
 	</row>
         <row>
 	  <entry>Canará</entry>
-	  <entry>kn</entry>
-	  <entry>kan</entry>
+	  <entry>[fuzzy]kn</entry>
+	  <entry>[fuzzy]kan</entry>
 	</row>
         <row>
 	  <entry>Kanuri</entry>
@@ -880,8 +880,8 @@
 	</row>
         <row>
 	  <entry>Urdu</entry>
-	  <entry>ur</entry>
-	  <entry>urd</entry>
+	  <entry>[fuzzy]ur</entry>
+	  <entry>[fuzzy]urd</entry>
 	</row>
         <row>
 	  <entry>Uzbeque</entry>
@@ -934,7 +934,7 @@
 	  <entry>yid</entry>
 	</row>
         <row>
-	  <entry>Ioruba</entry>
+	  <entry>Iorubá</entry>
 	  <entry>yo</entry>
 	  <entry>yor</entry>
 	</row>

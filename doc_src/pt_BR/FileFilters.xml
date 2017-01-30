@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.file.filters">
-  <title>Filtros de arquivos</title>
+  <title>Filtros de Arquivos</title>
 
   <para>O OmegaT apresenta filtros com grandes recursos de customização, assim você pode configurar a maioria dos detalhes do seu funcionamento. Os filtros de arquivos são partes do código e podem:</para>
 
@@ -108,19 +108,13 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Acrescentar ou regravar a declaração de codificação nos arquivos HTML e XHTML</emphasis>: frequentemente os arquivos alvo devem ter o conjunto de caracteres de codificação diferente daquele no arquivo original (seja definido explicita ou implicitamente). Usar esta opção permite que o tradutor especifique se os arquivos destino devem incluir a declaração de codificação. Por exemplo, se o filtro de arquivo especifica que o UTF8 é o esquema de codificação dos arquivos destino, selecionar a opção Sempre assegurará que esta informação seja incluída nos arquivos traduzidos.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
         <para><emphasis>Traduzir os seguintes elementos</emphasis>: os elementos selecionados aparecerão como segmentos na janela Editor.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Iniciar um novo parágrafo: a tag &lt;br&gt;</emphasis> do HTML criará um parágrafo para fins de segmentação.</para>
+        <para><emphasis>Iniciar um novo parágrafo</emphasis>: a tag &lt;br&gt; do HTML criará um parágrafo para fins de segmentação.</para>
       </listitem>
     </itemizedlist>
 
@@ -174,7 +168,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Outras opções:</emphasis></para>
+        <para><emphasis role="bold">Outras Opções:</emphasis></para>
 
         <itemizedlist>
           <listitem>
@@ -192,7 +186,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Acrescentar ou regravar a declaração de codificação nos arquivos HTML e XHTML</emphasis>Sempre (padrão), Somente se o arquivo (X)HTML tiver um cabeçalho, Somente se o arquivo (X)HTML tiver uma declaração de codificação, Nunca</para>
+        <para><emphasis>Acrescentar ou regravar a declaração de codificação nos arquivos HTML e XHTML</emphasis>: frequentemente os arquivos alvo devem ter o conjunto de caracteres de codificação diferente daquele no arquivo original (seja definido explicita ou implicitamente). Usar esta opção permite que o tradutor especifique se os arquivos destino devem incluir a declaração de codificação. Por exemplo, se o filtro de arquivo especifica que o UTF8 é o esquema de codificação dos arquivos destino, selecionar a opção Sempre assegurará que esta informação seja incluída nos arquivos traduzidos.</para>
       </listitem>
     </itemizedlist>
 
@@ -210,7 +204,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Pular texto que corresponde à expressão regular</emphasis>: o texto correspondendo à expressão regular será ignorado.</para>
+        <para><emphasis>Pular texto que corresponde à expressão regular</emphasis>: o texto correspondendo à expressão regular será ignorado. É exibido em vermelho no validador de tags. O texto no segmento fonte correspondente é exibido em itálico.</para>
       </listitem>
     </itemizedlist>
 
@@ -223,16 +217,16 @@
     <itemizedlist>
       <listitem>
         <para><emphasis>Não traduzir o atributo de conteúdo das tags com os seguintes pares de atributo key-value (separados por vírgulas)</emphasis>: caso haja correspondência na lista de pares de valor da chave, o conteúdo das tags será ignorado</para>
+
+        <para>Às vezes é útil poder deixar algumas tags intraduzíveis baseado no valor de atributos. Por exemplo, <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal> É possível definir pares de valor da chave de tags a não serem traduzidas. Para o exemplo acima, o campo conteria: <literal>class=hide, translate=no </literal></para>
       </listitem>
-    </itemizedlist>
 
-    <para><emphasis role="bold">Arquivos de texto</emphasis></para>
-
-    <itemizedlist>
       <listitem>
-        <para><emphasis>Segmentação de parágrafos por quebras de linha, linhas vazias ou nunca</emphasis>:</para>
+        <para><emphasis>Compactar espaço em branco no documento traduzido</emphasis>: vários espaços em branco seguidos serão convertidos em um único espaço no documento traduzido.</para>
+      </listitem>
 
-        <para>se as regras de segmentação por frases estiverem ativadas, o texto será segmentado de acordo com a opção selecionada.</para>
+      <listitem>
+        <para><emphasis>Remover comentários HTML em documento traduzido</emphasis>: todas as partes comentadas (entre &lt;!-- e --&gt;) não serão copiadas no documento traduzido.</para>
       </listitem>
     </itemizedlist>
 
@@ -261,7 +255,7 @@
           <primary>Filtros de arquivos</primary> <secondary>Padrão de tipos e nomes de arquivos</secondary>
         </indexterm></title>
 
-      <para>Quando o OmegaT encontra um arquivo na sua pasta source, ele tenta selecionar o filtro de acordo com a extensão do arquivo. Mais precisamente, o OmegaT tenta corresponder os tipos de arquivo fonte de cada filtro com o nome do arquivo. Por exemplo, o padrão <literal>*.xhtml </literal>corresponde a qualquer arquivo com a extensão <literal>.xhtml</literal>. Se for encontrado o filtro apropriado, ele é associado ao arquivo para processamento. Por exemplo, como padrão, os filtros XHTML são usados para processar arquivos com a extensão .xhtml. É possível alterar ou adicionar padrões de nome do arquivo para cada arquivo. Os tipos de arquivo fonte usam curingas iguais aos usados nas <emphasis role="bold">Buscas. </emphasis>O caractere '*' corresponde a zero ou mais caracteres. O caractere '?' corresponde exatamente a um caractere. Todos os outros caracteres correspondem a eles mesmos. Por exemplo, se você quiser que o filtro de texto processe os arquivos leiame (<literal>leiame, leia.me</literal> e <literal>leiame.txt</literal>) use o padrão <literal>leia*</literal>.</para>
+      <para>Quando o OmegaT encontra um arquivo na sua pasta source, ele tenta selecionar o filtro de acordo com a extensão do arquivo. Mais precisamente, o OmegaT tenta corresponder os tipos de arquivo fonte de cada filtro com o nome do arquivo. Por exemplo, o padrão <literal>*.xhtml </literal>corresponde a qualquer arquivo com a extensão <literal>.xhtml</literal>. Se for encontrado o filtro apropriado, ele é associado ao arquivo para processamento. Por exemplo, como padrão, os filtros XHTML são usados para processar arquivos com a extensão .xhtml. É possível mudar ou adicionar padrões de nome de arquivo para que os arquivos sejam classificados de acordo com cada filtro. Os tipos de arquivo fonte usam curingas iguais aos usados nas <emphasis role="bold">Buscas. </emphasis>O caractere '*' corresponde a zero ou mais caracteres. O caractere '?' corresponde exatamente a um caractere. Todos os outros caracteres correspondem a eles mesmos. Por exemplo, se você quiser que o filtro de texto processe os arquivos leiame (<literal>leiame, leia.me</literal> e <literal>leiame.txt</literal>) use o padrão <literal>leia*</literal>.</para>
     </section>
 
     <section id="source.and.target.files.encoding">

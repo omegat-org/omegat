@@ -139,7 +139,7 @@
         <row>
           <entry><emphasis role="bold">Ctrl+Espaço</emphasis></entry>
 
-          <entry>abre uma caixa de diálogo com sugestões contextuais (Mac: <emphasis role="bold">Esc</emphasis>). Use <emphasis role="bold">Ctrl+PgUp/PgDn</emphasis> (Cmd+PgUp/PgDn no Mac) para alternar em sequência as opções de <emphasis>Entradas de glossário</emphasis>, <emphasis>Entradas de auto-texto</emphasis>, <emphasis>Tags faltantes</emphasis> e <emphasis>Tabela de caracteres</emphasis>.</entry>
+          <entry>abre a caixa de diálogo Autocompletar com sugestões contextuais (Mac: <emphasis role="bold">Esc</emphasis>). Com ela aberta, use <emphasis role="bold">Ctrl+Space</emphasis> novamente para alternar entre as opções de <emphasis>Entradas de glossário</emphasis>, <emphasis>Entradas de autotexto,</emphasis> <emphasis>Tags faltantes</emphasis> e <emphasis>Tabela de caracteres</emphasis>.</entry>
         </row>
       </tbody>
     </tgroup>

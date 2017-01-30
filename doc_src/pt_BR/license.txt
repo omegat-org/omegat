@@ -111,7 +111,7 @@ os termos da seção 4, contanto que você também cumpra todas estas condiçõe
     "manter intactos todos os avisos".
 
     c) Você deve licenciar o trabalho inteiro, no conjunto, de acordo com esta
-    licença, a cada um que estiver em posse de uma cópia.  Esta
+    licença, a cada um que estiver em posse de uma cópia.  This
     licença se aplicará, junto com quaisquer termos adicionais aplicáveis da seção 7,
     ao conjunto do trabalho e a todas as suas partes, 
     independente de como forem empacotadas.  Esta Licença não dá nenhuma
@@ -149,7 +149,7 @@ das seções 4 e 5, contanto que também transmita o fonte correspondente legív
 
 
     c) Transmitir cópias individuais do código objeto com uma cópia da
-    oferta escrita para fornecer à Fonte Correspondente.  Esta
+    oferta escrita para fornecer à Fonte Correspondente.  This
     alternativa é permitida apenas ocasionalmente e não-comercialmente, e
     apenas se você recebeu o código objeto com tal oferta, de acordo
     com a subseção 6b.

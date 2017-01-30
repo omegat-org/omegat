@@ -91,7 +91,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Copiar arquivos para a pasta source...</guimenuitem></entry>
+              <entry><guimenuitem>Copiar Arquivos Para a Pasta Fonte...</guimenuitem></entry>
 
               <entry/>
 
@@ -209,7 +209,7 @@
           <primary>Menu</primary> <secondary>Editar</secondary>
         </indexterm></title>
 
-      <para>Nota: os itens geralmente encontrados na maioria dos aplicativos (copiar/recortar/colar) não são exibidos neste menu, mas estão disponíveis com os atalhos do seu sistema. For example:</para>
+      <para>Nota: os itens geralmente encontrados na maioria dos aplicativos (copiar/recortar/colar) não são exibidos neste menu, mas estão disponíveis com os atalhos do seu sistema. Por exemplo:</para>
 
       <table colsep="1">
         <title>Atalhos para copiar/recortar/colar</title>
@@ -359,7 +359,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Inserir próxima tag ausente</guimenuitem></entry>
+              <entry><guimenuitem>Inserir Próxima Tag Ausente</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -387,7 +387,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Criar termos no glossário</guimenuitem></entry>
+              <entry><guimenuitem>Criar Termos no Glossário</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -397,7 +397,7 @@
                   <keycap>G</keycap>
                 </keycombo></entry>
 
-              <entry>Permite que o usuario crie uma entrada no arquivo de glossário padrão.</entry>
+              <entry>Permite que o usuario crie uma entrada no arquivo de glossário padrão.<para>Ao selecionar uma sequência de texto (em qualquer tela) antes de apertar <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>, o texto será colado por padrão no campo <guilabel>Termo-fonte</guilabel>. </para></entry>
             </row>
 
             <row>
@@ -407,11 +407,11 @@
                   <keycap>Ctrl</keycap><keycap>F</keycap>
                 </keycombo></entry>
 
-              <entry>Abre uma nova <link linkend="section.search.window">janela de busca</link>.</entry>
+              <entry>Abre uma nova <link linkend="section.search.window">janela de busca</link>.<para>Ao selecionar uma sequência de texto (em qualquer tela) antes de apertar  <keycombo> <keycap>Ctrl</keycap> <keycap>F/k2&gt; </keycombo>, o texto será colado por padrão no campo <guilabel>Buscar</guilabel>. </para></entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Buscar e substituir...</guimenuitem></entry>
+              <entry><guimenuitem>Buscar e Substituir...</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -419,7 +419,7 @@
                   <keycap>K</keycap>
                 </keycombo></entry>
 
-              <entry>Abre uma nova <link linkend="section.searchreplace.window">janela de busca e substituição</link>.</entry>
+              <entry>Abre uma nova <link linkend="section.searchreplace.window">janela de busca e substituição</link>.<para>Ao selecionar uma sequência de texto (em qualquer tela) antes de apertar <keycombo><keycap>Ctrl</keycap><keycap>K</keycap></keycombo>, o texto será colado por padrão no campo<guilabel>Buscar</guilabel>.</para></entry>
             </row>
 
             <row>
@@ -443,7 +443,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Usar como tradução padrão</guimenuitem></entry>
+              <entry><guimenuitem>Usar como Tradução Padrão</guimenuitem></entry>
 
               <entry/>
 
@@ -451,7 +451,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Criar tradução alternativa</guimenuitem></entry>
+              <entry><guimenuitem>Criar Tradução Alternativa</guimenuitem></entry>
 
               <entry/>
 
@@ -475,7 +475,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Registrar tradução idêntica</guimenuitem></entry>
+              <entry><guimenuitem>Registrar Tradução Idêntica</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -553,7 +553,7 @@
                   <keycap>Ctrl</keycap><keycap>J</keycap>
                 </keycombo></entry>
 
-              <entry>O segmento é aberto quando o seu número de segmento é inserido.</entry>
+              <entry>O segmento se abre quando suas especificações ou seu número é inserido.</entry>
             </row>
 
             <row>
@@ -675,12 +675,11 @@
             <row>
               <entry><guimenuitem>Marcar caracteres de controle de algoritmo bidirecional</guimenuitem></entry>
 
-              <entry>Esta opção exibe <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">caracteres de controle bidirecionais</ulink>
-              </entry>
+              <entry>Esta opção exibe <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">caracteres de controle bidirecionais</ulink></entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Marcar segmentos auto-preenchidos</guimenuitem></entry>
+              <entry><guimenuitem>Marcar Segmentos Auto-preenchidos</guimenuitem></entry>
 
               <entry>Se marcado, o fundo de todos os segmentos cujo segmento alvo foi auto-preenchido (de TMXs localizadas em /tm/auto por exemplo) são exibidos em cores. As cores são exibidas contanto que a opção &quot;Salvar estados auto-preenchidos&quot; (em Opções/Modo de trabalho...) esteja marcada. Traduções comuns inseridas a partir da pasta auto são exibidas em laranja. Outras traduções, identificadas especificamente nas TMX, podem ser exibidas usando diferentes cores. Para detalhes técnicos, consulte <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Sugestões de Melhoria</ulink></entry>
             </row>
@@ -740,13 +739,13 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Estatística das correspondências</guimenuitem></entry>
+              <entry><guimenuitem>Estatística das Correspondências</guimenuitem></entry>
 
               <entry>Exibe as Estatísticas das correspondências para o projeto, como o número de repetições, correspondências exatas, correspondências parciais e não correspondências para segmentos, palavras e caracteres.</entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Estatísticas das correspondências por arquivo</guimenuitem></entry>
+              <entry><guimenuitem>Estatísticas das Correspondências por Arquivo</guimenuitem></entry>
 
               <entry>Exibe as Estatísticas das correspondências para cada arquivo do projeto, como o número de repetições, correspondências exatas, correspondências parciais e não correspondências para segmentos, palavras e caracteres.</entry>
             </row>
@@ -806,7 +805,7 @@
             <row>
               <entry><guimenuitem>Auto-completar</guimenuitem></entry>
 
-              <entry><para>Clique em <guimenuitem>Glossário...</guimenuitem> para configurar a visualização de glossário </para><para>Clique em <guimenuitem>Auto-texto...</guimenuitem> para configurar as opções de Auto-texto e adicionar ou remover entradas.</para><para>Clique em <guimenuitem>Tabela de caracteres...</guimenuitem> para configurar as opções da tabela de caracteres para a janela de auto-completar.</para></entry>
+              <entry><para>Clique em <guimenuitem>Glossário...</guimenuitem> para configurar a visualização de glossário </para><para>Clique em <guimenuitem>Auto-texto...</guimenuitem> para configurar as opções de Auto-texto e adicionar ou remover entradas.</para><para>Clique em <guimenuitem>Tabela de caracteres...</guimenuitem> para configurar as opções da tabela de caracteres para a janela de auto-completar.</para><para>O recurso Autocomplear é inicidado dentro do segmento por meio do atalho  <emphasis role="bold">Ctrl+Space</emphasis>. Por padrão, ele se abre automaticamente com sugestões relevantes, mas isso pode ser desativado desmarcando-se a opção <emphasis role="bold">Mostrar sugestões relevantes automaticamente</emphasis>.</para><para/></entry>
             </row>
 
             <row>
@@ -846,7 +845,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Verificação de tags...</guimenuitem></entry>
+              <entry><guimenuitem>Processamento de tags...</guimenuitem></entry>
 
               <entry>Para programadores: Permite configurar as opções do validador de tags para verificar também as variáveis de programação (%...).</entry>
             </row>
@@ -888,7 +887,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Verificador de língua</guimenuitem></entry>
+              <entry><guimenuitem>Verificador de Idioma</guimenuitem></entry>
 
               <entry>Quando selecionado, o LanguageTool verifica as traduções, e sublinha potenciais erros em azul.</entry>
             </row>
@@ -1189,7 +1188,7 @@
             </row>
 
             <row>
-              <entry>Criar termos no glossário</entry>
+              <entry>Criar Termos no Glossário</entry>
 
               <entry><keycombo>
                   <keycap>Shift</keycap><keycap>Ctrl</keycap><keycap>G</keycap>

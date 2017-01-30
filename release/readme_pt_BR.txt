@@ -220,6 +220,9 @@ campo de busca do Spotlight.
 Para participar do desenvolvimento do OmegaT, entre em contato com os desenvolvedores no:
     http://lists.sourceforge.net/lists/listinfo/omegat-development
 
+Para iniciar sua contribuição como programador, veja aqui as informações para desenvolvedores:
+    https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/
+
 Para traduzir a interface do usuário do OmegaT, manual do usuário ou outros documentos relacionados,
 leia:
       
@@ -250,18 +253,21 @@ O código é uma contribuição de
   Enrique Estévez Fernández
   Martin Fleurke  
   Wildrich Fourie
+  Tony Graham
   Phillip Hall
   Jean-Christophe Helary
+  Chihiro Hio
   Thomas Huriaux
   Hans-Peter Jacobs
   Kyle Katarn
   Piotr Kulik
   Ibai Lakunza Velasco
   Guido Leenders
-  Aaron Madlon-Kay
+  Aaron Madlon-Kay (gerente de integração)
   Fabián Mandelbaum
   Manfred Martin
   Adiel Mittmann
+  Hiroshi Miura 
   John Moran
   Maxym Mykhalchuk 
   Arno Peters
@@ -306,9 +312,9 @@ OmegaT usa as seguintes bibliotecas:
   Diff (GPL) 
   trilead-ssh2-1.0.0-build217 (licença Trilead SSH)
   lucene-*.jar (Licença Apache 2.0)
-  Os tokenizers em inglês (org.omegat.tokenizer.SnowballEnglishTokenizer e
-  org.omegat.tokenizer.LuceneEnglishTokenizer) usam palavras irrelevantes do Okapi
-(http://okapi.sourceforge.net) (Licença LGPL)
+  Tokenizadores do inglês (org.omegat.tokenizer.SnowballEnglishTokenizer and
+org.omegat.tokenizer.LuceneEnglishTokenizer) usaram stop words do
+Okapi (http://okapi.sourceforge.net) (LGPL license)
   tinysegmenter.jar (Licença BSD modificada)
   commons-*.jar (Licença Apache 2.0)
   jWordSplitter (Licença Apache 2.0)
@@ -321,6 +327,7 @@ OmegaT usa as seguintes bibliotecas:
   groovy-all-2.2.2.jar (Licença Apache 2.0)
   slf4j (Licença MIT)
   juniversalchardet-1.0.3.jar (GPL v2)
+  DictZip de JDictd (GPL v2)
 
 ==============================================================================
  5.  Você tem problemas com o OmegaT? Precisa de ajuda?

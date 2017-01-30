@@ -89,6 +89,8 @@
 
           <listitem>
             <para>Se tiver certeza que um arquivo TMX está mais correto do que o arquivo <filename>project_save.tmx</filename> do OmegaT, coloque este arquivo TMX em /tm/enforce para sobrescrever as traduções padrão existentes incondicionalmente.</para>
+
+            <para>A substituição (sobrescrita) estará em operação até a TMX ser removida de /tm/enforce.</para>
           </listitem>
         </varlistentry>
 

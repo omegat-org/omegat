@@ -232,11 +232,11 @@
           <row>
             <entry><inlinemediaobject>
                 <imageobject role="html">
-                  <imagedata fileref="images/restore.gif" width="60%"/>
+                  <imagedata fileref="images/Restore.gif" width="60%"/>
                 </imageobject>
 
                 <imageobject role="fo">
-                  <imagedata fileref="images/restore.gif" width="40%"/>
+                  <imagedata fileref="images/Restore.gif" width="40%"/>
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -246,11 +246,11 @@
           <row>
             <entry><inlinemediaobject>
                 <imageobject role="html">
-                  <imagedata fileref="images/undock.gif" width="60%"/>
+                  <imagedata fileref="images/Undock.gif" width="60%"/>
                 </imageobject>
 
                 <imageobject role="fo">
-                  <imagedata fileref="images/undock.gif" width="40%"/>
+                  <imagedata fileref="images/Undock.gif" width="40%"/>
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -260,11 +260,11 @@
           <row>
             <entry><inlinemediaobject>
                 <imageobject role="html">
-                  <imagedata fileref="images/dock.gif" width="60%"/>
+                  <imagedata fileref="images/Dock.gif" width="60%"/>
                 </imageobject>
 
                 <imageobject role="fo">
-                  <imagedata fileref="images/dock.gif" width="40%"/>
+                  <imagedata fileref="images/Dock.gif" width="40%"/>
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -617,7 +617,11 @@
           <primary>Janelas e painéis no OmegaT</primary> <secondary>Arquivos do projeto</secondary>
         </indexterm></title>
 
-      <para>A janela Arquivos do projeto lista os arquivos do projeto e exibe outras informações sobre o projeto. Ela é exibida automaticamente quando o OmegaT carrega um projeto. Use <guimenuitem>Ctrl+L<indexterm class="singular">
+      <para>A janela Arquivos do projeto lista os arquivos do projeto e exibe outras informações sobre o projeto. Ela é exibida automaticamente quando o OmegaT carrega um projeto.</para>
+
+      <para><remark>Observação:</remark>é possível esconder a janela de Arquivos do projeto. Basta passar <emphasis>project_files_show_on_load</emphasis> para <emphasis>falso</emphasis> no arquivo <filename>omegat.prefs</filename> (é possível acessá-lo no menu Options/Acesso à pasta de configurações.</para>
+
+      <para>Use <guimenuitem>Ctrl+L<indexterm class="singular">
           <primary>Atalhos</primary> <secondary>Lista de arquivos do projeto - Ctrl+L</secondary>
         </indexterm></guimenuitem> para abrir e <keycap>Esc</keycap> para fechar. A janela Arquivos do projeto exibe as seguintes informações:</para>
 
@@ -627,13 +631,11 @@
         </listitem>
 
         <listitem>
-          <para>a lista de todos os arquivos de tradução no projeto. Clique em qualquer arquivo para abri-lo para tradução. Observação: os nomes de arquivos (primeira coluna) podem ser colocados em ordem alfabética ao clicar no cabeçalho da coluna. Também é possível alterar a posição de um nome de arquivo ao clicar nele e pressionar os botões <emphasis>Mover...</emphasis>.</para>
-        </listitem>
-      </itemizedlist>
+          <para>a lista de todos os arquivos de tradução no projeto. Clique em qualquer arquivo para abri-lo para tradução.</para>
 
-      <itemizedlist>
-        <listitem>
-          <para>o arquivo atualmente disponível no painel de editor é destacado com um fundo azul. Pressionar <keycap>Enter</keycap> irá mover o Painel Editor para o topo do arquivo selecionado</para>
+          <para>Digitar qualquer texto fará com que o campo Filtro se abra, e neste campo podem ser inseridas partes de nomes de arquivo. Você pode selecionar um arquivo com as teclas <keycap>Seta para cima</keycap> e <keycap>Seta para baixo</keycap>, e abri-lo para tradução ao pressionar <keycap>Enter</keycap></para>
+
+          <para>Observação: os nomes de arquivos (primeira coluna) podem ser colocados em ordem alfabética ao clicar no cabeçalho da coluna. Também é possível alterar a posição de um nome de arquivo ao clicar nele e pressionar os botões <emphasis>Mover...</emphasis>.</para>
         </listitem>
       </itemizedlist>
 

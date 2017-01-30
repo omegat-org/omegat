@@ -23,6 +23,8 @@
   - External Search menu items are split into nested submenus of 10 items to
 accommodate users with numerous item definitions.
 
+  Localisation Updates:
+
   - Belarusian localisation updated to 4.0 (UI, documentation, scripts, readme)
   - Dutch localisation updated to 4.0 (UI, documentation, scripts, readme)
   - Italian localisation updated to 4.1.0 (UI, documentation)

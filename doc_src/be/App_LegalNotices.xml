@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.legal.notices">
+  <title><indexterm class="singular">
+      <primary>Юрыдычныя заўвагі</primary>
+    </indexterm>Юрыдычныя заўвагі</title>
+
+  <section id="legal.notices.for.documentation">
+    <title>Што да дакумэнтацыі<indexterm class="singular">
+        <primary>Юрыдычныя заўвагі</primary> <secondary>Што да дакумэнтацыі</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Аўтарскае права</emphasis></para>
+
+    <para>Дакумэнтацыя, якая распаўсюджваецца з <application>OmegaT</application>, уключае кіраўніцтва карыстальніка і дакумэнт readme.txt. Аўтарскае права на дакумэнтацыю © 2013 Віта Смолей, © 2014—2016 Вэнсан Бідо. Аўтар разьдзела <emphasis>“Навучэцеся карыстацца OmegaT за 5 хвілін!”</emphasis> — Сэмюэл Мюрэй, аўтарскае права © 2005—2012.</para>
+
+    <para><emphasis role="bold">Распаўсюджваньне і зьмены</emphasis></para>
+
+    <para>Гэтая дакумэнтацыю зьяўляецца свабоднай; яе можна распаўсюджваць і/альбо зьмяняць яе ў адпаведнасьці з умовамі ліцэнзіі GNU General Public License, апублікаванай Free Software Foundation, вэрсіі 3, альбо (па выбары) якой заўгодна пазьнейшай вэрсіі.</para>
+
+    <para><emphasis role="bold">Гарантыя</emphasis></para>
+
+    <para>Гэтая дакумэнтацыя распаўсюджваецца ў надзеі, што яна будзе карыснай, але НЕ ДАЕЦЦА НІЯКАЙ, у тым ліку падразумяванай, ГАРАНТЫІ ПРЫДАТНАСЬЦІ ДЛЯ ПРОДАЖУ або ПРЫДАТНАСЬЦІ ДЛЯ ПЭЎНАГА ПРЫЗНАЧЭНЬНЯ. Падрабязнасьці гл. у ліцэнзіі GNU General Public License.</para>
+  </section>
+
+  <section id="legal.ntices.for.application">
+    <title>Што да праграмы<indexterm class="singular">
+        <primary>Юрыдычныя абвесткі</primary> <secondary>Што да праграмы</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Аўтарскае права</emphasis></para>
+
+    <para>Аўтарскія правы на <emphasis role="bold"><application>OmegaT</application></emphasis> © 2000—2016 гг.: Кіт Годфры, Леў Абашкін Золтан Бартка, Фолькер Бэрлін, Дзідзье Брыель, Кім Брунінг, Алесь Булойчык, Тама Карданье, Сандра Джын Чуа, Энрыке Эстэвэс Фэрнандэс, Мартын Флёрке, Вільдрых Фур’е, Тоні Грэм, Філіп Хол, Жан-Крыстоф Эляры, Ціхіра Хія, Тама Юр’ё, Ганс-Пэтэр Якабс, Кайл Кэйтарн, Пётр Кулік, Ібаі Лякунса Вэляска, Гвіда Лендэрс, Арон Мадлан-Кэй, Фаб’ян Мандэльбаўм, Манфрэд Мартын, Ад’ель Мітман, Хіросі Міюра, Джон Моран, Максім Міхальчук, Арно Пэтэрс, Арно Пэтэрс, Генры Пэйфэрс, Брыяк Пільпрэ, Тыяга Сабога, Анджэй Савула, Бэнджамін Сайбанд, Юй Тан, Рашыд Умараў, Антоніё Вілеі, Ілья Вінаградаў, Мартын Вундэрліх і Міхаіл Захараў.</para>
+
+    <para><emphasis role="bold">Распаўсюджваньне і зьмены</emphasis></para>
+
+    <para><emphasis role="bold">OmegaT</emphasis> — свабодная праграма; яе можна распаўсюджваць і/або зьмяняць згодна з умовамі ліцэнзіі GNU General Public License, апублікаванай Free Software Foundation, вэрсіі 3 або (па выбары) якой заўгодна пазьнейшай.</para>
+
+    <para><emphasis role="bold">Гарантыя</emphasis></para>
+
+    <para><emphasis role="bold"> <application>OmegaT</application> </emphasis>распаўсюджваецца ў надзеі, што яна будзе карыснай, але НЕ ДАЕЦЦА НІЯКАЙ ГАРАНТЫІ, у тым ліку падразумяванай гарантыі ПРЫДАТНАСЬЦІ ДЛЯ ПРОДАЖУ або ПРЫДАТНАСЬЦІ ДЛЯ ПЭЎНАГА ПРЫЗНАЧЭНЬНЯ. Падрабязнасьці гл. у ліцэнзіі GNU General Public License.</para>
+  </section>
+</appendix>

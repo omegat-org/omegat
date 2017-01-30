@@ -1,0 +1,816 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.user.interface">
+  <title>Інтэрфэйс карыстальніка</title>
+
+  <section id="user.interface.items">
+    <title>Галоўнае акно OmegaT, іншыя вокны і дыялёгавыя вокны</title>
+
+    <para>Галоўнае OmegaT акно зьмяшчае галоўнае мэню, радок стану і некалькі панэляў. Ёсьць дадатковыя вокны, а таксама дыялёгавыя вокны, якія выкарыстоўваецца для зьмены парамэтраў праекта OmegaT. Ніжэй прыведзеная зводка зьвестак пра іх выкарыстаньне і выклік:</para>
+
+    <table colsep="0" rowsep="0">
+      <title>Галоўнае вакно OmegaT<indexterm class="singular">
+          <primary>Інтэрфэйс карыстальніка</primary> <secondary>Галоўнае вакно OmegaT</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Main OMegaT window">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Панэль рэдагаваньня</guimenuitem></entry>
+
+            <entry>дзе друкуецца і рэдагуецца пераклад</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Панэль супадзеньняў</guimenuitem></entry>
+
+            <entry>дзе паказваюцца найбольш падобныя сэгмэнты з файлаў памяці перакладаў</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Панэль глясароў</guimenuitem></entry>
+
+            <entry>дзе паказваюцца тэрміны, знойдзеныя ў бягучым сэгмэньце</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Панэль слоўнікаў</guimenuitem></entry>
+
+            <entry>дзе паказваюцца адпаведнікі са слоўнікаў да словаў, знойдзеных у бягучым сэгмэньце</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Панэль машыннага перакладу</guimenuitem></entry>
+
+            <entry>дзе паказваецца пераклад, атрыманы ад сэрвісаў машыннага перакладу</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Панэль зацемак</guimenuitem></entry>
+
+            <entry>зацемкі да бягучага сэгмэнта, напрыклад, альтэрнатыўныя пераклады або бягучы ключ у выпадку файлаў тыпу ключ = значэньне</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Панэль камэнтароў</guimenuitem></entry>
+
+            <entry>Камэнтары аўтара ў PO файлах або назва перакладанага атрыбуту (у файлах XHTML)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table colsep="0" rowsep="0">
+      <title>Іншыя вокны<indexterm class="singular">
+          <primary>Інтэрфэйс карыстальніка</primary> <secondary>Іншыя вокны</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Other windows">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Спалучэньні клявішаў</primary> <secondary>Праверка тэгаў — Ctrl + Shift + V</secondary>
+              </indexterm>Акно праверкі тэгаў.</guimenuitem></entry>
+
+            <entry><para>Выкарыстоўваецца для праверкі тэгаў (адчыняецца праз <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>V</keycap> </keycombo>, зачыняецца праз <keycap>Esc</keycap>)</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Спалучэньні клявішаў</primary> <secondary>Даведка — F1</secondary>
+              </indexterm>Браўзэр даведкі</guimenuitem></entry>
+
+            <entry><para>Выкарыстоўваецца для паказу дапаможніка карыстальніка (адчыняецца праз <keycap>F1</keycap>)<keycap/></para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Акно статыстыкі</guimenuitem></entry>
+
+            <entry><para>Выкарыстоўваецца, каб адчыніць акно са статыстыкай праекта, паказаць яго праз мэню <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>Мэню “Сэрвіс</primary> <secondary>Статыстыка</secondary>”
+                  </indexterm>“Налады</guimenu> <guimenuitem>Статыстыка”.</guimenuitem></menuchoice></para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Акно статыстыкі супадзеньняў</guimenuitem></entry>
+
+            <entry><para>Выкарыстоўваецца для паказу статыстыкі супадзеньняў праекта, адчыняецца праз мэню <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>Мэню “Сэрвіс</primary> <secondary>Статыстыка супадзеньняў</secondary>”
+                  </indexterm>“Сэрвіс</guimenu><guimenuitem>Статыстыка супадзеньняў”</guimenuitem></menuchoice>.</para></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table border="0" colsep="0" rowsep="0">
+      <title>Дыялёгі наладаў<indexterm class="singular">
+          <primary>Інтэрфэйс карыстальніка</primary> <secondary>Дыялёгі наладак</secondary> <seealso>Налады праекта</seealso>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Settings dialogs">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Уласьцівасьці праекта<indexterm class="singular">
+                <primary>Мэню “Праект”</primary> <secondary>Уласьцівасьці</secondary>
+              </indexterm></guimenuitem> <indexterm class="singular">
+                <primary>Спалучэньні клявішаў</primary> <secondary>Уласьцівасьці праекта — Ctrl+E</secondary>
+              </indexterm></entry>
+
+            <entry>Выкарыстоўваецца для зьмены каталёгаў і моваў праекта (адчыняецца праз <guimenuitem>Ctrl + E</guimenuitem> або мэню <menuchoice> <guimenu>Праект</guimenu> <guimenuitem> Уласьцівасьці…</guimenuitem></menuchoice>, зачыняецца праз <keycap>Esc</keycap>)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Шрыфт<indexterm class="singular">
+                <primary>Шрыфт</primary>
+              </indexterm></guimenuitem></entry>
+
+            <entry><para>Выкарыстоўваецца для зьмены шрыфту, які ўжываецца ў <application>OmegaT</application> для паказу зыходнага тэксту, перакладу, супадзеньняў і тэрмінаў з глясароў (адчыняецца праз мэню <menuchoice> <guimenu>Налады</guimenu> <guimenuitem>Шрыфт…</guimenuitem> </menuchoice>, зачыняецца праз <keycap>Esc</keycap>)</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Файлавыя фільтры<indexterm class="singular">
+                <primary>Файлавыя фільтры</primary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Выкарыстоўваецца для налады апрацоўкі падтрыманых фарматаў файлаў (адчыняецца праз мэню <menuchoice> <guimenu>Налады</guimenu> <guimenuitem>Файлавыя фільтры…</guimenuitem> </menuchoice>, зачыняецца праз <keycap>Esc</keycap>)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Сэгмэнтаваньне<indexterm class="singular">
+                <primary>Сэгмэнтаваньне</primary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Выкарыстоўваецца для зьмены спосабу сэгмэнтаваньня тэксту па сказах (адчыняецца праз <menuchoice> <guimenu>Налады</guimenu> <guimenuitem>Сэгмэнтаваньне</guimenuitem> </menuchoice>, зачыняецца праз <keycap>Esc</keycap>)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Налады рэдагаваньня<indexterm class="singular">
+                <primary>Налады рэдагаваньня</primary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Выкарыстоўваецца для зьмены дзеяньняў, якія адбываюцца пры пераходзе ад сэгмэнта да сэгмэнта ў <application>OmegaT</application> (адчыняецца праз мэню <menuchoice><guimenu>Налады</guimenu> <guimenuitem>Акно рэдагаваньня</guimenuitem></menuchoice>, зачыняецца праз <keycap>Esc</keycap>)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="OmegaT.main.window">
+    <title>Галоўнае вакно <application>OmegaT</application><indexterm class="singular">
+        <primary>Вокны і панэлі ў OmegaT</primary> <secondary>Галоўнае вакно</secondary>
+      </indexterm></title>
+
+    <figure id="OmegaT.main.window.figure">
+      <title>Галоўнае вакно OmegaT</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/OmegaT_panes_25.png" scale="100"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/OmegaT_panes_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Галоўнае вакно складаецца з некалькіх панэляў, галоўнага мэню і панэлі стану. Каб зьмяніць пазыцыю любой панэлі або нават адмацаваць яе ў асобнае вакно, трэба клікнуць па ейнаму загалоўку і перацягнуць яе. У залежнасьці ад стану панэлі ў ейным правым куце могуць зьяўляцца розныя абразкі:</para>
+
+    <note>
+      <para>Калі вы ня бачыце ўсе панэлі (адчыненымі або мінімізаванымі), іх можна аднавіць да зыходнага стану пасьля ўсталёўкі, выбраўшы праз мэню <guisubmenu>Налады → Аднавіць галоўнае вакно</guisubmenu>.</para>
+    </note>
+
+    <table>
+      <title>Віджэты панэляў<indexterm class="singular">
+          <primary>Вокны і панэлі ў OmegaT</primary> <secondary>Віджэты панэляў</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Minimize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Minimize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>мінімізаваць панэль, каб толькі ейны загаловак быў бачны ў ніжняй частцы вакна</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Maximize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Maximize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>максымізаваць панэль</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Restore.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Restore.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>аднавіць кампаноўку перад максымізацыяй</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Undock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Undock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>адмацаваць панэль ад галоўнага вакна</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Dock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Dock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>вярнуць панэль у межы галоўнага вакна</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>Пры неабходнасьці можна зрабіць, каб панэлі перакрываліся. Калі гэта будзе зроблена, у верхняй частцы панэляў будуць бачнымі ўкладкі. Разьдзяляльнікі паміж панэлямі можна перацягваць, каб мяняць памер панэляў. Калі вы заблыталіся ў зьменах у інтэрфэйсе карыстальніка, у любы момант можна скарыстацца з мэню <guimenuitem><indexterm class="singular">
+        <primary>Вокны OmegaT</primary> <seealso>Вокны і панэлі ў OmegaT</seealso>
+      </indexterm> <indexterm class="singular">
+        <primary>Вокны OmegaT</primary> <secondary> Аднаўленьне да зыходнага стану</secondary>
+      </indexterm>Налады  → Аднавіць галоўнае вакно </guimenuitem>, каб вярнуць зыходную кампаноўку.</para>
+
+    <para>На кожную панэль можна перацягнуць файлы, і яна будзе рэагаваць адпаведным чынам.<itemizedlist>
+        <listitem>
+          <para>Панэль рэдагаваньня: калі на гэтую панэль перацягнуць файл праекта OmegaT (<filename>omegat.project</filename>), адчыніцца адпаведны праект, а перад гэтым зачыніцца бягучы праект. Іншыя перацягнутыя файлы будуць скапіяваныя ў каталёг <filename>source</filename>. Тое самае адбываецца і ў вакне <link linkend="section.project.files">файлаў праекта</link>.</para>
+        </listitem>
+
+        <listitem>
+          <para>Панэль недакладных супадзеньняў: калі перацягнуць сюды файл <filename>.tmx</filename>, ён будзе скапіяваны ў каталёг <filename>tm</filename>.</para>
+        </listitem>
+
+        <listitem>
+          <para>Панэль глясароў: калі перацягнуць сюды файлы з вядомымі пашырэньнямі назваў для глясароў (<filename> .txt</filename>, <filename>.tab</filename> і г. д.), яны будуць скапіяваныя ў каталёг <filename>glossary</filename>.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <para>Лічыльнікі ў правым ніжнім куце паказваюць ход перакладу (лічбы ў левым слупку тычацца малюнка вышэй):</para>
+
+    <table>
+      <title>Галоўнае вакно — лічыльнікі<indexterm class="singular">
+          <primary>Вокны і панэлі ў OmegaT</primary> <secondary>Лічыльнікі</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>27/27</entry>
+
+            <entry>колькасьць сэгмэнтаў — перакладзеных і агулам — у бягучым файле</entry>
+          </row>
+
+          <row>
+            <entry>9319/16338</entry>
+
+            <entry>колькасьць унікальных сэгмэнтаў — перакладзеных і агулам — у праекце</entry>
+          </row>
+
+          <row>
+            <entry>31175</entry>
+
+            <entry>агульная колькасьць сэгмэнтаў (уключаючы паўторы) у праекце</entry>
+          </row>
+
+          <row>
+            <entry>103/114</entry>
+
+            <entry>колькасьць сымбаляў у зыходным тэксьце і перакладзе ў бягучым сэгмэньце</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>З практычнага гледзішча самая важная пара лікаў — другая: яна паказвае, колькі вы ўжо зрабілі адносна да агульнага або другога ліка. Паказаны ў прыкладзе праект, відавочна, скончана, бо ўсе ўнікальныя сэгмэнты перакладзеныя.</para>
+
+    <section id="editor.pane">
+      <title>Панэль рэдагаваньня<indexterm class="singular">
+          <primary>Вокны і панэлі ў OmegaT</primary> <secondary>Панэль рэдагаваньня</secondary>
+        </indexterm></title>
+
+      <para>Тут уласна і робіцца пераклад. У панэлі рэдагаваньня паказваецца тэкст часткова перакладзенага дакумэнта: ужо перакладзены тэкст адлюстроўваецца ў выглядзе перакладу, а неперакладзеныя — на мове арыгіналу. Паказваны тэкст разьбіваецца на сэгмэнты, можна прагортваць дакумэнт і адчыняць сэгмэнты падвойным клікам, каб рэдагаваць іх. У прыведзеным вышэй выпадку ўжо перакладзеныя сэгмэнты паказаныя жоўтым колерам.</para>
+
+      <para>Адзін з паказаных вышэй сэгмэнтаў — гэта бягучы сэгмэнт. Гэты сэгмэнт паказваецца ў двух частках. Верхняя частка — арыгінал, вылучаецца паўтлустым шрыфтам зь зялёным колерам тла, ніжняя частка — поле рэдагаваньня, на канцы — маркер: <indexterm class="singular">
+          <primary>Маркер сэгмэнта</primary>
+        </indexterm>маркер у выглядзе <literal>&lt;сэгмэнт №№№№&gt;</literal>, дзе №№№№ — нумар сэгмэнта ў праекце. Зьвяртайцеся да верхняй частцы як да эталёна, а ў полі рэдагаваньня ўводзьце і рэдагуйце пераклад.</para>
+
+      <para>Заўвага: маркер сэгмэнта мае выгляд <literal>&lt;сэгмэнт №№№№ + яшчэ yy&gt;, калі сэгмэнт не зьяўляецца ўнікальным. У падобным выпадку yy — колькасьць іншых асобнікаў сэгмэнта ў праекце.</literal></para>
+
+      <para>У залежнасьці ад таго, якія налады рэдагаваньня патрабуюцца, поле для рэдагаваньня неперакладзенага сэгмэнта можа быць пустым, утрымліваць зыходны тэкст, або ўтрымліваць пераклад тэкста, найбольш падобнага да таго, які неабходна перавесьці. Пры пераходзе да іншага сэгмэнта пераклад пацьвярджаецца і захоўваецца. Калі трэба, каб пераклад быў ідэнтычным арыгіналу, проста зрабеце поле рэдагаваньня пустым, выдаліўшы ўвесь тэкст (каб вылучыць усё, націсьнеце <keycap>Ctrl + A</keycap> і выдалеце праз <keycap>Del</keycap>), OmegaT можа захоўваць пераклады, ідэнтычныя арыгіналу. Гэта карысна для дакумэнтаў, якія зьмяшчаюць таварныя знакі, уласныя імёны або фрагмэнты на трэцяй мове, якія не патрабуюць перакладу. Дадатковыя зьвесткі гл. у разьдзеле <emphasis>“Рэдагаваньне перакладу”</emphasis>.</para>
+
+      <para>Калі клікнуць правай кнопкай мышы па панэлі рэдагаваньня, зьявіцца выплыўнае мэню з элемэнтамі <emphasis role="bold">“Выразаць”, “Капіяваць”, “Уставіць”</emphasis> (г. зн. функцыі, якім адпавядаюць спалучэньні клявішаў <keycombo> <keycap>Ctrl </keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo>і<keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>), <emphasis role="bold">“Перайсьці да сэгмэнта”</emphasis> і <emphasis role="bold">“Стварыць запіс глясара”</emphasis>. Акрамя таго, калі клікнуць правай кнопкай мышы па адкрытым сэгмэньце, прапануюцца яшчэ некалькі пунктаў, якія тычацца <emphasis role="bold">альтэрнатыўных перакладаў</emphasis>, напрыклад, каб перайсьці да іншага асобніка неўнікальных сэгмэнтаў.</para>
+
+      <para>Зь любога месца ў галоўным акне можна перацягнуць тэкст і ўставіць яго ў сэгмэнт. Фрагмэнты, перацягнутыя звонку ад сэгмэнта перакладу, капіююцца ў яго, а фрагмэнты, перацягнутыя зь іншага месца таго самага сэгмэнта — перамяшчаюцца.</para>
+
+      <para>Па змаўчаньні немагчыма вылучаць словы ў зыходным сэгмэньце з дапамогай клявіятуры, а ня мышы. Калі націснуць клявішу <keycap>F2</keycap>, стане магчымым перамяшчаць курсор у зыходны тэкст сэгмэнта (або ў якое заўгодна месца ў акне рэдагаваньня) з дапамогай клявішаў са стрэлкамі. У гэтым рэжыме ў ніжняй частцы панэлі паказваецца <guilabel>“Блякаваньне курсора выкл.”</guilabel>. Каб вярнуцца да стандартнага рэжыму <guilabel>”Блякаваньне курсора ўкл.”</guilabel>, трэба зноў націснуць клявішу <keycap>F2</keycap>.</para>
+    </section>
+
+    <section id="match.viewer">
+      <title>Панэль недакладных супадзеньняў<indexterm class="singular">
+          <primary>Вокны і панэлі ў OmegaT</primary> <secondary>Панэль недакладных супадзеньняў</secondary>
+        </indexterm></title>
+
+      <para><figure id="matches.pane">
+          <title><indexterm class="singular">
+              <primary>Супадзеньні</primary> <secondary>Панэль недакладных супадзеньняў — малюнак</secondary>
+            </indexterm><indexterm class="singular">
+              <primary> Вокны і панэлі ў OmegaT</primary> <secondary>Панэль недакладных супадзеньняў — малюнак</secondary>
+            </indexterm>Панэль недакладных супадзеньняў</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchesPane_25.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPane_25.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>У панэлі недакладных супадзеньняў паказваюцца найбольш падобныя сэгмэнты з файлаў памяці перакладаў, як з унутранай памяці перакладу праекта, створанай у рэжыме рэальнага часу па меры перакладаньня, так і з апорных файлаў памяці перакладаў, імпартаваных з папярэдніх праектаў, або атрыманых ад кліента або бюро перакладаў.</para>
+
+      <para>Пры пераходзе да наступнага сэгмэнту аўтаматычна выбіраецца першае недакладнае супадзеньне (з найвышэйшым паказчыкам падабенства). Можна выбраць іншае супадзеньне, націснуўшы <guimenuitem>Ctrl + 2, 3, 4 ці 5</guimenuitem>.<indexterm>
+          <primary>Спалучэньні клявішаў</primary> <secondary>Вылучыць супадзеньне — Ctrl + N</secondary>
+        </indexterm> Вядома, <keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo> ня будзе мець ніякага эфэкту, калі няма супадзеньня № 5. Каб выкарыстаць вылучанае супадзеньне ў перакладзе, трэба націснуць <guimenuitem>Ctrl + R</guimenuitem> <indexterm class="singular">
+          <primary>Спалучэньні клявішаў</primary> <secondary>Замяніць тэкст — Ctrl + R</secondary>
+        </indexterm>, каб замяніць ім тэкст у полі перакладу, або <guimenuitem>Ctrl + I<indexterm class="singular">
+          <primary>Спалучэньні клявішаў</primary> <secondary>Уставіць тэкст — Ctrl + I</secondary>
+        </indexterm></guimenuitem>, каб уставіць яго ў пазыцыю курсора.</para>
+
+      <para>Працэнт падабенства вылічаецца прыкладна так: колькасьць агульных словаў у зыходным сэгмэньце і ў тым, зь якім робіцца параўнаньне, падзяліць на колькасьць словаў у большым з гэтых сэгмэнтаў. Вылучанае недакладнае супадзеньне паказваецца паўтлустым шрыфтам, словы, якія адсутнічаюць у сэгмэньце, які вы перакладаеце, фарбуюцца ў сіні колер, а словы, якія прымыкаюць да фрагмэнта, якая адсутнічае, — у зялёны. У прыведзеным вышэй прыкладзе зыходны сэгмэнт — <emphasis role="bold">“Context menu command”</emphasis>. Найвышэйшае супадзеньне — 100%, бо ўсе словы супадаюць. Тое самае і з наступнымі двума супадзеньнямі, а супадзеньне № 4 падобнае, але іншае. Радок з адсоткам падабенства таксама ўключае назву файла памяці перакладаў<indexterm class="singular">
+          <primary>Файлы памяці перакладаў</primary> <secondary>Супадзеньні</secondary>
+        </indexterm>, у якім знойдзенае супадзеньне. Калі няма ніякай назвы файла, крыніцай зьяўляецца ўнутраная памяць перакладаў праекта. Састарэлыя сэгмэнты<indexterm class="singular">
+          <primary>Файлы памяці перакладаў</primary> <secondary>Састарэлыя сэгмэнты</secondary>
+        </indexterm> (супадзеньне № 2) — гэта сэгмэнты ў памяці перакладаў праекта па змаўчаньні, якія ня маюць адпаведнага сэгмэнта-крыніцы.</para>
+
+      <para>Ёсьць тры ацэнкі падабенства (66/66/30 у выпадку супадзеньня № 4 у прыкладзе вышэй). Яны вызначаюцца наступным чынам:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>адсотак падабенства (з улікам генэратараў метак)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>супадзеньне OmegaT па змаўчаньні — колькасьць словаў, для якіх знайшліся адпаведнікі (лікі і тэгі ігнаруюцца), падзеленая на агульную колькасьць словаў</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>супадзеньне OmegaT матч з улікам лікаў і тэгаў</para>
+        </listitem>
+      </itemizedlist>
+
+      <section>
+        <title>Панэль недакладных супадзеньняў — наладка<indexterm class="singular">
+            <primary>Вокны і панэлі ў OmegaT</primary> <secondary>Панэль недакладных супадзеньняў</secondary> <tertiary>Наладка</tertiary>
+          </indexterm><indexterm class="singular">
+            <primary>Зыходныя файлы</primary> <secondary>Пераклад абноўленага арыгіналу</secondary>
+          </indexterm></title>
+
+        <para>Праз мэню <guimenu>Налады → Зьнешнія файлы TMX</guimenu> даступныя некалькі зьменных, якія дазваляюць наладзіць паказ супадзеньняў на панэлі:</para>
+
+        <figure id="matches.pane.setup">
+          <title><indexterm class="singular">
+              <primary>Супадзеньні</primary> <secondary>Наладка панэлі недакладных супадзеньняў — малюнак</secondary>
+            </indexterm><indexterm class="singular">
+              <primary> Вокны і панэлі ў OmegaT</primary> <secondary>Наладка панэлі недакладных супадзеньняў — малюнак</secondary>
+            </indexterm>Наладка панэлі недакладных супадзеньняў</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="images/MatchesPaneSetup.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPaneSetup.png" width="50%"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>На малюнку вышэй паказаны шаблён паказу супадзеньняў па змаўчаньні. Зьмесьціва можна наладзіць з дапамогай наступных зьменных:</para>
+
+        <table colsep="0" rowsep="0">
+          <title>Наладка панэлі недакладных супадзеньняў<indexterm class="singular">
+              <primary>Інтэрфэйс карыстальніка</primary> <secondary>Наладка панэлі недакладных супадзеньняў</secondary>
+            </indexterm></title>
+
+          <tgroup cols="2" colsep="1" rowsep="1" title="Match pane setup">
+            <colspec align="left" colnum="1"/>
+
+            <colspec align="left" colnum="2"/>
+
+            <tbody>
+              <row>
+                <entry><literal>${id}</literal></entry>
+
+                <entry>Колькасьць супадзеньняў ад 1 да 5</entry>
+              </row>
+
+              <row>
+                <entry><literal>${sourceText}</literal></entry>
+
+                <entry>Зыходны тэкст супадзеньня</entry>
+              </row>
+
+              <row>
+                <entry><literal>${targetText}</literal></entry>
+
+                <entry>Тэкст перакладу супадзеньня</entry>
+              </row>
+
+              <row>
+                <entry><literal>${diff}</literal></entry>
+
+                <entry>Радок, якая паказвае адрозьненьні паміж крыніцай і супадзеньнем.<emphasis> Падказка: </emphasis>ужывайце гэтую функцыю, калі тэкст, які перакладаеце, быў абноўленым.</entry>
+              </row>
+
+              <row>
+                <entry><literal>${diffReversed}</literal></entry>
+
+                <entry>Тое, што і ${diff}, але з інвэрсіяй адрозьненьняў (што трэба ўставіць, а што — выдаліць).</entry>
+              </row>
+
+              <row>
+                <entry><literal>${score}</literal></entry>
+
+                <entry>Адсотак з улікам генэратара метак</entry>
+              </row>
+
+              <row>
+                <entry><literal>${noStemScore}</literal></entry>
+
+                <entry>Адсотак бязь лікаў і бяз тэгаў</entry>
+              </row>
+
+              <row>
+                <entry><literal>${adjustedScore}</literal></entry>
+
+                <entry>Скарэктаваны адсотак</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileNameOnly}</literal></entry>
+
+                <entry>Назва файла TMX</entry>
+              </row>
+
+              <row>
+                <entry><literal>${filePath}</literal></entry>
+
+                <entry>Поўны шлях да файла TMX</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileShortPath}</literal></entry>
+
+                <entry>Шлях да файла TMX, пачынаючы ад кораня /tm</entry>
+              </row>
+
+              <row>
+                <entry><literal>${initialCreationID}</literal></entry>
+
+                <entry>Аўтар супадзеньня, калі яно было створанае</entry>
+              </row>
+
+              <row>
+                <entry><literal>${initialCreationDate}</literal></entry>
+
+                <entry>Дата супадзеньня, калі яно было створанае</entry>
+              </row>
+
+              <row>
+                <entry><literal>${changedID}</literal></entry>
+
+                <entry>Аўтар супадзеньня, калі яно было нядаўна абноўленае</entry>
+              </row>
+
+              <row>
+                <entry><literal>${changedDate}</literal></entry>
+
+                <entry>Дата супадзеньня, калі яно было нядаўна абноўленае</entry>
+              </row>
+              <row>
+                <entry><literal>${fuzzyFlag}</literal></entry>
+
+                <entry>Паказвае, што гэтае супадзеньне — недакладнае (цяпер толькі для перакладаў з файлаў PO ставіцца пазнака #fuzzy)</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
+    </section>
+
+    <section>
+      <title>Панэль глясароў<indexterm class="singular">
+          <primary>Вокны і панэлі ў OmegaT</primary> <secondary>Панэль глясароў</secondary>
+        </indexterm></title>
+
+      <para>Панэль глясароў дазваляе атрымаць доступ да вашага ўласнага збору выразаў і спэцыяльнай тэрміналёгіі, сабраных разам у файлах глясароў. У ёй паказваюцца пераклады тэрмінаў, знойдзеных у бягучым сэгмэньце. У сэгмэньце ў прыкладзе ніжэй зыходны тэкст быў <emphasis>“Context menu command”</emphasis>, як і ў прыкладзе зь недакладным супадзеньнем вышэй, а паказаныя тэрміны былі знойдзеныя ў даступных глясарох (збор тэрмінаў “Microsoft” і глясар Славенскай групы карыстальнікаў Linux).</para>
+
+      <figure id="multiword.pane">
+        <title><indexterm class="singular">
+            <primary>Глясары</primary>
+          </indexterm>запісы зь некалькіх словаў у глясары</title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/GlossaryPane_25.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/GlossaryPane_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>Калі ўключаная функцыя TransTips (<guimenuitem>Налады → TransTips (тэрміны)</guimenuitem>), то можна клікнуць правай кнопкай па вылучаным слове ў зыходным тэксьце сэгмэнта, каб адкрыць выплыўнае мэню з прапанаваным перакладам, узятым з глясара. Калі выбраць адну з прапановаў, яна будзе ўстаўленая ў бягучую пазыцыю курсора ў тэкст перакладу сэгмэнта. Акрамя таго, можна вылучыць патрэбны варыянт у панэлі глясароў і ўставіць яго ў пераклад, клікнуўшы правай кнопкай мышы па вылучаным фрагмэньце.</para>
+    </section>
+
+    <section id="dictionaries">
+      <title>Панэль слоўнікаў<indexterm class="singular">
+          <primary>Вокны і панэлі ў OmegaT</primary> <secondary>Панэль слоўнікаў</secondary>
+        </indexterm></title>
+
+      <para>Слоўнікі — гэта электронныя эквіваленты друкаваных слоўнікаў, такіх як “Merriam Webster”, “Duden”, “Larousse” і г. д., якія вы можаце мець на працоўным стале. Больш падрабязна пра іх гл. у разьдзеле <link linkend="chapter.dictionaries">“Слоўнікі”</link>.</para>
+    </section>
+
+    <section id="Multiple.Translations">
+      <title>Панэль множных перакладаў<indexterm class="singular">
+          <primary>Вокны і панэлі ў OmegaT</primary> <secondary>Панэль множных перакладаў</secondary>
+        </indexterm></title>
+
+      <para>Пэўны сэгмэнт можа патрабаваць некалькі варыянтаў перакладу ў залежнасьці ад кантэксту. Калі бягучы пераклад сэгмэнта не пасуе, карыстальнік можа выбраць “<guisubmenu>Праўка → Стварыць альтэрнатыўны пераклад</guisubmenu>”. Пераклад, удрукаваны пасьля гэтага, будзе разглядацца як альтэрнатыўны пераклад зыходнага сэгмэнта. Адзін з варыянтаў, напрыклад, найімавернейшы зь іх, можна вызначыць як пераклад па змаўчаньні, выбраўшы “<guisubmenu>Праўка → Выкарыстоўваць як пераклад па змаўчаньні</guisubmenu>”.</para>
+    </section>
+
+    <section>
+      <title>Панэль зацемак</title>
+
+      <para>Перакладчык можа дадаць зацемкі да адкрытага сэгмэнта, напрыклад, каб вярнуцца пазьней да яго і паўторна перакласьці, праверыць, ці зьяўляюцца слушнымі альтэрнатыўныя пераклады, або спытаць калегаў пра іхняе меркаваньне. Для прагляду зацемак можна выкарыстоўваць пункты мэню “<guisubmenu>Пераход → Наступная зацемка</guisubmenu>” і “<guisubmenu>Пераход → Папярэдняя зацемка</guisubmenu>”.</para>
+    </section>
+
+    <section>
+      <title>Панэль камэнтароў</title>
+
+      <para>Некаторыя з фарматаў, спэцыялізаваных для перакладчыцкай працы, напрыклад, PO, дазваляюць уключаць камэнтары. Такім чынам перакладчыку можна паведаміць пра кантэкст сэгмэнта да перакладу. У прыведзеным ніжэй прыкладзе аўтар файла PO дадаў папярэджаньне перакладчыку наконт праверкі даўжыні перакладу:</para>
+
+      <figure id="comments.pane">
+        <title>Панэль камэнтароў<indexterm class="singular">
+            <primary>Камэнтары</primary> <secondary>Панэль камэнтароў</secondary>
+          </indexterm></title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/Comments_25.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/Comments_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
+
+    <section id="Google.Translate">
+      <title>Панэль машыннага перакладу<indexterm class="singular">
+          <primary>Вокны і панэлі ў OmegaT</primary> <secondary>Панэль машыннага перакладу</secondary>
+        </indexterm></title>
+
+      <para>Адчыніўшы панэль машыннага перакладу, можна пабачыць прапановы ад інструментаў машыннага перакладу для бягучага сэгмэнта. Націсьнеце <keysym>Ctrl + M</keysym>, каб замяніць пераклад бягучага сэгмэнта на прапанаваны пераклад. Больш зьвестак гл. у разьдзеле “<link linkend="chapter.machine.translate">Машынны пераклад</link>”.</para>
+    </section>
+
+    <section>
+      <title id="main.menu">Галоўнае мэню</title>
+
+      <para>Праз галоўнае мэню ажыцьцяўляецца доступ да ўсіх функцый <application>OmegaT</application>. Поўнае апісаньне ўсіх элемэнтаў мэню гл. у дадатку “<emphasis>Галоўнае мэню</emphasis>”. Найчасьцей ужываныя функцыі можна выклікаць праз спалучэньні клявішаў, і калі іх вывучыць, то падчас перакладу не спатрэбіцца зьвяртацца да мэню. Падрабязнасьці гл. у разьдзеле “<link linkend="chapter.menu">Мэню і спалучэньні клявішаў</link>”.</para>
+    </section>
+
+    <section id="status.bar">
+      <title>Панэль стану</title>
+
+      <para>На панэлі стану ў ніжняй частцы галоўнага вакна паказваюцца паведамленьні, якія тычацца працэсу працы. Гэтая панэль забясьпечвае зваротную сувязь з карыстальнікам па канкрэтных апэрацыях, якія выконваюцца. Тут таксама паказваецца колькасьць недакладных супадзеньняў і супадзеньняў з глясароў для бягучага сэгмэнта.</para>
+    </section>
+  </section>
+
+  <section id="other.windows">
+    <title>Іншыя вокны</title>
+
+    <section id="section.project.files">
+      <title>Файлы праекта<indexterm class="singular">
+          <primary>Вокны і панэлі ў OmegaT</primary> <secondary>Файлы праекта</secondary>
+        </indexterm></title>
+
+      <para>Акно файлаў праекта ўтрымлівае пералік файлаў праекта і іншую інфармацыю пра праект. Яно аўтаматычна выводзіцца на экран пры загрузцы праекта OmegaT.</para>
+
+      <para><remark>Заўвага:</remark> можна адключыць вывад гэтага вакна на экран пры загрузцы, зьмяніўшы значэньне зьменнай <emphasis>project_files_show_on_load</emphasis> на <emphasis>false</emphasis> у afqkt <filename>omegat.prefs</filename> (доступ да яго — праз мэню “Сэрвіс → Адчыніць каталёг канфігурацыі”).</para>
+
+      <para>Каб адчыніць яго, націсьнеце <guimenuitem>Ctrl + L<indexterm class="singular">
+          <primary>Спалучэньні клявішаў</primary> <secondary>Сьпіс файлаў праекта — Ctrl + L</secondary>
+        </indexterm></guimenuitem>, а каб зачыніць — <keycap>Esc</keycap>. У вакне файлаў праекта адлюстроўваецца наступная інфармацыя:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>агульная колькасьць файлаў да перакладу ў праекце. Рахуюцца файлы ў каталёгу /source у фармаце, які OmegaT здольная прачытаць. Іхні агульны лік паказваецца ў дужках, побач з загалоўкам “Файлы праекта”.</para>
+        </listitem>
+
+        <listitem>
+          <para>сьпіс усіх файлаў да перакладу ў праекце. Пры націску на любы файл ён адчыніцца для перакладу.</para>
+
+          <para>Калі пачаць друкаваць нейкі тэкст, адчыніцца поле “Фільтар”, дзе можна ўвесьці часткі назваў файлаў. Файл можна выбраць клявішамі <keycap>”Уверх”</keycap> і <keycap>”Уніз”</keycap> і адкрыць яго для перакладу, націснуўшы <keycap>Enter</keycap></para>
+
+          <para>Заўвага: назвы файлаў (у першым слупку) можна адсартаваць у альфабэтным парадку, клікнуўшы па загалоўку. Акрамя таго, можна зьмяніць пазыцыю назвы файла, клікнуўшы па ёй і націснуўшы кнопкі <emphasis>”На першую пазыцыю”, “Уверх”, “Уніз”, “На апошнюю пазыцыю”</emphasis>.</para>
+
+          <para>Клік правай кнопкай мышы па назьве файла адкрывае выплыўнае вакно, якое дазваляе адчыніць зыходны файл і (калі існуе) файл перакладу.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Запісы файлаў уключаюць іхнія назвы, тыпы файлавых фільтраў, іхняю кадоўку і колькасьць сэгмэнтаў у кожным файле.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>агульная колькасьць сэгмэнтаў, колькасьць унікальных сэгмэнтаў ва ўсім праекце, а таксама колькасьць ужо перакладзеных унікальных сэгмэнтаў паказваюцца ў ніжняй частцы</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Мноства <emphasis role="bold">унікальных</emphasis> сэгмэнтаў вылічаецца так: бяруцца ўсе сэгмэнты і выдаляюцца паўторныя сэгмэнты. (Вызначэньне тэрміна “унікальны” улічвае рэгістар: “Бегчы” і “бегчы” уважаюцца за розныя сэгмэнты).</para>
+
+      <para>Розьніца паміж колькасьцю сэгмэнтаў і колькасьцю ўнікальных сэгмэнтаў дае прыблізнае ўяўленьне пра колькасьць паўтораў у тэксьце. Аднак варта адзначыць, што лікі не паказваюць значэньня паўтораў: яны могуць азначаць паўторы адносна доўгіх сказаў (у гэтым выпадку вам пашанцавала) або проста табліцу ключавых словаў (ня так ужо і пашанцавала). У файле <filename> project_stats.txt </filename>, разьмешчаным у каталёгу omegat праекта, ёсьць больш падрабязныя зьвесткі пра сэгмэнты з разьбіўкай па файлах.</para>
+
+      <para>Зьмяненьне правілаў сэгмэнтаваньня можа спрычыніцца да зьмяненьня ліку сэгмэнтаў / унікальных сэгмэнтаў. Гэтага, як правіла, варта пазьбягаць, калі праект ужо пачаты. Болей зьвестак гл. у разьдзеле “<emphasis>Правілы сэгмэнтаваньня</emphasis>”.</para>
+
+      <para><emphasis role="bold"><indexterm class="singular">
+          <primary>Зыходныя файлы</primary> <secondary>Даданьне файлаў у праект</secondary>
+        </indexterm>Даданьне файлаў у праект:</emphasis> каб дадаць зыходныя файлы ў праект, можна націснуць кнопку “<guimenuitem>Імпартаваць зыходныя файлы</guimenuitem>”. Пры гэтым абраныя файлы капіююцца ў каталёг <filename>source</filename>, праект перагружаецца для загрузкі новых файлаў. Можна таксама дадаць зыходныя файлы з інтэрнэт-старонак, напісаных у MediaWiki, націснуўшы на кнопку “<guimenuitem>Спампаваць старонку MediaWiki</guimenuitem>” і падаўшы адпаведны URL.</para>
+    </section>
+
+    <section id="section.search.window">
+      <title>Акно пошуку<indexterm class="singular">
+          <primary>Вокны і панэлі ў OmegaT</primary> <secondary>Панэль пошуку</secondary>
+        </indexterm></title>
+
+      <para>Акно пошуку дазваляе знаходзіць пэўныя сэгмэнты ў праекце. Можна мець некалькі адчыненых вокнаў пошуку адначасова. Каб адчыніць новае вакно пошуку, націсьнеце <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> у галоўным акне. Акно пошуку складаецца з тэкставага поля для шуканага тэксту або ключавых словаў, сьцяжкоў і кнопак-пераключальнікаў для вызначэньня парамэтраў пошуку, і вобласьці паказу вынікаў пошуку. Больш зьвестак пра вакно пошуку гл. у разьдзеле<emphasis> “<link linkend="chapter.user.interface">Пошукі</link>” </emphasis>.</para>
+    </section>
+
+    <section id="section.tag.validation">
+      <title>Праверка тэгаў<indexterm class="singular">
+          <primary>Праверка тэгаў</primary> <seealso>Спалучэньні клявішаў, тэгі</seealso>
+        </indexterm><indexterm class="singular">
+          <primary>Вокны і панэлі ў OmegaT</primary> <secondary>Праверка тэгаў</secondary> <seealso>Тэгі</seealso>
+        </indexterm></title>
+
+      <para>У вакне праверкі тэгаў адлюстроўваюцца выяўленыя памылкі і неадпаведнасьці тэгаў у перакладзе. Акно адчыняецца праз <guimenuitem>Ctrl + T. </guimenuitem>У вакне прапануецца табліца ў 3 слупкі са спасылкай на сэгмэнт, а таксама ягоным зьмесьцівам — арыгіналам і перакладам:</para>
+
+      <para><figure id="tag.validator.window">
+          <title><indexterm class="singular">
+              <primary>Праверка тэгаў</primary> <secondary>Акно — малюнак</secondary> <seealso>Тэгі</seealso>
+            </indexterm>Акно праверкі тэгаў.</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/TagValidator.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/TagValidator.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>У мэтах спрашчэньня параўнаньня арыгіналу і перакладу тэгі вылучаюцца паўтлустым шрыфтам і сінім колерам. Націсьнеце на спасылку, каб перайсьці да сэгмэнта ў панэлі рэдагаваньня. Выпраўце памылку, калі трэба, і націсьнеце <guimenuitem>Ctrl + T</guimenuitem>, каб вярнуцца да вакна праверкі тэгаў і выправіць іншыя памылкі. У першым і трэцім выпадках, паказаных вышэй, тэгаў няправільна спараныя, а ў другім выпадку ў адчыняльным тэгу няма сымбаля &lt;.</para>
+
+      <para>Памылкі тэгаў — гэта выпадкі, калі парадак і колькасьць тэгаў у перакладзе не адпавядаюць арыгіналу. У некаторых выпадках зьмены тэгаў, пазначаныя ў акне праверкі тэгаў, неабходныя і пажаданыя, але іншыя будуць выклікаць праблемы пры кампіляцыі перакладаў. Тэгі звычайна прадстаўляюць сабой пэўнае фарматаваньне ў зыходным тэксьце. Спрашчэньне фармату зыходнага тэкста перад пачаткам перакладу значна зьмяншае колькасьць тэгаў.</para>
+    </section>
+
+    <section>
+      <title>Статыстыка<indexterm class="singular">
+          <primary>Статыстыка</primary> <seealso>Мэню Сэрвіс</seealso>
+        </indexterm></title>
+
+      <para>У вакне статыстыкі, якое выклікаецца праз мэню <emphasis role="bold">Сэрвіс → Статыстыка</emphasis>, паказваецца статыстыка бягучага праекта OmegaT у форме зводкі, а таксама з разьбіўкай па перакладаных файлах. Прадстаўленыя статыстычныя данія таксама даступныя ў файле <filename>project_stats.txt</filename> у тэкставым фармаце з табулятарамі ў якасьці разьдзяляльнікаў (падкаталёг <filename>omegat</filename>). Гэты файл можна адчыніць у якой-небудзь праграме для апрацоўкі электронных табліцаў. З дапамогай спалучэньняў клявішаў <guimenuitem>Ctrl + A<indexterm class="singular">
+          <primary>Спалучэньні клявішаў</primary> <secondary>Вылучыць усё — Ctrl+A</secondary>
+        </indexterm></guimenuitem><guimenuitem>, Ctrl + C<indexterm class="singular">
+          <primary>Спалучэньні клявішаў</primary> <secondary>Капіяваць тэкст — Ctrl + C</secondary>
+        </indexterm></guimenuitem>, <guimenuitem>Ctrl + V<indexterm class="singular">
+          <primary>Спалучэньні клявішаў</primary> <secondary>Уставіць тэкст — Ctrl + V</secondary>
+        </indexterm></guimenuitem> зьмесьціва вакна можна капіяваць у буфэр абмену і ўстаўляць адтуль.<figure id="ProjectStatistic.Window">
+          <title>статыстыка праекта</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/StatisticsWindow_25.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/StatisticsWindow_25.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+    </section>
+
+    <section>
+      <title>Статыстыка супадзеньняў<indexterm class="singular">
+          <primary>Статыстыка супадзеньняў</primary> <seealso>Мэню Сэрвіс</seealso>
+        </indexterm></title>
+
+      <para>Статыстыка супадзеньняў даступная праз мэню <guimenuitem>Сэрвіс → Статыстыка супадзеньняў. </guimenuitem> Ацэнка даволі рэсурсаёмістая і можа заняць шмат часу, таму ў працэсе разьліку бачны індыкатар хады выкананьня. Што тычыцца катэгорыяў, дэ-факта галіновым стандартам зьяўляецца наступная клясыфікацыя супадзеньняў па групах: паўторы, дакладнае супадзеньне, 95%—100%, 85%—94%, 75%—84%, 50%—74% і без супадзеньняў. Гэтая інфармацыя вылічаецца для сэгмэнтаў, а таксама для словаў і сымбаляў (без прабелаў і з прабеламі). Варта памятаць, што могуць быць нязначныя адрозьненьні паміж падлікам у OmegaT і данімі, якія прадстаўляюцца іншымі праграмамі аўтаматызацыі перакладу.<figure>
+          <title>Статыстыка супадзеньняў</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchStatistics.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchStatistics.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Заўважце, што гэтыя сумарныя лікі зьяўляюцца добрай (наколькі ўвогуле добрай яны могуць быць) ацэнкай аб’ёму працы над праектам і, такім чынам, могуць служыць асновай для рахаваньня выдаткаў і коштаў.</para>
+
+      <para>Прабелы паміж сэгмэнтамі ня ўлічваюцца ў апошнім слупку. Паўторы — гэта ідэнтычныя сэгмэнты, прысутныя некалькі разоў у тэксьце. Першы сэгмэнт і ягонае зьмесьціва будзе клясыфікавацца як “няма супадзеньня”, а астатнія зь іх — як паўтор першага. Калі пераклад для некалькіх ідэнтычных зыходных сэгмэнтаў ужо існуе ў памяці перакладаў праекта, гэтыя сэгмэнты, разам з іншымі, ужо перакладзенымі ўнікальнымі сэгмэнтамі, будуць клясыфікавацца як “дакладнае супадзеньне”. Колькасьць унікальных сэгмэнтаў у выпадку неабходнасьці можна знайсьці ў стандартным акне статыстыкі, незалежна ад таго, ці былі яны перакладзеныя або не.</para>
+
+      <para>Астатнія катэгорыі (50-100%) уключаюць у сябе неперакладзеныя сэгмэнты зь недакладным супадзеньнем. Недакладныя супадзеньні бяруцца з файлаў у падкаталёгу <filename>/tm</filename>, а ня толькі з унутранай памяці перакладаў у каталёгу <filename>/omegat, </filename>, як гэта робіцца для паўтораў і дакладных супадзеньняў. Адзінае адрозьненьне ад супадзеньняў з файла памяці перакладаў <filename>project_save</filename> у тым, што зьнешнія файлы памяці перакладаў ня могуць даваць дакладныя супадзеньня, толькі 100%-ныя. Калі выкарыстоўваць зьнешнія файлы памяці перакладаў для падліку непажадана, трэба або выдаліць усё з каталёга /tm, або (часова) зьмяніць налады праекта, каб значэньнем для каталёга апорных файлаў памяці перакладаў было іншае месца.</para>
+
+      <para>Данія ў акне статыстыкі разьдзеленыя табулятарамі, і іх з дапамогай спалучэньняў клявішаў <guimenuitem>Ctrl + A<indexterm class="singular">
+          <primary>Спалучэньні клявішаў</primary> <secondary>Вылучыць усё — Ctrl+A</secondary>
+        </indexterm></guimenuitem><guimenuitem>, Ctrl + C<indexterm class="singular">
+          <primary>Спалучэньні клявішаў</primary> <secondary>Капіяваць тэкст — Ctrl + C</secondary>
+        </indexterm></guimenuitem>, <guimenuitem>Ctrl + V<indexterm class="singular">
+          <primary>Спалучэньні клявішаў</primary> <secondary>Уставіць тэкст — Ctrl + V</secondary>
+        </indexterm></guimenuitem> можна вылучыць, скапіяваць і ўставіць, напрыклад, у электронную табліцу або ў бугальтарскую праграму. Пасьля разьліку данія таксама даступныя ў файле <filename>omegat/project_stats_match.txt.</filename> Зьвярнеце ўвагу на тое, што файл мае адзнаку часу, бо разьлік (у вадрозьненьне ад стандартных статыстычных даніх) не адбываецца імгненна і можа хутка стаць неактуальным.</para>
+    </section>
+
+    <section>
+      <title>Браўзэр даведкі<indexterm class="singular">
+          <primary>Мэню Даведка</primary> <secondary>Браўзэр даведкі</secondary>
+        </indexterm></title>
+
+      <para>Браўзэр даведкі (у якім паказваецца гэты дапаможнік) можна адкрыць клявішай <keycap><indexterm class="singular">
+          <primary>Спалучэньні клявішаў</primary> <secondary>Даведка — F1</secondary>
+        </indexterm>F1</keycap> або праз мэню <guimenuitem><indexterm class="singular">
+          <primary>Мэню Даведка</primary> <secondary>Дапаможнік карыстальніка…</secondary>
+        </indexterm>Даведка → Дапаможнік карыстальніка</guimenuitem>. У вакне адлюстроўваюцца дапаможнік і дзьве кнопкі: “Назад” і “Зьмест”. Дапаможнік карыстальніка — гэта HTML-дакумэнт са спасылкамі на розныя разьдзелы. Пасьля націску на спасылку, як і ў вэб-браўзэры, адбываецца пераход да патрэбнай старонкі.</para>
+
+      <para>Дапаможнік карыстальніка знаходзіцца ў падкаталёгу docs каталёга ўсталёўкі OmegaT, і можна, напрыклад, прачытаць дакумэнтацыю на ангельскай, адчыніўшы ў браўзэры файл <filename>docs/en/index.html</filename>. Калі адчыніць дапаможнік такім чынам, то можна пераходзіць і па зьнешніх вэб-спасылках, а ўбудаваны браўзэр дапаможніка гэтага не дазваляе.</para>
+    </section>
+  </section>
+</chapter>

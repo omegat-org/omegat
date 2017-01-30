@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.plain.text">
+  <title>Праца зь нефарматаваным тэкстам<indexterm class="singular">
+      <primary>Зыходныя файлы</primary> <secondary>Файлы нефарматаванага тэксту</secondary>
+    </indexterm></title>
+
+  <section id="default.encoding">
+    <title>Кадоўка па змаўчаньні<indexterm class="singular">
+        <primary>Кадоўка</primary> <secondary>Файлы нефарматаванага тэксту</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Зыходныя файлы</primary> <secondary>Кадоўка</secondary>
+      </indexterm></title>
+
+    <para>Файлы нефарматаванага тэксту — якія ў большасьці выпадкаў маюць пашырэньне назвы txt — утрымліваюць толькі тэкставую інфармацыю без дакладных указаньняў для кампутара пра мову тэксту. Усё, што OmegaT можа зрабіць у падобных выпадках, гэта зыходзіць з таго, што тэкст напісаны на той самай мове, зь якой карыстаецца сам кампутар. Гэта не праблема, калі файлы ў кадоўцы Unicode з 16 бітамі на сымбаль. /Але калі сымбалі ў 8-бітавай кадоўцы, можа ўзьнікнуць наступная праблема: замест тэксту на японскай, напрыклад…</para>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/OmT_Japanese.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/OmT_Japanese.png" width="60%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>… сыстэма пакажа нешта падобнае на наступнае:</para>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/OmT_Cyrillic.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/OmT_Cyrillic.png" width="60%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>Кампутар, на якім выконваецца OmegaT, па змаўчаньні ўжывае расейскую мову, і таму паказваюцца сымбалі кірыліцы, а не японская пісьмовасьць.</para>
+  </section>
+
+  <section id="OmegaT.solution">
+    <title>Рашэньне для <application>OmegaT</application></title>
+
+    <para>Існуе тры асноўных спосабы вырашэньня гэтай праблемы ў <application>OmegaT</application>. Усе яны патрабуюць працы з файлавымі фільтрамі (мэню <emphasis role="bold">Налады</emphasis>).</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Зьмянеце кадоўку файлаў на Unicode</term>
+
+        <listitem>
+          <para>адчынеце зыходны файл у тэкставым рэдактары, які правільна разумее ягоную кадоўку, і захавайце файл у кадоўцы <emphasis role="bold">UTF-8</emphasis>. Зьмянеце пашырэньне назвы з <literal>.txt</literal> на <literal>.utf-8.</literal> <application>OmegaT</application> аўтаматычна будзе апрацоўваць файл як файл у кадоўцы UTF-8. Гэта — бадай што найпрасьцешае рашэньне, якое дазволіць пазьбегнуць праблемаў надалей.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Задайце кадоўку для файлаў нефарматаванага тэксту</term>
+
+        <listitem>
+          <para>— г. зн., файлаў з пашырэньнем назвы <filename>.txt </filename> — : у пункце <emphasis role="bold">Тэкст</emphasis> дыялёгу файлавых фільтраў зьмянеце <emphasis role="bold">кадоўку зыходных файлаў</emphasis> з &lt;аўта&gt; на кадоўку, якая адпавядае зыходнаму файлу з пашырэньнем назвы <filename>.txt</filename>, напрыклад, на .jp для прыкладу, згаданага вышэй.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Зьмянеце пашырэньні назваў зыходных файлаў</term>
+
+        <listitem>
+          <para>напрыклад, з <filename>.txt</filename> на <filename>.jp</filename> для файлаў нефарматаванага тэксту на японскай мове: у элемэньце <emphasis role="bold">Тэкст</emphasis> дыялёгу файлавых фільтраў дадайце новы <emphasis role="bold">шаблён назваў зыходных файлаў</emphasis> (<filename>*.jp</filename> для гэтага прыклада) і выберыце адпаведныя парамэтры кадоўкі зыходных файлаў і файлаў перакладаў.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para><application>OmegaT</application> па змаўчаньні прапануе наступны сьпіс, каб спрасьціць наладку парамэтраў для пэўных файлаў нефарматаванага тэксту:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><literal>.txt</literal>: файлы аўтаматычна (&lt;аўта&gt;) апрацоўваюцца <application>OmegaT</application> як файлы ў кадоўцы кампутара па змаўчаньні.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><literal>.txt1</literal>: файлы ў кадоўцы ISO-8859-1, якая прыдатная для большасьці <emphasis role="bold">заходнеэўрапейскіх</emphasis> моваў.<indexterm class="singular">
+            <primary>Кадоўка</primary> <secondary>для моваў Заходняй Эўропы</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><literal>.txt2</literal>: файлы ў кадоўцы ISO-8859-2, якая прыдатная для большасьці моваў <emphasis role="bold">Цэнтральнай і Ўсходняй Эўропы</emphasis>.<indexterm class="singular">
+            <primary>Кадоўка</primary> <secondary>для моваў Цэнтральнай і Заходняй Эўропы</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><literal>.utf-8</literal>: файлы апрацоўваюцца <application>OmegaT</application> як кадаваныя ў UTF-8 (кадоўка, прыдатная амаль для ўсіх моваў сьвету).<indexterm class="singular">
+            <primary>Кадоўка</primary> <secondary>Unicode</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Праверце гэта самі, выбраўшы <emphasis role="bold">Файлавыя фільтры</emphasis> у мэню <emphasis role="bold">Налады</emphasis>. Напрыклад, калі ў вас ёсьць файл на чэскай (з высокай імавернасьцю ў кадоўцы <emphasis role="bold">ISO-8859-2</emphasis>), трэба проста зьмяніць пашырэньне назвы <literal>.txt</literal> на <literal>.txt2</literal>, і <application>OmegaT</application> апрацуе яго як мае быць. І, зразумела, найнадзейнейшым спосабам зьяўляецца перазахаваньне падобных файлаў ва Unicode, г. зн. з пашырэньнем назвы <literal>.utf-8</literal>.</para>
+  </section>
+</chapter>

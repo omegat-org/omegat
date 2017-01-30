@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.website">
+  <title><application><indexterm class="singular">
+      <primary>OmegaT у Інтэрнэце</primary>
+    </indexterm>OmegaT</application> у Інтэрнэце</title>
+
+  <section id="OmegaT.sites.and.OmegaT.SourceForge.project">
+    <title>Сайты <application>OmegaT</application> і праект <application>OmegaT</application> на SourceForge<indexterm class="singular">
+        <primary>OmegaT у Інтэрнэце</primary> <secondary>Праект на SourceForge</secondary>
+      </indexterm></title>
+
+    <para>Сайт <ulink url="http://www.omegat.org/"> <application>OmegaT</application> </ulink>утрымлівае спасылкі на шматлікія рэсурсы, датычныя <application>OmegaT</application>. Падтрымка карыстальнікаў ажыцьцяўляецца сіламі добраахвотнікаў у <ulink url="http://tech.groups.yahoo.com/group/omegat/">групе карыстальнікаў<application> OmegaT</application> на Yahoo!</ulink>. Пошук адказаў на пытаньні варта пачаць з <ulink url="http://tech.groups.yahoo.com/group/OmegaT/database?method=reportRows&amp;tbl=1">частых пытаньняў і адказаў</ulink>. Для атрыманьня апошняй вэрсіі OmegaT перайдзеце на старонку спампаваньня на www.omegat.org. Можна таксама накіроўваць <ulink url="https://sourceforge.net/p/omegat/bugs/">паведамленьні пра памылкі</ulink> і <ulink url="https://sourceforge.net/p/omegat/feature-requests/">запыты функцый/прапановы ўдасканаленьняў.</ulink></para>
+  </section>
+
+  <section id="bug.reports">
+    <title>Паведамленьні пра памылкі<indexterm class="singular">
+        <primary>OmegaT у Інтэрнэце</primary> <secondary>Паведамленьні пра памылкі</secondary>
+      </indexterm></title>
+
+    <para>Памятайце, што добрае паведамленьне пра памылку патрабуе ўсяго тры рэчы:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Крокі, якія дазваляюць узнавіць памылку</para>
+      </listitem>
+
+      <listitem>
+        <para>Што чакалася</para>
+      </listitem>
+
+      <listitem>
+        <para>Што замест гэтага атрымалася</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Больш зьвестак можна атрымаць з артыкула <ulink url="http://www.joelonsoftware.com/articles/fog0000000029.html">“Painless Bug Tracking”</ulink>, які напісаў Джоэл Сполскі.</para>
+
+    <para>Трэба дадаць копіі файлаў, часткі часопіса, здымкі экрана і ўсё іншае, што, як вы мяркуеце, дапаможа распрацоўшчыкам знайсьці і выправіць памылку. Памятайце, што паведамленьні пра памылкі і запыты функцый/прапановы ўдасканаленьняў зьяўляюцца агульнадаступнымі, так што ня сьлед далучаць файлы з канфідэнцыйным зьмесьцівам. Каб адсочваць, што адбываецца з паведамленьнем, трэба зарэгістравацца ў якасьці карыстальніка SourceForge, увайсьці ў сыстэму і падаць паведамленьне пра памылку або проста націснуць “Monitor” у верхняй частцы паведамленьня.</para>
+  </section>
+
+  <section id="contributing.to.omegat.project">
+    <title>Удзел у праекце <application>OmegaT</application><indexterm class="singular">
+        <primary>OmegaT у Інтэрнэце</primary> <secondary>Удзел у OmegaT</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Каб узяць удзел у <application>OmegaT</application>:</emphasis></para>
+
+    <para>спачатку далучэцеся да <ulink url="http://tech.groups.yahoo.com/group/OmegaT/">групы карыстальнікаў</ulink> (праз сайт або праз электронную пошту, адрас: <ulink url="mailto:OmegaT-subscribe@yahoogroups.com"><application>OmegaT</application>-subscribe@yahoogroups.com</ulink>). Для ўдзелу ў распрацоўцы <application>OmegaT</application> можна далучыцца да групы распрацоўшчыкаў праз сайт або праз электронную пошту, адрас: <ulink url="mailto:omegat-development-request@list.sourceforge.net?subject=subscribe">omegat-development-request@lists.sourceforge.net</ulink> (у радку тэмы ўпісаць “subscribe”).</para>
+
+    <para><emphasis role="bold">Каб перакласьці інтэрфэйс карыстальніка <application>OmegaT</application>, дапаможнік карыстальніка і іншыя адпаведныя дакумэнты:</emphasis></para>
+
+    <para>спачатку прачытайце <ulink url="http://www.omegat.org/en/howtos/localizing_omegat.php">“Кіраўніцтва ў лякалізацыі і наладцы<application>OmegaT</application>”</ulink> і далучэцеся да групы перакладчыкаў <application>OmegaT</application> праз сайт або праз электронную пошту, адрас: <ulink url="mailto:omegat-development-request@lists.sourceforge.net?subject=subscribe">OmegaT- l10n-request@lists.sourceforge.net</ulink> (у радку тэмы ўпісаць “subscribe”).</para>
+
+    <indexterm class="singular">
+      <primary>OmegaT у Інтэрнэце</primary> <secondary> Распрацоўка і лякалізацыя</secondary>
+    </indexterm>
+
+    <para>Каб падтрымаць OmegaT фінансава<indexterm class="singular">
+        <primary>OmegaT у Інтэрнэце</primary> <secondary>Фінансавая падтрымка</secondary>
+      </indexterm></para>
+
+    <para>Калі вы падтрымаеце далейшае разьвіцьцё OmegaT, будзем вельмі ўдзячнымі — націсьнеце на наступную спасылку, каб перайсьці да <ulink url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9UB6Y2BBF99LL">рахунка OmegaT на PayPal</ulink>.</para>
+
+    <indexterm class="singular">
+      <primary>OmegaT у Інтэрнэце</primary> <secondary>Ахвяраваньне на OmegaT</secondary>
+    </indexterm>
+  </section>
+</appendix>

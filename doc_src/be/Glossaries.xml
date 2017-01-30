@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.glossaries">
+  <title>Глясары<indexterm class="singular">
+      <primary>Вокны і панэлі ў OmegaT</primary> <secondary>Панэль глясароў</secondary>
+    </indexterm><indexterm class="singular">
+      <primary>Глясары</primary>
+    </indexterm></title>
+
+  <para>Глясары — гэта файлы, якія ствараюцца і зьмяняюцца ўручную для выкарыстаньня ў <application>OmegaT</application>.</para>
+
+  <para>Калі праект <application>OmegaT</application> зьмяшчае адзін ці некалькі глясароў, любыя тэрміны з глясара, знойдзеныя ў бягучым сэгмэньце, будуць аўтаматычна адлюстроўвацца на панэлі глясароў.</para>
+
+  <para>Ягонае разьмяшчэньне і назва вызначаюцца ў дыялёгавым вакне ўласьцівасьцяў праекта. Пашырэньне назвы павінна быць <filename>.txt</filename> або <filename>.utf8</filename> (калі няма, будзе даданае). Файл мусіць быць у каталёгу <filename>/glossary</filename> або ў падкаталёгу гэтага каталёга (напрыклад, <filename>/glossary/sub/glossary.txt</filename>). Наяўнасьць файла не патрабуецца пры яго вызначэньні, ён будзе створаны аўтаматычна (калі неабходна) пры стварэньні першага запісу ў глясары. Для існуючага файла фармат або кадоўка не правяраюцца: новыя запісы заўсёды дадаюцца з разьдзяленьнем сымбалямі табуляцыі і ў кадоўцы UTF-8. Паколькі існуючае зьмесьціва не закранаецца, пашкоджаньне існуючага файла будзе абмежаваным.</para>
+
+  <section>
+    <title>Ужываньне</title>
+
+    <para>Каб выкарыстоўваць існуючы глясар, проста зьмясьцеце яго ў каталёгу<indexterm class="singular">
+        <primary>Файлы праекта</primary> <secondary>Падкаталёг глясароў</secondary>
+      </indexterm> <filename>/glossary</filename> пасьля стварэньня праекта. <application>OmegaT</application> аўтаматычна знаходзіць файлы глясароў у гэтым каталёгу пры адкрыцьці праекта. Тэрміны ў бягучым сэгмэньце, якія <application>OmegaT</application> знаходзіць у файлах глясароў, паказваюцца на панэлі глясароў:</para>
+
+    <indexterm class="singular">
+      <primary>Глясары, панэль глясароў</primary>
+    </indexterm>
+
+    <figure>
+      <title>Панэль глясароў</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/GlossaryPane_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/GlossaryPane_25.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Слова перад знакам роўнасьці “=” — гэта зыходны тэрмін, а ягоны пераклад — пасьля знаку “=”. Запісы ў глясарох могуць мець камэнтары. Функцыя глясара шукае толькі дакладныя супадзеньні з запісам глясара (ня ўлічваючы словаформы і да г. п.). Новыя тэрміны можна дадаваць уручную ў файл(ы) глясароў падчас перакладу, напрыклад, у тэкставым рэдактары. Новыя тэрміны будуць пазнавацца толькі пасьля захаваньня зьменаў у файле.</para>
+
+    <para>Зыходны тэрмін можа складацца зь некалькі словаў, як у наступным прыкладзе:</para>
+
+    <figure>
+      <title>тэрміны зь некалькіх словаў у глясарох — прыклад<indexterm class="singular">
+          <primary>Глясары</primary> <secondary>Панэль глясароў</secondary> <tertiary>тэрміны зь некалькіх словаў</tertiary>
+        </indexterm></title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Падкрэсьлены тэрмін “pop-up menu” мае адпаведнік “pojavni menu” на панэлі глясароў. Калі яго вылучыць на панэлі глясароў і затым клікнуць правай кнопкай, ён будзе ўстаўлены ў пазыцыю курсора ў перакладзе бягучага сэгмэнта.<footnote>
+        <para>Заўважце, што ў прыведзеным вышэй выпадку гэта ня ўсё, бо мова перакладу (славенская) мае скланеньні. Таму пасьля ўстаўкі “pojavni menu” (назоўны склон) гэта трэба зьмяніць на “pojavnem meniju” (месны склон). Таму проста ўдрукаваць тэрмін можа быць хутчэйшым варыянтам у параўнаньні са зваротам да глясара і ўжываньне спалучэньняў клявішаў.</para>
+      </footnote></para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Глясары</primary> <secondary>Фармат файлаў</secondary>
+      </indexterm>Фармат файла<indexterm class="singular">
+        <primary>Файлы праекта</primary> <secondary>Карыстальніцкія файлы</secondary> <seealso>Глясары</seealso>
+      </indexterm></title>
+
+    <para>Файлы глясароў — гэта файлы нефарматаванага тэксту, у якіх элемэнты ўпарадкаваныя ў тры слупкі з сымбалямі табуляцыі ў якасьці разьдзяляльнікаў: першы слупок — зыходны тэрмін, другі — адпаведны пераклад. У трэці слупок можна ўпісваць дадатковую інфармацыю. У запісах можа адсутнічаць пераклад і быць толькі зыходны тэрмін і камэнтар.</para>
+
+    <para>Кадоўка глясароў вызначаецца аўтаматычна. Зразумела, кадоўка павінна ўтрымліваць сымбалі абодвух моваў, таму пажадана ўжываць Юнікод.</para>
+
+    <para>Таксама падтрымліваецца фармат CSV. Гэты фармат такі ж, як і з сымбалямі табуляцыі: зыходны тэрмін, пераклад. Поле камэнтароў аддзяляецца коскай “,”. Радкі могуць быць узятыя ў двукосьсі &quot;, што дазваляе мець коску ўнутры тэрміна або перакладу:</para>
+
+    <para><literal>&quot;This is a source term, which contains a comma&quot;,&quot;гэта тэрмін, у якім ёсьць коска&quot;</literal></para>
+
+    <para>У дадатак да нефарматаванага тэксту падтрымліваюцца таксама глясары ў фармаце TBX <indexterm class="singular">
+        <primary>Глясары</primary> <secondary>Фармат TBX</secondary>
+      </indexterm>. Файл <filename>.tbx</filename> мусіць быць у каталёгу <filename>/glossary</filename> або ў падкаталёгу гэтага каталёга (напрыклад, <filename>/glossary/sub/glossary.txt</filename>).</para>
+
+    <para>TBX (Term Base eXchange, абмен базамі тэрмінаў) — гэта адкрыты стандарт на аснове XML для абмену структураванымі тэрміналягічнымі данімі. TBX ухвалены LISA і ІСО ў якасьці міжнароднага стандарту. Калі ў вас ужо ёсьць сыстэма кіраваньня тэрміналёгіяй, магчыма, што ў ёй ёсьць функцыя экспарту даніх тэрміналёгіі ў фармат TBX. <ulink url="http://www.microsoft.com/Language/en-US/Terminology.aspx">Збор Microsoft Terminology</ulink> <indexterm class="singular">
+        <primary>Глясары</primary> <secondary>Збор Microsoft Terminology</secondary>
+      </indexterm> можна спампаваць прыкладна на 100 мовах, і ён можа служыць у якасьці грунтоўнага глясара ў галіне інфармацыйных тэхналёгіяў.</para>
+
+    <para>Заўвага: экспарт у <filename>.tbx </filename> у MultiTerm, здаецца, ненадзейны (лістапад 2013 г.), таму лепш ужываць экспарт у <filename>.tab</filename> MultiTerm.</para>
+  </section>
+
+  <section>
+    <title>Як стварыць глясары<indexterm class="singular">
+        <primary>Глясары</primary> <secondary>Стварэньне глясара</secondary>
+      </indexterm></title>
+
+    <para>У наладах праекта ёсьць магчымасьць задаць назву файла глясара, у які дазволены запіс (гл. пачатак гэтага разьдзела). Каб дадаць новы запіс, клікнеце правай кнопкай па панэлі глясароў або націсьнеце <keycap>Ctrl + Shift + G</keycap>. Зьявіцца вакно, дзе можна будзе ўвесьці зыходны тэрмін, пераклад і, калі трэба, камэнтар:</para>
+
+    <mediaobject role="html">
+      <imageobject>
+        <imagedata fileref="images/GlossaryEntry_25.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/GlossaryEntry_25.png" width="80%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>Зьмесьціва файлаў глясароў захоўваецца ў памяці і загружаецца пры адкрыцьці або перазагрузцы праекта. Абнаўленьне файла глясара, такім чынам, даволі простае: націсьнеце <keycap>Ctrl + Shift + G</keycap> і ўвядзеце новы тэрмін, ягоны пераклад і камэнтар, калі трэба (для пераходу паміж палямі націскайце Tab), і захавайце файл. Зьмесьціва панэлі глясароў адпаведна абновіцца.</para>
+
+    <para><indexterm class="singular">
+        <primary>Глясары</primary> <secondary>Месцазнаходжаньне файла глясара, у які дазволены запіс</secondary>
+      </indexterm>Месцазнаходжаньне файла глясара, у які дазволены запіс, задаецца праз дыялёг <guimenuitem>Праект → Уласьцівасьці…</guimenuitem>. Пазнаюцца файлы з пашырэньнямі назваў <filename>TXT</filename> і <filename>UTF8</filename></para>
+
+    <para><emphasis role="bold">Заўвага:</emphasis> Ёсьць, вядома, і іншыя спосабы і сродкі для стварэньня простых файлаў з табуляцыяй. Для гэтай мэты можна скарыстацца, напрыклад, з Notepad++ у Windows, GEdit у Linux або праграмаў для працы з электроннымі табліцамі, увогуле якой заўгодна праграмай, якая працуе з тэкстам у кадоўцы UTF-8 (або UTF-16 LE) і можа паказваць прабельныя сымбалі (каб не згубіць патрэбны сымбаль табуляцыі<keycap></keycap>).</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Глясары</primary> <secondary>Прыярытэт</secondary>
+      </indexterm>Прыярытэтны глясар</title>
+
+    <para>Вынікі з прыярытэтнага глясара (па змаўчаньні — glossary/glossary.txt) зьяўляюцца на першых месцаў на панэлі глясароў і ў падказках TransTips.</para>
+
+    <para>Паколькі ў запісах могуць перамешвацца словы з прыярытэтных і непрыярытэтных глясароў, словы з прыярытэтных глясароў вылучаюцца паўтлустым шрыфтам.</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Глясары</primary> <secondary>Trados MultiTerm</secondary>
+      </indexterm>Ужываньне Trados MultiTerm</title>
+
+    <para>Данія, экспартаваныя з Trados MultiTerm, можна выкарыстоўваць як глясар для <application>OmegaT</application> без дадатковай мадыфікацыі, задаўшы для назвы файла пашырэньне <filename>.tab </filename>, пры ўмове, што тэрмін і пераклад будуць у першых двух палёх адпаведна. Калі экспарт зроблены праз сыстэмную вопцыю “Tab-delimited export”, спатрэбіцца выдаліць першыя 5 слупкі (Seq. Nr, Date created і да г. п.).</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Глясары</primary> <secondary>Праблемы з глясарамі</secondary>
+      </indexterm>Звычайныя праблемы з глясарамі</title>
+
+    <para><emphasis role="bold">Праблема: Тэрміны з глясара не паказваюцца — магчымыя прычыны:</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Няма файла глясара ў каталёгу “glossary”.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Файл глясара пусты.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Элемэнты не падзеленыя сымбалем табуляцыі.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Пашырэньне назвы файла глясара няправільнае (павінна быць .tab, .utf8 або .txt).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Няма дакладнай адпаведнасьці паміж запісам глясара і зыходным тэкстам у дакумэньце — напрыклад, слова множнага ліку.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Файл глясара мае няправільную кадоўку.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>У бягучым сэгмэньце няма тэрмінаў, якія ёсьць у глясары.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Адна ці некалькі згаданых праблемаў ужо выпраўленая, але праект ня быў перазагружаны.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Праблема: на панэлі глясароў некаторыя сымбалі не адлюстроўваюцца правільна</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>…але тыя ж сымбалі адлюстроўваюцца правільна ў панэлі рэдагаваньня: пашырэньне назвы і кадоўка файлаў не супадаюць.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.regexp">
+  <title>Рэгулярныя выразы<indexterm class="singular">
+      <primary>Рэгулярныя выразы</primary> <seealso>Сэгмэнтаваньне</seealso> <seealso>Пошук</seealso>
+    </indexterm></title>
+
+  <para>Рэгулярныя выразы (або, часам, рэгвыры), якія ўжываюцца ў пошуках і правілах сэгмэнтаваньня, гэта выразы, якія падтрымліваюцца Java. Калі патрабуюцца больш спэцыфічныя зьвесткі, зьвяртайцеся да <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html">“Java Regex documentation”</ulink>. Дадатковыя спасылкі і прыклады гл. ніжэй.</para>
+
+  <note>
+    <para>Гэты разьдзел — для дасьведчаных карыстальнікаў, якім патрабуецца вызначаць уласныя варыянты правілаў сэгмэнтаваньня або ўжываць у пошуках складаныя выразы.</para>
+  </note>
+
+  <table>
+    <title>Рэгулярны выраз — сьцягі.</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Канструктыўны элемэнт</entry>
+
+          <entry align="left">… адпавядае наступнаму</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>(?i)</entry>
+
+          <entry>Ня ўлічваць рэгістар пры падборы адпаведнікаў (па змаўчаньні шаблён улічвае рэгістар).</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Рэгулярны выраз — сымбаль</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Канструктыўны элемэнт</entry>
+
+          <entry align="left">… адпавядае наступнаму</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>x</entry>
+
+          <entry>Сымбаль x, за выключэньнем наступнага…</entry>
+        </row>
+
+        <row>
+          <entry>\uhhhh</entry>
+
+          <entry>Сымбаль з шаснаццатковым значэньнем 0xhhhh</entry>
+        </row>
+
+        <row>
+          <entry>\t</entry>
+
+          <entry>Сымбаль табуляцыі ('\u0009')</entry>
+        </row>
+
+        <row>
+          <entry>\n</entry>
+
+          <entry>Сымбаль новага радка ('\u000A')</entry>
+        </row>
+
+        <row>
+          <entry>\r</entry>
+
+          <entry>Сымбаль вяртаньня карэткі ('\u000D')</entry>
+        </row>
+
+        <row>
+          <entry>\f</entry>
+
+          <entry>Сымбаль падачы блянка ('\u000C')</entry>
+        </row>
+
+        <row>
+          <entry>\a</entry>
+
+          <entry>Сымбаль “званок” ('\u0007')</entry>
+        </row>
+
+        <row>
+          <entry>\e</entry>
+
+          <entry>Сымбаль кіроўнай пасьлядоўнасьці ('\u001B')</entry>
+        </row>
+
+        <row>
+          <entry>\cx</entry>
+
+          <entry>Кіроўны сымбаль, адпаведны x</entry>
+        </row>
+
+        <row>
+          <entry>\0n</entry>
+
+          <entry>Сымбаль з васьмічным значэньнем 0n (0 &lt;= n &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\0nn</entry>
+
+          <entry>Сымбаль з васьмічным значэньнем 0nn (0 &lt;= n &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\0mnn</entry>
+
+          <entry>Сымбаль з васьмічным значэньнем 0mnn (0 &lt;= m &lt;= 3, 0 &lt;= n &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\xhh</entry>
+
+          <entry>Сымбаль з шаснаццатковым значэньнем 0xhh</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Рэгулярны выраз — цытаваньне</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Канструктыўны элемэнт</entry>
+
+          <entry align="left">… адпавядае наступнаму</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>\</entry>
+
+          <entry>Нічога, проста азначае наступны сымбаль. Гэта патрабуецца, каб увесьці літаральна адзін з мэта-сымбаляў !$()*+.&lt;&gt;?[\]^{|}.</entry>
+        </row>
+
+        <row>
+          <entry>\\</entry>
+
+          <entry>Напрыклад, гэта — сымбаль зваротнай косай рысы.</entry>
+        </row>
+
+        <row>
+          <entry>\Q</entry>
+
+          <entry>Нічога, проста азначае ўсе сымбалі да \E.</entry>
+        </row>
+
+        <row>
+          <entry>\E</entry>
+
+          <entry>Нічога, проста азначае канец цытаваньня, пачатага з \Q.</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Рэгулярны выраз — Клясы для блёкаў і катэгорыя Unicode</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Канструктыўны элемэнт</entry>
+
+          <entry align="left">… адпавядае наступнаму</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>\p{InGreek}</entry>
+
+          <entry>Сымбаль з грэцкага блёку (просты <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc">блёк</ulink>)</entry>
+        </row>
+
+        <row>
+          <entry>\p{Lu}</entry>
+
+          <entry>Сымбаль у верхнім рэгістры (простая <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc">катэгорыя</ulink>)</entry>
+        </row>
+
+        <row>
+          <entry>\p{Sc}</entry>
+
+          <entry>Сымбаль валюты</entry>
+        </row>
+
+        <row>
+          <entry>\P{InGreek}</entry>
+
+          <entry>Які заўгодна сымбаль ня з грэцкага блёку (адмаўленьне)</entry>
+        </row>
+
+        <row>
+          <entry>[\p{L}&amp;&amp;[^\p{Lu}]]</entry>
+
+          <entry>Якая заўгодна літара ня ў верхнім рэгістры (адыманьне)</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Рэгулярны выраз — Клясы сымбаляў</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Канструктыўны элемэнт</entry>
+
+          <entry align="left">… адпавядае наступнаму</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>[abc]</entry>
+
+          <entry>a, b або c (просты кляс)</entry>
+        </row>
+
+        <row>
+          <entry>[^abc]</entry>
+
+          <entry>Які заўгодна сымбаль апроч a, b або c (адмаўленьне)</entry>
+        </row>
+
+        <row>
+          <entry>[a-zA-Z]</entry>
+
+          <entry>Ад a да z або ад A да Z уключна (дыяпазон)</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Рэгулярны выраз — Вызначаныя клясы сымбаляў</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Канструктыўны элемэнт</entry>
+
+          <entry align="left">… адпавядае наступнаму</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>.</entry>
+
+          <entry>Які заўгодна сымбаль (апроч канцоў радкоў)</entry>
+        </row>
+
+        <row>
+          <entry>\d</entry>
+
+          <entry>Лічба: [0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\D</entry>
+
+          <entry>Ня лічба: [^0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\s</entry>
+
+          <entry>Прабельны сымбаль: [ \t\n\x0B\f\r]</entry>
+        </row>
+
+        <row>
+          <entry>\S</entry>
+
+          <entry>Непрабельны сымбаль: [^\s]</entry>
+        </row>
+
+        <row>
+          <entry>\w</entry>
+
+          <entry>Сымбаль у слове: [a-zA-Z_0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\W</entry>
+
+          <entry>Сымбаль ня ў слове: [^\w]</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Рэгулярны выраз — Вызначальнікі межаў</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Канструктыўны элемэнт</entry>
+
+          <entry align="left">… адпавядае наступнаму</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>^</entry>
+
+          <entry>Пачатак радка</entry>
+        </row>
+
+        <row>
+          <entry>$</entry>
+
+          <entry>Канец радка</entry>
+        </row>
+
+        <row>
+          <entry>\b</entry>
+
+          <entry>Мяжа слова</entry>
+        </row>
+
+        <row>
+          <entry>\B</entry>
+
+          <entry>Мяжа няслова</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Рэгулярны выраз — Прагныя квантары</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Канструктыўны элемэнт</entry>
+
+          <entry align="left">… адпавядае наступнаму</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>X<emphasis>?</emphasis></entry>
+
+          <entry>X, адзін раз або ніколі</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>*</emphasis></entry>
+
+          <entry>X, нуль або некалькі разоў</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>+</emphasis></entry>
+
+          <entry>X, адзін або некалькі разоў</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <note>
+    <para>прагныя квантары адпавядаюць як мага большай пасьлядоўнасьці. Напрыклад, для <emphasis>a+</emphasis> будзе адпаведнікам aaa у <emphasis>aaabbb</emphasis></para>
+  </note>
+
+  <table>
+    <title>Рэгулярны выраз — Няпрагныя квантары</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Канструктыўны элемэнт</entry>
+
+          <entry align="left">… адпавядае наступнаму</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>X??</entry>
+
+          <entry>X, адзін раз або ніколі</entry>
+        </row>
+
+        <row>
+          <entry>X*?</entry>
+
+          <entry>X, нуль або некалькі разоў</entry>
+        </row>
+
+        <row>
+          <entry>X+?</entry>
+
+          <entry>X, адзін або некалькі разоў</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <note>
+    <para>няпрагныя квантары адпавядаюць як мага меншай пасьлядоўнасьці. Напрыклад, для <emphasis>a+?</emphasis> будзе адпаведнікам першае <emphasis>a</emphasis> у пасьлядоўнасьці <emphasis>aaabbb</emphasis></para>
+  </note>
+
+  <table>
+    <title>Рэгулярны выраз — Лягічныя апэратары</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Канструктыўны элемэнт</entry>
+
+          <entry align="left">… адпавядае наступнаму</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>XY</entry>
+
+          <entry>X з Y за ім</entry>
+        </row>
+
+        <row>
+          <entry>X|Y</entry>
+
+          <entry>Або X, або Y</entry>
+        </row>
+
+        <row>
+          <entry>(XY)</entry>
+
+          <entry>XY як адзіная група</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section id="regex.tools.and.examples.of.use">
+    <title><indexterm class="singular">
+        <primary>Рэгулярныя выразы</primary> <secondary>Інструмэнты</secondary>
+      </indexterm>Рэгулярныя выразы і прыклады ўжываньня<indexterm class="singular">
+        <primary>Рэгулярныя выразы</primary> <secondary>Прыклады ўжываньня</secondary>
+      </indexterm></title>
+
+    <para>Для тэставаньня рэгулярных выразаў можна скарыстацца з шэрагу інтэрактыўных інструмэнтаў. Яны звычайна працуюць аднолькавым чынам (для прыкладу ўзяты Regular Expression Tester, гл. ніжэй): з рэгулярным выразам (верхні элемэнт) аналізуецца шуканы тэкст (тэкставае поле ў сярэдзіне), знаходзяцца нейкія адпаведнікі, вынікі паказваюцца ў полі выніковага тэксту.</para>
+
+    <figure id="regerx.tester">
+      <title>Regex Tester</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/RegexTester.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/RegexTester.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Вэрсіі аўтаномнага інструмэнта для Windows, Linux, FreeBSD: гл. <ulink url="http://weitz.de/regex-coach/">The Regex Coach</ulink>. Гэта амаль тое самае, што і ў прыкладзе вышэй.</para>
+
+    <para>Добры збор карысных прыкладаў рэгулярных выразаў можна ўзяць з самой <application>OmegaT</application> (гл. Налады → Сэгмэнтаваньне). Наступны сьпіс уключае выразы, карысныя для пошукаў у памяці перакладаў:</para>
+
+    <table>
+      <title>Regex — Прыклады рэгулярных выразаў у перакладах</title>
+
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <thead>
+          <row>
+            <entry>Рэгулярны выраз</entry>
+
+            <entry>Знойдзецца наступнае:</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>(\b\w+\b)\s\1\b</entry>
+
+            <entry>паўтор словаў</entry>
+          </row>
+
+          <row>
+            <entry>[\.,]\s*[\.,]+</entry>
+
+            <entry>коска або кропка, затым прабелы і яшчэ адна коска або кропка</entry>
+          </row>
+
+          <row>
+            <entry>\. \s+$</entry>
+
+            <entry>лішнія прабелы пасьля кропкі ў канцы радка</entry>
+          </row>
+
+          <row>
+            <entry>\s+a\s+[aeiou]</entry>
+
+            <entry>Для ангельскай мовы: перад словамі, якія пачынаюцца з галосных, звычайна павінна стаяць “an”, а ня “a”</entry>
+          </row>
+
+          <row>
+            <entry>\s+an\s+[^aeiou]</entry>
+
+            <entry>Для ангельскай мовы: праверка, падобная на апісаную вышэй, але для зычных (“a”, а ня “an”)</entry>
+          </row>
+
+          <row>
+            <entry>\s{2,}</entry>
+
+            <entry>адзін або некалькі прабелаў</entry>
+          </row>
+
+          <row>
+            <entry>\.[A-Z]</entry>
+
+            <entry>Кропка, за ёй літара ў верхнім рэгістры — магчыма, прапушчаны прабел паміж кропкай і пачаткам новага сказу?</entry>
+          </row>
+
+          <row>
+            <entry>\bis\b</entry>
+
+            <entry>пошук “is”, але ня “this” або “isn't” і да г. п.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+</chapter>

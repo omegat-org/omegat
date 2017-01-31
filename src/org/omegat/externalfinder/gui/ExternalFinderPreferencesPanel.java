@@ -48,6 +48,8 @@ public class ExternalFinderPreferencesPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        globalOptionsPanel = new javax.swing.JPanel();
+        projectSpecificCommandsCheckBox = new javax.swing.JCheckBox();
         jPanel5 = new javax.swing.JPanel();
         priorityPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -68,6 +70,11 @@ public class ExternalFinderPreferencesPanel extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
+        globalOptionsPanel.setLayout(new javax.swing.BoxLayout(globalOptionsPanel, javax.swing.BoxLayout.PAGE_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(projectSpecificCommandsCheckBox, OStrings.getString("PREFS_EXTERNALFINDER_PROJECT_COMMANDS_ENABLED")); // NOI18N
+        globalOptionsPanel.add(projectSpecificCommandsCheckBox);
+
         jPanel5.setAlignmentX(0.0F);
         jPanel5.setLayout(new java.awt.BorderLayout());
 
@@ -79,12 +86,14 @@ public class ExternalFinderPreferencesPanel extends javax.swing.JPanel {
         priorityPanel.add(jLabel1);
         priorityPanel.add(filler1);
 
-        prioritySpinner.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(50)));
+        prioritySpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 50));
         priorityPanel.add(prioritySpinner);
 
         jPanel5.add(priorityPanel, java.awt.BorderLayout.WEST);
 
-        add(jPanel5);
+        globalOptionsPanel.add(jPanel5);
+
+        add(globalOptionsPanel);
         add(filler3);
 
         jPanel2.setAlignmentX(0.0F);
@@ -129,6 +138,7 @@ public class ExternalFinderPreferencesPanel extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
+    javax.swing.JPanel globalOptionsPanel;
     javax.swing.JTable itemTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -139,6 +149,7 @@ public class ExternalFinderPreferencesPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     javax.swing.JPanel priorityPanel;
     javax.swing.JSpinner prioritySpinner;
+    javax.swing.JCheckBox projectSpecificCommandsCheckBox;
     javax.swing.JButton removeButton;
     // End of variables declaration//GEN-END:variables
 }

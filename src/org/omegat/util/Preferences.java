@@ -461,6 +461,9 @@ public class Preferences {
     public static final String ISSUE_PROVIDERS_DISABLED = "issue_providers_disabled";
     public static final String ISSUE_PROVIDERS_DONT_ASK = "issue_providers_dont_ask";
 
+    /** External Finder */
+    public static final String EXTERNAL_FINDER_ALLOW_PROJECT_COMMANDS = "external_finder_allow_project_commands";
+
     /** Private constructor, because this file is singleton */
     private Preferences() {
     }

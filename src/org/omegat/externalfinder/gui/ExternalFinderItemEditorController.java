@@ -40,6 +40,7 @@ import javax.swing.table.AbstractTableModel;
 
 import org.omegat.externalfinder.item.ExternalFinderItem;
 import org.omegat.externalfinder.item.ExternalFinderItem.ENCODING;
+import org.omegat.externalfinder.item.ExternalFinderItem.SCOPE;
 import org.omegat.externalfinder.item.ExternalFinderItem.TARGET;
 import org.omegat.externalfinder.item.ExternalFinderItemCommand;
 import org.omegat.externalfinder.item.ExternalFinderItemURL;
@@ -61,8 +62,8 @@ public class ExternalFinderItemEditorController {
     private final ExternalFinderItem.Builder builder;
     private boolean userDidConfirm;
 
-    public ExternalFinderItemEditorController() {
-        this(new ExternalFinderItem.Builder());
+    public ExternalFinderItemEditorController(SCOPE scope) {
+        this(new ExternalFinderItem.Builder().setScope(scope));
     }
 
     public ExternalFinderItemEditorController(ExternalFinderItem item) {

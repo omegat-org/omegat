@@ -49,6 +49,7 @@ import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.externalfinder.item.ExternalFinderConfiguration;
 import org.omegat.externalfinder.item.ExternalFinderItem;
+import org.omegat.externalfinder.item.ExternalFinderItem.SCOPE;
 import org.omegat.externalfinder.item.ExternalFinderItemMenuGenerator;
 import org.omegat.externalfinder.item.ExternalFinderItemPopupMenuConstructor;
 import org.omegat.externalfinder.item.ExternalFinderXMLLoader;
@@ -174,7 +175,7 @@ public class ExternalFinder {
         if (GLOBAL_CONFIG == null) {
             try {
                 File globalFile = getGlobalConfigFile();
-                IExternalFinderItemLoader userItemLoader = new ExternalFinderXMLLoader(globalFile);
+                IExternalFinderItemLoader userItemLoader = new ExternalFinderXMLLoader(globalFile, SCOPE.GLOBAL);
                 GLOBAL_CONFIG = userItemLoader.load();
             } catch (FileNotFoundException e) {
                 // Ignore
@@ -221,7 +222,7 @@ public class ExternalFinder {
         if (PROJECT_CONFIG == null) {
             // load project's xml file
             File projectFile = getProjectFile(currentProject);
-            IExternalFinderItemLoader projectItemLoader = new ExternalFinderXMLLoader(projectFile);
+            IExternalFinderItemLoader projectItemLoader = new ExternalFinderXMLLoader(projectFile, SCOPE.PROJECT);
             try {
                 PROJECT_CONFIG = projectItemLoader.load();
             } catch (FileNotFoundException e) {

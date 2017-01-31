@@ -40,7 +40,9 @@ import javax.swing.JOptionPane;
 
 import org.omegat.core.Core;
 import org.omegat.externalfinder.ExternalFinder;
+import org.omegat.externalfinder.item.ExternalFinderItem.SCOPE;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.openide.awt.Mnemonics;
 
 public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuGenerator {
@@ -90,12 +92,14 @@ public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuG
 
     private static class ExternalFinderItemActionListener implements ActionListener {
 
+        private final SCOPE scope;
         private final List<ExternalFinderItemURL> URLs;
         private final List<ExternalFinderItemCommand> commands;
 
         public ExternalFinderItemActionListener(ExternalFinderItem finderItem) {
             this.URLs = finderItem.getURLs();
             this.commands = finderItem.getCommands();
+            this.scope = finderItem.getScope();
         }
 
         public void actionPerformed(ActionEvent e) {
@@ -137,7 +141,13 @@ public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuG
                                 || (!isASCII && (command.getTarget() == ExternalFinderItem.TARGET.ASCII_ONLY))) {
                             continue;
                         }
-
+                        if (scope == SCOPE.PROJECT
+                                && !Preferences.isPreference(Preferences.EXTERNAL_FINDER_ALLOW_PROJECT_COMMANDS)) {
+                            JOptionPane.showMessageDialog(FocusManager.getCurrentManager().getFocusedWindow(),
+                                    OStrings.getString("EXTERNALFINDER_PROJECT_COMMANDS_DISALLOWED_MESSAGE"),
+                                    OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
                         try {
                             Runtime.getRuntime().exec(command.generateCommand(targetWords));
                         } catch (Exception ex) {

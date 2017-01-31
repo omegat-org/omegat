@@ -70,11 +70,16 @@ public class ExternalFinderItem {
         }
     }
 
+    public enum SCOPE {
+        GLOBAL, PROJECT
+    }
+
     private final String name;
     private final List<ExternalFinderItemURL> urls;
     private final List<ExternalFinderItemCommand> commands;
     private final KeyStroke keystroke;
     private final boolean nopopup;
+    private final SCOPE scope;
 
     private ExternalFinderItem(Builder builder) {
         this.name = builder.name;
@@ -82,6 +87,7 @@ public class ExternalFinderItem {
         this.commands = builder.commands.isEmpty() ? Collections.emptyList() : new ArrayList<>(builder.commands);
         this.keystroke = builder.keystroke;
         this.nopopup = builder.nopopup;
+        this.scope = builder.scope;
     }
 
     public String getName() {
@@ -102,6 +108,10 @@ public class ExternalFinderItem {
 
     public boolean isNopopup() {
         return nopopup;
+    }
+
+    public SCOPE getScope() {
+        return scope;
     }
 
     public boolean isAsciiOnly() {
@@ -220,11 +230,12 @@ public class ExternalFinderItem {
         private List<ExternalFinderItemCommand> commands = new ArrayList<>();
         private KeyStroke keystroke;
         private boolean nopopup = false;
+        public SCOPE scope;
 
         public static Builder from(ExternalFinderItem item) {
             return new Builder().setName(item.getName()).setURLs(item.getURLs())
                     .setCommands(item.getCommands()).setKeyStroke(item.getKeystroke())
-                    .setNopopup(item.isNopopup());
+                    .setNopopup(item.isNopopup()).setScope(item.getScope());
         }
 
         /**
@@ -288,6 +299,15 @@ public class ExternalFinderItem {
             return nopopup;
         }
 
+        public Builder setScope(SCOPE scope) {
+            this.scope = scope;
+            return this;
+        }
+
+        public SCOPE getScope() {
+            return scope;
+        }
+
         public ExternalFinderItem build() throws ExternalFinderValidationException {
             validate();
             return new ExternalFinderItem(this);
@@ -303,6 +323,10 @@ public class ExternalFinderItem {
             if (!hasUrls && !hasCommands) {
                 throw new ExternalFinderValidationException(
                         OStrings.getString("EXTERNALFINDER_ITEM_ERROR_EMPTY", name));
+            }
+            if (scope == null) {
+                throw new ExternalFinderValidationException(
+                        OStrings.getString("EXTERNALFINDER_ITEM_ERROR_NOSCOPE"));
             }
         }
     }

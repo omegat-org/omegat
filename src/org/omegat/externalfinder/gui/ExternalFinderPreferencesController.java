@@ -41,8 +41,10 @@ import javax.swing.table.AbstractTableModel;
 import org.omegat.externalfinder.ExternalFinder;
 import org.omegat.externalfinder.item.ExternalFinderConfiguration;
 import org.omegat.externalfinder.item.ExternalFinderItem;
+import org.omegat.externalfinder.item.ExternalFinderItem.SCOPE;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TableColumnSizer;
 
@@ -100,11 +102,12 @@ public class ExternalFinderPreferencesController extends BasePreferencesControll
             }
         });
         TableColumnSizer.autoSize(panel.itemTable, ItemColumn.CONTENTS.index, true);
-        panel.priorityPanel.setVisible(!isProjectSpecific);
+        panel.globalOptionsPanel.setVisible(!isProjectSpecific);
     }
 
     private void addItem() {
-        ExternalFinderItemEditorController editor = new ExternalFinderItemEditorController();
+        SCOPE scope = isProjectSpecific ? SCOPE.PROJECT : SCOPE.GLOBAL;
+        ExternalFinderItemEditorController editor = new ExternalFinderItemEditorController(scope);
         if (editor.show(SwingUtilities.windowForComponent(panel))) {
             int row = panel.itemTable.getSelectedRow();
             ItemsTableModel model = (ItemsTableModel) panel.itemTable.getModel();
@@ -145,6 +148,8 @@ public class ExternalFinderPreferencesController extends BasePreferencesControll
     public void persist() {
         if (!isProjectSpecific) {
             ExternalFinder.setGlobalConfig(getResult());
+            Preferences.setPreference(Preferences.EXTERNAL_FINDER_ALLOW_PROJECT_COMMANDS,
+                    panel.projectSpecificCommandsCheckBox.isSelected());
         }
     }
 
@@ -160,6 +165,8 @@ public class ExternalFinderPreferencesController extends BasePreferencesControll
 
     @Override
     protected void initFromPrefs() {
+        panel.projectSpecificCommandsCheckBox
+                .setSelected(Preferences.isPreference(Preferences.EXTERNAL_FINDER_ALLOW_PROJECT_COMMANDS));
         panel.prioritySpinner.setValue(originalConfig.getPriority());
         ItemsTableModel model = new ItemsTableModel(originalConfig.getItems());
         panel.itemTable.setModel(model);

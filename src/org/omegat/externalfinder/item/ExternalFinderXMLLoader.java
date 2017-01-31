@@ -35,6 +35,7 @@ import javax.swing.KeyStroke;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.omegat.externalfinder.item.ExternalFinderItem.SCOPE;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -44,9 +45,11 @@ public class ExternalFinderXMLLoader implements IExternalFinderItemLoader {
     private static final Logger LOGGER = Logger.getLogger(ExternalFinderXMLLoader.class.getName());
 
     private final File file;
+    private final SCOPE scope;
 
-    public ExternalFinderXMLLoader(File file) {
+    public ExternalFinderXMLLoader(File file, SCOPE scope) {
         this.file = Objects.requireNonNull(file);
+        this.scope = scope;
     }
 
     @Override
@@ -105,13 +108,14 @@ public class ExternalFinderXMLLoader implements IExternalFinderItemLoader {
         return priority;
     }
 
-    private static ExternalFinderItem generateFinderItem(Node item) {
+    private ExternalFinderItem generateFinderItem(Node item) {
         if (!item.hasChildNodes()) {
             return null;
         }
         final NodeList childNodes = item.getChildNodes();
 
         ExternalFinderItem.Builder builder = new ExternalFinderItem.Builder();
+        builder.setScope(scope);
 
         // retrive popup
         if (item.hasAttributes()) {

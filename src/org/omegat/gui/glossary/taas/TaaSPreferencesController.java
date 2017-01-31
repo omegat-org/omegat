@@ -29,11 +29,11 @@ package org.omegat.gui.glossary.taas;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -72,9 +72,10 @@ public class TaaSPreferencesController extends BasePreferencesController {
         panel = new TaaSPreferencesPanel();
         panel.getKeyButton.addActionListener(e -> {
             try {
-                Desktop.getDesktop().browse(new URI(TAAS_KEY_URL));
-            } catch (IOException | URISyntaxException e1) {
-                // Ignore
+                Desktop.getDesktop().browse(URI.create(TAAS_KEY_URL));
+            } catch (IOException ex) {
+                JOptionPane.showConfirmDialog(panel, ex.getLocalizedMessage(),
+                        OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
             }
         });
         Timer timer = new Timer(500, e -> {

@@ -28,9 +28,9 @@ package org.omegat.gui.preferences.view;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
@@ -61,9 +61,11 @@ public class PluginsPreferencesController extends BasePreferencesController {
         panel = new PluginsPreferencesPanel();
         panel.browsePluginsButton.addActionListener(e -> {
             try {
-                Desktop.getDesktop().browse(new URI(PLUGINS_WIKI_URL));
-            } catch (IOException | URISyntaxException e1) {
-                // Ignore
+                Desktop.getDesktop().browse(URI.create(PLUGINS_WIKI_URL));
+            } catch (IOException ex) {
+                JOptionPane.showConfirmDialog(panel, ex.getLocalizedMessage(),
+                        OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+
             }
         });
     }

@@ -73,11 +73,7 @@ public class Help {
         String lang = detectHelpLanguage();
         URI uri = getHelpFileURI(lang, OConsts.HELP_HOME);
         if (uri == null) {
-            try {
-                uri = new URI(ONLINE_HELP_URL);
-            } catch (URISyntaxException ex) {
-                // Shouldn't happen
-            }
+            uri = URI.create(ONLINE_HELP_URL);
         }
         Desktop.getDesktop().browse(uri);
     }

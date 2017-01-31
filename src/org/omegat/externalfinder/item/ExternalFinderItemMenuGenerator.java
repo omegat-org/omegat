@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.FocusManager;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
@@ -125,7 +124,7 @@ public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuG
                         } catch (Exception ex) {
                             Logger.getLogger(ExternalFinderItemMenuGenerator.class.getName())
                                     .log(Level.SEVERE, null, ex);
-                            JOptionPane.showMessageDialog(FocusManager.getCurrentManager().getFocusedWindow(),
+                            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
                                     ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
                                     JOptionPane.ERROR_MESSAGE);
                         }
@@ -143,7 +142,7 @@ public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuG
                         }
                         if (scope == SCOPE.PROJECT
                                 && !Preferences.isPreference(Preferences.EXTERNAL_FINDER_ALLOW_PROJECT_COMMANDS)) {
-                            JOptionPane.showMessageDialog(FocusManager.getCurrentManager().getFocusedWindow(),
+                            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
                                     OStrings.getString("EXTERNALFINDER_PROJECT_COMMANDS_DISALLOWED_MESSAGE"),
                                     OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                             return;
@@ -153,7 +152,7 @@ public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuG
                         } catch (Exception ex) {
                             Logger.getLogger(ExternalFinderItemMenuGenerator.class.getName())
                                     .log(Level.SEVERE, null, ex);
-                            JOptionPane.showMessageDialog(FocusManager.getCurrentManager().getFocusedWindow(),
+                            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
                                     ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
                                     JOptionPane.ERROR_MESSAGE);
                         }

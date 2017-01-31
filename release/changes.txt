@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.1
 ----------------------------------------------------------------------
-  4 Enhancements
+  5  Enhancements
   0 Bug fix
   7 Localisation updates
 ----------------------------------------------------------------------
@@ -17,6 +17,9 @@
 
   - Support new Azure-based Microsoft Translator API for MT
   https://sourceforge.net/p/omegat/feature-requests/1280/
+
+  - Disable project-specific external search commands by default
+  https://sourceforge.net/p/omegat/feature-requests/1304/
 
   Other changes:
 

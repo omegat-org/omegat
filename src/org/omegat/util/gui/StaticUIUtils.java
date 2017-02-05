@@ -32,6 +32,7 @@ import java.awt.Component;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.Window;
@@ -355,7 +356,13 @@ public class StaticUIUtils {
     }
 
     public static void setWindowIcon(Window window) {
-        window.setIconImages(Arrays.asList(ResourcesUtil.APP_ICON_16X16, ResourcesUtil.APP_ICON_32X32));
+        List<Image> icons;
+        if (Platform.isMacOSX()) {
+            icons = Arrays.asList(OSXIntegration.APP_ICON_MAC);
+        } else {
+            icons = Arrays.asList(ResourcesUtil.APP_ICON_16X16, ResourcesUtil.APP_ICON_32X32);
+        }
+        window.setIconImages(icons);
     }
 
     /**

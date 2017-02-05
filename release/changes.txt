@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.1
 ----------------------------------------------------------------------
-  5  Enhancements
-  0 Bug fix
+  5 Enhancements
+  1 Bug fix
   7 Localisation updates
 ----------------------------------------------------------------------
 4.1.1 vs 4.1.0
@@ -25,6 +25,11 @@
 
   - External Search menu items are split into nested submenus of 10 items to
 accommodate users with numerous item definitions.
+
+  Bug fixes:
+
+  - Wrong icon displayed when OmegaT is minimized in the OS X dock
+  https://sourceforge.net/p/omegat/bugs/850/
 
   Localisation Updates:
 

@@ -25,6 +25,7 @@
 
 package org.omegat.util.gui;
 
+import java.awt.Image;
 import java.awt.Window;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -54,6 +55,8 @@ import org.omegat.util.StaticUtils;
  */
 public class OSXIntegration {
     
+    public static Image APP_ICON_MAC;
+
     private static volatile Class<?> appClass;
     private static volatile Object app;
 
@@ -65,6 +68,12 @@ public class OSXIntegration {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", "OmegaT");
             
+            APP_ICON_MAC = ResourcesUtil.getBundledImage("OmegaT_mac.png");
+
+            // Set dock icon
+            Method setDockIconImage = getAppClass().getDeclaredMethod("setDockIconImage", Image.class);
+            setDockIconImage.invoke(getApp(), APP_ICON_MAC);
+
             // Set quit strategy:
             //   app.setQuitStrategy(com.apple.eawt.QuitStrategy.CLOSE_ALL_WINDOWS);
             Class<?> strategyClass = Class.forName("com.apple.eawt.QuitStrategy");

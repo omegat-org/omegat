@@ -51,6 +51,8 @@ import org.omegat.util.Platform;
 import com.vlsolutions.swing.docking.AutoHidePolicy;
 import com.vlsolutions.swing.docking.AutoHidePolicy.ExpandMode;
 import com.vlsolutions.swing.docking.DockableContainerFactory;
+import com.vlsolutions.swing.docking.DockableState;
+import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.ui.DockingUISettings;
 
 /**
@@ -380,6 +382,19 @@ public class DockingUI {
             if (menu.getComponent(i) instanceof JSeparator && menu.getComponent(i + 1) instanceof JSeparator) {
                 // remove duplicate separators
                 menu.remove(i);
+            }
+        }
+    }
+
+    /**
+     * Ensure that any "closed" Dockables are made visible.
+     */
+    public static void ensureDockablesVisible(DockingDesktop desktop) {
+        for (DockableState state : desktop.getDockables()) {
+            if (state.isClosed()) {
+                // VLDocking says this is how you re-show a closed Dockable,
+                // but it prints a stack trace. So just ignore it?
+                desktop.addDockable(state.getDockable());
             }
         }
     }

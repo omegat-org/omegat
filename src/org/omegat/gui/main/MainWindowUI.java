@@ -260,6 +260,11 @@ public class MainWindowUI {
         StaticUIUtils.persistGeometry(mainWindow, Preferences.MAINWINDOW_GEOMETRY_PREFIX);
 
         loadScreenLayoutFromPreferences(mainWindow);
+
+        // Ensure any "closed" Dockables are visible. These can be newly added
+        // panes not included in an older layout file, or e.g. panes installed by
+        // plugins.
+        DockingUI.ensureDockablesVisible(mainWindow.desktop);
     }
     
     /**

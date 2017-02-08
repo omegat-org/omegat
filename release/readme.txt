@@ -11,7 +11,7 @@ Prerequisites
 
 OmegaT requires the Java Runtime Environment (JRE) version 1.8 or higher to be installed on your system.
 
-We recommend to use OmegaT packages which include JRE, to save you the trouble of selecting, obtaining and installing it.
+We recommend using OmegaT packages that include the JRE, to save you the trouble of selecting, obtaining and installing it.
 
 
 Installing OmegaT (Windows)

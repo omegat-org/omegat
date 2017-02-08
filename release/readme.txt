@@ -23,7 +23,7 @@ Launch the installation program.
 Installing OmegaT (Mac)
 -----------------------
 
-Copy the OmegaT.zip archive to a suitable location and unpack it there to obtain a folder that contains an HTML documentation index file and OmegaT.app, the application file.
+Unpack the OmegaT .zip archive to obtain a folder that contains a documentation file and the OmegaT application. Move the folder to an appropriate location such as the Applications folder.
 
 
 Installing OmegaT (Linux)
@@ -69,9 +69,9 @@ If you can see the file OmegaT but not OmegaT.exe in your File Manager (Windows 
 Launching OmegaT (Mac)
 ----------------------
 
-Double-click on the file OmegaT.app.
+Double-click on the OmegaT application.
 
-You may drag OmegaT.app to your dock or to the tool bar of a Finder window to be able to launch it from any location. You can also call it in the Spotlight search field.
+You may drag the OmegaT application to your dock or to the tool bar of a Finder window to be able to launch it from any location. You can also launch it from the Spotlight search field.
 
 
 Launching OmegaT (Linux)

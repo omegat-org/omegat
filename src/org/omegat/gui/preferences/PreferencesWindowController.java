@@ -65,6 +65,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -544,8 +545,9 @@ public class PreferencesWindowController implements FurtherActionListener {
         innerPanel.clearButton.setEnabled(!isEmptyQuery);
         if (isEmptyQuery) {
             if (filterTree) {
-                setTreeVisible(root, true);
-                ((DefaultTreeModel) innerPanel.availablePrefsTree.getModel()).reload();
+                if (setTreeVisible(root, true)) {
+                    ((DefaultTreeModel) innerPanel.availablePrefsTree.getModel()).reload();
+                }
                 selectView(currentView);
             }
             overlay.setHighlightComponent(null);
@@ -604,9 +606,24 @@ public class PreferencesWindowController implements FurtherActionListener {
         innerPanel.availablePrefsTree.setSelectionPath(new TreePath(node.getPath()));
     }
 
-    private static void setTreeVisible(HideableNode root, boolean isVisible) {
-        walkTree(root, node -> ((HideableNode) node).setVisible(isVisible));
+    /**
+     * Set the visibility of the entire subtree starting at root.
+     * 
+     * @param root
+     *            Root node
+     * @param isVisible
+     *            Visible or not
+     * @return true if any of the nodes' visibility values were changed
+     */
+    private static boolean setTreeVisible(HideableNode root, boolean isVisible) {
+        List<Boolean> changes = walkTree(root, node -> {
+            HideableNode hideable = (HideableNode) node;
+            boolean wasVisible = hideable.isVisible;
+            hideable.setVisible(isVisible);
+            return wasVisible != isVisible;
+        });
         root.setVisible(true);
+        return changes.contains(true);
     }
 
     private static void setNodePathVisible(HideableNode node, boolean isVisible) {
@@ -672,6 +689,15 @@ public class PreferencesWindowController implements FurtherActionListener {
         }
     }
     
+    private static <T> List<T> walkTree(DefaultMutableTreeNode node,
+            Function<DefaultMutableTreeNode, T> function) {
+        List<T> results = new ArrayList<>();
+        walkTree(node, n -> {
+            results.add(function.apply(n));
+        });
+        return results;
+    }
+
     private static boolean anyInTree(DefaultMutableTreeNode node,
             Predicate<DefaultMutableTreeNode> predicate) {
         return firstNodeInTree(node, predicate).isPresent();

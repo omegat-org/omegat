@@ -59,7 +59,7 @@ public class PreferenceViewSelectorPanel extends javax.swing.JPanel {
         leftPanel = new javax.swing.JPanel();
         searchPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        searchTextField = new javax.swing.JTextField();
+        searchTextField = new org.omegat.util.gui.HintTextField();
         clearButton = new javax.swing.JButton();
         availablePrefsScrollPane = new javax.swing.JScrollPane();
         availablePrefsTree = new javax.swing.JTree();
@@ -159,7 +159,7 @@ public class PreferenceViewSelectorPanel extends javax.swing.JPanel {
     javax.swing.JSplitPane mainSplitPane;
     public javax.swing.JButton resetButton;
     private javax.swing.JPanel searchPanel;
-    javax.swing.JTextField searchTextField;
+    org.omegat.util.gui.HintTextField searchTextField;
     javax.swing.JPanel selectedPrefsPlaceholderPanel;
     javax.swing.JScrollPane selectedPrefsScrollPane;
     public javax.swing.JButton undoButton;

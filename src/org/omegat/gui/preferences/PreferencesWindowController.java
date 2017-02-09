@@ -210,8 +210,7 @@ public class PreferencesWindowController implements FurtherActionListener {
             }
         });
         innerPanel.clearButton.addActionListener(e -> {
-            innerPanel.searchTextField.setText(null);
-            innerPanel.searchTextField.requestFocusInWindow();
+            innerPanel.searchTextField.clear();
         });
         innerPanel.availablePrefsTree.getSelectionModel()
                 .setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
@@ -314,13 +313,15 @@ public class PreferencesWindowController implements FurtherActionListener {
                 innerPanel.searchTextField.selectAll();
             }
         });
-        inputMap.put(
-                KeyStroke.getKeyStroke(KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-                ACTION_KEY_NEW_SEARCH);
+        KeyStroke searchKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_F,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+        inputMap.put(searchKeyStroke, ACTION_KEY_NEW_SEARCH);
         actionMap.put(ACTION_KEY_CLEAR_OR_CLOSE, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (innerPanel.searchTextField.getDocument().getLength() > 0) {
+                if (!innerPanel.searchTextField.isEmpty()) {
+                    // Move focus away from search field
+                    innerPanel.availablePrefsTree.requestFocusInWindow();
                     innerPanel.clearButton.doClick();
                 } else {
                     StaticUIUtils.closeWindowByEvent(dialog);
@@ -338,6 +339,9 @@ public class PreferencesWindowController implements FurtherActionListener {
                 searchCurrentView();
             }
         });
+        
+        String searchKeyText = StaticUIUtils.getKeyStrokeText(searchKeyStroke);
+        innerPanel.searchTextField.setHintText(OStrings.getString("PREFERENCES_SEARCH_HINT", searchKeyText));
 
         // Set initial state
         searchAndFilterTree();
@@ -347,6 +351,8 @@ public class PreferencesWindowController implements FurtherActionListener {
 
         dialog.setPreferredSize(new Dimension(800, 500));
         dialog.pack();
+        // Prevent search field from getting initial focus
+        innerPanel.availablePrefsTree.requestFocusInWindow();
         dialog.setLocationRelativeTo(parent);
         dialog.setVisible(true);
     }
@@ -534,9 +540,9 @@ public class PreferencesWindowController implements FurtherActionListener {
     }
 
     private void incrementalSearchImpl(boolean filterTree, HideableNode root) {
-        String query = innerPanel.searchTextField.getText().trim();
-        innerPanel.clearButton.setEnabled(!query.isEmpty());
-        if (query.isEmpty()) {
+        boolean isEmptyQuery = innerPanel.searchTextField.isEmpty();
+        innerPanel.clearButton.setEnabled(!isEmptyQuery);
+        if (isEmptyQuery) {
             if (filterTree) {
                 setTreeVisible(root, true);
                 ((DefaultTreeModel) innerPanel.availablePrefsTree.getModel()).reload();
@@ -545,8 +551,9 @@ public class PreferencesWindowController implements FurtherActionListener {
             overlay.setHighlightComponent(null);
             return;
         }
+        String query = innerPanel.searchTextField.getText().trim();
         if (currentView != null && !currentView.validate()) {
-            innerPanel.searchTextField.setText(null);
+            innerPanel.searchTextField.clear();
             return;
         }
         Pattern pattern = Pattern.compile(".*" + Pattern.quote(query) + ".*",

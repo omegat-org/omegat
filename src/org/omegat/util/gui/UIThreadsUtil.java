@@ -26,6 +26,7 @@
 package org.omegat.util.gui;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,22 +52,18 @@ public class UIThreadsUtil {
         }
     }
 
-    private static class ResultHolder<T> {
-        T result;
-    }
-
     public static <T> T returnResultFromSwingThread(Supplier<T> s) {
         if (SwingUtilities.isEventDispatchThread()) {
             return s.get();
         } else {
-            ResultHolder<T> holder = new ResultHolder<>();
+            AtomicReference<T> reference = new AtomicReference<>();
             try {
-                SwingUtilities.invokeAndWait(() -> holder.result = s.get());
+                SwingUtilities.invokeAndWait(() -> reference.set(s.get()));
             } catch (InvocationTargetException | InterruptedException e) {
                 Logger.getLogger(StaticUIUtils.class.getName()).log(Level.WARNING, e.getLocalizedMessage(),
                         e);
             }
-            return holder.result;
+            return reference.get();
         }
     }
 

@@ -151,6 +151,7 @@ public class PreferencesWindowController implements FurtherActionListener {
     private PreferenceViewSelectorPanel innerPanel;
     private HighlightablePanel overlay;
     private IPreferencesController currentView;
+    private boolean didLoadGuis;
     private final Map<String, Runnable> persistenceRunnables = new HashMap<>();
 
     public void show(Window parent) {
@@ -208,6 +209,7 @@ public class PreferencesWindowController implements FurtherActionListener {
             public void focusGained(FocusEvent e) {
                 innerPanel.searchTextField.selectAll();
                 searchCurrentView();
+                preloadGuis();
             }
         });
         innerPanel.clearButton.addActionListener(e -> {
@@ -288,13 +290,6 @@ public class PreferencesWindowController implements FurtherActionListener {
                         selectView(initialSelection);
                     }
                 });
-                new SwingWorker<Void, Void>() {
-                    @Override
-                    protected Void doInBackground() throws Exception {
-                        preloadGuis();
-                        return null;
-                    }
-                }.execute();
             }
         });
         innerPanel.availablePrefsScrollPane.addComponentListener(new ComponentAdapter() {
@@ -721,6 +716,20 @@ public class PreferencesWindowController implements FurtherActionListener {
     }
 
     private void preloadGuis() {
+        if (didLoadGuis) {
+            return;
+        }
+        new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                preloadGuisImpl();
+                didLoadGuis = true;
+                return null;
+            }
+        }.execute();
+    }
+
+    private void preloadGuisImpl() {
         walkTree(getRoot(), node -> {
             IPreferencesController view = (IPreferencesController) node.getUserObject();
             if (view != null) {

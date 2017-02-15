@@ -85,59 +85,60 @@ public class OpenXMLFilter extends AbstractFilter {
          "|(page\\d+\\.xml)
         */
 
-        DOCUMENTS = "(document\\.xml)";
+        StringBuilder sb = new StringBuilder("(document\\.xml)");
 
         OpenXMLOptions options = new OpenXMLOptions(config);
 
         if (options.getTranslateComments()) {
-            DOCUMENTS += "|(comments\\.xml)";
+            sb.append("|(comments\\.xml)");
         }
         if (options.getTranslateFootnotes()) {
-            DOCUMENTS += "|(footnotes\\.xml)";
+            sb.append("|(footnotes\\.xml)");
         }
         if (options.getTranslateEndnotes()) {
-            DOCUMENTS += "|(endnotes\\.xml)";
+            sb.append("|(endnotes\\.xml)");
         }
         if (options.getTranslateHeaders()) {
-            DOCUMENTS += "|(header\\d+\\.xml)";
+            sb.append("|(header\\d+\\.xml)");
         }
         if (options.getTranslateFooters()) {
-            DOCUMENTS += "|(footer\\d+\\.xml)";
+            sb.append("|(footer\\d+\\.xml)");
         }
         if (options.getTranslateDocumentProperties()) {
-            DOCUMENTS += "|(core\\.xml)";
+            sb.append("|(core\\.xml)");
         }
-        DOCUMENTS += "|(sharedStrings\\.xml)";
+        sb.append("|(sharedStrings\\.xml)");
         if (options.getTranslateExcelComments()) {
-            DOCUMENTS += "|(comments\\d+\\.xml)";
+            sb.append("|(comments\\d+\\.xml)");
         }
-        DOCUMENTS += "|(slide\\d+\\.xml)";
+        sb.append("|(slide\\d+\\.xml)");
         if (options.getTranslateSlideMasters()) {
-            DOCUMENTS += "|(slideMaster\\d+\\.xml)";
+            sb.append("|(slideMaster\\d+\\.xml)");
         }
         if (options.getTranslateSlideLayouts()) {
-            DOCUMENTS += "|(slideLayout\\d+\\.xml)";
+            sb.append("|(slideLayout\\d+\\.xml)");
         }
         if (options.getTranslateSlideComments()) {
-            DOCUMENTS += "|(notesSlide\\d+\\.xml)";
+            sb.append("|(notesSlide\\d+\\.xml)");
         }
         if (options.getTranslateDiagrams()) {
-            DOCUMENTS += "|(data\\d+\\.xml)";
+            sb.append("|(data\\d+\\.xml)");
         }
         if (options.getTranslateCharts()) {
-            DOCUMENTS += "|(chart\\d+\\.xml)";
+            sb.append("|(chart\\d+\\.xml)");
         }
         if (options.getTranslateDrawings()) {
-            DOCUMENTS += "|(drawing\\d+\\.xml)";
+            sb.append("|(drawing\\d+\\.xml)");
         }
         if (options.getTranslateSheetNames()) {
-            DOCUMENTS += "|(workbook\\.xml)";
+            sb.append("|(workbook\\.xml)");
         }
         if (options.getTranslateSlideLinks()) {
-            DOCUMENTS += "|(slide\\d+\\.xml\\.rels)";
+            sb.append("|(slide\\d+\\.xml\\.rels)");
         }
-        DOCUMENTS += "|(page\\d+\\.xml)";       
-        
+        sb.append("|(page\\d+\\.xml)");
+        DOCUMENTS = sb.toString();
+
         TRANSLATABLE = Pattern.compile(DOCUMENTS);
     }
 

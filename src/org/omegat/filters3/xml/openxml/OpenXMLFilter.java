@@ -172,10 +172,8 @@ public class OpenXMLFilter extends AbstractFilter {
         return false;
     }
 
-    OpenXMLXMLFilter xmlfilter = null;
-
     private OpenXMLXMLFilter createXMLFilter() {
-        xmlfilter = new OpenXMLXMLFilter();
+        OpenXMLXMLFilter xmlfilter = new OpenXMLXMLFilter();
         xmlfilter.setCallbacks(entryParseCallback, entryTranslateCallback);
         // Defining the actual dialect, because at this step
         // we have the options

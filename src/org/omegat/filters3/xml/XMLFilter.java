@@ -157,9 +157,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     @Override
     public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
             TranslationException {
-        BufferedReader inReader = null;
-        try {
-            inReader = createReader(inFile, fc.getInEncoding());
+        try (BufferedReader inReader = createReader(inFile, fc.getInEncoding())) {
             inEncodingLastParsedFile = this.encoding;
             targetLanguage = fc.getTargetLang();
             InputSource source = new InputSource(inReader);
@@ -173,10 +171,6 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
             throw new TranslationException(e);
         } catch (SAXException e) {
             throw new TranslationException(e);
-        } finally {
-            if (inReader != null) {
-                inReader.close();
-            }
         }
     }
     @Override

@@ -232,10 +232,8 @@ public class OpenXMLFilter extends AbstractFilter {
             // We also order files arbitrarily, to have, for instance
             // documents.xml before comments.xml
             Collections.sort(filelist, this::compareZipEntries);
-            Enumeration<? extends ZipEntry> zipcontents = Collections.enumeration(filelist);
 
-            while (zipcontents.hasMoreElements()) {
-                ZipEntry zipentry = zipcontents.nextElement();
+            for (ZipEntry zipentry : filelist) {
                 String shortname = removePath(zipentry.getName());
                 if (TRANSLATABLE.matcher(shortname).matches()) {
                     File tmpin = tmp();

@@ -34,7 +34,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
@@ -227,64 +226,13 @@ public class OpenXMLFilter extends AbstractFilter {
             zipout = new ZipOutputStream(new FileOutputStream(outFile));
         Enumeration<? extends ZipEntry> unsortedZipcontents = zipfile.entries();
         List<? extends ZipEntry> filelist = Collections.list(unsortedZipcontents);
-        Collections.sort(filelist, new Comparator<ZipEntry>() {
-            // Sort filenames, because zipfile.entries give a random order
-            // We use a simplified natural sort, to have slide1, slide2 ...
-            // slide10
-            // instead of slide1, slide10, slide 2
-            // We also order files arbitrarily, to have, for instance
-            // documents.xml before comments.xml
-            @Override
-            public int compare(ZipEntry z1, ZipEntry z2) {
-                String s1 = z1.getName();
-                String s2 = z2.getName();
-                String[] words1 = s1.split("\\d+\\.");
-                String[] words2 = s2.split("\\d+\\.");
-                // Digits at the end and same text
-                if ((words1.length > 1 && words2.length > 1) && // Digits
-                        (words1[0].equals(words2[0]))) {        // Same text
-                    int number1 = 0;
-                    int number2 = 0;
-                    Matcher getDigits = DIGITS.matcher(s1);
-                    if (getDigits.find())
-                        number1 = Integer.parseInt(getDigits.group(1));
-                    getDigits = DIGITS.matcher(s2);
-                    if (getDigits.find())
-                        number2 = Integer.parseInt(getDigits.group(1));
-                    if (number1 > number2)
-                        return 1;
-                    else if (number1 < number2)
-                        return -1;
-                    else
-                        return 0;
-                } else {
-                    String shortname1 = removePath(words1[0]);
-                    shortname1 = removeXML(shortname1);
-                    String shortname2 = removePath(words2[0]);
-                    shortname2 = removeXML(shortname2);
-
-                    // Specific case for Excel
-                    // because "comments" is present twice in DOCUMENTS
-                    if (shortname1.indexOf("sharedStrings") >= 0 || shortname2.indexOf("sharedStrings") >= 0) {
-                        if (shortname2.indexOf("sharedStrings") >= 0)
-                            return 1; // sharedStrings must be first
-                        else
-                            return -1;
-                    }
-
-                    int index1 = DOCUMENTS.indexOf(shortname1);
-                    int index2 = DOCUMENTS.indexOf(shortname2);
-
-                    if (index1 > index2)
-                        return 1;
-                    else if (index1 < index2)
-                        return -1;
-                    else { // Documents were not in DOCUMENTS, we keep the normal order
-                        return s1.compareTo(s2);
-                    }
-                }
-            }
-        });
+        // Sort filenames, because zipfile.entries give a random order
+        // We use a simplified natural sort, to have slide1, slide2 ...
+        // slide10
+        // instead of slide1, slide10, slide 2
+        // We also order files arbitrarily, to have, for instance
+        // documents.xml before comments.xml
+        Collections.sort(filelist, this::compareZipEntries);
         Enumeration<? extends ZipEntry> zipcontents = Collections.enumeration(filelist);
 
         while (zipcontents.hasMoreElements()) {
@@ -333,6 +281,60 @@ public class OpenXMLFilter extends AbstractFilter {
         if (zipout != null)
             zipout.close();
         zipfile.close();
+    }
+    
+    public int compareZipEntries(ZipEntry z1, ZipEntry z2) {
+        String s1 = z1.getName();
+        String s2 = z2.getName();
+        String[] words1 = s1.split("\\d+\\.");
+        String[] words2 = s2.split("\\d+\\.");
+        // Digits at the end and same text
+        if ((words1.length > 1 && words2.length > 1) && // Digits
+                (words1[0].equals(words2[0]))) { // Same text
+            int number1 = 0;
+            int number2 = 0;
+            Matcher getDigits = DIGITS.matcher(s1);
+            if (getDigits.find()) {
+                number1 = Integer.parseInt(getDigits.group(1));
+            }
+            getDigits = DIGITS.matcher(s2);
+            if (getDigits.find()) {
+                number2 = Integer.parseInt(getDigits.group(1));
+            }
+            if (number1 > number2) {
+                return 1;
+            } else if (number1 < number2) {
+                return -1;
+            } else {
+                return 0;
+            }
+        } else {
+            String shortname1 = removePath(words1[0]);
+            shortname1 = removeXML(shortname1);
+            String shortname2 = removePath(words2[0]);
+            shortname2 = removeXML(shortname2);
+
+            // Specific case for Excel
+            // because "comments" is present twice in DOCUMENTS
+            if (shortname1.indexOf("sharedStrings") >= 0 || shortname2.indexOf("sharedStrings") >= 0) {
+                if (shortname2.indexOf("sharedStrings") >= 0) {
+                    return 1; // sharedStrings must be first
+                } else {
+                    return -1;
+                }
+            }
+
+            int index1 = DOCUMENTS.indexOf(shortname1);
+            int index2 = DOCUMENTS.indexOf(shortname2);
+
+            if (index1 > index2) {
+                return 1;
+            } else if (index1 < index2) {
+                return -1;
+            } else { // Documents were not in DOCUMENTS, we keep the normal order
+                return s1.compareTo(s2);
+            }
+        }
     }
 
     /** Human-readable Open XML filter name. */

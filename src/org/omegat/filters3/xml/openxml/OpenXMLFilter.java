@@ -184,7 +184,7 @@ public class OpenXMLFilter extends AbstractFilter {
     }
 
     /** Returns a temporary file for Open XML. A nasty hack, to say polite way. */
-    private File tmp() throws IOException {
+    private static File tmp() throws IOException {
         return File.createTempFile("o-xml-temp", ".xml");
     }
 
@@ -192,7 +192,7 @@ public class OpenXMLFilter extends AbstractFilter {
      * @param fileName A filename with a path
      * @return A string without the path
      */
-    private String removePath(String fileName) {
+    private static String removePath(String fileName) {
         if (fileName.lastIndexOf('/') >= 0) {
             fileName = fileName.substring(fileName.lastIndexOf('/') + 1);
         }  else if (fileName.lastIndexOf('\\') >= 0) { // Some weird files may use a backslash
@@ -205,7 +205,7 @@ public class OpenXMLFilter extends AbstractFilter {
      * @param fileName A filename
      * @return The filename without an .xml extension if found in it
      */
-    private String removeXML(String fileName) {
+    private static String removeXML(String fileName) {
         if (fileName.endsWith(".xml"))
             fileName = fileName.substring(0, fileName.lastIndexOf(".xml"));
         return fileName;

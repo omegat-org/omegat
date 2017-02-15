@@ -81,7 +81,11 @@ import org.omegat.util.Token;
  */
 public class FindMatches {
 
-    private static final int PENALTY_FOR_FUZZY = 20;
+    /**
+    * According to gettext source code, PO fuzzies are created above 60%
+    * https://sourceforge.net/p/omegat/feature-requests/1258/
+    */ 
+    private static final int PENALTY_FOR_FUZZY = 40;
     private static final int PENALTY_FOR_REMOVED = 5;
     private static final int SUBSEGMENT_MATCH_THRESHOLD = 85;
 

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.1
 ----------------------------------------------------------------------
-  5 Enhancements
+  7 Enhancements
   1 Bug fix
   7 Localisation updates
 ----------------------------------------------------------------------
@@ -20,6 +20,9 @@
 
   - Disable project-specific external search commands by default
   https://sourceforge.net/p/omegat/feature-requests/1304/
+
+  - Change PO fuzzies default match % to 60% 
+  https://sourceforge.net/p/omegat/feature-requests/1258/
 
   Other changes:
 

@@ -33,6 +33,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
@@ -149,10 +150,9 @@ public class OpenXMLFilter extends AbstractFilter {
     /** Returns true if it's an Open XML file. */
     @Override
     public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext fc) {
-        try {
             defineDOCUMENTSOptions(config); // Define the documents to read
 
-            ZipFile file = new ZipFile(inFile);
+        try (ZipFile file = new ZipFile(inFile)) {
             Enumeration<? extends ZipEntry> entries = file.entries();
             while (entries.hasMoreElements()) {
                 ZipEntry entry = entries.nextElement();
@@ -160,11 +160,9 @@ public class OpenXMLFilter extends AbstractFilter {
                 shortname = removePath(shortname);
                 Matcher filematch = TRANSLATABLE.matcher(shortname);
                 if (filematch.matches()) {
-                    file.close();
                     return true;
                 }
             }
-            file.close();
         } catch (IOException e) {
         }
         return false;
@@ -220,67 +218,68 @@ public class OpenXMLFilter extends AbstractFilter {
             TranslationException {
         defineDOCUMENTSOptions(processOptions); // Define the documents to read
 
-        ZipFile zipfile = new ZipFile(inFile);
         ZipOutputStream zipout = null;
-        if (outFile != null)
-            zipout = new ZipOutputStream(new FileOutputStream(outFile));
-        Enumeration<? extends ZipEntry> unsortedZipcontents = zipfile.entries();
-        List<? extends ZipEntry> filelist = Collections.list(unsortedZipcontents);
-        // Sort filenames, because zipfile.entries give a random order
-        // We use a simplified natural sort, to have slide1, slide2 ...
-        // slide10
-        // instead of slide1, slide10, slide 2
-        // We also order files arbitrarily, to have, for instance
-        // documents.xml before comments.xml
-        Collections.sort(filelist, this::compareZipEntries);
-        Enumeration<? extends ZipEntry> zipcontents = Collections.enumeration(filelist);
+        try (ZipFile zipfile = new ZipFile(inFile)) {
+            if (outFile != null) {
+                zipout = new ZipOutputStream(new FileOutputStream(outFile));
+            }
+            Enumeration<? extends ZipEntry> unsortedZipcontents = zipfile.entries();
+            List<? extends ZipEntry> filelist = Collections.list(unsortedZipcontents);
+            // Sort filenames, because zipfile.entries give a random order
+            // We use a simplified natural sort, to have slide1, slide2 ...
+            // slide10
+            // instead of slide1, slide10, slide 2
+            // We also order files arbitrarily, to have, for instance
+            // documents.xml before comments.xml
+            Collections.sort(filelist, this::compareZipEntries);
+            Enumeration<? extends ZipEntry> zipcontents = Collections.enumeration(filelist);
 
-        while (zipcontents.hasMoreElements()) {
-            ZipEntry zipentry = zipcontents.nextElement();
-            String shortname = zipentry.getName();
-            shortname = removePath(shortname);
-            Matcher filematch = TRANSLATABLE.matcher(shortname);
-            if (filematch.matches()) {
-                File tmpin = tmp();
-                FileUtils.copyInputStreamToFile(zipfile.getInputStream(zipentry), tmpin);
-                File tmpout = null;
-                if (zipout != null)
-                    tmpout = tmp();
+            while (zipcontents.hasMoreElements()) {
+                ZipEntry zipentry = zipcontents.nextElement();
+                String shortname = removePath(zipentry.getName());
+                if (TRANSLATABLE.matcher(shortname).matches()) {
+                    File tmpin = tmp();
+                    FileUtils.copyInputStreamToFile(zipfile.getInputStream(zipentry), tmpin);
+                    File tmpout = null;
+                    if (zipout != null) {
+                        tmpout = tmp();
+                    }
+                    try {
+                        createXMLFilter().processFile(tmpin, tmpout, fc);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        throw new TranslationException(e.getLocalizedMessage() + "\n"
+                                + OStrings.getString("OpenXML_ERROR_IN_FILE") + inFile, e);
+                    }
 
-                try {
-                    createXMLFilter().processFile(tmpin, tmpout, fc);
-                } catch (Exception e) {
-                    zipfile.close();
-                    e.printStackTrace();
-                    throw new TranslationException(e.getLocalizedMessage() + "\n"
-                            + OStrings.getString("OpenXML_ERROR_IN_FILE") + inFile, e);
-                }
-
-                if (zipout != null) {
-                    ZipEntry outEntry = new ZipEntry(zipentry.getName());
-                    zipout.putNextEntry(outEntry);
-                    FileUtils.copyFile(tmpout, zipout);
-                    zipout.closeEntry();
-                }
-                if (!tmpin.delete())
-                    tmpin.deleteOnExit();
-                if (tmpout != null) {
-                    if (!tmpout.delete())
+                    if (zipout != null) {
+                        ZipEntry outEntry = new ZipEntry(zipentry.getName());
+                        zipout.putNextEntry(outEntry);
+                        FileUtils.copyFile(tmpout, zipout);
+                        zipout.closeEntry();
+                    }
+                    if (!tmpin.delete()) {
+                        tmpin.deleteOnExit();
+                    }
+                    if (tmpout != null && !tmpout.delete()) {
                         tmpout.deleteOnExit();
-                }
-            } else {
-                if (zipout != null) {
-                    ZipEntry outEntry = new ZipEntry(zipentry.getName());
-                    zipout.putNextEntry(outEntry);
-
-                    IOUtils.copy(zipfile.getInputStream(zipentry), zipout);
-                    zipout.closeEntry();
+                    }
+                } else {
+                    if (zipout != null) {
+                        ZipEntry outEntry = new ZipEntry(zipentry.getName());
+                        zipout.putNextEntry(outEntry);
+                        try (InputStream is = zipfile.getInputStream(zipentry)) {
+                            IOUtils.copy(is, zipout);
+                        }
+                        zipout.closeEntry();
+                    }
                 }
             }
+        } finally {
+            if (zipout != null) {
+                zipout.close();
+            }
         }
-        if (zipout != null)
-            zipout.close();
-        zipfile.close();
     }
     
     public int compareZipEntries(ZipEntry z1, ZipEntry z2) {

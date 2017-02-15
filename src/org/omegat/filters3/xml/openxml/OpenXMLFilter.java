@@ -38,6 +38,8 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
@@ -60,6 +62,7 @@ import org.omegat.util.OStrings;
  * @author Didier Briel
  */
 public class OpenXMLFilter extends AbstractFilter {
+    private static final Logger LOGGER = Logger.getLogger(OpenXMLFilter.class.getName());
     private String DOCUMENTS;
     private Pattern TRANSLATABLE;
     private static final Pattern DIGITS = Pattern.compile("(\\d+)\\.xml");
@@ -150,7 +153,7 @@ public class OpenXMLFilter extends AbstractFilter {
     /** Returns true if it's an Open XML file. */
     @Override
     public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext fc) {
-            defineDOCUMENTSOptions(config); // Define the documents to read
+        defineDOCUMENTSOptions(config); // Define the documents to read
 
         try (ZipFile file = new ZipFile(inFile)) {
             Enumeration<? extends ZipEntry> entries = file.entries();
@@ -164,6 +167,7 @@ public class OpenXMLFilter extends AbstractFilter {
                 }
             }
         } catch (IOException e) {
+            LOGGER.log(Level.FINE, e.getLocalizedMessage(), e);
         }
         return false;
     }
@@ -245,7 +249,7 @@ public class OpenXMLFilter extends AbstractFilter {
                     try {
                         createXMLFilter().processFile(tmpin, tmpout, fc);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        LOGGER.log(Level.SEVERE, e.getLocalizedMessage(), e);
                         throw new TranslationException(e.getLocalizedMessage() + "\n"
                                 + OStrings.getString("OpenXML_ERROR_IN_FILE") + inFile, e);
                     }

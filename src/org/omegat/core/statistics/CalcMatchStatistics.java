@@ -300,6 +300,9 @@ public class CalcMatchStatistics extends LongProcessThread {
         CACHE: for (NearString near : nears) {
             final Token[] candTokens = localFinder.tokenizeAll(near.source);
             int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator.get(), strTokensStem, candTokens);
+            if (near.fuzzyMark) {
+                newSimilarity -= localFinder.PENALTY_FOR_FUZZY;
+            }
             if (newSimilarity > maxSimilarity) {
                 maxSimilarity = newSimilarity;
                 if (newSimilarity >= 95) // enough to say that we are in row 2

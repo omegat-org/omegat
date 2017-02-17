@@ -2,7 +2,7 @@
  OmegaT 4.1.1
 ----------------------------------------------------------------------
   7 Enhancements
-  1 Bug fix
+  2 Bug fixes
   7 Localisation updates
 ----------------------------------------------------------------------
 4.1.1 vs 4.1.0
@@ -33,6 +33,9 @@ accommodate users with numerous item definitions.
 
   - Wrong icon displayed when OmegaT is minimized in the OS X dock
   https://sourceforge.net/p/omegat/bugs/850/
+
+  - PO fuzzy counted as 100% instead of 60% in match statistics 
+  https://sourceforge.net/p/omegat/bugs/827/
 
   Localisation Updates:
 

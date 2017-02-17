@@ -301,7 +301,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             final Token[] candTokens = localFinder.tokenizeAll(near.source);
             int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator.get(), strTokensStem, candTokens);
             if (near.fuzzyMark) {
-                newSimilarity -= localFinder.PENALTY_FOR_FUZZY;
+                newSimilarity -= FindMatches.PENALTY_FOR_FUZZY;
             }
             if (newSimilarity > maxSimilarity) {
                 maxSimilarity = newSimilarity;

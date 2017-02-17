@@ -321,7 +321,7 @@ could fail with duplicate numbers
  OmegaT 3.6.0 update 5
 ----------------------------------------------------------------------
   0 Enhancement
-  1 Bug fix
+  2 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
 3.6.0 update 5 vs 3.6.0 update 4
@@ -330,6 +330,9 @@ could fail with duplicate numbers
 
   - DocBook XML filter ignores some content
   https://sourceforge.net/p/omegat/bugs/844/
+
+  - XML Spreadsheet format: the OfficeDocumentSettings tag is not 
+ignored
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 4 (2016-10-22)

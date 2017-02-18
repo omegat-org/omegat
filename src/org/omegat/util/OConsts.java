@@ -68,6 +68,9 @@ public class OConsts {
     // Last changes
     public static final String LAST_CHANGES_FILE = "changes.txt";
 
+    // contributors
+    public static final String CONTRIBUTORS_FILE = "contributors.txt";
+
     // status file consts
     public static final String FILES_ORDER_FILENAME = "files_order.txt";
     public static final String STATUS_EXTENSION = "project_save.tmx";

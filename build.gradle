@@ -202,7 +202,7 @@ distributions {
             }
             from('release') {
                 into 'docs'
-                include 'changes.txt', 'doc-license.txt', 'OmegaT-license.txt'
+                include 'changes.txt', 'doc-license.txt', 'OmegaT-license.txt', 'contributors.txt'
             }
             from('scripts') {
                 into 'scripts'

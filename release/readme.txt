@@ -162,53 +162,15 @@ Didier Briel is the OmegaT project manager.
 Previous contributors include:
 (alphabetical order)
 
-Code has been contributed by
-  Lev Abashkin
-  Zoltan Bartko
-  Volker Berlin
-  Didier Briel
-  Kim Bruning
-  Alex Buloichik (lead developer)
-  Sandra Jean Chua
-  Thomas Cordonnier
-  Enrique Estévez Fernández
-  Martin Fleurke
-  Wildrich Fourie
-  Tony Graham
-  Phillip Hall
-  Jean-Christophe Helary
-  Chihiro Hio
-  Thomas Huriaux
-  Hans-Peter Jacobs
-  Kyle Katarn
-  Piotr Kulik
-  Ibai Lakunza Velasco
-  Guido Leenders
-  Aaron Madlon-Kay (integration manager)
-  Fabián Mandelbaum
-  Manfred Martin
-  Adiel Mittmann
-  Hiroshi Miura
-  John Moran
-  Maxym Mykhalchuk
-  Arno Peters
-  Henry Pijffers
-  Briac Pilpré
-  Tiago Saboga
-  Andrzej Sawuła
-  Benjamin Siband
-  Yu Tang
-  Rashid Umarov
-  Antonio Vilei
-  Ilia Vinogradov
-  Martin Wunderlich
-  Michael Zakharov
+Contributions to the code are documented in contributors.txt.
 
 Other contributions by
+  Vincent Bidaux (documentation manager)
+  Alex Buloichik (lead developer)
   Sabine Cretella
   Dmitri Gabinski
   Jean-Christophe Helary (localization manager)
-  Vincent Bidaux (documentation manager)
+  Aaron Madlon-Kay (integration manager)
   Samuel Murray
   Marc Prior (webmaster)
   and many, many more very helpful people

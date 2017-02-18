@@ -26,10 +26,16 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.Frame;
+import java.io.IOException;
+import java.net.URI;
+import java.nio.charset.StandardCharsets;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 
+import org.apache.commons.io.IOUtils;
+import org.omegat.help.Help;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.StringUtil;
@@ -58,8 +64,8 @@ public class AboutDialog extends JDialog {
         initComponents();
 
         StaticUIUtils.setCaretUpdateEnabled(abouttext, false);
-        abouttext.setText(StringUtil.format(OStrings.getString("ABOUTDIALOG_CONTRIBUTORS"),
-                OStrings.getString("ABOUTDIALOG_CONTRIBUTOR_NAMES"), OStrings.getString("ABOUTDIALOG_LIBRARIES")));
+        abouttext.setText(StringUtil.format(OStrings.getString("ABOUTDIALOG_CONTRIBUTORS"), getContributors(),
+                OStrings.getString("ABOUTDIALOG_LIBRARIES")));
 
         versionLabel.setText(getVersionString());
 
@@ -78,6 +84,39 @@ public class AboutDialog extends JDialog {
 
         StaticUIUtils.fitInScreen(this);
         setLocationRelativeTo(parent);
+    }
+
+    private static String getContributors() {
+        URI contributorsUri = Help.getHelpFileURI(OConsts.CONTRIBUTORS_FILE);
+        String result = OStrings.getString("ABOUTDIALOG_CONTRIBUTORS_UNAVAILABLE");
+        if (contributorsUri != null) {
+            try {
+                result = IOUtils.toString(contributorsUri, StandardCharsets.UTF_8);
+                result = wrap(result, 78).replaceAll("(?m)^", "  ");
+            } catch (IOException e) {
+                // Ignore
+            }
+        }
+        return result;
+    }
+
+    private static String wrap(String text, int length) {
+        StringBuilder sb = new StringBuilder();
+        for (String line : text.split("\\n")) {
+            if (sb.length() > 0) {
+                sb.append(',');
+            }
+            for (String token : line.split("\\s")) {
+                if (sb.length() + 1 + token.length() - sb.lastIndexOf("\n") > length) {
+                    sb.append('\n');
+                }
+                if (sb.length() > 0 && sb.charAt(sb.length() - 1) != '\n') {
+                    sb.append(' ');
+                }
+                sb.append(token);
+            }
+        }
+        return sb.toString();
     }
 
     private String getVersionString() {

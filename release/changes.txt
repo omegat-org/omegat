@@ -320,11 +320,16 @@ could fail with duplicate numbers
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 5
 ----------------------------------------------------------------------
-  0 Enhancement
+  1 Enhancement
   2 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
 3.6.0 update 5 vs 3.6.0 update 4
+
+  Implemented requests:
+
+  - Make OmegaT available via Homebrew on macOS 
+  https://sourceforge.net/p/omegat/feature-requests/1305/
 
   Bug fixes:
 

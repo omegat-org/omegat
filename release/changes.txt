@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   7 Enhancements
   2 Bug fixes
-  7 Localisation updates
+  8 Localisation updates
 ----------------------------------------------------------------------
 4.1.1 vs 4.1.0
 
@@ -46,6 +46,7 @@ accommodate users with numerous item definitions.
   - Brazilian Portuguese updated to 3.6 (UI, documentation, scripts, readme)
   - Spanish localisation updated to 4.0.0 (UI, tutorial)
   - Traditional Chinese (TW) localisation updated to 4.0 (UI)
+  - Japanese localisation updated to 4.1 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 4.1.0 (2017-01-09)

@@ -59,6 +59,7 @@ public class IssueProvidersSelectorPanel extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
+        jTextArea1.setEditable(false);
         jTextArea1.setFont(dontAskCheckBox.getFont());
         jTextArea1.setLineWrap(true);
         jTextArea1.setText(OStrings.getString("ISSUE_PROVIDERS_SELECTOR_MESSAGE")); // NOI18N

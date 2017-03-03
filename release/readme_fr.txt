@@ -137,53 +137,15 @@ Didier Briel est le responsable du projet OmegaT.
 Les personnes qui ont contribué incluent :
 (ordre alphabétique)
 
-Contributions au code :
-  Lev Abashkin
-  Zoltan Bartko
-  Volker Berlin
-  Didier Briel
-  Kim Bruning
-  Alex Buloichik (développeur principal)
-  Sandra Jean Chua
-  Thomas Cordonnier
-  Enrique Estévez Fernández
-  Martin Fleurke
-  Wildrich Fourie
-  Tony Graham
-  Phillip Hall
-  Jean-Christophe Helary
-  Chihiro Hio
-  Thomas Huriaux
-  Hans-Peter Jacobs
-  Kyle Katarn
-  Piotr Kulik
-  Ibai Lakunza Velasco
-  Guido Leenders
-  Aaron Madlon-Kay (responsable de l'intégration)
-  Fabián Mandelbaum
-  Manfred Martin
-  Adiel Mittmann
-  Hiroshi Miura
-  John Moran
-  Maxym Mykhalchuk
-  Arno Peters
-  Henry Pijffers
-  Briac Pilpré
-  Tiago Saboga
-  Andrzej Sawuła
-  Benjamin Siband
-  Yu Tang
-  Rashid Umarov
-  Antonio Vilei
-  Ilia Vinogradov
-  Martin Wunderlich
-  Michael Zakharov
+Les contributions au code sont documentés dans contributors.txt.
 
 Autres contributions par :
+  Vincent Bidaux (responsable documentation)
+  Alex Buloichik (développeur principal)
   Sabine Cretella
   Dmitri Gabinski
   Jean-Christophe Helary (responsable localisations)
-  Vincent Bidaux (responsable documentation)
+  Aaron Madlon-Kay (responsable de l'intégration)
   Samuel Murray
   Marc Prior (webmestre)
   ainsi que beaucoup d'autres personnes.

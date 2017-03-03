@@ -16,7 +16,7 @@ Licensing information
 OmegaT is available under the terms of the GNU General Public License as
 published by the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version. You can find the text of the license in
-OmegaT-license.txt.
+/docs/OmegaT-license.txt.
 
 OmegaT uses a number of librairies. The license of each library is mentionned
 in /lib/licenses/Licenses.txt.
@@ -162,7 +162,7 @@ Didier Briel is the OmegaT project manager.
 Previous contributors include:
 (alphabetical order)
 
-Contributions to the code are documented in contributors.txt.
+Contributions to the code are documented in /docs/contributors.txt.
 
 Other contributions by
   Vincent Bidaux (documentation manager)

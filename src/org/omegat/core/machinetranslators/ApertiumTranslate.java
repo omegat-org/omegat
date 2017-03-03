@@ -27,10 +27,11 @@ package org.omegat.core.machinetranslators;
 
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Map;
 
+import org.omegat.util.JsonParser;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -41,15 +42,9 @@ import org.omegat.util.WikiGet;
  * @author Didier Briel
  */
 public class ApertiumTranslate extends BaseTranslate {
-    protected static String GT_URL = "http://api.apertium.org/json/translate?q=";
+    protected static String GT_URL = "https://www.apertium.org/apy/translate?q=";
     // Specific OmegaT key
-    protected static String GT_URL2 = "&markUnknown=no&format=omegat&langpair=#sourceLang#|#targetLang#&key=bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
-    protected static String MARK_BEG = "{\"translatedText\":\"";
-    protected static String MARK_END = "\"}";
-    protected static Pattern RE_UNICODE = Pattern.compile("\\\\u([0-9A-Fa-f]{4})");
-    protected static Pattern RE_HTML = Pattern.compile("&#([0-9]+);");
-    protected static Pattern RE_DETAILS = Pattern.compile("\"responseDetails\":\"([^\"]+)");
-    protected static Pattern RE_STATUS = Pattern.compile("\"responseStatus\":([0-9]+)");
+    protected static String GT_URL2 = "&markUnknown=no&langpair=#sourceLang#|#targetLang#&key=bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
 
     @Override
     protected String getPreferenceName() {
@@ -105,48 +100,40 @@ public class ApertiumTranslate extends BaseTranslate {
             return e.getLocalizedMessage();
         }
 
-        while (true) {
-            Matcher m = RE_UNICODE.matcher(v);
-            if (!m.find()) {
-                break;
-            }
-            String g = m.group();
-            char c = (char) Integer.parseInt(m.group(1), 16);
-            v = v.replace(g, Character.toString(c));
-        }
-        v = v.replace("&quot;", "&#34;");
-        v = v.replace("&nbsp;", "&#160;");
-        v = v.replace("&amp;", "&#38;");
-        v = v.replace("\\\"", "\"");
-        while (true) {
-            Matcher m = RE_HTML.matcher(v);
-            if (!m.find()) {
-                break;
-            }
-            String g = m.group();
-            char c = (char) Integer.parseInt(m.group(1));
-            v = v.replace(g, Character.toString(c));
-        }
-
-        int beg = v.indexOf(MARK_BEG) + MARK_BEG.length();
-        int end = v.indexOf(MARK_END, beg);
-        if (end < 0) {
-            //no translation found. e.g. {"responseData":{"translatedText":null},"responseDetails":"Not supported pair","responseStatus":451}
-            Matcher m = RE_DETAILS.matcher(v);
-            if (!m.find()) {
-                return "";
-            }
-            String details = m.group(1);
-            String code = "";
-            m = RE_STATUS.matcher(v);
-            if (m.find()) {
-                code = m.group(1);
-            }
-            return StringUtil.format(OStrings.getString("APERTIUM_ERROR"), code, details);
-        }
-        String tr = v.substring(beg, end - 2); // Remove \n
+        String tr = getJsonResults(v);
 
         putToCache(sLang, tLang, trText, tr);
+        return tr;
+    }
+
+    @SuppressWarnings("unchecked")
+    protected String getJsonResults(String json) {
+        Map<String, Object> rootNode;
+        try {
+            rootNode = (Map<String, Object>) JsonParser.parse(json);
+        } catch (Exception e) {
+            Log.logErrorRB(e, "MT_JSON_ERROR");
+            return OStrings.getString("MT_JSON_ERROR");
+        }
+
+        Integer code = 0;
+        String tr = null;
+        if (rootNode.containsKey("responseStatus")) {
+            code = (Integer) rootNode.get("responseStatus");
+        }
+
+        if (rootNode.containsKey("responseData")) {
+            Map<String, Object> data = (Map<String, Object>) rootNode.get("responseData");
+            tr = (String) data.get("translatedText");
+        }
+
+        // Returns an error message if there's no translatedText or if there was
+        // a problem
+        if (tr == null || code != 200) {
+            String details = (String) rootNode.get("responseDetails");
+            return StringUtil.format(OStrings.getString("APERTIUM_ERROR"), code, details);
+        }
+
         return tr;
     }
 }

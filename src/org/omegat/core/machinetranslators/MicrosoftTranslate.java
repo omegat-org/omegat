@@ -33,6 +33,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.omegat.gui.exttrans.MTConfigDialog;
+import org.omegat.util.JsonParser;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -125,6 +126,8 @@ public class MicrosoftTranslate extends BaseTranslate {
         }
         
     }
+    
+    @SuppressWarnings("unchecked")
     private void requestToken() throws Exception {
         String id = getCredential(PROPERTY_CLIENT_ID);
         String secret = getCredential(PROPERTY_CLIENT_SECRET);
@@ -138,8 +141,8 @@ public class MicrosoftTranslate extends BaseTranslate {
         p.put("scope", "http://api.microsofttranslator.com");
         p.put("grant_type", "client_credentials");
         String r = WikiGet.post(URL_TOKEN, p, null);
-        Map<String, String> rmap = unpackJson(r);
-        accessToken = rmap.get("access_token");
+        Map<String, Object> rmap = (Map<String, Object>) JsonParser.parse(r);
+        accessToken = (String) rmap.get("access_token");
     }
 
     private String requestTranslate(String langFrom, String langTo, String text) throws Exception {
@@ -161,55 +164,6 @@ public class MicrosoftTranslate extends BaseTranslate {
             Log.logWarningRB("MT_ENGINE_MICROSOFT_WRONG_RESPONSE");
             return null;
         }
-    }
-
-    int pos;
-    String str;
-
-    public Map<String, String> unpackJson(String v) {
-        if (!v.startsWith("{") || !v.endsWith("}")) {
-            throw new RuntimeException("Wrong");
-        }
-        str = v.substring(v.offsetByCodePoints(0, 1),
-                v.offsetByCodePoints(v.length(), -1));
-        pos = 0;
-
-        Map<String, String> result = new TreeMap<String, String>();
-
-        while (true) {
-            String key = readString();
-            mustBe(':');
-            String value = readString();
-            result.put(key, value);
-            if (pos == str.length()) {
-                break;
-            }
-            mustBe(',');
-        }
-     
-        return result;
-    }
-
-    String readString() {
-        if (str.codePointAt(pos) != '"') {
-            throw new RuntimeException("Wrong");
-        }
-        int startOffset = str.offsetByCodePoints(pos, 1);
-        int endOffset = str.indexOf('"', startOffset);
-        if (endOffset < 0) {
-            throw new RuntimeException("Wrong");
-        }
-        String result = str.substring(startOffset, endOffset);
-        pos = str.offsetByCodePoints(endOffset, 1);
-        return result;
-    }
-
-    void mustBe(int c) {
-        int cp = str.codePointAt(pos);
-        if (cp != c) {
-            throw new RuntimeException("Wrong");
-        }
-        pos += Character.charCount(cp);
     }
 
     @Override

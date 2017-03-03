@@ -30,15 +30,16 @@ package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.JCheckBox;
 
 import org.omegat.gui.exttrans.MTConfigDialog;
+import org.omegat.util.JsonParser;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.WikiGet;
@@ -54,11 +55,9 @@ import org.omegat.util.WikiGet;
  * @see <a href="https://cloud.google.com/translate/docs/getting-started">Translation API</a>
  */
 public class Google2Translate extends BaseTranslate {
-	protected static final String PROPERTY_PREMIUM_KEY = "google.api.premium";
-	protected static final String PROPERTY_API_KEY = "google.api.key";
-    protected static final String  GT_URL   = "https://translation.googleapis.com/language/translate/v2";
-    protected static final Pattern RE_UNICODE = Pattern.compile("\\\\u([0-9A-Fa-f]{4})");
-    protected static final Pattern RE_HTML  = Pattern.compile("&#([0-9]+);");
+    protected static final String PROPERTY_PREMIUM_KEY = "google.api.premium";
+    protected static final String PROPERTY_API_KEY = "google.api.key";
+    protected static final String GT_URL = "https://translation.googleapis.com/language/translate/v2";
 
     @Override
     protected String getPreferenceName() {
@@ -114,42 +113,36 @@ public class Google2Translate extends BaseTranslate {
             return e.getLocalizedMessage();
         }
 
-        while (true) {
-            Matcher m = RE_UNICODE.matcher(v);
-            if (!m.find()) {
-                break;
-            }
-            String g = m.group();
-            char c = (char) Integer.parseInt(m.group(1), 16);
-            v = v.replace(g, Character.toString(c));
+        String tr = getJsonResults(v);
+        
+        if (tr == null) {
+        	return "";
         }
-        v = v.replace("&quot;", "&#34;");
-        v = v.replace("&nbsp;", "&#160;");
-        v = v.replace("&amp;", "&#38;");
-        while (true) {
-            Matcher m = RE_HTML.matcher(v);
-            if (!m.find()) {
-                break;
-            }
-            String g = m.group();
-            char c = (char) Integer.parseInt(m.group(1));
-            v = v.replace(g, Character.toString(c));
-        }
-        Pattern pattern = java.util.regex.Pattern.compile("\\{\\s*\"translatedText\"\\s*:\\s*\"(.*?)\"\\s*(,\\s*\"model\"\\s*:\\s*\"\\w+\")?\\s*\\}\\s*]");
-        Matcher matcher = pattern.matcher(v);
-        boolean matchFound = matcher.find();
-
-        String tr = "";
-
-        if (matchFound) {
-            tr = matcher.group(1);
-        }
-
 
         tr = cleanSpacesAroundTags(tr, text);
 
         putToCache(sLang, tLang, trText, tr);
         return tr;
+    }
+
+    @SuppressWarnings("unchecked")
+    protected String getJsonResults(String json) {
+        Map<String, Object> rootNode;
+        try {
+            rootNode = (Map<String, Object>) JsonParser.parse(json);
+        } catch (Exception e) {
+            Log.logErrorRB(e, "MT_JSON_ERROR");
+            return OStrings.getString("MT_JSON_ERROR");
+        }
+
+        try {
+            Map<String, Object> dataNode = (Map<String, Object>) rootNode.get("data");
+            List<Object> translationsList = (List<Object>) dataNode.get("translations");
+            Map<String, String> translationNode = (Map<String, String>) translationsList.get(0);
+            return translationNode.get("translatedText");
+        } catch (NullPointerException e) {
+            return null;
+        }
     }
 
     /**

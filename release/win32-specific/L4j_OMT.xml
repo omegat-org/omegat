@@ -17,6 +17,6 @@
     <path>jre</path>
     <minVersion>1.8.0</minVersion>
     <maxVersion></maxVersion>
-    <jdkPreference>preferJdk</jdkPreference>
+    <jdkPreference>jreOnly</jdkPreference>
   </jre>
 </launch4jConfig>

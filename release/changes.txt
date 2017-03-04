@@ -322,7 +322,7 @@ could fail with duplicate numbers
  OmegaT 3.6.0 update 5
 ----------------------------------------------------------------------
   1 Enhancement
-  2 Bug fixes
+  3 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
 3.6.0 update 5 vs 3.6.0 update 4
@@ -339,6 +339,9 @@ could fail with duplicate numbers
 
   - XML Spreadsheet format: the OfficeDocumentSettings tag is not 
 ignored
+
+  - Windows: when a JDK was available, OmegaT.exe would use it even
+if a more recent JRE was available. Now, OmegaT.exe only uses JREs.
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 4 (2016-10-22)

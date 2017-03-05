@@ -205,7 +205,7 @@ public class TMXReader2 {
         // give a warning if the TMX source language is
         // different from the project source language
         String tmxSourceLanguage = getAttributeValue(element, "srclang");
-        if (!tmxSourceLanguage.equalsIgnoreCase(sourceLanguage.getLanguage())) {
+        if (!sourceLanguage.getLanguage().equalsIgnoreCase(tmxSourceLanguage)) {
             Log.logWarningRB("TMXR_WARNING_INCORRECT_SOURCE_LANG", tmxSourceLanguage,
                     sourceLanguage);
         }

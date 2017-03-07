@@ -883,7 +883,7 @@ public class ScriptingWindow {
         });
         menu.add(item);
         
-        PropertiesShortcuts.MainMenuShortcuts.bindKeyStrokes(menu);
+        PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(menu);
         
         mb.add(menu);
 

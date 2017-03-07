@@ -51,7 +51,14 @@ public class PropertiesShortcuts {
 
     private static final String MAIN_MENU_SHORTCUTS_FILE = "/org/omegat/gui/main/MainMenuShortcuts.properties";
 
-    public static final PropertiesShortcuts MainMenuShortcuts = new PropertiesShortcuts(MAIN_MENU_SHORTCUTS_FILE);
+    private static class LoadedShortcuts {
+        static final PropertiesShortcuts MAIN_MENU_SHORTCUTS = new PropertiesShortcuts(
+                MAIN_MENU_SHORTCUTS_FILE);
+    }
+
+    public static PropertiesShortcuts getMainMenuShortcuts() {
+        return LoadedShortcuts.MAIN_MENU_SHORTCUTS;
+    }
 
     final Properties properties = new Properties();
 

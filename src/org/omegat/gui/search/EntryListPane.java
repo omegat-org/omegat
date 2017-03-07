@@ -106,7 +106,7 @@ class EntryListPane extends JTextPane {
 
     private static void bindKeyStrokesFromMainMenuShortcuts(InputMap map) {
         // Add KeyStrokes Ctrl+N/P (Cmd+N/P for MacOS) to the map
-        PropertiesShortcuts.MainMenuShortcuts.bindKeyStrokes(map,
+        PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(map,
                 KEY_GO_TO_NEXT_SEGMENT, KEY_GO_TO_PREVIOUS_SEGMENT);
     }
 

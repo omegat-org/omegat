@@ -144,6 +144,6 @@ public class SearchWindowMenu extends JMenuBar {
             }
         });
 
-        PropertiesShortcuts.MainMenuShortcuts.bindKeyStrokes(this);
+        PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(this);
     }
 }

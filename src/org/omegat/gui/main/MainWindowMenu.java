@@ -425,10 +425,10 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         helpMenu.add(helpLogMenuItem = createMenuItem("TF_MENU_HELP_LOG"));
         
         setActionCommands();
-        PropertiesShortcuts.MainMenuShortcuts.bindKeyStrokes(mainMenu);
+        PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(mainMenu);
 
         String key = "findInProjectReuseLastWindow";
-        KeyStroke stroke = PropertiesShortcuts.MainMenuShortcuts.getKeyStroke(key);
+        KeyStroke stroke = PropertiesShortcuts.getMainMenuShortcuts().getKeyStroke(key);
         mainWindow.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(stroke, key);
         mainWindow.getRootPane().getActionMap().put(key, new AbstractAction() {
             @Override

@@ -53,14 +53,20 @@ public class PropertiesShortcuts {
     private static final Logger LOGGER = Logger.getLogger(PropertiesShortcuts.class.getName());
 
     private static final String MAIN_MENU_SHORTCUTS_FILE = "/org/omegat/gui/main/MainMenuShortcuts.properties";
+    private static final String EDITOR_SHORTCUTS_FILE = "/org/omegat/gui/main/EditorShortcuts.properties";
 
     private static class LoadedShortcuts {
         static final PropertiesShortcuts MAIN_MENU_SHORTCUTS = new PropertiesShortcuts(
                 MAIN_MENU_SHORTCUTS_FILE);
+        static final PropertiesShortcuts EDITOR_SHORTCUTS = new PropertiesShortcuts(EDITOR_SHORTCUTS_FILE);
     }
 
     public static PropertiesShortcuts getMainMenuShortcuts() {
         return LoadedShortcuts.MAIN_MENU_SHORTCUTS;
+    }
+
+    public static PropertiesShortcuts getEditorShortcuts() {
+        return LoadedShortcuts.EDITOR_SHORTCUTS;
     }
 
     final Properties properties = new Properties();

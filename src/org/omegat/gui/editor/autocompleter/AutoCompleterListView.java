@@ -110,22 +110,22 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
 
         KeyStroke s = KeyStroke.getKeyStrokeForEvent(e);
 
-        if (KEYSTROKE_UP.equals(s) || KEYSTROKE_UP_EMACS.equals(s)) {
+        if (s.equals(KEYSTROKE_UP) || s.equals(KEYSTROKE_UP_EMACS)) {
             selectPreviousPossibleValue();
             return true;
         }
 
-        if (KEYSTROKE_DOWN.equals(s) || KEYSTROKE_DOWN_EMACS.equals(s)) {
+        if (s.equals(KEYSTROKE_DOWN) || s.equals(KEYSTROKE_DOWN_EMACS)) {
             selectNextPossibleValue();
             return true;
         }
 
-        if (KEYSTROKE_PAGE_UP.equals(s)) {
+        if (s.equals(KEYSTROKE_PAGE_UP)) {
             selectPreviousPossibleValueByPage();
             return true;
         }
 
-        if (KEYSTROKE_PAGE_DOWN.equals(s)) {
+        if (s.equals(KEYSTROKE_PAGE_DOWN)) {
             selectNextPossibleValueByPage();
             return true;
         }

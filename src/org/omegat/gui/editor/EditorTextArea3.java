@@ -326,7 +326,7 @@ public class EditorTextArea3 extends JEditorPane {
         if (autoCompleter.processKeys(e)) {
             // The AutoCompleter needs special treatment.
             processed = true;
-        } else if (KEYSTROKE_CONTEXT_MENU.equals(s)) {
+        } else if (s.equals(KEYSTROKE_CONTEXT_MENU)) {
             // Context Menu key for contextual (right-click) menu (Shift+Esc on Mac)
             JPopupMenu popup = makePopupMenu(getCaretPosition());
             if (popup.getComponentCount() > 0) {
@@ -335,19 +335,19 @@ public class EditorTextArea3 extends JEditorPane {
                         (int) getCaret().getMagicCaretPosition().getY());
                 processed = true;
             }
-        } else if (KEYSTROKE_NEXT.equals(s)) {
+        } else if (s.equals(KEYSTROKE_NEXT)) {
             // Advance when 'Use TAB to advance'
             if (controller.settings.isUseTabForAdvance()) {
                 controller.nextEntry();
                 processed = true;
             }
-        } else if (KEYSTROKE_PREV.equals(s)) {
+        } else if (s.equals(KEYSTROKE_PREV)) {
             // Go back when 'Use TAB to advance'
             if (controller.settings.isUseTabForAdvance()) {
                 controller.prevEntry();
                 processed = true;
             }
-        } else if (KEYSTROKE_NEXT_NOT_TAB.equals(s)) {
+        } else if (s.equals(KEYSTROKE_NEXT_NOT_TAB)) {
             // Advance when not 'Use TAB to advance'
             if (!controller.settings.isUseTabForAdvance()) {
                 controller.nextEntry();
@@ -356,23 +356,23 @@ public class EditorTextArea3 extends JEditorPane {
                 Core.getMainWindow().showTimedStatusMessageRB("ETA_WARNING_TAB_ADVANCE");
                 processed = true;
             }
-        } else if (KEYSTROKE_PREV_NOT_TAB.equals(s)) {
+        } else if (s.equals(KEYSTROKE_PREV_NOT_TAB)) {
             // Go back when not 'Use TAB to advance'
             if (!controller.settings.isUseTabForAdvance()) {
                 controller.prevEntry();
                 processed = true;
             }
-        } else if (KEYSTROKE_INSERT_LF.equals(s)) {
+        } else if (s.equals(KEYSTROKE_INSERT_LF)) {
             // Insert LF
             KeyEvent ke = new KeyEvent(e.getComponent(), e.getID(), e.getWhen(), 0, KeyEvent.VK_ENTER, '\n');
             super.processKeyEvent(ke);
             processed = true;
-        } else if (KEYSTROKE_SELECT_ALL.equals(s)) {
+        } else if (s.equals(KEYSTROKE_SELECT_ALL)) {
             // Select all
             setSelectionStart(doc.getTranslationStart());
             setSelectionEnd(doc.getTranslationEnd());
             processed = true;
-        } else if (KEYSTROKE_SWITCH_ORIENTATION.equals(s)) {
+        } else if (s.equals(KEYSTROKE_SWITCH_ORIENTATION)) {
             // handle Ctrl+Shift+O - toggle orientation LTR-RTL
             Cursor oldCursor = this.getCursor();
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -382,7 +382,7 @@ public class EditorTextArea3 extends JEditorPane {
             Core.getMainWindow().showTimedStatusMessageRB("ETA_INFO_TOGGLE_LTR_RTL",
                     StaticUIUtils.getKeyStrokeText(KEYSTROKE_SWITCH_ORIENTATION));
             processed = true;
-        } else if (KEYSTROKE_DELETE_PREV_TOKEN.equals(s)) {
+        } else if (s.equals(KEYSTROKE_DELETE_PREV_TOKEN)) {
             // Delete previous token
             try {
                 processed = wholeTagDelete(false);
@@ -399,7 +399,7 @@ public class EditorTextArea3 extends JEditorPane {
             } catch (BadLocationException ex) {
                 // do nothing
             }
-        } else if (KEYSTROKE_DELETE_NEXT_TOKEN.equals(s)) {
+        } else if (s.equals(KEYSTROKE_DELETE_NEXT_TOKEN)) {
             // Delete next token
             try {
                 processed = wholeTagDelete(true);
@@ -416,30 +416,30 @@ public class EditorTextArea3 extends JEditorPane {
             } catch (BadLocationException ex) {
                 // do nothing
             }
-        } else if (KEYSTROKE_FIRST_SEG.equals(s)) {
+        } else if (s.equals(KEYSTROKE_FIRST_SEG)) {
             // Jump to beginning of document
             int segNum = controller.m_docSegList[0].segmentNumberInProject;
             controller.gotoEntry(segNum);
             processed = true;
-        } else if (KEYSTROKE_LAST_SEG.equals(s)) {
+        } else if (s.equals(KEYSTROKE_LAST_SEG)) {
             // Jump to end of document
             int lastSegIndex = controller.m_docSegList.length - 1;
             int segNum = controller.m_docSegList[lastSegIndex].segmentNumberInProject;
             controller.gotoEntry(segNum);
             processed = true;
-        } else if (KEYSTROKE_SKIP_PREV_TOKEN.equals(s)) {
+        } else if (s.equals(KEYSTROKE_SKIP_PREV_TOKEN)) {
             // Skip over previous token
             processed = moveCursorOverTag(false, false);
-        } else if (KEYSTROKE_SKIP_PREV_TOKEN_SEL.equals(s)) {
+        } else if (s.equals(KEYSTROKE_SKIP_PREV_TOKEN_SEL)) {
             // Skip over previous token while extending selection
             processed = moveCursorOverTag(true, false);
-        } else if (KEYSTROKE_SKIP_NEXT_TOKEN.equals(s)) {
+        } else if (s.equals(KEYSTROKE_SKIP_NEXT_TOKEN)) {
             // Skip over next token
             processed = moveCursorOverTag(false, true);
-        } else if (KEYSTROKE_SKIP_NEXT_TOKEN_SEL.equals(s)) {
+        } else if (s.equals(KEYSTROKE_SKIP_NEXT_TOKEN_SEL)) {
             // Skip over next token while extending selection
             processed = moveCursorOverTag(true, true);
-        } else if (KEYSTROKE_TOGGLE_CURSOR_LOCK.equals(s)) {
+        } else if (s.equals(KEYSTROKE_TOGGLE_CURSOR_LOCK)) {
             boolean lockEnabled = !lockCursorToInputArea;
             final String key = lockEnabled ? "MW_STATUS_CURSOR_LOCK_ON" : "MW_STATUS_CURSOR_LOCK_OFF";
             Core.getMainWindow().showStatusMessageRB(key);

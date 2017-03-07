@@ -153,7 +153,7 @@ public class AutoCompleter implements IAutoCompleter {
         
         KeyStroke s = KeyStroke.getKeyStrokeForEvent(e);
 
-        if (!isVisible() && KEYSTROKE_TRIGGER.equals(s)) {
+        if (!isVisible() && s.equals(KEYSTROKE_TRIGGER)) {
 
             if (!editor.isInActiveTranslation(editor.getCaretPosition())) {
                 return false;
@@ -174,28 +174,28 @@ public class AutoCompleter implements IAutoCompleter {
                 return true;
             }
             
-            if (KEYSTROKE_CONFIRM_AND_CLOSE.equals(s)) {
+            if (s.equals(KEYSTROKE_CONFIRM_AND_CLOSE)) {
                 doSelection();
                 return true;
             }
             
-            if (KEYSTROKE_CONFIRM_WITHOUT_CLOSE.equals(s)) {
+            if (s.equals(KEYSTROKE_CONFIRM_WITHOUT_CLOSE)) {
                 acceptedListItem(getSelectedValue()); 
                 updatePopup(false);
                 return true;
             }
 
-            if (KEYSTROKE_CLOSE.equals(s)) {
+            if (s.equals(KEYSTROKE_CLOSE)) {
                 setVisible(false);
                 return true;
             }
             
-            if (KEYSTROKE_PREV_VIEW.equals(s)) {
+            if (s.equals(KEYSTROKE_PREV_VIEW)) {
                 selectPreviousView();
                 return true;
             }
             
-            if (KEYSTROKE_NEXT_VIEW.equals(s)) {
+            if (s.equals(KEYSTROKE_NEXT_VIEW)) {
                 selectNextView();
                 return true;
             }

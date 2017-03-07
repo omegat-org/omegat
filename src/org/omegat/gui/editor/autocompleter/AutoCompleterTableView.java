@@ -131,52 +131,52 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
 
         KeyStroke s = KeyStroke.getKeyStrokeForEvent(e);
 
-        if (KEYSTROKE_UP.equals(s) || KEYSTROKE_UP_EMACS.equals(s)) {
+        if (s.equals(KEYSTROKE_UP) || s.equals(KEYSTROKE_UP_EMACS)) {
             selectPreviousPossibleValueUp();
             return true;
         }
 
-        if (KEYSTROKE_LEFT.equals(s) || KEYSTROKE_LEFT_EMACS.equals(s)) {
+        if (s.equals(KEYSTROKE_LEFT) || s.equals(KEYSTROKE_LEFT_EMACS)) {
             selectPreviousPossibleValueLeft();
             return true;
         }
         
-        if (KEYSTROKE_DOWN.equals(s) || KEYSTROKE_DOWN_EMACS.equals(s)) {
+        if (s.equals(KEYSTROKE_DOWN) || s.equals(KEYSTROKE_DOWN_EMACS)) {
             selectNextPossibleValueDown();
             return true;
         }
 
-        if (KEYSTROKE_RIGHT.equals(s) || KEYSTROKE_RIGHT_EMACS.equals(s)) {
+        if (s.equals(KEYSTROKE_RIGHT) || s.equals(KEYSTROKE_RIGHT_EMACS)) {
             selectNextPossibleValueRight();
             return true;
         }
         
-        if (KEYSTROKE_PAGE_UP.equals(s)) {
+        if (s.equals(KEYSTROKE_PAGE_UP)) {
             selectPreviousPossibleValueByPage();
             return true;
         }
 
-        if (KEYSTROKE_PAGE_DOWN.equals(s)) {
+        if (s.equals(KEYSTROKE_PAGE_DOWN)) {
             selectNextPossibleValueByPage();
             return true;
         }
         
-        if (KEYSTROKE_FIRST.equals(s)) {
+        if (s.equals(KEYSTROKE_FIRST)) {
             selectFirstPossibleValue();
             return true;
         }
 
-        if (KEYSTROKE_LAST.equals(s)) {
+        if (s.equals(KEYSTROKE_LAST)) {
             selectLastPossibleValue();
             return true;
         }
         
-        if (KEYSTROKE_FIRST_IN_ROW.equals(s)) {
+        if (s.equals(KEYSTROKE_FIRST_IN_ROW)) {
             selectFirstPossibleValueInLine();
             return true;
         }
 
-        if (KEYSTROKE_LAST_IN_ROW.equals(s)) {
+        if (s.equals(KEYSTROKE_LAST_IN_ROW)) {
             selectLastPossibleValueInLine();
             return true;
         }

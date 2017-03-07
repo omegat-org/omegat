@@ -30,6 +30,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import javax.swing.InputMap;
 import javax.swing.JMenu;
@@ -48,6 +49,8 @@ import org.omegat.util.StringUtil;
  * @author Yu Tang
  */
 public class PropertiesShortcuts {
+
+    private static final Logger LOGGER = Logger.getLogger(PropertiesShortcuts.class.getName());
 
     private static final String MAIN_MENU_SHORTCUTS_FILE = "/org/omegat/gui/main/MainMenuShortcuts.properties";
 
@@ -110,9 +113,13 @@ public class PropertiesShortcuts {
     public KeyStroke getKeyStroke(String key) {
         String shortcut = properties.getProperty(key);
         if (shortcut == null) {
-            throw new IllegalArgumentException("Key '" + key + "' is not found.");
+            throw new IllegalArgumentException("Keyboard shortcut not defined. Key=" + key);
         }
-        return KeyStroke.getKeyStroke(shortcut);
+        KeyStroke result = KeyStroke.getKeyStroke(shortcut);
+        if (!shortcut.isEmpty() && result == null) {
+            LOGGER.warning("Keyboard shortcut is invalid: " + key + "=" + shortcut);
+        }
+        return result;
     }
 
     public void bindKeyStrokes(JMenuBar menu) {
@@ -141,7 +148,7 @@ public class PropertiesShortcuts {
             String shortcut = item.getActionCommand();
             if (!StringUtil.isEmpty(shortcut)) {
                 try {
-                    item.setAccelerator(getKeyStroke(shortcut));
+                item.setAccelerator(getKeyStroke(shortcut));
                 } catch (Exception ex) {
                     // Eat exception silently
                 }
@@ -149,10 +156,9 @@ public class PropertiesShortcuts {
         }
     }
 
-    public void bindKeyStrokes(InputMap inputMap, Object... keys) {
-        for (Object o : keys) {
+    public void bindKeyStrokes(InputMap inputMap, String... keys) {
+        for (String key : keys) {
             try {
-                String key = (String) o;
                 KeyStroke keyStroke = getKeyStroke(key);
                 if (keyStroke == null) {
                     removeEntry(inputMap, key);

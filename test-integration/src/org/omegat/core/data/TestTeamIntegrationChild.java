@@ -427,6 +427,9 @@ public class TestTeamIntegrationChild {
         public void showStatusMessageRB(String messageKey, Object... params) {
         }
 
+        public void showTimedStatusMessageRB(String messageKey, Object... params) {
+        }
+
         public void showProgressMessage(String messageText) {
         }
 

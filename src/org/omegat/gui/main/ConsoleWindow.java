@@ -84,6 +84,11 @@ public class ConsoleWindow implements IMainWindow {
         System.out.println(msg);
     }
 
+    @Override
+    public void showTimedStatusMessageRB(String messageKey, Object... params) {
+        showStatusMessageRB(messageKey, params);
+    }
+
     public void displayWarningRB(String message, Object... args) {
         displayWarningRB(message, null, args);
     }

@@ -116,6 +116,9 @@ public abstract class TestCore extends XMLTestCase {
             public void showStatusMessageRB(String messageKey, Object... params) {
             }
 
+            public void showTimedStatusMessageRB(String messageKey, Object... params) {
+            }
+
             public void displayWarningRB(String warningKey, Object... params) {
             }
             

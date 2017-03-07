@@ -46,7 +46,6 @@ import java.util.List;
 
 import javax.swing.JEditorPane;
 import javax.swing.JPopupMenu;
-import javax.swing.SwingUtilities;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.text.AbstractDocument;
@@ -67,8 +66,6 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
-import org.omegat.gui.main.IMainWindow;
-import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Platform;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
@@ -323,12 +320,7 @@ public class EditorTextArea3 extends JEditorPane {
                 controller.nextEntry();
                 processed = true;
             } else {
-                IMainWindow mainWindow = Core.getMainWindow();
-                // Timed warning is not available for console window
-                if (mainWindow instanceof MainWindow) {
-                    MainWindow window = (MainWindow) mainWindow;
-                    window.showTimedStatusMessageRB("ETA_WARNING_TAB_ADVANCE");
-                }
+                Core.getMainWindow().showTimedStatusMessageRB("ETA_WARNING_TAB_ADVANCE");
                 processed = true;
             }
         } else if ((StaticUtils.isKey(e, KeyEvent.VK_ENTER,
@@ -356,12 +348,7 @@ public class EditorTextArea3 extends JEditorPane {
             controller.toggleOrientation();
             setCursor(oldCursor);
 
-            IMainWindow mainWindow = Core.getMainWindow();
-            // Timed warning is not available for console window
-            if (mainWindow instanceof MainWindow) {
-                MainWindow window = (MainWindow) mainWindow;
-                window.showTimedStatusMessageRB("ETA_INFO_TOGGLE_LTR_RTL");
-            }
+            Core.getMainWindow().showTimedStatusMessageRB("ETA_INFO_TOGGLE_LTR_RTL");
             processed = true;
         } else if (StaticUtils.isKey(e, KeyEvent.VK_BACK_SPACE,
                 mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK)) {
@@ -423,12 +410,7 @@ public class EditorTextArea3 extends JEditorPane {
         } else if (StaticUtils.isKey(e, KeyEvent.VK_F2, 0)) {
             boolean lockEnabled = !lockCursorToInputArea;
             final String key = lockEnabled ? "MW_STATUS_CURSOR_LOCK_ON" : "MW_STATUS_CURSOR_LOCK_OFF";
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    Core.getMainWindow().showStatusMessageRB(key);
-                }
-            });
+            Core.getMainWindow().showStatusMessageRB(key);
             lockCursorToInputArea = lockEnabled;
         }
 

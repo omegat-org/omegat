@@ -70,6 +70,17 @@ public interface IMainWindow {
     void showStatusMessageRB(String messageKey, Object... params);
 
     /**
+     * Same as {@link #showStatusMessageRB(String, Object...)} but this will
+     * clear the message after ten seconds.
+     * 
+     * @param messageKey
+     *            message key in resource bundle
+     * @param params
+     *            message parameters for formatting
+     */
+    void showTimedStatusMessageRB(String messageKey, Object... params);
+
+    /**
      * Show message in progress bar. Progress bar shows the translation progress: nr. of segments/words etc translated/to do.
      * 
      * @param messageText

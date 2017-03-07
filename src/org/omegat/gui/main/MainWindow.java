@@ -38,8 +38,6 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.HeadlessException;
 import java.awt.Window;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
@@ -355,14 +353,9 @@ public class MainWindow extends JFrame implements IMainWindow {
     }
 
     /**
-     * Same as {@link #showStatusMessageRB(String, Object...)} but 
-     * this will clear the message after ten seconds.
-     * 
-     * @param messageKey
-     *            message key in resource bundle
-     * @param params
-     *            message parameters for formatting
+     * {@inheritDoc}
      */
+    @Override
     public void showTimedStatusMessageRB(String messageKey, Object... params) {
         showStatusMessageRB(messageKey, params);
 
@@ -371,19 +364,13 @@ public class MainWindow extends JFrame implements IMainWindow {
         }
 
         // clear the message after 10 seconds
-        final String localizedString = getLocalizedString(messageKey, params);
-        ActionListener clearStatus = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                String text = statusLabel.getText();
-                if (localizedString.equals(text)) {
-                    statusLabel.setText(null);
-                }
+        String localizedString = getLocalizedString(messageKey, params);
+        Timer timer = new Timer(10_000, evt -> {
+            String text = statusLabel.getText();
+            if (localizedString.equals(text)) {
+                statusLabel.setText(null);
             }
-        };
-
-        final int DELAY = 10000; // milliseconds
-        final Timer timer = new Timer(DELAY, clearStatus);
+        });
         timer.setRepeats(false);  // one-time only
         timer.start();
     }

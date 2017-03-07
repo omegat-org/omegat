@@ -41,9 +41,9 @@ import org.omegat.util.WikiGet;
  * @author Didier Briel
  */
 public class ApertiumTranslate extends BaseTranslate {
-    protected static String GT_URL = "http://api.apertium.org/json/translate?q=";
+    protected static String GT_URL = "https://www.apertium.org/apy/translate?q=";
     // Specific OmegaT key
-    protected static String GT_URL2 = "&markUnknown=no&format=omegat&langpair=#sourceLang#|#targetLang#&key=bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
+    protected static String GT_URL2 = "&markUnknown=no&langpair=#sourceLang#|#targetLang#&key=bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
     protected static String MARK_BEG = "{\"translatedText\":\"";
     protected static String MARK_END = "\"}";
     protected static Pattern RE_UNICODE = Pattern.compile("\\\\u([0-9A-Fa-f]{4})");
@@ -100,7 +100,7 @@ public class ApertiumTranslate extends BaseTranslate {
         String url = GT_URL + URLEncoder.encode(trText, "UTF-8") + url2;
         String v;
         try {
-            v = WikiGet.getURL(url);
+            v = WikiGet.getURLNoCert(url);
         } catch (IOException e) {
             return e.getLocalizedMessage();
         }

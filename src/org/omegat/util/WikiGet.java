@@ -38,7 +38,20 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.Map;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import org.apache.commons.io.IOUtils;
 
@@ -181,6 +194,53 @@ public class WikiGet {
             page.append(new String(b, 0, n, "UTF-8"));
         }
         return page.toString();
+    }
+
+    public static String getURLNoCert(String target) throws IOException {
+        // Create a trust manager that does not validate certificate chains
+        TrustManager[] trustAllCerts = new TrustManager[] { 
+          new X509TrustManager() {
+
+            @Override
+            public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+            }
+
+            @Override
+            public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+            }
+
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                return null;
+            }
+
+        }};
+
+        // Ignore differences between given hostname and certificate hostname
+        HostnameVerifier hv = new HostnameVerifier() {
+          public boolean verify(String hostname, SSLSession session) { return true; }
+        };
+
+        // Install the all-trusting trust manager
+        SSLSocketFactory defaultSSLFactory = HttpsURLConnection.getDefaultSSLSocketFactory();
+        HostnameVerifier defaultHostnameVerifier = HttpsURLConnection.getDefaultHostnameVerifier();
+        try {
+          SSLContext sc = SSLContext.getInstance("SSL");
+          sc.init(null, trustAllCerts, new SecureRandom());
+          HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+          HttpsURLConnection.setDefaultHostnameVerifier(hv);
+          
+          return getURL(target);
+          
+        } catch (NoSuchAlgorithmException e) {
+            return "";
+        } catch (KeyManagementException e) {
+            return "";
+        } 
+        finally {
+            HttpsURLConnection.setDefaultSSLSocketFactory(defaultSSLFactory);
+            HttpsURLConnection.setDefaultHostnameVerifier(defaultHostnameVerifier);
+        }
     }
 
     /**

@@ -54,7 +54,7 @@ import org.omegat.util.StaticUtils;
  * @author Yu Tang
  */
 public class PropertiesShortcutsTest {
-    private PropertiesShortcuts shotcuts;
+    private PropertiesShortcuts shortcuts;
     private final String TEST_SAVE = "TEST_SAVE";
     private final String TEST_CUT = "TEST_CUT";
     private final String TEST_DELETE = "TEST_DELETE"; // overrided with user properties
@@ -84,13 +84,13 @@ public class PropertiesShortcutsTest {
 
     @Before
     public void setUp() {
-        shotcuts = new PropertiesShortcuts("/org/omegat/gui/shortcuts/test.properties");
-        assertFalse(shotcuts.properties.isEmpty());
+        shortcuts = new PropertiesShortcuts("/org/omegat/gui/shortcuts/test.properties");
+        assertFalse(shortcuts.properties.isEmpty());
     }
 
     @After
     public void tearDown() {
-        shotcuts = null;
+        shortcuts = null;
     }
 
     /**
@@ -98,23 +98,16 @@ public class PropertiesShortcutsTest {
      */
     @Test
     public void testGetKeyStroke() {
-        KeyStroke expected = CTRL_S;
-        KeyStroke result = shotcuts.getKeyStroke(TEST_SAVE);
-        assertEquals(expected, result);
+        assertEquals(CTRL_S, shortcuts.getKeyStroke(TEST_SAVE));
 
-        expected = CTRL_X;
-        result = shotcuts.getKeyStroke(TEST_CUT);
-        assertEquals(expected, result);
+        assertEquals(CTRL_X, shortcuts.getKeyStroke(TEST_CUT));
 
-        result = shotcuts.getKeyStroke(TEST_DELETE);
-        assertNull(result);
+        assertNull(shortcuts.getKeyStroke(TEST_DELETE));
 
-        expected = CTRL_P;
-        result = shotcuts.getKeyStroke(TEST_USER_1);
-        assertEquals(expected, result);
+        assertEquals(CTRL_P, shortcuts.getKeyStroke(TEST_USER_1));
 
         try {
-            shotcuts.getKeyStroke(OUT_OF_LIST);
+            shortcuts.getKeyStroke(OUT_OF_LIST);
         } catch (IllegalArgumentException ex) {
             // OK
         }
@@ -143,24 +136,17 @@ public class PropertiesShortcutsTest {
         child1.add(grandchild2);
 
         // bind
-        shotcuts.bindKeyStrokes(menu);
+        shortcuts.bindKeyStrokes(menu);
 
-        KeyStroke result = parent.getAccelerator();
-        assertNull(result);
+        assertNull(parent.getAccelerator());
 
-        result = child1.getAccelerator();
-        assertNull(result);
+        assertNull(child1.getAccelerator());
 
-        result = child2.getAccelerator();
-        assertNull(result);
+        assertNull(child2.getAccelerator());
 
-        KeyStroke expected = CTRL_P;
-        result = grandchild1.getAccelerator();
-        assertEquals(expected, result);
+        assertEquals(CTRL_P, grandchild1.getAccelerator());
 
-        expected = CTRL_X;
-        result = grandchild2.getAccelerator();
-        assertEquals(expected, result);
+        assertEquals(CTRL_X, grandchild2.getAccelerator());
     }
 
     /**
@@ -171,24 +157,18 @@ public class PropertiesShortcutsTest {
         // case JMenuItem with no children
         JMenuItem item = new JMenuItem();
         item.setActionCommand(TEST_SAVE);
-        KeyStroke expected = CTRL_S;
-        KeyStroke result = item.getAccelerator();
-        assertNull(result); // before binding
-        shotcuts.bindKeyStrokes(item); // bind
-        result = item.getAccelerator();
-        assertEquals(expected, result); // after binding(1)
+        assertNull(item.getAccelerator()); // before binding
+        shortcuts.bindKeyStrokes(item); // bind
+        assertEquals(CTRL_S, item.getAccelerator()); // after binding(1)
 
         item.setActionCommand(TEST_DELETE);
-        shotcuts.bindKeyStrokes(item); // bind
-        result = item.getAccelerator();
-        assertNull(result); // after binding(2)
+        shortcuts.bindKeyStrokes(item); // bind
+        assertNull(item.getAccelerator()); // after binding(2)
 
         item.setActionCommand(OUT_OF_LIST);
         item.setAccelerator(CTRL_D);
-        shotcuts.bindKeyStrokes(item); // bind
-        expected = CTRL_D;
-        result = item.getAccelerator();
-        assertEquals(expected, result); // after binding(3) - nothing has changed
+        shortcuts.bindKeyStrokes(item); // bind
+        assertEquals(CTRL_D, item.getAccelerator()); // after binding(3) - nothing has changed
     }
 
     /**
@@ -213,24 +193,17 @@ public class PropertiesShortcutsTest {
         child1.add(grandchild2);
 
         // bind
-        shotcuts.bindKeyStrokes(parent);
+        shortcuts.bindKeyStrokes(parent);
 
-        KeyStroke result = parent.getAccelerator();
-        assertNull(result);
+        assertNull(parent.getAccelerator());
 
-        result = child1.getAccelerator();
-        assertNull(result);
+        assertNull(child1.getAccelerator());
 
-        result = child2.getAccelerator();
-        assertNull(result);
+        assertNull(child2.getAccelerator());
 
-        KeyStroke expected = CTRL_P;
-        result = grandchild1.getAccelerator();
-        assertEquals(expected, result);
+        assertEquals(CTRL_P, grandchild1.getAccelerator());
 
-        expected = CTRL_X;
-        result = grandchild2.getAccelerator();
-        assertEquals(expected, result);
+        assertEquals(CTRL_X, grandchild2.getAccelerator());
     }
 
     /**
@@ -240,12 +213,10 @@ public class PropertiesShortcutsTest {
     public void testBindKeyStrokes_InputMap_ObjectArr() {
         // bind
         InputMap inputMap = new InputMap();
-        shotcuts.bindKeyStrokes(inputMap, TEST_SAVE, TEST_CUT, TEST_USER_1);
+        shortcuts.bindKeyStrokes(inputMap, TEST_SAVE, TEST_CUT, TEST_USER_1);
 
         // test map size
-        long expSize = 3;
-        long size = inputMap.size();
-        assertEquals(expSize, size);
+        assertEquals(3, inputMap.size());
 
         // test keys
         KeyStroke[] expResults = new KeyStroke[] { CTRL_S, CTRL_X, CTRL_P };
@@ -253,47 +224,30 @@ public class PropertiesShortcutsTest {
         assertArrayEquals(expResults, results);
 
         // test entry1 exists
-        Object expResult = TEST_SAVE;
-        Object result = inputMap.get(CTRL_S);
-        assertEquals(expResult, result);
+        assertEquals(TEST_SAVE, inputMap.get(CTRL_S));
 
         // test entry2 exists
-        expResult = TEST_CUT;
-        result = inputMap.get(CTRL_X);
-        assertEquals(expResult, result);
+        assertEquals(TEST_CUT, inputMap.get(CTRL_X));
 
         // test entry3 exists
-        expResult = TEST_USER_1;
-        result = inputMap.get(CTRL_P);
-        assertEquals(expResult, result);
+        assertEquals(TEST_USER_1, inputMap.get(CTRL_P));
 
         // test remove entry with null shortcut
         inputMap.put(CTRL_D, TEST_DELETE); // put target
-        expResult = TEST_DELETE;
-        result = inputMap.get(CTRL_D);
-        assertEquals(expResult, result); // target exists before remove
-        shotcuts.bindKeyStrokes(inputMap, TEST_DELETE); // key to be removed as null
-        result = inputMap.get(CTRL_D);
-        assertNull(result); // target will be null after removed
+        assertEquals(TEST_DELETE, inputMap.get(CTRL_D)); // target exists before remove
+        shortcuts.bindKeyStrokes(inputMap, TEST_DELETE); // key to be removed as null
+        assertNull(inputMap.get(CTRL_D)); // target will be null after removed
 
         // test map size again
-        expSize = 3;
-        size = inputMap.size();
-        assertEquals(expSize, size);
+        assertEquals(3, inputMap.size());
 
         // ensure no affect for entry1 after removing
-        expResult = TEST_SAVE;
-        result = inputMap.get(CTRL_S);
-        assertEquals(expResult, result);
+        assertEquals(TEST_SAVE, inputMap.get(CTRL_S));
 
         // ensure no affect for entry2 after removing
-        expResult = TEST_CUT;
-        result = inputMap.get(CTRL_X);
-        assertEquals(expResult, result);
+        assertEquals(TEST_CUT, inputMap.get(CTRL_X));
 
         // ensure no affect for entry3 after removing
-        expResult = TEST_USER_1;
-        result = inputMap.get(CTRL_P);
-        assertEquals(expResult, result);
+        assertEquals(TEST_USER_1, inputMap.get(CTRL_P));
     }
 }

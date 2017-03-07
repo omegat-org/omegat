@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.1
 ----------------------------------------------------------------------
-  7 Enhancements
+  8 Enhancements
   3 Bug fixes
   8 Localisation updates
 ----------------------------------------------------------------------
@@ -23,6 +23,9 @@
 
   - Change PO fuzzies default match % to 60% 
   https://sourceforge.net/p/omegat/feature-requests/1258/
+
+  - Make editor keys customizable
+  https://sourceforge.net/p/omegat/feature-requests/1311/
 
   Other changes:
 

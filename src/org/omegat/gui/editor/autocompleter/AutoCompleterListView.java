@@ -36,12 +36,13 @@ import java.util.List;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 import javax.swing.JScrollBar;
+import javax.swing.KeyStroke;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
 
 /**
@@ -52,6 +53,17 @@ import org.omegat.util.Token;
  */
 public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     
+    private final static KeyStroke KEYSTROKE_UP = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterListUp");
+    private final static KeyStroke KEYSTROKE_UP_EMACS = KeyStroke.getKeyStroke("ctrl P");
+    private final static KeyStroke KEYSTROKE_DOWN = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterListDown");
+    private final static KeyStroke KEYSTROKE_DOWN_EMACS = KeyStroke.getKeyStroke("ctrl N");
+    private final static KeyStroke KEYSTROKE_PAGE_UP = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterListPageUp");
+    private final static KeyStroke KEYSTROKE_PAGE_DOWN = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterListPageDown");
+
     private static JList<AutoCompleterItem> list;
     
     private static AutoCompleterItem NO_SUGGESTIONS = new AutoCompleterItem(
@@ -86,7 +98,8 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     
     @Override
     public boolean processKeys(KeyEvent e) {
-        if ((StaticUtils.isKey(e, KeyEvent.VK_LEFT, 0) || StaticUtils.isKey(e, KeyEvent.VK_RIGHT, 0))
+        int code = e.getKeyCode();
+        if ((code == KeyEvent.VK_LEFT || code == KeyEvent.VK_RIGHT) && e.getModifiers() == 0
                 && completer.isVisible() && completer.didPopUpAutomatically) {
             // Close autocompleter if user presses left or right (we can't use these anyway since it's a
             // vertical list) and the completer appeared automatically.
@@ -95,26 +108,24 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
             return false;
         }
 
-        if (StaticUtils.isKey(e, KeyEvent.VK_UP, 0)
-                || StaticUtils.isKey(e, KeyEvent.VK_P, KeyEvent.CTRL_MASK)) {
-            // process key UP
+        KeyStroke s = KeyStroke.getKeyStrokeForEvent(e);
+
+        if (KEYSTROKE_UP.equals(s) || KEYSTROKE_UP_EMACS.equals(s)) {
             selectPreviousPossibleValue();
             return true;
         }
 
-        if (StaticUtils.isKey(e, KeyEvent.VK_DOWN, 0)
-                || StaticUtils.isKey(e, KeyEvent.VK_N, KeyEvent.CTRL_MASK)) {
-            // process key DOWN
+        if (KEYSTROKE_DOWN.equals(s) || KEYSTROKE_DOWN_EMACS.equals(s)) {
             selectNextPossibleValue();
             return true;
         }
 
-        if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_UP, 0)) {
+        if (KEYSTROKE_PAGE_UP.equals(s)) {
             selectPreviousPossibleValueByPage();
             return true;
         }
 
-        if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_DOWN, 0)) {
+        if (KEYSTROKE_PAGE_DOWN.equals(s)) {
             selectNextPossibleValueByPage();
             return true;
         }

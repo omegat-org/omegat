@@ -29,7 +29,6 @@ package org.omegat.gui.editor.autocompleter;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +36,7 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.CompoundBorder;
@@ -51,12 +51,12 @@ import org.omegat.gui.editor.chartable.CharTableAutoCompleterView;
 import org.omegat.gui.editor.history.HistoryCompleter;
 import org.omegat.gui.editor.history.HistoryPredictor;
 import org.omegat.gui.glossary.GlossaryAutoCompleterView;
+import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * The controller part of the auto-completer
@@ -64,22 +64,21 @@ import org.omegat.util.StringUtil;
  * @author Zoltan Bartko (bartkozoltan@bartkozoltan.com)
  * @author Aaron Madlon-Kay
  */
-public class AutoCompleter implements IAutoCompleter {    
+public class AutoCompleter implements IAutoCompleter {
     
-    private final static boolean ON_MAC = Platform.isMacOSX();
-    
-    // On OS X: Esc (matches system word autocomplete; Cmd+Space conflicts with IME)
-    // Otherwise: Ctrl+Space (matches input assist in some IDEs, etc.)
-    private final static int TRIGGER_KEY = ON_MAC ? KeyEvent.VK_ESCAPE : KeyEvent.VK_SPACE;
-    private final static int TRIGGER_KEY_MASK = ON_MAC ? 0 : Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+    private final static KeyStroke KEYSTROKE_TRIGGER = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterTrigger");
+    private final static KeyStroke KEYSTROKE_NEXT_VIEW = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterNextView");
+    private final static KeyStroke KEYSTROKE_PREV_VIEW = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterPrevView");
+    private final static KeyStroke KEYSTROKE_CONFIRM_AND_CLOSE = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterConfirmAndClose");
+    private final static KeyStroke KEYSTROKE_CONFIRM_WITHOUT_CLOSE = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterConfirmWithoutClose");
+    private final static KeyStroke KEYSTROKE_CLOSE = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterClose");
 
-    // On OS X: Cmd+Left / Cmd+Right
-    // Otherwise: Ctrl+Space / Ctrl+Shift+Space
-    private final static int GO_NEXT_KEY = ON_MAC ? KeyEvent.VK_RIGHT : KeyEvent.VK_SPACE;
-    private final static int GO_NEXT_MASK = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
-    private final static int GO_PREV_KEY = ON_MAC ? KeyEvent.VK_LEFT : KeyEvent.VK_SPACE;
-    private final static int GO_PREV_MASK = ON_MAC ? GO_NEXT_MASK : GO_NEXT_MASK | KeyEvent.SHIFT_MASK;
-    
     private final static int MIN_VIEWPORT_HEIGHT = 50;
     private final static int MAX_POPUP_WIDTH = 500;
     
@@ -152,7 +151,9 @@ public class AutoCompleter implements IAutoCompleter {
      */
     public boolean processKeys(KeyEvent e) {
         
-        if (!isVisible() && StaticUtils.isKey(e, TRIGGER_KEY, TRIGGER_KEY_MASK)) {
+        KeyStroke s = KeyStroke.getKeyStrokeForEvent(e);
+
+        if (!isVisible() && KEYSTROKE_TRIGGER.equals(s)) {
 
             if (!editor.isInActiveTranslation(editor.getCaretPosition())) {
                 return false;
@@ -173,28 +174,28 @@ public class AutoCompleter implements IAutoCompleter {
                 return true;
             }
             
-            if ((StaticUtils.isKey(e, KeyEvent.VK_ENTER, 0))) {
+            if (KEYSTROKE_CONFIRM_AND_CLOSE.equals(s)) {
                 doSelection();
                 return true;
             }
             
-            if ((StaticUtils.isKey(e, KeyEvent.VK_INSERT, 0))) {
+            if (KEYSTROKE_CONFIRM_WITHOUT_CLOSE.equals(s)) {
                 acceptedListItem(getSelectedValue()); 
                 updatePopup(false);
                 return true;
             }
 
-            if ((StaticUtils.isKey(e, KeyEvent.VK_ESCAPE, 0))) {
+            if (KEYSTROKE_CLOSE.equals(s)) {
                 setVisible(false);
                 return true;
             }
             
-            if (StaticUtils.isKey(e, GO_PREV_KEY, GO_PREV_MASK)) {
+            if (KEYSTROKE_PREV_VIEW.equals(s)) {
                 selectPreviousView();
                 return true;
             }
             
-            if (StaticUtils.isKey(e, GO_NEXT_KEY, GO_NEXT_MASK)) {
+            if (KEYSTROKE_NEXT_VIEW.equals(s)) {
                 selectNextView();
                 return true;
             }
@@ -328,22 +329,19 @@ public class AutoCompleter implements IAutoCompleter {
         sb.append("</b>");
         
         if (views.size() != 1) {
-            String nextKeyString = keyText(GO_NEXT_KEY, GO_NEXT_MASK);
-            String prevKeyString = keyText(GO_PREV_KEY, GO_PREV_MASK);
-            
             int nextViewN = nextViewNumber(currentView);
             if (views.size() >= 2 && nextViewN != -1) {
                 sb.append("<br>");
-                sb.append(StringUtil.format(OStrings.getString("AC_NEXT_VIEW"),
-                        nextKeyString,
+                sb.append(OStrings.getString("AC_NEXT_VIEW",
+                        StaticUIUtils.getKeyStrokeText(KEYSTROKE_NEXT_VIEW),
                         views.get(nextViewN).getName()));
             }
             
             int prevViewN = prevViewNumber(currentView);
             if (views.size() > 2 && prevViewN != -1) {
                 sb.append("<br>");
-                sb.append(StringUtil.format(OStrings.getString("AC_PREV_VIEW"),
-                        prevKeyString,
+                sb.append(OStrings.getString("AC_PREV_VIEW",
+                        StaticUIUtils.getKeyStrokeText(KEYSTROKE_PREV_VIEW),
                         views.get(prevViewN).getName()));
             }
         }

@@ -28,14 +28,14 @@ package org.omegat.gui.editor.autocompleter;
 
 import java.awt.Component;
 import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
 
-import org.omegat.util.StaticUtils;
+import org.omegat.gui.shortcuts.PropertiesShortcuts;
 
 /**
  * Table-based auto-completer view
@@ -45,6 +45,31 @@ import org.omegat.util.StaticUtils;
  */
 public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
     
+    private final static KeyStroke KEYSTROKE_UP = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterTableUp");
+    private final static KeyStroke KEYSTROKE_UP_EMACS = KeyStroke.getKeyStroke("ctrl P");
+    private final static KeyStroke KEYSTROKE_DOWN = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterTableDown");
+    private final static KeyStroke KEYSTROKE_DOWN_EMACS = KeyStroke.getKeyStroke("ctrl N");
+    private final static KeyStroke KEYSTROKE_LEFT = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterTableLeft");
+    private final static KeyStroke KEYSTROKE_LEFT_EMACS = KeyStroke.getKeyStroke("ctrl B");
+    private final static KeyStroke KEYSTROKE_RIGHT = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterTableRight");
+    private final static KeyStroke KEYSTROKE_RIGHT_EMACS = KeyStroke.getKeyStroke("ctrl F");
+    private final static KeyStroke KEYSTROKE_PAGE_UP = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterTablePageUp");
+    private final static KeyStroke KEYSTROKE_PAGE_DOWN = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterTablePageDown");
+    private final static KeyStroke KEYSTROKE_FIRST = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterTableFirst");
+    private final static KeyStroke KEYSTROKE_LAST = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterTableLast");
+    private final static KeyStroke KEYSTROKE_FIRST_IN_ROW = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterTableFirstInRow");
+    private final static KeyStroke KEYSTROKE_LAST_IN_ROW = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("autocompleterTableLastInRow");
+
     /**
      * the table. Use getTable() to access the value;
      */
@@ -103,61 +128,55 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
     
     @Override
     public boolean processKeys(KeyEvent e) {
-        
-        if (StaticUtils.isKey(e, KeyEvent.VK_UP, 0)
-                || StaticUtils.isKey(e, KeyEvent.VK_P, KeyEvent.CTRL_MASK)) {
-            // process key UP
+
+        KeyStroke s = KeyStroke.getKeyStrokeForEvent(e);
+
+        if (KEYSTROKE_UP.equals(s) || KEYSTROKE_UP_EMACS.equals(s)) {
             selectPreviousPossibleValueUp();
             return true;
         }
 
-        if (StaticUtils.isKey(e, KeyEvent.VK_LEFT, 0)
-                || StaticUtils.isKey(e, KeyEvent.VK_B, KeyEvent.CTRL_MASK)) {
-            // process key LEFT
+        if (KEYSTROKE_LEFT.equals(s) || KEYSTROKE_LEFT_EMACS.equals(s)) {
             selectPreviousPossibleValueLeft();
             return true;
         }
         
-        if (StaticUtils.isKey(e, KeyEvent.VK_DOWN, 0)
-                || StaticUtils.isKey(e, KeyEvent.VK_N, KeyEvent.CTRL_MASK)) {
-            // process key DOWN
+        if (KEYSTROKE_DOWN.equals(s) || KEYSTROKE_DOWN_EMACS.equals(s)) {
             selectNextPossibleValueDown();
             return true;
         }
 
-        if (StaticUtils.isKey(e, KeyEvent.VK_RIGHT, 0)
-                || StaticUtils.isKey(e, KeyEvent.VK_F, KeyEvent.CTRL_MASK)) {
-            // process key RIGHT
+        if (KEYSTROKE_RIGHT.equals(s) || KEYSTROKE_RIGHT_EMACS.equals(s)) {
             selectNextPossibleValueRight();
             return true;
         }
         
-        if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_UP, 0)) {
+        if (KEYSTROKE_PAGE_UP.equals(s)) {
             selectPreviousPossibleValueByPage();
             return true;
         }
 
-        if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_DOWN, 0)) {
+        if (KEYSTROKE_PAGE_DOWN.equals(s)) {
             selectNextPossibleValueByPage();
             return true;
         }
         
-        if (StaticUtils.isKey(e, KeyEvent.VK_HOME, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
+        if (KEYSTROKE_FIRST.equals(s)) {
             selectFirstPossibleValue();
             return true;
         }
 
-        if (StaticUtils.isKey(e, KeyEvent.VK_END, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
+        if (KEYSTROKE_LAST.equals(s)) {
             selectLastPossibleValue();
             return true;
         }
         
-        if (StaticUtils.isKey(e, KeyEvent.VK_HOME, 0)) {
+        if (KEYSTROKE_FIRST_IN_ROW.equals(s)) {
             selectFirstPossibleValueInLine();
             return true;
         }
 
-        if (StaticUtils.isKey(e, KeyEvent.VK_END, 0)) {
+        if (KEYSTROKE_LAST_IN_ROW.equals(s)) {
             selectLastPossibleValueInLine();
             return true;
         }

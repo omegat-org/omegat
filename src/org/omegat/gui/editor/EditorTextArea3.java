@@ -399,14 +399,18 @@ public class EditorTextArea3 extends JEditorPane {
             int segNum = controller.m_docSegList[lastSegIndex].segmentNumberInProject;
             controller.gotoEntry(segNum);
             processed = true;
-        } else if (StaticUtils.isKey(e, KeyEvent.VK_LEFT, mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK)
-                || StaticUtils.isKey(e, KeyEvent.VK_LEFT, (mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK) | InputEvent.SHIFT_MASK)) {
+        } else if (StaticUtils.isKey(e, KeyEvent.VK_LEFT, mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK)) {            
             // Ctrl+Left - skip to the end of tag (Alt+Left for MacOS)
-            processed = moveCursorOverTag((e.getModifiers() & KeyEvent.SHIFT_MASK) != 0, false);
-        } else if (StaticUtils.isKey(e, KeyEvent.VK_RIGHT, mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK)
-                || StaticUtils.isKey(e, KeyEvent.VK_RIGHT, (mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK) | InputEvent.SHIFT_MASK)) {
+            processed = moveCursorOverTag(false, false);
+        } else if (StaticUtils.isKey(e, KeyEvent.VK_LEFT, (mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK) | InputEvent.SHIFT_MASK)) {
+            // Ctrl+Shift+Left - skip to the end of tag (Alt+Shift+Left for MacOS)
+            processed = moveCursorOverTag(true, false);
+        } else if (StaticUtils.isKey(e, KeyEvent.VK_RIGHT, mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK)) {
             // Ctrl+Right - skip to the end of tag (Alt+Right for MacOS)
-            processed = moveCursorOverTag((e.getModifiers() & KeyEvent.SHIFT_MASK) != 0, true);
+            processed = moveCursorOverTag(false, true);
+        } else if (StaticUtils.isKey(e, KeyEvent.VK_RIGHT, (mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK) | InputEvent.SHIFT_MASK)) {
+            // Ctrl+Shift+Right - skip to the end of tag with selection (Alt+Shift+Right for MacOS)
+            processed = moveCursorOverTag(true, true);
         } else if (StaticUtils.isKey(e, KeyEvent.VK_F2, 0)) {
             boolean lockEnabled = !lockCursorToInputArea;
             final String key = lockEnabled ? "MW_STATUS_CURSOR_LOCK_ON" : "MW_STATUS_CURSOR_LOCK_OFF";

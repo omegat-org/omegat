@@ -33,8 +33,6 @@ package org.omegat.gui.editor;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -46,6 +44,7 @@ import java.util.List;
 
 import javax.swing.JEditorPane;
 import javax.swing.JPopupMenu;
+import javax.swing.KeyStroke;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.text.AbstractDocument;
@@ -66,8 +65,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
-import org.omegat.util.Platform;
-import org.omegat.util.StaticUtils;
+import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.Styles;
@@ -82,6 +80,41 @@ import org.omegat.util.gui.Styles;
  */
 @SuppressWarnings("serial")
 public class EditorTextArea3 extends JEditorPane {
+
+    private final static KeyStroke KEYSTROKE_CONTEXT_MENU = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorContextMenu");
+    private final static KeyStroke KEYSTROKE_NEXT = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorNextSegment");
+    private final static KeyStroke KEYSTROKE_PREV = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorPrevSegment");
+    private final static KeyStroke KEYSTROKE_NEXT_NOT_TAB = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorNextSegmentNotTab");
+    private final static KeyStroke KEYSTROKE_PREV_NOT_TAB = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorPrevSegmentNotTab");
+    private final static KeyStroke KEYSTROKE_INSERT_LF = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorInsertLineBreak");
+    private final static KeyStroke KEYSTROKE_SELECT_ALL = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorSelectAll");
+    private final static KeyStroke KEYSTROKE_SWITCH_ORIENTATION = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorSwitchOrientation");
+    private final static KeyStroke KEYSTROKE_DELETE_PREV_TOKEN = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorDeletePrevToken");
+    private final static KeyStroke KEYSTROKE_DELETE_NEXT_TOKEN = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorDeleteNextToken");
+    private final static KeyStroke KEYSTROKE_FIRST_SEG = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorFirstSegment");
+    private final static KeyStroke KEYSTROKE_LAST_SEG = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorLastSegment");
+    private final static KeyStroke KEYSTROKE_SKIP_NEXT_TOKEN = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorSkipNextToken");
+    private final static KeyStroke KEYSTROKE_SKIP_PREV_TOKEN = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorSkipPrevToken");
+    private final static KeyStroke KEYSTROKE_SKIP_NEXT_TOKEN_SEL = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorSkipNextTokenWithSelection");
+    private final static KeyStroke KEYSTROKE_SKIP_PREV_TOKEN_SEL = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorSkipPrevTokenWithSelection");
+    private final static KeyStroke KEYSTROKE_TOGGLE_CURSOR_LOCK = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorToggleCursorLock");
 
     /** Undo Manager to store edits */
     protected final TranslationUndoManager undoManager = new TranslationUndoManager(this);
@@ -284,16 +317,15 @@ public class EditorTextArea3 extends JEditorPane {
 
         boolean processed = false;
 
-        boolean mac = Platform.isMacOSX();
-
         Document3 doc = getOmDocument();
+
+        KeyStroke s = KeyStroke.getKeyStrokeForEvent(e);
 
         // non-standard processing
         if (autoCompleter.processKeys(e)) {
             // The AutoCompleter needs special treatment.
             processed = true;
-        } else if (StaticUtils.isKey(e, KeyEvent.VK_CONTEXT_MENU, 0)
-                || (mac && StaticUtils.isKey(e, KeyEvent.VK_ESCAPE, InputEvent.SHIFT_MASK))) {
+        } else if (KEYSTROKE_CONTEXT_MENU.equals(s)) {
             // Context Menu key for contextual (right-click) menu (Shift+Esc on Mac)
             JPopupMenu popup = makePopupMenu(getCaretPosition());
             if (popup.getComponentCount() > 0) {
@@ -302,20 +334,20 @@ public class EditorTextArea3 extends JEditorPane {
                         (int) getCaret().getMagicCaretPosition().getY());
                 processed = true;
             }
-        } else if (StaticUtils.isKey(e, KeyEvent.VK_TAB, 0)) {
-            // press TAB when 'Use TAB to advance'
+        } else if (KEYSTROKE_NEXT.equals(s)) {
+            // Advance when 'Use TAB to advance'
             if (controller.settings.isUseTabForAdvance()) {
                 controller.nextEntry();
                 processed = true;
             }
-        } else if (StaticUtils.isKey(e, KeyEvent.VK_TAB, InputEvent.SHIFT_MASK)) {
-            // press Shift+TAB when 'Use TAB to advance'
+        } else if (KEYSTROKE_PREV.equals(s)) {
+            // Go back when 'Use TAB to advance'
             if (controller.settings.isUseTabForAdvance()) {
                 controller.prevEntry();
                 processed = true;
             }
-        } else if (StaticUtils.isKey(e, KeyEvent.VK_ENTER, 0)) {
-            // press ENTER
+        } else if (KEYSTROKE_NEXT_NOT_TAB.equals(s)) {
+            // Advance when not 'Use TAB to advance'
             if (!controller.settings.isUseTabForAdvance()) {
                 controller.nextEntry();
                 processed = true;
@@ -323,25 +355,23 @@ public class EditorTextArea3 extends JEditorPane {
                 Core.getMainWindow().showTimedStatusMessageRB("ETA_WARNING_TAB_ADVANCE");
                 processed = true;
             }
-        } else if ((StaticUtils.isKey(e, KeyEvent.VK_ENTER,
-                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()))) {
-            // press Ctrl+ENTER (Cmd+Enter for MacOS)
+        } else if (KEYSTROKE_PREV_NOT_TAB.equals(s)) {
+            // Go back when not 'Use TAB to advance'
             if (!controller.settings.isUseTabForAdvance()) {
                 controller.prevEntry();
                 processed = true;
             }
-        } else if (StaticUtils.isKey(e, KeyEvent.VK_ENTER, InputEvent.SHIFT_MASK)) {
-            // convert Shift+Enter event to straight enter key
+        } else if (KEYSTROKE_INSERT_LF.equals(s)) {
+            // Insert LF
             KeyEvent ke = new KeyEvent(e.getComponent(), e.getID(), e.getWhen(), 0, KeyEvent.VK_ENTER, '\n');
             super.processKeyEvent(ke);
             processed = true;
-        } else if (StaticUtils.isKey(e, KeyEvent.VK_A,
-                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
-            // handling Ctrl+A manually (Cmd+A for MacOS)
+        } else if (KEYSTROKE_SELECT_ALL.equals(s)) {
+            // Select all
             setSelectionStart(doc.getTranslationStart());
             setSelectionEnd(doc.getTranslationEnd());
             processed = true;
-        } else if (StaticUtils.isKey(e, KeyEvent.VK_O, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK)) {
+        } else if (KEYSTROKE_SWITCH_ORIENTATION.equals(s)) {
             // handle Ctrl+Shift+O - toggle orientation LTR-RTL
             Cursor oldCursor = this.getCursor();
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -350,9 +380,8 @@ public class EditorTextArea3 extends JEditorPane {
 
             Core.getMainWindow().showTimedStatusMessageRB("ETA_INFO_TOGGLE_LTR_RTL");
             processed = true;
-        } else if (StaticUtils.isKey(e, KeyEvent.VK_BACK_SPACE,
-                mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK)) {
-            // handle Ctrl+Backspace (Alt+Backspace for MacOS)
+        } else if (KEYSTROKE_DELETE_PREV_TOKEN.equals(s)) {
+            // Delete previous token
             try {
                 processed = wholeTagDelete(false);
                 if (!processed) {
@@ -368,9 +397,8 @@ public class EditorTextArea3 extends JEditorPane {
             } catch (BadLocationException ex) {
                 // do nothing
             }
-        } else if (StaticUtils.isKey(e, KeyEvent.VK_DELETE,
-                mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK)) {
-            // handle Ctrl+Backspace (Alt+Delete for MacOS)
+        } else if (KEYSTROKE_DELETE_NEXT_TOKEN.equals(s)) {
+            // Delete next token
             try {
                 processed = wholeTagDelete(true);
                 if (!processed) {
@@ -386,32 +414,30 @@ public class EditorTextArea3 extends JEditorPane {
             } catch (BadLocationException ex) {
                 // do nothing
             }
-        } else if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_UP,
-                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
-            // Ctrl+PgUp - to the begin of document(Cmd+PgUp for MacOS)
+        } else if (KEYSTROKE_FIRST_SEG.equals(s)) {
+            // Jump to beginning of document
             int segNum = controller.m_docSegList[0].segmentNumberInProject;
             controller.gotoEntry(segNum);
             processed = true;
-        } else if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_DOWN,
-                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
-            // Ctrl+PgDn - to the end of document(Cmd+PgDn for MacOS)
+        } else if (KEYSTROKE_LAST_SEG.equals(s)) {
+            // Jump to end of document
             int lastSegIndex = controller.m_docSegList.length - 1;
             int segNum = controller.m_docSegList[lastSegIndex].segmentNumberInProject;
             controller.gotoEntry(segNum);
             processed = true;
-        } else if (StaticUtils.isKey(e, KeyEvent.VK_LEFT, mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK)) {            
-            // Ctrl+Left - skip to the end of tag (Alt+Left for MacOS)
+        } else if (KEYSTROKE_SKIP_PREV_TOKEN.equals(s)) {
+            // Skip over previous token
             processed = moveCursorOverTag(false, false);
-        } else if (StaticUtils.isKey(e, KeyEvent.VK_LEFT, (mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK) | InputEvent.SHIFT_MASK)) {
-            // Ctrl+Shift+Left - skip to the end of tag (Alt+Shift+Left for MacOS)
+        } else if (KEYSTROKE_SKIP_PREV_TOKEN_SEL.equals(s)) {
+            // Skip over previous token while extending selection
             processed = moveCursorOverTag(true, false);
-        } else if (StaticUtils.isKey(e, KeyEvent.VK_RIGHT, mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK)) {
-            // Ctrl+Right - skip to the end of tag (Alt+Right for MacOS)
+        } else if (KEYSTROKE_SKIP_NEXT_TOKEN.equals(s)) {
+            // Skip over next token
             processed = moveCursorOverTag(false, true);
-        } else if (StaticUtils.isKey(e, KeyEvent.VK_RIGHT, (mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK) | InputEvent.SHIFT_MASK)) {
-            // Ctrl+Shift+Right - skip to the end of tag with selection (Alt+Shift+Right for MacOS)
+        } else if (KEYSTROKE_SKIP_NEXT_TOKEN_SEL.equals(s)) {
+            // Skip over next token while extending selection
             processed = moveCursorOverTag(true, true);
-        } else if (StaticUtils.isKey(e, KeyEvent.VK_F2, 0)) {
+        } else if (KEYSTROKE_TOGGLE_CURSOR_LOCK.equals(s)) {
             boolean lockEnabled = !lockCursorToInputArea;
             final String key = lockEnabled ? "MW_STATUS_CURSOR_LOCK_ON" : "MW_STATUS_CURSOR_LOCK_OFF";
             Core.getMainWindow().showStatusMessageRB(key);

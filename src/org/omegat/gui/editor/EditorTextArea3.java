@@ -68,6 +68,7 @@ import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -378,7 +379,8 @@ public class EditorTextArea3 extends JEditorPane {
             controller.toggleOrientation();
             setCursor(oldCursor);
 
-            Core.getMainWindow().showTimedStatusMessageRB("ETA_INFO_TOGGLE_LTR_RTL");
+            Core.getMainWindow().showTimedStatusMessageRB("ETA_INFO_TOGGLE_LTR_RTL",
+                    StaticUIUtils.getKeyStrokeText(KEYSTROKE_SWITCH_ORIENTATION));
             processed = true;
         } else if (KEYSTROKE_DELETE_PREV_TOKEN.equals(s)) {
             // Delete previous token

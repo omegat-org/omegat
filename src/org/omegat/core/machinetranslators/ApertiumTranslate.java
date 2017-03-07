@@ -44,12 +44,12 @@ public class ApertiumTranslate extends BaseTranslate {
     protected static String GT_URL = "https://www.apertium.org/apy/translate?q=";
     // Specific OmegaT key
     protected static String GT_URL2 = "&markUnknown=no&langpair=#sourceLang#|#targetLang#&key=bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
-    protected static String MARK_BEG = "{\"translatedText\":\"";
+    protected static String MARK_BEG = "{\"translatedText\": \"";
     protected static String MARK_END = "\"}";
     protected static Pattern RE_UNICODE = Pattern.compile("\\\\u([0-9A-Fa-f]{4})");
     protected static Pattern RE_HTML = Pattern.compile("&#([0-9]+);");
-    protected static Pattern RE_DETAILS = Pattern.compile("\"responseDetails\":\"([^\"]+)");
-    protected static Pattern RE_STATUS = Pattern.compile("\"responseStatus\":([0-9]+)");
+    protected static Pattern RE_DETAILS = Pattern.compile("\"responseDetails\"\\s*:\\s*\"([^\"]+)");
+    protected static Pattern RE_STATUS = Pattern.compile("\"responseStatus\"\\s*:\\s*([0-9]+)");
 
     @Override
     protected String getPreferenceName() {
@@ -144,7 +144,7 @@ public class ApertiumTranslate extends BaseTranslate {
             }
             return StringUtil.format(OStrings.getString("APERTIUM_ERROR"), code, details);
         }
-        String tr = v.substring(beg, end - 2); // Remove \n
+        String tr = v.substring(beg, end); // Remove \n
 
         putToCache(sLang, tLang, trText, tr);
         return tr;

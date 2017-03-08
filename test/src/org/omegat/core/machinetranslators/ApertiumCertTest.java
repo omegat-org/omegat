@@ -26,6 +26,8 @@
 package org.omegat.core.machinetranslators;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.net.ssl.SSLHandshakeException;
 
@@ -36,7 +38,30 @@ import org.omegat.util.WikiGet;
 public class ApertiumCertTest extends TestCore {
     private static final String APERTIUM_URL = "https://www.apertium.org/apy/translate?q=Hello+World&langpair=en|ca";
 
+    private int javaVersion = 0;
+    private int javaRevision = 0;
+
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+        String version = System.getProperty("java.version");
+
+        Pattern p = Pattern.compile("^(\\d+)\\.(\\d+)\\.(\\d+)_(\\d+)$");
+
+        Matcher m = p.matcher(version);
+
+        // Can't connect to Let's Encrypt Certs with java 6 (key size is too big)
+        if (m.matches()) {
+            javaVersion = Integer.parseInt(m.group(2));
+            javaRevision = Integer.parseInt(m.group(4));
+        }
+    }
+
     public void testNoCert() throws IOException {
+        if (javaVersion == 6) {
+            return;
+        }
+
         String response;
         response = WikiGet.getURLNoCert(APERTIUM_URL);
         assertNotNull(response);
@@ -44,17 +69,15 @@ public class ApertiumCertTest extends TestCore {
     }
 
     public void testSSLFailure() throws IOException {
-
-        String version = System.getProperty("java.version");
-        
-        if (! version.matches("^1\\.[67]\\.0_\\d{2}$")) {
-            assertTrue("Version " + version + " is probably OK", true);
+        if (javaVersion == 6) {
             return;
         }
         
         try {
             WikiGet.getURL(APERTIUM_URL);
-            fail("Connection with Apertium should fail with a bad Cert.");
+            if ((javaVersion == 7 && javaRevision < 111) || (javaVersion == 8 && javaRevision < 101)) {
+                fail("Connection with Apertium should fail with a bad Cert.");
+            }
         }
         catch (SSLHandshakeException e) {
             assertTrue(e.getMessage().contains("PKIX path building failed"));
@@ -63,6 +86,10 @@ public class ApertiumCertTest extends TestCore {
     
 
     public void testApertiumResponse() throws Exception {
+        if (javaVersion == 6) {
+            return;
+        }
+
         ApertiumTranslate at = new ApertiumTranslate();
         Language sLang = new Language("en");
         Language tLang = new Language("ca");

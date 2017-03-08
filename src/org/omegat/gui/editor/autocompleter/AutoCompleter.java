@@ -92,8 +92,6 @@ public class AutoCompleter implements IAutoCompleter {
     
     public AutoCompleter(EditorTextArea3 editor) { 
         this.editor = editor;
-
-        keys = new AutoCompleterKeys();
         
         scroll = new JScrollPane();
         scroll.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -121,6 +119,8 @@ public class AutoCompleter implements IAutoCompleter {
         popup.setLayout(new BorderLayout());
         popup.add(scroll, BorderLayout.CENTER); 
         popup.add(viewLabel, BorderLayout.SOUTH);
+
+        resetKeys();
     } 
 
     @Override
@@ -437,6 +437,14 @@ public class AutoCompleter implements IAutoCompleter {
         }
         // If we get here, no views had relevant content, so we close the popup.
         setVisible(false);
+    }
+
+    @Override
+    final public void resetKeys() {
+        keys = new AutoCompleterKeys();
+        if (canBecomeVisible()) {
+            updateViewLabel();
+        }
     }
 
     AutoCompleterKeys getKeys() {

@@ -25,11 +25,18 @@
 
 package org.omegat.gui.preferences.view;
 
-import javax.swing.JComponent;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+
+import org.omegat.core.Core;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
+import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * @author Aaron Madlon-Kay
@@ -54,11 +61,18 @@ public class AutoCompleterController extends BasePreferencesController {
 
     private void initGui() {
         panel = new AutoCompleterPreferencesPanel();
+        int mask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+        KeyStroke left = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, mask);
+        KeyStroke right = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, mask);
+        panel.switchWithLRCheckBox.setText(OStrings.getString("PREFS_AUTOCOMPLETE_SWITCH_VIEWS_LR",
+                StaticUIUtils.getKeyStrokeText(left), StaticUIUtils.getKeyStrokeText(right)));
+        panel.switchWithLRCheckBox.setVisible(Platform.isMacOSX());
     }
 
     @Override
     protected void initFromPrefs() {
         panel.automaticCheckBox.setSelected(Preferences.isPreference(Preferences.AC_SHOW_SUGGESTIONS_AUTOMATICALLY));
+        panel.switchWithLRCheckBox.setSelected(Preferences.isPreference(Preferences.AC_SWITCH_VIEWS_WITH_LR));
     }
 
     @Override
@@ -69,5 +83,7 @@ public class AutoCompleterController extends BasePreferencesController {
     @Override
     public void persist() {
         Preferences.setPreference(Preferences.AC_SHOW_SUGGESTIONS_AUTOMATICALLY, panel.automaticCheckBox.isSelected());
+        Preferences.setPreference(Preferences.AC_SWITCH_VIEWS_WITH_LR, panel.switchWithLRCheckBox.isSelected());
+        Core.getEditor().getAutoCompleter().resetKeys();
     }
 }

@@ -395,6 +395,7 @@ public class Preferences {
     public static final String TOK_BEHAVIOR_PREFIX = "tokenizer_behavior_";
 
     public static final String AC_SHOW_SUGGESTIONS_AUTOMATICALLY = "ac_show_suggestions_automatically";
+    public static final String AC_SWITCH_VIEWS_WITH_LR = "ac_switch_views_with_lr";
     
     /** glossary auto-completion */
     public static final String AC_GLOSSARY_ENABLED = "ac_glossary_enabled";

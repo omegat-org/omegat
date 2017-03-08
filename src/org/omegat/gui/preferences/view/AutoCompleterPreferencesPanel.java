@@ -49,15 +49,20 @@ public class AutoCompleterPreferencesPanel extends JPanel {
     private void initComponents() {
 
         automaticCheckBox = new javax.swing.JCheckBox();
+        switchWithLRCheckBox = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
         org.openide.awt.Mnemonics.setLocalizedText(automaticCheckBox, OStrings.getString("PREFS_AUTOCOMPLETE_SHOW_AUTOMATICALLY")); // NOI18N
         add(automaticCheckBox);
+
+        org.openide.awt.Mnemonics.setLocalizedText(switchWithLRCheckBox, OStrings.getString("PREFS_AUTOCOMPLETE_SWITCH_VIEWS_LR")); // NOI18N
+        add(switchWithLRCheckBox);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JCheckBox automaticCheckBox;
+    javax.swing.JCheckBox switchWithLRCheckBox;
     // End of variables declaration//GEN-END:variables
 }

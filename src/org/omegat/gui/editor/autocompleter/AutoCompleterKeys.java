@@ -25,9 +25,13 @@
 
 package org.omegat.gui.editor.autocompleter;
 
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+
 import javax.swing.KeyStroke;
 
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
+import org.omegat.util.Preferences;
 
 /**
  * A container class for all standard AutoCompleter keys. Plugins and other
@@ -74,8 +78,12 @@ public class AutoCompleterKeys {
 
         // AutoCompleter
         trigger = shortcuts.getKeyStroke("autocompleterTrigger");
-        nextView = shortcuts.getKeyStroke("autocompleterNextView");
-        prevView = shortcuts.getKeyStroke("autocompleterPrevView");
+        boolean useLeftRight = Preferences.isPreference(Preferences.AC_SWITCH_VIEWS_WITH_LR);
+        int mask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+        nextView = useLeftRight ? KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, mask)
+                : shortcuts.getKeyStroke("autocompleterNextView");
+        prevView = useLeftRight ? KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, mask)
+                : shortcuts.getKeyStroke("autocompleterPrevView");
         confirmAndClose = shortcuts.getKeyStroke("autocompleterConfirmAndClose");
         confirmWithoutClose = shortcuts.getKeyStroke("autocompleterConfirmWithoutClose");
         close = shortcuts.getKeyStroke("autocompleterClose");

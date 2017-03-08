@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Alex Buloichik, Yu Tang
+               2017 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -29,7 +30,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.InputMap;
@@ -47,18 +52,19 @@ import org.omegat.util.StringUtil;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Yu Tang
+ * @author Aaron Madlon-Kay
  */
 public class PropertiesShortcuts {
 
     private static final Logger LOGGER = Logger.getLogger(PropertiesShortcuts.class.getName());
 
-    private static final String MAIN_MENU_SHORTCUTS_FILE = "/org/omegat/gui/main/MainMenuShortcuts.properties";
-    private static final String EDITOR_SHORTCUTS_FILE = "/org/omegat/gui/main/EditorShortcuts.properties";
+    private static final String BUNDLED_ROOT = "/org/omegat/gui/main/";
+    private static final String MAIN_MENU_SHORTCUTS_FILE = "MainMenuShortcuts.properties";
+    private static final String EDITOR_SHORTCUTS_FILE = "EditorShortcuts.properties";
 
     private static class LoadedShortcuts {
-        static final PropertiesShortcuts MAIN_MENU_SHORTCUTS = new PropertiesShortcuts(
-                MAIN_MENU_SHORTCUTS_FILE);
-        static final PropertiesShortcuts EDITOR_SHORTCUTS = new PropertiesShortcuts(EDITOR_SHORTCUTS_FILE);
+        static final PropertiesShortcuts MAIN_MENU_SHORTCUTS = loadBundled(BUNDLED_ROOT, MAIN_MENU_SHORTCUTS_FILE);;
+        static final PropertiesShortcuts EDITOR_SHORTCUTS = loadBundled(BUNDLED_ROOT, EDITOR_SHORTCUTS_FILE);
     }
 
     public static PropertiesShortcuts getMainMenuShortcuts() {
@@ -69,7 +75,7 @@ public class PropertiesShortcuts {
         return LoadedShortcuts.EDITOR_SHORTCUTS;
     }
 
-    final Properties properties = new Properties();
+    private final Map<String, String> data = new HashMap<>();
 
     /**
      * Creates shortcut list with the specified defaults and user shortcuts.
@@ -81,43 +87,84 @@ public class PropertiesShortcuts {
      * For each shortcut, user shortcuts have priority, then defaults (for
      * Mac-specific or others).
      *
-     * @param conf
-     *            ShortcutsConfiguration
+     * @param classpathRoot
+     *            the path to the file on the classpath. Should include a
+     *            trailing slash.
+     * @param filename
+     *            name of file to load
      */
-    public PropertiesShortcuts(String propertiesFile) {
+    static PropertiesShortcuts loadBundled(String classpathRoot, String filename) {
+        PropertiesShortcuts result = new PropertiesShortcuts();
         try {
-            if (Platform.isMacOSX()) {
-                String macSpecific = propertiesFile.replaceAll("\\.properties$", ".mac.properties");
-                loadProperties(macSpecific);
-            }
-            if (properties.isEmpty()) {
-                loadProperties(propertiesFile);
-            }
-            File userFile = new File(StaticUtils.getConfigDir(), new File(propertiesFile).getName());
-            loadProperties(userFile);
+            result.loadFromClasspath(classpathRoot + filename);
+            result.loadFromFile(new File(StaticUtils.getConfigDir(), filename));
         } catch (IOException ex) {
-            throw new ExceptionInInitializerError(ex);
+            LOGGER.log(Level.SEVERE, "Failed to load shortcuts properties file", ex);
+        }
+        return result;
+    }
+
+    public void loadFromClasspath(String propertiesFile) throws IOException {
+        boolean loaded = false;
+        if (Platform.isMacOSX()) {
+            String macSpecific = getMacProperties(propertiesFile);
+            loaded = loadFromClasspathImpl(macSpecific);
+        }
+        if (!loaded) {
+            loadFromClasspathImpl(propertiesFile);
         }
     }
 
-    private void loadProperties(String path) throws IOException {
+    private String getMacProperties(String properties) {
+        return properties.replaceAll("\\.properties$", ".mac.properties");
+    }
+
+    /**
+     * Load the properties file from the classpath
+     * 
+     * @param path
+     * @return whether the file was loaded (<code>false</code> if not present,
+     *         etc.)
+     * @throws IOException
+     */
+    private boolean loadFromClasspathImpl(String path) throws IOException {
         try (InputStream in = getClass().getResourceAsStream(path)) {
             if (in != null) {
-                properties.load(in);
+                loadProperties(in);
+                return true;
             }
+        }
+        return false;
+    }
+
+    public void loadFromFile(File file) throws IOException {
+        boolean loaded = false;
+        if (Platform.isMacOSX()) {
+            File macSpecific = new File(getMacProperties(file.getPath()));
+            if (macSpecific.isFile()) {
+                loadFromFileImpl(macSpecific);
+                loaded = true;
+            }
+        }
+        if (!loaded && file.isFile()) {
+            loadFromFileImpl(file);
         }
     }
 
-    private void loadProperties(File file) throws IOException {
-        if (file.isFile()) {
-            try (FileInputStream fis = new FileInputStream(file)) {
-                properties.load(fis);
-            }
+    private void loadFromFileImpl(File file) throws IOException {
+        try (FileInputStream fis = new FileInputStream(file)) {
+            loadProperties(fis);
         }
+    }
+
+    private void loadProperties(InputStream in) throws IOException {
+        Properties props = new Properties();
+        props.load(in);
+        props.forEach((k, v) -> data.put(k.toString(), v.toString()));
     }
 
     public KeyStroke getKeyStroke(String key) {
-        String shortcut = properties.getProperty(key);
+        String shortcut = data.get(key);
         if (shortcut == null) {
             throw new IllegalArgumentException("Keyboard shortcut not defined. Key=" + key);
         }
@@ -188,5 +235,18 @@ public class PropertiesShortcuts {
             }
         }
         return removedEntry;
+    }
+
+    public boolean isEmpty() {
+        return data.isEmpty();
+    }
+
+    /**
+     * For testing purposes
+     * 
+     * @return Unmodifiable reference to data held by this instance
+     */
+    Map<String, String> getData() {
+        return Collections.unmodifiableMap(data);
     }
 }

@@ -54,38 +54,45 @@ import org.omegat.util.StaticUtils;
  * @author Yu Tang
  */
 public class PropertiesShortcutsTest {
+    private static final String TEST_SAVE = "TEST_SAVE";
+    private static final String TEST_CUT = "TEST_CUT";
+    private static final String TEST_DELETE = "TEST_DELETE"; // overrided with user properties
+    private static final String TEST_USER_1 = "TEST_USER_1"; // added from user properties
+    private static final String OUT_OF_LIST = "OUT_OF_LIST";
+    private static final KeyStroke CTRL_S = KeyStroke.getKeyStroke("ctrl S");
+    private static final KeyStroke CTRL_X = KeyStroke.getKeyStroke("ctrl X");
+    private static final KeyStroke CTRL_D = KeyStroke.getKeyStroke("ctrl D");
+    private static final KeyStroke CTRL_P = KeyStroke.getKeyStroke("ctrl P");
+    private static final String USER_FILE_NAME = "test.properties";
+    private static final String BUNDLED_ROOT = "/org/omegat/gui/shortcuts/";
+
+    private static File USER_FILE;
+
     private PropertiesShortcuts shortcuts;
-    private final String TEST_SAVE = "TEST_SAVE";
-    private final String TEST_CUT = "TEST_CUT";
-    private final String TEST_DELETE = "TEST_DELETE"; // overrided with user properties
-    private final String TEST_USER_1 = "TEST_USER_1"; // added from user properties
-    private final String OUT_OF_LIST = "OUT_OF_LIST";
-    private final KeyStroke CTRL_S = KeyStroke.getKeyStroke("ctrl S");
-    private final KeyStroke CTRL_X = KeyStroke.getKeyStroke("ctrl X");
-    private final KeyStroke CTRL_D = KeyStroke.getKeyStroke("ctrl D");
-    private final KeyStroke CTRL_P = KeyStroke.getKeyStroke("ctrl P");
 
     @BeforeClass
     public static void setUpClass() throws IOException {
         // Copy user-defined properties to user config dir
-        File userFile = new File(StaticUtils.getConfigDir(), "test.properties");
+        USER_FILE = new File(StaticUtils.getConfigDir(), USER_FILE_NAME);
         try (InputStream in = PropertiesShortcutsTest.class.getResourceAsStream("test.user.properties")) {
-            FileUtils.copyInputStreamToFile(in, userFile);
+            FileUtils.copyInputStreamToFile(in, USER_FILE);
         }
-        assertTrue(userFile.isFile());
+        assertTrue(USER_FILE.isFile());
     }
 
     @AfterClass
     public static void tearDownClass() {
         // Delete user-defined properties
-        File file = new File(StaticUtils.getConfigDir(), "test.properties");
-        assertTrue(file.delete());
+        assertTrue(USER_FILE.delete());
     }
 
     @Before
-    public void setUp() {
-        shortcuts = new PropertiesShortcuts("/org/omegat/gui/shortcuts/test.properties");
-        assertFalse(shortcuts.properties.isEmpty());
+    public void setUp() throws IOException {
+        shortcuts = new PropertiesShortcuts();
+        assertTrue(shortcuts.isEmpty());
+        shortcuts.loadFromClasspath(BUNDLED_ROOT + USER_FILE_NAME);
+        shortcuts.loadFromFile(USER_FILE);
+        assertFalse(shortcuts.isEmpty());
     }
 
     @After
@@ -249,5 +256,11 @@ public class PropertiesShortcutsTest {
 
         // ensure no affect for entry3 after removing
         assertEquals(TEST_USER_1, inputMap.get(CTRL_P));
+    }
+
+    @Test
+    public void testLoadBundled() {
+        PropertiesShortcuts props = PropertiesShortcuts.loadBundled(BUNDLED_ROOT, USER_FILE_NAME);
+        assertEquals(shortcuts.getData(), props.getData());
     }
 }

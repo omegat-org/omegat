@@ -51,7 +51,6 @@ import org.omegat.gui.editor.chartable.CharTableAutoCompleterView;
 import org.omegat.gui.editor.history.HistoryCompleter;
 import org.omegat.gui.editor.history.HistoryPredictor;
 import org.omegat.gui.glossary.GlossaryAutoCompleterView;
-import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -65,25 +64,13 @@ import org.omegat.util.gui.StaticUIUtils;
  * @author Aaron Madlon-Kay
  */
 public class AutoCompleter implements IAutoCompleter {
-    
-    private final static KeyStroke KEYSTROKE_TRIGGER = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterTrigger");
-    private final static KeyStroke KEYSTROKE_NEXT_VIEW = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterNextView");
-    private final static KeyStroke KEYSTROKE_PREV_VIEW = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterPrevView");
-    private final static KeyStroke KEYSTROKE_CONFIRM_AND_CLOSE = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterConfirmAndClose");
-    private final static KeyStroke KEYSTROKE_CONFIRM_WITHOUT_CLOSE = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterConfirmWithoutClose");
-    private final static KeyStroke KEYSTROKE_CLOSE = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterClose");
 
     private final static int MIN_VIEWPORT_HEIGHT = 50;
     private final static int MAX_POPUP_WIDTH = 500;
     
     JPopupMenu popup = new JPopupMenu(); 
     private EditorTextArea3 editor; 
+    private AutoCompleterKeys keys;
     
     
     public final static int PAGE_ROW_COUNT = 10;
@@ -104,7 +91,9 @@ public class AutoCompleter implements IAutoCompleter {
     JLabel viewLabel;
     
     public AutoCompleter(EditorTextArea3 editor) { 
-        this.editor = editor; 
+        this.editor = editor;
+
+        keys = new AutoCompleterKeys();
         
         scroll = new JScrollPane();
         scroll.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -153,7 +142,7 @@ public class AutoCompleter implements IAutoCompleter {
         
         KeyStroke s = KeyStroke.getKeyStrokeForEvent(e);
 
-        if (!isVisible() && s.equals(KEYSTROKE_TRIGGER)) {
+        if (!isVisible() && s.equals(keys.trigger)) {
 
             if (!editor.isInActiveTranslation(editor.getCaretPosition())) {
                 return false;
@@ -174,28 +163,28 @@ public class AutoCompleter implements IAutoCompleter {
                 return true;
             }
             
-            if (s.equals(KEYSTROKE_CONFIRM_AND_CLOSE)) {
+            if (s.equals(keys.confirmAndClose)) {
                 doSelection();
                 return true;
             }
             
-            if (s.equals(KEYSTROKE_CONFIRM_WITHOUT_CLOSE)) {
+            if (s.equals(keys.confirmWithoutClose)) {
                 acceptedListItem(getSelectedValue()); 
                 updatePopup(false);
                 return true;
             }
 
-            if (s.equals(KEYSTROKE_CLOSE)) {
+            if (s.equals(keys.close)) {
                 setVisible(false);
                 return true;
             }
             
-            if (s.equals(KEYSTROKE_PREV_VIEW)) {
+            if (s.equals(keys.prevView)) {
                 selectPreviousView();
                 return true;
             }
             
-            if (s.equals(KEYSTROKE_NEXT_VIEW)) {
+            if (s.equals(keys.nextView)) {
                 selectNextView();
                 return true;
             }
@@ -333,7 +322,7 @@ public class AutoCompleter implements IAutoCompleter {
             if (views.size() >= 2 && nextViewN != -1) {
                 sb.append("<br>");
                 sb.append(OStrings.getString("AC_NEXT_VIEW",
-                        StaticUIUtils.getKeyStrokeText(KEYSTROKE_NEXT_VIEW),
+                        StaticUIUtils.getKeyStrokeText(keys.nextView),
                         views.get(nextViewN).getName()));
             }
             
@@ -341,7 +330,7 @@ public class AutoCompleter implements IAutoCompleter {
             if (views.size() > 2 && prevViewN != -1) {
                 sb.append("<br>");
                 sb.append(OStrings.getString("AC_PREV_VIEW",
-                        StaticUIUtils.getKeyStrokeText(KEYSTROKE_PREV_VIEW),
+                        StaticUIUtils.getKeyStrokeText(keys.prevView),
                         views.get(prevViewN).getName()));
             }
         }
@@ -448,5 +437,9 @@ public class AutoCompleter implements IAutoCompleter {
         }
         // If we get here, no views had relevant content, so we close the popup.
         setVisible(false);
+    }
+
+    AutoCompleterKeys getKeys() {
+        return keys;
     }
 }

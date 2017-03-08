@@ -40,7 +40,6 @@ import javax.swing.KeyStroke;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.OStrings;
 import org.omegat.util.Token;
@@ -52,17 +51,6 @@ import org.omegat.util.Token;
  * @author Aaron Madlon-Kay
  */
 public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
-    
-    private final static KeyStroke KEYSTROKE_UP = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterListUp");
-    private final static KeyStroke KEYSTROKE_UP_EMACS = KeyStroke.getKeyStroke("ctrl P");
-    private final static KeyStroke KEYSTROKE_DOWN = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterListDown");
-    private final static KeyStroke KEYSTROKE_DOWN_EMACS = KeyStroke.getKeyStroke("ctrl N");
-    private final static KeyStroke KEYSTROKE_PAGE_UP = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterListPageUp");
-    private final static KeyStroke KEYSTROKE_PAGE_DOWN = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterListPageDown");
 
     private static JList<AutoCompleterItem> list;
     
@@ -109,23 +97,24 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
         }
 
         KeyStroke s = KeyStroke.getKeyStrokeForEvent(e);
+        AutoCompleterKeys keys = completer.getKeys();
 
-        if (s.equals(KEYSTROKE_UP) || s.equals(KEYSTROKE_UP_EMACS)) {
+        if (s.equals(keys.listUp) || s.equals(keys.listUpEmacs)) {
             selectPreviousPossibleValue();
             return true;
         }
 
-        if (s.equals(KEYSTROKE_DOWN) || s.equals(KEYSTROKE_DOWN_EMACS)) {
+        if (s.equals(keys.listDown) || s.equals(keys.listDownEmacs)) {
             selectNextPossibleValue();
             return true;
         }
 
-        if (s.equals(KEYSTROKE_PAGE_UP)) {
+        if (s.equals(keys.listPageUp)) {
             selectPreviousPossibleValueByPage();
             return true;
         }
 
-        if (s.equals(KEYSTROKE_PAGE_DOWN)) {
+        if (s.equals(keys.listPageDown)) {
             selectNextPossibleValueByPage();
             return true;
         }

@@ -35,8 +35,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
 
-import org.omegat.gui.shortcuts.PropertiesShortcuts;
-
 /**
  * Table-based auto-completer view
  * 
@@ -44,31 +42,6 @@ import org.omegat.gui.shortcuts.PropertiesShortcuts;
  * @author Aaron Madlon-Kay
  */
 public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
-    
-    private final static KeyStroke KEYSTROKE_UP = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterTableUp");
-    private final static KeyStroke KEYSTROKE_UP_EMACS = KeyStroke.getKeyStroke("ctrl P");
-    private final static KeyStroke KEYSTROKE_DOWN = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterTableDown");
-    private final static KeyStroke KEYSTROKE_DOWN_EMACS = KeyStroke.getKeyStroke("ctrl N");
-    private final static KeyStroke KEYSTROKE_LEFT = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterTableLeft");
-    private final static KeyStroke KEYSTROKE_LEFT_EMACS = KeyStroke.getKeyStroke("ctrl B");
-    private final static KeyStroke KEYSTROKE_RIGHT = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterTableRight");
-    private final static KeyStroke KEYSTROKE_RIGHT_EMACS = KeyStroke.getKeyStroke("ctrl F");
-    private final static KeyStroke KEYSTROKE_PAGE_UP = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterTablePageUp");
-    private final static KeyStroke KEYSTROKE_PAGE_DOWN = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterTablePageDown");
-    private final static KeyStroke KEYSTROKE_FIRST = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterTableFirst");
-    private final static KeyStroke KEYSTROKE_LAST = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterTableLast");
-    private final static KeyStroke KEYSTROKE_FIRST_IN_ROW = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterTableFirstInRow");
-    private final static KeyStroke KEYSTROKE_LAST_IN_ROW = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("autocompleterTableLastInRow");
 
     /**
      * the table. Use getTable() to access the value;
@@ -130,53 +103,54 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
     public boolean processKeys(KeyEvent e) {
 
         KeyStroke s = KeyStroke.getKeyStrokeForEvent(e);
+        AutoCompleterKeys keys = completer.getKeys();
 
-        if (s.equals(KEYSTROKE_UP) || s.equals(KEYSTROKE_UP_EMACS)) {
+        if (s.equals(keys.tableUp) || s.equals(keys.tableUpEmacs)) {
             selectPreviousPossibleValueUp();
             return true;
         }
 
-        if (s.equals(KEYSTROKE_LEFT) || s.equals(KEYSTROKE_LEFT_EMACS)) {
+        if (s.equals(keys.tableLeft) || s.equals(keys.tableLeftEmacs)) {
             selectPreviousPossibleValueLeft();
             return true;
         }
         
-        if (s.equals(KEYSTROKE_DOWN) || s.equals(KEYSTROKE_DOWN_EMACS)) {
+        if (s.equals(keys.tableDown) || s.equals(keys.tableDownEmacs)) {
             selectNextPossibleValueDown();
             return true;
         }
 
-        if (s.equals(KEYSTROKE_RIGHT) || s.equals(KEYSTROKE_RIGHT_EMACS)) {
+        if (s.equals(keys.tableRight) || s.equals(keys.tableRightEmacs)) {
             selectNextPossibleValueRight();
             return true;
         }
         
-        if (s.equals(KEYSTROKE_PAGE_UP)) {
+        if (s.equals(keys.tablePageUp)) {
             selectPreviousPossibleValueByPage();
             return true;
         }
 
-        if (s.equals(KEYSTROKE_PAGE_DOWN)) {
+        if (s.equals(keys.tablePageDown)) {
             selectNextPossibleValueByPage();
             return true;
         }
         
-        if (s.equals(KEYSTROKE_FIRST)) {
+        if (s.equals(keys.tableFirst)) {
             selectFirstPossibleValue();
             return true;
         }
 
-        if (s.equals(KEYSTROKE_LAST)) {
+        if (s.equals(keys.tableLast)) {
             selectLastPossibleValue();
             return true;
         }
         
-        if (s.equals(KEYSTROKE_FIRST_IN_ROW)) {
+        if (s.equals(keys.tableFirstInRow)) {
             selectFirstPossibleValueInLine();
             return true;
         }
 
-        if (s.equals(KEYSTROKE_LAST_IN_ROW)) {
+        if (s.equals(keys.tableLastInRow)) {
             selectLastPossibleValueInLine();
             return true;
         }

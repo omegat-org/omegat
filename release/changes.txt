@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.1
 ----------------------------------------------------------------------
-  8 Enhancements
+  9 Enhancements
   3 Bug fixes
   8 Localisation updates
 ----------------------------------------------------------------------
@@ -31,6 +31,10 @@
 
   - External Search menu items are split into nested submenus of 10 items to
 accommodate users with numerous item definitions.
+
+  - Mac only: The keys to switch auto-completer views have been changed
+to Cmd+Up/Down. To change them back, see Preferences > Auto-Completion >
+Switch views with Cmd+Left and Cmd+Right.
 
   Bug fixes:
 

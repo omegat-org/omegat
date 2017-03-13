@@ -611,7 +611,7 @@ public class PreferencesWindowController implements FurtherActionListener {
      * @return true if any of the nodes' visibility values were changed
      */
     private static boolean setTreeVisible(HideableNode root, boolean isVisible) {
-        List<Boolean> changes = walkTree(root, node -> {
+        List<Boolean> changes = mapTree(root, node -> {
             HideableNode hideable = (HideableNode) node;
             boolean wasVisible = hideable.isVisible;
             hideable.setVisible(isVisible);
@@ -684,7 +684,7 @@ public class PreferencesWindowController implements FurtherActionListener {
         }
     }
     
-    private static <T> List<T> walkTree(DefaultMutableTreeNode node,
+    private static <T> List<T> mapTree(DefaultMutableTreeNode node,
             Function<DefaultMutableTreeNode, T> function) {
         List<T> results = new ArrayList<>();
         walkTree(node, n -> {

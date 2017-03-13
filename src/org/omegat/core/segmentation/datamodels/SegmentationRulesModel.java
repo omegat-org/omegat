@@ -144,7 +144,7 @@ public class SegmentationRulesModel extends AbstractTableModel {
     }
 
     //
-    // Managing Listeners of Errorneous Input
+    // Managing Listeners of Erroneous Input
     //
 
     /** List of listeners */
@@ -154,7 +154,7 @@ public class SegmentationRulesModel extends AbstractTableModel {
         listeners.add(l);
     }
 
-    public void removeTableModelListener(ExceptionListener l) {
+    public void removeExceptionListener(ExceptionListener l) {
         listeners.remove(l);
     }
 

@@ -1481,28 +1481,31 @@ public class RealProject implements IProject {
         setProjectModified(true);
     }
 
-    @SuppressWarnings("unchecked")
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
         Map.Entry<String, TMXEntry>[] entries;
         synchronized (projectTMX) {
-            Set<Map.Entry<String, TMXEntry>> set = projectTMX.defaults.entrySet();
-            entries = set.toArray(new Map.Entry[set.size()]);
+            entries = entrySetToArray(projectTMX.defaults.entrySet());
         }
         for (Map.Entry<String, TMXEntry> en : entries) {
             it.iterate(en.getKey(), en.getValue());
         }
     }
 
-    @SuppressWarnings("unchecked")
     public void iterateByMultipleTranslations(MultipleTranslationsIterator it) {
         Map.Entry<EntryKey, TMXEntry>[] entries;
         synchronized (projectTMX) {
-            Set<Map.Entry<EntryKey, TMXEntry>> set = projectTMX.alternatives.entrySet();
-            entries = set.toArray(new Map.Entry[set.size()]);
+            entries = entrySetToArray(projectTMX.alternatives.entrySet());
         }
         for (Map.Entry<EntryKey, TMXEntry> en : entries) {
             it.iterate(en.getKey(), en.getValue());
         }
+    }
+    
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    private <K, V> Map.Entry<K, V>[] entrySetToArray(Set<Map.Entry<K, V>> set) {
+        // Assign to variable to facilitate suppressing the rawtypes warning
+        Map.Entry[] a = new Map.Entry[set.size()];
+        return set.toArray(a);
     }
     
     public boolean isOrphaned(String source) {

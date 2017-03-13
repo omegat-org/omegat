@@ -168,6 +168,7 @@ public class MainWindowUI {
                 break;
             case SAVE:
                 saveScreenLayout(mainWindow, perProjLayout);
+                break;
             default:
             }
         }

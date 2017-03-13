@@ -164,6 +164,7 @@ public class TagIssue implements IIssue {
         };
     }
 
+    @SuppressWarnings("fallthrough")
     public static AttributeSet styleForError(TagError error) {
         SimpleAttributeSet attr = new SimpleAttributeSet();
         StyleConstants.setBold(attr, true);
@@ -181,10 +182,11 @@ public class TagIssue implements IIssue {
         case ORPHANED:
             StyleConstants.setUnderline(attr, true);
         case ORDER:
-            StyleConstants.setForeground(attr, Color.decode("#FF8C00"));
+            StyleConstants.setForeground(attr, Color.decode("#FF8C00")); // orange
             break;
         case UNSPECIFIED:
             StyleConstants.setForeground(attr, Color.BLUE);
+            break;
         }
         return attr;
     }
@@ -212,6 +214,7 @@ public class TagIssue implements IIssue {
         return true;
     }
 
+    @SuppressWarnings("fallthrough")
     public static String colorizeByHTML(String text, TagError error) {
         String color = "black";
         switch (error) {
@@ -233,6 +236,7 @@ public class TagIssue implements IIssue {
             break;
         case UNSPECIFIED:
             color = "blue";
+            break;
         }
         return "<font color=\"" + color + "\"><b>" + text + "</b></font>";
     }

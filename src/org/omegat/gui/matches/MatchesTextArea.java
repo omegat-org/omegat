@@ -461,6 +461,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                                 r.length,
                                 i == activeMatch ? ATTRIBUTES_INSERTED_ACTIVE : ATTRIBUTES_INSERTED_INACTIVE,
                                 false);
+                            break;
                         case NOCHANGE:
                             // Nothing
                         }

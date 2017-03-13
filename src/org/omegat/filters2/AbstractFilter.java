@@ -307,6 +307,7 @@ public abstract class AbstractFilter implements IFilter {
     /**
      * {@inheritDoc}
      */
+    @Deprecated
     @Override
     public Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
         return null;

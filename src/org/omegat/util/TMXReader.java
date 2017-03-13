@@ -1119,9 +1119,9 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler {
     }
 
     // Constants for certain TMX tag names/attributes
-    private final static String TMX_TMX_TAG = "tmx";
+    //private final static String TMX_TMX_TAG = "tmx";
     private final static String TMX_TAG_HEADER = "header";
-    private final static String TMX_TAG_BODY = "body";
+    //private final static String TMX_TAG_BODY = "body";
     private final static String TMX_TAG_TU = "tu";
     private final static String TMX_TAG_TUV = "tuv";
     private final static String TMX_TAG_SEG = "seg";

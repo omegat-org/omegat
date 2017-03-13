@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.html2.HTMLFilter2;
@@ -150,11 +151,12 @@ public class TmxComplianceTests extends TmxComplianceBase {
      * Test Import1K - No Import
      */
     @Test
+    @Ignore
     public void testImport1K() throws Exception {
         ProjectProperties props = new TestProjectProperties("EN-US", "EN-GB");
         final ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), new File("test/data/tmx/TMXComplianceKit/ImportTest1K.tmx"),
                 orphanedCallback);
-        // TODO assertEquals(0, tmx.translationDefault.size());
+        assertEquals(0, tmx.defaults.size());
     }
 
     /**

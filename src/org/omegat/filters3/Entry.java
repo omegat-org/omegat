@@ -274,7 +274,7 @@ public class Entry {
             // trying to test
             int recursion = 1;
             for (int i = firstGood + 1; i < textEnd; i++) {
-                Element candElement = (Element) get(i);
+                Element candElement = get(i);
                 if (candElement instanceof Tag) {
                     Tag cand = (Tag) candElement;
                     if (cand.getTag().equals(good.getTag())) {

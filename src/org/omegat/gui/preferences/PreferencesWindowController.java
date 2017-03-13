@@ -586,13 +586,13 @@ public class PreferencesWindowController implements FurtherActionListener {
     }
 
     private void selectView(IPreferencesController view) {
-        firstNodeInTree(getRoot(), node -> ((DefaultMutableTreeNode) node).getUserObject() == view)
+        firstNodeInTree(getRoot(), node -> node.getUserObject() == view)
                 .ifPresent(this::selectNode);
     }
 
     private void selectView(Class<? extends IPreferencesController> viewClass) {
         firstNodeInTree(getRoot(), node -> {
-            Object obj = ((DefaultMutableTreeNode) node).getUserObject();
+            Object obj = node.getUserObject();
             return obj != null && obj.getClass().equals(viewClass);
         }).ifPresent(this::selectNode);
     }

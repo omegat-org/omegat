@@ -134,7 +134,7 @@ public class YandexTranslate extends BaseTranslate {
         XPath xPathText = xPathFactory.newXPath();
         String pathText = "/Translation[@code='200']/text";
 
-        String result = (String) xPathText.evaluate(pathText, new InputSource(new StringReader(response.response)));
+        String result = xPathText.evaluate(pathText, new InputSource(new StringReader(response.response)));
 
         putToCache(sLang, tLang, lvShorText, result);
         return result;

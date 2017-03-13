@@ -404,7 +404,7 @@ public class ScriptingWindow {
         }
         
         public void updateQuickScript() {
-            ScriptItem scriptItem = (ScriptItem) m_scriptList.getSelectedValue();
+            ScriptItem scriptItem = m_scriptList.getSelectedValue();
             updateQuickScript(scriptItem);
         }
         
@@ -726,7 +726,7 @@ public class ScriptingWindow {
             return;
         }
         try {
-            m_currentScriptItem = (ScriptItem) m_scriptList.getSelectedValue();
+            m_currentScriptItem = m_scriptList.getSelectedValue();
             m_txtScriptEditor.setHighlighting(FilenameUtils.getExtension(m_currentScriptItem.getFile().getName().toLowerCase()));
             
             m_txtScriptEditor.getTextArea().setText(m_currentScriptItem.getText());

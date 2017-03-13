@@ -118,12 +118,12 @@ public class GITCredentialsProvider extends CredentialsProvider {
     static final String KEY_PASSWORD_SUFFIX = "password";
     static final String KEY_FINGERPRINT_SUFFIX = "fingerprint";
 
-    private ProjectTeamSettings teamSettings;
+    //private ProjectTeamSettings teamSettings;
     /** Predefined in the omegat.project file. */
     private final Map<String, String> predefined = Collections.synchronizedMap(new HashMap<String, String>());
 
     public void setTeamSettings(ProjectTeamSettings teamSettings) {
-        this.teamSettings = teamSettings;
+        //this.teamSettings = teamSettings;
     }
 
     public void setPredefinedCredentials(String url, String predefinedUser, String predefinedPass,

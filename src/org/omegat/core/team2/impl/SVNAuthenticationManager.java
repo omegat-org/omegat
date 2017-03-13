@@ -71,14 +71,14 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
     private final String repoUrl;
     private final String predefinedUser;
     private final String predefinedPass;
-    private final ProjectTeamSettings teamSettings;
+    //private final ProjectTeamSettings teamSettings;
 
     public SVNAuthenticationManager(String repoUrl, String predefinedUser, String predefinedPass,
             ProjectTeamSettings teamSettings) {
         this.repoUrl = repoUrl;
         this.predefinedUser = predefinedUser;
         this.predefinedPass = predefinedPass;
-        this.teamSettings = teamSettings;
+        //this.teamSettings = teamSettings;
     }
 
     @Override

@@ -25,6 +25,8 @@
 
 package org.omegat.core.data;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.util.List;
 import java.util.Map;

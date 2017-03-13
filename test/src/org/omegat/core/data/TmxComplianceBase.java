@@ -25,6 +25,9 @@
 
 package org.omegat.core.data;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,6 +44,8 @@ import java.util.regex.Pattern;
 
 import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Before;
+import org.junit.Rule;
+import org.junit.rules.TestName;
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
@@ -50,8 +55,6 @@ import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.text.TextFilter;
-
-import junit.framework.TestCase;
 import org.omegat.util.TestPreferencesInitializer;
 
 /**
@@ -59,11 +62,14 @@ import org.omegat.util.TestPreferencesInitializer;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public abstract class TmxComplianceBase extends TestCase {
+public abstract class TmxComplianceBase {
 
     static Pattern RE_SEG = Pattern.compile("(<seg>.+</seg>)");
 
     protected File outFile;
+
+    @Rule
+    public TestName name = new TestName();
 
     @Before
     public void setUp() throws Exception {
@@ -71,7 +77,7 @@ public abstract class TmxComplianceBase extends TestCase {
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
         TestPreferencesInitializer.init();
 
-        outFile = new File("build/testdata/" + getClass().getSimpleName() + "-" + getName() + ".out");
+        outFile = new File("build/testdata/" + getClass().getSimpleName() + "-" + name.getMethodName() + ".out");
         outFile.getParentFile().mkdirs();
         if (outFile.exists()) {
             if (!outFile.delete()) {

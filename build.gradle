@@ -639,6 +639,9 @@ allprojects {
     javadoc {
         failOnError = false
     }
+    tasks.withType(JavaCompile) {
+       options.compilerArgs.addAll '-Xlint', '-Werror'
+    }
 }
 
 task jar2(type: Sync) {

@@ -52,6 +52,7 @@ import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.text.TextFilter;
 
 import junit.framework.TestCase;
+import org.omegat.util.TestPreferencesInitializer;
 
 /**
  * Base methods for TMX compliance tests.
@@ -68,6 +69,7 @@ public abstract class TmxComplianceBase extends TestCase {
     public void setUp() throws Exception {
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
+        TestPreferencesInitializer.init();
 
         outFile = new File("build/testdata/" + getClass().getSimpleName() + "-" + getName() + ".out");
         outFile.getParentFile().mkdirs();

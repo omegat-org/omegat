@@ -30,6 +30,7 @@ import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -184,6 +185,11 @@ public class DirectoryMonitor extends Thread {
             }
             FileInfo o = (FileInfo) obj;
             return lastModified == o.lastModified && length == o.length;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(lastModified, length);
         }
     }
 

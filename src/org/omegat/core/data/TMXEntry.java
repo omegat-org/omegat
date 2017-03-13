@@ -28,6 +28,8 @@
 
 package org.omegat.core.data;
 
+import java.util.Objects;
+
 import org.omegat.util.StringUtil;
 
 /**
@@ -117,6 +119,12 @@ public class TMXEntry {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(changeDate / 1000, creationDate / 1000, translation, note, linked, changer, creator,
+                defaultTranslation, source);
     }
 
     /**

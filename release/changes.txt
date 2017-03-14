@@ -2,7 +2,7 @@
  OmegaT 4.1.1
 ----------------------------------------------------------------------
   9 Enhancements
-  3 Bug fixes
+  4 Bug fixes
   8 Localisation updates
 ----------------------------------------------------------------------
 4.1.1 vs 4.1.0
@@ -46,6 +46,9 @@ views with Cmd+Left and Cmd+Right.
 
   - Exception when loading TMX missing `srclang` attribute in header
   https://sourceforge.net/p/omegat/bugs/853/
+
+  - Scripting: console.print() and println() add an extra line break
+  https://sourceforge.net/p/omegat/bugs/855/
 
   Localisation Updates:
 

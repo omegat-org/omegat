@@ -604,12 +604,12 @@ public class ScriptingWindow {
         bindings.put(ScriptRunner.VAR_CONSOLE, new IScriptLogger() {
             @Override
             public void print(Object o) {
-                logResult(o.toString());
+                logResult(o.toString(), false);
             }
 
             @Override
             public void println(Object o) {
-                print(o.toString() + "\n");
+                logResult(o.toString(), true);
             }
 
             @Override
@@ -642,23 +642,27 @@ public class ScriptingWindow {
     }
 
     private void logResult(String s, Throwable t) {
-        logResultToWindow(s + "\n" + t.getMessage());
+        logResultToWindow(s + "\n" + t.getMessage(), true);
         LOGGER.log(Level.SEVERE, s, t);
     }
 
     private void logResult(String s) {
-        logResultToWindow(s);
+        logResult(s, true);
+    }
+    
+    private void logResult(String s, boolean newLine) {
+        logResultToWindow(s, newLine);
         LOGGER.log(Level.INFO, s);
     }
 
     /**
      * Print log text to the Scripting Window's console area. A trailing line break will be added
-     * automatically.
+     * if the parameter newLine is true.
      */
-    private void logResultToWindow(String s) {
+    private void logResultToWindow(String s, boolean newLine) {
         Document doc = m_txtResult.getDocument();
         try {
-            doc.insertString(doc.getLength(), s + "\n", null);
+            doc.insertString(doc.getLength(), s + (newLine ? "\n" : ""), null);
         } catch (BadLocationException e1) {
             /* empty */
         }

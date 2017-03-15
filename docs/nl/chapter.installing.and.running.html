@@ -5,8 +5,8 @@
       <title>Hoofdstuk 3. Installeren en uitvoeren van OmegaT</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT 3.1 - Gebruikershandleiding">
-      <link rel="up" href="index.html" title="OmegaT 3.1 - Gebruikershandleiding">
+      <link rel="home" href="index.html" title="OmegaT 3.5 - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT 3.5 - Gebruikershandleiding">
       <link rel="prev" href="chapter.instant.start.guide.html" title="Hoofdstuk 2. Leren om OmegaT te gebruiken in 5 minuten!">
       <link rel="next" href="chapter.user.interface.html" title="Hoofdstuk 4. De gebruikersinterface">
    </head>
@@ -72,16 +72,17 @@
                      <dt><span class="section"><a href="chapter.installing.and.running.html#running.OmegaT.other">4.4. OmegaT uitvoeren</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.installing.and.running.html#using.Java.Web.Start">5. Java Web Start gebruiken</a></span></dt>
-               <dt><span class="section"><a href="chapter.installing.and.running.html#d0e1049">6. OmegaT starten vanaf de opdrachtregel</a></span></dt>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#drag.and.drop">5. Slepen en neerzetten</a></span></dt>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#using.Java.Web.Start">6. Java Web Start gebruiken</a></span></dt>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#d0e1065">7. OmegaT starten vanaf de opdrachtregel</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.installing.and.running.html#method1.opening.commandline.window">6.1. Openen van een venster voor de opdrachtregel</a></span></dt>
-                     <dt><span class="section"><a href="chapter.installing.and.running.html#launch.command.arguments">6.2. Argumenten voor de startopdracht</a></span></dt>
-                     <dt><span class="section"><a href="chapter.installing.and.running.html#omegat.command.arguments">6.3. OmegaT in de modus Opdrachtregel</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#method1.opening.commandline.window">7.1. Openen van een venster voor de opdrachtregel</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#launch.command.arguments">7.2. Argumenten voor de startopdracht</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#omegat.command.arguments">7.3. OmegaT in de modus Opdrachtregel</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.installing.and.running.html#building.OmegaT.from.source">7. <span class="application">OmegaT</span> bouwen vanuit de bron</a></span></dt>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#building.OmegaT.from.source">8. <span class="application">OmegaT</span> bouwen vanuit de bron</a></span></dt>
             </dl>
          </div>
          <div class="section">
@@ -160,7 +161,7 @@
                         #&nbsp;Country&nbsp;<br>
                         -Duser.country=CA&nbsp;</code></p>
                </div>
-               <p>Advies: als OmegaT traag werkt in  sessies van Remote Desktop onder Windows, zou u deze optie kunnen gebruiken:</p>
+               <p>Advies: als OmegaT traag werkt in sessies van Remote Desktop onder Windows, zou u deze optie kunnen gebruiken:</p>
                <div class="literallayout">
                   <p><code class="code">-Dsun.java2d.noddraw=false</code></p>
                </div>
@@ -237,7 +238,7 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p><span class="bold"><strong>Ja: </strong></span>download <span class="emphasis"><em>OmegaT_3.n.n_Windows_without_JRE.exe</em></span>.
+                        <p><span class="bold"><strong>Ja: </strong></span>download <span class="emphasis"><em>OmegaT_3.n.n_without_JRE.exe</em></span>.
                         </p>
                      </li>
                      <li class="listitem">
@@ -407,15 +408,15 @@
                </div>
                <p>Dubbelklik op<span class="emphasis"><em> <span class="application">OmegaT</span>.app</em></span> of klik op zijn locatie in het dock
                </p>
-               <p>U kunt het gedrag van OmegaT' aanpassen door de <span class="emphasis"><em>Eigenschappen</em></span> als ook het bestand <span class="emphasis"><em>OmegaT.sh</em></span> in het pakket te bewerken.
+               <p>U kunt het gedrag van OmegaT' aanpassen door de <span class="emphasis"><em>Eigenschappen</em></span> als ook het bestand <span class="emphasis"><em>Configuration.properties</em></span> in het pakket te bewerken.
                </p>
-               <p>Klik met rechts op <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> en selecteer "Pakketinhoud weergeven" om toegang te krijgen tot <span class="application"><span class="emphasis"><em>OmegaT.sh</em></span></span>, en open het bestand door er met rechts op te klikken en selecteer uw tekstverwerker van uw keuze. U kunt ook met "cd" daar
-                  rechtstreeks naartoe gaan vanaf de opdrachtregel en <span class="application"><span class="emphasis"><em>OmegaT.sh</em></span> openen in een verwerker voor de opdrachtregel zoals emacs of vi</span>.<a class="indexterm" name="d0e823"></a></p>
-               <p>Opties worden gewijzigd door <span class="emphasis"><em>OmegaT.sh</em></span> aan te passen. Verwijder, voor vooraf gedefinieerde opties, de # vóór een parameter om het in te schakelen. Bijvoorbeeld:
+               <p>Klik met rechts op <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> en selecteer "Pakketinhoud weergeven" om toegang te krijgen tot <span class="application"><span class="emphasis"><em>Configuration.properties</em></span></span>, en open dan het bestand door er met rechts op te klikken en selecteer uw tekstverwerker van uw keuze. U kunt ook met "cd"
+                  daar rechtstreeks naartoe gaan vanaf de opdrachtregel en <span class="application"><span class="emphasis"><em>Configuration.properties</em></span> openen in een verwerker voor de opdrachtregel zoals emacs of vi</span>.<a class="indexterm" name="d0e823"></a></p>
+               <p>Opties worden gewijzigd door <span class="emphasis"><em>Configuration.properties</em></span> aan te passen. Verwijder, voor vooraf gedefinieerde opties, de # vóór een parameter om het in te schakelen. Bijvoorbeeld:
                   <code class="filename">LANGUAGE="-Duser.language=ja"</code> (zonder de #) zal <span class="application">OmegaT</span> starten met de gebruikersinterface in het Japans.
                </p>
-               <p>Bewerk de startregel direct om de beschikbare hoeveelheid geheugen te wijzigen. Bijvoorbeeld: <code class="filename">${JAVA} -Xmx2048m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET}
-                     ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY} -jar OmegaT.jar</code> zal OmegaT starten met 2 gigabyte geheugen.
+               <p>Bewerk het bestand <span class="emphasis"><em>OmegaT.app/Contents/Info.plist</em></span> en wijzig de inhoud van &lt;string&gt;-Xmx1024M&lt;/string&gt; om de beschikbare hoeveelheid geheugen te wijzigen. Bijvoorbeeld: &lt;string&gt;-Xmx2048M&lt;/string&gt;
+                  zal OmegaT starten met 2 gigabyte geheugen.
                </p>
                <p>Als u meerdere instanties van <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> moet uitvoeren, gebruik dan in plaats daarvan het bestand <span class="emphasis"><em>OmegaT.sh</em></span> dat zich bevind in <span class="emphasis"><em><span class="application">OmegaT</span>.app/ Contents/MacOS/</em></span>.
                </p>
@@ -523,7 +524,19 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.Java.Web.Start"></a>5. Java Web Start gebruiken<a class="indexterm" name="d0e1003"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="drag.and.drop"></a>5. Slepen en neerzetten<a class="indexterm" name="d0e1003"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Op de meeste systemen, is het mogelijk een project te openen door een bestand <code class="filename">omegat.project</code> op het pictogram van OmegaT op hte bureaublad te laten vallen. Het zou ook mogelijk kunnen zijn een project van OmegaT te
+               openen door te dubbelklikken op een bestand <code class="filename">omegat.project</code>.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="using.Java.Web.Start"></a>6. Java Web Start gebruiken<a class="indexterm" name="d0e1019"></a></h2>
                   </div>
                </div>
             </div>
@@ -535,7 +548,7 @@
             <p><span class="emphasis"><em>http://omegat.sourceforge.net/webstart/<span class="application">OmegaT</span>.jnlp</em></span></p>
             <p>Download het bestand<span class="emphasis"><em> <span class="application">OmegaT</span>.jnlp</em></span> en klik er dan op. Gedurende de installatie, afhankelijk van uw besturingssysteem, zou u verschillende beveiligingswaarschuwingen
                kunnen ontvangen. De rechten die u aan deze versie geeft (welke kunnen lijken op "onbeperkte toegang tot de computer") zijn
-               identiek aan de rechten die u geeft voor de locale versie, d.i. zij geven toegang tot de harde schijf van de computer. Opvolgende
+               identiek aan de rechten die u geeft voor de lokale versie, d.i. zij geven toegang tot de harde schijf van de computer. Opvolgende
                klikken op <span class="emphasis"><em><span class="application">OmegaT</span>.jnlp</em></span> zal leiden tot het controleren op upgrades, ze installeren als ze er zijn, en dan <span class="application">OmegaT</span> starten. Na de initiële installatie kunt u natuurlijk <span class="emphasis"><em><span class="application">OmegaT</span>.jnlp</em></span> ook gebruiken als u offline bent.
             </p>
             <p><span class="bold"><strong>Privacy</strong></span>: <span class="application">OmegaT</span> Java Web Start slaat geen informatie van u op buiten de computer waarop het wordt uitgevoerd. De toepassing wordt slechts
@@ -547,7 +560,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e1049"></a>6. OmegaT starten vanaf de opdrachtregel<a class="indexterm" name="d0e1052"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e1065"></a>7. OmegaT starten vanaf de opdrachtregel<a class="indexterm" name="d0e1068"></a></h2>
                   </div>
                </div>
             </div>
@@ -558,7 +571,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="method1.opening.commandline.window"></a>6.1. Openen van een venster voor de opdrachtregel
+                        <h3 class="title"><a name="method1.opening.commandline.window"></a>7.1. Openen van een venster voor de opdrachtregel
                         </h3>
                      </div>
                   </div>
@@ -601,12 +614,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="launch.command.arguments"></a>6.2. Argumenten voor de startopdracht<a class="indexterm" name="d0e1154"></a></h3>
+                        <h3 class="title"><a name="launch.command.arguments"></a>7.2. Argumenten voor de startopdracht<a class="indexterm" name="d0e1170"></a></h3>
                      </div>
                   </div>
                </div>
                <p>De basisopdracht is hierboven al genoemd. Wijzigingen voor deze opdracht behelzen het daaraan toevoegen van "argumenten".
-                  Argumenten worden toegevoegd ná het initiële <span class="emphasis"><em>"java"</em></span> en vóór het gedeelte <span class="emphasis"><em>"-jar <span class="application">OmegaT</span>.jar"</em></span>. Onthoud dat u in Windows het bestand <code class="filename">OmegaT.l4J.ini</code> kunt wijzigen om uw voorkeuren weer te geven. Op andere platformen kunt u uw startprogramma aanpassen (bijv., <code class="filename">OmegaT.sh</code> op de Mac, <code class="filename">OmegaT</code> onder Linux) om hetzelfde te doen.
+                  Argumenten worden toegevoegd ná het initiële <span class="emphasis"><em>"java"</em></span> en vóór het gedeelte <span class="emphasis"><em>"-jar <span class="application">OmegaT</span>.jar"</em></span>. Onthoud dat u in Windows het bestand <code class="filename">OmegaT.l4J.ini</code> kunt wijzigen om uw voorkeuren weer te geven. Op andere platformen kunt u het bestand <code class="filename">Configuration.properties</code> aanpassen op de Mac, of de starter voor <code class="filename">OmegaT</code> onder Linux, om hetzelfde te doen.
                </p>
                <p>Een lijst van mogelijke argumenten wordt hieronder weergegeven. Gevorderde gebruikers kunnen meer informatie over de argumenten
                   vinden door <span class="emphasis"><em>man java</em></span> in het terminalvenster te typen.
@@ -615,7 +628,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Taal van de gebruikersinterface</strong></span></p>
-                        <p><span class="bold"><strong>-Duser.language=XX</strong></span><a class="indexterm" name="d0e1192"></a> Normaal gesproken, d.i. als <span class="application">OmegaT</span> wordt gestart zonder enig argument, detecteert het programma eerst de taal van het besturingssysteem van de gebruiker. Als
+                        <p><span class="bold"><strong>-Duser.language=XX</strong></span><a class="indexterm" name="d0e1208"></a> Normaal gesproken, d.i. als <span class="application">OmegaT</span> wordt gestart zonder enig argument, detecteert het programma eerst de taal van het besturingssysteem van de gebruiker. Als
                            een gebruikersinterface in deze taal beschikbaar is gebruikt <span class="application">OmegaT</span> die. Dus, als het besturingssysteem van de gebruiker Russisch is en <span class="application">OmegaT</span> is vertaald in het Russisch, wordt <span class="application">OmegaT</span> weergegeven met een Russische gebruikersinterface, Russische menu's, etc. Als de taal van het besturingssysteem van de gebruiker
                            niet beschikbaar is gebruikt <span class="application">OmegaT</span> standaard Engels. Dit is het standaard gedrag.
                         </p>
@@ -631,7 +644,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Land gebruiker</strong></span></p>
-                        <p><span class="bold"><strong>-Duser.country=XX</strong></span><a class="indexterm" name="d0e1240"></a> Naast de taal kunt u ook het land specificeren, bijvoorbeeld CN of TW in geval van de Chinese taal. U moet zowel de taal
+                        <p><span class="bold"><strong>-Duser.country=XX</strong></span><a class="indexterm" name="d0e1256"></a> Naast de taal kunt u ook het land specificeren, bijvoorbeeld CN of TW in geval van de Chinese taal. U moet zowel de taal
                            als het land specificeren om de gids Snel starten in de gewenste taal weer te geven. Dit is zelfs nodig als er slechts één
                            combinatie beschikbaar is, zoals pt_BR in geval van Portugees / Braziliaans.
                         </p>
@@ -642,7 +655,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Toewijzen van geheugen</strong></span></p>
-                        <p><span class="bold"><strong>-XmxZZM </strong></span><a class="indexterm" name="d0e1256"></a>Deze opdracht wijst meer geheugen toe aan <span class="application">OmegaT</span>. Standaard wordt 512 Mb toegewezen, dus er is geen voordeel te behalen door minder dan dit getal toe te wijzen. "ZZ" staat
+                        <p><span class="bold"><strong>-XmxZZM </strong></span><a class="indexterm" name="d0e1272"></a>Deze opdracht wijst meer geheugen toe aan <span class="application">OmegaT</span>. Standaard wordt 512 Mb toegewezen, dus er is geen voordeel te behalen door minder dan dit getal toe te wijzen. "ZZ" staat
                            voor de toegewezen geheugenruimte in megabytes. De opdracht om <span class="application">OmegaT</span> te starten met toewijzing van 1024 Mb (1 gigabyte) aan geheugen luidt dan ook:
                         </p>
                         <p><code class="literal">java -Xmx1024M -jar
@@ -650,23 +663,23 @@
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Proxy host IP-adres</strong></span></p>
-                        <p><span class="bold"><strong><span class="bold"><strong>-Dhttp.proxyHost=nnn.nnn.nnn.nnn</strong></span> <a class="indexterm" name="d0e1285"></a></strong></span> Het IP-adres van uw proxyserver, als uw systeem een proxy gebruikt
+                        <p><span class="bold"><strong><span class="bold"><strong>-Dhttp.proxyHost=nnn.nnn.nnn.nnn</strong></span> <a class="indexterm" name="d0e1301"></a></strong></span> Het IP-adres van uw proxyserver, als uw systeem een proxy gebruikt
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Proxyhost poortnummer</strong></span></p>
-                        <p><span class="bold"><strong>Dhttp.proxyPort=NNNN</strong></span> <a class="indexterm" name="d0e1301"></a>Het poortnummer dat uw systeem gebruikt om toegang te krijgen tot de proxyserver.
+                        <p><span class="bold"><strong>Dhttp.proxyPort=NNNN</strong></span> <a class="indexterm" name="d0e1317"></a>Het poortnummer dat uw systeem gebruikt om toegang te krijgen tot de proxyserver.
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Google Translate V2 </strong></span></p>
-                        <p><span class="bold"><strong>-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </strong></span><span class="bold"><strong><a class="indexterm" name="d0e1317"></a></strong></span> Indien u bent geabonneerd op de services van Google Translate, dient u hier uw eigen private Google API-sleutel in te voeren.
+                        <p><span class="bold"><strong>-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </strong></span><span class="bold"><strong><a class="indexterm" name="d0e1333"></a></strong></span> Indien u bent geabonneerd op de services van Google Translate, dient u hier uw eigen private Google API-sleutel in te voeren.
                            Onthoud dat de sleutel 38 tekens lang is.
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Microsoft
-                                           Translator</strong></span><a class="indexterm" name="d0e1329"></a></p>
+                                           Translator</strong></span><a class="indexterm" name="d0e1345"></a></p>
                         <p>Zorg er voor dat u een gratis account voor Microsoft hebt. U heeft dat nodig om in te loggen op <a class="ulink" href="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema" target="_top">Windows Azure Marketplace</a> en de service Translator te gebruiken. Onthoud dat tot en met 2M tekens per maand gratis is. De twee vereiste items zijn
                            beschikbaar op uw <a class="ulink" href="https://datamarket.azure.com/account" target="_top">pagina van het account</a> onder Primary account key en Customer-ID:
                         </p>
@@ -674,7 +687,7 @@
                         <p>-<span class="bold"><strong>Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</strong></span></p>
                      </li>
                      <li class="listitem">
-                        <p><span class="bold"><strong>Yandex Translate</strong></span><a class="indexterm" name="d0e1357"></a></p>
+                        <p><span class="bold"><strong>Yandex Translate</strong></span><a class="indexterm" name="d0e1373"></a></p>
                         <p>Zorg er voor dat u een gratis account voor Yandex heeft. U heeft dat nodig om een API-sleutel voor Yandex Translate te verkrijgen
                            en te gebruiken. API-sleutels kunnen worden aangevraagd met behulp van het <a class="ulink" href="http://api.yandex.com/key/form.xml?service=trnsl" target="_top">API key request form</a>, en worden bekeken op de pagina <a class="ulink" href="http://api.yandex.com/key/keyslist.xml" target="_top">My Keys</a>.
                         </p>
@@ -693,7 +706,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="omegat.command.arguments"></a>6.3. OmegaT in de modus Opdrachtregel<a class="indexterm" name="d0e1394"></a></h3>
+                        <h3 class="title"><a name="omegat.command.arguments"></a>7.3. OmegaT in de modus Opdrachtregel<a class="indexterm" name="d0e1410"></a></h3>
                      </div>
                   </div>
                </div>
@@ -705,7 +718,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="console.mode.prerequisites"></a>6.3.1. Vooraf vereist
+                           <h4 class="title"><a name="console.mode.prerequisites"></a>7.3.1. Vooraf vereist
                            </h4>
                         </div>
                      </div>
@@ -735,7 +748,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="starting.in.console.mode"></a>6.3.2. Beginnen in console-modus
+                           <h4 class="title"><a name="starting.in.console.mode"></a>7.3.2. Beginnen in console-modus
                            </h4>
                         </div>
                      </div>
@@ -743,6 +756,7 @@
                   <p>Enkele extra parameters moeten bij het starten worden opgegeven om <span class="application">OmegaT</span> in console-modus te starten. De meest belangrijke is <code class="literal">&lt;project-dir&gt;</code>, en optioneel<code class="literal"> --config-dir=&lt;config-dir&gt;. </code>Voorbeeld:
                   </p>
                   <p><code class="literal">java -jar <span class="application">OmegaT</span>.jar /pad/naar/project \</code></p>
+                  <p><code class="literal">--config-dir=/pad/naar/config-bestanden/ \</code></p>
                   <p><code class="literal">--config-dir=/pad/naar/config-bestanden/ \</code></p>
                   <p><code class="literal">
                                 --mode=console-translate|console-createpseudotranslatetmx|console-align</code></p>
@@ -761,6 +775,10 @@
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
                            <p><code class="literal">--config-dir=&lt;config-dir&gt;</code> vertelt <span class="application">OmegaT</span> in welke map de configuratiebestanden zijn opgeslagen. Indien niet opgegeven gaat <span class="application">OmegaT</span> terug naar de standaard waarden (<span class="application">OmegaT</span>-dir onder beginmap van de gebruiker, of indien niet beschikbaar: de huidige werkmap). Onthoud het dubbele "-"-teken
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p><code class="literal">--config-dir=&lt;config-dir&gt;</code> vertelt <span class="application">OmegaT</span> in welke map de configuratiebestanden zijn opgeslagen.
                            </p>
                         </li>
                      </ul>
@@ -890,7 +908,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="console.mode.option.quiet"></a>6.3.3. optie Quiet
+                           <h4 class="title"><a name="console.mode.option.quiet"></a>7.3.3. optie Quiet
                            </h4>
                         </div>
                      </div>
@@ -904,7 +922,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="console.mode.option.validatetags"></a>6.3.4. Optie Tags valideren
+                           <h4 class="title"><a name="console.mode.option.validatetags"></a>7.3.4. Optie Tags valideren
                            </h4>
                         </div>
                      </div>
@@ -920,7 +938,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>7. <span class="application">OmegaT</span> bouwen vanuit de bron<a class="indexterm" name="d0e1693"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>8. <span class="application">OmegaT</span> bouwen vanuit de bron<a class="indexterm" name="d0e1720"></a></h2>
                   </div>
                </div>
             </div>

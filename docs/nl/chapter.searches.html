@@ -5,8 +5,8 @@
       <title>Hoofdstuk 15. Zoeken</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT 3.1 - Gebruikershandleiding">
-      <link rel="up" href="index.html" title="OmegaT 3.1 - Gebruikershandleiding">
+      <link rel="home" href="index.html" title="OmegaT 3.5 - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT 3.5 - Gebruikershandleiding">
       <link rel="prev" href="chapter.segmentation.html" title="Hoofdstuk 14. Bronsegmentatie">
       <link rel="next" href="chapter.searchandreplace.html" title="Hoofdstuk 16. Zoeken en vervangen">
    </head>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.searches"></a>Hoofdstuk 15. Zoeken<a class="indexterm" name="d0e7407"></a></h1>
+                  <h1 class="title"><a name="chapter.searches"></a>Hoofdstuk 15. Zoeken<a class="indexterm" name="d0e7723"></a></h1>
                </div>
             </div>
          </div>
@@ -39,14 +39,14 @@
                <dt><span class="section"><a href="chapter.searches.html#using.wild.cards">2. Jokertekens gebruiken</a></span></dt>
                <dt><span class="section"><a href="chapter.searches.html#search.methoids">3. Zoekmethoden en opties</a></span></dt>
                <dt><span class="section"><a href="chapter.searches.html#search.result.display">4. Zoekresultaten weergeven</a></span></dt>
-               <dt><span class="section"><a href="chapter.searches.html#search.filter">5. Filteritems in bewerker overeenkomstig de zoekactie</a></span></dt>
+               <dt><span class="section"><a href="chapter.searches.html#search.filter">5. Filteritems in venster Bewerken overeenkomstig de zoekactie</a></span></dt>
             </dl>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="search.window"></a>1. venster Zoeken<a class="indexterm" name="d0e7413"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="search.window"></a>1. venster Zoeken<a class="indexterm" name="d0e7729"></a></h2>
                   </div>
                </div>
             </div>
@@ -57,12 +57,37 @@
             </p>
             <p>Klik op de pijl naar beneden van het vak <span class="emphasis"><em>Zoeken naar</em></span> on toegang te krijgen tot de 10 laatste zoekacties.
             </p>
+            <p>Het venster Zoeken heeft zijn eigen menu's:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Bestand &gt; Zoeken naar selectie (<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>): focus opnieuw op het zoekveld en selecteer alle inhoud.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Bestand &gt; Sluiten (<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>W</strong></span>): sluit het venster Zoeken (op dezelfde manier als <span class="keycap"><strong>Esc</strong></span>)
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Bewerken &gt; Bron invoegen (<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>I</strong></span>): voeg het huidige bronsegment in.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Bewerken &gt; Vervangen door bron (<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>R</strong></span>): vervangen met huidige bronsegment.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Bewerken &gt; Item voor woordenlijst maken (<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>G</strong></span>): een nieuw item voor de woordenlijst toevoegen.
+                     </p>
+                  </li>
+               </ul>
+            </div>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2. Jokertekens gebruiken<a class="indexterm" name="d0e7448"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2. Jokertekens gebruiken<a class="indexterm" name="d0e7821"></a></h2>
                   </div>
                </div>
             </div>
@@ -95,7 +120,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3. Zoekmethoden en opties<a class="indexterm" name="d0e7492"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3. Zoekmethoden en opties<a class="indexterm" name="d0e7865"></a></h2>
                   </div>
                </div>
             </div>
@@ -186,7 +211,8 @@
                   </li>
                </ul>
             </div>
-            <p>Als u klikt op de knop <span class="guibutton">Gevorderde opties</span> kunnen aanvullende criteria (auteur van de vertaling, datum van vertaling etc) worden geselecteerd.
+            <p>Als u klikt op de knop <span class="guibutton">Gevorderde opties</span> kunnen aanvullende criteria (auteur of maker van wijziging van de vertaling, datum van vertaling, Wezen-segmenten uitsluiten,
+               etc) worden geselecteerd. Als de optie <span class="emphasis"><em>Volledige/Halve breedte tekens ongevoelig</em></span> is geselecteerd, zullen zoekacties voor volledige vormen (CJK-tekens) overeenkomen met half brede vormen en vice versa.
             </p>
          </div>
          <div class="section">
@@ -203,9 +229,10 @@
                in de volgorde waarin zij in het project voorkomen. Vertaalde segmenten worden weergegeven met de originele tekst boven en
                de vertaalde tekst eronder, niet-vertaalde segmenten worden alleen als bron weergegeven.
             </p>
-            <p>Klikken op een segment opent het in het venster Bewerken om het aan te kunnen passen. Daarna kunt u teruggaan naar het venster
-               Zoeken en naar het volgende gevonden segment gaan, bijvoorbeeld om het te controleren en, indien nodig, de terminologie aan
-               te passen.
+            <p>Dubbelklikken op een segment opent het in het venster Bewerken voor aanpassingen (één enkele klik doet dat als de optie <span class="bold"><strong>Automatisch synchroniseren met venster Bewerken</strong></span> is geselecteerd). Daarna kunt u teruggaan naar het venster Zoeken en naar het volgende gevonden segment gaan, bijvoorbeeld
+               om het te controleren en, indien nodig, de terminologie aan te passen.
+            </p>
+            <p>U kunt, in het venster Zoeken, standaard sneltoetsen gebruiken (<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>N</strong></span>, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>P</strong></span>) om van het ene segment naar een ander te gaan.
             </p>
             <p>U kunt meerdere vensters Tekst zoeken tegelijkertijd geopend hebben. U kunt hun inhoud snel zien door te kijken naar hun titel:
                het zal de gebruikte zoekterm bevatten.
@@ -215,13 +242,13 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="search.filter"></a>5. Filteritems in bewerker overeenkomstig de zoekactie
+                     <h2 class="title" style="clear: both"><a name="search.filter"></a>5. Filteritems in venster Bewerken overeenkomstig de zoekactie
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Om eenvoudiger te navigeren in de resultaten van de zoekactie, kunt u de zoekactie toepassen in de bewerker. Druk onderaan
-               op de knop <span class="bold"><strong>Filter</strong></span> om de weergegeven items in het venster Bewerken te beperken tot die welke overeenkomen met de huidige zoekactie. U kunt de
+            <p>Om eenvoudiger te navigeren in de resultaten van de zoekactie, kunt u de zoekactie toepassen in het venster Bewerken. Druk
+               onderaan op de knop <span class="bold"><strong>Filter</strong></span> om de weergegeven items in het venster Bewerken te beperken tot die welke overeenkomen met de huidige zoekactie. U kunt de
                normale navigatie gebruiken om bijv. naar het volgende (niet-vertaalde) segment te gaan dat overeenkomt met de zoekcriteria.
             </p>
             <p>NB:</p>

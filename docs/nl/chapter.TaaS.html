@@ -5,8 +5,8 @@
       <title>Hoofdstuk 20. TaaS in OmegaT gebruiken</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT 3.1 - Gebruikershandleiding">
-      <link rel="up" href="index.html" title="OmegaT 3.1 - Gebruikershandleiding">
+      <link rel="home" href="index.html" title="OmegaT 3.5 - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT 3.5 - Gebruikershandleiding">
       <link rel="prev" href="chapter.glossaries.html" title="Hoofdstuk 19. Woordenlijsten">
       <link rel="next" href="chapter.machine.translate.html" title="Hoofdstuk 21. Machinevertaling">
    </head>
@@ -29,14 +29,14 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.TaaS"></a>Hoofdstuk 20. TaaS in OmegaT gebruiken<a class="indexterm" name="d0e8662"></a></h1>
+                  <h1 class="title"><a name="chapter.TaaS"></a>Hoofdstuk 20. TaaS in OmegaT gebruiken<a class="indexterm" name="d0e9057"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options">1. Algemeen</a></span></dt>
-               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.collections">2. Publieke en private collecties</a></span></dt>
+               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.generalities">1. Algemeen</a></span></dt>
+               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.key">2. Een sleutel maken</a></span></dt>
                <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.access">3. Toegang tot de service TaaS</a></span></dt>
             </dl>
          </div>
@@ -44,7 +44,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="section.TaaS.options"></a>1. Algemeen
+                     <h2 class="title" style="clear: both"><a name="section.TaaS.generalities"></a>1. Algemeen
                      </h2>
                   </div>
                </div>
@@ -59,19 +59,14 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="section.TaaS.options.collections"></a>2. Publieke en private collecties
+                     <h2 class="title" style="clear: both"><a name="section.TaaS.options.key"></a>2. Een sleutel maken
                      </h2>
                   </div>
                </div>
             </div>
-            <p>OmegaT maakt het mogelijk toegang te krijgen tot het publieke gedeelte van TaaS zonder enige registratie.</p>
             <p>Een gebruiker moet, om toegang te krijgen tot het private gedeelte, een sleutel maken met behulp van https://demo.taas-project.eu/account/keys/create?system=omegaT.</p>
             <p>De sleutel moet dan worden opgegeven aan OmegaT door middel van -Dtaas.user.key=xxxxx. De OmegaT configuratie-starters (OmegaT.l4J.ini,
-               omegat.kaptn en OmegaT.sh) bevatten een sjabloon-item.
-            </p>
-            <p>Bij toegang tot de service zonder een private sleutel, zal de het volgende bericht worden geplaatst in het log: TaaS API key
-               not found. Ga naar https://demo.taas-project.eu/account/keys/create?system=omegaT om uw eigen sleutel te maken en geef die
-               dan door aan OmegaT met -Dtaas.user.key=xxxxx (TAAS_API_KEY_NOT_FOUND)
+               omegat.kaptn en Configuration.properties) bevatten een sjabloon-item.
             </p>
          </div>
          <div class="section">

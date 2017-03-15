@@ -449,7 +449,7 @@ void RemoveOldTagAdapters(menuItem) {
 }
 
 void test(TagAdapter adapter) {
-    console.print ">> Run all test cases."
+    console.println ">> Run all test cases."
 
     // OK: 1-to-1 tag adapting
     assert "<s1><a2>Lorem</a2> ipsum!</s1>" == adapter.adapt(
@@ -511,5 +511,5 @@ void test(TagAdapter adapter) {
             "<s5><a6>Hello</a6><i7/> World!</s5>",
             "<s5>Lorem <a6>ipsum</a6><i7/>!</s5>")
 
-    console.print ">> Done. All green."
+    console.println ">> Done. All green."
 }

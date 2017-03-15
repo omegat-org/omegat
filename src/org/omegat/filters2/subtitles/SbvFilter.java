@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2017 Briac Pilpré
+ Copyright (C) 2017 Briac Pilpre
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -33,7 +33,7 @@ import org.omegat.util.OStrings;
 /**
  * Filter for subtitles files.
  * 
- * @author Briac Pilpré (briacp@gmail.com)
+ * @author Briac Pilpre (briacp@gmail.com)
  * @see <a href="https://support.google.com/youtube/answer/2734698">Format
  *      description</a>
  */

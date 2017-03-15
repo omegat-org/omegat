@@ -1,4 +1,4 @@
-call ant -Dlanguage=be instant-start
+call ant -Dlanguage=be all
 call ant -Dlanguage=ca instant-start
 call ant -Dlanguage=cs all
 call ant -Dlanguage=cy instant-start

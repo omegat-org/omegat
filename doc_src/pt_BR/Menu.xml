@@ -407,7 +407,7 @@
                   <keycap>Ctrl</keycap><keycap>F</keycap>
                 </keycombo></entry>
 
-              <entry>Abre uma nova <link linkend="section.search.window">janela de busca</link>.<para>Ao selecionar uma sequência de texto (em qualquer tela) antes de apertar  <keycombo> <keycap>Ctrl</keycap> <keycap>F/k2&gt; </keycombo>, o texto será colado por padrão no campo <guilabel>Buscar</guilabel>. </para></entry>
+              <entry>Abre uma nova <link linkend="section.search.window">janela de busca</link>.<para>Ao selecionar uma sequência de texto (em qualquer tela) antes de apertar  <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap></keycombo>, o texto será colado por padrão no campo <guilabel>Buscar</guilabel>. </para></entry>
             </row>
 
             <row>

@@ -302,7 +302,7 @@ public class FileUtil {
         }
         if (onCollision == null || !onCollision.isCanceled()) {
             for (File file : toDelete) {
-                FileUtils.deleteDirectory(file);
+                FileUtils.forceDelete(file);
             }
             copyFilesTo(destination, toReplace.toArray(new File[toReplace.size()]), (File) null);
         }

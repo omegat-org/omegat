@@ -86,6 +86,8 @@ public class FiltersCustomizerPanel extends JPanel {
         description.setWrapStyleWord(true);
         description.setAlignmentX(0.0F);
         description.setAlignmentY(0.0F);
+        description.setDragEnabled(false);
+        description.setFocusable(false);
         description.setOpaque(false);
         add(description);
         add(filler1);

@@ -25,6 +25,7 @@
 
 package org.omegat.gui.dialogs;
 
+import javax.swing.JLabel;
 import org.omegat.util.OStrings;
 
 /**
@@ -97,7 +98,9 @@ public class FilenamePatternsEditor extends javax.swing.JDialog {
         jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 0, 10));
         jPanel5.setLayout(new java.awt.BorderLayout());
 
+        labelHelp.setFont(new JLabel().getFont());
         org.openide.awt.Mnemonics.setLocalizedText(labelHelp, OStrings.getString("FILENAMEPATTERNS_HELP")); // NOI18N
+        labelHelp.setFocusable(false);
         jPanel5.add(labelHelp, java.awt.BorderLayout.SOUTH);
 
         jPanel3.add(jPanel5, java.awt.BorderLayout.SOUTH);

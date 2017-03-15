@@ -31,13 +31,15 @@
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new JLabel().getFont()" type="code"/>
+          <Connection component="prefixLabel" name="getFont" type="method"/>
         </Property>
         <Property name="lineWrap" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_WORKFLOW_DESCRIPTION" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="wrapStyleWord" type="boolean" value="true"/>
+        <Property name="dragEnabled" type="boolean" value="false"/>
+        <Property name="focusable" type="boolean" value="false"/>
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>
       <Constraints>

@@ -95,6 +95,8 @@ public class SegmentationCustomizerPanel extends JPanel {
         hintTextArea.setWrapStyleWord(true);
         hintTextArea.setAlignmentX(0.0F);
         hintTextArea.setAlignmentY(0.0F);
+        hintTextArea.setDragEnabled(false);
+        hintTextArea.setFocusable(false);
         hintTextArea.setOpaque(false);
         mapPanel.add(hintTextArea);
         mapPanel.add(filler1);

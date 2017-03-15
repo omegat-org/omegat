@@ -210,10 +210,11 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
         getContentPane().add(fileFormatTextField, gridBagConstraints);
 
         descTextArea.setEditable(false);
-        descTextArea.setFont(new JLabel().getFont());
+        descTextArea.setFont(fileFormatLabel.getFont());
         descTextArea.setLineWrap(true);
         descTextArea.setText(OStrings.getString("FILTEREDITOR_DESC")); // NOI18N
         descTextArea.setWrapStyleWord(true);
+        descTextArea.setDragEnabled(false);
         descTextArea.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

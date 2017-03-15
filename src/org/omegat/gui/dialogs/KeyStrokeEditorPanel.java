@@ -64,7 +64,7 @@ public class KeyStrokeEditorPanel extends javax.swing.JPanel {
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
         descriptionTextArea.setEditable(false);
-        descriptionTextArea.setFont(okButton.getFont());
+        descriptionTextArea.setFont(jLabel1.getFont());
         descriptionTextArea.setLineWrap(true);
         descriptionTextArea.setText(OStrings.getString("KEYSTROKE_EDITOR_MESSAGE")); // NOI18N
         descriptionTextArea.setWrapStyleWord(true);

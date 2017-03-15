@@ -72,6 +72,8 @@ public class PasswordSetPanel extends javax.swing.JPanel {
         messageTextArea.setText(OStrings.getString("PASSWORD_SET_MESSAGE")); // NOI18N
         messageTextArea.setWrapStyleWord(true);
         messageTextArea.setAlignmentX(0.0F);
+        messageTextArea.setDragEnabled(false);
+        messageTextArea.setFocusable(false);
         messageTextArea.setOpaque(false);
         add(messageTextArea);
 

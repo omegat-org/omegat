@@ -91,6 +91,8 @@ public class TagProcessingOptionsPanel extends JPanel {
         descriptionTextArea.setText(OStrings.getString("GUI_TAGVALIDATION_DESCRIPTION")); // NOI18N
         descriptionTextArea.setWrapStyleWord(true);
         descriptionTextArea.setAlignmentX(0.0F);
+        descriptionTextArea.setDragEnabled(false);
+        descriptionTextArea.setFocusable(false);
         descriptionTextArea.setOpaque(false);
         add(descriptionTextArea);
         add(filler7);

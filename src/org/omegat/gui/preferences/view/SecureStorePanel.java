@@ -61,11 +61,13 @@ public class SecureStorePanel extends JPanel {
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
         descriptionTextArea.setEditable(false);
-        descriptionTextArea.setFont(new JLabel().getFont());
+        descriptionTextArea.setFont(masterPasswordLabel.getFont());
         descriptionTextArea.setLineWrap(true);
         descriptionTextArea.setText(OStrings.getString("PREFS_SECURE_STORE_DESCRIPTION")); // NOI18N
         descriptionTextArea.setWrapStyleWord(true);
         descriptionTextArea.setAlignmentX(0.0F);
+        descriptionTextArea.setDragEnabled(false);
+        descriptionTextArea.setFocusable(false);
         descriptionTextArea.setOpaque(false);
         add(descriptionTextArea);
 

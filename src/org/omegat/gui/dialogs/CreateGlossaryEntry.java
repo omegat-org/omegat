@@ -137,10 +137,12 @@ public class CreateGlossaryEntry extends JDialog {
         getContentPane().add(sourceTermLabel, gridBagConstraints);
 
         descriptionTextArea.setEditable(false);
-        descriptionTextArea.setFont(getFont());
+        descriptionTextArea.setFont(targetTermLabel.getFont());
         descriptionTextArea.setLineWrap(true);
         descriptionTextArea.setText(OStrings.getString("CREATE_GLOSSARY_DESCRIPTION")); // NOI18N
         descriptionTextArea.setWrapStyleWord(true);
+        descriptionTextArea.setDragEnabled(false);
+        descriptionTextArea.setFocusable(false);
         descriptionTextArea.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

@@ -81,10 +81,12 @@ public class EditingBehaviorPanel extends JPanel {
         setLayout(new java.awt.GridBagLayout());
 
         descriptionTextArea.setEditable(false);
-        descriptionTextArea.setFont(new JLabel().getFont());
+        descriptionTextArea.setFont(prefixLabel.getFont());
         descriptionTextArea.setLineWrap(true);
         descriptionTextArea.setText(OStrings.getString("GUI_WORKFLOW_DESCRIPTION")); // NOI18N
         descriptionTextArea.setWrapStyleWord(true);
+        descriptionTextArea.setDragEnabled(false);
+        descriptionTextArea.setFocusable(false);
         descriptionTextArea.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

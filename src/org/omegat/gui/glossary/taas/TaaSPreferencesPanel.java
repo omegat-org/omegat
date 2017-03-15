@@ -84,6 +84,8 @@ public class TaaSPreferencesPanel extends JPanel {
         messageTextArea.setText(OStrings.getString("TAAS_API_KEY_NOT_FOUND")); // NOI18N
         messageTextArea.setWrapStyleWord(true);
         messageTextArea.setAlignmentX(0.0F);
+        messageTextArea.setDragEnabled(false);
+        messageTextArea.setFocusable(false);
         messageTextArea.setOpaque(false);
         messagePanel.add(messageTextArea);
         messagePanel.add(filler1);

@@ -79,9 +79,12 @@ public class ConflictDialog extends javax.swing.JDialog {
         jPanel5.setLayout(new java.awt.BorderLayout());
 
         lblExplanation.setEditable(false);
+        lblExplanation.setFont(jLabel1.getFont());
         lblExplanation.setLineWrap(true);
         lblExplanation.setText(OStrings.getString("CONFLICT_DIALOG_TEXT")); // NOI18N
         lblExplanation.setWrapStyleWord(true);
+        lblExplanation.setDragEnabled(false);
+        lblExplanation.setFocusable(false);
         lblExplanation.setOpaque(false);
         jPanel5.add(lblExplanation, java.awt.BorderLayout.NORTH);
 

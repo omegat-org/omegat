@@ -83,10 +83,12 @@ public class SaveOptionsPanel extends JPanel {
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         intervalDescriptionTextArea.setEditable(false);
-        intervalDescriptionTextArea.setFont(new JLabel().getFont());
+        intervalDescriptionTextArea.setFont(minutesLabel.getFont());
         intervalDescriptionTextArea.setLineWrap(true);
         intervalDescriptionTextArea.setText(OStrings.getString("SAVE_DIALOG_DESCRIPTION")); // NOI18N
         intervalDescriptionTextArea.setWrapStyleWord(true);
+        intervalDescriptionTextArea.setDragEnabled(false);
+        intervalDescriptionTextArea.setFocusable(false);
         intervalDescriptionTextArea.setOpaque(false);
         jPanel1.add(intervalDescriptionTextArea, java.awt.BorderLayout.NORTH);
 
@@ -139,11 +141,12 @@ public class SaveOptionsPanel extends JPanel {
         jPanel8.setLayout(new java.awt.BorderLayout());
 
         externalCmdDescriptionTextArea.setEditable(false);
-        externalCmdDescriptionTextArea.setFont(new JLabel().getFont());
+        externalCmdDescriptionTextArea.setFont(minutesLabel.getFont());
         externalCmdDescriptionTextArea.setLineWrap(true);
         externalCmdDescriptionTextArea.setText(OStrings.getString("EXTERNAL_COMMAND_DESCRIPTION")); // NOI18N
         externalCmdDescriptionTextArea.setWrapStyleWord(true);
         externalCmdDescriptionTextArea.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
+        externalCmdDescriptionTextArea.setDragEnabled(false);
         externalCmdDescriptionTextArea.setOpaque(false);
         jPanel8.add(externalCmdDescriptionTextArea, java.awt.BorderLayout.NORTH);
 

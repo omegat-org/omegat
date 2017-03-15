@@ -145,7 +145,7 @@ public class DictionaryInstallerDialog extends JDialog {
         jPanel1 = new javax.swing.JPanel();
         listLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        dictionaryList = new javax.swing.JList<String>();
+        dictionaryList = new javax.swing.JList<>();
         jPanel2 = new javax.swing.JPanel();
         installButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -163,6 +163,8 @@ public class DictionaryInstallerDialog extends JDialog {
         infoTextArea.setText(OStrings.getString("GUI_DICTIONARY_INSTALLER_TEXT_GO")); // NOI18N
         infoTextArea.setWrapStyleWord(true);
         infoTextArea.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        infoTextArea.setDragEnabled(false);
+        infoTextArea.setFocusable(false);
         infoTextArea.setOpaque(false);
         getContentPane().add(infoTextArea, java.awt.BorderLayout.NORTH);
 

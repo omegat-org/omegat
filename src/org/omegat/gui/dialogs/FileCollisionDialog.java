@@ -127,9 +127,12 @@ public class FileCollisionDialog extends javax.swing.JDialog {
         jPanel3.add(icon, java.awt.BorderLayout.WEST);
 
         message.setEditable(false);
+        message.setFont(icon.getFont());
         message.setLineWrap(true);
         message.setText(OStrings.getString("DND_FILE_COLLISION_MESSAGE")); // NOI18N
         message.setWrapStyleWord(true);
+        message.setDragEnabled(false);
+        message.setFocusable(false);
         message.setOpaque(false);
         jPanel3.add(message, java.awt.BorderLayout.CENTER);
 

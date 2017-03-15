@@ -102,6 +102,7 @@ public class Google2Translate extends BaseTranslate {
         params.put("source", sLang.getLanguageCode());
         params.put("target", targetLang);
         params.put("q", trText);
+        params.put("format", "text");
 
         Map<String, String> headers = new TreeMap<String, String>();
         headers.put("X-HTTP-Method-Override", "GET");

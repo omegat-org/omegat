@@ -210,6 +210,7 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
     private void disableRulesUI(String message) {
         panel.rulesMessagePanel.setVisible(true);
         panel.rulesMessageLabel.setText(message);
+        panel.rulesMessageLabel.setEnabled(false);
         panel.rulesScrollPane.setVisible(false);
         panel.rulesButtonsPanel.setVisible(false);
     }

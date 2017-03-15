@@ -59,7 +59,7 @@ views with Cmd+Left and Cmd+Right.
   - Brazilian Portuguese updated to 3.6 (UI, documentation, scripts, readme)
   - Spanish localisation updated to 4.0.0 (UI, tutorial)
   - Traditional Chinese (TW) localisation updated to 4.0 (UI)
-  - Japanese localisation updated to 4.1 (UI)
+  - Japanese localisation updated to 4.1.1 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 4.1.0 (2017-01-09)

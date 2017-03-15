@@ -38,11 +38,12 @@ import org.omegat.util.OStrings;
  *      description</a>
  */
 public class SbvFilter extends SrtFilter {
-    protected static final String PATTERN_TIME_INTERVAL = "([0-9]{1,}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}),([0-9]{1,}:[0-9]{2}:[0-9]{2}\\.[0-9]{3})";
+    protected static final Pattern PATTERN_TIME_INTERVAL = Pattern
+            .compile("([0-9]{1,}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}),([0-9]{1,}:[0-9]{2}:[0-9]{2}\\.[0-9]{3})");
 
     @Override
     protected Pattern getPattern() {
-        return Pattern.compile(PATTERN_TIME_INTERVAL);
+        return PATTERN_TIME_INTERVAL;
     }
 
     @Override

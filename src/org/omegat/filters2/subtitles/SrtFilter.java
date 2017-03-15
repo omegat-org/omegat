@@ -48,7 +48,8 @@ import org.omegat.util.StringUtil;
  * @see <a href="http://en.wikipedia.org/wiki/SubRip">Format description</a>
  */
 public class SrtFilter extends AbstractFilter {
-    protected static final String PATTERN_TIME_INTERVAL = "([0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3})\\s+-->\\s+([0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3})";
+    protected static final Pattern PATTERN_TIME_INTERVAL = Pattern
+            .compile("([0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3})\\s+-->\\s+([0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3})");
     protected static final String EOL = "\r\n";
 
     enum READ_STATE {
@@ -62,7 +63,7 @@ public class SrtFilter extends AbstractFilter {
     protected BufferedWriter out;
 
     protected Pattern getPattern() {
-        return Pattern.compile(PATTERN_TIME_INTERVAL);
+        return PATTERN_TIME_INTERVAL;
     }
 
     @Override

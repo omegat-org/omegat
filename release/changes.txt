@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.1
 ----------------------------------------------------------------------
- 10 Enhancements
+ 11 Enhancements
   4 Bug fixes
   8 Localisation updates
 ----------------------------------------------------------------------
@@ -38,6 +38,8 @@ views with Cmd+Left and Cmd+Right.
 
   - The script adapt_tags_to_match_target.groovy was largely improved, to
 cover most cases, which are described in the script comments
+
+  - New filter for YouTube SBV captions (*.sbv)
 
   Bug fixes:
 

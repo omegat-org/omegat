@@ -48,8 +48,7 @@ import org.omegat.util.StringUtil;
  * @see <a href="http://en.wikipedia.org/wiki/SubRip">Format description</a>
  */
 public class SrtFilter extends AbstractFilter {
-    protected static final Pattern PATTERN_TIME_INTERVAL = Pattern
-            .compile("([0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3})\\s+-->\\s+([0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3})");
+    protected static final String PATTERN_TIME_INTERVAL = "([0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3})\\s+-->\\s+([0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3})";
     protected static final String EOL = "\r\n";
 
     enum READ_STATE {
@@ -61,6 +60,10 @@ public class SrtFilter extends AbstractFilter {
     protected String key;
     protected StringBuilder text = new StringBuilder();
     protected BufferedWriter out;
+
+    protected Pattern getPattern() {
+        return Pattern.compile(PATTERN_TIME_INTERVAL);
+    }
 
     @Override
     public Instance[] getDefaultInstances() {
@@ -89,14 +92,15 @@ public class SrtFilter extends AbstractFilter {
         READ_STATE state = READ_STATE.WAIT_TIME;
         key = null;
         text.setLength(0);
-
+        Pattern pattern = getPattern();
+        
         try (MixedEolHandlingReader reader = new MixedEolHandlingReader(inFile)) {
             String s;
             while ((s = reader.readLine()) != null) {
                 String trimmed = s.trim();
                 switch (state) {
                 case WAIT_TIME:
-                    if (PATTERN_TIME_INTERVAL.matcher(trimmed).matches()) {
+                    if (pattern.matcher(trimmed).matches()) {
                         state = READ_STATE.WAIT_TEXT;
                     }
                     key = trimmed;

@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.translation.memories"></a>Chapter&nbsp;13.&nbsp;Memorie di traduzione<a class="indexterm" name="d0e6858"></a><a class="indexterm" name="d0e6861"></a></h1>
+                  <h1 class="title"><a name="chapter.translation.memories"></a>Chapter&nbsp;13.&nbsp;Memorie di traduzione<a class="indexterm" name="d0e6861"></a><a class="indexterm" name="d0e6864"></a></h1>
                </div>
             </div>
          </div>
@@ -41,7 +41,7 @@
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.location.and.purpose">1.1. Cartelle tmx - posizione e scopo</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.backup">1.2. copia di sicurezza della TMX</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.and.language">1.3. file TMX e lingua</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e7220">1.4. Segmenti orfani</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e7223">1.4. Segmenti orfani</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.translation.memories.html#using.translation.memories.from.previous.projects">2. Riutilizzo delle memorie di traduzione</a></span></dt>
@@ -50,10 +50,10 @@
                      <dt><span class="section"><a href="chapter.translation.memories.html#importing.and.exporting.translation.memories">2.1. Importazione ed esportazione delle memorie di traduzione</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#Creating.a.translation.memory.for.selected.documents">2.2. Creazione di una memoria di traduzione per i documenti selezionati</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#sharing.translation.memories">2.3. Condivisione delle memorie di traduzione</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e7373">2.4. Uso delle TMX con coppie di lingua alternative</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e7376">2.4. Uso delle TMX con coppie di lingua alternative</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.translation.memories.html#d0e7389">3. File di partenza con traduzioni esistenti</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.memories.html#d0e7392">3. File di partenza con traduzioni esistenti</a></span></dt>
                <dt><span class="section"><a href="chapter.translation.memories.html#pseudo.translated.memory">4. Memoria pseudo-tradotta</a></span></dt>
                <dt><span class="section"><a href="chapter.translation.memories.html#upgrading.translation.memories">5. Aggiornamento delle memorie di traduzione</a></span></dt>
             </dl>
@@ -80,13 +80,13 @@
                </p>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term"><a class="indexterm" name="d0e6880"></a>Cartella omegat</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6883"></a>Cartella omegat</span></dt>
                      <dd>
                         <p>La cartella omegat contiene il file <code class="filename">project_save.tmx</code> e pure varie copie di sicurezza dei file TMX. Il file <code class="filename">project_save.tmx</code> contiene tutti i segmenti che sono stati memorizzati a partire dall'inizio della traduzione del progetto. Questo file è sempre
                            presente nel progetto. Il suo contenuto sarà sempre ordinato alfabeticamente dal segmento di partenza.
                         </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6899"></a>Cartella principale del progetto</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6902"></a>Cartella principale del progetto</span></dt>
                      <dd>
                         <p>La cartella principale del progetto contiene tre file tmx, <code class="filename">project_name-omegat.tmx</code>, <code class="filename">project_name-level1.tmx</code> e <code class="filename">project_name-level2.tmx</code> (dove project_name è il nome del proprio progetto).
                         </p>
@@ -111,7 +111,7 @@
                            esempio nella sottocartella <code class="filename">tm</code> di un altro progetto (vedere sotto).
                         </p>
                      </dd>
-                     <dt><span class="term">Cartella <code class="filename"><a class="indexterm" name="d0e6954"></a>tm</code></span></dt>
+                     <dt><span class="term">Cartella <code class="filename"><a class="indexterm" name="d0e6957"></a>tm</code></span></dt>
                      <dd>
                         <p>La cartella /tm/ può contenere qualsiasi numero di memorie di traduzione secondarie - cioè i file tmx. Tali file possono essere
                            creati in uno dei tre modi indicati sopra. Notare che gli altri strumenti CAT possono esportare (e importare) file tmx, di
@@ -130,9 +130,9 @@
                            e segmenti all'interno di un file TMX dato riga per riga. L'ultimo segmento con il testo di origine identico verrà considerato
                            prioritario (nota: ha naturalmente più senso evitare, in primo luogo, che questo avvenga).
                         </p>
-                        <p>Si noti che i file TMX contenuti nella cartella tm possono essere compressi con gzip.<a class="indexterm" name="d0e6991"></a></p>
+                        <p>Si noti che i file TMX contenuti nella cartella tm possono essere compressi con gzip.<a class="indexterm" name="d0e6994"></a></p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6998"></a>Cartella tm/auto<a class="indexterm" name="d0e7006"></a></span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e7001"></a>Cartella tm/auto<a class="indexterm" name="d0e7009"></a></span></dt>
                      <dd>
                         <p>Se si sa da subito che le traduzioni di una certa memoria di traduzione (o più d'una) sono tutte corrette, esse possono essere
                            inserite all'interno della cartella <span class="bold"><strong>tm/auto</strong></span>, al fine di evitare la conferma dei molteplici casi di <span class="emphasis"><em>concordanze parziali [fuzzy]</em></span>.
@@ -194,7 +194,7 @@
                         <p>Nel pannello dell'editor, quando viene inserita una concordanza proveniente da una TMX contenuta in una cartella di nome <span class="bold"><strong>mt</strong></span>, lo sfondo del segmento attivo diventa rosso. Lo sfondo ritorna al colore normale se si lascia il segmento.
                         </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e7088"></a>Cartelle tm/penalty-xxx</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e7091"></a>Cartelle tm/penalty-xxx</span></dt>
                      <dd>
                         <p>A volte può risultare utile distinguere tra memorie di traduzione di alta qualità e quelle che, a causa dell'argomento, del
                            cliente, dello stato di revisione e via discorrendo, sono ritenute meno affidabili. Per le memorie di traduzione contenute
@@ -231,7 +231,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.backup"></a>1.2.&nbsp;copia di sicurezza della TMX<a class="indexterm" name="d0e7141"></a></h3>
+                        <h3 class="title"><a name="tmx.backup"></a>1.2.&nbsp;copia di sicurezza della TMX<a class="indexterm" name="d0e7144"></a></h3>
                      </div>
                   </div>
                </div>
@@ -269,7 +269,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3.&nbsp;file TMX e lingua<a class="indexterm" name="d0e7193"></a></h3>
+                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3.&nbsp;file TMX e lingua<a class="indexterm" name="d0e7196"></a></h3>
                      </div>
                   </div>
                </div>
@@ -299,7 +299,7 @@
                   memoria. Se le lingue corrispondono ma la nazione no, i segmenti verranno ancora caricati. Se non corrisponde né il codice
                   della lingua, né quello della nazione, i segmenti verranno ignorati.
                </p>
-               <p><a class="indexterm" name="d0e7214"></a>I file TMX possono, in genere, contenere unità di traduzione con diverse lingue candidate. Se per uno specifico segmento di
+               <p><a class="indexterm" name="d0e7217"></a>I file TMX possono, in genere, contenere unità di traduzione con diverse lingue candidate. Se per uno specifico segmento di
                   partenza non è presente alcuna voce per la lingua di destinazione selezionata, tutti gli altri segmenti di destinazione vengono
                   caricati, indipendentemente dalla lingua. Per esempio, se la coppia linguistica del progetto è IT-FR, può essere di qualche
                   aiuto verificare le corrispondenze nella traduzione IT-EN, se non è presente nulla nella coppia IT-FR.
@@ -309,7 +309,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e7220"></a>1.4.&nbsp;Segmenti orfani<a class="indexterm" name="d0e7223"></a></h3>
+                        <h3 class="title"><a name="d0e7223"></a>1.4.&nbsp;Segmenti orfani<a class="indexterm" name="d0e7226"></a></h3>
                      </div>
                   </div>
                </div>
@@ -323,7 +323,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2.&nbsp;Riutilizzo delle memorie di traduzione<a class="indexterm" name="d0e7239"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2.&nbsp;Riutilizzo delle memorie di traduzione<a class="indexterm" name="d0e7242"></a></h2>
                   </div>
                </div>
             </div>
@@ -381,7 +381,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="importing.and.exporting.translation.memories"></a>2.1.&nbsp;Importazione ed esportazione delle memorie di traduzione<a class="indexterm" name="d0e7302"></a></h3>
+                        <h3 class="title"><a name="importing.and.exporting.translation.memories"></a>2.1.&nbsp;Importazione ed esportazione delle memorie di traduzione<a class="indexterm" name="d0e7305"></a></h3>
                      </div>
                   </div>
                </div>
@@ -475,7 +475,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="sharing.translation.memories"></a>2.3.&nbsp;Condivisione delle memorie di traduzione<a class="indexterm" name="d0e7362"></a></h3>
+                        <h3 class="title"><a name="sharing.translation.memories"></a>2.3.&nbsp;Condivisione delle memorie di traduzione<a class="indexterm" name="d0e7365"></a></h3>
                      </div>
                   </div>
                </div>
@@ -492,7 +492,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e7373"></a>2.4.&nbsp;Uso delle TMX con coppie di lingua alternative<a class="indexterm" name="d0e7376"></a></h3>
+                        <h3 class="title"><a name="d0e7376"></a>2.4.&nbsp;Uso delle TMX con coppie di lingua alternative<a class="indexterm" name="d0e7379"></a></h3>
                      </div>
                   </div>
                </div>
@@ -516,7 +516,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7389"></a>3.&nbsp;File di partenza con traduzioni esistenti<a class="indexterm" name="d0e7392"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e7392"></a>3.&nbsp;File di partenza con traduzioni esistenti<a class="indexterm" name="d0e7395"></a></h2>
                   </div>
                </div>
             </div>
@@ -539,7 +539,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>4.&nbsp;Memoria pseudo-tradotta<a class="indexterm" name="d0e7411"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>4.&nbsp;Memoria pseudo-tradotta<a class="indexterm" name="d0e7414"></a></h2>
                   </div>
                </div>
             </div>
@@ -577,7 +577,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>5.&nbsp;Aggiornamento delle memorie di traduzione<a class="indexterm" name="d0e7463"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>5.&nbsp;Aggiornamento delle memorie di traduzione<a class="indexterm" name="d0e7466"></a></h2>
                   </div>
                </div>
             </div>

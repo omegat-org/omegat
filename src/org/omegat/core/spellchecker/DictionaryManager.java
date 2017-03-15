@@ -115,10 +115,10 @@ public class DictionaryManager {
         String[] dictionaryFiles;
 
         // get all affix files
-        affixFiles = dir.list(new DictionaryFileNameFilter(OConsts.SC_AFFIX_EXTENSION));
+        affixFiles = dir.list((dir, name) -> name.endsWith(OConsts.SC_AFFIX_EXTENSION));
 
         // get all dictionary files
-        dictionaryFiles = dir.list(new DictionaryFileNameFilter(OConsts.SC_DICTIONARY_EXTENSION));
+        dictionaryFiles = dir.list((dir, name) -> name.endsWith(OConsts.SC_DICTIONARY_EXTENSION));
 
         // match them
         if (affixFiles != null && dictionaryFiles != null) {

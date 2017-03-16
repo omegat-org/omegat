@@ -32,17 +32,16 @@
 
 package org.omegat.core.data;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
+import java.io.Writer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -1591,16 +1590,9 @@ public class RealProject implements IProject {
     
     @Override
     public List<String> getSourceFilesOrder() {
-        final String file = m_config.getProjectInternal() + OConsts.FILES_ORDER_FILENAME;
+        Path path = Paths.get(m_config.getProjectInternal(), OConsts.FILES_ORDER_FILENAME);
         try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
-            List<String> result = new ArrayList<String>();
-            String s;
-            while ((s = rd.readLine()) != null) {
-                result.add(s);
-            }
-            rd.close();
-            return result;
+            return Files.readAllLines(path, StandardCharsets.UTF_8);
         } catch (Exception ex) {
             return null;
         }
@@ -1608,15 +1600,12 @@ public class RealProject implements IProject {
 
     @Override
     public void setSourceFilesOrder(List<String> filesList) {
-        final String file = m_config.getProjectInternal() + OConsts.FILES_ORDER_FILENAME;
-        try {
-            BufferedWriter wr = new BufferedWriter(
-                    new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
+        Path path = Paths.get(m_config.getProjectInternal(), OConsts.FILES_ORDER_FILENAME);
+        try (Writer wr = Files.newBufferedWriter(path, StandardCharsets.UTF_8)) {
             for (String f : filesList) {
                 wr.write(f);
                 wr.write('\n');
             }
-            wr.close();
         } catch (Exception ex) {
             Log.log(ex);
         }

@@ -560,7 +560,7 @@ task checksums {
     def checksumsDir = file("${distsDir}/checksums")
     outputs.dir checksumsDir
     onlyIf {
-        checksumsDir.directory
+        distsDir.directory
     }
     doLast {
         distsDir.listFiles().findAll { it.file }.each { f ->

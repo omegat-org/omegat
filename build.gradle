@@ -58,6 +58,19 @@ repositories {
     }
 }
 
+task webstartDocsJar(type: Jar) {
+    description = 'Bundle documents for Java WebStart.'
+    baseName = 'docs'
+    from('release') {
+        include 'changes.txt', 'OmegaT-license.txt'
+        into 'docs'
+    }
+    from('docs') {
+        include '**/instantStartGuideNoTOC.html', '**/OmegaT.css', '**/images/InstantGuide_*.png'
+        into 'docs'
+    }
+}
+
 configurations {
     all {
         // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/813/
@@ -154,7 +167,7 @@ dependencies {
     testRuntime "org.languagetool:language-pl:${languageToolVersion}"
 
     // WebStart-only
-    jnlp project(path: ':release:WebStart-specific', configuration: 'docs')
+    jnlp webstartDocsJar.outputs.files
 
     testIntegrationCompile sourceSets.main.output, sourceSets.test.output, configurations.compile
 }

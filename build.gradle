@@ -572,10 +572,13 @@ processResources.doLast {
     def revision = [provided, omtVersion.revision, git, svn, 'unknown'].find {
         it != 'dev' && !it.empty
     }
-    println "Detected revision ${revision}"
-    def versionFile = file("${sourceSets.main.output.resourcesDir}/org/omegat/Version.properties")
-    ant.propertyfile(file: versionFile) {
-        entry(key: 'revision', value: revision)
+    inputs.property 'revision', revision
+    doLast {
+        logger.lifecycle("Detected revision ${revision}") 
+        def versionFile = file("${sourceSets.main.output.resourcesDir}/org/omegat/Version.properties")
+        ant.propertyfile(file: versionFile) {
+            entry(key: 'revision', value: revision)
+        }
     }
 }
 

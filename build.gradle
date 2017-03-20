@@ -187,7 +187,7 @@ jar {
 }
 
 ext {
-    assetDir = System.getProperty('asset.dir', '../')
+    assetDir = [findProperty('assetDir'), '../'].find { it != null }
 
     macExecutable = file("${assetDir}/JavaAppLauncher")
     macJRE = file("${assetDir}/jre-mac-root")
@@ -567,16 +567,17 @@ jnlp {
 
 ext.detectRevision = { ->
     /* Set the revision number included in version strings. The value is chosen from the first valid value in:
+    0. Provided as the Gradle property 'repo.revision'
     1. src/org/omegat/Version.properties (only if not "dev", i.e. this is a source package not under VCS)
     2. This svn checkout's revision
     3. This git clone's SHA-1
     4. If none of the above, the value "unknown"
      */
-    def provided = System.getProperty('repo.revision', '')
+    def provided = findProperty('repoRevision')
     def git = file('.git').directory ? doCmd('git rev-parse --short HEAD') : ''
     def svn = file('.svn').directory ? doCmd('svnversion') : ''
     [provided, omtVersion.revision, git, svn, 'unknown'].find {
-        it != 'dev' && !it.empty
+        it != null && it != 'dev' && !it.empty
     }
 }
 
@@ -745,8 +746,8 @@ bintray {
 }
 
 // Allow setting the max heap size for the run task from the command line, e.g.
-// `gradle -Drun.maxHeapSize=1024M run`
-run.maxHeapSize = System.getProperty('run.maxHeapSize')
+// `gradle -PrunMaxHeapSize=1024M run`
+run.maxHeapSize = findProperty('runMaxHeapSize')
 
 def Properties loadProperties(File propFile) {
     def config = new Properties()

@@ -694,6 +694,32 @@ task debug(type: JavaExec) {
     debug true
 }
 
+ext.repoHasChanges = {
+    if (file('.git').directory) {
+        !doCmd('git status -s').empty
+    } else if (file('.svn').directory) {
+        !doCmd('svn status -q').empty
+    } else {
+        false
+    }
+}
+
+task releaseCheck {
+    description = 'Check that the repository is in the right condition for a release'
+    doLast {
+        if (repoHasChanges()) {
+            throw new GradleException('Repository has uncommitted changes. Please commit before releasing.')
+        }
+    }
+}
+
+task release {
+    description = 'Create distribution packages for release.'
+    dependsOn clean, genDocIndex, releaseCheck, build
+    build.mustRunAfter clean, genDocIndex, releaseCheck
+    releaseCheck.mustRunAfter genDocIndex
+}
+
 task testIntegration(type: JavaExec) {
     description = 'Run integration tests. Pass repo URL as -Domegat.test.repo=<repo>'
     main = 'org.omegat.core.data.TestTeamIntegration'

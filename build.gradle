@@ -559,7 +559,7 @@ jnlp {
     }
 }
 
-processResources.doLast {
+ext.detectRevision = { ->
     /* Set the revision number included in version strings. The value is chosen from the first valid value in:
     1. src/org/omegat/Version.properties (only if not "dev", i.e. this is a source package not under VCS)
     2. This svn checkout's revision
@@ -569,9 +569,13 @@ processResources.doLast {
     def provided = System.getProperty('repo.revision', '')
     def git = file('.git').directory ? doCmd('git rev-parse --short HEAD') : ''
     def svn = file('.svn').directory ? doCmd('svnversion') : ''
-    def revision = [provided, omtVersion.revision, git, svn, 'unknown'].find {
+    [provided, omtVersion.revision, git, svn, 'unknown'].find {
         it != 'dev' && !it.empty
     }
+}
+
+processResources {
+    def revision = detectRevision()
     inputs.property 'revision', revision
     doLast {
         logger.lifecycle("Detected revision ${revision}") 

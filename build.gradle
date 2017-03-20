@@ -194,11 +194,37 @@ def linux64JRE = file("${assetDir}/jre-linux-64")
 def windowsJRE = file("${assetDir}/jre")
 def windowsJRE64 = file("${assetDir}/jre-64")
 
+task genDocIndex(type: Copy) {
+    description = 'Generate the docs index file'
+    def docPropsFiles = fileTree(dir: 'docs', include: '*/version.properties')
+    inputs.files docPropsFiles
+    from('doc_src') {
+        include 'index_template.html'
+    }
+    into 'docs'
+    rename('index_template.html', 'index.html')
+    doFirst {
+        def langNameExceptions = loadProperties file('doc_src/lang_exceptions.properties')
+        def langInfos = docPropsFiles.collect { props ->
+            def code = props.parentFile.name
+            def locale = Locale.forLanguageTag(code.replace('_', '-'))
+            def name = [langNameExceptions[code], locale.getDisplayName(locale)].find { it != null }
+            def docVersion = loadProperties(props).version
+            def status = docVersion == omtVersion.version ? 'up-to-date' : 'out-of-date'
+            ['code': code, 'name': name, 'version': docVersion, 'status': status]
+        }
+        expand('languages': langInfos)
+    }
+}
+
 distributions {
     main {
         contents {
             from('docs') {
                 into 'docs'
+            }
+            from(genDocIndex.outputs) {
+                include 'index.html'
             }
             from('release') {
                 into 'docs'
@@ -570,15 +596,6 @@ task checksums {
         }
     }
 }
-
-task genDocIndex(type: JavaExec) {
-    description = 'Regenerate the docs index file'
-    main = 'util.CreateDocIndexUtil'
-    classpath = sourceSets.main.runtimeClasspath
-    inputs.files fileTree(dir: 'docs', include: '**/version.properties')
-    outputs.file 'docs/index.html'
-}
-jar.finalizedBy genDocIndex
 
 task genJAXB {
     description = 'Generate classes for loading and manipulating XML formats'

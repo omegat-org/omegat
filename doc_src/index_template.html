@@ -1,0 +1,24 @@
+<html>
+<head>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+   <title>OmegaT User Manual</title>
+   <style type="text/css">
+      .up-to-date { color: green; font-weight: bold; }
+      .out-of-date { color: red; }
+   </style>
+</head>
+<body dir="ltr">
+
+<h1>OmegaT User Manual</h1>
+
+<table>
+<% languages.each { lang -> %>
+    <tr>
+        <td><a href="${lang.code}/index.html#__sethome">${lang.name}</a></td>
+        <td>(<span class="${lang.status}">${lang.version}</span>)</td>
+    </tr>
+<% } %>
+</table>
+
+</body>
+</html>

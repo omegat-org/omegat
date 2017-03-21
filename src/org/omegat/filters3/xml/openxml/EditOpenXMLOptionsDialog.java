@@ -72,7 +72,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         translateSlideCommentsCB.setSelected(options.getTranslateSlideComments());
         translateSlideMastersCB.setSelected(options.getTranslateSlideMasters());
         translateSlideLayoutsCB.setSelected(options.getTranslateSlideLayouts());
-        translateSlideLinksCB.setSelected(options.getTranslateSlideLinks());
+        translateLinksCB.setSelected(options.getTranslateLinks());
         translateChartsCB.setSelected(options.getTranslateCharts());
         translateDrawingsCB.setSelected(options.getTranslateDrawings());
         translateWordArtCB.setSelected(options.getTranslateWordArt());
@@ -132,7 +132,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         translateSlideCommentsCB = new javax.swing.JCheckBox();
         translateSlideMastersCB = new javax.swing.JCheckBox();
         translateSlideLayoutsCB = new javax.swing.JCheckBox();
-        translateSlideLinksCB = new javax.swing.JCheckBox();
+        translateLinksCB = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
         translateChartsCB = new javax.swing.JCheckBox();
         translateDiagramsCB = new javax.swing.JCheckBox();
@@ -241,13 +241,13 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(translateSlideLayoutsCB, OStrings.getString("OpenXML_TRANSLATE_SLIDE_LAYOUTS")); // NOI18N
         jPanel1.add(translateSlideLayoutsCB);
 
-        org.openide.awt.Mnemonics.setLocalizedText(translateSlideLinksCB, OStrings.getString("OpenXML_TRANSLATE_SLIDE_LINKS")); // NOI18N
-        jPanel1.add(translateSlideLinksCB);
-
         jLabel7.setFont(jLabel7.getFont().deriveFont(jLabel7.getFont().getStyle() | java.awt.Font.BOLD, jLabel7.getFont().getSize()-2));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         org.openide.awt.Mnemonics.setLocalizedText(jLabel7, OStrings.getString("OpenXML_GLOBAL")); // NOI18N
         jPanel1.add(jLabel7);
+
+        org.openide.awt.Mnemonics.setLocalizedText(translateLinksCB, OStrings.getString("OpenXML_TRANSLATE_SLIDE_LINKS")); // NOI18N
+        jPanel1.add(translateLinksCB);
 
         org.openide.awt.Mnemonics.setLocalizedText(translateChartsCB, OStrings.getString("OpenXML_TRANSLATE_CHARTS")); // NOI18N
         jPanel1.add(translateChartsCB);
@@ -297,7 +297,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         options.setTranslateSlideComments(translateSlideCommentsCB.isSelected());
         options.setTranslateSlideMasters(translateSlideMastersCB.isSelected());
         options.setTranslateSlideLayouts(translateSlideLayoutsCB.isSelected());
-        options.setTranslateSlideLinks(translateSlideLinksCB.isSelected());
+        options.setTranslateLinks(translateLinksCB.isSelected());
         options.setTranslateCharts(translateChartsCB.isSelected());
         options.setTranslateDrawings(translateDrawingsCB.isSelected());
         options.setTranslateWordArt(translateWordArtCB.isSelected());
@@ -353,7 +353,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox translateSheetNamesCB;
     private javax.swing.JCheckBox translateSlideCommentsCB;
     private javax.swing.JCheckBox translateSlideLayoutsCB;
-    private javax.swing.JCheckBox translateSlideLinksCB;
+    private javax.swing.JCheckBox translateLinksCB;
     private javax.swing.JCheckBox translateSlideMastersCB;
     private javax.swing.JCheckBox translateWordArtCB;
     // End of variables declaration//GEN-END:variables

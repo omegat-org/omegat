@@ -278,8 +278,26 @@ public class OpenXMLOptions extends AbstractOptions {
     /**
      * Returns whether Slide Links should be translated.
      * @return the state of OPTION_TRANSLATE_SLIDE_LINKS
+     * @deprecated use getTranslateLinks()
      */
     public boolean getTranslateSlideLinks() {
+        return getTranslateLinks();
+    }
+
+    /**
+     * Sets whether Slide Links should be translated.
+     * @param translateSlideLinks The option to translate external links
+     * @deprecated use setTranslateLinks(boolean)
+     */
+    public void setTranslateSlideLinks(boolean translateSlideLinks) {
+        setTranslateLinks(translateSlideLinks);
+    }
+    
+    /**
+     * Returns whether Slide Links should be translated.
+     * @return the state of OPTION_TRANSLATE_SLIDE_LINKS
+     */
+    public boolean getTranslateLinks() {
         return getBoolean(OPTION_TRANSLATE_SLIDE_LINKS, false);
     }
 
@@ -287,8 +305,8 @@ public class OpenXMLOptions extends AbstractOptions {
      * Sets whether Slide Links should be translated.
      * @param translateSlideLinks The option to translate external links
      */
-    public void setTranslateSlideLinks(boolean translateSlideLinks) {
-        setBoolean(OPTION_TRANSLATE_SLIDE_LINKS, translateSlideLinks);
+    public void setTranslateLinks(boolean translateLinks) {
+        setBoolean(OPTION_TRANSLATE_SLIDE_LINKS, translateLinks);
     }
     
     /**

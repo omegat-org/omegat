@@ -152,7 +152,7 @@ public class OpenXMLDialect extends DefaultXMLDialect {
             defineTranslatableTagAttribute("v:textpath", "string"); // WordArt
         }
 
-        if (options.getTranslateSlideLinks()) {
+        if (options.getTranslateLinks()) {
             defineTranslatableTagAttribute("Relationship", "Target"); // PowerPoint, only if TargetMode is External
         }
         

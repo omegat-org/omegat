@@ -136,8 +136,8 @@ public class OpenXMLFilter extends AbstractFilter {
         if (options.getTranslateSheetNames()) {
             sb.append("|(workbook\\.xml)");
         }
-        if (options.getTranslateSlideLinks()) {
-            sb.append("|(slide\\d+\\.xml\\.rels)");
+        if (options.getTranslateLinks()) {
+            sb.append("|(\\w+\\d*\\.xml\\.rels)");
         }
         sb.append("|(page\\d+\\.xml)");
         DOCUMENTS = sb.toString();

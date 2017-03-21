@@ -143,7 +143,7 @@ dependencies {
         compile 'org.jasypt:jasypt:1.9.2'
 
         // Groovy used for (runtime) scripts, tests only
-        runtime 'org.codehaus.groovy:groovy-all:2.4.7'
+        runtime 'org.codehaus.groovy:groovy-all:2.4.10'
 
         // Script editor
         compile 'com.fifesoft:rsyntaxtextarea:2.5.8'

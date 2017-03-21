@@ -1,7 +1,7 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
-    id 'de.gliderpilot.jnlp' version '1.1.0'
+    id 'de.gliderpilot.jnlp' version '1.2.0'
     id 'com.jfrog.bintray' version '1.7.3'
     // Uncomment and run `dependencyUpdates` task to check for updates to dependencies
     //id 'com.github.ben-manes.versions' version '0.14.0'

@@ -91,7 +91,7 @@ dependencies {
     if (!depsProvided) {
         compile 'commons-io:commons-io:2.5'
         compile 'commons-lang:commons-lang:2.6'
-        compile 'org.slf4j:slf4j-jdk14:1.7.22'
+        compile 'org.slf4j:slf4j-jdk14:1.7.25'
 
         // PDF Filter
         compile 'org.apache.pdfbox:pdfbox:2.0.5'

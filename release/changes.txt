@@ -1,11 +1,18 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.1 update 1
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancements
   0 Bug fix
   1 Localisation update
 ----------------------------------------------------------------------
 4.1.1 update 1 vs 4.1.1
+
+  Implemented requests:
+
+  - Option to translate target URLs in all Microsoft Office documents 
+  https://sourceforge.net/p/omegat/feature-requests/1308/
+
+  Other changes:
 
   - New filter for WebVTT captions (*.vtt). Only simple files are
 supported.

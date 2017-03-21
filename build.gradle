@@ -82,13 +82,16 @@ configurations {
 }
 
 ext {
-    depsProvided = file('lib/provided').directory
+    providedLibsDir = file('lib/provided')
     languageToolVersion = '3.5'
     luceneVersion = '5.2.1'
 }
 
 dependencies {
-    if (!depsProvided) {
+    // Libs are provided in the "source" distribution only
+    if (providedLibsDir.directory) {
+        compile fileTree(dir: providedLibsDir, include: '**/*.jar')
+    } else {
         compile 'commons-io:commons-io:2.5'
         compile 'commons-lang:commons-lang:2.6'
         compile 'org.slf4j:slf4j-jdk14:1.7.25'
@@ -153,8 +156,6 @@ dependencies {
         }
         compile 'com.fifesoft:autocomplete:2.5.8'
     }
-
-    compile fileTree(dir: 'lib', include: '**/*.jar')
 
     // Test dependencies
     testCompile 'junit:junit:4.12'

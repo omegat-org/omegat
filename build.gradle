@@ -200,7 +200,7 @@ jar {
 }
 
 ext {
-    assetDir = [findProperty('assetDir'), '../'].find { it != null }
+    assetDir = findProperty('assetDir') ?: '../'
 
     macExecutable = file("${assetDir}/JavaAppLauncher")
     macJRE = file("${assetDir}/jre-mac-root")
@@ -227,7 +227,7 @@ task genDocIndex(type: Copy) {
         def langInfos = docPropsFiles.collect { props ->
             def code = props.parentFile.name
             def locale = Locale.forLanguageTag(code.replace('_', '-'))
-            def name = [langNameExceptions[code], locale.getDisplayName(locale)].find { it != null }
+            def name = langNameExceptions[code] ?: locale.getDisplayName(locale)
             def docVersion = loadProperties(props).version
             def status = docVersion == omtVersion.version ? 'up-to-date' : 'out-of-date'
             ['code': code, 'name': name, 'version': docVersion, 'status': status]
@@ -521,7 +521,7 @@ ext.makeWinTask = { args ->
                          JRE_COMMENT_SUBST: hasJRE ? '' : ';',
                          JRE_PATH_SUBST: hasJRE ? args.jrePath.path : '',
                          CUSTOM_MESSAGES_SUBST: getInnoSetupCustomMessages(),
-                         ARCHITECTURE_SUBST: args.get('arch', '')])
+                         ARCHITECTURE_SUBST: args.arch ?: ''])
                 filteringCharset = 'UTF-8'
             }
             exec {
@@ -586,11 +586,11 @@ ext.detectRevision = { ->
     3. This git clone's SHA-1
     4. If none of the above, the value "unknown"
      */
-    def provided = findProperty('repoRevision')
+    def provided = findProperty('repoRevision') ?: ''
     def git = file('.git').directory ? doCmd('git rev-parse --short HEAD') : ''
     def svn = file('.svn').directory ? doCmd('svnversion') : ''
     [provided, omtVersion.revision, git, svn, 'unknown'].find {
-        it != null && it != 'dev' && !it.empty
+        it != 'dev' && !it.empty
     }
 }
 

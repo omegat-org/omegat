@@ -94,7 +94,7 @@ dependencies {
         compile 'org.slf4j:slf4j-jdk14:1.7.22'
 
         // PDF Filter
-        compile 'org.apache.pdfbox:pdfbox:2.0.4'
+        compile 'org.apache.pdfbox:pdfbox:2.0.5'
 
         // Aligner
         compile 'net.loomchild:maligna:3.0.0'

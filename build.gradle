@@ -574,7 +574,7 @@ jnlp {
         signJarRemovedManifestEntries = '(?:Trusted-Only|Trusted-Library|.*-Digest)'
         signJarParams = ['keystore', 'alias', 'storepass', 'keypass', 'tsaurl'].collectEntries {
             [(it): webstartProps[it]]
-        }.findAll { k, v -> v != null }
+        }.findAll { _, v -> v != null }
     }
 }
 

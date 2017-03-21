@@ -280,6 +280,7 @@ public class OpenXMLOptions extends AbstractOptions {
      * @return the state of OPTION_TRANSLATE_SLIDE_LINKS
      * @deprecated use getTranslateLinks()
      */
+    @Deprecated
     public boolean getTranslateSlideLinks() {
         return getTranslateLinks();
     }
@@ -289,6 +290,7 @@ public class OpenXMLOptions extends AbstractOptions {
      * @param translateSlideLinks The option to translate external links
      * @deprecated use setTranslateLinks(boolean)
      */
+    @Deprecated
     public void setTranslateSlideLinks(boolean translateSlideLinks) {
         setTranslateLinks(translateSlideLinks);
     }

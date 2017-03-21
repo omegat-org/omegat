@@ -233,6 +233,7 @@ task genDocIndex(type: Copy) {
             ['code': code, 'name': name, 'version': docVersion, 'status': status]
         }
         expand('languages': langInfos)
+        filteringCharset = 'UTF-8'
     }
 }
 

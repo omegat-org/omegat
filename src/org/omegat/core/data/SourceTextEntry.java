@@ -28,11 +28,8 @@
 package org.omegat.core.data;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * Source text entry represents an individual segment for translation pulled
@@ -143,23 +140,14 @@ public class SourceTextEntry {
      * Returns comment of entry if exist in source document.
      */
     public String getComment() {
-        if (props == null || props.length == 0) {
+        if (SegmentProperties.isEmpty(props)) {
             return null;
         }
-        // Avoid creating a new string if we can avoid it.
-        // This should be the majority case.
-        if (props.length == 2) {
-            return props[1];
-        }
-        return IntStream.range(0, props.length).filter((i) -> i % 2 != 0).mapToObj((i) -> props[i])
-                .collect(Collectors.joining("\n"));
+        return SegmentProperties.joinValues(props);
     }
     
     public String[] getRawProperties() {
-        if (props != null) {
-            return Arrays.copyOf(props, props.length);
-        }
-        return new String[0];
+        return SegmentProperties.copy(props);
     }
 
     /** Returns the number of this entry in a project. */

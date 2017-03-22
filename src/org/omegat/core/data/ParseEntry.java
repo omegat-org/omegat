@@ -192,7 +192,7 @@ public abstract class ParseEntry implements IParseCallback {
     @Override
     public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
             String path, IFilter filter, List<ProtectedPart> protectedParts) {
-        String[] props = comment == null ? null : new String[] { "comment", comment };
+        String[] props = comment == null ? null : new String[] { SegmentProperties.COMMENT, comment };
         addEntryWithProperties(id, source, translation, isFuzzy, props, path, filter, protectedParts);
     }
     

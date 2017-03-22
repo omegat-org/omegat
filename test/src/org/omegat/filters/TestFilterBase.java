@@ -50,6 +50,7 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.RealProject;
+import org.omegat.core.data.SegmentProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -98,7 +99,7 @@ public abstract class TestFilterBase extends TestCore {
 
             public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
                     String path, IFilter filter, List<ProtectedPart> protectedParts) {
-                String[] props = comment == null ? null : new String[] { "comment", comment };
+                String[] props = comment == null ? null : new String[] { SegmentProperties.COMMENT, comment };
                 addEntryWithProperties(id, source, translation, isFuzzy, props, path, filter, protectedParts);
             }
 
@@ -129,7 +130,7 @@ public abstract class TestFilterBase extends TestCore {
 
             public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
                     String path, IFilter filter, List<ProtectedPart> protectedParts) {
-                String[] props = comment == null ? null : new String[] { "comment", comment };
+                String[] props = comment == null ? null : new String[] { SegmentProperties.COMMENT, comment };
                 addEntryWithProperties(id, source, translation, isFuzzy, props, path, filter, protectedParts);
             }
 
@@ -159,7 +160,7 @@ public abstract class TestFilterBase extends TestCore {
 
             public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
                     String path, IFilter filter, List<ProtectedPart> protectedParts) {
-                String[] props = comment == null ? null : new String[] { "comment", comment };
+                String[] props = comment == null ? null : new String[] { SegmentProperties.COMMENT, comment };
                 addEntryWithProperties(id, source, translation, isFuzzy, props, path, filter, protectedParts);
             }
 
@@ -196,7 +197,7 @@ public abstract class TestFilterBase extends TestCore {
             }
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
                     String comment, String path, IFilter filter, List<ProtectedPart> protectedParts) {
-                String[] props = comment == null ? null : new String[] { "comment", comment };
+                String[] props = comment == null ? null : new String[] { SegmentProperties.COMMENT, comment };
                 addEntryWithProperties(id, source, translation, isFuzzy, props, path, filter, protectedParts);
             }
 

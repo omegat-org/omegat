@@ -505,10 +505,9 @@ ext.makeWinTask = { args ->
         destinationDir = file("${buildDir}/innosetup/${args.name}")
         def fullVersion = project.version + omtVersion.beta
         def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
-        def hasJRE = args.jrePath != null
         outputs.file "${distsDir}/${installerBasename}.exe"
         onlyIf {
-            (!hasJRE || args.jrePath.directory) && haveInnoSetup()
+            (!args.jrePath || args.jrePath.directory) && haveInnoSetup()
         }
         doLast {
             project.copy {
@@ -519,8 +518,8 @@ ext.makeWinTask = { args ->
                 filter(ReplaceTokens, tokens: [VERSION_NUMBER_SUBST: fullVersion,
                          OUTPUT_DIR_SUBST: distsDir.path,
                          OUTPUT_BASENAME_SUBST: installerBasename.toString(),
-                         JRE_COMMENT_SUBST: hasJRE ? '' : ';',
-                         JRE_PATH_SUBST: hasJRE ? args.jrePath.path : '',
+                         JRE_COMMENT_SUBST: args.jrePath ? '' : ';',
+                         JRE_PATH_SUBST: args.jrePath ? args.jrePath.path : '',
                          CUSTOM_MESSAGES_SUBST: getInnoSetupCustomMessages(),
                          ARCHITECTURE_SUBST: args.arch ?: ''])
                 filteringCharset = 'UTF-8'

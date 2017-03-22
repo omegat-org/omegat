@@ -70,11 +70,11 @@ public class TMXWriter {
         String sourceLocale = m_config.getSourceLanguage().toString();
         String targetLocale = m_config.getTargetLanguage().toString();
         String segmenting;
-        if (m_config.isSentenceSegmentingEnabled())
-            segmenting = TMXReader.SEG_SENTENCE;
-        else
-            segmenting = TMXReader.SEG_PARAGRAPH;
-
+        if (m_config.isSentenceSegmentingEnabled()) {
+            segmenting = "sentence";
+        } else {
+            segmenting = "paragraph";
+        }
         FileOutputStream fos = new FileOutputStream(filename);
         OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
         PrintWriter out = new PrintWriter(osw); // PW is easier to use than

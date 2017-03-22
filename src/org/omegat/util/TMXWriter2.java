@@ -283,8 +283,7 @@ public class TMXWriter2 {
 
         xml.writeAttribute("creationtoolversion", OStrings.getVersion());
 
-        xml.writeAttribute("segtype", sentenceSegmentingEnabled ? TMXReader.SEG_SENTENCE
-                : TMXReader.SEG_PARAGRAPH);
+        xml.writeAttribute("segtype", sentenceSegmentingEnabled ? "sentence" : "paragraph");
 
         xml.writeAttribute("srclang", sourceLanguage.toString());
 

@@ -572,9 +572,7 @@ jnlp {
             'Permissions': 'all-permissions',
             'Application-Name': applicationName]
         signJarRemovedManifestEntries = '(?:Trusted-Only|Trusted-Library|.*-Digest)'
-        signJarParams = ['keystore', 'alias', 'storepass', 'keypass', 'tsaurl'].collectEntries {
-            [(it): webstartProps[it]]
-        }.findAll { _, v -> v != null }
+        signJarParams = webstartProps.subMap('keystore', 'alias', 'storepass', 'keypass', 'tsaurl')
     }
 }
 

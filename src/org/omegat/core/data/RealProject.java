@@ -1212,47 +1212,46 @@ public class RealProject implements IProject {
      * updates.
      */
     private void loadTM() throws IOException {
-        final File tmRoot = new File(m_config.getTMRoot());
-        tmMonitor = new DirectoryMonitor(tmRoot, new DirectoryMonitor.Callback() {
-            public void fileChanged(File file) {
-                if (!file.getName().toLowerCase().endsWith(OConsts.TMX_EXTENSION)
-                        && !file.getName().toLowerCase().endsWith(OConsts.TMX_GZ_EXTENSION)) {
-                    // not a TMX file
-                    return;
-                }
-                if (file.getPath().startsWith(m_config.getTMOtherLangRoot()) ) {
-                    //tmx in other language, which is already shown in editor. Skip it.
-                    return;
-                }
-                // create new translation memories map
-                Map<String, ExternalTMX> newTransMemories = new TreeMap<String, ExternalTMX>(transMemories);
-                if (file.exists()) {
-                    try {
-                        ExternalTMX newTMX = new ExternalTMX(m_config, file,
-                                Preferences.isPreference(Preferences.EXT_TMX_SHOW_LEVEL2),
-                                Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH));
-                        newTransMemories.put(file.getPath(), newTMX);
-
-                        //
-                        // Please note the use of "/". FileUtil.computeRelativePath rewrites all other
-                        // directory separators into "/".
-                        //
-                        if (FileUtil.computeRelativePath(tmRoot, file).startsWith(OConsts.AUTO_TM + "/")) {                         
-                            appendFromAutoTMX(newTMX, false);
-                        } else if (FileUtil.computeRelativePath(tmRoot, file).startsWith(OConsts.AUTO_ENFORCE_TM + '/')) {
-                            appendFromAutoTMX(newTMX, true);
-                        }                          
-
-                    } catch (Exception e) {
-                        String filename = file.getPath();
-                        Log.logErrorRB(e, "TF_TM_LOAD_ERROR", filename);
-                        Core.getMainWindow().displayErrorRB(e, "TF_TM_LOAD_ERROR", filename);
-                    }
-                } else {
-                    newTransMemories.remove(file.getPath());
-                }
-                transMemories = newTransMemories;
+        File tmRoot = new File(m_config.getTMRoot());
+        tmMonitor = new DirectoryMonitor(tmRoot, file -> {
+            if (!file.getName().toLowerCase().endsWith(OConsts.TMX_EXTENSION)
+                    && !file.getName().toLowerCase().endsWith(OConsts.TMX_GZ_EXTENSION)) {
+                // not a TMX file
+                return;
             }
+            if (file.getPath().startsWith(m_config.getTMOtherLangRoot())) {
+                // tmx in other language, which is already shown in editor. Skip it.
+                return;
+            }
+            // create new translation memories map
+            Map<String, ExternalTMX> newTransMemories = new TreeMap<String, ExternalTMX>(transMemories);
+            if (file.exists()) {
+                try {
+                    ExternalTMX newTMX = new ExternalTMX(m_config, file,
+                            Preferences.isPreference(Preferences.EXT_TMX_SHOW_LEVEL2),
+                            Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH));
+                    newTransMemories.put(file.getPath(), newTMX);
+
+                    //
+                    // Please note the use of "/". FileUtil.computeRelativePath rewrites all other
+                    // directory separators into "/".
+                    //
+                    if (FileUtil.computeRelativePath(tmRoot, file).startsWith(OConsts.AUTO_TM + "/")) {
+                        appendFromAutoTMX(newTMX, false);
+                    } else if (FileUtil.computeRelativePath(tmRoot, file)
+                            .startsWith(OConsts.AUTO_ENFORCE_TM + '/')) {
+                        appendFromAutoTMX(newTMX, true);
+                    }
+
+                } catch (Exception e) {
+                    String filename = file.getPath();
+                    Log.logErrorRB(e, "TF_TM_LOAD_ERROR", filename);
+                    Core.getMainWindow().displayErrorRB(e, "TF_TM_LOAD_ERROR", filename);
+                }
+            } else {
+                newTransMemories.remove(file.getPath());
+            }
+            transMemories = newTransMemories;
         });
         tmMonitor.checkChanges();
         tmMonitor.start();

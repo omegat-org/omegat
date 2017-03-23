@@ -176,7 +176,6 @@ public class ExternalTMFactory {
             }
         }
 
-        private static final ParseEntryResult THROWAWAY = new ParseEntryResult();
         private final File file;
         private boolean removeTags;
         private boolean removeSpaces;
@@ -200,7 +199,8 @@ public class ExternalTMFactory {
         }
 
         private List<PrepareTMXEntry> loadImpl(Language sourceLang, Language targetLang) throws Exception {
-            final List<PrepareTMXEntry> entries = new ArrayList<>();
+            List<PrepareTMXEntry> entries = new ArrayList<>();
+            ParseEntryResult throwaway = new ParseEntryResult();
             Core.getFilterMaster().loadFile(file.getPath(),
                     new FilterContext(sourceLang, targetLang, true).setRemoveAllTags(removeTags),
                     new IParseCallback() {
@@ -235,9 +235,9 @@ public class ExternalTMFactory {
                                 return;
                             }
                             source = StringUtil.normalizeUnicode(
-                                    ParseEntry.stripSomeChars(source, THROWAWAY, removeTags, removeSpaces));
+                                    ParseEntry.stripSomeChars(source, throwaway, removeTags, removeSpaces));
                             target = StringUtil.normalizeUnicode(
-                                    ParseEntry.stripSomeChars(target, THROWAWAY, removeTags, removeSpaces));
+                                    ParseEntry.stripSomeChars(target, throwaway, removeTags, removeSpaces));
                             if (!source.trim().isEmpty()) {
                                 PrepareTMXEntry entry = new PrepareTMXEntry();
                                 entry.source = source;

@@ -30,10 +30,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.ParseEntry.ParseEntryResult;
+import org.omegat.filters2.FilterContext;
+import org.omegat.filters2.IFilter;
+import org.omegat.filters2.IParseCallback;
+import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
+import org.omegat.util.TMXProp;
 import org.omegat.util.TMXReader2;
 
 /**
@@ -45,7 +51,7 @@ import org.omegat.util.TMXReader2;
 public class ExternalTMFactory {
 
     public static boolean isSupported(File file) {
-        return TMXLoader.isSupported(file);
+        return TMXLoader.isSupported(file) || BifileLoader.isSupported(file);
     }
 
     public static ExternalTMX load(File file) throws Exception {
@@ -55,6 +61,10 @@ public class ExternalTMFactory {
                     .setExtTmxLevel2(Preferences.isPreference(Preferences.EXT_TMX_SHOW_LEVEL2))
                     .setUseSlash(Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH))
                     .setDoSegmenting(props.isSentenceSegmentingEnabled())
+                    .load(props.getSourceLanguage(), props.getTargetLanguage());
+        } else if (BifileLoader.isSupported(file)) {
+            return new BifileLoader(file).setRemoveTags(props.isRemoveTags())
+                    .setRemoveSpaces(Core.getFilterMaster().getConfig().isRemoveSpacesNonseg())
                     .load(props.getSourceLanguage(), props.getTargetLanguage());
         } else {
             throw new IllegalArgumentException("Unsupported external TM type: " + file.getName());
@@ -148,11 +158,114 @@ public class ExternalTMFactory {
                     }
                 }
             };
-    
+
             TMXReader2 reader = new TMXReader2();
             reader.readTMX(file, sourceLang, targetLang, doSegmenting, false, extTmxLevel2, useSlash, loader);
     
             return entries;
+        }
+    }
+
+    public static class BifileLoader {
+        public static boolean isSupported(File file) {
+            FilterMaster fm = Core.getFilterMaster();
+            try {
+                return fm.isFileSupported(file, true) && fm.isBilingualFile(file);
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
+        private static final ParseEntryResult THROWAWAY = new ParseEntryResult();
+        private final File file;
+        private boolean removeTags;
+        private boolean removeSpaces;
+
+        public BifileLoader(File file) {
+            this.file = file;
+        }
+
+        public BifileLoader setRemoveTags(boolean removeTags) {
+            this.removeTags = removeTags;
+            return this;
+        }
+
+        public BifileLoader setRemoveSpaces(boolean removeSpaces) {
+            this.removeSpaces = removeSpaces;
+            return this;
+        }
+
+        public ExternalTMX load(Language sourceLang, Language targetLang) throws Exception {
+            return new ExternalTMX(file.getName(), loadImpl(sourceLang, targetLang));
+        }
+
+        private List<PrepareTMXEntry> loadImpl(Language sourceLang, Language targetLang) throws Exception {
+            final List<PrepareTMXEntry> entries = new ArrayList<>();
+            Core.getFilterMaster().loadFile(file.getPath(),
+                    new FilterContext(sourceLang, targetLang, true).setRemoveAllTags(removeTags),
+                    new IParseCallback() {
+                        @Override
+                        public void linkPrevNextSegments() {
+                        }
+
+                        @Override
+                        public void addEntry(String id, String source, String translation, boolean isFuzzy,
+                                String comment, IFilter filter) {
+                            process(source, translation, id, comment, null, null);
+                        }
+
+                        @Override
+                        public void addEntry(String id, String source, String translation, boolean isFuzzy,
+                                String comment, String path, IFilter filter,
+                                List<ProtectedPart> protectedParts) {
+                            process(source, translation, id, comment, path, null);
+                        }
+
+                        @Override
+                        public void addEntryWithProperties(String id, String source, String translation,
+                                boolean isFuzzy, String[] props, String path, IFilter filter,
+                                List<ProtectedPart> protectedParts) {
+                            process(source, translation, id, null, null, props);
+
+                        }
+
+                        private void process(String source, String target, String id, String comment,
+                                String path, String[] props) {
+                            if (source == null || target == null) {
+                                return;
+                            }
+                            source = StringUtil.normalizeUnicode(
+                                    ParseEntry.stripSomeChars(source, THROWAWAY, removeTags, removeSpaces));
+                            target = StringUtil.normalizeUnicode(
+                                    ParseEntry.stripSomeChars(target, THROWAWAY, removeTags, removeSpaces));
+                            if (!source.trim().isEmpty()) {
+                                PrepareTMXEntry entry = new PrepareTMXEntry();
+                                entry.source = source;
+                                entry.translation = target;
+                                entry.note = comment;
+                                if (props != null) {
+                                    List<TMXProp> tmxProps = propsToList(props);
+                                    if (id != null) {
+                                        tmxProps.add(new TMXProp("id", id));
+                                    }
+                                    if (path != null) {
+                                        tmxProps.add(new TMXProp("path", path));
+                                    }
+                                    entry.otherProperties = tmxProps;
+                                }
+                                entries.add(entry);
+                            }
+                        }
+                    });
+            return entries;
+        }
+
+        private List<TMXProp> propsToList(String[] props) {
+            List<TMXProp> result = new ArrayList<>(props.length / 2);
+            for (int i = 0; i < props.length; i++) {
+                result.add(new TMXProp(props[i], props[++i]));
+            }
+            return result;
         }
     }
 }

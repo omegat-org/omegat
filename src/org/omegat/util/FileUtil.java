@@ -264,6 +264,18 @@ public class FileUtil {
         return fileAbs.substring(rootAbs.length());
     }
     
+    /**
+     * Check if file is in specified path.
+     */
+    public static boolean isInPath(File path, File tmxFile) {
+        try {
+            computeRelativePath(path, tmxFile);
+            return true;
+        } catch (IOException ex) {
+            return false;
+        }
+    }
+
     public interface ICollisionCallback {
         public boolean isCanceled();
         public boolean shouldReplace(File file, int thisFile, int totalFiles);

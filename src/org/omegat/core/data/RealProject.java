@@ -1512,11 +1512,11 @@ public class RealProject implements IProject {
     }
 
     public Map<String, ExternalTMX> getTransMemories() {
-        return transMemories;
+        return Collections.unmodifiableMap(transMemories);
     }
 
     public Map<Language, ProjectTMX> getOtherTargetLanguageTMs() {
-        return otherTargetLangTMs;
+        return Collections.unmodifiableMap(otherTargetLangTMs);
     }
 
     /**

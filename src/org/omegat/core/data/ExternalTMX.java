@@ -27,6 +27,7 @@
  **************************************************************************/
 package org.omegat.core.data;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -52,6 +53,6 @@ public class ExternalTMX {
     }
 
     public List<PrepareTMXEntry> getEntries() {
-        return entries;
+        return Collections.unmodifiableList(entries);
     }
 }

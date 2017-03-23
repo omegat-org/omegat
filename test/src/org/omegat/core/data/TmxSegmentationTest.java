@@ -69,13 +69,8 @@ public class TmxSegmentationTest extends TestCase {
 
     @Test
     public void testExternalTMX() throws Exception {
-        ProjectProperties props = new ProjectProperties();
-        props.setSupportDefaultTranslations(true);
-        props.setSourceLanguage(new Language("en"));
-        props.setTargetLanguage(new Language("fr"));
-        props.setSentenceSegmentingEnabled(true);
-
-        ExternalTMX tmx = new ExternalTMX(props, new File("test/data/tmx/resegmenting.tmx"), false, false);
+        ExternalTMX tmx = new ExternalTMFactory.TMXLoader(new File("test/data/tmx/resegmenting.tmx"))
+                .setDoSegmenting(true).load(new Language("en"), new Language("fr"));
 
         assertEquals(2, tmx.getEntries().size());
         assertEquals("This is test.", tmx.getEntries().get(0).source);

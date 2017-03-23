@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.1 update 1
 ----------------------------------------------------------------------
-  2 Enhancements
+  3 Enhancements
   0 Bug fix
   1 Localisation update
 ----------------------------------------------------------------------
@@ -11,6 +11,9 @@
 
   - Option to translate target URLs in all Microsoft Office documents 
   https://sourceforge.net/p/omegat/feature-requests/1308/
+
+  - Support using bilingual files as TMs
+  https://sourceforge.net/p/omegat/feature-requests/1312/
 
   Other changes:
 

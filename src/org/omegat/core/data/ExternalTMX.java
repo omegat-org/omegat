@@ -31,7 +31,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Class for store data from TMX from /tm/ folder. They are used only for fuzzy matches.
+ * Class for store data from TMs from the <code>/tm</code> folder. They are used only for fuzzy matches.
+ * <p>
+ * Note that the name includes "TMX" for historical reasons; the source may not have been an actual TMX file.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Thomas CORDONNIER

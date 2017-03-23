@@ -360,10 +360,11 @@ public class FilterMaster {
             }
             for (Files ff : f.getFiles()) {
                 boolean matchesMask = matchesMask(file.getName(), ff.getSourceFilenameMask());
+                if (!matchesMask) {
+                    continue;
+                }
                 if (quick && matchesMask) {
                     return true;
-                } else if (!matchesMask) {
-                    continue;
                 }
                 IFilter filterObject = getFilterInstance(f.getClassName());
                 if (filterObject == null) {

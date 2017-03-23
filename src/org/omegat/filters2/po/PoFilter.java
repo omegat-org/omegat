@@ -888,4 +888,9 @@ public class PoFilter extends AbstractFilter {
     public boolean hasOptions() {
         return true;
     }
+
+    @Override
+    public boolean isBilingual() {
+        return true;
+    }
 }

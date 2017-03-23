@@ -382,6 +382,12 @@ public class FilterMaster {
         return false;
     }
 
+    public boolean isBilingualFile(File file) throws Exception {
+        FilterContext fc = new FilterContext(null, null, true);
+        LookupInformation info = lookupFilter(file, fc);
+        return info.filterObject.isBilingual();
+    }
+
     private static List<String> supportedEncodings = null;
 
     /**

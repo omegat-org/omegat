@@ -264,4 +264,9 @@ public class MozillaLangFilter extends AbstractFilter {
     public boolean hasOptions() {
         return false;
     }
+
+    @Override
+    public boolean isBilingual() {
+        return true;
+    }
 }

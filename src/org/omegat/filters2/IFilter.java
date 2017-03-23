@@ -206,4 +206,15 @@ public interface IFilter {
      * @return the encoding of the last parsed source file, or null when no file has been parsed yet.
      */
     String getInEncodingLastParsedFile();
+
+    /**
+     * Indicates whether the filter is bilingual. Bilingual filters will supply both source strings and
+     * translation strings to {@link IParseCallback}.addEntry().
+     * 
+     * @return <code>true</code> if the filter is bilingual
+     * @since 4.1.1
+     */
+    default boolean isBilingual() {
+        return false;
+    }
 }

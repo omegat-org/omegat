@@ -88,7 +88,7 @@ public class ExternalTMFactoryTest extends TestCore {
 
         ExternalTMX tmx = ExternalTMFactory.load(tmxFile);
 
-        assertEquals(938, tmx.getEntries().size());
+        assertEquals(1013, tmx.getEntries().size());
         assertEquals("Choose syntax highlighting", tmx.getEntries().get(0).source);
         assertEquals(
                 "\u0412\u044B\u043B\u0443\u0447\u044D\u043D\u044C\u043D\u0435 "
@@ -107,7 +107,7 @@ public class ExternalTMFactoryTest extends TestCore {
 
         ExternalTMX tmx = ExternalTMFactory.load(tmxFile);
 
-        assertEquals(26, tmx.getEntries().size());
+        assertEquals(33, tmx.getEntries().size());
         assertEquals("Download %s for Android in your language", tmx.getEntries().get(0).source);
         assertEquals("Laden Sie %s f\u00FCr Android in Ihrer Sprache herunter",
                 tmx.getEntries().get(0).translation);

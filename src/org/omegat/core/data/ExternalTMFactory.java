@@ -65,6 +65,7 @@ public class ExternalTMFactory {
         } else if (BifileLoader.isSupported(file)) {
             return new BifileLoader(file).setRemoveTags(props.isRemoveTags())
                     .setRemoveSpaces(Core.getFilterMaster().getConfig().isRemoveSpacesNonseg())
+                    .setDoSegmenting(props.isSentenceSegmentingEnabled())
                     .load(props.getSourceLanguage(), props.getTargetLanguage());
         } else {
             throw new IllegalArgumentException("Unsupported external TM type: " + file.getName());
@@ -179,6 +180,7 @@ public class ExternalTMFactory {
         private final File file;
         private boolean removeTags;
         private boolean removeSpaces;
+        private boolean doSegmenting;
 
         public BifileLoader(File file) {
             this.file = file;
@@ -191,6 +193,11 @@ public class ExternalTMFactory {
 
         public BifileLoader setRemoveSpaces(boolean removeSpaces) {
             this.removeSpaces = removeSpaces;
+            return this;
+        }
+
+        public BifileLoader setDoSegmenting(boolean doSegmenting) {
+            this.doSegmenting = doSegmenting;
             return this;
         }
 
@@ -238,6 +245,23 @@ public class ExternalTMFactory {
                                     ParseEntry.stripSomeChars(source, throwaway, removeTags, removeSpaces));
                             target = StringUtil.normalizeUnicode(
                                     ParseEntry.stripSomeChars(target, throwaway, removeTags, removeSpaces));
+
+                            List<String> sources = new ArrayList<>();
+                            List<String> targets = new ArrayList<>();
+                            Core.getSegmenter().segmentEntries(doSegmenting, sourceLang, source, targetLang,
+                                    target, sources, targets);
+
+                            if (sources.size() == targets.size()) {
+                                for (int i = 0; i < sources.size(); i++) {
+                                    addImpl(sources.get(i), targets.get(i), id, comment, path, props);
+                                }
+                            } else {
+                                addImpl(source, target, id, comment, path, props);
+                            }
+                        }
+
+                        private void addImpl(String source, String target, String id, String comment,
+                                String path, String[] props) {
                             if (!source.trim().isEmpty()) {
                                 PrepareTMXEntry entry = new PrepareTMXEntry();
                                 entry.source = source;

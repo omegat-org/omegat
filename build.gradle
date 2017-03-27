@@ -27,11 +27,9 @@ sourceSets {
     main {
         java {
             srcDir 'src'
-            srcDir 'gen/src'
         }
         resources {
             srcDir 'src'
-            srcDir 'gen/src'
         }
     }
     test {
@@ -294,7 +292,7 @@ distributions {
         contents {
             from(rootDir) {
                 include 'docs/**', 'images/**', 'lib/**', 'release/**',
-                    'src/**', 'test/**', 'gen/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
+                    'src/**', 'test/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
                     'gradle/**', 'gradlew*', '*.gradle', 'README.md', '*.properties'
                 exclude '**/build/**', 'doc_src/**/pdf/**'
             }

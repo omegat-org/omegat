@@ -368,7 +368,8 @@ distributions {
                     'properties/search_replace.properties',
                     'properties/replace_strip_tags.properties',
                     'properties/strip_bidi_marks.properties',
-                    'properties/nbsp.properties'
+                    'properties/nbsp.properties',
+                    'extract_text_content.properties'
                 into 'source/scripts'
             }
             from('release') {

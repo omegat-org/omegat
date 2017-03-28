@@ -748,7 +748,7 @@ ext.mavenStyleVersion = version.replace('_', '-')
 
 publishing {
     publications {
-        forBintray(MavenPublication) {
+        bintray(MavenPublication) {
             groupId 'org.omegat'
             artifactId 'omegat'
             version mavenStyleVersion
@@ -771,13 +771,11 @@ bintray {
         repo = 'maven'
         name = 'OmegaT'
         userOrg = 'omegat-org'
-        licenses = ['GPL-3.0']
-        vcsUrl = 'https://svn.code.sf.net/p/omegat/svn/'
         version {
             name = mavenStyleVersion
         }
     }
-    publications = ['forBintray']
+    publications = ['bintray']
 }
 
 // Allow setting the max heap size for the run task from the command line, e.g.

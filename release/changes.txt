@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.1 update 1
 ----------------------------------------------------------------------
-  3 Enhancements
+  4 Enhancements
   0 Bug fix
   1 Localisation update
 ----------------------------------------------------------------------
@@ -19,6 +19,9 @@
 
   - New filter for WebVTT captions (*.vtt). Only simple files are
 supported.
+
+  - The new script extract_text_content.groovy allows exporting all
+strings of the project to a single text file
 
   Localisation Updates:
 

@@ -1,5 +1,5 @@
 /* :name=Extract Text Content :description=Extracts the content of the projects in a single text file (one line per segment).
- * see FR#1282 exporting the strings only - https://sourceforge.net/p/omegat/feature-requests/182/
+ * see RFE#1282 Extracts the content of the projects to text file - https://sourceforge.net/p/omegat/feature-requests/182/
  * 
  * @author  Briac Pilpré
  * @date    2017-03-22

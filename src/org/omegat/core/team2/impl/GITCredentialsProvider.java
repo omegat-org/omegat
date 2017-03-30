@@ -253,7 +253,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
                     throw new UnsupportedCredentialItem(uri, "Wrong fingerprint pattern");
                 }
                 if (predefinedFingerprint != null) {
-                    if (predefinedFingerprint.equals(predefinedFingerprint)) {
+                    if (promptedFingerprint.equals(predefinedFingerprint)) {
                         ((CredentialItem.YesNoType) i).setValue(true);
                     } else {
                         ((CredentialItem.YesNoType) i).setValue(false);

@@ -46,7 +46,7 @@ public class HistoryCompleter extends AutoCompleterListView {
 
     private static final Logger LOGGER = Logger.getLogger(HistoryCompleter.class.getName());
 
-    WordCompleter completer = new WordCompleter();
+    WordCompleter wordCompleter = new WordCompleter();
     private SourceTextEntry currentEntry;
     private boolean isCurrentEntryTranslated;
 
@@ -85,14 +85,14 @@ public class HistoryCompleter extends AutoCompleterListView {
                     train();
                 }
             } else {
-                completer.reset();
+                wordCompleter.reset();
             }
         });
     }
     
     synchronized void train() {
         long start = System.currentTimeMillis();
-        completer.reset();
+        wordCompleter.reset();
         Core.getProject().iterateByDefaultTranslations((source, trans) -> trainString(trans.translation));
         Core.getProject().iterateByMultipleTranslations((source, trans) -> trainString(trans.translation));
         long time = System.currentTimeMillis() - start;
@@ -105,7 +105,7 @@ public class HistoryCompleter extends AutoCompleterListView {
         }
         String[] tokens = getTokenizer().tokenizeWordsToStrings(text, StemmingMode.NONE);
         
-        completer.train(tokens);
+        wordCompleter.train(tokens);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class HistoryCompleter extends AutoCompleterListView {
         if (lastToken.isEmpty()) {
             return Collections.emptyList();
         }
-        return completer.completeWord(lastToken).stream().map(s -> new AutoCompleterItem(s, null, lastToken.length()))
+        return wordCompleter.completeWord(lastToken).stream().map(s -> new AutoCompleterItem(s, null, lastToken.length()))
                 .collect(Collectors.toList());
     }
 

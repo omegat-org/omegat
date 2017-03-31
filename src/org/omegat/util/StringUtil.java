@@ -303,11 +303,11 @@ public class StringUtil {
      * Compare two values, which could be null.
      */
     public static <T extends Comparable<T>> int compareToWithNulls(T v1, T v2) {
-        if (v1 == null && v2 == null) {
+        if (v1 == v2) {
             return 0;
-        } else if (v1 == null && v2 != null) {
+        } else if (v1 == null) {
             return -1;
-        } else if (v1 != null && v2 == null) {
+        } else if (v2 == null) {
             return 1;
         } else {
             return v1.compareTo(v2);

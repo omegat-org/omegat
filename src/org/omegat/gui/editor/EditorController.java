@@ -38,7 +38,6 @@ package org.omegat.gui.editor;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
-import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -119,14 +118,13 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.DragTargetOverlay;
 import org.omegat.util.gui.DragTargetOverlay.IDropInfo;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
-import com.vlsolutions.swing.docking.event.DockableSelectionEvent;
-import com.vlsolutions.swing.docking.event.DockableSelectionListener;
 
 /**
  * Class for control all editor operations.
@@ -379,16 +377,10 @@ public class EditorController implements IEditor {
 
         mw.addDockable(pane);
 
-        Container c = pane;
-        while (c != null && !(c instanceof DockingDesktop)) {
-            c = c.getParent(); // find dockable desktop
+        DockingDesktop desktop = DockingUI.getDesktop(pane);
+        if (desktop != null) {
+            desktop.addDockableSelectionListener(e -> dockableSelected = pane == e.getSelectedDockable());
         }
-        DockingDesktop desktop = (DockingDesktop) c;
-        desktop.addDockableSelectionListener(new DockableSelectionListener() {
-            public void selectionChanged(DockableSelectionEvent dockableselectionevent) {
-                dockableSelected = pane == dockableselectionevent.getSelectedDockable();
-            }
-        });
     }
 
     private final AdjustmentListener scrollListener = new AdjustmentListener() {

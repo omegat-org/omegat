@@ -32,6 +32,7 @@
 package org.omegat.util.gui;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -397,5 +398,20 @@ public class DockingUI {
                 desktop.addDockable(state.getDockable());
             }
         }
+    }
+
+    /**
+     * Traverse the given container's parents until either an instance of
+     * DockingDesktop is found, or null is found.
+     * 
+     * @param c
+     *            The container to search
+     * @return Either the parent DockingDesktop, or null
+     */
+    public static DockingDesktop getDesktop(Container c) {
+        while (c != null && !(c instanceof DockingDesktop)) {
+            c = c.getParent(); // find dockable desktop
+        }
+        return (DockingDesktop) c;
     }
 }

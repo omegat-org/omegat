@@ -237,26 +237,26 @@ public class PoFilter extends AbstractFilter {
     /**
      * If true, non-translated segments will contain the source text in ms
      */
-    public static boolean allowBlank = false;
+    private boolean allowBlank = false;
     /**
      * If false, the blank source segments will be skipped (not shown in editor)
      */
-    public static boolean allowEditingBlankSegment = false;
+    private boolean allowEditingBlankSegment = false;
     /**
      * If true, the header will be skipped (not shown in editor)
      */
-    public static boolean skipHeader = false;
+    private boolean skipHeader = false;
     /**
      * If true, wrong but widely used format support, where msgid contains ID, msgstr contains original text.
      */
-    public static boolean formatMonolingual = false;
+    private boolean formatMonolingual = false;
 
     /**
      * If true, the "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;" section
      * in the header will be updated with the correct INTEGER and EXPRESSION
      * based on the chosen targetLanguage
      */
-    public static boolean autoFillInPluralStatement = false;
+    private boolean autoFillInPluralStatement = false;
 
     protected static Pattern COMMENT_FUZZY = Pattern.compile("#, fuzzy");
     protected static Pattern COMMENT_FUZZY_OTHER = Pattern.compile("#,.* fuzzy.*");
@@ -628,7 +628,7 @@ public class PoFilter extends AbstractFilter {
     }
 
     protected void alignHeader(String header, FilterContext fc) {
-        if (entryParseCallback != null && !PoFilter.skipHeader) {
+        if (entryParseCallback != null && !skipHeader) {
             header = unescape(autoFillInPluralStatement(header, fc));
             List<ProtectedPart> protectedParts = TagUtil.applyCustomProtectedParts(header,
                     PatternConsts.PRINTF_VARS, null);
@@ -762,7 +762,7 @@ public class PoFilter extends AbstractFilter {
         if (isHeader) {
             entry = autoFillInPluralStatement(entry, fc);
         }
-        if (isHeader && PoFilter.skipHeader) {
+        if (isHeader && skipHeader) {
             translation = entry;
         } else {
             translation = entryTranslateCallback.getTranslation(id, entry, path + pathSuffix );
@@ -785,7 +785,7 @@ public class PoFilter extends AbstractFilter {
      * @return Header with the correct plural forms line according to target language.
      */
     private String autoFillInPluralStatement(String header, FilterContext fc) {
-        if (PoFilter.autoFillInPluralStatement) {
+        if (autoFillInPluralStatement) {
             Language targetLang = fc.getTargetLang();
             String lang = targetLang.getLanguageCode().toLowerCase();
             PluralInfo pluralInfo = pluralInfos.get(lang);

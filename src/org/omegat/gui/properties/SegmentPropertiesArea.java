@@ -73,10 +73,10 @@ import org.omegat.util.gui.Styles;
 
 public class SegmentPropertiesArea implements IPaneMenu {
 
-    private final static DateFormat DATE_FORMAT = DateFormat.getDateInstance();
-    private final static DateFormat TIME_FORMAT = DateFormat.getTimeInstance();
-
     private final static Pattern SPLIT_COMMAS = Pattern.compile("\\s*,\\s*");
+
+    private final DateFormat dateFormat = DateFormat.getDateInstance();
+    private final DateFormat timeFormat = DateFormat.getTimeInstance();
 
     private final static String KEY_ISDUP = "isDup";
     private final static String KEY_FILE = "file";
@@ -365,13 +365,13 @@ public class SegmentPropertiesArea implements IPaneMenu {
             return;
         }
         if (entry.changeDate != 0) {
-            setProperty(KEY_CHANGED, DATE_FORMAT.format(new Date(entry.changeDate)) + " "
-                    + TIME_FORMAT.format(new Date(entry.changeDate)));
+            setProperty(KEY_CHANGED, dateFormat.format(new Date(entry.changeDate)) + " "
+                    + timeFormat.format(new Date(entry.changeDate)));
         }
         setProperty(KEY_CHANGER, entry.changer);
         if (entry.creationDate != 0) {
-            setProperty(KEY_CREATED, DATE_FORMAT.format(new Date(entry.creationDate)) + " "
-                    + TIME_FORMAT.format(new Date(entry.creationDate)));
+            setProperty(KEY_CREATED, dateFormat.format(new Date(entry.creationDate)) + " "
+                    + timeFormat.format(new Date(entry.creationDate)));
         }
         setProperty(KEY_CREATOR, entry.creator);
         if (!entry.defaultTranslation) {

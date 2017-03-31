@@ -520,16 +520,14 @@ public class ScriptingWindow {
             scriptSource = m_currentScriptItem.getFile().getAbsolutePath();
         }
 
-        String scriptString = null;
-        if (m_txtScriptEditor.getTextArea().getText().trim().isEmpty()) {
+        String scriptString = m_txtScriptEditor.getTextArea().getText();
+        if (scriptString.trim().isEmpty()) {
             try {
                 scriptString = m_currentScriptItem.getText();
                 m_txtScriptEditor.getTextArea().setText(scriptString);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
-            scriptString = m_txtScriptEditor.getTextArea().getText();
         }
 
         logResult(StringUtil.format(OStrings.getString("SCW_RUNNING_SCRIPT"), scriptSource));

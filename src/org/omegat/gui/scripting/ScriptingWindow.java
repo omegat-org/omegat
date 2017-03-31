@@ -776,8 +776,7 @@ public class ScriptingWindow {
                 int result = chooser.showSaveDialog(frame);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     m_currentScriptItem = new ScriptItem(chooser.getSelectedFile());
-                }
-                else if (result == JFileChooser.APPROVE_OPTION) {
+                } else {
                     return;
                 }
             }

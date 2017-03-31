@@ -122,14 +122,13 @@ public class AndroidFilter extends XMLFilter {
         }
 
         String e = entry.replace("\\'", "'");
-        String r = null;
+        String r = e;
         if (entryParseCallback != null) {
             entryParseCallback.addEntry(id, e, null, false, idComment, null, this, protectedParts);
-            r = e;
         } else if (entryTranslateCallback != null) {
-            r = entryTranslateCallback.getTranslation(id, e, null);
-            if (r == null) {
-                r = e;
+            String translation = entryTranslateCallback.getTranslation(id, e, null);
+            if (translation != null) {
+                r = translation;
             }
         }
         return r.replace("'", "\\'");

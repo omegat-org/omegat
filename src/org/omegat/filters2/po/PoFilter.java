@@ -313,35 +313,19 @@ public class PoFilter extends AbstractFilter {
             TranslationException {
 
         String disallowBlankStr = processOptions.get(OPTION_ALLOW_BLANK);
-        if ((disallowBlankStr == null) || (disallowBlankStr.equalsIgnoreCase("true"))) {
-            allowBlank = true;
-        } else {
-            allowBlank = false;
-        }
+        allowBlank = disallowBlankStr == null || disallowBlankStr.equalsIgnoreCase("true");
+
         String disallowEditingBlankSegmentStr = processOptions.get(OPTION_ALLOW_EDITING_BLANK_SEGMENT);
-        if ((disallowEditingBlankSegmentStr == null) || (disallowEditingBlankSegmentStr.equalsIgnoreCase("true"))) {
-            allowEditingBlankSegment = true;
-        } else {
-            allowEditingBlankSegment = false;
-        }
+        allowEditingBlankSegment = disallowEditingBlankSegmentStr == null || disallowEditingBlankSegmentStr.equalsIgnoreCase("true");
+
         String skipHeaderStr = processOptions.get(OPTION_SKIP_HEADER);
-        if ("true".equalsIgnoreCase(skipHeaderStr)) {
-            skipHeader = true;
-        } else {
-            skipHeader = false;
-        }
+        skipHeader = "true".equalsIgnoreCase(skipHeaderStr);
+
         String autoFillInPluralStatementStr = processOptions.get(OPTION_AUTO_FILL_IN_PLURAL_STATEMENT);
-        if ("true".equalsIgnoreCase(autoFillInPluralStatementStr)) {
-            autoFillInPluralStatement = true;
-        } else {
-            autoFillInPluralStatement = false;
-        }
+        autoFillInPluralStatement = "true".equalsIgnoreCase(autoFillInPluralStatementStr);
+
         String formatMonolingualStr = processOptions.get(OPTION_FORMAT_MONOLINGUAL);
-        if ("true".equalsIgnoreCase(formatMonolingualStr)) {
-            formatMonolingual = true;
-        } else {
-            formatMonolingual = false;
-        }
+        formatMonolingual = "true".equalsIgnoreCase(formatMonolingualStr);
 
         inEncodingLastParsedFile = fc.getInEncoding();
         BufferedReader reader = createReader(inFile, inEncodingLastParsedFile);

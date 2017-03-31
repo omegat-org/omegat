@@ -562,7 +562,7 @@ public class TestTeamIntegrationChild {
                                     .getUnderlyingRepresentation() : null;
                             String s = "Rebase " + src(enProject) + " base=" + tr(enBase) + " head="
                                     + tr(enHead) + " project=" + tr(enProject);
-                            if (CONCURRENT_NAME.equals(enProject.source)) {
+                            if (enProject != null && CONCURRENT_NAME.equals(enProject.source)) {
                                 if (v(enHead) < v(enBase)) {
                                     throw new RuntimeException("Rebase HEAD: wrong concurrent: " + s);
                                 }

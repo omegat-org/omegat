@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -401,8 +402,7 @@ public class FindMatches {
         int pos = 0;
         for (int i = 0; i < result.size(); i++) {
             NearString st = result.get(i);
-            if (source.equals(st.source)
-                    && (translation == st.translation || translation != null && translation.equals(st.translation))) {
+            if (source.equals(st.source) && Objects.equals(translation, st.translation)) {
                 // Consolidate identical matches from different sources into a single NearString with
                 // multiple project entries.
                 result.set(i, NearString.merge(st, key, source, translation, comesFrom, fuzzy, similarity,

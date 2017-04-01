@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 
 import org.omegat.util.OConsts;
@@ -126,7 +127,8 @@ public class XMLReader extends Reader {
         byte[] buf = new byte[OConsts.READ_AHEAD_LIMIT];
         int len = is.read(buf);
         if (len > 0) {
-            String buffer = new String(buf, 0, len);
+            String buffer = defaultEncoding == null ? new String(buf, 0, len, Charset.defaultCharset())
+                    : new String(buf, 0, len, defaultEncoding);
 
             Matcher matcher_xml = PatternConsts.XML_ENCODING.matcher(buffer);
             if (matcher_xml.find()) {
@@ -143,7 +145,7 @@ public class XMLReader extends Reader {
         try {
             return new InputStreamReader(is, defaultEncoding);
         } catch (Exception e) {
-            return new InputStreamReader(is);
+            return new InputStreamReader(is, Charset.defaultCharset());
         }
     }
 

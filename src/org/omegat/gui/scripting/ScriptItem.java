@@ -85,7 +85,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
     }
 
     private void scanFileForDescription(File file) {
-        try (Scanner scan = new Scanner(file)) {
+        try (Scanner scan = new Scanner(file, StandardCharsets.UTF_8.name())) {
             scan.findInLine(":name\\s*=\\s*(.*)\\s+:description\\s*=\\s*(.*)");
             MatchResult results = scan.match();
             m_scriptName = results.group(1).trim();

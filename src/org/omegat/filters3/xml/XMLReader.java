@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 
@@ -141,7 +142,8 @@ public class XMLReader extends Reader {
         byte[] buf = new byte[OConsts.READ_AHEAD_LIMIT];
         int len = is.read(buf);
         if (len > 0) {
-            String buffer = new String(buf, 0, len);
+            String buffer = defaultEncoding == null ? new String(buf, 0, len, Charset.defaultCharset())
+                    : new String(buf, 0, len, defaultEncoding);
 
             Matcher matcher_xml = PatternConsts.XML_ENCODING.matcher(buffer);
             if (matcher_xml.find())
@@ -162,8 +164,9 @@ public class XMLReader extends Reader {
     }
 
     private BufferedReader createReaderAndDetectEOL(InputStream is, String encoding) throws IOException {
-        BufferedReader rd = new BufferedReader(encoding != null ? new InputStreamReader(is, encoding)
-                : new InputStreamReader(is), OConsts.READ_AHEAD_LIMIT);
+        InputStreamReader isr = encoding == null ? new InputStreamReader(is, Charset.defaultCharset())
+                : new InputStreamReader(is, encoding);
+        BufferedReader rd = new BufferedReader(isr, OConsts.READ_AHEAD_LIMIT);
         rd.mark(OConsts.READ_AHEAD_LIMIT);
 
         for (int i = 0; i < OConsts.READ_AHEAD_LIMIT; i++) {

@@ -32,6 +32,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 
 import org.omegat.util.OConsts;
@@ -118,7 +119,8 @@ public class HTMLReader extends Reader {
         byte[] buf = new byte[OConsts.READ_AHEAD_LIMIT];
         int len = is.read(buf);
         if (len > 0) {
-            String buffer = new String(buf, 0, len);
+            String buffer = defaultEncoding == null ? new String(buf, 0, len, Charset.defaultCharset())
+                    : new String(buf, 0, len, defaultEncoding);
 
             Matcher matcher_html = PatternConsts.HTML_ENCODING.matcher(buffer);
             if (matcher_html.find()) {
@@ -143,24 +145,25 @@ public class HTMLReader extends Reader {
         InputStreamReader isr = null;
 
         // try the encoding specified in the file first
-        if (encoding != null)
+        if (encoding != null) {
             try {
                 isr = new InputStreamReader(is, encoding);
             } catch (Exception e) {
             }
-
+        }
         // if there's no reader yet, try the default encoding
-        if (isr == null)
+        if (isr == null) {
             try {
                 isr = new InputStreamReader(is, defaultEncoding);
                 encoding = defaultEncoding;
             } catch (Exception e) {
             }
-
+        }
         // just create one without an encoding and cross fingers
-        if (isr == null)
-            isr = new InputStreamReader(is);
-
+        if (isr == null) {
+            isr = new InputStreamReader(is, Charset.defaultCharset());
+            encoding = Charset.defaultCharset().name();
+        }
         return isr;
     }
 

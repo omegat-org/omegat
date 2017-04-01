@@ -217,7 +217,8 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
         URLConnection conn = url.openConnection();
         conn.setRequestProperty("User-Agent", OStrings.getNameAndVersion());
         conn.setDoOutput(true);
-        try (OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream())) {
+        try (OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream(),
+                StandardCharsets.UTF_8)) {
             String srcLang = sourceLang == null ? null : sourceLang.toString();
             writer.write(buildPostData(srcLang, targetLang.toString(), sourceText, translationText,
                     disabledCategories, disabledRules, enabledRules));
@@ -332,7 +333,8 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
             URL url = new URL(testUrl);
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            try (OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream())) {
+            try (OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream(),
+                    StandardCharsets.UTF_8)) {
                 // Supply a dummy disabled category to force the server to take
                 // its configuration from this query only, not any server-side
                 // config.

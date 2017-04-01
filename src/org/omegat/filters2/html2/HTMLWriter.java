@@ -33,6 +33,7 @@ import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 
 import org.omegat.util.PatternConsts;
@@ -91,11 +92,11 @@ public class HTMLWriter extends Writer {
         FileOutputStream fos = new FileOutputStream(fileName);
 
         OutputStreamWriter osw;
-        if (encoding != null)
+        if (encoding != null) {
             osw = new OutputStreamWriter(fos, encoding);
-        else
-            osw = new OutputStreamWriter(fos);
-
+        } else {
+            osw = new OutputStreamWriter(fos, Charset.defaultCharset());
+        }
         realWriter = new BufferedWriter(osw);
     }
 

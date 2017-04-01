@@ -331,10 +331,11 @@ public abstract class AbstractFilter implements IFilter {
     protected BufferedReader createReader(File inFile, String inEncoding)
             throws UnsupportedEncodingException, IOException, TranslationException {
         InputStreamReader isr;
-        if (inEncoding == null)
-            isr = new InputStreamReader(new FileInputStream(inFile));
-        else
+        if (inEncoding == null) {
+            isr = new InputStreamReader(new FileInputStream(inFile), Charset.defaultCharset());
+        } else {
             isr = new InputStreamReader(new FileInputStream(inFile), inEncoding);
+        }
         return new BufferedReader(isr);
     }
 
@@ -354,10 +355,11 @@ public abstract class AbstractFilter implements IFilter {
     protected BufferedWriter createWriter(File outFile, String outEncoding)
             throws UnsupportedEncodingException, IOException {
         OutputStreamWriter osw;
-        if (outEncoding == null)
-            osw = new OutputStreamWriter(new FileOutputStream(outFile));
-        else
+        if (outEncoding == null) {
+            osw = new OutputStreamWriter(new FileOutputStream(outFile), Charset.defaultCharset());
+        } else {
             osw = new OutputStreamWriter(new FileOutputStream(outFile), outEncoding);
+        }
         return new BufferedWriter(osw);
     }
 

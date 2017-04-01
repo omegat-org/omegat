@@ -29,6 +29,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.logging.Logger;
 
 import org.omegat.core.Core;
@@ -66,10 +67,8 @@ public class CommandMonitor extends Thread {
     }
         
     public void run() {
-        InputStreamReader isr = new InputStreamReader(stream);
-        BufferedReader br = new BufferedReader(isr);
-        
-        try {
+        try (BufferedReader br = new BufferedReader(
+                new InputStreamReader(stream, Charset.defaultCharset()))) {
             String line = null;
             while ((line = br.readLine()) != null) {
                 if (isStdErr) {

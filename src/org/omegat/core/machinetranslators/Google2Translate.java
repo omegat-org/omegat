@@ -145,8 +145,9 @@ public class Google2Translate extends BaseTranslate {
         Matcher m = RE_HTML.matcher(text);
         while (m.find()) {
             String g = m.group();
-            char c = (char) Integer.parseInt(m.group(1));
-            text = text.replace(g, Character.toString(c));
+            int codePoint = Integer.parseInt(m.group(1));
+            String cpString = String.valueOf(Character.toChars(codePoint));
+            text = text.replace(g, cpString);
         }
         return text;
     }

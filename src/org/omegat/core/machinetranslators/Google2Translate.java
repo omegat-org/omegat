@@ -136,6 +136,12 @@ public class Google2Translate extends BaseTranslate {
 
     /** Convert entities to character. Ex: "&#39;" to "'". */
     private String unescapeHTML(String text) {
+        
+        text = text.replace("&quot;", "\"")
+                   .replace("&gt;", ">")
+                   .replace("&lt;", "<")
+                   .replace("&amp;", "&");
+
         while (true) {
             Matcher m = RE_HTML.matcher(text);
             if (!m.find()) {

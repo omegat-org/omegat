@@ -66,7 +66,7 @@ public class TaaSPlugin {
     private TaaSPlugin() {
     }
 
-    static Transformer filterTransformer, filterTransformerContext;
+    static Transformer filterTransformer;
 
     /**
      * Register plugin into OmegaT.

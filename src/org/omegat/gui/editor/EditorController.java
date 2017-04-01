@@ -2093,12 +2093,10 @@ public class EditorController implements IEditor {
      */
     protected static class HasMultipleTranslations implements IProject.MultipleTranslationsIterator {
         final String sourceEntryText;
-        IProject project;
         boolean found;
 
         public HasMultipleTranslations(String sourceEntryText) {
             this.sourceEntryText = sourceEntryText;
-            project = Core.getProject();
         }
 
         public void iterate(EntryKey source, TMXEntry trans) {

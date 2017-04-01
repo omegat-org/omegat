@@ -40,7 +40,6 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
-import org.apache.lucene.util.Version;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
@@ -77,8 +76,6 @@ public abstract class BaseTokenizer implements ITokenizer {
      * set this to false to use the language-specific tokenizer for everything.
      */
     protected boolean shouldDelegateTokenizeExactly = true;
-
-    protected Version currentBehavior = null;
 
     public BaseTokenizer() {
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {

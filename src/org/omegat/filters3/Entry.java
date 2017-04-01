@@ -582,16 +582,6 @@ public class Entry {
         }
     }
 
-    static class ShortTag {
-        String tag;
-        int pos;
-
-        ShortTag(String tag, int pos) {
-            this.tag = tag;
-            this.pos = pos;
-        }
-    }
-
     /**
      * Returns long XML-encoded representation of the entry translation for
      * storing in TMX.

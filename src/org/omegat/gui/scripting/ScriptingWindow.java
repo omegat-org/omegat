@@ -934,7 +934,8 @@ public class ScriptingWindow {
                 ScriptItem si = set.getScriptItem(scriptKey(i));
                 
                 if (si != null) {
-                    Preferences.setPreference(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey(i), si == null ? "" : si.getFile().getName());
+                    Preferences.setPreference(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey(i),
+                            si.getFile().getName());
                     new QuickScriptUpdater(i).updateQuickScript(si);
                     updateQuickScripts();
                 }

@@ -101,10 +101,10 @@ public class HTMLWriter extends Writer {
     }
 
     /** The minimal size of already written HTML that will be appended headers */
-    private final int minHeaderedBufferSize = 4096;
+    private static final int minHeaderedBufferSize = 4096;
 
     /** The maximal size of a buffer before flush */
-    private final int maxBufferSize = 65536;
+    private static final int maxBufferSize = 65536;
 
     /**
      * Signals that the writer is being closed, hence it needs to write any

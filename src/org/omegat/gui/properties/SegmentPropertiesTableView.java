@@ -247,7 +247,7 @@ public class SegmentPropertiesTableView implements ISegmentPropertiesView {
         }
     }
 
-    private class FlashingTable extends JTable {
+    private static class FlashingTable extends JTable {
         private FlashColorInterpolator flasher;
         private List<Integer> rows;
 

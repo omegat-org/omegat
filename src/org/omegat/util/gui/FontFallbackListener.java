@@ -128,7 +128,7 @@ public class FontFallbackListener implements DocumentListener {
         }.execute();
     }
 
-    private class StyleRun {
+    private static class StyleRun {
         public final int start;
         public final int length;
         public final AttributeSet attrs;

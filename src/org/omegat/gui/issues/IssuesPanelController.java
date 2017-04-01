@@ -785,7 +785,7 @@ public class IssuesPanelController implements IIssues {
     static final String ALL_TYPES = new String(OStrings.getString("ISSUES_TYPE_ALL"));
 
     @SuppressWarnings("serial")
-    class TypeListModel extends AbstractListModel<String> {
+    static class TypeListModel extends AbstractListModel<String> {
 
         private final List<Map.Entry<String, Long>> types;
 

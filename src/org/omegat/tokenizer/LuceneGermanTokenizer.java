@@ -69,7 +69,7 @@ public class LuceneGermanTokenizer extends BaseTokenizer {
      *      "https://github.com/apache/lucene-solr/blob/e8e4245d9b36123446546ff15967ac95429ea2b0/lucene/analysis/common/src/java/org/apache/lucene/analysis/de/GermanAnalyzer.java#L172">
      *      Behavior before version branching was removed</a>
      */
-    private class Lucene30GermanAnalyzer extends Analyzer {
+    private static class Lucene30GermanAnalyzer extends Analyzer {
         private final CharArraySet stopWords;
 
         public Lucene30GermanAnalyzer(CharArraySet stopWords) {

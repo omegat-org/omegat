@@ -104,7 +104,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
 
         // Create empty resource for confirmation
         return new ResourceBundle() {
-            final String MISSING_BUNDLE_MESSAGE = "ResourceBundle (.properties file for localization) is missing.";
+            final static String MISSING_BUNDLE_MESSAGE = "ResourceBundle (.properties file for localization) is missing.";
 
             @Override
             protected Object handleGetObject(String key) {
@@ -205,7 +205,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
         return getScriptName().compareTo(o.getScriptName());
     }
 
-    private final String BOM = "\uFEFF";
+    private static final String BOM = "\uFEFF";
     private boolean startsWithBOM = false;
     private String lineBreak = System.lineSeparator();
 

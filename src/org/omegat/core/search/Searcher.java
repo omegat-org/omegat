@@ -717,10 +717,10 @@ public class Searcher {
     
     // PM entries 0+
     // Only PM and TM are counted (separately) for '+X more' statistics
-    private final int ENTRY_ORIGIN_PROJECT_MEMORY = 0;
-    private final int ENTRY_ORIGIN_TRANSLATION_MEMORY = -1;
-    private final int ENTRY_ORIGIN_ORPHAN = -2;
-    private final int ENTRY_ORIGIN_ALTERNATIVE = -3;
-    private final int ENTRY_ORIGIN_GLOSSARY = -4;
-    private final int ENTRY_ORIGIN_TEXT = -5;
+    private static final int ENTRY_ORIGIN_PROJECT_MEMORY = 0;
+    private static final int ENTRY_ORIGIN_TRANSLATION_MEMORY = -1;
+    private static final int ENTRY_ORIGIN_ORPHAN = -2;
+    private static final int ENTRY_ORIGIN_ALTERNATIVE = -3;
+    private static final int ENTRY_ORIGIN_GLOSSARY = -4;
+    private static final int ENTRY_ORIGIN_TEXT = -5;
 }

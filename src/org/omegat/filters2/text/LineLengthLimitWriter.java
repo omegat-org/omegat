@@ -40,8 +40,6 @@ import org.omegat.util.Token;
  * @author Didier Briel
  */
 public class LineLengthLimitWriter extends Writer {
-    public static String PLATFORM_LINE_SEPARATOR = System.lineSeparator();
-
     final Writer out;
     final int lineLength;
     final int maxLineLength;
@@ -262,7 +260,7 @@ public class LineLengthLimitWriter extends Writer {
     void writeBreakEol() throws IOException {
         if (eol1 == 0 && eol2 == 0) {
             // there is no known EOL, use platform-dependent
-            out.write(PLATFORM_LINE_SEPARATOR);
+            out.write(System.lineSeparator());
         } else {
             if (eol1 != 0) {
                 out.write(eol1);

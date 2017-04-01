@@ -49,7 +49,7 @@ public class OStrings {
     private static String __BETA_KEY = "beta";
 
     /** For custom deployments of OmegaT that need to be distinguishable from "stock" OmegaT */
-    public static String BRANDING = "";
+    public static final String BRANDING = "";
 
     /** Just a version, e.g. "1.6" */
     public static final String VERSION = ResourceBundle.getBundle("org/omegat/Version")

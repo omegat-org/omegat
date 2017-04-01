@@ -73,7 +73,7 @@ public abstract class AbstractFilter implements IFilter {
      * This value represents to the user that the encoding is determined by the filter itself. "In code" the
      * <code>null</code> is used to represent automatic encoding selection.
      */
-    public static String ENCODING_AUTO_HUMAN = OStrings.getString("ENCODING_AUTO");
+    public static final String ENCODING_AUTO_HUMAN = OStrings.getString("ENCODING_AUTO");
 
     /** The original filename (with extension). */
     public static final String TFP_FILENAME = "${filename}";
@@ -181,7 +181,7 @@ public abstract class AbstractFilter implements IFilter {
      * It is equal to "${filename}", which means that the name of the translated file should be the same as
      * the name of the input file.
      */
-    public static String TARGET_DEFAULT = TFP_FILENAME;
+    public static final String TARGET_DEFAULT = TFP_FILENAME;
 
     /**
      * Human-readable name of the File Format this filter supports.

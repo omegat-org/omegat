@@ -47,9 +47,7 @@ import org.omegat.util.StringUtil;
  */
 public class OmegaTLogFormatter extends Formatter {
 
-    protected static String lineMark;
-
-    protected static String lineSeparator = System.lineSeparator();
+    protected static final String lineMark;
 
     private String logMask;
     private boolean isMaskContainsMark;
@@ -194,7 +192,7 @@ public class OmegaTLogFormatter extends Formatter {
                 res = res.replace("$key", "");
             }
         }
-        out.append(res).append(lineSeparator);
+        out.append(res).append(System.lineSeparator());
     }
 
     /**

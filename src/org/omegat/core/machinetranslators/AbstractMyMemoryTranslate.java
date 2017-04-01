@@ -61,10 +61,10 @@ import org.w3c.dom.NodeList;
 public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
 	
     private static final String MYMEMORY_API_EMAIL = "mymemory.api.email";
-    protected static String GT_URL = "http://mymemory.translated.net/api/get?q=";
-    protected static String MYMEMORYLABEL_TRANSLATION = "translation";
-    protected static String MYMEMORYLABEL_MATCHQUALITYPERCENTAGE = "match";
-    protected static String XPATH_QUERY = "child::tuv[starts-with(@lang, '#langCode#')]/seg/text()"; // MyMemory always returns a 4-letter locale code, even when the query contains a language code only; to make sure we get the right matches, only the language code is taken into account
+    protected static final String GT_URL = "http://mymemory.translated.net/api/get?q=";
+    protected static final String MYMEMORYLABEL_TRANSLATION = "translation";
+    protected static final String MYMEMORYLABEL_MATCHQUALITYPERCENTAGE = "match";
+    protected static final String XPATH_QUERY = "child::tuv[starts-with(@lang, '#langCode#')]/seg/text()"; // MyMemory always returns a 4-letter locale code, even when the query contains a language code only; to make sure we get the right matches, only the language code is taken into account
 
     protected final DocumentBuilderFactory factory;
     protected final XPathFactory xPathFactory;

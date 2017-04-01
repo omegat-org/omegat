@@ -49,7 +49,9 @@ import org.xml.sax.InputSource;
  * @author Martin Wunderlich
  */
 public class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
-    protected static String GT_URL2 = "&langpair=#sourceLang#|#targetLang#&of=#format#&mt=1"; // Note: Add parameter &mt=0 to suppress MT results from being included in the TMX response; omit this parameter to include MT results
+    // Note: Add parameter &mt=0 to suppress MT results from being included in the TMX response; omit this
+    // parameter to include MT results
+    protected static final String GT_URL2 = "&langpair=#sourceLang#|#targetLang#&of=#format#&mt=1";
     
     @Override
     protected String getPreferenceName() {

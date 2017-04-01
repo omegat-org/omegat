@@ -42,9 +42,9 @@ import org.omegat.util.WikiGet;
  * @author Didier Briel
  */
 public class ApertiumTranslate extends BaseTranslate {
-    protected static String GT_URL = "https://www.apertium.org/apy/translate?q=";
+    protected static final String GT_URL = "https://www.apertium.org/apy/translate?q=";
     // Specific OmegaT key
-    protected static String GT_URL2 = "&markUnknown=no&langpair=#sourceLang#|#targetLang#&key=bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
+    protected static final String GT_URL2 = "&markUnknown=no&langpair=#sourceLang#|#targetLang#&key=bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
 
     @Override
     protected String getPreferenceName() {

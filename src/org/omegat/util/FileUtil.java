@@ -67,7 +67,7 @@ import org.apache.commons.io.FileUtils;
  * @author Aaron Madlon-Kay
  */
 public class FileUtil {
-    public static long RENAME_RETRY_TIMEOUT = 3000;
+    public static final long RENAME_RETRY_TIMEOUT = 3000;
 
     /**
      * Removes old backups so that only 10 last are there.

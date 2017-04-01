@@ -82,7 +82,7 @@ import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
  * @author Aaron Madlon-Kay
  */
 public class MainWindowUI {
-    public static String UI_LAYOUT_FILE = "uiLayout" + OStrings.getBrandingToken() + ".xml";
+    public static final String UI_LAYOUT_FILE = "uiLayout" + OStrings.getBrandingToken() + ".xml";
     
     public enum STATUS_BAR_MODE {
         DEFAULT,

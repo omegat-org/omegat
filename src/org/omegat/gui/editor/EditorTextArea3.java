@@ -739,7 +739,7 @@ public class EditorTextArea3 extends JEditorPane {
     /**
      * Factory for create own view.
      */
-    public static ViewFactory factory3 = new ViewFactory() {
+    public static final ViewFactory factory3 = new ViewFactory() {
         public View create(Element elem) {
             String kind = elem.getName();
             if (kind != null) {

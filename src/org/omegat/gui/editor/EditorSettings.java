@@ -67,9 +67,9 @@ public class EditorSettings implements IEditorSettings {
     private boolean markLanguageChecker;
     private boolean doFontFallback;
 
-    public static String DISPLAY_MODIFICATION_INFO_NONE = "none";
-    public static String DISPLAY_MODIFICATION_INFO_SELECTED = "selected";
-    public static String DISPLAY_MODIFICATION_INFO_ALL = "all";
+    public static final String DISPLAY_MODIFICATION_INFO_NONE = "none";
+    public static final String DISPLAY_MODIFICATION_INFO_SELECTED = "selected";
+    public static final String DISPLAY_MODIFICATION_INFO_ALL = "all";
 
     protected EditorSettings(final EditorController parent) {
         this.parent = parent;

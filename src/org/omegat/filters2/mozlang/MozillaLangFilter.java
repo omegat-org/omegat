@@ -62,8 +62,8 @@ import org.omegat.util.TagUtil;
  */
 public class MozillaLangFilter extends AbstractFilter {
 
-    protected static Pattern LOCALIZATION_NOTE = Pattern.compile("# (.*)");
-    protected static Pattern PATTERN_SOURCE= Pattern.compile("^;(.*)");
+    protected static final Pattern LOCALIZATION_NOTE = Pattern.compile("# (.*)");
+    protected static final Pattern PATTERN_SOURCE = Pattern.compile("^;(.*)");
     
     enum READ_STATE {
         WAIT_SOURCE, WAIT_TARGET

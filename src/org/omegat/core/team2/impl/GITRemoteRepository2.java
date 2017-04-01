@@ -77,9 +77,9 @@ import gen.core.project.RepositoryDefinition;
 public class GITRemoteRepository2 implements IRemoteRepository2 {
     private static final Logger LOGGER = Logger.getLogger(GITRemoteRepository2.class.getName());
 
-    protected static String LOCAL_BRANCH = "master";
-    protected static String REMOTE_BRANCH = "origin/master";
-    protected static String REMOTE = "origin";
+    protected static final String LOCAL_BRANCH = "master";
+    protected static final String REMOTE_BRANCH = "origin/master";
+    protected static final String REMOTE = "origin";
 
     String repositoryURL;
     File localDirectory;

@@ -68,7 +68,8 @@ public class MozillaDTDFilter extends AbstractFilter {
 
     public static final String OPTION_REMOVE_STRINGS_UNTRANSLATED = "unremoveStringsUntranslated";
 
-    protected static Pattern RE_ENTITY =  Pattern.compile("<\\!ENTITY\\s+(\\S+)\\s+([\"'])(.+)\\2\\s*>", Pattern.DOTALL);
+    protected static final Pattern RE_ENTITY = Pattern.compile("<\\!ENTITY\\s+(\\S+)\\s+([\"'])(.+)\\2\\s*>",
+            Pattern.DOTALL);
     
     
     protected Map<String, String> align;

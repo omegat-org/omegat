@@ -38,7 +38,7 @@ public class Instance {
      * filter itself. "In code" the <code>null</code> is used to represent
      * automatic encoding selection.
      */
-    public static String ENCODING_AUTO_HUMAN = OStrings.getString("ENCODING_AUTO");
+    public static final String ENCODING_AUTO_HUMAN = OStrings.getString("ENCODING_AUTO");
 
     /** The original filename (with extension). */
     public static final String TFP_FILENAME = "${filename}";
@@ -49,7 +49,7 @@ public class Instance {
      * It is equal to "${filename}", which means that the name of the translated
      * file should be the same as the name of the input file.
      */
-    public static String TARGET_DEFAULT = TFP_FILENAME;
+    public static final String TARGET_DEFAULT = TFP_FILENAME;
 
     private String sourceFilenameMask;
 

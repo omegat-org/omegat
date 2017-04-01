@@ -33,6 +33,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JCheckBox;
 
@@ -58,6 +60,7 @@ public class Google2Translate extends BaseTranslate {
     protected static final String PROPERTY_PREMIUM_KEY = "google.api.premium";
     protected static final String PROPERTY_API_KEY = "google.api.key";
     protected static final String GT_URL = "https://translation.googleapis.com/language/translate/v2";
+    protected static final Pattern RE_HTML  = Pattern.compile("&#([0-9]+);");
 
     @Override
     protected String getPreferenceName() {
@@ -102,7 +105,10 @@ public class Google2Translate extends BaseTranslate {
         params.put("source", sLang.getLanguageCode());
         params.put("target", targetLang);
         params.put("q", trText);
-        params.put("format", "text");
+        // The 'text' format mangles the tags, whereas the 'html' encodes some characters
+        // as entities. Since it's more reliable to convert the entities back, we are
+        // using 'html' and convert the text with the unescapeHTML() method.
+        params.put("format", "html");
 
         Map<String, String> headers = new TreeMap<String, String>();
         headers.put("X-HTTP-Method-Override", "GET");
@@ -119,11 +125,27 @@ public class Google2Translate extends BaseTranslate {
         if (tr == null) {
         	return "";
         }
+        
+        tr = unescapeHTML(tr);
 
         tr = cleanSpacesAroundTags(tr, text);
 
         putToCache(sLang, tLang, trText, tr);
         return tr;
+    }
+
+    /** Convert entities to character. Ex: "&#39;" to "'". */
+    private String unescapeHTML(String text) {
+        while (true) {
+            Matcher m = RE_HTML.matcher(text);
+            if (!m.find()) {
+                break;
+            }
+            String g = m.group();
+            char c = (char) Integer.parseInt(m.group(1));
+            text = text.replace(g, Character.toString(c));
+        }
+        return text;
     }
 
     @SuppressWarnings("unchecked")

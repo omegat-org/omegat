@@ -301,11 +301,7 @@ public class Main {
         }
 
         if (!Core.getPluginsLoadingErrors().isEmpty()) {
-            String err = "";
-            for (int i = 0; i < Core.getPluginsLoadingErrors().size(); i++) {
-                err += "\n" + Core.getPluginsLoadingErrors().get(i);
-            }
-            err = err.substring(1);
+            String err = String.join("\n", Core.getPluginsLoadingErrors());
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), err,
                     OStrings.getString("STARTUP_ERRORBOX_TITLE"), JOptionPane.ERROR_MESSAGE);
         }

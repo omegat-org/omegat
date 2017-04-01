@@ -300,13 +300,13 @@ public class TagUtil {
      * @return a string containing the tags
      */
     public static String buildTagListForRemove(String str) {
-        String res = "";
+        StringBuilder res = new StringBuilder();
         Pattern placeholderPattern = PatternConsts.OMEGAT_TAG;
         Matcher placeholderMatcher = placeholderPattern.matcher(str);
         while (placeholderMatcher.find()) {
-            res += placeholderMatcher.group(0);
+            res.append(placeholderMatcher.group(0));
         }
-        return res;
+        return res.toString();
     }
 
     /**

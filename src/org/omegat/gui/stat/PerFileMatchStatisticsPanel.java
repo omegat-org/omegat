@@ -79,7 +79,7 @@ public class PerFileMatchStatisticsPanel extends BaseMatchStatisticsPanel {
         });
     }
     
-    private final MouseWheelListener mouseWheelListener = new MouseAdapter() {
+    private final transient MouseWheelListener mouseWheelListener = new MouseAdapter() {
         @Override
         public void mouseWheelMoved(MouseWheelEvent e) {
             StaticUIUtils.forwardMouseWheelEvent(scrollPane, e);

@@ -246,7 +246,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         setText(txt.toString());
     }
 
-    protected final MouseAdapter mouseCallback = new MouseAdapter() {
+    protected final transient MouseAdapter mouseCallback = new MouseAdapter() {
         @Override
         public void mousePressed(MouseEvent e) {
             if (e.isPopupTrigger()) {

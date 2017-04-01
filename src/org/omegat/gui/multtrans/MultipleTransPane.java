@@ -195,7 +195,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
         return null;
     }
 
-    protected MouseListener mouseListener = new MouseAdapter() {
+    protected final transient MouseListener mouseListener = new MouseAdapter() {
         @Override
         public void mousePressed(MouseEvent e) {
             if (e.isPopupTrigger()) {

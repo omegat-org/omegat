@@ -58,7 +58,7 @@ public class StatisticsWindow extends javax.swing.JDialog {
         STANDARD, MATCHES, MATCHES_PER_FILE
     };
     
-    private LongProcessThread thread;
+    private transient LongProcessThread thread;
 
     /**
      * Creates new form StatisticsWindow

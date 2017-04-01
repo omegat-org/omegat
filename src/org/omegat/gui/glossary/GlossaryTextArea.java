@@ -252,7 +252,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
     /**
      * MouseListener for the GlossaryTextArea.
      */
-    protected MouseListener mouseListener = new MouseAdapter() {
+    protected final transient MouseListener mouseListener = new MouseAdapter() {
         @Override
         public void mousePressed(MouseEvent e) {
             if (e.isPopupTrigger()) {

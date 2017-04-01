@@ -57,7 +57,7 @@ public class RoundedCornerBorder extends AbstractBorder {
     private final Color color;
     private final int side;
     private final int stroke;
-    private final Stroke strokeObj;
+    private final transient Stroke strokeObj;
     
     public RoundedCornerBorder() {
         this(-1, Color.GRAY, SIDE_ALL);

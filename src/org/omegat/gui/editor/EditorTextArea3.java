@@ -213,7 +213,7 @@ public class EditorTextArea3 extends JEditorPane {
                 && position <= getOmDocument().getTranslationEnd());
     }
 
-    protected MouseListener mouseListener = new MouseAdapter() {
+    protected final transient MouseListener mouseListener = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
             autoCompleter.setVisible(false);

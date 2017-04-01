@@ -824,8 +824,8 @@ public class PreferencesWindowController implements FurtherActionListener {
         private static final Color STROKE_COLOR = new Color(238, 210, 00, 128);
         private static final int STROKE = 2;
         private static final BasicStroke STROKE_OBJ = new BasicStroke(STROKE);
-        private final ComponentListener compListener;
-        private final MouseAdapter mouseAdapter;
+        private final transient ComponentListener compListener;
+        private final transient MouseAdapter mouseAdapter;
         private final JRootPane rootPane;
         private final Component overlayComponent;
         private final Rectangle clipRect = new Rectangle();

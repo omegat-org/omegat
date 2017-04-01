@@ -492,7 +492,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         diffInfos.clear();
     }
 
-    protected MouseListener mouseListener = new MouseAdapter() {
+    protected final transient MouseListener mouseListener = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
             if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() > 1) {

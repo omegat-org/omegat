@@ -4,6 +4,7 @@ plugins {
     id 'application'
     id 'maven-publish'
     id 'eclipse'
+    id 'findbugs'
     id 'de.gliderpilot.jnlp' version '1.2.0'
     id 'com.jfrog.bintray' version '1.7.3'
     // Uncomment and run `dependencyUpdates` task to check for updates to dependencies
@@ -682,6 +683,17 @@ allprojects {
     }
     tasks.withType(JavaCompile) {
        options.compilerArgs.addAll '-Xlint', '-Werror'
+    }
+}
+
+findbugs {
+    reportLevel = 'high'
+}
+
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled false
+        html.enabled true
     }
 }
 

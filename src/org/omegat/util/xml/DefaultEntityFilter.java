@@ -327,7 +327,7 @@ public class DefaultEntityFilter {
             return cp;
         }
         try {
-            return Integer.valueOf(escapeSequence);
+            return Integer.parseInt(escapeSequence);
         } catch (NumberFormatException e) {
             // Unconvertable Entity
             return 0;

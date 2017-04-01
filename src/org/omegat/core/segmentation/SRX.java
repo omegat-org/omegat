@@ -56,7 +56,7 @@ import gen.core.segmentation.Srx;
  * 
  * @author Maxym Mykhalchuk
  */
-public class SRX implements Serializable, Cloneable {
+public class SRX implements Serializable {
 
     private static final long serialVersionUID = 2182125877925944613L;
 
@@ -100,11 +100,11 @@ public class SRX implements Serializable, Cloneable {
     public SRX() {
     }
 
-    public SRX clone() {
+    public SRX copy() {
         SRX result = new SRX();
         result.mappingRules = new ArrayList<MapRule>(mappingRules.size());
         for (MapRule rule : mappingRules) {
-            result.mappingRules.add(rule.clone());
+            result.mappingRules.add(rule.copy());
         }
         return result;
     }

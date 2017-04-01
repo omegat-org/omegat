@@ -39,7 +39,7 @@ import org.omegat.util.StringUtil;
  * 
  * @author Maxym Mykhalchuk
  */
-public class MapRule implements Serializable, Cloneable {
+public class MapRule implements Serializable {
 
     private static final long serialVersionUID = -5868132953113679291L;
 
@@ -100,13 +100,13 @@ public class MapRule implements Serializable, Cloneable {
         this.pattern = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
     }
 
-    public MapRule clone() {
+    public MapRule copy() {
         MapRule result = new MapRule();
         result.languageCode = languageCode;
         result.pattern = pattern;
         result.rules = new ArrayList<Rule>(rules.size());
         for (Rule rule : rules) {
-            result.rules.add(rule.clone());
+            result.rules.add(rule.copy());
         }
         return result;
     }

@@ -34,7 +34,7 @@ import java.util.regex.PatternSyntaxException;
  * 
  * @author Maxym Mykhalchuk
  */
-public class Rule implements Serializable, Cloneable {
+public class Rule implements Serializable {
 
     private static final long serialVersionUID = 7645267236376489908L;
 
@@ -49,7 +49,7 @@ public class Rule implements Serializable, Cloneable {
         setAfterbreak(afterbreak);
     }
 
-    public Rule clone() {
+    public Rule copy() {
         Rule result = new Rule();
         result.breakRule = breakRule;
         result.beforebreak = beforebreak;

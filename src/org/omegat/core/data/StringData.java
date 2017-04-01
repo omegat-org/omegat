@@ -41,7 +41,7 @@ public class StringData {
         m_digest = d;
     }
 
-    public Object clone() {
+    public StringData copy() {
         return new StringData(m_cnt, m_orig, m_attr, m_digestLow, m_digestHigh, m_digest);
     }
 

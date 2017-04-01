@@ -36,7 +36,7 @@ public class SRXTest extends TestCase {
 
     public static void testSRXComparison() {
         SRX orig = SRX.getDefault();
-        SRX clone = orig.clone();
+        SRX clone = orig.copy();
         assertNotSame(orig, clone);
         assertEquals(orig, clone);
         assertEquals(orig.hashCode(), clone.hashCode());
@@ -46,7 +46,7 @@ public class SRXTest extends TestCase {
         assertNotEquals(orig, clone);
 
         // Deep change
-        clone = orig.clone();
+        clone = orig.copy();
         Rule rule = clone.getMappingRules().get(0).getRules().get(0);
         rule.setAfterbreak(rule.getAfterbreak() + "foo");
         assertNotEquals(orig, clone);

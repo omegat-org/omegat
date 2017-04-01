@@ -276,7 +276,7 @@ public class SegmentationCustomizerController extends BasePreferencesController 
     }
 
     protected void setEditableSRX(SRX srx) {
-        editableSRX = srx.clone();
+        editableSRX = srx.copy();
         MappingRulesModel model = new MappingRulesModel(editableSRX);
         panel.mapTable.setModel(model);
         model.addExceptionListener(ex -> panel.mapErrorsLabel.setText(ex.getLocalizedMessage()));

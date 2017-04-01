@@ -142,11 +142,8 @@ public class Google2Translate extends BaseTranslate {
                    .replace("&lt;", "<")
                    .replace("&amp;", "&");
 
-        while (true) {
-            Matcher m = RE_HTML.matcher(text);
-            if (!m.find()) {
-                break;
-            }
+        Matcher m = RE_HTML.matcher(text);
+        while (m.find()) {
             String g = m.group();
             char c = (char) Integer.parseInt(m.group(1));
             text = text.replace(g, Character.toString(c));

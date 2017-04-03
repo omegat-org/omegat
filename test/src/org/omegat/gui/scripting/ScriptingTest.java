@@ -29,8 +29,11 @@ import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.script.Compilable;
 import javax.script.ScriptEngine;
@@ -84,6 +87,28 @@ public class ScriptingTest extends TestCore {
                     assertNotNull(cEngine.compile(br));
                 }
             }
+        }
+    }
+    
+    public void testScriptProperties() throws Exception {
+        File scriptDir = new File(StaticUtils.installDir(), ScriptingWindow.DEFAULT_SCRIPTS_DIR);
+        assertTrue(scriptDir.isDirectory());
+        File propsDir = new File(scriptDir, "properties");
+        assertTrue(propsDir.isDirectory());
+
+        List<String> scripts = Collections.emptyList();
+        try (Stream<Path> stream = Files.list(scriptDir.toPath())) {
+            scripts = stream.map(Path::toFile).filter(File::isFile).map(File::getName)
+                    .map(FilenameUtils::removeExtension).filter(n -> !n.isEmpty()).collect(Collectors.toList());
+        }
+        assertFalse(scripts.isEmpty());
+
+        for (File f : propsDir.listFiles()) {
+            if (!f.isFile() || f.getName().equals(".DS_Store")) {
+                continue;
+            }
+            assertTrue("Script properties file appears to be orphaned: " + f,
+                    scripts.stream().anyMatch(s -> f.getName().startsWith(s)));
         }
     }
 

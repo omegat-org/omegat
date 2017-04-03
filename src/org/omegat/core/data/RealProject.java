@@ -412,9 +412,6 @@ public class RealProject implements IProject {
             transMemories.clear();
             projectTMX = null;
 
-            // Well, that cleared up some, GC to the rescue!
-            System.gc();
-
             // There, that should do it, now inform the user
             long memory = Runtime.getRuntime().maxMemory() / 1024 / 1024;
             Log.logErrorRB("OUT_OF_MEMORY", memory);

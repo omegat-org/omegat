@@ -695,6 +695,7 @@ tasks.withType(FindBugs) {
     reports {
         xml {
             enabled envIsCi
+            withMessages true
         }
         html.enabled !envIsCi
     }

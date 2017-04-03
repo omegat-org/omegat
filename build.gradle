@@ -17,6 +17,7 @@ mainClassName = 'org.omegat.Main'
 ext {
     javaVersion = '1.8'
     omtVersion = loadProperties file('src/org/omegat/Version.properties')
+    envIsCi = project.hasProperty('envIsCi')
 }
 
 sourceCompatibility = javaVersion
@@ -683,7 +684,7 @@ allprojects {
     }
     tasks.withType(JavaCompile) {
        options.compilerArgs.addAll '-Xlint', '-Werror'
-    }
+    } 
 }
 
 findbugs {
@@ -692,8 +693,10 @@ findbugs {
 
 tasks.withType(FindBugs) {
     reports {
-        xml.enabled false
-        html.enabled true
+        xml {
+            enabled envIsCi
+        }
+        html.enabled !envIsCi
     }
 }
 

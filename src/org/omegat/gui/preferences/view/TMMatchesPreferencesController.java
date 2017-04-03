@@ -64,8 +64,7 @@ public class TMMatchesPreferencesController extends BasePreferencesController {
 
     private void initGui() {
         panel = new TMMatchesPreferencesPanel();
-        panel.sortMatchesList.setModel(new DefaultComboBoxModel<>(
-                new SORT_KEY[] { SORT_KEY.SCORE, SORT_KEY.SCORE_NO_STEM, SORT_KEY.ADJUSTED_SCORE }));
+        panel.sortMatchesList.setModel(new DefaultComboBoxModel<>(SORT_KEY.values()));
         panel.sortMatchesList.setRenderer(new DelegatingComboBoxRenderer<SORT_KEY, String>() {
             @Override
             protected String getDisplayText(SORT_KEY value) {

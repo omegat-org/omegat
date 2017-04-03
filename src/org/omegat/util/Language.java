@@ -29,6 +29,9 @@
 
 package org.omegat.util;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 
@@ -202,7 +205,7 @@ public class Language implements Comparable<Object> {
      * variants (e.g., EN-US, EN-GB), they have been kept only when there are
      * more than one variant (e.g., JA-JP has been left commented).
      */
-    public static final Language[] LANGUAGES = new Language[] { new Language("AA"), // AFAR
+    private static final Language[] LANGUAGES = new Language[] { new Language("AA"), // AFAR
             // new Language("AA-ET"), // AFAR (ETHIOPIA)
             new Language("AA-DJ"), // AFAR (DJIBOUTI)
             new Language("AA-ER"), // AFAR (ERITREA)
@@ -619,6 +622,15 @@ public class Language implements Comparable<Object> {
             new Language("ZU"), // ZULU
 
     };
+
+    /**
+     * Get a list of all languages known to the program.
+     * 
+     * @return Unmodifiable list of languages
+     */
+    public static List<Language> getLanguages() {
+        return Collections.unmodifiableList(Arrays.asList(LANGUAGES));
+    }
 
     /**
      * Indicates whether some other language is "equal to" this one.

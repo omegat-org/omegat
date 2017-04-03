@@ -40,6 +40,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import org.omegat.util.EncodingDetector;
@@ -126,7 +129,7 @@ public abstract class AbstractFilter implements IFilter {
     protected String inEncodingLastParsedFile;
 
     /** All target filename patterns. */
-    public static final String[] TARGET_FILENAME_PATTERNS = new String[] { 
+    private static final String[] TARGET_FILENAME_PATTERNS = new String[] { 
                 TFP_FILENAME,
                 TFP_NAMEONLY,
                 TFP_EXTENSION,
@@ -162,6 +165,10 @@ public abstract class AbstractFilter implements IFilter {
                 TFP_FILE_TARGET_ENCODING,
                 TFP_FILE_FILTER_NAME
         };
+
+    public static List<String> getTargetFilenamePatterns() {
+        return Collections.unmodifiableList(Arrays.asList(TARGET_FILENAME_PATTERNS));
+    }
 
     /** Callback for parse. */
     protected IParseCallback entryParseCallback;

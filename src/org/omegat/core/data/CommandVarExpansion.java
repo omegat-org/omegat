@@ -26,10 +26,13 @@
 package org.omegat.core.data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map.Entry;
+
 import org.omegat.core.Core;
 import org.omegat.util.StringUtil;
-
 import org.omegat.util.VarExpansion;
 
 /**
@@ -56,8 +59,12 @@ public class CommandVarExpansion extends VarExpansion<ProjectProperties> {
     public static final String SOURCE_LANGUAGE = "${sourceLang}";
     public static final String TARGET_LANGUAGE = "${targetLang}";
     
-    public static final String[] COMMAND_VARIABLES;
+    private static final String[] COMMAND_VARIABLES;
     
+    public static List<String> getCommandVariables() {
+        return Collections.unmodifiableList(Arrays.asList(COMMAND_VARIABLES));
+    }
+
     public CommandVarExpansion(String template) {
         super(template);
     }

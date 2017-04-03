@@ -56,7 +56,7 @@ public class BundleTest extends TestCase {
         // Test English bundle separately as its name corresponds to the
         // empty locale, and will not be resolved otherwise.
         assertEncoding("Bundle.properties");
-        for (Language lang : Language.LANGUAGES) {
+        for (Language lang : Language.getLanguages()) {
             String bundle = "Bundle_" + lang.getLocaleCode() + ".properties";
             assertEncoding(bundle);
         }
@@ -83,7 +83,7 @@ public class BundleTest extends TestCase {
         // is a language we provide a bundle for.
         Locale.setDefault(Locale.ENGLISH);
         
-        for (Language lang : Language.LANGUAGES) {
+        for (Language lang : Language.getLanguages()) {
             ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/Bundle", lang.getLocale());
             assertTrue(bundle.getKeys().hasMoreElements());
         }

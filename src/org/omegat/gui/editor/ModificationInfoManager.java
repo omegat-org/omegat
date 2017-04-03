@@ -27,7 +27,10 @@
 package org.omegat.gui.editor;
 
 import java.text.DateFormat;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.omegat.core.data.TMXEntry;
@@ -69,7 +72,7 @@ public class ModificationInfoManager {
     public static final String VAR_CHANGED_TIME_SHORT_COUNTRY = "${changedTimeShortCountry}";
 
 
-    public static final String[] MOD_INFO_VARIABLES = {
+    private static final String[] MOD_INFO_VARIABLES = {
         VAR_CREATION_ID, VAR_CREATION_DATE, VAR_CREATION_DATE_COUNTRY,
         VAR_CREATION_DATE_SHORT, VAR_CREATION_DATE_SHORT_COUNTRY,
         VAR_CREATION_TIME, VAR_CREATION_TIME_COUNTRY,
@@ -80,9 +83,17 @@ public class ModificationInfoManager {
         VAR_CHANGED_TIME_SHORT, VAR_CHANGED_TIME_SHORT_COUNTRY
     };
 
-    public static final String[] MOD_INFO_VARIABLES_NO_DATE = {
+    public static List<String> getModInfoVariables() {
+        return Collections.unmodifiableList(Arrays.asList(MOD_INFO_VARIABLES));
+    }
+
+    private static final String[] MOD_INFO_VARIABLES_NO_DATE = {
         VAR_CREATION_ID, VAR_CHANGED_ID
     };
+
+    public static List<String> getModInfoVariablesNoDate() {
+        return Collections.unmodifiableList(Arrays.asList(MOD_INFO_VARIABLES_NO_DATE));
+    }
 
     public static final String DEFAULT_TEMPLATE =
             "${creationId} - ${changedId} ${changedDate} ${changedTime}";

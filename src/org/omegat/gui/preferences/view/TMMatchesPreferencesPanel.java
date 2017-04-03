@@ -27,11 +27,9 @@
 
 package org.omegat.gui.preferences.view;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 
 import org.omegat.core.matching.NearString.SORT_KEY;
-import org.omegat.gui.matches.MatchesVarExpansion;
 import org.omegat.util.OStrings;
 
 /**
@@ -123,8 +121,6 @@ public class TMMatchesPreferencesPanel extends JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(variablesLabel, bundle.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES")); // NOI18N
         jPanel4.add(variablesLabel, java.awt.BorderLayout.WEST);
-
-        variablesList.setModel(new DefaultComboBoxModel<>(MatchesVarExpansion.MATCHES_VARIABLES));
         jPanel4.add(variablesList, java.awt.BorderLayout.CENTER);
 
         org.openide.awt.Mnemonics.setLocalizedText(insertButton, bundle.getString("BUTTON_INSERT")); // NOI18N

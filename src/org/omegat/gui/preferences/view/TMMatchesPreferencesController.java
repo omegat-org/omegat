@@ -27,6 +27,8 @@
 
 package org.omegat.gui.preferences.view;
 
+import java.util.Vector;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 
@@ -77,6 +79,8 @@ public class TMMatchesPreferencesController extends BasePreferencesController {
         panel.insertButton
                 .addActionListener(
                         e -> panel.matchesTemplate.replaceSelection(panel.variablesList.getSelectedItem().toString()));
+        panel.variablesList
+                .setModel(new DefaultComboBoxModel<>(new Vector<>(MatchesVarExpansion.getMatchesVariables())));
     }
 
     @Override

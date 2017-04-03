@@ -26,27 +26,28 @@
  **************************************************************************/
 package org.omegat.gui.matches;
 
-import org.omegat.util.TMXProp;
-import org.omegat.util.VarExpansion;
-import org.omegat.core.data.ProjectProperties;
-import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.matching.DiffDriver;
-import org.omegat.core.matching.DiffDriver.TextRun;
-import org.omegat.core.matching.DiffDriver.Render;
-import org.omegat.core.matching.NearString;
-
+import java.text.DateFormat;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Date;
 import java.util.Map.Entry;
 import java.util.TreeMap;
-import java.text.DateFormat;
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.matching.DiffDriver;
+import org.omegat.core.matching.DiffDriver.Render;
+import org.omegat.core.matching.DiffDriver.TextRun;
+import org.omegat.core.matching.NearString;
 import org.omegat.util.OStrings;
+import org.omegat.util.TMXProp;
+import org.omegat.util.VarExpansion;
 
 /**
  * This class is used to convert a NearString to a text visible in the MatchesTextArea
@@ -84,7 +85,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     public static final String VAR_DIFF_REVERSED = "${diffReversed}";
     
     
-    public static final String[] MATCHES_VARIABLES = {
+    private static final String[] MATCHES_VARIABLES = {
         VAR_ID, 
         VAR_SOURCE_TEXT,
         VAR_DIFF,
@@ -96,6 +97,10 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
         VAR_CHANGED_ID, VAR_CHANGED_DATE, VAR_FUZZY_FLAG
     };
     
+    public static List<String> getMatchesVariables() {
+        return Collections.unmodifiableList(Arrays.asList(MATCHES_VARIABLES));
+    }
+
     public static final String DEFAULT_TEMPLATE = VAR_ID + ". " 
             + VAR_FUZZY_FLAG
             + VAR_SOURCE_TEXT + "\n"

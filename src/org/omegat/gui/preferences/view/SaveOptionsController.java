@@ -28,8 +28,12 @@
 
 package org.omegat.gui.preferences.view;
 
+import java.util.Vector;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 
+import org.omegat.core.data.CommandVarExpansion;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -74,6 +78,9 @@ public class SaveOptionsController extends BasePreferencesController {
 
         panel.externalCommandTextArea.setText(Preferences.getPreference(Preferences.EXTERNAL_COMMAND));
         panel.allowProjectCmdCheckBox.setSelected(Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD));
+
+        panel.variablesList
+                .setModel(new DefaultComboBoxModel<>(new Vector<>(CommandVarExpansion.getCommandVariables())));
     }
     
     @Override

@@ -28,6 +28,8 @@
 
 package org.omegat.gui.preferences.view;
 
+import java.util.Vector;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
@@ -64,8 +66,10 @@ public class ViewOptionsController extends BasePreferencesController {
     private void initGui() {
         panel = new ViewOptionsPanel();
         panel.templateActivator.addActionListener(e -> updateEnabledness());
-        panel.variablesList.setModel(new DefaultComboBoxModel<>(ModificationInfoManager.MOD_INFO_VARIABLES));
-        panel.variablesListND.setModel(new DefaultComboBoxModel<>(ModificationInfoManager.MOD_INFO_VARIABLES_NO_DATE));
+        panel.variablesList
+                .setModel(new DefaultComboBoxModel<>(new Vector<>(ModificationInfoManager.getModInfoVariables())));
+        panel.variablesListND.setModel(
+                new DefaultComboBoxModel<>(new Vector<>(ModificationInfoManager.getModInfoVariablesNoDate())));
         panel.insertButton.addActionListener(
                 e -> panel.modInfoTemplate.replaceSelection(panel.variablesList.getSelectedItem().toString()));
         panel.insertButtonND.addActionListener(

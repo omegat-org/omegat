@@ -35,6 +35,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.omegat.core.segmentation.SRX;
@@ -64,7 +65,7 @@ import gen.core.project.RepositoryDefinition;
  */
 public class ProjectProperties {
 
-    public static final String[] DEFAULT_EXCLUDES = {
+    private static final String[] DEFAULT_EXCLUDES = {
             "**/.svn/**",
             "**/CVS/**",
             "**/.cvs/**",
@@ -72,6 +73,10 @@ public class ProjectProperties {
             "**/Thumbs.db",
             "**/.DS_Store",
             };
+
+    public static List<String> getDefaultExcludes() {
+        return Collections.unmodifiableList(Arrays.asList(DEFAULT_EXCLUDES));
+    }
 
     /**
      * Constructor for tests only.

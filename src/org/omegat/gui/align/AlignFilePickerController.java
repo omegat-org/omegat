@@ -36,6 +36,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Vector;
 import java.util.concurrent.CancellationException;
 
 import javax.swing.DefaultComboBoxModel;
@@ -75,8 +76,9 @@ public class AlignFilePickerController {
     String targetDefaultDir;
     String defaultSaveDir;
 
-    Language sourceLanguage = Language.LANGUAGES[0];
-    Language targetLanguage = Language.LANGUAGES[Language.LANGUAGES.length - 1];
+    List<Language> allLangs = Language.getLanguages();
+    Language sourceLanguage = allLangs.get(0);
+    Language targetLanguage = allLangs.get(allLangs.size() - 1);
 
     public void setSourceFile(String sourceFile) {
         this.sourceFile = sourceFile;
@@ -119,7 +121,7 @@ public class AlignFilePickerController {
         StaticUIUtils.setEscapeClosable(frame);
 
         final AlignFilePicker picker = new AlignFilePicker();
-        picker.sourceLanguagePicker.setModel(new DefaultComboBoxModel<>(Language.LANGUAGES));
+        picker.sourceLanguagePicker.setModel(new DefaultComboBoxModel<>(new Vector<>(Language.getLanguages())));
         picker.sourceLanguagePicker.setRenderer(new LanguageComboBoxRenderer());
         picker.sourceLanguagePicker.setSelectedItem(sourceLanguage);
         picker.sourceLanguagePicker.addItemListener(new ItemListener() {
@@ -148,7 +150,7 @@ public class AlignFilePickerController {
                 updatePicker(picker);
             }
         });
-        picker.targetLanguagePicker.setModel(new DefaultComboBoxModel<>(Language.LANGUAGES));
+        picker.targetLanguagePicker.setModel(new DefaultComboBoxModel<>(new Vector<>(Language.getLanguages())));
         picker.targetLanguagePicker.setRenderer(new LanguageComboBoxRenderer());
         picker.targetLanguagePicker.setSelectedItem(targetLanguage);
         picker.targetLanguagePicker.addItemListener(new ItemListener() {

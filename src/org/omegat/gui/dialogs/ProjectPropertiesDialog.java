@@ -46,6 +46,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
@@ -214,7 +215,7 @@ public class ProjectPropertiesDialog extends JDialog {
         bL.add(bSL);
 
         // Source language field
-        final JComboBox<Language> m_sourceLocaleField = new JComboBox<>(Language.LANGUAGES);
+        final JComboBox<Language> m_sourceLocaleField = new JComboBox<>(new Vector<>(Language.getLanguages()));
         if (m_sourceLocaleField.getMaximumRowCount() < 20) 
             m_sourceLocaleField.setMaximumRowCount(20);
         m_sourceLocaleField.setEditable(true);
@@ -232,7 +233,7 @@ public class ProjectPropertiesDialog extends JDialog {
         bL.add(bLL);
 
         // Target language field
-        final JComboBox<Language> m_targetLocaleField = new JComboBox<>(Language.LANGUAGES);
+        final JComboBox<Language> m_targetLocaleField = new JComboBox<>(new Vector<>(Language.getLanguages()));
         if (m_targetLocaleField.getMaximumRowCount() < 20)
             m_targetLocaleField.setMaximumRowCount(20);
         m_targetLocaleField.setEditable(true);
@@ -435,7 +436,8 @@ public class ProjectPropertiesDialog extends JDialog {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         optionsBox.add(m_externalCommandScrollPane, gbc);
         final JLabel m_variablesLabel = new javax.swing.JLabel();
-        final JComboBox<String> m_variablesList = new JComboBox<>(CommandVarExpansion.COMMAND_VARIABLES);
+        final JComboBox<String> m_variablesList = new JComboBox<>(
+                new Vector<>(CommandVarExpansion.getCommandVariables()));
         final JButton m_insertButton = new javax.swing.JButton();
         // Add variable insertion controls only if project external commands are enabled.
         if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {

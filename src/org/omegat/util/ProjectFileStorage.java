@@ -35,7 +35,6 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -142,7 +141,7 @@ public class ProjectFileStorage {
             result.getSourceRootExcludes().addAll(om.getProject().getSourceDirExcludes().getMask());
         } else {
             // sourceRootExclude was not defined
-            result.getSourceRootExcludes().addAll(Arrays.asList(ProjectProperties.DEFAULT_EXCLUDES));
+            result.getSourceRootExcludes().addAll(ProjectProperties.getDefaultExcludes());
         }
         result.setTMRoot(normalizeLoadedPath(om.getProject().getTmDir(), OConsts.DEFAULT_TM));
 

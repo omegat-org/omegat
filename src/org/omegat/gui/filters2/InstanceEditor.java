@@ -26,6 +26,7 @@
 package org.omegat.gui.filters2;
 
 import java.awt.Dialog;
+import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
@@ -224,7 +225,7 @@ public class InstanceEditor extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         tfnpPanel.add(insertButton, gridBagConstraints);
 
-        substitute.setModel(new DefaultComboBoxModel<>(AbstractFilter.TARGET_FILENAME_PATTERNS));
+        substitute.setModel(new DefaultComboBoxModel<>(new Vector<>(AbstractFilter.getTargetFilenamePatterns())));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;

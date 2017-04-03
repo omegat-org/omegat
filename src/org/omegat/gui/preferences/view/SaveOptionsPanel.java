@@ -28,7 +28,6 @@
 
 package org.omegat.gui.preferences.view;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -161,8 +160,6 @@ public class SaveOptionsPanel extends JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(variablesLabel, OStrings.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES")); // NOI18N
         jPanel4.add(variablesLabel, java.awt.BorderLayout.WEST);
-
-        variablesList.setModel(new DefaultComboBoxModel<>(org.omegat.core.data.CommandVarExpansion.COMMAND_VARIABLES));
         jPanel4.add(variablesList, java.awt.BorderLayout.CENTER);
 
         org.openide.awt.Mnemonics.setLocalizedText(insertButton, OStrings.getString("BUTTON_INSERT")); // NOI18N

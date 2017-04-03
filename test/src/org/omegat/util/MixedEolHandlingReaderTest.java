@@ -25,8 +25,10 @@
 
 package org.omegat.util;
 
-import java.io.FileReader;
 import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import junit.framework.TestCase;
 
@@ -125,7 +127,8 @@ public class MixedEolHandlingReaderTest extends TestCase {
 
     public void testFile() throws Exception {
         try (MixedEolHandlingReader reader = new MixedEolHandlingReader(
-                new FileReader("test/data/filters/text/file-TextFilter.txt"))) {
+                Files.newBufferedReader(Paths.get("test/data/filters/text/file-TextFilter.txt"),
+                        StandardCharsets.UTF_8))) {
             assertEquals("This test file for test TextFilter.", reader.readLine());
             assertEquals("", reader.readLine());
             assertEquals("It should be second entry for empty-line separator or third line for line-break separator.",

@@ -24,10 +24,6 @@
  **************************************************************************/
 package org.omegat.convert.v20to21;
 
-import gen.core.filters.Files;
-import gen.core.filters.Filter;
-import gen.core.filters.Filters;
-
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
@@ -38,9 +34,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
+
+import gen.core.filters.Files;
+import gen.core.filters.Filter;
+import gen.core.filters.Filters;
 
 /**
  * Convert some configs from v2.0 to v2.1
@@ -121,14 +122,10 @@ public class Convert20to21 {
         StringBuilder r = new StringBuilder();
         char[] c = new char[8192];
         int len;
-        InputStreamReader rd = new InputStreamReader(new FileInputStream(f));
-        try {
+        try (InputStreamReader rd = new InputStreamReader(new FileInputStream(f), StandardCharsets.UTF_8)) {
             while ((len = rd.read(c)) >= 0) {
                 r.append(c, 0, len);
             }
-
-        } finally {
-            rd.close();
         }
         String res = r.toString();
         res = res.replace("org.omegat.filters2.master.Filters", "org.omegat.convert.v20to21.data.Filters");

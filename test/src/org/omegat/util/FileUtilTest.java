@@ -26,15 +26,15 @@
 package org.omegat.util;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.UncheckedIOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystemLoopException;
 import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -173,31 +173,19 @@ public class FileUtilTest extends TestCase {
         return dir;
     }
 
-    private File writeFile(File file, String content) throws FileNotFoundException {
+    private File writeFile(File file, String content) throws FileNotFoundException, UnsupportedEncodingException {
         File dir = file.getParentFile();
         if (!dir.isDirectory()) {
             assertTrue(dir.mkdirs());
         }
-        PrintStream stream = new PrintStream(file);
+        PrintStream stream = new PrintStream(file, StandardCharsets.US_ASCII.name());
         stream.println(content);
         stream.close();
         return file;
     }
     
     private boolean fileContentsAreEqual(File file1, File file2) throws IOException {
-        return readFile(file1).equals(readFile(file2));
-    }
-    
-    private String readFile(File file) throws IOException {
-        InputStreamReader stream = new InputStreamReader(new FileInputStream(file));
-        char[] cbuf = new char[256];
-        int len;
-        StringBuilder sb = new StringBuilder();
-        while ((len = stream.read(cbuf)) != -1) {
-            sb.append(cbuf, 0, len);
-        }
-        stream.close();
-        return sb.toString();
+        return Arrays.equals(FileUtils.readFileToByteArray(file1), FileUtils.readFileToByteArray(file2));
     }
 
     public void testRelative() throws Exception {

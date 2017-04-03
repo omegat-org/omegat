@@ -26,9 +26,11 @@
 package svn;
 
 import java.awt.HeadlessException;
-import java.io.File;
-import java.io.FileReader;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 import org.omegat.filters2.master.PluginUtils;
@@ -39,17 +41,17 @@ import junit.framework.TestCase;
 
 public class PluginsTest extends TestCase {
 
-    private static final File PLUGINS_FILE = new File(StaticUtils.installDir(), PluginUtils.PLUGINS_LIST_FILE);
+    private static final Path PLUGINS_FILE = Paths.get(StaticUtils.installDir(), PluginUtils.PLUGINS_LIST_FILE);
 
     public void testPluginsListWhitespace() throws Exception {
-        Files.lines(PLUGINS_FILE.toPath()).filter(line -> line.endsWith("\\")).forEach((String line) -> {
+        Files.lines(PLUGINS_FILE).filter(line -> line.endsWith("\\")).forEach((String line) -> {
             assertTrue("Continuation lines must end with a space.", line.endsWith(" \\"));
         });
     }
 
     public void testPluginsListClasses() throws Exception {
         Properties plugins = new Properties();
-        try (FileReader fr = new FileReader(PLUGINS_FILE)) {
+        try (Reader fr = Files.newBufferedReader(PLUGINS_FILE, StandardCharsets.UTF_8)) {
             plugins.load(fr);
         }
 

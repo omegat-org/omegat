@@ -45,8 +45,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.awt.event.ComponentAdapter;
@@ -97,8 +95,6 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IEntryEventListener;
-import org.omegat.core.events.IFontChangedEventListener;
-import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.gui.dialogs.ConflictDialogController;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
@@ -231,36 +227,34 @@ public class EditorController implements IEditor {
 
         settings = new EditorSettings(this);
 
-        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
-            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-                SHOW_TYPE showType;
-                switch (eventType) {
-                case CREATE:
-                case LOAD:
-                    history.clear();
-                    removeFilter();
-                    if (!Core.getProject().getAllEntries().isEmpty()) {
-                        showType = SHOW_TYPE.FIRST_ENTRY;
-                    } else {
-                        showType = SHOW_TYPE.EMPTY_PROJECT;
-                    }
-                    markerController.removeAll();
-                    setInitialOrientation();
-                    break;
-                case CLOSE:
-                    m_docSegList = null;
-                    history.clear();
-                    removeFilter();
-                    markerController.removeAll();
-                    showType = SHOW_TYPE.INTRO;
-                    deactivateWithoutCommit();
-                    break;
-                default:
-                    showType = SHOW_TYPE.NO_CHANGE;
+        CoreEvents.registerProjectChangeListener(eventType -> {
+            SHOW_TYPE showType;
+            switch (eventType) {
+            case CREATE:
+            case LOAD:
+                history.clear();
+                removeFilter();
+                if (!Core.getProject().getAllEntries().isEmpty()) {
+                    showType = SHOW_TYPE.FIRST_ENTRY;
+                } else {
+                    showType = SHOW_TYPE.EMPTY_PROJECT;
                 }
-                if (showType != SHOW_TYPE.NO_CHANGE) {
-                    updateState(showType);
-                }
+                markerController.removeAll();
+                setInitialOrientation();
+                break;
+            case CLOSE:
+                m_docSegList = null;
+                history.clear();
+                removeFilter();
+                markerController.removeAll();
+                showType = SHOW_TYPE.INTRO;
+                deactivateWithoutCommit();
+                break;
+            default:
+                showType = SHOW_TYPE.NO_CHANGE;
+            }
+            if (showType != SHOW_TYPE.NO_CHANGE) {
+                updateState(showType);
             }
         });
 
@@ -276,74 +270,65 @@ public class EditorController implements IEditor {
 
         createAdditionalPanes();
 
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                updateState(SHOW_TYPE.INTRO);
-                pane.requestFocus();
-            }
+        SwingUtilities.invokeLater(() -> {
+            updateState(SHOW_TYPE.INTRO);
+            pane.requestFocus();
         });
 
         // register font changes callback
-        CoreEvents.registerFontChangedEventListener(new IFontChangedEventListener() {
-            public void onFontChanged(Font newFont) {
-                setFont(newFont);
-                ViewLabel.fontHeight = 0;
-                editor.revalidate();
-                editor.repaint();
+        CoreEvents.registerFontChangedEventListener(newFont -> {
+            setFont(newFont);
+            ViewLabel.fontHeight = 0;
+            editor.revalidate();
+            editor.repaint();
 
-                // fonts have changed
-                emptyProjectPane.setFont(font);
-            }
+            // fonts have changed
+            emptyProjectPane.setFont(font);
         });
 
         // register Swing error logger
-        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-            public void uncaughtException(Thread t, Throwable e) {
-                LOGGER.log(Level.SEVERE, "Uncatched exception in thread [" + t.getName() + "]", e);
-            }
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
+            LOGGER.log(Level.SEVERE, "Uncatched exception in thread [" + t.getName() + "]", e);
         });
         
         EditorPopups.init(this);
 
         lazyLoadTimer.setRepeats(false);
-        lazyLoadTimer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JScrollBar bar = scrollPane.getVerticalScrollBar();
-                double scrollPercent = bar.getValue() / (double) bar.getMaximum();
-                int unitsPerSeg = (bar.getMaximum() - bar.getMinimum()) / (lastLoaded - firstLoaded + 1);
-                if (firstLoaded > 0 && scrollPercent <= PAGE_LOAD_THRESHOLD) {
-                    int docSize = editor.getDocument().getLength();
-                    int visiblePos = editor.viewToModel(scrollPane.getViewport().getViewPosition());
-                    // Try to load enough segments to restore scrollbar value to
-                    // the range (PAGE_LOAD_THRESHOLD, 1 - PAGE_LOAD_THRESHOLD).
-                    // Formula is obtained by solving the following equations for loadCount:
-                    //   PAGE_LOAD_THRESHOLD = newVal / newMax
-                    //   newVal = curVal + loadCount * unitsPerSeg
-                    //   newMax = curMax + loadCount * unitsPerSeg
-                    double loadCount = (PAGE_LOAD_THRESHOLD * bar.getMaximum() - bar.getValue())
-                            / (unitsPerSeg * (1 - PAGE_LOAD_THRESHOLD));
-                    loadUp((int) Math.ceil(loadCount));
-                    // If we leave the viewport at the same location then we are
-                    // not looking at the same content, because what we were
-                    // looking at is now further down the document. Calculate
-                    // the correct location and scroll there.
-                    int sizeDelta = editor.getDocument().getLength() - docSize;
-                    try {
-                        scrollPane.getViewport()
-                                .setViewPosition(editor.modelToView(visiblePos + sizeDelta).getLocation());
-                    } catch (BadLocationException ex) {
-                        Log.log(ex);
-                    }
-                } else if (lastLoaded < m_docSegList.length - 1 && scrollPercent >= 1 - PAGE_LOAD_THRESHOLD) {
-                    // Load enough segments to restore scrollbar value to the
-                    // range (PAGE_LOAD_THRESHOLD, 1 - PAGE_LOAD_THRESHOLD).
-                    // Formula is obtained by solving the following equations for loadCount:
-                    //   (1 - PAGE_LOAD_THRESHOLD) = curVal / newMax
-                    //   newMax = curMax + loadCount * unitsPerSeg
-                    double loadCount = (bar.getValue() / (1 - PAGE_LOAD_THRESHOLD) - bar.getMaximum()) / unitsPerSeg;
-                    loadDown((int) Math.ceil(loadCount));
+        lazyLoadTimer.addActionListener(e -> {
+            JScrollBar bar = scrollPane.getVerticalScrollBar();
+            double scrollPercent = bar.getValue() / (double) bar.getMaximum();
+            int unitsPerSeg = (bar.getMaximum() - bar.getMinimum()) / (lastLoaded - firstLoaded + 1);
+            if (firstLoaded > 0 && scrollPercent <= PAGE_LOAD_THRESHOLD) {
+                int docSize = editor.getDocument().getLength();
+                int visiblePos = editor.viewToModel(scrollPane.getViewport().getViewPosition());
+                // Try to load enough segments to restore scrollbar value to
+                // the range (PAGE_LOAD_THRESHOLD, 1 - PAGE_LOAD_THRESHOLD).
+                // Formula is obtained by solving the following equations for loadCount:
+                //   PAGE_LOAD_THRESHOLD = newVal / newMax
+                //   newVal = curVal + loadCount * unitsPerSeg
+                //   newMax = curMax + loadCount * unitsPerSeg
+                double loadCount = (PAGE_LOAD_THRESHOLD * bar.getMaximum() - bar.getValue())
+                        / (unitsPerSeg * (1 - PAGE_LOAD_THRESHOLD));
+                loadUp((int) Math.ceil(loadCount));
+                // If we leave the viewport at the same location then we are
+                // not looking at the same content, because what we were
+                // looking at is now further down the document. Calculate
+                // the correct location and scroll there.
+                int sizeDelta = editor.getDocument().getLength() - docSize;
+                try {
+                    scrollPane.getViewport()
+                            .setViewPosition(editor.modelToView(visiblePos + sizeDelta).getLocation());
+                } catch (BadLocationException ex) {
+                    Log.log(ex);
                 }
+            } else if (lastLoaded < m_docSegList.length - 1 && scrollPercent >= 1 - PAGE_LOAD_THRESHOLD) {
+                // Load enough segments to restore scrollbar value to the
+                // range (PAGE_LOAD_THRESHOLD, 1 - PAGE_LOAD_THRESHOLD).
+                // Formula is obtained by solving the following equations for loadCount:
+                //   (1 - PAGE_LOAD_THRESHOLD) = curVal / newMax
+                //   newMax = curMax + loadCount * unitsPerSeg
+                double loadCount = (bar.getValue() / (1 - PAGE_LOAD_THRESHOLD) - bar.getMaximum()) / unitsPerSeg;
+                loadDown((int) Math.ceil(loadCount));
             }
         });
     }
@@ -460,13 +445,11 @@ public class EditorController implements IEditor {
             displayedEntryIndex = 0;
             title = StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
             data = editor;
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    // need to run later because some other event listeners
-                    // should be called before
-                    loadDocument();
-                    gotoEntry(LastSegmentManager.getLastSegmentNumber());
-                }
+            SwingUtilities.invokeLater(() -> {
+                // need to run later because some other event listeners
+                // should be called before
+                loadDocument();
+                gotoEntry(LastSegmentManager.getLastSegmentNumber());
             });
             break;
         case NO_CHANGE:
@@ -926,11 +909,9 @@ public class EditorController implements IEditor {
         if (doc.isEditMode()) {
             m_docSegList[displayedEntryIndex].onActiveEntryChanged();
 
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    markerController.reprocessImmediately(m_docSegList[displayedEntryIndex]);
-                    editor.autoCompleter.textDidChange();
-                }
+            SwingUtilities.invokeLater(() -> {
+                markerController.reprocessImmediately(m_docSegList[displayedEntryIndex]);
+                editor.autoCompleter.textDidChange();
             });
         }
     }
@@ -941,19 +922,16 @@ public class EditorController implements IEditor {
      * will be at the bottom of the editor.
      */
     private void scrollForDisplayNearestSegments(final CaretPosition pos) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                Rectangle rect = getSegmentBounds(displayedEntryIndex);
-                if (rect != null) {
-                    // Expand rect vertically to fill height of viewport.
-                    int viewportHeight = scrollPane.getViewport().getHeight();
-                    rect.y -= (viewportHeight - rect.height) / 2;
-                    rect.height = viewportHeight;
-                    editor.scrollRectToVisible(rect);
-                }
-                setCaretPosition(pos);
+        SwingUtilities.invokeLater(() -> {
+            Rectangle rect = getSegmentBounds(displayedEntryIndex);
+            if (rect != null) {
+                // Expand rect vertically to fill height of viewport.
+                int viewportHeight = scrollPane.getViewport().getHeight();
+                rect.y -= (viewportHeight - rect.height) / 2;
+                rect.height = viewportHeight;
+                editor.scrollRectToVisible(rect);
             }
+            setCaretPosition(pos);
         });
     }
 

@@ -39,14 +39,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.JEditorPane;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.BoxView;
@@ -155,23 +152,21 @@ public class EditorTextArea3 extends JEditorPane {
 
         addMouseListener(mouseListener);
 
-        addCaretListener(new CaretListener() {
-            public void caretUpdate(CaretEvent e) {
-                try {
-                    int start = EditorUtils.getWordStart(EditorTextArea3.this, e.getMark());
-                    int end = EditorUtils.getWordEnd(EditorTextArea3.this, e.getMark());
-                    if (end - start <= 0) {
-                        // word not defined
-                        return;
-                    }
-                    String newWord = getText(start, end - start);
-                    if (!newWord.equals(currentWord)) {
-                        currentWord = newWord;
-                        CoreEvents.fireEditorNewWord(newWord);
-                    }
-                } catch (BadLocationException ex) {
-                    ex.printStackTrace();
+        addCaretListener(e -> {
+            try {
+                int start = EditorUtils.getWordStart(EditorTextArea3.this, e.getMark());
+                int end = EditorUtils.getWordEnd(EditorTextArea3.this, e.getMark());
+                if (end - start <= 0) {
+                    // word not defined
+                    return;
                 }
+                String newWord = getText(start, end - start);
+                if (!newWord.equals(currentWord)) {
+                    currentWord = newWord;
+                    CoreEvents.fireEditorNewWord(newWord);
+                }
+            } catch (BadLocationException ex) {
+                ex.printStackTrace();
             }
         });
         setToolTipText("");
@@ -291,11 +286,7 @@ public class EditorTextArea3 extends JEditorPane {
     protected void registerPopupMenuConstructors(int priority, IPopupMenuConstructor constructor) {
         synchronized (popupConstructors) {
             popupConstructors.add(new PopupMenuConstructorInfo(priority, constructor));
-            Collections.sort(popupConstructors, new Comparator<PopupMenuConstructorInfo>() {
-                public int compare(PopupMenuConstructorInfo o1, PopupMenuConstructorInfo o2) {
-                    return o1.priority - o2.priority;
-                }
-            });
+            Collections.sort(popupConstructors, (o1, o2) -> o1.priority - o2.priority);
         }
     }
 

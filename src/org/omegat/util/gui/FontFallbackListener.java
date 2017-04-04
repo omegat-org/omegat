@@ -26,8 +26,6 @@
 package org.omegat.util.gui;
 
 import java.awt.Font;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.List;
 
 import javax.swing.SwingWorker;
@@ -51,14 +49,11 @@ public class FontFallbackListener implements DocumentListener {
     
     public FontFallbackListener(final JTextComponent comp) {
         defaultFont = comp.getFont();
-        comp.addPropertyChangeListener("font", new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                if (evt.getNewValue() != null && !evt.getNewValue().equals(evt.getOldValue())) {
-                    defaultFont = (Font) evt.getNewValue();
-                    Document doc = comp.getDocument();
-                    doStyling(doc, 0, doc.getLength());
-                }
+        comp.addPropertyChangeListener("font", evt -> {
+            if (evt.getNewValue() != null && !evt.getNewValue().equals(evt.getOldValue())) {
+                defaultFont = (Font) evt.getNewValue();
+                Document doc = comp.getDocument();
+                doStyling(doc, 0, doc.getLength());
             }
         });
     }
@@ -79,9 +74,9 @@ public class FontFallbackListener implements DocumentListener {
         
         final StyledDocument doc = (StyledDocument) document;
         
-        new SwingWorker<Object, StyleRun>() {
+        new SwingWorker<Void, StyleRun>() {
             @Override
-            protected Object doInBackground() throws Exception {
+            protected Void doInBackground() throws Exception {
                 Segment seg = new Segment();
                 seg.setPartialReturn(true);
                 

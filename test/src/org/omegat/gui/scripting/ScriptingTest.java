@@ -29,7 +29,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.awt.HeadlessException;
+import java.awt.GraphicsEnvironment;
 import java.io.BufferedReader;
 import java.io.File;
 import java.nio.file.Files;
@@ -44,6 +44,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineFactory;
 
 import org.apache.commons.io.FilenameUtils;
+import org.junit.Assume;
 import org.junit.Test;
 import org.omegat.core.TestCore;
 import org.omegat.util.Preferences;
@@ -62,6 +63,8 @@ public class ScriptingTest extends TestCore {
      */
     @Test
     public void testLoadScriptingWindow() throws Exception {
+        Assume.assumeFalse(GraphicsEnvironment.isHeadless());
+
         // Set quick script
         Preferences.setPreference(Preferences.SCRIPTS_QUICK_PREFIX + 1, "blah");
         
@@ -70,9 +73,6 @@ public class ScriptingTest extends TestCore {
         try {
             Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, tmp.getAbsolutePath());
             new ScriptingWindow();
-        } catch (HeadlessException ex) {
-            // Can't do this test when headless
-            ex.printStackTrace();
         } finally {
             assertTrue(tmp.delete());
         }

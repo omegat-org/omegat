@@ -28,11 +28,12 @@ package org.omegat.gui.dialogs;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.Frame;
-import java.awt.HeadlessException;
+import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.Locale;
 
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.omegat.core.TestCore;
@@ -47,115 +48,71 @@ public class DialogsTest extends TestCore {
         // resource keys can't be masked by out-of-date translated
         // resources when runtime locale is not English.
         Locale.setDefault(Locale.ENGLISH);
+        // All tests in this class should require a GUI; any tests that can be
+        // run when headless should be put in a different class.
+        Assume.assumeFalse(GraphicsEnvironment.isHeadless());
     }
 
     @Test
     public void testAboutDialog() {
-        try {
-            new AboutDialog(null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
+        new AboutDialog(null);
     }
 
     @Test
     public void testCreateGlossaryEntryDialog() {
-        try {
-            new CreateGlossaryEntry(null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
+        new CreateGlossaryEntry(null);
     }
 
     @Test
     public void testDictionaryInstallerDialog() {
-        try {
-            new DictionaryInstallerDialog(null, null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
+        new DictionaryInstallerDialog(null, null);
     }
 
     @Test
     public void testFileCollisionDialog() {
-        try {
-            new FileCollisionDialog((Frame) null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
+        new FileCollisionDialog((Frame) null);
     }
 
     @Test
     public void testFilenamePatternsEditor() {
-        try {
-            new FilenamePatternsEditor(null, true);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
+        new FilenamePatternsEditor(null, true);
     }
 
     @Test
     public void testGoToSegmentDialog() {
-        try {
-            new GoToSegmentDialog(null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
+        new GoToSegmentDialog(null);
     }
 
     @Test
     public void testLastChangesDialog() {
-        try {
-            new LastChangesDialog(null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
+        new LastChangesDialog(null);
     }
 
     @Test
     public void testLicenseDialog() {
-        try {
-            new LicenseDialog(null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
+        new LicenseDialog(null);
     }
 
     @Test
     public void testLogDialog() {
-        try {
-            new LogDialog(null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
+        new LogDialog(null);
     }
 
     @Test
     public void testNewProjectFileChooser() {
-        try {
-            new NewProjectFileChooser();
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
+        new NewProjectFileChooser();
     }
 
     @Test
     public void testNewTeamProject() {
-        try {
-            new NewTeamProject(null);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
+        new NewTeamProject(null);
     }
 
     @Test
     public void testProjectPropertiesDialog() throws Exception {
         File dir = Files.createTempDirectory("omegat").toFile();
         try {
-            new ProjectPropertiesDialog(null, new ProjectProperties(dir),
-                    "project", Mode.NEW_PROJECT);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
+            new ProjectPropertiesDialog(null, new ProjectProperties(dir), "project", Mode.NEW_PROJECT);
         } finally {
             assertTrue(dir.delete());
         }

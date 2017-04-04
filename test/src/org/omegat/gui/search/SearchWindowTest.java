@@ -25,9 +25,10 @@
 
 package org.omegat.gui.search;
 
-import java.awt.HeadlessException;
+import java.awt.GraphicsEnvironment;
 import java.util.List;
 
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.omegat.core.TestCore;
@@ -46,20 +47,14 @@ public class SearchWindowTest extends TestCore {
 
     @Test
     public void testLoadSearchWindow() {
-        try {
-            new SearchWindowController(SearchMode.SEARCH);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
+        Assume.assumeFalse(GraphicsEnvironment.isHeadless());
+        new SearchWindowController(SearchMode.SEARCH);
     }
 
     @Test
     public void testLoadSearchAndReplaceWindow() {
-        try {
-            new SearchWindowController(SearchMode.REPLACE);
-        } catch (HeadlessException ignore) {
-            // Can't do this test when headless
-        }
+        Assume.assumeFalse(GraphicsEnvironment.isHeadless());
+        new SearchWindowController(SearchMode.REPLACE);
     }
 
     @Before

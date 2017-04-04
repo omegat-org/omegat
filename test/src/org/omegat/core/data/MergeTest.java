@@ -24,12 +24,14 @@
  **************************************************************************/
 package org.omegat.core.data;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import junit.framework.TestCase;
 
 import org.junit.Test;
 import org.omegat.core.data.TMXEntry.ExternalLinked;
@@ -39,7 +41,7 @@ import org.omegat.core.data.TMXEntry.ExternalLinked;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class MergeTest extends TestCase {
+public class MergeTest {
     @Test
     public void testTimeTruncate() throws Exception {
         // Time should be truncated(not rounded!) to 1 second

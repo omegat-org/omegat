@@ -24,6 +24,9 @@
  **************************************************************************/
 package org.omegat.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -44,6 +47,9 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
 import org.custommonkey.xmlunit.XMLUnit;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProjectTest;
 import org.omegat.filters.TestFilterBase;
@@ -55,23 +61,20 @@ import org.w3c.dom.Node;
  */
 public class TMXWriterTest extends TestFilterBase {
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-
+    @Before
+    public final void setUp() {
         XMLUnit.setControlEntityResolver(TMXReader2.TMX_DTD_RESOLVER);
         XMLUnit.setTestEntityResolver(TMXReader2.TMX_DTD_RESOLVER);
         XMLUnit.setIgnoreWhitespace(true);
     }
 
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-
+    @After
+    public final void tearDown() throws Exception {
         XMLUnit.setControlEntityResolver(null);
         XMLUnit.setTestEntityResolver(null);
     }
 
+    @Test
     public void testWriteInvalidChars() throws Exception {
         String in = "";
         in += (char) 0x00;
@@ -91,6 +94,7 @@ public class TMXWriterTest extends TestFilterBase {
         load(new ArrayList<String>(), null, false, false);
     }
 
+    @Test
     public void testLevel2write() throws Exception {
         TMXWriter2 wr = new TMXWriter2(outFile, new Language("en-US"), new Language("be-BY"), false, true,
                 false);
@@ -105,6 +109,7 @@ public class TMXWriterTest extends TestFilterBase {
         compareTMX(outFile, new File("test/data/tmx/test-save-tmx14.tmx"));
     }
 
+    @Test
     public void testLevel2reads() throws Exception {
         final List<String> sources = new ArrayList<String>();
 
@@ -150,6 +155,7 @@ public class TMXWriterTest extends TestFilterBase {
         assertEquals("6<a0>7", sources.get(3));
     }
 
+    @Test
     public void testEOLwrite() throws Exception {
         String eol = TMXWriter2.LINE_SEPARATOR;
         try {

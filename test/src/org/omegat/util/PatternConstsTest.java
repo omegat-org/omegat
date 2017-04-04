@@ -25,8 +25,11 @@
 
 package org.omegat.util;
 
+import static org.junit.Assert.fail;
+
 import java.util.regex.Matcher;
-import junit.framework.*;
+
+import org.junit.Test;
 
 
 /**
@@ -34,32 +37,12 @@ import junit.framework.*;
  *
  * @author Maxym Mykhalchuk
  */
-public class PatternConstsTest extends TestCase
-{
-    
-    public PatternConstsTest(String testName)
-    {
-        super(testName);
-    }
-
-    protected void setUp() throws Exception
-    {
-    }
-
-    protected void tearDown() throws Exception
-    {
-    }
-
-    public static Test suite()
-    {
-        TestSuite suite = new TestSuite(PatternConstsTest.class);
-        
-        return suite;
-    }
+public class PatternConstsTest {
     
     /**
      * Tests {@link PatternConsts#LANG_AND_COUNTRY} regular expression.
      */
+    @Test
     public void testLangAndCountry()
     {
         String LC_BAD = "abc*DEF";

@@ -25,10 +25,14 @@
 
 package org.omegat.filters;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.IAlignCallback;
@@ -37,16 +41,19 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 
 public class ResourceBundleFilterTest extends TestFilterBase {
+    @Test
     public void testParse() throws Exception {
         parse(new ResourceBundleFilter(),
                 "test/data/filters/resourceBundle/file-ResourceBundleFilter.properties");
     }
 
+    @Test
     public void testTranslate() throws Exception {
         translateText(new ResourceBundleFilter(),
                 "test/data/filters/resourceBundle/file-ResourceBundleFilter.properties");
     }
 
+    @Test
     public void testAlign() throws Exception {
         final AlignResult ar = new AlignResult();
         align(new ResourceBundleFilter(), "resourceBundle/file-ResourceBundleFilter.properties",
@@ -63,6 +70,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         boolean found = false;
     }
 
+    @Test
     public void testLoad() throws Exception {
         String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter.properties";
         ResourceBundleFilter filter = new ResourceBundleFilter();
@@ -86,6 +94,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         checkMultiEnd();
     }
     
+    @Test
     public void testDoNotEscapeUnicodeLiterals() throws Exception {
         String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-UnicodeLiterals.properties";
         ResourceBundleFilter filter = new ResourceBundleFilter();
@@ -100,6 +109,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         translateText(filter, f, options);
     }
     
+    @Test
     public void testBadUnicodeLiterals() throws Exception {
         String base = "test/data/filters/resourceBundle/";
         ResourceBundleFilter filter = new ResourceBundleFilter();
@@ -121,6 +131,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         }
     }
     
+    @Test
     public void testWhiteSpace() throws Exception {
         // We want to see full whitespace for this test
         boolean removeSpacesOrig = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
@@ -145,6 +156,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         Core.getFilterMaster().getConfig().setRemoveSpacesNonseg(removeSpacesOrig);
     }
 
+    @Test
     public void testNOI18N() throws Exception {
         String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-NOI18N.properties";
         ResourceBundleFilter filter = new ResourceBundleFilter();
@@ -157,6 +169,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         translateText(filter, f);
     }
 
+    @Test
     public void testCommentEscaping() throws Exception {
         String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-Comments.properties";
         ResourceBundleFilter filter = new ResourceBundleFilter();

@@ -25,6 +25,11 @@
 
 package org.omegat.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -41,28 +46,30 @@ import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.omegat.util.FileUtil.ICollisionCallback;
-
-import junit.framework.TestCase;
 
 /**
  * @author Aaron Madlon-Kay
  * @author Alex Buloichik
  */
-public class FileUtilTest extends TestCase {
+public class FileUtilTest {
 
     private File base;
 
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public final void setUp() throws Exception {
         base = Files.createTempDirectory("omegat").toFile();
     }
 
-    @Override
-    protected void tearDown() throws Exception {
+    @After
+    public final void tearDown() throws Exception {
         FileUtils.deleteDirectory(base);
     }
 
+    @Test
     public void testCopyFilesTo() throws Exception {
         File targetDir = makeDir(base, "target");
         
@@ -188,6 +195,7 @@ public class FileUtilTest extends TestCase {
         return Arrays.equals(FileUtils.readFileToByteArray(file1), FileUtils.readFileToByteArray(file2));
     }
 
+    @Test
     public void testRelative() throws Exception {
         assertFalse(FileUtil.isRelative("C:\\zz"));
         assertFalse(FileUtil.isRelative("z:/zz"));
@@ -199,6 +207,7 @@ public class FileUtilTest extends TestCase {
         assertTrue(FileUtil.isRelative("zz/"));
     }
 
+    @Test
     public void testAbsoluteForSystem() throws Exception {
         assertEquals("C:/zzz", FileUtil.absoluteForSystem("C:\\zzz", Platform.OsType.WIN64));
         assertEquals("/zzz", FileUtil.absoluteForSystem("C:\\zzz", Platform.OsType.LINUX64));
@@ -208,6 +217,7 @@ public class FileUtilTest extends TestCase {
         assertEquals("/zzz", FileUtil.absoluteForSystem("\\zzz", Platform.OsType.MAC64));
     }
 
+    @Test
     public void testEOL() throws Exception {
         File dir = new File("build/testdata/");
         dir.mkdirs();
@@ -245,6 +255,7 @@ public class FileUtilTest extends TestCase {
         }
     }
 
+    @Test
     public void testDeleteTree() throws Exception {
         // /root
         File root = new File(base, "root");
@@ -274,11 +285,13 @@ public class FileUtilTest extends TestCase {
         assertTrue(file.exists());
     }
 
+    @Test
     public void testCompileFileMask() {
         Pattern r = FileUtil.compileFileMask("Ab1-&*/**");
         assertEquals("(?:|.*/)Ab1\\-\\&[^/]*(?:|/.*)", r.pattern());
     }
 
+    @Test
     public void testFilePatterns() {
         // From
         // https://confluence.atlassian.com/fisheye/pattern-matching-guide-298976797.html
@@ -394,6 +407,7 @@ public class FileUtilTest extends TestCase {
         return p.matcher(path).matches();
     }
 
+    @Test
     public void testBuildFileList() throws Exception {
         File tempDir = Files.createTempDirectory("omegat").toFile();
         assertTrue(tempDir.isDirectory());

@@ -25,6 +25,11 @@
 
 package org.omegat.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -32,32 +37,35 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.omegat.core.data.ProjectException;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
 import org.omegat.tokenizer.LuceneFrenchTokenizer;
 
 import gen.core.project.Omegat;
-import junit.framework.TestCase;
 
-public class ProjectFileStorageTest extends TestCase {
+public class ProjectFileStorageTest {
 
     private static final File PROJECT_DIR = new File("test/data/project");
 
     private File tempDir;
 
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public final void setUp() throws Exception {
         tempDir = Files.createTempDirectory("omegat").toFile().getAbsoluteFile();
         assertTrue(tempDir.isDirectory());
         TestPreferencesInitializer.init(tempDir.getPath());
     }
 
-    @Override
-    protected void tearDown() throws Exception {
+    @After
+    public final void tearDown() throws Exception {
         FileUtils.deleteDirectory(tempDir);
     }
 
+    @Test
     public void testLoadDefaults() throws Exception {
         ProjectProperties props = ProjectFileStorage.loadPropertiesFile(tempDir,
                 new File(PROJECT_DIR, "defaultdirs.project"));
@@ -88,6 +96,7 @@ public class ProjectFileStorageTest extends TestCase {
         assertEquals("**/.svn/**", excludes.get(0));
     }
 
+    @Test
     public void testLoadCustomGlossaryDir() throws Exception {
         ProjectProperties props = ProjectFileStorage.loadPropertiesFile(tempDir,
                 new File(PROJECT_DIR, "customglossarydir.project"));
@@ -96,6 +105,7 @@ public class ProjectFileStorageTest extends TestCase {
         assertTrue(props.getWriteableGlossary().endsWith("foo/glossary.txt"));
     }
 
+    @Test
     public void testLoadCustomGlossaryFile() throws Exception {
         ProjectProperties props = ProjectFileStorage.loadPropertiesFile(tempDir,
                 new File(PROJECT_DIR, "customglossaryfile.project"));
@@ -104,6 +114,7 @@ public class ProjectFileStorageTest extends TestCase {
         assertTrue(props.getWriteableGlossary().endsWith("glossary/bar.txt"));
     }
 
+    @Test
     public void testLoadCustomGlossaryDirAndFile() throws Exception {
         ProjectProperties props = ProjectFileStorage.loadPropertiesFile(tempDir,
                 new File(PROJECT_DIR, "customglossarydirfile.project"));
@@ -112,6 +123,7 @@ public class ProjectFileStorageTest extends TestCase {
         assertTrue(props.getWriteableGlossary().endsWith("foo/bar.txt"));
     }
 
+    @Test
     public void testNearAbsolutePaths() throws Exception {
         File projFile = new File(PROJECT_DIR, "defaultdirs.project");
         Omegat omt = ProjectFileStorage.parseProjectFile(projFile);
@@ -158,6 +170,7 @@ public class ProjectFileStorageTest extends TestCase {
         }
     }
 
+    @Test
     public void testNearRelativePaths() throws Exception {
         File projFile = new File(PROJECT_DIR, "defaultdirs.project");
         Omegat omt = ProjectFileStorage.parseProjectFile(projFile);
@@ -209,6 +222,7 @@ public class ProjectFileStorageTest extends TestCase {
         }
     }
 
+    @Test
     public void testFarAbsolutePaths() throws Exception {
         File projFile = new File(PROJECT_DIR, "defaultdirs.project");
         Omegat omt = ProjectFileStorage.parseProjectFile(projFile);
@@ -251,6 +265,7 @@ public class ProjectFileStorageTest extends TestCase {
         assertEquals(ProjectFileStorage.normalizeSlashes(tmDir.getPath()), outOmt.getProject().getTmDir());
     }
 
+    @Test
     public void testFarRelativePaths() throws Exception {
         File projFile = new File(PROJECT_DIR, "defaultdirs.project");
         Omegat omt = ProjectFileStorage.parseProjectFile(projFile);
@@ -301,6 +316,7 @@ public class ProjectFileStorageTest extends TestCase {
         assertEquals(ProjectFileStorage.normalizeSlashes(tmDir.getPath()), outOmt.getProject().getTmDir());
     }
 
+    @Test
     public void testMissingDirs() throws Exception {
         // Older project files can be missing path definitions, in which case
         // we should fall back to the default values.

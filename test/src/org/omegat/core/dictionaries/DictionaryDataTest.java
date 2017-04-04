@@ -25,16 +25,20 @@
 
 package org.omegat.core.dictionaries;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
 
+import org.junit.Test;
 import org.omegat.util.Language;
 
-import junit.framework.TestCase;
+public class DictionaryDataTest {
 
-public class DictionaryDataTest extends TestCase {
-
+    @Test
     public void testLookup() {
         DictionaryData<String> data = new DictionaryData<>(new Language(Locale.ENGLISH));
         data.add("foobar", "bazbiz");

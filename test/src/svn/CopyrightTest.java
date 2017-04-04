@@ -25,21 +25,22 @@
 
 package svn;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-
-import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * Test for copyright notes exists in source files.
  * 
  * @author Alex Buloichik
  */
-public class CopyrightTest extends TestCase {
+public class CopyrightTest {
     protected static final String[] MUST_EXIST = new String[] { "OmegaT - Computer Assisted Translation (CAT) tool",
             "Copyright (C)", "Home page: http://www.omegat.org/", "This file is part of OmegaT",
             "OmegaT is free software: you can redistribute it and/or modify",
@@ -52,6 +53,7 @@ public class CopyrightTest extends TestCase {
             "You should have received a copy of the GNU General Public License",
             "along with this program.  If not, see <http://www.gnu.org/licenses/>." };
 
+    @Test
     public void testCopyright() throws Exception {
         List<File> sourceFiles = new ArrayList<File>();
         list(new File("src"), sourceFiles);

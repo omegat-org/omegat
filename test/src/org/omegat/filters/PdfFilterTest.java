@@ -24,26 +24,33 @@
  **************************************************************************/
 package org.omegat.filters;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Test;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.pdf.PdfFilter;
 
 public class PdfFilterTest extends TestFilterBase {
+    @Test
     public void testParse() throws Exception {
         List<ParsedEntry> lines = parse3(new PdfFilter(),
                 "test/data/filters/pdf/file-PdfFilter.pdf", null);
         assertEquals("This is some text. This is also some text. ", lines.get(0).source);
     }
 
+    @Test
     public void testTranslate() throws Exception {
         translate(new PdfFilter(), "test/data/filters/pdf/file-PdfFilter.pdf", Collections.emptyMap());
         compareBinary(new File("test/data/filters/pdf/file-PdfFilter-gold.txt"), outFile);
     }
 
+    @Test
     public void testLoad() throws Exception {
         String f = "test/data/filters/pdf/file-PdfFilter.pdf";
         IProject.FileInfo fi = loadSourceFiles(new PdfFilter(), f);
@@ -53,6 +60,7 @@ public class PdfFilterTest extends TestFilterBase {
         checkMultiEnd();
     }
 
+    @Test
     public void testPasswordProtected() throws Exception {
         String f = "test/data/filters/pdf/file-PdfFilter-password.pdf";
         try {

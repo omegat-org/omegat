@@ -25,20 +25,22 @@
 
 package org.omegat.util.gui;
 
+import static org.junit.Assert.fail;
+
 import java.util.MissingResourceException;
 
+import org.junit.Test;
 import org.omegat.util.OStrings;
 import org.omegat.util.TestPreferencesInitializer;
 
-import junit.framework.TestCase;
-
-public class StylesTest extends TestCase {
+public class StylesTest {
 
     /**
      * All colors should have a localizable name in Bundle.properties.
      * 
      * @throws Exception
      */
+    @Test
     public void testColorStrings() throws Exception {
         TestPreferencesInitializer.init();
         for (Styles.EditorColor c : Styles.EditorColor.values()) {

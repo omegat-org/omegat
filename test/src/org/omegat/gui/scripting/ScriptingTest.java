@@ -25,6 +25,10 @@
 
 package org.omegat.gui.scripting;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.File;
@@ -40,6 +44,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineFactory;
 
 import org.apache.commons.io.FilenameUtils;
+import org.junit.Test;
 import org.omegat.core.TestCore;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -55,6 +60,7 @@ public class ScriptingTest extends TestCore {
      * 
      * @see <a href="https://sourceforge.net/p/omegat/bugs/775/">Bug #775</a>
      */
+    @Test
     public void testLoadScriptingWindow() throws Exception {
         // Set quick script
         Preferences.setPreference(Preferences.SCRIPTS_QUICK_PREFIX + 1, "blah");
@@ -72,6 +78,7 @@ public class ScriptingTest extends TestCore {
         }
     }
 
+    @Test
     public void testCompileScripts() throws Exception {
         File scriptDir = new File(StaticUtils.installDir(), ScriptingWindow.DEFAULT_SCRIPTS_DIR);
         assertTrue(scriptDir.isDirectory());
@@ -90,6 +97,7 @@ public class ScriptingTest extends TestCore {
         }
     }
     
+    @Test
     public void testScriptProperties() throws Exception {
         File scriptDir = new File(StaticUtils.installDir(), ScriptingWindow.DEFAULT_SCRIPTS_DIR);
         assertTrue(scriptDir.isDirectory());
@@ -125,6 +133,7 @@ public class ScriptingTest extends TestCore {
      * runtime classpath then it will be available in the runtime classpath as
      * well.
      */
+    @Test
     public void testAvailableEngines() {
         List<String> extensions = ScriptRunner.MANAGER.getEngineFactories().stream()
                 .map(ScriptEngineFactory::getExtensions).flatMap(List::stream).collect(Collectors.toList());

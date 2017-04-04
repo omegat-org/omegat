@@ -25,6 +25,8 @@
 
 package org.omegat.core.team2;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,13 +34,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Before;
+import org.junit.Test;
 import org.omegat.core.data.ProjectProperties;
 
 import gen.core.project.RepositoryDefinition;
 import gen.core.project.RepositoryMapping;
-import junit.framework.TestCase;
 
-public class RemoteRepositoryProviderTest extends TestCase {
+public class RemoteRepositoryProviderTest {
     String V;
     String VR;
 
@@ -50,8 +53,8 @@ public class RemoteRepositoryProviderTest extends TestCase {
     List<String> copyTo = new ArrayList<String>();
     int copyCheckedIndex;
 
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public final void setUp() throws Exception {
         File dir = new File("build/testdata/repotest");
         FileUtils.deleteDirectory(dir);
         dir.mkdirs();
@@ -119,6 +122,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         addRepo("/", "/remote", "**/*.bak", "*.png", "dir/local/1.jpg", "1.jpg");
     }
 
+    @Test
     public void testNames() throws Exception {
         provider.copyFilesFromRepoToProject("/dir");
         provider.copyFilesFromRepoToProject("dir/");
@@ -128,6 +132,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         provider.copyFilesFromProjectToRepo("file", null);
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject11() throws Exception {
         filesRemote();
         mapping1();
@@ -136,6 +141,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject11a() throws Exception {
         filesRemote();
         mapping1a();
@@ -144,6 +150,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject12() throws Exception {
         filesRemote();
         mapping1();
@@ -152,6 +159,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject12a() throws Exception {
         filesRemote();
         mapping1a();
@@ -160,6 +168,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject13() throws Exception {
         filesRemote();
         mapping1();
@@ -171,6 +180,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject13a() throws Exception {
         filesRemote();
         mapping1a();
@@ -183,6 +193,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject14() throws Exception {
         filesRemote();
         mapping1();
@@ -191,6 +202,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject14a() throws Exception {
         filesRemote();
         mapping1a();
@@ -200,6 +212,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject15() throws Exception {
         filesRemote();
         mapping1();
@@ -207,6 +220,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject15a() throws Exception {
         filesRemote();
         mapping1a();
@@ -214,6 +228,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject16() throws Exception {
         filesRemote();
         mapping1();
@@ -221,6 +236,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject16a() throws Exception {
         filesRemote();
         mapping1a();
@@ -228,6 +244,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject17() throws Exception {
         filesRemote();
         mapping1();
@@ -239,6 +256,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject17a() throws Exception {
         filesRemote();
         mapping1a();
@@ -251,6 +269,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject21() throws Exception {
         filesRemote();
         mapping2();
@@ -263,6 +282,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject21a() throws Exception {
         filesRemote();
         mapping2a();
@@ -276,6 +296,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject22() throws Exception {
         filesRemote();
         mapping2();
@@ -284,6 +305,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject22a() throws Exception {
         filesRemote();
         mapping2a();
@@ -292,6 +314,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject31() throws Exception {
         filesRemote();
         mapping3();
@@ -304,6 +327,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject31a() throws Exception {
         filesRemote();
         mapping3a();
@@ -316,6 +340,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject41() throws Exception {
         filesRemote();
         mapping4();
@@ -326,6 +351,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject41a() throws Exception {
         filesRemote();
         mapping4a();
@@ -336,6 +362,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject51() throws Exception {
         filesRemote();
         mapping4();
@@ -345,6 +372,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject51a() throws Exception {
         filesRemote();
         mapping4a();
@@ -354,6 +382,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject52() throws Exception {
         filesRemote();
         mapping1();
@@ -364,6 +393,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromRepoToProject52a() throws Exception {
         filesRemote();
         mapping1a();
@@ -374,6 +404,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo11() throws Exception {
         filesLocal();
         mapping1();
@@ -382,6 +413,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo11a() throws Exception {
         filesLocal();
         mapping1a();
@@ -390,6 +422,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo12() throws Exception {
         filesLocal();
         mapping1();
@@ -398,6 +431,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo12a() throws Exception {
         filesLocal();
         mapping1a();
@@ -406,6 +440,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo13() throws Exception {
         filesLocal();
         mapping1();
@@ -417,6 +452,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo13a() throws Exception {
         filesLocal();
         mapping1a();
@@ -428,6 +464,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo14() throws Exception {
         filesLocal();
         mapping1();
@@ -436,6 +473,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo14a() throws Exception {
         filesLocal();
         mapping1a();
@@ -444,6 +482,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo15() throws Exception {
         filesLocal();
         mapping1();
@@ -451,6 +490,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo15a() throws Exception {
         filesLocal();
         mapping1a();
@@ -458,6 +498,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo16() throws Exception {
         filesLocal();
         mapping1();
@@ -465,6 +506,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo16a() throws Exception {
         filesLocal();
         mapping1a();
@@ -472,6 +514,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo17() throws Exception {
         filesLocal();
         mapping1();
@@ -483,6 +526,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo17a() throws Exception {
         filesLocal();
         mapping1a();
@@ -494,6 +538,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo21() throws Exception {
         filesLocal();
         mapping2();
@@ -506,6 +551,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo21a() throws Exception {
         filesLocal();
         mapping2a();
@@ -518,6 +564,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo22() throws Exception {
         filesLocal();
         mapping2();
@@ -526,6 +573,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo22a() throws Exception {
         filesLocal();
         mapping2a();
@@ -534,6 +582,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo31() throws Exception {
         filesLocal();
         mapping3();
@@ -545,6 +594,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo31a() throws Exception {
         filesLocal();
         mapping3a();
@@ -556,6 +606,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo41() throws Exception {
         filesLocal();
         mapping4();
@@ -568,6 +619,7 @@ public class RemoteRepositoryProviderTest extends TestCase {
         checkCopyEnd();
     }
 
+    @Test
     public void testCopyFilesFromProjectToRepo41a() throws Exception {
         filesLocal();
         mapping4a();

@@ -25,34 +25,41 @@
 
 package org.omegat;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.omegat.util.OConsts;
 import org.omegat.util.StaticUtils;
 
-import junit.framework.TestCase;
-
-public class CLIParametersTest extends TestCase {
+public class CLIParametersTest {
 
     private static Path tmpDir;
 
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public final void setUp() throws Exception {
         tmpDir = Files.createTempDirectory("omegat");
         assertTrue(tmpDir.toFile().isDirectory());
     }
 
-    @Override
-    protected void tearDown() throws Exception {
+    @After
+    public final void tearDown() throws Exception {
         FileUtils.deleteDirectory(tmpDir.toFile());
         assertFalse(tmpDir.toFile().exists());
     }
 
-    public static void testCLIParameters() throws Exception {
+    @Test
+    public void testCLIParameters() throws Exception {
         {
             Map<String, String> params = CLIParameters.parseArgs("--foo=bar", "--baz",
                     "--" + CLIParameters.CONFIG_FILE + "=bazinga", tmpDir.toString());

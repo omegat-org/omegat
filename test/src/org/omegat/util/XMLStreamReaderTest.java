@@ -25,22 +25,28 @@
 
 package org.omegat.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.util.List;
 
+import org.junit.Test;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.xml.XMLBlock;
 import org.omegat.util.xml.XMLStreamReader;
-
-import junit.framework.TestCase;
 
 /**
  * Test the XML reader used to read OmegaT preference files.
  * 
  * @author Aaron Madlon-Kay
  */
-public class XMLStreamReaderTest extends TestCase {
+public class XMLStreamReaderTest {
     
+    @Test
     public void testLoadXML() throws Exception {
         XMLStreamReader xml = new XMLStreamReader();
         xml.killEmptyBlocks();
@@ -94,6 +100,7 @@ public class XMLStreamReaderTest extends TestCase {
         xml.close();
     }
     
+    @Test
     public void testBadEntity() throws Exception {
         try (XMLStreamReader xml = new XMLStreamReader()) {
             xml.killEmptyBlocks();

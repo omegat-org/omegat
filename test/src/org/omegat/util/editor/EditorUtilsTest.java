@@ -25,20 +25,25 @@
  **************************************************************************/
 package org.omegat.util.editor;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import org.junit.Test;
 import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.editor.IEditor.CHANGE_CASE_TO;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
 
-import junit.framework.TestCase;
-
-public class EditorUtilsTest extends TestCase {
+public class EditorUtilsTest {
     
+    @Test
     public void testRemoveDirectionChars() {
         assertEquals("|", EditorUtils.removeDirectionChars("|"));
         assertEquals("", EditorUtils.removeDirectionChars("\u202A"));
@@ -48,6 +53,7 @@ public class EditorUtilsTest extends TestCase {
         assertEquals("zz", EditorUtils.removeDirectionChars("zz"));
     }
     
+    @Test
     public void testChangeCase() {
         Locale locale = Locale.ENGLISH;
         ITokenizer tokenizer = new LuceneEnglishTokenizer();
@@ -187,6 +193,7 @@ public class EditorUtilsTest extends TestCase {
         assertEquals("\"FOO, BAR\"", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
     }
 
+    @Test
     public void testReplaceGlossaryEntries() {
         List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
         entries.add(new GlossaryEntry("snowman", "sneeuwpop", "", false));

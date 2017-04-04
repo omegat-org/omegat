@@ -28,6 +28,7 @@ package org.omegat.gui.search;
 import java.awt.HeadlessException;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.omegat.core.TestCore;
 import org.omegat.core.TestCoreInitializer;
@@ -61,9 +62,8 @@ public class SearchWindowTest extends TestCore {
         }
     }
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public final void setUp() {
         final IEditorSettings editorSettings = new IEditorSettings() {
 
             @Override

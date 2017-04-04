@@ -25,12 +25,18 @@
 
 package org.omegat.gui.align;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
 
+import org.junit.Before;
+import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
@@ -40,12 +46,10 @@ import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 import org.omegat.gui.align.Aligner.ComparisonMode;
 import org.omegat.util.Language;
 
-import junit.framework.TestCase;
+public class AlignerTest {
 
-public class AlignerTest extends TestCase {
-
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public final void setUp() {
         FilterMaster.setFilterClasses(Arrays.asList(TextFilter.class, ResourceBundleFilter.class));
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
@@ -53,6 +57,7 @@ public class AlignerTest extends TestCase {
         assertTrue(Core.getFilterMaster().isFileSupported(new File("blah.properties"), true));
     }
 
+    @Test
     public void testAlignerHeapMode() throws Exception {
         String srcFile = "test/data/align/heapSource.txt";
         Language srcLang = new Language(Locale.ENGLISH);
@@ -78,6 +83,7 @@ public class AlignerTest extends TestCase {
         }
     }
 
+    @Test
     public void testAlignerParseMode() throws Exception {
         String srcFile = "test/data/align/parseSource.txt";
         Language srcLang = new Language(Locale.ENGLISH);
@@ -110,6 +116,7 @@ public class AlignerTest extends TestCase {
         }
     }
 
+    @Test
     public void testAlignerIDMode() throws Exception {
         String srcFile = "test/data/align/idSource.properties";
         Language srcLang = new Language(Locale.ENGLISH);

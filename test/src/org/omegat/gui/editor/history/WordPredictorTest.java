@@ -25,15 +25,18 @@
 
 package org.omegat.gui.editor.history;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Test;
 import org.omegat.gui.editor.history.WordPredictor.Prediction;
 
-import junit.framework.TestCase;
+public class WordPredictorTest {
 
-public class WordPredictorTest extends TestCase {
-
+    @Test
     public void testWordPredictor() {
         WordPredictor p = new WordPredictor();
 
@@ -63,6 +66,7 @@ public class WordPredictorTest extends TestCase {
         }
     }
 
+    @Test
     public void testWordFrequency() {
         WordPredictor p = new WordPredictor();
 
@@ -95,6 +99,7 @@ public class WordPredictorTest extends TestCase {
         }
     }
 
+    @Test
     public void testMinFrequency() {
         WordPredictor p = new WordPredictor();
 
@@ -134,6 +139,7 @@ public class WordPredictorTest extends TestCase {
         }
     }
 
+    @Test
     public void testReset() {
         WordPredictor p = new WordPredictor();
 
@@ -152,6 +158,7 @@ public class WordPredictorTest extends TestCase {
         }
     }
 
+    @Test
     public void testEmptyInput() {
         WordPredictor p = new WordPredictor();
 
@@ -184,6 +191,6 @@ public class WordPredictorTest extends TestCase {
 
     private void assertPrediction(String word, double freq, Prediction p) {
         assertEquals(word, p.getWord());
-        assertEquals(freq, p.getFrequency());
+        assertEquals(freq, p.getFrequency(), 0d);
     }
 }

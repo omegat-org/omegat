@@ -25,32 +25,40 @@
 
 package org.omegat.filters;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.BufferedReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import org.junit.Test;
 import org.omegat.core.data.IProject;
 import org.omegat.filters3.xml.docbook.DocBookFilter;
 
 public class DocBookFilterTest extends TestFilterBase {
+    @Test
     public void testParse() throws Exception {
         List<String> lines = parse(new DocBookFilter(), "test/data/filters/docBook/file-DocBookFilter.xml");
         boolean c = lines.contains("My String");
         assertTrue("'My String' not defined'", c);
     }
 
+    @Test
     public void testTranslate() throws Exception {
         translateText(new DocBookFilter(), "test/data/filters/docBook/file-DocBookFilter.xml");
     }
 
+    @Test
     public void testParseIntroLinux() throws Exception {
         List<String> lines = parse(new DocBookFilter(), "test/data/filters/docBook/Intro-Linux/abook.xml");
         assertTrue("Message not exist, i.e. entities not loaded",
                 lines.contains("Why should I use an editor?"));
     }
 
+    @Test
     public void testLoad() throws Exception {
         String f = "test/data/filters/docBook/Intro-Linux/abook.xml";
         IProject.FileInfo fi = loadSourceFiles(new DocBookFilter(), f);
@@ -61,6 +69,7 @@ public class DocBookFilterTest extends TestFilterBase {
         checkMulti("Machtelt", null, null, "A Hands on Guide", "Garrels", null);
     }
 
+    @Test
     public void testIsSupported() throws Exception {
         DocBookFilter filter = new DocBookFilter();
         Path goodFile = Paths.get("test/data/filters/docBook/file-DocBookFilter.xml");

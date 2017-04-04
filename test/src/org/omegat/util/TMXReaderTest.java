@@ -24,6 +24,11 @@
  **************************************************************************/
 package org.omegat.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Map;
@@ -31,6 +36,7 @@ import java.util.TreeMap;
 
 import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.io.IOUtils;
+import org.junit.Test;
 import org.omegat.core.TestCore;
 
 /**
@@ -40,6 +46,7 @@ public class TMXReaderTest extends TestCore {
     protected File outFile = new File(System.getProperty("java.io.tmpdir"), "OmegaT test - "
             + getClass().getSimpleName());
 
+    @Test
     public void testLeveL1() throws Exception {
         final Map<String, String> tr = new TreeMap<String, String>();
         new TMXReader2().readTMX(new File("test/data/tmx/test-level1.tmx"), new Language("en-US"),
@@ -56,6 +63,7 @@ public class TMXReaderTest extends TestCore {
         assertEquals("tr3", tr.get("lang3"));
     }
 
+    @Test
     public void testLeveL2() throws Exception {
         final Map<String, String> tr = new TreeMap<String, String>();
         new TMXReader2().readTMX(new File("test/data/tmx/test-level2.tmx"), new Language("en-US"),
@@ -71,6 +79,7 @@ public class TMXReaderTest extends TestCore {
         assertEquals("tr", tr.get("3 <n0>xx</n0>"));
     }
 
+    @Test
     public void testInvalidTMX() throws Exception {
         final Map<String, String> tr = new TreeMap<String, String>();
         new TMXReader2().readTMX(new File("test/data/tmx/invalid.tmx"), new Language("en"),
@@ -83,6 +92,7 @@ public class TMXReaderTest extends TestCore {
                 });
     }
     
+    @Test
     public void testSMP() throws Exception {
         final Map<String, String> tr = new TreeMap<String, String>();
         new TMXReader2().readTMX(new File("test/data/tmx/test-SMP.tmx"), new Language("en"),
@@ -98,6 +108,7 @@ public class TMXReaderTest extends TestCore {
         assertEquals("\uD835\uDC03\uD835\uDC04\uD835\uDC05", tr.get("\uD835\uDC00\uD835\uDC01\uD835\uDC02"));
     }
     
+    @Test
     public void testGetTuvByLang() {
         TMXReader2.ParsedTuv tuvBE = new TMXReader2.ParsedTuv();
         tuvBE.lang = "be";
@@ -134,6 +145,7 @@ public class TMXReaderTest extends TestCore {
         assertNull(tmx.getTuvByLang(new Language("ZZ")));
     }
 
+    @Test
     public void testCharset() throws Exception {
         File xml = new File("build/testdata/test.xml");
         xml.getParentFile().mkdirs();

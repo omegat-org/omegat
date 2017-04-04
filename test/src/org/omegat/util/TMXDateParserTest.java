@@ -25,40 +25,24 @@ Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
 
 package org.omegat.util;
 
-import junit.framework.*;
+import static org.junit.Assert.fail;
+
 import java.text.ParseException;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
+
+import org.junit.Test;
 
 /**
 * Tests for (some) static utility methods.
 *
 * @author Martin Fleurke
 */
-public class TMXDateParserTest extends TestCase
-{
+public class TMXDateParserTest {
    
-   public TMXDateParserTest(String testName)
-   {
-       super(testName);
-   }
-
-   protected void setUp() throws Exception
-   {
-   }
-
-   protected void tearDown() throws Exception
-   {
-   }
-
-   public static Test suite()
-   {
-       TestSuite suite = new TestSuite(TMXDateParserTest.class);
-       return suite;
-   }
-   
-   public void testParseDate() {
+    @Test
+    public void testParseDate() {
        TMXDateParser parser = new TMXDateParser();
        //Test parse and toString with proper date string
        String dateString = "19971116T192059Z";//normal time

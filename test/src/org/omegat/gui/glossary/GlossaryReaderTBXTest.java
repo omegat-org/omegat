@@ -24,9 +24,12 @@
  **************************************************************************/
 package org.omegat.gui.glossary;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.util.List;
 
+import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 import org.omegat.core.data.NotLoadedProject;
@@ -37,6 +40,7 @@ import org.omegat.util.Language;
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
 public class GlossaryReaderTBXTest extends TestCore {
+    @Test
     public void testRead() throws Exception {
         Core.setProject(new NotLoadedProject() {
             public ProjectProperties getProjectProperties() {

@@ -25,13 +25,16 @@
 
 package org.omegat.util.gui;
 
+import static org.junit.Assert.assertEquals;
+
 import java.awt.Color;
 import java.util.stream.IntStream;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class StaticUIUtilsTest extends TestCase {
+public class StaticUIUtilsTest {
 
+    @Test
     public void testGetHighlightColor() {
         // Don't make an invalid color even with big or edge-casey adjustment values
         IntStream.range(-1000, 1000).forEach(i -> StaticUIUtils.getHighlightColor(Color.WHITE, i));

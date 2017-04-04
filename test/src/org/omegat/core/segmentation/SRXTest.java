@@ -25,16 +25,19 @@
 
 package org.omegat.core.segmentation;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotSame;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * @author Aaron Madlon-Kay
  */
-public class SRXTest extends TestCase {
+public class SRXTest {
 
-    public static void testSRXComparison() {
+    @Test
+    public void testSRXComparison() {
         SRX orig = SRX.getDefault();
         SRX clone = orig.copy();
         assertNotSame(orig, clone);

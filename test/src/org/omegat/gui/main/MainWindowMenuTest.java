@@ -25,6 +25,9 @@
 
 package org.omegat.gui.main;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -34,6 +37,7 @@ import java.util.Map;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import org.junit.Test;
 import org.omegat.core.TestCore;
 
 /**
@@ -45,6 +49,7 @@ public class MainWindowMenuTest extends TestCore {
      * 
      * @throws Exception
      */
+    @Test
     public void testMenuActions() throws Exception {
         int count = 0;
 

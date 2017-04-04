@@ -26,22 +26,25 @@
 
 package org.omegat.util;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Locale;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * Tests for OmegaT language handling.
  *
  * @author Maxym Mykhalchuk
  */
-public class LanguageTest extends TestCase {
+public class LanguageTest {
 
     /**
      * Test of getLanguage method, of class org.omegat.util.Language.
      * 
      * @see <a href="https://sourceforge.net/p/omegat/bugs/185/">bug #185</a>
      */
+    @Test
     public void testGetLanguage() {
         String LANG_1 = "xx-YY";
         assertEquals(LANG_1, new Language(LANG_1).getLanguage());
@@ -53,6 +56,7 @@ public class LanguageTest extends TestCase {
     /**
      * Test of getLocale method, of class org.omegat.util.Language.
      */
+    @Test
     public void testGetLocale() {
         String LANG = "XXX-yy";
         assertEquals("xxx_YY", new Language(LANG).getLocaleCode());
@@ -61,6 +65,7 @@ public class LanguageTest extends TestCase {
     /**
      * Test of equals method, of class org.omegat.util.Language.
      */
+    @Test
     public void testEquals() {
         Language lang1 = new Language("xxx-YY");
         Language lang2 = new Language("XXX-yy");
@@ -73,6 +78,7 @@ public class LanguageTest extends TestCase {
     /**
      * Test the constructor under lots of stress.
      */
+    @Test
     public void testConstructor() {
         Language lang1 = new Language((Locale) null);
         Language lang2 = new Language((String) null);

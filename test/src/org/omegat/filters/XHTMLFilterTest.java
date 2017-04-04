@@ -32,6 +32,8 @@ import java.io.IOException;
 import java.util.TreeMap;
 
 import org.custommonkey.xmlunit.XMLUnit;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
@@ -43,9 +45,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 public class XHTMLFilterTest extends TestFilterBase {
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public final void setUp() {
         // Use custom EntityResolver to resolve DTD and entity files
         // to our locally provided files. Otherwise Java will actually
         // try to download them over the network each time, which is
@@ -67,6 +68,12 @@ public class XHTMLFilterTest extends TestFilterBase {
         XMLUnit.setControlEntityResolver(er);
     }
     
+    @After
+    public final void tearDown() throws Exception {
+        XMLUnit.setControlEntityResolver(null);
+        XMLUnit.setTestEntityResolver(null);
+    }
+
     @Test
     public void testParse() throws Exception {
         String f = "test/data/filters/xhtml/file-XHTMLFilter.html";

@@ -26,7 +26,11 @@
 
 package org.omegat.filters;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
+
 import org.junit.Test;
 import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
@@ -40,34 +44,35 @@ public class MagentoFilterTest extends TestFilterBase {
 
     @Test
     public void testParse() throws Exception {
-	List<String> entries = parse(new MagentoFilter(), "test/data/filters/magento/MagentoFilter.csv");
+        List<String> entries = parse(new MagentoFilter(), "test/data/filters/magento/MagentoFilter.csv");
         assertEquals(5, entries.size());
         int i = 0;
         assertEquals("Tr: %s", entries.get(i++));
         assertEquals("Tr: There are <a href=\"\"%s\"\">%s items</a> in your cart.", entries.get(i++));
         assertEquals("Tr: Separate by \"\",\"\".", entries.get(i++));
-        assertEquals("Tr: After selecting a new media storage location, press the Synchronize button", entries.get(i++));
+        assertEquals("Tr: After selecting a new media storage location, press the Synchronize button",
+                entries.get(i++));
         assertEquals("Tr: The reader repaired", entries.get(i++));
     }
 
-   @Test
+    @Test
     public void testTranslate() throws Exception {
-	translateText(new MagentoFilter(), "test/data/filters/magento/MagentoFilter.csv");
-    }   
-   
-   @Test
-   public void testAlign() throws Exception {
+        translateText(new MagentoFilter(), "test/data/filters/magento/MagentoFilter.csv");
+    }
+
+    @Test
+    public void testAlign() throws Exception {
         final AlignResultHolder alignResult = new AlignResultHolder();
-        
-        align(new MagentoFilter(), "magento/MagentoFilterAlign.csv",
-                "magento/MagentoFilterAlign-tr.csv", new IAlignCallback() {
-                    public void addTranslation(String id, String source, String translation, boolean isFuzzy, String comment, IFilter filter) {
-                        alignResult.aligned = id.equals("code") && 
-                                              source.equals("original") && 
-                                              translation.equals("translated");
+
+        align(new MagentoFilter(), "magento/MagentoFilterAlign.csv", "magento/MagentoFilterAlign-tr.csv",
+                new IAlignCallback() {
+                    public void addTranslation(String id, String source, String translation, boolean isFuzzy,
+                            String comment, IFilter filter) {
+                        alignResult.aligned = id.equals("code") && source.equals("original")
+                                && translation.equals("translated");
                     }
                 });
-        
+
         assertTrue(alignResult.aligned);
     }
 

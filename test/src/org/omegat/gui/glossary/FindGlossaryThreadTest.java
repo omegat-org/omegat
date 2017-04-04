@@ -25,12 +25,16 @@
 
 package org.omegat.gui.glossary;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
 import org.omegat.core.TestCore;
 
 public class FindGlossaryThreadTest extends TestCore {
+    @Test
     public void testEntriesSort() {
         List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
         entries.add(new GlossaryEntry("dog", "doggy", "cdog", false));

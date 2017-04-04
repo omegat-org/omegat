@@ -25,6 +25,10 @@
 
 package org.omegat.core.data;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -35,20 +39,18 @@ import org.omegat.core.Core;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.util.TestPreferencesInitializer;
 
-import junit.framework.TestCase;
-
 /**
  * Tests for RealProject classs.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class RealProjectTest extends TestCase {
+public class RealProjectTest {
     ProjectTMX tmx;
     RealProjectWithTMXAccess project;
     IProject.FileInfo fi;
 
     @Before
-    public void setUp() throws Exception {
+    public final void setUp() throws Exception {
         Core.initializeConsole(new TreeMap<String, String>());
         TestPreferencesInitializer.init();
     }

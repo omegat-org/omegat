@@ -25,16 +25,20 @@
 
 package org.omegat.filters;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.junit.Test;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
 public class POFilterTest extends TestFilterBase {
+    @Test
     public void testParse() throws Exception {
         Map<String, String> data = new TreeMap<String, String>();
         Map<String, String> tmx = new TreeMap<String, String>();
@@ -47,6 +51,7 @@ public class POFilterTest extends TestFilterBase {
         assertEquals(tmx.get("[PO-fuzzy] Delete Accounts"), "Supprimer des comptes");
     }
 
+    @Test
     public void testLoad() throws Exception {
         String f = "test/data/filters/po/file-POFilter-multiple.po";
         Map<String, String> options = new TreeMap<String, String>();
@@ -71,6 +76,7 @@ public class POFilterTest extends TestFilterBase {
         checkMultiEnd();
     }
 
+    @Test
     public void testLoadMonolingual() throws Exception {
         String f = "test/data/filters/po/file-POFilter-Monolingual.po";
         PoFilter filter = new PoFilter();
@@ -84,6 +90,7 @@ public class POFilterTest extends TestFilterBase {
         assertEquals("second source", parsed.get(1).source);
     }
 
+    @Test
     public void testTranslate() throws Exception {
         // translateText(new PoFilter(),
         // "test/data/filters/po/file-POFilter-be.po");

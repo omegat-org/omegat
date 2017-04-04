@@ -25,9 +25,13 @@
 
 package org.omegat.languagetools;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
@@ -50,9 +54,8 @@ import org.omegat.util.Language;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class FalseFriendsTest extends TestCore {
-    protected void setUp() throws Exception {
-        super.setUp();
-
+    @Before
+    public final void setUp() {
         final ProjectProperties props = new ProjectProperties() {
             public Language getSourceLanguage() {
                 return new Language("en");

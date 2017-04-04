@@ -24,15 +24,19 @@
  **************************************************************************/
 package org.omegat.gui.glossary;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
 import org.omegat.core.TestCore;
 
 /**
  * @author Martin Fleurke
  */
 public class GlossaryEntryTest extends TestCore {
+    @Test
     public void testRead() throws Exception {
         GlossaryEntry a = new GlossaryEntry("", "", "", false);
         GlossaryEntry b = new GlossaryEntry("", "", "", false);
@@ -64,6 +68,7 @@ public class GlossaryEntryTest extends TestCore {
         assertEquals(2, list.size());
     }
 
+    @Test
     public void testToStyledString() {
         GlossaryEntry ge = new GlossaryEntry("source1", "translation1", "", false);
         assertEquals("source1 = translation1", ge.toStyledString().text.toString());
@@ -73,6 +78,7 @@ public class GlossaryEntryTest extends TestCore {
         assertEquals("<html><p>source1 = <b>translation1</b></p></html>", ge.toStyledString().toHTML());
     }
 
+    @Test
     public void testToStyledStringMultipleTranslations() {
         GlossaryEntry ge = new GlossaryEntry("source1", new String[] {"translation1", "translation2"},
                                              new String[] { "", "" }, new boolean[] {false, false});
@@ -84,6 +90,7 @@ public class GlossaryEntryTest extends TestCore {
         assertEquals("<html><p>source1 = translation1, <b>translation2</b></p></html>", ge.toStyledString().toHTML());
     }
 
+    @Test
     public void testToStyledStringWithComment() {
         GlossaryEntry ge = new GlossaryEntry("source1", "translation1", "comment1", false);
         assertEquals("source1 = translation1\n1. comment1", ge.toStyledString().text.toString());
@@ -93,6 +100,7 @@ public class GlossaryEntryTest extends TestCore {
         assertEquals("<html><p>source1 = <b>translation1</b><br>1. comment1</p></html>", ge.toStyledString().toHTML());
     }
 
+    @Test
     public void testToStyledStringMultipleComments() {
         GlossaryEntry ge = new GlossaryEntry("source1", new String[] {"translation1", "translation2"},
                                              new String[] { "comment1", "comment2" }, new boolean[] {false, false});

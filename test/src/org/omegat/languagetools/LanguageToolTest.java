@@ -25,10 +25,17 @@
 
 package org.omegat.languagetools;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.languagetool.JLanguageTool;
 import org.languagetool.language.AmericanEnglish;
@@ -45,17 +52,15 @@ import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
 
-import junit.framework.TestCase;
-
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class LanguageToolTest extends TestCase {
+public class LanguageToolTest {
     private static final Language SOURCE_LANG = new Language(Locale.FRENCH);
     private static final Language TARGET_LANG = new Language(Locale.ENGLISH);
 
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public final void setUp() throws Exception {
         TestPreferencesInitializer.init();
     }
 
@@ -90,6 +95,7 @@ public class LanguageToolTest extends TestCase {
         assertEquals(0, matches.size());
     }
 
+    @Test
     public void testRemoteServer() throws Exception {
         HTTPServer server = new HTTPServer();
         try {
@@ -123,6 +129,7 @@ public class LanguageToolTest extends TestCase {
         }
     }
 
+    @Test
     public void testNativeBridge() throws Exception {
         ILanguageToolBridge bridge = new LanguageToolNativeBridge(SOURCE_LANG, TARGET_LANG);
 
@@ -133,6 +140,7 @@ public class LanguageToolTest extends TestCase {
         assertFalse(results.isEmpty());
     }
 
+    @Test
     public void testWrapperInit() throws Exception {
         // Defaults: Local implementation
         ILanguageToolBridge bridge = LanguageToolWrapper.createBridgeFromPrefs(SOURCE_LANG, TARGET_LANG);
@@ -145,6 +153,7 @@ public class LanguageToolTest extends TestCase {
         assertTrue(bridge instanceof LanguageToolNativeBridge);
     }
 
+    @Test
     public void testLanguageMapping() {
         {
             org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("en-US"));

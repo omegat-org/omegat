@@ -25,8 +25,12 @@
 
 package org.omegat.gui.notes;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 import javax.swing.SwingUtilities;
 
+import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 
@@ -36,6 +40,7 @@ import org.omegat.core.TestCore;
  */
 public class NotesTextAreaTest extends TestCore {
 
+    @Test
     public void testSetNote() throws Exception {
         final INotes nta = new NotesTextArea(Core.getMainWindow());
         final ResultHolder<String> holder = new ResultHolder<String>();
@@ -74,6 +79,7 @@ public class NotesTextAreaTest extends TestCore {
         public T result;
     }
 
+    @Test
     public void testClear() throws Exception {
         final INotes nta = new NotesTextArea(Core.getMainWindow());
         final ResultHolder<String> holder = new ResultHolder<String>();

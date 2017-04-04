@@ -25,19 +25,24 @@
 
 package org.omegat.core.statistics;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 /**
  * Tests for statistics calculation.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class StatisticsTest extends TestCase {
+public class StatisticsTest {
+    @Test
     public void testNumberOfWords() {
         assertEquals(3, Statistics.numberOfWords("one two three"));
         assertEquals(3, Statistics.numberOfWords("one , \b two three"));
         assertEquals(5, Statistics.numberOfWords("o\bne <b>two</b>"));
     }
+
+    @Test
     public void testNumberOfChars() {
         assertEquals(3, Statistics.numberOfCharactersWithoutSpaces("1 2\b3"));
         assertEquals(4, Statistics.numberOfCharactersWithSpaces("1 2\b3"));

@@ -25,14 +25,16 @@
 
 package org.omegat.tokenizer;
 
+import static org.junit.Assert.assertEquals;
+
 import org.apache.commons.lang.StringUtils;
+import org.junit.Test;
 import org.omegat.tokenizer.ITokenizer.StemmingMode;
 import org.omegat.util.Token;
 
-import junit.framework.TestCase;
+public class TokenizerTest {
 
-public class TokenizerTest extends TestCase {
-
+    @Test
     public void testEnglish() {
         ITokenizer tok = new LuceneEnglishTokenizer();
         String orig = "The quick, brown <x0/> jumped over 1 \"lazy\" dog.";
@@ -55,6 +57,7 @@ public class TokenizerTest extends TestCase {
      * <li>Re-joining of tags when doing verbatim or non-stemming tokenizing
      * </ol>
      */
+    @Test
     public void testJapanese() {
         ITokenizer tok = new LuceneJapaneseTokenizer();
         String orig = "\u6211\u3005\u306E\u3059\u3079\u3066\u306F\u540C\u3058\uFF11\u500B\u306E\u60D1"
@@ -106,6 +109,7 @@ public class TokenizerTest extends TestCase {
      * <p>
      * Text from https://tr.wikipedia.org/wiki/T%C3%BCrk%C3%A7e
      */
+    @Test
     public void testTurkish() {
         ITokenizer tok = new LuceneTurkishTokenizer();
         String orig = "\u201C\u0130stanbul a\u011Fz\u0131\u201D, T\u00FCrkiye T\u00FCrk\u00E7esi"
@@ -143,6 +147,7 @@ public class TokenizerTest extends TestCase {
      * <p>
      * Text from https://zh.wikipedia.org/wiki/%E6%B1%89%E8%AF%AD
      */
+    @Test
     public void testChinese() {
         ITokenizer tok = new LuceneSmartChineseTokenizer();
         String orig = "\u6F22\u8A9E\u7684\u6587\u5B57\u7CFB\u7D71\u2014\u2014\u6F22\u5B57\u662F"
@@ -184,6 +189,7 @@ public class TokenizerTest extends TestCase {
      *      "https://groups.yahoo.com/neo/groups/OmegaT/conversations/messages/28395">
      *      User group discussion</a>
      */
+    @Test
     public void testGerman() {
         ITokenizer tok = new LuceneGermanTokenizer();
         assertResult(new String[] { "prasentier", "pr\u00e4sentierte" },
@@ -199,6 +205,7 @@ public class TokenizerTest extends TestCase {
      * testing so that it doesn't get overlooked when changes are made to the
      * other tokenizers.
      */
+    @Test
     public void testDefault() {
         ITokenizer tok = new DefaultTokenizer();
         String orig = "The quick, brown <x0/> jumped over 1 \"lazy\" \u0130stanbul. "

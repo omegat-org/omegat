@@ -25,27 +25,28 @@
 
 package org.omegat.core.segmentation;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
 import org.omegat.util.Language;
-
-import junit.framework.TestCase;
 
 /**
  * Tests for OmegaT segmentation.
  *
  * @author Maxym Mykhalchuk
  */
-public class SegmenterTest extends TestCase {
+public class SegmenterTest {
 
     private Segmenter segmenter = new Segmenter(SRX.getDefault());
 
     /**
      * Test of segment method, of class org.omegat.core.segmentation.Segmenter.
      */
-    public void testSegment()
-    {
+    @Test
+    public void testSegment() {
         List<StringBuilder> spaces = new ArrayList<StringBuilder>();
         List<String> segments = segmenter.segment(new Language("en"), "<br7>\n\n<br5>\n\nother", spaces,
                 new ArrayList<Rule>());
@@ -58,8 +59,8 @@ public class SegmenterTest extends TestCase {
     /**
      * Test of glue method, of class org.omegat.core.segmentation.Segmenter.
      */
-    public void testGlue()
-    {
+    @Test
+    public void testGlue() {
         List<StringBuilder> spaces = new ArrayList<StringBuilder>();
         List<Rule> brules = new ArrayList<Rule>();
         String oldString = "<br7>\n\n<br5>\n\nother";
@@ -71,8 +72,8 @@ public class SegmenterTest extends TestCase {
     /**
      * Test of glue method for CJK, of class org.omegat.core.segmentation.Segmenter.
      */
-    public void testGlueCJK()
-    {
+    @Test
+    public void testGlueCJK() {
         final String EN_FULLSTOP = ".";
         final String JA_FULLSTOP = "\\u3002"; // Unicode escaped
 

@@ -25,11 +25,13 @@
 
 package org.omegat.filters;
 
+import org.junit.Test;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.latex.LatexFilter;
 
 public class LatexFilterTest extends TestFilterBase {
 
+    @Test
     public void testLoad() throws Exception {
         String f = "test/data/filters/Latex/latexexample.tex";
         IProject.FileInfo fi = loadSourceFiles(new LatexFilter(), f);

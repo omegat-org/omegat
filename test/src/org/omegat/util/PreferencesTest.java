@@ -25,31 +25,38 @@
 
 package org.omegat.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.omegat.filters.TestFilterBase;
 import org.omegat.util.Preferences.IPreferences;
-
-import junit.framework.TestCase;
 
 /**
  * @author Aaron Madlon-Kay
  */
-public class PreferencesTest extends TestCase {
+public class PreferencesTest {
 
     private File tmpDir;
 
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public final void setUp() throws Exception {
         tmpDir = Files.createTempDirectory("oemgat").toFile();
         assertTrue(tmpDir.isDirectory());
     }
 
-    @Override
-    protected void tearDown() throws Exception {
+    @After
+    public final void tearDown() throws Exception {
         FileUtils.deleteDirectory(tmpDir);
     }
 
@@ -57,6 +64,7 @@ public class PreferencesTest extends TestCase {
      * Test that if an error is encountered when loading the
      * preferences file, the original file is backed up.
      */
+    @Test
     public void testPreferencesBackup() throws Exception {
         File prefsFile = new File(tmpDir, Preferences.FILE_PREFERENCES);
 
@@ -100,6 +108,7 @@ public class PreferencesTest extends TestCase {
         };
     }
 
+    @Test
     public void testPreferencesLoadStore() throws Exception {
         File prefsFile = new File(tmpDir, Preferences.FILE_PREFERENCES);
 

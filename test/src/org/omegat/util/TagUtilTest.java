@@ -26,16 +26,17 @@
 
 package org.omegat.util;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Test;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.TagUtil.Tag;
 import org.omegat.util.TagUtil.TagType;
-
-import junit.framework.TestCase;
 
 /**
  * Tests for tag utility methods.
@@ -43,13 +44,14 @@ import junit.framework.TestCase;
  * @author Alex Buloichik
  * @author Aaron Madlon-Kay
  */
-public class TagUtilTest extends TestCase {
+public class TagUtilTest {
     
     /**
      * Test of buildTagList method, of class org.omegat.util.StaticUtils.
      * 
      * @throws Exception
      */
+    @Test
     public void testBuildTagList() throws Exception {
         TestPreferencesInitializer.init();
 
@@ -81,6 +83,7 @@ public class TagUtilTest extends TestCase {
         assertEquals("Wrong tags found in '" + str + "'", Arrays.asList(new Tag(4, "<test>case</test>")), tagList);
     }
     
+    @Test
     public void testTagType() {
         // Only OmegaT tags (per PatternConsts.OMEGAT_TAG_DECOMPILE) can be
         // anything other than TagType.SINGLE.
@@ -96,6 +99,7 @@ public class TagUtilTest extends TestCase {
         assertEquals(TagType.SINGLE, new Tag(-1, "foo").getType());
     }
     
+    @Test
     public void testTagName() {
         assertEquals("x0", new Tag(-1, "<x0>").getName());
         assertEquals("x10", new Tag(-1, "<x10>").getName());
@@ -108,6 +112,7 @@ public class TagUtilTest extends TestCase {
         assertEquals("foo", new Tag(-1, "foo").getName());
     }
     
+    @Test
     public void testPairedTag() {
         assertEquals("</x0>", new Tag(-1, "<x0>").getPairedTag());
         assertEquals("</x10>", new Tag(-1, "<x10>").getPairedTag());

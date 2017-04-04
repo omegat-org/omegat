@@ -25,6 +25,9 @@
 
 package svn;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
@@ -32,17 +35,16 @@ import java.util.Properties;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
+import org.junit.Test;
 import org.omegat.Main;
 import org.omegat.util.EncodingDetector;
 import org.omegat.util.Language;
-
-import junit.framework.TestCase;
 
 /**
  *
  * @author Aaron Madlon-Kay
  */
-public class BundleTest extends TestCase {
+public class BundleTest {
     
     /**
      * Ensure that all UI string bundles have either US-ASCII encoding
@@ -52,6 +54,7 @@ public class BundleTest extends TestCase {
      * 
      * @see PropertyResourceBundle https://docs.oracle.com/javase/8/docs/api/java/util/PropertyResourceBundle.html
      */
+    @Test
     public void testBundleEncodings() throws Exception {
         // Test English bundle separately as its name corresponds to the
         // empty locale, and will not be resolved otherwise.
@@ -76,6 +79,7 @@ public class BundleTest extends TestCase {
         }
     }
     
+    @Test
     public void testBundleLoading() {
         // We must set the default locale to English first because we provide our
         // English bundle as the empty-locale default. If we don't do so, the
@@ -89,6 +93,7 @@ public class BundleTest extends TestCase {
         }
     }
 
+    @Test
     public void testVersionPropsLoading() {
         ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/Version");
         bundle.getString("version");
@@ -96,11 +101,13 @@ public class BundleTest extends TestCase {
         bundle.getString("revision");
     }
 
+    @Test
     public void testLoggerPropsLoading() {
         ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/logger");
         assertTrue(bundle.getKeys().hasMoreElements());
     }
 
+    @Test
     public void testShortcutPropsLoading() throws Exception {
         ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/gui/main/MainMenuShortcuts");
         assertTrue(bundle.getKeys().hasMoreElements());

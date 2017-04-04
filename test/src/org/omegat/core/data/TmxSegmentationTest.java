@@ -25,8 +25,11 @@
 
 package org.omegat.core.data;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.SRX;
@@ -34,12 +37,10 @@ import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.Language;
 import org.omegat.util.TestPreferencesInitializer;
 
-import junit.framework.TestCase;
+public class TmxSegmentationTest {
 
-public class TmxSegmentationTest extends TestCase {
-
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public final void setUp() throws Exception {
         TestPreferencesInitializer.init();
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
     }

@@ -25,12 +25,16 @@
 
 package org.omegat.filters;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 
+import org.junit.Test;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.subtitles.SrtFilter;
 
 public class SrtFilterTest extends TestFilterBase {
+    @Test
     public void testParse() throws Exception {
         List<String> lines = parse(new SrtFilter(), "test/data/filters/srt/file-SrtFilter.srt");
         assertEquals(lines.size(), 3);
@@ -39,10 +43,12 @@ public class SrtFilterTest extends TestFilterBase {
         assertEquals("Third title\nand again", lines.get(2));
     }
 
+    @Test
     public void testTranslate() throws Exception {
         translateText(new SrtFilter(), "test/data/filters/srt/file-SrtFilter.srt");
     }
 
+    @Test
     public void testLoad() throws Exception {
         String f = "test/data/filters/srt/file-SrtFilter.srt";
         IProject.FileInfo fi = loadSourceFiles(new SrtFilter(), f);
@@ -54,6 +60,7 @@ public class SrtFilterTest extends TestFilterBase {
         checkMultiEnd();
     }
 
+    @Test
     public void testLoadMixedEol() throws Exception {
         String f = "test/data/filters/srt/file-SrtFilter-mixedEol.srt";
         IProject.FileInfo fi = loadSourceFiles(new SrtFilter(), f);

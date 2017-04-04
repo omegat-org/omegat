@@ -25,27 +25,31 @@
 
 package org.omegat.gui.dialogs;
 
+import static org.junit.Assert.assertTrue;
+
 import java.awt.Frame;
 import java.awt.HeadlessException;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.Locale;
 
+import org.junit.Before;
+import org.junit.Test;
 import org.omegat.core.TestCore;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog.Mode;
 
 public class DialogsTest extends TestCore {
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public final void setUp() {
         // Set default locale to English so that uses of old/stale
         // resource keys can't be masked by out-of-date translated
         // resources when runtime locale is not English.
         Locale.setDefault(Locale.ENGLISH);
     }
 
+    @Test
     public void testAboutDialog() {
         try {
             new AboutDialog(null);
@@ -54,6 +58,7 @@ public class DialogsTest extends TestCore {
         }
     }
 
+    @Test
     public void testCreateGlossaryEntryDialog() {
         try {
             new CreateGlossaryEntry(null);
@@ -62,6 +67,7 @@ public class DialogsTest extends TestCore {
         }
     }
 
+    @Test
     public void testDictionaryInstallerDialog() {
         try {
             new DictionaryInstallerDialog(null, null);
@@ -70,6 +76,7 @@ public class DialogsTest extends TestCore {
         }
     }
 
+    @Test
     public void testFileCollisionDialog() {
         try {
             new FileCollisionDialog((Frame) null);
@@ -78,6 +85,7 @@ public class DialogsTest extends TestCore {
         }
     }
 
+    @Test
     public void testFilenamePatternsEditor() {
         try {
             new FilenamePatternsEditor(null, true);
@@ -86,6 +94,7 @@ public class DialogsTest extends TestCore {
         }
     }
 
+    @Test
     public void testGoToSegmentDialog() {
         try {
             new GoToSegmentDialog(null);
@@ -94,6 +103,7 @@ public class DialogsTest extends TestCore {
         }
     }
 
+    @Test
     public void testLastChangesDialog() {
         try {
             new LastChangesDialog(null);
@@ -102,6 +112,7 @@ public class DialogsTest extends TestCore {
         }
     }
 
+    @Test
     public void testLicenseDialog() {
         try {
             new LicenseDialog(null);
@@ -110,6 +121,7 @@ public class DialogsTest extends TestCore {
         }
     }
 
+    @Test
     public void testLogDialog() {
         try {
             new LogDialog(null);
@@ -118,6 +130,7 @@ public class DialogsTest extends TestCore {
         }
     }
 
+    @Test
     public void testNewProjectFileChooser() {
         try {
             new NewProjectFileChooser();
@@ -126,6 +139,7 @@ public class DialogsTest extends TestCore {
         }
     }
 
+    @Test
     public void testNewTeamProject() {
         try {
             new NewTeamProject(null);
@@ -134,6 +148,7 @@ public class DialogsTest extends TestCore {
         }
     }
 
+    @Test
     public void testProjectPropertiesDialog() throws Exception {
         File dir = Files.createTempDirectory("omegat").toFile();
         try {

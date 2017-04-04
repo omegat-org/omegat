@@ -27,11 +27,17 @@
 
 package org.omegat.gui.glossary;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.SwingUtilities;
 
+import org.junit.Before;
+import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 import org.omegat.core.TestCoreInitializer;
@@ -55,6 +61,7 @@ public class GlossaryTextAreaTest extends TestCore {
     /**
      * Testing setGlossaryEntries of org.omegat.gui.main.GlossaryTextArea.
      */
+    @Test
     public void testSetGlossaryEntries() throws Exception {
         Preferences.setPreference(org.omegat.util.Preferences.TRANSTIPS, false);
 
@@ -76,6 +83,7 @@ public class GlossaryTextAreaTest extends TestCore {
     /**
      * Testing clear in org.omegat.gui.main.GlossaryTextArea.
      */
+    @Test
     public void testClear() throws Exception {
         Preferences.setPreference(org.omegat.util.Preferences.TRANSTIPS, false);
 
@@ -93,9 +101,8 @@ public class GlossaryTextAreaTest extends TestCore {
         assertTrue(gta.getText().isEmpty());
     }
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public final void setUp() {
         TestCoreInitializer.initEditor(new IEditor() {
             public void activateEntry() {
             }

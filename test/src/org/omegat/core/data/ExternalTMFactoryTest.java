@@ -25,9 +25,14 @@
 
 package org.omegat.core.data;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.util.Arrays;
 
+import org.junit.Before;
+import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 import org.omegat.core.segmentation.SRX;
@@ -39,9 +44,8 @@ import org.omegat.util.Language;
 
 public class ExternalTMFactoryTest extends TestCore {
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public final void setUp() {
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
         FilterMaster.setFilterClasses(Arrays.asList(PoFilter.class, MozillaLangFilter.class));
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
@@ -67,6 +71,7 @@ public class ExternalTMFactoryTest extends TestCore {
         });
     }
 
+    @Test
     public void testLoadTMX() throws Exception {
         File tmxFile = new File("test/data/tmx/resegmenting.tmx");
 
@@ -81,6 +86,7 @@ public class ExternalTMFactoryTest extends TestCore {
         assertEquals("Juste un test.", tmx.getEntries().get(1).translation);
     }
 
+    @Test
     public void testLoadPO() throws Exception {
         File tmxFile = new File("test/data/filters/po/file-POFilter-be-utf8.po");
 
@@ -100,6 +106,7 @@ public class ExternalTMFactoryTest extends TestCore {
                 tmx.getEntries().get(1).translation);
     }
 
+    @Test
     public void testLoadMozillaLang() throws Exception {
         File tmxFile = new File("test/data/filters/MozillaLang/file-MozillaLangFilter-de.lang");
 

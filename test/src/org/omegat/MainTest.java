@@ -25,35 +25,41 @@
 
 package org.omegat;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.util.OConsts;
 import org.omegat.util.ProjectFileStorage;
 
-import junit.framework.TestCase;
-
-public class MainTest extends TestCase {
+public class MainTest {
 
     private static Path tmpDir;
 
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public final void setUp() throws Exception {
         tmpDir = Files.createTempDirectory("omegat");
         assertTrue(tmpDir.toFile().isDirectory());
     }
 
-    @Override
-    protected void tearDown() throws Exception {
+    @After
+    public final void tearDown() throws Exception {
         FileUtils.deleteDirectory(tmpDir.toFile());
         assertFalse(tmpDir.toFile().exists());
     }
 
-    public static void testConsoleTranslate() throws Exception {
+    @Test
+    public void testConsoleTranslate() throws Exception {
         // Create project properties
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         // Create project internal directories

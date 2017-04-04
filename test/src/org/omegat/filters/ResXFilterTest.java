@@ -25,11 +25,13 @@
 
 package org.omegat.filters;
 
+import org.junit.Test;
 import org.omegat.core.data.IProject;
 import org.omegat.filters3.xml.resx.ResXFilter;
 
 public class ResXFilterTest extends TestFilterBase {
 
+    @Test
     public void testLoad() throws Exception {
         String f = "test/data/filters/ResX/Resources.resx";
         IProject.FileInfo fi = loadSourceFiles(new ResXFilter(), f);

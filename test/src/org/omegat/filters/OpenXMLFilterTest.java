@@ -25,6 +25,8 @@
 
 package org.omegat.filters;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.net.URL;
 import java.util.List;
@@ -34,6 +36,7 @@ import org.omegat.core.data.IProject;
 import org.omegat.filters3.xml.openxml.OpenXMLFilter;
 
 public class OpenXMLFilterTest extends TestFilterBase {
+    @Test
     public void testParse() throws Exception {
         List<String> entries = parse(new OpenXMLFilter(), "test/data/filters/openXML/file-OpenXMLFilter.docx");
         assertEquals(2, entries.size());
@@ -41,6 +44,7 @@ public class OpenXMLFilterTest extends TestFilterBase {
         assertEquals("This is second line.", entries.get(1));
     }
 
+    @Test
     public void testTranslate() throws Exception {
         File in = new File("test/data/filters/openXML/file-OpenXMLFilter.docx");
         translate(new OpenXMLFilter(), in.getPath());

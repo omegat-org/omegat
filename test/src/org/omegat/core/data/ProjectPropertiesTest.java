@@ -25,9 +25,12 @@
 
 package org.omegat.core.data;
 
-import java.io.File;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import junit.framework.TestCase;
+import java.io.File;
 
 import org.junit.Test;
 import org.omegat.util.Platform;
@@ -37,7 +40,7 @@ import org.omegat.util.Platform;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class ProjectPropertiesTest extends TestCase {
+public class ProjectPropertiesTest {
 
     @Test
     public void test1() {

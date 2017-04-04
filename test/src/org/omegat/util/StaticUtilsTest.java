@@ -27,10 +27,14 @@
 
 package org.omegat.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.util.regex.Pattern;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * Tests for (some) static utility methods.
@@ -38,8 +42,9 @@ import junit.framework.TestCase;
  * @author Maxym Mykhalchuk
  * @author Aaron Madlon-Kay
  */
-public class StaticUtilsTest extends TestCase {
+public class StaticUtilsTest {
 
+    @Test
     public void testParseCLICommand() {
         String cmd = " sort  \"/path with/spaces in/it\"    /path\\ with/escaped\\ spaces/"
                 + " \"escape\\\"escape\" 'noescape\\'noescape'' \"noescape\\ noescape\""
@@ -57,6 +62,7 @@ public class StaticUtilsTest extends TestCase {
         assertEquals(args.length, 1);
     }
 
+    @Test
     public void testInstallDir() {
         File installDir = new File(StaticUtils.installDir());
 
@@ -67,6 +73,7 @@ public class StaticUtilsTest extends TestCase {
         }
     }
 
+    @Test
     public void testGlobToRegex() {
         assertTrue(Pattern.matches(StaticUtils.globToRegex("ab?d", false), "abcd"));
         assertFalse(Pattern.matches(StaticUtils.globToRegex("ab?d", false), "abd"));

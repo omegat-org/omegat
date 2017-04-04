@@ -26,7 +26,11 @@
 
 package org.omegat.filters;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
+
 import org.junit.Test;
 import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
@@ -58,7 +62,7 @@ public class ILIASFilterTest extends TestFilterBase {
     }
 
     @Test
-   public void testAlign() throws Exception {
+    public void testAlign() throws Exception {
         final AlignResultHolder alignResult = new AlignResultHolder();
         
         align(new ILIASFilter(), "ilias/ILIASFilterAlign.lang",

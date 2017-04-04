@@ -36,7 +36,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import org.apache.commons.io.FileUtils;
-import org.custommonkey.xmlunit.XMLTestCase;
+import org.junit.After;
+import org.junit.Before;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
@@ -49,10 +50,11 @@ import com.vlsolutions.swing.docking.Dockable;
  * 
  * @author Alexander_Buloichik
  */
-public abstract class TestCore extends XMLTestCase {
+public abstract class TestCore {
     protected File configDir;
 
-    protected void setUp() throws Exception {
+    @Before
+    public final void setUpCore() throws Exception {
         configDir = Files.createTempDirectory("omegat").toFile();
         TestPreferencesInitializer.init(configDir.getAbsolutePath());
 
@@ -153,8 +155,8 @@ public abstract class TestCore extends XMLTestCase {
         Core.setCurrentProject(new NotLoadedProject());
     }
 
-    @Override
-    protected void tearDown() throws Exception {
+    @After
+    public final void tearDownCore() throws Exception {
         FileUtils.deleteDirectory(configDir);
     }
 }

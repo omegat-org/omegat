@@ -25,19 +25,22 @@
 
 package org.omegat.gui.matches;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Before;
+import org.junit.Test;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.TestPreferencesInitializer;
 
-import junit.framework.TestCase;
+public class MatchesTextAreaTest {
 
-public class MatchesTextAreaTest extends TestCase {
-
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public final void setUp() throws Exception {
         TestPreferencesInitializer.init();
     }
 
+    @Test
     public void testReplaceNumbers() {
         ITokenizer tok = new DefaultTokenizer();
 

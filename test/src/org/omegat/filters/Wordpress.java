@@ -25,15 +25,19 @@
  **************************************************************************/
 package org.omegat.filters;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 
+import org.junit.Test;
 import org.omegat.filters3.xml.wordpress.WordpressFilter;
 
 public class Wordpress extends TestFilterBase {
+    @Test
     public void testParse() throws Exception {
         List<String> lines = parse(new WordpressFilter(),
                 "test/data/filters/wordpress/Wordpress.xml", null);
-        assertTrue(lines.size()== 3);
+        assertEquals(3, lines.size());
         assertEquals("This is a description", lines.get(0));
     }
 

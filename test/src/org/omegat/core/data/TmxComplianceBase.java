@@ -72,7 +72,7 @@ public abstract class TmxComplianceBase {
     public TestName name = new TestName();
 
     @Before
-    public void setUp() throws Exception {
+    public final void setUp() throws Exception {
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
         TestPreferencesInitializer.init();

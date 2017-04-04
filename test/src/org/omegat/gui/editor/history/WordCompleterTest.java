@@ -25,13 +25,18 @@
 
 package org.omegat.gui.editor.history;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.Arrays;
 import java.util.Collections;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class WordCompleterTest extends TestCase {
+public class WordCompleterTest {
 
+    @Test
     public void testWordCompletion() {
         WordCompleter c = new WordCompleter();
 
@@ -56,6 +61,7 @@ public class WordCompleterTest extends TestCase {
         assertEquals(Collections.emptyList(), c.completeWord("Fooba"));
     }
 
+    @Test
     public void testReset() {
         WordCompleter c = new WordCompleter();
         c.train("foob foobar foobaz foobiz".split(" "));
@@ -67,6 +73,7 @@ public class WordCompleterTest extends TestCase {
         assertEquals(Collections.emptyList(), c.completeWord("foo"));
     }
 
+    @Test
     public void testEmptyInput() {
         WordCompleter c = new WordCompleter();
 

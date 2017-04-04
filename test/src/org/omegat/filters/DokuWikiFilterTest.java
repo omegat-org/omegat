@@ -26,6 +26,10 @@
 
 package org.omegat.filters;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.util.List;
 import java.util.TreeMap;
@@ -71,6 +75,7 @@ public class DokuWikiFilterTest extends TestFilterBase {
                 new TreeMap<String, String>(), context));
     }
 
+    @Test
     public void testLoad() throws Exception {
         String f = "test/data/filters/dokuwiki/dokuwiki.txt";
         IProject.FileInfo fi = loadSourceFiles(new DokuWikiFilter(), f);
@@ -81,6 +86,7 @@ public class DokuWikiFilterTest extends TestFilterBase {
         checkMulti("multiple spaces in text", null, null, "This is a flow text.", "* asterisk * asterisk", null);
     }
 
+    @Test
     public void testDetectHeadingLevel() {
         assertEquals(0, DokuWikiFilter.getHeadingLevel(""));
         assertEquals(0, DokuWikiFilter.getHeadingLevel("abc"));

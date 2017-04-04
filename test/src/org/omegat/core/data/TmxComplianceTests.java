@@ -150,8 +150,8 @@ public class TmxComplianceTests extends TmxComplianceBase {
     /**
      * Test Import1K - No Import
      */
-    @Test
     @Ignore
+    @Test
     public void testImport1K() throws Exception {
         ProjectProperties props = new TestProjectProperties("EN-US", "EN-GB");
         final ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), new File("test/data/tmx/TMXComplianceKit/ImportTest1K.tmx"),

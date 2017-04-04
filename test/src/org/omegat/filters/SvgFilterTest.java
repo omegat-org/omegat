@@ -25,11 +25,13 @@
 
 package org.omegat.filters;
 
+import org.junit.Test;
 import org.omegat.core.data.IProject;
 import org.omegat.filters3.xml.svg.SvgFilter;
 
 public class SvgFilterTest extends TestFilterBase {
 
+    @Test
     public void testLoad() throws Exception {
         String f = "test/data/filters/SVG/Neural_network_example.svg";
         IProject.FileInfo fi = loadSourceFiles(new SvgFilter(), f);

@@ -25,6 +25,10 @@
 
 package org.omegat.core.dictionaries;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+
 import java.io.File;
 import java.util.List;
 import java.util.Locale;
@@ -34,15 +38,13 @@ import org.junit.Test;
 import org.omegat.core.dictionaries.LingvoDSL.LingvoDSLDict;
 import org.omegat.util.Language;
 
-import junit.framework.TestCase;
-
 /**
  * Dictionary test
  *
  * @author Hiroshi Miura
  * @author Aaron Madlon-Kay
  */
-public class LingvoDSLTest extends TestCase {
+public class LingvoDSLTest {
 
     private static final Language ENGLISH = new Language(Locale.ENGLISH);
     private static final File TEST_DICT = new File("test/data/dicts-lingvo/test.dsl");

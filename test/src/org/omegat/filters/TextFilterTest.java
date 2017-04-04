@@ -25,6 +25,8 @@
 
 package org.omegat.filters;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +43,7 @@ public class TextFilterTest extends TestFilterBase {
         assertEquals("First entry\r\n", entries.get(0));
     }
 
+    @Test
     public void testTranslate() throws Exception {
         translateText(new TextFilter(), "test/data/filters/text/text1.txt");
     }

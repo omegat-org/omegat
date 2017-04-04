@@ -26,9 +26,14 @@
 
 package org.omegat.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.Locale;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * Tests for (some) static utility methods.
@@ -36,7 +41,8 @@ import junit.framework.TestCase;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
-public class StringUtilTest extends TestCase {
+public class StringUtilTest {
+    @Test
     public void testIsSubstringAfter() {
         assertFalse(StringUtil.isSubstringAfter("123456", 5, "67"));
         assertTrue(StringUtil.isSubstringAfter("123456", 5, "6"));
@@ -45,6 +51,7 @@ public class StringUtilTest extends TestCase {
         assertTrue(StringUtil.isSubstringAfter("123456", 1, "23"));
     }
 
+    @Test
     public void testIsTitleCase() {
         assertFalse(StringUtil.isTitleCase("foobar"));
         assertFalse(StringUtil.isTitleCase("fooBar"));
@@ -64,6 +71,7 @@ public class StringUtilTest extends TestCase {
         assertFalse(StringUtil.isTitleCase("\u01c9"));
     }
     
+    @Test
     public void testIsSubstringBefore() {
         assertFalse(StringUtil.isSubstringBefore("123456", 1, "01"));
         assertTrue(StringUtil.isSubstringBefore("123456", 1, "1"));
@@ -72,6 +80,7 @@ public class StringUtilTest extends TestCase {
         assertTrue(StringUtil.isSubstringBefore("123456", 5, "45"));
     }
     
+    @Test
     public void testUnicodeNonBMP() {
         // MATHEMATICAL BOLD CAPITAL A (U+1D400)
         String test = "\uD835\uDC00";
@@ -104,6 +113,7 @@ public class StringUtilTest extends TestCase {
         assertFalse(StringUtil.isTitleCase(test));
     }
     
+    @Test
     public void testAlphanumericStringCase() {
         String test = "MQL5";
         assertTrue(StringUtil.isUpperCase(test));
@@ -130,6 +140,7 @@ public class StringUtilTest extends TestCase {
         assertTrue(StringUtil.isMixedCase(test));
     }
     
+    @Test
     public void testEmptyStringCase() {
         String test = null;
         try {
@@ -164,6 +175,7 @@ public class StringUtilTest extends TestCase {
         assertEquals("", StringUtil.toTitleCase("", Locale.ENGLISH));
     }
     
+    @Test
     public void testIsWhiteSpace() {
         try {
             assertFalse(StringUtil.isWhiteSpace(null));
@@ -181,6 +193,7 @@ public class StringUtilTest extends TestCase {
         assertTrue(StringUtil.isWhiteSpace("\u00a0\u2007\u202f"));
     }
     
+    @Test
     public void testIsMixedCase() {
         assertTrue(StringUtil.isMixedCase("ABc"));
         assertTrue(StringUtil.isMixedCase("aBc"));
@@ -190,6 +203,7 @@ public class StringUtilTest extends TestCase {
         assertTrue(StringUtil.isMixedCase(" {ABc"));
     }
     
+    @Test
     public void testNonWordCase() {
         String test = "{";
         assertFalse(StringUtil.isLowerCase(test));
@@ -198,6 +212,7 @@ public class StringUtilTest extends TestCase {
         assertFalse(StringUtil.isMixedCase(test));
     }
     
+    @Test
     public void testToTitleCase() {
         Locale locale = Locale.ENGLISH;
         assertEquals("Abc", StringUtil.toTitleCase("abc", locale));
@@ -217,11 +232,13 @@ public class StringUtilTest extends TestCase {
         assertEquals(test, StringUtil.toTitleCase(test, locale));
     }
     
+    @Test
     public void testCompressSpace() {
         assertEquals("One Two Three Four Five", StringUtil.compressSpaces(" One Two\nThree   Four\r\nFive "));
         assertEquals("Six seven", StringUtil.compressSpaces("Six\tseven"));
     }
     
+    @Test
     public void testIsValidXMLChar() {
         assertFalse(StringUtil.isValidXMLChar(0x01));
         assertTrue(StringUtil.isValidXMLChar(0x09));
@@ -238,6 +255,7 @@ public class StringUtilTest extends TestCase {
         assertFalse(StringUtil.isValidXMLChar(0x110000));
     }
 
+    @Test
     public void testCapitalizeFirst() {
         Locale locale = Locale.ENGLISH;
         assertEquals("Abc", StringUtil.capitalizeFirst("abc", locale));
@@ -252,6 +270,7 @@ public class StringUtilTest extends TestCase {
         assertEquals("\u0130jk", StringUtil.capitalizeFirst("ijk", new Locale("tr")));
     }
     
+    @Test
     public void testMatchCapitalization() {
         Locale locale = Locale.ENGLISH;
         String text = "foo";
@@ -275,6 +294,7 @@ public class StringUtilTest extends TestCase {
         assertEquals(text, StringUtil.matchCapitalization(text, ".", locale));
     }
 
+    @Test
     public void testFirstN() {
         // MATHEMATICAL BOLD CAPITAL A (U+1D400) x2
         String test = "\uD835\uDC00\uD835\uDC00";
@@ -284,6 +304,7 @@ public class StringUtilTest extends TestCase {
         assertEquals(test, StringUtil.firstN(test, 100));
     }
 
+    @Test
     public void testTruncateString() {
         // MATHEMATICAL BOLD CAPITAL A (U+1D400) x3
         String test = "\uD835\uDC00\uD835\uDC00\uD835\uDC00";
@@ -299,6 +320,7 @@ public class StringUtilTest extends TestCase {
         assertEquals(test, StringUtil.truncate(test, 100));
     }
 
+    @Test
     public void testNormalizeWidth() {
         String test = "Foo 123 " // ASCII
                 + "\uFF26\uFF4F\uFF4F\u3000\uFF11\uFF12\uFF13 " // Full-width alphanumerics
@@ -322,6 +344,7 @@ public class StringUtilTest extends TestCase {
         assertEquals("\u30a2\u30a2\u30ac\u30ac ", StringUtil.normalizeWidth(test));
     }
     
+    @Test
     public void testRstrip() {
         assertEquals("", StringUtil.rstrip(""));
         assertEquals("", StringUtil.rstrip(" "));

@@ -24,15 +24,19 @@
  **************************************************************************/
 package org.omegat.gui.glossary;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.util.List;
 
+import org.junit.Test;
 import org.omegat.core.TestCore;
 
 /**
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
 public class GlossaryReaderTSVTest extends TestCore {
+    @Test
     public void testRead() throws Exception {
         List<GlossaryEntry> g = GlossaryReaderTSV.read(new File(
                 "test/data/glossaries/test.tab"), false);
@@ -53,6 +57,7 @@ public class GlossaryReaderTSVTest extends TestCore {
         assertEquals(g.get(1).getCommentText(), "Comment #2");
     }
 
+    @Test
     public void testCharset() throws Exception {
         // TODO
     }

@@ -25,6 +25,10 @@
 
 package org.omegat.core.dictionaries;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -39,14 +43,12 @@ import org.omegat.gui.dictionaries.IDictionaries;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.util.Language;
 
-import junit.framework.TestCase;
-
 /**
  *
  * @author Hiroshi Miura
  * @author Aaron Madlon-Kay
  */
-public class DictionariesManagerTest extends TestCase {
+public class DictionariesManagerTest {
     
     private static final String DICTS_DIR = "test/data/dicts";
     private static final File IGNORE_FILE = new File(DICTS_DIR, DictionariesManager.IGNORE_FILE);
@@ -57,7 +59,7 @@ public class DictionariesManagerTest extends TestCase {
     private DictionariesManager manager;
     
     @Before
-    public void setUp() throws Exception {
+    public final void setUp() throws Exception {
         manager = new DictionariesManager(new IDictionaries() {
             @Override
             public void refresh() {
@@ -84,7 +86,7 @@ public class DictionariesManagerTest extends TestCase {
     }
     
     @After
-    public void tearDown() {
+    public final void tearDown() {
         assertTrue(IGNORE_FILE.delete());
     }
 

@@ -24,12 +24,16 @@
  **************************************************************************/
 package org.omegat.filters;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 
+import org.junit.Test;
 import org.omegat.core.data.IProject;
 import org.omegat.filters3.xml.android.AndroidFilter;
 
 public class AndroidFilterTest extends TestFilterBase {
+    @Test
     public void testParse() throws Exception {
         List<ParsedEntry> lines = parse3(new AndroidFilter(),
                 "test/data/filters/Android/file-AndroidFilter.xml", null);
@@ -40,10 +44,12 @@ public class AndroidFilterTest extends TestFilterBase {
         assertTrue("T'est".equals(lines.get(2).source));
     }
 
+    @Test
     public void testTranslate() throws Exception {
         translateXML(new AndroidFilter(), "test/data/filters/Android/file-AndroidFilter.xml");
     }
 
+    @Test
     public void testLoad() throws Exception {
         String f = "test/data/filters/Android/file-AndroidFilter.xml";
         IProject.FileInfo fi = loadSourceFiles(new AndroidFilter(), f);

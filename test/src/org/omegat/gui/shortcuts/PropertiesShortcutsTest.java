@@ -87,7 +87,7 @@ public class PropertiesShortcutsTest {
     }
 
     @Before
-    public void setUp() throws IOException {
+    public final void setUp() throws IOException {
         shortcuts = new PropertiesShortcuts();
         assertTrue(shortcuts.isEmpty());
         shortcuts.loadFromClasspath(BUNDLED_ROOT + USER_FILE_NAME);
@@ -96,7 +96,7 @@ public class PropertiesShortcutsTest {
     }
 
     @After
-    public void tearDown() {
+    public final void tearDown() {
         shortcuts = null;
     }
 

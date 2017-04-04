@@ -25,15 +25,21 @@
 
 package org.omegat.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class MixedEolHandlingReaderTest extends TestCase {
+public class MixedEolHandlingReaderTest {
 
+    @Test
     public void testDetection() throws Exception {
         String none = "a";
         try (MixedEolHandlingReader reader = new MixedEolHandlingReader(new StringReader(none))) {
@@ -95,6 +101,7 @@ public class MixedEolHandlingReaderTest extends TestCase {
         }
     }
 
+    @Test
     public void testReadLine() throws Exception {
         String cr = "a\rb\rc";
         try (MixedEolHandlingReader reader = new MixedEolHandlingReader(new StringReader(cr))) {
@@ -125,6 +132,7 @@ public class MixedEolHandlingReaderTest extends TestCase {
         }
     }
 
+    @Test
     public void testFile() throws Exception {
         try (MixedEolHandlingReader reader = new MixedEolHandlingReader(
                 Files.newBufferedReader(Paths.get("test/data/filters/text/file-TextFilter.txt"),

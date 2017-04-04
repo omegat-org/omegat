@@ -25,10 +25,15 @@
 
 package org.omegat.filters;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 
+import org.junit.Before;
+import org.junit.Test;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.FiltersUtil;
 import org.omegat.filters2.text.TextFilter;
@@ -36,19 +41,19 @@ import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 
 import gen.core.filters.Files;
 import gen.core.filters.Filters;
-import junit.framework.TestCase;
 
 /**
  * @author Aaron Madlon-Kay
  */
-public class FiltersTest extends TestCase {
+public class FiltersTest {
 
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public final void setUp() {
         FilterMaster.setFilterClasses(Arrays.asList(TextFilter.class, ResourceBundleFilter.class));
     }
 
-    public static void testFiltersComparison() {
+    @Test
+    public void testFiltersComparison() {
         Filters orig = FilterMaster.createDefaultFiltersConfig();
         Filters clone = FilterMaster.createDefaultFiltersConfig();
         assertNotSame(orig, clone);

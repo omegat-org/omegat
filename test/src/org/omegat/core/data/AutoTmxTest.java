@@ -24,10 +24,14 @@
  **************************************************************************/
 package org.omegat.core.data;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.SRX;
@@ -35,18 +39,16 @@ import org.omegat.core.segmentation.Segmenter;
 import org.omegat.tokenizer.LuceneFrenchTokenizer;
 import org.omegat.util.TestPreferencesInitializer;
 
-import junit.framework.TestCase;
-
 /**
  * Tests for tm/auto/ tmx loading with replace translations.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class AutoTmxTest extends TestCase {
+public class AutoTmxTest {
     RealProject p;
 
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public final void setUp() throws Exception {
         TestPreferencesInitializer.init();
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
     }

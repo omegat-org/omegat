@@ -25,6 +25,10 @@
 
 package org.omegat.filters;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.net.URL;
@@ -43,6 +47,10 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.io.FileUtils;
+import org.custommonkey.xmlunit.XMLAssert;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.rules.TestName;
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 import org.omegat.core.data.EntryKey;
@@ -77,14 +85,16 @@ public abstract class TestFilterBase extends TestCore {
 
     protected File outFile;
 
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Rule
+    public TestName name = new TestName();
 
+    @Before
+    public final void setUpFilterBase() throws Exception {
         Core.initializeConsole(Collections.emptyMap());
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         Core.setProject(new TestProject(new ProjectPropertiesTest()));
 
-        outFile = new File("build/testdata/OmegaT_test-" + getClass().getName() + "-" + getName());
+        outFile = new File("build/testdata/OmegaT_test-" + getClass().getName() + "-" + name.getMethodName());
         outFile.getParentFile().mkdirs();
     }
 
@@ -312,7 +322,7 @@ public abstract class TestFilterBase extends TestCore {
         n = (Node) exprTool.evaluate(doc2, XPathConstants.NODE);
         n.setNodeValue("");
 
-        assertXMLEqual(doc1, doc2);
+        XMLAssert.assertXMLEqual(doc1, doc2);
     }
 
     protected void compareXML(File f1, File f2) throws Exception {
@@ -320,7 +330,7 @@ public abstract class TestFilterBase extends TestCore {
     }
 
     protected void compareXML(URL f1, URL f2) throws Exception {
-        assertXMLEqual(new InputSource(f1.toExternalForm()), new InputSource(f2.toExternalForm()));
+        XMLAssert.assertXMLEqual(new InputSource(f1.toExternalForm()), new InputSource(f2.toExternalForm()));
     }
 
     protected static class ParsedEntry {

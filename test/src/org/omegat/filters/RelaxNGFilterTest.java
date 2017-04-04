@@ -26,32 +26,40 @@
 
 package org.omegat.filters;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.BufferedReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import org.junit.Test;
 import org.omegat.core.data.IProject;
 import org.omegat.filters3.xml.relaxng.RelaxNGFilter;
 
 public class RelaxNGFilterTest extends TestFilterBase {
+    @Test
     public void testParse() throws Exception {
         List<String> lines = parse(new RelaxNGFilter(), "test/data/filters/relaxng/relaxng.rng");
         boolean c = lines.contains("RELAX NG is a schema language for XML.");
         assertTrue("'RELAX NG is a schema language for XML.' not defined'", c);
     }
 
+    @Test
     public void testTranslate() throws Exception {
         translateText(new RelaxNGFilter(), "test/data/filters/relaxng/relaxng.rng");
     }
 
+    @Test
     public void testParseIntroLinux() throws Exception {
         List<String> lines = parse(new RelaxNGFilter(), "test/data/filters/relaxng/relaxng.rng");
         assertTrue("Message not exist, i.e. entities not loaded",
                 lines.contains("RELAX NG is a schema language for XML."));
     }
 
+    @Test
     public void testLoad() throws Exception {
         String f = "test/data/filters/relaxng/relaxng.rng";
         IProject.FileInfo fi = loadSourceFiles(new RelaxNGFilter(), f);
@@ -60,6 +68,7 @@ public class RelaxNGFilterTest extends TestFilterBase {
         checkMulti("RELAX NG is a schema language for XML.", null, null, "", "RELAX NG is simple and easy to learn.", null);
     }
 
+    @Test
     public void testIsSupported() throws Exception {
         RelaxNGFilter filter = new RelaxNGFilter();
         Path goodFile = Paths.get("test/data/filters/relaxng/relaxng.rng");

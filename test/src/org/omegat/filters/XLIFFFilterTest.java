@@ -26,6 +26,11 @@
 
 package org.omegat.filters;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -34,6 +39,7 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
@@ -53,9 +59,8 @@ import org.xml.sax.SAXException;
 public class XLIFFFilterTest extends TestFilterBase {
     XLIFFFilter filter;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public final void setUp() {
         filter = new XLIFFFilter();
         XLIFFDialect dialect = (XLIFFDialect) filter.getDialect();
         dialect.defineDialect(new XLIFFOptions(new TreeMap<String, String>()));
@@ -261,6 +266,7 @@ public class XLIFFFilterTest extends TestFilterBase {
         }
     }
 
+    @Test
     public void testProperties() throws Exception {
         String f = "test/data/filters/xliff/file-XLIFFFilter-properties.xlf";
         IProject.FileInfo fi = loadSourceFiles(filter, f);

@@ -25,18 +25,22 @@
 
 package org.omegat.filters;
 
+import org.junit.Test;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.text.ini.INIFilter;
 
 public class INIFilterTest extends TestFilterBase {
+    @Test
     public void testParse() throws Exception {
         parse(new INIFilter(), "test/data/filters/ini/file-INIFilter.ini");
     }
 
+    @Test
     public void testTranslate() throws Exception {
         translateText(new INIFilter(), "test/data/filters/ini/file-INIFilter.ini");
     }
 
+    @Test
     public void testLoad() throws Exception {
         String f = "test/data/filters/ini/file-INIFilter.ini";
         IProject.FileInfo fi = loadSourceFiles(new INIFilter(), f);

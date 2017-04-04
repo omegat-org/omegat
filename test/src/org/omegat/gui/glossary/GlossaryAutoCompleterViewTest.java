@@ -25,12 +25,17 @@
 
 package org.omegat.gui.glossary;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Stream;
 
+import org.junit.Before;
+import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 import org.omegat.core.TestCoreInitializer;
@@ -53,6 +58,7 @@ public class GlossaryAutoCompleterViewTest extends TestCore {
 
     private final List<GlossaryEntry> currentEntries = new ArrayList<>();
 
+    @Test
     public void testSuggestions() {
         GlossaryAutoCompleterView view = new GlossaryAutoCompleterView();
         List<AutoCompleterItem> result = view.computeListData("blah", false);
@@ -114,9 +120,8 @@ public class GlossaryAutoCompleterViewTest extends TestCore {
         assertEquals("foo", result.get(0).payload);
     }
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public final void setUp() {
         Core.setProject(new NotLoadedProject() {
             @Override
             public ITokenizer getTargetTokenizer() {

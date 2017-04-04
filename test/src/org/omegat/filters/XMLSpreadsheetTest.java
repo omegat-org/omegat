@@ -25,11 +25,16 @@
  **************************************************************************/
 package org.omegat.filters;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 
+import org.junit.Test;
 import org.omegat.filters3.xml.xmlspreadsheet.XMLSpreadsheetFilter;
 
 public class XMLSpreadsheetTest extends TestFilterBase {
+    @Test
     public void testParse() throws Exception {
         List<String> lines = parse(new XMLSpreadsheetFilter(),
                 "test/data/filters/XMLSpreadsheet/XMLSpreadsheet2003.xml", null);
@@ -37,6 +42,7 @@ public class XMLSpreadsheetTest extends TestFilterBase {
         assertEquals("This is a test sentence with <b>HTML tags</b> inside.", lines.get(0));
     }
 
+    @Test
     public void testTranslate() throws Exception {
         translateXML(new XMLSpreadsheetFilter(), "test/data/filters/XMLSpreadsheet/XMLSpreadsheet2003.xml");
     }

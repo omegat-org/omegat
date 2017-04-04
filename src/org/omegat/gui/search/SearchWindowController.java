@@ -241,12 +241,12 @@ public class SearchWindowController {
             }
         });
         
-        form.m_authorField.enterActionListener = new ActionListener() {
+        form.m_authorField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 doSearch();
             }
-        };
+        });
 
         form.m_dateToCB.addActionListener(new ActionListener() {
             @Override

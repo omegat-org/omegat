@@ -28,23 +28,10 @@
 
 package org.omegat.gui.search;
 
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.KeyEvent;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JTextField;
-import javax.swing.KeyStroke;
-import javax.swing.text.Document;
-import javax.swing.text.PlainDocument;
-import javax.swing.text.StringContent;
-import javax.swing.undo.UndoManager;
+import org.omegat.util.gui.HintTextField;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * "Default text" feature inspired by http://stackoverflow.com/a/1739037/448068
@@ -55,122 +42,24 @@ import javax.swing.undo.UndoManager;
  *  @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
-public class MFindField extends JTextField implements FocusListener {
+public class MFindField extends HintTextField {
+    
+    private final Font normalFont;
+
     public MFindField() {
-        // Handle undo (CtrlCmd+Z);
-        KeyStroke undo = KeyStroke.getKeyStroke(KeyEvent.VK_Z,
-                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(), false);
-        Action undoAction = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                undo();
-            }
-        };
-        getInputMap().put(undo, "UNDO");
-        getActionMap().put("UNDO", undoAction);
-
-        // Handle redo (CtrlCmd+Y);
-        KeyStroke redo = KeyStroke.getKeyStroke(KeyEvent.VK_Y,
-                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(), false);
-        Action redoAction = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                redo();
-            }
-        };
-        getInputMap().put(redo, "REDO");
-        getActionMap().put("REDO", redoAction);
-        
-        defaultText = null;
         normalFont = getFont();
-        defaultTextFont = normalFont.deriveFont(Font.ITALIC);
-        normalColor = getForeground();
-        isDirty = false;
-        addFocusListener(this);
-    }
-
-    public void setDefaultText(String text) {
-        defaultText = text;
-        if (getText().isEmpty()) {
-            showDefaultText();
-        }
-    }
-    
-    private void showDefaultText() {
-        setText(defaultText);
-        setFont(defaultTextFont);
-        setForeground(getDisabledTextColor());
-        isDirty = false;
+        StaticUIUtils.makeUndoable(this);
     }
 
     @Override
-    protected Document createDefaultModel() {
-        PlainDocument doc = new PlainDocument(new StringContent());
-        // doc.addDocumentListener(this);
-        undoManager = new UndoManager();
-        doc.addUndoableEditListener(undoManager);
-        return doc;
+    protected void applyHintStyle() {
+        super.applyHintStyle();
+        setFont(normalFont.deriveFont(Font.ITALIC));
     }
 
     @Override
-    protected void processKeyEvent(KeyEvent e) {
-        if (enterActionListener != null && e.getKeyCode() == KeyEvent.VK_ENTER
-                && e.getID() == KeyEvent.KEY_PRESSED && !getText().equals("")) {
-                enterActionListener.actionPerformed(null); // doSearch()
-        } else {
-            super.processKeyEvent(e);
-        }
-        if (e.getID() == KeyEvent.KEY_TYPED) {
-            isDirty = true;
-        }
-    }
-
-    protected void undo() {
-        if (undoManager.canUndo()) {
-            undoManager.undo();
-        }
-    }
-
-    protected void redo() {
-        if (undoManager.canRedo()) {
-            undoManager.redo();
-        }
-    }
-
-    public void focusGained(FocusEvent e) {
-        if (defaultText != null && isEditable() && getText().isEmpty()) {
-            setText("");
-        }
-    }
-
-    public void focusLost(FocusEvent e) {
-        if (defaultText != null && isEditable() && getText().isEmpty()) {
-            showDefaultText();
-        }
-    }
-
-    @Override
-    public String getText() {
-        String content = super.getText();
-        if (!isDirty && defaultText != null && content.equals(defaultText)) {
-            return "";
-        }
-        return content;
-    }
-    
-    @Override
-    public void setText(String t) {
+    protected void restoreNormalStyle() {
         setFont(normalFont);
-        setForeground(normalColor);
-        if (!t.isEmpty()) {
-            isDirty = true;
-        }
-        super.setText(t);
+        super.restoreNormalStyle();
     }
-
-    private UndoManager undoManager;
-    private Font normalFont;
-    private Font defaultTextFont;
-    private Color normalColor;
-    private String defaultText;
-    private boolean isDirty;
-    ActionListener enterActionListener;
 }

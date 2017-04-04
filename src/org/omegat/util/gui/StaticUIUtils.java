@@ -63,6 +63,7 @@ import javax.swing.Timer;
 import javax.swing.text.Caret;
 import javax.swing.text.DefaultCaret;
 import javax.swing.text.JTextComponent;
+import javax.swing.undo.UndoManager;
 
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
@@ -413,5 +414,37 @@ public class StaticUIUtils {
             sb.append(keyText);
         }
         return sb.toString();
+    }
+
+    @SuppressWarnings("serial")
+    public static void makeUndoable(JTextComponent comp) {
+        UndoManager manager = new UndoManager();
+        comp.getDocument().addUndoableEditListener(manager);
+
+        // Handle undo (Ctrl/Cmd+Z);
+        KeyStroke undo = KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(),
+                false);
+        Action undoAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                if (manager.canUndo()) {
+                    manager.undo();
+                }
+            }
+        };
+        comp.getInputMap().put(undo, "UNDO");
+        comp.getActionMap().put("UNDO", undoAction);
+
+        // Handle redo (Ctrl/Cmd+Y);
+        KeyStroke redo = KeyStroke.getKeyStroke(KeyEvent.VK_Y, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(),
+                false);
+        Action redoAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                if (manager.canRedo()) {
+                    manager.redo();
+                }
+            }
+        };
+        comp.getInputMap().put(redo, "REDO");
+        comp.getActionMap().put("REDO", redoAction);
     }
 }

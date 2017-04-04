@@ -40,14 +40,13 @@ import javax.swing.JTextField;
 @SuppressWarnings("serial")
 public class HintTextField extends JTextField {
 
-    private static final Color HINT_FOREGROUND = Color.GRAY;
-
-    private String hintText;
-    private Color originalForeground;
-    private boolean isDirty;
-    private boolean isShowingHint;
+    protected String hintText;
+    protected Color originalForeground;
+    protected boolean isDirty;
+    protected boolean isShowingHint;
 
     public HintTextField() {
+        originalForeground = getForeground();
         addFocusListener(new FocusListener() {
 
             @Override
@@ -89,19 +88,40 @@ public class HintTextField extends JTextField {
     }
 
     private void showHint() {
-        setText(hintText);
-        originalForeground = getForeground();
-        setForeground(HINT_FOREGROUND);
+        super.setText(hintText);
+        applyHintStyle();
         isDirty = false;
         isShowingHint = true;
     }
 
+    protected void applyHintStyle() {
+        setForeground(getDisabledTextColor());
+    }
+
     private void hideHint() {
-        if (isShowingHint) {
-            setText(null);
-            setForeground(originalForeground);
-            isDirty = false;
-            isShowingHint = false;
+        super.setText(null);
+        restoreNormalStyle();
+        isDirty = false;
+        isShowingHint = false;
+    }
+
+    protected void restoreNormalStyle() {
+        setForeground(originalForeground);
+    }
+
+    @Override
+    public String getText() {
+        return isShowingHint ? "" : super.getText();
+    }
+
+    @Override
+    public void setText(String t) {
+        if (t.isEmpty() && !hasFocus()) {
+            showHint();
+        } else {
+            hideHint();
+            super.setText(t);
+            isDirty = true;
         }
     }
 }

@@ -67,9 +67,9 @@ public class SearchWindowForm extends javax.swing.JFrame {
         buttonGroupSearchState = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         m_searchLabel = new javax.swing.JLabel();
-        m_searchField = new javax.swing.JComboBox<String>();
+        m_searchField = new javax.swing.JComboBox<>();
         m_replaceLabel = new javax.swing.JLabel();
-        m_replaceField = new javax.swing.JComboBox<String>();
+        m_replaceField = new javax.swing.JComboBox<>();
         m_searchButton = new javax.swing.JButton();
         m_panelSearch = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -142,7 +142,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
         m_advancedVisiblePane = new javax.swing.JPanel();
         m_authorCB = new javax.swing.JCheckBox();
         m_authorField = new org.omegat.gui.search.MFindField();
-        m_authorField.setDefaultText(OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR"));
+        m_authorField.setHintText(OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR"));
         m_dateFromCB = new javax.swing.JCheckBox();
         m_dateFromButton = new javax.swing.JButton();
         m_dateToCB = new javax.swing.JCheckBox();

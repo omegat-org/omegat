@@ -906,7 +906,7 @@
         </Component>
         <Component class="org.omegat.gui.search.MFindField" name="m_authorField">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="m_authorField.setDefaultText(OStrings.getString(&quot;TF_CUR_SEGMENT_UNKNOWN_AUTHOR&quot;));"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="m_authorField.setHintText(OStrings.getString(&quot;TF_CUR_SEGMENT_UNKNOWN_AUTHOR&quot;));"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">

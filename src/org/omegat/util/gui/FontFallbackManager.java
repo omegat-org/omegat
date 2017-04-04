@@ -27,9 +27,13 @@ package org.omegat.util.gui;
 
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
+import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 public class FontFallbackManager {
 
@@ -45,14 +49,14 @@ public class FontFallbackManager {
      * <li><a href="https://github.com/googlei18n/noto-emoji">Noto Emoji</a>
      * </ul>
      */
-    private static final String FONT_BLACKLIST = "Apple Color Emoji;";
+    private static final Set<String> FONT_BLACKLIST = Collections.singleton("Apple Color Emoji");
     private static final Font FONT_UNAVAILABLE = new Font("", 0, 0);
     
     private static final Logger LOGGER = Logger.getLogger(FontFallbackManager.class.getName());
     
     private static final Font[] recentFonts = new Font[8];
     private static int lastFontIndex = 0;
-    private static final Map<Integer, Font> cache = new ConcurrentHashMap<Integer, Font>();
+    private static final Map<Integer, Font> cache = new ConcurrentHashMap<>();
     
     public static Font getCapableFont(int cp) {
         // Skip variation selectors
@@ -93,18 +97,22 @@ public class FontFallbackManager {
             return cachedFont;
         }
         // All we can do now is do a brute-force full search of available fonts.
-        LOGGER.fine("Searching for font supporting U+" + Integer.toHexString(cp) + " " + String.valueOf(Character.toChars(cp)));
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        for (Font font : ge.getAllFonts()) {
-            if (font.canDisplay(cp) && !FONT_BLACKLIST.contains(font.getFamily() + ";")) {
-                LOGGER.fine("Search found " + font.getFamily());
-                cache.put(cp, font);
-                addRecentFont(font);
-                return font;
-            }
-        }
-        cache.put(cp, FONT_UNAVAILABLE);
-        return null;
+        Font[] allFonts = ge.getAllFonts();
+        LOGGER.fine(() -> String.format("Searching %d fonts for one supporting U+%h %s", allFonts.length, cp,
+                String.valueOf(Character.toChars(cp))));
+        long start = System.currentTimeMillis();
+        Optional<Font> font = Stream.of(allFonts).parallel().filter(f -> {
+            return f.canDisplay(cp) && !FONT_BLACKLIST.contains(f.getFamily());
+        }).findFirst();
+        cache.put(cp, font.orElse(FONT_UNAVAILABLE));
+        font.ifPresent(FontFallbackManager::addRecentFont);
+        LOGGER.fine(() -> font.isPresent()
+                ? String.format("Search found %s in %d ms", font.get().getFamily(),
+                        System.currentTimeMillis() - start)
+                : String.format("Search failed to find a font; time: %d ms",
+                        System.currentTimeMillis() - start));
+        return font.orElse(null);
     }
     
     private static void addRecentFont(Font font) {

@@ -1,12 +1,10 @@
-/* :name=Currency Translator :description=Translate currencies representation according to source and target locale.\nThis will translate a string like "$123,399.99" to "123 399,99 USD"
- * 
- *  Translate currencies representation accorfing to source and target locale.
- *  This will translate a string like "$123,399.99" to "123 399,99 USD"
+/* :name=QA - Currency Translator :description=Translate currencies representation according to source and target locale. This will translate a string like "$123,399.99" in EN to "123 399,99 USD" in FR
  *
  * @author  Briac Pilpré
  * @date    2016-07-15
  * @version 0.2
  */
+ 
 import java.text.NumberFormat
  
 def gui() {

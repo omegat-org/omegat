@@ -1,6 +1,8 @@
-/* :name=QA - Identical Segments :description=Checks for identical segments (case sensitive).
+/* :name=QA - Check Same Segment (JavaScript) :description=Checks for identical segments (case sensitive).
  * 
- *  Test script taking inspiration from the tag validation class :)
+ * @author  
+ * @date    
+ * @version 
  */
 
 console.println("Check for identical segments (case insensitive).\n");

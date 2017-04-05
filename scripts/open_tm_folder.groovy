@@ -1,7 +1,5 @@
-/* :name=Open TM Folder :description=Open the /tm folder
+/* :name=OPEN - Open TM Folder :description=Open the /tm folder
  * 
- *  Open the /tm folder
- *
  * @author  Yu Tang
  * @date    2013-06-05
  * @version 0.3

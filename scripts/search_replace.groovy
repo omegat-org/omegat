@@ -1,5 +1,4 @@
-/*
- *  Simple search and replace script
+/* :name=QA - Search and Replace :description=Simple search and replace script
  *
  * @author  Didier Briel
  * @author  Briac Pilpre

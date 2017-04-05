@@ -1,10 +1,7 @@
-/* :name=SAMPLE - GUI Scripting :description=Groovy example of GUI scripting
+/** :name=Example - GUI Scripting   :description=Example of GUI scripting
  * 
- * @author  
- * @date    
- * @version 
+ * Groovy example of a GUI script
  */
-
 import groovy.swing.SwingBuilder
 import java.awt.Component
 import javax.swing.JButton

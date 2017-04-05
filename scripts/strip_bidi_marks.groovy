@@ -1,10 +1,9 @@
-/* :name=QA - Strip BiDi Marks :description=Remove bidi mark in the current target or in selection
+/* Remove bidi mark in the current target or in selection
  * 
  * @author   Manuel Souto Pico (based on Kos Ivantsov's Strip Tags script)
  * @date     2016-07-15
  * @version  0.2
  */
- 
 import static javax.swing.JOptionPane.*
 import static org.omegat.util.Platform.*
 

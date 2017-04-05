@@ -1,4 +1,9 @@
-// :name=Example - Modify Segment :description=Example of segment modification
+/* :name=SAMPLE - Modify Segment :description=Example of segment modification
+ * 
+ * @author  
+ * @date    
+ * @version 
+*/
 
 def gui() {
 def ste = editor.currentEntry;

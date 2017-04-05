@@ -1,7 +1,5 @@
-/* :name=Open project_save.tmx :description=Open project_save.tmx in an editor
+/* :name=OPEN - Open Project Memory :description=Open project_save.tmx in an editor
  * 
- * Open project_save.tmx in an editor
- *
  * @author  Yu Tang
  * @date    2014-05-14
  * @version 0.4

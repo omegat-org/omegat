@@ -1,4 +1,4 @@
-/* :name=Non-breaking space :description=Replace spaces with non-breakable spaces where appropriate in French
+/* :name=QA - Non-breaking space :description=Replace spaces with non-breakable spaces where appropriate in French
  *
  * @author  Didier Briel
  * @author  Briac Pilpre

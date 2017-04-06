@@ -26,12 +26,13 @@ strings of the project to a single text file
   - The Scripting window now contains a Help menu with a link to OmegaT 
 Javadoc
 
-  - The /scripts/readme.txt file contains links to OmegaT Javadoc, Groovy and EcmaScript language references,  the GPL v3
+  - The /scripts/readme.txt file contains links to OmegaT Javadoc,
+Groovy and EcmaScript language references, the GPL v3
 
   Bug fixes:
 
-  - Google Translate was in text mode, which didn't work best
-for tags. It has been reverted to HTML mode.
+  - Google Translate was in text mode, which didn't work best for
+tags. It has been reverted to HTML mode.
 
   Localisation Updates:
 

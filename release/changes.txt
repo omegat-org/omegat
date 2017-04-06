@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.1 update 1
 ----------------------------------------------------------------------
-  5 Enhancements
+  6 Enhancements
   1 Bug fix
   1 Localisation update
 ----------------------------------------------------------------------
@@ -25,6 +25,8 @@ strings of the project to a single text file
 
   - The Scripting window now contains a Help menu with a link to OmegaT 
 Javadoc
+
+  - The /scripts/readme.txt file contains links to OmegaT Javadoc, Groovy and EcmaScript language references,  the GPL v3
 
   Bug fixes:
 

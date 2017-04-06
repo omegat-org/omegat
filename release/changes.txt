@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.1 update 1
 ----------------------------------------------------------------------
-  4 Enhancements
+  5 Enhancements
   1 Bug fix
   1 Localisation update
 ----------------------------------------------------------------------
@@ -22,6 +22,9 @@ supported.
 
   - The new script extract_text_content.groovy allows exporting all
 strings of the project to a single text file
+
+  - The Scripting window now contains a Help menu with a link to OmegaT 
+Javadoc
 
   Bug fixes:
 

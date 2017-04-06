@@ -89,6 +89,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
+import org.omegat.help.Help;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -892,6 +893,20 @@ public class ScriptingWindow {
         m_txtScriptEditor.enhanceMenu(mb);
 
         buildSetsMenu(mb);
+
+        menu = new JMenu();
+        Mnemonics.setLocalizedText(menu, OStrings.getString("SCW_MENU_HELP"));
+        item = new JMenuItem();
+        Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_JAVADOC"));
+        item.addActionListener(e -> {
+            try {
+                Help.showJavadoc();
+            } catch (IOException ex) {
+                Log.log(ex);
+            }
+        });
+        menu.add(item);
+        mb.add(menu);
 
         return mb;
     }

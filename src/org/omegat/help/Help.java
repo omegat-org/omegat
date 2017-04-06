@@ -63,6 +63,15 @@ public class Help {
     public static final String ONLINE_HELP_URL = OStrings.IS_BETA
             ? "http://omegat.sourceforge.net/manual-latest/"
             : "http://omegat.sourceforge.net/manual-standard/";
+    
+    public static final String ONLINE_JAVADOC_URL = OStrings.IS_BETA
+            ? "https://omegat.ci.cloudbees.com/job/omegat-javadoc/javadoc/"
+            : "https://omegat.ci.cloudbees.com/job/omegat-stable-javadoc/javadoc/";
+
+    public static void showJavadoc() throws IOException {
+        URI uri = URI.create(ONLINE_JAVADOC_URL);
+        Desktop.getDesktop().browse(uri);
+    }
 
     /**
      * Shows help in the system browser.

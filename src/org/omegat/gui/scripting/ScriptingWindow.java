@@ -728,14 +728,18 @@ public class ScriptingWindow {
         if (m_scriptList.isSelectionEmpty()) {
             return;
         }
+        m_currentScriptItem = m_scriptList.getSelectedValue();
+        displayScriptItem();
+    }
+
+    /** Display the content of a script item in the Script Editor area. */
+    private void displayScriptItem() {
         try {
-            m_currentScriptItem = m_scriptList.getSelectedValue();
-            m_txtScriptEditor.setHighlighting(FilenameUtils.getExtension(m_currentScriptItem.getFile().getName().toLowerCase()));
-            
+            m_txtScriptEditor
+                    .setHighlighting(FilenameUtils.getExtension(m_currentScriptItem.getFile().getName().toLowerCase()));
             m_txtScriptEditor.getTextArea().setText(m_currentScriptItem.getText());
             m_txtScriptEditor.getTextArea().setCaretPosition(0);
-
-        } catch (IOException e) {
+        } catch (IOException ex) {
             logResult(OStrings.getString("SCW_CANNOT_READ_SCRIPT"));
         }
     }
@@ -745,6 +749,27 @@ public class ScriptingWindow {
     }
 
     // Menu Actions
+    private class OpenScriptAction implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            
+            // If a project is opened, set the file chooser to the project root instead of the default script path
+            File openFileDir = Core.getProject().isProjectLoaded() ? Core.getProject().getProjectProperties().getProjectRootDir() : m_scriptsDirectory;
+
+            JFileChooser chooser = new JFileChooser(openFileDir);
+            chooser.setDialogTitle(OStrings.getString("SCW_SCRIPTS_OPEN_SCRIPT_TITLE"));
+            chooser.setDialogTitle("Select a Script File");
+            chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            int result = chooser.showOpenDialog(frame);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                // we should write the result into the directory text field
+                //File file = chooser.getSelectedFile();  
+                //setScriptsDirectory(file);
+                m_currentScriptItem = new ScriptItem(chooser.getSelectedFile());
+                displayScriptItem();
+            }
+        }
+    }
+
     private class NewScriptAction implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             m_currentScriptItem = null;
@@ -839,6 +864,14 @@ public class ScriptingWindow {
         Mnemonics.setLocalizedText(menu, OStrings.getString("SCW_MENU_TITLE"));
         
         JMenuItem item;
+
+        // https://sourceforge.net/p/omegat/feature-requests/1314/
+        item = new JMenuItem();
+        Mnemonics.setLocalizedText(item, OStrings.getString("SCW_LOAD_FILE"));
+        item.addActionListener(new OpenScriptAction());
+        item.setAccelerator(
+                KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        menu.add(item);
         
         item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_NEW_SCRIPT"));

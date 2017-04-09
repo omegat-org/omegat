@@ -246,7 +246,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(jLabel7, OStrings.getString("OpenXML_GLOBAL")); // NOI18N
         jPanel1.add(jLabel7);
 
-        org.openide.awt.Mnemonics.setLocalizedText(translateLinksCB, OStrings.getString("OpenXML_TRANSLATE_SLIDE_LINKS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateLinksCB, OStrings.getString("OpenXML_TRANSLATE_LINKS")); // NOI18N
         jPanel1.add(translateLinksCB);
 
         org.openide.awt.Mnemonics.setLocalizedText(translateChartsCB, OStrings.getString("OpenXML_TRANSLATE_CHARTS")); // NOI18N

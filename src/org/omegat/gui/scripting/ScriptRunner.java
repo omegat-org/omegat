@@ -48,8 +48,6 @@ import org.omegat.util.StringUtil;
 
 public class ScriptRunner {
 
-    private static final String USER_DIR_PROPERTY = "user.dir";
-
     /**
      * Scripts that want to run on the Event Dispatch Thread should define a
      * top-level function with this name and NOT evaluate it.
@@ -165,26 +163,11 @@ public class ScriptRunner {
             bindings.putAll(additionalBindings);
         }
         engine.setBindings(bindings, ScriptContext.ENGINE_SCOPE);
-        
-        // By default, the scripts run in the working directory of OmegaT. If
-        // a project is loaded the working directory changes to the project root
-        // directory. It should simplify project files manipulations.
-        String originalUserDir = System.getProperty(USER_DIR_PROPERTY);
-        if (Core.getProject().isProjectLoaded()) {
-            System.setProperty(USER_DIR_PROPERTY,
-                    Core.getProject().getProjectProperties().getProjectRootDir().getAbsolutePath());
+        Object result = engine.eval(script);
+        if (engine instanceof Invocable) {
+            invokeGuiScript((Invocable) engine);
         }
-
-        try {
-            Object result = engine.eval(script);
-            if (engine instanceof Invocable) {
-                invokeGuiScript((Invocable) engine);
-            }
-            return result;
-        } finally {
-            // Restore the original value in case it is used elsewhere in the application
-            System.setProperty(USER_DIR_PROPERTY, originalUserDir);
-        }
+        return result;
     }
 
     private static void invokeGuiScript(Invocable engine) throws ScriptException {

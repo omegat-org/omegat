@@ -30,15 +30,28 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CodingErrorAction;
+import java.nio.charset.MalformedInputException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+import java.util.function.BiConsumer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.Test;
 import org.omegat.Main;
 import org.omegat.util.EncodingDetector;
 import org.omegat.util.Language;
+import org.omegat.util.OStrings;
 
 /**
  *
@@ -117,5 +130,59 @@ public class BundleTest {
         Properties props = new Properties();
         props.load(getClass().getResourceAsStream("/org/omegat/gui/main/MainMenuShortcuts.mac.properties"));
         assertFalse(props.isEmpty());
+    }
+
+    /**
+     * Search for UI strings used via OStrings.getString() but not defined in
+     * Bundle.properties.
+     * <p>
+     * This is a brute-force text search over all .java source files and will
+     * not catch dynamically computed keys or exotic invocations (such as via
+     * method references, e.g. OStrings::getString, etc.).
+     * <p>
+     * More thorough checks would be possible by actually running the relevant
+     * code, but a lot of it requires a GUI environment (our CI is headless, so
+     * such tests will rarely get run), or a substantial testing harness, or
+     * requires people to manually add tests (which they just won't do).
+     * 
+     * @throws Exception
+     */
+    @Test
+    public void testUndefinedStrings() throws Exception {
+        Locale.setDefault(Locale.ENGLISH);
+        Pattern pattern = Pattern.compile("OStrings\\.getString\\(\\s*\"([^\"]+)\"\\s*[,\\)]");
+        processSourceContent((path, chars) -> {
+            Matcher m = pattern.matcher(chars);
+            while (m.find()) {
+                OStrings.getString(m.group(1));
+            }
+        });
+    }
+
+    /**
+     * Process the text content of all .java files under /src. Will blow up if
+     * any are not US-ASCII.
+     * 
+     * @param consumer
+     *            A function that accepts the file path and content
+     * @throws IOException
+     *             from Files.find()
+     */
+    public static void processSourceContent(BiConsumer<Path, CharSequence> consumer) throws IOException {
+        CharsetDecoder decoder = StandardCharsets.US_ASCII.newDecoder();
+        decoder.onMalformedInput(CodingErrorAction.REPORT);
+        decoder.onUnmappableCharacter(CodingErrorAction.REPORT);
+        Files.find(Paths.get(".", "src"), 100,
+                (path, attrs) -> attrs.isRegularFile() && path.toString().endsWith(".java")).forEach(p -> {
+                    try {
+                        byte[] bytes = Files.readAllBytes(p);
+                        CharBuffer chars = decoder.decode(ByteBuffer.wrap(bytes));
+                        consumer.accept(p, chars);
+                    } catch (MalformedInputException ex) {
+                        throw new RuntimeException("File contains non-ASCII characters: " + p, ex);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(p.toString(), ex);
+                    }
+                });
     }
 }

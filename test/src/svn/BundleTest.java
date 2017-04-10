@@ -172,17 +172,21 @@ public class BundleTest {
         CharsetDecoder decoder = StandardCharsets.US_ASCII.newDecoder();
         decoder.onMalformedInput(CodingErrorAction.REPORT);
         decoder.onUnmappableCharacter(CodingErrorAction.REPORT);
-        Files.find(Paths.get(".", "src"), 100,
-                (path, attrs) -> attrs.isRegularFile() && path.toString().endsWith(".java")).forEach(p -> {
-                    try {
-                        byte[] bytes = Files.readAllBytes(p);
-                        CharBuffer chars = decoder.decode(ByteBuffer.wrap(bytes));
-                        consumer.accept(p, chars);
-                    } catch (MalformedInputException ex) {
-                        throw new RuntimeException("File contains non-ASCII characters: " + p, ex);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(p.toString(), ex);
-                    }
-                });
+        for (String root : new String[] { "src", "test", "test-integration" }) {
+            Path rootPath = Paths.get(".", root);
+            assertTrue(rootPath.toFile().isDirectory());
+            Files.find(rootPath, 100,
+                    (path, attrs) -> attrs.isRegularFile() && path.toString().endsWith(".java")).forEach(p -> {
+                        try {
+                            byte[] bytes = Files.readAllBytes(p);
+                            CharBuffer chars = decoder.decode(ByteBuffer.wrap(bytes));
+                            consumer.accept(p, chars);
+                        } catch (MalformedInputException ex) {
+                            throw new RuntimeException("File contains non-ASCII characters: " + p, ex);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(p.toString(), ex);
+                        }
+                    });
+        }
     }
 }

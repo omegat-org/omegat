@@ -40,9 +40,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import java.util.function.BiConsumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -157,6 +159,22 @@ public class BundleTest {
                 OStrings.getString(m.group(1));
             }
         });
+    }
+
+    /**
+     * Test the behavior when a resource key is missing. Various code assumes
+     * that we throw a MissingResourceException, not e.g. return null or the
+     * empty string.
+     */
+    @Test(expected = MissingResourceException.class)
+    public void testUndefinedString() {
+        Locale.setDefault(Locale.ENGLISH);
+        // Not sure why we'd ever have a UUID key, but just in case, keep trying
+        // new UUIDs until we hit one that's missing (or we give up at
+        // Integer.MAX_VALUE and fail).
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {
+            OStrings.getString(UUID.randomUUID().toString());
+        }
     }
 
     /**

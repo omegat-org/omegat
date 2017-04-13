@@ -111,12 +111,12 @@ public class TagProcessingOptionsController extends BasePreferencesController {
         panel.simpleCheckRadio.setSelected(Preferences.isPreference(Preferences.CHECK_SIMPLE_PRINTF_TAGS));
         panel.fullCheckRadio.setSelected(Preferences.isPreference(Preferences.CHECK_ALL_PRINTF_TAGS));
         panel.javaPatternCheckBox.setSelected(Preferences.isPreference(Preferences.CHECK_JAVA_PATTERN_TAGS));
+        panel.cbCountingProtectedText.setSelected(
+                StatisticsSettings.isCountingProtectedText() || StatisticsSettings.isCountingCustomTags());
         panel.customPatternRegExpTF.setText(Preferences.getPreference(Preferences.CHECK_CUSTOM_PATTERN));
         panel.removePatternRegExpTF.setText(Preferences.getPreference(Preferences.CHECK_REMOVE_PATTERN));
         panel.looseTagOrderCheckBox.setSelected(Preferences.isPreference(Preferences.LOOSE_TAG_ORDERING));
         panel.cbTagsValidRequired.setSelected(Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED));
-        panel.cbCountingProtectedText
-                .setSelected(StatisticsSettings.isCountingProtectedText() || StatisticsSettings.isCountingCustomTags());
     }
 
     @Override

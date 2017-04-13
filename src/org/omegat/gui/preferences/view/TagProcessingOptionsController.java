@@ -89,6 +89,7 @@ public class TagProcessingOptionsController extends BasePreferencesController {
                 checkReloadRequired();
             }
         };
+        panel.cbCountingProtectedText.addActionListener(e -> checkReloadRequired());
         panel.removePatternRegExpTF.getDocument().addDocumentListener(docListener);
         panel.customPatternRegExpTF.getDocument().addDocumentListener(docListener);
     }
@@ -98,7 +99,9 @@ public class TagProcessingOptionsController extends BasePreferencesController {
                 panel.customPatternRegExpTF.getText());
         boolean removePatternChanged = valueIsDifferent(Preferences.CHECK_REMOVE_PATTERN,
                 panel.removePatternRegExpTF.getText());
-        setReloadRequired(customPatternChanged || removePatternChanged);
+        boolean statsHandlingChanged = (StatisticsSettings.isCountingProtectedText()
+                || StatisticsSettings.isCountingCustomTags()) != panel.cbCountingProtectedText.isSelected();
+        setReloadRequired(customPatternChanged || removePatternChanged || statsHandlingChanged);
     }
 
     @Override

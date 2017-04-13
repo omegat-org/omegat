@@ -126,7 +126,10 @@ public class TagProcessingOptionsController extends BasePreferencesController {
         panel.removePatternRegExpTF.setText("");
         panel.looseTagOrderCheckBox.setSelected(false);
         panel.cbTagsValidRequired.setSelected(false);
-        panel.cbCountingProtectedText.setSelected(Preferences.STAT_COUNTING_PROTECTED_TEXT_DEFAULT);
+        @SuppressWarnings("unused")
+        boolean countingProtectedTextDefault = Preferences.STAT_COUNTING_PROTECTED_TEXT_DEFAULT
+                || Preferences.STAT_COUNTING_CUSTOM_TAGS_DEFAULT;
+        panel.cbCountingProtectedText.setSelected(countingProtectedTextDefault);
     }
 
     @Override

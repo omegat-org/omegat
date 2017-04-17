@@ -176,14 +176,16 @@ public class TMXWriter2 {
         // add properties
         if (propValues != null) {
             for (int i = 0; i < propValues.size(); i += 2) {
-                if (propValues.get(i + 1) == null) {
+                String value = propValues.get(i + 1);
+                if (value == null) {
                     // value is null - not need to write
                     continue;
                 }
                 xml.writeCharacters("      ");
                 xml.writeStartElement("prop");
-                xml.writeAttribute("type", propValues.get(i));
-                xml.writeCharacters(propValues.get(i + 1));
+                String type = StringUtil.removeXMLInvalidChars(propValues.get(i));
+                xml.writeAttribute("type", type);
+                xml.writeCharacters(StringUtil.removeXMLInvalidChars(value));
                 xml.writeEndElement(); // prop
                 xml.writeCharacters(LINE_SEPARATOR);
             }

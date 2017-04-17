@@ -1605,11 +1605,14 @@ public class RealProject implements IProject {
     }
 
     /**
-     * This method converts directory separators into unix-style. It required to have the same filenames in
+     * This method converts directory separators into Unix-style. It required to have the same filenames in
      * the alternative translation in Windows and Unix boxes.
-     * 
-     * Also it can use --alternate-filename-from and --alternate-filename-to command line parameters for
-     * change filename in entry key. It allows to have many versions of one file in one project.
+     * <p>
+     * Also it can use {@code --alternate-filename-from} and {@code --alternate-filename-to} command line
+     * parameters for change filename in entry key. It allows to have many versions of one file in one
+     * project.
+     * <p>
+     * Because the filename can be stored in the project TMX, it also removes any XML-unsafe chars.
      * 
      * @param filename
      *            filesystem's filename
@@ -1622,7 +1625,7 @@ public class RealProject implements IProject {
         if (f != null && t != null) {
             fn = fn.replaceAll(f, t);
         }
-        return fn;
+        return StringUtil.removeXMLInvalidChars(fn);
     }
 
     protected class LoadFilesCallback extends ParseEntry {

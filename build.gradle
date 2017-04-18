@@ -5,6 +5,7 @@ plugins {
     id 'maven-publish'
     id 'eclipse'
     id 'findbugs'
+    id 'checkstyle'
     id 'de.gliderpilot.jnlp' version '1.2.0'
     id 'com.jfrog.bintray' version '1.7.3'
     // Uncomment and run `dependencyUpdates` task to check for updates to dependencies
@@ -699,6 +700,10 @@ tasks.withType(FindBugs) {
         }
         html.enabled !envIsCi
     }
+}
+
+checkstyle {
+    ignoreFailures = true
 }
 
 task jar2(type: Sync) {

@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 
+import org.apache.commons.io.FilenameUtils;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
@@ -70,15 +71,6 @@ public class DictionaryManager {
         return dir.getAbsolutePath();
     }
 
-    /** return the file name only - e.g. until the first dot */
-    private String getFileNameOnly(String filename) {
-        int position;
-        if ((position = filename.indexOf(".")) != -1)
-            return filename.substring(0, position);
-        else
-            return null;
-    }
-
     /**
      * returns a list of full names of dictionaries from a dictionary code list
      */
@@ -86,12 +78,13 @@ public class DictionaryManager {
         List<String> result = new ArrayList<String>();
 
         for (String dic : aList) {
-            String parts[] = dic.split("_");
+            String[] parts = dic.split("_");
             Locale locale;
-            if (parts.length == 1)
+            if (parts.length == 1) {
                 locale = new Locale(parts[0]);
-            else
+            } else {
                 locale = new Locale(parts[0], parts[1]);
+            }
             result.add(dic + " - " + locale.getDisplayName());
         }
 
@@ -109,16 +102,13 @@ public class DictionaryManager {
      * returns a list of available dictionaries in the xx_YY form
      */
     public List<String> getLocalDictionaryCodeList() {
-        List<String> result = new ArrayList<String>();
-
-        String[] affixFiles;
-        String[] dictionaryFiles;
+        List<String> result = new ArrayList<>();
 
         // get all affix files
-        affixFiles = dir.list((dir, name) -> name.endsWith(OConsts.SC_AFFIX_EXTENSION));
+        String[] affixFiles = dir.list((d, name) -> name.endsWith(OConsts.SC_AFFIX_EXTENSION));
 
         // get all dictionary files
-        dictionaryFiles = dir.list((dir, name) -> name.endsWith(OConsts.SC_DICTIONARY_EXTENSION));
+        String[] dictionaryFiles = dir.list((d, name) -> name.endsWith(OConsts.SC_DICTIONARY_EXTENSION));
 
         // match them
         if (affixFiles != null && dictionaryFiles != null) {
@@ -126,14 +116,14 @@ public class DictionaryManager {
                 boolean match = false;
 
                 // get the affix file name
-                String affixName = getFileNameOnly(affixFile);
+                String affixName = FilenameUtils.getBaseName(affixFile);
                 if (affixName == null || affixName.isEmpty()) {
                     continue;
                 }
                 // cycle through the dictionary names
                 for (String dictionaryFile : dictionaryFiles) {
                     // get the dic file name
-                    String dicName = getFileNameOnly(dictionaryFile);
+                    String dicName = FilenameUtils.getBaseName(dictionaryFile);
                     if (dicName == null || dicName.isEmpty()) {
                         continue;
                     }
@@ -168,8 +158,9 @@ public class DictionaryManager {
 
         File affFile = new File(base + OConsts.SC_AFFIX_EXTENSION);
 
-        if (!affFile.delete())
+        if (!affFile.delete()) {
             return false;
+        }
 
         File dicFile = new File(base + OConsts.SC_DICTIONARY_EXTENSION);
 
@@ -196,8 +187,9 @@ public class DictionaryManager {
 
         // compare the two lists
         for (String dicCode : remoteDicList) {
-            if (!localDicList.contains(dicCode))
+            if (!localDicList.contains(dicCode)) {
                 result.add(dicCode);
+            }
         }
 
         return result;
@@ -210,8 +202,8 @@ public class DictionaryManager {
         List<String> result = new ArrayList<String>();
 
         // download the file
-        String htmlfile = StaticUtils.downloadFileToString
-                (Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL));
+        String htmlfile = StaticUtils
+                .downloadFileToString(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL));
 
         // build a list of available language codes
         Matcher matcher = PatternConsts.DICTIONARY_ZIP.matcher(htmlfile);
@@ -237,8 +229,8 @@ public class DictionaryManager {
      */
     public void installRemoteDictionary(String langCode) throws MalformedURLException, IOException {
         // download the package in question to the disk to a temporary location
-        String from = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL) +
-                      "/" + langCode + ".zip";
+        String from = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL) + "/" + langCode
+                + ".zip";
 
         // TODO: replace this with something meaningful
         File tempFile = File.createTempFile(langCode, ".zip");

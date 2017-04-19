@@ -36,6 +36,10 @@ import org.omegat.util.Token;
  * @author Maxym Mykhalchuk
  */
 public class FuzzyMatcher {
+
+    private FuzzyMatcher() {
+    }
+
     /**
      * Builds the similarity data for color highlight in match window.
      */
@@ -48,17 +52,19 @@ public class FuzzyMatcher {
             result[i] = 0;
 
             Token righttoken = null;
-            if (i + 1 < len)
+            if (i + 1 < len) {
                 righttoken = matchTokens[i + 1];
+            }
             boolean rightfound = (i + 1 == len) || DefaultTokenizer.isContains(sourceTokens, righttoken);
 
             Token token = matchTokens[i];
             boolean found = DefaultTokenizer.isContains(sourceTokens, token);
 
-            if (found && (!leftfound || !rightfound))
+            if (found && (!leftfound || !rightfound)) {
                 result[i] = StringData.PAIR;
-            else if (!found)
+            } else if (!found) {
                 result[i] = StringData.UNIQ;
+            }
 
             leftfound = found;
         }
@@ -75,7 +81,7 @@ public class FuzzyMatcher {
      * @return similarity in percents
      */
     public static int calcSimilarity(final ISimilarityCalculator distanceCalculator, final Token[] str,
-            final Token cand[]) {
+            final Token[] cand) {
         if (str.length == 0 && cand.length == 0) {
             // empty token lists - can't calculate similarity
             return 0;

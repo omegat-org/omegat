@@ -691,7 +691,7 @@ public class AlignPanelController {
         modified = true;
         Rectangle initialRect = panel.table.getVisibleRect();
         panel.table.clearSelection();
-        int resultRows[] = model.splitRow(row, col, split);
+        int[] resultRows = model.splitRow(row, col, split);
         panel.table.changeSelection(resultRows[0], col, false, false);
         panel.table.changeSelection(resultRows[resultRows.length - 1], col, false, true);
         ensureSelectionVisible(initialRect);

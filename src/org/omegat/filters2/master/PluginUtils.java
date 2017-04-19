@@ -67,11 +67,11 @@ public final class PluginUtils {
 
     public static final String PLUGINS_LIST_FILE = "Plugins.properties";
 
-    enum PLUGIN_TYPE {
+    enum PluginType {
         FILTER, TOKENIZER, MARKER, MACHINETRANSLATOR, BASE, GLOSSARY, UNKNOWN
     };
 
-    protected static final List<Class<?>> loadedPlugins = new ArrayList<Class<?>>();
+    protected static final List<Class<?>> LOADED_PLUGINS = new ArrayList<Class<?>>();
 
     /** Private constructor to disallow creation */
     private PluginUtils() {
@@ -134,7 +134,7 @@ public final class PluginUtils {
         }
 
         // run base plugins
-        for (Class<?> pl : basePluginClasses) {
+        for (Class<?> pl : BASE_PLUGIN_CLASSES) {
             try {
                 pl.newInstance();
             } catch (Exception ex) {
@@ -144,15 +144,17 @@ public final class PluginUtils {
     }
 
     public static List<Class<?>> getFilterClasses() {
-        return filterClasses;
+        return FILTER_CLASSES;
     }
 
     public static List<Class<?>> getTokenizerClasses() {
-        return tokenizerClasses;
+        return TOKENIZER_CLASSES;
     }
 
     public static Class<?> getTokenizerClassForLanguage(Language lang) {
-        if (lang == null) return DefaultTokenizer.class;
+        if (lang == null) {
+            return DefaultTokenizer.class;
+        }
 
         // Prefer an exact match on the full ISO language code (XX-YY).
         Class<?> exactResult = searchForTokenizer(lang.getLanguage());
@@ -174,13 +176,17 @@ public final class PluginUtils {
     }
 
     private static boolean isDefault(Class<?> c) {
-        if (c == null) return false;
+        if (c == null) {
+            return false;
+        }
         Tokenizer ann = c.getAnnotation(Tokenizer.class);
         return ann == null ? false : ann.isDefault();
     }
 
     private static Class<?> searchForTokenizer(String lang) {
-        if (lang.length() < 1) return null;
+        if (lang.isEmpty()) {
+            return null;
+        }
 
         lang = lang.toLowerCase();
 
@@ -188,9 +194,11 @@ public final class PluginUtils {
         // "default" tokenizer is found.
         Class<?> fallback = null;
 
-        for (Class<?> c : tokenizerClasses) {
+        for (Class<?> c : TOKENIZER_CLASSES) {
             Tokenizer ann = c.getAnnotation(Tokenizer.class);
-            if (ann == null) continue;
+            if (ann == null) {
+                continue;
+            }
             String[] languages = ann.languages();
             try {
                 if (languages.length == 1 && languages[0].equals(Tokenizer.DISCOVER_AT_RUNTIME)) {
@@ -201,8 +209,11 @@ public final class PluginUtils {
             }
             for (String s : languages) {
                 if (lang.equals(s)) {
-                    if (ann.isDefault()) return c; // Return best possible match.
-                    else if (fallback == null) fallback = c;
+                    if (ann.isDefault()) {
+                        return c; // Return best possible match.
+                    } else if (fallback == null) {
+                        fallback = c;
+                    }
                 }
             }
         }
@@ -211,28 +222,28 @@ public final class PluginUtils {
     }
 
     public static List<Class<?>> getMarkerClasses() {
-        return markerClasses;
+        return MARKER_CLASSES;
     }
 
     public static List<Class<?>> getMachineTranslationClasses() {
-        return machineTranslationClasses;
+        return MACHINE_TRANSLATION_CLASSES;
     }
 
     public static List<Class<?>> getGlossaryClasses() {
-        return glossaryClasses;
+        return GLOSSARY_CLASSES;
     }
 
-    protected static final List<Class<?>> filterClasses = new ArrayList<Class<?>>();
+    protected static final List<Class<?>> FILTER_CLASSES = new ArrayList<>();
 
-    protected static final List<Class<?>> tokenizerClasses = new ArrayList<Class<?>>();
+    protected static final List<Class<?>> TOKENIZER_CLASSES = new ArrayList<>();
 
-    protected static final List<Class<?>> markerClasses = new ArrayList<Class<?>>();
+    protected static final List<Class<?>> MARKER_CLASSES = new ArrayList<>();
 
-    protected static final List<Class<?>> machineTranslationClasses = new ArrayList<Class<?>>();
+    protected static final List<Class<?>> MACHINE_TRANSLATION_CLASSES = new ArrayList<>();
 
-    protected static final List<Class<?>> glossaryClasses = new ArrayList<Class<?>>();
+    protected static final List<Class<?>> GLOSSARY_CLASSES = new ArrayList<>();
 
-    protected static final List<Class<?>> basePluginClasses = new ArrayList<Class<?>>();
+    protected static final List<Class<?>> BASE_PLUGIN_CLASSES = new ArrayList<>();
 
     /**
      * Parse one manifest file.
@@ -279,7 +290,7 @@ public final class PluginUtils {
             Class<?> c = classLoader.loadClass(clazz);
             Method load = c.getMethod("loadPlugins");
             load.invoke(c);
-            loadedPlugins.add(c);
+            LOADED_PLUGINS.add(c);
             Log.logInfoRB("PLUGIN_LOAD_OK", clazz);
         } catch (Throwable ex) {
             Log.logErrorRB(ex, "PLUGIN_LOAD_ERROR", clazz, ex.getClass().getSimpleName(), ex.getMessage());
@@ -289,7 +300,7 @@ public final class PluginUtils {
     }
 
     public static void unloadPlugins() {
-        for(Class<?> p:loadedPlugins) {
+        for (Class<?> p : LOADED_PLUGINS) {
             try {
                 Method load = p.getMethod("unloadPlugins");
                 load.invoke(p);
@@ -327,35 +338,35 @@ public final class PluginUtils {
 
     protected static void loadClassOld(String sType, String key, ClassLoader classLoader)
             throws ClassNotFoundException {
-        PLUGIN_TYPE pType;
+        PluginType pType;
         try {
-            pType = PLUGIN_TYPE.valueOf(sType.toUpperCase(Locale.ENGLISH));
+            pType = PluginType.valueOf(sType.toUpperCase(Locale.ENGLISH));
         } catch (Exception ex) {
-            pType = PLUGIN_TYPE.UNKNOWN;
+            pType = PluginType.UNKNOWN;
         }
         switch (pType) {
         case FILTER:
-            filterClasses.add(classLoader.loadClass(key));
+            FILTER_CLASSES.add(classLoader.loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         case TOKENIZER:
-            tokenizerClasses.add(classLoader.loadClass(key));
+            TOKENIZER_CLASSES.add(classLoader.loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         case MARKER:
-            markerClasses.add(classLoader.loadClass(key));
+            MARKER_CLASSES.add(classLoader.loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         case MACHINETRANSLATOR:
-            machineTranslationClasses.add(classLoader.loadClass(key));
+            MACHINE_TRANSLATION_CLASSES.add(classLoader.loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         case BASE:
-            basePluginClasses.add(classLoader.loadClass(key));
+            BASE_PLUGIN_CLASSES.add(classLoader.loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         case GLOSSARY:
-            glossaryClasses.add(classLoader.loadClass(key));
+            GLOSSARY_CLASSES.add(classLoader.loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         default:

@@ -56,6 +56,7 @@ public class EntryKey implements Comparable<EntryKey> {
         this.path = path;
     }
 
+    @Override
     public int hashCode() {
         int hash = sourceText.hashCode();
         if (!IGNORE_FILE_CONTEXT && file != null) {
@@ -76,10 +77,11 @@ public class EntryKey implements Comparable<EntryKey> {
         return hash;
     }
 
+    @Override
     public boolean equals(Object obj) {
-    	if (!(obj instanceof EntryKey)) {
-    		return false;
-    	}
+        if (!(obj instanceof EntryKey)) {
+            return false;
+        }
         EntryKey o = (EntryKey) obj;
         return StringUtil.equalsWithNulls(sourceText, o.sourceText) && // source
                 (IGNORE_FILE_CONTEXT || StringUtil.equalsWithNulls(file, o.file)) && // file
@@ -89,6 +91,7 @@ public class EntryKey implements Comparable<EntryKey> {
                 StringUtil.equalsWithNulls(path, o.path); // path
     }
 
+    @Override
     public int compareTo(EntryKey o) {
         int c = IGNORE_FILE_CONTEXT ? 0 : StringUtil.compareToWithNulls(file, o.file);
         if (c == 0) {
@@ -109,6 +112,7 @@ public class EntryKey implements Comparable<EntryKey> {
         return c;
     }
 
+    @Override
     public String toString() {
         return "[file:" + file + ", id=" + id + ", path=" + path + ", source='" + sourceText + "', prev='"
                 + prev + "', next='" + next + "']";

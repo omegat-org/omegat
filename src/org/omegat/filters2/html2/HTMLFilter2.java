@@ -116,25 +116,26 @@ public class HTMLFilter2 extends AbstractFilter {
             IOException {
         HTMLWriter hwriter;
         HTMLOptions options = new HTMLOptions(processOptions);
-        if (encoding == null)
+        if (encoding == null) {
             this.targetEncoding = sourceEncoding;
-        else
+        } else {
             this.targetEncoding = encoding;
-
+        }
         hwriter = new HTMLWriter(outfile.getAbsolutePath(), this.targetEncoding, options);
         return new BufferedWriter(hwriter);
     }
 
     @Override
-    public void processFile(BufferedReader infile, BufferedWriter outfile, org.omegat.filters2.FilterContext fc) throws IOException,
-            TranslationException {
+    public void processFile(BufferedReader infile, BufferedWriter outfile,
+            org.omegat.filters2.FilterContext fc) throws IOException, TranslationException {
         StringBuilder all = null;
         try {
             all = new StringBuilder();
-            char cbuf[] = new char[1000];
+            char[] cbuf = new char[1000];
             int len = -1;
-            while ((len = infile.read(cbuf)) > 0)
+            while ((len = infile.read(cbuf)) > 0) {
                 all.append(cbuf, 0, len);
+            }
         } catch (OutOfMemoryError e) {
             // out of memory?
             all = null;

@@ -25,7 +25,11 @@
 
 package org.omegat.core.data;
 
-public class DataUtils {
+public final class DataUtils {
+
+    private DataUtils() {
+    }
+
     public static boolean isDuplicate(SourceTextEntry ste, TMXEntry te) {
         return ste.getDuplicate() == SourceTextEntry.DUPLICATE.NEXT && te.defaultTranslation;
     }

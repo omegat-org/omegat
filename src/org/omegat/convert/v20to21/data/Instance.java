@@ -64,10 +64,11 @@ public class Instance {
     private String sourceEncoding;
 
     public String getSourceEncodingHuman() {
-        if (sourceEncoding == null)
+        if (sourceEncoding == null) {
             return ENCODING_AUTO_HUMAN;
-        else
+        } else {
             return sourceEncoding;
+        }
     }
 
     public String getSourceEncoding() {
@@ -75,19 +76,21 @@ public class Instance {
     }
 
     public void setSourceEncoding(String sourceEncoding) {
-        if (sourceEncoding == null || sourceEncoding.equals(ENCODING_AUTO_HUMAN))
+        if (sourceEncoding == null || sourceEncoding.equals(ENCODING_AUTO_HUMAN)) {
             this.sourceEncoding = null;
-        else
+        } else {
             this.sourceEncoding = sourceEncoding;
+        }
     }
 
     private String targetEncoding;
 
     public String getTargetEncodingHuman() {
-        if (targetEncoding == null)
+        if (targetEncoding == null) {
             return ENCODING_AUTO_HUMAN;
-        else
+        } else {
             return targetEncoding;
+        }
     }
 
     public String getTargetEncoding() {
@@ -95,10 +98,11 @@ public class Instance {
     }
 
     public void setTargetEncoding(String targetEncoding) {
-        if (targetEncoding == null || targetEncoding.equals(ENCODING_AUTO_HUMAN))
+        if (targetEncoding == null || targetEncoding.equals(ENCODING_AUTO_HUMAN)) {
             this.targetEncoding = null;
-        else
+        } else {
             this.targetEncoding = targetEncoding;
+        }
     }
 
     private String targetFilenamePattern;

@@ -48,7 +48,10 @@ import org.omegat.util.TMXReader2;
  * @author Aaron Madlon-Kay
  *
  */
-public class ExternalTMFactory {
+public final class ExternalTMFactory {
+
+    private ExternalTMFactory() {
+    }
 
     public static boolean isSupported(File file) {
         return TMXLoader.isSupported(file) || BifileLoader.isSupported(file);
@@ -72,7 +75,7 @@ public class ExternalTMFactory {
         }
     }
 
-    public static class TMXLoader {
+    public static final class TMXLoader {
         public static boolean isSupported(File file) {
             String name = file.getName().toLowerCase();
             return name.endsWith(OConsts.TMX_EXTENSION) || name.endsWith(OConsts.TMX_GZ_EXTENSION);
@@ -103,11 +106,10 @@ public class ExternalTMFactory {
         }
 
         public ExternalTMX load(Language sourceLang, Language targetLang) throws Exception {
-            return new ExternalTMX(file.getName(), loadImpl(file, doSegmenting, sourceLang, targetLang));
+            return new ExternalTMX(file.getName(), loadImpl(sourceLang, targetLang));
         }
 
-        private List<PrepareTMXEntry> loadImpl(File file, boolean doSegmenting, Language sourceLang,
-                Language targetLang) throws Exception {
+        private List<PrepareTMXEntry> loadImpl(Language sourceLang, Language targetLang) throws Exception {
             List<PrepareTMXEntry> entries = new ArrayList<>();
 
             TMXReader2.LoadCallback loader = new TMXReader2.LoadCallback() {
@@ -167,7 +169,7 @@ public class ExternalTMFactory {
         }
     }
 
-    public static class BifileLoader {
+    public static final class BifileLoader {
         public static boolean isSupported(File file) {
             FilterMaster fm = Core.getFilterMaster();
             try {

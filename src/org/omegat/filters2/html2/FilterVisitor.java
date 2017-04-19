@@ -850,7 +850,6 @@ public class FilterVisitor extends NodeVisitor {
     }
 
     /** Named HTML Entities and corresponding numeric character references */
-    // CHECKSTYLE:OFF
     private static final Object[][] ENTITIES = {
             { "quot", 34 },
             { "amp", 38 },
@@ -981,7 +980,6 @@ public class FilterVisitor extends NodeVisitor {
 
             { "spades", 9824 }, { "clubs", 9827 }, { "hearts", 9829 },
             { "diams", 9830 } };
-    // CHECKSTYLE:ON
 
     /** Converts HTML entities to normal characters */
     protected String entitiesToChars(String str) {

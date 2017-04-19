@@ -138,13 +138,13 @@ public class ImportFromAutoTMX {
                 hasOtherProp = true;
             }
         }
-        return EntryKey.IGNORE_FILE_CONTEXT ? hasFileProp && hasOtherProp : hasFileProp;
+        return EntryKey.isIgnoreFileContext() ? hasFileProp && hasOtherProp : hasFileProp;
     }
 
     private boolean altTranslationMatches(PrepareTMXEntry entry, EntryKey key) {
         try {
             for (TMXProp p : entry.otherProperties) {
-                if (p.getType().equals(ProjectTMX.PROP_FILE) && EntryKey.IGNORE_FILE_CONTEXT) {
+                if (p.getType().equals(ProjectTMX.PROP_FILE) && EntryKey.isIgnoreFileContext()) {
                     continue;
                 }
                 Field f = EntryKey.class.getField(p.getType());

@@ -44,7 +44,7 @@ public class EntryKey implements Comparable<EntryKey> {
     /**
      * When true, ignore the {@link #file} member when comparing EntryKeys.
      */
-    public static boolean IGNORE_FILE_CONTEXT = false;
+    private static boolean ignoreFileContext = false;
 
     public EntryKey(final String file, final String sourceText, final String id, final String prev,
             final String next, final String path) {
@@ -59,7 +59,7 @@ public class EntryKey implements Comparable<EntryKey> {
     @Override
     public int hashCode() {
         int hash = sourceText.hashCode();
-        if (!IGNORE_FILE_CONTEXT && file != null) {
+        if (!ignoreFileContext && file != null) {
             hash += file.hashCode();
         }
         if (id != null) {
@@ -84,7 +84,7 @@ public class EntryKey implements Comparable<EntryKey> {
         }
         EntryKey o = (EntryKey) obj;
         return StringUtil.equalsWithNulls(sourceText, o.sourceText) && // source
-                (IGNORE_FILE_CONTEXT || StringUtil.equalsWithNulls(file, o.file)) && // file
+                (ignoreFileContext || StringUtil.equalsWithNulls(file, o.file)) && // file
                 StringUtil.equalsWithNulls(id, o.id) && // id
                 StringUtil.equalsWithNulls(prev, o.prev) && // prev
                 StringUtil.equalsWithNulls(next, o.next) && // next
@@ -93,7 +93,7 @@ public class EntryKey implements Comparable<EntryKey> {
 
     @Override
     public int compareTo(EntryKey o) {
-        int c = IGNORE_FILE_CONTEXT ? 0 : StringUtil.compareToWithNulls(file, o.file);
+        int c = ignoreFileContext ? 0 : StringUtil.compareToWithNulls(file, o.file);
         if (c == 0) {
             c = StringUtil.compareToWithNulls(id, o.id);
         }
@@ -118,7 +118,11 @@ public class EntryKey implements Comparable<EntryKey> {
                 + prev + "', next='" + next + "']";
     }
 
-    public static void setIgnoreFileContext(boolean ignoreFileContext) {
-        IGNORE_FILE_CONTEXT = ignoreFileContext;
+    public static void setIgnoreFileContext(boolean ignore) {
+        ignoreFileContext = ignore;
+    }
+
+    public static boolean isIgnoreFileContext() {
+        return ignoreFileContext;
     }
 }

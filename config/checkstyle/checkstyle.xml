@@ -41,6 +41,16 @@
 
     <property name="fileExtensions" value="java, properties, xml"/>
 
+    <module name="SuppressionCommentFilter">
+        <property name="offCommentFormat" value="&lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents"/>
+        <property name="onCommentFormat" value="&lt;/editor-fold&gt;//GEN-END:initComponents"/>
+    </module>
+
+    <module name="SuppressionCommentFilter">
+        <property name="offCommentFormat" value="// Variables declaration - do not modify//GEN-BEGIN:variables"/>
+        <property name="onCommentFormat" value="// End of variables declaration//GEN-END:variables"/>
+    </module>
+
     <!-- Checks that a package-info.java file exists for each package.     -->
     <!-- See http://checkstyle.sf.net/config_javadoc.html#JavadocPackage -->
     <module name="JavadocPackage"/>
@@ -78,6 +88,8 @@
     <!-- </module> -->
 
     <module name="TreeWalker">
+
+        <module name="FileContentsHolder"/>
 
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->

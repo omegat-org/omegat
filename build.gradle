@@ -702,10 +702,6 @@ tasks.withType(FindBugs) {
     }
 }
 
-checkstyle {
-    ignoreFailures = true
-}
-
 checkstyleMain.exclude '**/gen/**'
 
 task jar2(type: Sync) {

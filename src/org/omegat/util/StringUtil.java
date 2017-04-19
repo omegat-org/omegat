@@ -571,6 +571,7 @@ public final class StringUtil {
      * @param text
      * @return Normalized-width text
      */
+    // CHECKSTYLE:OFF
     public static String normalizeWidth(String text) {
         StringBuilder sb = new StringBuilder(text);
 
@@ -808,6 +809,7 @@ public final class StringUtil {
 
         return normalizeUnicode(result);
     }
+    // CHECKSTYLE:ON
 
     /**
      * Strip whitespace from the end of a string. Uses

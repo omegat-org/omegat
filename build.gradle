@@ -706,6 +706,8 @@ checkstyle {
     ignoreFailures = true
 }
 
+checkstyleMain.exclude '**/gen/**'
+
 task jar2(type: Sync) {
     description = 'Create minimal executable output for debugging.'
     destinationDir = file("${buildDir}/install/jar2")

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -42,7 +42,7 @@ import javax.xml.bind.DatatypeConverter;
 
 /**
  * Utilities for string processing.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Tiago Saboga
@@ -51,7 +51,10 @@ import javax.xml.bind.DatatypeConverter;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
-public class StringUtil {
+public final class StringUtil {
+
+    private StringUtil() {
+    }
 
     public static final char TRUNCATE_CHAR = '\u2026';
 
@@ -148,11 +151,11 @@ public class StringUtil {
             return isTitleCase(input.codePointAt(0));
         }
     }
-    
+
     public static boolean isTitleCase(int codePoint) {
         // True if is actual title case, or if is upper case and has no separate title case variant.
-        return Character.isTitleCase(codePoint) ||
-                (Character.isUpperCase(codePoint) && Character.toTitleCase(codePoint) == codePoint);
+        return Character.isTitleCase(codePoint)
+                || (Character.isUpperCase(codePoint) && Character.toTitleCase(codePoint) == codePoint);
     }
 
     /**
@@ -172,7 +175,7 @@ public class StringUtil {
         }
         return true;
     }
-    
+
     /**
      * Returns true if the input is a whitespace character
      * (including non-breaking characters that are false according to
@@ -184,7 +187,7 @@ public class StringUtil {
                 || codePoint == '\u2007'
                 || codePoint == '\u202F';
     }
-    
+
     public static boolean isCJK(String input) {
         if (input.isEmpty()) {
             return false;
@@ -199,14 +202,14 @@ public class StringUtil {
         }
         return true;
     }
-    
+
     public static String capitalizeFirst(String text, Locale locale) {
         int remainder = text.offsetByCodePoints(0, 1);
         String firstCP = text.substring(0, remainder);
         return StringUtil.toTitleCase(firstCP, locale)
                 + text.substring(remainder);
     }
-    
+
     public static String matchCapitalization(String text, String matchTo, Locale locale) {
         if (StringUtil.isEmpty(matchTo)) {
             return text;
@@ -215,7 +218,7 @@ public class StringUtil {
         if (text.startsWith(matchTo)) {
             return text;
         }
-        
+
         // If matching to title case (or 1 upper char), capitalize first letter.
         // Don't turn into title case because the text may be e.g. a phrase
         // with intentional mixed casing.
@@ -233,7 +236,7 @@ public class StringUtil {
         }
         return text;
     }
-    
+
     /**
      * Convert text to title case according to the supplied locale.
      */
@@ -260,7 +263,7 @@ public class StringUtil {
                     : text.substring(0, remainderOffset).toUpperCase(locale);
         return first + text.substring(remainderOffset).toLowerCase(locale);
     }
-    
+
     /**
      * Returns first not null object from list, or null if all values is null.
      */
@@ -313,7 +316,7 @@ public class StringUtil {
             return v1.compareTo(v2);
         }
     }
-    
+
     /**
      * Extracts first N codepoints from string.
      */
@@ -380,7 +383,7 @@ public class StringUtil {
         }
         return substring.equals(text.substring(pos - substring.length(), pos));
     }
-    
+
     public static String stripFromEnd(String string, String... toStrip) {
         if (string == null) {
             return null;
@@ -424,7 +427,7 @@ public class StringUtil {
         }
         return sb.toString();
     }
-    
+
     public static boolean isValidXMLChar(int codePoint) {
         if (codePoint < 0x20) {
             if (codePoint != 0x09 && codePoint != 0x0A && codePoint != 0x0D) {
@@ -500,7 +503,7 @@ public class StringUtil {
      * Converts XML entities to characters.
      */
     public static String unescapeXMLEntities(String text) {
-    
+
         if (text.contains("&gt;")) {
             text = text.replaceAll("&gt;", ">");
         }
@@ -549,7 +552,7 @@ public class StringUtil {
         str = str.replaceAll("'", "''");
         return MessageFormat.format(str, arguments);
     }
-    
+
     /**
      * Normalize the
      * <a href="https://en.wikipedia.org/wiki/Halfwidth_and_fullwidth_forms">
@@ -647,7 +650,7 @@ public class StringUtil {
             case 0xFF9D: sb.setCharAt(i, (char)0x30F3); break;
             case 0xFF9E: sb.setCharAt(i, (char)0x3099); break;
             case 0xFF9F: sb.setCharAt(i, (char)0x309A); break;
-            }            
+            }
             // Hangul
             if (( ch > 0xFFA1 ) && ( ch <= 0xFFBE )) {
                 sb.setCharAt(i, (char)(ch-0xCE70));
@@ -680,7 +683,7 @@ public class StringUtil {
             case 0x212A: sb.setCharAt(i, 'K'); break;
             case 0x212B: sb.setCharAt(i, (char)0x00C5); break;
             }
-                            
+
             switch ( ch ) {
             // Squared Latin Abbreviations 1
             case 0x3371: sb.setCharAt(i, 'h'); sb.insert(i+1, "Pa"); i+=2; break;
@@ -842,7 +845,7 @@ public class StringUtil {
 
     /**
      * Convert a string's <code>charset</code> bytes into a Base64-encoded String.
-     * 
+     *
      * @param string
      *            a string
      * @param charset
@@ -856,7 +859,7 @@ public class StringUtil {
     /**
      * Convert a char array's <code>charset</code> bytes into a Base64-encoded String.
      * Useful for handling passwords. Intermediate buffers are cleared after use.
-     * 
+     *
      * @param chars
      *            a char array
      * @param charset
@@ -876,7 +879,7 @@ public class StringUtil {
      * Convert a Base64-encoded String into an array of bytes. Convenience
      * method for {@link DatatypeConverter#parseBase64Binary(String)} (available
      * since Java 1.6) because it's so well hidden.
-     * 
+     *
      * @param b64data
      *            Base64-encoded String
      * @return Data bytes
@@ -887,7 +890,7 @@ public class StringUtil {
 
     /**
      * Decode the Base64-encoded <code>charset</code> bytes back to a String.
-     * 
+     *
      * @param b64data
      *            Base64-encoded String
      * @param charset

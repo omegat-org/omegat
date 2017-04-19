@@ -68,11 +68,11 @@ public class FilterVisitor extends NodeVisitor {
     private BufferedWriter writer;
     private HTMLOptions options;
 
-    public FilterVisitor(HTMLFilter2 htmlfilter, BufferedWriter bufwriter, HTMLOptions options) {
+    public FilterVisitor(HTMLFilter2 htmlfilter, BufferedWriter bufwriter, HTMLOptions opts) {
         this.filter = htmlfilter;
         // HHC filter has no options
-        if (options != null) {
-            this.options = options;
+        if (opts != null) {
+            this.options = opts;
         } else {
             // To prevent a null pointer exception later, see https://sourceforge.net/p/omegat/bugs/651/
             this.options = new HTMLOptions(new TreeMap<String, String>());
@@ -119,13 +119,13 @@ public class FilterVisitor extends NodeVisitor {
     List<Node> afters;
 
     /** The tags behind the shortcuts */
-    List<Tag> s_tags;
+    List<Tag> sTags;
     /** The tag numbers of shorcutized tags */
-    List<Integer> s_tag_numbers;
+    List<Integer> sTagNumbers;
     /** The list of all the tag shortcuts */
-    List<String> s_shortcuts;
+    List<String> sShortcuts;
     /** The number of shortcuts stored */
-    int s_nshortcuts;
+    int sNumShortcuts;
 
     /**
      * Self traversal predicate.
@@ -163,54 +163,60 @@ public class FilterVisitor extends NodeVisitor {
             // configuration
             Vector<?> tagAttributes = tag.getAttributesEx();
             Iterator<?> i = tagAttributes.iterator();
-            while (i.hasNext() && intactTag == false) {
+            while (i.hasNext() && !intactTag) {
                 Attribute attribute = (Attribute) i.next();
                 String name = attribute.getName();
                 String value = attribute.getValue();
-                if (name == null || value == null)
+                if (name == null || value == null) {
                     continue;
+                }
                 intactTag = this.filter.checkIgnoreTags(name, value);
             }
         }
 
         if (intactTag) {
-            if (text)
+            if (text) {
                 endup();
-            else
+            } else {
                 flushbefors();
+            }
             writeout(tag.toHtml());
-            if (tag.getEndTag() != null)
+            if (tag.getEndTag() != null) {
                 recurse = false;
+            }
         } else {
             // recurse = true;
-            if (isParagraphTag(tag) && text)
+            if (isParagraphTag(tag) && text) {
                 endup();
-
+            }
             if (isPreformattingTag(tag) || Core.getFilterMaster().getConfig().isPreserveSpaces()) {
                 preformatting = true;
             }
             // Translate attributes of tags if they are not null.
             maybeTranslateAttribute(tag, "abbr");
             maybeTranslateAttribute(tag, "alt");
-            if (options.getTranslateHref())
+            if (options.getTranslateHref()) {
                 maybeTranslateAttribute(tag, "href");
-            if (options.getTranslateHreflang())
+            }
+            if (options.getTranslateHreflang()) {
                 maybeTranslateAttribute(tag, "hreflang");
+            }
             if (options.getTranslateLang()) {
                 maybeTranslateAttribute(tag, "lang");
                 maybeTranslateAttribute(tag, "xml:lang");
             }
             maybeTranslateAttribute(tag, "label");
-            if ("IMG".equals(tag.getTagName()) && options.getTranslateSrc())
+            if ("IMG".equals(tag.getTagName()) && options.getTranslateSrc()) {
                 maybeTranslateAttribute(tag, "src");
+            }
             maybeTranslateAttribute(tag, "summary");
             maybeTranslateAttribute(tag, "title");
             if ("INPUT".equals(tag.getTagName())) { //an input element
-                if (   options.getTranslateValue() //and we translate all input elements
-                    || options.getTranslateButtonValue() // or we translate submit/button/reset elements ...
-                        && (  "submit".equalsIgnoreCase(tag.getAttribute("type"))
-                           || "button".equalsIgnoreCase(tag.getAttribute("type"))
-                           || "reset".equalsIgnoreCase(tag.getAttribute("type"))
+                if (options.getTranslateValue() //and we translate all input elements
+                        || options.getTranslateButtonValue() // or we translate submit/button/reset elements ...
+                                && ("submit".equalsIgnoreCase(tag.getAttribute("type"))
+                                        || "button".equalsIgnoreCase(tag.getAttribute("type"))
+                                        || "reset".equalsIgnoreCase(tag.getAttribute("type"))
                            ) //and it is a submit/button/reset element.
                    ) {
                     //then translate the value
@@ -226,12 +232,13 @@ public class FilterVisitor extends NodeVisitor {
                 Vector<?> tagAttributes = tag.getAttributesEx();
                 Iterator<?> i = tagAttributes.iterator();
                 boolean doSkipMetaTag = false;
-                while (i.hasNext() && doSkipMetaTag == false) {
+                while (i.hasNext() && !doSkipMetaTag) {
                     Attribute attribute = (Attribute) i.next();
                     String name = attribute.getName();
                     String value = attribute.getValue();
-                    if (name == null || value == null)
+                    if (name == null || value == null) {
                         continue;
+                    }
                     doSkipMetaTag = this.filter.checkDoSkipMetaTag(name, value);
                 }
                 if (!doSkipMetaTag) {
@@ -255,7 +262,8 @@ public class FilterVisitor extends NodeVisitor {
     protected void maybeTranslateAttribute(Tag tag, String key) {
         String attr = tag.getAttribute(key);
         if (attr != null) {
-            String comment = OStrings.getString("HTMLFILTER_TAG") + " " + tag.getTagName() + " " + OStrings.getString("HTMLFILTER_ATTRIBUTE") + " " + key;
+            String comment = OStrings.getString("HTMLFILTER_TAG") + " " + tag.getTagName() + " "
+                    + OStrings.getString("HTMLFILTER_ATTRIBUTE") + " " + key;
             String trans = filter.privateProcessEntry(entitiesToChars(attr), comment);
             tag.setAttribute(key, charsToEntities(trans));
         }
@@ -287,10 +295,11 @@ public class FilterVisitor extends NodeVisitor {
             firstcall = false;
         }
 
-        if (text)
+        if (text) {
             queueTranslatable(string);
-        else
+        } else {
             queuePrefix(string);
+        }
     }
 
     /**
@@ -302,9 +311,12 @@ public class FilterVisitor extends NodeVisitor {
     @Override
     public void visitRemarkNode(Remark remark) {
         recurse = true;
-        if (text)
+        if (text) {
             endup();
-        if (!options.getRemoveComments()) writeout(remark.toHtml());
+        }
+        if (!options.getRemoveComments()) {
+            writeout(remark.toHtml());
+        }
     }
 
     /**
@@ -316,11 +328,12 @@ public class FilterVisitor extends NodeVisitor {
     @Override
     public void visitEndTag(Tag tag) {
         recurse = true;
-        if (isParagraphTag(tag) && text)
+        if (isParagraphTag(tag) && text) {
             endup();
-        if (isPreformattingTag(tag))
+        }
+        if (isPreformattingTag(tag)) {
             preformatting = false;
-
+        }
         queuePrefix(tag);
     }
 
@@ -337,10 +350,11 @@ public class FilterVisitor extends NodeVisitor {
      */
     @Override
     public void finishedParsing() {
-        if (text)
+        if (text) {
             endup();
-        else
+        } else {
             flushbefors();
+        }
     }
 
     /**
@@ -373,9 +387,9 @@ public class FilterVisitor extends NodeVisitor {
                 // End of JC's contribution
                 tagname.equals("FORM") || tagname.equals("TEXTAREA") || tagname.equals("FIELDSET")
                 || tagname.equals("LEGEND") || tagname.equals("LABEL") || tagname.equals("SELECT")
-                || tagname.equals("OPTION") || tagname.equals("HR") ||
+                || tagname.equals("OPTION") || tagname.equals("HR")
                 // Optional paragraph on BR
-                (tagname.equals("BR") && options.getParagraphOnBr());
+                || (tagname.equals("BR") && options.getParagraphOnBr());
 
     }
 
@@ -419,28 +433,29 @@ public class FilterVisitor extends NodeVisitor {
         int firstgoodlimit = befors.size();
         int firstgood = 0;
         while (firstgood < firstgoodlimit) {
-            Node good_node = all.get(firstgood);
-            if (!(good_node instanceof Tag)) {
+            Node goodNode = all.get(firstgood);
+            if (!(goodNode instanceof Tag)) {
                 firstgood++;
                 continue;
             }
-            Tag good = (Tag) good_node;
+            Tag good = (Tag) goodNode;
 
             // trying to test
             int recursion = 1;
             boolean found = false;
             for (int i = firstgood + 1; i < all.size(); i++) {
-                Node cand_node = all.get(i);
-                if (cand_node instanceof Tag) {
-                    Tag cand = (Tag) cand_node;
+                Node candNode = all.get(i);
+                if (candNode instanceof Tag) {
+                    Tag cand = (Tag) candNode;
                     if (cand.getTagName().equals(good.getTagName())) {
-                        if (!cand.isEndTag())
+                        if (!cand.isEndTag()) {
                             recursion++;
-                        else {
+                        } else {
                             recursion--;
                             if (recursion == 0) {
-                                if (i >= firstgoodlimit)
+                                if (i >= firstgoodlimit) {
                                     found = true;
+                                }
                                 // we've found an ending tag for this "good one"
                                 break;
                             }
@@ -450,8 +465,9 @@ public class FilterVisitor extends NodeVisitor {
             }
             // if we could find an ending,
             // this is a "good one"
-            if (found)
+            if (found) {
                 break;
+            }
             firstgood++;
         }
 
@@ -462,28 +478,29 @@ public class FilterVisitor extends NodeVisitor {
         all.addAll(afters);
         int lastgood = all.size() - 1;
         while (lastgood > lastgoodlimit) {
-            Node good_node = all.get(lastgood);
-            if (!(good_node instanceof Tag)) {
+            Node goodNode = all.get(lastgood);
+            if (!(goodNode instanceof Tag)) {
                 lastgood--;
                 continue;
             }
-            Tag good = (Tag) good_node;
+            Tag good = (Tag) goodNode;
 
             // trying to test
             int recursion = 1;
             boolean found = false;
             for (int i = lastgood - 1; i >= firstgoodlimit; i--) {
-                Node cand_node = all.get(i);
-                if (cand_node instanceof Tag) {
-                    Tag cand = (Tag) cand_node;
+                Node candNode = all.get(i);
+                if (candNode instanceof Tag) {
+                    Tag cand = (Tag) candNode;
                     if (cand.getTagName().equals(good.getTagName())) {
-                        if (cand.isEndTag())
+                        if (cand.isEndTag()) {
                             recursion++;
-                        else {
+                        } else {
                             recursion--;
                             if (recursion == 0) {
-                                if (i <= lastgoodlimit)
+                                if (i <= lastgoodlimit) {
                                     found = true;
+                                }
                                 // we've found a starting tag for this
                                 // "good one"
                                 break;
@@ -494,8 +511,9 @@ public class FilterVisitor extends NodeVisitor {
             }
             // if we coud find a starting,
             // this is a "good one"
-            if (found)
+            if (found) {
                 break;
+            }
             lastgood--;
         }
 
@@ -546,10 +564,11 @@ public class FilterVisitor extends NodeVisitor {
         // writing out all tags before the "first good" one
         for (int i = 0; i < firstgood; i++) {
             Node node = all.get(i);
-            if (node instanceof Tag)
+            if (node instanceof Tag) {
                 writeout("<" + node.getText() + ">");
-            else
+            } else {
                 writeout(compressWhitespace(node.getText()));
+            }
         }
 
         // appending all tags until "last good" one to paragraph text
@@ -559,8 +578,7 @@ public class FilterVisitor extends NodeVisitor {
             Node node = all.get(i);
             if (node instanceof Tag) {
                 shortcut((Tag) node, paragraph);
-            } else // node instanceof Text
-            {
+            } else { // node instanceof Text
                 paragraph.append(entitiesToChars(node.toHtml()));
             }
         }
@@ -591,8 +609,9 @@ public class FilterVisitor extends NodeVisitor {
             for (int cp, i = size; i > 0; i -= Character.charCount(cp)) {
                 cp = uncompressed.codePointBefore(i);
                 if (!Character.isWhitespace(cp)) {
-                    spacePostfix = i == size ? "" : uncompressed.substring(i,
-                            options.getCompressWhitespace() ? Math.min(uncompressed.offsetByCodePoints(i, 1), size) : size);
+                    spacePostfix = i == size ? ""
+                            : uncompressed.substring(i, options.getCompressWhitespace()
+                                    ? Math.min(uncompressed.offsetByCodePoints(i, 1), size) : size);
                     break;
                 }
             }
@@ -608,8 +627,9 @@ public class FilterVisitor extends NodeVisitor {
         String translation = filter.privateProcessEntry(compressed, null);
 
         // writing out uncompressed
-        if (compressed.equals(translation) && !options.getCompressWhitespace())
+        if (compressed.equals(translation) && !options.getCompressWhitespace()) {
             translation = uncompressed;
+        }
 
         // converting & < and > into &amp; &lt; and &gt; respectively
         // note that this doesn't change < and > of tag shortcuts
@@ -624,10 +644,11 @@ public class FilterVisitor extends NodeVisitor {
         // writing out all tags after the "last good" one
         for (int i = lastgood + 1; i < all.size(); i++) {
             Node node = all.get(i);
-            if (node instanceof Tag)
+            if (node instanceof Tag) {
                 writeout("<" + node.getText() + ">");
-            else
+            } else {
                 writeout(compressWhitespace(node.getText()));
+            }
         }
 
         cleanup();
@@ -640,13 +661,13 @@ public class FilterVisitor extends NodeVisitor {
         text = false;
         recurse = true;
         // paragraph = new StringBuffer();
-        befors = new ArrayList<Node>();
-        translatable = new ArrayList<Node>();
-        afters = new ArrayList<Node>();
-        s_tags = new ArrayList<Tag>();
-        s_tag_numbers = new ArrayList<Integer>();
-        s_shortcuts = new ArrayList<String>();
-        s_nshortcuts = 0;
+        befors = new ArrayList<>();
+        translatable = new ArrayList<>();
+        afters = new ArrayList<>();
+        sTags = new ArrayList<>();
+        sTagNumbers = new ArrayList<>();
+        sShortcuts = new ArrayList<>();
+        sNumShortcuts = 0;
     }
 
     /**
@@ -660,17 +681,17 @@ public class FilterVisitor extends NodeVisitor {
             result.append('/');
             // trying to lookup for appropriate starting tag
             int recursion = 1;
-            for (int i = s_tags.size() - 1; i >= 0; i--) {
-                Tag othertag = s_tags.get(i);
+            for (int i = sTags.size() - 1; i >= 0; i--) {
+                Tag othertag = sTags.get(i);
                 if (othertag.getTagName().equals(tag.getTagName())) {
-                    if (othertag.isEndTag())
+                    if (othertag.isEndTag()) {
                         recursion++;
-                    else {
+                    } else {
                         recursion--;
                         if (recursion == 0) {
                             // we've found a starting tag for this ending one
                             // !!!
-                            n = s_tag_numbers.get(i);
+                            n = sTagNumbers.get(i);
                             break;
                         }
                     }
@@ -678,12 +699,12 @@ public class FilterVisitor extends NodeVisitor {
             }
             if (n < 0) {
                 // ending tag without a starting one
-                n = s_nshortcuts;
-                s_nshortcuts++;
+                n = sNumShortcuts;
+                sNumShortcuts++;
             }
         } else {
-            n = s_nshortcuts;
-            s_nshortcuts++;
+            n = sNumShortcuts;
+            sNumShortcuts++;
         }
 
         // special handling for BR tag, as it's given a two-char shortcut
@@ -696,22 +717,23 @@ public class FilterVisitor extends NodeVisitor {
         }
 
         result.append(n);
-        if (tag.isEmptyXmlTag()) // This only detects tags that already have a
-                                 // slash in the source,
+        if (tag.isEmptyXmlTag()) { // This only detects tags that already have a
+                                   // slash in the source,
             result.append('/'); // but ignores HTML 4.x style <br>, <img>, and
                                 // similar tags without one
                                 // The code below would fix that, but breaks
                                 // backwards compatibility
                                 // with previously translated HTML files
+        }
         // if (tag.isEmptyXmlTag() || tag.getTagName().equals("BR") ||
         // tag.getTagName().equals("IMG"))
         // result.append('/');
         result.append('>');
 
         String shortcut = result.toString();
-        s_tags.add(tag);
-        s_tag_numbers.add(n);
-        s_shortcuts.add(shortcut);
+        sTags.add(tag);
+        sTagNumbers.add(n);
+        sShortcuts.add(shortcut);
         paragraph.append(shortcut);
     }
 
@@ -719,11 +741,11 @@ public class FilterVisitor extends NodeVisitor {
      * Recovers tag shortcuts into full tags.
      */
     private String unshorcutize(String str) {
-        for (int i = 0; i < s_shortcuts.size(); i++) {
-            String shortcut = s_shortcuts.get(i);
+        for (int i = 0; i < sShortcuts.size(); i++) {
+            String shortcut = sShortcuts.get(i);
             int pos = -1;
             while ((pos = str.indexOf(shortcut, pos + 1)) >= 0) {
-                Tag tag = s_tags.get(i);
+                Tag tag = sTags.get(i);
                 try {
                     str = str.substring(0, pos) + "<" + tag.getText() + ">"
                             + str.substring(pos + shortcut.length());
@@ -745,13 +767,14 @@ public class FilterVisitor extends NodeVisitor {
      * <p>
      * Whitespace text is simply added to the queue.
      */
-    private void queueTranslatable(Text text) {
-        if (!text.toHtml().trim().isEmpty()) {
+    private void queueTranslatable(Text txt) {
+        if (!txt.toHtml().trim().isEmpty()) {
             translatable.addAll(afters);
             afters.clear();
-            translatable.add(text);
-        } else
-            afters.add(text);
+            translatable.add(txt);
+        } else {
+            afters.add(txt);
+        }
     }
 
     /**
@@ -771,13 +794,14 @@ public class FilterVisitor extends NodeVisitor {
      * list that is inspected when the translatable text is sent to OmegaT core.
      */
     protected void queuePrefix(Tag tag) {
-        if (text)
+        if (text) {
             queueTranslatable(tag);
-        else if (isParagraphTag(tag)) {
+        } else if (isParagraphTag(tag)) {
             flushbefors();
             writeout("<" + tag.getText() + ">");
-        } else
+        } else {
             befors.add(tag);
+        }
     }
 
     /**
@@ -786,100 +810,89 @@ public class FilterVisitor extends NodeVisitor {
      * {@link #queueTranslatable(Tag)}, otherwise it's collected to a special
      * list that is inspected when the translatable text is sent to OmegaT core.
      */
-    private void queuePrefix(Text text) {
-        befors.add(text);
+    private void queuePrefix(Text txt) {
+        befors.add(txt);
     }
 
     /** Saves "Befors" to output stream and cleans the list. */
     private void flushbefors() {
         for (Node node : befors) {
-            if (node instanceof Tag)
+            if (node instanceof Tag) {
                 writeout("<" + node.getText() + ">");
-            else
+            } else {
                 writeout(compressWhitespace(node.getText()));
+            }
         }
         befors.clear();
     }
 
     /**
-     * Remove consecutive whitespace if otions.getCompressWhitespace()==true, and only space+tab is removed.
-     * Newlines are not touched, to preserve the layout a little more.
-     * NB: We cannot use StaticUtils.compressSpaces, because it trims a string consisting of only whitespace to the empty string.
-     * @param input some text outside / between tags where it is allowed to compress spaces.
+     * Remove consecutive whitespace if
+     * {@code options.getCompressWhitespace()==true}, and only space+tab is
+     * removed. Newlines are not touched, to preserve the layout a little more.
+     * <p>
+     * NB: We cannot use {@code StaticUtils.compressSpaces}, because it trims a
+     * string consisting of only whitespace to the empty string.
+     *
+     * @param input
+     *            some text outside / between tags where it is allowed to
+     *            compress spaces.
      * @return the compressed input.
      */
     private String compressWhitespace(String input) {
         if (options.getCompressWhitespace()) {
             Matcher whitespaceMatch = PatternConsts.SPACE_TAB.matcher(input);
-            return whitespaceMatch.replaceAll(" "); //keep at least 1 space, as not to change the meaning of the document.
+            // keep at least 1 space, as not to change the meaning of the document.
+            return whitespaceMatch.replaceAll(" ");
         } else {
             return input;
         }
     }
 
     /** Named HTML Entities and corresponding numeric character references */
-    private static final Object ENTITIES[][] = {
+    // CHECKSTYLE:OFF
+    private static final Object[][] ENTITIES = {
             { "quot", 34 },
             { "amp", 38 },
             { "lt", 60 },
             { "gt", 62 },
 
             // Latin Extended-A
-            { "OElig", 338 }, // latin capital ligature OE, U+0152
-                                           // ISOlat2
-            { "oelig", 339 }, // latin small ligature oe, U+0153
-                                           // ISOlat2
-            // ligature is a misnomer, this is a separate character in some
-            // languages
-            { "Scaron", 352 }, // latin capital letter S with
-                                            // caron, U+0160 ISOlat2
-            { "scaron", 353 }, // latin small letter s with caron,
-                                            // U+0161 ISOlat2
-            { "Yuml", 376 }, // latin capital letter Y with
-                                          // diaeresis, U+0178 ISOlat2
+            { "OElig", 338 }, // latin capital ligature OE, U+0152 ISOlat2
+            { "oelig", 339 }, // latin small ligature oe, U+0153 ISOlat2
+                              // ligature is a misnomer, this is a separate
+                              // character in some languages
+            { "Scaron", 352 }, // latin capital letter S with caron, U+0160 ISOlat2
+            { "scaron", 353 }, // latin small letter s with caron, U+0161 ISOlat2
+            { "Yuml", 376 }, // latin capital letter Y with diaeresis, U+0178 ISOlat2
 
             // Spacing Modifier Letters
-            { "circ", 710 }, // modifier letter circumflex accent,
-                                          // U+02C6 ISOpub
+            { "circ", 710 }, // modifier letter circumflex accent, U+02C6 ISOpub
             { "tilde", 732 }, // small tilde, U+02DC ISOdia
 
             // General Punctuation
             { "ensp", 8194 }, // en space, U+2002 ISOpub
             { "emsp", 8195 }, // em space, U+2003 ISOpub
             { "thinsp", 8201 }, // thin space, U+2009 ISOpub
-            { "zwnj", 8204 }, // zero width non-joiner, U+200C NEW
-                                           // RFC 2070
-            { "zwj", 8205 }, // zero width joiner, U+200D NEW RFC
-                                          // 2070
-            { "lrm", 8206 }, // left-to-right mark, U+200E NEW RFC
-                                          // 2070
-            { "rlm", 8207 }, // right-to-left mark, U+200F NEW RFC
-                                          // 2070
+            { "zwnj", 8204 }, // zero width non-joiner, U+200C NEW RFC 2070
+            { "zwj", 8205 }, // zero width joiner, U+200D NEW RFC 2070
+            { "lrm", 8206 }, // left-to-right mark, U+200E NEW RFC 2070
+            { "rlm", 8207 }, // right-to-left mark, U+200F NEW RFC 2070
             { "ndash", 8211 }, // en dash, U+2013 ISOpub
             { "mdash", 8212 }, // em dash, U+2014 ISOpub
-            { "lsquo", 8216 }, // left single quotation mark,
-                                            // U+2018 ISOnum
-            { "rsquo", 8217 }, // right single quotation mark,
-                                            // U+2019 ISOnum
-            { "sbquo", 8218 }, // single low-9 quotation mark,
-                                            // U+201A NEW
-            { "ldquo", 8220 }, // left double quotation mark,
-                                            // U+201C ISOnum
-            { "rdquo", 8221 }, // right double quotation mark,
-                                            // U+201D ISOnum
-            { "bdquo", 8222 }, // double low-9 quotation mark,
-                                            // U+201E NEW
+            { "lsquo", 8216 }, // left single quotation mark, U+2018 ISOnum
+            { "rsquo", 8217 }, // right single quotation mark, U+2019 ISOnum
+            { "sbquo", 8218 }, // single low-9 quotation mark, U+201A NEW
+            { "ldquo", 8220 }, // left double quotation mark, U+201C ISOnum
+            { "rdquo", 8221 }, // right double quotation mark, U+201D ISOnum
+            { "bdquo", 8222 }, // double low-9 quotation mark, U+201E NEW
             { "dagger", 8224 }, // dagger, U+2020 ISOpub
             { "Dagger", 8225 }, // double dagger, U+2021 ISOpub
             { "permil", 8240 }, // per mille sign, U+2030 ISOtech
-            { "lsaquo", 8249 }, // single left-pointing angle
-                                             // quotation mark, U+2039 ISO
-                                             // proposed
-            // lsaquo is proposed but not yet ISO standardized
-            { "rsaquo", 8250 }, // single right-pointing angle
-                                             // quotation mark, U+203A ISO
-                                             // proposed
-            // rsaquo is proposed but not yet ISO standardized
+            { "lsaquo", 8249 }, // single left-pointing angle quotation mark, U+2039 ISO
+                                // proposed: lsaquo is proposed but not yet ISO standardized
+            { "rsaquo", 8250 }, // single right-pointing angle quotation mark, U+203A ISO
+                                // proposed: rsaquo is proposed but not yet ISO standardized
             { "euro", 8364 }, // euro sign, U+20AC NEW
 
             { "nbsp", 160 }, { "iexcl", 161 }, { "cent", 162 },
@@ -967,7 +980,8 @@ public class FilterVisitor extends NodeVisitor {
             { "loz", 9674 },
 
             { "spades", 9824 }, { "clubs", 9827 }, { "hearts", 9829 },
-            { "diams", 9830 }, };
+            { "diams", 9830 } };
+    // CHECKSTYLE:ON
 
     /** Converts HTML entities to normal characters */
     protected String entitiesToChars(String str) {
@@ -1000,11 +1014,11 @@ public class FilterVisitor extends NodeVisitor {
                             }
                             hexEnd += Character.charCount(hexCp);
                         }
-                        String s_entity = str.substring(hexStart, hexEnd);
+                        String sEntity = str.substring(hexStart, hexEnd);
                         try {
-                            int n_entity = Integer.parseInt(s_entity, 16);
-                            if (n_entity > 0 && n_entity <= 0x10FFFF) {
-                                res.appendCodePoint(n_entity);
+                            int nEntity = Integer.parseInt(sEntity, 16);
+                            if (nEntity > 0 && nEntity <= 0x10FFFF) {
+                                res.appendCodePoint(nEntity);
                                 if (hexEnd < strlen && str.codePointAt(hexEnd) == ';') {
                                     i = hexEnd;
                                 } else {
@@ -1031,11 +1045,11 @@ public class FilterVisitor extends NodeVisitor {
                             }
                             decEnd += Character.charCount(decCp);
                         }
-                        String s_entity = str.substring(decStart, decEnd);
+                        String sEntity = str.substring(decStart, decEnd);
                         try {
-                            int n_entity = Integer.parseInt(s_entity, 10);
-                            if (n_entity > 0 && n_entity <= 0x10FFFF) {
-                                res.appendCodePoint(n_entity);
+                            int nEntity = Integer.parseInt(sEntity, 10);
+                            if (nEntity > 0 && nEntity <= 0x10FFFF) {
+                                res.appendCodePoint(nEntity);
                                 if (decEnd < strlen && str.codePointAt(decEnd) == ';') {
                                     i = decEnd;
                                 } else {
@@ -1064,10 +1078,10 @@ public class FilterVisitor extends NodeVisitor {
                         }
                         entEnd += Character.charCount(entCp);
                     }
-                    String s_entity = str.substring(entStart, entEnd);
-                    int n_entity = lookupEntity(s_entity);
-                    if (n_entity > 0 && n_entity <= 65535) {
-                        res.append((char) n_entity);
+                    String sEntity = str.substring(entStart, entEnd);
+                    int nEntity = lookupEntity(sEntity);
+                    if (nEntity > 0 && nEntity <= 65535) {
+                        res.append((char) nEntity);
                         if (entEnd < strlen && str.codePointAt(entEnd) == ';') {
                             i = entEnd;
                         } else {
@@ -1111,9 +1125,10 @@ public class FilterVisitor extends NodeVisitor {
      */
     private int lookupEntity(String entity) {
         for (int i = 0; i < ENTITIES.length; i++) {
-            Object[] ONENT = ENTITIES[i];
-            if (entity.equals(ONENT[0]))
-                return ((Integer) ONENT[1]).intValue();
+            Object[] onent = ENTITIES[i];
+            if (entity.equals(onent[0])) {
+                return ((Integer) onent[1]).intValue();
+            }
         }
         return -1;
     }
@@ -1155,7 +1170,7 @@ public class FilterVisitor extends NodeVisitor {
                     boolean foundShortcut = false; // here because it's
                                                    // impossible to step out of
                                                    // two loops at once
-                    for (String currShortcut : s_shortcuts) {
+                    for (String currShortcut : sShortcuts) {
                         if (maybeShortcut.equals(currShortcut)) {
                             // skipping the conversion of < into &lt;
                             // because it's a part of the tag

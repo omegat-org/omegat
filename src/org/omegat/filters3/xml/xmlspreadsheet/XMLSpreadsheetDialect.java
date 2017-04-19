@@ -1,12 +1,12 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2011-2012 Didier Briel
                2015 Didier Briel
- 
+
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -35,24 +35,24 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
  * This class specifies the XML Spreadsheet Dialect.
- * 
+ *
  * @author Didier Briel
  */
 public class XMLSpreadsheetDialect extends DefaultXMLDialect {
     public static final Pattern ROOT_PATTERN = Pattern.compile("Workbook");
-    
+
     public XMLSpreadsheetDialect() {
         defineConstraint(CONSTRAINT_ROOT, ROOT_PATTERN);
         defineParagraphTags(new String[] { "Workbook", "Cell", });
-        defineIntactTags(new String[] { 
+        defineIntactTags(new String[] {
             "DocumentProperties", "ExcelWorkbook", "WorksheetOptions", "OfficeDocumentSettings"});
 
     }
-    
+
     /**
      * In the XML Spreadsheet filter, content should not be translated in the following
-     * condition: When the tag is &lt;Data&gt; with the attribute ss:Type="Number". 
-     * 
+     * condition: When the tag is &lt;Data&gt; with the attribute ss:Type="Number".
+     *
      * @param tag
      *            An XML tag
      * @param atts

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
@@ -32,7 +32,7 @@ import java.io.Reader;
 /**
  * Reader class that preserves line breaks when using readLine(), that can be
  * retrieved through getLastLinebreak()
- * 
+ *
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  */
 public class LinebreakPreservingReader extends Reader {

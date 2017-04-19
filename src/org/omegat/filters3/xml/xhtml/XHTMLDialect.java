@@ -41,7 +41,7 @@ import org.xml.sax.InputSource;
 
 /**
  * This class specifies XHTML dialect of XML.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Alex Buloichik

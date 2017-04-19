@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -44,7 +44,7 @@ import org.omegat.util.StringUtil;
 /**
  * Filter to support Files for Magento CE locale. The files are a kind of CSV that looks like
  * "string in code","string to display in a locale"
- * 
+ *
  * @author Michael Zakharov <trapman.hunt@gmail.com>
  */
 public class MagentoFilter extends AbstractFilter {
@@ -69,7 +69,7 @@ public class MagentoFilter extends AbstractFilter {
     /**
      * Doing the processing of the file...
      * @param reader
-     * @param outfile  
+     * @param outfile
      */
     @Override
     public void processFile(BufferedReader reader, BufferedWriter outfile, FilterContext fc) throws IOException {
@@ -82,15 +82,15 @@ public class MagentoFilter extends AbstractFilter {
          * Magento CSV looks like "string in the code","translation to display"
          * The pattern below successfully handles cases like:
          * "Use "",""",""","" will be used"
-         * The string will be displayed as: Use "," 
+         * The string will be displayed as: Use ","
          * or, after translation: "," will be used
          * The pattern splits it like
          * "Use "",""" (key for translation) and ""","" will be used" (value for translation)
          */
         Pattern splitter = Pattern.compile(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
-        
+
         while ((line = lbpr.readLine()) != null) {
-            
+
             /**
              * Some lines in Magento locale CSV may look like:
              * "first, second
@@ -102,7 +102,7 @@ public class MagentoFilter extends AbstractFilter {
             while (!line.endsWith("\"") && (contLine = lbpr.readLine()) != null ) {
                 line += lbpr.getLinebreak() + contLine; // Preserve linebreaks
             }
-            
+
             String trimmed = line.trim();
 
             // skipping empty strings
@@ -110,26 +110,26 @@ public class MagentoFilter extends AbstractFilter {
                 outfile.write(line + lbpr.getLinebreak());
                 continue;
             }
-            
+
             String[] result = splitter.split(trimmed);
             if(result.length < 2 ) { // Guard for malformed rows
-                outfile.write(line + lbpr.getLinebreak()); 
-                continue;                
+                outfile.write(line + lbpr.getLinebreak());
+                continue;
             }
             String key = result[0];
             String value = result[1];
-            
+
             // Remove ""
-            key = key.substring(1, key.length() - 1); 
-            value = value.substring(1, value.length() - 1); 
-            
+            key = key.substring(1, key.length() - 1);
+            value = value.substring(1, value.length() - 1);
+
             // writing out: "string in the code","
             outfile.write("\"" + key + "\",\"");
 
             String trans = process(key, value);
-                        
+
             outfile.write(trans + "\""); // Translation and closing "
-            outfile.write(lbpr.getLinebreak()); 
+            outfile.write(lbpr.getLinebreak());
         }
         lbpr.close();
     }
@@ -150,12 +150,12 @@ public class MagentoFilter extends AbstractFilter {
             }
         }
     }
-    
+
     /**
-     * 
+     *
      * @param key
      * @param value
-     * @return 
+     * @return
      */
     private String process(String key, String value) {
         if (entryParseCallback != null) {

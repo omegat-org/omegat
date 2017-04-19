@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -67,7 +67,7 @@ public class XHTMLFilterTest extends TestFilterBase {
         XMLUnit.setTestEntityResolver(er);
         XMLUnit.setControlEntityResolver(er);
     }
-    
+
     @After
     public final void tearDown() throws Exception {
         XMLUnit.setControlEntityResolver(null);

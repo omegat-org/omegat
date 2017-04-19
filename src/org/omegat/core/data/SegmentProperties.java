@@ -32,7 +32,7 @@ import java.util.stream.IntStream;
 /**
  * Utility methods for working with segment property arrays. These arrays are simple key-value maps, where
  * keys are on the even indexes and associated values immediately follow.
- * 
+ *
  * @author Aaron Madlon-Kay
  *
  */

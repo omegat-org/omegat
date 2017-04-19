@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -34,7 +34,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
  * Dialect of Open XML files.
- * 
+ *
  * @author Didier Briel
  * @author Antonio Vilei
  */
@@ -51,14 +51,14 @@ public class OpenXMLDialect extends DefaultXMLDialect {
                 // Excel
                 "si", "comment", "definedName",
                 // PowerPoint
-                "a:p", "c:v", 
+                "a:p", "c:v",
                 // Visio
                 "Text"});
 
         if (options.getBreakOnBr()) {
             defineParagraphTag("w:br"); // Word
         }
-        
+
         if (options.getTranslateHiddenText()) // Word
             defineOutOfTurnTag("w:instrText");
         else
@@ -67,7 +67,7 @@ public class OpenXMLDialect extends DefaultXMLDialect {
         if (!options.getTranslateFallbackText()) { // Word
             defineIntactTag("mc:Fallback");
         }
-        
+
         defineIntactTags(new String[] {
                 // Excel
                 "authors", "rPh", "definedNames",
@@ -79,7 +79,7 @@ public class OpenXMLDialect extends DefaultXMLDialect {
                 "wp:align", "wp:posOffset", "wp14:pctWidth", "wp14:pctHeight", "w:fldChar", "cp:lastModifiedBy",
                 "cp:revision", "cp:lastPrinted", "dcterms:created", "dcterms:modified", "cp:version",
                 // Drawings
-                "xdr:col", "xdr:row", "xdr:colOff", "xdr:rowOff", 
+                "xdr:col", "xdr:row", "xdr:colOff", "xdr:rowOff",
                 // Visio (copied directly from the Visio filter. As far as we know, the dialect is the same)
                 "DocumentProperties",
                 "DocumentSettings",
@@ -143,7 +143,7 @@ public class OpenXMLDialect extends DefaultXMLDialect {
                 "XForm1D",
                 "ShdwBkgnd",
                 "TextBkgnd",
-                "vx:TextBkgnd",       
+                "vx:TextBkgnd",
         });
 
         defineTranslatableTagAttribute("sheet", "name"); // Excel
@@ -155,7 +155,7 @@ public class OpenXMLDialect extends DefaultXMLDialect {
         if (options.getTranslateLinks()) {
             defineTranslatableTagAttribute("Relationship", "Target"); // PowerPoint, only if TargetMode is External
         }
-        
+
         boolean aggregationEnabled = options.getAggregateTags();
         /*
          * The current OpenXML filter finds too many tags, usually causing what
@@ -168,7 +168,7 @@ public class OpenXMLDialect extends DefaultXMLDialect {
         // If defined in the options, set space preserving for all tags
         setForceSpacePreserving(options.getSpacePreserving());
     }
-    
+
     /**
      * Returns for a given attribute of a given tag if the attribute should be
      * translated with the given other attributes present. If the tagAttribute
@@ -180,7 +180,7 @@ public class OpenXMLDialect extends DefaultXMLDialect {
     public Boolean validateTranslatableTagAttribute(String tag, String attribute, Attributes atts) {
         // special case:
         if ("Relationship".equalsIgnoreCase(tag) && attribute.equalsIgnoreCase("Target") ) {
-            
+
                 for (int i = 0; i < atts.size(); i++) {
                     Attribute otherAttribute = atts.get(i);
                     if ("TargetMode".equalsIgnoreCase(otherAttribute.getName())

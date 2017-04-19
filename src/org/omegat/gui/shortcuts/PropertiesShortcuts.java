@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Alex Buloichik, Yu Tang
@@ -49,7 +49,7 @@ import org.omegat.util.StringUtil;
 
 /**
  * The <code>PropertiesShortcuts</code> class represents a persistent set of shortcut.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Yu Tang
  * @author Aaron Madlon-Kay
@@ -121,7 +121,7 @@ public class PropertiesShortcuts {
 
     /**
      * Load the properties file from the classpath
-     * 
+     *
      * @param path
      * @return whether the file was loaded (<code>false</code> if not present,
      *         etc.)
@@ -181,7 +181,7 @@ public class PropertiesShortcuts {
 
     /**
      * Travel by all submenus for setup shortcuts.
-     * 
+     *
      * @param menu
      *            menu or menu item
      */
@@ -243,7 +243,7 @@ public class PropertiesShortcuts {
 
     /**
      * For testing purposes
-     * 
+     *
      * @return Unmodifiable reference to data held by this instance
      */
     Map<String, String> getData() {

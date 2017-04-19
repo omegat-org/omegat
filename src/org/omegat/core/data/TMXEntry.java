@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
@@ -34,12 +34,12 @@ import org.omegat.util.StringUtil;
 
 /**
  * Storage for TMX entry.
- * 
+ *
  * Variables in this class can be changed only before store to ProjectTMX. After that, all values must be
  * unchangeable.
- * 
+ *
  * Only RealProject can create and change TMXEntry objects.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Guido Leenders
  * @author Aaron Madlon-Kay

@@ -31,7 +31,7 @@ import org.omegat.util.gui.Styles;
 
 /**
  * Marker for Non-breakable space
- * 
+ *
  * @author Martin Fleurke
  */
 public class NBSPMarker extends AbstractMarker {

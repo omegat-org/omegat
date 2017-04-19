@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -54,7 +54,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * This is a pane that displays comments on source texts.
- * 
+ *
  * @author Martin Fleurke
  * @author Alex Buloichik
  */
@@ -65,7 +65,7 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
     private static final String EXPLANATION = OStrings.getString("GUI_COMMENTSWINDOW_explanation");
 
     private final List<ProviderStorage> providers = new ArrayList<ProviderStorage>();
-    
+
     private final DockableScrollPane scrollPane;
 
     /** Creates new Comments Text Area Pane */
@@ -84,7 +84,7 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
         addCommentProvider(ENTRY_COMMENT_PROVIDER, 0);
 
         CoreEvents.registerEntryEventListener(this);
-        
+
         JTextPaneLinkifier.linkify(this);
     }
 
@@ -92,7 +92,7 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
         UIThreadsUtil.mustBeSwingThread();
 
         scrollPane.stopNotifying();
-        
+
         List<ProviderStorage> list;
         synchronized (providers) {
             list = new ArrayList<ProviderStorage>(providers);

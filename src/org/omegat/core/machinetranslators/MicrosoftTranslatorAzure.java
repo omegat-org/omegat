@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Alex Buloichik, Didier Briel
@@ -44,7 +44,7 @@ import org.omegat.util.WikiGet;
 
 /**
  * Support for Microsoft Translator API machine translation.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Aaron Madlon-Kay

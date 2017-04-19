@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -30,7 +30,7 @@ import java.awt.Component;
 /**
  * An interface implemented by views shown in the Preferences window. See
  * <code>BasePreferencesController</code> for a base implementation.
- * 
+ *
  * @author Aaron Madlon-Kay
  *
  */
@@ -101,7 +101,7 @@ public interface IPreferencesController {
      * <p>
      * When validation fails, implementors should <i>not</i> raise dialogs;
      * instead they should offer feedback within the view GUI.
-     * 
+     *
      * @return True if the settings are valid and OK to be persisted; false if
      *         not
      */

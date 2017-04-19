@@ -58,7 +58,7 @@ public class ScriptingTest extends TestCore {
      * <p>
      * NPE while initializing quick script menu entries when the script folder path
      * member is null (failed to be set because it was invalid).
-     * 
+     *
      * @see <a href="https://sourceforge.net/p/omegat/bugs/775/">Bug #775</a>
      */
     @Test
@@ -67,7 +67,7 @@ public class ScriptingTest extends TestCore {
 
         // Set quick script
         Preferences.setPreference(Preferences.SCRIPTS_QUICK_PREFIX + 1, "blah");
-        
+
         // Set bogus scripts folder (a file can't be a folder!)
         File tmp = File.createTempFile("omegat", "tmp");
         try {
@@ -96,7 +96,7 @@ public class ScriptingTest extends TestCore {
             }
         }
     }
-    
+
     @Test
     public void testScriptProperties() throws Exception {
         File scriptDir = new File(StaticUtils.installDir(), ScriptingWindow.DEFAULT_SCRIPTS_DIR);

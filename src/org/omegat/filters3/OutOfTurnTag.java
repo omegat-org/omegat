@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -31,7 +31,7 @@ import org.omegat.util.StringUtil;
 
 /**
  * Class for collecting out of turn pieces of document.
- * 
+ *
  * @author Maxym Mykhalchuk
  */
 public abstract class OutOfTurnTag extends Tag {
@@ -59,13 +59,13 @@ public abstract class OutOfTurnTag extends Tag {
      * be implemented by the decendant.
      * <p>
      * E.g. for OpenDocument footnote (out of turn tag "text:note-body") <code>
-     * &lt;text:note-body>&lt;text:p text:style-name="Endnote"&gt;The endnote 
-     * appears at the end of the document in OO but in the middle of 
+     * &lt;text:note-body>&lt;text:p text:style-name="Endnote"&gt;The endnote
+     * appears at the end of the document in OO but in the middle of
      * the segment in OmegaT.&lt;/text:p>&lt;/text:note-body&gt;
      * </code> this method should return the same if not translated, namely
      * <code>
-     * &lt;text:note-body>&lt;text:p text:style-name="Endnote"&gt;The endnote 
-     * appears at the end of the document in OO but in the middle of 
+     * &lt;text:note-body>&lt;text:p text:style-name="Endnote"&gt;The endnote
+     * appears at the end of the document in OO but in the middle of
      * the segment in OmegaT.&lt;/text:p>&lt;/text:note-body&gt;
      * </code>.
      */
@@ -76,14 +76,14 @@ public abstract class OutOfTurnTag extends Tag {
      * in TMX, without enclosing &lt;ph&gt;.
      * <p>
      * E.g. for OpenDocument footnote (out of turn tag "text:note-body") <code>
-     * &lt;text:note-body>&lt;text:p text:style-name="Endnote"&gt;The endnote 
-     * appears at the end of the document in OO but in the middle of 
+     * &lt;text:note-body>&lt;text:p text:style-name="Endnote"&gt;The endnote
+     * appears at the end of the document in OO but in the middle of
      * the segment in OmegaT.&lt;/text:p>&lt;/text:note-body&gt;
      * </code> this method should return the following, if not translated,
      * <code>
-     * &amp;lt;text:note-body&amp;gt;&amp;lt;text:p text:style-name="Endnote"&amp;gt;The 
-     * endnote appears at the end of the document in OO but in the middle of 
-     * the segment in 
+     * &amp;lt;text:note-body&amp;gt;&amp;lt;text:p text:style-name="Endnote"&amp;gt;The
+     * endnote appears at the end of the document in OO but in the middle of
+     * the segment in
      * OmegaT.&amp;lt;/text:p&amp;gt;&amp;lt;/text:note-body&amp;gt;
      * </code>.
      */

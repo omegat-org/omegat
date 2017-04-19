@@ -32,12 +32,12 @@ import org.omegat.util.Log;
 
 /**
  * Base class for search info about current entry in the separate thread.
- * 
+ *
  * Implementation must check isEntryChanged method and exit if antry changed,
  * against create multimple threads when user travels by entries fast.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
- * 
+ *
  * @param <T>
  *            result type of found data
  */
@@ -46,7 +46,7 @@ public abstract class EntryInfoSearchThread<T> extends Thread {
 
     /**
      * Entry which processed currently.
-     * 
+     *
      * If entry in pane was changed, it means user was moved to other entry, and
      * there is no sense to continue search.
      */
@@ -54,7 +54,7 @@ public abstract class EntryInfoSearchThread<T> extends Thread {
 
     /**
      * Constructor.
-     * 
+     *
      * @param pane
      *            entry info pane
      * @param entry
@@ -69,13 +69,13 @@ public abstract class EntryInfoSearchThread<T> extends Thread {
     /**
      * Check if current entry was changed. If user moved to other entry, there
      * is no sence to continue search.
-     * 
+     *
      * @return true if current entry was changed
      */
     protected boolean isEntryChanged() {
         return currentlyProcessedEntry != pane.currentlyProcessedEntry;
     }
-    
+
     /**
      * Throws exception if entry changed for stop processing.
      */
@@ -123,9 +123,9 @@ public abstract class EntryInfoSearchThread<T> extends Thread {
 
     /**
      * Implementation-dependent method for search info.
-     * 
+     *
      * If entry changed, method can return null.
-     * 
+     *
      * @return result of search
      */
     protected abstract T search() throws EntryChangedException, Exception;

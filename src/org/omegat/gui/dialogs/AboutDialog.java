@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -44,7 +44,7 @@ import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * About dialog, showing OmegaT version and information on contributors.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  */
@@ -74,7 +74,7 @@ public class AboutDialog extends JDialog {
                 Runtime.getRuntime().maxMemory() / 1024 / 1024 };
         String memoryUsage = StringUtil.format(OStrings.getString("MEMORY_USAGE"), args);
         memoryusage.setText(memoryUsage);
-        
+
         String javaVersion = StringUtil.format(OStrings.getString("JAVA_VERSION"),
                 System.getProperty("java.version"), Platform.is64Bit() ? 64 : 32);
         javaversion.setText(javaVersion);

@@ -37,13 +37,13 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * Class for process undo/redo operations.
- * 
+ *
  * We can't use standard UndoManager because OmegaT changes text attributes,
  * which affects on standard UndoManager. Instead, TranslationUndoManager
  * remember only text changes. But changed text should be stored only on
  * UndoableEditEvent, because composed text chars(Japanese, Chinese) should be
  * stored as one char.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TranslationUndoManager implements UndoableEditListener {

@@ -1,8 +1,8 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
- 
+
  Copyright (C) 2008 Alex Buloichik (alex73mail@gmail.com)
                2013, 2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
@@ -53,7 +53,7 @@ import org.omegat.util.Token;
 
 /**
  * Base class for Lucene-based tokenizers.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
@@ -71,7 +71,7 @@ public abstract class BaseTokenizer implements ITokenizer {
      * Indicates that {@link #tokenizeVerbatim(String)} should use OmegaT's
      * {@link WordIterator} to tokenize "exactly" for display.
      * <p>
-     * For language-specific tokenizers that maintain the property that 
+     * For language-specific tokenizers that maintain the property that
      * <code>(the concatenation of all tokens).equals(original string) == true</code>,
      * set this to false to use the language-specific tokenizer for everything.
      */
@@ -89,7 +89,7 @@ public abstract class BaseTokenizer implements ITokenizer {
             }
         });
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -123,7 +123,7 @@ public abstract class BaseTokenizer implements ITokenizer {
         cache.put(strOrig, result);
         return result;
     }
-    
+
     @Override
     public String[] tokenizeWordsToStrings(String str, StemmingMode stemmingMode) {
         return tokenizeToStrings(str,
@@ -160,13 +160,13 @@ public abstract class BaseTokenizer implements ITokenizer {
 
         return result.toArray(new Token[result.size()]);
     }
-    
+
     @Override
     public String[] tokenizeVerbatimToStrings(String str) {
         if (StringUtil.isEmpty(str)) {
             return EMPTY_STRING_LIST;
         }
-        
+
         if (!shouldDelegateTokenizeExactly) {
             return tokenizeToStrings(str, false, false, false, false);
         }
@@ -185,7 +185,7 @@ public abstract class BaseTokenizer implements ITokenizer {
 
         return result.toArray(new String[result.size()]);
     }
-    
+
     protected Token[] tokenizeByCodePoint(String strOrig) {
         // See http://www.ibm.com/developerworks/library/j-unicode/#1-5
         // Example 1-5 appears to be faster than 1-6 for us (because our strings are short?)
@@ -196,7 +196,7 @@ public abstract class BaseTokenizer implements ITokenizer {
         }
         return tokens;
     }
-    
+
     protected String[] tokenizeByCodePointToStrings(String strOrig) {
         // See http://www.ibm.com/developerworks/library/j-unicode/#1-5
         // Example 1-5 appears to be faster than 1-6 for us (because our strings are short?)
@@ -241,7 +241,7 @@ public abstract class BaseTokenizer implements ITokenizer {
         }
         return result.toArray(new Token[result.size()]);
     }
-    
+
     protected String[] tokenizeToStrings(String str, boolean stemsAllowed, boolean stopWordsAllowed,
             boolean filterDigits, boolean filterWhitespace) {
         if (StringUtil.isEmpty(str)) {
@@ -303,7 +303,7 @@ public abstract class BaseTokenizer implements ITokenizer {
         }
         return !(filterWhitespace && isWhitespaceOnly);
     }
-    
+
     protected abstract TokenStream getTokenStream(String strOrig, boolean stemsAllowed, boolean stopWordsAllowed)
             throws IOException;
 
@@ -327,7 +327,7 @@ public abstract class BaseTokenizer implements ITokenizer {
         }
         return ann.languages();
     }
-    
+
     protected Language getLanguage() {
         String[] languages = getSupportedLanguages();
         if (languages.length == 0 || languages[0] == Tokenizer.DISCOVER_AT_RUNTIME) {
@@ -372,14 +372,14 @@ public abstract class BaseTokenizer implements ITokenizer {
         }
         return sb.toString();
     }
-    
+
     protected String printTest(String[] strings, String input) {
         StringBuilder sb = new StringBuilder();
         sb.append(StringUtils.join(strings, ", ")).append('\n');
         sb.append("Is verbatim: ").append(StringUtils.join(strings, "").equals(input)).append('\n');
         return sb.toString();
     }
-    
+
     public static ICommentProvider TOKENIZER_DEBUG_PROVIDER = new ICommentProvider() {
         @Override
         public String getComment(SourceTextEntry newEntry) {

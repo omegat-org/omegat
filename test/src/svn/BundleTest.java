@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
@@ -60,13 +60,13 @@ import org.omegat.util.OStrings;
  * @author Aaron Madlon-Kay
  */
 public class BundleTest {
-    
+
     /**
      * Ensure that all UI string bundles have either US-ASCII encoding
      * or ISO-8859-1 encoding. The spec requires the latter, but ISO-8859-1
      * is a superset of ASCII so ASCII is also acceptable (and is widely used
      * in practice).
-     * 
+     *
      * @see PropertyResourceBundle https://docs.oracle.com/javase/8/docs/api/java/util/PropertyResourceBundle.html
      */
     @Test
@@ -79,7 +79,7 @@ public class BundleTest {
             assertEncoding(bundle);
         }
     }
-    
+
     private void assertEncoding(String bundle) throws IOException {
         try (InputStream stream = Main.class.getResourceAsStream(bundle)) {
             if (stream == null) {
@@ -93,7 +93,7 @@ public class BundleTest {
             assertTrue(encoding == null || "WINDOWS-1252".equals(encoding));
         }
     }
-    
+
     @Test
     public void testBundleLoading() {
         // We must set the default locale to English first because we provide our
@@ -101,7 +101,7 @@ public class BundleTest {
         // English bundle will never be tested in the case that the "default default"
         // is a language we provide a bundle for.
         Locale.setDefault(Locale.ENGLISH);
-        
+
         for (Language lang : Language.getLanguages()) {
             ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/Bundle", lang.getLocale());
             assertTrue(bundle.getKeys().hasMoreElements());
@@ -146,7 +146,7 @@ public class BundleTest {
      * code, but a lot of it requires a GUI environment (our CI is headless, so
      * such tests will rarely get run), or a substantial testing harness, or
      * requires people to manually add tests (which they just won't do).
-     * 
+     *
      * @throws Exception
      */
     @Test
@@ -180,7 +180,7 @@ public class BundleTest {
     /**
      * Process the text content of all .java files under /src. Will blow up if
      * any are not US-ASCII.
-     * 
+     *
      * @param consumer
      *            A function that accepts the file path and content
      * @throws IOException

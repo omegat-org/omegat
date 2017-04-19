@@ -1,9 +1,9 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2007 Zoltan Bartko 
+ Copyright (C) 2007 Zoltan Bartko
                2009-2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -43,7 +43,7 @@ import org.omegat.util.StaticUtils;
 
 /**
  * Dictionary manager. Spell checking dictionaries' utility functions.
- * 
+ *
  * @author Zoltan Bartko - bartkozoltan@bartkozoltan.com
  * @author Didier Briel
  */
@@ -54,7 +54,7 @@ public class DictionaryManager {
 
     /**
      * Creates a new instance of DictionaryManager.
-     * 
+     *
      * @param dirName
      *            : the directory where the spell checking dictionary files
      *            (*.(aff|dic) are available locally
@@ -154,7 +154,7 @@ public class DictionaryManager {
 
     /**
      * Uninstall (delete) a given dictionary from the dictionary directory
-     * 
+     *
      * @param lang
      *            : the language code (xx_YY) of the dictionary to be deleted
      * @returns true upon success, otherwise false
@@ -231,7 +231,7 @@ public class DictionaryManager {
      * installs a remote dictionary by downloading the corresponding zip file
      * from the net and by installing the aff and dic file to the dictionary
      * directory.
-     * 
+     *
      * @param langCode
      *            : the language code (xx_YY)
      */

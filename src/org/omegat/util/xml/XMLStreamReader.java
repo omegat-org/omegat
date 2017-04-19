@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -42,7 +42,7 @@ import org.omegat.util.StringUtil;
 
 /**
  * A reader for XML stream.
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  */
@@ -404,7 +404,7 @@ public class XMLStreamReader implements Closeable {
      * <p>
      * For comments we copy "--" into tagname and '...' into first attribute.
      * For CDATA we eat CDATA prefix, setup a "hack" flag and return.
-     * 
+     *
      * @see <a href=
      *      "http://sourceforge.net/tracker/?func=detail&atid=520347&aid=1109089&group_id=68187">
      *      bug fixes</a>

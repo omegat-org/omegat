@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -47,9 +47,9 @@ import org.omegat.util.Preferences;
 
 /**
  * Class that loads glossary files and adds glossary entries to strings of the source files.
- * 
+ *
  * This class don't need any threads synchronization code, since it only set and clear 'glossaryEntries' var.
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik <alex73mail@gmail.com>
@@ -142,7 +142,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
             }
         }
     }
-    
+
     public void forceUpdateGlossary() {
         pane.refresh();
     }
@@ -172,7 +172,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
 
     /**
      * Get glossary entries.
-     * 
+     *
      * @return all entries
      * @param src
      */
@@ -193,7 +193,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      * Get glossary entries for search operation. Almost the same as getGlossaryEntries(), except search
      * usually executed for every segment in project, i.e. should work enough fast. Then, search should be
      * produced by local files only.
-     * 
+     *
      * @return all entries
      * @param src
      */

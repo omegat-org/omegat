@@ -43,7 +43,7 @@ import org.xml.sax.InputSource;
 
 /**
  * Interface to describe XML dialect.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Martin Fleurke
  * @author Didier Briel
@@ -116,7 +116,7 @@ public interface XMLDialect {
      * absence of other attributes. For instance, in the ResX filter, tags
      * should not be translated when they contain the attribute "type", or when
      * the attribute "name" starts with "&amp;gt";
-     * 
+     *
      * @param tag
      *            The tag that could be translated
      * @param atts
@@ -129,7 +129,7 @@ public interface XMLDialect {
      * For a given tag, return wether the content of this tag should be
      * translated, depending on the content of one attribute and the presence or
      * absence of other attributes.
-     * 
+     *
      * @param tag
      *            The tag that could be translated
      * @param atts
@@ -143,7 +143,7 @@ public interface XMLDialect {
      * translated, depending on the content of one attribute and the presence or
      * absence of other attributes. For instance, in the Typo3 filter, tags
      * should be translated when the attribute locazible="1".
-     * 
+     *
      * @param tag
      *            The tag that could be translated
      * @param atts
@@ -158,7 +158,7 @@ public interface XMLDialect {
      * absence of other attributes). For instance, in the XLIFF filter, the
      * &lt;mark&gt; tag should start a new paragraph when the attribute "mtype"
      * contains "seg".
-     * 
+     *
      * @param tag
      *            The tag that could be a paragraph tag
      * @param atts
@@ -173,7 +173,7 @@ public interface XMLDialect {
      * absence of other attributes). For instance, in the XLIFF filter, the
      * &lt;mark&gt; tag should be a preformat tag when the attribute "mtype"
      * contains "seg".
-     * 
+     *
      * @param tag
      *            The tag that could be a preformat tag
      * @param atts
@@ -253,7 +253,7 @@ public interface XMLDialect {
 
     /**
      * Sets closingTag to <code>true</code> or <code>false</code>
-     * 
+     *
      * @param onOff
      *            The parameter setting wether closing tags should be used or
      *            not for empty tags.
@@ -267,7 +267,7 @@ public interface XMLDialect {
 
     /**
      * Sets tagsAggregationEnabled to <code>true</code> or <code>false</code>
-     * 
+     *
      * @param onOff
      *            The parameter setting whether tags aggregation can be enabled
      *            in order to reduce the number of tags shown to the user.

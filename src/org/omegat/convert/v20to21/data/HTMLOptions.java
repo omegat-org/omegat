@@ -53,14 +53,14 @@ import java.io.Serializable;
  * Skip text matching regExp []<br>
  * Skip content of meta-tag when any of the given attibutename-value pairs is
  * present in the tag
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Martin Fleurke
  */
 public class HTMLOptions implements Serializable {
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 1L;
     /** (X)HTML filter should always add/rewrite encoding declaration. */
@@ -84,7 +84,7 @@ public class HTMLOptions implements Serializable {
     /**
      * Returns whether and when (X)HTML filter adds/rewrites encoding
      * declaration.
-     * 
+     *
      * @return One of {@link #REWRITE_ALWAYS}, {@link #REWRITE_IFHEADER},
      *         {@link #REWRITE_IFMETA}, {@link #REWRITE_NEVER}.
      */
@@ -94,7 +94,7 @@ public class HTMLOptions implements Serializable {
 
     /**
      * Sets when (X)HTML filter should add/rewrite encoding declaration.
-     * 
+     *
      * @param rewriteEncoding
      *            One of {@link #REWRITE_ALWAYS}, {@link #REWRITE_IFHEADER},
      *            {@link #REWRITE_IFMETA}, {@link #REWRITE_NEVER}.

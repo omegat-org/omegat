@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko
@@ -40,7 +40,7 @@ import org.omegat.util.StringUtil;
 
 /**
  * The table model of the table in the autotext configuration window.
- * 
+ *
  * @author bartkoz
  * @author Aaron Madlon-Kay
  */
@@ -48,11 +48,11 @@ import org.omegat.util.StringUtil;
 public class AutotextTableModel extends AbstractTableModel {
 
     private List<AutotextItem> data = Collections.emptyList();
-    
+
     public AutotextTableModel(Collection<AutotextItem> data) {
         this.data = new ArrayList<>(data);
     }
-    
+
     /**
      * Store the data to the specified autotext list. All items, where the target is not empty are stored.
      * @param autotext the target list
@@ -60,11 +60,11 @@ public class AutotextTableModel extends AbstractTableModel {
     public List<AutotextItem> getData() {
         return data.stream().filter(item -> !StringUtil.isEmpty(item.target)).collect(Collectors.toList());
     }
-    
-    private String[] columnNames = { OStrings.getString("AC_AUTOTEXT_ABBREVIATION"), 
+
+    private String[] columnNames = { OStrings.getString("AC_AUTOTEXT_ABBREVIATION"),
         OStrings.getString("AC_AUTOTEXT_TEXT"),
         OStrings.getString("AC_AUTOTEXT_COMMENT") };
-    
+
     @Override
     public int getRowCount() {
         return data.size();
@@ -88,12 +88,12 @@ public class AutotextTableModel extends AbstractTableModel {
         }
         throw new IllegalArgumentException();
     }
-    
+
     @Override
     public String getColumnName(int col) {
       return columnNames[col];
     }
-    
+
     @Override
     public void setValueAt(Object value, int row, int col) {
         AutotextItem current = data.get(row);
@@ -104,12 +104,12 @@ public class AutotextTableModel extends AbstractTableModel {
         data.set(row, item);
         fireTableCellUpdated(row, col);
     }
-    
+
     @Override
     public boolean isCellEditable(int row, int col) {
         return true;
     }
-    
+
     /**
      * add a new row.
      * @param item what to add
@@ -121,14 +121,14 @@ public class AutotextTableModel extends AbstractTableModel {
         fireTableDataChanged();
         return newPosition;
     }
-    
+
     /**
-     * remove a row. 
+     * remove a row.
      * @param position where from
      */
     public void removeRow(int position) {
         data.remove(position);
         fireTableDataChanged();
     }
-    
+
 }

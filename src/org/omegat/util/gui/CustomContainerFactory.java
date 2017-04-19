@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -45,12 +45,12 @@ import com.vlsolutions.swing.docking.DockableContainerFactory;
 /**
  * A custom {@link DockableContainerFactory} to allow us to supply custom
  * {@link DockViewTitleBar}s so that we can insert custom buttons.
- * 
+ *
  * @author Aaron Madlon-Kay
  *
  */
 public class CustomContainerFactory extends DefaultDockableContainerFactory {
-    
+
     private static Icon SETTINGS_ICON = new ImageIcon(
             ResourcesUtil.getBundledImage("appbar.settings.active.png"));
     private static Icon SETTINGS_ICON_INACTIVE = new ImageIcon(
@@ -62,18 +62,18 @@ public class CustomContainerFactory extends DefaultDockableContainerFactory {
     public DockViewTitleBar createTitleBar() {
         return new CustomTitleBar();
     }
-    
+
     @SuppressWarnings("serial")
     private static class CustomTitleBar extends DockViewTitleBar {
-        
+
         private JButton settingsButton;
-        
+
         public CustomTitleBar() {
             settingsButton = new JButton(SETTINGS_ICON_INACTIVE);
             settingsButton.setRolloverIcon(SETTINGS_ICON);
             settingsButton.setPressedIcon(SETTINGS_ICON_PRESSED);
             settingsButton.setToolTipText(OStrings.getString("DOCKING_HINT_SETTINGS"));
-            
+
             // These values are set to match defaults in DockViewTitleBarUI
             settingsButton.setRolloverEnabled(true);
             settingsButton.setBorderPainted(false);
@@ -81,7 +81,7 @@ public class CustomContainerFactory extends DefaultDockableContainerFactory {
             settingsButton.setFocusable(false);
             settingsButton.setMargin(new Insets(0, 2, 0, 2));
             settingsButton.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 2));
-            
+
             settingsButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -99,11 +99,11 @@ public class CustomContainerFactory extends DefaultDockableContainerFactory {
                 }
             });
         }
-        
+
         private IPaneMenu getSettingsCallback() {
             return (IPaneMenu) getDockable().getDockKey().getProperty(IPaneMenu.PROPERTY_PANE_MENU_ACTION_LISTENER);
         }
-        
+
         @Override
         public void finishLayout() {
             if (getSettingsCallback() != null) {

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -43,7 +43,7 @@ import com.vlsolutions.swing.docking.DockingConstants;
 
 /**
  * Dockable ScrollPane for a docking library.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Aaron Madlon-Kay
  */
@@ -71,7 +71,7 @@ public class DockableScrollPane extends JScrollPane implements Dockable {
             int size = c.getFont().getSize() / 2;
             c.setBorder(new EmptyBorder(size, size, size, size));
         }
-        Border panelBorder = UIManager.getBorder("OmegaTDockablePanel.border"); 
+        Border panelBorder = UIManager.getBorder("OmegaTDockablePanel.border");
         if (panelBorder != null) {
             setBorder(panelBorder);
         }
@@ -82,7 +82,7 @@ public class DockableScrollPane extends JScrollPane implements Dockable {
         dockKey = new DockKey(key, name, null, null, DockingConstants.HIDE_BOTTOM);
         dockKey.setFloatEnabled(detouchable);
         dockKey.setCloseEnabled(false);
-        
+
         if (view instanceof IPaneMenu) {
             setMenuProvider((IPaneMenu) view);
         }
@@ -108,7 +108,7 @@ public class DockableScrollPane extends JScrollPane implements Dockable {
         }
         dockKey.setNotification(true);
     }
-    
+
     public void stopNotifying() {
         dockKey.setNotification(false);
     }

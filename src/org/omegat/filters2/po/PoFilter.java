@@ -57,13 +57,13 @@ import org.omegat.util.TagUtil;
 
 /**
  * Filter to support po files (in various encodings).
- * 
+ *
  * Format described on http://www.gnu.org/software/hello/manual/gettext/PO-Files.html
- * 
+ *
  * Filter is not thread-safe !
- * 
+ *
  * Filter uses msgctx field as path, and plural index as suffix of path.
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Thomas Huriaux
@@ -288,7 +288,7 @@ public class PoFilter extends AbstractFilter {
 
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[] 
+        return new Instance[]
         { new Instance("*.po", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()),
                 new Instance("*.pot", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()) };
     }
@@ -451,7 +451,7 @@ public class PoFilter extends AbstractFilter {
             }
 
             if ((m = MSG_STR.matcher(s)).matches()) {
-                
+
                 // Hack to be able to translate empty segments
                 // If the source segment is empty and there is a reference then
                 // it copies the reference of the segment and the localization note into the source segment
@@ -720,7 +720,7 @@ public class PoFilter extends AbstractFilter {
      * string-line to left-align all lines. [With nowrap set to true, long lines are also never wrapped
      * (except for at newline characters), but that was already not done without nowrap.] [ 1869069 ] Escape
      * support for PO
-     * 
+     *
      * @param en
      *            The entire source text
      * @param allowNull
@@ -865,7 +865,7 @@ public class PoFilter extends AbstractFilter {
 
     /**
      * Returns true to indicate that Text filter has options.
-     * 
+     *
      * @return True, because the PO filter has options.
      */
     @Override

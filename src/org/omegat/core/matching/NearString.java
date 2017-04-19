@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -39,7 +39,7 @@ import org.omegat.util.TMXProp;
 
 /**
  * Class to hold a single fuzzy match.
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Thomas Cordonnier
@@ -49,7 +49,7 @@ public class NearString {
     public enum MATCH_SOURCE {
         MEMORY, TM, FILES
     };
-    
+
     public enum SORT_KEY {
         SCORE, SCORE_NO_STEM, ADJUSTED_SCORE
     }
@@ -72,7 +72,7 @@ public class NearString {
         this.changer = changer;
         this.changedDate = changedDate;
     }
-    
+
     public static NearString merge(NearString ns, final EntryKey key, final String source, final String translation,
             MATCH_SOURCE comesFrom, final boolean fuzzyMark, final int nearScore, final int nearScoreNoStem,
             final int adjustedScore, final byte[] nearData, final String projName, final String creator,
@@ -110,7 +110,7 @@ public class NearString {
     public String source;
     public String translation;
     public MATCH_SOURCE comesFrom;
-    
+
     public boolean fuzzyMark;
 
     public Scores[] scores;
@@ -130,13 +130,13 @@ public class NearString {
         public final int scoreNoStem;
         /** adjusted similarity score for match including all tokens */
         public final int adjustedScore;
-        
+
         public Scores(int score, int scoreNoStem, int adjustedScore) {
             this.score = score;
             this.scoreNoStem = scoreNoStem;
             this.adjustedScore = adjustedScore;
         }
-        
+
         public String toString() {
             StringBuilder b = new StringBuilder();
             b.append("(");
@@ -149,15 +149,15 @@ public class NearString {
             return b.toString();
         }
     }
-    
+
     public static class ScoresComparator implements Comparator<Scores> {
-        
+
         private final SORT_KEY key;
-        
+
         public ScoresComparator(SORT_KEY key) {
             this.key = key;
         }
-        
+
         @Override
         public int compare(Scores o1, Scores o2) {
             int s1 = primaryScore(o1);
@@ -177,7 +177,7 @@ public class NearString {
             }
             return 0;
         }
-        
+
         private int primaryScore(Scores s) {
             switch(key) {
             case SCORE:
@@ -189,7 +189,7 @@ public class NearString {
                 return s.adjustedScore;
             }
         }
-        
+
         private int secondaryScore(Scores s) {
             switch(key) {
             case SCORE:
@@ -201,7 +201,7 @@ public class NearString {
                 return s.score;
             }
         }
-        
+
         private int ternaryScore(Scores s) {
             switch(key) {
             case SCORE:

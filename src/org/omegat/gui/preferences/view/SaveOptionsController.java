@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -82,7 +82,7 @@ public class SaveOptionsController extends BasePreferencesController {
         panel.variablesList
                 .setModel(new DefaultComboBoxModel<>(new Vector<>(CommandVarExpansion.getCommandVariables())));
     }
-    
+
     @Override
     public void restoreDefaults() {
         panel.minutesSpinner.setValue(Preferences.AUTO_SAVE_DEFAULT / 60);

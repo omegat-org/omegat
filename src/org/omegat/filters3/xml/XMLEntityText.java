@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -30,7 +30,7 @@ import org.omegat.filters3.Text;
 /**
  * Internal entity text in XML. Like, for example, in
  * <code>&lt;title&gt;&amp;brandFullName; Credits&lt;/title&gt;</code>.
- * 
+ *
  * @author Maxym Mykhalchuk
  */
 public class XMLEntityText extends Text {

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -64,7 +64,7 @@ public class HTMLFilter2Test extends TestFilterBase {
         checkMulti("This is first line.", null, null, "", "This is second line.", null);
         checkMulti("This is second line.", null, null, "This is first line.", "", null);
         checkMultiEnd();
-        
+
         f = "test/data/filters/html/file-HTMLFilter2-SMP.html";
         fi = loadSourceFiles(filter, f);
 

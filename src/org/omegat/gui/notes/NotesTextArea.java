@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -49,7 +49,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * This is a pane that displays notes on translation units.
- * 
+ *
  * @author Martin Fleurke
  * @author Aaron Madlon-Kay
  */
@@ -72,7 +72,7 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes, IPan
         setEditable(false);
         setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
-        
+
         JTextPaneLinkifier.linkify(this);
         undoManager = new UndoManager();
         getDocument().addUndoableEditListener(undoManager);
@@ -132,7 +132,7 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes, IPan
             undoManager.redo();
         }
     }
-    
+
     @Override
     public void populatePaneMenu(JPopupMenu menu) {
         final JMenuItem notify = new JCheckBoxMenuItem(OStrings.getString("GUI_NOTESWINDOW_NOTIFICATIONS"));

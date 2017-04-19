@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -62,19 +62,19 @@ import org.omegat.util.Token;
 
 /**
  * Class to find matches by specified criteria.
- * 
+ *
  * Since we can use stemmers to prepare tokens, we should use 3-pass comparison of similarity. Similarity will
  * be calculated in 3 steps:
- * 
+ *
  * 1. Split original segment into word-only tokens using stemmer (with stop words list), then compare tokens.
- * 
+ *
  * 2. Split original segment into word-only tokens without stemmer, then compare tokens.
- * 
+ *
  * 3. Split original segment into not-only-words tokens (including numbers and tags) without stemmer, then
  * compare tokens.
- * 
+ *
  * This class is not thread safe ! Must be used in the one thread only.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
@@ -85,7 +85,7 @@ public class FindMatches {
     /**
     * According to gettext source code, PO fuzzies are created above 60%
     * https://sourceforge.net/p/omegat/feature-requests/1258/
-    */ 
+    */
     static final int PENALTY_FOR_FUZZY = 40;
     private static final int PENALTY_FOR_REMOVED = 5;
     private static final int SUBSEGMENT_MATCH_THRESHOLD = 85;
@@ -284,7 +284,7 @@ public class FindMatches {
 
     /**
      * Compare one entry with original entry.
-     * 
+     *
      * @param candEntry
      *            entry to compare
      */
@@ -363,7 +363,7 @@ public class FindMatches {
     /**
      * Check if entry have a chance to be added to result list. If no, there is no sense to calculate other
      * parameters.
-     * 
+     *
      * @param simStem
      *            similarity with stemming
      * @param simNoStem

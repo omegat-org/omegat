@@ -42,15 +42,15 @@ import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 
 /**
  * TMX Compliance tests as described on http://www.localization.org/fileadmin/standards/tmx1.4/comp.htm
- * 
+ *
  * The Level 1 Compliance verifies mostly TMX structure, white spaces handling
  * and how the application deals with non-ASCII characters and special characters
  * in XML such as '<', or '&', XML syntax, encodings, and so forth.
- * 
- * The Level 2 compliance verifies mostly how the application deals with content 
- * markup. To qualify for Level 2 compliance, the application must also qualify 
+ *
+ * The Level 2 compliance verifies mostly how the application deals with content
+ * markup. To qualify for Level 2 compliance, the application must also qualify
  * for Level 1 compliance.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TmxComplianceTests extends TmxComplianceBase {
@@ -247,7 +247,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
          * should contain "untranslated-string", but in the ExportTest1D.po
          * file it contains ID.
          */
-        
+
 //        File tmxFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1D.tmx");
 //        File sourceFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1D.po");
 //        File translatedFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1D_fr.po");
@@ -269,7 +269,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
 
     /**
      * Test Import2A - Content Markup Syntax in HTML.
-     * 
+     *
      * TEST CHANGED FROM TMX COMPLIANCE PACK BECAUSE WE HAVE OTHER SEGMENTATION SETTINGS, i.e. "Picture: <img
      * src="img.png"/>" should be processed as one segment by TMX compliance tests, but it's not a one segment
      * by OmegaT segmentation. Since it out of scope of testing, we patch tmx for runtime-only.
@@ -286,13 +286,13 @@ public class TmxComplianceTests extends TmxComplianceBase {
         fix.put("Picture:", createTMXEntry("Picture:", "Image:", true));
         translateUsingTmx(new HTMLFilter2(), config, "ImportTest2A.htm", "UTF-8", "ImportTest2A.tmx",
                 "windows-1252", props, fix);
-        
+
         List<String> lines1 = readTextFile(new File("test/data/tmx/TMXComplianceKit/ImportTest2A_fr-ca.htm"), "windows-1252");
         List<String> lines2 = readTextFile(outFile, "windows-1252");
 
         // fix meta line, since OmegaT writes own meta line for encoding
         lines2.set(2, "<meta content=\"text/html; charset=windows-1252\" http-equiv=\"Content-Type\">");
-        
+
         assertEquals(lines1.size(), lines2.size());
         for (int i = 0; i < lines1.size(); i++) {
             // HTML spec allows unescaped U+0022 QUOTE MARK (outside of attribute values);
@@ -302,7 +302,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
             assertEquals(line1, line2);
         }
     }
-    
+
     private String normalize(String str) {
         return str.replace("&quot;", "\"");
     }

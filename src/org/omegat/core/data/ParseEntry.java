@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -46,10 +46,10 @@ import org.omegat.util.StringUtil;
 
 /**
  * Process one entry on parse source file.
- * 
+ *
  * This class caches segments for one file, then flushes they. It required to ability to link prev/next
  * segments.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers
  * @author Alex Buloichik <alex73mail@gmail.com>
@@ -57,7 +57,7 @@ import org.omegat.util.StringUtil;
 public abstract class ParseEntry implements IParseCallback {
 
     private final ProjectProperties m_config;
-    
+
     /** Cached segments. */
     private List<ParseEntryQueueItem> parseQueue = new ArrayList<ParseEntryQueueItem>();
 
@@ -82,7 +82,7 @@ public abstract class ParseEntry implements IParseCallback {
          */
         parseQueue.clear();
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -104,10 +104,10 @@ public abstract class ParseEntry implements IParseCallback {
             }
         }
     }
-    
+
     /**
      * This method is called by filters to add new entry in OmegaT after read it from source file.
-     * 
+     *
      * @param id
      *            ID of entry, if format supports it
      * @param source
@@ -195,12 +195,12 @@ public abstract class ParseEntry implements IParseCallback {
         String[] props = comment == null ? null : new String[] { SegmentProperties.COMMENT, comment };
         addEntryWithProperties(id, source, translation, isFuzzy, props, path, filter, protectedParts);
     }
-    
+
     /**
      * This method is called by filters to add new entry in OmegaT after read it from source file.
      * <p>
      * Old call without path, for compatibility.
-     * 
+     *
      * @param id
      *            ID of entry, if format supports it
      * @param source
@@ -246,7 +246,7 @@ public abstract class ParseEntry implements IParseCallback {
     /**
      * Adds a segment to the project. If a translation is given, it it added to
      * the projects TMX.
-     * 
+     *
      * @param id
      *            ID of entry, if format supports it
      * @param segmentIndex
@@ -275,7 +275,7 @@ public abstract class ParseEntry implements IParseCallback {
 
     /**
      * Strip some chars for represent string in UI.
-     * 
+     *
      * @param src
      *            source string to strip chars
      * @return result
@@ -350,7 +350,7 @@ public abstract class ParseEntry implements IParseCallback {
         public boolean crlf, cr;
         int spacesAtBegin, spacesAtEnd;
     }
-    
+
     /**
      * Storage for collected segments.
      */

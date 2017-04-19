@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -45,7 +45,7 @@ import org.omegat.util.TagUtil;
 /**
  * Translatable entry. Holds a list of source tags and text, translated text and
  * maintains correspondence between tags in source and in target.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -442,7 +442,7 @@ public class Entry {
      * the user translates. E.g. for
      * <code>Here's &lt;b&gt;bold text&lt;/b&gt;</code> should return
      * <code>Here's &lt;b0&gt;bold text&lt;/b0&gt;</code>.
-     * 
+     *
      * @param tagsAggregation
      *            Whether tags of this entry can be aggregated.
      * @param xmlDialect
@@ -471,7 +471,7 @@ public class Entry {
     /**
      * Returns long XML-encoded representation of the source entry for storing
      * in TMX. E.g. for <code>Here's &lt;b&gt;bold text&lt;/b&gt;</code> should
-     * return <code>Here's &lt;bpt i="0"&gt;&amp;b0&amp;gt;&lt;/bpt&gt;bold 
+     * return <code>Here's &lt;bpt i="0"&gt;&amp;b0&amp;gt;&lt;/bpt&gt;bold
      *       text&lt;ept i="0"&gt;&amp;lt;/b0&amp;gt;&lt;/ept&gt;</code>.
      */
     public String sourceToTMX() {
@@ -522,7 +522,7 @@ public class Entry {
      * <b>can</b> be translated as
      * <code>Etot tekst &lt;i&gt;naklonnyi&lt;/i&gt; i &lt;b&gt;poluzhirnyi&lt;/b&gt;</code>.
      * </ul>
-     * 
+     *
      * @throws TranslationException
      *             -- if any tag is missing or tags are ordered incorrectly.
      */

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Henry Pijffers
@@ -45,7 +45,7 @@ import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Dialog that accepts a segment number to jump to in the editor.
- * 
+ *
  * @author Henry Pijffers
  * @author Alex Buloichik
  * @author Aaron Madlon-Kay
@@ -56,14 +56,14 @@ public class GoToSegmentDialog extends javax.swing.JDialog {
 
     private AlphabeticalMarkers alphabeticalMarkers;
     private int result = -1;
-    
+
     /**
      * Creates new form GoToSegmentDialog
      */
     public GoToSegmentDialog(java.awt.Frame parent) {
         super(parent, true);
         initComponents();
-        
+
         segmentField.enableInputMethods(false);
         segmentField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -79,7 +79,7 @@ public class GoToSegmentDialog extends javax.swing.JDialog {
                 detectDidInputLetter();
             }
         });
-        
+
         StaticUIUtils.setEscapeAction(this, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -106,7 +106,7 @@ public class GoToSegmentDialog extends javax.swing.JDialog {
             okButtonActionPerformed(null);
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -204,7 +204,7 @@ public class GoToSegmentDialog extends javax.swing.JDialog {
             displayErrorMessage(maxNr);
             return;
         }
-        
+
         result = segmentNr;
         doClose();
     }//GEN-LAST:event_okButtonActionPerformed
@@ -222,17 +222,17 @@ public class GoToSegmentDialog extends javax.swing.JDialog {
         setVisible(false);
         dispose();
     }
-    
+
     private void displayErrorMessage(int maxNr) {
         JOptionPane.showMessageDialog(this,
                 StringUtil.format(OStrings.getString("MW_SEGMENT_NUMBER_ERROR"), maxNr),
                 OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
     }
-    
+
     public int getResult() {
         return result;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel fieldLabel;

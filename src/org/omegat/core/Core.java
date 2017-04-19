@@ -86,15 +86,15 @@ import org.omegat.util.RecentProjects;
 
 /**
  * Class which contains all components instances.
- * 
+ *
  * Note about threads synchronization: each component must have only local
  * synchronization. It mustn't synchronize around other components or some other
  * objects.
- * 
+ *
  * Components which works in Swing UI thread can have other synchronization
  * idea: it can not be synchronized to access to some data which changed only in
  * UI thread.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Wildrich Fourie
  */
@@ -199,17 +199,17 @@ public class Core {
 
     /**
      * Get comments area
-     * 
+     *
      * @return the comment area
      */
     public static IComments getComments() {
         return comments;
     }
-    
+
     public static IDictionaries getDictionaries() {
         return dictionaries;
     }
-    
+
     public static Segmenter getSegmenter() {
         return segmenter;
     }
@@ -287,7 +287,7 @@ public class Core {
 
     /**
      * Set main window instance for unit tests.
-     * 
+     *
      * @param mainWindow
      */
     protected static void setMainWindow(IMainWindow mainWindow) {
@@ -296,7 +296,7 @@ public class Core {
 
     /**
      * Set project instance for unit tests.
-     * 
+     *
      * @param currentProject
      */
     protected static void setCurrentProject(IProject currentProject) {
@@ -305,7 +305,7 @@ public class Core {
 
     /**
      * Register class for calculate marks.
-     * 
+     *
      * @param marker
      *            marker implementation
      */
@@ -357,7 +357,7 @@ public class Core {
      * For instance project load/save/compile/autosave operations must not be executed in parallel because it
      * will break project files, especially during team synchronization. For guaranteed non-parallel
      * execution, all such operations must be executed via this method.
-     * 
+     *
      * @param waitForUnlock
      *            should execution wait for unlock 3 minutes
      * @param run

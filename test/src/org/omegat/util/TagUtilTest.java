@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Alex Buloichik
@@ -40,15 +40,15 @@ import org.omegat.util.TagUtil.TagType;
 
 /**
  * Tests for tag utility methods.
- * 
+ *
  * @author Alex Buloichik
  * @author Aaron Madlon-Kay
  */
 public class TagUtilTest {
-    
+
     /**
      * Test of buildTagList method, of class org.omegat.util.StaticUtils.
-     * 
+     *
      * @throws Exception
      */
     @Test
@@ -82,7 +82,7 @@ public class TagUtilTest {
         tagList = TagUtil.buildTagList(str, new SourceTextEntry(null, 0, null, null, pp).getProtectedParts());
         assertEquals("Wrong tags found in '" + str + "'", Arrays.asList(new Tag(4, "<test>case</test>")), tagList);
     }
-    
+
     @Test
     public void testTagType() {
         // Only OmegaT tags (per PatternConsts.OMEGAT_TAG_DECOMPILE) can be
@@ -98,7 +98,7 @@ public class TagUtilTest {
         assertEquals(TagType.SINGLE, new Tag(-1, "</x0/>").getType());
         assertEquals(TagType.SINGLE, new Tag(-1, "foo").getType());
     }
-    
+
     @Test
     public void testTagName() {
         assertEquals("x0", new Tag(-1, "<x0>").getName());
@@ -111,7 +111,7 @@ public class TagUtilTest {
         assertEquals("</x0/>", new Tag(-1, "</x0/>").getName());
         assertEquals("foo", new Tag(-1, "foo").getName());
     }
-    
+
     @Test
     public void testPairedTag() {
         assertEquals("</x0>", new Tag(-1, "<x0>").getPairedTag());

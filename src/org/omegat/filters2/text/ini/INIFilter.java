@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -45,7 +45,7 @@ import org.omegat.util.StringUtil;
 /**
  * Filter to support Files with Key=Value pairs, which are sometimes used for
  * i18n of software.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik
  * @author Didier Briel
@@ -66,8 +66,8 @@ public class INIFilter extends AbstractFilter {
     }
 
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.ini"), 
-                                new Instance("*.lng"), 
+        return new Instance[] { new Instance("*.ini"),
+                                new Instance("*.lng"),
                 new Instance("*.strings", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()) };
     }
 
@@ -128,7 +128,7 @@ public class INIFilter extends AbstractFilter {
                 }
                 equalsPos = nextOffset;
             }
-            
+
             int afterEqualsPos = str.offsetByCodePoints(equalsPos, 1);
 
             // writing out everything before = (and = itself)

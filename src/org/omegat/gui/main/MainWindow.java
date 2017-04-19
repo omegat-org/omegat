@@ -1,9 +1,9 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers, 
+ Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers,
                          Benjamin Siband, and Kim Bruning
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik, Didier Briel
@@ -79,7 +79,7 @@ import com.vlsolutions.swing.docking.FloatingDialog;
 /**
  * The main window of OmegaT application (unless the application is started in
  * consoleMode).
- * 
+ *
  * @author Keith Godfrey
  * @author Benjamin Siband
  * @author Maxym Mykhalchuk
@@ -144,7 +144,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         getContentPane().add(MainWindowUI.initDocking(this), BorderLayout.CENTER);
         pack();
         getContentPane().add(MainWindowUI.createStatusBar(this), BorderLayout.SOUTH);
-        
+
         StaticUIUtils.setWindowIcon(this);
 
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
@@ -170,7 +170,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         CoreEvents.registerFontChangedEventListener(newFont -> m_font = newFont);
 
         MainWindowUI.handlePerProjectLayouts(this);
-        
+
         updateTitle();
 
         // Set up prompt to reload if segmentation or filters settings change
@@ -245,7 +245,7 @@ public class MainWindow extends JFrame implements IMainWindow {
                 if (near.comesFrom == NearString.MATCH_SOURCE.TM
                     && FileUtil.isInPath(new File(Core.getProject().getProjectProperties().getTMRoot(), "mt"),
                     new File(near.projs[0]))) {
-                    fromMT = true;    
+                    fromMT = true;
                 }
             }
         }
@@ -341,7 +341,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
         });
     }
-    
+
     private String getLocalizedString(String messageKey, Object... params) {
         if (messageKey == null) {
             return " ";
@@ -377,7 +377,7 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     /**
      * Show message in progress bar.
-     * 
+     *
      * @param messageText
      *            message text
      */
@@ -386,7 +386,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     }
 
     /* Set progress bar tooltip text.
-     * 
+     *
      * @param tooltipText
      *            tooltip text
      */
@@ -396,7 +396,7 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     /**
      * Show message in length label.
-     * 
+     *
      * @param messageText
      *            message text
      */
@@ -407,7 +407,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     // /////////////////////////////////////////////////////////////
     // /////////////////////////////////////////////////////////////
     // display oriented code
-    
+
     private JLabel lastDialogText;
     private String lastDialogKey;
 
@@ -417,7 +417,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     public void displayWarningRB(String warningKey, Object... params) {
         displayWarningRB(warningKey, null, params);
     };
-    
+
     /**
      * {@inheritDoc}
      */
@@ -430,19 +430,19 @@ public class MainWindow extends JFrame implements IMainWindow {
                 } else {
                     msg = OStrings.getString(warningKey);
                 }
-                
+
                 if (supercedesKey != null && lastDialogText != null && supercedesKey.equals(lastDialogKey)) {
                     Window w = SwingUtilities.getWindowAncestor(lastDialogText);
                     if (w != null) {
                         w.dispose();
                     }
                 }
-                
+
                 lastDialogText = new JLabel(msg);
                 lastDialogKey = warningKey;
 
                 statusLabel.setText(msg);
-                
+
                 JOptionPane.showMessageDialog(MainWindow.this, lastDialogText, OStrings.getString("TF_WARNING"),
                         JOptionPane.WARNING_MESSAGE);
             }
@@ -536,7 +536,7 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see JOptionPane#showConfirmDialog(java.awt.Component, Object, String,
      *      int, int)
      */

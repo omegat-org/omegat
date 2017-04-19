@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * Dummy spellchecker which used when other spellcheckers can't be loaded, or
  * dictionary not exist.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SpellCheckerDummy implements ISpellCheckerProvider {

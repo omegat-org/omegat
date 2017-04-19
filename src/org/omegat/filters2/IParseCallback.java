@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -30,17 +30,16 @@ import java.util.List;
 
 import org.omegat.core.data.ProtectedPart;
 
-
 /**
  * Callback for parse files.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
 public interface IParseCallback {
     /**
      * Read entry from source file, with arbitrary (optional) properties
-     * 
+     *
      * @param id
      *            ID in source file, or null if ID not supported by format
      * @param source
@@ -60,7 +59,7 @@ public interface IParseCallback {
      */
     void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy, String[] props,
             String path, IFilter filter, List<ProtectedPart> protectedParts);
-    
+
     /**
      * Read entry from source file, with single "comment" property. Convenience method for
      * {@link #addEntryWithProperties(String, String, String, boolean, String[], String, IFilter, List)}.
@@ -69,9 +68,9 @@ public interface IParseCallback {
             IFilter filter, List<ProtectedPart> protectedParts);
 
     /**
-     * Old call without path, for compatibility 
+     * Old call without path, for compatibility
      */
-    void addEntry(String id, String source, String translation, boolean isFuzzy, String comment, 
+    void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
             IFilter filter);
 
     /**

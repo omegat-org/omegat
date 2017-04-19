@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013-2014 Aaron Madlon-Kay
@@ -25,14 +25,13 @@
 
 package org.omegat.util.gui;
 
-
 /**
  * A class that renders a tokenizer combo box.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class TokenizerComboBoxRenderer extends DelegatingComboBoxRenderer<Object, String> {
-    
+
     @Override
     protected String getDisplayText(Object value) {
     	if (value instanceof Class<?>) {
@@ -42,7 +41,7 @@ public class TokenizerComboBoxRenderer extends DelegatingComboBoxRenderer<Object
     	if (value instanceof String) {
             return (String) value;
         }
-    	
+
     	throw new RuntimeException("Unsupported type in tokenizer combobox");
     }
 }

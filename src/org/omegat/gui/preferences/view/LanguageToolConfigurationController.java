@@ -113,7 +113,7 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
 
     private void initGui() {
         panel = new LanguageToolConfigurationPanel();
-        org.openide.awt.Mnemonics.setLocalizedText(panel.bridgeNativeRadioButton, 
+        org.openide.awt.Mnemonics.setLocalizedText(panel.bridgeNativeRadioButton,
                 StringUtil.format(OStrings.getString("GUI_LANGUAGETOOL_NATIVE_BRIDGE"), JLanguageTool.VERSION));
         panel.bridgeNativeRadioButton.addActionListener(e -> handleBridgeTypeChange(BridgeType.NATIVE));
         panel.bridgeLocalRadioButton.addActionListener(e -> handleBridgeTypeChange(BridgeType.LOCAL_INSTALLATION));
@@ -206,7 +206,7 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
                     });
         }
     }
-    
+
     private void disableRulesUI(String message) {
         panel.rulesMessagePanel.setVisible(true);
         panel.rulesMessageLabel.setText(message);

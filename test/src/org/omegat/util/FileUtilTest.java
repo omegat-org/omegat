@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay, Alex Buloichik
@@ -72,12 +72,12 @@ public class FileUtilTest {
     @Test
     public void testCopyFilesTo() throws Exception {
         File targetDir = makeDir(base, "target");
-        
+
         // Make structure to copy into targetDir
         File sourceDir = makeDir(base, "source");
         File file1 =  writeFile(new File(sourceDir, "file1"), "file1-first");
         File file2 = writeFile(new File(sourceDir, "sub1/file2"), "file2-first");
-        
+
         // Copy all files. Make sure they are identical.
         FileUtil.copyFilesTo(targetDir, sourceDir.listFiles(), null);
         final File file1trg = new File(targetDir, "file1");
@@ -86,13 +86,13 @@ public class FileUtilTest {
         assertTrue(fileContentsAreEqual(file1, file1trg));
         assertTrue(new File(targetDir, "sub1").isDirectory());
         assertTrue(fileContentsAreEqual(file2, file2trg));
-        
+
         // Modify source files.
         File file3 = new File(sourceDir, "file3");
         writeFile(file3, "file3-first");
         writeFile(file1, "file1-second");
         writeFile(file2, "file2-second");
-        
+
         // Do copy but don't overwrite anything. Only file3 should be copied.
         FileUtil.copyFilesTo(targetDir, sourceDir.listFiles(), new ICollisionCallback() {
             @Override
@@ -108,10 +108,10 @@ public class FileUtilTest {
         assertFalse(fileContentsAreEqual(file1, file1trg));
         assertFalse(fileContentsAreEqual(file2, file2trg));
         assertTrue(fileContentsAreEqual(file3, file3trg));
-        
-        // Add sub1/file4 to target; this will disappear after replacing sub1. 
+
+        // Add sub1/file4 to target; this will disappear after replacing sub1.
         File file4trg = writeFile(new File(targetDir, "sub1/file4"), "file4");
-        
+
         // Do copy and overwrite sub1 only. sub1/file2 should be replaced
         // and sub1/file4 should disappear.
         FileUtil.copyFilesTo(targetDir, sourceDir.listFiles(), new ICollisionCallback() {
@@ -128,19 +128,19 @@ public class FileUtilTest {
         assertTrue(fileContentsAreEqual(file2, file2trg));
         assertTrue(fileContentsAreEqual(file3, file3trg));
         assertFalse(file4trg.exists());
-        
+
         // Do copy and cancel on last file. None of the files should be changed.
         // shouldReplace() should be called once for all files in source/.
         CountingCallback callback = new CountingCallback() {
             private boolean isCanceled = false;
-            
+
             @Override
             public boolean shouldReplace(File file, int thisFile, int totalFiles) {
                 calledTimes++;
                 isCanceled = thisFile + 1 == totalFiles;
                 return !isCanceled();
             }
-            
+
             @Override
             public boolean isCanceled() {
                 return isCanceled;
@@ -151,13 +151,13 @@ public class FileUtilTest {
         assertFalse(fileContentsAreEqual(file1, file1trg));
         assertTrue(fileContentsAreEqual(file2, file2trg));
         assertTrue(fileContentsAreEqual(file3, file3trg));
-        
+
         // Try copying to non-existent destination.
         File newTarget = new File(base, "newtarget");
         FileUtil.copyFilesTo(newTarget, sourceDir.listFiles(), null);
         assertTrue(newTarget.isDirectory());
         assertTrue(fileContentsAreEqual(file1, new File(newTarget, "file1")));
-        
+
         // Try copying to destination that exists but is a file.
         File targetFile = writeFile(new File(base, "targetFile"), "");
         try {
@@ -170,7 +170,7 @@ public class FileUtilTest {
     private abstract class CountingCallback implements ICollisionCallback {
         int calledTimes = 0;
     }
-    
+
     private File makeDir(File parent, String... names) {
         File dir = parent;
         for (String name : names) {
@@ -190,7 +190,7 @@ public class FileUtilTest {
         stream.close();
         return file;
     }
-    
+
     private boolean fileContentsAreEqual(File file1, File file2) throws IOException {
         return Arrays.equals(FileUtils.readFileToByteArray(file1), FileUtils.readFileToByteArray(file2));
     }

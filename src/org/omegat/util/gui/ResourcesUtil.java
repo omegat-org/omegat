@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -33,12 +33,12 @@ import java.net.URL;
 
 /**
  * Utils for load resources from classpath.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
 public class ResourcesUtil {
-    
+
     private static final String RESOURCES = "/org/omegat/gui/resources/";
 
     /**
@@ -50,19 +50,19 @@ public class ResourcesUtil {
 
     /**
      * Load icon.
-     * 
+     *
      * @param resourceName
      *            resource name
-     * @throws FileNotFoundException 
+     * @throws FileNotFoundException
      */
     public static Image getImage(final String resourceName) {
         URL resourceURL = ResourcesUtil.class.getResource(resourceName);
         return Toolkit.getDefaultToolkit().getImage(resourceURL);
     }
-    
+
     /**
      * Load icon from classpath.
-     * 
+     *
      * @param iconName
      *            icon file name
      * @return icon instance

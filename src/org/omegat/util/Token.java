@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
  * characters.
  * <p>
  * Since 1.6 strips '&' in given token text.
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
@@ -74,7 +74,7 @@ public class Token {
 
     /**
      * Creates a new token.
-     * 
+     *
      * @param _text
      *            the text of the token
      * @param _offset
@@ -86,7 +86,7 @@ public class Token {
 
     /**
      * Creates a new token.
-     * 
+     *
      * @param _text
      *            the text of the token
      * @param _offset
@@ -123,7 +123,7 @@ public class Token {
     public String getTextFromString(String input) {
         return input.substring(offset, length + offset);
     }
-    
+
     /**
      * Get the strings represented by the provided tokens, from the original string
      * they were produced from. For debugging purposes.

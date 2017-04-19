@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -71,9 +71,9 @@ import net.loomchild.maligna.matrix.MatrixFactory;
 /**
  * Class to drive alignment of input files. Responsible for filtering and performing automatic alignment with
  * mALIGNa.
- * 
+ *
  * @author Aaron Madlon-Kay
- * 
+ *
  * @see <a href="https://github.com/loomchild/maligna">mALIGNa</a>
  */
 public class Aligner {
@@ -168,7 +168,7 @@ public class Aligner {
      * Parse the input files and extract the alignable text, which is retained in memory so that different
      * alignment settings can be tried without re-parsing the files. This determines the available
      * {@link ComparisonMode}s, available in {@link #allowedModes}.
-     * 
+     *
      * @throws Exception
      *             If the parsing fails for whatever reason
      */
@@ -232,7 +232,7 @@ public class Aligner {
      * <li>Key: A list of IDs for the parsed text units
      * <li>Value: A list of parsed text units
      * </ul>
-     * 
+     *
      * @param file
      *            Path to input file
      * @return Pair of lists
@@ -286,7 +286,7 @@ public class Aligner {
     /**
      * Segment the specified list of strings into a flat list of strings. The resulting list will be free of
      * empty strings.
-     * 
+     *
      * @param language
      *            The language of the texts to be segmented
      * @param rawTexts
@@ -301,7 +301,7 @@ public class Aligner {
     /**
      * Align {@link ComparisonMode#PARSEWISE} without first segmenting the source and target strings. No
      * alignment algorithm is applied.
-     * 
+     *
      * @return List of beads where each entry of {@link #srcRaw} is aligned by index with each entry of
      *         {@link #trgRaw}
      */
@@ -316,7 +316,7 @@ public class Aligner {
     /**
      * Align {@link ComparisonMode#PARSEWISE} the source and target strings. Each pair is segmented and
      * aligned separately by algorithm.
-     * 
+     *
      * @return List of beads where each entry of {@link #srcRaw} is aligned by index with each entry of
      *         {@link #trgRaw}
      */
@@ -336,7 +336,7 @@ public class Aligner {
     /**
      * Align by {@link ComparisonMode#ID} without first segmenting the source and target strings. No alignment
      * algorithm is applied.
-     * 
+     *
      * @return List of beads aligned by ID
      */
     private Stream<Alignment> alignByIdNotSegmented() {
@@ -350,7 +350,7 @@ public class Aligner {
     /**
      * Align source and target strings by {@link ComparisonMode#ID}. Each pair is segmented and aligned
      * separately by algorithm.
-     * 
+     *
      * @return List of beads aligned by ID
      */
     private Stream<Alignment> alignByIdSegmented() {
@@ -368,7 +368,7 @@ public class Aligner {
 
     /**
      * Align {@link ComparisonMode#HEAPWISE}. Input text is optionally segmented, then aligned by algorithm.
-     * 
+     *
      * @param doSegmenting
      *            Whether to segment the text
      * @return List of beads aligned heapwise
@@ -402,7 +402,7 @@ public class Aligner {
     /**
      * Perform alignment according to the current settings and return the resulting list of beads. Will call
      * {@link #loadFiles()} if it has not yet been called.
-     * 
+     *
      * @return List of beads
      * @throws Exception
      *             If parsing the input files fails
@@ -428,9 +428,9 @@ public class Aligner {
      * <li>key = source text
      * <li>value = target text
      * </ol>
-     * 
+     *
      * Calls {@link #loadFiles()} if it has not yet been called.
-     * 
+     *
      * @return
      * @throws Exception
      */
@@ -444,7 +444,7 @@ public class Aligner {
 
     /**
      * Obtain appropriate calculator according to the specified {@link CalculatorType}.
-     * 
+     *
      * @param calculatorType
      * @param counterType
      * @param aligns
@@ -464,7 +464,7 @@ public class Aligner {
 
     /**
      * Obtain appropriate counter according to the specified {@link CounterType}.
-     * 
+     *
      * @param counterType
      * @return
      */
@@ -480,7 +480,7 @@ public class Aligner {
 
     /**
      * Obtain appropriate align algorithm object according to the specified {@link AlgorithmClass}.
-     * 
+     *
      * @param algorithmClass
      * @param calculator
      * @return
@@ -499,7 +499,7 @@ public class Aligner {
 
     /**
      * Use mALIGNa to align the specified source and target texts, according to the specified parameters.
-     * 
+     *
      * @param algorithmClass
      * @param calculatorType
      * @param counterType

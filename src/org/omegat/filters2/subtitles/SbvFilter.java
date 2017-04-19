@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2017 Briac Pilpre
@@ -32,7 +32,7 @@ import org.omegat.util.OStrings;
 
 /**
  * Filter for subtitles files.
- * 
+ *
  * @author Briac Pilpre (briacp@gmail.com)
  * @see <a href="https://support.google.com/youtube/answer/2734698">Format
  *      description</a>

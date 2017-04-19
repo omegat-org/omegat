@@ -53,7 +53,7 @@ import org.omegat.util.StringUtil;
  * Some useful discussion why HTML filter should behave like it does, happened
  * on a <a href="https://sourceforge.net/p/omegat/bugs/108/">bug report</a>
  * devoted to compressing space.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Martin Fleurke
  * @author Didier Briel
@@ -87,7 +87,6 @@ public class HTMLFilter2 extends AbstractFilter {
      */
     private HashMap<String, String> ignoreTagsAttributes;
 
-
     @Override
     protected boolean requirePrevNextFields() {
         return true;
@@ -95,7 +94,7 @@ public class HTMLFilter2 extends AbstractFilter {
     /**
      * Customized version of creating input reader for HTML files, aware of
      * encoding by using <code>EncodingAwareReader</code> class.
-     * 
+     *
      * @see HTMLReader
      */
     @Override
@@ -109,7 +108,7 @@ public class HTMLFilter2 extends AbstractFilter {
     /**
      * Customized version of creating an output stream for HTML files, appending
      * charset meta by using <code>HTMLWriter</code> class.
-     * 
+     *
      * @see HTMLWriter
      */
     @Override
@@ -235,7 +234,7 @@ public class HTMLFilter2 extends AbstractFilter {
 
     /**
      * Returns true to indicate that (X)HTML filter has options.
-     * 
+     *
      * @return True, because (X)HTML filter has options.
      */
     @Override
@@ -245,7 +244,7 @@ public class HTMLFilter2 extends AbstractFilter {
 
     /**
      * (X)HTML Filter shows a <b>modal</b> dialog to edit its own options.
-     * 
+     *
      * @param currentOptions
      *            Current options to edit.
      * @return Updated filter options if user confirmed the changes, and current
@@ -270,7 +269,7 @@ public class HTMLFilter2 extends AbstractFilter {
 
     /**
      * Returns the encoding of the html writer (if already set)
-     * 
+     *
      * @return the target encoding
      */
     public String getTargetEncoding() {

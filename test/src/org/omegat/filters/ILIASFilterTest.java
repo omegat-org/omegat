@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -64,17 +64,17 @@ public class ILIASFilterTest extends TestFilterBase {
     @Test
     public void testAlign() throws Exception {
         final AlignResultHolder alignResult = new AlignResultHolder();
-        
+
         align(new ILIASFilter(), "ilias/ILIASFilterAlign.lang",
                 "ilias/ILIASFilterAlign-tr.lang", new IAlignCallback() {
                     @Override
                     public void addTranslation(String id, String source, String translation, boolean isFuzzy, String comment, IFilter filter) {
                         alignResult.aligned = id.equals("module_name#:#variable_name") &&
-                                              source.equals("original") && 
+                                              source.equals("original") &&
                                               translation.equals("translated");
                     }
                 });
-        
+
         assertTrue(alignResult.aligned);
     }
 

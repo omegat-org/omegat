@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
@@ -42,7 +42,7 @@ import org.omegat.util.StringUtil;
 
 /**
  * The glossary auto-completer view.
- * 
+ *
  * @author Zoltan Bartko <bartkozoltan@bartkozoltan.com>
  * @author Aaron Madlon-Kay
  */
@@ -64,29 +64,29 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
                 && (leadingText.codePointCount(0, leadingText.length()) > 1
                         || entries.size() <= AutoCompleter.PAGE_ROW_COUNT);
     }
-    
+
     @Override
     public List<AutoCompleterItem> computeListData(String prevText, boolean contextualOnly) {
         String wordChunk = getLastToken(prevText);
         String sortMatchTo = wordChunk;
-        
+
         List<AutoCompleterItem> result = new ArrayList<AutoCompleterItem>();
         List<GlossaryEntry> entries = Core.getGlossary().getDisplayedEntries();
-        
+
         // Get contextual results
         fillMatchingTerms(result, entries, wordChunk);
-        
+
         if (result.isEmpty() && !contextualOnly) {
             // Get non-contextual results only if called for
             fillMatchingTerms(result, entries, null);
             sortMatchTo = null;
         }
-        
+
         Collections.sort(result, new GlossaryComparator(entries, sortMatchTo));
-        
+
         return result;
     }
-    
+
     /**
      * Fill provided result list with AutCompleterItems matching the provided wordChunk.
      * If the wordChunk is null, all available items will be added. However if the wordChunk is
@@ -100,7 +100,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
             // Context is present but empty--we consider no terms to match.
             return;
         }
-        
+
         for (GlossaryEntry entry : glossary) {
             for (String term : entry.getLocTerms(true)) {
                 if (!termMatchesChunk(term, context)) {
@@ -120,7 +120,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
             }
         }
     }
-    
+
     private boolean termMatchesChunk(String term, String context) {
         if (context == null) {
             // Consider null context to match everything
@@ -132,7 +132,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
         // Consider a term to NOT match if it is the same (modulo case) as the context (i.e. it is already present)
         return !lowerTerm.equals(lowerContext) && lowerTerm.startsWith(lowerContext);
     }
-    
+
     private Locale getTargetLocale() {
         return getTargetLanguage().getLocale();
     }
@@ -151,22 +151,22 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
     }
 
     static class GlossaryComparator implements Comparator<AutoCompleterItem> {
-        
+
         private boolean bySource = Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_BY_SOURCE);
         private boolean byLength = Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_BY_LENGTH);
         private boolean alphabetically = Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_ALPHABETICALLY);
-        
+
         private final List<GlossaryEntry> entries;
         private final String matchTo;
-        
+
         public GlossaryComparator(List<GlossaryEntry> entries, String matchTo) {
             this.entries = entries;
             this.matchTo = matchTo;
         }
-        
+
         @Override
         public int compare(AutoCompleterItem o1, AutoCompleterItem o2) {
-            
+
             // If one of the payloads starts with the exact matchTo string, prioritize that one.
             if (!StringUtil.isEmpty(matchTo)) {
                 boolean o1Matches = o1.payload.startsWith(matchTo);
@@ -185,7 +185,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
                     return 1;
                 }
             }
-            
+
             // Sort alphabetically by source term
             if (bySource) {
                 int result = o1.extras[0].compareTo(o2.extras[0]);
@@ -193,7 +193,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
                     return result;
                 }
             }
-            
+
             // Sorting for same source with multiple targets
             if (o1.extras[0].equals(o2.extras[0])) {
                 if (byLength) {
@@ -207,7 +207,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
                     return o1.payload.compareTo(o2.payload);
                 }
             }
-            
+
             // If we make it here, we should ensure the sorting is the same
             // as in the original list of entries.
             int i1 = -1;
@@ -230,7 +230,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
             }
             return 0;
         }
-        
+
         private boolean isOriginalEntry(AutoCompleterItem item) {
             for (GlossaryEntry entry : entries) {
                 for (String term : entry.getLocTerms(true)) {

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010-2015 Alex Buloichik
@@ -43,7 +43,7 @@ import org.openide.awt.Mnemonics;
 
 /**
  * Base class for machine translation.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  */
@@ -105,16 +105,16 @@ public abstract class BaseTranslate implements IMachineTranslation {
     abstract protected String getPreferenceName();
 
     abstract protected String translate(Language sLang, Language tLang, String text) throws Exception;
-    
+
     /**
      * Attempt to clean spaces added around tags by machine translators. Do it by comparing spaces between the source
      * text and the machine translated text.
      * @param machineText The text returned by the machine translator
      * @param sourceText The original source segment
-     * @return 
+     * @return
      */
     protected String cleanSpacesAroundTags(String machineText, String sourceText) {
-        
+
         // Spaces after
         Matcher tag = PatternConsts.OMEGAT_TAG_SPACE.matcher(machineText);
         while (tag.find()) {
@@ -149,7 +149,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
      * Retrieve a credential with the given ID. First checks temporary system properties, then falls back to
      * the program's persistent preferences. Store a credential with
      * {@link #setCredential(String, String, boolean)}.
-     * 
+     *
      * @param id
      *            ID or key of the credential to retrieve
      * @return the credential value in plain text
@@ -166,7 +166,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
      * Store a credential. Credentials are stored in temporary system properties and, if
      * <code>temporary</code> is <code>false</code>, in the program's persistent preferences encoded in
      * Base64. Retrieve a credential with {@link #getCredential(String)}.
-     * 
+     *
      * @param id
      *            ID or key of the credential to store
      * @param value
@@ -183,7 +183,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
      * Determine whether a credential has been stored "temporarily" according to the definition in
      * {@link #setCredential(String, String, boolean)}. The result will be <code>false</code> if the
      * credential is not stored at all, or if it is stored permanently.
-     * 
+     *
      * @param id
      *            ID or key of credential
      * @return <code>true</code> only if the credential is stored temporarily

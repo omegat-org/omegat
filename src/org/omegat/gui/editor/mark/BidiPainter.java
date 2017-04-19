@@ -37,12 +37,12 @@ import javax.swing.text.JTextComponent;
  * @author Martin Fleurke
  */
 public class BidiPainter extends SymbolPainter {
-	
+
 	protected boolean rtl;
 	protected boolean ltr;
-	
+
 	/**
-	 * 
+	 *
 	 * @param c color to use when painting
 	 * @param s Bidirectonal formatting character/code that is marked.
 	 */

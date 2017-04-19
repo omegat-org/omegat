@@ -105,7 +105,7 @@ public class HTMLOptions extends AbstractOptions {
     /**
      * Returns whether and when (X)HTML filter adds/rewrites encoding
      * declaration.
-     * 
+     *
      * @return One of {@link REWRITE_MODE#ALWAYS}, {@link REWRITE_MODE#IFHEADER}
      *         , {@link REWRITE_MODE#IFMETA}, {@link REWRITE_MODE#NEVER}.
      */
@@ -115,7 +115,7 @@ public class HTMLOptions extends AbstractOptions {
 
     /**
      * Sets when (X)HTML filter should add/rewrite encoding declaration.
-     * 
+     *
      * @param rewriteEncoding
      *            One of {@link REWRITE_MODE#ALWAYS},
      *            {@link REWRITE_MODE#IFHEADER}, {@link REWRITE_MODE#IFMETA},
@@ -278,7 +278,7 @@ public class HTMLOptions extends AbstractOptions {
 
     /**
      * Sets whether the comments should be removed from the HTML document on generating target documents.
-     * @param removeComments 
+     * @param removeComments
      */
     public void setRemoveComments(boolean removeComments) {
         setBoolean(OPTION_REMOVE_COMMENTS, removeComments);

@@ -219,7 +219,7 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
         a = m_csp.addBottomComponent(ks, m_replaceToolBar);
         a.putValue(Action.NAME, OStrings.getString("SCW_MENU_SHOW_REPLACE_BAR"));
         menu.add(new JMenuItem(a));
-        
+
         mb.add(menu);
     }
 

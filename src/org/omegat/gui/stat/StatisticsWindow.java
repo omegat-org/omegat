@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
@@ -44,7 +44,7 @@ import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Display match statistics window and save data to file.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Thomas Cordonnier
  * @author Aaron Madlon-Kay
@@ -53,11 +53,11 @@ import org.omegat.util.gui.StaticUIUtils;
 public class StatisticsWindow extends javax.swing.JDialog {
 
     private String textData;
-    
+
     public static enum STAT_TYPE {
         STANDARD, MATCHES, MATCHES_PER_FILE
     };
-    
+
     private transient LongProcessThread thread;
 
     /**
@@ -67,7 +67,7 @@ public class StatisticsWindow extends javax.swing.JDialog {
         super(parent, true);
         initComponents();
         copyDataButton.setVisible(false);
-        
+
         JComponent output = null;
 
         switch (statType) {
@@ -189,7 +189,7 @@ public class StatisticsWindow extends javax.swing.JDialog {
             }
         });
     }
-    
+
     public void showProgress(final int percent) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -211,7 +211,7 @@ public class StatisticsWindow extends javax.swing.JDialog {
             }
         });
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeButton;
     private javax.swing.JButton copyDataButton;

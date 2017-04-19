@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Briac Pilpre
@@ -100,7 +100,7 @@ public class LastSegmentManager {
     /**
      * Read the user's last-visited segment number from persistent storage. The
      * segment number is the user-visible number that starts with 1.
-     * 
+     *
      * @return The segment number (starts from 1)
      */
     public static int getLastSegmentNumber() {

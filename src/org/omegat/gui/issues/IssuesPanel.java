@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -29,7 +29,7 @@ import org.omegat.util.OStrings;
 
 /**
  * A panel for graphically displaying and organizing issues.
- * 
+ *
  * @author Aaron Madlon-Kay <aaron@madlon-kay.com>
  */
 @SuppressWarnings("serial")
@@ -156,7 +156,6 @@ public class IssuesPanel extends javax.swing.JPanel {
 
         add(jPanel3, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JButton closeButton;

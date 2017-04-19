@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Alex Buloichik
@@ -56,7 +56,7 @@ import gen.core.project.RepositoryDefinition;
 
 /**
  * SVN repository connection implementation.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
@@ -181,10 +181,10 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
 
     /**
      * Determines whether or not the supplied URL represents a valid Subversion repository.
-     * 
+     *
      * <p>
      * Does the equivalent of <code>svn info <i>url</i></code>.
-     * 
+     *
      * @param url
      *            URL of supposed remote repository
      * @return true if repository appears to be valid, false otherwise

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
@@ -38,11 +38,11 @@ import javax.swing.text.ViewFactory;
  * the editing line with wordwrap, add a new line at the beginning of the line
  * and write something, the word wrapping behaves in a strange way. If you paste
  * a long line (wrapped one), the word wrap disappears and the line gets looong.
- * 
+ *
  * JDK bug 6539700(http://bugs.sun.com/view_bug.do?bug_id=6539700) : JTextPane
  * line wrap radically different from previous versions in jre 1.5.0_10+. Fixed
  * in Java 7b70.
- * 
+ *
  * @author bartkoz
  * @author Alex Buloichik (alex73mail@gmail.com)
  */

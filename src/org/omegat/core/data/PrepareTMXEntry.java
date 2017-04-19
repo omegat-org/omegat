@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
@@ -36,10 +36,10 @@ import org.omegat.util.TMXProp;
  * Class for prepare TMXEntry content before save unchangeable copy in the ProjectTMX. We can't use just
  * parameters in the setTranslation() method since count of parameters is too much. Structure of this class is
  * almost the save like TMXEntry.
- * 
+ *
  * Instead, we will set all parameters into this class, then ProjectTMX will convert in into TMXEntry than
  * save internally.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Guido Leenders
  * @author Aaron Madlon-Kay

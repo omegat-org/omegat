@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Chihiro Hio, Aaron Madlon-Kay
@@ -65,7 +65,6 @@ public class ExternalFinderItemCommand {
     public String getDelimiter() {
         return delimiter;
     }
-
 
     @Override
     public int hashCode() {
@@ -192,7 +191,7 @@ public class ExternalFinderItemCommand {
 
         /**
          * Check the current builder parameters to see if they constitute a valid command.
-         * 
+         *
          * @return A sample array of arguments illustrating what the output will look like
          * @throws ExternalFinderValidationException
          *             If any parameter is not valid

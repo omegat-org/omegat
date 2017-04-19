@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -41,14 +41,14 @@ public class LanguageTest {
 
     /**
      * Test of getLanguage method, of class org.omegat.util.Language.
-     * 
+     *
      * @see <a href="https://sourceforge.net/p/omegat/bugs/185/">bug #185</a>
      */
     @Test
     public void testGetLanguage() {
         String LANG_1 = "xx-YY";
         assertEquals(LANG_1, new Language(LANG_1).getLanguage());
-        
+
         String LANG_2 = "XX-yy";
         assertEquals(LANG_2, new Language(LANG_2).getLanguage());
     }
@@ -74,7 +74,7 @@ public class LanguageTest {
         assertEquals(lang1, lang3);
         assertEquals(lang2, lang3);
     }
-    
+
     /**
      * Test the constructor under lots of stress.
      */

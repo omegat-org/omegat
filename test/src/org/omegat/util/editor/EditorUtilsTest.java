@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2011 Alex Buloichik
@@ -42,7 +42,7 @@ import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
 
 public class EditorUtilsTest {
-    
+
     @Test
     public void testRemoveDirectionChars() {
         assertEquals("|", EditorUtils.removeDirectionChars("|"));
@@ -52,7 +52,7 @@ public class EditorUtilsTest {
         assertEquals("zz", EditorUtils.removeDirectionChars("\u202Az\u202Bz\u202C"));
         assertEquals("zz", EditorUtils.removeDirectionChars("zz"));
     }
-    
+
     @Test
     public void testChangeCase() {
         Locale locale = Locale.ENGLISH;
@@ -73,42 +73,42 @@ public class EditorUtilsTest {
         assertEquals(round4, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
         String round5 = EditorUtils.doChangeCase(round4, CHANGE_CASE_TO.CYCLE, locale, tokenizer);
         assertEquals(round1, round5);
-        
+
         input = "lower case only";
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
         assertEquals("LOWER CASE ONLY", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
         assertEquals("Lower case only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
         assertEquals("Lower Case Only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
         assertEquals("Lower case only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
-        
+
         input = "UPPER CASE ONLY";
         assertEquals("upper case only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
         assertEquals("Upper case only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
         assertEquals("Upper Case Only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
         assertEquals("upper case only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
-        
+
         input = "Title Case Only";
         assertEquals("title case only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
         assertEquals("TITLE CASE ONLY", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
         assertEquals("Title case only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
         assertEquals("TITLE CASE ONLY", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
-        
+
         input = "Sentence case string";
         assertEquals("sentence case string", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
         assertEquals("SENTENCE CASE STRING", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
         assertEquals("Sentence Case String", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
         assertEquals("Sentence Case String", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
-        
+
         input = "mIxed CaSe oNly";
         assertEquals("mixed case only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
         assertEquals("MIXED CASE ONLY", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
         assertEquals("Mixed case only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
         assertEquals("Mixed Case Only", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
         assertEquals("MIXED CASE ONLY", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
-        
+
         // Ambiguous only
         input = "A B C";
         assertEquals("a b c", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
@@ -121,7 +121,7 @@ public class EditorUtilsTest {
         assertEquals("A b c", round3);
         round4 = EditorUtils.doChangeCase(round3, CHANGE_CASE_TO.CYCLE, locale, tokenizer);
         assertEquals(input, round4);
-        
+
         // No letter-containing tokens
         input = "{!} 1 \u65e5\u672c\u8a9e";
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
@@ -129,37 +129,37 @@ public class EditorUtilsTest {
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
-        
+
         // Single tokens
-        
+
         input = "lower";
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
         assertEquals("LOWER", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
         assertEquals("Lower", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
         assertEquals("Lower", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
         assertEquals("Lower", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
-        
+
         input = "UPPER";
         assertEquals("upper", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
         assertEquals("Upper", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
         assertEquals("Upper", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
         assertEquals("upper", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
-        
+
         input = "Title";
         assertEquals("title", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
         assertEquals("TITLE", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
         assertEquals("TITLE", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
-                
+
         input = "mIxed";
         assertEquals("mixed", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
         assertEquals("MIXED", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.UPPER, locale, tokenizer));
         assertEquals("Mixed", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
         assertEquals("Mixed", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
         assertEquals("MIXED", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
-        
+
         // Ambiguous
         input = "A";
         assertEquals("a", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
@@ -183,7 +183,7 @@ public class EditorUtilsTest {
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.SENTENCE, locale, tokenizer));
         assertEquals(input, EditorUtils.doChangeCase(input, CHANGE_CASE_TO.TITLE, locale, tokenizer));
         assertEquals("<g0>FOO</g0>", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.CYCLE, locale, tokenizer));
-        
+
         // Includes surrounding punctuation
         input = "\"Foo, Bar\"";
         assertEquals("\"foo, bar\"", EditorUtils.doChangeCase(input, CHANGE_CASE_TO.LOWER, locale, tokenizer));
@@ -198,14 +198,14 @@ public class EditorUtilsTest {
         List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
         entries.add(new GlossaryEntry("snowman", "sneeuwpop", "", false));
         entries.add(new GlossaryEntry("Bob", "Blub", "", false));
-        
+
         ITokenizer tokenizer = new LuceneEnglishTokenizer();
         Locale locale = Locale.ENGLISH;
 
         String srcText = "Snowman Bob went to the snowman party. SnOwMaN!";
         String expected = "Sneeuwpop Blub went to the sneeuwpop party. sneeuwpop!";
         assertEquals(expected, EditorUtils.replaceGlossaryEntries(srcText, entries, locale, tokenizer));
-        
+
         // Empty cases
         assertNull(EditorUtils.replaceGlossaryEntries(null, entries, locale, tokenizer));
         assertEquals("", EditorUtils.replaceGlossaryEntries("", entries, locale, tokenizer));

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -36,7 +36,7 @@ import org.omegat.util.OStrings;
 
 /**
  * Filter for DocBook files.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Fabian Mandelbaum
  * @author Didier Briel
@@ -52,7 +52,7 @@ public class DocBookFilter extends XMLFilter {
 
     /**
      * Human-readable name of the File Format this filter supports.
-     * 
+     *
      * @return File format name
      */
     public String getFileFormatName() {
@@ -63,8 +63,8 @@ public class DocBookFilter extends XMLFilter {
      * Returns the hint displayed while the user edits the filter, and when she
      * adds/edits the instance of this filter. The hint may be any string,
      * preferably in a non-geek language.
-     * 
-     * 
+     *
+     *
      * @return The hint for editing the filter in a non-geek language.
      */
     public String getHint() {
@@ -77,7 +77,7 @@ public class DocBookFilter extends XMLFilter {
      * file mask, encoding of the source file etc.
      * <p>
      * Note that the user may change the instances freely.
-     * 
+     *
      * @return Default filter instances
      */
     public Instance[] getDefaultInstances() {
@@ -86,7 +86,7 @@ public class DocBookFilter extends XMLFilter {
 
     /**
      * Either the encoding can be read, or it is UTF-8..
-     * 
+     *
      * @return <code>false</code>
      */
     public boolean isSourceEncodingVariable() {
@@ -95,13 +95,13 @@ public class DocBookFilter extends XMLFilter {
 
     /**
      * Yes, DocBook may be written out in a variety of encodings.
-     * 
+     *
      * @return <code>true</code>
      */
     public boolean isTargetEncodingVariable() {
         return true;
     }
-    
+
     protected boolean requirePrevNextFields() {
         return true;
     }
@@ -109,7 +109,7 @@ public class DocBookFilter extends XMLFilter {
     /**
      * Returns whether the file is supported by the filter, by checking DB4
      * (DTD) or DB5 (Namespace) constraints.
-     * 
+     *
      * @return <code>true</code> or <code>false</code>
      */
     public boolean isFileSupported(BufferedReader reader) {

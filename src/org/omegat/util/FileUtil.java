@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -61,7 +61,7 @@ import org.apache.commons.io.FileUtils;
 
 /**
  * Files processing utilities.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Aaron Madlon-Kay
@@ -184,7 +184,7 @@ public class FileUtil {
 
     /**
      * Find files in subdirectories.
-     * 
+     *
      * @param dir
      *            directory to start find
      * @param filter
@@ -200,7 +200,7 @@ public class FileUtil {
 
     /**
      * Internal find method, which calls himself recursively.
-     * 
+     *
      * @param dir
      *            directory to start find
      * @param filter
@@ -237,7 +237,7 @@ public class FileUtil {
 
     /**
      * Compute relative path of file.
-     * 
+     *
      * @param rootDir
      *            root directory
      * @param filePath
@@ -263,7 +263,7 @@ public class FileUtil {
         }
         return fileAbs.substring(rootAbs.length());
     }
-    
+
     /**
      * Check if file is in specified path.
      */
@@ -319,7 +319,7 @@ public class FileUtil {
             copyFilesTo(destination, toReplace.toArray(new File[toReplace.size()]), (File) null);
         }
     }
-    
+
     private static Map<File, File> copyFilesTo(File destination, File[] toCopy, File root) throws IOException {
         Map<File, File> collisions = new LinkedHashMap<File, File>();
         for (File file : toCopy) {
@@ -383,7 +383,7 @@ public class FileUtil {
 
     /**
      * Returns a list of all files under the root directory by absolute path.
-     * 
+     *
      * @throws IOException
      */
     public static List<File> buildFileList(File rootDir, boolean recursive) throws IOException {

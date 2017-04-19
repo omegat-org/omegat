@@ -1,11 +1,11 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007-2010 Didier Briel
                2010 Antonio Vilei
-               2011-2016 Didier Briel               
+               2011-2016 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -63,7 +63,7 @@ import org.omegat.filters2.AbstractOptions;
  * <li>[+] Preserve space for all tags
  * <li>[+] Start a new paragraph on Word soft return
  * </ul>
- * 
+ *
  * @author Didier Briel, Antonio Vilei
  */
 public class OpenXMLOptions extends AbstractOptions {
@@ -80,7 +80,7 @@ public class OpenXMLOptions extends AbstractOptions {
     private static final String OPTION_TRANSLATE_SLIDE_COMMENTS = "translateSlideComments";
     private static final String OPTION_TRANSLATE_SLIDE_MASTERS = "translateSlideMasters";
     private static final String OPTION_TRANSLATE_SLIDE_LAYOUTS = "translateSlideLayouts";
-    private static final String OPTION_TRANSLATE_SLIDE_LINKS = "translateSlideLinks";   
+    private static final String OPTION_TRANSLATE_SLIDE_LINKS = "translateSlideLinks";
     private static final String OPTION_TRANSLATE_CHARTS = "translateCharts";
     private static final String OPTION_TRANSLATE_DRAWINGS = "translateDrawings";
     private static final String OPTION_TRANSLATE_WORDART = "translateWordArt";
@@ -176,7 +176,7 @@ public class OpenXMLOptions extends AbstractOptions {
     public void setTranslateFooters(boolean translateFooters) {
         setBoolean(OPTION_TRANSLATE_FOOTERS, translateFooters);
     }
-    
+
     /**
      * @return whether Fallback Text should be translated.
      */
@@ -294,7 +294,7 @@ public class OpenXMLOptions extends AbstractOptions {
     public void setTranslateSlideLinks(boolean translateSlideLinks) {
         setTranslateLinks(translateSlideLinks);
     }
-    
+
     /**
      * Returns whether Slide Links should be translated.
      * @return the state of OPTION_TRANSLATE_SLIDE_LINKS
@@ -310,7 +310,7 @@ public class OpenXMLOptions extends AbstractOptions {
     public void setTranslateLinks(boolean translateLinks) {
         setBoolean(OPTION_TRANSLATE_SLIDE_LINKS, translateLinks);
     }
-    
+
     /**
      * Returns whether Charts should be translated.
      */
@@ -382,7 +382,7 @@ public class OpenXMLOptions extends AbstractOptions {
     public void setSpacePreserving(boolean onOff) {
         setBoolean(OPTION_PRESERVE_SPACES, onOff);
     }
-    
+
     /**
      * Returns whether a new paragraph should be created on "w:br"
      * @return the state of OPTION_BREAK_ON_BR
@@ -390,7 +390,7 @@ public class OpenXMLOptions extends AbstractOptions {
     public boolean getBreakOnBr() {
         return getBoolean(OPTION_BREAK_ON_BR, true);
     }
-    
+
     /**
      * Sets whether a new paragraph should be created on "w:br"
      * @param breakOnBr The option whether to break or not
@@ -398,7 +398,7 @@ public class OpenXMLOptions extends AbstractOptions {
     public void setBreakOnBr(boolean breakOnBr) {
         setBoolean(OPTION_BREAK_ON_BR, breakOnBr);
     }
-            
+
     /**
      * Returns whether Word document properties should be translated
      * @return the state of OPTION_DOCUMENT_PROPERTIES
@@ -406,7 +406,7 @@ public class OpenXMLOptions extends AbstractOptions {
     public boolean getTranslateDocumentProperties() {
         return getBoolean(OPTION_DOCUMENT_PROPERTIES, false);
     }
-    
+
     /**
      * Sets whether Word document properties should be translated
      * @param translateDocumentProperties The option whether to translate document properties or not

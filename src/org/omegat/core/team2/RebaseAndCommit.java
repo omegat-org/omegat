@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Alex Buloichik, Martin Fleurke, Aaron Madlon-Kay
@@ -34,7 +34,7 @@ import org.omegat.util.Log;
 
 /**
  * Core for rebase and commit files.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
  * @author Aaron Madlon-Kay
@@ -238,7 +238,7 @@ public class RebaseAndCommit {
          * Rebaser should read and parse BASE version of file. It can't just remember file path because file
          * will be removed after switch into other version. Rebase can be called after that or can not be
          * called.
-         * 
+         *
          * Case for non-exist file: it's correct call. That means file is just created in local box. But after
          * that, remote repository can also contain file, i.e. two users created file independently, then
          * rebase will be called. Implementation should interpret non-exist file as empty data.
@@ -249,7 +249,7 @@ public class RebaseAndCommit {
          * Rebaser should read and parse HEAD version of file. It can't just remember file path because file
          * will be removed after switch into other version. Rebase can be called after that or can not be
          * called.
-         * 
+         *
          * Case for non-exist file: it's correct call. That means file was removed from repository.
          * Implementation should interpret non-exist file as empty data.
          */

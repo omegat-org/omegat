@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -48,7 +48,7 @@ import org.omegat.util.Token;
 
 /**
  * Some utilities methods.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Aaron Madlon-Kay
@@ -56,7 +56,7 @@ import org.omegat.util.Token;
 public class EditorUtils {
     /**
      * Check if language is Right-To-Left oriented.
-     * 
+     *
      * @param language
      *            ISO-639-2 language code
      * @return true if language is RTL
@@ -80,9 +80,9 @@ public class EditorUtils {
     /**
      * Determines the start of a word for the given model location. This method
      * skips direction char.
-     * 
+     *
      * TODO: change to use document's locale
-     * 
+     *
      * @param c
      * @param offs
      * @return
@@ -100,9 +100,9 @@ public class EditorUtils {
     /**
      * Determines the end of a word for the given model location. This method
      * skips direction char.
-     * 
+     *
      * TODO: change to use document's locale
-     * 
+     *
      * @param c
      * @param offs
      * @return
@@ -121,7 +121,7 @@ public class EditorUtils {
 
     /**
      * Check if char is direction char(u202A,u202B,u202C).
-     * 
+     *
      * @param ch
      *            char to check
      * @return true if it's direction char
@@ -132,7 +132,7 @@ public class EditorUtils {
 
     /**
      * Remove invisible direction chars from string.
-     * 
+     *
      * @param text
      *            string with direction chars
      * @return string without direction chars
@@ -143,7 +143,7 @@ public class EditorUtils {
 
     /**
      * Remove bidi chars around tags only.
-     * 
+     *
      * @param text
      *            string with direction chars
      * @return string without direction chars
@@ -171,7 +171,7 @@ public class EditorUtils {
      * {@link #doChangeCase(String, CHANGE_CASE_TO, Locale, ITokenizer)}. The
      * locale and tokenizer will be taken from the current project's target
      * language values.
-     * 
+     *
      * @param input
      *            The string to change
      * @param toWhat
@@ -188,7 +188,7 @@ public class EditorUtils {
      * Change the case of the input string to the indicated case. When toWhat is
      * {@link CHANGE_CASE_TO#CYCLE} the result will be UPPER > LOWER > SENTENCE
      * > TITLE > UPPER.
-     * 
+     *
      * @param input
      *            The string to change
      * @param toWhat
@@ -284,7 +284,7 @@ public class EditorUtils {
      * Determine whether or not the provided token should be considered when
      * changing the case of a larger string. We don't want to consider, e.g.,
      * OmegaT tags because changing their case can break them.
-     * 
+     *
      * @param token
      * @return Whether or not to change case
      */
@@ -306,11 +306,11 @@ public class EditorUtils {
         if (mixed > 0) {
             presentCaseTypes++;
         }
-        
+
         if ((title > 0 || ambiguous > 0) && lower > 0 && upper == 0 && mixed == 0) {
             return CHANGE_CASE_TO.TITLE;
         }
-        
+
         if (mixed > 0 || presentCaseTypes > 1) {
             return CHANGE_CASE_TO.UPPER;
         }
@@ -332,7 +332,7 @@ public class EditorUtils {
             // get binary upper/lower switching instead of trinary upper/lower/title.
             return CHANGE_CASE_TO.LOWER;
         }
-        
+
         // This should only happen if no cases are present, so it doesn't even matter.
         return CHANGE_CASE_TO.UPPER;
     }
@@ -341,7 +341,7 @@ public class EditorUtils {
      * Convenience method for {@link #replaceGlossaryEntries(String, List, Locale, ITokenizer)}.
      * Glossary entries are retrieved from {@link GlossaryManager}; the locale and tokenizer are
      * taken from the project's current values for the source language.
-     * 
+     *
      * @param text Text in which to replace glossary hits. Assumed to be in the project's source language.
      * @return Text with source glossary terms replaced with target terms
      */
@@ -356,7 +356,7 @@ public class EditorUtils {
      * Given a list of glossary entries, replace any instances of the source term appearing
      * in the given text with the target term. When there are multiple target terms, the first
      * one is used.
-     * 
+     *
      * @param text Text in which to replace glossary hits (assumed to be in the project's source language)
      * @param entries List of glossary entries
      * @param locale Locale with which to perform capitalization matching (assumed to be source locale)

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010-2013 Alex Buloichik
@@ -38,7 +38,7 @@ import org.omegat.util.Log;
  * This class calls all marks calculators in background, check if source entry
  * changed, and send add marks to editor. Used for spell/grammar checkers,
  * TransTips, etc.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class CalcMarkersThread extends Thread {

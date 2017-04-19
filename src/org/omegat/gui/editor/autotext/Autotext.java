@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko
@@ -48,9 +48,9 @@ import org.omegat.util.StaticUtils;
 public class Autotext {
     private static final String AUTOTEXT_FILE_NAME = "omegat.autotext";
     private static final File DEFAULT_FILE = new File(StaticUtils.getConfigDir(), AUTOTEXT_FILE_NAME);
-    
+
     private static volatile List<AutotextItem> list = Collections.emptyList();
-        
+
     static {
         if (DEFAULT_FILE.isFile()) {
             try {
@@ -64,7 +64,7 @@ public class Autotext {
     public static List<AutotextItem> getItems() {
         return Collections.unmodifiableList(list);
     }
-    
+
     public static void setList(Collection<AutotextItem> items) {
         list = new ArrayList<>(items);
     }
@@ -81,7 +81,7 @@ public class Autotext {
         Files.write(file.toPath(), items.stream().map(AutotextItem::toString).collect(Collectors.toList()),
                 StandardCharsets.UTF_8);
     }
-    
+
     public static void save() throws IOException {
         save(list, DEFAULT_FILE);
     }

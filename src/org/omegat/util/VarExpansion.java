@@ -47,7 +47,7 @@ import org.omegat.core.data.ProjectProperties;
  * </ul>
  * Here we define variables which depends only on the project. This class should
  * be overriden to define more specific substitutions.
- * 
+ *
  * @author Thomas CORDONNIER
  * @author Aaron Madlon-Kay
  */
@@ -57,23 +57,23 @@ public abstract class VarExpansion<Param> {
 
     public static final String VAR_SOURCE_TEXT = "${sourceText}";
     public static final String VAR_TARGET_TEXT = "${targetText}";
-    public static final String VAR_PROJECT_SOURCE_LANG = "${projectSourceLang}";    
+    public static final String VAR_PROJECT_SOURCE_LANG = "${projectSourceLang}";
     public static final String VAR_PROJECT_SOURCE_LANG_CODE = "${projectSourceLangCode}";
-    public static final String VAR_PROJECT_TARGET_LANG = "${projectTargetLang}";    
+    public static final String VAR_PROJECT_TARGET_LANG = "${projectTargetLang}";
     public static final String VAR_PROJECT_TARGET_LANG_CODE = "${projectTargetLangCode}";
     public static final String VAR_FILE_NAME = "${fileName}";
     public static final String VAR_FILE_NAME_ONLY = "${fileNameOnly}";
-    public static final String VAR_FILE_EXTENSION = "${fileExtension}";	
+    public static final String VAR_FILE_EXTENSION = "${fileExtension}";
     public static final String VAR_FILE_PATH = "${filePath}";
     public static final String VAR_FILE_SHORT_PATH = "${fileShortPath}";
-    
+
     public static final Pattern patternBundleEntry = Pattern.compile("#\\{([\\w\\.]+?)\\}(\\[.+?\\])*");
 
     protected String template;
-    
+
     public VarExpansion(String template) {
         // Optimisation : pre-expand all what is not one-match-dependant
-        
+
         // Bundle entries
         template = expandBundleEntries(template);
 
@@ -85,17 +85,17 @@ public abstract class VarExpansion<Param> {
             template = template.replace(VAR_PROJECT_SOURCE_LANG, prop.getSourceLanguage().getLanguage());
             template = template.replace(VAR_PROJECT_SOURCE_LANG_CODE, prop.getSourceLanguage().getLanguageCode());
         }
-        
-        this.template = template;        
+
+        this.template = template;
     }
 
    // ------------------------------ functions -------------------
-    
-    /** 
+
+    /**
      * Replace bundle entries with their translation <br>
-     * Format : #{BUNDLE_ENTRY_NAME}[param0][param1][param2]... 
+     * Format : #{BUNDLE_ENTRY_NAME}[param0][param1][param2]...
      * (parameters can contain expanded variables but not with [ or ])
-     * @param localTemplate  Initial template. 
+     * @param localTemplate  Initial template.
      * @return Expanded template
      */
     protected static String expandBundleEntries(String localTemplate) {
@@ -104,7 +104,7 @@ public abstract class VarExpansion<Param> {
             String original = matcher.group();
             String translation = OStrings.getString(matcher.group(1));
             if (!StringUtil.isEmpty(matcher.group(2))) {
-                String vars = matcher.group(2); 
+                String vars = matcher.group(2);
                 List<String> values = new ArrayList<String>();
                 matcher = Pattern.compile("\\[(.+?)\\]").matcher(vars);
                 while (matcher.find()) values.add(matcher.group(1));
@@ -114,7 +114,7 @@ public abstract class VarExpansion<Param> {
         }
         return localTemplate;
     }
-    
+
     /**
      * Expands all variables relating to file name : <ul>
      * <li>${filePath} = full file path
@@ -125,7 +125,7 @@ public abstract class VarExpansion<Param> {
      * <li>${fileExtension} = all extensions after '.'
 	 * <li>${fileExtension-1}, ${fileExtension-2}, ... = ${fileExtension} after removing 1, 2, ... extensions
      * </ul>
-     * @param localTemplate initial template. If null, use instance's template but does not modify it 
+     * @param localTemplate initial template. If null, use instance's template but does not modify it
      * @param filePath  path used by variable ${fileShortPath}
      * @return	Copy of the template with mentioned variables expanded. Other variables remain unchanged
      */
@@ -165,13 +165,13 @@ public abstract class VarExpansion<Param> {
 		// prevent unexpanded fileName variables in case the file has less extensions than expected
         localTemplate = localTemplate.replaceAll("\\$\\{fileNameOnly(-\\d+)?\\}", filePath);
         localTemplate = localTemplate.replaceAll("\\$\\{fileExtension(-\\d+)?\\}", "");
-        return localTemplate;        
+        return localTemplate;
     }
-    
+
     public String expandFileName(String localTemplate, String filePath, String baseDir) {
         return expandFileNames(localTemplate, new String[] {filePath}, baseDir);
     }
 
     public abstract String expandVariables (Param param);
-    
+
 }

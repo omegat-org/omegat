@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -37,7 +37,7 @@ import org.xml.sax.Attributes;
 
 /**
  * Filter for WiX resources.
- * 
+ *
  * @author Didier Briel
  */
 public class WiXFilter extends XMLFilter {
@@ -59,7 +59,7 @@ public class WiXFilter extends XMLFilter {
 
     /**
      * Either the encoding can be read, or it is UTF-8.
-     * 
+     *
      * @return <code>false</code>
      */
     @Override
@@ -69,7 +69,7 @@ public class WiXFilter extends XMLFilter {
 
     /**
      * Yes, Wix may be written out in a variety of encodings.
-     * 
+     *
      * @return <code>true</code>
      */
     @Override

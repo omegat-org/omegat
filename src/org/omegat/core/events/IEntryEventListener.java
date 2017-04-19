@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -28,13 +28,13 @@ import org.omegat.core.data.SourceTextEntry;
 
 /**
  * Listener interface for entry change events.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IEntryEventListener {
     /**
      * Called on new file displayed.
-     * 
+     *
      * @param activeFileName
      *            new active file name
      */
@@ -42,7 +42,7 @@ public interface IEntryEventListener {
 
     /**
      * Called on new entry activated or current entry deactivated.
-     * 
+     *
      * @param newEntry
      *            new entry instance which activated, or null if entry
      *            deactivated

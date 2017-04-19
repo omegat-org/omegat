@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -32,7 +32,7 @@ import org.omegat.util.OStrings;
 
 /**
  * Filter for Help & Manual files.
- * 
+ *
  * @author Guido Leenders
  */
 public class HelpAndManualFilter extends XMLFilter {
@@ -46,7 +46,7 @@ public class HelpAndManualFilter extends XMLFilter {
 
     /**
      * Human-readable name of the File Format this filter supports.
-     * 
+     *
      * @return File format name
      */
     public String getFileFormatName() {
@@ -59,7 +59,7 @@ public class HelpAndManualFilter extends XMLFilter {
      * file mask, encoding of the source file etc.
      * <p>
      * Note that the user may change the instances freely.
-     * 
+     *
      * @return Default filter instances
      */
     public Instance[] getDefaultInstances() {
@@ -68,7 +68,7 @@ public class HelpAndManualFilter extends XMLFilter {
 
     /**
      * Either the encoding can be read, or it is UTF-8.
-     * 
+     *
      * @return <code>false</code>
      */
     @Override
@@ -78,14 +78,14 @@ public class HelpAndManualFilter extends XMLFilter {
 
     /**
      * Yes, Help & Manual may be written out in a variety of encodings.
-     * 
+     *
      * @return <code>true</code>
      */
     @Override
     public boolean isTargetEncodingVariable() {
         return true;
     }
-    
+
     @Override
     protected boolean requirePrevNextFields() {
         return true;

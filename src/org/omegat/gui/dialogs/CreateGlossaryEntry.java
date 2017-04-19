@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -36,7 +36,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
@@ -58,7 +58,7 @@ public class CreateGlossaryEntry extends JDialog {
         getRootPane().setDefaultButton(okButton);
 
         // initializing options
-  
+
         invalidate();
         pack();
         setLocationRelativeTo(parent);
@@ -96,7 +96,7 @@ public class CreateGlossaryEntry extends JDialog {
     public javax.swing.JTextArea getGlossaryFileText() {
         return glossaryFileText;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -274,12 +274,12 @@ public class CreateGlossaryEntry extends JDialog {
             }
         }
     }//GEN-LAST:event_commentTextKeyPressed
- 
+
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
 
         doClose(RET_OK);
     }//GEN-LAST:event_okButtonActionPerformed
-            
+
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         doClose(RET_CANCEL);
     }//GEN-LAST:event_cancelButtonActionPerformed

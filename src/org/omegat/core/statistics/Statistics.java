@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
@@ -42,7 +42,7 @@ import org.omegat.util.StaticUtils;
 
 /**
  * Save project statistic into text file.
- * 
+ *
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Maxym Mykhalchuk
@@ -117,7 +117,7 @@ public class Statistics {
 
     /**
      * Write text to file.
-     * 
+     *
      * @param filename
      * @param data
      */

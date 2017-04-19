@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
@@ -62,7 +62,7 @@ import org.xml.sax.SAXException;
 
 /**
  * Helper for read TMX files, using StAX.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @see <a href="http://www.ttt.org/oscarStandards/tmx/tmx14b.html">TMX 1.4b
  *      specification</a>
@@ -86,7 +86,7 @@ public class TMXReader2 {
     private boolean extTmxLevel2;
     private boolean useSlash;
     private boolean isSegmentingEnabled;
-    
+
     private int errorsCount, warningsCount;
 
     ParsedTu currentTu = new ParsedTu();
@@ -147,7 +147,7 @@ public class TMXReader2 {
         Log.logRB("TMXR_INFO_READING_FILE", file.getAbsolutePath());
 
         boolean allFound = true;
-        
+
         try (InputStream in = getInputStream(file)) {
             xml = factory.createXMLEventReader(in);
             while (xml.hasNext()) {
@@ -196,7 +196,7 @@ public class TMXReader2 {
     protected void parseHeader(StartElement element, final Language sourceLanguage) {
         isParagraphSegtype = SEG_PARAGRAPH.equals(getAttributeValue(element, "segtype"));
         isOmegaT = CT_OMEGAT.equals(getAttributeValue(element, "creationtool"));
-        
+
         // log some details
         Log.logRB("TMXR_INFO_CREATION_TOOL", getAttributeValue(element, "creationtool"));
         Log.logRB("TMXR_INFO_CREATION_TOOL_VERSION", getAttributeValue(element, "creationtoolversion"));
@@ -291,7 +291,7 @@ public class TMXReader2 {
             }
         }
     }
-    
+
     protected void parseNote(StartElement element) throws Exception {
         noteContent.setLength(0);
 
@@ -526,7 +526,7 @@ public class TMXReader2 {
 
     /**
      * Get ParsedTuv from list of Tuv for specific language.
-     * 
+     *
      * Language choosed by:<br>
      * - with the same language+country<br>
      * - if not exist, then with the same language but without country<br>

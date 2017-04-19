@@ -41,7 +41,7 @@ import org.omegat.util.TestPreferencesInitializer;
 
 /**
  * Tests for RealProject classs.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class RealProjectTest {

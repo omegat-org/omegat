@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013-2016 Aaron Madlon-Kay
@@ -42,7 +42,7 @@ import org.madlonkay.supertmxmerge.util.ReflectionUtil;
 
 /**
  * A wrapper class for use with SuperTMXMerge.
- * 
+ *
  * @author Aaron Madlon-Kay <aaron@madlon-kay.com>
  */
 public class SyncTMX implements ITmx {

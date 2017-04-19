@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Alex Buloichik
@@ -34,7 +34,7 @@ import org.apache.commons.io.FileUtils;
 
 /**
  * Class for read/save project-specific settings.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ProjectTeamSettings {

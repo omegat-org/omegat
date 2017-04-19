@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Alex Buloichik, Didier Briel
@@ -36,7 +36,7 @@ import org.omegat.util.TMXProp;
 
 /**
  * Utility class for import translations from tm/auto/ files.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  */
@@ -63,7 +63,7 @@ public class ImportFromAutoTMX {
      * @param isEnforcedTMX If true, existing default translations will be overwritten in all cases
      */
     void process(ExternalTMX tmx, boolean isEnforcedTMX) {
-               
+
         for (PrepareTMXEntry e : tmx.getEntries()) { // iterate by all entries in TMX
             List<SourceTextEntry> list = existEntries.get(e.source);
             if (list == null) {
@@ -88,9 +88,9 @@ public class ImportFromAutoTMX {
                     }
                     if (existTranslation.isTranslated()) { // default translation already exist
                         if (existTranslation.linked == TMXEntry.ExternalLinked.xAUTO
-                                && !StringUtil.equalsWithNulls(existTranslation.translation, e.translation) 
+                                && !StringUtil.equalsWithNulls(existTranslation.translation, e.translation)
                                 || isEnforcedTMX) {
-                            // translation already from auto and really changed or translation comes 
+                            // translation already from auto and really changed or translation comes
                             // from the enforce folder
                             setTranslation(ste, e, isDefaultTranslation, TMXEntry.ExternalLinked.xAUTO);
                         }
@@ -124,7 +124,7 @@ public class ImportFromAutoTMX {
             }
         }
     }
-    
+
     private boolean isAltTranslation(PrepareTMXEntry entry) {
         boolean hasFileProp = false;
         boolean hasOtherProp = false;
@@ -140,7 +140,7 @@ public class ImportFromAutoTMX {
         }
         return EntryKey.IGNORE_FILE_CONTEXT ? hasFileProp && hasOtherProp : hasFileProp;
     }
-    
+
     private boolean altTranslationMatches(PrepareTMXEntry entry, EntryKey key) {
         try {
             for (TMXProp p : entry.otherProperties) {
@@ -158,7 +158,7 @@ public class ImportFromAutoTMX {
             return false;
         }
     }
-    
+
     private void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
             TMXEntry.ExternalLinked externalLinked) {
         if (StringUtil.isEmpty(trans.note)) {

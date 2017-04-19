@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
@@ -52,15 +52,15 @@ import org.omegat.util.gui.TextUtil;
 
 /**
  * Thread for calculate standard statistics.
- * 
+ *
  * Calculation requires two different tags stripping: one for calculate unique and remaining, and second for
  * calculate number of words and chars.
- * 
+ *
  * Number of words/chars calculation requires to just strip all tags, protected parts, placeholders(see StatCount.java).
- * 
+ *
  * Calculation of unique and remaining also requires to just strip all tags, protected parts, placeholders for
  * standard calculation.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Arno Peters
  * @author Aaron Madlon-Kay
@@ -128,7 +128,7 @@ public class CalcStandardStatistics extends LongProcessThread {
     public static String buildProjectStats(final IProject project, final StatisticsInfo hotStat) {
         return buildProjectStats(project, hotStat, null);
     }
-    
+
     /**
      * Builds a file with statistic info about the project. The total word &
      * character count of the project, the total number of unique segments, plus

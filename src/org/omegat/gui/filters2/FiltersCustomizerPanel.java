@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -37,7 +37,7 @@ import org.omegat.util.OStrings;
  * Main UI for for setting up filters. Filter is a class that allows for
  * reading and writing a single file format. OmegaT has different filters for
  * different supported file formats. E.g. HTML, OpenOffice etc.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik
  * @author Yu Tang

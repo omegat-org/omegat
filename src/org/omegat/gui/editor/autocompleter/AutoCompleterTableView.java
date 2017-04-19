@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
@@ -37,7 +37,7 @@ import javax.swing.KeyStroke;
 
 /**
  * Table-based auto-completer view
- * 
+ *
  * @author bartkoz
  * @author Aaron Madlon-Kay
  */
@@ -47,12 +47,12 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
      * the table. Use getTable() to access the value;
      */
     private static JTable table;
-    
+
     public AutoCompleterTableView(String name) {
         super(name);
         getTable().changeSelection(0, 0, false, false);
     }
-    
+
     /**
      * Set the selection.
      * @param p the new point
@@ -60,7 +60,7 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
     public void setSelection(Point p) {
         getTable().changeSelection(p.y, p.x, false, false);
     }
-    
+
     public JTable getTable() {
         if (table == null) {
             table = new JTable();
@@ -71,7 +71,7 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
         }
         return table;
     }
-    
+
     private final MouseAdapter mouseAdapter = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -85,20 +85,20 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
             }
         }
     };
-    
+
     @Override
     public Component getViewContent() {
         return getTable();
     }
-    
+
     /**
      * Get the point selected in the table.
-     * @return 
+     * @return
      */
     public Point getSelectionPoint() {
         return new Point(getTable().getSelectedColumn(), getTable().getSelectedRow());
     }
-    
+
     @Override
     public boolean processKeys(KeyEvent e) {
 
@@ -114,7 +114,7 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
             selectPreviousPossibleValueLeft();
             return true;
         }
-        
+
         if (s.equals(keys.tableDown) || s.equals(keys.tableDownEmacs)) {
             selectNextPossibleValueDown();
             return true;
@@ -124,7 +124,7 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
             selectNextPossibleValueRight();
             return true;
         }
-        
+
         if (s.equals(keys.tablePageUp)) {
             selectPreviousPossibleValueByPage();
             return true;
@@ -134,7 +134,7 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
             selectNextPossibleValueByPage();
             return true;
         }
-        
+
         if (s.equals(keys.tableFirst)) {
             selectFirstPossibleValue();
             return true;
@@ -144,7 +144,7 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
             selectLastPossibleValue();
             return true;
         }
-        
+
         if (s.equals(keys.tableFirstInRow)) {
             selectFirstPossibleValueInLine();
             return true;
@@ -154,106 +154,106 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
             selectLastPossibleValueInLine();
             return true;
         }
-        
+
         return false;
-    } 
-    
-    /** 
+    }
+
+    /**
      * Selects the next item in the list.
-     */ 
-    protected void selectNextPossibleValueDown() { 
+     */
+    protected void selectNextPossibleValueDown() {
         Point p = getSelectionPoint();
-        
+
         int y = (p.y + 1) % getTable().getModel().getRowCount();
-        
+
         setSelection(new Point(p.x, y));
     }
-    
+
     /**
      * Select the first value in the table (top left).
      */
     protected void selectFirstPossibleValue() {
         setSelection(new Point(0, 0));
     }
-    
+
     /**
      * Select the last value in the table (bottom right).
      */
     protected void selectLastPossibleValue() {
-        setSelection(new Point(getTable().getModel().getColumnCount() - 1, 
+        setSelection(new Point(getTable().getModel().getColumnCount() - 1,
                 getTable().getModel().getRowCount() - 1));
     }
-    
+
     /**
      * Select the first value in the current line.
      */
     protected void selectFirstPossibleValueInLine() {
         setSelection(new Point(0, getTable().getSelectedRow()));
     }
-    
+
     /**
      * Select the last value in the current line.
      */
     protected void selectLastPossibleValueInLine() {
-        setSelection(new Point(getTable().getModel().getColumnCount() - 1, 
+        setSelection(new Point(getTable().getModel().getColumnCount() - 1,
                 getTable().getSelectedRow()));
     }
-    
+
     /**
      * Go one cell to the right.
      */
-    protected void selectNextPossibleValueRight() { 
+    protected void selectNextPossibleValueRight() {
         Point p = getSelectionPoint();
-        
+
         int x = (p.x + 1) % getTable().getModel().getColumnCount();
-        
+
         setSelection(new Point(x, p.y));
     }
-    
-    /** 
-     * Selects the item in the list following the current one by completer.pageRowCount items or go to the first item. 
-     * currently selected item is already the last item. 
-     */ 
-    protected void selectNextPossibleValueByPage() { 
+
+    /**
+     * Selects the item in the list following the current one by completer.pageRowCount items or go to the first item.
+     * currently selected item is already the last item.
+     */
+    protected void selectNextPossibleValueByPage() {
         Point p = getSelectionPoint();
-        
+
         int size = getTable().getModel().getRowCount();
         setSelection(new Point(
                 p.x,
                 Math.min(p.y + AutoCompleter.PAGE_ROW_COUNT, size - 1)));
     }
 
-    /** 
+    /**
      * Selects the previous item in the list.
-     */ 
-    protected void selectPreviousPossibleValueUp() { 
+     */
+    protected void selectPreviousPossibleValueUp() {
         Point p = getSelectionPoint();
-        
+
         int size = getTable().getModel().getRowCount();
         int y = (p.y - 1 + size) % size;
-        
+
         setSelection(new Point(p.x, y));
-    } 
-    
+    }
+
     /**
      * Go one cell to the left.
      */
-    protected void selectPreviousPossibleValueLeft() { 
+    protected void selectPreviousPossibleValueLeft() {
         Point p = getSelectionPoint();
-        
+
         int size = getTable().getModel().getColumnCount();
         int x = (p.x - 1 + size) % size;
-        
+
         setSelection(new Point(x, p.y));
     }
-    
-    /** 
-     * Selects the item in the list preceding the current one by completer.pageRowCount items or go to the first item.  It won't change the selection if the 
-     * currently selected item is already the first item. 
-     */ 
-    protected void selectPreviousPossibleValueByPage() { 
+
+    /**
+     * Selects the item in the list preceding the current one by completer.pageRowCount items or go to the first item.  It won't change the selection if the
+     * currently selected item is already the first item.
+     */
+    protected void selectPreviousPossibleValueByPage() {
         Point p = getSelectionPoint();
-        
+
         setSelection(new Point(
                 p.x,
                 Math.max(p.y - AutoCompleter.PAGE_ROW_COUNT, 0)));
@@ -263,17 +263,17 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
     public int getRowCount() {
         return getTable().getModel().getRowCount();
     }
-    
+
     @Override
     public int getPreferredHeight() {
         return getModifiedRowCount() * getTable().getRowHeight();
     }
-    
+
     @Override
     public int getPreferredWidth() {
         return getTable().getPreferredSize().width;
     }
-    
+
     @Override
     public AutoCompleterItem getSelectedValue() {
         Point p = getSelectionPoint();

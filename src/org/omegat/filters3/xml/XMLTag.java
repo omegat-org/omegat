@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -33,14 +33,14 @@ import org.omegat.util.Language;
 
 /**
  * XML Tag.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
 public class XMLTag extends Tag {
     /** Creates a new instance of XML Tag */
     public XMLTag(String tag, String shortcut, Type type, org.xml.sax.Attributes attributes, Language targetLanguage) {
-        super(tag, shortcut, type, XMLUtils.convertAttributes(attributes));     
+        super(tag, shortcut, type, XMLUtils.convertAttributes(attributes));
         this.targetLanguage = targetLanguage;
     }
 
@@ -58,8 +58,8 @@ public class XMLTag extends Tag {
             buf.append("/");
         buf.append(getTag());
         buf.append(getAttributes().toString());
-        
-        // If that's an Open XML document, we preserve spaces for all <w:t> tags 
+
+        // If that's an Open XML document, we preserve spaces for all <w:t> tags
         if (getTag().equalsIgnoreCase("w:t") && Type.BEGIN == getType()) {
             Boolean preserve = false;
             for (int i = 0; i < getAttributes().size(); i++) {
@@ -72,11 +72,11 @@ public class XMLTag extends Tag {
             if (!preserve) {
                  buf.append(" xml:space=\"preserve\"");
             }
-        }    
-        
+        }
+
         boolean alreadyClosed = false;
-        
-        // If the target language is RTL and the document is a .doxc 
+
+        // If the target language is RTL and the document is a .doxc
         // we do a number of tag insertions
         if (EditorUtils.isRTL(targetLanguage.getLanguageCode())) {
             if (getTag().equalsIgnoreCase("w:pPr") && Type.BEGIN == getType()) {
@@ -88,7 +88,7 @@ public class XMLTag extends Tag {
             } else if (getTag().equalsIgnoreCase("w:tblPr") && Type.BEGIN == getType()) {
                 buf.append("><w:bidiVisual/");
             } else if (getTag().equalsIgnoreCase("w:tblStyle") && Type.ALONE == getType()) {
-                buf.append("/><w:bidiVisual/"); 
+                buf.append("/><w:bidiVisual/");
                 alreadyClosed = true;
             }
         }

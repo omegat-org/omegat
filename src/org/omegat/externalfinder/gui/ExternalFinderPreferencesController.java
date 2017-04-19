@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -178,28 +178,28 @@ public class ExternalFinderPreferencesController extends BasePreferencesControll
         return isProjectSpecific ? OStrings.getString("PREFS_TITLE_EXTERNALFINDER_PROJ_SPECIFIC")
                 : OStrings.getString("PREFS_TITLE_EXTERNALFINDER");
     }
-    
+
     static enum ItemColumn {
         NAME(0, OStrings.getString("PREFS_EXTERNALFINDER_COL_NAME"), String.class),
         CONTENTS(1, OStrings.getString("PREFS_EXTERNALFINDER_COL_SUMMARY"), String.class),
         KEYSTROKE(2, OStrings.getString("PREFS_EXTERNALFINDER_COL_KEYSTROKE"), String.class),
         NOPOPUP(3, OStrings.getString("PREFS_EXTERNALFINDER_COL_POPUP"), Boolean.class);
-        
+
         final int index;
         final String label;
         final Class<?> clazz;
-        
+
         private ItemColumn(int index, String label, Class<?> clazz) {
             this.index = index;
             this.label = label;
             this.clazz = clazz;
         }
-        
+
         static ItemColumn get(int index) {
             return values()[index];
         }
     }
-    
+
     @SuppressWarnings("serial")
     static class ItemsTableModel extends AbstractTableModel {
 
@@ -239,7 +239,7 @@ public class ExternalFinderPreferencesController extends BasePreferencesControll
         public String getColumnName(int column) {
             return ItemColumn.get(column).label;
         }
-        
+
         @Override
         public Class<?> getColumnClass(int columnIndex) {
             return ItemColumn.get(columnIndex).clazz;

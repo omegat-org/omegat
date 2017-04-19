@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -31,14 +31,13 @@ import java.util.regex.Matcher;
 
 import org.junit.Test;
 
-
 /**
  * Testing some of regular expressions.
  *
  * @author Maxym Mykhalchuk
  */
 public class PatternConstsTest {
-    
+
     /**
      * Tests {@link PatternConsts#LANG_AND_COUNTRY} regular expression.
      */
@@ -67,7 +66,7 @@ public class PatternConstsTest {
             fail("Wrong language extracted");
         if( !m.group(2).equals("DEF") )
             fail("Wrong country extracted");
-        
+
         String L_GOOD = "abc";
         m = PatternConsts.LANG_AND_COUNTRY.matcher(L_GOOD);
         if( !m.matches() )
@@ -80,7 +79,7 @@ public class PatternConstsTest {
             fail("Wrong language extracted");
         if( m.group(2)!=null )
             fail("Country extracted, but it should not");
-        
+
         String C_GOOD = "Z-abc";
         m = PatternConsts.LANG_AND_COUNTRY.matcher(C_GOOD);
         if( !m.matches() )
@@ -94,5 +93,5 @@ public class PatternConstsTest {
         if( !m.group(2).equals("abc") )
             fail("Wrong country extracted");
     }
-    
+
 }

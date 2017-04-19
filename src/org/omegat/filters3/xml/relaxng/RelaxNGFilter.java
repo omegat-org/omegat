@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -39,7 +39,7 @@ import org.omegat.util.OStrings;
  * Filter for RELAX NG XML files.
  *
  * RELAX NG is a schema language for XML.  See http://relaxng.org/
- * 
+ *
  * @author Tony Graham
  */
 public class RelaxNGFilter extends XMLFilter {
@@ -53,7 +53,7 @@ public class RelaxNGFilter extends XMLFilter {
 
     /**
      * Human-readable name of the File Format this filter supports.
-     * 
+     *
      * @return File format name
      */
     public String getFileFormatName() {
@@ -66,7 +66,7 @@ public class RelaxNGFilter extends XMLFilter {
      * file mask, encoding of the source file etc.
      * <p>
      * Note that the user may change the instances freely.
-     * 
+     *
      * @return Default filter instances
      */
     public Instance[] getDefaultInstances() {
@@ -75,7 +75,7 @@ public class RelaxNGFilter extends XMLFilter {
 
     /**
      * Either the encoding can be read, or it is UTF-8.
-     * 
+     *
      * @return <code>false</code>
      */
     @Override
@@ -85,14 +85,14 @@ public class RelaxNGFilter extends XMLFilter {
 
     /**
      * Yes, RELAX NG XML may be written out in a variety of encodings.
-     * 
+     *
      * @return <code>true</code>
      */
     @Override
     public boolean isTargetEncodingVariable() {
         return true;
     }
-    
+
     @Override
     protected boolean requirePrevNextFields() {
         return true;
@@ -101,7 +101,7 @@ public class RelaxNGFilter extends XMLFilter {
    /**
     * Returns whether the file is supported by the filter by checking
     * RELAX NG element and namespace constraints.
-    * 
+    *
     * @return <code>true</code> or <code>false</code>
     */
     public boolean isFileSupported(BufferedReader reader) {

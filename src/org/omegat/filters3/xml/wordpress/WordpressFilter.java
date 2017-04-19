@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -36,7 +36,7 @@ import org.omegat.util.OStrings;
 
 /**
  * Filter for Flash files.
- * 
+ *
  * @author Didier Briel
  */
 public class WordpressFilter extends XMLFilter {
@@ -50,7 +50,7 @@ public class WordpressFilter extends XMLFilter {
 
     /**
      * Human-readable name of the File Format this filter supports.
-     * 
+     *
      * @return File format name
      */
     @Override
@@ -64,7 +64,7 @@ public class WordpressFilter extends XMLFilter {
      * file mask, encoding of the source file etc.
      * <p>
      * Note that the user may change the instances freely.
-     * 
+     *
      * @return Default filter instances
      */
     @Override
@@ -74,7 +74,7 @@ public class WordpressFilter extends XMLFilter {
 
     /**
      * Either the encoding can be read, or it is UTF-8.
-     * 
+     *
      * @return <code>false</code>
      */
     @Override
@@ -84,7 +84,7 @@ public class WordpressFilter extends XMLFilter {
 
     /**
      * Yes, Wordpress may be written out in a variety of encodings.
-     * 
+     *
      * @return <code>true</code>
      */
     @Override

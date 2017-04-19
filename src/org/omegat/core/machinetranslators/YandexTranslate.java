@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Alex Buloichik, Didier Briel
@@ -109,7 +109,7 @@ public class YandexTranslate extends BaseTranslate {
         //XPath xPathCode = xPathFactory.newXPath();
         //String pathCode = "/Translation/@code";
         //String code = (String) xPathCode.evaluate(pathCode, new InputSource(new StringReader(lvResponse)));
-        
+
         switch (response.code) {
             case ERR_OK:
                 break;
@@ -175,4 +175,3 @@ public class YandexTranslate extends BaseTranslate {
         dialog.show();
     }
 }
-

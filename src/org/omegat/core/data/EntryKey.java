@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
@@ -29,7 +29,7 @@ import org.omegat.util.StringUtil;
 
 /**
  * Class for store full entry's identifier, including file, id, src, etc.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
@@ -40,7 +40,7 @@ public class EntryKey implements Comparable<EntryKey> {
     public final String prev;
     public final String next;
     public final String path;
-    
+
     /**
      * When true, ignore the {@link #file} member when comparing EntryKeys.
      */
@@ -113,7 +113,7 @@ public class EntryKey implements Comparable<EntryKey> {
         return "[file:" + file + ", id=" + id + ", path=" + path + ", source='" + sourceText + "', prev='"
                 + prev + "', next='" + next + "']";
     }
-    
+
     public static void setIgnoreFileContext(boolean ignoreFileContext) {
         IGNORE_FILE_CONTEXT = ignoreFileContext;
     }

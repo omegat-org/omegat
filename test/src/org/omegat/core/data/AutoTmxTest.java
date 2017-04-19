@@ -41,7 +41,7 @@ import org.omegat.util.TestPreferencesInitializer;
 
 /**
  * Tests for tm/auto/ tmx loading with replace translations.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class AutoTmxTest {

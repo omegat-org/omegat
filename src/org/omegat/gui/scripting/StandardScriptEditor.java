@@ -41,7 +41,7 @@ public class StandardScriptEditor extends AbstractScriptEditor {
 
     @Override
     public void setHighlighting(String extension) {
-        
+
     }
 
     @Override
@@ -52,7 +52,7 @@ public class StandardScriptEditor extends AbstractScriptEditor {
     @Override
     public void initLayout(ScriptingWindow scriptingWindow) {
         m_scriptEditor = new JTextArea();
-        
+
         m_scriptEditor.setFont(new Font(Font.MONOSPACED, Font.PLAIN,
                 m_scriptEditor.getFont().getSize()));
         m_scrollPaneEditor = new JScrollPane(m_scriptEditor);
@@ -68,5 +68,5 @@ public class StandardScriptEditor extends AbstractScriptEditor {
     public JTextArea getTextArea() {
         return m_scriptEditor;
     }
-    
+
 }

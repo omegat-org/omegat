@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -41,7 +41,7 @@ import org.omegat.util.OStrings;
 
 /**
  * Filter for XHTML files.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Martin Fleurke
@@ -60,10 +60,10 @@ public class XHTMLFilter extends XMLFilter {
     protected boolean requirePrevNextFields() {
         return true;
     }
-    
+
     /**
      * Human-readable name of the File Format this filter supports.
-     * 
+     *
      * @return File format name
      */
     public String getFileFormatName() {
@@ -75,7 +75,7 @@ public class XHTMLFilter extends XMLFilter {
      * filter instances, different by source file mask, encoding of the source file etc.
      * <p>
      * Note that the user may change the instances freely.
-     * 
+     *
      * @return Default filter instances
      */
     public Instance[] getDefaultInstances() {
@@ -85,7 +85,7 @@ public class XHTMLFilter extends XMLFilter {
 
     /**
      * Either the encoding can be read, or it is UTF-8.
-     * 
+     *
      * @return <code>false</code>
      */
     @Override
@@ -95,7 +95,7 @@ public class XHTMLFilter extends XMLFilter {
 
     /**
      * Yes, XHTML may be written out in a variety of encodings.
-     * 
+     *
      * @return <code>true</code>
      */
     @Override
@@ -152,7 +152,7 @@ public class XHTMLFilter extends XMLFilter {
 
     /**
      * Returns true to indicate that the XHTML filter has options.
-     * 
+     *
      * @return True, because the XHTML filter has options.
      */
     @Override
@@ -162,7 +162,7 @@ public class XHTMLFilter extends XMLFilter {
 
     /**
      * XHTML Filter shows a <b>modal</b> dialog to edit its own options.
-     * 
+     *
      * @param currentOptions
      *            Current options to edit.
      * @return Updated filter options if user confirmed the changes, and current options otherwise.

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
@@ -44,9 +44,9 @@ import javax.swing.text.StyledDocument;
 import org.omegat.util.Preferences;
 
 public class FontFallbackListener implements DocumentListener {
-        
+
     private Font defaultFont;
-    
+
     public FontFallbackListener(final JTextComponent comp) {
         defaultFont = comp.getFont();
         comp.addPropertyChangeListener("font", evt -> {
@@ -57,29 +57,29 @@ public class FontFallbackListener implements DocumentListener {
             }
         });
     }
-    
+
     @Override
     public void insertUpdate(final DocumentEvent e) {
         doStyling(e.getDocument(), e.getOffset(), e.getLength());
     }
-    
+
     private void doStyling(Document document, final int offset, final int length) {
         if (!Preferences.isPreference(Preferences.FONT_FALLBACK)) {
             return;
         }
-        
+
         if (!(document instanceof StyledDocument)) {
             return;
         }
-        
+
         final StyledDocument doc = (StyledDocument) document;
-        
+
         new SwingWorker<Void, StyleRun>() {
             @Override
             protected Void doInBackground() throws Exception {
                 Segment seg = new Segment();
                 seg.setPartialReturn(true);
-                
+
                 int nleft = length;
                 int offs = offset;
                 try {
@@ -114,7 +114,7 @@ public class FontFallbackListener implements DocumentListener {
                 }
                 return null;
             }
-            
+
             protected void process(List<StyleRun> chunks) {
                 for (StyleRun chunk : chunks) {
                     doc.setCharacterAttributes(chunk.start, chunk.length, chunk.attrs, false);
@@ -127,7 +127,7 @@ public class FontFallbackListener implements DocumentListener {
         public final int start;
         public final int length;
         public final AttributeSet attrs;
-        
+
         public StyleRun(int start, int length, AttributeSet attrs) {
             this.start = start;
             this.length = length;
@@ -142,7 +142,7 @@ public class FontFallbackListener implements DocumentListener {
     @Override
     public void changedUpdate(DocumentEvent e) {
     }
-    
+
     private AttributeSet getAttributes(Font font) {
         MutableAttributeSet attrs = new SimpleAttributeSet();
         StyleConstants.setFontFamily(attrs, font.getFamily());

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008-2013 Alex Buloichik
@@ -31,13 +31,13 @@ import org.omegat.core.data.SourceTextEntry;
 
 /**
  * Interface for tag validation.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface ITagValidation {
     /**
      * Get invalid tags entries.
-     * 
+     *
      * @return List of entries with invalid tags. Will be empty if no invalid
      *         tags are found.
      */
@@ -46,7 +46,7 @@ public interface ITagValidation {
     /**
      * Get invalid tags entries from specified files corresponding to
      * sourcePattern.
-     * 
+     *
      * @param sourcePattern
      *            The regexp of files to validate
      * @return List of entries with invalid tags. Will be empty if no invalid
@@ -56,7 +56,7 @@ public interface ITagValidation {
 
     /**
      * Checks invalid tags for one entry.
-     * 
+     *
      * @param ste
      *            entry
      * @return true if there are no invalid tags
@@ -65,7 +65,7 @@ public interface ITagValidation {
 
     /**
      * Log invalid tags entries to console.
-     * 
+     *
      * @param invalidTagsEntries
      *            list of invalid tags entries(from {@link #listInvalidTags()}
      *            method)

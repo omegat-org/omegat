@@ -1,6 +1,6 @@
 /**************************************************************************
-OmegaT - Computer Assisted Translation (CAT) tool 
-         with fuzzy matching, translation memory, keyword search, 
+OmegaT - Computer Assisted Translation (CAT) tool
+         with fuzzy matching, translation memory, keyword search,
          glossaries, and translation leveraging into updated projects.
 
 Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -40,7 +40,7 @@ import org.junit.Test;
 * @author Martin Fleurke
 */
 public class TMXDateParserTest {
-   
+
     @Test
     public void testParseDate() {
        TMXDateParser parser = new TMXDateParser();
@@ -64,8 +64,8 @@ public class TMXDateParserTest {
        }
        dateString2 = parser.getTMXDate(d);
        if (!dateString.equals(dateString2)) fail("Parsing string to date and back does not give same string (for daylight savings time)");
-       
-       //Test if same dates but different time zone give equal strings 
+
+       //Test if same dates but different time zone give equal strings
        GregorianCalendar c = new GregorianCalendar(TimeZone.getTimeZone("-02:00"));
        Date d2 = c.getTime(); //date in time zone -02:00 (hardly used anywhere, so most likely to be unique)
        Date dn = new Date(); //date with whatever time zone user is in (should be different from -02:00.

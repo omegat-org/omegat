@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -46,7 +46,7 @@ import org.omegat.util.PatternConsts;
  * collects all the output inside itself in a string. Then it adds the specified
  * encoding declaration (or replaces the encoding) and writes out the file in
  * the encoding.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
@@ -65,7 +65,7 @@ public class XMLWriter extends Writer {
 
     /**
      * Creates new XMLWriter.
-     * 
+     *
      * @param fileName
      *            file name to write to
      * @param encoding
@@ -176,7 +176,7 @@ public class XMLWriter extends Writer {
      * Write a portion of an array of characters. Simply calls
      * <code>write(char[], int, int)</code> of the internal
      * <code>StringWriter</code>.
-     * 
+     *
      * @param cbuf
      *            - Array of characters
      * @param off

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -37,7 +37,7 @@ import org.omegat.util.OStrings;
 
 /**
  * Filter for Typo3 LocManager files.
- * 
+ *
  * @author Didier Briel
  */
 public class Typo3Filter extends XMLFilter {
@@ -51,7 +51,7 @@ public class Typo3Filter extends XMLFilter {
 
     /**
      * Human-readable name of the File Format this filter supports.
-     * 
+     *
      * @return File format name
      */
     public String getFileFormatName() {
@@ -64,7 +64,7 @@ public class Typo3Filter extends XMLFilter {
      * file mask, encoding of the source file etc.
      * <p>
      * Note that the user may change the instances freely.
-     * 
+     *
      * @return Default filter instances
      */
     public Instance[] getDefaultInstances() {
@@ -73,7 +73,7 @@ public class Typo3Filter extends XMLFilter {
 
     /**
      * Either the encoding can be read, or it is UTF-8.
-     * 
+     *
      * @return <code>false</code>
      */
     public boolean isSourceEncodingVariable() {
@@ -82,13 +82,13 @@ public class Typo3Filter extends XMLFilter {
 
     /**
      * Yes, Typo3 LocManager may be written out in a variety of encodings.
-     * 
+     *
      * @return <code>true</code>
      */
     public boolean isTargetEncodingVariable() {
         return true;
     }
-    
+
     @Override
     protected boolean requirePrevNextFields() {
         return true;
@@ -97,7 +97,7 @@ public class Typo3Filter extends XMLFilter {
     /**
      * Returns whether the file is supported by the filter, by checking root
      * tags constraints.
-     * 
+     *
      * @return <code>true</code> or <code>false</code>
      */
     public boolean isFileSupported(BufferedReader reader) {

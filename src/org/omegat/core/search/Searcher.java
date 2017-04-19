@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -72,7 +72,7 @@ import org.omegat.util.StringUtil;
 /**
  * This class implements search functionality. It is non-reentrant: each searcher instance must be used by a
  * single thread.
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers
@@ -87,7 +87,7 @@ public class Searcher {
 
     /**
      * Create new searcher instance.
-     * 
+     *
      * @param project
      *            Current project
      */
@@ -96,7 +96,7 @@ public class Searcher {
         this.expression = expression;
     }
 
-    /** 
+    /**
      * Set thread for checking interruption.
      */
     public void setThread(LongProcessThread thread) {
@@ -143,7 +143,7 @@ public class Searcher {
 
     /**
      * Search for an expression and return a list of results.
-     * 
+     *
      * @param expression
      *            what to search for (search text and options)
      * @param maxResults
@@ -163,7 +163,7 @@ public class Searcher {
         m_entryMap = null; // HP
 
         m_entryMap = new HashMap<String, Integer>(); // HP
-        
+
         m_tmxMap = new HashMap<String, Integer>();
 
         // create a list of matchers
@@ -306,7 +306,7 @@ public class Searcher {
             if (!m_searchExpression.excludeOrphans) {
                 m_project.iterateByDefaultTranslations(new IProject.DefaultTranslationsIterator() {
                     final String file = OStrings.getString("CT_ORPHAN_STRINGS");
-    
+
                     public void iterate(String source, TMXEntry en) {
                         // stop searching if the max. nr of hits has been reached
                         if (m_numFinds >= expression.numberOfResults) {
@@ -387,7 +387,7 @@ public class Searcher {
      * Loops over collection of TMXEntries and checks every entry.
      * If max nr of hits have been reached or serach has been stopped,
      * the function stops and returns false. Else it finishes and returns true;
-     * 
+     *
      * @param tmEn collection of TMX Entries to check.
      * @param tmxID identifier of the TMX. E.g. the filename or language code
      * @return true when finished and all entries checked,
@@ -431,7 +431,7 @@ public class Searcher {
 
     /**
      * Check if specified entry should be found.
-     * 
+     *
      * @param srcText
      *            source text
      * @param locText
@@ -520,7 +520,7 @@ public class Searcher {
         FilterMaster fm = Core.getFilterMaster();
 
         final SearchCallback searchCallback = new SearchCallback(m_project.getProjectProperties());
-        
+
         int depth = expression.recursive ? Integer.MAX_VALUE : 0;
         Files.walk(root, depth, FileVisitOption.FOLLOW_LINKS).forEach(path -> {
             String filename = path.toString();
@@ -571,17 +571,17 @@ public class Searcher {
 
     /**
      * Looks for an occurrence of the search string(s) in the supplied text string.
-     * 
+     *
      * @param text
      *            The text string to search in
-     * 
+     *
      * @return True if the text string contains all search strings
      */
     public boolean searchString(String origText) {
         if (origText == null || m_matchers == null || m_matchers.isEmpty()) {
             return false;
         }
-        
+
         String text = m_searchExpression.widthInsensitive ? StringUtil.normalizeWidth(origText) : origText;
 
         foundMatches.clear();
@@ -639,16 +639,16 @@ public class Searcher {
 
     /**
      * Looks for an occurrence of the author search string in the supplied text string.
-     * 
+     *
      * @param author
      *            The text string to search in
-     * 
+     *
      * @return True if the text string contains the search string
      */
     private boolean searchAuthor(TMXEntry te) {
         if (te == null || m_author == null)
             return false;
-        
+
         if (m_author.pattern().pattern().equals("")) {
             // Handle search for null author.
             return te.changer == null && te.creator == null;
@@ -656,18 +656,18 @@ public class Searcher {
 
         if (te.changer != null) {
             m_author.reset(te.changer);
-            if (m_author.find()) { 
+            if (m_author.find()) {
                 return true;
             }
         }
-        
+
         if (te.creator != null) {
             m_author.reset(te.creator);
             if (m_author.find()) {
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -714,7 +714,7 @@ public class Searcher {
     private final SearchExpression expression;
     private LongProcessThread checkStop;
     private final List<SearchMatch> foundMatches = new ArrayList<SearchMatch>();
-    
+
     // PM entries 0+
     // Only PM and TM are counted (separately) for '+X more' statistics
     private static final int ENTRY_ORIGIN_PROJECT_MEMORY = 0;

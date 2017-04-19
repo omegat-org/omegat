@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -51,7 +51,7 @@ import org.omegat.util.gui.Styles.EditorColor;
 
 /**
  * A provider for spelling issues.
- * 
+ *
  * @author Aaron Madlon-Kay
  *
  */
@@ -77,7 +77,7 @@ class SpellingIssueProvider implements IIssueProvider {
     /**
      * A class representing misspellings in a translation. One instance holds
      * all misspelled tokens for the given source/target text pair.
-     * 
+     *
      * @author Aaron Madlon-Kay
      *
      */
@@ -162,4 +162,3 @@ class SpellingIssueProvider implements IIssueProvider {
         }
     }
 }
-

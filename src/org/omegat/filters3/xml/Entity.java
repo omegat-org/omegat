@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -30,7 +30,7 @@ package org.omegat.filters3.xml;
  * Entity declaration in XML file's Document type declaration. For example,
  * <code>&lt;!ENTITY gloss SYSTEM "gloss.xml"&gt;</code> is external entity and
  * <code>&lt;!ENTITY % dbnotn.module "INCLUDE"&gt;</code> is internal one.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik
  */

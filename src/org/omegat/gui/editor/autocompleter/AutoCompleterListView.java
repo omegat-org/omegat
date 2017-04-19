@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
@@ -46,22 +46,22 @@ import org.omegat.util.Token;
 
 /**
  * A list based auto-completer view.
- * 
+ *
  * @author bartkoz
  * @author Aaron Madlon-Kay
  */
 public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
 
     private static JList<AutoCompleterItem> list;
-    
+
     private static AutoCompleterItem NO_SUGGESTIONS = new AutoCompleterItem(
             OStrings.getString("AC_NO_SUGGESTIONS"), null, 0);
-    
+
     public AutoCompleterListView(String name) {
         super(name);
         getList().setFocusable(false);
     }
-    
+
     public JList<AutoCompleterItem> getList() {
         if (list == null) {
             list = new JList<>();
@@ -70,7 +70,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
         }
         return list;
     }
-    
+
     private final MouseAdapter mouseAdapter = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -83,7 +83,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
             }
         }
     };
-    
+
     @Override
     public boolean processKeys(KeyEvent e) {
         int code = e.getKeyCode();
@@ -120,43 +120,43 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
         }
 
         return false;
-    } 
-    
-    /** 
+    }
+
+    /**
      * Selects the next item in the list.
-     */ 
-    protected void selectNextPossibleValue() { 
+     */
+    protected void selectNextPossibleValue() {
         int i = (getList().getSelectedIndex() + 1) % getList().getModel().getSize();
-        getList().setSelectedIndex(i); 
-        getList().ensureIndexIsVisible(i); 
-    } 
-    
-    /** 
+        getList().setSelectedIndex(i);
+        getList().ensureIndexIsVisible(i);
+    }
+
+    /**
      * Selects the item in the list following the current one by one page, or the last item if
-     * there is less than one page following. 
-     */ 
-    protected void selectNextPossibleValueByPage() { 
+     * there is less than one page following.
+     */
+    protected void selectNextPossibleValueByPage() {
         int page = getList().getLastVisibleIndex() - getList().getFirstVisibleIndex();
         int i = Math.min(getList().getSelectedIndex() + page, getList().getModel().getSize() - 1);
         getList().setSelectedIndex(i);
         getList().ensureIndexIsVisible(i);
-    } 
+    }
 
-    /** 
+    /**
      * Selects the previous item in the list.
-     */ 
-    protected void selectPreviousPossibleValue() { 
+     */
+    protected void selectPreviousPossibleValue() {
         int size = getList().getModel().getSize();
         int i = (getList().getSelectedIndex() - 1 + size) % size;
-        getList().setSelectedIndex(i); 
-        getList().ensureIndexIsVisible(i); 
-    } 
-    
-    /** 
+        getList().setSelectedIndex(i);
+        getList().ensureIndexIsVisible(i);
+    }
+
+    /**
      * Selects the item in the list preceding the current one by one page, or the first item if
-     * there is less than one page preceding. 
-     */ 
-    protected void selectPreviousPossibleValueByPage() { 
+     * there is less than one page preceding.
+     */
+    protected void selectPreviousPossibleValueByPage() {
         int page = getList().getLastVisibleIndex() - getList().getFirstVisibleIndex();
         int i = Math.max(getList().getSelectedIndex() - page, 0);
         getList().setSelectedIndex(i);
@@ -167,13 +167,13 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     public int getRowCount() {
         return getList().getModel().getSize();
     }
-    
+
     @Override
     public int getPreferredHeight() {
         Rectangle bounds = getList().getCellBounds(0, 0);
         return (int) (getModifiedRowCount() * (bounds == null ? getList().getFont().getSize() : bounds.getHeight()));
     }
-    
+
     @Override
     public int getPreferredWidth() {
         int width = getList().getPreferredSize().width;
@@ -183,7 +183,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
         }
         return width;
     };
-    
+
     protected void setData(AutoCompleterItem... entries) {
         getList().setListData(entries);
         if (entries.length > 0) {
@@ -192,39 +192,39 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
             getList().scrollRectToVisible(new Rectangle());
         }
     }
-    
+
     @Override
     public AutoCompleterItem getSelectedValue() {
         Object item = getList().getSelectedValue();
         return item == NO_SUGGESTIONS ? null : (AutoCompleterItem) item;
     }
-    
+
     @Override
     public Component getViewContent() {
         getList().setVisibleRowCount(getModifiedRowCount());
         return getList();
     }
-    
+
     @Override
     public void updateViewData() {
-        List<AutoCompleterItem> entryList = computeListData(getLeadingText(), false);    
+        List<AutoCompleterItem> entryList = computeListData(getLeadingText(), false);
         if (entryList.isEmpty()) {
             setData(NO_SUGGESTIONS);
         } else {
             setData(entryList.toArray(new AutoCompleterItem[entryList.size()]));
         }
     }
-    
+
     @Override
     public boolean shouldPopUp() {
         return !computeListData(getLeadingText(), true).isEmpty();
     }
-    
+
     protected String getLastToken(String text) {
         String token = "";
         ITokenizer tokenizer = getTokenizer();
         Token[] tokens = tokenizer.tokenizeVerbatim(text);
-        
+
         if (tokens.length != 0) {
             Token lastToken = tokens[tokens.length - 1];
             String lastString = text.substring(lastToken.getOffset()).trim();
@@ -234,26 +234,26 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
         }
         return token;
     }
-    
+
     /**
      * Compute the items visible in the auto-completer list
      * @param prevText the text in the editing field up to the cursor location
      * @return a list of AutoCompleterItems.
      */
     public abstract List<AutoCompleterItem> computeListData(String prevText, boolean contextualOnly);
-    
+
     /**
      * Each view should determine how to print a view item.
      * @param item The item to print
      * @return A string representation of the view item
      */
     public abstract String itemToString(AutoCompleterItem item);
-    
+
     private static final Border LIST_MARGIN_BORDER = new EmptyBorder(0, 5, 0, 5);
-    
+
     @SuppressWarnings("serial")
     private class CellRenderer extends DefaultListCellRenderer {
-        
+
         @Override
         public Component getListCellRendererComponent(JList<?> list, Object value,
                 int index, boolean isSelected, boolean cellHasFocus) {

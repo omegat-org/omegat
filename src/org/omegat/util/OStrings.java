@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -36,7 +36,7 @@ import java.util.ResourceBundle;
  * <p>
  * Please don't add any new strings here, use <code>getString</code> method.
  * This class still has so many strings for legacy reasons only.
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
@@ -155,7 +155,7 @@ public class OStrings {
                     getApplicationDisplayName(), VERSION);
         }
     }
-    
+
     /**
      * Returns the OmegaT full version for logs, etc. (includes the application name).
      * Example: "OmegaT-3.5_0_dev", "OmegaT-3.5.1_0_r7532"
@@ -164,7 +164,7 @@ public class OStrings {
         return StringUtil.format(getString("app-version-template"), getApplicationName(),
                 VERSION, UPDATE, REVISION);
     }
-    
+
     /**
      * Returns the OmegaT full version for logs, etc. (does not include the application name).
      * Example: "3.5_0_dev", "3.5.1_0_r7532"
@@ -174,7 +174,7 @@ public class OStrings {
     }
 
     /** Returns default text for progress bar when no project is loaded
-     * 
+     *
      */
     public static String getProgressBarDefaultPrecentageText() {
         return StringUtil.format(OStrings.getString("MW_PROGRESS_DEFAULT_PERCENTAGE"),

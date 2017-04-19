@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2011 Alex Buloichik
@@ -27,13 +27,13 @@ package org.omegat.filters2;
 
 /**
  * Callback for translate files.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface ITranslateCallback {
     /**
      * Set current pass number
-     * 
+     *
      * Any filter called in one-pass mode by default. But if it require second pass for support prev/next
      * segments, it can set flag 'needSecondPass'.
      * @param pass The current path number, i.e., 1 or 2
@@ -48,7 +48,7 @@ public interface ITranslateCallback {
 
     /**
      * Get translation for output to compiled target.
-     * 
+     *
      * @param id
      *            ID in source file, or null if ID not supported by format
      * @param source

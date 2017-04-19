@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -30,7 +30,7 @@ import java.util.List;
 
 /**
  * A list of Tag's attritutes.
- * 
+ *
  * @author Maxym Mykhalchuk
  */
 public class Attributes {
@@ -53,7 +53,7 @@ public class Attributes {
 
     /**
      * Find attribute value by name.
-     * 
+     *
      * @param attrName
      *            attribute name, case insensitive
      * @return attribute value, or null if not found

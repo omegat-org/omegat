@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2017 Aaron Madlon-Kay
@@ -61,7 +61,7 @@ public class IssueProvidersSelectorController {
 
         dialog.getRootPane().setDefaultButton(panel.okButton);
         dialog.getContentPane().add(panel);
-        
+
         // Tags item is hard-coded because it is not disableable and is implemented differently from all
         // others.
         JCheckBox tagsCB = new JCheckBox(OStrings.getString("ISSUES_TAGS_PROVIDER_NAME"));

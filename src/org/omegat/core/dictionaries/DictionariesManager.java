@@ -54,7 +54,7 @@ import org.omegat.util.Preferences;
 
 /**
  * Class for load dictionaries.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Aaron Madlon-Kay
@@ -136,7 +136,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
      * Check all known dictionary factories to see if they support this file.
      * Will stop at the first supporting factory and attempt to load the
      * dictionary.
-     * 
+     *
      * @param file
      *            Dictionary file to be loaded
      * @return Whether or not the file was loaded
@@ -188,7 +188,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
             saveIgnoreWords(words, new File(monitor.getDir(), IGNORE_FILE));
         }
     }
-    
+
     private static void saveIgnoreWords(Collection<String> words, File outFile) {
         try {
             File outFileTmp = new File(outFile.getPath() + ".new");
@@ -209,7 +209,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
 
     /**
      * Find words list in all dictionaries.
-     * 
+     *
      * @param words
      *            words list
      * @return articles list

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -30,13 +30,13 @@ import org.omegat.util.Token;
 /**
  * Interface for similarity calculator. It require to implement more than one
  * token comparison algorithm.
- * 
+ *
  * @author Alex Buloichik
  */
 public interface ISimilarityCalculator {
     /**
      * Compute similarity.
-     * 
+     *
      * @param source
      *            source segment
      * @param target

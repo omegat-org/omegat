@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -40,7 +40,7 @@ import com.vlsolutions.swing.docking.Dockable;
 /**
  * The main window of OmegaT application, if the program is started in
  * consoleMode.
- * 
+ *
  * @author Martin Fleurke
  */
 public class ConsoleWindow implements IMainWindow {
@@ -92,7 +92,7 @@ public class ConsoleWindow implements IMainWindow {
     public void displayWarningRB(String message, Object... args) {
         displayWarningRB(message, null, args);
     }
-    
+
     public void displayWarningRB(String message, String supercedesKey, Object... args) {
         System.err.println(StringUtil.format(OStrings.getString(message), args));
     }

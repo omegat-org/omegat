@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010-2013 Alex Buloichik
@@ -31,7 +31,7 @@ import org.omegat.core.data.SourceTextEntry;
 
 /**
  * Interface for calculate marks in editor.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IMarker {
@@ -41,7 +41,7 @@ public interface IMarker {
      * Method will be called NOT in Swing thread.
      * <p>
      * Note to implementers: Both <code>sourceText</code> and <code>translationText</code> might be null!
-     * 
+     *
      * @return null if nothing changed, or list of new marks. Empty list must be returned if marks shouldn't
      *         be displayed
      */

@@ -62,7 +62,7 @@ import gen.taas.TaasLanguage;
 
 /**
  * Controller for TaaS download UI.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 @SuppressWarnings("serial")
@@ -82,7 +82,7 @@ public class BrowseTaasCollectionsController {
 
         dialog.labelStatus.setText(OStrings.getString("TAAS_STATUS_LIST"));
         new SwingWorker<List<TaasCollection>, Void>() {
-            
+
             @Override
             protected List<TaasCollection> doInBackground() throws Exception {
                 return TaaSPlugin.getClient().getCollectionsList();

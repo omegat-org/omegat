@@ -40,7 +40,7 @@ import org.omegat.util.gui.Styles;
 
 /**
  * Marker for TransTips.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TransTipsMarker implements IMarker {

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Aaron Madlon-Kay
@@ -37,42 +37,42 @@ public class TagRepairTest {
 
     @Test
     public void testRepairTags() {
-        
+
         // Fix extraneous
         StringBuilder text = new StringBuilder("Foo bar baz bar bonkers");
         TagRepair.fixExtraneous(text, new Tag(-1, "bar"));
         TagRepair.fixExtraneous(text, new Tag(-1, "bar"));
         assertEquals("Foo  baz  bonkers", text.toString());
-        
+
         // Fix missing: before
         text = new StringBuilder("Foo bar {tag2}baz");
         String[] tags = {"{tag1}", "{tag2}"};
         TagRepair.fixMissing(TagValidationTest.getList(tags), text, new Tag(-1, "{tag1}"));
         assertEquals("Foo bar {tag1}{tag2}baz", text.toString());
-        
+
         // Fix missing: after
         text = new StringBuilder("Foo bar {tag2}baz");
         String[] tags2 = {"{tag2}", "{tag1}"};
         TagRepair.fixMissing(TagValidationTest.getList(tags2), text, new Tag(-1, "{tag1}"));
         assertEquals("Foo bar {tag2}{tag1}baz", text.toString());
-        
+
         // Fix missing: no anchor
         text = new StringBuilder("Foo bar baz");
         String[] tags3 = {"{tag1}"};
         TagRepair.fixMissing(TagValidationTest.getList(tags3), text, new Tag(-1, "{tag1}"));
         assertEquals("Foo bar baz{tag1}", text.toString());
-        
+
         // Fix malformed
         text = new StringBuilder("Foo bar {tag2}baz{tag1}");
         String[] tags4 = {"{tag1}", "{tag2}"};
         TagRepair.fixMalformed(TagValidationTest.getList(tags4), text, new Tag(-1, "{tag1}"));
         assertEquals("Foo bar {tag1}{tag2}baz", text.toString());
-        
+
         // Fix whitespace
         text = new StringBuilder("\nFoo\n");
         TagRepair.fixWhitespace(text, "Foo");
         assertEquals("Foo", text.toString());
-        
+
         // Fix whitespace
         text = new StringBuilder("Foo");
         TagRepair.fixWhitespace(text, "\nFoo\n");

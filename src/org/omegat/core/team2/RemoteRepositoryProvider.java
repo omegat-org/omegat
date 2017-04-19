@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Alex Buloichik
@@ -47,10 +47,10 @@ import gen.core.project.RepositoryMapping;
 
 /**
  * Class for process some repository commands.
- * 
+ *
  * Path, local path, repository path can be directory or one file only. Directory should be declared like
  * 'source/', file should be declared like 'source/text.po'.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class RemoteRepositoryProvider {
@@ -149,7 +149,7 @@ public class RemoteRepositoryProvider {
     }
 
     /**
-     * Saves file into 'prepared' dir. 
+     * Saves file into 'prepared' dir.
      */
     public File toPrepared(File inFile) throws Exception {
         File dir = new File(projectRoot, REPO_PREPARE_SUBDIR);
@@ -200,7 +200,7 @@ public class RemoteRepositoryProvider {
 
     /**
      * Copy all mappings that under specified directory path into project directory.
-     * 
+     *
      * @param localPath
      *            directory name or file name
      * @param forceExcludes
@@ -214,7 +214,7 @@ public class RemoteRepositoryProvider {
 
     /**
      * Copy all mappings that under specified directory path into repository directory.
-     * 
+     *
      * @param localPath
      *            directory name or file name
      * @param eolConversionCharset

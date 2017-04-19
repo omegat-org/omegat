@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -56,7 +56,7 @@ import org.xml.sax.SAXException;
 /**
  * Abstract basis filter for XML format filters: OpenDocument, DocBook etc. Ideally should allow creation of a
  * new XML dialect filter by simply specifying translatable tags and attributes.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Alex Buloichik
@@ -93,13 +93,13 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
 
     /**
      * Creates a special XML-encoding-aware reader of an input file.
-     * 
+     *
      * @param inFile
      *            The source file.
      * @param outEncoding
      *            Encoding of the source file, if the filter supports it. Otherwise null.
      * @return The reader of the source file.
-     * 
+     *
      * @throws UnsupportedEncodingException
      *             Thrown if JVM doesn't support the specified inEncoding.
      * @throws IOException
@@ -117,13 +117,13 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     /**
      * Creates a writer of the translated file. Accepts <code>null</code> output file -- returns a writer to
      * <code>/dev/null</code> in this case ;-)
-     * 
+     *
      * @param outFile
      *            The target file.
      * @param outEncoding
      *            Encoding of the target file, if the filter supports it. Otherwise null.
      * @return The writer for the target file.
-     * 
+     *
      * @throws UnsupportedEncodingException
      *             Thrown if JVM doesn't support the specified outEncoding
      * @throws IOException
@@ -145,7 +145,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
      * Target language of the project
      */
     private Language targetLanguage;
-    
+
     /**
      * @return The target language of the project
      */
@@ -183,7 +183,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     /**
      * Whether source encoding can be varied by the user. If XML file has no encoding declaration, UTF-8 will
      * be used, hence returns <code>false</code> by default.
-     * 
+     *
      * @return <code>false</code>
      */
     @Override
@@ -193,7 +193,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
 
     /**
      * Target encoding can be varied by the user.
-     * 
+     *
      * @return <code>true</code>
      */
     @Override
@@ -215,7 +215,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
         } else { // We're not supposed to be there,  (parsing called from inside isFileSupported, for instance)
             return entry; // so what we return is not important
         }
-            
+
     }
 
     /**
@@ -277,11 +277,11 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
             return false;
         }
     }
-    
+
     @Override
     public void tagStart(String path, Attributes atts) {
     }
-    
+
     @Override
     public void tagEnd(String path) {
     }

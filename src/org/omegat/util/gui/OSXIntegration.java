@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014, 2015 Aaron Madlon-Kay
@@ -50,11 +50,11 @@ import org.omegat.util.StaticUtils;
 
 /**
  * This class uses reflection to set Mac OS X-specific integration hooks.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class OSXIntegration {
-    
+
     public static Image APP_ICON_MAC;
 
     private static volatile Class<?> appClass;
@@ -67,7 +67,7 @@ public class OSXIntegration {
         try {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", "OmegaT");
-            
+
             APP_ICON_MAC = ResourcesUtil.getBundledImage("OmegaT_mac.png");
 
             // Set dock icon
@@ -79,7 +79,7 @@ public class OSXIntegration {
             Class<?> strategyClass = Class.forName("com.apple.eawt.QuitStrategy");
             Method setQuitStrategy = getAppClass().getDeclaredMethod("setQuitStrategy", strategyClass);
             setQuitStrategy.invoke(getApp(), strategyClass.getField("CLOSE_ALL_WINDOWS").get(null));
-            
+
             // Prevent sudden termination:
             //   app.disableSuddenTermination();
             Method disableTerm = getAppClass().getDeclaredMethod("disableSuddenTermination");
@@ -90,14 +90,14 @@ public class OSXIntegration {
             CoreEvents.registerApplicationEventListener(appListener);
             // 2. The open file handler can defer opening a project until the GUI is ready.
             setOpenFilesHandler(openFilesHandler);
-            
+
             // Register listener to update the main window's proxy icon and modified indicators.
             CoreEvents.registerProjectChangeListener(projectListener);
         } catch (Exception ex) {
             Log.log(ex);
         }
     }
-    
+
     private static final IApplicationEventListener appListener = new IApplicationEventListener() {
         @Override
         public void onApplicationStartup() {
@@ -116,7 +116,7 @@ public class OSXIntegration {
             guiLoaded = false;
         }
     };
-    
+
     private static final IOpenFilesHandler openFilesHandler = new IOpenFilesHandler() {
         @Override
         public void openFiles(List<?> files) {
@@ -146,7 +146,7 @@ public class OSXIntegration {
             }
         }
     };
-    
+
     private static final IProjectEventListener projectListener = new IProjectEventListener() {
         @Override
         public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
@@ -171,7 +171,7 @@ public class OSXIntegration {
             }
         }
     };
-    
+
     public static void setAboutHandler(final ActionListener al) {
         try {
             // Handler must implement com.apple.eawt.AboutHandler interface.
@@ -197,7 +197,7 @@ public class OSXIntegration {
             Log.log(ex);
         }
     }
-    
+
     public static void setQuitHandler(final ActionListener al) {
         try {
             // Handler must implement com.apple.eawt.QuitHandler interface.
@@ -232,7 +232,7 @@ public class OSXIntegration {
             Log.log(ex);
         }
     }
-    
+
     public static void setOpenFilesHandler(final IOpenFilesHandler ofh) {
         try {
             // Handler must implement com.apple.eawt.OpenFilesHandler interface.
@@ -309,22 +309,22 @@ public class OSXIntegration {
     public static void setProxyIcon(JRootPane rootPane, File file) {
         rootPane.putClientProperty("Window.documentFile", file);
     }
-    
+
     public static void setModifiedIndicator(JRootPane rootPane, boolean isModified) {
         rootPane.putClientProperty("Window.documentModified", isModified);
     }
-    
+
     public interface IOpenFilesHandler {
         public void openFiles(List<?> files);
     }
-    
+
     private static Class<?> getAppClass() throws Exception {
         if (appClass == null) {
             appClass = Class.forName("com.apple.eawt.Application");
         }
         return appClass;
     }
-    
+
     private static Object getApp() throws Exception {
         if (app == null) {
             Method getApp = getAppClass().getDeclaredMethod("getApplication");

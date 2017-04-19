@@ -44,7 +44,7 @@ public interface ILanguageToolBridge {
 
     /**
      * Get marks for Entry
-     * 
+     *
      * @param sourceText
      * @param translationText
      * @return List of results

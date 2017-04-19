@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -32,7 +32,7 @@ import org.omegat.util.gui.Styles;
 /**
  * A class that interpolates between a given min and max color, according to the formula
  * <code>-4x^2 + 4x</code>.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class FlashColorInterpolator {

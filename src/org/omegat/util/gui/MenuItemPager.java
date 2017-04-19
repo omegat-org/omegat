@@ -48,7 +48,7 @@ import org.omegat.util.OStrings;
  * <li>Optionally obtain the "first page" of items (the items added directly to the root target menu) with
  * {@link #getFirstPage()}.
  * </ol>
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class MenuItemPager {
@@ -77,10 +77,10 @@ public class MenuItemPager {
 
     /**
      * Set the size of the page (number of items allowed before a new submenu is created).
-     * 
+     *
      * The actual number of items added to any (sub)menu is <code>itemsPerPage + 1</code> for the next
      * submenu.
-     * 
+     *
      * @param itemsPerPage
      *            Page size
      */
@@ -90,7 +90,7 @@ public class MenuItemPager {
 
     /**
      * Add an item to the menu. The item will be added to a submenu as appropriate.
-     * 
+     *
      * @param newItem
      *            The item to add
      * @return The provided item
@@ -120,7 +120,7 @@ public class MenuItemPager {
     /**
      * Get the "first page" of items (the items added directly to the provided root menu). If a second page
      * was added, the list will include the item representing the submenu.
-     * 
+     *
      * @return The first-page items
      */
     public List<JMenuItem> getFirstPage() {

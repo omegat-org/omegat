@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -50,7 +50,7 @@ import org.omegat.util.PatternConsts;
  * declaration is added, and the file is written in OS-default encoding. This is
  * done to fix a bug <a href="https://sourceforge.net/p/omegat/bugs/101/">[1.6
  * RC2] Bug with Target Encoding set to &lt;auto&gt; for (x)HTML</a>.
- * 
+ *
  * @author Maxym Mykhalchuk
  */
 public class HTMLWriter extends Writer {
@@ -75,7 +75,7 @@ public class HTMLWriter extends Writer {
 
     /**
      * Creates new HTMLWriter.
-     * 
+     *
      * @param fileName
      *            - file name to write to
      * @param encoding
@@ -190,7 +190,7 @@ public class HTMLWriter extends Writer {
      * Write a portion of an array of characters. Simply calls
      * <code>write(char[], int, int)</code> of the internal
      * <code>StringWriter</code>.
-     * 
+     *
      * @param cbuf
      *            - Array of characters
      * @param off

@@ -39,9 +39,9 @@ import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Modal dialog to edit the Mozilla DTD filter options.
- * 
+ *
  * Code modified from the file: PoOptionsDialog.java
- * 
+ *
  * @author Enrique Estevez (keko.gl@gmail.com)
  */
 @SuppressWarnings("serial")

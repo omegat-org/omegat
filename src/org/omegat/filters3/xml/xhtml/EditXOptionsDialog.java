@@ -43,7 +43,7 @@ import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Modal dialog to edit (X)HTML filter options.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Martin Fleurke

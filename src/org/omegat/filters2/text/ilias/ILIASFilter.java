@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -50,11 +50,11 @@ import org.omegat.util.StringUtil;
  * The file contains a header that should be copied into the translated version.
  * The translated stings should not contain any \n\r symbols but may include
  * simple HTML entities such as &lt;p&gt; ... &lt;/p&gt; and &lt;br /&gt;
- * 
+ *
  * @see <a href=
  *      "http://www.ilias.de/docu/ilias.php?ref_id=37&from_page=129&obj_id=133&obj_type=PageObject&cmd=layout&cmdClass=illmpresentationgui&cmdNode=ih&baseClass=ilLMPresentationGUI">
  *      docs</a>
- * 
+ *
  * @author Michael Zakharov <trapman.hunt@gmail.com>
  */
 public class ILIASFilter extends AbstractFilter {
@@ -88,7 +88,7 @@ public class ILIASFilter extends AbstractFilter {
     /**
      * Doing the processing of the file...
      * @param reader
-     * @param outfile  
+     * @param outfile
      */
     @Override
     public void processFile(BufferedReader reader, BufferedWriter outfile, FilterContext fc) throws IOException {
@@ -103,7 +103,7 @@ public class ILIASFilter extends AbstractFilter {
          */
 
         while ((line = lbpr.readLine()) != null) {
-                      
+
             String trimmed = line.trim();
 
             // skipping empty strings
@@ -121,17 +121,17 @@ public class ILIASFilter extends AbstractFilter {
             String value = mat.group(3);
 
             if(value.isEmpty()) { // If original text is empty, the translated is empty too
-                outfile.write(line + lbpr.getLinebreak()); 
-                continue;                
+                outfile.write(line + lbpr.getLinebreak());
+                continue;
             }
 
             // writing out: "module_name#:#identifier#:#"
             outfile.write(key + "#:#");
 
             String trans = process(key, value);
-                        
+
             outfile.write(trans); // Translation
-            outfile.write(lbpr.getLinebreak()); 
+            outfile.write(lbpr.getLinebreak());
         }
         lbpr.close();
     }
@@ -169,7 +169,6 @@ public class ILIASFilter extends AbstractFilter {
         return markFound & !textFound;
     }
 
-
     @Override
     protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, org.omegat.filters2.FilterContext fc) throws Exception {
         Map<String, String> source = new HashMap<String, String>();
@@ -186,12 +185,12 @@ public class ILIASFilter extends AbstractFilter {
             }
         }
     }
-    
+
     /**
-     * 
+     *
      * @param key
      * @param value
-     * @return 
+     * @return
      */
     private String process(String key, String value) {
         if (entryParseCallback != null) {

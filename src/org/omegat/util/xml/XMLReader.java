@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -48,7 +48,7 @@ import org.omegat.util.PatternConsts;
  * If encoding isn't specified, or it is not supported by Java platform, the
  * file is opened in default system encoding (ISO-8859-2 in USA, Windows-1251 on
  * my OS).
- * 
+ *
  * @author Maxym Mykhalchuk
  */
 public class XMLReader extends Reader {
@@ -58,7 +58,7 @@ public class XMLReader extends Reader {
     /**
      * Creates a new instance of XMLReader. If encoding cannot be detected,
      * falls back to default encoding of Operating System.
-     * 
+     *
      * @param fileName
      *            - the file to read
      */
@@ -71,7 +71,7 @@ public class XMLReader extends Reader {
      * falls back to supplied <code>encoding</code>, or (if supplied null, or
      * supplied encoding is not supported by JVM) falls back to default encoding
      * of Operating System.
-     * 
+     *
      * @param fileName
      *            The file to read.
      * @param encoding
@@ -87,7 +87,7 @@ public class XMLReader extends Reader {
 
     /**
      * Returns the reader of the underlying file in the correct encoding.
-     * 
+     *
      * <p>
      * We can detect the following:
      * <ul>
@@ -96,7 +96,7 @@ public class XMLReader extends Reader {
      * <li>Any other encoding with 8-bit Latin symbols (e.g. Windows-1251, UTF-8
      * etc), if it is specified using XML/HTML-style encoding declarations.
      * </ul>
-     * 
+     *
      * <p>
      * Note that we cannot detect UTF-16 encoding, if there's no BOM!
      */

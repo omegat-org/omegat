@@ -43,9 +43,9 @@ import org.omegat.util.gui.UIThreadsUtil;
 /**
  * Base class for show information about currently selected entry. It can be used for glossaries, dictionaries
  * and other panes.
- * 
+ *
  * If you need long search operation, use EntryInfoThreadPane instead.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @param <T>
  *            result type of found data

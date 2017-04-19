@@ -332,7 +332,7 @@ public final class StringUtil {
      * Truncate the supplied text to a maximum of len codepoints. If truncated,
      * the result will be the first (len - 1) codepoints plus a trailing
      * ellipsis.
-     * 
+     *
      * @param text
      *            The text to truncate
      * @param len
@@ -409,7 +409,7 @@ public final class StringUtil {
 
     /**
      * Replace invalid XML chars by spaces.
-     * 
+     *
      * @param str
      *            input stream
      * @return result stream
@@ -567,7 +567,7 @@ public final class StringUtil {
      * This method was adapted from <a href=
      * "https://bitbucket.org/okapiframework/okapi/src/52143104fcfc7eda204d04dfbbc273189f3a7f0f/okapi/steps/fullwidthconversion/src/main/java/net/sf/okapi/steps/fullwidthconversion/FullWidthConversionStep.java">
      * FullWidthConversionStep.java</a> in the Okapi Framework under GPLv2+.
-     * 
+     *
      * @param text
      * @return Normalized-width text
      */
@@ -815,7 +815,7 @@ public final class StringUtil {
      * Strip whitespace from the end of a string. Uses
      * {@link Character#isWhitespace(int)}, so it does not strip the extra
      * non-breaking whitespace included in {@link #isWhiteSpace(int)}.
-     * 
+     *
      * @param text
      * @return text with trailing whitespace removed
      */
@@ -836,7 +836,7 @@ public final class StringUtil {
      * Convert a byte array into a Base64-encoded String. Convenience method for
      * {@link DatatypeConverter#printBase64Binary(byte[])} (available since Java
      * 1.6) because it's so well hidden.
-     * 
+     *
      * @param bytes
      *            Data bytes
      * @return Base64-encoded String

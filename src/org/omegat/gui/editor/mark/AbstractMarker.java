@@ -41,7 +41,7 @@ import org.omegat.core.data.SourceTextEntry;
  * Abstract marker class that marks source and target text according to some
  * 'pattern' and paints them accoriding to some 'PAINTER' and 'ATTRIBUTES' (all
  * of they defined by implementing classes)
- * 
+ *
  * @author Martin Fleurke
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
@@ -59,7 +59,7 @@ public abstract class AbstractMarker implements IMarker {
 
     /**
      * Is the marker enabled?
-     * 
+     *
      * @return true when enabled (markers are painted). false when disabled (no
      *         markers painted)
      */

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -31,7 +31,7 @@ import java.util.regex.PatternSyntaxException;
 
 /**
  * The class representing a single segmentation rule.
- * 
+ *
  * @author Maxym Mykhalchuk
  */
 public class Rule implements Serializable {
@@ -67,7 +67,7 @@ public class Rule implements Serializable {
 
     /**
      * Returns whether this is a rule that determines a break or an exception.
-     * 
+     *
      * @return true is this is a break rule.
      */
     public boolean isBreakRule() {
@@ -76,7 +76,7 @@ public class Rule implements Serializable {
 
     /**
      * Sets whether this is a rule that determines a break or an exception.
-     * 
+     *
      * @param breakRule
      *            New value -- true for a break rule, false for an exception.
      */
@@ -93,7 +93,7 @@ public class Rule implements Serializable {
     /**
      * Returns a regular expression which represents the text that appears
      * before a segment break.
-     * 
+     *
      * @return regular expression of a text before break.
      */
     public String getBeforebreak() {
@@ -106,7 +106,7 @@ public class Rule implements Serializable {
     /**
      * Returns a regular expression which represents the text that appears
      * before a segment break.
-     * 
+     *
      * @return regular expression of a text before break.
      */
     public Pattern getCompiledBeforebreak() {
@@ -116,7 +116,7 @@ public class Rule implements Serializable {
     /**
      * Sets a regular expression which represents the text that appears before a
      * segment break.
-     * 
+     *
      * @param beforebreak
      *            Regular expression string of a text before break.
      */
@@ -133,7 +133,7 @@ public class Rule implements Serializable {
     /**
      * Returns a regular expression which represents the text that appears after
      * a segment break.
-     * 
+     *
      * @return regular expression of a text after break.
      */
     public String getAfterbreak() {
@@ -146,7 +146,7 @@ public class Rule implements Serializable {
     /**
      * Returns a regular expression which represents the text that appears after
      * a segment break.
-     * 
+     *
      * @return regular expression of a text after break.
      */
     public Pattern getCompiledAfterbreak() {
@@ -156,7 +156,7 @@ public class Rule implements Serializable {
     /**
      * Sets a regular expression which represents the text that appears after a
      * segment break.
-     * 
+     *
      * @param afterbreak
      *            Regular expression string of a text after break.
      */

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Yu Tang
@@ -161,7 +161,7 @@ public abstract class AlphabeticalMarkers extends JPanel {
         g2.setColor(colorScheme.foreground);
         layout.draw(g2, location.x + diffForCentered.width, location.y + diffForCentered.height);
     }
-    
+
     //  +------+
     //  |      |
     //  |      |
@@ -253,12 +253,12 @@ public abstract class AlphabeticalMarkers extends JPanel {
     }
 
     protected abstract Map<Integer, Point> getViewableSegmentLocations();
-    
+
     /**
-     * Translate a marker title letter to a segment number. If the letter 
+     * Translate a marker title letter to a segment number. If the letter
      * found, it will be converted to actual segment number string.
      * @param inputValue
-     * @return if the letter found translated string, otherwise inputValue. 
+     * @return if the letter found translated string, otherwise inputValue.
      */
     public String translateSegmentNumber(String inputValue) {
         try {
@@ -308,13 +308,13 @@ public abstract class AlphabeticalMarkers extends JPanel {
 
         @Override
         public String toString() {
-            return this.getClass().getSimpleName() + " {" 
-                    + this.segmentNumber + ", '" 
+            return this.getClass().getSimpleName() + " {"
+                    + this.segmentNumber + ", '"
                     + this.title + "', "
                     + this.location.toString() + "}";
         }
     }
-    
+
     private static class ColorScheme {
         Color background;
         Color foreground;

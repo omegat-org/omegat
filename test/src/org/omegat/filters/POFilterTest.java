@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -58,9 +58,9 @@ public class POFilterTest extends TestFilterBase {
         options.put("skipHeader", "true");
         IProject.FileInfo fi = loadSourceFiles(new PoFilter(), f, options);
 
-        String comment = OStrings.getString("POFILTER_TRANSLATOR_COMMENTS") + "\n" + "A valid comment\nAnother valid comment\n\n" 
+        String comment = OStrings.getString("POFILTER_TRANSLATOR_COMMENTS") + "\n" + "A valid comment\nAnother valid comment\n\n"
         + OStrings.getString("POFILTER_EXTRACTED_COMMENTS") + "\n" + "Some extracted comments\nMore extracted comments\n\n"
-        + OStrings.getString("POFILTER_REFERENCES") + "\n" + "/my/source/file\n/my/source/file2\n\n"; 
+        + OStrings.getString("POFILTER_REFERENCES") + "\n" + "/my/source/file\n/my/source/file2\n\n";
 
         checkMultiStart(fi, f);
         checkMulti("source1", null, "some context", null, null, comment);

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Alex Buloichik
@@ -55,9 +55,9 @@ import com.jcraft.jsch.agentproxy.TrileadAgentProxy;
 /**
  * Authentication manager for SVN. See details about authentication at the
  * http://wiki.svnkit.com/Authentication. Authentication manager created for each repository instance.
- * 
+ *
  * Only username+password authentication supported. Proxy not supported for https:// repositories.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SVNAuthenticationManager implements ISVNAuthenticationManager {

@@ -64,11 +64,11 @@ import org.xml.sax.helpers.DefaultHandler;
 /**
  * The part of XML filter that actually does the job. This class is called back
  * by SAXParser.
- * 
+ *
  * Entities described on
  * http://www.ibm.com/developerworks/xml/library/x-entities/
  * http://xmlwriter.net/xml_guide/entity_declaration.shtml
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Martin Fleurke
  * @author Didier Briel
@@ -85,7 +85,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     private BufferedWriter mainWriter;
     /** Current writer for an external included file. */
     private BufferedWriter extWriter = null;
-    
+
     /** Current path in XML. */
     private final Stack<String> currentTagPath = new Stack<String>();
 
@@ -153,7 +153,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             return spacePreserve;
         }
     }
-    
+
     private void resetSpacePreservingTag() {
         spacePreserve = false;
     }
@@ -571,7 +571,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         } else {
             queueEndTag(tag);
         }
-        
+
         translatorTagEnd(tag);
         if (!translator.isInIgnored() && prevIgnored) {
             // stop ignored from this tag - need to flush without translate
@@ -582,7 +582,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     /**
      * One of the main methods of the XML filter: it collects all the data,
      * adjusts it, and sends for translation.
-     * 
+     *
      * @see #translateAndFlush()
      */
     private void translateButDontFlash() throws TranslationException {
@@ -595,7 +595,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         Element lead = currEntry().get(0);
         String translation = src;
         if ((lead instanceof Tag)
-             && (isPreformattingTag(((Tag) lead).getTag(), ((Tag) lead).getAttributes()) 
+             && (isPreformattingTag(((Tag) lead).getTag(), ((Tag) lead).getAttributes())
                  || isSpacePreservingTag())
              && isTranslatableTag()
              && !StringUtil.isEmpty(src)) {
@@ -605,7 +605,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             String compressed = src;
             if (Core.getFilterMaster().getConfig().isRemoveSpacesNonseg()) {
                 compressed = StringUtil.compressSpaces(src);
-            } 
+            }
             if (isTranslatableTag())
                 translation = translator.translate(compressed, shortcutDetails);
             // untranslated is written out uncompressed
@@ -620,7 +620,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * One of the main methods of the XML filter: it collects all the data,
      * adjusts it, sends for translation, writes out the translated data and
      * clears the entry.
-     * 
+     *
      * @see #translateButDontFlash()
      */
     private void translateAndFlush() throws SAXException, TranslationException {
@@ -672,7 +672,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * Returns whether the tag starts a new paragraph. It is called at the end
      * of an element (&lt;/mrk&gt;), and thus doesn't provide attributes. Those
      * are restored from the paragraphTagAttributes stack.
-     * 
+     *
      * @param tag
      *            A tag
      * @return <code>true</code> or <code>false</false>
@@ -708,7 +708,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
 
     /**
      * Returns whether the tag is content based.
-     * 
+     *
      * @param tag
      *            A tag
      * @return <code>true</code> or <code>false</false>
@@ -728,7 +728,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
 
     /**
      * Returns whether the tag surrounds preformatted block of text.
-     * 
+     *
      * @param tag
      *            A tag
      * @return <code>true</code> or <code>false</false>
@@ -744,7 +744,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * Returns whether the tag surrounds preformatted block of text. It is
      * called at the end of an element (&lt;/mrk&gt;), and thus doesn't provide
      * attributes. Those are restored from the preformatTagAttributes stack.
-     * 
+     *
      * @param tag
      *            A tag
      * @return <code>true</code> or <code>false</false>
@@ -783,7 +783,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     /**
      * If we are not inside a translatable tag, and if the dialect says the new
      * one is translatable, add the new tag to the stack
-     * 
+     *
      * @param tag
      *            The current opening tag
      * @param atts
@@ -828,7 +828,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         }
         return path.toString();
     }
-    
+
     /**
      * If the space-preserving flag is not set, and the attributes say it is one, set it
      *
@@ -873,7 +873,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         if (dialect.getForceSpacePreserving()) {
             return true;
         }
-        
+
         boolean preserve = false;
 
         for (int i = 0; i < currentAttributes.size(); i++) {
@@ -1047,7 +1047,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
 
     /**
      * Report the end of an entity.
-     * 
+     *
      * @param name
      *            The name of the entity that is ending.
      * @exception SAXException

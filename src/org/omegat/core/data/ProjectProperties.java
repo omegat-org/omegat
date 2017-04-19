@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -54,7 +54,7 @@ import gen.core.project.RepositoryDefinition;
 
 /**
  * Storage for project properties. May read and write project from/to disk.
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Guido Leenders
@@ -190,8 +190,7 @@ public class ProjectProperties {
     public void setTMRoot(String tmRoot) {
         tmDir.setRelativeOrAbsolute(tmRoot);
     }
-    
-  
+
     /** Returns The Translation Memory (TMX) with translations to other languages Files Directory */
     public String getTMOtherLangRoot() {
         return tmDir.getAsString() + OConsts.DEFAULT_OTHERLANG + '/';
@@ -407,7 +406,7 @@ public class ProjectProperties {
     public void setProjectFilters(Filters projectFilters) {
         this.projectFilters = projectFilters;
     }
-    
+
     public String getExternalCommand() {
         return externalCommand;
     }
@@ -426,7 +425,7 @@ public class ProjectProperties {
         }
         return returnValue;
     }
-    
+
     /**
      * Verify project and print any problems.
      */
@@ -462,7 +461,7 @@ public class ProjectProperties {
         if (!tmx.exists()) {
             throw new ProjectException(StringUtil.format(OStrings.getString("PROJECT_TM_FOLDER"), tmxDir));
         }
-        
+
         // Dictionary folder is always created automatically when it does not exist, for ascending
         // compatibility reasons.
         // There is no exception handling when a failure occurs during folder creation.
@@ -507,7 +506,7 @@ public class ProjectProperties {
 
     private SRX projectSRX;
     private Filters projectFilters;
-    
+
     private String externalCommand;
 
     protected File projectRootDir;
@@ -538,7 +537,7 @@ public class ProjectProperties {
         /**
          * path is directory(or file) as declared in the omegat.project, but not __DEFAULT__. I.e. caller can
          * send something like "/some/project/source", or "source", or "source/".
-         * 
+         *
          * Absolute paths from Windows will be treated as relative on Linux/MacOS, and vice versa.
          */
         public void setRelativeOrAbsolute(String path) {

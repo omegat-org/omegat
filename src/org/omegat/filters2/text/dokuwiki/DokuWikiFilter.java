@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -41,7 +41,7 @@ import org.omegat.util.OStrings;
 /**
  * Filter to support Files with the DokuWiki syntax
  * http://www.dokuwiki.org/syntax. The DokuWiki save it content in *.txt files
- * 
+ *
  * @author Volker Berlin
  */
 public class DokuWikiFilter extends AbstractFilter {
@@ -66,7 +66,7 @@ public class DokuWikiFilter extends AbstractFilter {
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.txt", "UTF-8", "UTF-8"), };
     }
-    
+
     protected boolean requirePrevNextFields() {
         return true;
     }
@@ -187,7 +187,7 @@ public class DokuWikiFilter extends AbstractFilter {
 
     /**
      * Check if the line is a heading and which level of heading
-     * 
+     *
      * @param line
      *            the lien to check
      * @return the level, 0 means no heading
@@ -216,7 +216,7 @@ public class DokuWikiFilter extends AbstractFilter {
     /**
      * Check if there are data to translate in the StringBuilder. If yes then it
      * translate it and reset the StringBuilder.
-     * 
+     *
      * @param outfile
      *            Writer of the target file on compilation
      * @param text
@@ -237,7 +237,7 @@ public class DokuWikiFilter extends AbstractFilter {
 
     /**
      * Check if there are data to translate. If yes then it translate it.
-     * 
+     *
      * @param outfile
      *            Writer of the target file on compilation
      * @param value
@@ -269,7 +269,7 @@ public class DokuWikiFilter extends AbstractFilter {
 
     /**
      * Skip comments and code blocks.
-     * 
+     *
      * @param outfile
      *            Writer of the target file on compilation
      * @param text

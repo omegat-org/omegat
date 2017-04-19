@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -102,7 +102,7 @@ import org.omegat.util.gui.TableColumnSizer;
 
 /**
  * A controller to orchestrate the {@link IssuesPanel}.
- * 
+ *
  * @author Aaron Madlon-Kay
  *
  */
@@ -115,7 +115,6 @@ public class IssuesPanelController implements IIssues {
 
     static final double INNER_SPLIT_INITIAL_RATIO = 0.25d;
     static final double OUTER_SPLIT_INITIAL_RATIO = 0.5d;
-
 
     static final Icon SETTINGS_ICON = new ImageIcon(ResourcesUtil.getBundledImage("appbar.settings.active.png"));
     static final Icon SETTINGS_ICON_INACTIVE = new ImageIcon(
@@ -142,7 +141,7 @@ public class IssuesPanelController implements IIssues {
     JFrame frame;
     IssuesPanel panel;
     TableColumnSizer colSizer;
-    
+
     String filePattern;
     String instructions;
 
@@ -295,7 +294,7 @@ public class IssuesPanelController implements IIssues {
         panel.showAllButton.addActionListener(e -> showAll());
 
         colSizer = TableColumnSizer.autoSize(panel.table, IssueColumn.DESCRIPTION.index, true);
-        
+
         CoreEvents.registerProjectChangeListener(e -> {
             switch (e) {
             case CLOSE:

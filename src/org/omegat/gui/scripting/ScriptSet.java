@@ -49,19 +49,18 @@ public class ScriptSet {
             e.printStackTrace();
         }
     }
-    
 
     public static void saveSet(final File setFile, final String title, final String[] quickScripts) throws IOException {
         Properties p = new Properties();
-        
+
         p.setProperty("title", title);
-        
+
         for ( int i = 0; i < ScriptingWindow.NUMBERS_OF_QUICK_SCRIPTS; i++) {
             if (quickScripts[i] != null) {
                 p.setProperty(Integer.toString(i+1), quickScripts[i]);
             }
         }
-        
+
         p.store(new FileOutputStream(setFile), "OmegaT Script Set");
     }
 
@@ -73,7 +72,7 @@ public class ScriptSet {
            return m_setFile.getName();
        }
     }
-    
+
     public ScriptItem getScriptItem(int key) {
         if (key > ScriptingWindow.NUMBERS_OF_QUICK_SCRIPTS) {
             key = ScriptingWindow.NUMBERS_OF_QUICK_SCRIPTS;
@@ -83,16 +82,12 @@ public class ScriptSet {
         if (m_props.containsKey(idx)) {
             return new ScriptItem(new File(m_setFile.getParentFile(), m_props.getProperty(idx)));
         }
-        
+
         return null;
     }
 
-
     public void load() {
-        
-        
+
     }
-    
-    
-    
+
 }

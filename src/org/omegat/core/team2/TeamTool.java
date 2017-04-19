@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -48,7 +48,7 @@ import org.tmatesoft.svn.core.wc.SVNClientManager;
 /**
  * A utility class implementing useful tools related to team projects. Intended
  * mostly for CLI use.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class TeamTool {
@@ -59,7 +59,7 @@ public class TeamTool {
      * Utility function to create a minimal project to serve as a base for a
      * team project. Will add/stage everything if invoked on a path already
      * containing a git working tree or svn checkout.
-     * 
+     *
      * @param dir
      *            Directory in which to create team project
      * @param srcLang

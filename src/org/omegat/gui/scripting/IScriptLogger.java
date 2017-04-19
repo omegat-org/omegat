@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2011 Briac Pilpre 
+ Copyright (C) 2011 Briac Pilpre
                2013 Alex Buloichik, Yu Tang
                2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
@@ -28,7 +28,7 @@ package org.omegat.gui.scripting;
 
 /**
  * Used to display results in the scripting window
- * 
+ *
  * @author Briac Pilpre (briacp@gmail.com)
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Yu Tang
@@ -37,8 +37,8 @@ package org.omegat.gui.scripting;
 public interface IScriptLogger {
 
     public void print(Object o);
-	
+
     public void println(Object o);
-	
+
     public void clear();
 }

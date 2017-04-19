@@ -38,7 +38,7 @@ import org.omegat.util.gui.Styles;
 /**
  * Marker for be able to add marks when a match is inserted from such a TMX manually. TMX should be in tm/mt/
  * folder.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ComesFromMTMarker implements IMarker {

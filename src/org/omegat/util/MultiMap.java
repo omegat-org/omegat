@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -32,7 +32,7 @@ import java.util.Set;
 
 /**
  * A map that maps keys to sets of values. Does NOT allow null keys/values.
- * 
+ *
  * @author Maxym Mykhalchuk
  */
 public class MultiMap<K, V> {

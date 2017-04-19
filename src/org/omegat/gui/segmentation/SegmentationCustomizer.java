@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -33,7 +33,7 @@ import org.omegat.gui.dialogs.PreferencesDialog;
 /**
  * A convenience class implementing a similar API to the old SegmentationCustomizer implementation, now based
  * on {@link SegmentationCustomizerController} and {@link PreferencesDialog}.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class SegmentationCustomizer {

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
@@ -32,14 +32,14 @@ import org.omegat.util.gui.Styles;
 
 /**
  * Collection of Markers for whitespace symbols.
- * 
+ *
  * @author Martin Fleurke
  */
 public class WhitespaceMarkerFactory {
 
     /**
      * Marker for a normal whitespace.
-     * 
+     *
      * @author Martin Fleurke
      */
     public static class SpaceMarker extends AbstractMarker {
@@ -67,11 +67,11 @@ public class WhitespaceMarkerFactory {
         }
     }
     /**
-     * Marker for linefeed. 
-     * 
-     * There is a linefeed symbol: U+240A. But it is so small / hard to see, 
+     * Marker for linefeed.
+     *
+     * There is a linefeed symbol: U+240A. But it is so small / hard to see,
      * that instead we use U+00B6 as the symbol to show, like other applications do.
-     * 
+     *
      * @author Martin Fleurke
      */
     public static class LFMarker extends AbstractMarker {

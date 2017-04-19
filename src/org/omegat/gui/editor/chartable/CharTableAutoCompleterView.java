@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
@@ -44,9 +44,9 @@ import org.omegat.util.Preferences;
 public class CharTableAutoCompleterView extends AutoCompleterTableView {
 
     private CharTableModel model;
-    
+
     DefaultTableCellRenderer renderer;
-    
+
     public CharTableAutoCompleterView() {
         super(OStrings.getString("AC_CHARTABLE_VIEW"));
         model = new CharTableModel(null);
@@ -74,7 +74,7 @@ public class CharTableAutoCompleterView extends AutoCompleterTableView {
                 input = customChars;
             }
         }
-        
+
         if (model.setData(input)) {
             setSelection(new Point(0,0));
         }
@@ -84,7 +84,7 @@ public class CharTableAutoCompleterView extends AutoCompleterTableView {
     public void setSelection(Point p) {
         super.setSelection(model.modifyPoint(p));
     }
-    
+
     @Override
     public boolean shouldPopUp() {
         return false;

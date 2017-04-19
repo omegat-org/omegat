@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Chihiro Hio, Aaron Madlon-Kay
@@ -71,7 +71,7 @@ import org.omegat.util.gui.MenuItemPager;
  * <p>
  * See the plugin page or <code>package.html</code> for information about the
  * XML format.
- * 
+ *
  * @see <a href=
  *      "https://github.com/hiohiohio/omegat-plugin-externalfinder">omegat-plugin-externalfinder
  *      on GitHub</a>
@@ -168,7 +168,7 @@ public class ExternalFinder {
      * Get the global configuration. This is stored in the user's OmegaT
      * configuration directory. If the file does not exist, an empty
      * configuration will be created and returned.
-     * 
+     *
      * @return The configuration (will never be null)
      */
     public static ExternalFinderConfiguration getGlobalConfig() {
@@ -210,7 +210,7 @@ public class ExternalFinder {
 
     /**
      * Get the project-specific configuration.
-     * 
+     *
      * @return The configuration, or null if no project is loaded or the project
      *         has no config file
      */

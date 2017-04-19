@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Antonio Vilei
@@ -28,14 +28,14 @@ package org.omegat.core.search;
 
 /**
  * Storage for a search result entry.
- * 
+ *
  * @author Antonio Vilei
  */
 public class SearchResultEntry {
 
     /**
      * Creates a new search result entry with properties set to given values.
-     * 
+     *
      * @param num
      *            Number of the corresponding entry within a project
      * @param preamble
@@ -75,7 +75,7 @@ public class SearchResultEntry {
     public String getPreamble() {
         return (m_preamble);
     }
-    
+
     public void setPreamble(String preamble) {
         m_preamble = preamble;
     }

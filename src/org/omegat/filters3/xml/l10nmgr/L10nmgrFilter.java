@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -32,7 +32,7 @@ import org.omegat.util.OStrings;
 
 /**
  * Filter for L10nmgr for Typo3.
- * 
+ *
  * @author Didier Briel
  */
 public class L10nmgrFilter extends XMLFilter {
@@ -68,7 +68,7 @@ public class L10nmgrFilter extends XMLFilter {
 
     /**
      * Yes, L10nmgr may be written out in a variety of encodings.
-     * 
+     *
      * @return <code>true</code>
      */
     @Override

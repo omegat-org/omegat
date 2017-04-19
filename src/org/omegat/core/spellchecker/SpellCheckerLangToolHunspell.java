@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -36,7 +36,7 @@ import org.omegat.util.Log;
 /**
  * A thin wrapper around the LanguageTool Hunspell implementation (which itself
  * wraps native libs)
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class SpellCheckerLangToolHunspell implements ISpellCheckerProvider {

@@ -40,7 +40,7 @@ import gen.taas.TaasExtractionResult;
 
 /**
  * TaaS glossary implementation.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TaaSGlossary implements IGlossary {

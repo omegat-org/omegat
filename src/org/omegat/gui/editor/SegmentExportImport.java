@@ -44,7 +44,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 /**
  * Class for export current segment and monitor changes for import if external
  * script produce some results.
- * 
+ *
  * @author Alex Buloichik <alex73mail@gmail.com>
  * @author Aaron Madlon-Kay
  */

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -48,7 +48,7 @@ import org.omegat.util.PatternConsts;
  * specified, or it is not supported by Java platform, the file is opened in
  * encoding passed to constructor or default system encoding (ISO-8859-2 in USA,
  * Windows-1251 on my OS).
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
@@ -61,7 +61,7 @@ public class HTMLReader extends Reader {
      * falls back to supplied <code>encoding</code>, or (if supplied null, or
      * supplied encoding is not supported by JVM) falls back to default encoding
      * of Operating System.
-     * 
+     *
      * @param fileName
      *            The file to read.
      * @param encoding
@@ -82,7 +82,7 @@ public class HTMLReader extends Reader {
 
     /**
      * Returns the reader of the underlying file in the correct encoding.
-     * 
+     *
      * <p>
      * We can detect the following:
      * <ul>

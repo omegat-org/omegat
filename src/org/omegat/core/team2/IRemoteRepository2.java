@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Alex Buloichik
@@ -32,13 +32,13 @@ import gen.core.project.RepositoryDefinition;
 
 /**
  * Interface for any remote repository implementation.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IRemoteRepository2 {
     /**
      * Initialize repository provider.
-     * 
+     *
      * @param repo
      *            repository description instance
      * @param dir
@@ -58,7 +58,7 @@ public interface IRemoteRepository2 {
     /**
      * Add the specified file in preparation for commit (e.g.
      * <code>git add</code>, <code>svn add</code>).
-     * 
+     *
      * @param path
      *            The relative path of the item from the root of the repo
      *            (should not start with a <code>/</code>)
@@ -68,7 +68,7 @@ public interface IRemoteRepository2 {
 
     /**
      * Commit to repository after specified version, or after any version if 'null' specified.
-     * 
+     *
      * @param path
      *            path for commit
      * @param onVersions

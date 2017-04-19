@@ -45,14 +45,14 @@ import java.io.Serializable;
  * Start a new paragraph on breaks (&lt;br&gt;) []<br>
  * Skip text matchin regExp [] Skip content of meta-tag when any of the given
  * attibutename-value pairs is present in the tag
- * 
+ *
  * @author Didier Briel
  * @author Martin Fleurke
  */
 public class XHTMLOptions implements Serializable {
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 1L;
     /** Hold value of properties. */

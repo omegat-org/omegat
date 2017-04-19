@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 Kim Bruning
@@ -46,7 +46,7 @@ import org.apache.commons.io.IOUtils;
 
 /**
  * Import pages from MediaWiki
- * 
+ *
  * @author Kim Bruning
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
@@ -74,7 +74,7 @@ public class WikiGet {
     /**
      * Gets mediawiki wiki-code data from remote server. The get strategy is
      * determined by the url format.
-     * 
+     *
      * @param remote_url
      *            string representation of well-formed URL of wikipage to be
      *            retrieved
@@ -116,7 +116,7 @@ public class WikiGet {
 
     /**
      * Print UTF-8 text to stdout (useful for debugging)
-     * 
+     *
      * @param output
      *            The UTF-8 format string to be printed.
      */
@@ -132,7 +132,7 @@ public class WikiGet {
     /**
      * Creates new BufferedWriter configured for UTF-8 output and connects it to
      * an OutputStream
-     * 
+     *
      * @param out
      *            Outputstream to connect to.
      */
@@ -142,7 +142,7 @@ public class WikiGet {
 
     /**
      * Save UTF-8 format data to file.
-     * 
+     *
      * @param dir
      *            directory to write to.
      * @param filename
@@ -164,10 +164,10 @@ public class WikiGet {
 
     /**
      * Obtain UTF-8 format text from remote URL.
-     * 
+     *
      * @param target
      *            String representation of well-formed URL.
-     * @throws IOException 
+     * @throws IOException
      */
     public static String getURL(String target) throws IOException {
         StringBuilder page = new StringBuilder();
@@ -182,7 +182,7 @@ public class WikiGet {
 
     /**
      * Obtain byte array context from remote URL.
-     * 
+     *
      * @param target
      *            String representation of well-formed URL.
      * @return byte array or null if status is not 200 OK
@@ -210,7 +210,7 @@ public class WikiGet {
 
     /**
      * Get data from the remote URL.
-     * 
+     *
      * @param address
      *            address to post
      * @param params
@@ -262,7 +262,7 @@ public class WikiGet {
 
     /**
      * Post data to the remote URL.
-     * 
+     *
      * @param address
      *            address to post
      * @param params

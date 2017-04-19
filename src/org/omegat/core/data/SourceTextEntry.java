@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -35,7 +35,7 @@ import java.util.List;
  * Source text entry represents an individual segment for translation pulled
  * directly from the input files. There can be many SourceTextEntries having
  * identical source language strings
- * 
+ *
  * @author Keith Godfrey
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
@@ -47,8 +47,8 @@ public class SourceTextEntry {
     /** Storage for full entry's identifiers, including source text. */
     private final EntryKey key;
 
-    /** 
-     * String properties from source file. Contents are alternating 
+    /**
+     * String properties from source file. Contents are alternating
      * key (even index), value (odd index) strings. Should be of even length.
      */
     private final String[] props;
@@ -68,12 +68,12 @@ public class SourceTextEntry {
         NEXT
     };
 
-    /** 
+    /**
      * A list of duplicates of this STE. Will be non-null for the FIRST duplicate,
      * null for NONE and NEXT STEs. See {@link #getDuplicate()} for full logic.
      */
     List<SourceTextEntry> duplicates;
-    
+
     /**
      * The first duplicate of this STE. Will be null for NONE and FIRST STEs,
      * non-null for NEXT STEs. See {@link #getDuplicate()} for full logic.
@@ -91,7 +91,7 @@ public class SourceTextEntry {
 
     /**
      * Creates a new source text entry.
-     * 
+     *
      * @param key
      *            entry key
      * @param entryNum
@@ -145,7 +145,7 @@ public class SourceTextEntry {
         }
         return SegmentProperties.joinValues(props);
     }
-    
+
     public String[] getRawProperties() {
         return SegmentProperties.copy(props);
     }
@@ -169,7 +169,7 @@ public class SourceTextEntry {
         }
         return duplicates == null ? 0 : duplicates.size();
     }
-    
+
     public List<SourceTextEntry> getDuplicates() {
         if (firstInstance != null) {
             List<SourceTextEntry> result = new ArrayList<SourceTextEntry>(firstInstance.getDuplicates());
@@ -183,7 +183,7 @@ public class SourceTextEntry {
             return Collections.unmodifiableList(duplicates);
         }
     }
-    
+
     public String getSourceTranslation() {
         return sourceTranslation;
     }

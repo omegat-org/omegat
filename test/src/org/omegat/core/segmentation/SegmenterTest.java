@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -55,7 +55,7 @@ public class SegmenterTest {
         assertEquals("<br5>", segments.get(1));
         assertEquals("other", segments.get(2));
     }
-    
+
     /**
      * Test of glue method, of class org.omegat.core.segmentation.Segmenter.
      */
@@ -68,7 +68,7 @@ public class SegmenterTest {
         String newString = segmenter.glue(new Language("en"), new Language("fr"), segments, spaces, brules);
         assertEquals(oldString, newString);
     }
-    
+
     /**
      * Test of glue method for CJK, of class org.omegat.core.segmentation.Segmenter.
      */
@@ -95,7 +95,7 @@ public class SegmenterTest {
         translated = getPseudoTranslationFromEnToJa(SOURCE3);
         assertEquals(TRANSLATED3, translated);
     }
-    
+
     private String getPseudoTranslationFromEnToJa(final String source) {
         final String EN_FULLSTOP = ".";
         final String JA_FULLSTOP = "\\u3002";

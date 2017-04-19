@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
@@ -34,7 +34,7 @@ import java.util.List;
  * Class for store data from TMs from the <code>/tm</code> folder. They are used only for fuzzy matches.
  * <p>
  * Note that the name includes "TMX" for historical reasons; the source may not have been an actual TMX file.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Thomas CORDONNIER
  * @author Aaron Madlon-Kay

@@ -42,7 +42,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-
 /**
  * @author Ibai Lakunza Velasco
  * @author Didier Briel
@@ -52,7 +51,7 @@ public class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
     // Note: Add parameter &mt=0 to suppress MT results from being included in the TMX response; omit this
     // parameter to include MT results
     protected static final String GT_URL2 = "&langpair=#sourceLang#|#targetLang#&of=#format#&mt=0";
-    
+
     @Override
     protected String getPreferenceName() {
     	return Preferences.ALLOW_MYMEMORY_HUMAN_TRANSLATE;
@@ -62,7 +61,7 @@ public class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
     public String getName() {
         return OStrings.getString("MT_ENGINE_MYMEMORY_HUMAN");
     }
-    
+
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
         String prev = getFromCache(sLang, tLang, text);
@@ -72,7 +71,7 @@ public class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
 
         String tmxResponse = "";
         String bestHumanTranslation = "";
-        
+
         // Get MyMemory response in TMX format
         try {
             tmxResponse = getMyMemoryResponse(sLang, tLang, text, "tmx");
@@ -81,36 +80,35 @@ public class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
         {
             return e.getLocalizedMessage();
         }
-        
-        // Adjust DTD location and bug in entity encoding; the second line should be removed as soon as the bug is 
+
+        // Adjust DTD location and bug in entity encoding; the second line should be removed as soon as the bug is
         // fixed by MyMemory; TODO: Use local DTD
         tmxResponse = tmxResponse.replace("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">", "");
         tmxResponse = tmxResponse.replace("&", "&amp;");
-        
+
         // We must remove anything before the XML declaration, otherwise we get an exception when creating the
         // DOM object. Currently, MyMemory returns \r\n<?xml
         tmxResponse = getXMLString(tmxResponse);
-        
+
         // Build DOM object from the returned XML string
         InputSource source = new InputSource(new StringReader(tmxResponse));
         Document document = factory.newDocumentBuilder().parse(source);
-        
+
         // Set up Xpath stuff
         XPath xpath = xPathFactory.newXPath();
-        String allTUsQuery = "//tu"; 
-        
+        String allTUsQuery = "//tu";
+
         // Get all TUs
         XPathExpression expr = xpath.compile(allTUsQuery);
         Object result = expr.evaluate(document, XPathConstants.NODESET);
-        NodeList allTUs = (NodeList) result;     
-        
+        NodeList allTUs = (NodeList) result;
+
         bestHumanTranslation = getBestTranslation(sLang, tLang, text, xpath, allTUs);
-        
+
         putToCache(sLang, tLang, text, bestHumanTranslation);
-        return bestHumanTranslation; 
+        return bestHumanTranslation;
     }
 
-	  
 	/**
 	 * Builds the URL for the XML query
 	 */
@@ -120,7 +118,7 @@ public class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
     	String targetLang = mymemoryCode(tLang);
     	String url2 = GT_URL2.replace("#sourceLang#", sourceLang).replace("#targetLang#", targetLang).replace("#format#", format);
     	String url = GT_URL + URLEncoder.encode(text, "UTF-8") + url2;
-    	
+
     	return url;
-    }   
+    }
 }

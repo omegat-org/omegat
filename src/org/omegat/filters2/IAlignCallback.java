@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
@@ -27,13 +27,13 @@ package org.omegat.filters2;
 
 /**
  * Callback for align files in filter.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IAlignCallback {
     /**
      * New found aligned data.
-     * 
+     *
      * @param id
      *            entry id
      * @param source

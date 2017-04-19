@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -43,7 +43,7 @@ import org.omegat.util.StringUtil;
 
 /**
  * Filter for subtitles files.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @see <a href="http://en.wikipedia.org/wiki/SubRip">Format description</a>
  */
@@ -94,7 +94,7 @@ public class SrtFilter extends AbstractFilter {
         key = null;
         text.setLength(0);
         Pattern pattern = getPattern();
-        
+
         try (MixedEolHandlingReader reader = new MixedEolHandlingReader(inFile)) {
             String s;
             while ((s = reader.readLine()) != null) {
@@ -134,7 +134,7 @@ public class SrtFilter extends AbstractFilter {
         if (align != null) {
             align.put(key, text.toString());
         }
-        
+
         if (entryParseCallback != null) {
             entryParseCallback.addEntry(key, text.toString(), null, false, null, null, this, null);
         } else if (entryTranslateCallback != null) {
@@ -145,7 +145,7 @@ public class SrtFilter extends AbstractFilter {
             out.write(tr.replace("\n", EOL));
             out.write(EOL);
         }
-        
+
         key = null;
         text.setLength(0);
     }

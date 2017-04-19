@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -41,7 +41,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * Editor behavior control settings.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
  * @author Hans-Peter Jacobs
@@ -208,7 +208,7 @@ public class EditorSettings implements IEditorSettings {
     public boolean isMarkBidi() {
         return markBidi;
     }
-    
+
     public boolean isDoFontFallback() {
         return doFontFallback;
     }
@@ -254,7 +254,7 @@ public class EditorSettings implements IEditorSettings {
             parent.activateEntry();
         }
     }
-    
+
     public void setMarkNBSP(boolean markNBSP) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -294,7 +294,7 @@ public class EditorSettings implements IEditorSettings {
             parent.activateEntry();
         }
     }
-    
+
     public void setDoFontFallback(boolean doFontFalback) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -340,7 +340,7 @@ public class EditorSettings implements IEditorSettings {
 
     /**
      * Sets the setting for display the modification information or not
-     * 
+     *
      * @param displayModificationInfo
      *            Either DISPLAY_MODIFICATION_INFO_NONE ,
      *            DISPLAY_MODIFICATION_INFO_SELECTED ,
@@ -379,7 +379,7 @@ public class EditorSettings implements IEditorSettings {
             parent.remarkOneMarker(SpellCheckerMarker.class.getName());
         }
     }
-    
+
     /**
      * repaint segments in editor according to new view options. Use when options change to make them effective immediately.
      */
@@ -412,7 +412,7 @@ public class EditorSettings implements IEditorSettings {
             parent.activateEntry();
         }
     }
-    
+
     /**
      * Choose segment's attributes based on rules.
      * @param isSource is it a source segment or a target segment
@@ -427,7 +427,7 @@ public class EditorSettings implements IEditorSettings {
     public AttributeSet getAttributeSet(boolean isSource, boolean isPlaceholder, boolean isRemoveText, DUPLICATE duplicate, boolean active, boolean translationExists, boolean hasNote, boolean isNBSP) {
         //determine foreground color
         Color fg = null;
-        
+
         // Custom foreground colors
         if (active) {
             if (isSource) {
@@ -470,7 +470,7 @@ public class EditorSettings implements IEditorSettings {
         if (isRemoveText && !isSource) {
             fg = Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor();
         }
-        
+
         //determine background color
         Color bg = null;
         if (active) {

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
@@ -64,13 +64,13 @@ import org.omegat.util.Log;
  * @author Aaron Madlon-Kay
  */
 public class DragTargetOverlay {
-    
+
     private static int MARGIN = 0;
 
     public static void apply(final JComponent comp, final IDropInfo info) {
         DropTargetListener listener = new DropTargetAdapter() {
             private JPanel panel = null;
-            
+
             @Override
             public void dragEnter(DropTargetDragEvent dtde) {
                 if (!dtde.isDataFlavorSupported(info.getDataFlavor()) || !info.canAcceptDrop()) {
@@ -93,7 +93,7 @@ public class DragTargetOverlay {
                     }
                 });
             }
-            
+
             private Rectangle calculateBounds(Component overlayComponent) {
                 JRootPane rootPane = SwingUtilities.getRootPane(overlayComponent);
                 Rectangle rect = SwingUtilities.convertRectangle(overlayComponent.getParent(),
@@ -110,10 +110,10 @@ public class DragTargetOverlay {
             @Override
             public void drop(DropTargetDropEvent dtde) {}
         };
-        
+
         addListener(comp, listener);
     }
-    
+
     private static JPanel createOverlayPanel(final JComponent comp, final JLayeredPane layeredPane, final IDropInfo info) {
         final JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
@@ -125,13 +125,13 @@ public class DragTargetOverlay {
         panel.add(label, BorderLayout.CENTER);
         panel.setBackground(new Color(0, 0, 0, 150));
         addListener(panel, new FileDropListener(info) {
-            
+
             @Override
             public void drop(DropTargetDropEvent dtde) {
                 super.drop(dtde);
                 restore();
             }
-            
+
             @Override
             public void dragExit(DropTargetEvent dte) {
                 restore();
@@ -154,14 +154,14 @@ public class DragTargetOverlay {
         });
         return panel;
     }
-    
+
     private static class FileDropListener extends DropTargetAdapter {
         private final IDropInfo info;
-        
+
         public FileDropListener(IDropInfo info) {
             this.info = info;
         }
-        
+
         private void verifyDrag(DropTargetDragEvent dtde) {
             if (dtde.isDataFlavorSupported(info.getDataFlavor())
                     && (dtde.getSourceActions() & info.getDnDAction()) != 0) {
@@ -170,22 +170,22 @@ public class DragTargetOverlay {
                 dtde.rejectDrag();
             }
         }
-        
+
         @Override
         public void dragEnter(DropTargetDragEvent dtde) {
             verifyDrag(dtde);
         }
-        
+
         @Override
         public void dragOver(DropTargetDragEvent dtde) {
             verifyDrag(dtde);
         }
-        
+
         @Override
         public void dropActionChanged(DropTargetDragEvent dtde) {
             verifyDrag(dtde);
         }
-        
+
         @Override
         public void drop(DropTargetDropEvent dtde) {
             dtde.acceptDrop(info.getDnDAction());
@@ -202,7 +202,7 @@ public class DragTargetOverlay {
             dtde.dropComplete(success);
         }
     }
-    
+
     private static void addListener(JComponent comp, DropTargetListener listener) {
         DropTarget target = comp.getDropTarget();
         if (target == null) {
@@ -215,7 +215,7 @@ public class DragTargetOverlay {
             }
         }
     }
-    
+
     public interface IDropInfo {
         public DataFlavor getDataFlavor();
         public int getDnDAction();
@@ -224,10 +224,10 @@ public class DragTargetOverlay {
         public String getOverlayMessage();
         public boolean handleDroppedObject(Object dropped);
     }
-    
+
     public static abstract class FileDropInfo implements IDropInfo {
         private final boolean doReset;
-        
+
         public FileDropInfo(boolean doReset) {
             this.doReset = doReset;
         }
@@ -236,12 +236,12 @@ public class DragTargetOverlay {
         public DataFlavor getDataFlavor() {
             return DataFlavor.javaFileListFlavor;
         }
-        
+
         @Override
         public int getDnDAction() {
             return DnDConstants.ACTION_COPY;
         }
-        
+
         private List<File> filterFiles(List<?> files) {
             List<File> filtered = new ArrayList<File>(files.size());
             for (Object o : files) {
@@ -252,7 +252,7 @@ public class DragTargetOverlay {
             }
             return filtered;
         }
-        
+
         @Override
         public boolean handleDroppedObject(Object dropped) {
             return handleFiles(filterFiles((List<?>) dropped));
@@ -273,7 +273,7 @@ public class DragTargetOverlay {
             });
             return true;
         }
-        
+
         protected abstract boolean acceptFile(File pathname);
         protected abstract String getImportDestination();
     }

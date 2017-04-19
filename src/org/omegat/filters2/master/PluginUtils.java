@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -59,7 +59,7 @@ import org.omegat.util.StringUtil;
 
 /**
  * Static utilities for OmegaT filter plugins.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
@@ -132,7 +132,7 @@ public final class PluginUtils {
         } catch (Exception ex) {
             Log.log(ex);
         }
-        
+
         // run base plugins
         for (Class<?> pl : basePluginClasses) {
             try {
@@ -153,13 +153,13 @@ public final class PluginUtils {
 
     public static Class<?> getTokenizerClassForLanguage(Language lang) {
         if (lang == null) return DefaultTokenizer.class;
-        
+
         // Prefer an exact match on the full ISO language code (XX-YY).
         Class<?> exactResult = searchForTokenizer(lang.getLanguage());
         if (isDefault(exactResult)) {
             return exactResult;
         }
-        
+
         // Otherwise return a match for the language only (XX).
         Class<?> generalResult = searchForTokenizer(lang.getLanguageCode());
         if (isDefault(generalResult)) {
@@ -169,7 +169,7 @@ public final class PluginUtils {
         } else if (generalResult != null) {
             return generalResult;
         }
-        
+
         return DefaultTokenizer.class;
     }
 
@@ -181,13 +181,13 @@ public final class PluginUtils {
 
     private static Class<?> searchForTokenizer(String lang) {
         if (lang.length() < 1) return null;
-        
+
         lang = lang.toLowerCase();
-        
+
         // Choose first relevant tokenizer as fallback if no
         // "default" tokenizer is found.
         Class<?> fallback = null;
-        
+
         for (Class<?> c : tokenizerClasses) {
             Tokenizer ann = c.getAnnotation(Tokenizer.class);
             if (ann == null) continue;
@@ -206,7 +206,7 @@ public final class PluginUtils {
                 }
             }
         }
-        
+
         return fallback;
     }
 
@@ -236,7 +236,7 @@ public final class PluginUtils {
 
     /**
      * Parse one manifest file.
-     * 
+     *
      * @param m
      *            manifest
      * @param classLoader

@@ -1,8 +1,8 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
- 
+
  Copyright (C) 2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -50,7 +50,7 @@ public class TokenizerTest {
         assertResult(new String[] { "quick", "brown", "jump", "jumped", "over", "lazi", "lazy", "dog" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.MATCHING));
     }
-    
+
     /**
      * LuceneJapaneseTokenizer includes two customizations that warrant testing:
      * <ol><li>Special removal of tags (e.g. &lt;x0/>) when stemming
@@ -87,7 +87,7 @@ public class TokenizerTest {
                 "\u60D1\u661F", "\u82F1", "a", "planet", "\u4F4F\u3080", "\u4F4F\u307F", "\u6211\u3005",
                 "\u3059\u3079\u3066", "\u751F\u7269", "\u570F", "\u90E8" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.MATCHING));
-        
+
         // Check for TagJoiningFilter
         orig = "<x0/>\u3042</x0>\u300C<x1/>\u300D<x2/>\u3002<foo bar 123";
         assertVerbatim(new String[] { "<x0/>", "\u3042", "</x0>", "\u300C", "<x1/>", "\u300D", "<x2/>", "\u3002",
@@ -99,7 +99,7 @@ public class TokenizerTest {
         assertResult(new String[] { "\u3042", "foo", "bar" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.MATCHING));
     }
-    
+
     /**
      * Turkish warrants special testing because it has the letter \u0130
      * (LATIN CAPITAL LETTER I WITH DOT ABOVE); the result (both content
@@ -140,7 +140,7 @@ public class TokenizerTest {
                 "olu\u015Fmu\u015Ftur" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.MATCHING));
     }
-    
+
     /**
      * Chinese tends to have very few character boundaries breakable by BreakIterator,
      * so LuceneSmartChineseTokenizer tokenizes by code point for verbatim tokenizing.
@@ -179,12 +179,12 @@ public class TokenizerTest {
                 "\u5177", "\u4E00\u5B9A", "\u7684", "\u8868\u97F3", "\u529F\u80FD" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.MATCHING));
     }
-    
+
     /**
      * The behavior of the Lucene GermanAnalyzer was better for our purposes in
      * Lucene 3.0, so we implement a custom analyzer that recreates that
      * behavior.
-     * 
+     *
      * @see <a href=
      *      "https://groups.yahoo.com/neo/groups/OmegaT/conversations/messages/28395">
      *      User group discussion</a>
@@ -235,7 +235,7 @@ public class TokenizerTest {
             assertEquals(expected[i], testTok[i].getTextFromString(origString));
         }
     }
-    
+
     private void assertResult(String[] expected, String[] test) {
 //        for (String s : test) {
 //            System.out.print('"');

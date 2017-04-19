@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Alex Buloichik, Didier Briel
@@ -43,7 +43,7 @@ import org.omegat.util.WikiGet;
 
 /**
  * Support of Microsoft Translator machine translation.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Aaron Madlon-Kay
@@ -122,11 +122,11 @@ public class MicrosoftTranslate extends BaseTranslate {
                    (language.getLanguage().compareToIgnoreCase("zh-hk") == 0)) {
             return "zh-CHT";
         } else {
-            return language.getLanguageCode();         
+            return language.getLanguageCode();
         }
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     private void requestToken() throws Exception {
         String id = getCredential(PROPERTY_CLIENT_ID);

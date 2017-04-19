@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2017 Aaron Madlon-Kay
@@ -44,7 +44,7 @@ import org.omegat.util.TMXReader2;
 
 /**
  * Common utility class for external TMs.
- * 
+ *
  * @author Aaron Madlon-Kay
  *
  */
@@ -82,16 +82,16 @@ public class ExternalTMFactory {
         private boolean extTmxLevel2;
         private boolean useSlash;
         private boolean doSegmenting;
-    
+
         public TMXLoader(File file) {
             this.file = file;
         }
-    
+
         public TMXLoader setExtTmxLevel2(boolean extTmxLevel2) {
             this.extTmxLevel2 = extTmxLevel2;
             return this;
         }
-    
+
         public TMXLoader setUseSlash(boolean useSlash) {
             this.useSlash = useSlash;
             return this;
@@ -101,22 +101,22 @@ public class ExternalTMFactory {
             this.doSegmenting = doSegmenting;
             return this;
         }
-    
+
         public ExternalTMX load(Language sourceLang, Language targetLang) throws Exception {
             return new ExternalTMX(file.getName(), loadImpl(file, doSegmenting, sourceLang, targetLang));
         }
-    
+
         private List<PrepareTMXEntry> loadImpl(File file, boolean doSegmenting, Language sourceLang,
                 Language targetLang) throws Exception {
             List<PrepareTMXEntry> entries = new ArrayList<>();
-    
+
             TMXReader2.LoadCallback loader = new TMXReader2.LoadCallback() {
                 public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                         TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
                     if (tuvSource == null) {
                         return false;
                     }
-    
+
                     if (tuvTarget != null) {
                         // add only target Tuv
                         addTuv(tu, tuvSource, tuvTarget, isParagraphSegtype);
@@ -130,7 +130,7 @@ public class ExternalTMFactory {
                     }
                     return true;
                 }
-    
+
                 private void addTuv(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                         TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
                     String changer = StringUtil.nvl(tuvTarget.changeid, tuvTarget.creationid, tu.changeid,
@@ -139,12 +139,12 @@ public class ExternalTMFactory {
                     long changed = StringUtil.nvlLong(tuvTarget.changedate, tuvTarget.creationdate,
                             tu.changedate, tu.creationdate);
                     long created = StringUtil.nvlLong(tuvTarget.creationdate, tu.creationdate);
-    
+
                     List<String> sources = new ArrayList<String>();
                     List<String> targets = new ArrayList<String>();
                     Core.getSegmenter().segmentEntries(doSegmenting && isParagraphSegtype, sourceLang,
                             tuvSource.text, targetLang, tuvTarget.text, sources, targets);
-    
+
                     for (int i = 0; i < sources.size(); i++) {
                         PrepareTMXEntry te = new PrepareTMXEntry();
                         te.source = sources.get(i);
@@ -162,7 +162,7 @@ public class ExternalTMFactory {
 
             TMXReader2 reader = new TMXReader2();
             reader.readTMX(file, sourceLang, targetLang, doSegmenting, false, extTmxLevel2, useSlash, loader);
-    
+
             return entries;
         }
     }

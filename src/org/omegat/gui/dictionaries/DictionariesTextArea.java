@@ -75,9 +75,9 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * This is a Dictionaries pane that displays dictionaries entries.
- * 
+ *
  * @author Alex Buloichik <alex73mail@gmail.com>
- * @author Jean-Christophe Helary 
+ * @author Jean-Christophe Helary
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
@@ -90,7 +90,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     protected final List<String> displayedWords = new ArrayList<String>();
 
     protected ITokenizer tokenizer;
-    
+
     private final DockableScrollPane scrollPane;
 
     public DictionariesTextArea(IMainWindow mw) {
@@ -190,7 +190,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             // shouldn't be throwed
         }
     }
-    
+
     @Override
     public void onEntryActivated(SourceTextEntry newEntry) {
         scrollPane.stopNotifying();
@@ -225,7 +225,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         if (!data.isEmpty() && Preferences.isPreference(Preferences.NOTIFY_DICTIONARY_HITS)) {
             scrollPane.notify(true);
         }
-        
+
         StringBuilder txt = new StringBuilder();
         boolean wasPrev = false;
         int i = 0;

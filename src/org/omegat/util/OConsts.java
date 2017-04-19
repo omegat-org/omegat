@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -35,7 +35,7 @@ package org.omegat.util;
  * // TODO Note: Some constants that are used only in a single class, or are
  * more appropriate in another class (e.g. preference names) are moved in
  * appropriate class definitions.
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Zoltan Bartko (bartkozoltan@bartkozoltan.com)
@@ -64,7 +64,7 @@ public class OConsts {
 
     // licenses
     public static final String LICENSE_FILE = "OmegaT-license.txt";
-    
+
     // Last changes
     public static final String LAST_CHANGES_FILE = "changes.txt";
 
@@ -186,7 +186,7 @@ public class OConsts {
     public static final int MAX_PARENT_DIRECTORIES_ABS2REL = 5;
 
     public static final String segmentMarkerString = "<" + OStrings.getSegmentMarker() + ">";
-    
+
     /** Max number of recent projects to remember */
     public static final int MAX_RECENT_PROJECTS = 5;
 }

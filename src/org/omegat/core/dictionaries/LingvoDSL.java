@@ -38,10 +38,10 @@ import org.omegat.util.Language;
 
 /**
  * Dictionary implementation for Lingvo DSL format.
- * 
+ *
  * Lingvo DSL format described in Lingvo help. See also
  * http://www.dsleditor.narod.ru/art_03.htm(russian).
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */

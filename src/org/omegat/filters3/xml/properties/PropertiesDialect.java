@@ -1,13 +1,13 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009 Didier Briel, Guido Leenders
                2012 Guido Leenders
                2015 Tony Graham
- 
+
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -36,7 +36,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
  * This class specifies the Java Properties XML Dialect.
- * 
+ *
  * @author Tony Graham
  */
 public class PropertiesDialect extends DefaultXMLDialect {

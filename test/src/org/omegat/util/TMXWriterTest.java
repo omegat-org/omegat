@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
@@ -151,7 +151,7 @@ public class TMXWriterTest extends TestFilterBase {
         // which should be treated as a beginning tag even when
         // useSlash = true so that we can match after segmenting,
         // such as in TmxComplianceTests#testImport2A:
-        // "First <b0>sentence. Second</b0> sentence." -> ["First <b0>sentence.", "Second</b0> sentence."] 
+        // "First <b0>sentence. Second</b0> sentence." -> ["First <b0>sentence.", "Second</b0> sentence."]
         assertEquals("6<a0>7", sources.get(3));
     }
 

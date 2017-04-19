@@ -1,9 +1,9 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers, 
+ Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers,
                          Benjamin Siband, and Kim Bruning
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik
@@ -86,7 +86,7 @@ import org.omegat.util.TagUtil.Tag;
 
 /**
  * Handler for main menu items.
- * 
+ *
  * @author Keith Godfrey
  * @author Benjamin Siband
  * @author Maxym Mykhalchuk
@@ -557,7 +557,7 @@ public class MainWindowMenuHandler {
     public void editSelectFuzzyNextMenuItemActionPerformed() {
         Core.getMatcher().setNextActiveMatch();
     }
-    
+
     /** Set active match to the previous one */
     public void editSelectFuzzyPrevMenuItemActionPerformed() {
         Core.getMatcher().setPrevActiveMatch();
@@ -586,7 +586,7 @@ public class MainWindowMenuHandler {
     public void editMultipleDefaultActionPerformed() {
         Core.getEditor().setAlternateTranslationForCurrentEntry(false);
     }
-    
+
     public void editMultipleAlternateActionPerformed() {
         Core.getEditor().setAlternateTranslationForCurrentEntry(true);
     }
@@ -635,7 +635,7 @@ public class MainWindowMenuHandler {
     public void gotoNextUniqueMenuItemActionPerformed() {
         Core.getEditor().nextUniqueEntry();
     }
-    
+
     public void gotoNextTranslatedMenuItemActionPerformed() {
         Core.getEditor().nextTranslatedEntry();
     }
@@ -665,7 +665,7 @@ public class MainWindowMenuHandler {
         dialog.setVisible(true);
 
         int jumpTo = dialog.getResult();
-        
+
         if (jumpTo != -1) {
             Core.getEditor().gotoEntry(jumpTo);
         }
@@ -678,14 +678,13 @@ public class MainWindowMenuHandler {
     public void gotoHistoryForwardMenuItemActionPerformed() {
         Core.getEditor().gotoHistoryForward();
     }
-    
+
     public void gotoMatchSourceSegmentActionPerformed() {
         NearString ns = Core.getMatcher().getActiveMatch();
         if (ns != null && ns.comesFrom == MATCH_SOURCE.MEMORY) {
             Core.getEditor().gotoEntry(ns.source, ns.key);
         }
     }
-
 
     public void viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed() {
         Core.getEditor().getSettings()
@@ -743,7 +742,7 @@ public class MainWindowMenuHandler {
         Core.getEditor().getSettings()
                 .setMarkAutoPopulated(mainWindow.menu.viewMarkAutoPopulatedCheckBoxMenuItem.isSelected());
     }
-    
+
     public void viewMarkLanguageCheckerCheckBoxMenuItemActionPerformed() {
         Core.getEditor().getSettings()
                 .setMarkLanguageChecker(mainWindow.menu.viewMarkLanguageCheckerCheckBoxMenuItem.isSelected());
@@ -861,13 +860,13 @@ public class MainWindowMenuHandler {
         boolean enabled = mainWindow.menu.optionsMTAutoFetchCheckboxMenuItem.isSelected();
         Preferences.setPreference(Preferences.MT_AUTO_FETCH, enabled);
     }
-    
+
     public void optionsDictionaryFuzzyMatchingCheckBoxMenuItemActionPerformed() {
         Preferences.setPreference(Preferences.DICTIONARY_FUZZY_MATCHING,
                 mainWindow.menu.optionsDictionaryFuzzyMatchingCheckBoxMenuItem.isSelected());
         Preferences.save();
     }
-    
+
     /**
      * Displays the filters setup dialog to allow customizing file filters in detail.
      */

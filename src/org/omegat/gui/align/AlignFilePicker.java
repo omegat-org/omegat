@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -32,7 +32,7 @@ import org.omegat.util.OStrings;
  * UI component for picking source and target languages and files.
  * <p>
  * THIS MUST BE EDITED IN NETBEANS GUI BUILDER.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
@@ -145,7 +145,6 @@ public class AlignFilePicker extends javax.swing.JPanel {
 
         add(bottomPanel, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel bottomPanel;

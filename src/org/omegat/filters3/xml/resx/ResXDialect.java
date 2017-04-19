@@ -1,11 +1,11 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009-2011 Didier Briel
- 
+
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -33,7 +33,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
  * This class specifies the ResX XML Dialect.
- * 
+ *
  * @author Didier Briel
  */
 public class ResXDialect extends DefaultXMLDialect {
@@ -49,7 +49,7 @@ public class ResXDialect extends DefaultXMLDialect {
      * attribute "type" or "mimetype", the content shouldn't be translated. If
      * there is the attribute "name", the content shouldn't be translated if the
      * content of "name" starts with &gt; or ends with "FieldName"
-     * 
+     *
      * @param tag
      *            An XML tag
      * @param atts

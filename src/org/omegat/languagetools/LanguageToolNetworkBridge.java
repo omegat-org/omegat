@@ -49,7 +49,6 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
-
 public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
 
     /* Constants */
@@ -165,7 +164,7 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
 
     /**
      * Common initialization for both constructors
-     * 
+     *
      * @throws Exception
      *             If unable to determine the server's supported languages
      */
@@ -359,7 +358,7 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
 
     /**
      * Find the best-matching language from the provided options.
-     * 
+     *
      * @param serverLangs
      *            The raw response objects from {@link #getSupportedLanguages()}
      * @param desiredLang

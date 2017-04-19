@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -35,7 +35,7 @@ import com.vlsolutions.swing.docking.Dockable;
 
 /**
  * Interface for access to main window functionality.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IMainWindow {
@@ -61,7 +61,7 @@ public interface IMainWindow {
 
     /**
      * Show message in status bar from resource bundle by key.
-     * 
+     *
      * @param messageKey
      *            message key in resource bundle
      * @param params
@@ -72,7 +72,7 @@ public interface IMainWindow {
     /**
      * Same as {@link #showStatusMessageRB(String, Object...)} but this will
      * clear the message after ten seconds.
-     * 
+     *
      * @param messageKey
      *            message key in resource bundle
      * @param params
@@ -82,7 +82,7 @@ public interface IMainWindow {
 
     /**
      * Show message in progress bar. Progress bar shows the translation progress: nr. of segments/words etc translated/to do.
-     * 
+     *
      * @param messageText
      *            message text
      */
@@ -90,7 +90,7 @@ public interface IMainWindow {
 
     /**
      * Show message in length label. Length label shows length (in nr of characters) of current segment
-     * 
+     *
      * @param messageText
      *            message text
      */
@@ -98,19 +98,19 @@ public interface IMainWindow {
 
     /**
      * Display warning.
-     * 
+     *
      * @param warningKey
      *            warning message key in resource bundle
      * @param params
      *            warning text parameters
      */
     void displayWarningRB(String warningKey, Object... params);
-    
+
     /**
      * Same as {@link #displayWarningRB(String, Object...)} but this will close the previous
      * dialog if the dialog is still open and the supplied supercedesKey matches the previous
      * dialog's key.
-     * 
+     *
      * @param warningKey
      *            warning message key in resource bundle
      * @param supercedesKey
@@ -122,7 +122,7 @@ public interface IMainWindow {
 
     /**
      * Display error.
-     * 
+     *
      * @param ex
      *            exception to show
      * @param errorKey
@@ -134,7 +134,7 @@ public interface IMainWindow {
 
     /**
      * Show message in an ErrorDialog
-     * 
+     *
      * @param message
      *            message key in resource bundle of message that is to be
      *            displayed
@@ -168,7 +168,7 @@ public interface IMainWindow {
     /**
      * Add new dockable pane into application frame. This method called on
      * application startup.
-     * 
+     *
      * @param pane
      *            dockable pane
      */

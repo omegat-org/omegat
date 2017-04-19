@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -29,7 +29,7 @@ import org.omegat.filters3.Tag;
 
 /**
  * XML Tag that surrounds intact portions of XML document.
- * 
+ *
  * @author Maxym Mykhalchuk
  */
 public class XMLIntactTag extends Tag {
@@ -56,11 +56,11 @@ public class XMLIntactTag extends Tag {
 
     /**
      * Returns this tag and the intact contents it surrounds. E.g. for
-     * 
+     *
      * <pre>
      * &lt;style&gt;<br>html {<br>&nbsp;&nbsp;&nbsp;background-color: white;<br>}<br>&lt;/style&gt;
      * </pre>
-     * 
+     *
      * should return absolutely the same.
      */
     public String toOriginal() {

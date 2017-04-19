@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -104,7 +104,7 @@ import gen.core.project.RepositoryDefinition;
  * <li>If some directories are missing while opening a project.
  * <li>For editing project properties.
  * </ul>
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
@@ -157,7 +157,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
     /**
      * Creates a dialog to create a new project / edit folders of existing one.
-     * 
+     *
      * @param projectProperties
      *            properties of the project
      * @param projFileName
@@ -216,7 +216,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // Source language field
         final JComboBox<Language> m_sourceLocaleField = new JComboBox<>(new Vector<>(Language.getLanguages()));
-        if (m_sourceLocaleField.getMaximumRowCount() < 20) 
+        if (m_sourceLocaleField.getMaximumRowCount() < 20)
             m_sourceLocaleField.setMaximumRowCount(20);
         m_sourceLocaleField.setEditable(true);
         m_sourceLocaleField.setRenderer(new LanguageComboBoxRenderer());
@@ -665,7 +665,7 @@ public class ProjectPropertiesDialog extends JDialog {
                 }
             }
         });
-        
+
         m_fileFiltersButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -744,7 +744,7 @@ public class ProjectPropertiesDialog extends JDialog {
             File wGlos = f.getParentFile(); // Remove the file name
             // The writeable glossary must be in in the /glossary folder
             if (!wGlos.isDirectory() || !wGlos.equals(new File(m_glosRootField.getText()))) {
-                m_writeableGlosField.setForeground(Color.RED);  
+                m_writeableGlosField.setForeground(Color.RED);
             }
             f = new File(m_tmRootField.getText());
             if (!f.isDirectory()) {
@@ -777,7 +777,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
     /**
      * Browses for the directory.
-     * 
+     *
      * @param browseTarget
      *            customizes the messages depending on what is browsed for
      * @param field
@@ -1018,7 +1018,7 @@ public class ProjectPropertiesDialog extends JDialog {
         projectProperties.setSupportDefaultTranslations(m_allowDefaultsCheckBox.isSelected());
 
         projectProperties.setRemoveTags(m_removeTagsCheckBox.isSelected());
-        
+
         projectProperties.setExternalCommand(m_customCommandTextArea.getText());
 
         projectProperties.setSourceRoot(m_srcRootField.getText());
@@ -1137,7 +1137,7 @@ public class ProjectPropertiesDialog extends JDialog {
         public ScrollableBox(int axis) {
             super(axis);
         }
-        
+
         @Override
         public Dimension getPreferredScrollableViewportSize() {
             return getPreferredSize();
@@ -1162,9 +1162,9 @@ public class ProjectPropertiesDialog extends JDialog {
         public boolean getScrollableTracksViewportHeight() {
             return false;
         }
-        
+
     }
-    
+
     /**
      * Whether the user cancelled the dialog.
      */

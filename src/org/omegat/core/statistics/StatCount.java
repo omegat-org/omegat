@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009-2014 Alex Buloichik
@@ -36,13 +36,13 @@ import org.omegat.core.data.SourceTextEntry;
  * <li>All protected parts(including tags, placeholders, protected text and
  * related tags) are not counted in the word count (default). For example:
  * "&lt;i1>", "&lt;m0>Acme&lt;/m0>" will produce 0 words.
- * 
+ *
  * <li>Protected texts are counted, but related tags are not counted in the word
  * count. For example: "&lt;i1>" - 0 words, "&lt;m0>Acme&lt;/m0>" - 1 word.
  * </ol>
  * The mode is stored in the
  * {@link StatisticsSettings#isCountingProtectedText()} property.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class StatCount {

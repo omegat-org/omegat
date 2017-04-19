@@ -57,7 +57,7 @@ import org.omegat.util.StringUtil;
 /**
  * The part of HTML filter that actually does the job. This class is called back
  * by HTMLParser (http://sf.net/projects/htmlparser/).
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
@@ -71,11 +71,11 @@ public class FilterVisitor extends NodeVisitor {
     public FilterVisitor(HTMLFilter2 htmlfilter, BufferedWriter bufwriter, HTMLOptions options) {
         this.filter = htmlfilter;
         // HHC filter has no options
-        if (options != null) {       
-            this.options = options;  
-        } else {                                                           
+        if (options != null) {
+            this.options = options;
+        } else {
             // To prevent a null pointer exception later, see https://sourceforge.net/p/omegat/bugs/651/
-            this.options = new HTMLOptions(new TreeMap<String, String>()); 
+            this.options = new HTMLOptions(new TreeMap<String, String>());
         }
         this.writer = bufwriter;
     }
@@ -129,7 +129,7 @@ public class FilterVisitor extends NodeVisitor {
 
     /**
      * Self traversal predicate.
-     * 
+     *
      * @return <code>true</code> if a node itself is to be visited.
      */
     @Override
@@ -139,7 +139,7 @@ public class FilterVisitor extends NodeVisitor {
 
     /**
      * Depth traversal predicate.
-     * 
+     *
      * @return <code>true</code> if children are to be visited.
      */
     @Override
@@ -149,13 +149,12 @@ public class FilterVisitor extends NodeVisitor {
 
     /**
      * Called for each <code>Tag</code> visited.
-     * 
+     *
      * @param tag
      *            The tag being visited.
      */
     @Override
     public void visitTag(Tag tag) {
-
 
         boolean intactTag = isIntactTag(tag);
 
@@ -173,7 +172,7 @@ public class FilterVisitor extends NodeVisitor {
                 intactTag = this.filter.checkIgnoreTags(name, value);
             }
         }
-        
+
         if (intactTag) {
             if (text)
                 endup();
@@ -247,7 +246,7 @@ public class FilterVisitor extends NodeVisitor {
     /**
      * If the attribute of the tag is not empty, it translates it as a separate
      * segment.
-     * 
+     *
      * @param tag
      *            the tag object
      * @param key
@@ -266,7 +265,7 @@ public class FilterVisitor extends NodeVisitor {
 
     /**
      * Called for each chunk of text (<code>StringNode</code>) visited.
-     * 
+     *
      * @param string
      *            The string node being visited.
      */
@@ -296,7 +295,7 @@ public class FilterVisitor extends NodeVisitor {
 
     /**
      * Called for each comment (<code>RemarkNode</code>) visited.
-     * 
+     *
      * @param remark
      *            The remark node being visited.
      */
@@ -310,7 +309,7 @@ public class FilterVisitor extends NodeVisitor {
 
     /**
      * Called for each end <code>Tag</code> visited.
-     * 
+     *
      * @param tag
      *            The end tag being visited.
      */
@@ -348,7 +347,7 @@ public class FilterVisitor extends NodeVisitor {
      * Does the tag lead to starting (ending) a paragraph.
      * <p>
      * Contains code donated by JC to have dictionary list parsed as segmenting.
-     * 
+     *
      * @see <a href="https://sourceforge.net/p/omegat/feature-requests/102/">RFE
      *      #102</a>
      */
@@ -597,7 +596,7 @@ public class FilterVisitor extends NodeVisitor {
                     break;
                 }
             }
-            
+
             if (Core.getFilterMaster().getConfig().isRemoveSpacesNonseg()) {
                 compressed = StringUtil.compressSpaces(uncompressed);
             } else {
@@ -803,7 +802,7 @@ public class FilterVisitor extends NodeVisitor {
     }
 
     /**
-     * Remove consecutive whitespace if otions.getCompressWhitespace()==true, and only space+tab is removed. 
+     * Remove consecutive whitespace if otions.getCompressWhitespace()==true, and only space+tab is removed.
      * Newlines are not touched, to preserve the layout a little more.
      * NB: We cannot use StaticUtils.compressSpaces, because it trims a string consisting of only whitespace to the empty string.
      * @param input some text outside / between tags where it is allowed to compress spaces.
@@ -1138,7 +1137,7 @@ public class FilterVisitor extends NodeVisitor {
             case '>':
                 // If it's the end of a processing instruction
                 if ((i > 0) && str.codePointBefore(i) == '?') {
-                   res.append(">"); 
+                   res.append(">");
                 } else {
                     res.append("&gt;");
                 }

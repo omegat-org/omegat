@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -82,9 +82,9 @@ import org.omegat.util.gui.OSXIntegration;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 
-/**	
+/**
  * The main OmegaT class, used to launch the program.
- * 
+ *
  * @author Keith Godfrey
  * @author Martin Fleurke
  * @author Alex Buloichik
@@ -151,7 +151,7 @@ public class Main {
         if (params.containsKey(CLIParameters.DISABLE_PROJECT_LOCKING)) {
             RuntimePreferences.setProjectLockingEnabled(false);
         }
-        
+
         if (params.containsKey(CLIParameters.DISABLE_LOCATION_SAVE)) {
             RuntimePreferences.setLocationSaveEnabled(false);
         }
@@ -208,7 +208,7 @@ public class Main {
      * Load System properties from a specified .properties file. In order to
      * allow this to reliably change the display language, it must called before
      * any use of {@link Log#log}, thus it logs to {@link System#out}.
-     * 
+     *
      * @param path
      *            to config file
      */
@@ -246,7 +246,7 @@ public class Main {
             System.err.println("Error while reading config file: " + path);
         }
     }
-    
+
     /**
      * Execute standard GUI.
      */
@@ -284,7 +284,7 @@ public class Main {
             UIManager.getInstalledLookAndFeels();
 
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            
+
             System.setProperty("swing.aatext", "true");
 
         } catch (Exception e) {
@@ -346,17 +346,17 @@ public class Main {
         else
             p.compileProject(".*", false);
 
-        // Called *after* executing post processing command (unlike the 
+        // Called *after* executing post processing command (unlike the
         // regular PROJECT_CHANGE_TYPE.COMPILE)
         executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
 
         p.closeProject();
         executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE);
         System.out.println(OStrings.getString("CONSOLE_FINISHED"));
-        
+
         return 0;
     }
-    
+
     /**
      * Validates tags according to command line specs:
      * <code>--tag-validation=[abort|warn]</code>
@@ -498,7 +498,7 @@ public class Main {
      * creates the project class and adds it to the Core. Loads the project if
      * specified. An exit occurs on error loading the project. This method is
      * for the different console modes, to prevent code duplication.
-     * 
+     *
      * @param loadProject
      *            load the project or not
      * @return the project.
@@ -530,10 +530,10 @@ public class Main {
         }
         return p;
     }
-    
-    /** Execute script as PROJECT_CHANGE events. We can't use the regular project listener because 
+
+    /** Execute script as PROJECT_CHANGE events. We can't use the regular project listener because
      *  the SwingUtilities.invokeLater method used in CoreEvents doesn't stop the project processing
-     *  in console mode. 
+     *  in console mode.
      */
     private static void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
         if (params.containsKey(CLIParameters.SCRIPT)) {
@@ -551,7 +551,6 @@ public class Main {
     		}
     	}
     }
-
 
     public static void showError(Throwable ex) {
         String msg;

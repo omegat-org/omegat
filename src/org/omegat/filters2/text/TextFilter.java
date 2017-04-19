@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -44,7 +44,7 @@ import org.omegat.util.OStrings;
 
 /**
  * Filter to support plain text files (in various encodings).
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Didier Briel
@@ -66,18 +66,17 @@ public class TextFilter extends AbstractFilter {
     public static final String SEGMENT_NEVER = "NEVER";
 
     public static final String OPTION_SEGMENT_ON = "segmentOn";
-    
+
     /**
      * Length at which a line break should occur in target documents
      */
     public static final String OPTION_LINE_LENGTH = "lineLength";
-    
+
     /**
      * Maximum line length in target documents
      */
     public static final String OPTION_MAX_LINE_LENGTH = "maxLineLength";
 
-    
     /**
      * Register plugin into OmegaT.
      */
@@ -110,7 +109,7 @@ public class TextFilter extends AbstractFilter {
     public boolean isTargetEncodingVariable() {
         return true;
     }
-    
+
     @Override
     protected boolean requirePrevNextFields() {
         return true;
@@ -241,7 +240,7 @@ public class TextFilter extends AbstractFilter {
 
     /**
      * Returns true to indicate that Text filter has options.
-     * 
+     *
      * @return True, because Text filter has options.
      */
     @Override

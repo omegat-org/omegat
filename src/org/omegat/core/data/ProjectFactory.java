@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
@@ -33,9 +33,9 @@ import org.omegat.core.events.IProjectEventListener;
 
 /**
  * Factory for load project, create project, and create "not-loaded" project.
- * 
+ *
  * TODO: change exception handling
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ProjectFactory {
@@ -57,7 +57,7 @@ public class ProjectFactory {
     /**
      * Loads project in a "big" sense -- loads project's properties, glossaryes,
      * tms, source files etc.
-     * 
+     *
      * @param props
      *            properties for new project
      */

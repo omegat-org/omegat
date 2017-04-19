@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -39,7 +39,7 @@ import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Modal dialog to edit Text filter options.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
@@ -51,7 +51,7 @@ public class TextOptionsDialog extends javax.swing.JDialog {
     public static final int RET_OK = 1;
 
     private Map<String, String> options;
-    
+
     /**
      * Set the value and availability of maxLineLengthSpinner depending on the value of lineLengthSpinner
      */
@@ -64,7 +64,7 @@ public class TextOptionsDialog extends javax.swing.JDialog {
             } else if (Integer.parseInt(lineLengthSpinner.getValue().toString()) > 0) {
                 maxLineLengthSpinner.setEnabled(true);
             }
-            if (Integer.parseInt(maxLineLengthSpinner.getValue().toString()) < 
+            if (Integer.parseInt(maxLineLengthSpinner.getValue().toString()) <
                 Integer.parseInt(lineLengthSpinner.getValue().toString())) {
                 maxLineLengthSpinner.setValue(Integer.parseInt(lineLengthSpinner.getValue().toString()));
             }
@@ -91,7 +91,7 @@ public class TextOptionsDialog extends javax.swing.JDialog {
         } else {
             emptyLinesRB.setSelected(true);
         }
-        
+
         try {
             lineLengthSpinner.setValue(Integer.parseInt(options.get(TextFilter.OPTION_LINE_LENGTH)));
         } catch (Exception e) {
@@ -102,8 +102,8 @@ public class TextOptionsDialog extends javax.swing.JDialog {
         } catch (Exception e) {
             maxLineLengthSpinner.setValue(0);
         }
-        
-        checkLineLengthValue();        
+
+        checkLineLengthValue();
 
         StaticUIUtils.setEscapeAction(this, new AbstractAction() {
             @Override

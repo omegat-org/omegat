@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2017 Aaron Madlon-Kay
@@ -34,7 +34,7 @@ import javax.swing.JTextField;
 
 /**
  * A text field that displays customizable hint text when empty and unfocused.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")

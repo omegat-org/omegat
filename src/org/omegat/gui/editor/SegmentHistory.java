@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
@@ -31,9 +31,9 @@ import java.util.List;
 /**
  * Segment history class. The model needed to implement functionality as in web
  * browsers - go to previous and goto next segment.
- * 
+ *
  * Since this class is a singleton, use getInstance() to find out the instance.
- * 
+ *
  * @author bartkoz
  */
 class SegmentHistory {

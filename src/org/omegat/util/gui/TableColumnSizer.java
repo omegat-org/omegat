@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
@@ -53,18 +53,18 @@ import javax.swing.table.TableModel;
  * @author Aaron Madlon-Kay
  */
 public class TableColumnSizer {
-    
+
     private int[] optimalColWidths;
     private int remainderColReferenceWidth = -1;
     private boolean didManuallyAdjustCols;
     private int remainderColumn = 0;
     private final boolean fitTableToWidth;
-    
+
     private boolean didApplySizes;
-    
+
     private final JTable table;
     private final List<ActionListener> listeners = new CopyOnWriteArrayList<>();
-    
+
     /**
      * Automatically optimize the column widths of a table. The {@link #remainderColumn}
      * is the index of the column that will receive additional space left over after
@@ -88,11 +88,11 @@ public class TableColumnSizer {
      * {@link #remainderColumn}.
      * <p>
      * Also note that automatic sizing will be disabled if the user manually adjusts column widths.
-     *  
+     *
      * @param table
      * @param remainderColumn
      * @param fitTableToWidth
-     * @return 
+     * @return
      */
     public static TableColumnSizer autoSize(JTable table, int remainderColumn, boolean fitTableToWidth) {
         TableColumnSizer colSizer = new TableColumnSizer(table, remainderColumn, fitTableToWidth);
@@ -100,13 +100,13 @@ public class TableColumnSizer {
         colSizer.adjustTableColumns();
         return colSizer;
     }
-    
+
     private TableColumnSizer(JTable table, int remainderColumn, boolean fitTableToWidth) {
         this.table = table;
         this.remainderColumn = Math.max(remainderColumn, 0);
         this.fitTableToWidth = fitTableToWidth;
     }
-    
+
     /**
      * Add various listeners to keep the columns in sync with the table's
      * current width.
@@ -156,10 +156,10 @@ public class TableColumnSizer {
             @Override
             public void ancestorResized(HierarchyEvent e) {
                 adjustTableColumns();
-            } 
+            }
         });
     }
-    
+
     private final TableModelListener modelListener = new TableModelListener() {
         @Override
         public void tableChanged(TableModelEvent e) {
@@ -167,7 +167,7 @@ public class TableColumnSizer {
             adjustTableColumns();
         }
     };
-    
+
     private final TableColumnModelListener colListener = new TableColumnModelListener() {
         @Override
         public void columnAdded(TableColumnModelEvent e) {
@@ -201,7 +201,7 @@ public class TableColumnSizer {
         public void columnSelectionChanged(ListSelectionEvent e) {
         }
     };
-    
+
     /**
      * Calculate the width that the {@link #remainderColumn} would get under
      * {@link JTable#AUTO_RESIZE_SUBSEQUENT_COLUMNS}. The result is cached.
@@ -213,7 +213,7 @@ public class TableColumnSizer {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         remainderColReferenceWidth = table.getColumnModel().getColumn(remainderColumn).getWidth();
     }
-    
+
     /**
      * Calculate each column's ideal width, based on header and cells.
      * Results are cached.
@@ -224,7 +224,7 @@ public class TableColumnSizer {
             return;
         }
         optimalColWidths = new int[table.getColumnCount()];
-        
+
         for (int column = 0; column < table.getColumnCount(); column++) {
             TableColumn col = table.getColumnModel().getColumn(column);
             col.setMaxWidth(Short.MAX_VALUE);
@@ -254,7 +254,7 @@ public class TableColumnSizer {
                     cellRenderer = table.getCellRenderer(row, column);
                     c = table.prepareRenderer(cellRenderer, row, column);
                 }
-                
+
                 c.setBounds(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
                 int width = c.getPreferredSize().width + table.getIntercellSpacing().width + margin;
                 preferredWidth = Math.max(preferredWidth, width);
@@ -268,7 +268,7 @@ public class TableColumnSizer {
             optimalColWidths[column] = preferredWidth;
         }
     }
-    
+
     /**
      * Get the new suggested width for the {@link #remainderColumn}, based on
      * what is left over after all other columns get their optimal widths.
@@ -281,11 +281,11 @@ public class TableColumnSizer {
             }
             otherCols += optimalColWidths[i];
         }
-        
+
         Component parent = table.getParent();
         return parent == null ? 0 : parent.getWidth() - otherCols;
     }
-    
+
     /**
      * Reset any state that relies on the contents of the table.
      */
@@ -294,19 +294,19 @@ public class TableColumnSizer {
         remainderColReferenceWidth = -1;
         didApplySizes = false;
     }
-    
+
     public void setRestoreAutoSizing() {
         didManuallyAdjustCols = false;
         didApplySizes = false;
     }
-    
+
     /**
      * Adjust the columns of the table.
-     * 
+     *
      * If possible, this optimally sizes the columns such that columns greater
      * than 0 are only as big as necessary, and the rest of the space goes to
      * column 0.
-     * 
+     *
      * This auto-sizing only happens if it represents an improvement over the
      * default sizing (gives more space to the {@link #remainderColumn} than
      * it would get with {@link JTable#AUTO_RESIZE_SUBSEQUENT_COLUMNS}),
@@ -316,29 +316,29 @@ public class TableColumnSizer {
         if (table.getColumnCount() == 0) {
             return;
         }
-        
+
         calculateOptimalColWidths();
-        
+
         ensureTableResizeMode(fitTableToWidth ? JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS : JTable.AUTO_RESIZE_OFF);
-        
+
         int proposedRemainderWidth = calculateProposedRemainderColWidth();
-                        
+
         if (shouldAutoSize(proposedRemainderWidth)) {
             doAutoSize(proposedRemainderWidth);
         } else if (didApplySizes) {
             undoAutoSize();
         }
-        
+
         notifyListeners();
     }
-    
+
     private void doAutoSize(int proposedRemainderWidth) {
-        
+
         if (!fitTableToWidth) {
             int width = Math.max(proposedRemainderWidth, optimalColWidths[remainderColumn]);
             table.getColumnModel().getColumn(remainderColumn).setPreferredWidth(width);
         }
-        
+
         if (didApplySizes) {
             return;
         }
@@ -356,17 +356,17 @@ public class TableColumnSizer {
         }
         didApplySizes = true;
     }
-    
+
     private void undoAutoSize() {
         if (!didApplySizes) {
             return;
         }
-        
+
         if (!fitTableToWidth) {
             didApplySizes = false;
             return;
         }
-        
+
         for (int i = 0; i < optimalColWidths.length; i++) {
             if (i == remainderColumn) {
                 continue;
@@ -378,7 +378,7 @@ public class TableColumnSizer {
         }
         didApplySizes = false;
     }
-    
+
     /**
      * Set table mode if it isn't already in the desired mode.
      */
@@ -388,13 +388,13 @@ public class TableColumnSizer {
         }
         table.setAutoResizeMode(mode);
     }
-    
+
     /**
      * Decide if we should apply optimized column sizes given the proposed
      * {@link #remainderColumn} width.
-     * 
+     *
      * @param proposedRemainderWidth
-     * @return 
+     * @return
      */
     private boolean shouldAutoSize(int proposedRemainderWidth) {
         if (didManuallyAdjustCols) {
@@ -409,21 +409,21 @@ public class TableColumnSizer {
         calculateRemainderColReferenceWidth();
         return proposedRemainderWidth >= remainderColReferenceWidth;
     }
-    
+
     public void addColumnAdjustmentListener(ActionListener listener) {
         if (listener == null) {
             return;
         }
         listeners.add(listener);
     }
-    
+
     public void removeColumnAdjustmentListener(ActionListener listener) {
         if (listener == null) {
             return;
         }
         listeners.remove(listener);
     }
-    
+
     private void notifyListeners() {
     	SwingUtilities.invokeLater(new Runnable() {
 			@Override

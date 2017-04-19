@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
@@ -42,7 +42,7 @@ import org.omegat.util.gui.StaticUIUtils;
 public class FileCollisionDialog extends javax.swing.JDialog {
 
     private JButton userClicked;
-    
+
     public static boolean promptToReplace(javax.swing.JDialog parent, String filename) {
         FileCollisionDialog dialog = new FileCollisionDialog(parent);
         dialog.setFilename(filename);
@@ -51,7 +51,7 @@ public class FileCollisionDialog extends javax.swing.JDialog {
         dialog.setVisible(true);
         return dialog.shouldReplace();
     }
-    
+
     /**
      * Creates new form FileCollisionDialog
      */
@@ -60,13 +60,13 @@ public class FileCollisionDialog extends javax.swing.JDialog {
         grandInit();
         setLocationRelativeTo(parent);
     }
-    
+
     public FileCollisionDialog(javax.swing.JDialog parent) {
         super(parent, true);
         grandInit();
         setLocationRelativeTo(parent);
     }
-    
+
     private void grandInit() {
         initComponents();
         icon.setIcon(UIManager.getIcon("OptionPane.warningIcon"));
@@ -77,11 +77,11 @@ public class FileCollisionDialog extends javax.swing.JDialog {
             }
         });
     }
-    
+
     public void setFilename(String name) {
         message.setText(StringUtil.format(OStrings.getString("DND_FILE_COLLISION_MESSAGE"), name));
     }
-    
+
     public void enableApplyToAll(boolean enabled) {
         batchCheckbox.setVisible(enabled);
     }
@@ -89,19 +89,19 @@ public class FileCollisionDialog extends javax.swing.JDialog {
     public boolean isApplyToAll() {
         return batchCheckbox.isSelected();
     }
-    
+
     public boolean userDidCancel() {
         return userClicked == cancelButton;
     }
-    
+
     public boolean shouldReplace() {
         return userClicked == replaceButton;
     }
-    
+
     private void close() {
         setVisible(false);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

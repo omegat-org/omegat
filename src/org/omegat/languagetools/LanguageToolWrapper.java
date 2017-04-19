@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010-2013 Alex Buloichik
@@ -47,11 +47,11 @@ import org.omegat.util.gui.Styles;
 
 /**
  * Marker implementation for LanguageTool support.
- * 
+ *
  * Bilingual check described <a href=
  * "http://languagetool.wikidot.com/checking-translations-bilingual-texts">here
  * </a>
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  * @author Lev Abashkin
@@ -71,7 +71,7 @@ public class LanguageToolWrapper {
 
         Core.registerMarker(new LanguageToolMarker());
         IssueProviders.addIssueProvider(new LanguageToolIssueProvider());
-        
+
         CoreEvents.registerProjectChangeListener(e -> {
             switch (e) {
                 case CREATE:

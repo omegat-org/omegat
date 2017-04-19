@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -39,11 +39,11 @@ import org.omegat.util.PatternConsts;
 /**
  * The class that sentences the paragraphs into sentences and glues translated
  * sentences together to form a paragraph.
- * 
+ *
  * @author Maxym Mykhalchuk
  */
 public final class Segmenter {
-    
+
     private final SRX srx;
 
     public Segmenter(SRX srx) {
@@ -64,7 +64,7 @@ public final class Segmenter {
      * An additional list with space information is returned to be able to glue
      * translation together with the same spaces between them as in original
      * paragraph.
-     * 
+     *
      * @param paragraph
      *            the paragraph text
      * @param spaces
@@ -122,7 +122,7 @@ public final class Segmenter {
      * that contributed to each of the breaks made.
      * <p>
      * If glued back together, these strings form the same paragraph text as this function was fed.
-     * 
+     *
      * @param paragraph
      *            the paragraph text
      * @param brules
@@ -257,7 +257,7 @@ public final class Segmenter {
 
         /**
          * Compares this break position with another.
-         * 
+         *
          * @return a negative integer if its position is less than the another's, zero if they are equal, or a
          *         positive integer as its position is greater than the another's.
          * @throws ClassCastException
@@ -286,7 +286,7 @@ public final class Segmenter {
      * <li>For all other language combinations it restores the spaces present
      * before segmenting.
      * </ul>
-     * 
+     *
      * @param sentences
      *            list of translated sentences
      * @param spaces

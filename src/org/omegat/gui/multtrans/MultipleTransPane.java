@@ -57,7 +57,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * Pane for display information about multiple translations.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Jean-Christophe Helary
  * @author Aaron Madlon-Kay
@@ -68,7 +68,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
     private static final String EXPLANATION = OStrings.getString("GUI_MULTIPLETRANSLATIONSWINDOW_explanation");
 
     private List<DisplayedEntry> entries = new ArrayList<DisplayedEntry>();
-    
+
     private final DockableScrollPane scrollPane;
 
     public MultipleTransPane(IMainWindow mw) {
@@ -116,22 +116,22 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
         scrollPane.stopNotifying();
         super.onEntryActivated(newEntry);
     }
-    
+
     @Override
     protected void setFoundResult(SourceTextEntry processedEntry, List<MultipleTransFoundEntry> data) {
         UIThreadsUtil.mustBeSwingThread();
 
         clear();
-        
+
         // Check case if current segment has default translation and there are no alternative translations.
         if (data.size() == 1 && data.get(0).key == null) {
             return;
         }
-        
+
         if (!data.isEmpty() && Preferences.isPreference(Preferences.NOTIFY_MULTIPLE_TRANSLATIONS)) {
             scrollPane.notify(true);
         }
-        
+
         StringBuilder o = new StringBuilder();
         for (MultipleTransFoundEntry e : data) {
             DisplayedEntry de = new DisplayedEntry();
@@ -159,7 +159,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
 
         setText(o.toString());
     }
-    
+
     @Override
     public void clear() {
         super.clear();
@@ -185,7 +185,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
     protected void startSearchThread(SourceTextEntry newEntry) {
         new MultipleTransFindThread(this, Core.getProject(), newEntry).start();
     }
-    
+
     private DisplayedEntry getEntryAtPosition(int pos) {
         for (DisplayedEntry de : entries) {
             if (de.start <= pos && de.end >= pos) {
@@ -222,7 +222,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
 
     private void populateContextMenu(JPopupMenu popup, int pos) {
         final DisplayedEntry de = getEntryAtPosition(pos);
-        
+
         JMenuItem item;
         // default translation
         item = popup.add(OStrings.getString("MULT_POPUP_DEFAULT"));

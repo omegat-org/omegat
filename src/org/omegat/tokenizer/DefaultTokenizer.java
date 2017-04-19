@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
@@ -42,7 +42,7 @@ import org.omegat.util.Token;
 
 /**
  * Methods for tokenize string.
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
@@ -83,7 +83,7 @@ public class DefaultTokenizer implements ITokenizer {
         if (StringUtil.isEmpty(strOrig)) {
             return EMPTY_TOKENS_LIST;
         }
-        
+
         Token[] result;
         synchronized (tokenCache) {
             result = tokenCache.get(strOrig);
@@ -100,7 +100,7 @@ public class DefaultTokenizer implements ITokenizer {
         }
         return result;
     }
-    
+
     @Override
     public String[] tokenizeWordsToStrings(String str, StemmingMode stemmingMode) {
         if (StringUtil.isEmpty(str)) {
@@ -113,7 +113,7 @@ public class DefaultTokenizer implements ITokenizer {
     public Token[] tokenizeVerbatim(final String strOrig) {
         return tokenizeTextNoCache(strOrig, true);
     }
-    
+
     @Override
     public String[] tokenizeVerbatimToStrings(String str) {
         return tokenizeTextToStringsNoCache(str, true);
@@ -131,7 +131,7 @@ public class DefaultTokenizer implements ITokenizer {
      * <p>
      * OmegaT tags and other non-word tokens are skipped if the parameter "all"
      * is false.
-     * 
+     *
      * @param str
      *            string to tokenize
      * @param all
@@ -176,7 +176,7 @@ public class DefaultTokenizer implements ITokenizer {
 
         return tokens.toArray(new Token[tokens.size()]);
     }
-    
+
     private static String[] tokenizeTextToStringsNoCache(String str, boolean all) {
         if (StringUtil.isEmpty(str)) {
             return EMPTY_STRINGS_LIST;
@@ -248,12 +248,12 @@ public class DefaultTokenizer implements ITokenizer {
      * Check if array contains other array.
      * @param tokensList a list of tokens to be searched
      * @param listForFind a list of tokens to search in tokensList
-     * @param notExact is true if the tokens in listForFind can be non-contiguous or in a different order in the 
+     * @param notExact is true if the tokens in listForFind can be non-contiguous or in a different order in the
      * tokensList. If false, tokens must be exactly the same.
      * @return true if the tokens in listForFind are found in tokensList
      */
     public static boolean isContainsAll(Token[] tokensList, Token[] listForFind, boolean notExact) {
-        if (notExact) {         
+        if (notExact) {
             for (Token t : listForFind) {
                 if (!isContains(tokensList, t)) {
                     return false;
@@ -264,7 +264,7 @@ public class DefaultTokenizer implements ITokenizer {
             return isContainsExact(tokensList, listForFind);
         }
     }
-    
+
     /**
      * Check if a list of tokens is found contiguously in another list of tokens
      * @param tokensList a list of tokens to be searched
@@ -276,11 +276,11 @@ public class DefaultTokenizer implements ITokenizer {
             if (tokensList[i].equals(listForFind[0])) { // We found the first position of listForFind
                 if (listForFind.length == 1) { // Only one token, and we found it
                     return true;
-                }                   
+                }
                 int k = i+1;
                 if (listForFind.length <= tokensList.length-k+1) { // Enough words remain to match tokensList
                     boolean found = true;
-                    for (int j=1; j<listForFind.length; j++) { 
+                    for (int j=1; j<listForFind.length; j++) {
                         if (!listForFind[j].equals(tokensList[k])) { // One of the other tokens doesn't match
                             found = false;
                             break;

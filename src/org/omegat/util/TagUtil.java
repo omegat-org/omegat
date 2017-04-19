@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013-2014 Aaron Madlon-Kay
@@ -41,63 +41,63 @@ import org.omegat.core.statistics.StatisticsSettings;
 
 /**
  * A collection of tag-related static utilities.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class TagUtil {
-    
+
     private static final Comparator<Tag> TAG_COMPARATOR = new Comparator<Tag>() {
         @Override
         public int compare(Tag o1, Tag o2) {
             return o1.pos - o2.pos;
         }
     };
-    
+
     public static class Tag {
         public final int pos;
         public final String tag;
-    
+
         public Tag(int pos, String tag) {
             this.pos = pos;
             this.tag = tag;
         }
-        
+
         public TagType getType() {
             Matcher m = PatternConsts.OMEGAT_TAG_DECOMPILE.matcher(tag);
             if (!m.find()) {
                 return TagType.SINGLE;
             }
-            
+
             boolean hasFrontSlash = "/".equals(m.group(1));
             boolean hasBackSlash = "/".equals(m.group(4));
-            
+
             if (hasFrontSlash && !hasBackSlash) {
                 return TagType.END;
             }
-            
+
             if (!hasFrontSlash && !hasBackSlash) {
                 return TagType.START;
             }
-            
+
             return TagType.SINGLE;
         }
-        
+
         public String getName() {
             Matcher m = PatternConsts.OMEGAT_TAG_DECOMPILE.matcher(tag);
             if (!m.find()) {
                 return tag;
             }
-            
+
             boolean hasFrontSlash = "/".equals(m.group(1));
             boolean hasBackSlash = "/".equals(m.group(4));
-            
+
             if (hasFrontSlash && hasBackSlash) {
                 return tag;
             }
-            
+
             return m.group(2) + m.group(3);
         }
-        
+
         public String getPairedTag() {
             switch(getType()) {
             case START:
@@ -143,7 +143,7 @@ public class TagUtil {
             }
             return true;
         }
-        
+
         @Override
         public String toString() {
             return tag + "@" + pos;
@@ -163,7 +163,7 @@ public class TagUtil {
     }
 
     /**
-     * A tuple containing 
+     * A tuple containing
      * <ul><li>A tag's name</li>
      * <li>The tag's {@link TagType} type</li>
      * </ul>
@@ -171,7 +171,7 @@ public class TagUtil {
     public static class TagInfo {
         public final TagType type;
         public final String name;
-        
+
         public TagInfo (String name, TagType type) {
             this.name = name;
             this.type = type;
@@ -180,7 +180,7 @@ public class TagUtil {
 
     final public static String TAG_SEPARATOR_SENTINEL = "\uE100";
     final public static char TEXT_REPLACEMENT = '\uE100';
-        
+
     public static List<Tag> getAllTagsInSource() {
         SourceTextEntry ste = Core.getEditor().getCurrentEntry();
         return buildTagList(ste.getSrcText(), ste.getProtectedParts());
@@ -188,9 +188,9 @@ public class TagUtil {
 
     public static List<Tag> getAllTagsMissingFromTarget() {
         List<Tag> result = new ArrayList<Tag>();
-        
+
         StringBuilder target = new StringBuilder(Core.getEditor().getCurrentTranslation());
-        
+
         for (Tag tag : getAllTagsInSource()) {
             int pos = -1;
             if ((pos = target.indexOf(tag.tag)) != -1) {
@@ -201,21 +201,21 @@ public class TagUtil {
         }
         return result;
     }
-    
+
     public static List<String> getGroupedMissingTagsFromTarget() {
         List<String> result = new ArrayList<String>();
-        
+
         List<Tag> tags = getAllTagsMissingFromTarget();
         for (int i = 0; i < tags.size(); i++) {
             Tag tag = tags.get(i);
-            
+
             // Compile the longest possible list of contiguous tags and offer as
             // a group.
             List<String> group = getGroupAt(tags, i).stream().map(t -> t.tag).collect(Collectors.toList());
             if (group.size() > 1) {
                 result.add(String.join("", group));
             }
-            
+
             // See if this tag and next tag make a pair and offer them as a set,
             // regardless of whether or not they're contiguous.
             // E.g. either an actual pair like <foo></foo> or a potential pair
@@ -231,10 +231,10 @@ public class TagUtil {
 
             result.addAll(group);
         }
-        
+
         return result.stream().distinct().collect(Collectors.toList());
     }
-    
+
     private static List<Tag> getGroupAt(List<Tag> tags, int index) {
         Tag tag = tags.get(index);
         if (index > 0) {
@@ -283,7 +283,7 @@ public class TagUtil {
                 }
             }
         }
-        
+
         Collections.sort(tags, TAG_COMPARATOR);
         return tags;
     }
@@ -326,7 +326,7 @@ public class TagUtil {
     /**
      * Find some protected parts defined in Tag Validation Options dialog: printf variables, java
      * MessageFormat patterns, user defined cusom tags.
-     * 
+     *
      * These protected parts shouldn't affect statistic but just be displayed in gray in editor and take part
      * in tag validation.
      */
@@ -342,7 +342,7 @@ public class TagUtil {
         } else {
             result = new ArrayList<ProtectedPart>();
         }
-    
+
         Matcher placeholderMatcher = protectedPartsPatterns.matcher(source);
         while (placeholderMatcher.find()) {
             ProtectedPart pp = new ProtectedPart();

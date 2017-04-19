@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Alex Buloichik
@@ -37,7 +37,7 @@ import org.junit.Test;
 
 /**
  * Tests for (some) static utility methods.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
@@ -62,7 +62,7 @@ public class StringUtilTest {
         // LATIN CAPITAL LETTER L WITH SMALL LETTER J (U+01C8)
         assertTrue(StringUtil.isTitleCase("\u01C8bcd"));
         assertFalse(StringUtil.isTitleCase("a\u01C8bcd"));
-        
+
         // LATIN CAPITAL LETTER L WITH SMALL LETTER J (U+01C8)
         assertTrue(StringUtil.isTitleCase("\u01c8"));
         // LATIN CAPITAL LETTER LJ (U+01C7)
@@ -70,7 +70,7 @@ public class StringUtilTest {
         // LATIN SMALL LETTER LJ (U+01C9)
         assertFalse(StringUtil.isTitleCase("\u01c9"));
     }
-    
+
     @Test
     public void testIsSubstringBefore() {
         assertFalse(StringUtil.isSubstringBefore("123456", 1, "01"));
@@ -79,7 +79,7 @@ public class StringUtilTest {
         assertTrue(StringUtil.isSubstringBefore("123456", 6, "56"));
         assertTrue(StringUtil.isSubstringBefore("123456", 5, "45"));
     }
-    
+
     @Test
     public void testUnicodeNonBMP() {
         // MATHEMATICAL BOLD CAPITAL A (U+1D400)
@@ -87,32 +87,32 @@ public class StringUtilTest {
         assertTrue(StringUtil.isUpperCase(test));
         assertFalse(StringUtil.isLowerCase(test));
         assertTrue(StringUtil.isTitleCase(test));
-        
+
         // MATHEMATICAL BOLD CAPITAL A (U+1D400) x2
         test = "\uD835\uDC00\uD835\uDC00";
         assertTrue(StringUtil.isUpperCase(test));
         assertFalse(StringUtil.isLowerCase(test));
         assertFalse(StringUtil.isTitleCase(test));
-        
+
         // MATHEMATICAL BOLD SMALL A (U+1D41A)
         test = "\uD835\uDC1A";
         assertFalse(StringUtil.isUpperCase(test));
         assertTrue(StringUtil.isLowerCase(test));
         assertFalse(StringUtil.isTitleCase(test));
-        
+
         // MATHEMATICAL BOLD CAPITAL A + MATHEMATICAL BOLD SMALL A
         test = "\uD835\uDC00\uD835\uDC1A";
         assertFalse(StringUtil.isUpperCase(test));
         assertFalse(StringUtil.isLowerCase(test));
         assertTrue(StringUtil.isTitleCase(test));
-        
+
         // MATHEMATICAL BOLD SMALL A + MATHEMATICAL BOLD CAPITAL A
         test = "\uD835\uDC1A\uD835\uDC00";
         assertFalse(StringUtil.isUpperCase(test));
         assertFalse(StringUtil.isLowerCase(test));
         assertFalse(StringUtil.isTitleCase(test));
     }
-    
+
     @Test
     public void testAlphanumericStringCase() {
         String test = "MQL5";
@@ -139,7 +139,7 @@ public class StringUtilTest {
         assertFalse(StringUtil.isTitleCase(test));
         assertTrue(StringUtil.isMixedCase(test));
     }
-    
+
     @Test
     public void testEmptyStringCase() {
         String test = null;
@@ -167,14 +167,14 @@ public class StringUtilTest {
         } catch (NullPointerException ex) {
             // OK
         }
-        
+
         test = "";
         assertFalse(StringUtil.isUpperCase(test));
         assertFalse(StringUtil.isLowerCase(test));
         assertFalse(StringUtil.isTitleCase(test));
         assertEquals("", StringUtil.toTitleCase("", Locale.ENGLISH));
     }
-    
+
     @Test
     public void testIsWhiteSpace() {
         try {
@@ -192,7 +192,7 @@ public class StringUtilTest {
         // NO-BREAK SPACE (U+00A0) + FIGURE SPACE (U+2007) + NARROW NO-BREAK SPACE (U+202F)
         assertTrue(StringUtil.isWhiteSpace("\u00a0\u2007\u202f"));
     }
-    
+
     @Test
     public void testIsMixedCase() {
         assertTrue(StringUtil.isMixedCase("ABc"));
@@ -202,7 +202,7 @@ public class StringUtilTest {
         // Non-letter characters should not affect the result:
         assertTrue(StringUtil.isMixedCase(" {ABc"));
     }
-    
+
     @Test
     public void testNonWordCase() {
         String test = "{";
@@ -211,7 +211,7 @@ public class StringUtilTest {
         assertFalse(StringUtil.isTitleCase(test));
         assertFalse(StringUtil.isMixedCase(test));
     }
-    
+
     @Test
     public void testToTitleCase() {
         Locale locale = Locale.ENGLISH;
@@ -231,26 +231,26 @@ public class StringUtilTest {
         String test = "!@#$%^&*()-=\"\\";
         assertEquals(test, StringUtil.toTitleCase(test, locale));
     }
-    
+
     @Test
     public void testCompressSpace() {
         assertEquals("One Two Three Four Five", StringUtil.compressSpaces(" One Two\nThree   Four\r\nFive "));
         assertEquals("Six seven", StringUtil.compressSpaces("Six\tseven"));
     }
-    
+
     @Test
     public void testIsValidXMLChar() {
         assertFalse(StringUtil.isValidXMLChar(0x01));
         assertTrue(StringUtil.isValidXMLChar(0x09));
         assertTrue(StringUtil.isValidXMLChar(0x0A));
         assertTrue(StringUtil.isValidXMLChar(0x0D));
-        
+
         assertTrue(StringUtil.isValidXMLChar(0x21));
         assertFalse(StringUtil.isValidXMLChar(0xD800));
-        
+
         assertTrue(StringUtil.isValidXMLChar(0xE000));
         assertFalse(StringUtil.isValidXMLChar(0xFFFE));
-        
+
         assertTrue(StringUtil.isValidXMLChar(0x10000));
         assertFalse(StringUtil.isValidXMLChar(0x110000));
     }
@@ -269,7 +269,7 @@ public class StringUtilTest {
         // LATIN SMALL LETTER I (U+0069) -> LATIN CAPITAL LETTER I WITH DOT ABOVE (U+0130) in Turkish
         assertEquals("\u0130jk", StringUtil.capitalizeFirst("ijk", new Locale("tr")));
     }
-    
+
     @Test
     public void testMatchCapitalization() {
         Locale locale = Locale.ENGLISH;
@@ -343,7 +343,7 @@ public class StringUtilTest {
         test = "\u30a2\uff71\u30ac\uff76\u3099\u3000";
         assertEquals("\u30a2\u30a2\u30ac\u30ac ", StringUtil.normalizeWidth(test));
     }
-    
+
     @Test
     public void testRstrip() {
         assertEquals("", StringUtil.rstrip(""));

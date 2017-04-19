@@ -40,6 +40,8 @@
     -->
 
     <property name="fileExtensions" value="java, properties, xml"/>
+    
+    <property name="severity" value="warning"/>
 
     <module name="SuppressionCommentFilter">
         <property name="offCommentFormat" value="&lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents"/>

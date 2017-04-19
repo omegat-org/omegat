@@ -56,13 +56,13 @@ import org.omegat.util.StringUtil;
  */
 public abstract class ParseEntry implements IParseCallback {
 
-    private final ProjectProperties m_config;
+    private final ProjectProperties config;
 
     /** Cached segments. */
     private List<ParseEntryQueueItem> parseQueue = new ArrayList<ParseEntryQueueItem>();
 
-    public ParseEntry(final ProjectProperties m_config) {
-        this.m_config = m_config;
+    public ParseEntry(final ProjectProperties conf) {
+        this.config = conf;
     }
 
     protected void setCurrentFile(FileInfo fi) {
@@ -143,9 +143,9 @@ public abstract class ParseEntry implements IParseCallback {
         ParseEntryResult tmp = new ParseEntryResult();
 
         boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
-        source = stripSomeChars(source, tmp, m_config.isRemoveTags(), removeSpaces);
+        source = stripSomeChars(source, tmp, config.isRemoveTags(), removeSpaces);
         source = StringUtil.normalizeUnicode(source);
-        if (m_config.isRemoveTags() && protectedParts != null) {
+        if (config.isRemoveTags() && protectedParts != null) {
             for (int i = 0; i < protectedParts.size(); i++) {
                 ProtectedPart p = protectedParts.get(i);
                 String s = p.getTextInSourceSegment();
@@ -159,14 +159,14 @@ public abstract class ParseEntry implements IParseCallback {
             }
         }
         if (translation != null) {
-            translation = stripSomeChars(translation, tmp, m_config.isRemoveTags(), removeSpaces);
+            translation = stripSomeChars(translation, tmp, config.isRemoveTags(), removeSpaces);
             translation = StringUtil.normalizeUnicode(translation);
         }
 
-        if (m_config.isSentenceSegmentingEnabled()) {
+        if (config.isSentenceSegmentingEnabled()) {
             List<StringBuilder> spaces = new ArrayList<StringBuilder>();
             List<Rule> brules = new ArrayList<Rule>();
-            Language sourceLang = m_config.getSourceLanguage();
+            Language sourceLang = config.getSourceLanguage();
             List<String> segments = Core.getSegmenter().segment(sourceLang, source, spaces, brules);
             if (segments.size() == 1) {
                 internalAddSegment(id, (short) 0, segments.get(0), translation, isFuzzy, props, path,
@@ -327,13 +327,14 @@ public abstract class ParseEntry implements IParseCallback {
          * translate.
          */
         per.crlf = r.indexOf("\r\n") > 0;
-        if (per.crlf)
+        if (per.crlf) {
             r = r.replace("\r\n", "\n");
+        }
         per.cr = r.indexOf("\r") > 0;
-        if (per.cr)
+        if (per.cr) {
             r = r.replace("\r", "\n");
-
-        if(removeTags) {
+        }
+        if (removeTags) {
             r = PatternConsts.OMEGAT_TAG.matcher(r).replaceAll("");
         }
 

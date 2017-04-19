@@ -851,9 +851,9 @@ public class EditorController implements IEditor {
         //
         // Navigate to entry as requested.
         //
-        if (pos.position!=null) { // check if outside of entry
+        if (pos.position != null) { // check if outside of entry
             pos.position = Math.max(0, pos.position);
-            pos.position = Math.min(pos.position, te-ts);
+            pos.position = Math.min(pos.position, te - ts);
         }
         if (pos.selectionStart != null && pos.selectionEnd != null) { // check if outside of entry
             pos.selectionStart = Math.max(0, pos.selectionStart);

@@ -53,22 +53,23 @@ import org.omegat.util.StaticUtils;
  *
  * @author Aaron Madlon-Kay
  */
-public class OSXIntegration {
+public final class OSXIntegration {
 
-    public static Image APP_ICON_MAC;
+    private OSXIntegration() {
+    }
+
+    public static final Image APP_ICON_MAC = ResourcesUtil.getBundledImage("OmegaT_mac.png");
 
     private static volatile Class<?> appClass;
     private static volatile Object app;
 
     private static boolean guiLoaded = false;
-    private static final List<Runnable> doAfterLoad = new ArrayList<Runnable>();
+    private static final List<Runnable> DO_AFTER_LOAD = new ArrayList<>();
 
     public static void init() {
         try {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", "OmegaT");
-
-            APP_ICON_MAC = ResourcesUtil.getBundledImage("OmegaT_mac.png");
 
             // Set dock icon
             Method setDockIconImage = getAppClass().getDeclaredMethod("setDockIconImage", Image.class);
@@ -87,26 +88,26 @@ public class OSXIntegration {
 
             // Register to find out when app finishes loading so we can
             // 1. Set up full-screen support, and...
-            CoreEvents.registerApplicationEventListener(appListener);
+            CoreEvents.registerApplicationEventListener(APP_LISTENER);
             // 2. The open file handler can defer opening a project until the GUI is ready.
-            setOpenFilesHandler(openFilesHandler);
+            setOpenFilesHandler(OPEN_FILES_HANDLER);
 
             // Register listener to update the main window's proxy icon and modified indicators.
-            CoreEvents.registerProjectChangeListener(projectListener);
+            CoreEvents.registerProjectChangeListener(PROJECT_LISTENER);
         } catch (Exception ex) {
             Log.log(ex);
         }
     }
 
-    private static final IApplicationEventListener appListener = new IApplicationEventListener() {
+    private static final IApplicationEventListener APP_LISTENER = new IApplicationEventListener() {
         @Override
         public void onApplicationStartup() {
             guiLoaded = true;
-            synchronized (doAfterLoad) {
-                for (Runnable r : doAfterLoad) {
+            synchronized (DO_AFTER_LOAD) {
+                for (Runnable r : DO_AFTER_LOAD) {
                     r.run();
                 }
-                doAfterLoad.clear();
+                DO_AFTER_LOAD.clear();
             }
             Window window = Core.getMainWindow().getApplicationFrame();
             enableFullScreen(window);
@@ -117,7 +118,7 @@ public class OSXIntegration {
         }
     };
 
-    private static final IOpenFilesHandler openFilesHandler = new IOpenFilesHandler() {
+    private static final IOpenFilesHandler OPEN_FILES_HANDLER = new IOpenFilesHandler() {
         @Override
         public void openFiles(List<?> files) {
             if (files.isEmpty()) {
@@ -140,35 +141,32 @@ public class OSXIntegration {
             if (guiLoaded) {
                 SwingUtilities.invokeLater(openProject);
             } else {
-                synchronized (doAfterLoad) {
-                    doAfterLoad.add(openProject);
+                synchronized (DO_AFTER_LOAD) {
+                    DO_AFTER_LOAD.add(openProject);
                 }
             }
         }
     };
 
-    private static final IProjectEventListener projectListener = new IProjectEventListener() {
-        @Override
-        public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-            JRootPane rootPane = Core.getMainWindow().getApplicationFrame().getRootPane();
-            switch (eventType) {
-            case CREATE:
-            case LOAD:
-                String projDir = Core.getProject().getProjectProperties().getProjectRoot();
-                setProxyIcon(rootPane, new File(projDir));
-                break;
-            case CLOSE:
-                setProxyIcon(rootPane, null);
-                break;
-            case MODIFIED:
-                setModifiedIndicator(rootPane, true);
-                break;
-            case SAVE:
-                setModifiedIndicator(rootPane, false);
-                break;
-            default:
-                // Nothing
-            }
+    private static final IProjectEventListener PROJECT_LISTENER = eventType -> {
+        JRootPane rootPane = Core.getMainWindow().getApplicationFrame().getRootPane();
+        switch (eventType) {
+        case CREATE:
+        case LOAD:
+            String projDir = Core.getProject().getProjectProperties().getProjectRoot();
+            setProxyIcon(rootPane, new File(projDir));
+            break;
+        case CLOSE:
+            setProxyIcon(rootPane, null);
+            break;
+        case MODIFIED:
+            setModifiedIndicator(rootPane, true);
+            break;
+        case SAVE:
+            setModifiedIndicator(rootPane, false);
+            break;
+        default:
+            // Nothing
         }
     };
 
@@ -176,16 +174,12 @@ public class OSXIntegration {
         try {
             // Handler must implement com.apple.eawt.AboutHandler interface.
             Class<?> aboutHandlerClass = Class.forName("com.apple.eawt.AboutHandler");
-            InvocationHandler ih = new InvocationHandler() {
-                @Override
-                public Object invoke(Object proxy, Method method, Object[] args)
-                        throws Throwable {
-                    if (method.getName().equals("handleAbout")) {
-                        // Respond to handleAbout(com.apple.eawt.AppEvent.AboutEvent)
-                        al.actionPerformed(null);
-                    }
-                    return null;
+            InvocationHandler ih = (proxy, method, args) -> {
+                if (method.getName().equals("handleAbout")) {
+                    // Respond to handleAbout(com.apple.eawt.AppEvent.AboutEvent)
+                    al.actionPerformed(null);
                 }
+                return null;
             };
             Object handler = Proxy.newProxyInstance(OSXIntegration.class.getClassLoader(),
                     new Class<?>[] { aboutHandlerClass }, ih);
@@ -202,25 +196,21 @@ public class OSXIntegration {
         try {
             // Handler must implement com.apple.eawt.QuitHandler interface.
             Class<?> quitHandlerClass = Class.forName("com.apple.eawt.QuitHandler");
-            InvocationHandler ih = new InvocationHandler() {
-                @Override
-                public Object invoke(Object proxy, Method method, Object[] args)
-                    throws Throwable {
-                    if (method.getName().equals("handleQuitRequestWith")) {
-                        Class<?> quitResponseClass = Class.forName("com.apple.eawt.QuitResponse");
-                        if (args != null && args.length > 1 && quitResponseClass.isInstance(args[1]) &&
-                                Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
-                            // Respond to handleQuitRequestWith(com.apple.eawt.AppEvent.QuitEvent,
-                            //   com.apple.eawt.QuitResponse)
-                            // Cancel the quit because OmegaT will prompt:
-                            //   arg1.cancelQuit();
-                            Method cancelQuit = quitResponseClass.getDeclaredMethod("cancelQuit");
-                            cancelQuit.invoke(args[1]);
-                        }
-                        al.actionPerformed(null);
+            InvocationHandler ih = (proxy, method, args) -> {
+                if (method.getName().equals("handleQuitRequestWith")) {
+                    Class<?> quitResponseClass = Class.forName("com.apple.eawt.QuitResponse");
+                    if (args != null && args.length > 1 && quitResponseClass.isInstance(args[1])
+                            && Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
+                        // Respond to handleQuitRequestWith(com.apple.eawt.AppEvent.QuitEvent,
+                        //     com.apple.eawt.QuitResponse)
+                        // Cancel the quit because OmegaT will prompt:
+                        //     arg1.cancelQuit();
+                        Method cancelQuit = quitResponseClass.getDeclaredMethod("cancelQuit");
+                        cancelQuit.invoke(args[1]);
                     }
-                    return null;
+                    al.actionPerformed(null);
                 }
+                return null;
             };
             Object handler = Proxy.newProxyInstance(OSXIntegration.class.getClassLoader(),
                     new Class<?>[] { quitHandlerClass }, ih);
@@ -237,27 +227,24 @@ public class OSXIntegration {
         try {
             // Handler must implement com.apple.eawt.OpenFilesHandler interface.
             Class<?> openFilesHandlerClass = Class.forName("com.apple.eawt.OpenFilesHandler");
-            InvocationHandler ih = new InvocationHandler() {
-                @Override
-                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                    try {
-                        if (method.getName().equals("openFiles")) {
-                            Class<?> filesEventClass = Class.forName("com.apple.eawt.AppEvent$FilesEvent");
-                            if (args != null && args.length > 0 && filesEventClass.isInstance(args[0])) {
-                                Object filesEvent = args[0];
-                                // Respond to openFiles(com.apple.eawt.AppEvent.OpenFilesEvent)
-                                // Get provided list of files:
-                                //   arg0.getFiles()
-                                Method getFilesMethod = filesEventClass.getDeclaredMethod("getFiles");
-                                Object filesList = getFilesMethod.invoke(filesEvent);
-                                ofh.openFiles((List<?>) filesList);
-                            }
+            InvocationHandler ih = (proxy, method, args) -> {
+                try {
+                    if (method.getName().equals("openFiles")) {
+                        Class<?> filesEventClass = Class.forName("com.apple.eawt.AppEvent$FilesEvent");
+                        if (args != null && args.length > 0 && filesEventClass.isInstance(args[0])) {
+                            Object filesEvent = args[0];
+                            // Respond to openFiles(com.apple.eawt.AppEvent.OpenFilesEvent)
+                            // Get provided list of files:
+                            //    arg0.getFiles()
+                            Method getFilesMethod = filesEventClass.getDeclaredMethod("getFiles");
+                            Object filesList = getFilesMethod.invoke(filesEvent);
+                            ofh.openFiles((List<?>) filesList);
                         }
-                    } catch (Throwable t) {
-                        Log.log(t);
                     }
-                    return null;
+                } catch (Throwable t) {
+                    Log.log(t);
                 }
+                return null;
             };
             Object handler = Proxy.newProxyInstance(OSXIntegration.class.getClassLoader(),
                     new Class<?>[] { openFilesHandlerClass }, ih);
@@ -274,7 +261,7 @@ public class OSXIntegration {
         try {
             // Handler must implement com.apple.eawt.PreferencesHandler interface.
             Class<?> preferencesHandlerClass = Class.forName("com.apple.eawt.PreferencesHandler");
-            InvocationHandler ih = (Object proxy, Method method, Object[] args) -> {
+            InvocationHandler ih = (proxy, method, args) -> {
                 if (method.getName().equals("handlePreferences")) {
                     // Respond to
                     // handlePreferences(com.apple.eawt.AppEvent.PreferencesHandler)
@@ -315,7 +302,7 @@ public class OSXIntegration {
     }
 
     public interface IOpenFilesHandler {
-        public void openFiles(List<?> files);
+        void openFiles(List<?> files);
     }
 
     private static Class<?> getAppClass() throws Exception {

@@ -7,6 +7,9 @@
   <fileset name="all" enabled="true" check-config-name="OmegaT config" local="true">
     <file-match-pattern match-pattern="." include-pattern="true"/>
   </fileset>
+  <filter name="WriteProtectedFiles" enabled="true"/>
+  <filter name="DerivedFiles" enabled="true"/>
+  <filter name="UnOpenedFiles" enabled="true"/>
   <filter name="FilesFromPackage" enabled="true">
     <filter-data value="src/gen"/>
   </filter>

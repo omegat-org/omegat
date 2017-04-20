@@ -279,14 +279,9 @@ public class MainWindowMenuHandler {
             return;
         }
         File toOpen = new File(root, path);
-
-// When the following code is active, manually assigning a shortcut to the command
-// only opens the parent folder and not the file itself
-
-//        if ((modifier & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
-//            toOpen = toOpen.getParentFile();
-//        }
-
+        if ((modifier & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
+            toOpen = toOpen.getParentFile();
+        }
         openFile(toOpen);
     }
 
@@ -300,14 +295,9 @@ public class MainWindowMenuHandler {
             return;
         }
         File toOpen = new File(root, path);
-
-// When the following code is active, manually assigning a shortcut to the command
-// only opens the parent folder and not the file itself
-
-//        if ((modifier & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
-//            toOpen = toOpen.getParentFile();
-//        }
-
+        if ((modifier & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
+            toOpen = toOpen.getParentFile();
+        }
         openFile(toOpen);
     }
 
@@ -320,14 +310,9 @@ public class MainWindowMenuHandler {
             return;
         }
         File toOpen = new File(path);
-
-// When the following code is active, manually assigning a shortcut to the command
-// only opens the parent folder and not the file itself
-
-//       if ((modifier & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
-//           toOpen = toOpen.getParentFile();
-//        }
-
+        if ((modifier & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
+            toOpen = toOpen.getParentFile();
+        }
         openFile(toOpen);
     }
 

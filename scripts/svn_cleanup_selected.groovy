@@ -1,5 +1,4 @@
-/*
- * Perform SVN cleanup on any local SVN repository
+/* :name=SVN - Cleanup :description=Perform SVN cleanup on any local SVN repository
  *
  * @author	Yu Tang
  * @author	Kos Ivatsov

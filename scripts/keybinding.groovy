@@ -1,4 +1,10 @@
-// :name=Example - Key Binding :description=Example of keybinding event
+/* :name=SAMPLE - Key Binding :description=Example of keybinding event
+ * 
+ * @author  
+ * @date    
+ * @version 
+ */
+ 
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;

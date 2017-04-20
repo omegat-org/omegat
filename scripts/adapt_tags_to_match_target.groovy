@@ -1,4 +1,4 @@
-/* :name=TAGS - Adapt standard tags :description=Adapt standard tags when Replace with Match command invoked
+/* :name=Adapt standard tags :description=Adapt standard tags when Replace with Match command invoked
  * 
  *  The workaround by script for RFE #841:
  *  Adapt tags to match target 

@@ -1,10 +1,10 @@
-/* :name=OPEN - Auto Open Last Project :description=Automatically opens last opened OmegaT project
+/** :name=Auto Open Last Project :description=Allow to automatically open last used OmegaT project
  *
  *  Allow to automatically open last used OmegaT project
  *
- *  Usage: move this script to
- *  <your-scripts-folder>/application_startup/ sub-folder
- *  for event driven automatically execution.
+ * Usage: move this script to
+ * <your-scripts-folder>/application_startup/ sub-folder
+ * for event driven automatically execution.
  *
  * @author  Yu Tang
  * @date    2014-09-16

@@ -1,9 +1,4 @@
-/* :name=QA - Check Same Segment (Groovy) :description=Checks for identical segments (case sensitive)
- *
- * @author  
- * @date    
- * @version 
- */
+// :name=Check Same Segment :description=Check for identical segments (case sensitive)
 
 console.println("Check for identical segments (case sensitive).\n");
 

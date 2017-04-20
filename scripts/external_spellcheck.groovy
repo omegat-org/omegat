@@ -1,4 +1,4 @@
-/* :name=QA - External spellcheck :description=Writes all segments in a file named [project_name].doc and opens it
+/* :name=External spellcheck :description=Writes all segments in a file named [project_name].doc and opens it
  *
  * @author: Didier Briel
  * @author: Kos Ivantsov

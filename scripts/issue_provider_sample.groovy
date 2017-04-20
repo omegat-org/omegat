@@ -1,10 +1,3 @@
-/* :name=SAMPLE - Issue Provider :description=
- *
- * @author:	
- * @date:		
- * @version	
- */
-
 import org.omegat.core.data.SourceTextEntry
 import org.omegat.core.data.TMXEntry
 import org.omegat.gui.issues.*

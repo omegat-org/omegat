@@ -238,6 +238,16 @@ task genDocIndex(type: Copy) {
     }
 }
 
+task webManual(type: Sync) {
+    description = 'Generate the HTML manual'
+    dependsOn genDocIndex
+    destinationDir = file("${buildDir}/docs/manual")
+    from 'docs'
+    from('release') {
+        include 'doc-license.txt'
+    }
+}
+
 distributions {
     main {
         contents {

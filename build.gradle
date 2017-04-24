@@ -815,6 +815,9 @@ remotes {
         user = findProperty('sourceforgeWebUser')
         password = findProperty('sourceforgeWebPassword')
         agent = true
+        if (envIsCi) {
+            knownHosts = file("${assetDir}/known_hosts")
+        }
     }
 }
 

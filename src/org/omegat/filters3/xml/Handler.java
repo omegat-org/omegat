@@ -95,10 +95,11 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * returns {@link #extWriter}.
      */
     private BufferedWriter currWriter() {
-        if (extWriter != null)
+        if (extWriter != null) {
             return extWriter;
-        else
+        } else {
             return mainWriter;
+        }
     }
 
     /** Currently parsed external entity that has its own writer. */
@@ -164,12 +165,13 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * {@link #outofturnEntries}.
      */
     private Entry currEntry() {
-        if (collectingIntactText())
+        if (collectingIntactText()) {
             return intacttagEntry;
-        else if (collectingOutOfTurnText())
+        } else if (collectingOutOfTurnText()) {
             return outofturnEntries.peek();
-        else
+        } else {
             return entry;
+        }
     }
 
     /**
@@ -221,12 +223,14 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         String filename;
         if (e.getSystemId() != null) {
             File errorfile = new File(inFile.getParentFile(), localizeSystemId(e.getSystemId()));
-            if (errorfile.exists())
+            if (errorfile.exists()) {
                 filename = errorfile.getAbsolutePath();
-            else
+            } else {
                 filename = inFile.getAbsolutePath();
-        } else
+            }
+        } else {
             filename = inFile.getAbsolutePath();
+        }
         throw new SAXException("\n"
                 + StringUtil.format(e.getMessage() + "\n" + OStrings.getString("XML_FATAL_ERROR"),
                         filename, linenum));
@@ -303,14 +307,17 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
 
     /** Finds external entity by publicId and systemId. */
     private Entity findExternalEntity(String publicId, String systemId) {
-        if (publicId == null && systemId == null)
+        if (publicId == null && systemId == null) {
             return null;
+        }
         for (Entity entity : externalEntities) {
-            if (entity.isInternal())
+            if (entity.isInternal()) {
                 continue;
+            }
             if (StringUtil.equal(publicId, entity.getPublicId())
-                    && StringUtil.equal(systemId, entity.getSystemId()))
+                    && StringUtil.equal(systemId, entity.getSystemId())) {
                 return entity;
+            }
         }
         return null;
     }
@@ -321,8 +328,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * the text it represents, in {@link #characters(char[],int,int)}.
      */
     private void doStartEntity(String name) {
-        if (inDTD)
+        if (inDTD) {
             return;
+        }
         internalEntityStarted = internalEntities.get(name);
     }
 
@@ -332,8 +340,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * nulls the entity.
      */
     private void doEndEntity(String name) throws SAXException, TranslationException, IOException {
-        if (inDTD || extEntity == null)
+        if (inDTD || extEntity == null) {
             return;
+        }
         if (extEntity.getOriginalName().equals(name)) {
             boolean parameterEntiry = extEntity.isParameter();
             extEntity = null;
@@ -367,8 +376,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             InputSource entity = new InputSource(systemId);
             // checking if f
             if (systemId.startsWith(START_FILESCHEMA)) {
-                if (!new File(new URI(systemId)).exists())
+                if (!new File(new URI(systemId)).exists()) {
                     entity = null;
+                }
             }
 
             if (entity != null) {
@@ -389,14 +399,16 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
                     }
                 }
                 return entity;
-            } else
+            } else {
                 return new InputSource(new java.io.StringReader(""));
+            }
         } else {
             InputSource source = dialect.resolveEntity(publicId, systemId);
-            if (source != null)
+            if (source != null) {
                 return source;
-            else
+            } else {
                 return new InputSource(new java.io.StringReader(""));
+            }
         }
     }
 
@@ -407,9 +419,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
 
         // TODO: ideally, xml:space=preserved would be handled at this level, but that would suppose
         // knowing here whether we're inside a preformatted tag, etc.
-        if (internalEntityStarted != null && s.equals(internalEntityStarted.getValue()))
+        if (internalEntityStarted != null && s.equals(internalEntityStarted.getValue())) {
             currEntry().add(new XMLEntityText(internalEntityStarted));
-        else {
+        } else {
             boolean added = false;
             if (!currEntry().isEmpty()) {
                 Element elem = currEntry().get(currEntry().size() - 1);
@@ -422,8 +434,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
                     }
                 }
             }
-            if (!added)
+            if (!added) {
                 currEntry().add(new XMLText(s, inCDATA));
+            }
         }
     }
 
@@ -453,8 +466,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         }
         currEntry().add(xmltag);
 
-        if (intacttag != null)
+        if (intacttag != null) {
             intacttagEntry = intacttag.getIntactContents();
+        }
 
         if (!collectingIntactText()) {
             for (int i = 0; i < xmltag.getAttributes().size(); i++) {
@@ -564,8 +578,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
                 queueEndTag(tag);
                 // TODO: If a file doesn't contain any paragraph tag,
                 // the translatable content will be lost
-                if (isParagraphTag(tag) && !collectingOutOfTurnText() && !collectingIntactText())
+                if (isParagraphTag(tag) && !collectingOutOfTurnText() && !collectingIntactText()) {
                     translateAndFlush();
+                }
                 removeTranslatableTag();
             }
         } else {
@@ -586,8 +601,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * @see #translateAndFlush()
      */
     private void translateButDontFlash() throws TranslationException {
-        if (currEntry().isEmpty())
+        if (currEntry().isEmpty()) {
             return;
+        }
 
         List<ProtectedPart> shortcutDetails = new ArrayList<ProtectedPart>();
         boolean tagsAggregation = isTagsAggregationEnabled();
@@ -606,11 +622,13 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             if (Core.getFilterMaster().getConfig().isRemoveSpacesNonseg()) {
                 compressed = StringUtil.compressSpaces(src);
             }
-            if (isTranslatableTag())
+            if (isTranslatableTag()) {
                 translation = translator.translate(compressed, shortcutDetails);
+            }
             // untranslated is written out uncompressed
-            if (compressed.equals(translation))
+            if (compressed.equals(translation)) {
                 translation = src;
+            }
         }
 
         currEntry().setTranslation(translation, dialect, new ArrayList<ProtectedPart>());
@@ -662,10 +680,11 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         preformatTagAttributes.push(atts);
 
         if ((dialect.getParagraphTags() != null && dialect.getParagraphTags().contains(tag))
-                || isPreformattingTag(tag, atts))
+                || isPreformattingTag(tag, atts)) {
             return true;
-        else
+        } else {
             return dialect.validateParagraphTag(tag, atts);
+        }
     }
 
     /**
@@ -679,9 +698,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      */
     private boolean isParagraphTag(String tag) {
         if ((dialect.getParagraphTags() != null && dialect.getParagraphTags().contains(tag))
-                || isPreformattingTag(tag))
+                || isPreformattingTag(tag)) {
             return true;
-        else {
+        } else {
             org.omegat.filters3.Attributes atts = null;
             if (tag.equals(paragraphTagName.lastElement())) {
                 paragraphTagName.pop();
@@ -714,14 +733,14 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * @return <code>true</code> or <code>false</false>
      */
     private boolean isContentBasedTag(String tag, org.omegat.filters3.Attributes atts) {
-        if (dialect.getContentBasedTags() != null && dialect.getContentBasedTags().containsKey(tag))
+        if (dialect.getContentBasedTags() != null && dialect.getContentBasedTags().containsKey(tag)) {
             return true;
-        else {
+        } else {
             if (atts == null) {
-                if (tag.equals(intacttagName))
+                if (tag.equals(intacttagName)) {
                     atts = intacttagAttributes; // Restore attributes
+                }
             }
-
             return dialect.validateContentBasedTag(tag, atts);
         }
     }
@@ -734,11 +753,12 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * @return <code>true</code> or <code>false</false>
      */
     private boolean isPreformattingTag(String tag, org.omegat.filters3.Attributes atts) {
-        if (dialect.getPreformatTags() != null && dialect.getPreformatTags().contains(tag))
+        if (dialect.getPreformatTags() != null && dialect.getPreformatTags().contains(tag)) {
             return true;
-        else
+        } else {
             return dialect.validatePreformatTag(tag, atts);
         }
+    }
 
     /**
      * Returns whether the tag surrounds preformatted block of text. It is
@@ -750,9 +770,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * @return <code>true</code> or <code>false</false>
      */
     private boolean isPreformattingTag(String tag) {
-        if (dialect.getPreformatTags() != null && dialect.getPreformatTags().contains(tag))
+        if (dialect.getPreformatTags() != null && dialect.getPreformatTags().contains(tag)) {
             return true;
-        else {
+        } else {
             org.omegat.filters3.Attributes atts = null;
             if (tag.equals(preformatTagName.lastElement())) {
                 preformatTagName.pop();
@@ -760,7 +780,6 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             }
             return dialect.validatePreformatTag(tag, atts);
         }
-
     }
 
     /**
@@ -768,12 +787,13 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * translate.
      */
     private boolean isIntactTag(String tag, org.omegat.filters3.Attributes atts) {
-        if (dialect.getIntactTags() != null && dialect.getIntactTags().contains(tag))
+        if (dialect.getIntactTags() != null && dialect.getIntactTags().contains(tag)) {
             return true;
-        else {
+        } else {
             if (atts == null) {
-                if (tag.equals(intacttagName))
+                if (tag.equals(intacttagName)) {
                     atts = intacttagAttributes; // Restore attributes
+                }
             }
 
             return dialect.validateIntactTag(tag, atts);
@@ -795,8 +815,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     void setTranslatableTag(String tag, org.omegat.filters3.Attributes atts) {
 
         if (!isTranslatableTag()) { // If stack is empty
-            if (dialect.validateTranslatableTag(tag, atts))
+            if (dialect.validateTranslatableTag(tag, atts)) {
                 translatableTagName.push(tag);
+            }
         } else {
             translatableTagName.push(tag);
         }
@@ -806,8 +827,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * Remove a tag from the stack of translatable tags
      */
     void removeTranslatableTag() {
-        if (isTranslatableTag()) // If there is something in the stack
+        if (isTranslatableTag()) { // If there is something in the stack
             translatableTagName.pop(); // Remove it
+        }
     }
 
     private void translatorTagStart(String tag, Attributes atts) {
@@ -857,10 +879,11 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
 
     /** Returns a shortcut for a tag. Queries dialect first, else returns null. */
     private String getShortcut(String tag) {
-        if (dialect.getShortcuts() != null)
+        if (dialect.getShortcuts() != null) {
             return dialect.getShortcuts().get(tag);
-        else
+        } else {
             return null;
+        }
     }
 
     /**
@@ -931,23 +954,26 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     /** Receive notification of character data inside an element. */
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
-        if (inDTD)
+        if (inDTD) {
             return;
+        }
         queueText(new String(ch, start, length));
     }
 
     /** Receive notification of ignorable whitespace in element content. */
     @Override
     public void ignorableWhitespace(char[] ch, int start, int length) throws SAXException {
-        if (inDTD)
+        if (inDTD) {
             return;
+        }
         queueText(new String(ch, start, length));
     }
 
     /** Receive notification of an XML comment anywhere in the document. */
     public void comment(char[] ch, int start, int length) throws SAXException {
-        if (inDTD)
+        if (inDTD) {
             return;
+        }
         queueComment(new String(ch, start, length));
     }
 
@@ -957,8 +983,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      */
     @Override
     public void processingInstruction(String target, String data) throws SAXException {
-        if (inDTD)
+        if (inDTD) {
             return;
+        }
         queueProcessingInstruction(target, data);
     }
 
@@ -1068,8 +1095,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * Report an internal entity declaration.
      */
     public void internalEntityDecl(String name, String value) throws SAXException {
-        if (inDTD)
+        if (inDTD) {
             return;
+        }
         Entity entity = new Entity(name, value);
         internalEntities.put(name, entity);
         dtd.addEntity(entity);
@@ -1079,12 +1107,14 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * Report a parsed external entity declaration.
      */
     public void externalEntityDecl(String name, String publicId, String systemId) throws SAXException {
-        if (inDTD)
+        if (inDTD) {
             return;
+        }
         try {
             Entity entity = new Entity(name, publicId, localizeSystemId(systemId));
-            if (isInSource(systemId))
+            if (isInSource(systemId)) {
                 externalEntities.add(entity);
+            }
             dtd.addEntity(entity);
         } catch (MalformedURLException ex) {
             throw new SAXException(ex);

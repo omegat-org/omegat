@@ -469,7 +469,7 @@ public abstract class TestFilterBase extends TestCore {
     }
 
     protected void checkAlignById(String id, String source, String translation, String path) {
-        for(AlignedEntry en:al) {
+        for (AlignedEntry en : al) {
             if (id.equals(en.id)) {
                 assertEquals(source, en.source);
                 assertEquals(translation, en.translation);

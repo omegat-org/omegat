@@ -1118,7 +1118,7 @@ public class AlignPanelController {
         private final JCheckBox checkBox = new JCheckBox();
         private final AttributeSet highlight;
 
-        public MultilineCellRenderer() {
+        MultilineCellRenderer() {
             // textArea.setLineWrap(true);
             // textArea.setWrapStyleWord(true);
             textArea.setOpaque(true);
@@ -1219,7 +1219,7 @@ public class AlignPanelController {
         List<String> rowToSourceLine;
         List<String> rowToTargetLine;
 
-        public BeadTableModel(List<MutableBead> data) {
+        BeadTableModel(List<MutableBead> data) {
             this.data = data;
             makeCache();
         }
@@ -2008,7 +2008,7 @@ public class AlignPanelController {
         private final int[] rows;
         private final int[] cols;
 
-        public TableSelection(int[] rows, int[] cols) {
+        TableSelection(int[] rows, int[] cols) {
             this.rows = rows;
             this.cols = cols;
         }
@@ -2083,7 +2083,7 @@ public class AlignPanelController {
     static class EnumRenderer<T extends Enum<?>> extends DelegatingComboBoxRenderer<T, String> {
         private final String keyPrefix;
 
-        public EnumRenderer(String keyPrefix) {
+        EnumRenderer(String keyPrefix) {
             this.keyPrefix = keyPrefix;
         }
 

@@ -45,7 +45,7 @@ import org.madlonkay.supertmxmerge.util.ReflectionUtil;
  *
  * @author Aaron Madlon-Kay <aaron@madlon-kay.com>
  */
-public class SyncTMX implements ITmx {
+public final class SyncTMX implements ITmx {
 
     private ProjectTMX tmx;
     private final String name;
@@ -250,7 +250,7 @@ public class SyncTMX implements ITmx {
         private final TMXEntry tmxEntry;
         private final String targetLanguage;
 
-        public SyncTu(TMXEntry tmxEntry, String targetLanguage) {
+        SyncTu(TMXEntry tmxEntry, String targetLanguage) {
             this.tmxEntry = tmxEntry;
             this.targetLanguage = targetLanguage;
         }
@@ -273,7 +273,7 @@ public class SyncTMX implements ITmx {
         private final String language;
         private Map<String, String> props;
 
-        public SyncTuv(TMXEntry tmxEntry, String language) {
+        SyncTuv(TMXEntry tmxEntry, String language) {
             this.tmxEntry = tmxEntry;
             this.language = language;
         }
@@ -303,12 +303,15 @@ public class SyncTMX implements ITmx {
 
         @Override
         public boolean equals(Object obj) {
-            if (this == obj)
+            if (this == obj) {
                 return true;
-            if (obj == null)
+            }
+            if (obj == null) {
                 return false;
-            if (getClass() != obj.getClass())
+            }
+            if (getClass() != obj.getClass()) {
                 return false;
+            }
             final SyncTuv other = (SyncTuv) obj;
             return tmxEntry.equals(other.tmxEntry) && this.language.equals(other.language);
         }

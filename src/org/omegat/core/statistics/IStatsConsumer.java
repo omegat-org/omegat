@@ -33,17 +33,17 @@ package org.omegat.core.statistics;
  * @author Aaron Madlon-Kay
  */
 public interface IStatsConsumer {
-    public void appendTextData(String result);
+    void appendTextData(String result);
 
-    public void appendTable(String title, String[] headers, String[][] data);
+    void appendTable(String title, String[] headers, String[][] data);
 
-    public void setTextData(String data);
+    void setTextData(String data);
 
-    public void setTable(String[] headers, String[][] data);
+    void setTable(String[] headers, String[][] data);
 
-    public void setDataFile(String path);
+    void setDataFile(String path);
 
-    public void finishData();
+    void finishData();
 
-    public void showProgress(int percent);
+    void showProgress(int percent);
 }

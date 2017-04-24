@@ -47,14 +47,14 @@ import org.xml.sax.InputSource;
  * @author Didier Briel
  * @author Martin Wunderlich
  */
-public class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
+public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
     // Note: Add parameter &mt=0 to suppress MT results from being included in the TMX response; omit this
     // parameter to include MT results
     protected static final String GT_URL2 = "&langpair=#sourceLang#|#targetLang#&of=#format#&mt=0";
 
     @Override
     protected String getPreferenceName() {
-    	return Preferences.ALLOW_MYMEMORY_HUMAN_TRANSLATE;
+        return Preferences.ALLOW_MYMEMORY_HUMAN_TRANSLATE;
     }
 
     @Override
@@ -75,9 +75,7 @@ public class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
         // Get MyMemory response in TMX format
         try {
             tmxResponse = getMyMemoryResponse(sLang, tLang, text, "tmx");
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             return e.getLocalizedMessage();
         }
 
@@ -109,16 +107,18 @@ public class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
         return bestHumanTranslation;
     }
 
-	/**
-	 * Builds the URL for the XML query
-	 */
+    /**
+     * Builds the URL for the XML query
+     */
     @Override
-    protected String buildMyMemoryUrl(Language sLang, Language tLang, String text, String format) throws UnsupportedEncodingException {
-    	String sourceLang = mymemoryCode(sLang);
-    	String targetLang = mymemoryCode(tLang);
-    	String url2 = GT_URL2.replace("#sourceLang#", sourceLang).replace("#targetLang#", targetLang).replace("#format#", format);
-    	String url = GT_URL + URLEncoder.encode(text, "UTF-8") + url2;
+    protected String buildMyMemoryUrl(Language sLang, Language tLang, String text, String format)
+            throws UnsupportedEncodingException {
+        String sourceLang = mymemoryCode(sLang);
+        String targetLang = mymemoryCode(tLang);
+        String url2 = GT_URL2.replace("#sourceLang#", sourceLang).replace("#targetLang#", targetLang)
+                .replace("#format#", format);
+        String url = GT_URL + URLEncoder.encode(text, "UTF-8") + url2;
 
-    	return url;
+        return url;
     }
 }

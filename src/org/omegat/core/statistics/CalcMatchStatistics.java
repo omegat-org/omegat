@@ -305,8 +305,9 @@ public class CalcMatchStatistics extends LongProcessThread {
             }
             if (newSimilarity > maxSimilarity) {
                 maxSimilarity = newSimilarity;
-                if (newSimilarity >= 95) // enough to say that we are in row 2
+                if (newSimilarity >= 95) { // enough to say that we are in row 2
                     break CACHE;
+                }
             }
         }
         return maxSimilarity;

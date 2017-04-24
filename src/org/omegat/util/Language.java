@@ -66,8 +66,9 @@ public class Language implements Comparable<Object> {
 
     /** Creates a new instance of Language, based on Locale */
     public Language(Locale locale) {
-        if (locale != null)
+        if (locale != null) {
             this.locale = locale;
+        }
         this.languageCode = this.locale.getLanguage();
         this.countryCode = this.locale.getCountry();
     }
@@ -90,8 +91,9 @@ public class Language implements Comparable<Object> {
             Matcher m = PatternConsts.LANG_AND_COUNTRY.matcher(str);
             if (m.matches() && m.groupCount() >= 1) {
                 this.languageCode = m.group(1);
-                if (m.group(2) != null)
+                if (m.group(2) != null) {
                     this.countryCode = m.group(2);
+                }
                 this.locale = new Locale(this.languageCode.toLowerCase(Locale.ENGLISH),
                         this.countryCode.toUpperCase(Locale.ENGLISH));
             }
@@ -134,8 +136,9 @@ public class Language implements Comparable<Object> {
         } else {
             // Patch Java locale, to return correct locales instead of obsolete codes
             String returnString = locale.toString();
-            if (returnString.length()<2)
+            if (returnString.length() < 2) {
                 return returnString; // We cannot test a locale of less than 2 characters
+            }
             if (returnString.substring(0, 2).equalsIgnoreCase("in")) {
                 returnString = "id" + returnString.substring(2);
             } else if (returnString.substring(0, 2).equalsIgnoreCase("iw")) {
@@ -166,20 +169,22 @@ public class Language implements Comparable<Object> {
      * Returns only a language (XX).
      */
     public String getLanguageCode() {
-        if (this.languageCode == null)
+        if (this.languageCode == null) {
             return "";
-        else
+        } else {
             return this.languageCode;
+        }
     }
 
     /**
      * Returns only a country (YY).
      */
     public String getCountryCode() {
-        if (this.countryCode == null)
+        if (this.countryCode == null) {
             return "";
-        else
+        } else {
             return this.countryCode;
+        }
     }
 
     /**
@@ -637,12 +642,15 @@ public class Language implements Comparable<Object> {
      */
     @Override
     public boolean equals(Object lang) {
-        if (this == lang)
+        if (this == lang) {
             return true;
-        if (lang == null)
+        }
+        if (lang == null) {
             return false;
-        if (!(lang instanceof Language))
+        }
+        if (!(lang instanceof Language)) {
             return false;
+        }
         Language that = (Language) lang;
         return this.getLocaleCode().equals(that.getLocaleCode());
     }
@@ -657,9 +665,9 @@ public class Language implements Comparable<Object> {
     }
 
 	public int compareTo(Object o) {
-		if (o instanceof Language) {
-			return this.getLanguage().compareTo(((Language)o).getLanguage());
-		}
+        if (o instanceof Language) {
+            return this.getLanguage().compareTo(((Language) o).getLanguage());
+        }
 		return this.getLanguage().compareTo(o.toString());
 	}
 

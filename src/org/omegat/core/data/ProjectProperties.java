@@ -113,7 +113,7 @@ public class ProjectProperties {
         setTargetTokenizer(PluginUtils.getTokenizerClassForLanguage(getTargetLanguage()));
     }
 
-	/** Returns The Target (Compiled) Files Directory */
+    /** Returns The Target (Compiled) Files Directory */
     public String getTargetRoot() {
         return targetDir.getAsString();
     }
@@ -355,12 +355,12 @@ public class ProjectProperties {
      * Returns whether The Sentence Segmenting is Enabled for this Project. Default, Yes.
      */
     public boolean isSentenceSegmentingEnabled() {
-        return sentenceSegmentingOn;
+        return sentenceSegmentingEnabled;
     }
 
     /** Sets whether The Sentence Segmenting is Enabled for this Project */
-    public void setSentenceSegmentingEnabled(boolean sentenceSegmentingOn) {
-        this.sentenceSegmentingOn = sentenceSegmentingOn;
+    public void setSentenceSegmentingEnabled(boolean sentenceSegmentingEnabled) {
+        this.sentenceSegmentingEnabled = sentenceSegmentingEnabled;
     }
 
     public boolean isSupportDefaultTranslations() {
@@ -500,7 +500,7 @@ public class ProjectProperties {
     private Class<?> sourceTokenizer;
     private Class<?> targetTokenizer;
 
-    private boolean sentenceSegmentingOn;
+    private boolean sentenceSegmentingEnabled;
     private boolean supportDefaultTranslations;
     private boolean removeTags;
 
@@ -520,7 +520,7 @@ public class ProjectProperties {
     /**
      * Class for support project path functionality, like relative path, etc.
      */
-    public class ProjectPath {
+    public final class ProjectPath {
         private final boolean isDirectory;
         private File fs;
         /** Null if path is not under project root */

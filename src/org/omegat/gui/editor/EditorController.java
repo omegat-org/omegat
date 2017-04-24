@@ -807,8 +807,9 @@ public class EditorController implements IEditor {
             return;
         }
 
-        if (!Core.getProject().isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded()) {
             return;
+        }
 
         SegmentBuilder builder = m_docSegList[displayedEntryIndex];
 
@@ -1004,14 +1005,12 @@ public class EditorController implements IEditor {
             nfPer.setRoundingMode(java.math.RoundingMode.DOWN);
             nfPer.setMaximumFractionDigits(1);
 
-            String message = StringUtil.format( OStrings.getString("MW_PROGRESS_DEFAULT_PERCENTAGE"),
-                    (translatedUniqueInFile == 0) ? "0%" :
-                            nfPer.format((double)translatedUniqueInFile / uniqueInFile),
+            String message = StringUtil.format(OStrings.getString("MW_PROGRESS_DEFAULT_PERCENTAGE"),
+                    (translatedUniqueInFile == 0) ? "0%" : nfPer.format((double) translatedUniqueInFile / uniqueInFile),
                     uniqueInFile - translatedUniqueInFile,
-                    (stat.numberofTranslatedSegments == 0) ? "0%" :
-                            nfPer.format((double)stat.numberofTranslatedSegments / stat.numberOfUniqueSegments),
-                    stat.numberOfUniqueSegments - stat.numberofTranslatedSegments,
-                    stat.numberOfSegmentsTotal);
+                    (stat.numberofTranslatedSegments == 0) ? "0%"
+                            : nfPer.format((double) stat.numberofTranslatedSegments / stat.numberOfUniqueSegments),
+                    stat.numberOfUniqueSegments - stat.numberofTranslatedSegments, stat.numberOfSegmentsTotal);
 
             mw.showProgressMessage(message);
         }
@@ -1123,14 +1122,14 @@ public class EditorController implements IEditor {
                 break;
             }
         } else { // translation from editor
-            if (newTrans.isEmpty()) {// empty translation
+            if (newTrans.isEmpty()) { // empty translation
                 if (oldTE.isTranslated() && "".equals(oldTE.translation)) {
                     // It's an empty translation which should remain empty
                     newen.translation = "";
                 } else {
-                    newen.translation = null;// will be untranslated
+                    newen.translation = null; // will be untranslated
                 }
-            } else if (newTrans.equals(newen.source)) {// equals to source
+            } else if (newTrans.equals(newen.source)) { // equals to source
                 if (Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)) {
                     // translation can be equals to source
                     newen.translation = newTrans;
@@ -1278,8 +1277,9 @@ public class EditorController implements IEditor {
     private void iterateToEntry(boolean forward, Predicate<SourceTextEntry> shouldStop) {
         UIThreadsUtil.mustBeSwingThread();
 
-        if (!Core.getProject().isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded()) {
             return;
+        }
 
         Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
         Cursor oldCursor = editor.getCursor();
@@ -1321,7 +1321,7 @@ public class EditorController implements IEditor {
             }
             ste = getCurrentEntry();
             if (ste != null && shouldStop.test(ste)) {
-            	break;
+                break;
             }
             if (looped && displayedFileIndex == startFileIndex) {
                 if (forward && displayedEntryIndex >= startEntryIndex) {
@@ -1468,8 +1468,9 @@ public class EditorController implements IEditor {
     public void gotoEntry(final int entryNum, final CaretPosition pos) {
         UIThreadsUtil.mustBeSwingThread();
 
-        if (!Core.getProject().isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded()) {
             return;
+        }
 
         if (m_docSegList == null) {
             // document didn't loaded yet
@@ -1657,7 +1658,8 @@ public class EditorController implements IEditor {
 
         SegmentBuilder builder = m_docSegList[displayedEntryIndex];
         if (builder.hasRTL && targetLangIsRTL) {
-            text = EditorUtils.addBidiAroundTags(EditorUtils.removeDirectionCharsAroundTags(text, builder.ste), builder.ste);
+            text = EditorUtils.addBidiAroundTags(EditorUtils.removeDirectionCharsAroundTags(text, builder.ste),
+                    builder.ste);
         }
 
         // build local offsets
@@ -1769,7 +1771,8 @@ public class EditorController implements IEditor {
 
         SegmentBuilder builder = m_docSegList[displayedEntryIndex];
         if (builder.hasRTL && targetLangIsRTL) {
-            text = EditorUtils.addBidiAroundTags(EditorUtils.removeDirectionCharsAroundTags(text, builder.ste), builder.ste);
+            text = EditorUtils.addBidiAroundTags(EditorUtils.removeDirectionCharsAroundTags(text, builder.ste),
+                    builder.ste);
         }
         editor.replaceSelection(text);
     }
@@ -2092,10 +2095,10 @@ public class EditorController implements IEditor {
     @SuppressWarnings("serial")
     public AlphabeticalMarkers getAlphabeticalMarkers() {
         return new AlphabeticalMarkers(scrollPane) {
+            static final int UPPER_GAP = 5;
 
             @Override
             protected Map<Integer, Point> getViewableSegmentLocations() {
-                final int UPPER_GAP = 5;
                 Map<Integer, Point> map = new LinkedHashMap<Integer, Point>(); // keep putting order
 
                 // no segments

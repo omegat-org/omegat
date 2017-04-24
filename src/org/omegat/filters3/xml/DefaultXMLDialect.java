@@ -66,8 +66,9 @@ public class DefaultXMLDialect implements XMLDialect {
 
     /** Defines a set of paragraph tags from an array. Allows duplicates. */
     public void defineParagraphTags(String[] tags) {
-        for (String tag : tags)
+        for (String tag : tags) {
             defineParagraphTag(tag);
+        }
     }
 
     /** The set of defined content based tags. */
@@ -87,8 +88,9 @@ public class DefaultXMLDialect implements XMLDialect {
 
     /** Defines a set of preformat tags from an array. Allows duplicates. */
     public void definePreformatTags(String[] tags) {
-        for (String tag : tags)
+        for (String tag : tags) {
             definePreformatTag(tag);
+        }
     }
 
     /** The set of defined tags that surround intact text. */
@@ -101,8 +103,9 @@ public class DefaultXMLDialect implements XMLDialect {
 
     /** Defines a set of intact tags from an array. Allows duplicates. */
     public void defineIntactTags(String[] tags) {
-        for (String tag : tags)
+        for (String tag : tags) {
             defineIntactTag(tag);
+        }
     }
 
     /** The set of defined paragraph tags. */
@@ -115,14 +118,16 @@ public class DefaultXMLDialect implements XMLDialect {
 
     /** Defines translatable attributes of a tag. */
     public void defineTranslatableTagAttributes(String tag, String[] attributes) {
-        for (String attr : attributes)
+        for (String attr : attributes) {
             defineTranslatableTagAttribute(tag, attr);
+        }
     }
 
     /** Defines translatable attribute of several tags. */
     public void defineTranslatableTagsAttribute(String[] tags, String attribute) {
-        for (String tag : tags)
+        for (String tag : tags) {
             defineTranslatableTagAttribute(tag, attribute);
+        }
     }
 
     /** The set of defined paragraph tags. */
@@ -140,8 +145,9 @@ public class DefaultXMLDialect implements XMLDialect {
      * to).
      */
     public void defineTranslatableAttributes(String[] attributes) {
-        for (String attr : attributes)
+        for (String attr : attributes) {
             defineTranslatableAttribute(attr);
+        }
     }
 
     /**
@@ -163,8 +169,9 @@ public class DefaultXMLDialect implements XMLDialect {
      * be translated separately, not breaking currently collected text.
      */
     public void defineOutOfTurnTags(String[] tags) {
-        for (String tag : tags)
+        for (String tag : tags) {
             defineOutOfTurnTag(tag);
+        }
     }
 
     Map<Integer, Pattern> constraints = new HashMap<Integer, Pattern>();
@@ -207,8 +214,9 @@ public class DefaultXMLDialect implements XMLDialect {
      *            tags, and odd elements are their corresponding shortcuts.
      */
     public void defineShortcuts(String[] mappings) {
-        for (int i = 0; i < mappings.length / 2; i++)
+        for (int i = 0; i < mappings.length / 2; i++) {
             defineShortcut(mappings[2 * i], mappings[2 * i + 1]);
+        }
     }
 
     // /////////////////////////////////////////////////////////////////////////

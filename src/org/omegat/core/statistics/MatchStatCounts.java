@@ -138,7 +138,7 @@ public class MatchStatCounts {
         if (rows.length != counts.length + 1) {
             throw new IllegalArgumentException("Must supply headers for " + (counts.length + 1) + " rows");
         }
-        return calcTable(rows, i-> true);
+        return calcTable(rows, i -> true);
     }
 
     /**

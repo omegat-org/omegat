@@ -814,11 +814,7 @@ remotes {
         host = 'web.sourceforge.net'
         user = findProperty('sourceforgeWebUser')
         password = findProperty('sourceforgeWebPassword')
-        if (!password) {
-            def ident = findProperty('sourceforgeWebIdentity')
-            identity = ident ? file(ident) : null
-            passphrase = findProperty('sourceforgeWebPassphrase')
-        }
+        agent = true
     }
 }
 

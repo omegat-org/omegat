@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -27,7 +27,7 @@ package org.omegat.core.events;
 
 /**
  * Listener interface for application event, like startup and shutdown.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IApplicationEventListener {
@@ -39,7 +39,7 @@ public interface IApplicationEventListener {
 
     /**
      * Called on application shutdown.
-     * 
+     *
      * CAN BE EXECUTED IN ANY THREAD !
      */
     void onApplicationShutdown();

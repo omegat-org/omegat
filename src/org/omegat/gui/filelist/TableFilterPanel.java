@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
@@ -62,7 +62,6 @@ public class TableFilterPanel extends javax.swing.JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(filterCloseButton, OStrings.getString("PF_FILTER_BUTTON_CLOSE")); // NOI18N
         add(filterCloseButton, java.awt.BorderLayout.EAST);
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton filterCloseButton;

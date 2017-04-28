@@ -9,7 +9,8 @@ OmegaT will run on the latest Java, but is required to be compatible with Java
 thus recommended to build with Oracle JDK 1.8.
 
 Eclipse and NetBeans are recommended IDEs for working with OmegaT source
-code. NetBeans is required to modify *.form-based GUI layouts.
+code. NetBeans is required to modify *.form-based GUI layouts (install the
+Gradle Support plugin to open the OmegaT project in NetBeans.)
 
 Check the other files in this directory for documentation. You can
 produce Javadoc by running `gradlew javadoc`, or browse online:

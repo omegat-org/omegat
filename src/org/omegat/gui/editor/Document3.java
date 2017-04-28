@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
@@ -44,7 +44,7 @@ import org.omegat.util.gui.Styles;
 
 /**
  * We need to redefine some standard document behavior.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  * @author Zoltan Bartko
@@ -90,14 +90,14 @@ public class Document3 extends DefaultStyledDocument {
      * {@link StaticUIUtils#setCaretUpdateEnabled(javax.swing.text.JTextComponent, boolean)}
      * ). After the document changes are complete and you have set this flag
      * back to false, caret update can be re-enabled.
-     * 
+     *
      * @see <a href="https://sourceforge.net/p/omegat/bugs/162/">Initial
      *      ticket</a>
      * @see <a href="https://sourceforge.net/p/omegat/bugs/529/">Later, more
      *      specific ticket</a>
      */
     protected boolean trustedChangesInProgress = false;
-    
+
     /**
      * Flag to indicate that text is currently being composed (should
      * not be considered to have been input yet) by an IME.
@@ -112,12 +112,12 @@ public class Document3 extends DefaultStyledDocument {
         StyleConstants.setBackground(defaultStyle, Styles.EditorColor.COLOR_BACKGROUND.getColor());
         setFont(controller.font);
     }
-    
+
     private Style getDefaultStyle() {
         StyleContext styleContext = (StyleContext) getAttributeContext();
         return styleContext.getStyle(StyleContext.DEFAULT_STYLE);
     }
-    
+
     void setFont(Font font) {
         Style defaultStyle = getDefaultStyle();
         StyleConstants.setFontFamily(defaultStyle, font.getFamily());
@@ -158,7 +158,7 @@ public class Document3 extends DefaultStyledDocument {
 
     /**
      * Extract active translation.
-     * 
+     *
      * @return active translation text
      */
     String extractTranslation() {
@@ -176,7 +176,7 @@ public class Document3 extends DefaultStyledDocument {
 
     /**
      * Set alignment for specified part of text.
-     * 
+     *
      * @param beginOffset
      *            begin offset
      * @param endOffset

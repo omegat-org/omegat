@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Kim Bruning
@@ -119,7 +119,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * Controller for showing all the files of the project.
- * 
+ *
  * @author Keith Godfrey
  * @author Kim Bruning
  * @author Maxym Mykhalchuk
@@ -141,20 +141,20 @@ public class ProjectFilesListController {
     private Sorter currentSorter;
 
     private TableFilterPanel filterPanel;
-    
+
     private Font defaultFont;
-    
+
     public ProjectFilesListController(MainWindow parent) {
 
         list = new ProjectFilesList();
-        
+
         if (Platform.isMacOSX()) {
             OSXIntegration.enableFullScreen(list);
         }
 
         createTableFiles();
         createTableTotal();
-        
+
         TableColumnSizer colSizer = TableColumnSizer.autoSize(list.tableFiles, 0, true);
         colSizer.addColumnAdjustmentListener(new ActionListener() {
             @Override
@@ -162,7 +162,7 @@ public class ProjectFilesListController {
                 propagateTableColumns();
             }
         });
-        
+
         DragTargetOverlay.apply(list.tableFiles, new FileDropInfo(true) {
             @Override
             public String getImportDestination() {
@@ -186,7 +186,7 @@ public class ProjectFilesListController {
                 return list.tablesInnerPanel;
             }
         });
-        
+
         defaultFont = list.tableFiles.getFont();
         if (Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
             String fontName = Preferences.getPreference(Preferences.TF_SRC_FONT_NAME);
@@ -197,7 +197,7 @@ public class ProjectFilesListController {
         }
 
         list.tablesInnerPanel.setBorder(new JScrollPane().getBorder());
-        
+
         // set the position and size
         initWindowLayout();
 
@@ -328,7 +328,7 @@ public class ProjectFilesListController {
                 }
             }
         });
-        
+
         list.tableFiles.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -356,13 +356,13 @@ public class ProjectFilesListController {
         list.btnDown.addKeyListener(filterTrigger);
         list.btnFirst.addKeyListener(filterTrigger);
         list.btnLast.addKeyListener(filterTrigger);
-        
+
         list.btnUp.addActionListener(moveAction);
         list.btnDown.addActionListener(moveAction);
         list.btnFirst.addActionListener(moveAction);
         list.btnLast.addActionListener(moveAction);
     }
-    
+
     private void updateTitle() {
         int numFiles = currentSorter.getModelRowCount();
         if (isFiltering()) {
@@ -477,7 +477,7 @@ public class ProjectFilesListController {
             }
         }
     };
-    
+
     private void startFilter(char c) {
         if (isFiltering()) {
             throw new IllegalStateException("Already filtering!");
@@ -545,7 +545,7 @@ public class ProjectFilesListController {
         list.validate();
         list.repaint();
     }
-    
+
     private boolean isFiltering() {
         return filterPanel != null;
     }
@@ -562,7 +562,7 @@ public class ProjectFilesListController {
             // Nothing
         }
     }
-    
+
     private void applyFilter() {
         if (!isFiltering()) {
             throw new IllegalStateException("Can't apply filter when we're not filtering!");
@@ -593,7 +593,7 @@ public class ProjectFilesListController {
         list.validate();
         list.repaint();
     }
-    
+
     ActionListener moveAction = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -603,7 +603,7 @@ public class ProjectFilesListController {
             }
 
             int pos = selected[0];
-            
+
             int newPos;
             if (e.getSource() == list.btnUp) {
                 newPos = pos - 1;
@@ -666,7 +666,7 @@ public class ProjectFilesListController {
         list.tableFiles.getSelectionModel().setSelectionInterval(row, row);
         list.tableFiles.scrollRectToVisible(list.tableFiles.getCellRect(row, 0, true));
     }
-    
+
     /**
      * Loads/sets the position and size of the project files window.
      */
@@ -711,13 +711,13 @@ public class ProjectFilesListController {
         DataTableStyling.applyColors(list.tableFiles);
         list.tableFiles.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     }
-    
+
     private void propagateTableColumns() {
         // Set last column of tableTotal to match size of scrollbar.
         JScrollBar scrollbar = list.scrollFiles.getVerticalScrollBar();
         int sbWidth = scrollbar == null || !scrollbar.isVisible() ? 0 : scrollbar.getWidth();
         list.tableTotal.getColumnModel().getColumn(list.tableTotal.getColumnCount() - 1).setPreferredWidth(sbWidth);
-        
+
         // Propagate column sizes to totals table
         for (int i = 0; i < list.tableFiles.getColumnCount(); i++) {
             TableColumn srcCol = list.tableFiles.getColumnModel().getColumn(i);
@@ -899,11 +899,11 @@ public class ProjectFilesListController {
     private TableCellRenderer getNumberCellRenderer(List<IProject.FileInfo> files) {
         return new CustomRenderer(files, DataTableStyling.getNumberCellRenderer());
     }
-    
+
     private TableCellRenderer getTextCellRenderer(List<IProject.FileInfo> files) {
         return new CustomRenderer(files, DataTableStyling.getTextCellRenderer());
     }
-    
+
     private static final Color COLOR_SPECIAL_FG = Color.BLACK;
     private static final Color COLOR_SPECIAL_BG = new Color(0xC8DDF2);
 
@@ -914,7 +914,7 @@ public class ProjectFilesListController {
 
         private final List<IProject.FileInfo> files;
         private final TableCellRenderer childRenderer;
-        
+
         public CustomRenderer(List<IProject.FileInfo> files, TableCellRenderer childRenderer) {
             this.files = files;
             this.childRenderer = childRenderer;
@@ -1051,7 +1051,7 @@ public class ProjectFilesListController {
                 }
             }
         }
-        
+
         private void applyPrefs() {
             List<String> filenames = files.stream().map(fi -> fi.filePath)
                     .sorted(StreamUtil.comparatorByList(Core.getProject().getSourceFilesOrder()))
@@ -1229,7 +1229,7 @@ public class ProjectFilesListController {
             }
             Core.getProject().setSourceFilesOrder(filenames);
         }
-        
+
         public void setFilter(Pattern pattern) {
             if (filter == pattern || pattern != null && pattern.equals(filter)) {
                 return;
@@ -1240,7 +1240,7 @@ public class ProjectFilesListController {
             sort();
             fireRowSorterChanged(lastViewToModel);
         }
-        
+
         private boolean include(IProject.FileInfo item) {
             if (filter == null) {
                 return true;

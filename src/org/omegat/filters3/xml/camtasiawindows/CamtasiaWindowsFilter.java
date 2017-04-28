@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -33,7 +33,7 @@ import org.omegat.util.OStrings;
 
 /**
  * Filter for Camtasia for Windows files.
- * 
+ *
  * @author Guido Leenders
  */
 public class CamtasiaWindowsFilter extends XMLFilter {
@@ -47,7 +47,7 @@ public class CamtasiaWindowsFilter extends XMLFilter {
 
     /**
      * Human-readable name of the File Format this filter supports.
-     * 
+     *
      * @return File format name
      */
     public String getFileFormatName() {
@@ -60,7 +60,7 @@ public class CamtasiaWindowsFilter extends XMLFilter {
      * file mask, encoding of the source file etc.
      * <p>
      * Note that the user may change the instances freely.
-     * 
+     *
      * @return Default filter instances
      */
     public Instance[] getDefaultInstances() {
@@ -69,7 +69,7 @@ public class CamtasiaWindowsFilter extends XMLFilter {
 
     /**
      * Either the encoding can be read, or it is UTF-8.
-     * 
+     *
      * @return <code>false</code>
      */
     @Override
@@ -79,14 +79,14 @@ public class CamtasiaWindowsFilter extends XMLFilter {
 
     /**
      * No, Camtasia for Windows does not seem to like many XML encodings.
-     * 
+     *
      * @return <code>true</code>
      */
     @Override
     public boolean isTargetEncodingVariable() {
         return false;
     }
-    
+
     @Override
     protected boolean requirePrevNextFields() {
         return true;

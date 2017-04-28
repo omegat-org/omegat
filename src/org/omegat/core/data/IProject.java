@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -37,7 +37,7 @@ import org.omegat.util.Language;
 
 /**
  * Interface for access to loaded project. Each loaded project will be new instance of IProject.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  */
@@ -80,14 +80,14 @@ public interface IProject {
 
     /**
      * Get project properties.
-     * 
+     *
      * @return project properties
      */
     ProjectProperties getProjectProperties();
 
     /**
      * Get project loaded status.
-     * 
+     *
      * @return true if project loaded
      */
     boolean isProjectLoaded();
@@ -114,9 +114,9 @@ public interface IProject {
 
     /**
      * Set translation for entry.
-     * 
+     *
      * Optimistic locking will not be checked.
-     * 
+     *
      * @param entry
      *            entry
      * @param trans
@@ -129,7 +129,7 @@ public interface IProject {
      * Set translation for entry with optimistic lock checking: if previous translation is not the same like
      * in storage, OptimisticLockingFail exception will be generated. Use when user has typed a new
      * translation.
-     * 
+     *
      * @param entry
      *            entry
      * @param trans
@@ -141,7 +141,7 @@ public interface IProject {
 
     /**
      * Change note only for translation.
-     * 
+     *
      * @param entry
      *            entry
      * @param oldTrans
@@ -153,7 +153,7 @@ public interface IProject {
 
     /**
      * Get statistics for project.
-     * 
+     *
      * @return
      */
     StatisticsInfo getStatistics();
@@ -163,7 +163,7 @@ public interface IProject {
      * ALWAYS returns TMXEntry, because note can exist even for non-translated segment. Use
      * TMXEntry.isTranslated() for check if translation text really exist. Translation can be checked for
      * default/alternative by the TMXEntry.defaultTranslation.
-     * 
+     *
      * @param ste
      *            source entry
      * @return translation
@@ -197,14 +197,14 @@ public interface IProject {
 
     /**
      * Get all translation memories from /tm/ folder.
-     * 
+     *
      * @return translation memories
      */
     Map<String, ExternalTMX> getTransMemories();
-    
+
     /**
      * Get all translation memories from /other_lang/ folder.
-     * 
+     *
      * @return translation memories
      */
     Map<Language, ProjectTMX> getOtherTargetLanguageTMs();
@@ -221,14 +221,14 @@ public interface IProject {
      * <p>
      * The target path must be calculated because it can depend on project properties such
      * as the target language, etc.
-     * 
+     *
      * @param sourceFile The relative path (under the <code>source</code> directory) of the
      * source file, e.g. <code>Bundle.properties</code>
      * @return The relative path (under the <code>target</code> directory) of the corresponding
      * target file, e.g. <code>Bundle_fr_FR.properties</code>
      */
     String getTargetPathForSourceFile(String sourceFile);
-    
+
     /**
      * Get ordered list of source file names.
      */

@@ -34,7 +34,7 @@ import org.omegat.util.StringUtil;
 
 /**
  * An entry in the glossary.
- * 
+ *
  * @author Keith Godfrey
  * @author Aaron Madlon-Kay
  * @author Alex Buloichik
@@ -59,11 +59,11 @@ public class GlossaryEntry {
 
     /**
      * Return the first target-language term string.
-     * 
+     *
      * Glossary entries can have multiple target strings
      * if they have been combined for display purposes.
      * Access all target strings with {@link GlossaryEntry#getLocTerms(boolean)}.
-     * 
+     *
      * @return The first target-language term string
      */
     public String getLocText() {
@@ -73,13 +73,13 @@ public class GlossaryEntry {
     /**
      * Return each individual target-language term that
      * corresponds to the source term.
-     * 
+     *
      * @param uniqueOnly Whether or not to filter duplicates from the list
      * @return All target-language terms
      */
     public String[] getLocTerms(boolean uniqueOnly) {
         if (!uniqueOnly || m_loc.length == 1) return m_loc;
-        
+
         ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < m_loc.length; i++) {
             if (i > 0 && m_loc[i].equals(m_loc[i - 1])) continue;
@@ -90,14 +90,14 @@ public class GlossaryEntry {
 
     /**
      * Return the first comment string.
-     * 
+     *
      * Glossary entries can have multiple comment strings
      * if they have been combined for display purposes.
      * Access all comment strings with {@link GlossaryEntry#getComments()}.
-     * 
+     *
      * @return The first comment string
      */
-    public String getCommentText() {        
+    public String getCommentText() {
         return m_com.length > 0 ? m_com[0] : "";
     }
 
@@ -118,9 +118,9 @@ public class GlossaryEntry {
 
         result.text.append(m_src);
         result.text.append(" = ");
-        
+
         StringBuilder comments = new StringBuilder();
-        
+
         int commentIndex = 0;
         for (int i = 0; i < m_loc.length; i++) {
             if (i > 0 && m_loc[i].equals(m_loc[i - 1])) {
@@ -148,17 +148,17 @@ public class GlossaryEntry {
                 comments.append(m_com[i]);
             }
         }
-        
+
         result.text.append(comments);
-        
+
         return result;
     }
-    
+
     /**
      * If a combined glossary entry contains ',', it needs to be bracketed by
      * quotes, to prevent confusion when entries are combined. However, if the
      * entry contains ';' or '"', it will automatically be bracketed by quotes.
-     * 
+     *
      * @param entry
      *            A glossary text entry
      * @return A glossary text entry possibly bracketed by quotes
@@ -227,7 +227,7 @@ public class GlossaryEntry {
             return sb.toString().replaceAll("\n", "<br>");
         }
     }
-    
+
     private void normalize(String[] strs) {
         for (int i = 0; i < strs.length; i++) {
             strs[i] = StringUtil.normalizeUnicode(strs[i]);

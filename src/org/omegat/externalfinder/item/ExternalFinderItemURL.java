@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Chihiro Hio, Aaron Madlon-Kay
@@ -164,7 +164,7 @@ public class ExternalFinderItemURL {
 
         /**
          * Check the current builder parameters to see if they constitute a valid URL.
-         * 
+         *
          * @return A sample URL illustrating what the output will look like
          * @throws ExternalFinderValidationException
          *             If any parameter is not valid
@@ -190,7 +190,7 @@ public class ExternalFinderItemURL {
                 throw new ExternalFinderValidationException(e);
             }
         }
-        
+
         public URI generateSampleURL() throws UnsupportedEncodingException, URISyntaxException {
             String findingWords = target == ExternalFinderItem.TARGET.NON_ASCII_ONLY
                     ? "f\u00f8\u00f8 b\u00e5r" : "foo bar";

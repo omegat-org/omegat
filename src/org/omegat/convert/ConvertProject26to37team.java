@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Alex Buloichik
@@ -59,7 +59,7 @@ import gen.core.project.RepositoryMapping;
 /**
  * Check if project is 2.6-style team project, i.e. 'inplace' repository working copy exit. Then convert it
  * into 3.6-style team project.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ConvertProject26to37team {

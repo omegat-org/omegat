@@ -70,7 +70,7 @@ import org.omegat.util.gui.Styles;
 
 /**
  * Changes of standard JEditorPane implementation for support custom behavior.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Wildrich Fourie
@@ -128,7 +128,7 @@ public class EditorTextArea3 extends JEditorPane {
     /**
      * Whether or not we are confining the cursor to the editable part of the
      * text area. The user can optionally allow the caret to roam freely.
-     * 
+     *
      * @see #checkAndFixCaret(boolean)
      */
     protected boolean lockCursorToInputArea = true;
@@ -175,7 +175,7 @@ public class EditorTextArea3 extends JEditorPane {
         setCaretColor(Styles.EditorColor.COLOR_FOREGROUND.getColor());
         setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
     }
-    
+
     @Override
     public void setFont(Font font) {
         super.setFont(font);
@@ -201,7 +201,7 @@ public class EditorTextArea3 extends JEditorPane {
     /**
      * Return true if the specified position is within the active translation
      * @param position
-     * @return 
+     * @return
      */
     public boolean isInActiveTranslation(int position) {
         return (position >= getOmDocument().getTranslationStart()
@@ -212,7 +212,7 @@ public class EditorTextArea3 extends JEditorPane {
         @Override
         public void mouseClicked(MouseEvent e) {
             autoCompleter.setVisible(false);
-            
+
             // Handle double-click
             if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
                 int mousepos = viewToModel(e.getPoint());
@@ -249,7 +249,7 @@ public class EditorTextArea3 extends JEditorPane {
     };
 
     private JPopupMenu makePopupMenu(int pos) {
-        
+
         PopupMenuConstructorInfo[] cons;
         synchronized (popupConstructors) {
             /**
@@ -450,7 +450,7 @@ public class EditorTextArea3 extends JEditorPane {
                 }
             }
             super.processKeyEvent(e);
-            //note that the translation start/end position are not updated yet. This has been updated when then keyreleased event occurs. 
+            //note that the translation start/end position are not updated yet. This has been updated when then keyreleased event occurs.
         }
 
         // some after-processing catches
@@ -481,7 +481,7 @@ public class EditorTextArea3 extends JEditorPane {
 
     /**
      * Move cursor over tag(possible, with selection)
-     * 
+     *
      * @param withShift
      *            true if selection need
      * @param checkTagStart
@@ -537,7 +537,7 @@ public class EditorTextArea3 extends JEditorPane {
 
     /**
      * Whole tag delete before or after cursor
-     * 
+     *
      * @param checkTagStart
      *            true if check tag start, false if check tag end
      * @return true if tag deleted
@@ -571,7 +571,7 @@ public class EditorTextArea3 extends JEditorPane {
     /**
      * Try to select full tag on specified position, in the source and
      * translation part of segment.
-     * 
+     *
      * @param pos
      *            position
      * @return true if selected
@@ -622,7 +622,7 @@ public class EditorTextArea3 extends JEditorPane {
     /**
      * Checks whether the selection & caret is inside editable text, and changes
      * their positions accordingly if not.
-     * 
+     *
      * @param force
      *            When true, ignore {@link #lockCursorToInputArea} and always
      *            fix the caret even if the user has enabled free roaming

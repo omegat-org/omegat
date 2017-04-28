@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -31,7 +31,7 @@ package org.omegat.filters2;
  * while parsing/writing out the file.
  * <p>
  * Note that a filter may also throw IOException in case of any I/O errors.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Aaron Madlon-Kay
  */
@@ -40,7 +40,7 @@ public class TranslationException extends Exception {
     /**
      * Constructs an instance of <code>TranslationException</code> with the
      * specified detail message.
-     * 
+     *
      * @param msg
      *            the detail message.
      */
@@ -51,7 +51,7 @@ public class TranslationException extends Exception {
     /**
      * Constructs an instance of <code>TranslationException</code> with the
      * specified detail message and cause.
-     * 
+     *
      * @param msg
      *            the detail message.
      * @param cause
@@ -64,7 +64,7 @@ public class TranslationException extends Exception {
     /**
      * Constructs an instance of <code>TranslationException</code> with the
      * specified cause.
-     * 
+     *
      * @param cause
      *            cause the cause
      */

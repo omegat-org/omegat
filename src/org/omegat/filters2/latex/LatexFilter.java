@@ -47,7 +47,7 @@ import org.omegat.util.OStrings;
 
 /**
  * Filter to support LaTeX files.
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Thomas Huriaux
@@ -73,7 +73,7 @@ public class LatexFilter extends AbstractFilter {
     public boolean isTargetEncodingVariable() {
         return true;
     }
-    
+
     @Override
     protected boolean requirePrevNextFields() {
         return true;
@@ -128,7 +128,7 @@ public class LatexFilter extends AbstractFilter {
 
     /**
      * Processes a LaTeX document
-     * 
+     *
      * @param in
      *            Source document
      * @param out
@@ -148,7 +148,7 @@ public class LatexFilter extends AbstractFilter {
          */
         String state;
         while ((s = in.readLine()) != null) {
-            // String[] c = s.split(""); In Java 8, that line gave a first empty element, so it was replaced with the 
+            // String[] c = s.split(""); In Java 8, that line gave a first empty element, so it was replaced with the
             // following lines, and idx below was started at 0 instead of 1
             String[] c;
             if (!s.isEmpty()){
@@ -417,7 +417,7 @@ public class LatexFilter extends AbstractFilter {
         for (Iterator<String> it = commands.iterator(); it.hasNext();) {
             String command = it.next();
 
-            if (command.equals("\\\\") || command.equals("\\{") || command.equals("\\[") || command.equals("\\|")) {                
+            if (command.equals("\\\\") || command.equals("\\{") || command.equals("\\[") || command.equals("\\|")) {
                 // continue;
                 command = "\\" + command;
             }

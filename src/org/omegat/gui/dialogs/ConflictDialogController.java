@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Alex Buloichik
@@ -32,12 +32,12 @@ import org.omegat.core.Core;
 
 /**
  * Show conflict dialog.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ConflictDialogController {
     private static final int MAX_CODEPOINTS = 100;
-    
+
     private volatile String result;
 
     public String show(String baseText, String remoteText, String localText) {
@@ -68,7 +68,7 @@ public class ConflictDialogController {
 
         return result;
     }
-    
+
     private static String prepareText(String text) {
         if (text == null) {
             return String.valueOf(text);

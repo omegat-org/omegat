@@ -59,7 +59,7 @@ import gen.taas.TaasTerm;
 
 /**
  * Client for TaaS REST service.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 @SuppressWarnings("serial")

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -48,7 +48,7 @@ import org.xml.sax.Attributes;
 
 /**
  * Filter for XLIFF files.
- * 
+ *
  * @author Didier Briel
  * @author Aaron Madlon-Kay
  * @author Piotr Kulik
@@ -65,7 +65,7 @@ public class XLIFFFilter extends XMLFilter {
     private ArrayList<String> entryText = new ArrayList<String>();
     private ArrayList<List<ProtectedPart>> protectedParts = new ArrayList<List<ProtectedPart>>();
     private HashSet<String> altIDCache = new HashSet<String>();
-    
+
     private String id;
    /**
      * Sets whether alternative translations are identified by previous and next paragraphs or by &lt;trans-unit&gt; ID
@@ -91,7 +91,7 @@ public class XLIFFFilter extends XMLFilter {
 
     /**
      * Human-readable name of the File Format this filter supports.
-     * 
+     *
      * @return File format name
      */
     @Override
@@ -105,19 +105,19 @@ public class XLIFFFilter extends XMLFilter {
      * file mask, encoding of the source file etc.
      * <p>
      * Note that the user may change the instances freely.
-     * 
+     *
      * @return Default filter instances
      */
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.xlf", null, null), 
+        return new Instance[] { new Instance("*.xlf", null, null),
                                 new Instance("*.xliff", null, null),
                                 new Instance("*.sdlxliff", null, null), };
     }
 
     /**
      * Either the encoding can be read, or it is UTF-8.
-     * 
+     *
      * @return <code>false</code>
      */
     @Override
@@ -127,22 +127,22 @@ public class XLIFFFilter extends XMLFilter {
 
     /**
      * Yes, XLIFF may be written out in a variety of encodings.
-     * 
+     *
      * @return <code>true</code>
      */
     @Override
     public boolean isTargetEncodingVariable() {
         return true;
     }
-    
+
     @Override
     protected boolean requirePrevNextFields() {
         return altTransIDType == ID_TYPE.CONTEXT;
     }
-    
+
     /**
      * Returns true to indicate that the XLIFF filter has options.
-     * 
+     *
      * @return True, because the XLIFF filter has options.
      */
     @Override
@@ -152,7 +152,7 @@ public class XLIFFFilter extends XMLFilter {
 
     /**
      * XLIFF Filter shows a <b>modal</b> dialog to edit its own options.
-     * 
+     *
      * @param currentOptions
      *            Current options to edit.
      * @return Updated filter options if user confirmed the changes, and current options otherwise.
@@ -173,9 +173,9 @@ public class XLIFFFilter extends XMLFilter {
             return null;
         }
     }
-    
-    /** 
-     * We're not actually checking whether it is a valid XLIFF file; we just need a place to call defineDialect. 
+
+    /**
+     * We're not actually checking whether it is a valid XLIFF file; we just need a place to call defineDialect.
      */
     @Override
     public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext context) {
@@ -195,7 +195,7 @@ public class XLIFFFilter extends XMLFilter {
         return result;
     }
 
-    /** 
+    /**
      * Support of group and trans-unit resname attribute and trans-unit <note> as comment, based on ResXFilter code
      */
     @Override
@@ -220,7 +220,7 @@ public class XLIFFFilter extends XMLFilter {
     @Override
     public void tagEnd(String path) {
         if (path.endsWith("trans-unit/note")) {
-            // <trans-unit> <note>'s only 
+            // <trans-unit> <note>'s only
             addProperty("note", text.toString());
         } else if (path.endsWith("trans-unit")) {
             if (entryParseCallback != null) {
@@ -240,7 +240,7 @@ public class XLIFFFilter extends XMLFilter {
                 if (resname != null) {
                     addProperty("resname", resname);
                 }
-                                
+
                 for (int i = 0; i < entryText.size(); i++) {
                     entryParseCallback.addEntryWithProperties(getSegID(), entryText.get(i), null, false,
                             finalizeProperties(), null, this, protectedParts.get(i));
@@ -261,19 +261,19 @@ public class XLIFFFilter extends XMLFilter {
             ignored = false;
         }
     }
-    
+
     private void addProperty(String key, String value) {
         props.add(key);
         props.add(value);
     }
-    
+
     private String[] finalizeProperties() {
         if (props.isEmpty()) {
             return null;
         }
         return props.toArray(new String[props.size()]);
     }
-    
+
     private String getSegID() {
         String segID = null;
         switch (altTransIDType) {
@@ -291,7 +291,7 @@ public class XLIFFFilter extends XMLFilter {
         }
         return segID;
     }
-    
+
     String ensureUniqueID(String id) {
     	int i = 0;
     	String tryID;

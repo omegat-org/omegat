@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -46,7 +46,7 @@ import org.omegat.util.PatternConsts;
  * collects all the output inside itself in a string. Then it adds the specified
  * encoding declaration (or replaces the encoding) and writes out the file in
  * the encoding.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
@@ -58,43 +58,46 @@ public class XMLWriter extends Writer {
     private BufferedWriter realWriter;
 
     /** Replacement string for XML header */
-    private String XML_HEADER;
+    private String xmlHeader;
 
     /** Detected EOL chars. */
     private String eol;
 
     /**
      * Creates new XMLWriter.
-     * 
+     *
      * @param fileName
      *            file name to write to
      * @param encoding
      *            encoding to write a file in
      */
-    public XMLWriter(File file, String encoding, String eol) throws FileNotFoundException, UnsupportedEncodingException {
-        if (encoding == null)
-            XML_HEADER = "<?xml version=\"1.0\"?>";
-        else
-            XML_HEADER = "<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>";
+    public XMLWriter(File file, String encoding, String eol)
+            throws FileNotFoundException, UnsupportedEncodingException {
+        if (encoding == null) {
+            xmlHeader = "<?xml version=\"1.0\"?>";
+        } else {
+            xmlHeader = "<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>";
+        }
 
         writer = new StringWriter();
         FileOutputStream fos = new FileOutputStream(file);
 
         OutputStreamWriter osw;
-        if (encoding == null) // Without precision, an XML file is UTF-8
+        if (encoding == null) {
             osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
-        else
+        } else {
             osw = new OutputStreamWriter(fos, encoding);
+        }
 
         realWriter = new BufferedWriter(osw);
         this.eol = eol;
     }
 
     /** The minimal size of already written HTML that will be appended headers */
-    private static final int minHeaderedBufferSize = 4096;
+    private static final int MIN_HEADERED_BUFFER_SIZE = 4096;
 
     /** The maximal size of a buffer before flush */
-    private static final int maxBufferSize = 65536;
+    private static final int MAX_BUFFERED_SIZE = 65536;
 
     /**
      * Signals that the writer is being closed, hence it needs to write any
@@ -129,19 +132,19 @@ public class XMLWriter extends Writer {
 
             realWriter.write(fixEOL(buffer).toString());
             buffer.setLength(0);
-        } else if (signalClosing || buffer.length() >= minHeaderedBufferSize) {
+        } else if (signalClosing || buffer.length() >= MIN_HEADERED_BUFFER_SIZE) {
             // else if we're closing or the buffer is big enough
             // to (hopefully) contain all the existing headers
 
             signalAlreadyFlushed = true;
             String contents;
-            Matcher matcher_header = PatternConsts.XML_HEADER.matcher(buffer);
-            if (matcher_header.find()) {
-                contents = fixEOL(new StringBuffer(matcher_header.replaceFirst(XML_HEADER))).toString();
+            Matcher matcherHeader = PatternConsts.XML_HEADER.matcher(buffer);
+            if (matcherHeader.find()) {
+                contents = fixEOL(new StringBuffer(matcherHeader.replaceFirst(xmlHeader))).toString();
             } else {
                 Log.log("Shouldn't happen! " + "XMLWriter: XML File does not contain XML header:\n"
                         + buffer.substring(0, Math.min(buffer.length(), 80)));
-                realWriter.write(XML_HEADER);
+                realWriter.write(xmlHeader);
                 contents = fixEOL(buffer).toString();
             }
 
@@ -176,7 +179,7 @@ public class XMLWriter extends Writer {
      * Write a portion of an array of characters. Simply calls
      * <code>write(char[], int, int)</code> of the internal
      * <code>StringWriter</code>.
-     * 
+     *
      * @param cbuf
      *            - Array of characters
      * @param off
@@ -188,7 +191,8 @@ public class XMLWriter extends Writer {
      */
     public void write(char[] cbuf, int off, int len) throws IOException {
         writer.write(cbuf, off, len);
-        if (writer.getBuffer().length() >= maxBufferSize)
+        if (writer.getBuffer().length() >= MAX_BUFFERED_SIZE) {
             flush();
+        }
     }
 }

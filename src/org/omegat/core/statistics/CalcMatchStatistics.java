@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
@@ -55,17 +55,17 @@ import org.omegat.util.gui.TextUtil;
 
 /**
  * Thread for calculate match statistics, total and per file.
- * 
+ *
  * Calculation requires two different tags stripping: one for calculate match percentage, and second for
  * calculate number of words and chars.
- * 
+ *
  * Number of words/chars calculation requires to just strip all tags, protected parts, placeholders(see
  * StatCount.java).
- * 
+ *
  * Calculation of match percentage requires 2 steps for tags processing: 1) remove only simple XML tags for
  * find 5 nearest matches(but not protected parts' text: from "<m0>Acme</m0>" only tags should be removed, but
  * not "Acme" ), then 2) compute better percentage without any tags removing.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Thomas Cordonnier
  * @author Aaron Madlon-Kay
@@ -118,7 +118,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         }
         callback.finishData();
     }
-    
+
     void appendText(String text) {
         textForLog.append(text);
         callback.appendTextData(text);
@@ -129,11 +129,11 @@ public class CalcMatchStatistics extends LongProcessThread {
         textForLog.append(text);
         callback.setTextData(text);
     }
-    
+
     void appendTable(String title, String[][] table) {
         callback.appendTable(title, header, table);
     }
-    
+
     void showTable(String[][] table) {
         callback.setTable(header, table);
     }
@@ -142,7 +142,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         int fileNumber = 0;
         for (IProject.FileInfo fi : Core.getProject().getProjectFiles()) {
             fileNumber++;
-            
+
             MatchStatCounts perFile = forFile(fi);
             checkInterrupted();
 
@@ -259,12 +259,12 @@ public class CalcMatchStatistics extends LongProcessThread {
      * For the match calculation, we iterates by untranslated entries. Each untranslated entry compared with
      * source texts of: 1) default translations, 2) alternative translations, 3) TMs(from
      * project.getTransMemories()).
-     * 
+     *
      * We need to find best matches, because "adjustedScore" for non-best matches can be better for some worse
      * "score", what is not so good. It happen because some tags can be repeated many times, or since we are
      * using not so good tokens comparison. Best matches find will produce the same similarity like in patches
      * pane.
-     * 
+     *
      * Similarity calculates between tokens tokenized by ITokenizer.tokenizeAllExactly() (adjustedScore)
      */
     Optional<MatchStatCounts> calcSimilarity(List<SourceTextEntry> untranslatedEntries) {
@@ -305,8 +305,9 @@ public class CalcMatchStatistics extends LongProcessThread {
             }
             if (newSimilarity > maxSimilarity) {
                 maxSimilarity = newSimilarity;
-                if (newSimilarity >= 95) // enough to say that we are in row 2
+                if (newSimilarity >= 95) { // enough to say that we are in row 2
                     break CACHE;
+                }
             }
         }
         return maxSimilarity;

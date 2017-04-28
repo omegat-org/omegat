@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
@@ -57,7 +57,7 @@ import gen.core.filters.Filters;
  * <p>
  * This class's static methods remain for compatibility, but now they wrap a
  * singleton instance of a concrete implementation of {@link IPreferences}.
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers
@@ -89,12 +89,12 @@ public class Preferences {
     public static final String TF_FONT_DEFAULT = "Dialog";
     public static final String TF_SRC_FONT_SIZE = "source_font_size";
     public static final int TF_FONT_SIZE_DEFAULT = 12;
-    
+
     /** Whether to automatically perform MT requests on entering segment */
     public static final String MT_AUTO_FETCH = "mt_auto_fetch";
     /** Whether to restrict automatic MT requests to only untranslated segments */
     public static final String MT_ONLY_UNTRANSLATED = "mt_only_untranslated";
-    
+
     public static final String GLOSSARY_TBX_DISPLAY_CONTEXT = "glossary_tbx_display_context";
     public static final boolean GLOSSARY_TBX_DISPLAY_CONTEXT_DEFAULT = true;
     public static final String GLOSSARY_NOT_EXACT_MATCH = "glossary_not_exact_match";
@@ -175,14 +175,14 @@ public class Preferences {
     public static final String ALLOW_APERTIUM_TRANSLATE = "allow_apertium_translate";
 
     public static final String ALLOW_MICROSOFT_TRANSLATE = "allow_microsoft_translate";
-    
+
     public static final String ALLOW_MICROSOFT_TRANSLATOR_AZURE = "allow_microsoft_translator_azure";
 
     public static final String ALLOW_MYMEMORY_HUMAN_TRANSLATE = "allow_mymemory_human_translate";
     public static final String ALLOW_MYMEMORY_MACHINE_TRANSLATE = "allow_mymemory_machine_translate";
-    
+
     public static final String ALLOW_YANDEX_TRANSLATE = "allow_yandex_translate";
-    
+
     /** Enable TransTips */
     public static final String TRANSTIPS = "transtips";
     /** TransTips Option: Only match exact words */
@@ -190,7 +190,7 @@ public class Preferences {
 
     /** Mark the segments with a note with a different color */
     public static final String MARK_NOTED_SEGMENTS = "mark_noted_segments";
-    
+
     /** Mark the non-breakable spaces with a different color */
     public static final String MARK_NBSP = "mark_nbsp";
     /** Mark whitespace as symbols */
@@ -235,7 +235,7 @@ public class Preferences {
     /** Workflow Option: Number of segments to load initially in editor */
     public static final String EDITOR_INITIAL_SEGMENT_LOAD_COUNT = "editor_initial_segment_load_count";
     public static final int EDITOR_INITIAL_SEGMENT_LOAD_COUNT_DEFAULT = 2000;
-    
+
     /** Tag Validation Option: Don't check printf-tags */
     public static final String DONT_CHECK_PRINTF_TAGS = "tagValidation_noCheck";
     public static final boolean DONT_CHECK_PRINTF_TAGS_DEFAULT = true;
@@ -291,7 +291,7 @@ public class Preferences {
      * The location of the scripts
      */
     public static final String SCRIPTS_DIRECTORY = "scripts_dir";
-    
+
     /** Quick script names */
     public static final String SCRIPTS_QUICK_PREFIX = "scripts_quick_";
     public static final String SCRIPTS_QUICK_1 = "scripts_quick_1";
@@ -360,10 +360,10 @@ public class Preferences {
 
     /** Default number of seconds to auto save project */
     public static final int AUTO_SAVE_DEFAULT = 180;
-    
+
     /** Custom external command for post-processing */
     public static final String EXTERNAL_COMMAND = "external_command";
-    
+
     /** Allow per-project external commands */
     public static final String ALLOW_PROJECT_EXTERN_CMD = "allow_project_extern_cmd";
 
@@ -388,7 +388,7 @@ public class Preferences {
     /**
      * Prefix for keys used to record default tokenizer behavior settings.
      * Prepend to the full name of the tokenizer, e.g.
-     * 
+     *
      * <code>TOK_BEHAVIOR_PREFIX + tokenizer.class.getName()</code> to obtain
      * <code>tokenizer_behavior_org.omegat.tokenizer.LuceneXXTokenizer</code>
      */
@@ -396,7 +396,7 @@ public class Preferences {
 
     public static final String AC_SHOW_SUGGESTIONS_AUTOMATICALLY = "ac_show_suggestions_automatically";
     public static final String AC_SWITCH_VIEWS_WITH_LR = "ac_switch_views_with_lr";
-    
+
     /** glossary auto-completion */
     public static final String AC_GLOSSARY_ENABLED = "ac_glossary_enabled";
     public static final boolean AC_GLOSSARY_ENABLED_DEFAULT = true;
@@ -474,7 +474,7 @@ public class Preferences {
      * file.
      * <p>
      * If the key is not found, returns the empty string.
-     * 
+     *
      * @param key
      *            key of the key to look up, usually a static string from this
      *            class
@@ -483,12 +483,12 @@ public class Preferences {
     public static String getPreference(String key) {
         return m_preferences.getPreference(key);
     }
-    
+
 	/**
      * Returns true if the preference is in OmegaT's preferences file.
      * <p>
      * If the key is not found return false
-     * 
+     *
      * @param key
      *            key of the key to look up, usually a static string from this
      *            class
@@ -503,7 +503,7 @@ public class Preferences {
      * <p>
      * Returns true if the preference exists and is equal to "true", false
      * otherwise (no such preference, or it's equal to "false", etc).
-     * 
+     *
      * @param key
      *            preference key, usually a static string from this class
      * @return preference defaultValue as a boolean
@@ -518,7 +518,7 @@ public class Preferences {
      * <p>
      * If the key is not found, returns the default value provided and sets the
      * preference to the default value.
-     * 
+     *
      * @param key
      *            name of the key to look up, usually a static string from this
      *            class
@@ -536,7 +536,7 @@ public class Preferences {
      * <p>
      * If the key is not found, returns the default value provided and sets the
      * preference to the default value.
-     * 
+     *
      * @param key
      *            name of the key to look up, usually a static string from this
      *            class
@@ -554,7 +554,7 @@ public class Preferences {
      * <p>
      * If the key is not found, returns the default value provided and sets the
      * preference to the default value.
-     * 
+     *
      * @param key
      *            name of the key to look up, usually a static string from this
      *            class
@@ -572,7 +572,7 @@ public class Preferences {
      * <p>
      * If the key is not found, returns the default value provided and sets the
      * preference to the default value.
-     * 
+     *
      * @param key
      *            name of the key to look up, usually a static string from this
      *            class
@@ -587,7 +587,7 @@ public class Preferences {
     /**
      * Sets the value of some preference. The value will be persisted to disk as
      * XML, serialized via value.toString().
-     * 
+     *
      * @param name
      *            preference key name, usually Preferences.PREF_...
      * @param value
@@ -612,7 +612,7 @@ public class Preferences {
      * will be of the "correct" type (Integer, Boolean, Enum, etc.) but the
      * value returned by {@link PropertyChangeEvent#getOldValue()} will be the
      * String equivalent for storing in XML.
-     * 
+     *
      * @param listener
      */
     public static void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -626,7 +626,7 @@ public class Preferences {
      * will be of the "correct" type (Integer, Boolean, Enum, etc.) but the
      * value returned by {@link PropertyChangeEvent#getOldValue()} will be the
      * String equivalent for storing in XML.
-     * 
+     *
      * @param listener
      */
     public static void addPropertyChangeListener(String property, PropertyChangeListener listener) {

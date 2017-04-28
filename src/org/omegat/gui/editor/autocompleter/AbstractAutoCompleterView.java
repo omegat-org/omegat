@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
@@ -52,7 +52,7 @@ abstract public class AbstractAutoCompleterView {
      * the completer
      */
     protected AutoCompleter completer;
-    
+
     /**
      * Creates a new auto-completer view.
      * @param name the name of this view
@@ -60,7 +60,7 @@ abstract public class AbstractAutoCompleterView {
     public AbstractAutoCompleterView(String name) {
         this.name = name;
     }
-    
+
     /**
      * @return the name
      */
@@ -84,7 +84,7 @@ abstract public class AbstractAutoCompleterView {
     public ITokenizer getTokenizer() {
         return Core.getProject().getTargetTokenizer();
     }
-    
+
     /**
      * Return the target language currently in use.
      */
@@ -98,46 +98,46 @@ abstract public class AbstractAutoCompleterView {
      * @return true if a key has been processed, false if otherwise.
      */
     public abstract boolean processKeys(KeyEvent e);
-    
+
     /**
      * return the size of the data list / array.
-     * @return 
+     * @return
      */
     public abstract int getRowCount();
-    
+
     /**
      * get the preferred height of the component
-     * @return 
+     * @return
      */
     public abstract int getPreferredHeight();
-    
+
     /**
      * get the preferred width of the component
      * @return
      */
     public abstract int getPreferredWidth();
-    
+
     /**
      * get the selected value
-     * @return 
+     * @return
      */
     public abstract AutoCompleterItem getSelectedValue();
-    
+
     /**
      * Update the view data
      * @return true if any update has been done.
      */
     public abstract void updateViewData();
-    
+
     /**
      * Obtain the content to put in the autocompleter popup.
      * The view should also do any other preparation necessary for
      * display.
-     * 
+     *
      * @return the component to show in the autocompleter popup
      */
     public abstract Component getViewContent();
-    
+
     /**
      * Return a modified row count. The basic implementation. Override this in the
      * different view types.
@@ -150,21 +150,21 @@ abstract public class AbstractAutoCompleterView {
     /**
      * Return true to indicate that the view has relevant contextual suggestions
      * that merit displaying the AutoCompleter popup unprompted.
-     * 
+     *
      * @return Whether or not the AutoCompleter should appear
      */
     public abstract boolean shouldPopUp();
-    
+
     /**
      * Indicates whether or not the AutoCompleter should close by default when the
      * user confirms a selection. Override and return false to keep the popup open.
-     * 
+     *
      * @return Whether or not the AutoCompleter popup should close upon selection
      */
     public boolean shouldCloseOnSelection() {
         return true;
     }
-    
+
     protected String getLeadingText() {
         try {
             EditorTextArea3 editor = completer.getEditor();
@@ -179,7 +179,7 @@ abstract public class AbstractAutoCompleterView {
     /**
      * Indicates whether the view should be considered "on" or "off". When off, the view will not be shown in
      * any circumstances (whether automatically or manually).
-     * 
+     *
      * @return
      */
     protected boolean isEnabled() {

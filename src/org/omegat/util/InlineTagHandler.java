@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Alex Buloichik, Aaron Madlon-Kay
@@ -34,7 +34,7 @@ import org.omegat.filters3.Tag;
 /**
  * This class handles inline tags, i.e. helps to replace all tags into
  * shortcuts. It handles bpt,ept,it tags numeration.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
@@ -62,7 +62,7 @@ public class InlineTagHandler {
     /**
      * Handle "bpt" tag start for TMX. OmegaT internal tag number
      * will be based off the x attr (if provided).
-     * 
+     *
      * @param i TMX i attribute value
      * @param x TMX x attribute value (can be null)
      */
@@ -85,13 +85,13 @@ public class InlineTagHandler {
         }
         pairTags.put(currentI, index);
     }
-    
+
     /**
      * Handle "bpt" tag start. Identifier will be first non-null
      * attribute in provided attributes. OmegaT internal tag number
      * will be its index in the list of tags in the segment (starting
      * with 0).
-     * 
+     *
      * @param attributeValues
      *            attributes to identify pairs
      */
@@ -102,7 +102,7 @@ public class InlineTagHandler {
 
     /**
      * Store shortcut letter for current 'i' value.
-     * 
+     *
      * @param letter
      *            letter to store
      */
@@ -114,7 +114,7 @@ public class InlineTagHandler {
 
     /**
      * Get stored shortcut letter for current 'i' value.
-     * 
+     *
      * @return
      */
     public int getTagShortcutLetter() {
@@ -124,7 +124,7 @@ public class InlineTagHandler {
 
     /**
      * Store shortcut letter for current other tag.
-     * 
+     *
      * @param letter
      *            letter to store
      */
@@ -134,7 +134,7 @@ public class InlineTagHandler {
 
     /**
      * Get stored shortcut letter for current other tag.
-     * 
+     *
      * @return
      */
     public int getOtherTagShortcutLetter() {
@@ -143,7 +143,7 @@ public class InlineTagHandler {
 
     /**
      * Handle "ept" tag start.
-     * 
+     *
      * @param attributeValues
      *            attributes to identify pairs
      */
@@ -160,7 +160,7 @@ public class InlineTagHandler {
 
     /**
      * Handle "bpt" tag end.
-     * 
+     *
      * @return shortcut index
      */
     public Integer endBPT() {
@@ -169,7 +169,7 @@ public class InlineTagHandler {
 
     /**
      * Handle "ept" tag end.
-     * 
+     *
      * @return shortcut index
      */
     public Integer endEPT() {
@@ -178,7 +178,7 @@ public class InlineTagHandler {
 
     /**
      * Handle other tag end.
-     * 
+     *
      * @return shortcut index
      */
     public int endOTHER() {
@@ -189,7 +189,7 @@ public class InlineTagHandler {
 
     /**
      * Handle paired tag end.
-     * 
+     *
      * @return shortcut index
      */
     public int paired(String tagName, Tag.Type tagType) {

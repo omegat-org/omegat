@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -31,7 +31,7 @@ import org.omegat.util.StaticUtils;
 
 /**
  * A Xtag in a CopyFlow Gold for QuarkXPress source text.
- * 
+ *
  * @author Didier Briel
  */
 public class Xtag implements Element {
@@ -45,7 +45,7 @@ public class Xtag implements Element {
     /**
      * Makes a shortcut from an Xtag. If the tag contains no letter, uses 'x'
      * for the shortcut.
-     * 
+     *
      * @param tag
      *            The full Xtag
      * @return The shortcut
@@ -131,7 +131,7 @@ public class Xtag implements Element {
 
     /**
      * Not really implemented
-     * 
+     *
      * @return an empty string
      */
     public String toTMX() {

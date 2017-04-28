@@ -28,7 +28,7 @@ package org.omegat.languagetools;
 /**
  * An intermediate result container to abstract over native and network result
  * types.
- * 
+ *
  * @author Aaron Madlon-Kay
  *
  */

@@ -1,8 +1,8 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
- 
+
  Copyright (C) 2008 Alex Buloichik (alex73mail@gmail.com)
                2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
@@ -61,7 +61,7 @@ public class LuceneGermanTokenizer extends BaseTokenizer {
     /**
      * A German analyzer that recreates the behavior of the GermanAnalyzer in
      * Lucene 3.0 and earlier.
-     * 
+     *
      * @see <a href=
      *      "https://groups.yahoo.com/neo/groups/OmegaT/conversations/messages/28395">
      *      User group discussion</a>

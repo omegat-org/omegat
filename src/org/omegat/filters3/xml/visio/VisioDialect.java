@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -32,17 +32,16 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
 /**
  * This class specifies Visio XML Dialect.
  * Works on Visio 2003 and 2010 vdx files (other versions of Visio have not been tested)
- * 
+ *
  * @author Didier Briel
  * @author Phillip Hall
- * 
+ *
  */
 public class VisioDialect extends DefaultXMLDialect {
     public VisioDialect() {
         defineParagraphTags(new String[] {
             "Text",
         });
-
 
        defineIntactTags(new String[] {
            "DocumentProperties",

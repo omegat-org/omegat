@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2006 Henry Pijffers
@@ -77,21 +77,21 @@ import org.omegat.util.StringUtil;
 public class StaticUIUtils {
 
     private static final KeyStroke ESC_KEYSTROKE = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-    
+
     /**
      * Make a dialog closeable by pressing the Esc key.
      * {@link JDialog#dispose()} will be called.
-     * 
+     *
      * @param dialog
      */
     public static void setEscapeClosable(JDialog dialog) {
         setEscapeAction(dialog.getRootPane(), makeCloseAction(dialog));
     }
-    
+
     /**
      * Make a dialog closeable by pressing the Esc key.
      * {@link JFrame#dispose()} will be called.
-     * 
+     *
      * @param frame
      */
     public static void setEscapeClosable(JFrame frame) {
@@ -118,19 +118,19 @@ public class StaticUIUtils {
 
     /**
      * Associate a custom action to be called when the Esc key is pressed.
-     * 
+     *
      * @param dialog
-     * @param action 
+     * @param action
      */
     public static void setEscapeAction(JDialog dialog, Action action) {
         setEscapeAction(dialog.getRootPane(), action);
     }
-    
+
     /**
      * Associate a custom action to be called when the Esc key is pressed.
-     * 
+     *
      * @param frame
-     * @param action 
+     * @param action
      */
     public static void setEscapeAction(JFrame frame, Action action) {
         setEscapeAction(frame.getRootPane(), action);
@@ -138,21 +138,21 @@ public class StaticUIUtils {
 
     /**
      * Associate a custom action to be called when the Esc key is pressed.
-     * 
+     *
      * @param pane
-     * @param action 
+     * @param action
      */
     public static void setEscapeAction(JRootPane pane, Action action) {
         // Handle escape key to close the window
         pane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(ESC_KEYSTROKE, "ESCAPE");
         pane.getActionMap().put("ESCAPE", action);
     }
-    
+
     /**
-     * Truncate the supplied text so that it fits within the width (minus margin) 
+     * Truncate the supplied text so that it fits within the width (minus margin)
      * of the supplied component. Truncation is achieved by replacing a chunk from
      * the center of the string with an ellipsis.
-     * 
+     *
      * @param text Text to truncate
      * @param comp Component to fit text into
      * @param margin Additional space to leave empty
@@ -162,14 +162,14 @@ public class StaticUIUtils {
         if (text == null || text.isEmpty() || comp == null) {
             return text;
         }
-        
+
         final int targetWidth = comp.getWidth();
-        
+
         // Early out if component is not visible
         if (targetWidth < 1) {
             return text;
         }
-        
+
         Graphics graphics = comp.getGraphics();
         if (graphics == null) {
             return text;
@@ -180,12 +180,12 @@ public class StaticUIUtils {
         if (fullWidth + margin < targetWidth) {
             return text;
         }
-        
+
         final int truncateCharWidth = metrics.charWidth(StringUtil.TRUNCATE_CHAR);
         final int middle = text.offsetByCodePoints(0, text.codePointCount(0, text.length()) / 2);
         int chompStart = middle, chompEnd = middle;
         String chomp = null;
-        
+
         // Calculate size when removing progressively larger chunks from the middle
         while (true) {
             if (chompStart == 0 || chompEnd == text.length()) {
@@ -199,13 +199,13 @@ public class StaticUIUtils {
             chompStart = text.offsetByCodePoints(chompStart, -1);
             chompEnd = text.offsetByCodePoints(chompEnd, 1);
         }
-        
+
         if (chomp != null) {
             text = text.substring(0, chompStart) + StringUtil.TRUNCATE_CHAR + text.substring(chompEnd, text.length());
         }
         return text;
     }
-    
+
     public static void forwardMouseWheelEvent(Component target, MouseWheelEvent evt) {
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(
                 new MouseWheelEvent(target, evt.getID(), evt.getWhen(),
@@ -261,7 +261,7 @@ public class StaticUIUtils {
      * <a href="https://bugs.openjdk.java.net/browse/JDK-8065739">JDK-8065739
      * </a>, a Java bug specific to Java 1.8 on OS X whereby a frame too close
      * to the width of the screen will warp to one corner with tiny dimensions.
-     * 
+     *
      * @param width
      *            Proposed window width
      * @return A safe window width
@@ -278,7 +278,7 @@ public class StaticUIUtils {
 
     /**
      * Toggle the enabled property of an entire hierarchy of components.
-     * 
+     *
      * @param parent
      *            The parent component, which will also be toggled
      * @param isEnabled

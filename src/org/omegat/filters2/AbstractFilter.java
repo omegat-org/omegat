@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -62,7 +62,7 @@ import org.omegat.util.OStrings;
  * <li>Tags shortcuts are expanded in translated text
  * <li>Translated text is written into the output file
  * </ol>
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Martin Wunderlich
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -129,7 +129,7 @@ public abstract class AbstractFilter implements IFilter {
     protected String inEncodingLastParsedFile;
 
     /** All target filename patterns. */
-    private static final String[] TARGET_FILENAME_PATTERNS = new String[] { 
+    private static final String[] TARGET_FILENAME_PATTERNS = new String[] {
                 TFP_FILENAME,
                 TFP_NAMEONLY,
                 TFP_EXTENSION,
@@ -192,7 +192,7 @@ public abstract class AbstractFilter implements IFilter {
 
     /**
      * Human-readable name of the File Format this filter supports.
-     * 
+     *
      * @return File format name
      */
     @Override
@@ -203,7 +203,7 @@ public abstract class AbstractFilter implements IFilter {
      * filter instances, different by source file mask, encoding of the source file etc.
      * <p>
      * Note that the user may change the instances freely.
-     * 
+     *
      * @return Default filter instances
      */
     @Override
@@ -217,7 +217,7 @@ public abstract class AbstractFilter implements IFilter {
      * Return false to state that your filter doesn't need encoding management provided by OmegaT, because it
      * either autodetects the encoding based on file contents (like HTML filter does) or the encoding is fixed
      * (like in OpenOffice files).
-     * 
+     *
      * @return whether source encoding can be changed by the user
      */
     @Override
@@ -230,7 +230,7 @@ public abstract class AbstractFilter implements IFilter {
      * <p>
      * Return false to state that your filter doesn't need encoding management provided by OmegaT, because the
      * encoding is fixed (like in OpenOffice files), or for some other reason.
-     * 
+     *
      * @return whether target encoding can be changed by the user
      */
     @Override
@@ -246,7 +246,7 @@ public abstract class AbstractFilter implements IFilter {
      * <p>
      * For example, DocBook files have .xml extension, as possibly many other XML files, so the filter should
      * check a DTD of the document.
-     * 
+     *
      * @param reader
      *            The reader of the source file
      * @return Does the filter support the file
@@ -262,7 +262,7 @@ public abstract class AbstractFilter implements IFilter {
      * <p>
      * For example, DocBook files have .xml extension, as possibly many other XML files, so the filter should
      * check a DTD of the document.
-     * 
+     *
      * @param inFile
      *            Source file.
      * @param fc
@@ -281,7 +281,7 @@ public abstract class AbstractFilter implements IFilter {
     /**
      * Define fuzzy mark prefix for source which will be stored in TM. It's 'fuzzy' by default, but each
      * filter can redefine it.
-     * 
+     *
      * @return fuzzy mark prefix
      */
     @Override
@@ -292,7 +292,7 @@ public abstract class AbstractFilter implements IFilter {
     /**
      * Returns the hint displayed while the user edits the filter, and when she adds/edits the instance of
      * this filter. The hint may be any string, preferably in a non-geek language.
-     * 
+     *
      * @return The hint for editing the filter in a non-geek language.
      */
     @Override
@@ -303,7 +303,7 @@ public abstract class AbstractFilter implements IFilter {
     /**
      * OmegaT calls this to see whether the filter has any options. By default returns false, so filter
      * authors should override this to tell OmegaT core that this filter has options.
-     * 
+     *
      * @return True if the filter has any options, and false otherwise.
      */
     @Override
@@ -322,7 +322,7 @@ public abstract class AbstractFilter implements IFilter {
 
     /**
      * Creates a reader of an input file.
-     * 
+     *
      * @param inFile
      *            The source file.
      * @param inEncoding
@@ -348,7 +348,7 @@ public abstract class AbstractFilter implements IFilter {
 
     /**
      * Creates a writer of the translated file.
-     * 
+     *
      * @param outFile
      *            The target file
      * @param outEncoding
@@ -382,7 +382,7 @@ public abstract class AbstractFilter implements IFilter {
      * <p>
      * If you need more control over processed files, override
      * {@link #processFile(File, File, FilterContext)} instead.
-     * 
+     *
      * @param inFile
      *            Reader of the source file. It's the result of calling
      *            {@link #createReader(File,String)}.
@@ -415,7 +415,7 @@ public abstract class AbstractFilter implements IFilter {
      * file, or {@link #createWriter(File,String)} to create a writer if output file is not <code>null</code>;
      * then calls {@link #processFile(BufferedReader,BufferedWriter)} to process source file, and then closes
      * reader and writer.
-     * 
+     *
      * @param inFile
      *            The source file.
      * @param outFile
@@ -424,7 +424,7 @@ public abstract class AbstractFilter implements IFilter {
      *            Filter context.
      * @returns List of processed files (each element of type {@link File}) or null if the filter can not/did
      *          not process multiple files.
-     * 
+     *
      * @throws IOException
      *             In case of any I/O error.
      * @throws TranslationException
@@ -454,7 +454,7 @@ public abstract class AbstractFilter implements IFilter {
             reader.close();
         }
     }
-    
+
     /**
      * Get the input encoding. If it's not set in the FilterContext (setting is "&lt;auto&gt;")
      * and the filter allows ({@link #isSourceEncodingVariable()}), try to detect it. The result may be null.
@@ -470,7 +470,7 @@ public abstract class AbstractFilter implements IFilter {
         }
         return encoding;
     }
-    
+
     /**
      * Get the output encoding. If it's not set in the FilterContext (setting is "&lt;auto&gt;")
      * and the filter allows ({@link #isTargetEncodingVariable()}):
@@ -535,7 +535,7 @@ public abstract class AbstractFilter implements IFilter {
 
     /**
      * Align source file against translated file.
-     * 
+     *
      * @param sourceFile
      *            source file
      * @param translatedFile
@@ -580,7 +580,7 @@ public abstract class AbstractFilter implements IFilter {
      * <li>Instruct OmegaT what source strings are translatable.
      * <li>Get the translation of each source string.
      * </ul>
-     * 
+     *
      * @param entry
      *            Translatable source string
      * @return Translation of the source string. If there's no translation, returns the source string itself.
@@ -594,7 +594,7 @@ public abstract class AbstractFilter implements IFilter {
      * <li>Instruct OmegaT what source strings are translatable.
      * <li>Get the translation of each source string.
      * </ul>
-     * 
+     *
      * @param entry
      *            Translatable source string
      * @param comment comment on the source string in the source file (if available)
@@ -612,7 +612,7 @@ public abstract class AbstractFilter implements IFilter {
 
     /**
      * Set both callbacks. Used for child XML filters only.
-     * 
+     *
      * @param parseCallback
      * @param translateCallback
      */

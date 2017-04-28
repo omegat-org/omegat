@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -52,13 +52,13 @@ public class HistoryPredictor extends AutoCompleterListView {
 
     public HistoryPredictor() {
         super(OStrings.getString("AC_HISTORY_PREDICTIONS_VIEW"));
-        
+
         CoreEvents.registerProjectChangeListener(eventType -> {
             if (isEnabled() && eventType == PROJECT_CHANGE_TYPE.LOAD) {
                 train();
             }
         });
-        CoreEvents.registerEntryEventListener(new IEntryEventListener() {            
+        CoreEvents.registerEntryEventListener(new IEntryEventListener() {
             @Override
             public void onNewFile(String activeFileName) {
             }
@@ -89,7 +89,7 @@ public class HistoryPredictor extends AutoCompleterListView {
             }
         });
     }
-    
+
     synchronized void train() {
         long start = System.currentTimeMillis();
         predictor.reset();
@@ -98,13 +98,13 @@ public class HistoryPredictor extends AutoCompleterListView {
         long time = System.currentTimeMillis() - start;
         LOGGER.finer(() -> String.format("Time to train History Predictor: %d ms", time));
     }
-    
+
     private void trainString(String text) {
         if (text == null) {
             return;
         }
         String[] tokens = getTokenizer().tokenizeWordsToStrings(text, StemmingMode.NONE);
-        
+
         predictor.train(tokens);
     }
 
@@ -157,7 +157,7 @@ public class HistoryPredictor extends AutoCompleterListView {
      * <p>
      * If the language is not space-delimited, use the last token, as we have no
      * way of distinguishing a completed word from an incomplete one.
-     * 
+     *
      * @param tokens
      * @return
      */

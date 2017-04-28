@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
@@ -33,7 +33,7 @@ import java.io.InputStream;
 import org.mozilla.universalchardet.UniversalDetector;
 
 public class EncodingDetector {
-    
+
     /**
      * Detect the encoding of the supplied file.
      * Convenience method for {@link #detectEncoding(java.io.InputStream)}.
@@ -43,30 +43,30 @@ public class EncodingDetector {
             return detectEncoding(stream);
         }
     }
-    
+
     /**
      * Detect the encoding of the supplied file. The caller is responsible for closing the stream.
-     * 
+     *
      * @see <a href="https://code.google.com/p/juniversalchardet/">Original</a>
      * @see <a href="https://github.com/amake/juniversalchardet">Fork</a>
      */
     public static String detectEncoding(InputStream stream) throws IOException {
         UniversalDetector detector = new UniversalDetector(null);
-        
+
         byte[] buffer = new byte[4096];
         int read;
         while ((read = stream.read(buffer)) > 0 && !detector.isDone()) {
             detector.handleData(buffer, 0, read);
         }
-        
+
         detector.dataEnd();
-        
+
         String encoding = detector.getDetectedCharset();
         detector.reset();
-        
+
         return encoding;
     }
-    
+
     /**
      * Detect the encoding of the supplied file. If detection fails, return the supplied
      * default encoding.

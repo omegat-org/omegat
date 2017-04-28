@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -61,7 +61,7 @@ import org.omegat.util.TagUtil;
 /**
  * Filter to support Java Resource Bundles - the files that are used to I18ze
  * Java applications.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Keith Godfrey
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -73,7 +73,7 @@ import org.omegat.util.TagUtil;
  * Option to remove untranslated segments in the target files
  * Code adapted from the file: MozillaDTDFilter.java
  * Support for encoding outside the ASCII encoding. The management depends of the user.
- * The user have to choose the encoding of the file, source and target. 
+ * The user have to choose the encoding of the file, source and target.
  * The default is ASCII, which corresponds to the standard behaviour: in that case, any character above 127 is encoded
  * according to the specifications of the bundle files. If another character set is chosen, no encoding takes place
  * and it's up to the user to select a charset compatible with the characters used.
@@ -91,20 +91,20 @@ public class ResourceBundleFilter extends AbstractFilter {
      * TODO: Make this optional
      */
     public static final String DO_NOT_TRANSLATE_COMMENT = "NOI18N";
-    
+
     public static final String OPTION_REMOVE_STRINGS_UNTRANSLATED = "unremoveStringsUntranslated";
     public static final String OPTION_DONT_UNESCAPE_U_LITERALS = "dontUnescapeULiterals";
     public static final String DEFAULT_TARGET_ENCODING = StandardCharsets.US_ASCII.name();
 
     protected Map<String, String> align;
-    
+
     private String targetEncoding = DEFAULT_TARGET_ENCODING;
-    
+
     /**
      * If true, will remove non-translated segments in the target files
      */
     private boolean removeStringsUntranslated = false;
-    
+
     /**
      * If true, will not convert characters into \\uXXXX notation
      */
@@ -116,7 +116,7 @@ public class ResourceBundleFilter extends AbstractFilter {
     }
 
     /**
-     * 
+     *
      * @return true, because it is possible to change source encoding
      */
     @Override
@@ -125,7 +125,7 @@ public class ResourceBundleFilter extends AbstractFilter {
     }
 
     /**
-     * 
+     *
      * @return true, because it is possible to change target encoding
      */
     @Override
@@ -134,7 +134,7 @@ public class ResourceBundleFilter extends AbstractFilter {
     }
 
     /**
-     * The default encoding is OConsts.ASCII 
+     * The default encoding is OConsts.ASCII
     */
     @Override
     public Instance[] getDefaultInstances() {
@@ -232,7 +232,7 @@ public class ResourceBundleFilter extends AbstractFilter {
 
     /**
      * Converts normal strings to ascii-encoded ones.
-     * 
+     *
      * @param text
      *            Text to convert.
      * @param key
@@ -245,7 +245,7 @@ public class ResourceBundleFilter extends AbstractFilter {
      */
     private String toAscii(String text, EscapeMode mode) {
         CharsetEncoder charsetEncoder = Charset.forName(targetEncoding).newEncoder();
-        
+
         StringBuilder result = new StringBuilder();
 
         for (int cp, len = text.length(), i = 0; i < len; i += Character.charCount(cp)) {
@@ -282,9 +282,9 @@ public class ResourceBundleFilter extends AbstractFilter {
         }
 
         return result.toString();
-        
+
     }
-    
+
     private static boolean containsUEscapeAt(String text, int offset) {
         if (text.codePointCount(offset, text.length()) < 1 + 1 + 4) {
             return false;
@@ -307,7 +307,7 @@ public class ResourceBundleFilter extends AbstractFilter {
      * Removes extra slashes from, e.g. "\ ", "\=" and "\:" typical in
      * machine-generated resource bundles. A slash at the end of a string means
      * a mandatory space has been trimmed.
-     * 
+     *
      * @see <a href="https://sourceforge.net/p/omegat/bugs/266/">bug #266</a>
      */
     private String removeExtraSlashes(String string) {
@@ -474,7 +474,7 @@ public class ResourceBundleFilter extends AbstractFilter {
 
     /**
      * Looks for the key-value separator (=,: or ' ') in the string.
-     * 
+     *
      * @return The char number of key-value separator in a string. Not that if
      *         the string does not contain any separator this string is
      *         considered to be a key with empty string value, and this method
@@ -540,7 +540,6 @@ public class ResourceBundleFilter extends AbstractFilter {
         }
     }
 
-    
     @Override
     public Map<String, String> changeOptions(Window parent, Map<String, String> config) {
         try {
@@ -559,11 +558,11 @@ public class ResourceBundleFilter extends AbstractFilter {
 
     /**
      * Returns true to indicate that Java Resource Bundles filter has options.
-     * 
+     *
      */
     @Override
     public boolean hasOptions() {
         return true;
     }
-    
+
 }

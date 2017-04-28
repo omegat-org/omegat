@@ -34,7 +34,7 @@ import org.apache.commons.io.FileUtils;
 /**
  * An initializer for ensuring that tests can't pollute (or be polluted by)
  * actual user preferences.
- * 
+ *
  * @author Aaron Madlon-Kay
  *
  */
@@ -44,7 +44,7 @@ public class TestPreferencesInitializer {
      * Init the preferences system using a temp dir for the config dir where
      * prefs files are read and written. Convenience method for
      * {@link #init(String)}.
-     * 
+     *
      * @throws IOException
      */
     public static void init() throws IOException {
@@ -56,7 +56,7 @@ public class TestPreferencesInitializer {
     /**
      * Init the preferences system using the supplied path as the config dir
      * where prefs files are read and written.
-     * 
+     *
      * @param configDir
      */
     public static synchronized void init(String configDir) {

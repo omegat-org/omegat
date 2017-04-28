@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -33,7 +33,7 @@ import org.omegat.util.OStrings;
 
 /**
  * Filter for SVG images.
- * 
+ *
  * @author Didier Briel
  */
 public class SvgFilter extends XMLFilter {
@@ -52,10 +52,10 @@ public class SvgFilter extends XMLFilter {
         return new Instance[] { new Instance("*.svg"),
         						new Instance("*.xml")};
     }
-    
+
     /**
      * Either the encoding can be read, or it is UTF-8.
-     * 
+     *
      * @return <code>false</code>
      */
     @Override
@@ -65,14 +65,14 @@ public class SvgFilter extends XMLFilter {
 
     /**
      * Yes, Svg may be written out in a variety of encodings.
-     * 
+     *
      * @return <code>true</code>
      */
     @Override
     public boolean isTargetEncodingVariable() {
         return true;
     }
-    
+
     @Override
     protected boolean requirePrevNextFields() {
         return true;

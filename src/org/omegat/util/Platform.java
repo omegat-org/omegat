@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
@@ -26,10 +26,9 @@
 
 package org.omegat.util;
 
-
 /**
  * A class to retrieve some platform information.
- * 
+ *
  * @author Zoltan Bartko bartkozoltan@bartkozoltan.com
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
@@ -85,7 +84,7 @@ public final class Platform {
         OsType os = getOsType();
         return os == OsType.MAC32 || os == OsType.MAC64;
     }
-    
+
     /**
      * Returns true if the JVM (NOT the OS) is 64-bit
      */

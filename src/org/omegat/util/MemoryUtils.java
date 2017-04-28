@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
@@ -31,10 +31,10 @@ import java.lang.reflect.Modifier;
 
 /**
  * Utils for calculate used memory.
- * 
+ *
  * Calculation of object size is not perfect. It doesn't support multiple links
  * to one object instance(object shares), memory alignments.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class MemoryUtils {
@@ -49,7 +49,7 @@ public class MemoryUtils {
 
     /**
      * Get memory which used by jvm.
-     * 
+     *
      * @return memory size
      */
     public static long getMemoryUsed() {
@@ -58,7 +58,7 @@ public class MemoryUtils {
 
     /**
      * Get memory allocated by jvm.
-     * 
+     *
      * @return memory size
      */
     public static long getMemoryAllocated() {
@@ -67,7 +67,7 @@ public class MemoryUtils {
 
     /**
      * Get maximum memory which can be allocated by jvm.
-     * 
+     *
      * @return memory size
      */
     public static long getMemoryLimit() {
@@ -76,7 +76,7 @@ public class MemoryUtils {
 
     /**
      * Calculate memory usage for object.
-     * 
+     *
      * @param obj
      *            object
      * @return memory size, or -1 if size is unknown
@@ -139,7 +139,7 @@ public class MemoryUtils {
 
     /**
      * Calculate memory usage for simple types.
-     * 
+     *
      * @param oc
      *            simple type class
      * @return memory size

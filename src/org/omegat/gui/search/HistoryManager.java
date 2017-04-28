@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Aaron Madlon-Kay
@@ -31,15 +31,15 @@ import org.omegat.util.Preferences;
 
 /**
  * A class for managing search/replace history
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class HistoryManager {
-    
-    private static final List<String> searchItems; 
+
+    private static final List<String> searchItems;
     private static final List<String> replaceItems;
     private static final int maxItems;
-    
+
     static {
         maxItems = Preferences.getPreferenceDefault(Preferences.SEARCHWINDOW_HISTORY_SIZE, 10);
         searchItems = new ArrayList<String>(maxItems);
@@ -55,9 +55,9 @@ public class HistoryManager {
             }
         }
     }
-    
+
     private HistoryManager() {}
-    
+
     public static void addSearchItem(String item) {
         synchronized (searchItems) {
             searchItems.remove(item);
@@ -67,7 +67,7 @@ public class HistoryManager {
             }
         }
     }
-    
+
     public static void addReplaceItem(String item) {
         synchronized (replaceItems) {
             replaceItems.remove(item);
@@ -77,19 +77,19 @@ public class HistoryManager {
             }
         }
     }
-    
+
     public static String[] getSearchItems() {
         synchronized (searchItems) {
             return searchItems.toArray(new String[searchItems.size()]);
         }
     }
-    
+
     public static String[] getReplaceItems() {
         synchronized (replaceItems) {
             return replaceItems.toArray(new String[replaceItems.size()]);
         }
     }
-    
+
     public static void save() {
         synchronized (searchItems) {
             for (int i = 0; i < searchItems.size(); i++) {

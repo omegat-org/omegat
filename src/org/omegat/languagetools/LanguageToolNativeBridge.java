@@ -123,7 +123,7 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
 
     /**
      * Get the closest LanguageTool language to the supplied OmegaT language, or null if none can be found.
-     * 
+     *
      * @see <code>getLanguageForLanguageNameAndCountry</code> and <code>getLanguageForLanguageNameOnly</code>
      *      in {@link Languages}.
      */

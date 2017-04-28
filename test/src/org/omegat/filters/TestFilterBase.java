@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -76,7 +76,7 @@ import org.xml.sax.InputSource;
 
 /**
  * Base class for test filter parsing.
- * 
+ *
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
 public abstract class TestFilterBase extends TestCore {
@@ -238,7 +238,7 @@ public abstract class TestFilterBase extends TestCore {
     protected void translate(AbstractFilter filter, String filename) throws Exception {
         translate(filter, filename, Collections.emptyMap());
     }
-    
+
     protected void translate(AbstractFilter filter, String filename, Map<String, String> config) throws Exception {
         filter.translateFile(new File(filename), outFile, config, context,
                 new ITranslateCallback() {
@@ -467,9 +467,9 @@ public abstract class TestFilterBase extends TestCore {
         assertEquals(path, en.path);
         alCount++;
     }
-    
+
     protected void checkAlignById(String id, String source, String translation, String path) {
-        for(AlignedEntry en:al) {
+        for (AlignedEntry en : al) {
             if (id.equals(en.id)) {
                 assertEquals(source, en.source);
                 assertEquals(translation, en.translation);

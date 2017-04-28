@@ -42,27 +42,26 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
-
 /**
  * @author Ibai Lakunza Velasco
  * @author Didier Briel
  * @author Martin Wunderlich
  */
-public class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
+public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
     // Note: Add parameter &mt=0 to suppress MT results from being included in the TMX response; omit this
     // parameter to include MT results
     protected static final String GT_URL2 = "&langpair=#sourceLang#|#targetLang#&of=#format#&mt=1";
-    
+
     @Override
     protected String getPreferenceName() {
-    	return Preferences.ALLOW_MYMEMORY_MACHINE_TRANSLATE;
+        return Preferences.ALLOW_MYMEMORY_MACHINE_TRANSLATE;
     }
 
     @Override
     public String getName() {
         return OStrings.getString("MT_ENGINE_MYMEMORY_MACHINE");
     }
-    
+
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
         String prev = getFromCache(sLang, tLang, text);
@@ -71,75 +70,76 @@ public class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
         }
 
         String tmxResponse = "";
-        String machineTranslationMatch = ""; 
-        
+        String machineTranslationMatch = "";
+
         // Get MyMemory response in TMX format
         try {
             tmxResponse = getMyMemoryResponse(sLang, tLang, text, "tmx");
-        } catch(Exception e) { 
+        } catch (Exception e) {
             return e.getLocalizedMessage();
         }
-        
-        // Adjust DTD location and bug in entity encoding; the second line should be removed as soon as the bug is 
+
+        // Adjust DTD location and bug in entity encoding; the second line should be removed as soon as the bug is
         // fixed by MyMemory; TODO: Use local DTD
         tmxResponse = tmxResponse.replace("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">", "");
         tmxResponse = tmxResponse.replace("&", "&amp;");
-        
+
         // We must remove anything before the XML declaration, otherwise we get an exception when creating the
         // DOM object. Currently, MyMemory returns \r\n<?xml
         tmxResponse = getXMLString(tmxResponse);
-        
-        
+
         // Build DOM object from the returned XML string
         InputSource source = new InputSource(new StringReader(tmxResponse));
         Document document = factory.newDocumentBuilder().parse(source);
-        
+
         // Extract MT response and remove MT TU from XML
         // MyMemory is using hyphens instead of underscores and uppercase codes in 4-letter locale-codes
-        String targetLangCode =  tLang.getLocaleCode().replace('_', '-').toUpperCase(); 
+        String targetLangCode =  tLang.getLocaleCode().replace('_', '-').toUpperCase();
         machineTranslationMatch = extractMTresponse(document, targetLangCode);
-        
+
         machineTranslationMatch = cleanSpacesAroundTags(machineTranslationMatch, text);
-        
+
         putToCache(sLang, tLang, text, machineTranslationMatch);
-        return machineTranslationMatch; 
-    }
-    
-    private String extractMTresponse(Document document, String targetLang) {
-        String MTresponse = "";
-        String MTQuery = String.format("/tmx/body/tu[@creationid='MT!']/tuv[starts-with(@lang, '%s')]/seg/text()", targetLang); 
-        Object result = null; 
-        
-        XPath xpath = xPathFactory.newXPath();
-        
-        try {
-            XPathExpression expr = xpath.compile(MTQuery);
-            result = expr.evaluate(document, XPathConstants.NODE);
-        	    
-            Node node = (Node)result;
-            MTresponse = node.getTextContent();
-        } catch(Exception ex) {       	
-            // silently catch the exception and provide details to user
-            MTresponse = OStrings.getString("MT_ENGINE_MYMEMORY_MACHINE_ERROR") + ex.getMessage();;                      
-        }
-        
-        MTresponse = cleanUpText(MTresponse);
-        
-        return MTresponse;
+        return machineTranslationMatch;
     }
 
-	  
+    private String extractMTresponse(Document document, String targetLang) {
+        String mtResponse = "";
+        String mtQuery = String.format("/tmx/body/tu[@creationid='MT!']/tuv[starts-with(@lang, '%s')]/seg/text()",
+                targetLang);
+        Object result = null;
+
+        XPath xpath = xPathFactory.newXPath();
+
+        try {
+            XPathExpression expr = xpath.compile(mtQuery);
+            result = expr.evaluate(document, XPathConstants.NODE);
+
+            Node node = (Node) result;
+            mtResponse = node.getTextContent();
+        } catch (Exception ex) {
+            // silently catch the exception and provide details to user
+            mtResponse = OStrings.getString("MT_ENGINE_MYMEMORY_MACHINE_ERROR") + ex.getMessage();
+        }
+
+        mtResponse = cleanUpText(mtResponse);
+
+        return mtResponse;
+    }
+
     /**
      * Builds the URL for the XML query
      */
     @Override
-     protected String buildMyMemoryUrl(Language sLang, Language tLang, String text, String format) throws UnsupportedEncodingException {
+    protected String buildMyMemoryUrl(Language sLang, Language tLang, String text, String format)
+            throws UnsupportedEncodingException {
         String sourceLang = mymemoryCode(sLang);
         String targetLang = mymemoryCode(tLang);
-        String url2 = GT_URL2.replace("#sourceLang#", sourceLang).replace("#targetLang#", targetLang).replace("#format#", format);
+        String url2 = GT_URL2.replace("#sourceLang#", sourceLang).replace("#targetLang#", targetLang)
+                .replace("#format#", format);
         String url = GT_URL + URLEncoder.encode(text, "UTF-8") + url2;
-    
+
         return url;
-    }   
-    
+    }
+
 }

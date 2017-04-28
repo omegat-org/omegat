@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008-2013 Alex Buloichik
@@ -226,7 +226,7 @@ public class XLIFFFilterTest extends TestFilterBase {
      * content is on a path that contains both spaces and "non-path" characters,
      * a URISyntaxException was reported about the path instead of the
      * SAXParseException about the file content.
-     * 
+     *
      * This may only fail with a particular underlying parser implementation, as
      * it depends on a particular codepath in
      * com.sun.org.apache.xerces.internal.impl.XMLEntityManager and

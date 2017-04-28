@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2017 Aaron Madlon-Kay
@@ -37,7 +37,7 @@ import org.omegat.util.Preferences;
  * A container class for all standard AutoCompleter keys. Plugins and other
  * derived classes can handle additional keys by overriding
  * <code>processKeys()</code>.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class AutoCompleterKeys {

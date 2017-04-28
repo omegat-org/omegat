@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Alex Buloichik
@@ -27,10 +27,10 @@ package org.omegat.core.threads;
 
 /**
  * Exception for be thrown when thread stopped by OmegaT.
- * 
+ *
  * java.lang.InterruptedException can't be used, because it doesn't RuntimeException, i.e. all callbacks, etc.
  * should define Exception throwed.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 @SuppressWarnings("serial")

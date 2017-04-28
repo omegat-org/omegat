@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
@@ -45,7 +45,7 @@ import org.omegat.util.logging.OmegaTFileHandler;
 
 /**
  * A collection of methods to make logging things easier.
- * 
+ *
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
@@ -78,7 +78,7 @@ public class Log {
 
     /**
      * Initialize handlers manually. Required for WebStart.
-     * 
+     *
      * @param in
      *            settings
      */
@@ -130,7 +130,7 @@ public class Log {
     public static String getLogLocation() {
         return StaticUtils.getConfigDir() + "/logs";
     }
-    
+
     /**
      * Compute the filename of the log file
      * @return the filename of the log, or an empty string
@@ -143,9 +143,9 @@ public class Log {
         } else {
             return "";
         }
-            
+
     }
-    
+
     /**
      * Compute the full path of the log file
      * @return the full path of the log file
@@ -158,7 +158,7 @@ public class Log {
      * Set the level for the global logger. This is normally determined by the
      * <code>logger.properties</code> file; use this method to override for
      * special use cases.
-     * 
+     *
      * @param level
      *            The new level
      */
@@ -175,7 +175,7 @@ public class Log {
 
     /**
      * Logs a message, retrieved from the resource bundle.
-     * 
+     *
      * @param key
      *            The key of the message in the resource bundle.
      * @param parameters
@@ -194,10 +194,10 @@ public class Log {
 
     /**
      * Logs an Exception or Error.
-     * 
+     *
      * To the log are written: - The class name of the Exception or Error - The
      * message, if any - The stack trace
-     * 
+     *
      * @param throwable
      *            The exception or error to log
      */
@@ -306,7 +306,7 @@ public class Log {
 
     /**
      * Writes debug message to log (without localization)
-     * 
+     *
      * @param message
      *            message text
      * @param parameters

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -34,7 +34,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
  * This class specifies DocBook XML Dialect.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Fabian Mandelbaum
@@ -53,7 +53,7 @@ public class DocBookDialect extends DefaultXMLDialect {
                        "firstname", "surname", "affiliation", "orgname", "address", "email", "edition", "pubdate",
                        "copyright", "year", "holder", "isbn", "keywordset", "keyword", "preface", "title", "simpara", "para",
                        "chapter", "table", "tgroup", "thead", "tbody", "row", "entry", "revhistory", "revision",
-                       "revnumber", "date", "authorinitials", "revremark", "itemizedlist", "listitem", "member", 
+                       "revnumber", "date", "authorinitials", "revremark", "itemizedlist", "listitem", "member",
                        "releaseinfo", "bibliomixed", "bibliomset", "bridgehead", "glossseealso",
                        "primaryie", "refentrytitle", "secondaryie", "seealsoie", "seeie", "subtitle",
                        "synopfragmentref", "term", "tertiaryie", "tocentry", "glosssee", "section"});

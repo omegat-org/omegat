@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -39,7 +39,7 @@ import org.xml.sax.Attributes;
 
 /**
  * The interface to specify the method a Handler can use to translate text.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Alex Buloichik
@@ -53,14 +53,14 @@ interface Translator {
 
     /**
      * Creates a special XML-encoding-aware reader of an input file.
-     * 
+     *
      * @param inFile
      *            The source file.
      * @param outEncoding
      *            Encoding of the source file, if the filter supports it.
      *            Otherwise null.
      * @return The reader of the source file.
-     * 
+     *
      * @throws UnsupportedEncodingException
      *             Thrown if JVM doesn't support the specified inEncoding.
      * @throws IOException
@@ -71,14 +71,14 @@ interface Translator {
 
     /**
      * Creates a writer of the translated file.
-     * 
+     *
      * @param outFile
      *            The target file.
      * @param outEncoding
      *            Encoding of the target file, if the filter supports it.
      *            Otherwise null.
      * @return The writer for the target file.
-     * 
+     *
      * @throws UnsupportedEncodingException
      *             Thrown if JVM doesn't support the specified outEncoding
      * @throws IOException
@@ -89,7 +89,7 @@ interface Translator {
 
     /**
      * Start tag translation.
-     * 
+     *
      * @param path
      *            path in the XML
      * @param atts
@@ -99,7 +99,7 @@ interface Translator {
 
     /**
      * Finish tag translation.
-     * 
+     *
      * @param path
      *            path in the XML
      */
@@ -114,7 +114,7 @@ interface Translator {
      * Process text.
      */
     void text(String text);
-    
+
     /**
      * Returns true if current section should be ignored by parser.
      */

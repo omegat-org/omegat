@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Alex Buloichik
@@ -29,7 +29,7 @@ import org.omegat.core.data.SourceTextEntry;
 
 /**
  * Provider for some type of comments. It should work enough fast, without any network and disk calls.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface ICommentProvider {

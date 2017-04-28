@@ -56,7 +56,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * Class for store information about displayed segment, and for show segment in editor.
- * 
+ *
  * RTL and Bidirectional support: see good description at
  * http://www.iamcal.com/understanding-bidirectional-text/. Java support of RTL/bidi depends on supported
  * Unicode version. You can usually find supported Unicode version in the Character class comments.
@@ -128,7 +128,7 @@ public class SegmentBuilder {
 
     /**
      * Markers for this segment.
-     * 
+     *
      * Array of displayed marks. 1nd dimension - marker, 2nd dimension - marks
      */
     protected MarkInfo[][] marks;
@@ -574,7 +574,7 @@ public class SegmentBuilder {
         insertDirectionMarker(rtl);
 
         //the marker itself is in user language
-        insertDirectionEmbedding(EditorUtils.localeIsRTL()); 
+        insertDirectionEmbedding(EditorUtils.localeIsRTL());
         AttributeSet attrSegmentMark = settings.getSegmentMarkerAttributeSet();
         insert(createSegmentMarkText(), attrSegmentMark);
         insertDirectionEndEmbedding();
@@ -617,7 +617,7 @@ public class SegmentBuilder {
             }
             text = text.replace("0000", replacement);
         }
-        
+
         // trim and replace spaces to non-break spaces
         text = text.trim().replace(' ', '\u00A0');
 

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -32,19 +32,20 @@ import java.util.HashMap;
  * <p>
  * Does XML Entity -> Symbol conversion on source file read and Symbol -> XML
  * Entity conversion on translation write.
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  */
 public class DefaultEntityFilter {
 
-    private static HashMap<Integer, String> m_charMap;
-    private static HashMap<String, Integer> m_escMap;
+    private static final HashMap<Integer, String> CHAR_MAP;
+    private static final HashMap<String, Integer> ESC_MAP;
 
     static {
-        m_escMap = new HashMap<String, Integer>(512);
-        m_charMap = new HashMap<Integer, String>(512);
+        ESC_MAP = new HashMap<String, Integer>(512);
+        CHAR_MAP = new HashMap<Integer, String>(512);
 
+        // CHECKSTYLE:OFF
         addMapEntry('\'', "apos");
         addMapEntry('"', "quot");
         addMapEntry('&', "amp");
@@ -298,18 +299,19 @@ public class DefaultEntityFilter {
         addMapEntry(9827, "clubs");
         addMapEntry(9829, "hearts");
         addMapEntry(9830, "diams");
+        // CHECKSTYLE:ON
     }
 
     private static void addMapEntry(int val, String name) {
-        m_escMap.put(name, val);
-        m_charMap.put(val, name);
+        ESC_MAP.put(name, val);
+        CHAR_MAP.put(val, name);
     }
 
     /**
      * Converts plaintext symbol to XML entity.
      */
     public String convertToEntity(int cp) {
-        String s = m_charMap.get(cp);
+        String s = CHAR_MAP.get(cp);
         if (s != null) {
             return "&" + s + ";";
         } else {
@@ -322,7 +324,7 @@ public class DefaultEntityFilter {
      * converted, returns 0.
      */
     public int convertToSymbol(String escapeSequence) {
-        Integer cp = m_escMap.get(escapeSequence);
+        Integer cp = ESC_MAP.get(escapeSequence);
         if (cp != null) {
             return cp;
         }

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -29,7 +29,7 @@ import org.omegat.filters3.OutOfTurnTag;
 
 /**
  * Out of turn XML Tag.
- * 
+ *
  * @author Maxym Mykhalchuk
  */
 public class XMLOutOfTurnTag extends OutOfTurnTag {
@@ -43,13 +43,13 @@ public class XMLOutOfTurnTag extends OutOfTurnTag {
      * Returns the tag in its original form as it was in original document.
      * <p>
      * E.g. for OpenDocument footnote (out of turn tag "text:note-body") <code>
-     * &lt;text:note-body>&lt;text:p text:style-name="Endnote">The endnote 
-     * appears at the end of the document in OO but in the middle of 
+     * &lt;text:note-body>&lt;text:p text:style-name="Endnote">The endnote
+     * appears at the end of the document in OO but in the middle of
      * the segment in OmegaT.&lt;/text:p>&lt;/text:note-body>
      * </code> this method should return the same if not translated, namely
      * <code>
-     * &lt;text:note-body>&lt;text:p text:style-name="Endnote">The endnote 
-     * appears at the end of the document in OO but in the middle of 
+     * &lt;text:note-body>&lt;text:p text:style-name="Endnote">The endnote
+     * appears at the end of the document in OO but in the middle of
      * the segment in OmegaT.&lt;/text:p>&lt;/text:note-body>
      * </code>.
      */

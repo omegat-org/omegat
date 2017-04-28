@@ -39,7 +39,7 @@ import java.util.logging.Logger;
 /**
  * Class for monitor directory content changes. It just looks directory every x seconds and run callback if
  * some files changed.
- * 
+ *
  * @author Alex Buloichik <alex73mail@gmail.com>
  * @author Briac Pilpre
  */
@@ -56,7 +56,7 @@ public class DirectoryMonitor extends Thread {
 
     /**
      * Create monitor.
-     * 
+     *
      * @param dir
      *            directory to monitoring
      */
@@ -78,7 +78,7 @@ public class DirectoryMonitor extends Thread {
         // Can't call this(dir, callback) because fields are final.
         this.directoryCallback = directoryCallback;
     }
-    
+
     public File getDir() {
         return dir;
     }
@@ -160,7 +160,7 @@ public class DirectoryMonitor extends Thread {
                 directoryChanged = true;
             }
         }
-        
+
         if (directoryCallback != null && directoryChanged)
         {
         	directoryCallback.directoryChanged(dir);
@@ -202,7 +202,7 @@ public class DirectoryMonitor extends Thread {
          */
         void fileChanged(File file);
     }
-    
+
     public interface DirectoryCallback {
         /**
          * Called once for every directory where a file was changed - created, modified, deleted.

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Arno Peters
@@ -52,7 +52,7 @@ import org.omegat.util.OStrings;
 public class PdfFilter  extends AbstractFilter {
 
     private static final Pattern LINEBREAK_PATTERN = Pattern.compile("^\\s*?$");
-    
+
     @Override
     public String getFileFormatName() {
         return OStrings.getString("PDFFILTER_FILTER_NAME");
@@ -115,7 +115,7 @@ public class PdfFilter  extends AbstractFilter {
             if (sb.length() > 0) {
                 out.write(processEntry(sb.toString()));
                 sb.setLength(0);
-                out.write("\n");				
+                out.write("\n");
             }
         } catch (IOException e) {
             e.printStackTrace();

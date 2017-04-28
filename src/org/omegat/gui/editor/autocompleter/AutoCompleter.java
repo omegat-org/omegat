@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
@@ -59,7 +59,7 @@ import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * The controller part of the auto-completer
- * 
+ *
  * @author Zoltan Bartko (bartkozoltan@bartkozoltan.com)
  * @author Aaron Madlon-Kay
  */
@@ -67,41 +67,40 @@ public class AutoCompleter implements IAutoCompleter {
 
     private final static int MIN_VIEWPORT_HEIGHT = 50;
     private final static int MAX_POPUP_WIDTH = 500;
-    
-    JPopupMenu popup = new JPopupMenu(); 
-    private EditorTextArea3 editor; 
+
+    JPopupMenu popup = new JPopupMenu();
+    private EditorTextArea3 editor;
     private AutoCompleterKeys keys;
-    
-    
+
     public final static int PAGE_ROW_COUNT = 10;
-    
+
     boolean didPopUpAutomatically = false;
-    
+
     /**
      * a list of the views associated with this auto-completer
      */
     List<AbstractAutoCompleterView> views = new ArrayList<AbstractAutoCompleterView>();
-    
+
     /**
      * the current view
      */
     int currentView = -1;
-    
+
     JScrollPane scroll;
     JLabel viewLabel;
-    
-    public AutoCompleter(EditorTextArea3 editor) { 
+
+    public AutoCompleter(EditorTextArea3 editor) {
         this.editor = editor;
-        
+
         scroll = new JScrollPane();
         scroll.setBorder(new EmptyBorder(0, 0, 0, 0));
         scroll.setPreferredSize(new Dimension(200, 200));
         scroll.setColumnHeaderView(null);
         scroll.setFocusable(false);
- 
-        scroll.getVerticalScrollBar().setFocusable(false); 
-        scroll.getHorizontalScrollBar().setFocusable(false); 
-        
+
+        scroll.getVerticalScrollBar().setFocusable(false);
+        scroll.getHorizontalScrollBar().setFocusable(false);
+
         // add any views here
         addView(new GlossaryAutoCompleterView());
         addView(new AutotextAutoCompleterView());
@@ -117,11 +116,11 @@ public class AutoCompleter implements IAutoCompleter {
         viewLabel.setOpaque(true);
         popup.setBorder(new MatteBorder(1, 1, 1, 1, UIManager.getColor("OmegaTBorder.color")));
         popup.setLayout(new BorderLayout());
-        popup.add(scroll, BorderLayout.CENTER); 
+        popup.add(scroll, BorderLayout.CENTER);
         popup.add(viewLabel, BorderLayout.SOUTH);
 
         resetKeys();
-    } 
+    }
 
     @Override
     public void addView(AbstractAutoCompleterView view) {
@@ -132,14 +131,14 @@ public class AutoCompleter implements IAutoCompleter {
     EditorTextArea3 getEditor() {
         return editor;
     }
-    
+
     /**
      * Process the autocompletion keys
      * @param e the key event to process
      * @return true if a key has been processed, false if otherwise.
      */
     public boolean processKeys(KeyEvent e) {
-        
+
         KeyStroke s = KeyStroke.getKeyStrokeForEvent(e);
 
         if (!isVisible() && s.equals(keys.trigger)) {
@@ -154,22 +153,22 @@ public class AutoCompleter implements IAutoCompleter {
 
             updatePopup(false);
             setVisible(true);
-            
+
             return true;
         }
-        
+
         if (isVisible()) {
             if (getCurrentView().processKeys(e)) {
                 return true;
             }
-            
+
             if (s.equals(keys.confirmAndClose)) {
                 doSelection();
                 return true;
             }
-            
+
             if (s.equals(keys.confirmWithoutClose)) {
-                acceptedListItem(getSelectedValue()); 
+                acceptedListItem(getSelectedValue());
                 updatePopup(false);
                 return true;
             }
@@ -178,37 +177,37 @@ public class AutoCompleter implements IAutoCompleter {
                 setVisible(false);
                 return true;
             }
-            
+
             if (s.equals(keys.prevView)) {
                 selectPreviousView();
                 return true;
             }
-            
+
             if (s.equals(keys.nextView)) {
                 selectNextView();
                 return true;
             }
         }
-        
+
         // otherwise
         return false;
     }
-    
+
     public void doSelection() {
         acceptedListItem(getSelectedValue());
         if (getCurrentView().shouldCloseOnSelection()) {
             setVisible(false);
         }
     }
-    
+
     /**
      * Returns the currently selected value.
-     * @return 
+     * @return
      */
     private AutoCompleterItem getSelectedValue() {
         return views.get(currentView).getSelectedValue();
     }
-       
+
     /**
      * Show the popup list.
      */
@@ -222,7 +221,7 @@ public class AutoCompleter implements IAutoCompleter {
         }
 
         AbstractAutoCompleterView view = getCurrentView();
-        
+
         view.updateViewData();
         scroll.setPreferredSize(new Dimension(Math.min(view.getPreferredWidth(), MAX_POPUP_WIDTH),
                 Math.max(view.getPreferredHeight(), MIN_VIEWPORT_HEIGHT)));
@@ -233,7 +232,7 @@ public class AutoCompleter implements IAutoCompleter {
             popup.show(editor, p.x, p.y);
         }
     }
-    
+
     /**
      * Determine the x,y coordinate at which to place the popup.
      */
@@ -254,9 +253,9 @@ public class AutoCompleter implements IAutoCompleter {
 
     /**
      * Replace the text in the editor with the accepted item.
-     * @param selected 
+     * @param selected
      */
-    protected void acceptedListItem(AutoCompleterItem selected) { 
+    protected void acceptedListItem(AutoCompleterItem selected) {
         if (selected == null) {
             return;
         }
@@ -270,11 +269,11 @@ public class AutoCompleter implements IAutoCompleter {
             editor.setSelectionEnd(offset);
         }
         editor.replaceSelection(selected.payload);
-        
+
         if (selected.cursorAdjust != 0) {
             editor.getCaret().setDot(editor.getCaretPosition() + selected.cursorAdjust);
         }
-        
+
         if (selected.keepSelection) {
             editor.replaceSelection(selection);
         }
@@ -293,10 +292,10 @@ public class AutoCompleter implements IAutoCompleter {
         }
         return -1;
     }
-    
+
     /**
      * Get the view number of the previous view.
-     * @return 
+     * @return
      */
     private int prevViewNumber(int start) {
         for (int n = 1; n <= views.size(); n++) {
@@ -307,7 +306,7 @@ public class AutoCompleter implements IAutoCompleter {
         }
         return -1;
     }
-    
+
     /**
      * Update the view label
      */
@@ -316,7 +315,7 @@ public class AutoCompleter implements IAutoCompleter {
         sb.append("<b>");
         sb.append(getCurrentView().getName());
         sb.append("</b>");
-        
+
         if (views.size() != 1) {
             int nextViewN = nextViewNumber(currentView);
             if (views.size() >= 2 && nextViewN != -1) {
@@ -325,7 +324,7 @@ public class AutoCompleter implements IAutoCompleter {
                         StaticUIUtils.getKeyStrokeText(keys.nextView),
                         views.get(nextViewN).getName()));
             }
-            
+
             int prevViewN = prevViewNumber(currentView);
             if (views.size() > 2 && prevViewN != -1) {
                 sb.append("<br>");
@@ -335,14 +334,14 @@ public class AutoCompleter implements IAutoCompleter {
             }
         }
         sb.append("</html>");
-        
+
         viewLabel.setText(sb.toString());
     }
 
     public AbstractAutoCompleterView getCurrentView() {
         return views.get(currentView);
     }
-    
+
     /** go to the next view */
     private boolean selectNextView() {
         int nextViewN = nextViewNumber(currentView);
@@ -360,7 +359,7 @@ public class AutoCompleter implements IAutoCompleter {
         updateViewLabel();
         updatePopup(onlyIfVisible);
     }
-    
+
     /** select the previous view */
     private boolean selectPreviousView() {
         int prevViewN = prevViewNumber(currentView);
@@ -383,7 +382,7 @@ public class AutoCompleter implements IAutoCompleter {
                 public void run() {
                     Point p = getDisplayPoint();
                     popup.show(editor, p.x, p.y);
-                    editor.requestFocus(); 
+                    editor.requestFocus();
                 }
             });
         } else {
@@ -391,21 +390,21 @@ public class AutoCompleter implements IAutoCompleter {
             didPopUpAutomatically = false;
         }
     }
-    
+
     private boolean canBecomeVisible() {
         return currentView != -1 || selectNextView();
     }
 
-    /** 
+    /**
      * get the key text
      * @param base
      * @param modifier
-     * @return 
+     * @return
      */
     public String keyText(int base, int modifier) {
          return KeyEvent.getKeyModifiersText(modifier) + "+" + KeyEvent.getKeyText(base);
     }
-    
+
     public void textDidChange() {
         if (isVisible() && !didPopUpAutomatically) {
             updatePopup(true);
@@ -414,7 +413,7 @@ public class AutoCompleter implements IAutoCompleter {
         if (!Preferences.isPreference(Preferences.AC_SHOW_SUGGESTIONS_AUTOMATICALLY)) {
             return;
         }
-        
+
         if (!canBecomeVisible()) {
             return;
         }

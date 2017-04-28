@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik, Didier Briel
@@ -61,7 +61,7 @@ import org.xml.sax.helpers.XMLFilterImpl;
 
 /**
  * Reader for TBX glossaries.
- * 
+ *
  * @author Alex Buloichik <alex73mail@gmail.com>
  * @author Didier Briel
  * @author Guido Leenders

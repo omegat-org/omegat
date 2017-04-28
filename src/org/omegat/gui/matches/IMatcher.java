@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -29,28 +29,28 @@ import org.omegat.core.matching.NearString;
 
 /**
  * Interface for access to editor functionality.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Zoltan Bartko
  */
 public interface IMatcher {
     /**
      * Get selected match.
-     * 
+     *
      * Must be called from UI thread only.
      */
     NearString getActiveMatch();
 
     /**
      * Set specified mathc as active.
-     * 
+     *
      * @param index
      *            new active match
-     * 
+     *
      *            Must be called from UI thread only.
      */
     void setActiveMatch(int index);
-    
+
     String substituteNumbers(String source, String sourceMatch, String targetMatch);
 
     /**

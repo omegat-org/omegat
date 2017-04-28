@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -73,7 +73,7 @@ import gen.core.filters.Filters;
 /**
  * A master class that registers and handles all the filters. Singleton - there can be only one instance of
  * this class.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers
  * @author Martin Wunderlich
@@ -159,7 +159,7 @@ public class FilterMaster {
 
     /**
      * Get filter's instance by filter class name.
-     * 
+     *
      * @param classname
      *            filter's class name
      * @return filter instance
@@ -180,7 +180,7 @@ public class FilterMaster {
 
     /**
      * OmegaT core calls this method to load a source file.
-     * 
+     *
      * @param filename
      *            The name of the source file to load.
      * @return Whether the file was handled by one of OmegaT filters.
@@ -218,7 +218,7 @@ public class FilterMaster {
      * <li>Filter is asked to process the file.
      * </ul>
      * If no filter is found, that processes this file, we simply copy it to target folder.
-     * 
+     *
      * @param sourcedir
      *            The folder of the source inFile.
      * @param filename
@@ -301,14 +301,14 @@ public class FilterMaster {
     /**
      * Gets the filter according to the source filename provided. In case of failing to find a filter to
      * handle the file returns <code>null</code>.
-     * 
+     *
      * In case of finding an appropriate filter it
      * <ul>
      * <li>Creates the filter (use <code>OneFilter.getFilter()</code> to get it)
      * <li>Creates a reader (use <code>OneFilter.getReader()</code> to get it)
      * <li>Checks whether the filter supports the file.
      * </ul>
-     * 
+     *
      * @param inFile The full path to the source file
      * @return The corresponding LookupInformation
      */
@@ -345,7 +345,7 @@ public class FilterMaster {
      * it matches known supported patterns. When false, the filter may have to
      * actually load some or all of the file in order to determine whether or
      * not it is supported.
-     * 
+     *
      * @param file
      *            The file to check
      * @param quick
@@ -393,8 +393,8 @@ public class FilterMaster {
 
     /**
      * Queries JRE for the list of supported encodings. Also adds the human name for no/automatic inEncoding.
-     * 
-     * 
+     *
+     *
      * @return names of all the encodings in an array
      */
     public static List<String> getSupportedEncodings() {
@@ -429,7 +429,7 @@ public class FilterMaster {
     /**
      * Loads information about the filters from an XML file. If there's an error loading a file, it calls
      * <code>setupDefaultFilters</code>.
-     * 
+     *
      * @throws IOException
      */
     public static Filters loadConfig(File configFile) throws IOException {
@@ -455,7 +455,7 @@ public class FilterMaster {
 
     /**
      * Saves information about the filters to an XML file.
-     * 
+     *
      * @throws IOException
      */
     public static void saveConfig(Filters config, File configFile) throws IOException {
@@ -480,7 +480,7 @@ public class FilterMaster {
 
     /**
      * Whether the mask matches the filename. Filename should be "name.ext", without path.
-     * 
+     *
      * @param filename
      *            The filename to check
      * @param mask
@@ -523,7 +523,7 @@ public class FilterMaster {
         LookupInformation lookup = lookupFilter(srcFile, fc);
         return getTargetForSource(srcRelPath, lookup, fc.getTargetLang());
     }
-    
+
     private static String getTargetForSource(String srcRelPath, LookupInformation lookup, Language targetLang) {
         File srcRelFile = new File(srcRelPath);
         return new File(srcRelFile.getParent(),
@@ -532,7 +532,7 @@ public class FilterMaster {
                         lookup.outFilesInfo.getSourceEncoding(), lookup.outFilesInfo.getTargetEncoding(),
                         lookup.filterObject.getFileFormatName())).getPath();
     }
-    
+
     /**
      * Construct a target filename according to pattern from a file's name. Filename should be "name.ext",
      * without path.
@@ -570,7 +570,7 @@ public class FilterMaster {
      * <li><code>${nameOnly-1}</code> will be equal to "thisisfile.ext1"
      * <li>and <code>${extension-1}</code> - "ext2"
      * </ul>
-     * 
+     *
      * @param filename
      *            Filename to change
      * @param pattern
@@ -665,7 +665,7 @@ public class FilterMaster {
         //
         res = res.replace(AbstractFilter.TFP_FILE_FILTER_NAME, filterFormatName);
         //
-        
+
         String sourceMaskPattern = sourceMask.replaceAll("\\?","(.)").replaceAll("\\*","(.*?)");
         java.util.regex.Matcher sourceMatcher = Pattern.compile(sourceMaskPattern).matcher(filename);
         if (sourceMatcher.find()) {
@@ -673,7 +673,7 @@ public class FilterMaster {
                 res = res.replaceAll("\\$\\{" + i + "\\}", sourceMatcher.group(i));
             }
         }
-        
+
         String[] splitName = filename.split("\\.");
         StringBuilder nameOnlyBuf = new StringBuilder (splitName[0]);
         StringBuilder extensionBuf = new StringBuilder (splitName[splitName.length - 1]);
@@ -691,7 +691,7 @@ public class FilterMaster {
 
     /**
      * Clone config for editing
-     * 
+     *
      * @return new config instance
      */
     public static Filters cloneConfig(Filters orig) {
@@ -708,7 +708,7 @@ public class FilterMaster {
 
     /**
      * Clone one filter's config for editing.
-     * 
+     *
      * @param f
      *            one filter's config
      * @return new config instance
@@ -731,7 +731,7 @@ public class FilterMaster {
 
     /**
      * Clone one filter's instance config for editing.
-     * 
+     *
      * @param f
      *            new filter's instance config
      * @return new config instance
@@ -747,7 +747,7 @@ public class FilterMaster {
 
     /**
      * Create default filter's config.
-     * 
+     *
      * @param filterClassname
      *            filter's classname
      * @return default filter's config
@@ -773,7 +773,7 @@ public class FilterMaster {
 
     /**
      * Convert options from xml for filter usage.
-     * 
+     *
      * @param options
      *            xml options
      * @return options for filter usage
@@ -788,7 +788,7 @@ public class FilterMaster {
 
     /**
      * Convert options to xml from map.
-     * 
+     *
      * @param f
      *            filter
      * @param newOptions

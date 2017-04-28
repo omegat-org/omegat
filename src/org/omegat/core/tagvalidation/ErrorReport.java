@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Aaron Madlon-Kay
@@ -41,7 +41,7 @@ import org.omegat.util.TagUtil.Tag;
  * separately for the source and translation text. The SourceTextEntry is
  * retained so that we can look up and replace the translation text when
  * auto-fixing tags.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class ErrorReport {
@@ -88,7 +88,7 @@ public class ErrorReport {
     /**
      * Obtain an inverse map, indicating which tags are associated with which
      * errors.
-     * 
+     *
      * @return A map between errors and tags
      */
     public Map<TagError, List<Tag>> inverseReport() {
@@ -154,7 +154,7 @@ public class ErrorReport {
 
     /**
      * Obtain the appropriate user-facing string for an error.
-     * 
+     *
      * @param error
      * @return The localized error name
      */

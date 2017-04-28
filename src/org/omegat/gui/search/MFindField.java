@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey
@@ -35,7 +35,7 @@ import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * "Default text" feature inspired by http://stackoverflow.com/a/1739037/448068
- *  
+ *
  *  @author Keith Godfrey
  *  @author Henry Pijffers (henry.pijffers@saxnot.com)
  *  @author Didier Briel
@@ -43,7 +43,7 @@ import org.omegat.util.gui.StaticUIUtils;
  */
 @SuppressWarnings("serial")
 public class MFindField extends HintTextField {
-    
+
     private final Font normalFont;
 
     public MFindField() {

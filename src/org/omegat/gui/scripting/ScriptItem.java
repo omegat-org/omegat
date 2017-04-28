@@ -51,7 +51,7 @@ import org.omegat.util.LinebreakPreservingReader;
 /**
  * A script file in the script list is represented as ScriptListFile to allow
  * for localization, description and reordering.
- * 
+ *
  * @author Briac Pilpre
  * @author Didier Briel
  * @author Aaron Madlon-Kay
@@ -62,7 +62,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
 
     public ScriptItem(File scriptFile) {
         m_file = scriptFile;
-        
+
         if (m_file == null) {
             return;
         }
@@ -71,7 +71,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
             ClassLoader loader = new URLClassLoader(new URL[]{scriptFile.getParentFile().toURI().toURL()});
             String shortName = FilenameUtils.removeExtension(scriptFile.getName());
             try { // Try first at the root of the script dir, for compatibility
-                m_res = ResourceBundle.getBundle(shortName, Locale.getDefault(), loader); 
+                m_res = ResourceBundle.getBundle(shortName, Locale.getDefault(), loader);
             } catch (MissingResourceException e) {
                 try { // Then inside the /properties dir
                     m_res = ResourceBundle.getBundle(PROPERTIES  + shortName, Locale.getDefault(), loader);

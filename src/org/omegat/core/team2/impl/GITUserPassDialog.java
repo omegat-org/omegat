@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -58,10 +58,10 @@ public class GITUserPassDialog extends javax.swing.JDialog {
         invalidate();
         pack();
         setLocationRelativeTo(parent);
-        
+
         userText.requestFocusInWindow();
     }
-    
+
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
     public int getReturnStatus() {
         return returnStatus;

@@ -32,7 +32,7 @@ import org.omegat.gui.main.IMainWindow;
 
 /**
  * Core initializer for unit tests.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TestCoreInitializer {

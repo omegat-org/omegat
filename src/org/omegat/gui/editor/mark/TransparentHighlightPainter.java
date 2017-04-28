@@ -38,7 +38,7 @@ import org.omegat.gui.editor.UnderlineFactory.Underliner;
 
 /**
  * Paints transparent background color
- * 
+ *
  * @author Martin Fleurke
  */
 public class TransparentHighlightPainter extends Underliner {
@@ -46,7 +46,7 @@ public class TransparentHighlightPainter extends Underliner {
     private AlphaComposite alphaComposite;
 
     /**
-     * 
+     *
      * @param color the color to paint the background in
      * @param alpha the transparency level (1.0 = not transparent, 0.0 = full transparency)
      */

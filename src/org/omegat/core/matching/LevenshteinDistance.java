@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -31,13 +31,13 @@ import org.omegat.util.Token;
 
 /**
  * Class to compute Levenshtein Distance.
- * 
+ *
  * <p>
  * Levenshtein distance (LD) is a measure of the similarity between two strings,
  * which we will refer to as the source string (s) and the target string (t).
  * The distance is the number of deletions, insertions, or substitutions
  * required to transform s into t.
- * 
+ *
  * <p>
  * For example,
  * <ul>
@@ -46,22 +46,22 @@ import org.omegat.util.Token;
  * <li>If s is "test" and t is "tent", then LD(s,t) = 1, because one
  * substitution (change "s" to "n") is sufficient to transform s into t.
  * </ul>
- * 
+ *
  * <p>
  * The greater the Levenshtein distance, the more different the strings are.
  * <p>
  * Levenshtein distance is named after the Russian scientist Vladimir
  * Levenshtein, who devised the algorithm in 1965. If you can't spell or
  * pronounce Levenshtein, the metric is also sometimes called edit distance.
- * 
+ *
  * alex73's comment: We can't make 'compute' mathod static, because in this case
  * LevenshteinDistance will not be thread-safe(see 'd' and 'p' arrays). We can't
  * create these arrays inside 'compute' method, because it's enough slow
  * operation. We have to create LevenshteinDistance instance one for each thread
  * where we will call it. It's best way for best performance.
- * 
+ *
  * @see <a href="http://people.cs.pitt.edu/~kirk/cs1501/Pruhs/Fall2006/Assignments/editdistance/Levenshtein%20Distance.htm">Levenshtein Distance, in Three Flavors</a>
- * 
+ *
  * @author Vladimir Levenshtein
  * @author Michael Gilleland, Merriam Park Software
  * @author Chas Emerick, Apache Software Foundation
@@ -93,12 +93,12 @@ public class LevenshteinDistance implements ISimilarityCalculator {
 
     /*
      * Compute Levenshtein distance between two lists.
-     * 
+     *
      * <p> The difference between this impl. and the canonical one is that,
      * rather than creating and retaining a matrix of size s.length()+1 by
      * t.length()+1, we maintain two single-dimensional arrays of length
      * s.length()+1.
-     * 
+     *
      * <p> The first, d, is the 'current working' distance array that maintains
      * the newest distance cost counts as we iterate through the characters of
      * String s. Each time we increment the index of String t we are comparing,
@@ -109,11 +109,11 @@ public class LevenshteinDistance implements ISimilarityCalculator {
      * aren't really copied anymore, just switched... this is clearly much
      * better than cloning an array or doing a System.arraycopy() each time
      * through the outer loop.)
-     * 
+     *
      * <p> Effectively, the difference between the two implementations is this
      * one does not cause an out of memory condition when calculating the LD
      * over two very large strings.
-     * 
+     *
      * <p> For perfomance reasons the maximal number of compared items is {@link
      * #MAX_N}.
      */

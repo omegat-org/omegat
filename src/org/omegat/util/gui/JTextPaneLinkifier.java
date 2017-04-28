@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Chihiro Hio, Aaron Madlon-Kay
@@ -54,17 +54,17 @@ import org.omegat.util.Log;
 
 /**
  * Adapted from omegat-plugin-linkbuilder by Chihiro Hio, provided under GPLv3.
- * 
+ *
  * @see <a href="https://github.com/hiohiohio/omegat-plugin-linkbuilder">
  *      Original</a>
- * 
+ *
  * @author Chihiro Hio
  * @author Aaron Madlon-Kay
  */
 public class JTextPaneLinkifier {
 
     private static final String ATTR_LINK = "linkbuilder_link";
-    
+
     public static void linkify(JTextPane jTextPane) {
         final MouseAdapter mouseAdapter = new AttributeInserterMouseListener(jTextPane);
 
@@ -99,7 +99,7 @@ public class JTextPaneLinkifier {
     private interface IAttributeAction {
         public void execute();
     }
-    
+
     private static class AttributeInserterMouseListener extends MouseAdapter {
 
         private final JTextPane jTextPane;
@@ -148,7 +148,7 @@ public class JTextPaneLinkifier {
         private static final Pattern URL_PATTERN = Pattern.compile(REGEX_URL, Pattern.CASE_INSENSITIVE);
         private static final AttributeSet DEFAULT_ATTRIBUTES = new SimpleAttributeSet();
         private static final AttributeSet LINK_ATTRIBUTES;
-        
+
         static {
             MutableAttributeSet tmp = new SimpleAttributeSet();
             StyleConstants.setUnderline(tmp, true);
@@ -244,7 +244,7 @@ public class JTextPaneLinkifier {
                 Log.log(ex);
             }
         }
-        
+
         private AttributeSet makeAttributes(final int offset, final URI target) {
             SimpleAttributeSet atts = new SimpleAttributeSet(doc.getCharacterElement(offset).getAttributes());
             atts.addAttributes(LINK_ATTRIBUTES);
@@ -257,7 +257,7 @@ public class JTextPaneLinkifier {
                         Log.log(e);
                     }
                 }
-            });  
+            });
             return atts;
         }
     }

@@ -81,7 +81,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * This is a Glossary pane that displays glossary entries.
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Didier Briel
@@ -111,7 +111,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
     protected static List<GlossaryEntry> nowEntries;
 
     private CreateGlossaryEntry createGlossaryEntryDialog;
-    
+
     private final DockableScrollPane scrollPane;
 
     /** Creates new form MatchGlossaryPane */
@@ -130,7 +130,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         addMouseListener(mouseListener);
 
         Core.getEditor().registerPopupMenuConstructors(300, new TransTipsPopup());
-        
+
         if (!GraphicsEnvironment.isHeadless()) {
             DragTargetOverlay.apply(this, new FileDropInfo(false) {
                 @Override
@@ -158,7 +158,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
                 }
             });
         }
-        
+
         JTextPaneLinkifier.linkify(this);
     }
 
@@ -213,7 +213,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         if (!entries.isEmpty() && Preferences.isPreference(Preferences.NOTIFY_GLOSSARY_HITS)) {
             scrollPane.notify(true);
         }
-        
+
         nowEntries = entries;
 
         // If the TransTips is enabled then underline all the matched glossary
@@ -273,10 +273,10 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
             popup.show(GlossaryTextArea.this, p.x, p.y);
         }
     };
-    
+
     private void populateContextMenu(JPopupMenu popup) {
         boolean projectLoaded = Core.getProject().isProjectLoaded();
-        
+
         final String selection = getSelectedText();
         JMenuItem item = popup.add(OStrings.getString("GUI_GLOSSARYWINDOW_insertselection"));
         item.setEnabled(projectLoaded && !StringUtil.isEmpty(selection));

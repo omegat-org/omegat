@@ -68,7 +68,7 @@ public class DictionaryInstallerDialog extends JDialog {
      * the list model
      */
     private final DefaultListModel<String> listModel = new DefaultListModel<>();
-    
+
     private LoaderWorker loader = null;
     private InstallerWorker installer = null;
 
@@ -81,7 +81,7 @@ public class DictionaryInstallerDialog extends JDialog {
         this.dicMan = dicMan;
 
         initComponents();
-        
+
         dictionaryList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -92,9 +92,9 @@ public class DictionaryInstallerDialog extends JDialog {
         });
 
         setLocationRelativeTo(parent);
-        
+
         dictionaryListValueChanged(null);
-        
+
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {
@@ -118,10 +118,10 @@ public class DictionaryInstallerDialog extends JDialog {
             try {
                 List<String> list = get();
                 list.forEach(listModel::addElement);
-                
+
                 dictionaryList.setModel(listModel);
                 dictionaryList.setEnabled(true);
-                
+
                 if (list.isEmpty()) {
                     installButton.setEnabled(false);
                     infoTextArea.setText(OStrings.getString("GUI_DICTIONARY_INSTALLER_TEXT_NOTHING"));
@@ -132,7 +132,7 @@ public class DictionaryInstallerDialog extends JDialog {
             }
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -237,7 +237,7 @@ public class DictionaryInstallerDialog extends JDialog {
 
         private final Cursor HOURGLASS_CURSOR = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
         private Cursor oldCursor;
-        
+
         @Override
         protected List<String> doInBackground() throws Exception {
             oldCursor = getCursor();
@@ -268,7 +268,7 @@ public class DictionaryInstallerDialog extends JDialog {
         protected void process(List<String> chunks) {
             chunks.forEach(listModel::removeElement);
         }
-        
+
         @Override
         protected void done() {
             try {
@@ -282,7 +282,7 @@ public class DictionaryInstallerDialog extends JDialog {
             closeButton.setEnabled(true);
         }
     }
-    
+
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         if (installer != null) {
             installer.cancel(true);

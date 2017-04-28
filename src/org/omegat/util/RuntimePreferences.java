@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -28,7 +28,7 @@ package org.omegat.util;
 /**
  * Class for store runtime-only preferences, which shouldn't be saved to config
  * dir.
- * 
+ *
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
 public class RuntimePreferences {
@@ -40,7 +40,7 @@ public class RuntimePreferences {
     private static String configDir;
 
     private static boolean projectLockingEnabled = true;
-    
+
     /** Last opened project location save control **/
     private static boolean locationSaveEnabled = true;
 

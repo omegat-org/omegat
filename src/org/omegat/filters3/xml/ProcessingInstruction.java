@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Didier Briel
@@ -28,7 +28,7 @@ package org.omegat.filters3.xml;
 /**
  * A processing instruction in an XML file. For example,
  * <code>&lt;? here is the processing instruction ?&gt;</code>.
- * 
+ *
  * @author Didier Briel
  */
 public class ProcessingInstruction extends XMLPseudoTag {

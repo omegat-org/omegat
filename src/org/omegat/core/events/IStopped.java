@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Alex Buloichik
@@ -28,7 +28,7 @@ package org.omegat.core.events;
 /**
  * Interface for checking if some operations was already stopped. Used in some separate threads for check is
  * processing still required.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IStopped {

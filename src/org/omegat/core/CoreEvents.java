@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -41,10 +41,10 @@ import org.omegat.util.Log;
 
 /**
  * Class for distribute main application events.
- * 
+ *
  * All events can be fired in any threads, but will be delivered to listeners
  * only in the UI thread. It's required for better threads synchronization.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class CoreEvents {

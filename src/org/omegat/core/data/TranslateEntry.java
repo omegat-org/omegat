@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2011 Alex Buloichik
@@ -39,10 +39,10 @@ import org.omegat.util.TagUtil;
 
 /**
  * Base class for entry translation.
- * 
+ *
  * This class collects all segments which should be translated, for ability to link prev/next segments for the
  * seconds pass.
- * 
+ *
  * @author Alex Buloichik <alex73mail@gmail.com>
  * @author Wildrich Fourie
  * @author Didier Briel
@@ -50,12 +50,12 @@ import org.omegat.util.TagUtil;
 public abstract class TranslateEntry implements ITranslateCallback {
 
     private final ProjectProperties m_config;
-    
+
     private int pass;
-    
+
     /** Collected segments. */
     private List<TranslateEntryQueueItem> translateQueue = new ArrayList<TranslateEntryQueueItem>();
-    
+
     /**
      * Index of currently processed segment. It required for multiple translation for use right segment.
      */
@@ -77,7 +77,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
     protected void fileStarted() {
         currentlyProcessedSegment = 0;
     }
-    
+
     abstract String getCurrentFile();
 
     protected void fileFinished() {
@@ -86,7 +86,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
         }
         translateQueue.clear();
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -94,18 +94,18 @@ public abstract class TranslateEntry implements ITranslateCallback {
     public String getTranslation(final String id, final String origSource, final String path) {
         ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
 
-        // fix for bug 3487497; 
-        // Fetch removed tags if the options 
+        // fix for bug 3487497;
+        // Fetch removed tags if the options
         // has been enabled.
         String tags = null;
         if (m_config.isRemoveTags()) {
             tags = TagUtil.buildTagListForRemove(origSource);
         }
-        
+
         boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
         final String source = StringUtil.normalizeUnicode(ParseEntry.stripSomeChars(
                 origSource, spr, m_config.isRemoveTags(), removeSpaces));
-        
+
         StringBuilder res = new StringBuilder();
 
         if (m_config.isSentenceSegmentingEnabled()) {
@@ -136,29 +136,29 @@ public abstract class TranslateEntry implements ITranslateCallback {
             }
             res.append(tr);
         }
-        
+
         // replacing all occurrences of LF (\n) by either single CR (\r) or CRLF
         // (\r\n)
         // this is a reversal of the process at the beginning of this method
         // fix for bug 1462566
         String r = res.toString();
-        
+
         //- Word: anything placed before the leading tag is omitted in translated document
         // https://sourceforge.net/p/omegat/bugs/634/
-        // This is a Word document, Remove Tags (from Project Properties) is not checked and Remove leading and 
+        // This is a Word document, Remove Tags (from Project Properties) is not checked and Remove leading and
         // trailing tags (from File Filters) is not checked
         String fileName = getCurrentFile().toLowerCase();
         if ((fileName.endsWith(".docx") || fileName.endsWith(".docm")) &&
             !m_config.isRemoveTags() && !Core.getFilterMaster().getConfig().isRemoveTags()) {
             // Locate the location of the first tag
             String firstTag = TagUtil.getFirstTag(r);
-            if (firstTag != null) { 
+            if (firstTag != null) {
                 int locFirstTag = r.indexOf(firstTag);
                 // Is there text before that first tag?
                 if (locFirstTag > 0) {
                     // Was the first tag between two words without any spaces around?
                     String addSpace = "";
-                    if (!Character.isWhitespace(r.codePointBefore(locFirstTag)) && 
+                    if (!Character.isWhitespace(r.codePointBefore(locFirstTag)) &&
                         !Character.isWhitespace(r.codePointAt(locFirstTag + firstTag.length())) &&
                         Core.getProject().getProjectProperties().getTargetLanguage().isSpaceDelimited()) {
                         addSpace = " ";
@@ -166,17 +166,16 @@ public abstract class TranslateEntry implements ITranslateCallback {
                     // Move that first tag before the text, adding a space if needed.
                     r = firstTag + r.substring(0, locFirstTag) + addSpace + r.substring(locFirstTag + firstTag.length());
                 }
-            }                           
+            }
         }
 
-        
-        // fix for bug 3487497; 
-        // explicitly add the removed tags at 
+        // fix for bug 3487497;
+        // explicitly add the removed tags at
         // the end of the translated string.
         if (m_config.isRemoveTags()) {
             r += tags;
         }
-        
+
         if (spr.crlf) {
             r = r.replace("\n", "\r\n");
         } else if (spr.cr) {
@@ -190,7 +189,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
         if (spr.spacesAtEnd > 0) {
             r = r + origSource.substring(origSource.length() - spr.spacesAtEnd);
         }
-        
+
         return r;
     }
 
@@ -223,11 +222,11 @@ public abstract class TranslateEntry implements ITranslateCallback {
             }
         }
     }
-    
+
     /**
      * This method calls real method for empty prev/next on the first pass, then with real prev/next on the
      * second pass.
-     * 
+     *
      * @param id
      * @param segmentIndex
      * @param segmentSource
@@ -261,10 +260,10 @@ public abstract class TranslateEntry implements ITranslateCallback {
             throw new RuntimeException("Invalid pass number: " + pass);
         }
     }
-    
+
     protected abstract String getSegmentTranslation(String id, int segmentIndex, String segmentSource,
             String prevSegment, String nextSegment, String path);
-    
+
     /**
      * Storage for cached segments.
      */

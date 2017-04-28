@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007-2012 Didier Briel
@@ -45,7 +45,7 @@ import org.omegat.filters2.AbstractOptions;
  * <li>[]Ignore type and ctype attributes when building &lt;ph&gt; tag shortcuts
  * <li>[]Ignore type and ctype attributes when building &lt;bpt&gt;/&lt;ept&gt; tag shortcuts
  * </ul>
- * 
+ *
  * @author Didier Briel
  * @author Piotr Kulik
  * @author Aaron Madlon-Kay
@@ -58,7 +58,7 @@ public class XLIFFOptions extends AbstractOptions {
     @Deprecated
     private static final String OPTION_ALT_TRANS_ID = "alttransid";
     private static final String OPTION_ALT_TRANS_ID_TYPE = "alttransidtype";
-    
+
     /**
      * Identify how the ID for alternative translations is decided.
      */
@@ -70,7 +70,7 @@ public class XLIFFOptions extends AbstractOptions {
     	/** Take the ID from the &lt;trans-unit&gt;'s resname attribute. */
     	RESNAME_ATTR
     }
-    
+
     public XLIFFOptions(Map<String, String> config) {
         super(config);
     }
@@ -88,56 +88,56 @@ public class XLIFFOptions extends AbstractOptions {
     public void set26Compatibility(boolean compatibility26) {
         setBoolean(OPTION_26_COMPATIBILITY, compatibility26);
     }
-    
-    /** 
+
+    /**
      * Return whether the shortcut should be set to "f" for
      * &lt;it pos="end&gt; tags
      */
     public boolean getForceShortcutToF() {
         return getBoolean(OPTION_FORCE_SHORTCUT_2_F, false);
     }
-    
-    /** 
+
+    /**
      * Set whether the shortcut should be set to "f" for
      * &lt;it pos="end&gt; tags
      */
     public void setForceShortcutToF(boolean forceshortcut2f) {
-        setBoolean(OPTION_FORCE_SHORTCUT_2_F, forceshortcut2f);    
+        setBoolean(OPTION_FORCE_SHORTCUT_2_F, forceshortcut2f);
     }
 
-    /** 
-     * Return whether the type and ctype attributes of 
+    /**
+     * Return whether the type and ctype attributes of
      * &lt;ph&gt; tag should be ignored when building shortcuts
      */
     public boolean getIgnoreTypeForPhTags() {
         return getBoolean(OPTION_IGNORE_TYPE_4_PH_TAGS, false);
     }
-    
-    /** 
-     * Set whether the type and ctype attributes of 
+
+    /**
+     * Set whether the type and ctype attributes of
      * &lt;ph&gt; tag should be ignored when building shortcuts
      */
     public void setIgnoreTypeForPhTags(boolean ignoreTypeForPhTags) {
-        setBoolean(OPTION_IGNORE_TYPE_4_PH_TAGS, ignoreTypeForPhTags);    
+        setBoolean(OPTION_IGNORE_TYPE_4_PH_TAGS, ignoreTypeForPhTags);
     }
 
-    /** 
-     * Return whether the type and ctype attributes of 
+    /**
+     * Return whether the type and ctype attributes of
      * &lt;bpt&gt;/&lt;ept&gt; tags should be ignored when building shortcuts
      */
     public boolean getIgnoreTypeForBptTags() {
         return getBoolean(OPTION_IGNORE_TYPE_4_BPT_TAGS, false);
     }
-    
-    /** 
-     * Set whether the type and ctype attributes of 
+
+    /**
+     * Set whether the type and ctype attributes of
      * &lt;bpt&gt;/&lt;ept&gt; tags should be ignored when building shortcuts
      */
     public void setIgnoreTypeForBptTags(boolean ignoreTypeForBptTags) {
-        setBoolean(OPTION_IGNORE_TYPE_4_BPT_TAGS, ignoreTypeForBptTags);    
+        setBoolean(OPTION_IGNORE_TYPE_4_BPT_TAGS, ignoreTypeForBptTags);
     }
-    
-    /** 
+
+    /**
      * Return how the ID for alternative translations should be taken:
      * <ul><li>previous and next paragraph ({@link ID_TYPE#CONTEXT}, default)</li>
      * <li>the &lt;trans-unit&gt; id ({@link ID_TYPE#ELEMENT_ID})</li>
@@ -151,8 +151,8 @@ public class XLIFFOptions extends AbstractOptions {
         }
         return result;
     }
-    
-    /** 
+
+    /**
      * Set how the ID for alternative translations should be taken:
      * <ul><li>previous and next paragraph ({@link ID_TYPE#CONTEXT}, default)</li>
      * <li>the &lt;trans-unit&gt; id ({@link ID_TYPE#ELEMENT_ID})</li>

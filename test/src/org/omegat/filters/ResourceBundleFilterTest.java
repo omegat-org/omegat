@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -84,7 +84,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         checkMulti("Value5", "ID5", null, null, null, "! alternate comment style");
         checkMulti("Value\u2603", "ID6", null, null, null, "# Unicode escape \u2603"); // U+2603 SNOWMAN
         checkMultiEnd();
-        
+
         f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-SMP.properties";
         fi = loadSourceFiles(filter, f);
 
@@ -93,7 +93,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         checkMulti("\uD835\uDC03\uD835\uDC04\uD835\uDC05", "ID2", null, null, null, null);
         checkMultiEnd();
     }
-    
+
     @Test
     public void testDoNotEscapeUnicodeLiterals() throws Exception {
         String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-UnicodeLiterals.properties";
@@ -105,10 +105,10 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         checkMultiStart(fi, f);
         checkMulti("a\nb\\u0020\\ad", "MU", null, null, null, "# \\u00ad");
         checkMultiEnd();
-        
+
         translateText(filter, f, options);
     }
-    
+
     @Test
     public void testBadUnicodeLiterals() throws Exception {
         String base = "test/data/filters/resourceBundle/";
@@ -130,7 +130,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         } catch (TranslationException ex) {
         }
     }
-    
+
     @Test
     public void testWhiteSpace() throws Exception {
         // We want to see full whitespace for this test
@@ -147,7 +147,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         checkMulti("Value1\tValue2", "KEY3", null, null, null, "# Significant whitespace on continuation line");
         checkMulti("Value1 Value2", "KEY4", null, null, null, null);
         checkMultiEnd();
-        
+
         translate(filter, f);
         compareBinary(new File("test/data/filters/resourceBundle/file-ResourceBundleFilter-WhiteSpace-gold.properties"),
                 outFile);

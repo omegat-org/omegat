@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
@@ -27,14 +27,14 @@ package org.omegat.util.gui;
 
 /**
  * Some utilities for display text tables with aligning.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TextUtil {
 
     /**
      * Draw text table with columns align.
-     * 
+     *
      * @param columnHeaders
      *            column headers
      * @param table
@@ -70,7 +70,7 @@ public class TextUtil {
 
     /**
      * Output field with specified length.
-     * 
+     *
      * @param out
      *            output stream
      * @param data

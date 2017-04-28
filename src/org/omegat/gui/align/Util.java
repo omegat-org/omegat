@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -36,7 +36,7 @@ public class Util {
 
     /**
      * Get the index of an item in a list, not based on equality but on object identity (<code>==</code>).
-     * 
+     *
      * @param items
      * @param item
      * @return
@@ -52,7 +52,7 @@ public class Util {
 
     /**
      * Remove an item from a list, not based on equality but on object identity (<code>==</code>).
-     * 
+     *
      * @param items
      * @param item
      * @return
@@ -69,7 +69,7 @@ public class Util {
 
     /**
      * Join a list of objects with a delimiter.
-     * 
+     *
      * @param delimiter
      *            String to insert between each item
      * @param items
@@ -95,7 +95,7 @@ public class Util {
     /**
      * Join a list of objects with a delimiter appropriate for the given language (empty delimiter, or U+0020
      * SPACE).
-     * 
+     *
      * @param lang
      *            Language of items
      * @param items

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -53,7 +53,7 @@ import gen.core.segmentation.Srx;
 /**
  * The class with all the segmentation data possible -- rules, languages, etc.
  * It loads and saves its data from/to SRX file.
- * 
+ *
  * @author Maxym Mykhalchuk
  */
 public class SRX implements Serializable {
@@ -181,7 +181,7 @@ public class SRX implements Serializable {
         }
         return res;
     }
-    
+
     /**
      * Does a config file already exists for the project at the given location?
      * @param configDir the project directory for storage of settings file
@@ -190,7 +190,6 @@ public class SRX implements Serializable {
         File configFile = new File(configDir + CONF_SENTSEG);
         return configFile.exists();
     }
-
 
     /** Merges two sets of segmentation rules together. */
     private static SRX merge(SRX current, SRX defaults) {
@@ -275,7 +274,7 @@ public class SRX implements Serializable {
 
     /**
      * Find rules for specific language.
-     * 
+     *
      * @param source
      *            rules list
      * @param langName
@@ -390,7 +389,7 @@ public class SRX implements Serializable {
 
     /**
      * Getter for property segmentSubflows.
-     * 
+     *
      * @return Value of property segmentSubflows.
      */
     public boolean isSegmentSubflows() {
@@ -400,7 +399,7 @@ public class SRX implements Serializable {
 
     /**
      * Setter for property segmentSubflows.
-     * 
+     *
      * @param segmentSubflows
      *            New value of property segmentSubflows.
      */
@@ -416,7 +415,7 @@ public class SRX implements Serializable {
 
     /**
      * Getter for property includeStartingTags.
-     * 
+     *
      * @return Value of property includeStartingTags.
      */
     public boolean isIncludeStartingTags() {
@@ -426,7 +425,7 @@ public class SRX implements Serializable {
 
     /**
      * Setter for property includeStartingTags.
-     * 
+     *
      * @param includeStartingTags
      *            New value of property includeStartingTags.
      */
@@ -441,7 +440,7 @@ public class SRX implements Serializable {
 
     /**
      * Getter for property includeEndingTags.
-     * 
+     *
      * @return Value of property includeEndingTags.
      */
     public boolean isIncludeEndingTags() {
@@ -450,7 +449,7 @@ public class SRX implements Serializable {
 
     /**
      * Setter for property includeEndingTags.
-     * 
+     *
      * @param includeEndingTags
      *            New value of property includeEndingTags.
      */
@@ -465,7 +464,7 @@ public class SRX implements Serializable {
 
     /**
      * Getter for property includeIsolatedTags.
-     * 
+     *
      * @return Value of property includeIsolatedTags.
      */
     public boolean isIncludeIsolatedTags() {
@@ -475,7 +474,7 @@ public class SRX implements Serializable {
 
     /**
      * Setter for property includeIsolatedTags.
-     * 
+     *
      * @param includeIsolatedTags
      *            New value of property includeIsolatedTags.
      */

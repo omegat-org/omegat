@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -38,7 +38,7 @@ import org.omegat.util.StaticUtils;
 /**
  * Basic File Chooser for OmegaT, showing the icon for OmegaT projects and
  * customizing the description for OmegaT project directories.
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  */
@@ -55,7 +55,6 @@ public class OmegaTFileChooser extends JFileChooser {
     public OmegaTFileChooser() {
         super(Preferences.getPreference(Preferences.CURRENT_FOLDER));
     }
-
 
     /** Redefines the icon for OmegaT projects. */
     public Icon getIcon(File f) {

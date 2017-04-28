@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -25,7 +25,11 @@
 
 package org.omegat.core.data;
 
-public class DataUtils {
+public final class DataUtils {
+
+    private DataUtils() {
+    }
+
     public static boolean isDuplicate(SourceTextEntry ste, TMXEntry te) {
         return ste.getDuplicate() == SourceTextEntry.DUPLICATE.NEXT && te.defaultTranslation;
     }

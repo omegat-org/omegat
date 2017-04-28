@@ -62,12 +62,15 @@ import gen.taas.TaasLanguage;
 
 /**
  * Controller for TaaS download UI.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 @SuppressWarnings("serial")
-public class BrowseTaasCollectionsController {
+public final class BrowseTaasCollectionsController {
     static BrowseTaasCollectionsUI dialog;
+
+    private BrowseTaasCollectionsController() {
+    }
 
     public static void show() {
         dialog = new BrowseTaasCollectionsUI(Core.getMainWindow().getApplicationFrame(), true);
@@ -82,7 +85,7 @@ public class BrowseTaasCollectionsController {
 
         dialog.labelStatus.setText(OStrings.getString("TAAS_STATUS_LIST"));
         new SwingWorker<List<TaasCollection>, Void>() {
-            
+
             @Override
             protected List<TaasCollection> doInBackground() throws Exception {
                 return TaaSPlugin.getClient().getCollectionsList();
@@ -188,7 +191,7 @@ public class BrowseTaasCollectionsController {
         return columns;
     }
 
-    static DefaultTableCellRenderer NAME_CELL_RENDERER = new DefaultTableCellRenderer() {
+    static final DefaultTableCellRenderer NAME_CELL_RENDERER = new DefaultTableCellRenderer() {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
                 boolean hasFocus, int row, int column) {
@@ -202,7 +205,7 @@ public class BrowseTaasCollectionsController {
         }
     };
 
-    static ActionListener DOWNLOAD_LISTENER = new ActionListener() {
+    static final ActionListener DOWNLOAD_LISTENER = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
 
@@ -276,7 +279,7 @@ public class BrowseTaasCollectionsController {
         return new File(dir, "TaaS-" + collection.getId() + ".tbx");
     }
 
-    public static class CollectionsTable extends AbstractTableModel {
+    public static final class CollectionsTable extends AbstractTableModel {
         final List<TaasCollection> list;
         final boolean[] marks;
         final Language source;

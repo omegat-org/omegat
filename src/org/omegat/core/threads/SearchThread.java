@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -39,7 +39,7 @@ import org.omegat.util.Log;
 /**
  * Each search window has its own search thread to actually do the searching.
  * This prevents lockup of the UI during intensive searches
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers
@@ -50,7 +50,7 @@ import org.omegat.util.Log;
 public class SearchThread extends LongProcessThread {
     /**
      * Starts a new search. To search current project only, set rootDir to null.
-     * 
+     *
      * @param window
      *            search window for display results
      * @param expression

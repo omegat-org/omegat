@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010-2013 Alex Buloichik
@@ -47,11 +47,11 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * Class for manage marks and controll all markers.
- * 
+ *
  * All markers for inactive segment usually executed in background threads(one
  * thread for one marker class), but markers for active segment executed in UI
  * thread immediately.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class MarkerController {
@@ -94,7 +94,7 @@ public class MarkerController {
 
     /**
      * Get marker's index by class name.
-     * 
+     *
      * @param markerClassName
      *            marker's class name
      * @return marker's index
@@ -110,7 +110,7 @@ public class MarkerController {
 
     /**
      * Remove all marks for all entries.
-     * 
+     *
      * @param newEntriesCount
      *            count of newly displayed entries
      */
@@ -159,7 +159,7 @@ public class MarkerController {
         if (entryBuilders == null) {
             return;
         }
-        
+
         for (SegmentBuilder sb : entryBuilders) {
             if (!sb.hasBeenCreated()) {
                 continue;
@@ -208,7 +208,7 @@ public class MarkerController {
 
     /**
      * Return tooltips texts for specified editor position.
-     * 
+     *
      * @param entryIndex
      * @param pos
      * @return

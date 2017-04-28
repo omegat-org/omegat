@@ -42,7 +42,7 @@ import org.omegat.util.VarExpansion;
  * This class is used to generate modification info for a TMXEntry to a text
  * visible above source segment according to the given template containing
  * variables.
- * 
+ *
  * @author Thomas CORDONNIER
  * @author Aaron Madlon-Kay
  * @author Alex Buloichik
@@ -70,7 +70,6 @@ public class ModificationInfoManager {
     public static final String VAR_CHANGED_TIME_COUNTRY = "${changedTimeCountry}";
     public static final String VAR_CHANGED_TIME_SHORT = "${changedTimeShort}";
     public static final String VAR_CHANGED_TIME_SHORT_COUNTRY = "${changedTimeShortCountry}";
-
 
     private static final String[] MOD_INFO_VARIABLES = {
         VAR_CREATION_ID, VAR_CREATION_DATE, VAR_CREATION_DATE_COUNTRY,
@@ -150,7 +149,7 @@ public class ModificationInfoManager {
             return defaultTemplate.apply(trans);
         }
     }
-    
+
     public static class ModificationInfoVarExpansion extends VarExpansion<TMXEntry> {
 
         public ModificationInfoVarExpansion(String template) {

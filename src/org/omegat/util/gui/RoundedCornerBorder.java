@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
@@ -46,23 +46,23 @@ import javax.swing.border.AbstractBorder;
  */
 @SuppressWarnings("serial")
 public class RoundedCornerBorder extends AbstractBorder {
-    
+
     public static final int SIDE_TOP = 0;
     public static final int SIDE_LEFT = 1;
     public static final int SIDE_BOTTOM = 2;
     public static final int SIDE_RIGHT = 3;
     public static final int SIDE_ALL = 4;
-    
+
     private final int radius;
     private final Color color;
     private final int side;
     private final int stroke;
     private final transient Stroke strokeObj;
-    
+
     public RoundedCornerBorder() {
         this(-1, Color.GRAY, SIDE_ALL);
     }
-    
+
     public RoundedCornerBorder(int radius, Color color, int side) {
         this(radius, color, side, 1);
     }
@@ -80,20 +80,20 @@ public class RoundedCornerBorder extends AbstractBorder {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setStroke(strokeObj);
-        
+
         int r = radius == -1 ? height - stroke : radius;
         RoundRectangle2D roundRect = new RoundRectangle2D.Float(x, y, width - (stroke - 0.5f), height - stroke, r, r);
         Rectangle2D sharpRect = new Rectangle2D.Float(x, y, width, height);
         Area corners = new Area(sharpRect);
         corners.subtract(new Area(roundRect));
         Color background = c.getParent() == null ? null : c.getParent().getBackground();
-        
+
         if (side == SIDE_ALL) {
             drawCorners(g2, background, corners, roundRect);
             g2.dispose();
             return;
         }
-        
+
         Shape initialClip = g2.getClip();
         Rectangle2D roundedHalfClip;
         Shape line1;
@@ -119,17 +119,17 @@ public class RoundedCornerBorder extends AbstractBorder {
         }
         g2.clip(roundedHalfClip);
         drawCorners(g2, background, corners, roundRect);
-        
+
         Area inverseClip = new Area(sharpRect);
         inverseClip.subtract(new Area(roundedHalfClip));
         g2.setClip(initialClip);
         g2.clip(inverseClip);
         g2.draw(line1);
         g2.draw(line2);
-        
+
         g2.dispose();
     }
-    
+
     private void drawCorners(Graphics2D g2, Color background, Area corners, Shape shape) {
         if (background != null) {
             g2.setColor(background);
@@ -138,7 +138,7 @@ public class RoundedCornerBorder extends AbstractBorder {
         g2.setColor(color);
         g2.draw(shape);
     }
-    
+
     @Override
     public Insets getBorderInsets(Component c) {
         return new Insets(4, 8, 4, 8);

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -41,7 +41,7 @@ import org.openide.awt.Mnemonics;
 
 /**
  * Dialog showing Last changes.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
@@ -115,7 +115,6 @@ public class LastChangesDialog extends JDialog {
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width - 600) / 2, (screenSize.height - 400) / 2, 600, 400);
     }
-
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {
         doClose(RET_OK);

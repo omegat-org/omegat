@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -87,7 +87,7 @@ public class TextFilterTest extends TestFilterBase {
         checkMulti("line3", null, null, "line2", "", null);
         checkMultiEnd();
     }
-    
+
     @Test
     public void testLineLengthLimit() throws Exception {
         Map<String, String> options = new TreeMap<String, String>();
@@ -96,7 +96,7 @@ public class TextFilterTest extends TestFilterBase {
         options.put(TextFilter.OPTION_MAX_LINE_LENGTH, "10");
 
         TextFilter filter = new TextFilter();
-        
+
         translate(filter, "test/data/filters/text/file-TextFilter-SMP.txt", options);
         compareBinary(new File("test/data/filters/text/file-TextFilter-SMP-gold.txt"), outFile);
     }

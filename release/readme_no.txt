@@ -1,7 +1,7 @@
 OmegaT er oversatt av Ingeborg Hauge Clementsen, copyright© 2016
 
 ==============================================================================
-  OmegaT 3.0, Viktig-fil
+  OmegaT 4.0, Viktig-fil
 
   1.  Informasjon om OmegaT
   2.  Hva er OmegaT?
@@ -93,7 +93,7 @@ Brukermanualen finner du i mappen du nettopp lastet ned. Du kan åpne den i Hjel
  3. Installere OmegaT
 
 3.1 Generell info:
-Du må ha Java Runtime Environment (JRE) versjon 1.6 eller høyere installert på systemet for å kunne kjøre OmegaT. OmegaT-pakker som inkluderer Java Runtime Environment er nå tilgjengelige for å spare brukerne for bryet med å velge, finne og installere det selv. 
+Du må ha Java Runtime Environment (JRE) versjon 1.8 eller høyere installert på systemet for å kunne kjøre OmegaT. OmegaT-pakker som inkluderer Java Runtime Environment er nå tilgjengelige for å spare brukerne for bryet med å velge, finne og installere det selv. 
 
 Dersom du allerede har Java, er en måte å installere den nyeste versjonen av OmegaT å bruke Java Web Start. 
 For å gjøre dette laster du ned og kjører denne filen:
@@ -103,9 +103,9 @@ For å gjøre dette laster du ned og kjører denne filen:
 Denne filen installerer både det korrekte miljøet for din datamaskin og programmet første gang den kjøres. Neste gang du bruker programmet, trenger du ikke internettilgang.
 
 Avhenging av hvilket operativsystem du har, kan det hende du får flere sikkerhetsadvarsler mens programmet installeres. Sertifikatet er av "PnS Concept". 
-Tillatelsene du gir til denne versjonen (som kan klassifiseres som "ubegrenset tilgang til datamaskinen") er identiske med de tillatelsene du gir den lokale versjonen (prosedyre for installasjon av lokal versjon finner du lenger ned): de gir tilgang til maskinens harddisk. Dersom du klikker på OmegaT.jnlp ved en senere anleding, vil den se etter oppdateringer og installere dem dersom de finnes (gitt at du har internettilgang), og så starte OmegaT.  
+Tillatelsene du gir til denne versjonen (som kan klassifiseres som "ubegrenset tilgang til datamaskinen") er identiske med de tillatelsene du gir den lokale versjonen (prosedyre for installasjon av lokal versjon finner du lenger ned): de gir tilgang til maskinens harddisk. Dersom du klikker på OmegaT.jnlp ved en senere anledning, vil den se etter oppdateringer og installere dem dersom de finnes (gitt at du har internettilgang), og så starte OmegaT.  
 
-Alternative måter for å laste ned og installere OmegaT ser du nedenfor. 
+Alternative måter å laste ned og installere OmegaT på vises nedenfor. 
 
 Windows- og Linux-brukere: dersom du er sikker på at systemet ditt allerede har en passende versjon av JRE installert, kan du installere den versjonen av OmegaT som ikke inkluderer JRE (vises i navnet, "Without_JRE"). 
 Dersom du er i tvil, anbefaler vi at du bruker den versjonen som inkluderer JRE. Dette er trygt; selv om du allerede har JRE installert i systemet ditt, vil ikke denne nye versjonen skape problemer.
@@ -114,10 +114,12 @@ Linx-brukere: OmegaT kjøres på den Javaen med åpen kildekode-implementering s
  Vi anbefaler derfor at du laster ned og installerer enten Oracle Java Runtime Environment (JRE) eller OmegaT-pakken som inneholder JRE (.tar.bz2) og som er merket "Linux". Dersom du installerer en versjon av Java på systemnivå, må du forsikre deg om at det er enten i kjørestien din eller at du henter den frem når du starter OmegaT. Dersom du ikke er godt kjent med Linux, anbefaler vi at du installerer en OmegaT-versjon som inneholder JRE. Dette er trygt, ettersom at en "lokal" JRE ikke vil påvirke andre JRE-er som er installert i systemet ditt.
 
 Mac-brukere:
-JRE er allerede installert på Mac OS X før Mac OS X 10.7 (Lion). Lion-brukere vil bli spurt av systemet første gang de kjører et program som trenger Java, og systemet vil til slutt laste ned Java og installere det automatisk.
+Det følger med en JRE med Mac-versjonen. Du kan alternativt laste ned og installere Oracle JRE selv.
+
+    https://java.com/en/download/
 
 Linux på PowerPC-systemer:
-Brukere må laste ned IBMs JRE, ettersom at Sun ikke tilbyr et JRE for PPC-systemer. Last det ned her:
+Brukere må laste ned IBMs JRE, ettersom at Sun ikke tilbyr en JRE for PPC-systemer. Last det ned her:
 
     http://www.ibm.com/developerworks/java/jdk/linux/download.html 
 
@@ -207,6 +209,7 @@ Tidligere bidragsytere inkluderer:
 (i alfabetisk rekkefølge)
 
 Disse har bidratt med koder
+  Lev Abashkin
   Zoltan Bartko
   Volker Berlin
   Didier Briel
@@ -261,8 +264,6 @@ Andre bidrag fra
 OmegaT bruker følgende bibliotek:
   HTMLParser 1.6 av Somik Raha, Derrick Oswald m.fl. (LGPL-lisens)
   VLDocking Framework 3.0.5-SNAPSHOT (LGPL-lisens)
-  Hunspell av László Németh m.fl. (LGPL-lisens)
-  JNA av Todd Fast, Timothy Wall m.fl. (LGPL-lisens)
   Swing-Layout 1.0.4 (LGPL-lisens)
   Jmyspell 2.1.4 (LGPL-lisens)
   SVNKit 1.8.5 (TMate-lisens)
@@ -271,25 +272,19 @@ OmegaT bruker følgende bibliotek:
   SQLJet 1.1.10 (GPL v2)
   JGit (Eclipse Distribution-lisens)
   JSch (JSch-lisens)
-  Base64 (offentlig domene)
+  jsch-agent-proxy (jsch-agent-proxy-lisens)
   Diff (GPL)
   trilead-ssh2-1.0.0-build217 (Trilead SSH-lisens)
   lucene-*.jar (Apache License 2.0)
-  De engelske tokenisererne (org.omegat.tokenizer.SnowballEnglishTokenizer og
-org.omegat.tokenizer.LuceneEnglishTokenizer) bruker stoppord fra Okapi (http://okapi.sourceforge.net) (LGPL-lisens)
-  tinysegmenter.jar (Modified BSD-lisens)
   commons-*.jar (Apache-lisens 2.0)
-  jWordSplitter (Apache License 2.0)
-  LanguageTool.jar (LGPL-lisens)
-  morfologik-*.jar (Morfologik-lisens)
-  segment-1.4.1.jar (Segment-lisens)
-  pdfbox-app-1.8.1.jar (Apache-lisens 2.0)
-  KoreanAnalyzer-3x-120223.jar (Apache-lisens 2.0)
+  LanguageTool (LGPL-lisens og andre)
+  PDFBox (Apache-lisens 2.0)
   SuperTMXMerge-for_OmegaT.jar (LGPL-lisens)
   groovy-all-2.2.2.jar(Apache-lisens 2.0)
   slf4j (MIT-lisens)
   juniversalchardet-1.0.3.jar (GPL v2)
   DictZip fra JDictd (GPL v2)
+  trie4j (Apache-lisens 2.0)
 
 ==============================================================================
  5.  Har du problemer med OmegaT? Trenger du hjelp?

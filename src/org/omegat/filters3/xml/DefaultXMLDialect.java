@@ -49,7 +49,7 @@ import org.xml.sax.InputSource;
 
 /**
  * Helper class for describing a certain XML dialect.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Martin Fleurke
  * @author Didier Briel
@@ -66,8 +66,9 @@ public class DefaultXMLDialect implements XMLDialect {
 
     /** Defines a set of paragraph tags from an array. Allows duplicates. */
     public void defineParagraphTags(String[] tags) {
-        for (String tag : tags)
+        for (String tag : tags) {
             defineParagraphTag(tag);
+        }
     }
 
     /** The set of defined content based tags. */
@@ -87,8 +88,9 @@ public class DefaultXMLDialect implements XMLDialect {
 
     /** Defines a set of preformat tags from an array. Allows duplicates. */
     public void definePreformatTags(String[] tags) {
-        for (String tag : tags)
+        for (String tag : tags) {
             definePreformatTag(tag);
+        }
     }
 
     /** The set of defined tags that surround intact text. */
@@ -101,8 +103,9 @@ public class DefaultXMLDialect implements XMLDialect {
 
     /** Defines a set of intact tags from an array. Allows duplicates. */
     public void defineIntactTags(String[] tags) {
-        for (String tag : tags)
+        for (String tag : tags) {
             defineIntactTag(tag);
+        }
     }
 
     /** The set of defined paragraph tags. */
@@ -115,14 +118,16 @@ public class DefaultXMLDialect implements XMLDialect {
 
     /** Defines translatable attributes of a tag. */
     public void defineTranslatableTagAttributes(String tag, String[] attributes) {
-        for (String attr : attributes)
+        for (String attr : attributes) {
             defineTranslatableTagAttribute(tag, attr);
+        }
     }
 
     /** Defines translatable attribute of several tags. */
     public void defineTranslatableTagsAttribute(String[] tags, String attribute) {
-        for (String tag : tags)
+        for (String tag : tags) {
             defineTranslatableTagAttribute(tag, attribute);
+        }
     }
 
     /** The set of defined paragraph tags. */
@@ -140,8 +145,9 @@ public class DefaultXMLDialect implements XMLDialect {
      * to).
      */
     public void defineTranslatableAttributes(String[] attributes) {
-        for (String attr : attributes)
+        for (String attr : attributes) {
             defineTranslatableAttribute(attr);
+        }
     }
 
     /**
@@ -163,8 +169,9 @@ public class DefaultXMLDialect implements XMLDialect {
      * be translated separately, not breaking currently collected text.
      */
     public void defineOutOfTurnTags(String[] tags) {
-        for (String tag : tags)
+        for (String tag : tags) {
             defineOutOfTurnTag(tag);
+        }
     }
 
     Map<Integer, Pattern> constraints = new HashMap<Integer, Pattern>();
@@ -172,7 +179,7 @@ public class DefaultXMLDialect implements XMLDialect {
     /**
      * Defines a constraint to restrict supported subset of XML files. There can
      * be only one constraint of each type.
-     * 
+     *
      * @param constraintType
      *            Type of constraint, see CONSTRAINT_... constants.
      * @param template
@@ -188,7 +195,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * Defines a shortcut for a tag, useful for formatting tags. Shortcut is a
      * short form of a tag visible to translator, and stored in OmegaT's flavor
      * of TMX files.
-     * 
+     *
      * @param tag
      *            Tag name.
      * @param shortcut
@@ -201,14 +208,15 @@ public class DefaultXMLDialect implements XMLDialect {
     /**
      * Defines shortcuts for formatting tags. An alternative to calling
      * {@link #defineShortcut(String,String)} multiple times.
-     * 
+     *
      * @param mappings
      *            Array of strings, where even elements (0th, 2nd, etc) are
      *            tags, and odd elements are their corresponding shortcuts.
      */
     public void defineShortcuts(String[] mappings) {
-        for (int i = 0; i < mappings.length / 2; i++)
+        for (int i = 0; i < mappings.length / 2; i++) {
             defineShortcut(mappings[2 * i], mappings[2 * i + 1]);
+        }
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -283,7 +291,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * absence of other attributes. For instance, in the ResX filter, tags
      * should not be translated when they contain the attribute "type", or when
      * the attribute "name" starts with "&amp;gt";
-     * 
+     *
      * @param tag
      *            The tag that could be translated
      * @param atts
@@ -307,7 +315,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * should be translated when the attribute locazible="1". Contrary to
      * validateIntactTag, this applies only to the current tag, and the tags
      * contained in it are not affected.
-     * 
+     *
      * @param tag
      *            The tag that could be translated
      * @param atts
@@ -325,7 +333,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * absence of other attributes). For instance, in the XLIFF filter, the
      * &lt;mark&gt; tag should start a new paragraph when the attribute "mtype"
      * contains "seg".
-     * 
+     *
      * @param tag
      *            The tag that could be a paragraph tag
      * @param atts
@@ -343,7 +351,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * absence of other attributes). For instance, in the XLIFF filter, the
      * &lt;mark&gt; tag should be a preformat tag when the attribute "mtype"
      * contains "seg".
-     * 
+     *
      * @param tag
      *            The tag that could be a preformat tag
      * @param atts
@@ -418,7 +426,7 @@ public class DefaultXMLDialect implements XMLDialect {
 
     /**
      * Sets closingTag to <code>true</code> or <code>false</code>
-     * 
+     *
      * @param onOff
      *            The parameter setting wether closing tags should be used or
      *            not for empty tags.

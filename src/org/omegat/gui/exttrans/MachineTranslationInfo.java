@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
@@ -28,14 +28,14 @@ package org.omegat.gui.exttrans;
 
 /**
  * Class to store machine translation result.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
 public class MachineTranslationInfo {
     public final String translatorName;
     public final String result;
-    
+
     public MachineTranslationInfo(String translatorName, String result) {
         this.translatorName = translatorName;
         this.result = result;

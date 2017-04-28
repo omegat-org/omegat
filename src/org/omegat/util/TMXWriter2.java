@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2006 Henry Pijffers
@@ -48,9 +48,9 @@ import org.omegat.core.data.TMXEntry;
 
 /**
  * Helper for write TMX files, using StAX.
- * 
+ *
  * We can't use JAXB for writing because it changes spaces on formatted output.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
  * @author Didier Briel
@@ -70,7 +70,7 @@ public class TMXWriter2 {
 
     /**
      * DateFormat with format YYYYMMDDThhmmssZ able to display a date in UTC time.
-     * 
+     *
      * SimpleDateFormat IS NOT THREAD SAFE !!!
      */
     private final SimpleDateFormat tmxDateFormat;
@@ -80,7 +80,7 @@ public class TMXWriter2 {
     }
 
     /**
-     * 
+     *
      * @param file
      * @param sourceLanguage
      * @param targetLanguage
@@ -150,7 +150,7 @@ public class TMXWriter2 {
 
     /**
      * Write one entry.
-     * 
+     *
      * @param source
      * @param translation
      * @param propValues
@@ -176,19 +176,21 @@ public class TMXWriter2 {
         // add properties
         if (propValues != null) {
             for (int i = 0; i < propValues.size(); i += 2) {
-                if (propValues.get(i + 1) == null) {
+                String value = propValues.get(i + 1);
+                if (value == null) {
                     // value is null - not need to write
                     continue;
                 }
                 xml.writeCharacters("      ");
                 xml.writeStartElement("prop");
-                xml.writeAttribute("type", propValues.get(i));
-                xml.writeCharacters(propValues.get(i + 1));
+                String type = StringUtil.removeXMLInvalidChars(propValues.get(i));
+                xml.writeAttribute("type", type);
+                xml.writeCharacters(StringUtil.removeXMLInvalidChars(value));
                 xml.writeEndElement(); // prop
                 xml.writeCharacters(LINE_SEPARATOR);
             }
         }
-        
+
         // add note
         if (!StringUtil.isEmpty(note)) {
             note = StringUtil.removeXMLInvalidChars(note);
@@ -378,7 +380,7 @@ public class TMXWriter2 {
 
         xml.writeEndElement();
     }
-    
+
     /**
      * Replaces \n with platform specific end of lines
      * @param text The string to be converted

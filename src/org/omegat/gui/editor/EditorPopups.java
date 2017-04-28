@@ -57,7 +57,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * Some standard editor popups.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Wildrich Fourie
  * @author Didier Briel
@@ -77,7 +77,7 @@ public class EditorPopups {
     /**
      * create the spell checker popup menu - suggestions for a wrong word, add
      * and ignore. Works only for the active segment, for the translation
-     * 
+     *
      * @param point
      *            : where should the popup be shown
      */
@@ -112,11 +112,11 @@ public class EditorPopups {
                     break;
                 }
             }
-            
+
             if (tok == null) {
                 return;
             }
-            
+
             final String word = tok.getTextFromString(translation);
             // The wordStart must be the absolute offset in the Editor document.
             final int wordStart = mousepos - relOffset + tok.getOffset();
@@ -172,7 +172,7 @@ public class EditorPopups {
                         addIgnoreWord(word, wordStart, true);
                     }
                 });
-                
+
                 menu.addSeparator();
 
             }
@@ -180,7 +180,7 @@ public class EditorPopups {
 
         /**
          * add a new word to the spell checker or ignore a word
-         * 
+         *
          * @param word
          *            : the word in question
          * @param offset
@@ -266,7 +266,7 @@ public class EditorPopups {
             }
 
             menu.addSeparator();
-            
+
 			// Add glossary entry
 			JMenuItem item = menu.add(OStrings.getString("GUI_GLOSSARYWINDOW_addentry"));
             item.addActionListener(new ActionListener() {
@@ -308,14 +308,14 @@ public class EditorPopups {
             menu.addSeparator();
         }
     }
-    
+
     public static class DuplicateSegmentsPopup implements IPopupMenuConstructor {
         protected final EditorController ec;
-        
+
         public DuplicateSegmentsPopup(EditorController ec) {
             this.ec = ec;
         }
-        
+
         @Override
         public void addItems(JPopupMenu menu, JTextComponent comp,
                 int mousepos, boolean isInActiveEntry,

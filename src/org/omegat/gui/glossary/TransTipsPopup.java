@@ -41,7 +41,7 @@ import org.omegat.util.Preferences;
 
 /**
  * Popup for TransTips processing.
- * 
+ *
  * @author W. Fourie
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel

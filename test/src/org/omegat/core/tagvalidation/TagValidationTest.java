@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Aaron Madlon-Kay
@@ -43,7 +43,7 @@ public class TagValidationTest {
 
     @Test
     public void testOrderedTagValidation() {
-        
+
         // No errors
         String[] srcTags = {"<g0>", "<g1>", "</g1>", "</g0>"};
         String[] locTags = {"<g0>", "<g1>", "</g1>", "</g0>"};
@@ -51,7 +51,7 @@ public class TagValidationTest {
         TagValidation.inspectOrderedTags(getList(srcTags), getList(locTags), false, report);
         assertTrue(report.srcErrors.isEmpty());
         assertTrue(report.transErrors.isEmpty());
-        
+
         // Missing </g0>
         String[] srcTags2 = {"<g0>", "<g1>", "</g1>", "</g0>"};
         String[] locTags2 = {"<g0>", "<g1>", "</g1>"};
@@ -59,7 +59,7 @@ public class TagValidationTest {
         TagValidation.inspectOrderedTags(getList(srcTags2), getList(locTags2), false, report);
         assertTrue(report.srcErrors.get(tag("</g0>")) == TagError.MISSING);
         assertTrue(report.transErrors.get(tag("<g0>")) == TagError.ORPHANED);
-        
+
         // Count mismatch </g0>
         String[] srcTags3 = {"<g0>", "<g1>", "</g1>", "</g0>"};
         String[] locTags3 = {"<g0>", "<g1>", "</g1>", "</g0>", "</g0>"};
@@ -67,7 +67,7 @@ public class TagValidationTest {
         TagValidation.inspectOrderedTags(getList(srcTags3), getList(locTags3), false, report);
         assertTrue(report.srcErrors.isEmpty());
         assertTrue(report.transErrors.get(tag("</g0>")) == TagError.DUPLICATE);
-        
+
         // Extraneous <x2/>
         String[] srcTags4 = {"<g0>", "<g1>", "</g1>", "</g0>"};
         String[] locTags4 = {"<g0>", "<g1>", "<x2/>", "</g1>", "</g0>"};
@@ -75,7 +75,7 @@ public class TagValidationTest {
         TagValidation.inspectOrderedTags(getList(srcTags4), getList(locTags4), false, report);
         assertTrue(report.srcErrors.isEmpty());
         assertTrue(report.transErrors.get(tag("<x2/>")) == TagError.EXTRANEOUS);
-        
+
         // Bad nesting <g1></g1>
         String[] srcTags5 = {"<g0>", "</g0>", "<g1>", "</g1>"};
         String[] locTags5 = {"<g0>", "</g0>", "</g1>", "<g1>"};
@@ -84,7 +84,7 @@ public class TagValidationTest {
         assertTrue(report.srcErrors.isEmpty());
         assertTrue(report.transErrors.get(tag("<g1>")) == TagError.MALFORMED);
         assertTrue(report.transErrors.get(tag("</g1>")) == TagError.MALFORMED);
-        
+
         // Out of order <g1></g1>
         String[] srcTags6 = {"<g0>", "</g0>", "<g1>", "</g1>"};
         String[] locTags6 = {"<g1>", "</g1>", "<g0>", "</g0>"};
@@ -93,7 +93,7 @@ public class TagValidationTest {
         assertTrue(report.srcErrors.isEmpty());
         assertTrue(report.transErrors.get(tag("<g1>")) == TagError.ORDER);
         assertTrue(report.transErrors.get(tag("</g1>")) == TagError.ORDER);
-        
+
         // Out of order <g1></g1> with loose ordering
         report = new ErrorReport();
         TagValidation.inspectOrderedTags(getList(srcTags6), getList(locTags6), true, report);
@@ -110,7 +110,7 @@ public class TagValidationTest {
         TagValidation.inspectUnorderedTags(getList(srcTags), getList(locTags), report);
         assertTrue(report.srcErrors.isEmpty());
         assertTrue(report.transErrors.isEmpty());
-        
+
         // Missing d
         String[] srcTags2 = {"a", "b", "c", "d"};
         String[] locTags2 = {"a", "b", "c"};
@@ -118,7 +118,7 @@ public class TagValidationTest {
         TagValidation.inspectUnorderedTags(getList(srcTags2), getList(locTags2), report);
         assertTrue(report.srcErrors.get(tag("d")) == TagError.MISSING);
         assertTrue(report.transErrors.isEmpty());
-        
+
         // No error for unordered: Count mismatch d
         String[] srcTags3 = {"a", "b", "c", "d"};
         String[] locTags3 = {"a", "b", "c", "d", "d"};
@@ -126,7 +126,7 @@ public class TagValidationTest {
         TagValidation.inspectUnorderedTags(getList(srcTags3), getList(locTags3), report);
         assertTrue(report.srcErrors.isEmpty());
         assertTrue(report.transErrors.isEmpty());
-        
+
         // Extraneous e
         String[] srcTags4 = {"a", "b", "c", "d"};
         String[] locTags4 = {"a", "b", "e", "c", "d"};
@@ -138,20 +138,20 @@ public class TagValidationTest {
 
     @Test
     public void testPrintfTagValidation() {
-        
+
         // No error
         ErrorReport report = new ErrorReport("Foo %s bar %d", "Foo %s bar %d");
         TagValidation.inspectPrintfVariables(true, report);
         assertTrue(report.srcErrors.isEmpty());
         assertTrue(report.transErrors.isEmpty());
-        
+
         // Missing %d
         report = new ErrorReport("Foo %s bar %d", "Foo %s bar");
         TagValidation.inspectPrintfVariables(true, report);
         assertTrue(report.srcErrors.get(new Tag(4, "%s")) == TagError.UNSPECIFIED);
         assertTrue(report.srcErrors.get(new Tag(11, "%d")) == TagError.UNSPECIFIED);
         assertTrue(report.transErrors.get(new Tag(4, "%s")) == TagError.UNSPECIFIED);
-        
+
         // Extraneous %d
         report = new ErrorReport("Foo %s bar %d", "Foo %s bar %d baz %d");
         TagValidation.inspectPrintfVariables(true, report);
@@ -166,20 +166,20 @@ public class TagValidationTest {
     public void testRemovePattern() throws Exception {
         TestPreferencesInitializer.init();
         Preferences.setPreference(Preferences.CHECK_REMOVE_PATTERN, "foo");
-        
+
         // No error
         ErrorReport report = new ErrorReport("foo bar baz", "bar baz");
         TagValidation.inspectRemovePattern(report);
         assertTrue(report.srcErrors.isEmpty());
         assertTrue(report.transErrors.isEmpty());
-        
+
         // Extraneous foo
         report = new ErrorReport("foo bar baz", "foo bar baz");
         TagValidation.inspectRemovePattern(report);
         assertTrue(report.srcErrors.isEmpty());
         assertTrue(report.transErrors.get(new Tag(0, "foo")) == TagError.EXTRANEOUS);
     }
-    
+
     protected static List<Tag> getList(String[] array) {
         List<Tag> list = new ArrayList<Tag>();
         for (String item : array) {
@@ -187,7 +187,7 @@ public class TagValidationTest {
         }
         return list;
     }
-    
+
     private static Tag tag(String tag) {
         return new Tag(-1, tag);
     }

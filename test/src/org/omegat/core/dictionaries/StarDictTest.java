@@ -56,7 +56,7 @@ public class StarDictTest extends TestCore {
         StarDictDict dict = (StarDictDict) new StarDict().loadDict(new File("test/data/dicts/latin-francais.ifo"),
                 FRENCH);
         assertEquals(11964, dict.data.size());
-        
+
         String word = "testudo";
         List<Entry<String, StarDictDict.Entry>> data = dict.data.lookUp(word);
         assertEquals(1, data.size());
@@ -82,13 +82,13 @@ public class StarDictTest extends TestCore {
         assertEquals("testudo", result.get(0).getWord());
         assertEquals("dinis, f. : tortue", result.get(0).getArticle());
     }
-    
+
     @Test
     public void testReadZipDict() throws Exception {
         StarDictDict dict = (StarDictDict) new StarDict()
                 .loadDict(new File("test/data/dicts-zipped/latin-francais.ifo"), FRENCH);
         assertEquals(11964, dict.data.size());
-        
+
         String word = "testudo";
         List<Entry<String, StarDictDict.Entry>> data = dict.data.lookUp(word);
         assertEquals(1, data.size());

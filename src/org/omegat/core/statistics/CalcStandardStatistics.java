@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
@@ -52,30 +52,30 @@ import org.omegat.util.gui.TextUtil;
 
 /**
  * Thread for calculate standard statistics.
- * 
+ *
  * Calculation requires two different tags stripping: one for calculate unique and remaining, and second for
  * calculate number of words and chars.
- * 
+ *
  * Number of words/chars calculation requires to just strip all tags, protected parts, placeholders(see StatCount.java).
- * 
+ *
  * Calculation of unique and remaining also requires to just strip all tags, protected parts, placeholders for
  * standard calculation.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Arno Peters
  * @author Aaron Madlon-Kay
  */
 public class CalcStandardStatistics extends LongProcessThread {
-    private static final String[] htHeaders = new String[] { "", OStrings.getString("CT_STATS_Segments"),
+    private static final String[] HT_HEADERS = { "", OStrings.getString("CT_STATS_Segments"),
             OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
             OStrings.getString("CT_STATS_Characters"), OStrings.getString("CT_STATS_Files") };
 
-    private static final String[] htRows = new String[] { OStrings.getString("CT_STATS_Total"),
+    private static final String[] HT_ROWS = { OStrings.getString("CT_STATS_Total"),
             OStrings.getString("CT_STATS_Remaining"), OStrings.getString("CT_STATS_Unique"),
             OStrings.getString("CT_STATS_Unique_Remaining") };
-    private static final boolean[] htAlign = new boolean[] { false, true, true, true, true, true };
+    private static final boolean[] HT_ALIGN = new boolean[] { false, true, true, true, true, true };
 
-    private static final String[] ftHeaders = new String[] { OStrings.getString("CT_STATS_FILE_Name"),
+    private static final String[] FT_HEADERS = { OStrings.getString("CT_STATS_FILE_Name"),
             OStrings.getString("CT_STATS_FILE_Total_Segments"),
             OStrings.getString("CT_STATS_FILE_Remaining_Segments"),
             OStrings.getString("CT_STATS_FILE_Unique_Segments"),
@@ -93,7 +93,7 @@ public class CalcStandardStatistics extends LongProcessThread {
             OStrings.getString("CT_STATS_FILE_Unique_Characters"),
             OStrings.getString("CT_STATS_FILE_Unique_Remaining_Characters"), };
 
-    private static final boolean[] ftAlign = new boolean[] { false, true, true, true, true, true, true, true,
+    private static final boolean[] FT_ALIGN = { false, true, true, true, true, true, true, true,
             true, true, true, true, true, true, true, true, true, };
 
     private final StatisticsPanel callback;
@@ -113,8 +113,9 @@ public class CalcStandardStatistics extends LongProcessThread {
         // removing old stats
         try {
             File oldstats = new File(internalDir + "word_counts");
-            if (oldstats.exists())
+            if (oldstats.exists()) {
                 oldstats.delete();
+            }
         } catch (Exception e) {
         }
 
@@ -128,13 +129,14 @@ public class CalcStandardStatistics extends LongProcessThread {
     public static String buildProjectStats(final IProject project, final StatisticsInfo hotStat) {
         return buildProjectStats(project, hotStat, null);
     }
-    
+
     /**
      * Builds a file with statistic info about the project. The total word &
      * character count of the project, the total number of unique segments, plus
      * the details for each file.
      */
-    public static String buildProjectStats(final IProject project, final StatisticsInfo hotStat, final StatisticsPanel callback) {
+    public static String buildProjectStats(final IProject project, final StatisticsInfo hotStat,
+            final StatisticsPanel callback) {
 
         StatCount total = new StatCount();
         StatCount remaining = new StatCount();
@@ -231,9 +233,9 @@ public class CalcStandardStatistics extends LongProcessThread {
 
         String[][] headerTable = calcHeaderTable(new StatCount[] { total, remaining, unique, remainingUnique });
         if (callback != null) {
-            callback.setProjectTableData(htHeaders, headerTable);
+            callback.setProjectTableData(HT_HEADERS, headerTable);
         }
-        result.append(TextUtil.showTextTable(htHeaders, headerTable, htAlign));
+        result.append(TextUtil.showTextTable(HT_HEADERS, headerTable, HT_ALIGN));
         result.append("\n\n");
 
         // STATISTICS BY FILE
@@ -241,9 +243,9 @@ public class CalcStandardStatistics extends LongProcessThread {
         result.append("\n\n");
         String[][] filesTable = calcFilesTable(project.getProjectProperties(), counts);
         if (callback != null) {
-            callback.setFilesTableData(ftHeaders, filesTable);
+            callback.setFilesTableData(FT_HEADERS, filesTable);
         }
-        result.append(TextUtil.showTextTable(ftHeaders, filesTable, ftAlign));
+        result.append(TextUtil.showTextTable(FT_HEADERS, filesTable, FT_ALIGN));
 
         if (hotStat != null) {
             hotStat.numberOfSegmentsTotal = total.segments;
@@ -262,7 +264,7 @@ public class CalcStandardStatistics extends LongProcessThread {
         String[][] table = new String[result.length][6];
 
         for (int i = 0; i < result.length; i++) {
-            table[i][0] = htRows[i];
+            table[i][0] = HT_ROWS[i];
             table[i][1] = Integer.toString(result[i].segments);
             table[i][2] = Integer.toString(result[i].words);
             table[i][3] = Integer.toString(result[i].charsWithoutSpaces);
@@ -272,12 +274,12 @@ public class CalcStandardStatistics extends LongProcessThread {
         return table;
     }
 
-    protected static String[][] calcFilesTable(final ProjectProperties m_config, final List<FileData> counts) {
+    protected static String[][] calcFilesTable(final ProjectProperties config, final List<FileData> counts) {
         String[][] table = new String[counts.size()][17];
 
         int r = 0;
         for (FileData numbers : counts) {
-            table[r][0] = StaticUtils.makeFilenameRelative(numbers.filename, m_config.getSourceRoot());
+            table[r][0] = StaticUtils.makeFilenameRelative(numbers.filename, config.getSourceRoot());
             table[r][1] = Integer.toString(numbers.total.segments);
             table[r][2] = Integer.toString(numbers.remaining.segments);
             table[r][3] = Integer.toString(numbers.unique.segments);

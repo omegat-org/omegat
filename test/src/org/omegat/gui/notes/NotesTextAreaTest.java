@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
@@ -35,7 +35,7 @@ import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 
 /**
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class NotesTextAreaTest extends TestCore {
@@ -44,7 +44,7 @@ public class NotesTextAreaTest extends TestCore {
     public void testSetNote() throws Exception {
         final INotes nta = new NotesTextArea(Core.getMainWindow());
         final ResultHolder<String> holder = new ResultHolder<String>();
-        
+
         final String s = "foobar";
         SwingUtilities.invokeAndWait(new Runnable() {
             @Override
@@ -74,7 +74,7 @@ public class NotesTextAreaTest extends TestCore {
         });
         assertNull(holder.result);
     }
-    
+
     private class ResultHolder<T> {
         public T result;
     }
@@ -83,7 +83,7 @@ public class NotesTextAreaTest extends TestCore {
     public void testClear() throws Exception {
         final INotes nta = new NotesTextArea(Core.getMainWindow());
         final ResultHolder<String> holder = new ResultHolder<String>();
-        
+
         SwingUtilities.invokeAndWait(new Runnable() {
             @Override
             public void run() {

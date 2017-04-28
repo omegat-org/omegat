@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -31,7 +31,7 @@ import org.omegat.util.Preferences;
 
 /**
  * A base preferences controller implementation.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public abstract class BasePreferencesController implements IPreferencesController {

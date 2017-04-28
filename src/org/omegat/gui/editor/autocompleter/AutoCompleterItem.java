@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013-2015 Aaron Madlon-Kay
@@ -37,7 +37,7 @@ import java.util.Arrays;
  * that created the AutoCompleterItem should know how to use these
  * values appropriately in its {@link AutoCompleterListView#itemToString(AutoCompleterItem)}
  * method.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class AutoCompleterItem {
@@ -46,7 +46,7 @@ public class AutoCompleterItem {
     public final int cursorAdjust;
     public final boolean keepSelection;
     public final int replacementLength;
-    
+
     public AutoCompleterItem(String payload, String[] extras, int replacementLength) {
         this.payload = payload;
         this.extras = extras;
@@ -54,7 +54,7 @@ public class AutoCompleterItem {
         this.keepSelection = false;
         this.replacementLength = replacementLength;
     }
-    
+
     public AutoCompleterItem(String payload, String[] extras, int cursorAdjust, boolean keepSelection, int replacementLength) {
         this.payload = payload;
         this.extras = extras;

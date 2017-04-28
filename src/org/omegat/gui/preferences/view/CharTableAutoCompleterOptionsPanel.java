@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
@@ -35,7 +35,6 @@ import org.omegat.util.OStrings;
  */
 @SuppressWarnings("serial")
 public class CharTableAutoCompleterOptionsPanel extends javax.swing.JPanel {
-
 
     /**
      * Creates new form CharTableAutoCompleterDialog

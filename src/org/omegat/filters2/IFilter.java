@@ -32,18 +32,18 @@ import java.util.Map;
 
 /**
  * Interface for filters declaration.
- * 
+ *
  * TODO: each filter should be stateless, i.e. options shouldn't be stored in filter, but should be sent to
  * filter on each parse, align, or translate operation.
- * 
+ *
  * Filters shouldn't use Core, but use Context instead.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IFilter {
     /**
      * Human-readable name of the File Format this filter supports.
-     * 
+     *
      * @return File format name
      */
     String getFileFormatName();
@@ -51,7 +51,7 @@ public interface IFilter {
     /**
      * Returns the hint displayed while the user edits the filter, and when she adds/edits the instance of
      * this filter. The hint may be any string, preferably in a non-geek language.
-     * 
+     *
      * @return The hint for editing the filter in a non-geek language.
      */
     String getHint();
@@ -61,7 +61,7 @@ public interface IFilter {
      * filter instances, different by source file mask, encoding of the source file etc.
      * <p>
      * Note that the user may change the instances freely.
-     * 
+     *
      * @return Default filter instances
      */
     Instance[] getDefaultInstances();
@@ -74,7 +74,7 @@ public interface IFilter {
      * Return false to state that your filter doesn't need encoding management provided by OmegaT, because it
      * either autodetects the encoding based on file contents (like HTML filter does) or the encoding is fixed
      * (like in OpenOffice files).
-     * 
+     *
      * @return whether source encoding can be changed by the user
      */
     boolean isSourceEncodingVariable();
@@ -86,7 +86,7 @@ public interface IFilter {
      * <p>
      * Return false to state that your filter doesn't need encoding management provided by OmegaT, because the
      * encoding is fixed (like in OpenOffice files), or for some other reason.
-     * 
+     *
      * @return whether target encoding can be changed by the user
      */
     boolean isTargetEncodingVariable();
@@ -94,7 +94,7 @@ public interface IFilter {
     /**
      * Define fuzzy mark prefix for source which will be stored in TM. It's 'fuzzy' by default, but each
      * filter can redefine it.
-     * 
+     *
      * @return fuzzy mark prefix
      */
     String getFuzzyMark();
@@ -105,7 +105,7 @@ public interface IFilter {
      * <p>
      * For example, DocBook files have .xml extension, as possibly many other XML files, so the filter should
      * check a DTD of the document.
-     * 
+     *
      * @param inFile
      *            Source file.
      * @param config
@@ -118,7 +118,7 @@ public interface IFilter {
 
     /**
      * Parse single file.
-     * 
+     *
      * @param inFile
      *            file to parse
      * @param config
@@ -134,7 +134,7 @@ public interface IFilter {
 
     /**
      * Create translated file.
-     * 
+     *
      * @param inFile
      *            source file
      * @param outFile
@@ -152,7 +152,7 @@ public interface IFilter {
 
     /**
      * Align source and translated files.
-     * 
+     *
      * @param inFile
      *            source file
      * @param outFile
@@ -174,7 +174,7 @@ public interface IFilter {
      * Show change options dialog for able to change options.
      * <p>
      * Deprecated; please use {@link #changeOptions(Window, Map)} instead.
-     * 
+     *
      * @param parent
      *            parent window
      * @param config
@@ -186,7 +186,7 @@ public interface IFilter {
 
     /**
      * Show change options dialog for able to change options.
-     * 
+     *
      * @param parent
      *            parent window
      * @param config
@@ -210,7 +210,7 @@ public interface IFilter {
     /**
      * Indicates whether the filter is bilingual. Bilingual filters will supply both source strings and
      * translation strings to {@link IParseCallback}.addEntry().
-     * 
+     *
      * @return <code>true</code> if the filter is bilingual
      * @since 4.1.1
      */

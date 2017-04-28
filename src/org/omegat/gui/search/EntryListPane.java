@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -85,7 +85,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * segment, instructs the main UI to jump to that segment this replaces the
  * previous huperlink interface and is much more flexible in the fonts it
  * displays than the HTML text
- * 
+ *
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -146,7 +146,7 @@ class EntryListPane extends JTextPane {
 
     public EntryListPane() {
         setDocument(new DefaultStyledDocument());
-        
+
         setDragEnabled(true);
         setFont(Core.getMainWindow().getApplicationFont());
         StaticUIUtils.makeCaretAlwaysVisible(this);
@@ -381,7 +381,7 @@ class EntryListPane extends JTextPane {
     /**
      * Adds a message text to be displayed. Used for displaying messages that
      * aren't results.
-     * 
+     *
      * @param message
      *            The message to display
      */
@@ -476,7 +476,7 @@ class EntryListPane extends JTextPane {
         DisplayedEntry getPrevious();
 
         void activate();
-        
+
         void gotoEntryInEditor();
     }
 
@@ -596,7 +596,7 @@ class EntryListPane extends JTextPane {
 
         private final AttributeSet attrNormal;
         private final AttributeSet attrActive;
-        
+
         private int entryListIndex = -1;
         private int offset         = -1;
         private int length         = -1;
@@ -633,7 +633,7 @@ class EntryListPane extends JTextPane {
             offset         = -1;
             length         = -1;
         }
-        
+
         private void removeCurrentHighlight() {
             if (entryListIndex == -1 || entryListIndex >= m_offsetList.size() || length <= 0) {
                 return;

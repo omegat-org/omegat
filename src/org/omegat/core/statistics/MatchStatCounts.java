@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Alex Buloichik
@@ -32,7 +32,7 @@ import java.util.stream.Stream;
 /**
  * Bean for store match count for one file or for full project, i.e. "Repetitions", "Exact match", "95%-100%",
  * "85%-94%", etc.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class MatchStatCounts {
@@ -69,7 +69,7 @@ public class MatchStatCounts {
     /**
      * Add all counts contained in another MatchStatCounts instance into this
      * instance.
-     * 
+     *
      * @param other
      *            Counts to add
      * @return This instance
@@ -83,7 +83,7 @@ public class MatchStatCounts {
 
     /**
      * Get row index by match percent.
-     * 
+     *
      * @param percent
      *            match percent
      * @return row index
@@ -107,7 +107,7 @@ public class MatchStatCounts {
 
     /**
      * Extract first two rows result to text table.
-     * 
+     *
      * @param result
      *            result
      * @return text table
@@ -129,7 +129,7 @@ public class MatchStatCounts {
     /**
      * Extract result to text table. Convenience method for
      * {@link #calcTable(String[], IntPredicate)} that accepts all rows.
-     * 
+     *
      * @param rows
      *            An array of row headers
      * @return text table
@@ -138,13 +138,13 @@ public class MatchStatCounts {
         if (rows.length != counts.length + 1) {
             throw new IllegalArgumentException("Must supply headers for " + (counts.length + 1) + " rows");
         }
-        return calcTable(rows, i-> true);
+        return calcTable(rows, i -> true);
     }
 
     /**
      * Extract result to text table. Rows for which the <code>rowFilter</code>
      * returns <code>false</code> will be skipped.
-     * 
+     *
      * @param rows
      *            An array of row headers
      * @param rowFilter

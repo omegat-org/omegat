@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
@@ -91,7 +91,7 @@ public class TMXReaderTest extends TestCore {
                     }
                 });
     }
-    
+
     @Test
     public void testSMP() throws Exception {
         final Map<String, String> tr = new TreeMap<String, String>();
@@ -107,7 +107,7 @@ public class TMXReaderTest extends TestCore {
         // Assert contents are {"ABC": "DEF"} where letters are MATHEMATICAL BOLD CAPITALs (U+1D400-)
         assertEquals("\uD835\uDC03\uD835\uDC04\uD835\uDC05", tr.get("\uD835\uDC00\uD835\uDC01\uD835\uDC02"));
     }
-    
+
     @Test
     public void testGetTuvByLang() {
         TMXReader2.ParsedTuv tuvBE = new TMXReader2.ParsedTuv();
@@ -115,7 +115,7 @@ public class TMXReaderTest extends TestCore {
 
         TMXReader2.ParsedTuv tuvFR = new TMXReader2.ParsedTuv();
         tuvFR.lang = "FR";
-        
+
         TMXReader2.ParsedTuv tuvFRCA = new TMXReader2.ParsedTuv();
         tuvFRCA.lang = "FR-CA";
 
@@ -141,7 +141,7 @@ public class TMXReaderTest extends TestCore {
 
         assertEquals(tmx.getTuvByLang(new Language("EN")), tuvENGB);
         assertEquals(tmx.getTuvByLang(new Language("EN-CA")), tuvENGB);
-        
+
         assertNull(tmx.getTuvByLang(new Language("ZZ")));
     }
 

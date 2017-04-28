@@ -37,7 +37,7 @@ import org.omegat.util.Platform;
 
 /**
  * Tests for ProjectProperties class.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ProjectPropertiesTest {

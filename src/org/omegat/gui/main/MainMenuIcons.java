@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
@@ -43,13 +43,13 @@ import javax.swing.Icon;
  * @author Aaron Madlon-Kay
  */
 public class MainMenuIcons {
-    
+
     @SuppressWarnings({"rawtypes", "unchecked"})
     abstract private static class BaseIcon implements Icon {
-        
+
         private Map defaultHints;
         private Map originalHints;
-        
+
         public BaseIcon() {
             originalHints = new RenderingHints(null);
             try {
@@ -70,7 +70,7 @@ public class MainMenuIcons {
             doPaint(g2, x, y);
             g2.addRenderingHints(originalHints);
         }
-        
+
         abstract void doPaint(Graphics2D g2, int x, int y);
 
         @Override
@@ -79,18 +79,18 @@ public class MainMenuIcons {
         }
 
         @Override
-        
+
         public int getIconHeight() {
             return ICON_SIZE;
         }
-        
+
         /**
          * Get rendering hints from a Graphics instance.
          * "hintsToSave" is a Map of RenderingHint key-values.
          * For each hint key present in that map, the value of that
          * hint is obtained from the Graphics and stored as the value
          * for the key in savedHints.
-         * 
+         *
          * From: http://docs.oracle.com/javase/7/docs/api/java/awt/doc-files/DesktopProperties.html
          */
         private Map getRenderingHints(Graphics2D g2d, Map hintsToSave, Map savedHints) {
@@ -110,36 +110,36 @@ public class MainMenuIcons {
             }
             return savedHints;
        }
-        
+
     }
-    
+
     /**
      * Size of icons (both height and width) of menu entries.
      */
     private static final int ICON_SIZE = 12;
-    
+
     /**
      * Creates an empty icon of the default size.
      */
     static Icon newBlankIcon() {
         return new Icon() {
-            
+
             @Override
             public void paintIcon(Component c, Graphics g, int x, int y) {
             }
-            
+
             @Override
             public int getIconWidth() {
                 return ICON_SIZE;
             }
-            
+
             @Override
             public int getIconHeight() {
                 return ICON_SIZE;
             }
         };
     }
-    
+
     /**
      * Creates an icon to show color of background marking
      * @param color background color
@@ -162,17 +162,17 @@ public class MainMenuIcons {
      * Convenience method for {@link #newTextIcon(Color, Font, char)}
      * that uses the default font.
      * @param color color of font
-     * @param text char to draw 
+     * @param text char to draw
      */
     static Icon newTextIcon(final Color color, final char c) {
         return newTextIcon(color, null, c);
     }
-    
+
     /**
      * Creates icon with a char in the specified color and font
      * @param color color of font
      * @param font font to use
-     * @param text char to draw 
+     * @param text char to draw
      */
     static Icon newTextIcon(final Color color, final Font font, final char c) {
         final char[] chars = new char[] {c};

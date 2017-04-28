@@ -52,14 +52,14 @@ import org.omegat.util.VarExpansion;
 /**
  * This class is used to convert a NearString to a text visible in the MatchesTextArea
  * according to the given template containing variables.
- * 
+ *
  * @author Thomas CORDONNIER
  * @author Aaron Madlon-Kay
  */
 public class MatchesVarExpansion extends VarExpansion<NearString> {
-    
+
     // ------------------------------ definitions -------------------
-    
+
     public static final String VAR_ID = "${id}";
     public static final String VAR_SCORE_BASE = "${score}";
     public static final String VAR_SCORE_NOSTEM = "${noStemScore}";
@@ -83,43 +83,42 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     public static final String VAR_FUZZY_FLAG = "${fuzzyFlag}";
     public static final String VAR_DIFF = "${diff}";
     public static final String VAR_DIFF_REVERSED = "${diffReversed}";
-    
-    
+
     private static final String[] MATCHES_VARIABLES = {
-        VAR_ID, 
+        VAR_ID,
         VAR_SOURCE_TEXT,
         VAR_DIFF,
         VAR_DIFF_REVERSED,
-        VAR_TARGET_TEXT, 
+        VAR_TARGET_TEXT,
         VAR_SCORE_BASE, VAR_SCORE_NOSTEM, VAR_SCORE_ADJUSTED,
         VAR_FILE_NAME_ONLY, VAR_FILE_PATH, VAR_FILE_SHORT_PATH,
         VAR_INITIAL_CREATION_ID, VAR_INITIAL_CREATION_DATE,
         VAR_CHANGED_ID, VAR_CHANGED_DATE, VAR_FUZZY_FLAG
     };
-    
+
     public static List<String> getMatchesVariables() {
         return Collections.unmodifiableList(Arrays.asList(MATCHES_VARIABLES));
     }
 
-    public static final String DEFAULT_TEMPLATE = VAR_ID + ". " 
+    public static final String DEFAULT_TEMPLATE = VAR_ID + ". "
             + VAR_FUZZY_FLAG
             + VAR_SOURCE_TEXT + "\n"
             + VAR_TARGET_TEXT + "\n"
-            + "<" + VAR_SCORE_BASE + "/" 
+            + "<" + VAR_SCORE_BASE + "/"
             + VAR_SCORE_NOSTEM + "/"
             + VAR_SCORE_ADJUSTED + "% "
             + VAR_FILE_PATH + ">";
-    
+
     public static final Pattern patternSingleProperty = Pattern.compile("@\\{(.+?)\\}");
-    public static final Pattern patternPropertyGroup = Pattern.compile("@\\[(.+?)\\]\\[(.+?)\\]\\[(.+?)\\]"); 
-    
+    public static final Pattern patternPropertyGroup = Pattern.compile("@\\[(.+?)\\]\\[(.+?)\\]\\[(.+?)\\]");
+
     private static Replacer sourceTextReplacer = new Replacer() {
         public void replace(Result R, NearString match) {
             R.sourcePos = R.text.indexOf(VAR_SOURCE_TEXT);
             R.text = R.text.replace(VAR_SOURCE_TEXT, match.source);
         }
     };
-    
+
     private static Replacer diffReplacer = new Replacer() {
         public void replace(Result R, NearString match) {
             int diffPos = R.text.indexOf(VAR_DIFF);
@@ -131,7 +130,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             }
         }
     };
-    
+
     private static Replacer diffReversedReplacer = new Replacer() {
         public void replace(Result R, NearString match) {
             int diffPos = R.text.indexOf(VAR_DIFF_REVERSED);
@@ -143,16 +142,16 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             }
         }
     };
-    
+
     // ------------------------------ subclasses -------------------
-    
+
     /** Class to store formatted text and indications for other treatments **/
     public static class Result {
-        public String text = null; 
+        public String text = null;
         public int sourcePos = -1;
         public final Map<Integer, List<TextRun>> diffInfo = new HashMap<Integer, List<TextRun>>();
     }
-    
+
     /** A simple interface for making anonymous functions that perform string replacements. */
     private interface Replacer {
         public void replace(Result R, NearString match);
@@ -165,17 +164,17 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
 
     public MatchesVarExpansion (String template) {
         super(template);
-        
+
     }
-        
+
     /**
      * Replace property calls by the corresponding value <br>
-     * Format : @{PropertyName} 
+     * Format : @{PropertyName}
      *      in this case, retreive only the property value, name is elsewhere. <br>
-     * Format : @[Property name with *][separator 1][separator2] 
+     * Format : @[Property name with *][separator 1][separator2]
      *      in this case, return all properties matching the 1st pattern,
      *      as key=value pairs where = is replaced by separator1 and use separator2 between entries.<br>
-     * Expression \n for new line is accepted in separators. 
+     * Expression \n for new line is accepted in separators.
      * @param localTemplate  Initial template
      * @param props Map of properties
      * @return Expanded template
@@ -188,7 +187,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
         }
         while ((matcher = patternPropertyGroup.matcher(localTemplate)).find()) {
             String patternStr = matcher.group(1), separator1 = matcher.group(2), separator2 = matcher.group(3);
-            separator1 = separator1.replace("\\n","\n"); 
+            separator1 = separator1.replace("\\n","\n");
             separator2 = separator2.replace("\\n","\n");
             Pattern pattern = Pattern.compile(patternStr.replace("*","(.*)").replace("?","(.)"));
             StringBuilder res = new StringBuilder();
@@ -199,8 +198,8 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             if (res.toString().endsWith(separator2))
                 res.replace(res.toString().lastIndexOf(separator2), res.length(), "");
             localTemplate = localTemplate.replace(matcher.group(), res.toString());
-        }        
-        return localTemplate;        
+        }
+        return localTemplate;
     }
 
     private String getPropValue(List<TMXProp> props, String type) {
@@ -242,11 +241,11 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
         }
         return localTemplate;
     }
-    
+
     public Result apply(NearString match, int id) {
         Result R = new Result();
         styledComponents.clear();
-        
+
         // Variables
         R.text = this.expandVariables(match);
         R.text = R.text.replace(VAR_ID, Integer.toString(id));
@@ -266,7 +265,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
         for (Entry<Integer, Replacer> e : styledComponents.entrySet()) {
             e.getValue().replace(R, match);
         }
-        
+
         return R;
     }
 }

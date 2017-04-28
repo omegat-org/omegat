@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
@@ -46,7 +46,7 @@ import org.omegat.util.Preferences;
 
 /**
  * Methods for tokenize string.
- * 
+ *
  * @author Zoltan Bartko - bartkozoltan@bartkozoltan.com
  * @author Aaron Madlon-Kay
  */

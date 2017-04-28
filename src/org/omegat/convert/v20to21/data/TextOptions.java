@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -38,13 +38,13 @@ import java.io.Serializable;
  * <li>[+] Empty lines (double line break)
  * <li>[] Never
  * </ul>
- * 
- * 
+ *
+ *
  * @author Maxym Mykhalchuk
  */
 public class TextOptions implements Serializable {
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 1L;
     /**
@@ -65,7 +65,7 @@ public class TextOptions implements Serializable {
 
     /**
      * Returns when Text filter should segmentOn text into paragraphs.
-     * 
+     *
      * @return One of {@link #SEGMENT_BREAKS}, {@link #SEGMENT_EMPTYLINES},
      *         {@link #SEGMENT_NEVER}.
      */
@@ -75,7 +75,7 @@ public class TextOptions implements Serializable {
 
     /**
      * Sets when Text filter should segmentOn text into paragraphs.
-     * 
+     *
      * @param segmentOn
      *            One of {@link #SEGMENT_BREAKS}, {@link #SEGMENT_EMPTYLINES},
      *            {@link #SEGMENT_NEVER}.

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
@@ -35,7 +35,6 @@ import org.omegat.util.OStrings;
  */
 @SuppressWarnings("serial")
 public class AutotextAutoCompleterOptionsPanel extends javax.swing.JPanel {
-    
 
     /**
      * Creates new form AutotextAutoCompleterOptionsDialog
@@ -43,7 +42,7 @@ public class AutotextAutoCompleterOptionsPanel extends javax.swing.JPanel {
     public AutotextAutoCompleterOptionsPanel() {
         initComponents();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -197,7 +196,7 @@ public class AutotextAutoCompleterOptionsPanel extends javax.swing.JPanel {
 
         add(jPanel6, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JButton addNewRowButton;
     javax.swing.JPanel displayPanel;

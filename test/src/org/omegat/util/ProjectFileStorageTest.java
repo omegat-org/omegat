@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -133,7 +133,7 @@ public class ProjectFileStorageTest {
             String prefix = repeat(i, "a/");
             File projRoot = Paths.get(tempDir.getAbsolutePath(), prefix, "root").toFile();
             projRoot.mkdirs();
-    
+
             // Set project folders to absolute paths
             File srcDir = new File(tempDir, "source").getAbsoluteFile();
             File trgDir = new File(tempDir, "target").getAbsoluteFile();
@@ -145,10 +145,10 @@ public class ProjectFileStorageTest {
             omt.getProject().setDictionaryDir(dictDir.getPath());
             omt.getProject().setGlossaryDir(glosDir.getPath());
             omt.getProject().setTmDir(tmDir.getPath());
-    
+
             // Make all the actual folders
             Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir).forEach(File::mkdirs);
-    
+
             // Load the ProjectProperties and verify that the project folders
             // are resolved correctly
             ProjectProperties props = ProjectFileStorage.loadPropertiesFile(projRoot, omt);

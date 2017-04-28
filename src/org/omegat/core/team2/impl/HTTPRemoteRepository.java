@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Alex Buloichik
@@ -48,11 +48,11 @@ import gen.core.project.RepositoryMapping;
 
 /**
  * HTTP/HTTPS repository connection implementation.
- * 
+ *
  * It can be used as read-only repository for retrieve sources, external TMX, glossaries, etc. Since HTTP
  * protocol doesn't support multiple files, each URL should be mapped to separate file, i.e. directory mapping
  * is not supported.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class HTTPRemoteRepository implements IRemoteRepository2 {

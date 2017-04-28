@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -30,7 +30,7 @@ import org.omegat.util.Token;
 
 /**
  * Interface for tokenize string engine.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
@@ -73,7 +73,7 @@ public interface ITokenizer {
      * Results are not cached.
      */
     Token[] tokenizeVerbatim(String str);
-    
+
     /**
      * Breaks a string into strings. Numbers, tags, and other non-word tokens are
      * included in the result. Stemming is NOT used.
@@ -90,7 +90,7 @@ public interface ITokenizer {
      * supported languages. Meant for tokenizers for which the supported languages
      * can only be determined at runtime, like the {@link HunspellTokenizer}.
      * <p>
-     * Indicate that this should be used by setting the {@link Tokenizer} annotation 
+     * Indicate that this should be used by setting the {@link Tokenizer} annotation
      * to contain only {@link Tokenizer#DISCOVER_AT_RUNTIME}.
      */
     public String[] getSupportedLanguages();

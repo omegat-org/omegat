@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Aaron Madlon-Kay
@@ -39,7 +39,7 @@ import bmsi.util.Diff;
 /**
  * Drives a diff engine to produce rendered textual diff output.
  * Uses GNU Diff for Java: http://bmsi.com/java/#diff
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class DiffDriver {
@@ -47,7 +47,7 @@ public class DiffDriver {
     public enum Type {
         INSERT, DELETE, NOCHANGE
     }
-    
+
     public static final Pattern DIFF_MERGEABLE_DELIMITER_PATTERN = Pattern.compile("[ :;,.()]+");
 
     /**
@@ -60,7 +60,7 @@ public class DiffDriver {
     public static Render render(String original, String revised, boolean optimize) {
 
         Render result = new Render();
-        
+
         ITokenizer tokenizer = Core.getProject().getSourceTokenizer();
         if (tokenizer == null) {
             // Project has probably been closed.
@@ -89,7 +89,7 @@ public class DiffDriver {
             if (c == null) {
                 // No change for this token.
                 if (n < originalStrings.length) {
-                    if (optimize) result.addRun(rawText.length(), originalStrings[n].length(), Type.NOCHANGE);  
+                    if (optimize) result.addRun(rawText.length(), originalStrings[n].length(), Type.NOCHANGE);
                     rawText.append(originalStrings[n]);
                 }
                 continue;
@@ -130,7 +130,7 @@ public class DiffDriver {
                 // If this was an insert only (no deleted lines), we should
                 // add the original token in as well.
                 if (c.deleted == 0 && n < originalStrings.length) {
-                    if (optimize) result.addRun(rawText.length(), originalStrings[n].length(), Type.NOCHANGE); 
+                    if (optimize) result.addRun(rawText.length(), originalStrings[n].length(), Type.NOCHANGE);
                     rawText.append(originalStrings[n]);
                 }
             }
@@ -146,17 +146,17 @@ public class DiffDriver {
     }
 
     private static Render optimizeRender(Render render, int level) {
-        if (level > 3) 
+        if (level > 3)
             return render;
-        
+
         StringBuilder rawText = new StringBuilder();
         Render result = new Render();
         List<TextRun> fList = render.formatting;
-        
+
         // try to merge <deletion><insertion><space><deletion><insertion> patterns
         if (fList.size() < 5)
             return render;
-        
+
         for (int i = 0; i < fList.size(); i++) {
             TextRun r0 = fList.get(i);
             if (i < fList.size()-4) {
@@ -165,20 +165,20 @@ public class DiffDriver {
                 TextRun r3 = fList.get(i+3);
                 TextRun r4 = fList.get(i+4);
 
-                if (r0.type == Type.DELETE 
-                        && r1.type == Type.INSERT 
-                        && r2.type == Type.NOCHANGE 
+                if (r0.type == Type.DELETE
+                        && r1.type == Type.INSERT
+                        && r2.type == Type.NOCHANGE
                         && DIFF_MERGEABLE_DELIMITER_PATTERN.matcher(
-                                render.text.substring(r2.start, r2.start + r2.length)).matches() 
-                        && r3.type == Type.DELETE 
-                        && r4.type == Type.INSERT 
+                                render.text.substring(r2.start, r2.start + r2.length)).matches()
+                        && r3.type == Type.DELETE
+                        && r4.type == Type.INSERT
                         ) {
                     StringBuilder buff = new StringBuilder();
                     //merge deletes
                     buff.append(render.getRunText(r0));
                     buff.append(render.getRunText(r2));
                     buff.append(render.getRunText(r3));
-                    
+
                     result.addRun(rawText.length(), buff.length(), Type.DELETE);
                     rawText.append(buff);
 
@@ -188,20 +188,20 @@ public class DiffDriver {
                     buff.append(render.getRunText(r1));
                     buff.append(render.getRunText(r2));
                     buff.append(render.getRunText(r4));
-                    
+
                     result.addRun(rawText.length(), buff.length(), Type.INSERT);
                     rawText.append(buff);
 
                     i = i+4;
                     continue;
-                }    
+                }
             }
             result.addRun(rawText.length(), r0.length, r0.type);
             rawText.append(render.getRunText(r0));
         }
-        
+
         result.text = rawText.toString();
-        
+
         Render optimized = optimizeRender(result,level+1);
         return (optimized.formatting.size() < result.formatting.size()) ? optimized : result;
     }
@@ -229,7 +229,7 @@ public class DiffDriver {
     /**
      * Double check some assumptions made about change scripts.
      * Only meant to be called in debug, via assert.
-     * 
+     *
      * @param script Linked list of Diff.change elements
      * @param original Original strings
      * @param revised Revised strings
@@ -265,11 +265,11 @@ public class DiffDriver {
         public void addRun(int start, int length, Type type) {
             formatting.add(new TextRun(start, length, type));
         }
-        
+
         /**
-         * Get the text corresponding to the run 
+         * Get the text corresponding to the run
          * @param run
-         * @return 
+         * @return
          */
         public String getRunText(TextRun run) {
             return text.substring(run.start, run.start + run.length);

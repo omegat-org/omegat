@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014, 2016 Aaron Madlon-Kay
@@ -34,13 +34,13 @@ import javax.swing.ListCellRenderer;
 /**
  * A combo box renderer that delegates rendering to the Look And Feel's default
  * renderer. This preserves OS styling and highlighting on e.g. Mac OS X.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 abstract public class DelegatingComboBoxRenderer<T, U> implements ListCellRenderer<T> {
 
     private final ListCellRenderer<Object> original = new JComboBox<Object>().getRenderer();
-    
+
     @Override
     public Component getListCellRendererComponent(JList<? extends T> list, T value, int index, boolean isSelected,
             boolean cellHasFocus) {

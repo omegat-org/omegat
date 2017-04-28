@@ -1,12 +1,12 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2011 Didier Briel
                2016 Didier Briel
- 
+
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -35,7 +35,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
  * This class specifies the Wordpress XML Dialect.
- * 
+ *
  * @author Didier Briel
  */
 public class WordpressDialect extends DefaultXMLDialect {
@@ -44,8 +44,8 @@ public class WordpressDialect extends DefaultXMLDialect {
 
     public WordpressDialect() {
 
-        defineParagraphTags(new String[] { 
-            "channel", 
+        defineParagraphTags(new String[] {
+            "channel",
             "content:encoded",
             "title",
             "description"
@@ -61,10 +61,10 @@ public class WordpressDialect extends DefaultXMLDialect {
            "category"
        });
     }
-    
+
     /**
      * In the Wordpress filter, all tags starting with wp: should be ignored
-     * 
+     *
      * @param tag
      *            An XML tag
      * @param atts

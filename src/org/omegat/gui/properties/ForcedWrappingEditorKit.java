@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -42,10 +42,10 @@ import javax.swing.text.ViewFactory;
  * {@link JTextPane}s won't break words when wrapping, so very long words can result in horizontal scrolling.
  * This EditorKit is a big, complicated way of overriding {@link LabelView#getMinimumSpan(int)} to return 0
  * for the X-axis, allowing long words to be broken.
- * 
+ *
  * @see <a href="http://stackoverflow.com/a/13375811/448068">StackOverflow</a>
  * @see <a href="http://java-sl.com/wrap.html">Java SL</a>
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")

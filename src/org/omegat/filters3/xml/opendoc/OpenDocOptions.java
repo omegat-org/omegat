@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007-2010 Didier Briel
@@ -45,7 +45,7 @@ import org.omegat.filters2.AbstractOptions;
  * <li>[] Links (URL)
  * <li>[] Sheet names
  * </ul>
- * 
+ *
  * @author Didier Briel
  */
 public class OpenDocOptions extends AbstractOptions {

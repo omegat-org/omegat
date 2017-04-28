@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2011 Alex Buloichik
@@ -36,10 +36,10 @@ import org.omegat.gui.common.EntryInfoSearchThread;
 
 /**
  * Class for iterate by all translation and find entries for multiple translations pane.
- * 
+ *
  * There is no sense to store multiple translations into map with source text key, because full iterate is
  * enough fast since we just check strings for equals.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class MultipleTransFindThread extends EntryInfoSearchThread<List<MultipleTransFoundEntry>> {

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
@@ -41,9 +41,9 @@ public class TitledTablePanel extends javax.swing.JPanel {
      */
     public TitledTablePanel() {
         initComponents();
-        
+
         // Set the title JTextArea's caret not to update on changes to the text.
-        // When a TitledTablePanel is used in a JScrollPane (like in the 
+        // When a TitledTablePanel is used in a JScrollPane (like in the
         // PerFileMatchStatisticsPanel) the caret updating will cause unwanted
         // scrolling whenever a new TitledTablePanel is displayed.
         StaticUIUtils.setCaretUpdateEnabled(title, false);
@@ -76,7 +76,6 @@ public class TitledTablePanel extends javax.swing.JPanel {
 
         add(scrollPane, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JScrollPane scrollPane;

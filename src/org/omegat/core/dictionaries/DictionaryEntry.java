@@ -27,7 +27,7 @@ package org.omegat.core.dictionaries;
 
 /**
  * Class for store one dictionary entry.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class DictionaryEntry implements Comparable<DictionaryEntry> {

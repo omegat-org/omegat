@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -51,8 +51,8 @@ import org.omegat.util.PatternConsts;
  * <p>
  * If encoding isn't specified, or it is not supported by the Java platform, the
  * file is opened in UTF-8, in compliance with the XML specifications
- * 
- * 
+ *
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
@@ -79,7 +79,7 @@ public class XMLReader extends Reader {
     /**
      * Creates a new instance of XMLReader. If encoding cannot be detected,
      * falls back to default UTF-8.
-     * 
+     *
      * @param fileName
      *            - the file to read
      */
@@ -91,7 +91,7 @@ public class XMLReader extends Reader {
      * Creates a new instance of XMLReader. If encoding cannot be detected,
      * falls back to supplied <code>encoding</code>, or (if supplied null, or
      * supplied encoding is not supported by JVM) falls back to UTF-8.
-     * 
+     *
      * @param fileName
      *            The file to read.
      * @param encoding
@@ -103,7 +103,7 @@ public class XMLReader extends Reader {
 
     /**
      * Returns the reader of the underlying file in the correct encoding.
-     * 
+     *
      * <p>
      * We can detect the following:
      * <ul>
@@ -112,7 +112,7 @@ public class XMLReader extends Reader {
      * <li>Any other encoding with 8-bit Latin symbols (e.g. Windows-1251, UTF-8
      * etc), if it is specified using XML/HTML-style encoding declarations.
      * </ul>
-     * 
+     *
      * <p>
      * Note that we cannot detect UTF-16 encoding, if there's no BOM!
      */
@@ -126,13 +126,15 @@ public class XMLReader extends Reader {
         int char2 = is.read();
         int char3 = is.read();
         encoding = null;
-        if (char1 == 0xFE && char2 == 0xFF)
+        if (char1 == 0xFE && char2 == 0xFF) {
             encoding = "UTF-16BE";
-        if (char1 == 0xFF && char2 == 0xFE)
+        }
+        if (char1 == 0xFF && char2 == 0xFE) {
             encoding = "UTF-16LE";
-        if (char1 == 0xEF && char2 == 0xBB && char3 == 0xBF)
+        }
+        if (char1 == 0xEF && char2 == 0xBB && char3 == 0xBF) {
             encoding = "UTF-8";
-
+        }
         is.reset();
         if (encoding != null) {
             return createReaderAndDetectEOL(is, encoding);
@@ -145,9 +147,10 @@ public class XMLReader extends Reader {
             String buffer = defaultEncoding == null ? new String(buf, 0, len, Charset.defaultCharset())
                     : new String(buf, 0, len, defaultEncoding);
 
-            Matcher matcher_xml = PatternConsts.XML_ENCODING.matcher(buffer);
-            if (matcher_xml.find())
-                encoding = matcher_xml.group(1);
+            Matcher matcherXml = PatternConsts.XML_ENCODING.matcher(buffer);
+            if (matcherXml.find()) {
+                encoding = matcherXml.group(1);
+            }
         }
 
         is.reset();
@@ -211,8 +214,9 @@ public class XMLReader extends Reader {
             readFirstTime = false;
             reader.mark(1);
             int ch = reader.read();
-            if (ch != 0xFEFF)
+            if (ch != 0xFEFF) {
                 reader.reset();
+            }
         }
         return reader.read(cbuf, off, len);
     }

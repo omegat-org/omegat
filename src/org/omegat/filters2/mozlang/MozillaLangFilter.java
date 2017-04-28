@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2014 Enrique Estevez Fernandez 
+ Copyright (C) 2014 Enrique Estevez Fernandez
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -50,12 +50,12 @@ import org.omegat.util.TagUtil;
 
 /**
  * Filter for support Mozilla lang files.
- * 
+ *
  * Filter for lang files. Something about the format described on
  * https://sourceforge.net/p/omegat/feature-requests/962/
  * https://developer.mozilla.org/en-US/docs/Web_Localizability/Localization_formats
  * http://bedrock.readthedocs.org/en/latest/l10n.html
- * 
+ *
  * Code adapted from the files: PoFilter.java and SrtFilter.java
  *
  * @author Enrique Estevez (keko.gl@gmail.com)
@@ -64,11 +64,11 @@ public class MozillaLangFilter extends AbstractFilter {
 
     protected static final Pattern LOCALIZATION_NOTE = Pattern.compile("# (.*)");
     protected static final Pattern PATTERN_SOURCE = Pattern.compile("^;(.*)");
-    
+
     enum READ_STATE {
         WAIT_SOURCE, WAIT_TARGET
     };
-    
+
     private StringBuilder source, target, localizationNote;
 
     private BufferedWriter out;
@@ -80,10 +80,10 @@ public class MozillaLangFilter extends AbstractFilter {
 
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[] 
+        return new Instance[]
             { new Instance("*.lang") };
     }
-    
+
     /**
      * Creating an input stream to read the source .lang file.
      * <p>
@@ -107,7 +107,7 @@ public class MozillaLangFilter extends AbstractFilter {
         // lang file use UTF8 encoding
         return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outfile), StandardCharsets.UTF_8));
     }
-    
+
     @Override
     public boolean isSourceEncodingVariable() {
         return false;
@@ -117,12 +117,11 @@ public class MozillaLangFilter extends AbstractFilter {
     public boolean isTargetEncodingVariable() {
         return false;
     }
-    
+
     @Override
     public String getInEncodingLastParsedFile() {
         return StandardCharsets.UTF_8.name();
     }
-
 
     @Override
     public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
@@ -150,17 +149,17 @@ public class MozillaLangFilter extends AbstractFilter {
             reader.close();
         }
     }
-    
+
     @Override
     protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc) throws IOException, TranslationException {
         source = new StringBuilder();
         target = new StringBuilder();
         localizationNote = new StringBuilder();
-        
+
         out = outFile;
 
         READ_STATE state = READ_STATE.WAIT_SOURCE;
-        
+
         String s;
         while ((s = inFile.readLine()) != null) {
 
@@ -193,7 +192,6 @@ public class MozillaLangFilter extends AbstractFilter {
             }
         }
     }
-           
 
     protected void eol(String s) throws IOException {
         if (out != null) {
@@ -227,7 +225,7 @@ public class MozillaLangFilter extends AbstractFilter {
      * @param comments
      */
     protected void align(String source, String translation, String comments) {
-        if (entryParseCallback != null) {       
+        if (entryParseCallback != null) {
             List<ProtectedPart> protectedParts = TagUtil.applyCustomProtectedParts(source, PatternConsts.PRINTF_VARS, null);
             entryParseCallback.addEntry(null, source, translation, false, comments, null, this, protectedParts);
         } else if (entryAlignCallback != null) {
@@ -257,7 +255,7 @@ public class MozillaLangFilter extends AbstractFilter {
 
     /**
      * Returns true to indicate that Text filter has options.
-     * 
+     *
      * @return False, because the LANG filter has not options.
      */
     @Override

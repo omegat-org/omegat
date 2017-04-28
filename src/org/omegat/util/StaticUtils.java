@@ -93,7 +93,7 @@ public class StaticUtils {
     /**
      * Char which should be used instead protected parts. It should be non-letter char, to be able to have
      * correct words counter.
-     * 
+     *
      * This char can be placed around protected text for separate words inside protected text and words
      * outside if there are no spaces between they.
      */
@@ -178,11 +178,11 @@ public class StaticUtils {
      * current working directory being used.
      *
      * <ul><li>Windows XP: &lt;Documents and Settings>\&lt;User name>\Application Data\OmegaT
-     * <li>Windows Vista: User\&lt;User name>\AppData\Roaming 
-     * <li>Linux: ~/.omegat 
+     * <li>Windows Vista: User\&lt;User name>\AppData\Roaming
+     * <li>Linux: ~/.omegat
      * <li>Solaris/SunOS: ~/.omegat
-     * <li>FreeBSD: ~/.omegat 
-     * <li>Mac OS X: ~/Library/Preferences/OmegaT 
+     * <li>FreeBSD: ~/.omegat
+     * <li>Mac OS X: ~/Library/Preferences/OmegaT
      * <li>Other: User home directory
      * </ul>
      *
@@ -237,7 +237,7 @@ public class StaticUtils {
             String appData = null;
 
             // We do not use %APPDATA%
-            // Trying first Vista/7, because "Application Data" exists also as virtual folder, 
+            // Trying first Vista/7, because "Application Data" exists also as virtual folder,
             // so we would not be able to differentiate with 2000/XP otherwise
             File appDataFile = new File(home, "AppData\\Roaming");
             if (appDataFile.exists()) {
@@ -508,7 +508,7 @@ public class StaticUtils {
         extractFileFromJar(is, destination, filenames);
         is.close();
     }
-    
+
     public static void extractFileFromJar(InputStream in, String destination, String... filenames) throws IOException {
         if (filenames == null || filenames.length == 0) {
             throw new IllegalArgumentException("Caller must provide non-empty list of files to extract.");
@@ -552,10 +552,10 @@ public class StaticUtils {
         if (cmd.isEmpty()) {
             return new String[] { "" };
         }
-        
+
         StringBuilder arg = new StringBuilder();
         List<String> result = new ArrayList<String>();
-        
+
         final char noQuote = '\0';
         char currentQuote = noQuote;
         for (int cp, i = 0; i < cmd.length(); i += Character.charCount(cp)) {
@@ -602,5 +602,5 @@ public class StaticUtils {
         File projFile = new File(f.getAbsolutePath(), OConsts.FILE_PROJECT);
         return projFile.isFile();
     }
-    
+
 } // StaticUtils

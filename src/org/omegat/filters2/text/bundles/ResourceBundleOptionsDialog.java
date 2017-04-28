@@ -1,6 +1,6 @@
 /**************************************************************************
-OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013, 2015 Enrique Estevez
@@ -37,9 +37,9 @@ import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Modal dialog to edit the Java Resource Bundles filter options.
- * 
+ *
  * Code modified from the file: MozillaDTDOptionsDialog.java
- * 
+ *
  * @author Enrique Estevez (keko.gl@gmail.com)
  */
 @SuppressWarnings("serial")
@@ -65,7 +65,7 @@ public class ResourceBundleOptionsDialog extends javax.swing.JDialog {
 
         String notConvertCharacters = options.get(ResourceBundleFilter.OPTION_DONT_UNESCAPE_U_LITERALS);
         dontUnescapeULiteralsCB.setSelected("true".equalsIgnoreCase(notConvertCharacters));
-        
+
         StaticUIUtils.setEscapeAction(this, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {

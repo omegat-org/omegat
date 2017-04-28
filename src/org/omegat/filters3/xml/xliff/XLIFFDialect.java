@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -45,10 +45,10 @@ import org.omegat.util.StringUtil;
 
 /**
  * This class specifies XLIFF XML Dialect.
- * 
+ *
  * XLIFF 1.2 specification:
  * http://docs.oasis-open.org/xliff/xliff-core/xliff-core.html
- * 
+ *
  * @author Didier Briel
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Piotr Kulik
@@ -62,18 +62,16 @@ public class XLIFFDialect extends DefaultXMLDialect {
      * Sets whether alternative translations are identified by previous and next paragraphs or by &lt;trans-unit&gt; ID
     */
     protected ID_TYPE altTransIDType;
-    
+
     public XLIFFDialect() {
     }
-    
 
     /**
      * Actually defines the dialect. It cannot be done during creation, because
      * options are not known at that step.
      */
     public void defineDialect(XLIFFOptions options) {
-    
-        
+
         defineParagraphTags(new String[] { "source", "target", });
 
         defineOutOfTurnTags(new String[] { "sub", });
@@ -87,13 +85,13 @@ public class XLIFFDialect extends DefaultXMLDialect {
             defineIntactTags(new String[] { "source", "header", "bin-unit", "prop-group", "count-group",
                     "alt-trans", "note",
                     "context", "seg-source", "sdl:seg-defs"});
-            
+
             defineContentBasedTag("bpt", Tag.Type.BEGIN);
             defineContentBasedTag("ept", Tag.Type.END);
             defineContentBasedTag("it", Tag.Type.ALONE);
             defineContentBasedTag("ph", Tag.Type.ALONE);
             // "mrk", only <mrk mtype="protected"> is content-based tag. see validateContentBasedTag
-            
+
             forceShortCutToF = options.getForceShortcutToF();
             ignoreTypeForPhTags = options.getIgnoreTypeForPhTags();
             ignoreTypeForBptTags = options.getIgnoreTypeForBptTags();
@@ -105,7 +103,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
     /**
      * In the XLIFF filter, the tag &lt;mrk&gt; is a preformat tag when the
      * attribute "mtype" contains "seg".
-     * 
+     *
      * @param tag
      *            An XML tag
      * @param atts
@@ -200,7 +198,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
                     if ("close".equals(tagHandler.getCurrentPos()) || "end".equals(tagHandler.getCurrentPos())) {
                         // In some cases, even if we're able to compute a shortcut, it's better to force to "f"
                         // for better compatibility with corresponding TMX files
-                        if (forceShortCutToF) { 
+                        if (forceShortCutToF) {
                             shortcutLetter = 'f';
                         }
                         shortcut = "</" + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f') + tagIndex + '>';

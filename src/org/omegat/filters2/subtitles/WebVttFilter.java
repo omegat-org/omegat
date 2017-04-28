@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2017 Briac Pilpre
@@ -32,7 +32,7 @@ import org.omegat.util.OStrings;
 
 /**
  * Filter for WebVTT subtitles files. Only simple WebVTT files are currently supported, no tags checking.
- * 
+ *
  * @author Briac Pilpre (briacp@gmail.com)
  * @see <a href="https://w3c.github.io/webvtt/">Format
  *      description</a>

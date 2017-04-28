@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -43,7 +43,7 @@ import org.openide.awt.Mnemonics;
 /**
  * Editor for a single instance of the filter. E.g. HTML filter may have two
  * instances -- one for .html and other for .htm files.
- * 
+ *
  * @author Maxym Mykhalchuk
  */
 @SuppressWarnings("serial")

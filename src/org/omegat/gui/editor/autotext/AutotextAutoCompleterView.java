@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
@@ -49,7 +49,7 @@ public class AutotextAutoCompleterView extends AutoCompleterListView {
     public AutotextAutoCompleterView() {
         super(OStrings.getString("AC_AUTOTEXT_VIEW"));
     }
-            
+
     @Override
     public List<AutoCompleterItem> computeListData(String prevText, boolean contextualOnly) {
         List<AutotextItem> items = Autotext.getItems();
@@ -60,23 +60,23 @@ public class AutotextAutoCompleterView extends AutoCompleterListView {
                     new String[] { s.source, s.comment }, s.source.length()));
             }
         }
-        
+
         if (!Core.getProject().getProjectProperties().getTargetLanguage().isSpaceDelimited()
                 && result.isEmpty() && !contextualOnly) {
             for (AutotextItem s : items) {
                 result.add(new AutoCompleterItem(s.target, new String[] { s.source, s.comment }, 0));
             }
         }
-        
+
         Collections.sort(result, new AutotextComparator());
-        
+
         return result;
     }
 
     @Override
     public String itemToString(AutoCompleterItem item) {
         StringBuilder b = new StringBuilder();
-        
+
         if (item.extras != null && item.extras[0] != null && !item.extras[0].isEmpty()) {
             b.append(item.extras[0]).append(" \u2192 ");
         }
@@ -88,13 +88,13 @@ public class AutotextAutoCompleterView extends AutoCompleterListView {
         }
         return b.toString();
     }
-    
+
     class AutotextComparator implements Comparator<AutoCompleterItem> {
 
         private boolean byLength = Preferences.isPreference(Preferences.AC_AUTOTEXT_SORT_BY_LENGTH);
         private boolean alphabetically = Preferences.isPreference(Preferences.AC_AUTOTEXT_SORT_ALPHABETICALLY);
         private boolean sortFullText = Preferences.isPreference(Preferences.AC_AUTOTEXT_SORT_FULL_TEXT);
-        
+
         @Override
         public int compare(AutoCompleterItem o1, AutoCompleterItem o2) {
             if (byLength) {
@@ -104,7 +104,7 @@ public class AutotextAutoCompleterView extends AutoCompleterListView {
                     return -1;
                 }
             }
-            
+
             if (alphabetically) {
                 if (sortFullText) {
                     return o1.payload.compareTo(o2.payload);
@@ -112,11 +112,11 @@ public class AutotextAutoCompleterView extends AutoCompleterListView {
                     return itemToString(o1).compareTo(itemToString(o2));
                 }
             }
-            
+
             return 0;
         }
     }
-    
+
     @Override
     public ITokenizer getTokenizer() {
         return new DefaultTokenizer();

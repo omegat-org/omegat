@@ -1,9 +1,9 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.1 update 1
 ----------------------------------------------------------------------
-  4 Enhancements
-  1 Bug fix
-  1 Localisation update
+  7 Enhancements
+  2 Bug fixes
+  2 Localisation updates
 ----------------------------------------------------------------------
 4.1.1 update 1 vs 4.1.1
 
@@ -15,6 +15,9 @@
   - Support using bilingual files as TMs
   https://sourceforge.net/p/omegat/feature-requests/1312/
 
+  - Create an Open menu in the Script Editor
+  https://sourceforge.net/p/omegat/feature-requests/1314/
+
   Other changes:
 
   - New filter for WebVTT captions (*.vtt). Only simple files are
@@ -23,14 +26,24 @@ supported.
   - The new script extract_text_content.groovy allows exporting all
 strings of the project to a single text file
 
+  - The Scripting window now contains a Help menu with a link to OmegaT 
+Javadoc
+
+  - The /scripts/readme.txt file contains links to OmegaT Javadoc,
+Groovy and EcmaScript language references, the GPL v3
+
   Bug fixes:
 
-  - Google Translate was in text mode, which didn't work best
-for tags. It has been reverted to HTML mode.
+  - Google Translate was in text mode, which didn't work best for
+tags. It has been reverted to HTML mode.
+
+  - XML-invalid chars in source file names could leak into project TMX
+  https://sourceforge.net/p/omegat/bugs/857/
 
   Localisation Updates:
 
   - Italian localisation updated to 4.1.1 (UI, readme)
+  - Norvegian localisation updated to 4.1 (UI, readme)
 
 ----------------------------------------------------------------------
  OmegaT 4.1.1 (2017-03-15)

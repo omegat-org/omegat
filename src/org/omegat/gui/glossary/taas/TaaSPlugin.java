@@ -50,7 +50,7 @@ import org.openide.awt.Mnemonics;
 
 /**
  * TaaS plugin.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TaaSPlugin {

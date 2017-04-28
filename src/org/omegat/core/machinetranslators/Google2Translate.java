@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik, Didier Briel
@@ -48,12 +48,12 @@ import org.omegat.util.WikiGet;
 
 /**
  * Support of Google Translate API v.2 machine translation.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Briac Pilpre
  * @author Aaron Madlon-Kay
- * 
+ *
  * @see <a href="https://cloud.google.com/translate/docs/getting-started">Translation API</a>
  */
 public class Google2Translate extends BaseTranslate {
@@ -88,7 +88,7 @@ public class Google2Translate extends BaseTranslate {
             targetLang = tLang.getLanguage();
         else if ((tLang.getLanguage().compareToIgnoreCase("zh-hk") == 0))
             targetLang = "ZH-TW"; // Google doesn't recognize ZH-HK
-        
+
         String googleKey = getCredential(PROPERTY_API_KEY);
 
         if (googleKey == null || googleKey.isEmpty()) {
@@ -113,7 +113,7 @@ public class Google2Translate extends BaseTranslate {
         Map<String, String> headers = new TreeMap<String, String>();
         headers.put("X-HTTP-Method-Override", "GET");
 
-        String v; 
+        String v;
         try {
 			v = WikiGet.post(GT_URL, params, headers);
 	    } catch (IOException e) {
@@ -121,11 +121,11 @@ public class Google2Translate extends BaseTranslate {
         }
 
         String tr = getJsonResults(v);
-        
+
         if (tr == null) {
         	return "";
         }
-        
+
         tr = unescapeHTML(tr);
 
         tr = cleanSpacesAroundTags(tr, text);
@@ -136,7 +136,7 @@ public class Google2Translate extends BaseTranslate {
 
     /** Convert entities to character. Ex: "&#39;" to "'". */
     private String unescapeHTML(String text) {
-        
+
         text = text.replace("&quot;", "\"")
                    .replace("&gt;", ">")
                    .replace("&lt;", "<")
@@ -174,7 +174,7 @@ public class Google2Translate extends BaseTranslate {
 
     /**
      * Whether or not to use the new Neural Machine Translation System
-     * 
+     *
      * @see <a href="https://research.googleblog.com/2016/09/a-neural-network-for-machine.html">A Neural
      *      Network for Machine Translation, at Production Scale</a>
      */
@@ -200,7 +200,7 @@ public class Google2Translate extends BaseTranslate {
                 String key = panel.valueField1.getText().trim();
                 boolean temporary = panel.temporaryCheckBox.isSelected();
                 setCredential(PROPERTY_API_KEY, key, temporary);
-                
+
                 System.setProperty(PROPERTY_PREMIUM_KEY, Boolean.toString(premiumCheckBox.isSelected()));
                 Preferences.setPreference(PROPERTY_PREMIUM_KEY, premiumCheckBox.isSelected());
             }

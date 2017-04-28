@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -89,6 +89,7 @@ public class TagProcessingOptionsController extends BasePreferencesController {
                 checkReloadRequired();
             }
         };
+        panel.cbCountingProtectedText.addActionListener(e -> checkReloadRequired());
         panel.removePatternRegExpTF.getDocument().addDocumentListener(docListener);
         panel.customPatternRegExpTF.getDocument().addDocumentListener(docListener);
     }
@@ -98,7 +99,9 @@ public class TagProcessingOptionsController extends BasePreferencesController {
                 panel.customPatternRegExpTF.getText());
         boolean removePatternChanged = valueIsDifferent(Preferences.CHECK_REMOVE_PATTERN,
                 panel.removePatternRegExpTF.getText());
-        setReloadRequired(customPatternChanged || removePatternChanged);
+        boolean statsHandlingChanged = (StatisticsSettings.isCountingProtectedText()
+                || StatisticsSettings.isCountingCustomTags()) != panel.cbCountingProtectedText.isSelected();
+        setReloadRequired(customPatternChanged || removePatternChanged || statsHandlingChanged);
     }
 
     @Override
@@ -108,12 +111,12 @@ public class TagProcessingOptionsController extends BasePreferencesController {
         panel.simpleCheckRadio.setSelected(Preferences.isPreference(Preferences.CHECK_SIMPLE_PRINTF_TAGS));
         panel.fullCheckRadio.setSelected(Preferences.isPreference(Preferences.CHECK_ALL_PRINTF_TAGS));
         panel.javaPatternCheckBox.setSelected(Preferences.isPreference(Preferences.CHECK_JAVA_PATTERN_TAGS));
+        panel.cbCountingProtectedText.setSelected(
+                StatisticsSettings.isCountingProtectedText() || StatisticsSettings.isCountingCustomTags());
         panel.customPatternRegExpTF.setText(Preferences.getPreference(Preferences.CHECK_CUSTOM_PATTERN));
         panel.removePatternRegExpTF.setText(Preferences.getPreference(Preferences.CHECK_REMOVE_PATTERN));
         panel.looseTagOrderCheckBox.setSelected(Preferences.isPreference(Preferences.LOOSE_TAG_ORDERING));
         panel.cbTagsValidRequired.setSelected(Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED));
-        panel.cbCountingProtectedText
-                .setSelected(StatisticsSettings.isCountingProtectedText() || StatisticsSettings.isCountingCustomTags());
     }
 
     @Override
@@ -126,7 +129,10 @@ public class TagProcessingOptionsController extends BasePreferencesController {
         panel.removePatternRegExpTF.setText("");
         panel.looseTagOrderCheckBox.setSelected(false);
         panel.cbTagsValidRequired.setSelected(false);
-        panel.cbCountingProtectedText.setSelected(Preferences.STAT_COUNTING_PROTECTED_TEXT_DEFAULT);
+        @SuppressWarnings("unused")
+        boolean countingProtectedTextDefault = Preferences.STAT_COUNTING_PROTECTED_TEXT_DEFAULT
+                || Preferences.STAT_COUNTING_CUSTOM_TAGS_DEFAULT;
+        panel.cbCountingProtectedText.setSelected(countingProtectedTextDefault);
     }
 
     @Override

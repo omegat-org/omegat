@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
@@ -46,7 +46,7 @@ import java.util.TimeZone;
  * format, this parser only parses this variant of the 'basic' format.
  * <p>
  * DateFormat is not thread-safe, so this class must be instantiated.
- * 
+ *
  * @author Martin Fleurke
  */
 public class TMXDateParser {
@@ -68,7 +68,7 @@ public class TMXDateParser {
     /**
      * Parse the given string as TMX date format (ISO 8601 compatible
      * 'YYYYMMDDThhmmssZ') and returns the Date
-     * 
+     *
      * @param tmxDate
      *            A date representation in YYYYMMDDThhmmssZ format
      * @return a Date instance
@@ -88,7 +88,7 @@ public class TMXDateParser {
     /**
      * Returns the string representation of the date according to the preferred
      * TMX date format 'YYYYMMDDThhmmssZ'
-     * 
+     *
      * @param date
      *            a Date instance
      * @return a string representing the date in the ISO 8601 compatible format
@@ -101,7 +101,7 @@ public class TMXDateParser {
     /**
      * Returns the string representation of the date according to the preferred
      * TMX date format 'YYYYMMDDThhmmssZ'
-     * 
+     *
      * @param date
      *            unix timestamp (ms since 1970)
      * @return a string representing the date in the ISO 8601 compatible format

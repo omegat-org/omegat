@@ -1,13 +1,13 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009 Didier Briel
                2011 Guido Leenders, Didier Briel
                2012 Guido Leenders
- 
+
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -35,7 +35,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
  * This class specifies the Camtasia for Windows XML Dialect of camproj files.
- * 
+ *
  * @author Guido Leenders
  * @author Didier Briel
  */
@@ -44,7 +44,7 @@ public class CamtasiaWindowsDialect extends DefaultXMLDialect {
 
     public CamtasiaWindowsDialect() {
         defineConstraint(CONSTRAINT_ROOT, CAMW_ROOT_TAG);
-        
+
         defineParagraphTags(new String[] {
             "Caption",
             "RichTextHTML",
@@ -56,7 +56,7 @@ public class CamtasiaWindowsDialect extends DefaultXMLDialect {
             "Project_Notes",
             "JumpURL"
         });
-        
+
         defineIntactTags(new String[] {
             "Accel_cmd",
             "Accel_fVirt",

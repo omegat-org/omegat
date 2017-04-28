@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik, Martin Fleurke
@@ -47,7 +47,7 @@ import org.omegat.util.TagUtil.Tag;
 
 /**
  * Class for show tag validation results.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
  * @author Aaron Madlon-Kay
@@ -124,7 +124,7 @@ public class TagValidationTool implements ITagValidation {
 
     /**
      * Checks entry for valid tags.
-     * 
+     *
      * @return An {@link ErrorReport} summarizing the results (will be empty if
      *         no issues found)
      */
@@ -163,7 +163,7 @@ public class TagValidationTool implements ITagValidation {
 
     /**
      * Fix all errors indicated in a given ErrorReport.
-     * 
+     *
      * @param report
      *            The report indicating the segment and errors to fix
      * @return The fixed translation string, or null if one of the errors is of

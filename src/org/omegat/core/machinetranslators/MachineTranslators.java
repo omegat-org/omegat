@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -37,7 +37,7 @@ import org.omegat.gui.exttrans.IMachineTranslation;
  * MachineTranslateTextArea and so should not add themselves manually. New-style
  * plugins ("OmegaT-Plugins: &lt;classname>") should add themselves with
  * {@link #add(IMachineTranslation)} in the loadPlugins() method.
- * 
+ *
  * @author Aaron Madlon-Kay
  *
  */

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -45,7 +45,7 @@ import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Dialog showing the log.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Aaron Madlon-Kay
@@ -58,21 +58,21 @@ public class LogDialog extends javax.swing.JDialog {
     public static final int RET_OK = 1;
 
     private int returnStatus = RET_CANCEL;
-    
+
     /**
      * Creates new form LogDialog
      */
     public LogDialog(java.awt.Frame parent) {
         super(parent, true);
         initComponents();
-        
+
         setTitle(OStrings.getString("LOGDIALOG_TITLE") + " " + Log.getLogFileName());
-        
+
         StaticUIUtils.setEscapeClosable(this);
-        
+
         setSize(600, 400);
         setLocationRelativeTo(parent);
-        
+
         final File logLocation = new File(Log.getLogFilePath());
         new SwingWorker<String, Object>() {
             @Override

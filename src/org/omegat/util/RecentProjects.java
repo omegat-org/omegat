@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Briac Pilpre, Aaron Madlon-Kay
@@ -40,15 +40,15 @@ import org.omegat.gui.main.ProjectUICommands;
 
 /**
  * Management of recent projects
- * 
+ *
  * @author Briac Pilpre
  * @author Aaron Madlon-Kay
  */
 public class RecentProjects {
-    
+
     private static final List<String> recentProjects;
     private static final int mostRecentProjectSize;
-    
+
     static {
         mostRecentProjectSize = Preferences.getPreferenceDefault(Preferences.MOST_RECENT_PROJECTS_SIZE, OConsts.MAX_RECENT_PROJECTS);
         recentProjects = new ArrayList<String>(mostRecentProjectSize);
@@ -59,7 +59,7 @@ public class RecentProjects {
             }
         }
     }
-    
+
     private RecentProjects() {}
 
     private static void saveToPrefs() {
@@ -73,12 +73,12 @@ public class RecentProjects {
     }
 
     public static void updateMenu() {
-        
+
         IMainWindow window = Core.getMainWindow();
         if (window == null) {
             return;
         }
-        
+
         JMenuItem recentMenu = window.getMainMenu().getProjectRecentMenuItem();
         if (recentMenu == null) {
             return;
@@ -115,5 +115,5 @@ public class RecentProjects {
         updateMenu();
         saveToPrefs();
     }
-    
+
 }

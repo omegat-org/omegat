@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -65,7 +65,7 @@ import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Controller for align file picker UI
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class AlignFilePickerController {
@@ -110,7 +110,7 @@ public class AlignFilePickerController {
 
     /**
      * Display the align tool file picker. The picker is not modal, so this call will return immediately.
-     * 
+     *
      * @param parent
      *            Parent window of file picker and align window
      */
@@ -438,7 +438,7 @@ public class AlignFilePickerController {
      * <li>Target language
      * <li>Target file path
      * </ol>
-     * 
+     *
      * @param args
      * @throws Exception
      */

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -52,7 +52,7 @@ import java.util.regex.Matcher;
  * (MN Mongolia), and ISO 639 recommends that language codes are written in
  * lower case (mn Mongolian)).
  * </ul>
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Zoltan Bartko bartkozoltan@bartkozoltan.com
@@ -66,8 +66,9 @@ public class Language implements Comparable<Object> {
 
     /** Creates a new instance of Language, based on Locale */
     public Language(Locale locale) {
-        if (locale != null)
+        if (locale != null) {
             this.locale = locale;
+        }
         this.languageCode = this.locale.getLanguage();
         this.countryCode = this.locale.getCountry();
     }
@@ -78,7 +79,7 @@ public class Language implements Comparable<Object> {
      * chars, and YY is a country ISO code composed from 1-8 alpha/digit
      * (A-Za-z0-9) chars.<br>
      * The form xx-xxxx-xx is also accepted, where "xxxx" is a 4 alpha characters script as defined in
-     * <a href="http://unicode.org/iso15924/iso15924-codes.html">ISO 15924</a>. E.g., sr-Latn-RS, 
+     * <a href="http://unicode.org/iso15924/iso15924-codes.html">ISO 15924</a>. E.g., sr-Latn-RS,
      * which represents Serbian ('sr') written using Latin script ('Latn') as used in Serbia ('RS').
      * This form is described in <a href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP47</a>.
      */
@@ -90,8 +91,9 @@ public class Language implements Comparable<Object> {
             Matcher m = PatternConsts.LANG_AND_COUNTRY.matcher(str);
             if (m.matches() && m.groupCount() >= 1) {
                 this.languageCode = m.group(1);
-                if (m.group(2) != null)
+                if (m.group(2) != null) {
                     this.countryCode = m.group(2);
+                }
                 this.locale = new Locale(this.languageCode.toLowerCase(Locale.ENGLISH),
                         this.countryCode.toUpperCase(Locale.ENGLISH));
             }
@@ -131,21 +133,22 @@ public class Language implements Comparable<Object> {
     public String getLocaleCode() {
         if (locale == null) {
             return "";
-        } else { 
+        } else {
             // Patch Java locale, to return correct locales instead of obsolete codes
             String returnString = locale.toString();
-            if (returnString.length()<2)
+            if (returnString.length() < 2) {
                 return returnString; // We cannot test a locale of less than 2 characters
+            }
             if (returnString.substring(0, 2).equalsIgnoreCase("in")) {
                 returnString = "id" + returnString.substring(2);
             } else if (returnString.substring(0, 2).equalsIgnoreCase("iw")) {
                 returnString = "he" + returnString.substring(2);
             } else if (returnString.substring(0, 2).equalsIgnoreCase("ji")) {
                 returnString = "yi" + returnString.substring(2);
-            } 
+            }
             return returnString;
         }
-            
+
     }
 
     /**
@@ -166,26 +169,28 @@ public class Language implements Comparable<Object> {
      * Returns only a language (XX).
      */
     public String getLanguageCode() {
-        if (this.languageCode == null)
+        if (this.languageCode == null) {
             return "";
-        else
+        } else {
             return this.languageCode;
+        }
     }
 
     /**
      * Returns only a country (YY).
      */
     public String getCountryCode() {
-        if (this.countryCode == null)
+        if (this.countryCode == null) {
             return "";
-        else
+        } else {
             return this.countryCode;
+        }
     }
 
     /**
      * Determine whether or not the language is space-delimited. Only Chinese,
      * Japanese, and Tibetan are not space-delimited.
-     * 
+     *
      * @see <a href="https://linguistlist.org/issues/6/6-1302.html">LINGUIST
      *      List 6.1302</a>
      */
@@ -625,7 +630,7 @@ public class Language implements Comparable<Object> {
 
     /**
      * Get a list of all languages known to the program.
-     * 
+     *
      * @return Unmodifiable list of languages
      */
     public static List<Language> getLanguages() {
@@ -637,12 +642,15 @@ public class Language implements Comparable<Object> {
      */
     @Override
     public boolean equals(Object lang) {
-        if (this == lang)
+        if (this == lang) {
             return true;
-        if (lang == null)
+        }
+        if (lang == null) {
             return false;
-        if (!(lang instanceof Language))
+        }
+        if (!(lang instanceof Language)) {
             return false;
+        }
         Language that = (Language) lang;
         return this.getLocaleCode().equals(that.getLocaleCode());
     }
@@ -657,15 +665,15 @@ public class Language implements Comparable<Object> {
     }
 
 	public int compareTo(Object o) {
-		if (o instanceof Language) {
-			return this.getLanguage().compareTo(((Language)o).getLanguage());
-		}
+        if (o instanceof Language) {
+            return this.getLanguage().compareTo(((Language) o).getLanguage());
+        }
 		return this.getLanguage().compareTo(o.toString());
 	}
 
     /**
      * Verify the correctness of a language or country code
-     * 
+     *
      * @param code
      *            A string containing a language or country code
      * @return <code>true</code> or <code>false</code>

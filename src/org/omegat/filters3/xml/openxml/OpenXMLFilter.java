@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -57,7 +57,7 @@ import org.omegat.util.OStrings;
 
 /**
  * Filter for Open XML file format.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
@@ -72,17 +72,17 @@ public class OpenXMLFilter extends AbstractFilter {
      */
     private void defineDOCUMENTSOptions(Map<String, String> config) {
         /*
-         Complete string when all options are enabled 
+         Complete string when all options are enabled
          Word
          "(document\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)|(header\\d+\\.xml)
          |(footer\\d+\\.xml)|(core\\.xml)"
-         Excel 
-         "|(sharedStrings\\.xml)|(comments\\d+\\.xml)" 
-         PowerPoint 
+         Excel
+         "|(sharedStrings\\.xml)|(comments\\d+\\.xml)"
+         PowerPoint
          "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)| (slideLayout\\d+\\.xml)|(notesSlide\\d+\\.xml)"
          Global
          "|(data\\d+\\.xml)|(chart\\d+\\.xml)|(drawing\\d+\\.xml)"
-         Excel 
+         Excel
          "|(workbook\\.xml)"
          Visio
          "|(page\\d+\\.xml)
@@ -281,7 +281,7 @@ public class OpenXMLFilter extends AbstractFilter {
             }
         }
     }
-    
+
     public int compareZipEntries(ZipEntry z1, ZipEntry z2) {
         String s1 = z1.getName();
         String s2 = z2.getName();
@@ -345,10 +345,10 @@ public class OpenXMLFilter extends AbstractFilter {
     /** Extensions... */
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[] { 
-            new Instance("*.doc?"), 
-            new Instance("*.dotx"), 
-            new Instance("*.xls?"), 
+        return new Instance[] {
+            new Instance("*.doc?"),
+            new Instance("*.dotx"),
+            new Instance("*.xls?"),
             new Instance("*.ppt?"),
             new Instance("*.vsdx")
         };
@@ -375,7 +375,7 @@ public class OpenXMLFilter extends AbstractFilter {
 
     /**
      * Returns true to indicate that the OpenXML filter has options.
-     * 
+     *
      * @return True, because the OpenXML filter has options.
      */
     @Override
@@ -385,7 +385,7 @@ public class OpenXMLFilter extends AbstractFilter {
 
     /**
      * OpenXML Filter shows a <b>modal</b> dialog to edit its own options.
-     * 
+     *
      * @param currentOptions
      *            Current options to edit.
      * @return Updated filter options if user confirmed the changes, and current options otherwise.
@@ -408,7 +408,7 @@ public class OpenXMLFilter extends AbstractFilter {
 
     @Override
     public String getInEncodingLastParsedFile() {
-        // Encoding is 'binary', it is zipped. Inside there may be many files. 
+        // Encoding is 'binary', it is zipped. Inside there may be many files.
         // It makes no sense to display the encoding of some xml file inside.
         return "OpenXML";
     }

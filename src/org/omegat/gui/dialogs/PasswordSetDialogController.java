@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -51,7 +51,7 @@ import org.omegat.util.gui.StaticUIUtils;
  * <p>
  * The result will be empty when the user cancels the dialog. When the result is present, the caller is
  * responsible for wiping the <code>char[]</code> after use.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class PasswordSetDialogController {
@@ -100,7 +100,7 @@ public class PasswordSetDialogController {
                 StaticUIUtils.closeWindowByEvent(dialog);
             }
         });
-        
+
         dialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {

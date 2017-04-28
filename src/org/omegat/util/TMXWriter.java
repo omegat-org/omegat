@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
@@ -40,16 +40,16 @@ import org.omegat.core.data.ProjectProperties;
 
 /**
  * Class that store TMX (Translation Memory Exchange) files.
- * 
+ *
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Maxym Mykhalchuk
- * 
+ *
  */
 public class TMXWriter {
 
     /**
      * Saves a TMX file to disk
-     * 
+     *
      * @param filename
      *            The name of the file to create
      * @param forceValidTMX

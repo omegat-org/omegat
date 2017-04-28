@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -60,7 +60,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * because the master password is readily accessible the actual security is
  * greatly diminished. This feature was deemed required for usability, despite
  * the drawbacks.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public final class CredentialsManager {
@@ -94,7 +94,7 @@ public final class CredentialsManager {
     /**
      * Securely store a key-value pair. If the master password is not stored and
      * has not been input, the user will be prompted to input it.
-     * 
+     *
      * @param key
      *            The key for the value to store (not encrypted)
      * @param value
@@ -117,7 +117,7 @@ public final class CredentialsManager {
      * <p>
      * If the master password has not been set, this will return false for all
      * keys.
-     * 
+     *
      * @see #isMasterPasswordSet()
      */
     public boolean isStored(String key) {
@@ -191,7 +191,7 @@ public final class CredentialsManager {
      * Retrieve the securely stored value for the given key. If the master
      * password is not stored and has not been input, the user will be prompted
      * to input it.
-     * 
+     *
      * @param key
      *            The key for the value to store (not encrypted)
      * @return The Optional-wrapped value, which can be empty if the user

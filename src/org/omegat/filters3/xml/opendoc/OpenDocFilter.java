@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -51,7 +51,7 @@ import org.omegat.util.OStrings;
 
 /**
  * Filter for Open Document file format.
- * 
+ *
  * @author Maxym Mykhalchuk
  */
 public class OpenDocFilter extends AbstractFilter {
@@ -188,7 +188,7 @@ public class OpenDocFilter extends AbstractFilter {
 
     /**
      * Returns true to indicate that the OpenDoc filter has options.
-     * 
+     *
      * @return True, because the OpenDoc filter has options.
      */
     public boolean hasOptions() {
@@ -197,7 +197,7 @@ public class OpenDocFilter extends AbstractFilter {
 
     /**
      * OpenDoc Filter shows a <b>modal</b> dialog to edit its own options.
-     * 
+     *
      * @param currentOptions
      *            Current options to edit.
      * @return Updated filter options if user confirmed the changes, and current options otherwise.

@@ -49,7 +49,7 @@ import org.omegat.util.Token;
 
 /**
  * Class for find glossary entries for current entry in editor.
- * 
+ *
  * This process looks up the source string entries, and find matched glossary
  * entries.
  * <p>
@@ -61,7 +61,7 @@ import org.omegat.util.Token;
  * <li>"Edit" vs "Editing the edit" - matches OK!
  * <li>"Edit" vs "Edit" - matches OK!
  * </ul>
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -84,19 +84,19 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
 
     @Override
     protected List<GlossaryEntry> search() {
-        
+
         ITokenizer tok = Core.getProject().getSourceTokenizer();
         if (tok == null) {
             return Collections.emptyList();
         }
-        
+
         List<GlossaryEntry> entries = manager.getGlossaryEntries(src);
         if (entries == null) {
             return Collections.emptyList();
         }
-        
+
         List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
-        
+
         // Make comparison case-insensitive
         Locale loc = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
         String srcLower = src.toLowerCase(loc);
@@ -114,13 +114,13 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
                 continue;
             }
 
-            if (DefaultTokenizer.isContainsAll(strTokens, glosTokens, 
+            if (DefaultTokenizer.isContainsAll(strTokens, glosTokens,
                     Preferences.isPreferenceDefault(Preferences.GLOSSARY_NOT_EXACT_MATCH,
                             Preferences.GLOSSARY_NOT_EXACT_MATCH_DEFAULT))) {
                 result.add(glosEntry);
                 continue;
             }
-            
+
             if (!Core.getProject().getProjectProperties().getSourceLanguage().isSpaceDelimited()
                     && StringUtil.isCJK(glosEntry.getSrcText()) && src.contains(glosEntry.getSrcText())) {
                 // This is a CJK word and our source language is not space-delimited, so include if
@@ -135,14 +135,14 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
         sortGlossaryEntries(result);
         return filterGlossary(result);
     }
-    
+
     private Token[] tokenize(ITokenizer tok, String str) {
         if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_STEMMING,
                 Preferences.GLOSSARY_STEMMING_DEFAULT)) {
             return tok.tokenizeWords(str, StemmingMode.GLOSSARY);
         } else {
             return tok.tokenizeVerbatim(str);
-        }        
+        }
     }
 
     static void sortGlossaryEntries(List<GlossaryEntry> entries) {

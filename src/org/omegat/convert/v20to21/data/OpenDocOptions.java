@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 Didier Briel
@@ -40,13 +40,13 @@ import java.io.Serializable;
  * <li>[+] Notes
  * <li>[+] Comments
  * </ul>
- * 
+ *
  * @author Didier Briel
  */
 public class OpenDocOptions implements Serializable {
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 1L;
     /** Hold value of properties. */

@@ -99,7 +99,7 @@ public class StarDict implements IDictionaryFactory {
          * Field in StarDict .ifo file, added in version 3.0.0. This must be
          * retained in order to support idxoffsetbits=64 dictionaries (not yet
          * implemented).
-         * 
+         *
          * @see <a href="http://www.stardict.org/StarDictFileFormat">StarDict
          *      File Format</a>
          */
@@ -116,7 +116,7 @@ public class StarDict implements IDictionaryFactory {
          *            ifo file with dictionary
          */
         public StarDictDict(File ifoFile, Language language) throws Exception {
-    
+
             this.language = language;
 
             Map<String, String> header = readIFO(ifoFile);
@@ -125,30 +125,30 @@ public class StarDict implements IDictionaryFactory {
                 throw new Exception("Invalid version of dictionary: " + version);
             }
             String sametypesequence = header.get("sametypesequence");
-            if (!"g".equals(sametypesequence) && 
-                !"m".equals(sametypesequence) && 
+            if (!"g".equals(sametypesequence) &&
+                !"m".equals(sametypesequence) &&
                 !"x".equals(sametypesequence) &&
                 !"h".equals(sametypesequence)) {
                 throw new Exception("Invalid type of dictionary: " + sametypesequence);
             }
-            
+
             if ("3.0.0".equals(version)) {
                 String bitsString = header.get("idxoffsetbits");
                 if (bitsString != null) {
                     idxoffsetbits = Integer.parseInt(bitsString);
                 }
             }
-    
+
             if (idxoffsetbits != 32) {
                 throw new Exception("StarDict dictionaries with idxoffsetbits=64 are not supported.");
             }
-    
+
             String f = ifoFile.getPath();
             if (f.endsWith(".ifo")) {
                 f = f.substring(0, f.length() - ".ifo".length());
             }
             dictName = f;
-    
+
             try {
                 dataFile = getFile(".dict.dz", ".dict").get().getPath();
                 dictType = dataFile.endsWith(".dz") ? DictType.DICTZIP : DictType.DICTFILE;
@@ -216,7 +216,7 @@ public class StarDict implements IDictionaryFactory {
          * <p>
          * Synchronized to prevent concurrent reading of the same file from
          * disk.
-         * 
+         *
          * @param start
          *            Start offset in data file
          * @param len
@@ -237,7 +237,7 @@ public class StarDict implements IDictionaryFactory {
         /**
          * Read .dict file data and return article string. Intended to be called
          * only from {@link #readArticle(int, int)}.
-         * 
+         *
          * @param start
          *            Start offset in data file
          * @param len
@@ -262,7 +262,6 @@ public class StarDict implements IDictionaryFactory {
             }
             return result;
         }
-
 
         /**
          * Read .dict.dz file data. Intended to be called only from
@@ -312,7 +311,7 @@ public class StarDict implements IDictionaryFactory {
             }
             return result;
         }
-        
+
         class Entry {
             private volatile String cache;
             private final int start;

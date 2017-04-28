@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
@@ -106,13 +106,13 @@ import gen.core.filters.Filters;
 /**
  * Loaded project implementation. Only translation could be changed after project will be loaded and set by
  * Core.setProject.
- * 
+ *
  * All components can read all data directly without synchronization. All synchronization implemented inside
  * RealProject.
- * 
+ *
  * Since team sync is long operation, autosaving was splitted into 3 phrases: get remote data in background, then rebase
  * during segment deactivation, then commit in background.
- * 
+ *
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Maxym Mykhalchuk
@@ -158,9 +158,9 @@ public class RealProject implements IProject {
     private final ITokenizer sourceTokenizer, targetTokenizer;
 
     private DirectoryMonitor tmMonitor;
-    
+
     private DirectoryMonitor tmOtherLanguagesMonitor;
-    
+
     /**
      * Indicates when there is an ongoing save event. Saving might take a while during
      * team sync: if a merge is required the save might be postponed indefinitely while we
@@ -171,12 +171,12 @@ public class RealProject implements IProject {
     /**
      * Storage for all translation memories, which shouldn't be changed and saved, i.e. for /tm/*.tmx files,
      * aligned data from source files.
-     * 
+     *
      * This map recreated each time when files changed. So, you can free use it without thinking about
      * synchronization.
      */
     private Map<String, ExternalTMX> transMemories = new TreeMap<String, ExternalTMX>();
-    
+
     /**
      * Storage for all translation memories of translations to other languages.
      */
@@ -198,7 +198,7 @@ public class RealProject implements IProject {
 
     /** This instance returned if translation not exist. */
     private final TMXEntry EMPTY_TRANSLATION;
-    
+
     private boolean allowTranslationEqualToSource = Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC);
 
     /**
@@ -211,7 +211,7 @@ public class RealProject implements IProject {
      * Create new project instance. It required to call {@link #createProject()}
      * or {@link #loadProject(boolean)} methods just after constructor before
      * use project.
-     * 
+     *
      * @param props
      *            project properties
      * @param isNewProject
@@ -375,7 +375,7 @@ public class RealProject implements IProject {
 
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);
             importHandler = new ImportFromAutoTMX(this, allProjectEntries);
-            
+
             importTranslationsFromSources();
 
             loadTM();
@@ -430,7 +430,7 @@ public class RealProject implements IProject {
     public Map<String, TMXEntry> align(final ProjectProperties props, final File translatedDir)
             throws Exception {
         FilterMaster fm = Core.getFilterMaster();
-        
+
         File root = new File(m_config.getSourceRoot());
         List<File> srcFileList = FileUtil.buildFileList(root, true);
 
@@ -528,7 +528,7 @@ public class RealProject implements IProject {
     /**
      * Builds translated files corresponding to sourcePattern and creates fresh TM files.
      * Convenience method. Assumes we want to run external post-processing commands.
-     * 
+     *
      * @param sourcePattern
      *            The regexp of files to create
      * @throws IOException
@@ -537,10 +537,10 @@ public class RealProject implements IProject {
     public void compileProject(String sourcePattern) throws Exception {
         compileProject(sourcePattern, true);
     }
-    
+
     /**
      * Builds translated files corresponding to sourcePattern and creates fresh TM files.
-     * 
+     *
      * @param sourcePattern
      *            The regexp of files to create
      * @param doPostProcessing
@@ -635,7 +635,7 @@ public class RealProject implements IProject {
         }
 
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
-        
+
         if (doPostProcessing) {
 
             // Kill any processes still not complete
@@ -646,22 +646,22 @@ public class RealProject implements IProject {
             }
             doExternalCommand(Preferences.getPreference(Preferences.EXTERNAL_COMMAND));
         }
-        
+
         Log.logInfoRB("LOG_DATAENGINE_COMPILE_END");
     }
-    
+
     /**
      * Set up and execute the user-specified external command.
      * @param command Command to execute
      */
     private void doExternalCommand(String command) {
-        
+
         if (StringUtil.isEmpty(command)) {
             return;
         }
-        
+
         Core.getMainWindow().showStatusMessageRB("CT_START_EXTERNAL_CMD");
-        
+
         CommandVarExpansion expander = new CommandVarExpansion(command);
         command = expander.expandVariables(m_config);
         Log.log("Executing command: " + command);
@@ -698,9 +698,9 @@ public class RealProject implements IProject {
         }
     }
 
-    /** 
+    /**
      * Saves the translation memory and preferences.
-     * 
+     *
      * This method must be executed in the Core.executeExclusively.
      */
     public synchronized void saveProject(boolean doTeamSync) {
@@ -708,7 +708,7 @@ public class RealProject implements IProject {
             return;
         }
         isSaving = true;
-        
+
         Log.logInfoRB("LOG_DATAENGINE_SAVE_START");
         UIThreadsUtil.mustNotBeSwingThread();
 
@@ -756,13 +756,13 @@ public class RealProject implements IProject {
             Core.getAutoSave().enable();
         }
         Log.logInfoRB("LOG_DATAENGINE_SAVE_END");
-        
+
         isSaving = false;
     }
 
     /**
      * Prepare for future team sync.
-     * 
+     *
      * This method must be executed in the Core.executeExclusively.
      */
     @Override
@@ -795,7 +795,7 @@ public class RealProject implements IProject {
 
     /**
      * Fast team sync for execute from SaveThread.
-     * 
+     *
      * This method must be executed in the Core.executeExclusively.
      */
     @Override
@@ -995,11 +995,11 @@ public class RealProject implements IProject {
 
     /**
      * Do 3-way merge of:
-     * 
+     *
      * Base: baseTMX
-     * 
+     *
      * File 1: projectTMX (mine)
-     * 
+     *
      * File 2: headTMX (theirs)
      */
     protected void mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
@@ -1022,7 +1022,7 @@ public class RealProject implements IProject {
 
     /**
      * Create the given directory if it does not exist yet.
-     * 
+     *
      * @param dir the directory path to create
      * @param dirType the directory name to show in IOException
      * @throws IOException when directory could not be created.
@@ -1070,7 +1070,7 @@ public class RealProject implements IProject {
 
     /**
      * Load source files for project.
-     * 
+     *
      * @param projectRoot
      *            project root dir
      */
@@ -1099,8 +1099,8 @@ public class RealProject implements IProject {
             loadFilesCallback.fileFinished();
 
             if (filter != null && !fi.entries.isEmpty()) {
-                fi.filterClass = filter.getClass(); //Don't store the instance, because every file gets an instance and 
-                                                    // then we consume a lot of memory for all instances. 
+                fi.filterClass = filter.getClass(); //Don't store the instance, because every file gets an instance and
+                                                    // then we consume a lot of memory for all instances.
                                                     //See also IFilter "TODO: each filter should be stateless"
                 fi.filterFileFormatName = filter.getFileFormatName();
                 try {
@@ -1141,14 +1141,14 @@ public class RealProject implements IProject {
             }
         }
     }
-    
+
     /**
      * This method imports translation from source files into ProjectTMX.
-     * 
+     *
      * If there are multiple segments with equals source, then first
      * translations will be loaded as default, all other translations will be
      * loaded as alternative.
-     * 
+     *
      * We shouldn't load translation from source file(even as alternative) when
      * default translation already exists in project_save.tmx. So, only first
      * load will be possible.
@@ -1157,7 +1157,7 @@ public class RealProject implements IProject {
         // which default translations we added - allow to add alternatives
         // except the same translation
         Map<String, String> allowToImport = new HashMap<String, String>();
-        
+
         for (FileInfo fi : projectFilesList) {
             for (int i = 0; i < fi.entries.size(); i++) {
                 SourceTextEntry ste = fi.entries.get(i);
@@ -1250,7 +1250,7 @@ public class RealProject implements IProject {
         tmMonitor.checkChanges();
         tmMonitor.start();
     }
-    
+
     /**
      * Locates and loads external TMX files with legacy translations. Uses directory monitor for check file
      * updates.
@@ -1355,7 +1355,7 @@ public class RealProject implements IProject {
             CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.MODIFIED);
         }
     }
-    
+
     @Override
     public void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
             ExternalLinked externalLinked, AllTranslations previous) throws OptimisticLockingFail {
@@ -1439,7 +1439,7 @@ public class RealProject implements IProject {
          */
         int diff = prevTrEntry.translation == null ? 0 : -1;
         diff += trans.translation == null ? 0 : +1;
-        hotStat.numberofTranslatedSegments = Math.max(0, 
+        hotStat.numberofTranslatedSegments = Math.max(0,
                 Math.min(hotStat.numberOfUniqueSegments, hotStat.numberofTranslatedSegments + diff));
     }
 
@@ -1448,7 +1448,7 @@ public class RealProject implements IProject {
         if (oldTE == null) {
             throw new IllegalArgumentException("RealProject.setNote(tr) can't be null");
         }
-        
+
         // Disallow empty notes. Use null to represent lack of note.
         if (note != null && note.isEmpty()) {
             note = null;
@@ -1492,14 +1492,14 @@ public class RealProject implements IProject {
             it.iterate(en.getKey(), en.getValue());
         }
     }
-    
+
     @SuppressWarnings({ "unchecked", "rawtypes" })
     private <K, V> Map.Entry<K, V>[] entrySetToArray(Set<Map.Entry<K, V>> set) {
         // Assign to variable to facilitate suppressing the rawtypes warning
         Map.Entry[] a = new Map.Entry[set.size()];
         return set.toArray(a);
     }
-    
+
     public boolean isOrphaned(String source) {
         return !checkOrphanedCallback.existSourceInProject(source);
     }
@@ -1537,7 +1537,7 @@ public class RealProject implements IProject {
      * <li>Class specified in project settings</li>
      * <li>{@link DefaultTokenizer}</li>
      * </ol>
-     * 
+     *
      * @param cmdLine Tokenizer class specified on command line
      * @return Tokenizer implementation
      */
@@ -1556,7 +1556,7 @@ public class RealProject implements IProject {
         } catch (Throwable e) {
             Log.log(e);
         }
-        
+
         return new DefaultTokenizer();
     }
 
@@ -1580,7 +1580,7 @@ public class RealProject implements IProject {
         }
         return null;
     }
-    
+
     @Override
     public List<String> getSourceFilesOrder() {
         Path path = Paths.get(m_config.getProjectInternal(), OConsts.FILES_ORDER_FILENAME);
@@ -1605,12 +1605,15 @@ public class RealProject implements IProject {
     }
 
     /**
-     * This method converts directory separators into unix-style. It required to have the same filenames in
+     * This method converts directory separators into Unix-style. It required to have the same filenames in
      * the alternative translation in Windows and Unix boxes.
-     * 
-     * Also it can use --alternate-filename-from and --alternate-filename-to command line parameters for
-     * change filename in entry key. It allows to have many versions of one file in one project.
-     * 
+     * <p>
+     * Also it can use {@code --alternate-filename-from} and {@code --alternate-filename-to} command line
+     * parameters for change filename in entry key. It allows to have many versions of one file in one
+     * project.
+     * <p>
+     * Because the filename can be stored in the project TMX, it also removes any XML-unsafe chars.
+     *
      * @param filename
      *            filesystem's filename
      * @return normalized filename
@@ -1622,7 +1625,7 @@ public class RealProject implements IProject {
         if (f != null && t != null) {
             fn = fn.replaceAll(f, t);
         }
-        return fn;
+        return StringUtil.removeXMLInvalidChars(fn);
     }
 
     protected class LoadFilesCallback extends ParseEntry {
@@ -1667,7 +1670,7 @@ public class RealProject implements IProject {
                     PatternConsts.getPlaceholderPattern(), protectedParts);
 
             //If Allow translation equals to source is not set, we ignore such existing translations
-            if (ek.sourceText.equals(segmentTranslation) && 
+            if (ek.sourceText.equals(segmentTranslation) &&
                     !allowTranslationEqualToSource) {
                 segmentTranslation = null;
             }
@@ -1768,7 +1771,7 @@ public class RealProject implements IProject {
             }
         }
     }
-    
+
     ProjectTMX.CheckOrphanedCallback checkOrphanedCallback = new ProjectTMX.CheckOrphanedCallback() {
         public boolean existSourceInProject(String src) {
             return existSource.contains(src);

@@ -85,7 +85,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
         panel = new SpellcheckerConfigurationPanel();
 
         panel.autoSpellcheckCheckBox.addActionListener(e -> updateDetailPanel());
-        
+
         panel.directoryTextField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {

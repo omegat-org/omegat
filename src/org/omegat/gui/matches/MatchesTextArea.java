@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -85,7 +85,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * This is a Match pane, that displays fuzzy matches.
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Zoltan Bartko
@@ -109,7 +109,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     private static final AttributeSet ATTRIBUTES_DELETED_INACTIVE = Styles.createAttributeSet(Styles.EditorColor.COLOR_MATCHES_DEL_INACTIVE.getColor(), null, null, null, true, null);
     private static final AttributeSet ATTRIBUTES_INSERTED_ACTIVE = Styles.createAttributeSet(Styles.EditorColor.COLOR_MATCHES_INS_ACTIVE.getColor(), null, true, null, null, true);
     private static final AttributeSet ATTRIBUTES_INSERTED_INACTIVE = Styles.createAttributeSet(Styles.EditorColor.COLOR_MATCHES_INS_INACTIVE.getColor(), null, null, null, null, true);
-    
+
     private final DockableScrollPane scrollPane;
     private final List<NearString> matches = new ArrayList<NearString>();
 
@@ -132,7 +132,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         setMinimumSize(new Dimension(100, 50));
 
         addMouseListener(mouseListener);
-        
+
         DragTargetOverlay.apply(this, new FileDropInfo(false) {
             @Override
             public String getImportDestination() {
@@ -156,7 +156,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             }
         });
     }
-    
+
     @Override
     public void onEntryActivated(SourceTextEntry newEntry) {
         scrollPane.stopNotifying();
@@ -175,17 +175,17 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     @Override
     protected void setFoundResult(final SourceTextEntry se, List<NearString> newMatches) {
         UIThreadsUtil.mustBeSwingThread();
-        
+
         clear();
 
         if (newMatches == null) {
             return;
         }
-        
+
         if (!newMatches.isEmpty() && Preferences.isPreference(Preferences.NOTIFY_FUZZY_MATCHES)) {
             scrollPane.notify(true);
         }
-        
+
         NearString.SORT_KEY key = Preferences.getPreferenceEnumDefault(Preferences.EXT_TMX_SORT_KEY, SORT_KEY.SCORE);
         newMatches.sort(Comparator.comparing(ns -> ns.scores[0], new ScoresComparator(key).reversed()));
 
@@ -194,7 +194,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         StringBuilder displayBuffer = new StringBuilder();
 
         MatchesVarExpansion template = new MatchesVarExpansion(Preferences.getPreferenceDefault(Preferences.EXT_TMX_MATCH_TEMPLATE, MatchesVarExpansion.DEFAULT_TEMPLATE));
-        
+
         for (int i = 0; i < newMatches.size(); i++) {
             NearString match = newMatches.get(i);
             MatchesVarExpansion.Result result = template.apply(match, i + 1);
@@ -248,7 +248,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
      * the source match and the target match. The order of the numbers can be
      * different between the source match and the target match. Numbers will be
      * substituted at the correct location.
-     * 
+     *
      * @param source
      *            The source segment
      * @param sourceMatch
@@ -279,7 +279,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
 
         if (sourceMatchNumbers.size() != sourceNumbers.size() || sourceMatchNumbers.size() != targetMatchNumbers.size()
                 || !new HashSet<>(sourceMatchNumbers).equals(new HashSet<>(targetMatchNumbers))) {
-            return targetMatch; 
+            return targetMatch;
         }
 
         Map<Integer, Integer> locationMap = mapIndices(sourceMatchNumbers, targetMatchNumbers);
@@ -302,7 +302,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     /**
      * Determine whether the given string is a number. Integers and simple
      * doubles (not localized) are recognized.
-     * 
+     *
      * @param text
      *            A string
      * @return True if the string represents a number
@@ -326,7 +326,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     /**
      * Create a mapping of indices of equivalent items in the given list.
      * Handles duplicated items correctly.
-     * 
+     *
      * @param source
      *            Source list
      * @param target
@@ -356,9 +356,9 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
 
     /**
      * if WORKFLOW_OPTION "Insert best fuzzy match into target field" is set
-     * 
+     *
      * RFE "Option: Insert best match (80%+) into target field"
-     * 
+     *
      * @see <a href="https://sourceforge.net/p/omegat/feature-requests/33/">RFE
      *      #33</a>
      */
@@ -383,7 +383,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
 
                     String translation = thebest.translation;
                     if (Preferences.isPreference(Preferences.CONVERT_NUMBERS)) {
-                        translation = 
+                        translation =
                             substituteNumbers(currentEntry.getSrcText(), thebest.source, thebest.translation);
                     }
                     Core.getEditor().replaceEditText(prefix + translation);
@@ -418,7 +418,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         if (tokenizer == null) {
             return;
         }
-        
+
         // Apply sourceText styling
         if (sourcePos.get(activeMatch) != -1) {
             Token[] tokens = tokenizer.tokenizeVerbatim(match.source);
@@ -435,7 +435,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                 }
             }
         }
-        
+
         // Apply diff styling to ALL diffs, with colors only for activeMatch
         // Iterate through (up to) 5 fuzzy matches
         for (int i = 0; i < diffInfos.size(); i++) {
@@ -580,7 +580,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                 popup.addSeparator();
             }
         }
-        
+
         JMenuItem item = popup.add(OStrings.getString("MATCHES_INSERT"));
         item.addActionListener(new ActionListener() {
             // the action: insert this match
@@ -614,7 +614,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         if (hasMatches) {
             final NearString ns = matches.get(index);
             String proj = ns.projs[0];
-            
+
             if (StringUtil.isEmpty(proj)) {
                 item.addActionListener(new ActionListener() {
                     @Override
@@ -627,7 +627,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             }
         }
     }
-    
+
     /**
      * Make the next match active
      */

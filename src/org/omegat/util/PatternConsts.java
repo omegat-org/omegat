@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
 
 /**
  * Constant patterns, used in different other classes.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Zoltan Bartko (bartkozoltan@bartkozoltan.com)
@@ -90,7 +90,7 @@ public class PatternConsts {
             "<meta.*?charset\\s*=\\s*[\"'](\\S+?)[\"'].*?/?\\s*>",
             Pattern.CASE_INSENSITIVE);
 
-    /** Compiled pattern to look for HTML file HEAD declaration. 
+    /** Compiled pattern to look for HTML file HEAD declaration.
      Using [^e] instead of . prevents confusing &lt;head&gt; with &lt;header&gt; from HTML 5*/
     public static final Pattern HTML_HEAD = Pattern.compile("<head[^e]*?>", Pattern.CASE_INSENSITIVE);
 
@@ -136,7 +136,7 @@ public class PatternConsts {
      * Call <code>matcher.group(n)</code> to get each piece.
      */
     public static final Pattern OMEGAT_TAG_DECOMPILE = Pattern.compile("<(\\/?)([a-zA-Z]+)([0-9]+)(\\/?)>");
-    
+
     /**
      * Pattern that matches paired tag in protected parts
      * <ol>
@@ -148,19 +148,18 @@ public class PatternConsts {
      */
     public static final Pattern PROTECTED_PARTS_PAIRED_TAG_DECOMPILE = Pattern.compile("^(<.+?>)([^<]+?)(<\\/.+?>)");
 
-
     /**
      * Pattern that matches an equiv-text attribute as used in XLIFF inline codes.
      */
     public static final Pattern EQUIV_TEXT_ATTRIBUTE_DECOMPILE = Pattern.compile("equiv-text=\"([^\"]+)\"");
-    
+
     /** Pattern that detects space-only regular expressions. */
     public static final Pattern SPACY_REGEX = Pattern.compile("((\\s|\\\\n|\\\\t|\\\\s)(\\+|\\*)?)+");
 
     /** Pattern that detects language and country, with an optionnal script in the middle. */
     public static final Pattern LANG_AND_COUNTRY = Pattern
             .compile("([A-Za-z]{1,8})(?:(?:-|_)(?:[A-Za-z]{4}(?:-|_))?([A-Za-z0-9]{1,8}))?");
-    
+
     /** Pattern for detecting remote dictionary file archives */
     public static final Pattern DICTIONARY_ZIP = Pattern.compile(
     // "\"([a-z]{1,8})(_([A-Z]{1,8})?)?\\.zip\"");
@@ -199,7 +198,7 @@ public class PatternConsts {
      * Pattern for detecting the placeholders in a printf-function string. It
      * detects only simple placeholders, without SIGN-, PADDING-, ALIGNMENT- and
      * WIDTH specifier.
-     * 
+     *
      * @see #PRINTF_VARS
      */
     public static final Pattern SIMPLE_PRINTF_VARS = Pattern.compile(RE_SIMPLE_PRINTF_VARS);
@@ -227,7 +226,7 @@ public class PatternConsts {
     /**
      * Returns the placeholder pattern (OmegaT tags, printf tags, java
      * MessageFomat tags, custom tags, combined according to user configuration)
-     * 
+     *
      * @return the pattern
      * @see #updatePlaceholderPattern()
      */

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -25,12 +25,14 @@
 
 package org.omegat.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.regex.Matcher;
 
 import org.junit.Test;
-
 
 /**
  * Testing some of regular expressions.
@@ -38,61 +40,39 @@ import org.junit.Test;
  * @author Maxym Mykhalchuk
  */
 public class PatternConstsTest {
-    
+
     /**
      * Tests {@link PatternConsts#LANG_AND_COUNTRY} regular expression.
      */
     @Test
-    public void testLangAndCountry()
-    {
-        String LC_BAD = "abc*DEF";
-        Matcher m = PatternConsts.LANG_AND_COUNTRY.matcher(LC_BAD);
-        if( m.matches() )
-            fail("Language and Country pattern '" +
-                    PatternConsts.LANG_AND_COUNTRY.pattern() +
-                    "' incorrectly matches a wrong string '" +
-                    LC_BAD+
-                    "'");
-        String LC_GOOD = "abc-DEF";
-        m = PatternConsts.LANG_AND_COUNTRY.matcher(LC_GOOD);
-        if( !m.matches() )
-            fail("Language and Country pattern '" +
-                    PatternConsts.LANG_AND_COUNTRY.pattern() +
-                    "' does not match a good string '" +
-                    LC_GOOD +
-                    "'");
-        if( m.groupCount()!=2 )
-            fail("Wrong group count extracted ("+m.groupCount()+"), should be 2.");
-        if( !m.group(1).equals("abc") )
-            fail("Wrong language extracted");
-        if( !m.group(2).equals("DEF") )
-            fail("Wrong country extracted");
-        
-        String L_GOOD = "abc";
-        m = PatternConsts.LANG_AND_COUNTRY.matcher(L_GOOD);
-        if( !m.matches() )
-            fail("Language and Country pattern '" +
-                    PatternConsts.LANG_AND_COUNTRY.pattern() +
-                    "' does not match a good string '" +
-                    L_GOOD +
-                    "'");
-        if( !m.group(1).equals("abc") )
-            fail("Wrong language extracted");
-        if( m.group(2)!=null )
-            fail("Country extracted, but it should not");
-        
-        String C_GOOD = "Z-abc";
-        m = PatternConsts.LANG_AND_COUNTRY.matcher(C_GOOD);
-        if( !m.matches() )
-            fail("Language and Country pattern '" +
-                    PatternConsts.LANG_AND_COUNTRY.pattern() +
-                    "' does not match a good string '" +
-                    C_GOOD +
-                    "'");
-        if( !m.group(1).equals("Z") )
-            fail("Wrong language extracted");
-        if( !m.group(2).equals("abc") )
-            fail("Wrong country extracted");
+    public void testLangAndCountry() {
+        String lcBad = "abc*DEF";
+        Matcher m = PatternConsts.LANG_AND_COUNTRY.matcher(lcBad);
+        if (m.matches()) {
+            fail("Language and Country pattern '" + PatternConsts.LANG_AND_COUNTRY.pattern()
+                    + "' incorrectly matches a wrong string '" + lcBad + "'");
+        }
+        String lcGood = "abc-DEF";
+        m = PatternConsts.LANG_AND_COUNTRY.matcher(lcGood);
+        assertTrue("Language and Country pattern '" + PatternConsts.LANG_AND_COUNTRY.pattern()
+                + "' does not match a good string '" + lcGood + "'", m.matches());
+        assertEquals("Wrong group count extracted (" + m.groupCount() + "), should be 2.", 2, m.groupCount());
+        assertEquals("Wrong language extracted", "abc", m.group(1));
+        assertEquals("Wrong country extracted", "DEF", m.group(2));
+
+        String lBad = "abc";
+        m = PatternConsts.LANG_AND_COUNTRY.matcher(lBad);
+        assertTrue("Language and Country pattern '" + PatternConsts.LANG_AND_COUNTRY.pattern()
+                + "' does not match a good string '" + lBad + "'", m.matches());
+        assertEquals("Wrong language extracted", "abc", m.group(1));
+        assertNull("Country extracted, but it should not", m.group(2));
+
+        String cGood = "Z-abc";
+        m = PatternConsts.LANG_AND_COUNTRY.matcher(cGood);
+        assertTrue("Language and Country pattern '" + PatternConsts.LANG_AND_COUNTRY.pattern()
+                + "' does not match a good string '" + lcGood + "'", m.matches());
+        assertEquals("Wrong language extracted", "Z", m.group(1));
+        assertEquals("Wrong country extracted", "abc", m.group(2));
     }
-    
+
 }

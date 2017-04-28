@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * Wrapper around all the file filter classes. Is a JavaBean, so that it's easy
  * to write/read it to/from XML file and provides a table model.
- * 
+ *
  * @author Maxym Mykhalchuk
  */
 public class Filters {

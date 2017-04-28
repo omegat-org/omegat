@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Aaron Madlon-Kay, Zoltan Bartko
@@ -42,7 +42,7 @@ import org.omegat.util.Token;
 
 /**
  * An AutoCompleterView for inserting missing tags.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class TagAutoCompleterView extends AutoCompleterListView {
@@ -56,9 +56,9 @@ public class TagAutoCompleterView extends AutoCompleterListView {
     @Override
     public List<AutoCompleterItem> computeListData(String prevText, boolean contextualOnly) {
         String wordChunk = getLastToken(prevText);
-        
+
         List<String> missingGroups = TagUtil.getGroupedMissingTagsFromTarget();
-        
+
         // If wordChunk is a tag, pretend we have a blank wordChunk.
         for (Tag tag : TagUtil.getAllTagsInSource()) {
             if (tag.tag.equals(wordChunk)) {
@@ -79,7 +79,7 @@ public class TagAutoCompleterView extends AutoCompleterListView {
         if (matchGroups.isEmpty() && !contextualOnly) {
             return convertList(missingGroups, 0);
         }
-        
+
         return convertList(matchGroups, wordChunk.length());
     }
 
@@ -111,14 +111,14 @@ public class TagAutoCompleterView extends AutoCompleterListView {
     public String itemToString(AutoCompleterItem item) {
         return item.extras[0];
     }
-    
+
     private static class TagTokenizer implements ITokenizer {
 
         @Override
         public Token[] tokenizeWords(String str, StemmingMode stemmingMode) {
             return tokenize(str);
         }
-        
+
         @Override
         public String[] tokenizeWordsToStrings(String str, StemmingMode stemmingMode) {
             return null;
@@ -128,7 +128,7 @@ public class TagAutoCompleterView extends AutoCompleterListView {
         public Token[] tokenizeVerbatim(String str) {
             return tokenize(str);
         }
-        
+
         @Override
         public String[] tokenizeVerbatimToStrings(String str) {
             return null;
@@ -147,12 +147,12 @@ public class TagAutoCompleterView extends AutoCompleterListView {
             }
             return tokens;
         }
-        
+
         /**
          * Create a regex that will split a string in front of any protected parts.
          * It will look like "(?=c1|c2|c3|...|cn)" where c1,...,cn are the unique first
          * characters of protected parts in the current segment.
-         * 
+         *
          * @return regex string
          */
         private String buildRegex() {
@@ -178,7 +178,7 @@ public class TagAutoCompleterView extends AutoCompleterListView {
             regex.append(')');
             return regex.toString();
         }
-        
+
         @Override
         public String[] getSupportedLanguages() {
             return null;

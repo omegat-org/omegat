@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -31,7 +31,7 @@ import org.omegat.util.OStrings;
  * Frame with menu for AlignPanel.
  * <p>
  * THIS MUST BE EDITED IN NETBEANS GUI BUILDER.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")

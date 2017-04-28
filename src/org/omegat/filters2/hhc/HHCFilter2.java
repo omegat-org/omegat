@@ -1,10 +1,10 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
- Copyright (C) 2006 Didier Briel              
+ Copyright (C) 2006 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -41,12 +41,12 @@ import org.omegat.util.OStrings;
 /**
  * A filter to translate HHC and HHK files.
  * <p>
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
 public class HHCFilter2 extends HTMLFilter2 {
-    
+
     @Override
     protected boolean requirePrevNextFields() {
         return true;
@@ -106,7 +106,7 @@ public class HHCFilter2 extends HTMLFilter2 {
 
     /**
      * Returns true to indicate that a filter has options.
-     * 
+     *
      * @return False, because HHC filter has no options.
      */
     @Override

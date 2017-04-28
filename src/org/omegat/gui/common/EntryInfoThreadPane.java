@@ -32,7 +32,7 @@ import org.omegat.core.events.IEntryEventListener;
 /**
  * Base class for show information about currently selected entry, searched by separate thread. It can be used
  * for glossaries, dictionaries and other panes.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @param <T>
  *            result type of found data
@@ -74,7 +74,7 @@ public abstract class EntryInfoThreadPane<T> extends EntryInfoPane<T> implements
 
     /**
      * Each implementation should start own EntryInfoSearchThread thread.
-     * 
+     *
      * @param newEntry
      *            new entry for find
      */
@@ -82,7 +82,7 @@ public abstract class EntryInfoThreadPane<T> extends EntryInfoPane<T> implements
 
     /**
      * Callback from search thread.
-     * 
+     *
      * @param processedEntry
      *            entry which produce data
      * @param data
@@ -92,7 +92,7 @@ public abstract class EntryInfoThreadPane<T> extends EntryInfoPane<T> implements
 
     /**
      * Callback from search thread if error occured.
-     * 
+     *
      * @param ex
      */
     protected void setError(Exception ex) {

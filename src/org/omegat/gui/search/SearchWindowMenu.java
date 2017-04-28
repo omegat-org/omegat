@@ -93,7 +93,6 @@ public class SearchWindowMenu extends JMenuBar {
         JMenu editMenu = add(new JMenu());
         Mnemonics.setLocalizedText(editMenu, OStrings.getString("SW_EDIT_MENU"));
 
-
         // "Action Commands" must be the same as equivalent MainWindowMenu
         // members in order to get matching shortcuts.
 

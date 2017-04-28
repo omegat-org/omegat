@@ -45,7 +45,7 @@ import org.trie4j.patricia.MapPatriciaTrie;
  * <li>Call {@link #done()} when done adding data (required!)
  * <li>Retrieve data with {@link #lookUp(String, boolean)}
  * </ol>
- * 
+ *
  * @author Aaron Madlon-Kay
  *
  * @param <T>
@@ -70,7 +70,7 @@ public class DictionaryData<T> {
      * Insert a key=value pair into the data store. Unicode normalization is
      * performed on the key. The value is stored both for the key and its
      * lowercase version, if the latter differs.
-     * 
+     *
      * @param key
      *            The key
      * @param value
@@ -89,7 +89,7 @@ public class DictionaryData<T> {
      * Do the actual storing of the value. Most values are going to be singular,
      * but dictionaries may store multiple definitions for the same key, so in
      * that case we store the values in an array.
-     * 
+     *
      * @param key
      * @param value
      */
@@ -109,7 +109,7 @@ public class DictionaryData<T> {
 
     /**
      * Return the given array with the given value appended to it.
-     * 
+     *
      * @param array
      * @param value
      * @return
@@ -132,7 +132,7 @@ public class DictionaryData<T> {
 
     /**
      * Look up the given word.
-     * 
+     *
      * @param word
      *            The word to look up
      * @return A list of stored objects matching the given word
@@ -146,7 +146,7 @@ public class DictionaryData<T> {
     /**
      * Look up the given word using predictive completion; e.g. "term" will
      * match "terminology" (and "terminal", etc.).
-     * 
+     *
      * @param word
      *            The word to look up
      * @return A list of stored objects matching the given word
@@ -184,7 +184,7 @@ public class DictionaryData<T> {
     /**
      * Unpack the given stored object (singular, or array) into the given
      * collection.
-     * 
+     *
      * @param value
      * @param into
      */
@@ -205,7 +205,7 @@ public class DictionaryData<T> {
     /**
      * Get the number of stored keys. Returns <code>-1</code> if {@link #done()}
      * has not yet been called.
-     * 
+     *
      * @return The number of stored keys
      */
     public int size() {

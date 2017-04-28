@@ -57,7 +57,7 @@ import org.omegat.util.StringUtil;
  * <p>
  * Option to remove untranslated segments in the target files by Enrique Estevez (Code adapted from the file:
  * PoFilter.java)
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Enrique Estevez (keko.gl@gmail.com)
@@ -70,15 +70,13 @@ public class MozillaDTDFilter extends AbstractFilter {
 
     protected static final Pattern RE_ENTITY = Pattern.compile("<\\!ENTITY\\s+(\\S+)\\s+([\"'])(.+)\\2\\s*>",
             Pattern.DOTALL);
-    
-    
+
     protected Map<String, String> align;
 
     /**
      * If true, will remove non-translated segments in the target files
      */
     public static boolean removeStringsUntranslated = false;
-
 
     @Override
     public Instance[] getDefaultInstances() {
@@ -179,7 +177,7 @@ public class MozillaDTDFilter extends AbstractFilter {
                 out.write(block.substring(0, m.start(3)));
                 out.write(trans != null ? trans : text);
                 out.write(block.substring(m.end(3)));
-            }    
+            }
         } else if (entryAlignCallback != null && id != null) {
             align.put(id, text);
         }
@@ -207,7 +205,6 @@ public class MozillaDTDFilter extends AbstractFilter {
         return StandardCharsets.UTF_8.name();
     }
 
-
     @Override
     public Map<String, String> changeOptions(Window parent, Map<String, String> config) {
         try {
@@ -226,7 +223,7 @@ public class MozillaDTDFilter extends AbstractFilter {
 
     /**
      * Returns true to indicate that Mozilla DTD filter has options.
-     * 
+     *
      */
     @Override
     public boolean hasOptions() {

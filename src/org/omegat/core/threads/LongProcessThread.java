@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009-2013 Alex Buloichik
@@ -27,7 +27,7 @@ package org.omegat.core.threads;
 
 /**
  * Thread for some long operations in background, like statistics calculation.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class LongProcessThread extends Thread {

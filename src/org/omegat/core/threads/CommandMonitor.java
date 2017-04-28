@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Aaron Madlon-Kay
@@ -37,35 +37,35 @@ import org.omegat.core.Core;
 /**
  * Monitor an external process. Inspired by StreamGobbler from:
  * http://www.javaworld.com/javaworld/jw-12-2000/jw-1229-traps.html?page=4
- * 
+ *
  * Used to empty the buffers of external commands so they don't lock up.
- * 
+ *
  * @author aaron.madlon-kay
  */
 public class CommandMonitor extends Thread {
-    
+
     private static final Logger LOGGER = Logger.getLogger(CommandMonitor.class.getName());
-    
+
     private final InputStream stream;
     private final Process process;
     private final boolean isStdErr;
     private String message = null;
-    
+
     public static CommandMonitor newStdoutMonitor(Process process) {
         return new CommandMonitor(process, false);
     }
-    
+
     public static CommandMonitor newStderrMonitor(Process process) {
         return new CommandMonitor(process, true);
     }
-    
+
     private CommandMonitor(Process process, boolean isStdErr) {
         this.isStdErr = isStdErr;
         this.process = process;
         this.stream = isStdErr ? process.getErrorStream() : process.getInputStream();
         setName("CommandMonitor");
     }
-        
+
     public void run() {
         try (BufferedReader br = new BufferedReader(
                 new InputStreamReader(stream, Charset.defaultCharset()))) {
@@ -81,7 +81,7 @@ public class CommandMonitor extends Thread {
         } catch (IOException e) {
             Core.getMainWindow().showStatusMessageRB("CT_ERROR_MONITORING_EXTERNAL_CMD");
         }
-        
+
         int exitValue = -1;
         try {
             exitValue = process.waitFor();

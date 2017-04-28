@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Alex Buloichik
@@ -49,9 +49,9 @@ import org.omegat.util.TMXWriter2;
 
 /**
  * Class for store data from project_save.tmx.
- * 
+ *
  * Orphaned or non-orphaned translation calculated by RealProject.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
@@ -68,18 +68,18 @@ public class ProjectTMX {
 
     /**
      * Storage for default translations for current project.
-     * 
+     *
      * It must be used with synchronization around ProjectTMX.
      */
     Map<String, TMXEntry> defaults;
 
     /**
      * Storage for alternative translations for current project.
-     * 
+     *
      * It must be used with synchronization around ProjectTMX.
      */
     Map<EntryKey, TMXEntry> alternatives;
-    
+
     final CheckOrphanedCallback checkOrphanedCallback;
 
     public ProjectTMX(Language sourceLanguage, Language targetLanguage, boolean isSentenceSegmentingEnabled, File file, CheckOrphanedCallback callback) throws Exception {

@@ -57,7 +57,7 @@ public class ApertiumTranslate extends BaseTranslate {
 
     /**
      * Modify some country codes to fit with Apertium
-     * 
+     *
      * @param language
      *            An OmegaT language
      * @return A code modified for some Apertium languages

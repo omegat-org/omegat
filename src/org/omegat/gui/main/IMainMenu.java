@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -32,7 +32,7 @@ import javax.swing.JMenuItem;
 
 /**
  * Main menu interface.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Aaron Madlon-Kay
@@ -47,10 +47,10 @@ public interface IMainMenu {
     JMenu getGlossaryMenu();
 
     JMenu getProjectMenu();
-    
+
     JMenuItem getProjectRecentMenuItem();
 
     JMenu getAutoCompletionMenu();
-    
+
     void invokeAction(String action, int modifiers);
 }

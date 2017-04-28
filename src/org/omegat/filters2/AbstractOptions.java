@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * Class for wrap text options for read default values, parse int, boolean, enum
  * values, etc.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public abstract class AbstractOptions {
@@ -46,7 +46,7 @@ public abstract class AbstractOptions {
 
     /**
      * Parse boolean value from string option.
-     * 
+     *
      * @param key
      *            value key
      * @param defaultValue
@@ -66,7 +66,7 @@ public abstract class AbstractOptions {
 
     /**
      * Save boolean value to string option.
-     * 
+     *
      * @param key
      * @param value
      */
@@ -76,7 +76,7 @@ public abstract class AbstractOptions {
 
     /**
      * Get string from string option.
-     * 
+     *
      * @param key
      *            value key
      * @param defaultValue
@@ -90,7 +90,7 @@ public abstract class AbstractOptions {
 
     /**
      * Save string value to string option.
-     * 
+     *
      * @param key
      * @param value
      */
@@ -100,7 +100,7 @@ public abstract class AbstractOptions {
 
     /**
      * Get string from string option.
-     * 
+     *
      * @param key
      *            value key
      * @param defaultValue
@@ -118,7 +118,7 @@ public abstract class AbstractOptions {
 
     /**
      * Save string value to string option.
-     * 
+     *
      * @param key
      * @param value
      */

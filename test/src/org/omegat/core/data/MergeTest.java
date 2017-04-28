@@ -38,7 +38,7 @@ import org.omegat.core.data.TMXEntry.ExternalLinked;
 
 /**
  * Tests for merge in team project.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class MergeTest {

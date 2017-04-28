@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -47,16 +47,16 @@ import org.omegat.util.StaticUtils;
 /**
  * File handler for standard logging for support logrotating(on startup only)
  * and file naming with datetime part.
- * 
+ *
  * This handler will create 'OmegaT.log' for OmegaT(and OmegaT-1.log,
  * OmegaT-2.log for next instances which runned in the same time). logrotate
  * will work only on create handler, i.e. logs from one OmegaT run will be only
  * in one log file. It means, what log file can be much longer than maxinum file
  * size. Maximum file size used only on startup for decide: should we rotate
  * logs or not.
- * 
+ *
  * Rotated logs will be named like 'OmegaT.20080325.1800.log'.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class OmegaTFileHandler extends StreamHandler {
@@ -107,10 +107,10 @@ public class OmegaTFileHandler extends StreamHandler {
             String fileName = OStrings.getApplicationName()
                     // Instance index
                     + (instanceIndex > 0 ? ("-" + instanceIndex) : "");
-            
+
             lockFile = new File(dir, fileName + ".log.lck");
             logFileName = fileName;
-            
+
             // try to create lock file
             lockStream = new FileOutputStream(lockFile);
             if (lockStream.getChannel().tryLock() != null) {

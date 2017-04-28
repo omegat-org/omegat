@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -135,7 +135,7 @@ import org.omegat.util.gui.StaticUIUtils;
  * A modal window aggregating all preference "views"
  * ({@link IPreferencesController}s). Plugins can provide their own views via
  * {@link PreferencesControllers#addSupplier(java.util.function.Supplier)}.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class PreferencesWindowController implements FurtherActionListener {
@@ -335,7 +335,7 @@ public class PreferencesWindowController implements FurtherActionListener {
                 searchCurrentView();
             }
         });
-        
+
         String searchKeyText = StaticUIUtils.getKeyStrokeText(searchKeyStroke);
         innerPanel.searchTextField.setHintText(OStrings.getString("PREFERENCES_SEARCH_HINT", searchKeyText));
 
@@ -603,7 +603,7 @@ public class PreferencesWindowController implements FurtherActionListener {
 
     /**
      * Set the visibility of the entire subtree starting at root.
-     * 
+     *
      * @param root
      *            Root node
      * @param isVisible
@@ -683,7 +683,7 @@ public class PreferencesWindowController implements FurtherActionListener {
             walkTree((DefaultMutableTreeNode) o, consumer);
         }
     }
-    
+
     private static <T> List<T> mapTree(DefaultMutableTreeNode node,
             Function<DefaultMutableTreeNode, T> function) {
         List<T> results = new ArrayList<>();
@@ -815,7 +815,6 @@ public class PreferencesWindowController implements FurtherActionListener {
             return count;
         }
     }
-
 
     @SuppressWarnings("serial")
     static class HighlightablePanel extends JPanel {

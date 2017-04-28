@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Aaron Madlon-Kay
@@ -31,19 +31,19 @@ import org.apache.lucene.util.Version;
 
 /**
  * A class that renders a tokenizer behavior version combo box cell.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class TokenizerBehaviorComboBoxRenderer extends DelegatingComboBoxRenderer<Object, String> {
 
     private final Map<Version, String> names;
     private final Version recommended;
-    
+
     public TokenizerBehaviorComboBoxRenderer(Map<Version, String> names, Version recommended) {
         this.names = names;
         this.recommended = recommended;
     }
-    
+
     @Override
     protected String getDisplayText(Object value) {
     	if (value instanceof Version) {

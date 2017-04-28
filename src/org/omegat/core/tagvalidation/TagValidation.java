@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Aaron Madlon-Kay
@@ -151,7 +151,7 @@ public class TagValidation {
             report.transErrors.put(new Tag(removeMatcher.start(), removeMatcher.group()), TagError.EXTRANEOUS);
         }
     }
-    
+
     protected static void inspectUnorderedTags(List<Tag> srcTags, List<Tag> locTags, ErrorReport report) {
         for (Tag tag : srcTags) {
             if (!containsTag(locTags, tag.tag)) {
@@ -164,9 +164,9 @@ public class TagValidation {
             }
         }
     }
-    
+
     /**
-     * Check that translated tags are well-formed. 
+     * Check that translated tags are well-formed.
      * In order to accommodate tags orphaned by segmenting,
      * unmatched tags are allowed, but only if they don't interfere with
      * non-orphaned tags.
@@ -195,7 +195,7 @@ public class TagValidation {
         }
 
         // Check translation tags.
-        
+
         List<Tag> expectedTags = new ArrayList<Tag>(srcTags);
         Stack<Tag> tagStack = new Stack<Tag>();
         for (Tag tag : locTags) {
@@ -246,7 +246,7 @@ public class TagValidation {
                 // Ignore
             }
         }
-        
+
         // Check expected tags for anything left.
         for (Tag tag : expectedTags) {
             report.srcErrors.put(tag, TagError.MISSING);
@@ -263,7 +263,7 @@ public class TagValidation {
             }
         }
     }
-    
+
     private static List<Tag> getCommonTags(List<Tag> orig, List<Tag> compare) {
         List<Tag> result = new ArrayList<Tag>();
         List<Tag> uninspected = new ArrayList<Tag>(compare);
@@ -278,7 +278,7 @@ public class TagValidation {
         }
         return result;
     }
-    
+
     private static boolean containsTag(List<Tag> tags, String tag) {
         if (tag == null) {
             return false;
@@ -290,7 +290,7 @@ public class TagValidation {
         }
         return false;
     }
-    
+
     private static Tag removeTag(List<Tag> tags, String tag) {
         for (int i = 0; i < tags.size(); i++) {
             Tag t = tags.get(i);

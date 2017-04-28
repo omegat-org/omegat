@@ -69,7 +69,7 @@ public class ScriptRunner {
      * Execute as read from the file associated with the supplied
      * {@link ScriptItem}. This is a convenience method for
      * {@link #executeScript(String, ScriptItem, Map)}.
-     * 
+     *
      * @param item
      * @param additionalBindings
      * @return
@@ -90,7 +90,7 @@ public class ScriptRunner {
      * <p>
      * This is a convenience method for
      * {@link #executeScript(String, ScriptEngine, Map)}.
-     * 
+     *
      * @param script
      *            The script in string form. Can be null.
      * @param item
@@ -137,7 +137,7 @@ public class ScriptRunner {
 
     /**
      * Execute a script with a given engine and bindings.
-     * 
+     *
      * @param script
      *            The script in string form
      * @param engine

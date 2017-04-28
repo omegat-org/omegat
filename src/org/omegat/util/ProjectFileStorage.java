@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -52,7 +52,7 @@ import gen.core.project.Project.Repositories;
 
 /**
  * Class that reads and saves project definition file.
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Didier Briel
@@ -90,7 +90,7 @@ public class ProjectFileStorage {
      * This is a convenience method for {@link #loadPropertiesFile(File, File)}.
      * <p>
      * If the supplied {@link File} is not a directory, an {@link IllegalArgumentException} will be thrown.
-     * 
+     *
      * @param projectDir
      *            The directory of the project
      * @return The loaded project properties
@@ -105,7 +105,7 @@ public class ProjectFileStorage {
      * <p>
      * If <code>projectDir</code> is not a directory or <code>projectFile</code> is not a file, an
      * {@link IllegalArgumentException} will be thrown.
-     * 
+     *
      * @param projectDir
      *            The directory of the project
      * @param projectFile
@@ -167,7 +167,7 @@ public class ProjectFileStorage {
 
         result.setSourceTokenizer(loadTokenizer(om.getProject().getSourceTok(), result.getSourceLanguage()));
         result.setTargetTokenizer(loadTokenizer(om.getProject().getTargetTok(), result.getTargetLanguage()));
-        
+
         if (om.getProject().isSentenceSeg() != null) {
             result.setSentenceSegmentingEnabled(om.getProject().isSentenceSeg());
         }
@@ -255,7 +255,7 @@ public class ProjectFileStorage {
      * filesystem root) or if the relative path is more than
      * {@link OConsts#MAX_PARENT_DIRECTORIES_ABS2REL} levels away then it gives
      * up and returns the original <code>absolutePath</code>.
-     * 
+     *
      * @param root
      *            Root path against which to evaluate
      * @param absolutePath

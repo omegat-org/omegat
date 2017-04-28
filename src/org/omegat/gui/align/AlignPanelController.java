@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -116,7 +116,7 @@ import gen.core.filters.Filters;
 
 /**
  * Controller for the alignment UI
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class AlignPanelController {
@@ -159,7 +159,7 @@ public class AlignPanelController {
 
     /**
      * Display the align tool. The tool is not modal, so this call will return immediately.
-     * 
+     *
      * @param parent
      *            Parent window of the align tool
      */
@@ -432,7 +432,7 @@ public class AlignPanelController {
             }
         };
         frame.reloadItem.addActionListener(reloadListener);
-        
+
         ActionListener removeTagsListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -514,7 +514,7 @@ public class AlignPanelController {
                 closeFrame(frame);
             }
         });
-        
+
         frame.keepAllItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -691,7 +691,7 @@ public class AlignPanelController {
         modified = true;
         Rectangle initialRect = panel.table.getVisibleRect();
         panel.table.clearSelection();
-        int resultRows[] = model.splitRow(row, col, split);
+        int[] resultRows = model.splitRow(row, col, split);
         panel.table.changeSelection(resultRows[0], col, false, false);
         panel.table.changeSelection(resultRows[resultRows.length - 1], col, false, true);
         ensureSelectionVisible(initialRect);
@@ -839,7 +839,7 @@ public class AlignPanelController {
     /**
      * Reloads the beads with the current settings. The loading itself takes place on a background thread.
      * Calls {@link #updatePanel(AlignPanel, AlignMenuFrame)} afterwards.
-     * 
+     *
      * @param panel
      * @param frame
      */
@@ -898,7 +898,7 @@ public class AlignPanelController {
     /**
      * Ensure that the panel controls and available menu items are synced with the settings of the underlying
      * aligner.
-     * 
+     *
      * @param panel
      * @param frame
      */
@@ -1030,7 +1030,7 @@ public class AlignPanelController {
      * If the user has modified the SRX rules, offer to save them permanently. Otherwise they are simply
      * discarded. Does nothing when OmegaT's main window is not available (changes are always discarded under
      * standalone use).
-     * 
+     *
      * @param comp
      *            Parent component for dialog boxes
      */
@@ -1062,7 +1062,7 @@ public class AlignPanelController {
      * If the user has modified the file filter settings, offer to save them permanently. Otherwise they are
      * simply discarded. Does nothing when OmegaT's main window is not available (changes are always discarded
      * under standalone use).
-     * 
+     *
      * @param comp
      *            Parent component for dialog boxes
      */
@@ -1118,7 +1118,7 @@ public class AlignPanelController {
         private final JCheckBox checkBox = new JCheckBox();
         private final AttributeSet highlight;
 
-        public MultilineCellRenderer() {
+        MultilineCellRenderer() {
             // textArea.setLineWrap(true);
             // textArea.setWrapStyleWord(true);
             textArea.setOpaque(true);
@@ -1219,7 +1219,7 @@ public class AlignPanelController {
         List<String> rowToSourceLine;
         List<String> rowToTargetLine;
 
-        public BeadTableModel(List<MutableBead> data) {
+        BeadTableModel(List<MutableBead> data) {
             this.data = data;
             makeCache();
         }
@@ -1358,7 +1358,7 @@ public class AlignPanelController {
         /**
          * Move the specified lines located in <code>rows</code> and <code>col</code> into the bead indicated
          * by <code>trgRow</code>.
-         * 
+         *
          * @param rows
          *            Rows to move
          * @param col
@@ -1416,7 +1416,7 @@ public class AlignPanelController {
         /**
          * Split the specified bead into two: one with an equal number of source and target lines (e.g. 1-1)
          * and one with the remainder (e.g. 0-1). The new bead is inserted into the underlying data store.
-         * 
+         *
          * @param bead
          * @return The remainder bead
          */
@@ -1433,7 +1433,7 @@ public class AlignPanelController {
         /**
          * Split the specified bead into two: the first with the specified count of lines, and the second with
          * the remainder.
-         * 
+         *
          * @param bead
          * @param count
          * @return The remainder bead
@@ -1468,7 +1468,7 @@ public class AlignPanelController {
         /**
          * Indicate whether the line at the specified <code>row</code> and <code>col</code> can be moved in
          * the indicated direction. A line is movable if it is not blocked by another line in the same bead.
-         * 
+         *
          * @param row
          * @param col
          * @param up
@@ -1494,7 +1494,7 @@ public class AlignPanelController {
          * the bead indicated by <code>trgRow</code>. In addition to requiring
          * {@link #canMove(int, int, boolean)} to return true, the bead must be different from the current
          * bead, and no non-empty cells can exist between the current and target rows.
-         * 
+         *
          * @param trgRow
          * @param row
          * @param col
@@ -1531,7 +1531,7 @@ public class AlignPanelController {
 
         /**
          * Get a list of rows covered by the bead at <code>row</code>.
-         * 
+         *
          * @param row
          * @return
          */
@@ -1558,7 +1558,7 @@ public class AlignPanelController {
         /**
          * Get a list of rows for which the cell in the specified <code>col</code> represents an actual line
          * (is not empty).
-         * 
+         *
          * @param col
          * @param rows
          * @return
@@ -1575,7 +1575,7 @@ public class AlignPanelController {
 
         /**
          * Get the last row of the bead immediately preceding the one at the indicated <code>row</code>.
-         * 
+         *
          * @param row
          * @return The row, or -1 if there is no previous bead
          */
@@ -1585,14 +1585,14 @@ public class AlignPanelController {
 
         /**
          * Get the first row of the bead immediately after the one at the indicated <code>row</code>.
-         * 
+         *
          * @param row
          * @return The row, or -1 if there is no next bead
          */
         int nextBeadFromRow(int row) {
             return nextBeadFromRowByOffset(row, 1);
         }
-        
+
         private int nextBeadFromRowByOffset(int row, int offset) {
             MutableBead bead = rowToBead.get(row);
             for (int i = row + offset; i < getRowCount(); i += offset) {
@@ -1607,7 +1607,7 @@ public class AlignPanelController {
          * Merge all lines at the indicated <code>rows</code> and <code>col</code> into the first specified
          * row. This is destructive in that it actually joins the strings together and replaces the existing
          * value.
-         * 
+         *
          * @param rows
          * @param col
          * @return The resulting row
@@ -1648,7 +1648,7 @@ public class AlignPanelController {
          * Replace the line at <code>row</code> and <code>col</code> with the specified <code>split</code>
          * lines, which are inserted in its place. This is destructive in that it removes the original line
          * entirely.
-         * 
+         *
          * @param row
          * @param col
          * @param split
@@ -1682,7 +1682,7 @@ public class AlignPanelController {
         /**
          * Replace the line at <code>row</code> and <code>col</code> with the specified <code>newVal</code>.
          * This is destructive in that it removes the original line entirely.
-         * 
+         *
          * @param row
          * @param col
          * @param newVal
@@ -1708,7 +1708,7 @@ public class AlignPanelController {
          * impression of each row moving by the offset relative to the opposing column. Because displayed rows
          * don't map directly to lines, that means some rows won't move at all, e.g. if the target row is
          * still the same bead.
-         * 
+         *
          * @param rows
          * @param col
          * @param offset
@@ -1781,7 +1781,7 @@ public class AlignPanelController {
 
         /**
          * Get the number of beads contained within the specified rows.
-         * 
+         *
          * @param rows
          * @return
          */
@@ -1798,7 +1798,7 @@ public class AlignPanelController {
 
         /**
          * Split the lines specified at <code>rows</code> and <code>col</code> into multiple beads.
-         * 
+         *
          * @param rows
          * @param col
          * @return A two-member array indicating the first and last resulting rows
@@ -2008,7 +2008,7 @@ public class AlignPanelController {
         private final int[] rows;
         private final int[] cols;
 
-        public TableSelection(int[] rows, int[] cols) {
+        TableSelection(int[] rows, int[] cols) {
             this.rows = rows;
             this.cols = cols;
         }
@@ -2083,7 +2083,7 @@ public class AlignPanelController {
     static class EnumRenderer<T extends Enum<?>> extends DelegatingComboBoxRenderer<T, String> {
         private final String keyPrefix;
 
-        public EnumRenderer(String keyPrefix) {
+        EnumRenderer(String keyPrefix) {
             this.keyPrefix = keyPrefix;
         }
 

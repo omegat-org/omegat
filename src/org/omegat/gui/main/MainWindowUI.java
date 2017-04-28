@@ -1,9 +1,9 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers, 
+ Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers,
                          Benjamin Siband, and Kim Bruning
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik
@@ -69,7 +69,7 @@ import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
 
 /**
  * Class for initialize, load/save, etc. for main window UI components.
- * 
+ *
  * @author Keith Godfrey
  * @author Benjamin Siband
  * @author Maxym Mykhalchuk
@@ -83,7 +83,7 @@ import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
  */
 public class MainWindowUI {
     public static final String UI_LAYOUT_FILE = "uiLayout" + OStrings.getBrandingToken() + ".xml";
-    
+
     public enum STATUS_BAR_MODE {
         DEFAULT,
         PERCENTAGE,
@@ -122,16 +122,16 @@ public class MainWindowUI {
         CoreEvents.registerProjectChangeListener(handler);
         CoreEvents.registerApplicationEventListener(handler);
     }
-    
+
     private static class PerProjectLayoutHandler implements IProjectEventListener, IApplicationEventListener {
 
         private final MainWindow mainWindow;
         private boolean didApplyPerProjectLayout = false;
-        
+
         public PerProjectLayoutHandler(MainWindow mainWindow) {
             this.mainWindow = mainWindow;
         }
-        
+
         @Override
         public void onApplicationStartup() {
         }
@@ -144,8 +144,8 @@ public class MainWindowUI {
                 loadScreenLayoutFromPreferences(mainWindow);
                 didApplyPerProjectLayout = false;
             }
-        }            
-            
+        }
+
         @Override
         public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
             if (eventType == PROJECT_CHANGE_TYPE.CLOSE && didApplyPerProjectLayout) {
@@ -172,13 +172,13 @@ public class MainWindowUI {
             default:
             }
         }
-        
+
         private File getPerProjectLayout() {
             return new File(Core.getProject().getProjectProperties().getProjectInternal(),
                     MainWindowUI.UI_LAYOUT_FILE);
         }
     }
-    
+
     /**
      * Create swing UI components for status panel.
      */
@@ -190,7 +190,7 @@ public class MainWindowUI {
         mainWindow.statusLabel.setFont(mainWindow.statusLabel.getFont().deriveFont(11f));
 
         Border border = UIManager.getBorder("OmegaTStatusArea.border");
-        
+
         final STATUS_BAR_MODE progressMode = Preferences.getPreferenceEnumDefault(
                 Preferences.SB_PROGRESS_MODE, STATUS_BAR_MODE.DEFAULT);
 
@@ -249,7 +249,7 @@ public class MainWindowUI {
             statusPanel.setBackground(bgColor);
             statusPanel2.setBackground(bgColor);
         }
-        
+
         return statusPanel;
     }
 
@@ -267,7 +267,7 @@ public class MainWindowUI {
         // plugins.
         DockingUI.ensureDockablesVisible(mainWindow.desktop);
     }
-    
+
     /**
      * Assume screen size is 800x600 if width less than 900, and 1024x768 if
      * larger. Assume task bar at bottom of screen. If screen size saved,
@@ -319,7 +319,7 @@ public class MainWindowUI {
         File uiLayoutFile = new File(StaticUtils.getConfigDir(), MainWindowUI.UI_LAYOUT_FILE);
         saveScreenLayout(mainWindow, uiLayoutFile);
     }
-    
+
     /**
      * Stores main window layout to the specified output file.
      */

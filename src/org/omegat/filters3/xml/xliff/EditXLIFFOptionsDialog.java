@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -40,7 +40,7 @@ import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Modal dialog to edit XLIFF filter options.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Piotr Kulik
@@ -67,7 +67,7 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         prevAndNextRB.setSelected(options.getAltTransIDType() == ID_TYPE.CONTEXT);
         transIDRB.setSelected(options.getAltTransIDType() == ID_TYPE.ELEMENT_ID);
         transResnameRB.setSelected(options.getAltTransIDType() == ID_TYPE.RESNAME_ATTR);
-        
+
         StaticUIUtils.setEscapeAction(this, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -196,7 +196,6 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
         options.set26Compatibility(compatibility26CB.isSelected());
         options.setForceShortcutToF(forceshortcut2fCB.isSelected());
@@ -221,7 +220,6 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
         doClose(RET_CANCEL);
     }//GEN-LAST:event_closeDialog
-
 
     private void doClose(int retStatus) {
         returnStatus = retStatus;

@@ -5,8 +5,10 @@ plugins {
     id 'maven-publish'
     id 'eclipse'
     id 'findbugs'
+    id 'checkstyle'
     id 'de.gliderpilot.jnlp' version '1.2.0'
     id 'com.jfrog.bintray' version '1.7.3'
+    id 'org.hidetake.ssh' version '2.9.0'
     // Uncomment and run `dependencyUpdates` task to check for updates to dependencies
     //id 'com.github.ben-manes.versions' version '0.14.0'
 }
@@ -234,6 +236,16 @@ task genDocIndex(type: Copy) {
         }
         expand('languages': langInfos)
         filteringCharset = 'UTF-8'
+    }
+}
+
+task webManual(type: Sync) {
+    description = 'Generate the HTML manual'
+    dependsOn genDocIndex
+    destinationDir = file("${buildDir}/docs/manual")
+    from 'docs'
+    from('release') {
+        include 'doc-license.txt'
     }
 }
 
@@ -701,6 +713,8 @@ tasks.withType(FindBugs) {
     }
 }
 
+checkstyleMain.exclude '**/gen/**'
+
 task jar2(type: Sync) {
     description = 'Create minimal executable output for debugging.'
     destinationDir = file("${buildDir}/install/jar2")
@@ -793,6 +807,45 @@ bintray {
         }
     }
     publications = ['bintray']
+}
+
+remotes {
+    sourceforgeWeb {
+        host = 'web.sourceforge.net'
+        user = findProperty('sourceforgeWebUser')
+        password = findProperty('sourceforgeWebPassword')
+        agent = true
+        if (envIsCi) {
+            knownHosts = file("${assetDir}/known_hosts")
+        }
+    }
+}
+
+task publishManual {
+    description = 'Copy the manual to SourceForge web.'
+    dependsOn webManual
+    doLast {
+        ssh.run {
+            session(remotes.sourceforgeWeb) {
+                def root = '/home/project-web/omegat/htdocs'
+                def timestamp = new Date().format('yyyyMMddHHmmss')
+                def tempDir = "manual-temp-${timestamp}"
+                def manualDir = "manual-${omtVersion.beta.empty ? 'standard' : 'latest'}"
+                sftp {
+                    cd root
+                    mkdir tempDir
+                }
+                put from: webManual.outputs.files, into: "${root}/${tempDir}"
+                sftp {
+                    cd root
+                    try { rename manualDir, "${manualDir}-old-${timestamp}" }
+                        catch (ignored) {}
+                    rename "${tempDir}/${webManual.destinationDir.name}", manualDir
+                    rmdir tempDir
+                }
+            }
+        }
+    }
 }
 
 // Allow setting the max heap size for the run task from the command line, e.g.

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
@@ -47,7 +47,7 @@ import com.vlsolutions.swing.docking.Dockable;
 
 /**
  * Core setup for unit tests.
- * 
+ *
  * @author Alexander_Buloichik
  */
 public abstract class TestCore {
@@ -123,7 +123,7 @@ public abstract class TestCore {
 
             public void displayWarningRB(String warningKey, Object... params) {
             }
-            
+
             public void displayWarningRB(String warningKey, String supercedesKey, Object... params) {
             }
 
@@ -136,7 +136,7 @@ public abstract class TestCore {
             public IMainMenu getMainMenu() {
                 return mainMenu;
             }
-            
+
             public Cursor getCursor() {
                 return null;
             }

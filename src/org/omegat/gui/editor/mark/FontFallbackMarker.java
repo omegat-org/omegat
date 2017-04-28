@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
@@ -40,9 +40,9 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.gui.FontFallbackManager;
 
 public class FontFallbackMarker implements IMarker {
-    
+
     private Font editorFont;
-    
+
     public FontFallbackMarker() {
         editorFont = Core.getMainWindow().getApplicationFont();
         CoreEvents.registerFontChangedEventListener(newFont -> {
@@ -54,14 +54,14 @@ public class FontFallbackMarker implements IMarker {
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText,
             String translationText, boolean isActive) throws Exception {
-        
+
         if (!isEnabled()) {
             return null;
         }
 
-        int srcGlyphMissing = sourceText == null ? -1 : editorFont.canDisplayUpTo(sourceText);       
+        int srcGlyphMissing = sourceText == null ? -1 : editorFont.canDisplayUpTo(sourceText);
         int trgGlyphMissing = translationText == null ? -1 : editorFont.canDisplayUpTo(translationText);
-                
+
         if (srcGlyphMissing == -1 && trgGlyphMissing == -1) {
             return null;
         }
@@ -69,18 +69,18 @@ public class FontFallbackMarker implements IMarker {
         if (srcGlyphMissing != -1) {
             createMarks(marks, Mark.ENTRY_PART.SOURCE, sourceText, srcGlyphMissing);
         }
-                
+
         if (trgGlyphMissing != -1) {
             createMarks(marks, Mark.ENTRY_PART.TRANSLATION, translationText, trgGlyphMissing);
         }
-        
+
         return marks;
     }
-    
+
     private boolean isEnabled() {
         return Core.getEditor().getSettings().isDoFontFallback();
     }
-    
+
     private void createMarks(List<Mark> acc, Mark.ENTRY_PART part, String text, int firstMissing) {
         char[] chars = text.toCharArray();
         int i = firstMissing;
@@ -107,7 +107,7 @@ public class FontFallbackMarker implements IMarker {
             acc.add(m);
         }
     }
-    
+
     private AttributeSet getAttributes(Font font) {
         MutableAttributeSet attrs = new SimpleAttributeSet();
         StyleConstants.setFontFamily(attrs, font.getFamily());

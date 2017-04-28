@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -39,7 +39,7 @@ import java.util.stream.IntStream;
  * "foo\r\r\n" will return "foo\r" for that line. This differs from
  * {@link BufferedReader} in that the latter will treat all EOL chars as
  * starting new lines, so the above example would give "foo" and then "".
- * 
+ *
  * @author Aaron Madlon-Kay
  *
  */

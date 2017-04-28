@@ -43,10 +43,10 @@ import org.omegat.util.StringUtil;
 
 /**
  * Filter for support Windows resource files.
- * 
+ *
  * Format described on
  * http://msdn.microsoft.com/en-us/library/aa380599(VS.85).aspx
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class RcFilter extends AbstractFilter {

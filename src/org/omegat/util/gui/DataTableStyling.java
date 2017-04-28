@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
@@ -56,7 +56,7 @@ import org.omegat.util.Platform;
  * @author Aaron Madlon-Kay
  */
 public class DataTableStyling {
-    
+
     public static final Color COLOR_STANDARD_FG = Color.BLACK;
     public static final Color COLOR_STANDARD_BG = Color.WHITE;
     public static final Color COLOR_SELECTION_FG = Color.WHITE;
@@ -64,13 +64,13 @@ public class DataTableStyling {
     public static final Color COLOR_ALTERNATING_HILITE = new Color(245, 245, 245);
     public static final Border TABLE_FOCUS_BORDER = new MatteBorder(1, 1, 1, 1, new Color(0x76AFE8));
     public static final Border TABLE_NO_FOCUS_BORDER = new EmptyBorder(1, 1, 1, 1);
-    
+
     public static final DecimalFormat NUMBER_FORMAT = new DecimalFormat(",##0");
 
     public static final int FONT_NO_CHANGE = -1;
-    
+
     public static final int LINE_SPACING = 6;
-    
+
     public static void applyColors(JTable table) {
         if (!Platform.isMacOSX()) {
             // Windows needs some extra colors set for consistency, but these
@@ -91,24 +91,24 @@ public class DataTableStyling {
         table.setSelectionBackground(COLOR_SELECTION_BG);
         table.setGridColor(COLOR_STANDARD_BG);
     }
-    
+
     public static void applyFont(JTable table, Font font) {
         table.setFont(font);
         table.setRowHeight(font.getSize() + DataTableStyling.LINE_SPACING);
     }
-    
+
     public static TableCellRenderer getNumberCellRenderer() {
         return new AlternatingHighlightRenderer().setAlignment(SwingConstants.RIGHT).setNumberFormat(NUMBER_FORMAT);
     }
-    
+
     public static TableCellRenderer getTextCellRenderer() {
         return new AlternatingHighlightRenderer();
     }
-    
+
     public static TableCellRenderer getHeaderTextCellRenderer() {
         return new AlternatingHighlightRenderer().setFontStyle(Font.BOLD);
     }
-    
+
     public static abstract class FancyRenderer<T extends JComponent> implements TableCellRenderer {
         private NumberFormat numberFormat = null;
         private boolean doHighlight = true;

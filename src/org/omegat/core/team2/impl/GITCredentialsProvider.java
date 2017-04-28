@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Alex Buloichik
@@ -72,7 +72,7 @@ import com.jcraft.jsch.agentproxy.usocket.JNAUSocketFactory;
  * <li>git://
  * <li>http://
  * </ul>
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  * @see <a href="http://www.codeaffine.com/2014/12/09/jgit-authentication/">JGit Authentication Explained</a>
@@ -303,7 +303,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
 
     /**
      * shows dialog to ask for credentials, and stores credentials.
-     * 
+     *
      * @return true when entered, false on cancel.
      */
     private Credentials askCredentials(URIish uri, Credentials credentials) {

@@ -47,7 +47,7 @@ import java.util.List;
  * See {@link StarDict} for an example of the recommended deferred-loading
  * implementation, and {@link LingvoDSL} for an example of an simpler, up-front
  * loading implementation.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
@@ -55,10 +55,10 @@ public interface IDictionary {
 
     /**
      * Read article's text.
-     * 
+     *
      * @param word
      *            The word to look up in the dictionary
-     * 
+     *
      * @return List of entries. May be empty, but cannot be null.
      */
     List<DictionaryEntry> readArticles(String word) throws Exception;
@@ -68,10 +68,10 @@ public interface IDictionary {
      * will return articles for "term", "terminology", "termite", etc. The
      * default implementation simply calls {@link #readArticles(String)} for
      * backwards compatibility.
-     * 
+     *
      * @param word
      *            The word to look up in the dictionary
-     * 
+     *
      * @return List of entries. May be empty, but cannot be null.
      */
     default List<DictionaryEntry> readArticlesPredictive(String word) throws Exception {

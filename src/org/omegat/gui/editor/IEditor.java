@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008-2010 Alex Buloichik
@@ -39,9 +39,9 @@ import org.omegat.gui.editor.mark.Mark;
 
 /**
  * Interface for access to editor functionality.
- * 
+ *
  * Almost all methods must be called from UI thread.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Guido Leenders
@@ -105,17 +105,17 @@ public interface IEditor {
      * Can be called from any thread.
      */
     String getCurrentTargetFile();
-    
+
     /**
      * Get current active entry.
-     * 
+     *
      * Can be called from any thread.
      */
     SourceTextEntry getCurrentEntry();
 
     /**
      * Get current active entry number.
-     * 
+     *
      * Can be called from any thread.
      */
     int getCurrentEntryNumber();
@@ -131,7 +131,7 @@ public interface IEditor {
 
     /**
      * Commits the translation and deactivate entry. Translation will be saved.
-     * 
+     *
      * Must be called only from UI thread.
      */
     void commitAndDeactivate();
@@ -139,62 +139,62 @@ public interface IEditor {
     /**
      * Commits the translation and leave entry activated. Translation will be
      * saved.
-     * 
+     *
      * Must be called only from UI thread.
      */
     void commitAndLeave();
 
     /**
      * Move to next entry.
-     * 
+     *
      * Must be called only from UI thread.
      */
     void nextEntry();
 
     /**
      * Move to previous entry.
-     * 
+     *
      * Must be called only from UI thread.
      */
     void prevEntry();
 
     /**
      * Move to next entry with a note.
-     * 
+     *
      * Must be called only from UI thread.
      */
     void nextEntryWithNote();
 
     /**
      * Move to previous entry with a note.
-     * 
+     *
      * Must be called only from UI thread.
      */
     void prevEntryWithNote();
 
     /**
      * Move to next untranslated entry.
-     * 
+     *
      * Must be called only from UI thread.
      */
     void nextUntranslatedEntry();
 
     /**
      * Move to next translated entry.
-     * 
+     *
      * Must be called only from UI thread.
      */
     void nextTranslatedEntry();
-    
+
     /**
      * Move to the first non-unique entry.
      * Must be called from UI thread.
      */
     void nextUniqueEntry();
-    
+
     /**
      * Goto first entry in specified file.
-     * 
+     *
      * @param fileIndex
      *            file index in project
      * @throws IndexOutOfBoundsException
@@ -206,10 +206,10 @@ public interface IEditor {
      * Goto entry with specified number. Convenience method for
      * {@link #gotoEntry(int, CaretPosition)} where the caret position will be
      * the start of the entry.
-     * 
+     *
      * @param entryNum
      *            entry number, starts from 1
-     * 
+     *
      *            Must be called only from UI thread.
      */
     void gotoEntry(int entryNum);
@@ -217,50 +217,50 @@ public interface IEditor {
     /**
      * Goto entry with specified number, and restore caret to specified
      * position.
-     * 
+     *
      * @param entryNum
      *            entry number, starts from 1
-     * 
+     *
      *            Must be called only from UI thread.
      */
     void gotoEntry(int entryNum, CaretPosition pos);
 
     /**
      * Goto entry based on a string and entry key.
-     * 
+     *
      * @param srcString
      *            entry source string
      * @param key
-     *            entry key (can be null)           
-     * 
+     *            entry key (can be null)
+     *
      *            Must be called only from UI thread.
      */
     void gotoEntry(String srcString, EntryKey key);
 
     /**
      * Goto entry with specified number while avoiding clobbering the tag fixes.
-     * 
+     *
      * @param fixedEntry
      *            entry number, starts from 1
      * @param fixedSource
      *            The source of the entry that was fixed
-     * 
+     *
      *            Must be called only from UI thread.
      */
     void gotoEntryAfterFix(int fixedEntry, String fixedSource);
 
     /**
      * Refresh the current editor view while avoiding clobbering any tag fixes.
-     * 
+     *
      * @param fixedEntries
      *            A list of all entries that were altered
-     * 
+     *
      *            Must be called only from UI thread.
      */
     void refreshViewAfterFix(List<Integer> fixedEntries);
 
     void refreshView(boolean doCommit);
-    
+
     /**
      * Set current focus to editor.
      */
@@ -269,17 +269,17 @@ public interface IEditor {
     /**
      * Change case of the selected text or if none is selected, of the current
      * word.
-     * 
+     *
      * @param newCase
      *            : lower, title, upper or cycle
-     * 
+     *
      *            Must be called only from UI thread.
      */
     void changeCase(CHANGE_CASE_TO newCase);
 
     /**
      * Replaces the entire edit area with a given text.
-     * 
+     *
      * Must be called only from UI thread.
      */
     void replaceEditText(String text);
@@ -287,14 +287,14 @@ public interface IEditor {
     /**
      * Inserts text at the cursor position and mark as to be changed
      * by the translator, i.e, background of segment should be marked
-     * 
+     *
      * Must be called only from UI thread.
      */
     void replaceEditTextAndMark(String text);
 
     /**
      * Inserts text at the cursor position.
-     * 
+     *
      * Must be called only from UI thread.
      */
     void insertText(String text);
@@ -302,7 +302,7 @@ public interface IEditor {
     /**
      * Inserts text at the cursor position and mark as to be changed
      * by the translator, i.e, background of segment should be marked
-     * 
+     *
      * Must be called only from UI thread.
      * @param text The text to insert
      */
@@ -310,65 +310,65 @@ public interface IEditor {
 
     /**
      * Inserts tag at the cursor position, probably with adding bidi control chars.
-     * 
+     *
      * Must be called only from UI thread.
      */
     void insertTag(String tag);
 
     /**
      * Go to next segment from history.
-     * 
+     *
      * Must be called only from UI thread.
      */
     void gotoHistoryForward();
 
     /**
      * Go to previous segment from history.
-     * 
+     *
      * Must be called only from UI thread.
      */
     void gotoHistoryBack();
 
     /**
      * Get settings instance.
-     * 
+     *
      * @return interface for read and change editor settings
-     * 
+     *
      *         Can be called from any thread.
      */
     IEditorSettings getSettings();
 
     /**
      * Undo editing.
-     * 
+     *
      * Must be called only from UI thread.
      */
     void undo();
 
     /**
      * Redo editing.
-     * 
+     *
      * Must be called only from UI thread.
      */
     void redo();
 
     /**
      * Get currently selected text.
-     * 
+     *
      * @return selected text
-     * 
+     *
      *         Must be called only from UI thread.
      */
     String getSelectedText();
-    
+
     /**
-     * Set default/alternate translation for current entry. 
+     * Set default/alternate translation for current entry.
      */
     void setAlternateTranslationForCurrentEntry(boolean alternate);
 
     /**
      * All plugins can call this method for mark something in active entry.
-     * 
+     *
      * @param requiredActiveEntry
      *            entry which should be active. If user moved to other entry,
      *            then marks will be skipped
@@ -381,7 +381,7 @@ public interface IEditor {
 
     /**
      * Register constructor of popup menu.
-     * 
+     *
      * @param priority
      *            priority of process order
      * @param constructor
@@ -401,7 +401,7 @@ public interface IEditor {
 
     /**
      * Sets a filter to this editor. The filter causes only the selected entries to be shown in the editor.
-     * 
+     *
      * @param filter
      *            Filter instance
      */

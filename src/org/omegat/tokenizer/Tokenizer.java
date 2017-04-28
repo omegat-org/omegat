@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Aaron Madlon-Kay
@@ -30,7 +30,7 @@ import java.lang.annotation.RetentionPolicy;
 /**
  * Annotation to indicate the languages for which
  * a tokenizer is intended for use.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 @Retention(RetentionPolicy.RUNTIME)
@@ -49,7 +49,7 @@ public @interface Tokenizer {
      */
     String[] languages();
 
-    /** 
+    /**
      * When multiple tokenizers support the same language,
      * this indicates the one that should be preferred above the others.
      */

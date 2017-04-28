@@ -27,20 +27,20 @@ package org.omegat.gui.notes;
 
 /**
  * Interface for access to notes pane.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface INotes {
     /**
      * Get note's text, which may be edited.
-     * 
+     *
      * @return new note's text
      */
     String getNoteText();
 
     /**
      * Set note's text for current entry.
-     * 
+     *
      * @param note
      *            note's text, or null if note doesn't exist
      */

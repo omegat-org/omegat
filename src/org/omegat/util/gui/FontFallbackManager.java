@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
@@ -51,13 +51,13 @@ public class FontFallbackManager {
      */
     private static final Set<String> FONT_BLACKLIST = Collections.singleton("Apple Color Emoji");
     private static final Font FONT_UNAVAILABLE = new Font("", 0, 0);
-    
+
     private static final Logger LOGGER = Logger.getLogger(FontFallbackManager.class.getName());
-    
+
     private static final Font[] recentFonts = new Font[8];
     private static int lastFontIndex = 0;
     private static final Map<Integer, Font> cache = new ConcurrentHashMap<>();
-    
+
     public static Font getCapableFont(int cp) {
         // Skip variation selectors
         if (cp >= '\uFE00' && cp <= '\uFE0F') {
@@ -73,7 +73,7 @@ public class FontFallbackManager {
             return getCapableFontInternal(cp);
         }
     }
-    
+
     private static Font getCapableFontInternal(int cp) {
         // Iterate backwards through recent fonts.
         // Presumably, most fallback chars in a given document will be the same
@@ -114,7 +114,7 @@ public class FontFallbackManager {
                         System.currentTimeMillis() - start));
         return font.orElse(null);
     }
-    
+
     private static void addRecentFont(Font font) {
         lastFontIndex = (lastFontIndex + 1) % recentFonts.length;
         recentFonts[lastFontIndex] = font;

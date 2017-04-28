@@ -42,7 +42,7 @@ import org.omegat.util.gui.Styles;
 
 /**
  * Marker for all parts in segments that have to be removed.
- * 
+ *
  * @author Martin Fleurke
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay

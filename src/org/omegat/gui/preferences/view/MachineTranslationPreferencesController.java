@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -67,11 +67,11 @@ public class MachineTranslationPreferencesController extends BasePreferencesCont
     public String toString() {
         return OStrings.getString("PREFS_TITLE_MACHINE_TRANSLATION");
     }
-    
+
     enum ProviderColumn {
         NAME(0, OStrings.getString("PREFS_MT_HEADER_PROVIDER"), String.class),
         CHECKBOX(1, OStrings.getString("PREFS_MT_HEADER_ENABLED"), Boolean.class);
-        
+
         private final int index;
         private final String label;
         private final Class<?> clazz;
@@ -123,7 +123,7 @@ public class MachineTranslationPreferencesController extends BasePreferencesCont
         int row = panel.mtProviderTable.getSelectedRow();
         return getProviderAtRow(row);
     }
-    
+
     Optional<IMachineTranslation> getProviderAtRow(int row) {
         try {
             ProvidersTableModel model = (ProvidersTableModel) panel.mtProviderTable.getModel();

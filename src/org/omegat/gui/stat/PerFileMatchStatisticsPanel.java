@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
@@ -49,7 +49,7 @@ public class PerFileMatchStatisticsPanel extends BaseMatchStatisticsPanel {
 
     private final JPanel tablesPanel;
     private final JScrollPane scrollPane;
-    
+
     public PerFileMatchStatisticsPanel(StatisticsWindow window) {
         super(window);
         setLayout(new BorderLayout());
@@ -60,7 +60,7 @@ public class PerFileMatchStatisticsPanel extends BaseMatchStatisticsPanel {
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         add(scrollPane);
     }
-    
+
     @Override
     public void appendTable(final String title, final String[] headers, final String[][] data) {
         if (headers == null || headers.length == 0) {
@@ -78,7 +78,7 @@ public class PerFileMatchStatisticsPanel extends BaseMatchStatisticsPanel {
             }
         });
     }
-    
+
     private final transient MouseWheelListener mouseWheelListener = new MouseAdapter() {
         @Override
         public void mouseWheelMoved(MouseWheelEvent e) {

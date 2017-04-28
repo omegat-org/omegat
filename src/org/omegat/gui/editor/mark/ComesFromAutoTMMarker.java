@@ -37,7 +37,7 @@ import org.omegat.util.gui.Styles;
 
 /**
  * Marker for marks entries from TMX that come automatically from tm/auto/ folder.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ComesFromAutoTMMarker implements IMarker {

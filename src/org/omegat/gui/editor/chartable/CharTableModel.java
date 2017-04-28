@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
@@ -38,17 +38,17 @@ import javax.swing.table.AbstractTableModel;
 @SuppressWarnings("serial")
 public class CharTableModel extends AbstractTableModel {
     Font font;
-    
-    int columnCount = 16; 
-    
+
+    int columnCount = 16;
+
     int glyphCount = 65535-32;
-    
+
     StringBuilder data = null;
-    
+
     public CharTableModel(String data) {
         setData(data);
     }
-    
+
     /**
      * set the data to a selected string
      * @param data the new string
@@ -63,7 +63,7 @@ public class CharTableModel extends AbstractTableModel {
             // Both same non-null value
             return false;
         }
-        
+
         if (data == null) {
             glyphCount = 0xFFF - 32;
             this.data = null;
@@ -74,11 +74,11 @@ public class CharTableModel extends AbstractTableModel {
         fireTableDataChanged();
         return true;
     }
-    
+
     public String getData() {
         return data.toString();
     }
-    
+
     /**
      * leave only unique characters in the data string.
      */
@@ -86,7 +86,7 @@ public class CharTableModel extends AbstractTableModel {
         if (data == null) {
             return;
         }
-        
+
         StringBuilder temp = new StringBuilder();
         for (int i = 0; i < data.length(); i++) {
             if (temp.indexOf(data.substring(i,i+1)) == -1) {
@@ -97,7 +97,7 @@ public class CharTableModel extends AbstractTableModel {
         glyphCount = data.length();
         fireTableDataChanged();
     }
-    
+
     /**
      * Append a new character to the data.
      * @param c the character
@@ -116,7 +116,7 @@ public class CharTableModel extends AbstractTableModel {
         glyphCount++;
         fireTableDataChanged();
     }
-    
+
     /**
      * Remove the selected characters from the model.
      * @param row1 from row
@@ -128,7 +128,7 @@ public class CharTableModel extends AbstractTableModel {
         if (data.length() == 0) {
             return;
         }
-        
+
         int pos1 = row1 * getColumnCount() + col1;
         pos1 = pos1 >= data.length() ? data.length() - 1 : pos1;
         int pos2 = row2 * getColumnCount() + col2;
@@ -138,7 +138,7 @@ public class CharTableModel extends AbstractTableModel {
         glyphCount = data.length();
         fireTableDataChanged();
     }
-    
+
     @Override
     public int getRowCount() {
         return (glyphCount / columnCount) + ((glyphCount % columnCount > 0) ? 1 : 0);
@@ -155,7 +155,7 @@ public class CharTableModel extends AbstractTableModel {
         if (value < glyphCount)
             if (data!=null)
                 return data.charAt(value);
-            else 
+            else
                 return (char)(value + 32);
         else
             return null;
@@ -165,7 +165,7 @@ public class CharTableModel extends AbstractTableModel {
     public String getColumnName(int column) {
         return "";
     }
-    
+
     /**
      * Prevent the use of invalid points in the table (beyond data string length).
      * @param p the point in question

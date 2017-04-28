@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -49,7 +49,7 @@ import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Controller for a simple text splitting dialog.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class SplittingPanelController {
@@ -60,7 +60,7 @@ public class SplittingPanelController {
 
     /**
      * Create the controller with the text to be split and an optional hint to the user.
-     * 
+     *
      * @param text
      *            The text to be split
      * @param reference
@@ -77,7 +77,7 @@ public class SplittingPanelController {
      * If the user cancels, the result array will contain as its sole member the original string provided to
      * the constructor. Otherwise the array will contain the (trimmed) results of splitting the original
      * string.
-     * 
+     *
      * @param parent
      *            The parent window of the dialog
      * @return The result array
@@ -112,7 +112,7 @@ public class SplittingPanelController {
                 doCancel(dialog);
             }
         });
-        
+
         panel.okButton.setEnabled(false);
 
         panel.editorPane.addCaretListener(new CaretListener() {
@@ -121,7 +121,7 @@ public class SplittingPanelController {
                 panel.okButton.setEnabled(e.getDot() == e.getMark() && e.getDot() > 0 && e.getDot() < text.length());
             }
         });
-        
+
         panel.editorPane.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {

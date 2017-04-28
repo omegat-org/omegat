@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -40,7 +40,7 @@ import net.loomchild.maligna.coretypes.Alignment;
 /**
  * A container class used to store data for alignment. "Bead" is used in NLP literature to refer to a grouping
  * of source and target sentences that are held to correlate (are aligned together).
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 class MutableBead {
@@ -92,7 +92,7 @@ class MutableBead {
 
     /**
      * Get whether or not the bead contains the same number of source and target lines.
-     * 
+     *
      * @return
      */
     public boolean isBalanced() {
@@ -101,7 +101,7 @@ class MutableBead {
 
     /**
      * Get whether or not the bead is entirely empty (has 0 source lines and 0 target lines).
-     * 
+     *
      * @return
      */
     public boolean isEmpty() {
@@ -114,7 +114,7 @@ class MutableBead {
      * <li>key = source text
      * <li>value = target text
      * </ol>
-     * 
+     *
      * @param beads
      *            List of beads to convert
      * @return List of squashed pairs
@@ -132,7 +132,7 @@ class MutableBead {
      * Get the average score of the list of beads. In mALIGNa the "score" is <code>-ln(probability)</code> of
      * the alignment, so lower scores are better. We use {@link Double#MAX_VALUE} as a sentinel for failure to
      * calculate (empty list, etc.).
-     * 
+     *
      * @param beads
      * @return Average score, or {@link Double#MAX_VALUE} if incalculable
      */

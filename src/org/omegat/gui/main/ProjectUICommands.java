@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008-2016 Alex Buloichik
@@ -79,7 +79,7 @@ import gen.core.project.RepositoryMapping;
 
 /**
  * Handler for project UI commands, like open, save, compile, etc.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
  * @author Thomas Cordonnier
@@ -142,9 +142,9 @@ public class ProjectUICommands {
                         Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     }
                 }
-                
+
                 RecentProjects.add(dir.getAbsolutePath());
-                
+
                 mainWindow.setCursor(oldCursor);
                 return null;
             }
@@ -372,16 +372,16 @@ public class ProjectUICommands {
     /**
      * Open project. Does nothing if there is already a project open.
      * Convenience method for {@link #projectOpen(File, boolean)}.
-     * 
+     *
      * @param projectDirectory
      */
     public static void projectOpen(File projectDirectory) {
         projectOpen(projectDirectory, false);
     }
-    
+
     /**
      * Open project. Does nothing if a project is already open and closeCurrent is false.
-     * 
+     *
      * @param projectDirectory
      *            project directory or null if user must choose it
      * @param closeCurrent
@@ -491,7 +491,7 @@ public class ProjectUICommands {
                 mainWindow.setCursor(oldCursor);
                 return null;
             }
-            
+
             protected void done() {
                 try {
                     get();
@@ -803,7 +803,7 @@ public class ProjectUICommands {
      * Copy the specified files to the specified destination. The project will be reloaded afterward.
      * <p>
      * Convenience method for {@link #projectImportFiles(String, File[], boolean)}.
-     * 
+     *
      * @param destination
      *            The path to copy the files to
      * @param toImport
@@ -816,7 +816,7 @@ public class ProjectUICommands {
     /**
      * Copy the specified files to the specified destination, then reload if indicated. Note that a modal
      * dialog will be shown if any of the specified files would be overwritten.
-     * 
+     *
      * @param destination
      *            The path to copy the files to
      * @param toImport
@@ -883,7 +883,7 @@ public class ProjectUICommands {
         chooser.setMultiSelectionEnabled(true);
         chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         chooser.setDialogTitle(OStrings.getString("TF_FILE_IMPORT_TITLE"));
-    
+
         int result = chooser.showOpenDialog(Core.getMainWindow().getApplicationFrame());
         if (result == OmegaTFileChooser.APPROVE_OPTION) {
             File[] selFiles = chooser.getSelectedFiles();

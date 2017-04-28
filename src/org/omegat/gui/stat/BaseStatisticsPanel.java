@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
@@ -48,11 +48,11 @@ import org.omegat.util.gui.TableColumnSizer;
 public abstract class BaseStatisticsPanel extends JPanel implements IStatsConsumer {
 
     private final StatisticsWindow window;
-    
+
     public BaseStatisticsPanel(StatisticsWindow window) {
         this.window = window;
     }
-    
+
     @Override
     public void showProgress(int percent) {
         window.showProgress(percent);
@@ -62,26 +62,26 @@ public abstract class BaseStatisticsPanel extends JPanel implements IStatsConsum
     public void finishData() {
         window.finishData();
     }
-    
+
     @Override
     public void setTextData(String data) {
         window.setTextData(data);
     }
-    
+
     @Override
     public void setDataFile(String path) {
         File file = new File(path);
         OSXIntegration.setProxyIcon(getRootPane(), file.isFile() ? file : null);
     }
-    
+
     static class StringArrayTableModel extends AbstractTableModel {
-        
+
         private final String[][] data;
 
         public StringArrayTableModel(String[][] data) {
             this.data = data;
         }
-        
+
         @Override
         public int getRowCount() {
             return data == null ? 0 : data.length;
@@ -98,10 +98,10 @@ public abstract class BaseStatisticsPanel extends JPanel implements IStatsConsum
             return data[rowIndex][columnIndex];
         }
     }
-        
+
     protected TitledTablePanel generateTableDisplay(String title, String[] headers, String[][] data) {
         TitledTablePanel panel = new TitledTablePanel();
-        
+
         DataTableStyling.applyColors(panel.table);
         panel.table.setDefaultRenderer(Object.class, DataTableStyling.getNumberCellRenderer());
         Font font = panel.table.getFont();
@@ -109,7 +109,7 @@ public abstract class BaseStatisticsPanel extends JPanel implements IStatsConsum
             font = Core.getMainWindow().getApplicationFont();
         }
         DataTableStyling.applyFont(panel.table, font);
-        
+
         panel.title.setText(title);
         panel.table.setModel(new StringArrayTableModel(data));
         setTableHeaders(panel.table, headers);
@@ -117,9 +117,9 @@ public abstract class BaseStatisticsPanel extends JPanel implements IStatsConsum
                 DataTableStyling.getHeaderTextCellRenderer());
         TableColumnSizer.autoSize(panel.table, 0, false);
         panel.table.setPreferredScrollableViewportSize(panel.table.getPreferredSize());
-        return panel;        
+        return panel;
     }
-    
+
     protected static void setTableHeaders(JTable table, String[] headers) {
         for (int i = 0; i < headers.length; i++) {
             TableColumn col = table.getColumnModel().getColumn(i);

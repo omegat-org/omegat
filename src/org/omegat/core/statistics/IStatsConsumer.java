@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -29,21 +29,21 @@ package org.omegat.core.statistics;
  * An interface for consumers of statistical information.
  * <p>
  * TODO: Separate "setting" and "appending" into different interfaces.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public interface IStatsConsumer {
-    public void appendTextData(String result);
+    void appendTextData(String result);
 
-    public void appendTable(String title, String[] headers, String[][] data);
+    void appendTable(String title, String[] headers, String[][] data);
 
-    public void setTextData(String data);
+    void setTextData(String data);
 
-    public void setTable(String[] headers, String[][] data);
+    void setTable(String[] headers, String[][] data);
 
-    public void setDataFile(String path);
+    void setDataFile(String path);
 
-    public void finishData();
+    void finishData();
 
-    public void showProgress(int percent);
+    void showProgress(int percent);
 }

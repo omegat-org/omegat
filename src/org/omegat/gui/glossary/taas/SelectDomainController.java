@@ -49,7 +49,7 @@ import gen.taas.TaasDomain;
 
 /**
  * Controller for select TaaS domains.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SelectDomainController {
@@ -61,7 +61,7 @@ public class SelectDomainController {
         dialog.labelStatus.setText(OStrings.getString("TAAS_STATUS_DOMAIN_LIST"));
 
         new SwingWorker<List<TaasDomain>, Void>() {
-            
+
             @Override
             protected List<TaasDomain> doInBackground() throws Exception {
                 List<TaasDomain> result = TaaSPlugin.getClient().getDomainsList();

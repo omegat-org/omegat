@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -82,9 +82,9 @@ import org.omegat.util.gui.OSXIntegration;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 
-/**	
+/**
  * The main OmegaT class, used to launch the program.
- * 
+ *
  * @author Keith Godfrey
  * @author Martin Fleurke
  * @author Alex Buloichik
@@ -92,7 +92,10 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Aaron Madlon-Kay
  * @author Kyle Katarn
  */
-public class Main {
+public final class Main {
+
+    private Main() {
+    }
 
     /** Project location for load on startup. */
     protected static File projectLocation = null;
@@ -101,7 +104,7 @@ public class Main {
     protected static String remoteProject = null;
 
     /** Execution command line parameters. */
-    protected static final Map<String, String> params = new TreeMap<String, String>();
+    protected static final Map<String, String> PARAMS = new TreeMap<>();
 
     /** Execution mode. */
     protected static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
@@ -122,37 +125,37 @@ public class Main {
         // https://sourceforge.net/p/omegat/bugs/812/
         System.setProperty("jna.encoding", Charset.defaultCharset().name());
 
-        params.putAll(CLIParameters.parseArgs(args));
+        PARAMS.putAll(CLIParameters.parseArgs(args));
 
-        String projectDir = params.get(CLIParameters.PROJECT_DIR);
+        String projectDir = PARAMS.get(CLIParameters.PROJECT_DIR);
         if (projectDir != null) {
             projectLocation = new File(projectDir);
         }
-        remoteProject = params.get(CLIParameters.REMOTE_PROJECT);
+        remoteProject = PARAMS.get(CLIParameters.REMOTE_PROJECT);
 
-        applyConfigFile(params.get(CLIParameters.CONFIG_FILE));
+        applyConfigFile(PARAMS.get(CLIParameters.CONFIG_FILE));
 
-        runMode = CLIParameters.RUN_MODE.parse(params.get(CLIParameters.MODE));
+        runMode = CLIParameters.RUN_MODE.parse(PARAMS.get(CLIParameters.MODE));
 
-        String resourceBundle = params.get(CLIParameters.RESOURCE_BUNDLE);
+        String resourceBundle = PARAMS.get(CLIParameters.RESOURCE_BUNDLE);
         if (resourceBundle != null) {
             OStrings.loadBundle(resourceBundle);
         }
 
-        String configDir = params.get(CLIParameters.CONFIG_DIR);
+        String configDir = PARAMS.get(CLIParameters.CONFIG_DIR);
         if (configDir != null) {
             RuntimePreferences.setConfigDir(configDir);
         }
 
-        if (params.containsKey(CLIParameters.QUIET)) {
+        if (PARAMS.containsKey(CLIParameters.QUIET)) {
             RuntimePreferences.setQuietMode(true);
         }
 
-        if (params.containsKey(CLIParameters.DISABLE_PROJECT_LOCKING)) {
+        if (PARAMS.containsKey(CLIParameters.DISABLE_PROJECT_LOCKING)) {
             RuntimePreferences.setProjectLockingEnabled(false);
         }
-        
-        if (params.containsKey(CLIParameters.DISABLE_LOCATION_SAVE)) {
+
+        if (PARAMS.containsKey(CLIParameters.DISABLE_LOCATION_SAVE)) {
             RuntimePreferences.setLocationSaveEnabled(false);
         }
 
@@ -167,7 +170,7 @@ public class Main {
         // Do migration and load various settings. The order is important!
         ConvertConfigs.convert();
         Preferences.init();
-        PluginUtils.loadPlugins(params);
+        PluginUtils.loadPlugins(PARAMS);
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
         Preferences.initFilters();
         Preferences.initSegmentation();
@@ -208,7 +211,7 @@ public class Main {
      * Load System properties from a specified .properties file. In order to
      * allow this to reliably change the display language, it must called before
      * any use of {@link Log#log}, thus it logs to {@link System#out}.
-     * 
+     *
      * @param path
      *            to config file
      */
@@ -227,7 +230,7 @@ public class Main {
             for (String key : config.keySet()) {
                 String value = config.getString(key);
                 System.setProperty(key, value);
-                params.put(key, value);
+                PARAMS.put(key, value);
                 System.out.println("Read from config: " + key + "=" + value);
             }
             // Apply language preferences, if present.
@@ -246,7 +249,7 @@ public class Main {
             System.err.println("Error while reading config file: " + path);
         }
     }
-    
+
     /**
      * Execute standard GUI.
      */
@@ -263,17 +266,13 @@ public class Main {
         // (like Gnome Shell) recognize OmegaT
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Class<?> cls = toolkit.getClass();
-        try
-        {
-            if (cls.getName().equals("sun.awt.X11.XToolkit"))
-            {
+        try {
+            if (cls.getName().equals("sun.awt.X11.XToolkit")) {
                 Field field = cls.getDeclaredField("awtAppClassName");
                 field.setAccessible(true);
                 field.set(toolkit, "OmegaT");
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // do nothing
         }
 
@@ -284,7 +283,7 @@ public class Main {
             UIManager.getInstalledLookAndFeels();
 
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            
+
             System.setProperty("swing.aatext", "true");
 
         } catch (Exception e) {
@@ -293,7 +292,7 @@ public class Main {
         }
 
         try {
-            Core.initializeGUI(params);
+            Core.initializeGUI(PARAMS);
         } catch (Throwable ex) {
             Log.log(ex);
             showError(ex);
@@ -332,7 +331,7 @@ public class Main {
         Log.log("");
 
         System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
-        Core.initializeConsole(params);
+        Core.initializeConsole(PARAMS);
 
         RealProject p = selectProjectConsoleMode(true);
 
@@ -340,23 +339,24 @@ public class Main {
 
         System.out.println(OStrings.getString("CONSOLE_TRANSLATING"));
 
-        String sourceMask = params.get(CLIParameters.SOURCE_PATTERN);
-        if (sourceMask != null)
+        String sourceMask = PARAMS.get(CLIParameters.SOURCE_PATTERN);
+        if (sourceMask != null) {
             p.compileProject(sourceMask, false);
-        else
+        } else {
             p.compileProject(".*", false);
+        }
 
-        // Called *after* executing post processing command (unlike the 
+        // Called *after* executing post processing command (unlike the
         // regular PROJECT_CHANGE_TYPE.COMPILE)
         executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
 
         p.closeProject();
         executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE);
         System.out.println(OStrings.getString("CONSOLE_FINISHED"));
-        
+
         return 0;
     }
-    
+
     /**
      * Validates tags according to command line specs:
      * <code>--tag-validation=[abort|warn]</code>
@@ -366,7 +366,7 @@ public class Main {
      * no tag validation is done.
      */
     private static void validateTagsConsoleMode() {
-        TAG_VALIDATION_MODE mode = TAG_VALIDATION_MODE.parse(params.get(CLIParameters.TAG_VALIDATION));
+        TAG_VALIDATION_MODE mode = TAG_VALIDATION_MODE.parse(PARAMS.get(CLIParameters.TAG_VALIDATION));
 
         List<ErrorReport> stes;
 
@@ -402,7 +402,7 @@ public class Main {
         Log.log("");
 
         System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
-        Core.initializeConsole(params);
+        Core.initializeConsole(PARAMS);
 
         RealProject p = selectProjectConsoleMode(true);
 
@@ -410,11 +410,11 @@ public class Main {
 
         System.out.println(OStrings.getString("CONSOLE_CREATE_PSEUDOTMX"));
 
-        ProjectProperties m_config = p.getProjectProperties();
+        ProjectProperties config = p.getProjectProperties();
         List<SourceTextEntry> entries = p.getAllEntries();
-        String pseudoTranslateTMXFilename = params.get(CLIParameters.PSEUDOTRANSLATETMX);
+        String pseudoTranslateTMXFilename = PARAMS.get(CLIParameters.PSEUDOTRANSLATETMX);
         PSEUDO_TRANSLATE_TYPE pseudoTranslateType = PSEUDO_TRANSLATE_TYPE
-                .parse(params.get(CLIParameters.PSEUDOTRANSLATETYPE));
+                .parse(PARAMS.get(CLIParameters.PSEUDOTRANSLATETYPE));
 
         String fname;
         if (!StringUtil.isEmpty(pseudoTranslateTMXFilename)) {
@@ -428,7 +428,7 @@ public class Main {
         }
 
         // prepare tmx
-        Map<String, PrepareTMXEntry> data = new HashMap<String, PrepareTMXEntry>();
+        Map<String, PrepareTMXEntry> data = new HashMap<>();
         for (SourceTextEntry ste : entries) {
             PrepareTMXEntry entry = new PrepareTMXEntry();
             entry.source = ste.getSrcText();
@@ -445,7 +445,7 @@ public class Main {
 
         try {
             // Write OmegaT-project-compatible TMX:
-            TMXWriter.buildTMXFile(fname, false, false, m_config, data);
+            TMXWriter.buildTMXFile(fname, false, false, config, data);
         } catch (IOException e) {
             Log.logErrorRB("CT_ERROR_CREATING_TMX");
             Log.log(e);
@@ -465,14 +465,14 @@ public class Main {
             return 1;
         }
 
-        String dir = params.get(CLIParameters.ALIGNDIR);
+        String dir = PARAMS.get(CLIParameters.ALIGNDIR);
         if (dir == null) {
             System.out.println(OStrings.getString("CONSOLE_TRANSLATED_FILES_LOC_UNDEFINED"));
             return 1;
         }
 
         System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
-        Core.initializeConsole(params);
+        Core.initializeConsole(PARAMS);
         RealProject p = selectProjectConsoleMode(true);
 
         validateTagsConsoleMode();
@@ -480,7 +480,7 @@ public class Main {
         System.out.println(StringUtil.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), dir));
 
         Map<String, TMXEntry> data = p.align(p.getProjectProperties(), new File(dir));
-        Map<String, PrepareTMXEntry> result = new TreeMap<String, PrepareTMXEntry>();
+        Map<String, PrepareTMXEntry> result = new TreeMap<>();
         for (Map.Entry<String, TMXEntry> en : data.entrySet()) {
             result.put(en.getKey(), new PrepareTMXEntry(en.getValue()));
         }
@@ -498,7 +498,7 @@ public class Main {
      * creates the project class and adds it to the Core. Loads the project if
      * specified. An exit occurs on error loading the project. This method is
      * for the different console modes, to prevent code duplication.
-     * 
+     *
      * @param loadProject
      *            load the project or not
      * @return the project.
@@ -530,28 +530,27 @@ public class Main {
         }
         return p;
     }
-    
-    /** Execute script as PROJECT_CHANGE events. We can't use the regular project listener because 
+
+    /** Execute script as PROJECT_CHANGE events. We can't use the regular project listener because
      *  the SwingUtilities.invokeLater method used in CoreEvents doesn't stop the project processing
-     *  in console mode. 
+     *  in console mode.
      */
     private static void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
-        if (params.containsKey(CLIParameters.SCRIPT)) {
-    		File script = new File(params.get("script").toString());
+        if (PARAMS.containsKey(CLIParameters.SCRIPT)) {
+            File script = new File(PARAMS.get("script").toString());
 
             if (script.isFile()) {
-    			HashMap<String, Object> binding = new HashMap<String, Object>();
-    			binding.put("eventType", eventType);
+                HashMap<String, Object> binding = new HashMap<>();
+                binding.put("eventType", eventType);
                 try {
                     String result = ScriptRunner.executeScript(new ScriptItem(script), binding);
                     Log.log(result);
                 } catch (Exception ex) {
                     Log.log(ex);
                 }
-    		}
-    	}
+            }
+        }
     }
-
 
     public static void showError(Throwable ex) {
         String msg;

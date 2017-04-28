@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik, Aaron Madlon-Kay
@@ -44,7 +44,7 @@ import org.omegat.util.Preferences;
 
 /**
  * Static attributes for text.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  * @author Briac Pilpre
@@ -80,8 +80,8 @@ public final class Styles {
         COLOR_WHITESPACE("#808080"),
         COLOR_BIDIMARKERS("#c80000"),
         COLOR_MARK_COMES_FROM_TM("#fa8072"), // Salmon red
-        COLOR_MARK_COMES_FROM_TM_XICE("#af76df"), // Purple 
-        COLOR_MARK_COMES_FROM_TM_X100PC("#ff9408"), // Dark Orange 
+        COLOR_MARK_COMES_FROM_TM_XICE("#af76df"), // Purple
+        COLOR_MARK_COMES_FROM_TM_X100PC("#ff9408"), // Dark Orange
         COLOR_MARK_COMES_FROM_TM_XAUTO("#ffd596"), // Orange
         COLOR_REPLACE("#0000ff"), // Blue
         COLOR_LANGUAGE_TOOLS("#0000ff"),
@@ -131,7 +131,7 @@ public final class Styles {
         public Color getColor() {
             return color;
         }
-        
+
         public Color getDefault() {
             return defaultColor;
         }
@@ -151,19 +151,19 @@ public final class Styles {
                 Preferences.setPreference(name(), DEFAULT_COLOR);
             } else {
                 color = newColor;
-                Preferences.setPreference(name(), toHex());   
+                Preferences.setPreference(name(), toHex());
             }
         }
     }
 
     /**
      * Construct required attributes set.
-     * 
+     *
      * Since we need many attributes combinations, it's not good idea to have
      * variable to each attributes set. There is no sense to store created
      * attributes in the cache, because calculate hash for cache require about
      * 2-3 time more than just create attributes set from scratch.
-     * 
+     *
      * 1000000 attributes creation require about 305 ms - it's enough fast.
      */
     public static AttributeSet createAttributeSet(Color foregroundColor, Color backgroundColor, Boolean bold,
@@ -187,16 +187,16 @@ public final class Styles {
 
     public static AttributeSet createAttributeSet(Color foregroundColor, Color backgroundColor, Boolean bold,
             Boolean italic, Boolean strikethrough, Boolean underline) {
-    	
+
     	MutableAttributeSet r = (MutableAttributeSet) createAttributeSet(foregroundColor, backgroundColor, bold, italic);
-    	
+
     	if (strikethrough != null) {
     		StyleConstants.setStrikeThrough(r, strikethrough);
     	}
     	if (underline != null) {
     		StyleConstants.setUnderline(r, underline);
     	}
-    	
+
     	return r;
     }
 }

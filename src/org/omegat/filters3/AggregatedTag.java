@@ -35,7 +35,7 @@ import java.util.List;
  * "tag soup". Tags aggregation can help alleviate this problem, but can
  * sometimes lead to semantic issues. Aggregation is OK only as a temporary
  * hack, until we improve the OpenXML filter.
- * 
+ *
  * @author Antonio Vilei
  */
 public class AggregatedTag extends Tag {

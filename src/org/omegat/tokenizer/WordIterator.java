@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -33,7 +33,7 @@ import org.omegat.util.PatternConsts;
 /**
  * BreakIterator for word-breaks with OmegaT heuristics, based on an instance of
  * BreakIterator implementing word breaks.
- * 
+ *
  * @see java.text.BreakIterator#getWordInstance
  * @author Maxym Mykhalchuk
  */
@@ -49,7 +49,7 @@ public class WordIterator extends BreakIterator {
     /**
      * Set a new text string to be scanned. The current scan position is reset
      * to first().
-     * 
+     *
      * @param newText
      *            new text to scan.
      */
@@ -62,7 +62,7 @@ public class WordIterator extends BreakIterator {
     /**
      * Return the first boundary. The iterator's current position is set to the
      * first boundary.
-     * 
+     *
      * @return The character index of the first text boundary.
      */
     public int first() {
@@ -72,7 +72,7 @@ public class WordIterator extends BreakIterator {
     /**
      * Return character index of the text boundary that was most recently
      * returned by next(), previous(), first(), or last()
-     * 
+     *
      * @return The boundary most recently returned.
      */
     public int current() {
@@ -86,7 +86,7 @@ public class WordIterator extends BreakIterator {
      * <p>
      * Note: This iterator skips OmegaT-specific tags, and groups
      * [text-]mnemonics-text into a single token.
-     * 
+     *
      * @return The character index of the next text boundary or DONE if all
      *         boundaries have been returned. Equivalent to next(1).
      */
@@ -232,9 +232,9 @@ public class WordIterator extends BreakIterator {
     /**
      * <b>Not yet implemented! Throws a RuntimeException if you try to call
      * it.</b>
-     * 
+     *
      * Return the nth boundary from the current boundary
-     * 
+     *
      * @param n
      *            which boundary to return. A value of 0 does nothing. Negative
      *            values move to previous boundaries and positive values move to
@@ -248,11 +248,11 @@ public class WordIterator extends BreakIterator {
     /**
      * <b>Not yet implemented! Throws a RuntimeException if you try to call
      * it.</b>
-     * 
+     *
      * Return the first boundary following the specified offset. The value
      * returned is always greater than the offset or the value
      * BreakIterator.DONE
-     * 
+     *
      * @param offset
      *            the offset to begin scanning. Valid values are determined by
      *            the CharacterIterator passed to setText(). Invalid values
@@ -266,10 +266,10 @@ public class WordIterator extends BreakIterator {
     /**
      * <b>Not yet implemented! Throws a RuntimeException if you try to call
      * it.</b>
-     * 
+     *
      * Set a new text for scanning. The current scan position is reset to
      * first().
-     * 
+     *
      * @param newText
      *            new text to scan.
      */
@@ -280,9 +280,9 @@ public class WordIterator extends BreakIterator {
     /**
      * <b>Not yet implemented! Throws a RuntimeException if you try to call
      * it.</b>
-     * 
+     *
      * Get the text being scanned
-     * 
+     *
      * @return the text being scanned
      */
     public java.text.CharacterIterator getText() {
@@ -292,9 +292,9 @@ public class WordIterator extends BreakIterator {
     /**
      * <b>Not yet implemented! Throws a RuntimeException if you try to call
      * it.</b>
-     * 
+     *
      * Return the boundary preceding the current boundary.
-     * 
+     *
      * @return The character index of the previous text boundary or DONE if all
      *         boundaries have been returned.
      */
@@ -305,10 +305,10 @@ public class WordIterator extends BreakIterator {
     /**
      * <b>Not yet implemented! Throws a RuntimeException if you try to call
      * it.</b>
-     * 
+     *
      * Return the last boundary. The iterator's current position is set to the
      * last boundary.
-     * 
+     *
      * @return The character index of the last text boundary.
      */
     public int last() {

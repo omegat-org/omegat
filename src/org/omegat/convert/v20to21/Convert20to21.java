@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
@@ -45,13 +45,13 @@ import gen.core.filters.Filters;
 
 /**
  * Convert some configs from v2.0 to v2.1
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class Convert20to21 {
     /**
      * Convert filters config ('filters.conf') into new format.
-     * 
+     *
      * @param fromFile
      *            old config file
      * @param toFile
@@ -112,7 +112,7 @@ public class Convert20to21 {
 
     /**
      * Read old config file and replace package names.
-     * 
+     *
      * @param f
      *            old config file
      * @return old config file with replaces package names
@@ -147,7 +147,7 @@ public class Convert20to21 {
 
     /**
      * Convert TextFilter options from int to string.
-     * 
+     *
      * @param res
      */
     private static void convertTextFilter(Filters res) {
@@ -178,7 +178,7 @@ public class Convert20to21 {
 
     /**
      * Convert HTMLFilter2 options from int to string.
-     * 
+     *
      * @param res
      */
     private static void convertHTMLFilter2(Filters res) {

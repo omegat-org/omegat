@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -30,12 +30,12 @@ import org.omegat.util.Language;
 
 /**
  * A class that renders a language combo box smartly.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Aaron Madlon-Kay
  */
 public class LanguageComboBoxRenderer extends DelegatingComboBoxRenderer<Language, String> {
-    
+
     @Override
     protected String getDisplayText(Language value) {
         return value == null ? null : value + " - " + value.getDisplayName();

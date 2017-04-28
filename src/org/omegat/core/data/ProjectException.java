@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Guido Leenders
@@ -29,7 +29,7 @@ package org.omegat.core.data;
  * ProjectException is a checked exception that may be thrown by validating
  * a project.
  * <p>
- * 
+ *
  * @author Guido Leenders
  */
 @SuppressWarnings("serial")
@@ -37,7 +37,7 @@ public class ProjectException extends Exception {
     /**
      * Constructs an instance of <code>ProjectException</code> with the
      * specified detail message.
-     * 
+     *
      * @param msg
      *            the detail message.
      */
@@ -48,7 +48,7 @@ public class ProjectException extends Exception {
     /**
      * Constructs an instance of <code>ProjectException</code> with the
      * specified detail message and cause.
-     * 
+     *
      * @param msg
      *            the detail message.
      * @param cause

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -28,7 +28,7 @@ package org.omegat.filters2;
 import java.io.Serializable;
 
 /**
- * 
+ *
  * @author Maxym Mykhalchuk
  */
 public class Instance implements Serializable {
@@ -48,10 +48,11 @@ public class Instance implements Serializable {
     private String sourceEncoding;
 
     public String getSourceEncodingHuman() {
-        if (sourceEncoding == null)
+        if (sourceEncoding == null) {
             return AbstractFilter.ENCODING_AUTO_HUMAN;
-        else
+        } else {
             return sourceEncoding;
+        }
     }
 
     public String getSourceEncoding() {
@@ -59,19 +60,21 @@ public class Instance implements Serializable {
     }
 
     public void setSourceEncoding(String sourceEncoding) {
-        if (sourceEncoding == null || sourceEncoding.equals(AbstractFilter.ENCODING_AUTO_HUMAN))
+        if (sourceEncoding == null || sourceEncoding.equals(AbstractFilter.ENCODING_AUTO_HUMAN)) {
             this.sourceEncoding = null;
-        else
+        } else {
             this.sourceEncoding = sourceEncoding;
+        }
     }
 
     private String targetEncoding;
 
     public String getTargetEncodingHuman() {
-        if (targetEncoding == null)
+        if (targetEncoding == null) {
             return AbstractFilter.ENCODING_AUTO_HUMAN;
-        else
+        } else {
             return targetEncoding;
+        }
     }
 
     public String getTargetEncoding() {
@@ -79,10 +82,11 @@ public class Instance implements Serializable {
     }
 
     public void setTargetEncoding(String targetEncoding) {
-        if (targetEncoding == null || targetEncoding.equals(AbstractFilter.ENCODING_AUTO_HUMAN))
+        if (targetEncoding == null || targetEncoding.equals(AbstractFilter.ENCODING_AUTO_HUMAN)) {
             this.targetEncoding = null;
-        else
+        } else {
             this.targetEncoding = targetEncoding;
+        }
     }
 
     private String targetFilenamePattern;

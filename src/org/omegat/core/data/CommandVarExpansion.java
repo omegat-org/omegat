@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Aaron Madlon-Kay, Yu Tang
@@ -38,14 +38,14 @@ import org.omegat.util.VarExpansion;
 /**
  * Expand variables representing project properties.
  * Intended for use in preparing external commands for execution.
- * 
+ *
  * @author Aaron Madlon-Kay
  * @author Yu Tang
  */
 public class CommandVarExpansion extends VarExpansion<ProjectProperties> {
 
     // ------------------------------ definitions -------------------
-    
+
     public static final String PROJECT_NAME = "${projectName}";
     public static final String PROJECT_ROOT = "${projectRoot}";
     public static final String SOURCE_ROOT = "${sourceRoot}";
@@ -58,9 +58,9 @@ public class CommandVarExpansion extends VarExpansion<ProjectProperties> {
     public static final String TM_OTHER_LANG_ROOT = "${tmOtherLangRoot}";
     public static final String SOURCE_LANGUAGE = "${sourceLang}";
     public static final String TARGET_LANGUAGE = "${targetLang}";
-    
+
     private static final String[] COMMAND_VARIABLES;
-    
+
     public static List<String> getCommandVariables() {
         return Collections.unmodifiableList(Arrays.asList(COMMAND_VARIABLES));
     }
@@ -68,7 +68,7 @@ public class CommandVarExpansion extends VarExpansion<ProjectProperties> {
     public CommandVarExpansion(String template) {
         super(template);
     }
-    
+
     @Override
     public String expandVariables(ProjectProperties props) {
         String localTemplate = this.template;
@@ -87,20 +87,20 @@ public class CommandVarExpansion extends VarExpansion<ProjectProperties> {
         for (Entry<String, String> e : System.getenv().entrySet()) {
             localTemplate = localTemplate.replace(fixEnvarName(e.getKey()), e.getValue());
         }
-        
+
         String currentFile = Core.getEditor().getCurrentFile();
         if (!StringUtil.isEmpty(currentFile)) {
             String sourceRoot = props.getSourceRoot();
             localTemplate = expandFileName(localTemplate, sourceRoot + currentFile, sourceRoot);
         }
-        
+
         return localTemplate;
     }
-    
+
     private static String fixEnvarName(String varname) {
         return String.format("${%s}", varname);
     }
-    
+
     static {
         ArrayList<String> vars = new ArrayList<String>();
         vars.add(PROJECT_NAME);
@@ -123,7 +123,7 @@ public class CommandVarExpansion extends VarExpansion<ProjectProperties> {
         for (Entry<String, String> e : System.getenv().entrySet()) {
             vars.add(fixEnvarName(e.getKey()));
         }
-        
+
         COMMAND_VARIABLES = vars.toArray(new String[vars.size()]);
     }
 }

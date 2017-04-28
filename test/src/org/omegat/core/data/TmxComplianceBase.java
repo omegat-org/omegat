@@ -59,7 +59,7 @@ import org.omegat.util.TestPreferencesInitializer;
 
 /**
  * Base methods for TMX compliance tests.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public abstract class TmxComplianceBase {

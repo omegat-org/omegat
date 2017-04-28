@@ -34,7 +34,7 @@ import org.omegat.util.Preferences;
 /**
  * Underlines all the terms in the SourceTextEntry that has matches in the
  * Glossary.
- * 
+ *
  * @author W. Fourie
  * @author Alex Buloichik
  * @author Didier Briel
@@ -69,7 +69,7 @@ public class TransTips {
     /**
      * Search for a word and returns the offset of the first occurrence.
      * Highlights are added for all occurrences found.
-     * 
+     *
      * @param glossaryEntry
      *            To be searched
      * @param start
@@ -96,7 +96,6 @@ public class TransTips {
             word = word.toLowerCase();
         } // Otherwise, if the glossary word is in full uppercase,
           // we only apply transtips to source words that are in full uppercase too
-
 
         int lastIndex = 0;
         int wordSize = word.length();
@@ -126,7 +125,7 @@ public class TransTips {
 
     /**
      * Determines if the word is surrounded by whitespace characters.
-     * 
+     *
      * @param sourceText
      * @param testIndex
      * @param glosSrc

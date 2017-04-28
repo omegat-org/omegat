@@ -1,9 +1,9 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, 
+ Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk,
                             Sandra Jean Chua, and Henry Pijffers
                2007 Didier Briel
                2009 Alex Buloichik
@@ -47,7 +47,7 @@ import org.omegat.util.StaticUtils;
 
 /**
  * A utility class for accessing bundled local or online documentation.
- * 
+ *
  * @author Keith Godfrey
  * @author Sandra Jean Chua - sachachua at users.sourceforge.net
  * @author Maxym Mykhalchuk
@@ -64,9 +64,18 @@ public class Help {
             ? "http://omegat.sourceforge.net/manual-latest/"
             : "http://omegat.sourceforge.net/manual-standard/";
 
+    public static final String ONLINE_JAVADOC_URL = OStrings.IS_BETA
+            ? "https://omegat.ci.cloudbees.com/job/omegat-javadoc/javadoc/"
+            : "https://omegat.ci.cloudbees.com/job/omegat-stable-javadoc/javadoc/";
+
+    public static void showJavadoc() throws IOException {
+        URI uri = URI.create(ONLINE_JAVADOC_URL);
+        Desktop.getDesktop().browse(uri);
+    }
+
     /**
      * Shows help in the system browser.
-     * 
+     *
      * @throws IOException
      */
     public static void showHelp() throws IOException {
@@ -110,7 +119,7 @@ public class Help {
 
     /**
      * Detects the documentation language to use.
-     * 
+     *
      * If the latest manual is not available in the system locale language, it
      * returns null, i.e. show a language selection screen.
      */

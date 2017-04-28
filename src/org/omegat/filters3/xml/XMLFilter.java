@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
@@ -56,7 +56,7 @@ import org.xml.sax.SAXException;
 /**
  * Abstract basis filter for XML format filters: OpenDocument, DocBook etc. Ideally should allow creation of a
  * new XML dialect filter by simply specifying translatable tags and attributes.
- * 
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Alex Buloichik
@@ -93,13 +93,13 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
 
     /**
      * Creates a special XML-encoding-aware reader of an input file.
-     * 
+     *
      * @param inFile
      *            The source file.
      * @param outEncoding
      *            Encoding of the source file, if the filter supports it. Otherwise null.
      * @return The reader of the source file.
-     * 
+     *
      * @throws UnsupportedEncodingException
      *             Thrown if JVM doesn't support the specified inEncoding.
      * @throws IOException
@@ -117,13 +117,13 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     /**
      * Creates a writer of the translated file. Accepts <code>null</code> output file -- returns a writer to
      * <code>/dev/null</code> in this case ;-)
-     * 
+     *
      * @param outFile
      *            The target file.
      * @param outEncoding
      *            Encoding of the target file, if the filter supports it. Otherwise null.
      * @return The writer for the target file.
-     * 
+     *
      * @throws UnsupportedEncodingException
      *             Thrown if JVM doesn't support the specified outEncoding
      * @throws IOException
@@ -132,20 +132,21 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     @Override
     public BufferedWriter createWriter(File outFile, String outEncoding) throws UnsupportedEncodingException,
             IOException {
-        if (outEncoding == null)
+        if (outEncoding == null) {
             outEncoding = this.encoding;
-
-        if (outFile == null)
+        }
+        if (outFile == null) {
             return new BufferedWriter(new StringWriter());
-        else
+        } else {
             return new BufferedWriter(new XMLWriter(outFile, outEncoding, eol));
+        }
     }
 
     /**
      * Target language of the project
      */
     private Language targetLanguage;
-    
+
     /**
      * @return The target language of the project
      */
@@ -183,7 +184,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     /**
      * Whether source encoding can be varied by the user. If XML file has no encoding declaration, UTF-8 will
      * be used, hence returns <code>false</code> by default.
-     * 
+     *
      * @return <code>false</code>
      */
     @Override
@@ -193,7 +194,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
 
     /**
      * Target encoding can be varied by the user.
-     * 
+     *
      * @return <code>true</code>
      */
     @Override
@@ -215,7 +216,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
         } else { // We're not supposed to be there,  (parsing called from inside isFileSupported, for instance)
             return entry; // so what we return is not important
         }
-            
+
     }
 
     /**
@@ -231,22 +232,25 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
 
         try {
             char[] cbuf = new char[OConsts.READ_AHEAD_LIMIT];
-            int cbuf_len = reader.read(cbuf);
-            String buf = new String(cbuf, 0, cbuf_len);
+            int cbufLen = reader.read(cbuf);
+            String buf = new String(cbuf, 0, cbufLen);
             Matcher matcher = PatternConsts.XML_DOCTYPE.matcher(buf);
             if (matcher.find()) {
                 Pattern doctype = dialect.getConstraints().get(XMLDialect.CONSTRAINT_DOCTYPE);
                 if (doctype != null
-                        && (matcher.group(1) == null || !doctype.matcher(matcher.group(1)).matches()))
+                        && (matcher.group(1) == null || !doctype.matcher(matcher.group(1)).matches())) {
                     return false;
+                }
                 Pattern publicc = dialect.getConstraints().get(XMLDialect.CONSTRAINT_PUBLIC_DOCTYPE);
                 if (publicc != null
-                        && (matcher.group(3) == null || !publicc.matcher(matcher.group(3)).matches()))
+                        && (matcher.group(3) == null || !publicc.matcher(matcher.group(3)).matches())) {
                     return false;
+                }
                 Pattern system = dialect.getConstraints().get(XMLDialect.CONSTRAINT_SYSTEM_DOCTYPE);
                 if (system != null
-                        && (matcher.group(5) == null || !system.matcher(matcher.group(5)).matches()))
+                        && (matcher.group(5) == null || !system.matcher(matcher.group(5)).matches())) {
                     return false;
+                }
             } else if (dialect.getConstraints().containsKey(XMLDialect.CONSTRAINT_DOCTYPE)
                     || dialect.getConstraints().containsKey(XMLDialect.CONSTRAINT_PUBLIC_DOCTYPE)
                     || dialect.getConstraints().containsKey(XMLDialect.CONSTRAINT_SYSTEM_DOCTYPE)) {
@@ -256,8 +260,9 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
             matcher = PatternConsts.XML_ROOTTAG.matcher(buf);
             if (matcher.find()) {
                 Pattern root = dialect.getConstraints().get(XMLDialect.CONSTRAINT_ROOT);
-                if (root != null && (matcher.group(1) == null || !root.matcher(matcher.group(1)).matches()))
+                if (root != null && (matcher.group(1) == null || !root.matcher(matcher.group(1)).matches())) {
                     return false;
+                }
             } else if (dialect.getConstraints().containsKey(XMLDialect.CONSTRAINT_ROOT)) {
                 return false;
             }
@@ -265,8 +270,9 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
             matcher = PatternConsts.XML_XMLNS.matcher(buf);
             if (matcher.find()) {
                 Pattern xmlns = dialect.getConstraints().get(XMLDialect.CONSTRAINT_XMLNS);
-                if (xmlns != null && (matcher.group(2) == null || !xmlns.matcher(matcher.group(2)).matches()))
+                if (xmlns != null && (matcher.group(2) == null || !xmlns.matcher(matcher.group(2)).matches())) {
                     return false;
+                }
             } else if (dialect.getConstraints().containsKey(XMLDialect.CONSTRAINT_XMLNS)) {
                 return false;
             }
@@ -277,11 +283,11 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
             return false;
         }
     }
-    
+
     @Override
     public void tagStart(String path, Attributes atts) {
     }
-    
+
     @Override
     public void tagEnd(String path) {
     }

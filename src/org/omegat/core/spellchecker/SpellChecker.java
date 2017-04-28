@@ -1,12 +1,12 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 Zoltan Bartko, Alex Buloichik
                2009 Didier Briel
                2015 Aaron Madlon-Kay
-               Home page: http://www.omegat.org/               
+               Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
  This file is part of OmegaT.
@@ -61,7 +61,7 @@ import org.omegat.util.Token;
 
 /**
  * Common spell checker interface for use any spellchecker providers.
- * 
+ *
  * @author Zoltan Bartko (bartkozoltan at bartkozoltan dot com)
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel

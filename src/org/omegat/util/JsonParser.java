@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2017 Aaron Madlon-Kay
@@ -39,7 +39,7 @@ import javax.script.ScriptException;
  * untrusted input.
  * <p>
  * <b>Note:</b> Java.asJSONCompatible is only available in Java 1.8.0_60 or later.
- * 
+ *
  * @see <a href="http://www.oracle.com/technetwork/java/javase/8u60-relnotes-2620227.html">Java 8u60 release
  *      notes</a>
  * @author Aaron Madlon-Kay

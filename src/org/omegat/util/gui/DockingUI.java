@@ -1,9 +1,9 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers, 
+ Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers,
                          Benjamin Siband, and Kim Bruning
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik
@@ -78,10 +78,10 @@ public class DockingUI {
         // Install VLDocking defaults
         DockingUISettings.getInstance().installUI();
         DockableContainerFactory.setFactory(new CustomContainerFactory());
-        
+
         // Enable animated popup when mousing over minimized tab
         AutoHidePolicy.getPolicy().setExpandMode(ExpandMode.EXPAND_ON_ROLLOVER);
-        
+
         // UI strings
         UIManager.put("DockViewTitleBar.minimizeButtonText", OStrings.getString("DOCKING_HINT_MINIMIZE"));
         UIManager.put("DockViewTitleBar.maximizeButtonText", OStrings.getString("DOCKING_HINT_MAXIMIZE"));
@@ -107,7 +107,7 @@ public class DockingUI {
         UIManager.put("DockingDesktop.maximizeActionAccelerator", null);
         UIManager.put("DockingDesktop.dockActionAccelerator", null);
         UIManager.put("DockingDesktop.floatActionAccelerator", null);
-        
+
         // Disused icons
         UIManager.put("DockViewTitleBar.menu.close", getIcon("empty.gif"));
         UIManager.put("DockTabbedPane.close", getIcon("empty.gif"));
@@ -117,20 +117,20 @@ public class DockingUI {
 
         // Classic design overridden by flat design
         //installClassicDesign();
-        
+
         installFlatDesign();
-        
+
         // Panel notification (blinking tabs/headers) settings
         UIManager.put("DockingDesktop.notificationBlinkCount", 2);
         UIManager.put("DockingDesktop.notificationColor", Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
-        
+
         ensureTitlebarReadability();
     }
 
     @SuppressWarnings("unused")
     private static void installClassicDesign() {
         UIManager.put("OmegaTStatusArea.border", new MatteBorder(1, 1, 1, 1, Color.BLACK));
-        
+
         UIManager.put("DockViewTitleBar.hide", getIcon("minimize.gif"));
         UIManager.put("DockViewTitleBar.hide.rollover", getIcon("minimize.rollover.gif"));
         UIManager.put("DockViewTitleBar.hide.pressed", getIcon("minimize.pressed.gif"));
@@ -162,10 +162,10 @@ public class DockingUI {
         UIManager.put("DockTabbedPane.menu.float", getIcon("empty.gif"));
         UIManager.put("DockTabbedPane.menu.closeAll", getIcon("empty.gif"));
         UIManager.put("DockTabbedPane.menu.closeAllOther", getIcon("empty.gif"));
-        
+
         UIManager.put("DragControler.detachCursor", getIcon("undock.gif").getImage());
     }
-    
+
     private static void ensureTitlebarReadability() {
         // to ensure DockViewTitleBar title readability
         Color textColor = UIManager.getColor("InternalFrame.inactiveTitleForeground");
@@ -189,7 +189,7 @@ public class DockingUI {
         UIManager.put("DockingDesktop.notificationBlinkCount", 2);
         UIManager.put("DockingDesktop.notificationColor", Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
     }
-    
+
     private static void installFlatDesign() {
         // Colors
         Color standardBgColor = UIManager.getColor("Panel.background"); // #EEEEEE on Metal & OS X LAF
@@ -198,15 +198,15 @@ public class DockingUI {
         Color borderColor = adjustRGB(standardBgColor, 0x9B - 0xEE); // #EEEEEE -> #9B9B9B; Standard border. Darker than standard background.
         UIManager.put("OmegaTBorder.color", borderColor);
         Color statusAreaColor = adjustRGB(standardBgColor, 0x57 - 0xEE); // #EEEEEE -> #575757; Darkest border
-        
+
         // General highlight & shadow used in a lot of places
         UIManager.put("VLDocking.highlight", activeTitleBgColor);
         UIManager.put("VLDocking.shadow", statusAreaColor);
-        
+
         // Main window main area
         int outside = 5;
         UIManager.put("DockingDesktop.border", new EmptyBorder(outside, outside, outside, outside));
-        
+
         // Docked, visible panels get two borders if we're not careful:
         // 1. Drawn by VLDocking. Surrounds panel content AND header. Set this to empty margin instead.
         int panel = 2;
@@ -218,10 +218,10 @@ public class DockingUI {
 
         // GTK+ LAF has a default border on the viewport. Disable this.
         UIManager.put("OmegaTDockablePanelViewport.border", new EmptyBorder(0, 0, 0, 0));
-        
+
         // Use proportionally sized internal margin for text document-like panels
         UIManager.put("OmegaTDockablePanel.isProportionalMargins", true);
-        
+
         // Tabbed docked, visible panels are surrounded by LAF-specific chrome, but the surrounding
         // colors don't appear to be available through the API. These values are from visual inspection.
         if (Platform.isMacOSX()) {
@@ -231,17 +231,17 @@ public class DockingUI {
         } else {
             UIManager.put("DockView.tabbedDockableBorder", new MatteBorder(5, 5, 5, 5, standardBgColor));
         }
-        
+
         // Windows 8+ is very square.
         int cornerRadius = isFlatWindows() ? 0 : 8;
-        
+
         // Panel title bars
         Color activeTitleText = UIManager.getColor("Label.foreground");
         Color inactiveTitleText = adjustRGB(activeTitleText, 0x80); // #000000 -> #808080; GTK+ has Color.WHITE for Label.disabledForeground
         UIManager.put("DockViewTitleBar.border", new RoundedCornerBorder(cornerRadius, borderColor, RoundedCornerBorder.SIDE_TOP));
         UIManager.put("InternalFrame.activeTitleForeground", activeTitleText); // Windows 7 "Classic" has Color.WHITE for this
         UIManager.put("InternalFrame.activeTitleBackground", activeTitleBgColor);
-        UIManager.put("InternalFrame.inactiveTitleForeground", inactiveTitleText); 
+        UIManager.put("InternalFrame.inactiveTitleForeground", inactiveTitleText);
         UIManager.put("InternalFrame.inactiveTitleBackground", standardBgColor);
         // Disable gradient on pane title bars
         UIManager.put("DockViewTitleBar.disableCustomPaint", true);
@@ -259,15 +259,15 @@ public class DockingUI {
         UIManager.put("OmegaTStatusArea.border", new MatteBorder(1, 1, 1, 1, statusAreaColor));
         // Lowermost section margins
         UIManager.put("OmegaTMainWindowBottomMargin.border", new EmptyBorder(0, 2 * outside, outside, 2 * outside));
-        
+
         UIManager.put("OmegaTEditorFilter.border", new MatteBorder(1, 1, 0, 1, borderColor));
-        
+
         // Undocked panel
         UIManager.put("activeCaption", Color.WHITE);
         UIManager.put("activeCaptionBorder", borderColor);
         UIManager.put("inactiveCaption", standardBgColor);
         UIManager.put("inactiveCaptionBorder", borderColor);
-        
+
         // Icons
         UIManager.put("DockViewTitleBar.maximize", getIcon("appbar.app.tall.inactive.png"));
         UIManager.put("DockViewTitleBar.maximize.rollover", getIcon("appbar.app.tall.png"));
@@ -287,7 +287,7 @@ public class DockingUI {
         UIManager.put("DockViewTitleBar.attach", getIcon("appbar.dock.window.inactive.png"));
         UIManager.put("DockViewTitleBar.attach.rollover", getIcon("appbar.dock.window.png"));
         UIManager.put("DockViewTitleBar.attach.pressed", getIcon("appbar.dock.window.pressed.png"));
-        
+
         UIManager.put("DockViewTitleBar.menu.hide", getIcon("appbar.hide.png"));
         UIManager.put("DockViewTitleBar.menu.maximize", getIcon("appbar.app.tall.png"));
         UIManager.put("DockViewTitleBar.menu.restore", getIcon("appbar.window.restore.png"));
@@ -298,11 +298,11 @@ public class DockingUI {
         UIManager.put("DockTabbedPane.menu.hide", getIcon("appbar.hide.png"));
         UIManager.put("DockTabbedPane.menu.maximize", getIcon("appbar.app.tall.png"));
         UIManager.put("DockTabbedPane.menu.float", getIcon("appbar.fullscreen.png"));
-        
+
         // Windows only accepts a 32x32 cursor image with no semitransparency, so you basically
         // need a special image just for that.
         UIManager.put("DragControler.detachCursor", ResourcesUtil.getBundledImage("appbar.fullscreen.cursor32x32.png"));
-        
+
         // Use more native-looking icons on OS X
         if (Platform.isMacOSX()) {
             UIManager.put("DockViewTitleBar.maximize", getIcon("appbar.fullscreen.corners.inactive.png"));
@@ -314,18 +314,18 @@ public class DockingUI {
             UIManager.put("DockViewTitleBar.hide", getIcon("appbar.minus.inactive.png"));
             UIManager.put("DockViewTitleBar.hide.rollover", getIcon("appbar.minus.png"));
             UIManager.put("DockViewTitleBar.hide.pressed", getIcon("appbar.minus.pressed.png"));
-            
+
             UIManager.put("DockViewTitleBar.menu.hide", getIcon("appbar.minus.png"));
             UIManager.put("DockViewTitleBar.menu.maximize", getIcon("appbar.fullscreen.corners.png"));
             UIManager.put("DockViewTitleBar.menu.restore", getIcon("appbar.restore.corners.png"));
-            
+
             UIManager.put("DockTabbedPane.menu.hide", getIcon("appbar.minus.png"));
             UIManager.put("DockTabbedPane.menu.maximize", getIcon("appbar.fullscreen.corners.png"));
-            
+
             UIManager.put("DragControler.detachCursor", ResourcesUtil.getBundledImage("appbar.fullscreen.png"));
         }
     }
-    
+
     /**
      * Adjust a color by adding some constant to its RGB values, clamping to the
      * range 0-255.
@@ -336,7 +336,7 @@ public class DockingUI {
                 Math.max(0, Math.min(255, color.getBlue() + adjustment)));
         return result;
     }
-    
+
     // Windows Classic LAF detection from http://stackoverflow.com/a/4386821/448068
     private static boolean isWindowsLAF() {
         return UIManager.getLookAndFeel().getID().equals("Windows");
@@ -356,7 +356,7 @@ public class DockingUI {
 
     /**
      * Load icon from classpath.
-     * 
+     *
      * @param iconName
      *            icon file name
      * @return icon instance
@@ -403,7 +403,7 @@ public class DockingUI {
     /**
      * Traverse the given container's parents until either an instance of
      * DockingDesktop is found, or null is found.
-     * 
+     *
      * @param c
      *            The container to search
      * @return Either the parent DockingDesktop, or null

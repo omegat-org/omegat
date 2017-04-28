@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009-2010 Alex Buloichik
@@ -55,7 +55,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * Pane for display machine translations.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
  * @author Jean-Christophe Helary
@@ -103,7 +103,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     public void forceLoad() {
         startSearchThread(currentlyProcessedEntry, true);
     }
-    
+
     @Override
     protected void startSearchThread(SourceTextEntry newEntry) {
         startSearchThread(newEntry, false);
@@ -131,7 +131,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
             setText(getText() + data.result + "\n<" + data.translatorName + ">\n\n");
         }
     }
-    
+
     @Override
     public void clear() {
         super.clear();
@@ -167,7 +167,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
             String result = getTranslation(source, target);
             return result == null ? null : new MachineTranslationInfo(translator.getName(), result);
         }
-        
+
         private String getTranslation(Language source, Language target) throws Exception {
             if (!force) {
                 if (!Preferences.isPreferenceDefault(Preferences.MT_AUTO_FETCH, true)) {

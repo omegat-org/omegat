@@ -60,7 +60,7 @@ public class NewTeamProject extends javax.swing.JDialog {
     public NewTeamProject(java.awt.Frame parent) {
         super(parent, true);
         initComponents();
-        
+
         txtRepositoryOrProjectFileURL.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -89,7 +89,7 @@ public class NewTeamProject extends javax.swing.JDialog {
                 updateDialog();
             }
         });
-        
+
         StaticUIUtils.setEscapeClosable(this);
         getRootPane().setDefaultButton(btnOk);
         setLocationRelativeTo(parent);
@@ -367,7 +367,7 @@ public class NewTeamProject extends javax.swing.JDialog {
         boolean typeDetected = repoType != null;
         btnOk.setEnabled(dirOK && typeDetected);
     }
-    
+
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         if (repoTypeWorker != null) {
             repoTypeWorker.cancel(true);

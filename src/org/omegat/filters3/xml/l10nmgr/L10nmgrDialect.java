@@ -1,11 +1,11 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
            (C) 2010 Didier Briel
- 
+
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -33,7 +33,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
  * This class specifies the L10nmgr XML Dialect.
- * 
+ *
  * @author Didier Briel
  */
 public class L10nmgrDialect extends DefaultXMLDialect {
@@ -43,7 +43,7 @@ public class L10nmgrDialect extends DefaultXMLDialect {
 
         defineConstraint(CONSTRAINT_ROOT, TYPO3L10N);
 
-        defineParagraphTags(new String[] { 
+        defineParagraphTags(new String[] {
             "pageGrp", // Specific L10nmgr tag
             "data",    // Specific L10nmgr tag
             // HML tags

@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -52,13 +52,13 @@ public class HistoryCompleter extends AutoCompleterListView {
 
     public HistoryCompleter() {
         super(OStrings.getString("AC_HISTORY_COMPLETIONS_VIEW"));
-        
+
         CoreEvents.registerProjectChangeListener(eventType -> {
             if (isEnabled() && eventType == PROJECT_CHANGE_TYPE.LOAD) {
                 train();
             }
         });
-        CoreEvents.registerEntryEventListener(new IEntryEventListener() {            
+        CoreEvents.registerEntryEventListener(new IEntryEventListener() {
             @Override
             public void onNewFile(String activeFileName) {
             }
@@ -89,7 +89,7 @@ public class HistoryCompleter extends AutoCompleterListView {
             }
         });
     }
-    
+
     synchronized void train() {
         long start = System.currentTimeMillis();
         wordCompleter.reset();
@@ -98,13 +98,13 @@ public class HistoryCompleter extends AutoCompleterListView {
         long time = System.currentTimeMillis() - start;
         LOGGER.finer(() -> String.format("Time to train History Completer: %d ms", time));
     }
-    
+
     private void trainString(String text) {
         if (text == null) {
             return;
         }
         String[] tokens = getTokenizer().tokenizeWordsToStrings(text, StemmingMode.NONE);
-        
+
         wordCompleter.train(tokens);
     }
 

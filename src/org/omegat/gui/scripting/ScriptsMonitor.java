@@ -49,7 +49,7 @@ import org.omegat.util.DirectoryMonitor;
 public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, DirectoryMonitor.Callback {
 	private static final boolean SCRIPTING_EVENTS = true;
 	private static boolean applicationStartupEventScriptsExecuted = false;
-	
+
     private static final FilenameFilter FILTER;
 
     static {
@@ -97,7 +97,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
      */
 	@Override
 	public void fileChanged(File file) {
-		
+
 	}
 	@Override
 	public void directoryChanged(File file) {
@@ -105,9 +105,9 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
         	// No script directory.
         	return;
         }
-        
+
         // Plain Scripts
-    	// Only display files with an extension supported by the engines 
+    	// Only display files with an extension supported by the engines
     	// currently installed.
         ArrayList<ScriptItem> scriptsList = new ArrayList<ScriptItem>();
 		// Replace the script filename by its description, if available
@@ -122,7 +122,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
             hookApplicationEvent();
             hookEntryEvent();
             hookProjectEvent();
-            hookEditorEvent();        	
+            hookEditorEvent();
         }
     }
 
@@ -169,7 +169,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 		addEventScripts(EventType.PROJECT_CHANGED);
 
 		m_projectEventListener = new IProjectEventListener() {
-			
+
 			@Override
 			public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
 				HashMap<String, Object> binding = new HashMap<String, Object>();
@@ -177,13 +177,12 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 
 				for (ScriptItem si : m_eventsScript.get(EventType.PROJECT_CHANGED)) {
                     m_scriptingWindow.executeScriptFile(si, binding);
-				}				
+				}
 			}
 		};
 		CoreEvents.registerProjectChangeListener(m_projectEventListener);
 	}
 
-	
 	private void hookApplicationEvent() {
 		if (m_applicationEventListener != null) {
 			CoreEvents
@@ -227,7 +226,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 			public void onNewWord(String newWord) {
 				HashMap<String, Object> binding = new HashMap<String, Object>();
 				binding.put("newWord", newWord);
-				
+
 				for (ScriptItem si : m_eventsScript.get(EventType.NEW_WORD)) {
                     m_scriptingWindow.executeScriptFile(si, binding);
 				}
@@ -237,10 +236,9 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 		CoreEvents.registerEditorEventListener(m_editorEventListener);
 	}
 
-	
 	private void addEventScripts(EventType eventType) {
 		String entryDirName = eventType.name().toLowerCase();
-		
+
 		File entryActivatedDir = new File(m_scriptDir, entryDirName);
         if (!entryActivatedDir.isDirectory()) {
             return;
@@ -256,22 +254,21 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
         	}
         }
 	}
-	
-	
+
     private enum EventType {
 		// ApplicationEvent
 		APPLICATION_STARTUP,
 		APPLICATION_SHUTDOWN,
-		
+
 		// EditorEvent
 		NEW_WORD,
-		
+
 		// FontEvent
 		//FONT_CHANGED,
-		
+
 		// ProjectEvent
 		PROJECT_CHANGED,
-		
+
 		// EntryEvent
 		ENTRY_ACTIVATED,
 		NEW_FILE
@@ -286,7 +283,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 	private IProjectEventListener m_projectEventListener;
 	private IApplicationEventListener m_applicationEventListener;
 	private IEditorEventListener m_editorEventListener;
-	
+
 	// Map holding the script fired for the different event listeners.
 	private HashMap<EventType, ArrayList<ScriptItem>> m_eventsScript = new HashMap<EventType, ArrayList<ScriptItem>>();
 }

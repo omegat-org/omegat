@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
@@ -49,7 +49,7 @@ import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Controller for a simple regex editing dialog.
- * 
+ *
  * @author Aaron Madlon-Kay
  */
 public class PatternPanelController {
@@ -59,7 +59,7 @@ public class PatternPanelController {
 
     /**
      * Create the controller with the initial pattern.
-     * 
+     *
      * @param pattern
      *            The pattern to be shown in the editing area
      */
@@ -69,7 +69,7 @@ public class PatternPanelController {
 
     /**
      * Show the dialog. The dialog is modal, so this method will block until complete.
-     * 
+     *
      * @param parent
      *            The parent window of the dialog
      * @return The result of editing

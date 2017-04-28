@@ -352,6 +352,7 @@ public class RealProject implements IProject {
                 remoteRepositoryProvider.switchAllToLatest();
 
                 loadTranslations();
+                Core.getMainWindow().showStatusMessageRB("TEAM_REBASE_AND_COMMIT");
                 rebaseAndCommitProject(true);
 
                 // retrieve other directories

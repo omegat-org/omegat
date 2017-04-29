@@ -40,7 +40,7 @@ import java.util.regex.Matcher;
  * adhere to ISO standard LL-CC.
  * <p>
  * This class tries to follow
- * <a href="http://www.lisa.org/standards/tmx/tmx.html#xml:lang">TMX
+ * <a href="https://www.gala-global.org/tmx-14b#xml:lang">TMX
  * Specification on languages</a>, which is based on
  * <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066</a>, i.e.
  * <ul>

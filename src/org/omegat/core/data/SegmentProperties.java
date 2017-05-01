@@ -42,6 +42,7 @@ public class SegmentProperties {
 
     // Standard keys
     public static final String COMMENT = "comment";
+    public static final String REFERENCE = "reference";
 
     public static boolean isEmpty(String[] props) {
         return props == null || props.length == 0;
@@ -62,5 +63,22 @@ public class SegmentProperties {
         }
         return IntStream.range(0, props.length).filter(i -> i % 2 != 0).mapToObj(i -> props[i])
                 .collect(Collectors.joining("\n"));
+    }
+
+    public static boolean isReferenceEntry(String[] props) {
+        if (isEmpty(props)) {
+            return false;
+        }
+        String value = getProperty(props, REFERENCE);
+        return Boolean.parseBoolean(value);
+    }
+
+    public static String getProperty(String[] props, String key) {
+        for (int i = 0; i < props.length; i++) {
+            if (key.equals(props[i])) {
+                return props[i + 1];
+            }
+        }
+        return null;
     }
 }

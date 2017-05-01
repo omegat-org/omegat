@@ -1087,7 +1087,7 @@ public class RealProject implements IProject {
         for (String filepath : srcPathList) {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_FILE_MX", filepath);
 
-            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys);
+            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys, transMemories);
 
             FileInfo fi = new FileInfo();
             fi.filePath = filepath;
@@ -1635,11 +1635,16 @@ public class RealProject implements IProject {
 
         private final Set<String> existSource;
         private final Set<EntryKey> existKeys;
+        private final Map<String, ExternalTMX> externalTms;
 
-        public LoadFilesCallback(final Set<String> existSource, final Set<EntryKey> existKeys) {
+        private ExternalTMFactory.Builder tmBuilder;
+
+        public LoadFilesCallback(Set<String> existSource, Set<EntryKey> existKeys,
+                Map<String, ExternalTMX> externalTms) {
             super(m_config);
             this.existSource = existSource;
             this.existKeys = existKeys;
+            this.externalTms = externalTms;
         }
 
         public void setCurrentFile(FileInfo fi) {
@@ -1651,7 +1656,12 @@ public class RealProject implements IProject {
         public void fileFinished() {
             super.fileFinished();
 
+            if (tmBuilder != null && externalTms != null) {
+                externalTms.put(entryKeyFilename, tmBuilder.done());
+            }
+
             fileInfo = null;
+            tmBuilder = null;
         }
 
         /**
@@ -1678,11 +1688,19 @@ public class RealProject implements IProject {
             SourceTextEntry srcTextEntry = new SourceTextEntry(ek, allProjectEntries.size() + 1, props,
                     segmentTranslation, protectedParts);
             srcTextEntry.setSourceTranslationFuzzy(segmentTranslationFuzzy);
-            allProjectEntries.add(srcTextEntry);
-            fileInfo.entries.add(srcTextEntry);
 
-            existSource.add(segmentSource);
-            existKeys.add(srcTextEntry.getKey());
+            if (SegmentProperties.isReferenceEntry(props)) {
+                if (tmBuilder == null) {
+                    tmBuilder = new ExternalTMFactory.Builder(new File(entryKeyFilename).getName());
+                }
+                tmBuilder.addEntry(segmentSource, segmentTranslation, id, path, props);
+            } else {
+                allProjectEntries.add(srcTextEntry);
+                fileInfo.entries.add(srcTextEntry);
+
+                existSource.add(segmentSource);
+                existKeys.add(srcTextEntry.getKey());
+            }
         }
     };
 

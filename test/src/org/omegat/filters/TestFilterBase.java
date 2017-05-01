@@ -35,6 +35,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +55,7 @@ import org.junit.rules.TestName;
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 import org.omegat.core.data.EntryKey;
+import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProtectedPart;
@@ -431,8 +433,9 @@ public abstract class TestFilterBase extends TestCore {
 
             Set<String> existSource = new HashSet<String>();
             Set<EntryKey> existKeys = new HashSet<EntryKey>();
+            Map<String, ExternalTMX> transMemories = new HashMap<>();
 
-            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys);
+            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys, transMemories);
 
             FileInfo fi = new FileInfo();
             fi.filePath = file;

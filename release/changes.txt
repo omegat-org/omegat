@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.1 update 1
 ----------------------------------------------------------------------
-  7 Enhancements
+  8 Enhancements
   2 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
@@ -17,6 +17,9 @@
 
   - Create an Open menu in the Script Editor
   https://sourceforge.net/p/omegat/feature-requests/1314/
+
+  - Compute PO fuzzies real match % 
+  https://sourceforge.net/p/omegat/feature-requests/1259/
 
   Other changes:
 

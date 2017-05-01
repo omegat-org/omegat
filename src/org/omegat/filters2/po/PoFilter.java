@@ -9,6 +9,7 @@
                2009 Alex Buloichik
                2011 Didier Briel
                2013-1014 Alex Buloichik, Enrique Estevez
+               2017 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -44,6 +45,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.omegat.core.data.ProtectedPart;
+import org.omegat.core.data.SegmentProperties;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -261,6 +263,7 @@ public class PoFilter extends AbstractFilter {
 
     protected static final Pattern COMMENT_FUZZY = Pattern.compile("#, fuzzy");
     protected static final Pattern COMMENT_FUZZY_OTHER = Pattern.compile("#,.* fuzzy.*");
+    protected static final Pattern COMMENT_FUZZY_MSGID = Pattern.compile("#\\|.* msgid.*\"(.*)\"");
     protected static final Pattern COMMENT_NOWRAP = Pattern.compile("#,.* no-wrap.*");
     protected static final Pattern COMMENT_TRANSLATOR = Pattern.compile("# (.*)");
     protected static final Pattern COMMENT_EXTRACTED = Pattern.compile("#\\. (.*)");
@@ -271,16 +274,17 @@ public class PoFilter extends AbstractFilter {
     protected static final Pattern MSG_OTHER = Pattern.compile("\"(.*)\"");
     protected static final Pattern PLURAL_FORMS = Pattern.compile("Plural-Forms: *nplurals= *([0-9]+) *; *plural",
             Pattern.CASE_INSENSITIVE);
+    protected static final Pattern MSG_FUZZY = Pattern.compile("#\\|\\s\"(.*)\"");
 
     enum MODE {
         MSGID, MSGSTR, MSGID_PLURAL, MSGSTR_PLURAL, MSGCTX
     };
 
     private StringBuilder[] sources, targets;
-    private StringBuilder translatorComments, extractedComments, references;
+    private StringBuilder translatorComments, extractedComments, references, sourceFuzzyTrue;
     private int plurals = 2;
     private String path;
-    private boolean nowrap, fuzzy;
+    private boolean nowrap, fuzzy, fuzzyTrue;
 
     private BufferedWriter out;
 
@@ -380,6 +384,7 @@ public class PoFilter extends AbstractFilter {
 
     private void processPoFile(BufferedReader in, FilterContext fc) throws IOException {
         fuzzy = false;
+        fuzzyTrue = false;
         nowrap = false;
         MODE currentMode = null;
         int currentPlural = 0;
@@ -395,6 +400,7 @@ public class PoFilter extends AbstractFilter {
         translatorComments = new StringBuilder();
         extractedComments = new StringBuilder();
         references = new StringBuilder();
+        sourceFuzzyTrue = new StringBuilder();
         path = "";
 
         String s;
@@ -403,6 +409,14 @@ public class PoFilter extends AbstractFilter {
             // We trim trailing spaces, otherwise the regexps could fail, thus making some segments
             // invisible to OmegaT
             s = s.trim();
+
+            // We have a real fuzzy
+            Matcher mTrueFuzzy = COMMENT_FUZZY_MSGID.matcher(s);
+            if (mTrueFuzzy.matches()) {
+                fuzzyTrue = true;
+                sourceFuzzyTrue.append(mTrueFuzzy.group(1));
+                continue;
+            }
 
             /*
              * Removing the fuzzy markers, as it has no meanings after being processed by omegat
@@ -521,6 +535,14 @@ public class PoFilter extends AbstractFilter {
 
                 continue;
             }
+
+            // True fuzzy
+            Matcher mMsgFuzzy = MSG_FUZZY.matcher(s);
+            if (mMsgFuzzy.matches()) {
+                sourceFuzzyTrue.append(mMsgFuzzy.group(1));
+                continue;
+            }
+
             Matcher mOther = MSG_OTHER.matcher(s);
             if (mOther.matches()) {
                 String text = mOther.group(1);
@@ -615,8 +637,14 @@ public class PoFilter extends AbstractFilter {
             } else {
                 List<ProtectedPart> protectedParts = TagUtil.applyCustomProtectedParts(source,
                         PatternConsts.PRINTF_VARS, null);
-                entryParseCallback.addEntry(null, source, translation, fuzzy, comments, path + pathSuffix,
-                        this, protectedParts);
+                entryParseCallback.addEntry(null, source, translation, fuzzy, comments, path + pathSuffix, this,
+                        protectedParts);
+                if (fuzzyTrue) { // We add a reference entry
+                    String[] props = { SegmentProperties.COMMENT, comments, SegmentProperties.REFERENCE, "true" };
+                    entryParseCallback.addEntryWithProperties(null, sourceFuzzyTrue.toString(), translation, false,
+                            props, path + pathSuffix, this, null);
+                    fuzzyTrue = false;
+                }
             }
         } else if (entryAlignCallback != null) {
             entryAlignCallback.addTranslation(null, source, translation, fuzzy, path + pathSuffix, this);
@@ -713,6 +741,7 @@ public class PoFilter extends AbstractFilter {
         translatorComments.setLength(0);
         extractedComments.setLength(0);
         references.setLength(0);
+        sourceFuzzyTrue.setLength(0);
     }
 
     protected static final Pattern R1 = Pattern.compile("(?<!\\\\)((\\\\\\\\)*)\\\\\"");

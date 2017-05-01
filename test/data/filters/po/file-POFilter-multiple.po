@@ -31,3 +31,13 @@ msgctxt "one more context"
 msgid "source4"
 msgid_plural "source4"
 
+#, fuzzy
+#| msgid ""
+#| "True fuzzy!"
+msgid "source5"
+msgstr "trans5"
+
+#, fuzzy
+#| msgid "True fuzzy 2!"
+msgid "source6"
+msgstr "trans6"

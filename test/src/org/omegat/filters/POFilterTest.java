@@ -32,7 +32,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.junit.Test;
-import org.omegat.core.data.IProject;
+import org.omegat.core.data.ExternalTMX;
+import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
@@ -56,11 +57,12 @@ public class POFilterTest extends TestFilterBase {
         String f = "test/data/filters/po/file-POFilter-multiple.po";
         Map<String, String> options = new TreeMap<String, String>();
         options.put("skipHeader", "true");
-        IProject.FileInfo fi = loadSourceFiles(new PoFilter(), f, options);
+        TestFileInfo fi = loadSourceFiles(new PoFilter(), f, options);
 
-        String comment = OStrings.getString("POFILTER_TRANSLATOR_COMMENTS") + "\n" + "A valid comment\nAnother valid comment\n\n"
-        + OStrings.getString("POFILTER_EXTRACTED_COMMENTS") + "\n" + "Some extracted comments\nMore extracted comments\n\n"
-        + OStrings.getString("POFILTER_REFERENCES") + "\n" + "/my/source/file\n/my/source/file2\n\n";
+        String comment = OStrings.getString("POFILTER_TRANSLATOR_COMMENTS") + "\n"
+                + "A valid comment\nAnother valid comment\n\n" + OStrings.getString("POFILTER_EXTRACTED_COMMENTS")
+                + "\n" + "Some extracted comments\nMore extracted comments\n\n"
+                + OStrings.getString("POFILTER_REFERENCES") + "\n" + "/my/source/file\n/my/source/file2\n\n";
 
         checkMultiStart(fi, f);
         checkMulti("source1", null, "some context", null, null, comment);
@@ -73,7 +75,22 @@ public class POFilterTest extends TestFilterBase {
                 StringUtil.format(OStrings.getString("POFILTER_PLURAL_FORM_COMMENT"), 1) + "\n");
         checkMulti("source4", null, "one more context[2]", null, null,
                 StringUtil.format(OStrings.getString("POFILTER_PLURAL_FORM_COMMENT"), 2) + "\n");
+        checkMulti("source5", null, "", null, null, null);
+        checkMulti("source6", null, "", null, null, null);
         checkMultiEnd();
+
+        ExternalTMX tmEntries = fi.referenceEntries;
+        assertEquals(2, tmEntries.getEntries().size());
+        {
+            PrepareTMXEntry entry = tmEntries.getEntries().get(0);
+            assertEquals("True fuzzy!", entry.source);
+            assertEquals("trans5", entry.translation);
+        }
+        {
+            PrepareTMXEntry entry = tmEntries.getEntries().get(1);
+            assertEquals("True fuzzy 2!", entry.source);
+            assertEquals("trans6", entry.translation);
+        }
     }
 
     @Test

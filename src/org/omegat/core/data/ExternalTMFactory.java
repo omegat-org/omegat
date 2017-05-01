@@ -273,6 +273,25 @@ public final class ExternalTMFactory {
         }
     }
 
+    public static final class Builder {
+        private final String name;
+        private final List<PrepareTMXEntry> entries = new ArrayList<>();
+
+        public Builder(String name) {
+            this.name = name;
+        }
+
+        public void addEntry(String source, String target, String id, String path, String[] props) {
+            if (!source.trim().isEmpty()) {
+                entries.add(makeEntry(source, target, id, null, path, props));
+            }
+        }
+
+        public ExternalTMX done() {
+            return new ExternalTMX(name, entries);
+        }
+    }
+
     private static PrepareTMXEntry makeEntry(String source, String target, String id, String comment, String path,
             String[] props) {
         PrepareTMXEntry entry = new PrepareTMXEntry();

@@ -265,33 +265,41 @@ public final class ExternalTMFactory {
                         private void addImpl(String source, String target, String id, String comment,
                                 String path, String[] props) {
                             if (!source.trim().isEmpty()) {
-                                PrepareTMXEntry entry = new PrepareTMXEntry();
-                                entry.source = source;
-                                entry.translation = target;
-                                entry.note = comment;
-                                if (props != null) {
-                                    List<TMXProp> tmxProps = propsToList(props);
-                                    if (id != null) {
-                                        tmxProps.add(new TMXProp("id", id));
-                                    }
-                                    if (path != null) {
-                                        tmxProps.add(new TMXProp("path", path));
-                                    }
-                                    entry.otherProperties = tmxProps;
-                                }
-                                entries.add(entry);
+                                entries.add(makeEntry(source, target, id, comment, path, props));
                             }
                         }
                     });
             return entries;
         }
+    }
 
-        private List<TMXProp> propsToList(String[] props) {
-            List<TMXProp> result = new ArrayList<>(props.length / 2);
-            for (int i = 0; i < props.length; i++) {
-                result.add(new TMXProp(props[i], props[++i]));
+    private static PrepareTMXEntry makeEntry(String source, String target, String id, String comment, String path,
+            String[] props) {
+        PrepareTMXEntry entry = new PrepareTMXEntry();
+        entry.source = source;
+        entry.translation = target;
+        entry.note = comment;
+        if (props != null) {
+            List<TMXProp> tmxProps = propsToList(props);
+            if (id != null) {
+                tmxProps.add(new TMXProp("id", id));
             }
-            return result;
+            if (path != null) {
+                tmxProps.add(new TMXProp("path", path));
+            }
+            entry.otherProperties = tmxProps;
+            if (entry.note == null) {
+                entry.note = SegmentProperties.getProperty(props, SegmentProperties.COMMENT);
+            }
         }
+        return entry;
+    }
+
+    private static List<TMXProp> propsToList(String[] props) {
+        List<TMXProp> result = new ArrayList<>(props.length / 2);
+        for (int i = 0; i < props.length; i++) {
+            result.add(new TMXProp(props[i], props[++i]));
+        }
+        return result;
     }
 }

@@ -581,8 +581,8 @@ public class TestTeamIntegrationChild {
                             }
                         }
                     });
-            String srcLang = m_config.getSourceLanguage().getLanguage();
-            String trgLang = m_config.getTargetLanguage().getLanguage();
+            String srcLang = config.getSourceLanguage().getLanguage();
+            String trgLang = config.getTargetLanguage().getLanguage();
             synchronized (projectTMX) {
                 ProjectTMX mergedTMX = SuperTmxMerge.merge(
                         new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),

@@ -83,17 +83,18 @@ public class PoFilter extends AbstractFilter {
     private static class PluralInfo {
         public int plurals;
         public String  expression;
-        public PluralInfo(int nrOfPlurals, String pluralExpression) {
+
+        PluralInfo(int nrOfPlurals, String pluralExpression) {
             plurals = nrOfPlurals;
             expression = pluralExpression;
         }
     }
 
-    private static final Map<String, PluralInfo> pluralInfos;
+    private static final Map<String, PluralInfo> PLURAL_INFOS;
     static {
         HashMap<String, PluralInfo> info = new HashMap<String, PluralInfo>();
-        //list taken from http://translate.sourceforge.net/wiki/l10n/pluralforms d.d. 14-09-2012
-        //See also http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html
+        // list taken from http://translate.sourceforge.net/wiki/l10n/pluralforms d.d. 14-09-2012
+        // See also http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html
         info.put("ach", new PluralInfo(2, "(n > 1)"));
         info.put("af", new PluralInfo(2, "(n != 1)"));
         info.put("ak", new PluralInfo(2, "(n > 1)"));
@@ -231,7 +232,7 @@ public class PoFilter extends AbstractFilter {
         info.put("wo", new PluralInfo(1, "0"));
         info.put("yo", new PluralInfo(2, "(n != 1)"));
         info.put("zh", new PluralInfo(1, "0 "));
-        pluralInfos = Collections.unmodifiableMap(info);
+        PLURAL_INFOS = Collections.unmodifiableMap(info);
     }
 
     /**
@@ -268,6 +269,8 @@ public class PoFilter extends AbstractFilter {
     protected static final Pattern MSG_STR = Pattern.compile("msgstr(\\[([0-9]+)\\])?\\s+\"(.*)\"");
     protected static final Pattern MSG_CTX = Pattern.compile("msgctxt\\s+\"(.*)\"");
     protected static final Pattern MSG_OTHER = Pattern.compile("\"(.*)\"");
+    protected static final Pattern PLURAL_FORMS = Pattern.compile("Plural-Forms: *nplurals= *([0-9]+) *; *plural",
+            Pattern.CASE_INSENSITIVE);
 
     enum MODE {
         MSGID, MSGSTR, MSGID_PLURAL, MSGSTR_PLURAL, MSGCTX
@@ -275,7 +278,7 @@ public class PoFilter extends AbstractFilter {
 
     private StringBuilder[] sources, targets;
     private StringBuilder translatorComments, extractedComments, references;
-    private int plurals=2;
+    private int plurals = 2;
     private String path;
     private boolean nowrap, fuzzy;
 
@@ -316,7 +319,8 @@ public class PoFilter extends AbstractFilter {
         allowBlank = disallowBlankStr == null || disallowBlankStr.equalsIgnoreCase("true");
 
         String disallowEditingBlankSegmentStr = processOptions.get(OPTION_ALLOW_EDITING_BLANK_SEGMENT);
-        allowEditingBlankSegment = disallowEditingBlankSegmentStr == null || disallowEditingBlankSegmentStr.equalsIgnoreCase("true");
+        allowEditingBlankSegment = disallowEditingBlankSegmentStr == null
+                || disallowEditingBlankSegmentStr.equalsIgnoreCase("true");
 
         String skipHeaderStr = processOptions.get(OPTION_SKIP_HEADER);
         skipHeader = "true".equalsIgnoreCase(skipHeaderStr);
@@ -355,9 +359,9 @@ public class PoFilter extends AbstractFilter {
         // BOM (byte order mark) bugfix
         translatedFile.mark(1);
         int ch = translatedFile.read();
-        if (ch != 0xFEFF)
+        if (ch != 0xFEFF) {
             translatedFile.reset();
-
+        }
         this.out = null;
         processPoFile(translatedFile, fc);
     }
@@ -367,9 +371,9 @@ public class PoFilter extends AbstractFilter {
         // BOM (byte order mark) bugfix
         in.mark(1);
         int ch = in.read();
-        if (ch != 0xFEFF)
+        if (ch != 0xFEFF) {
             in.reset();
-
+        }
         this.out = out;
         processPoFile(in, fc);
     }
@@ -383,7 +387,8 @@ public class PoFilter extends AbstractFilter {
         sources = new StringBuilder[2];
         sources[0] = new StringBuilder();
         sources[1] = new StringBuilder();
-        targets = new StringBuilder[2]; //can be overridden when header has been read and the number of plurals is different.
+        // can be overridden when header has been read and the number of plurals is different.
+        targets = new StringBuilder[2];
         targets[0] = new StringBuilder();
         targets[1] = new StringBuilder();
 
@@ -427,14 +432,15 @@ public class PoFilter extends AbstractFilter {
                 eol(s);
                 continue;
             }
-            Matcher m;
 
-            if ((m = MSG_ID.matcher(s)).matches()) { //msg_id(_plural)
+            Matcher mId = MSG_ID.matcher(s);
+            if (mId.matches()) { // msg_id(_plural)
                 currentPlural = 0;
-                String text = m.group(2);
-                if (m.group(1) == null) {
+                String text = mId.group(2);
+                if (mId.group(1) == null) {
                     // non-plural ID ('msg_id')
-                    //we can start a new translation. Flush current translation. This has not happened when no empty lines are in between 'segments'.
+                    // we can start a new translation. Flush current translation.
+                    // This has not happened when no empty lines are in between 'segments'.
                     if (sources[0].length() > 0) {
                         flushTranslation(currentMode, fc);
                     }
@@ -450,19 +456,19 @@ public class PoFilter extends AbstractFilter {
                 continue;
             }
 
-            if ((m = MSG_STR.matcher(s)).matches()) {
+            Matcher mStr = MSG_STR.matcher(s);
+            if (mStr.matches()) {
 
                 // Hack to be able to translate empty segments
                 // If the source segment is empty and there is a reference then
                 // it copies the reference of the segment and the localization note into the source segment
-                if (allowEditingBlankSegment == true && sources[0].length() == 0 && references.length() > 0)
-                {
+                if (allowEditingBlankSegment && sources[0].length() == 0 && references.length() > 0) {
                     String aux = references.toString() + extractedComments.toString();
                     sources[0].append(aux);
                 }
 
-                String text = m.group(3);
-                if (m.group(1) == null) {
+                String text = mStr.group(3);
+                if (mStr.group(1) == null) {
                     // non-plural lines
                     currentMode = MODE.MSGSTR;
                     targets[0].append(text);
@@ -470,7 +476,7 @@ public class PoFilter extends AbstractFilter {
                 } else {
                     currentMode = MODE.MSGSTR_PLURAL;
                     // plurals, i.e. msgstr[N] lines
-                    currentPlural = Integer.parseInt(m.group(2));
+                    currentPlural = Integer.parseInt(mStr.group(2));
                     if (currentPlural < plurals) {
                         targets[currentPlural].append(text);
                     }
@@ -478,42 +484,46 @@ public class PoFilter extends AbstractFilter {
                 continue;
             }
 
-            if ((m = MSG_CTX.matcher(s)).matches()) {
+            Matcher mCtx = MSG_CTX.matcher(s);
+            if (mCtx.matches()) {
                 currentMode = MODE.MSGCTX;
                 currentPlural = 0;
-                path = m.group(1);
+                path = mCtx.group(1);
                 eol(s);
 
                 continue;
             }
 
-            if ((m = COMMENT_REFERENCE.matcher(s)).matches()) {
+            Matcher mReference = COMMENT_REFERENCE.matcher(s);
+            if (mReference.matches()) {
                 currentPlural = 0;
-                references.append(m.group(1));
+                references.append(mReference.group(1));
                 references.append("\n");
                 eol(s);
 
                 continue;
             }
-            if ((m = COMMENT_EXTRACTED.matcher(s)).matches()) {
+            Matcher mExtracted = COMMENT_EXTRACTED.matcher(s);
+            if (mExtracted.matches()) {
                 currentPlural = 0;
-                extractedComments.append(m.group(1));
+                extractedComments.append(mExtracted.group(1));
                 extractedComments.append("\n");
                 eol(s);
 
                 continue;
             }
-            if ((m = COMMENT_TRANSLATOR.matcher(s)).matches()) {
+            Matcher mTranslator = COMMENT_TRANSLATOR.matcher(s);
+            if (mTranslator.matches()) {
                 currentPlural = 0;
-                translatorComments.append(m.group(1));
+                translatorComments.append(mTranslator.group(1));
                 translatorComments.append("\n");
                 eol(s);
 
                 continue;
             }
-
-            if ((m = MSG_OTHER.matcher(s)).matches()) {
-                String text = m.group(1);
+            Matcher mOther = MSG_OTHER.matcher(s);
+            if (mOther.matches()) {
+                String text = mOther.group(1);
                 if (currentMode == null) {
                     throw new IOException(OStrings.getString("POFILTER_INVALID_FORMAT"));
                 }
@@ -567,15 +577,17 @@ public class PoFilter extends AbstractFilter {
         String t = unescape(targets[pair].toString());
 
         if (translatorComments.length() > 0) {
-            c += OStrings.getString("POFILTER_TRANSLATOR_COMMENTS") + "\n" + unescape(translatorComments.toString() + "\n");
+            c += OStrings.getString("POFILTER_TRANSLATOR_COMMENTS") + "\n"
+                    + unescape(translatorComments.toString() + "\n");
         }
         if (extractedComments.length() > 0) {
-            c += OStrings.getString("POFILTER_EXTRACTED_COMMENTS") + "\n" + unescape(extractedComments.toString() + "\n");
+            c += OStrings.getString("POFILTER_EXTRACTED_COMMENTS") + "\n"
+                    + unescape(extractedComments.toString() + "\n");
         }
         if (references.length() > 0) {
             c += OStrings.getString("POFILTER_REFERENCES") + "\n" + unescape(references.toString() + "\n");
         }
-        if (c.length()==0) {
+        if (c.length() == 0) {
             c = null;
         }
         align(s, t, c, pathSuffix);
@@ -628,11 +640,10 @@ public class PoFilter extends AbstractFilter {
             } else {
                 // header
 
-                //check existing plural statement. If it contains the number of plurals, then use it!
-                StringBuilder targets0 =targets[0];
+                // check existing plural statement. If it contains the number of plurals, then use it!
+                StringBuilder targets0 = targets[0];
                 String header = targets[0].toString();
-                Pattern pluralPattern = Pattern.compile("Plural-Forms: *nplurals= *([0-9]+) *; *plural", Pattern.CASE_INSENSITIVE);
-                Matcher pluralMatcher = pluralPattern.matcher(header);
+                Matcher pluralMatcher = PLURAL_FORMS.matcher(header);
                 if (pluralMatcher.find()) {
                     String nrOfPluralsString = header.substring(pluralMatcher.start(1), pluralMatcher.end(1));
                     plurals = Integer.parseInt(nrOfPluralsString);
@@ -640,7 +651,7 @@ public class PoFilter extends AbstractFilter {
                     //else use predefined number of plurals, if it exists
                     Language targetLang = fc.getTargetLang();
                     String lang = targetLang.getLanguageCode().toLowerCase();
-                    PluralInfo pluralInfo = pluralInfos.get(lang);
+                    PluralInfo pluralInfo = PLURAL_INFOS.get(lang);
                     if (pluralInfo != null) {
                         plurals = pluralInfo.plurals;
                     }
@@ -648,7 +659,7 @@ public class PoFilter extends AbstractFilter {
                 //update the number of targets according to new plural number
                 targets = new StringBuilder[plurals];
                 targets[0] = targets0;
-                for (int i=1; i < plurals; i++) {
+                for (int i = 1; i < plurals; i++) {
                     targets[i] = new StringBuilder();
                 }
 
@@ -680,12 +691,13 @@ public class PoFilter extends AbstractFilter {
                 // plurals
                 if (out != null) {
                     out.write("msgstr[0] " + getTranslation(null, sources[0], allowBlank, false, fc, 0) + "\n");
-                    for (int i=1;i<plurals;i++) {
-                        out.write("msgstr["+i+"] " + getTranslation(null, sources[1], allowBlank, false, fc, i) + "\n");
+                    for (int i = 1; i < plurals; i++) {
+                        out.write("msgstr[" + i + "] " + getTranslation(null, sources[1], allowBlank, false, fc, i)
+                                + "\n");
                     }
                 } else {
                     align(0);
-                    for (int i=1;i<plurals;i++) {
+                    for (int i = 1; i < plurals; i++) {
                         align(i);
                     }
                 }
@@ -694,7 +706,7 @@ public class PoFilter extends AbstractFilter {
         }
         sources[0].setLength(0);
         sources[1].setLength(0);
-        for (int i=0;i<plurals;i++) {
+        for (int i = 0; i < plurals; i++) {
             targets[i].setLength(0);
         }
         path = "";
@@ -710,33 +722,37 @@ public class PoFilter extends AbstractFilter {
 
     /**
      * Private processEntry to do pre- and postprocessing.<br>
-     * The given entry is interpreted to a string (e.g. escaped quotes are unescaped, '\n' is translated into
-     * newline character, '\t' into tab character.) then translated and then returned as a PO-string-notation
-     * (e.g. double quotes escaped, newline characters represented as '\n' and surrounded by double quotes,
-     * possibly split up over multiple lines)<Br>
-     * Long translations are not split up over multiple lines as some PO editors do, but when there are
-     * newline characters in a translation, it is split up at the newline markers.<Br>
-     * If the nowrap parameter is true, a translation that exists of multiple lines starts with an empty
-     * string-line to left-align all lines. [With nowrap set to true, long lines are also never wrapped
-     * (except for at newline characters), but that was already not done without nowrap.] [ 1869069 ] Escape
-     * support for PO
+     * The given entry is interpreted to a string (e.g. escaped quotes are unescaped, '\n' is translated into newline
+     * character, '\t' into tab character.) then translated and then returned as a PO-string-notation (e.g. double
+     * quotes escaped, newline characters represented as '\n' and surrounded by double quotes, possibly split up over
+     * multiple lines)<Br>
+     * Long translations are not split up over multiple lines as some PO editors do, but when there are newline
+     * characters in a translation, it is split up at the newline markers.<Br>
+     * If the nowrap parameter is true, a translation that exists of multiple lines starts with an empty string-line to
+     * left-align all lines. [With nowrap set to true, long lines are also never wrapped (except for at newline
+     * characters), but that was already not done without nowrap.] [ 1869069 ] Escape support for PO
      *
      * @param en
      *            The entire source text
      * @param allowNull
      *            Allow to output a blank translation in msgstr
-     * @param isHeader is the given string the PO-header string?
-     * @param fc The FilterContext, for targetLanguage
-     * @param plural if the source text is a plural, which plural number / variant are we on? 0 = no plural, 1.. are the plurals for the given target language.
-     * @return The translated entry, within double quotes on each line (thus ready to be printed to target
-     *         file immediately)
+     * @param isHeader
+     *            is the given string the PO-header string?
+     * @param fc
+     *            The FilterContext, for targetLanguage
+     * @param plural
+     *            if the source text is a plural, which plural number / variant are we on? 0 = no plural, 1.. are the
+     *            plurals for the given target language.
+     * @return The translated entry, within double quotes on each line (thus ready to be printed to target file
+     *         immediately)
      **/
-    private String getTranslation(String id, StringBuilder en, boolean allowNull, boolean isHeader, FilterContext fc, int plural) {
+    private String getTranslation(String id, StringBuilder en, boolean allowNull, boolean isHeader, FilterContext fc,
+            int plural) {
         String entry = unescape(en.toString());
 
         String pathSuffix;
         if (plural > 0) {
-            pathSuffix = "["+plural+"]";
+            pathSuffix = "[" + plural + "]";
         } else {
             pathSuffix = "";
         }
@@ -749,7 +765,7 @@ public class PoFilter extends AbstractFilter {
         if (isHeader && skipHeader) {
             translation = entry;
         } else {
-            translation = entryTranslateCallback.getTranslation(id, entry, path + pathSuffix );
+            translation = entryTranslateCallback.getTranslation(id, entry, path + pathSuffix);
         }
 
         if (translation == null && !allowNull) { // We write the source in translation
@@ -772,9 +788,10 @@ public class PoFilter extends AbstractFilter {
         if (autoFillInPluralStatement) {
             Language targetLang = fc.getTargetLang();
             String lang = targetLang.getLanguageCode().toLowerCase();
-            PluralInfo pluralInfo = pluralInfos.get(lang);
+            PluralInfo pluralInfo = PLURAL_INFOS.get(lang);
             if (pluralInfo != null) {
-                return header.replaceAll("Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;", "Plural-Forms: nplurals="+pluralInfo.plurals+"; plural="+pluralInfo.expression+";");
+                return header.replaceAll("Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;",
+                        "Plural-Forms: nplurals=" + pluralInfo.plurals + "; plural=" + pluralInfo.expression + ";");
             }
         }
         return header;
@@ -852,10 +869,11 @@ public class PoFilter extends AbstractFilter {
         try {
             PoOptionsDialog dialog = new PoOptionsDialog(parent, config);
             dialog.setVisible(true);
-            if (PoOptionsDialog.RET_OK == dialog.getReturnStatus())
+            if (PoOptionsDialog.RET_OK == dialog.getReturnStatus()) {
                 return dialog.getOptions();
-            else
+            } else {
                 return null;
+            }
         } catch (Exception e) {
             Log.log(OStrings.getString("POFILTER_EXCEPTION"));
             Log.log(e);

@@ -57,6 +57,7 @@ import org.omegat.core.TestCore;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
+import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.RealProject;
@@ -344,14 +345,14 @@ public abstract class TestFilterBase extends TestCore {
         String path;
     }
 
-    protected IProject.FileInfo loadSourceFiles(IFilter filter, String file, Map<String, String> filterOptions)
+    protected TestFileInfo loadSourceFiles(IFilter filter, String file, Map<String, String> filterOptions)
             throws Exception {
         ProjectPropertiesTest props = new ProjectPropertiesTest();
         TestProject p = new TestProject(props);
         return p.loadSourceFiles(filter, file, filterOptions);
     }
 
-    protected IProject.FileInfo loadSourceFiles(IFilter filter, String file) throws Exception {
+    protected TestFileInfo loadSourceFiles(IFilter filter, String file) throws Exception {
         return loadSourceFiles(filter, file, Collections.emptyMap());
     }
 
@@ -428,7 +429,8 @@ public abstract class TestFilterBase extends TestCore {
             super(props);
         }
 
-        public FileInfo loadSourceFiles(IFilter filter, String file, Map<String, String> filterOptions) throws Exception {
+        public TestFileInfo loadSourceFiles(IFilter filter, String file, Map<String, String> filterOptions)
+                throws Exception {
             Core.setProject(this);
 
             Set<String> existSource = new HashSet<String>();
@@ -437,7 +439,7 @@ public abstract class TestFilterBase extends TestCore {
 
             LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys, transMemories);
 
-            FileInfo fi = new FileInfo();
+            TestFileInfo fi = new TestFileInfo();
             fi.filePath = file;
 
             loadFilesCallback.setCurrentFile(fi);
@@ -445,6 +447,10 @@ public abstract class TestFilterBase extends TestCore {
             filter.parseFile(new File(file), filterOptions, context, loadFilesCallback);
 
             loadFilesCallback.fileFinished();
+
+            if (!transMemories.isEmpty()) {
+                fi.referenceEntries = transMemories.values().iterator().next();
+            }
 
             return fi;
         }
@@ -503,5 +509,9 @@ public abstract class TestFilterBase extends TestCore {
         public String source;
         public String translation;
         public String path;
+    }
+
+    public static class TestFileInfo extends FileInfo {
+        public ExternalTMX referenceEntries;
     }
 }

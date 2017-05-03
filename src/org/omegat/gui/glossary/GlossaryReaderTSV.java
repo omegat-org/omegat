@@ -68,14 +68,9 @@ public final class GlossaryReaderTSV {
 
     public static List<GlossaryEntry> read(final File file, boolean priorityGlossary) throws IOException {
         String encoding = getFileEncoding(file);
-        if (encoding == null) {
-            return null;
-        }
-        InputStreamReader reader = new InputStreamReader(new FileInputStream(file), encoding);
-
         List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
-        BufferedReader in = new BufferedReader(reader);
-        try {
+
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding))) {
             // BOM (byte order mark) bugfix
             in.mark(1);
             int ch = in.read();
@@ -101,8 +96,6 @@ public final class GlossaryReaderTSV {
                 }
                 result.add(new GlossaryEntry(tokens[0], tokens[1], comment, priorityGlossary));
             }
-        } finally {
-            in.close();
         }
 
         return result;
@@ -123,12 +116,12 @@ public final class GlossaryReaderTSV {
         } else {
             encoding = EncodingDetector.detectEncodingDefault(file, StandardCharsets.UTF_8.name());
         }
-        Writer wr = new OutputStreamWriter(new FileOutputStream(file, true), encoding);
-        wr.append(newEntry.getSrcText()).append('\t').append(newEntry.getLocText());
-        if (!StringUtil.isEmpty(newEntry.getCommentText())) {
-            wr.append('\t').append(newEntry.getCommentText());
+        try (Writer wr = new OutputStreamWriter(new FileOutputStream(file, true), encoding)) {
+            wr.append(newEntry.getSrcText()).append('\t').append(newEntry.getLocText());
+            if (!StringUtil.isEmpty(newEntry.getCommentText())) {
+                wr.append('\t').append(newEntry.getCommentText());
+            }
+            wr.append(System.lineSeparator());
         }
-        wr.append(System.lineSeparator());
-        wr.close();
     }
 }

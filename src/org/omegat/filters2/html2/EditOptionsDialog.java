@@ -257,8 +257,11 @@ public class EditOptionsDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Checks text value of JTextField if it is a valid regular expression. If not, focus is set to the text field and an alert is shown.
-     * @param textfield the text field with the regular expression
+     * Checks text value of JTextField if it is a valid regular expression. If not, focus is set to the text field and
+     * an alert is shown.
+     * 
+     * @param textfield
+     *            the text field with the regular expression
      * @return true if regular expression is valid, false otherwise
      */
     private boolean checkRegExp(JTextField textfield) {
@@ -275,19 +278,19 @@ public class EditOptionsDialog extends javax.swing.JDialog {
         return true;
     }
 
-    private void okButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_okButtonActionPerformed
-    {
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
         if (!checkRegExp(skipRegExpTF)) {
             return;
         }
-        if (alwaysRB.isSelected())
+        if (alwaysRB.isSelected()) {
             options.setRewriteEncoding(HTMLOptions.REWRITE_MODE.ALWAYS);
-        else if (ifHasHeaderRB.isSelected())
+        } else if (ifHasHeaderRB.isSelected()) {
             options.setRewriteEncoding(HTMLOptions.REWRITE_MODE.IFHEADER);
-        else if (ifHasMetaRB.isSelected())
+        } else if (ifHasMetaRB.isSelected()) {
             options.setRewriteEncoding(HTMLOptions.REWRITE_MODE.IFMETA);
-        else if (neverRB.isSelected())
+        } else if (neverRB.isSelected()) {
             options.setRewriteEncoding(HTMLOptions.REWRITE_MODE.NEVER);
+        }
 
         options.setTranslateHref(translateHrefCB.isSelected());
         options.setTranslateSrc(translateSrcCB.isSelected());
@@ -305,14 +308,12 @@ public class EditOptionsDialog extends javax.swing.JDialog {
         doClose(RET_OK);
     }// GEN-LAST:event_okButtonActionPerformed
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_cancelButtonActionPerformed
-    {
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
         doClose(RET_CANCEL);
     }// GEN-LAST:event_cancelButtonActionPerformed
 
     /** Closes the dialog */
-    private void closeDialog(java.awt.event.WindowEvent evt)// GEN-FIRST:event_closeDialog
-    {
+    private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
         doClose(RET_CANCEL);
     }// GEN-LAST:event_closeDialog
 

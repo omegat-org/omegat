@@ -60,9 +60,7 @@ public class PdfFilter  extends AbstractFilter {
 
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[] {
-                new Instance("*.pdf", null, null, TFP_NAMEONLY+".txt")
-        };
+        return new Instance[] { new Instance("*.pdf", null, null, TFP_NAMEONLY + ".txt") };
     }
 
     @Override
@@ -99,7 +97,7 @@ public class PdfFilter  extends AbstractFilter {
 
         String s = "";
         try {
-            while ( (s = in.readLine()) != null ) {
+            while ((s = in.readLine()) != null) {
                 Matcher m = LINEBREAK_PATTERN.matcher(s);
 
                 if (m.find()) {

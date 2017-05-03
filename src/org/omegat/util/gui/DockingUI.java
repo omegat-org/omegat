@@ -176,9 +176,9 @@ public class DockingUI {
                         textColor.getGreen(), textColor.getBlue(), null);
                 float brightness = hsb[2]; // darkest 0.0f <--> 1.0f brightest
                 if (brightness >= 0.5f) {
-                    brightness -= 0.5f;    // to darker
+                    brightness -= 0.5f; // to darker
                 } else {
-                    brightness += 0.5f;    // to brighter
+                    brightness += 0.5f; // to brighter
                 }
                 int rgb = Color.HSBtoRGB(hsb[0], hsb[1], brightness);
                 ColorUIResource res = new ColorUIResource(rgb);
@@ -192,12 +192,17 @@ public class DockingUI {
 
     private static void installFlatDesign() {
         // Colors
-        Color standardBgColor = UIManager.getColor("Panel.background"); // #EEEEEE on Metal & OS X LAF
-        Color activeTitleBgColor = adjustRGB(standardBgColor, 0xF6 - 0xEE); // #EEEEEE -> #F6F6F6; Lighter than standard background
-        Color bottomAreaBgColor = adjustRGB(standardBgColor, 0xDE - 0xEE); // #EEEEEE -> #DEDEDE; Darkest background
-        Color borderColor = adjustRGB(standardBgColor, 0x9B - 0xEE); // #EEEEEE -> #9B9B9B; Standard border. Darker than standard background.
+        // #EEEEEE on Metal & OS X LAF
+        Color standardBgColor = UIManager.getColor("Panel.background");
+        // #EEEEEE -> #F6F6F6; Lighter than standard background
+        Color activeTitleBgColor = adjustRGB(standardBgColor, 0xF6 - 0xEE);
+        // #EEEEEE -> #DEDEDE; Darkest background
+        Color bottomAreaBgColor = adjustRGB(standardBgColor, 0xDE - 0xEE);
+        // #EEEEEE -> #9B9B9B; Standard border. Darker than standard background.
+        Color borderColor = adjustRGB(standardBgColor, 0x9B - 0xEE);
         UIManager.put("OmegaTBorder.color", borderColor);
-        Color statusAreaColor = adjustRGB(standardBgColor, 0x57 - 0xEE); // #EEEEEE -> #575757; Darkest border
+        // #EEEEEE -> #575757; Darkest border
+        Color statusAreaColor = adjustRGB(standardBgColor, 0x57 - 0xEE);
 
         // General highlight & shadow used in a lot of places
         UIManager.put("VLDocking.highlight", activeTitleBgColor);
@@ -237,9 +242,12 @@ public class DockingUI {
 
         // Panel title bars
         Color activeTitleText = UIManager.getColor("Label.foreground");
-        Color inactiveTitleText = adjustRGB(activeTitleText, 0x80); // #000000 -> #808080; GTK+ has Color.WHITE for Label.disabledForeground
-        UIManager.put("DockViewTitleBar.border", new RoundedCornerBorder(cornerRadius, borderColor, RoundedCornerBorder.SIDE_TOP));
-        UIManager.put("InternalFrame.activeTitleForeground", activeTitleText); // Windows 7 "Classic" has Color.WHITE for this
+        // #000000 -> #808080; GTK+ has Color.WHITE for Label.disabledForeground
+        Color inactiveTitleText = adjustRGB(activeTitleText, 0x80);
+        UIManager.put("DockViewTitleBar.border",
+                new RoundedCornerBorder(cornerRadius, borderColor, RoundedCornerBorder.SIDE_TOP));
+        // Windows 7 "Classic" has Color.WHITE for this
+        UIManager.put("InternalFrame.activeTitleForeground", activeTitleText);
         UIManager.put("InternalFrame.activeTitleBackground", activeTitleBgColor);
         UIManager.put("InternalFrame.inactiveTitleForeground", inactiveTitleText);
         UIManager.put("InternalFrame.inactiveTitleBackground", standardBgColor);
@@ -253,7 +261,8 @@ public class DockingUI {
                 new MatteBorder(1, 0, 0, 0, borderColor),
                 new EmptyBorder(0, 2 * outside, 0, 2 * outside)));
         UIManager.put("AutoHideButtonPanel.background", bottomAreaBgColor);
-        UIManager.put("AutoHideButton.expandBorderBottom", new RoundedCornerBorder(cornerRadius, borderColor, RoundedCornerBorder.SIDE_BOTTOM));
+        UIManager.put("AutoHideButton.expandBorderBottom",
+                new RoundedCornerBorder(cornerRadius, borderColor, RoundedCornerBorder.SIDE_BOTTOM));
         UIManager.put("AutoHideButton.background", standardBgColor);
         // OmegaT-defined status box in lower right
         UIManager.put("OmegaTStatusArea.border", new MatteBorder(1, 1, 1, 1, statusAreaColor));
@@ -343,8 +352,7 @@ public class DockingUI {
     }
 
     private static boolean isWindowsClassicLAF() {
-        return isWindowsLAF() &&
-                !(Boolean) Toolkit.getDefaultToolkit().getDesktopProperty("win.xpstyle.themeActive");
+        return isWindowsLAF() && !(Boolean) Toolkit.getDefaultToolkit().getDesktopProperty("win.xpstyle.themeActive");
     }
 
     // This check fails to detect Windows 10 correctly on Java 1.8 prior to u60.

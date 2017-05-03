@@ -59,11 +59,11 @@ public class OpenXMLDialect extends DefaultXMLDialect {
             defineParagraphTag("w:br"); // Word
         }
 
-        if (options.getTranslateHiddenText()) // Word
+        if (options.getTranslateHiddenText()) {
             defineOutOfTurnTag("w:instrText");
-        else
+        } else {
             defineIntactTag("w:instrText");
-
+        }
         if (!options.getTranslateFallbackText()) { // Word
             defineIntactTag("mc:Fallback");
         }
@@ -179,7 +179,7 @@ public class OpenXMLDialect extends DefaultXMLDialect {
     @Override
     public Boolean validateTranslatableTagAttribute(String tag, String attribute, Attributes atts) {
         // special case:
-        if ("Relationship".equalsIgnoreCase(tag) && attribute.equalsIgnoreCase("Target") ) {
+        if ("Relationship".equalsIgnoreCase(tag) && attribute.equalsIgnoreCase("Target")) {
 
                 for (int i = 0; i < atts.size(); i++) {
                     Attribute otherAttribute = atts.get(i);

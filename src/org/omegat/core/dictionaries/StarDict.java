@@ -125,10 +125,10 @@ public class StarDict implements IDictionaryFactory {
                 throw new Exception("Invalid version of dictionary: " + version);
             }
             String sametypesequence = header.get("sametypesequence");
-            if (!"g".equals(sametypesequence) &&
-                !"m".equals(sametypesequence) &&
-                !"x".equals(sametypesequence) &&
-                !"h".equals(sametypesequence)) {
+            if (!"g".equals(sametypesequence)
+                    && !"m".equals(sametypesequence)
+                    && !"x".equals(sametypesequence)
+                    && !"h".equals(sametypesequence)) {
                 throw new Exception("Invalid type of dictionary: " + sametypesequence);
             }
 
@@ -317,7 +317,7 @@ public class StarDict implements IDictionaryFactory {
             private final int start;
             private final int len;
 
-            public Entry(int start, int len) {
+            Entry(int start, int len) {
                 this.start = start;
                 this.len = len;
             }

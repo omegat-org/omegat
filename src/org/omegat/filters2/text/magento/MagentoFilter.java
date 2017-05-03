@@ -31,8 +31,8 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
 import java.util.regex.Pattern;
+
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -99,7 +99,7 @@ public class MagentoFilter extends AbstractFilter {
              */
             String contLine;
             // Continue reading until the line ends with ", or end of file
-            while (!line.endsWith("\"") && (contLine = lbpr.readLine()) != null ) {
+            while (!line.endsWith("\"") && (contLine = lbpr.readLine()) != null) {
                 line += lbpr.getLinebreak() + contLine; // Preserve linebreaks
             }
 
@@ -112,7 +112,7 @@ public class MagentoFilter extends AbstractFilter {
             }
 
             String[] result = splitter.split(trimmed);
-            if(result.length < 2 ) { // Guard for malformed rows
+            if (result.length < 2) { // Guard for malformed rows
                 outfile.write(line + lbpr.getLinebreak());
                 continue;
             }
@@ -135,7 +135,8 @@ public class MagentoFilter extends AbstractFilter {
     }
 
     @Override
-    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, org.omegat.filters2.FilterContext fc) throws Exception {
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile,
+            org.omegat.filters2.FilterContext fc) throws Exception {
         Map<String, String> source = new HashMap<String, String>();
         Map<String, String> translated = new HashMap<String, String>();
 

@@ -39,7 +39,6 @@ import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.IEditor.CHANGE_CASE_TO;
 import org.omegat.gui.glossary.GlossaryEntry;
-import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil;
@@ -53,7 +52,11 @@ import org.omegat.util.Token;
  * @author Didier Briel
  * @author Aaron Madlon-Kay
  */
-public class EditorUtils {
+public final class EditorUtils {
+
+    private EditorUtils() {
+    }
+
     /**
      * Check if language is Right-To-Left oriented.
      *
@@ -338,11 +341,12 @@ public class EditorUtils {
     }
 
     /**
-     * Convenience method for {@link #replaceGlossaryEntries(String, List, Locale, ITokenizer)}.
-     * Glossary entries are retrieved from {@link GlossaryManager}; the locale and tokenizer are
-     * taken from the project's current values for the source language.
+     * Convenience method for {@link #replaceGlossaryEntries(String, List, Locale, ITokenizer)}. Glossary entries are
+     * retrieved from {@code GlossaryManager}; the locale and tokenizer are taken from the project's current values for
+     * the source language.
      *
-     * @param text Text in which to replace glossary hits. Assumed to be in the project's source language.
+     * @param text
+     *            Text in which to replace glossary hits. Assumed to be in the project's source language.
      * @return Text with source glossary terms replaced with target terms
      */
     public static String replaceGlossaryEntries(String text) {
@@ -353,17 +357,21 @@ public class EditorUtils {
     }
 
     /**
-     * Given a list of glossary entries, replace any instances of the source term appearing
-     * in the given text with the target term. When there are multiple target terms, the first
-     * one is used.
+     * Given a list of glossary entries, replace any instances of the source term appearing in the given text with the
+     * target term. When there are multiple target terms, the first one is used.
      *
-     * @param text Text in which to replace glossary hits (assumed to be in the project's source language)
-     * @param entries List of glossary entries
-     * @param locale Locale with which to perform capitalization matching (assumed to be source locale)
-     * @param tokenizer Tokenizer with which to split text (assumed to be project's source tokenizer)
+     * @param text
+     *            Text in which to replace glossary hits (assumed to be in the project's source language)
+     * @param entries
+     *            List of glossary entries
+     * @param locale
+     *            Locale with which to perform capitalization matching (assumed to be source locale)
+     * @param tokenizer
+     *            Tokenizer with which to split text (assumed to be project's source tokenizer)
      * @return Text with source glossary terms replaced with target terms
      */
-    public static String replaceGlossaryEntries(String text, List<GlossaryEntry> entries, Locale locale, ITokenizer tokenizer) {
+    public static String replaceGlossaryEntries(String text, List<GlossaryEntry> entries, Locale locale,
+            ITokenizer tokenizer) {
         if (StringUtil.isEmpty(text) || entries == null || entries.isEmpty()) {
             return text;
         }

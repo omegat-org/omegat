@@ -151,7 +151,8 @@ public class MozillaLangFilter extends AbstractFilter {
     }
 
     @Override
-    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc) throws IOException, TranslationException {
+    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc)
+            throws IOException, TranslationException {
         source = new StringBuilder();
         target = new StringBuilder();
         localizationNote = new StringBuilder();
@@ -204,7 +205,7 @@ public class MozillaLangFilter extends AbstractFilter {
         String s = source.toString();
         String c = "";
         String t;
-        if ( s.equals(target.toString()) ) {
+        if (s.equals(target.toString())) {
             t = null;
         } else {
             t = target.toString();
@@ -212,7 +213,7 @@ public class MozillaLangFilter extends AbstractFilter {
         if (localizationNote.length() > 0) {
             c += "\n" + OStrings.getString("LANGFILTER_LOCALIZATION_NOTE") + "\n" + localizationNote.toString();
         }
-        if (c.length()==0) {
+        if (c.length() == 0) {
             c = null;
         }
         align(s, t, c);
@@ -226,7 +227,8 @@ public class MozillaLangFilter extends AbstractFilter {
      */
     protected void align(String source, String translation, String comments) {
         if (entryParseCallback != null) {
-            List<ProtectedPart> protectedParts = TagUtil.applyCustomProtectedParts(source, PatternConsts.PRINTF_VARS, null);
+            List<ProtectedPart> protectedParts = TagUtil.applyCustomProtectedParts(source, PatternConsts.PRINTF_VARS,
+                    null);
             entryParseCallback.addEntry(null, source, translation, false, comments, null, this, protectedParts);
         } else if (entryAlignCallback != null) {
             entryAlignCallback.addTranslation(null, source, translation, false, null, this);
@@ -239,9 +241,7 @@ public class MozillaLangFilter extends AbstractFilter {
             tr = entryTranslateCallback.getTranslation(null, source.toString(), null);
             if (tr == null) {
                 tr = source.toString();
-            }
-            else if ( tr.equals(source.toString()) )
-            {
+            } else if (tr.equals(source.toString())) {
                 tr += " {ok}";
             }
             eol(tr);

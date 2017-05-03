@@ -79,7 +79,7 @@ public class XMLStreamReader implements Closeable {
     private void setStream(File file, String encoding) throws FileNotFoundException,
             UnsupportedEncodingException, IOException, TranslationException {
         m_reader = new XMLReader(file.getAbsolutePath(), encoding);
-        _setStream();
+        setStreamImpl();
     }
 
     /**
@@ -94,11 +94,11 @@ public class XMLStreamReader implements Closeable {
      */
     public void setStream(InputStream stream, String encoding) throws IOException, TranslationException {
         m_reader = new XMLReader(stream, encoding);
-        _setStream();
+        setStreamImpl();
     }
 
     // do the work here
-    private void _setStream() throws IOException, TranslationException {
+    private void setStreamImpl() throws IOException, TranslationException {
         m_pos = -1;
         // make sure XML file is proper
         XMLBlock blk = getNextBlock();
@@ -145,7 +145,7 @@ public class XMLStreamReader implements Closeable {
                 XMLBlock b = getNextTag();
                 return b;
             }
-        } else if (cp == ']' && end_cdata_flag) {
+        } else if (cp == ']' && endCdataFlag) {
             // very, very special case -- the end of CDATA block
             // is handled completely separately
             XMLBlock b = getNextTagCDATAEnd();
@@ -212,8 +212,9 @@ public class XMLStreamReader implements Closeable {
      * Pushes cached chars onto the stack, in effect rewinding stream.
      */
     private void revertToCached() {
-        for (int i = m_charCache.size() - 1; i >= 0; i--)
+        for (int i = m_charCache.size() - 1; i >= 0; i--) {
             m_charStack.push(m_charCache.get(i));
+        }
     }
 
     /**
@@ -262,8 +263,9 @@ public class XMLStreamReader implements Closeable {
                                 if (b != '\n') {
                                     // not a cr/lf pair - make sure not
                                     // another cr and then push char
-                                    if (b == 13)
+                                    if (b == 13) {
                                         pushChar('\n');
+                                    }
                                 }
                                 // else - do nothing; swallow the 13
                             } else {
@@ -331,11 +333,11 @@ public class XMLStreamReader implements Closeable {
                         if (wsCnt == 0) {
                             strBuf.append(' ');
                             wsCnt = 1;
-                        } else
+                        } else {
                             continue;
+                        }
                     }
-                } else // compressWhitespace == false
-                {
+                } else { // compressWhitespace == false
                     strBuf.appendCodePoint(cp);
                 }
             } else {
@@ -346,7 +348,7 @@ public class XMLStreamReader implements Closeable {
                     break;
                 }
 
-                if (cp == ']' && cdata_flag) {
+                if (cp == ']' && cdataFlag) {
                     // handling ]]> (closure of CDATA expression) in a special
                     // way
                     int cp1 = getNextChar();
@@ -354,8 +356,8 @@ public class XMLStreamReader implements Closeable {
                     pushChar(cp2);
                     pushChar(cp1);
                     if (cp1 == ']' && cp2 == '>') {
-                        cdata_flag = false;
-                        end_cdata_flag = true;
+                        cdataFlag = false;
+                        endCdataFlag = true;
                         pushChar(cp);
                         break;
                     }
@@ -374,14 +376,14 @@ public class XMLStreamReader implements Closeable {
         return blk;
     }
 
-    private boolean cdata_flag = false;
-    private boolean end_cdata_flag = false;
+    private boolean cdataFlag = false;
+    private boolean endCdataFlag = false;
 
     /**
      * Gets the end of CDATA expression - "]]>".
      */
     private XMLBlock getNextTagCDATAEnd() {
-        end_cdata_flag = false;
+        endCdataFlag = false;
 
         XMLBlock blk = new XMLBlock();
         blk.setTypeChar('!');
@@ -482,10 +484,11 @@ public class XMLStreamReader implements Closeable {
                 // verify comment string - copy until -->
                 switch (type) {
                 case type_dash:
-                    if (dashCnt >= 2)
+                    if (dashCnt >= 2) {
                         data.appendCodePoint(cp);
-                    else
+                    } else {
                         dashCnt++;
+                    }
                     break;
 
                 case type_gt:
@@ -516,7 +519,7 @@ public class XMLStreamReader implements Closeable {
                 case type_opBrac:
                     // the end of CDATA declaration
                     state = state_finish;
-                    cdata_flag = true;
+                    cdataFlag = true;
                     break;
 
                 default:
@@ -646,13 +649,15 @@ public class XMLStreamReader implements Closeable {
         // TODO construct error message with correct state data
         // for now, just throw a parse error
         String data = OStrings.getString("XSR_ERROR_TAG_NAME") + blk.getTagName() + " ";
-        if (blk.isStandalone())
+        if (blk.isStandalone()) {
             data += OStrings.getString("XSR_ERROR_EMPTY_TAG");
-        else if (blk.isClose())
+        } else if (blk.isClose()) {
             data += OStrings.getString("XSR_ERROR_CLOSE_TAG");
-        if (blk.numAttributes() > 0)
+        }
+        if (blk.numAttributes() > 0) {
             data += OStrings.getString("XSR_ERROR_LOADED") + blk.numAttributes()
                     + OStrings.getString("XSR_ERROR_ATTRIBUTES");
+        }
         throw new TranslationException(msg + data);
     }
 
@@ -828,8 +833,9 @@ public class XMLStreamReader implements Closeable {
                     // parse error - got '?' followed by something
                     // unexpected
                     throwErrorInGetNextTag(blk, OStrings.getString("XSR_ERROR_FLOATING_QUESTION_MARK"));
-                } else
+                } else {
                     state = state_finish;
+                }
                 break;
 
             case state_buildAttr:
@@ -882,8 +888,8 @@ public class XMLStreamReader implements Closeable {
                         attr = new StringBuilder();
                         val = new StringBuilder();
                         state = state_closeValueQuote;
-                    } // else -- an error!
-                    else {
+                    // else -- an error!
+                    } else {
                         // this is a quoted value - be lenient on OK chars
                         val.appendCodePoint(cp);
                     }
@@ -1065,13 +1071,13 @@ public class XMLStreamReader implements Closeable {
         List<XMLBlock> lst = new ArrayList<XMLBlock>();
 
         // sanity check
-        if (block == null)
+        if (block == null) {
             return lst;
-
+        }
         // if block is a standalone tag, return straight away
-        if (block.isStandalone())
+        if (block.isStandalone()) {
             return lst;
-
+        }
         // start search
         int depth = 0;
         XMLBlock blk;
@@ -1086,11 +1092,13 @@ public class XMLStreamReader implements Closeable {
                 if (blk.isClose()) {
                     if (depth == 0) {
                         // found the closing tag
-                        if (includeTerminationBlock)
+                        if (includeTerminationBlock) {
                             lst.add(blk);
+                        }
                         break;
-                    } else
+                    } else {
                         depth--;
+                    }
                 } else {
                     // imbedded tag of same name - increase stack count
                     depth++;

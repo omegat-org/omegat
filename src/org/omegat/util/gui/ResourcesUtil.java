@@ -28,7 +28,6 @@ package org.omegat.util.gui;
 
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.io.FileNotFoundException;
 import java.net.URL;
 
 /**
@@ -37,7 +36,10 @@ import java.net.URL;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
-public class ResourcesUtil {
+public final class ResourcesUtil {
+
+    private ResourcesUtil() {
+    }
 
     private static final String RESOURCES = "/org/omegat/gui/resources/";
 
@@ -53,7 +55,6 @@ public class ResourcesUtil {
      *
      * @param resourceName
      *            resource name
-     * @throws FileNotFoundException
      */
     public static Image getImage(final String resourceName) {
         URL resourceURL = ResourcesUtil.class.getResource(resourceName);

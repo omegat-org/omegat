@@ -163,8 +163,7 @@ public class ProjectPropertiesDialog extends JDialog {
      * @param projFileName
      *            project file name
      * @param dialogTypeValue
-     *            type of the dialog ({@link Mode#NEW_PROJECT},
-     *            {@link Mode#RESOLVE_DIRS} or {@link Mode#EDIT_PROJECT}).
+     *            type of the dialog ({@link Mode#NEW_PROJECT}, {@link Mode#RESOLVE_DIRS} or {@link Mode#EDIT_PROJECT}).
      */
     public ProjectPropertiesDialog(Frame parent, final ProjectProperties projectProperties, String projFileName,
             Mode dialogTypeValue) {
@@ -199,7 +198,8 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // Source and target languages and tokenizers
         Box localesBox = Box.createHorizontalBox();
-        localesBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), OStrings.getString("PP_LANGUAGES") ));
+        localesBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+                OStrings.getString("PP_LANGUAGES")));
 
         // Languages box
         Box bL = Box.createVerticalBox();
@@ -471,7 +471,8 @@ public class ProjectPropertiesDialog extends JDialog {
         centerBox.add(Box.createVerticalStrut(5));
 
         Box dirsBox = Box.createVerticalBox();
-        dirsBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), OStrings.getString("PP_DIRECTORIES") ));
+        dirsBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+                OStrings.getString("PP_DIRECTORIES")));
 
         JLabel m_srcRootLabel = new JLabel();
         Mnemonics.setLocalizedText(m_srcRootLabel, OStrings.getString("PP_SRC_ROOT"));
@@ -885,8 +886,9 @@ public class ProjectPropertiesDialog extends JDialog {
             curDir = dirFile.getParent();
         }
 
-        if (curDir.equals(""))
+        if (curDir.equals("")) {
             curDir = Preferences.getPreference(Preferences.CURRENT_FOLDER);
+        }
 
         if (!curDir.equals("")) {
             File dir = new File(curDir);
@@ -899,22 +901,24 @@ public class ProjectPropertiesDialog extends JDialog {
         int action = browser.showOpenDialog(this);
 
         // check if the selection has been approved
-        if (action != javax.swing.JFileChooser.APPROVE_OPTION)
+        if (action != javax.swing.JFileChooser.APPROVE_OPTION) {
             return;
+        }
 
         // get the selected folder
         File dir = browser.getSelectedFile();
-        if (dir == null)
+        if (dir == null) {
             return;
+        }
 
         String str = dir.getAbsolutePath();
         if (!fileMode) {
-            str+= File.separator; // Add file separator for directories
+            str += File.separator; // Add file separator for directories
         }
 
         // The writeable glossary file must end with .txt or utf8. Not .tab, because it not necessarily is .utf8
-        if (glossaryFile && !str.endsWith(OConsts.EXT_TSV_TXT) &&!str.endsWith(OConsts.EXT_TSV_UTF8)) {
-           str += OConsts.EXT_TSV_TXT; // Defaults to .txt
+        if (glossaryFile && !str.endsWith(OConsts.EXT_TSV_TXT) && !str.endsWith(OConsts.EXT_TSV_UTF8)) {
+            str += OConsts.EXT_TSV_TXT; // Defaults to .txt
         }
 
         // reset appropriate path - store preferred directory
@@ -924,8 +928,9 @@ public class ProjectPropertiesDialog extends JDialog {
             projectProperties.setSourceRoot(str);
             field.setText(projectProperties.getSourceRoot());
             if (new File(projectProperties.getSourceRoot()).exists()
-                    && new File(projectProperties.getSourceRoot()).isDirectory())
+                    && new File(projectProperties.getSourceRoot()).isDirectory()) {
                 field.setForeground(java.awt.SystemColor.textText);
+            }
             break;
 
         case 2:
@@ -933,8 +938,9 @@ public class ProjectPropertiesDialog extends JDialog {
             projectProperties.setTargetRoot(str);
             field.setText(projectProperties.getTargetRoot());
             if (new File(projectProperties.getTargetRoot()).exists()
-                    && new File(projectProperties.getTargetRoot()).isDirectory())
+                    && new File(projectProperties.getTargetRoot()).isDirectory()) {
                 field.setForeground(java.awt.SystemColor.textText);
+            }
             break;
 
         case 3:
@@ -942,8 +948,9 @@ public class ProjectPropertiesDialog extends JDialog {
             projectProperties.setGlossaryRoot(str);
             field.setText(projectProperties.getGlossaryRoot());
             if (new File(projectProperties.getGlossaryRoot()).exists()
-                    && new File(projectProperties.getGlossaryRoot()).isDirectory())
+                    && new File(projectProperties.getGlossaryRoot()).isDirectory()) {
                 field.setForeground(java.awt.SystemColor.textText);
+            }
             break;
 
         case 4:
@@ -951,8 +958,9 @@ public class ProjectPropertiesDialog extends JDialog {
             projectProperties.setTMRoot(str);
             field.setText(projectProperties.getTMRoot());
             if (new File(projectProperties.getTMRoot()).exists()
-                    && new File(projectProperties.getTMRoot()).isDirectory())
+                    && new File(projectProperties.getTMRoot()).isDirectory()) {
                 field.setForeground(java.awt.SystemColor.textText);
+            }
             break;
 
         case 5:
@@ -960,8 +968,9 @@ public class ProjectPropertiesDialog extends JDialog {
             projectProperties.setDictRoot(str);
             field.setText(projectProperties.getDictRoot());
             if (new File(projectProperties.getDictRoot()).exists()
-                    && new File(projectProperties.getDictRoot()).isDirectory())
+                    && new File(projectProperties.getDictRoot()).isDirectory()) {
                 field.setForeground(java.awt.SystemColor.textText);
+            }
             break;
 
         case 6:
@@ -971,8 +980,9 @@ public class ProjectPropertiesDialog extends JDialog {
             // The writable glosssary file must be inside the glossary dir
             if (new File(projectProperties.getWriteableGlossaryDir()).exists()
                     && new File(projectProperties.getWriteableGlossaryDir()).isDirectory()
-                    && projectProperties.getWriteableGlossaryDir().contains(projectProperties.getGlossaryRoot()))
+                    && projectProperties.getWriteableGlossaryDir().contains(projectProperties.getGlossaryRoot())) {
                 field.setForeground(java.awt.SystemColor.textText);
+            }
             break;
 
         }
@@ -981,8 +991,9 @@ public class ProjectPropertiesDialog extends JDialog {
     private void doOK(JComboBox<Language> m_sourceLocaleField, JComboBox<Language> m_targetLocaleField,
             JComboBox<Class<?>> m_sourceTokenizerField, JComboBox<Class<?>> m_targetTokenizerField,
             JCheckBox m_sentenceSegmentingCheckBox, JTextField m_srcRootField, JTextField m_locRootField,
-            JTextField m_glosRootField, JTextField m_writeableGlosField, JTextField m_tmRootField, JTextField m_dictRootField,
-            JCheckBox m_allowDefaultsCheckBox, JCheckBox m_removeTagsCheckBox, JTextArea m_customCommandTextArea) {
+            JTextField m_glosRootField, JTextField m_writeableGlosField, JTextField m_tmRootField,
+            JTextField m_dictRootField, JCheckBox m_allowDefaultsCheckBox, JCheckBox m_removeTagsCheckBox,
+            JTextArea m_customCommandTextArea) {
         if (!Language.verifySingleLangCode(m_sourceLocaleField.getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(
                     this,
@@ -1006,11 +1017,11 @@ public class ProjectPropertiesDialog extends JDialog {
         projectProperties.setTargetLanguage(m_targetLocaleField.getSelectedItem().toString());
 
         if (m_sourceTokenizerField.isEnabled()) {
-            projectProperties.setSourceTokenizer((Class<?>)m_sourceTokenizerField.getSelectedItem());
+            projectProperties.setSourceTokenizer((Class<?>) m_sourceTokenizerField.getSelectedItem());
         }
 
         if (m_targetTokenizerField.isEnabled()) {
-            projectProperties.setTargetTokenizer((Class<?>)m_targetTokenizerField.getSelectedItem());
+            projectProperties.setTargetTokenizer((Class<?>) m_targetTokenizerField.getSelectedItem());
         }
 
         projectProperties.setSentenceSegmentingEnabled(m_sentenceSegmentingCheckBox.isSelected());
@@ -1022,8 +1033,9 @@ public class ProjectPropertiesDialog extends JDialog {
         projectProperties.setExternalCommand(m_customCommandTextArea.getText());
 
         projectProperties.setSourceRoot(m_srcRootField.getText());
-        if (!projectProperties.getSourceRoot().endsWith(File.separator))
+        if (!projectProperties.getSourceRoot().endsWith(File.separator)) {
             projectProperties.setSourceRoot(projectProperties.getSourceRoot() + File.separator);
+        }
 
         if (dialogType != Mode.NEW_PROJECT && !new File(projectProperties.getSourceRoot()).exists()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_SOURCEDIR_DOESNT_EXIST"),
@@ -1033,8 +1045,9 @@ public class ProjectPropertiesDialog extends JDialog {
         }
 
         projectProperties.setTargetRoot(m_locRootField.getText());
-        if (!projectProperties.getTargetRoot().endsWith(File.separator))
+        if (!projectProperties.getTargetRoot().endsWith(File.separator)) {
             projectProperties.setTargetRoot(projectProperties.getTargetRoot() + File.separator);
+        }
         if (dialogType != Mode.NEW_PROJECT && !new File(projectProperties.getTargetRoot()).exists()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_TRANSDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
@@ -1043,8 +1056,9 @@ public class ProjectPropertiesDialog extends JDialog {
         }
 
         projectProperties.setGlossaryRoot(m_glosRootField.getText());
-        if (!projectProperties.getGlossaryRoot().endsWith(File.separator))
+        if (!projectProperties.getGlossaryRoot().endsWith(File.separator)) {
             projectProperties.setGlossaryRoot(projectProperties.getGlossaryRoot() + File.separator);
+        }
         if (dialogType != Mode.NEW_PROJECT && !new File(projectProperties.getGlossaryRoot()).exists()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_GLOSSDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
@@ -1072,8 +1086,9 @@ public class ProjectPropertiesDialog extends JDialog {
         }
 
         projectProperties.setTMRoot(m_tmRootField.getText());
-        if (!projectProperties.getTMRoot().endsWith(File.separator))
+        if (!projectProperties.getTMRoot().endsWith(File.separator)) {
             projectProperties.setTMRoot(projectProperties.getTMRoot() + File.separator);
+        }
         if (dialogType != Mode.NEW_PROJECT && !new File(projectProperties.getTMRoot()).exists()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_TMDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
@@ -1082,8 +1097,9 @@ public class ProjectPropertiesDialog extends JDialog {
         }
 
         projectProperties.setDictRoot(m_dictRootField.getText());
-        if (!projectProperties.getDictRoot().endsWith(File.separator))
+        if (!projectProperties.getDictRoot().endsWith(File.separator)) {
             projectProperties.setDictRoot(projectProperties.getDictRoot() + File.separator);
+        }
         if (dialogType != Mode.NEW_PROJECT && !new File(projectProperties.getDictRoot()).exists()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_DICTDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
@@ -1134,7 +1150,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
     private static class ScrollableBox extends Box implements Scrollable {
 
-        public ScrollableBox(int axis) {
+        ScrollableBox(int axis) {
             super(axis);
         }
 

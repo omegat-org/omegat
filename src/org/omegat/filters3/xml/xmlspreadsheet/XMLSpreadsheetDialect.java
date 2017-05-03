@@ -29,6 +29,7 @@
 package org.omegat.filters3.xml.xmlspreadsheet;
 
 import java.util.regex.Pattern;
+
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.xml.DefaultXMLDialect;
@@ -69,9 +70,10 @@ public class XMLSpreadsheetDialect extends DefaultXMLDialect {
         if (atts != null) {
             for (int i = 0; i < atts.size(); i++) {
                 Attribute oneAttribute = atts.get(i);
-                if (oneAttribute.getName().equalsIgnoreCase("ss:type") &&
-                    oneAttribute.getValue().equalsIgnoreCase("number") )
+                if (oneAttribute.getName().equalsIgnoreCase("ss:type")
+                        && oneAttribute.getValue().equalsIgnoreCase("number")) {
                     return true;
+                }
             }
         }
         return false;

@@ -116,10 +116,10 @@ public class MicrosoftTranslate extends BaseTranslate {
      * @return either a language code, or a Chinese language code plus a Microsoft variant
      */
     private String checkMSLang(Language language) {
-        if (language.getLanguage().compareToIgnoreCase("zh-cn") == 0){
+        if (language.getLanguage().compareToIgnoreCase("zh-cn") == 0) {
             return "zh-CHS";
-        } else if ((language.getLanguage().compareToIgnoreCase("zh-tw") == 0) ||
-                   (language.getLanguage().compareToIgnoreCase("zh-hk") == 0)) {
+        } else if ((language.getLanguage().compareToIgnoreCase("zh-tw") == 0)
+                || (language.getLanguage().compareToIgnoreCase("zh-hk") == 0)) {
             return "zh-CHT";
         } else {
             return language.getLanguageCode();

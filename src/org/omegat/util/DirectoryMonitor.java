@@ -118,11 +118,12 @@ public class DirectoryMonitor extends Thread {
      * directory immediately.
      */
     public synchronized void checkChanges() {
-    	boolean directoryChanged = false;
+        boolean directoryChanged = false;
         // find deleted or changed files
         for (String fn : new ArrayList<String>(existFiles.keySet())) {
-            if (stopped)
+            if (stopped) {
                 return;
+            }
             File f = new File(fn);
             if (!f.exists()) {
                 // file removed
@@ -149,8 +150,9 @@ public class DirectoryMonitor extends Thread {
             }
         });
         for (File f : foundFiles) {
-            if (stopped)
+            if (stopped) {
                 return;
+            }
             String fn = f.getPath();
             if (!existFiles.keySet().contains(fn)) {
                 // file added
@@ -161,9 +163,8 @@ public class DirectoryMonitor extends Thread {
             }
         }
 
-        if (directoryCallback != null && directoryChanged)
-        {
-        	directoryCallback.directoryChanged(dir);
+        if (directoryCallback != null && directoryChanged) {
+            directoryCallback.directoryChanged(dir);
         }
     }
 

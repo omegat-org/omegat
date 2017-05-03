@@ -49,7 +49,7 @@ import org.omegat.util.TagUtil;
  */
 public abstract class TranslateEntry implements ITranslateCallback {
 
-    private final ProjectProperties m_config;
+    private final ProjectProperties config;
 
     private int pass;
 
@@ -61,8 +61,8 @@ public abstract class TranslateEntry implements ITranslateCallback {
      */
     private int currentlyProcessedSegment;
 
-    public TranslateEntry(final ProjectProperties m_config) {
-        this.m_config = m_config;
+    public TranslateEntry(final ProjectProperties config) {
+        this.config = config;
     }
 
     /**
@@ -98,22 +98,22 @@ public abstract class TranslateEntry implements ITranslateCallback {
         // Fetch removed tags if the options
         // has been enabled.
         String tags = null;
-        if (m_config.isRemoveTags()) {
+        if (config.isRemoveTags()) {
             tags = TagUtil.buildTagListForRemove(origSource);
         }
 
         boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
         final String source = StringUtil.normalizeUnicode(ParseEntry.stripSomeChars(
-                origSource, spr, m_config.isRemoveTags(), removeSpaces));
+                origSource, spr, config.isRemoveTags(), removeSpaces));
 
         StringBuilder res = new StringBuilder();
 
-        if (m_config.isSentenceSegmentingEnabled()) {
+        if (config.isSentenceSegmentingEnabled()) {
             boolean translated = false;
             List<StringBuilder> spaces = new ArrayList<StringBuilder>();
             List<Rule> brules = new ArrayList<Rule>();
-            Language sourceLang = m_config.getSourceLanguage();
-            Language targetLang = m_config.getTargetLanguage();
+            Language sourceLang = config.getSourceLanguage();
+            Language targetLang = config.getTargetLanguage();
             List<String> segments = Core.getSegmenter().segment(sourceLang, source, spaces, brules);
             for (int i = 0; i < segments.size(); i++) {
                 String onesrc = segments.get(i);
@@ -148,8 +148,8 @@ public abstract class TranslateEntry implements ITranslateCallback {
         // This is a Word document, Remove Tags (from Project Properties) is not checked and Remove leading and
         // trailing tags (from File Filters) is not checked
         String fileName = getCurrentFile().toLowerCase();
-        if ((fileName.endsWith(".docx") || fileName.endsWith(".docm")) &&
-            !m_config.isRemoveTags() && !Core.getFilterMaster().getConfig().isRemoveTags()) {
+        if ((fileName.endsWith(".docx") || fileName.endsWith(".docm")) && !config.isRemoveTags()
+                && !Core.getFilterMaster().getConfig().isRemoveTags()) {
             // Locate the location of the first tag
             String firstTag = TagUtil.getFirstTag(r);
             if (firstTag != null) {
@@ -158,13 +158,14 @@ public abstract class TranslateEntry implements ITranslateCallback {
                 if (locFirstTag > 0) {
                     // Was the first tag between two words without any spaces around?
                     String addSpace = "";
-                    if (!Character.isWhitespace(r.codePointBefore(locFirstTag)) &&
-                        !Character.isWhitespace(r.codePointAt(locFirstTag + firstTag.length())) &&
-                        Core.getProject().getProjectProperties().getTargetLanguage().isSpaceDelimited()) {
+                    if (!Character.isWhitespace(r.codePointBefore(locFirstTag))
+                            && !Character.isWhitespace(r.codePointAt(locFirstTag + firstTag.length()))
+                            && Core.getProject().getProjectProperties().getTargetLanguage().isSpaceDelimited()) {
                         addSpace = " ";
                     }
                     // Move that first tag before the text, adding a space if needed.
-                    r = firstTag + r.substring(0, locFirstTag) + addSpace + r.substring(locFirstTag + firstTag.length());
+                    r = firstTag + r.substring(0, locFirstTag) + addSpace
+                            + r.substring(locFirstTag + firstTag.length());
                 }
             }
         }
@@ -172,7 +173,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
         // fix for bug 3487497;
         // explicitly add the removed tags at
         // the end of the translated string.
-        if (m_config.isRemoveTags()) {
+        if (config.isRemoveTags()) {
             r += tags;
         }
 

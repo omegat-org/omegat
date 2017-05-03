@@ -77,7 +77,6 @@ import org.omegat.core.threads.CommandMonitor;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
-import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.gui.glossary.GlossaryReaderTSV;
@@ -530,13 +529,12 @@ public class RealProject implements IProject {
     }
 
     /**
-     * Builds translated files corresponding to sourcePattern and creates fresh TM files.
-     * Convenience method. Assumes we want to run external post-processing commands.
+     * Builds translated files corresponding to sourcePattern and creates fresh TM files. Convenience method. Assumes we
+     * want to run external post-processing commands.
      *
      * @param sourcePattern
      *            The regexp of files to create
-     * @throws IOException
-     * @throws TranslationException
+     * @throws Exception
      */
     public void compileProject(String sourcePattern) throws Exception {
         compileProject(sourcePattern, true);
@@ -549,8 +547,7 @@ public class RealProject implements IProject {
      *            The regexp of files to create
      * @param doPostProcessing
      *            Whether or not we should perform external post-processing.
-     * @throws IOException
-     * @throws TranslationException
+     * @throws Exception
      */
     public void compileProject(String sourcePattern, boolean doPostProcessing) throws Exception {
         Log.logInfoRB("LOG_DATAENGINE_COMPILE_START");

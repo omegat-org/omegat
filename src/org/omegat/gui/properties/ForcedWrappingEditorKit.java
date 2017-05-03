@@ -25,7 +25,6 @@
 
 package org.omegat.gui.properties;
 
-import javax.swing.JTextPane;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.BoxView;
 import javax.swing.text.ComponentView;
@@ -39,9 +38,9 @@ import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
 
 /**
- * {@link JTextPane}s won't break words when wrapping, so very long words can result in horizontal scrolling.
- * This EditorKit is a big, complicated way of overriding {@link LabelView#getMinimumSpan(int)} to return 0
- * for the X-axis, allowing long words to be broken.
+ * {@code JTextPane}s won't break words when wrapping, so very long words can result in horizontal scrolling. This
+ * EditorKit is a big, complicated way of overriding {@link LabelView#getMinimumSpan(int)} to return 0 for the X-axis,
+ * allowing long words to be broken.
  *
  * @see <a href="http://stackoverflow.com/a/13375811/448068">StackOverflow</a>
  * @see <a href="http://java-sl.com/wrap.html">Java SL</a>
@@ -83,7 +82,7 @@ public class ForcedWrappingEditorKit extends StyledEditorKit {
 
     private static class WrapLabelView extends LabelView {
 
-        public WrapLabelView(Element elem) {
+        WrapLabelView(Element elem) {
             super(elem);
         }
 

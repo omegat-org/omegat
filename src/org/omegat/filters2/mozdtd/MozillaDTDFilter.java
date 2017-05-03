@@ -153,7 +153,7 @@ public class MozillaDTDFilter extends AbstractFilter {
                 outFile.write(block.toString());
                 block.setLength(0);
             }
-            if (!Character.isWhitespace(c) ) { // In the regexp, there could be whitespace between " and >
+            if (!Character.isWhitespace(c)) { // In the regexp, there could be whitespace between " and >
                 previousChar = c;
             }
         }
@@ -173,7 +173,7 @@ public class MozillaDTDFilter extends AbstractFilter {
         } else if (entryTranslateCallback != null) {
             // replace translation
             String trans = entryTranslateCallback.getTranslation(id, text, null);
-            if (trans != null || removeStringsUntranslated == false) {
+            if (trans != null || !removeStringsUntranslated) {
                 out.write(block.substring(0, m.start(3)));
                 out.write(trans != null ? trans : text);
                 out.write(block.substring(m.end(3)));
@@ -184,7 +184,8 @@ public class MozillaDTDFilter extends AbstractFilter {
     }
 
     @Override
-    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc) throws Exception {
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc)
+            throws Exception {
         Map<String, String> source = new HashMap<String, String>();
         Map<String, String> translated = new HashMap<String, String>();
 
@@ -210,10 +211,11 @@ public class MozillaDTDFilter extends AbstractFilter {
         try {
             MozillaDTDOptionsDialog dialog = new MozillaDTDOptionsDialog(parent, config);
             dialog.setVisible(true);
-            if (MozillaDTDOptionsDialog.RET_OK == dialog.getReturnStatus())
+            if (MozillaDTDOptionsDialog.RET_OK == dialog.getReturnStatus()) {
                 return dialog.getOptions();
-            else
+            } else {
                 return null;
+            }
         } catch (Exception e) {
             Log.log(OStrings.getString("MOZDTD_FILTER_EXCEPTION"));
             Log.log(e);

@@ -42,7 +42,6 @@ import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.Properties;
-import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.UUID;
 import java.util.function.BiConsumer;
@@ -62,12 +61,11 @@ import org.omegat.util.OStrings;
 public class BundleTest {
 
     /**
-     * Ensure that all UI string bundles have either US-ASCII encoding
-     * or ISO-8859-1 encoding. The spec requires the latter, but ISO-8859-1
-     * is a superset of ASCII so ASCII is also acceptable (and is widely used
-     * in practice).
+     * Ensure that all UI string bundles have either US-ASCII encoding or ISO-8859-1 encoding. The spec requires the
+     * latter, but ISO-8859-1 is a superset of ASCII so ASCII is also acceptable (and is widely used in practice).
      *
-     * @see PropertyResourceBundle https://docs.oracle.com/javase/8/docs/api/java/util/PropertyResourceBundle.html
+     * @see <a href=
+     *      "https://docs.oracle.com/javase/8/docs/api/java/util/PropertyResourceBundle.html">PropertyResourceBundle</a>
      */
     @Test
     public void testBundleEncodings() throws Exception {

@@ -55,9 +55,9 @@ public class ScriptSet {
 
         p.setProperty("title", title);
 
-        for ( int i = 0; i < ScriptingWindow.NUMBERS_OF_QUICK_SCRIPTS; i++) {
+        for (int i = 0; i < ScriptingWindow.NUMBERS_OF_QUICK_SCRIPTS; i++) {
             if (quickScripts[i] != null) {
-                p.setProperty(Integer.toString(i+1), quickScripts[i]);
+                p.setProperty(Integer.toString(i + 1), quickScripts[i]);
             }
         }
 
@@ -65,12 +65,11 @@ public class ScriptSet {
     }
 
     public String getTitle() {
-       if (m_props.containsKey("title")) {
-           return m_props.getProperty("title");
-       }
-       else {
-           return m_setFile.getName();
-       }
+        if (m_props.containsKey("title")) {
+            return m_props.getProperty("title");
+        } else {
+            return m_setFile.getName();
+        }
     }
 
     public ScriptItem getScriptItem(int key) {

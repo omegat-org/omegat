@@ -178,8 +178,7 @@ public class EditorSettings implements IEditorSettings {
         return markNonUniqueSegments;
     }
 
-    public boolean isHideDuplicateSegments()
-    {
+    public boolean isHideDuplicateSegments() {
         return true;
     }
 
@@ -189,6 +188,7 @@ public class EditorSettings implements IEditorSettings {
 
     /**
      * mark non-breakable spaces?
+     *
      * @return true when set, false otherwise
      */
     public boolean isMarkNBSP() {
@@ -381,7 +381,8 @@ public class EditorSettings implements IEditorSettings {
     }
 
     /**
-     * repaint segments in editor according to new view options. Use when options change to make them effective immediately.
+     * repaint segments in editor according to new view options. Use when options change to make them effective
+     * immediately.
      */
     public void updateViewPreferences() {
         UIThreadsUtil.mustBeSwingThread();
@@ -397,15 +398,18 @@ public class EditorSettings implements IEditorSettings {
             parent.activateEntry();
         }
     }
+
     /**
-     * repaint segments in editor according to new view tag validation options. Use when options change to make them effective immediately.
+     * repaint segments in editor according to new view tag validation options. Use when options change to make them
+     * effective immediately.
      */
     public void updateTagValidationPreferences() {
         UIThreadsUtil.mustBeSwingThread();
 
         parent.commitAndDeactivate();
 
-        //nothing special to do: tags/placeholders are determined by segment builder and info is passed as argument to getattributeSet.
+        // nothing special to do: tags/placeholders are determined by segment builder and info is passed as argument to
+        // getattributeSet.
 
         if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();
@@ -415,17 +419,27 @@ public class EditorSettings implements IEditorSettings {
 
     /**
      * Choose segment's attributes based on rules.
-     * @param isSource is it a source segment or a target segment
-     * @param isPlaceholder is it for a placeholder (OmegaT tag or sprintf-variable etc.) or regular text inside the segment?
-     * @param isremovetext is it text that should be removed from translation?
-     * @param duplicate is the sourceTextEntry a duplicate or not? values: DUPLICATE.NONE, DUPLICATE.FIRST or DUPLICATE.NEXT. See sourceTextEntryste.getDuplicate()
-     * @param active is it an active segment?
-     * @param translationExists does a translation already exist
-     * @param isNBSP is the text a non-breakable space
+     *
+     * @param isSource
+     *            is it a source segment or a target segment
+     * @param isPlaceholder
+     *            is it for a placeholder (OmegaT tag or sprintf-variable etc.) or regular text inside the segment?
+     * @param isremovetext
+     *            is it text that should be removed from translation?
+     * @param duplicate
+     *            is the sourceTextEntry a duplicate or not? values: DUPLICATE.NONE, DUPLICATE.FIRST or DUPLICATE.NEXT.
+     *            See sourceTextEntryste.getDuplicate()
+     * @param active
+     *            is it an active segment?
+     * @param translationExists
+     *            does a translation already exist
+     * @param isNBSP
+     *            is the text a non-breakable space
      * @return proper AttributeSet to use on displaying the segment.
      */
-    public AttributeSet getAttributeSet(boolean isSource, boolean isPlaceholder, boolean isRemoveText, DUPLICATE duplicate, boolean active, boolean translationExists, boolean hasNote, boolean isNBSP) {
-        //determine foreground color
+    public AttributeSet getAttributeSet(boolean isSource, boolean isPlaceholder, boolean isRemoveText,
+            DUPLICATE duplicate, boolean active, boolean translationExists, boolean hasNote, boolean isNBSP) {
+        // determine foreground color
         Color fg = null;
 
         // Custom foreground colors
@@ -466,7 +480,9 @@ public class EditorSettings implements IEditorSettings {
                 break;
             }
         }
-        if (isPlaceholder) fg = Styles.EditorColor.COLOR_PLACEHOLDER.getColor();
+        if (isPlaceholder) {
+            fg = Styles.EditorColor.COLOR_PLACEHOLDER.getColor();
+        }
         if (isRemoveText && !isSource) {
             fg = Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor();
         }
@@ -540,18 +556,24 @@ public class EditorSettings implements IEditorSettings {
         return Styles.createAttributeSet(Styles.EditorColor.COLOR_MOD_INFO_FG.getColor(),
                 Styles.EditorColor.COLOR_MOD_INFO.getColor(), false, true);
     }
+
     /**
      * Returns font attributes for the segment marker.
+     *
      * @return
      */
     public AttributeSet getSegmentMarkerAttributeSet() {
-        return Styles.createAttributeSet(Styles.EditorColor.COLOR_SEGMENT_MARKER_FG.getColor(), Styles.EditorColor.COLOR_SEGMENT_MARKER_BG.getColor(), true, false);
+        return Styles.createAttributeSet(Styles.EditorColor.COLOR_SEGMENT_MARKER_FG.getColor(),
+                Styles.EditorColor.COLOR_SEGMENT_MARKER_BG.getColor(), true, false);
     }
+
     /**
      * Returns font attributes for other laguages translation.
+     *
      * @return
      */
     public AttributeSet getOtherLanguageTranslationAttributeSet() {
-        return Styles.createAttributeSet(Styles.EditorColor.COLOR_SOURCE_FG.getColor(), Styles.EditorColor.COLOR_SOURCE.getColor(), false, true);
+        return Styles.createAttributeSet(Styles.EditorColor.COLOR_SOURCE_FG.getColor(),
+                Styles.EditorColor.COLOR_SOURCE.getColor(), false, true);
     }
 }

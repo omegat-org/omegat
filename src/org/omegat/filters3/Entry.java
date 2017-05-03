@@ -264,12 +264,14 @@ public class Entry {
         boolean found = false;
         for (firstGood = 0; firstGood < textStart; firstGood++) {
             Element goodElem = get(firstGood);
-            if (!(goodElem instanceof Tag))
+            if (!(goodElem instanceof Tag)) {
                 continue;
+            }
 
             Tag good = (Tag) goodElem;
-            if (Tag.Type.BEGIN != good.getType())
+            if (Tag.Type.BEGIN != good.getType()) {
                 continue;
+            }
 
             // trying to test
             int recursion = 1;
@@ -278,13 +280,14 @@ public class Entry {
                 if (candElement instanceof Tag) {
                     Tag cand = (Tag) candElement;
                     if (cand.getTag().equals(good.getTag())) {
-                        if (Tag.Type.BEGIN == cand.getType())
+                        if (Tag.Type.BEGIN == cand.getType()) {
                             recursion++;
-                        else if (Tag.Type.END == cand.getType()) {
+                        } else if (Tag.Type.END == cand.getType()) {
                             recursion--;
                             if (recursion == 0) {
-                                if (i > textStart)
+                                if (i > textStart) {
                                     found = true;
+                                }
                                 break;
                             }
                         }
@@ -292,11 +295,13 @@ public class Entry {
                 }
             }
             // if we could find an ending, this is a "good one"
-            if (found)
+            if (found) {
                 break;
+            }
         }
-        if (!found)
+        if (!found) {
             firstGood = textStart;
+        }
 
         // //////////////////////////////////////////////////////////////////////
         // "last good"
@@ -304,12 +309,14 @@ public class Entry {
         found = false;
         for (lastGood = size() - 1; lastGood > textEnd; lastGood--) {
             Element goodElem = get(lastGood);
-            if (!(goodElem instanceof Tag))
+            if (!(goodElem instanceof Tag)) {
                 continue;
+            }
 
             Tag good = (Tag) goodElem;
-            if (Tag.Type.END != good.getType())
+            if (Tag.Type.END != good.getType()) {
                 continue;
+            }
 
             // trying to test
             int recursion = 1;
@@ -318,13 +325,14 @@ public class Entry {
                 if (candElement instanceof Tag) {
                     Tag cand = (Tag) candElement;
                     if (cand.getTag().equals(good.getTag())) {
-                        if (Tag.Type.END == cand.getType())
+                        if (Tag.Type.END == cand.getType()) {
                             recursion++;
-                        else if (Tag.Type.BEGIN == cand.getType()) {
+                        } else if (Tag.Type.BEGIN == cand.getType()) {
                             recursion--;
                             if (recursion == 0) {
-                                if (i < textEnd)
+                                if (i < textEnd) {
                                     found = true;
+                                }
                                 break;
                             }
                         }
@@ -332,11 +340,13 @@ public class Entry {
                 }
             }
             // if we coud find a starting, this is a "good one"
-            if (found)
+            if (found) {
                 break;
+            }
         }
-        if (!found)
+        if (!found) {
             lastGood = textEnd;
+        }
 
         boolean removeTags;
         if (handler.getContext().isRemoveAllTags()) { // If Remove Tags is on,
@@ -415,9 +425,9 @@ public class Entry {
                         if (otherElem instanceof Tag) {
                             Tag other = (Tag) otherElem;
                             if (other.getTag().equals(tag.getTag())) {
-                                if (Tag.Type.END == other.getType())
+                                if (Tag.Type.END == other.getType()) {
                                     recursion++;
-                                else if (Tag.Type.BEGIN == other.getType()) {
+                                } else if (Tag.Type.BEGIN == other.getType()) {
                                     recursion--;
                                     if (recursion == 0) {
                                         tag.setIndex(other.getIndex());
@@ -427,8 +437,7 @@ public class Entry {
                             }
                         }
                     }
-                    if (tag.getIndex() < 0) // ending tag without a starting one
-                    {
+                    if (tag.getIndex() < 0) { // ending tag without a starting one
                         tag.setIndex(n);
                         n++;
                     }
@@ -476,8 +485,9 @@ public class Entry {
      */
     public String sourceToTMX() {
         StringBuilder buf = new StringBuilder();
-        for (int i = 0; i < size(); i++)
+        for (int i = 0; i < size(); i++) {
             buf.append(get(i).toTMX());
+        }
         return buf.toString();
     }
 
@@ -489,8 +499,9 @@ public class Entry {
      */
     public String sourceToOriginal() {
         StringBuilder buf = new StringBuilder();
-        for (int i = 0; i < size(); i++)
+        for (int i = 0; i < size(); i++) {
             buf.append(get(i).toOriginal());
+        }
         return buf.toString();
     }
 
@@ -565,8 +576,9 @@ public class Entry {
             // P.S. If shortcut tag isn't found, probably we should issue a
             // warning.
         }
-        if (pos < translation.length())
+        if (pos < translation.length()) {
             translatedEntry.add(createTextInstance(translation.substring(pos)));
+        }
 
         // /////////////////////////////////////////////////////////////////////
         // checking tags
@@ -587,18 +599,21 @@ public class Entry {
      * storing in TMX.
      */
     public String translationToTMX() {
-        if (translatedEntry == null)
+        if (translatedEntry == null) {
             return sourceToTMX();
+        }
 
         StringBuilder buf = new StringBuilder();
 
-        for (int i = 0; i < getFirstGood(); i++)
+        for (int i = 0; i < getFirstGood(); i++) {
             buf.append(get(i).toTMX());
+        }
 
         buf.append(translatedEntry.sourceToTMX());
 
-        for (int i = getLastGood() + 1; i < size(); i++)
+        for (int i = getLastGood() + 1; i < size(); i++) {
             buf.append(get(i).toTMX());
+        }
 
         return buf.toString();
     }
@@ -608,18 +623,21 @@ public class Entry {
      * document.
      */
     public String translationToOriginal() {
-        if (translatedEntry == null)
+        if (translatedEntry == null) {
             return sourceToOriginal();
+        }
 
         StringBuilder buf = new StringBuilder();
 
-        for (int i = 0; i < getFirstGood(); i++)
+        for (int i = 0; i < getFirstGood(); i++) {
             buf.append(get(i).toOriginal());
+        }
 
         buf.append(translatedEntry.sourceToOriginal());
 
-        for (int i = getLastGood() + 1; i < size(); i++)
+        for (int i = getLastGood() + 1; i < size(); i++) {
             buf.append(get(i).toOriginal());
+        }
 
         return buf.toString();
     }

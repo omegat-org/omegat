@@ -218,25 +218,24 @@ public class PoOptionsDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void okButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_okButtonActionPerformed
-    {
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
         options.put(PoFilter.OPTION_ALLOW_BLANK, Boolean.toString(allowBlankCB.isSelected()));
-        options.put(PoFilter.OPTION_ALLOW_EDITING_BLANK_SEGMENT, Boolean.toString(allowEditingBlankSegmentCB.isSelected()));
+        options.put(PoFilter.OPTION_ALLOW_EDITING_BLANK_SEGMENT,
+                Boolean.toString(allowEditingBlankSegmentCB.isSelected()));
         options.put(PoFilter.OPTION_SKIP_HEADER, Boolean.toString(skipHeaderCB.isSelected()));
-        options.put(PoFilter.OPTION_AUTO_FILL_IN_PLURAL_STATEMENT, Boolean.toString(autoFillInPluralStatementCB.isSelected()));
+        options.put(PoFilter.OPTION_AUTO_FILL_IN_PLURAL_STATEMENT,
+                Boolean.toString(autoFillInPluralStatementCB.isSelected()));
         options.put(PoFilter.OPTION_FORMAT_MONOLINGUAL, Boolean.toString(formatMonolingualRB.isSelected()));
 
         doClose(RET_OK);
     }// GEN-LAST:event_okButtonActionPerformed
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_cancelButtonActionPerformed
-    {
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
         doClose(RET_CANCEL);
     }// GEN-LAST:event_cancelButtonActionPerformed
 
     /** Closes the dialog */
-    private void closeDialog(java.awt.event.WindowEvent evt)// GEN-FIRST:event_closeDialog
-    {
+    private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
         doClose(RET_CANCEL);
     }// GEN-LAST:event_closeDialog
 

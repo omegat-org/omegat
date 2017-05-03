@@ -78,11 +78,14 @@ public class GlossaryEntry {
      * @return All target-language terms
      */
     public String[] getLocTerms(boolean uniqueOnly) {
-        if (!uniqueOnly || m_loc.length == 1) return m_loc;
-
+        if (!uniqueOnly || m_loc.length == 1) {
+            return m_loc;
+        }
         ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < m_loc.length; i++) {
-            if (i > 0 && m_loc[i].equals(m_loc[i - 1])) continue;
+            if (i > 0 && m_loc[i].equals(m_loc[i - 1])) {
+                continue;
+            }
             list.add(m_loc[i]);
         }
         return list.toArray(new String[list.size()]);
@@ -114,7 +117,7 @@ public class GlossaryEntry {
     }
 
     public StyledString toStyledString() {
-        StyledString result=new StyledString();
+        StyledString result = new StyledString();
 
         result.text.append(m_src);
         result.text.append(" = ");
@@ -132,7 +135,9 @@ public class GlossaryEntry {
                 }
                 continue;
             }
-            if (i > 0) result.text.append(", ");
+            if (i > 0) {
+                result.text.append(", ");
+            }
             if (m_priority[i]) {
                 result.markBoldStart();
             }
@@ -165,16 +170,21 @@ public class GlossaryEntry {
      */
     private String bracketEntry(String entry) {
 
-        if (entry.contains(",") && !(entry.contains(";") || entry.contains("\"")))
+        if (entry.contains(",") && !(entry.contains(";") || entry.contains("\""))) {
             entry = '"' + entry + '"';
+        }
         return entry;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if ( o == null || o.getClass() != this.getClass() ) return false;
-        GlossaryEntry otherGlossaryEntry = (GlossaryEntry)o;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
+        GlossaryEntry otherGlossaryEntry = (GlossaryEntry) o;
 
         return StringUtil.equalsWithNulls(this.m_src, otherGlossaryEntry.m_src)
                 && Arrays.equals(this.m_loc, otherGlossaryEntry.m_loc)

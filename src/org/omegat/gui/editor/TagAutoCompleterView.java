@@ -71,7 +71,9 @@ public class TagAutoCompleterView extends AutoCompleterListView {
         if (!"".equals(wordChunk)) {
             // Check for partial matches among missing tag groups.
             for (String g : missingGroups) {
-                if (g.startsWith(wordChunk)) matchGroups.add(g);
+                if (g.startsWith(wordChunk)) {
+                    matchGroups.add(g);
+                }
             }
         }
 
@@ -94,10 +96,11 @@ public class TagAutoCompleterView extends AutoCompleterListView {
             if (sep > -1) {
                 cleaned = s.replace(TagUtil.TAG_SEPARATOR_SENTINEL, "");
                 display = s.replace(TagUtil.TAG_SEPARATOR_SENTINEL, "|");
-                adjustment = - (s.length() - 1 - sep);
+                adjustment = -(s.length() - 1 - sep);
                 keepSelection = true;
             }
-            result.add(new AutoCompleterItem(cleaned, new String[] { display }, adjustment, keepSelection, replacementLength));
+            result.add(new AutoCompleterItem(cleaned, new String[] { display }, adjustment, keepSelection,
+                    replacementLength));
         }
         return result;
     }

@@ -75,9 +75,9 @@ public class GlossaryTextAreaTest extends TestCore {
             }
         });
         // Make sure representations of both entries are rendered
-        String GTATEXT = entries.get(0).toStyledString().text.toString() + "\n\n" +
-                         entries.get(1).toStyledString().text.toString() + "\n\n";
-        assertEquals(GTATEXT, gta.getText());
+        String gtaText = entries.get(0).toStyledString().text.toString() + "\n\n"
+                + entries.get(1).toStyledString().text.toString() + "\n\n";
+        assertEquals(gtaText, gta.getText());
     }
 
     /**

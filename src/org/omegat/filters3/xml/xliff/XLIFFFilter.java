@@ -162,9 +162,9 @@ public class XLIFFFilter extends XMLFilter {
         try {
             EditXLIFFOptionsDialog dialog = new EditXLIFFOptionsDialog(parent, currentOptions);
             dialog.setVisible(true);
-            if (EditXLIFFOptionsDialog.RET_OK == dialog.getReturnStatus())
+            if (EditXLIFFOptionsDialog.RET_OK == dialog.getReturnStatus()) {
                 return dialog.getOptions().getOptionsMap();
-            else {
+            } else {
                 return null;
             }
         } catch (Exception e) {
@@ -296,13 +296,13 @@ public class XLIFFFilter extends XMLFilter {
         int i = 0;
         String tryID;
         while (true) {
-    		tryID = id + (i == 0 ? "" : "_" + i);
-    		if (!altIDCache.contains(tryID)) {
-    			altIDCache.add(tryID);
-    			return tryID;
-    		}
-    		i++;
-    	}
+            tryID = id + (i == 0 ? "" : "_" + i);
+            if (!altIDCache.contains(tryID)) {
+                altIDCache.add(tryID);
+                return tryID;
+            }
+            i++;
+        }
     }
 
     @Override
@@ -318,10 +318,10 @@ public class XLIFFFilter extends XMLFilter {
     @Override
     public String translate(String entry, List<ProtectedPart> protectedParts) {
         if (entryParseCallback != null) {
-        	if (!StringUtil.isEmpty(entry)) {
-        		entryText.add(entry);
-        		this.protectedParts.add(protectedParts);
-        	}
+            if (!StringUtil.isEmpty(entry)) {
+                entryText.add(entry);
+                this.protectedParts.add(protectedParts);
+            }
             return entry;
         } else if (entryTranslateCallback != null) {
             String translation = StringUtil.isEmpty(entry) ? entry

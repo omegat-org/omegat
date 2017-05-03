@@ -63,7 +63,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Didier Briel
  * @author Aaron Madlon-Kay
  */
-public class EditorPopups {
+public final class EditorPopups {
     public static void init(EditorController ec) {
         ec.registerPopupMenuConstructors(100, new SpellCheckerPopup(ec));
         ec.registerPopupMenuConstructors(200, new GoToSegmentPopup(ec));
@@ -72,6 +72,9 @@ public class EditorPopups {
         ec.registerPopupMenuConstructors(600, new EmptyNoneTranslationPopup(ec));
         ec.registerPopupMenuConstructors(700, new InsertTagsPopup(ec));
         ec.registerPopupMenuConstructors(700, new InsertBidiPopup(ec));
+    }
+
+    private EditorPopups() {
     }
 
     /**
@@ -267,8 +270,8 @@ public class EditorPopups {
 
             menu.addSeparator();
 
-			// Add glossary entry
-			JMenuItem item = menu.add(OStrings.getString("GUI_GLOSSARYWINDOW_addentry"));
+            // Add glossary entry
+            JMenuItem item = menu.add(OStrings.getString("GUI_GLOSSARYWINDOW_addentry"));
             item.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Core.getGlossary()
@@ -328,7 +331,8 @@ public class EditorPopups {
             if (dups.isEmpty()) {
                 return;
             }
-            JMenuItem header = menu.add(StringUtil.format(OStrings.getString("MW_GO_TO_DUPLICATE_HEADER"), dups.size()));
+            JMenuItem header = menu
+                    .add(StringUtil.format(OStrings.getString("MW_GO_TO_DUPLICATE_HEADER"), dups.size()));
             header.setEnabled(false);
             MenuItemPager pager = new MenuItemPager(menu);
             for (SourceTextEntry entry : dups) {

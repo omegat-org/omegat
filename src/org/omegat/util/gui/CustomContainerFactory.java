@@ -40,22 +40,21 @@ import org.omegat.util.OStrings;
 
 import com.vlsolutions.swing.docking.DefaultDockableContainerFactory;
 import com.vlsolutions.swing.docking.DockViewTitleBar;
-import com.vlsolutions.swing.docking.DockableContainerFactory;
 
 /**
- * A custom {@link DockableContainerFactory} to allow us to supply custom
- * {@link DockViewTitleBar}s so that we can insert custom buttons.
+ * A custom {@code DockableContainerFactory} to allow us to supply custom {@link DockViewTitleBar}s so that we can
+ * insert custom buttons.
  *
  * @author Aaron Madlon-Kay
  *
  */
 public class CustomContainerFactory extends DefaultDockableContainerFactory {
 
-    private static Icon SETTINGS_ICON = new ImageIcon(
+    private static final Icon SETTINGS_ICON = new ImageIcon(
             ResourcesUtil.getBundledImage("appbar.settings.active.png"));
-    private static Icon SETTINGS_ICON_INACTIVE = new ImageIcon(
+    private static final Icon SETTINGS_ICON_INACTIVE = new ImageIcon(
             ResourcesUtil.getBundledImage("appbar.settings.inactive.png"));
-    private static Icon SETTINGS_ICON_PRESSED = new ImageIcon(
+    private static final Icon SETTINGS_ICON_PRESSED = new ImageIcon(
             ResourcesUtil.getBundledImage("appbar.settings.pressed.png"));
 
     @Override
@@ -68,7 +67,7 @@ public class CustomContainerFactory extends DefaultDockableContainerFactory {
 
         private JButton settingsButton;
 
-        public CustomTitleBar() {
+        CustomTitleBar() {
             settingsButton = new JButton(SETTINGS_ICON_INACTIVE);
             settingsButton.setRolloverIcon(SETTINGS_ICON);
             settingsButton.setPressedIcon(SETTINGS_ICON_PRESSED);

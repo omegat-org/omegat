@@ -70,7 +70,7 @@ import com.vlsolutions.swing.docking.Dockable;
 
 /**
  * Child process for concurrent modification.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TestTeamIntegrationChild {
@@ -604,7 +604,7 @@ public class TestTeamIntegrationChild {
          * the base. This integration test never deletes entries, only adds or
          * modifies them, so modified versions must be supersets of their base
          * versions.
-         * 
+         *
          * @param base
          *            Base TM from which the other TM is derived
          * @param other

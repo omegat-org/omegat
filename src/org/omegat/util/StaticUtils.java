@@ -69,26 +69,30 @@ import org.omegat.util.Platform.OsType;
  * @author Martin Fleurke
  * @author Aaron Madlon-Kay
  */
-public class StaticUtils {
+public final class StaticUtils {
+
+    private StaticUtils() {
+    }
+
     /**
      * Configuration directory on Windows platforms
      */
-    private final static String WINDOWS_CONFIG_DIR = "\\OmegaT\\";
+    private static final String WINDOWS_CONFIG_DIR = "\\OmegaT\\";
 
     /**
      * Configuration directory on UNIX platforms
      */
-    private final static String UNIX_CONFIG_DIR = "/.omegat/";
+    private static final String UNIX_CONFIG_DIR = "/.omegat/";
 
     /**
      * Configuration directory on Mac OS X
      */
-    private final static String OSX_CONFIG_DIR = "/Library/Preferences/OmegaT/";
+    private static final String OSX_CONFIG_DIR = "/Library/Preferences/OmegaT/";
 
     /**
      * Script directory
      */
-    private final static String SCRIPT_DIR = "script";
+    private static final String SCRIPT_DIR = "script";
 
     /**
      * Char which should be used instead protected parts. It should be non-letter char, to be able to have
@@ -104,13 +108,13 @@ public class StaticUtils {
      * Contains the location of the directory containing the configuration
      * files.
      */
-    private static String m_configDir = null;
+    private static String configDir = null;
 
     /**
      * Contains the location of the script dir containing the exported text
      * files.
      */
-    private static String m_scriptDir = null;
+    private static String scriptDir = null;
 
     /**
      * Check if specified key pressed.
@@ -137,14 +141,14 @@ public class StaticUtils {
     }
 
     /** Caching install dir */
-    private static String INSTALLDIR = null;
+    private static String installDir = null;
 
     /**
      * Returns OmegaT installation directory. The code uses this method to look
      * up for OmegaT documentation.
      */
     public static String installDir() {
-        if (INSTALLDIR == null) {
+        if (installDir == null) {
             File file = null;
             try {
                 URI sourceUri = StaticUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI();
@@ -165,9 +169,9 @@ public class StaticUtils {
             if (file == null) {
                 file = Paths.get(".").toFile();
             }
-            INSTALLDIR = file.getAbsolutePath();
+            installDir = file.getAbsolutePath();
         }
-        return INSTALLDIR;
+        return installDir;
     }
 
     /**
@@ -191,15 +195,15 @@ public class StaticUtils {
      */
     public static String getConfigDir() {
         // if the configuration directory has already been determined, return it
-        if (m_configDir != null) {
-            return m_configDir;
+        if (configDir != null) {
+            return configDir;
         }
 
         String cd = RuntimePreferences.getConfigDir();
         if (cd != null) {
             // use the forced specified directory
-            m_configDir = new File(cd).getAbsolutePath() + File.separator;
-            return m_configDir;
+            configDir = new File(cd).getAbsolutePath() + File.separator;
+            return configDir;
         }
 
         OsType os = Platform.getOsType(); // name of operating system
@@ -213,7 +217,7 @@ public class StaticUtils {
             // access to the os/user home properties is restricted,
             // the location of the config dir cannot be determined,
             // set the config dir to the current working dir
-            m_configDir = new File(".").getAbsolutePath() + File.separator;
+            configDir = new File(".").getAbsolutePath() + File.separator;
 
             // log the exception, only do this after the config dir
             // has been set to the current working dir, otherwise
@@ -221,15 +225,15 @@ public class StaticUtils {
             Log.logErrorRB("SU_USERHOME_PROP_ACCESS_ERROR");
             Log.log(e.toString());
 
-            return m_configDir;
+            return configDir;
         }
 
         // if os or user home is null or empty, we cannot reliably determine
         // the config dir, so we use the current working dir (= empty string)
         if (os == null || StringUtil.isEmpty(home)) {
             // set the config dir to the current working dir
-            m_configDir = new File(".").getAbsolutePath() + File.separator;
-            return m_configDir;
+            configDir = new File(".").getAbsolutePath() + File.separator;
+            return configDir;
         }
 
         // check for Windows versions
@@ -254,38 +258,35 @@ public class StaticUtils {
             if (!StringUtil.isEmpty(appData)) {
                 // if a valid application data dir has been found,
                 // append an OmegaT subdir to it
-                m_configDir = appData + WINDOWS_CONFIG_DIR;
+                configDir = appData + WINDOWS_CONFIG_DIR;
             } else {
                 // otherwise set the config dir to the user's home directory,
                 // usually
                 // C:\Documents and Settings\<User>\OmegaT
-                m_configDir = home + WINDOWS_CONFIG_DIR;
+                configDir = home + WINDOWS_CONFIG_DIR;
             }
-        }
         // Check for UNIX varieties
         // Solaris is generally detected as SunOS
-        else if (os == OsType.LINUX32 || os == OsType.LINUX64 || os == OsType.OTHER) {
+        } else if (os == OsType.LINUX32 || os == OsType.LINUX64 || os == OsType.OTHER) {
             // set the config dir to the user's home dir + "/.omegat/", so it's
             // hidden
-            m_configDir = home + UNIX_CONFIG_DIR;
-        }
+            configDir = home + UNIX_CONFIG_DIR;
         // check for Mac OS X
-        else if (Platform.isMacOSX()) {
+        } else if (Platform.isMacOSX()) {
             // set the config dir to the user's home dir +
             // "/Library/Preferences/OmegaT/"
-            m_configDir = home + OSX_CONFIG_DIR;
-        }
+            configDir = home + OSX_CONFIG_DIR;
         // other OSes / default
-        else {
+        } else {
             // use the user's home directory by default
-            m_configDir = home + File.separator;
+            configDir = home + File.separator;
         }
 
         // create the path to the configuration dir, if necessary
-        if (!m_configDir.isEmpty()) {
+        if (!configDir.isEmpty()) {
             try {
                 // check if the dir exists
-                File dir = new File(m_configDir);
+                File dir = new File(configDir);
                 if (!dir.exists()) {
                     // create the dir
                     boolean created = dir.mkdirs();
@@ -294,13 +295,13 @@ public class StaticUtils {
                     // set the config dir to the current working dir
                     if (!created) {
                         Log.logErrorRB("SU_CONFIG_DIR_CREATE_ERROR");
-                        m_configDir = new File(".").getAbsolutePath() + File.separator;
+                        configDir = new File(".").getAbsolutePath() + File.separator;
                     }
                 }
             } catch (SecurityException e) {
                 // the system doesn't want us to write where we want to write
                 // reset the config dir to the current working dir
-                m_configDir = new File(".").getAbsolutePath() + File.separator;
+                configDir = new File(".").getAbsolutePath() + File.separator;
 
                 // log the exception, but only after the config dir has been
                 // reset
@@ -310,19 +311,19 @@ public class StaticUtils {
         }
 
         // we should have a correct, existing config dir now
-        return m_configDir;
+        return configDir;
     }
 
     public static String getScriptDir() {
         // If the script directory has already been determined, return it
-        if (m_scriptDir != null)
-            return m_scriptDir;
-
-        m_scriptDir = getConfigDir() + SCRIPT_DIR + File.separator;
+        if (scriptDir != null) {
+            return scriptDir;
+        }
+        scriptDir = getConfigDir() + SCRIPT_DIR + File.separator;
 
         try {
             // Check if the directory exists
-            File dir = new File(m_scriptDir);
+            File dir = new File(scriptDir);
             if (!dir.exists()) {
                 // Create the directory
                 boolean created = dir.mkdirs();
@@ -331,28 +332,28 @@ public class StaticUtils {
                 // set the script directory to config directory
                 if (!created) {
                     Log.logErrorRB("SU_SCRIPT_DIR_CREATE_ERROR");
-                    m_scriptDir = getConfigDir();
+                    scriptDir = getConfigDir();
                 }
             }
         } catch (SecurityException e) {
             // The system doesn't want us to write where we want to write
             // reset the script dir to the current config dir
-            m_scriptDir = getConfigDir();
+            scriptDir = getConfigDir();
 
             // log the exception, but only after the script dir has been reset
             Log.logErrorRB("SU_SCRIPT_DIR_CREATE_ERROR");
             Log.log(e.toString());
         }
-        return m_scriptDir;
+        return scriptDir;
     }
 
     /**
      * Encodes the array of bytes to store them in a plain text file.
      */
     public static String uuencode(byte[] buf) {
-        if (buf.length <= 0)
+        if (buf.length <= 0) {
             return "";
-
+        }
         StringBuilder res = new StringBuilder();
         res.append(buf[0]);
         for (int i = 1; i < buf.length; i++) {
@@ -383,10 +384,11 @@ public class StaticUtils {
      * Makes the file name relative to the given path.
      */
     public static String makeFilenameRelative(String filename, String path) {
-        if (filename.toLowerCase().startsWith(path.toLowerCase()))
+        if (filename.toLowerCase().startsWith(path.toLowerCase())) {
             return filename.substring(path.length());
-        else
+        } else {
             return filename;
+        }
     }
 
     /**

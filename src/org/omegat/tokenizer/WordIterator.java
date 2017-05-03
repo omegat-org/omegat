@@ -91,21 +91,24 @@ public class WordIterator extends BreakIterator {
      *         boundaries have been returned. Equivalent to next(1).
      */
     public int next() {
-        if (!nextItems.isEmpty())
+        if (!nextItems.isEmpty()) {
             return nextItems.removeFirst();
+        }
 
         int curr = current();
         int next = breaker.next();
-        if (DONE == next)
+        if (DONE == next) {
             return DONE;
+        }
 
         String str = text.substring(curr, next);
 
         // grouping OmegaT tags
         if (str.equals("<")) {
             int next2 = breaker.next();
-            if (DONE == next2)
+            if (DONE == next2) {
                 return next;
+            }
 
             int next3 = breaker.next();
             if (DONE == next3) {
@@ -133,9 +136,9 @@ public class WordIterator extends BreakIterator {
                 }
                 // there're at least three maybe-words after "<"
                 String str4 = text.substring(next3, next4);
-                if (str4.equals(">"))
+                if (str4.equals(">")) {
                     return next4; // yes, it's a standalone tag
-                else {
+                } else {
                     // rewind back three times
                     breaker.previous();
                     breaker.previous();
@@ -159,17 +162,18 @@ public class WordIterator extends BreakIterator {
                 }
                 // there're at least three maybe-words after "<"
                 String str4 = text.substring(next3, next4);
-                if (str4.equals(">"))
+                if (str4.equals(">")) {
                     return next4; // yes, it's a standalone tag
-                else {
+                } else {
                     // rewind back three times
                     breaker.previous();
                     breaker.previous();
                     breaker.previous();
                     return next;
                 }
-            } else if (str3.equals(">"))
+            } else if (str3.equals(">")) {
                 return next3; // yes, it's an OmegaT tag
+            }
             {
                 // rewind back two times
                 breaker.previous();
@@ -179,13 +183,14 @@ public class WordIterator extends BreakIterator {
         } else if (str.equals("&")) {
             // trying to see the mnemonic
             int next2 = breaker.next();
-            if (DONE == next2)
+            if (DONE == next2) {
                 return next;
+            }
 
             String str2 = text.substring(next, next2);
-            if (Character.isLetterOrDigit(str2.codePointAt(0)))
+            if (Character.isLetterOrDigit(str2.codePointAt(0))) {
                 return next2;
-            else {
+            } else {
                 // rewind back once
                 breaker.previous();
                 return next;
@@ -193,12 +198,12 @@ public class WordIterator extends BreakIterator {
         } else if (Character.isLetterOrDigit(str.codePointAt(0))) {
             // trying to see whether the next "word" is a "&"
             int next2 = breaker.next();
-            if (DONE == next2)
+            if (DONE == next2) {
                 return next;
+            }
 
             String str2 = text.substring(next, next2);
-            if (str2.equals("&")) // yes, it's there
-            {
+            if (str2.equals("&")) { // yes, it's there
                 int next3 = breaker.next();
                 if (DONE == next3) {
                     // Something&
@@ -208,9 +213,9 @@ public class WordIterator extends BreakIterator {
 
                 String str3 = text.substring(next2, next3);
                 // is it followed by a word like Some&thing
-                if (Character.isLetterOrDigit(str3.codePointAt(0)))
+                if (Character.isLetterOrDigit(str3.codePointAt(0))) {
                     return next3; // oh yes
-                else { // oh no
+                } else { // oh no
                     // rewind back two times
                     breaker.previous();
                     breaker.previous();
@@ -221,8 +226,9 @@ public class WordIterator extends BreakIterator {
                 breaker.previous();
                 return next;
             }
-        } else
+        } else {
             return next;
+        }
     }
 
     // ////////////////////////////////////////////////////////////////////////

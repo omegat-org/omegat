@@ -68,24 +68,24 @@ import gen.core.project.RepositoryMapping;
 /**
  * This is test for team project concurrent modification. It doesn't simple junit test, but looks like
  * 'integration' test.
- * 
+ *
  * This test prepare scenario, execute separate JVMs for concurrent updates, then check remote repository
  * data.
- * 
+ *
  * Each child process updates own segments with source1..5/0/1/2/3 by values from 1 and more. Segment source/0
  * updated each time, but source/1/2/3 updated once per cycle. After process will be finished, values in tmx
  * should be in right order, i.e. only by increasing order. That means user will not commit previous
  * translation for other user's segments.
- * 
+ *
  * Segment with 'concurrent' source will be modified by all users by values from 1 and more with user's
  * prefix. Conflicts should be resolved by choose higher value. After process will be finished, values in
  * 'concurrent' segment should be also increased only.
- * 
+ *
  * Each child saves Integer.MAXVALUE as last translation, but current OmegaT implementation doesn't require to
  * commit it, see "GIT_CONFLICT=Push failed. Will be synchronized next time."
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
- * 
+ *
  *         TODO: "svn: E160028: Commit failed" during commit
  */
 public class TestTeamIntegration {
@@ -242,7 +242,8 @@ public class TestTeamIntegration {
 
         ProjectProperties config = createConfig(REPO, origDir);
 
-        RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config.getProjectRootDir(), config.getRepositories());
+        RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config.getProjectRootDir(),
+                config.getRepositories());
         remote.switchAllToLatest();
 
         new File(origDir, "omegat").mkdirs();
@@ -303,7 +304,7 @@ public class TestTeamIntegration {
         volatile boolean finished;
         String source;
 
-        public Run(String source, File dir, int delay) throws Exception {
+        Run(String source, File dir, int delay) throws Exception {
             this.source = source;
             URLClassLoader cl = (URLClassLoader) TestTeamIntegration.class.getClassLoader();
             List<String> cp = new ArrayList<String>();

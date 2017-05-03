@@ -32,7 +32,10 @@ import java.io.InputStream;
 
 import org.mozilla.universalchardet.UniversalDetector;
 
-public class EncodingDetector {
+public final class EncodingDetector {
+
+    private EncodingDetector() {
+    }
 
     /**
      * Detect the encoding of the supplied file.

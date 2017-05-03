@@ -52,7 +52,11 @@ import org.omegat.util.StringUtil;
  * @author Alex Buloichik <alex73mail@gmail.com>
  * @author Aaron Madlon-Kay
  */
-public class GlossaryReaderTSV {
+public final class GlossaryReaderTSV {
+
+    private GlossaryReaderTSV() {
+    }
+
     public static String getFileEncoding(final File file) throws IOException {
         String fname_lower = file.getName().toLowerCase();
         if (fname_lower.endsWith(OConsts.EXT_TSV_DEF) || fname_lower.endsWith(OConsts.EXT_TSV_TXT)) {
@@ -77,25 +81,26 @@ public class GlossaryReaderTSV {
             // BOM (byte order mark) bugfix
             in.mark(1);
             int ch = in.read();
-            if (ch != 0xFEFF)
+            if (ch != 0xFEFF) {
                 in.reset();
-
+            }
             for (String s = in.readLine(); s != null; s = in.readLine()) {
                 // skip lines that start with '#'
-                if (s.startsWith("#"))
+                if (s.startsWith("#")) {
                     continue;
-
+                }
                 // divide lines on tabs
-                String tokens[] = s.split("\t");
+                String[] tokens = s.split("\t");
                 // check token list to see if it has a valid string
-                if (tokens.length < 2 || tokens[0].isEmpty())
+                if (tokens.length < 2 || tokens[0].isEmpty()) {
                     continue;
-
+                }
                 // creating glossary entry and add it to the hash
                 // (even if it's already there!)
                 String comment = "";
-                if (tokens.length >= 3)
+                if (tokens.length >= 3) {
                     comment = tokens[2];
+                }
                 result.add(new GlossaryEntry(tokens[0], tokens[1], comment, priorityGlossary));
             }
         } finally {

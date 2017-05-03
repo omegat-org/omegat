@@ -206,7 +206,7 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         } else if (transIDRB.isSelected()) {
             options.setAltTransIDType(ID_TYPE.ELEMENT_ID);
         } else if (transResnameRB.isSelected()) {
-        	options.setAltTransIDType(ID_TYPE.RESNAME_ATTR);
+            options.setAltTransIDType(ID_TYPE.RESNAME_ATTR);
         }
 
         doClose(RET_OK);

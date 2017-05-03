@@ -67,7 +67,7 @@ public abstract class VarExpansion<Param> {
     public static final String VAR_FILE_PATH = "${filePath}";
     public static final String VAR_FILE_SHORT_PATH = "${fileShortPath}";
 
-    public static final Pattern patternBundleEntry = Pattern.compile("#\\{([\\w\\.]+?)\\}(\\[.+?\\])*");
+    public static final Pattern PATTERN_BUNDLE_ENTRY = Pattern.compile("#\\{([\\w\\.]+?)\\}(\\[.+?\\])*");
 
     protected String template;
 
@@ -100,37 +100,45 @@ public abstract class VarExpansion<Param> {
      */
     protected static String expandBundleEntries(String localTemplate) {
         Matcher matcher;
-        while ((matcher = patternBundleEntry.matcher(localTemplate)).find()) {
+        while ((matcher = PATTERN_BUNDLE_ENTRY.matcher(localTemplate)).find()) {
             String original = matcher.group();
             String translation = OStrings.getString(matcher.group(1));
             if (!StringUtil.isEmpty(matcher.group(2))) {
                 String vars = matcher.group(2);
                 List<String> values = new ArrayList<String>();
                 matcher = Pattern.compile("\\[(.+?)\\]").matcher(vars);
-                while (matcher.find()) values.add(matcher.group(1));
+                while (matcher.find()) {
+                    values.add(matcher.group(1));
+                }
                 translation = MessageFormat.format(translation, values.toArray());
             }
-            localTemplate = localTemplate.replace (original, translation);
+            localTemplate = localTemplate.replace(original, translation);
         }
         return localTemplate;
     }
 
     /**
-     * Expands all variables relating to file name : <ul>
+     * Expands all variables relating to file name :
+     * <ul>
      * <li>${filePath} = full file path
      * <li>${fileShortPath} = file path relative to given root
      * <li>${fileName} = full file name (w/o path but with extension)
      * <li>${fileNameOnly} = file name without extension
      * <li>${fileNameOnly-1}, ${fileNameOnly-2}, ... = filename with 1, 2, ... extensions
      * <li>${fileExtension} = all extensions after '.'
-	 * <li>${fileExtension-1}, ${fileExtension-2}, ... = ${fileExtension} after removing 1, 2, ... extensions
+     * <li>${fileExtension-1}, ${fileExtension-2}, ... = ${fileExtension} after removing 1, 2, ... extensions
      * </ul>
-     * @param localTemplate initial template. If null, use instance's template but does not modify it
-     * @param filePath  path used by variable ${fileShortPath}
-     * @return	Copy of the template with mentioned variables expanded. Other variables remain unchanged
+     *
+     * @param localTemplate
+     *            initial template. If null, use instance's template but does not modify it
+     * @param filePath
+     *            path used by variable ${fileShortPath}
+     * @return Copy of the template with mentioned variables expanded. Other variables remain unchanged
      */
     public String expandFileNames(String localTemplate, String[] filePaths, String baseDir) {
-        if (localTemplate == null) localTemplate = this.template; // copy
+        if (localTemplate == null) {
+            localTemplate = this.template; // copy
+        }
         String filePath = filePaths[0];
         String numHint = "";
         if (filePaths.length > 1) {
@@ -154,24 +162,24 @@ public abstract class VarExpansion<Param> {
             localTemplate = localTemplate.replace(VAR_FILE_NAME_ONLY, nameOnlyBuf.toString());
             localTemplate = localTemplate.replace(VAR_FILE_EXTENSION, extensionBuf.toString());
             for (int i = 0; i < splitName.length; i++) {
-                localTemplate = localTemplate.replaceAll ("\\$\\{fileNameOnly-" + i + "\\}", nameOnlyBuf.toString());
-                localTemplate = localTemplate.replaceAll ("\\$\\{fileExtension-" + i + "\\}", extensionBuf.toString());
+                localTemplate = localTemplate.replaceAll("\\$\\{fileNameOnly-" + i + "\\}", nameOnlyBuf.toString());
+                localTemplate = localTemplate.replaceAll("\\$\\{fileExtension-" + i + "\\}", extensionBuf.toString());
                 if (i + 1 < splitName.length) {
-                    nameOnlyBuf.append (".").append(splitName[i + 1]);
+                    nameOnlyBuf.append(".").append(splitName[i + 1]);
                     extensionBuf.insert(0, splitName[splitName.length - i - 2] + '.');
                 }
             }
         }
-		// prevent unexpanded fileName variables in case the file has less extensions than expected
+        // prevent unexpanded fileName variables in case the file has less extensions than expected
         localTemplate = localTemplate.replaceAll("\\$\\{fileNameOnly(-\\d+)?\\}", filePath);
         localTemplate = localTemplate.replaceAll("\\$\\{fileExtension(-\\d+)?\\}", "");
         return localTemplate;
     }
 
     public String expandFileName(String localTemplate, String filePath, String baseDir) {
-        return expandFileNames(localTemplate, new String[] {filePath}, baseDir);
+        return expandFileNames(localTemplate, new String[] { filePath }, baseDir);
     }
 
-    public abstract String expandVariables (Param param);
+    public abstract String expandVariables(Param param);
 
 }

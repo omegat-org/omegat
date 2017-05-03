@@ -65,7 +65,7 @@ public class PatternConsts {
      * #5 - SYSTEM DOCTYPE URL
      */
     public static final Pattern XML_DOCTYPE = Pattern
-            .compile("<\\!DOCTYPE\\s+(\\w+)\\s+(PUBLIC\\s+\"(-//.*)\"\\s+)?");// (SYSTEM\\s+)?\"(.*?)\"\\s+>");
+            .compile("<\\!DOCTYPE\\s+(\\w+)\\s+(PUBLIC\\s+\"(-//.*)\"\\s+)?"); // (SYSTEM\\s+)?\"(.*?)\"\\s+>");
 
     /**
      * Compiled pattern to extract the root tag from XML file, if any. Group #1
@@ -169,7 +169,7 @@ public class PatternConsts {
             // [ 2138846 ] French dictionary cannot be downloaded and installed
             "\"([a-z]{1,8})(_([A-Z]{1,8})?)(_1-3-2)?\\.zip\"");
 
-    public static final Pattern SPACE_TAB = Pattern.compile("( |	)+");
+    public static final Pattern SPACE_TAB = Pattern.compile("( |\t)+");
 
     /**
      * Pattern for detecting the placeholders in a printf-function string which
@@ -203,12 +203,13 @@ public class PatternConsts {
      */
     public static final Pattern SIMPLE_PRINTF_VARS = Pattern.compile(RE_SIMPLE_PRINTF_VARS);
 
-    public static final Pattern SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS = Pattern.compile(RE_SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS);
+    public static final Pattern SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS = Pattern
+            .compile(RE_SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS);
 
     /**
      * Pattern for detecting OmegaT-tags and other placeholders (extended sprintf-variant) in texts
      */
-    public static final Pattern SIMPLE_PLACEHOLDERS = Pattern.compile(RE_OMEGAT_TAG+"|"+RE_PRINTF_VARS);
+    public static final Pattern SIMPLE_PLACEHOLDERS = Pattern.compile(RE_OMEGAT_TAG + "|" + RE_PRINTF_VARS);
 
     /**
      * combined pattern for all placeholder tags
@@ -234,17 +235,17 @@ public class PatternConsts {
         if (PLACEHOLDERS == null) {
             String regexp = RE_OMEGAT_TAG;
             if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_ALL_PRINTF_TAGS))) {
-                regexp += "|"+RE_PRINTF_VARS;
+                regexp += "|" + RE_PRINTF_VARS;
             } else if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_SIMPLE_PRINTF_TAGS))) {
-                regexp += "|"+RE_SIMPLE_PRINTF_VARS;
+                regexp += "|" + RE_SIMPLE_PRINTF_VARS;
             }
             if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_JAVA_PATTERN_TAGS))) {
-                regexp += "|"+RE_SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS;
+                regexp += "|" + RE_SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS;
             }
-            //assume: customRegExp has already been validated.
+            // assume: customRegExp has already been validated.
             String customRegExp = Preferences.getPreference(Preferences.CHECK_CUSTOM_PATTERN);
             if (!"".equalsIgnoreCase(customRegExp)) {
-                regexp += "|"+customRegExp;
+                regexp += "|" + customRegExp;
             }
             PLACEHOLDERS = Pattern.compile(regexp);
         }

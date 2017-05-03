@@ -86,6 +86,6 @@ public class TransTipsPopup implements IPopupMenuConstructor {
         for (GlossaryEntry ge : GlossaryTextArea.nowEntries) {
             TransTips.search(sb.getSourceText(), ge, callback);
         }
-	    menu.addSeparator();
+        menu.addSeparator();
     }
 }

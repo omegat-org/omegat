@@ -70,7 +70,7 @@ import gen.core.filters.Filters;
  * @author Aaron Madlon-Kay
  * @author Hiroshi Miura
  */
-public class Preferences {
+public final class Preferences {
     /** OmegaT-wide Preferences Filename */
     public static final String FILE_PREFERENCES = "omegat" + OStrings.getBrandingToken() + ".prefs";
 
@@ -227,7 +227,7 @@ public class Preferences {
     public static final String EXPORT_CURRENT_SEGMENT = "wf_exportCurrentSegment";
     /** Workflow Option: Go To Next Untranslated Segment stops when there is at least one
     alternative translation */
-    public static final String STOP_ON_ALTERNATIVE_TRANSLATION="wf_stopOnAlternativeTranslation";
+    public static final String STOP_ON_ALTERNATIVE_TRANSLATION = "wf_stopOnAlternativeTranslation";
     /** Workflow Option: Attempt to convert numbers when inserting a fuzzy match */
     public static final String CONVERT_NUMBERS = "wf_convertNumbers";
     /** Workflow Option: Save auto-populated status */
@@ -484,14 +484,13 @@ public class Preferences {
         return m_preferences.getPreference(key);
     }
 
-	/**
+    /**
      * Returns true if the preference is in OmegaT's preferences file.
      * <p>
      * If the key is not found return false
      *
      * @param key
-     *            key of the key to look up, usually a static string from this
-     *            class
+     *            key of the key to look up, usually a static string from this class
      * @return true if preferences exists
      */
     public static boolean existsPreference(String key) {
@@ -765,7 +764,7 @@ public class Preferences {
     private static Filters m_filters;
 
     // Support for firing property change events
-    private static PropertyChangeSupport m_propChangeSupport = new PropertyChangeSupport(Preferences.class);
+    private static final PropertyChangeSupport m_propChangeSupport = new PropertyChangeSupport(Preferences.class);
 
     /**
      * Gets the prefs file to use. Looks in these places in this order:

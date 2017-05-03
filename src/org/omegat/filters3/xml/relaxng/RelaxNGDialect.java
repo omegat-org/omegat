@@ -42,7 +42,8 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  */
 public class RelaxNGDialect extends DefaultXMLDialect {
     public static final Pattern RELAXNG_ROOT_TAG = Pattern.compile("grammar");
-    public static final Pattern RELAXNG_XMLNS = Pattern.compile("xmlns(:\\w+)?=\"http://relaxng.org/ns/structure/1.0\"");
+    public static final Pattern RELAXNG_XMLNS = Pattern
+            .compile("xmlns(:\\w+)?=\"http://relaxng.org/ns/structure/1.0\"");
 
     public RelaxNGDialect() {
         defineConstraint(CONSTRAINT_ROOT, RELAXNG_ROOT_TAG);
@@ -50,7 +51,7 @@ public class RelaxNGDialect extends DefaultXMLDialect {
 
         defineParagraphTags(new String[] { "documentation", "a:documentation", });
 
-	defineIntactTags(new String[] { "value", "name", "nsName", });
+        defineIntactTags(new String[] { "value", "name", "nsName", });
     }
 
 }

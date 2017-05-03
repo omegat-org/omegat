@@ -79,9 +79,9 @@ public abstract class TestCore {
                 return new JMenu();
             }
 
-			public JMenuItem getProjectRecentMenuItem() {
+            public JMenuItem getProjectRecentMenuItem() {
                 return new JMenu();
-			}
+            }
 
             public JMenu getAutoCompletionMenu() {
                 return new JMenu();

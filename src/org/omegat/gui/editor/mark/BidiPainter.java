@@ -38,14 +38,16 @@ import javax.swing.text.JTextComponent;
  */
 public class BidiPainter extends SymbolPainter {
 
-	protected boolean rtl;
-	protected boolean ltr;
+    protected boolean rtl;
+    protected boolean ltr;
 
-	/**
-	 *
-	 * @param c color to use when painting
-	 * @param s Bidirectonal formatting character/code that is marked.
-	 */
+    /**
+     *
+     * @param c
+     *            color to use when painting
+     * @param s
+     *            Bidirectonal formatting character/code that is marked.
+     */
     public BidiPainter(Color c, String s) {
         super(c, s);
         if (symbol.equals("\u200F") || symbol.equals("\u202E") || symbol.equals("\u202B")) {
@@ -60,18 +62,18 @@ public class BidiPainter extends SymbolPainter {
     protected void paint(Graphics g, Rectangle rect, JTextComponent c) {
         g.setColor(color);
         Polygon p = new Polygon();
-        p.addPoint(rect.x, rect.y+rect.height);
+        p.addPoint(rect.x, rect.y + rect.height);
         p.addPoint(rect.x, rect.y);
         if (rtl) {
-            p.addPoint(rect.x-4, rect.y);
-            p.addPoint(rect.x, rect.y+4);
+            p.addPoint(rect.x - 4, rect.y);
+            p.addPoint(rect.x, rect.y + 4);
         } else if (ltr) {
-            p.addPoint(rect.x+4, rect.y);
-            p.addPoint(rect.x, rect.y+4);
+            p.addPoint(rect.x + 4, rect.y);
+            p.addPoint(rect.x, rect.y + 4);
         } else {
-            p.addPoint(rect.x-2, rect.y);
-            p.addPoint(rect.x, rect.y-4);
-            p.addPoint(rect.x+2, rect.y);
+            p.addPoint(rect.x - 2, rect.y);
+            p.addPoint(rect.x, rect.y - 4);
+            p.addPoint(rect.x + 2, rect.y);
             p.addPoint(rect.x, rect.y);
         }
         g.fillPolygon(p);

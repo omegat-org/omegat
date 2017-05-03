@@ -667,7 +667,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
             item.setEnabled(isProjectOpened);
         }
         if (Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
-        	projectTeamNewMenuItem.setEnabled(false);
+            projectTeamNewMenuItem.setEnabled(false);
         }
 
     }

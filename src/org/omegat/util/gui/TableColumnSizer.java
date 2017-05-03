@@ -52,7 +52,7 @@ import javax.swing.table.TableModel;
  *
  * @author Aaron Madlon-Kay
  */
-public class TableColumnSizer {
+public final class TableColumnSizer {
 
     private int[] optimalColWidths;
     private int remainderColReferenceWidth = -1;
@@ -245,7 +245,8 @@ public class TableColumnSizer {
                         // Headers are usually Strings
                         cellRenderer = table.getDefaultRenderer(String.class);
                     }
-                    c = cellRenderer.getTableCellRendererComponent(table, col.getHeaderValue(), false, false, 0, column);
+                    c = cellRenderer.getTableCellRendererComponent(table, col.getHeaderValue(), false, false, 0,
+                            column);
                     c.setFont(table.getTableHeader().getFont());
                     // Add somewhat arbitrary margin to header because it gets truncated at a smaller width
                     // than a regular cell does (Windows LAF more than OS X LAF).
@@ -425,14 +426,11 @@ public class TableColumnSizer {
     }
 
     private void notifyListeners() {
-    	SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "columnsAdjusted");
-				for (ActionListener listener : listeners) {
-					listener.actionPerformed(event);
-				}
-			}
-		});
+        SwingUtilities.invokeLater(() -> {
+            ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "columnsAdjusted");
+            for (ActionListener listener : listeners) {
+                listener.actionPerformed(event);
+            }
+        });
     }
 }

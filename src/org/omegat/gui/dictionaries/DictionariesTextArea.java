@@ -81,9 +81,10 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
-public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEntry>> implements IDictionaries, IPaneMenu {
+public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEntry>>
+        implements IDictionaries, IPaneMenu {
 
-	private static final String EXPLANATION = OStrings.getString("GUI_DICTIONARYWINDOW_explanation");
+    private static final String EXPLANATION = OStrings.getString("GUI_DICTIONARYWINDOW_explanation");
 
     protected final DictionariesManager manager = new DictionariesManager(this);
 
@@ -336,7 +337,8 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
     @Override
     public void populatePaneMenu(JPopupMenu menu) {
-        final JMenuItem notify = new JCheckBoxMenuItem(OStrings.getString("GUI_DICTIONARYWINDOW_SETTINGS_NOTIFICATIONS"));
+        final JMenuItem notify = new JCheckBoxMenuItem(
+                OStrings.getString("GUI_DICTIONARYWINDOW_SETTINGS_NOTIFICATIONS"));
         notify.setSelected(Preferences.isPreference(Preferences.NOTIFY_DICTIONARY_HITS));
         notify.addActionListener(new ActionListener() {
             @Override

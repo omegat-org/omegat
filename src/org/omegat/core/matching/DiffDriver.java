@@ -42,7 +42,10 @@ import bmsi.util.Diff;
  *
  * @author Aaron Madlon-Kay
  */
-public class DiffDriver {
+public final class DiffDriver {
+
+    private DiffDriver() {
+    }
 
     public enum Type {
         INSERT, DELETE, NOCHANGE
@@ -89,13 +92,15 @@ public class DiffDriver {
             if (c == null) {
                 // No change for this token.
                 if (n < originalStrings.length) {
-                    if (optimize) result.addRun(rawText.length(), originalStrings[n].length(), Type.NOCHANGE);
+                    if (optimize) {
+                        result.addRun(rawText.length(), originalStrings[n].length(), Type.NOCHANGE);
+                    }
                     rawText.append(originalStrings[n]);
                 }
                 continue;
             } else {
-            	// Next time, start search from the next change.
-            	script = c.link;
+                // Next time, start search from the next change.
+                script = c.link;
             }
 
             // Handle deletions
@@ -130,7 +135,9 @@ public class DiffDriver {
                 // If this was an insert only (no deleted lines), we should
                 // add the original token in as well.
                 if (c.deleted == 0 && n < originalStrings.length) {
-                    if (optimize) result.addRun(rawText.length(), originalStrings[n].length(), Type.NOCHANGE);
+                    if (optimize) {
+                        result.addRun(rawText.length(), originalStrings[n].length(), Type.NOCHANGE);
+                    }
                     rawText.append(originalStrings[n]);
                 }
             }
@@ -138,7 +145,7 @@ public class DiffDriver {
 
         result.text = rawText.toString();
         if (optimize) {
-            Render optimized = optimizeRender(result,0);
+            Render optimized = optimizeRender(result, 0);
             return (optimized.formatting.size() < result.formatting.size()) ? optimized : result;
         } else {
             return result;
@@ -146,24 +153,25 @@ public class DiffDriver {
     }
 
     private static Render optimizeRender(Render render, int level) {
-        if (level > 3)
+        if (level > 3) {
             return render;
-
+        }
         StringBuilder rawText = new StringBuilder();
         Render result = new Render();
         List<TextRun> fList = render.formatting;
 
         // try to merge <deletion><insertion><space><deletion><insertion> patterns
-        if (fList.size() < 5)
+        if (fList.size() < 5) {
             return render;
+        }
 
         for (int i = 0; i < fList.size(); i++) {
             TextRun r0 = fList.get(i);
-            if (i < fList.size()-4) {
-                TextRun r1 = fList.get(i+1);
-                TextRun r2 = fList.get(i+2);
-                TextRun r3 = fList.get(i+3);
-                TextRun r4 = fList.get(i+4);
+            if (i < fList.size() - 4) {
+                TextRun r1 = fList.get(i + 1);
+                TextRun r2 = fList.get(i + 2);
+                TextRun r3 = fList.get(i + 3);
+                TextRun r4 = fList.get(i + 4);
 
                 if (r0.type == Type.DELETE
                         && r1.type == Type.INSERT
@@ -182,7 +190,7 @@ public class DiffDriver {
                     result.addRun(rawText.length(), buff.length(), Type.DELETE);
                     rawText.append(buff);
 
-                    buff.delete(0,buff.length());
+                    buff.delete(0, buff.length());
 
                     //merge inserts
                     buff.append(render.getRunText(r1));
@@ -192,7 +200,7 @@ public class DiffDriver {
                     result.addRun(rawText.length(), buff.length(), Type.INSERT);
                     rawText.append(buff);
 
-                    i = i+4;
+                    i = i + 4;
                     continue;
                 }
             }
@@ -202,7 +210,7 @@ public class DiffDriver {
 
         result.text = rawText.toString();
 
-        Render optimized = optimizeRender(result,level+1);
+        Render optimized = optimizeRender(result, level + 1);
         return (optimized.formatting.size() < result.formatting.size()) ? optimized : result;
     }
     /**
@@ -213,8 +221,8 @@ public class DiffDriver {
      * @return Element at index i, or null if not found
      */
     private static Diff.change search(int i, Diff.change script) {
-    	// Give up when we reach the end of the list,
-    	// OR if we've passed the desired index (list is sorted in increasing order).
+        // Give up when we reach the end of the list,
+        // OR if we've passed the desired index (list is sorted in increasing order).
         if (script == null || script.line0 > i) {
             return null;
         }
@@ -227,24 +235,26 @@ public class DiffDriver {
     }
 
     /**
-     * Double check some assumptions made about change scripts.
-     * Only meant to be called in debug, via assert.
+     * Double check some assumptions made about change scripts. Only meant to be called in debug, via assert.
      *
-     * @param script Linked list of Diff.change elements
-     * @param original Original strings
-     * @param revised Revised strings
+     * @param script
+     *            Linked list of Diff.change elements
+     * @param original
+     *            Original strings
+     * @param revised
+     *            Revised strings
      * @return Whether or not the change script is valid
      */
     private static boolean validate(Diff.change script, String[] original, String[] revised) {
-    	Diff.change prev = null;
+        Diff.change prev = null;
         for (Diff.change c = script; c != null; c = c.link) {
             // Script is sorted in increasing order of string line number.
             if (prev != null && (c.line0 <= prev.line0 || c.line1 <= prev.line1)) {
-            	return false;
+                return false;
             }
             // All changes will be accounted for by walking c.line0 in range [0, original.length].
             if (c.line0 < 0 || c.line0 > original.length) {
-            	return false;
+                return false;
             }
             prev = c;
         }

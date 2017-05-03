@@ -120,17 +120,16 @@ public class Searcher {
                     String key = entry.getSrcText() + entry.getTranslation();
                     if (entry.getEntryNum() == ENTRY_ORIGIN_TRANSLATION_MEMORY) {
                         if (m_tmxMap.containsKey(key) && (m_tmxMap.get(key) > 0)) {
-                        	String newPreamble = StringUtil.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
-                        			entry.getPreamble(), m_tmxMap.get(key));
+                            String newPreamble = StringUtil.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
+                                    entry.getPreamble(), m_tmxMap.get(key));
                             entry.setPreamble(newPreamble);
                         }
                     } else if (entry.getEntryNum() > ENTRY_ORIGIN_PROJECT_MEMORY) {
                         // at this stage each PM entry num is increased by 1
                         if (m_entryMap.containsKey(key) && (m_entryMap.get(key) > 0)) {
-                        	String newPreamble = StringUtil.isEmpty(entry.getPreamble())
-                        			? StringUtil.format(OStrings.getString("SW_NR_OF_MORE"),
-                            				m_entryMap.get(key))
-                    				: StringUtil.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
+                            String newPreamble = StringUtil.isEmpty(entry.getPreamble())
+                                    ? StringUtil.format(OStrings.getString("SW_NR_OF_MORE"), m_entryMap.get(key))
+                                    : StringUtil.format(OStrings.getString("SW_FILE_AND_NR_OF_MORE"),
                                             entry.getPreamble(), m_entryMap.get(key));
                             entry.setPreamble(newPreamble);
                         }
@@ -257,8 +256,9 @@ public class Searcher {
                 String file = expression.fileNames ? getFileForEntry(entryNum + 1) : null;
                 addEntry(entryNum + 1, file, (entryNum + 1) + "> ", src, target,
                         note, srcMatches, targetMatches, noteMatches);
-                if (!expression.allResults) // If we filter results
+                if (!expression.allResults) { // If we filter results
                     m_entryMap.put(key, 0); // HP
+                }
             } else if (!expression.allResults) {
                 m_entryMap.put(key, m_entryMap.get(key) + 1);
             }
@@ -267,9 +267,10 @@ public class Searcher {
             if (!m_tmxMap.containsKey(key) || expression.allResults) {
                 addEntry(entryNum, intro, null, src, target, note,
                         srcMatches, targetMatches, noteMatches);
-                if (!expression.allResults)
+                if (!expression.allResults) {
                     // first occurence
                     m_tmxMap.put(key, 0);
+                }
             } else if (!expression.allResults) {
                 // next occurence
                 m_tmxMap.put(key, m_tmxMap.get(key) + 1);
@@ -344,13 +345,19 @@ public class Searcher {
             if (!expression.searchAuthor && !expression.searchDateAfter && !expression.searchDateBefore) {
                 for (Map.Entry<String, ExternalTMX> tmEn : m_project.getTransMemories().entrySet()) {
                     final String fileTM = tmEn.getKey();
-                    if (!searchEntries(tmEn.getValue().getEntries(), fileTM)) return;
+                    if (!searchEntries(tmEn.getValue().getEntries(), fileTM)) {
+                        return;
+                    }
                     checkStop.checkInterrupted();
                 }
                 for (Map.Entry<Language, ProjectTMX> tmEn : m_project.getOtherTargetLanguageTMs().entrySet()) {
                     final Language langTM = tmEn.getKey();
-                    if (!searchEntriesAlternative(tmEn.getValue().getDefaults(), langTM.getLanguage())) return;
-                    if (!searchEntriesAlternative(tmEn.getValue().getAlternatives(), langTM.getLanguage())) return;
+                    if (!searchEntriesAlternative(tmEn.getValue().getDefaults(), langTM.getLanguage())) {
+                        return;
+                    }
+                    if (!searchEntriesAlternative(tmEn.getValue().getAlternatives(), langTM.getLanguage())) {
+                        return;
+                    }
                     checkStop.checkInterrupted();
                 }
             }
@@ -395,15 +402,16 @@ public class Searcher {
      */
     private boolean searchEntries(Collection<PrepareTMXEntry> tmEn, final String tmxID) {
         for (PrepareTMXEntry tm : tmEn) {
-            // stop searching if the max. nr of hits has been
-            // reached
+            // stop searching if the max. nr of hits has been reached
             if (m_numFinds >= expression.numberOfResults) {
                 return false;
             }
 
-            //for alternative translations:
-            //- it is not feasible to get the sourcetextentry that matches the tm.source, so we cannot get the entryNum and real translation
-            //- although the 'trnalsation' is used as 'source', we search it as translation, else we cannot show to which real source it belongs
+            // for alternative translations:
+            // - it is not feasible to get the sourcetextentry that matches the tm.source, so we cannot get the entryNum
+            // and real translation
+            // - although the 'translation' is used as 'source', we search it as translation, else we cannot show to
+            // which real source it belongs
             checkEntry(tm.source, tm.translation, tm.note, null, null, ENTRY_ORIGIN_TRANSLATION_MEMORY, tmxID);
 
             checkStop.checkInterrupted();
@@ -413,15 +421,16 @@ public class Searcher {
 
     private boolean searchEntriesAlternative(Collection<TMXEntry> tmEn, final String tmxID) {
         for (TMXEntry tm : tmEn) {
-            // stop searching if the max. nr of hits has been
-            // reached
+            // stop searching if the max. nr of hits has been reached
             if (m_numFinds >= expression.numberOfResults) {
                 return false;
             }
 
-            //for alternative translations:
-            //- it is not feasible to get the sourcetextentry that matches the tm.source, so we cannot get the entryNum and real translation
-            //- although the 'trnalsation' is used as 'source', we search it as translation, else we cannot show to which real source it belongs
+            // for alternative translations:
+            // - it is not feasible to get the sourcetextentry that matches the tm.source, so we cannot get the entryNum
+            // and real translation
+            // - although the 'translation' is used as 'source', we search it as translation, else we cannot show to
+            // which real source it belongs
             checkEntry(tm.source, tm.translation, tm.note, null, null, ENTRY_ORIGIN_ALTERNATIVE, tmxID);
 
             checkStop.checkInterrupted();
@@ -441,7 +450,8 @@ public class Searcher {
      * @param comment
      *            comment text
      * @param entry
-     *            entry. Null for external tmx entries (so we can only search for source and translation in external tmx)
+     *            entry. Null for external tmx entries (so we can only search for source and translation in external
+     *            tmx)
      * @param entryNum
      *            entry number
      * @param intro
@@ -624,7 +634,7 @@ public class Searcher {
                 int end = Math.max(cu.getEnd(), pr.getEnd());
                 // leave only one region
                 pr = new SearchMatch(pr.getStart(), end);
-                foundMatches.set(i-1, pr);
+                foundMatches.set(i - 1, pr);
                 foundMatches.remove(i);
             } else {
                 i++;
@@ -646,8 +656,9 @@ public class Searcher {
      * @return True if the text string contains the search string
      */
     private boolean searchAuthor(TMXEntry te) {
-        if (te == null || m_author == null)
+        if (te == null || m_author == null) {
             return false;
+        }
 
         if (m_author.pattern().pattern().equals("")) {
             // Handle search for null author.
@@ -676,8 +687,9 @@ public class Searcher {
 
     public void searchText(String seg, String translation, String filename) {
         // don't look further if the max. nr of hits has been reached
-        if (m_numFinds >= expression.numberOfResults)
+        if (m_numFinds >= expression.numberOfResults) {
             return;
+        }
 
         checkStop.checkInterrupted();
 

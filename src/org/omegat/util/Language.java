@@ -664,12 +664,12 @@ public class Language implements Comparable<Object> {
         return locale.hashCode();
     }
 
-	public int compareTo(Object o) {
+    public int compareTo(Object o) {
         if (o instanceof Language) {
             return this.getLanguage().compareTo(((Language) o).getLanguage());
         }
-		return this.getLanguage().compareTo(o.toString());
-	}
+        return this.getLanguage().compareTo(o.toString());
+    }
 
     /**
      * Verify the correctness of a language or country code

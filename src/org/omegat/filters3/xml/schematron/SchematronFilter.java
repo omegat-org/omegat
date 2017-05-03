@@ -111,8 +111,8 @@ public class SchematronFilter extends XMLFilter {
             int cbuf_len = reader.read(cbuf);
             String buf = new String(cbuf, 0, cbuf_len);
             Matcher matcher = SchematronDialect.SCHEMATRON_XMLNS.matcher(buf);
-	    if (!matcher.find()) // not Schematron
-		return false;
+        if (!matcher.find()) // not Schematron
+        return false;
             }
         } catch (Exception e) {
             return false;

@@ -29,8 +29,8 @@
 
 package org.omegat.filters3.xml.schematron;
 
-import java.util.regex.Pattern;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import org.omegat.filters3.xml.DefaultXMLDialect;
 
@@ -41,7 +41,8 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  */
 public class SchematronDialect extends DefaultXMLDialect {
     public static final Pattern SCHEMATRON_ROOT_TAG = Pattern.compile("schema|pattern");
-    public static final Pattern SCHEMATRON_XMLNS = Pattern.compile("xmlns(:\\w+)?=\"http://purl.oclc.org/dsdl/schematron\"");
+    public static final Pattern SCHEMATRON_XMLNS = Pattern
+            .compile("xmlns(:\\w+)?=\"http://purl.oclc.org/dsdl/schematron\"");
 
     /*
      * A map of attribute-name and attribute value pairs that, if exist in a
@@ -55,7 +56,7 @@ public class SchematronDialect extends DefaultXMLDialect {
 
         defineParagraphTags(new String[] { "assert", "report", });
 
-	defineIntactTags(new String[] { "phase", "active", "ns", "include", "key", "let", });
+        defineIntactTags(new String[] { "phase", "active", "ns", "include", "key", "let", });
 
         ignoreTagsAttributes = new HashMap<String, String>();
         ignoreTagsAttributes.put("TRANSLATE=FALSE", "");

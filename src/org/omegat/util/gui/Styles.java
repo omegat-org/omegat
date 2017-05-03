@@ -52,6 +52,9 @@ import org.omegat.util.Preferences;
 public final class Styles {
     private static final Logger LOGGER = Logger.getLogger(EditorColor.class.getName());
 
+    private Styles() {
+    }
+
     public enum EditorColor {
         COLOR_BACKGROUND(UIManager.getColor("TextPane.background")), // Also used for EditorPane.background
         COLOR_FOREGROUND(UIManager.getColor("TextPane.foreground")),
@@ -105,7 +108,7 @@ public final class Styles {
         private Color color;
         private Color defaultColor;
 
-        private EditorColor(Color defaultColor) {
+        EditorColor(Color defaultColor) {
             this.color = defaultColor;
             this.defaultColor = defaultColor;
 
@@ -120,7 +123,7 @@ public final class Styles {
             }
         }
 
-        private EditorColor(String defaultColor) {
+        EditorColor(String defaultColor) {
             this(Color.decode(defaultColor));
         }
 
@@ -188,15 +191,16 @@ public final class Styles {
     public static AttributeSet createAttributeSet(Color foregroundColor, Color backgroundColor, Boolean bold,
             Boolean italic, Boolean strikethrough, Boolean underline) {
 
-    	MutableAttributeSet r = (MutableAttributeSet) createAttributeSet(foregroundColor, backgroundColor, bold, italic);
+        MutableAttributeSet r = (MutableAttributeSet) createAttributeSet(foregroundColor, backgroundColor, bold,
+                italic);
 
-    	if (strikethrough != null) {
-    		StyleConstants.setStrikeThrough(r, strikethrough);
-    	}
-    	if (underline != null) {
-    		StyleConstants.setUnderline(r, underline);
-    	}
+        if (strikethrough != null) {
+            StyleConstants.setStrikeThrough(r, strikethrough);
+        }
+        if (underline != null) {
+            StyleConstants.setUnderline(r, underline);
+        }
 
-    	return r;
+        return r;
     }
 }

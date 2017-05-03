@@ -224,11 +224,12 @@ public class ScriptingWindow {
         removeAllQuickScriptActionListenersFrom(m_quickMenus[index]);
 
         if (m_quickMenus.length < index || m_quickMenus[index] == null) {
-        	return;
+            return;
         }
 
         m_quickMenus[index].setEnabled(false);
-        Mnemonics.setLocalizedText(m_quickMenus[index], "&" + scriptKey(index) + " - " + OStrings.getString("SCW_SCRIPTS_NONE"));
+        Mnemonics.setLocalizedText(m_quickMenus[index],
+                "&" + scriptKey(index) + " - " + OStrings.getString("SCW_SCRIPTS_NONE"));
     }
 
     private void setQuickScriptMenu(ScriptItem scriptItem, int index) {
@@ -290,7 +291,8 @@ public class ScriptingWindow {
     private void addRunShortcutToOmegaT() {
         JRootPane appliRootPane = Core.getMainWindow().getApplicationFrame().getRootPane();
         appliRootPane.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
-                KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK, false), "RUN_CURRENT_SCRIPT");
+                KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK, false),
+                "RUN_CURRENT_SCRIPT");
         appliRootPane.getActionMap().put("RUN_CURRENT_SCRIPT", new AbstractAction() {
             private static final long serialVersionUID = 1L;
 
@@ -341,7 +343,8 @@ public class ScriptingWindow {
 
         m_txtScriptEditor.initLayout(this);
 
-        JSplitPane splitPane1 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, m_txtScriptEditor.getPanel(), scrollPaneResults);
+        JSplitPane splitPane1 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, m_txtScriptEditor.getPanel(),
+                scrollPaneResults);
         splitPane1.setOneTouchExpandable(true);
         splitPane1.setDividerLocation(430);
         Dimension minimumSize1 = new Dimension(100, 50);
@@ -359,8 +362,8 @@ public class ScriptingWindow {
         frame.getContentPane().add(splitPane, BorderLayout.CENTER);
 
         JPanel panelSouth = new JPanel();
-        FlowLayout fl_panelSouth = (FlowLayout) panelSouth.getLayout();
-        fl_panelSouth.setAlignment(FlowLayout.LEFT);
+        FlowLayout flPanelSouth = (FlowLayout) panelSouth.getLayout();
+        flPanelSouth.setAlignment(FlowLayout.LEFT);
         frame.getContentPane().add(panelSouth, BorderLayout.SOUTH);
         setupRunButtons(panelSouth);
 
@@ -388,7 +391,7 @@ public class ScriptingWindow {
         int index;
         int scriptKey;
 
-        public QuickScriptUpdater(int index) {
+        QuickScriptUpdater(int index) {
             this.scriptKey = scriptKey(index);
             this.index = index;
         }
@@ -465,7 +468,8 @@ public class ScriptingWindow {
             removeQuickScriptMenuItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
-                    String scriptName = Preferences.getPreferenceDefault(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey, "(unknown)");
+                    String scriptName = Preferences.getPreferenceDefault(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey,
+                            "(unknown)");
                     logResult(StringUtil.format(OStrings.getString("SCW_REMOVED_QUICK_SCRIPT"), scriptName, scriptKey));
                     Preferences.setPreference(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey, "");
                     m_quickScriptButtons[index].setToolTipText(OStrings.getString("SCW_NO_SCRIPT_SET"));
@@ -483,7 +487,8 @@ public class ScriptingWindow {
                     addQuickScriptMenuItem.setEnabled(!m_scriptList.isSelectionEmpty());
 
                     // Disable remove a script command if the quick run button is not bounded
-                    String scriptName = Preferences.getPreferenceDefault(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey, null);
+                    String scriptName = Preferences.getPreferenceDefault(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey,
+                            null);
                     removeQuickScriptMenuItem.setEnabled(!StringUtil.isEmpty(scriptName));
                 }
 
@@ -543,7 +548,7 @@ public class ScriptingWindow {
         private final Map<String, Object> bindings;
         private long start;
 
-        public ScriptWorker(String scriptString, ScriptItem scriptItem, Map<String, Object> bindings) {
+        ScriptWorker(String scriptString, ScriptItem scriptItem, Map<String, Object> bindings) {
             this.scriptString = scriptString;
             this.scriptItem = scriptItem;
             this.bindings = bindings;
@@ -711,7 +716,7 @@ public class ScriptingWindow {
                 unsetQuickScriptMenu(i);
 
                 if (m_quickScriptButtons.length < i || m_quickScriptButtons[i] == null) {
-                	return;
+                    return;
                 }
 
                 m_quickScriptButtons[i].setToolTipText(OStrings.getString("SCW_NO_SCRIPT_SET"));
@@ -753,7 +758,8 @@ public class ScriptingWindow {
         public void actionPerformed(ActionEvent e) {
 
             // If a project is opened, set the file chooser to the project root instead of the default script path
-            File openFileDir = Core.getProject().isProjectLoaded() ? Core.getProject().getProjectProperties().getProjectRootDir() : m_scriptsDirectory;
+            File openFileDir = Core.getProject().isProjectLoaded()
+                    ? Core.getProject().getProjectProperties().getProjectRootDir() : m_scriptsDirectory;
 
             JFileChooser chooser = new JFileChooser(openFileDir);
             chooser.setDialogTitle(OStrings.getString("SCW_SCRIPTS_OPEN_SCRIPT_TITLE"));
@@ -838,7 +844,8 @@ public class ScriptingWindow {
     private class ExploreScriptFolderAction implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             try {
-                m_scriptsDirectory = m_scriptsDirectory.getCanonicalFile(); // Normalize file name in case it is displayed
+                // Normalize file name in case it is displayed
+                m_scriptsDirectory = m_scriptsDirectory.getCanonicalFile();
             } catch (Exception ex) {
                 // Ignore
             }
@@ -1001,7 +1008,7 @@ public class ScriptingWindow {
         m_setsMenu.addSeparator();
 
         if (m_scriptsDirectory == null) {
-        	return;
+            return;
         }
 
         for (File script : m_scriptsDirectory.listFiles(new FileFilter(){

@@ -45,43 +45,43 @@ import org.omegat.util.EncodingDetector;
  * @author Alex Buloichik <alex73mail@gmail.com>
  * @author Aaron Madlon-Kay
  */
-public class GlossaryReaderCSV {
+public final class GlossaryReaderCSV {
     /** Fields separator. Can be dependent of regional options. */
     protected static final char SEPARATOR = ',';
 
+    private GlossaryReaderCSV() {
+    }
+
     public static List<GlossaryEntry> read(final File file, boolean priorityGlossary) throws IOException {
         String encoding = EncodingDetector.detectEncodingDefault(file, StandardCharsets.UTF_8.name());
-        InputStreamReader reader = new InputStreamReader(new FileInputStream(file), encoding);
 
         List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
-        BufferedReader in = new BufferedReader(reader);
-        try {
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding))) {
             // BOM (byte order mark) bugfix
             in.mark(1);
             int ch = in.read();
-            if (ch != 0xFEFF)
+            if (ch != 0xFEFF) {
                 in.reset();
-
+            }
             for (String s = in.readLine(); s != null; s = in.readLine()) {
                 // skip lines that start with '#'
-                if (s.startsWith("#"))
+                if (s.startsWith("#")) {
                     continue;
-
+                }
                 // divide lines on tabs
-                String tokens[] = parseLine(s);
+                String[] tokens = parseLine(s);
                 // check token list to see if it has a valid string
-                if (tokens.length < 2 || tokens[0].isEmpty())
+                if (tokens.length < 2 || tokens[0].isEmpty()) {
                     continue;
-
+                }
                 // creating glossary entry and add it to the hash
                 // (even if it's already there!)
                 String comment = "";
-                if (tokens.length >= 3)
+                if (tokens.length >= 3) {
                     comment = tokens[2];
+                }
                 result.add(new GlossaryEntry(tokens[0], tokens[1], comment, priorityGlossary));
             }
-        } finally {
-            in.close();
         }
 
         return result;

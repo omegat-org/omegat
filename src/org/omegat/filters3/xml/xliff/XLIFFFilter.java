@@ -202,7 +202,7 @@ public class XLIFFFilter extends XMLFilter {
     public void tagStart(String path, Attributes atts) {
         if (atts != null && path.endsWith("trans-unit")) {
             // resname may or may not be present.
-        	resname = atts.getValue("resname");
+            resname = atts.getValue("resname");
             id = atts.getValue("id");
         }
         // not all <group> tags have resname attribute
@@ -255,7 +255,7 @@ public class XLIFFFilter extends XMLFilter {
         } else if (path.endsWith("/group")) {
             groupResname.remove(--groupLevel);
         } else if (path.endsWith("/file")) {
-        	altIDCache.clear();
+            altIDCache.clear();
         }
         if ("/xliff/file/header".equals(path)) {
             ignored = false;
@@ -293,9 +293,9 @@ public class XLIFFFilter extends XMLFilter {
     }
 
     String ensureUniqueID(String id) {
-    	int i = 0;
-    	String tryID;
-    	while (true) {
+        int i = 0;
+        String tryID;
+        while (true) {
     		tryID = id + (i == 0 ? "" : "_" + i);
     		if (!altIDCache.contains(tryID)) {
     			altIDCache.add(tryID);
@@ -324,7 +324,8 @@ public class XLIFFFilter extends XMLFilter {
         	}
             return entry;
         } else if (entryTranslateCallback != null) {
-            String translation = StringUtil.isEmpty(entry) ? entry : entryTranslateCallback.getTranslation(getSegID(), entry, null);
+            String translation = StringUtil.isEmpty(entry) ? entry
+                    : entryTranslateCallback.getTranslation(getSegID(), entry, null);
             return translation != null ? translation : entry;
         } else {
             return entry;

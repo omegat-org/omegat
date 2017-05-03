@@ -83,11 +83,12 @@ public class Google2Translate extends BaseTranslate {
 
         String targetLang = tLang.getLanguageCode();
         // Differentiate in target between simplified and traditional Chinese
-        if ((tLang.getLanguage().compareToIgnoreCase("zh-cn") == 0)
-                || (tLang.getLanguage().compareToIgnoreCase("zh-tw") == 0))
+        if (tLang.getLanguage().compareToIgnoreCase("zh-cn") == 0
+                || tLang.getLanguage().compareToIgnoreCase("zh-tw") == 0) {
             targetLang = tLang.getLanguage();
-        else if ((tLang.getLanguage().compareToIgnoreCase("zh-hk") == 0))
+        } else if (tLang.getLanguage().compareToIgnoreCase("zh-hk") == 0) {
             targetLang = "ZH-TW"; // Google doesn't recognize ZH-HK
+        }
 
         String googleKey = getCredential(PROPERTY_API_KEY);
 
@@ -98,7 +99,7 @@ public class Google2Translate extends BaseTranslate {
         Map<String, String> params = new TreeMap<String, String>();
 
         if (isPremium()) {
-        	params.put("model", "nmt");
+            params.put("model", "nmt");
         }
 
         params.put("key", googleKey);
@@ -115,15 +116,15 @@ public class Google2Translate extends BaseTranslate {
 
         String v;
         try {
-			v = WikiGet.post(GT_URL, params, headers);
-	    } catch (IOException e) {
+            v = WikiGet.post(GT_URL, params, headers);
+        } catch (IOException e) {
             return e.getLocalizedMessage();
         }
 
         String tr = getJsonResults(v);
 
         if (tr == null) {
-        	return "";
+            return "";
         }
 
         tr = unescapeHTML(tr);

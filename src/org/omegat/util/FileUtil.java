@@ -66,8 +66,11 @@ import org.apache.commons.io.FileUtils;
  * @author Didier Briel
  * @author Aaron Madlon-Kay
  */
-public class FileUtil {
+public final class FileUtil {
     public static final long RENAME_RETRY_TIMEOUT = 3000;
+
+    private FileUtil() {
+    }
 
     /**
      * Removes old backups so that only 10 last are there.
@@ -210,11 +213,11 @@ public class FileUtil {
      */
     private static void findFiles(final File dir, final FileFilter filter, final List<File> result,
             final Set<String> knownDirs) {
-        String curr_dir;
+        String currDir;
         try {
             // check for recursive
-            curr_dir = dir.getCanonicalPath();
-            if (!knownDirs.add(curr_dir)) {
+            currDir = dir.getCanonicalPath();
+            if (!knownDirs.add(currDir)) {
                 return;
             }
         } catch (IOException ex) {
@@ -277,8 +280,9 @@ public class FileUtil {
     }
 
     public interface ICollisionCallback {
-        public boolean isCanceled();
-        public boolean shouldReplace(File file, int thisFile, int totalFiles);
+        boolean isCanceled();
+
+        boolean shouldReplace(File file, int thisFile, int totalFiles);
     }
 
     /**
@@ -356,13 +360,7 @@ public class FileUtil {
      */
     public static boolean isRelative(String path) {
         path = path.replace('\\', '/');
-        if (RE_ABSOLUTE_LINUX.matcher(path).matches()) {
-            return false;
-        } else if (RE_ABSOLUTE_WINDOWS.matcher(path).matches()) {
-            return false;
-        } else {
-            return true;
-        }
+        return !RE_ABSOLUTE_LINUX.matcher(path).matches() && !RE_ABSOLUTE_WINDOWS.matcher(path).matches();
     }
 
     /**

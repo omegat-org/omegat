@@ -63,12 +63,12 @@ public class XLIFFOptions extends AbstractOptions {
      * Identify how the ID for alternative translations is decided.
      */
     public enum ID_TYPE {
-    	/** Take the ID from the prev and next segments. */
-    	CONTEXT,
-    	/** Take the ID from the &lt;trans-unit&gt;'s XML ID. */
-    	ELEMENT_ID,
-    	/** Take the ID from the &lt;trans-unit&gt;'s resname attribute. */
-    	RESNAME_ATTR
+        /** Take the ID from the prev and next segments. */
+        CONTEXT,
+        /** Take the ID from the &lt;trans-unit&gt;'s XML ID. */
+        ELEMENT_ID,
+        /** Take the ID from the &lt;trans-unit&gt;'s resname attribute. */
+        RESNAME_ATTR
     }
 
     public XLIFFOptions(Map<String, String> config) {
@@ -147,7 +147,7 @@ public class XLIFFOptions extends AbstractOptions {
     public ID_TYPE getAltTransIDType() {
         ID_TYPE result = getEnum(ID_TYPE.class, OPTION_ALT_TRANS_ID_TYPE, null);
         if (result == null) {
-        	return getBoolean(OPTION_ALT_TRANS_ID, false) ? ID_TYPE.ELEMENT_ID : ID_TYPE.CONTEXT;
+            return getBoolean(OPTION_ALT_TRANS_ID, false) ? ID_TYPE.ELEMENT_ID : ID_TYPE.CONTEXT;
         }
         return result;
     }

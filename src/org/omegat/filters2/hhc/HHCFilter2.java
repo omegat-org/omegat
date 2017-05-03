@@ -58,10 +58,11 @@ public class HHCFilter2 extends HTMLFilter2 {
         StringBuilder all = null;
         try {
             all = new StringBuilder();
-            char cbuf[] = new char[1000];
+            char[] cbuf = new char[1000];
             int len = -1;
-            while ((len = infile.read(cbuf)) > 0)
+            while ((len = infile.read(cbuf)) > 0) {
                 all.append(cbuf, 0, len);
+            }
         } catch (OutOfMemoryError e) {
             // out of memory?
             all = null;

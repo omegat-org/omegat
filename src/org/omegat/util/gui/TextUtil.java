@@ -30,7 +30,10 @@ package org.omegat.util.gui;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class TextUtil {
+public final class TextUtil {
+
+    private TextUtil() {
+    }
 
     /**
      * Draw text table with columns align.
@@ -45,7 +48,7 @@ public class TextUtil {
         StringBuilder out = new StringBuilder();
 
         // calculate max column size
-        int maxColSize[] = new int[columnHeaders.length];
+        int[] maxColSize = new int[columnHeaders.length];
         for (int c = 0; c < columnHeaders.length; c++) {
             maxColSize[c] = columnHeaders[c].length();
         }

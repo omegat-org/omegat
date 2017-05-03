@@ -34,14 +34,14 @@ public class TokenizerComboBoxRenderer extends DelegatingComboBoxRenderer<Object
 
     @Override
     protected String getDisplayText(Object value) {
-    	if (value instanceof Class<?>) {
+        if (value instanceof Class<?>) {
             Class<?> cls = (Class<?>) value;
             return cls.getSimpleName();
         }
-    	if (value instanceof String) {
+        if (value instanceof String) {
             return (String) value;
         }
 
-    	throw new RuntimeException("Unsupported type in tokenizer combobox");
+        throw new RuntimeException("Unsupported type in tokenizer combobox");
     }
 }

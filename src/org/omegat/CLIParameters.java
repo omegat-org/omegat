@@ -42,7 +42,10 @@ import org.omegat.util.StringUtil;
  *
  * @author Aaron Madlon-Kay
  */
-public class CLIParameters {
+public final class CLIParameters {
+
+    private CLIParameters() {
+    }
 
     /** Regexp for parse parameters. */
     protected static final Pattern PARAM = Pattern.compile("\\-\\-([A-Za-z\\-]+)(=(.+))?");

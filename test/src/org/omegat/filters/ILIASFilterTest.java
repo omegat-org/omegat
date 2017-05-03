@@ -44,7 +44,7 @@ public class ILIASFilterTest extends TestFilterBase {
 
     @Test
     public void testParse() throws Exception {
-	List<String> entries = parse(new ILIASFilter(), "test/data/filters/ilias/ILIASFilter.lang");
+        List<String> entries = parse(new ILIASFilter(), "test/data/filters/ilias/ILIASFilter.lang");
         assertEquals(7, entries.size());
         int i = 0;
         assertEquals("Good line", entries.get(i++));
@@ -68,10 +68,10 @@ public class ILIASFilterTest extends TestFilterBase {
         align(new ILIASFilter(), "ilias/ILIASFilterAlign.lang",
                 "ilias/ILIASFilterAlign-tr.lang", new IAlignCallback() {
                     @Override
-                    public void addTranslation(String id, String source, String translation, boolean isFuzzy, String comment, IFilter filter) {
-                        alignResult.aligned = id.equals("module_name#:#variable_name") &&
-                                              source.equals("original") &&
-                                              translation.equals("translated");
+                    public void addTranslation(String id, String source, String translation, boolean isFuzzy,
+                            String comment, IFilter filter) {
+                        alignResult.aligned = id.equals("module_name#:#variable_name") && source.equals("original")
+                                && translation.equals("translated");
                     }
                 });
 

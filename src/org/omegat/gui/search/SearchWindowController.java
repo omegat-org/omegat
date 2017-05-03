@@ -119,7 +119,7 @@ public class SearchWindowController {
         if (Platform.isMacOSX()) {
             OSXIntegration.enableFullScreen(form);
         }
-        m_dateFormat = new SimpleDateFormat(SAVED_DATE_FORMAT);
+        dateFormat = new SimpleDateFormat(SAVED_DATE_FORMAT);
 
         form.m_searchField.setModel(new DefaultComboBoxModel<>(HistoryManager.getSearchItems()));
         if (form.m_searchField.getModel().getSize() > 0) {
@@ -138,16 +138,16 @@ public class SearchWindowController {
         Date earliestDate = calendar.getTime();
         Date latestDate = initDate;
 
-        m_dateFromModel = new SpinnerDateModel(initDate, earliestDate, latestDate, Calendar.YEAR);
-        form.m_dateFromSpinner.setModel(m_dateFromModel);
+        dateFromModel = new SpinnerDateModel(initDate, earliestDate, latestDate, Calendar.YEAR);
+        form.m_dateFromSpinner.setModel(dateFromModel);
 
-        m_dateToModel = new SpinnerDateModel(initDate, earliestDate, latestDate, Calendar.YEAR);
-        form.m_dateToSpinner.setModel(m_dateToModel);
+        dateToModel = new SpinnerDateModel(initDate, earliestDate, latestDate, Calendar.YEAR);
+        form.m_dateToSpinner.setModel(dateToModel);
 
         // Box Number of results
-        SpinnerNumberModel m_numberModel = new SpinnerNumberModel(OConsts.ST_MAX_SEARCH_RESULTS, 1, Integer.MAX_VALUE,
+        SpinnerNumberModel numberModel = new SpinnerNumberModel(OConsts.ST_MAX_SEARCH_RESULTS, 1, Integer.MAX_VALUE,
                 1);
-        form.m_numberOfResults.setModel(m_numberModel);
+        form.m_numberOfResults.setModel(numberModel);
 
         loadPreferences();
 
@@ -179,7 +179,7 @@ public class SearchWindowController {
             form.m_allResultsCB.setVisible(false);
             form.m_fileNamesCB.setVisible(false);
             form.m_filterButton.setVisible(false);
-            form.m_numberLabel.setVisible(false);;
+            form.m_numberLabel.setVisible(false);
             form.m_numberOfResults.setVisible(false);
             form.m_panelSearch.setVisible(false);
             form.m_panelReplace.setVisible(true);
@@ -344,10 +344,11 @@ public class SearchWindowController {
 
                 // move focus to dir edit field if dir search is selected
                 // otherwise move focus to search field
-                if (form.m_rbDir.isSelected())
+                if (form.m_rbDir.isSelected()) {
                     form.m_dirField.requestFocus();
-                else
+                } else {
                     form.m_searchField.requestFocus();
+                }
             }
         });
         form.m_rbProject.addActionListener(new ActionListener() {
@@ -372,8 +373,8 @@ public class SearchWindowController {
                 // save user preferences
                 savePreferences();
 
-                if (m_thread != null) {
-                    m_thread.fin();
+                if (thread != null) {
+                    thread.fin();
                 }
 
                 // back to the initial segment
@@ -516,7 +517,8 @@ public class SearchWindowController {
         }
 
         // case sensitivity
-        form.m_replaceCase.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_CASE_SENSITIVE_REPLACE, false));
+        form.m_replaceCase
+                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_CASE_SENSITIVE_REPLACE, false));
 
                 // nbsp as space
         form.m_replaceSpaceMatchNbsp.setSelected(Preferences.isPreferenceDefault(
@@ -540,7 +542,8 @@ public class SearchWindowController {
                 Preferences.SEARCHWINDOW_REPLACE_UNTRANSLATED, true));
 
         form.m_searchNotesCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_NOTES, true));
-        form.m_searchCommentsCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_COMMENTS, true));
+        form.m_searchCommentsCB
+                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_COMMENTS, true));
 
         form.m_cbSearchInGlossaries.setSelected(Preferences.isPreferenceDefault(
                 Preferences.SEARCHWINDOW_GLOSSARY_SEARCH, true));
@@ -553,8 +556,10 @@ public class SearchWindowController {
         form.m_fileNamesCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_FILE_NAMES, false));
 
         // editor related options
-        form.m_autoSyncWithEditor.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_AUTO_SYNC, false));
-        form.m_backToInitialSegment.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_BACK_TO_INITIAL_SEGMENT, false));
+        form.m_autoSyncWithEditor
+                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_AUTO_SYNC, false));
+        form.m_backToInitialSegment
+                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_BACK_TO_INITIAL_SEGMENT, false));
 
         // update the enabled/selected status of normal options
         updateOptionStatus();
@@ -628,13 +633,14 @@ public class SearchWindowController {
         Preferences.setPreference(Preferences.SEARCHWINDOW_AUTHOR_NAME, form.m_authorField.getText());
         Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_FROM, form.m_dateFromCB.isSelected());
         Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_FROM_VALUE,
-                m_dateFormat.format(m_dateFromModel.getDate()));
+                dateFormat.format(dateFromModel.getDate()));
         Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_TO, form.m_dateToCB.isSelected());
-        Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_TO_VALUE, m_dateFormat.format(m_dateToModel.getDate()));
+        Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_TO_VALUE, dateFormat.format(dateToModel.getDate()));
         Preferences.setPreference(Preferences.SEARCHWINDOW_NUMBER_OF_RESULTS,
                 ((Integer) form.m_numberOfResults.getValue()));
         Preferences.setPreference(Preferences.SEARCHWINDOW_EXCLUDE_ORPHANS, form.m_excludeOrphans.isSelected());
-        Preferences.setPreference(Preferences.SEARCHWINDOW_FULLHALFWIDTH_INSENSITIVE, form.m_fullHalfWidthInsensitive.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_FULLHALFWIDTH_INSENSITIVE,
+                form.m_fullHalfWidthInsensitive.isSelected());
 
         // search dir options
         Preferences.setPreference(Preferences.SEARCHWINDOW_DIR, form.m_dirField.getText());
@@ -643,7 +649,8 @@ public class SearchWindowController {
 
         // editor related options
         Preferences.setPreference(Preferences.SEARCHWINDOW_AUTO_SYNC, form.m_autoSyncWithEditor.isSelected());
-        Preferences.setPreference(Preferences.SEARCHWINDOW_BACK_TO_INITIAL_SEGMENT, form.m_backToInitialSegment.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_BACK_TO_INITIAL_SEGMENT,
+                form.m_backToInitialSegment.isSelected());
 
         // Search/replace history
         HistoryManager.save();
@@ -712,9 +719,9 @@ public class SearchWindowController {
 
         browser.showOpenDialog(form);
         File dir = browser.getSelectedFile();
-        if (dir == null)
+        if (dir == null) {
             return;
-
+        }
         String str = dir.getAbsolutePath() + File.separator;
         form.m_dirField.setText(str);
     }
@@ -760,9 +767,9 @@ public class SearchWindowController {
 
     private void doSearch() {
         UIThreadsUtil.mustBeSwingThread();
-        if (m_thread != null) {
+        if (thread != null) {
             // stop old search thread
-            m_thread.fin();
+            thread.fin();
         }
 
         EntryListPane viewer = (EntryListPane) form.m_viewer;
@@ -779,8 +786,9 @@ public class SearchWindowController {
         if (form.m_rbDir.isSelected()) {
             // make sure it's a valid directory name
             root = form.m_dirField.getText();
-            if (!root.endsWith(File.separator))
+            if (!root.endsWith(File.separator)) {
                 root += File.separator;
+            }
             File f = new File(root);
             if (!f.exists() || !f.isDirectory()) {
                 String error = StringUtil.format(OStrings.getString("SW_ERROR_BAD_DIR"),
@@ -872,22 +880,22 @@ public class SearchWindowController {
         s.searchAuthor = form.m_authorCB.isSelected();
         s.author = form.m_authorField.getText();
         s.searchDateAfter = form.m_dateFromCB.isSelected();
-        s.dateAfter = m_dateFromModel.getDate().getTime();
+        s.dateAfter = dateFromModel.getDate().getTime();
         s.searchDateBefore = form.m_dateToCB.isSelected();
-        s.dateBefore = m_dateToModel.getDate().getTime();
+        s.dateBefore = dateToModel.getDate().getTime();
         s.numberOfResults = mode == SearchMode.SEARCH ? ((Integer) form.m_numberOfResults.getValue())
                 : Integer.MAX_VALUE;
 
         Searcher searcher = new Searcher(Core.getProject(), s);
         // start the search in a separate thread
-        m_thread = new SearchThread(this, searcher);
-        m_thread.start();
+        thread = new SearchThread(this, searcher);
+        thread.start();
     }
 
     void doCancel() {
         UIThreadsUtil.mustBeSwingThread();
-        if (m_thread != null) {
-            m_thread.fin();
+        if (thread != null) {
+            thread.fin();
         }
         form.dispose();
     }
@@ -960,15 +968,15 @@ public class SearchWindowController {
     private void doResetDateFrom() {
         Calendar calendar = Calendar.getInstance();
         Date now = calendar.getTime();
-        m_dateFromModel.setEnd(now);
-        m_dateFromModel.setValue(now);
+        dateFromModel.setEnd(now);
+        dateFromModel.setValue(now);
     }
 
     private void doResetDateTo() {
         Calendar calendar = Calendar.getInstance();
         Date now = calendar.getTime();
-        m_dateToModel.setEnd(now);
-        m_dateToModel.setValue(now);
+        dateToModel.setEnd(now);
+        dateToModel.setValue(now);
     }
 
     private void enableDisableDateTo() {
@@ -998,14 +1006,15 @@ public class SearchWindowController {
             // from date
             form.m_dateFromCB.setSelected(Preferences.isPreference(Preferences.SEARCHWINDOW_DATE_FROM));
             String dateFromValue = Preferences.getPreference(Preferences.SEARCHWINDOW_DATE_FROM_VALUE);
-            if (!StringUtil.isEmpty(dateFromValue))
-                m_dateFromModel.setValue(m_dateFormat.parse(dateFromValue));
-
+            if (!StringUtil.isEmpty(dateFromValue)) {
+                dateFromModel.setValue(dateFormat.parse(dateFromValue));
+            }
             // to date
             form.m_dateToCB.setSelected(Preferences.isPreference(Preferences.SEARCHWINDOW_DATE_TO));
             String dateToValue = Preferences.getPreference(Preferences.SEARCHWINDOW_DATE_TO_VALUE);
-            if (!StringUtil.isEmpty(dateToValue))
-                m_dateToModel.setValue(m_dateFormat.parse(dateToValue));
+            if (!StringUtil.isEmpty(dateToValue)) {
+                dateToModel.setValue(dateFormat.parse(dateToValue));
+            }
         } catch (ParseException e) {
             // use safe settings in case of parsing error
             form.m_dateFromCB.setSelected(false);
@@ -1017,7 +1026,8 @@ public class SearchWindowController {
                 OConsts.ST_MAX_SEARCH_RESULTS));
 
         form.m_excludeOrphans.setSelected(Preferences.isPreference(Preferences.SEARCHWINDOW_EXCLUDE_ORPHANS));
-        form.m_fullHalfWidthInsensitive.setSelected(Preferences.isPreference(Preferences.SEARCHWINDOW_FULLHALFWIDTH_INSENSITIVE));
+        form.m_fullHalfWidthInsensitive
+                .setSelected(Preferences.isPreference(Preferences.SEARCHWINDOW_FULLHALFWIDTH_INSENSITIVE));
 
         // if advanced options are enabled (e.g. author/date search),
         // let the user see them anyway. This is important because
@@ -1112,18 +1122,20 @@ public class SearchWindowController {
                 }
 
                 String fulltext = msg;
-                if (ex != null)
+                if (ex != null) {
                     fulltext += "\n" + ex.getLocalizedMessage();
-                JOptionPane.showMessageDialog(form, fulltext, OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
+                }
+                JOptionPane.showMessageDialog(form, fulltext, OStrings.getString("TF_ERROR"),
+                        JOptionPane.ERROR_MESSAGE);
             }
         });
     }
 
-    private SimpleDateFormat m_dateFormat;
-    private SpinnerDateModel m_dateFromModel, m_dateToModel;
+    private SimpleDateFormat dateFormat;
+    private SpinnerDateModel dateFromModel, dateToModel;
 
-    private SearchThread m_thread;
+    private SearchThread thread;
 
-    private final static String SAVED_DATE_FORMAT = "yyyy/MM/dd HH:mm";
+    private static final String SAVED_DATE_FORMAT = "yyyy/MM/dd HH:mm";
 
 }

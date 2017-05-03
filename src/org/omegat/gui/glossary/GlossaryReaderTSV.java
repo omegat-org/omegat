@@ -58,11 +58,15 @@ public final class GlossaryReaderTSV {
     }
 
     public static String getFileEncoding(final File file) throws IOException {
+        return getFileEncoding(file, Charset.defaultCharset().name());
+    }
+
+    public static String getFileEncoding(final File file, String defaultEncoding) throws IOException {
         String fnameLower = file.getName().toLowerCase();
         if (fnameLower.endsWith(OConsts.EXT_TSV_UTF8)) {
             return StandardCharsets.UTF_8.name();
         } else {
-            return EncodingDetector.detectEncodingDefault(file, Charset.defaultCharset().name());
+            return EncodingDetector.detectEncodingDefault(file, defaultEncoding);
         }
     }
 
@@ -114,7 +118,7 @@ public final class GlossaryReaderTSV {
             file.getParentFile().mkdirs();
             file.createNewFile();
         } else {
-            encoding = EncodingDetector.detectEncodingDefault(file, StandardCharsets.UTF_8.name());
+            encoding = getFileEncoding(file, StandardCharsets.UTF_8.name());
         }
         try (Writer wr = new OutputStreamWriter(new FileOutputStream(file, true), encoding)) {
             wr.append(newEntry.getSrcText()).append('\t').append(newEntry.getLocText());

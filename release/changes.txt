@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.1 update 1
 ----------------------------------------------------------------------
-  8 Enhancements
+  9 Enhancements
   2 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
@@ -20,6 +20,9 @@
 
   - Compute PO fuzzies real match % 
   https://sourceforge.net/p/omegat/feature-requests/1259/
+
+  - Update MainMenuShortcuts.properties to reflect actual menus
+  https://sourceforge.net/p/omegat/feature-requests/1315/
 
   Other changes:
 

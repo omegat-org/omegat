@@ -83,7 +83,6 @@ import javax.swing.event.MenuKeyListener;
 import javax.swing.event.TableColumnModelEvent;
 import javax.swing.event.TableColumnModelListener;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -133,7 +132,6 @@ public class ProjectFilesListController {
 
     private ProjectFilesList list;
     private FileInfoModel modelFiles;
-    private DataTableStyling.PatternHighlightRenderer fileRenderer;
     private AbstractTableModel modelTotal;
     private Sorter currentSorter;
 
@@ -527,7 +525,7 @@ public class ProjectFilesListController {
         }
         String quoted = Pattern.quote(filterPanel.filterTextField.getText());
         Pattern findPattern = Pattern.compile(quoted, Pattern.CASE_INSENSITIVE);
-        fileRenderer.setPattern(findPattern);
+        FilesTableColumn.FILE_NAME.setHighlightPattern(findPattern);
         Pattern matchPattern = Pattern.compile(".*" + quoted + ".*", Pattern.CASE_INSENSITIVE);
         currentSorter.setFilter(matchPattern);
         selectRow(0);
@@ -537,7 +535,7 @@ public class ProjectFilesListController {
         if (!isFiltering()) {
             throw new IllegalStateException("Can't end filtering when we're not filtering!");
         }
-        fileRenderer.setPattern(null);
+        FilesTableColumn.FILE_NAME.setHighlightPattern(null);
         list.tablesOuterPanel.remove(filterPanel);
         list.btnDown.setEnabled(true);
         list.btnUp.setEnabled(true);
@@ -666,7 +664,7 @@ public class ProjectFilesListController {
         // Set last column of tableTotal to match size of scrollbar.
         JScrollBar scrollbar = list.scrollFiles.getVerticalScrollBar();
         int sbWidth = scrollbar == null || !scrollbar.isVisible() ? 0 : scrollbar.getWidth();
-        list.tableTotal.getColumnModel().getColumn(list.tableTotal.getColumnCount() - 1).setPreferredWidth(sbWidth);
+        list.tableTotal.getColumnModel().getColumn(TotalsTableColumn.MARGIN.index).setPreferredWidth(sbWidth);
 
         // Propagate column sizes to totals table
         for (int i = 0; i < list.tableFiles.getColumnCount(); i++) {
@@ -675,35 +673,44 @@ public class ProjectFilesListController {
             trgCol.setPreferredWidth(srcCol.getWidth());
         }
     }
+    
+    enum FilesTableColumn {
+        FILE_NAME(0, OStrings.getString("PF_FILENAME"), String.class, new DataTableStyling.PatternHighlightRenderer()),
+        FILTER(1, OStrings.getString("PF_FILTERNAME"), String.class, DataTableStyling.getTextCellRenderer()),
+        ENCODING(2, OStrings.getString("PF_ENCODING"), String.class, DataTableStyling.getTextCellRenderer()),
+        SEGMENTS(3, OStrings.getString("PF_NUM_SEGMENTS"), Integer.class, DataTableStyling.getNumberCellRenderer()),
+        UNIQUE_SEGMENTS(4, OStrings.getString("PF_NUM_UNIQUE_SEGMENTS"), Integer.class, DataTableStyling.getNumberCellRenderer());
+
+        private final int index;
+        private final String label;
+        private final Class<?> clazz;
+        private final TableCellRenderer renderer;
+
+        private FilesTableColumn(int index, String label, Class<?> clazz, TableCellRenderer renderer) {
+            this.index = index;
+            this.label = label;
+            this.clazz = clazz;
+            this.renderer = renderer;
+        }
+
+        static FilesTableColumn get(int index) {
+            return values()[index];
+        }
+
+        private void setHighlightPattern(Pattern pattern) {
+            if (renderer instanceof DataTableStyling.PatternHighlightRenderer) {
+                ((DataTableStyling.PatternHighlightRenderer) renderer).setPattern(pattern);
+            } else {
+                throw new UnsupportedOperationException("Column " + label + " doesn't support pattern highlights");
+            }
+        }
+    }
 
     private void setTableFilesModel(final List<IProject.FileInfo> files) {
         modelFiles = new FileInfoModel(files);
-
         list.tableFiles.setModel(modelFiles);
-
-        TableColumnModel columns = new DefaultTableColumnModel();
-        TableColumn cFile = new TableColumn(0, 150);
-        cFile.setHeaderValue(OStrings.getString("PF_FILENAME"));
-        fileRenderer = new DataTableStyling.PatternHighlightRenderer();
-        cFile.setCellRenderer(new CustomRenderer(files, fileRenderer));
-        TableColumn cFilter = new TableColumn(1, 100);
-        cFilter.setHeaderValue(OStrings.getString("PF_FILTERNAME"));
-        cFilter.setCellRenderer(getTextCellRenderer(files));
-        TableColumn cEncoding = new TableColumn(2, 50);
-        cEncoding.setHeaderValue(OStrings.getString("PF_ENCODING"));
-        cEncoding.setCellRenderer(getTextCellRenderer(files));
-        TableColumn cCount = new TableColumn(3, 50);
-        cCount.setHeaderValue(OStrings.getString("PF_NUM_SEGMENTS"));
-        cCount.setCellRenderer(getNumberCellRenderer(files));
-        TableColumn cUnique = new TableColumn(4, 50);
-        cUnique.setHeaderValue(OStrings.getString("PF_NUM_UNIQUE_SEGMENTS"));
-        cUnique.setCellRenderer(getNumberCellRenderer(files));
-        columns.addColumn(cFile);
-        columns.addColumn(cFilter);
-        columns.addColumn(cEncoding);
-        columns.addColumn(cCount);
-        columns.addColumn(cUnique);
-        columns.addColumnModelListener(new TableColumnModelListener() {
+        TableColumnModel colModel = list.tableFiles.getColumnModel();
+        colModel.addColumnModelListener(new TableColumnModelListener() {
             @Override
             public void columnAdded(TableColumnModelEvent e) {
             }
@@ -714,6 +721,7 @@ public class ProjectFilesListController {
 
             @Override
             public void columnMoved(TableColumnModelEvent e) {
+                // Propagate movement to tableTotal
                 list.tableTotal.getColumnModel().moveColumn(e.getFromIndex(), e.getToIndex());
             }
 
@@ -725,11 +733,72 @@ public class ProjectFilesListController {
             public void columnSelectionChanged(ListSelectionEvent e) {
             }
         });
-        list.tableFiles.setColumnModel(columns);
-
+        for (FilesTableColumn col : FilesTableColumn.values()) {
+            TableColumn tCol = colModel.getColumn(col.index);
+            tCol.setCellRenderer(new CustomRenderer(files, col.renderer));
+        }
         currentSorter = new Sorter(files);
         currentSorter.addRowSorterListener(e -> updateTitle());
         list.tableFiles.setRowSorter(currentSorter);
+    }
+    
+    enum TotalsTableColumn {
+        LABEL(0, String.class, DataTableStyling.getTextCellRenderer()) {
+            @Override
+            protected Object getValue(int row) {
+                switch (row) {
+                case 0:
+                    return OStrings.getString("GUI_PROJECT_TOTAL_SEGMENTS");
+                case 1:
+                    return OStrings.getString("GUI_PROJECT_UNIQUE_SEGMENTS");
+                case 2:
+                    return OStrings.getString("GUI_PROJECT_TRANSLATED");
+                default:
+                    throw new IllegalArgumentException();
+                }
+            }
+        },
+        EMPTY_1(1, String.class, DataTableStyling.getTextCellRenderer()),
+        EMPTY_2(2, String.class, DataTableStyling.getTextCellRenderer()),
+        EMPTY_3(3, Integer.class, DataTableStyling.getNumberCellRenderer()),
+        VALUE(4, Integer.class, DataTableStyling.getNumberCellRenderer()) {
+            @Override
+            protected Object getValue(int row) {
+                if (!Core.getProject().isProjectLoaded()) {
+                    return "-";
+                }
+                StatisticsInfo stat = Core.getProject().getStatistics();
+                switch (row) {
+                case 0:
+                    return stat.numberOfSegmentsTotal;
+                case 1:
+                    return stat.numberOfUniqueSegments;
+                case 2:
+                    return stat.numberofTranslatedSegments;
+                default:
+                    throw new IllegalArgumentException();
+                }
+            }
+        },
+        MARGIN(5, String.class, new DataTableStyling.AlternatingHighlightRenderer().setDoHighlight(false));
+
+        private final int index;
+        private final Class<?> clazz;
+        private final TableCellRenderer renderer;
+
+        private TotalsTableColumn(int index, Class<?> clazz, TableCellRenderer renderer) {
+            this.index = index;
+            this.clazz = clazz;
+            this.renderer = renderer;
+        }
+        
+        protected Object getValue(int row) {
+            return "";
+        }
+
+        static TotalsTableColumn get(int index) {
+            return values()[index];
+        }
     }
 
     private void createTableTotal() {
@@ -739,43 +808,17 @@ public class ProjectFilesListController {
         modelTotal = new AbstractTableModel() {
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
-                if (columnIndex == 0) {
-                    switch (rowIndex) {
-                    case 0:
-                        return OStrings.getString("GUI_PROJECT_TOTAL_SEGMENTS");
-                    case 1:
-                        return OStrings.getString("GUI_PROJECT_UNIQUE_SEGMENTS");
-                    case 2:
-                        return OStrings.getString("GUI_PROJECT_TRANSLATED");
-                    }
-                } else if (columnIndex == 1) {
-                    return "";
-                } else if (columnIndex == 2) {
-                    return "";
-                } else if (columnIndex == 3) {
-                    return "";
-                } else if (columnIndex == 4) {
-                    if (!Core.getProject().isProjectLoaded()) {
-                        return "-";
-                    }
-                    StatisticsInfo stat = Core.getProject().getStatistics();
-                    switch (rowIndex) {
-                    case 0:
-                        return stat.numberOfSegmentsTotal;
-                    case 1:
-                        return stat.numberOfUniqueSegments;
-                    case 2:
-                        return stat.numberofTranslatedSegments;
-                    }
-                } else if (columnIndex == 5) {
-                    return "";
-                }
-                return null;
+                return TotalsTableColumn.get(columnIndex).getValue(rowIndex);
             }
 
             @Override
             public int getColumnCount() {
-                return 6;
+                return TotalsTableColumn.values().length;
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return TotalsTableColumn.get(columnIndex).clazz;
             }
 
             @Override
@@ -785,27 +828,12 @@ public class ProjectFilesListController {
         };
         list.tableTotal.setModel(modelTotal);
 
-        TableColumnModel columns = new DefaultTableColumnModel();
-        TableColumn cFile = new TableColumn(0, 150);
-        cFile.setCellRenderer(getTextCellRenderer(null));
-        TableColumn cFilter = new TableColumn(1, 100);
-        cFilter.setCellRenderer(getTextCellRenderer(null));
-        TableColumn cEncoding = new TableColumn(2, 50);
-        cEncoding.setCellRenderer(getTextCellRenderer(null));
-        TableColumn cCount = new TableColumn(3, 50);
-        cCount.setCellRenderer(getNumberCellRenderer(null));
-        TableColumn cUnique = new TableColumn(4, 50);
-        cUnique.setCellRenderer(getNumberCellRenderer(null));
-        TableColumn cScrollbarMargin = new TableColumn(5, 0);
-        cScrollbarMargin.setCellRenderer(
-                new CustomRenderer(null, new DataTableStyling.AlternatingHighlightRenderer().setDoHighlight(false)));
-        columns.addColumn(cFile);
-        columns.addColumn(cFilter);
-        columns.addColumn(cEncoding);
-        columns.addColumn(cCount);
-        columns.addColumn(cUnique);
-        columns.addColumn(cScrollbarMargin);
-        list.tableTotal.setColumnModel(columns);
+        TableColumnModel colModel = list.tableTotal.getColumnModel();
+        for (TotalsTableColumn col : TotalsTableColumn.values()) {
+            TableColumn tCol = colModel.getColumn(col.index);
+            tCol.setCellRenderer(new CustomRenderer(null, col.renderer));
+            tCol.setMinWidth(0);
+        }
     }
 
     /**
@@ -844,14 +872,6 @@ public class ProjectFilesListController {
         } finally {
             list.setCursor(oldCursor);
         }
-    }
-
-    private TableCellRenderer getNumberCellRenderer(List<IProject.FileInfo> files) {
-        return new CustomRenderer(files, DataTableStyling.getNumberCellRenderer());
-    }
-
-    private TableCellRenderer getTextCellRenderer(List<IProject.FileInfo> files) {
-        return new CustomRenderer(files, DataTableStyling.getTextCellRenderer());
     }
 
     private static final Color COLOR_SPECIAL_FG = Color.BLACK;
@@ -918,26 +938,26 @@ public class ProjectFilesListController {
                 // data changed
                 return null;
             }
-            switch (columnIndex) {
-            case 0:
+            switch (FilesTableColumn.get(columnIndex)) {
+            case FILE_NAME:
                 return fi.filePath;
-            case 1:
+            case FILTER:
                 return fi.filterFileFormatName;
-            case 2:
+            case ENCODING:
                 return fi.fileEncoding;
-            case 3:
+            case SEGMENTS:
                 return fi.entries.size();
-            case 4:
+            case UNIQUE_SEGMENTS:
                 StatisticsInfo stat = Core.getProject().getStatistics();
                 return stat.uniqueCountsByFile.get(fi.filePath);
             default:
-                return null;
+                throw new IllegalArgumentException();
             }
         }
 
         @Override
         public int getColumnCount() {
-            return 5;
+            return FilesTableColumn.values().length;
         }
 
         @Override
@@ -947,20 +967,12 @@ public class ProjectFilesListController {
 
         @Override
         public Class<?> getColumnClass(int columnIndex) {
-            switch (columnIndex) {
-            case 0:
-                return String.class;
-            case 1:
-                return String.class;
-            case 2:
-                return String.class;
-            case 3:
-                return Integer.class;
-            case 4:
-                return Integer.class;
-            default:
-                return null;
-            }
+            return FilesTableColumn.get(columnIndex).clazz;
+        }
+
+        @Override
+        public String getColumnName(int column) {
+            return FilesTableColumn.get(column).label;
         }
 
         public FileInfo getDataAtRow(int row) {

@@ -56,7 +56,6 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -97,8 +96,6 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IEntryEventListener;
-import org.omegat.core.events.IFontChangedEventListener;
-import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.ProjectUICommands;
@@ -156,12 +153,7 @@ public class ProjectFilesListController {
         createTableTotal();
 
         TableColumnSizer colSizer = TableColumnSizer.autoSize(list.tableFiles, 0, true);
-        colSizer.addColumnAdjustmentListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                propagateTableColumns();
-            }
-        });
+        colSizer.addColumnAdjustmentListener(e -> propagateTableColumns());
 
         DragTargetOverlay.apply(list.tableFiles, new FileDropInfo(true) {
             @Override
@@ -201,24 +193,9 @@ public class ProjectFilesListController {
         // set the position and size
         initWindowLayout();
 
-        list.m_addNewFileButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                doImportSourceFiles();
-            }
-        });
-        list.m_wikiImportButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                doWikiImport();
-            }
-        });
-        list.m_closeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                doCancel();
-            }
-        });
+        list.m_addNewFileButton.addActionListener(e -> doImportSourceFiles());
+        list.m_wikiImportButton.addActionListener(e -> doWikiImport());
+        list.m_closeButton.addActionListener(e -> doCancel());
         list.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
@@ -237,34 +214,28 @@ public class ProjectFilesListController {
             }
         });
 
-        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
-            @Override
-            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-                switch (eventType) {
-                case CLOSE:
-                    list.tableFiles.setModel(new DefaultTableModel());
-                    list.tableFiles.repaint();
-                    modelTotal.fireTableDataChanged();
-                    list.setVisible(false);
+        CoreEvents.registerProjectChangeListener(eventType -> {
+            switch (eventType) {
+            case CLOSE:
+                list.tableFiles.setModel(new DefaultTableModel());
+                list.tableFiles.repaint();
+                modelTotal.fireTableDataChanged();
+                list.setVisible(false);
+                break;
+            case LOAD:
+            case CREATE:
+                buildDisplay(Core.getProject().getProjectFiles());
+                if (!Preferences.isPreferenceDefault(Preferences.PROJECT_FILES_SHOW_ON_LOAD, true)) {
                     break;
-                case LOAD:
-                case CREATE:
-                    buildDisplay(Core.getProject().getProjectFiles());
-                    if (!Preferences.isPreferenceDefault(Preferences.PROJECT_FILES_SHOW_ON_LOAD, true)) {
-                        break;
-                    }
-                    list.setVisible(true);
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            list.toFront();
-                            list.tableFiles.requestFocus();
-                        }
-                    });
-                    break;
-                default:
-                    // Nothing
                 }
+                list.setVisible(true);
+                SwingUtilities.invokeLater(() -> {
+                    list.toFront();
+                    list.tableFiles.requestFocus();
+                });
+                break;
+            default:
+                // Nothing
             }
         });
 
@@ -286,14 +257,11 @@ public class ProjectFilesListController {
             }
         });
 
-        CoreEvents.registerFontChangedEventListener(new IFontChangedEventListener() {
-            @Override
-            public void onFontChanged(Font newFont) {
-                if (!Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
-                    newFont = defaultFont;
-                }
-                setFont(newFont);
+        CoreEvents.registerFontChangedEventListener(newFont -> {
+            if (!Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
+                newFont = defaultFont;
             }
+            setFont(newFont);
         });
 
         list.tableFiles.addMouseListener(new MouseAdapter() {
@@ -488,12 +456,7 @@ public class ProjectFilesListController {
         list.btnFirst.setEnabled(false);
         list.btnLast.setEnabled(false);
         list.tablesOuterPanel.add(filterPanel, BorderLayout.SOUTH);
-        filterPanel.filterTextField.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gotoFile(list.tableFiles.getSelectedRow());
-            }
-        });
+        filterPanel.filterTextField.addActionListener(e -> gotoFile(list.tableFiles.getSelectedRow()));
         filterPanel.filterTextField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -534,12 +497,7 @@ public class ProjectFilesListController {
                 filterPanel.filterTextField.setCaretPosition(filterPanel.filterTextField.getText().length());
             }
         });
-        filterPanel.filterCloseButton.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                endFilter();
-            }
-        });
+        filterPanel.filterCloseButton.addActionListener(e -> endFilter());
         filterPanel.filterTextField.setText(Character.toString(c));
         filterPanel.filterTextField.requestFocus();
         list.validate();
@@ -594,31 +552,28 @@ public class ProjectFilesListController {
         list.repaint();
     }
 
-    ActionListener moveAction = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            int[] selected = list.tableFiles.getSelectedRows();
-            if (selected.length == 0) {
-                return;
-            }
-
-            int pos = selected[0];
-
-            int newPos;
-            if (e.getSource() == list.btnUp) {
-                newPos = pos - 1;
-            } else if (e.getSource() == list.btnDown) {
-                newPos = pos + 1;
-            } else if (e.getSource() == list.btnFirst) {
-                newPos = 0;
-            } else if (e.getSource() == list.btnLast) {
-                newPos = Integer.MAX_VALUE;
-            } else {
-                return;
-            }
-            pos = currentSorter.moveTo(selected, newPos);
-            list.tableFiles.getSelectionModel().setSelectionInterval(pos, pos + selected.length - 1);
+    ActionListener moveAction = e -> {
+        int[] selected = list.tableFiles.getSelectedRows();
+        if (selected.length == 0) {
+            return;
         }
+
+        int pos = selected[0];
+
+        int newPos;
+        if (e.getSource() == list.btnUp) {
+            newPos = pos - 1;
+        } else if (e.getSource() == list.btnDown) {
+            newPos = pos + 1;
+        } else if (e.getSource() == list.btnFirst) {
+            newPos = 0;
+        } else if (e.getSource() == list.btnLast) {
+            newPos = Integer.MAX_VALUE;
+        } else {
+            return;
+        }
+        pos = currentSorter.moveTo(selected, newPos);
+        list.tableFiles.getSelectionModel().setSelectionInterval(pos, pos + selected.length - 1);
     };
 
     public boolean isActive() {
@@ -630,12 +585,7 @@ public class ProjectFilesListController {
             // moved current file selection here so it will be properly set on each activation
             list.setVisible(true);
             list.toFront();
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    selectCurrentFile(Core.getProject().getProjectFiles());
-                }
-            });
+            SwingUtilities.invokeLater(() -> selectCurrentFile(Core.getProject().getProjectFiles()));
         } else {
             list.setVisible(false);
         }
@@ -1056,18 +1006,15 @@ public class ProjectFilesListController {
             List<String> filenames = files.stream().map(fi -> fi.filePath)
                     .sorted(StreamUtil.comparatorByList(Core.getProject().getSourceFilesOrder()))
                     .collect(Collectors.toList());
-            Collections.sort(viewToModel, new Comparator<Integer>() {
-                @Override
-                public int compare(Integer o1, Integer o2) {
-                    int pos1 = filenames.indexOf(files.get(o1).filePath);
-                    int pos2 = filenames.indexOf(files.get(o2).filePath);
-                    if (pos1 < pos2) {
-                        return -1;
-                    } else if (pos1 > pos2) {
-                        return 1;
-                    } else {
-                        return 0;
-                    }
+            Collections.sort(viewToModel, (o1, o2) -> {
+                int pos1 = filenames.indexOf(files.get(o1).filePath);
+                int pos2 = filenames.indexOf(files.get(o2).filePath);
+                if (pos1 < pos2) {
+                    return -1;
+                } else if (pos1 > pos2) {
+                    return 1;
+                } else {
+                    return 0;
                 }
             });
 
@@ -1154,40 +1101,37 @@ public class ProjectFilesListController {
                 return;
             }
             final StatisticsInfo stat = Core.getProject().getStatistics();
-            Collections.sort(viewToModel, new Comparator<Integer>() {
-                @Override
-                public int compare(Integer o1, Integer o2) {
-                    IProject.FileInfo f1 = files.get(o1);
-                    IProject.FileInfo f2 = files.get(o2);
-                    int c = 0;
-                    switch (sortKey.getColumn()) {
-                    case 0:
-                        c = f1.filePath.compareToIgnoreCase(f2.filePath);
-                        break;
-                    case 1:
-                        c = f1.filterFileFormatName.compareToIgnoreCase(f2.filterFileFormatName);
-                        break;
-                    case 2:
-                        String fe1 = f1.fileEncoding == null ? "" : f1.fileEncoding;
-                        String fe2 = f2.fileEncoding == null ? "" : f2.fileEncoding;
-                        c = fe1.compareToIgnoreCase(fe2);
-                        break;
-                    case 3:
-                        int m1 = f1.entries.size();
-                        int m2 = f2.entries.size();
-                        c = m1 > m2 ? 1 : m1 < m2 ? -1 : 0;
-                        break;
-                    case 4:
-                        int n1 = stat.uniqueCountsByFile.get(f1.filePath);
-                        int n2 = stat.uniqueCountsByFile.get(f2.filePath);
-                        c = n1 > n2 ? 1 : n1 < n2 ? -1 : 0;
-                        break;
-                    }
-                    if (sortKey.getSortOrder() == SortOrder.DESCENDING) {
-                        c = -c;
-                    }
-                    return c;
+            Collections.sort(viewToModel, (o1, o2) -> {
+                IProject.FileInfo f1 = files.get(o1);
+                IProject.FileInfo f2 = files.get(o2);
+                int c = 0;
+                switch (sortKey.getColumn()) {
+                case 0:
+                    c = f1.filePath.compareToIgnoreCase(f2.filePath);
+                    break;
+                case 1:
+                    c = f1.filterFileFormatName.compareToIgnoreCase(f2.filterFileFormatName);
+                    break;
+                case 2:
+                    String fe1 = f1.fileEncoding == null ? "" : f1.fileEncoding;
+                    String fe2 = f2.fileEncoding == null ? "" : f2.fileEncoding;
+                    c = fe1.compareToIgnoreCase(fe2);
+                    break;
+                case 3:
+                    int m1 = f1.entries.size();
+                    int m2 = f2.entries.size();
+                    c = m1 > m2 ? 1 : m1 < m2 ? -1 : 0;
+                    break;
+                case 4:
+                    int n1 = stat.uniqueCountsByFile.get(f1.filePath);
+                    int n2 = stat.uniqueCountsByFile.get(f2.filePath);
+                    c = n1 > n2 ? 1 : n1 < n2 ? -1 : 0;
+                    break;
                 }
+                if (sortKey.getSortOrder() == SortOrder.DESCENDING) {
+                    c = -c;
+                }
+                return c;
             });
             recalc();
         }

@@ -55,7 +55,10 @@ import org.omegat.util.Platform;
  *
  * @author Aaron Madlon-Kay
  */
-public class DataTableStyling {
+public final class DataTableStyling {
+
+    private DataTableStyling() {
+    }
 
     public static final Color COLOR_STANDARD_FG = Color.BLACK;
     public static final Color COLOR_STANDARD_BG = Color.WHITE;
@@ -109,7 +112,7 @@ public class DataTableStyling {
         return new AlternatingHighlightRenderer().setFontStyle(Font.BOLD);
     }
 
-    public static abstract class FancyRenderer<T extends JComponent> implements TableCellRenderer {
+    public abstract static class FancyRenderer<T extends JComponent> implements TableCellRenderer {
         private NumberFormat numberFormat = null;
         private boolean doHighlight = true;
         private int fontStyle = FONT_NO_CHANGE;

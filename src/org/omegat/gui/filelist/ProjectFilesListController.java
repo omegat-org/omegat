@@ -675,7 +675,8 @@ public class ProjectFilesListController {
     }
     
     enum FilesTableColumn {
-        FILE_NAME(0, OStrings.getString("PF_FILENAME"), String.class, new DataTableStyling.PatternHighlightRenderer()),
+        FILE_NAME(0, OStrings.getString("PF_FILENAME"), String.class,
+                new DataTableStyling.PatternHighlightRenderer().setLineWrap(false)),
         FILTER(1, OStrings.getString("PF_FILTERNAME"), String.class, DataTableStyling.getTextCellRenderer()),
         ENCODING(2, OStrings.getString("PF_ENCODING"), String.class, DataTableStyling.getTextCellRenderer()),
         SEGMENTS(3, OStrings.getString("PF_NUM_SEGMENTS"), Integer.class, DataTableStyling.getNumberCellRenderer()),

@@ -210,29 +210,29 @@ public final class DataTableStyling {
             StyleConstants.setForeground(sas, HIGHLIGHT_FG_COLOR);
             HIGHLIGHT_ATTR = sas;
         }
-        private final JTextPane component = new JTextPane();
-        private boolean lineWrapEnabled = true;
+        private final JTextPane component;
         private Pattern pattern;
 
-        public PatternHighlightRenderer setPattern(Pattern pattern) {
-            this.pattern = pattern;
-            return this;
-        }
-
         /**
-         * Sets whether line wrap is enabled. Disable line wrap when using this as a single-line renderer. Default is
-         * {@code true}.
+         * Create a new PatternHighlightRenderer.
          * <p>
-         * This is required because this renderer uses a {@link JTextPane} as its rendering component, and the default
-         * JTextPane wrapping results in words simply disappearing when used as a single-line renderer.
+         * Disable line wrap when using this as a single-line renderer. This is because this renderer uses a
+         * {@link JTextPane} as its rendering component, and the default JTextPane wrapping results in words simply
+         * disappearing when used as a single-line renderer.
          *
          * @param lineWrapEnabled
          *            Whether to allow line wrapping
-         * @return this renderer
          * @see <a href="https://sourceforge.net/p/omegat/bugs/862/">Bug #862</a>
          */
-        public PatternHighlightRenderer setLineWrap(boolean lineWrapEnabled) {
-            this.lineWrapEnabled = lineWrapEnabled;
+        public PatternHighlightRenderer(boolean lineWrapEnabled) {
+            component = new JTextPane();
+            if (!lineWrapEnabled) {
+                component.setEditorKit(new NoWrapEditorKit());
+            }
+        }
+
+        public PatternHighlightRenderer setPattern(Pattern pattern) {
+            this.pattern = pattern;
             return this;
         }
 
@@ -243,11 +243,7 @@ public final class DataTableStyling {
 
         @Override
         protected void applyValue(String value) {
-            // Replace spaces with no-break spaces if line wrapping is disabled.
-            // This is a poor workaround.
-            // TODO: Figure out how to properly disable line wrapping in a JTextPane
-            String displayValue = lineWrapEnabled ? value : value.replace(' ', '\u00a0');
-            component.setText(displayValue);
+            component.setText(value);
             if (value != null) {
                 doHighlighting(value);
             }

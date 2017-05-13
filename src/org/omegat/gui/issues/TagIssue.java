@@ -55,6 +55,7 @@ import org.omegat.core.tagvalidation.TagValidationTool;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil.Tag;
+import org.omegat.util.gui.CharacterWrapEditorKit;
 import org.omegat.util.gui.Styles.EditorColor;
 
 /**
@@ -103,6 +104,9 @@ public class TagIssue implements IIssue {
     @Override
     public Component getDetailComponent() {
         TripleSplitButtonPanel panel = new TripleSplitButtonPanel();
+        panel.firstTextPane.setEditorKit(new CharacterWrapEditorKit());
+        panel.middleTextPane.setEditorKit(new CharacterWrapEditorKit());
+        panel.lastTextPane.setEditorKit(new CharacterWrapEditorKit());
         panel.firstButton.setBorderPainted(false);
         panel.middleButton.setBorderPainted(false);
         try {

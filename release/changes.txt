@@ -2,7 +2,7 @@
  OmegaT 4.1.1 update 1
 ----------------------------------------------------------------------
   9 Enhancements
-  2 Bug fixes
+  4 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
 4.1.1 update 1 vs 4.1.1
@@ -45,6 +45,12 @@ tags. It has been reverted to HTML mode.
 
   - XML-invalid chars in source file names could leak into project TMX
   https://sourceforge.net/p/omegat/bugs/857/
+
+  - Long file paths truncated too aggressively in Project Files dialog
+  https://sourceforge.net/p/omegat/bugs/862/
+
+  - Force wrapping in issue windows 
+  https://sourceforge.net/p/omegat/feature-requests/1318/
 
   Localisation Updates:
 

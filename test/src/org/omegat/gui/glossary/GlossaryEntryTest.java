@@ -38,12 +38,12 @@ import org.omegat.core.TestCore;
 public class GlossaryEntryTest extends TestCore {
     @Test
     public void testRead() throws Exception {
-        GlossaryEntry a = new GlossaryEntry("", "", "", false);
-        GlossaryEntry b = new GlossaryEntry("", "", "", false);
+        GlossaryEntry a = new GlossaryEntry("", "", "", false, null);
+        GlossaryEntry b = new GlossaryEntry("", "", "", false, null);
         assertEquals(a, b);
 
-        GlossaryEntry c = new GlossaryEntry("src", "", "", false);
-        GlossaryEntry d = new GlossaryEntry("src", "", "", false);
+        GlossaryEntry c = new GlossaryEntry("src", "", "", false, null);
+        GlossaryEntry d = new GlossaryEntry("src", "", "", false, null);
         assertEquals(c, d);
 
         List<GlossaryEntry> list = new ArrayList<GlossaryEntry>();
@@ -70,47 +70,47 @@ public class GlossaryEntryTest extends TestCore {
 
     @Test
     public void testToStyledString() {
-        GlossaryEntry ge = new GlossaryEntry("source1", "translation1", "", false);
+        GlossaryEntry ge = new GlossaryEntry("source1", "translation1", "", false, null);
         assertEquals("source1 = translation1", ge.toStyledString().text.toString());
         assertEquals("<html><p>source1 = translation1</p></html>", ge.toStyledString().toHTML());
 
-        ge = new GlossaryEntry("source1", "translation1", "", true);
+        ge = new GlossaryEntry("source1", "translation1", "", true, null);
         assertEquals("<html><p>source1 = <b>translation1</b></p></html>", ge.toStyledString().toHTML());
     }
 
     @Test
     public void testToStyledStringMultipleTranslations() {
         GlossaryEntry ge = new GlossaryEntry("source1", new String[] {"translation1", "translation2"},
-                                             new String[] { "", "" }, new boolean[] {false, false});
+                new String[] { "", "" }, new boolean[] { false, false }, new String[] { null, null });
         assertEquals("source1 = translation1, translation2", ge.toStyledString().text.toString());
         assertEquals("<html><p>source1 = translation1, translation2</p></html>", ge.toStyledString().toHTML());
 
         ge = new GlossaryEntry("source1", new String[] { "translation1", "translation2" }, new String[] { "", "" },
-                new boolean[] { false, true });
+                new boolean[] { false, true }, new String[] { null, null });
         assertEquals("<html><p>source1 = translation1, <b>translation2</b></p></html>", ge.toStyledString().toHTML());
     }
 
     @Test
     public void testToStyledStringWithComment() {
-        GlossaryEntry ge = new GlossaryEntry("source1", "translation1", "comment1", false);
+        GlossaryEntry ge = new GlossaryEntry("source1", "translation1", "comment1", false, null);
         assertEquals("source1 = translation1\n1. comment1", ge.toStyledString().text.toString());
         assertEquals("<html><p>source1 = translation1<br>1. comment1</p></html>", ge.toStyledString().toHTML());
 
-        ge = new GlossaryEntry("source1", "translation1", "comment1", true);
+        ge = new GlossaryEntry("source1", "translation1", "comment1", true, null);
         assertEquals("<html><p>source1 = <b>translation1</b><br>1. comment1</p></html>", ge.toStyledString().toHTML());
     }
 
     @Test
     public void testToStyledStringMultipleComments() {
         GlossaryEntry ge = new GlossaryEntry("source1", new String[] {"translation1", "translation2"},
-                                             new String[] { "comment1", "comment2" }, new boolean[] {false, false});
+                new String[] { "comment1", "comment2" }, new boolean[] { false, false }, new String[] { null, null });
         assertEquals("source1 = translation1, translation2\n1. comment1\n2. comment2",
                      ge.toStyledString().text.toString());
         assertEquals("<html><p>source1 = translation1, translation2<br>1. comment1<br>2. comment2</p></html>",
                 ge.toStyledString().toHTML());
 
         ge = new GlossaryEntry("source1", new String[] { "translation1", "translation2" },
-                new String[] { "comment1", "comment2" }, new boolean[] { true, false });
+                new String[] { "comment1", "comment2" }, new boolean[] { true, false }, new String[] { null, null });
         assertEquals("<html><p>source1 = <b>translation1</b>, translation2<br>1. comment1<br>2. comment2</p></html>",
                 ge.toStyledString().toHTML());
     }

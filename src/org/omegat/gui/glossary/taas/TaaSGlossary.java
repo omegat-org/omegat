@@ -34,6 +34,7 @@ import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.gui.glossary.GlossaryReaderTBX;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
+import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 
 import gen.taas.TaasExtractionResult;
@@ -56,7 +57,7 @@ public class TaaSGlossary implements IGlossary {
         TaasExtractionResult res = TaaSPlugin.getClient().termExtraction(sLang, tLang, srcText,
                 Preferences.getPreference(Preferences.TAAS_DOMAIN));
         String data = TaaSPlugin.filterTaasResult(res.getTerms());
-        List<GlossaryEntry> entries = GlossaryReaderTBX.read(data, false);
+        List<GlossaryEntry> entries = GlossaryReaderTBX.read(data, false, OStrings.getString("TAAS_GLOSSARY_NAME"));
         Log.logDebug(LOGGER, "TaaS returns {0} glossary entries", entries.size());
         return entries;
     }

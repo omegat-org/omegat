@@ -26,17 +26,6 @@
 
 package org.omegat.gui.glossary;
 
-import gen.core.tbx.Descrip;
-import gen.core.tbx.DescripGrp;
-import gen.core.tbx.Hi;
-import gen.core.tbx.LangSet;
-import gen.core.tbx.Martif;
-import gen.core.tbx.Note;
-import gen.core.tbx.Ntig;
-import gen.core.tbx.TermEntry;
-import gen.core.tbx.TermNote;
-import gen.core.tbx.Tig;
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -58,6 +47,17 @@ import org.omegat.util.Preferences;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLFilterImpl;
+
+import gen.core.tbx.Descrip;
+import gen.core.tbx.DescripGrp;
+import gen.core.tbx.Hi;
+import gen.core.tbx.LangSet;
+import gen.core.tbx.Martif;
+import gen.core.tbx.Note;
+import gen.core.tbx.Ntig;
+import gen.core.tbx.TermEntry;
+import gen.core.tbx.TermNote;
+import gen.core.tbx.Tig;
 
 /**
  * Reader for TBX glossaries.
@@ -84,15 +84,17 @@ public class GlossaryReaderTBX {
 
     public static List<GlossaryEntry> read(final File file, boolean priorityGlossary) throws Exception {
         Martif tbx = load(file);
-        return readMartif(tbx, priorityGlossary);
+        return readMartif(tbx, priorityGlossary, file.getPath());
     }
 
-    public static List<GlossaryEntry> read(final String data, boolean priorityGlossary) throws Exception {
+    public static List<GlossaryEntry> read(final String data, boolean priorityGlossary, String origin)
+            throws Exception {
         Martif tbx = loadFromString(data);
-        return readMartif(tbx, priorityGlossary);
+        return readMartif(tbx, priorityGlossary, origin);
     }
 
-    public static List<GlossaryEntry> readMartif(final Martif tbx, boolean priorityGlossary) throws Exception {
+    public static List<GlossaryEntry> readMartif(final Martif tbx, boolean priorityGlossary, String origin)
+            throws Exception {
         if (tbx.getText() == null) {
             return Collections.emptyList();
         }
@@ -144,11 +146,11 @@ public class GlossaryReaderTBX {
             for (String s : sTerms) {
                 boolean addedForLang = false;
                 for (String t : tTerms) {
-                    result.add(new GlossaryEntry(s, t, comment.toString(), priorityGlossary));
+                    result.add(new GlossaryEntry(s, t, comment.toString(), priorityGlossary, origin));
                     addedForLang = true;
                 }
                 if (!addedForLang) { // An entry is created just to get the definition
-                    result.add(new GlossaryEntry(s, "", comment.toString(), priorityGlossary));
+                    result.add(new GlossaryEntry(s, "", comment.toString(), priorityGlossary, origin));
                 }
             }
             sTerms.clear();
@@ -257,8 +259,7 @@ public class GlossaryReaderTBX {
     }
 
     public static class NamespaceFilter extends XMLFilterImpl {
-        private static final InputSource EMPTY_INPUT_SOURCE = new InputSource(new ByteArrayInputStream(
-                new byte[0]));
+        private static final InputSource EMPTY_INPUT_SOURCE = new InputSource(new ByteArrayInputStream(new byte[0]));
 
         public NamespaceFilter(XMLReader xmlReader) {
             super(xmlReader);

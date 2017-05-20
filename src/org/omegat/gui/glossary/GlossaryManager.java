@@ -197,7 +197,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      * @return all entries
      * @param src
      */
-    public List<GlossaryEntry> search(String src) {
+    public List<GlossaryEntry> getLocalEntries() {
         List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
         synchronized (this) {
             for (List<GlossaryEntry> en : glossaries.values()) {

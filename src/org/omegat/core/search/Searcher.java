@@ -366,7 +366,7 @@ public class Searcher {
         // search the glossary, if requested
         if (m_searchExpression.glossary) {
             String intro = OStrings.getString("SW_GLOSSARY_RESULT");
-            List<GlossaryEntry> entries = Core.getGlossaryManager().search(m_searchExpression.text);
+            List<GlossaryEntry> entries = Core.getGlossaryManager().getLocalEntries();
             for (GlossaryEntry en : entries) {
                 checkEntry(en.getSrcText(), en.getLocText(), null, null, null, ENTRY_ORIGIN_GLOSSARY, intro);
                 // stop searching if the max. nr of hits has been reached

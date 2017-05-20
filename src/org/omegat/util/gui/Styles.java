@@ -90,6 +90,7 @@ public final class Styles {
         COLOR_LANGUAGE_TOOLS("#0000ff"),
         COLOR_TRANSTIPS("#0000ff"),
         COLOR_SPELLCHECK("#ff0000"),
+        COLOR_TERMINOLOGY(Color.ORANGE),
         COLOR_MATCHES_CHANGED("#0000ff"),
         COLOR_MATCHES_UNCHANGED("#00ff00"),
         COLOR_MATCHES_DEL_ACTIVE((Color) null),

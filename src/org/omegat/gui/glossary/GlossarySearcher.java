@@ -75,6 +75,23 @@ public class GlossarySearcher {
         return filterGlossary(result);
     }
 
+    public List<String> searchTargetMatches(String trg, GlossaryEntry entry) {
+
+        List<String> result = new ArrayList<>();
+
+        // Compute source entry tokens
+        Token[] strTokens = tokenize(trg);
+
+        for (String term : entry.getLocTerms(true)) {
+            checkCancelled();
+            if (isTokenMatch(strTokens, term) || isCjkMatch(trg, term)) {
+                result.add(term);
+            }
+        }
+        // No need to sort or filter
+        return result;
+    }
+
     /**
      * Override this to throw an exception (that you will catch) to abort matching.
      */

@@ -50,6 +50,7 @@ public class IssueProviders {
     private static final List<IIssueProvider> ISSUE_PROVIDERS = new ArrayList<>();
     static {
         addIssueProvider(new SpellingIssueProvider());
+        addIssueProvider(new TerminologyIssueProvider());
     }
 
     private IssueProviders() {

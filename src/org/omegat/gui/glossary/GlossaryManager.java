@@ -31,6 +31,7 @@ package org.omegat.gui.glossary;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -39,6 +40,7 @@ import java.util.TreeMap;
 import org.omegat.core.Core;
 import org.omegat.core.glossaries.IGlossary;
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.DirectoryMonitor;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -220,5 +222,49 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
                 Log.log(ex);
             }
         }
+    }
+
+    /**
+     * Get all glossary entries with source terms found in the provided string.
+     *
+     * @param src
+     *            The text to search
+     * @return A list of matching glossary entries
+     */
+    public List<GlossaryEntry> searchSourceMatches(String src) {
+        ITokenizer tok = Core.getProject().getSourceTokenizer();
+        if (tok == null) {
+            return Collections.emptyList();
+        }
+
+        List<GlossaryEntry> entries = getGlossaryEntries(src);
+        if (entries == null) {
+            return Collections.emptyList();
+        }
+
+        GlossarySearcher searcher = new GlossarySearcher(tok,
+                Core.getProject().getProjectProperties().getSourceLanguage());
+
+        return searcher.searchSourceMatches(src, entries);
+    }
+
+    /**
+     * Get all target terms for the provided glossary entry that can be found in the provided string.
+     *
+     * @param trg
+     *            The text to search
+     * @param entry
+     *            The glossary entry whose target terms should be searched
+     * @return A list of matching target terms
+     */
+    public List<String> searchTargetMatches(String trg, GlossaryEntry entry) {
+        ITokenizer tok = Core.getProject().getTargetTokenizer();
+        if (tok == null) {
+            return Collections.emptyList();
+        }
+        GlossarySearcher searcher = new GlossarySearcher(tok,
+                Core.getProject().getProjectProperties().getTargetLanguage());
+
+        return searcher.searchTargetMatches(trg, entry);
     }
 }

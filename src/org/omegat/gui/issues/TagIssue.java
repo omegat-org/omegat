@@ -57,6 +57,7 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil.Tag;
 import org.omegat.util.gui.CharacterWrapEditorKit;
 import org.omegat.util.gui.Styles.EditorColor;
+import org.openide.awt.Mnemonics;
 
 /**
  * A class representing problems with tags in a translation. One instance holds
@@ -123,7 +124,7 @@ public class TagIssue implements IIssue {
             panel.middleButton.setVisible(false);
         } else {
             panel.lastTextPane.setText(fixText);
-            org.openide.awt.Mnemonics.setLocalizedText(panel.lastButton, OStrings.getString("ISSUES_TAGS_BUTTON_APPLY_FIX"));
+            Mnemonics.setLocalizedText(panel.lastButton, OStrings.getString("ISSUES_TAGS_BUTTON_APPLY_FIX"));
             panel.lastButton.addActionListener(getFixActionListener(fixText));
             minHeight += panel.lastButton.getPreferredSize().height;
         }
@@ -204,7 +205,7 @@ public class TagIssue implements IIssue {
      *            The report to fix
      * @return Whether or not the fix succeeded
      */
-    private boolean doFix(ErrorReport report, String fixed) {
+    private static boolean doFix(ErrorReport report, String fixed) {
         // Make sure the translation hasn't changed in the editor.
         TMXEntry prevTrans = Core.getProject().getTranslationInfo(report.ste);
         if (!report.translation.equals(prevTrans.translation)) {

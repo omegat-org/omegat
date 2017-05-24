@@ -5,8 +5,8 @@
  * @author  Piotr Kulik
  * @author  Kos Ivantsov
  * @author  Didier Briel
- * @date    2016-03-10
- * @version 0.7.1
+ * @date    2017-05-24
+ * @version 0.7.3
  */
 
 // if FALSE only current file will be checked
@@ -61,6 +61,15 @@ bRules = null;
 
 sourceLang = getLTLanguage(project.getProjectProperties().getSourceLanguage());
 targetLang = getLTLanguage(project.getProjectProperties().getTargetLanguage());
+
+sourceLt = null
+targetLt = null
+if (sourceLang != null) {
+	sourceLt = getLanguageToolInstance(sourceLang)
+}
+if (targetLang != null) {
+	targetLt = getLanguageToolInstance(targetLang)
+}
 sourceLt = getLanguageToolInstance(sourceLang);
 targetLt = getLanguageToolInstance(targetLang);
 if (sourceLt != null && targetLt != null) {

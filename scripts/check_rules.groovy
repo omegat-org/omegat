@@ -70,8 +70,6 @@ if (sourceLang != null) {
 if (targetLang != null) {
 	targetLt = getLanguageToolInstance(targetLang)
 }
-sourceLt = getLanguageToolInstance(sourceLang);
-targetLt = getLanguageToolInstance(targetLang);
 if (sourceLt != null && targetLt != null) {
     bRules = getBiTextRules(sourceLang, targetLang);
 }

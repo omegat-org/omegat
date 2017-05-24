@@ -60,6 +60,15 @@ bRules = null;
 
 sourceLang = getLTLanguage(project.getProjectProperties().getSourceLanguage());
 targetLang = getLTLanguage(project.getProjectProperties().getTargetLanguage());
+
+sourceLt = null
+targetLt = null
+if (sourceLang != null) {
+	sourceLt = getLanguageToolInstance(sourceLang)
+}
+if (targetLang != null) {
+	targetLt = getLanguageToolInstance(targetLang)
+}
 sourceLt = getLanguageToolInstance(sourceLang);
 targetLt = getLanguageToolInstance(targetLang);
 if (sourceLt != null && targetLt != null) {

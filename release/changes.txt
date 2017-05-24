@@ -1,4 +1,18 @@
 ----------------------------------------------------------------------
+ OmegaT 3.6.0 update 6
+----------------------------------------------------------------------
+  0 Enhancement
+  1 Bug fix
+  0 Localisation update
+----------------------------------------------------------------------
+3.6.0 update 6 vs 3.6.0 update 5
+
+  Bug fixes:
+
+  - When there were no LanguageTool rules for the source or the target
+language of the project, the QA - Check Rules script was crashing
+
+----------------------------------------------------------------------
  OmegaT 3.6.0 update 5 (2017-03-09)
 ----------------------------------------------------------------------
   1 Enhancement

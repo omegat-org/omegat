@@ -259,7 +259,7 @@ public abstract class BaseTokenizer implements ITokenizer {
             CharTermAttribute cattr = in.getAttribute(CharTermAttribute.class);
             OffsetAttribute off = in.getAttribute(OffsetAttribute.class);
 
-            Locale loc = stemsAllowed ? getLanguage().getLocale() : null;
+            Locale loc = stemsAllowed ? getEffectiveLanguage().getLocale() : null;
 
             in.reset();
             while (in.incrementToken()) {
@@ -320,32 +320,48 @@ public abstract class BaseTokenizer implements ITokenizer {
 
     @Override
     public String[] getSupportedLanguages() {
+        return getAnnotationLanguages();
+    }
+
+    private String[] getAnnotationLanguages() {
         Tokenizer ann = getClass().getAnnotation(Tokenizer.class);
         if (ann == null) {
             throw new RuntimeException(getClass().getName() + " must have a "
                     + Tokenizer.class.getName() + " annotation available at runtime.");
         }
-        return ann.languages();
+        String[] languages = ann.languages();
+        if (languages.length == 0) {
+            throw new RuntimeException(getClass().getName() + " must have a non-empty " + Tokenizer.class.getName()
+                    + " annotation available at runtime.");
+        }
+        return languages;
     }
 
-    protected Language getLanguage() {
-        String[] languages = getSupportedLanguages();
-        if (languages.length == 0 || languages[0].equals(Tokenizer.DISCOVER_AT_RUNTIME)) {
-            IProject proj = Core.getProject();
-            if (proj == null) {
-                throw new RuntimeException("This tokenizer's language can only be "
-                        + "determined in the context of a project, but project is null.");
-            } else if (proj.getSourceTokenizer() == this) {
-                return proj.getProjectProperties().getSourceLanguage();
-            } else if (proj.getTargetTokenizer() == this) {
-                return proj.getProjectProperties().getTargetLanguage();
+    protected Language getEffectiveLanguage() {
+        String[] languages = getAnnotationLanguages();
+        if (languages.length == 1) {
+            if (languages[0].equals(Tokenizer.DISCOVER_AT_RUNTIME)) {
+                return getProjectLanguage();
             } else {
-                throw new RuntimeException("This tokenizer's language can only be "
-                        + "determined in the context of a project, but is not assigned "
-                        + "to current project.");
+                return new Language(languages[0]);
             }
         }
-        return new Language(languages[0]);
+        return getProjectLanguage();
+    }
+
+    protected Language getProjectLanguage() {
+        IProject proj = Core.getProject();
+        if (proj == null) {
+            throw new RuntimeException("This tokenizer's language can only be "
+                    + "determined in the context of a project, but project is null.");
+        } else if (proj.getSourceTokenizer() == this) {
+            return proj.getProjectProperties().getSourceLanguage();
+        } else if (proj.getTargetTokenizer() == this) {
+            return proj.getProjectProperties().getTargetLanguage();
+        } else {
+            throw new RuntimeException("This tokenizer's language can only be "
+                    + "determined in the context of a project, but is not assigned " + "to current project.");
+        }
     }
 
     protected String test(String... args) {

@@ -31,7 +31,9 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -53,36 +55,30 @@ import org.omegat.util.Preferences;
 @Tokenizer(languages = { Tokenizer.DISCOVER_AT_RUNTIME })
 public class HunspellTokenizer extends BaseTokenizer {
 
-    private static Map<Language, File> AFFIX_FILES;
-    private static Map<Language, File> DICTIONARY_FILES;
+    private static Map<Language, File> affixFiles;
+    private static Map<Language, File> dictionaryFiles;
+    private static String[] availableDictLangs;
 
-    private Dictionary dict;
+    private volatile Dictionary dict;
+    private volatile boolean failedToLoadDict;
 
     private Dictionary getDict() {
-        if (dict != null) {
-            return dict;
+        if (failedToLoadDict) {
+            return null;
         }
-
-        if (AFFIX_FILES == null || DICTIONARY_FILES == null) {
-            populateInstalledDicts();
+        Dictionary result = dict;
+        if (result == null) {
+            synchronized (this) {
+                result = dict;
+                if (result == null) {
+                    result = dict = initDict(getEffectiveLanguage());
+                    if (result == null) {
+                        failedToLoadDict = true;
+                    }
+                }
+            }
         }
-
-        Language language = getLanguage();
-        File affixFile = AFFIX_FILES.get(language);
-        File dictionaryFile = DICTIONARY_FILES.get(language);
-
-        if (affixFile == null || dictionaryFile == null || !affixFile.exists()
-                || !dictionaryFile.exists()) {
-            Log.logErrorRB("HUNSPELL_TOKENIZER_DICT_NOT_INSTALLED", language.getLocale());
-        }
-
-        try {
-            dict = new Dictionary(new FileInputStream(affixFile), new FileInputStream(dictionaryFile));
-            return dict;
-        } catch (Exception ex) {
-            // Nothing
-        }
-        return null;
+        return result;
     }
 
     @Override
@@ -106,18 +102,16 @@ public class HunspellTokenizer extends BaseTokenizer {
 
     @Override
     public String[] getSupportedLanguages() {
-
         populateInstalledDicts();
-
-        Set<Language> commonLangs = AFFIX_FILES.keySet();
-        commonLangs.retainAll(DICTIONARY_FILES.keySet());
-
-        return langsToStrings(commonLangs);
+        return availableDictLangs;
     }
 
-    private static void populateInstalledDicts() {
-        AFFIX_FILES = new HashMap<Language, File>();
-        DICTIONARY_FILES = new HashMap<Language, File>();
+    private static synchronized void populateInstalledDicts() {
+        if (affixFiles != null && dictionaryFiles != null) {
+            return;
+        }
+        affixFiles = new HashMap<>();
+        dictionaryFiles = new HashMap<>();
 
         String dictionaryDirPath = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY);
         if (dictionaryDirPath.isEmpty()) {
@@ -133,21 +127,47 @@ public class HunspellTokenizer extends BaseTokenizer {
             String name = file.getName();
             if (name.endsWith(OConsts.SC_AFFIX_EXTENSION)) {
                 Language lang = new Language(name.substring(0, name.lastIndexOf(OConsts.SC_AFFIX_EXTENSION)));
-                AFFIX_FILES.put(lang, file);
-                AFFIX_FILES.put(new Language(lang.getLanguageCode()), file);
+                affixFiles.put(lang, file);
+                affixFiles.put(new Language(lang.getLanguageCode()), file);
             } else if (name.endsWith(OConsts.SC_DICTIONARY_EXTENSION)) {
                 Language lang = new Language(name.substring(0, name.lastIndexOf(OConsts.SC_DICTIONARY_EXTENSION)));
-                DICTIONARY_FILES.put(lang, file);
-                DICTIONARY_FILES.put(new Language(lang.getLanguageCode()), file);
+                dictionaryFiles.put(lang, file);
+                dictionaryFiles.put(new Language(lang.getLanguageCode()), file);
             }
+        }
+
+        Set<Language> commonLangs = new HashSet<>(affixFiles.keySet());
+        commonLangs.retainAll(dictionaryFiles.keySet());
+        availableDictLangs = langsToStrings(commonLangs);
+    }
+
+    private static Dictionary initDict(Language language) {
+        populateInstalledDicts();
+
+        File affixFile;
+        File dictionaryFile;
+        synchronized (HunspellTokenizer.class) {
+            affixFile = affixFiles.get(language);
+            dictionaryFile = dictionaryFiles.get(language);
+        }
+
+        if (affixFile == null || dictionaryFile == null || !affixFile.exists() || !dictionaryFile.exists()) {
+            Log.logErrorRB("HUNSPELL_TOKENIZER_DICT_NOT_INSTALLED", language.getLocale());
+            return null;
+        }
+        try {
+            return new Dictionary(new FileInputStream(affixFile), new FileInputStream(dictionaryFile));
+        } catch (Throwable t) {
+            Log.log(t);
+            return null;
         }
     }
 
     private static String[] langsToStrings(Set<Language> langs) {
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<String>(langs.size() * 2);
         for (Language lang : langs) {
-            result.add(lang.getLanguage().toLowerCase());
-            result.add(lang.getLanguageCode().toLowerCase());
+            result.add(lang.getLanguage().toLowerCase(Locale.ENGLISH));
+            result.add(lang.getLanguageCode().toLowerCase(Locale.ENGLISH));
         }
         return result.toArray(new String[result.size()]);
     }

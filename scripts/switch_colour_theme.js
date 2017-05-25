@@ -1,15 +1,13 @@
-/* :name=Switch Colour Theme :description=Switch Editor Colour Theme 
+/* :name=UI - Switch Colour Theme (Javascript) :description=Switch Editor Colour Theme 
  *
- * Apply a colour theme to OmegaT. The application needs to be restarted for the theme to take effect.
+ *  Apply a colour theme to OmegaT. The application needs to be restarted for the theme to take effect.
  *
  * @author  Briac Pilpre
  * @date    2014-09-22
  * @version 0.1
  */
 
-
 var theme = 'Dark';
-
 
 var themes = {
     'Default': {
@@ -91,7 +89,6 @@ var themes = {
         'COLOR_MATCHES_DEL_ACTIVE': '#ff0000'
     }
 };
-
 
 console.println('Switch to theme ' + theme);
 for (var name in themes[theme]) {

@@ -1,5 +1,4 @@
-/* 
- * QA script
+/* :name=QA - Check Rules :description=Check the project against the rules specified in the script. The rules are based on the Checkmate Quality check 
  *
  * @author  Briac Pilpre
  * @author  Piotr Kulik

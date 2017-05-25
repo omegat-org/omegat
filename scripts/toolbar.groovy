@@ -1,3 +1,11 @@
+/* :name=SAMPLE - Toolbar :description=
+ *
+ * @author: 	
+ * @date: 	
+ * @version 	
+ */
+
+
 import javax.swing.JToolBar;
 import javax.swing.JButton;
 

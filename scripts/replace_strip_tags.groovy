@@ -1,4 +1,4 @@
-/* Remove tags in the current target or in selection
+/* :name=TAGS - Strip Tags :description=Remove tags in the current target or in selection
  * 
  * @author   Kos Ivantsov
  * @date     2016-07-15

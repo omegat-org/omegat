@@ -41,6 +41,9 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.hunspell.Dictionary;
 import org.apache.lucene.analysis.hunspell.HunspellStemFilter;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
+import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
+import org.omegat.core.events.IProjectEventListener.PROJECT_CHANGE_TYPE;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -170,5 +173,23 @@ public class HunspellTokenizer extends BaseTokenizer {
             result.add(lang.getLanguageCode().toLowerCase(Locale.ENGLISH));
         }
         return result.toArray(new String[result.size()]);
+    }
+
+    private static synchronized void reset() {
+        affixFiles = null;
+        dictionaryFiles = null;
+        availableDictLangs = null;
+    }
+
+    public static void loadPlugins() {
+        Core.registerTokenizerClass(HunspellTokenizer.class);
+        CoreEvents.registerProjectChangeListener(e -> {
+            if (e == PROJECT_CHANGE_TYPE.LOAD) {
+                reset();
+            }
+        });
+    }
+
+    public static void unloadPlugins() {
     }
 }

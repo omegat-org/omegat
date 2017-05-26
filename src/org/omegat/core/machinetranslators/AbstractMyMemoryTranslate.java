@@ -90,10 +90,7 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
      * @return A code modified for MyMemory languages
      */
     protected String mymemoryCode(Language language) {
-
-        String lCode = language.getLanguageCode().toLowerCase();
-
-        return lCode;
+        return language.getLocaleLCID();
     }
 
     @Override

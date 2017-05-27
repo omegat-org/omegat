@@ -86,7 +86,7 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
      */
     protected String mymemoryCode(Language language) {
 
-        String lCode = language.getLanguageCode().toLowerCase();
+        String lCode = language.getLocaleLCID();
 
         return lCode;
     }

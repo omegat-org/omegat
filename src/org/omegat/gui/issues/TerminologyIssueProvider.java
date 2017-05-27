@@ -28,6 +28,7 @@ package org.omegat.gui.issues;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -48,6 +49,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.gui.glossary.TransTips;
+import org.omegat.util.FileUtil;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.Styles.EditorColor;
 
@@ -125,12 +127,16 @@ class TerminologyIssueProvider implements IIssueProvider {
 
         @Override
         public String getDescription() {
-            String delim = OStrings.getString("ISSUES_TERMINOLOGY_TERM_DELIMITER");
+            String oDelim = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DELIMITER");
+            List<String> origins = Arrays.asList(glossaryEntry.getOrigins(true));
+            String originStr = String.join(oDelim, FileUtil.getUniqueNames(origins));
+            String tDelim = OStrings.getString("ISSUES_TERMINOLOGY_TERM_DELIMITER");
             String[] targetTerms = glossaryEntry.getLocTerms(true);
             return targetTerms.length == 1
-                    ? OStrings.getString("ISSUES_TERMINOLOGY_DESCRIPTION", glossaryEntry.getSrcText(), targetTerms[0])
-                    : OStrings.getString("ISSUES_TERMINOLOGY_DESCRIPTION_MULTI", glossaryEntry.getSrcText(),
-                            String.join(delim, targetTerms));
+                    ? OStrings.getString("ISSUES_TERMINOLOGY_DESCRIPTION", originStr, glossaryEntry.getSrcText(),
+                            targetTerms[0])
+                    : OStrings.getString("ISSUES_TERMINOLOGY_DESCRIPTION_MULTI", originStr, glossaryEntry.getSrcText(),
+                            String.join(tDelim, targetTerms));
         }
 
         @Override

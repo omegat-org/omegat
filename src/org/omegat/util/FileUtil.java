@@ -42,6 +42,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
@@ -49,6 +50,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
@@ -58,6 +60,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  * Files processing utilities.
@@ -479,5 +482,66 @@ public final class FileUtil {
             }
         }
         return Pattern.compile(m.toString());
+    }
+
+    /**
+     * Given a list of paths, return a list of filenames (a la {@code File.getName()}) plus the minimum number of parent
+     * path segments required to make each filename unique within the result list. E.g.
+     * <ul>
+     * <li>{@code [foo/bar.txt, foo/baz.txt] -> [bar.txt, baz.txt]}
+     * <li>{@code [foo/bar/baz.txt, foo/fop/baz.txt] -> [bar/baz.txt, fop/baz.txt]}
+     * <li>{@code [foo/bar/baz/fop.txt, foo/buz/baz/fop.txt] -> [bar/baz/fop.txt, buz/baz/fop.txt]}
+     * <li>{@code [foo.txt, foo.txt] -> [foo.txt, foo.txt]} (actual duplicates are unmodified)
+     * </ul>
+     * Note that paths will be normalized (indirections removed, trailing and duplicate separators removed, separators
+     * become {@code /}).
+     *
+     * @param paths
+     *            A list of paths
+     * @return A list of minimal unique paths
+     */
+    public static List<String> getUniqueNames(List<String> paths) {
+        // Normalize
+        List<String> fullPaths = new ArrayList<>(paths);
+        fullPaths.replaceAll(p -> Optional.ofNullable(FilenameUtils.normalizeNoEndSeparator(p, true)).orElse(""));
+        // Create working array with first attempt (one segment)
+        List<String> working = new ArrayList<>(fullPaths);
+        working.replaceAll(p -> StringUtil.getTailSegments(p, '/', 1));
+        // Early out for normalizable singleton list
+        if (working.size() == 1 && !working.get(0).isEmpty()) {
+            return working;
+        }
+        // Note number of segments retained for each item
+        int[] segments = new int[fullPaths.size()];
+        Arrays.fill(segments, 1);
+        while (true) {
+            boolean didTrim = false;
+            // Calculate counts to allow finding duplicates
+            int[] counts = new int[working.size()];
+            Arrays.setAll(counts, i -> Collections.frequency(working, working.get(i)));
+            for (int i = 0; i < counts.length; i++) {
+                if (counts[i] > 1) {
+                    // Re-trim the duplicate with one extra segment
+                    String curr = working.get(i);
+                    String trimmed = StringUtil.getTailSegments(fullPaths.get(i), '/', ++segments[i]);
+                    // Re-trimmed value only valid if distinct from previous value
+                    if (!curr.equals(trimmed)) {
+                        working.set(i, trimmed);
+                        didTrim = true;
+                    }
+                }
+            }
+            if (!didTrim) {
+                // Did no valid work on this iteration, so stop
+                break;
+            }
+        }
+        // Restore any un-normalizable paths
+        for (int i = 0; i < working.size(); i++) {
+            if (working.get(i).isEmpty()) {
+                working.set(i, paths.get(i));
+            }
+        }
+        return working;
     }
 }

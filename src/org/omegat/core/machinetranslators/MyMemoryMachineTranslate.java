@@ -82,7 +82,7 @@ public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
         @SuppressWarnings("unchecked")
         List<Map<String, Object>> matches = (List<Map<String, Object>>) jsonResponse.get("matches");
         for (Map<String, Object> entry : matches) {
-            Double score = (Double) entry.get("match");
+            double score = ((Number) entry.get("match")).doubleValue();
             String createdBy = (String) entry.get("created-by");
             if ("MT!".equals(createdBy)) {
                 mtEntry = entry;

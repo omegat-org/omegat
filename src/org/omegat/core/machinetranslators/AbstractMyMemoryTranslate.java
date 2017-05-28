@@ -30,51 +30,27 @@ package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.Locale;
+import java.util.Map;
+import java.util.TreeMap;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
-import org.omegat.core.Core;
-import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.gui.exttrans.MTConfigDialog;
-import org.omegat.tokenizer.ITokenizer;
+import org.omegat.util.JsonParser;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
-import org.omegat.util.StringUtil;
-import org.omegat.util.Token;
 import org.omegat.util.WikiGet;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  * @author Ibai Lakunza Velasco
  * @author Didier Briel
  * @author Martin Wunderlich
  * @author Manfred Martin
- * @author Didier Briel
+ * @author Briac Pilpre
  */
 public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
 
     private static final String MYMEMORY_API_EMAIL = "mymemory.api.email";
-    protected static final String GT_URL = "http://mymemory.translated.net/api/get?q=";
-    protected static final String MYMEMORYLABEL_TRANSLATION = "translation";
-    protected static final String MYMEMORYLABEL_MATCHQUALITYPERCENTAGE = "match";
-    // MyMemory always returns a 4-letter locale code, even when the query
-    // contains a language code only; to make sure we get the right matches,
-    // only the language code is taken into account
-    protected static final String XPATH_QUERY = "child::tuv[starts-with(@lang, '#langCode#')]/seg/text()";
-
-    protected final DocumentBuilderFactory factory;
-    protected final XPathFactory xPathFactory;
-
-    public AbstractMyMemoryTranslate() {
-        factory = DocumentBuilderFactory.newInstance();
-        xPathFactory = XPathFactory.newInstance();
-    }
+    private static final String MYMEMORY_API_KEY = "mymemory.api.key";
+    private static final String GT_URL = "http://mymemory.translated.net/api/get";
 
     @Override
     protected abstract String getPreferenceName();
@@ -96,133 +72,64 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
     @Override
     protected abstract String translate(Language sLang, Language tLang, String text) throws Exception;
 
-    /**
-     * @param sLang
-     * @param tLang
-     * @param text
-     * @param xpath
-     * @param allTUs
-     * @return
-     * @throws XPathExpressionException
-     */
-    protected String getBestTranslation(Language sLang, Language tLang, String text, XPath xpath, NodeList allTUs)
-            throws XPathExpressionException {
-        int lowestEditDistance = 999999;
-        int dist = 0;
-        Node tu = null;
-        String sourceSeg = "";
-        String targetSeg = "";
-        String targetSegQueryString = XPATH_QUERY.replace("#langCode#", tLang.getLanguageCode());
-        String sourceSegQueryString = XPATH_QUERY.replace("#langCode#", sLang.getLanguageCode());
+    @SuppressWarnings("unchecked")
+    protected Map<String, Object> getMyMemoryResponse(Language sLang, Language tLang, String text) throws Exception {
 
-        String bestTranslation = "";
+        String targetLang = tLang.getLocaleLCID();
+        String sourceLang = sLang.getLocaleLCID();
 
-        // Loop over TUs to get best matching source segment and its translation
-        for (int i = 0; i < allTUs.getLength(); i++) {
-            tu = allTUs.item(i);
-
-            sourceSeg = xpath.evaluate(sourceSegQueryString, tu);
-            targetSeg = xpath.evaluate(targetSegQueryString, tu);
-
-            // Make strings lowercase to make comparison case-insensitive.
-            // (Case-sensitive comparison would penalize mere capitalization
-            // differences equally with whole-word differences.)
-            Locale srcLoc = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
-            dist = getLevensteinDistance(text.toLowerCase(srcLoc), sourceSeg.toLowerCase(srcLoc));
-
-            if (dist < lowestEditDistance && !sourceSeg.isEmpty() && !targetSeg.isEmpty()) {
-                lowestEditDistance = dist;
-                bestTranslation = targetSeg;
-            }
-
-            if (dist == 0) {
-                break; // Can't find a better match than this one, so let's stop
-                       // the loop here.
-            }
-        }
-
-        bestTranslation = cleanUpText(bestTranslation);
-
-        return bestTranslation;
-    }
-
-    protected String cleanUpText(String str) {
-        str = str.replace("&quot;", "\"");
-        str = str.replace("&nbsp;", "\u00A0");
-        str = str.replace("&amp;", "&");
-        str = str.replace("&apos;", "'");
-        str = str.replace("&#39;", "'");
-        str = str.replace("&lt;", "<");
-        str = str.replace("&gt;", ">");
-        str = str.trim();
-
-        return str;
-    }
-
-    /**
-     * @param text
-     * @param sourceSeg
-     * @return
-     */
-    private int getLevensteinDistance(String text, String sourceSeg) {
-        int dist;
-        LevenshteinDistance leven = new LevenshteinDistance();
-        ITokenizer srcTokenizer = Core.getProject().getSourceTokenizer();
-
-        Token[] textTokenArray = srcTokenizer.tokenizeVerbatim(text);
-        Token[] sourceSegTokenArray = srcTokenizer.tokenizeVerbatim(sourceSeg);
-
-        dist = leven.compute(textTokenArray, sourceSegTokenArray);
-        return dist;
-    }
-
-    protected String getMyMemoryResponse(Language sLang, Language tLang, String text, String format)
-            throws UnsupportedEncodingException, IOException {
-        String url = buildMyMemoryUrl(sLang, tLang, text, format);
-
-        // Get email from systemProperties to enable 1000rq/day instead of 100 rq/day
+        String apiKey = getCredential(MYMEMORY_API_KEY);
         String email = getCredential(MYMEMORY_API_EMAIL);
-        if (!StringUtil.isEmpty(email)) {
-            url = url + "&de=" + email;
+
+        Map<String, String> params = new TreeMap<String, String>();
+
+        // The sentence you want to translate. Use UTF-8. Max 500 bytes
+        params.put("q", text);
+
+        // Source and language pair, separated by the | symbol. Use ISO standard
+        // names or RFC3066
+        params.put("langpair", sourceLang + "|" + targetLang);
+
+        // Output format - json (default), tmx, serialized php array
+        params.put("of", "json");
+
+        // Enables Machine Translation in results. You can turn it off if you
+        // want just human segments
+        params.put("mt", includeMT() ? "1" : "0");
+
+        // If your request is authenticated, returns only matches from your
+        // private TM.
+        // params.put("onlyprivate", onlyPrivate() ? "1" : "0");
+
+        // Authenticates the request; matches from your private TM are returned
+        // too.
+        if (!apiKey.isEmpty()) {
+            params.put("key", apiKey);
         }
+
+        // (CAT) The IP of the end user generating the request.
+        // params.put("ip", "");
+
+        // (CAT) A valid email where we can reach you in case of troubles.
+        if (!email.isEmpty()) {
+            params.put("de", email);
+        }
+
+        Map<String, String> headers = new TreeMap<String, String>();
 
         // Get the results from MyMemory
-        String myMemoryResponse = "";
+        String myMemoryJson = "";
         try {
-            myMemoryResponse = WikiGet.getURL(url);
+            myMemoryJson = WikiGet.get(GT_URL, params, headers);
         } catch (IOException e) {
             throw e;
         }
 
-        return myMemoryResponse;
-    }
-
-    /**
-     * @param sLang
-     * @param tLang
-     * @param text
-     * @param format
-     * @return
-     * @throws UnsupportedEncodingException
-     *
-     *             This method must be overriden in the concrete implementations
-     *             to adjust the query to include or exclude MT results
-     */
-    protected abstract String buildMyMemoryUrl(Language sLang, Language tLang, String text, String format)
-            throws UnsupportedEncodingException;
-
-     /**
-     * Removes any character before &lt;?xml in a string.
-     * This prevents an exception when trying to create a DOM object from that string.
-     * @param str The input string
-     * @return The string starting with &lt;?xml, if found, or the initial string
-     */
-    protected String getXMLString(String str) {
-        int xmlHeader = str.indexOf("<?xml");
-        if (xmlHeader != -1) { // XML header is not at the beginning
-            str = str.substring(xmlHeader);
+        try {
+            return (Map<String, Object>) JsonParser.parse(myMemoryJson);
+        } catch (Exception e) {
+            throw e;
         }
-        return str;
     }
 
     @Override
@@ -242,9 +149,12 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
         };
         dialog.panel.valueLabel1.setText(OStrings.getString("MT_ENGINE_MYMEMORY_EMAIL_LABEL"));
         dialog.panel.valueField1.setText(getCredential(MYMEMORY_API_EMAIL));
-        dialog.panel.valueLabel2.setVisible(false);
-        dialog.panel.valueField2.setVisible(false);
+        dialog.panel.valueLabel2.setText(OStrings.getString("MT_ENGINE_MYMEMORY_API_KEY_LABEL"));
+        dialog.panel.valueField2.setText(getCredential(MYMEMORY_API_KEY));
         dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(MYMEMORY_API_EMAIL));
         dialog.show();
     }
+
+    /** true: Include MT / false: human translate */
+    abstract protected boolean includeMT();
 }

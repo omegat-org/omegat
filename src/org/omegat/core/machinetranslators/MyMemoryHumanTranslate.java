@@ -27,30 +27,19 @@
 
 package org.omegat.core.machinetranslators;
 
-import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
+import java.util.Map;
 
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 
 /**
  * @author Ibai Lakunza Velasco
  * @author Didier Briel
  * @author Martin Wunderlich
+ * @author Briac Pilpre
  */
 public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
-    // Note: Add parameter &mt=0 to suppress MT results from being included in the TMX response; omit this
-    // parameter to include MT results
-    protected static final String GT_URL2 = "&langpair=#sourceLang#|#targetLang#&of=#format#&mt=0";
 
     @Override
     protected String getPreferenceName() {
@@ -63,62 +52,38 @@ public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
     }
 
     @Override
+    protected boolean includeMT() {
+        return false;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
         String prev = getFromCache(sLang, tLang, text);
         if (prev != null) {
             return prev;
         }
 
-        String tmxResponse = "";
-        String bestHumanTranslation = "";
+        Map<String, Object> jsonResponse;
 
-        // Get MyMemory response in TMX format
+        // Get MyMemory response in JSON format
         try {
-            tmxResponse = getMyMemoryResponse(sLang, tLang, text, "tmx");
+            jsonResponse = (Map<String, Object>) getMyMemoryResponse(sLang, tLang, text);
         } catch (Exception e) {
             return e.getLocalizedMessage();
         }
 
-        // Adjust DTD location and bug in entity encoding; the second line should be removed as soon as the bug is
-        // fixed by MyMemory; TODO: Use local DTD
-        tmxResponse = tmxResponse.replace("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">", "");
-        tmxResponse = tmxResponse.replace("&", "&amp;");
+        String translation = "";
+        try {
+            // responseData/translatedText contains the best match.
+            Map<String, Object> dataNode = (Map<String, Object>) jsonResponse.get("responseData");
+            translation = dataNode.get("translatedText").toString();
+        } catch (NullPointerException e) {
+            return null;
+        }
 
-        // We must remove anything before the XML declaration, otherwise we get an exception when creating the
-        // DOM object. Currently, MyMemory returns \r\n<?xml
-        tmxResponse = getXMLString(tmxResponse);
-
-        // Build DOM object from the returned XML string
-        InputSource source = new InputSource(new StringReader(tmxResponse));
-        Document document = factory.newDocumentBuilder().parse(source);
-
-        // Set up Xpath stuff
-        XPath xpath = xPathFactory.newXPath();
-        String allTUsQuery = "//tu";
-
-        // Get all TUs
-        XPathExpression expr = xpath.compile(allTUsQuery);
-        Object result = expr.evaluate(document, XPathConstants.NODESET);
-        NodeList allTUs = (NodeList) result;
-
-        bestHumanTranslation = getBestTranslation(sLang, tLang, text, xpath, allTUs);
-
-        putToCache(sLang, tLang, text, bestHumanTranslation);
-        return bestHumanTranslation;
+        putToCache(sLang, tLang, text, translation);
+        return translation;
     }
 
-    /**
-     * Builds the URL for the XML query
-     */
-    @Override
-    protected String buildMyMemoryUrl(Language sLang, Language tLang, String text, String format)
-            throws UnsupportedEncodingException {
-        String sourceLang = mymemoryCode(sLang);
-        String targetLang = mymemoryCode(tLang);
-        String url2 = GT_URL2.replace("#sourceLang#", sourceLang).replace("#targetLang#", targetLang)
-                .replace("#format#", format);
-        String url = GT_URL + URLEncoder.encode(text, "UTF-8") + url2;
-
-        return url;
-    }
 }

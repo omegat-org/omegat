@@ -161,7 +161,7 @@ class TerminologyIssueProvider implements IIssueProvider {
         }
 
         private Component getOriginLabel() {
-            String delim = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DELIMITER");
+            String delim = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DETAIL_DELIMITER");
             String[] origins = glossaryEntry.getOrigins(true);
             String originDesc = origins.length == 1 ? OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN", origins[0])
                     : OStrings.getString("ISSUES_TERMINOLOGY_ORIGINS", String.join(delim, origins));

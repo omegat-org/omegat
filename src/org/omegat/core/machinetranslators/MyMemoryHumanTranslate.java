@@ -68,7 +68,7 @@ public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
 
         // Get MyMemory response in JSON format
         try {
-            jsonResponse = (Map<String, Object>) getMyMemoryResponse(sLang, tLang, text);
+            jsonResponse = getMyMemoryResponse(sLang, tLang, text);
         } catch (Exception e) {
             return e.getLocalizedMessage();
         }

@@ -183,6 +183,9 @@ public class FiltersCustomizerController extends BasePreferencesController {
     }
 
     private void doEdit(int row) {
+        if (!isEditable()) {
+            return;
+        }
         Filter filter = getFilterAtRow(row);
         FilterEditor editor = new FilterEditor(SwingUtilities.windowForComponent(panel), filter);
         editor.setVisible(true);

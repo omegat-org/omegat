@@ -170,7 +170,7 @@ public class FiltersCustomizerController extends BasePreferencesController {
     }
 
     private void updateEnabledness() {
-        boolean enabled = panel.projectSpecificCB.isSelected() || !isProjectSpecific;
+        boolean enabled = isEditable();
         panel.filtersTable.setEnabled(enabled);
         panel.filtersTable.setFocusable(enabled);
         panel.cbRemoveTags.setEnabled(enabled);
@@ -221,7 +221,7 @@ public class FiltersCustomizerController extends BasePreferencesController {
 
     @Override
     public void restoreDefaults() {
-        if (panel.projectSpecificCB.isSelected() || !isProjectSpecific) {
+        if (isEditable()) {
             editableFilters = FilterMaster.cloneConfig(defaultFilters);
             panel.filtersTable.setModel(new FiltersTableModel(editableFilters));
             panel.cbRemoveTags.setSelected(editableFilters.isRemoveTags());
@@ -231,11 +231,15 @@ public class FiltersCustomizerController extends BasePreferencesController {
         }
     }
 
+    private boolean isEditable() {
+        return !isProjectSpecific || panel.projectSpecificCB.isSelected();
+    }
+
     public Filters getResult() {
-        if (isProjectSpecific && !panel.projectSpecificCB.isSelected()) {
-            return null;
-        } else {
+        if (isEditable()) {
             return editableFilters;
+        } else {
+            return null;
         }
     }
 

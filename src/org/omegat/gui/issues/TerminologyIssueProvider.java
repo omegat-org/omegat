@@ -28,6 +28,7 @@ package org.omegat.gui.issues;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -127,16 +128,56 @@ class TerminologyIssueProvider implements IIssueProvider {
 
         @Override
         public String getDescription() {
-            String oDelim = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DELIMITER");
-            List<String> origins = Arrays.asList(glossaryEntry.getOrigins(true));
-            String originStr = String.join(oDelim, FileUtil.getUniqueNames(origins));
+            // Trivial situation with just one term/origin
+            String[] origins = glossaryEntry.getOrigins(false);
+            String[] targetTerms = glossaryEntry.getLocTerms(false);
+            if (targetTerms.length == 1) {
+                String origin = FileUtil.getUniqueNames(Arrays.asList(origins[0])).get(0);
+                return OStrings.getString("ISSUES_TERMINOLOGY_DESCRIPTION", origin, glossaryEntry.getSrcText(),
+                        targetTerms[0]);
+            }
+
+            // Multiple terms, but just one origin
             String tDelim = OStrings.getString("ISSUES_TERMINOLOGY_TERM_DELIMITER");
-            String[] targetTerms = glossaryEntry.getLocTerms(true);
-            return targetTerms.length == 1
-                    ? OStrings.getString("ISSUES_TERMINOLOGY_DESCRIPTION", originStr, glossaryEntry.getSrcText(),
-                            targetTerms[0])
-                    : OStrings.getString("ISSUES_TERMINOLOGY_DESCRIPTION_MULTI", originStr, glossaryEntry.getSrcText(),
-                            String.join(tDelim, targetTerms));
+            String[] uniqueOrigins = glossaryEntry.getOrigins(true);
+            String[] uniqueTerms = glossaryEntry.getLocTerms(true);
+            if (uniqueOrigins.length == 1) {
+                List<String> formattedTerms = Arrays.asList(uniqueTerms);
+                formattedTerms.replaceAll(t -> OStrings.getString("ISSUES_TERMINOLOGY_TERM_TEMPLATE", t));
+                String origin = FileUtil.getUniqueNames(Arrays.asList(uniqueOrigins[0])).get(0);
+                return OStrings.getString("ISSUES_TERMINOLOGY_DESCRIPTION_MULTI", origin, glossaryEntry.getSrcText(),
+                        String.join(tDelim, formattedTerms));
+            }
+
+            // Multiple terms with multiple origins
+            List<String> uniqueOriginsList = Arrays.asList(uniqueOrigins);
+            String oDelim = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DELIMITER");
+            String iDelim = OStrings.getString("ISSUES_TERMINOLOGY_TERM_ORIGIN_INDEX_DELIMITER");
+            String originStr = String.join(oDelim, FileUtil.getUniqueNames(uniqueOriginsList));
+            List<String> formattedTerms = new ArrayList<>(uniqueTerms.length);
+            for (int i = 0; i < uniqueTerms.length; i++) {
+                String term = uniqueTerms[i];
+                // Collect unique term origins
+                List<String> termOrigins = new ArrayList<>(uniqueOrigins.length);
+                for (int j = 0; j < targetTerms.length; j++) {
+                    if (term.equals(targetTerms[j])) {
+                        String origin = origins[j];
+                        if (!termOrigins.contains(origin)) {
+                            termOrigins.add(origin);
+                        }
+                    }
+                }
+                // Collect indices of origins
+                List<String> originIndices = new ArrayList<>(uniqueOrigins.length);
+                for (String origin : termOrigins) {
+                    int index = uniqueOriginsList.indexOf(origin) + 1;
+                    originIndices.add(String.valueOf(index));
+                }
+                formattedTerms.add(OStrings.getString("ISSUES_TERMINOLOGY_TERM_MULTIORIGIN_TEMPLATE", term,
+                        String.join(iDelim, originIndices)));
+            }
+            return OStrings.getString("ISSUES_TERMINOLOGY_DESCRIPTION_MULTI", originStr, glossaryEntry.getSrcText(),
+                    String.join(tDelim, formattedTerms));
         }
 
         @Override
@@ -163,8 +204,17 @@ class TerminologyIssueProvider implements IIssueProvider {
         private Component getOriginLabel() {
             String delim = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DETAIL_DELIMITER");
             String[] origins = glossaryEntry.getOrigins(true);
-            String originDesc = origins.length == 1 ? OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN", origins[0])
-                    : OStrings.getString("ISSUES_TERMINOLOGY_ORIGINS", String.join(delim, origins));
+            String originDesc;
+            if (origins.length == 1) {
+                originDesc = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN", origins[0]);
+            } else {
+                List<String> formattedOrigins = new ArrayList<>(origins.length);
+                for (int i = 0; i < origins.length; i++) {
+                    formattedOrigins
+                            .add(OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DETAIL_TEMPLATE", i + 1, origins[i]));
+                }
+                originDesc = OStrings.getString("ISSUES_TERMINOLOGY_ORIGINS", String.join(delim, formattedOrigins));
+            }
             JTextArea originLabel = new JTextArea(originDesc);
             originLabel.setEditable(false);
             originLabel.setOpaque(false);

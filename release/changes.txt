@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.1 update 1
 ----------------------------------------------------------------------
-  9 Enhancements
+ 10 Enhancements
   4 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
@@ -37,6 +37,12 @@ Javadoc
 
   - The /scripts/readme.txt file contains links to OmegaT Javadoc,
 Groovy and EcmaScript language references, the GPL v3
+
+  - MyMemory translation engine improvements: 
+MyMemory allows the API key (-Dmymemory.api.key) to be set in the 
+configuration, to return matches from private TMs.
+If MyMemory (machine) is used and no MT translation is provided, the best 
+human match is returned.
 
   Bug fixes:
 

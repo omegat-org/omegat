@@ -75,7 +75,7 @@ public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
         // Find the best Human translation if no MT translation is provided for
         // this text. If there is a MT translation, it will always take
         // precedence.
-        Double bestScore = (double) 0;
+        double bestScore = 0d;
         Map<String, Object> bestEntry = null;
         Map<String, Object> mtEntry = null;
 

@@ -156,5 +156,5 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
     }
 
     /** true: Include MT / false: human translate */
-    abstract protected boolean includeMT();
+    protected abstract boolean includeMT();
 }

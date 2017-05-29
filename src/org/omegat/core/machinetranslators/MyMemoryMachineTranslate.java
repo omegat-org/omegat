@@ -6,6 +6,7 @@
  Copyright (C) 2010 Alex Buloichik, Ibai Lakunza Velasco, Didier Briel
                2013 Martin Wunderlich, Didier Briel
                2015 Didier Briel
+               2017 Briac Pilpre
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

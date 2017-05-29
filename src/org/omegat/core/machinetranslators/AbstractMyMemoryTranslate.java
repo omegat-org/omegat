@@ -7,6 +7,7 @@
                2013 Martin Wunderlich
                2014 Manfred Martin
                2015 Didier Briel
+               2017 Briac Pilpre
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

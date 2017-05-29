@@ -66,7 +66,6 @@ public class SegmentationCustomizerController extends BasePreferencesController 
      * Flag if this customizer shows project specific segmentation rules or not
      */
     private boolean isProjectSpecific;
-    private boolean haveProjectSrx;
 
     public SegmentationCustomizerController() {
         this(false, SRX.getDefault(), Preferences.getSRX(), null);
@@ -77,7 +76,6 @@ public class SegmentationCustomizerController extends BasePreferencesController 
         this.defaultSRX = defaultSRX;
         this.userSRX = userSRX;
         this.projectSRX = projectSRX;
-        this.haveProjectSrx = projectSRX != null;
     }
 
     @Override
@@ -250,8 +248,8 @@ public class SegmentationCustomizerController extends BasePreferencesController 
     @Override
     protected void initFromPrefs() {
         panel.projectSpecificCB.setVisible(isProjectSpecific);
-        panel.projectSpecificCB.setSelected(haveProjectSrx);
-        setEditableSRX(isProjectSpecific && haveProjectSrx ? projectSRX : userSRX);
+        panel.projectSpecificCB.setSelected(projectSRX != null);
+        setEditableSRX(isProjectSpecific && projectSRX != null ? projectSRX : userSRX);
         updateEnabledness();
     }
 
@@ -265,7 +263,7 @@ public class SegmentationCustomizerController extends BasePreferencesController 
     }
 
     private boolean isEditable() {
-        return !isProjectSpecific || (haveProjectSrx && panel.projectSpecificCB.isSelected());
+        return !isProjectSpecific || panel.projectSpecificCB.isSelected();
     }
 
     private void updateEnabledness() {
@@ -296,10 +294,10 @@ public class SegmentationCustomizerController extends BasePreferencesController 
      * requested, and user has not checked 'enable project specific segmentation', then null is returned.
      */
     public SRX getResult() {
-        if (isProjectSpecific && !panel.projectSpecificCB.isSelected()) {
-            return null;
-        } else {
+        if (isEditable()) {
             return editableSRX;
+        } else {
+            return null;
         }
     }
 }

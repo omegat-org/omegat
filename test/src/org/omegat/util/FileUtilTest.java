@@ -508,5 +508,9 @@ public class FileUtilTest {
         assertEquals(Arrays.asList("//foo", "../foo"), FileUtil.getUniqueNames(Arrays.asList("//foo", "../foo")));
         // Singleton case
         assertEquals(Arrays.asList("../foo"), FileUtil.getUniqueNames(Arrays.asList("../foo")));
+
+        // Non-path
+        assertEquals(Arrays.asList("My Awesome Glossary"),
+                FileUtil.getUniqueNames(Arrays.asList("My Awesome Glossary")));
     }
 }

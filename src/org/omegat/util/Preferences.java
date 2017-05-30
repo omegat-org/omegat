@@ -174,8 +174,6 @@ public final class Preferences {
 
     public static final String ALLOW_APERTIUM_TRANSLATE = "allow_apertium_translate";
 
-    public static final String ALLOW_MICROSOFT_TRANSLATE = "allow_microsoft_translate";
-
     public static final String ALLOW_MICROSOFT_TRANSLATOR_AZURE = "allow_microsoft_translator_azure";
 
     public static final String ALLOW_MYMEMORY_HUMAN_TRANSLATE = "allow_mymemory_human_translate";

@@ -2,7 +2,7 @@
  OmegaT 4.1.1 update 1
 ----------------------------------------------------------------------
  10 Enhancements
-  4 Bug fixes
+  5 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
 4.1.1 update 1 vs 4.1.1
@@ -57,6 +57,10 @@ tags. It has been reverted to HTML mode.
 
   - Force wrapping in issue windows 
   https://sourceforge.net/p/omegat/feature-requests/1318/
+
+  - Segmentation rules not immediately editable upon making
+project-specific
+  https://sourceforge.net/p/omegat/bugs/870/
 
   Localisation Updates:
 

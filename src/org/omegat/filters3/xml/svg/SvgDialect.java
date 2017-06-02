@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2010 Didier Briel
+               2017 Didier Briel
 
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -41,7 +42,7 @@ public class SvgDialect extends DefaultXMLDialect {
 
     public SvgDialect() {
         defineConstraint(CONSTRAINT_ROOT, ROOT_PATTERN);
-        defineParagraphTags(new String[] { "text", "p" });
-        defineIntactTags(new String[] { "style", "image", "path"});
+        defineParagraphTags(new String[] { "svg", "text", "p", "flowRoot" });
+        defineIntactTags(new String[] { "style", "image", "path", "dc:format"});
     }
 }

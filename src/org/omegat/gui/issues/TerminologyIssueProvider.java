@@ -31,6 +31,7 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -168,13 +169,16 @@ class TerminologyIssueProvider implements IIssueProvider {
                     }
                 }
                 // Collect indices of origins
-                List<String> originIndices = new ArrayList<>(uniqueOrigins.length);
+                List<Integer> originIndices = new ArrayList<>(uniqueOrigins.length);
                 for (String origin : termOrigins) {
                     int index = uniqueOriginsList.indexOf(origin) + 1;
-                    originIndices.add(String.valueOf(index));
+                    originIndices.add(index);
                 }
+                originIndices.sort(Comparator.naturalOrder());
+                List<String> indexStrings = new ArrayList<>(originIndices.size());
+                originIndices.forEach(idx -> indexStrings.add(String.valueOf(idx)));
                 formattedTerms.add(OStrings.getString("ISSUES_TERMINOLOGY_TERM_MULTIORIGIN_TEMPLATE", term,
-                        String.join(iDelim, originIndices)));
+                        String.join(iDelim, indexStrings)));
             }
             return OStrings.getString("ISSUES_TERMINOLOGY_DESCRIPTION_MULTI", originStr, glossaryEntry.getSrcText(),
                     String.join(tDelim, formattedTerms));

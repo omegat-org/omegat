@@ -138,10 +138,17 @@ class TerminologyIssueProvider implements IIssueProvider {
                         targetTerms[0]);
             }
 
-            // Multiple terms, but just one origin
             String tDelim = OStrings.getString("ISSUES_TERMINOLOGY_TERM_DELIMITER");
+            String oDelim = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DELIMITER");
             String[] uniqueOrigins = glossaryEntry.getOrigins(true);
             String[] uniqueTerms = glossaryEntry.getLocTerms(true);
+            // Multiple origins, but just one term
+            if (uniqueTerms.length == 1) {
+                String origin = String.join(oDelim, FileUtil.getUniqueNames(Arrays.asList(uniqueOrigins)));
+                return OStrings.getString("ISSUES_TERMINOLOGY_DESCRIPTION", origin, glossaryEntry.getSrcText(),
+                        uniqueTerms[0]);
+            }
+            // Multiple terms, but just one origin
             if (uniqueOrigins.length == 1) {
                 List<String> formattedTerms = Arrays.asList(uniqueTerms);
                 formattedTerms.replaceAll(t -> OStrings.getString("ISSUES_TERMINOLOGY_TERM_TEMPLATE", t));
@@ -152,7 +159,6 @@ class TerminologyIssueProvider implements IIssueProvider {
 
             // Multiple terms with multiple origins
             List<String> uniqueOriginsList = Arrays.asList(uniqueOrigins);
-            String oDelim = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DELIMITER");
             String iDelim = OStrings.getString("ISSUES_TERMINOLOGY_TERM_ORIGIN_INDEX_DELIMITER");
             String originStr = String.join(oDelim, FileUtil.getUniqueNames(uniqueOriginsList));
             List<String> formattedTerms = new ArrayList<>(uniqueTerms.length);

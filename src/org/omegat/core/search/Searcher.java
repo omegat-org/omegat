@@ -588,6 +588,20 @@ public class Searcher {
      * @return True if the text string contains all search strings
      */
     public boolean searchString(String origText) {
+        return searchString(origText, true);
+    }
+
+    /**
+     * Looks for an occurrence of the search string(s) in the supplied text string.
+     *
+     * @param text
+     *            The text string to search in
+     * @param collapseResults
+     *            True if the adjacent results should be collapsed.
+     *
+     * @return True if the text string contains all search strings
+     */
+    public boolean searchString(String origText, boolean collapseResults) {
         if (origText == null || m_matchers == null || m_matchers.isEmpty()) {
             return false;
         }
@@ -626,18 +640,23 @@ public class Searcher {
 
         // merge overlapped matches for better performance to mark on UI
         Collections.sort(foundMatches);
-        for (int i = 1; i < foundMatches.size();) {
-            SearchMatch pr = foundMatches.get(i - 1);
-            SearchMatch cu = foundMatches.get(i);
-            // check for overlapped
-            if (pr.getStart() <= cu.getStart() && pr.getEnd() >= cu.getStart()) {
-                int end = Math.max(cu.getEnd(), pr.getEnd());
-                // leave only one region
-                pr = new SearchMatch(pr.getStart(), end);
-                foundMatches.set(i - 1, pr);
-                foundMatches.remove(i);
-            } else {
-                i++;
+
+        // We should not collapse results when doing a search/replace
+        // see https://sourceforge.net/p/omegat/bugs/675/
+        if (collapseResults) {
+            for (int i = 1; i < foundMatches.size();) {
+                SearchMatch pr = foundMatches.get(i - 1);
+                SearchMatch cu = foundMatches.get(i);
+                // check for overlapped
+                if (pr.getStart() <= cu.getStart() && pr.getEnd() >= cu.getStart()) {
+                    int end = Math.max(cu.getEnd(), pr.getEnd());
+                    // leave only one region
+                    pr = new SearchMatch(pr.getStart(), end);
+                    foundMatches.set(i - 1, pr);
+                    foundMatches.remove(i);
+                } else {
+                    i++;
+                }
             }
         }
         return true;

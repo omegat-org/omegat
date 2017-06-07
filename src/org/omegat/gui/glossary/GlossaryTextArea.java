@@ -358,9 +358,9 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
             public void windowClosed(WindowEvent e) {
                 createGlossaryEntryDialog = null;
                 if (dialog.getReturnStatus() == CreateGlossaryEntry.RET_OK) {
-                    String src = StringUtil.normalizeUnicode(dialog.getSourceText().getText());
-                    String loc = StringUtil.normalizeUnicode(dialog.getTargetText().getText());
-                    String com = StringUtil.normalizeUnicode(dialog.getCommentText().getText());
+                    String src = StringUtil.normalizeUnicode(dialog.getSourceText().getText()).trim();
+                    String loc = StringUtil.normalizeUnicode(dialog.getTargetText().getText()).trim();
+                    String com = StringUtil.normalizeUnicode(dialog.getCommentText().getText()).trim();
                     if (!StringUtil.isEmpty(src) && !StringUtil.isEmpty(loc)) {
                         try {
                             GlossaryReaderTSV.append(out, new GlossaryEntry(src, loc, com, true, out.getPath()));

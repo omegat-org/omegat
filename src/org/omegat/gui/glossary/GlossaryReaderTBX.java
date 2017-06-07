@@ -235,13 +235,9 @@ public class GlossaryReaderTBX {
         NamespaceFilter xmlFilter = new NamespaceFilter(parser.getXMLReader());
         xmlFilter.setContentHandler(unm.getUnmarshallerHandler());
 
-        FileInputStream in = new FileInputStream(f);
-        try {
+        try (FileInputStream in = new FileInputStream(f)) {
             SAXSource source = new SAXSource(xmlFilter, new InputSource(in));
-
             return (Martif) unm.unmarshal(source);
-        } finally {
-            in.close();
         }
     }
 
@@ -253,9 +249,10 @@ public class GlossaryReaderTBX {
         NamespaceFilter xmlFilter = new NamespaceFilter(parser.getXMLReader());
         xmlFilter.setContentHandler(unm.getUnmarshallerHandler());
 
-        SAXSource source = new SAXSource(xmlFilter, new InputSource(new StringReader(data)));
-
-        return (Martif) unm.unmarshal(source);
+        try (StringReader in = new StringReader(data)) {
+            SAXSource source = new SAXSource(xmlFilter, new InputSource(in));
+            return (Martif) unm.unmarshal(source);
+        }
     }
 
     public static class NamespaceFilter extends XMLFilterImpl {

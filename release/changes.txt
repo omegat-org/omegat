@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.1 update 1
 ----------------------------------------------------------------------
- 10 Enhancements
+ 11 Enhancements
   6 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
@@ -43,6 +43,8 @@ MyMemory allows the API key (-Dmymemory.api.key) to be set in the
 configuration, to return matches from private TMs.
 If MyMemory (machine) is used and no MT translation is provided, the best 
 human match is returned.
+
+  - The default tokenizers were added to the team project creation tool
 
   Bug fixes:
 

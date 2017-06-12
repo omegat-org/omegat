@@ -36,6 +36,8 @@ import org.eclipse.jgit.api.Git;
 import org.omegat.CLIParameters;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
+import org.omegat.filters2.master.PluginUtils;
+import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -83,6 +85,11 @@ public class TeamTool {
         ProjectProperties props = new ProjectProperties(dir);
         props.setSourceLanguage(srcLang);
         props.setTargetLanguage(trgLang);
+
+        // Set default tokenizers
+        props.setSourceTokenizer(PluginUtils.getTokenizerClassForLanguage(new Language(srcLang)));
+        props.setTargetTokenizer(PluginUtils.getTokenizerClassForLanguage(new Language(trgLang)));
+
         // Create project internal directories
         props.autocreateDirectories();
         // Create version-controlled glossary file

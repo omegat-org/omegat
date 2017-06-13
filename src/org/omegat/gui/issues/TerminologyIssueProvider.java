@@ -215,14 +215,29 @@ class TerminologyIssueProvider implements IIssueProvider {
         private Component getOriginLabel() {
             String delim = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DETAIL_DELIMITER");
             String[] origins = glossaryEntry.getOrigins(true);
+            String glossariesDir = Core.getProject().getProjectProperties().getGlossaryDir().getAsString();
             String originDesc;
             if (origins.length == 1) {
-                originDesc = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN", origins[0]);
+                String origin = trimPrefix(normalizePath(origins[0]), glossariesDir);
+                originDesc = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN", origin);
             } else {
+                String tDelim = OStrings.getString("ISSUES_TERMINOLOGY_TERM_DELIMITER");
                 List<String> formattedOrigins = new ArrayList<>(origins.length);
+                String[] allOrigins = glossaryEntry.getOrigins(false);
+                String[] allTerms = glossaryEntry.getLocTerms(false);
                 for (int i = 0; i < origins.length; i++) {
-                    formattedOrigins
-                            .add(OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DETAIL_TEMPLATE", i + 1, origins[i]));
+                    List<String> termsFromThisOrigin = new ArrayList<>();
+                    // This should always be the case, but being cautious
+                    if (allOrigins.length == allTerms.length) {
+                        for (int j = 0; j < allOrigins.length; j++) {
+                            if (allOrigins[j].equals(origins[i]) && !termsFromThisOrigin.contains(allTerms[j])) {
+                                termsFromThisOrigin.add(allTerms[j]);
+                            }
+                        }
+                    }
+                    String origin = trimPrefix(normalizePath(origins[i]), glossariesDir);
+                    formattedOrigins.add(OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DETAIL_TEMPLATE", i + 1, origin,
+                            String.join(tDelim, termsFromThisOrigin)));
                 }
                 originDesc = OStrings.getString("ISSUES_TERMINOLOGY_ORIGINS", String.join(delim, formattedOrigins));
             }
@@ -235,5 +250,13 @@ class TerminologyIssueProvider implements IIssueProvider {
             originLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
             return originLabel;
         }
+    }
+
+    private static String normalizePath(String path) {
+        return path.replace('\\', '/');
+    }
+
+    private static String trimPrefix(String str, String prefix) {
+        return str.startsWith(prefix) ? str.substring(prefix.length()) : str;
     }
 }

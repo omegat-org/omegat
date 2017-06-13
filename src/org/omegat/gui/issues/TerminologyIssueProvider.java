@@ -219,7 +219,7 @@ class TerminologyIssueProvider implements IIssueProvider {
             String originDesc;
             if (origins.length == 1) {
                 String origin = trimPrefix(normalizePath(origins[0]), glossariesDir);
-                originDesc = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN", origin);
+                originDesc = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN", glossaryEntry.getSrcText(), origin);
             } else {
                 String tDelim = OStrings.getString("ISSUES_TERMINOLOGY_TERM_DELIMITER");
                 List<String> formattedOrigins = new ArrayList<>(origins.length);
@@ -239,7 +239,8 @@ class TerminologyIssueProvider implements IIssueProvider {
                     formattedOrigins.add(OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DETAIL_TEMPLATE", i + 1, origin,
                             String.join(tDelim, termsFromThisOrigin)));
                 }
-                originDesc = OStrings.getString("ISSUES_TERMINOLOGY_ORIGINS", String.join(delim, formattedOrigins));
+                originDesc = OStrings.getString("ISSUES_TERMINOLOGY_ORIGINS", glossaryEntry.getSrcText(),
+                        String.join(delim, formattedOrigins));
             }
             JTextArea originLabel = new JTextArea(originDesc);
             originLabel.setEditable(false);

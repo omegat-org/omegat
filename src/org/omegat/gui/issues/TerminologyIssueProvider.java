@@ -214,14 +214,16 @@ class TerminologyIssueProvider implements IIssueProvider {
 
         private Component getOriginLabel() {
             String delim = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DETAIL_DELIMITER");
+            String tDelim = OStrings.getString("ISSUES_TERMINOLOGY_TERM_DELIMITER");
             String[] origins = glossaryEntry.getOrigins(true);
             String glossariesDir = Core.getProject().getProjectProperties().getGlossaryDir().getAsString();
             String originDesc;
             if (origins.length == 1) {
                 String origin = trimPrefix(normalizePath(origins[0]), glossariesDir);
-                originDesc = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN", glossaryEntry.getSrcText(), origin);
+                originDesc = OStrings.getString("ISSUES_TERMINOLOGY_ORIGINS", glossaryEntry.getSrcText(),
+                        OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DETAIL_TEMPLATE", 1, origin,
+                                String.join(tDelim, glossaryEntry.getLocTerms(true))));
             } else {
-                String tDelim = OStrings.getString("ISSUES_TERMINOLOGY_TERM_DELIMITER");
                 List<String> formattedOrigins = new ArrayList<>(origins.length);
                 String[] allOrigins = glossaryEntry.getOrigins(false);
                 String[] allTerms = glossaryEntry.getLocTerms(false);

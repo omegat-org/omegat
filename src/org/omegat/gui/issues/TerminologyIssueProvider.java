@@ -38,9 +38,8 @@ import java.util.stream.Collectors;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.UIManager;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -244,13 +243,9 @@ class TerminologyIssueProvider implements IIssueProvider {
                 originDesc = OStrings.getString("ISSUES_TERMINOLOGY_ORIGINS", glossaryEntry.getSrcText(),
                         String.join(delim, formattedOrigins));
             }
-            JTextArea originLabel = new JTextArea(originDesc);
-            originLabel.setEditable(false);
-            originLabel.setOpaque(false);
-            originLabel.setLineWrap(true);
-            originLabel.setWrapStyleWord(true);
-            originLabel.setFont(UIManager.getFont("Label.font"));
-            originLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+            JLabel originLabel = new JLabel(originDesc);
+            originLabel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5),
+                    originLabel.getBorder()));
             return originLabel;
         }
     }

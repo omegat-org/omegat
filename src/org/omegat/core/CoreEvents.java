@@ -47,83 +47,82 @@ import org.omegat.util.Log;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class CoreEvents {
-    private static final List<IProjectEventListener> projectEventListeners = new CopyOnWriteArrayList<IProjectEventListener>();
-    private static final List<IApplicationEventListener> applicationEventListeners = new CopyOnWriteArrayList<IApplicationEventListener>();
-    private static final List<IEntryEventListener> entryEventListeners = new CopyOnWriteArrayList<IEntryEventListener>();
-    private static final List<IFontChangedEventListener> fontChangedEventListeners = new CopyOnWriteArrayList<IFontChangedEventListener>();
-    private static final List<IEditorEventListener> editorEventListeners = new CopyOnWriteArrayList<IEditorEventListener>();
+public final class CoreEvents {
+    private static final List<IProjectEventListener> PROJECT_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
+    private static final List<IApplicationEventListener> APPLICATION_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
+    private static final List<IEntryEventListener> ENTRY_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
+    private static final List<IFontChangedEventListener> FONT_CHANGED_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
+    private static final List<IEditorEventListener> EDITOR_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
+
+    private CoreEvents() {
+    }
 
     /** Register listener. */
     public static void registerProjectChangeListener(final IProjectEventListener listener) {
-        projectEventListeners.add(listener);
+        PROJECT_EVENT_LISTENERS.add(listener);
     }
 
     /** Unregister listener. */
     public static void unregisterProjectChangeListener(final IProjectEventListener listener) {
-        projectEventListeners.remove(listener);
+        PROJECT_EVENT_LISTENERS.remove(listener);
     }
 
     /** Register listener. */
     public static void registerApplicationEventListener(final IApplicationEventListener listener) {
-        applicationEventListeners.add(listener);
+        APPLICATION_EVENT_LISTENERS.add(listener);
     }
 
     /** Unregister listener. */
     public static void unregisterApplicationEventListener(final IApplicationEventListener listener) {
-        applicationEventListeners.remove(listener);
+        APPLICATION_EVENT_LISTENERS.remove(listener);
     }
 
     /** Register listener. */
     public static void registerEntryEventListener(final IEntryEventListener listener) {
-        entryEventListeners.add(listener);
+        ENTRY_EVENT_LISTENERS.add(listener);
     }
 
     /** Unregister listener. */
     public static void unregisterEntryEventListener(final IEntryEventListener listener) {
-        entryEventListeners.remove(listener);
+        ENTRY_EVENT_LISTENERS.remove(listener);
     }
 
     /** Register listener. */
     public static void registerFontChangedEventListener(final IFontChangedEventListener listener) {
-        fontChangedEventListeners.add(listener);
+        FONT_CHANGED_EVENT_LISTENERS.add(listener);
     }
 
     /** Unregister listener. */
     public static void unregisterFontChangedEventListener(final IFontChangedEventListener listener) {
-        fontChangedEventListeners.remove(listener);
+        FONT_CHANGED_EVENT_LISTENERS.remove(listener);
     }
 
     /** Register listener. */
     public static void registerEditorEventListener(final IEditorEventListener listener) {
-        editorEventListeners.add(listener);
+        EDITOR_EVENT_LISTENERS.add(listener);
     }
 
     /** Unregister listener. */
     public static void unregisterEditorEventListener(final IEditorEventListener listener) {
-        editorEventListeners.remove(listener);
+        EDITOR_EVENT_LISTENERS.remove(listener);
     }
 
     /** Fire event. */
     public static void fireProjectChange(final IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                Log.logInfoRB("LOG_INFO_EVENT_PROJECT_CHANGE", eventType);
-                for (IProjectEventListener listener : projectEventListeners) {
-                    listener.onProjectChanged(eventType);
-                }
+        SwingUtilities.invokeLater(() -> {
+            Log.logInfoRB("LOG_INFO_EVENT_PROJECT_CHANGE", eventType);
+            for (IProjectEventListener listener : PROJECT_EVENT_LISTENERS) {
+                listener.onProjectChanged(eventType);
             }
         });
     }
 
     /** Fire event. */
     public static void fireApplicationStartup() {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                Log.logInfoRB("LOG_INFO_EVENT_APPLICATION_STARTUP");
-                for (IApplicationEventListener listener : applicationEventListeners) {
-                    listener.onApplicationStartup();
-                }
+        SwingUtilities.invokeLater(() -> {
+            Log.logInfoRB("LOG_INFO_EVENT_APPLICATION_STARTUP");
+            for (IApplicationEventListener listener : APPLICATION_EVENT_LISTENERS) {
+                listener.onApplicationStartup();
             }
         });
     }
@@ -132,54 +131,46 @@ public class CoreEvents {
     public static void fireApplicationShutdown() {
         // We shouldn't invoke it later, because need to shutdown immediately.
         Log.logInfoRB("LOG_INFO_EVENT_APPLICATION_SHUTDOWN");
-        for (IApplicationEventListener listener : applicationEventListeners) {
+        for (IApplicationEventListener listener : APPLICATION_EVENT_LISTENERS) {
             listener.onApplicationShutdown();
         }
     }
 
     /** Fire event. */
     public static void fireEntryNewFile(final String activeFileName) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                Log.logInfoRB("LOG_INFO_EVENT_ENTRY_NEWFILE", activeFileName);
-                for (IEntryEventListener listener : entryEventListeners) {
-                    listener.onNewFile(activeFileName);
-                }
+        SwingUtilities.invokeLater(() -> {
+            Log.logInfoRB("LOG_INFO_EVENT_ENTRY_NEWFILE", activeFileName);
+            for (IEntryEventListener listener : ENTRY_EVENT_LISTENERS) {
+                listener.onNewFile(activeFileName);
             }
         });
     }
 
     /** Fire event. */
     public static void fireEntryActivated(final SourceTextEntry newEntry) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                Log.logInfoRB("LOG_INFO_EVENT_ENTRY_ACTIVATED");
-                for (IEntryEventListener listener : entryEventListeners) {
-                    listener.onEntryActivated(newEntry);
-                }
+        SwingUtilities.invokeLater(() -> {
+            Log.logInfoRB("LOG_INFO_EVENT_ENTRY_ACTIVATED");
+            for (IEntryEventListener listener : ENTRY_EVENT_LISTENERS) {
+                listener.onEntryActivated(newEntry);
             }
         });
     }
 
     /** Fire event. */
     public static void fireFontChanged(final Font newFont) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                Log.logInfoRB("LOG_INFO_EVENT_FONT_CHANGED");
-                for (IFontChangedEventListener listener : fontChangedEventListeners) {
-                    listener.onFontChanged(newFont);
-                }
+        SwingUtilities.invokeLater(() -> {
+            Log.logInfoRB("LOG_INFO_EVENT_FONT_CHANGED");
+            for (IFontChangedEventListener listener : FONT_CHANGED_EVENT_LISTENERS) {
+                listener.onFontChanged(newFont);
             }
         });
     }
 
     /** Fire event. */
     public static void fireEditorNewWord(final String newWord) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                for (IEditorEventListener listener : editorEventListeners) {
-                    listener.onNewWord(newWord);
-                }
+        SwingUtilities.invokeLater(() -> {
+            for (IEditorEventListener listener : EDITOR_EVENT_LISTENERS) {
+                listener.onNewWord(newWord);
             }
         });
     }

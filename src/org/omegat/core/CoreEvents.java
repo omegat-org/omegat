@@ -109,10 +109,8 @@ public class CoreEvents {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 Log.logInfoRB("LOG_INFO_EVENT_PROJECT_CHANGE", eventType);
-                synchronized (projectEventListeners) {
-                    for (IProjectEventListener listener : projectEventListeners) {
-                        listener.onProjectChanged(eventType);
-                    }
+                for (IProjectEventListener listener : projectEventListeners) {
+                    listener.onProjectChanged(eventType);
                 }
             }
         });

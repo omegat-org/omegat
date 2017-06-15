@@ -25,10 +25,13 @@
 
 package org.omegat.core;
 
+import java.awt.Component;
 import java.awt.Font;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import org.omegat.core.data.SourceTextEntry;
@@ -37,7 +40,9 @@ import org.omegat.core.events.IEditorEventListener;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.Log;
+import org.omegat.util.OStrings;
 
 /**
  * Class for distribute main application events.
@@ -112,7 +117,11 @@ public final class CoreEvents {
         SwingUtilities.invokeLater(() -> {
             Log.logInfoRB("LOG_INFO_EVENT_PROJECT_CHANGE", eventType);
             for (IProjectEventListener listener : PROJECT_EVENT_LISTENERS) {
-                listener.onProjectChanged(eventType);
+                try {
+                    listener.onProjectChanged(eventType);
+                } catch (Throwable t) {
+                    log("ERROR_EVENT_PROJECT_CHANGE", t);
+                }
             }
         });
     }
@@ -122,7 +131,11 @@ public final class CoreEvents {
         SwingUtilities.invokeLater(() -> {
             Log.logInfoRB("LOG_INFO_EVENT_APPLICATION_STARTUP");
             for (IApplicationEventListener listener : APPLICATION_EVENT_LISTENERS) {
-                listener.onApplicationStartup();
+                try {
+                    listener.onApplicationStartup();
+                } catch (Throwable t) {
+                    log("ERROR_EVENT_APPLICATION_STARTUP", t);
+                }
             }
         });
     }
@@ -132,7 +145,11 @@ public final class CoreEvents {
         // We shouldn't invoke it later, because need to shutdown immediately.
         Log.logInfoRB("LOG_INFO_EVENT_APPLICATION_SHUTDOWN");
         for (IApplicationEventListener listener : APPLICATION_EVENT_LISTENERS) {
-            listener.onApplicationShutdown();
+            try {
+                listener.onApplicationShutdown();
+            } catch (Throwable t) {
+                log("ERROR_EVENT_APPLICATION_SHUTDOWN", t);
+            }
         }
     }
 
@@ -141,7 +158,11 @@ public final class CoreEvents {
         SwingUtilities.invokeLater(() -> {
             Log.logInfoRB("LOG_INFO_EVENT_ENTRY_NEWFILE", activeFileName);
             for (IEntryEventListener listener : ENTRY_EVENT_LISTENERS) {
-                listener.onNewFile(activeFileName);
+                try {
+                    listener.onNewFile(activeFileName);
+                } catch (Throwable t) {
+                    log("ERROR_EVENT_ENTRY_NEWFILE", t);
+                }
             }
         });
     }
@@ -151,7 +172,11 @@ public final class CoreEvents {
         SwingUtilities.invokeLater(() -> {
             Log.logInfoRB("LOG_INFO_EVENT_ENTRY_ACTIVATED");
             for (IEntryEventListener listener : ENTRY_EVENT_LISTENERS) {
-                listener.onEntryActivated(newEntry);
+                try {
+                    listener.onEntryActivated(newEntry);
+                } catch (Throwable t) {
+                    log("ERROR_EVENT_ENTRY_ACTIVATED", t);
+                }
             }
         });
     }
@@ -161,7 +186,11 @@ public final class CoreEvents {
         SwingUtilities.invokeLater(() -> {
             Log.logInfoRB("LOG_INFO_EVENT_FONT_CHANGED");
             for (IFontChangedEventListener listener : FONT_CHANGED_EVENT_LISTENERS) {
-                listener.onFontChanged(newFont);
+                try {
+                    listener.onFontChanged(newFont);
+                } catch (Throwable t) {
+                    log("ERROR_EVENT_FONT_CHANGED", t);
+                }
             }
         });
     }
@@ -170,8 +199,20 @@ public final class CoreEvents {
     public static void fireEditorNewWord(final String newWord) {
         SwingUtilities.invokeLater(() -> {
             for (IEditorEventListener listener : EDITOR_EVENT_LISTENERS) {
-                listener.onNewWord(newWord);
+                try {
+                    listener.onNewWord(newWord);
+                } catch (Throwable t) {
+                    log("ERROR_EVENT_EDITOR_NEW_WORD", t);
+                }
             }
         });
+    }
+
+    private static void log(String msgKey, Throwable t) {
+        Log.log(t);
+        // Main window might not yet be available
+        Component parent = Optional.ofNullable(Core.getMainWindow()).map(IMainWindow::getApplicationFrame).orElse(null);
+        JOptionPane.showMessageDialog(parent, OStrings.getString(msgKey, t), OStrings.getString("ERROR_TITLE"),
+                JOptionPane.ERROR_MESSAGE);
     }
 }

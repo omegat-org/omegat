@@ -40,7 +40,7 @@ import javax.swing.Icon;
 public class SimpleColorIcon implements Icon {
 
     private final Color color;
-    final static int ICON_DIMENSION = 16;
+    static final int ICON_DIMENSION = 16;
 
     public SimpleColorIcon(Color color) {
         this.color = color;

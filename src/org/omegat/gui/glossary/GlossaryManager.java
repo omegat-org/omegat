@@ -152,17 +152,17 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      */
     private List<GlossaryEntry> loadGlossaryFile(final File file) throws Exception {
         boolean isPriority = priorityGlossary.equals(file);
-        String fname_lower = file.getName().toLowerCase();
-        if (fname_lower.endsWith(OConsts.EXT_TSV_DEF)) {
+        String fnameLower = file.getName().toLowerCase();
+        if (fnameLower.endsWith(OConsts.EXT_TSV_DEF)) {
             Log.logRB("CT_LOADING_GLOSSARY", file.getName());
             return GlossaryReaderTSV.read(file, isPriority);
-        } else if (fname_lower.endsWith(OConsts.EXT_TSV_UTF8) || fname_lower.endsWith(OConsts.EXT_TSV_TXT)) {
+        } else if (fnameLower.endsWith(OConsts.EXT_TSV_UTF8) || fnameLower.endsWith(OConsts.EXT_TSV_TXT)) {
             Log.logRB("CT_LOADING_GLOSSARY", file.getName());
             return GlossaryReaderTSV.read(file, isPriority);
-        } else if (fname_lower.endsWith(OConsts.EXT_CSV_UTF8)) {
+        } else if (fnameLower.endsWith(OConsts.EXT_CSV_UTF8)) {
             Log.logRB("CT_LOADING_GLOSSARY", file.getName());
             return GlossaryReaderCSV.read(file, isPriority);
-        } else if (fname_lower.endsWith(OConsts.EXT_TBX)) {
+        } else if (fnameLower.endsWith(OConsts.EXT_TBX)) {
             Log.logRB("CT_LOADING_GLOSSARY", file.getName());
             return GlossaryReaderTBX.read(file, isPriority);
         } else {

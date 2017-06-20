@@ -330,7 +330,7 @@ public abstract class BaseTokenizer implements ITokenizer {
 
     protected Language getLanguage() {
         String[] languages = getSupportedLanguages();
-        if (languages.length == 0 || languages[0] == Tokenizer.DISCOVER_AT_RUNTIME) {
+        if (languages.length == 0 || languages[0].equals(Tokenizer.DISCOVER_AT_RUNTIME)) {
             IProject proj = Core.getProject();
             if (proj == null) {
                 throw new RuntimeException("This tokenizer's language can only be "

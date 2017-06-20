@@ -29,6 +29,7 @@ package org.omegat.gui.glossary;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.omegat.util.StringUtil;
 
@@ -40,17 +41,19 @@ import org.omegat.util.StringUtil;
  * @author Alex Buloichik
  */
 public class GlossaryEntry {
-    public GlossaryEntry(String src, String[] loc, String[] com, boolean[] fromPriorityGlossary) {
-        mSources = StringUtil.normalizeUnicode(src);
+    public GlossaryEntry(String src, String[] loc, String[] com, boolean[] fromPriorityGlossary, String[] origins) {
+        mSource = StringUtil.normalizeUnicode(src);
         mTargets = loc;
         normalize(mTargets);
         mComments = com;
         normalize(com);
         mPriorities = fromPriorityGlossary;
+        mOrigins = origins;
     }
 
-    public GlossaryEntry(String src, String loc, String com, boolean fromPriorityGlossary) {
-        this(src, new String[] { loc }, new String[] { com }, new boolean[] { fromPriorityGlossary });
+    public GlossaryEntry(String src, String loc, String com, boolean fromPriorityGlossary, String origin) {
+        this(src, new String[] { loc }, new String[] { com }, new boolean[] { fromPriorityGlossary },
+                new String[] { origin });
     }
 
     public String getSrcText() {
@@ -114,6 +117,13 @@ public class GlossaryEntry {
 
     public boolean[] getPriorities() {
         return mPriorities;
+    }
+
+    public String[] getOrigins(boolean uniqueOnly) {
+        if (!uniqueOnly || mOrigins.length == 1) {
+            return mOrigins;
+        }
+        return Stream.of(mOrigins).distinct().toArray(String[]::new);
     }
 
     public StyledString toStyledString() {
@@ -248,4 +258,5 @@ public class GlossaryEntry {
     private String[] mTargets;
     private String[] mComments;
     private boolean[] mPriorities;
+    private String[] mOrigins;
 }

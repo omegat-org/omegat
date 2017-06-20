@@ -37,10 +37,10 @@ public class FindGlossaryThreadTest extends TestCore {
     @Test
     public void testEntriesSort() {
         List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
-        entries.add(new GlossaryEntry("dog", "doggy", "cdog", false));
-        entries.add(new GlossaryEntry("cat", "catty", "ccat", false));
-        entries.add(new GlossaryEntry("zzz", "zzz", "czzz", true));
-        entries.add(new GlossaryEntry("horse", "catty", "chorse", false));
+        entries.add(new GlossaryEntry("dog", "doggy", "cdog", false, null));
+        entries.add(new GlossaryEntry("cat", "catty", "ccat", false, null));
+        entries.add(new GlossaryEntry("zzz", "zzz", "czzz", true, null));
+        entries.add(new GlossaryEntry("horse", "catty", "chorse", false, null));
         FindGlossaryThread.sortGlossaryEntries(entries);
         assertEquals("zzz", entries.get(0).getSrcText());
         assertEquals("horse", entries.get(1).getSrcText());

@@ -98,7 +98,7 @@ public final class GlossaryReaderTSV {
                 if (tokens.length >= 3) {
                     comment = tokens[2];
                 }
-                result.add(new GlossaryEntry(tokens[0], tokens[1], comment, priorityGlossary));
+                result.add(new GlossaryEntry(tokens[0], tokens[1], comment, priorityGlossary, file.getPath()));
             }
         }
 

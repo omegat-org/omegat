@@ -176,7 +176,7 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
         List<GlossaryEntry> returnList = new LinkedList<GlossaryEntry>();
 
         // The default replace entry
-        GlossaryEntry replaceEntry = new GlossaryEntry("", "", "", false);
+        GlossaryEntry replaceEntry = new GlossaryEntry("", "", "", false, null);
 
         // Remove the duplicates from the list
         boolean removedDuplicate = false;
@@ -275,6 +275,7 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
             List<String> locTxts = new ArrayList<>();
             List<String> comTxts = new ArrayList<>();
             List<Boolean> prios = new ArrayList<>();
+            List<String> origins = new ArrayList<>();
 
             for (GlossaryEntry e : sortList) {
                 for (String s : e.getLocTerms(false)) {
@@ -286,6 +287,9 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
                 for (boolean s : e.getPriorities()) {
                     prios.add(s);
                 }
+                for (String o : e.getOrigins(false)) {
+                    origins.add(o);
+                }
             }
             boolean[] priorities = new boolean[prios.size()];
             for (int j = 0; j < prios.size(); j++) {
@@ -293,7 +297,8 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
             }
 
             GlossaryEntry combineEntry = new GlossaryEntry(srcTxt, locTxts.toArray(new String[locTxts.size()]),
-                    comTxts.toArray(new String[comTxts.size()]), priorities);
+                    comTxts.toArray(new String[comTxts.size()]), priorities,
+                    origins.toArray(new String[origins.size()]));
             returnList.add(combineEntry);
         }
         return returnList;

@@ -65,7 +65,7 @@ public class GlossaryAutoCompleterViewTest extends TestCore {
 
         assertTrue(result.isEmpty());
 
-        Stream.of("foo", "bar", "BAZ").map(t -> new GlossaryEntry("", t, "", true))
+        Stream.of("foo", "bar", "BAZ").map(t -> new GlossaryEntry("", t, "", true, null))
                 .forEach(currentEntries::add);
 
         // No context -> suggest everything

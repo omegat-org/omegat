@@ -196,8 +196,8 @@ public class EditorUtilsTest {
     @Test
     public void testReplaceGlossaryEntries() {
         List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
-        entries.add(new GlossaryEntry("snowman", "sneeuwpop", "", false));
-        entries.add(new GlossaryEntry("Bob", "Blub", "", false));
+        entries.add(new GlossaryEntry("snowman", "sneeuwpop", "", false, null));
+        entries.add(new GlossaryEntry("Bob", "Blub", "", false, null));
 
         ITokenizer tokenizer = new LuceneEnglishTokenizer();
         Locale locale = Locale.ENGLISH;
@@ -223,7 +223,7 @@ public class EditorUtilsTest {
         }
 
         // Multiword entry
-        entries.add(0, new GlossaryEntry("snowman party", "sneeuwpop parti", "", false));
+        entries.add(0, new GlossaryEntry("snowman party", "sneeuwpop parti", "", false, null));
         srcText = "Snowman Bob went to the snowman party. SnOwMaN!";
         expected = "Sneeuwpop Blub went to the sneeuwpop parti. sneeuwpop!";
         assertEquals(expected, EditorUtils.replaceGlossaryEntries(srcText, entries, locale, tokenizer));

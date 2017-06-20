@@ -363,7 +363,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
                     String com = StringUtil.normalizeUnicode(dialog.getCommentText().getText());
                     if (!StringUtil.isEmpty(src) && !StringUtil.isEmpty(loc)) {
                         try {
-                            GlossaryReaderTSV.append(out, new GlossaryEntry(src, loc, com, true));
+                            GlossaryReaderTSV.append(out, new GlossaryEntry(src, loc, com, true, out.getPath()));
                         } catch (Exception ex) {
                             Log.log(ex);
                         }

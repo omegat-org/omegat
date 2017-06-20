@@ -67,7 +67,7 @@ project-specific
   - Adjacent search matches are collapsed when doing a search/replace
   https://sourceforge.net/p/omegat/bugs/675/
 
-  - BaseTokenizer.getLanguage() change string.equals() to '==' 
+  - Tokenizer language discovery at runtime not working
   https://sourceforge.net/p/omegat/bugs/869/
 
   Localisation Updates:

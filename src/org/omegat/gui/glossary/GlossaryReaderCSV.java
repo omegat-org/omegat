@@ -126,6 +126,7 @@ public final class GlossaryReaderCSV {
             }
         }
         result.add(w.toString());
+        result.replaceAll(String::trim);
         return result.toArray(new String[result.size()]);
     }
 }

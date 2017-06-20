@@ -88,6 +88,9 @@ public final class GlossaryReaderTSV {
                 }
                 // divide lines on tabs
                 String[] tokens = s.split("\t");
+                for (int i = 0; i < tokens.length; i++) {
+                    tokens[i] = tokens[i].trim();
+                }
                 // check token list to see if it has a valid string
                 if (tokens.length < 2 || tokens[0].isEmpty()) {
                     continue;

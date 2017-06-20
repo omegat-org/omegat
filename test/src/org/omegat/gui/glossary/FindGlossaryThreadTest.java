@@ -41,7 +41,7 @@ public class FindGlossaryThreadTest extends TestCore {
         entries.add(new GlossaryEntry("cat", "catty", "ccat", false, null));
         entries.add(new GlossaryEntry("zzz", "zzz", "czzz", true, null));
         entries.add(new GlossaryEntry("horse", "catty", "chorse", false, null));
-        FindGlossaryThread.sortGlossaryEntries(entries);
+        GlossarySearcher.sortGlossaryEntries(entries);
         assertEquals("zzz", entries.get(0).getSrcText());
         assertEquals("horse", entries.get(1).getSrcText());
         assertEquals("cat", entries.get(2).getSrcText());

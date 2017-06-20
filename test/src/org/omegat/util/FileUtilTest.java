@@ -464,4 +464,53 @@ public class FileUtilTest {
 
         FileUtils.deleteDirectory(tempDir);
     }
+
+    @Test
+    public void testGetUniqueNames() {
+        // Singleton case, all platform conventions
+        assertEquals(Arrays.asList("foo.txt"), FileUtil.getUniqueNames(Arrays.asList("C:\\foo\\foo.txt")));
+        assertEquals(Arrays.asList("foo.txt"), FileUtil.getUniqueNames(Arrays.asList("C:/foo/foo.txt")));
+        assertEquals(Arrays.asList("foo.txt"), FileUtil.getUniqueNames(Arrays.asList("/foo/foo.txt")));
+
+        // All unique, all platform conventions
+        assertEquals(Arrays.asList("foo.txt", "bar.txt", "baz.txt"),
+                FileUtil.getUniqueNames(Arrays.asList("C:\\foo\\foo.txt", "C:\\foo\\bar.txt", "C:\\bar\\baz.txt")));
+        assertEquals(Arrays.asList("foo.txt", "bar.txt", "baz.txt"),
+                FileUtil.getUniqueNames(Arrays.asList("C:/foo/foo.txt", "C:/foo/bar.txt", "C:/bar/baz.txt")));
+        assertEquals(Arrays.asList("foo.txt", "bar.txt", "baz.txt"),
+                FileUtil.getUniqueNames(Arrays.asList("/foo/foo.txt", "/foo/bar.txt", "/bar/baz.txt")));
+
+        // One-level duplicate, all platform conventions
+        assertEquals(Arrays.asList("foo.txt", "foo/bar.txt", "bar/bar.txt"),
+                FileUtil.getUniqueNames(Arrays.asList("C:\\foo\\foo.txt", "C:\\foo\\bar.txt", "C:\\bar\\bar.txt")));
+        assertEquals(Arrays.asList("foo.txt", "foo/bar.txt", "bar/bar.txt"),
+                FileUtil.getUniqueNames(Arrays.asList("C:/foo/foo.txt", "C:/foo/bar.txt", "C:/bar/bar.txt")));
+        assertEquals(Arrays.asList("foo.txt", "foo/bar.txt", "bar/bar.txt"),
+                FileUtil.getUniqueNames(Arrays.asList("/foo/foo.txt", "/foo/bar.txt", "/bar/bar.txt")));
+
+        // Unhelpful extra depth doesn't affect result
+        assertEquals(Arrays.asList("foo.txt", "foo/bar.txt", "bar/bar.txt"),
+                FileUtil.getUniqueNames(Arrays.asList("/foo/foo.txt", "/foo/bar.txt", "/faz/bar/bar.txt")));
+
+        // Two-level duplicate
+        assertEquals(Arrays.asList("foo.txt", "faz/foo/bar.txt", "fop/foo/bar.txt"),
+                FileUtil.getUniqueNames(Arrays.asList("/foo/foo.txt", "/faz/foo/bar.txt", "/fop/foo/bar.txt")));
+
+        // Actual duplicates result in full original paths
+        assertEquals(Arrays.asList("foo.txt", "/foo/bar.txt", "/foo/bar.txt"),
+                FileUtil.getUniqueNames(Arrays.asList("/foo/foo.txt", "/foo/bar.txt", "/foo/bar.txt")));
+
+        // Test normalization
+        assertEquals(Arrays.asList("foo", "bar/baz", "buz/baz", "baz/baz"),
+                FileUtil.getUniqueNames(Arrays.asList("foo/", "bar/boo/../baz", "/buz/baz", "/baz//baz")));
+
+        // Un-normalizable paths are untouched
+        assertEquals(Arrays.asList("//foo", "../foo"), FileUtil.getUniqueNames(Arrays.asList("//foo", "../foo")));
+        // Singleton case
+        assertEquals(Arrays.asList("../foo"), FileUtil.getUniqueNames(Arrays.asList("../foo")));
+
+        // Non-path
+        assertEquals(Arrays.asList("My Awesome Glossary"),
+                FileUtil.getUniqueNames(Arrays.asList("My Awesome Glossary")));
+    }
 }

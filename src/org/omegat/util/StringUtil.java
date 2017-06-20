@@ -902,4 +902,27 @@ public final class StringUtil {
     public static String decodeBase64(String b64data, Charset charset) {
         return new String(decodeBase64(b64data), charset);
     }
+
+    /**
+     * For a string delimited by some separator, retrieve the last {@code segments} segments.
+     *
+     * @param str
+     *            The string
+     * @param separator
+     *            The separator delimiting the string's segments
+     * @param segments
+     *            The number of segments to return, starting at the end
+     * @return The trailing segments, or, if {@code segments} is greater than the number of segments contained in
+     *         {@code str}, then {@code str} itself.
+     */
+    public static String getTailSegments(String str, int separator, int segments) {
+        int start = str.length();
+        for (int i = 0; i < segments; i++) {
+            start = str.lastIndexOf(separator, start - Character.charCount(1));
+            if (start == -1) {
+                return str;
+            }
+        }
+        return str.substring(start + Character.charCount(separator), str.length());
+    }
 }

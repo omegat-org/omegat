@@ -105,9 +105,11 @@ dependencies {
         compile 'org.dict.zip:dictzip-lib:0.8.2'
         compile 'com.github.takawitter:trie4j:0.9.5'
 
+        // Encoding dectection
+        compile 'com.github.albfernandez:juniversalchardet:2.0.0'
+
         // Legacy projects re-hosted on GitHub + Bintray
         compile 'org.omegat:vldocking:3.0.5'
-        compile 'org.omegat:juniversalchardet:1.0.4'
         compile 'org.omegat:htmlparser:1.5'
         compile 'org.omegat:gnudiff4j:1.15'
         compile 'org.omegat:lib-mnemonics:1.0'

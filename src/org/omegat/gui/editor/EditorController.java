@@ -667,13 +667,17 @@ public class EditorController implements IEditor {
      * {@inheritDoc}
      */
     public String getCurrentFile() {
-        if (Core.getProject().getProjectFiles().isEmpty()) {
+        IProject proj = Core.getProject();
+        if (proj == null) {
+            return null;
+        }
+        if (proj.getProjectFiles().isEmpty()) {
             // there is no files yet
             return null;
         }
 
-        if (displayedFileIndex < Core.getProject().getProjectFiles().size()) {
-            return Core.getProject().getProjectFiles().get(displayedFileIndex).filePath;
+        if (displayedFileIndex < proj.getProjectFiles().size()) {
+            return proj.getProjectFiles().get(displayedFileIndex).filePath;
         } else {
             return null;
         }

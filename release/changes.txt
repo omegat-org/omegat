@@ -67,6 +67,9 @@ project-specific
   - Adjacent search matches are collapsed when doing a search/replace
   https://sourceforge.net/p/omegat/bugs/675/
 
+  - BaseTokenizer.getLanguage() change string.equals() to '==' 
+  https://sourceforge.net/p/omegat/bugs/869/
+
   Localisation Updates:
 
   - Italian localisation updated to 4.1.1 (UI, readme)

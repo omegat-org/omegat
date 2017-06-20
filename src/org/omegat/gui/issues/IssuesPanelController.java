@@ -148,7 +148,7 @@ public class IssuesPanelController implements IIssues {
     int mouseoverCol = -1;
     int mouseoverRow = -1;
     int selectedEntry = -1;
-    String selectedType = null;
+    List<String> selectedTypes = Collections.emptyList();
 
     IssueLoader loader;
 
@@ -283,13 +283,13 @@ public class IssuesPanelController implements IIssues {
         panel.typeList.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 updateFilter();
-                selectedType = getSelectedType().orElse(null);
+                selectedTypes = getSelectedTypes();
             }
         });
 
         panel.jumpButton.addActionListener(e -> jumpToSelectedIssue());
 
-        panel.reloadButton.addActionListener(e -> refreshData(selectedEntry, selectedType));
+        panel.reloadButton.addActionListener(e -> refreshData(selectedEntry, selectedTypes));
 
         panel.showAllButton.addActionListener(e -> showAll());
 
@@ -307,7 +307,7 @@ public class IssuesPanelController implements IIssues {
                 break;
             case MODIFIED:
                 if (frame.isVisible()) {
-                    SwingUtilities.invokeLater(() -> refreshData(selectedEntry, selectedType));
+                    SwingUtilities.invokeLater(() -> refreshData(selectedEntry, selectedTypes));
                 }
                 break;
             default:
@@ -347,7 +347,7 @@ public class IssuesPanelController implements IIssues {
                     JCheckBoxMenuItem item = new JCheckBoxMenuItem(label);
                     item.addActionListener(e -> {
                         IssueProviders.setProviderEnabled(provider.getId(), item.isSelected());
-                        refreshData(selectedEntry, selectedType);
+                        refreshData(selectedEntry, selectedTypes);
                     });
                     item.setSelected(!disabledProviders.contains(provider.getId()));
                     menu.add(item);
@@ -432,20 +432,24 @@ public class IssuesPanelController implements IIssues {
         return Optional.of(imodel.getIssueAt(realSelection));
     }
 
-    Optional<String> getSelectedType() {
-        return getTypeAtRow(panel.typeList.getSelectedIndex());
+    List<String> getSelectedTypes() {
+        List<String> types = getTypesAtRows(panel.typeList.getSelectedIndices());
+        if (types.contains(ALL_TYPES)) {
+            return Collections.singletonList(ALL_TYPES);
+        }
+        return types;
     }
 
-    Optional<String> getTypeAtRow(int row) {
-        if (row < 0) {
-            return Optional.empty();
+    List<String> getTypesAtRows(int[] rows) {
+        if (rows.length == 0) {
+            return Collections.emptyList();
         }
         ListModel<String> model = panel.typeList.getModel();
         if (!(model instanceof TypeListModel)) {
-            return Optional.empty();
+            return Collections.emptyList();
         }
         TypeListModel tModel = (TypeListModel) model;
-        return Optional.of(tModel.getTypeAt(row));
+        return tModel.getTypesAt(rows);
     }
 
     void showPopupMenu(Component source, Point p, IIssue issue) {
@@ -489,7 +493,7 @@ public class IssuesPanelController implements IIssues {
         this.filePattern = filePattern;
         this.instructions = instructions;
         init();
-        SwingUtilities.invokeLater(() -> refreshData(jumpToEntry, null));
+        SwingUtilities.invokeLater(() -> refreshData(jumpToEntry, Collections.emptyList()));
     }
 
     void reset() {
@@ -509,7 +513,7 @@ public class IssuesPanelController implements IIssues {
         panel.instructionsTextArea.setText(instructions);
     }
 
-    synchronized void refreshData(int jumpToEntry, String jumpToType) {
+    synchronized void refreshData(int jumpToEntry, List<String> jumpToTypes) {
         reset();
         if (!frame.isVisible()) {
             // Don't call setVisible if already visible, because the window will
@@ -521,20 +525,20 @@ public class IssuesPanelController implements IIssues {
         panel.progressBar.setMaximum(Core.getProject().getAllEntries().size());
         panel.progressBar.setVisible(true);
         panel.progressBar.setEnabled(true);
-        loader = new IssueLoader(jumpToEntry, jumpToType);
+        loader = new IssueLoader(jumpToEntry, jumpToTypes);
         loader.execute();
     }
 
     class IssueLoader extends SwingWorker<List<IIssue>, Integer> {
 
         private final int jumpToEntry;
-        private final String jumpToType;
+        private final List<String> jumpToTypes;
 
         private int progress = 0;
 
-        public IssueLoader(int jumpToEntry, String jumpToType) {
+        public IssueLoader(int jumpToEntry, List<String> jumpToTypes) {
             this.jumpToEntry = jumpToEntry;
-            this.jumpToType = jumpToType;
+            this.jumpToTypes = Objects.requireNonNull(jumpToTypes);
         }
 
         @Override
@@ -626,9 +630,11 @@ public class IssuesPanelController implements IIssues {
             }
             colSizer.reset();
             colSizer.adjustTableColumns();
-            if (jumpToType != null) {
-                ((TypeListModel) panel.typeList.getModel()).indexOfType(jumpToType)
-                        .ifPresent(panel.typeList::setSelectedIndex);
+            if (!jumpToTypes.isEmpty()) {
+                int[] indicies = ((TypeListModel) panel.typeList.getModel()).indiciesOfTypes(jumpToTypes);
+                if (indicies.length > 0) {
+                    panel.typeList.setSelectedIndices(indicies);
+                }
             }
             if (jumpToEntry >= 0) {
                 IntStream.range(0, panel.table.getRowCount())
@@ -640,22 +646,22 @@ public class IssuesPanelController implements IIssues {
     }
 
     void updateFilter() {
-        int selection = panel.typeList.getSelectedIndex();
-        if (selection < 0) {
+        int[] selection = panel.typeList.getSelectedIndices();
+        if (selection.length == 0) {
             return;
         }
         TypeListModel model = ((TypeListModel) panel.typeList.getModel());
-        String type = model.getTypeAt(selection);
+        List<String> types = model.getTypesAt(selection);
         @SuppressWarnings("unchecked")
         TableRowSorter<IssuesTableModel> sorter = (TableRowSorter<IssuesTableModel>) panel.table.getRowSorter();
         sorter.setRowFilter(new RowFilter<IssuesTableModel, Integer>() {
             @Override
             public boolean include(RowFilter.Entry<? extends IssuesTableModel, ? extends Integer> entry) {
-                return type == ALL_TYPES || entry.getStringValue(IssueColumn.TYPE.index).equals(type);
+                return types.contains(ALL_TYPES) || types.contains(entry.getStringValue(IssueColumn.TYPE.index));
             }
         });
         int totalItems = panel.table.getModel().getRowCount();
-        if (type == ALL_TYPES) {
+        if (types.contains(ALL_TYPES)) {
             updateTitle(totalItems);
         } else {
             updateTitle((int) model.getCountAt(selection), totalItems);
@@ -815,16 +821,19 @@ public class IssuesPanelController implements IIssues {
                     entry.getValue());
         }
 
-        String getTypeAt(int index) {
-            return types.get(index).getKey();
+        List<String> getTypesAt(int[] indicies) {
+            return IntStream.of(indicies).mapToObj(types::get).map(Map.Entry::getKey).collect(Collectors.toList());
         }
 
-        long getCountAt(int index) {
-            return types.get(index).getValue();
+        long getCountAt(int[] indicies) {
+            return IntStream.of(indicies).mapToObj(types::get).mapToLong(Map.Entry::getValue).sum();
         }
 
-        OptionalInt indexOfType(String type) {
-            return IntStream.range(0, types.size()).filter(i -> types.get(i).getKey().equals(type)).findFirst();
+        int[] indiciesOfTypes(List<String> queryTypes) {
+            return queryTypes
+                    .stream().map(type -> IntStream.range(0, queryTypes.size())
+                            .filter(i -> types.get(i).getKey().equals(type)).findFirst())
+                    .filter(OptionalInt::isPresent).mapToInt(OptionalInt::getAsInt).toArray();
         }
     }
 }

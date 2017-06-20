@@ -55,7 +55,7 @@ public class IssuesPanel extends javax.swing.JPanel {
         outerSplitPane = new javax.swing.JSplitPane();
         innerSplitPane = new javax.swing.JSplitPane();
         typeListScrollPanel = new javax.swing.JScrollPane();
-        typeList = new javax.swing.JList<String>();
+        typeList = new javax.swing.JList<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         messagePanel = new javax.swing.JPanel();
@@ -94,7 +94,6 @@ public class IssuesPanel extends javax.swing.JPanel {
 
         innerSplitPane.setBorder(null);
 
-        typeList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         typeListScrollPanel.setViewportView(typeList);
 
         innerSplitPane.setLeftComponent(typeListScrollPanel);

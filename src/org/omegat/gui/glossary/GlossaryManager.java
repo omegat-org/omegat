@@ -38,6 +38,8 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.ProtectedPart;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.glossaries.IGlossary;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.tokenizer.ITokenizer;
@@ -231,13 +233,13 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      *            The text to search
      * @return A list of matching glossary entries
      */
-    public List<GlossaryEntry> searchSourceMatches(String src) {
+    public List<GlossaryEntry> searchSourceMatches(SourceTextEntry ste) {
         ITokenizer tok = Core.getProject().getSourceTokenizer();
         if (tok == null) {
             return Collections.emptyList();
         }
 
-        List<GlossaryEntry> entries = getGlossaryEntries(src);
+        List<GlossaryEntry> entries = getGlossaryEntries(ste.getSrcText());
         if (entries == null) {
             return Collections.emptyList();
         }
@@ -245,7 +247,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         GlossarySearcher searcher = new GlossarySearcher(tok,
                 Core.getProject().getProjectProperties().getSourceLanguage());
 
-        return searcher.searchSourceMatches(src, entries);
+        return searcher.searchSourceMatches(ste, entries);
     }
 
     /**
@@ -253,11 +255,13 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      *
      * @param trg
      *            The text to search
+     * @param protectedParts
+     *            A list of protected parts from which matches should be disregarded (can be null)
      * @param entry
      *            The glossary entry whose target terms should be searched
      * @return A list of matching target terms
      */
-    public List<String> searchTargetMatches(String trg, GlossaryEntry entry) {
+    public List<String> searchTargetMatches(String trg, ProtectedPart[] protectedParts, GlossaryEntry entry) {
         ITokenizer tok = Core.getProject().getTargetTokenizer();
         if (tok == null) {
             return Collections.emptyList();
@@ -265,6 +269,6 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         GlossarySearcher searcher = new GlossarySearcher(tok,
                 Core.getProject().getProjectProperties().getTargetLanguage());
 
-        return searcher.searchTargetMatches(trg, entry);
+        return searcher.searchTargetMatches(trg, protectedParts, entry);
     }
 }

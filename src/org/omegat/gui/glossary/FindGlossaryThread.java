@@ -61,13 +61,13 @@ import org.omegat.tokenizer.ITokenizer;
  */
 public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry>> {
 
-    private final String src;
+    private final SourceTextEntry ste;
     private final GlossaryManager manager;
 
     public FindGlossaryThread(final GlossaryTextArea pane, final SourceTextEntry newEntry,
             final GlossaryManager manager) {
         super(pane, newEntry);
-        this.src = newEntry.getSrcText();
+        this.ste = newEntry;
         this.manager = manager;
     }
 
@@ -79,7 +79,7 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
             return Collections.emptyList();
         }
 
-        List<GlossaryEntry> entries = manager.getGlossaryEntries(src);
+        List<GlossaryEntry> entries = manager.getGlossaryEntries(ste.getSrcText());
         if (entries == null) {
             return Collections.emptyList();
         }
@@ -92,6 +92,6 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
             }
         };
 
-        return searcher.searchSourceMatches(src, entries);
+        return searcher.searchSourceMatches(ste, entries);
     }
 }

@@ -32,12 +32,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.ProtectedPart;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.ITokenizer.StemmingMode;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
+import org.omegat.util.TagUtil;
+import org.omegat.util.TagUtil.Tag;
 import org.omegat.util.Token;
 
 /**
@@ -54,16 +58,17 @@ public class GlossarySearcher {
         this.lang = lang;
     }
 
-    public List<GlossaryEntry> searchSourceMatches(String src, List<GlossaryEntry> entries) {
+    public List<GlossaryEntry> searchSourceMatches(SourceTextEntry ste, List<GlossaryEntry> entries) {
 
         List<GlossaryEntry> result = new ArrayList<>();
 
         // Compute source entry tokens
-        Token[] strTokens = tokenize(src);
+        Token[] strTokens = tokenize(ste.getSrcText(), TagUtil.buildTagList(ste.getSrcText(), ste.getProtectedParts()));
 
         for (GlossaryEntry glosEntry : entries) {
             checkCancelled();
-            if (isTokenMatch(strTokens, glosEntry.getSrcText()) || isCjkMatch(src, glosEntry.getSrcText())) {
+            if (isTokenMatch(strTokens, glosEntry.getSrcText())
+                    || isCjkMatch(ste.getSrcText(), glosEntry.getSrcText())) {
                 result.add(glosEntry);
             }
         }
@@ -75,12 +80,12 @@ public class GlossarySearcher {
         return filterGlossary(result);
     }
 
-    public List<String> searchTargetMatches(String trg, GlossaryEntry entry) {
+    public List<String> searchTargetMatches(String trg, ProtectedPart[] protectedParts, GlossaryEntry entry) {
 
         List<String> result = new ArrayList<>();
 
         // Compute source entry tokens
-        Token[] strTokens = tokenize(trg);
+        Token[] strTokens = tokenize(trg, TagUtil.buildTagList(trg, protectedParts));
 
         for (String term : entry.getLocTerms(true)) {
             checkCancelled();
@@ -124,6 +129,29 @@ public class GlossarySearcher {
         } else {
             return tok.tokenizeVerbatim(strLower);
         }
+    }
+
+    private Token[] tokenize(String str, List<Tag> tags) {
+        Token[] tokens = tokenize(str);
+        if (tags.isEmpty()) {
+            return tokens;
+        }
+        List<Token> result = new ArrayList<>(tokens.length);
+        for (Token tok : tokenize(str)) {
+            if (!tokenInTag(tok, tags)) {
+                result.add(tok);
+            }
+        }
+        return result.toArray(new Token[result.size()]);
+    }
+
+    private static boolean tokenInTag(Token tok, List<Tag> tags) {
+        for (Tag tag : tags) {
+            if (tok.getOffset() >= tag.pos && tok.getOffset() + tok.getLength() <= tag.pos + tag.tag.length()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     static void sortGlossaryEntries(List<GlossaryEntry> entries) {

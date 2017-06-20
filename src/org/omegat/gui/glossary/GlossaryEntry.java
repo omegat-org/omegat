@@ -41,12 +41,12 @@ import org.omegat.util.StringUtil;
  */
 public class GlossaryEntry {
     public GlossaryEntry(String src, String[] loc, String[] com, boolean[] fromPriorityGlossary) {
-        m_src = StringUtil.normalizeUnicode(src);
-        m_loc = loc;
-        normalize(m_loc);
-        m_com = com;
+        mSources = StringUtil.normalizeUnicode(src);
+        mTargets = loc;
+        normalize(mTargets);
+        mComments = com;
         normalize(com);
-        m_priority = fromPriorityGlossary;
+        mPriorities = fromPriorityGlossary;
     }
 
     public GlossaryEntry(String src, String loc, String com, boolean fromPriorityGlossary) {
@@ -54,7 +54,7 @@ public class GlossaryEntry {
     }
 
     public String getSrcText() {
-        return m_src;
+        return mSource;
     }
 
     /**
@@ -67,7 +67,7 @@ public class GlossaryEntry {
      * @return The first target-language term string
      */
     public String getLocText() {
-        return m_loc.length > 0 ? m_loc[0] : "";
+        return mTargets.length > 0 ? mTargets[0] : "";
     }
 
     /**
@@ -78,15 +78,15 @@ public class GlossaryEntry {
      * @return All target-language terms
      */
     public String[] getLocTerms(boolean uniqueOnly) {
-        if (!uniqueOnly || m_loc.length == 1) {
-            return m_loc;
+        if (!uniqueOnly || mTargets.length == 1) {
+            return mTargets;
         }
         ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < m_loc.length; i++) {
-            if (i > 0 && m_loc[i].equals(m_loc[i - 1])) {
+        for (int i = 0; i < mTargets.length; i++) {
+            if (i > 0 && mTargets[i].equals(mTargets[i - 1])) {
                 continue;
             }
-            list.add(m_loc[i]);
+            list.add(mTargets[i]);
         }
         return list.toArray(new String[list.size()]);
     }
@@ -101,56 +101,56 @@ public class GlossaryEntry {
      * @return The first comment string
      */
     public String getCommentText() {
-        return m_com.length > 0 ? m_com[0] : "";
+        return mComments.length > 0 ? mComments[0] : "";
     }
 
     public String[] getComments() {
-        return m_com;
+        return mComments;
     }
 
     public boolean getPriority() {
-        return m_priority.length > 0 ? m_priority[0] : false;
+        return mPriorities.length > 0 ? mPriorities[0] : false;
     }
 
     public boolean[] getPriorities() {
-        return m_priority;
+        return mPriorities;
     }
 
     public StyledString toStyledString() {
         StyledString result = new StyledString();
 
-        result.text.append(m_src);
+        result.text.append(mSource);
         result.text.append(" = ");
 
         StringBuilder comments = new StringBuilder();
 
         int commentIndex = 0;
-        for (int i = 0; i < m_loc.length; i++) {
-            if (i > 0 && m_loc[i].equals(m_loc[i - 1])) {
-                if (!m_com[i].equals("")) {
+        for (int i = 0; i < mTargets.length; i++) {
+            if (i > 0 && mTargets[i].equals(mTargets[i - 1])) {
+                if (!mComments[i].equals("")) {
                     comments.append("\n");
                     comments.append(commentIndex);
                     comments.append(". ");
-                    comments.append(m_com[i]);
+                    comments.append(mComments[i]);
                 }
                 continue;
             }
             if (i > 0) {
                 result.text.append(", ");
             }
-            if (m_priority[i]) {
+            if (mPriorities[i]) {
                 result.markBoldStart();
             }
-            result.text.append(bracketEntry(m_loc[i]));
-            if (m_priority[i]) {
+            result.text.append(bracketEntry(mTargets[i]));
+            if (mPriorities[i]) {
                 result.markBoldEnd();
             }
             commentIndex++;
-            if (!m_com[i].equals("")) {
+            if (!mComments[i].equals("")) {
                 comments.append("\n");
                 comments.append(commentIndex);
                 comments.append(". ");
-                comments.append(m_com[i]);
+                comments.append(mComments[i]);
             }
         }
 
@@ -186,17 +186,17 @@ public class GlossaryEntry {
         }
         GlossaryEntry otherGlossaryEntry = (GlossaryEntry) o;
 
-        return StringUtil.equalsWithNulls(this.m_src, otherGlossaryEntry.m_src)
-                && Arrays.equals(this.m_loc, otherGlossaryEntry.m_loc)
-                && Arrays.equals(this.m_com, otherGlossaryEntry.m_com);
+        return StringUtil.equalsWithNulls(this.mSource, otherGlossaryEntry.mSource)
+                && Arrays.equals(this.mTargets, otherGlossaryEntry.mTargets)
+                && Arrays.equals(this.mComments, otherGlossaryEntry.mComments);
     }
 
     @Override
     public int hashCode() {
         int hash = 98;
-        hash = hash * 17 + (m_src == null ? 0 : m_src.hashCode());
-        hash = hash * 31 + (m_loc == null ? 0 : Arrays.hashCode(m_loc));
-        hash = hash * 13 + (m_com == null ? 0 : Arrays.hashCode(m_com));
+        hash = hash * 17 + (mSource == null ? 0 : mSource.hashCode());
+        hash = hash * 31 + (mTargets == null ? 0 : Arrays.hashCode(mTargets));
+        hash = hash * 13 + (mComments == null ? 0 : Arrays.hashCode(mComments));
         return hash;
     }
 
@@ -244,8 +244,8 @@ public class GlossaryEntry {
         }
     }
 
-    private String m_src;
-    private String[] m_loc;
-    private String[] m_com;
-    private boolean[] m_priority;
+    private String mSource;
+    private String[] mTargets;
+    private String[] mComments;
+    private boolean[] mPriorities;
 }

@@ -262,25 +262,27 @@ public class TagUtil {
      * 'protected parts' and OmegaT style tags: &lt;xx02&gt; or &lt;/yy01&gt;.
      */
     public static List<Tag> buildTagList(String str, ProtectedPart[] protectedParts) {
+        if (protectedParts == null || protectedParts.length == 0) {
+            return Collections.emptyList();
+        }
+
         List<Tag> tags = new ArrayList<Tag>();
-        if (protectedParts != null) {
-            // Put string in temporary buffer and replace tags with spaces as we find them.
-            // This ensures that we don't find identical tags multiple times unless they are
-            // actually present multiple times.
-            StringBuilder sb = new StringBuilder(str);
-            while (true) {
-                boolean loopAgain = false;
-                for (ProtectedPart pp : protectedParts) {
-                    int pos = -1;
-                    if ((pos = sb.indexOf(pp.getTextInSourceSegment())) != -1) {
-                        tags.add(new Tag(pos, pp.getTextInSourceSegment()));
-                        replaceWith(sb, pos, pos + pp.getTextInSourceSegment().length(), TEXT_REPLACEMENT);
-                        loopAgain = true;
-                    }
+        // Put string in temporary buffer and replace tags with spaces as we find them.
+        // This ensures that we don't find identical tags multiple times unless they are
+        // actually present multiple times.
+        StringBuilder sb = new StringBuilder(str);
+        while (true) {
+            boolean loopAgain = false;
+            for (ProtectedPart pp : protectedParts) {
+                int pos = -1;
+                if ((pos = sb.indexOf(pp.getTextInSourceSegment())) != -1) {
+                    tags.add(new Tag(pos, pp.getTextInSourceSegment()));
+                    replaceWith(sb, pos, pos + pp.getTextInSourceSegment().length(), TEXT_REPLACEMENT);
+                    loopAgain = true;
                 }
-                if (!loopAgain) {
-                    break;
-                }
+            }
+            if (!loopAgain) {
+                break;
             }
         }
 

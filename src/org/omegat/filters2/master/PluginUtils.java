@@ -204,8 +204,8 @@ public final class PluginUtils {
                 if (languages.length == 1 && languages[0].equals(Tokenizer.DISCOVER_AT_RUNTIME)) {
                     languages = ((ITokenizer) c.newInstance()).getSupportedLanguages();
                 }
-            } catch (Exception ex) {
-                // Nothing
+            } catch (IllegalAccessException | InstantiationException ex) {
+                Log.log(ex);
             }
             for (String s : languages) {
                 if (lang.equals(s)) {

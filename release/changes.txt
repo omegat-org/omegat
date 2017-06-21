@@ -9,7 +9,7 @@
 
   Implemented requests:
 
-  - Option to translate target URLs in all Microsoft Office documents 
+  - Option to translate target URLs in all Microsoft Office documents
   https://sourceforge.net/p/omegat/feature-requests/1308/
 
   - Support using bilingual files as TMs
@@ -18,7 +18,7 @@
   - Create an Open menu in the Script Editor
   https://sourceforge.net/p/omegat/feature-requests/1314/
 
-  - Compute PO fuzzies real match % 
+  - Compute PO fuzzies real match %
   https://sourceforge.net/p/omegat/feature-requests/1259/
 
   - Update MainMenuShortcuts.properties to reflect actual menus
@@ -32,16 +32,16 @@ supported.
   - The new script extract_text_content.groovy allows exporting all
 strings of the project to a single text file
 
-  - The Scripting window now contains a Help menu with a link to OmegaT 
+  - The Scripting window now contains a Help menu with a link to OmegaT
 Javadoc
 
   - The /scripts/readme.txt file contains links to OmegaT Javadoc,
 Groovy and EcmaScript language references, the GPL v3
 
-  - MyMemory translation engine improvements: 
-MyMemory allows the API key (-Dmymemory.api.key) to be set in the 
+  - MyMemory translation engine improvements:
+MyMemory allows the API key (-Dmymemory.api.key) to be set in the
 configuration, to return matches from private TMs.
-If MyMemory (machine) is used and no MT translation is provided, the best 
+If MyMemory (machine) is used and no MT translation is provided, the best
 human match is returned.
 
   - The default tokenizers were added to the team project creation tool
@@ -57,7 +57,7 @@ tags. It has been reverted to HTML mode.
   - Long file paths truncated too aggressively in Project Files dialog
   https://sourceforge.net/p/omegat/bugs/862/
 
-  - Force wrapping in issue windows 
+  - Force wrapping in issue windows
   https://sourceforge.net/p/omegat/feature-requests/1318/
 
   - Segmentation rules not immediately editable upon making
@@ -98,7 +98,7 @@ project-specific
   - Disable project-specific external search commands by default
   https://sourceforge.net/p/omegat/feature-requests/1304/
 
-  - Change PO fuzzies default match % to 60% 
+  - Change PO fuzzies default match % to 60%
   https://sourceforge.net/p/omegat/feature-requests/1258/
 
   - Make editor keys customizable
@@ -123,7 +123,7 @@ cover most cases, which are described in the script comments
   - Wrong icon displayed when OmegaT is minimized in the OS X dock
   https://sourceforge.net/p/omegat/bugs/850/
 
-  - PO fuzzy counted as 100% instead of 60% in match statistics 
+  - PO fuzzy counted as 100% instead of 60% in match statistics
   https://sourceforge.net/p/omegat/bugs/827/
 
   - Exception when loading TMX missing `srclang` attribute in header
@@ -177,10 +177,10 @@ cover most cases, which are described in the script comments
   - New external_spellcheck script, to help spell checking in a
 word processor when the source document is not a word processing
 document. The script writes all segments (or only segments
-from the current file) to a file named [project_name].doc and then 
+from the current file) to a file named [project_name].doc and then
 opens it.
 
-  - Windows 64-bit version. It installs as a 64-bit version and 
+  - Windows 64-bit version. It installs as a 64-bit version and
 contains a 64-bit JRE. It cannot be installed on a 32-bit system.
 
   - The Align Files file picker shows feedback when the selected
@@ -196,7 +196,7 @@ files are not supported.
   - The Doku Wiki filter no longer throws an exception when
 encountering certain malformed header lines
 
-  - Changes to segments get lost in team projects randomly and silently 
+  - Changes to segments get lost in team projects randomly and silently
   https://sourceforge.net/p/omegat/bugs/836/
 
   Localisation Updates:
@@ -263,7 +263,7 @@ new project
   - OmegaT could fail to load some projects where folders were not
 below the root of the project
 
-  - It was not possible to open projects where one folder (e.g., 
+  - It was not possible to open projects where one folder (e.g.,
 /dictionary) was not defined
 
   - The tree structure of Linux packages was wrong
@@ -282,13 +282,13 @@ below the root of the project
   - Allow searches across source, target simultaneously
   https://sourceforge.net/p/omegat/feature-requests/1185/
 
-  - Flexible use of spellcheck (with and w/o locale) 
+  - Flexible use of spellcheck (with and w/o locale)
   https://sourceforge.net/p/omegat/feature-requests/455/
 
   - New team mode implementation
   https://sourceforge.net/p/omegat/feature-requests/1189/
 
-  - Update LanguageTool to 3.3 
+  - Update LanguageTool to 3.3
   https://sourceforge.net/p/omegat/feature-requests/970/
 
   - Dismiss auto-completer window after hitting right/left arrow keys
@@ -297,7 +297,7 @@ below the root of the project
   - Support prefix search for dictionary
   https://sourceforge.net/p/omegat/feature-requests/1124/
 
-  - Support ssh-agent for git public key authentication 
+  - Support ssh-agent for git public key authentication
   https://sourceforge.net/p/omegat/feature-requests/1126/
 
   - Put archive contents in self-titled root folder for all distributions
@@ -306,7 +306,7 @@ below the root of the project
   - Add action menus to panes
   https://sourceforge.net/p/omegat/feature-requests/1196/
 
-  - Notify user when minimized panes have content 
+  - Notify user when minimized panes have content
   https://sourceforge.net/p/omegat/feature-requests/1197/
 
   - Add Segment Properties pane
@@ -324,13 +324,13 @@ below the root of the project
   - Apply aggressive font fallback to Search results
   https://sourceforge.net/p/omegat/feature-requests/1220/
 
-  - Handle multiple selection in Project Files list context menu 
+  - Handle multiple selection in Project Files list context menu
   https://sourceforge.net/p/omegat/feature-requests/1231/
 
-  - Compatibility with MED format 
+  - Compatibility with MED format
   https://sourceforge.net/p/omegat/feature-requests/1240/
 
-  - Scripting Editor Enhancements 
+  - Scripting Editor Enhancements
   https://sourceforge.net/p/omegat/feature-requests/1244/
 
   - Perform case folding when looking up dictionary entries
@@ -377,18 +377,18 @@ it is possible to double-click on a dictionary instead of pressing Install
   - It's possible to disable individual autocompleter views
 
   - When a filter is applied to the Project Files dialog
-(simply by typing characters), the filter is reflected in the 
-title -- e.g., Project Files (2 of 48) -- and the filter pattern 
+(simply by typing characters), the filter is reflected in the
+title -- e.g., Project Files (2 of 48) -- and the filter pattern
 is highlighted in the file paths.
 
   - In the script nbsp.groovy, it is now possible to replace
-straight apostrophes with curly ones. At the beginning of 
+straight apostrophes with curly ones. At the beginning of
 the script, def fix_apostrophes = false; must be replaced
 with def fix_apostrophes = true;
 
   Bug fixes:
 
-  - Ctrl+click does not activate context menu on OS X 
+  - Ctrl+click does not activate context menu on OS X
   https://sourceforge.net/p/omegat/bugs/805/
 
   - When the list of filters was changed, an entry could lead
@@ -397,10 +397,10 @@ to the wrong filter
   - TMX not loaded when extension is in uppercase
   https://sourceforge.net/p/omegat/bugs/809/
 
-  - Ctrl+I with MT match is not shown with red background 
+  - Ctrl+I with MT match is not shown with red background
   https://sourceforge.net/p/omegat/bugs/754/
 
-  - Incorrect count of proposed changes in find/replace 
+  - Incorrect count of proposed changes in find/replace
   https://sourceforge.net/p/omegat/bugs/820/
 
   - When replacing the target text with a match, the number substitution
@@ -431,7 +431,7 @@ could fail with duplicate numbers
 language of the project, the QA - Check Rules script was crashing
 
   - MyMemory (machine) wouldn't find the correct translation if the
-target language contained a non default country code (e.g., FR-CA 
+target language contained a non default country code (e.g., FR-CA
 instead of FR-FR)
 
   - Some text was ignored in Inkscape's SVG export
@@ -447,7 +447,7 @@ instead of FR-FR)
 
   Implemented requests:
 
-  - Make OmegaT available via Homebrew on macOS 
+  - Make OmegaT available via Homebrew on macOS
   https://sourceforge.net/p/omegat/feature-requests/1305/
 
   Bug fixes:
@@ -455,7 +455,7 @@ instead of FR-FR)
   - DocBook XML filter ignores some content
   https://sourceforge.net/p/omegat/bugs/844/
 
-  - XML Spreadsheet format: the OfficeDocumentSettings tag is not 
+  - XML Spreadsheet format: the OfficeDocumentSettings tag is not
 ignored
 
   - Windows: when a JDK was available, OmegaT.exe would use it even
@@ -513,7 +513,7 @@ be able to work with the new one.
   - Make SRT filter robust against inconsistent EOL chars
   https://sourceforge.net/p/omegat/feature-requests/1255/
 
-  - Script to adapt match tags to target 
+  - Script to adapt match tags to target
   https://sourceforge.net/p/omegat/feature-requests/1263/
 
   Other changes:
@@ -521,7 +521,7 @@ be able to work with the new one.
   - In the Nbsp script, % was added to the list of characters that
 must be preceded by a non-breaking space
 
-  - The Windows setup program can now be launched in any of the 
+  - The Windows setup program can now be launched in any of the
 supported languages, regardless of the languages installed in Windows
 
   - Revised user manual
@@ -548,7 +548,7 @@ were not taken into account, only the predefined values were used
 ----------------------------------------------------------------------
 3.6.0 update 1 vs 3.6.0
 
-  Implemented requests:  
+  Implemented requests:
 
   - Improve handling of tags and custom tags for RTL languages
   https://sourceforge.net/p/omegat/feature-requests/1221/
@@ -573,7 +573,7 @@ were not taken into account, only the predefined values were used
 ----------------------------------------------------------------------
 3.6.0 vs 3.5.4
 
-  Implemented requests:  
+  Implemented requests:
 
   - Allow width-insensitive search
   https://sourceforge.net/p/omegat/feature-requests/140/
@@ -584,7 +584,7 @@ were not taken into account, only the predefined values were used
   - Allow moving the cursor anywhere in the editor
   https://sourceforge.net/p/omegat/feature-requests/821/
 
-  - Add menus to the Search window 
+  - Add menus to the Search window
   https://sourceforge.net/p/omegat/feature-requests/1164/
 
   - Improve case matching in glossary auto-completer
@@ -593,10 +593,10 @@ were not taken into account, only the predefined values were used
   - Keep top Machine Translation pane item visible
   https://sourceforge.net/p/omegat/feature-requests/1168/
 
-  - Keep top Alternative Translation match visible 
+  - Keep top Alternative Translation match visible
   https://sourceforge.net/p/omegat/feature-requests/1169/
 
-  - Open help in external browser 
+  - Open help in external browser
   https://sourceforge.net/p/omegat/feature-requests/397/
 
   - Make it possible to create dictionary plugins
@@ -608,7 +608,7 @@ were not taken into account, only the predefined values were used
   - Immediately apply changes to automatic save interval
   https://sourceforge.net/p/omegat/feature-requests/1174/
 
-  - Filters for Java Properties XML and Schematron 
+  - Filters for Java Properties XML and Schematron
   https://sourceforge.net/p/omegat/feature-requests/1147/
 
   - Open source & target files from the Project Files window
@@ -671,7 +671,7 @@ bug comments for instructions on adding the certificate to the trust store.
 
  - Support 3.0.0 StarDict dictionaries
 
- - To reflect TaaS's change of policy, a key is now mandatory to use the 
+ - To reflect TaaS's change of policy, a key is now mandatory to use the
 service
 
   - Exclude .DS_Store files from translation by default
@@ -693,13 +693,13 @@ preventing cutting after "\" and ":" and before "{" and ":"
 stop the calculations
   https://sourceforge.net/p/omegat/bugs/789/
 
-  - An error was fixed with -Dhttp.proxyHost and -Dhttp.proxyPort in 
+  - An error was fixed with -Dhttp.proxyHost and -Dhttp.proxyPort in
 Linux kaptain launcher
 
   - When using the line length limit in the Text filter, a trailing space
-remained at the end of lines when the line was cut on a space. 
+remained at the end of lines when the line was cut on a space.
 
-  - Word: specific tag processing not working when extension in uppercase 
+  - Word: specific tag processing not working when extension in uppercase
   https://sourceforge.net/p/omegat/bugs/794/
 
   - ResourceBundleFilter drops key in #NOI18N key=value pairs
@@ -725,9 +725,9 @@ remained at the end of lines when the line was cut on a space.
 ----------------------------------------------------------------------
 3.5.3 vs 3.5.2 update 1
 
-  Implemented requests:  
+  Implemented requests:
 
-  - Add sentence case to Shift+F3 case change 
+  - Add sentence case to Shift+F3 case change
   https://sourceforge.net/p/omegat/feature-requests/1134/
 
   - Improve glossary matching of terms containing numbers
@@ -767,20 +767,20 @@ Resource Bundle filter
   - Allow excluding orphan segments from search results
   https://sourceforge.net/p/omegat/feature-requests/1026/
 
-  - Show revision number in version string 
+  - Show revision number in version string
   https://sourceforge.net/p/omegat/feature-requests/1159/
 
   Other changes:
 
-  - Mac OS X: It is now possible to make the project files list 
-"truly" full-screen. On OS X 10.11 this means you can have the main 
+  - Mac OS X: It is now possible to make the project files list
+"truly" full-screen. On OS X 10.11 this means you can have the main
 window and the project files window open side-by-side in split view.
 
-  - spellcheck.groovy has a new option to ignore segments where 
+  - spellcheck.groovy has a new option to ignore segments where
 source=target
 
   - A new script, Strip Bidi Marks (strip_bidi_marks.groovy) allows
-removing bidi marks in the current segment 
+removing bidi marks in the current segment
 
   - It's now possible to have an alternative translation where
 the translation is the same but the note is different
@@ -802,7 +802,7 @@ spaces where appropriate in French
 
   Bug fixes:
 
-  - Spell Checking issue with a Turkish character 
+  - Spell Checking issue with a Turkish character
   https://sourceforge.net/p/omegat/bugs/771/
 
   - Unresolvable scripting folder setting can cause an empty
@@ -820,7 +820,7 @@ Tag nesting is now only tested for OmegaT tags.
 
   - Fragments to be removed not colored correctly
   https://sourceforge.net/p/omegat/bugs/549/
-  
+
   - Editor freezes when navigating segments by double-click (OS X only)
   https://sourceforge.net/p/omegat/bugs/529/
 
@@ -834,7 +834,7 @@ Tag nesting is now only tested for OmegaT tags.
   - Japanese localisation updated to 3.5.3 (UI, documentation, scripts, readme)
   - Norwegian localisation updated to 3.5.3 (UI, tutorial, scripts, readme)
   - Spanish localisation updated to 3.5.3 (UI, tutorial)
- 
+
 ----------------------------------------------------------------------
  OmegaT 3.5.2 update 1 (2015-09-25)
 ----------------------------------------------------------------------
@@ -846,10 +846,10 @@ Tag nesting is now only tested for OmegaT tags.
 
   Bug fixes:
 
-  - No dictionaries show up in the Spellchecker Setup window 
+  - No dictionaries show up in the Spellchecker Setup window
   https://sourceforge.net/p/omegat/bugs/766/
 
-  - Fails to build OmegaT users guide on Linux 
+  - Fails to build OmegaT users guide on Linux
   https://sourceforge.net/p/omegat/bugs/769/
 
   - Wrong encoding of the Portugal Portuguese UI strings
@@ -863,25 +863,25 @@ Tag nesting is now only tested for OmegaT tags.
 ----------------------------------------------------------------------
 3.5.2 vs 3.5.1
 
-  Implemented requests:  
-  
+  Implemented requests:
+
   -Allow aggressive font fallback for undisplayable characters
   https://sourceforge.net/p/omegat/feature-requests/1112/
 
-  - Allow to apply tokenizer to dictionaries 
+  - Allow to apply tokenizer to dictionaries
   https://sourceforge.net/p/omegat/feature-requests/1053/
 
-  - Changing "Ctrl + Left/Right Arrow" Shortcuts in Auto-completer 
+  - Changing "Ctrl + Left/Right Arrow" Shortcuts in Auto-completer
   https://sourceforge.net/p/omegat/feature-requests/1113/
 
   Other changes:
 
   - Open XML filter: In Word, <w:br> (soft return) was considered
-a paragraph tag. There is now an option in the filter (on, by default, 
+a paragraph tag. There is now an option in the filter (on, by default,
 for compatibility with existing translations) to decide whether soft
 returns should generate a new paragraph or not.
 
-  - In the Search window, the Author search field can match either creator 
+  - In the Search window, the Author search field can match either creator
 or changer
 
   - The About window shows the Java version
@@ -894,16 +894,16 @@ or changer
 
   Bug fixes:
 
-  - Auto-Completer does not work for repeated custom tags 
+  - Auto-Completer does not work for repeated custom tags
   https://sourceforge.net/p/omegat/bugs/753/
 
   - Equivalent Unicode composed and decomposed characters not treated as equivalent
   https://sourceforge.net/p/omegat/bugs/758/
 
-  - Tag validation does not recognize extraneous tags 
+  - Tag validation does not recognize extraneous tags
   https://sourceforge.net/p/omegat/bugs/660/
 
-  - Tag validation fails 
+  - Tag validation fails
   https://sourceforge.net/p/omegat/bugs/733/
 
   - Non-Latin characters corrupted in the editor, but not in the other panes
@@ -912,7 +912,7 @@ or changer
   - The auto-completer popup once again follows the caret when navigating with
 the arrow keys
 
-  - Team project: new source files not downloaded when doing a reload 
+  - Team project: new source files not downloaded when doing a reload
   https://sourceforge.net/p/omegat/bugs/763/
 
   - Numeric entities, e.g., &#181; (decimal) &#x00B5; (hex) were not read
@@ -938,7 +938,7 @@ correctly from configuration files
 
   Implemented requests:
 
-  - Glossary adding term dialog - set focus on any GUI element 
+  - Glossary adding term dialog - set focus on any GUI element
   https://sourceforge.net/p/omegat/feature-requests/1014/
 
   - Allow bundling of Hunspell spelling dictionaries in OmegaT.jar
@@ -960,13 +960,13 @@ correctly from configuration files
 directly the configuration folder
 
   - The encoding of glossaries is now determined automatically. That means
-you can now have a .tab or .csv glossary in UTF-16 LE and a .txt glossary in 
-Windows 1252. Of course, the encoding must be compatible with both the 
+you can now have a .tab or .csv glossary in UTF-16 LE and a .txt glossary in
+Windows 1252. Of course, the encoding must be compatible with both the
 languages contained, so Unicode is recommended.
 
   Bug fixes:
 
-  - Shift + F3 doesn't cycle case for single characters 
+  - Shift + F3 doesn't cycle case for single characters
   https://sourceforge.net/p/omegat/bugs/750/
 
   - The Japanese tokenizer was not removing tags
@@ -974,8 +974,8 @@ languages contained, so Unicode is recommended.
   - When the auto-completer was changing the first letter of a phrase
 from lower-case to upper-case, it was turning the phrase to title-case
 
-  - The Mac package contained two folders with the same name except the 
-case. Depending on the zip application, it was difficult to unpack it 
+  - The Mac package contained two folders with the same name except the
+case. Depending on the zip application, it was difficult to unpack it
 correctly.
 
   Localisation updates:
@@ -999,13 +999,13 @@ correctly.
 
   Implemented requests:
 
-  - Drag and drop within the segment 
+  - Drag and drop within the segment
   https://sourceforge.net/p/omegat/feature-requests/401/
 
   - Auto-completion option: Show relevant suggestions automatically
   https://sourceforge.net/p/omegat/feature-requests/1097/
 
-  - Glossary view auto-completion improvements 
+  - Glossary view auto-completion improvements
   https://sourceforge.net/p/omegat/feature-requests/1098/
 
   Bug fixes:
@@ -1013,7 +1013,7 @@ correctly.
   - The writeable glossary was not working propertly if it was not
 at the root of the glossary folder
 
-  - It was not possible to have two glossaries with the same name 
+  - It was not possible to have two glossaries with the same name
 in different sub-folders
 
   Localisation updates:
@@ -1032,16 +1032,16 @@ in different sub-folders
 
   Implemented requests:
 
-  - Progress bar L10N improvement 
+  - Progress bar L10N improvement
   https://sourceforge.net/p/omegat/feature-requests/1055/
 
-  - Glossary input from Search window 
+  - Glossary input from Search window
   https://sourceforge.net/p/omegat/feature-requests/747/
 
-  - Highlighting search word in target segment 
+  - Highlighting search word in target segment
   https://sourceforge.net/p/omegat/feature-requests/890/
 
-  - Drag and drop to open project 
+  - Drag and drop to open project
   https://sourceforge.net/p/omegat/feature-requests/113/
 
   - Drag and drop to add files to project
@@ -1050,7 +1050,7 @@ in different sub-folders
   - Add confirmation for the button Reset all colours
   https://sourceforge.net/p/omegat/feature-requests/1085/
 
-  - Option to remove "fuzziness" from glossary 
+  - Option to remove "fuzziness" from glossary
   https://sourceforge.net/p/omegat/feature-requests/1033/
 
   - Better Mac OS X integration
@@ -1068,7 +1068,7 @@ Ctrl+Shift+O is pressed
 
   - New OmegaT icon on the Mac
 
-  - Go to next/previous segment with key shortcuts work 
+  - Go to next/previous segment with key shortcuts work
 in the Search result window just like in the Editor
 
   - Alternatively to specifiy a project folder on the command line,
@@ -1079,20 +1079,20 @@ possible to check linguistic (LangageTool) issues
 
   - There's now a "Save as" button in Help > Log
 
-  - Read parameters from config file on startup, specified with 
+  - Read parameters from config file on startup, specified with
 --config-file=path/to/file
 
   - There are two new search options at the bottom of the Search window.
-"Auto-sync with Editor". If checked, the Editor will go automatically to the 
+"Auto-sync with Editor". If checked, the Editor will go automatically to the
 segment where the cursor is located in the search window.
-"Back to the initial segment on close". If checked, the Editor will go back 
+"Back to the initial segment on close". If checked, the Editor will go back
 to the segment being current before the Search window was opened.
 
   Bug fixes:
 
   - Panel header title was white under Windows 7 with a classic theme
 
-  - Script files could be locked 
+  - Script files could be locked
   https://sourceforge.net/p/omegat/bugs/749/
 
   - In statistics, scrollbars could cover table content
@@ -1119,21 +1119,21 @@ to the segment being current before the Search window was opened.
   Implemented requests:
 
   - Improve OmegaT look and feel
-  https://sourceforge.net/p/omegat/feature-requests/1082/  
+  https://sourceforge.net/p/omegat/feature-requests/1082/
 
-  - Better statistics layout for l10n UI 
+  - Better statistics layout for l10n UI
   https://sourceforge.net/p/omegat/feature-requests/820/
 
   - Increase the size or better layout of the statistics window
   https://sourceforge.net/p/omegat/feature-requests/656/
 
-  - Add Close button to Statistics window 
+  - Add Close button to Statistics window
   https://sourceforge.net/p/omegat/feature-requests/859/
 
-  - Automatically detect input file encoding when possible 
+  - Automatically detect input file encoding when possible
   https://sourceforge.net/p/omegat/feature-requests/1075/
 
-  - Improve default output encoding settings 
+  - Improve default output encoding settings
   https://sourceforge.net/p/omegat/feature-requests/1083/
 
   - Improve fuzzy match difference granularity in Chinese
@@ -1146,7 +1146,7 @@ to the segment being current before the Search window was opened.
 
   - New XML Spreadsheet 2003 filter. This allows translating Excel document
 exported in XML 2003 format. As the extension is .xml, other filters may
-"steal" the file. In that case, they have to be disabled. The XML 
+"steal" the file. In that case, they have to be disabled. The XML
 Spreadhsheet 2003 filter limits itself to documents where the first tag
 is "Workbook".
 
@@ -1159,16 +1159,16 @@ are displayed in bold
 
   Bug fixes:
 
-  - Editor title overflows with long filename 
+  - Editor title overflows with long filename
   https://sourceforge.net/p/omegat/bugs/739/
 
   - Valid XML characters outside the BMP are stripped from input
   https://sourceforge.net/p/omegat/bugs/740/
 
-  - Scripting window: now ScriptsDir is displayed like "foo\scripts" instead 
+  - Scripting window: now ScriptsDir is displayed like "foo\scripts" instead
 of "foo\.\scripts"
 
-  - OmegaT does not look nice on Mac retina display 
+  - OmegaT does not look nice on Mac retina display
   https://sourceforge.net/p/omegat/bugs/712/
 
   Localisation updates:
@@ -1188,15 +1188,15 @@ of "foo\.\scripts"
 
   Implemented requests:
 
-  - Support HTML 5 encoding detection 
+  - Support HTML 5 encoding detection
   https://sourceforge.net/p/omegat/feature-requests/1122/
-  
+
   Bug fixes:
 
   - Mac: With the included JRE, it was not possible to launch scripts
 opening files or folders
 
-  - Team project: URL used for checkout is not trimmed 
+  - Team project: URL used for checkout is not trimmed
   https://sourceforge.net/p/omegat/bugs/764/
 
 ----------------------------------------------------------------------
@@ -1212,7 +1212,7 @@ opening files or folders
 
   - When a segment contained only protected text, and that the
 translation contained text, an error occurred when trying to create
-the translated document, resulting in the translated document being 
+the translated document, resulting in the translated document being
 empty
 
   Localisation updates:
@@ -1232,7 +1232,7 @@ empty
 
   - Updated LanguageTool to 2.2
 
-  - *.strings (Mac OS X localisation format) was added to the Key=value 
+  - *.strings (Mac OS X localisation format) was added to the Key=value
 filter. That's only a partial solution, as " and ; characters remain
 in the translatable text, and have to be preserved by the translator.
 
@@ -1244,7 +1244,7 @@ entered as "CSV"
   - Too many duplicate segments in the popup menu
   https://sourceforge.net/p/omegat/bugs/744/
 
-  - Exclusion masks not working correctly under Windows 
+  - Exclusion masks not working correctly under Windows
   https://sourceforge.net/p/omegat/bugs/746/
 
   Localisation updates:
@@ -1263,15 +1263,15 @@ entered as "CSV"
 
   Implemented requests:
 
-  - Change auto-completion mode access keys 
+  - Change auto-completion mode access keys
   https://sourceforge.net/p/omegat/feature-requests/1073/
 
   Bug fixes:
-  
+
   - The OK and Cancel buttons of Options > Editing Behaviour were not
 displayed correctly
 
-  - Newly assigned scripts execute several times 
+  - Newly assigned scripts execute several times
   https://sourceforge.net/p/omegat/bugs/737/
 
   - The project-specific file filter configuration was deleted when
@@ -1288,16 +1288,16 @@ quitting OmegaT
 
   Implemented requests:
 
-  - Machine translation with Yandex 
+  - Machine translation with Yandex
   https://sourceforge.net/p/omegat/feature-requests/790/
 
   - Use selection for text Search from "Fuzzy Match" or "Glossary" panes
   https://sourceforge.net/p/omegat/feature-requests/877/
 
   - Allow to insert selection into translation from the Fuzzy Matches pane
-  https://sourceforge.net/p/omegat/feature-requests/1057/ 
+  https://sourceforge.net/p/omegat/feature-requests/1057/
 
-  - Warn user if the Enter key is hit while "Use TAB to Advance" is checked 
+  - Warn user if the Enter key is hit while "Use TAB to Advance" is checked
   https://sourceforge.net/p/omegat/feature-requests/1061/
 
   - Support XLIFF equiv-text in tooltips, simplify tooltip prefs
@@ -1309,7 +1309,7 @@ quitting OmegaT
   - Contextual menu to jump to another instance of non-unique segments
   https://sourceforge.net/p/omegat/feature-requests/1067/
 
-  - Make it easy to "brand" OmegaT for custom deployments 
+  - Make it easy to "brand" OmegaT for custom deployments
   https://sourceforge.net/p/omegat/feature-requests/1069/
 
   - Make it easy to find specific files by name or path
@@ -1322,26 +1322,26 @@ quitting OmegaT
   https://sourceforge.net/p/omegat/feature-requests/1038/
 
   Other enhancements:
-  
+
   - ILIAS Language File filter. Those files can have the .lang or
-.lang.local extensions. As .lang files are also loaded by the Lang 
+.lang.local extensions. As .lang files are also loaded by the Lang
 Mozilla filter, it has to be unabled to load them with the ILIAS filter.
 
-  - Machine translation requests are now cached. That means that a 
+  - Machine translation requests are now cached. That means that a
 source segment already translated will not be requested again during
 the same session (i.e., until OmegaT is closed).
 
-  - The initial location and the layout when resized of various dialogs 
+  - The initial location and the layout when resized of various dialogs
 were improved. The OK button was set as the default button for all dialogs.
 
-  - The Custom Colours dialog was improved. It can be closed with Escape, 
+  - The Custom Colours dialog was improved. It can be closed with Escape,
 changes are remembered immediately and all colours can be reset at once.
 There's also a new tab for colour selection.
 
   - The Project Files dialog can be hidden on project load via hidden preference
 (project_files_show_on_load)
 
-  - It is possible to define the text and background colour of modification 
+  - It is possible to define the text and background colour of modification
 information and the active segment's source and target
 
   - Dialogs are now centered against the main window instead of the screen
@@ -1360,7 +1360,7 @@ The new styling has been applied to all platforms.
   -  java.io.IOException: Error rename new file to glossary in team projects
   https://sourceforge.net/p/omegat/bugs/695/
 
-  - In some specific cases, the content of Mozilla DTD files was not 
+  - In some specific cases, the content of Mozilla DTD files was not
 loaded
 
   - License information was missing from the lib folder of binary
@@ -1369,15 +1369,15 @@ distributions
   - Wrong Swedish segmentation exception corrected
 
   - Newline characters are lost in Japanese target documents
-  https://sourceforge.net/p/omegat/bugs/721/ 
-  
+  https://sourceforge.net/p/omegat/bugs/721/
+
   - Filtering after a search with no live segments freezes OmegaT
   https://sourceforge.net/p/omegat/bugs/692/
-  
+
   - Ellipses missing in several menu items
   https://sourceforge.net/p/omegat/bugs/728/
 
-  - Both menu items for alternative translation are enabled 
+  - Both menu items for alternative translation are enabled
   https://sourceforge.net/p/omegat/bugs/731/
 
   - Incorrect handling of typographic apostrophe (U+2019)
@@ -1412,21 +1412,21 @@ Apply this font to the Project Files dialog was used
 3.1.8 vs. 3.1.7
 
   Implemented requests:
-  
+
   - Allow custom background/foreground colors for different elements in the editor
   https://sourceforge.net/p/omegat/feature-requests/1035/
 
-  - Show dialog for unsupported SVN errors 
+  - Show dialog for unsupported SVN errors
   https://sourceforge.net/p/omegat/feature-requests/1041/
 
-  - Allow configurable diff-style colours in fuzzy matching 
+  - Allow configurable diff-style colours in fuzzy matching
   https://sourceforge.net/p/omegat/feature-requests/900/
 
   Other enhancements:
 
-  - It is now possible to customise colours used in the Fuzzy Matches pane  
+  - It is now possible to customise colours used in the Fuzzy Matches pane
 
-  - All OmegaT windows (Search and Scripting windows) now use the OmegaT icon 
+  - All OmegaT windows (Search and Scripting windows) now use the OmegaT icon
 instead of the standard Java ones
 
   - Revised user manual
@@ -1440,8 +1440,8 @@ instead of the standard Java ones
 
   - The text colour was not applied in the Editor
 
-  - If there was a double click in the search result entries pane in the 
-Search window before the first searching execution, the cursor (i.e., 
+  - If there was a double click in the search result entries pane in the
+Search window before the first searching execution, the cursor (i.e.,
 mouse pointer) changed to the Wait icon and could not be restored
 
   - Strange glossary behavior - removing of newly added terms
@@ -1450,16 +1450,16 @@ mouse pointer) changed to the Wait icon and could not be restored
   - OmegaT keeps temporary files project_save.tmx-based_on_revision_number.new
   https://sourceforge.net/p/omegat/bugs/683/
 
-  - Git team project saving failure with 3.1.6 
+  - Git team project saving failure with 3.1.6
   https://sourceforge.net/p/omegat/bugs/714/
 
   - Fuzzy match segment not shown entirely when Ctrl+Arrow/Num is typed
   https://sourceforge.net/p/omegat/bugs/720/
 
-  - PO comments also included as source text 
+  - PO comments also included as source text
   https://sourceforge.net/p/omegat/bugs/705/
 
-  - In team projects, OmegaT was sometimes failing to rename files (perhaps 
+  - In team projects, OmegaT was sometimes failing to rename files (perhaps
 blocked by antivirus or cache software). There's now a 3-second retry.
 
   Localisation updates:
@@ -1484,16 +1484,16 @@ blocked by antivirus or cache software). There's now a 3-second retry.
   - Add the ability to commit updated segmentation.conf
   https://sourceforge.net/p/omegat/feature-requests/1004/
 
-  - Accept UTF-16 text files for glossaries 
+  - Accept UTF-16 text files for glossaries
   https://sourceforge.net/p/omegat/feature-requests/644/
 
   - Allow scripts to run in console mode
-  https://sourceforge.net/p/omegat/feature-requests/994/ 
+  https://sourceforge.net/p/omegat/feature-requests/994/
 
   - Colour themes (e.g., light/dark GUI modes)
   https://sourceforge.net/p/omegat/feature-requests/958/
 
-  - Editable colours 
+  - Editable colours
   https://sourceforge.net/p/omegat/feature-requests/549/
 
   - Go to next unique segment
@@ -1506,7 +1506,7 @@ the last open project
 
   - Suggest local directory for new team project based on repository URL
 
-  - Word filter: an option allows to translate or not duplicate legacy 
+  - Word filter: an option allows to translate or not duplicate legacy
 fallback text. It is off by default, which means the legacy fallback
 text is not translated.
 
@@ -1515,10 +1515,10 @@ text is not translated.
 
   Bug fixes:
 
-  - Line length limit doesn't work on one line text files 
+  - Line length limit doesn't work on one line text files
   https://sourceforge.net/p/omegat/bugs/707/
 
-  - Scripts folder is not created in the source package 
+  - Scripts folder is not created in the source package
   https://sourceforge.net/p/omegat/bugs/709/
 
   - TransTip doesn't highlight acronyms
@@ -1529,10 +1529,10 @@ text is not translated.
 
   - Some Mozilla DTD files were not loaded correctly
 
-  - When using Create Current Translated Document, the message should be in the singular 
+  - When using Create Current Translated Document, the message should be in the singular
   https://sourceforge.net/p/omegat/bugs/713/
 
-  - PO filter: it was not possible to enter an alternative translation for a 
+  - PO filter: it was not possible to enter an alternative translation for a
 different plural when the source sentences of the plural were the same.
 As the identifier for alternative translations of PO were changed, it is not
 recommanded to change version during a project.
@@ -1554,10 +1554,10 @@ recommanded to change version during a project.
 
   Implemented requests:
 
-  - Allow customising segment modification information 
+  - Allow customising segment modification information
   https://sourceforge.net/p/omegat/feature-requests/1022/
 
-  - Automatically open last visited segment 
+  - Automatically open last visited segment
   https://sourceforge.net/p/omegat/feature-requests/35/
 
   - Memory for searched items
@@ -1565,24 +1565,24 @@ recommanded to change version during a project.
 
   Other enhancements:
 
-  - Ctrl+Shift+M was added as a shortcut to "Go to selected match" 
+  - Ctrl+Shift+M was added as a shortcut to "Go to selected match"
   https://sourceforge.net/p/omegat/feature-requests/1009/
 
-  - Protected parts tooltip view changes. In Options > View, paired tags 
+  - Protected parts tooltip view changes. In Options > View, paired tags
 can be removed from tooltip, text between paired tags can be bolded.
-  
+
   Bug fixes:
 
   - Wrong font used in dictionary window
   https://sourceforge.net/p/omegat/bugs/706
-  
+
   - Alt+Up/Down was set to Select Next Match and Select Previous Match on Mac OSX
   https://sourceforge.net/p/omegat/bugs/687/
 
   - The description of open_current_file.groovy was wrongly
 "Open the current translated file". It was corrected to "Open the current source file"
 
-  - The HTML filter had a different behaviour, where attributes were transformed into 
+  - The HTML filter had a different behaviour, where attributes were transformed into
 tags and could not be translated.
 
   - Multi-line notes in XLIFF files were not extracted correctly
@@ -1617,7 +1617,7 @@ tags and could not be translated.
 
   - List recent projects
   https://sourceforge.net/p/omegat/feature-requests/161/
-  
+
   Bug fixes:
 
   - Pane headline missing using the Windows classic theme
@@ -1642,7 +1642,7 @@ tags and could not be translated.
 
   Implemented requests:
 
-  - Enable Check whole project by default in check_rules.groovy 
+  - Enable Check whole project by default in check_rules.groovy
   https://sourceforge.net/p/omegat/feature-requests/1012/
 
   - Don't save location of projects opened via command line
@@ -1651,19 +1651,19 @@ tags and could not be translated.
   - Select the matching percentage on which to base the match ordering
   https://sourceforge.net/p/omegat/feature-requests/847/
 
-  - Select folders and files to ignore in the source folder 
+  - Select folders and files to ignore in the source folder
   https://sourceforge.net/p/omegat/feature-requests/954/
 
   Other enhancements:
 
   - Improve combo box look and feel on OS X
 
-  - SVNKit updated to 1.8.5. Team projects created previously will continue 
-to work normally with OmegaT. However, if you want to use SVN tools to manage a 
-project created with OmegaT 3.1.4 (e.g., commit new source files), you have 
+  - SVNKit updated to 1.8.5. Team projects created previously will continue
+to work normally with OmegaT. However, if you want to use SVN tools to manage a
+project created with OmegaT 3.1.4 (e.g., commit new source files), you have
 to use a compatible tool (e.g., Tortoise SVN 1.8.7). If you want to manage
-with such a tool projects created previously, you have to perform an SVN Upgrade 
-Copy. Once this is done, the working copy can no longer be managed with a 1.7 SVN 
+with such a tool projects created previously, you have to perform an SVN Upgrade
+Copy. Once this is done, the working copy can no longer be managed with a 1.7 SVN
 tool or OmegaT 3.1.3.
 
   - When a team project gets online/offline, the last dialog box replaces
@@ -1684,7 +1684,7 @@ to the comment pane
 
   Bug fixes:
 
-  - Minor cursor issue in team projects 
+  - Minor cursor issue in team projects
   https://sourceforge.net/p/omegat/bugs/672/
 
   - Editing behaviour "leave the segment empty" setting not working when filter is active
@@ -1706,28 +1706,28 @@ to the comment pane
 
   Implemented requests:
 
-  - Implement application_start event for scripts 
+  - Implement application_start event for scripts
   https://sourceforge.net/p/omegat/feature-requests/1000/
 
   - XLIFF filter - RESNAME as id for alternative translations
   https://sourceforge.net/p/omegat/feature-requests/996/
 
-  - Make adding filename to alternative translations configurable 
+  - Make adding filename to alternative translations configurable
   https://sourceforge.net/p/omegat/feature-requests/961/
 
   - Create automatically project_save.tmx when creating a project
   https://sourceforge.net/p/omegat/feature-requests/1008/
 
-  - Go to selected match 
+  - Go to selected match
   https://sourceforge.net/p/omegat/feature-requests/1009/
 
   Other enhancements:
 
-  - When enabling or disabling Options > Glossary > Display Context 
+  - When enabling or disabling Options > Glossary > Display Context
 Description for TBX Glossaries, only TBX glossaries are reloaded, instead
 of all glossaries
 
-  - Under Linux, the layout of omegat.kaptn was improved. the "Languages" 
+  - Under Linux, the layout of omegat.kaptn was improved. the "Languages"
 and "Appearance" tabs are now merged into a single "GUI Settings" tab.
 
   - The size of the About dialog is reduced automatically if it doesn't
@@ -1738,16 +1738,16 @@ fit on screen
   - Specific user interface layout can be built into a Java Web Start package at
 compilation time, by putting an uiLayout.xml file in /release/WebStart-specific
 
-  - Text filter: when using the line length limit, OmegaT tries to avoid 
-putting a new line just after an opening bracket. Opening brackets are 
+  - Text filter: when using the line length limit, OmegaT tries to avoid
+putting a new line just after an opening bracket. Opening brackets are
 defined as '([{<'.
 
-  - A new option in the search window allows showing the source file name 
+  - A new option in the search window allows showing the source file name
 for each search result
 
   Bug fixes:
 
-  - Remove script action outputs wrong script name 
+  - Remove script action outputs wrong script name
   https://sourceforge.net/p/omegat/bugs/656/
 
   - Untranslated segments missing in target Java .properties and Mozilla DTDs
@@ -1780,22 +1780,22 @@ ant-contrib. See details in /release/WebStart-specific/build.xml
   - Make several identical results in Search Results window appear as one result
   https://sourceforge.net/p/omegat/feature-requests/936/
 
-  - Dual mode progress bar 
+  - Dual mode progress bar
   http://sourceforge.net/p/omegat/feature-requests/959
 
-  - Extend check_rules.groovy with ability to sort by error type 
+  - Extend check_rules.groovy with ability to sort by error type
   https://sourceforge.net/p/omegat/feature-requests/992/
 
-  - Show segments with spelling errors in check_rules.groovy 
+  - Show segments with spelling errors in check_rules.groovy
   https://sourceforge.net/p/omegat/feature-requests/999/
 
-  - Script: Strip tags only in selection 
+  - Script: Strip tags only in selection
   https://sourceforge.net/p/omegat/feature-requests/998/
 
-  -  Make SVN_cleanup script localizable 
+  -  Make SVN_cleanup script localizable
   https://sourceforge.net/p/omegat/feature-requests/997/
 
-  - Connector to TaaS online service 
+  - Connector to TaaS online service
   https://sourceforge.net/p/omegat/feature-requests/1007/
 
   Other enhancements:
@@ -1809,10 +1809,10 @@ ant-contrib. See details in /release/WebStart-specific/build.xml
   - For team projects, the type of repository (Git or SVN) is now detected
 automatically. When authentication is required, credentials have to be
 provided first to detect the type of repository. The type of repository can
-be forced by prefixing the URL with "git!" or "svn!". 
+be forced by prefixing the URL with "git!" or "svn!".
 E.g., svn!https://omegat.xxxx.xx/omegat-fr
 
-  - Scripts with a separate .properties file for user messages are now 
+  - Scripts with a separate .properties file for user messages are now
 included in localisation bundles
 
   - Specific preferences can be built into a Java Web Start package at
@@ -1861,10 +1861,10 @@ used by most users
 
   Bug fixes:
 
-  - OmegaT HTML filter confuses <head> and <header> 
+  - OmegaT HTML filter confuses <head> and <header>
   https://sourceforge.net/p/omegat/bugs/680/
 
-  - Open xxx (e.g., Open glossary) scripts under Windows were not compatible 
+  - Open xxx (e.g., Open glossary) scripts under Windows were not compatible
 with Samba shares
 
   - In the text filter, the line length limit was not respected if
@@ -1887,7 +1887,7 @@ not converted back to real tags in the target document
   - Add Illustrator xml export format support to the SVG filter
   https://sourceforge.net/p/omegat/feature-requests/987/
 
-  - Allow using <trans-unit> ID as identifier of alternative translations in XLIFF filter 
+  - Allow using <trans-unit> ID as identifier of alternative translations in XLIFF filter
   https://sourceforge.net/p/omegat/feature-requests/989/
 
   - Mozilla .lang files filter
@@ -1914,8 +1914,8 @@ not converted back to real tags in the target document
 "Cancel" could lead to believe that changes already done would be
 undone
 
-  - By giving an email in -Dmymemory.api.email for MyMemory machine 
-translation, it is possible to use 1000 requests per day instead 
+  - By giving an email in -Dmymemory.api.email for MyMemory machine
+translation, it is possible to use 1000 requests per day instead
 of 100 ones
 
   - The Linux version is now available also with a 64-bit JRE
@@ -1927,19 +1927,19 @@ preceding a segment in the Comments pane
 
   Bug fixes:
 
-  - When using a search or replace filter, the last change made before 
+  - When using a search or replace filter, the last change made before
 removing the filter or pressing Cancel could be lost
 
   - Alternative translation overwrites the default one in team project
   https://sourceforge.net/p/omegat/bugs/678/
 
-  - "Properties..." menu is disabled in team projects 
+  - "Properties..." menu is disabled in team projects
   https://sourceforge.net/p/omegat/bugs/673/
 
   - OmegaT shows incorrect match statistics for bilingual documents when source=target
   https://sourceforge.net/p/omegat/bugs/662/
 
-  - Unable to save note for untranslated segment 
+  - Unable to save note for untranslated segment
   https://sourceforge.net/p/omegat/bugs/677/
 
   Localisation updates:
@@ -1963,13 +1963,13 @@ removing the filter or pressing Cancel could be lost
   - Add facility for conflict resolution during team sync
   https://sourceforge.net/p/omegat/feature-requests/950/
 
-  - Find and Replace (poss. with regex) 
+  - Find and Replace (poss. with regex)
   https://sourceforge.net/p/omegat/feature-requests/66/
 
   - Search in comments
   https://sourceforge.net/p/omegat/feature-requests/943/
 
-  - Show XLIFF multiple trans-unit notes 
+  - Show XLIFF multiple trans-unit notes
   https://sourceforge.net/p/omegat/feature-requests/949/
 
   - Allow custom sorting order of project files
@@ -1981,22 +1981,22 @@ removing the filter or pressing Cancel could be lost
   - Extend project statistics with the number of files in which they occur
   https://sourceforge.net/p/omegat/feature-requests/910/
 
-  - Mark auto-populated segments 
+  - Mark auto-populated segments
   https://sourceforge.net/p/omegat/feature-requests/963/
 
-  - Priority TM to override project_save.tmx 
+  - Priority TM to override project_save.tmx
   https://sourceforge.net/p/omegat/feature-requests/957/
 
-  - Localisation support for scripts 
+  - Localisation support for scripts
   https://sourceforge.net/p/omegat/feature-requests/975/
 
-  - Event for scripts 
+  - Event for scripts
   https://sourceforge.net/p/omegat/feature-requests/976/
 
-  - Set the glossary folder as default folder for the writable glossary file 
+  - Set the glossary folder as default folder for the writable glossary file
   https://sourceforge.net/p/omegat/feature-requests/982/
 
-  - Allow changing charset for .properties 
+  - Allow changing charset for .properties
   https://sourceforge.net/p/omegat/feature-requests/807/
 
   - Ignore <image>, <style> and <path> content in SVG files
@@ -2009,7 +2009,7 @@ removing the filter or pressing Cancel could be lost
   https://sourceforge.net/p/omegat/feature-requests/906/
 
   Other enhancements:
-  
+
   - If there is a selection When inserting a tag pair, the tags are
 put on each side of the selection
 
@@ -2022,69 +2022,69 @@ is the most common encoding for those files
   - The About dialog can now be resized
 
   - In the Mozilla DTD filter, an option allows to not
-include untranslated strings in the target files 
+include untranslated strings in the target files
 
   - In the bundle properties filter, an option allows to not
-include untranslated strings in the target files 
+include untranslated strings in the target files
 
   - A new script (svn_commit_source_files.groovy) allows
 uploading new or modified source files of a team project
 without having to use an SVN client
 
-  - The scripting interface uses now the Java 6 native implementation 
-of JSR-223 script interface instead of the Bean Scripting Framework. 
-The list of available script engines should properly reflect the 
-engines installed on OmegaT classpath. Since Java6 includes by 
+  - The scripting interface uses now the Java 6 native implementation
+of JSR-223 script interface instead of the Bean Scripting Framework.
+The list of available script engines should properly reflect the
+engines installed on OmegaT classpath. Since Java6 includes by
 default a javascript engine, we don't need Rhino anymore.
-The value returned by the executed script is displayed in the script 
+The value returned by the executed script is displayed in the script
 console.
 
   - Upgraded Groovy version from 1.8.9 to 2.2.2
-  
+
   - The size and position of the scripting windows are saved in the preferences.
-    
+
   - The script directory is monitored every seconds to see if a script has
  been added or deleted. This way, it is not necessary to use "F5" to refresh the
  script list.
- 
+
   - The script window list only displays supported script files.
 
-  - Addition of two new scripts to deal with extra tags. 
-replace_with_match_no_tags.groovy will replace the target segment with a match 
+  - Addition of two new scripts to deal with extra tags.
+replace_with_match_no_tags.groovy will replace the target segment with a match
 without the tags.
 replace_strip_tags.groovy will remove any tag form the target segment.
-Other related scripts are available from 
+Other related scripts are available from
 http://libretraduko.wordpress.com/2013/06/26/stripping-tags-everywhere-groovy-way/
 
   - When reading a level-2 project_save.tmx, standalone tags (e.g., <f0>) will have
 a trailing '/' or not depending on the option in Options > External TMXs. Previously, a
-trailing / was never added. This will improve compatibility when translating XML content and 
+trailing / was never added. This will improve compatibility when translating XML content and
 when project_save was not produced by OmegaT.
 
-  - XLIFF filter option: Ignore type and ctype attributes when building <bpt> and 
+  - XLIFF filter option: Ignore type and ctype attributes when building <bpt> and
 <ept> tag shortcuts. This is similar to the option already available for <ph> tags:
 https://sourceforge.net/p/omegat/feature-requests/938/
 
   - The script svn_cleanup.groovy was renamed to svn_cleanup_selected.groovy. When
 no project is loaded, it allows doing "svn cleanup" on any SVN repository.
 
-  - Standard scripts now have a user friendly name and description, which is displayed 
+  - Standard scripts now have a user friendly name and description, which is displayed
 instead of displaying the file name
 
-  - New QA rule in check_rules.groovy that checks the case of the first character 
+  - New QA rule in check_rules.groovy that checks the case of the first character
 in source and target
 
   - Modifying project properties is disabled for team projects
 
   Bug fixes:
 
-  - Monolingual .po: msgstr in exported files are empty 
+  - Monolingual .po: msgstr in exported files are empty
   https://sourceforge.net/p/omegat/bugs/654/
 
-  - Error on saving team project without glossary file 
+  - Error on saving team project without glossary file
   https://sourceforge.net/p/omegat/bugs/657/
 
-  - Problem using Filter in search window when no matches are returned 
+  - Problem using Filter in search window when no matches are returned
   https://sourceforge.net/p/omegat/bugs/653/
 
   - XLIFF filter: untranslatable text (translate="no") appeared in the Editor
@@ -2093,7 +2093,7 @@ in source and target
 
   - On Mac, the quit and About menu behaviour was fixed
 
-  - Scripting window layout leaves "RUN" button out 
+  - Scripting window layout leaves "RUN" button out
   https://sourceforge.net/p/omegat/bugs/646/
 
   Localisation updates:
@@ -2113,7 +2113,7 @@ in source and target
   Bug fixes:
 
   - Includes team project bug fix from 2.6.3 update 9
-  
+
 ----------------------------------------------------------------------
  OmegaT 3.0.8 update 4 (2014-02-25)
 ----------------------------------------------------------------------
@@ -2125,7 +2125,7 @@ in source and target
 
   Other enhancements:
 
-  - Mac: a pre-defined line in OmegaT.sh makes it easier to use  
+  - Mac: a pre-defined line in OmegaT.sh makes it easier to use
 system Java 1.6 on OS X
 
   Localisation updates:
@@ -2143,7 +2143,7 @@ system Java 1.6 on OS X
 
   Implemented requests:
 
-  - Insert Next Missing Tag Pair 
+  - Insert Next Missing Tag Pair
   https://sourceforge.net/p/omegat/feature-requests/947/
 
   Other enhancements:
@@ -2166,7 +2166,7 @@ New Project or Open Project
 
   Implemented requests:
 
-  - XLIFF filter: Ignore type and ctype attributes when building <ph> tag shortcuts 
+  - XLIFF filter: Ignore type and ctype attributes when building <ph> tag shortcuts
   https://sourceforge.net/p/omegat/feature-requests/938/
 
   - Added dummy Google Translate API key in the Mac package
@@ -2176,7 +2176,7 @@ New Project or Open Project
   http://sourceforge.net/p/omegat/feature-requests/945/
 
   Other enhancements:
-  
+
   - New Korean tokenizer. As it is still "beta", it it not yet the default
 tokenizer for Korean, and has to be selected manually in the list.
 
@@ -2185,16 +2185,16 @@ ambiguity and ease exchanging files across different platforms.
 
   - Scripts now use a monospaced font
 
-  - The Mac version now contains the JRE (1.7). Runtime parameters 
-(e.g., user language, Google API key, etc.) can be edited in 
+  - The Mac version now contains the JRE (1.7). Runtime parameters
+(e.g., user language, Google API key, etc.) can be edited in
 OmegaT.app/Contents/MacOS/OmegaT.sh.
 
   Bug fixes:
 
-  - OutOfMemoryError in DirectoryMonitor if monitored path contains recursive symlinks 
+  - OutOfMemoryError in DirectoryMonitor if monitored path contains recursive symlinks
   https://sourceforge.net/p/omegat/bugs/652/
 
-  - In the Search window, the shortcut Alt+f was allocated both to Files 
+  - In the Search window, the shortcut Alt+f was allocated both to Files
 and Filter, and no shortcut was allocated to Translated. The new shortcuts
 are Alt+l for Files, Alt+f for Filter and Alt+t for Translated
 
@@ -2219,7 +2219,7 @@ Download MediaWiki Page were greyed out
 
   Bug fixes:
 
-  - Enabling Remove Tags results in almost empty translated Word files 
+  - Enabling Remove Tags results in almost empty translated Word files
   https://sourceforge.net/p/omegat/bugs/635/
 
   Localisation updates:
@@ -2247,39 +2247,39 @@ Download MediaWiki Page were greyed out
 
   Implemented requests:
 
-  - Show XLIFF trans-unit note as a comment 
+  - Show XLIFF trans-unit note as a comment
   https://sourceforge.net/p/omegat/feature-requests/803/
 
   - Feedback on console for number of glossary entries fetched
   https://sourceforge.net/p/omegat/feature-requests/750/
 
   Other enhancements:
-  
+
   - New debugging information about team projects available in the logs
 (if org.omegat.level=FINEST is set in logger.properties)
 
-  - A graphical version of the script check_same_segments.groovy was 
+  - A graphical version of the script check_same_segments.groovy was
 added: show_same_segments.groovy
 
-  - The ${diff} display is now "optimized" by concatenating consecutive 
-inserts or deletes separated only by whitespace. This makes the diff more 
+  - The ${diff} display is now "optimized" by concatenating consecutive
+inserts or deletes separated only by whitespace. This makes the diff more
 readable.
 
-  - In addition to ${diff}, there is also now ${diffReversed} in the 
+  - In addition to ${diff}, there is also now ${diffReversed} in the
 Fuzzy Matches pane display options
 
   For the two points above, see
   - Missing part from matches not highlighted
   https://sourceforge.net/p/omegat/bugs/264/
 and
-  - Show where text has been added in match window 
+  - Show where text has been added in match window
   https://sourceforge.net/p/omegat/feature-requests/183/
 
-  - New option in the XLIFF filter: force shortcut to "f" for 
+  - New option in the XLIFF filter: force shortcut to "f" for
 <it pos="end"> tags
 
   - A new QA rule was added to check_rules.groovy. It will be triggered
-if the target segment ends with a different punctuation sign (.!?;:) from 
+if the target segment ends with a different punctuation sign (.!?;:) from
 the one used in the source segment
 
   - In the XLIFF filter, segments containing only protected text
@@ -2293,13 +2293,13 @@ folder was hard to read. It was changed to "salmon red".
   - Missing orion jar in lib folder
   https://sourceforge.net/p/omegat/bugs/639/
 
-  - Not going to right note in projects containing several files 
+  - Not going to right note in projects containing several files
   https://sourceforge.net/p/omegat/bugs/644/
 
   - Hyperlinks in PowerPoint cannot be translated
   https://sourceforge.net/p/omegat/bugs/600/
 
-  - Error: java.lang.IndexOutOfBoundsException on tag validation with custom tags 
+  - Error: java.lang.IndexOutOfBoundsException on tag validation with custom tags
   https://sourceforge.net/p/omegat/bugs/638/
 
   Localisation updates:
@@ -2327,18 +2327,18 @@ folder was hard to read. It was changed to "salmon red".
   https://sourceforge.net/p/omegat/feature-requests/912/
 
   Other enhancements:
-  
+
   - The auto-text file type is displayed in the file selector.
 
   - In the Editor, the tooltip is now the same as the title
 
   - There's a new report in Tools: Match Statistics per Files
 It gives the same information as the match statistics for every file,
-plus the total at the end, with the repetitions being split in two 
-lines: 
-"Repetitions within this file" lists repetitions for which the first 
+plus the total at the end, with the repetitions being split in two
+lines:
+"Repetitions within this file" lists repetitions for which the first
 occurence is in this file.
-"Repetitions from other files" list repetitions for which the first 
+"Repetitions from other files" list repetitions for which the first
 occurence is in a previous file in the list.
 
   - When Ctrl+F (Cmd+F) is used in the search window, the focus goes
@@ -2368,38 +2368,38 @@ as beginning <it> tags are not standalone tags, but opening tags.
 
   Implemented requests:
 
-  - Add Hunspell-based tokenizer 
+  - Add Hunspell-based tokenizer
   https://sourceforge.net/p/omegat/feature-requests/901/
 
   - Reduce automatically size of Project Properties and File Filter dialogs when they don't fit on screen
   https://sourceforge.net/p/omegat/feature-requests/899/
 
-  - Add "Totals" row to match statistics 
+  - Add "Totals" row to match statistics
   https://sourceforge.net/p/omegat/feature-requests/592/
 
   - Creating Current Translated Document
   https://sourceforge.net/p/omegat/feature-requests/880/
 
-  - Standardize on type of numbering in list for fuzzy matches 
+  - Standardize on type of numbering in list for fuzzy matches
   https://sourceforge.net/p/omegat/feature-requests/897/
 
   Other enhancements:
 
   - More information is logged when plugins are loaded
- 
-  - Protected text (from the XLIFF filter currently) remains protected even 
+
+  - Protected text (from the XLIFF filter currently) remains protected even
 when Remove Tags is used
 
   - The speed of parsing source documents was improved
 
   - Better detection of untranslated entries for Android filter
 
-  Bug fixes: 
+  Bug fixes:
 
   - Ignore content of header in OmegaT's XLIFF filter
   https://sourceforge.net/p/omegat/bugs/625/
 
-  - OmT saves XML with LF even if source file is CRLF 
+  - OmT saves XML with LF even if source file is CRLF
   https://sourceforge.net/p/omegat/bugs/326/
 
   - Filelist not sorted during creating translated files
@@ -2424,24 +2424,24 @@ when Remove Tags is used
   - "Insert symbol" auto-completion view
   https://sourceforge.net/p/omegat/feature-requests/862/
 
-  - Add auto-text view to auto-completer 
+  - Add auto-text view to auto-completer
   https://sourceforge.net/p/omegat/feature-requests/861/
 
-  - Optional source term in auto-completer 
+  - Optional source term in auto-completer
   https://sourceforge.net/p/omegat/feature-requests/887/
 
-  - Priority Glossary 
+  - Priority Glossary
   https://sourceforge.net/p/omegat/feature-requests/853/
 
-  - Fill TMX on segmentation from sentence to paragraph 
+  - Fill TMX on segmentation from sentence to paragraph
   https://sourceforge.net/p/omegat/feature-requests/825/
 
-  - Do not scroll the glossary pane to the bottom 
+  - Do not scroll the glossary pane to the bottom
   https://sourceforge.net/p/omegat/feature-requests/729/
 
   Other enhancements:
 
-  - The MyMemory machine translator has been separated into two 
+  - The MyMemory machine translator has been separated into two
 different options: MyMemory (machine) and MyMemory (human)
 
   - XLIFF filter: the <trans-unit> resname attribute is shown in the
@@ -2450,12 +2450,12 @@ comment pane
   - The QA script (check_rules.groovy) now checks for double blanks,
 which can contain either normal spaces or non-breaking spaces
 
-  - If there is no preference file (omegat.prefs) in the configuration 
-folder,  i.e., OmegaT has never been launched and quit, and there is one 
+  - If there is no preference file (omegat.prefs) in the configuration
+folder,  i.e., OmegaT has never been launched and quit, and there is one
 in the installation folder, OmegaT will read preferences from that file.
 That allow distributing a version with customised pre-defined options.
 
-  Bug fixes: 
+  Bug fixes:
 
   - bad_extension.grvy is not so bad
   https://sourceforge.net/p/omegat/bugs/596/
@@ -2468,11 +2468,11 @@ OmegaT
 
   - The match statistics were based purely on the leftmost percentage,
 without taking into account which matches are really selected to go
-into the fuzzy match pane. This could lead to situation where the 
-statistics and what is seen in the fuzzy match pane was significantly 
-different. The statistics are now using an algorithm giving consistent 
-result with the match pane. The percentage kept is, however, still the 
-rightmost one. As the computation method is different, all statistics 
+into the fuzzy match pane. This could lead to situation where the
+statistics and what is seen in the fuzzy match pane was significantly
+different. The statistics are now using an algorithm giving consistent
+result with the match pane. The percentage kept is, however, still the
+rightmost one. As the computation method is different, all statistics
 will give different results compared with the previous version.
 
   Localisation updates:
@@ -2488,9 +2488,9 @@ will give different results compared with the previous version.
 ----------------------------------------------------------------------
 3.0.4 update 2 vs. 3.0.4 update 1
 
-  Bug fixes: 
+  Bug fixes:
 
-  - java.lang.IndexOutOfBoundsException during strict tag validation 
+  - java.lang.IndexOutOfBoundsException during strict tag validation
   http://sourceforge.net/p/omegat/bugs/608/
 
   Localisation updates:
@@ -2508,7 +2508,7 @@ will give different results compared with the previous version.
 
   Implemented requests:
 
-  - Translate HTML5 attribute 'placeholder' 
+  - Translate HTML5 attribute 'placeholder'
   https://sourceforge.net/p/omegat/feature-requests/881/
 
  Other enhancements:
@@ -2518,17 +2518,17 @@ will give different results compared with the previous version.
   - The autocompleter popup has a new page, to insert grouped
 missing tags
 
-  Bug fixes: 
+  Bug fixes:
 
   - Virtual config folder path listed instead of real one under Windows Vista/7
   https://sourceforge.net/p/omegat/bugs/601/
 
-  - Typo in linux-install.sh that hinders proper execution 
+  - Typo in linux-install.sh that hinders proper execution
   https://sourceforge.net/p/omegat/bugs/605/
 
   - PO filter: real empty source segments were not working
 
-  - Project name resolving for execution with 
+  - Project name resolving for execution with
 "java -jar /omegat/OmegaT.jar ./" was fixed
 
 ----------------------------------------------------------------------
@@ -2542,7 +2542,7 @@ missing tags
 
   Implemented requests:
 
-  - Add support for monolingual .po files 
+  - Add support for monolingual .po files
   https://sourceforge.net/p/omegat/feature-requests/865/
 
   - Allow 12 scripts in the Tools menu
@@ -2554,33 +2554,33 @@ missing tags
   - Exactly equal suggestions from diferents tmx show only as one
   https://sourceforge.net/p/omegat/feature-requests/874/
 
-  - Print non-string data types with console.print() and println() 
+  - Print non-string data types with console.print() and println()
   https://sourceforge.net/p/omegat/feature-requests/875/
 
-  - Sorted list of scripts 
+  - Sorted list of scripts
   https://sourceforge.net/p/omegat/feature-requests/878/
 
-  - Default shortcut for "Insert next Missing Tag" 
+  - Default shortcut for "Insert next Missing Tag"
   https://sourceforge.net/p/omegat/feature-requests/856/
 
  Other enhancements:
 
-  - Linux: Zenity is not needed anymore in omegat.kaptn to display 
+  - Linux: Zenity is not needed anymore in omegat.kaptn to display
 OmegaT's version, and several typos were corrected
 
   - The "check-rules" script now has a GUI
 
   - There is a new global spell checking script
 
-  Bug fixes: 
+  Bug fixes:
 
-  - Scripts folder is not created in Windows packages  
+  - Scripts folder is not created in Windows packages
   https://sourceforge.net/p/omegat/bugs/595/
 
-  - Stop word discarded from glossary when using tokenizer 
+  - Stop word discarded from glossary when using tokenizer
   https://sourceforge.net/p/omegat/bugs/484/
 
-  - Language checker does not work in Japanese 
+  - Language checker does not work in Japanese
   https://sourceforge.net/p/omegat/bugs/593/
 
   - The log contained an exception related to the LanguageTool module.
@@ -2607,10 +2607,10 @@ loaded
 
   Implemented requests:
 
-  - Change script keyboard shortcuts to Ctrl+Shift+Fn 
+  - Change script keyboard shortcuts to Ctrl+Shift+Fn
   https://sourceforge.net/p/omegat/feature-requests/839/
 
-  - Make groovy scripts that ship with Scripting Plugin cross-platform 
+  - Make groovy scripts that ship with Scripting Plugin cross-platform
   https://sourceforge.net/p/omegat/feature-requests/864/
 
   Other enhancements:
@@ -2621,19 +2621,19 @@ this version, remove the scripting plugin from the plugin folder.
   - Linux: linux-install.sh and omegat.kaptn were improved, notably
 with the inclusion of Microsoft Translate
 
-  Bug fixes: 
+  Bug fixes:
 
   - LanguageTool wasn't working in some languages
-  
+
   - When one source term was corresponding to several ones
 (e.g., source term = target term1, target term2) in the glossary pane,
 only the first target term was shown in the TransTip popup menu
 
-  - The autocompleter was sometimes capitalising the first letter of 
+  - The autocompleter was sometimes capitalising the first letter of
 terms when it shouldn't
 
   - When Remove leading and trailing tag was not checked in File Filter
-Options, some trailing conditional paragraph end tags could remain at 
+Options, some trailing conditional paragraph end tags could remain at
 the end of the segment. It mainly affected segmented XLIFF generated by
 Rainbow.
 
@@ -2693,13 +2693,13 @@ Rainbow.
 
   Implemented requests:
 
-  - Add facility to auto-complete input 
+  - Add facility to auto-complete input
   https://sourceforge.net/p/omegat/feature-requests/854/
 
-  - PDF input filter 
+  - PDF input filter
   https://sourceforge.net/p/omegat/feature-requests/539/
 
-  - Keyboard access to contextual menu items 
+  - Keyboard access to contextual menu items
   https://sourceforge.net/p/omegat/feature-requests/537/
 
   Other enhancements:
@@ -2715,10 +2715,10 @@ documented in docs_devel/OmegaT developer's guide.odt
   - Tag validation window does not keep enough space for Japanese errors
   https://sourceforge.net/p/omegat/bugs/583/
 
-  - Remove leading and trailing tags option not working 
+  - Remove leading and trailing tags option not working
   https://sourceforge.net/p/omegat/bugs/582/
 
-  - New tag handling changes XML formatting for empty tags 
+  - New tag handling changes XML formatting for empty tags
   https://sourceforge.net/p/omegat/bugs/581/
 
   - Team projects: during save, OmegaT could not update omegat.project
@@ -2805,10 +2805,10 @@ of OmegaT, the second instance would freeze
   - Better OmegaT icon resolution
   https://sourceforge.net/p/omegat/feature-requests/822/
 
-  - Integrate tokenizers in OmegaT 
+  - Integrate tokenizers in OmegaT
   https://sourceforge.net/p/omegat/feature-requests/844/
 
-  - Enable LanguageTool Plugin in Java Webstart version 
+  - Enable LanguageTool Plugin in Java Webstart version
   https://sourceforge.net/p/omegat/feature-requests/851/
 
   Other enhancements:
@@ -2885,7 +2885,7 @@ compilation time, by putting an uiLayout.xml file in /release/WebStart-specific
 
   - Documentation can now be created as PDF for CJK languages
 
-  Bug fixes: 
+  Bug fixes:
 
   - No more warning about mixed content in the Java Web Start package. Requires
 ant-contrib. See details in /release/WebStart-specific/build.xml
@@ -2907,7 +2907,7 @@ translatable text could appear (the content of <definedNames> tags)
 ----------------------------------------------------------------------
 2.6.3 update 10 vs. 2.6.3 update 9
 
-  Bug fixes: 
+  Bug fixes:
 
   - Swedish segmentation rules were using a wrong language code
 
@@ -2927,9 +2927,9 @@ prevented from properly entering credentials
 ----------------------------------------------------------------------
 2.6.3 update 9 vs. 2.6.3 update 8
 
-  Bug fixes: 
-  
-  - There was still an issue with team projects, where newer translations 
+  Bug fixes:
+
+  - There was still an issue with team projects, where newer translations
 could sometimes be overwritten by older ones. It should now be fixed.
 
   Localisation updates:
@@ -2945,10 +2945,10 @@ could sometimes be overwritten by older ones. It should now be fixed.
 ----------------------------------------------------------------------
 2.6.3 update 8 vs. 2.6.3 update 7
 
-  Bug fixes: 
+  Bug fixes:
 
   - The fix for "mixed content" introduced in 2.6.3 update 7 made
-sometimes OmegaT unusable since a change introduced in Java 1.7_51. We have 
+sometimes OmegaT unusable since a change introduced in Java 1.7_51. We have
 removed it, so users get again a warning about mixed content.
 
   - "Rebase" (i.e., synchronisation) for team projects had an
@@ -2965,20 +2965,20 @@ sometimes be overwritten by older ones.
 2.6.3 update 7 vs. 2.6.3 update 6
 
   Implemented requests:
-  
-  - Add release date to the changes.txt file 
+
+  - Add release date to the changes.txt file
   https://sourceforge.net/p/omegat/feature-requests/944/
 
-  Bug fixes: 
+  Bug fixes:
 
   - Word plugin causes weird inline code in OmegaT
   https://sourceforge.net/p/omegat/bugs/645/
 
-  - NullPointerException when loading project with HHC files 
+  - NullPointerException when loading project with HHC files
   https://sourceforge.net/p/omegat/bugs/651/
 
   - When using Java Webstart, Java was warning about "mixed content"
-in the application, and asking whether the application should be 
+in the application, and asking whether the application should be
 blocked or not. This was fixed, and no question is asked anymore.
 
 ----------------------------------------------------------------------
@@ -2990,7 +2990,7 @@ blocked or not. This was fixed, and no question is asked anymore.
 ----------------------------------------------------------------------
 2.6.3 update 6 vs. 2.6.3 update 5
 
-  Bug fixes: 
+  Bug fixes:
 
   - Workaround for slowness in the Editor with Java 1.7_045
 
@@ -3005,10 +3005,10 @@ blocked or not. This was fixed, and no question is asked anymore.
 
   Implemented requests:
 
-  - Update JRE to 1.7 
+  - Update JRE to 1.7
   https://sourceforge.net/p/omegat/feature-requests/793/
 
-  Bug fixes: 
+  Bug fixes:
 
   - Ignore content of sdl:seg-defs tags in OmegaT's XLIFF filter
   https://sourceforge.net/p/omegat/bugs/624/
@@ -3019,7 +3019,7 @@ blocked or not. This was fixed, and no question is asked anymore.
   - tm/auto folder is created in wrong location
   https://sourceforge.net/p/omegat/bugs/553/
 
-  - If project location properties changed to blank, OmegaT freezes after reloading project 
+  - If project location properties changed to blank, OmegaT freezes after reloading project
   https://sourceforge.net/p/omegat/bugs/632/
 
   - When opening the Search window with a search expression, the leading and
@@ -3034,17 +3034,17 @@ trailing spaces were not removed
 ----------------------------------------------------------------------
 2.6.3 update 4 vs. 2.6.3 update 3
 
-  Bug fixes: 
+  Bug fixes:
 
   - Visible tags (wp14:pctWidth" and "wp14:pctHeight") in the Editor
 could prevent opening Word target documents if the content was changed
 
-  - <releaseinfo> not declared as a paragraph tag in the DocBook filter 
+  - <releaseinfo> not declared as a paragraph tag in the DocBook filter
   https://sourceforge.net/p/omegat/feature-requests/883/
 
-  - When launching OmegaT from the command line in align mode 
-(--mode=console-align), an error message occured: 
-Exception in thread "main" java.util.MissingResourceException: Can't find 
+  - When launching OmegaT from the command line in align mode
+(--mode=console-align), an error message occured:
+Exception in thread "main" java.util.MissingResourceException: Can't find
 resource for bundle java.util.PropertyResourceBundle, key INITIALIZING
 
 ----------------------------------------------------------------------
@@ -3056,18 +3056,18 @@ resource for bundle java.util.PropertyResourceBundle, key INITIALIZING
 ----------------------------------------------------------------------
 2.6.3 update 3 vs. 2.6.3 update 2
 
-  Bug fixes: 
+  Bug fixes:
 
-  - Team projects: duplicate entries could still happen in the writable 
-glossary 
+  - Team projects: duplicate entries could still happen in the writable
+glossary
 
   - Restore default window when saved layout cannot be restored
   https://sourceforge.net/p/omegat/bugs/602/
 
-  - Glossary synchronisation in team projects was not working properly 
+  - Glossary synchronisation in team projects was not working properly
 under Git
 
-  - HTML filter: submit and button input values were translated even  
+  - HTML filter: submit and button input values were translated even
  when not configured to do so
 
   Localisation updates:
@@ -3113,16 +3113,16 @@ under Git
   Other enhancements:
 
   - All documentation images were converted to 256 colours, giving
-a significant size decrease without a noticeable change in image 
+a significant size decrease without a noticeable change in image
 clarity
 
   - Linux: improved Kaptain launcher, with updated tokenizers
 
   - Java (for Windows and Linux with JRE) updated to 1.6.0_43-b01
-  
+
   Bug fixes:
 
-  - When an XML document (e.g., DocBook), contained both internal and 
+  - When an XML document (e.g., DocBook), contained both internal and
 external entities, the target files could be empty
 
   - Word selection with a double-click could sometimes be off
@@ -3152,7 +3152,7 @@ external entities, the target files could be empty
   https://sourceforge.net/p/omegat/feature-requests/596/
 
   Other enhancements:
-  
+
   - More flexible parsing for external commands arguments
 
   - Updated documentation
@@ -3186,11 +3186,11 @@ machines
   https://sourceforge.net/p/omegat/feature-requests/811/
 
   Other enhancements:
-  
+
   - Git team git server fingerprint will be stored in plain text file if
 credentials are also stored. Acceptance of fingerprint will be remembered.
 
-  - Markers for whitespace (space, tab, newline) and Bidi-characters in the 
+  - Markers for whitespace (space, tab, newline) and Bidi-characters in the
 View menu
 
   - Tag colouring for RTL languages/orientation
@@ -3210,12 +3210,12 @@ where the author is unknown
   - PO filter: there was an error when loading PO files with a target
 language with 1 plural form
 
-  - Team projects: changes in the writable glossary were not calculated 
+  - Team projects: changes in the writable glossary were not calculated
 correctly, which resulted in duplicate entries
 
-  - Team projects: when the writeable glossary was not inside the 
+  - Team projects: when the writeable glossary was not inside the
 working copy, it was not possible to synchronise the project. Now, if
-the writeable glossary is outside the working copy, no attempt is done 
+the writeable glossary is outside the working copy, no attempt is done
 to synchronise it.
 
   - In the Fuzzy Matches pane, depending on the order of the options,
@@ -3251,7 +3251,7 @@ the display could be corrupted when ${diff} was used
 
   - Support for gzipped (.tmx.gz) external TMXs
 
-  - Alignment (for filters that support it) now segments into sentences if 
+  - Alignment (for filters that support it) now segments into sentences if
 segmentation is enabled in the project
 
   - Git submodule support added
@@ -3260,7 +3260,7 @@ segmentation is enabled in the project
 
   - The writable glossary file can now be used in team project. Updates are shared.
 
-  - PO-filter takes number of plurals from header if it is defined in the header. 
+  - PO-filter takes number of plurals from header if it is defined in the header.
 If not defined, the default for the language is used just like before.
 
   - New "--no-team" command line option, to be able to use a team project without
@@ -3275,7 +3275,7 @@ the Windows Azure Marketplace.
   - Missing part from matches not highlighted
   https://sourceforge.net/p/omegat/bugs/264/
 
-  - It was not possible to use team projects offline. Now, when the 
+  - It was not possible to use team projects offline. Now, when the
 connection is off, a message mentions the project is in offline mode.
 The connection continues to be tested on each save. When the connection
 comes back, a message informs the user that the project is back in online
@@ -3287,7 +3287,7 @@ mode.
 
   - Small memory consumption optimizations on team projects during save.
 
-  - Create/download project dialog accepts empty folder besides new folder as project location, 
+  - Create/download project dialog accepts empty folder besides new folder as project location,
 and doesn't show files any more.
 
   - Multiple save commands could interfere, causing you to lose all translations in team project.
@@ -3313,7 +3313,7 @@ and doesn't show files any more.
 
   Bug fixes:
 
-  - The Okapi plugin was not working: an exception was produced when trying 
+  - The Okapi plugin was not working: an exception was produced when trying
 to load a file
 
 ----------------------------------------------------------------------
@@ -3327,13 +3327,13 @@ to load a file
 
   Implemented requests:
 
-  - Allow to load TMX as 'alternative source' 
+  - Allow to load TMX as 'alternative source'
   https://sourceforge.net/p/omegat/feature-requests/799/
 
-  - Display encoding and filter used in list of project files 
+  - Display encoding and filter used in list of project files
   https://sourceforge.net/p/omegat/feature-requests/736/
 
-  - Ignore 'Fragments that should be removed' on fuzzy matches 
+  - Ignore 'Fragments that should be removed' on fuzzy matches
   https://sourceforge.net/p/omegat/feature-requests/800/
 
   - Option to not translate headers in PO filter
@@ -3349,11 +3349,11 @@ to load a file
   - Remove tags is now a project property feature, instead of being a
 global option
 
-  - HTML filter: new options to compress whitespace and remove comments 
+  - HTML filter: new options to compress whitespace and remove comments
 
   Bug fixes:
 
-  - The PO filter option "Allow blank translations in the target files" 
+  - The PO filter option "Allow blank translations in the target files"
 was not showing the saved setting
 
 ----------------------------------------------------------------------
@@ -3381,7 +3381,7 @@ was not showing the saved setting
 
   Bug fixes:
 
-  - Automatic loading of translations from the /tm/auto folder had 
+  - Automatic loading of translations from the /tm/auto folder had
 stopped working except under Windows
 
   Localisation updates:
@@ -3396,14 +3396,14 @@ stopped working except under Windows
    0 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
-2.6.0 update 1 vs. 2.6.0 
+2.6.0 update 1 vs. 2.6.0
 
   Other enhancements:
 
   - SVN for team projects is now compatible with Subversion 1.7
 
-  - If a user has only read-only permission for a repository for team 
-projects, it is possible to check the read-only check box in the 
+  - If a user has only read-only permission for a repository for team
+projects, it is possible to check the read-only check box in the
 authentication dialog. Once this box is checked, OmegaT will not attempt
 to write in the repository anymore
 
@@ -3414,7 +3414,7 @@ to write in the repository anymore
    0 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
-2.6.0 vs. 2.5.3 
+2.6.0 vs. 2.5.3
 
   Implemented requests:
 
@@ -3486,7 +3486,7 @@ to write in the repository anymore
 
   Bug fixes:
 
-  - <revision> tags were shown to the translator in the TXML (Wordfast) 
+  - <revision> tags were shown to the translator in the TXML (Wordfast)
 filter
 
   Localisation updates:
@@ -3545,7 +3545,7 @@ filter
 
   Other enhancements:
 
-  - Fastest computation of Match Statistics. 
+  - Fastest computation of Match Statistics.
 In addition, the first two lines are displayed as soon as they are computed
 
   Bug fixes:
@@ -3564,7 +3564,7 @@ to 2.5.)
   - Java Webstart was not working with Java 1.7
 
   - When one of the languages is an RTL language, or where setting the Editor
-in RTL mode with Shift+Ctrl+O, spaces could be wrongly located. As a workaround, 
+in RTL mode with Shift+Ctrl+O, spaces could be wrongly located. As a workaround,
 tags are not displayed in grey when translating an RTL language is involved or when
 the Editor is in RTL mode.
 
@@ -3591,7 +3591,7 @@ the Editor is in RTL mode.
 
   Other enhancements:
 
-  - Windows installer: there's a new option to specify whether the 
+  - Windows installer: there's a new option to specify whether the
 language chosen during installation should be used for OmegaT. If
 Yes, OmegaT.l4J.ini is modified to use that language.
 
@@ -3603,7 +3603,7 @@ Yes, OmegaT.l4J.ini is modified to use that language.
   - NullPointerException during resegmentation
   https://sourceforge.net/p/omegat/bugs/531/
 
-  - When editing project-specific file filters, the checkbox was 
+  - When editing project-specific file filters, the checkbox was
 labelled jCheckBox1 instead of "Enable project specific filters"
 
   - When changing project-specific segmentation rules to default and back,
@@ -3632,7 +3632,7 @@ the results were not immediately visible
 
   Other enhancements:
 
-  - The automatic save interval can now be set in Options > Save. 
+  - The automatic save interval can now be set in Options > Save.
 It is defined in minutes and seconds. If a value lower than 10 seconds
 is set, it is reset to 10 seconds.
 
@@ -3672,12 +3672,12 @@ See https://sourceforge.net/p/omegat/feature-requests/733/
 
   Other enhancements:
 
-  - The Linux packages (OmegaT_xxx_Linux.tar.bz2 and OmegaT_xxx_Without_JRE.zip) 
-have been improved. They now contain an installation script: linux-install.sh 
+  - The Linux packages (OmegaT_xxx_Linux.tar.bz2 and OmegaT_xxx_Without_JRE.zip)
+have been improved. They now contain an installation script: linux-install.sh
 and a Kaptain script: omegat.kaptn. The OmegaT script in OmegaT_xxx_Without_JRE.zip
-have been improved with the usage of REALOMEGATPATH, as was already the case in 
+have been improved with the usage of REALOMEGATPATH, as was already the case in
 OmegaT_xxx_Linux.tar.bz2.
-  
+
   Bug fixes:
 
   - After loading or reloading the project, the focus was on the Matches
@@ -3687,8 +3687,8 @@ pane rather than on the Editor
 OpenOffice.org/LibreOffice, etc.). I.e., the source text was inserted
 in the target document.
 
-  - "Comment:" was displayed for all HTML segments, even when the 
-segment was not an attribute, and therefore had no comments to 
+  - "Comment:" was displayed for all HTML segments, even when the
+segment was not an attribute, and therefore had no comments to
 display
 
   Localisation updates:
@@ -3711,18 +3711,18 @@ of a .txt one, .txt being still the default
 
   Bug fixes:
 
-  - When using Remove Tags, some non-OmegaT tags (e.g., %s, depending on 
-the kind of tags checked in Options > Tag Validation) and some 
+  - When using Remove Tags, some non-OmegaT tags (e.g., %s, depending on
+the kind of tags checked in Options > Tag Validation) and some
 non-useful spaces could be copied at the end of the segment in the target
 document
 
   - In some rare circumstances, the display of matches in the Fuzzy Matches
 pane could be very slow
 
-  - When the Fuzzy Matches pane was closed, the explanation text was 
+  - When the Fuzzy Matches pane was closed, the explanation text was
 displayed in bold instead of the initial non-bold attribute
 
-  - In TMXs, the end of line was hardcoded as LF, instead of using the 
+  - In TMXs, the end of line was hardcoded as LF, instead of using the
 system line separator (e.g., CR+LF under Windows, LF under Linux)
 
   - In the Android filter, the "do not translate" mark has been corrected
@@ -3742,7 +3742,7 @@ system line separator (e.g., CR+LF under Windows, LF under Linux)
 
   Bug fixes:
 
-  - When the glossary folder wasn't in the default location, the 
+  - When the glossary folder wasn't in the default location, the
 default writeable glossary file wasn't computed correctly. In addition,
 the name of the glossary file was lost on saving when a manual correction
 was done in project properties.
@@ -3777,16 +3777,16 @@ was done in project properties.
 
   - Add explanatory messages to windows as hints when no project is open
 
-  - Segments containing a note can be marked with View > 
+  - Segments containing a note can be marked with View >
 Mark Segments with Notes. This marking has priority over Mark Translated
 and Mark Untranslated.
 
-  - Display of the corresponding colours in the View menu for "Mark" 
+  - Display of the corresponding colours in the View menu for "Mark"
 menu entries
 
   Bug fixes:
 
-  - In the PO filter, "path" was always displayed in the Comment pane, 
+  - In the PO filter, "path" was always displayed in the Comment pane,
 even if it was empty
 
   - When using Insert Source Tags, a space was added before the first one
@@ -3806,7 +3806,7 @@ even if it was empty
    2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
-2.5.1 update 1 vs. 2.5.1 
+2.5.1 update 1 vs. 2.5.1
 
   Implemented requests:
 
@@ -3864,9 +3864,9 @@ even if it was empty
 
   Other enhancements:
 
-  - Insert Source Tags inserts all relevant tags (custom, java, printf), 
+  - Insert Source Tags inserts all relevant tags (custom, java, printf),
 not only OmegaT-tags
-  
+
   Bug fixes:
 
   - Camtasia filter: <Line> is incorrectly added as src segment
@@ -3919,7 +3919,7 @@ to a tag of a source document
 
   - The "out of memory" message now refers to the manual
 
-  - Instead of using Java's default memory allocation, the Windows and Linux 
+  - Instead of using Java's default memory allocation, the Windows and Linux
 startup scripts now use 512 MB
 
   Bug fixes:
@@ -3934,7 +3934,7 @@ startup scripts now use 512 MB
   - In the HHC filter, the comment pane contained Tag: PARAM Attribute: value
 for all segments
 
-  - For external TMXs, the parameter "Use XML for standalone tags" was not 
+  - For external TMXs, the parameter "Use XML for standalone tags" was not
 working for all tags
 
   Localisation updates:
@@ -3952,7 +3952,7 @@ working for all tags
 2.5.0 update 4 vs. 2.5.0 update 3
 
   Bug fixes:
-  
+
   - Entering empty translations wasn't working
 
 ----------------------------------------------------------------------
@@ -3968,7 +3968,7 @@ working for all tags
 
   - TMX: match other languages if no project target language
   https://sourceforge.net/p/omegat/feature-requests/525/
-  
+
   - HTML filter: translate label attribute of OPTION/OPTGROUP/MENU tag
   https://sourceforge.net/p/omegat/feature-requests/732/
 
@@ -3980,10 +3980,10 @@ working for all tags
   - Empty translations are now allowed. They are displayed as <EMPTY>
 in the Editor. To create one, right-click in a segment, and select
 "Set empty translation". The same popup menu also allows to Delete an
-existing translation. It has the same effect as emptying the target 
+existing translation. It has the same effect as emptying the target
 segment, and then pressing Enter.
 
-  - Five scripts from the Scripting plugin can now be displayed and 
+  - Five scripts from the Scripting plugin can now be displayed and
 launched directly under the Scripting menu entry. Requires version
 0.3-2.5.0_03 of the scripting plugin.
 
@@ -4031,11 +4031,11 @@ no tags at all
    4 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
-2.5.0 update 1 vs. 2.5.0 
+2.5.0 update 1 vs. 2.5.0
 
   Other enhancements:
 
-  - Hunspell updated to 1.3.2, and available for 32 and 64-bit Linux, Mac and 
+  - Hunspell updated to 1.3.2, and available for 32 and 64-bit Linux, Mac and
 Windows
 
   Bug fixes:
@@ -4043,10 +4043,10 @@ Windows
   - Null pointer exception in a project without <dictionary_dir>
   https://sourceforge.net/p/omegat/bugs/509/
 
-  - Wrong handling of the Enter key in the comment field of a 
+  - Wrong handling of the Enter key in the comment field of a
 glossary entry
 
-  - Strange behaviour of the Editor for segments with empty 
+  - Strange behaviour of the Editor for segments with empty
 translations in TMX
 
   - Search function doesn't work when searching files
@@ -4073,16 +4073,16 @@ translations in TMX
 
   - Run scripts in OmegaT
   https://sourceforge.net/p/omegat/feature-requests/699/
-  
+
   - View/edit notes on translation units (restore main window to see notes pane)
   https://sourceforge.net/p/omegat/feature-requests/713/
-  
+
   - View comments in source files (restore main window to see comments pane)
   https://sourceforge.net/p/omegat/feature-requests/716/
-  
+
   - Project-specific file filters
   https://sourceforge.net/p/omegat/feature-requests/714/
-  
+
   - Project-specific segmentation rules
   https://sourceforge.net/p/omegat/feature-requests/715/
 
@@ -4099,8 +4099,8 @@ reloading the project is still necessary.)
   - Wordfast TXML filter. Only target segments are read, so it
 it is mostly useful for files where source = target.
 
-  - The timestamp of the 10 backup files is now the time of the last 
-save of project_save.tmx, instead of the time when the backup occurs. 
+  - The timestamp of the 10 backup files is now the time of the last
+save of project_save.tmx, instead of the time when the backup occurs.
 A new backup (project_save.tmx.bak) is also done each time the project
 is saved.
 
@@ -4138,7 +4138,7 @@ is saved.
 
   Bug fixes:
 
-  - Yiddish (language code "YI" or "JI") was not declared as a right 
+  - Yiddish (language code "YI" or "JI") was not declared as a right
 to left language
 
   - Simplified Chinese localisation updated to 2.3 (backported from 2.5.0) (documentation)
@@ -4183,8 +4183,8 @@ sending 5000 instead of 2000 characters requests
 
   Other enhancements:
 
-  - As the Google Translate API v1 has been shutt off (see 
-http://code.google.com/apis/language/translate/v1/getting_started.html), 
+  - As the Google Translate API v1 has been shutt off (see
+http://code.google.com/apis/language/translate/v1/getting_started.html),
 the corresponding menu entry has been removed
 
   Bug fixes:
@@ -4192,7 +4192,7 @@ the corresponding menu entry has been removed
   - Java 7 compilation encoding errors
   https://sourceforge.net/p/omegat/bugs/522/
 
-  - When several dictionaries were used, words written in uppercase in 
+  - When several dictionaries were used, words written in uppercase in
 the dictionaries could fail to be recognised
 
   - NetBSD and DragonFly not recognized as UNIX
@@ -4201,7 +4201,7 @@ the dictionaries could fail to be recognised
   - Some Open XML files could not be loaded, because they used
 backslashes instead of slashes in the zip container
 
-  Localisation updates:  
+  Localisation updates:
   - Slovenian localisation updated to 2.3 (UI)
   - Dutch localisation updated to 2.3 (backported from 2.5.0 update 3) (documentation)
 
@@ -4221,7 +4221,7 @@ backslashes instead of slashes in the zip container
 
   Bug fixes:
 
-  - Open XML filter: <rPh> tags (phonetic pronunciation) were not 
+  - Open XML filter: <rPh> tags (phonetic pronunciation) were not
 hidden in OmegaT
 
 ----------------------------------------------------------------------
@@ -4237,7 +4237,7 @@ hidden in OmegaT
 
   - Apertium: remove '*' before unknown words and do not translate
 tags
-  
+
   Bug fixes:
 
   - Pipe-sign | missing from fields when copy-pasting
@@ -4245,7 +4245,7 @@ tags
 
   - Parse exception in the LaTeX filter
 
-  Localisation updates:  
+  Localisation updates:
   - Spanish localisation updated to 2.3 (UI, documentation, readme)
 
 ----------------------------------------------------------------------
@@ -7577,7 +7577,7 @@ and 6 minor bugs fixed:
 Repackaging of 1.3.16 plus the latest help files.
 
 
-1.3.16 
+1.3.16
 -------------------------------
 Fixed a bug in the file copy routine which would append extra data onto
   unrecongized files when making an image of the source tree (thanks Maxym)

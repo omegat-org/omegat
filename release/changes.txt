@@ -207,7 +207,7 @@ encountering certain malformed header lines
 ----------------------------------------------------------------------
  OmegaT 4.0.1 (2016-10-03)
 ----------------------------------------------------------------------
-  6 Enhancements
+  7 Enhancements
   2 Bug fixes
   1 Localisation update
 ----------------------------------------------------------------------
@@ -229,6 +229,9 @@ encountering certain malformed header lines
 
   - Enable use of LanguageTool remote servers or local installations
   https://sourceforge.net/p/omegat/feature-requests/1273/
+
+  - Remember the Create Glossary Entry dialog position
+  https://sourceforge.net/p/omegat/feature-requests/1176/
 
   Other changes:
 

@@ -76,8 +76,10 @@ public class SegmentationCustomizerPanel extends JPanel {
         jPanel6 = new javax.swing.JPanel();
         ruleInsertButton = new javax.swing.JButton();
         ruleDeleteButton = new javax.swing.JButton();
+        ruleFirstButton = new javax.swing.JButton();
         ruleUpButton = new javax.swing.JButton();
         ruleDownButton = new javax.swing.JButton();
+        ruleBottomButton = new javax.swing.JButton();
         ruleErrorsLabel = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -199,11 +201,20 @@ public class SegmentationCustomizerPanel extends JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         jPanel6.add(ruleDeleteButton, gridBagConstraints);
 
+        org.openide.awt.Mnemonics.setLocalizedText(ruleFirstButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_TOP")); // NOI18N
+        ruleFirstButton.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        jPanel6.add(ruleFirstButton, gridBagConstraints);
+
         org.openide.awt.Mnemonics.setLocalizedText(ruleUpButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_UP_2")); // NOI18N
         ruleUpButton.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         jPanel6.add(ruleUpButton, gridBagConstraints);
@@ -212,10 +223,19 @@ public class SegmentationCustomizerPanel extends JPanel {
         ruleDownButton.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         jPanel6.add(ruleDownButton, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(ruleBottomButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_BOTTOM")); // NOI18N
+        ruleBottomButton.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        jPanel6.add(ruleBottomButton, gridBagConstraints);
 
         jPanel5.add(jPanel6, java.awt.BorderLayout.NORTH);
 
@@ -247,9 +267,11 @@ public class SegmentationCustomizerPanel extends JPanel {
     javax.swing.JTable mapTable;
     javax.swing.JButton mapUpButton;
     javax.swing.JCheckBox projectSpecificCB;
+    javax.swing.JButton ruleBottomButton;
     javax.swing.JButton ruleDeleteButton;
     javax.swing.JButton ruleDownButton;
     javax.swing.JLabel ruleErrorsLabel;
+    javax.swing.JButton ruleFirstButton;
     javax.swing.JButton ruleInsertButton;
     javax.swing.JPanel rulePanel;
     javax.swing.JScrollPane ruleScrollPane;

@@ -143,6 +143,20 @@ public class SegmentationRulesModel extends AbstractTableModel {
         fireTableRowsUpdated(row, row + 1);
     }
 
+    /** Moves a segmentation rule to top. */
+    public void moveRowFirst(int row) {
+        Rule ruleCurrent = rules.remove(row);
+        rules.add(0, ruleCurrent);
+        fireTableRowsUpdated(0, row);
+    }
+
+    /** Moves a segmentation rule to bottom. */
+    public void moveRowToBottom(int row) {
+        Rule ruleCurrent = rules.remove(row);
+        rules.add(ruleCurrent);
+        fireTableRowsUpdated(row, rules.size());
+    }
+
     //
     // Managing Listeners of Erroneous Input
     //

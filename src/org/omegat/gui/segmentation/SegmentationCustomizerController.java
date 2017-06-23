@@ -139,6 +139,8 @@ public class SegmentationCustomizerController extends BasePreferencesController 
                 panel.ruleDeleteButton.setEnabled(false);
                 panel.ruleUpButton.setEnabled(false);
                 panel.ruleDownButton.setEnabled(false);
+                panel.ruleFirstButton.setEnabled(false);
+                panel.ruleBottomButton.setEnabled(false);
             } else {
                 panel.ruleDeleteButton.setEnabled(true);
 
@@ -147,13 +149,17 @@ public class SegmentationCustomizerController extends BasePreferencesController 
 
                 if (rulerow > 0) {
                     panel.ruleUpButton.setEnabled(true);
+                    panel.ruleFirstButton.setEnabled(true);
                 } else {
                     panel.ruleUpButton.setEnabled(false);
+                    panel.ruleFirstButton.setEnabled(false);
                 }
                 if (rulerow < (rules - 1)) {
                     panel.ruleDownButton.setEnabled(true);
+                    panel.ruleBottomButton.setEnabled(true);
                 } else {
                     panel.ruleDownButton.setEnabled(false);
+                    panel.ruleBottomButton.setEnabled(false);
                 }
             }
         });
@@ -177,6 +183,23 @@ public class SegmentationCustomizerController extends BasePreferencesController 
             model.moveRowUp(selrow);
             panel.ruleTable.getSelectionModel().clearSelection();
             panel.ruleTable.getSelectionModel().addSelectionInterval(selrow - 1, selrow - 1);
+        });
+        panel.ruleBottomButton.addActionListener(e -> {
+            commitTableEdits();
+            SegmentationRulesModel model = (SegmentationRulesModel) panel.ruleTable.getModel();
+            int selrow = panel.ruleTable.getSelectedRow();
+            model.moveRowToBottom(selrow);
+            int rows = panel.ruleTable.getRowCount() - 1;
+            panel.ruleTable.changeSelection(rows, 0, false, false);
+            panel.ruleTable.changeSelection(rows, panel.ruleTable.getColumnCount() - 1, false, true);
+        });
+        panel.ruleFirstButton.addActionListener(e -> {
+            commitTableEdits();
+            SegmentationRulesModel model = (SegmentationRulesModel) panel.ruleTable.getModel();
+            int selrow = panel.ruleTable.getSelectedRow();
+            model.moveRowFirst(selrow);
+            panel.ruleTable.changeSelection(0, 0, false, false);
+            panel.ruleTable.changeSelection(0, panel.ruleTable.getColumnCount() - 1, false, true);
         });
         panel.ruleDeleteButton.addActionListener(e -> {
             commitTableEdits();

@@ -375,7 +375,7 @@ Custom strings from release\win32-specific must be added manually to the languag
             <zipfileset dir="release/mac-specific/" excludes="OmegaT.app/Contents/Info.plist"/>
             <zipfileset dir="build/" includes="Info.plist" prefix="OmegaT.app/Contents/"/>
             <zipfileset dir="${assets.dir}/" includes="JavaAppLauncher" filemode="755" prefix="OmegaT.app/Contents/MacOS/"/>
-            <zipfileset dir="${assets.dir}/jre-mac-root/" excludes="bin/" filemode="755" prefix="OmegaT.app/Contents/PlugIns/jre/"/>
+            <zipfileset dir="${assets.dir}/jre-mac-root/" excludes="bin/" filemode="755" prefix="OmegaT.app/Contents/PlugIns/jre.bundle/"/>
         </zip>
     </target>
 
@@ -408,7 +408,7 @@ Custom strings from release\win32-specific must be added manually to the languag
                 extensions="*"
                 name="All Files"
                 role="none"/>
-            <plistentry key="JVMRuntime" value="jre"/>
+            <plistentry key="JVMRuntime" value="jre.bundle"/>
         </bundleapp>
     </target>
 

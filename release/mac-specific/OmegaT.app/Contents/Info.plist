@@ -82,7 +82,7 @@
 <string>--config-file=$APP_ROOT/Contents/Resources/Configuration.properties</string>
 </array>
 <key>JVMRuntime</key>
-<string>jre</string>
+<string>jre.bundle</string>
 </dict>
 </plist>
 

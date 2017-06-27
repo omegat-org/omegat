@@ -386,7 +386,7 @@ Custom strings from release\win32-specific must be added manually to the languag
 			<arg value="${env.codesignIdentity}"/>
 			<arg value="build/mac-signed/OmegaT.app"/>
 		</exec>
-		<zip destfile="dist2/OmegaT_${distversion}${beta}_Mac-signed.zip">
+		<zip destfile="dist2/OmegaT_${distversion}${beta}_Mac_Signed.zip">
 			<zipfileset dir="build/mac-signed/" excludes="OmegaT.app/Contents/MacOS/JavaAppLauncher,OmegaT.app/Contents/PlugIns/jre.bundle"/>
 			<zipfileset dir="build/mac-signed/" includes="OmegaT.app/Contents/MacOS/JavaAppLauncher,OmegaT.app/Contents/PlugIns/jre.bundle" filemode="755"/>
 		</zip>

@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.2 update 1
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancements
   0 Bug fix
   0 Localisation update
 ----------------------------------------------------------------------
 4.1.2 update 1 vs 4.1.2
+
+  Implemented requests:
+
+  - Do not load fake PO fuzzies when real ones exist
+  https://sourceforge.net/p/omegat/feature-requests/1323/
 
   Other changes:
 

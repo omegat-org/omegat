@@ -379,6 +379,19 @@ Custom strings from release\win32-specific must be added manually to the languag
         </zip>
     </target>
 
+	<target name="mac-signed" description="Build signed Mac distro; supply identity in `codesignIdentity` envar" depends="mac">
+		<unzip src="dist2/OmegaT_${distversion}${beta}_Mac.zip" dest="build/mac-signed"/>
+		<exec executable="codesign">
+			<arg line="--deep -s"/>
+			<arg value="${env.codesignIdentity}"/>
+			<arg value="build/mac-signed/OmegaT.app"/>
+		</exec>
+		<zip destfile="dist2/OmegaT_${distversion}${beta}_Mac_Signed.zip">
+			<zipfileset dir="build/mac-signed/" excludes="OmegaT.app/Contents/MacOS/JavaAppLauncher,OmegaT.app/Contents/PlugIns/jre.bundle"/>
+			<zipfileset dir="build/mac-signed/" includes="OmegaT.app/Contents/MacOS/JavaAppLauncher,OmegaT.app/Contents/PlugIns/jre.bundle" filemode="755"/>
+		</zip>
+	</target>
+
     <!-- Requires AppBundler to be available to Ant (e.g. in ~/.ant/lib):
          https://bitbucket.org/infinitekind/appbundler
          AppBundler requires Java 1.7 -->

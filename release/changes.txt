@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   2 Enhancements
   0 Bug fix
-  0 Localisation update
+  1 Localisation update
 ----------------------------------------------------------------------
 4.1.2 update 1 vs 4.1.2
 
@@ -17,6 +17,11 @@
   - Move First and Move Last buttons were added to the segmentation
 dialog to move quickly the selected rule to the first or last position 
 in the table
+
+
+  Localisation Updates:
+
+  - Italian localisation updated to 4.1.2 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 4.1.2 (2017-06-22)

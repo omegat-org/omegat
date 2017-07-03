@@ -25,7 +25,6 @@
 
 package org.omegat.core.data;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -126,6 +125,9 @@ public class ImportFromAutoTMX {
     }
 
     private boolean isAltTranslation(PrepareTMXEntry entry) {
+        if (entry.otherProperties == null) {
+            return false;
+        }
         boolean hasFileProp = false;
         boolean hasOtherProp = false;
         for (TMXProp p : entry.otherProperties) {
@@ -142,21 +144,24 @@ public class ImportFromAutoTMX {
     }
 
     private boolean altTranslationMatches(PrepareTMXEntry entry, EntryKey key) {
-        try {
-            for (TMXProp p : entry.otherProperties) {
-                if (p.getType().equals(ProjectTMX.PROP_FILE) && EntryKey.isIgnoreFileContext()) {
-                    continue;
-                }
-                Field f = EntryKey.class.getField(p.getType());
-                Object value = f.get(key);
-                if (!value.equals(p.getValue())) {
-                    return false;
-                }
-            }
-            return true;
-        } catch (Exception e) {
+        if (entry.otherProperties == null) {
             return false;
         }
+        String file = null, id = null, next = null, prev = null, path = null;
+        for (TMXProp p : entry.otherProperties) {
+            if (ProjectTMX.PROP_FILE.equals(p.getType())) {
+                file = p.getValue();
+            } else if (ProjectTMX.PROP_ID.equals(p.getType())) {
+                id = p.getValue();
+            } else if (ProjectTMX.PROP_NEXT.equals(p.getType())) {
+                next = p.getValue();
+            } else if (ProjectTMX.PROP_PREV.equals(p.getType())) {
+                prev = p.getValue();
+            } else if (ProjectTMX.PROP_PATH.equals(p.getType())) {
+                path = p.getValue();
+            }
+        }
+        return key.equals(new EntryKey(file, entry.source, id, prev, next, path));
     }
 
     private void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,

@@ -27,6 +27,7 @@ package org.omegat.core.data;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.omegat.core.Core;
@@ -298,19 +299,20 @@ public final class ExternalTMFactory {
         entry.source = source;
         entry.translation = target;
         entry.note = comment;
+        List<TMXProp> tmxProps = Collections.emptyList();
         if (props != null) {
-            List<TMXProp> tmxProps = propsToList(props);
+            tmxProps = propsToList(props);
             if (id != null) {
                 tmxProps.add(new TMXProp("id", id));
             }
             if (path != null) {
                 tmxProps.add(new TMXProp("path", path));
             }
-            entry.otherProperties = tmxProps;
             if (entry.note == null) {
                 entry.note = SegmentProperties.getProperty(props, SegmentProperties.COMMENT);
             }
         }
+        entry.otherProperties = tmxProps;
         return entry;
     }
 

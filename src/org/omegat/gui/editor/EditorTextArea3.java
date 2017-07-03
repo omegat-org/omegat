@@ -724,7 +724,7 @@ public class EditorTextArea3 extends JEditorPane {
     public String getToolTipText(MouseEvent event) {
         int pos = viewToModel(event.getPoint());
         int s = controller.getSegmentIndexAtLocation(pos);
-        return controller.markerController.getToolTips(s, pos);
+        return s < 0 ? null : controller.markerController.getToolTips(s, pos);
     }
 
     /**

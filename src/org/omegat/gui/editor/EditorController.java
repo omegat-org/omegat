@@ -1028,6 +1028,9 @@ public class EditorController implements IEditor {
         // clicked segment
 
         int segmentAtLocation = getSegmentIndexAtLocation(location);
+        if (segmentAtLocation < 0) {
+            return false;
+        }
         if (displayedEntryIndex != segmentAtLocation) {
             commitAndDeactivate();
             displayedEntryIndex = segmentAtLocation;
@@ -1039,6 +1042,9 @@ public class EditorController implements IEditor {
     }
 
     protected int getSegmentIndexAtLocation(int location) {
+        if (m_docSegList == null) {
+            return -1;
+        }
         for (int i = 0; i < m_docSegList.length; i++) {
             SegmentBuilder builder = m_docSegList[i];
             // Treat start and end positions inclusively to give

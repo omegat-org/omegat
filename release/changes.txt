@@ -2,7 +2,7 @@
  OmegaT 4.1.2 update 1
 ----------------------------------------------------------------------
   2 Enhancements
-  0 Bug fix
+  1 Bug fix
   1 Localisation update
 ----------------------------------------------------------------------
 4.1.2 update 1 vs 4.1.2
@@ -18,6 +18,9 @@
 dialog to move quickly the selected rule to the first or last position 
 in the table
 
+  Bug fixes:
+
+  - An error occurred when a PO file was used in /tm/auto
 
   Localisation Updates:
 

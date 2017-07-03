@@ -1308,6 +1308,9 @@ public class RealProject implements IProject {
     }
 
     public TMXEntry getTranslationInfo(SourceTextEntry ste) {
+        if (projectTMX == null) {
+            return EMPTY_TRANSLATION;
+        }
         TMXEntry r = projectTMX.getMultipleTranslation(ste.getKey());
         if (r == null) {
             r = projectTMX.getDefaultTranslation(ste.getSrcText());
@@ -1480,6 +1483,9 @@ public class RealProject implements IProject {
     }
 
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
+        if (projectTMX == null) {
+            return;
+        }
         Map.Entry<String, TMXEntry>[] entries;
         synchronized (projectTMX) {
             entries = entrySetToArray(projectTMX.defaults.entrySet());
@@ -1490,6 +1496,9 @@ public class RealProject implements IProject {
     }
 
     public void iterateByMultipleTranslations(MultipleTranslationsIterator it) {
+        if (projectTMX == null) {
+            return;
+        }
         Map.Entry<EntryKey, TMXEntry>[] entries;
         synchronized (projectTMX) {
             entries = entrySetToArray(projectTMX.alternatives.entrySet());

@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXProp;
@@ -87,7 +88,7 @@ public class ImportFromAutoTMX {
                     }
                     if (existTranslation.isTranslated()) { // default translation already exist
                         if (existTranslation.linked == TMXEntry.ExternalLinked.xAUTO
-                                && !StringUtil.equalsWithNulls(existTranslation.translation, e.translation)
+                                && !Objects.equals(existTranslation.translation, e.translation)
                                 || isEnforcedTMX) {
                             // translation already from auto and really changed or translation comes
                             // from the enforce folder
@@ -109,13 +110,13 @@ public class ImportFromAutoTMX {
                             || existTranslation.linked == TMXEntry.ExternalLinked.x100PC) {
                         // already contains x-ice
                         if (hasICE
-                                && !StringUtil.equalsWithNulls(existTranslation.translation, e.translation)) {
+                                && !Objects.equals(existTranslation.translation, e.translation)) {
                             setTranslation(ste, e, false, TMXEntry.ExternalLinked.xICE);
                         }
                     } else if (existTranslation.linked == TMXEntry.ExternalLinked.x100PC) {
                         // already contains x-100pc
                         if (has100PC
-                                && !StringUtil.equalsWithNulls(existTranslation.translation, e.translation)) {
+                                && !Objects.equals(existTranslation.translation, e.translation)) {
                             setTranslation(ste, e, false, TMXEntry.ExternalLinked.x100PC);
                         }
                     }

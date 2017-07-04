@@ -29,6 +29,7 @@ package org.omegat.core.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.Rule;
@@ -251,8 +252,8 @@ public abstract class TranslateEntry implements ITranslateCallback {
             return getSegmentTranslation(id, segmentIndex, segmentSource, null, null, path);
         case 2:
             item = translateQueue.get(currentlyProcessedSegment);
-            if (!StringUtil.equalsWithNulls(id, item.id) || segmentIndex != item.segmentIndex
-                    || !StringUtil.equalsWithNulls(segmentSource, item.segmentSource)) {
+            if (!Objects.equals(id, item.id) || segmentIndex != item.segmentIndex
+                    || !Objects.equals(segmentSource, item.segmentSource)) {
                 throw new RuntimeException("Invalid two-pass processing: not equals fields");
             }
             currentlyProcessedSegment++;

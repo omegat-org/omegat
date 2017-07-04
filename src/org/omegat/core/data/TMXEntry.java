@@ -30,8 +30,6 @@ package org.omegat.core.data;
 
 import java.util.Objects;
 
-import org.omegat.util.StringUtil;
-
 /**
  * Storage for TMX entry.
  *
@@ -106,16 +104,16 @@ public class TMXEntry {
         if (!equalsTranslation(other)) {
             return false;
         }
-        if (!StringUtil.equalsWithNulls(changer, other.changer)) {
+        if (!Objects.equals(changer, other.changer)) {
             return false;
         }
-        if (!StringUtil.equalsWithNulls(creator, other.creator)) {
+        if (!Objects.equals(creator, other.creator)) {
             return false;
         }
         if (defaultTranslation != other.defaultTranslation) {
             return false;
         }
-        if (!StringUtil.equalsWithNulls(source, other.source)) {
+        if (!Objects.equals(source, other.source)) {
             return false;
         }
         return true;
@@ -135,13 +133,13 @@ public class TMXEntry {
         if (other == null) {
             return false;
         }
-        if (!StringUtil.equalsWithNulls(translation, other.translation)) {
+        if (!Objects.equals(translation, other.translation)) {
             return false;
         }
-        if (!StringUtil.equalsWithNulls(note, other.note)) {
+        if (!Objects.equals(note, other.note)) {
             return false;
         }
-        if (!StringUtil.equalsWithNulls(linked, other.linked)) {
+        if (!Objects.equals(linked, other.linked)) {
             return false;
         }
         return true;

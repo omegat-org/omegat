@@ -58,6 +58,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
@@ -1158,7 +1159,7 @@ public class EditorController implements IEditor {
 
         boolean defaultTranslation = sb.isDefaultTranslation();
         boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
-        boolean translationChanged = !StringUtil.equalsWithNulls(oldTE.translation, newen.translation);
+        boolean translationChanged = !Objects.equals(oldTE.translation, newen.translation);
         boolean noteChanged = !StringUtil.nvl(oldTE.note, "").equals(StringUtil.nvl(newen.note, ""));
 
         if (!isNewAltTrans && !translationChanged && noteChanged) {

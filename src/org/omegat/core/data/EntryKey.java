@@ -25,6 +25,8 @@
  **************************************************************************/
 package org.omegat.core.data;
 
+import java.util.Objects;
+
 import org.omegat.util.StringUtil;
 
 /**
@@ -83,12 +85,12 @@ public class EntryKey implements Comparable<EntryKey> {
             return false;
         }
         EntryKey o = (EntryKey) obj;
-        return StringUtil.equalsWithNulls(sourceText, o.sourceText) && // source
-                (ignoreFileContext || StringUtil.equalsWithNulls(file, o.file)) && // file
-                StringUtil.equalsWithNulls(id, o.id) && // id
-                StringUtil.equalsWithNulls(prev, o.prev) && // prev
-                StringUtil.equalsWithNulls(next, o.next) && // next
-                StringUtil.equalsWithNulls(path, o.path); // path
+        return Objects.equals(sourceText, o.sourceText) && // source
+                (ignoreFileContext || Objects.equals(file, o.file)) && // file
+                Objects.equals(id, o.id) && // id
+                Objects.equals(prev, o.prev) && // prev
+                Objects.equals(next, o.next) && // next
+                Objects.equals(path, o.path); // path
     }
 
     @Override

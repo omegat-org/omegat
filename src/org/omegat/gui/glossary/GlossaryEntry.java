@@ -29,6 +29,7 @@ package org.omegat.gui.glossary;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 import org.omegat.util.StringUtil;
@@ -196,7 +197,7 @@ public class GlossaryEntry {
         }
         GlossaryEntry otherGlossaryEntry = (GlossaryEntry) o;
 
-        return StringUtil.equalsWithNulls(this.mSource, otherGlossaryEntry.mSource)
+        return Objects.equals(this.mSource, otherGlossaryEntry.mSource)
                 && Arrays.equals(this.mTargets, otherGlossaryEntry.mTargets)
                 && Arrays.equals(this.mComments, otherGlossaryEntry.mComments);
     }

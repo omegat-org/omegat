@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013-2014 Aaron Madlon-Kay
+               2017 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -288,6 +289,49 @@ public class TagUtil {
 
         Collections.sort(tags, TAG_COMPARATOR);
         return tags;
+    }
+
+    /*
+     * Builds a list of format tags that are not in the source segment, and hence not
+     * in protected parts.
+     *
+    */
+    public static List<Tag> buildExtraTagList(List<Tag> extraTags, List<Tag> srcTags, String str) {
+        
+        StringBuilder sb = new StringBuilder(str);
+        
+        Pattern placeholderPattern = PatternConsts.OMEGAT_TAG;
+        Matcher placeholderMatcher = placeholderPattern.matcher(str);
+        while (placeholderMatcher.find()) {
+            if (!containsTag(srcTags, placeholderMatcher.group(0))) {
+                int pos;
+                if ((pos = sb.indexOf(placeholderMatcher.group(0))) != -1) {
+                    extraTags.add(new Tag(pos, placeholderMatcher.group(0)));
+                    replaceWith(sb, pos, pos + placeholderMatcher.group(0).length(), TEXT_REPLACEMENT);
+                }               
+            }
+        }
+        
+        Collections.sort(extraTags, TAG_COMPARATOR);
+        return extraTags;
+    }
+    
+    /**
+     * Check whether a tag belongs to a list of tags
+     * @param tags
+     * @param tag
+     * @return true or false
+     */
+    public static boolean containsTag(List<Tag> tags, String tag) {
+        if (tag == null) {
+            return false;
+        }
+        for (Tag t : tags) {
+            if (t.tag.equals(tag)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static void replaceWith(StringBuilder sb, int start, int end, char replacement) {
